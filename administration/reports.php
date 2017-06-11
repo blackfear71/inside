@@ -123,10 +123,16 @@
 									echo '<span class="titre_bug">Demande : <b>' . $auteur_bug . '</b> // Date : <b>' . $date_bug . '</b> // Sujet : <b>' . $donnees['subject'] . '</b> // Etat : <b>' . $etat_bug . '</b></span>';
 
 									echo '<form method="post" action="bug_status.php?view=' . $_GET['view'] . '&id=' . $donnees['id'] . '" class="resolve_bug">';
-										echo '<div class="triangle_resolution_green"></div>';
-										echo '<input type="submit" name="resolve_bug" value="Résoudre" class="resolution" style="background-color: rgb(90, 200, 70);" />';
-										echo '<div class="triangle_resolution_red"></div>';
-										echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="resolution" style="background-color: rgb(255, 25, 55);" />';
+										if ($donnees['resolved'] == "N")
+										{
+											echo '<div class="triangle_resolution_green"></div>';
+											echo '<input type="submit" name="resolve_bug" value="Résoudre" class="resolution" style="background-color: rgb(90, 200, 70);" />';
+										}
+										else
+										{
+											echo '<div class="triangle_resolution_red"></div>';
+											echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="resolution" style="background-color: rgb(255, 25, 55);" />';
+										}
 									echo '</form>';
 								echo '</div>';
 								

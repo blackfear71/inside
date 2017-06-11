@@ -2538,7 +2538,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-	background: linear-gradient(to left top, rgb(255, 25, 55) 50%, rgb(90, 200, 70) 50%);
+	background: linear-gradient(to left top, rgb(255, 25, 55) 50%, transparent 50%);
 }
 
 .triangle_resolution_blue
