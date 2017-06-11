@@ -273,7 +273,7 @@
 
 							// On récupère la liste des personne souhaitant visionner le film
 							echo '<div class="date_sortie">Intéresse</div>';
-							echo '<div class="date_sortie_2">';
+							echo '<div class="view_by">';
 							
 							$count = 0;
 							
@@ -292,14 +292,18 @@
 									}
 								}
 								// On affiche le nom correspondant à l'utilisateur et ses étoiles
-								echo '<div class="view_by">' . $utilisateur . ' (';
-
-								for($k = 1; $k <= $data4['stars']; $k++)
-								{
-									echo '<div class="star_five"></div>';
-								}
-
-								echo ')</div>';
+								echo '<table class="table_view_by">';
+									echo '<tr>';
+										echo '<td class="td_view_by" style="border-right: solid 1px white;">' . $utilisateur . '</td>';
+										
+										echo '<td class="td_view_by">';
+										for($k = 1; $k <= $data4['stars']; $k++)
+										{
+											echo '<div class="star_five"></div>';
+										}
+										echo '</td>';
+									echo '</tr>';
+								echo '</table>';
 								
 								$count++;
 							}

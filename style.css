@@ -1894,13 +1894,29 @@ article
 	font-size: 110%;
 }
 
+.table_view_by
+{
+	width: 100%;
+	border-spacing: 0.5px;
+	border-collapse: collapse;
+}
+
+.td_view_by
+{
+	width: 50%;
+	border-bottom: solid 1px white;
+	padding-left: 4%;
+}
+
 .view_by
 {
+	display: inline-block;
+	width: 50%;
+	background-color: #f3f3f3;
+	font-family: robotolight, Verdana, sans-serif;
 	border-bottom: solid 1px white;
-	width: 100%;
-	margin-left: -4%;
-	padding-left: 4%;
-	padding-right: 8%;
+	line-height: 48px;
+	font-size: 110%;
 }
 
 .links_details
