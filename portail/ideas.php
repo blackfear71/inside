@@ -166,16 +166,10 @@
 										}
 										elseif (!empty($donnees['developper']) AND $donnees['status'] != "D" AND $_SESSION['identifiant'] == $donnees['developper'])
 										{
-											if ($donnees['status'] == "P")
-											{
-												echo '<div class="triangle_resolution_green"></div>';
-												echo '<input type="submit" name="cloturer" value="Clôturer" class="resolution" style="background-color: rgb(90, 200, 70);" />';
-											}
-											else
-											{
-												echo '<div class="triangle_resolution_red"></div>';
-												echo '<input type="submit" name="remettre_en_cours" value="Remettre en cours" class="resolution" style="background-color: rgb(255, 25, 55);" />';
-											}
+											echo '<div class="triangle_resolution_green"></div>';
+											echo '<input type="submit" name="cloturer" value="Clôturer" class="resolution" style="background-color: rgb(90, 200, 70);" />';
+											echo '<div class="triangle_resolution_red_green"></div>';
+											echo '<input type="submit" name="remettre_en_cours" value="Remettre en cours" class="resolution" style="background-color: rgb(255, 25, 55);" />';
 										}
 										elseif ($donnees['status'] != "P")
 										{
