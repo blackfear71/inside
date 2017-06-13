@@ -146,7 +146,7 @@
 					else
 					{
 						// Tableau des films
-						include('moviehouse/tableau_films.php');
+						include('moviehouse/table_films.php');
 					}					
 				?>
 				

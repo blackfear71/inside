@@ -18,20 +18,20 @@
 		$req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 		$data = $req->fetch();
 		
-		$participate = $data['participate'];
+		$participation = $data['participation'];
 		
 		$req->closeCursor();
 		
 		// Inversion de la participation
-		if ($participate == "N")
-			$participate = "Y";
+		if ($participation == "P")
+			$participation = "N";
 		else
-			$participate = "N";
+			$participation = "P";
 		
 		// Mise à jour
-		$req2 = $bdd->prepare('UPDATE movie_house_users SET participate = :participate WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
+		$req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 		$req2->execute(array(
-			'participate' => $participate
+			'participation' => $participation
 		));
 		$req2->closeCursor();
 	}
@@ -43,27 +43,20 @@
 		$req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 		$data = $req->fetch();
 		
-		$seen = $data['seen'];
+		$participation = $data['participation'];
 		
 		$req->closeCursor();
 		
 		// Inversion de la vue
-		if ($seen == "N")
-		{
-			$seen = "Y";
-			$participate = "Y";
-		}
+		if ($participation == "S")
+			$participation = "N";
 		else
-		{
-			$seen = "N";
-			$participate = "N";
-		}
+			$participation = "S";
 		
 		// Mise à jour
-		$req2 = $bdd->prepare('UPDATE movie_house_users SET participate = :participate, seen = :seen WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
+		$req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 		$req2->execute(array(
-			'participate' => $participate,
-			'seen' => $seen
+			'participation' => $participation
 		));
 		$req2->closeCursor();
 	}

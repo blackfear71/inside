@@ -260,8 +260,10 @@
 								// Si l'utilisateur ne veut plus participer
 								if ($present == true)
 								{
-									echo '<form method="post" action="actions.php?id_film=' . $_GET['id_film'] . '" class="form_not_interested">';
-										echo '<input type="submit" name="not_interested" value="Ne m\'intéresse plus" class="not_interested"/>';							
+									echo '<form method="post" action="actions.php?id_film=' . $_GET['id_film'] . '" class="form_not_interested">';						
+										echo '<input type="submit" name="participate" value="Je participe !" class="not_interested" style="background-color: #2f891f;" />';							
+										echo '<input type="submit" name="seen" value="J\'ai vu !" class="not_interested" style="background-color: #2eb2f4;" />';
+										echo '<input type="submit" name="not_interested" value="Ne m\'intéresse plus" class="not_interested" />';										
 									echo '</form>';
 								}
 							echo '</div>';

@@ -78,9 +78,9 @@
 					$reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $donnees['id'] . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 					$donnees2 = $reponse2->fetch();
 
-					if ($donnees2['seen'] == "Y")
+					if ($donnees2['participation'] == "S")
 						echo '<td class="table_users" style="background: #74cefb;">';
-					elseif ($donnees2['participate'] == "Y")
+					elseif ($donnees2['participation'] == "P")
 						echo '<td class="table_users" style="background: #91d784;">';
 					else
 						echo '<td class="table_users">';
@@ -165,8 +165,7 @@
 				$choix_movie[$i][1] = $donnees2['id_film'];
 				$choix_movie[$i][2] = $donnees2['identifiant'];
 				$choix_movie[$i][3] = $donnees2['stars'];
-				$choix_movie[$i][4] = $donnees2['participate'];
-				$choix_movie[$i][5] = $donnees2['seen'];
+				$choix_movie[$i][4] = $donnees2['participation'];
 							
 				$i++;
 			}					
@@ -217,9 +216,9 @@
 							if ($ligne[2] == $user_choix[$j] AND $ligne[1] == $donnees3['id'])
 							{
 								// On affiche la préférence pour le film + la couleur de participation/vue
-								if ($ligne[5] == "Y")
+								if ($ligne[4] == "S")
 									echo '<td class="table_users" style="background: #74cefb;">';
-								elseif ($ligne[4] == "Y")
+								elseif ($ligne[4] == "P")
 									echo '<td class="table_users" style="background: #91d784;">';
 								else
 									echo '<td class="table_users">';
