@@ -1,43 +1,6 @@
 <?php
 	session_start();
 
-	if (isset($_POST['prendre_en_charge']) OR isset($_POST['cloturer']) OR isset($_POST['remettre_en_cours']))
-	{
-		include('../../includes/appel_bdd.php');
-		
-		if (isset($_POST['prendre_en_charge']))
-		{
-			$status = "P";
-			$developper = $_SESSION['identifiant'];
-		}
-		elseif(isset($_POST['cloturer']))
-		{
-			$status = "D";
-			$developper = $_SESSION['identifiant'];
-		}
-		elseif(isset($_POST['remettre_en_cours']))
-		{
-			$status = "P";
-			$developper = "";
-		}
-		
-		$req = $bdd->prepare('UPDATE ideas SET status=:status, developper=:developper WHERE id=' . $_GET['id']);
-		$req->execute(array(
-			'status' => $status,
-			'developper' => $developper
-		));
-		$req->closeCursor();
-		
-		header('location: ../ideas.php?view=' . $_GET['view']);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	if (isset($_POST['reset']) OR isset($_POST['take']) OR isset($_POST['developp']) OR isset($_POST['end']) OR isset($_POST['reject']))
 	{
 		include('../../includes/appel_bdd.php');

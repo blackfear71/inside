@@ -279,7 +279,7 @@
 							
 							$count = 0;
 							
-							$req4 = $bdd->query('SELECT id_film, identifiant, stars FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant != "admin" ORDER BY identifiant ASC');
+							$req4 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant != "admin" ORDER BY identifiant ASC');
 							while($data4 = $req4->fetch())
 							{
 								// On recherche le nom correspondant à l'identifiant stocké dans le tableau précédent
@@ -297,8 +297,14 @@
 								echo '<table class="table_view_by">';
 									echo '<tr>';
 										echo '<td class="td_view_by" style="border-right: solid 1px white;">' . $utilisateur . '</td>';
-										
-										echo '<td class="td_view_by">';
+	
+										if ($data4['participation'] == "S")
+											echo '<td class="td_view_by" style="background: #74cefb;">';
+										elseif ($data4['participation'] == "P")
+											echo '<td class="td_view_by" style="background: #91d784;">';
+										else
+											echo '<td class="td_view_by">';										
+
 										for($k = 1; $k <= $data4['stars']; $k++)
 										{
 											echo '<div class="star_five"></div>';
