@@ -180,6 +180,8 @@
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée terminée</p>';
 		elseif ($_GET['view'] == "inprogress")							
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée en cours</p>';
+		elseif ($_GET['view'] == "mine")							
+			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée en charge</p>';
 		else
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée proposée</p>';
 	}
