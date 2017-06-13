@@ -38,7 +38,7 @@
 		));
 		$req->closeCursor();
 		
-		header('location: ../ideas.php?view=' . $_GET['view']);
+		header('location: ../ideas.php?view=' . $_GET['view'] . '#' . $_GET['id']);
 	}
 	elseif (isset($_POST['new_idea']))
 	{

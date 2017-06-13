@@ -38,7 +38,7 @@
 											
 			// Prise en charge
 			case "C":
-				$etat_idee = '<span style="color: red;">Pris en charge</span>';														
+				$etat_idee = '<span style="color: red;">Prise en charge</span>';														
 				break;
 												
 			// En progrès
@@ -66,7 +66,7 @@
 		// Affichage des idées
 		echo '<table class="table_ideas">';
 			// Titre idée
-			echo '<tr>';												
+			echo '<tr id="' . $donnees['id'] . '">';												
 				echo '<td class="td_ideas_title">';
 					echo 'Idée';
 				echo '</td>';
@@ -153,7 +153,7 @@
 			{
 				echo '<tr>';
 					echo '<td class="td_ideas_title">';
-						echo 'Pris en charge par';
+						echo 'Prise en charge par';
 					echo '</td>';
 					echo '<td class="td_ideas_content">';
 						echo $developpeur_idee;
