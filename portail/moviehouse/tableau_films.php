@@ -107,7 +107,7 @@
 						
 						if (isset($donnees2['stars']))
 						{
-							echo '<form method="post" action="moviehouse/not_interested.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees2['id_film'] . '" class="form_not_interested">';
+							echo '<form method="post" action="moviehouse/actions.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees2['id_film'] . '" class="form_not_interested">';
 								// Pas intéressé
 								echo '<input type="submit" name="not_interested" value="" title="Pas intéressé" class="not_interested_2"/>';
 								// Je participe								

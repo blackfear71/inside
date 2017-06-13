@@ -47,22 +47,15 @@
 		
 		$req->closeCursor();
 		
-		// Inversion de la vue et de la participation (qui dépend de la vue)
+		// Inversion de la vue
 		if ($seen == "N")
-		{
 			$seen = "Y";
-			$participate = "Y";
-		}
 		else
-		{
 			$seen = "N";
-			$participate = "N";
-		}
 		
 		// Mise à jour
-		$req2 = $bdd->prepare('UPDATE movie_house_users SET participate = :participate, seen = :seen WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
+		$req2 = $bdd->prepare('UPDATE movie_house_users SET seen = :seen WHERE id_film = ' . $id_film . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 		$req2->execute(array(
-			'participate' => $participate,
 			'seen' => $seen
 		));
 		$req2->closeCursor();
