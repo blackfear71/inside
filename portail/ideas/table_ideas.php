@@ -5,6 +5,8 @@
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE status="D" OR status="R" ORDER BY id DESC');
 	elseif ($_GET['view'] == "inprogress")							
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE status="O" OR status="C" OR status="P" ORDER BY id DESC');
+	elseif ($_GET['view'] == "mine")							
+		$reponse = $bdd->query('SELECT * FROM ideas WHERE (status="O" OR status="C" OR status="P") AND developper="' . $_SESSION['identifiant'] . '" ORDER BY id DESC');
 	else
 		$reponse = $bdd->query('SELECT * FROM ideas ORDER BY id DESC');
 			

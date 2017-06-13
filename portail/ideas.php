@@ -13,7 +13,7 @@
 	if (!isset($_SESSION['idea_submited']))
 		$_SESSION['idea_submited'] = NULL;
 	
-	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "done" AND $_GET['view'] != "inprogress"))
+	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "done" AND $_GET['view'] != "mine" AND $_GET['view'] != "inprogress"))
 		header('location: ideas.php?view=all');
 ?>
 
@@ -59,7 +59,8 @@
 					<?php
 						$switch1 = '<a href="ideas.php?view=all" class="link_bug_switch_inactive">Toutes</a>';
 						$switch2 = '<a href="ideas.php?view=inprogress" class="link_bug_switch_inactive">En cours</a>';
-						$switch3 = '<a href="ideas.php?view=done" class="link_bug_switch_inactive">Terminées</a>';
+						$switch3 = '<a href="ideas.php?view=mine" class="link_bug_switch_inactive">En charge</a>';
+						$switch4 = '<a href="ideas.php?view=done" class="link_bug_switch_inactive">Terminées</a>';
 						
 						if ($_GET['view'] == "all")
 						{
@@ -69,12 +70,16 @@
 						{
 							$switch2 = '<a href="ideas.php?view=inprogress" class="link_bug_switch_active">En cours</a>';
 						}
+						elseif ($_GET['view'] == "mine")
+						{
+							$switch3 = '<a href="ideas.php?view=mine" class="link_bug_switch_active">En charge</a>';
+						}
 						elseif ($_GET['view'] == "done")
 						{
-							$switch3 = '<a href="ideas.php?view=done" class="link_bug_switch_active">Terminées</a>';
+							$switch4 = '<a href="ideas.php?view=done" class="link_bug_switch_active">Terminées</a>';
 						}
 						
-						echo $switch1, $switch2, $switch3;						
+						echo $switch1, $switch2, $switch3, $switch4;						
 					?>
 				</div>
 
