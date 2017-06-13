@@ -1,6 +1,7 @@
-/*** Couleur ***/
+/*** Couleurs ***/
 /**************************************************************************/
 /* Les couleurs utilisées régulièrement sur le site sont répertoriées ici */
+/* Plus il y a de '+', plus la couleur est accentuée                      */
 /**************************************************************************/
 /*   #f3f3f3            -> gris clair (+++++++)                           */
 /*   #e6e6e6            -> gris clair (++++++)                            */
@@ -17,13 +18,15 @@
 /*   rgb(80, 115, 130)  -> gris/bleu clair (++)                           */
 /*   rgb(100, 120, 130) -> gris/bleu clair (+)                            */
 /*                                                                        */
-/*   #2eb2f4            -> bleu clair                                     */
+/*   #74cefb            -> bleu clair (++)                                */
+/*   #2eb2f4            -> bleu clair (+)                                 */
 /*   #0064dc            -> bleu moyen                                     */
 /*                                                                        */
 /*   rgb(200, 25, 50)   -> rouge moyen (++)                               */
 /*   rgb(255, 25, 55)   -> rouge moyen (+)                                */
 /*                                                                        */
 /*   rgb(90, 200, 70)   -> vert moyen                                     */
+/*   91d784             -> vert clair                                     */
 /**************************************************************************/
 
 
@@ -1452,6 +1455,36 @@ article
 	background-size: 20px;
 	background-repeat: no-repeat;
 	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.participate
+{
+	width: 25px;
+	height: 25px;
+	border: 0;
+	background-color: transparent;
+	background-image: url("/insidecgi/portail/moviehouse/participate.png");
+	background-size: 25px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 5px;
+	
+}
+
+.seen
+{
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background-color: transparent;
+	background-image: url("/insidecgi/portail/moviehouse/seen.png");
+	background-size: 30px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	margin-left: 4px;
 }
 
 .init_table_users

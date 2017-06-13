@@ -49,11 +49,17 @@
 		// Sinon on insère une nouvelle ligne
 		else
 		{
-			$req3 = $bdd->prepare('INSERT INTO movie_house_users(id_film, identifiant, stars) VALUES(:id_film, :identifiant, :stars)');
+			// Initialisation de la participation et vue
+			$participate = "N";
+			$seen = "N";
+			
+			$req3 = $bdd->prepare('INSERT INTO movie_house_users(id_film, identifiant, stars, participate, seen) VALUES(:id_film, :identifiant, :stars, :participate, :seen)');
 			$req3->execute(array(
 				'id_film' => $id_film,
 				'identifiant' => $identifiant,
-				'stars' => $preference
+				'stars' => $preference,
+				'participate' => $participate,
+				'seen' => $seen
 				));
 			$req3->closeCursor();
 		}

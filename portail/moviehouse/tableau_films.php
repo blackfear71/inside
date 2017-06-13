@@ -26,13 +26,16 @@
 			while($donnees = $reponse->fetch())
 			{
 				// On affiche la date du jour
-				if ($donnees['date_theater'] > $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
+				if (date("Y") == $_GET['year'])
 				{
-					echo '<tr class="ligne_tableau_movie_house">';
-						echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
-					echo '</tr>';
-					
-					$date_jour_present = true;
+					if ($donnees['date_theater'] > $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
+					{
+						echo '<tr class="ligne_tableau_movie_house">';
+							echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
+						echo '</tr>';
+						
+						$date_jour_present = true;
+					}
 				}
 				
 				// Nom du film
@@ -71,11 +74,17 @@
 							echo substr($donnees['date_doodle'], 2, 2) . '/' . substr($donnees['date_doodle'], 0, 2) . '/' . substr($donnees['date_doodle'], 4, 4);
 					echo '</td>';
 
-					// Etoiles utilisateur
+					// Etoiles utilisateur + couleur de participation/vue
 					$reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $donnees['id'] . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 					$donnees2 = $reponse2->fetch();
 
-					echo '<td class="table_users">';
+					if ($donnees2['seen'] == "Y")
+						echo '<td class="table_users" style="background: #74cefb;">';
+					elseif ($donnees2['participate'] == "Y")
+						echo '<td class="table_users" style="background: #91d784;">';
+					else
+						echo '<td class="table_users">';
+
 						echo '<div class="stars_content">';
 							echo '<form method="post" action="moviehouse/submit_stars.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees['id'] . '">';
 								for($k = 1; $k <= $donnees2['stars']; $k++)
@@ -90,16 +99,24 @@
 								}
 							echo '</form>';	
 						echo '</div>';
+						
 					echo '</td>';
 					
-					// Pas intéressé
+					// Actions
 					echo '<td class="table_dates">';
+						
 						if (isset($donnees2['stars']))
 						{
 							echo '<form method="post" action="moviehouse/not_interested.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees2['id_film'] . '" class="form_not_interested">';
-								echo '<input type="submit" name="not_interested" value="" title="Pas intéressé" class="not_interested_2"/>';							
+								// Pas intéressé
+								echo '<input type="submit" name="not_interested" value="" title="Pas intéressé" class="not_interested_2"/>';
+								// Je participe								
+								echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate"/>';
+								// J'ai vu
+								echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen"/>';							
 							echo '</form>';
 						}
+						
 					echo '</td>';
 					
 					$reponse2->closeCursor();
@@ -148,6 +165,8 @@
 				$choix_movie[$i][1] = $donnees2['id_film'];
 				$choix_movie[$i][2] = $donnees2['identifiant'];
 				$choix_movie[$i][3] = $donnees2['stars'];
+				$choix_movie[$i][4] = $donnees2['participate'];
+				$choix_movie[$i][5] = $donnees2['seen'];
 							
 				$i++;
 			}					
@@ -163,13 +182,16 @@
 			while($donnees3 = $reponse3->fetch())
 			{			
 				// On affiche la date du jour
-				if ($donnees3['date_theater'] > $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
+				if (date("Y") == $_GET['year'])
 				{
-					echo '<tr class="ligne_tableau_movie_house">';
-						echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
-					echo '</tr>';
-					
-					$date_jour_present = true;
+					if ($donnees3['date_theater'] > $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
+					{
+						echo '<tr class="ligne_tableau_movie_house">';
+							echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
+						echo '</tr>';
+						
+						$date_jour_present = true;
+					}
 				}
 				
 				echo '<tr class="ligne_tableau_movie_house">';
@@ -194,8 +216,14 @@
 						{
 							if ($ligne[2] == $user_choix[$j] AND $ligne[1] == $donnees3['id'])
 							{
-								// On affiche la préférence pour le film 
-								echo '<td class="table_users">';
+								// On affiche la préférence pour le film + la couleur de participation/vue
+								if ($ligne[5] == "Y")
+									echo '<td class="table_users" style="background: #74cefb;">';
+								elseif ($ligne[4] == "Y")
+									echo '<td class="table_users" style="background: #91d784;">';
+								else
+									echo '<td class="table_users">';
+
 									if (is_numeric($ligne[3]) AND $ligne[3] != 0)
 									{
 										echo '<div class="stars_content">';
@@ -227,7 +255,8 @@
 												}	
 											}
 										echo '</div>';
-									}					
+									}	
+									
 								echo '</td>';
 												
 								// Si on a affiché une seule ligne, on saura qu'il ne faut pas ajouter une case vide
@@ -238,6 +267,7 @@
 						// Si jamais on n'a trouvé aucune ligne à afficher, l'indicateur va permettre d'afficher un case vide et de continuer sur la colonne suivante
 						if ($empty == true)
 						{
+							// Pas de couleur sur la case car on n'a pas fait de choix
 							echo '<td class="table_users">';
 								echo '<div class="stars_content">';
 									// Si le user correspond à la colonne ($j)
