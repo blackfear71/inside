@@ -26,7 +26,7 @@
 /*   rgb(255, 25, 55)   -> rouge moyen (+)                                */
 /*                                                                        */
 /*   rgb(90, 200, 70)   -> vert moyen                                     */
-/*   91d784             -> vert clair                                     */
+/*   #91d784            -> vert clair                                     */
 /**************************************************************************/
 
 
@@ -2451,21 +2451,6 @@ article
 	line-height: 30px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .table_ideas
 {
 	margin-top: 30px;
@@ -2502,7 +2487,7 @@ article
 
 .tr_ideas_idea
 {
-	background-color: #e3e3e3;
+	background-color: #74cefb;
 }
 
 .tr_ideas_idea td
@@ -2536,53 +2521,6 @@ article
 	color: white;
 	cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.triangle_resolution_blue_2
-{
-	display: inline-block;
-	margin-bottom: -14px;
-	width: 20px;
-	height: 40px;
-	background: linear-gradient(to left top, #2eb2f4 50%, transparent 50%);
-}
-
-.triangle_resolution_red_2
-{
-	display: inline-block;
-	margin-bottom: -14px;
-	width: 20px;
-	height: 40px;
-	background: linear-gradient(to left top, rgb(255, 25, 55) 50%, transparent 50%);
-}
-
-.triangle_resolution_red_green
-{
-	display: inline-block;
-	margin-bottom: -14px;
-	width: 20px;
-	height: 40px;
-	background: linear-gradient(to left top, rgb(255, 25, 55) 50%, rgb(90, 200, 70) 50%);
-}
-
-
 
 /*** Bugs ***/
 .zone_titre_bug
