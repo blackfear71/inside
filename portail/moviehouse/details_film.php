@@ -257,12 +257,28 @@
 								
 								$req3->closeCursor();
 								
-								// Si l'utilisateur ne veut plus participer
+								// Si l'utilisateur a des étoiles
 								if ($present == true)
 								{
-									echo '<form method="post" action="actions.php?id_film=' . $_GET['id_film'] . '" class="form_not_interested">';						
-										echo '<input type="submit" name="participate" value="Je participe !" class="not_interested" style="background-color: #2f891f;" />';							
-										echo '<input type="submit" name="seen" value="J\'ai vu !" class="not_interested" style="background-color: #2eb2f4;" />';
+									echo '<form method="post" action="actions.php?id_film=' . $_GET['id_film'] . '" class="form_not_interested">';		
+										$req4 = $bdd->query('SELECT participation FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
+										$data4 = $req4->fetch();
+
+										// Participation
+										if ($data4['participation'] == "P")
+											echo '<input type="submit" name="participate" value="Je ne participe plus..." class="not_interested" style="background-color: #2f891f;" />';	
+										else
+											echo '<input type="submit" name="participate" value="Je participe !" class="not_interested" style="background-color: #2f891f;" />';
+										
+										// Vue
+										if ($data4['participation'] == "S")										
+											echo '<input type="submit" name="seen" value="Je n\'ai pas vu ..." class="not_interested" style="background-color: #2eb2f4;" />';
+										else
+											echo '<input type="submit" name="seen" value="J\'ai vu !" class="not_interested" style="background-color: #2eb2f4;" />';
+											
+										$req4->closeCursor();
+
+										// Pas intéressé
 										echo '<input type="submit" name="not_interested" value="Ne m\'intéresse plus" class="not_interested" />';										
 									echo '</form>';
 								}
@@ -279,13 +295,13 @@
 							
 							$count = 0;
 							
-							$req4 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant != "admin" ORDER BY identifiant ASC');
-							while($data4 = $req4->fetch())
+							$req5 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant != "admin" ORDER BY identifiant ASC');
+							while($data5 = $req5->fetch())
 							{
 								// On recherche le nom correspondant à l'identifiant stocké dans le tableau précédent
 								foreach ($full_names as $line)
 								{
-									if ($data4['identifiant'] == $line[1])
+									if ($data5['identifiant'] == $line[1])
 									{
 										$utilisateur = $line[2];
 										
@@ -298,14 +314,14 @@
 									echo '<tr>';
 										echo '<td class="td_view_by" style="border-right: solid 1px white;">' . $utilisateur . '</td>';
 	
-										if ($data4['participation'] == "S")
+										if ($data5['participation'] == "S")
 											echo '<td class="td_view_by" style="background: #74cefb;">';
-										elseif ($data4['participation'] == "P")
+										elseif ($data5['participation'] == "P")
 											echo '<td class="td_view_by" style="background: #91d784;">';
 										else
 											echo '<td class="td_view_by">';										
 
-										for($k = 1; $k <= $data4['stars']; $k++)
+										for($k = 1; $k <= $data5['stars']; $k++)
 										{
 											echo '<div class="star_five"></div>';
 										}
@@ -315,11 +331,11 @@
 								
 								$count++;
 							}
-							$req4->closeCursor();
+							$req5->closeCursor();
 							
 							if ($count == 0)
 							{
-								echo '-';
+								echo '<span style="padding-left: 4%; padding-right: 4%;">-</span>';
 							}
 							
 							echo '</div>';

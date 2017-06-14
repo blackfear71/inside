@@ -67,8 +67,8 @@
 
 		// Affichage des idées
 		echo '<table class="table_ideas">';
-			// Titre idée
-			echo '<tr id="' . $donnees['id'] . '">';												
+			echo '<tr id="' . $donnees['id'] . '">';	
+				// Titre idée
 				echo '<td class="td_ideas_title">';
 					echo 'Idée';
 				echo '</td>';
@@ -76,8 +76,19 @@
 					echo $donnees['subject'];
 				echo '</td>';
 				
-				// Boutons de prise en charge
-				if (empty($donnees['developper']) OR (!empty($donnees['developper']) AND $_SESSION['identifiant'] == $donnees['developper']))
+				// Date
+				echo '<td class="td_ideas_title">';
+					echo 'Date';
+				echo '</td>';
+				echo '<td class="td_ideas_content">';
+					echo $date_idee;
+				echo '</td>';
+				
+				// Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
+				if ( empty($donnees['developper']) 
+				OR (!empty($donnees['developper']) AND $_SESSION['identifiant'] == $donnees['developper'])
+				OR  $donnees['status'] == "D" 
+				OR  $donnees['status'] == "R")
 				{
 					echo '<td rowspan="100%" class="td_ideas_actions">';
 						echo '<form method="post" action="ideas/manage_ideas.php?view=' . $_GET['view'] . '&id=' . $donnees['id'] . '">';
@@ -128,45 +139,26 @@
 				echo '<td class="td_ideas_content">';
 					echo $auteur_idee;
 				echo '</td>';
-			echo '</tr>';
 			
-			// Date
-			echo '<tr>';
-				echo '<td class="td_ideas_title">';
-					echo 'Date';
-				echo '</td>';
-				echo '<td class="td_ideas_content">';
-					echo $date_idee;
-				echo '</td>';
-			echo '</tr>';
-				
-			// Statut
-			echo '<tr>';
+				// Statut
 				echo '<td class="td_ideas_title">';
 					echo 'Statut';
 				echo '</td>';
 				echo '<td class="td_ideas_content">';
 					echo $etat_idee;
+					
+					// Développeur
+					if (!empty($donnees['developper']))
+					{
+						echo ' par ' . $developpeur_idee;
+					}
 				echo '</td>';
 			echo '</tr>';
-					
-			// Prise en charge
-			if (!empty($donnees['developper']))
-			{
-				echo '<tr>';
-					echo '<td class="td_ideas_title">';
-						echo 'Prise en charge par';
-					echo '</td>';
-					echo '<td class="td_ideas_content">';
-						echo $developpeur_idee;
-					echo '</td>';
-			echo '</tr>';
-			}
 						
 			// Description idée
 			echo '<tr class="tr_ideas_idea">';
-				echo '<td colspan="2">';
-					echo $donnees['content'];
+				echo '<td colspan="4">';
+					echo '<p>' . $donnees['content'] . '</p>';
 				echo '</td>';
 			echo '</tr>';
 		echo '</table>';

@@ -41,7 +41,7 @@
 				// Nom du film
 				echo '<tr class="ligne_tableau_movie_house">';
 					echo '<td class="table_titres">';
-						echo '<a href="moviehouse/details_film.php?id_film=' . $donnees['id'] . '" class="link_film">' . $donnees['film'] . '</a>';
+						echo '<a href="moviehouse/details_film.php?id_film=' . $donnees['id'] . '" id="' . $donnees['id'] . '" class="link_film">' . $donnees['film'] . '</a>';
 					echo '</td>';
 				
 					// Date de sortie cinéma
@@ -196,7 +196,7 @@
 				echo '<tr class="ligne_tableau_movie_house">';
 					// Noms des films sur la 1ère colonne
 					echo '<td class="table_titres">';
-						echo '<a href="moviehouse/details_film.php?id_film=' . $donnees3['id'] . '" class="link_film">' . $donnees3['film'] . '</a>';
+						echo '<a href="moviehouse/details_film.php?id_film=' . $donnees3['id'] . '" id="' . $donnees3['id'] . '" class="link_film">' . $donnees3['film'] . '</a>';
 					echo '</td>';
 					
 					// Date de sortie des films sur la 2ème colonne

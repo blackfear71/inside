@@ -85,7 +85,7 @@
 
 				<div class="ajout_idee">
 					<?php
-						echo '<form method="post" action="ideas/manage_ideas.php?view=' . $_GET['view'] . '" class="">';
+						echo '<form method="post" action="ideas/manage_ideas.php?view=' . $_GET['view'] . '">';
 							echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="100" class="saisie_titre_3" required />';
 							echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_2"></textarea>';
 					

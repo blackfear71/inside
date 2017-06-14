@@ -66,7 +66,7 @@
 		if (isset($_GET['year']))
 		{
 			// On revient à la liste
-			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year']);
+			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '#' . $_GET['id_film']);
 		}
 		else
 		{

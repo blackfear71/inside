@@ -50,7 +50,7 @@
 		$date = date("mdY");
 		$author = $_SESSION['identifiant'];
 		$content = htmlspecialchars($_POST['content_idea']);
-		$status = "P";
+		$status = "O";
 		$developper = "";
 		
 		//Stockage de l'enregistrement en table

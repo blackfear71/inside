@@ -63,7 +63,7 @@
 	
 	// Redirection
 	if (isset($_GET['view']) AND isset($_GET['year']))
-		header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year']);
+		header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '#' . $_GET['id_film']);
 	else
 		header('location: details_film.php?id_film=' . $id_film);
 ?>
