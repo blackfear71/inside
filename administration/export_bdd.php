@@ -1,14 +1,9 @@
 <?php 
     //Saisir les informations importantes ici
 	// En local
-	/*$mysqlUserName    = "root";
+	$mysqlUserName    = "root";
     $mysqlPassword      = "";
-    $mysqlHostName      = "localhost";*/
-	
-	// En ligne
-    $mysqlUserName      = "cgi";
-    $mysqlPassword      = "1SekAYsGM4h6NqPC";
-    $mysqlHostName      = "127.0.0.1";
+    $mysqlHostName      = "localhost";
 	
     $DbName             = "inside_cgi";
     $backup_name        = "mybackup.sql";

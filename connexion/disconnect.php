@@ -1,5 +1,4 @@
 <?php
-
 	// Démarrer la session
 	session_start();
 	
@@ -15,6 +14,5 @@
 	//Retour sur index.php
 	header('location: /insidecgi/index.php');
 	
-	exit;
-	
+	exit;	
 ?>

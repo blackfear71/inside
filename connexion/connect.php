@@ -1,8 +1,6 @@
 <?php 
 	session_start();
-?>
 
-<?php
 	// Appel de la BDD
 	include("../includes/appel_bdd.php");
 
@@ -57,9 +55,7 @@
 	}
 
 	$reponse->closeCursor();
-?>
 
-<?php
 	// Redirection si OK sinon message d'erreur et retour à la page de connexion
 	
 	if ($_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")

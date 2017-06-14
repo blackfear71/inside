@@ -17,6 +17,7 @@
 	
 	if ($_GET['univers'] != $donnees['category'])
 		header('location: article.php?id=' . $donnees['id'] . '&univers=' . $donnees['category']);
+	
 	$reponse->closeCursor();
 ?>
 

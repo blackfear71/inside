@@ -20,7 +20,7 @@
 		$reponse->closeCursor();
 	}
 	
-	//Contrôle de la vue
+	// Contrôle de la vue
 	if (!isset($_GET['view']) OR empty($_GET['view']) OR ($_GET['view'] != "main" AND $_GET['view'] != "user"))
 		header('location: moviehouse.php?view=main&year=' . $_GET['year']);
 	

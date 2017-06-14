@@ -110,15 +110,6 @@
 					<input type="submit" value="Italique" onclick="insertTag(' <italique>','</italique> ','textarea');" class="bouton_insertion" />
 					<input type="submit" value="Souligné" onclick="insertTag(' <souligne>','</souligne> ','textarea');" class="bouton_insertion" />					
 					<input type="submit" value="Surligné" onclick="insertTag(' <surligne>','</surligne> ','textarea');" class="bouton_insertion" />					
-
-					<!--<input type="submit" value="Image" onclick="insert_style('image')" class="bouton_insertion" />
-					<input type="submit" value="Lien" onclick="insert_style('lien')" class="bouton_insertion" />
-					<input type="submit" value="Rouge" onclick="insert_style('rouge')" class="bouton_insertion" />
-					<input type="submit" value="Vert" onclick="insert_style('vert')" class="bouton_insertion" />
-					<input type="submit" value="Gras" onclick="insert_style('gras')" class="bouton_insertion" />
-					<input type="submit" value="Italique" onclick="insert_style('italique')" class="bouton_insertion" />
-					<input type="submit" value="Souligné" onclick="insert_style('souligné')" class="bouton_insertion" />
-					<input type="submit" value="Surligné" onclick="insert_style('surligné')" class="bouton_insertion" />-->
 				</div>
 			</article>
 		</section>
