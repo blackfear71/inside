@@ -94,7 +94,7 @@
 				echo '</td>';
 				
 				echo '<td class="td_manage_users">';
-					$req5 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper = "' . $donnees['identifiant'] . '"');
+					$req5 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper = "' . $donnees['identifiant'] . '" AND status != "D" AND status != "R"');
 					$data5 = $req5->fetch();
 					echo $data5['nb_ideas_inprogress'];
 					$req5->closeCursor();
@@ -146,7 +146,7 @@
 			echo '</td>';
 			
 			echo '<td class="td_manage_users">';
-				$req11 = $bdd->query('SELECT COUNT(id) AS nb_total_ideas_inprogress FROM ideas WHERE developper != "" AND (status != "D" OR status != "R")');
+				$req11 = $bdd->query('SELECT COUNT(id) AS nb_total_ideas_inprogress FROM ideas WHERE developper != "" AND status != "D" AND status != "R"');
 				$data11 = $req11->fetch();
 				echo $data11['nb_total_ideas_inprogress'];
 				$req11->closeCursor();
