@@ -10,27 +10,15 @@
 				echo 'Pseudo';
 			echo '</td>';
 			
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Nombre d\'articles publiés';
-			echo '</td>';
-			
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Nombre de demandes (bugs/évolutions)';
-			echo '</td>';
-			
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Nombre de demandes résolues (bugs/évolutions)';
-			echo '</td>';
-			
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users" style="width: 25%;">';
 				echo 'Demande de réinitialisation du mot de passe';
 			echo '</td>';
 			
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users" style="width: 25%;">';
 				echo 'Annuler la demande de réinitialisation du mot de passe';
 			echo '</td>';
 			
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users" style="width: 25%;">';
 				echo 'Réinitialiser le mot de passe';
 			echo '</td>';
 		echo '</tr>';
@@ -49,27 +37,6 @@
 				
 				echo '<td class="td_manage_users">';
 					echo $donnees['full_name'];
-				echo '</td>';
-				
-				echo '<td class="td_manage_users">';
-					$req1 = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $donnees['identifiant'] . '"');
-					$data1 = $req1->fetch();
-					echo $data1['nb_publications'];											
-					$req1->closeCursor();
-				echo '</td>';
-				
-				echo '<td class="td_manage_users">';
-					$req2 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $donnees['identifiant'] . '"');
-					$data2 = $req2->fetch();
-					echo $data2['nb_bugs'];
-					$req2->closeCursor();
-				echo '</td>';
-				
-				echo '<td class="td_manage_users">';
-					$req3 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $donnees['identifiant'] . '" AND resolved = "Y"');
-					$data3 = $req3->fetch();
-					echo $data3['nb_bugs'];
-					$req3->closeCursor();
 				echo '</td>';
 				
 				echo '<td class="td_manage_users">';
@@ -104,41 +71,20 @@
 		// Bas du tableau		
 		echo '<tr>';
 			echo '<td colspan="2" class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
-				echo 'Total';
-			echo '</td>';
-			
-			echo '<td class="td_manage_users">';
-				$req4 = $bdd->query('SELECT COUNT(id) AS nb_total_articles FROM reference_guide');
-				$data4 = $req4->fetch();
-				echo $data4['nb_total_articles'];
-				$req4->closeCursor();
-			echo '</td>';
-			
-			echo '<td class="td_manage_users">';
-				$req5 = $bdd->query('SELECT COUNT(id) AS nb_total_bugs FROM bugs');
-				$data5 = $req5->fetch();
-				echo $data5['nb_total_bugs'];
-				$req5->closeCursor();
-			echo '</td>';
-			
-			echo '<td class="td_manage_users">';
-				$req6 = $bdd->query('SELECT COUNT(id) AS nb_total_resolved FROM bugs WHERE resolved = "Y"');
-				$data6 = $req6->fetch();
-				echo $data6['nb_total_resolved'];
-				$req6->closeCursor();
+				echo 'Alertes';
 			echo '</td>';
 			
 			echo '<td colspan="3"class="td_manage_users">';
-				$req7 = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-				while($data7 = $req7->fetch())
+				$req1 = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+				while($data1 = $req1->fetch())
 				{
-					if ($data7['reset'] == "Y")
+					if ($data1['reset'] == "Y")
 					{
 						echo '<span class="reset_warning">!</span>';
 						break;
 					}
 				}
-				$req7->closeCursor();
+				$req1->closeCursor();
 			echo '</td>';
 		echo '</tr>';
 	echo '</table>';

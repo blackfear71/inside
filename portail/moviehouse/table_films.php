@@ -28,7 +28,7 @@
 				// On affiche la date du jour
 				if (date("Y") == $_GET['year'])
 				{
-					if ($donnees['date_theater'] > $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
+					if ($donnees['date_theater'] >= $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
 					{
 						echo '<tr class="ligne_tableau_movie_house">';
 							echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
@@ -183,7 +183,7 @@
 				// On affiche la date du jour
 				if (date("Y") == $_GET['year'])
 				{
-					if ($donnees3['date_theater'] > $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
+					if ($donnees3['date_theater'] >= $date_jour AND $date_jour_present == false AND $_SESSION['today_movie_house'] == "Y")
 					{
 						echo '<tr class="ligne_tableau_movie_house">';
 							echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';

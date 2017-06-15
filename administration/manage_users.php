@@ -65,6 +65,10 @@
 					}
 	
 					include('table_users.php');
+					
+					echo '<br /><br />';
+					
+					include('table_stats.php');
 				?>
 
 			</article>
