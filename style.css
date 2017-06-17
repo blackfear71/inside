@@ -2723,7 +2723,7 @@ article
 /*** Gestion des utilisateurs ***/
 .title_gestion
 {
-	width: 78%;
+	width: 76%;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: robotothin, Verdana, sans-serif;
@@ -2731,7 +2731,10 @@ article
 	text-align: center;
 	background-color: rgb(255, 25, 55);
 	color: white;
-	padding: 1%;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
