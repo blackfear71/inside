@@ -1,4 +1,6 @@
 <?php
+	echo '<div class="title_gestion">Gestion des mots de passe</div>';
+	
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';

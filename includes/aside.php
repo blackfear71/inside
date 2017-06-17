@@ -42,7 +42,9 @@
 	{
 		echo '<form method="post" action="/insidecgi/connexion/disconnect.php">';
 			echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
+			echo '<div class="hover_aside">Déconnexion</div>';
 		echo '</form>';
+		
 	}
 	
 	// Profil
@@ -51,6 +53,7 @@
 		echo '<a href="/insidecgi/connexion/profil.php?user=' . $_SESSION['identifiant'] . '" title="Profil" class="link_profile">';
 			echo '<img src="/insidecgi/includes/profile.png" alt="profile" title="Profil" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Profil</div>';
 	}
 	
 	// Menu
@@ -59,6 +62,7 @@
 		echo '<a onclick="afficherMasquer(\'menu\')" title="Menu" class="link_profile">';
 			echo '<img src="/insidecgi/includes/menu.png" alt="menu" title="Menu" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Menu</div>';
 		
 		include($_SERVER["DOCUMENT_ROOT"] . '/insidecgi/portail/referenceguide/menu_rg.php');
 		
@@ -73,6 +77,7 @@
 		echo '<a href="/insidecgi/portail/referenceguide/saisie_article.php" title="Ajouter un article" class="link_profile">';
 			echo '<img src="/insidecgi/includes/add.png" alt="add" title="Ajouter un article" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Ajouter</div>';
 	}
 	
 	// Ajouter un film (avancé)
@@ -81,6 +86,7 @@
 		echo '<a href="/insidecgi/portail/moviehouse/saisie_film_plus.php" title="Ajouter un film (avancé)" class="link_profile">';
 			echo '<img src="/insidecgi/includes/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Ajouter</div>';
 	}
 	
 	// Modifier les détails
@@ -89,6 +95,7 @@
 		echo '<a href="/insidecgi/portail/moviehouse/saisie_film_plus.php?modify_id=' . $_GET['id_film'] . '" title="Modifier les détails" class="link_profile">';
 			echo '<img src="/insidecgi/includes/edit.png" alt="profile" title="Modifier les détails" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Modifier</div>';
 	}
 	
 	// Retour à l'accueil
@@ -96,7 +103,8 @@
 	{
 		echo '<a href="/insidecgi/index.php" class="link_profile" title="Retour à l\'accueil" style="margin-top: 0;">';
 			echo '<img src="/insidecgi/includes/back.png" alt="profile" title="Retour à l\'accueil" class="icon_profile" />';
-		echo '</a>';	
+		echo '</a>';
+		echo '<div class="hover_aside">Accueil</div>';
 	}
 	
 	// Retour au portail
@@ -105,6 +113,7 @@
 		echo '<a href="/insidecgi/portail/portail.php" title="Retour au portail" class="link_profile">';
 			echo '<img src="/insidecgi/includes/back.png" alt="back" title="Retour au portail" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Accueil</div>';
 	}
 	
 	// Retour au portail administration
@@ -113,6 +122,7 @@
 		echo '<a href="/insidecgi/administration/administration.php" title="Retour au portail administration" class="link_profile">';
 			echo '<img src="/insidecgi/includes/back.png" alt="back" title="Retour au portail administration" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Accueil</div>';
 	}	
 	
 	// Boite à idées
@@ -121,6 +131,7 @@
 		echo '<a href="/insidecgi/portail/ideas.php?view=inprogress" title="&#35;TheBox" class="link_profile">';
 			echo '<img src="/insidecgi/includes/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">#TheBox</div>';
 	}		
 	
 	// Signaler un bug
@@ -129,5 +140,6 @@
 		echo '<a href="/insidecgi/portail/bug.php" title="Signaler un bug" class="link_profile">';
 			echo '<img src="/insidecgi/includes/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
 		echo '</a>';
+		echo '<div class="hover_aside">Signaler</div>';
 	}		
 ?>
