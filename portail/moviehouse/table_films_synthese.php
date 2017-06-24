@@ -1,21 +1,21 @@
 <?php
 	include('../includes/appel_bdd.php');
-	
+
 	/************************/
 	/* Tableau vue générale */
 	/************************/
 	echo '<table class="table_movie_house">';
-					
+
 		// On récupère la liste des utilisateurs du site sur la première ligne à partir de la 3ème colonne
 		$user_choix = array();
 		echo '<tr>';
 			echo '<td class="table_titres" style="border: 0;"></td>';
 			echo '<td class="init_table_dates" style="width: 120px;">Date de sortie</td>';
-			
+
 			$reponse1 = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-			
+
 			$nombre_users = 0;
-			
+
 			while($donnees1 = $reponse1->fetch())
 			{
 				echo '<td class="init_table_users" style="padding: 5px;">';
@@ -25,42 +25,44 @@
 						else
 							echo '<img src="../includes/default.png" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
 					echo '</div>';
-				echo '</td>';	
-									
+
+					echo '<span class="full_name_films">' . $donnees1['full_name'] . '</span>';
+				echo '</td>';
+
 				$nombre_users++;
 				$user_choix[$nombre_users] = $donnees1['identifiant'];
-			}					
-							
+			}
+
 			$reponse1->closeCursor();
 		echo '</tr>';
-						
+
 		// On récupère dans un tableau les choix utilisateurs
 		$choix_movies = array();
 		$i = 1;
-						
+
 		$reponse2 = $bdd->query('SELECT * FROM movie_house_users ORDER BY identifiant ASC');
-						
+
 		while($donnees2 = $reponse2->fetch())
 		{
 			$choix_movie[$i][1] = $donnees2['id_film'];
 			$choix_movie[$i][2] = $donnees2['identifiant'];
 			$choix_movie[$i][3] = $donnees2['stars'];
 			$choix_movie[$i][4] = $donnees2['participation'];
-						
+
 			$i++;
-		}					
-						
+		}
+
 		$reponse2->closeCursor();
-						
+
 		// On récupère la liste des films sur la première colonne et la date de sortie sur la 2ème
 		$reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' ORDER BY date_theater ASC, film ASC');
-		
+
 		$date_jour = date("mdY");
 		$date_jour_present = false;
 		$l = 0;
 
 		while($donnees3 = $reponse3->fetch())
-		{			
+		{
 			// On affiche la date du jour
 			if (date("Y") == $_GET['year'])
 			{
@@ -69,28 +71,28 @@
 					echo '<tr class="ligne_tableau_movie_house">';
 						echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
 					echo '</tr>';
-					
+
 					$date_jour_present = true;
 				}
 			}
-			
+
 			echo '<tr class="ligne_tableau_movie_house">';
 				// Noms des films sur la 1ère colonne
 				echo '<td class="table_titres">';
 					echo '<a href="moviehouse/details_film.php?id_film=' . $donnees3['id'] . '" id="' . $donnees3['id'] . '" class="link_film">' . $donnees3['film'] . '</a>';
 				echo '</td>';
-				
+
 				// Date de sortie des films sur la 2ème colonne
 				echo '<td class="table_dates">';
 					echo substr($donnees3['date_theater'], 2, 2) . '/' . substr($donnees3['date_theater'], 0, 2) . '/' . substr($donnees3['date_theater'], 4, 4);
 				echo '</td>';
-								
+
 				// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)
 				for ($j=1; $j <= $nombre_users; $j++)
-				{		
+				{
 					// On initialise comme si on n'avait pas trouvé de ligne à afficher
-					$empty = true;	
-					
+					$empty = true;
+
 					// On parcourt chaque ligne du tableau de chaque personne en fonction des films qu'il veut voir
 					foreach ($choix_movie as $ligne)
 					{
@@ -111,25 +113,25 @@
 									echo '<div class="stars_content">';
 										// Si le user correspond à la colonne
 										if ($_SESSION['identifiant'] == $ligne[2])
-										{												
+										{
 											echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto; background-color: transparent;">';
 												if (isset($ligne[3]))
 													echo $ligne[3];
 												else
 													echo '0';
 											echo '</a>';
-										
+
 											echo '<form method="post" action="moviehouse/submit_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligne[1] . '" id="preference2[' . $l . ']" style="display: none; min-width: 160px;">';
 												// Boutons vote
 												for($m = 0; $m <= 3; $m++)
 												{
 													echo '<input type="submit" name="preference[' . $m . ']" value="' . $m . '" class="link_vote"/>';
 												}
-												
+
 												// Bouton annulation
 												echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Annuler" class="link_vote">';
 													echo '<img src="moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
-												echo '</a>';							
+												echo '</a>';
 											echo '</form>';
 										}
 										else
@@ -140,13 +142,13 @@
 												echo '</span>';
 										}
 									echo '</div>';
-								}	
-								
+								}
+
 							echo '</td>';
-											
+
 							// Si on a affiché une seule ligne, on saura qu'il ne faut pas ajouter une case vide
 							$empty = false;
-						}		
+						}
 					}
 
 					// Si jamais on n'a trouvé aucune ligne à afficher, l'indicateur va permettre d'afficher un case vide et de continuer sur la colonne suivante
@@ -157,7 +159,7 @@
 							echo '<td class="table_users" style="background-color: #fffde8;">';
 						else
 							echo '<td class="table_users">';
-						
+
 							echo '<div class="stars_content">';
 								// Si le user correspond à la colonne ($j)
 								if ($_SESSION['identifiant'] == $user_choix[$j])
@@ -165,18 +167,18 @@
 									echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto; background-color: transparent;">';
 										echo '0';
 									echo '</a>';
-								
+
 									echo '<form method="post" action="moviehouse/submit_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees3['id'] . '" id="preference2[' . $l . ']" style="display: none;">';
 										// Boutons vote
 										for($m = 0; $m <= 3; $m++)
 										{
 											echo '<input type="submit" name="preference[' . $m . ']" value="' . $m . '" class="link_vote"/>';
 										}
-										
+
 										// Bouton annulation
 										echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Annuler" class="link_vote">';
 											echo '<img src="moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
-										echo '</a>';							
+										echo '</a>';
 									echo '</form>';
 								}
 								else
@@ -190,37 +192,39 @@
 					}
 				}
 			echo '</tr>';
-			
+
 			$l++;
-		}					
-						
+		}
+
 		$reponse3->closeCursor();
-		
+
 		// On récupère la liste des utilisateurs du site sur la dernière ligne à partir de la 3ème colonne
 		$user_choix = array();
 		echo '<tr>';
 			echo '<td class="table_titres" style="border: 0;"></td>';
 			echo '<td class="init_table_dates">Date de sortie</td>';
-			
+
 			$reponse4 = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-			
+
 			$nombre_users = 0;
-			
+
 			while($donnees4 = $reponse4->fetch())
 			{
-				echo '<td class="init_table_users">';
+				echo '<td class="init_table_users" style="padding: 5px;">';
 					echo '<div class="zone_avatar_films">';
 						if (isset($donnees4['avatar']) AND !empty($donnees4['avatar']))
 							echo '<img src="../connexion/avatars/' . $donnees4['avatar'] . '" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
 						else
 							echo '<img src="../includes/default.png" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
 					echo '</div>';
-				echo '</td>';	
-									
+
+					echo '<span class="full_name_films">' . $donnees4['full_name'] . '</span>';
+				echo '</td>';
+
 				$nombre_users++;
 				$user_choix[$nombre_users] = $donnees4['identifiant'];
-			}					
-							
+			}
+
 			$reponse4->closeCursor();
 		echo '</tr>';
 

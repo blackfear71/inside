@@ -35,7 +35,7 @@ html
 {
 	height: 100%;
 }
-	
+
 body
 {
 	margin: 0;
@@ -278,13 +278,13 @@ header
 	height: 100px;
 }
 
-.mask 
+.mask
 {
     height: 25px;
     width: 100%;
 }
 
-.triangle 
+.triangle
 {
     width: 100%;
     height: 100%;
@@ -358,7 +358,7 @@ section
 	color: black;
 	width: 20%;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;
 }
 
 .avertissement
@@ -611,7 +611,7 @@ article
 	border-style: solid;
 	border-width: 0 0 400px 50px;
 	border-color: transparent transparent white transparent;
-	opacity: 0.1;	
+	opacity: 0.1;
 }
 
 .title_portail
@@ -657,7 +657,7 @@ article
 	background-color: rgb(30, 40, 50);
 	opacity: 0.5;
 	height: 400px;
-	width: 25%;	
+	width: 25%;
 }
 
 .title_rdz
@@ -711,7 +711,7 @@ article
 	color: white;
 	line-height: 70px;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_menu_univers_under
@@ -752,7 +752,7 @@ article
 	font-size: 500%;
 	margin-top: -200px;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_glossaire
@@ -774,7 +774,7 @@ article
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .mask_glossaire_1
@@ -821,7 +821,7 @@ article
 	font-family: robotothin, Verdana, sans-serif;
 	font-size: 500%;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_micrortc
@@ -854,7 +854,7 @@ article
 	margin-top: -50px;
 	margin-right: 10px;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_menu_link
@@ -957,7 +957,7 @@ article
 	border: 1px solid #BDC3C7;
 	vertical-align: middle;
 	padding-left: 10px;
-	padding-right: 10px;	
+	padding-right: 10px;
 	line-height: 30px;
 }
 
@@ -1070,7 +1070,7 @@ article
 .nb_results
 {
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 80%;	
+	font-size: 80%;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -1121,7 +1121,7 @@ article
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-bottom: 0px;
-	line-height: 50px;	
+	line-height: 50px;
 	text-align: right;
 }
 
@@ -1154,14 +1154,14 @@ article
 .article_auteur
 {
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	width: 79%;
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: right;
-	line-height: 40px;	
+	line-height: 40px;
 }
 
 .article_contenu
@@ -1202,7 +1202,7 @@ article
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-bottom: 0px;
-	line-height: 50px;	
+	line-height: 50px;
 	text-align: right;
 }
 
@@ -1220,14 +1220,14 @@ article
 .saisie_auteur
 {
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	width: 79%;
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: right;
-	line-height: 40px;	
+	line-height: 40px;
 }
 
 .saisie_contenu
@@ -1245,7 +1245,7 @@ article
 	font-size: 100%;
 	background-color: #f3f3f3;
 }
-		
+
 .saisie_valider
 {
 	display: block;
@@ -1300,7 +1300,7 @@ article
 }
 
 .previs_article
-{	
+{
 	display: inline-block;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 150%;
@@ -1309,10 +1309,10 @@ article
 
 .img_article
 {
-	max-height: 400px; 
+	max-height: 400px;
 	max-width: 100%;
 	display: block;
-	margin-left: auto; 
+	margin-left: auto;
 	margin-right: auto;
 }
 
@@ -1413,7 +1413,7 @@ article
 
 .table_movie_house td
 {
-	border: 1px solid #BDC3C7; 
+	border: 1px solid #BDC3C7;
 }
 
 .ligne_tableau_movie_house:hover
@@ -1491,7 +1491,7 @@ article
 	cursor: pointer;
 	margin-left: 5px;
 	margin-right: 5px;
-	
+
 }
 
 .seen
@@ -1513,7 +1513,7 @@ article
 	text-align: center;
 	background-color: #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .zone_avatar_films
@@ -1536,6 +1536,11 @@ article
 	vertical-align: middle;
 }
 
+.full_name_films
+{
+	font-size: 70%;
+}
+
 .zone_avatar_details_film
 {
 	background-color: white;
@@ -1548,6 +1553,7 @@ article
 	display: inline-block;
 	vertical-align: middle;
 	margin-top: -5px;
+	margin-left: 4%;
 }
 
 .avatar_details_film
@@ -1627,7 +1633,7 @@ article
 	padding-right: 1%;
 	margin-left: 1.5%;
 	margin-right: 0.75%;
-	width: 48%;	
+	width: 48%;
 	font-family: robotoregular, Verdana, sans-serif;
 }
 
@@ -1637,7 +1643,7 @@ article
 	line-height: 30px;
 	min-height: 30px;
 	padding-left: 1%;
-	padding-right: 1%;	
+	padding-right: 1%;
 	margin-left: 0.75%;
 	width: 28%;
 	font-family: robotoregular, Verdana, sans-serif;
@@ -1704,8 +1710,8 @@ article
 	font-size: 80%;
 	border: 0;
 	text-align: center;
-	margin-left: auto; 
-	margin-right: auto; 
+	margin-left: auto;
+	margin-right: auto;
 	background-color: #e3e3e3;
 }
 
@@ -1729,6 +1735,22 @@ article
 	background-color: rgb(200, 25, 50);
 }
 
+.link_vote_details
+{
+	color: white;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 50%;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	border: 0;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgb(200, 25, 50);
+}
+
 .cancel_vote
 {
 	width: 15px;
@@ -1740,127 +1762,6 @@ article
 .stars_content
 {
 	width: 100%;
-}
-
-.star_five 
-{
-	display: inline-block;
-	margin: 3px 0;
-	position: relative;
-	color: rgb(200, 25, 50);
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid rgb(200, 25, 50);
-	border-left: 10px solid transparent;
-	-moz-transform: rotate(35deg);
-	-webkit-transform: rotate(35deg);
-	-ms-transform: rotate(35deg);
-	-o-transform: rotate(35deg);
-}
-
-.star_five:before 
-{
-	display: inline-block;
-	border-bottom: 8px solid rgb(200, 25, 50);
-	border-left: 3px solid transparent;
-	border-right: 3px solid transparent;
-	position: absolute;
-	height: 0;
-	width: 0;
-	top: -4.5px;
-	left: -6.5px;
-	display: block;
-	content: '';
-	-webkit-transform: rotate(-35deg);
-	-moz-transform: rotate(-35deg);
-	-ms-transform: rotate(-35deg);
-	-o-transform: rotate(-35deg);
-}
-
-.star_five:after 
-{
-	display: inline-block;
-	position: absolute;
-	color: rgb(200, 25, 50);
-	top: 0.3px;
-	left: -10.5px;
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid rgb(200, 25, 50);
-	border-left: 10px solid transparent;
-	-webkit-transform: rotate(-70deg);
-	-moz-transform: rotate(-70deg);
-	-ms-transform: rotate(-70deg);
-	-o-transform: rotate(-70deg);
-	content: '';
-}
-
-.star_five_2 
-{
-	display: inline-block;
-	margin: 3px 0;
-	position: relative;
-	color: #e3e3e3;
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid #e3e3e3;
-	border-left: 10px solid transparent;
-	-moz-transform: rotate(35deg);
-	-webkit-transform: rotate(35deg);
-	-ms-transform: rotate(35deg);
-	-o-transform: rotate(35deg);
-}
-
-.star_five_2:before 
-{
-	display: inline-block;
-	border-bottom: 8px solid #e3e3e3;
-	border-left: 3px solid transparent;
-	border-right: 3px solid transparent;
-	position: absolute;
-	height: 0;
-	width: 0;
-	top: -4.5px;
-	left: -6.5px;
-	display: block;
-	content: '';
-	-webkit-transform: rotate(-35deg);
-	-moz-transform: rotate(-35deg);
-	-ms-transform: rotate(-35deg);
-	-o-transform: rotate(-35deg);
-}
-
-.star_five_2:after 
-{
-	display: inline-block;
-	position: absolute;
-	color: #e3e3e3;
-	top: 0.3px;
-	left: -10.5px;
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid #e3e3e3;
-	border-left: 10px solid transparent;
-	-webkit-transform: rotate(-70deg);
-	-moz-transform: rotate(-70deg);
-	-ms-transform: rotate(-70deg);
-	-o-transform: rotate(-70deg);
-	content: '';
-}
-
-.star_input
-{
-	display: inline-block;
-	margin-left: -17px;
-	background-color: transparent;
-	border: 0;
-	cursor: pointer;
-	position: relative;
-	z-index: 1;
 }
 
 /*** Details film ***/
@@ -2063,7 +1964,6 @@ article
 {
 	width: 50%;
 	border-bottom: solid 1px white;
-	padding-left: 4%;
 }
 
 .user_view_by
@@ -2081,7 +1981,6 @@ article
 	border-bottom: solid 1px white;
 	line-height: 48px;
 	font-size: 110%;
-	
 }
 
 .links_details
@@ -2108,7 +2007,7 @@ article
 	cursor: pointer;
 	color: white;
 	text-decoration: none;
-	font-family: robotothin, Verdana, sans-serif;	
+	font-family: robotothin, Verdana, sans-serif;
 }
 
 .fiche_align
@@ -2310,7 +2209,7 @@ article
 	padding: 10px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	line-height: 20px;	
+	line-height: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
 }
@@ -2374,7 +2273,7 @@ article
 
 .avatar_preview
 {
-	margin-top: 23px;	
+	margin-top: 23px;
 	max-width: 120px;
 	max-height: 120px;
 }
@@ -2529,7 +2428,7 @@ article
 	border-style: solid;
 	border-width: 0 0 200px 50px;
 	border-color: transparent transparent white transparent;
-	opacity: 0.1;	
+	opacity: 0.1;
 }
 
 .new_menu_link_admin
@@ -2595,6 +2494,11 @@ article
 	margin-bottom: 30px;
 }
 
+.ajout_idee
+{
+	margin-top: 30px;
+}
+
 .saisie_titre_3
 {
 	font-family: robotolight, Verdana, sans-serif;
@@ -2609,7 +2513,7 @@ article
 	line-height: 48px;
 	min-height: 48px;
 	text-align: left;
-	border: 0;	
+	border: 0;
 }
 
 .saisie_contenu_2
@@ -2752,7 +2656,7 @@ article
 
 .switch_bug_view
 {
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 	max-width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -2792,10 +2696,6 @@ article
 	border-radius: 5px;
 }
 
-.liste_bugs
-{
-}
-
 .resolve_bug
 {
 	float: right;
@@ -2809,7 +2709,7 @@ article
 	height: 40px;
 	cursor: pointer;
 	font-family: robotothin, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	color: white;
 }
 
@@ -2827,7 +2727,7 @@ article
 	padding-right: 10px;
 	line-height: 40px;
 	font-family: robotothin, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	color: white;
 }
 
@@ -2929,7 +2829,7 @@ article
 
 .table_manage_users td
 {
-	border: 1px solid #BDC3C7; 
+	border: 1px solid #BDC3C7;
 }
 
 .init_tr_manage_users

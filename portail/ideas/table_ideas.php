@@ -1,33 +1,33 @@
 <?php
 	include('../includes/appel_bdd.php');
-	
-	if ($_GET['view'] == "done")							
+
+	if ($_GET['view'] == "done")
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE status="D" OR status="R" ORDER BY id DESC');
-	elseif ($_GET['view'] == "inprogress")							
+	elseif ($_GET['view'] == "inprogress")
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE status="O" OR status="C" OR status="P" ORDER BY id DESC');
-	elseif ($_GET['view'] == "mine")							
+	elseif ($_GET['view'] == "mine")
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE (status="O" OR status="C" OR status="P") AND developper="' . $_SESSION['identifiant'] . '" ORDER BY id DESC');
 	else
 		$reponse = $bdd->query('SELECT * FROM ideas ORDER BY id DESC');
-			
+
 	$count = 0;
-	
+
 	while ($donnees = $reponse->fetch())
 	{
 		// Recherche du nom complet de l'auteur
 		$reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['author'] . '"');
 		$donnees2 = $reponse2->fetch();
-		
+
 		$auteur_idee = $donnees2['full_name'];
-		
+
 		$reponse2->closeCursor();
-		
+
 		// Recherche du nom complet du developpeur
 		$reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['developper'] . '"');
 		$donnees3 = $reponse3->fetch();
-		
+
 		$developpeur_idee = $donnees3['full_name'];
-		
+
 		$reponse3->closeCursor();
 
 		// Libellés états
@@ -37,37 +37,37 @@
 			case "O":
 				$etat_idee = '<span style="color: red;">Ouverte</span>';
 				break;
-											
+
 			// Prise en charge
 			case "C":
-				$etat_idee = '<span style="color: red;">Prise en charge</span>';														
+				$etat_idee = '<span style="color: red;">Prise en charge</span>';
 				break;
-												
+
 			// En progrès
 			case "P":
-				$etat_idee = '<span style="color: red;">En cours de développement</span>';													
+				$etat_idee = '<span style="color: red;">En cours de développement</span>';
 				break;
-												
+
 			// Terminée
 			case "D":
-				$etat_idee = '<span style="color: green;">Terminée</span>';													
+				$etat_idee = '<span style="color: green;">Terminée</span>';
 				break;
-												
+
 			// Rejetée
 			case "R":
-				$etat_idee = '<span style="color: red;">Rejetée</span>';													
+				$etat_idee = '<span style="color: red;">Rejetée</span>';
 				break;
-												
+
 			default:
 				break;
 		}
-		
+
 		// Formatage date
 		$date_idee = substr($donnees['date'], 2, 2) . "/" . substr($donnees['date'], 0, 2) . "/" . substr($donnees['date'], 4, 4);
 
 		// Affichage des idées
 		echo '<table class="table_ideas">';
-			echo '<tr id="' . $donnees['id'] . '">';	
+			echo '<tr id="' . $donnees['id'] . '">';
 				// Titre idée
 				echo '<td class="td_ideas_title">';
 					echo 'Idée';
@@ -75,7 +75,7 @@
 				echo '<td class="td_ideas_content">';
 					echo $donnees['subject'];
 				echo '</td>';
-				
+
 				// Date
 				echo '<td class="td_ideas_title">';
 					echo 'Date';
@@ -83,11 +83,11 @@
 				echo '<td class="td_ideas_content">';
 					echo $date_idee;
 				echo '</td>';
-				
+
 				// Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
-				if ( empty($donnees['developper']) 
+				if ( empty($donnees['developper'])
 				OR (!empty($donnees['developper']) AND $_SESSION['identifiant'] == $donnees['developper'])
-				OR  $donnees['status'] == "D" 
+				OR  $donnees['status'] == "D"
 				OR  $donnees['status'] == "R")
 				{
 					echo '<td rowspan="100%" class="td_ideas_actions">';
@@ -98,31 +98,31 @@
 								case "O":
 									echo '<input type="submit" name="take" value="Prendre en charge" title="Prendre en charge" class="button_idea" />';
 									break;
-											
+
 								// Prise en charge
 								case "C":
 									echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="button_idea" />';
 									echo '<input type="submit" name="developp" value="Développer" title="Commencer les développements" class="button_idea" />';
-									echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="button_idea" />';															
+									echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="button_idea" />';
 									break;
-												
+
 								// En progrès
 								case "P":
 									echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="button_idea" />';
 									echo '<input type="submit" name="take" value="Prendre en charge" title="Prendre en charge" class="button_idea" />';
-									echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="button_idea" />';															
+									echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="button_idea" />';
 									break;
-												
+
 								// Terminée
 								case "D":
-									echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="button_idea" />';														
+									echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="button_idea" />';
 									break;
-											
+
 								// Rejetée
 								case "R":
-									echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="button_idea" />';														
+									echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="button_idea" />';
 									break;
-												
+
 								default:
 									break;
 							}
@@ -130,7 +130,7 @@
 					echo '</td>';
 				}
 			echo '</tr>';
-						
+
 			// Proposé par
 			echo '<tr>';
 				echo '<td class="td_ideas_title">';
@@ -139,14 +139,14 @@
 				echo '<td class="td_ideas_content">';
 					echo $auteur_idee;
 				echo '</td>';
-			
+
 				// Statut
 				echo '<td class="td_ideas_title">';
 					echo 'Statut';
 				echo '</td>';
 				echo '<td class="td_ideas_content">';
 					echo $etat_idee;
-					
+
 					// Développeur
 					if (!empty($donnees['developper']))
 					{
@@ -154,7 +154,7 @@
 					}
 				echo '</td>';
 			echo '</tr>';
-						
+
 			// Description idée
 			echo '<tr class="tr_ideas_idea">';
 				echo '<td colspan="4">';
@@ -165,18 +165,18 @@
 
 		$count++;
 	}
-	
+
 	if ($count == 0)
 	{
-		if ($_GET['view'] == "done")							
+		if ($_GET['view'] == "done")
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée terminée</p>';
-		elseif ($_GET['view'] == "inprogress")							
+		elseif ($_GET['view'] == "inprogress")
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée en cours</p>';
-		elseif ($_GET['view'] == "mine")							
+		elseif ($_GET['view'] == "mine")
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée en charge</p>';
 		else
 			echo '<p class="submitted" style="text-align: center; color: black;">Aucune idée proposée</p>';
 	}
-	
-	$reponse->closeCursor();			
+
+	$reponse->closeCursor();
 ?>
