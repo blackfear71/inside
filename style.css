@@ -290,7 +290,7 @@ header
     height: 100%;
     left: 0px;
     top: 0px;
-    background: linear-gradient(to right bottom, rgb(255, 25, 55) 50%, transparent 50%);
+    background-color: linear-gradient(to right bottom, rgb(255, 25, 55) 50%, transparent 50%);
 }
 
 /*** Accueil ***/
@@ -329,7 +329,7 @@ section
 .bouton_connexion
 {
 	border: 0;
-	background: white;
+	background-color: white;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 150%;
 	cursor: pointer;
@@ -1842,7 +1842,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_previous_2
@@ -1851,7 +1851,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
+	background-color: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_previous_3
@@ -1860,7 +1860,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_next
@@ -1869,7 +1869,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background: linear-gradient(to left top, #2eb2f4 50%, transparent 50%);
+	background-color: linear-gradient(to left top, #2eb2f4 50%, transparent 50%);
 }
 
 .triangle_next_2
@@ -1878,7 +1878,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_next_3
@@ -1887,7 +1887,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
+	background-color: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
 }
 
 .title_previous_next_film
@@ -2143,7 +2143,6 @@ article
 	display: block;
 	color: black;
 	text-decoration: none;
-	background: blue;
 	padding: 8px;
 }
 
@@ -2492,7 +2491,7 @@ article
 	z-index: 1;
 	float: left;
 	margin-top: -200px;
-	background: transparent;
+	background-color: transparent;
 	border: 0;
 	height: 200px;
 	width: 300px;
@@ -2763,7 +2762,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-    background: linear-gradient(to left top, rgb(90, 200, 70) 50%, transparent 50%);
+  background-color: linear-gradient(to left top, rgb(90, 200, 70) 50%, transparent 50%);
 }
 
 .triangle_resolution_red
@@ -2772,7 +2771,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-	background: linear-gradient(to left top, rgb(255, 25, 55) 50%, transparent 50%);
+	background-color: linear-gradient(to left top, rgb(255, 25, 55) 50%, transparent 50%);
 }
 
 .triangle_resolution_blue
@@ -2781,7 +2780,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 /*** Purge ***/
