@@ -2143,6 +2143,8 @@ article
 	display: block;
 	color: black;
 	text-decoration: none;
+	background: blue;
+	padding: 8px;
 }
 
 /*** Saisie film avancée ***/
@@ -2299,6 +2301,7 @@ article
 	margin-top: 23px;
 	max-width: 120px;
 	max-height: 120px;
+	border-radius: 5px;
 }
 
 .zone_parcourir_avatar
