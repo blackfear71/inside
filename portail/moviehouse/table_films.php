@@ -1,7 +1,9 @@
 <?php
 	include('../includes/appel_bdd.php');
 	
-	// Tableau vue utilisateur
+	/***************************/
+	/* Tableau vue utilisateur */
+	/***************************/
 	if ($_GET['view'] == "user")
 	{
 		echo '<table class="table_movie_house">';
@@ -126,7 +128,9 @@
 			$reponse->closeCursor();
 		echo '</table>';
 	}
-	// Tableau vue générale
+	/************************/
+	/* Tableau vue générale */
+	/************************/
 	else
 	{
 		echo '<table class="table_movie_house">';
@@ -137,14 +141,19 @@
 				echo '<td class="table_titres" style="border: 0;"></td>';
 				echo '<td class="init_table_dates">Date de sortie</td>';
 				
-				$reponse1 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+				$reponse1 = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 				
 				$nombre_users = 0;
 				
 				while($donnees1 = $reponse1->fetch())
 				{
 					echo '<td class="init_table_users">';
-						echo $donnees1['full_name'];
+						echo '<div class="zone_avatar_films">';
+							if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
+								echo '<img src="../connexion/avatars/' . $donnees1['avatar'] . '" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
+							else
+								echo '<img src="../includes/default.png" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
+						echo '</div>';
 					echo '</td>';	
 										
 					$nombre_users++;
@@ -217,9 +226,11 @@
 							{
 								// On affiche la préférence pour le film + la couleur de participation/vue
 								if ($ligne[4] == "S")
-									echo '<td class="table_users" style="background: #74cefb;">';
+									echo '<td class="table_users" style="background-color: #74cefb;">';
 								elseif ($ligne[4] == "P")
-									echo '<td class="table_users" style="background: #91d784;">';
+									echo '<td class="table_users" style="background-color: #91d784;">';
+								elseif ($_SESSION['identifiant'] == $ligne[2])
+									echo '<td class="table_users" style="background-color: #fffde8;">';
 								else
 									echo '<td class="table_users">';
 
@@ -267,7 +278,11 @@
 						if ($empty == true)
 						{
 							// Pas de couleur sur la case car on n'a pas fait de choix
-							echo '<td class="table_users">';
+							if ($_SESSION['identifiant'] == $user_choix[$j])
+								echo '<td class="table_users" style="background-color: #fffde8;">';
+							else
+								echo '<td class="table_users">';
+							
 								echo '<div class="stars_content">';
 									// Si le user correspond à la colonne ($j)
 									if ($_SESSION['identifiant'] == $user_choix[$j])
@@ -295,6 +310,34 @@
 			}					
 							
 			$reponse3->closeCursor();
+			
+			// On récupère la liste des utilisateurs du site sur la dernière ligne à partir de la 3ème colonne
+			$user_choix = array();
+			echo '<tr>';
+				echo '<td class="table_titres" style="border: 0;"></td>';
+				echo '<td class="init_table_dates">Date de sortie</td>';
+				
+				$reponse4 = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+				
+				$nombre_users = 0;
+				
+				while($donnees4 = $reponse4->fetch())
+				{
+					echo '<td class="init_table_users">';
+						echo '<div class="zone_avatar_films">';
+							if (isset($donnees4['avatar']) AND !empty($donnees4['avatar']))
+								echo '<img src="../connexion/avatars/' . $donnees4['avatar'] . '" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
+							else
+								echo '<img src="../includes/default.png" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
+						echo '</div>';
+					echo '</td>';	
+										
+					$nombre_users++;
+					$user_choix[$nombre_users] = $donnees4['identifiant'];
+				}					
+								
+				$reponse4->closeCursor();
+			echo '</tr>';
 
 		echo '</table>';
 	}

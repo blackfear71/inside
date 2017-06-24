@@ -58,7 +58,8 @@
 			</aside>
 		
 			<article class="article_portail">
-				<div class="categorie_profil">
+				<!-- Gestion pseudo -->
+				<div class="categorie_profil">					
 					<div class="titre_profil">
 						Changement de pseudo
 					</div>
@@ -72,7 +73,44 @@
 						</form>
 					</div>
 				</div>
+				
+				<!-- Gestion avatar -->
+				<div class="categorie_profil">
+					<div class="titre_profil">
+						Avatar
+					</div>
+					
+					<div class="contenu_profil">
+						<div class="zone_avatar">
+							<?php
+								include('../includes/appel_bdd.php');
+								
+								$reponse = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant="' . $_SESSION['identifiant'] . '"');
+								$donnees = $reponse->fetch();
 
+								if (isset($donnees['avatar']) AND !empty($donnees['avatar']))
+									echo '<img src="avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_preview" />';
+
+								$reponse->closeCursor();
+							?>
+							
+							<form method="post" action="avatar.php" enctype="multipart/form-data" runat="server">					
+								<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
+								
+								<span class="zone_parcourir_avatar">+<input type="file" accept="image/*" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" /></span>
+								
+								<div class="mask_avatar">
+									<img id="output" class="avatar"/>
+								</div>
+
+								<input type="submit" name="post_avatar" value="Envoyer" class="saisie_envoyer_avatar" />			
+								<input type="submit" name="delete_avatar" value="Supprimer" class="saisie_envoyer_avatar" />			
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- Gestion mot de passe -->
 				<div class="categorie_profil">
 					<div class="titre_profil">
 						Changement de mot de passe
@@ -105,6 +143,7 @@
 					</div>
 				</div>
 
+				<!-- Gestion préférences -->
 				<div class="categorie_profil">
 					<div class="titre_profil">
 						Mes préférences
@@ -187,6 +226,7 @@
 					</div>
 				</div>
 				
+				<!-- Gestion statistiques -->
 				<div class="categorie_profil">
 					<div class="titre_profil">
 						Mes contributions <span class="pseudo">Reference Guide</span>
@@ -217,6 +257,13 @@
 			<?php include('../includes/footer.php'); ?>
 		</footer>
 		
+		<script type="text/javascript">
+			var loadFile = function(event) 
+			{
+				var output = document.getElementById('output');
+				output.src = URL.createObjectURL(event.target.files[0]);
+			};
+		</script>
     </body>
 	
 </html>

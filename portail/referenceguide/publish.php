@@ -3,6 +3,22 @@
 	
 	include("../../includes/appel_bdd.php");
 	
+	// On contrôle la présence du dossier images, sinon on le créé
+	$dossier1 = "images";
+	
+	if (!is_dir($dossier1))
+	{
+	   mkdir($dossier1);
+	}
+	
+	// On contrôle la présence du dossier temp, sinon on le créé
+	$dossier2 = "temp";
+	
+	if (!is_dir($dossier2))
+	{
+	   mkdir($dossier2);
+	}
+	
 	if (isset($_POST['publish_article']))
 	{
 		// Titre de l'article
