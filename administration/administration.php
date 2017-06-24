@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	
+
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
 		header('location: ../portail/portail.php');
-	
+
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 ?>
@@ -19,14 +19,14 @@
 		<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
 		<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
     </head>
-	
-	<body>	
-	
-		<header> 
+
+	<body>
+
+		<header>
 			<div class="main_title">
 				Administration
 			</div>
-			
+
 			<div class="mask">
 				<div class="triangle"></div>
 			</div>
@@ -37,11 +37,11 @@
 				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
-					
+
 					include('../includes/aside.php');
-				?>		
+				?>
 			</aside>
-		
+
 			<article class="article_portail">
 				<div class="new_menu_admin">
 					<a href="manage_users.php" class="new_menu_link_admin">
@@ -55,7 +55,7 @@
 									$req = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 									while($data = $req->fetch())
 									{
-										if ($data['reset'] == "Y")
+										if ($data['reset'] == "Y" OR $data['reset'] == "I")
 										{
 											echo '( ! )';
 											break;
@@ -67,7 +67,7 @@
 							</div>
 						</div>
 					</a>
-					
+
 					<a href="" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -86,7 +86,7 @@
 								<div class="saut_ligne">MOVIE<br />HOUSE</div>
 							</div>
 						</div>
-					</a>						
+					</a>
 
 					<a href="show_purge.php" class="new_menu_link_admin">
 						<div class="menu_admin_box">
@@ -96,8 +96,8 @@
 								<div class="saut_ligne">FICHIERS<br />TEMPORAIRES</div>
 							</div>
 						</div>
-					</a>							
-										
+					</a>
+
 					<a href="reports.php?view=unresolved" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -124,7 +124,7 @@
 							</div>
 						</div>
 					</a>
-					
+
 					<a href="/phpmyadmin/" target="_blank" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -132,7 +132,7 @@
 							<div class="title_admin">phpMyAdmin</div>
 						</div>
 					</a>
-					
+
 					<form method="post" action="export_bdd.php" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -146,11 +146,11 @@
 				</div>
 			</article>
 		</section>
-		
+
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-		
+
     </body>
-	
+
 </html>
