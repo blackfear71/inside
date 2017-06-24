@@ -239,7 +239,7 @@
 							// Nombre de publications
 							$reponse = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $_SESSION['identifiant'] . '"');
 							$donnees = $reponse->fetch();
-							echo '<p class="actual">Nombre de publications : <span class="pseudo">' . $donnees['nb_publications'] . '</span></p>';
+							echo '<p class="actual">Nombre de publications <span class="pseudo">ReferenceGuide</span> : <span class="pseudo">' . $donnees['nb_publications'] . '</span></p>';
 							$reponse->closeCursor();
 
 							// Nombre de votes utiles
@@ -251,7 +251,7 @@
 							// Nombre d'idées
 							$reponse = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $_SESSION['identifiant'] . '"');
 							$donnees = $reponse->fetch();
-							echo '<p class="actual">Nombre d\'idées soumises : <span class="pseudo">' . $donnees['nb_idees'] . '</span></p>';
+							echo '<p class="actual">Nombre d\'idées soumises <span class="pseudo">#TheBox</span> : <span class="pseudo">' . $donnees['nb_idees'] . '</span></p>';
 							$reponse->closeCursor();
 						echo '</div>';
 					?>

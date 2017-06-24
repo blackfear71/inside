@@ -5,7 +5,7 @@
   {
     include('../includes/appel_bdd.php');
 
-    $trigramme = $_POST['trigramme'];
+    $trigramme = strtoupper($_POST['trigramme']);
     $pseudo = $_POST['pseudo'];
     $salt = rand();
     $password = htmlspecialchars(hash('sha1', $_POST['password'] . $salt));
