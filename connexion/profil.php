@@ -229,7 +229,7 @@
 				<!-- Gestion statistiques -->
 				<div class="categorie_profil">
 					<div class="titre_profil">
-						Mes contributions <span class="pseudo">Reference Guide</span>
+						Mes contributions
 					</div>
 
 					<?php
