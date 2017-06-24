@@ -1518,12 +1518,11 @@ article
 
 .zone_avatar_films
 {
-	background: blue;
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 48px;
+	line-height: 38px;
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
@@ -1532,14 +1531,34 @@ article
 
 .avatar_films
 {
-	max-width: 50px;
-	max-height: 50px;
+	max-width: 40px;
+	max-height: 40px;
+	vertical-align: middle;
+}
+
+.zone_avatar_details_film
+{
+	background-color: white;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 28px;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -5px;
+}
+
+.avatar_details_film
+{
+	max-width: 30px;
+	max-height: 30px;
 	vertical-align: middle;
 }
 
 .table_users
 {
-	width: 120px;
 	text-align: center;
 	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
@@ -1651,6 +1670,71 @@ article
 	margin-bottom: -20px;
 	font-family: robotoregular, Verdana, sans-serif;
 	line-height: 50px;
+}
+
+.link_vote
+{
+	display: inline-block;
+	color: rgb(200, 25, 50);
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 50%;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	border: solid 1px rgb(200, 25, 50);
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	cursor: pointer;
+	background-color: #e3e3e3;
+}
+
+.link_vote_empty
+{
+	display: inline-block;
+	color: rgb(200, 25, 50);
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 50%;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	border: 0;
+	text-align: center;
+	margin-left: auto; 
+	margin-right: auto; 
+	background-color: #e3e3e3;
+}
+
+.link_vote_selected
+{
+	display: inline-block;
+	color: white;
+	border: solid 1px rgb(200, 25, 50);
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 50%;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	cursor: pointer;
+	background-color: rgb(200, 25, 50);
+}
+
+.cancel_vote
+{
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+	margin-top: -3px;
 }
 
 .stars_content
@@ -1980,6 +2064,12 @@ article
 	width: 50%;
 	border-bottom: solid 1px white;
 	padding-left: 4%;
+}
+
+.user_view_by
+{
+	display: inline-block;
+	margin-left: 10px;
 }
 
 .view_by

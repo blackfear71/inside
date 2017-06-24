@@ -193,11 +193,12 @@
 							$full_names = array();
 							$i = 1;
 							
-							$req1 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant != "admin" ORDER BY id ASC');
+							$req1 = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY id ASC');
 							while ($data1 = $req1->fetch())
 							{
 								$full_names[$i][1] = $data1['identifiant'];
 								$full_names[$i][2] = $data1['full_name'];
+								$full_names[$i][3] = $data1['avatar'];
 								
 								$i++;
 							}
@@ -226,7 +227,6 @@
 								{
 									echo '<a href="' . $donnees['link'] . '" target="_blank" class="link_fiche">';
 										echo '<div class="fiche_align">Fiche du film</div>';
-										//echo '<img src="../../includes/back.png" alt="fiche" class="fiche_film" />';
 									echo '</a>';
 								}
 								else
@@ -241,18 +241,16 @@
 								$data3 = $req3->fetch();
 
 								echo '<div class="form_stars_details">';
-									echo '<form method="post" action="submit_stars.php?id_film=' . $_GET['id_film'] . '">';
-										for($k = 1; $k <= $data3['stars']; $k++)
+									echo '<form method="post" action="submit_film.php?id_film=' . $_GET['id_film'] . '">';
+										// Boutons vote
+										for($j = 0; $j <= 3; $j++)
 										{
-											echo '<div class="star_five"></div>';
-											echo '<input type="submit" name="star[' . $k . ']" value="" class="star_input" />';
-										}
-										for($k = $data3['stars'] + 1; $k <= 5; $k++)
-										{
-											echo '<div class="star_five_2"></div>';
-											echo '<input type="submit" name="star[' . $k . ']" value="" class="star_input" />';
-										}
-									echo '</form>';	
+											if ($j == $data3['stars'])
+												echo '<input type="submit" name="preference[' . $j . ']" value="' . $j . '" class="link_vote_selected" />';
+											else
+												echo '<input type="submit" name="preference[' . $j . ']" value="' . $j . '" class="link_vote" />';
+										}						
+									echo '</form>';
 								echo '</div>';
 								
 								$req3->closeCursor();
@@ -276,10 +274,7 @@
 										else
 											echo '<input type="submit" name="seen" value="J\'ai vu !" class="not_interested" style="background-color: #2eb2f4;" />';
 											
-										$req4->closeCursor();
-
-										// Pas intéressé
-										echo '<input type="submit" name="not_interested" value="Ne m\'intéresse plus" class="not_interested" />';										
+										$req4->closeCursor();										
 									echo '</form>';
 								}
 							echo '</div>';
@@ -304,7 +299,8 @@
 									if ($data5['identifiant'] == $line[1])
 									{
 										$utilisateur = $line[2];
-										
+										$avatar = $line[3];
+																			
 										// Passe à l'itération suivante si on a trouvé le pseudo
 										continue;
 									}
@@ -312,8 +308,17 @@
 								// On affiche le nom correspondant à l'utilisateur et ses étoiles
 								echo '<table class="table_view_by">';
 									echo '<tr>';
-										echo '<td class="td_view_by" style="border-right: solid 1px white;">' . $utilisateur . '</td>';
-	
+										echo '<td class="td_view_by" style="border-right: solid 1px white;">';
+											echo '<div class="zone_avatar_details_film">';
+												if (isset($avatar) AND !empty($avatar))
+													echo '<img src="../../connexion/avatars/' . $avatar . '" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
+												else
+													echo '<img src="../../includes/default.png" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
+											echo '</div>';
+											
+											echo '<div class="user_view_by">' . $utilisateur . '</div>';
+										echo '</td>';
+
 										if ($data5['participation'] == "S")
 											echo '<td class="td_view_by" style="background: #74cefb;">';
 										elseif ($data5['participation'] == "P")

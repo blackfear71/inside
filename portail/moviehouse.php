@@ -146,7 +146,10 @@
 					else
 					{
 						// Tableau des films
-						include('moviehouse/table_films.php');
+						if ($_GET['view'] == "user")
+							include('moviehouse/table_films_user.php');
+						else
+							include('moviehouse/table_films_synthese.php');
 					}					
 				?>
 				
