@@ -1,14 +1,14 @@
 <?php
 	session_start();
-	
+
 	include('../../includes/init_session.php');
-	
+
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: ../../administration/administration.php');
-	
+
 	if ($_SESSION['connected'] == false)
 		header('location: ../../index.php');
-	
+
 	if (!isset($_GET['search']) OR $_GET['search'] == "no")
 		$_SESSION['search'] = "";
 ?>
@@ -24,13 +24,13 @@
 		<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
 		<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
     </head>
-	
-	<body>	
-		
-		<header onclick="document.getElementById('menu').style.display='none';"> 
+
+	<body>
+
+		<header onclick="document.getElementById('menu').style.display='none';">
 			<?php include('../../includes/onglets.php') ; ?>
 		</header>
-		
+
 		<section>
 			<aside>
 				<!-- Boutons d'action -->
@@ -42,41 +42,32 @@
 					$back = true;
 					$ideas = true;
 					$bug = true;
-					
+
 					include('../../includes/aside.php');
 				?>
 			</aside>
-		
+
 			<article class="article_portail" onclick="document.getElementById('menu').style.display='none';" style="padding-top: 10px;">
-				<?php					
+				<?php
 					include('banniere.php');
 				?>
-				
+
 				<div class="search_bar_liste">
-					<?php 
-						include('search_form.php'); 
+					<?php
+						include('search_form.php');
 					?>
 				</div>
-				
-				<?php					
+
+				<?php
 					include('search_results.php');
 				?>
-			</article>	
+			</article>
 		</section>
-		
+
 		<footer onclick="document.getElementById('menu').style.display='none';">
 			<?php include('../../includes/footer.php'); ?>
 		</footer>
-		
-		<script type="text/javascript">
-			function afficherMasquer(id)
-			{
-				if (document.getElementById(id).style.display == "none")
-					document.getElementById(id).style.display = "block";
-				else
-					document.getElementById(id).style.display = "none";
-			}
-		</script>
-    </body>
-	
+
+  </body>
+
 </html>

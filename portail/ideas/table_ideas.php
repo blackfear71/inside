@@ -18,7 +18,10 @@
 		$reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['author'] . '"');
 		$donnees2 = $reponse2->fetch();
 
-		$auteur_idee = $donnees2['full_name'];
+		if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
+			$auteur_idee = $donnees2['full_name'];
+		else
+			$auteur_idee = "<i>un ancien utilisateur</i>";
 
 		$reponse2->closeCursor();
 
@@ -26,7 +29,10 @@
 		$reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['developper'] . '"');
 		$donnees3 = $reponse3->fetch();
 
-		$developpeur_idee = $donnees3['full_name'];
+		if (isset($donnees3['full_name']) AND !empty($donnees3['full_name']))
+			$developpeur_idee = $donnees3['full_name'];
+		else
+			$developpeur_idee = "<i>un ancien utilisateur</i>";
 
 		$reponse3->closeCursor();
 

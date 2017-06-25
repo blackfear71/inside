@@ -5,6 +5,7 @@
   {
     include('../includes/appel_bdd.php');
 
+    // Récupération des champs saisis et initialisations
     $trigramme = strtoupper($_POST['trigramme']);
     $pseudo = $_POST['pseudo'];
     $salt = rand();
@@ -57,5 +58,22 @@
 
     // Redirection
     header('location: inscription.php');
+  }
+  elseif (isset($_POST['ask_desinscription']))
+  {
+    include('../includes/appel_bdd.php');
+
+    $reset = "D";
+    $_SESSION['ask_desinscription'] = false;
+
+    $req = $bdd->prepare('UPDATE users SET reset=:reset WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
+    $req->execute(array(
+      'reset' => $reset
+    ));
+    $req->closeCursor();
+
+    $_SESSION['ask_desinscription'] = true;
+
+    header('location: profil.php?user=' . $_SESSION['identifiant']);
   }
 ?>

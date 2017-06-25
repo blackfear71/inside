@@ -4,32 +4,54 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users" style="width: 10%;">';
+			echo '<td rowspan="2" class="init_td_manage_users" style="width: 10%;">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Demande de réinitialisation du mot de passe';
+			echo '<td colspan="3" class="init_td_manage_users" style="width: 35%;">';
+				echo 'Réinitialisation mot de passe';
+			echo '</td>';
+
+			echo '<td colspan="2" class="init_td_manage_users" style="width: 20%;">';
+				echo 'Inscription';
+			echo '</td>';
+
+			echo '<td colspan="2" class="init_td_manage_users" style="width: 20%;">';
+				echo 'Désinscription';
+			echo '</td>';
+		echo '</tr>';
+
+		echo '<tr class="init_tr_manage_users">';
+			echo '<td class="init_td_manage_users" style="width: 10%;">';
+				echo 'Demande';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users" style="width: 10%;">';
+				echo 'Annuler';
 			echo '</td>';
 
 			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Annuler la demande de réinitialisation du mot de passe';
+				echo 'Réinitialiser';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Réinitialiser le mot de passe';
+			echo '<td class="init_td_manage_users" style="width: 10%;">';
+				echo 'Accepter';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Accepter l\'inscription';
+			echo '<td class="init_td_manage_users" style="width: 10%;">';
+				echo 'Refuser';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
-				echo 'Refuser l\'inscription';
+			echo '<td class="init_td_manage_users" style="width: 10%;">';
+				echo 'Accepter';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users" style="width: 10%;">';
+				echo 'Refuser';
 			echo '</td>';
 		echo '</tr>';
 
@@ -91,6 +113,24 @@
 						echo '</form>';
 					}
 				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					if ($donnees['reset'] == "D")
+					{
+						echo '<form method="post" action="manage_inscription.php?id_user=' . $donnees['id'] . '">';
+							echo '<input type="submit" name="accept_desinscription" value="ACCEPTER" class="reset_password" />';
+						echo '</form>';
+					}
+				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					if ($donnees['reset'] == "D")
+					{
+						echo '<form method="post" action="manage_inscription.php?id_user=' . $donnees['id'] . '">';
+							echo '<input type="submit" name="decline_desinscription" value="REFUSER" class="reset_password" />';
+						echo '</form>';
+					}
+				echo '</td>';
 			echo '</tr>';
 		}
 
@@ -102,11 +142,11 @@
 				echo 'Alertes';
 			echo '</td>';
 
-			echo '<td colspan="5"class="td_manage_users">';
+			echo '<td colspan="7"class="td_manage_users">';
 				$req1 = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 				while($data1 = $req1->fetch())
 				{
-					if ($data1['reset'] == "Y" OR $data1['reset'] == "I")
+					if ($data1['reset'] == "Y" OR $data1['reset'] == "I" OR $data1['reset'] == "D")
 					{
 						echo '<span class="reset_warning">!</span>';
 						break;

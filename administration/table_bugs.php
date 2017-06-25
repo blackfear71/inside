@@ -16,7 +16,10 @@
 		$reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['author'] . '"');
 		$donnees2 = $reponse2->fetch();
 
-		$auteur_bug = $donnees2['full_name'];
+		if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
+			$auteur_bug = $donnees2['full_name'];
+		else
+			$auteur_bug = "<i>un ancien utilisateur</i>";
 
 		$reponse2->closeCursor();
 

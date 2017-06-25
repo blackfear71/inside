@@ -10,11 +10,24 @@
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 
+	// Initialisation alertes
+	if (!isset($_SESSION['pseudo_changed']))
+			$_SESSION['pseudo_changed'] = NULL;
+
+	if (!isset($_SESSION['avatar_changed']))
+			$_SESSION['avatar_changed'] = NULL;
+
+	if (!isset($_SESSION['avatar_deleted']))
+			$_SESSION['avatar_deleted'] = NULL;
+
 	if (!isset($_SESSION['wrong_password']))
 		$_SESSION['wrong_password'] = NULL;
 
 	if (!isset($_SESSION['preferences_updated']))
 		$_SESSION['preferences_updated'] = NULL;
+
+	if (!isset($_SESSION['ask_desinscription']))
+		$_SESSION['ask_desinscription'] = NULL;
 
 	if ($_GET['user'] != $_SESSION['identifiant'])
 		header('location: ../connexion/profil.php?user=' . $_SESSION['identifiant'] . '');
@@ -56,6 +69,11 @@
 					include('../includes/aside.php');
 				?>
 			</aside>
+
+			<!-- Messages d'alerte -->
+			<?php
+				include('alerts.php');
+			?>
 
 			<article class="article_portail">
 				<!-- Gestion pseudo -->
@@ -117,23 +135,6 @@
 					</div>
 
 					<div class="contenu_profil">
-						<?php
-							if (isset($_SESSION['wrong_password']) AND $_SESSION['wrong_password'] == true)
-							{
-								echo '<p class="wrong_change_password">Mauvais mot de passe d\'origine ou mauvaise confirmation du nouveau mot de passe.</p>';
-								$_SESSION['wrong_password'] = NULL;
-							}
-							elseif (isset($_SESSION['wrong_password']) AND $_SESSION['wrong_password'] == false)
-							{
-								echo '<p class="wrong_change_password">Le mot de passe a été modifié avec succès.</p>';
-								$_SESSION['wrong_password'] = NULL;
-							}
-							else
-							{
-								$_SESSION['wrong_password'] = NULL;
-							}
-						?>
-
 						<form method="post" action="change_mdp.php" class="form_pseudo">
 							<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_profil_2" required />
 							<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_profil_2" required />
@@ -151,23 +152,6 @@
 
 					<div class="contenu_profil">
 						<form method="post" action="preferences.php" class="form_preference">
-							<?php
-								if (isset($_SESSION['preferences_updated']) AND $_SESSION['preferences_updated'] == false)
-								{
-									echo '<p class="wrong_change_password">Les préférences n\'ont pas été modifiées.</p>';
-									$_SESSION['preferences_updated'] = NULL;
-								}
-								elseif (isset($_SESSION['preferences_updated']) AND $_SESSION['preferences_updated'] == true)
-								{
-									echo '<p class="wrong_change_password">Les préférences ont été mises à jour avec succès.</p>';
-									$_SESSION['preferences_updated'] = NULL;
-								}
-								else
-								{
-									$_SESSION['preferences_updated'] = NULL;
-								}
-							?>
-
 							<div class="titre_preference">
 								Choix de la vue par défaut Movie House
 							</div>
@@ -253,6 +237,23 @@
 							$donnees = $reponse->fetch();
 							echo '<p class="actual">Nombre d\'idées soumises <span class="pseudo">#TheBox</span> : <span class="pseudo">' . $donnees['nb_idees'] . '</span></p>';
 							$reponse->closeCursor();
+						echo '</div>';
+					?>
+				</div>
+
+				<!-- Gestion désinscription -->
+				<div class="categorie_profil">
+					<div class="titre_profil">
+						Désinscription
+					</div>
+
+					<?php
+						echo '<div class="contenu_profil">';
+							echo '<p class="actual">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l\'administrateur à l\'aide de ce bouton. Il validera votre choix après vérification.</p>';
+
+							echo '<form method="post" action="ask_inscription.php" class="form_preference">';
+								echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="saisie_valider_preferences" />';
+							echo '</form>';
 						echo '</div>';
 					?>
 				</div>

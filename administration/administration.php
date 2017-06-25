@@ -55,7 +55,7 @@
 									$req = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 									while($data = $req->fetch())
 									{
-										if ($data['reset'] == "Y" OR $data['reset'] == "I")
+										if ($data['reset'] == "Y" OR $data['reset'] == "I" OR $data['reset'] == "D")
 										{
 											echo '( ! )';
 											break;

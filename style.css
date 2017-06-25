@@ -27,8 +27,10 @@
 /*                                                                        */
 /*   rgb(90, 200, 70)   -> vert moyen                                     */
 /*   #91d784            -> vert clair                                     */
+/*                                                                        */
+/*   #fffd4c            -> jaune clair (++)                               */
+/*   #fffde8            -> jaune clair (+)                                */
 /**************************************************************************/
-
 
 /*** Corps ***/
 html
@@ -290,7 +292,7 @@ header
     height: 100%;
     left: 0px;
     top: 0px;
-    background-color: linear-gradient(to right bottom, rgb(255, 25, 55) 50%, transparent 50%);
+    background: linear-gradient(to right bottom, rgb(255, 25, 55) 50%, transparent 50%);
 }
 
 /*** Accueil ***/
@@ -1545,7 +1547,7 @@ article
 	height: 40px;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 38px;
+	line-height: 30px;
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
@@ -1842,7 +1844,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_previous_2
@@ -1851,7 +1853,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background-color: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
+	background: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_previous_3
@@ -1860,7 +1862,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_next
@@ -1869,7 +1871,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background-color: linear-gradient(to left top, #2eb2f4 50%, transparent 50%);
+	background: linear-gradient(to left top, #2eb2f4 50%, transparent 50%);
 }
 
 .triangle_next_2
@@ -1878,7 +1880,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 .triangle_next_3
@@ -1887,7 +1889,7 @@ article
 	margin-bottom: -19px;
 	width: 10px;
 	height: 50px;
-	background-color: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
+	background: linear-gradient(to right bottom, transparent 50%, #2eb2f4 50%);
 }
 
 .title_previous_next_film
@@ -2196,6 +2198,27 @@ article
 }
 
 /*** Profil ***/
+.message_alerte_profil
+{
+	position: absolute;
+	left: 50%;
+	width: 500px;
+	margin-left: -250px;
+	margin-top: -45px;
+	line-height: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+	background-color: #fffd4c;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	box-shadow: 2px 2px 5px #a3a3a3;
+	z-index: -1;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
 .categorie_profil
 {
 	width: 80%;
@@ -2337,7 +2360,7 @@ article
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -123px;
+	margin-top: -124px;
 	line-height: 120px;
 }
 
@@ -2367,17 +2390,7 @@ article
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-}
-
-.wrong_change_password
-{
-	padding-bottom: 10px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;
-	width: 400px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+	margin-top: 20px;
 }
 
 .form_preference
@@ -2762,7 +2775,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-  background-color: linear-gradient(to left top, rgb(90, 200, 70) 50%, transparent 50%);
+  background: linear-gradient(to left top, rgb(90, 200, 70) 50%, transparent 50%);
 }
 
 .triangle_resolution_red
@@ -2771,7 +2784,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-	background-color: linear-gradient(to left top, rgb(255, 25, 55) 50%, transparent 50%);
+	background: linear-gradient(to left top, rgb(255, 25, 55) 50%, transparent 50%);
 }
 
 .triangle_resolution_blue
@@ -2780,7 +2793,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-	background-color: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
+	background: linear-gradient(to left top, transparent 50%, #2eb2f4 50%);
 }
 
 /*** Purge ***/
