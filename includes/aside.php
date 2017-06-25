@@ -1,3 +1,13 @@
+<script>
+	function afficherMasquer(id)
+	{
+		if (document.getElementById(id).style.display == "none")
+			document.getElementById(id).style.display = "block";
+		else
+			document.getElementById(id).style.display = "none";
+	}
+</script>
+
 <?php
 	//////////////////////////////////////
 	// Paramétrage des boutons d'action //
@@ -154,13 +164,3 @@
 		echo '<div class="hover_aside">Signaler</div>';
 	}
 ?>
-
-<script type="text/javascript">
-	function afficherMasquer(id)
-	{
-		if (document.getElementById(id).style.display == "none")
-			document.getElementById(id).style.display = "block";
-		else
-			document.getElementById(id).style.display = "none";
-	}
-</script>
