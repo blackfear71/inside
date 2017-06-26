@@ -1,5 +1,5 @@
 <?php
-	echo '<div class="title_gestion">Gestion des mots de passe</div>';
+	echo '<div class="title_gestion">Gestion des utilisateurs</div>';
 
 	echo '<table class="table_manage_users">';
 		// Entête du tableau

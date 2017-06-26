@@ -1539,6 +1539,8 @@ article
 	background-color: #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	padding: 5px;
+	vertical-align: top;
 }
 
 .zone_avatar_films
