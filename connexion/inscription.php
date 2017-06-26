@@ -17,14 +17,14 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="../favicon.png" />
-		<link rel="stylesheet" href="../style.css" />
-        <title>Inside CGI - Inscription</title>
-		<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
-    </head>
+  <head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="../favicon.png" />
+	<link rel="stylesheet" href="../style.css" />
+  <title>Inside CGI - Inscription</title>
+	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  </head>
 
 	<body>
 
@@ -95,6 +95,6 @@
 			<?php include('../includes/footer.php'); ?>
 		</footer>
 
-    </body>
+  </body>
 
 </html>

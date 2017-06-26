@@ -6,8 +6,8 @@
     include('../includes/appel_bdd.php');
 
     // Récupération des champs saisis et initialisations
-    $trigramme = strtoupper($_POST['trigramme']);
-    $pseudo = $_POST['pseudo'];
+    $trigramme = htmlspecialchars(strtoupper($_POST['trigramme']));
+    $pseudo = htmlspecialchars($_POST['pseudo']);
     $salt = rand();
     $password = htmlspecialchars(hash('sha1', $_POST['password'] . $salt));
     $confirm_password = htmlspecialchars(hash('sha1', $_POST['confirm_password'] . $salt));

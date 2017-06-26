@@ -1,6 +1,8 @@
 <?php
 	include('../../includes/appel_bdd.php');
 
+	$_SESSION['search'] = htmlspecialchars($_SESSION['search']);
+
 	// On récupère tout d'abord les noms correspondant aux identifiants
 	$full_names = array();
 	$i = 1;

@@ -1,11 +1,11 @@
 <?php
 	session_start();
-	
+
 	include('../includes/init_session.php');
-	
+
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: ../administration/administration.php');
-	
+
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 ?>
@@ -13,27 +13,27 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="../favicon.png" />
-		<link rel="stylesheet" href="../style.css" />
-        <title>Inside CGI - Portail</title>
-		<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
-    </head>
-	
-	<body>	
-	
-		<header> 
+  <head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="../favicon.png" />
+	<link rel="stylesheet" href="../style.css" />
+  <title>Inside CGI - Portail</title>
+	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  </head>
+
+	<body>
+
+		<header>
 			<div class="main_title">
 				Portail
 			</div>
-			
+
 			<div class="mask">
 				<div class="triangle"></div>
 			</div>
 		</header>
-		
+
 		<section>
 			<aside>
 				<!-- Boutons d'action -->
@@ -42,11 +42,11 @@
 					$profil = true;
 					$ideas = true;
 					$bug = true;
-					
+
 					include('../includes/aside.php');
 				?>
 			</aside>
-		
+
 			<article class="article_portail">
 				<div class="new_menu_portail">
 					<a href="referenceguide.php" class="new_menu_link_portail">
@@ -57,7 +57,7 @@
 							<div class="title_portail">REFE-<br />RENCE<br /><br />Guide</div>
 						</div>
 					</a>
-					
+
 					<!--<a href="timesheet.php" class="new_menu_link_portail">
 						<div class="menu_portail_box">
 							<div class="mask_portail"></div>
@@ -65,7 +65,7 @@
 							<div class="title_portail">Good<br />Old<br /><br />TIME<br />SHEET</div>
 						</div>
 					</a>-->
-					
+
 					<?php
 						switch ($_SESSION['view_movie_house'])
 						{
@@ -78,7 +78,7 @@
 									echo '</div>';
 								echo '</a>';
 								break;
-								
+
 							case "S":
 							default:
 								echo '<a href="moviehouse.php?view=main&year=' . date("Y") . '" class="new_menu_link_portail">';
@@ -95,11 +95,11 @@
 
 			</article>
 		</section>
-		
+
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-		
-    </body>
-	
+
+  </body>
+
 </html>

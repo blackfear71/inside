@@ -7,7 +7,7 @@
 	{
 		$_SESSION['pseudo_changed'] = false;
 
-		$new_pseudo = $_POST['new_pseudo'];
+		$new_pseudo = htmlspecialchars($_POST['new_pseudo']);
 
 		$req = $bdd->prepare('UPDATE users SET full_name = :full_name WHERE identifiant = "' . $_SESSION['identifiant'] . '" AND full_name = "' . $_SESSION['full_name'] . '"');
 		$req->execute(array(

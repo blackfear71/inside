@@ -1568,17 +1568,19 @@ article
 
 .zone_avatar_details_film
 {
+	float: left;
 	background-color: white;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 28px;
+	line-height: 20px;
 	overflow: hidden;
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: -5px;
-	margin-left: 4%;
+	margin-left: 10px;
+	margin-top: 8px;
+	background: blue;
 }
 
 .avatar_details_film
@@ -1993,8 +1995,7 @@ article
 
 .user_view_by
 {
-	display: inline-block;
-	margin-left: 10px;
+	margin-left: 50px;
 }
 
 .view_by
