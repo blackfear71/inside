@@ -1,8 +1,8 @@
 <?php
 	session_start();
-	
+
 	include ('../../includes/appel_bdd.php');
-	
+
 	// On récupère le choix utilisateur
 	if (isset($_POST['preference'][0]))
 		$preference = 0;
@@ -12,16 +12,20 @@
 		$preference = 2;
 	elseif (isset($_POST['preference'][3]))
 		$preference = 3;
+	elseif (isset($_POST['preference'][4]))
+		$preference = 4;
+	elseif (isset($_POST['preference'][5]))
+		$preference = 5;
 	else
 		$preference = 0;
-	
+
 	if (isset($_GET['id_film']) AND is_numeric($_GET['id_film']))
 	{
 		if ($preference == 0)
 		{
 			$id_film = $_GET['id_film'];
 			$identifiant = $_SESSION['identifiant'];
-			
+
 			// Suppression de la table
 			$req = $bdd->exec('DELETE FROM movie_house_users WHERE id_film=' . $id_film . ' AND identifiant="' . $identifiant . '"');
 		}
@@ -29,22 +33,22 @@
 		{
 			// On récupère le numéro du film
 			$id_film = $_GET['id_film'];
-			
+
 			// Onrécupère l'identifiant de l'utilisateur
 			$identifiant = $_SESSION['identifiant'];
-			
+
 			// On verifie qu'il n'existe pas déjà un choix pour ce film
 			$existe = false;
-			
-			$req1 = $bdd->query('SELECT COUNT(id) AS existe_deja FROM movie_house_users WHERE id_film=' . $id_film . ' 
+
+			$req1 = $bdd->query('SELECT COUNT(id) AS existe_deja FROM movie_house_users WHERE id_film=' . $id_film . '
 																						AND   identifiant="' . $identifiant . '"
 																						ORDER BY id ASC');
-				
+
 			$data1 = $req1->fetch();
 			if (is_numeric($data1['existe_deja']) AND $data1['existe_deja'] > 0)
 				$existe = true;
 			$req1->closeCursor();
-				
+
 			// Si trouvé alors on fait une MAJ
 			if ($existe == true)
 			{
@@ -53,13 +57,13 @@
 					'stars' => $preference
 				));
 				$req2->closeCursor();
-			}	
+			}
 			// Sinon on insère une nouvelle ligne
 			else
 			{
 				// Initialisation de la participation
 				$participation = "N";
-				
+
 				$req3 = $bdd->prepare('INSERT INTO movie_house_users(id_film, identifiant, stars, participation) VALUES(:id_film, :identifiant, :stars, :participation)');
 				$req3->execute(array(
 					'id_film' => $id_film,

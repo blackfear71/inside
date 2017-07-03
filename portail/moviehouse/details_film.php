@@ -243,12 +243,18 @@
 								echo '<div class="form_stars_details">';
 									echo '<form method="post" action="submit_film.php?id_film=' . $_GET['id_film'] . '">';
 										// Boutons vote
-										for($j = 0; $j <= 3; $j++)
+										for($j = 0; $j <= 5; $j++)
 										{
 											if ($j == $data3['stars'])
-												echo '<input type="submit" name="preference[' . $j . ']" value="' . $j . '" class="link_vote_selected" />';
+											{
+												echo '<img src="star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_selected" />';
+											}
 											else
-												echo '<input type="submit" name="preference[' . $j . ']" value="' . $j . '" class="link_vote" />';
+											{
+												echo '<img src="star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" />';
+											}
 										}
 									echo '</form>';
 								echo '</div>';
@@ -327,7 +333,7 @@
 											echo '<td class="td_view_by">';
 
 											echo '<div class="link_vote_details">';
-												echo $data5['stars'];
+												echo '<img src="star' . $data5['stars'] . '.png" alt="star' . $data5['stars'] . '" class="new_star" />';
 											echo '</div>';
 
 										echo '</td>';

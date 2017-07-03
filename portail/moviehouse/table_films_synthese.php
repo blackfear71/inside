@@ -114,18 +114,51 @@
 										// Si le user correspond à la colonne
 										if ($_SESSION['identifiant'] == $ligne[2])
 										{
-											echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto; background-color: transparent;">';
-												if (isset($ligne[3]))
-													echo $ligne[3];
-												else
-													echo '0';
-											echo '</a>';
+											switch($ligne[3])
+											{
+												case "1":
+													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+														echo '<img src="moviehouse/star1.png" alt="star1" class="new_star" />';
+													echo '</a>';
+													break;
 
-											echo '<form method="post" action="moviehouse/submit_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligne[1] . '" id="preference2[' . $l . ']" style="display: none; min-width: 160px;">';
+												case "2":
+													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+														echo '<img src="moviehouse/star2.png" alt="star2" class="new_star" />';
+													echo '</a>';
+													break;
+
+												case "3":
+													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+														echo '<img src="moviehouse/star3.png" alt="star3" class="new_star" />';
+													echo '</a>';
+													break;
+
+												case "4":
+													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+														echo '<img src="moviehouse/star4.png" alt="star4" class="new_star" />';
+													echo '</a>';
+													break;
+
+												case "5":
+													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+														echo '<img src="moviehouse/star5.png" alt="star5" class="new_star" />';
+													echo '</a>';
+													break;
+
+												default:
+													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+														echo '<img src="moviehouse/star0.png" alt="star0" class="new_star" />';
+													echo '</a>';
+													break;
+											}
+
+											echo '<form method="post" action="moviehouse/submit_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligne[1] . '" id="preference2[' . $l . ']" style="display: none; min-width: 240px;">';
 												// Boutons vote
-												for($m = 0; $m <= 3; $m++)
+												for($m = 0; $m <= 5; $m++)
 												{
-													echo '<input type="submit" name="preference[' . $m . ']" value="' . $m . '" class="link_vote"/>';
+													echo '<img src="moviehouse/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
+													echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" />';
 												}
 
 												// Bouton annulation
@@ -134,12 +167,11 @@
 												echo '</a>';
 											echo '</form>';
 										}
+										// Avis des autres utilisteurs
 										else
 										{
 											if (isset($ligne[3]))
-												echo '<span class="link_vote_empty">';
-													echo $ligne[3];
-												echo '</span>';
+												echo '<img src="moviehouse/star' . $ligne[3] . '.png" alt="star0" class="new_star" />';
 										}
 									echo '</div>';
 								}
@@ -164,15 +196,16 @@
 								// Si le user correspond à la colonne ($j)
 								if ($_SESSION['identifiant'] == $user_choix[$j])
 								{
-									echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto; background-color: transparent;">';
-										echo '0';
+									echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+										echo '<img src="moviehouse/star0.png" alt="star0" class="new_star" />';
 									echo '</a>';
 
-									echo '<form method="post" action="moviehouse/submit_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees3['id'] . '" id="preference2[' . $l . ']" style="display: none;">';
+									echo '<form method="post" action="moviehouse/submit_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees3['id'] . '" id="preference2[' . $l . ']" style="display: none; min-width: 240px;">';
 										// Boutons vote
-										for($m = 0; $m <= 3; $m++)
+										for($m = 0; $m <= 5; $m++)
 										{
-											echo '<input type="submit" name="preference[' . $m . ']" value="' . $m . '" class="link_vote"/>';
+											echo '<img src="moviehouse/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
+											echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" />';
 										}
 
 										// Bouton annulation
@@ -181,11 +214,10 @@
 										echo '</a>';
 									echo '</form>';
 								}
+								// Avis des autres utilisteurs
 								else
 								{
-									echo '<span class="link_vote_empty">';
-										echo '0';
-									echo '</span>';
+									echo '<img src="moviehouse/star0.png" alt="star0" class="new_star" />';
 								}
 							echo '</div>';
 						echo '</td>';

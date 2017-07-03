@@ -7,7 +7,7 @@
 	// lecture par requête de la BDD
 	$reponse = $bdd->query('SELECT * FROM users');
 
-	$login = htmlspecialchars($_POST['login']);
+	$login = htmlspecialchars(strtoupper($_POST['login']));
 
 	while ($donnees = $reponse->fetch())
 	{
