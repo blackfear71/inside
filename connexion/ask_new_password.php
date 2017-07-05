@@ -1,16 +1,16 @@
 <?php
 	session_start();
-	
+
 	if (isset($_POST['ask_password']))
 	{
 		include('../includes/appel_bdd.php');
-		
-		$identifiant = $_POST['login'];
+
+		$identifiant = htmlspecialchars($_POST['login']);
 		$reset = "N";
 		$_SESSION['wrong_id'] = false;
 		$_SESSION['asked'] = false;
 		$_SESSION['already_asked'] = false;
-				
+
 		// On vérifie que l'identifiant existe bien
 		$reponse = $bdd->query('SELECT id, identifiant, reset FROM users');
 
@@ -49,8 +49,8 @@
 				$_SESSION['already_asked'] = false;
 			}
 		}
-		$reponse->closeCursor();	
-		
+		$reponse->closeCursor();
+
 		header('location: forgot_password.php');
 	}
 ?>

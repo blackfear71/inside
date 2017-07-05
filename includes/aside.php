@@ -1,42 +1,52 @@
+<script>
+	function afficherMasquer(id)
+	{
+		if (document.getElementById(id).style.display == "none")
+			document.getElementById(id).style.display = "block";
+		else
+			document.getElementById(id).style.display = "none";
+	}
+</script>
+
 <?php
 	//////////////////////////////////////
 	// Paramétrage des boutons d'action //
 	//////////////////////////////////////
-	
+
 	// Initialisations
 	if (!isset($disconnect))
 		$disconnect = false;
-	
+
 	if (!isset($profil))
 		$profil = false;
 
 	if (!isset($menu_rg))
 		$menu_rg = false;
-	
+
 	if (!isset($add_article))
 		$add_article = false;
-	
+
 	if (!isset($add_film))
 		$add_film = false;
-	
+
 	if (!isset($modify_film))
 		$modify_film = false;
-	
+
 	if (!isset($back_index))
 		$back_index = false;
-	
+
 	if (!isset($back))
 		$back = false;
-	
+
 	if (!isset($back_admin))
 		$back_admin = false;
-	
+
 	if (!isset($ideas))
 		$ideas = false;
-	
+
 	if (!isset($bug))
 		$bug = false;
-	
+
 	// Déconnexion
 	if ($disconnect == true)
 	{
@@ -44,9 +54,9 @@
 			echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
 			echo '<div class="hover_aside">Déconnexion</div>';
 		echo '</form>';
-		
+
 	}
-	
+
 	// Profil
 	if ($profil == true)
 	{
@@ -55,7 +65,7 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Profil</div>';
 	}
-	
+
 	// Menu
 	if ($menu_rg == true)
 	{
@@ -63,9 +73,20 @@
 			echo '<img src="/insidecgi/includes/menu.png" alt="menu" title="Menu" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Menu</div>';
-		
-		include($_SERVER["DOCUMENT_ROOT"] . '/insidecgi/portail/referenceguide/menu_rg.php');
-		
+
+		// Menu caché
+		echo '<div id="menu" style="display: none;">';
+			echo '<div class="triangle2"></div>';
+			echo '<ul>';
+				echo '<li style="border-top-left-radius: 5px; border-top-right-radius: 5px;"><a class="link_menu" href="liste_articles.php?univers=rdz&search=no">Univers RDZ</a></li>';
+				echo '<li><a class="link_menu" href="liste_articles.php?univers=tso&search=no">Univers TSO</a></li>';
+				echo '<li><a class="link_menu" href="liste_articles.php?univers=ims&search=no">Univers IMS</a></li>';
+				echo '<li><a class="link_menu" href="liste_articles.php?univers=micrortc&search=no">Univers Micro/RTC</a></li>';
+				echo '<li><a class="link_menu" href="liste_articles.php?univers=portaileid&search=no">Portail EID</a></li>';
+				echo '<li style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom: solid 1px #e3e3e3;"><a class="link_menu" href="liste_articles.php?univers=glossaire&search=no">Glossaire</a></li>';
+			echo '</ul>';
+		echo '</div>';
+
 		// Récupération de l'univers en cas d'ajout d'article
 		if (isset($_GET['univers']))
 			$_SESSION['univers'] = $_GET['univers'];
@@ -79,7 +100,7 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
-	
+
 	// Ajouter un film (avancé)
 	if ($add_film == true)
 	{
@@ -88,7 +109,7 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
-	
+
 	// Modifier les détails
 	if ($modify_film == true)
 	{
@@ -97,7 +118,7 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Modifier</div>';
 	}
-	
+
 	// Retour à l'accueil
 	if ($back_index == true)
 	{
@@ -106,7 +127,7 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
-	
+
 	// Retour au portail
 	if ($back == true)
 	{
@@ -115,7 +136,7 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
-	
+
 	// Retour au portail administration
 	if ($back_admin == true)
 	{
@@ -123,8 +144,8 @@
 			echo '<img src="/insidecgi/includes/back.png" alt="back" title="Retour au portail administration" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
-	}	
-	
+	}
+
 	// Boite à idées
 	if ($ideas == true)
 	{
@@ -132,8 +153,8 @@
 			echo '<img src="/insidecgi/includes/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">#TheBox</div>';
-	}		
-	
+	}
+
 	// Signaler un bug
 	if ($bug == true)
 	{
@@ -141,5 +162,5 @@
 			echo '<img src="/insidecgi/includes/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Signaler</div>';
-	}		
+	}
 ?>

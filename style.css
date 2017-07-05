@@ -27,15 +27,17 @@
 /*                                                                        */
 /*   rgb(90, 200, 70)   -> vert moyen                                     */
 /*   #91d784            -> vert clair                                     */
+/*                                                                        */
+/*   #fffd4c            -> jaune clair (++)                               */
+/*   #fffde8            -> jaune clair (+)                                */
 /**************************************************************************/
-
 
 /*** Corps ***/
 html
 {
 	height: 100%;
 }
-	
+
 body
 {
 	margin: 0;
@@ -278,13 +280,13 @@ header
 	height: 100px;
 }
 
-.mask 
+.mask
 {
     height: 25px;
     width: 100%;
 }
 
-.triangle 
+.triangle
 {
     width: 100%;
     height: 100%;
@@ -329,7 +331,7 @@ section
 .bouton_connexion
 {
 	border: 0;
-	background: white;
+	background-color: white;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 150%;
 	cursor: pointer;
@@ -351,14 +353,27 @@ section
 	display: block;
 	text-align: center;
 	margin-top: 150px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 80%;
 	text-decoration: none;
 	color: black;
 	width: 20%;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;
+}
+
+.subcribe
+{
+	display: block;
+	text-align: center;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	text-decoration: none;
+	color: black;
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .avertissement
@@ -373,6 +388,16 @@ section
 .wrong_id
 {
 	margin-top: 100px;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-family: robotolight, Verdana, sans-serif;
+}
+
+.asking_inscription
+{
+	margin-top: 30px;
 	width: 30%;
 	margin-left: auto;
 	margin-right: auto;
@@ -611,7 +636,7 @@ article
 	border-style: solid;
 	border-width: 0 0 400px 50px;
 	border-color: transparent transparent white transparent;
-	opacity: 0.1;	
+	opacity: 0.1;
 }
 
 .title_portail
@@ -657,7 +682,7 @@ article
 	background-color: rgb(30, 40, 50);
 	opacity: 0.5;
 	height: 400px;
-	width: 25%;	
+	width: 25%;
 }
 
 .title_rdz
@@ -711,7 +736,7 @@ article
 	color: white;
 	line-height: 70px;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_menu_univers_under
@@ -752,7 +777,7 @@ article
 	font-size: 500%;
 	margin-top: -200px;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_glossaire
@@ -774,7 +799,7 @@ article
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .mask_glossaire_1
@@ -821,7 +846,7 @@ article
 	font-family: robotothin, Verdana, sans-serif;
 	font-size: 500%;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_micrortc
@@ -854,7 +879,7 @@ article
 	margin-top: -50px;
 	margin-right: 10px;
 	position: relative;
-	z-index: 1;	
+	z-index: 1;
 }
 
 .new_menu_link
@@ -957,7 +982,7 @@ article
 	border: 1px solid #BDC3C7;
 	vertical-align: middle;
 	padding-left: 10px;
-	padding-right: 10px;	
+	padding-right: 10px;
 	line-height: 30px;
 }
 
@@ -1070,7 +1095,7 @@ article
 .nb_results
 {
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 80%;	
+	font-size: 80%;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -1121,7 +1146,7 @@ article
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-bottom: 0px;
-	line-height: 50px;	
+	line-height: 50px;
 	text-align: right;
 }
 
@@ -1154,14 +1179,14 @@ article
 .article_auteur
 {
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	width: 79%;
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: right;
-	line-height: 40px;	
+	line-height: 40px;
 }
 
 .article_contenu
@@ -1202,7 +1227,7 @@ article
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-bottom: 0px;
-	line-height: 50px;	
+	line-height: 50px;
 	text-align: right;
 }
 
@@ -1220,14 +1245,14 @@ article
 .saisie_auteur
 {
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	width: 79%;
 	padding-left: 0.5%;
 	padding-right: 0.5%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: right;
-	line-height: 40px;	
+	line-height: 40px;
 }
 
 .saisie_contenu
@@ -1245,7 +1270,7 @@ article
 	font-size: 100%;
 	background-color: #f3f3f3;
 }
-		
+
 .saisie_valider
 {
 	display: block;
@@ -1300,7 +1325,7 @@ article
 }
 
 .previs_article
-{	
+{
 	display: inline-block;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 150%;
@@ -1309,10 +1334,10 @@ article
 
 .img_article
 {
-	max-height: 400px; 
+	max-height: 400px;
 	max-width: 100%;
 	display: block;
-	margin-left: auto; 
+	margin-left: auto;
 	margin-right: auto;
 }
 
@@ -1413,12 +1438,12 @@ article
 
 .table_movie_house td
 {
-	border: 1px solid #BDC3C7; 
+	border: 1px solid #BDC3C7;
 }
 
 .ligne_tableau_movie_house:hover
 {
-	background-color: #B3B3B3;
+	background-color: #fffde8;
 }
 
 .table_titres
@@ -1491,7 +1516,7 @@ article
 	cursor: pointer;
 	margin-left: 5px;
 	margin-right: 5px;
-	
+
 }
 
 .seen
@@ -1513,12 +1538,61 @@ article
 	text-align: center;
 	background-color: #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
-	font-weight: bold;	
+	font-weight: bold;
+	padding: 5px;
+	vertical-align: top;
+}
+
+.zone_avatar_films
+{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 30px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+}
+
+.avatar_films
+{
+	max-width: 40px;
+	max-height: 40px;
+	vertical-align: middle;
+}
+
+.full_name_films
+{
+	font-size: 70%;
+}
+
+.zone_avatar_details_film
+{
+	float: left;
+	background-color: white;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 20px;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-top: 8px;
+}
+
+.avatar_details_film
+{
+	max-width: 30px;
+	max-height: 30px;
+	vertical-align: middle;
 }
 
 .table_users
 {
-	width: 120px;
 	text-align: center;
 	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
@@ -1587,7 +1661,7 @@ article
 	padding-right: 1%;
 	margin-left: 1.5%;
 	margin-right: 0.75%;
-	width: 48%;	
+	width: 48%;
 	font-family: robotoregular, Verdana, sans-serif;
 }
 
@@ -1597,7 +1671,7 @@ article
 	line-height: 30px;
 	min-height: 30px;
 	padding-left: 1%;
-	padding-right: 1%;	
+	padding-right: 1%;
 	margin-left: 0.75%;
 	width: 28%;
 	font-family: robotoregular, Verdana, sans-serif;
@@ -1632,130 +1706,98 @@ article
 	line-height: 50px;
 }
 
-.stars_content
-{
-	width: 100%;
-}
-
-.star_five 
+.link_vote
 {
 	display: inline-block;
-	margin: 3px 0;
-	position: relative;
-	color: rgb(200, 25, 50);
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid rgb(200, 25, 50);
-	border-left: 10px solid transparent;
-	-moz-transform: rotate(35deg);
-	-webkit-transform: rotate(35deg);
-	-ms-transform: rotate(35deg);
-	-o-transform: rotate(35deg);
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
 }
 
-.star_five:before 
+.link_vote_2
 {
 	display: inline-block;
-	border-bottom: 8px solid rgb(200, 25, 50);
-	border-left: 3px solid transparent;
-	border-right: 3px solid transparent;
-	position: absolute;
-	height: 0;
-	width: 0;
-	top: -4.5px;
-	left: -6.5px;
-	display: block;
-	content: '';
-	-webkit-transform: rotate(-35deg);
-	-moz-transform: rotate(-35deg);
-	-ms-transform: rotate(-35deg);
-	-o-transform: rotate(-35deg);
-}
-
-.star_five:after 
-{
-	display: inline-block;
-	position: absolute;
-	color: rgb(200, 25, 50);
-	top: 0.3px;
-	left: -10.5px;
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid rgb(200, 25, 50);
-	border-left: 10px solid transparent;
-	-webkit-transform: rotate(-70deg);
-	-moz-transform: rotate(-70deg);
-	-ms-transform: rotate(-70deg);
-	-o-transform: rotate(-70deg);
-	content: '';
-}
-
-.star_five_2 
-{
-	display: inline-block;
-	margin: 3px 0;
-	position: relative;
-	color: #e3e3e3;
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid #e3e3e3;
-	border-left: 10px solid transparent;
-	-moz-transform: rotate(35deg);
-	-webkit-transform: rotate(35deg);
-	-ms-transform: rotate(35deg);
-	-o-transform: rotate(35deg);
-}
-
-.star_five_2:before 
-{
-	display: inline-block;
-	border-bottom: 8px solid #e3e3e3;
-	border-left: 3px solid transparent;
-	border-right: 3px solid transparent;
-	position: absolute;
-	height: 0;
-	width: 0;
-	top: -4.5px;
-	left: -6.5px;
-	display: block;
-	content: '';
-	-webkit-transform: rotate(-35deg);
-	-moz-transform: rotate(-35deg);
-	-ms-transform: rotate(-35deg);
-	-o-transform: rotate(-35deg);
-}
-
-.star_five_2:after 
-{
-	display: inline-block;
-	position: absolute;
-	color: #e3e3e3;
-	top: 0.3px;
-	left: -10.5px;
-	width: 0px;
-	height: 0px;
-	border-right: 10px solid transparent;
-	border-bottom: 7px solid #e3e3e3;
-	border-left: 10px solid transparent;
-	-webkit-transform: rotate(-70deg);
-	-moz-transform: rotate(-70deg);
-	-ms-transform: rotate(-70deg);
-	-o-transform: rotate(-70deg);
-	content: '';
-}
-
-.star_input
-{
-	display: inline-block;
-	margin-left: -17px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
 	background-color: transparent;
 	border: 0;
 	cursor: pointer;
-	position: relative;
+	margin-left: 2px;
+	margin-right: 2px;
 	z-index: 1;
+}
+
+.link_vote_3
+{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+	margin-left: 2px;
+	margin-right: 2px;
+	z-index: 1;
+}
+
+.new_star
+{
+	width: 30px;
+	vertical-align: middle;
+}
+
+.new_star_2
+{
+	margin-right: -32px;
+	vertical-align: middle;
+	width: 30px;
+}
+
+.new_star_3
+{
+	margin-right: -22px;
+	margin-left: 3px;
+	margin-top: -7px;
+	vertical-align: middle;
+	width: 20px;
+}
+
+.link_vote_selected
+{
+	display: inline-block;
+	border: solid 1px rgb(200, 25, 50);
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.link_vote_details
+{
+	width: 30px;
+	height: 30px;
+	line-height: 20px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.cancel_vote
+{
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	margin-top: 3px;
+}
+
+.stars_content
+{
+	width: 100%;
 }
 
 /*** Details film ***/
@@ -1958,7 +2000,11 @@ article
 {
 	width: 50%;
 	border-bottom: solid 1px white;
-	padding-left: 4%;
+}
+
+.user_view_by
+{
+	margin-left: 50px;
 }
 
 .view_by
@@ -1970,7 +2016,6 @@ article
 	border-bottom: solid 1px white;
 	line-height: 48px;
 	font-size: 110%;
-	
 }
 
 .links_details
@@ -1997,7 +2042,7 @@ article
 	cursor: pointer;
 	color: white;
 	text-decoration: none;
-	font-family: robotothin, Verdana, sans-serif;	
+	font-family: robotothin, Verdana, sans-serif;
 }
 
 .fiche_align
@@ -2110,6 +2155,7 @@ article
 	display: block;
 	color: black;
 	text-decoration: none;
+	padding: 8px;
 }
 
 /*** Saisie film avancée ***/
@@ -2162,6 +2208,27 @@ article
 }
 
 /*** Profil ***/
+.message_alerte_profil
+{
+	position: absolute;
+	left: 50%;
+	width: 500px;
+	margin-left: -250px;
+	margin-top: -45px;
+	line-height: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+	background-color: #fffd4c;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	box-shadow: 2px 2px 5px #a3a3a3;
+	z-index: -1;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
 .categorie_profil
 {
 	width: 80%;
@@ -2199,7 +2266,7 @@ article
 	padding: 10px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	line-height: 20px;	
+	line-height: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
 }
@@ -2255,6 +2322,77 @@ article
 	font-size: 100%;
 }
 
+.zone_avatar
+{
+	text-align: center;
+	width: 100%;
+}
+
+.avatar_preview
+{
+	margin-top: 23px;
+	max-width: 120px;
+	max-height: 120px;
+	border-radius: 5px;
+}
+
+.zone_parcourir_avatar
+{
+	display: inline-block;
+	height: 120px;
+	width: 120px;
+	border-style: dashed;
+	border-radius: 10px;
+	border-color: #a3a3a3;
+	font-family: Roboto-Light, Verdana, sans-serif;
+	font-size: 300%;
+	line-height: 110px;
+	color: #a3a3a3;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.bouton_parcourir_avatar
+{
+	opacity: 0;
+	height: 120px;
+	width: 120px;
+	margin-top: -110px;
+	display: block;
+	cursor: pointer;
+}
+
+.mask_avatar
+{
+	width: 120px;
+	height: 120px;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -124px;
+	line-height: 120px;
+}
+
+.avatar
+{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 120px;
+	vertical-align: middle;
+}
+
+.saisie_envoyer_avatar
+{
+	height: 43px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
 .saisie_valider_mdp
 {
 	height: 43px;
@@ -2262,17 +2400,7 @@ article
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-}
-
-.wrong_change_password
-{
-	padding-bottom: 10px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;
-	width: 400px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+	margin-top: 20px;
 }
 
 .form_preference
@@ -2298,10 +2426,9 @@ article
 .saisie_valider_preferences
 {
 	height: 43px;
-	margin-left: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
-	margin-top: 50px;
+	margin-top: 30px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	margin-left: auto;
@@ -2349,7 +2476,7 @@ article
 	border-style: solid;
 	border-width: 0 0 200px 50px;
 	border-color: transparent transparent white transparent;
-	opacity: 0.1;	
+	opacity: 0.1;
 }
 
 .new_menu_link_admin
@@ -2387,7 +2514,7 @@ article
 	z-index: 1;
 	float: left;
 	margin-top: -200px;
-	background: transparent;
+	background-color: transparent;
 	border: 0;
 	height: 200px;
 	width: 300px;
@@ -2415,6 +2542,11 @@ article
 	margin-bottom: 30px;
 }
 
+.ajout_idee
+{
+	margin-top: 30px;
+}
+
 .saisie_titre_3
 {
 	font-family: robotolight, Verdana, sans-serif;
@@ -2429,7 +2561,7 @@ article
 	line-height: 48px;
 	min-height: 48px;
 	text-align: left;
-	border: 0;	
+	border: 0;
 }
 
 .saisie_contenu_2
@@ -2572,7 +2704,7 @@ article
 
 .switch_bug_view
 {
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 	max-width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -2612,10 +2744,6 @@ article
 	border-radius: 5px;
 }
 
-.liste_bugs
-{
-}
-
 .resolve_bug
 {
 	float: right;
@@ -2629,7 +2757,7 @@ article
 	height: 40px;
 	cursor: pointer;
 	font-family: robotothin, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	color: white;
 }
 
@@ -2647,7 +2775,7 @@ article
 	padding-right: 10px;
 	line-height: 40px;
 	font-family: robotothin, Verdana, sans-serif;
-	font-size: 100%;	
+	font-size: 100%;
 	color: white;
 }
 
@@ -2657,7 +2785,7 @@ article
 	margin-bottom: -14px;
 	width: 20px;
 	height: 40px;
-    background: linear-gradient(to left top, rgb(90, 200, 70) 50%, transparent 50%);
+  background: linear-gradient(to left top, rgb(90, 200, 70) 50%, transparent 50%);
 }
 
 .triangle_resolution_red
@@ -2723,7 +2851,7 @@ article
 /*** Gestion des utilisateurs ***/
 .title_gestion
 {
-	width: 78%;
+	width: 76%;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: robotothin, Verdana, sans-serif;
@@ -2731,7 +2859,10 @@ article
 	text-align: center;
 	background-color: rgb(255, 25, 55);
 	color: white;
-	padding: 1%;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
@@ -2746,7 +2877,7 @@ article
 
 .table_manage_users td
 {
-	border: 1px solid #BDC3C7; 
+	border: 1px solid #BDC3C7;
 }
 
 .init_tr_manage_users
