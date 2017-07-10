@@ -32,6 +32,9 @@
 	if (!isset($modify_film))
 		$modify_film = false;
 
+	if (!isset($delete_film))
+			$delete_film = false;
+
 	if (!isset($back_index))
 		$back_index = false;
 
@@ -54,7 +57,6 @@
 			echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
 			echo '<div class="hover_aside">Déconnexion</div>';
 		echo '</form>';
-
 	}
 
 	// Profil
@@ -114,16 +116,25 @@
 	if ($modify_film == true)
 	{
 		echo '<a href="/insidecgi/portail/moviehouse/saisie_film_plus.php?modify_id=' . $_GET['id_film'] . '" title="Modifier les détails" class="link_profile">';
-			echo '<img src="/insidecgi/includes/edit.png" alt="profile" title="Modifier les détails" class="icon_profile" />';
+			echo '<img src="/insidecgi/includes/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Modifier</div>';
+	}
+
+	// Demande suppression film
+	if ($delete_film == true)
+	{
+		echo '<form method="post" action="saisie_film.php?delete_id=' . $_GET['id_film'] . '" onclick="if(!confirm(\'Effectuer la demande de suppression de ce film ?\')) return false;">';
+			echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
+			echo '<div class="hover_aside">Suppression</div>';
+		echo '</form>';
 	}
 
 	// Retour à l'accueil
 	if ($back_index == true)
 	{
 		echo '<a href="/insidecgi/index.php" class="link_profile" title="Retour à l\'accueil" style="margin-top: 0;">';
-			echo '<img src="/insidecgi/includes/back.png" alt="profile" title="Retour à l\'accueil" class="icon_profile" />';
+				echo '<img src="/insidecgi/includes/back.png" alt="accueil" title="Retour à l\'accueil" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -141,7 +152,7 @@
 	if ($back_admin == true)
 	{
 		echo '<a href="/insidecgi/administration/administration.php" title="Retour au portail administration" class="link_profile">';
-			echo '<img src="/insidecgi/includes/back.png" alt="back" title="Retour au portail administration" class="icon_profile" />';
+			echo '<img src="/insidecgi/includes/back.png" alt="back_admin" title="Retour au portail administration" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}

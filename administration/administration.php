@@ -78,12 +78,26 @@
 						</div>
 					</a>
 
-					<a href="" class="new_menu_link_admin">
+					<a href="manage_films.php" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
 							<div class="title_admin">Gestion
-								<div class="saut_ligne">MOVIE<br />HOUSE</div>
+								<div class="saut_ligne">MOVIE<br />HOUSE
+								<?php
+									include('../includes/appel_bdd.php');
+									$req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
+									while($data = $req->fetch())
+									{
+										if ($data['to_delete'] == "Y")
+										{
+											echo '( ! )';
+											break;
+										}
+									}
+									$req->closeCursor();
+								?>
+								</div>
 							</div>
 						</div>
 					</a>

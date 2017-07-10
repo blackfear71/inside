@@ -6,23 +6,23 @@
 	{
 		// Initialisation
 		$url = "";
-			
-		//DAILYMOTION	
+
+		//DAILYMOTION
 		preg_match('#&lt;object[^&gt;]+&gt;.+?http://www.dailymotion.com/swf/video/([A-Za-z0-9]+).+?&lt;/object&gt;#s', $adress, $matches);
 
-		if (!isset($matches[1])) 
+		if (!isset($matches[1]))
 		{
 			preg_match('#http://www.dailymotion.com/video/([A-Za-z0-9]+)#s', $adress, $matches);
-			if (!isset($matches[1])) 
+			if (!isset($matches[1]))
 			{
 				preg_match('#http://www.dailymotion.com/embed/video/([A-Za-z0-9]+)#s', $adress, $matches);
-				if (!isset($matches[1])) 
+				if (!isset($matches[1]))
 				{
 					$url = "";
 				}
 				elseif (strlen($matches[1]))
-				{ 
-					$url = 'dailymotion:_:' . $matches[1]; 
+				{
+					$url = 'dailymotion:_:' . $matches[1];
 				}
 			}
 			elseif (strlen($matches[1]))
@@ -37,22 +37,22 @@
 				$url = 'dailymotion:_:' . $matches[1];
 			}
 		}
-			
+
 		//YOUTUBE
 		if (preg_match('#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#', $adress, $videoid))
 		{
-			if (strlen($videoid[0])) 
-			{ 
-				$url = 'youtube:_:' . $videoid[0]; 
+			if (strlen($videoid[0]))
+			{
+				$url = 'youtube:_:' . $videoid[0];
 			}
 		}
 
 		//VIMEO
 		if (preg_match('#(https?://)?(www.)?(player.)?vimeo.com/([a-z]*/)*([0-9]{6,11})[?]?.*#', $adress, $videoid))
 		{
-			if (strlen($videoid[5])) 
-			{ 
-				$url = 'vimeo:_:' . $videoid[5]; 
+			if (strlen($videoid[5]))
+			{
+				$url = 'vimeo:_:' . $videoid[5];
 			}
 		}
 
@@ -62,40 +62,42 @@
 
 <?php
 	session_start();
-		
+
 	include ('../../includes/appel_bdd.php');
-	
+
 	// Saisie rapide à partir du tableau des films
 	if (isset($_POST['saisie_rapide']))
-	{		
+	{
 		// Sauvegarde en session en cas d'erreur
 		$_SESSION['nom_film_saisi'] = $_POST['nom_film'];
 		$_SESSION['date_theater_saisie'] = $_POST['date_theater'];
-		
+
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
+		$to_delete = "N";
 		$date_theater = "";
-		$date_release = "";		
+		$date_release = "";
 		$link = "";
 		$poster = "";
 		$trailer = "";
 		$id_url = "";
 		$doodle = "";
 		$date_doodle = "";
-		
+
 		$date_a_verifier = $_POST['date_theater'];
-		
+
 		list($d, $m, $y) = explode('/', $date_a_verifier);
-		
+
 		// On vérifie le format de la date
 		if (checkdate($m, $d, $y))
 		{
 			$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-			
-			// Stockage de l'enregistrement en table		
-			$req = $bdd->prepare('INSERT INTO movie_house(film, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
+
+			// Stockage de l'enregistrement en table
+			$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
 			$req->execute(array(
 				'film' => $nom_film,
+				'to_delete' => $to_delete,
 				'date_theater' => $date_theater,
 				'date_release' => $date_release,
 				'link' => $link,
@@ -106,7 +108,7 @@
 				'date_doodle' => $date_doodle
 				));
 			$req->closeCursor();
-			
+
 			$_SESSION['wrong_date'] = false;
 			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4));
 		}
@@ -128,9 +130,10 @@
 		$_SESSION['poster_saisi'] = $_POST['poster'];
 		$_SESSION['doodle_saisi'] = $_POST['doodle'];
 		$_SESSION['date_doodle_saisie'] = $_POST['date_doodle'];
-		
+
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
+		$to_delete = "N";
 		$date_theater = "";
 		$date_release = "";
 		$link = $_POST['link'];
@@ -139,20 +142,20 @@
 		$id_url = "";
 		$doodle = $_POST['doodle'];
 		$date_doodle = "";
-		
+
 		/*
 		// Lien Youtube trailer
 		$search = "watch?v=";
 		$replace = "embed/";
 		$trailer = str_replace($search, $replace, $_POST['trailer']);
 		*/
-		
+
 		// Récupération ID vidéo
 		$id_url = extract_url($trailer);
 
 		// Récupération date sortie cinéma
 		$date_a_verifier_1 = $_POST['date_theater'];
-		
+
 		list($d, $m, $y) = explode('/', $date_a_verifier_1);
 
 		// On vérifie le format de la date 1 (date sortie cinéma)
@@ -160,13 +163,13 @@
 		{
 			$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
 			$_SESSION['wrong_date'] = false;
-			
+
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
 			{
 				$date_a_verifier_2 = $_POST['date_release'];
-				
+
 				list($d, $m, $y) = explode('/', $date_a_verifier_2);
-				
+
 				// On vérifie le format de la date 2 (date sortie dvd/bluray)
 				if (checkdate($m, $d, $y))
 				{
@@ -179,13 +182,13 @@
 					header('location: saisie_film_plus.php');
 				}
 			}
-			
+
 			if (isset($_POST['date_doodle']) AND !empty($_POST['date_doodle']))
 			{
 				$date_a_verifier_3 = $_POST['date_doodle'];
-				
+
 				list($d, $m, $y) = explode('/', $date_a_verifier_3);
-				
+
 				// On vérifie le format de la date 3 (date proposée)
 				if (checkdate($m, $d, $y))
 				{
@@ -197,14 +200,15 @@
 					$_SESSION['wrong_date'] = true;
 					header('location: saisie_film_plus.php');
 				}
-			}			
-			
+			}
+
 			if ($_SESSION['wrong_date'] == false)
 			{
-				// Stockage de l'enregistrement en table		
-				$req = $bdd->prepare('INSERT INTO movie_house(film, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
+				// Stockage de l'enregistrement en table
+				$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
 				$req->execute(array(
 					'film' => $nom_film,
+					'to_delete' => $to_delete,
 					'date_theater' => $date_theater,
 					'date_release' => $date_release,
 					'link' => $link,
@@ -221,13 +225,13 @@
 					case "D":
 						header('location: ../moviehouse.php?view=user&year=' . substr($_POST['date_theater'], 6, 4));
 						break;
-								
+
 					case "S":
 					default:
 						header('location: ../moviehouse.php?view=main&year=' . substr($_POST['date_theater'], 6, 4));
 						break;
 				}
-			}	
+			}
 		}
 		else
 		{
@@ -247,7 +251,7 @@
 		$_SESSION['poster_saisi'] = $_POST['poster'];
 		$_SESSION['doodle_saisi'] = $_POST['doodle'];
 		$_SESSION['date_doodle_saisie'] = $_POST['date_doodle'];
-		
+
 		// Récupération des variables
 		$id_film = $_GET['modify_id'];
 		$nom_film = $_POST['nom_film'];
@@ -259,34 +263,34 @@
 		$id_url = "";
 		$doodle = $_POST['doodle'];
 		$date_doodle = "";
-		
+
 		/*
 		// Lien Youtube trailer
 		$search = "watch?v=";
 		$replace = "embed/";
 		$trailer = str_replace($search, $replace, $_POST['trailer']);
 		*/
-		
+
 		// Récupération ID vidéo
 		$id_url = extract_url($trailer);
-		
+
 		// Récupération date sortie cinéma
 		$date_a_verifier_1 = $_POST['date_theater'];
-		
+
 		list($d, $m, $y) = explode('/', $date_a_verifier_1);
-		
+
 		// On vérifie le format de la date 1 (date sortie cinéma)
 		if (checkdate($m, $d, $y))
 		{
 			$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
 			$_SESSION['wrong_date'] = false;
-			
+
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
 			{
 				$date_a_verifier_2 = $_POST['date_release'];
-				
+
 				list($d, $m, $y) = explode('/', $date_a_verifier_2);
-				
+
 				// On vérifie le format de la date 2 (date sortie dvd/bluray)
 				if (checkdate($m, $d, $y))
 				{
@@ -299,13 +303,13 @@
 					header('location: saisie_film_plus.php?modify_id=' . $id_film);
 				}
 			}
-			
+
 			if (isset($_POST['date_doodle']) AND !empty($_POST['date_doodle']))
 			{
 				$date_a_verifier_3 = $_POST['date_doodle'];
-				
+
 				list($d, $m, $y) = explode('/', $date_a_verifier_3);
-				
+
 				// On vérifie le format de la date 3 (date proposée)
 				if (checkdate($m, $d, $y))
 				{
@@ -322,12 +326,12 @@
 			if ($_SESSION['wrong_date'] == false)
 			{
 				// Modification de l'enregistrement en table
-				$req = $bdd->prepare('UPDATE movie_house SET film = :film, 
-															 date_theater = :date_theater, 
-															 date_release = :date_release, 
-															 link = :link, 
-															 poster = :poster, 
-															 trailer = :trailer, 
+				$req = $bdd->prepare('UPDATE movie_house SET film = :film,
+															 date_theater = :date_theater,
+															 date_release = :date_release,
+															 link = :link,
+															 poster = :poster,
+															 trailer = :trailer,
 															 id_url = :id_url,
 															 doodle = :doodle,
 															 date_doodle = :date_doodle
@@ -344,14 +348,40 @@
 					'date_doodle' => $date_doodle
 				));
 				$req->closeCursor();
-				
+
 				header('location: details_film.php?id_film=' . $id_film);
-			}	
+			}
 		}
 		else
 		{
 			$_SESSION['wrong_date'] = true;
 			header('location: saisie_film_plus.php?modify_id=' . $id_film);
+		}
+	}
+	// Demande de suppression d'un film
+	elseif (isset($_POST['delete_film']))
+	{
+		$id_film = $_GET['delete_id'];
+		$to_delete = "Y";
+
+		// Modification de l'enregistrement en table
+		$req = $bdd->prepare('UPDATE movie_house SET to_delete = :to_delete WHERE id = ' . $id_film);
+		$req->execute(array(
+			'to_delete' => $to_delete
+		));
+		$req->closeCursor();
+
+		// Redirection
+		switch ($_SESSION['view_movie_house'])
+		{
+			case "D":
+				header('location: ../moviehouse.php?view=user&year=' . date("Y"));
+				break;
+
+			case "S":
+			default:
+				header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+				break;
 		}
 	}
 ?>

@@ -7,20 +7,40 @@
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 
-		if (!isset($_SESSION['user_ask_id']))
-		{
-			$_SESSION['user_ask_id'] = "";
-		}
 
-	  if (!isset($_SESSION['user_ask_name']))
-		{
-			$_SESSION['user_ask_name'] = "";
-		}
 
-	  if (!isset($_SESSION['new_password']))
-	  {
-	    $_SESSION['new_password'] = "";
-	  }
+
+
+
+
+
+
+
+
+	if (!isset($_SESSION['user_ask_id']))
+	{
+		$_SESSION['user_ask_id'] = "";
+	}
+
+  if (!isset($_SESSION['user_ask_name']))
+	{
+		$_SESSION['user_ask_name'] = "";
+	}
+
+  if (!isset($_SESSION['new_password']))
+  {
+    $_SESSION['new_password'] = "";
+  }
+
+
+
+
+
+
+
+
+
+  
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +50,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
-  <title>Inside CGI - Utilisateurs</title>
+  <title>Inside CGI - Films</title>
 	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
   </head>
@@ -39,7 +59,7 @@
 
 		<header>
 			<div class="main_title">
-				Gestion des utilisateurs
+				Gestion des films
 			</div>
 
 			<div class="mask">
@@ -60,6 +80,16 @@
 
 			<article class="article_portail">
 
+
+
+
+
+
+
+
+
+
+
 				<?php
 					if (isset($_SESSION['user_ask_id'])   AND !empty($_SESSION['user_ask_id'])
 					AND isset($_SESSION['user_ask_name']) AND !empty($_SESSION['user_ask_name'])
@@ -72,12 +102,20 @@
 						$_SESSION['new_password'] = "";
 					}
 
-					include('table_users.php');
-
-					echo '<br /><br />';
-
-					include('table_stats.php');
+					include('table_films.php');
 				?>
+
+
+
+
+
+
+
+
+
+
+
+
 
 			</article>
 		</section>

@@ -36,6 +36,7 @@
 					$disconnect = true;
 					$profil = true;
 					$modify_film = true;
+					$delete_film = true;
 					$back = true;
 					$ideas = true;
 					$bug = true;

@@ -452,6 +452,23 @@ aside
 	box-shadow: 3px 3px #c3c3c3;
 }
 
+.icon_delete
+{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+	border: 0;
+	border-radius: 50%;
+	background-color: rgb(255, 25, 55);
+	background-image: url("includes/delete.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	box-shadow: 3px 3px #c3c3c3;
+}
+
 .link_profile
 {
 	background-color: rgb(255, 25, 55);
@@ -487,7 +504,8 @@ aside
 }
 
 .link_profile:hover + .hover_aside,
-.icon_deconnexion:hover + .hover_aside
+.icon_deconnexion:hover + .hover_aside,
+.icon_delete:hover + .hover_aside
 {
 	visibility: visible;
 }
