@@ -11,7 +11,7 @@
 	{
 		include('../includes/appel_bdd.php');
 
-		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house ORDER BY SUBSTR(date_theater,5,4) ASC');
+		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
 		while($donnees = $reponse->fetch())
 		{
 			if ($_GET['year'] == $donnees['SUBSTR(date_theater,5,4)'])
@@ -85,7 +85,7 @@
 			<?php
 				include('../includes/alerts.php');
 			?>
-			
+
 			<article class="article_portail">
 				<!-- Switch entre vue générale et vue personnelle-->
 				<div class="switch_bug_view">
@@ -112,7 +112,7 @@
 					{
 						include('../includes/appel_bdd.php');
 
-						$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house ORDER BY SUBSTR(date_theater,5,4) ASC');
+						$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
 
 						echo '<div class="movie_year">';
 

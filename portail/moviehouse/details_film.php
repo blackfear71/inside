@@ -3,6 +3,17 @@
 
 	include('../../includes/init_session.php');
 
+	// Contrôle film non à supprimer
+	include('../../includes/appel_bdd.php');
+
+	$reponse = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $_GET['id_film']);
+	$donnees = $reponse->fetch();
+
+	if ($donnees['to_delete'] == "Y")
+		header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+
+	$reponse->closeCursor();
+
 	// Redirection si admin
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: ../../administration/administration.php');
@@ -72,7 +83,7 @@
 					$i = 0;
 					$j = 0;
 
-					$req0 = $bdd->query('SELECT id, film FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . substr($donnees['date_theater'], 4, 4) . ' ORDER BY date_theater ASC, film ASC');
+					$req0 = $bdd->query('SELECT id, film FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . substr($donnees['date_theater'], 4, 4) . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
 					while($data0 = $req0->fetch())
 					{
 						$liste_films[$i][1] = $data0['id'];
@@ -364,6 +375,15 @@
 
 					$reponse->closeCursor();
 				?>
+
+			<!-- Commentaires -->
+			<!-- // saisie commentaires // à faire : pas de commentaires // liste des commentaires // commentaires liés (?) // smileys
+			<div class="zone_comments_films">
+				<div class="title_comments_films">
+					Commentaires
+				</div>
+			</div>
+			-->
 
 			</article>
 		</section>

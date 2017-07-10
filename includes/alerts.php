@@ -35,7 +35,7 @@
   elseif (isset($_SESSION['wrong_date']))
   {
     echo '<div class="message_alerte_2">';
-      // Format date invalide
+      // Format date invalide (saisie rapide et saisie avancée)
       if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
       {
         echo 'La date n\'a pas un format valide (jj/mm/yyyy).';
