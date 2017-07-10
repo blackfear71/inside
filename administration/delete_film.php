@@ -14,6 +14,8 @@
 			'to_delete' => $to_delete
 		));
 		$req->closeCursor();
+
+		$_SESSION['film_reseted'] = true;
 	}
 	elseif (isset($_POST['accepter_suppression_film']))
 	{
@@ -24,6 +26,8 @@
 
     // Suppression du film
     $req2 = $bdd->exec('DELETE FROM movie_house WHERE id = ' . $id_film );
+
+		$_SESSION['film_deleted'] = true;
 	}
 
 	header('location: manage_films.php');

@@ -7,40 +7,15 @@
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 
-
-
-
-
-
-
-
-
-
-
-	if (!isset($_SESSION['user_ask_id']))
+	if (!isset($_SESSION['film_deleted']))
 	{
-		$_SESSION['user_ask_id'] = "";
+		$_SESSION['film_deleted'] = false;
 	}
 
-  if (!isset($_SESSION['user_ask_name']))
+	if (!isset($_SESSION['film_reseted']))
 	{
-		$_SESSION['user_ask_name'] = "";
+		$_SESSION['film_reseted'] = false;
 	}
-
-  if (!isset($_SESSION['new_password']))
-  {
-    $_SESSION['new_password'] = "";
-  }
-
-
-
-
-
-
-
-
-
-  
 ?>
 
 <!DOCTYPE html>
@@ -80,42 +55,22 @@
 
 			<article class="article_portail">
 
-
-
-
-
-
-
-
-
-
-
 				<?php
-					if (isset($_SESSION['user_ask_id'])   AND !empty($_SESSION['user_ask_id'])
-					AND isset($_SESSION['user_ask_name']) AND !empty($_SESSION['user_ask_name'])
-					AND isset($_SESSION['new_password'])  AND !empty($_SESSION['new_password']))
+					if (isset($_SESSION['film_deleted']) AND $_SESSION['film_deleted'] == true)
 					{
-						echo '<div class="reseted">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['user_ask_id'] . ' / ' . $_SESSION['user_ask_name'] . '</b> : </div>';
-						echo '<p class="reseted_2"><b>' . $_SESSION['new_password'] . '</b></p>';
-						$_SESSION['user_ask_id'] = "";
-						$_SESSION['user_ask_name'] = "";
-						$_SESSION['new_password'] = "";
+						echo '<div class="reseted">Le film a bien été supprimé de la base de données</div>';
+						$_SESSION['film_deleted'] = "";
 					}
 
+					if (isset($_SESSION['film_reseted']) AND $_SESSION['film_reseted'] == true)
+					{
+						echo '<div class="reseted">Le film a bien été remis dans la liste</div>';
+						$_SESSION['film_reseted'] = "";
+					}
+
+					// Tableau des demandes
 					include('table_films.php');
 				?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 			</article>
 		</section>

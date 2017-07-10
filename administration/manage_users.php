@@ -7,20 +7,12 @@
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 
-		if (!isset($_SESSION['user_ask_id']))
-		{
-			$_SESSION['user_ask_id'] = "";
-		}
-
-	  if (!isset($_SESSION['user_ask_name']))
-		{
-			$_SESSION['user_ask_name'] = "";
-		}
-
-	  if (!isset($_SESSION['new_password']))
-	  {
-	    $_SESSION['new_password'] = "";
-	  }
+	if (!isset($_SESSION['user_ask_id']) OR !isset($_SESSION['user_ask_name']) OR !isset($_SESSION['new_password']))
+	{
+		$_SESSION['user_ask_id'] = "";
+		$_SESSION['user_ask_name'] = "";
+		$_SESSION['new_password'] = "";
+	}
 ?>
 
 <!DOCTYPE html>
@@ -72,10 +64,12 @@
 						$_SESSION['new_password'] = "";
 					}
 
+					// Tableau des utilisateurs
 					include('table_users.php');
 
 					echo '<br /><br />';
 
+					// Tableau des statistiques
 					include('table_stats.php');
 				?>
 

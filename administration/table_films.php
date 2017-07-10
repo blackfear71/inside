@@ -1,5 +1,5 @@
 <?php
-	echo '<div class="title_gestion">Gestion des utilisateurs</div>';
+	echo '<div class="title_gestion">Demandes de suppression de film</div>';
 
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
@@ -24,6 +24,8 @@
 		echo '</tr>';
 
 		include('../includes/appel_bdd.php');
+
+		$i = 0;
 
 		// Recherche des données du film
 		$reponse = $bdd->query('SELECT id, film, to_delete FROM movie_house WHERE to_delete = "Y" ORDER BY id ASC');
@@ -53,9 +55,17 @@
           }
 				echo '</td>';
 			echo '</tr>';
+
+			$i++;
 		}
 
 		$reponse->closeCursor();
+
+		// S'il n'y a pas de données
+		if ($i == 0)
+		{
+			echo '<td colspan="3"class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
+		}
 
 		// Bas du tableau
 		echo '<tr>';
