@@ -3,7 +3,7 @@
 
 	include('../../includes/appel_bdd.php');
 
-	$_SESSION['submitted'] = false;
+	$_SESSION['bug_submitted'] = false;
 
 	if (isset($_POST['report']))
 	{
@@ -27,7 +27,7 @@
 				));
 		$req->closeCursor();
 
-		$_SESSION['submitted'] = true;
+		$_SESSION['bug_submitted'] = true;
 
 		header('location: ../bug.php');
 	}

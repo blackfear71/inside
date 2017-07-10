@@ -44,7 +44,7 @@
 	{
 		include('../../includes/appel_bdd.php');
 		
-		$_SESSION['idea_submited'] = false;
+		$_SESSION['idea_submitted'] = false;
 		
 		$subject = htmlspecialchars($_POST['subject_idea']);
 		$date = date("mdY");
@@ -65,7 +65,7 @@
 				));
 		$req->closeCursor();
 		
-		$_SESSION['idea_submited'] = true;
+		$_SESSION['idea_submitted'] = true;
 		
 		header ('location: ../ideas.php?view=' . $_GET['view']);		
 	}

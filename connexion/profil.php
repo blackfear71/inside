@@ -72,7 +72,7 @@
 
 			<!-- Messages d'alerte -->
 			<?php
-				include('alerts.php');
+				include('../includes/alerts.php');
 			?>
 
 			<article class="article_portail">
@@ -271,7 +271,7 @@
 				output.src = URL.createObjectURL(event.target.files[0]);
 			};
 		</script>
-		
+
   </body>
 
 </html>

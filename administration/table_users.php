@@ -99,7 +99,7 @@
 				echo '<td class="td_manage_users">';
 					if ($donnees['reset'] == "I")
 					{
-						echo '<form method="post" action="manage_inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
 							echo '<input type="submit" name="accept_inscription" value="ACCEPTER" class="reset_password" />';
 						echo '</form>';
 					}
@@ -108,7 +108,7 @@
 				echo '<td class="td_manage_users">';
 					if ($donnees['reset'] == "I")
 					{
-						echo '<form method="post" action="manage_inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
 							echo '<input type="submit" name="decline_inscription" value="REFUSER" class="reset_password" />';
 						echo '</form>';
 					}
@@ -117,7 +117,7 @@
 				echo '<td class="td_manage_users">';
 					if ($donnees['reset'] == "D")
 					{
-						echo '<form method="post" action="manage_inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
 							echo '<input type="submit" name="accept_desinscription" value="ACCEPTER" class="reset_password" />';
 						echo '</form>';
 					}
@@ -126,7 +126,7 @@
 				echo '<td class="td_manage_users">';
 					if ($donnees['reset'] == "D")
 					{
-						echo '<form method="post" action="manage_inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
 							echo '<input type="submit" name="decline_desinscription" value="REFUSER" class="reset_password" />';
 						echo '</form>';
 					}

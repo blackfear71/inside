@@ -8,14 +8,10 @@
 		header('location: ../index.php');
 
 	if (!isset($_SESSION['film_deleted']))
-	{
-		$_SESSION['film_deleted'] = false;
-	}
+		$_SESSION['film_deleted'] = NULL;
 
 	if (!isset($_SESSION['film_reseted']))
-	{
-		$_SESSION['film_reseted'] = false;
-	}
+		$_SESSION['film_reseted'] = NULL;
 ?>
 
 <!DOCTYPE html>
@@ -53,21 +49,14 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 
 				<?php
-					if (isset($_SESSION['film_deleted']) AND $_SESSION['film_deleted'] == true)
-					{
-						echo '<div class="reseted">Le film a bien été supprimé de la base de données</div>';
-						$_SESSION['film_deleted'] = "";
-					}
-
-					if (isset($_SESSION['film_reseted']) AND $_SESSION['film_reseted'] == true)
-					{
-						echo '<div class="reseted">Le film a bien été remis dans la liste</div>';
-						$_SESSION['film_reseted'] = "";
-					}
-
 					// Tableau des demandes
 					include('table_films.php');
 				?>

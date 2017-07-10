@@ -35,6 +35,10 @@
 		$_SESSION['date_theater_saisie'] = "";
 	}
 
+	// Initialisation alertes
+	if (!isset($_SESSION['wrong_date']))
+		$_SESSION['wrong_date'] = NULL;
+
 	// Redirection si admin
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: ../administration/administration.php');
@@ -77,6 +81,11 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+			
 			<article class="article_portail">
 				<!-- Switch entre vue générale et vue personnelle-->
 				<div class="switch_bug_view">

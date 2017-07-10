@@ -1,12 +1,89 @@
 <?php
-  if (isset($_SESSION['pseudo_changed'])
+  // Alertes gestion des films (Administrateur)
+  if (isset($_SESSION['film_deleted'])
+  OR  isset($_SESSION['film_reseted']))
+  {
+    echo '<div class="message_alerte">';
+      // Film supprimé
+      if (isset($_SESSION['film_deleted']) AND $_SESSION['film_deleted'] == true)
+      {
+        echo 'Le film a bien été supprimé de la base de données.';
+        $_SESSION['film_deleted'] = NULL;
+      }
+
+      // Film réinitialisé
+      if (isset($_SESSION['film_reseted']) AND $_SESSION['film_reseted'] == true)
+      {
+        echo 'Le film a bien été remis dans la liste.';
+        $_SESSION['film_reseted'] = NULL;
+      }
+    echo '</div>';
+  }
+  // Alertes purge (Administrateur)
+  elseif (isset($_SESSION['purged']))
+  {
+    echo '<div class="message_alerte">';
+      // Dossier purgé
+      if (isset($_SESSION['purged']) AND $_SESSION['purged'] == true)
+    	{
+    		echo 'Les fichiers ont bien été purgés.';
+    		$_SESSION['purged'] = NULL;
+    	}
+    echo '</div>';
+  }
+  // Alertes Movie House (Utilisateurs)
+  elseif (isset($_SESSION['wrong_date']))
+  {
+    echo '<div class="message_alerte_2">';
+      // Format date invalide
+      if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
+      {
+        echo 'La date n\'a pas un format valide (jj/mm/yyyy).';
+        $_SESSION['wrong_date'] = NULL;
+      }
+    echo '</div>';
+  }
+  // Alertes #TheBox (Utilisateurs)
+  elseif (isset($_SESSION['idea_submitted']))
+  {
+    echo '<div class="message_alerte">';
+      // Idée soumise
+      if (isset($_SESSION['idea_submitted']) AND $_SESSION['idea_submitted'] == false)
+      {
+        echo 'Problème lors de l\'envoi de l\'idée.';
+        $_SESSION['idea_submitted'] = NULL;
+      }
+      elseif (isset($_SESSION['idea_submitted']) AND $_SESSION['idea_submitted'] == true)
+      {
+        echo 'L\'idée a été soumise avec succès.';
+        $_SESSION['idea_submitted'] = NULL;
+      }
+      else
+      {
+        $_SESSION['idea_submitted'] = NULL;
+      }
+    echo '</div>';
+  }
+  // Alertes bugs (Utilisateurs)
+  elseif (isset($_SESSION['bug_submitted']))
+  {
+    echo '<div class="message_alerte">';
+      if (isset($_SESSION['bug_submitted']) AND $_SESSION['bug_submitted'] == true)
+  		{
+  			echo 'Votre message a été envoyé à l\'administrateur.';
+  			$_SESSION['bug_submitted'] = NULL;
+  		}
+    echo '</div>';
+  }
+  // Alertes profil (Utilisateurs)
+  elseif (isset($_SESSION['pseudo_changed'])
   OR  isset($_SESSION['avatar_changed'])
   OR  isset($_SESSION['avatar_deleted'])
   OR  isset($_SESSION['wrong_password'])
   OR  isset($_SESSION['preferences_updated'])
   OR  isset($_SESSION['ask_desinscription']))
   {
-    echo '<div class="message_alerte_profil">';
+    echo '<div class="message_alerte">';
       // Changement pseudo
       if (isset($_SESSION['pseudo_changed']) AND $_SESSION['pseudo_changed'] == true)
       {
