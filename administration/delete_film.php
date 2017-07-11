@@ -24,8 +24,11 @@
     // Suppression des avis movie_house_users
     $req1 = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $id_film);
 
+		// SUppression des Commentaires
+		$req2 = $bdd->exec('DELETE FROM movie_house_comments WHERE id_film = ' . $id_film );
+
     // Suppression du film
-    $req2 = $bdd->exec('DELETE FROM movie_house WHERE id = ' . $id_film );
+    $req3 = $bdd->exec('DELETE FROM movie_house WHERE id = ' . $id_film );
 
 		$_SESSION['film_deleted'] = true;
 	}

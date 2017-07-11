@@ -3,6 +3,9 @@
 
 	include('../../includes/init_session.php');
 
+	// Fonctions
+	include('../../includes/fonctions_dates.php');
+
 	// Contrôle film non à supprimer
 	include('../../includes/appel_bdd.php');
 
@@ -376,14 +379,49 @@
 					$reponse->closeCursor();
 				?>
 
-			<!-- Commentaires -->
-			<!-- // saisie commentaires // à faire : pas de commentaires // liste des commentaires // commentaires liés (?) // smileys
-			<div class="zone_comments_films">
-				<div class="title_comments_films">
-					Commentaires
+				<!-- Commentaires -->
+				<div class="zone_comments_films">
+					<!-- Titre -->
+					<div class="title_comments_films">
+						Commentaires
+					</div>
+
+					<!-- Affichage des commentaires -->
+					<?php
+						$reponse = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $_GET['id_film'] . ' ORDER BY id ASC');
+						while($donnees = $reponse->fetch())
+						{
+							echo '<div class="content_comments_films">';
+								$reponse2 = $bdd->query('SELECT full_name, avatar FROM users WHERE identifiant = "' . $donnees['author'] . '"');
+								$donnees2 = $reponse2->fetch();
+								// Photo de profil
+								echo '<div class="zone_avatar_comments">';
+									if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
+										echo '<img src="../../connexion/avatars/' . $donnees2['avatar'] . '" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
+									else
+										echo '<img src="../../includes/default.png" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
+								echo '</div>';
+
+								// Pseudo
+								echo '<div class="pseudo_comments_films">' . $donnees2['full_name'] . '</div>';
+								$reponse2->closeCursor();
+
+								// Date et heure
+								echo '<div class="date_comments_films">Le ' . formatDateForDisplay($donnees['date']) . ' à ' . formatTimeForDisplay($donnees['time']) . '</div>';
+
+								// Commentaire
+								echo '<div class="comment_comments_films">' . nl2br($donnees['comment']) . '</div>';
+							echo '</div>';
+						}
+						$reponse->closeCursor();
+					?>
+
+					<!-- Saisie commentaire -->
+					<form method="post" action="comment_film.php?id_film=<?php echo $_GET['id_film'] ?>" id="comments" class="saisie_comments_films">
+						<textarea placeholder="Votre commentaire ici..." name="comment" class="saisie_commentaire" required></textarea>
+						<input type="submit" name="submit_comment" value="Envoyer" class="send_comment" />
+					</form>
 				</div>
-			</div>
-			-->
 
 			</article>
 		</section>

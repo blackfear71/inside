@@ -2179,18 +2179,114 @@ article
 /*** Commentaires films ***/
 .zone_comments_films
 {
-	background-color: #e3e3e3;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 30px;
+	margin-top: 50px;
 }
 
 .title_comments_films
 {
-	padding: 10px;
+	padding: 1%;
+	font-family: robotomedium_italic, Verdana, sans-serif;
+	font-size: 110%;
+	color: white;
+	background-color: #2eb2f4;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.content_comments_films
+{
+	background-color: #f3f3f3;
+	border-bottom: solid 1px #2eb2f4;
+	padding: 1%;
+	min-height: 50px;
+}
+
+.zone_avatar_comments
+{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 40px;
+	overflow: hidden;
+	background-color: white;
+	float: left;
+	clear: both;
+}
+
+.avatar_comments
+{
+	max-width: 50px;
+	max-height: 50px;
+	vertical-align: middle;
+}
+
+.pseudo_comments_films
+{
 	font-family: robotomedium, Verdana, sans-serif;
-	font-size: 100%;
+	margin-left: 60px;
+}
+
+.date_comments_films
+{
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #a3a3a3;
+	margin-left: 60px;
+}
+
+.comment_comments_films
+{
+	font-family: robotoregular, Verdana, sans-serif;
+	text-align: justify;
+	margin-left: 60px;
+	margin-top: 20px;
+}
+
+.saisie_comments_films
+{
+	background-color: #2eb2f4;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-bottom: 55px;
+}
+
+.saisie_commentaire
+{
+	width: 97%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-left: 1%;
+	margin-right: 1%;
+	padding: 0.5%;
+	border: 0;
+	font-family: robotoregular, Verdana, sans-serif;
+	resize: none;
+	height: 70px;
+	border-radius: 5px;
+}
+
+.send_comment
+{
+	float: right;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 120%;
+	margin-right: 1%;
+	margin-bottom: 1%;
+	border: 0;
+	background-color: white;
+	border-radius: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+.send_comment:hover
+{
+	background-color: #91d784;
 }
 
 /*** Saisie film avancée ***/
