@@ -6,9 +6,6 @@
 
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
-
-	if (!isset($_SESSION['purged']))
-		$_SESSION['purged'] = NULL;
 ?>
 
 <!DOCTYPE html>

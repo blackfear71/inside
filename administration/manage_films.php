@@ -6,12 +6,6 @@
 
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
-
-	if (!isset($_SESSION['film_deleted']))
-		$_SESSION['film_deleted'] = NULL;
-
-	if (!isset($_SESSION['film_reseted']))
-		$_SESSION['film_reseted'] = NULL;
 ?>
 
 <!DOCTYPE html>

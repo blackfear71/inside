@@ -35,10 +35,6 @@
 		$_SESSION['date_theater_saisie'] = "";
 	}
 
-	// Initialisation alertes
-	if (!isset($_SESSION['wrong_date']))
-		$_SESSION['wrong_date'] = NULL;
-
 	// Redirection si admin
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: ../administration/administration.php');
@@ -141,13 +137,7 @@
 				</form>
 
 				<?php
-					// Message d'erreur en cas de date invalide
-					if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
-					{
-						echo '<p class="wrong_date">La date n\'a pas un format valide (jj/mm/yyyy).</p>';
-						$_SESSION['wrong_date'] = false;
-					}
-
+					// Message s'il n'y a pas de films
 					if ($annee_existante == false)
 					{
 						echo '<p class="wrong_date">Pas encore de films pour cette année...</p>';

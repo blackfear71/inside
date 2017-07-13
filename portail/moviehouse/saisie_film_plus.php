@@ -17,16 +17,18 @@
 	}
 
 	// Contrôle film non à supprimer
-	include('../../includes/appel_bdd.php');
+	if (isset($_GET['modify_id']))
+	{
+		include('../../includes/appel_bdd.php');
 
-	$reponse = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $_GET['modify_id']);
-	$donnees = $reponse->fetch();
+		$reponse = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $_GET['modify_id']);
+		$donnees = $reponse->fetch();
 
-	if ($donnees['to_delete'] == "Y")
-		header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+		if ($donnees['to_delete'] == "Y")
+			header('location: ../moviehouse.php?view=main&year=' . date("Y"));
 
-	$reponse->closeCursor();
-
+		$reponse->closeCursor();
+	}
 	// Redirection si admin
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: ../../administration/administration.php');
@@ -128,7 +130,7 @@
 										echo '<input type="text" name="date_doodle" value="' . $_SESSION['date_doodle_saisie'] . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 										echo '<input type="submit" name="modification_avancee" value="Valider" class="saisie_valider_film" />';
 
-										$_SESSION['wrong_date'] = false;
+										$_SESSION['wrong_date'] = NULL;
 									}
 									// Sinon on affiche les données de la table
 									else
@@ -167,7 +169,7 @@
 
 								if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
 								{
-									$_SESSION['wrong_date'] = false;
+									$_SESSION['wrong_date'] = NULL;
 								}
 							}
 						?>

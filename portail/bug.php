@@ -9,9 +9,6 @@
 
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
-
-	if (!isset($_SESSION['bug_submitted']))
-		$_SESSION['bug_submitted'] = NULL;
 ?>
 
 <!DOCTYPE html>

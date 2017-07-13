@@ -10,25 +10,6 @@
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 
-	// Initialisation alertes
-	if (!isset($_SESSION['pseudo_changed']))
-			$_SESSION['pseudo_changed'] = NULL;
-
-	if (!isset($_SESSION['avatar_changed']))
-			$_SESSION['avatar_changed'] = NULL;
-
-	if (!isset($_SESSION['avatar_deleted']))
-			$_SESSION['avatar_deleted'] = NULL;
-
-	if (!isset($_SESSION['wrong_password']))
-		$_SESSION['wrong_password'] = NULL;
-
-	if (!isset($_SESSION['preferences_updated']))
-		$_SESSION['preferences_updated'] = NULL;
-
-	if (!isset($_SESSION['ask_desinscription']))
-		$_SESSION['ask_desinscription'] = NULL;
-
 	if ($_GET['user'] != $_SESSION['identifiant'])
 		header('location: ../connexion/profil.php?user=' . $_SESSION['identifiant'] . '');
 ?>

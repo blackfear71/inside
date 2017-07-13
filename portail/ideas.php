@@ -10,9 +10,6 @@
 	if ($_SESSION['connected'] == false)
 		header('location: ../index.php');
 
-	if (!isset($_SESSION['idea_submitted']))
-		$_SESSION['idea_submitted'] = NULL;
-
 	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "done" AND $_GET['view'] != "mine" AND $_GET['view'] != "inprogress"))
 		header('location: ideas.php?view=all');
 ?>
