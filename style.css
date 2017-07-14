@@ -443,7 +443,7 @@ aside
 	border: 0;
 	border-radius: 50%;
 	background-color: rgb(255, 25, 55);
-	background-image: url("includes/logout.png");
+	background-image: url("includes/icons/logout.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -460,7 +460,7 @@ aside
 	border: 0;
 	border-radius: 50%;
 	background-color: rgb(255, 25, 55);
-	background-image: url("includes/delete.png");
+	background-image: url("includes/icons/delete.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -962,7 +962,7 @@ article
 	/*width: 40px;
 	height: 40px;*/
 	border: 0;
-	background-image: url("includes/search.png");
+	background-image: url("includes/icons/search.png");
 	background-size: 40px 40px;
 	background-repeat: no-repeat;
 	background-position: center;

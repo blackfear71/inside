@@ -1,5 +1,6 @@
 <?php
-	session_start();
+	// Contrôles communs Utilisateurs
+	include('../../includes/controls_users.php');
 
 	include('../../includes/init_session.php');
 
@@ -25,13 +26,6 @@
 		$_SESSION['doesnt_exist'] = true;
 
 	$reponse->closeCursor();
-
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../../administration/administration.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../../index.php');
 ?>
 
 <!DOCTYPE html>
@@ -139,7 +133,7 @@
 
 											// On affiche le lien
 											echo '<a href="details_film.php?id_film=' . $liste_films[$j - 1][1] . '" title="' . $liste_films[$j - 1][2] . '" class="zone_prev_movie">';
-												echo '<img src="../../includes/back.png" alt="prev" title="Film précédent" class="prev_movie" />';
+												echo '<img src="../../includes/icons/back.png" alt="prev" title="Film précédent" class="prev_movie" />';
 												echo '<div class="title_previous_next_film" style="padding-right: 10px;">' . $titre . '</div>';
 												echo '<div class="triangle_previous"></div>';
 												echo '<div class="triangle_previous_2"></div>';
@@ -174,7 +168,7 @@
 												echo '<div class="triangle_next_2"></div>';
 												echo '<div class="triangle_next"></div>';
 												echo '<div class="title_previous_next_film" style="padding-left: 10px;">' . $titre . '</div>';
-												echo '<img src="../../includes/back.png" alt="next" title="Film suivant" class="next_movie" />';
+												echo '<img src="../../includes/icons/back.png" alt="next" title="Film suivant" class="next_movie" />';
 											echo '</a>';
 										}
 										// Zone vide si pas de film suivant (pour conserver le décalage et laisser le titre centré)
@@ -265,7 +259,7 @@
 
 									// Lien vers le doodle
 									if (!empty($donnees['doodle']))
-										echo '<a href="' . $donnees['doodle'] . '" target="_blank" class="link_doodle"><img src="../../includes/doodle.png" alt="doodle" class="logo_doodle" /></a>';
+										echo '<a href="' . $donnees['doodle'] . '" target="_blank" class="link_doodle"><img src="../../includes/icons/doodle.png" alt="doodle" class="logo_doodle" /></a>';
 
 									// Etoiles utilisateur
 									$req3 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
@@ -350,7 +344,7 @@
 													if (isset($avatar) AND !empty($avatar))
 														echo '<img src="../../connexion/avatars/' . $avatar . '" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
 													else
-														echo '<img src="../../includes/default.png" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
+														echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
 												echo '</div>';
 
 												echo '<div class="user_view_by">' . $utilisateur . '</div>';
@@ -413,7 +407,7 @@
 										if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
 											echo '<img src="../../connexion/avatars/' . $donnees2['avatar'] . '" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
 										else
-											echo '<img src="../../includes/default.png" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
+											echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
 									echo '</div>';
 
 									// Pseudo

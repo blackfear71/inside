@@ -1,6 +1,7 @@
 <?php
 	session_start();
 
+	// Si déjà connecté
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
 		header('location: portail/portail.php');
 	elseif (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")

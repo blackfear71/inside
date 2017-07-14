@@ -1,6 +1,7 @@
 <?php
-	session_start();
-
+	// Contrôles communs Utilisateurs
+	include('../../includes/controls_users.php');
+	
 	include('../../includes/init_session.php');
 
 	// Initialisation sauvegarde saisie
@@ -29,13 +30,6 @@
 
 		$reponse->closeCursor();
 	}
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../../administration/administration.php');
-
-	// Redirection si non connecté
-	if ($_SESSION['connected'] == false)
-		header('location: ../../index.php');
 ?>
 
 <!DOCTYPE html>

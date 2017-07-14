@@ -1,11 +1,6 @@
 <?php
-	session_start();
-
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../../administration/administration.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../../index.php');
+	// Contrôles communs Utilisateurs
+	include('../../includes/controls_users.php');
 ?>
 
 <!DOCTYPE html>
@@ -185,7 +180,7 @@
 				where.focus();
 			}
 		</script>
-		
+
   </body>
 
 </html>

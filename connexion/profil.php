@@ -1,14 +1,9 @@
 <?php
-	session_start();
+	// Contrôles communs Utilisateurs
+	include('../includes/controls_users.php');
 
+	// Initialisations session
 	include('../includes/init_session.php');
-
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../administration/administration.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
 
 	if ($_GET['user'] != $_SESSION['identifiant'])
 		header('location: ../connexion/profil.php?user=' . $_SESSION['identifiant'] . '');
