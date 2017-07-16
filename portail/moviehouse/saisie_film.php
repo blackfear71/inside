@@ -4,7 +4,7 @@
 	include ('../../includes/appel_bdd.php');
 	include ('../../includes/fonctions_regex.php');
 	include ('../../includes/fonctions_dates.php');
-	
+
 	// Saisie rapide à partir du tableau des films
 	if (isset($_POST['saisie_rapide']))
 	{
@@ -25,10 +25,10 @@
 		$date_doodle = "";
 
 		$date_a_verifier = $_POST['date_theater'];
-		
-		//SMI - déb					
+
+		//SMI - déb
 		//list($d, $m, $y) = explode('/', $date_a_verifier);
-		
+
 		// On vérifie le format de la date
 		// if (checkdate($m, $d, $y))
 		// {
@@ -39,9 +39,9 @@
 				$date_theater = '1230' . date('Y');
 			}
 			else
-			{			
+			{
 				$date_theater = '1231' . date('Y');
-			}	
+			}
 		}
 		else
 		{
@@ -50,8 +50,8 @@
 		}
 			//SMI - fin
 
-			// Stockage de l'enregistrement en table		
-			$req = $bdd->prepare('INSERT INTO movie_house(film, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
+			// Stockage de l'enregistrement en table
+			$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
 			$req->execute(array(
 				'film' => $nom_film,
 				'to_delete' => $to_delete,
@@ -114,7 +114,7 @@
 
 		// Récupération date sortie cinéma
 		$date_a_verifier_1 = $_POST['date_theater'];
-		
+
 		//SMI - déb
 		// list($d, $m, $y) = explode('/', $date_a_verifier_1);
 
@@ -129,9 +129,9 @@
 					$date_theater = '1230' . date('Y');
 				}
 				else
-				{			
+				{
 					$date_theater = '1231' . date('Y');
-				}	
+				}
 			}
 			else
 			{
@@ -209,7 +209,7 @@
 						header('location: ../moviehouse.php?view=main&year=' . substr($_POST['date_theater'], 6, 4));
 						break;
 				}
-			}	
+			}
 			//SMI - déb
 		// }
 		// else
@@ -271,9 +271,9 @@
 					$date_theater = '1230' . date('Y');
 				}
 				else
-				{			
+				{
 					$date_theater = '1231' . date('Y');
-				}	
+				}
 			}
 			else
 			{
@@ -281,7 +281,7 @@
 				$date_theater = substr($date_a_verifier_1, 5, 2) . substr($date_a_verifier_1, 8, 2) . substr($date_a_verifier_1, 0, 4);
 			}
 			//SMI - fin
-			
+
 			$_SESSION['wrong_date'] = false;
 
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
@@ -349,7 +349,7 @@
 				$req->closeCursor();
 
 				header('location: details_film.php?id_film=' . $id_film);
-			}	
+			}
 			//SMI - déb
 		// }
 		// else
