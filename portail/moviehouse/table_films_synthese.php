@@ -1,5 +1,6 @@
 <?php
 	include('../includes/appel_bdd.php');
+	include('../includes/fonctions_dates.php');
 
 	/************************/
 	/* Tableau vue générale */
@@ -84,7 +85,18 @@
 
 				// Date de sortie des films sur la 2ème colonne
 				echo '<td class="table_dates">';
-					echo substr($donnees3['date_theater'], 2, 2) . '/' . substr($donnees3['date_theater'], 0, 2) . '/' . substr($donnees3['date_theater'], 4, 4);
+					if (!empty($donnees3['date_theater']))
+					{
+						if (isBlankDate($donnees3['date_theater']))
+						{
+							echo 'N.C.';
+						}
+						else
+						{
+							echo substr($donnees3['date_theater'], 2, 2) . '/' . substr($donnees3['date_theater'], 0, 2) . '/' . substr($donnees3['date_theater'], 4, 4);
+						}
+					}
+					//echo substr($donnees3['date_theater'], 2, 2) . '/' . substr($donnees3['date_theater'], 0, 2) . '/' . substr($donnees3['date_theater'], 4, 4);
 				echo '</td>';
 
 				// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)

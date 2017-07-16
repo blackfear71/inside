@@ -1,5 +1,6 @@
 <?php
 	include('../includes/appel_bdd.php');
+	include('../includes/fonctions_dates.php');
 
 	/***************************/
 	/* Tableau vue utilisateur */
@@ -48,7 +49,18 @@
 				// Date de sortie cinéma
 				echo '<td class="table_dates">';
 					if (!empty($donnees['date_theater']))
-						echo substr($donnees['date_theater'], 2, 2) . '/' . substr($donnees['date_theater'], 0, 2) . '/' . substr($donnees['date_theater'], 4, 4);
+					//SMI - déb
+					{
+						if (isBlankDate($donnees['date_theater']))
+						{
+							echo 'N.C.';
+						}
+						else
+						{
+							echo substr($donnees['date_theater'], 2, 2) . '/' . substr($donnees['date_theater'], 0, 2) . '/' . substr($donnees['date_theater'], 4, 4);
+						}
+					}	
+					//SMI - fin						
 				echo '</td>';
 
 				// Fiche du film

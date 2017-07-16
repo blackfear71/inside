@@ -1,69 +1,9 @@
 <?php
-	/////////////////////////////////////////////////////////////////
-	// Fonction d'extraction de l'id d'une vidéo à partir de l'url //
-	/////////////////////////////////////////////////////////////////
-	function extract_url ($adress)
-	{
-		// Initialisation
-		$url = "";
-			
-		//DAILYMOTION	
-		preg_match('#&lt;object[^&gt;]+&gt;.+?http://www.dailymotion.com/swf/video/([A-Za-z0-9]+).+?&lt;/object&gt;#s', $adress, $matches);
-
-		if (!isset($matches[1])) 
-		{
-			preg_match('#http://www.dailymotion.com/video/([A-Za-z0-9]+)#s', $adress, $matches);
-			if (!isset($matches[1])) 
-			{
-				preg_match('#http://www.dailymotion.com/embed/video/([A-Za-z0-9]+)#s', $adress, $matches);
-				if (!isset($matches[1])) 
-				{
-					$url = "";
-				}
-				elseif (strlen($matches[1]))
-				{ 
-					$url = 'dailymotion:_:' . $matches[1]; 
-				}
-			}
-			elseif (strlen($matches[1]))
-			{
-				$url = 'dailymotion:_:' . $matches[1];
-			}
-		}
-		elseif (strlen($matches[1]))
-		{
-			if (strlen($matches[1]))
-			{
-				$url = 'dailymotion:_:' . $matches[1];
-			}
-		}
-			
-		//YOUTUBE
-		if (preg_match('#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#', $adress, $videoid))
-		{
-			if (strlen($videoid[0])) 
-			{ 
-				$url = 'youtube:_:' . $videoid[0]; 
-			}
-		}
-
-		//VIMEO
-		if (preg_match('#(https?://)?(www.)?(player.)?vimeo.com/([a-z]*/)*([0-9]{6,11})[?]?.*#', $adress, $videoid))
-		{
-			if (strlen($videoid[5])) 
-			{ 
-				$url = 'vimeo:_:' . $videoid[5]; 
-			}
-		}
-
-		return $url;
-	}
-?>
-
-<?php
 	session_start();
 		
 	include ('../../includes/appel_bdd.php');
+	include ('../../includes/fonctions_regex.php');
+	include ('../../includes/fonctions_dates.php');
 	
 	// Saisie rapide à partir du tableau des films
 	if (isset($_POST['saisie_rapide']))
@@ -85,13 +25,30 @@
 		
 		$date_a_verifier = $_POST['date_theater'];
 		
-		list($d, $m, $y) = explode('/', $date_a_verifier);
+		//SMI - déb					
+		//list($d, $m, $y) = explode('/', $date_a_verifier);
 		
 		// On vérifie le format de la date
-		if (checkdate($m, $d, $y))
+		// if (checkdate($m, $d, $y))
+		// {
+		if (empty($date_a_verifier))
 		{
-			$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-			
+			if (isLastDayOfYearWednesday(date('Y')))
+			{
+				$date_theater = '1230' . date('Y');
+			}
+			else
+			{			
+				$date_theater = '1231' . date('Y');
+			}	
+		}
+		else
+		{
+			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+			$date_theater = substr($date_a_verifier, 5, 2) . substr($date_a_verifier, 8, 2) . substr($date_a_verifier, 0, 4);
+		}
+			//SMI - fin
+
 			// Stockage de l'enregistrement en table		
 			$req = $bdd->prepare('INSERT INTO movie_house(film, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
 			$req->execute(array(
@@ -109,12 +66,14 @@
 			
 			$_SESSION['wrong_date'] = false;
 			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4));
-		}
-		else
-		{
-			$_SESSION['wrong_date'] = true;
-			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . date("Y"));
-		}
+		//SMI - déb
+		// }
+		// else
+		// {
+		// 	$_SESSION['wrong_date'] = true;
+		// 	header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . date("Y"));
+		// }
+		//SMI - fin
 	}
 	// Saisie avancée à partir de l'écran dédié
 	elseif (isset($_POST['saisie_avancee']))
@@ -153,12 +112,31 @@
 		// Récupération date sortie cinéma
 		$date_a_verifier_1 = $_POST['date_theater'];
 		
-		list($d, $m, $y) = explode('/', $date_a_verifier_1);
+		//SMI - déb
+		// list($d, $m, $y) = explode('/', $date_a_verifier_1);
 
 		// On vérifie le format de la date 1 (date sortie cinéma)
-		if (checkdate($m, $d, $y))
-		{
-			$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+		// if (checkdate($m, $d, $y))
+		// {
+			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+			if (empty($date_a_verifier_1))
+			{
+				if (isLastDayOfYearWednesday(date('Y')))
+				{
+					$date_theater = '1230' . date('Y');
+				}
+				else
+				{			
+					$date_theater = '1231' . date('Y');
+				}	
+			}
+			else
+			{
+				// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+				$date_theater = substr($date_a_verifier_1, 5, 2) . substr($date_a_verifier_1, 8, 2) . substr($date_a_verifier_1, 0, 4);
+			}
+			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+			// SMI - fin
 			$_SESSION['wrong_date'] = false;
 			
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
@@ -228,12 +206,14 @@
 						break;
 				}
 			}	
-		}
-		else
-		{
-			$_SESSION['wrong_date'] = true;
-			header('location: saisie_film_plus.php');
-		}
+			//SMI - déb
+		// }
+		// else
+		// {
+		// 	$_SESSION['wrong_date'] = true;
+		// 	header('location: saisie_film_plus.php');
+		// }
+		//SMI - fin
 	}
 	// Modification à partir de l'écran de saisie avancée
 	elseif (isset($_POST['modification_avancee']))
@@ -276,9 +256,28 @@
 		list($d, $m, $y) = explode('/', $date_a_verifier_1);
 		
 		// On vérifie le format de la date 1 (date sortie cinéma)
-		if (checkdate($m, $d, $y))
-		{
-			$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+		// SMI - déb
+		// if (checkdate($m, $d, $y))
+		// {
+		// 	$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+			if (empty($date_a_verifier_1))
+			{
+				if (isLastDayOfYearWednesday(date('Y')))
+				{
+					$date_theater = '1230' . date('Y');
+				}
+				else
+				{			
+					$date_theater = '1231' . date('Y');
+				}	
+			}
+			else
+			{
+				// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
+				$date_theater = substr($date_a_verifier_1, 5, 2) . substr($date_a_verifier_1, 8, 2) . substr($date_a_verifier_1, 0, 4);
+			}
+			//SMI - fin
+			
 			$_SESSION['wrong_date'] = false;
 			
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
@@ -347,11 +346,13 @@
 				
 				header('location: details_film.php?id_film=' . $id_film);
 			}	
-		}
-		else
-		{
-			$_SESSION['wrong_date'] = true;
-			header('location: saisie_film_plus.php?modify_id=' . $id_film);
-		}
+			//SMI - déb
+		// }
+		// else
+		// {
+		// 	$_SESSION['wrong_date'] = true;
+		// 	header('location: saisie_film_plus.php?modify_id=' . $id_film);
+		// }
+		//SMI - fin
 	}
 ?>

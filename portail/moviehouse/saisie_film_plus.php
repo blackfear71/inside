@@ -108,8 +108,10 @@
 									{
 										echo '<span class="obligatoire">*</span>';
 										echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
-										echo '<span class="obligatoire">*</span>';
-										echo '<input type="text" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" required />';
+										//SMI - déb
+										//echo '<span class="obligatoire">*</span>';
+										echo '<input type="date" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
+										//SMI - fin
 										echo '<input type="text" name="date_release" value="' . $_SESSION['date_release_saisie'] . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 										echo '<input type="text" name="trailer" value="' . $_SESSION['trailer_saisi'] . '" placeholder="Trailer (lien Youtube, Dailymotion ou Vimeo)" class="monoligne_film" />';
 										echo '<input type="text" name="link" value="' . $_SESSION['link_saisi'] . '" placeholder="Lien (Allociné, Wikipédia...)" class="monoligne_film" />';
@@ -125,8 +127,10 @@
 									{
 										echo '<span class="obligatoire">*</span>';
 										echo '<input type="text" name="nom_film" value="' . $donnees['film'] . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
-										echo '<span class="obligatoire">*</span>';
-										echo '<input type="text" name="date_theater" value="' . $date_theater . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" required />';
+										//SMI - déb
+										//echo '<span class="obligatoire">*</span>';
+										echo '<input type="date" name="date_theater" value="' . $date_theater . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
+										//SMI - fin
 										echo '<input type="text" name="date_release" value="' . $date_release . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 										echo '<input type="text" name="trailer" value="' . $donnees['trailer'] . '" placeholder="Trailer (lien Youtube, Dailymotion ou Vimeo)" class="monoligne_film" />';
 										echo '<input type="text" name="link" value="' . $donnees['link'] . '" placeholder="Lien (Allociné, Wikipédia...)" class="monoligne_film" />';
@@ -144,8 +148,10 @@
 								echo '<form method="post" action="saisie_film.php" class="form_pseudo">';
 									echo '<span class="obligatoire">*</span>';
 									echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
-									echo '<span class="obligatoire">*</span>';
-									echo '<input type="text" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" required />';
+									//SMI - déb
+									//echo '<span class="obligatoire">*</span>';
+									echo '<input type="date" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
+									//SMI - fin
 									echo '<input type="text" name="date_release" value="' . $_SESSION['date_release_saisie'] . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 									echo '<input type="text" name="trailer" value="' . $_SESSION['trailer_saisi'] . '" placeholder="Trailer (lien Youtube, Dailymotion ou Vimeo)" class="monoligne_film" />';
 									echo '<input type="text" name="link" value="' . $_SESSION['link_saisi'] . '" placeholder="Lien (Allociné, Wikipédia...)" class="monoligne_film" />';
