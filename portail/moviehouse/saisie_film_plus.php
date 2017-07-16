@@ -1,6 +1,7 @@
 <?php
-	session_start();
-
+	// Contrôles communs Utilisateurs
+	include('../../includes/controls_users.php');
+	
 	include('../../includes/init_session.php');
 
 	// Initialisation sauvegarde saisie
@@ -16,13 +17,19 @@
 		$_SESSION['date_doodle_saisie'] = "";
 	}
 
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../../administration/administration.php');
+	// Contrôle film non à supprimer
+	if (isset($_GET['modify_id']))
+	{
+		include('../../includes/appel_bdd.php');
 
-	// Redirection si non connecté
-	if ($_SESSION['connected'] == false)
-		header('location: ../../index.php');
+		$reponse = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $_GET['modify_id']);
+		$donnees = $reponse->fetch();
+
+		if ($donnees['to_delete'] == "Y")
+			header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+
+		$reponse->closeCursor();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +64,11 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 				<div class="bandeau_titre_article">
 					<?php
@@ -74,12 +86,6 @@
 
 					<div class="contenu_profil">
 						<?php
-							// Message d'erreur en cas de date invalide
-							if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
-							{
-								echo '<p class="wrong_date_film">La date n\'a pas un format valide (jj/mm/yyyy).</p>';
-							}
-
 							if (isset($_GET['modify_id']) AND !empty($_GET['modify_id']))
 							{
 								include('../../includes/appel_bdd.php');
@@ -120,7 +126,7 @@
 										echo '<input type="text" name="date_doodle" value="' . $_SESSION['date_doodle_saisie'] . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 										echo '<input type="submit" name="modification_avancee" value="Valider" class="saisie_valider_film" />';
 
-										$_SESSION['wrong_date'] = false;
+										$_SESSION['wrong_date'] = NULL;
 									}
 									// Sinon on affiche les données de la table
 									else
@@ -163,7 +169,7 @@
 
 								if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
 								{
-									$_SESSION['wrong_date'] = false;
+									$_SESSION['wrong_date'] = NULL;
 								}
 							}
 						?>

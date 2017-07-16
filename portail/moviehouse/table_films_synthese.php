@@ -24,7 +24,7 @@
 						if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
 							echo '<img src="../connexion/avatars/' . $donnees1['avatar'] . '" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
 						else
-							echo '<img src="../includes/default.png" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
+							echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
 					echo '</div>';
 
 					echo '<span class="full_name_films">' . $donnees1['full_name'] . '</span>';
@@ -56,7 +56,7 @@
 		$reponse2->closeCursor();
 
 		// On récupère la liste des films sur la première colonne et la date de sortie sur la 2ème
-		$reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' ORDER BY date_theater ASC, film ASC');
+		$reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
 
 		$date_jour = date("mdY");
 		$date_jour_present = false;
@@ -259,7 +259,7 @@
 						if (isset($donnees4['avatar']) AND !empty($donnees4['avatar']))
 							echo '<img src="../connexion/avatars/' . $donnees4['avatar'] . '" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
 						else
-							echo '<img src="../includes/default.png" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
+							echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
 					echo '</div>';
 
 					echo '<span class="full_name_films">' . $donnees4['full_name'] . '</span>';

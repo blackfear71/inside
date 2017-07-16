@@ -1,14 +1,6 @@
 <?php
-	session_start();
-
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-		header('location: ../portail/portail.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
-
-	if (!isset($_SESSION['purged']))
-		$_SESSION['purged'] = false;
+	// Contrôles communs Administrateur
+	include('../includes/controls_admin.php');
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +38,11 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 				<div class="bandeau_titre_article">
 					<div class="previs_article">Images présentes dans le dossier <i>portail/referenceguide/temp</i></div>
@@ -64,13 +61,6 @@
 						{
 							echo '<img src="' . $filename . '" alt="' . $filename . '" title="' . $filename . '" class="img_purge" />';
 							$i++;
-						}
-
-						if ($_SESSION['purged'] == true)
-						{
-							echo '<p class="submitted" style="text-align: center;">Les fichiers ont bien été purgés.</p>';
-
-							$_SESSION['purged'] = false;
 						}
 
 						if ($i == 0)

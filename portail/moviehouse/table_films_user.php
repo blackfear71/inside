@@ -14,12 +14,13 @@
 			echo '<td class="init_table_dates" style="width: 120px;">Bande-annonce</td>';
 			echo '<td class="init_table_dates" style="width: 120px;">Doodle</td>';
 			echo '<td class="init_table_dates" style="width: 120px;">Date proposée</td>';
+			echo '<td class="init_table_dates" style="width: 120px;">Commentaires</td>';
 			echo '<td class="init_table_dates" style="width: 120px;">Vote</td>';
 			echo '<td class="init_table_dates" style="width: 120px;">Actions</td>';
 		echo '</tr>';
 
 		// On récupère la liste des films sur la première colonne et les autres infos sur les colonnes suivantes
-		$reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' ORDER BY date_theater ASC, film ASC');
+		$reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
 
 		$date_jour = date("mdY");
 		$date_jour_present = false;
@@ -85,6 +86,14 @@
 				echo '<td class="table_dates">';
 					if (!empty($donnees['date_doodle']))
 						echo substr($donnees['date_doodle'], 2, 2) . '/' . substr($donnees['date_doodle'], 0, 2) . '/' . substr($donnees['date_doodle'], 4, 4);
+				echo '</td>';
+
+				// Commentaires
+				echo '<td class="table_dates">';
+					$reponse1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE id_film = "' . $donnees['id'] . '"');
+					$donnees1 = $reponse1->fetch();
+					echo $donnees1['nb_comments'];
+					$reponse1->closeCursor();
 				echo '</td>';
 
 				// Etoiles utilisateur + couleur de participation/vue

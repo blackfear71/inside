@@ -1,6 +1,6 @@
 <?php
-	// Contrôles communs Utilisateurs
-	include('../includes/controls_users.php');
+	// Contrôles communs Administrateur
+	include('../includes/controls_admin.php');
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
-  <title>Inside CGI - GOT</title>
+  <title>Inside CGI - Films</title>
 	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
   </head>
@@ -18,7 +18,13 @@
 	<body>
 
 		<header>
-			<?php include('../includes/onglets.php') ; ?>
+			<div class="main_title">
+				Gestion des films
+			</div>
+
+			<div class="mask">
+				<div class="triangle"></div>
+			</div>
 		</header>
 
 		<section>
@@ -26,19 +32,23 @@
 				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
-					$profil = true;
-					$back = true;
-					$ideas = true;
-					$bug = true;
+					$back_admin = true;
 
 					include('../includes/aside.php');
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 
-				<img src="travaux.png" alt="travaux" title="En cours de réalisation..." style="display: block; margin-left: auto; margin-right: auto; width: 300px; padding-top: 100px;" />
-				<p style="font-family: robotolight, Verdana, sans-serif; font-size: 150%; text-align: center; margin-left: auto; margin-right: auto;">Page en cours de réalisation...</p>
+				<?php
+					// Tableau des demandes
+					include('table_films.php');
+				?>
 
 			</article>
 		</section>

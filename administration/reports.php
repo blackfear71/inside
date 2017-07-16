@@ -1,11 +1,6 @@
 <?php
-	session_start();
-
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-		header('location: ../portail/portail.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
+	// Contrôles communs Administrateur
+	include('../includes/controls_admin.php');
 
 	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "resolved" AND $_GET['view'] != "unresolved"))
 		header('location: reports.php?view=all');

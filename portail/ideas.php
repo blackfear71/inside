@@ -1,17 +1,8 @@
 <?php
-	session_start();
+	// Contrôles communs Utilisateurs
+	include('../includes/controls_users.php');
 
 	include('../includes/init_session.php');
-
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../administration/administration.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
-
-	if (!isset($_SESSION['idea_submited']))
-		$_SESSION['idea_submited'] = NULL;
 
 	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "done" AND $_GET['view'] != "mine" AND $_GET['view'] != "inprogress"))
 		header('location: ideas.php?view=all');
@@ -54,6 +45,11 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 				<div class="switch_bug_view">
 					<?php
@@ -91,21 +87,6 @@
 
 							echo '<input type="submit" name="new_idea" value="Soumettre" class="submit_idea" />';
 						echo '</form>';
-
-						if (isset($_SESSION['idea_submited']) AND $_SESSION['idea_submited'] == false)
-						{
-							echo '<p class="idea_submited">Problème lors de l\'envoi de l\'idée</p>';
-							$_SESSION['idea_submited'] = NULL;
-						}
-						elseif (isset($_SESSION['idea_submited']) AND $_SESSION['idea_submited'] == true)
-						{
-							echo '<p class="idea_submited">L\'idée a été soumise avec succès</p>';
-							$_SESSION['idea_submited'] = NULL;
-						}
-						else
-						{
-							$_SESSION['idea_submited'] = NULL;
-						}
 					?>
 				</div>
 

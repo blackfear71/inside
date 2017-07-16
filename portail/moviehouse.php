@@ -1,5 +1,6 @@
 <?php
-	session_start();
+	// Contrôles communs Utilisateurs
+	include('../includes/controls_users.php');
 
 	// Initialisation des variables SESSION pour la création d'articles
 	include('../includes/init_session.php');
@@ -11,7 +12,7 @@
 	{
 		include('../includes/appel_bdd.php');
 
-		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house ORDER BY SUBSTR(date_theater,5,4) ASC');
+		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
 		while($donnees = $reponse->fetch())
 		{
 			if ($_GET['year'] == $donnees['SUBSTR(date_theater,5,4)'])
@@ -34,14 +35,6 @@
 		$_SESSION['nom_film_saisi'] = "";
 		$_SESSION['date_theater_saisie'] = "";
 	}
-
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../administration/administration.php');
-
-	// Redirection si non connecté
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +70,11 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 				<!-- Switch entre vue générale et vue personnelle-->
 				<div class="switch_bug_view">
@@ -103,7 +101,7 @@
 					{
 						include('../includes/appel_bdd.php');
 
-						$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house ORDER BY SUBSTR(date_theater,5,4) ASC');
+						$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
 
 						echo '<div class="movie_year">';
 
@@ -132,13 +130,7 @@
 				</form>
 
 				<?php
-					// Message d'erreur en cas de date invalide
-					if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
-					{
-						echo '<p class="wrong_date">La date n\'a pas un format valide (jj/mm/yyyy).</p>';
-						$_SESSION['wrong_date'] = false;
-					}
-
+					// Message s'il n'y a pas de films
 					if ($annee_existante == false)
 					{
 						echo '<p class="wrong_date">Pas encore de films pour cette année...</p>';

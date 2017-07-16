@@ -1,11 +1,6 @@
 <?php
-	session_start();
-
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-		header('location: ../portail/portail.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
+	// Contrôles communs Administrateur
+	include('../includes/controls_admin.php');
 
 	if (!isset($_SESSION['user_ask_id']) OR !isset($_SESSION['user_ask_name']) OR !isset($_SESSION['new_password']))
 	{
@@ -64,10 +59,12 @@
 						$_SESSION['new_password'] = "";
 					}
 
+					// Tableau des utilisateurs
 					include('table_users.php');
 
 					echo '<br /><br />';
 
+					// Tableau des statistiques
 					include('table_stats.php');
 				?>
 

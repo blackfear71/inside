@@ -1,17 +1,8 @@
 <?php
-	session_start();
+	// Contrôles communs Utilisateurs
+	include('../includes/controls_users.php');
 
 	include('../includes/init_session.php');
-
-	// Redirection si admin
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: ../administration/administration.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
-
-	if (!isset($_SESSION['submitted']))
-		$_SESSION['submitted'] = false;
 ?>
 
 <!DOCTYPE html>
@@ -51,20 +42,17 @@
 				?>
 			</aside>
 
+			<!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
 				<p class="intro_bug">
 					Le site ne présente aucun bug. Si toutefois vous pensez être tombé sur ce qui prétend en être un, vous pouvez le signaler via le formulaire ci-dessous.
 					Ce que nous appellerons désormais "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à votre écoute pour vous
 					servir au mieux.
 				</p>
-
-				<?php
-					if (isset($_SESSION['submitted']) AND $_SESSION['submitted'] == true)
-					{
-						echo '<p class="submitted">Votre message a été envoyé à l\'administrateur.</p>';
-						$_SESSION['submitted'] = false;
-					}
-				?>
 
 				<form method="post" action="bugs/report_bug.php">
 					<input type="text" name="subject" placeholder="Objet" maxlength="255" class="saisie_titre_2" required />

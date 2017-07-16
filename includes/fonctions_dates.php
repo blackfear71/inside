@@ -1,12 +1,12 @@
 <?php
 /* isLastDayOfYearWednesday
    Fonction pour déterminer si le 31 décembre de l'année en cours est un mercredi
-   afin de gérer le cas où on afficherait "N.C." pour 31/12 qui est effectivement une date de sortie 
-*/ 
+   afin de gérer le cas où on afficherait "N.C." pour 31/12 qui est effectivement une date de sortie
+*/
 function isLastDayOfYearWednesday($year){
     $lastDay = strtotime($year . '-12-31');
-    
-    if(date('D', $lastDay) === 'Wed') 
+
+    if(date('D', $lastDay) === 'Wed')
         return true;
     else
         return false;
@@ -22,6 +22,17 @@ function formatDateForDisplay($date){
         return substr($date, 2, 2) . '/' . substr($date, 0, 2) . '/' . substr($date, 4, 4);
     else
         return $date;
+}
+
+/* formatTimeForDisplay
+   Les heures sont stockées au format HHMMSS. Cette fonction renvoie l'heure au format
+   HH:MM:SS pour l'affichage. Si elle ne comporte pas 6 caractères, on renvoie l'argument
+*/
+function formatTimeForDisplay($time){
+    if (strlen($time) == 6)
+        return substr($time, 0, 2) . ':' . substr($time, 2, 2) . ':' . substr($time, 4, 2);
+    else
+        return $time;
 }
 
 /* isBlankDate

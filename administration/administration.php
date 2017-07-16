@@ -1,11 +1,6 @@
 <?php
-	session_start();
-
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-		header('location: ../portail/portail.php');
-
-	if ($_SESSION['connected'] == false)
-		header('location: ../index.php');
+	// Contrôles communs Administrateur
+	include('../includes/controls_admin.php');
 ?>
 
 <!DOCTYPE html>
@@ -78,12 +73,26 @@
 						</div>
 					</a>
 
-					<a href="" class="new_menu_link_admin">
+					<a href="manage_films.php" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
 							<div class="title_admin">Gestion
-								<div class="saut_ligne">MOVIE<br />HOUSE</div>
+								<div class="saut_ligne">MOVIE<br />HOUSE
+								<?php
+									include('../includes/appel_bdd.php');
+									$req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
+									while($data = $req->fetch())
+									{
+										if ($data['to_delete'] == "Y")
+										{
+											echo '( ! )';
+											break;
+										}
+									}
+									$req->closeCursor();
+								?>
+								</div>
 							</div>
 						</div>
 					</a>
