@@ -1,7 +1,7 @@
 <?php
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
-	
+
 	include('../includes/init_session.php');
 ?>
 
@@ -86,6 +86,15 @@
 								break;
 						}
 					?>
+
+					<a href="expensecenter.php" class="new_menu_link_portail">
+						<div class="menu_portail_box">
+							<div class="mask_portail"></div>
+							<div class="mask_portail_triangle"></div>
+							<div class="title_portail">EXP-<br />ENSE<br /><br />Center</div>
+						</div>
+					</a>
+
 				</div>
 
 			</article>

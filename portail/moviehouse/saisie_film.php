@@ -46,7 +46,7 @@
 		else
 		{
 			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-			$date_theater = substr($date_a_verifier, 5, 2) . substr($date_a_verifier, 8, 2) . substr($date_a_verifier, 0, 4);
+			$date_theater = substr($date_a_verifier, 3, 2) . substr($date_a_verifier, 0, 2) . substr($date_a_verifier, 6, 4);
 		}
 			//SMI - fin
 
@@ -136,7 +136,7 @@
 			else
 			{
 				// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-				$date_theater = substr($date_a_verifier_1, 5, 2) . substr($date_a_verifier_1, 8, 2) . substr($date_a_verifier_1, 0, 4);
+				$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
 			}
 			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
 			// SMI - fin
@@ -278,7 +278,7 @@
 			else
 			{
 				// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-				$date_theater = substr($date_a_verifier_1, 5, 2) . substr($date_a_verifier_1, 8, 2) . substr($date_a_verifier_1, 0, 4);
+				$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
 			}
 			//SMI - fin
 

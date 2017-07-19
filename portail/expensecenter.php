@@ -39,7 +39,11 @@
 			<?php
 				include('../includes/alerts.php');
 			?>
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> devs
 			<article class="article_portail">
 
           <?php
