@@ -250,8 +250,6 @@
 
 			$reponse4 = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 
-			$nombre_users = 0;
-
 			while($donnees4 = $reponse4->fetch())
 			{
 				echo '<td class="init_table_users">';
@@ -264,9 +262,6 @@
 
 					echo '<span class="full_name_films">' . $donnees4['full_name'] . '</span>';
 				echo '</td>';
-
-				$nombre_users++;
-				$user_choix[$nombre_users] = $donnees4['identifiant'];
 			}
 
 			$reponse4->closeCursor();
