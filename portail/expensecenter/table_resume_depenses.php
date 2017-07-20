@@ -59,7 +59,7 @@
 		$reponse2->closeCursor();
 
 		// On récupère la liste des prix sur la première colonne, le nom de l'acheteur sur la 2ème et la date sur la 3ème
-		$reponse3 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+		$reponse3 = $bdd->query('SELECT * FROM expense_center ORDER BY id DESC');
 
 		$l = 0;
 

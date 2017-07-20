@@ -61,7 +61,10 @@
                   $nb_parts_user = $data2['parts'];
               }
 
-              $prix_par_part = $prix_achat / $nb_parts_total;
+              if ($nb_parts_total != 0)
+                $prix_par_part = $prix_achat / $nb_parts_total;
+              else
+                $prix_par_part = 0;
 
               // echo 'nb parts total : ' . $nb_parts_total . '<br />';
               // echo 'nb parts user : ' . $nb_parts_user . '<br />';

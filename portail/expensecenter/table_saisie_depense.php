@@ -68,7 +68,7 @@
             {
               echo '<td rowspan="' . ($nb_lignes * 2 - 1) . '" class="zone_saisie_prix">';
                 // Saisie prix
-                echo '<input type="text" name="depense" placeholder="Prix" maxlength="10" class="saisie_prix" required /> <span class="euro">€</span>';
+                echo '<input type="text" name="depense" placeholder="Prix" maxlength="4" class="saisie_prix" required /> <span class="euro">€</span>';
 
                 // Saisie acheteur
                 $reponse = $bdd->query('SELECT id, identifiant, full_name FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
