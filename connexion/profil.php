@@ -213,6 +213,62 @@
 							$donnees = $reponse->fetch();
 							echo '<p class="actual">Nombre d\'idées soumises <span class="pseudo">#TheBox</span> : <span class="pseudo">' . $donnees['nb_idees'] . '</span></p>';
 							$reponse->closeCursor();
+
+							// Nombre de commentaires Movie House
+							$reponse = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $_SESSION['identifiant'] . '"');
+							$donnees = $reponse->fetch();
+							echo '<p class="actual">Nombre de commentaires <span class="pseudo">MovieHouse</span> : <span class="pseudo">' . $donnees['nb_comments'] . '</span></p>';
+							$reponse->closeCursor();
+
+							// Solde des dépenses
+		          $req1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+
+		          $bilan = 0;
+
+		          while($data1 = $req1->fetch())
+		          {
+		            // Prix d'achat
+		            $prix_achat = $data1['price'];
+
+		            // Identifiant de l'acheteur
+		            $acheteur = $data1['buyer'];
+
+		            // Nombre de parts et prix par parts
+		            $req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
+
+		            $nb_parts_total = 0;
+		            $nb_parts_user = 0;
+
+		            while($data2 = $req2->fetch())
+		            {
+		              // Nombre de parts total
+		              $nb_parts_total = $nb_parts_total + $data2['parts'];
+
+		              // Nombre de parts de l'utilisateur
+		              if ($_SESSION['identifiant'] == $data2['identifiant'])
+		                $nb_parts_user = $data2['parts'];
+		            }
+
+		            if ($nb_parts_total != 0)
+		              $prix_par_part = $prix_achat / $nb_parts_total;
+		            else
+		              $prix_par_part = 0;
+
+		            // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
+		            if ($data1['buyer'] == $_SESSION['identifiant'])
+		              $bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
+		            else
+		              $bilan = $bilan - ($prix_par_part * $nb_parts_user);
+
+		            $req2->closeCursor();
+
+		          }
+
+		          $req1->closeCursor();
+
+		          $bilan_format = str_replace('.', ',', round($bilan, 2));
+
+							echo '<p class="actual">Solde <span class="pseudo">ExpenseCenter</span> : <span class="pseudo">' . $bilan_format . ' €</span></p>';
 						echo '</div>';
 					?>
 				</div>

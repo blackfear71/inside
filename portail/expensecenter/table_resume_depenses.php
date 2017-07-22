@@ -143,7 +143,8 @@
 				// Boutons d'action
 				echo '<td class="action_depenses">';
 					// Modification ligne
-					echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/edit.png" alt="edit" title="Modifier la ligne" class="icone_resume_depenses" /></a>';
+					//echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/edit.png" alt="edit" title="Modifier la ligne" class="icone_resume_depenses" /></a>';
+					echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" title="Modifier la ligne" class="icone_modifier_depense"></a>';
 
 					// Formatage nom utilisateur
 					$utilisateur = str_replace('\'', '&rsquo;', $user_parts[$numero_utilisateur_courant][2]);
@@ -241,10 +242,10 @@
 					// Boutons d'action
 					echo '<td class="action_depenses">';
 						// Validation modification
-						echo '<input type="submit" name="modify_depense" value="" class="icone_valider_depense" />';
+						echo '<input type="submit" name="modify_depense" value="" title="Valider la modification" class="icone_valider_depense" />';
 
 						// Annulation modification ligne
-						echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/cancel.png" alt="cancel" title="Annuler la modification" class="icone_resume_depenses" style="margin-top: -2px; margin-left: 10px;" /></a>';
+						echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" title="Annuler la modification" class="icone_annuler_depense"></a>';
 					echo '</td>';
 
 				echo '</form>';

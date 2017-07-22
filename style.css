@@ -2556,30 +2556,40 @@ article
 .action_depenses
 {
 		text-align: center;
+		padding-top: 5px;
+		padding-bottom: 5px;
 }
 
 .link_action_depenses
 {
 	display: inline-block;
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
+	vertical-align: middle;
 	margin-left: 10px;
 	margin-right: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	vertical-align: middle;
 }
 
-.icone_resume_depenses
+.icone_modifier_depense
 {
-	background-color: rgb(255, 25, 55);
+	display: inline-block;
 	width: 30px;
+	height: 30px;
+	border: 0;
 	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("includes/icons/edit.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	margin-left: 10px;
+	margin-right: 10px;
+	vertical-align: middle;
 }
 
 .icone_supprimer_depense
 {
+	display: inline-block;
 	width: 30px;
 	height: 30px;
 	border: 0;
@@ -2591,10 +2601,14 @@ article
 	background-position: center;
 	cursor: pointer;
 	overflow: hidden;
+	/*margin-left: 10px;
+	margin-right: 10px;*/
+	vertical-align: middle;
 }
 
 .icone_valider_depense
 {
+	display: inline-block;
 	width: 30px;
 	height: 30px;
 	border: 0;
@@ -2606,7 +2620,28 @@ article
 	background-position: center;
 	cursor: pointer;
 	overflow: hidden;
-	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.icone_annuler_depense
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("includes/icons/cancel.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	margin-left: 10px;
+	margin-right: 10px;
+	vertical-align: middle;
 }
 
 .parts_2

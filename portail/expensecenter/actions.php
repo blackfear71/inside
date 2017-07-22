@@ -64,8 +64,8 @@
       $list_parts = array();
       $i = 0;
 
-      $_SESSION['price']       = $_POST['depense'];
-      $_SESSION['buyer']       = $buyer;
+      $_SESSION['price'] = $_POST['depense'];
+      $_SESSION['buyer'] = $buyer;
 
       // Stockage de la liste des parts en fonction de l'utilisateur
       $reponse = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
@@ -108,33 +108,39 @@
       if ($ligne[2] == 0)
       {
         $req2 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense=' . $id_modify . ' AND identifiant = "' . $ligne[1] . '"');
+        echo 'delete<br />';
       }
       else
       {
-        $non_modifiee = false;
-        $a_modifier  = false;
-        $a_inserer   = false;
+        echo 'modifié<br />';
+        $a_modifier   = false;
+        $a_inserer    = false;
+        $count        = 0;
 
         // On cherche si la ligne existe
         $req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense=' . $id_modify);
         while($data2 = $req2->fetch())
         {
-          if ($ligne[1] == $data2['identifiant'] AND $ligne[2] == $data2['parts'])
-            $non_modifiee = true;
-          elseif ($ligne[1] == $data2['identifiant'] AND $ligne[2] != $data2['parts'])
-            $a_modifier = true;
-          else
-            $a_inserer = true;
+          //echo $ligne[1] . ' - ' . $ligne[2] . '<br />';
+          if ($ligne[1] == $data2['identifiant'])
+          {
+            if ($ligne[2] != $data2['parts'])
+              $a_modifier = true;
+
+            $count++;
+          }
         }
         $req2->closeCursor();
 
-        // Si la ligne existe déjà mais qu'elle n'a pas changé, on ne fait rien
-        if ($non_modifiee == true)
-        {
-          echo NULL;
-        }
-        // Si la ligne existe déjà et qu'elle a changé, on met à jour
-        elseif ($a_modifier == true)
+        if ($count == 0)
+          $a_inserer = true;
+
+        echo '<br />' . $count;
+        echo 'modif : ' . $a_modifier . '<br />';
+        echo 'ins : ' . $a_inserer . '<br /><br />';
+
+        // Si la ligne existe déjà et qu'elle a changé, on met à jour, sinon on ne fait rien
+        if ($a_modifier == true)
         {
           $req3 = $bdd->prepare('UPDATE expense_center_users SET parts=:parts WHERE id_expense=' . $id_modify . ' AND identifiant = "' . $ligne[1] . '"');
       		$req3->execute(array(
