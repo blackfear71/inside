@@ -1,6 +1,14 @@
 <?php
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
+
+	// Initialisation sauvegarde saisie
+	if (!isset($_SESSION['not_numeric']) OR $_SESSION['not_numeric'] != true)
+	{
+		$_SESSION['price'] = "";
+		$_SESSION['buyer'] = "";
+		unset($_SESSION['tableau_parts']);
+	}
 ?>
 
 <!DOCTYPE html>

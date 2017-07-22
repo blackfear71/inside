@@ -1,5 +1,9 @@
 <?php
-  // Initialisations
+  /*******************/
+  /* Initialisations */
+  /*******************/
+
+  // Initialisations Movie House
   if (!isset($_SESSION['film_deleted']))
     $_SESSION['film_deleted'] = NULL;
 
@@ -12,12 +16,18 @@
   if (!isset($_SESSION['wrong_date']))
     $_SESSION['wrong_date'] = NULL;
 
+  if (!isset($_SESSION['doesnt_exist']))
+    $_SESSION['doesnt_exist'] = NULL;
+
+  // Initialisations #TheBox
   if (!isset($_SESSION['idea_submitted']))
     $_SESSION['idea_submitted'] = NULL;
 
+  // Initialisations bugs
   if (!isset($_SESSION['bug_submitted']))
     $_SESSION['bug_submitted'] = NULL;
 
+  // Initialisations profil
   if (!isset($_SESSION['pseudo_changed']))
     $_SESSION['pseudo_changed'] = NULL;
 
@@ -36,8 +46,22 @@
   if (!isset($_SESSION['ask_desinscription']))
     $_SESSION['ask_desinscription'] = NULL;
 
-  if (!isset($_SESSION['doesnt_exist']))
-    $_SESSION['doesnt_exist'] = NULL;
+  // Initialisations Expense Center
+  if (!isset($_SESSION['not_numeric']))
+    $_SESSION['not_numeric'] = NULL;
+
+  if (!isset($_SESSION['depense_added']))
+    $_SESSION['depense_added'] = NULL;
+
+  if (!isset($_SESSION['depense_modified']))
+    $_SESSION['depense_modified'] = NULL;
+
+  if (!isset($_SESSION['depense_deleted']))
+    $_SESSION['depense_deleted'] = NULL;
+
+  /***********/
+  /* Alertes */
+  /***********/
 
   // Alertes gestion des films (Administrateur)
   if (isset($_SESSION['film_deleted'])
@@ -222,5 +246,37 @@
         $_SESSION['ask_desinscription'] = NULL;
       echo '</div>';
     }
+  }
+  // Prix non numérique ou > 0
+  elseif (isset($_SESSION['not_numeric']) AND $_SESSION['not_numeric'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'Le prix doit être numérique et positif.';
+      $_SESSION['not_numeric'] = NULL;
+    echo '</div>';
+  }
+  // Dépense ajoutée
+  elseif (isset($_SESSION['depense_added']) AND $_SESSION['depense_added'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La dépense a bien été ajoutée.';
+      $_SESSION['depense_added'] = NULL;
+    echo '</div>';
+  }
+  // Dépense modifiée
+  elseif (isset($_SESSION['depense_modified']) AND $_SESSION['depense_modified'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La dépense a bien été modifiée.';
+      $_SESSION['depense_modified'] = NULL;
+    echo '</div>';
+  }
+  // Dépense supprimée
+  elseif (isset($_SESSION['depense_deleted']) AND $_SESSION['depense_deleted'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La dépense a bien été suprimée.';
+      $_SESSION['depense_deleted'] = NULL;
+    echo '</div>';
   }
 ?>

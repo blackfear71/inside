@@ -12,7 +12,10 @@
 
       while($donnees = $reponse->fetch())
       {
-        echo '<tr>';
+        if ($_SESSION['identifiant'] == $donnees['identifiant'])
+          echo '<tr style="background-color: #fffde8;">';
+        else
+          echo '<tr>';
 
           echo '<td class="td_depenses">';
             // Avatars

@@ -68,7 +68,7 @@
             {
               echo '<td rowspan="' . ($nb_lignes * 2 - 1) . '" class="zone_saisie_prix">';
                 // Saisie prix
-                echo '<input type="text" name="depense" placeholder="Prix" maxlength="4" class="saisie_prix" required /> <span class="euro">€</span>';
+                echo '<input type="text" name="depense" value="' . $_SESSION['price'] . '" placeholder="Prix" maxlength="4" class="saisie_prix" required /> <span class="euro">€</span>';
 
                 // Saisie acheteur
                 $reponse = $bdd->query('SELECT id, identifiant, full_name FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
@@ -78,7 +78,10 @@
 
                   while($donnees = $reponse->fetch())
                   {
-                    echo '<option value="' . $donnees['identifiant'] . '">' . $donnees['full_name'] . '</option>';
+                    if ($donnees['identifiant'] == $_SESSION['buyer'])
+                      echo '<option value="' . $_SESSION['buyer'] . '" selected>' . $donnees['full_name'] . '</option>';
+                    else
+                      echo '<option value="' . $donnees['identifiant'] . '">' . $donnees['full_name'] . '</option>';
                   }
 
                   echo '</select>';
@@ -90,13 +93,18 @@
             for($j = 0; $j < $nb_users_line; $j++)
             {
               echo '<td>';
-                echo '<select name="depense_user" class="parts">';
-                  echo '<option value="0">0</option>';
-                  echo '<option value="1">1</option>';
-                  echo '<option value="2">2</option>';
-                  echo '<option value="3">3</option>';
-                  echo '<option value="4">4</option>';
-                  echo '<option value="5">5</option>';
+                echo '<select name="depense_user[]" class="parts">';
+                  for($k = 0; $k <= 5; $k++)
+                  {
+                    // On calcule l'indice où commencer à récupérer el tableau des parts en fonction de chaque ligne. Le premier numéro de ligne est 1, le premier indice 0 et on a 5 utilisateurs par ligne
+                    $l = $j + 5 * ($ligne - 1);
+
+                    // On affiche les parts en mémoire si il y a eu une erreur de saisie
+                    if (isset($_SESSION['tableau_parts']) AND is_numeric($_SESSION['tableau_parts'][$l]) AND $_SESSION['tableau_parts'][$l] == $k)
+                      echo '<option value="' . $k . '" selected>' . $k . '</option>';
+                    else
+                      echo '<option value="' . $k . '">' . $k . '</option>';
+                  }
                 echo '</select>';
               echo '</td>';
             }

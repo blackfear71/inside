@@ -2486,7 +2486,6 @@ article
 
 .table_total_depenses
 {
-	background-color: #e3e3e3;
 	border-collapse: collapse;
 	width: 100%;
 }
@@ -2503,7 +2502,6 @@ article
 .td_depenses
 {
 	padding: 5px;
-	background-color: white;
 	border: solid 1px #b3b3b3;
 	font-family: robotolight, Verdana, sans-serif;
 }
@@ -2578,6 +2576,37 @@ article
 	background-color: rgb(255, 25, 55);
 	width: 30px;
 	border-radius: 5px;
+}
+
+.icone_supprimer_depense
+{
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("includes/icons/delete.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.icone_valider_depense
+{
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("includes/icons/validate.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	margin-top: 5px;
 }
 
 .parts_2

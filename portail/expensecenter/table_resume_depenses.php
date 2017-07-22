@@ -65,13 +65,16 @@
 
 		while($donnees3 = $reponse3->fetch())
 		{
+			$date_achat = substr($donnees3['date'], 2, 2) . '/' . substr($donnees3['date'], 0, 2) . '/' . substr($donnees3['date'], 4, 4);
+			$prix_achat = str_replace('.', ',', round($donnees3['price'], 2));
+
 			/***************************************************/
 			/* Ligne visualisation normale (sans modification) */
 			/***************************************************/
 			echo '<tr class="ligne_tableau_movie_house" id="modifier_depense_2[' . $l . ']">';
 				// Prix sur la 1ère colonne
 				echo '<td class="prices">';
-					echo $donnees3['price'] . ' €';
+					echo $prix_achat . ' €';
 				echo '</td>';
 
 				// Acheteur sur la 2ème colonne
@@ -81,6 +84,7 @@
 						if ($user_parts[$j][1] == $donnees3['buyer'])
 						{
 							echo $user_parts[$j][2];
+							$numero_utilisateur_courant = $j;
 							break;
 						}
 					}
@@ -88,7 +92,7 @@
 
 				// Date sur la 3ème colonne
 				echo '<td class="table_dates">';
-					echo substr($donnees3['date'], 2, 2) . '/' . substr($donnees3['date'], 0, 2) . '/' . substr($donnees3['date'], 4, 4);
+					echo $date_achat;
 				echo '</td>';
 
 				// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)
@@ -120,12 +124,14 @@
 						}
 					}
 
-					// Si jamais on n'a trouvé aucune ligne à afficher, l'indicateur va permettre d'afficher un case vide et de continuer sur la colonne suivante
+					// Si jamais on n'a trouvé aucune donnée à afficher, l'indicateur va permettre d'afficher un case à 0 et de continuer sur la colonne suivante
 					if ($empty == true)
 					{
-						// Pas de couleur sur la case car on n'a pas fait de choix
+						// Pas de couleur sur la case car on n'a pas de part
 						if ($_SESSION['identifiant'] == $user_parts[$k][1])
+						{
 							echo '<td class="table_users" style="background-color: #fffde8;">';
+						}
 						else
 							echo '<td class="table_users">';
 								echo 0;
@@ -139,9 +145,12 @@
 					// Modification ligne
 					echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/edit.png" alt="edit" title="Modifier la ligne" class="icone_resume_depenses" /></a>';
 
+					// Formatage nom utilisateur
+					$utilisateur = str_replace('\'', '&rsquo;', $user_parts[$numero_utilisateur_courant][2]);
+
 					// Suppression ligne
-					echo '<form method="post" action="" onclick="if(!confirm(\'Supprimer cette dépense ?\')) return false;" title="Supprimer la ligne" class="link_action_depenses">';
-						echo '<img src="../includes/icons/delete.png" alt="delete" title="Supprimer la ligne" class="icone_resume_depenses" />';
+					echo '<form method="post" action="expensecenter/actions.php?id_delete=' . $donnees3['id'] . '" onclick="if(!confirm(\'Supprimer la dépense de ' . $utilisateur . ' du ' . $date_achat . ' et d&rsquo;un montant de ' . $prix_achat . ' € ?\')) return false;" title="Supprimer la ligne" class="link_action_depenses">';
+						echo '<input type="submit" name="delete_depense" value="" class="icone_supprimer_depense" />';
 					echo '</form>';
 				echo '</td>';
 
@@ -154,7 +163,7 @@
 
 				// Prix sur la 1ère colonne
 				echo '<td class="prices">';
-					echo $donnees3['price'] . ' €';
+					echo $prix_achat . ' €';
 				echo '</td>';
 
 				// Acheteur sur la 2ème colonne
@@ -171,72 +180,74 @@
 
 				// Date sur la 3ème colonne
 				echo '<td class="table_dates">';
-					echo substr($donnees3['date'], 2, 2) . '/' . substr($donnees3['date'], 0, 2) . '/' . substr($donnees3['date'], 4, 4);
+					echo $date_achat;
 				echo '</td>';
 
-				// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)
-				for ($n = 1; $n <= $nombre_users; $n++)
-				{
-					// On initialise comme si on n'avait pas trouvé de ligne à afficher
-					$empty = true;
-
-					// On parcourt chaque ligne du tableau de chaque personne en fonction des parts qu'il a consommé
-					foreach ($prices as $ligne)
+				echo '<form method="post" action="expensecenter/actions.php?id_modify=' . $donnees3['id'] . '" title="Valider la modification" class="link_action_depenses">';
+					// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)
+					for ($n = 1; $n <= $nombre_users; $n++)
 					{
-						if ($ligne[2] == $user_parts[$n][1] AND $ligne[1] == $donnees3['id'])
+						// On initialise comme si on n'avait pas trouvé de ligne à afficher
+						$empty = true;
+
+						// On parcourt chaque ligne du tableau de chaque personne en fonction des parts qu'il a consommé
+						foreach ($prices as $ligne)
 						{
-							// On affiche le nombre de parts + la couleur si utilisateur concerné
-							if ($_SESSION['identifiant'] == $ligne[2])
+							if ($ligne[2] == $user_parts[$n][1] AND $ligne[1] == $donnees3['id'])
+							{
+								// On affiche le nombre de parts + la couleur si utilisateur concerné
+								if ($_SESSION['identifiant'] == $ligne[2])
+									echo '<td class="table_users" style="background-color: #fffde8;">';
+								else
+									echo '<td class="table_users">';
+
+										echo '<select name="depense_user[]" class="parts_2">';
+										for($p = 0; $p <= 5; $p++)
+										{
+											if ($p == $ligne[3])
+												echo '<option value="' . $p . '" selected>' . $p . '</option>';
+											else
+												echo '<option value="' . $p . '">' . $p . '</option>';
+										}
+										echo '</select>';
+
+								echo '</td>';
+
+								// Si on a affiché une seule ligne, on saura qu'il ne faut pas ajouter une case vide
+								$empty = false;
+							}
+						}
+
+						// Si jamais on n'a trouvé aucune ligne à afficher, l'indicateur va permettre d'afficher un case vide et de continuer sur la colonne suivante
+						if ($empty == true)
+						{
+							// On affiche une liste déroulante + la couleur si utilisateur concerné
+							if ($_SESSION['identifiant'] == $user_parts[$n][1])
 								echo '<td class="table_users" style="background-color: #fffde8;">';
 							else
 								echo '<td class="table_users">';
 
-									echo '<select name="depense_user" class="parts_2">';
-									for($p = 0; $p <= 5; $p++)
+									echo '<select name="depense_user[]" class="parts_2">';
+									for($o = 0; $o <= 5; $o++)
 									{
-										if ($p == $ligne[3])
-											echo '<option value="' . $p . '" selected>' . $p . '</option>';
-										else
-											echo '<option value="' . $p . '">' . $p . '</option>';
+										echo '<option value="' . $o . '">' . $o . '</option>';
 									}
 									echo '</select>';
 
 							echo '</td>';
-
-							// Si on a affiché une seule ligne, on saura qu'il ne faut pas ajouter une case vide
-							$empty = false;
 						}
 					}
 
-					// Si jamais on n'a trouvé aucune ligne à afficher, l'indicateur va permettre d'afficher un case vide et de continuer sur la colonne suivante
-					if ($empty == true)
-					{
-						// Pas de couleur sur la case car on n'a pas fait de choix
-						if ($_SESSION['identifiant'] == $user_parts[$j][1])
-							echo '<td class="table_users" style="background-color: #fffde8;">';
-						else
-							echo '<td class="table_users">';
-								echo '<select name="depense_user" class="parts_2">';
-								for($o = 0; $o <= 5; $o++)
-								{
-									echo '<option value="' . $o . '">' . $o . '</option>';
-								}
-								echo '</select>';
-							echo '</div>';
-						echo '</td>';
-					}
-				}
+					// Boutons d'action
+					echo '<td class="action_depenses">';
+						// Validation modification
+						echo '<input type="submit" name="modify_depense" value="" class="icone_valider_depense" />';
 
-				// Boutons d'action
-				echo '<td class="action_depenses">';
-					// Validation modification
-					echo '<form method="post" action="" title="Valider la modification" class="link_action_depenses">';
-						echo '<img src="../includes/icons/validate.png" alt="validate" title="Supprimer la ligne" class="icone_resume_depenses" />';
-					echo '</form>';
+						// Annulation modification ligne
+						echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/cancel.png" alt="cancel" title="Annuler la modification" class="icone_resume_depenses" style="margin-top: -2px; margin-left: 10px;" /></a>';
+					echo '</td>';
 
-					// Annulation modification ligne
-					echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/cancel.png" alt="cancel" title="Annuler la modification" class="icone_resume_depenses" /></a>';
-				echo '</td>';
+				echo '</form>';
 
 			echo '</tr>';
 
