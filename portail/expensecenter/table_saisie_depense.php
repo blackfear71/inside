@@ -87,6 +87,9 @@
                   echo '</select>';
 
                   $reponse->closeCursor();
+
+                  // Saisie Commentaire
+                  echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense" />' . $_SESSION['comment'] . '</textarea>';
               echo '</td>';
             }
 

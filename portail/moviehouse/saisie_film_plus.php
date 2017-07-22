@@ -1,8 +1,11 @@
 <?php
 	// Contrôles communs Utilisateurs
 	include('../../includes/controls_users.php');
-	
+
 	include('../../includes/init_session.php');
+
+	// Fonctions
+	include('../../includes/fonctions_dates.php');
 
 	// Initialisation sauvegarde saisie
 	if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] == false)
@@ -135,7 +138,10 @@
 										echo '<input type="text" name="nom_film" value="' . $donnees['film'] . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
 										//SMI - déb
 										//echo '<span class="obligatoire">*</span>';
-										echo '<input type="date" name="date_theater" value="' . $date_theater . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
+										if (isBlankDate($donnees['date_theater']))
+											echo '<input type="date" name="date_theater" value="" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
+										else
+											echo '<input type="date" name="date_theater" value="' . $date_theater . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 										//SMI - fin
 										echo '<input type="text" name="date_release" value="' . $date_release . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" class="monoligne_film" />';
 										echo '<input type="text" name="trailer" value="' . $donnees['trailer'] . '" placeholder="Trailer (lien Youtube, Dailymotion ou Vimeo)" class="monoligne_film" />';

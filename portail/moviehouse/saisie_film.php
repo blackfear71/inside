@@ -67,6 +67,7 @@
 			$req->closeCursor();
 
 			$_SESSION['wrong_date'] = false;
+			$_SESSION['film_added'] = true;
 			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4));
 		//SMI - déb
 		// }
@@ -197,6 +198,8 @@
 					'date_doodle' => $date_doodle
 					));
 				$req->closeCursor();
+
+				$_SESSION['film_added'] = true;
 
 				switch ($_SESSION['view_movie_house'])
 				{
@@ -348,6 +351,7 @@
 				));
 				$req->closeCursor();
 
+				$_SESSION['film_modified'] = true;
 				header('location: details_film.php?id_film=' . $id_film);
 			}
 			//SMI - déb
@@ -371,6 +375,8 @@
 			'to_delete' => $to_delete
 		));
 		$req->closeCursor();
+
+		$_SESSION['film_removed'] = true;
 
 		// Redirection
 		switch ($_SESSION['view_movie_house'])

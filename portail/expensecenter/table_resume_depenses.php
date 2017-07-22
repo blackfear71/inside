@@ -38,7 +38,8 @@
 
 			$reponse1->closeCursor();
 
-      echo '<td class="init_table_dates">Actions</td>';
+			echo '<td class="init_table_dates">Commentaire</td>';
+			echo '<td class="init_table_dates">Actions</td>';
 		echo '</tr>';
 
 		// On récupère dans un tableau les choix utilisateurs
@@ -140,6 +141,11 @@
 					}
 				}
 
+				// Commentaires
+				echo '<td class="table_users_comment">';
+					echo nl2br($donnees3['comment']);
+				echo '</td>';
+
 				// Boutons d'action
 				echo '<td class="action_depenses">';
 					// Modification ligne
@@ -239,6 +245,11 @@
 						}
 					}
 
+					// Saisie Commentaire
+					echo '<td class="table_users">';
+							echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense_2" />' . $donnees3['comment'] . '</textarea>';
+					echo '</td>';
+
 					// Boutons d'action
 					echo '<td class="action_depenses">';
 						// Validation modification
@@ -292,6 +303,7 @@
 
 			$reponse4->closeCursor();
 
+			echo '<td class="init_table_dates">Commentaire</td>';
       echo '<td class="init_table_dates">Actions</td>';
 		echo '</tr>';
 

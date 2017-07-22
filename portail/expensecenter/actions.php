@@ -8,16 +8,18 @@
     $date       = date("mdY");
     $price      = str_replace(',', '.', htmlspecialchars($_POST['depense']));
     $buyer      = $_POST['buyer_user'];
+    $comment    = htmlspecialchars($_POST['comment']);
 
     // Test si prix numérique et positif
     if (is_numeric($price) AND $price > 0)
     {
       // Insertion dans la table expense_center
-      $req0 = $bdd->prepare('INSERT INTO expense_center(date, price, buyer) VALUES(:date, :price, :buyer)');
+      $req0 = $bdd->prepare('INSERT INTO expense_center(date, price, buyer, comment) VALUES(:date, :price, :buyer, :comment)');
       $req0->execute(array(
         'date'  => $date,
         'price' => $price,
-        'buyer' => $buyer
+        'buyer' => $buyer,
+        'comment' => $comment
           ));
       $req0->closeCursor();
 
@@ -64,8 +66,9 @@
       $list_parts = array();
       $i = 0;
 
-      $_SESSION['price'] = $_POST['depense'];
-      $_SESSION['buyer'] = $buyer;
+      $_SESSION['price']   = $_POST['depense'];
+      $_SESSION['buyer']   = $buyer;
+      $_SESSION['comment'] = $comment;
 
       // Stockage de la liste des parts en fonction de l'utilisateur
       $reponse = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
@@ -84,6 +87,15 @@
   elseif (isset($_POST['modify_depense']) AND isset($_GET['id_modify']))
   {
     $id_modify = $_GET['id_modify'];
+
+    // Mise à jour du commentaire si modifié
+    $comment = htmlspecialchars($_POST['comment']);
+
+    $req0 = $bdd->prepare('UPDATE expense_center SET comment=:comment WHERE id=' . $id_modify);
+    $req0->execute(array(
+      'comment' => $comment
+    ));
+    $req0->closeCursor();
 
     // On stocke le tableau des parts en fonction de l'utilisateur si la part n'est pas à 0
     $list_parts_users = array();

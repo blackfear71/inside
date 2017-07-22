@@ -311,7 +311,12 @@
 								echo '</div>';
 
 								// Dates
-								echo '<div class="date_sortie">Sortie cinéma</div><div class="date_sortie_2">' . $date_theater . '</div>';
+								echo '<div class="date_sortie">Sortie cinéma</div><div class="date_sortie_2">';
+								if (isBlankDate($donnees['date_theater']))
+									echo 'N.C.';
+								else
+									echo $date_theater;
+							 	echo '</div>';
 								echo '<div class="date_sortie">Sortie DVD/Bluray</div><div class="date_sortie_2">' . $date_release . '</div>';
 								echo '<div class="date_sortie">Date proposée</div><div class="date_sortie_2">' . $date_doodle . '</div>';
 
