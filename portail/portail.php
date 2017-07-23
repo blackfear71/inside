@@ -100,6 +100,15 @@
 							echo '</div>';
 						echo '</a>';
 
+						// Lien Petits Pédestres
+						echo '<a href="petitspedestres.php" class="new_menu_link_portail">';
+							echo '<div class="menu_portail_box">';
+								echo '<div class="mask_portail"></div>';
+								echo '<div class="mask_portail_triangle"></div>';
+								echo '<div class="title_portail">LES<br />PETITS<br /><br />Pédes-<br/>tres</div>';
+							echo '</div>';
+						echo '</a>';
+
 					echo '</div>';
 				?>
 
