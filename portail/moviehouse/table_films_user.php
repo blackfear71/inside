@@ -58,7 +58,7 @@
 						}
 						else
 						{
-							echo substr($donnees['date_theater'], 2, 2) . '/' . substr($donnees['date_theater'], 0, 2) . '/' . substr($donnees['date_theater'], 4, 4);
+							echo formatDateForDisplay($donnees['date_theater']);
 						}
 					}
 					//SMI - fin
