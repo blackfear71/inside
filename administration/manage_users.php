@@ -64,8 +64,13 @@
 
 					echo '<br /><br />';
 
-					// Tableau des statistiques
-					include('table_stats.php');
+					// Tableau des statistiques des catégories
+					include('table_stats_categories.php');
+
+					echo '<br /><br />';
+
+					// Tableau des statistiques demandes
+					include('table_stats_requests.php');
 				?>
 
 			</article>

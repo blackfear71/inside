@@ -81,9 +81,7 @@
             // echo '<br />';
 
             $req2->closeCursor();
-
           }
-
           $req1->closeCursor();
 
           // echo 'BILAN : ' . $bilan . '<br />';
