@@ -2558,6 +2558,16 @@ article
 	float: right;
 }
 
+.expense_year
+{
+	clear: both;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: solid 1px rgb(255, 25, 55);
+	margin-bottom: -20px;
+}
+
 .zone_resume_depenses
 {
 	clear: both;

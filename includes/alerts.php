@@ -23,10 +23,10 @@
     $_SESSION['film_added'] = NULL;
 
   if (!isset($_SESSION['film_modified']))
-    $_SESSION['film_added'] = NULL;
+    $_SESSION['film_modified'] = NULL;
 
   if (!isset($_SESSION['film_removed']))
-    $_SESSION['film_added'] = NULL;
+    $_SESSION['film_removed'] = NULL;
 
   // Initialisations #TheBox
   if (!isset($_SESSION['idea_submitted']))
@@ -125,7 +125,6 @@
   elseif (isset($_SESSION['film_added']) AND $_SESSION['film_added'] == true)
   {
     echo '<div class="message_alerte_2">';
-      // Film inexistant
       echo 'Le film a bien été ajouté.';
       $_SESSION['film_added'] = NULL;
     echo '</div>';
@@ -134,7 +133,6 @@
   elseif (isset($_SESSION['film_modified']) AND $_SESSION['film_modified'] == true)
   {
     echo '<div class="message_alerte_2">';
-      // Film inexistant
       echo 'La fiche du film a bien été modifiée.';
       $_SESSION['film_modified'] = NULL;
     echo '</div>';
@@ -143,7 +141,6 @@
   elseif (isset($_SESSION['film_removed']) AND $_SESSION['film_removed'] == true)
   {
     echo '<div class="message_alerte_2">';
-      // Film inexistant
       echo 'La demande de suppression a bien été prise en compte.';
       $_SESSION['film_removed'] = NULL;
     echo '</div>';

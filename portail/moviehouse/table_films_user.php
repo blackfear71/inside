@@ -60,8 +60,8 @@
 						{
 							echo substr($donnees['date_theater'], 2, 2) . '/' . substr($donnees['date_theater'], 0, 2) . '/' . substr($donnees['date_theater'], 4, 4);
 						}
-					}	
-					//SMI - fin						
+					}
+					//SMI - fin
 				echo '</td>';
 
 				// Fiche du film

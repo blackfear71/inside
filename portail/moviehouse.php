@@ -2,6 +2,8 @@
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
 
+	// var_dump($_SESSION) ;
+
 	// Initialisation des variables SESSION pour la création d'articles
 	include('../includes/init_session.php');
 
@@ -30,7 +32,7 @@
 		header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . date("Y"));
 
 	// Initialisation sauvegarde saisie
-	if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] == false)
+	if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
 	{
 		$_SESSION['nom_film_saisi'] = "";
 		$_SESSION['date_theater_saisie'] = "";
@@ -44,6 +46,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <title>Inside CGI - MH</title>
 	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
@@ -125,7 +128,7 @@
 
 				<form method="post" action="moviehouse/saisie_film.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
 					<input type="text" name="nom_film" value="<?php echo $_SESSION['nom_film_saisi']; ?>" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />
-					<input type="date" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="date_saisie_rapide" />
+					<input type="text" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="date_saisie_rapide" />
 					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
 				</form>
 
@@ -147,7 +150,7 @@
 
 				<form method="post" action="moviehouse/saisie_film.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
 					<input type="text" name="nom_film" value="<?php echo $_SESSION['nom_film_saisi']; ?>" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />
-					<input type="date" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" class="date_saisie_rapide" />
+					<input type="text" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="date_saisie_rapide" />
 					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
 				</form>
 			</article>
@@ -158,5 +161,45 @@
 		</footer>
 
   </body>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<script>
+		$(function()
+		{
+			$( "#datepicker" ).datepicker(
+			{
+				firstDay: 1,
+				altField: "#datepicker",
+				closeText: 'Fermer',
+				prevText: 'Précédent',
+				nextText: 'Suivant',
+				currentText: 'Aujourd\'hui',
+				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+				weekHeader: 'Sem.',
+				dateFormat: 'dd/mm/yy'
+			});
+			$( "#datepicker2" ).datepicker(
+			{
+				firstDay: 1,
+				altField: "#datepicker2",
+				closeText: 'Fermer',
+				prevText: 'Précédent',
+				nextText: 'Suivant',
+				currentText: 'Aujourd\'hui',
+				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+				weekHeader: 'Sem.',
+				dateFormat: 'dd/mm/yy'
+			});
+		});
+	</script>
 
 </html>

@@ -43,25 +43,30 @@
 			</aside>
 
 			<article class="article_portail">
-				<div class="new_menu_portail">
-					<a href="referenceguide.php" class="new_menu_link_portail">
-						<div class="menu_portail_box">
-							<div class="mask_portail"></div>
-							<div class="mask_portail_triangle"></div>
-							<!--<div class="title_portail">REF<br />ERE<br />NCE<br /><br />Guide</div>-->
-							<div class="title_portail">REFE-<br />RENCE<br /><br />Guide</div>
-						</div>
-					</a>
 
-					<!--<a href="timesheet.php" class="new_menu_link_portail">
-						<div class="menu_portail_box">
-							<div class="mask_portail"></div>
-							<div class="mask_portail_triangle"></div>
-							<div class="title_portail">Good<br />Old<br /><br />TIME<br />SHEET</div>
-						</div>
-					</a>-->
+				<?php
+					echo '<div class="new_menu_portail">';
 
-					<?php
+						// Lien ReferenceGuide
+						echo '<a href="referenceguide.php" class="new_menu_link_portail">';
+							echo '<div class="menu_portail_box">';
+								echo '<div class="mask_portail"></div>';
+								echo '<div class="mask_portail_triangle"></div>';
+								//<div class="title_portail">REF<br />ERE<br />NCE<br /><br />Guide</div>
+								echo '<div class="title_portail">REFE-<br />RENCE<br /><br />Guide</div>';
+							echo '</div>';
+						echo '</a>';
+
+						// Lien TimeSheet
+						/*<a href="timesheet.php" class="new_menu_link_portail">
+							<div class="menu_portail_box">
+								<div class="mask_portail"></div>
+								<div class="mask_portail_triangle"></div>
+								<div class="title_portail">Good<br />Old<br /><br />TIME<br />SHEET</div>
+							</div>
+						</a>*/
+
+						// Lien MovieHouse
 						switch ($_SESSION['view_movie_house'])
 						{
 							case "D":
@@ -85,17 +90,18 @@
 								echo '</a>';
 								break;
 						}
-					?>
 
-					<a href="expensecenter.php" class="new_menu_link_portail">
-						<div class="menu_portail_box">
-							<div class="mask_portail"></div>
-							<div class="mask_portail_triangle"></div>
-							<div class="title_portail">EXP-<br />ENSE<br /><br />Center</div>
-						</div>
-					</a>
+						// Lien ExpenseCenter
+						echo '<a href="expensecenter.php?year=' . date("Y") . '" class="new_menu_link_portail">';
+							echo '<div class="menu_portail_box">';
+								echo '<div class="mask_portail"></div>';
+								echo '<div class="mask_portail_triangle"></div>';
+								echo '<div class="title_portail">EXP-<br />ENSE<br /><br />Center</div>';
+							echo '</div>';
+						echo '</a>';
 
-				</div>
+					echo '</div>';
+				?>
 
 			</article>
 		</section>

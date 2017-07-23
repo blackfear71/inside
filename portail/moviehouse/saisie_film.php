@@ -26,30 +26,33 @@
 
 		$date_a_verifier = $_POST['date_theater'];
 
+		// Contrôle date à vide
 		//SMI - déb
-		//list($d, $m, $y) = explode('/', $date_a_verifier);
-
-		// On vérifie le format de la date
-		// if (checkdate($m, $d, $y))
-		// {
 		if (empty($date_a_verifier))
 		{
 			if (isLastDayOfYearWednesday(date('Y')))
 			{
+				$date_a_verifier = '30/12/' . date('Y');
 				$date_theater = '1230' . date('Y');
 			}
 			else
 			{
+				$date_a_verifier = '31/12/' . date('Y');
 				$date_theater = '1231' . date('Y');
 			}
 		}
 		else
 		{
-			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
 			$date_theater = substr($date_a_verifier, 3, 2) . substr($date_a_verifier, 0, 2) . substr($date_a_verifier, 6, 4);
 		}
-			//SMI - fin
+		//SMI - fin
 
+		// On décompose la date à contrôler
+		list($d, $m, $y) = explode('/', $date_a_verifier);
+
+		// On vérifie le format de la date
+		if (checkdate($m, $d, $y))
+		{
 			// Stockage de l'enregistrement en table
 			$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
 			$req->execute(array(
@@ -66,17 +69,16 @@
 				));
 			$req->closeCursor();
 
-			$_SESSION['wrong_date'] = false;
 			$_SESSION['film_added'] = true;
-			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4));
-		//SMI - déb
-		// }
-		// else
-		// {
-		// 	$_SESSION['wrong_date'] = true;
-		// 	header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . date("Y"));
-		// }
-		//SMI - fin
+
+			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($date_a_verifier, 6, 4));
+		}
+		else
+		{
+			$_SESSION['wrong_date'] = true;
+
+			header('location: ../moviehouse.php?view=' . $_GET['view'] . '&year=' . date("Y"));
+		}
 	}
 	// Saisie avancée à partir de l'écran dédié
 	elseif (isset($_POST['saisie_avancee']))
@@ -103,12 +105,12 @@
 		$doodle = $_POST['doodle'];
 		$date_doodle = "";
 
-		/*
+		//PHA - déb
 		// Lien Youtube trailer
-		$search = "watch?v=";
+		/*$search = "watch?v=";
 		$replace = "embed/";
-		$trailer = str_replace($search, $replace, $_POST['trailer']);
-		*/
+		$trailer = str_replace($search, $replace, $_POST['trailer']);*/
+		//PHA - fin
 
 		// Récupération ID vidéo
 		$id_url = extract_url($trailer);
@@ -116,33 +118,33 @@
 		// Récupération date sortie cinéma
 		$date_a_verifier_1 = $_POST['date_theater'];
 
+		// Contrôle date à vide
 		//SMI - déb
-		// list($d, $m, $y) = explode('/', $date_a_verifier_1);
-
-		// On vérifie le format de la date 1 (date sortie cinéma)
-		// if (checkdate($m, $d, $y))
-		// {
-			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-			if (empty($date_a_verifier_1))
+		if (empty($date_a_verifier_1))
+		{
+			if (isLastDayOfYearWednesday(date('Y')))
 			{
-				if (isLastDayOfYearWednesday(date('Y')))
-				{
-					$date_theater = '1230' . date('Y');
-				}
-				else
-				{
-					$date_theater = '1231' . date('Y');
-				}
+				$date_a_verifier_1 = '30/12/' . date('Y');
+				$date_theater = '1230' . date('Y');
 			}
 			else
 			{
-				// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-				$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
+				$date_a_verifier_1 = '31/12/' . date('Y');
+				$date_theater = '1231' . date('Y');
 			}
-			// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-			// SMI - fin
-			$_SESSION['wrong_date'] = false;
+		}
+		else
+		{
+			$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
+		}
+		// SMI - fin
 
+		// On décompose la date à contrôler
+		list($d, $m, $y) = explode('/', $date_a_verifier_1);
+
+		// On vérifie le format de la date
+		if (checkdate($m, $d, $y))
+		{
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
 			{
 				$date_a_verifier_2 = $_POST['date_release'];
@@ -153,7 +155,6 @@
 				if (checkdate($m, $d, $y))
 				{
 					$date_release = substr($_POST['date_release'], 3, 2) . substr($_POST['date_release'], 0, 2) . substr($_POST['date_release'], 6, 4);
-					$_SESSION['wrong_date'] = false;
 				}
 				else
 				{
@@ -172,7 +173,6 @@
 				if (checkdate($m, $d, $y))
 				{
 					$date_doodle = substr($_POST['date_doodle'], 3, 2) . substr($_POST['date_doodle'], 0, 2) . substr($_POST['date_doodle'], 6, 4);
-					$_SESSION['wrong_date'] = false;
 				}
 				else
 				{
@@ -181,7 +181,7 @@
 				}
 			}
 
-			if ($_SESSION['wrong_date'] == false)
+			if ($_SESSION['wrong_date'] != true)
 			{
 				// Stockage de l'enregistrement en table
 				$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
@@ -204,23 +204,21 @@
 				switch ($_SESSION['view_movie_house'])
 				{
 					case "D":
-						header('location: ../moviehouse.php?view=user&year=' . substr($_POST['date_theater'], 6, 4));
+						header('location: ../moviehouse.php?view=user&year=' . substr($date_a_verifier_1, 6, 4));
 						break;
 
 					case "S":
 					default:
-						header('location: ../moviehouse.php?view=main&year=' . substr($_POST['date_theater'], 6, 4));
+						header('location: ../moviehouse.php?view=main&year=' . substr($date_a_verifier_1, 6, 4));
 						break;
 				}
 			}
-			//SMI - déb
-		// }
-		// else
-		// {
-		// 	$_SESSION['wrong_date'] = true;
-		// 	header('location: saisie_film_plus.php');
-		// }
-		//SMI - fin
+		}
+		else
+		{
+			$_SESSION['wrong_date'] = true;
+			header('location: saisie_film_plus.php');
+		}
 	}
 	// Modification à partir de l'écran de saisie avancée
 	elseif (isset($_POST['modification_avancee']))
@@ -235,6 +233,15 @@
 		$_SESSION['doodle_saisi'] = $_POST['doodle'];
 		$_SESSION['date_doodle_saisie'] = $_POST['date_doodle'];
 
+		echo $_SESSION['nom_film_saisi'] . '<br />';
+		echo $_SESSION['date_theater_saisie'] . '<br />';
+		echo $_SESSION['date_release_saisie'] . '<br />';
+		echo $_SESSION['trailer_saisi'] . '<br />';
+		echo $_SESSION['link_saisi'] . '<br />';
+		echo $_SESSION['poster_saisi'] . '<br />';
+		echo $_SESSION['doodle_saisi'] . '<br />';
+		echo $_SESSION['date_doodle_saisie'] . '<br />';
+
 		// Récupération des variables
 		$id_film = $_GET['modify_id'];
 		$nom_film = $_POST['nom_film'];
@@ -247,12 +254,12 @@
 		$doodle = $_POST['doodle'];
 		$date_doodle = "";
 
-		/*
+		//PHA - déb
 		// Lien Youtube trailer
-		$search = "watch?v=";
+		/*$search = "watch?v=";
 		$replace = "embed/";
-		$trailer = str_replace($search, $replace, $_POST['trailer']);
-		*/
+		$trailer = str_replace($search, $replace, $_POST['trailer']);*/
+		//PHA - fin
 
 		// Récupération ID vidéo
 		$id_url = extract_url($trailer);
@@ -260,33 +267,33 @@
 		// Récupération date sortie cinéma
 		$date_a_verifier_1 = $_POST['date_theater'];
 
-		list($d, $m, $y) = explode('/', $date_a_verifier_1);
-
-		// On vérifie le format de la date 1 (date sortie cinéma)
-		// SMI - déb
-		// if (checkdate($m, $d, $y))
-		// {
-		// 	$date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-			if (empty($date_a_verifier_1))
+		// Contrôle date à vide
+		//SMI - déb
+		if (empty($date_a_verifier_1))
+		{
+			if (isLastDayOfYearWednesday(date('Y')))
 			{
-				if (isLastDayOfYearWednesday(date('Y')))
-				{
-					$date_theater = '1230' . date('Y');
-				}
-				else
-				{
-					$date_theater = '1231' . date('Y');
-				}
+				$date_a_verifier_1 = '30/12/' . date('Y');
+				$date_theater = '1230' . date('Y');
 			}
 			else
 			{
-				// $date_theater = substr($_POST['date_theater'], 3, 2) . substr($_POST['date_theater'], 0, 2) . substr($_POST['date_theater'], 6, 4);
-				$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
+				$date_a_verifier_1 = '31/12/' . date('Y');
+				$date_theater = '1231' . date('Y');
 			}
-			//SMI - fin
+		}
+		else
+		{
+			$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
+		}
+		// SMI - fin
 
-			$_SESSION['wrong_date'] = false;
+		// On décompose la date à contrôler
+		list($d, $m, $y) = explode('/', $date_a_verifier_1);
 
+		// On vérifie le format de la date
+		if (checkdate($m, $d, $y))
+		{
 			if (isset($_POST['date_release']) AND !empty($_POST['date_release']))
 			{
 				$date_a_verifier_2 = $_POST['date_release'];
@@ -316,7 +323,6 @@
 				if (checkdate($m, $d, $y))
 				{
 					$date_doodle = substr($_POST['date_doodle'], 3, 2) . substr($_POST['date_doodle'], 0, 2) . substr($_POST['date_doodle'], 6, 4);
-					$_SESSION['wrong_date'] = false;
 				}
 				else
 				{
@@ -325,7 +331,7 @@
 				}
 			}
 
-			if ($_SESSION['wrong_date'] == false)
+			if ($_SESSION['wrong_date'] != true)
 			{
 				// Modification de l'enregistrement en table
 				$req = $bdd->prepare('UPDATE movie_house SET film = :film,
@@ -354,14 +360,12 @@
 				$_SESSION['film_modified'] = true;
 				header('location: details_film.php?id_film=' . $id_film);
 			}
-			//SMI - déb
-		// }
-		// else
-		// {
-		// 	$_SESSION['wrong_date'] = true;
-		// 	header('location: saisie_film_plus.php?modify_id=' . $id_film);
-		// }
-		//SMI - fin
+		}
+		else
+		{
+			$_SESSION['wrong_date'] = true;
+			header('location: saisie_film_plus.php?modify_id=' . $id_film);
+		}
 	}
 	// Demande de suppression d'un film
 	elseif (isset($_POST['delete_film']))

@@ -15,7 +15,7 @@
 			$onglet_3 = '<a href="/insidecgi/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
 			break;
 	}
-	$onglet4 = '<a href="/insidecgi/portail/expensecenter.php" class="onglet_inactif" style="border-right: solid 1px white;">Expense Center</a>';
+	$onglet4 = '<a href="/insidecgi/portail/expensecenter.php?year=' . date("Y") . '" class="onglet_inactif" style="border-right: solid 1px white;">Expense Center</a>';
 
 	// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 	$path = $_SERVER['PHP_SELF'];
@@ -56,7 +56,7 @@
 	// Expense center
 	if ($path == '/insidecgi/portail/expensecenter.php')
 	{
-		$onglet4 = '<a href="/insidecgi/portail/expensecenter.php" class="onglet_actif" style="border-right: solid 1px white;">Expense Center</a>';
+		$onglet4 = '<a href="/insidecgi/portail/expensecenter.php?year=' . date("Y") . '" class="onglet_actif" style="border-right: solid 1px white;">Expense Center</a>';
 	}
 
 	// Affichage des onglets
