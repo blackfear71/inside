@@ -35,6 +35,17 @@ function formatTimeForDisplay($time){
         return $time;
 }
 
+/* formatDateForInsert
+   Les dates sont stockées au format MMJJAAAA. Cette fonction renvoie la date au format
+   MMJJAAAA pour l'insertion en base. Si elle ne comporte pas 8 caractères, on renvoie l'argument
+*/
+function formatDateForInsert($date){
+    if (strlen($date) == 10)
+        return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
+    else
+        return $date;
+}
+
 /* isBlankDate
     <=> si on affiche "N.C." dans le tableau pour une date inconnue (laissée à blanc)
    Retourne vrai si la date est 31/12 et que la date n'est pas un mercredi

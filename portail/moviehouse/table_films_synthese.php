@@ -96,7 +96,6 @@
 							echo formatDateForDisplay($donnees3['date_theater']);
 						}
 					}
-					//echo substr($donnees3['date_theater'], 2, 2) . '/' . substr($donnees3['date_theater'], 0, 2) . '/' . substr($donnees3['date_theater'], 4, 4);
 				echo '</td>';
 
 				// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)

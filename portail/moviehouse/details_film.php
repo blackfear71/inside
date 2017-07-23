@@ -2,6 +2,7 @@
 	// Contrôles communs Utilisateurs
 	include('../../includes/controls_users.php');
 
+	// Initialisation des variables SESSION pour la création d'articles
 	include('../../includes/init_session.php');
 
 	// Fonctions
@@ -82,14 +83,13 @@
 						$date_doodle = "-";
 
 						if (!empty($donnees['date_theater']))
-							$date_theater = substr($donnees['date_theater'], 2, 2) . '/' . substr($donnees['date_theater'], 0, 2) . '/' .  substr($donnees['date_theater'], 4, 4);
+							$date_theater = formatDateForDisplay($donnees['date_theater']);
 
 						if (!empty($donnees['date_release']))
-							$date_release = substr($donnees['date_release'], 2, 2) . '/' .  substr($donnees['date_release'], 0, 2) . '/' .  substr($donnees['date_release'], 4, 4);
+							$date_release = formatDateForDisplay($donnees['date_release']);
 
 						if (!empty($donnees['date_doodle']))
-							$date_doodle = substr($donnees['date_doodle'], 2, 2) . '/' .  substr($donnees['date_doodle'], 0, 2) . '/' .  substr($donnees['date_doodle'], 4, 4);
-
+							$date_doodle = formatDateForDisplay($donnees['date_doodle']);
 
 						// On récupère la liste des films pour trouver le film précédent et suivant
 						$liste_films = array();
@@ -416,7 +416,11 @@
 									echo '</div>';
 
 									// Pseudo
-									echo '<div class="pseudo_comments_films">' . $donnees2['full_name'] . '</div>';
+									if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
+										echo '<div class="pseudo_comments_films">' . $donnees2['full_name'] . '</div>';
+									else
+										echo '<div class="pseudo_comments_films"><i>un ancien utilisateur</i></div>';
+
 									$reponse2->closeCursor();
 
 									// Date et heure

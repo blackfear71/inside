@@ -1,5 +1,6 @@
 <?php
 	include('../includes/appel_bdd.php');
+	include('../includes/fonctions_dates.php');
 
 	if ($_GET['view'] == "done")
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE status="D" OR status="R" ORDER BY id DESC');
@@ -69,7 +70,7 @@
 		}
 
 		// Formatage date
-		$date_idee = substr($donnees['date'], 2, 2) . "/" . substr($donnees['date'], 0, 2) . "/" . substr($donnees['date'], 4, 4);
+		$date_idee = formatDateForDisplay($donnees['date']);
 
 		// Affichage des idées
 		echo '<table class="table_ideas">';

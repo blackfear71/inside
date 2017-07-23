@@ -1,5 +1,5 @@
 <?php
-	// Penser à changer le style="border-right: solid 1px white;" sur le dernier onglet_1
+	// Penser à changer le style="border-right: solid 1px white;" sur le dernier onglet
 
 	// Par défaut, tous les onglets sont off
 	$onglet_1 = '<a href="/insidecgi/portail/referenceguide.php" class="onglet_inactif">Reference Guide</a>';

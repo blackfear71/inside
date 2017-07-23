@@ -2612,8 +2612,6 @@ article
 .action_depenses
 {
 		text-align: center;
-		padding-top: 5px;
-		padding-bottom: 5px;
 }
 
 .link_action_depenses
@@ -2622,6 +2620,8 @@ article
 	vertical-align: middle;
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .icone_modifier_depense
@@ -2638,8 +2638,6 @@ article
 	background-position: center;
 	cursor: pointer;
 	overflow: hidden;
-	margin-left: 10px;
-	margin-right: 10px;
 	vertical-align: middle;
 }
 
@@ -2657,8 +2655,6 @@ article
 	background-position: center;
 	cursor: pointer;
 	overflow: hidden;
-	/*margin-left: 10px;
-	margin-right: 10px;*/
 	vertical-align: middle;
 }
 
@@ -2676,8 +2672,6 @@ article
 	background-position: center;
 	cursor: pointer;
 	overflow: hidden;
-	margin-left: 10px;
-	margin-right: 10px;
 	vertical-align: middle;
 }
 
@@ -2695,8 +2689,6 @@ article
 	background-position: center;
 	cursor: pointer;
 	overflow: hidden;
-	margin-left: 10px;
-	margin-right: 10px;
 	vertical-align: middle;
 }
 

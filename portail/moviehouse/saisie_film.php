@@ -43,7 +43,7 @@
 		}
 		else
 		{
-			$date_theater = substr($date_a_verifier, 3, 2) . substr($date_a_verifier, 0, 2) . substr($date_a_verifier, 6, 4);
+			$date_theater = formatDateForInsert($date_a_verifier);
 		}
 		//SMI - fin
 
@@ -135,7 +135,7 @@
 		}
 		else
 		{
-			$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
+			$date_theater = formatDateForInsert($date_a_verifier_1);
 		}
 		// SMI - fin
 
@@ -154,7 +154,7 @@
 				// On vérifie le format de la date 2 (date sortie dvd/bluray)
 				if (checkdate($m, $d, $y))
 				{
-					$date_release = substr($_POST['date_release'], 3, 2) . substr($_POST['date_release'], 0, 2) . substr($_POST['date_release'], 6, 4);
+					$date_release = formatDateForInsert($_POST['date_release']);
 				}
 				else
 				{
@@ -172,7 +172,7 @@
 				// On vérifie le format de la date 3 (date proposée)
 				if (checkdate($m, $d, $y))
 				{
-					$date_doodle = substr($_POST['date_doodle'], 3, 2) . substr($_POST['date_doodle'], 0, 2) . substr($_POST['date_doodle'], 6, 4);
+					$date_doodle = formatDateForInsert($_POST['date_doodle']);
 				}
 				else
 				{
@@ -284,7 +284,7 @@
 		}
 		else
 		{
-			$date_theater = substr($date_a_verifier_1, 3, 2) . substr($date_a_verifier_1, 0, 2) . substr($date_a_verifier_1, 6, 4);
+			$date_theater = formatDateForInsert($date_a_verifier_1);
 		}
 		// SMI - fin
 
@@ -303,7 +303,7 @@
 				// On vérifie le format de la date 2 (date sortie dvd/bluray)
 				if (checkdate($m, $d, $y))
 				{
-					$date_release = substr($_POST['date_release'], 3, 2) . substr($_POST['date_release'], 0, 2) . substr($_POST['date_release'], 6, 4);
+					$date_release = formatDateForInsert($_POST['date_release']);
 					$_SESSION['wrong_date'] = false;
 				}
 				else
@@ -322,7 +322,7 @@
 				// On vérifie le format de la date 3 (date proposée)
 				if (checkdate($m, $d, $y))
 				{
-					$date_doodle = substr($_POST['date_doodle'], 3, 2) . substr($_POST['date_doodle'], 0, 2) . substr($_POST['date_doodle'], 6, 4);
+					$date_doodle = formatDateForInsert($_POST['date_doodle']);
 				}
 				else
 				{
