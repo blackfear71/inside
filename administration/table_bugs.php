@@ -1,5 +1,6 @@
 <?php
 	include('../includes/appel_bdd.php');
+	include('../includes/fonctions_dates.php');
 
 	if ($_GET['view'] == "resolved")
 		$reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="Y" ORDER BY id DESC');
@@ -30,7 +31,7 @@
 			$etat_bug = '<span style="color: red;">En cours</span>';
 
 		// Formatage date
-		$date_bug = substr($donnees['date'], 2, 2) . "/" . substr($donnees['date'], 0, 2) . "/" . substr($donnees['date'], 4, 4);
+		$date_bug = formatDateForDisplay($donnees['date']);
 
 		// Affichage des idées
 		echo '<table class="table_ideas">';

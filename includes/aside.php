@@ -113,7 +113,7 @@
 	}
 
 	// Modifier les détails
-	if ($modify_film == true)
+	if ($modify_film == true AND $_SESSION['doesnt_exist'] != true)
 	{
 		echo '<a href="/insidecgi/portail/moviehouse/saisie_film_plus.php?modify_id=' . $_GET['id_film'] . '" title="Modifier les détails" class="link_profile">';
 			echo '<img src="/insidecgi/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
@@ -122,7 +122,7 @@
 	}
 
 	// Demande suppression film
-	if ($delete_film == true)
+	if ($delete_film == true AND $_SESSION['doesnt_exist'] != true)
 	{
 		echo '<form method="post" action="saisie_film.php?delete_id=' . $_GET['id_film'] . '" onclick="if(!confirm(\'Effectuer la demande de suppression de ce film ?\')) return false;">';
 			echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';

@@ -1,5 +1,6 @@
 <?php
 	include('../../includes/appel_bdd.php');
+	include('../../includes/fonctions_dates.php');
 
 	$_SESSION['search'] = htmlspecialchars($_SESSION['search']);
 
@@ -48,7 +49,7 @@
 					}
 
 					// On formatte la date
-					$formatted_date = substr($donnees['publish_date'], 2, 2) . "/" . substr($donnees['publish_date'], 0, 2) . "/" . substr($donnees['publish_date'], 4, 4);
+					$formatted_date = formatDateForDisplay($donnees['publish_date']);
 
 					// On affiche chaque ligne
 					echo '<tr>';
@@ -111,7 +112,7 @@
 					}
 
 					// On formatte la date
-					$formatted_date = substr($donnees['publish_date'], 2, 2) . "/" . substr($donnees['publish_date'], 0, 2) . "/" . substr($donnees['publish_date'], 4, 4);
+					$formatted_date = formatDateForDisplay($donnees['publish_date']);
 
 					// On affiche chaque ligne
 					echo '<tr>';
@@ -249,7 +250,7 @@
 				}
 
 				// On formatte la date
-				$formatted_date = substr($donnees['publish_date'], 2, 2) . "/" . substr($donnees['publish_date'], 0, 2) . "/" . substr($donnees['publish_date'], 4, 4);
+				$formatted_date = formatDateForDisplay($donnees['publish_date']);
 
 				// On affiche chaque ligne
 				echo '<tr>';

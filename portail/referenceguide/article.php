@@ -59,7 +59,7 @@
 
 					echo '<p class="article_titre">' . $donnees['title'] . '</p>';
 
-					$formatted_date = substr($donnees['publish_date'], 2, 2) . "/" . substr($donnees['publish_date'], 0, 2) . "/" . substr($donnees['publish_date'], 4, 4);
+					$formatted_date = formatDateForDisplay($donnees['publish_date']);
 
 					echo '<p class="article_date">' . $formatted_date . '</p>';
 

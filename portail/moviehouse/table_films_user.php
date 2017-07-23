@@ -85,7 +85,7 @@
 				// Date de sortie proposée
 				echo '<td class="table_dates">';
 					if (!empty($donnees['date_doodle']))
-						echo substr($donnees['date_doodle'], 2, 2) . '/' . substr($donnees['date_doodle'], 0, 2) . '/' . substr($donnees['date_doodle'], 4, 4);
+						echo formatDateForDisplay($donnees['date_doodle']);
 				echo '</td>';
 
 				// Commentaires

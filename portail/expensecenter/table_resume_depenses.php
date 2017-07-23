@@ -66,7 +66,7 @@
 
 		while($donnees3 = $reponse3->fetch())
 		{
-			$date_achat = substr($donnees3['date'], 2, 2) . '/' . substr($donnees3['date'], 0, 2) . '/' . substr($donnees3['date'], 4, 4);
+			$date_achat = formatDateForDisplay($donnees3['date']);
 			$prix_achat = str_replace('.', ',', round($donnees3['price'], 2));
 
 			/***************************************************/
@@ -80,15 +80,19 @@
 
 				// Acheteur sur la 2ème colonne
 				echo '<td class="prices">';
+					$trouve = false;
 					for ($j = 1; $j <= $nombre_users; $j++)
 					{
 						if ($user_parts[$j][1] == $donnees3['buyer'])
 						{
 							echo $user_parts[$j][2];
 							$numero_utilisateur_courant = $j;
+							$trouve = true;
 							break;
 						}
 					}
+					if ($trouve == false)
+						echo 'un ancien<br />utilisateur';
 				echo '</td>';
 
 				// Date sur la 3ème colonne
@@ -149,11 +153,16 @@
 				// Boutons d'action
 				echo '<td class="action_depenses">';
 					// Modification ligne
-					//echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" class="link_action_depenses"><img src="../includes/icons/edit.png" alt="edit" title="Modifier la ligne" class="icone_resume_depenses" /></a>';
-					echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" title="Modifier la ligne" class="icone_modifier_depense"></a>';
+					echo '<span class="link_action_depenses">';
+						echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" title="Modifier la ligne" class="icone_modifier_depense"></a>';
+					echo '</span>';
 
 					// Formatage nom utilisateur
-					$utilisateur = str_replace('\'', '&rsquo;', $user_parts[$numero_utilisateur_courant][2]);
+					//echo '**' . $user_parts[$numero_utilisateur_courant][2] . '**';
+					if (isset($numero_utilisateur_courant) AND !empty($user_parts[$numero_utilisateur_courant][2]))
+						$utilisateur = str_replace('\'', '&rsquo;', $user_parts[$numero_utilisateur_courant][2]);
+					else
+						$utilisateur = "un ancien utilisateur";
 
 					// Suppression ligne
 					echo '<form method="post" action="expensecenter/actions.php?id_delete=' . $donnees3['id'] . '" onclick="if(!confirm(\'Supprimer la dépense de ' . $utilisateur . ' du ' . $date_achat . ' et d&rsquo;un montant de ' . $prix_achat . ' € ?\')) return false;" title="Supprimer la ligne" class="link_action_depenses">';
@@ -253,10 +262,14 @@
 					// Boutons d'action
 					echo '<td class="action_depenses">';
 						// Validation modification
-						echo '<input type="submit" name="modify_depense" value="" title="Valider la modification" class="icone_valider_depense" />';
+						echo '<span class="link_action_depenses">';
+							echo '<input type="submit" name="modify_depense" value="" title="Valider la modification" class="icone_valider_depense" />';
+						echo '</span>';						
 
 						// Annulation modification ligne
-						echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" title="Annuler la modification" class="icone_annuler_depense"></a>';
+						echo '<span class="link_action_depenses">';
+							echo '<a onclick="afficherMasquerRow(\'modifier_depense[' . $l . ']\'); afficherMasquerRow(\'modifier_depense_2[' . $l . ']\');" title="Annuler la modification" class="icone_annuler_depense"></a>';
+						echo '</span>';
 					echo '</td>';
 
 				echo '</form>';

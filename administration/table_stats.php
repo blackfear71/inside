@@ -189,14 +189,14 @@
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				$req6 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE status != "D" AND status != "R"');
+				$req6 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper != "" AND status != "D" AND status != "R"');
 				$data6 = $req6->fetch();
 				echo $data6['nb_ideas_inprogress'] - $nb_tot_idees_en_charge;
 				$req6->closeCursor();
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				$req7 = $bdd->query('SELECT COUNT(id) AS nb_ideas_finished FROM ideas WHERE (status = "D" OR status = "R")');
+				$req7 = $bdd->query('SELECT COUNT(id) AS nb_ideas_finished FROM ideas WHERE developper != "" AND (status = "D" OR status = "R")');
 				$data7 = $req7->fetch();
 				echo $data7['nb_ideas_finished'] - $nb_tot_idees_terminees;
 				$req7->closeCursor();

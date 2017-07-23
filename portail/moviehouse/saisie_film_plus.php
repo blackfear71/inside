@@ -39,6 +39,18 @@
 
 		$reponse->closeCursor();
 	}
+
+	// Contrôle film existant
+	if (isset($_GET['modify_id']))
+	{
+		$reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $_GET['modify_id']);
+		$donnees = $reponse->fetch();
+
+		if ($reponse->rowCount() == 0)
+			$_SESSION['doesnt_exist'] = true;
+
+		$reponse->closeCursor();
+	}	
 ?>
 
 <!DOCTYPE html>
@@ -109,13 +121,13 @@
 								$date_doodle = "";
 
 								if (!empty($donnees['date_theater']))
-									$date_theater = substr($donnees['date_theater'], 2, 2) . '/' . substr($donnees['date_theater'], 0, 2) . '/' .  substr($donnees['date_theater'], 4, 4);
+									$date_theater = formatDateForDisplay($donnees['date_theater']);
 
 								if (!empty($donnees['date_release']))
-									$date_release = substr($donnees['date_release'], 2, 2) . '/' .  substr($donnees['date_release'], 0, 2) . '/' .  substr($donnees['date_release'], 4, 4);
+									$date_release = formatDateForDisplay($donnees['date_release']);
 
 								if (!empty($donnees['date_doodle']))
-									$date_doodle = substr($donnees['date_doodle'], 2, 2) . '/' .  substr($donnees['date_doodle'], 0, 2) . '/' .  substr($donnees['date_doodle'], 4, 4);
+									$date_doodle = formatDateForDisplay($donnees['date_doodle']);
 
 								// On affiche le tableau avec les données de la base
 								echo '<form method="post" action="saisie_film.php?modify_id=' . $_GET['modify_id'] . '" class="form_pseudo">';
