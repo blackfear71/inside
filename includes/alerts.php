@@ -68,6 +68,10 @@
   if (!isset($_SESSION['depense_deleted']))
     $_SESSION['depense_deleted'] = NULL;
 
+  // Initialisations Petits Pédestres
+  if (!isset($_SESSION['erreur_distance']))
+    $_SESSION['erreur_distance'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -81,8 +85,8 @@
     {
       echo '<div class="message_alerte">';
         echo 'Le film a bien été supprimé de la base de données.';
-        $_SESSION['film_deleted'] = NULL;
       echo '</div>';
+      $_SESSION['film_deleted'] = NULL;
     }
 
     // Film réinitialisé
@@ -90,89 +94,89 @@
     {
       echo '<div class="message_alerte">';
         echo 'Le film a bien été remis dans la liste.';
-        $_SESSION['film_reseted'] = NULL;
       echo '</div>';
+      $_SESSION['film_reseted'] = NULL;
     }
   }
   // Alertes purge (Administrateur)
   elseif (isset($_SESSION['purged']) AND $_SESSION['purged'] == true)
   {
     echo '<div class="message_alerte">';
-      // Dossier purgé
   		echo 'Les fichiers ont bien été purgés.';
-  		$_SESSION['purged'] = NULL;
     echo '</div>';
+    $_SESSION['purged'] = NULL;
   }
   // Alertes Movie House (Utilisateurs)
+  // Format date invalide (saisie rapide et saisie avancée)
   elseif (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
   {
     echo '<div class="message_alerte_2">';
-      // Format date invalide (saisie rapide et saisie avancée)
       echo 'La date n\'a pas un format valide (jj/mm/yyyy).';
-      $_SESSION['wrong_date'] = NULL;
     echo '</div>';
+    $_SESSION['wrong_date'] = NULL;
   }
   // Film inexistant
   elseif (isset($_SESSION['doesnt_exist']) AND $_SESSION['doesnt_exist'] == true)
   {
     echo '<div class="message_alerte_2">';
-      // Film inexistant
       echo 'Ce film n\'existe pas !';
-      $_SESSION['doesnt_exist'] = NULL;
     echo '</div>';
+    $_SESSION['doesnt_exist'] = NULL;
   }
   // Film ajouté
   elseif (isset($_SESSION['film_added']) AND $_SESSION['film_added'] == true)
   {
     echo '<div class="message_alerte_2">';
       echo 'Le film a bien été ajouté.';
-      $_SESSION['film_added'] = NULL;
     echo '</div>';
+    $_SESSION['film_added'] = NULL;
   }
   // Film modifié
   elseif (isset($_SESSION['film_modified']) AND $_SESSION['film_modified'] == true)
   {
     echo '<div class="message_alerte_2">';
       echo 'La fiche du film a bien été modifiée.';
-      $_SESSION['film_modified'] = NULL;
     echo '</div>';
+    $_SESSION['film_modified'] = NULL;
   }
   // Film supprimé
   elseif (isset($_SESSION['film_removed']) AND $_SESSION['film_removed'] == true)
   {
     echo '<div class="message_alerte_2">';
       echo 'La demande de suppression a bien été prise en compte.';
-      $_SESSION['film_removed'] = NULL;
     echo '</div>';
+    $_SESSION['film_removed'] = NULL;
   }
   // Alertes #TheBox (Utilisateurs)
   elseif (isset($_SESSION['idea_submitted']))
   {
-    echo '<div class="message_alerte">';
-      // Idée soumise
-      if (isset($_SESSION['idea_submitted']) AND $_SESSION['idea_submitted'] == false)
-      {
+    // Idée soumise
+    if (isset($_SESSION['idea_submitted']) AND $_SESSION['idea_submitted'] == false)
+    {
+      echo '<div class="message_alerte">';
         echo 'Problème lors de l\'envoi de l\'idée.';
-        $_SESSION['idea_submitted'] = NULL;
-      }
-      elseif (isset($_SESSION['idea_submitted']) AND $_SESSION['idea_submitted'] == true)
-      {
+      echo '</div>';
+      $_SESSION['idea_submitted'] = NULL;
+    }
+    elseif (isset($_SESSION['idea_submitted']) AND $_SESSION['idea_submitted'] == true)
+    {
+      echo '<div class="message_alerte">';
         echo 'L\'idée a été soumise avec succès.';
-        $_SESSION['idea_submitted'] = NULL;
-      }
-      else
-      {
-        $_SESSION['idea_submitted'] = NULL;
-      }
-    echo '</div>';
+      echo '</div>';
+      $_SESSION['idea_submitted'] = NULL;
+    }
+    else
+    {
+      $_SESSION['idea_submitted'] = NULL;
+    }
   }
   // Alertes bugs (Utilisateurs)
   elseif (isset($_SESSION['bug_submitted']) AND $_SESSION['bug_submitted'] == true)
   {
     echo '<div class="message_alerte">';
 			echo 'Votre message a été envoyé à l\'administrateur.';
-			$_SESSION['bug_submitted'] = NULL;
     echo '</div>';
+    $_SESSION['bug_submitted'] = NULL;
   }
   // Alertes profil (Utilisateurs)
   elseif (isset($_SESSION['pseudo_changed'])
@@ -187,8 +191,8 @@
     {
       echo '<div class="message_alerte">';
         echo 'Le pseudo a bien été modifié.';
-        $_SESSION['pseudo_changed'] = NULL;
       echo '</div>';
+      $_SESSION['pseudo_changed'] = NULL;
     }
 
     // Changement avatar
@@ -196,15 +200,15 @@
     {
       echo '<div class="message_alerte">';
         echo 'L\'avatar a bien été modifié.';
-        $_SESSION['avatar_changed'] = NULL;
       echo '</div>';
+      $_SESSION['avatar_changed'] = NULL;
     }
     elseif (isset($_SESSION['avatar_changed']) AND $_SESSION['avatar_changed'] == false)
     {
       echo '<div class="message_alerte">';
         echo 'Un problème a eu lieu lors de la modification de l\'avatar.';
-        $_SESSION['avatar_changed'] = NULL;
       echo '</div>';
+      $_SESSION['avatar_changed'] = NULL;
     }
     else
     {
@@ -216,15 +220,15 @@
     {
       echo '<div class="message_alerte">';
         echo 'L\'avatar a bien été supprimé.';
-        $_SESSION['avatar_deleted'] = NULL;
       echo '</div>';
+      $_SESSION['avatar_deleted'] = NULL;
     }
     elseif (isset($_SESSION['avatar_deleted']) AND $_SESSION['avatar_deleted'] == false)
     {
       echo '<div class="message_alerte">';
         echo 'Un problème a eu lieu lors de la suppression de l\'avatar.';
-        $_SESSION['avatar_deleted'] = NULL;
       echo '</div>';
+      $_SESSION['avatar_deleted'] = NULL;
     }
     else
     {
@@ -236,15 +240,15 @@
     {
       echo '<div class="message_alerte">';
         echo 'Mauvais mot de passe d\'origine ou mauvaise confirmation du nouveau mot de passe.';
-        $_SESSION['wrong_password'] = NULL;
       echo '</div>';
+      $_SESSION['wrong_password'] = NULL;
     }
     elseif (isset($_SESSION['wrong_password']) AND $_SESSION['wrong_password'] == false)
     {
       echo '<div class="message_alerte">';
         echo 'Le mot de passe a été modifié avec succès.';
-        $_SESSION['wrong_password'] = NULL;
       echo '</div>';
+      $_SESSION['wrong_password'] = NULL;
     }
     else
     {
@@ -256,15 +260,15 @@
     {
       echo '<div class="message_alerte">';
         echo 'Les préférences n\'ont pas été modifiées.';
-        $_SESSION['preferences_updated'] = NULL;
       echo '</div>';
+      $_SESSION['preferences_updated'] = NULL;
     }
     elseif (isset($_SESSION['preferences_updated']) AND $_SESSION['preferences_updated'] == true)
     {
       echo '<div class="message_alerte">';
         echo 'Les préférences ont été mises à jour avec succès.';
-        $_SESSION['preferences_updated'] = NULL;
       echo '</div>';
+      $_SESSION['preferences_updated'] = NULL;
     }
     else
     {
@@ -276,8 +280,8 @@
     {
       echo '<div class="message_alerte">';
         echo 'La demande de désinscription a bien été soumise.';
-        $_SESSION['ask_desinscription'] = NULL;
       echo '</div>';
+      $_SESSION['ask_desinscription'] = NULL;
     }
   }
   // Prix non numérique ou > 0
@@ -285,31 +289,39 @@
   {
     echo '<div class="message_alerte_2">';
       echo 'Le prix doit être numérique et positif.';
-      $_SESSION['not_numeric'] = NULL;
     echo '</div>';
+    $_SESSION['not_numeric'] = NULL;
   }
   // Dépense ajoutée
   elseif (isset($_SESSION['depense_added']) AND $_SESSION['depense_added'] == true)
   {
     echo '<div class="message_alerte_2">';
       echo 'La dépense a bien été ajoutée.';
-      $_SESSION['depense_added'] = NULL;
     echo '</div>';
+    $_SESSION['depense_added'] = NULL;
   }
   // Dépense modifiée
   elseif (isset($_SESSION['depense_modified']) AND $_SESSION['depense_modified'] == true)
   {
     echo '<div class="message_alerte_2">';
       echo 'La dépense a bien été modifiée.';
-      $_SESSION['depense_modified'] = NULL;
     echo '</div>';
+    $_SESSION['depense_modified'] = NULL;
   }
   // Dépense supprimée
   elseif (isset($_SESSION['depense_deleted']) AND $_SESSION['depense_deleted'] == true)
   {
     echo '<div class="message_alerte_2">';
       echo 'La dépense a bien été suprimée.';
-      $_SESSION['depense_deleted'] = NULL;
     echo '</div>';
+    $_SESSION['depense_deleted'] = NULL;
+  }
+  // Distance parcours non numérique
+  elseif (isset($_SESSION['erreur_distance']))
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La distance doit être un nombre ;)';
+    echo '</div>';
+    $_SESSION['erreur_distance'] = NULL;
   }
 ?>
