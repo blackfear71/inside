@@ -624,7 +624,6 @@ article
 	margin-right: auto;
 	text-align: center;
 	padding-top: 50px;
-	margin-left: 15px;
 }
 
 .menu_portail_box
@@ -913,6 +912,8 @@ article
 	width: 300px;
 	margin-left: 5px;
 	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 /*** Reference Guide ***/
@@ -2923,11 +2924,8 @@ article
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	padding-top: 44px;
-	margin-left: 15px;
+	padding-top: 50px;
 	max-width: 80%;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .menu_admin_box
