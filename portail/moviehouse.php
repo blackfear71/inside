@@ -118,7 +118,7 @@
 
 							if ($annee_existante == false)
 							{
-								echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '" class="movie_year_active">' . $_GET['year'] . '</a>';
+								echo '<span class="movie_year_active">' . $_GET['year'] . '</span>';
 							}
 						echo '</div>';
 
