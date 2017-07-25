@@ -4,7 +4,7 @@
 
 	// Initialisation des variables SESSION pour la création d'articles
 	include('../includes/init_session.php');
-	
+
 	// Initialisation sauvegarde saisie
 	if (!isset($_SESSION['not_numeric']) OR $_SESSION['not_numeric'] != true)
 	{

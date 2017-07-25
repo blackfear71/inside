@@ -159,7 +159,7 @@
 				else
 				{
 					$_SESSION['wrong_date'] = true;
-					header('location: saisie_film_plus.php');
+					header('location: saisie_avancee.php');
 				}
 			}
 
@@ -177,7 +177,7 @@
 				else
 				{
 					$_SESSION['wrong_date'] = true;
-					header('location: saisie_film_plus.php');
+					header('location: saisie_avancee.php');
 				}
 			}
 
@@ -217,7 +217,7 @@
 		else
 		{
 			$_SESSION['wrong_date'] = true;
-			header('location: saisie_film_plus.php');
+			header('location: saisie_avancee.php');
 		}
 	}
 	// Modification à partir de l'écran de saisie avancée
@@ -309,7 +309,7 @@
 				else
 				{
 					$_SESSION['wrong_date'] = true;
-					header('location: saisie_film_plus.php?modify_id=' . $id_film);
+					header('location: saisie_avancee.php?modify_id=' . $id_film);
 				}
 			}
 
@@ -327,7 +327,7 @@
 				else
 				{
 					$_SESSION['wrong_date'] = true;
-					header('location: saisie_film_plus.php?modify_id=' . $id_film);
+					header('location: saisie_avancee.php?modify_id=' . $id_film);
 				}
 			}
 
@@ -364,7 +364,7 @@
 		else
 		{
 			$_SESSION['wrong_date'] = true;
-			header('location: saisie_film_plus.php?modify_id=' . $id_film);
+			header('location: saisie_avancee.php?modify_id=' . $id_film);
 		}
 	}
 	// Demande de suppression d'un film

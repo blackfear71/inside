@@ -266,18 +266,18 @@
 									$data3 = $req3->fetch();
 
 									echo '<div class="form_stars_details">';
-										echo '<form method="post" action="submit_film.php?id_film=' . $_GET['id_film'] . '">';
+										echo '<form method="post" action="vote_film.php?id_film=' . $_GET['id_film'] . '">';
 											// Boutons vote
 											for($j = 0; $j <= 5; $j++)
 											{
 												if ($j == $data3['stars'])
 												{
-													echo '<img src="star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+													echo '<img src="images/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
 													echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_selected" />';
 												}
 												else
 												{
-													echo '<img src="star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+													echo '<img src="images/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
 													echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" />';
 												}
 											}
@@ -289,7 +289,7 @@
 									// Si l'utilisateur a des étoiles
 									if ($present == true)
 									{
-										echo '<form method="post" action="actions.php?id_film=' . $_GET['id_film'] . '" class="form_not_interested">';
+										echo '<form method="post" action="actions_users.php?id_film=' . $_GET['id_film'] . '" class="form_not_interested">';
 											$req4 = $bdd->query('SELECT participation FROM movie_house_users WHERE id_film = ' . $_GET['id_film'] . ' AND identifiant = "' . $_SESSION['identifiant'] . '"');
 											$data4 = $req4->fetch();
 
@@ -363,7 +363,7 @@
 												echo '<td class="td_view_by">';
 
 												echo '<div class="link_vote_details">';
-													echo '<img src="star' . $data5['stars'] . '.png" alt="star' . $data5['stars'] . '" class="new_star" />';
+													echo '<img src="images/stars/star' . $data5['stars'] . '.png" alt="star' . $data5['stars'] . '" class="new_star" />';
 												echo '</div>';
 
 											echo '</td>';
@@ -387,7 +387,7 @@
 								if (!empty($donnees['poster']))
 									echo '<img src="' . $donnees['poster'] . '" alt="' . $donnees['poster'] . '" title="' . $donnees['film'] . '" class="img_details" /><br />';
 								else
-									echo '<img src="cinema.jpg" alt="pellicule" title="' . $donnees['film'] . '" class="img_details"/>';
+									echo '<img src="images/cinema.jpg" alt="pellicule" title="' . $donnees['film'] . '" class="img_details"/>';
 							echo '</div>';
 						echo '</div>';
 

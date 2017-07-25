@@ -75,31 +75,6 @@
 					$req2->closeCursor();
 				echo '</td>';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				// Calcul des bilans
 				$reponse1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
 
@@ -122,7 +97,7 @@
 					while($donnees2 = $reponse2->fetch())
 					{
 						// Nombre de parts total
-						$nb_parts_total = $nb_parts_total + $donnees2['parts'];
+						$nb_parts_total += $donnees2['parts'];
 
 						// Nombre de parts de l'utilisateur
 						if ($donnees['identifiant'] == $donnees2['identifiant'])
@@ -157,18 +132,8 @@
 					echo '<td class="td_manage_users" style="background-color: rgb(90, 200, 70);">';
 				else
 					echo '<td class="td_manage_users">';
-
 						echo $bilan_format . ' €';
-
-				echo '</td>';
-
-
-
-
-
-
-
-
+					echo '</td>';
 			echo '</tr>';
 		}
 
@@ -185,7 +150,7 @@
 		}
 		$req4->closeCursor();
 
-		// On cherche les utilisateurs désinscrits qui ont une dépenses
+		// On cherche les utilisateurs désinscrits qui ont une dépense
 		$utilisateurs_desinscrits = array();
 		$j = 0;
 
@@ -211,6 +176,44 @@
 		}
 		$req5->closeCursor();
 
+		// On cherche les utilisateurs désinscrits qui ont un achat
+		$req6 = $bdd->query('SELECT DISTINCT buyer FROM expense_center ORDER BY buyer ASC');
+		while($data6 = $req6->fetch())
+		{
+			$founded = false;
+
+			// On cherche déja s'il y a un acheteur qui n'est pas dans les inscrits
+			foreach($utilisateurs_inscrits as $ligne)
+			{
+				if ($data6['buyer'] == $ligne)
+				{
+					$founded = true;
+					break;
+				}
+			}
+
+			// Si c'est le cas, on cherche s'il n'est pas déjà dans les désinscrits
+			if ($founded == false)
+			{
+				foreach($utilisateurs_desinscrits as $ligne2)
+				{
+					if ($data6['buyer'] == $ligne2)
+					{
+						$founded = true;
+						break;
+					}
+				}
+			}
+
+			// Sinon on le rajoute à la liste des désinscrits
+			if ($founded == false)
+			{
+				$utilisateurs_desinscrits[$j] = $data6['buyer'];
+				$j++;
+			}
+		}
+		$req6->closeCursor();
+
 		// Séparation utilisateurs désinscrits
 		$compteur_tableau = count($utilisateurs_desinscrits);
 		if ($compteur_tableau > 0)
@@ -220,7 +223,9 @@
 			echo '</tr>';
 		}
 
-		// Utilisateurs désinscrits
+		// Utilisateurs désinscrits (avec alerte s'il reste des dettes)
+		$alerte_bilan = false;
+
 		foreach($utilisateurs_desinscrits as $ligne)
 		{
 			echo '<tr class="tr_manage_users">';
@@ -229,59 +234,70 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					$req6 = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $ligne . '"');
-					$data6 = $req6->fetch();
-					echo $data6['nb_publications'];
-					$req6->closeCursor();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					$req7 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $ligne . '"');
+					$req7 = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $ligne . '"');
 					$data7 = $req7->fetch();
-					echo $data7['nb_comments'];
+					echo $data7['nb_publications'];
 					$req7->closeCursor();
 				echo '</td>';
 
+				echo '<td class="td_manage_users">';
+					$req8 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $ligne . '"');
+					$data8 = $req8->fetch();
+					echo $data8['nb_comments'];
+					$req8->closeCursor();
+				echo '</td>';
+
 				// Calcul des bilans pour les utilisateurs désinscrits uniquement
-				$reponse1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+				$req9 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
 
 				$bilan = 0;
 
-				while($donnees1 = $reponse1->fetch())
+				while($data9 = $req9->fetch())
 				{
 					// Prix d'achat
-					$prix_achat = $donnees1['price'];
+					$prix_achat = $data9['price'];
 
 					// Identifiant de l'acheteur
-					$acheteur = $donnees1['buyer'];
+					$acheteur = $data9['buyer'];
 
-					// Nombre de parts et prix par parts
-					$reponse2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $donnees1['id'] . ' AND identifiant = "' . $ligne . '"');
+					// Nombre de parts total et utilisateur
+					$req10 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data9['id']);
 
-					$nb_parts_total_user = 0;
+					$nb_parts_total = 0;
+					$nb_parts_user = 0;
 
-					while($donnees2 = $reponse2->fetch())
+					while($data10 = $req10->fetch())
 					{
-						// Nombre de parts total de l'utilisateur
-						$nb_parts_total_user = $nb_parts_total_user + $donnees2['parts'];
+						// Nombre de parts total
+						$nb_parts_total += $data10['parts'];
+
+						// Nombre de parts de l'utilisateur
+						if ($ligne == $data10['identifiant'])
+							$nb_parts_user = $data10['parts'];
 					}
 
-					if ($nb_parts_total_user != 0)
-						$prix_par_part = $prix_achat / $nb_parts_total_user;
+					// Prix par parts
+					if ($nb_parts_total != 0)
+						$prix_par_part = $prix_achat / $nb_parts_total;
 					else
 						$prix_par_part = 0;
 
 					// On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-					if ($donnees1['buyer'] == $ligne AND $nb_parts_total_user >= 0)
-						$bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_total_user);
-					elseif ($donnees1['buyer'] != $ligne AND $nb_parts_total_user > 0)
-						$bilan = $bilan - ($prix_par_part * $nb_parts_total_user);
+					if ($data9['buyer'] == $ligne AND $nb_parts_user >= 0)
+						$bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
+					elseif ($data9['buyer'] != $ligne AND $nb_parts_user > 0)
+						$bilan -= $prix_par_part * $nb_parts_user;
 
-					$reponse2->closeCursor();
+					$req10->closeCursor();
 				}
-				$reponse1->closeCursor();
+				$req9->closeCursor();
 
 				$bilan_format = str_replace('.', ',', round($bilan, 2));
+
+				if ($bilan != 0)
+				{
+					$alerte_bilan = true;
+				}
 
 				if ($bilan < 0 AND $bilan <= -5)
 					echo '<td class="td_manage_users" style="background-color: rgb(255, 25, 55);">';
@@ -293,10 +309,8 @@
 					echo '<td class="td_manage_users" style="background-color: rgb(90, 200, 70);">';
 				else
 					echo '<td class="td_manage_users">';
-
 						echo $bilan_format . ' €';
-
-				echo '</td>';
+					echo '</td>';
 			echo '</tr>';
 		}
 
@@ -307,47 +321,24 @@
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				$req7 = $bdd->query('SELECT COUNT(id) AS nb_total_articles FROM reference_guide');
-				$data7 = $req7->fetch();
-				echo $data7['nb_total_articles'];
-				$req7->closeCursor();
+				$req11 = $bdd->query('SELECT COUNT(id) AS nb_total_articles FROM reference_guide');
+				$data11 = $req11->fetch();
+				echo $data11['nb_total_articles'];
+				$req11->closeCursor();
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				$req8 = $bdd->query('SELECT COUNT(id) AS nb_total_comments FROM movie_house_comments');
-				$data8 = $req8->fetch();
-				echo $data8['nb_total_comments'];
-				$req8->closeCursor();
+				$req12 = $bdd->query('SELECT COUNT(id) AS nb_total_comments FROM movie_house_comments');
+				$data12 = $req12->fetch();
+				echo $data12['nb_total_comments'];
+				$req12->closeCursor();
 			echo '</td>';
 
-
-
-
-
-
-
 			echo '<td class="td_manage_users">';
-
-
-
-
 				// Alerte si un utilisateur désinscrit n'a pas payé
-
-
-
-
-
-				/*$req9 = $bdd->query('SELECT COUNT(id) AS nb_total_bugs FROM bugs');
-				$data9 = $req9->fetch();
-				echo $data9['nb_total_bugs'];
-				$req9->closeCursor();*/
+				if ($alerte_bilan == true)
+					echo '<span class="reset_warning">!</span>';
 			echo '</td>';
-
-
-
-
-
-
 		echo '</tr>';
 	echo '</table>';
 ?>

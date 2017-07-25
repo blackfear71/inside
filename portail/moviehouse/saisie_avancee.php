@@ -50,7 +50,7 @@
 			$_SESSION['doesnt_exist'] = true;
 
 		$reponse->closeCursor();
-	}	
+	}
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +130,7 @@
 									$date_doodle = formatDateForDisplay($donnees['date_doodle']);
 
 								// On affiche le tableau avec les données de la base
-								echo '<form method="post" action="saisie_film.php?modify_id=' . $_GET['modify_id'] . '" class="form_pseudo">';
+								echo '<form method="post" action="actions_films.php?modify_id=' . $_GET['modify_id'] . '" class="form_pseudo">';
 									// On réinsère les données qu'on vient de saisir en cas de mauvaise saisie
 									if ($wrong_date == true)
 									{
@@ -176,7 +176,7 @@
 							}
 							else
 							{
-								echo '<form method="post" action="saisie_film.php" class="form_pseudo">';
+								echo '<form method="post" action="actions_films.php" class="form_pseudo">';
 									echo '<span class="obligatoire">*</span>';
 									echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
 									//SMI - déb

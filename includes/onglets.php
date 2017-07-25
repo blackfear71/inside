@@ -38,7 +38,7 @@
 
 	// Movie House
 	if ($path == '/insidecgi/portail/moviehouse.php'
-	OR  $path == '/insidecgi/portail/moviehouse/saisie_film_plus.php'
+	OR  $path == '/insidecgi/portail/moviehouse/saisie_avancee.php'
 	OR  $path == '/insidecgi/portail/moviehouse/details_film.php')
 	{
 		switch ($_SESSION['view_movie_house'])

@@ -126,7 +126,7 @@
 					}
 				?>
 
-				<form method="post" action="moviehouse/saisie_film.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
+				<form method="post" action="moviehouse/actions_films.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
 					<input type="text" name="nom_film" value="<?php echo $_SESSION['nom_film_saisi']; ?>" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />
 					<input type="text" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="date_saisie_rapide" />
 					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
@@ -148,7 +148,7 @@
 					}
 				?>
 
-				<form method="post" action="moviehouse/saisie_film.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
+				<form method="post" action="moviehouse/actions_films.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
 					<input type="text" name="nom_film" value="<?php echo $_SESSION['nom_film_saisi']; ?>" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />
 					<input type="text" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="date_saisie_rapide" />
 					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
