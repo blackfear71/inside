@@ -10,8 +10,8 @@
     $buyer      = $_POST['buyer_user'];
     $comment    = htmlspecialchars($_POST['comment']);
 
-    // Test si prix numérique et positif
-    if (is_numeric($price) AND $price > 0)
+    // Test si prix numérique
+    if (is_numeric($price))
     {
       // Insertion dans la table expense_center
       $req0 = $bdd->prepare('INSERT INTO expense_center(date, price, buyer, comment) VALUES(:date, :price, :buyer, :comment)');

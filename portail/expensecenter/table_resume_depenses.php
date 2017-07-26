@@ -38,7 +38,7 @@
 
 			$reponse1->closeCursor();
 
-			echo '<td class="init_table_dates">Commentaire</td>';
+			echo '<td class="init_table_dates" style="max-width: 120px;">Commentaire</td>';
 			echo '<td class="init_table_dates">Actions</td>';
 		echo '</tr>';
 
@@ -67,7 +67,7 @@
 		while($donnees3 = $reponse3->fetch())
 		{
 			$date_achat = formatDateForDisplay($donnees3['date']);
-			$prix_achat = str_replace('.', ',', round($donnees3['price'], 2));
+			$prix_achat = str_replace('.', ',', number_format($donnees3['price'], 2));
 
 			/***************************************************/
 			/* Ligne visualisation normale (sans modification) */
@@ -146,7 +146,7 @@
 				}
 
 				// Commentaires
-				echo '<td class="table_users_comment">';
+				echo '<td class="table_users_comment" style="max-width: 120px;">';
 					echo nl2br($donnees3['comment']);
 				echo '</td>';
 
@@ -264,7 +264,7 @@
 						// Validation modification
 						echo '<span class="link_action_depenses">';
 							echo '<input type="submit" name="modify_depense" value="" title="Valider la modification" class="icone_valider_depense" />';
-						echo '</span>';						
+						echo '</span>';
 
 						// Annulation modification ligne
 						echo '<span class="link_action_depenses">';

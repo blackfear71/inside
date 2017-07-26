@@ -288,7 +288,7 @@
   elseif (isset($_SESSION['not_numeric']) AND $_SESSION['not_numeric'] == true)
   {
     echo '<div class="message_alerte_2">';
-      echo 'Le prix doit être numérique et positif.';
+      echo 'Le prix doit être numérique.';
     echo '</div>';
     $_SESSION['not_numeric'] = NULL;
   }

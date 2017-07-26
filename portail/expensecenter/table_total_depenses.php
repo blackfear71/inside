@@ -85,7 +85,7 @@
           $req1->closeCursor();
 
           // echo 'BILAN : ' . $bilan . '<br />';
-          $bilan_format = str_replace('.', ',', round($bilan, 2));
+          $bilan_format = str_replace('.', ',', number_format($bilan, 2));
 
           if ($bilan < 0 AND $bilan <= -5)
             echo '<td class="td_depenses" style="background-color: rgb(255, 25, 55);">';
