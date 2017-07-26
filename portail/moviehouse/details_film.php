@@ -36,9 +36,9 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../../favicon.png" />
 	<link rel="stylesheet" href="../../style.css" />
-  <title>Inside CGI - MH</title>
-	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  <title>Inside - MH</title>
+	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>
 
 	<body>
@@ -273,7 +273,7 @@
 												if ($j == $data3['stars'])
 												{
 													echo '<img src="images/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
-													echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_selected" />';
+													echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
 												}
 												else
 												{

@@ -21,9 +21,9 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
-  <title>Inside CGI - Inscription</title>
-	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  <title>Inside - Inscription</title>
+	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>
 
 	<body>
@@ -51,7 +51,7 @@
 			<article class="article_portail">
 
 				<div class="avertissement">
-          Ici vous pouvez vous inscrire au site INSIDE \ CGI. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu'un mot de passe. Celui-ci sera directement crypté afin de garantir la sécurité
+          Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu'un mot de passe. Celui-ci sera directement crypté afin de garantir la sécurité
           de l'accès. Une demande sera envoyée à l'administrateur qui validera votre inscription dans les plus brefs délais.
 				</div>
 

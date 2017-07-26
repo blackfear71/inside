@@ -25,16 +25,21 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="favicon.png" />
 	<link rel="stylesheet" href="style.css" />
-  <title>Inside CGI</title>
-	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  <title>Inside</title>
+	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>
 
 	<body>
 
 		<header>
 			<div class="main_title">
-				INSIDE &nbsp; \ &nbsp; CGI
+				<div class="zone_title">
+					<div class="trait_title_1"></div>
+					<img src="includes/inside.png" alt="inside" class="inside" />
+					<div class="trait_title_2"></div>
+				</div>
+				<!--INSIDE &nbsp; \ &nbsp; CGI-->
 			</div>
 
 			<div class="mask">

@@ -151,7 +151,11 @@
 						for($j = 0; $j <= 5; $j++)
 						{
 							echo '<img src="moviehouse/images/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
-							echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
+
+							if ($j == $donnees2['stars'])
+								echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
+							else
+								echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
 						}
 
 						// Bouton annulation

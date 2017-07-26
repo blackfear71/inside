@@ -13,9 +13,9 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
-  <title>Inside CGI - Bug</title>
-	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  <title>Inside - Bug</title>
+	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>
 
 	<body>

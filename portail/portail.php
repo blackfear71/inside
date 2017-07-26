@@ -12,9 +12,9 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
-  <title>Inside CGI - Portail</title>
-	<meta name="description" content="Bienvenue sur Inside CGI, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside CGI, portail, CDS Finance" />
+  <title>Inside - Portail</title>
+	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>
 
 	<body>
@@ -48,14 +48,14 @@
 					echo '<div class="new_menu_portail">';
 
 						// Lien ReferenceGuide
-						echo '<a href="referenceguide.php" class="new_menu_link_portail">';
+						/*echo '<a href="referenceguide.php" class="new_menu_link_portail">';
 							echo '<div class="menu_portail_box">';
 								echo '<div class="mask_portail"></div>';
 								echo '<div class="mask_portail_triangle"></div>';
 								//<div class="title_portail">REF<br />ERE<br />NCE<br /><br />Guide</div>
 								echo '<div class="title_portail">REFE-<br />RENCE<br /><br />Guide</div>';
 							echo '</div>';
-						echo '</a>';
+						echo '</a>';*/
 
 						// Lien TimeSheet
 						/*<a href="timesheet.php" class="new_menu_link_portail">

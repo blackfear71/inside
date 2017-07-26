@@ -169,7 +169,11 @@
 												for($m = 0; $m <= 5; $m++)
 												{
 													echo '<img src="moviehouse/images/stars/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
-													echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" />';
+
+													if ($m == $ligne[3])
+														echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
+													else
+														echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" />';
 												}
 
 												// Bouton annulation
@@ -216,7 +220,10 @@
 										for($m = 0; $m <= 5; $m++)
 										{
 											echo '<img src="moviehouse/images/stars/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
-											echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" />';
+											if ($m == 0)
+												echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
+											else
+												echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" />';
 										}
 
 										// Bouton annulation
