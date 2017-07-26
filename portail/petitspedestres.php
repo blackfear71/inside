@@ -26,7 +26,7 @@
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <title>Inside - PP</title>
+	<title>Inside - PP</title>
 	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>

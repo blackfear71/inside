@@ -87,14 +87,16 @@
           // echo 'BILAN : ' . $bilan . '<br />';
           $bilan_format = str_replace('.', ',', number_format($bilan, 2));
 
-          if ($bilan < 0 AND $bilan <= -5)
-            echo '<td class="td_depenses" style="background-color: rgb(255, 25, 55);">';
-          elseif ($bilan < 0 AND $bilan > -5)
+          if ($bilan <= -6)
+            echo '<td class="td_depenses" style="background-color: #ee4949">';
+          elseif ($bilan <= -3 AND $bilan > -6)
+            echo '<td class="td_depenses" style="background-color: #ff9147;">';
+          elseif ($bilan < 0 AND $bilan > -3)
             echo '<td class="td_depenses" style="background-color: #fffd4c;">';
           elseif ($bilan > 0 AND $bilan < 5)
-            echo '<td class="td_depenses" style="background-color: #91d784;">';
+            echo '<td class="td_depenses" style="background-color: #b6fc78;">';
           elseif ($bilan > 0 AND $bilan >= 5)
-            echo '<td class="td_depenses" style="background-color: rgb(90, 200, 70);">';
+            echo '<td class="td_depenses" style="background-color: #71d058;">';
           else
             echo '<td class="td_depenses">';
               echo '<span class="somme_bilan">' . $bilan_format . ' €</span>';

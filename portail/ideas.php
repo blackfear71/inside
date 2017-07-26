@@ -16,7 +16,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../favicon.png" />
 	<link rel="stylesheet" href="../style.css" />
-  <title>Inside - &#35;TheBox</title>
+	<title>Inside - &#35;TheBox</title>
 	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside, portail, CDS Finance" />
   </head>
