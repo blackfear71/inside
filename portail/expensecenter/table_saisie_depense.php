@@ -9,7 +9,7 @@
 
   echo '<div class="zone_saisie_depense">';
 
-    echo '<form method="post" action="expensecenter/actions.php">';
+    echo '<form method="post" action="expensecenter/actions.php?year=' . $_GET['year'] . '">';
 
       echo '<table class="table_saisie_depense">';
 

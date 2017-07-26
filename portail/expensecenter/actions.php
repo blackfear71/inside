@@ -192,5 +192,5 @@
   }
 
   // Redirection
-  header('location: ../expensecenter.php');
+  header('location: ../expensecenter.php?year=' . $_GET['year']);
 ?>
