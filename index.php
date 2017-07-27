@@ -36,7 +36,7 @@
 			<div class="main_title">
 				<div class="zone_title">
 					<div class="trait_title_1"></div>
-					<img src="includes/inside.png" alt="inside" class="inside" />
+					<img src="includes/icons/inside.png" alt="inside" class="inside" />
 					<div class="trait_title_2"></div>
 				</div>
 				<!--INSIDE &nbsp; \ &nbsp; CGI-->
