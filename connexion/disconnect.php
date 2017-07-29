@@ -12,7 +12,7 @@
 	$_SESSION['connected'] = false;
 
 	// Retour sur index.php
-	header('location: /insidecgi/index.php');
+	header('location: /inside/index.php');
 
 	exit;
 ?>

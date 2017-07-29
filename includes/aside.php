@@ -53,7 +53,7 @@
 	// Déconnexion
 	if ($disconnect == true)
 	{
-		echo '<form method="post" action="/insidecgi/connexion/disconnect.php">';
+		echo '<form method="post" action="/inside/connexion/disconnect.php">';
 			echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
 			echo '<div class="hover_aside">Déconnexion</div>';
 		echo '</form>';
@@ -62,8 +62,8 @@
 	// Profil
 	if ($profil == true)
 	{
-		echo '<a href="/insidecgi/connexion/profil.php?user=' . $_SESSION['identifiant'] . '" title="Profil" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/profile.png" alt="profile" title="Profil" class="icon_profile" />';
+		echo '<a href="/inside/connexion/profil.php?user=' . $_SESSION['identifiant'] . '" title="Profil" class="link_profile">';
+			echo '<img src="/inside/includes/icons/profile.png" alt="profile" title="Profil" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Profil</div>';
 	}
@@ -72,7 +72,7 @@
 	if ($menu_rg == true)
 	{
 		echo '<a onclick="afficherMasquer(\'menu\')" title="Menu" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/menu.png" alt="menu" title="Menu" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/menu.png" alt="menu" title="Menu" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Menu</div>';
 
@@ -97,8 +97,8 @@
 	// Ajouter un article
 	if ($add_article == true)
 	{
-		echo '<a href="/insidecgi/portail/referenceguide/saisie_article.php" title="Ajouter un article" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/add.png" alt="add" title="Ajouter un article" class="icon_profile" />';
+		echo '<a href="/inside/portail/referenceguide/saisie_article.php" title="Ajouter un article" class="link_profile">';
+			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un article" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
@@ -106,8 +106,8 @@
 	// Ajouter un film (avancé)
 	if ($add_film == true)
 	{
-		echo '<a href="/insidecgi/portail/moviehouse/saisie_avancee.php" title="Ajouter un film (avancé)" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_profile" />';
+		echo '<a href="/inside/portail/moviehouse/saisie_avancee.php" title="Ajouter un film (avancé)" class="link_profile">';
+			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
@@ -115,8 +115,8 @@
 	// Modifier les détails
 	if ($modify_film == true AND $_SESSION['doesnt_exist'] != true)
 	{
-		echo '<a href="/insidecgi/portail/moviehouse/saisie_avancee.php?modify_id=' . $_GET['id_film'] . '" title="Modifier les détails" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
+		echo '<a href="/inside/portail/moviehouse/saisie_avancee.php?modify_id=' . $_GET['id_film'] . '" title="Modifier les détails" class="link_profile">';
+			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Modifier</div>';
 	}
@@ -133,8 +133,8 @@
 	// Retour à l'accueil
 	if ($back_index == true)
 	{
-		echo '<a href="/insidecgi/index.php" class="link_profile" title="Retour à l\'accueil" style="margin-top: 0;">';
-				echo '<img src="/insidecgi/includes/icons/back.png" alt="accueil" title="Retour à l\'accueil" class="icon_profile" />';
+		echo '<a href="/inside/index.php" class="link_profile" title="Retour à l\'accueil" style="margin-top: 0;">';
+				echo '<img src="/inside/includes/icons/back.png" alt="accueil" title="Retour à l\'accueil" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -142,8 +142,8 @@
 	// Retour au portail
 	if ($back == true)
 	{
-		echo '<a href="/insidecgi/portail/portail.php" title="Retour au portail" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/back.png" alt="back" title="Retour au portail" class="icon_profile" />';
+		echo '<a href="/inside/portail/portail.php" title="Retour au portail" class="link_profile">';
+			echo '<img src="/inside/includes/icons/back.png" alt="back" title="Retour au portail" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -151,8 +151,8 @@
 	// Retour au portail administration
 	if ($back_admin == true)
 	{
-		echo '<a href="/insidecgi/administration/administration.php" title="Retour au portail administration" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/back.png" alt="back_admin" title="Retour au portail administration" class="icon_profile" />';
+		echo '<a href="/inside/administration/administration.php" title="Retour au portail administration" class="link_profile">';
+			echo '<img src="/inside/includes/icons/back.png" alt="back_admin" title="Retour au portail administration" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -160,8 +160,8 @@
 	// Boite à idées
 	if ($ideas == true)
 	{
-		echo '<a href="/insidecgi/portail/ideas.php?view=inprogress" title="&#35;TheBox" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
+		echo '<a href="/inside/portail/ideas.php?view=inprogress" title="&#35;TheBox" class="link_profile">';
+			echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">#TheBox</div>';
 	}
@@ -169,8 +169,8 @@
 	// Signaler un bug
 	if ($bug == true)
 	{
-		echo '<a href="/insidecgi/portail/bug.php" title="Signaler un bug" class="link_profile">';
-			echo '<img src="/insidecgi/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
+		echo '<a href="/inside/portail/bug.php" title="Signaler un bug" class="link_profile">';
+			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Signaler</div>';
 	}

@@ -1,6 +1,5 @@
 <?php
-	//echo '<div class="footer_title">INSIDE&nbsp;\&nbsp;CGI</div>';
-	echo '<img src="/insidecgi/includes/icons/inside_mini.png" alt="inside" class="inside_mini" />';
+	echo '<img src="/inside/includes/icons/inside_mini.png" alt="inside" class="inside_mini" />';
 
 	echo '<div class="footer_line"></div>';
 

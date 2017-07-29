@@ -3,7 +3,7 @@
 	try
 	{
 		// En local
-		$bdd = new PDO('mysql:host=localhost; dbname=inside_cgi; charset=utf8',
+		$bdd = new PDO('mysql:host=localhost; dbname=inside; charset=utf8',
 					     'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 	}
 	catch (Exception $e)

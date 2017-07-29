@@ -39,7 +39,6 @@
 					<img src="includes/icons/inside.png" alt="inside" class="inside" />
 					<div class="trait_title_2"></div>
 				</div>
-				<!--INSIDE &nbsp; \ &nbsp; CGI-->
 			</div>
 
 			<div class="mask">

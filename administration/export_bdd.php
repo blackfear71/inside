@@ -5,7 +5,7 @@
     $mysqlPassword      = "";
     $mysqlHostName      = "localhost";
 
-    $DbName             = "inside_cgi";
+    $DbName             = "inside";
     $backup_name        = "mybackup.sql";
 
 		// Ou ajouter un 5ème paramètre sous forme de tableau (array) des tables spécifiquements choisies : array("mytable1","mytable2","mytable3") pour plusieurs tables

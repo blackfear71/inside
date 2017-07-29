@@ -1549,7 +1549,7 @@ article
 	height: 20px;
 	border: 0;
 	background-color: transparent;
-	background-image: url("/insidecgi/portail/moviehouse/images/not_interested.png");
+	background-image: url("/inside/portail/moviehouse/images/not_interested.png");
 	background-size: 20px;
 	background-repeat: no-repeat;
 	cursor: pointer;
@@ -1563,7 +1563,7 @@ article
 	height: 25px;
 	border: 0;
 	background-color: transparent;
-	background-image: url("/insidecgi/portail/moviehouse/images/participate.png");
+	background-image: url("/inside/portail/moviehouse/images/participate.png");
 	background-size: 25px;
 	background-repeat: no-repeat;
 	cursor: pointer;
@@ -1578,7 +1578,7 @@ article
 	height: 30px;
 	border: 0;
 	background-color: transparent;
-	background-image: url("/insidecgi/portail/moviehouse/images/seen.png");
+	background-image: url("/inside/portail/moviehouse/images/seen.png");
 	background-size: 30px;
 	background-repeat: no-repeat;
 	cursor: pointer;
