@@ -63,7 +63,7 @@
 						</div>
 					</a>
 
-					<a href="" class="new_menu_link_admin">
+					<!--<a href="" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -71,7 +71,7 @@
 								<div class="saut_ligne">REFERENCE<br />GUIDE</div>
 							</div>
 						</div>
-					</a>
+					</a>-->
 
 					<a href="manage_films.php" class="new_menu_link_admin">
 						<div class="menu_admin_box">

@@ -1,6 +1,31 @@
-﻿Inside
+﻿                      ___          ___                   ___         ___     
+            ___      /  /\        /  /\        ___      /  /\       /  /\    
+           /__/\    /  /::|      /  /::\      /__/\    /  /::\     /  /::\   
+           \__\:\  /  /:|:|     /__/:/\:\     \__\:\  /  /:/\:\   /  /:/\:\  
+           /  /::\/  /:/|:|__  _\_ \:\ \:\    /  /::\/  /:/  \:\ /  /::\ \:\ 
+        __/  /:/\/__/:/ |:| /\/__/\ \:\ \:\__/  /:/\/__/:/ \__\:/__/:/\:\ \:\
+       /__/\/:/~~\__\/  |:|/:/\  \:\ \:\_\/__/\/:/  \  \:\ /  /:|  \:\ \:\_\/
+       \  \::/       |  |:/:/  \  \:\_\:\ \  \::/    \  \:\  /:/ \  \:\ \:\  
+        \  \:\       |__|::/    \  \:\/:/  \  \:\     \  \:\/:/   \  \:\_\/  
+         \__\/       /__/:/      \  \::/    \__\/      \__\::/     \  \:\    
+                     \__\/        \__\/                             \__\/    
 
-Ce site internet créé par P. H. est un portail permettant de gérer une base de données de films.
-C'est de la balle :)
+---------------------------------------------------------------------------------------
+***************************************************************************************
 
-Merci Sacha ;)
+		INSIDE
+
+
+	INSIDE est une plateforme de partage créée par les membres pour les membres.
+
+	Fonctionnalités :
+	-----------------
+		- MOVIE HOUSE          : base de données de films et organisation
+					 de soirées cinéma
+		- EXPENSE CENTER       : outil de suivi des dépenses des membres
+		- LES PETITS PEDESTRES : organisation d'entrainements ou
+					 de courses à pied
+		- #THEBOX              : boîte à idées
+
+---------------------------------------------------------------------------------------
+***************************************************************************************
