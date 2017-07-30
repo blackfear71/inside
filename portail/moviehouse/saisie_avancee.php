@@ -101,12 +101,12 @@
 					?>
 				</div>
 
-				<div class="categorie_profil" style="margin-top: 50px;">
-					<div class="titre_profil">
+				<div class="titre_saisie_avancee">
+					<div class="sous_titre_saisie_avancee">
 						Informations sur le média
 					</div>
 
-					<div class="contenu_profil">
+					<div class="contenu_saisie_avancee">
 						<?php
 							if (isset($_GET['modify_id']) AND !empty($_GET['modify_id']))
 							{
@@ -130,7 +130,7 @@
 									$date_doodle = formatDateForDisplay($donnees['date_doodle']);
 
 								// On affiche le tableau avec les données de la base
-								echo '<form method="post" action="actions_films.php?modify_id=' . $_GET['modify_id'] . '" class="form_pseudo">';
+								echo '<form method="post" action="actions_films.php?modify_id=' . $_GET['modify_id'] . '" class="form_saisie_avancee">';
 									// On réinsère les données qu'on vient de saisir en cas de mauvaise saisie
 									if ($wrong_date == true)
 									{
@@ -176,7 +176,7 @@
 							}
 							else
 							{
-								echo '<form method="post" action="actions_films.php" class="form_pseudo">';
+								echo '<form method="post" action="actions_films.php" class="form_saisie_avancee">';
 									echo '<span class="obligatoire">*</span>';
 									echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
 									//SMI - déb

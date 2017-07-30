@@ -52,243 +52,314 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Gestion pseudo -->
-				<div class="categorie_profil">
-					<div class="titre_profil">
-						Changement de pseudo
+
+				<!-- Bloc utilisateur -->
+				<div class="zone_profil_utilisateur">
+					<!-- Titre -->
+					<div class="zone_profil_utilisateur_titre">
+						<?php
+							// Affichage pseudo
+							echo $_SESSION['full_name'];
+						?>
 					</div>
 
-					<div class="contenu_profil">
-						<p class="actual">Pseudo actuel : <span class="pseudo"><?php echo $_SESSION['full_name']; ?></span></p>
+					<!-- Tableau modification pseudo & avatar -->
+					<table class="zone_profil_utilisateur_table">
+						<tr>
+							<!-- Saisie pseudo -->
+							<td class="zone_profil_utilisateur_pseudo">
+								<form method="post" action="change_pseudo.php" class="zone_profil_utilisateur_pseudo_form">
+									<input type="text" name="new_pseudo" placeholder="Nouveau pseudo" maxlength="255" class="monoligne_profil" required />
+									<input type="submit" name="saisie_pseudo" value="Valider" class="saisie_valider_profil" />
+								</form>
+							</td>
 
-						<form method="post" action="change_pseudo.php" class="form_pseudo">
-							<input type="text" name="new_pseudo" placeholder="Nouveau pseudo" maxlength="255" class="monoligne_profil" required />
-							<input type="submit" name="saisie_pseudo" value="Valider" class="saisie_valider_pseudo" />
-						</form>
-					</div>
-				</div>
+							<!-- Saisie avatar -->
+							<td class="zone_profil_utilisateur_avatar">
+								<div class="zone_avatar">
+									<form method="post" action="avatar.php" enctype="multipart/form-data" runat="server">
+										<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
 
-				<!-- Gestion avatar -->
-				<div class="categorie_profil">
-					<div class="titre_profil">
-						Avatar
-					</div>
+										<span class="zone_parcourir_avatar">+<input type="file" accept="image/*" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" /></span>
 
-					<div class="contenu_profil">
-						<div class="zone_avatar">
-							<?php
-								include('../includes/appel_bdd.php');
+										<div class="mask_avatar">
+											<img id="output" class="avatar"/>
+										</div>
 
-								$reponse = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant="' . $_SESSION['identifiant'] . '"');
-								$donnees = $reponse->fetch();
-
-								if (isset($donnees['avatar']) AND !empty($donnees['avatar']))
-									echo '<img src="avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_preview" />';
-
-								$reponse->closeCursor();
-							?>
-
-							<form method="post" action="avatar.php" enctype="multipart/form-data" runat="server">
-								<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
-
-								<span class="zone_parcourir_avatar">+<input type="file" accept="image/*" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" /></span>
-
-								<div class="mask_avatar">
-									<img id="output" class="avatar"/>
+										<input type="submit" name="post_avatar" value="Modifier l'avatar" class="saisie_valider_profil" />
+									</form>
 								</div>
+							</td>
 
-								<input type="submit" name="post_avatar" value="Envoyer" class="saisie_envoyer_avatar" />
-								<input type="submit" name="delete_avatar" value="Supprimer" class="saisie_envoyer_avatar" />
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<!-- Gestion mot de passe -->
-				<div class="categorie_profil">
-					<div class="titre_profil">
-						Changement de mot de passe
-					</div>
-
-					<div class="contenu_profil">
-						<form method="post" action="change_mdp.php" class="form_pseudo">
-							<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_profil_2" required />
-							<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_profil_2" required />
-							<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_profil_2" required />
-							<input type="submit" name="saisie_mdp" value="Valider" class="saisie_valider_mdp" />
-						</form>
-					</div>
-				</div>
-
-				<!-- Gestion préférences -->
-				<div class="categorie_profil">
-					<div class="titre_profil">
-						Mes préférences
-					</div>
-
-					<div class="contenu_profil">
-						<form method="post" action="preferences.php" class="form_preference">
-							<div class="titre_preference">
-								Choix de la vue par défaut Movie House
-							</div>
-
-							<div class="contenu_preference">
+							<!-- Suppression avatar -->
+							<td class="zone_profil_utilisateur_suppr">
 								<?php
-									switch ($_SESSION['view_movie_house'])
-									{
-										case "D":
-											echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" required />';
-											echo '<label for="synthese">Synthèse</label>';
-											echo '<br />';
-											echo '<input id="detail" type= "radio" name="movie_house_view" value="D" checked required />';
-											echo '<label for="detail">Détails</label>';
-											echo '<br />';
-											break;
+									// Affichage avatar
+									include('../includes/appel_bdd.php');
 
-										case "S":
-										default:
-											echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" checked required />';
-											echo '<label for="synthese">Synthèse</label>';
-											echo '<br />';
-											echo '<input id="detail" type= "radio" name="movie_house_view" value="D" required />';
-											echo '<label for="detail">Détails</label>';
-											echo '<br />';
-											break;
-									}
+									$reponse = $bdd->query('SELECT identifiant, full_name, avatar FROM users WHERE identifiant="' . $_SESSION['identifiant'] . '"');
+									$donnees = $reponse->fetch();
+
+									if (isset($donnees['avatar']) AND !empty($donnees['avatar']))
+										echo '<img src="avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="zone_profil_utilisateur_suppr_avatar" />';
+
+									$reponse->closeCursor();
 								?>
-							</div>
 
-							<div class="titre_preference">
-								Affichage de la date du jour dans la liste des films
-							</div>
-
-							<div class="contenu_preference">
-
-								<?php
-									switch ($_SESSION['today_movie_house'])
-									{
-										case "Y":
-											echo '<input id="afficher" type="checkbox" name="affiche_date" checked />';
-											echo '<label for="afficher">Afficher</label>';
-											break;
-
-										case "N":
-										default:
-											echo '<input id="afficher" type="checkbox" name="affiche_date" />';
-											echo '<label for="afficher">Afficher</label>';
-											break;
-									}
-								?>
-							</div>
-
-							<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_preferences" />
-						</form>
-					</div>
+								<form method="post" action="avatar.php" enctype="multipart/form-data" runat="server">
+									<input type="submit" name="delete_avatar" value="Supprimer l'avatar" class="saisie_valider_profil" />
+								</form>
+							</td>
+						</tr>
+					</table>
 				</div>
 
-				<!-- Gestion statistiques -->
-				<div class="categorie_profil">
-					<div class="titre_profil">
+				<!-- Bloc contributions -->
+				<div class="zone_profil_generique">
+					<!-- Titre -->
+					<div class="zone_profil_utilisateur_titre">
 						Mes contributions
 					</div>
 
-					<?php
-						echo '<div class="contenu_profil">';
-							include('../includes/appel_bdd.php');
+					<!-- Tableau contributions -->
+					<table class="zone_profil_preferences_table">
+						<!-- 3 catégories par ligne ! -->
+						<tr>
+							<!-- Contributions Movie House -->
+							<td class="zone_profil_contribution">
+								<div class="titre_preference">
+									MOVIE HOUSE
+								</div>
 
-							// Nombre de publications
-							$reponse = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $_SESSION['identifiant'] . '"');
-							$donnees = $reponse->fetch();
-							echo '<p class="actual">Nombre de publications <span class="pseudo">ReferenceGuide</span> : <span class="pseudo">' . $donnees['nb_publications'] . '</span></p>';
-							$reponse->closeCursor();
+								<div class="sous_titre_preference">
+									Nombre de commentaires
+								</div>
 
-							// Nombre de votes utiles
-							//echo '<p class="actual">Nombre de votes "utile" : <span class="pseudo">NB ICI</span></p>';
+								<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+									<?php
+										// Nombre de commentaires Movie House
+										$reponse = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $_SESSION['identifiant'] . '"');
+										$donnees = $reponse->fetch();
+										echo $donnees['nb_comments'];
+										$reponse->closeCursor();
+									?>
+								</div>
+							</td>
 
-							// Nombre de MAJ/SUP en attente
-							//echo '<p class="actual">Demandes de mise à jour / suppression en attente : <span class="pseudo">NB ICI</span></p>';
+							<!-- Contributions Expense Center -->
+							<td class="zone_profil_contribution">
+								<div class="titre_preference">
+									EXPENSE CENTER
+								</div>
 
-							// Nombre d'idées
-							$reponse = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $_SESSION['identifiant'] . '"');
-							$donnees = $reponse->fetch();
-							echo '<p class="actual">Nombre d\'idées soumises <span class="pseudo">#TheBox</span> : <span class="pseudo">' . $donnees['nb_idees'] . '</span></p>';
-							$reponse->closeCursor();
+								<div class="sous_titre_preference">
+									Solde
+								</div>
 
-							// Nombre de commentaires Movie House
-							$reponse = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $_SESSION['identifiant'] . '"');
-							$donnees = $reponse->fetch();
-							echo '<p class="actual">Nombre de commentaires <span class="pseudo">MovieHouse</span> : <span class="pseudo">' . $donnees['nb_comments'] . '</span></p>';
-							$reponse->closeCursor();
+								<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+									<?php
+									// Solde des dépenses
+									$req1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
 
-							// Solde des dépenses
-		          $req1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+									$bilan = 0;
 
-		          $bilan = 0;
+									while($data1 = $req1->fetch())
+									{
+										// Prix d'achat
+										$prix_achat = $data1['price'];
 
-		          while($data1 = $req1->fetch())
-		          {
-		            // Prix d'achat
-		            $prix_achat = $data1['price'];
+										// Identifiant de l'acheteur
+										$acheteur = $data1['buyer'];
 
-		            // Identifiant de l'acheteur
-		            $acheteur = $data1['buyer'];
+										// Nombre de parts et prix par parts
+										$req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
 
-		            // Nombre de parts et prix par parts
-		            $req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
+										$nb_parts_total = 0;
+										$nb_parts_user = 0;
 
-		            $nb_parts_total = 0;
-		            $nb_parts_user = 0;
+										while($data2 = $req2->fetch())
+										{
+											// Nombre de parts total
+											$nb_parts_total = $nb_parts_total + $data2['parts'];
 
-		            while($data2 = $req2->fetch())
-		            {
-		              // Nombre de parts total
-		              $nb_parts_total = $nb_parts_total + $data2['parts'];
+											// Nombre de parts de l'utilisateur
+											if ($_SESSION['identifiant'] == $data2['identifiant'])
+												$nb_parts_user = $data2['parts'];
+										}
 
-		              // Nombre de parts de l'utilisateur
-		              if ($_SESSION['identifiant'] == $data2['identifiant'])
-		                $nb_parts_user = $data2['parts'];
-		            }
+										if ($nb_parts_total != 0)
+											$prix_par_part = $prix_achat / $nb_parts_total;
+										else
+											$prix_par_part = 0;
 
-		            if ($nb_parts_total != 0)
-		              $prix_par_part = $prix_achat / $nb_parts_total;
-		            else
-		              $prix_par_part = 0;
+										// On fait la somme des dépenses moins les parts consommées pour trouver le bilan
+										if ($data1['buyer'] == $_SESSION['identifiant'])
+											$bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
+										else
+											$bilan = $bilan - ($prix_par_part * $nb_parts_user);
 
-		            // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-		            if ($data1['buyer'] == $_SESSION['identifiant'])
-		              $bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
-		            else
-		              $bilan = $bilan - ($prix_par_part * $nb_parts_user);
+										$req2->closeCursor();
 
-		            $req2->closeCursor();
+									}
 
-		          }
+									$req1->closeCursor();
 
-		          $req1->closeCursor();
+									$bilan_format = str_replace('.', ',', round($bilan, 2));
 
-		          $bilan_format = str_replace('.', ',', round($bilan, 2));
+									echo $bilan_format . ' €';
+									?>
+								</div>
+							</td>
 
-							echo '<p class="actual">Solde <span class="pseudo">ExpenseCenter</span> : <span class="pseudo">' . $bilan_format . ' €</span></p>';
-						echo '</div>';
-					?>
+							<!-- Contributions #TheBox -->
+							<td class="zone_profil_contribution">
+								<div class="titre_preference">
+									#THEBOX
+								</div>
+
+								<div class="sous_titre_preference">
+									Nombre d'idées soumises
+								</div>
+
+								<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+									<?php
+									// Nombre d'idées
+									$reponse = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $_SESSION['identifiant'] . '"');
+									$donnees = $reponse->fetch();
+									echo $donnees['nb_idees'];
+									$reponse->closeCursor();
+									?>
+								</div>
+							</td>
+						</tr>
+					</table>
 				</div>
 
-				<!-- Gestion désinscription -->
-				<div class="categorie_profil">
-					<div class="titre_profil">
-						Désinscription
+				<!-- Bloc préférences -->
+				<div class="zone_profil_generique">
+					<!-- Titre -->
+					<div class="zone_profil_utilisateur_titre">
+						Préférences
 					</div>
 
-					<?php
-						echo '<div class="contenu_profil">';
-							echo '<p class="actual">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l\'administrateur à l\'aide de ce bouton. Il validera votre choix après vérification.</p>';
+					<!-- Tableau modification préférences -->
+					<table class="zone_profil_preferences_table">
+						<tr>
+							<!-- Préférences Movie House -->
+							<td class="zone_profil_preferences_mh">
 
-							echo '<form method="post" action="ask_inscription.php" class="form_preference">';
-								echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="saisie_valider_preferences" />';
-							echo '</form>';
-						echo '</div>';
-					?>
+								<form method="post" action="preferences.php">
+
+									<div class="titre_preference">
+										MOVIE HOUSE
+									</div>
+
+									<div class="sous_titre_preference">
+										Choix de la vue par défaut
+									</div>
+
+									<div class="contenu_preference">
+										<?php
+											switch ($_SESSION['view_movie_house'])
+											{
+												case "D":
+													echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" required />';
+													echo '<label for="synthese">Synthèse</label>';
+													echo '<br />';
+													echo '<input id="detail" type= "radio" name="movie_house_view" value="D" checked required />';
+													echo '<label for="detail">Détails</label>';
+													echo '<br />';
+													break;
+
+												case "S":
+												default:
+													echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" checked required />';
+													echo '<label for="synthese">Synthèse</label>';
+													echo '<br />';
+													echo '<input id="detail" type= "radio" name="movie_house_view" value="D" required />';
+													echo '<label for="detail">Détails</label>';
+													echo '<br />';
+													break;
+											}
+										?>
+									</div>
+
+									<div class="sous_titre_preference">
+										Affichage de la date du jour dans la liste des films
+									</div>
+
+									<div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+										<?php
+											switch ($_SESSION['today_movie_house'])
+											{
+												case "Y":
+													echo '<input id="afficher" type="checkbox" name="affiche_date" checked />';
+													echo '<label for="afficher">Afficher</label>';
+													break;
+
+												case "N":
+												default:
+													echo '<input id="afficher" type="checkbox" name="affiche_date" />';
+													echo '<label for="afficher">Afficher</label>';
+													break;
+											}
+										?>
+									</div>
+
+									<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_profil" style="margin-top: 20px;" />
+
+								</form>
+
+							</td>
+						</tr>
+					</table>
 				</div>
+
+				<!-- Bloc utilisateur -->
+				<div class="zone_profil_generique">
+					<!-- Titre -->
+					<div class="zone_profil_utilisateur_titre">
+						Utilisateur
+					</div>
+
+					<!-- Tableau modification mot de passe & désinscription -->
+					<table class="zone_profil_utilisateur_table">
+						<tr>
+							<!-- Saisie mot de passe -->
+							<td class="zone_profil_utilisateur_mdp">
+								<form method="post" action="change_mdp.php" class="zone_profil_utilisateur_pseudo_form">
+									<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_profil" required />
+									<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_profil" required />
+									<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_profil" required />
+									<input type="submit" name="saisie_mdp" value="Valider" class="saisie_valider_profil" />
+								</form>
+							</td>
+
+							<!-- Demande désinscription -->
+							<td class="zone_profil_utilisateur_desinscription">
+								<div class="message_profil">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l'administrateur à l'aide de ce bouton. Il validera votre choix après vérification.</div>
+
+								<form method="post" action="ask_inscription.php" class="form_preference">
+									<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="saisie_valider_profil" />
+								</form>
+
+								<?php
+									// On vérifie s'il y a déjà une demande
+									$reponse = $bdd->query('SELECT id, identifiant, reset FROM users WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
+									$donnees = $reponse->fetch();
+
+									if ($donnees['reset'] == "D")
+										echo '<div class="message_profil" style="font-weight: bold;">Une demande est déjà en cours.</div>';
+									else
+										echo '<div class="message_profil" style="font-weight: bold;">Aucune demande en cours.</div>';
+
+									$reponse->closeCursor();
+								?>
+							</td>
+						</tr>
+					</table>
+				</div>
+
 			</article>
 		</section>
 
