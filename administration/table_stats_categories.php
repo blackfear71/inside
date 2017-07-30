@@ -380,7 +380,7 @@
 				echo 'Bilan';
 			echo '</td>';
 
-			if (-0.01 < $somme_bilans_finale < 0.01)
+			if ($somme_bilans_finale < 0.01 AND $somme_bilans_finale > -0.01)
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
 			else
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif; background-color: #ee4949;">';
