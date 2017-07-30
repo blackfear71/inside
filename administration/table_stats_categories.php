@@ -380,7 +380,7 @@
 				echo 'Bilan';
 			echo '</td>';
 
-			if ($somme_bilans_finale == 0)
+			if (-0.01 < $somme_bilans_finale < 0.01)
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
 			else
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif; background-color: #ee4949;">';
@@ -395,7 +395,7 @@
 
 			echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
 				// Alerte si un utilisateur désinscrit n'a pas payé
-				if ($alerte_bilan == true or $somme_bilans_finale > 0)
+				if ($alerte_bilan == true OR $somme_bilans_finale > 0.01 OR $somme_bilans_finale < -0.01)
 					echo '<span class="reset_warning">!</span>';
 			echo '</td>';
 		echo '</tr>';
