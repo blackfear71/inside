@@ -7,6 +7,7 @@
 
 	// Fonctions
 	include('../../includes/fonctions_dates.php');
+	include('../../includes/fonctions_regex.php');
 
 	// Contrôle film non à supprimer
 	include('../../includes/appel_bdd.php');
@@ -426,8 +427,12 @@
 									// Date et heure
 									echo '<div class="date_comments_films">Le ' . formatDateForDisplay($donnees['date']) . ' à ' . formatTimeForDisplay($donnees['time']) . '</div>';
 
+									// On cherche les liens dans les commentaires
+									$commentaire = extract_link(nl2br($donnees['comment']));
+
 									// Commentaire
-									echo '<div class="comment_comments_films">' . nl2br($donnees['comment']) . '</div>';
+									echo '<div class="comment_comments_films">' . $commentaire . '</div>';
+
 								echo '</div>';
 							}
 							$reponse->closeCursor();

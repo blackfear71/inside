@@ -97,7 +97,7 @@
 						</div>
 					</a>
 
-					<a href="show_purge.php" class="new_menu_link_admin">
+					<!--<a href="show_purge.php" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -105,7 +105,7 @@
 								<div class="saut_ligne">FICHIERS<br />TEMPORAIRES</div>
 							</div>
 						</div>
-					</a>
+					</a>-->
 
 					<a href="reports.php?view=unresolved" class="new_menu_link_admin">
 						<div class="menu_admin_box">

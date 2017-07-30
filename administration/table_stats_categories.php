@@ -20,7 +20,7 @@
 				echo 'Movie House';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 25%;">';
+			echo '<td colspan="4" class="init_td_manage_users" style="width: 25%;">';
 				echo 'ExpenseCenter';
 			echo '</td>';
 		echo '</tr>';
@@ -34,7 +34,7 @@
 				echo 'Nombre de commentaires';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users">';
+			echo '<td colspan="4" class="init_td_manage_users">';
 				echo 'Bilan des dépenses';
 			echo '</td>';
 		echo '</tr>';
@@ -44,6 +44,10 @@
 		// Initialisations calcul total des inscrits
 		$nb_tot_publications    = 0;
 		$nb_tot_commentaires    = 0;
+
+		// Initialisation contrôle somme des bilans nulle pour les dépenses avec parts
+		$somme_bilans = 0;
+		$somme_bilans_finale = 0;
 
 		// Recherche des données utilisateurs
 		$reponse = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
@@ -111,32 +115,34 @@
 
 					// On fait la somme des dépenses moins les parts consommées pour trouver le bilan
 					if ($donnees1['buyer'] == $donnees['identifiant'])
-						$bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
+						$bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
 					else
-						$bilan = $bilan - ($prix_par_part * $nb_parts_user);
+						$bilan -= $prix_par_part * $nb_parts_user;
 
 					$reponse2->closeCursor();
-
 				}
 				$reponse1->closeCursor();
 
-				$bilan_format = str_replace('.', ',', round($bilan, 2));
+				$bilan_format = str_replace('.', ',', number_format($bilan, 2));
 
 				if ($bilan <= -6)
-					echo '<td class="td_depenses" style="background-color: #ee4949">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #ee4949">';
 				elseif ($bilan <= -3 AND $bilan > -6)
-					echo '<td class="td_depenses" style="background-color: #ff9147;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #ff9147;">';
 				elseif ($bilan < 0 AND $bilan > -3)
-					echo '<td class="td_depenses" style="background-color: #fffd4c;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #fffd4c;">';
 				elseif ($bilan > 0 AND $bilan < 5)
-					echo '<td class="td_depenses" style="background-color: #b6fc78;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #b6fc78;">';
 				elseif ($bilan > 0 AND $bilan >= 5)
-					echo '<td class="td_depenses" style="background-color: #71d058;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #71d058;">';
 				else
-					echo '<td class="td_manage_users">';
+					echo '<td colspan="4" class="td_depenses">';
 						echo $bilan_format . ' €';
 					echo '</td>';
 			echo '</tr>';
+
+			// Somme des bilans (pour contrôle somme avec parts à 0)
+			$somme_bilans += $bilan;
 		}
 
 		$reponse->closeCursor();
@@ -144,6 +150,7 @@
 		// On récupère un tableau des utilisateurs inscrits
 		$utilisateurs_inscrits = array();
 		$i = 0;
+
 		$req4 = $bdd->query('SELECT identifiant FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 		while($data4 = $req4->fetch())
 		{
@@ -286,15 +293,21 @@
 
 					// On fait la somme des dépenses moins les parts consommées pour trouver le bilan
 					if ($data9['buyer'] == $ligne AND $nb_parts_user >= 0)
+					{
 						$bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
+						$somme_bilans += $bilan;
+					}
 					elseif ($data9['buyer'] != $ligne AND $nb_parts_user > 0)
+					{
 						$bilan -= $prix_par_part * $nb_parts_user;
+						$somme_bilans += $bilan;
+					}
 
 					$req10->closeCursor();
 				}
 				$req9->closeCursor();
 
-				$bilan_format = str_replace('.', ',', round($bilan, 2));
+				$bilan_format = str_replace('.', ',', number_format($bilan, 2));
 
 				if ($bilan != 0)
 				{
@@ -302,21 +315,46 @@
 				}
 
 				if ($bilan <= -6)
-					echo '<td class="td_depenses" style="background-color: #ee4949">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #ee4949">';
 				elseif ($bilan <= -3 AND $bilan > -6)
-					echo '<td class="td_depenses" style="background-color: #ff9147;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #ff9147;">';
 				elseif ($bilan < 0 AND $bilan > -3)
-					echo '<td class="td_depenses" style="background-color: #fffd4c;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #fffd4c;">';
 				elseif ($bilan > 0 AND $bilan < 5)
-					echo '<td class="td_depenses" style="background-color: #b6fc78;">';
+					echo '<td colspan="4" class="td_depenses" style="background-color: #b6fc78;">';
 				elseif ($bilan > 0 AND $bilan >= 5)
-					echo '<td class="td_depenses" style="background-color: #71d058;">';
+					echo '<td colspan="5" class="td_depenses" style="background-color: #71d058;">';
 				else
-					echo '<td class="td_manage_users">';
+					echo '<td colspan="4" class="td_depenses">';
 						echo $bilan_format . ' €';
 					echo '</td>';
 			echo '</tr>';
+
+			// Somme des bilans (pour contrôle somme avec parts à 0)
+			$somme_bilans += $bilan;
 		}
+
+		// On cherche les dépenses sans parts
+		$reponse3 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+
+		$depense_0_parts = 0;
+
+		while($donnees3 = $reponse3->fetch())
+		{
+			$reponse4 = $bdd->query('SELECT COUNT(id) AS nb_parts_depense FROM expense_center_users WHERE id_expense = ' . $donnees3['id']);
+			$donnees4 = $reponse4->fetch();
+
+			//echo '$donnees4[nb_parts_depense] : ' . $donnees4['nb_parts_depense'] . '<br />';
+
+			if ($donnees4['nb_parts_depense'] == 0)
+				$depense_0_parts += $donnees3['price'];
+
+			$reponse4->closeCursor();
+		}
+		$reponse3->closeCursor();
+
+		// On retire les dépenses à 0 parts de la somme des bilans
+		$somme_bilans_finale = $somme_bilans - $depense_0_parts;
 
 		// Bas du tableau
 		echo '<tr>';
@@ -338,9 +376,26 @@
 				$req12->closeCursor();
 			echo '</td>';
 
-			echo '<td class="td_manage_users">';
+			echo '<td class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
+				echo 'Bilan';
+			echo '</td>';
+
+			if ($somme_bilans_finale == 0)
+				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
+			else
+				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif; background-color: #ee4949;">';
+					$somme_bilans_finale_format = str_replace('.', ',', number_format($somme_bilans_finale, 2));
+					// Somme des dépenses de chacun dont les parts ne sont pas toutes à 0 : doit être toujours égal à 0€
+					echo $somme_bilans_finale_format . ' €';
+			echo '</td>';
+
+			echo '<td class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
+				echo 'Alertes';
+			echo '</td>';
+
+			echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
 				// Alerte si un utilisateur désinscrit n'a pas payé
-				if ($alerte_bilan == true)
+				if ($alerte_bilan == true or $somme_bilans_finale > 0)
 					echo '<span class="reset_warning">!</span>';
 			echo '</td>';
 		echo '</tr>';
