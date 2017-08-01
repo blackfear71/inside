@@ -23,6 +23,9 @@
 		$id_url = "";
 		$doodle = "";
 		$date_doodle = "";
+		$time_doodle = "";
+		$restaurant = "N";
+		$place = "";
 
 		$date_a_verifier = $_POST['date_theater'];
 
@@ -54,7 +57,32 @@
 		if (checkdate($m, $d, $y))
 		{
 			// Stockage de l'enregistrement en table
-			$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
+			$req = $bdd->prepare('INSERT INTO movie_house(film,
+																										to_delete,
+																										date_theater,
+																										date_release,
+																										link,
+																										poster,
+																										trailer,
+																										id_url,
+																										doodle,
+																										date_doodle,
+																										time_doodle,
+																										restaurant,
+																										place)
+																						VALUES(:film,
+																									 :to_delete,
+																									 :date_theater,
+																									 :date_release,
+																									 :link,
+																									 :poster,
+																									 :trailer,
+																									 :id_url,
+																									 :doodle,
+																									 :date_doodle,
+																									 :time_doodle,
+																									 :restaurant,
+																									 :place)');
 			$req->execute(array(
 				'film' => $nom_film,
 				'to_delete' => $to_delete,
@@ -65,7 +93,10 @@
 				'trailer' => $trailer,
 				'id_url' => $id_url,
 				'doodle' => $doodle,
-				'date_doodle' => $date_doodle
+				'date_doodle' => $date_doodle,
+				'time_doodle' => $time_doodle,
+				'restaurant' => $restaurant,
+				'place' => $place
 				));
 			$req->closeCursor();
 
@@ -93,6 +124,19 @@
 		$_SESSION['doodle_saisi'] = $_POST['doodle'];
 		$_SESSION['date_doodle_saisie'] = $_POST['date_doodle'];
 
+		if (isset($_POST['hours_doodle']))
+			$_SESSION['hours_doodle_saisies'] = $_POST['hours_doodle'];
+		else
+			$_SESSION['hours_doodle_saisies'] = "";
+
+		if (isset($_POST['minutes_doodle']))
+			$_SESSION['minutes_doodle_saisies'] = $_POST['minutes_doodle'];
+		else
+			$_SESSION['minutes_doodle_saisies'] = "";
+
+		$_SESSION['restaurant_saisi'] = $_POST['restaurant'];
+		$_SESSION['place_saisie'] = $_POST['place'];
+
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
 		$to_delete = "N";
@@ -104,6 +148,14 @@
 		$id_url = "";
 		$doodle = $_POST['doodle'];
 		$date_doodle = "";
+
+		if (!empty($_POST['date_doodle']) AND isset($_POST['hours_doodle']) AND isset($_POST['minutes_doodle']))
+			$time_doodle = $_POST['hours_doodle'] . $_POST['minutes_doodle'];
+		else
+			$time_doodle = "";
+
+		$restaurant = $_POST['restaurant'];
+		$place = $_POST['place'];
 
 		//PHA - déb
 		// Lien Youtube trailer
@@ -184,7 +236,30 @@
 			if ($_SESSION['wrong_date'] != true)
 			{
 				// Stockage de l'enregistrement en table
-				$req = $bdd->prepare('INSERT INTO movie_house(film, to_delete, date_theater, date_release, link, poster, trailer, id_url, doodle, date_doodle) VALUES(:film, :to_delete, :date_theater, :date_release, :link, :poster, :trailer, :id_url, :doodle, :date_doodle)');
+				$req = $bdd->prepare('INSERT INTO movie_house(film,
+																											to_delete,
+																											date_theater,
+																											date_release,
+																											link, poster,
+																											trailer,
+																											id_url,
+																											doodle,
+																											date_doodle,
+																											time_doodle,
+																											restaurant,
+																											place)
+																							VALUES(:film,
+																										 :to_delete,
+																										 :date_theater,
+																										 :date_release,
+																										 :link, :poster,
+																										 :trailer,
+																										 :id_url,
+																										 :doodle,
+																										 :date_doodle,
+																									   :time_doodle,
+																										 :restaurant,
+																										 :place)');
 				$req->execute(array(
 					'film' => $nom_film,
 					'to_delete' => $to_delete,
@@ -195,7 +270,10 @@
 					'trailer' => $trailer,
 					'id_url' => $id_url,
 					'doodle' => $doodle,
-					'date_doodle' => $date_doodle
+					'date_doodle' => $date_doodle,
+					'time_doodle' => $time_doodle,
+					'restaurant' => $restaurant,
+					'place' => $place
 					));
 				$req->closeCursor();
 
@@ -233,14 +311,18 @@
 		$_SESSION['doodle_saisi'] = $_POST['doodle'];
 		$_SESSION['date_doodle_saisie'] = $_POST['date_doodle'];
 
-		echo $_SESSION['nom_film_saisi'] . '<br />';
-		echo $_SESSION['date_theater_saisie'] . '<br />';
-		echo $_SESSION['date_release_saisie'] . '<br />';
-		echo $_SESSION['trailer_saisi'] . '<br />';
-		echo $_SESSION['link_saisi'] . '<br />';
-		echo $_SESSION['poster_saisi'] . '<br />';
-		echo $_SESSION['doodle_saisi'] . '<br />';
-		echo $_SESSION['date_doodle_saisie'] . '<br />';
+		if (isset($_POST['hours_doodle']))
+			$_SESSION['hours_doodle_saisies'] = $_POST['hours_doodle'];
+		else
+			$_SESSION['hours_doodle_saisies'] = "";
+
+		if (isset($_POST['minutes_doodle']))
+			$_SESSION['minutes_doodle_saisies'] = $_POST['minutes_doodle'];
+		else
+			$_SESSION['minutes_doodle_saisies'] = "";
+
+		$_SESSION['restaurant_saisi'] = $_POST['restaurant'];
+		$_SESSION['place_saisie'] = $_POST['place'];
 
 		// Récupération des variables
 		$id_film = $_GET['modify_id'];
@@ -253,6 +335,14 @@
 		$id_url = "";
 		$doodle = $_POST['doodle'];
 		$date_doodle = "";
+
+		if (!empty($_POST['date_doodle']) AND isset($_POST['hours_doodle']) AND isset($_POST['minutes_doodle']))
+			$time_doodle = $_POST['hours_doodle'] . $_POST['minutes_doodle'];
+		else
+			$time_doodle = "";
+
+		$restaurant = $_POST['restaurant'];
+		$place = $_POST['place'];
 
 		//PHA - déb
 		// Lien Youtube trailer
@@ -342,7 +432,10 @@
 															 trailer = :trailer,
 															 id_url = :id_url,
 															 doodle = :doodle,
-															 date_doodle = :date_doodle
+															 date_doodle = :date_doodle,
+															 time_doodle = :time_doodle,
+															 restaurant = :restaurant,
+															 place = :place
 														 WHERE id = ' . $id_film);
 				$req->execute(array(
 					'film' => $nom_film,
@@ -353,7 +446,10 @@
 					'trailer' => $trailer,
 					'id_url' => $id_url,
 					'doodle' => $doodle,
-					'date_doodle' => $date_doodle
+					'date_doodle' => $date_doodle,
+					'time_doodle' => $time_doodle,
+					'restaurant' => $restaurant,
+					'place' => $place
 				));
 				$req->closeCursor();
 

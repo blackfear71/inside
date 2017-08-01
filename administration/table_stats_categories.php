@@ -12,23 +12,23 @@
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 25%;">';
+			/*echo '<td class="init_td_manage_users" style="width: 25%;">';
 				echo 'ReferenceGuide';
-			echo '</td>';
+			echo '</td>';*/
 
-			echo '<td class="init_td_manage_users" style="width: 25%;">';
+			echo '<td class="init_td_manage_users" style="width: 35%;">';
 				echo 'Movie House';
 			echo '</td>';
 
-			echo '<td colspan="4" class="init_td_manage_users" style="width: 25%;">';
+			echo '<td colspan="4" class="init_td_manage_users" style="width: 40%;">';
 				echo 'ExpenseCenter';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users">';
+			/*echo '<td class="init_td_manage_users">';
 				echo 'Nombre d\'articles publiés';
-			echo '</td>';
+			echo '</td>';*/
 
 			echo '<td class="init_td_manage_users">';
 				echo 'Nombre de commentaires';
@@ -63,13 +63,13 @@
 					echo $donnees['full_name'];
 				echo '</td>';
 
-				echo '<td class="td_manage_users">';
+				/*echo '<td class="td_manage_users">';
 					$req1 = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $donnees['identifiant'] . '"');
 					$data1 = $req1->fetch();
 					echo $data1['nb_publications'];
 					$nb_tot_publications += $data1['nb_publications'];
 					$req1->closeCursor();
-				echo '</td>';
+				echo '</td>';*/
 
 				echo '<td class="td_manage_users">';
 					$req2 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $donnees['identifiant'] . '"');
@@ -242,12 +242,12 @@
 					echo $ligne;
 				echo '</td>';
 
-				echo '<td class="td_manage_users">';
+				/*echo '<td class="td_manage_users">';
 					$req7 = $bdd->query('SELECT COUNT(id) AS nb_publications FROM reference_guide WHERE author = "' . $ligne . '"');
 					$data7 = $req7->fetch();
 					echo $data7['nb_publications'];
 					$req7->closeCursor();
-				echo '</td>';
+				echo '</td>';*/
 
 				echo '<td class="td_manage_users">';
 					$req8 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $ligne . '"');
@@ -362,12 +362,12 @@
 				echo 'Total';
 			echo '</td>';
 
-			echo '<td class="td_manage_users">';
+			/*echo '<td class="td_manage_users">';
 				$req11 = $bdd->query('SELECT COUNT(id) AS nb_total_articles FROM reference_guide');
 				$data11 = $req11->fetch();
 				echo $data11['nb_total_articles'];
 				$req11->closeCursor();
-			echo '</td>';
+			echo '</td>';*/
 
 			echo '<td class="td_manage_users">';
 				$req12 = $bdd->query('SELECT COUNT(id) AS nb_total_comments FROM movie_house_comments');

@@ -2045,6 +2045,7 @@ article
 .user_view_by
 {
 	margin-left: 50px;
+	padding-right: 10px;
 }
 
 .view_by
@@ -2312,44 +2313,82 @@ article
 }
 
 /*** Saisie film avancée ***/
-.titre_saisie_avancee
+.zone_saisie_avancee
 {
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 20px;
 	margin-top: 50px;
+	background-color: #e3e3e3;
+	border-radius: 5px;
 }
 
-.sous_titre_saisie_avancee
+.titre_saisie_avancee
 {
-	background-color: #e3e3e3;
-	border: 1px solid #BDC3C7;
-	padding: 10px;
+	background-color: rgb(255, 25, 55);
+	line-height: 50px;
+	border-bottom: solid 5px rgb(200, 25, 50);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 120%;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+	font-size: 150%;
+	color: white;
 }
 
 .contenu_saisie_avancee
 {
-	border-bottom: 1px solid #BDC3C7;
-	border-left: 1px solid #BDC3C7;
-	border-right: 1px solid #BDC3C7;
-	padding: 10px;
+	width: 100%;
+	background-color: #f3f3f3;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	line-height: 20px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 110%;
 }
 
 .form_saisie_avancee
 {
-	margin-bottom: 20px;
-	margin-top: 20px;
+	padding: 1.5%;
 	text-align: center;
+}
+
+.zone_saisie_avancee_infos
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 49.25%;
+	margin-right: 0.75%;
+	padding-bottom: 1.5%;
+	background-color: #e3e3e3;
+	border-radius: 5px;
+}
+
+.zone_saisie_avancee_orga
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 49.25%;
+	margin-left: 0.75%;
+	padding-bottom: 1.5%;
+	background-color: #e3e3e3;
+	border-radius: 5px;
+}
+
+.sous_titre_saisie_avancee
+{
+	background-color: #2eb2f4;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 120%;
+	color: white;
+	text-align: center;
+	border-bottom: solid 5px #3091c1;
 }
 
 .obligatoire
@@ -2357,47 +2396,128 @@ article
 	float: right;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: red;
-	margin-left: -2.5%;
-	margin-right: -10px;
-	width: 2.5%;
+	margin-right: -33px;
 	text-align: center;
 }
 
 .monoligne_film
 {
 	display: block;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	width: 95%;
+	margin-bottom: 10px;
 	line-height: 40px;
 	min-height: 40px;
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 0;
-	background-color: #e3e3e3;
+	background-color: white;
 	border-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
 }
 
-.wrong_date_film
+.monoligne_film_short
 {
+	display: inline-block;
+	width: 60%;
+	margin-bottom: 10px;
+	line-height: 40px;
+	min-height: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	background-color: white;
+	border-radius: 5px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+	font-size: 110%;
+}
+
+.select_time
+{
+	display: inline-block;
+	width: 13%;
+	height: 42px;
+	padding-top: 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 2%;
+	border: 0;
+	border-radius: 5px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+	font-size: 110%;
+}
+
+.restaurant
+{
+	display: block;
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: robotoregular, Verdana, sans-serif;
+	margin-bottom: 10px;
+	line-height: 42px;
+	min-height: 42px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	background-color: #fffd4c;
+	border-radius: 5px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+	font-size: 110%;
+}
+
+.zone_select_restaurant
+{
+	text-align: center;
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.bouton_restaurant
+{
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+.label_restaurant
+{
+	display: inline-block;
+	background-color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 100px;
+	padding-left: 25px;
+	margin-left: -30px;
+	border-radius: 5px;
+	font-family: robotolight_italic, Verdana, sans-serif;
 }
 
 .saisie_valider_film
 {
-	height: 43px;
-	margin-left: 20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 40px;
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: #e3e3e3;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+.saisie_valider_film:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
 }
 
 /*** Alertes ***/
@@ -2943,7 +3063,10 @@ article
 .zone_profil_preferences_table
 {
 	width: 100%;
-	border-collapse: collapse;
+	text-align: center;
+	background-color: #e3e3e3;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 .zone_profil_preferences_mh
@@ -3002,9 +3125,7 @@ article
 	padding-top: 20px;
 	padding-bottom: 20px;
 	width: 33%;
-	background-color: #e3e3e3;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	display: inline-block;
 }
 
 .contenu_contribution

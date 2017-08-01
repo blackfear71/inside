@@ -319,7 +319,42 @@
 									echo $date_theater;
 							 	echo '</div>';
 								echo '<div class="date_sortie">Sortie DVD/Bluray</div><div class="date_sortie_2">' . $date_release . '</div>';
-								echo '<div class="date_sortie">Date proposée</div><div class="date_sortie_2">' . $date_doodle . '</div>';
+								echo '<div class="date_sortie">Date proposée</div>';
+								echo '<div class="date_sortie_2">';
+								 	echo $date_doodle;
+
+									if (!empty($donnees['date_doodle']) AND !empty($donnees['time_doodle']))
+									{
+										$heure_doodle = substr($donnees['time_doodle'], 0, 2);
+										$minutes_doodle = substr($donnees['time_doodle'], 2, 2);
+
+										echo ' à ' . $heure_doodle . ':' . $minutes_doodle;
+									}
+								echo '</div>';
+
+								// Restaurant
+								echo '<div class="date_sortie">Restaurant</div>';
+								echo '<div class="date_sortie_2">';
+									switch ($donnees['restaurant'])
+									{
+										case "B":
+											echo 'Avant';
+											if (!empty($donnees['place']))
+												echo ' : ' . $donnees['place'];
+											break;
+
+										case "A":
+											echo 'Après';
+											if (!empty($donnees['place']))
+												echo ' : ' . $donnees['place'];
+											break;
+
+										case "N":
+										default:
+											echo 'Aucun';
+											break;
+									}
+								echo '</div>';
 
 								// On récupère la liste des personne souhaitant visionner le film
 								echo '<div class="date_sortie">Intéresse</div>';
@@ -357,9 +392,9 @@
 											echo '</td>';
 
 											if ($data5['participation'] == "S")
-												echo '<td class="td_view_by" style="background: #74cefb;">';
+												echo '<td class="td_view_by" style="background-color: #74cefb;">';
 											elseif ($data5['participation'] == "P")
-												echo '<td class="td_view_by" style="background: #91d784;">';
+												echo '<td class="td_view_by" style="background-color: #91d784;">';
 											else
 												echo '<td class="td_view_by">';
 

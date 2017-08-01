@@ -122,117 +122,114 @@
 					</div>
 
 					<!-- Tableau contributions -->
-					<table class="zone_profil_preferences_table">
-						<!-- 3 catégories par ligne ! -->
-						<tr>
-							<!-- Contributions Movie House -->
-							<td class="zone_profil_contribution">
-								<div class="titre_preference">
-									MOVIE HOUSE
-								</div>
+					<div class="zone_profil_preferences_table">
+						<!-- Contributions Movie House -->
+						<div class="zone_profil_contribution">
+							<div class="titre_preference">
+								MOVIE HOUSE
+							</div>
 
-								<div class="sous_titre_preference">
-									Nombre de commentaires
-								</div>
+							<div class="sous_titre_preference">
+								Nombre de commentaires
+							</div>
 
-								<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-									<?php
-										// Nombre de commentaires Movie House
-										$reponse = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $_SESSION['identifiant'] . '"');
-										$donnees = $reponse->fetch();
-										echo $donnees['nb_comments'];
-										$reponse->closeCursor();
-									?>
-								</div>
-							</td>
+							<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+								<?php
+									// Nombre de commentaires Movie House
+									$reponse = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $_SESSION['identifiant'] . '"');
+									$donnees = $reponse->fetch();
+									echo $donnees['nb_comments'];
+									$reponse->closeCursor();
+								?>
+							</div>
+						</div>
 
-							<!-- Contributions Expense Center -->
-							<td class="zone_profil_contribution">
-								<div class="titre_preference">
-									EXPENSE CENTER
-								</div>
+						<!-- Contributions Expense Center -->
+						<div class="zone_profil_contribution">
+							<div class="titre_preference">
+								EXPENSE CENTER
+							</div>
 
-								<div class="sous_titre_preference">
-									Solde
-								</div>
+							<div class="sous_titre_preference">
+								Solde
+							</div>
 
-								<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-									<?php
-									// Solde des dépenses
-									$req1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+							<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+								<?php
+								// Solde des dépenses
+								$req1 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
 
-									$bilan = 0;
+								$bilan = 0;
 
-									while($data1 = $req1->fetch())
+								while($data1 = $req1->fetch())
+								{
+									// Prix d'achat
+									$prix_achat = $data1['price'];
+
+									// Identifiant de l'acheteur
+									$acheteur = $data1['buyer'];
+
+									// Nombre de parts et prix par parts
+									$req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
+
+									$nb_parts_total = 0;
+									$nb_parts_user = 0;
+
+									while($data2 = $req2->fetch())
 									{
-										// Prix d'achat
-										$prix_achat = $data1['price'];
+										// Nombre de parts total
+										$nb_parts_total = $nb_parts_total + $data2['parts'];
 
-										// Identifiant de l'acheteur
-										$acheteur = $data1['buyer'];
-
-										// Nombre de parts et prix par parts
-										$req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
-
-										$nb_parts_total = 0;
-										$nb_parts_user = 0;
-
-										while($data2 = $req2->fetch())
-										{
-											// Nombre de parts total
-											$nb_parts_total = $nb_parts_total + $data2['parts'];
-
-											// Nombre de parts de l'utilisateur
-											if ($_SESSION['identifiant'] == $data2['identifiant'])
-												$nb_parts_user = $data2['parts'];
-										}
-
-										if ($nb_parts_total != 0)
-											$prix_par_part = $prix_achat / $nb_parts_total;
-										else
-											$prix_par_part = 0;
-
-										// On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-										if ($data1['buyer'] == $_SESSION['identifiant'])
-											$bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
-										else
-											$bilan = $bilan - ($prix_par_part * $nb_parts_user);
-
-										$req2->closeCursor();
-
+										// Nombre de parts de l'utilisateur
+										if ($_SESSION['identifiant'] == $data2['identifiant'])
+											$nb_parts_user = $data2['parts'];
 									}
 
-									$req1->closeCursor();
+									if ($nb_parts_total != 0)
+										$prix_par_part = $prix_achat / $nb_parts_total;
+									else
+										$prix_par_part = 0;
 
-									$bilan_format = str_replace('.', ',', round($bilan, 2));
+									// On fait la somme des dépenses moins les parts consommées pour trouver le bilan
+									if ($data1['buyer'] == $_SESSION['identifiant'])
+										$bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
+									else
+										$bilan = $bilan - ($prix_par_part * $nb_parts_user);
 
-									echo $bilan_format . ' €';
-									?>
-								</div>
-							</td>
+									$req2->closeCursor();
 
-							<!-- Contributions #TheBox -->
-							<td class="zone_profil_contribution">
-								<div class="titre_preference">
-									#THEBOX
-								</div>
+								}
 
-								<div class="sous_titre_preference">
-									Nombre d'idées soumises
-								</div>
+								$req1->closeCursor();
 
-								<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-									<?php
-									// Nombre d'idées
-									$reponse = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $_SESSION['identifiant'] . '"');
-									$donnees = $reponse->fetch();
-									echo $donnees['nb_idees'];
-									$reponse->closeCursor();
-									?>
-								</div>
-							</td>
-						</tr>
-					</table>
+								$bilan_format = str_replace('.', ',', round($bilan, 2));
+
+								echo $bilan_format . ' €';
+								?>
+							</div>
+						</div>
+
+						<!-- Contributions #TheBox -->
+						<div class="zone_profil_contribution">
+							<div class="titre_preference">
+								#THEBOX
+							</div>
+
+							<div class="sous_titre_preference">
+								Nombre d'idées soumises
+							</div>
+
+							<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+								<?php
+								// Nombre d'idées
+								$reponse = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $_SESSION['identifiant'] . '"');
+								$donnees = $reponse->fetch();
+								echo $donnees['nb_idees'];
+								$reponse->closeCursor();
+								?>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<!-- Bloc préférences -->
@@ -243,76 +240,74 @@
 					</div>
 
 					<!-- Tableau modification préférences -->
-					<table class="zone_profil_preferences_table">
-						<tr>
-							<!-- Préférences Movie House -->
-							<td class="zone_profil_preferences_mh">
+					<div class="zone_profil_preferences_table">
+						<!-- Préférences Movie House -->
+						<div class="zone_profil_preferences_mh">
 
-								<form method="post" action="preferences.php">
+							<form method="post" action="preferences.php">
 
-									<div class="titre_preference">
-										MOVIE HOUSE
-									</div>
+								<div class="titre_preference">
+									MOVIE HOUSE
+								</div>
 
-									<div class="sous_titre_preference">
-										Choix de la vue par défaut
-									</div>
+								<div class="sous_titre_preference">
+									Choix de la vue par défaut
+								</div>
 
-									<div class="contenu_preference">
-										<?php
-											switch ($_SESSION['view_movie_house'])
-											{
-												case "D":
-													echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" required />';
-													echo '<label for="synthese">Synthèse</label>';
-													echo '<br />';
-													echo '<input id="detail" type= "radio" name="movie_house_view" value="D" checked required />';
-													echo '<label for="detail">Détails</label>';
-													echo '<br />';
-													break;
+								<div class="contenu_preference">
+									<?php
+										switch ($_SESSION['view_movie_house'])
+										{
+											case "D":
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" required />';
+												echo '<label for="synthese">Synthèse</label>';
+												echo '<br />';
+												echo '<input id="detail" type= "radio" name="movie_house_view" value="D" checked required />';
+												echo '<label for="detail">Détails</label>';
+												echo '<br />';
+												break;
 
-												case "S":
-												default:
-													echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" checked required />';
-													echo '<label for="synthese">Synthèse</label>';
-													echo '<br />';
-													echo '<input id="detail" type= "radio" name="movie_house_view" value="D" required />';
-													echo '<label for="detail">Détails</label>';
-													echo '<br />';
-													break;
-											}
-										?>
-									</div>
+											case "S":
+											default:
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" checked required />';
+												echo '<label for="synthese">Synthèse</label>';
+												echo '<br />';
+												echo '<input id="detail" type= "radio" name="movie_house_view" value="D" required />';
+												echo '<label for="detail">Détails</label>';
+												echo '<br />';
+												break;
+										}
+									?>
+								</div>
 
-									<div class="sous_titre_preference">
-										Affichage de la date du jour dans la liste des films
-									</div>
+								<div class="sous_titre_preference">
+									Affichage de la date du jour dans la liste des films
+								</div>
 
-									<div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-										<?php
-											switch ($_SESSION['today_movie_house'])
-											{
-												case "Y":
-													echo '<input id="afficher" type="checkbox" name="affiche_date" checked />';
-													echo '<label for="afficher">Afficher</label>';
-													break;
+								<div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+									<?php
+										switch ($_SESSION['today_movie_house'])
+										{
+											case "Y":
+												echo '<input id="afficher" type="checkbox" name="affiche_date" checked />';
+												echo '<label for="afficher">Afficher</label>';
+												break;
 
-												case "N":
-												default:
-													echo '<input id="afficher" type="checkbox" name="affiche_date" />';
-													echo '<label for="afficher">Afficher</label>';
-													break;
-											}
-										?>
-									</div>
+											case "N":
+											default:
+												echo '<input id="afficher" type="checkbox" name="affiche_date" />';
+												echo '<label for="afficher">Afficher</label>';
+												break;
+										}
+									?>
+								</div>
 
-									<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_profil" style="margin-top: 20px;" />
+								<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_profil" style="margin-top: 20px;" />
 
-								</form>
+							</form>
 
-							</td>
-						</tr>
-					</table>
+						</div>
+					</div>
 				</div>
 
 				<!-- Bloc utilisateur -->
