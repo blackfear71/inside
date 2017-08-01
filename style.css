@@ -2495,6 +2495,13 @@ article
 	margin-left: -30px;
 	border-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
+	cursor: pointer;
+}
+
+.label_restaurant:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
 }
 
 .saisie_valider_film
