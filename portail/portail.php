@@ -69,6 +69,16 @@
 						// Lien MovieHouse
 						switch ($_SESSION['view_movie_house'])
 						{
+							case "S":
+								echo '<a href="moviehouse.php?view=main&year=' . date("Y") . '" class="new_menu_link_portail">';
+									echo '<div class="menu_portail_box">';
+										echo '<div class="mask_portail"></div>';
+										echo '<div class="mask_portail_triangle"></div>';
+										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
+									echo '</div>';
+								echo '</a>';
+								break;
+
 							case "D":
 								echo '<a href="moviehouse.php?view=user&year=' . date("Y") . '" class="new_menu_link_portail">';
 									echo '<div class="menu_portail_box">';
@@ -79,9 +89,9 @@
 								echo '</a>';
 								break;
 
-							case "S":
+							case "H":
 							default:
-								echo '<a href="moviehouse.php?view=main&year=' . date("Y") . '" class="new_menu_link_portail">';
+								echo '<a href="moviehouse.php?view=home&year=' . date("Y") . '" class="new_menu_link_portail">';
 									echo '<div class="menu_portail_box">';
 										echo '<div class="mask_portail"></div>';
 										echo '<div class="mask_portail_triangle"></div>';

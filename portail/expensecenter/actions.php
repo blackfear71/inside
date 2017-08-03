@@ -88,11 +88,19 @@
   {
     $id_modify = $_GET['id_modify'];
 
+    // Mise à jour du prix si modifié
+    $price = str_replace(',', '.', htmlspecialchars($_POST['depense']));
+
+    // Mise à jour de l'acheteur si modifié
+    $buyer = $_POST['buyer_user'];
+
     // Mise à jour du commentaire si modifié
     $comment = htmlspecialchars($_POST['comment']);
 
-    $req0 = $bdd->prepare('UPDATE expense_center SET comment=:comment WHERE id=' . $id_modify);
+    $req0 = $bdd->prepare('UPDATE expense_center SET price=:price, buyer=:buyer, comment=:comment WHERE id=' . $id_modify);
     $req0->execute(array(
+      'price' => $price,
+      'buyer' => $buyer,
       'comment' => $comment
     ));
     $req0->closeCursor();

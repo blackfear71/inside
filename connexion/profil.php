@@ -258,7 +258,22 @@
 									<?php
 										switch ($_SESSION['view_movie_house'])
 										{
+											case "S":
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="H" required />';
+												echo '<label for="synthese">Accueil</label>';
+												echo '<br />';
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" checked required />';
+												echo '<label for="synthese">Synthèse</label>';
+												echo '<br />';
+												echo '<input id="detail" type= "radio" name="movie_house_view" value="D" required />';
+												echo '<label for="detail">Détails</label>';
+												echo '<br />';
+												break;
+
 											case "D":
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="H" required />';
+												echo '<label for="synthese">Accueil</label>';
+												echo '<br />';
 												echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" required />';
 												echo '<label for="synthese">Synthèse</label>';
 												echo '<br />';
@@ -267,9 +282,12 @@
 												echo '<br />';
 												break;
 
-											case "S":
+											case "H":
 											default:
-												echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" checked required />';
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="H" checked required />';
+												echo '<label for="synthese">Accueil</label>';
+												echo '<br />';
+												echo '<input id="synthese" type= "radio" name="movie_house_view" value="S" required />';
 												echo '<label for="synthese">Synthèse</label>';
 												echo '<br />';
 												echo '<input id="detail" type= "radio" name="movie_house_view" value="D" required />';

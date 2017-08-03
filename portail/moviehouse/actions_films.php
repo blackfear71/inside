@@ -15,6 +15,7 @@
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
 		$to_delete = "N";
+		$date_add = date("mdY");
 		$date_theater = "";
 		$date_release = "";
 		$link = "";
@@ -59,6 +60,7 @@
 			// Stockage de l'enregistrement en table
 			$req = $bdd->prepare('INSERT INTO movie_house(film,
 																										to_delete,
+																										date_add,
 																										date_theater,
 																										date_release,
 																										link,
@@ -72,6 +74,7 @@
 																										place)
 																						VALUES(:film,
 																									 :to_delete,
+																									 :date_add,
 																									 :date_theater,
 																									 :date_release,
 																									 :link,
@@ -86,6 +89,7 @@
 			$req->execute(array(
 				'film' => $nom_film,
 				'to_delete' => $to_delete,
+				'date_add' => $date_add,
 				'date_theater' => $date_theater,
 				'date_release' => $date_release,
 				'link' => $link,
@@ -140,6 +144,7 @@
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
 		$to_delete = "N";
+		$date_add = date("mdY");
 		$date_theater = "";
 		$date_release = "";
 		$link = $_POST['link'];
@@ -238,6 +243,7 @@
 				// Stockage de l'enregistrement en table
 				$req = $bdd->prepare('INSERT INTO movie_house(film,
 																											to_delete,
+																											date_add,
 																											date_theater,
 																											date_release,
 																											link, poster,
@@ -250,6 +256,7 @@
 																											place)
 																							VALUES(:film,
 																										 :to_delete,
+																										 :date_add,
 																										 :date_theater,
 																										 :date_release,
 																										 :link, :poster,
@@ -263,6 +270,7 @@
 				$req->execute(array(
 					'film' => $nom_film,
 					'to_delete' => $to_delete,
+					'date_add' => $date_add,
 					'date_theater' => $date_theater,
 					'date_release' => $date_release,
 					'link' => $link,
@@ -281,13 +289,17 @@
 
 				switch ($_SESSION['view_movie_house'])
 				{
+					case "S":
+						header('location: ../moviehouse.php?view=main&year=' . substr($date_a_verifier_1, 6, 4));
+						break;
+
 					case "D":
 						header('location: ../moviehouse.php?view=user&year=' . substr($date_a_verifier_1, 6, 4));
 						break;
 
-					case "S":
+					case "H":
 					default:
-						header('location: ../moviehouse.php?view=main&year=' . substr($date_a_verifier_1, 6, 4));
+						header('location: ../moviehouse.php?view=home&year=' . substr($date_a_verifier_1, 6, 4));
 						break;
 				}
 			}
@@ -481,13 +493,17 @@
 		// Redirection
 		switch ($_SESSION['view_movie_house'])
 		{
+			case "S":
+				header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+				break;
+				
 			case "D":
 				header('location: ../moviehouse.php?view=user&year=' . date("Y"));
 				break;
 
-			case "S":
+			case "H":
 			default:
-				header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+				header('location: ../moviehouse.php?view=home&year=' . date("Y"));
 				break;
 		}
 	}

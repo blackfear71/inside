@@ -177,29 +177,35 @@
 			/**********************************/
 			echo '<tr class="ligne_tableau_movie_house" id="modifier_depense[' . $l . ']" style="display: none;">';
 
-				// Prix sur la 1ère colonne
-				echo '<td class="prices">';
-					echo $prix_achat . ' €';
-				echo '</td>';
-
-				// Acheteur sur la 2ème colonne
-				echo '<td class="prices">';
-					for ($m = 1; $m <= $nombre_users; $m++)
-					{
-						if ($user_parts[$m][1] == $donnees3['buyer'])
-						{
-							echo $user_parts[$m][2];
-							break;
-						}
-					}
-				echo '</td>';
-
-				// Date sur la 3ème colonne
-				echo '<td class="table_dates">';
-					echo $date_achat;
-				echo '</td>';
-
 				echo '<form method="post" action="expensecenter/actions.php?id_modify=' . $donnees3['id'] . '" title="Valider la modification" class="link_action_depenses">';
+
+					// Prix sur la 1ère colonne
+					echo '<td class="prices">';
+						echo '<input type="text" name="depense" value="' . $prix_achat . '" placeholder="Prix" maxlength="6" class="saisie_prix_2" required /> <span class="euro">€</span>';
+					echo '</td>';
+
+					// Acheteur sur la 2ème colonne
+					echo '<td class="prices">';
+						echo '<select name="buyer_user" class="buyer" required>';
+							for ($m = 1; $m <= $nombre_users; $m++)
+							{
+								if ($user_parts[$m][1] == $donnees3['buyer'])
+								{
+									echo '<option value="' . $user_parts[$m][1] . '" selected>' . $user_parts[$m][2] . '</option>';
+								}
+								else
+								{
+									echo '<option value="' . $user_parts[$m][1] . '">' . $user_parts[$m][2] . '</option>';
+								}
+							}
+						echo '</select>';
+					echo '</td>';
+
+					// Date sur la 3ème colonne
+					echo '<td class="table_dates">';
+						echo $date_achat;
+					echo '</td>';
+
 					// On parcours chaque colonne pour tester l'identifiant (colonne <=> $j)
 					for ($n = 1; $n <= $nombre_users; $n++)
 					{

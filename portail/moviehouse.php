@@ -24,8 +24,8 @@
 	}
 
 	// Contrôle de la vue
-	if (!isset($_GET['view']) OR empty($_GET['view']) OR ($_GET['view'] != "main" AND $_GET['view'] != "user"))
-		header('location: moviehouse.php?view=main&year=' . $_GET['year']);
+	if (!isset($_GET['view']) OR empty($_GET['view']) OR ($_GET['view'] != "home" AND $_GET['view'] != "main" AND $_GET['view'] != "user"))
+		header('location: moviehouse.php?view=home&year=' . $_GET['year']);
 
 	// Contrôle si l'année est renseignée et numérique
 	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
@@ -82,77 +82,97 @@
 				<!-- Switch entre vue générale et vue personnelle-->
 				<div class="switch_bug_view">
 					<?php
-						$switch1 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Synthèse</a>';
-						$switch2 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Détails</a>';
+						$switch1 = '<a href="moviehouse.php?view=home&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Accueil</a>';
+						$switch2 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Synthèse</a>';
+						$switch3 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Détails</a>';
 
-						if ($_GET['view'] == "main")
+						if ($_GET['view'] == "home")
 						{
-							$switch1 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_active">Synthèse</a>';
+							$switch1 = '<a href="moviehouse.php?view=home&year=' . $_GET['year'] . '" class="link_bug_switch_active">Accueil</a>';
+						}
+						elseif ($_GET['view'] == "main")
+						{
+							$switch2 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_active">Synthèse</a>';
 						}
 						elseif ($_GET['view'] == "user")
 						{
-							$switch2 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_active">Détails</a>';
+							$switch3 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_active">Détails</a>';
 						}
 
-						echo $switch1, $switch2;
+						echo $switch1, $switch2, $switch3;
 					?>
 				</div>
 
-				<!-- Gestion affichage des onglets en fonction de l'année -->
+				<!-- Gestion affichage des onglets en fonction de l'année pour les vues Synthèse et Détails-->
 				<?php
-					if (isset($_GET['year']) AND is_numeric($_GET['year']))
+					if (isset($_GET['view']) AND ($_GET['view'] == "main" OR $_GET['view'] == "user"))
 					{
-						include('../includes/appel_bdd.php');
+						if (isset($_GET['year']) AND is_numeric($_GET['year']))
+						{
+							include('../includes/appel_bdd.php');
 
-						$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
+							$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
 
-						echo '<div class="movie_year">';
+							echo '<div class="movie_year">';
 
-							while($donnees = $reponse->fetch())
-							{
-								if ($donnees['SUBSTR(date_theater,5,4)'] == $_GET['year'])
-									echo '<span class="movie_year_active">' . $donnees['SUBSTR(date_theater,5,4)'] . '</span>';
-								else
-									echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $donnees['SUBSTR(date_theater,5,4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date_theater,5,4)'] . '</a>';
-							}
+								while($donnees = $reponse->fetch())
+								{
+									if ($donnees['SUBSTR(date_theater,5,4)'] == $_GET['year'])
+										echo '<span class="movie_year_active">' . $donnees['SUBSTR(date_theater,5,4)'] . '</span>';
+									else
+										echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $donnees['SUBSTR(date_theater,5,4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date_theater,5,4)'] . '</a>';
+								}
 
+								if ($annee_existante == false)
+								{
+									echo '<span class="movie_year_active">' . $_GET['year'] . '</span>';
+								}
+							echo '</div>';
+
+							$reponse->closeCursor();
+						}
+					}
+
+					if (isset($_GET['view']))
+					{
+						if ($_GET['view'] == "main" OR $_GET['view'] == "user")
+						{
+							// Saisie rapide
+							echo '<form method="post" action="moviehouse/actions_films.php?view=' . $_GET['view'] . '" class="form_saisie_rapide">';
+								echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />';
+								echo '<input type="text" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="date_saisie_rapide" />';
+								echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
+							echo '</form>';
+
+							// Message s'il n'y a pas de films
 							if ($annee_existante == false)
 							{
-								echo '<span class="movie_year_active">' . $_GET['year'] . '</span>';
+								echo '<p class="wrong_date">Pas encore de films pour cette année...</p>';
 							}
-						echo '</div>';
+							else
+							{
+								// Tableau des films
+								if ($_GET['view'] == "user")
+									include('moviehouse/table_films_user.php');
+								else
+									include('moviehouse/table_films_synthese.php');
+							}
 
-						$reponse->closeCursor();
+							// Saisie rapide
+							echo '<form method="post" action="moviehouse/actions_films.php?view=' . $_GET['view'] . '" class="form_saisie_rapide">';
+								echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />';
+								echo '<input type="text" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="date_saisie_rapide" />';
+								echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
+							echo '</form>';
+						}
+						elseif ($_GET['view'] == "home")
+						{
+							// Accueil des films
+							include('moviehouse/table_films_home.php');
+						}
 					}
 				?>
 
-				<form method="post" action="moviehouse/actions_films.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
-					<input type="text" name="nom_film" value="<?php echo $_SESSION['nom_film_saisi']; ?>" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />
-					<input type="text" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="date_saisie_rapide" />
-					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
-				</form>
-
-				<?php
-					// Message s'il n'y a pas de films
-					if ($annee_existante == false)
-					{
-						echo '<p class="wrong_date">Pas encore de films pour cette année...</p>';
-					}
-					else
-					{
-						// Tableau des films
-						if ($_GET['view'] == "user")
-							include('moviehouse/table_films_user.php');
-						else
-							include('moviehouse/table_films_synthese.php');
-					}
-				?>
-
-				<form method="post" action="moviehouse/actions_films.php?view=<?php echo $_GET['view']; ?>" class="form_saisie_rapide">
-					<input type="text" name="nom_film" value="<?php echo $_SESSION['nom_film_saisi']; ?>" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />
-					<input type="text" name="date_theater" value="<?php echo $_SESSION['date_theater_saisie']; ?>" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="date_saisie_rapide" />
-					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
-				</form>
 			</article>
 		</section>
 

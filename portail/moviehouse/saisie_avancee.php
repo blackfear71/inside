@@ -39,7 +39,7 @@
 		$donnees = $reponse->fetch();
 
 		if ($donnees['to_delete'] == "Y")
-			header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+			header('location: ../moviehouse.php?view=home&year=' . date("Y"));
 
 		$reponse->closeCursor();
 	}

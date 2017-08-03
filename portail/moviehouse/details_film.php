@@ -16,7 +16,7 @@
 	$donnees = $reponse->fetch();
 
 	if ($donnees['to_delete'] == "Y")
-		header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+		header('location: ../moviehouse.php?view=home&year=' . date("Y"));
 
 	$reponse->closeCursor();
 
@@ -423,7 +423,7 @@
 								if (!empty($donnees['poster']))
 									echo '<img src="' . $donnees['poster'] . '" alt="' . $donnees['poster'] . '" title="' . $donnees['film'] . '" class="img_details" /><br />';
 								else
-									echo '<img src="images/cinema.jpg" alt="pellicule" title="' . $donnees['film'] . '" class="img_details"/>';
+									echo '<img src="images/cinema.jpg" alt="poster" title="' . $donnees['film'] . '" class="img_details"/>';
 							echo '</div>';
 						echo '</div>';
 

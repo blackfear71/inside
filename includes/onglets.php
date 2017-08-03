@@ -6,13 +6,17 @@
 	//$onglet_2 = '<a href="/inside/portail/timesheet.php" class="onglet_inactif">Timesheet</a>';
 	switch ($_SESSION['view_movie_house'])
 	{
+		case "S":
+			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
+			break;
+
 		case "D":
 			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=user&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
 			break;
 
-		case "S":
+		case "H":
 		default:
-			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
+			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=home&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
 			break;
 	}
 	$onglet4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" class="onglet_inactif"">Expense Center</a>';
@@ -43,13 +47,17 @@
 	{
 		switch ($_SESSION['view_movie_house'])
 		{
+			case "S":
+				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
+				break;
+				
 			case "D":
 				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=user&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
 				break;
 
-			case "S":
+			case "H":
 			default:
-				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
+				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=home&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
 				break;
 		}
 	}

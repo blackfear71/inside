@@ -74,7 +74,7 @@
                 $reponse = $bdd->query('SELECT id, identifiant, full_name FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
 
                 echo '<select name="buyer_user" class="buyer" required>';
-                  echo '<option value="">Choisissez...</option>';
+                  echo '<option value="" hidden>Choisissez...</option>';
 
                   while($donnees = $reponse->fetch())
                   {
@@ -95,11 +95,13 @@
 
             for($j = 0; $j < $nb_users_line; $j++)
             {
+              $nb_max_parts = 5;
+
               echo '<td>';
                 echo '<select name="depense_user[]" class="parts">';
-                  for($k = 0; $k <= 5; $k++)
+                  for($k = 0; $k <= $nb_max_parts; $k++)
                   {
-                    // On calcule l'indice où commencer à récupérer el tableau des parts en fonction de chaque ligne. Le premier numéro de ligne est 1, le premier indice 0 et on a 5 utilisateurs par ligne
+                    // On calcule l'indice où commencer à récupérer le tableau des parts en fonction de chaque ligne. Le premier numéro de ligne est 1, le premier indice 0 et on a 5 utilisateurs par ligne
                     $l = $j + 5 * ($ligne - 1);
 
                     // On affiche les parts en mémoire si il y a eu une erreur de saisie
