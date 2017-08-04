@@ -74,42 +74,45 @@
 
 			<article class="article_portail">
 
-          <?php
-            // Saisie nouvelle ligne
-            include('expensecenter/table_saisie_depense.php');
+				<!-- Bandeau catégorie -->
+				<img src="../includes/images/expense_center_band.png" alt="expense_center_band" class="bandeau_categorie" />
 
-            // Affichage bilan
-            include('expensecenter/table_total_depenses.php');
+        <?php
+          // Saisie nouvelle ligne
+          include('expensecenter/table_saisie_depense.php');
 
-						// Affichage des onglets (années)
-						if (isset($_GET['year']) AND is_numeric($_GET['year']))
-						{
-							include('../includes/appel_bdd.php');
+          // Affichage bilan
+          include('expensecenter/table_total_depenses.php');
 
-							$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
+					// Affichage des onglets (années)
+					if (isset($_GET['year']) AND is_numeric($_GET['year']))
+					{
+						include('../includes/appel_bdd.php');
 
-							echo '<div class="expense_year">';
+						$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
 
-								while($donnees = $reponse->fetch())
-								{
-									if ($donnees['SUBSTR(date, 1, 4)'] == $_GET['year'])
-										echo '<span class="movie_year_active">' . $donnees['SUBSTR(date, 1, 4)'] . '</span>';
-									else
-										echo '<a href="expensecenter.php?year=' . $donnees['SUBSTR(date, 1, 4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date, 1, 4)'] . '</a>';
-								}
+						echo '<div class="expense_year">';
 
-								if ($annee_existante == false)
-								{
-									echo '<span class="movie_year_active">' . $_GET['year'] . '</span>';
-								}
-							echo '</div>';
+							while($donnees = $reponse->fetch())
+							{
+								if ($donnees['SUBSTR(date, 1, 4)'] == $_GET['year'])
+									echo '<span class="movie_year_active">' . $donnees['SUBSTR(date, 1, 4)'] . '</span>';
+								else
+									echo '<a href="expensecenter.php?year=' . $donnees['SUBSTR(date, 1, 4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date, 1, 4)'] . '</a>';
+							}
 
-							$reponse->closeCursor();
-						}
+							if ($annee_existante == false)
+							{
+								echo '<span class="movie_year_active">' . $_GET['year'] . '</span>';
+							}
+						echo '</div>';
 
-            // Lignes saisies
-            include('expensecenter/table_resume_depenses.php');
-          ?>
+						$reponse->closeCursor();
+					}
+
+          // Lignes saisies
+          include('expensecenter/table_resume_depenses.php');
+        ?>
 
 			</article>
 		</section>

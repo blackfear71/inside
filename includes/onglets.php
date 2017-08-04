@@ -7,20 +7,20 @@
 	switch ($_SESSION['view_movie_house'])
 	{
 		case "S":
-			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
+			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 			break;
 
 		case "D":
-			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=user&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
+			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=user&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 			break;
 
 		case "H":
 		default:
-			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=home&year=' . date("Y") . '" class="onglet_inactif">Movie House</a>';
+			$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=home&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 			break;
 	}
-	$onglet4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" class="onglet_inactif"">Expense Center</a>';
-	$onglet5 = '<a href="/inside/portail/petitspedestres.php" class="onglet_inactif" style="border-right: solid 1px white;">Les Petits Pédestres</a>';
+	$onglet4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+	$onglet5 = '<a href="/inside/portail/petitspedestres.php" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 
 	// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 	$path = $_SERVER['PHP_SELF'];
@@ -48,16 +48,16 @@
 		switch ($_SESSION['view_movie_house'])
 		{
 			case "S":
-				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
+				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=main&year=' . date("Y") . '" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 				break;
-				
+
 			case "D":
-				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=user&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
+				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=user&year=' . date("Y") . '" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 				break;
 
 			case "H":
 			default:
-				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=home&year=' . date("Y") . '" class="onglet_actif">Movie House</a>';
+				$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=home&year=' . date("Y") . '" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 				break;
 		}
 	}
@@ -65,13 +65,13 @@
 	// Expense center
 	if ($path == '/inside/portail/expensecenter.php')
 	{
-		$onglet4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" class="onglet_actif"">Expense Center</a>';
+		$onglet4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_actif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 	}
 
 	// Petits pédestres
 	if ($path == '/inside/portail/petitspedestres.php')
 	{
-		$onglet5 = '<a href="/inside/portail/petitspedestres.php" class="onglet_actif" style="border-right: solid 1px white;">Les Petits Pédestres</a>';
+		$onglet5 = '<a href="/inside/portail/petitspedestres.php" class="onglet_actif" title="Les Petits Pédestres" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 	}
 
 	// Affichage des onglets

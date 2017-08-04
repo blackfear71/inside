@@ -25,7 +25,7 @@
 
 	// Contrôle de la vue
 	if (!isset($_GET['view']) OR empty($_GET['view']) OR ($_GET['view'] != "home" AND $_GET['view'] != "main" AND $_GET['view'] != "user"))
-		header('location: moviehouse.php?view=home&year=' . $_GET['year']);
+		header('location: moviehouse.php?view=home&year=' . date("Y"));
 
 	// Contrôle si l'année est renseignée et numérique
 	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
@@ -79,16 +79,19 @@
 			?>
 
 			<article class="article_portail">
+				<!-- Bandeau catégorie -->
+				<img src="../includes/images/movie_house_band.png" alt="movie_house_band" class="bandeau_categorie" />
+				
 				<!-- Switch entre vue générale et vue personnelle-->
 				<div class="switch_bug_view">
 					<?php
-						$switch1 = '<a href="moviehouse.php?view=home&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Accueil</a>';
+						$switch1 = '<a href="moviehouse.php?view=home&year=' . date("Y") . '" class="link_bug_switch_inactive">Accueil</a>';
 						$switch2 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Synthèse</a>';
 						$switch3 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Détails</a>';
 
 						if ($_GET['view'] == "home")
 						{
-							$switch1 = '<a href="moviehouse.php?view=home&year=' . $_GET['year'] . '" class="link_bug_switch_active">Accueil</a>';
+							$switch1 = '<a href="moviehouse.php?view=home&year=' . date("Y") . '" class="link_bug_switch_active">Accueil</a>';
 						}
 						elseif ($_GET['view'] == "main")
 						{
@@ -159,7 +162,7 @@
 							}
 
 							// Saisie rapide
-							echo '<form method="post" action="moviehouse/actions_films.php?view=' . $_GET['view'] . '" class="form_saisie_rapide">';
+							echo '<form method="post" action="moviehouse/actions_films.php?view=' . $_GET['view'] . '" class="form_saisie_rapide" style="margin-bottom: 0px;">';
 								echo '<input type="text" name="nom_film" value="' . $_SESSION['nom_film_saisi'] . '" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />';
 								echo '<input type="text" name="date_theater" value="' . $_SESSION['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="date_saisie_rapide" />';
 								echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';

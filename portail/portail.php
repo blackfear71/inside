@@ -75,6 +75,7 @@
 										echo '<div class="mask_portail"></div>';
 										echo '<div class="mask_portail_triangle"></div>';
 										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
+										echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
 									echo '</div>';
 								echo '</a>';
 								break;
@@ -85,6 +86,7 @@
 										echo '<div class="mask_portail"></div>';
 										echo '<div class="mask_portail_triangle"></div>';
 										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
+										echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
 									echo '</div>';
 								echo '</a>';
 								break;
@@ -96,6 +98,7 @@
 										echo '<div class="mask_portail"></div>';
 										echo '<div class="mask_portail_triangle"></div>';
 										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
+										echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
 									echo '</div>';
 								echo '</a>';
 								break;
@@ -107,6 +110,7 @@
 								echo '<div class="mask_portail"></div>';
 								echo '<div class="mask_portail_triangle"></div>';
 								echo '<div class="title_portail">EXP-<br />ENSE<br /><br />Center</div>';
+								echo '<img src="../includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_menu" />';
 							echo '</div>';
 						echo '</a>';
 
@@ -116,6 +120,7 @@
 								echo '<div class="mask_portail"></div>';
 								echo '<div class="mask_portail_triangle"></div>';
 								echo '<div class="title_portail">LES<br />PETITS<br /><br />Pédes-<br/>tres</div>';
+								echo '<img src="../includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_menu" />';
 							echo '</div>';
 						echo '</a>';
 
