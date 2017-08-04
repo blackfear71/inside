@@ -4,7 +4,7 @@
 	if (isset($_POST['reset']) OR isset($_POST['take']) OR isset($_POST['developp']) OR isset($_POST['end']) OR isset($_POST['reject']))
 	{
 		include('../../includes/appel_bdd.php');
-		
+
 		if (isset($_POST['reset']))
 		{
 			$status = "O";
@@ -30,29 +30,29 @@
 			$status = "R";
 			$developper = $_SESSION['identifiant'];
 		}
-		
+
 		$req = $bdd->prepare('UPDATE ideas SET status=:status, developper=:developper WHERE id=' . $_GET['id']);
 		$req->execute(array(
 			'status' => $status,
 			'developper' => $developper
 		));
 		$req->closeCursor();
-		
+
 		header('location: ../ideas.php?view=' . $_GET['view'] . '#' . $_GET['id']);
 	}
 	elseif (isset($_POST['new_idea']))
 	{
 		include('../../includes/appel_bdd.php');
-		
+
 		$_SESSION['idea_submitted'] = false;
-		
+
 		$subject = htmlspecialchars($_POST['subject_idea']);
-		$date = date("mdY");
+		$date = date("Ymd");
 		$author = $_SESSION['identifiant'];
 		$content = htmlspecialchars($_POST['content_idea']);
 		$status = "O";
 		$developper = "";
-		
+
 		//Stockage de l'enregistrement en table
 		$req = $bdd->prepare('INSERT INTO ideas(subject, date, author, content, status, developper) VALUES(:subject, :date, :author, :content, :status, :developper)');
 		$req->execute(array(
@@ -64,10 +64,10 @@
 			'developper' => $developper
 				));
 		$req->closeCursor();
-		
+
 		$_SESSION['idea_submitted'] = true;
-		
-		header ('location: ../ideas.php?view=' . $_GET['view']);		
+
+		header ('location: ../ideas.php?view=' . $_GET['view']);
 	}
 	else
 		header ('location: ../ideas.php?view=inprogress');

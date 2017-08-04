@@ -2,7 +2,7 @@
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
 
-	include('../includes/init_session.php');
+	//include('../includes/init_session.php');
 ?>
 
 <!DOCTYPE html>

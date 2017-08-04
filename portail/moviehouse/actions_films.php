@@ -15,7 +15,7 @@
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
 		$to_delete = "N";
-		$date_add = date("mdY");
+		$date_add = date("Ymd");
 		$date_theater = "";
 		$date_release = "";
 		$link = "";
@@ -37,12 +37,12 @@
 			if (isLastDayOfYearWednesday(date('Y')))
 			{
 				$date_a_verifier = '30/12/' . date('Y');
-				$date_theater = '1230' . date('Y');
+				$date_theater = date('Y') . '1230';
 			}
 			else
 			{
 				$date_a_verifier = '31/12/' . date('Y');
-				$date_theater = '1231' . date('Y');
+				$date_theater = date('Y') . '1231';
 			}
 		}
 		else
@@ -144,7 +144,7 @@
 		// Récupération des variables
 		$nom_film = $_POST['nom_film'];
 		$to_delete = "N";
-		$date_add = date("mdY");
+		$date_add = date("Ymd");
 		$date_theater = "";
 		$date_release = "";
 		$link = $_POST['link'];
@@ -182,12 +182,12 @@
 			if (isLastDayOfYearWednesday(date('Y')))
 			{
 				$date_a_verifier_1 = '30/12/' . date('Y');
-				$date_theater = '1230' . date('Y');
+				$date_theater = date('Y') . '1230';
 			}
 			else
 			{
 				$date_a_verifier_1 = '31/12/' . date('Y');
-				$date_theater = '1231' . date('Y');
+				$date_theater = date('Y') . '1231';
 			}
 		}
 		else
@@ -376,12 +376,12 @@
 			if (isLastDayOfYearWednesday(date('Y')))
 			{
 				$date_a_verifier_1 = '30/12/' . date('Y');
-				$date_theater = '1230' . date('Y');
+				$date_theater = date('Y') . '1230';
 			}
 			else
 			{
 				$date_a_verifier_1 = '31/12/' . date('Y');
-				$date_theater = '1231' . date('Y');
+				$date_theater = date('Y') . '1231';
 			}
 		}
 		else
@@ -496,7 +496,7 @@
 			case "S":
 				header('location: ../moviehouse.php?view=main&year=' . date("Y"));
 				break;
-				
+
 			case "D":
 				header('location: ../moviehouse.php?view=user&year=' . date("Y"));
 				break;

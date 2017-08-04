@@ -1,15 +1,15 @@
 <?php
     //Saisir les informations importantes ici
 		// En local
-		$mysqlUserName    = "root";
-    $mysqlPassword      = "";
-    $mysqlHostName      = "localhost";
+		$mysqlUserName = "root";
+    $mysqlPassword = "root";
+    $mysqlHostName = "localhost";
 
-    $DbName             = "inside";
-    $backup_name        = "mybackup.sql";
+    $DbName        = "inside";
+    $backup_name   = "mybackup.sql";
 
 		// Ou ajouter un 5ème paramètre sous forme de tableau (array) des tables spécifiquements choisies : array("mytable1","mytable2","mytable3") pour plusieurs tables
-		// $tables          = "Your tables";
+		// $tables     = "Your tables";
 
     Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName, $tables=false, $backup_name=false);
 

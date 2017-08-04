@@ -20,9 +20,9 @@
 		echo '</tr>';
 
 		// On récupère la liste des films sur la première colonne et les autres infos sur les colonnes suivantes
-		$reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
+		$reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
 
-		$date_jour = date("mdY");
+		$date_jour = date("Ymd");
 		$date_jour_present = false;
 		$i = 0;
 

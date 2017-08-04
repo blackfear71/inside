@@ -10,7 +10,7 @@
 		// On récupère le sujet, le contenu et la date
 		$sujet = htmlspecialchars($_POST['subject']);
 		$contenu = htmlspecialchars($_POST['contenu_bug']);
-		$date = date("mdY");
+		$date = date("Ymd");
 		$auteur = $_SESSION['identifiant'];
 		$type = $_POST['type_bug'];
 		$resolved = "N";

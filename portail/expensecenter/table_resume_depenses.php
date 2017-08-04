@@ -60,7 +60,7 @@
 		$reponse2->closeCursor();
 
 		// On récupère la liste des prix sur la première colonne, le nom de l'acheteur sur la 2ème et la date sur la 3ème
-		$reponse3 = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date,5,4)=' . $_GET['year'] . ' ORDER BY id DESC');
+		$reponse3 = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4)=' . $_GET['year'] . ' ORDER BY id DESC');
 
 		$l = 0;
 

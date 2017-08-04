@@ -25,8 +25,8 @@
 		$title = htmlspecialchars($_SESSION['title_article']);
 
 		// Date de publication
-		$publish_date = date("mdY");
-		
+		$publish_date = date("Ymd");
+
 		// Auteur
 		$author = $_SESSION['identifiant'];
 

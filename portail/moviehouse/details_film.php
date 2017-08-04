@@ -3,7 +3,7 @@
 	include('../../includes/controls_users.php');
 
 	// Initialisation des variables SESSION pour la création d'articles
-	include('../../includes/init_session.php');
+	//include('../../includes/init_session.php');
 
 	// Fonctions
 	include('../../includes/fonctions_dates.php');
@@ -97,7 +97,7 @@
 						$i = 0;
 						$j = 0;
 
-						$req0 = $bdd->query('SELECT id, film FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . substr($donnees['date_theater'], 4, 4) . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
+						$req0 = $bdd->query('SELECT id, film FROM movie_house WHERE SUBSTR(date_theater, 1, 4)=' . substr($donnees['date_theater'], 0, 4) . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
 						while($data0 = $req0->fetch())
 						{
 							$liste_films[$i][1] = $data0['id'];

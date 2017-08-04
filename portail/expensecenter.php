@@ -3,7 +3,7 @@
 	include('../includes/controls_users.php');
 
 	// Initialisation des variables SESSION pour la création d'articles
-	include('../includes/init_session.php');
+	//include('../includes/init_session.php');
 
 	// Initialisation sauvegarde saisie
 	if (!isset($_SESSION['not_numeric']) OR $_SESSION['not_numeric'] != true)
@@ -21,10 +21,10 @@
 	{
 		include('../includes/appel_bdd.php');
 
-		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date,5,4) FROM expense_center ORDER BY SUBSTR(date,5,4) ASC');
+		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
 		while($donnees = $reponse->fetch())
 		{
-			if ($_GET['year'] == $donnees['SUBSTR(date,5,4)'])
+			if ($_GET['year'] == $donnees['SUBSTR(date, 1, 4)'])
 				$annee_existante = true;
 		}
 		$reponse->closeCursor();
@@ -86,16 +86,16 @@
 						{
 							include('../includes/appel_bdd.php');
 
-							$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date,5,4) FROM expense_center ORDER BY SUBSTR(date,5,4) ASC');
+							$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
 
 							echo '<div class="expense_year">';
 
 								while($donnees = $reponse->fetch())
 								{
-									if ($donnees['SUBSTR(date,5,4)'] == $_GET['year'])
-										echo '<span class="movie_year_active">' . $donnees['SUBSTR(date,5,4)'] . '</span>';
+									if ($donnees['SUBSTR(date, 1, 4)'] == $_GET['year'])
+										echo '<span class="movie_year_active">' . $donnees['SUBSTR(date, 1, 4)'] . '</span>';
 									else
-										echo '<a href="expensecenter.php?year=' . $donnees['SUBSTR(date,5,4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date,5,4)'] . '</a>';
+										echo '<a href="expensecenter.php?year=' . $donnees['SUBSTR(date, 1, 4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date, 1, 4)'] . '</a>';
 								}
 
 								if ($annee_existante == false)

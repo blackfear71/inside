@@ -3,7 +3,7 @@
 	include('../includes/controls_users.php');
 
 	// Initialisation des variables SESSION pour la création d'articles
-	include('../includes/init_session.php');
+	//include('../includes/init_session.php');
 
 	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "done" AND $_GET['view'] != "mine" AND $_GET['view'] != "inprogress"))
 		header('location: ideas.php?view=all');

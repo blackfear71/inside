@@ -5,7 +5,7 @@
   if (isset($_POST['add_depense']))
   {
     // Récupération des données
-    $date       = date("mdY");
+    $date       = date("Ymd");
     $price      = str_replace(',', '.', htmlspecialchars($_POST['depense']));
     $buyer      = $_POST['buyer_user'];
     $comment    = htmlspecialchars($_POST['comment']);

@@ -1,7 +1,11 @@
 <?php
+	// Fonctions date
+	include('../../includes/fonctions_dates.php');
+
 	// Contrôles communs Utilisateurs
 	include('../../includes/controls_users.php');
 
+	// Initialisation des variables SESSION pour la création d'articles
 	include('../../includes/init_session.php');
 
 	// On vérifie la catégorie de l'article pour éviter un mauvais affichage de l'URL

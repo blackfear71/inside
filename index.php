@@ -15,7 +15,7 @@
 	if (!isset($_SESSION['not_yet']))
 		$_SESSION['not_yet'] = false;
 
-	include('includes/init_session.php');
+	//include('includes/init_session.php');
 ?>
 
 <!DOCTYPE html>

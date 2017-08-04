@@ -5,7 +5,7 @@
 	// var_dump($_SESSION) ;
 
 	// Initialisation des variables SESSION pour la création d'articles
-	include('../includes/init_session.php');
+	//include('../includes/init_session.php');
 
 	// Contrôle si l'année existe
 	$annee_existante = false;
@@ -14,10 +14,10 @@
 	{
 		include('../includes/appel_bdd.php');
 
-		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
+		$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater, 1, 4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater, 1, 4) ASC');
 		while($donnees = $reponse->fetch())
 		{
-			if ($_GET['year'] == $donnees['SUBSTR(date_theater,5,4)'])
+			if ($_GET['year'] == $donnees['SUBSTR(date_theater, 1, 4)'])
 				$annee_existante = true;
 		}
 		$reponse->closeCursor();
@@ -111,16 +111,16 @@
 						{
 							include('../includes/appel_bdd.php');
 
-							$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater,5,4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater,5,4) ASC');
+							$reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater, 1, 4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater, 1, 4) ASC');
 
 							echo '<div class="movie_year">';
 
 								while($donnees = $reponse->fetch())
 								{
-									if ($donnees['SUBSTR(date_theater,5,4)'] == $_GET['year'])
-										echo '<span class="movie_year_active">' . $donnees['SUBSTR(date_theater,5,4)'] . '</span>';
+									if ($donnees['SUBSTR(date_theater, 1, 4)'] == $_GET['year'])
+										echo '<span class="movie_year_active">' . $donnees['SUBSTR(date_theater, 1, 4)'] . '</span>';
 									else
-										echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $donnees['SUBSTR(date_theater,5,4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date_theater,5,4)'] . '</a>';
+										echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $donnees['SUBSTR(date_theater, 1, 4)'] . '" class="movie_year_inactive">' . $donnees['SUBSTR(date_theater, 1, 4)'] . '</a>';
 								}
 
 								if ($annee_existante == false)

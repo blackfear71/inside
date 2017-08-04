@@ -5,7 +5,7 @@
 
   <div class="zone_home_films">
     <?php
-      $reponse1 = $bdd->query('SELECT * FROM movie_house ORDER BY SUBSTR(date_add, 4, 4) DESC, id DESC LIMIT 5');
+      $reponse1 = $bdd->query('SELECT * FROM movie_house ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC LIMIT 5');
 
       while($donnees1 = $reponse1->fetch())
       {
@@ -47,11 +47,11 @@
       while($donnees2 = $reponse2->fetch())
       {
         // On ne tient pas compte de tous les films à sortir à date du jour - 1 mois
-        $reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 5, 4) = ' . $_GET['year'] . ' AND id = ' . $donnees2['id_film']);
+        $reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = ' . $_GET['year'] . ' AND id = ' . $donnees2['id_film']);
 
         $donnees3 = $reponse3->fetch();
         {
-          $date_film = substr($donnees3['date_theater'], 4, 4) . substr($donnees3['date_theater'], 0, 2) . substr($donnees3['date_theater'], 2, 2);
+          $date_film = substr($donnees3['date_theater'], 0, 4) . substr($donnees3['date_theater'], 4, 2) . substr($donnees3['date_theater'], 6, 2);
 
           if ($date_film > $date_du_jour_moins_1_mois)
           {

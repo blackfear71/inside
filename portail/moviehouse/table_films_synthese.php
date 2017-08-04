@@ -56,9 +56,9 @@
 		$reponse2->closeCursor();
 
 		// On récupère la liste des films sur la première colonne et la date de sortie sur la 2ème
-		$reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater,5,4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
+		$reponse3 = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
 
-		$date_jour = date("mdY");
+		$date_jour = date("Ymd");
 		$date_jour_present = false;
 		$l = 0;
 

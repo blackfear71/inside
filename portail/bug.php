@@ -3,7 +3,7 @@
 	include('../includes/controls_users.php');
 
 	// Initialisation des variables SESSION pour la création d'articles
-	include('../includes/init_session.php');
+	//include('../includes/init_session.php');
 ?>
 
 <!DOCTYPE html>

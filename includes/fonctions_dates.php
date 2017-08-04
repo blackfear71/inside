@@ -14,12 +14,12 @@ function isLastDayOfYearWednesday($year){
 }
 
 /* formatDateForDisplay
-   Les dates sont stockées au format MMJJAAAA. Cette fonction renvoie la date au format
+   Les dates sont stockées au format AAAAMMJJ. Cette fonction renvoie la date au format
    JJ/MM/AAAA pour l'affichage. Si elle ne comporte pas 8 caractères, on renvoie l'argument
 */
 function formatDateForDisplay($date){
     if (strlen($date) == 8)
-        return substr($date, 2, 2) . '/' . substr($date, 0, 2) . '/' . substr($date, 4, 4);
+        return substr($date, 6, 2) . '/' . substr($date, 4, 2) . '/' . substr($date, 0, 4);
     else
         return $date;
 }
@@ -36,12 +36,12 @@ function formatTimeForDisplay($time){
 }
 
 /* formatDateForInsert
-   Les dates sont stockées au format MMJJAAAA. Cette fonction renvoie la date au format
-   MMJJAAAA pour l'insertion en base. Si elle ne comporte pas 8 caractères, on renvoie l'argument
+   Les dates sont stockées au format AAAAMMJJ. Cette fonction renvoie la date au format
+   AAAAMMJJ pour l'insertion en base. Si elle ne comporte pas 8 caractères, on renvoie l'argument
 */
 function formatDateForInsert($date){
     if (strlen($date) == 10)
-        return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
+        return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
     else
         return $date;
 }
@@ -54,8 +54,8 @@ function formatDateForInsert($date){
 */
 function isBlankDate($date){
     $isLastDayWednesday = isLastDayOfYearWednesday(date('Y'));
-    $thirtiethOfDecember = '1230' . date ('Y');
-    $thirtyFirstOfDecember = '1231' . date ('Y');
+    $thirtiethOfDecember = date ('Y') . '1230';
+    $thirtyFirstOfDecember = date ('Y') . '1231';
 
     if (($date == $thirtyFirstOfDecember && !$isLastDayWednesday)
        || ($date == $thirtiethOfDecember && $isLastDayWednesday))

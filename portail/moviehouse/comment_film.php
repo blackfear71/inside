@@ -8,7 +8,7 @@
     // On récupère les données
     $id_film = $_GET['id_film'];
     $author  = $_SESSION['identifiant'];
-    $date    = date("mdY");
+    $date    = date("Ymd");
     $time    = date("His");
     $comment = htmlspecialchars($_POST['comment']);
 

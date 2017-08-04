@@ -2291,6 +2291,7 @@ article
 	background-color: #2eb2f4;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	border-bottom: solid 5px #3091c1;
 }
 
 .content_comments_films
@@ -3267,6 +3268,37 @@ article
 .form_preference
 {
 	margin: 30px;
+}
+
+.bouton_preference
+{
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+.label_preference
+{
+	display: inline-block;
+	background-color: #f3f3f3;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 100px;
+	padding-left: 25px;
+	margin-left: -30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	cursor: pointer;*/
+}
+
+.label_preference:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
 }
 
 /*** Admin ***/
