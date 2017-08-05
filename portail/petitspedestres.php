@@ -67,9 +67,8 @@
 						echo '<input type="text" name="distance" value="' . $_SESSION['distance'] . '" placeholder="Distance (km)" maxlength="10" class="date_saisie_rapide" />';
 						echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
 					echo '</form>';
-				?>
 
-        <?php
+					// Tableau des parcours
         	echo '<table class="table_movie_house">';
           	echo '<tr>';
               echo '<td class="init_table_dates" style="width: 120px;">Nom du parcours</td>';

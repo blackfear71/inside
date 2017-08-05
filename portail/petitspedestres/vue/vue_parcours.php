@@ -17,6 +17,7 @@
 		</header>
 
 		<section>
+      
 			<aside>
 				<!-- Boutons d'action -->
 				<?php
@@ -38,12 +39,12 @@
 			?>
 
 			<article class="article_portail">
-                <!-- Bandeau catégorie -->
+        <!-- Bandeau catégorie -->
 				<img src="../../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
-                <p>Parcours : <?php echo $parcours->getNom(); ?></p>
-            </article>
+        <p>Parcours : <?php echo $parcours->getNom(); ?></p>
+      </article>
 
-        </section>
+    </section>
 
 		<footer>
 			<?php include('../../../includes/footer.php'); ?>
