@@ -1,19 +1,47 @@
 <?php
 class Parcours{
+    private $id;
     private $nom;
     private $distance;
     private $lieu;
     private $url_image;
 
-    // constructeur de l'objet Parcours
-    // il faut passer une variable $data contenant le résultat de la requête fetch
-    public function __construct($data){
+    // Constructeur par défaut (objet vide)
+    public function __construct(){
+        $this->id = 0;
+        $this->nom = '';
+        $this->distance = 0;
+        $this->lieu = '';
+        $this->url_image = '';
+    }
+
+    // Constructeur de l'objet Parcours en fonction de données
+    // -> il faut passer une variable $data contenant le résultat de la requête fetch
+    public static function withData($data){
+        $parcours = new self();
+        $parcours->fill($data);
+        return $parcours;
+    }
+
+    protected function fill ($data){
+        $this->id = $data['id'];
         $this->nom = $data['nom'];
         $this->distance = $data['distance'];
         $this->lieu = $data['lieu'];
         $this->url_image = $data['image'];
     }
+
     // getters et setters pour l'objet Parcours
+    // id
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+
     // nom
     public function setNom($name){
         $this->nom = $name;

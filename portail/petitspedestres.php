@@ -81,12 +81,13 @@
 
             while($donnees = $reponse->fetch())
             {
-                $parcours = new Parcours($donnees);
+							// Instanciation d'un objet Parcours à partir des données remontées de la bdd
+                $parcours = Parcours::withData($donnees);
 
                 echo '<tr>';
                   echo '<td class="table_users">';
                     echo '<div>';
-                      echo $parcours->getNom();
+                      echo '<a href="petitspedestres/controleur/consulter_parcours.php?id=' . $parcours->getId() . '">'. $parcours->getNom() . '</a>';
                     echo '</div>';
                   echo '</td>';
 
