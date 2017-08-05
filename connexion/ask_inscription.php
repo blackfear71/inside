@@ -74,6 +74,6 @@
 
     $_SESSION['ask_desinscription'] = true;
 
-    header('location: profil.php?user=' . $_SESSION['identifiant']);
+    header('location: ../profil/profil.php?user=' . $_SESSION['identifiant']);
   }
 ?>

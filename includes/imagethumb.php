@@ -1,13 +1,13 @@
 <?php
 
-	function imagethumb( $image_src , $image_dest = NULL , $max_size = 100, $expand = FALSE, $square = FALSE )
+	function imagethumb($image_src , $image_dest = NULL , $max_size = 100, $expand = FALSE, $square = FALSE)
 	{
-		if (!file_exists($image_src)) 
+		if (!file_exists($image_src))
 			return FALSE;
 
 		// Récupère les infos de l'image
 		$fileinfo = getimagesize($image_src);
-		if (!$fileinfo) 
+		if (!$fileinfo)
 			return FALSE;
 
 		$width     = $fileinfo[0];
@@ -18,7 +18,7 @@
 		if (!$expand && max($width, $height) <= $max_size && (!$square || ($square && $width==$height)))
 		{
 			// L'image est plus petite que max_size
-			if( $image_dest)
+			if ($image_dest)
 			{
 				return copy($image_src, $image_dest);
 			}
@@ -119,7 +119,7 @@
 		}
 
 		// Libération de la mémoire
-		imagedestroy($new_image); 
+		imagedestroy($new_image);
 
 		return TRUE;
 	}

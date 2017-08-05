@@ -21,7 +21,7 @@
             // Avatars
             echo '<div class="zone_avatar_total_depenses">';
               if (isset($donnees['avatar']) AND !empty($donnees['avatar']))
-                echo '<img src="../connexion/avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_total_depenses" />';
+                echo '<img src="../profil/avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_total_depenses" />';
               else
                 echo '<img src="../includes/icons/profile.png" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_total_depenses" />';
             echo '</div>';

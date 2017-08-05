@@ -1641,7 +1641,7 @@ article
 	height: 40px;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 30px;
+	line-height: 40px;
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
@@ -1652,7 +1652,6 @@ article
 {
 	max-width: 40px;
 	max-height: 40px;
-	vertical-align: middle;
 }
 
 .full_name_films
@@ -2922,7 +2921,7 @@ article
 	height: 30px;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 20px;
+	line-height: 30px;
 	overflow: hidden;
 	display: inline-block;
 	vertical-align: middle;
@@ -2933,7 +2932,6 @@ article
 {
 	max-width: 30px;
 	max-height: 30px;
-	vertical-align: middle;
 }
 
 .pseudo_total_depenses
@@ -3262,7 +3260,21 @@ article
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 120px;
+	max-height: 120px;
 	vertical-align: middle;
+}
+
+.zone_profil_utilisateur_suppr_mask
+{
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	overflow: hidden;
+	vertical-align: middle;
+	background-color: white;
 }
 
 .zone_profil_utilisateur_suppr_avatar
@@ -3270,7 +3282,6 @@ article
 	max-width: 120px;
 	max-height: 120px;
 	border-radius: 5px;
-	margin-bottom: 20px;
 }
 
 .zone_profil_generique

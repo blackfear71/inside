@@ -383,7 +383,7 @@
 											echo '<td class="td_view_by" style="border-right: solid 1px white;">';
 												echo '<div class="zone_avatar_details_film">';
 													if (isset($avatar) AND !empty($avatar))
-														echo '<img src="../../connexion/avatars/' . $avatar . '" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
+														echo '<img src="../../profil/avatars/' . $avatar . '" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
 													else
 														echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $utilisateur . '" class="avatar_details_film" />';
 												echo '</div>';
@@ -446,7 +446,7 @@
 									// Photo de profil
 									echo '<div class="zone_avatar_comments">';
 										if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
-											echo '<img src="../../connexion/avatars/' . $donnees2['avatar'] . '" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
+											echo '<img src="../../profil/avatars/' . $donnees2['avatar'] . '" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
 										else
 											echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $donnees2['full_name'] . '" class="avatar_comments" />';
 									echo '</div>';

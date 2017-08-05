@@ -62,7 +62,7 @@
 	// Profil
 	if ($profil == true)
 	{
-		echo '<a href="/inside/connexion/profil.php?user=' . $_SESSION['identifiant'] . '" title="Profil" class="link_profile">';
+		echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['identifiant'] . '" title="Profil" class="link_profile">';
 			echo '<img src="/inside/includes/icons/profile.png" alt="profile" title="Profil" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Profil</div>';

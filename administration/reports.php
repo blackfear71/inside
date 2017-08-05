@@ -42,7 +42,7 @@
 			</aside>
 
 			<article class="article_portail">
-				<div class="switch_bug_view">
+				<div class="switch_bug_view" style="margin-top: -30px;">
 					<?php
 						$switch1 = '<a href="reports.php?view=all" class="link_bug_switch_inactive">Tous</a>';
 						$switch2 = '<a href="reports.php?view=unresolved" class="link_bug_switch_inactive">En cours</a>';

@@ -23,7 +23,7 @@
 				echo '<td class="init_table_users">';
 					echo '<div class="zone_avatar_films">';
 						if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-							echo '<img src="../connexion/avatars/' . $donnees1['avatar'] . '" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
+							echo '<img src="../profil/avatars/' . $donnees1['avatar'] . '" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
 						else
 							echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $donnees1['full_name'] . '" class="avatar_films" />';
 					echo '</div>';
@@ -311,7 +311,7 @@
 				echo '<td class="init_table_users">';
 					echo '<div class="zone_avatar_films">';
 						if (isset($donnees4['avatar']) AND !empty($donnees4['avatar']))
-							echo '<img src="../connexion/avatars/' . $donnees4['avatar'] . '" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
+							echo '<img src="../profil/avatars/' . $donnees4['avatar'] . '" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
 						else
 							echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $donnees4['full_name'] . '" class="avatar_films" />';
 					echo '</div>';

@@ -6,7 +6,7 @@
 	//include('../includes/init_session.php');
 
 	if ($_GET['user'] != $_SESSION['identifiant'])
-		header('location: ../connexion/profil.php?user=' . $_SESSION['identifiant'] . '');
+		header('location: ../profil/profil.php?user=' . $_SESSION['identifiant'] . '');
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +101,11 @@
 									$donnees = $reponse->fetch();
 
 									if (isset($donnees['avatar']) AND !empty($donnees['avatar']))
-										echo '<img src="avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="zone_profil_utilisateur_suppr_avatar" />';
+									{
+										echo '<div class="zone_profil_utilisateur_suppr_mask">';
+											echo '<img src="avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="zone_profil_utilisateur_suppr_avatar" />';
+										echo '</div>';
+									}
 
 									$reponse->closeCursor();
 								?>
@@ -352,7 +356,7 @@
 							<td class="zone_profil_utilisateur_desinscription">
 								<div class="message_profil">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l'administrateur à l'aide de ce bouton. Il validera votre choix après vérification.</div>
 
-								<form method="post" action="ask_inscription.php" class="form_preference">
+								<form method="post" action="../connexion/ask_inscription.php" class="form_preference">
 									<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="saisie_valider_profil" />
 								</form>
 
@@ -385,6 +389,7 @@
 			{
 				var output = document.getElementById('output');
 				output.src = URL.createObjectURL(event.target.files[0]);
+				output.src.SizeHeight = "120px";
 			};
 		</script>
 
