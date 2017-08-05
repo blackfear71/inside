@@ -5,7 +5,7 @@
 	/************************/
 	/* Tableau des dépenses */
 	/************************/
-	echo '<table class="table_movie_house">';
+	echo '<table class="table_movie_house" style="margin-top: 50px;">';
 
 		// On récupère la liste des utilisateurs du site sur la première ligne à partir de la 4ème colonne
 		$user_parts = array();

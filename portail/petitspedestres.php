@@ -60,12 +60,14 @@
 				<!-- Bandeau catégorie -->
 				<img src="../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
 
-				<!-- Saisie -->
-        <form method="post" action="petitspedestres/ajout_parcours.php" class="form_saisie_rapide">
-					<input type="text" name="nom_parcours" value="<?php echo $_SESSION['nom_parcours'];?>" placeholder="Nom du parcours" maxlength="255" class="name_saisie_rapide" required />
-            <input type="text" name="distance" value="<?php echo $_SESSION['distance'];?>" placeholder="Distance (km)" maxlength="10"  class="date_saisie_rapide" />
-					<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />
-				</form>
+				<?php
+					// Saisie
+					echo '<form method="post" action="petitspedestres/ajout_parcours.php" class="form_saisie_rapide">';
+						echo '<input type="text" name="nom_parcours" value="' . $_SESSION['nom_parcours'] . '" placeholder="Nom du parcours" maxlength="255" class="name_saisie_rapide" required />';
+						echo '<input type="text" name="distance" value="' . $_SESSION['distance'] . '" placeholder="Distance (km)" maxlength="10" class="date_saisie_rapide" />';
+						echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
+					echo '</form>';
+				?>
 
         <?php
         	echo '<table class="table_movie_house">';

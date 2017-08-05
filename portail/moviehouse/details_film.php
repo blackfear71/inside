@@ -273,12 +273,12 @@
 											{
 												if ($j == $data3['stars'])
 												{
-													echo '<img src="images/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+													echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
 													echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
 												}
 												else
 												{
-													echo '<img src="images/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+													echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
 													echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" />';
 												}
 											}
@@ -399,7 +399,7 @@
 												echo '<td class="td_view_by">';
 
 												echo '<div class="link_vote_details">';
-													echo '<img src="images/stars/star' . $data5['stars'] . '.png" alt="star' . $data5['stars'] . '" class="new_star" />';
+													echo '<img src="icons/stars/star' . $data5['stars'] . '.png" alt="star' . $data5['stars'] . '" class="new_star" />';
 												echo '</div>';
 
 											echo '</td>';

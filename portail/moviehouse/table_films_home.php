@@ -1,4 +1,5 @@
 <div class="zone_home">
+  <!-- Ajouts récents -->
   <div class="titre_home" style="margin-top: 0;">
     Ajouts récents
   </div>
@@ -27,6 +28,7 @@
     ?>
   </div>
 
+  <!-- Les plus attendus -->
   <div class="titre_home">
     Les plus attendus en <?php echo $_GET['year']; ?>
   </div>
@@ -119,6 +121,14 @@
               // Titre du film
               echo '<div class="titre_home_film">';
                 echo $donnees4['film'];
+              echo '</div>';
+
+              // Nombre d'utilisateurs intéressés et moyenne des étoiles
+              echo '<div class="stats_home_film">';
+                echo '<div class="stats_home_icon_1"></div>';
+                echo '<div class="stats_home_number">' . $ligne[3] . '</div>';
+                echo '<div class="stats_home_icon_2"></div>';
+                echo '<div class="stats_home_number">' . str_replace('.', ',', round($ligne[2], 1)) . ' / 5</div>';
               echo '</div>';
             echo '</a>';
           }

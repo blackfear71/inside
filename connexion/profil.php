@@ -307,14 +307,14 @@
 										switch ($_SESSION['today_movie_house'])
 										{
 											case "Y":
-												echo '<input id="afficher" type="checkbox" name="affiche_date" checked />';
-												echo '<label for="afficher">Afficher</label>';
+												echo '<input id="afficher" type="checkbox" name="affiche_date" class="bouton_preference" checked />';
+												echo '<label for="afficher" class="label_preference">Afficher</label>';
 												break;
 
 											case "N":
 											default:
-												echo '<input id="afficher" type="checkbox" name="affiche_date" />';
-												echo '<label for="afficher">Afficher</label>';
+												echo '<input id="afficher" type="checkbox" name="affiche_date" class="bouton_preference" />';
+												echo '<label for="afficher" class="label_preference">Afficher</label>';
 												break;
 										}
 									?>

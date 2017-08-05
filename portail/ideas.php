@@ -25,7 +25,7 @@
 
 		<header>
 			<div class="main_title">
-				#TheBox
+				<img src="../includes/images/the_box_band.png" alt="movie_house_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">
@@ -52,7 +52,7 @@
 			?>
 
 			<article class="article_portail">
-				<div class="switch_bug_view">
+				<div class="switch_bug_view" style="margin-top: -30px;">
 					<?php
 						$switch1 = '<a href="ideas.php?view=all" class="link_bug_switch_inactive">Toutes</a>';
 						$switch2 = '<a href="ideas.php?view=inprogress" class="link_bug_switch_inactive">En cours</a>';

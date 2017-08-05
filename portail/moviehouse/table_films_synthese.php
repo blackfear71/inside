@@ -129,37 +129,37 @@
 											{
 												case "1":
 													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-														echo '<img src="moviehouse/images/stars/star1.png" alt="star1" class="new_star" />';
+														echo '<img src="moviehouse/icons/stars/star1.png" alt="star1" class="new_star" />';
 													echo '</a>';
 													break;
 
 												case "2":
 													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-														echo '<img src="moviehouse/images/stars/star2.png" alt="star2" class="new_star" />';
+														echo '<img src="moviehouse/icons/stars/star2.png" alt="star2" class="new_star" />';
 													echo '</a>';
 													break;
 
 												case "3":
 													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-														echo '<img src="moviehouse/images/stars/star3.png" alt="star3" class="new_star" />';
+														echo '<img src="moviehouse/icons/stars/star3.png" alt="star3" class="new_star" />';
 													echo '</a>';
 													break;
 
 												case "4":
 													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-														echo '<img src="moviehouse/images/stars/star4.png" alt="star4" class="new_star" />';
+														echo '<img src="moviehouse/icons/stars/star4.png" alt="star4" class="new_star" />';
 													echo '</a>';
 													break;
 
 												case "5":
 													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-														echo '<img src="moviehouse/images/stars/star5.png" alt="star5" class="new_star" />';
+														echo '<img src="moviehouse/icons/stars/star5.png" alt="star5" class="new_star" />';
 													echo '</a>';
 													break;
 
 												default:
 													echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-														echo '<img src="moviehouse/images/stars/star0.png" alt="star0" class="new_star" />';
+														echo '<img src="moviehouse/icons/stars/star0.png" alt="star0" class="new_star" />';
 													echo '</a>';
 													break;
 											}
@@ -168,7 +168,7 @@
 												// Boutons vote
 												for($m = 0; $m <= 5; $m++)
 												{
-													echo '<img src="moviehouse/images/stars/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
+													echo '<img src="moviehouse/icons/stars/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
 
 													if ($m == $ligne[3])
 														echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
@@ -178,7 +178,7 @@
 
 												// Bouton annulation
 												echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Annuler" class="link_vote">';
-													echo '<img src="moviehouse/images/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
+													echo '<img src="moviehouse/icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
 												echo '</a>';
 											echo '</form>';
 										}
@@ -186,7 +186,7 @@
 										else
 										{
 											if (isset($ligne[3]))
-												echo '<img src="moviehouse/images/stars/star' . $ligne[3] . '.png" alt="star0" class="new_star" />';
+												echo '<img src="moviehouse/icons/stars/star' . $ligne[3] . '.png" alt="star0" class="new_star" />';
 										}
 									echo '</div>';
 								}
@@ -212,14 +212,14 @@
 								if ($_SESSION['identifiant'] == $user_choix[$j])
 								{
 									echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-										echo '<img src="moviehouse/images/stars/star0.png" alt="star0" class="new_star" />';
+										echo '<img src="moviehouse/icons/stars/star0.png" alt="star0" class="new_star" />';
 									echo '</a>';
 
 									echo '<form method="post" action="moviehouse/vote_film.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $donnees3['id'] . '" id="preference2[' . $l . ']" style="display: none; min-width: 240px;">';
 										// Boutons vote
 										for($m = 0; $m <= 5; $m++)
 										{
-											echo '<img src="moviehouse/images/stars/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
+											echo '<img src="moviehouse/icons/stars/star' . $m .'.png" alt="star' . $m . '" class="new_star_2" />';
 											if ($m == 0)
 												echo '<input type="submit" name="preference[' . $m . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
 											else
@@ -228,14 +228,14 @@
 
 										// Bouton annulation
 										echo '<a onclick="afficherMasquer(\'preference[' . $l . ']\'); afficherMasquer(\'preference2[' . $l . ']\');" id="preference[' . $l . ']" title="Annuler" class="link_vote">';
-											echo '<img src="moviehouse/images/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
+											echo '<img src="moviehouse/icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
 										echo '</a>';
 									echo '</form>';
 								}
 								// Avis des autres utilisteurs
 								else
 								{
-									echo '<img src="moviehouse/images/stars/star0.png" alt="star0" class="new_star" />';
+									echo '<img src="moviehouse/icons/stars/star0.png" alt="star0" class="new_star" />';
 								}
 							echo '</div>';
 						echo '</td>';
