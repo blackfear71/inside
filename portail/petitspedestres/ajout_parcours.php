@@ -15,7 +15,7 @@
       'image' => ''
       );
 
-  $monParcours = new Parcours($parcours);
+  $monParcours = Parcours::withData($parcours);
 
   if (is_numeric($monParcours->getDistance()))
   {

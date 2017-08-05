@@ -24,7 +24,10 @@ class Parcours{
     }
 
     protected function fill ($data){
-        $this->id = $data['id'];
+        if (isset($data['id'])){
+          $this->id = $data['id'];
+        }
+        
         $this->nom = $data['nom'];
         $this->distance = $data['distance'];
         $this->lieu = $data['lieu'];

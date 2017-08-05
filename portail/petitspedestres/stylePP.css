@@ -22,3 +22,13 @@
 	position: relative;
 	z-index: -2;
 }
+
+.label_parcours
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 70px;
+	padding-left: 10px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;	
+}

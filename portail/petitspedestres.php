@@ -86,9 +86,15 @@
                 echo '<tr>';
                   echo '<td class="table_users">';
                     echo '<div>';
-                      echo '<a href="petitspedestres/controleur/consulter_parcours.php?id=' . $parcours->getId() . '">'. $parcours->getNom() . '</a>';
+                      echo '<a href="petitspedestres/controleur/parcours.php?id=' . $parcours->getId() . '&action=consulter">'. $parcours->getNom() . '</a>';
                     echo '</div>';
                   echo '</td>';
+
+									/*
+									Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
+									Réponse : Parcours.
+									C'est nul ? Oui, c'est nul.
+									*/
 
                   echo '<td class="table_users">';
                     echo '<div>';

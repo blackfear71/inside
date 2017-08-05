@@ -70,7 +70,7 @@
 
 	// Petits pédestres
 	if ($path == '/inside/portail/petitspedestres.php' 
-       OR $path == '/inside/portail/petitspedestres/controleur/consulter_parcours.php')
+       OR $path == '/inside/portail/petitspedestres/controleur/parcours.php')
 	{
 		$onglet5 = '<a href="/inside/portail/petitspedestres.php" class="onglet_actif" title="Les Petits Pédestres" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 	}
