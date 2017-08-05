@@ -22,7 +22,7 @@
 
 		<header>
 			<div class="main_title">
-				Outil de demande d'évolution
+				<img src="../includes/images/bugs_band.png" alt="bugs_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

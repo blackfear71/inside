@@ -22,7 +22,7 @@
 
 		<header>
 			<div class="main_title">
-				Rapports de bugs
+				<img src="../includes/images/reports_band.png" alt="reports_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

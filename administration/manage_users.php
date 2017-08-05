@@ -26,7 +26,7 @@
 
 		<header>
 			<div class="main_title">
-				Gestion des utilisateurs
+				<img src="../includes/images/manage_users_band.png" alt="manage_users_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

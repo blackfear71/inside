@@ -142,4 +142,47 @@
       }
     ?>
   </div>
+
+  <!-- Prochaines sorties -->
+  <div class="titre_home">
+    Les prochaines soirées
+  </div>
+
+  <div class="zone_home_films">
+    <?php
+      $reponse5 = $bdd->query('SELECT * FROM movie_house WHERE date_doodle != "" AND date_doodle >= ' . date("Ymd") . ' ORDER BY date_doodle ASC, id DESC LIMIT 5');
+
+      $count = 0;
+
+      while($donnees5 = $reponse5->fetch())
+      {
+        echo '<a href="moviehouse/details_film.php?id_film=' . $donnees5['id'] . '" class="link_home_film">';
+          // Poster
+          if (!empty($donnees5['poster']))
+            echo '<img src="' . $donnees5['poster'] . '" alt="poster" title="' . $donnees5['film'] . '" class="img_home_film" />';
+          else
+            echo '<img src="moviehouse/images/cinema.jpg" alt="poster" title="' . $donnees5['film'] . '" class="img_home_film" />';
+
+          // Titre du film
+          echo '<div class="titre_home_film">';
+            echo $donnees5['film'];
+          echo '</div>';
+
+          // Date de sortie
+          echo '<div class="date_home_film">';
+            echo 'Soirée le ' . formatDateForDisplay($donnees5['date_doodle']);
+          echo '</div>';
+        echo '</a>';
+
+        $count++;
+      }
+
+      $reponse5->closeCursor();
+
+      if ($count == 0)
+      {
+        echo '<div class="no_films_waited">Pas encore de soirées prévues prochainement...</div>';
+      }
+    ?>
+  </div>
 </div>

@@ -25,7 +25,7 @@
 
 		<header>
 			<div class="main_title">
-				Profil
+				<img src="../includes/images/profile_band.png" alt="profile_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

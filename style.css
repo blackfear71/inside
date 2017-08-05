@@ -733,11 +733,11 @@ article
 .title_portail
 {
 	float: left;
-	margin-top: -370px;
+	margin-top: -360px;
 	margin-left: 40px;
 	color: white;
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 400%;
+	font-size: 300%;
 	line-height: 50px;
 	text-align: justify;
 }
@@ -2011,6 +2011,18 @@ article
 	display: inline-block;
 	font-family: robotolight, Verdana, sans-serif;
 	vertical-align: middle;
+}
+
+.date_home_film
+{
+	background-color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 5px;
+	font-family: robotomedium_italic, Verdana, sans-serif;
+	color: black;
 }
 
 .no_films_waited

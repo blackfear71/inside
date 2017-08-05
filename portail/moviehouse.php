@@ -1,8 +1,11 @@
 <?php
+	// var_dump($_SESSION);
+	
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
 
-	// var_dump($_SESSION) ;
+	// Fonctions
+	include('../includes/fonctions_dates.php');
 
 	// Initialisation des variables SESSION pour la création d'articles
 	//include('../includes/init_session.php');
@@ -81,7 +84,7 @@
 			<article class="article_portail">
 				<!-- Bandeau catégorie -->
 				<img src="../includes/images/movie_house_band.png" alt="movie_house_band" class="bandeau_categorie" />
-				
+
 				<!-- Switch entre vue générale et vue personnelle-->
 				<div class="switch_bug_view">
 					<?php

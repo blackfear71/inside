@@ -19,7 +19,7 @@
 
 		<header>
 			<div class="main_title">
-				Gestion des films
+				<img src="../includes/images/manage_films_band.png" alt="manage_films_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

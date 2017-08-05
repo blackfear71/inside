@@ -1,6 +1,5 @@
 <?php
 	include('../includes/appel_bdd.php');
-	include('../includes/fonctions_dates.php');
 
 	/***************************/
 	/* Tableau vue utilisateur */

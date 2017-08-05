@@ -19,7 +19,7 @@
 
 		<header>
 			<div class="main_title">
-				Administration
+				<img src="../includes/images/administration_band.png" alt="administration_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">
