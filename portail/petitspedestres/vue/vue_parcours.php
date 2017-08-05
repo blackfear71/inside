@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../../../favicon.png" />
 	<link rel="stylesheet" href="../../../style.css" />
+	<link rel="stylesheet" href="../stylePP.css" />
 	<title>Inside - PP</title>
 	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside, portail, CDS Finance" />
@@ -23,6 +24,7 @@
 					$disconnect = true;
 					$profil = true;
 					$modify_film = false;
+					$modify_parcours = true;
 					$delete_film = false;
 					$back = true;
 					$ideas = true;
@@ -40,7 +42,22 @@
 			<article class="article_portail">
                 <!-- Bandeau catégorie -->
 				<img src="../../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
-                <p>Parcours : <?php echo $parcours->getNom(); ?></p>
+                
+                <div class="PP-parcours">
+                    <div class="PP-titre">
+                        <?php echo $parcours->getNom(); ?>
+                    </div>
+                    <p>
+                       Distance : <?php echo $parcours->getDistance() . ' km'; ?><br/>
+                       Lieu : <?php echo $parcours->getLieu(); ?>
+                       <?php 
+                       if ($parcours->isImageSet())
+                       {
+                           echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . ' classe="img_article" /><br/>';
+                       }
+                        ?>
+                        </p>
+                </div>
             </article>
 
         </section>
