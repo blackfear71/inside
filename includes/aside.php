@@ -32,6 +32,9 @@
 	if (!isset($modify_film))
 		$modify_film = false;
 
+	if (!isset($modify_parcours))
+		$modify_parcours = false;
+		
 	if (!isset($delete_film))
 			$delete_film = false;
 
