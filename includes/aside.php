@@ -121,6 +121,15 @@
 		echo '<div class="hover_aside">Modifier</div>';
 	}
 
+	// Modifier parcours
+	if ($modify_parcours == true)
+	{
+		echo '<a href="/inside/portail/petitspedestres/controleur/consulter_parcours.php?id=' . $_GET['id'] . '" title="Modifier les détails" class="link_profile">';
+			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
+		echo '</a>';
+		echo '<div class="hover_aside">Modifier</div>';
+	}
+
 	// Demande suppression film
 	if ($delete_film == true AND $_SESSION['doesnt_exist'] != true)
 	{

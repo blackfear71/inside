@@ -77,5 +77,15 @@ class Parcours{
     public function getImage(){
         return $this->url_image;
     }
+
+    // Méthode pour savoir si url image présente ou non 
+    public function isImageSet(){
+        if (empty($this->url_image)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }
 ?>
