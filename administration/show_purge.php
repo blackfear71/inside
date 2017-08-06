@@ -19,7 +19,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				Purge des fichiers temporaires
+				<img src="../includes/images/purge_band.png" alt="purge_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

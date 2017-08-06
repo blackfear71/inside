@@ -15,7 +15,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				<img src="../../includes/images/the_box_band.png" alt="movie_house_band" class="bandeau_categorie_2" />
+				<img src="../../includes/images/the_box_band.png" alt="the_box_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

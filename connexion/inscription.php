@@ -30,7 +30,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				Demande d'inscription
+				<img src="../includes/images/subscribe_band.png" alt="subscribe_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">

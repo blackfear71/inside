@@ -29,7 +29,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				Demande de réinitialisation du mot de passe
+				<img src="../includes/images/password_band.png" alt="password_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">
