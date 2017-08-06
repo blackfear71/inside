@@ -1,6 +1,6 @@
 <?php
 	// var_dump($_SESSION);
-	
+
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
 
@@ -85,27 +85,23 @@
 				<!-- Bandeau catégorie -->
 				<img src="../includes/images/movie_house_band.png" alt="movie_house_band" class="bandeau_categorie" />
 
-				<!-- Switch entre vue générale et vue personnelle-->
-				<div class="switch_bug_view">
+				<!-- Switch entre accueil, vue générale et vue personnelle-->
+				<div class="switch_view">
 					<?php
-						$switch1 = '<a href="moviehouse.php?view=home&year=' . date("Y") . '" class="link_bug_switch_inactive">Accueil</a>';
-						$switch2 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Synthèse</a>';
-						$switch3 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_inactive">Détails</a>';
+						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
+																 'main' => array('lib' => 'Synthèse', 'date' => $_GET['year']),
+																 'user' => array('lib' => 'Détails',  'date' => $_GET['year'])
+																);
 
-						if ($_GET['view'] == "home")
+						foreach ($listeSwitch as $view => $lib_view)
 						{
-							$switch1 = '<a href="moviehouse.php?view=home&year=' . date("Y") . '" class="link_bug_switch_active">Accueil</a>';
-						}
-						elseif ($_GET['view'] == "main")
-						{
-							$switch2 = '<a href="moviehouse.php?view=main&year=' . $_GET['year'] . '" class="link_bug_switch_active">Synthèse</a>';
-						}
-						elseif ($_GET['view'] == "user")
-						{
-							$switch3 = '<a href="moviehouse.php?view=user&year=' . $_GET['year'] . '" class="link_bug_switch_active">Détails</a>';
-						}
+							if ($_GET['view'] == $view)
+								$switch = '<a href="moviehouse.php?view=' . $view . '&year=' . $lib_view['date'] . '" class="link_switch_active">' . $lib_view['lib'] . '</a>';
+							else
+								$switch = '<a href="moviehouse.php?view=' . $view . '&year=' . $lib_view['date'] . '" class="link_switch_inactive">' . $lib_view['lib'] . '</a>';
 
-						echo $switch1, $switch2, $switch3;
+							echo $switch;
+						}
 					?>
 				</div>
 

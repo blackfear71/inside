@@ -1,6 +1,4 @@
 <?php
-  // @ini_set('display_errors', 'on');
-
   // Contrôles communs Utilisateurs
   include_once('../../../includes/controls_users.php');
 
@@ -16,7 +14,7 @@
 \         /
  \******/
 
-  // Contrôle vue renseignée
+  // Contrôle vue renseignée URL
   switch ($_GET['view'])
   {
     case 'all':
@@ -29,7 +27,7 @@
       header('location: controleur_ideas.php?view=all&action=goConsulter');
   }
 
-  // Contrôle action renseignée
+  // Contrôle action renseignée URL
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
@@ -41,7 +39,7 @@
       header('location: controleur_ideas.php?view=' . $_GET['view'] . '&action=goConsulter');
   }
 
-  // Choix fonction
+  // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

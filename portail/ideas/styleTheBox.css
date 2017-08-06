@@ -1,17 +1,9 @@
+/**************/
 /*** TheBox ***/
-.trait_ideas
-{
-	clear: both;
-	width: 80%;
-	height: 3px;
-	background-color: #e3e3e3;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
+/**************/
 
-.ajout_idee
+/*** Ajout idée ***/
+.zone_ajout_idee
 {
 	margin-top: 30px;
 }
@@ -64,6 +56,20 @@
 	font-size: 110%;
 }
 
+/*** Séparation ***/
+.trait_ideas
+{
+	clear: both;
+	width: 80%;
+	height: 3px;
+	background-color: #e3e3e3;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/*** Liste idées ***/
 .table_ideas
 {
 	margin-top: 30px;

@@ -42,26 +42,22 @@
 			</aside>
 
 			<article class="article_portail">
-				<div class="switch_bug_view" style="margin-top: -30px;">
+				<div class="switch_view" style="margin-top: -30px;">
 					<?php
-						$switch1 = '<a href="reports.php?view=all" class="link_bug_switch_inactive">Tous</a>';
-						$switch2 = '<a href="reports.php?view=unresolved" class="link_bug_switch_inactive">En cours</a>';
-						$switch3 = '<a href="reports.php?view=resolved" class="link_bug_switch_inactive">Résolus</a>';
+						$listeSwitch = array('all'        => 'Tous',
+																 'unresolved' => 'En cours',
+																 'resolved'   => 'Résolus'
+																);
 
-						if ($_GET['view'] == "all")
+						foreach ($listeSwitch as $view => $lib_view)
 						{
-							$switch1 = '<a href="reports.php?view=all" class="link_bug_switch_active">Tous</a>';
-						}
-						elseif ($_GET['view'] == "unresolved")
-						{
-							$switch2 = '<a href="reports.php?view=unresolved" class="link_bug_switch_active">En cours</a>';
-						}
-						elseif ($_GET['view'] == "resolved")
-						{
-							$switch3 = '<a href="reports.php?view=resolved" class="link_bug_switch_active">Résolus</a>';
-						}
+							if ($_GET['view'] == $view)
+								$switch = '<a href="reports.php?view=' . $view . '" class="link_switch_active">' . $lib_view . '</a>';
+							else
+								$switch = '<a href="reports.php?view=' . $view . '" class="link_switch_inactive">' . $lib_view . '</a>';
 
-						echo $switch1, $switch2, $switch3;
+							echo $switch;
+						}
 					?>
 				</div>
 

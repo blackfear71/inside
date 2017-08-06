@@ -3,10 +3,13 @@
   include_once('../../../includes/classes/ideas.php');
 
   // METIER : Lecture liste des idées
+  // RETOUR : Tableau d'idées
   function readIdeas($view)
   {
-    // Initialisation tableau d'idées
-    $listeIdeas = array();
+    // Initialisations tableau d'idées
+    $listeIdeas       = array();
+    $auteur_idee      = "";
+    $developpeur_idee = "";
 
     global $bdd;
 
@@ -22,7 +25,7 @@
 
     while ($donnees = $reponse->fetch())
     {
-      // Instanciation d'un objet Ideas à partir des données remontées de la bdd
+      // Instanciation d'un objet Idea à partir des données remontées de la bdd
       $idea = Ideas::withData($donnees);
 
       // Recherche du nom complet de l'auteur
@@ -36,18 +39,21 @@
 
       $reponse2->closeCursor();
 
-      // Recherche du nom complet du developpeur
-      $reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $idea->getDevelopper() . '"');
-      $donnees3 = $reponse3->fetch();
+      // Recherche du nom complet du developpeur si renseigné
+      if (!empty($idea->getDevelopper()))
+      {
+        $reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $idea->getDevelopper() . '"');
+        $donnees3 = $reponse3->fetch();
 
-      if (isset($donnees3['full_name']) AND !empty($donnees3['full_name']))
-        $developpeur_idee = $donnees3['full_name'];
-      else
-        $developpeur_idee = "<i>un ancien utilisateur</i>";
+        if (isset($donnees3['full_name']) AND !empty($donnees3['full_name']))
+          $developpeur_idee = $donnees3['full_name'];
+        else
+          $developpeur_idee = "<i>un ancien utilisateur</i>";
 
-      $reponse3->closeCursor();
+        $reponse3->closeCursor();
+      }
 
-      // On construit un tableau avec les données d'une idée
+      // On construit un tableau qu'on alimente avec les données d'une idée
       $myIdea = array('id'         => $idea->getId(),
                       'subject'    => $idea->getSubject(),
                       'date'       => $idea->getDate(),
@@ -68,6 +74,7 @@
   }
 
   // METIER : Insertion d'un idée
+  // RETOUR : Aucun
 
      /******\
    /         \
@@ -75,7 +82,6 @@
   \         /
    \******/
 
-  // Renvoie un objet Ideas
   function insertIdea()
   {
     // Récupération des données
@@ -129,7 +135,7 @@
   }
 
   // METIER : Mise à jour du statut d'une idée
-  // Renvoie un objet Ideas
+  // RETOUR : Aucun
   function updateIdea($id, $post)
   {
     switch ($post)
@@ -168,7 +174,7 @@
         break;
     }
 
-    // On construit un tableau avec les données
+    // On construit un tableau avec les données à modifier
     $data = array('status'     => $status,
                   'developper' => $developper
                  );

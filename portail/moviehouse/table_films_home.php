@@ -145,7 +145,7 @@
 
   <!-- Prochaines sorties -->
   <div class="titre_home">
-    Les prochaines soirées
+    Les prochaines sorties
   </div>
 
   <div class="zone_home_films">
@@ -170,7 +170,7 @@
 
           // Date de sortie
           echo '<div class="date_home_film">';
-            echo 'Soirée le ' . formatDateForDisplay($donnees5['date_doodle']);
+            echo 'Sortie le ' . formatDateForDisplay($donnees5['date_doodle']);
           echo '</div>';
         echo '</a>';
 
@@ -181,7 +181,7 @@
 
       if ($count == 0)
       {
-        echo '<div class="no_films_waited">Pas encore de soirées prévues prochainement...</div>';
+        echo '<div class="no_films_waited">Pas encore de sorties prévues prochainement...</div>';
       }
     ?>
   </div>
