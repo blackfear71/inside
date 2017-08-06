@@ -1,4 +1,4 @@
-<script>
+<!--<script>
 	function afficherMasquer(id)
 	{
 		if (document.getElementById(id).style.display == "none")
@@ -6,7 +6,7 @@
 		else
 			document.getElementById(id).style.display = "none";
 	}
-</script>
+</script>-->
 
 <?php
 	//////////////////////////////////////
@@ -173,7 +173,6 @@
 	if ($ideas == true)
 	{
 		echo '<a href="/inside/portail/ideas/controleur/controleur_ideas.php?view=inprogress&action=goConsulter" title="&#35;TheBox" class="link_profile">';
-		//echo '<a href="/inside/portail/ideas.php?view=inprogress" title="&#35;TheBox" class="link_profile">';
 			echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">#TheBox</div>';

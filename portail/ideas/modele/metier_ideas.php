@@ -48,14 +48,15 @@
       $reponse3->closeCursor();
 
       // On construit un tableau avec les données d'une idée
-      $myIdea = array('id'          => $idea->getId(),
-                      'subject'     => $idea->getSubject(),
-                      'date'        => $idea->getDate(),
-                      'identifiant' => $idea->getAuthor(),
-                      'name'        => $auteur_idee,
-                      'content'     => $idea->getContent(),
-                      'status'      => $idea->getStatus(),
-                      'developper'  => $developpeur_idee
+      $myIdea = array('id'         => $idea->getId(),
+                      'subject'    => $idea->getSubject(),
+                      'date'       => $idea->getDate(),
+                      'author'     => $idea->getAuthor(),
+                      'name_a'     => $auteur_idee,
+                      'content'    => $idea->getContent(),
+                      'status'     => $idea->getStatus(),
+                      'developper' => $idea->getDevelopper(),
+                      'name_d'     => $developpeur_idee
                      );
 
       array_push($listeIdeas, $myIdea);

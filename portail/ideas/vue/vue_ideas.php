@@ -159,7 +159,7 @@
 
                   // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
           				if ( empty($ligne['developper'])
-          				OR (!empty($ligne['developper']) AND $_SESSION['identifiant'] == $ligne['identifiant'])
+          				OR (!empty($ligne['developper']) AND $_SESSION['identifiant'] == $ligne['developper'])
           				OR  $ligne['status'] == "D"
           				OR  $ligne['status'] == "R")
           				{
@@ -210,7 +210,7 @@
           					echo 'Proposée par';
           				echo '</td>';
           				echo '<td class="td_ideas_content">';
-          					echo $ligne['name'];
+          					echo $ligne['name_a'];
           				echo '</td>';
 
           				// Statut
