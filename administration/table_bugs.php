@@ -105,11 +105,11 @@
 	if ($count == 0)
 	{
 		if ($_GET['view'] == "resolved")
-			echo '<p class="submitted" style="text-align: center; color: black;">Aucun(e) bug/évolution résolu(e)</p>';
+			echo '<p class="no_bugs">Aucun(e) bug/évolution résolu(e)</p>';
 		elseif ($_GET['view'] == "unresolved")
-			echo '<p class="submitted" style="text-align: center; color: black;">Aucun(e) bug/évolution non résolu(e)</p>';
+			echo '<p class="no_bugs">Aucun(e) bug/évolution non résolu(e)</p>';
 		else
-			echo '<p class="submitted" style="text-align: center; color: black;">Aucun(e) bug/évolution</p>';
+			echo '<p class="no_bugs">Aucun(e) bug/évolution</p>';
 	}
 
 	$reponse->closeCursor();

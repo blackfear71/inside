@@ -1,11 +1,3 @@
-<?php
-	// Contrôles communs Utilisateurs
-	include('../includes/controls_users.php');
-
-	// Initialisation des variables SESSION pour la création d'articles
-	//include('../includes/init_session.php');
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +6,8 @@
 		<meta name="keywords" content="Inside, portail, CDS Finance" />
 
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
+    <link rel="stylesheet" href="/inside/style.css" />
+		<link rel="stylesheet" href="styleBugs.css" />
 
 		<title>Inside - Bug</title>
   </head>
@@ -22,7 +15,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				<img src="../includes/images/bugs_band.png" alt="bugs_band" class="bandeau_categorie_2" />
+				<img src="../../includes/images/bugs_band.png" alt="bugs_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">
@@ -39,13 +32,13 @@
 					$back = true;
 					$ideas = true;
 
-					include('../includes/aside.php');
+					include('../../includes/aside.php');
 				?>
 			</aside>
 
 			<!-- Messages d'alerte -->
 			<?php
-				include('../includes/alerts.php');
+				include('../../includes/alerts.php');
 			?>
 
 			<article class="article_portail">
@@ -55,28 +48,28 @@
 					servir au mieux.
 				</p>
 
-				<form method="post" action="bugs/report_bug.php">
-					<input type="text" name="subject" placeholder="Objet" maxlength="255" class="saisie_titre_2" required />
+				<form method="post" action="bugs.php?action=doSignaler">
+					<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_titre_bug" required />
 
-					<select name="type_bug" class="saisie_type_bug">
+					<select name="type_bugs" class="saisie_type_bug">
 						<option value="B">Bug</option>
 						<option value="E">Evolution</option>
 					</select>
 
-					<div class="trait"></div>
+					<div class="trait_bugs"></div>
 
-					<textarea placeholder="Description du problème" name="contenu_bug" class="saisie_contenu"></textarea>
+					<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>
 
-					<div class="trait"></div>
+					<div class="trait_bugs"></div>
 
-					<input type="submit" name="report" value="Soumettre" class="saisie_valider" />
+					<input type="submit" name="report" value="Soumettre" class="submit_bug" />
 				</form>
 			</article>
 		</section>
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/footer.php'); ?>
+			<?php include('../../includes/footer.php'); ?>
 		</footer>
   </body>
 </html>

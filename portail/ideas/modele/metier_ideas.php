@@ -75,7 +75,7 @@
     return $listeIdeas;
   }
 
-  // METIER : Insertion d'un idée
+  // METIER : Insertion d'une idée
   // RETOUR : Aucun
   function insertIdea()
   {
@@ -95,8 +95,6 @@
                    'status'     => $status,
                    'developper' => $developper
                   );
-
-    $myIdeas = Ideas::withData($ideas);
 
     // On insère dans la table
     if (!empty($subject))
@@ -118,6 +116,12 @@
                                              )');
       $req->execute($ideas);
       $req->closeCursor();
+
+      $_SESSION['idea_submitted'] = true;
+    }
+    else
+    {
+      $_SESSION['idea_submitted'] = false;
     }
   }
 
@@ -158,8 +162,6 @@
     $data = array('status'     => $status,
                   'developper' => $developper
                  );
-
-    $ideas = Ideas::withData($data);
 
     // On met à jour la table
     global $bdd;

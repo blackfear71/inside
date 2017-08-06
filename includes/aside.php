@@ -193,7 +193,7 @@
 	// Signaler un bug
 	if ($bug == true)
 	{
-		echo '<a href="/inside/portail/bug.php" title="Signaler un bug" class="link_profile">';
+		echo '<a href="/inside/portail/bugs/bugs.php?action=goSignaler" title="Signaler un bug" class="link_profile">';
 			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Signaler</div>';

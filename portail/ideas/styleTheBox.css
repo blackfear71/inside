@@ -57,13 +57,13 @@
 	border-radius: 5px;
 	margin-top: 10px;
 	margin-bottom: 30px;
+	cursor: pointer;
 }
 
 .submit_idea:hover
 {
 	background-color: rgb(255, 25, 55);
 	color: white;
-	cursor: pointer;
 }
 
 /*** Séparation ***/

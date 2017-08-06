@@ -8,7 +8,7 @@
   include_once('modele/metier_parcours.php');
 
   // Initialisations booléens
-  $lectureListe = false;      
+  $lectureListe = false;
   $controlesDonnees = true;
 
   // EVALUATE TRUE WHEN COI-FCT = 'L0001' PERFORM...
@@ -17,18 +17,18 @@
       // Récupération de tous les parcours. Attention, $parcours est un tableau d'objets Parcours
       $parcours = listParcours();
       $lectureListe = true;
-      break; 
+      break;
 
     case 'goajouter':
       // On ne fait rien
-      $controlesDonnees = false;  
+      $controlesDonnees = false;
       break;
 
     case 'doajouter':
       $parcours = addParcours($_POST);
       // Ceci est un peu chimique mais sinon ça marche pas...
       $_GET['id'] = $parcours->getId();
-      break;      
+      break;
 
     case 'consulter':
     case 'gomodifier':
@@ -63,7 +63,7 @@
       $parcours->setImage(htmlspecialchars($parcours->getImage()));
     }
   }
-  
+
 
   // Affichage vue
   switch ($_GET['action']){

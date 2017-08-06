@@ -64,7 +64,7 @@
 						}
 
 						if ($i == 0)
-							echo '<p class="submitted" style="text-align: center; color: black;">Pas de fichiers à purger.</p>';
+							echo '<p class="no_bugs">Pas de fichiers à purger.</p>';
 					?>
 				</div>
 

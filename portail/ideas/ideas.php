@@ -91,7 +91,7 @@
 
     case 'goConsulter':
     default:
-      include('vue/vue_ideas.php');
+      include_once('vue/vue_ideas.php');
       break;
   }
 ?>
