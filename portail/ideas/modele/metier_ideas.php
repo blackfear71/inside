@@ -77,13 +77,6 @@
 
   // METIER : Insertion d'un idée
   // RETOUR : Aucun
-
-     /******\
-   /         \
-  |    !!    | Valider qu'on a bien aucun retour (facultatif en PHP)
-  \         /
-   \******/
-
   function insertIdea()
   {
     // Récupération des données
@@ -126,50 +119,35 @@
       $req->execute($ideas);
       $req->closeCursor();
     }
-
-    /******\
-  /         \
- |    !!    | Valider qu'on a bien aucun retour (facultatif en PHP)
- \         /
-  \******/
-
-    //return $idea;
   }
 
   // METIER : Mise à jour du statut d'une idée
   // RETOUR : Aucun
   function updateIdea($id, $post)
   {
-    switch ($post)
+    switch (key($post))
     {
-
-      /******\
-    /         \
-   |    !!    | Ce switch est-il bien fait ?
-   \         /
-    \******/
-
-      case isset($post['take']):
+      case 'take':
         $status     = "C";
         $developper = $_SESSION['identifiant'];
         break;
 
-      case isset($post['developp']):
+      case 'developp':
         $status     = "P";
         $developper = $_SESSION['identifiant'];
         break;
 
-      case isset($post['end']):
+      case 'end':
         $status     = "D";
         $developper = $_SESSION['identifiant'];
         break;
 
-      case isset($post['reject']):
+      case 'reject':
         $status     = "R";
         $developper = $_SESSION['identifiant'];
         break;
 
-      case isset($post['reset']):
+      case 'reset':
       default:
         $status     = "O";
         $developper = "";
@@ -190,13 +168,5 @@
                                      WHERE id         = ' . $id);
     $req->execute($data);
     $req->closeCursor();
-
-    /******\
-  /         \
- |    !!    | Valider qu'on a bien aucun retour (facultatif en PHP)
- \         /
-  \******/
-
-    //return $ideas;
   }
 ?>

@@ -8,12 +8,6 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_ideas.php');
 
-   /******\
- /         \
-|    !!    | Ces contrôles sont-ils pertinents ici ?
-\         /
- \******/
-
   // Contrôle vue renseignée URL
   switch ($_GET['view'])
   {
@@ -60,12 +54,6 @@
     default:
       break;
   }
-
-   /******\
- /         \
-|    !!    | Pas d'action pour les autres cas que la lecture non ?
-\         /
- \******/
 
   // Traitements de sécurité avant la vue
   switch ($_GET['action'])

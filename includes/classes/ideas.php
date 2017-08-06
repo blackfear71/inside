@@ -37,13 +37,6 @@
 
     protected function fill ($data)
     {
-
-       /******\
-     /         \
-    |    !!    | Il faut bien mettre un if sur toutes ?
-    \         /
-     \******/
-
       if (isset($data['id']))
         $this->id         = $data['id'];
 
