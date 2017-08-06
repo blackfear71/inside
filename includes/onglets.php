@@ -20,7 +20,7 @@
 			break;
 	}
 	$onglet4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
-	$onglet5 = '<a href="/inside/portail/petitspedestres.php" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
+	$onglet5 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 
 	// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 	$path = $_SERVER['PHP_SELF'];
@@ -69,10 +69,9 @@
 	}
 
 	// Petits pédestres
-	if ($path == '/inside/portail/petitspedestres.php' 
-       OR $path == '/inside/portail/petitspedestres/controleur/parcours.php')
+	if ($path == '/inside/portail/petitspedestres/parcours.php')
 	{
-		$onglet5 = '<a href="/inside/portail/petitspedestres.php" class="onglet_actif" title="Les Petits Pédestres" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
+		$onglet5 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" class="onglet_actif" title="Les Petits Pédestres" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 	}
 
 	// Affichage des onglets
