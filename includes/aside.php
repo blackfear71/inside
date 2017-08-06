@@ -20,8 +20,8 @@
 	if (!isset($profil))
 		$profil = false;
 
-	if (!isset($menu_rg))
-		$menu_rg = false;
+	/*if (!isset($menu_rg))
+		$menu_rg = false;*/
 
 	if (!isset($add_article))
 		$add_article = false;
@@ -75,7 +75,7 @@
 	}
 
 	// Menu
-	if ($menu_rg == true)
+	/*if ($menu_rg == true)
 	{
 		echo '<a onclick="afficherMasquer(\'menu\')" title="Menu" class="link_profile">';
 			echo '<img src="/inside/includes/icons/menu.png" alt="menu" title="Menu" class="icon_profile" />';
@@ -98,7 +98,7 @@
 		// Récupération de l'univers en cas d'ajout d'article
 		if (isset($_GET['univers']))
 			$_SESSION['univers'] = $_GET['univers'];
-	}
+	}*/
 
 	// Ajouter un article
 	if ($add_article == true)
