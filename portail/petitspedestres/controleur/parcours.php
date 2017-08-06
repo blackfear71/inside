@@ -10,20 +10,20 @@
   // EVALUATE TRUE WHEN COI-FCT = 'L0001' PERFORM...
   switch ($_GET['action']){
     case 'consulter':
-    case 'gomodifier':    
-      // Récupération des données par le modèle  
+    case 'gomodifier':
+      // Récupération des données par le modèle
       $parcours = getParcours($_GET['id']);
       break;
 
     case 'domodifier':
-      // Mise à jour des données par le modèle  
+      // Mise à jour des données par le modèle
       $parcours = updateParcours($_GET['id'], $_POST);
       break;
 
     default:
-      break;      
+      break;
   }
-  
+
   // Traitements de sécurité avant la vue
   $parcours->setNom(htmlspecialchars($parcours->getNom()));
   $parcours->setDistance(htmlspecialchars($parcours->getDistance()));
@@ -39,10 +39,10 @@
 
     case 'gomodifier':
       include_once('../vue/mod_parcours.php');
-      break;    
+      break;
 
     default:
       include_once('../vue/vue_parcours.php');
-      break;        
+      break;
   }
 ?>

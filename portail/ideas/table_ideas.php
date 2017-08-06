@@ -2,6 +2,9 @@
 	include('../includes/appel_bdd.php');
 	include('../includes/fonctions_dates.php');
 
+	// Classe Ideas
+	include('../includes/classes/ideas.php');
+
 	if ($_GET['view'] == "done")
 		$reponse = $bdd->query('SELECT * FROM ideas WHERE status="D" OR status="R" ORDER BY id DESC');
 	elseif ($_GET['view'] == "inprogress")
@@ -15,8 +18,11 @@
 
 	while ($donnees = $reponse->fetch())
 	{
+		// Instanciation d'un objet Ideas à partir des données remontées de la bdd
+			$ideas = Ideas::withData($donnees);
+
 		// Recherche du nom complet de l'auteur
-		$reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['author'] . '"');
+		$reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $ideas->getAuthor() . '"');
 		$donnees2 = $reponse2->fetch();
 
 		if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
@@ -27,7 +33,7 @@
 		$reponse2->closeCursor();
 
 		// Recherche du nom complet du developpeur
-		$reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $donnees['developper'] . '"');
+		$reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $ideas->getDevelopper() . '"');
 		$donnees3 = $reponse3->fetch();
 
 		if (isset($donnees3['full_name']) AND !empty($donnees3['full_name']))
@@ -38,7 +44,7 @@
 		$reponse3->closeCursor();
 
 		// Libellés états
-		switch ($donnees['status'])
+		switch ($ideas->getStatus())
 		{
 			// Ouverte
 			case "O":
@@ -70,17 +76,17 @@
 		}
 
 		// Formatage date
-		$date_idee = formatDateForDisplay($donnees['date']);
+		$date_idee = formatDateForDisplay($ideas->getDate());
 
 		// Affichage des idées
 		echo '<table class="table_ideas">';
-			echo '<tr id="' . $donnees['id'] . '">';
+			echo '<tr id="' . $ideas->getId() . '">';
 				// Titre idée
 				echo '<td class="td_ideas_title">';
 					echo 'Idée';
 				echo '</td>';
 				echo '<td class="td_ideas_content">';
-					echo $donnees['subject'];
+					echo $ideas->getSubject();
 				echo '</td>';
 
 				// Date
@@ -92,14 +98,22 @@
 				echo '</td>';
 
 				// Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
-				if ( empty($donnees['developper'])
-				OR (!empty($donnees['developper']) AND $_SESSION['identifiant'] == $donnees['developper'])
-				OR  $donnees['status'] == "D"
-				OR  $donnees['status'] == "R")
+				if ( empty($ideas->getDevelopper())
+				OR (!empty($ideas->getDevelopper()) AND $_SESSION['identifiant'] == $ideas->getDevelopper())
+				OR  $ideas->getStatus() == "D"
+				OR  $ideas->getStatus() == "R")
 				{
 					echo '<td rowspan="100%" class="td_ideas_actions">';
-						echo '<form method="post" action="ideas/manage_ideas.php?view=' . $_GET['view'] . '&id=' . $donnees['id'] . '">';
-							switch ($donnees['status'])
+					
+					/******\
+				/         \
+			 |    !!     |
+				\         /
+				 \******/
+
+						//echo '<form method="post" action="ideas/manage_ideas.php?view=' . $_GET['view'] . '&id=' . $donnees['id'] . '">';
+						echo '<form method="post" action="ideas/controleur/controleur_ideas.php?view=' . $_GET['view'] . '&id=' . $ideas->getId() . '&action=doChangerStatut">';
+							switch ($ideas->getStatus())
 							{
 								// Ouverte
 								case "O":
@@ -155,7 +169,7 @@
 					echo $etat_idee;
 
 					// Développeur
-					if (!empty($donnees['developper']))
+					if (!empty($ideas->getDevelopper()))
 					{
 						echo ' par ' . $developpeur_idee;
 					}
@@ -165,7 +179,7 @@
 			// Description idée
 			echo '<tr class="tr_ideas_idea">';
 				echo '<td colspan="4">';
-					echo '<p>' . $donnees['content'] . '</p>';
+					echo '<p>' . $ideas->getContent() . '</p>';
 				echo '</td>';
 			echo '</tr>';
 		echo '</table>';

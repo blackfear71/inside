@@ -24,9 +24,7 @@
 				<?php
 					$disconnect = true;
 					$profil = true;
-					$modify_film = false;
 					$modify_parcours = true;
-					$delete_film = false;
 					$back = true;
 					$ideas = true;
 					$bug = true;

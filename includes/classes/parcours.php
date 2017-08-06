@@ -27,7 +27,7 @@ class Parcours{
         if (isset($data['id'])){
           $this->id = $data['id'];
         }
-        
+
         $this->nom = $data['nom'];
         $this->distance = $data['distance'];
         $this->lieu = $data['lieu'];
@@ -43,7 +43,6 @@ class Parcours{
     public function getId(){
         return $this->id;
     }
-
 
     // nom
     public function setNom($name){
@@ -81,7 +80,7 @@ class Parcours{
         return $this->url_image;
     }
 
-    // Méthode pour savoir si url image présente ou non 
+    // Méthode pour savoir si url image présente ou non
     public function isImageSet(){
         if (empty($this->url_image)){
             return false;
