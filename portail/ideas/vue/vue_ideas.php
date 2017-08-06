@@ -221,9 +221,9 @@
           					echo $etat_idee;
 
           					// Développeur
-          					if (!empty($ligne['developpeur']))
+          					if (!empty($ligne['name_d']))
           					{
-          						echo ' par ' . $ligne['developpeur'];
+          						echo ' par ' . $ligne['name_d'];
           					}
           				echo '</td>';
           			echo '</tr>';
