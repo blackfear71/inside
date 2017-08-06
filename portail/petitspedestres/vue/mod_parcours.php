@@ -7,7 +7,7 @@
 
   	<link rel="icon" type="image/png" href="/inside/favicon.png" />
   	<link rel="stylesheet" href="/inside/style.css" />
-  	<link rel="stylesheet" href="../stylePP.css" />
+  	<link rel="stylesheet" href="stylePP.css" />
 
   	<title>Inside - PP</title>
   </head>
