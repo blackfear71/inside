@@ -15,7 +15,7 @@
     foreach ($listeIdeas as $ligne)
     {
       // Libellés états
-      switch ($ligne['status'])
+      switch ($ligne->getStatus())
       {
         // Ouverte
         case "O":
@@ -47,17 +47,17 @@
       }
 
       // Formatage date
-      $date_idee = formatDateForDisplay($ligne['date']);
+      $date_idee = formatDateForDisplay($ligne->getDate());
 
       // Affichage des idées
       echo '<table class="table_ideas">';
-        echo '<tr id="' . $ligne['id'] . '">';
+        echo '<tr id="' . $ligne->getId() . '">';
           // Titre idée
           echo '<td class="td_ideas_title">';
             echo 'Idée';
           echo '</td>';
           echo '<td class="td_ideas_content">';
-            echo $ligne['subject'];
+            echo $ligne->getSubject();
           echo '</td>';
 
           // Date
@@ -69,14 +69,14 @@
           echo '</td>';
 
           // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
-          if ( empty($ligne['developper'])
-          OR (!empty($ligne['developper']) AND $_SESSION['identifiant'] == $ligne['developper'])
-          OR  $ligne['status'] == "D"
-          OR  $ligne['status'] == "R")
+          if ( empty($ligne->getDevelopper())
+          OR (!empty($ligne->getDevelopper()) AND $_SESSION['identifiant'] == $ligne->getDevelopper())
+          OR  $ligne->getStatus() == "D"
+          OR  $ligne->getStatus() == "R")
           {
             echo '<td rowspan="100%" class="td_ideas_actions">';
-              echo '<form method="post" action="../controleur/controleur_ideas.php?view=' . $_GET['view'] . '&action=doChangerStatut&id=' . $ligne['id'] . '">';
-                switch ($ligne['status'])
+              echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doChangerStatut&id=' . $ligne->getId() . '">';
+                switch ($ligne->getStatus())
                 {
                   // Ouverte
                   case "O":
@@ -121,7 +121,7 @@
             echo 'Proposée par';
           echo '</td>';
           echo '<td class="td_ideas_content">';
-            echo $ligne['name_a'];
+            echo $ligne->getName_a();
           echo '</td>';
 
           // Statut & développeur
@@ -133,15 +133,15 @@
             echo $etat_idee;
 
             // Développeur
-            if (!empty($ligne['name_d']))
-              echo ' par ' . $ligne['name_d'];
+            if (!empty($ligne->getName_d()))
+              echo ' par ' . $ligne->getName_d();
           echo '</td>';
         echo '</tr>';
 
         // Description idée
         echo '<tr class="tr_ideas_idea">';
           echo '<td colspan="4">';
-            echo '<p>' . $ligne['content'] . '</p>';
+            echo '<p>' . $ligne->getContent() . '</p>';
           echo '</td>';
         echo '</tr>';
       echo '</table>';

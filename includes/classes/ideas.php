@@ -5,20 +5,24 @@
     private $subject;
     private $date;
     private $author;
+    private $name_a;
     private $content;
     private $status;
     private $developper;
+    private $name_d;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id = 0;
+      $this->id         = 0;
       $this->subject    = '';
       $this->date       = '';
       $this->author     = '';
+      $this->name_a     = '';
       $this->content    = '';
       $this->status     = '';
       $this->developper = '';
+      $this->name_d     = '';
     }
 
     // Constructeur de l'objet Ideas en fonction des données
@@ -33,10 +37,10 @@
 
     protected function fill ($data)
     {
-      
+
        /******\
      /         \
-    |    !!    |
+    |    !!    | Il faut bien mettre un if sur toutes ?
     \         /
      \******/
 
@@ -52,6 +56,9 @@
       if (isset($data['author']))
         $this->author     = $data['author'];
 
+      if (isset($data['name_a']))
+        $this->name_a     = $data['name_a'];
+
       if (isset($data['content']))
         $this->content    = $data['content'];
 
@@ -60,6 +67,9 @@
 
       if (isset($data['developper']))
         $this->developper = $data['developper'];
+
+      if (isset($data['name_d']))
+        $this->name_d     = $data['name_d'];
     }
 
     // getters et setters pour l'objet Ideas
@@ -107,6 +117,17 @@
       return $this->author;
     }
 
+    // Nom complet auteur
+    public function setName_a($name_a)
+    {
+      $this->name_a = $name_a;
+    }
+
+    public function getName_a()
+    {
+      return $this->name_a;
+    }
+
     // Contenu
     public function setContent($content)
     {
@@ -138,6 +159,17 @@
     public function getDevelopper()
     {
       return $this->developper;
+    }
+
+    // Nom complet développeur
+    public function setName_d($name_d)
+    {
+      $this->name_d = $name_d;
+    }
+
+    public function getName_d()
+    {
+      return $this->name_d;
     }
   }
 ?>

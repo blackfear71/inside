@@ -1,15 +1,13 @@
 <?php
-  include_once('../../../includes/appel_bdd.php');
-  include_once('../../../includes/classes/ideas.php');
+  include_once('../../includes/appel_bdd.php');
+  include_once('../../includes/classes/ideas.php');
 
   // METIER : Lecture liste des idées
   // RETOUR : Tableau d'idées
   function readIdeas($view)
   {
-    // Initialisations tableau d'idées
-    $listeIdeas       = array();
-    $auteur_idee      = "";
-    $developpeur_idee = "";
+    // Initialisation tableau d'idées
+    $listeIdeas = array();
 
     global $bdd;
 
@@ -25,6 +23,10 @@
 
     while ($donnees = $reponse->fetch())
     {
+      // Initilialisation variables
+      $auteur_idee      = "";
+      $developpeur_idee = "";
+
       // Instanciation d'un objet Idea à partir des données remontées de la bdd
       $idea = Ideas::withData($donnees);
 
@@ -65,7 +67,7 @@
                       'name_d'     => $developpeur_idee
                      );
 
-      array_push($listeIdeas, $myIdea);
+      array_push($listeIdeas, Ideas::withData($myIdea));
     }
 
     $reponse->closeCursor();
@@ -78,7 +80,7 @@
 
      /******\
    /         \
-  |    !!    |
+  |    !!    | Valider qu'on a bien aucun retour (facultatif en PHP)
   \         /
    \******/
 
@@ -127,7 +129,7 @@
 
     /******\
   /         \
- |    !!    |
+ |    !!    | Valider qu'on a bien aucun retour (facultatif en PHP)
  \         /
   \******/
 
@@ -143,7 +145,7 @@
 
       /******\
     /         \
-   |    !!    |
+   |    !!    | Ce switch est-il bien fait ?
    \         /
     \******/
 
@@ -191,7 +193,7 @@
 
     /******\
   /         \
- |    !!    |
+ |    !!    | Valider qu'on a bien aucun retour (facultatif en PHP)
  \         /
   \******/
 
