@@ -16,18 +16,18 @@
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../favicon.png" />
-	<link rel="stylesheet" href="../style.css" />
-	<title>Inside - Inscription</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+
+		<title>Inside - Inscription</title>
   </head>
 
 	<body>
-
 		<header>
 			<div class="main_title">
 				Demande d'inscription
@@ -39,8 +39,8 @@
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$back_index = true;
 
@@ -49,7 +49,6 @@
 			</aside>
 
 			<article class="article_portail">
-
 				<div class="avertissement">
           Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu'un mot de passe. Celui-ci sera directement crypté afin de garantir la sécurité
           de l'accès. Une demande sera envoyée à l'administrateur qui validera votre inscription dans les plus brefs délais.
@@ -87,14 +86,12 @@
             $_SESSION['ask_inscription'] = false;
           }
 				?>
-
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-
   </body>
-
 </html>

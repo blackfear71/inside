@@ -22,25 +22,26 @@
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../../favicon.png" />
-	<link rel="stylesheet" href="../../style.css" />
-	<title>Inside - RG</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+
+		<title>Inside - RG</title>
   </head>
 
 	<body>
-
+		<!-- Onglets -->
 		<header onclick="document.getElementById('menu').style.display='none';">
 			<?php include('../../includes/onglets.php') ; ?>
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
 					$profil = true;
@@ -121,10 +122,9 @@
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer onclick="document.getElementById('menu').style.display='none';">
 			<?php include('../../includes/footer.php'); ?>
 		</footer>
-
   </body>
-
 </html>

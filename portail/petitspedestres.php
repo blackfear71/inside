@@ -13,32 +13,34 @@
 
   if (!isset($_SESSION['erreur_distance']) OR $_SESSION['erreur_distance'] == false)
   {
-      $_SESSION['nom_parcours'] = "";
-      $_SESSION['distance'] = "";
+    $_SESSION['nom_parcours'] = "";
+    $_SESSION['distance'] = "";
   }
 ?>
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../favicon.png" />
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<title>Inside - PP</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+		<title>Inside - PP</title>
   </head>
 
 	<body>
+		<!-- Onglets -->
     <header>
 			<?php include('../includes/onglets.php') ; ?>
 		</header>
 
     <section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
 					$profil = true;
@@ -56,7 +58,6 @@
 			?>
 
       <article class="article_portail">
-
 				<!-- Bandeau catégorie -->
 				<img src="../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
 
@@ -117,9 +118,9 @@
       	</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-
-    </body>
+  </body>
 </html>

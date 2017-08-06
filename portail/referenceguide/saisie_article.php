@@ -5,25 +5,26 @@
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../../favicon.png" />
-	<link rel="stylesheet" href="../../style.css" />
-	<title>Inside - RG</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+
+		<title>Inside - RG</title>
   </head>
 
 	<body>
-
+		<!-- Onglets -->
 		<header onclick="document.getElementById('menu').style.display='none';">
 			<?php include('../../includes/onglets.php') ; ?>
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
 					$profil = true;
@@ -109,11 +110,13 @@
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer onclick="document.getElementById('menu').style.display='none';">
 			<?php include('../../includes/footer.php'); ?>
 		</footer>
 
 		<script type="text/javascript">
+			// Insère des balises dans la zone de saisie
 			function insertTag(startTag, endTag, textareaId, tagType)
 			{
 				var field  = document.getElementById(textareaId);
@@ -144,7 +147,8 @@
 				field.scrollTop = scroll; // et on redéfinit le scroll.
 			}
 
-			function insert_style(style)
+			// Ancienne version de l'insertion de balises
+			/*function insert_style(style)
 			{
 				if (style == "image")
 					insertion = '\r<image>TITRE_DE_L_IMAGE_ICI</image>\r';
@@ -178,9 +182,7 @@
 
 				//Positionnement du curseur
 				where.focus();
-			}
+			}*/
 		</script>
-
   </body>
-
 </html>

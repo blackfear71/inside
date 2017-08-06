@@ -15,18 +15,18 @@
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../favicon.png" />
-	<link rel="stylesheet" href="../style.css" />
-	<title>Inside - MDP</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+
+		<title>Inside - MDP</title>
   </head>
 
 	<body>
-
 		<header>
 			<div class="main_title">
 				Demande de réinitialisation du mot de passe
@@ -38,8 +38,8 @@
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$back_index = true;
 
@@ -48,7 +48,6 @@
 			</aside>
 
 			<article class="article_portail">
-
 				<div class="avertissement">
 					Si vous avez perdu votre mot de passe, vous pouvez effectuer une demande de réinitialisation du mot de passe à l'administrateur via le formulaire ci-dessous.
 					L'administrateur est suceptible de vous contacter directement afin de vérifier votre demande. Il vous suffit de renseigner votre identifiant afin que celui-ci
@@ -81,14 +80,12 @@
 						$_SESSION['already_asked'] = false;
 					}
 				?>
-
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-
   </body>
-
 </html>

@@ -1,6 +1,4 @@
 <?php
-	// var_dump($_SESSION);
-
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
 
@@ -44,26 +42,27 @@
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../favicon.png" />
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<title>Inside - MH</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+		<title>Inside - MH</title>
   </head>
 
 	<body>
-
+		<!-- Onglets -->
 		<header>
 			<?php include('../includes/onglets.php') ; ?>
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
 					$profil = true;
@@ -174,54 +173,53 @@
 						}
 					}
 				?>
-
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
 
-  </body>
-
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-	<script>
-		$(function()
-		{
-			$( "#datepicker" ).datepicker(
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+		<script>
+			// Génère un calendrier
+			$(function()
 			{
-				firstDay: 1,
-				altField: "#datepicker",
-				closeText: 'Fermer',
-				prevText: 'Précédent',
-				nextText: 'Suivant',
-				currentText: 'Aujourd\'hui',
-				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-				weekHeader: 'Sem.',
-				dateFormat: 'dd/mm/yy'
+				$( "#datepicker" ).datepicker(
+				{
+					firstDay: 1,
+					altField: "#datepicker",
+					closeText: 'Fermer',
+					prevText: 'Précédent',
+					nextText: 'Suivant',
+					currentText: 'Aujourd\'hui',
+					monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+					monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+					dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+					dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+					dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+					weekHeader: 'Sem.',
+					dateFormat: 'dd/mm/yy'
+				});
+				$( "#datepicker2" ).datepicker(
+				{
+					firstDay: 1,
+					altField: "#datepicker2",
+					closeText: 'Fermer',
+					prevText: 'Précédent',
+					nextText: 'Suivant',
+					currentText: 'Aujourd\'hui',
+					monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+					monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+					dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+					dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+					dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+					weekHeader: 'Sem.',
+					dateFormat: 'dd/mm/yy'
+				});
 			});
-			$( "#datepicker2" ).datepicker(
-			{
-				firstDay: 1,
-				altField: "#datepicker2",
-				closeText: 'Fermer',
-				prevText: 'Précédent',
-				nextText: 'Suivant',
-				currentText: 'Aujourd\'hui',
-				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-				weekHeader: 'Sem.',
-				dateFormat: 'dd/mm/yy'
-			});
-		});
-	</script>
-
+		</script>
+	</body>
 </html>

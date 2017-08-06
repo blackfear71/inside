@@ -2,23 +2,24 @@
 	// Contrôles communs Utilisateurs
 	include('../includes/controls_users.php');
 
+	// Initialisation des variables SESSION pour la création d'articles
 	//include('../includes/init_session.php');
 ?>
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../favicon.png" />
-	<link rel="stylesheet" href="../style.css" />
-	<title>Inside - Portail</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+
+		<title>Inside - Portail</title>
   </head>
 
 	<body>
-
 		<header>
 			<div class="main_title">
 				<img src="../includes/images/portail_band.png" alt="portail_band" class="bandeau_categorie_2" />
@@ -30,8 +31,8 @@
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
 					$profil = true;
@@ -43,7 +44,6 @@
 			</aside>
 
 			<article class="article_portail">
-
 				<?php
 					echo '<div class="new_menu_portail">';
 
@@ -126,14 +126,12 @@
 
 					echo '</div>';
 				?>
-
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-
   </body>
-
 </html>

@@ -11,18 +11,18 @@
 
 <!DOCTYPE html>
 <html>
-
   <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../favicon.png" />
-	<link rel="stylesheet" href="../style.css" />
-	<title>Inside - Profil</title>
-	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-	<meta name="keywords" content="Inside, portail, CDS Finance" />
+		<meta charset="utf-8" />
+		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
+		<meta name="keywords" content="Inside, portail, CDS Finance" />
+
+		<link rel="icon" type="image/png" href="/inside/favicon.png" />
+		<link rel="stylesheet" href="/inside/style.css" />
+
+		<title>Inside - Profil</title>
   </head>
 
 	<body>
-
 		<header>
 			<div class="main_title">
 				<img src="../includes/images/profile_band.png" alt="profile_band" class="bandeau_categorie_2" />
@@ -34,8 +34,8 @@
 		</header>
 
 		<section>
+			<!-- Paramétrage des boutons de navigation -->
 			<aside>
-				<!-- Boutons d'action -->
 				<?php
 					$disconnect = true;
 					$back = true;
@@ -52,13 +52,11 @@
 			?>
 
 			<article class="article_portail">
-
 				<!-- Bloc utilisateur -->
 				<div class="zone_profil_utilisateur">
-					<!-- Titre -->
+					<!-- Affichage pseudo -->
 					<div class="zone_profil_utilisateur_titre">
 						<?php
-							// Affichage pseudo
 							echo $_SESSION['full_name'];
 						?>
 					</div>
@@ -376,15 +374,16 @@
 						</tr>
 					</table>
 				</div>
-
 			</article>
 		</section>
 
+		<!-- Pied de page -->
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
 
 		<script type="text/javascript">
+			// Insère une prévisualisation de l'image sur la page
 			var loadFile = function(event)
 			{
 				var output = document.getElementById('output');
@@ -392,7 +391,5 @@
 				output.src.SizeHeight = "120px";
 			};
 		</script>
-
   </body>
-
 </html>
