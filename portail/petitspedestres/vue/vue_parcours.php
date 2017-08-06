@@ -3,9 +3,9 @@
 
   <head>
 	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="../../../favicon.png" />
-	<link rel="stylesheet" href="../../../style.css" />
-	<link rel="stylesheet" href="../stylePP.css" />
+	<link rel="icon" type="image/png" href="../../favicon.png" />
+	<link rel="stylesheet" href="../../style.css" />
+	<link rel="stylesheet" href="stylePP.css" />
 	<title>Inside - PP</title>
 	<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
 	<meta name="keywords" content="Inside, portail, CDS Finance" />
@@ -14,7 +14,7 @@
 	<body>
 
 		<header>
-			<?php include('../../../includes/onglets.php') ; ?>
+			<?php include('../../includes/onglets.php') ; ?>
 		</header>
 
 		<section>
@@ -24,24 +24,27 @@
 				<?php
 					$disconnect = true;
 					$profil = true;
+					$ajouter_parcours = true;
 					$modify_parcours = true;
 					$back = true;
 					$ideas = true;
 					$bug = true;
 
-					include('../../../includes/aside.php');
+					include('../../includes/aside.php');
 				?>
 			</aside>
 
 			<!-- Messages d'alerte -->
 			<?php
-				include('../../../includes/alerts.php');
+				include('../../includes/alerts.php');
 			?>
 
 			<article class="article_portail">
         <!-- Bandeau catégorie -->
-				<img src="../../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
-        <div class="PP-parcours">
+				<a href="parcours.php?action=liste">
+					<img src="../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />	
+				</a>
+				<div class="PP-parcours">
           <div class="PP-titre">
             <?php echo $parcours->getNom(); ?>
           </div>
@@ -63,7 +66,7 @@
     </section>
 
 		<footer>
-			<?php include('../../../includes/footer.php'); ?>
+			<?php include('../../includes/footer.php'); ?>
 		</footer>
 
   </body>

@@ -115,7 +115,7 @@
 						echo '</a>';
 
 						// Lien Petits Pédestres
-						echo '<a href="petitspedestres.php" class="new_menu_link_portail">';
+						echo '<a href="petitspedestres/parcours.php?action=liste" class="new_menu_link_portail">';
 							echo '<div class="menu_portail_box">';
 								echo '<div class="mask_portail"></div>';
 								echo '<div class="mask_portail_triangle"></div>';

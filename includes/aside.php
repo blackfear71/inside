@@ -124,10 +124,19 @@
 		echo '<div class="hover_aside">Modifier</div>';
 	}
 
+	// Ajouter parcours
+	if ($ajouter_parcours == true)
+	{
+		echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goajouter" title="Ajouter parcours" class="link_profile">';
+			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter parcours" class="icon_profile" />';
+		echo '</a>';
+		echo '<div class="hover_aside">Ajouter</div>';
+	}
+
 	// Modifier parcours
 	if ($modify_parcours == true)
 	{
-		echo '<a href="/inside/portail/petitspedestres/controleur/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_profile">';
+		echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_profile">';
 			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Modifier</div>';

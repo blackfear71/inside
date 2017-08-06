@@ -1,6 +1,6 @@
 <?php
-  include_once('../../../includes/appel_bdd.php');
-  include_once('../../../includes/classes/parcours.php');
+  include_once('../../includes/appel_bdd.php');
+  include_once('../../includes/classes/parcours.php');
 
   // Métier : lecture d'un parcours en fonction de son id
   // Renvoie un objet Parcours
@@ -52,5 +52,53 @@
       return new Parcours();      
     }
 
+  }
+
+  // Métier : liste des parcours, par ordre alphabétique
+  // Renvoie une liste d'objets Parcours
+  function listParcours(){
+    global $bdd;
+    $reponse = $bdd->query('SELECT * FROM petits_pedestres_parcours ORDER BY nom ASC');
+
+    // Nouveau tableau vide de parcours, servira à la vue
+    $tableauParcours = array();
+
+    while($donnees = $reponse->fetch()){
+			// Ajout d'un objet parcours (instancié à partir des données de la base) au tableau de parcours
+      array_push($tableauParcours, Parcours::withData($donnees));
+    }
+
+    $reponse->closeCursor();
+
+    return $tableauParcours;
+  }
+
+  // Métier : insertion d'un nouveau parcours dans la base de données
+  // Ne renvoie rien pour le moment
+  function addParcours($post){
+    $data = array (
+      'nom' => $post['name'],
+      'distance' => $post['dist'],
+      'lieu' => $post['location'],
+      'image' => $post['picurl']
+    );
+
+    if (is_numeric($data['distance'])){
+      global $bdd;
+      $req = $bdd->prepare('INSERT INTO petits_pedestres_parcours(nom, distance, lieu, image)
+                                                       VALUES(:nom, :distance, :lieu, :image)');
+      $req->execute($data);
+      $req->closeCursor();
+      
+      $parcours = Parcours::withData($data);
+      $parcours->setId($bdd->lastInsertId());
+
+      return $parcours;
+    }
+    else{
+      $_SESSION['erreur_distance'] = true;      
+      return new Parcours();
+    }
+    
   }
 ?>
