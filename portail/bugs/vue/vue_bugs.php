@@ -42,28 +42,59 @@
 			?>
 
 			<article class="article_portail">
-				<p class="intro_bug">
-					Le site ne présente aucun bug. Si toutefois vous pensez être tombé sur ce qui prétend en être un, vous pouvez le signaler via le formulaire ci-dessous.
-					Ce que nous appellerons désormais "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à votre écoute pour vous
-					servir au mieux.
-				</p>
+        <!-- Onglets vues -->
+        <div class="switch_view" style="margin-top: -30px;">
+          <?php
+            $listeSwitch = array('submit'     => array('lib' => 'Saisie',   'action' => 'goSignaler'),
+                                 'unresolved' => array('lib' => 'En cours', 'action' => 'goConsulter'),
+                                 'resolved'   => array('lib' => 'Résolu(e)s',  'action' => 'goConsulter')
+                                );
 
-				<form method="post" action="bugs.php?action=doSignaler">
-					<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_titre_bug" required />
+            foreach ($listeSwitch as $view => $lib_view)
+            {
+              if ($_GET['view'] == $view)
+                $switch = '<a href="bugs.php?view=' . $view . '&action=' . $lib_view['action'] . '" class="link_switch_active">' . $lib_view['lib'] . '</a>';
+              else
+                $switch = '<a href="bugs.php?view=' . $view . '&action=' . $lib_view['action'] . '" class="link_switch_inactive">' . $lib_view['lib'] . '</a>';
 
-					<select name="type_bugs" class="saisie_type_bug">
-						<option value="B">Bug</option>
-						<option value="E">Evolution</option>
-					</select>
+              echo $switch;
+            }
+          ?>
+        </div>
 
-					<div class="trait_bugs"></div>
+        <?php
+          // Vue listes
+          if (isset($_GET['view']) AND ($_GET['view'] == "resolved" OR $_GET['view'] == "unresolved"))
+          {
+            include('table_bugs.php');
+          }
+          // Vue saisie
+          else
+          {
+            echo '<p class="intro_bug">';
+              echo 'Le site ne présente aucun bug. Si toutefois vous pensez être tombé sur ce qui prétend en être un, vous pouvez le signaler via le formulaire ci-dessous.
+    					Ce que nous appellerons désormais "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à votre écoute pour vous
+    					servir au mieux.';
+            echo '</p>';
 
-					<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>
+            echo '<form method="post" action="bugs.php?view=' . $_GET['view'] . '&action=doSignaler">';
+              echo '<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_titre_bug" required />';
 
-					<div class="trait_bugs"></div>
+              echo '<select name="type_bug" class="saisie_type_bug">';
+                echo '<option value="B">Bug</option>';
+                echo '<option value="E">Evolution</option>';
+              echo '</select>';
 
-					<input type="submit" name="report" value="Soumettre" class="submit_bug" />
-				</form>
+              echo '<div class="trait_bugs"></div>';
+
+              echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>';
+
+              echo '<div class="trait_bugs"></div>';
+
+              echo '<input type="submit" name="report" value="Soumettre" class="submit_bug" />';
+            echo '</form>';
+          }
+        ?>
 			</article>
 		</section>
 

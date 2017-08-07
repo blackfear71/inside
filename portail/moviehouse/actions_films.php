@@ -287,21 +287,25 @@
 
 				$_SESSION['film_added'] = true;
 
+				// Récupération préférence
 				switch ($_SESSION['view_movie_house'])
 				{
 					case "S":
-						header('location: ../moviehouse.php?view=main&year=' . substr($date_a_verifier_1, 6, 4));
+						$view_movie_house = "main";
 						break;
 
 					case "D":
-						header('location: ../moviehouse.php?view=user&year=' . substr($date_a_verifier_1, 6, 4));
+						$view_movie_house = "user";
 						break;
 
 					case "H":
 					default:
-						header('location: ../moviehouse.php?view=home&year=' . substr($date_a_verifier_1, 6, 4));
+						$view_movie_house = "home";
 						break;
 				}
+
+				// Redirection
+				header('location: ../moviehouse.php?view=' . $view_movie_house . '&year=' . substr($date_a_verifier_1, 6, 4));
 			}
 		}
 		else
@@ -490,21 +494,24 @@
 
 		$_SESSION['film_removed'] = true;
 
-		// Redirection
+		// Récupération préférence
 		switch ($_SESSION['view_movie_house'])
 		{
 			case "S":
-				header('location: ../moviehouse.php?view=main&year=' . date("Y"));
+				$view_movie_house = "main";
 				break;
 
 			case "D":
-				header('location: ../moviehouse.php?view=user&year=' . date("Y"));
+				$view_movie_house = "user";
 				break;
 
 			case "H":
 			default:
-				header('location: ../moviehouse.php?view=home&year=' . date("Y"));
+				$view_movie_house = "home";
 				break;
 		}
+
+		// Redirection
+		header('location: ../moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y"));
 	}
 ?>

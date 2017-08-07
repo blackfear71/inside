@@ -80,10 +80,10 @@
   function insertIdea()
   {
     // Récupération des données
-    $subject    = htmlspecialchars($_POST['subject_idea']);
+    $subject    = $_POST['subject_idea'];
     $date       = date("Ymd");
     $author     = $_SESSION['identifiant'];
-    $content    = htmlspecialchars($_POST['content_idea']);
+    $content    = $_POST['content_idea'];
     $status     = "O";
     $developper = "";
 

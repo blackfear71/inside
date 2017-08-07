@@ -76,7 +76,7 @@
 					if ($donnees['type'] == "B")
 						echo 'Remonté par';
 					elseif ($donnees['type'] == "E")
-						echo 'Remontée par';
+						echo 'Proposée par';
 				echo '</td>';
 				echo '<td class="td_ideas_content">';
 					echo $auteur_bug;
@@ -94,7 +94,7 @@
 			// Description idée
 			echo '<tr class="tr_ideas_idea">';
 				echo '<td colspan="4">';
-					echo '<p>' . $donnees['content'] . '</p>';
+					echo '<p>' . nl2br($donnees['content']) . '</p>';
 				echo '</td>';
 			echo '</tr>';
 		echo '</table>';

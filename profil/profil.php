@@ -243,11 +243,9 @@
 
 					<!-- Tableau modification préférences -->
 					<div class="zone_profil_preferences_table">
-						<!-- Préférences Movie House -->
-						<div class="zone_profil_preferences_mh">
-
-							<form method="post" action="preferences.php">
-
+						<form method="post" action="preferences.php" style="padding-bottom: 20px;">
+							<!-- Préférences Movie House -->
+							<div class="zone_profil_contribution">
 								<div class="titre_preference">
 									MOVIE HOUSE
 								</div>
@@ -301,6 +299,31 @@
 								</div>
 
 								<div class="sous_titre_preference">
+									Catégories à afficher sur la page d'accueil
+								</div>
+
+								<div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+									<?php
+										$films_waited  = $_SESSION['categories_home'][0];
+										$films_way_out = $_SESSION['categories_home'][1];
+
+										if ($films_waited == "Y")
+											echo '<input id="films_waited" type="checkbox" name="films_waited" class="bouton_preference" checked />';
+										else
+											echo '<input id="films_waited" type="checkbox" name="films_waited" class="bouton_preference" />';
+										echo '<label for="films_waited" class="label_preference_3">Les plus attendus</label>';
+
+										echo '<br />';
+
+										if ($films_way_out == "Y")
+											echo '<input id="films_way_out" type="checkbox" name="films_way_out" class="bouton_preference" checked />';
+										else
+											echo '<input id="films_way_out" type="checkbox" name="films_way_out" class="bouton_preference" />';
+										echo '<label for="films_way_out" class="label_preference_3">Les prochaines sorties</label>';
+									?>
+								</div>
+
+								<div class="sous_titre_preference">
 									Affichage de la date du jour dans la liste des films
 								</div>
 
@@ -321,12 +344,89 @@
 										}
 									?>
 								</div>
+							</div>
 
-								<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_profil" style="margin-top: 20px;" />
+							<!-- Préférences #TheBox -->
+							<div class="zone_profil_contribution">
+								<div class="titre_preference">
+									#THEBOX
+								</div>
 
-							</form>
+								<div class="sous_titre_preference">
+									Choix de la vue par défaut
+								</div>
 
-						</div>
+								<div class="contenu_preference">
+									<?php
+										switch ($_SESSION['view_the_box'])
+										{
+											case "P":
+												echo '<input id="all" type= "radio" name="the_box_view" value="A" class="bouton_preference" required />';
+												echo '<label for="all" class="label_preference_2">Toutes</label>';
+												echo '<br />';
+												echo '<input id="inprogress" type= "radio" name="the_box_view" value="P" class="bouton_preference" checked required />';
+												echo '<label for="inprogress" class="label_preference_2">En cours</label>';
+												echo '<br />';
+												echo '<input id="mine" type= "radio" name="the_box_view" value="M" class="bouton_preference" required />';
+												echo '<label for="mine" class="label_preference_2">En charge</label>';
+												echo '<br />';
+												echo '<input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" required />';
+												echo '<label for="done" class="label_preference_2">Terminées / Rejetées</label>';
+												echo '<br />';
+												break;
+
+											case "M":
+												echo '<input id="all" type= "radio" name="the_box_view" value="A" class="bouton_preference" required />';
+												echo '<label for="all" class="label_preference_2">Toutes</label>';
+												echo '<br />';
+												echo '<input id="inprogress" type= "radio" name="the_box_view" value="P" class="bouton_preference" required />';
+												echo '<label for="inprogress" class="label_preference_2">En cours</label>';
+												echo '<br />';
+												echo '<input id="mine" type= "radio" name="the_box_view" value="M" class="bouton_preference" checked required />';
+												echo '<label for="mine" class="label_preference_2">En charge</label>';
+												echo '<br />';
+												echo '<input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" required />';
+												echo '<label for="done" class="label_preference_2">Terminées / Rejetées</label>';
+												echo '<br />';
+												break;
+
+											case "D":
+												echo '<input id="all" type= "radio" name="the_box_view" value="A" class="bouton_preference" required />';
+												echo '<label for="all" class="label_preference_2">Toutes</label>';
+												echo '<br />';
+												echo '<input id="inprogress" type= "radio" name="the_box_view" value="P" class="bouton_preference" required />';
+												echo '<label for="inprogress" class="label_preference_2">En cours</label>';
+												echo '<br />';
+												echo '<input id="mine" type= "radio" name="the_box_view" value="M" class="bouton_preference" required />';
+												echo '<label for="mine" class="label_preference_2">En charge</label>';
+												echo '<br />';
+												echo '<input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" checked required />';
+												echo '<label for="done" class="label_preference_2">Terminées / Rejetées</label>';
+												echo '<br />';
+												break;
+
+											case "A":
+											default:
+												echo '<input id="all" type= "radio" name="the_box_view" value="A" class="bouton_preference" checked required />';
+												echo '<label for="all" class="label_preference_2">Toutes</label>';
+												echo '<br />';
+												echo '<input id="inprogress" type= "radio" name="the_box_view" value="P" class="bouton_preference" required />';
+												echo '<label for="inprogress" class="label_preference_2">En cours</label>';
+												echo '<br />';
+												echo '<input id="mine" type= "radio" name="the_box_view" value="M" class="bouton_preference" required />';
+												echo '<label for="mine" class="label_preference_2">En charge</label>';
+												echo '<br />';
+												echo '<input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" required />';
+												echo '<label for="done" class="label_preference_2">Terminées / Rejetées</label>';
+												echo '<br />';
+												break;
+										}
+									?>
+								</div>
+							</div>
+
+							<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_profil" />
+						</form>
 					</div>
 				</div>
 

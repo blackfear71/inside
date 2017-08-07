@@ -20,9 +20,9 @@
 		{
 			if ($donnees['reset'] == "I")
 			{
-				$_SESSION['not_yet'] = true;
+				$_SESSION['not_yet']   = true;
 				$_SESSION['connected'] = false;
-				$_SESSION['wrong'] = false;
+				$_SESSION['wrong']     = false;
 
 				break;
 			}
@@ -44,8 +44,10 @@
 						$reponse2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
 						$donnees2 = $reponse2->fetch();
 
-						$_SESSION['view_movie_house'] = $donnees2['view_movie_house'];
+						$_SESSION['view_movie_house']  = $donnees2['view_movie_house'];
+						$_SESSION['categories_home']   = $donnees2['categories_home'];
 						$_SESSION['today_movie_house'] = $donnees2['today_movie_house'];
+						$_SESSION['view_the_box']      = $donnees2['view_the_box'];
 
 						$reponse2->closeCursor();
 					}
@@ -55,7 +57,7 @@
 				else // Sinon, on affiche un message d'erreur
 				{
 					$_SESSION['connected'] = false;
-					$_SESSION['wrong'] = true;
+					$_SESSION['wrong']     = true;
 
 					break;
 				}
@@ -66,7 +68,7 @@
 		else
 		{
 			$_SESSION['connected'] = false;
-			$_SESSION['wrong'] = true;
+			$_SESSION['wrong']     = true;
 		}
 	}
 

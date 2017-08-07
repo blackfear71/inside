@@ -19,18 +19,7 @@
 
     default:
       header('location: ideas.php?view=all&action=goConsulter');
-  }
-
-  // Contrôle action renseignée URL
-  switch ($_GET['action'])
-  {
-    case 'doChangerStatut':
-    case 'doInserer':
-    case 'goConsulter':
       break;
-
-    default:
-      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter');
   }
 
   // Appel métier
@@ -52,6 +41,8 @@
       break;
 
     default:
+      // Contrôle action renseignée URL
+      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter');
       break;
   }
 

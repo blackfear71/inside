@@ -1,16 +1,69 @@
 <?php
   include_once('../../includes/appel_bdd.php');
-  //include_once('../../includes/classes/bugs.php');
+  include_once('../../includes/classes/bugs.php');
+
+  // METIER : Lecture liste des bugs
+  // RETOUR : Tableau des bugs
+  function readBugs($view)
+  {
+    // Initialisation tableau des bugs
+    $listeBugs = array();
+
+    global $bdd;
+
+    // Lecture de la base en fonction de la vue
+    if ($view == "resolved")
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="Y" ORDER BY id DESC');
+    else
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="N" ORDER BY id DESC');
+
+    while ($donnees = $reponse->fetch())
+    {
+      // Initilialisation variables
+      $auteur_bug = "";
+
+      // Instanciation d'un objet Idea à partir des données remontées de la bdd
+      $bug = Bugs::withData($donnees);
+
+      // Recherche du nom complet de l'auteur
+      $reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
+      $donnees2 = $reponse2->fetch();
+
+      if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
+        $auteur_bug = $donnees2['full_name'];
+      else
+        $auteur_bug = "<i>un ancien utilisateur</i>";
+
+      $reponse2->closeCursor();
+
+      // On construit un tableau qu'on alimente avec les données d'un bug
+      $myBug = array('id'       => $bug->getId(),
+                     'subject'  => $bug->getSubject(),
+                     'date'     => $bug->getDate(),
+                     'author'   => $bug->getAuthor(),
+                     'name_a'   => $auteur_bug,
+                     'content'  => $bug->getContent(),
+                     'type'     => $bug->getType(),
+                     'resolved' => $bug->getResolved()
+                     );
+
+      array_push($listeBugs, Bugs::withData($myBug));
+    }
+
+    $reponse->closeCursor();
+
+    return $listeBugs;
+  }
 
   // METIER : Insertion d'un bug
   // RETOUR : Aucun
   function insertBug()
   {
     // Récupération des données
-    $subject  = htmlspecialchars($_POST['subject_bug']);
+    $subject  = $_POST['subject_bug'];
     $date     = date("Ymd");
     $author   = $_SESSION['identifiant'];
-    $content  = htmlspecialchars($_POST['content_bug']);
+    $content  = $_POST['content_bug'];
     $type     = $_POST['type_bug'];
     $resolved = "N";
 
@@ -22,8 +75,6 @@
                   'type'     => $type,
                   'resolved' => $resolved
                  );
-
-    var_dump($bugs);
 
     // On insère dans la table
     if (!empty($subject))

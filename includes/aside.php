@@ -184,7 +184,28 @@
 	// Boite à idées
 	if ($ideas == true)
 	{
-		echo '<a href="/inside/portail/ideas/ideas.php?view=inprogress&action=goConsulter" title="&#35;TheBox" class="link_profile">';
+		// Récupération des préférences
+		switch ($_SESSION['view_the_box'])
+		{
+			case "P":
+				$view_the_box = "inprogress";
+				break;
+
+			case "M":
+				$view_the_box = "mine";
+				break;
+
+			case "D":
+				$view_the_box = "done";
+				break;
+
+			case "A":
+			default:
+				$view_the_box = "all";
+				break;
+		}
+
+		echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_profile">';
 			echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">#TheBox</div>';
@@ -193,7 +214,7 @@
 	// Signaler un bug
 	if ($bug == true)
 	{
-		echo '<a href="/inside/portail/bugs/bugs.php?action=goSignaler" title="Signaler un bug" class="link_profile">';
+		echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_profile">';
 			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Signaler</div>';

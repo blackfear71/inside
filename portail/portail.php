@@ -70,39 +70,27 @@
 						switch ($_SESSION['view_movie_house'])
 						{
 							case "S":
-								echo '<a href="moviehouse.php?view=main&year=' . date("Y") . '" class="new_menu_link_portail">';
-									echo '<div class="menu_portail_box">';
-										echo '<div class="mask_portail"></div>';
-										echo '<div class="mask_portail_triangle"></div>';
-										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
-										echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
-									echo '</div>';
-								echo '</a>';
+								$view_movie_house = "main";
 								break;
 
 							case "D":
-								echo '<a href="moviehouse.php?view=user&year=' . date("Y") . '" class="new_menu_link_portail">';
-									echo '<div class="menu_portail_box">';
-										echo '<div class="mask_portail"></div>';
-										echo '<div class="mask_portail_triangle"></div>';
-										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
-										echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
-									echo '</div>';
-								echo '</a>';
+								$view_movie_house = "user";
 								break;
 
 							case "H":
 							default:
-								echo '<a href="moviehouse.php?view=home&year=' . date("Y") . '" class="new_menu_link_portail">';
-									echo '<div class="menu_portail_box">';
-										echo '<div class="mask_portail"></div>';
-										echo '<div class="mask_portail_triangle"></div>';
-										echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
-										echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
-									echo '</div>';
-								echo '</a>';
+								$view_movie_house = "home";
 								break;
 						}
+
+						echo '<a href="moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" class="new_menu_link_portail">';
+							echo '<div class="menu_portail_box">';
+								echo '<div class="mask_portail"></div>';
+								echo '<div class="mask_portail_triangle"></div>';
+								echo '<div class="title_portail">MOVIE<br />HOUSE</div>';
+								echo '<img src="../includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_menu" />';
+							echo '</div>';
+						echo '</a>';
 
 						// Lien ExpenseCenter
 						echo '<a href="expensecenter.php?year=' . date("Y") . '" class="new_menu_link_portail">';

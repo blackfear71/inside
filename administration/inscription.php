@@ -4,13 +4,14 @@
   // Inscription utilisateur
   if (isset($_POST['accept_inscription']))
   {
+    // On met simplement à jour le status de l'utilisateur
     $reset = "N";
 
     $req = $bdd->prepare('UPDATE users SET reset=:reset WHERE id = ' . $_GET['id_user']);
     $req->execute(array(
       'reset' => $reset
     ));
-    $req->closeCursor();
+    $req->closeCursor();  
   }
   // Suppression demande inscription
   elseif (isset($_POST['decline_inscription']))

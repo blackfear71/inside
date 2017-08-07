@@ -141,7 +141,7 @@
         // Description idée
         echo '<tr class="tr_ideas_idea">';
           echo '<td colspan="4">';
-            echo '<p>' . $ligne->getContent() . '</p>';
+            echo '<p>' . nl2br($ligne->getContent()) . '</p>';
           echo '</td>';
         echo '</tr>';
       echo '</table>';

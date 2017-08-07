@@ -5,14 +5,20 @@
   {
     include('../includes/appel_bdd.php');
 
-    // Récupération des champs saisis et initialisations
-    $trigramme = htmlspecialchars(strtoupper($_POST['trigramme']));
-    $pseudo = htmlspecialchars($_POST['pseudo']);
-    $salt = rand();
-    $password = htmlspecialchars(hash('sha1', $_POST['password'] . $salt));
+    // Récupération des champs saisis et initialisations utilisateur
+    $trigramme        = htmlspecialchars(strtoupper($_POST['trigramme']));
+    $pseudo           = htmlspecialchars($_POST['pseudo']);
+    $salt             = rand();
+    $password         = htmlspecialchars(hash('sha1', $_POST['password'] . $salt));
     $confirm_password = htmlspecialchars(hash('sha1', $_POST['confirm_password'] . $salt));
-    $reset = "I";
-    $avatar = "";
+    $reset            = "I";
+    $avatar           = "";
+
+    // Initialisations préférences
+    $view_movie_house  = "H";
+    $categories_home   = "NN";
+    $today_movie_house = "N";
+    $view_the_box      = "P";
 
     // Contrôle trigramme déjà pris
     $reponse = $bdd->query('SELECT id, identifiant FROM users');
@@ -35,16 +41,28 @@
     {
       if ($password == $confirm_password)
       {
+        // On créé l'utilisateur
         $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, full_name, avatar) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :full_name, :avatar)');
 				$req->execute(array(
-					'identifiant' => $trigramme,
-          'salt' => $salt,
+					'identifiant'  => $trigramme,
+          'salt'         => $salt,
           'mot_de_passe' => $password,
-          'reset' => $reset,
-					'full_name' => $pseudo,
-					'avatar' => $avatar
+          'reset'        => $reset,
+					'full_name'    => $pseudo,
+					'avatar'       => $avatar
 					));
 				$req->closeCursor();
+
+        // On créé les préférences
+        $req = $bdd->prepare('INSERT INTO preferences(identifiant, view_movie_house, categories_home, today_movie_house, view_the_box) VALUES(:identifiant, :view_movie_house, :categories_home, :today_movie_house, :view_the_box)');
+        $req->execute(array(
+          'identifiant'       => $trigramme,
+          'view_movie_house'  => $view_movie_house,
+          'categories_home'   => $categories_home,
+          'today_movie_house' => $today_movie_house,
+          'view_the_box'      => $view_the_box
+          ));
+        $req->closeCursor();
 
         $_SESSION['ask_inscription'] = true;
         $_SESSION['wrong_confirm'] = false;
@@ -57,7 +75,7 @@
     }
 
     // Redirection
-    header('location: inscription.php');
+    //header('location: inscription.php');
   }
   elseif (isset($_POST['ask_desinscription']))
   {
