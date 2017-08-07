@@ -32,11 +32,11 @@
 				if (isset($mdp) AND $mdp == $donnees['mot_de_passe'])
 				{
 					// Sauvegarde des données utilisateur en SESSION
-					$_SESSION['connected'] = true;
-					$_SESSION['id'] = $donnees['id'];
+					$_SESSION['connected']   = true;
+					$_SESSION['id']          = $donnees['id'];
 					$_SESSION['identifiant'] = $donnees['identifiant'];
-					$_SESSION['full_name'] = $donnees['full_name'];
-					$_SESSION['wrong'] = false;
+					$_SESSION['full_name']   = $donnees['full_name'];
+					$_SESSION['wrong']       = false;
 
 					// Recherche et sauvegarde des preferences utilisateur en SESSION
 					if ($_SESSION['identifiant'] != "admin")

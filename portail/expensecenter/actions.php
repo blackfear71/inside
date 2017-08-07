@@ -8,7 +8,7 @@
     $date       = date("Ymd");
     $price      = str_replace(',', '.', htmlspecialchars($_POST['depense']));
     $buyer      = $_POST['buyer_user'];
-    $comment    = htmlspecialchars($_POST['comment']);
+    $comment    = $_POST['comment'];
 
     // Test si prix numérique
     if (is_numeric($price))
@@ -95,7 +95,7 @@
     $buyer = $_POST['buyer_user'];
 
     // Mise à jour du commentaire si modifié
-    $comment = htmlspecialchars($_POST['comment']);
+    $comment = $_POST['comment'];
 
     $req0 = $bdd->prepare('UPDATE expense_center SET price=:price, buyer=:buyer, comment=:comment WHERE id=' . $id_modify);
     $req0->execute(array(

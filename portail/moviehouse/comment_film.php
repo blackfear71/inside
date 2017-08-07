@@ -10,7 +10,7 @@
     $author  = $_SESSION['identifiant'];
     $date    = date("Ymd");
     $time    = date("His");
-    $comment = htmlspecialchars($_POST['comment']);
+    $comment = $_POST['comment'];
 
     // Stockage de l'enregistrement en table
     $req = $bdd->prepare('INSERT INTO movie_house_comments(id_film, author, date, time, comment) VALUES(:id_film, :author, :date, :time, :comment)');

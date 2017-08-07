@@ -75,23 +75,6 @@
     }
 
     // Redirection
-    //header('location: inscription.php');
-  }
-  elseif (isset($_POST['ask_desinscription']))
-  {
-    include('../includes/appel_bdd.php');
-
-    $reset = "D";
-    $_SESSION['ask_desinscription'] = false;
-
-    $req = $bdd->prepare('UPDATE users SET reset=:reset WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
-    $req->execute(array(
-      'reset' => $reset
-    ));
-    $req->closeCursor();
-
-    $_SESSION['ask_desinscription'] = true;
-
-    header('location: ../profil/profil.php?user=' . $_SESSION['identifiant']);
+    header('location: inscription.php');
   }
 ?>

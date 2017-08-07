@@ -5,7 +5,7 @@
 	{
 		include('../includes/appel_bdd.php');
 
-		$identifiant = htmlspecialchars($_POST['login']);
+		$identifiant = htmlspecialchars(strtoupper($_POST['login']));
 		$reset = "N";
 		$_SESSION['wrong_id'] = false;
 		$_SESSION['asked'] = false;
