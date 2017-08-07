@@ -7,6 +7,7 @@
 
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
 		<link rel="stylesheet" href="/inside/style.css" />
+    <link rel="stylesheet" href="styleProfil.css" />
 
 		<title>Inside - Profil</title>
   </head>
@@ -73,7 +74,7 @@
   										echo '<span class="zone_parcourir_avatar">+<input type="file" accept="image/*" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" required /></span>';
 
   										echo '<div class="mask_avatar">';
-  											echo '<img id="output" class="avatar"/>';
+  											echo '<img id="output" class="avatar_profil"/>';
   										echo '</div>';
 
   										echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="saisie_valider_profil" />';
@@ -183,7 +184,7 @@
 					<!-- Tableau modification préférences -->
 					<div class="zone_profil_preferences_table">
             <?php
-              echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierPreferences" style="padding-bottom: 20px;">';
+              echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierPreferences" class="form_preference">';
             ?>
 							<!-- Préférences Movie House -->
 							<div class="zone_profil_contribution">
@@ -353,14 +354,14 @@
 								<div class="message_profil">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l'administrateur à l'aide de ce bouton. Il validera votre choix après vérification.</div>
 
                 <?php
-  								echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=askDesinscription" class="form_preference">';
+  								echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=askDesinscription" class="form_desinscription">';
   									echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="saisie_valider_profil" />';
   								echo '</form>';
 
 									if ($profil->getReset() == "D")
-										echo '<div class="message_profil" style="font-weight: bold;">Une demande est déjà en cours.</div>';
+										echo '<div class="message_profil_2">Une demande est déjà en cours.</div>';
 									else
-										echo '<div class="message_profil" style="font-weight: bold;">Aucune demande en cours.</div>';
+										echo '<div class="message_profil_2">Aucune demande en cours.</div>';
 								?>
 							</td>
 						</tr>

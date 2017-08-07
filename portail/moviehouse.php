@@ -85,7 +85,7 @@
 				<img src="../includes/images/movie_house_band.png" alt="movie_house_band" class="bandeau_categorie" />
 
 				<!-- Switch entre accueil, vue générale et vue personnelle-->
-				<div class="switch_view">
+				<div class="switch_view_2">
 					<?php
 						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
 																 'main' => array('lib' => 'Synthèse', 'date' => $_GET['year']),

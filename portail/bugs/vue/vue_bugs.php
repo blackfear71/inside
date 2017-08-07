@@ -43,7 +43,7 @@
 
 			<article class="article_portail">
         <!-- Onglets vues -->
-        <div class="switch_view" style="margin-top: -30px;">
+        <div class="switch_view">
           <?php
             $listeSwitch = array('submit'     => array('lib' => 'Saisie',   'action' => 'goSignaler'),
                                  'unresolved' => array('lib' => 'En cours', 'action' => 'goConsulter'),

@@ -41,10 +41,10 @@
       <article class="article_portail">
 				<!-- Bandeau catégorie -->
 				<img src="../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
-				<br />
+
 				<?php
 					// Tableau des parcours
-        	echo '<table class="table_movie_house">';
+        	echo '<table class="table_movie_house" style="margin-top: 30px;">';
           	echo '<tr>';
               echo '<td class="init_table_dates" style="width: 120px;">Nom du parcours</td>';
               echo '<td class="init_table_dates" style="width: 120px;">Distance</td>';

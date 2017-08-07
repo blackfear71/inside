@@ -43,7 +43,7 @@
 			</aside>
 
 			<article class="article_portail">
-				<div class="switch_view" style="margin-top: -30px;">
+				<div class="switch_view">
 					<?php
 						$listeSwitch = array('all'        => 'Tous',
 																 'unresolved' => 'En cours',
