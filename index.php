@@ -3,7 +3,7 @@
 
 	// Si déjà connecté
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-		header('location: portail/portail.php');
+		header('location: portail/portail/portail.php?action=goConsulter');
 	elseif (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 		header('location: administration/administration.php');
 	else

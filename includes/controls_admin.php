@@ -5,7 +5,7 @@
 
   // Contrôle utilisateur normal
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-		header('location: /inside/portail/portail.php');
+		header('location: /inside/portail/portail/portail.php?action=goConsulter');
 
   // Contrôle utilisateur connecté
 	if ($_SESSION['connected'] == false)

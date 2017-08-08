@@ -1,0 +1,64 @@
+/***************/
+/*** Portail ***/
+/***************/
+
+.menu_portail
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding-top: 50px;
+}
+
+.menu_portail_box
+{
+	height: 400px;
+	width: 300px;
+	display: inline-block;
+	margin-right: -4px;
+	background-color: rgb(55, 70, 80);
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.mask_portail
+{
+	float: right;
+	background-color: white;
+	width: 70px;
+	height: 400px;
+	opacity: 0.1;
+}
+
+.mask_portail_triangle
+{
+	float: right;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 0 400px 50px;
+	border-color: transparent transparent white transparent;
+	opacity: 0.1;
+}
+
+.title_portail
+{
+	float: left;
+	margin-top: -360px;
+	margin-left: 40px;
+	color: white;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 300%;
+	line-height: 50px;
+	text-align: justify;
+}
+
+.logo_menu
+{
+	float: right;
+	height: 200px;
+	width: 200px;
+	margin-top: -180px;
+	margin-right: -40px;
+	opacity: 0.3;
+}

@@ -81,7 +81,7 @@
 	}
 	elseif ($_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
 	{
-		header('location: ../portail/portail.php');
+		header('location: ../portail/portail/portail.php?action=goConsulter');
 	}
 	else
 	{

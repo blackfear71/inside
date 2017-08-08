@@ -166,7 +166,7 @@
 	// Retour au portail
 	if ($back == true)
 	{
-		echo '<a href="/inside/portail/portail.php" title="Retour au portail" class="link_profile">';
+		echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_profile">';
 			echo '<img src="/inside/includes/icons/back.png" alt="back" title="Retour au portail" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';

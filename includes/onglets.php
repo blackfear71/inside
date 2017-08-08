@@ -19,53 +19,37 @@
 	}
 
 	// Par défaut, tous les onglets sont off
-	//$onglet_1 = '<a href="/inside/portail/referenceguide.php" class="onglet_inactif">Reference Guide</a>';
-	//$onglet_2 = '<a href="/inside/portail/timesheet.php" class="onglet_inactif">Timesheet</a>';
-	$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
-	$onglet_4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
-	$onglet_5 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
+	$onglet_1 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
+	$onglet_2 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+	$onglet_3 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 
 	// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 	$path = $_SERVER['PHP_SELF'];
 
 	/*echo 'page courante : ' . $path;*/
 
-	// Reference Guide
-	/*if ($path == '/inside/portail/referenceguide.php'
-	OR  $path == '/inside/portail/referenceguide/liste_articles.php'
-	OR  $path == '/inside/portail/referenceguide/article.php'
-	OR  $path == '/inside/portail/referenceguide/saisie_article.php'
-	OR  $path == '/inside/portail/referenceguide/saisie_medias.php'
-	OR  $path == '/inside/portail/referenceguide/previsu.php')
-		$onglet_1 = '<a href="/inside/portail/referenceguide.php" class="onglet_actif">Reference Guide</a>';*/
-
-	// Timesheet
-	/*if ($path == '/inside/portail/timesheet.php')
-		$onglet_2 = '<a href="/inside/portail/timesheet.php" class="onglet_actif">Timesheet</a>';*/
-
 	// Movie House
 	if ($path == '/inside/portail/moviehouse.php'
 	OR  $path == '/inside/portail/moviehouse/saisie_avancee.php'
 	OR  $path == '/inside/portail/moviehouse/details_film.php')
 	{
-		$onglet_3 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
+		$onglet_1 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 	}
 
 	// Expense center
 	if ($path == '/inside/portail/expensecenter.php')
 	{
-		$onglet_4 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_actif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+		$onglet_2 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_actif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 	}
 
 	// Petits pédestres
 	if ($path == '/inside/portail/petitspedestres/parcours.php')
 	{
-		$onglet_5 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" class="onglet_actif" title="Les Petits Pédestres" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
+		$onglet_3 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" class="onglet_actif" title="Les Petits Pédestres" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 	}
 
 	// Affichage des onglets
 	echo '<div class="main_title_2">';
-		echo $onglet_3, $onglet_4, $onglet_5;
-		//echo $onglet_1, $onglet_2, $onglet_3;
+		echo $onglet_1, $onglet_2, $onglet_3;
 	echo '</div>';
 ?>
