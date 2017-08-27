@@ -30,7 +30,7 @@
 					$disconnect = true;
 					$profil = true;
 					$back = true;
-					$bug = true;
+					$reports = true;
 
 					include('../../includes/aside.php');
 				?>

@@ -53,8 +53,8 @@
 	if (!isset($ideas))
 		$ideas = false;
 
-	if (!isset($bug))
-		$bug = false;
+	if (!isset($reports))
+		$reports = false;
 
 	// Déconnexion
 	if ($disconnect == true)
@@ -212,7 +212,7 @@
 	}
 
 	// Signaler un bug
-	if ($bug == true)
+	if ($reports == true)
 	{
 		echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_profile">';
 			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';

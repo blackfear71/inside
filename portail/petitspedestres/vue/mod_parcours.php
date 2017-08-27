@@ -30,7 +30,7 @@
 					$delete_film = false;
 					$back = true;
 					$ideas = true;
-					$bug = true;
+					$reports = true;
 
 					include('../../includes/aside.php');
 				?>

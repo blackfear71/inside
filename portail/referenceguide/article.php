@@ -49,7 +49,7 @@
 					$add_article = true;
 					$back = true;
 					$ideas = true;
-					$bug = true;
+					$reports = true;
 
 					include('../../includes/aside.php');
 				?>
