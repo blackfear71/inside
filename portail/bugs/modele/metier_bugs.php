@@ -4,7 +4,7 @@
 
   // METIER : Lecture liste des bugs
   // RETOUR : Tableau des bugs
-  function readBugs($view)
+  function getBugs($view)
   {
     // Initialisation tableau des bugs
     $listeBugs = array();

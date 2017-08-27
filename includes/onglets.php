@@ -20,7 +20,7 @@
 
 	// Par défaut, tous les onglets sont off
 	$onglet_1 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
-	$onglet_2 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+	$onglet_2 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 	$onglet_3 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 
 	// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
@@ -37,9 +37,9 @@
 	}
 
 	// Expense center
-	if ($path == '/inside/portail/expensecenter.php')
+	if ($path == '/inside/portail/expensecenter/expensecenter.php')
 	{
-		$onglet_2 = '<a href="/inside/portail/expensecenter.php?year=' . date("Y") . '" title="Expense Center" class="onglet_actif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+		$onglet_2 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="Expense Center" class="onglet_actif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 	}
 
 	// Petits pédestres

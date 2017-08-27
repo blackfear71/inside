@@ -66,7 +66,7 @@
 						echo '</a>';
 
 						// Lien ExpenseCenter
-						echo '<a href="../expensecenter.php?year=' . date("Y") . '" class="new_menu_link_portail">';
+						echo '<a href="../expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" class="new_menu_link_portail">';
 							echo '<div class="menu_portail_box">';
 								echo '<div class="mask_portail"></div>';
 								echo '<div class="mask_portail_triangle"></div>';

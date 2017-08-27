@@ -26,7 +26,7 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      $listeBugs = readBugs($_GET['view']);
+      $listeBugs = getBugs($_GET['view']);
       break;
 
     case 'doSignaler':

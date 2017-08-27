@@ -27,12 +27,12 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      $listeIdeas = readIdeas($_GET['view']);
+      $listeIdeas = getIdeas($_GET['view']);
       break;
 
     case 'doInserer':
       // Insertion des données par le modèle
-      insertIdea($_POST);
+      insertIdea($_POST, $_SESSION['identifiant']);
       break;
 
     case 'doChangerStatut':

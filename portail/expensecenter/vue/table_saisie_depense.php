@@ -1,23 +1,15 @@
 <?php
-  include('../includes/appel_bdd.php');
-
-  // Nombre utilisateurs
-  $reponse = $bdd->query('SELECT COUNT(id) AS nb_users FROM users WHERE identifiant != "admin"');
-  $donnees = $reponse->fetch();
-  $nb_users = $donnees['nb_users'];
-  $reponse->closeCursor();
-
+  /*********************/
+  /* Tableau de saisie */
+  /*********************/
   echo '<div class="zone_saisie_depense">';
-
-    echo '<form method="post" action="expensecenter/actions.php?year=' . $_GET['year'] . '">';
-
+    echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer">';
       echo '<table class="table_saisie_depense">';
-
         // Nombre de colonnes par ligne
         $nb_colonnes = 5;
 
         // Nombre de Lignes
-        $nb_lignes = ceil($nb_users / $nb_colonnes);
+        $nb_lignes = ceil($nbUsers / $nb_colonnes);
 
         // Initalisation position ligne tableau
         $ligne = 1;
@@ -40,25 +32,21 @@
             // Initialisation nombre d'utilisateurs par ligne
             $nb_users_line = 0;
 
-            $reponse = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC LIMIT ' . $premiere_entree . ', ' . $nb_colonnes);
-
-            while($donnees = $reponse->fetch())
+            foreach (array_slice($listeUsers, $premiere_entree, $premiere_entree + $nb_colonnes) as $user)
             {
               echo '<td class="titre_user_depense">';
                 echo '<div class="zone_avatar_films">';
-                  if (isset($donnees['avatar']) AND !empty($donnees['avatar']))
-                    echo '<img src="../profil/avatars/' . $donnees['avatar'] . '" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_films" />';
+                  if (!empty($user->getAvatar()))
+                    echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getFull_name() . '" class="avatar_films" />';
                   else
-                    echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $donnees['full_name'] . '" class="avatar_films" />';
+                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getFull_name() . '" class="avatar_films" />';
                 echo '</div>';
 
-                echo '<span class="full_name_films">' . $donnees['full_name'] . '</span>';
+                echo '<span class="full_name_films">' . $user->getFull_name() . '</span>';
               echo '</td>';
 
               $nb_users_line++;
             }
-
-            $reponse->closeCursor();
           echo '</tr>';
 
           // Lignes de saisie
@@ -71,25 +59,20 @@
                 echo '<input type="text" name="depense" value="' . $_SESSION['price'] . '" placeholder="Prix" maxlength="6" class="saisie_prix" required /> <span class="euro">€</span>';
 
                 // Saisie acheteur
-                $reponse = $bdd->query('SELECT id, identifiant, full_name FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-
                 echo '<select name="buyer_user" class="buyer" required>';
                   echo '<option value="" hidden>Choisissez...</option>';
 
-                  while($donnees = $reponse->fetch())
-                  {
-                    if ($donnees['identifiant'] == $_SESSION['buyer'])
-                      echo '<option value="' . $_SESSION['buyer'] . '" selected>' . $donnees['full_name'] . '</option>';
-                    else
-                      echo '<option value="' . $donnees['identifiant'] . '">' . $donnees['full_name'] . '</option>';
-                  }
+                    foreach ($listeUsers as $user)
+                    {
+                      if ($user->getIdentifiant() == $_SESSION['buyer'])
+                        echo '<option value="' . $_SESSION['buyer'] . '" selected>' . $user->getFull_name() . '</option>';
+                      else
+                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getFull_name() . '</option>';
+                    }
+                echo '</select>';
 
-                  echo '</select>';
-
-                  $reponse->closeCursor();
-
-                  // Saisie Commentaire
-                  echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense" />' . $_SESSION['comment'] . '</textarea>';
+                // Saisie Commentaire
+                echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense" />' . $_SESSION['comment'] . '</textarea>';
               echo '</td>';
             }
 
@@ -122,8 +105,6 @@
 
       // Validation dépense
       echo '<input type="submit" name="add_depense" value="Rajouter une ligne aux dépenses" class="add_depense" />';
-
     echo '</form>';
-
   echo '</div>';
 ?>

@@ -4,7 +4,7 @@
 
   // METIER : Lecture liste des idées
   // RETOUR : Tableau d'idées
-  function readIdeas($view)
+  function getIdeas($view)
   {
     // Initialisation tableau d'idées
     $listeIdeas = array();
@@ -77,13 +77,13 @@
 
   // METIER : Insertion d'une idée
   // RETOUR : Aucun
-  function insertIdea()
+  function insertIdea($post, $identifiant)
   {
     // Récupération des données
-    $subject    = $_POST['subject_idea'];
+    $subject    = $post['subject_idea'];
     $date       = date("Ymd");
-    $author     = $_SESSION['identifiant'];
-    $content    = $_POST['content_idea'];
+    $author     = $identifiant;
+    $content    = $post['content_idea'];
     $status     = "O";
     $developper = "";
 

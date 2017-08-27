@@ -10,11 +10,11 @@
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id                = 0;
-      $this->identifiant       = '';
-      $this->reset             = '';
-      $this->full_name         = '';
-      $this->avatar            = '';
+      $this->id          = 0;
+      $this->identifiant = '';
+      $this->reset       = '';
+      $this->full_name   = '';
+      $this->avatar      = '';
     }
 
     // Constructeur de l'objet Profile en fonction des données
