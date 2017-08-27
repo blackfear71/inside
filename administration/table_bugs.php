@@ -94,7 +94,7 @@
 			// Description idée
 			echo '<tr class="tr_ideas_idea">';
 				echo '<td colspan="4">';
-					echo '<p>' . nl2br($donnees['content']) . '</p>';
+					echo '<p>' . htmlspecialchars(nl2br($donnees['content'])) . '</p>';
 				echo '</td>';
 			echo '</tr>';
 		echo '</table>';

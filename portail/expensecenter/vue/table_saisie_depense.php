@@ -32,7 +32,7 @@
             // Initialisation nombre d'utilisateurs par ligne
             $nb_users_line = 0;
 
-            foreach (array_slice($listeUsers, $premiere_entree, $premiere_entree + $nb_colonnes) as $user)
+            foreach (array_slice($listeUsers, $premiere_entree, $nb_colonnes) as $user)
             {
               echo '<td class="titre_user_depense">';
                 echo '<div class="zone_avatar_films">';

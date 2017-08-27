@@ -2801,6 +2801,13 @@ article
 	border-radius: 5px;
 }
 
+.td_depenses
+{
+	padding: 5px;
+	border: solid 1px #b3b3b3;
+	font-family: robotolight, Verdana, sans-serif;
+}
+
 /*** TheBox ***/
 .table_ideas
 {
