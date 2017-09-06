@@ -28,9 +28,9 @@
 			<aside>
 				<?php
 					$disconnect = true;
-					$back = true;
-					$ideas = true;
-					$reports = true;
+					$back       = true;
+					$ideas      = true;
+					$reports    = true;
 
 					include('../includes/aside.php');
 				?>

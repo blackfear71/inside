@@ -23,10 +23,10 @@
 			<aside>
 				<?php
 					$disconnect = true;
-					$profil = true;
-					$back = true;
-					$ideas = true;
-					$reports = true;
+					$profil     = true;
+					$back       = true;
+					$ideas      = true;
+					$reports    = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -58,7 +58,7 @@
                 echo '<a href="expensecenter.php?year=' . $year . '&action=goConsulter" class="expense_year_inactive">' . $year . '</a>';
             }
 
-            if ($annee_existante == false)
+            if ($anneeExistante == false)
               echo '<span class="expense_year_active">' . $_GET['year'] . '</span>';
           echo '</div>';
 

@@ -24,10 +24,10 @@
 			<aside>
 				<?php
 					$disconnect = true;
-					$profil = true;
-					$back = true;
-					$ideas = true;
-					$reports = true;
+					$profil     = true;
+					$back       = true;
+					$ideas      = true;
+					$reports    = true;
 
 					include('../../includes/aside.php');
 				?>

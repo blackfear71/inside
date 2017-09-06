@@ -3,6 +3,28 @@
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/expenses.php');
 
+  // METIER : Contrôle année existante (pour les onglets)
+  // RETOUR : Booléen
+  function controlYear($year)
+  {
+    $annee_existante = false;
+
+    if (isset($year) AND is_numeric($year))
+    {
+      global $bdd;
+
+      $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
+      while($donnees = $reponse->fetch())
+      {
+        if ($year == $donnees['SUBSTR(date, 1, 4)'])
+          $annee_existante = true;
+      }
+      $reponse->closeCursor();
+    }
+
+    return $annee_existante;
+  }
+
   // METIER : Lecture nombre d'utilisateurs inscrits
   // RETOUR : Nombre d'utilisateurs
   function countUsers()
@@ -67,13 +89,13 @@
 
       while($data1 = $req1->fetch())
       {
-        $expense = Expenses::withData($data1);
+        $expense    = Expenses::withData($data1);
 
         // Prix d'achat
         $prix_achat = $expense->getPrice();
 
         // Identifiant de l'acheteur
-        $acheteur = $expense->getBuyer();
+        $acheteur   = $expense->getBuyer();
 
         // echo 'prix achat : ' . $prix_achat . '<br />';
         // echo 'acheteur : ' . $acheteur . '<br />';
@@ -165,24 +187,20 @@
 
     // Récupération d'une liste des dépenses
     $reponse = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4) = ' . $year . ' ORDER BY id DESC');
-
     while($donnees = $reponse->fetch())
     {
-      // Ajout d'un objet parcours (instancié à partir des données de la base) au tableau de dépenses
+      // Ajout d'un objet Expenses (instancié à partir des données de la base) au tableau de dépenses
       array_push($listeExpenses, Expenses::withData($donnees));
     }
-
     $reponse->closeCursor();
 
     // Récupération d'une liste des parts
     $reponse2 = $bdd->query('SELECT * FROM expense_center_users ORDER BY id_expense DESC, identifiant ASC');
-
     while($donnees2 = $reponse2->fetch())
     {
-      // Ajout d'un objet parcours (instancié à partir des données de la base) au tableau de dépenses
+      // Ajout d'un objet Parts (instancié à partir des données de la base) au tableau de dépenses
       array_push($listeParts, Parts::withData($donnees2));
     }
-
     $reponse2->closeCursor();
 
     // On consolide un nouveau tableau repésentant chaque ligne du tableau résumé
@@ -202,7 +220,7 @@
             if ($part->getIdentifiant() == $user->getIdentifiant())
             {
               $myParts = array('identifiant' => $user->getIdentifiant(),
-                               'part'        => $part->getParts(),
+                               'part'        => $part->getParts()
                               );
 
               $part_trouve = true;
@@ -216,7 +234,7 @@
         if ($part_trouve == false)
         {
           $myParts = array('identifiant' => $user->getIdentifiant(),
-                           'part'        => 0,
+                           'part'        => 0
                           );
         }
         else
@@ -264,6 +282,8 @@
       $i++;
     }
 
+    // var_dump($tableauResume);
+
     return $tableauResume;
   }
 
@@ -293,7 +313,7 @@
       $req0->closeCursor();
 
       // On récupère le numéro permettant d'identifier la dépenses
-      $id_expense = $bdd -> lastInsertId();
+      $id_expense = $bdd->lastInsertId();
 
       // On stocke le tableau des parts en fonction de l'utilisateur si la part n'est pas à 0
       $list_parts_users = array();

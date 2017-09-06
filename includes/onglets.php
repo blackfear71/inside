@@ -5,21 +5,21 @@
 	switch ($_SESSION['view_movie_house'])
 	{
 		case "S":
-			$view_movie_house = "main";
+			$view_movie_house   = "main";
 			break;
 
 		case "D":
-			$view_movie_house = "user";
+			$view_movie_house   = "user";
 			break;
 
 		case "H":
 		default:
-			$view_movie_house = "home";
+			$view_movie_house   = "home";
 			break;
 	}
 
 	// Par défaut, tous les onglets sont off
-	$onglet_1 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
+	$onglet_1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 	$onglet_2 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 	$onglet_3 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 
@@ -29,11 +29,11 @@
 	/*echo 'page courante : ' . $path;*/
 
 	// Movie House
-	if ($path == '/inside/portail/moviehouse.php'
-	OR  $path == '/inside/portail/moviehouse/saisie_avancee.php'
-	OR  $path == '/inside/portail/moviehouse/details_film.php')
+	if ($path == '/inside/portail/moviehouse/moviehouse.php'
+	OR  $path == '/inside/portail/moviehouse/saisie.php'
+	OR  $path == '/inside/portail/moviehouse/details.php')
 	{
-		$onglet_1 = '<a href="/inside/portail/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
+		$onglet_1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 	}
 
 	// Expense center

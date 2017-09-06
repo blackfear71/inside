@@ -23,14 +23,10 @@
 			<aside>
 				<?php
 					$disconnect = true;
-					$profil = true;
-					$modify_film = false;
-					$ajouter_parcours = false;
-					$modify_parcours = false;
-					$delete_film = false;
-					$back = true;
-					$ideas = true;
-					$reports = true;
+					$profil     = true;
+					$back       = true;
+					$ideas      = true;
+					$reports    = true;
 
 					include('../../includes/aside.php');
 				?>

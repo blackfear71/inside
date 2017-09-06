@@ -28,9 +28,9 @@
 			<aside>
 				<?php
 					$disconnect = true;
-					$profil = true;
-					$ideas = true;
-					$reports = true;
+					$profil     = true;
+					$ideas      = true;
+					$reports    = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -56,7 +56,7 @@
 								break;
 						}
 
-						echo '<a href="../moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '" class="new_menu_link_portail">';
+						echo '<a href="../moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" class="new_menu_link_portail">';
 							echo '<div class="menu_portail_box">';
 								echo '<div class="mask_portail"></div>';
 								echo '<div class="mask_portail_triangle"></div>';

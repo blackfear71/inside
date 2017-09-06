@@ -1,0 +1,131 @@
+<?php
+  // Contrôles communs Utilisateurs
+  include_once('../../includes/controls_users.php');
+
+  // Fonctions communes
+  include('../../includes/fonctions_dates.php');
+  include('../../includes/fonctions_regex.php');
+
+  // Modèle de données : "module métier"
+  include_once('modele/metier_moviehouse.php');
+
+  // Initialisation sauvegarde saisie
+  if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
+  {
+    $_SESSION['nom_film_saisi']         = "";
+    $_SESSION['date_theater_saisie']    = "";
+    $_SESSION['date_release_saisie']    = "";
+    $_SESSION['trailer_saisi']          = "";
+    $_SESSION['link_saisi']             = "";
+    $_SESSION['poster_saisi']           = "";
+    $_SESSION['doodle_saisi']           = "";
+    $_SESSION['date_doodle_saisie']     = "";
+    $_SESSION['hours_doodle_saisies']   = "";
+    $_SESSION['minutes_doodle_saisies'] = "";
+    $_SESSION['time_doodle_saisi']      = "";
+    $_SESSION['restaurant_saisi']       = "";
+    $_SESSION['place_saisie']           = "";
+    $wrong_date                         = false;
+  }
+
+  // Récupération top si erreur date (écrasé par les alertes sinon)
+  if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
+    $wrong_date = true;
+
+  // Appel métier
+  switch ($_GET['action'])
+  {
+    case 'goAjouter':
+      // Lecture liste des données par le modèle
+      $initSaisie   = true;
+      $filmExistant = false;
+
+      if ($_SESSION['wrong_date'] == true)
+        $film = initCreErrFilm();
+      else
+        $film = initCreFilm();
+      break;
+
+    case "goModifier":
+      $initSaisie   = false;
+      $filmExistant = controlFilm($_GET['modify_id']);
+
+      if ($filmExistant == true)
+      {
+        if ($_SESSION['wrong_date'] == true)
+          $film = initModErrFilm($_GET['modify_id']);
+        else
+          $film = initModFilm($_GET['modify_id']);
+      }
+      break;
+
+    case "doInserer":
+      $new_id = insertFilmAvance($_POST);
+      break;
+
+    case "doModifier":
+      modFilmAvance($_GET['modify_id'], $_POST);
+      break;
+
+    default:
+      // Contrôle action renseignée URL
+      header('location: saisie.php?modify_id=' . $_GET['id'] . '&action=goAjouter');
+      break;
+  }
+
+  // Traitements de sécurité avant la vue
+  switch ($_GET['action'])
+  {
+    case 'goAjouter':
+    case "goModifier":
+      $film->setFilm(htmlspecialchars($film->getFilm()));
+      $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
+      $film->setDate_add(htmlspecialchars($film->getDate_add()));
+      $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
+      $film->setDate_release(htmlspecialchars($film->getDate_release()));
+      $film->setLink(htmlspecialchars($film->getLink()));
+      $film->setPoster(htmlspecialchars($film->getPoster()));
+      $film->setTrailer(htmlspecialchars($film->getTrailer()));
+      $film->setId_url(htmlspecialchars($film->getId_url()));
+      $film->setDoodle(htmlspecialchars($film->getDoodle()));
+      $film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
+      $film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
+      $film->setRestaurant(htmlspecialchars($film->getRestaurant()));
+      $film->setPlace(htmlspecialchars($film->getPlace()));
+      $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
+      $film->setStars_user(htmlspecialchars($film->getStars_user()));
+      $film->setParticipation(htmlspecialchars($film->getParticipation()));
+      $film->setNb_users(htmlspecialchars($film->getNb_users()));
+      $film->setAverage(htmlspecialchars($film->getAverage()));
+      break;
+
+    case "doInserer":
+    case "doModifier":
+    default:
+      break;
+  }
+
+  // Redirection affichage
+  switch ($_GET['action'])
+  {
+    case "doInserer":
+      if ($_SESSION['wrong_date'] == true)
+        header('location: saisie.php?action=goAjouter');
+      else
+        header('location: details.php?id_film=' . $new_id . '&action=goConsulter');
+      break;
+
+    case "doModifier":
+      if ($_SESSION['wrong_date'] == true)
+        header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
+      else
+        header('location: details.php?id_film=' . $_GET['modify_id'] . '&action=goConsulter');
+      break;
+
+    case 'goAjouter':
+    case "goModifier":
+    default:
+      include_once('vue/vue_saisie.php');
+      break;
+  }
+?>

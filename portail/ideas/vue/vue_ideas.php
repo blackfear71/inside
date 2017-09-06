@@ -28,9 +28,9 @@
 			<aside>
 				<?php
 					$disconnect = true;
-					$profil = true;
-					$back = true;
-					$reports = true;
+					$profil     = true;
+					$back       = true;
+					$reports    = true;
 
 					include('../../includes/aside.php');
 				?>

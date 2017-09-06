@@ -22,13 +22,13 @@
       <!-- Paramétrage des boutons de navigation -->
 			<aside>
 				<?php
-					$disconnect = true;
-					$profil = true;
+					$disconnect       = true;
+					$profil           = true;
 					$ajouter_parcours = true;
-					$modify_parcours = true;
-					$back = true;
-					$ideas = true;
-					$reports = true;
+					$modify_parcours  = true;
+					$back             = true;
+					$ideas            = true;
+					$reports          = true;
 
 					include('../../includes/aside.php');
 				?>
