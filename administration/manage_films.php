@@ -1,59 +1,78 @@
 <?php
-	// Contrôles communs Administrateur
-	include('../includes/controls_admin.php');
+  // Contrôles communs Administrateur
+  include_once('../includes/controls_admin.php');
+
+  // Modèle de données : "module métier"
+  include_once('modele/metier_administration.php');
+
+  // Appel métier
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+      // Lecture liste des données par le modèle
+			$listeSuppression = getToDelete();
+			$alerteFilms      = getAlerteFilms();
+      break;
+
+		case "doDeleteFilm":
+			deleteFilm($_GET['delete_id']);
+			break;
+
+		case "doResetFilm":
+			resetFilm($_GET['delete_id']);
+			break;
+
+    default:
+      // Contrôle action renseignée URL
+      header('location: manage_films.php?action=goConsulter');
+      break;
+  }
+
+  // Traitements de sécurité avant la vue
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+			foreach ($listeSuppression as $film)
+			{
+				$film->setId(htmlspecialchars($film->getId()));
+				$film->setFilm(htmlspecialchars($film->getFilm()));
+				$film->setTo_delete(htmlspecialchars($film->getTo_delete()));
+				$film->setDate_add(htmlspecialchars($film->getDate_add()));
+				$film->setDate_theater(htmlspecialchars($film->getDate_theater()));
+				$film->setDate_release(htmlspecialchars($film->getDate_release()));
+				$film->setLink(htmlspecialchars($film->getLink()));
+				$film->setPoster(htmlspecialchars($film->getPoster()));
+				$film->setTrailer(htmlspecialchars($film->getTrailer()));
+				$film->setId_url(htmlspecialchars($film->getId_url()));
+				$film->setDoodle(htmlspecialchars($film->getDoodle()));
+				$film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
+				$film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
+				$film->setRestaurant(htmlspecialchars($film->getRestaurant()));
+				$film->setNb_comments(htmlspecialchars($film->getNb_comments()));
+				$film->setStars_user(htmlspecialchars($film->getStars_user()));
+				$film->setParticipation(htmlspecialchars($film->getParticipation()));
+				$film->setNb_users(htmlspecialchars($film->getNb_users()));
+				$film->setAverage(htmlspecialchars($film->getAverage()));
+			}
+      break;
+
+		case "doDeleteFilm":
+		case "doResetFilm":
+    default:
+      break;
+  }
+
+  // Redirection affichage
+  switch ($_GET['action'])
+  {
+		case "doDeleteFilm":
+		case "doResetFilm":
+			header ('location: manage_films.php?action=goConsulter');
+			break;
+
+    case 'goConsulter':
+    default:
+      include_once('vue/vue_manage_films.php');
+      break;
+  }
 ?>
-
-<!DOCTYPE html>
-<html>
-  <head>
-		<meta charset="utf-8" />
-		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside, portail, CDS Finance" />
-
-		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
-
-		<title>Inside - Films</title>
-  </head>
-
-	<body>
-		<header>
-			<div class="main_title">
-				<img src="../includes/images/manage_films_band.png" alt="manage_films_band" class="bandeau_categorie_2" />
-			</div>
-
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
-		</header>
-
-		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside>
-				<?php
-					$disconnect = true;
-					$back_admin = true;
-
-					include('../includes/aside.php');
-				?>
-			</aside>
-
-			<!-- Messages d'alerte -->
-			<?php
-				include('../includes/alerts.php');
-			?>
-
-			<article class="article_portail">
-				<?php
-					// Tableau des demandes
-					include('table_films.php');
-				?>
-			</article>
-		</section>
-
-		<!-- Pied de page -->
-		<footer>
-			<?php include('../includes/footer.php'); ?>
-		</footer>
-  </body>
-</html>

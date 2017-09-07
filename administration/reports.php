@@ -1,78 +1,76 @@
 <?php
-	// Contrôles communs Administrateur
-	include('../includes/controls_admin.php');
+  // Contrôles communs Administrateur
+  include_once('../includes/controls_admin.php');
 
-	if (!isset($_GET['view']) or ($_GET['view'] != "all" AND $_GET['view'] != "resolved" AND $_GET['view'] != "unresolved"))
-		header('location: reports.php?view=all');
+	// Fonctions communes
+	include('../includes/fonctions_dates.php');
+
+  // Modèle de données : "module métier"
+  include_once('modele/metier_administration.php');
+
+	// Contrôle vue renseignée URL
+	switch ($_GET['view'])
+	{
+		case 'all':
+		case 'resolved':
+		case 'unresolved':
+			break;
+
+		default:
+			header('location: reports.php?view=all&action=goConsulter');
+			break;
+	}
+
+  // Appel métier
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+      // Lecture liste des données par le modèle
+			$listeBugs = getBugs($_GET['view']);
+      break;
+
+		case "doChangerStatut":
+			// Mise à jour des données par le modèle
+			updateBug($_GET['id'], $_POST);
+			break;
+
+    default:
+      // Contrôle action renseignée URL
+      header('location: reports.php?view=all&action=goConsulter');
+      break;
+  }
+
+  // Traitements de sécurité avant la vue
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+			foreach ($listeBugs as $bug)
+			{
+				$bug->setSubject(htmlspecialchars($bug->getSubject()));
+				$bug->setDate(htmlspecialchars($bug->getDate()));
+				$bug->setAuthor(htmlspecialchars($bug->getAuthor()));
+				$bug->setName_a(htmlspecialchars($bug->getName_a()));
+				$bug->setContent(htmlspecialchars($bug->getContent()));
+				$bug->getType(htmlspecialchars($bug->getType()));
+				$bug->getResolved(htmlspecialchars($bug->getResolved()));
+			}
+      break;
+
+		case "doChangerStatut":
+    default:
+      break;
+  }
+
+  // Redirection affichage
+  switch ($_GET['action'])
+  {
+		case "doChangerStatut":
+			header('location: reports.php?view=' . $_GET['view'] . '&action=goConsulter');
+			break;
+
+    case 'goConsulter':
+    default:
+      include_once('vue/vue_reports.php');
+      break;
+  }
 ?>
-
-<!DOCTYPE html>
-<html>
-  <head>
-		<meta charset="utf-8" />
-		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside, portail, CDS Finance" />
-
-		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
-
-		<title>Inside - Bugs</title>
-  </head>
-
-	<body>
-
-		<header>
-			<div class="main_title">
-				<img src="../includes/images/reports_band.png" alt="reports_band" class="bandeau_categorie_2" />
-			</div>
-
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
-		</header>
-
-		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside>
-				<?php
-					$disconnect = true;
-					$back_admin = true;
-
-					include('../includes/aside.php');
-				?>
-			</aside>
-
-			<article class="article_portail">
-				<div class="switch_view">
-					<?php
-						$listeSwitch = array('all'        => 'Tous',
-																 'unresolved' => 'En cours',
-																 'resolved'   => 'Résolus'
-																);
-
-						foreach ($listeSwitch as $view => $lib_view)
-						{
-							if ($_GET['view'] == $view)
-								$switch = '<a href="reports.php?view=' . $view . '" class="link_switch_active">' . $lib_view . '</a>';
-							else
-								$switch = '<a href="reports.php?view=' . $view . '" class="link_switch_inactive">' . $lib_view . '</a>';
-
-							echo $switch;
-						}
-					?>
-				</div>
-
-				<div class="liste_bugs">
-					<?php
-						include('table_bugs.php');
-					?>
-				</div>
-			</article>
-		</section>
-
-		<!-- Pied de page -->
-		<footer>
-			<?php include('../includes/footer.php'); ?>
-		</footer>
-  </body>
-</html>

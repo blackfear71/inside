@@ -5,7 +5,7 @@
 	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
 		header('location: portail/portail/portail.php?action=goConsulter');
 	elseif (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-		header('location: administration/administration.php');
+		header('location: administration/administration.php?action=goConsulter');
 	else
 		$_SESSION['connected'] = false;
 

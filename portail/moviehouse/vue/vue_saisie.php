@@ -8,6 +8,7 @@
 
   	<link rel="icon" type="image/png" href="/inside/favicon.png" />
   	<link rel="stylesheet" href="/inside/style.css" />
+    <link rel="stylesheet" href="styleMH.css" />
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   	<title>Inside - MH</title>

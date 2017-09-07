@@ -17,7 +17,7 @@
       $this->comment = '';
     }
 
-    // Constructeur de l'objet Ideas en fonction des données
+    // Constructeur de l'objet Expenses en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -122,7 +122,7 @@
       $this->bilan_format = '';
     }
 
-    // Constructeur de l'objet Ideas en fonction des données
+    // Constructeur de l'objet Bilans en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -153,7 +153,7 @@
         $this->bilan_format = $data['bilan_format'];
     }
 
-    // getters et setters pour l'objet Expenses
+    // getters et setters pour l'objet Bilans
     // id
     public function setId($id)
     {
@@ -237,7 +237,7 @@
       $this->parts       = 0;
     }
 
-    // Constructeur de l'objet Ideas en fonction des données
+    // Constructeur de l'objet Parts en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -262,7 +262,7 @@
         $this->parts       = $data['parts'];
     }
 
-    // getters et setters pour l'objet Expenses
+    // getters et setters pour l'objet Parts
     // id
     public function setId($id)
     {

@@ -140,7 +140,7 @@
 	     echo '</table>';
     }
     else
-      echo '<p class="wrong_date">Pas encore de films pour cette année...</p>';
+      echo '<p class="no_films">Pas encore de films pour cette année...</p>';
 
   // Saisie rapide
   echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doSaisieRapide" class="form_saisie_rapide" style="margin-bottom: 0px;">';

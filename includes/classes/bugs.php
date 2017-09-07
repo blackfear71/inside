@@ -23,7 +23,7 @@
       $this->resolved = '';
     }
 
-    // Constructeur de l'objet Ideas en fonction des données
+    // Constructeur de l'objet Bugs en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -60,7 +60,7 @@
         $this->resolved = $data['resolved'];
     }
 
-    // getters et setters pour l'objet Ideas
+    // getters et setters pour l'objet Bugs
     // id
     public function setId($id)
     {

@@ -10,7 +10,6 @@ function isLastDayOfYearWednesday($year){
         return true;
     else
         return false;
-
 }
 
 /* formatDateForDisplay

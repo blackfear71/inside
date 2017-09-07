@@ -32,7 +32,7 @@
       if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
         $auteur_bug = $donnees2['full_name'];
       else
-        $auteur_bug = "<i>un ancien utilisateur</i>";
+        $auteur_bug = "un ancien utilisateur";
 
       $reponse2->closeCursor();
 

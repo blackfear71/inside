@@ -175,7 +175,7 @@
 	// Retour au portail administration
 	if ($back_admin == true)
 	{
-		echo '<a href="/inside/administration/administration.php" title="Retour au portail administration" class="link_profile">';
+		echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_profile">';
 			echo '<img src="/inside/includes/icons/back.png" alt="back_admin" title="Retour au portail administration" class="icon_profile" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';

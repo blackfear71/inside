@@ -77,7 +77,7 @@
 	// Redirection si OK sinon message d'erreur et retour à la page de connexion
 	if ($_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
 	{
-		header('location: ../administration/administration.php');
+		header('location: ../administration/administration.php?action=goConsulter');
 	}
 	elseif ($_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
 	{

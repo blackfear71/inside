@@ -7,7 +7,8 @@
 
   	<link rel="icon" type="image/png" href="/inside/favicon.png" />
   	<link rel="stylesheet" href="/inside/style.css" />
-
+    <link rel="stylesheet" href="styleMH.css" />
+    
   	<title>Inside - MH</title>
   </head>
 

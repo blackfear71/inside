@@ -1,164 +1,43 @@
 <?php
-	// Contrôles communs Administrateur
-	include('../includes/controls_admin.php');
+  // Contrôles communs Administrateur
+  include_once('../includes/controls_admin.php');
+
+  // Modèle de données : "module métier"
+  include_once('modele/metier_administration.php');
+
+  // Appel métier
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+      // Lecture liste des données par le modèle
+			$alerteUsers = getAlerteUsers();
+			$alerteFilms = getAlerteFilms();
+			$nbBugs      = getNbBugs();
+			$nbEvols     = getNbEvols();
+      break;
+
+    default:
+      // Contrôle action renseignée URL
+      header('location: administration.php?action=goConsulter');
+      break;
+  }
+
+  // Traitements de sécurité avant la vue
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+      break;
+
+    default:
+      break;
+  }
+
+  // Redirection affichage
+  switch ($_GET['action'])
+  {
+    case 'goConsulter':
+    default:
+      include_once('vue/vue_administration.php');
+      break;
+  }
 ?>
-
-<!DOCTYPE html>
-<html>
-  <head>
-		<meta charset="utf-8" />
-		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside, portail, CDS Finance" />
-
-		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
-
-		<title>Inside - Administration</title>
-  </head>
-
-	<body>
-		<header>
-			<div class="main_title">
-				<img src="../includes/images/administration_band.png" alt="administration_band" class="bandeau_categorie_2" />
-			</div>
-
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
-		</header>
-
-		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside>
-				<?php
-					$disconnect = true;
-
-					include('../includes/aside.php');
-				?>
-			</aside>
-
-			<article class="article_portail">
-				<div class="new_menu_admin">
-					<a href="manage_users.php" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<div class="title_admin">Gestion
-								<div class="saut_ligne">UTILISATEURS
-								<?php
-									include('../includes/appel_bdd.php');
-									$req = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-									while($data = $req->fetch())
-									{
-										if ($data['reset'] == "Y" OR $data['reset'] == "I" OR $data['reset'] == "D")
-										{
-											echo '( ! )';
-											break;
-										}
-									}
-									$req->closeCursor();
-								?>
-								</div>
-							</div>
-						</div>
-					</a>
-
-					<!--<a href="" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<div class="title_admin">Gestion
-								<div class="saut_ligne">REFERENCE<br />GUIDE</div>
-							</div>
-						</div>
-					</a>-->
-
-					<a href="manage_films.php" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<div class="title_admin">Gestion
-								<div class="saut_ligne">MOVIE<br />HOUSE
-								<?php
-									include('../includes/appel_bdd.php');
-									$req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
-									while($data = $req->fetch())
-									{
-										if ($data['to_delete'] == "Y")
-										{
-											echo '( ! )';
-											break;
-										}
-									}
-									$req->closeCursor();
-								?>
-								</div>
-							</div>
-						</div>
-					</a>
-
-					<!--<a href="show_purge.php" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<div class="title_admin">Purge
-								<div class="saut_ligne">FICHIERS<br />TEMPORAIRES</div>
-							</div>
-						</div>
-					</a>-->
-
-					<a href="reports.php?view=unresolved" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<div class="title_admin">Rapports
-								<div class="saut_ligne">
-									BUGS
-									<?php
-										include('../includes/appel_bdd.php');
-										$req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type="B" AND resolved="N"');
-										$data = $req->fetch();
-										echo ' (' . $data['nb_bugs'] . ')';
-										$req->closeCursor();
-									?>
-									<br />EVOLUTIONS
-									<?php
-										include('../includes/appel_bdd.php');
-										$req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type="E" AND resolved="N"');
-										$data = $req->fetch();
-										echo ' (' . $data['nb_bugs'] . ')';
-										$req->closeCursor();
-									?>
-								</div>
-							</div>
-						</div>
-					</a>
-
-					<a href="/phpmyadmin/" target="_blank" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<div class="title_admin">phpMyAdmin</div>
-						</div>
-					</a>
-
-					<form method="post" action="export_bdd.php" class="new_menu_link_admin">
-						<div class="menu_admin_box">
-							<div class="mask_admin"></div>
-							<div class="mask_admin_triangle"></div>
-							<input type="submit" name="export" value="Sauvegarde" class="export_bdd" />
-							<div class="title_admin">
-								<div class="saut_ligne" style="margin-top: 65px;">BDD</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</article>
-		</section>
-
-		<!-- Pied de page -->
-		<footer>
-			<?php include('../includes/footer.php'); ?>
-		</footer>
-  </body>
-</html>
