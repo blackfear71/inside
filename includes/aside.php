@@ -1,13 +1,3 @@
-<!--<script>
-	function afficherMasquer(id)
-	{
-		if (document.getElementById(id).style.display == "none")
-			document.getElementById(id).style.display = "block";
-		else
-			document.getElementById(id).style.display = "none";
-	}
-</script>-->
-
 <?php
 	//////////////////////////////////////
 	// Paramétrage des boutons d'action //
@@ -19,9 +9,6 @@
 
 	if (!isset($profil))
 		$profil = false;
-
-	/*if (!isset($menu_rg))
-		$menu_rg = false;*/
 
 	if (!isset($add_article))
 		$add_article = false;
@@ -73,32 +60,6 @@
 		echo '</a>';
 		echo '<div class="hover_aside">Profil</div>';
 	}
-
-	// Menu
-	/*if ($menu_rg == true)
-	{
-		echo '<a onclick="afficherMasquer(\'menu\')" title="Menu" class="link_profile">';
-			echo '<img src="/inside/includes/icons/menu.png" alt="menu" title="Menu" class="icon_profile" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Menu</div>';
-
-		// Menu caché
-		echo '<div id="menu" style="display: none;">';
-			echo '<div class="triangle2"></div>';
-			echo '<ul>';
-				echo '<li style="border-top-left-radius: 5px; border-top-right-radius: 5px;"><a class="link_menu" href="liste_articles.php?univers=rdz&search=no">Univers RDZ</a></li>';
-				echo '<li><a class="link_menu" href="liste_articles.php?univers=tso&search=no">Univers TSO</a></li>';
-				echo '<li><a class="link_menu" href="liste_articles.php?univers=ims&search=no">Univers IMS</a></li>';
-				echo '<li><a class="link_menu" href="liste_articles.php?univers=micrortc&search=no">Univers Micro/RTC</a></li>';
-				echo '<li><a class="link_menu" href="liste_articles.php?univers=portaileid&search=no">Portail EID</a></li>';
-				echo '<li style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom: solid 1px #e3e3e3;"><a class="link_menu" href="liste_articles.php?univers=glossaire&search=no">Glossaire</a></li>';
-			echo '</ul>';
-		echo '</div>';
-
-		// Récupération de l'univers en cas d'ajout d'article
-		if (isset($_GET['univers']))
-			$_SESSION['univers'] = $_GET['univers'];
-	}*/
 
 	// Ajouter un article
 	if ($add_article == true)

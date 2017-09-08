@@ -50,7 +50,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant != "admin"  AND reset != "I" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -256,19 +256,24 @@
         {
           if ($listeExpenses[$i]->getBuyer() == $user->getIdentifiant())
           {
-            $name_b = $user->getFull_name();
+            $name_b        = $user->getFull_name();
+            $oldUser       = false;
             $pseudo_trouve = true;
           }
         }
 
         if ($pseudo_trouve == false)
-          $name_b = "un ancien<br />utilisateur";
+        {
+          $name_b  = "un ancien utilisateur";
+          $oldUser = true;
+        }
 
         // On génère une ligne dans le tableau final
         $myResume = array('id_expense' => $listeExpenses[$i]->getId(),
                           'price'      => str_replace('.', ',', number_format($listeExpenses[$i]->getPrice(), 2)),
                           'buyer'      => $listeExpenses[$i]->getBuyer(),
                           'name_b'     => $name_b,
+                          'oldUser'    => $oldUser,
                           'date'       => formatDateForDisplay($listeExpenses[$i]->getDate()),
                           'tableParts' => $tableauParts,
                           'comment'    => $listeExpenses[$i]->getComment()

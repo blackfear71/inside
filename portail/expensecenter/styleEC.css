@@ -308,6 +308,13 @@
 	font-family: robotolight, Verdana, sans-serif;
 }
 
+.table_buyer_expense_center
+{
+	text-align: center;
+	font-family: robotolight, Verdana, sans-serif;
+	max-width: 80px;
+}
+
 .table_date_expense_center
 {
 	width: 130px;

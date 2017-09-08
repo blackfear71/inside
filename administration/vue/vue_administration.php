@@ -7,6 +7,7 @@
 
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
 		<link rel="stylesheet" href="/inside/style.css" />
+    <link rel="stylesheet" href="styleAdmin.css" />
 
 		<title>Inside - Administration</title>
   </head>
@@ -49,7 +50,7 @@
 						</div>
 					</a>
 
-					<a href="manage_films.php?action=goConsulte" class="new_menu_link_admin">
+					<a href="manage_films.php?action=goConsulter" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>

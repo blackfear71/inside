@@ -58,17 +58,6 @@
 	font-family: robotomedium, Verdana, sans-serif;
 }
 
-.table_date_jour
-{
-	padding-left: 10px;
-	padding-right: 10px;
-	line-height: 40px;
-	font-family: robotolight, Verdana, sans-serif;
-	background-color: #2eb2f4;
-	color: white;
-	text-align: center;
-}
-
 .logo_tableau_films
 {
 	margin-top: -2px;
@@ -833,6 +822,14 @@
 	text-align: justify;
 	margin-left: 60px;
 	margin-top: 20px;
+}
+
+.link_comment
+{
+	width: 25px;
+	vertical-align: middle;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .saisie_comments_films

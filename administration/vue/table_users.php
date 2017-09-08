@@ -55,86 +55,79 @@
 			echo '</td>';
 		echo '</tr>';
 
-		include('../includes/appel_bdd.php');
-
-		// Recherche des données utilisateurs
-		$reponse = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-
-		while($donnees = $reponse->fetch())
-		{
-			echo '<tr class="tr_manage_users">';
+    foreach ($listeUsers as $user)
+    {
+      echo '<tr class="tr_manage_users">';
 				echo '<td class="td_manage_users">';
-					echo $donnees['identifiant'];
+					echo $user->getIdentifiant();
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $donnees['full_name'];
+					echo $user->getFull_name();
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "Y")
+					if ($user->getReset() == "Y")
 						echo 'Oui';
 					else
 						echo 'Non';
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "Y")
+					if ($user->getReset() == "Y")
 					{
-						echo '<form method="post" action="reset_password.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doAnnulerMdp">';
 							echo '<input type="submit" name="annuler_reinitialisation" value="ANNULER" class="reset_password" />';
 						echo '</form>';
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "Y")
+					if ($user->getReset() == "Y")
 					{
-						echo '<form method="post" action="reset_password.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doChangerMdp">';
 							echo '<input type="submit" name="reinitialiser" value="REINITIALISER" class="reset_password" />';
 						echo '</form>';
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "I")
+					if ($user->getReset() == "I")
 					{
-						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doAccepterInscription">';
 							echo '<input type="submit" name="accept_inscription" value="ACCEPTER" class="reset_password" />';
 						echo '</form>';
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "I")
+					if ($user->getReset() == "I")
 					{
-						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doRefuserInscription">';
 							echo '<input type="submit" name="decline_inscription" value="REFUSER" class="reset_password" />';
 						echo '</form>';
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "D")
+					if ($user->getReset() == "D")
 					{
-						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doAccepterDesinscription">';
 							echo '<input type="submit" name="accept_desinscription" value="ACCEPTER" class="reset_password" />';
 						echo '</form>';
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($donnees['reset'] == "D")
+					if ($user->getReset() == "D")
 					{
-						echo '<form method="post" action="inscription.php?id_user=' . $donnees['id'] . '">';
+						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doRefuserDesinscription">';
 							echo '<input type="submit" name="decline_desinscription" value="REFUSER" class="reset_password" />';
 						echo '</form>';
 					}
 				echo '</td>';
 			echo '</tr>';
-		}
-
-		$reponse->closeCursor();
+    }
 
 		// Bas du tableau
 		echo '<tr>';
@@ -143,16 +136,8 @@
 			echo '</td>';
 
 			echo '<td colspan="7"class="td_manage_users">';
-				$req1 = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-				while($data1 = $req1->fetch())
-				{
-					if ($data1['reset'] == "Y" OR $data1['reset'] == "I" OR $data1['reset'] == "D")
-					{
-						echo '<span class="reset_warning">!</span>';
-						break;
-					}
-				}
-				$req1->closeCursor();
+        if ($alerteUsers == true)
+          echo '<span class="reset_warning">!</span>';
 			echo '</td>';
 		echo '</tr>';
 	echo '</table>';

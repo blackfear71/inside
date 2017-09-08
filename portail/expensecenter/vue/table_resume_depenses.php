@@ -43,7 +43,7 @@
 	        echo '</td>';
 
 	        // Acheteur sur la 2ème colonne
-	        echo '<td class="table_price_expense_center">';
+	        echo '<td class="table_buyer_expense_center">';
 	          echo $ligneResume['name_b'];
 	        echo '</td>';
 
@@ -96,15 +96,23 @@
 
 						// Acheteur sur la 2ème colonne
 						echo '<td class="table_price_expense_center">';
-							echo '<select name="buyer_user" class="buyer" required>';
-	              foreach ($listeUsers as $user)
-	              {
-	                if ($user->getIdentifiant() == $ligneResume['buyer'])
-	                  echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getFull_name() . '</option>';
-	                else
-	                  echo '<option value="' . $user->getIdentifiant() . '">' . $user->getFull_name() . '</option>';
-	              }
-							echo '</select>';
+							if ($ligneResume['oldUser'] == true)
+							{
+								echo '<input type="hidden" id="old_buyer" name="buyer_user" value="' . $ligneResume['buyer'] . '" class="buyer" required readonly />';
+								echo '<label for="old_buyer">' . $ligneResume['name_b'] . '</label>';
+							}
+							else
+							{
+								echo '<select name="buyer_user" class="buyer" required>';
+									foreach ($listeUsers as $user)
+									{
+										if ($user->getIdentifiant() == $ligneResume['buyer'])
+											echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getFull_name() . '</option>';
+										else
+											echo '<option value="' . $user->getIdentifiant() . '">' . $user->getFull_name() . '</option>';
+									}
+								echo '</select>';
+							}
 						echo '</td>';
 
 						// Date sur la 3ème colonne

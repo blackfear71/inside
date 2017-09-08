@@ -1,0 +1,99 @@
+/**********************/
+/*** Administration ***/
+/**********************/
+
+.new_menu_admin
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding-top: 50px;
+	max-width: 80%;
+}
+
+.menu_admin_box
+{
+	height: 200px;
+	width: 300px;
+	display: inline-block;
+	margin-right: -4px;
+	background-color: rgb(55, 70, 80);
+	border-radius: 5px;
+}
+
+.mask_admin
+{
+	float: right;
+	background-color: white;
+	width: 70px;
+	height: 200px;
+	opacity: 0.1;
+}
+
+.mask_admin_triangle
+{
+	float: right;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 0 200px 50px;
+	border-color: transparent transparent white transparent;
+	opacity: 0.1;
+}
+
+.new_menu_link_admin
+{
+	text-decoration: none;
+	display: inline-block;
+	height: 200px;
+	width: 300px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+.title_admin
+{
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 30px;
+	color: white;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 200%;
+	line-height: 35px;
+	text-align: justify;
+}
+
+.saut_ligne
+{
+	margin-top: 25px;
+}
+
+.export_bdd
+{
+	position: relative;
+	z-index: 1;
+	float: left;
+	margin-top: -200px;
+	background-color: transparent;
+	border: 0;
+	height: 200px;
+	width: 300px;
+	padding-bottom: 100px;
+	padding-left: 30px;
+	color: white;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 200%;
+	line-height: 35px;
+	text-align: justify;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.td_stats_admin
+{
+	padding: 5px;
+	border: solid 1px #b3b3b3;
+	font-family: robotolight, Verdana, sans-serif;
+}
