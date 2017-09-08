@@ -1,18 +1,3 @@
-<?php
-	session_start();
-
-	$_SESSION['connected'] = false;
-
-	if (!isset($_SESSION['wrong_id']))
-		$_SESSION['wrong_id'] = false;
-
-	if (!isset($_SESSION['asked']))
-		$_SESSION['asked'] = false;
-
-	if (!isset($_SESSION['already_asked']))
-		$_SESSION['already_asked'] = false;
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,7 +14,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				<img src="../includes/images/password_band.png" alt="password_band" class="bandeau_categorie_2" />
+				<img src="includes/images/password_band.png" alt="password_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">
@@ -43,7 +28,7 @@
 				<?php
 					$back_index = true;
 
-					include('../includes/aside.php');
+					include('includes/aside.php');
 				?>
 			</aside>
 
@@ -55,10 +40,12 @@
 				</div>
 
 				<div class="bloc_identification" style="margin-top: 100px;">
-					<form method="post" action="ask_new_password.php">
-						<input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne" required />
-						<input type="submit" name="ask_password" value="SOUMETTRE" class="bouton_connexion"/>
-					</form>
+          <?php
+  					echo '<form method="post" action="index.php?action=doDemanderMdp">';
+  						echo '<input type="text" name="login" value="' . $_SESSION['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="100" class="monoligne" required />';
+  						echo '<input type="submit" name="ask_password" value="SOUMETTRE" class="bouton_connexion"/>';
+  					echo '</form>';
+          ?>
 				</div>
 
 				<?php
@@ -85,7 +72,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/footer.php'); ?>
+			<?php include('includes/footer.php'); ?>
 		</footer>
   </body>
 </html>

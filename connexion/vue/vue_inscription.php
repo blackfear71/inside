@@ -1,19 +1,3 @@
-<?php
-	session_start();
-
-	$_SESSION['connected'] = false;
-
-  // Initialisation messages
-	if (!isset($_SESSION['already_exist']))
-		$_SESSION['already_exist'] = false;
-
-  if (!isset($_SESSION['wrong_confirm']))
-    $_SESSION['wrong_confirm'] = false;
-
-  if (!isset($_SESSION['ask_inscription']))
-    $_SESSION['ask_inscription'] = false;
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,7 +14,7 @@
 	<body>
 		<header>
 			<div class="main_title">
-				<img src="../includes/images/subscribe_band.png" alt="subscribe_band" class="bandeau_categorie_2" />
+				<img src="includes/images/subscribe_band.png" alt="subscribe_band" class="bandeau_categorie_2" />
 			</div>
 
 			<div class="mask">
@@ -44,7 +28,7 @@
 				<?php
 					$back_index = true;
 
-					include('../includes/aside.php');
+					include('includes/aside.php');
 				?>
 			</aside>
 
@@ -55,13 +39,15 @@
 				</div>
 
 				<div class="bloc_identification" style="margin-top: 50px;">
-					<form method="post" action="ask_inscription.php">
-            <input type="text" name="trigramme" placeholder="Identifiant" maxlength="3" class="monoligne" required />
-						<input type="text" name="pseudo" placeholder="Pseudo" maxlength="255" class="monoligne" required />
-            <input type="password" name="password" placeholder="Mot de passe" maxlength="100" class="monoligne" required />
-            <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne" required />
-						<input type="submit" name="ask_inscription" value="SOUMETTRE" class="bouton_connexion"/>
-					</form>
+					<?php
+            echo '<form method="post" action="index.php?action=doDemanderInscription">';
+              echo '<input type="text" name="trigramme" value="' . $_SESSION['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne" required />';
+  						echo '<input type="text" name="pseudo" value="' . $_SESSION['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne" required />';
+              echo '<input type="password" name="password" value="' . $_SESSION['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne" required />';
+              echo '<input type="password" name="confirm_password" value="' . $_SESSION['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne" required />';
+  						echo '<input type="submit" name="ask_inscription" value="SOUMETTRE" class="bouton_connexion"/>';
+  					echo '</form>';
+          ?>
 				</div>
 
 				<?php
@@ -91,7 +77,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/footer.php'); ?>
+			<?php include('includes/footer.php'); ?>
 		</footer>
   </body>
 </html>

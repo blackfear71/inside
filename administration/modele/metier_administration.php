@@ -813,10 +813,6 @@
     $reponse->closeCursor();
   }
 
-
-
-
-
   // METIER : Validation inscription (mise à jour du status utilisateur)
   // RETOUR : Aucun
   function acceptInscription($id_user)
@@ -853,13 +849,6 @@
     // Supression utilisateur
     $req3 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user);
   }
-
-
-
-
-
-
-
 
   // METIER : Validation désinscription
   // RETOUR : Aucun

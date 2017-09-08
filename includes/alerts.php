@@ -10,9 +10,6 @@
   if (!isset($_SESSION['film_reseted']))
     $_SESSION['film_reseted'] = NULL;
 
-  if (!isset($_SESSION['purged']))
-    $_SESSION['purged'] = NULL;
-
   if (!isset($_SESSION['wrong_date']))
     $_SESSION['wrong_date'] = NULL;
 
@@ -97,14 +94,6 @@
       echo '</div>';
       $_SESSION['film_reseted'] = NULL;
     }
-  }
-  // Alertes purge (Administrateur)
-  elseif (isset($_SESSION['purged']) AND $_SESSION['purged'] == true)
-  {
-    echo '<div class="message_alerte">';
-  		echo 'Les fichiers ont bien été purgés.';
-    echo '</div>';
-    $_SESSION['purged'] = NULL;
   }
   // Alertes Movie House (Utilisateurs)
   // Format date invalide (saisie rapide et saisie avancée)
