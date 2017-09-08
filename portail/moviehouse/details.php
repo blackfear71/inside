@@ -9,6 +9,10 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_moviehouse.php');
 
+  // Contrôle si l'id est renseignée et numérique
+  if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
+    header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+
   // Appel métier
   switch ($_GET['action'])
   {
@@ -43,7 +47,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
       break;
   }
 

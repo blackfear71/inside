@@ -47,6 +47,10 @@
       break;
 
     case "goModifier":
+      // Contrôle si l'id est renseignée et numérique
+      if (!isset($_GET['modify_id']) OR !is_numeric($_GET['modify_id']))
+        header('location: saisie.php?action=goAjouter');
+
       $initSaisie   = false;
       $filmExistant = controlFilm($_GET['modify_id']);
 
@@ -69,7 +73,10 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: saisie.php?modify_id=' . $_GET['id'] . '&action=goAjouter');
+      if (isset($_GET['modify_id']) AND is_numeric($_GET['modify_id']))
+        header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
+      else
+        header('location: saisie.php?action=goAjouter');
       break;
   }
 

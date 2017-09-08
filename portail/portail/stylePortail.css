@@ -62,3 +62,36 @@
 	margin-right: -40px;
 	opacity: 0.3;
 }
+
+.lien_portail
+{
+	text-decoration: none;
+	display: inline-block;
+	height: 200px;
+	width: 200px;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.fond_lien_portail
+{
+	width: 200px;
+	height: 200px;
+	background-color: #374650;
+	border-radius: 2px;
+	display: inline-block;
+	box-shadow: 0 0 3px #2c3840;
+	line-height: 200px;
+}
+
+.img_lien_portail
+{
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+	vertical-align: middle;
+	filter: drop-shadow(3px 3px 0 #2c3840);
+}
