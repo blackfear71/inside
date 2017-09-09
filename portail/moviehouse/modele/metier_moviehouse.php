@@ -306,7 +306,7 @@
     global $bdd;
 
     // Récupération d'une liste des films
-    $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4)=' . $_GET['year'] . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
+    $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = ' . $year . ' AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
     while($donnees = $reponse->fetch())
     {
       // Ajout d'un objet Movie (instancié à partir des données de la base) au tableau des films
@@ -515,7 +515,7 @@
     if ($preference == 0)
 		{
 			// Suppression de la table
-			$req = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant="' . $identifiant . '"');
+			$req = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $identifiant . '"');
 		}
 		else
 		{
@@ -564,7 +564,7 @@
 
     $id_film = $get['id_film'];
 
-    if(isset($_POST['participate']))
+    if(isset($post['participate']))
   	{
   		// Lecture de l'état de la participation
   		$req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
@@ -587,7 +587,7 @@
   		));
   		$req2->closeCursor();
   	}
-  	elseif(isset($_POST['seen']))
+  	elseif(isset($post['seen']))
   	{
   		// Lecture de l'état de la vue
   		$req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
@@ -952,12 +952,12 @@
     $_SESSION['doodle_saisi']        = $post['doodle'];
     $_SESSION['date_doodle_saisie']  = $post['date_doodle'];
 
-    if (isset($_POST['hours_doodle']))
+    if (isset($post['hours_doodle']))
       $_SESSION['hours_doodle_saisies'] = $post['hours_doodle'];
     else
       $_SESSION['hours_doodle_saisies'] = "  ";
 
-    if (isset($_POST['minutes_doodle']))
+    if (isset($post['minutes_doodle']))
       $_SESSION['minutes_doodle_saisies'] = $post['minutes_doodle'];
     else
       $_SESSION['minutes_doodle_saisies'] = "  ";
@@ -1118,12 +1118,12 @@
     $_SESSION['doodle_saisi']        = $post['doodle'];
     $_SESSION['date_doodle_saisie']  = $post['date_doodle'];
 
-    if (isset($_POST['hours_doodle']))
+    if (isset($post['hours_doodle']))
       $_SESSION['hours_doodle_saisies'] = $post['hours_doodle'];
     else
       $_SESSION['hours_doodle_saisies'] = "  ";
 
-    if (isset($_POST['minutes_doodle']))
+    if (isset($post['minutes_doodle']))
       $_SESSION['minutes_doodle_saisies'] = $post['minutes_doodle'];
     else
       $_SESSION['minutes_doodle_saisies'] = "  ";

@@ -826,10 +826,20 @@
 
 .link_comment
 {
-	width: 25px;
+	display: inline-block;
 	vertical-align: middle;
-	padding-left: 5px;
-	padding-right: 5px;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 50%;
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/portail/moviehouse/icons/link.png");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	box-shadow: 3px 3px #c3c3c3;
 }
 
 .saisie_comments_films

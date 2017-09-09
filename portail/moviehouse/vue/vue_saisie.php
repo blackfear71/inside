@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="styleMH.css" />
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="scriptMH.js"></script>
+
   	<title>Inside - MH</title>
   </head>
 
@@ -193,63 +197,5 @@
 		<footer>
 			<?php include('../../includes/footer.php'); ?>
 		</footer>
-
   </body>
-
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-	<script>
-		$(function()
-		{
-			$( "#datepicker" ).datepicker(
-			{
-				firstDay: 1,
-				altField: "#datepicker",
-				closeText: 'Fermer',
-				prevText: 'Précédent',
-				nextText: 'Suivant',
-				currentText: 'Aujourd\'hui',
-				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-				weekHeader: 'Sem.',
-				dateFormat: 'dd/mm/yy'
-			});
-			$( "#datepicker2" ).datepicker(
-			{
-				firstDay: 1,
-				altField: "#datepicker2",
-				closeText: 'Fermer',
-				prevText: 'Précédent',
-				nextText: 'Suivant',
-				currentText: 'Aujourd\'hui',
-				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-				weekHeader: 'Sem.',
-				dateFormat: 'dd/mm/yy'
-			});
-			$( "#datepicker3" ).datepicker(
-			{
-				firstDay: 1,
-				altField: "#datepicker3",
-				closeText: 'Fermer',
-				prevText: 'Précédent',
-				nextText: 'Suivant',
-				currentText: 'Aujourd\'hui',
-				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-				monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-				dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-				dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-				weekHeader: 'Sem.',
-				dateFormat: 'dd/mm/yy'
-			});
-		});
-	</script>
-
 </html>

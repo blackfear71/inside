@@ -158,12 +158,8 @@
 
  		$avatar = rand();
 
- 		// Exception si on ne met pas d'image
- 		if ($files['avatar']['name'] == NULL)
- 		{
- 			header('location: profil.php?user=' . $user . '&action=goConsulter');
- 		}
- 		else
+ 		// Si on a bien une image
+ 		if ($files['avatar']['name'] != NULL)
  		{
  			// Dossier de destination
  			$avatar_dir = 'avatars/';
@@ -174,12 +170,8 @@
  			$size_file = $files['avatar']['size'];
       $maxsize   = 8388608; // 8Mo
 
-      // Exception si le fichier est trop grand
- 			if ($size_file > $maxsize)
- 			{
- 				header('location: profil.php?user=' . $user . '&action=goConsulter');
- 			}
- 			else
+      // Si le fichier n'est pas trop grand
+ 			if ($size_file < $maxsize)
  			{
  				// Contrôle fichier temporaire existant
  				if (!is_uploaded_file($tmp_file))
@@ -212,7 +204,7 @@
  				// echo "Le fichier a bien été uploadé";
 
  				// On efface l'ancien avatar si présent
- 				$reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant="' . $user . '"');
+ 				$reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
  				$donnees1 = $reponse1->fetch();
 
  				if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
@@ -241,7 +233,7 @@
     global $bdd;
 
     // On efface l'ancien avatar si présent
-    $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant="' . $user . '"');
+    $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
@@ -326,7 +318,7 @@
       global $bdd;
 
   		// Lecture des données actuelles de l'utilisateur
-  		$reponse = $bdd->query('SELECT id, identifiant, salt, mot_de_passe FROM users WHERE identifiant="' . $user . '"');
+  		$reponse = $bdd->query('SELECT id, identifiant, salt, mot_de_passe FROM users WHERE identifiant = "' . $user . '"');
   		$donnees = $reponse->fetch();
 
   		$wrong_password = false;
@@ -341,7 +333,7 @@
 
   			if ($new_password == $confirm_new_password)
   			{
-  				$req = $bdd->prepare('UPDATE users SET salt=:salt, mot_de_passe=:mot_de_passe WHERE identifiant="' . $user . '"');
+  				$req = $bdd->prepare('UPDATE users SET salt = :salt, mot_de_passe = :mot_de_passe WHERE identifiant = "' . $user . '"');
   				$req->execute(array(
   					'salt' => $salt,
   					'mot_de_passe' => $new_password
@@ -376,7 +368,7 @@
 
     $reset = "D";
 
-    $reponse = $bdd->prepare('UPDATE users SET reset=:reset WHERE identifiant = "' . $user . '"');
+    $reponse = $bdd->prepare('UPDATE users SET reset = :reset WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
       'reset' => $reset
     ));

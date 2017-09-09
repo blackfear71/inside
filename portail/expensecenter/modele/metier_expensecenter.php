@@ -360,7 +360,7 @@
       $list_parts = array();
       $i = 0;
 
-      $_SESSION['price']   = $_POST['depense'];
+      $_SESSION['price']   = $post['depense'];
       $_SESSION['buyer']   = $buyer;
       $_SESSION['comment'] = $comment;
 
@@ -392,7 +392,7 @@
     // Mise à jour du commentaire si modifié
     $comment = $post['comment'];
 
-    $req0 = $bdd->prepare('UPDATE expense_center SET price=:price, buyer=:buyer, comment=:comment WHERE id=' . $id_modify);
+    $req0 = $bdd->prepare('UPDATE expense_center SET price = :price, buyer = :buyer, comment = :comment WHERE id = ' . $id_modify);
     $req0->execute(array(
       'price'   => $price,
       'buyer'   => $buyer,
@@ -447,7 +447,7 @@
         // Si la ligne existe déjà et qu'elle a changé, on met à jour, sinon on ne fait rien
         if ($a_modifier == true)
         {
-          $req3 = $bdd->prepare('UPDATE expense_center_users SET parts=:parts WHERE id_expense = ' . $id_modify . ' AND identifiant = "' . $ligne['identifiant'] . '"');
+          $req3 = $bdd->prepare('UPDATE expense_center_users SET parts = :parts WHERE id_expense = ' . $id_modify . ' AND identifiant = "' . $ligne['identifiant'] . '"');
           $req3->execute(array(
             'parts' => $ligne['part']
           ));

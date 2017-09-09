@@ -13,9 +13,9 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "resolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="Y" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" ORDER BY id DESC');
     else
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="N" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "N" ORDER BY id DESC');
 
     while ($donnees = $reponse->fetch())
     {
@@ -26,7 +26,7 @@
       $bug = Bugs::withData($donnees);
 
       // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
       if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
@@ -57,14 +57,14 @@
 
   // METIER : Insertion d'un bug
   // RETOUR : Aucun
-  function insertBug()
+  function insertBug($post)
   {
     // Récupération des données
-    $subject  = $_POST['subject_bug'];
+    $subject  = $post['subject_bug'];
     $date     = date("Ymd");
     $author   = $_SESSION['identifiant'];
-    $content  = $_POST['content_bug'];
-    $type     = $_POST['type_bug'];
+    $content  = $post['content_bug'];
+    $type     = $post['type_bug'];
     $resolved = "N";
 
     // On construit un tableau avec les données

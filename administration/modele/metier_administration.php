@@ -56,7 +56,7 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type="B" AND resolved="N"');
+    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "B" AND resolved = "N"');
     $data = $req->fetch();
 
     $nb_bugs = $data['nb_bugs'];
@@ -74,7 +74,7 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type="E" AND resolved="N"');
+    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "E" AND resolved = "N"');
     $data = $req->fetch();
 
     $nb_evols = $data['nb_bugs'];
@@ -152,9 +152,9 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "resolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="Y" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" ORDER BY id DESC');
     elseif ($view == "unresolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved="N" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "N" ORDER BY id DESC');
     else
       $reponse = $bdd->query('SELECT * FROM bugs ORDER BY id DESC');
 
@@ -167,7 +167,7 @@
       $bug = Bugs::withData($donnees);
 
       // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
       if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
@@ -874,7 +874,7 @@
     $status     = "O";
     $developper = "";
 
-    $req4 = $bdd->prepare('UPDATE ideas SET status=:status, developper=:developper WHERE developper = "' . $identifiant . '" AND status != "D" AND status != "R"');
+    $req4 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $identifiant . '" AND status != "D" AND status != "R"');
     $req4->execute(array(
       'status'     => $status,
       'developper' => $developper

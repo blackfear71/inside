@@ -13,11 +13,11 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "done")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE status="D" OR status="R" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "D" OR status = "R" ORDER BY id DESC');
     elseif ($view == "inprogress")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE status="O" OR status="C" OR status="P" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "O" OR status = "C" OR status = "P" ORDER BY id DESC');
     elseif ($view == "mine")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status="O" OR status="C" OR status="P") AND developper="' . $_SESSION['identifiant'] . '" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['identifiant'] . '" ORDER BY id DESC');
     else
       $reponse = $bdd->query('SELECT * FROM ideas ORDER BY id DESC');
 
@@ -31,7 +31,7 @@
       $idea = Ideas::withData($donnees);
 
       // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $idea->getAuthor() . '"');
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $idea->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
       if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
@@ -44,7 +44,7 @@
       // Recherche du nom complet du developpeur si renseigné
       if (!empty($idea->getDevelopper()))
       {
-        $reponse3 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $idea->getDevelopper() . '"');
+        $reponse3 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $idea->getDevelopper() . '"');
         $donnees3 = $reponse3->fetch();
 
         if (isset($donnees3['pseudo']) AND !empty($donnees3['pseudo']))

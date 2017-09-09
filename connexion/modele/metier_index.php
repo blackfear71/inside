@@ -38,7 +38,7 @@
   					$_SESSION['connected']   = true;
   					$_SESSION['id']          = $donnees['id'];
   					$_SESSION['identifiant'] = $donnees['identifiant'];
-  					$_SESSION['pseudo']   = $donnees['pseudo'];
+  					$_SESSION['pseudo']      = $donnees['pseudo'];
   					$_SESSION['wrong']       = false;
 
   					// Recherche et sauvegarde des preferences utilisateur en SESSION

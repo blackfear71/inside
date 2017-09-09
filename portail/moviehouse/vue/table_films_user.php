@@ -149,13 +149,3 @@
     echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
   echo '</form>';
 ?>
-
-<script type="text/javascript">
-	function afficherMasquer(id)
-	{
-		if (document.getElementById(id).style.display == "none")
-			document.getElementById(id).style.display = "block";
-		else
-			document.getElementById(id).style.display = "none";
-	}
-</script>

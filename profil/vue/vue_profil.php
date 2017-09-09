@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleProfil.css" />
 
+    <script type="text/javascript" src="scriptProfil.js"></script>
+
 		<title>Inside - Profil</title>
   </head>
 
@@ -374,15 +376,5 @@
 		<footer>
 			<?php include('../includes/footer.php'); ?>
 		</footer>
-
-		<script type="text/javascript">
-			// Insère une prévisualisation de l'image sur la page
-			var loadFile = function(event)
-			{
-				var output = document.getElementById('output');
-				output.src = URL.createObjectURL(event.target.files[0]);
-				output.src.SizeHeight = "120px";
-			};
-		</script>
   </body>
 </html>

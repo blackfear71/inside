@@ -65,7 +65,7 @@
 	function extract_link ($text)
 	{
 		// On cherche les liens
-		$text = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank"><img src="/inside/portail/moviehouse/icons/link.png" alt="link" title="Lien" class="link_comment" /></a>', $text);
+		$text = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="link_comment"></a>', $text);
 
 		// Remplacement des débuts d'url
 		$search    = array('www.', 'https://https://', 'http://https://');
