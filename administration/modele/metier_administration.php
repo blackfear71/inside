@@ -12,7 +12,7 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, full_name, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $req = $bdd->query('SELECT id, identifiant, pseudo, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($data = $req->fetch())
     {
       if ($data['reset'] == "Y" OR $data['reset'] == "I" OR $data['reset'] == "D")
@@ -167,11 +167,11 @@
       $bug = Bugs::withData($donnees);
 
       // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
-      if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
-        $auteur_bug = $donnees2['full_name'];
+      if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
+        $auteur_bug = $donnees2['pseudo'];
       else
         $auteur_bug = "un ancien utilisateur";
 
@@ -232,7 +232,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, reset, full_name, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, reset, pseudo, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -314,7 +314,7 @@
       $bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
 
       $cat = array('identifiant'  => $user->getIdentifiant(),
-                   'pseudo'       => $user->getFull_name(),
+                   'pseudo'       => $user->getPseudo(),
                    'nb_comments'  => $nb_comments,
                    'bilan'        => $bilan,
                    'bilan_format' => $bilan_format
@@ -616,7 +616,7 @@
 
       // On génère une ligne du tableau
       $stats = array('identifiant'         => $user->getIdentifiant(),
-                     'pseudo'              => $user->getFull_name(),
+                     'pseudo'              => $user->getPseudo(),
                      'nb_bugs'             => $nb_bugs,
                      'nb_bugs_resolved'    => $nb_bugs_resolved,
                      'nb_ideas'            => $nb_ideas,
@@ -803,11 +803,11 @@
     $req->closeCursor();
 
     // Récupération identifiant et pseudo
-    $reponse = $bdd->query('SELECT id, identifiant, full_name FROM users WHERE id = ' . $id_user);
+    $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE id = ' . $id_user);
     $donnees = $reponse->fetch();
 
     $_SESSION['user_ask_id'] = $donnees['identifiant'];
-    $_SESSION['user_ask_name'] = $donnees['full_name'];
+    $_SESSION['user_ask_name'] = $donnees['pseudo'];
     $_SESSION['new_password'] = $chaine;
 
     $reponse->closeCursor();

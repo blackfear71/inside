@@ -58,7 +58,7 @@
     case 'goConsulter':
       $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
       $profil->setReset(htmlspecialchars($profil->getReset()));
-      $profil->setFull_name(htmlspecialchars($profil->getFull_name()));
+      $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
       $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
 
       $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));

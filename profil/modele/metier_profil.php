@@ -130,14 +130,14 @@
     global $bdd;
 
     // Mise à jour du pseudo
-    $reponse = $bdd->prepare('UPDATE users SET full_name = :full_name WHERE identifiant = "' . $user . '"');
+    $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
-      'full_name' => $new_pseudo
+      'pseudo' => $new_pseudo
     ));
     $reponse->closeCursor();
 
     // Mise à jour du pseudo stocké en SESSION
-    $_SESSION['full_name'] = $new_pseudo;
+    $_SESSION['pseudo'] = $new_pseudo;
 
     $_SESSION['pseudo_changed'] = true;
   }

@@ -69,14 +69,14 @@
         foreach ($listeUsers as $user)
         {
           $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
-          $user->setFull_name(htmlspecialchars($user->getFull_name()));
+          $user->setPseudo(htmlspecialchars($user->getPseudo()));
           $user->setAvatar(htmlspecialchars($user->getAvatar()));
         }
 
         foreach ($listeBilans as $bilan)
         {
           $bilan->setIdentifiant(htmlspecialchars($bilan->getIdentifiant()));
-          $bilan->setFull_name(htmlspecialchars($bilan->getFull_name()));
+          $bilan->setPseudo(htmlspecialchars($bilan->getPseudo()));
           $bilan->setAvatar(htmlspecialchars($bilan->getAvatar()));
           $bilan->setBilan(htmlspecialchars($bilan->getBilan()));
           $bilan->setBilan_format(htmlspecialchars($bilan->getBilan_format()));

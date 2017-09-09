@@ -4,7 +4,7 @@
     private $id;
     private $identifiant;
     private $reset;
-    private $full_name;
+    private $pseudo;
     private $avatar;
 
     // Constructeur par défaut (objet vide)
@@ -13,7 +13,7 @@
       $this->id          = 0;
       $this->identifiant = '';
       $this->reset       = '';
-      $this->full_name   = '';
+      $this->pseudo      = '';
       $this->avatar      = '';
     }
 
@@ -38,8 +38,8 @@
       if (isset($data['reset']))
         $this->reset       = $data['reset'];
 
-      if (isset($data['full_name']))
-        $this->full_name   = $data['full_name'];
+      if (isset($data['pseudo']))
+        $this->pseudo      = $data['pseudo'];
 
       if (isset($data['avatar']))
         $this->avatar      = $data['avatar'];
@@ -80,14 +80,14 @@
     }
 
     // Pseudo
-    public function setFull_name($full_name)
+    public function setPseudo($pseudo)
     {
-      $this->full_name = $full_name;
+      $this->pseudo = $pseudo;
     }
 
-    public function getFull_name()
+    public function getPseudo()
     {
-      return $this->full_name;
+      return $this->pseudo;
     }
 
     // Avatar

@@ -273,7 +273,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant != "admin"  AND reset != "I" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin"  AND reset != "I" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -282,7 +282,7 @@
       // On construit un tableau des utilisateurs
       $myUser = array('id'          => $user->getId(),
                       'identifiant' => $user->getIdentifiant(),
-                      'full_name'   => $user->getFull_name(),
+                      'pseudo'      => $user->getPseudo(),
                       'avatar'      => $user->getAvatar()
                     );
 
@@ -772,10 +772,10 @@
     while($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
-      $reponse2 = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
+      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
       $donnees2 = $reponse2->fetch();
       {
-        $pseudo = $donnees2['full_name'];
+        $pseudo = $donnees2['pseudo'];
         $avatar = $donnees2['avatar'];
       }
       $reponse2->closeCursor();
@@ -805,10 +805,10 @@
     while($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
-      $reponse2 = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant = "' . $donnees['author'] . '"');
+      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['author'] . '"');
       $donnees2 = $reponse2->fetch();
 
-      $pseudo = $donnees2['full_name'];
+      $pseudo = $donnees2['pseudo'];
       $avatar = $donnees2['avatar'];
 
       $reponse2->closeCursor();

@@ -38,7 +38,7 @@
   					$_SESSION['connected']   = true;
   					$_SESSION['id']          = $donnees['id'];
   					$_SESSION['identifiant'] = $donnees['identifiant'];
-  					$_SESSION['full_name']   = $donnees['full_name'];
+  					$_SESSION['pseudo']   = $donnees['pseudo'];
   					$_SESSION['wrong']       = false;
 
   					// Recherche et sauvegarde des preferences utilisateur en SESSION
@@ -127,13 +127,13 @@
       if ($password == $confirm_password)
       {
         // On créé l'utilisateur
-        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, full_name, avatar) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :full_name, :avatar)');
+        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar)');
 				$req->execute(array(
 					'identifiant'  => $trigramme,
           'salt'         => $salt,
           'mot_de_passe' => $password,
           'reset'        => $reset,
-					'full_name'    => $pseudo,
+					'pseudo'       => $pseudo,
 					'avatar'       => $avatar
 					));
 				$req->closeCursor();

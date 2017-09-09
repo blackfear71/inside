@@ -65,7 +65,7 @@
 			{
 				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
 				$user->setReset(htmlspecialchars($user->getReset()));
-				$user->setFull_name(htmlspecialchars($user->getFull_name()));
+				$user->setPseudo(htmlspecialchars($user->getPseudo()));
 				$user->setAvatar(htmlspecialchars($user->getAvatar()));
 			}
 

@@ -50,7 +50,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, full_name, avatar FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -59,7 +59,7 @@
       // On construit un tableau des utilisateurs
       $myUser = array('id'          => $user->getId(),
                       'identifiant' => $user->getIdentifiant(),
-                      'full_name'   => $user->getFull_name(),
+                      'pseudo'      => $user->getPseudo(),
                       'avatar'      => $user->getAvatar()
                     );
 
@@ -143,7 +143,7 @@
 
       // On construit un tableau des bilans
       $myBilan = array('identifiant'  => $user->getIdentifiant(),
-                       'full_name'    => $user->getFull_name(),
+                       'pseudo'       => $user->getPseudo(),
                        'avatar'       => $user->getAvatar(),
                        'bilan'        => $bilan,
                        'bilan_format' => $bilan_format
@@ -256,7 +256,7 @@
         {
           if ($listeExpenses[$i]->getBuyer() == $user->getIdentifiant())
           {
-            $name_b        = $user->getFull_name();
+            $name_b        = $user->getPseudo();
             $oldUser       = false;
             $pseudo_trouve = true;
           }

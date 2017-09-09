@@ -31,11 +31,11 @@
       $idea = Ideas::withData($donnees);
 
       // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $idea->getAuthor() . '"');
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $idea->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
-      if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
-        $auteur_idee = $donnees2['full_name'];
+      if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
+        $auteur_idee = $donnees2['pseudo'];
       else
         $auteur_idee = "<i>un ancien utilisateur</i>";
 
@@ -44,11 +44,11 @@
       // Recherche du nom complet du developpeur si renseigné
       if (!empty($idea->getDevelopper()))
       {
-        $reponse3 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $idea->getDevelopper() . '"');
+        $reponse3 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $idea->getDevelopper() . '"');
         $donnees3 = $reponse3->fetch();
 
-        if (isset($donnees3['full_name']) AND !empty($donnees3['full_name']))
-          $developpeur_idee = $donnees3['full_name'];
+        if (isset($donnees3['pseudo']) AND !empty($donnees3['pseudo']))
+          $developpeur_idee = $donnees3['pseudo'];
         else
           $developpeur_idee = "<i>un ancien utilisateur</i>";
 

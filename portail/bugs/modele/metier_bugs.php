@@ -26,11 +26,11 @@
       $bug = Bugs::withData($donnees);
 
       // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, full_name FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant="' . $bug->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
-      if (isset($donnees2['full_name']) AND !empty($donnees2['full_name']))
-        $auteur_bug = $donnees2['full_name'];
+      if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
+        $auteur_bug = $donnees2['pseudo'];
       else
         $auteur_bug = "un ancien utilisateur";
 

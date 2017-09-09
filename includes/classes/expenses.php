@@ -106,7 +106,7 @@
   {
     private $id;
     private $identifiant;
-    private $full_name;
+    private $pseudo;
     private $avatar;
     private $bilan;
     private $bilan_format;
@@ -116,7 +116,7 @@
     {
       $this->id           = 0;
       $this->identifiant  = '';
-      $this->full_name    = '';
+      $this->pseudo       = '';
       $this->avatar       = '';
       $this->bilan        = 0;
       $this->bilan_format = '';
@@ -140,8 +140,8 @@
       if (isset($data['identifiant']))
         $this->identifiant  = $data['identifiant'];
 
-      if (isset($data['full_name']))
-        $this->full_name    = $data['full_name'];
+      if (isset($data['pseudo']))
+        $this->pseudo       = $data['pseudo'];
 
       if (isset($data['avatar']))
         $this->avatar       = $data['avatar'];
@@ -177,14 +177,14 @@
     }
 
     // Pseudo
-    public function setFull_name($full_name)
+    public function setPseudo($pseudo)
     {
-      $this->full_name = $full_name;
+      $this->pseudo = $pseudo;
     }
 
-    public function getFull_name()
+    public function getPseudo()
     {
-      return $this->full_name;
+      return $this->pseudo;
     }
 
     // Avatar

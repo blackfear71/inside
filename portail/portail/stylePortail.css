@@ -81,7 +81,6 @@
 	height: 200px;
 	background-color: #374650;
 	border-radius: 2px;
-	display: inline-block;
 	box-shadow: 0 0 3px #2c3840;
 	line-height: 200px;
 }
@@ -91,7 +90,6 @@
 	width: 100px;
 	margin-left: auto;
 	margin-right: auto;
-	display: inline-block;
 	vertical-align: middle;
 	filter: drop-shadow(3px 3px 0 #2c3840);
 }

@@ -63,7 +63,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $user->getFull_name();
+					echo $user->getPseudo();
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';

@@ -20,12 +20,12 @@
           echo '<td class="init_table_users">';
   					echo '<div class="zone_avatar_films">';
   						if (!empty($user->getAvatar()))
-  							echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getFull_name() . '" class="avatar_films" />';
+  							echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
   						else
-  							echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getFull_name() . '" class="avatar_films" />';
+  							echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
   					echo '</div>';
 
-  					echo '<span class="full_name_films">' . $user->getFull_name() . '</span>';
+  					echo '<span class="pseudo_films">' . $user->getPseudo() . '</span>';
   				echo '</td>';
         }
       echo '</tr>';
@@ -120,12 +120,12 @@
           echo '<td class="init_table_users">';
             echo '<div class="zone_avatar_films">';
               if (!empty($user->getAvatar()))
-                echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getFull_name() . '" class="avatar_films" />';
+                echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
               else
-                echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getFull_name() . '" class="avatar_films" />';
+                echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
             echo '</div>';
 
-            echo '<span class="full_name_films">' . $user->getFull_name() . '</span>';
+            echo '<span class="pseudo_films">' . $user->getPseudo() . '</span>';
           echo '</td>';
         }
       echo '</tr>';
