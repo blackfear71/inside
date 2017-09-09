@@ -45,6 +45,14 @@
       deleteFilm($_GET['delete_id']);
       break;
 
+    case "doSupprimerCommentaire":
+      deleteComment($_GET['comment_id']);
+      break;
+
+    case "doModifierCommentaire":
+      updateComment($_GET['comment_id'], $_POST);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
@@ -115,6 +123,8 @@
     case "doParticiperFilm":
     case "doCommenter":
     case "doSupprimer":
+    case "doSupprimerCommentaire":
+    case "doModifierCommentaire":
     default:
       break;
   }
@@ -149,6 +159,14 @@
       }
 
       header('location: moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter');
+      break;
+
+    case "doSupprimerCommentaire":
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter#comments');
+      break;
+
+    case "doModifierCommentaire":
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter#' . $_GET['comment_id']);
       break;
 
     case 'goConsulter':

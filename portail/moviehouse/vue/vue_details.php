@@ -8,7 +8,9 @@
   	<link rel="icon" type="image/png" href="/inside/favicon.png" />
   	<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleMH.css" />
-    
+
+    <script type="text/javascript" src="scriptMH.js"></script>
+
   	<title>Inside - MH</title>
   </head>
 
@@ -284,7 +286,7 @@
   						// Affichage des commentaires
               foreach ($listeCommentaires as $comment)
               {
-  							echo '<div class="content_comments_films">';
+  							echo '<div class="content_comments_films" id="' . $comment->getId() . '">';
   								// Photo de profil
   								echo '<div class="zone_avatar_comments">';
   									if (!empty($comment->getAvatar()))
@@ -302,11 +304,64 @@
   								// Date et heure
   								echo '<div class="date_comments_films">Le ' . formatDateForDisplay($comment->getDate()) . ' à ' . formatTimeForDisplay($comment->getTime()) . '</div>';
 
-  								// On cherche les liens dans les commentaires
-  								$commentaire = extract_link(nl2br($comment->getComment()));
+                  // Actions sur commentaires seulement si l'auteur correspond à l'utilisateur connecté
+                  if ($comment->getAuthor() == $_SESSION['identifiant'])
+                  {
+                    /***************************************************/
+                    /* Ligne visualisation normale (sans modification) */
+                    /***************************************************/
+                    echo '<span id="modifier_comment_2[' . $comment->getId() . ']">';
+                      echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire">';
+                        echo '<div class="actions_commentaires">';
+                          // Modification commentaire
+                          echo '<span class="link_actions_commentaires">';
+                            echo '<a onclick="afficherMasquer(\'modifier_comment[' . $comment->getId() . ']\'); afficherMasquer(\'modifier_comment_2[' . $comment->getId() . ']\');" title="Modifier le commentaire" class="icone_modifier_comment"></a>';
+                          echo '</span>';
 
-  								// Commentaire
-  								echo '<div class="comment_comments_films">' . $commentaire . '</div>';
+                          // Suppression commentaire
+                          echo '<span class="link_actions_commentaires">';
+                            echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" onclick="if(!confirm(\'Supprimer ce commentaire ?\')) return false;" class="icone_supprimer_comment" />';
+                          echo '</span>';
+                        echo '</div>';
+                      echo '</form>';
+
+    								// On cherche les liens dans les commentaires
+    								$commentaire = extract_link(nl2br($comment->getComment()));
+
+    								// Commentaire
+    								echo '<div class="comment_comments_films">' . $commentaire . '</div>';
+                  echo '</span>';
+
+                  /**********************************/
+                  /* Ligne cachée pour modification */
+                  /**********************************/
+                  echo '<span id="modifier_comment[' . $comment->getId() . ']" style="display: none;">';
+                    echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doModifierCommentaire">';
+                      echo '<div class="actions_commentaires" style="margin-top: -45px;">';
+                        // Validation modification
+                        echo '<span class="link_actions_commentaires">';
+                          echo '<input type="submit" name="modify_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
+                        echo '</span>';
+
+                        // Annulation modification
+                        echo '<span class="link_actions_commentaires">';
+                          echo '<a onclick="afficherMasquer(\'modifier_comment[' . $comment->getId() . ']\'); afficherMasquer(\'modifier_comment_2[' . $comment->getId() . ']\');" title="Annuler la modification" class="icone_annuler_comment"></a>';
+                        echo '</span>';
+                      echo '</div>';
+
+                      echo '<textarea placeholder="Votre commentaire ici..." name="comment" class="saisie_commentaire" required>' . $comment->getComment() . '</textarea>';
+                    echo '</form>';
+                  echo '</span>';
+                }
+                // Affichage commentaire normal
+                else
+                {
+                  // On cherche les liens dans les commentaires
+                  $commentaire = extract_link(nl2br($comment->getComment()));
+
+                  // Commentaire
+                  echo '<div class="comment_comments_films">' . $commentaire . '</div>';
+                }
                 echo '</div>';
               }
 

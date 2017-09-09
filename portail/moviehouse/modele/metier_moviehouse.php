@@ -850,6 +850,29 @@
     $req->closeCursor();
   }
 
+  // METIER : Suppression commentaire sur un détail film
+  // RETOUR : Aucun
+  function deleteComment($id_comment)
+  {
+    global $bdd;
+
+    $reponse = $bdd->exec('DELETE FROM movie_house_comments WHERE id = ' . $id_comment);
+  }
+
+  // METIER : Modification commentaire sur un détail film
+  // RETOUR : Aucun
+  function updateComment($id_comment, $post)
+  {
+    global $bdd;
+
+    // Modification de l'enregistrement en table
+    $req = $bdd->prepare('UPDATE movie_house_comments SET comment = :comment WHERE id = ' . $id_comment);
+    $req->execute(array(
+      'comment' => $post['comment']
+    ));
+    $req->closeCursor();
+  }
+
   // METIER : Demande de suppression d'un film
   // RETOUR : Aucun
   function deleteFilm($id_film)

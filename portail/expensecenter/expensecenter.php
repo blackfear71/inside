@@ -117,9 +117,12 @@
   switch ($_GET['action'])
   {
     case 'doInserer':
-    case 'doModifier':
     case 'doSupprimer':
       header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter');
+      break;
+
+    case 'doModifier':
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter#' . $_GET['id_modify']);
       break;
 
     case 'goConsulter':

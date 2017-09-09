@@ -886,6 +886,89 @@
 	background-color: #91d784;
 }
 
+.actions_commentaires
+{
+	float: right;
+	text-align: center;
+	margin-top: -65px;
+}
+
+.link_actions_commentaires
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.icone_modifier_comment
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/includes/icons/edit.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.icone_supprimer_comment
+{
+	display: inline-block;
+	margin-left: 15px;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/includes/icons/delete.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.icone_valider_comment
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/includes/icons/validate.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.icone_annuler_comment
+{
+	display: inline-block;
+	margin-left: 15px;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 5px;
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/includes/icons/cancel.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
 /*** Saisie film avancée ***/
 .titre_saisie_avancee
 {
