@@ -101,3 +101,15 @@
 	color: black;
 	text-align: center;
 }
+
+/*** Liste bugs ***/
+.table_bugs
+{
+	margin-top: 30px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	border-radius: 5px;
+	overflow: hidden;
+}

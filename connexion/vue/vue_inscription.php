@@ -32,6 +32,11 @@
 				?>
 			</aside>
 
+      <!-- Messages d'alerte -->
+      <?php
+        include('includes/alerts.php');
+      ?>
+
 			<article class="article_portail">
 				<div class="avertissement">
           Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu'un mot de passe. Celui-ci sera directement crypté afin de garantir la sécurité
@@ -49,29 +54,6 @@
   					echo '</form>';
           ?>
 				</div>
-
-				<?php
-          // Indentifiant déjà existant
-					if ($_SESSION['already_exist'] == true)
-					{
-						echo '<div class="asking_inscription">Cet identifiant existe déjà.</div>';
-						$_SESSION['already_exist'] = false;
-					}
-
-          // Mauvaise confirmation du mot de passe
-          if ($_SESSION['wrong_confirm'] == true)
-          {
-            echo '<div class="asking_inscription">Mauvaise confirmation du mot de passe.</div>';
-            $_SESSION['wrong_confirm'] = false;
-          }
-
-          // Demande d'inscription approuvée
-          if ($_SESSION['ask_inscription'] == true)
-          {
-            echo '<div class="asking_inscription">Votre demande d\'inscription a été soumise.</div>';
-            $_SESSION['ask_inscription'] = false;
-          }
-				?>
 			</article>
 		</section>
 

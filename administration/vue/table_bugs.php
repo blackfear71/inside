@@ -19,7 +19,7 @@
       $date_bug = formatDateForDisplay($bug->getDate());
 
       // Affichage des idées
-  		echo '<table class="table_ideas">';
+  		echo '<table class="table_bugs">';
   			echo '<tr id="' . $bug->getId() . '">';
   				// Titre idée
   				echo '<td class="td_ideas_title">';

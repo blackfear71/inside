@@ -29,33 +29,6 @@
 	OR   (isset($_SESSION['asked'])          AND $_SESSION['asked'] == true))
 		$_SESSION['identifiant_saisi_mdp'] = "";
 
-	// Initialisation messages connexion
-	if (!isset($_SESSION['wrong']))
-	 $_SESSION['wrong'] = false;
-
-	if (!isset($_SESSION['not_yet']))
-	 $_SESSION['not_yet'] = false;
-
-	// Initialisation messages inscription
-	if (!isset($_SESSION['already_exist']))
-		$_SESSION['already_exist'] = false;
-
-	if (!isset($_SESSION['wrong_confirm']))
-		$_SESSION['wrong_confirm'] = false;
-
-	if (!isset($_SESSION['ask_inscription']))
-		$_SESSION['ask_inscription'] = false;
-
-	// Initialisation messages changement mot de passe
-	if (!isset($_SESSION['wrong_id']))
-		$_SESSION['wrong_id'] = false;
-
-	if (!isset($_SESSION['asked']))
-		$_SESSION['asked'] = false;
-
-	if (!isset($_SESSION['already_asked']))
-		$_SESSION['already_asked'] = false;
-
   // Modèle de données : "module métier"
   include_once('connexion/modele/metier_index.php');
 

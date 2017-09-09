@@ -1,7 +1,34 @@
-<?php
+<?php  
   /*******************/
   /* Initialisations */
   /*******************/
+
+  // Initialisation messages connexion
+  if (!isset($_SESSION['wrong_connexion']))
+   $_SESSION['wrong_connexion'] = NULL;
+
+  if (!isset($_SESSION['not_yet']))
+   $_SESSION['not_yet'] = NULL;
+
+  // Initialisation messages inscription
+  if (!isset($_SESSION['already_exist']))
+    $_SESSION['already_exist'] = NULL;
+
+  if (!isset($_SESSION['wrong_confirm']))
+    $_SESSION['wrong_confirm'] = NULL;
+
+  if (!isset($_SESSION['ask_inscription']))
+    $_SESSION['ask_inscription'] = NULL;
+
+  // Initialisation messages changement mot de passe
+  if (!isset($_SESSION['wrong_id']))
+    $_SESSION['wrong_id'] = NULL;
+
+  if (!isset($_SESSION['asked']))
+    $_SESSION['asked'] = NULL;
+
+  if (!isset($_SESSION['already_asked']))
+    $_SESSION['already_asked'] = NULL;
 
   // Initialisations Movie House
   if (!isset($_SESSION['film_deleted']))
@@ -72,6 +99,73 @@
   /***********/
   /* Alertes */
   /***********/
+
+  // Alertes connexion
+  if (isset($_SESSION['wrong_connexion']) AND $_SESSION['wrong_connexion'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Mot de passe incorrect ou utilisateur inconnu.';
+    echo '</div>';
+    $_SESSION['wrong_connexion'] = NULL;
+  }
+
+  if (isset($_SESSION['not_yet']) AND $_SESSION['not_yet'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Veuillez patienter jusqu\'à ce que l\'administrateur valide votre inscription.';
+    echo '</div>';
+    $_SESSION['not_yet'] = NULL;
+  }
+
+  // Alertes inscription
+  if (isset($_SESSION['already_exist']) AND $_SESSION['already_exist'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Cet identifiant existe déjà.';
+    echo '</div>';
+    $_SESSION['already_exist'] = NULL;
+  }
+
+  if (isset($_SESSION['wrong_confirm']) AND $_SESSION['wrong_confirm'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Mauvaise confirmation du mot de passe.';
+    echo '</div>';
+    $_SESSION['wrong_confirm'] = NULL;
+  }
+
+  if (isset($_SESSION['ask_inscription']) AND $_SESSION['ask_inscription'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Votre demande d\'inscription a été soumise.';
+    echo '</div>';
+    $_SESSION['ask_inscription'] = NULL;
+  }
+
+  // Alertes changement mot de passe
+  if (isset($_SESSION['wrong_id']) AND $_SESSION['wrong_id'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Cet identifiant n\'existe pas.';
+    echo '</div>';
+    $_SESSION['wrong_id'] = NULL;
+  }
+
+  if (isset($_SESSION['asked']) AND $_SESSION['asked'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'La demande de réinitialisation du mot de passe a bien été effectuée.';
+    echo '</div>';
+    $_SESSION['asked'] = NULL;
+  }
+
+  if (isset($_SESSION['already_asked']) AND $_SESSION['already_asked'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Une demande de réinitialisation du mot de passe est déjà en cours pour cet utilisateur.';
+    echo '</div>';
+    $_SESSION['already_asked'] = NULL;
+  }
 
   // Alertes gestion des films (Administrateur)
   if (isset($_SESSION['film_deleted'])

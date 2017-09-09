@@ -87,6 +87,8 @@
 	margin-left: auto;
 	margin-right: auto;
 	border-collapse: collapse;
+	border-radius: 5px;
+	overflow: hidden;
 }
 
 .td_ideas_title

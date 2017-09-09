@@ -26,7 +26,7 @@
   			{
   				$_SESSION['not_yet']   = true;
   				$_SESSION['connected'] = false;
-  				$_SESSION['wrong']     = false;
+  				$_SESSION['wrong_connexion']     = false;
   				break;
   			}
   			else
@@ -35,11 +35,11 @@
   				if (isset($mdp) AND $mdp == $donnees['mot_de_passe'])
   				{
   					// Sauvegarde des données utilisateur en SESSION
-  					$_SESSION['connected']   = true;
-  					$_SESSION['id']          = $donnees['id'];
-  					$_SESSION['identifiant'] = $donnees['identifiant'];
-  					$_SESSION['pseudo']      = $donnees['pseudo'];
-  					$_SESSION['wrong']       = false;
+  					$_SESSION['connected']       = true;
+  					$_SESSION['id']              = $donnees['id'];
+  					$_SESSION['identifiant']     = $donnees['identifiant'];
+  					$_SESSION['pseudo']          = $donnees['pseudo'];
+  					$_SESSION['wrong_connexion'] = false;
 
   					// Recherche et sauvegarde des preferences utilisateur en SESSION
   					if ($_SESSION['identifiant'] != "admin")
@@ -58,10 +58,11 @@
             $connected = true;
   					break; // Important sinon la boucle continue et la variable connected passera forcément sur false alors qu'elle doit rester true !
   				}
-  				else // Sinon, on affiche un message d'erreur
+          // Sinon, on affiche un message d'erreur
+  				else
   				{
-  					$_SESSION['connected'] = false;
-  					$_SESSION['wrong']     = true;
+  					$_SESSION['connected']       = false;
+  					$_SESSION['wrong_connexion'] = true;
   					break;
   				}
 
@@ -70,8 +71,8 @@
   		}
   		else
   		{
-  			$_SESSION['connected'] = false;
-  			$_SESSION['wrong']     = true;
+  			$_SESSION['connected']       = false;
+  			$_SESSION['wrong_connexion'] = true;
   		}
   	}
 
@@ -175,6 +176,7 @@
 		$_SESSION['wrong_id']      = false;
 		$_SESSION['asked']         = false;
 		$_SESSION['already_asked'] = false;
+    $_SESSION['not_yet']       = false;
 
     global $bdd;
 
@@ -191,6 +193,14 @@
 					$_SESSION['already_asked'] = true;
 					break;
 				}
+        elseif ($donnees['reset'] == "I")
+        {
+          $_SESSION['wrong_id']      = false;
+          $_SESSION['asked']         = false;
+          $_SESSION['already_asked'] = false;
+          $_SESSION['not_yet']       = true;
+          break;
+        }
 				else
 				{
 					// Mise à jour de la table

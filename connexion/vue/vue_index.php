@@ -27,7 +27,12 @@
 		</header>
 
 		<section>
-			<article>
+      <!-- Messages d'alerte -->
+      <?php
+        include('includes/alerts.php');
+      ?>
+
+			<article class="article_portail">
 				<div class="bloc_identification">
 					<!-- Connexion -->
 					<form method="post" action="index.php?action=doConnecter">
@@ -35,21 +40,6 @@
 						<input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne" required />
 						<input type="submit" name="connect" value="CONNEXION" class="bouton_connexion"/>
 					</form>
-
-					<!-- Messages d'erreur -->
-					<?php
-						if ($_SESSION['wrong'] == true)
-						{
-							echo '<div class="wrong_password">Mot de passe incorrect ou utilisateur inconnu.</div>';
-							$_SESSION['wrong'] = false;
-						}
-
-						if ($_SESSION['not_yet'] == true)
-						{
-							echo '<div class="wrong_password" style="margin-bottom: -114px;">Veuillez patienter jusqu\'à ce que l\'administrateur valide votre inscription.</div>';
-							$_SESSION['not_yet'] = false;
-						}
-					?>
 				</div>
 
 				<!-- Lien mot de passe perdu -->

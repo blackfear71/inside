@@ -283,11 +283,13 @@
 	padding-bottom: 10px;
 	width: 80px;
 	padding-left: 40px;
-	margin-left: -35px;
+	margin-left: -30px;
+	margin-bottom: 10px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	cursor: pointer;
 	text-align: left;
+	vertical-align: top;
 }
 
 .label_preference_2
@@ -296,13 +298,15 @@
 	background-color: #f3f3f3;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	width: 160px;
+	width: 90px;
 	padding-left: 40px;
 	margin-left: -35px;
+	margin-bottom: 10px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	cursor: pointer;
 	text-align: left;
+	vertical-align: top;
 }
 
 .label_preference_3
@@ -314,8 +318,7 @@
 	width: 170px;
 	padding-left: 40px;
 	margin-left: -30px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	cursor: pointer;

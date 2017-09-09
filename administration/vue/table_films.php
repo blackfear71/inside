@@ -36,7 +36,7 @@
             if ($film->getTo_delete() == "Y")
             {
     					echo '<form method="post" action="manage_films.php?delete_id=' . $film->getId() . '&action=doDeleteFilm">';
-    						echo '<input type="submit" name="accepter_suppression_film" value="ACCEPTER" class="reset_password" />';
+    						echo '<input type="submit" name="accepter_suppression_film" value="ACCEPTER" class="bouton_admin" />';
     					echo '</form>';
             }
   				echo '</td>';
@@ -45,7 +45,7 @@
             if ($film->getTo_delete() == "Y")
             {
     					echo '<form method="post" action="manage_films.php?delete_id=' . $film->getId() . '&action=doResetFilm">';
-    						echo '<input type="submit" name="annuler_suppression_film" value="REFUSER" class="reset_password" />';
+    						echo '<input type="submit" name="annuler_suppression_film" value="REFUSER" class="bouton_admin" />';
     					echo '</form>';
             }
   				echo '</td>';

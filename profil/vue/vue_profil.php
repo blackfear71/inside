@@ -320,7 +320,7 @@
                   <label for="mine" class="label_preference_2">En charge</label>
                   <br />
                   <input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" <?php if($checked_d){echo 'checked';} ?> required />
-                  <label for="done" class="label_preference_2">Terminées / Rejetées</label>
+                  <label for="done" class="label_preference_2">Terminées<br />& rejetées</label>
 								</div>
 							</div>
 

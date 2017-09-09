@@ -439,29 +439,6 @@ section
 	font-family: robotolight, Verdana, sans-serif;
 }
 
-.reset_password
-{
-	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border-radius: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	background-color: #e3e3e3;
-	color: black;
-}
-
-.reset_password:hover
-{
-	background-color: rgb(255, 25, 55);
-	color: white;
-	cursor: pointer;
-}
-
 /*** Portail ***/
 aside
 {
@@ -1647,15 +1624,6 @@ article
 }
 
 /*** TheBox ***/
-.table_ideas
-{
-	margin-top: 30px;
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	border-collapse: collapse;
-}
-
 .td_ideas_title
 {
 	background-color: #d3d3d3;

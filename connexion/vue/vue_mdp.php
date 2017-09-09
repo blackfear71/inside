@@ -32,6 +32,11 @@
 				?>
 			</aside>
 
+      <!-- Messages d'alerte -->
+      <?php
+        include('includes/alerts.php');
+      ?>
+
 			<article class="article_portail">
 				<div class="avertissement">
 					Si vous avez perdu votre mot de passe, vous pouvez effectuer une demande de réinitialisation du mot de passe à l'administrateur via le formulaire ci-dessous.
@@ -42,31 +47,11 @@
 				<div class="bloc_identification" style="margin-top: 100px;">
           <?php
   					echo '<form method="post" action="index.php?action=doDemanderMdp">';
-  						echo '<input type="text" name="login" value="' . $_SESSION['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="100" class="monoligne" required />';
+  						echo '<input type="text" name="login" value="' . $_SESSION['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne" required />';
   						echo '<input type="submit" name="ask_password" value="SOUMETTRE" class="bouton_connexion"/>';
   					echo '</form>';
           ?>
 				</div>
-
-				<?php
-					if ($_SESSION['wrong_id'] == true)
-					{
-						echo '<div class="wrong_id">Cet identifiant n\'existe pas.</div>';
-						$_SESSION['wrong_id'] = false;
-					}
-
-					if ($_SESSION['asked'] == true)
-					{
-						echo '<div class="wrong_id">La demande de réinitialisation du mot de passe a bien été effectuée.</div>';
-						$_SESSION['asked'] = false;
-					}
-
-					if ($_SESSION['already_asked'] == true)
-					{
-						echo '<div class="wrong_id">Une demande de réinitialisation du mot de passe est déjà en cours pour cet utilisateur.</div>';
-						$_SESSION['already_asked'] = false;
-					}
-				?>
 			</article>
 		</section>
 

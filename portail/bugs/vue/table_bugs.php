@@ -50,7 +50,7 @@
       $date_bug = formatDateForDisplay($ligne->getDate());
 
       // Affichage des idées
-      echo '<table class="table_ideas">';
+      echo '<table class="table_bugs">';
         echo '<tr>';
           // Titre idée
           echo '<td class="td_ideas_title">';
