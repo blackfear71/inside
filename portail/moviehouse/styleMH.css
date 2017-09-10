@@ -624,8 +624,16 @@
 	background-color: rgb(255, 25, 55);
 	border-bottom: solid 5px rgb(200, 25, 50);
 	line-height: 50px;
-	padding-left: 20px;
+	padding-left: 15px;
 	margin-top: 30px;
+}
+
+.icone_home
+{
+	width: 30px;
+	margin-top: -5px;
+	vertical-align: middle;
+	margin-right: 10px;
 }
 
 .zone_home_films

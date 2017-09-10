@@ -1,7 +1,7 @@
 <div class="zone_home">
   <!-- Ajouts récents -->
   <div class="titre_home" style="margin-top: 0;">
-    Ajouts récents
+    <img src="icons/recent.png" alt="recent" class="icone_home" />Ajouts récents
   </div>
 
   <div class="zone_home_films">
@@ -29,7 +29,7 @@
     if ($films_waited == "Y")
     {
       echo '<div class="titre_home">';
-        echo 'Les plus attendus en ' . $_GET['year'];
+        echo '<img src="icons/waited.png" alt="recent" class="icone_home" />Les plus attendus en ' . $_GET['year'];
       echo '</div>';
 
       echo '<div class="zone_home_films">';
@@ -69,7 +69,7 @@
     if ($films_way_out == "Y")
     {
       echo '<div class="titre_home">';
-        echo 'Les prochaines sorties';
+        echo '<img src="icons/way_out.png" alt="recent" class="icone_home" />Les prochaines sorties';
       echo '</div>';
 
       echo '<div class="zone_home_films">';
