@@ -68,9 +68,45 @@
 		$text = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="link_comment"></a>', $text);
 
 		// Remplacement des débuts d'url
-		$search    = array('www.', 'https://https://', 'http://https://');
-		$replace   = array('https://www.', 'https://', 'http://');
-		$text      = str_replace($search, $replace, $text);
+		$search  = array('www.', 'https://https://', 'http://https://');
+		$replace = array('https://www.', 'https://', 'http://');
+		$text    = str_replace($search, $replace, $text);
+
+		return $text;
+	}
+
+	//////////////////////////////////////
+	// Fonction d'extraction de smileys //
+	//////////////////////////////////////
+	function extract_smiley($text)
+	{
+		$in = array(htmlspecialchars(":)"),
+								htmlspecialchars(":-)"),
+								htmlspecialchars(";)"),
+								htmlspecialchars(";-)"),
+								htmlspecialchars(":("),
+								htmlspecialchars(":-("),
+								htmlspecialchars(":|"),
+								htmlspecialchars(":-|"),
+								htmlspecialchars(":D"),
+								htmlspecialchars(":-D"),
+								htmlspecialchars(":O"),
+								htmlspecialchars(":-O")
+							 );
+		$out = array('<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley" />',
+							 	 '<img src="/inside/includes/icons/smileys/1.png" alt=":-)" class="smiley" />',
+							 	 '<img src="/inside/includes/icons/smileys/2.png" alt=";)" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/2.png" alt=";-)" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/3.png" alt=":(" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/3.png" alt=":-(" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/4.png" alt=":|" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/4.png" alt=":-|" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/5.png" alt=":D" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/5.png" alt=":-D" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/6.png" alt=":O" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/6.png" alt=":-O" class="smiley" />'
+								);
+		$text = str_replace($in, $out, $text);
 
 		return $text;
 	}

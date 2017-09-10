@@ -59,3 +59,19 @@ $(function()
     dateFormat: 'dd/mm/yy'
   });
 });
+
+// Insère un smiley dans la zone de saisie
+function insert_smiley(smiley, id)
+{
+  // Emplacement
+  var where = document.getElementById(id);
+
+  // Texte à insérer + espace
+  var phrase = smiley +" ";
+
+  // Contenu déjà présent + Texte à insérer
+  where.value += phrase;
+
+  // Positionnement du curseur
+  where.focus();
+}
