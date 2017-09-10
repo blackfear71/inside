@@ -92,9 +92,9 @@
 
           // Etoiles utilisateur + couleur de participation/vue
           if ($film->getParticipation() == "S")
-            echo '<td class="table_users" style="background: #74cefb;">';
+            echo '<td class="table_users" style="background-color: #74cefb;">';
           elseif ($film->getParticipation() == "P")
-            echo '<td class="table_users" style="background: #91d784;">';
+            echo '<td class="table_users" style="background-color: #91d784;">';
           else
             echo '<td class="table_users">';
 

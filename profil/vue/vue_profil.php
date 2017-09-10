@@ -49,7 +49,7 @@
 					<!-- Affichage pseudo -->
 					<div class="zone_profil_utilisateur_titre">
 						<?php
-							echo $profil->getPseudo();
+							echo '<img src="icons/profile.png" alt="profile" class="icone_profil" />' . $profil->getPseudo();
 						?>
 					</div>
 
@@ -115,7 +115,7 @@
 				<div class="zone_profil_generique">
 					<!-- Titre -->
 					<div class="zone_profil_utilisateur_titre">
-						Mes contributions
+						<img src="icons/stats.png" alt="stats" class="icone_profil" />Mes contributions
 					</div>
 
 					<!-- Tableau contributions -->
@@ -180,7 +180,7 @@
 				<div class="zone_profil_generique">
 					<!-- Titre -->
 					<div class="zone_profil_utilisateur_titre">
-						Préférences
+						<img src="icons/settings.png" alt="settings" class="icone_profil" />Préférences
 					</div>
 
 					<!-- Tableau modification préférences -->
@@ -333,7 +333,7 @@
 				<div class="zone_profil_generique">
 					<!-- Titre -->
 					<div class="zone_profil_utilisateur_titre">
-						Utilisateur
+						<img src="icons/connexion.png" alt="connexion" class="icone_profil" />Utilisateur
 					</div>
 
 					<!-- Tableau modification mot de passe & désinscription -->
