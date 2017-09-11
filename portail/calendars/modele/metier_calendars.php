@@ -56,7 +56,7 @@
                        '05' => 'Mai',
                        '06' => 'Juin',
                        '07' => 'Juillet',
-                       '08' => 'Août',
+                       '08' => 'Aout',
                        '09' => 'Septembre',
                        '10' => 'Octobre',
                        '11' => 'Novembre',
