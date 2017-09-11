@@ -56,21 +56,27 @@
 								break;
 						}
 
-            echo '<a href="../moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="MOVIE HOUSE" class="lien_portail">';
+            echo '<a href="../moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="Movie House" class="lien_portail">';
               echo '<div class="fond_lien_portail">';
                 echo '<img src="../../includes/icons/movie_house.png" alt="movie_house" class="img_lien_portail" />';
               echo '</div>';
             echo '</a>';
 
-            echo '<a href="../expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="EXPENSE CENTER" class="lien_portail">';
+            echo '<a href="../expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="Expense Center" class="lien_portail">';
               echo '<div class="fond_lien_portail">';
                 echo '<img src="../../includes/icons/expense_center.png" alt="expense_center" class="img_lien_portail" />';
               echo '</div>';
             echo '</a>';
 
-            echo '<a href="../petitspedestres/parcours.php?action=liste" title="LES PETITS PEDESTRES" class="lien_portail">';
+            echo '<a href="../petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="lien_portail">';
               echo '<div class="fond_lien_portail">';
                 echo '<img src="../../includes/icons/petits_pedestres.png" alt="petits_pedestres" class="img_lien_portail" />';
+              echo '</div>';
+            echo '</a>';
+
+            echo '<a href="../calendars/calendars.php?year=' . date("Y") . '&action=goConsulter" title="Calendars" class="lien_portail">';
+              echo '<div class="fond_lien_portail">';
+                echo '<img src="../../includes/icons/calendars.png" alt="calendars" class="img_lien_portail" />';
               echo '</div>';
             echo '</a>';
 

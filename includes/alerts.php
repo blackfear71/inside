@@ -1,4 +1,4 @@
-<?php  
+<?php
   /*******************/
   /* Initialisations */
   /*******************/
@@ -96,6 +96,10 @@
   if (!isset($_SESSION['erreur_distance']))
     $_SESSION['erreur_distance'] = NULL;
 
+  // Initialisations Calendars
+  if (!isset($_SESSION['calendar_deleted']))
+    $_SESSION['calendar_deleted'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -108,17 +112,15 @@
     echo '</div>';
     $_SESSION['wrong_connexion'] = NULL;
   }
-
-  if (isset($_SESSION['not_yet']) AND $_SESSION['not_yet'] == true)
+  elseif (isset($_SESSION['not_yet']) AND $_SESSION['not_yet'] == true)
   {
     echo '<div class="message_alerte">';
       echo 'Veuillez patienter jusqu\'à ce que l\'administrateur valide votre inscription.';
     echo '</div>';
     $_SESSION['not_yet'] = NULL;
   }
-
   // Alertes inscription
-  if (isset($_SESSION['already_exist']) AND $_SESSION['already_exist'] == true)
+  elseif (isset($_SESSION['already_exist']) AND $_SESSION['already_exist'] == true)
   {
     echo '<div class="message_alerte">';
       echo 'Cet identifiant existe déjà.';
@@ -133,43 +135,38 @@
     echo '</div>';
     $_SESSION['wrong_confirm'] = NULL;
   }
-
-  if (isset($_SESSION['ask_inscription']) AND $_SESSION['ask_inscription'] == true)
+  elseif (isset($_SESSION['ask_inscription']) AND $_SESSION['ask_inscription'] == true)
   {
     echo '<div class="message_alerte">';
       echo 'Votre demande d\'inscription a été soumise.';
     echo '</div>';
     $_SESSION['ask_inscription'] = NULL;
   }
-
   // Alertes changement mot de passe
-  if (isset($_SESSION['wrong_id']) AND $_SESSION['wrong_id'] == true)
+  elseif (isset($_SESSION['wrong_id']) AND $_SESSION['wrong_id'] == true)
   {
     echo '<div class="message_alerte">';
       echo 'Cet identifiant n\'existe pas.';
     echo '</div>';
     $_SESSION['wrong_id'] = NULL;
   }
-
-  if (isset($_SESSION['asked']) AND $_SESSION['asked'] == true)
+  elseif (isset($_SESSION['asked']) AND $_SESSION['asked'] == true)
   {
     echo '<div class="message_alerte">';
       echo 'La demande de réinitialisation du mot de passe a bien été effectuée.';
     echo '</div>';
     $_SESSION['asked'] = NULL;
   }
-
-  if (isset($_SESSION['already_asked']) AND $_SESSION['already_asked'] == true)
+  elseif (isset($_SESSION['already_asked']) AND $_SESSION['already_asked'] == true)
   {
     echo '<div class="message_alerte">';
       echo 'Une demande de réinitialisation du mot de passe est déjà en cours pour cet utilisateur.';
     echo '</div>';
     $_SESSION['already_asked'] = NULL;
   }
-
   // Alertes gestion des films (Administrateur)
-  if (isset($_SESSION['film_deleted'])
-  OR  isset($_SESSION['film_reseted']))
+  elseif (isset($_SESSION['film_deleted'])
+  OR      isset($_SESSION['film_reseted']))
   {
     // Film supprimé
     if (isset($_SESSION['film_deleted']) AND $_SESSION['film_deleted'] == true)
@@ -406,5 +403,21 @@
       echo 'La distance doit être un nombre ;)';
     echo '</div>';
     $_SESSION['erreur_distance'] = NULL;
+  }
+  // Alerte calendrier ajouté
+  elseif (isset($_SESSION['calendar_added']) AND $_SESSION['calendar_added'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'Le calendrier a bien été ajouté';
+    echo '</div>';
+    $_SESSION['calendar_added'] = NULL;
+  }
+  // Alerte calendrier supprimé
+  elseif (isset($_SESSION['calendar_deleted']) AND $_SESSION['calendar_deleted'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'Le calendrier a bien été supprimé';
+    echo '</div>';
+    $_SESSION['calendar_deleted'] = NULL;
   }
 ?>

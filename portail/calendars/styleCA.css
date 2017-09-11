@@ -1,0 +1,268 @@
+/*******************/
+/*** Calendriers ***/
+/*******************/
+
+/*** Onglets ***/
+.calendars_year
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: solid 1px rgb(255, 25, 55);
+	margin-top: 30px;
+}
+
+.calendars_year_active
+{
+	display: inline-block;
+	line-height: 30px;
+	height: 30px;
+	width: 80px;
+	text-align: center;
+	background-color: rgb(255, 25, 55);
+	color: white;
+	text-decoration: none;
+	font-family: robotolight, Verdana, sans-serif;
+}
+
+.calendars_year_inactive
+{
+	display: inline-block;
+	line-height: 30px;
+	height: 30px;
+	width: 80px;
+	text-align: center;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	font-family: robotolight, Verdana, sans-serif;
+}
+
+.calendars_year_inactive:hover
+{
+	color: white;
+	background-color: rgb(200, 25, 50);
+	text-decoration: none;
+}
+
+/*** Saisie ***/
+.form_saisie_calendar
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.select_month
+{
+	/* 20% */
+	height: 40px;
+	width: 20%;
+	border-radius: 5px;
+	border: solid 1px #a3a3a3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+}
+
+.select_year
+{
+	/* 20% + 2% */
+	margin-left: 1%;
+	margin-right: 1%;
+	height: 40px;
+	width: 20%;
+	border-radius: 5px;
+	border: solid 1px #a3a3a3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+}
+
+.zone_parcourir_calendars
+{
+	/* 20% + 1% */
+	display: inline-block;
+	margin-right: 1%;
+	height: 40px;
+	width: 20%;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: black;
+	background-color: #e3e3e3;
+	text-align: center;
+}
+
+.zone_parcourir_calendars:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
+}
+
+.bouton_parcourir_calendars
+{
+	opacity: 0;
+	height: 40px;
+	width: 100%;
+	margin-top: -40px;
+	display: block;
+	cursor: pointer;
+}
+
+.label_parcourir
+{
+	line-height: 40px;
+	height: 40px;
+	width: 100%;
+}
+
+.send_calendar
+{
+	width: 40px;
+	height: 40px;
+	border: 0;
+	background-color: #e3e3e3;
+	background-image: url("/inside/portail/calendars/icons/send_red.png");
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.send_calendar:hover
+{
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/portail/calendars/icons/send.png");
+}
+
+/*** Tableau calendriers ***/
+.table_calendars
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 20px;
+	background-color: #f3f3f3;
+	border-radius: 5px;
+}
+
+.table_calendars_td
+{
+	text-align: center;
+	overflow: hidden;
+}
+
+.zone_calendars_totale
+{
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.zone_calendar
+{
+	position: relative;
+	width: 100%;
+	box-shadow: 0 0 5px #a3a3a3;
+}
+
+.calendar
+{
+	width: 100%;
+	vertical-align: middle;
+}
+
+.title_calendar
+{
+	position: absolute;
+	right: 0%;
+	bottom: 20%;
+	z-index: 1;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	background-color: white;
+	width: 52%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	padding-left: 4%;
+	padding-right: 4%;
+	text-align: right;
+	border-top: solid 2px #e3e3e3;
+	border-bottom: solid 2px #e3e3e3;
+}
+
+.mask_calendar_square
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: white;
+	opacity: 0.7;
+	height: 100%;
+	width: 60%;
+}
+
+.download_calendar
+{
+	display: block;
+	background-color: #d3d3d3;
+	width: 70%;
+	line-height: 40px;
+	margin-top: 10px;
+	font-family: robotolight, Verdana, sans-serif;
+	text-decoration: none;
+	color: black;
+	border-radius: 5px;
+}
+
+.download_calendar:hover
+{
+	color: white;
+	background-color: rgb(255, 25, 55);
+}
+
+.delete_calendar
+{
+	float: right;
+	margin-top: -40px;
+	width: 28%;
+	height: 40px;
+	border: 0;
+	background-color: #d3d3d3;
+	background-image: url("/inside/portail/calendars/icons/delete_red.png");
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.delete_calendar:hover
+{
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/portail/calendars/icons/delete.png");
+}
+
+.zone_no_calendars
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.no_calendars
+{
+	background-color: #2eb2f4;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	color: white;
+	text-align: center;
+	box-shadow: 0 5px 0 #74cefb;
+	padding: 20px;
+	display: inline-block;
+}
