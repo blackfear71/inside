@@ -168,7 +168,7 @@
         }
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-        imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
+        $test = imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
 
         // echo "Le fichier a bien été uploadé";
 

@@ -1,10 +1,7 @@
 <?php
   // Contrôles communs Utilisateurs
   include_once('../../includes/controls_users.php');
-
-  // Fonctions communes
-  //include('../../includes/fonctions_dates.php');
-
+  
   // Contrôle si l'année est renseignée et numérique
 	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
 		header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
