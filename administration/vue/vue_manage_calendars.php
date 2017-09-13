@@ -44,7 +44,7 @@
           // Formulaire autorisation saisie calendriers
           echo '<div class="title_gestion">Autorisations de gestion des calendriers</div>';
 
-          echo '<form method="post" action="manage_calendars?action=doChangerAutorisations" class="form_autorisations">';
+          echo '<form method="post" action="manage_calendars.php?action=doChangerAutorisations" class="form_autorisations">';
             echo '<div class="zone_autorisations">';
               foreach ($listePreferences as $preference)
               {
