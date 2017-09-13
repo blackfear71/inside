@@ -199,7 +199,7 @@
  				}
 
  				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 200px (cf fonction imagethumb.php)
- 				imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 200, FALSE, TRUE);
+ 				imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
 
  				// echo "Le fichier a bien été uploadé";
 

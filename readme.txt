@@ -25,6 +25,7 @@
 		- EXPENSE CENTER       : outil de suivi des dépenses des membres
 		- LES PETITS PEDESTRES : organisation d'entrainements ou
 					 de courses à pied
+    - CALENDARS            : calendriers de l'équipe
 		- #THEBOX              : boîte à idées
 
 ---------------------------------------------------------------------------------------

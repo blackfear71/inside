@@ -100,6 +100,9 @@
   if (!isset($_SESSION['calendar_deleted']))
     $_SESSION['calendar_deleted'] = NULL;
 
+  if (!isset($_SESSION['calendar_reseted']))
+    $_SESSION['calendar_reseted'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -413,11 +416,33 @@
     $_SESSION['calendar_added'] = NULL;
   }
   // Alerte calendrier supprimé
-  elseif (isset($_SESSION['calendar_deleted']) AND $_SESSION['calendar_deleted'] == true)
+  elseif (isset($_SESSION['calendar_removed']) AND $_SESSION['calendar_removed'] == true)
   {
     echo '<div class="message_alerte_2">';
-      echo 'Le calendrier a bien été supprimé';
+      echo 'La demande de suppression a bien été prise en compte.';
     echo '</div>';
-    $_SESSION['calendar_deleted'] = NULL;
+    $_SESSION['calendar_removed'] = NULL;
+  }
+  // Alertes gestion des calendriers (Administrateur)
+  elseif (isset($_SESSION['calendar_deleted'])
+  OR      isset($_SESSION['calendar_reseted']))
+  {
+    // Calendrier supprimé
+    if (isset($_SESSION['calendar_deleted']) AND $_SESSION['calendar_deleted'] == true)
+    {
+      echo '<div class="message_alerte">';
+        echo 'Le calendrier a bien été supprimé de la base de données.';
+      echo '</div>';
+      $_SESSION['calendar_deleted'] = NULL;
+    }
+
+    // Calendrier réinitialisé
+    if (isset($_SESSION['calendar_reseted']) AND $_SESSION['calendar_reseted'] == true)
+    {
+      echo '<div class="message_alerte">';
+        echo 'Le calendrier a bien été remis dans la liste.';
+      echo '</div>';
+      $_SESSION['calendar_reseted'] = NULL;
+    }
   }
 ?>

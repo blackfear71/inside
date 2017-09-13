@@ -65,6 +65,21 @@
 						</div>
 					</a>
 
+          <a href="manage_calendars.php?action=goConsulter" class="new_menu_link_admin">
+            <div class="menu_admin_box">
+              <div class="mask_admin"></div>
+              <div class="mask_admin_triangle"></div>
+              <div class="title_admin">Gestion
+                <div class="saut_ligne">CALENDARS
+                  <?php
+                    if ($alerteCalendars == true)
+                      echo '( ! )';
+                  ?>
+                </div>
+              </div>
+            </div>
+          </a>
+
 					<a href="reports.php?view=unresolved&action=goConsulter" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>

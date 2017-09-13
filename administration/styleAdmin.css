@@ -168,6 +168,30 @@
 	cursor: pointer;
 }
 
+/*** Gestion calendriers ***/
+.calendar_to_delete
+{
+	width: 300px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	box-shadow: 0 0 3px #a3a3a3;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.title_calendar_to_delete
+{
+	margin-bottom: 10px;
+	background-color: #fffd4c;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 /*** Bugs ***/
 .table_bugs
 {

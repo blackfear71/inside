@@ -1,6 +1,7 @@
 <?php
   include_once('../includes/appel_bdd.php');
   include_once('../includes/classes/movies.php');
+  include_once('../includes/classes/calendars.php');
   include_once('../includes/classes/bugs.php');
   include_once('../includes/classes/profile.php');
 
@@ -35,6 +36,28 @@
     global $bdd;
 
     $req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
+    while($data = $req->fetch())
+    {
+      if ($data['to_delete'] == "Y")
+      {
+        $alert = true;
+        break;
+      }
+    }
+    $req->closeCursor();
+
+    return $alert;
+  }
+
+  // METIER : Contrôle alertes Calendars
+  // RETOUR : Booléen
+  function getAlerteCalendars()
+  {
+    $alert = false;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, to_delete FROM calendars WHERE to_delete = "Y"');
     while($data = $req->fetch())
     {
       if ($data['to_delete'] == "Y")
@@ -86,7 +109,7 @@
 
   // METIER : Lecture des films à supprimer
   // RETOUR : Liste des films à supprimer
-  function getToDelete()
+  function getFilmsToDelete()
   {
     $listToDelete = array();
 
@@ -139,6 +162,84 @@
     $req->closeCursor();
 
     $_SESSION['film_reseted'] = true;
+  }
+
+  // METIER : Lecture des calendriers à supprimer
+  // RETOUR : Liste des calendriers à supprimer
+  function getCalendarsToDelete()
+  {
+    $listToDelete = array();
+
+    $listeMois = array('01' => 'Janvier',
+                       '02' => 'Février',
+                       '03' => 'Mars',
+                       '04' => 'Avril',
+                       '05' => 'Mai',
+                       '06' => 'Juin',
+                       '07' => 'Juillet',
+                       '08' => 'Août',
+                       '09' => 'Septembre',
+                       '10' => 'Octobre',
+                       '11' => 'Novembre',
+                       '12' => 'Décembre'
+                      );
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM calendars WHERE to_delete = "Y" ORDER BY year DESC, month DESC, id DESC');
+    while($donnees = $reponse->fetch())
+    {
+      $myDelete = Calendrier::withData($donnees);
+      $myDelete->setTitle($listeMois[$myDelete->getMonth()] . " " . $myDelete->getYear());
+
+      // On ajoute la ligne au tableau
+      array_push($listToDelete, $myDelete);
+    }
+    $reponse->closeCursor();
+
+    return $listToDelete;
+  }
+
+  // METIER : Supprime un calendrier de la base
+  // RETOUR : Aucun
+  function deleteCalendrier($id_cal)
+  {
+    global $bdd;
+
+    // On efface le calendrier si présent
+    $reponse = $bdd->query('SELECT * FROM calendars WHERE id = ' . $id_cal);
+    $donnees = $reponse->fetch();
+
+    if (isset($donnees['calendar']) AND !empty($donnees['calendar']))
+    {
+      unlink ("../portail/calendars/images/" . $donnees['year'] . "/" . $donnees['calendar']);
+      unlink ("../portail/calendars/images/" . $donnees['year'] . "/mini/" . $donnees['calendar']);
+    }
+
+    $reponse->closeCursor();
+
+    // On efface la ligne de la base
+    $reponse2 = $bdd->exec('DELETE FROM calendars WHERE id = ' . $id_cal);
+
+    $_SESSION['calendar_deleted'] = true;
+  }
+
+  // METIER : Réinitialise un calendrier de la base
+  // RETOUR : Aucun
+  function resetCalendrier($id_cal)
+  {
+    global $bdd;
+
+    // Mise à jour de la table (remise à N de l'indicateur de demande)
+    $to_delete = "N";
+
+    $req = $bdd->prepare('UPDATE calendars SET to_delete = :to_delete WHERE id = ' . $id_cal);
+    $req->execute(array(
+      'to_delete' => $to_delete
+    ));
+    $req->closeCursor();
+
+    $_SESSION['calendar_reseted'] = true;
   }
 
   // METIER : Lecture liste des bugs

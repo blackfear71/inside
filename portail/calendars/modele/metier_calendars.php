@@ -65,7 +65,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM calendars WHERE year = ' . $year . ' ORDER BY month DESC');
+    $reponse = $bdd->query('SELECT * FROM calendars WHERE year = ' . $year . ' AND to_delete != "Y" ORDER BY month DESC, id DESC');
     while($donnees = $reponse->fetch())
     {
       $myCalendar = Calendrier::withData($donnees);
@@ -81,24 +81,18 @@
   // RETOUR : Aucun
   function deleteCalendrier($id_cal)
   {
+    $to_delete = "Y";
+
     global $bdd;
 
-    // On efface le calendrier si présent
-    $reponse = $bdd->query('SELECT * FROM calendars WHERE id = ' . $id_cal);
-    $donnees = $reponse->fetch();
-
-    if (isset($donnees['calendar']) AND !empty($donnees['calendar']))
-    {
-      unlink ("images/" . $donnees['year'] . "/" . $donnees['calendar']);
-      unlink ("images/" . $donnees['year'] . "/mini/" . $donnees['calendar']);
-    }
-
+    // On fait simplement une mise à jour du top en attendant validation de l'admin
+    $reponse = $bdd->prepare('UPDATE calendars SET to_delete = :to_delete WHERE id = ' . $id_cal);
+    $reponse->execute(array(
+      'to_delete' => $to_delete
+    ));
     $reponse->closeCursor();
 
-    // On efface la ligne de la base
-    $reponse2 = $bdd->exec('DELETE FROM calendars WHERE id = ' . $id_cal);
-
-    $_SESSION['calendar_deleted'] = true;
+    $_SESSION['calendar_removed'] = true;
   }
 
   // METIER : Ajout calendrier avec création miniature
@@ -106,8 +100,9 @@
   function insertCalendrier($post, $files)
   {
     // On récupère les données
-    $month = $post['months'];
-    $year  = $post['years'];
+    $month     = $post['months'];
+    $year      = $post['years'];
+    $to_delete = "N";
 
     global $bdd;
 
@@ -173,11 +168,12 @@
         // echo "Le fichier a bien été uploadé";
 
         // On stocke la référence du nouveau calendrier dans la base
-        $reponse = $bdd->prepare('INSERT INTO calendars(month, year, calendar) VALUES(:month, :year, :calendar)');
+        $reponse = $bdd->prepare('INSERT INTO calendars(to_delete, month, year, calendar) VALUES(:to_delete, :month, :year, :calendar)');
 				$reponse->execute(array(
-					'month'    => $month,
-          'year'     => $year,
-          'calendar' => $new_name
+          'to_delete' => $to_delete,
+					'month'     => $month,
+          'year'      => $year,
+          'calendar'  => $new_name
 					));
 				$reponse->closeCursor();
 

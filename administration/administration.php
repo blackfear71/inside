@@ -10,10 +10,11 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-			$alerteUsers = getAlerteUsers();
-			$alerteFilms = getAlerteFilms();
-			$nbBugs      = getNbBugs();
-			$nbEvols     = getNbEvols();
+			$alerteUsers     = getAlerteUsers();
+			$alerteFilms     = getAlerteFilms();
+      $alerteCalendars = getAlerteCalendars();
+			$nbBugs          = getNbBugs();
+			$nbEvols         = getNbEvols();
       break;
 
     default:

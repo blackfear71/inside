@@ -10,7 +10,7 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-			$listeSuppression = getToDelete();
+			$listeSuppression = getFilmsToDelete();
 			$alerteFilms      = getAlerteFilms();
       break;
 
