@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleAdmin.css" />
 
-		<title>Inside - Films</title>
+		<title>Inside - Calendriers</title>
   </head>
 
 	<body>
@@ -41,6 +41,33 @@
 
 			<article class="article_portail">
 				<?php
+          // Formulaire autorisation saisie calendriers
+          echo '<div class="title_gestion">Autorisations de gestion des calendriers</div>';
+
+          echo '<form method="post" action="manage_calendars?action=doChangerAutorisations" class="form_autorisations">';
+            echo '<div class="zone_autorisations">';
+              foreach ($listePreferences as $preference)
+              {
+                echo '<div class="zone_check_autorisation">';
+                  if ($preference['manage_calendars'] == "Y")
+                  {
+                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="' . $preference['id'] . '" checked>';
+                    echo '<label for="autorisation' . $preference['id'] . '" class="label_autorisation">' . $preference['pseudo'] . '</label>';
+                  }
+                  else
+                  {
+                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="' . $preference['id'] . '">';
+                    echo '<label for="autorisation' . $preference['id'] . '" class="label_autorisation">' . $preference['pseudo'] . '</label>';
+                  }
+                echo '</div>';
+              }
+            echo '</div>';
+
+            echo '<input type="submit" name="saisie_autorisations" value="Mettre à jour" class="saisie_autorisations" />';
+          echo '</form>';
+
+          echo '<br /><br />';
+
 					// Tableau des demandes
 					include('table_calendars.php');
 				?>

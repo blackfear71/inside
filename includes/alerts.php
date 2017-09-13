@@ -96,12 +96,15 @@
   if (!isset($_SESSION['erreur_distance']))
     $_SESSION['erreur_distance'] = NULL;
 
-  // Initialisations Calendars
+  // Initialisations Calendars (Administrateur)
   if (!isset($_SESSION['calendar_deleted']))
     $_SESSION['calendar_deleted'] = NULL;
 
   if (!isset($_SESSION['calendar_reseted']))
     $_SESSION['calendar_reseted'] = NULL;
+
+  if (!isset($_SESSION['autorizations_updated']))
+    $_SESSION['autorizations_updated'] = NULL;
 
   /***********/
   /* Alertes */
@@ -444,5 +447,13 @@
       echo '</div>';
       $_SESSION['calendar_reseted'] = NULL;
     }
+  }
+  // Alerte autorisations mises à jour (Administrateur)
+  elseif (isset($_SESSION['autorizations_updated']) AND $_SESSION['autorizations_updated'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Les autorisations ont été mises à jour.';
+    echo '</div>';
+    $_SESSION['autorizations_updated'] = NULL;
   }
 ?>

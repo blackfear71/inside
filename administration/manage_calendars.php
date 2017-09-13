@@ -10,8 +10,13 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
+      $listePreferences = getListePreferences();
 			$listeSuppression = getCalendarsToDelete();
 			$alerteCalendars  = getAlerteCalendars();
+      break;
+
+    case "doChangerAutorisations":
+      updateAutorisations($_POST);
       break;
 
 		case "doDeleteCalendrier":
@@ -40,8 +45,16 @@
         $calendar->setYear(htmlspecialchars($calendar->getYear()));
 				$calendar->setCalendar(htmlspecialchars($calendar->getCalendar()));
 			}
+
+      foreach ($listePreferences as $preference)
+      {
+        $preference['identifiant']      = htmlspecialchars($preference['identifiant']);
+        $preference['pseudo']           = htmlspecialchars($preference['pseudo']);
+        $preference['manage_calendars'] = htmlspecialchars($preference['manage_calendars']);
+      }
       break;
 
+    case "doChangerAutorisations":
 		case "doDeleteCalendrier":
 		case "doResetCalendrier":
     default:
@@ -51,6 +64,7 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case "doChangerAutorisations":
 		case "doDeleteCalendrier":
 		case "doResetCalendrier":
 			header ('location: manage_calendars.php?action=goConsulter');

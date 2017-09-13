@@ -1000,4 +1000,75 @@
     ));
     $req->closeCursor();
   }
+
+  // METIER : Récupération préférences tous utilisateurs
+  // RETOUR : Liste des préférences
+  function getListePreferences()
+  {
+    $listPreferences = array();
+    $pseudo          = '';
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT * FROM preferences ORDER BY identifiant ASC');
+    while($data = $req->fetch())
+    {
+      // Récupération pseudo
+      $req2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data['identifiant'] . '"');
+      $data2 = $req2->fetch();
+
+      $pseudo = $data2['pseudo'];
+
+      $req2->closeCursor();
+
+      $myPreference = array('id'               => $data['id'],
+                            'identifiant'      => $data['identifiant'],
+                            'pseudo'           => $pseudo,
+                            'manage_calendars' => $data['manage_calendars']
+                           );
+      array_push($listPreferences, $myPreference);
+    }
+    $req->closeCursor();
+
+    return $listPreferences;
+  }
+
+  // METIER : Mise à jour des autorisations sur les calendriers
+  // RETOUR : Aucun
+  function updateAutorisations($post)
+  {
+    unset ($post['saisie_autorisations']);
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT * FROM preferences');
+    while($data = $req->fetch())
+    {
+      // Par défaut, le top autorisation est à Non
+      $manage_calendars = "N";
+
+      if (!empty($post))
+      {
+        foreach ($post as $id => $ligne)
+        {
+          if ($data['id'] == $id)
+          {
+            // Si seulement on a activé bouton, on passe le top autorisation à Oui
+            $manage_calendars = "Y";
+            break;
+          }
+        }
+      }
+
+      // Dans tous les cas on met à jour chaque préférence de profil
+      $req2 = $bdd->prepare('UPDATE preferences SET manage_calendars = :manage_calendars WHERE id = ' . $data['id']);
+      $req2->execute(array(
+        'manage_calendars' => $manage_calendars
+      ));
+      $req2->closeCursor();
+    }
+    $req->closeCursor();
+
+    $_SESSION['autorizations_updated'] = true;
+  }
 ?>

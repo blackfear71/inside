@@ -105,6 +105,7 @@
     $categories_home   = "NN";
     $today_movie_house = "N";
     $view_the_box      = "P";
+    $manage_calendars  = "N";
 
     global $bdd;
 
@@ -140,13 +141,14 @@
 				$req->closeCursor();
 
         // On créé les préférences
-        $req = $bdd->prepare('INSERT INTO preferences(identifiant, view_movie_house, categories_home, today_movie_house, view_the_box) VALUES(:identifiant, :view_movie_house, :categories_home, :today_movie_house, :view_the_box)');
+        $req = $bdd->prepare('INSERT INTO preferences(identifiant, view_movie_house, categories_home, today_movie_house, view_the_box, manage_calendars) VALUES(:identifiant, :view_movie_house, :categories_home, :today_movie_house, :view_the_box, :manage_calendars)');
         $req->execute(array(
           'identifiant'       => $trigramme,
           'view_movie_house'  => $view_movie_house,
           'categories_home'   => $categories_home,
           'today_movie_house' => $today_movie_house,
-          'view_the_box'      => $view_the_box
+          'view_the_box'      => $view_the_box,
+          'manage_calendars'  => $manage_calendars
           ));
         $req->closeCursor();
 

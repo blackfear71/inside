@@ -1,6 +1,7 @@
 <?php
   include_once('../../includes/appel_bdd.php');
   include_once('../../includes/classes/calendars.php');
+  include_once('../../includes/classes/profile.php');
   include_once('../../includes/imagethumb.php');
 
   // METIER : Contrôle année existante (pour les onglets)
@@ -13,7 +14,7 @@
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT DISTINCT year FROM calendars ORDER BY year ASC');
+      $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year ASC');
       while($donnees = $reponse->fetch())
       {
         if ($year == $donnees['year'])
@@ -33,7 +34,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT DISTINCT year FROM calendars ORDER BY year ASC');
+    $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year ASC');
     while($donnees = $reponse->fetch())
     {
       array_push($onglets, $donnees['year']);
@@ -180,5 +181,23 @@
         $_SESSION['calendar_added'] = true;
       }
     }
+  }
+
+  // METIER : Lecture des données préférences
+  // RETOUR : Objet Preferences
+  function getPreferences($user)
+  {
+    global $bdd;
+
+    // Lecture des préférences
+    $reponse = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $user . '"');
+    $donnees = $reponse->fetch();
+
+    // Instanciation d'un objet Profil à partir des données remontées de la bdd
+    $preferences = Preferences::withData($donnees);
+
+    $reponse->closeCursor();
+
+    return $preferences;
   }
 ?>

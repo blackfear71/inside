@@ -117,7 +117,7 @@
     $preferences = Preferences::withData($donnees);
 
     $reponse->closeCursor();
-
+    
     return $preferences;
   }
 

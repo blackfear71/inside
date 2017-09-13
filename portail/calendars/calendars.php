@@ -17,6 +17,7 @@
       $anneeExistante = controlYear($_GET['year']);
       $onglets        = getOnglets();
       $calendriers    = getCalendars($_GET['year']);
+      $preferences    = getPreferences($_SESSION['identifiant']);
       break;
 
     case "doAjouter":
@@ -49,6 +50,12 @@
         $calendrier->setTitle(htmlspecialchars($calendrier->getTitle()));
         $calendrier->setCalendar(htmlspecialchars($calendrier->getCalendar()));
       }
+
+      $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
+      $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
+      $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
+      $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
+      $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
       break;
 
     case "doAjouter":

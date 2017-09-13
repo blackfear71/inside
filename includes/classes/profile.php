@@ -180,6 +180,7 @@
     private $categories_home;
     private $today_movie_house;
     private $view_the_box;
+    private $manage_calendars;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -189,6 +190,7 @@
       $this->categories_home   = '';
       $this->today_movie_house = '';
       $this->view_the_box      = '';
+      $this->manage_calendars  = '';
     }
 
     // Constructeur de l'objet Preferences en fonction des données
@@ -217,6 +219,9 @@
 
       if (isset($data['view_the_box']))
         $this->view_the_box      = $data['view_the_box'];
+
+      if (isset($data['manage_calendars']))
+        $this->manage_calendars  = $data['manage_calendars'];
     }
 
     // getters et setters pour l'objet Preferences
@@ -273,6 +278,17 @@
     public function getView_the_box()
     {
       return $this->view_the_box;
+    }
+
+    // Préférence (admin) gestion des calendriers
+    public function setManage_calendars($manage_calendars)
+    {
+      $this->manage_calendars = $manage_calendars;
+    }
+
+    public function getManage_calendars()
+    {
+      return $this->manage_calendars;
     }
   }
 ?>

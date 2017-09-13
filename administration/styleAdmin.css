@@ -169,6 +169,74 @@
 }
 
 /*** Gestion calendriers ***/
+.form_autorisations
+{
+	background-color: #e3e3e3;
+	width: 80%;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 20px;
+}
+
+.zone_autorisations
+{
+	text-align: center;
+	padding: 20px;
+}
+
+.zone_check_autorisation
+{
+	background-color: white;
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.zone_check_autorisation:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
+}
+
+.label_autorisation
+{
+	margin-left: 10px;
+	font-family: robotolight, Verdana, sans-serif;
+	cursor: pointer;
+	padding: 10px;
+	padding-left: 40px;
+	margin-left: -32px;
+}
+
+.saisie_autorisations
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 0;
+	background-color: white;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	cursor: pointer;
+}
+
+.saisie_autorisations:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
+}
+
 .calendar_to_delete
 {
 	width: 300px;
