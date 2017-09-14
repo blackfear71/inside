@@ -70,7 +70,7 @@
           // Etoiles utilisateurs
           foreach ($ligneFilm['tableStars'] as $stars)
           {
-            if ($stars['identifiant'] == $_SESSION['identifiant'])
+            if ($stars['identifiant'] == $_SESSION['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
               echo '<td class="table_users" style="background-color: #fffde8;">';
             elseif ($stars['participation'] == "S")
               echo '<td class="table_users" style="background-color: #74cefb;">';
@@ -84,13 +84,13 @@
                     echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
                   echo '</a>';
 
-                  echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $i . ']" style="display: none; min-width: 240px;">';
+                  echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $i . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                     // Boutons vote
                     for($j = 0; $j <= 5; $j++)
                     {
                       echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
                       if ($j == $stars['stars'])
-                        echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
+                        echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
                       else
                         echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
                     }
@@ -103,7 +103,9 @@
                 }
                 else
                 {
-                  echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
+                  echo '<span class="link_vote" style="cursor: default;">';
+                    echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
+                  echo '</span>';
                 }
             echo '</td>';
           }

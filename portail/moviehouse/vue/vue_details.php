@@ -129,24 +129,25 @@
   									echo '<a href="' . $detailsFilm->getDoodle() . '" target="_blank" class="link_doodle"><img src="../../includes/icons/doodle.png" alt="doodle" class="logo_doodle" /></a>';
 
   								// Etoiles utilisateur
-  								echo '<div class="form_stars_details">';
-  									echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doVoterFilm">';
-  										// Boutons vote
-  										for($j = 0; $j <= 5; $j++)
-  										{
-  											if ($j == $detailsFilm->getStars_user())
-  											{
-  												echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
-  												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
-  											}
-  											else
-  											{
-  												echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
-  												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" />';
-  											}
-  										}
-  									echo '</form>';
-  								echo '</div>';
+									echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doVoterFilm" class="form_stars_details">';
+										// Boutons vote
+                    echo '<span style="vertical-align: middle;">';
+										for($j = 0; $j <= 5; $j++)
+										{
+
+											if ($j == $detailsFilm->getStars_user())
+											{
+												echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
+											}
+											else
+											{
+												echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
+												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" />';
+											}
+										}
+                    echo '</span>';
+									echo '</form>';
 
   								// Si l'utilisateur a des étoiles
   								if ($detailsFilm->getStars_user() > 0)

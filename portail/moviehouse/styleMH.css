@@ -78,6 +78,7 @@
 	cursor: pointer;
 	margin-left: 5px;
 	margin-right: 5px;
+	filter: drop-shadow(0px 0px 1px #5c5c5c);
 }
 
 .seen
@@ -91,6 +92,7 @@
 	background-repeat: no-repeat;
 	cursor: pointer;
 	margin-left: 4px;
+	filter: drop-shadow(0px 0px 1px #5c5c5c);
 }
 
 .form_saisie_rapide
@@ -172,6 +174,8 @@
 	width: 30px;
 	height: 30px;
 	cursor: pointer;
+	vertical-align: middle;
+	margin-top: -5px;
 }
 
 .link_vote_2
@@ -185,20 +189,24 @@
 	cursor: pointer;
 	margin-left: 2px;
 	margin-right: 2px;
+	vertical-align: middle;
+	position: relative;
 	z-index: 1;
+	margin-top: -18px;
+	padding-bottom: 40px;
 }
 
 .new_star
 {
 	width: 30px;
-	vertical-align: middle;
+	filter: drop-shadow(0px 0px 1px #4c4c4c);
 }
 
 .new_star_2
 {
 	margin-right: -32px;
-	vertical-align: middle;
 	width: 30px;
+	filter: drop-shadow(0px 0px 1px #4c4c4c);
 }
 
 /*** Détails ***/
@@ -569,23 +577,25 @@
 {
 	display: inline-block;
 	width: 20px;
-	height: 20px;
+	height: 25px;
 	cursor: pointer;
 	background-color: transparent;
 	border: 0;
 	cursor: pointer;
 	margin-left: 2px;
 	margin-right: 2px;
+	position: relative;
 	z-index: 1;
+	padding-bottom: 5px;
+	padding-top: 5px;
 }
 
 .new_star_3
 {
 	margin-right: -22px;
-	margin-left: 3px;
-	margin-top: -7px;
-	vertical-align: middle;
+	margin-left: 2px;
 	width: 20px;
+	filter: drop-shadow(0px 0px 1px #4c4c4c);
 }
 
 .link_vote_details
@@ -602,8 +612,6 @@
 {
 	width: 20px;
 	height: 20px;
-	vertical-align: middle;
-	margin-top: 3px;
 }
 
 /*** Accueil Movie House ***/

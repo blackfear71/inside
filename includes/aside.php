@@ -109,7 +109,7 @@
 	// Demande suppression film
 	if ($delete_film == true AND $_SESSION['doesnt_exist'] != true)
 	{
-		echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Effectuer la demande de suppression de ce film ?\')) return false;">';
+		echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Demander la suppression de ce film ?\')) return false;">';
 			echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
 			echo '<div class="hover_aside">Suppression</div>';
 		echo '</form>';

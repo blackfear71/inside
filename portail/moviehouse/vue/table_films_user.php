@@ -102,14 +102,14 @@
                 echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="new_star" />';
               echo '</a>';
 
-              echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $i . ']" style="display: none; min-width: 240px;">';
+              echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $i . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                 // Boutons vote
                 for($j = 0; $j <= 5; $j++)
                 {
                   echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
 
                   if ($j == $film->getStars_user())
-                    echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="padding-bottom: 8px; border-bottom: solid 3px rgb(200, 25, 50);" />';
+                    echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
                   else
                     echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
                 }
