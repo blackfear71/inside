@@ -62,13 +62,13 @@
                 echo '<select name="buyer_user" class="buyer" required>';
                   echo '<option value="" hidden>Choisissez...</option>';
 
-                    foreach ($listeUsers as $user)
-                    {
-                      if ($user->getIdentifiant() == $_SESSION['buyer'])
-                        echo '<option value="' . $_SESSION['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
-                      else
-                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                    }
+                  foreach ($listeUsers as $user)
+                  {
+                    if ($user->getIdentifiant() == $_SESSION['buyer'])
+                      echo '<option value="' . $_SESSION['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
+                    else
+                      echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                  }
                 echo '</select>';
 
                 // Saisie Commentaire
@@ -100,7 +100,6 @@
 
           $ligne++;
         }
-
       echo '</table>';
 
       // Validation dépense

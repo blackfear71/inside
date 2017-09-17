@@ -290,7 +290,7 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: 80px;
-	padding-left: 40px;
+	padding-left: 35px;
 	margin-left: -30px;
 	margin-bottom: 10px;
 	border-radius: 5px;
@@ -298,6 +298,7 @@
 	cursor: pointer;
 	text-align: left;
 	vertical-align: top;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .label_preference_2
@@ -315,11 +316,26 @@
 	cursor: pointer;
 	text-align: left;
 	vertical-align: top;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .label_preference_3
 {
 	display: inline-block;
+	background-color: #f3f3f3;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 135px;
+	padding-left: 40px;
+	margin-left: -35px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	cursor: pointer;
+	text-align: left;
+	vertical-align: top;
+	box-shadow: 0 0 3px #7c7c7c;
+	/*display: inline-block;
 	background-color: #f3f3f3;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -330,7 +346,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	cursor: pointer;
-	text-align: left;
+	text-align: left;*/
 }
 
 .label_preference:hover, .label_preference_2:hover, .label_preference_3:hover

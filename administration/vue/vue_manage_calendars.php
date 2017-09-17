@@ -51,12 +51,12 @@
                 echo '<div class="zone_check_autorisation">';
                   if ($preference['manage_calendars'] == "Y")
                   {
-                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="' . $preference['id'] . '" checked>';
+                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']" checked>';
                     echo '<label for="autorisation' . $preference['id'] . '" class="label_autorisation">' . $preference['pseudo'] . '</label>';
                   }
                   else
                   {
-                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="' . $preference['id'] . '">';
+                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']">';
                     echo '<label for="autorisation' . $preference['id'] . '" class="label_autorisation">' . $preference['pseudo'] . '</label>';
                   }
                 echo '</div>';

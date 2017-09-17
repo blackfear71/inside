@@ -61,7 +61,11 @@
 			          else
 			            echo '<td class="table_users_expense_center">';
 
-			            echo $part['part'];
+								if ($part['part'] > 0)
+			            echo '<span class="part_bold">' . $part['part'] . '</span>';
+								else
+									echo $part['part'];
+
 			          echo '</td>';
 			        }
 

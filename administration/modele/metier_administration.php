@@ -1037,8 +1037,6 @@
   // RETOUR : Aucun
   function updateAutorisations($post)
   {
-    unset ($post['saisie_autorisations']);
-
     global $bdd;
 
     $req = $bdd->query('SELECT * FROM preferences');
@@ -1047,9 +1045,9 @@
       // Par défaut, le top autorisation est à Non
       $manage_calendars = "N";
 
-      if (!empty($post))
+      if (!empty($post['autorization']))
       {
-        foreach ($post as $id => $ligne)
+        foreach ($post['autorization'] as $id => $ligne)
         {
           if ($data['id'] == $id)
           {

@@ -73,7 +73,7 @@
   									echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangeAvatar" enctype="multipart/form-data" runat="server">';
   										echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-  										echo '<span class="zone_parcourir_avatar">+<input type="file" accept="image/*" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" required /></span>';
+  										echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" required /></span>';
 
   										echo '<div class="mask_avatar">';
   											echo '<img id="output" class="avatar_profil"/>';

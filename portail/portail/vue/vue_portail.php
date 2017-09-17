@@ -80,6 +80,12 @@
               echo '</div>';
             echo '</a>';
 
+            echo '<a href="../collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="lien_portail">';
+              echo '<div class="fond_lien_portail">';
+                echo '<img src="../../includes/icons/collector.png" alt="calendars" class="img_lien_portail" />';
+              echo '</div>';
+            echo '</a>';
+
 						/*echo '<a href="../moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" class="new_menu_link_portail">';
 							echo '<div class="menu_portail_box">';
 								echo '<div class="mask_portail"></div>';

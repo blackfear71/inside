@@ -88,7 +88,7 @@
               echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
               echo '<div class="zone_parcourir_calendars">';
                 echo '<div class="label_parcourir">Parcourir</div>';
-                echo '<input type="file" accept="image/*" name="calendar" class="bouton_parcourir_calendars" required />';
+                echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_calendars" required />';
               echo '</div>';
 
               // Bouton envoi

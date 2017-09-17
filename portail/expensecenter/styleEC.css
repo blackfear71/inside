@@ -331,6 +331,11 @@
 	font-family: robotolight, Verdana, sans-serif;
 }
 
+.part_bold
+{
+	font-weight: bold;
+}
+
 .table_comment_expense_center
 {
 	text-align: justify;

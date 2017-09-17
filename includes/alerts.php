@@ -106,6 +106,13 @@
   if (!isset($_SESSION['autorizations_updated']))
     $_SESSION['autorizations_updated'] = NULL;
 
+  // Initialisations Collector Room
+  if (!isset($_SESSION['collector_added']))
+    $_SESSION['collector_added'] = NULL;
+
+  if (!isset($_SESSION['collector_deleted']))
+    $_SESSION['collector_deleted'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -455,5 +462,21 @@
       echo 'Les autorisations ont été mises à jour.';
     echo '</div>';
     $_SESSION['autorizations_updated'] = NULL;
+  }
+  // ALerte phrase culte ajoutée
+  elseif (isset($_SESSION['collector_added']) AND $_SESSION['collector_added'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La phrase culte a été ajoutée.';
+    echo '</div>';
+    $_SESSION['collector_added'] = NULL;
+  }
+  // Alerte phrase culte supprimée
+  elseif (isset($_SESSION['collector_deleted']) AND $_SESSION['collector_deleted'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La phrase culte a été supprimée.';
+    echo '</div>';
+    $_SESSION['collector_deleted'] = NULL;
   }
 ?>
