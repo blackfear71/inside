@@ -106,14 +106,16 @@
   {
     private $nb_comments;
     private $expenses;
+    private $nb_collectors;
     private $nb_ideas;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->nb_comments = 0;
-      $this->expenses    = 0;
-      $this->nb_ideas    = 0;
+      $this->nb_comments   = 0;
+      $this->expenses      = 0;
+      $this->nb_collectors = 0;
+      $this->nb_ideas      = 0;
     }
 
     // Constructeur de l'objet Statistiques en fonction des données
@@ -129,13 +131,16 @@
     protected function fill ($data)
     {
       if (isset($data['nb_comments']))
-        $this->nb_comments = $data['nb_comments'];
+        $this->nb_comments   = $data['nb_comments'];
 
       if (isset($data['expenses']))
-        $this->expenses    = $data['expenses'];
+        $this->expenses      = $data['expenses'];
+
+      if (isset($data['nb_collectors']))
+        $this->nb_collectors = $data['nb_collectors'];
 
       if (isset($data['nb_ideas']))
-        $this->nb_ideas    = $data['nb_ideas'];
+        $this->nb_ideas      = $data['nb_ideas'];
     }
 
     // getters et setters pour l'objet Statistiques
@@ -159,6 +164,17 @@
     public function getExpenses()
     {
       return $this->expenses;
+    }
+
+    // Nombre de phrases cultes soumises
+    public function setNb_collectors($nb_collectors)
+    {
+      $this->nb_collectors = $nb_collectors;
+    }
+
+    public function getNb_collectors()
+    {
+      return $this->nb_collectors;
     }
 
     // Nombre d'idées soumises

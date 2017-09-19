@@ -348,7 +348,7 @@
   }
 
   // METIER : Lecture statistiques catégories des utilisateurs inscrits
-  // RETOUR : Tableau de nombres de commentaires & bilans des dépenses
+  // RETOUR : Tableau de nombres de commentaires & bilans des dépenses & phrases cultes
   function getTabCategoriesIns($list_users)
   {
     // Initialisation tableau des statistiques de catégories
@@ -361,8 +361,9 @@
     ////////////////////////////////////////
     foreach ($list_users as $user)
     {
-      $nb_comments = 0;
-      $bilan       = 0;
+      $nb_comments   = 0;
+      $bilan         = 0;
+      $nb_collectors = 0;
 
       // Nombre commentaires Movie House
       $req1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user->getIdentifiant() . '"');
@@ -414,11 +415,20 @@
 
       $bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
 
-      $cat = array('identifiant'  => $user->getIdentifiant(),
-                   'pseudo'       => $user->getPseudo(),
-                   'nb_comments'  => $nb_comments,
-                   'bilan'        => $bilan,
-                   'bilan_format' => $bilan_format
+      // Nombre phrases cultes Collector Room
+      $req4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user->getIdentifiant() . '"');
+      $data4 = $req4->fetch();
+
+      $nb_collectors = $data4['nb_collectors'];
+
+      $req4->closeCursor();
+
+      $cat = array('identifiant'   => $user->getIdentifiant(),
+                   'pseudo'        => $user->getPseudo(),
+                   'nb_comments'   => $nb_comments,
+                   'bilan'         => $bilan,
+                   'bilan_format'  => $bilan_format,
+                   'nb_collectors' => $nb_collectors
                   );
 
       array_push($tabCategories, $cat);
@@ -562,11 +572,21 @@
 
       $bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
 
-      $cat = array('identifiant'  => $user_des,
-                   'pseudo'       => '',
-                   'nb_comments'  => $nb_comments,
-                   'bilan'        => $bilan,
-                   'bilan_format' => $bilan_format
+
+      // Nombre phrases cultes Collector Room
+      $req6 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user_des . '"');
+      $data6 = $req6->fetch();
+
+      $nb_collectors = $data6['nb_collectors'];
+
+      $req6->closeCursor();
+
+      $cat = array('identifiant'   => $user_des,
+                   'pseudo'        => '',
+                   'nb_comments'   => $nb_comments,
+                   'bilan'         => $bilan,
+                   'bilan_format'  => $bilan_format,
+                   'nb_collectors' => $nb_collectors
                   );
 
       array_push($tabCategories, $cat);
@@ -584,6 +604,7 @@
     $nb_tot_commentaires = 0;
     $somme_bilans        = 0;
     $alerte_bilan        = false;
+    $nb_tot_collectors   = 0;
 
     global $bdd;
 
@@ -633,10 +654,19 @@
     if ($somme_bilans > 0.01 OR $somme_bilans < -0.01)
       $alerte_bilan = true;
 
+    // Nombre de phrase cultes total
+    $req4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector');
+    $data4 = $req4->fetch();
+
+    $nb_tot_collectors = $data4['nb_collectors'];
+
+    $req4->closeCursor();
+
     $tabTotCat = array('nb_tot_commentaires' => $nb_tot_commentaires,
                        'somme_bilans'        => $somme_bilans,
                        'somme_bilans_format' => $somme_bilans_format,
-                       'alerte_bilan'        => $alerte_bilan
+                       'alerte_bilan'        => $alerte_bilan,
+                       'nb_tot_collectors'   => $nb_tot_collectors
                         );
 
     return $tabTotCat;

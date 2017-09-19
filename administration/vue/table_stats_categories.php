@@ -12,12 +12,16 @@
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 35%;">';
+			echo '<td class="init_td_manage_users" style="width: 25%;">';
 				echo 'Movie House';
 			echo '</td>';
 
-			echo '<td colspan="4" class="init_td_manage_users" style="width: 40%;">';
-				echo 'ExpenseCenter';
+			echo '<td colspan="4" class="init_td_manage_users" style="width: 30%;">';
+				echo 'Expense Center';
+			echo '</td>';
+
+			echo '<td colspan="4" class="init_td_manage_users" style="width: 20%;">';
+				echo 'Collector Room';
 			echo '</td>';
 		echo '</tr>';
 
@@ -28,6 +32,10 @@
 
 			echo '<td colspan="4" class="init_td_manage_users">';
 				echo 'Bilan des dépenses';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users">';
+				echo 'Nombre de phrases cultes';
 			echo '</td>';
 		echo '</tr>';
 
@@ -61,6 +69,10 @@
 					echo '<td colspan="4" class="td_stats_admin">';
 						echo $statsCatIns['bilan_format'];
 					echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statsCatIns['nb_collectors'];
+				echo '</td>';
 			echo '</tr>';
     }
 
@@ -98,6 +110,10 @@
 					echo '<td colspan="4" class="td_stats_admin">';
 						echo $statsCatDes['bilan_format'];
 					echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statsCatDes['nb_collectors'];
+				echo '</td>';
 			echo '</tr>';
 		}
 
@@ -130,6 +146,10 @@
 			echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
 				if ($totalCategories['alerte_bilan'] == true)
 					echo '<span class="reset_warning">!</span>';
+			echo '</td>';
+
+			echo '<td class="td_manage_users">';
+				echo $totalCategories['nb_tot_collectors'];
 			echo '</td>';
 		echo '</tr>';
 	echo '</table>';

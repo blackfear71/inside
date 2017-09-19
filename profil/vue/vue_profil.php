@@ -131,7 +131,7 @@
 								Nombre de commentaires
 							</div>
 
-							<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+							<div class="contenu_contribution">
 								<?php
 									echo $statistiques->getNb_comments();
 								?>
@@ -149,14 +149,32 @@
 								Solde
 							</div>
 
-							<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+							<div class="contenu_contribution">
 								<?php
                   echo $statistiques->getExpenses() . ' €';
 								?>
 							</div>
 						</div>
 
-						<!-- Contributions #TheBox -->
+						<!-- Contributions Collector Room -->
+						<div class="zone_profil_contribution">
+							<div class="titre_preference">
+								COLLECTOR ROOM
+							</div>
+
+              <!-- Nombre d'idées soumises -->
+							<div class="sous_titre_preference">
+								Nombre de phrases cultes soumises
+							</div>
+
+							<div class="contenu_contribution">
+								<?php
+                  echo $statistiques->getNb_collectors();
+								?>
+							</div>
+						</div>
+
+            <!-- Contributions #TheBox -->
 						<div class="zone_profil_contribution">
 							<div class="titre_preference">
 								#THEBOX
@@ -167,7 +185,7 @@
 								Nombre d'idées soumises
 							</div>
 
-							<div class="contenu_contribution" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+							<div class="contenu_contribution">
 								<?php
                   echo $statistiques->getNb_ideas();
 								?>

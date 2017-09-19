@@ -83,18 +83,27 @@
 
     $expenses = str_replace('.', ',', round($expenses, 2));
 
-    // Nombre d'idées soumises
-    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    // Nombre de phrases cultes soumises
+    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
     $donnees4 = $reponse4->fetch();
 
-    $nb_ideas = $donnees4['nb_idees'];
+    $nb_collectors = $donnees4['nb_collectors'];
 
     $reponse4->closeCursor();
 
+    // Nombre d'idées soumises
+    $reponse5 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    $donnees5 = $reponse5->fetch();
+
+    $nb_ideas = $donnees5['nb_idees'];
+
+    $reponse5->closeCursor();
+
     // On construit un tableau avec les données statistiques
-    $myStats = array('nb_comments' => $nb_comments,
-                     'expenses'    => $expenses,
-                     'nb_ideas'    => $nb_ideas,
+    $myStats = array('nb_comments'   => $nb_comments,
+                     'expenses'      => $expenses,
+                     'nb_collectors' => $nb_collectors,
+                     'nb_ideas'      => $nb_ideas,
                     );
 
     // Instanciation d'un objet Statistiques à partir des données remontées de la bdd
@@ -117,7 +126,7 @@
     $preferences = Preferences::withData($donnees);
 
     $reponse->closeCursor();
-    
+
     return $preferences;
   }
 
