@@ -56,7 +56,7 @@
 	if ($profil == true)
 	{
 		echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['identifiant'] . '&action=goConsulter" title="Profil" class="link_profile">';
-			echo '<img src="/inside/includes/icons/profile.png" alt="profile" title="Profil" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/profile.png" alt="profile" title="Profil" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Profil</div>';
 	}
@@ -65,7 +65,7 @@
 	if ($add_article == true)
 	{
 		echo '<a href="/inside/portail/referenceguide/saisie_article.php" title="Ajouter un article" class="link_profile">';
-			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un article" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un article" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
@@ -74,7 +74,7 @@
 	if ($add_film == true)
 	{
 		echo '<a href="/inside/portail/moviehouse/saisie.php?action=goAjouter" title="Ajouter un film (avancé)" class="link_profile">';
-			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
@@ -83,7 +83,7 @@
 	if ($modify_film == true AND $_SESSION['doesnt_exist'] != true)
 	{
 		echo '<a href="/inside/portail/moviehouse/saisie.php?modify_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_profile">';
-			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Modifier</div>';
 	}
@@ -92,7 +92,7 @@
 	if ($ajouter_parcours == true)
 	{
 		echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goajouter" title="Ajouter parcours" class="link_profile">';
-			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter parcours" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter parcours" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Ajouter</div>';
 	}
@@ -101,7 +101,7 @@
 	if ($modify_parcours == true)
 	{
 		echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_profile">';
-			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Modifier</div>';
 	}
@@ -119,7 +119,7 @@
 	if ($back_index == true)
 	{
 		echo '<a href="/inside/index.php" class="link_profile" title="Retour à l\'accueil" style="margin-top: 0;">';
-				echo '<img src="/inside/includes/icons/back.png" alt="accueil" title="Retour à l\'accueil" class="icon_profile" />';
+				echo '<img src="/inside/includes/icons/back.png" alt="accueil" title="Retour à l\'accueil" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -128,7 +128,7 @@
 	if ($back == true)
 	{
 		echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_profile">';
-			echo '<img src="/inside/includes/icons/back.png" alt="back" title="Retour au portail" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/back.png" alt="back" title="Retour au portail" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -137,7 +137,7 @@
 	if ($back_admin == true)
 	{
 		echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_profile">';
-			echo '<img src="/inside/includes/icons/back.png" alt="back_admin" title="Retour au portail administration" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/back.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -167,7 +167,7 @@
 		}
 
 		echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_profile">';
-			echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">#TheBox</div>';
 	}
@@ -176,7 +176,7 @@
 	if ($reports == true)
 	{
 		echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_profile">';
-			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_profile" />';
+			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Signaler</div>';
 	}

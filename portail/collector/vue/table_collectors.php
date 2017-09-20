@@ -13,13 +13,13 @@
         echo '<table class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
           echo '<tr>';
             // Citation (gauche)
-            echo '<td rowspan="100%" class="collector">';
+            echo '<td rowspan="100%" class="collector" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
-              echo '<div class="text_collector">' . $collector->getCollector() . '</div>';
+              echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
             echo '</td>';
 
-            echo '<td colspan="2" class="speaker">';
+            echo '<td colspan="2" class="speaker" style="border-top-right-radius: 5px;">';
               // Avatar (droite)
               if (!empty($collector->getAvatar_s()))
               {
@@ -49,7 +49,7 @@
               echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_modify_collector"></a>';
             echo '</td>';
 
-            echo '<td class="speaker_actions">';
+            echo '<td class="speaker_actions" style="border-bottom-right-radius: 5px;">';
               // Suppression
               echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
                 echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_delete_collector" />';
@@ -65,13 +65,13 @@
           echo '<form method="post" action="collector.php?modify_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '">';
             echo '<tr>';
               // Modification citation (gauche)
-              echo '<td rowspan="100%" class="collector">';
+              echo '<td rowspan="100%" class="collector" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">';
                 echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
                 echo '<textarea name="collector" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
                 echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
               echo '</td>';
 
-              echo '<td colspan="2" class="speaker">';
+              echo '<td colspan="2" class="speaker" style="border-top-right-radius: 5px;">';
                 // Avatar (droite)
                 if (!empty($collector->getAvatar_s()))
                 {
@@ -94,15 +94,10 @@
 
                     foreach ($listeUsers as $user)
                     {
-                      if ($user->getIdentifiant() == $_SESSION['speaker'])
-                        echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                      if ($user->getIdentifiant() == $collector->getSpeaker())
+                        echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
                       else
-                      {
-                        if ($user->getIdentifiant() == $collector->getSpeaker())
-                          echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
-                        else
-                          echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                      }
+                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
                     }
                   echo '</select>';
                 }
@@ -124,7 +119,7 @@
                 echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_cancel_collector"></a>';
               echo '</td>';
 
-              echo '<td class="speaker_actions">';
+              echo '<td class="speaker_actions" style="border-bottom-right-radius: 5px;">';
                 // Validation modification
                 echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_validate_collector" />';
               echo '</td>';
@@ -139,7 +134,7 @@
         /***************************************************/
         echo '<table class="zone_collector" id="modifier_collector_4[' . $collector->getId() . ']">';
           echo '<tr>';
-            echo '<td colspan="2" class="speaker">';
+            echo '<td colspan="2" class="speaker" style="border-top-left-radius: 5px;">';
               // Avatar (gauche)
               if (!empty($collector->getAvatar_s()))
               {
@@ -163,15 +158,15 @@
             echo '</td>';
 
             // Citation (droite)
-            echo '<td rowspan="100%" class="collector">';
+            echo '<td rowspan="100%" class="collector" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
-              echo '<div class="text_collector">' . $collector->getCollector() . '</div>';
+              echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
             echo '</td>';
           echo '<tr>';
 
           echo '<tr>';
-            echo '<td class="speaker_actions" style="border-right: solid 1px white;">';
+            echo '<td class="speaker_actions" style="border-right: solid 1px white; border-bottom-left-radius: 5px;">';
               // Suppression
               echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
                 echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_delete_collector" />';
@@ -191,7 +186,7 @@
         echo '<table class="zone_collector" id="modifier_collector_3[' . $collector->getId() . ']" style="display: none;">';
           echo '<form method="post" action="collector.php?modify_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '">';
             echo '<tr>';
-              echo '<td colspan="2" class="speaker">';
+              echo '<td colspan="2" class="speaker" style="border-top-left-radius: 5px;">';
                 // Avatar (droite)
                 if (!empty($collector->getAvatar_s()))
                 {
@@ -214,15 +209,10 @@
 
                     foreach ($listeUsers as $user)
                     {
-                      if ($user->getIdentifiant() == $_SESSION['speaker'])
-                        echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                      if ($user->getIdentifiant() == $collector->getSpeaker())
+                        echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
                       else
-                      {
-                        if ($user->getIdentifiant() == $collector->getSpeaker())
-                          echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
-                        else
-                          echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                      }
+                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
                     }
                   echo '</select>';
                 }
@@ -238,7 +228,7 @@
               echo '</td>';
 
               // Modification citation (gauche)
-              echo '<td rowspan="100%" class="collector">';
+              echo '<td rowspan="100%" class="collector" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">';
                 echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
                 echo '<textarea name="collector" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
                 echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
@@ -246,14 +236,14 @@
             echo '</tr>';
 
             echo '<tr>';
-              echo '<td class="speaker_actions" style="border-right: solid 1px white;">';
-                // Annulation modification
-                echo '<a onclick="afficherMasquer(\'modifier_collector_3[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_4[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_cancel_collector"></a>';
+              echo '<td class="speaker_actions" style="border-right: solid 1px white; border-bottom-left-radius: 5px;">';
+                // Validation modification
+                echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_validate_collector" />';
               echo '</td>';
 
               echo '<td class="speaker_actions">';
-                // Validation modification
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_validate_collector" />';
+                // Annulation modification
+                echo '<a onclick="afficherMasquer(\'modifier_collector_3[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_4[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_cancel_collector"></a>';
               echo '</td>';
             echo '</tr>';
           echo '</form>';

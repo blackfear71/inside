@@ -38,7 +38,7 @@
 					<form method="post" action="index.php?action=doConnecter">
 						<input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne" required />
 						<input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne" required />
-						<input type="submit" name="connect" value="CONNEXION" class="bouton_connexion"/>
+						<input type="submit" name="connect" value="CONNEXION" class="bouton_connexion" />
 					</form>
 				</div>
 

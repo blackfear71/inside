@@ -48,7 +48,7 @@
           <?php
   					echo '<form method="post" action="index.php?action=doDemanderMdp">';
   						echo '<input type="text" name="login" value="' . $_SESSION['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne" required />';
-  						echo '<input type="submit" name="ask_password" value="SOUMETTRE" class="bouton_connexion"/>';
+  						echo '<input type="submit" name="ask_password" value="SOUMETTRE" class="bouton_connexion" />';
   					echo '</form>';
           ?>
 				</div>

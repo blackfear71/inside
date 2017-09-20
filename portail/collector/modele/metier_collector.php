@@ -185,9 +185,23 @@
     {
       global $bdd;
 
+      // On récupère éventuellement l'identifiant si l'utilisateur est désinscrit
+      if (!isset($post['speaker']))
+      {
+        $reponse = $bdd->query('SELECT id, speaker FROM collector WHERE id = ' . $id_col);
+        $donnees = $reponse->fetch();
+
+        $speaker = $donnees['speaker'];
+
+        $reponse->closeCursor();
+      }
+      else
+        $speaker = $post['speaker'];
+
+      // Modification de l'enregistrement en base
       $req = $bdd->prepare('UPDATE collector SET speaker = :speaker, date_collector = :date_collector, collector = :collector WHERE id = ' . $id_col);
       $req->execute(array(
-        'speaker'        => $post['speaker'],
+        'speaker'        => $speaker,
         'date_collector' => formatDateForInsert($post['date_collector']),
         'collector'      => $post['collector']
       ));

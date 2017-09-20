@@ -50,7 +50,7 @@
   						echo '<input type="text" name="pseudo" value="' . $_SESSION['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne" required />';
               echo '<input type="password" name="password" value="' . $_SESSION['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne" required />';
               echo '<input type="password" name="confirm_password" value="' . $_SESSION['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne" required />';
-  						echo '<input type="submit" name="ask_inscription" value="SOUMETTRE" class="bouton_connexion"/>';
+  						echo '<input type="submit" name="ask_inscription" value="SOUMETTRE" class="bouton_connexion" />';
   					echo '</form>';
           ?>
 				</div>

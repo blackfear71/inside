@@ -76,7 +76,7 @@
   										echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event)" required /></span>';
 
   										echo '<div class="mask_avatar">';
-  											echo '<img id="output" class="avatar_profil"/>';
+  											echo '<img id="output" class="avatar_profil" />';
   										echo '</div>';
 
   										echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="saisie_valider_profil" />';

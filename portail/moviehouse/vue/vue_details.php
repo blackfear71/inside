@@ -273,7 +273,7 @@
   							if (!empty($detailsFilm->getPoster()))
   								echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="img_details" /><br />';
   							else
-  								echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details"/>';
+  								echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details" />';
   						echo '</div>';
   					echo '</div>';
 

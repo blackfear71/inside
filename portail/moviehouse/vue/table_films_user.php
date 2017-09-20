@@ -127,9 +127,9 @@
   					{
   						echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
   							// Je participe
-  							echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate"/>';
+  							echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate" />';
   							// J'ai vu
-  							echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen"/>';
+  							echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';
   						echo '</form>';
   					}
   				echo '</td>';
