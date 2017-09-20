@@ -31,6 +31,7 @@
   padding-left: 1%;
   padding-right: 1%;
   line-height: 40px;
+  min-height: 40px;
   border-radius: 5px;
   margin-left: 1%;
   margin-right: 1%;
@@ -93,6 +94,16 @@
   background-color: #a3a3a3;
   width: 18%;
   padding: 1%;
+}
+
+.speaker_actions
+{
+  background-color: #a3a3a3;
+  border-top: solid 1px white;
+  height: 30px;
+  width: 9%;
+  padding: 1%;
+  text-align: center;
 }
 
 .quote_1
@@ -202,6 +213,24 @@
   border-radius: 50%;
 }
 
+/*** Actions & modification ***/
+.icone_modify_collector
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/portail/collector/icons/edit.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
 .icon_delete_collector
 {
   width: 30px;
@@ -214,4 +243,78 @@
   background-color: transparent;
   cursor: pointer;
   overflow: hidden;
+}
+
+.icone_cancel_collector
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/portail/collector/icons/cancel.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.icon_validate_collector
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/portail/collector/icons/validate.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.modify_text_collector
+{
+  resize: vertical;
+  width: 98%;
+  padding: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: robotolight, Verdana, sans-serif;
+  border-radius: 5px;
+  border: solid 1px #a3a3a3;
+  min-height: 150px;
+}
+
+.modify_speaker
+{
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 0;
+  padding: 1%;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+}
+
+.modify_date_collector
+{
+  display: block;
+  width: 76%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 0;
+  padding: 2%;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
 }

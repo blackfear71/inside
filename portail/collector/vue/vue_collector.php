@@ -63,7 +63,7 @@
             echo '</select>';
 
             // Saisie date
-            echo '<input type="text" name="date" value="' . $_SESSION['date'] . '" placeholder="Date" maxlength="10" id="datepicker" class="saisie_date_collector" required />';
+            echo '<input type="text" name="date_collector" value="' . $_SESSION['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker" class="saisie_date_collector" required />';
 
             // Bouton
             echo '<input type="submit" name="insert_collector" value="Ajouter" title="Ajouter" class="saisie_bouton" />';

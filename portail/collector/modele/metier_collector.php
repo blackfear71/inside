@@ -74,7 +74,7 @@
     // Lecture des enregistrements
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM collector ORDER BY date DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+    $reponse = $bdd->query('SELECT * FROM collector ORDER BY date_collector DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
     while($donnees = $reponse->fetch())
     {
       $myCollector = Collector::withData($donnees);
@@ -95,11 +95,13 @@
 
       if (empty($myCollector->getName_a()))
       {
+        $myCollector->setAuthor("");
         $myCollector->setName_a("un ancien utilisateur");
       }
 
       if (empty($myCollector->getName_s()))
       {
+        $myCollector->setSpeaker("");
         $myCollector->setName_s("un ancien utilisateur");
       }
 
@@ -115,11 +117,11 @@
   function insertCollector($post)
   {
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['speaker']   = $post['speaker'];
-    $_SESSION['date']      = $post['date'];
-    $_SESSION['collector'] = $post['collector'];
+    $_SESSION['speaker']        = $post['speaker'];
+    $_SESSION['date_collector'] = $post['date_collector'];
+    $_SESSION['collector']      = $post['collector'];
 
-    $date_a_verifier = $post['date'];
+    $date_a_verifier = $post['date_collector'];
 
     // On décompose la date à contrôler
     list($d, $m, $y) = explode('/', $date_a_verifier);
@@ -129,22 +131,25 @@
     {
       global $bdd;
 
-      $collector = array('author'    => $_SESSION['identifiant'],
-                         'speaker'   => $post['speaker'],
-                         'date'      => formatDateForInsert($date_a_verifier),
-                         'collector' => $post['collector']
+      $collector = array('author'         => $_SESSION['identifiant'],
+                         'speaker'        => $post['speaker'],
+                         'date_collector' => formatDateForInsert($date_a_verifier),
+                         'collector'      => $post['collector'],
+                         'date'           => date("Ymd")
                         );
 
 			// Stockage de l'enregistrement en table
       $req = $bdd->prepare('INSERT INTO collector(author,
 																									speaker,
-																									date,
-																									collector
+																									date_collector,
+																									collector,
+                                                  date
                                                  )
 																			     VALUES(:author,
 																									:speaker,
-																								  :date,
-																								  :collector
+																								  :date_collector,
+																								  :collector,
+                                                  :date
                                                  )');
       $req->execute($collector);
 		  $req->closeCursor();
@@ -164,5 +169,33 @@
     $req = $bdd->exec('DELETE FROM collector WHERE id = ' . $id_col);
 
     $_SESSION['collector_deleted'] = true;
+  }
+
+  // METIER : Modification phrases cultes
+  // RETOUR : Aucun
+  function modifyCollector($post, $id_col)
+  {
+    $date_a_verifier = $post['date_collector'];
+
+    // On décompose la date à contrôler
+    list($d, $m, $y) = explode('/', $date_a_verifier);
+
+    // On vérifie le format de la date
+    if (checkdate($m, $d, $y))
+    {
+      global $bdd;
+
+      $req = $bdd->prepare('UPDATE collector SET speaker = :speaker, date_collector = :date_collector, collector = :collector WHERE id = ' . $id_col);
+      $req->execute(array(
+        'speaker'        => $post['speaker'],
+        'date_collector' => formatDateForInsert($post['date_collector']),
+        'collector'      => $post['collector']
+      ));
+      $req->closeCursor();
+
+      $_SESSION['collector_modified'] = true;
+    }
+    else
+      $_SESSION['wrong_date'] = true;
   }
 ?>

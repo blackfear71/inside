@@ -113,6 +113,7 @@
 	padding-left: 1%;
 	padding-right: 1%;
 	line-height: 40px;
+	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
@@ -126,6 +127,7 @@
 	padding-left: 1%;
 	padding-right: 1%;
 	line-height: 40px;
+	min-height: 40px;
 	border-radius: 5px;
 	margin-left: 1%;
 	margin-right: 1%;

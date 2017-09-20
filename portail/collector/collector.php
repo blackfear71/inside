@@ -12,9 +12,9 @@
   // Initialisation sauvegarde saisie
   if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
   {
-    $_SESSION['speaker']   = "";
-    $_SESSION['date']      = "";
-    $_SESSION['collector'] = "";
+    $_SESSION['speaker']        = "";
+    $_SESSION['date_collector'] = "";
+    $_SESSION['collector']      = "";
   }
 
   // Modèle de données : "module métier"
@@ -47,6 +47,10 @@
       deleteCollector($_GET['delete_id']);
       break;
 
+    case "doModifier":
+      modifyCollector($_POST, $_GET['modify_id']);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: collector.php?action=goConsulter&page=1');
@@ -71,7 +75,7 @@
           $collector->setName_a(htmlspecialchars($collector->getName_a()));
           $collector->setSpeaker(htmlspecialchars($collector->getSpeaker()));
           $collector->setName_s(htmlspecialchars($collector->getName_s()));
-          $collector->setDate(htmlspecialchars($collector->getDate()));
+          $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
         }
       }
@@ -79,6 +83,7 @@
 
     case "doAjouter":
     case "doSupprimer":
+    case "doModifier":
     default:
       break;
   }
@@ -91,6 +96,7 @@
       break;
 
     case "doSupprimer":
+    case "doModifier":
       header('location: collector.php?action=goConsulter&page=' . $_GET['page']);
       break;
 

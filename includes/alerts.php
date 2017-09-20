@@ -113,6 +113,9 @@
   if (!isset($_SESSION['collector_deleted']))
     $_SESSION['collector_deleted'] = NULL;
 
+  if (!isset($_SESSION['collector_modified']))
+    $_SESSION['collector_modified'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -478,5 +481,13 @@
       echo 'La phrase culte a été supprimée.';
     echo '</div>';
     $_SESSION['collector_deleted'] = NULL;
+  }
+  // Alerte phrase culte modifiée
+  elseif (isset($_SESSION['collector_modified']) AND $_SESSION['collector_modified'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'La phrase culte a été modifiée.';
+    echo '</div>';
+    $_SESSION['collector_modified'] = NULL;
   }
 ?>

@@ -7,20 +7,20 @@
     private $speaker;
     private $name_s;
     private $avatar_s;
-    private $date;
+    private $date_collector;
     private $collector;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id        = 0;
-      $this->author    = '';
-      $this->name_a    = '';
-      $this->speaker   = '';
-      $this->name_s    = '';
-      $this->avatar_s  = '';
-      $this->date      = '';
-      $this->collector = '';
+      $this->id             = 0;
+      $this->author         = '';
+      $this->name_a         = '';
+      $this->speaker        = '';
+      $this->name_s         = '';
+      $this->avatar_s       = '';
+      $this->date_collector = '';
+      $this->collector      = '';
     }
 
     // Constructeur de l'objet Bugs en fonction des données
@@ -36,19 +36,19 @@
     protected function fill ($data)
     {
       if (isset($data['id']))
-        $this->id        = $data['id'];
+        $this->id             = $data['id'];
 
       if (isset($data['author']))
-        $this->author    = $data['author'];
+        $this->author         = $data['author'];
 
       if (isset($data['speaker']))
-        $this->speaker   = $data['speaker'];
+        $this->speaker        = $data['speaker'];
 
-      if (isset($data['date']))
-        $this->date      = $data['date'];
+      if (isset($data['date_collector']))
+        $this->date_collector = $data['date_collector'];
 
       if (isset($data['collector']))
-        $this->collector = $data['collector'];
+        $this->collector      = $data['collector'];
     }
 
     // getters et setters pour l'objet Bugs
@@ -118,15 +118,15 @@
       return $this->avatar_s;
     }
 
-    // Date
-    public function setDate($date)
+    // Date Collector
+    public function setDate_collector($date_collector)
     {
-      $this->date = $date;
+      $this->date_collector = $date_collector;
     }
 
-    public function getDate()
+    public function getDate_collector()
     {
-      return $this->date;
+      return $this->date_collector;
     }
 
     // Phrase collector
