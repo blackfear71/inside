@@ -25,8 +25,8 @@
   {
     case "goConsulter":
       // Lecture des données par le modèle
-      $listeUsers      = getUsers();
-      $nbPages         = getPages();
+      $listeUsers = getUsers();
+      $nbPages    = getPages();
 
       if ($nbPages > 0)
       {
@@ -48,7 +48,7 @@
 
     case "doSupprimer":
       deleteVotes($_GET['delete_id']);
-      deleteCollector($_GET['delete_id']);      
+      deleteCollector($_GET['delete_id']);
       break;
 
     case "doModifier":

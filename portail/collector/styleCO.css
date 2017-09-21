@@ -318,7 +318,7 @@
 }
 
 /*** Vote ***/
-.link_current_vote
+.link_current_vote_right
 {
   float: right;
   width: 40px;
@@ -331,18 +331,44 @@
   cursor: pointer;
 }
 
+.link_current_vote_left
+{
+  float: left;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-top: -50px;
+  margin-left: 40px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
 .current_vote
 {
   width: 40px;
   filter: drop-shadow(0px 0px 1px #5c5c5c);
 }
 
-.zone_smileys
+.zone_smileys_right
 {
   background-color: white;
   box-shadow: 0 0 5px #e3e3e3;
   float: right;
   margin-right: -197px;
+  margin-top: -55px;
+  padding: 5px;
+  border-radius: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.zone_smileys_left
+{
+  background-color: white;
+  box-shadow: 0 0 5px #7c7c7c;
+  float: left;
+  margin-left: -137px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;

@@ -27,13 +27,8 @@
                 else
                   echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
 
-
-
-
-
-
                 // Vote
-                echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote">';
+                echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_right">';
                   $founded = false;
 
                   foreach ($listeVotes as $vote)
@@ -51,11 +46,9 @@
                 echo '</a>';
 
                 // Formulaire vote
-                echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
-
+                echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_right" style="display: none;">';
                   for ($j = 1; $j <= 6; $j++)
                   {
-
                     $founded = false;
                     foreach ($listeVotes as $vote)
                     {
@@ -70,16 +63,6 @@
                       echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" />';
                   }
                 echo '</form>';
-
-
-
-
-
-
-
-
-
-
               echo '</div>';
 
               // Nom & date (droite)
@@ -184,6 +167,43 @@
               else
                 echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
               echo '</div>';
+
+              // Vote
+              echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_left">';
+                $founded = false;
+
+                foreach ($listeVotes as $vote)
+                {
+                  if ($vote->getId_collector() == $collector->getId())
+                  {
+                    echo '<img src="../../includes/icons/smileys/' . $vote->getVote() . '.png" alt="smiley" class="current_vote" />';
+                    $founded = true;
+                    break;
+                  }
+                }
+
+                if ($founded == false)
+                  echo '<img src="../../includes/icons/smileys/4.png" alt="smiley" class="current_vote" />';
+              echo '</a>';
+
+              // Formulaire vote
+              echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_left" style="display: none;">';
+                for ($j = 1; $j <= 6; $j++)
+                {
+                  $founded = false;
+                  foreach ($listeVotes as $vote)
+                  {
+                    if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
+                    {
+                      echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" style="background-size: 40px; width: 40px; height: 40px;" />';
+                      $founded = true;
+                    }
+                  }
+
+                  if ($founded == false)
+                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" />';
+                }
+              echo '</form>';
 
               // Nom & date (gauche)
               echo '<div class="name_collector">';
