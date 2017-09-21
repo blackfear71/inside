@@ -37,7 +37,7 @@
         else
         {
           $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page']);
-          $listeVotes      = getVotes($listeCollectors, $_SESSION['identifiant']);
+          $listeVotes      = getVotesUser($listeCollectors, $_SESSION['identifiant']);
         }
       }
       break;

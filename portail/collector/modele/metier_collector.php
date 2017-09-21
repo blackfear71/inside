@@ -215,7 +215,7 @@
 
   // METIER : Lecture des votes utilisateur
   // RETOUR : Liste des votes
-  function getVotes($list_collectors, $user)
+  function getVotesUser($list_collectors, $user)
   {
     $listVotes = array();
 
