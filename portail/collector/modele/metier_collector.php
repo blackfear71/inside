@@ -287,7 +287,7 @@
     $reponse->closeCursor();
   }
 
-  // METIER : Suppression votes si phrase culte supprimée
+  // METIER : Suppression des votes si phrase culte supprimée
   // RETOUR : Aucun
   function deleteVotes($id_col)
   {

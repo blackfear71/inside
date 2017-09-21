@@ -338,7 +338,7 @@
   height: 40px;
   border-radius: 50%;
   margin-top: -50px;
-  margin-left: 40px;
+  margin-left: -20px;
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -368,7 +368,7 @@
   background-color: white;
   box-shadow: 0 0 5px #7c7c7c;
   float: left;
-  margin-left: -137px;
+  margin-left: -197px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;
