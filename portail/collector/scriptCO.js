@@ -1,8 +1,17 @@
 // Affiche ou masque la modification de phrase culte
-function afficherMasquer(id)
+function afficherMasquerRow(id)
 {
   if (document.getElementById(id).style.display == "none")
     document.getElementById(id).style.display = "table";
+  else
+    document.getElementById(id).style.display = "none";
+}
+
+// Affiche ou masque la modification du vote
+function afficherMasquer(id)
+{
+  if (document.getElementById(id).style.display == "none")
+    document.getElementById(id).style.display = "block";
   else
     document.getElementById(id).style.display = "none";
 }

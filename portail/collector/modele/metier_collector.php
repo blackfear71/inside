@@ -212,4 +212,86 @@
     else
       $_SESSION['wrong_date'] = true;
   }
+
+  // METIER : Lecture des votes utilisateur
+  // RETOUR : Liste des votes
+  function getVotes($list_collectors, $user)
+  {
+    $listVotes = array();
+
+    global $bdd;
+
+    foreach ($list_collectors as $collector)
+    {
+      $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND identifiant = "' . $user . '"');
+      $donnees = $reponse->fetch();
+
+      if ($reponse->rowCount() > 0)
+      {
+        $myVote = VotesCollector::withData($donnees);
+        array_push($listVotes, $myVote);
+      }
+
+      $reponse->closeCursor();
+    }
+
+    return $listVotes;
+  }
+
+  // METIER : Insertion ou mise à jour vote
+  // RETOUR : Aucun
+  function voteCollector($post, $user, $id_col)
+  {
+    if (isset($post['smiley_1']))
+      $vote = 1;
+    elseif (isset($post['smiley_2']))
+      $vote = 2;
+    elseif (isset($post['smiley_3']))
+      $vote = 3;
+    elseif (isset($post['smiley_4']))
+      $vote = 4;
+    elseif (isset($post['smiley_5']))
+      $vote = 5;
+    elseif (isset($post['smiley_6']))
+      $vote = 6;
+    else
+      $vote = 4;
+
+    global $bdd;
+
+    // On cherche s'il existe déjà un vote
+    $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $id_col . ' AND identifiant = "' . $user . '"');
+    $donnees = $reponse->fetch();
+
+    // Si on a déjà un vote, on met à jour
+    if ($reponse->rowCount() > 0)
+    {
+      $reponse2 = $bdd->prepare('UPDATE collector_users SET vote = :vote WHERE id = ' . $donnees['id']);
+      $reponse2->execute(array(
+        'vote' => $vote
+      ));
+      $reponse2->closeCursor();
+    }
+    // Sinon on insère
+    else
+    {
+      $reponse2 = $bdd->prepare('INSERT INTO collector_users(id_collector, identifiant, vote) VALUES(:id_collector, :identifiant, :vote)');
+      $reponse2->execute(array(
+        'id_collector' => $id_col,
+        'identifiant'  => $user,
+        'vote'         => $vote
+        ));
+      $reponse2->closeCursor();
+    }
+
+    $reponse->closeCursor();
+  }
+
+  // METIER : Suppression votes si phrase culte supprimée
+  // RETOUR : Aucun
+  function deleteVotes($id_col)
+  {
+    global $bdd;
+    $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $id_col);
+  }
 ?>

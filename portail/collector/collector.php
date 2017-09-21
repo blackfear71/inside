@@ -35,7 +35,10 @@
         elseif ($_GET['page'] < 1)
           header('location: collector.php?action=goConsulter&page=1');
         else
+        {
           $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page']);
+          $listeVotes      = getVotes($listeCollectors, $_SESSION['identifiant']);
+        }
       }
       break;
 
@@ -44,11 +47,16 @@
       break;
 
     case "doSupprimer":
-      deleteCollector($_GET['delete_id']);
+      deleteVotes($_GET['delete_id']);
+      deleteCollector($_GET['delete_id']);      
       break;
 
     case "doModifier":
       modifyCollector($_POST, $_GET['modify_id']);
+      break;
+
+    case "doVoter":
+      voteCollector($_POST, $_SESSION['identifiant'], $_GET['id']);
       break;
 
     default:
@@ -69,6 +77,7 @@
           $user->setPseudo(htmlspecialchars($user->getPseudo()));
           $user->setAvatar(htmlspecialchars($user->getAvatar()));
         }
+
         foreach ($listeCollectors as $collector)
         {
           $collector->setAuthor(htmlspecialchars($collector->getAuthor()));
@@ -78,12 +87,20 @@
           $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
         }
+
+        foreach ($listeVotes as $vote)
+        {
+          $vote->setId_collector(htmlspecialchars($vote->getId_collector()));
+          $vote->setIdentifiant(htmlspecialchars($vote->getIdentifiant()));
+          $vote->setVote(htmlspecialchars($vote->getVote()));
+        }
       }
       break;
 
     case "doAjouter":
     case "doSupprimer":
     case "doModifier":
+    case "doVoter":
     default:
       break;
   }
@@ -97,6 +114,7 @@
 
     case "doSupprimer":
     case "doModifier":
+    case "doVoter":
       header('location: collector.php?action=goConsulter&page=' . $_GET['page']);
       break;
 

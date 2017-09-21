@@ -23,7 +23,7 @@
       $this->collector      = '';
     }
 
-    // Constructeur de l'objet Bugs en fonction des données
+    // Constructeur de l'objet Collector en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -138,6 +138,93 @@
     public function getCollector()
     {
       return $this->collector;
+    }
+  }
+
+  class VotesCollector
+  {
+    private $id;
+    private $id_collector;
+    private $identifiant;
+    private $vote;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->id           = 0;
+      $this->id_collector = 0;
+      $this->identifiant  = '';
+      $this->vote         = 0;
+    }
+
+    // Constructeur de l'objet VotesCollector en fonction des données
+    // -> il faut passer une variable $data contenant le résultat de la requête fetch
+    public static function withData($data)
+    {
+      $vote = new self();
+      $vote->fill($data);
+
+      return $vote;
+    }
+
+    protected function fill ($data)
+    {
+      if (isset($data['id']))
+        $this->id           = $data['id'];
+
+      if (isset($data['id_collector']))
+        $this->id_collector = $data['id_collector'];
+
+      if (isset($data['identifiant']))
+        $this->identifiant  = $data['identifiant'];
+
+      if (isset($data['vote']))
+        $this->vote         = $data['vote'];
+    }
+
+    // getters et setters pour l'objet Bugs
+    // id
+    public function setId($id)
+    {
+      $this->id = $id;
+    }
+
+    public function getId()
+    {
+      return $this->id;
+    }
+
+    // Id collector
+    public function setId_collector($id_collector)
+    {
+      $this->id_collector = $id_collector;
+    }
+
+    public function getId_collector()
+    {
+      return $this->id_collector;
+    }
+
+    // Identifiant
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Vote
+    public function setVote($vote)
+    {
+      $this->vote = $vote;
+    }
+
+    public function getVote()
+    {
+      return $this->vote;
     }
   }
 ?>

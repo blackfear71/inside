@@ -76,8 +76,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
-  border-radius: 5px;
-  overflow: hidden;
   border-collapse: collapse;
 }
 
@@ -125,7 +123,6 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  overflow: hidden;
   border: solid 3px white;
   filter: drop-shadow(0px 0px 1px #5c5c5c);
   background-color: #b3b3b3;
@@ -136,6 +133,7 @@
 .avatar_collector
 {
   width: 100px;
+  border-radius: 50%;
 }
 
 .text_collector
@@ -317,4 +315,127 @@
   padding: 2%;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
+}
+
+/*** Vote ***/
+.link_current_vote
+{
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-top: -50px;
+  margin-right: -20px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.current_vote
+{
+  width: 40px;
+  filter: drop-shadow(0px 0px 1px #5c5c5c);
+}
+
+.zone_smileys
+{
+  background-color: white;
+  box-shadow: 0 0 5px #e3e3e3;
+  float: right;
+  margin-right: -197px;
+  margin-top: -55px;
+  padding: 5px;
+  border-radius: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.smiley_1
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/1.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.smiley_2
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/2.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.smiley_3
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/3.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.smiley_4
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/4.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.smiley_5
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/5.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.smiley_6
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/6.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
