@@ -238,6 +238,37 @@
     return $listVotes;
   }
 
+  // METIER : Liste des votes par phrase culte
+  // RETOUR : Liste des votes
+  function getVotes($list_collectors)
+  {
+    $listVotes   = array();
+    $listSmileys = array();
+
+    global $bdd;
+
+    foreach ($list_collectors as $collector)
+    {
+      for ($i = 1; $i <= 6; $i++)
+      {
+        $req = $bdd->query('SELECT COUNT(id) AS nb_smileys FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i);
+        $data = $req->fetch();
+
+        $listSmileys[$i] = $data['nb_smileys'];
+
+        $req->closeCursor();
+      }
+
+      $myVotes = array('id'      => $collector->getId(),
+                       'smileys' => $listSmileys
+                      );
+
+      array_push($listVotes, $myVotes);
+    }
+
+    return $listVotes;
+  }
+
   // METIER : Insertion ou mise à jour vote
   // RETOUR : Aucun
   function voteCollector($post, $user, $id_col)
@@ -292,6 +323,7 @@
   function deleteVotes($id_col)
   {
     global $bdd;
+    
     $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $id_col);
   }
 ?>

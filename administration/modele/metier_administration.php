@@ -1001,19 +1001,22 @@
     // Suppression des préférences
     $req3 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $identifiant . '"');
 
+    // Suppression des votes collector
+    $req4 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $identifiant . '"');
+
     // Remise en cours des idées non terminées ou rejetées
     $status     = "O";
     $developper = "";
 
-    $req4 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $identifiant . '" AND status != "D" AND status != "R"');
-    $req4->execute(array(
+    $req5 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $identifiant . '" AND status != "D" AND status != "R"');
+    $req5->execute(array(
       'status'     => $status,
       'developper' => $developper
     ));
-    $req4->closeCursor();
+    $req5->closeCursor();
 
     // Supression utilisateur
-    $req5 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
+    $req6 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
   }
 
   // METIER : Refus désinscription

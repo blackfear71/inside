@@ -465,3 +465,63 @@
   background-position: center;
   cursor: pointer;
 }
+
+.smiley_votes_left_1, .smiley_votes_left_2, .smiley_votes_left_3, .smiley_votes_left_4, .smiley_votes_left_5, .smiley_votes_left_6
+{
+  float: left;
+  width: 30px;
+  margin-right: -8px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #5c5c5c;
+  border: solid 1px white;
+}
+
+.smiley_votes_right_1, .smiley_votes_right_2, .smiley_votes_right_3, .smiley_votes_right_4, .smiley_votes_right_5, .smiley_votes_right_6
+{
+  float: right;
+  width: 30px;
+  margin-left: -8px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #5c5c5c;
+  border: solid 1px white;
+}
+
+.nb_votes_left_1, .nb_votes_left_2, .nb_votes_left_3, .nb_votes_left_4, .nb_votes_left_5, .nb_votes_left_6
+{
+  background-color: rgb(255, 25, 55);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+  float: left;
+  margin-top: -30px;
+  margin-left: -22px;
+  display: none;
+}
+
+.nb_votes_right_1, .nb_votes_right_2, .nb_votes_right_3, .nb_votes_right_4, .nb_votes_right_5, .nb_votes_right_6
+{
+  background-color: rgb(255, 25, 55);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+  float: right;
+  margin-top: -30px;
+  margin-right: -22px;
+  display: none;
+}
+
+.smiley_votes_left_1:hover ~ .nb_votes_left_1, .smiley_votes_left_2:hover ~ .nb_votes_left_2, .smiley_votes_left_3:hover ~ .nb_votes_left_3,
+.smiley_votes_left_4:hover ~ .nb_votes_left_4, .smiley_votes_left_5:hover ~ .nb_votes_left_5, .smiley_votes_left_6:hover ~ .nb_votes_left_6,
+.smiley_votes_right_1:hover ~ .nb_votes__right_1, .smiley_votes_right_2:hover ~ .nb_votes_right_2, .smiley_votes_right_3:hover ~ .nb_votes_right_3,
+.smiley_votes_right_4:hover ~ .nb_votes_right_4, .smiley_votes_right_5:hover ~ .nb_votes_right_5, .smiley_votes_right_6:hover ~ .nb_votes_right_6
+{
+  display: block;
+}

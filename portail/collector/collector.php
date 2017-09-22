@@ -37,7 +37,8 @@
         else
         {
           $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page']);
-          $listeVotes      = getVotesUser($listeCollectors, $_SESSION['identifiant']);
+          $listeVotesUsers = getVotesUser($listeCollectors, $_SESSION['identifiant']);
+          $listeVotes      = getVotes($listeCollectors);
         }
       }
       break;
@@ -88,7 +89,7 @@
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
         }
 
-        foreach ($listeVotes as $vote)
+        foreach ($listeVotesUsers as $vote)
         {
           $vote->setId_collector(htmlspecialchars($vote->getId_collector()));
           $vote->setIdentifiant(htmlspecialchars($vote->getIdentifiant()));

@@ -13,7 +13,7 @@
         echo '<table class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
           echo '<tr>';
             // Citation (gauche)
-            echo '<td rowspan="100%" class="collector" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">';
+            echo '<td class="collector" style="border-top-left-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
@@ -31,7 +31,7 @@
                 echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_right">';
                   $founded = false;
 
-                  foreach ($listeVotes as $vote)
+                  foreach ($listeVotesUsers as $vote)
                   {
                     if ($vote->getId_collector() == $collector->getId())
                     {
@@ -50,7 +50,7 @@
                   for ($j = 1; $j <= 6; $j++)
                   {
                     $founded = false;
-                    foreach ($listeVotes as $vote)
+                    foreach ($listeVotesUsers as $vote)
                     {
                       if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
                       {
@@ -75,6 +75,24 @@
           echo '</tr>';
 
           echo '<tr>';
+            // Votes tous utilisateurs
+            echo '<td class="collector" style="border-bottom-left-radius: 5px;">';
+              foreach ($listeVotes as $votes)
+              {
+                if ($votes['id'] == $collector->getId())
+                {
+                  for ($k = 1; $k <= 6; $k++)
+                  {
+                    if ($votes['smileys'][$k] != 0)
+                    {
+                      echo '<img src="../../includes/icons/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_left_' . $k . '" />';
+                      echo '<span class="nb_votes_left_' . $k . '">' . $votes['smileys'][$k] . '</span>';
+                    }
+                  }
+                }
+              }
+            echo '</td>';
+
             echo '<td class="speaker_actions" style="border-right: solid 1px white;">';
               // Modification
               echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_modify_collector"></a>';
@@ -83,7 +101,7 @@
             echo '<td class="speaker_actions" style="border-bottom-right-radius: 5px;">';
               // Suppression
               echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_delete_collector" />';
+                echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector" />';
               echo '</form>';
             echo '</td>';
           echo '</tr>';
@@ -141,12 +159,12 @@
             echo '<tr>';
               echo '<td class="speaker_actions" style="border-right: solid 1px white;">';
                 // Annulation modification
-                echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_cancel_collector"></a>';
+                echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Annuler" class="icone_cancel_collector"></a>';
               echo '</td>';
 
               echo '<td class="speaker_actions" style="border-bottom-right-radius: 5px;">';
                 // Validation modification
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_validate_collector" />';
+                echo '<input type="submit" name="delete_collector" value="" title="Valider" class="icon_validate_collector" />';
               echo '</td>';
             echo '</tr>';
           echo '</form>';
@@ -171,7 +189,7 @@
                 echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_left">';
                   $founded = false;
 
-                  foreach ($listeVotes as $vote)
+                  foreach ($listeVotesUsers as $vote)
                   {
                     if ($vote->getId_collector() == $collector->getId())
                     {
@@ -190,7 +208,7 @@
                   for ($j = 1; $j <= 6; $j++)
                   {
                     $founded = false;
-                    foreach ($listeVotes as $vote)
+                    foreach ($listeVotesUsers as $vote)
                     {
                       if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
                       {
@@ -214,7 +232,7 @@
             echo '</td>';
 
             // Citation (droite)
-            echo '<td rowspan="100%" class="collector" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">';
+            echo '<td class="collector" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
@@ -225,13 +243,31 @@
             echo '<td class="speaker_actions" style="border-right: solid 1px white; border-bottom-left-radius: 5px;">';
               // Suppression
               echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_delete_collector" />';
+                echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector" />';
               echo '</form>';
             echo '</td>';
 
             echo '<td class="speaker_actions">';
               // Modification
               echo '<a onclick="afficherMasquerRow(\'modifier_collector_3[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_4[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_modify_collector"></a>';
+            echo '</td>';
+
+            // Votes tous utilisateurs
+            echo '<td class="collector" style="border-bottom-right-radius: 5px;">';
+              foreach ($listeVotes as $votes)
+              {
+                if ($votes['id'] == $collector->getId())
+                {
+                  for ($k = 1; $k <= 6; $k++)
+                  {
+                    if ($votes['smileys'][$k] != 0)
+                    {
+                      echo '<img src="../../includes/icons/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_right_' . $k . '" />';
+                      echo '<span class="nb_votes_right_' . $k . '">' . $votes['smileys'][$k] . '</span>';
+                    }
+                  }
+                }
+              }
             echo '</td>';
           echo '</tr>';
         echo '</table>';
@@ -292,12 +328,12 @@
             echo '<tr>';
               echo '<td class="speaker_actions" style="border-right: solid 1px white; border-bottom-left-radius: 5px;">';
                 // Validation modification
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer" class="icon_validate_collector" />';
+                echo '<input type="submit" name="delete_collector" value="" title="Valider" class="icon_validate_collector" />';
               echo '</td>';
 
               echo '<td class="speaker_actions">';
                 // Annulation modification
-                echo '<a onclick="afficherMasquerRow(\'modifier_collector_3[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_4[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_cancel_collector"></a>';
+                echo '<a onclick="afficherMasquerRow(\'modifier_collector_3[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_4[' . $collector->getId() . ']\');" title="Annuler" class="icone_cancel_collector"></a>';
               echo '</td>';
             echo '</tr>';
           echo '</form>';
