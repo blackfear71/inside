@@ -232,7 +232,7 @@
             echo '</td>';
 
             // Citation (droite)
-            echo '<td class="collector" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">';
+            echo '<td class="collector" style="border-top-right-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';

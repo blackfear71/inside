@@ -53,11 +53,14 @@
 	margin-right: auto;
 	margin-top: 30px;
 	text-align: center;
+	line-height: 40px;
 }
 
 .select_month
 {
 	/* 20% */
+	display: inline-block;
+	vertical-align: middle;
 	height: 40px;
 	width: 20%;
 	border-radius: 5px;
@@ -69,6 +72,8 @@
 .select_year
 {
 	/* 20% + 2% */
+	display: inline-block;
+	vertical-align: middle;
 	margin-left: 1%;
 	margin-right: 1%;
 	height: 40px;
@@ -83,6 +88,7 @@
 {
 	/* 20% + 1% */
 	display: inline-block;
+	vertical-align: middle;
 	margin-right: 1%;
 	height: 40px;
 	width: 20%;
@@ -119,6 +125,8 @@
 
 .send_calendar
 {
+	display: inline-block;
+	vertical-align: middle;
 	width: 40px;
 	height: 40px;
 	border: 0;

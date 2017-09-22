@@ -524,4 +524,6 @@
 .smiley_votes_right_4:hover ~ .nb_votes_right_4, .smiley_votes_right_5:hover ~ .nb_votes_right_5, .smiley_votes_right_6:hover ~ .nb_votes_right_6
 {
   display: block;
+  position: relative;
+  z-index: 2;
 }
