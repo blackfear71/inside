@@ -309,8 +309,6 @@
 
     // Mise à jour des préférences stockées en SESSION
     $_SESSION['view_movie_house']  = $view_movie_house;
-    $_SESSION['categories_home']   = $categories_home;
-    $_SESSION['today_movie_house'] = $today_movie_house;
     $_SESSION['view_the_box']      = $view_the_box;
 
 		$_SESSION['preferences_updated'] = true;

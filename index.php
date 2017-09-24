@@ -28,7 +28,7 @@
 	AND  (!isset($_SESSION['already_asked']) OR $_SESSION['already_asked'] != true))
 	OR   (isset($_SESSION['asked'])          AND $_SESSION['asked'] == true))
 		$_SESSION['identifiant_saisi_mdp'] = "";
-
+		
   // Modèle de données : "module métier"
   include_once('connexion/modele/metier_index.php');
 

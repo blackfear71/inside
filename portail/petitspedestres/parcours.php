@@ -33,7 +33,10 @@
     case 'consulter':
     case 'gomodifier':
       // Récupération des données par le modèle
-      $parcours = getParcours($_GET['id']);
+      if (!isset($_GET['id']) OR empty($_GET['id']))
+        header('location: parcours.php?action=liste');
+      else
+        $parcours = getParcours($_GET['id']);
       break;
 
     case 'domodifier':
@@ -42,6 +45,8 @@
       break;
 
     default:
+      // Contrôle action renseignée URL
+      header('location: parcours.php?action=liste');
       break;
   }
 

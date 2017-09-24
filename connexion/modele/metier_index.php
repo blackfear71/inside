@@ -36,7 +36,6 @@
   				{
   					// Sauvegarde des données utilisateur en SESSION
   					$_SESSION['connected']       = true;
-  					$_SESSION['id']              = $donnees['id'];
   					$_SESSION['identifiant']     = $donnees['identifiant'];
   					$_SESSION['pseudo']          = $donnees['pseudo'];
   					$_SESSION['wrong_connexion'] = false;
@@ -48,8 +47,6 @@
   						$donnees2 = $reponse2->fetch();
 
   						$_SESSION['view_movie_house']  = $donnees2['view_movie_house'];
-  						$_SESSION['categories_home']   = $donnees2['categories_home'];
-  						$_SESSION['today_movie_house'] = $donnees2['today_movie_house'];
   						$_SESSION['view_the_box']      = $donnees2['view_the_box'];
 
   						$reponse2->closeCursor();
