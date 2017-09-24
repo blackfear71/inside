@@ -70,6 +70,9 @@
   if (!isset($_SESSION['avatar_deleted']))
     $_SESSION['avatar_deleted'] = NULL;
 
+  if (!isset($_SESSION['mail_updated']))
+    $_SESSION['mail_updated'] = NULL;
+
   if (!isset($_SESSION['wrong_password']))
     $_SESSION['wrong_password'] = NULL;
 
@@ -280,6 +283,7 @@
   OR  isset($_SESSION['avatar_deleted'])
   OR  isset($_SESSION['wrong_password'])
   OR  isset($_SESSION['preferences_updated'])
+  OR  isset($_SESSION['mail_updated'])
   OR  isset($_SESSION['ask_desinscription']))
   {
     // Changement pseudo
@@ -329,6 +333,15 @@
     else
     {
       $_SESSION['avatar_deleted'] = NULL;
+    }
+
+    // Email mis à jour
+    if (isset($_SESSION['mail_updated']) AND $_SESSION['mail_updated'] == true)
+    {
+      echo '<div class="message_alerte">';
+        echo 'L\'adresse mail a été mise à jour.';
+      echo '</div>';
+      $_SESSION['mail_updated'] = NULL;
     }
 
     // Changement mot de passe

@@ -347,6 +347,44 @@
 					</div>
 				</div>
 
+        <!-- Bloc mailing -->
+        <div class="zone_profil_generique">
+          <!-- Titre -->
+          <div class="zone_profil_utilisateur_titre">
+            <img src="icons/mailing.png" alt="mailing" class="icone_profil" />Mailing
+          </div>
+
+          <!-- Tableau modification mailing -->
+          <table class="zone_profil_utilisateur_table">
+            <tr>
+              <td class="zone_profil_utilisateur_mdp">
+                <!-- Affichage adresse mail courante -->
+                <div class="message_profil">
+                  <?php
+                    if (!empty($profil->getEmail()))
+                      echo 'L\'adresse mail actuellement utilisée est : <strong>' . $profil->getEmail() . '</strong>';
+                    else
+                      echo 'Pas d\'adresse mail actuellement renseignée.';
+                  ?>
+                </div>
+
+                <?php
+                  // Saisie adresse mail
+                  echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdateMail" class="zone_profil_utilisateur_pseudo_form">';
+                    echo '<input type="email" name="mail" placeholder="Adresse mail" maxlength="255" class="monoligne_profil" required />';
+                    echo '<input type="submit" name="saisie_mail" value="Mettre à jour" class="saisie_valider_profil" />';
+                  echo '</form>';
+
+                  // Suppression adresse mail
+                  echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdateMail" class="zone_profil_utilisateur_pseudo_form">';
+                    echo '<input type="submit" name="suppression_mail" value="Supprimer" class="saisie_valider_profil" />';
+                  echo '</form>';
+                ?>
+              </td>
+            </tr>
+          </table>
+        </div>
+
 				<!-- Bloc utilisateur -->
 				<div class="zone_profil_generique">
 					<!-- Titre -->

@@ -38,6 +38,10 @@
       modifyPreferences($_GET['user'], $_POST);
       break;
 
+    case "doUpdateMail":
+      updateMail($_GET['user'], $_POST);
+      break;
+
     case 'doChangeMdp':
       changeMdp($_GET['user'], $_POST);
       break;
@@ -60,6 +64,7 @@
       $profil->setReset(htmlspecialchars($profil->getReset()));
       $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
       $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
+      $profil->setEmail(htmlspecialchars($profil->getEmail()));
 
       $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
       $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));
@@ -76,6 +81,7 @@
     case 'doChangeAvatar':
     case 'doSupprimerAvatar':
     case 'doModifierPreferences':
+    case "doUpdateMail":
     case 'doChangeMdp':
     case 'askDesinscription':
     default:
@@ -89,6 +95,7 @@
     case 'doChangeAvatar':
     case 'doSupprimerAvatar':
     case 'doModifierPreferences':
+    case "doUpdateMail":
     case 'doChangeMdp':
     case 'askDesinscription':
       header('location: profil.php?user=' . $_GET['user'] . '&action=goConsulter');

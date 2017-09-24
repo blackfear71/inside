@@ -316,6 +316,27 @@
 		$_SESSION['preferences_updated'] = true;
   }
 
+  // METIER : Modification adresse mail
+  // RETOUR : Aucun
+  function updateMail($user, $post)
+  {
+    if (isset($post['suppression_mail']))
+      $mail = "";
+    else
+      $mail = $post['mail'];
+
+    global $bdd;
+
+    // Mise à jour de l'adresse mail utilisateur
+		$reponse = $bdd->prepare('UPDATE users SET email  = :email WHERE identifiant = "' . $user . '"');
+		$reponse->execute(array(
+			'email'  => $mail
+		));
+		$reponse->closeCursor();
+
+    $_SESSION['mail_updated'] = true;
+  }
+
   // METIER : Mise à jour du mot de passe
   // RETOUR : Aucun
   function changeMdp($user, $post)

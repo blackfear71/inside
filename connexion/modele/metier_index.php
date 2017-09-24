@@ -99,6 +99,7 @@
     $confirm_password = htmlspecialchars(hash('sha1', $post['confirm_password'] . $salt));
     $reset            = "I";
     $avatar           = "";
+    $email            = "";
 
     // Initialisations préférences
     $view_movie_house  = "H";
@@ -129,14 +130,15 @@
       if ($password == $confirm_password)
       {
         // On créé l'utilisateur
-        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar)');
+        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar, email) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar, :email)');
 				$req->execute(array(
 					'identifiant'  => $trigramme,
           'salt'         => $salt,
           'mot_de_passe' => $password,
           'reset'        => $reset,
 					'pseudo'       => $pseudo,
-					'avatar'       => $avatar
+					'avatar'       => $avatar,
+          'email'        => $email
 					));
 				$req->closeCursor();
 
