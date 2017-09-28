@@ -99,6 +99,67 @@
 	font-family: robotolight, Verdana, sans-serif;
 }
 
+/*** Infos utilisateurs ***/
+.zone_infos
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.zone_infos_user
+{
+	background-color: #e3e3e3;
+	display: inline-block;
+	width: 280px;
+	margin: 0.5%;
+	padding: 10px;
+	border-radius: 5px;
+	border: solid 1px #d3d3d3;
+	vertical-align: top;
+}
+
+.circle_avatar
+{
+  float: left;
+	width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: solid 3px white;
+  filter: drop-shadow(0px 0px 1px #5c5c5c);
+  background-color: #b3b3b3;
+}
+
+.infos_avatar
+{
+	width: 100px;
+  border-radius: 50%;
+}
+
+.infos_pseudo
+{
+	margin-left: 120px;
+	font-family: robotomedium, Verdana, sans-serif;
+	text-align: left;
+	word-wrap: break-word;
+}
+
+.infos_identifiant
+{
+	margin-left: 120px;
+	font-family: robotolight, Verdana, sans-serif;
+	text-align: left;
+}
+
+.infos_mail
+{
+	margin-left: 120px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+	text-align: left;
+	word-wrap: break-word;
+}
+
 /*** Gestion utilisateurs ***/
 .form_manage_user
 {

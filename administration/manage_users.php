@@ -66,7 +66,8 @@
 				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
 				$user->setReset(htmlspecialchars($user->getReset()));
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
-				$user->setAvatar(htmlspecialchars($user->getAvatar()));
+        $user->setAvatar(htmlspecialchars($user->getAvatar()));
+				$user->setEmail(htmlspecialchars($user->getEmail()));
 			}
 
 			foreach ($tabCategoriesIns as $statsCatIns)

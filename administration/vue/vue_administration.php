@@ -35,6 +35,16 @@
 
 			<article class="article_portail">
 				<div class="new_menu_admin">
+          <a href="infos_users.php?action=goConsulter" class="new_menu_link_admin">
+            <div class="menu_admin_box">
+              <div class="mask_admin"></div>
+              <div class="mask_admin_triangle"></div>
+              <div class="title_admin">Infos
+                <div class="saut_ligne">UTILISATEURS</div>
+              </div>
+            </div>
+          </a>
+
 					<a href="manage_users.php?action=goConsulter" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
