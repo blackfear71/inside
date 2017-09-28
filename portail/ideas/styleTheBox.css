@@ -3,66 +3,56 @@
 /**************/
 
 /*** Ajout idée ***/
-.zone_ajout_idee
+.form_saisie_idea
 {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 30px;
+	text-align: center;
 }
 
 .saisie_titre_idee
 {
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 130%;
-	background-color: #e3e3e3;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	width: 78%;
-	margin-left: 10%;
+	width: 78.5%;
+	margin-right: 1%;
+	border: solid 1px #a3a3a3;
 	padding-left: 1%;
 	padding-right: 1%;
-	line-height: 48px;
-	min-height: 48px;
-	text-align: left;
-	border: 0;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
 }
 
 .saisie_contenu_idee
 {
-	resize: vertical;
-	width: 78%;
-	min-height: 50px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;
-	background-color: #f3f3f3;
-	padding: 1%;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	margin-top: 1%;
+  width: 97.5%;
+  padding: 1%;
+  font-family: robotolight, Verdana, sans-serif;
+  resize: vertical;
+  border-radius: 5px;
+  border: solid 1px #a3a3a3;
 }
 
 .submit_idea
 {
-	float: right;
-	margin-right: 10%;
-	border: 0;
-	background-color: #e3e3e3;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 20px;
-	padding-right: 20px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 110%;
+	width: 18%;
+	line-height: 43px;
+	border: solid 1px #e3e3e3;
 	border-radius: 5px;
-	margin-top: 10px;
-	margin-bottom: 30px;
+	background-color: #e3e3e3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
 	cursor: pointer;
 }
 
 .submit_idea:hover
 {
 	background-color: rgb(255, 25, 55);
+	border: solid 1px rgb(255, 25, 55);
 	color: white;
 }
 

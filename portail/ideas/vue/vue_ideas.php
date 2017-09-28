@@ -64,16 +64,15 @@
 				</div>
 
         <!-- Zone de saisie idée -->
-				<div class="zone_ajout_idee">
-					<?php
-						echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer">';
-							echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="100" class="saisie_titre_idee" required />';
-							echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_idee"></textarea>';
+				<?php
+					echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer" class="form_saisie_idea">';
+						echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="100" class="saisie_titre_idee" required />';
 
-							echo '<input type="submit" name="new_idea" value="Soumettre" class="submit_idea" />';
-						echo '</form>';
-					?>
-				</div>
+						echo '<input type="submit" name="new_idea" value="Soumettre" class="submit_idea" />';
+
+            echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_idee"></textarea>';
+					echo '</form>';
+				?>
 
         <!-- Séparation -->
 				<div class="trait_ideas"></div>

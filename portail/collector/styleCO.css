@@ -48,7 +48,7 @@
 	background-color: #e3e3e3;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	cursor: pointer
+	cursor: pointer;
 }
 
 .saisie_bouton:hover
@@ -329,6 +329,7 @@
   position: relative;
   z-index: 1;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .link_current_vote_left
@@ -342,6 +343,7 @@
   position: relative;
   z-index: 1;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .current_vote

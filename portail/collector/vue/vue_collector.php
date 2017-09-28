@@ -66,7 +66,7 @@
             echo '<input type="text" name="date_collector" value="' . $_SESSION['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker" class="saisie_date_collector" required />';
 
             // Bouton
-            echo '<input type="submit" name="insert_collector" value="Ajouter" title="Ajouter" class="saisie_bouton" />';
+            echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
 
             // Saisie phrase
             echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['collector'] . '</textarea>';
