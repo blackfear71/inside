@@ -29,5 +29,12 @@
     - COLLECTOR ROOM       : collection de phrases cultes
 		- #THEBOX              : boîte à idées
 
+  Notes aux développeurs :
+  ------------------------
+    Ne pas toucher aux fichiers suivants lors de vos développements :
+      - appel_bdd.php
+      - appel_mail.php
+      - export_bdd.php
+
 ---------------------------------------------------------------------------------------
 ***************************************************************************************

@@ -52,7 +52,8 @@ class PHPMailer
      * The MIME Content-type of the message.
      * @var string
      */
-    public $ContentType = 'text/plain';
+    //public $ContentType = 'text/plain';
+    public $ContentType = 'text/html';
 
     /**
      * The message encoding.
