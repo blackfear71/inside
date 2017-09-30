@@ -2,11 +2,11 @@
   switch ($modele)
   {
     case "film":
-    $message = '<html>';
-      $message .= '<head>';
-        // CSS
-        $message .= '<style type="text/css">';
-        $message .= '
+      $message = '<html>';
+        $message .= '<head>';
+          // CSS
+          $message .= '<style type="text/css">';
+          $message .= '
           .zone_mail
           {
           	margin-left: auto;
@@ -101,26 +101,6 @@
           {
           	width: 50px;
           }
-
-          .trait_mail_1
-          {
-          	float: left;
-          	height: 1px;
-          	width: 30%;
-          	margin-top: 25px;
-          	margin-left: 120px;
-          	background-color: rgb(255, 25, 55);
-          }
-
-          .trait_mail_2
-          {
-          	float: right;
-          	height: 1px;
-          	width: 30%;
-          	margin-top: 25px;
-          	margin-right: 120px;
-          	background-color: rgb(255, 25, 55);
-          }
           ';
           $message .= '</style>';
         $message .= '</head>';
@@ -169,9 +149,7 @@
             $message .= '</div>';
 
             $message .= '<div class="footer_mail">';
-              $message .= '<div class="trait_mail_1"></div>';
               $message .= '<img src="../../includes/icons/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
-              $message .= '<div class="trait_mail_2"></div>';
             $message .= '</div>';
           $message .= '</div>';
         $message .= '</body>';
