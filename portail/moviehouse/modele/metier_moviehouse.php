@@ -1315,7 +1315,10 @@
 
     // Envoi du mail avec gestion des erreurs
     if(!$mail->Send())
+    {
       echo 'Erreur : ' . $mail->ErrorInfo;
+      $_SESSION['mail_film_error'] = true;
+    }      
     else
       $_SESSION['mail_film_send'] = true;
 

@@ -123,6 +123,9 @@
   if (!isset($_SESSION['mail_film_send']))
     $_SESSION['mail_film_send'] = NULL;
 
+  if (!isset($_SESSION['mail_film_error']))
+    $_SESSION['mail_film_error'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -514,5 +517,13 @@
       echo 'L\'email a bien été envoyé.';
     echo '</div>';
     $_SESSION['mail_film_send'] = NULL;
+  }
+  // Alerte erreur mail film
+  elseif (isset($_SESSION['mail_film_error']) AND $_SESSION['mail_film_error'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'Une erreur est survenue lors de l\'envoi. Contactez l\'administrateur.';
+    echo '</div>';
+    $_SESSION['mail_film_error'] = NULL;
   }
 ?>
