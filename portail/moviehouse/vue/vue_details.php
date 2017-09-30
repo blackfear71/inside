@@ -167,6 +167,13 @@
 
   									echo '</form>';
   								}
+
+                  if ($detailsFilm->getNb_users() > 0)
+                  {
+                    echo '<a href="mailing.php?id_film=' . $detailsFilm->getId() . '&action=goConsulter">';
+                      echo '<div class="send_mail_details">Envoyer mail</div>';
+                    echo '</a>';
+                  }
   							echo '</div>';
 
   							// Dates

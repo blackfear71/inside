@@ -764,6 +764,14 @@
       $reponse2->closeCursor();
     }
 
+    // On récupère le nombre de participants
+    $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $id_film);
+    $donnees3 = $reponse3->fetch();
+
+    $film->setNb_users($donnees3['nb_users']);
+
+    $reponse3->closeCursor();
+
     return $film;
   }
 

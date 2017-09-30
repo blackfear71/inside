@@ -57,7 +57,10 @@
                   echo '<br /><br /><br /><br />';
                   echo 'Vous avez stipulé être intéréssé(e) par le film : <strong>' . $detailsFilm->getFilm() . '</strong>';
                   echo '<br /><br />';
-                  echo 'Vous recevez ce mail contenant le lien doodle à renseigner pour donner votre disponibilité : <a href="' . $detailsFilm->getDoodle() . '" target="_blank">Doodle</a>';
+                  if (!empty($detailsFilm->getDoodle()))
+                    echo 'Vous recevez ce mail contenant le lien doodle à renseigner pour donner votre disponibilité : <a href="' . $detailsFilm->getDoodle() . '" target="_blank">Doodle</a>';
+                  else
+                    echo 'Aucun Doodle n\'a encore été créé pour ce film. Si vous êtes intéressé(e), veuillez le mettre en place.';
                   echo '<br /><br />';
                   echo 'Les autres personnes intéressées sont :<br />';
                   foreach ($listeEtoiles as $participant)

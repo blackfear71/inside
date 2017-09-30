@@ -146,7 +146,7 @@
                   if (!empty($details->getDoodle()))
                     $message .= 'Vous recevez ce mail contenant le lien doodle à renseigner pour donner votre disponibilité : <a href="' . $details->getDoodle() . '" target="_blank">Doodle</a>';
                   else
-                    $message .= 'Aucun Doodle n\'a encore été créé pour ce film. Si vous êtes intéressé, veuillez le mettre en place.';
+                    $message .= 'Aucun Doodle n\'a encore été créé pour ce film. Si vous êtes intéressé(e), veuillez le mettre en place.';
                   $message .= '<br /><br />';
                   $message .= 'Les personnes intéressées sont :<br />';
                   foreach ($participants as $participant)
