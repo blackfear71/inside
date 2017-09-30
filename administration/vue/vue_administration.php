@@ -128,13 +128,6 @@
 						</div>
 					</form>
 				</div>
-
-
-
-
-        <form method="post" action="testmail.php">
-          <input type="submit" value="sendmail" />
-        </form>
 			</article>
 		</section>
 

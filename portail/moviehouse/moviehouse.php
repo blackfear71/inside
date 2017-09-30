@@ -142,6 +142,7 @@
             $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
             $film->setStars_user(htmlspecialchars($film->getStars_user()));
             $film->setParticipation(htmlspecialchars($film->getParticipation()));
+            $film->setNb_users(htmlspecialchars($film->getNb_users()));
           }
           break;
 

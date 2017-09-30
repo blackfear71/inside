@@ -101,6 +101,7 @@
           $etoiles->setIdentifiant(htmlspecialchars($etoiles->getIdentifiant()));
           $etoiles->setPseudo(htmlspecialchars($etoiles->getPseudo()));
           $etoiles->setAvatar(htmlspecialchars($etoiles->getAvatar()));
+          $etoiles->setEmail(htmlspecialchars($etoiles->getEmail()));
           $etoiles->setStars(htmlspecialchars($etoiles->getStars()));
           $etoiles->setParticipation(htmlspecialchars($etoiles->getParticipation()));
         }

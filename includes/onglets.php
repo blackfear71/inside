@@ -33,7 +33,8 @@
 	// Movie House
 	if ($path == '/inside/portail/moviehouse/moviehouse.php'
 	OR  $path == '/inside/portail/moviehouse/saisie.php'
-	OR  $path == '/inside/portail/moviehouse/details.php')
+	OR  $path == '/inside/portail/moviehouse/details.php'
+	OR  $path == '/inside/portail/moviehouse/mailing.php')
 	{
 		$onglet_1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 	}

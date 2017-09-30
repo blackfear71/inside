@@ -349,6 +349,7 @@
     private $identifiant;
     private $pseudo;
     private $avatar;
+    private $email;
     private $stars;
     private $participation;
 
@@ -360,6 +361,7 @@
       $this->identifiant   = '';
       $this->pseudo        = '';
       $this->avatar        = '';
+      $this->email         = '';
       $this->stars         = 0;
       $this->participation = '';
     }
@@ -446,6 +448,17 @@
     public function getAvatar()
     {
       return $this->avatar;
+    }
+
+    // Email
+    public function setEmail($email)
+    {
+      $this->email = $email;
+    }
+
+    public function getEmail()
+    {
+      return $this->email;
     }
 
     // Etoiles utilisateur

@@ -95,6 +95,17 @@
 	filter: drop-shadow(0px 0px 1px #5c5c5c);
 }
 
+.mailing
+{
+	width: 25px;
+	height: 25px;
+	border: 0;
+	cursor: pointer;
+	margin-left: 8px;
+	vertical-align: middle;
+	filter: drop-shadow(0px 0px 1px #5c5c5c);
+}
+
 .form_saisie_rapide
 {
 	width: 80%;
@@ -1187,6 +1198,169 @@
 }
 
 .saisie_valider_film:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
+}
+
+/*** Mailing ***/
+.zone_mail
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	min-height: 500px;
+	text-align: center;
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: #e3e3e3;
+}
+
+.entete_mail
+{
+	line-height: 110px;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 50px;
+	color: white;
+	background-color: rgb(255, 25, 55);
+	height: 100px;
+}
+
+.logo_inside_mail
+{
+	height: 100%;
+	margin-top: 3px;
+}
+
+.trait_mail_1
+{
+	height: 2px;
+	width: 120px;
+	float: left;
+	margin-left: 200px;
+	margin-top: 53px;
+	border-radius: 5px;
+	background: -moz-linear-gradient(left, transparent, white, transparent);
+}
+
+.trait_mail_2
+{
+	height: 2px;
+	width: 120px;
+	float: right;
+	margin-right: 200px;
+	margin-top: 53px;
+	border-radius: 5px;
+	background: -moz-linear-gradient(left, transparent, white, transparent);
+}
+
+.mask_mail
+{
+  height: 15px;
+  width: 100%;
+}
+
+.triangle_mail
+{
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: linear-gradient(to right bottom, rgb(255, 25, 55) 50%, transparent 50%);
+}
+
+.corps_mail
+{
+	width: 100%;
+	margin-top: 20px;
+}
+
+.corps_mail_left
+{
+	float: left;
+	width: 60%;
+	height: 100%;
+}
+
+.text_mail
+{
+	text-align: justify;
+	padding: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+}
+
+.participants_mail
+{
+	line-height: 25px;
+	margin: 0;
+	margin-left: 30px;
+}
+
+.corps_mail_right
+{
+	float: right;
+	width: 38%;
+	height: 100%;
+	padding-right: 2%;
+	padding-bottom: 1.5%;
+}
+
+.poster_mail
+{
+	max-width: 100%;
+	border-radius: 5px;
+}
+
+.footer_mail
+{
+	clear: both;
+}
+
+.logo_inside_mini_mail
+{
+	width: 50px;
+}
+
+.trait_mail_3
+{
+	float: left;
+	height: 1px;
+	width: 30%;
+	margin-top: 25px;
+	margin-left: 120px;
+	background-color: rgb(255, 25, 55);
+}
+
+.trait_mail_4
+{
+	float: right;
+	height: 1px;
+	width: 30%;
+	margin-top: 25px;
+	margin-right: 120px;
+	background-color: rgb(255, 25, 55);
+}
+
+.send_mail_film
+{
+	border: 0;
+	display: block;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #e3e3e3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 120%;
+	border: solid 1px #d3d3d3;
+}
+
+.send_mail_film:hover
 {
 	background-color: rgb(255, 25, 55);
 	color: white;

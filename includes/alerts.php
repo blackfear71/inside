@@ -119,6 +119,10 @@
   if (!isset($_SESSION['collector_modified']))
     $_SESSION['collector_modified'] = NULL;
 
+  // Initialisations emails
+  if (!isset($_SESSION['mail_film_send']))
+    $_SESSION['mail_film_send'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -502,5 +506,13 @@
       echo 'La phrase culte a été modifiée.';
     echo '</div>';
     $_SESSION['collector_modified'] = NULL;
+  }
+  // Alerte email film
+  elseif (isset($_SESSION['mail_film_send']) AND $_SESSION['mail_film_send'] == true)
+  {
+    echo '<div class="message_alerte_2">';
+      echo 'L\'email a bien été envoyé.';
+    echo '</div>';
+    $_SESSION['mail_film_send'] = NULL;
   }
 ?>

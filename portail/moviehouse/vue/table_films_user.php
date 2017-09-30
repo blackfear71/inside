@@ -132,6 +132,14 @@
   							echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';
   						echo '</form>';
   					}
+
+            // Mailing
+            if ($film->getNb_users() > 0)
+            {
+              echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter" class="">';
+                echo '<img src="icons/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
+              echo '</a>';
+            }
   				echo '</td>';
         echo '</tr>';
 

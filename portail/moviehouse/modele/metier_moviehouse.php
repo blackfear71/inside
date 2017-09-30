@@ -240,6 +240,14 @@
         $reponse3->closeCursor();
       }
 
+      // On récupère le nombre de participants
+      $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $myFilm->getId());
+      $donnees4 = $reponse4->fetch();
+
+      $myFilm->setNb_users($donnees4['nb_users']);
+
+      $reponse4->closeCursor();
+
       // On ajoute la ligne au tableau
       array_push($listFilms, $myFilm);
     }
@@ -772,17 +780,19 @@
     while($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
-      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
+      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar, email FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
       $donnees2 = $reponse2->fetch();
       {
         $pseudo = $donnees2['pseudo'];
         $avatar = $donnees2['avatar'];
+        $email  = $donnees2['email'];
       }
       $reponse2->closeCursor();
 
       $stars = Stars::withData($donnees);
       $stars->setPseudo($pseudo);
       $stars->setAvatar($avatar);
+      $stars->setEmail($email);
 
       // Ajout d'un objet Stars (instancié à partir des données de la base) au tableau de dépenses
       array_push($listStars, $stars);
@@ -1271,5 +1281,37 @@
     }
     else
       $_SESSION['wrong_date'] = true;
+  }
+
+  // METIER : Envoi mail sortie film
+  // RETOUR : Aucun
+  function sendMail($id_film, $details, $participants)
+  {
+    include_once('../../includes/appel_mail.php');
+
+    // Destinataires
+    foreach ($participants as $participant)
+    {
+      if (!empty($participant->getEmail()))
+        $mail->AddAddress($participant->getEmail(), $participant->getPseudo());
+    }
+
+    // Objet
+    $mail->Subject = 'Votre participation à "' . $details->getFilm() . '"';
+
+    // Contenu message (choix modèle, initialisation, retour modèle)
+    $modele  = 'film';
+    $message = '';
+    include('../../includes/modeles_mails.php');
+    $mail->MsgHTML($message);
+
+    // Envoi du mail avec gestion des erreurs
+    if(!$mail->Send())
+      echo 'Erreur : ' . $mail->ErrorInfo;
+    else
+      $_SESSION['mail_film_send'] = true;
+
+    //var_dump($mail);
+    //echo $message;
   }
 ?>
