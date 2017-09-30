@@ -437,7 +437,7 @@
   elseif (isset($_SESSION['calendar_added']) AND $_SESSION['calendar_added'] == true)
   {
     echo '<div class="message_alerte_2">';
-      echo 'Le calendrier a bien été ajouté';
+      echo 'Le calendrier a bien été ajouté.';
     echo '</div>';
     $_SESSION['calendar_added'] = NULL;
   }
