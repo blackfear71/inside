@@ -61,7 +61,7 @@
                 <?php
   								echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangePseudo" class="zone_profil_utilisateur_pseudo_form">';
   									echo '<input type="text" name="new_pseudo" placeholder="Nouveau pseudo" maxlength="255" class="monoligne_profil" required />';
-  									echo '<input type="submit" name="saisie_pseudo" value="Valider" class="saisie_valider_profil" />';
+  									echo '<input type="submit" name="saisie_pseudo" value="Valider" class="bouton_profil" />';
   								echo '</form>';
                 ?>
 							</td>
@@ -79,7 +79,7 @@
   											echo '<img id="output" class="avatar_profil" />';
   										echo '</div>';
 
-  										echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="saisie_valider_profil" />';
+  										echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="bouton_profil" />';
   									echo '</form>';
                   ?>
 								</div>
@@ -96,7 +96,7 @@
                     echo '</div>';
 
                     echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data" runat="server">';
-    									echo '<input type="submit" name="delete_avatar" value="Supprimer l\'avatar" class="saisie_valider_profil" />';
+    									echo '<input type="submit" name="delete_avatar" value="Supprimer l\'avatar" class="bouton_profil" />';
     								echo '</form>';
                   }
                   else
@@ -204,7 +204,7 @@
 					<!-- Tableau modification préférences -->
 					<div class="zone_profil_preferences_table">
             <?php
-              echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierPreferences" class="form_preference">';
+              echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierPreferences">';
             ?>
 							<!-- Préférences Movie House -->
 							<div class="zone_profil_contribution">
@@ -253,7 +253,7 @@
 									Catégories à afficher sur la page d'accueil
 								</div>
 
-								<div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+								<div class="contenu_preference">
 									<?php
                     $categories_home = $preferences->getCategories_home();
 										$films_waited    = $categories_home[0];
@@ -300,7 +300,7 @@
 									Choix de la vue par défaut
 								</div>
 
-								<div class="contenu_preference">
+								<div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
 									<?php
                     $checked_p = false;
                     $checked_m = false;
@@ -342,7 +342,7 @@
 								</div>
 							</div>
 
-							<input type="submit" name="saisie_preferences" value="Mettre à jour" class="saisie_valider_profil" />
+							<input type="submit" name="saisie_preferences" value="Mettre à jour" class="bouton_profil" />
 						</form>
 					</div>
 				</div>
@@ -372,12 +372,12 @@
                   // Saisie adresse mail
                   echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdateMail" class="zone_profil_utilisateur_pseudo_form">';
                     echo '<input type="email" name="mail" placeholder="Adresse mail" maxlength="255" class="monoligne_profil" required />';
-                    echo '<input type="submit" name="saisie_mail" value="Mettre à jour" class="saisie_valider_profil" />';
+                    echo '<input type="submit" name="saisie_mail" value="Mettre à jour" class="bouton_profil" />';
                   echo '</form>';
 
                   // Suppression adresse mail
                   echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdateMail" class="zone_profil_utilisateur_pseudo_form">';
-                    echo '<input type="submit" name="suppression_mail" value="Supprimer" class="saisie_valider_profil" />';
+                    echo '<input type="submit" name="suppression_mail" value="Supprimer" class="bouton_profil" />';
                   echo '</form>';
                 ?>
               </td>
@@ -402,7 +402,7 @@
   									echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_profil" required />';
   									echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_profil" required />';
   									echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_profil" required />';
-  									echo '<input type="submit" name="saisie_mdp" value="Valider" class="saisie_valider_profil" />';
+  									echo '<input type="submit" name="saisie_mdp" value="Valider" class="bouton_profil" />';
   								echo '</form>';
                 ?>
 							</td>
@@ -413,7 +413,7 @@
 
                 <?php
   								echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=askDesinscription" class="form_desinscription">';
-  									echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="saisie_valider_profil" />';
+  									echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="bouton_profil" />';
   								echo '</form>';
 
 									if ($profil->getReset() == "D")

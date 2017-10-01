@@ -45,7 +45,50 @@
 }
 
 /*** Tableaux ***/
-.ligne_tableau_movie_house:hover
+.table_movie_house
+{
+	border-collapse: collapse;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table_movie_house td
+{
+	border-right: 1px solid #e3e3e3;
+	border-left: 1px solid #e3e3e3;
+}
+
+.init_table_dates
+{
+	height: 40px;
+	width: 120px;
+	text-align: center;
+	background-color: #ffad01;
+	border-top: 1px solid #e3e3e3;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-weight: bold;
+}
+
+.init_table_users
+{
+	height: 40px;
+	text-align: center;
+	background-color: #f3f3f3;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-weight: bold;
+	padding: 5px;
+	vertical-align: top;
+}
+
+.ligne_tableau_movie_house_2
+{
+	background-color: #f3f3f3;
+}
+
+.ligne_tableau_movie_house:hover, .ligne_tableau_movie_house_2:hover
 {
 	background-color: #fffde8;
 }
@@ -56,6 +99,14 @@
 	padding-right: 10px;
 	line-height: 30px;
 	font-family: robotomedium, Verdana, sans-serif;
+}
+
+.table_dates
+{
+	width: 130px;
+	text-align: center;
+	line-height: 30px;
+	font-family: robotoregular, Verdana, sans-serif;
 }
 
 .logo_tableau_films

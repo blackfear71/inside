@@ -79,8 +79,12 @@
 		// Séparation utilisateurs
 		if (!empty($tabCategoriesDes))
 		{
-			echo '<tr class="ligne_tableau_movie_house">';
-				echo '<td class="table_date_jour" colspan="100%">Anciens utilisateurs</td>';
+			echo '<tr>';
+				echo '<td class="table_date_jour" colspan="100%">';
+					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
+					echo 'Anciens utilisateurs';
+					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+				echo '</td>';
 			echo '</tr>';
 		}
 

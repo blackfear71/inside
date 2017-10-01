@@ -25,6 +25,17 @@
 	padding-right: 10px;
 }
 
+.init_table_saisie
+{
+	height: 40px;
+	width: 120px;
+	text-align: center;
+	background-color: #ffad01;
+	border-top: 1px solid #e3e3e3;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-weight: bold;
+}
+
 .titre_user_depense
 {
 	font-family: robotobold, Verdana, sans-serif;
@@ -225,32 +236,20 @@
   margin-right: auto;
 }
 
-/*.table_expense_center
-{
-	border-collapse: collapse;
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-}
-
-.table_expense_center tr
-{
-	border-bottom: solid 1px #b3b3b3;
-	border-top: solid 1px #b3b3b3;
-}*/
-
 .table_expense_center
 {
   border-collapse: collapse;
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
 }
 
 .table_expense_center td
 {
-	border: 1px solid #BDC3C7;
+	border-left: 1px solid #e3e3e3;
+	border-right: 1px solid #e3e3e3;
 }
 
 .init_table_expense_center
@@ -258,6 +257,7 @@
 	height: 40px;
 	text-align: center;
 	background-color: #e3e3e3;
+	background-color: #ffad01;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
 }
@@ -266,7 +266,7 @@
 {
 	height: 40px;
 	text-align: center;
-	background-color: #e3e3e3;
+	background-color: #f3f3f3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
 	padding: 5px;
@@ -297,9 +297,14 @@
 	font-size: 70%;
 }
 
-.ligne_tableau_expense_center:hover
+.ligne_tableau_expense_center:hover, .ligne_tableau_expense_center_2:hover
 {
 	background-color: #fffde8;
+}
+
+.ligne_tableau_expense_center_2
+{
+	background-color: #f3f3f3;
 }
 
 .table_price_expense_center

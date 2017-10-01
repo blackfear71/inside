@@ -31,12 +31,17 @@
 	    // Tableau
 			if (!empty($tableauExpenses))
 			{
+				$i = 0;
+
 		    foreach ($tableauExpenses as $ligneResume)
 		    {
 		      /***************************************************/
 		      /* Ligne visualisation normale (sans modification) */
 		      /***************************************************/
-		      echo '<tr class="ligne_tableau_expense_center" id="modifier_depense_2[' . $ligneResume['id_expense'] . ']">';
+					if ($i % 2 == 0)
+						echo '<tr class="ligne_tableau_expense_center" id="modifier_depense_2[' . $ligneResume['id_expense'] . ']">';
+					else
+		      	echo '<tr class="ligne_tableau_expense_center_2" id="modifier_depense_2[' . $ligneResume['id_expense'] . ']">';
 						echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&id_delete=' . $ligneResume['id_expense'] . '&action=doSupprimer">';
 							// Prix sur la 1ère colonne
 			        echo '<td class="table_price_expense_center" id=' . $ligneResume['id_expense'] . '>';
@@ -92,7 +97,10 @@
 		      /**********************************/
 		      /* Ligne cachée pour modification */
 		      /**********************************/
-		      echo '<tr class="ligne_tableau_expense_center" id="modifier_depense[' . $ligneResume['id_expense'] . ']" style="display: none;">';
+					if ($i % 2 == 0)
+						echo '<tr class="ligne_tableau_expense_center" id="modifier_depense[' . $ligneResume['id_expense'] . ']" style="display: none;">';
+					else
+		      	echo '<tr class="ligne_tableau_expense_center_2" id="modifier_depense[' . $ligneResume['id_expense'] . ']" style="display: none;">';
 						echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&id_modify=' . $ligneResume['id_expense'] . '&action=doModifier" title="Valider la modification">';
 							// Prix sur la 1ère colonne
 							echo '<td class="table_price_expense_center">';
@@ -165,6 +173,8 @@
 							echo '</td>';
 						echo '</form>';
 					echo '</tr>';
+
+					$i++;
 	    	}
 			}
 			// S'il n'y a pas de dépenses à afficher
@@ -185,7 +195,7 @@
 
 	      foreach ($listeUsers as $user)
 	      {
-	        echo '<td class="init_table_users">';
+	        echo '<td class="init_table_expense_center_users">';
 	          echo '<div class="zone_avatar_films">';
 	            if (!empty($user->getAvatar()))
 	              echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';

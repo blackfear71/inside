@@ -13,8 +13,8 @@
   {
     echo '<table class="table_movie_house">';
       echo '<tr>';
-        echo '<td class="table_titres" style="border: 0;"></td>';
-        echo '<td class="init_table_dates" style="width: 120px;">Date de sortie</td>';
+        echo '<td class="table_titres" style="border: 0; border-bottom: 1px solid #e3e3e3;"></td>';
+        echo '<td class="init_table_dates">Date de sortie</td>';
         foreach ($listeUsers as $user)
         {
           echo '<td class="init_table_users">';
@@ -29,7 +29,7 @@
   				echo '</td>';
         }
       echo '</tr>';
-
+      
       $date_jour = date("Ymd");
       $date_jour_present = false;
       $i = 0;
@@ -42,7 +42,11 @@
           if ($ligneFilm['date_theater'] >= $date_jour AND $date_jour_present == false AND $preferences->getToday_movie_house() == "Y")
           {
             echo '<tr class="ligne_tableau_movie_house">';
-              echo '<td class="table_date_jour" colspan="100%">Aujourd\'hui, le ' . date("d/m/Y") . '</td>';
+              echo '<td class="table_date_jour" colspan="100%">';
+                echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
+                echo 'Aujourd\'hui, le ' . date("d/m/Y");
+                echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+              echo '</td>';
             echo '</tr>';
 
             $date_jour_present = true;
@@ -50,7 +54,10 @@
         }
 
         // Liste des films
-        echo '<tr class="ligne_tableau_movie_house">';
+        if ($i % 2 == 0)
+          echo '<tr class="ligne_tableau_movie_house">';
+        else
+          echo '<tr class="ligne_tableau_movie_house_2">';
           // Noms des films sur la 1ère colonne
           echo '<td class="table_titres">';
             echo '<a href="details.php?id_film=' . $ligneFilm['id_film'] . '&action=goConsulter" id="' . $ligneFilm['id_film'] . '" class="link_film">' . $ligneFilm['film'] . '</a>';
@@ -80,11 +87,11 @@
               echo '<td class="table_users">';
                 if ($stars['identifiant'] == $_SESSION['identifiant'])
                 {
-                  echo '<a onclick="afficherMasquer(\'preference[' . $i . ']\'); afficherMasquer(\'preference2[' . $i . ']\');" id="preference[' . $i . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                  echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
                     echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
                   echo '</a>';
 
-                  echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $i . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                  echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                     // Boutons vote
                     for($j = 0; $j <= 5; $j++)
                     {
@@ -96,7 +103,7 @@
                     }
 
                     // Bouton annulation
-                    echo '<a onclick="afficherMasquer(\'preference[' . $i . ']\'); afficherMasquer(\'preference2[' . $i . ']\');" id="preference[' . $i . ']" title="Annuler" class="link_vote">';
+                    echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Annuler" class="link_vote">';
                       echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                     echo '</a>';
                   echo '</form>';
@@ -115,8 +122,8 @@
       }
 
       echo '<tr>';
-        echo '<td class="table_titres" style="border: 0;"></td>';
-        echo '<td class="init_table_dates" style="width: 120px;">Date de sortie</td>';
+        echo '<td class="table_titres" style="border: 0; border-top: 1px solid #e3e3e3;"></td>';
+        echo '<td class="init_table_dates">Date de sortie</td>';
         foreach ($listeUsers as $user)
         {
           echo '<td class="init_table_users">';

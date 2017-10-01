@@ -21,7 +21,7 @@
             // Si on est sur la première ligne on affiche le titre sinon on affiche une case vide
             if ($ligne == 1)
             {
-              echo '<td class="init_table_dates">';
+              echo '<td class="init_table_saisie">';
                 echo 'Prix et acheteur';
               echo '</td>';
             }

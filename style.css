@@ -28,6 +28,7 @@
 /*   rgb(90, 200, 70)   -> vert moyen                                     */
 /*   #91d784            -> vert clair                                     */
 /*                                                                        */
+/*   #ffad01            -> jaune moyen                                    */
 /*   #fffd4c            -> jaune clair (++)                               */
 /*   #fffde8            -> jaune clair (+)                                */
 /**************************************************************************/
@@ -1444,47 +1445,6 @@ article
 }
 
 /*** Movie House ***/
-.table_movie_house
-{
-	border-collapse: collapse;
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.table_movie_house td
-{
-	border: 1px solid #BDC3C7;
-}
-
-.init_table_dates
-{
-	height: 40px;
-	text-align: center;
-	background-color: #e3e3e3;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-weight: bold;
-}
-
-.table_dates
-{
-	width: 130px;
-	text-align: center;
-	line-height: 30px;
-	font-family: robotoregular, Verdana, sans-serif;
-}
-
-.init_table_users
-{
-	height: 40px;
-	text-align: center;
-	background-color: #e3e3e3;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-weight: bold;
-	padding: 5px;
-	vertical-align: top;
-}
-
 .zone_avatar_films
 {
 	width: 40px;
@@ -1496,6 +1456,7 @@ article
 	margin-left: auto;
 	margin-right: auto;
 	background-color: white;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .avatar_films
@@ -1518,13 +1479,54 @@ article
 
 .table_date_jour
 {
-	padding-left: 10px;
-	padding-right: 10px;
 	line-height: 40px;
 	font-family: robotolight, Verdana, sans-serif;
 	background-color: #2eb2f4;
 	color: white;
 	text-align: center;
+}
+
+.banderole_left_1
+{
+	height: 42px;
+	width: 10px;
+	position: absolute;
+	background-color: #2eb2f4;
+	margin-left: -11px;
+	margin-top: -1px;
+}
+
+.banderole_left_2
+{
+	height: 10px;
+	width: 10px;
+	position: absolute;
+	background: linear-gradient(to left bottom, #74cefb 50%, transparent 50%);
+	margin-left: -11px;
+	margin-top: 41px;
+	z-index: 0;
+}
+
+.banderole_left_3
+{
+	height: 42px;
+	width: 10px;
+	float: right;
+	background-color: #2eb2f4;
+	margin-right: -11px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+}
+
+.banderole_left_4
+{
+	height: 10px;
+	width: 10px;
+	float: right;
+	background: linear-gradient(to right bottom, #74cefb 50%, transparent 50%);
+	margin-right: -11px;
+	margin-top: 41px;
+	margin-bottom: -11px;
 }
 
 /*** Saisie film avancée ***/

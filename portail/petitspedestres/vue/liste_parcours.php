@@ -14,6 +14,7 @@
   </head>
 
 	<body>
+    <!-- Onglets -->
     <header>
 			<?php include('../../includes/onglets.php') ; ?>
 		</header>
@@ -44,40 +45,47 @@
 
 				<?php
 					// Tableau des parcours
-        	echo '<table class="table_movie_house" style="margin-top: 30px;">';
+        	echo '<table class="PP-table">';
           	echo '<tr>';
-              echo '<td class="init_table_dates" style="width: 120px;">Nom du parcours</td>';
-              echo '<td class="init_table_dates" style="width: 120px;">Distance</td>';
-              echo '<td class="init_table_dates" style="width: 120px;">Lieu</td>';
+              echo '<td class="PP-table-titre">Nom du parcours</td>';
+              echo '<td class="PP-table-titre">Distance</td>';
+              echo '<td class="PP-table-titre">Lieu</td>';
             echo '</tr>';
+
+            $i = 0;
 
             foreach ($parcours as $prcr)
             {
+              if ($i % 2 == 0)
                 echo '<tr>';
-                  echo '<td class="table_users">';
+              else
+                echo '<tr class="PP-tr">';
+                  echo '<td class="PP-table-ligne">';
                     echo '<div>';
                       echo '<a href="parcours.php?id=' . $prcr->getId() . '&action=consulter">'. $prcr->getNom() . '</a>';
                     echo '</div>';
                   echo '</td>';
 
-									/*
-									Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
-									Réponse : Parcours.
-									C'est nul ? Oui, c'est nul.
-									*/
+  								/*
+  								Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
+  								Réponse : Parcours.
+  								C'est nul ? Oui, c'est nul.
+  								*/
 
-                  echo '<td class="table_users">';
+                  echo '<td class="PP-table-ligne">';
                     echo '<div>';
                       echo $prcr->getDistance() . ' km';
                     echo '</div>';
                   echo '</td>';
 
-                  echo '<td class="table_users">';
+                  echo '<td class="PP-table-ligne">';
                     echo '<div>';
                       echo $prcr->getLieu();
                     echo '</div>';
                   echo '</td>';
-                echo '</tr>';
+              echo '</tr>';
+
+              $i++;
             }
 
           echo '</table>';

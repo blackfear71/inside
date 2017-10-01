@@ -89,12 +89,13 @@
 	font-size: 110%;
 }
 
-.saisie_valider_profil
+.bouton_profil
 {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	height: 40px;
+	margin-top: 1.5%;
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
@@ -105,7 +106,7 @@
 	cursor: pointer;
 }
 
-.saisie_valider_profil:hover
+.bouton_profil:hover
 {
 	background-color: rgb(255, 25, 55);
 	color: white;
@@ -196,10 +197,11 @@
 .zone_profil_preferences_table
 {
 	width: 100%;
-	text-align: center;
+	text-align: justify;
 	background-color: #e3e3e3;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+	padding-bottom: 1.5%;
 }
 
 .titre_preference
@@ -238,15 +240,15 @@
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 	padding-top: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 }
 
 .zone_profil_contribution
 {
-	padding-top: 20px;
-	padding-bottom: 20px;
 	width: 33%;
+	padding-top: 1.5%;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -264,11 +266,6 @@
 	font-size: 250%;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-}
-
-.form_preference
-{
-	padding-bottom: 20px;
 }
 
 .form_desinscription
@@ -337,18 +334,6 @@
 	text-align: left;
 	vertical-align: top;
 	box-shadow: 0 0 3px #7c7c7c;
-	/*display: inline-block;
-	background-color: #f3f3f3;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 170px;
-	padding-left: 40px;
-	margin-left: -30px;
-	margin-bottom: 10px;
-	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
-	cursor: pointer;
-	text-align: left;*/
 }
 
 .label_preference:hover, .label_preference_2:hover, .label_preference_3:hover
@@ -360,8 +345,6 @@
 /*** Zone mot de passe & désinscription ***/
 .zone_profil_utilisateur_mdp
 {
-	padding-top: 20px;
-	padding-bottom: 20px;
 	width: 50%;
 	background-color: #e3e3e3;
 	border-bottom-left-radius: 5px;
@@ -369,8 +352,6 @@
 
 .zone_profil_utilisateur_desinscription
 {
-	padding-top: 20px;
-	padding-bottom: 20px;
 	width: 50%;
 	background-color: #f3f3f3;
 	border-bottom-right-radius: 5px;
@@ -383,6 +364,7 @@
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 1.5%;
 }
 
 .message_profil_2
@@ -393,4 +375,5 @@
 	margin-left: auto;
 	margin-right: auto;
 	font-weight: bold;
+	margin-bottom: 2%;
 }
