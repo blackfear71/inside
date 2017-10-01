@@ -1,4 +1,4 @@
-![INSIDE](http://77.206.45.128/inside/includes/icons/inside_red.png)
+![INSIDE](http://77.206.45.128/inside/includes/icons/inside.png)
 
 # INSIDE - Plateforme de partage créée par les membres pour les membres.
 
