@@ -2,6 +2,7 @@
   include_once('../../includes/appel_bdd.php');
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
+  include_once('../../includes/modeles_mails.php');
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
@@ -1295,34 +1296,76 @@
   // RETOUR : Aucun
   function sendMail($id_film, $details, $participants)
   {
-    include_once('../../includes/appel_mail.php');
+    // Traitement de sécurité
+    $details->setId(htmlspecialchars($details->getId()));
+    $details->setFilm(htmlspecialchars($details->getFilm()));
+    $details->setTo_delete(htmlspecialchars($details->getTo_delete()));
+    $details->setDate_add(htmlspecialchars($details->getDate_add()));
+    $details->setDate_theater(htmlspecialchars($details->getDate_theater()));
+    $details->setDate_release(htmlspecialchars($details->getDate_release()));
+    $details->setLink(htmlspecialchars($details->getLink()));
+    $details->setPoster(htmlspecialchars($details->getPoster()));
+    $details->setTrailer(htmlspecialchars($details->getTrailer()));
+    $details->setId_url(htmlspecialchars($details->getId_url()));
+    $details->setDoodle(htmlspecialchars($details->getDoodle()));
+    $details->setDate_doodle(htmlspecialchars($details->getDate_doodle()));
+    $details->setTime_doodle(htmlspecialchars($details->getTime_doodle()));
+    $details->setRestaurant(htmlspecialchars($details->getRestaurant()));
+    $details->setNb_comments(htmlspecialchars($details->getNb_comments()));
+    $details->setStars_user(htmlspecialchars($details->getStars_user()));
+    $details->setParticipation(htmlspecialchars($details->getParticipation()));
+    $details->setNb_users(htmlspecialchars($details->getNb_users()));
+    $details->setAverage(htmlspecialchars($details->getAverage()));
 
-    // Destinataires
     foreach ($participants as $participant)
     {
-      if (!empty($participant->getEmail()))
-        $mail->AddAddress($participant->getEmail(), $participant->getPseudo());
+      $participant->setId(htmlspecialchars($participant->getId()));
+      $participant->setId_film(htmlspecialchars($participant->getId_film()));
+      $participant->setIdentifiant(htmlspecialchars($participant->getIdentifiant()));
+      $participant->setPseudo(htmlspecialchars($participant->getPseudo()));
+      $participant->setAvatar(htmlspecialchars($participant->getAvatar()));
+      $participant->setEmail(htmlspecialchars($participant->getEmail()));
+      $participant->setStars(htmlspecialchars($participant->getStars()));
+      $participant->setParticipation(htmlspecialchars($participant->getParticipation()));
     }
 
-    // Objet
-    $mail->Subject = 'Votre participation à "' . $details->getFilm() . '"';
-
-    // Contenu message (choix modèle, initialisation, retour modèle)
-    $modele  = 'film';
-    $message = '';
-    include('../../includes/modeles_mails.php');
-    $mail->MsgHTML($message);
-
-    // Envoi du mail avec gestion des erreurs
-    if(!$mail->Send())
+    // On envoie un mail par personne et non un mail groupé
+    foreach ($participants as $participant)
     {
-      echo 'Erreur : ' . $mail->ErrorInfo;
-      $_SESSION['mail_film_error'] = true;
-    }      
-    else
-      $_SESSION['mail_film_send'] = true;
+      if ($_SESSION['mail_film_error'] != true)
+      {
+        if (!empty($participant->getEmail()))
+        {
+          include_once('../../includes/appel_mail.php');
 
-    //var_dump($mail);
-    //echo $message;
+          // Destinataire
+          $mail->clearAddresses();
+          $mail->AddAddress($participant->getEmail(), $participant->getPseudo());
+
+          // Objet
+          $mail->Subject = 'Votre participation à "' . $details->getFilm() . '"';
+
+          // Contenu message
+          $message = getModeleFilm($details, $participants);
+          $mail->MsgHTML($message);
+
+          // Envoi du mail avec gestion des erreurs
+          if(!$mail->Send())
+          {
+            echo 'Erreur : ' . $mail->ErrorInfo;
+            $_SESSION['mail_film_error'] = true;
+            $_SESSION['mail_film_send']  = NULL;
+          }
+          else
+          {
+            $_SESSION['mail_film_error'] = NULL;
+            $_SESSION['mail_film_send']  = true;
+          }
+
+          //var_dump($mail);
+          //echo $message;
+        }
+      }
+    }
   }
 ?>

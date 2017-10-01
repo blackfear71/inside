@@ -128,7 +128,7 @@
 	if ($back == true)
 	{
 		echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_profile">';
-			echo '<img src="/inside/includes/icons/back.png" alt="back" title="Retour au portail" class="icon_aside" />';
+			echo '<img src="/inside/includes/icons/home.png" alt="back" title="Retour au portail" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}
@@ -137,7 +137,7 @@
 	if ($back_admin == true)
 	{
 		echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_profile">';
-			echo '<img src="/inside/includes/icons/back.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
+			echo '<img src="/inside/includes/icons/home.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Accueil</div>';
 	}

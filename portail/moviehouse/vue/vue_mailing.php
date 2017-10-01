@@ -38,64 +38,47 @@
 			?>
 
 			<article class="article_portail">
-				<div class="zone_mail">
-          <div class="entete_mail">
-            <div class="trait_mail_1"></div>
-            <img src="../../includes/icons/inside.png" alt="inside" class="logo_inside_mail" />
-            <div class="trait_mail_2"></div>
-          </div>
-
-          <div class="mask_mail">
-            <div class="triangle_mail"></div>
-          </div>
-
-          <div class="corps_mail">
-            <div class="corps_mail_left">
-              <div class="text_mail">
-                <?php
-                  echo 'Bonjour,';
-                  echo '<br /><br /><br /><br />';
-                  echo 'Vous avez stipulé être intéréssé(e) par le film : <strong>' . $detailsFilm->getFilm() . '</strong>';
-                  echo '<br /><br />';
-                  if (!empty($detailsFilm->getDoodle()))
-                    echo 'Vous recevez ce mail contenant le lien doodle à renseigner pour donner votre disponibilité : <a href="' . $detailsFilm->getDoodle() . '" target="_blank">Doodle</a>';
-                  else
-                    echo 'Aucun Doodle n\'a encore été créé pour ce film. Si vous êtes intéressé(e), veuillez le mettre en place.';
-                  echo '<br /><br />';
-                  echo 'Les autres personnes intéressées sont :<br />';
-                  foreach ($listeEtoiles as $participant)
-                  {
-                    echo '<p class="participants_mail">- ' . $participant->getPseudo() . '</p>';
-                  }
-                  echo '<br /><br /><br />';
-                  echo 'Cordialement,';
-                  echo '<br /><br /><br /><br />';
-                  echo 'Mail envoyé depuis INSIDE.';
-                ?>
-              </div>
-            </div>
-
-            <div class="corps_mail_right">
-              <?php
-                if (!empty($detailsFilm->getPoster()))
-                  echo '<img src="' . $detailsFilm->getPoster() . '" alt="poster" title="' . $detailsFilm->getFilm() . '" class="poster_mail"/>';
-                else
-                  echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="poster_mail"/>';
-              ?>
-            </div>
-          </div>
-
-          <div class="footer_mail">
-            <div class="trait_mail_3"></div>
-            <img src="../../includes/icons/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />
-            <div class="trait_mail_4"></div>
-          </div>
-        </div>
-
         <?php
-          echo '<form method="post" action="mailing.php?id_film=' . $_GET['id_film'] . '&action=sendMail">';
-            echo '<input type="submit" name="send_mail_film" value="Envoyer l\'e-mail" class="send_mail_film" />';
-          echo '</form>';
+          $modele_mail = getModeleFilm($detailsFilm, $listeEtoiles);
+          echo $modele_mail;
+
+          // Encadré destinataires
+          echo '<div class="zone_destinataires_mail">';
+            $email_present = false;
+
+            foreach($listeEtoiles as $participant)
+            {
+              if (!empty($participant->getEmail()))
+              {
+                if ($email_present == false)
+                {
+                  echo 'L\'email sera envoyé aux personnes suivantes :<br />';
+                  $email_present = true;
+                }
+                echo '<p class="destinataires">';
+                  if (!empty($participant->getAvatar()))
+                    echo '<img src="../../profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
+                  else
+                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
+
+                  echo $participant->getPseudo();
+                echo '</p>';
+              }
+            }
+
+            if ($email_present == false)
+              echo '<p class="avertissement_mail" style="margin-top: 0;">Aucune personne ne sera avertie car aucun email n\'a été renseigné.</p>';
+            else
+              echo '<p class="avertissement_mail">N\'oubliez pas d\'avertir les éventuelles personnes n\'ayant pas renseigné d\'adresse mail.</p>';
+          echo '</div>';
+
+          // Bouton envoi mail
+          if ($email_present == true)
+          {
+            echo '<form method="post" action="mailing.php?id_film=' . $_GET['id_film'] . '&action=sendMail">';
+              echo '<input type="submit" name="send_mail_film" value="Envoyer l\'e-mail" class="send_mail_film" />';
+            echo '</form>';
+          }
         ?>
 			</article>
 		</section>
