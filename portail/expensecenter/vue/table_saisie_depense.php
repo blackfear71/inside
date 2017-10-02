@@ -50,7 +50,7 @@
           echo '</tr>';
 
           // Lignes de saisie
-          echo '<tr style="border-bottom: 1px solid #b3b3b3;">';
+          echo '<tr>';
             // Si on est sur la première ligne on affiche le champ de saisie du prix sinon on affiche une case vide
             if ($ligne == 1)
             {
@@ -80,7 +80,7 @@
             {
               $nb_max_parts = 5;
 
-              echo '<td>';
+              echo '<td style="border-bottom: 1px solid #b3b3b3;">';
                 echo '<select name="depense_user[]" class="parts">';
                   for($k = 0; $k <= $nb_max_parts; $k++)
                   {

@@ -14,7 +14,6 @@
 .table_saisie_depense
 {
 	border-collapse: collapse;
-	border: 1px solid #b3b3b3;
 }
 
 .table_saisie_depense td
@@ -35,6 +34,7 @@
 	background-color: #ffad01;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	border-top: 1px solid #b3b3b3;
 }
 
 .titre_user_depense
@@ -44,11 +44,13 @@
 	text-align: center;
 	vertical-align: top;
 	background-color: #e3e3e3;
+	border-top: 1px solid #b3b3b3;
 }
 
 .zone_saisie_prix
 {
 	text-align: center;
+	border-bottom: 1px solid #b3b3b3;
 }
 
 .saisie_prix
