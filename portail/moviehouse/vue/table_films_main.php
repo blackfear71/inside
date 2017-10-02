@@ -29,7 +29,7 @@
   				echo '</td>';
         }
       echo '</tr>';
-      
+
       $date_jour = date("Ymd");
       $date_jour_present = false;
       $i = 0;

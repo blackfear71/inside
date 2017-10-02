@@ -58,7 +58,6 @@
         case 'home':
         default:
           $listeRecents  = getRecents();
-
           $preferences   = getPreferences($_SESSION['identifiant']);
           $films_waited  = $preferences->getCategories_home()[0];
           $films_way_out = $preferences->getCategories_home()[1];

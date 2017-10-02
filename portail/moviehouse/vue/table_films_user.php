@@ -15,14 +15,14 @@
   		// Titres du tableau
   		echo '<tr>';
   			echo '<td class="table_titres" style="border: 0; border-bottom: 1px solid #e3e3e3;"></td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Date de sortie</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Fiche</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Bande-annonce</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Doodle</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Date proposée</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Commentaires</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Vote</td>';
-  			echo '<td class="init_table_dates" style="width: 120px;">Actions</td>';
+  			echo '<td class="init_table_dates">Date de sortie</td>';
+  			echo '<td class="init_table_dates">Fiche</td>';
+  			echo '<td class="init_table_dates">Bande-annonce</td>';
+  			echo '<td class="init_table_dates">Doodle</td>';
+  			echo '<td class="init_table_dates">Date proposée</td>';
+  			echo '<td class="init_table_dates">Commentaires</td>';
+  			echo '<td class="init_table_dates">Vote</td>';
+  			echo '<td class="init_table_dates">Actions</td>';
   		echo '</tr>';
 
       $date_jour = date("Ymd");

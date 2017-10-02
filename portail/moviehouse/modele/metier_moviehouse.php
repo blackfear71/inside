@@ -162,6 +162,13 @@
       }
     }
 
+    // Tri final sur la moyenne
+    foreach ($listAttendus as $attendu)
+    {
+      $tri_average[] = $attendu->getAverage();
+    }
+    array_multisort($tri_average, SORT_DESC, $listAttendus);
+
     return $listAttendus;
   }
 

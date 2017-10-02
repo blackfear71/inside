@@ -50,7 +50,7 @@
           echo '</tr>';
 
           // Lignes de saisie
-          echo '<tr>';
+          echo '<tr style="border-bottom: 1px solid #b3b3b3;">';
             // Si on est sur la première ligne on affiche le champ de saisie du prix sinon on affiche une case vide
             if ($ligne == 1)
             {

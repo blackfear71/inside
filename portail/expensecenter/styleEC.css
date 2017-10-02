@@ -14,11 +14,13 @@
 .table_saisie_depense
 {
 	border-collapse: collapse;
+	border: 1px solid #b3b3b3;
 }
 
 .table_saisie_depense td
 {
-	border: solid 1px #b3b3b3;
+	border-left: solid 1px #b3b3b3;
+	border-right: solid 1px #b3b3b3;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 10px;
@@ -31,7 +33,6 @@
 	width: 120px;
 	text-align: center;
 	background-color: #ffad01;
-	border-top: 1px solid #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
 }
@@ -133,13 +134,14 @@
 {
 	border-collapse: collapse;
 	width: 100%;
+	border: solid 1px #b3b3b3;
 }
 
 .td_init_depenses
 {
 	padding: 10px;
-	background-color: #e3e3e3;
 	border: solid 1px #b3b3b3;
+	background-color: #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
 }
@@ -147,7 +149,8 @@
 .td_depenses
 {
 	padding: 5px;
-	border: solid 1px #b3b3b3;
+	border-left: solid 1px #b3b3b3;
+	border-right: solid 1px #b3b3b3;
 	font-family: robotolight, Verdana, sans-serif;
 }
 
@@ -164,6 +167,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: 10px;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .avatar_total_depenses
@@ -256,8 +260,7 @@
 {
 	height: 40px;
 	text-align: center;
-	background-color: #e3e3e3;
-	background-color: #ffad01;
+	background-color: #f3f3f3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
 }
@@ -284,6 +287,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	background-color: white;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .avatar_expense_center

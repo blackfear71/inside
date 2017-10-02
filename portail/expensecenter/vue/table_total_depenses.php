@@ -10,11 +10,15 @@
         echo '<td class="td_init_depenses">Bilan</td>';
       echo '</tr>';
 
+      $i = 0;
+
       // Lignes utilisateurs
       foreach ($listeBilans as $bilan)
       {
         if ($_SESSION['identifiant'] == $bilan->getIdentifiant())
           echo '<tr style="background-color: #fffde8;">';
+        elseif ($i % 2 != 0)
+          echo '<tr style="background-color: #f3f3f3;">';
         else
           echo '<tr>';
 
@@ -46,6 +50,8 @@
               echo '<span class="somme_bilan">' . $bilan->getBilan_format() . ' €</span>';
             echo '</td>';
         echo '</tr>';
+
+        $i++;
       }
     echo '</table>';
   echo '</div>';

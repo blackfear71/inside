@@ -61,7 +61,7 @@
 
 .init_table_dates
 {
-	height: 40px;
+	line-height: 50px;
 	width: 120px;
 	text-align: center;
 	background-color: #ffad01;
