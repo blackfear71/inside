@@ -1294,7 +1294,6 @@
 	border: 0;
 	vertical-align: middle;
 	margin-left: -26px;
-	margin-right: 5px;
 	margin-top: -4px;
 	cursor: pointer;
 	opacity: 0;
@@ -1388,7 +1387,7 @@
 	vertical-align: top;
 }
 
-/*** New commentaires ***/
+/*** Commentaires ***/
 .zone_commentaires
 {
 	clear: both;
