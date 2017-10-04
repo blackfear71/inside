@@ -45,272 +45,298 @@
 				<?php
           if ($filmExistant == true)
           {
-  					// Titre du film + boutons navigation
-  					echo '<div class="bandeau_titre_article">';
+            // Bandeau avec poster
+            echo '<div class="bandeau_details">';
               // Lien film précédent
               if (!empty($listeNavigation['previous']['id']) AND !empty($listeNavigation['previous']['film']))
               {
-                echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" title="' . $listeNavigation['previous']['film'] . '" class="zone_prev_movie">';
-                  echo '<img src="../../includes/icons/back.png" alt="prev" title="Film précédent" class="prev_movie" />';
-                  echo '<div class="title_previous_next_film" style="padding-right: 10px;">' . $listeNavigation['previous']['film'] . '</div>';
-                  echo '<div class="triangle_previous"></div>';
-                  echo '<div class="triangle_previous_2"></div>';
-                  echo '<div class="triangle_previous_3"></div>';
-                echo '</a>';
+                echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="icons/left.png" alt="left" class="fleche_detail" /></a>';
+                echo '<span class="titre_prev_movie">' . $listeNavigation['previous']['film'] . '</span>';
               }
-              // Zone vide si pas de film précédent (pour conserver le décalage et laisser le titre centré)
-              else
-                echo '<div class="empty_previous"></div>';
-
-              // Titre
-              echo '<div class="previs_article">' . $detailsFilm->getFilm() . '</div>';
-
               // Lien film suivant
               if (!empty($listeNavigation['next']['id']) AND !empty($listeNavigation['next']['film']))
               {
-                echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" title="' . $listeNavigation['next']['film'] . '" class="zone_next_movie">';
-                  echo '<div class="triangle_next_3"></div>';
-                  echo '<div class="triangle_next_2"></div>';
-                  echo '<div class="triangle_next"></div>';
-                  echo '<div class="title_previous_next_film" style="padding-left: 10px;">' . $listeNavigation['next']['film'] . '</div>';
-                  echo '<img src="../../includes/icons/back.png" alt="next" title="Film suivant" class="next_movie" />';
-                echo '</a>';
+                echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="icons/right.png" alt="right" class="fleche_detail" /></a>';
+                echo '<span class="titre_next_movie">' . $listeNavigation['next']['film'] . '</span>';
               }
-              // Zone vide si pas de film suivant (pour conserver le décalage et laisser le titre centré)
+              // Fond + Titre du film
+              if (!empty($detailsFilm->getPoster()))
+                echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" /><br />';
               else
-                echo '<div class="empty_next"></div>';
+                echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';
 
+              echo '<div class="titre_film_details">' . $detailsFilm->getFilm() . '</div>';
             echo '</div>';
 
-  					// Zone de détails du film
-  					echo '<div class="details">';
-  						echo '<div class="detail_gauche">';
-  							// Vidéo
-  							if (!empty($detailsFilm->getId_url()))
-  							{
-  								echo '<div class="video_container">';
-  									$exp = explode(':_:', $detailsFilm->getId_url());
-  									$html = "";
+            echo '<div class="details">';
+              // Partie gauche
+              echo '<div class="left_details">';
+                echo '<table class="table_left_details">';
+                  echo '<tr>';
+                    echo '<td class="zone_poster_detail">';
+                      // Affichage du poster
+                      if (!empty($detailsFilm->getPoster()))
+                        echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="img_details" /><br />';
+                      else
+                        echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details" />';
+                    echo '</td>';
 
-  									switch ($exp[0])
-  									{
-  										case 'youtube':
-  											$html = '<iframe src="http://www.youtube.com/embed/' . $exp[1] . '" allowfullscreen class="video"></iframe>';
-  											break;
-  										case 'vimeo':
-  											$html = '<iframe src="http://player.vimeo.com/video/'.$exp[1].'" allowFullScreen class="video"></iframe>';
-  											break;
-  										case 'dailymotion':
-  											$html = '<iframe src="http://www.dailymotion.com/embed/video/'.$exp[1].'" allowfullscreen class="video"></iframe>';
-  											break;
+                    echo '<td class="zone_link_1">';
+                      // Mailing
+                      if ($detailsFilm->getNb_users() > 0)
+                      {
+                        echo '<a href="mailing.php?id_film=' . $detailsFilm->getId() . '&action=goConsulter" class="link_details">';
+                          echo '<img src="icons/mailing_red.png" alt="mailing" title="Envoyer mail" class="icon_details" />';
+                        echo '</a>';
+                      }
 
-  										default:
-  											break;
-  									}
+                      // Doodle
+                      if (!empty($detailsFilm->getDoodle()))
+                      {
+                        echo '<a href="' . $detailsFilm->getDoodle() . '" target="_blank" class="link_details">';
+                          echo '<img src="icons/doodle.png" alt="doodle" title="Doodle" class="icon_details" />';
+                        echo '</a>';
+                      }
 
-  									echo $html;
-  								echo '</div>';
-  							}
+                      // Fiche du film
+                      if (!empty($detailsFilm->getLink()))
+                      {
+                        echo '<a href="' . $detailsFilm->getLink() . '" target="_blank" class="link_details">';
+                          echo '<img src="icons/pellicule.png" alt="pellicule" title="Fiche du film" class="icon_details" />';
+                        echo '</a>';
+                      }
+                    echo '</td>';
+                  echo '</tr>';
+              echo '</table>';
 
-  							// Zone de liens
-  							echo '<div class="links_details">';
-  								// Lien vers la fiche du film
-  								if (!empty($detailsFilm->getLink()))
-  								{
-  									echo '<a href="' . $detailsFilm->getLink() . '" target="_blank" class="link_fiche">';
-  										echo '<div class="fiche_align">Fiche du film</div>';
-  									echo '</a>';
-  								}
-  								else
-  									echo '<div class="fiche_absente">Pas de fiche</div>';
+              // Actions
+              echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doVoterFilm" class="form_stars_details_left">';
+                // Etoiles utilisateur
+                for($j = 0; $j <= 5; $j++)
+                {
 
-  								// Lien vers le doodle
-  								if (!empty($detailsFilm->getDoodle()))
-  									echo '<a href="' . $detailsFilm->getDoodle() . '" target="_blank" class="link_doodle"><img src="../../includes/icons/doodle.png" alt="doodle" class="logo_doodle" /></a>';
-
-  								// Etoiles utilisateur
-									echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doVoterFilm" class="form_stars_details">';
-										// Boutons vote
-                    echo '<span style="vertical-align: middle;">';
-										for($j = 0; $j <= 5; $j++)
-										{
-
-											if ($j == $detailsFilm->getStars_user())
-											{
-												echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
-												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
-											}
-											else
-											{
-												echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_3" />';
-												echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_3" />';
-											}
-										}
-                    echo '</span>';
-									echo '</form>';
-
-  								// Si l'utilisateur a des étoiles
-  								if ($detailsFilm->getStars_user() > 0)
-  								{
-  									echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doParticiperFilm" class="form_not_interested">';
-  										// Participation
-  										if ($detailsFilm->getParticipation() == "P")
-  											echo '<input type="submit" name="participate" value="Je ne participe plus..." class="not_interested" style="background-color: #2f891f;" />';
-  										else
-  											echo '<input type="submit" name="participate" value="Je participe !" class="not_interested" style="background-color: #2f891f;" />';
-
-  										// Vue
-  										if ($detailsFilm->getParticipation() == "S")
-  											echo '<input type="submit" name="seen" value="Je n\'ai pas vu ..." class="not_interested" style="background-color: #2eb2f4;" />';
-  										else
-  											echo '<input type="submit" name="seen" value="J\'ai vu !" class="not_interested" style="background-color: #2eb2f4;" />';
-
-  									echo '</form>';
-  								}
-
-                  if ($detailsFilm->getNb_users() > 0)
+                  if ($j == $detailsFilm->getStars_user())
                   {
-                    echo '<a href="mailing.php?id_film=' . $detailsFilm->getId() . '&action=goConsulter">';
-                      echo '<div class="send_mail_details">Envoyer mail</div>';
-                    echo '</a>';
+                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_vote" style="border: solid 1px #7c7c7c;" />';
+                    echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_star_vote" />';
                   }
-  							echo '</div>';
-
-  							// Dates
-  							echo '<div class="date_sortie">Sortie cinéma</div><div class="date_sortie_2">';
-  							if (isBlankDate($detailsFilm->getDate_theater()))
-  								echo 'N.C.';
-  							else
-  								echo formatDateForDisplay($detailsFilm->getDate_theater());
-  						 	echo '</div>';
-
-                if (!empty($detailsFilm->getDate_release()))
-  					      echo '<div class="date_sortie">Sortie DVD/Bluray</div><div class="date_sortie_2">' . formatDateForDisplay($detailsFilm->getDate_release()) . '</div>';
-                else
-                  echo '<div class="date_sortie">Sortie DVD/Bluray</div><div class="date_sortie_2">-</div>';
-
-  							echo '<div class="date_sortie">Date proposée</div>';
-  							echo '<div class="date_sortie_2">';
-                  if (!empty($detailsFilm->getDate_doodle()))
+                  else
                   {
-  		 	            echo formatDateForDisplay($detailsFilm->getDate_doodle());
+                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_vote" />';
+                    echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_star_vote" />';
+                  }
+                }
+              echo '</form>';
 
-                    if (!empty($detailsFilm->getTime_doodle()))
+              // Si l'utilisateur a des étoiles
+              if ($detailsFilm->getStars_user() > 0)
+              {
+                echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doParticiperFilm" class="form_stars_details_right">';
+                  // Participation
+                  if ($detailsFilm->getParticipation() == "P")
+                  {
+                    echo '<img src="icons/participate.png" alt="participate" class="star_vote" style="background-color: rgb(255, 25, 55);" />';
+                    echo '<input type="submit" name="participate" class="link_star_vote" />';
+                  }
+                  else
+                  {
+                    echo '<img src="icons/participate.png" alt="participate" class="star_vote" />';
+                    echo '<input type="submit" name="participate" class="link_star_vote" />';
+                  }
+
+                  // Vue
+                  if ($detailsFilm->getParticipation() == "S")
+                  {
+                    echo '<img src="icons/seen.png" alt="seen" class="star_vote" style="background-color: rgb(255, 25, 55);" />';
+                    echo '<input type="submit" name="seen" class="link_star_vote" />';
+                  }
+                  else
+                  {
+                    echo '<img src="icons/seen.png" alt="seen" class="star_vote" />';
+                    echo '<input type="submit" name="seen" class="link_star_vote" />';
+                  }
+
+                echo '</form>';
+              }
+
+              // Tableau des personnes intéressées
+              echo '<div class="entete_detail">';
+                echo 'Personnes intéressées';
+              echo '</div>';
+
+              echo '<div class="contenu_detail">';
+                echo '<table class="table_interested">';
+                  if (!empty($listeEtoiles))
+                  {
+                    foreach ($listeEtoiles as $etoiles)
                     {
-                      $heure_doodle   = substr($detailsFilm->getTime_doodle(), 0, 2);
-                      $minutes_doodle = substr($detailsFilm->getTime_doodle(), 2, 2);
+                      // On affiche le nom correspondant à l'utilisateur et ses étoiles
+                      if ($etoiles->getIdentifiant() == $_SESSION['identifiant'])
+                        echo '<tr class="tr_interested" style="background-color: #fffde8;">';
+                      else
+                        echo '<tr class="tr_interested">';
 
-                      echo ' à ' . $heure_doodle . ':' . $minutes_doodle;
+                        echo '<td class="td_interested_left">';
+                          if (!empty($etoiles->getAvatar()))
+                            echo '<img src="../../profil/avatars/' . $etoiles->getAvatar() . '" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
+                          else
+                            echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
+                        echo '</td>';
+
+                        echo '<td class="td_interested_middle">';
+                          echo $etoiles->getPseudo();
+                        echo '</td>';
+
+                        echo '<td class="td_interested_right">';
+                          if ($etoiles->getParticipation() == "S")
+                            echo '<div class="circle_star_interested" style="background-color: #74cefb;">';
+                          elseif ($etoiles->getParticipation() == "P")
+                            echo '<div class="circle_star_interested" style="background-color: #91d784;">';
+                          else
+                            echo '<div class="circle_star_interested">';
+
+                            echo '<img src="icons/stars/star' . $etoiles->getStars() . '.png" alt="star' . $etoiles->getStars() . '" class="star_interested" />';
+                          echo '</div>';
+                        echo '</td>';
+                      echo '</tr>';
                     }
                   }
                   else
-                    echo '-';
-  							echo '</div>';
+                    echo '<div class="no_interested">Aucune personne encore intéressée.</div>';
+                echo '</table>';
+              echo '</div>';
+            echo '</div>';
 
-  							// Restaurant
-  							echo '<div class="date_sortie">Restaurant</div>';
-  							echo '<div class="date_sortie_2">';
-  								switch ($detailsFilm->getRestaurant())
-  								{
-  									case "B":
-  										echo 'Avant';
-  										if (!empty($detailsFilm->getPlace()))
-  											echo ' : ' . $detailsFilm->getPlace();
-  										break;
+            // Partie droite
+            echo '<div class="right_details">';
+              // Vidéo
+              if (!empty($detailsFilm->getId_url()))
+              {
+                echo '<div class="video_container">';
+                  $exp = explode(':_:', $detailsFilm->getId_url());
+                  $html = "";
 
-  									case "A":
-  										echo 'Après';
-  										if (!empty($detailsFilm->getPlace()))
-  											echo ' : ' . $detailsFilm->getPlace();
-  										break;
-
-  									case "N":
-  									default:
-  										echo 'Aucun';
-  										break;
-  								}
-  							echo '</div>';
-
-  							// On récupère la liste des personne souhaitant visionner le film
-  							echo '<div class="date_sortie">Intéresse</div>';
-  							echo '<div class="view_by">';
-
-                if (!empty($listeEtoiles))
-                {
-                  foreach ($listeEtoiles as $etoiles)
+                  switch ($exp[0])
                   {
-                    // On affiche le nom correspondant à l'utilisateur et ses étoiles
-                    echo '<table class="table_view_by">';
-                      echo '<tr>';
-                        echo '<td class="td_view_by" style="border-right: solid 1px white;">';
-                          echo '<div class="zone_avatar_details_film">';
-                            if (!empty($etoiles->getAvatar()))
-                              echo '<img src="../../profil/avatars/' . $etoiles->getAvatar() . '" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_details_film" />';
-                            else
-                              echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_details_film" />';
-                          echo '</div>';
+                    case 'youtube':
+                      $html = '<iframe src="http://www.youtube.com/embed/' . $exp[1] . '" allowfullscreen class="video"></iframe>';
+                      break;
 
-                          echo '<div class="user_view_by">' . $etoiles->getPseudo() . '</div>';
-                        echo '</td>';
+                    case 'vimeo':
+                      $html = '<iframe src="http://player.vimeo.com/video/'.$exp[1].'" allowFullScreen class="video"></iframe>';
+                      break;
 
-                        if ($etoiles->getParticipation() == "S")
-                          echo '<td class="td_view_by" style="background-color: #74cefb;">';
-                        elseif ($etoiles->getParticipation() == "P")
-                          echo '<td class="td_view_by" style="background-color: #91d784;">';
-                        else
-                          echo '<td class="td_view_by">';
+                    case 'dailymotion':
+                      $html = '<iframe src="http://www.dailymotion.com/embed/video/'.$exp[1].'" allowfullscreen class="video"></iframe>';
+                      break;
 
-                          echo '<div class="link_vote_details">';
-                            echo '<img src="icons/stars/star' . $etoiles->getStars() . '.png" alt="star' . $etoiles->getStars() . '" class="new_star" />';
-                          echo '</div>';
+                    default:
+                      break;
+                  }
 
-                        echo '</td>';
-                      echo '</tr>';
-                    echo '</table>';
+                  echo $html;
+                echo '</div>';
+              }
+
+              // Sortie cinéma
+              echo '<div class="entete_detail">';
+                echo 'Sortie au cinéma';
+              echo '</div>';
+
+              echo '<div class="contenu_detail">';
+                if (isBlankDate($detailsFilm->getDate_theater()))
+                  echo 'N.C.';
+                else
+                  echo formatDateForDisplay($detailsFilm->getDate_theater());
+              echo '</div>';
+
+              // Sortie DVD / Bluray
+              echo '<div class="entete_detail">';
+                echo 'Sortie en DVD / Bluray';
+              echo '</div>';
+
+              echo '<div class="contenu_detail">';
+                if (!empty($detailsFilm->getDate_release()))
+                  echo formatDateForDisplay($detailsFilm->getDate_release());
+                else
+                  echo '-';
+              echo '</div>';
+
+              // Date proposée
+              echo '<div class="entete_detail">';
+                echo 'Sortie proposée';
+              echo '</div>';
+
+              echo '<div class="contenu_detail">';
+                if (!empty($detailsFilm->getDate_doodle()))
+                {
+                  echo formatDateForDisplay($detailsFilm->getDate_doodle());
+
+                  if (!empty($detailsFilm->getTime_doodle()))
+                  {
+                    $heure_doodle   = substr($detailsFilm->getTime_doodle(), 0, 2);
+                    $minutes_doodle = substr($detailsFilm->getTime_doodle(), 2, 2);
+
+                    echo ' à ' . $heure_doodle . ':' . $minutes_doodle;
                   }
                 }
                 else
-                  echo '<span style="padding-left: 4%; padding-right: 4%;">-</span>';
+                  echo '-';
+              echo '</div>';
 
-  							echo '</div>';
-  						echo '</div>';
+              // Restaurant
+              echo '<div class="entete_detail">';
+                echo 'Restaurant';
+              echo '</div>';
 
-  						echo '<div class="detail_droite">';
-  							// Affichage du poster
-  							if (!empty($detailsFilm->getPoster()))
-  								echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="img_details" /><br />';
-  							else
-  								echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details" />';
-  						echo '</div>';
-  					echo '</div>';
+              echo '<div class="contenu_detail">';
+                switch ($detailsFilm->getRestaurant())
+                {
+                  case "B":
+                    echo 'Avant';
+                    if (!empty($detailsFilm->getPlace()))
+                      echo ' : ' . $detailsFilm->getPlace();
+                    break;
 
-  					// Commentaires
-  					echo '<div class="zone_comments_films">';
-  						// Titre
-  						echo '<div class="title_comments_films">';
-  							echo 'Commentaires';
-  						echo '</div>';
+                  case "A":
+                    echo 'Après';
+                    if (!empty($detailsFilm->getPlace()))
+                      echo ' : ' . $detailsFilm->getPlace();
+                    break;
 
-  						// Affichage des commentaires
+                  case "N":
+                  default:
+                    echo 'Aucun';
+                    break;
+                }
+              echo '</div>';
+            echo '</div>';
+
+            // Commentaires
+            echo '<div class="zone_commentaires">';
+              // Titre
+              echo '<div class="entete_detail">';
+                echo 'Commentaires';
+              echo '</div>';
+
+              // Affichage des commentaires
               foreach ($listeCommentaires as $comment)
               {
-  							echo '<div class="content_comments_films" id="' . $comment->getId() . '">';
-  								// Photo de profil
-  								echo '<div class="zone_avatar_comments">';
-  									if (!empty($comment->getAvatar()))
-  										echo '<img src="../../profil/avatars/' . $comment->getAvatar() . '" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
-  									else
-  										echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
-  								echo '</div>';
+                echo '<div class="zone_commentaire_user" id="' . $comment->getId() . '">';
+                  // Photo de profil
+                  if (!empty($comment->getAvatar()))
+                    echo '<img src="../../profil/avatars/' . $comment->getAvatar() . '" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
+                  else
+                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
 
-  								// Pseudo
-  								if (!empty($comment->getPseudo()))
-  									echo '<div class="pseudo_comments_films">' . $comment->getPseudo() . '</div>';
-  								else
-  									echo '<div class="pseudo_comments_films"><i>un ancien utilisateur</i></div>';
+                  // Pseudo
+                  if (!empty($comment->getPseudo()))
+                    echo '<div class="pseudo_comments_films">' . $comment->getPseudo() . '</div>';
+                  else
+                    echo '<div class="pseudo_comments_films"><i>un ancien utilisateur</i></div>';
 
-  								// Date et heure
-  								echo '<div class="date_comments_films">Le ' . formatDateForDisplay($comment->getDate()) . ' à ' . formatTimeForDisplay($comment->getTime()) . '</div>';
+                  // Date et heure
+                  echo '<div class="date_comments_films">Le ' . formatDateForDisplay($comment->getDate()) . ' à ' . formatTimeForDisplay($comment->getTime()) . '</div>';
 
                   // Actions sur commentaires seulement si l'auteur correspond à l'utilisateur connecté
                   if ($comment->getAuthor() == $_SESSION['identifiant'])
@@ -340,7 +366,7 @@
                       $commentaire = extract_link(nl2br($commentaire));
 
                       // Commentaire
-                      echo '<div class="comment_comments_films">' . $commentaire . '</div>';
+                      echo '<div class="texte_commentaire">' . $commentaire . '</div>';
                     echo '</span>';
 
                     /**********************************/
@@ -360,16 +386,16 @@
                           echo '</span>';
                         echo '</div>';
 
-                        echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="modifyComment' . $comment->getId() . '" class="saisie_commentaire_2" required>' . $comment->getComment() . '</textarea>';
+                        echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="modifyComment' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
 
-                        echo '<span class="liste_smiley_2">';
+                        echo '<div class="zone_saisie_smileys">';
                           echo '<a onclick="insert_smiley(\':)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\';)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\':(\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\':|\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\':D\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\':O\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                        echo '</span>';
+                        echo '</div>';
                       echo '</form>';
                     echo '</span>';
                   }
@@ -380,17 +406,17 @@
                     $commentaire = extract_link(nl2br($comment->getComment()));
 
                     // Commentaire
-                    echo '<div class="comment_comments_films">' . $commentaire . '</div>';
+                    echo '<div class="texte_commentaire">' . $commentaire . '</div>';
                   }
                 echo '</div>';
               }
 
-  						// Saisie commentaire
-  						echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doCommenter" id="comments" class="saisie_comments_films">';
-  							echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="insertComment" class="saisie_commentaire" required></textarea>';
-  							echo '<input type="submit" name="submit_comment" value="Envoyer" class="send_comment" />';
+              // Saisie commentaire
+  						echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doCommenter" id="comments" class="saisie_commentaires_films">';
+  							echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="insertComment" class="zone_saisie_comment" required></textarea>';
+  							echo '<input type="submit" name="submit_comment" value="Envoyer" class="bouton_commentaires" />';
 
-                echo '<div class="liste_smiley">';
+                echo '<div class="zone_saisie_smileys">';
                 	echo '<a onclick="insert_smiley(\':)\', \'insertComment\')"><img src="../../includes/icons/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
                 	echo '<a onclick="insert_smiley(\';)\', \'insertComment\')"><img src="../../includes/icons/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
                 	echo '<a onclick="insert_smiley(\':(\', \'insertComment\')"><img src="../../includes/icons/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
@@ -399,7 +425,7 @@
                 	echo '<a onclick="insert_smiley(\':O\', \'insertComment\')"><img src="../../includes/icons/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
                 echo '</div>';
   						echo '</form>';
-  					echo '</div>';
+            echo '</div>';
           }
 				?>
 			</article>
