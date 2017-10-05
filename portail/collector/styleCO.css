@@ -537,7 +537,7 @@
 
 .smiley_votes_left_1:hover ~ .nb_votes_left_1, .smiley_votes_left_2:hover ~ .nb_votes_left_2, .smiley_votes_left_3:hover ~ .nb_votes_left_3,
 .smiley_votes_left_4:hover ~ .nb_votes_left_4, .smiley_votes_left_5:hover ~ .nb_votes_left_5, .smiley_votes_left_6:hover ~ .nb_votes_left_6,
-.smiley_votes_right_1:hover ~ .nb_votes__right_1, .smiley_votes_right_2:hover ~ .nb_votes_right_2, .smiley_votes_right_3:hover ~ .nb_votes_right_3,
+.smiley_votes_right_1:hover ~ .nb_votes_right_1, .smiley_votes_right_2:hover ~ .nb_votes_right_2, .smiley_votes_right_3:hover ~ .nb_votes_right_3,
 .smiley_votes_right_4:hover ~ .nb_votes_right_4, .smiley_votes_right_5:hover ~ .nb_votes_right_5, .smiley_votes_right_6:hover ~ .nb_votes_right_6
 {
   display: block;
