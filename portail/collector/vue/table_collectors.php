@@ -47,6 +47,7 @@
 
                 // Formulaire vote
                 echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_right" style="display: none;">';
+                  // Gestion smiley par défaut
                   $no_vote = true;
                   foreach ($listeVotesUsers as $vote)
                   {
@@ -59,6 +60,7 @@
                   else
                     echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
 
+                  // Gestion autres smileys
                   for ($j = 1; $j <= 6; $j++)
                   {
                     $founded = false;
@@ -217,6 +219,7 @@
 
                 // Formulaire vote
                 echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_left" style="display: none;">';
+                  // Gestion smiley par défaut
                   $no_vote = true;
                   foreach ($listeVotesUsers as $vote)
                   {
@@ -229,6 +232,7 @@
                   else
                     echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
 
+                  // Gestion autres smileys
                   for ($j = 1; $j <= 6; $j++)
                   {
                     $founded = false;
