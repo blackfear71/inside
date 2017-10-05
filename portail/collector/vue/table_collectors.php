@@ -42,11 +42,23 @@
                   }
 
                   if ($founded == false)
-                    echo '<img src="../../includes/icons/smileys/4.png" alt="smiley" class="current_vote" />';
+                    echo '<img src="../../includes/icons/smileys/0.png" alt="smiley" class="current_vote" />';
                 echo '</a>';
 
                 // Formulaire vote
                 echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_right" style="display: none;">';
+                  $no_vote = true;
+                  foreach ($listeVotesUsers as $vote)
+                  {
+                    if ($vote->getId_collector() == $collector->getId() AND !empty($vote->getVote()))
+                      $no_vote = false;
+                  }
+
+                  if ($no_vote == true)
+                    echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 40px; width: 40px; height: 40px;" />';
+                  else
+                    echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
+
                   for ($j = 1; $j <= 6; $j++)
                   {
                     $founded = false;
@@ -200,11 +212,23 @@
                   }
 
                   if ($founded == false)
-                    echo '<img src="../../includes/icons/smileys/4.png" alt="smiley" class="current_vote" />';
+                    echo '<img src="../../includes/icons/smileys/0.png" alt="smiley" class="current_vote" />';
                 echo '</a>';
 
                 // Formulaire vote
                 echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_left" style="display: none;">';
+                  $no_vote = true;
+                  foreach ($listeVotesUsers as $vote)
+                  {
+                    if ($vote->getId_collector() == $collector->getId() AND !empty($vote->getVote()))
+                      $no_vote = false;
+                  }
+
+                  if ($no_vote == true)
+                    echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 40px; width: 40px; height: 40px;" />';
+                  else
+                    echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
+
                   for ($j = 1; $j <= 6; $j++)
                   {
                     $founded = false;

@@ -50,13 +50,13 @@
               // Lien film précédent
               if (!empty($listeNavigation['previous']['id']) AND !empty($listeNavigation['previous']['film']))
               {
-                echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="icons/left.png" alt="left" class="fleche_detail" /></a>';
+                echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="icons/left.png" alt="left" class="fleche_detail" style="padding-right: 50px;" /></a>';
                 echo '<span class="titre_prev_movie">' . $listeNavigation['previous']['film'] . '</span>';
               }
               // Lien film suivant
               if (!empty($listeNavigation['next']['id']) AND !empty($listeNavigation['next']['film']))
               {
-                echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="icons/right.png" alt="right" class="fleche_detail" /></a>';
+                echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="icons/right.png" alt="right" class="fleche_detail" style="padding-left: 50px;" /></a>';
                 echo '<span class="titre_next_movie">' . $listeNavigation['next']['film'] . '</span>';
               }
               // Fond + Titre du film

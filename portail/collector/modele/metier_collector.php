@@ -286,7 +286,7 @@
     elseif (isset($post['smiley_6']))
       $vote = 6;
     else
-      $vote = 4;
+      $vote = 0;
 
     global $bdd;
 
@@ -294,8 +294,13 @@
     $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $id_col . ' AND identifiant = "' . $user . '"');
     $donnees = $reponse->fetch();
 
+    // Si on a un vote mais on supprime l'avis
+    if ($reponse->rowCount() > 0 AND $vote == 0)
+    {
+      $reponse2 = $bdd->exec('DELETE FROM collector_users WHERE id = ' . $donnees['id']);
+    }
     // Si on a déjà un vote, on met à jour
-    if ($reponse->rowCount() > 0)
+    elseif ($reponse->rowCount() > 0 AND $vote > 0)
     {
       $reponse2 = $bdd->prepare('UPDATE collector_users SET vote = :vote WHERE id = ' . $donnees['id']);
       $reponse2->execute(array(
@@ -304,7 +309,7 @@
       $reponse2->closeCursor();
     }
     // Sinon on insère
-    else
+    elseif ($reponse->rowCount() == 0 AND $vote > 0)
     {
       $reponse2 = $bdd->prepare('INSERT INTO collector_users(id_collector, identifiant, vote) VALUES(:id_collector, :identifiant, :vote)');
       $reponse2->execute(array(
@@ -323,7 +328,7 @@
   function deleteVotes($id_col)
   {
     global $bdd;
-    
+
     $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $id_col);
   }
 ?>

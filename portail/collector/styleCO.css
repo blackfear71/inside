@@ -357,7 +357,7 @@
   background-color: white;
   box-shadow: 0 0 2px #5c5c5c;
   float: right;
-  margin-right: -197px;
+  margin-right: -230px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;
@@ -370,12 +370,27 @@
   background-color: white;
   box-shadow: 0 0 2px #5c5c5c;
   float: left;
-  margin-left: -197px;
+  margin-left: -230px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;
   position: relative;
   z-index: 2;
+}
+
+.smiley_0
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/0.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 .smiley_1
