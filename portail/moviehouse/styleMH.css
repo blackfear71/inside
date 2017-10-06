@@ -170,7 +170,7 @@
 .name_saisie_rapide
 {
 	/* 50% */
-	width: 48.5%;
+	width: 48%;
 	border: solid 1px #a3a3a3;
 	padding-left: 1%;
 	padding-right: 1%;
@@ -1168,7 +1168,7 @@
 {
 	float: right;
 	position: relative;
-	z-index: 2;
+	z-index: 1;
 	line-height: 290px;
 	margin-right: 1%;
 	opacity: 0;
@@ -1223,7 +1223,7 @@
 	box-shadow: 0 0 4px #5c5c5c;
 }
 
-.zone_link_1
+.zone_link
 {
 	vertical-align: bottom;
 	text-align: center;
@@ -1249,7 +1249,9 @@
 
 .form_stars_details_left
 {
-	line-height: 50px;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	display: inline-block;
 	width: 50%;
 	text-align: left;
@@ -1258,7 +1260,9 @@
 
 .form_stars_details_right
 {
-	line-height: 50px;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	display: inline-block;
 	width: 50%;
 	margin-top: -4px;
@@ -1301,7 +1305,9 @@
 	font-size: 150%;
 	font-weight: bold;
 	border-bottom: solid 1px #b3b3b3;
-	line-height: 50px;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	color: #262626;
 }
 
@@ -1315,6 +1321,7 @@
 {
 	border-collapse: collapse;
 	width: 100%;
+	margin-top: 10px;
 }
 
 .tr_interested

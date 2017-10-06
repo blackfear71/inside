@@ -81,7 +81,7 @@
                         echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details" />';
                     echo '</td>';
 
-                    echo '<td class="zone_link_1">';
+                    echo '<td class="zone_link">';
                       // Mailing
                       if ($detailsFilm->getNb_users() > 0)
                       {

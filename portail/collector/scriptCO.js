@@ -16,6 +16,21 @@ function afficherMasquer(id)
     document.getElementById(id).style.display = "none";
 }
 
+// Combiné avec afficherMasquer(), cela permet de fermer le formulaire en cliquant n'importe où sur le body
+$(function()
+{
+  $("body").click(function()
+  {
+    $(document.getElementsByName("form_vote_user")).hide();
+    $(document.getElementsByName("vote_user")).show();
+  });
+  $(document.getElementsByName("vote_user")).click(function(event)
+  {
+    $(document.getElementById("modifier_vote")).show();
+    event.stopPropagation();
+  });
+})
+
 // Génère un ou plusieurs calendrier
 $(function()
 {

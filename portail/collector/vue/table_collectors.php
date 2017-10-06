@@ -28,7 +28,7 @@
                   echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
 
                 // Vote
-                echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_right">';
+                echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" name="vote_user" class="link_current_vote_right">';
                   $founded = false;
 
                   foreach ($listeVotesUsers as $vote)
@@ -46,7 +46,7 @@
                 echo '</a>';
 
                 // Formulaire vote
-                echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_right" style="display: none;">';
+                echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_right" style="display: none;">';
                   // Gestion smiley par défaut
                   $no_vote = true;
                   foreach ($listeVotesUsers as $vote)
@@ -100,7 +100,20 @@
                     if ($votes['smileys'][$k] != 0)
                     {
                       echo '<img src="../../includes/icons/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_left_' . $k . '" />';
-                      echo '<span class="nb_votes_left_' . $k . '">' . $votes['smileys'][$k] . '</span>';
+
+                      // Pseudos
+                      $listeUsersSmiley = '';
+                      foreach ($votes['identifiants'][$k] as $identifiants)
+                      {
+                        $listeUsersSmiley .= $identifiants['pseudo'] . ', ';
+                      }
+
+                      echo '<span class="nb_votes_left_' . $k . '">';
+                        echo substr($listeUsersSmiley, 0, -2);
+                      echo '</span>';
+
+                      // Nombre de chaque smiley
+                      //echo '<span class="nb_votes_left_' . $k . '">' . $votes['smileys'][$k] . '</span>';
                     }
                   }
                 }
@@ -200,7 +213,7 @@
                   echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
 
                 // Vote
-                echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_left">';
+                echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" name="vote_user" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote_left">';
                   $founded = false;
 
                   foreach ($listeVotesUsers as $vote)
@@ -218,7 +231,7 @@
                 echo '</a>';
 
                 // Formulaire vote
-                echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_left" style="display: none;">';
+                echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys_left" style="display: none;">';
                   // Gestion smiley par défaut
                   $no_vote = true;
                   foreach ($listeVotesUsers as $vote)
@@ -291,7 +304,20 @@
                     if ($votes['smileys'][$k] != 0)
                     {
                       echo '<img src="../../includes/icons/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_right_' . $k . '" />';
-                      echo '<span class="nb_votes_right_' . $k . '">' . $votes['smileys'][$k] . '</span>';
+
+                      // Pseudos
+                      $listeUsersSmiley = '';
+                      foreach ($votes['identifiants'][$k] as $identifiants)
+                      {
+                        $listeUsersSmiley .= $identifiants['pseudo'] . ', ';
+                      }
+
+                      echo '<span class="nb_votes_right_' . $k . '">';
+                        echo substr($listeUsersSmiley, 0, -2);
+                      echo '</span>';
+
+                      // Nombre de chaque smiley
+                      //echo '<span class="nb_votes_right_' . $k . '">' . $votes['smileys'][$k] . '</span>';
                     }
                   }
                 }

@@ -242,8 +242,10 @@
   // RETOUR : Liste des votes
   function getVotes($list_collectors)
   {
-    $listVotes   = array();
-    $listSmileys = array();
+    $listVotes      = array();
+    $listSmileys    = array();
+    $listUsers      = array();
+    $myIdentifiants = array();
 
     global $bdd;
 
@@ -251,16 +253,43 @@
     {
       for ($i = 1; $i <= 6; $i++)
       {
+        // Recherche du nombre de smileys
         $req = $bdd->query('SELECT COUNT(id) AS nb_smileys FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i);
         $data = $req->fetch();
 
         $listSmileys[$i] = $data['nb_smileys'];
 
         $req->closeCursor();
+
+        // Recherche des noms
+        $myArray = array();
+
+        $req2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i . ' ORDER BY identifiant ASC');
+        while($data2 = $req2->fetch())
+        {
+          if ($req2->rowCount() > 0)
+          {
+            $req3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data2['identifiant'] . '"');
+            $data3 = $req3->fetch();
+
+            $pseudo = $data3['pseudo'];
+
+            $req3->closeCursor();
+
+            $myIdentifiants = array('identifiant' => $data2['identifiant'],
+                                    'pseudo'      => $pseudo
+                                   );
+            array_push($myArray, $myIdentifiants);
+          }
+        }
+        $req2->closeCursor();
+
+        $listUsers[$i] = $myArray;
       }
 
-      $myVotes = array('id'      => $collector->getId(),
-                       'smileys' => $listSmileys
+      $myVotes = array('id'           => $collector->getId(),
+                       'identifiants' => $listUsers,
+                       'smileys'      => $listSmileys
                       );
 
       array_push($listVotes, $myVotes);
