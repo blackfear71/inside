@@ -4,6 +4,7 @@
   include_once('../includes/classes/calendars.php');
   include_once('../includes/classes/bugs.php');
   include_once('../includes/classes/profile.php');
+  include_once('../includes/classes/success.php');
 
   // METIER : Contrôle alertes utilisateurs
   // RETOUR : Booléen
@@ -1101,5 +1102,165 @@
     $req->closeCursor();
 
     $_SESSION['autorizations_updated'] = true;
+  }
+
+  // METIER : Lecture liste des succès
+  // RETOUR : Liste des succès
+  function getSuccess()
+  {
+    $listSuccess = array();
+
+    global $bdd;
+
+    // Lecture des données utilisateur
+    $reponse = $bdd->query('SELECT * FROM success');
+    while($donnees = $reponse->fetch())
+    {
+      // Instanciation d'un objet Success à partir des données remontées de la bdd
+      $mySuccess = Success::withData($donnees);
+      array_push($listSuccess, $mySuccess);
+    }
+    $reponse->closeCursor();
+
+    // Tri sur ordonnancement
+    foreach ($listSuccess as $success)
+    {
+      $tri_order[] = $success->getOrder_success();
+    }
+    array_multisort($tri_order, SORT_ASC, $listSuccess);
+
+    return $listSuccess;
+  }
+
+  // METIER : Insertion nouveau succès
+  // RETOUR : Aucun
+  function insertSuccess($post, $files)
+  {
+    var_dump($post);
+
+    $reference     = $post['reference'];
+    $order_success = $post['order_success'];
+    $title         = $post['title'];
+    $description   = $post['description'];
+    $limit_success = $post['limit_success'];
+
+    // Sauvegarde en cas d'erreur
+    $_SESSION['reference_success']   = $reference;
+    $_SESSION['order_success']       = $order_success;
+    $_SESSION['title_success']       = $title;
+    $_SESSION['description_success'] = $description;
+    $_SESSION['limit_success']       = $limit_success;
+
+    $control_ok = true;
+    global $bdd;
+
+    // Contrôle référence
+    $reponse = $bdd->query('SELECT * FROM success');
+    while($donnees = $reponse->fetch())
+    {
+      if ($reference == $donnees['reference'])
+      {
+        $control_ok = false;
+        $_SESSION['already_referenced'] = true;
+        break;
+      }
+    }
+    $reponse->closeCursor();
+
+    // Contrôles ordonnancement
+    if ($control_ok == true)
+    {
+      if (is_numeric($order_success))
+      {
+        $reponse = $bdd->query('SELECT * FROM success');
+        while($donnees = $reponse->fetch())
+        {
+          if ($order_success == $donnees['order_success'])
+          {
+            $control_ok = false;
+            $_SESSION['already_ordered'] = true;
+            break;
+          }
+        }
+        $reponse->closeCursor();
+      }
+      else
+      {
+        $control_ok = false;
+        $_SESSION['order_not_numeric'] = true;
+      }
+    }
+
+    // Contrôle condition
+    if ($control_ok == true)
+    {
+      if (!is_numeric($limit_success))
+      {
+        $control_ok = false;
+        $_SESSION['limit_not_numeric'] = true;
+      }
+    }
+
+    // Si contrôles ok, insertion image puis table
+    if ($control_ok == true)
+    {
+      // Insertion image
+      // Si on a bien une image
+   		if ($files['success']['name'] != NULL)
+   		{
+   			// Dossier de destination
+   			$success_dir = '../includes/icons/success/';
+
+   			// Données du fichier
+   			$file      = $files['success']['name'];
+   			$tmp_file  = $files['success']['tmp_name'];
+   			$size_file = $files['success']['size'];
+        $maxsize   = 8388608; // 8Mo
+
+        // Si le fichier n'est pas trop grand
+   			if ($size_file < $maxsize)
+   			{
+   				// Contrôle fichier temporaire existant
+   				if (!is_uploaded_file($tmp_file))
+   				{
+   					exit("Le fichier est introuvable");
+   				}
+
+   				// Contrôle type de fichier
+   				$type_file = $files['success']['type'];
+
+   				if (!strstr($type_file, 'png'))
+   				{
+   					exit("Le fichier n'est pas une image valide");
+   				}
+   				else
+   				{
+   					$type_image = pathinfo($file, PATHINFO_EXTENSION);
+   					$new_name   = $reference . '.' . $type_image;
+   				}
+
+   				// Contrôle upload (si tout est bon, l'image est envoyée)
+   				if (!move_uploaded_file($tmp_file, $success_dir . $new_name))
+   				{
+   					exit("Impossible de copier le fichier dans $success_dir");
+   				}
+
+   				echo "Le fichier a bien été uploadé";
+
+   				// On stocke le nouveau succès dans la base
+          $reponse = $bdd->prepare('INSERT INTO success(reference, order_success, title, description, limit_success) VALUES(:reference, :order_success, :title, :description, :limit_success)');
+  				$reponse->execute(array(
+  					'reference'     => $reference,
+            'order_success' => $order_success,
+            'title'         => $title,
+            'description'   => $description,
+  					'limit_success' => $limit_success
+  					));
+  				$reponse->closeCursor();
+
+   				$_SESSION['success_added'] = true;
+   			}
+   		}
+    }
   }
 ?>

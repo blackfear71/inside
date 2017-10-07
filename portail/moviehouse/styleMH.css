@@ -1378,7 +1378,8 @@
 .no_interested
 {
 	font-family: robotolight, Verdana, sans-serif;
-	line-height: 50px;
+	line-height: 20px;
+	margin-top: 10px;
 }
 
 .right_details

@@ -334,3 +334,202 @@
 	border-radius: 5px;
 	overflow: hidden;
 }
+
+/*** Saisie succès ***/
+.form_saisie_succes
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	text-align: center;
+	line-height: 40px;
+}
+
+.saisie_title
+{
+	width: 37.5%;
+	margin-right: 1%;
+	border: solid 1px #a3a3a3;
+	padding-left: 1%;
+	padding-right: 1%;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.saisie_reference
+{
+	width: 17%;
+	margin-right: 1%;
+	border: solid 1px #a3a3a3;
+	padding-left: 1%;
+	padding-right: 1%;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.saisie_order
+{
+	width: 12%;
+	margin-right: 1%;
+	border: solid 1px #a3a3a3;
+	padding-left: 1%;
+	padding-right: 1%;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.zone_parcourir_succes
+{
+	/* 20% + 1% */
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -4px;
+	margin-right: 1%;
+	height: 42px;
+	width: 20%;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: black;
+	background-color: #e3e3e3;
+	text-align: center;
+}
+
+.zone_parcourir_succes:hover
+{
+	background-color: rgb(255, 25, 55);
+	color: white;
+}
+
+.bouton_parcourir_succes
+{
+	opacity: 0;
+	height: 42px;
+	width: 100%;
+	margin-top: -40px;
+	display: block;
+	cursor: pointer;
+}
+
+.label_parcourir
+{
+	line-height: 42px;
+	height: 40px;
+	width: 100%;
+}
+
+.send_succes
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -4px;
+	height: 42px;
+	width: 3%;
+	border: 0;
+	background-color: #e3e3e3;
+	background-image: url("/inside/portail/calendars/icons/send_red.png");
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.send_succes:hover
+{
+	background-color: rgb(255, 25, 55);
+	background-image: url("/inside/portail/calendars/icons/send.png");
+}
+
+.saisie_description
+{
+	margin-top: 15px;
+	width: 76.6%;
+	margin-right: 1%;
+	border: solid 1px #a3a3a3;
+	padding-left: 1%;
+	padding-right: 1%;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.saisie_limit
+{
+	width: 18%;
+	border: solid 1px #a3a3a3;
+	padding-left: 1%;
+	padding-right: 1%;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+/*** Affichage succès ***/
+.zone_succes_admin
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.succes_liste
+{
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin: 1%;
+	width: 140px;
+	background-color: #ffad01;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.ordonnancement_succes
+{
+	float: left;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 50%;
+	background-color: rgb(255, 25, 55);
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	margin-bottom: -20px;
+	position: relative;
+	z-index: 1;
+}
+
+.logo_succes
+{
+	width: 140px;
+}
+
+.titre_succes
+{
+	margin-top: 6px;
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 120%;
+}
+
+.description_succes
+{
+	margin-top: 10px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+}

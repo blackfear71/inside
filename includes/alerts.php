@@ -126,6 +126,22 @@
   if (!isset($_SESSION['mail_film_error']))
     $_SESSION['mail_film_error'] = NULL;
 
+  // Initialisations gestion succès
+  if (!isset($_SESSION['already_referenced']))
+    $_SESSION['already_referenced'] = NULL;
+
+  if (!isset($_SESSION['order_not_numeric']))
+    $_SESSION['order_not_numeric'] = NULL;
+
+  if (!isset($_SESSION['already_ordered']))
+    $_SESSION['already_ordered'] = NULL;
+
+  if (!isset($_SESSION['limit_not_numeric']))
+    $_SESSION['limit_not_numeric'] = NULL;
+
+  if (!isset($_SESSION['success_added']))
+    $_SESSION['success_added'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -525,5 +541,45 @@
       echo 'Une erreur est survenue lors de l\'envoi. Contactez l\'administrateur.';
     echo '</div>';
     $_SESSION['mail_film_error'] = NULL;
+  }
+  // Alerte référence déjà existante
+  elseif (isset($_SESSION['already_referenced']) AND $_SESSION['already_referenced'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Cette référence existe déjà.';
+    echo '</div>';
+    $_SESSION['already_referenced'] = NULL;
+  }
+  // Alerte ordonnancement non numérique
+  elseif (isset($_SESSION['order_not_numeric']) AND $_SESSION['order_not_numeric'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'L\'ordonnancement doit être numérique.';
+    echo '</div>';
+    $_SESSION['order_not_numeric'] = NULL;
+  }
+  // ALerte ordonnancement déjà pris
+  elseif (isset($_SESSION['already_ordered']) AND $_SESSION['already_ordered'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Cette ordonnancement est déjà pris.';
+    echo '</div>';
+    $_SESSION['already_ordered'] = NULL;
+  }
+  // Alerte condition non numérique
+  elseif (isset($_SESSION['limit_not_numeric']) AND $_SESSION['limit_not_numeric'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'La condition doit être numérique.';
+    echo '</div>';
+    $_SESSION['limit_not_numeric'] = NULL;
+  }
+  // Alerte succès ajouté
+  elseif (isset($_SESSION['success_added']) AND $_SESSION['success_added'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Succès ajouté, ne pas oublier de modifier le code.';
+    echo '</div>';
+    $_SESSION['success_added'] = NULL;
   }
 ?>

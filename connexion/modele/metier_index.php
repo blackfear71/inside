@@ -97,6 +97,8 @@
     $reset            = "I";
     $avatar           = "";
     $email            = "";
+    $beginner         = 0;
+    $developper       = 0;
 
     // Initialisations préférences
     $view_movie_house  = "H";
@@ -127,7 +129,7 @@
       if ($password == $confirm_password)
       {
         // On créé l'utilisateur
-        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar, email) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar, :email)');
+        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar, email, beginner, developper) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar, :email, :beginner, :developper)');
 				$req->execute(array(
 					'identifiant'  => $trigramme,
           'salt'         => $salt,
@@ -135,7 +137,9 @@
           'reset'        => $reset,
 					'pseudo'       => $pseudo,
 					'avatar'       => $avatar,
-          'email'        => $email
+          'email'        => $email,
+          'beginner'     => $beginner,
+          'developper'   => $developper
 					));
 				$req->closeCursor();
 
