@@ -334,7 +334,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, reset, pseudo, avatar, email FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, reset, pseudo, avatar, email, beginner, developper FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -1262,5 +1262,50 @@
    			}
    		}
     }
+  }
+
+
+
+
+  // METIER : Modification top Beginner
+  // RETOUR : Aucun
+  function changeBeginner($user, $topBeginner)
+  {
+    var_dump($user);
+    var_dump($topBeginner);
+
+    if ($topBeginner == 1)
+      $topBeginner = 0;
+    else
+      $topBeginner = 1;
+
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE users SET beginner = :beginner WHERE identifiant = "' . $user . '"');
+    $req->execute(array(
+      'beginner' => $topBeginner
+    ));
+    $req->closeCursor();
+  }
+
+  // METIER : Modification top Developper
+  // RETOUR : Aucun
+  function changeDevelopper($user, $topDevelopper)
+  {
+    var_dump($user);
+    var_dump($topDevelopper);
+
+    global $bdd;
+
+    if ($topDevelopper == 1)
+      $topDevelopper = 0;
+    else
+      $topDevelopper = 1;
+
+    $req = $bdd->prepare('UPDATE users SET developper = :developper WHERE identifiant = "' . $user . '"');
+    $req->execute(array(
+      'developper' => $topDevelopper
+    ));
+    $req->closeCursor();
   }
 ?>

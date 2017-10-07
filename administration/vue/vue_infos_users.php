@@ -56,6 +56,22 @@
 
                 // Email
                 echo '<div class="infos_mail">' . $user->getEmail() . '</div>';
+
+                // Formulaire True Insider
+                echo '<form method="post" action="infos_users.php?user=' . $user->getIdentifiant() . '&top=' . $user->getBeginner() . '&action=changeBeginnerStatus">';
+                  if ($user->getBeginner() == "1")
+                    echo '<input type="submit" value="True Insider" class="beginner" />';
+                  else
+                    echo '<input type="submit" value="True Insider" class="not_beginner" />';
+                echo '</form>';
+
+                // Formulaire Developpeur
+                echo '<form method="post" action="infos_users.php?user=' . $user->getIdentifiant() . '&top=' . $user->getDevelopper() . '&action=changeDevelopperStatus">';
+                  if ($user->getDevelopper() == "1")
+                    echo '<input type="submit" value="Développeur" class="developper" />';
+                  else
+                    echo '<input type="submit" value="Développeur" class="not_developper" />';
+                echo '</form>';
               echo '</div>';
             }
   				?>

@@ -160,6 +160,70 @@
 	word-wrap: break-word;
 }
 
+.beginner
+{
+	float: left;
+	clear: both;
+	margin-top: 10px;
+	line-height: 30px;
+	border: 0;
+	width: 50%;
+	cursor: pointer;
+	background-color: rgb(255, 25, 55);
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.not_beginner
+{
+	float: left;
+	clear: both;
+	background: blue;
+	margin-top: 10px;
+	line-height: 30px;
+	border: 0;
+	width: 50%;
+	cursor: pointer;
+	background-color: white;
+	font-family: robotolight, Verdana, sans-serif;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.developper
+{
+	float: right;
+	clear: both;
+	background: red;
+	margin-top: -30px;
+	line-height: 30px;
+	border: 0;
+	width: 50%;
+	cursor: pointer;
+	background-color: #74cefb;
+	font-family: robotolight, Verdana, sans-serif;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.not_developper
+{
+	float: right;
+	clear: both;
+	background: pink;
+	margin-top: -30px;
+	line-height: 30px;
+	border: 0;
+	width: 50%;
+	cursor: pointer;
+	background-color: #b3b3b3;
+	font-family: robotolight, Verdana, sans-serif;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
 /*** Gestion utilisateurs ***/
 .form_manage_user
 {

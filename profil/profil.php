@@ -108,6 +108,8 @@
           $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
           $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
+          $profil->setBeginner(htmlspecialchars($profil->getBeginner()));
+          $profil->setDevelopper(htmlspecialchars($profil->getDevelopper()));
 
           $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
           $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));

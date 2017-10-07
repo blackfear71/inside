@@ -13,6 +13,14 @@
 			$listeUsers = getUsers();
       break;
 
+    case 'changeBeginnerStatus':
+      changeBeginner($_GET['user'], $_GET['top']);
+      break;
+
+    case 'changeDevelopperStatus':
+      changeDevelopper($_GET['user'], $_GET['top']);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: infos_users.php?action=goConsulter');
@@ -30,9 +38,13 @@
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
 				$user->setAvatar(htmlspecialchars($user->getAvatar()));
         $user->setEmail(htmlspecialchars($user->getEmail()));
+        $user->setBeginner(htmlspecialchars($user->getBeginner()));
+        $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
 			}
       break;
 
+    case 'changeBeginnerStatus':
+    case 'changeDevelopperStatus':
     default:
       break;
   }
@@ -40,6 +52,11 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'changeBeginnerStatus':
+    case 'changeDevelopperStatus':
+      header('location: infos_users.php?action=goConsulter');
+      break;
+
     case 'goConsulter':
     default:
       include_once('vue/vue_infos_users.php');

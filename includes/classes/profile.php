@@ -7,6 +7,8 @@
     private $pseudo;
     private $avatar;
     private $email;
+    private $beginner;
+    private $developper;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -17,6 +19,8 @@
       $this->pseudo      = '';
       $this->avatar      = '';
       $this->email       = '';
+      $this->beginner    = '';
+      $this->developper  = '';
     }
 
     // Constructeur de l'objet Profile en fonction des données
@@ -48,6 +52,12 @@
 
       if (isset($data['email']))
         $this->email       = $data['email'];
+
+      if (isset($data['beginner']))
+        $this->beginner    = $data['beginner'];
+
+      if (isset($data['developper']))
+        $this->developper  = $data['developper'];
     }
 
     // getters et setters pour l'objet Profile
@@ -115,6 +125,28 @@
     public function getEmail()
     {
       return $this->email;
+    }
+
+    // True Insider
+    public function setBeginner($beginner)
+    {
+      $this->beginner = $beginner;
+    }
+
+    public function getBeginner()
+    {
+      return $this->beginner;
+    }
+
+    // Développeur
+    public function setDevelopper($developper)
+    {
+      $this->developper = $developper;
+    }
+
+    public function getDevelopper()
+    {
+      return $this->developper;
     }
   }
 
