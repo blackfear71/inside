@@ -7,16 +7,39 @@
 
   // Contrôle user renseignée URL
   if ($_GET['user'] != $_SESSION['identifiant'])
-    header('location: profil.php?user=' . $_SESSION['identifiant'] . '&action=goConsulter');
+    header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
+
+    // Contrôle vue renseignée URL
+    switch ($_GET['view'])
+    {
+      case 'settings':
+      case 'success':
+        break;
+
+      default:
+        header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
+        break;
+    }
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $profil       = getProfile($_GET['user']);
-      $preferences  = getPreferences($_GET['user']);
-      $statistiques = getStatistiques($_GET['user']);
+      switch ($_GET['view'])
+      {
+        case 'success':
+          $listeSuccess = getSuccess();
+          $successUser  = getSuccessUser($listeSuccess, $_SESSION['identifiant']);
+          break;
+
+        case 'settings':
+        default:
+          $profil       = getProfile($_GET['user']);
+          $preferences  = getPreferences($_GET['user']);
+          $statistiques = getStatistiques($_GET['user']);
+          break;
+      }
       break;
 
     case 'doChangePseudo':
@@ -52,7 +75,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: profil.php?user=' . $_SESSION['identifiant'] . '&action=goConsulter');
+      header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
       break;
   }
 
@@ -60,21 +83,43 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
-      $profil->setReset(htmlspecialchars($profil->getReset()));
-      $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
-      $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
-      $profil->setEmail(htmlspecialchars($profil->getEmail()));
+      switch ($_GET['view'])
+      {
+        case 'success':
+          foreach ($listeSuccess as $success)
+          {
+            $success->setReference(htmlspecialchars($success->getReference()));
+            $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
+            $success->setTitle(htmlspecialchars($success->getTitle()));
+            $success->setDescription(htmlspecialchars($success->getDescription()));
+            $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+          }
 
-      $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
-      $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));
-      $statistiques->setNb_ideas(htmlspecialchars($statistiques->getNb_ideas()));
+          foreach ($successUser as $limit)
+          {
+            $limit = htmlspecialchars($limit);
+          }
+          break;
 
-      $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-      $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
-      $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
-      $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-      $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+        case 'settings':
+        default:
+          $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
+          $profil->setReset(htmlspecialchars($profil->getReset()));
+          $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
+          $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
+          $profil->setEmail(htmlspecialchars($profil->getEmail()));
+
+          $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
+          $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));
+          $statistiques->setNb_ideas(htmlspecialchars($statistiques->getNb_ideas()));
+
+          $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
+          $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
+          $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
+          $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
+          $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+          break;
+      }
       break;
 
     case 'doChangePseudo':
@@ -98,7 +143,7 @@
     case "doUpdateMail":
     case 'doChangeMdp':
     case 'askDesinscription':
-      header('location: profil.php?user=' . $_GET['user'] . '&action=goConsulter');
+      header('location: profil.php?user=' . $_GET['user'] . '&view=settings&action=goConsulter');
       break;
 
     case 'goConsulter':

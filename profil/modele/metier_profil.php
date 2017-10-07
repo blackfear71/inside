@@ -1,6 +1,7 @@
 <?php
   include_once('../includes/appel_bdd.php');
   include_once('../includes/classes/profile.php');
+  include_once('../includes/classes/success.php');
   include_once('../includes/imagethumb.php');
 
   // METIER : Lecture des données préférences
@@ -403,5 +404,255 @@
     $reponse->closeCursor();
 
     $_SESSION['ask_desinscription'] = true;
+  }
+
+  // METIER : Lecture liste des succès
+  // RETOUR : Liste des succès
+  function getSuccess()
+  {
+    $listSuccess = array();
+
+    global $bdd;
+
+    // Lecture des données utilisateur
+    $reponse = $bdd->query('SELECT * FROM success');
+    while($donnees = $reponse->fetch())
+    {
+      // Instanciation d'un objet Success à partir des données remontées de la bdd
+      $mySuccess = Success::withData($donnees);
+      array_push($listSuccess, $mySuccess);
+    }
+    $reponse->closeCursor();
+
+    // Tri sur ordonnancement
+    foreach ($listSuccess as $success)
+    {
+      $tri_order[] = $success->getOrder_success();
+    }
+    array_multisort($tri_order, SORT_ASC, $listSuccess);
+
+    return $listSuccess;
+  }
+
+  // METIER : Succès de l'utilisateur courant
+  // RETOUR : Succès utilisateur
+  function getSuccessUser($listSuccess, $user)
+  {
+    //var_dump ($listSuccess);
+
+    $successUser = array();
+
+    global $bdd;
+
+    // Recherche des données
+    foreach ($listSuccess as $success)
+    {
+      switch($success->getReference())
+      {
+        // J'étais là
+        case "beginning":
+          $true_insider = 0;
+
+          $req = $bdd->query('SELECT id, identifiant, beginner FROM users WHERE identifiant = "' . $user . '"');
+          $data = $req->fetch();
+
+          $true_insider = $data['beginner'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $true_insider;
+          break;
+
+        // Je l'ai fait !
+        case "developper":
+          $developper = 0;
+
+          $req = $bdd->query('SELECT id, identifiant, developper FROM users WHERE identifiant = "' . $user . '"');
+          $data = $req->fetch();
+
+          $developper = $data['developper'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $developper;
+          break;
+
+        // Cinéphile amateur
+        case "publisher":
+          $nb_films_publies = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_films_publies FROM movie_house WHERE identifiant_add = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_films_publies = $data['nb_films_publies'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_films_publies;
+          break;
+
+        // Cinéphile professionnel
+        case "viewer":
+          $nb_films_vus = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_films_vus FROM movie_house_users WHERE identifiant = "' . $user . '" AND participation = "S"');
+          $data = $req->fetch();
+
+          $nb_films_vus = $data['nb_films_vus'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_films_vus;
+          break;
+
+        // Commentateur sportif
+        case "commentator":
+          $nb_commentaires_films = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_commentaires_films FROM movie_house_comments WHERE author = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_commentaires_films = $data['nb_commentaires_films'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_commentaires_films;
+          break;
+
+        // Expert acoustique
+        case "listener":
+          $nb_collector_publiees = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_collector_publiees FROM collector WHERE author = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_collector_publiees = $data['nb_collector_publiees'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_collector_publiees;
+          break;
+
+        // Dommage collatéral
+        case "speaker":
+          $nb_collector_speaker = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_collector_speaker FROM collector WHERE speaker = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_collector_speaker = $data['nb_collector_speaker'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_collector_speaker;
+          break;
+
+        // Rigolo compulsif
+        case "funny":
+          $nb_collector_user = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_collector_user FROM collector_users WHERE identifiant = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_collector_user = $data['nb_collector_user'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_collector_user;
+          break;
+
+        // Désigné volontaire
+        case "buyer":
+          $nb_buyer = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_buyer FROM expense_center WHERE buyer = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_buyer = $data['nb_buyer'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_buyer;
+          break;
+
+        // Profiteur occasionnel
+        case "eater":
+          $nb_parts = 0;
+
+          $req = $bdd->query('SELECT * FROM expense_center_users WHERE identifiant = "' . $user . '"');
+          while($data = $req->fetch())
+          {
+            $nb_parts += $data['parts'];
+          }
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_parts;
+          break;
+
+        // Génie créatif
+        case "creator":
+          $nb_idees_publiees = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_idees_publiees FROM ideas WHERE author = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_idees_publiees = $data['nb_idees_publiees'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_idees_publiees;
+          break;
+
+        // Top développeur
+        case "applier":
+          $nb_idees_resolues = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_idees_resolues FROM ideas WHERE developper = "' . $user . '" AND status = "D"');
+          $data = $req->fetch();
+
+          $nb_idees_resolues = $data['nb_idees_resolues'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_idees_resolues;
+          break;
+
+        // Débugger aguerri
+        case "debugger":
+          $nb_bugs_publies = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_bugs_publies FROM bugs WHERE author = "' . $user . '"');
+          $data = $req->fetch();
+
+          $nb_bugs_publies = $data['nb_bugs_publies'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_bugs_publies;
+          break;
+
+        // Compilateur intégré
+        case "compiler":
+          $nb_bugs_resolus = 0;
+
+          $req = $bdd->query('SELECT COUNT(id) AS nb_bugs_resolus FROM bugs WHERE author = "' . $user . '" AND resolved = "Y"');
+          $data = $req->fetch();
+
+          $nb_bugs_resolus = $data['nb_bugs_resolus'];
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_bugs_resolus;
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    // Tri des succès
+    ksort($successUser);
+
+    return $successUser;
   }
 ?>

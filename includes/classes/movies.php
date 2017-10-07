@@ -5,6 +5,7 @@
     private $film;
     private $to_delete;
     private $date_add;
+    private $identifiant_add;
     private $date_theater;
     private $date_release;
     private $link;
@@ -25,26 +26,27 @@
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id            = 0;
-      $this->film          = '';
-      $this->to_delete     = '';
-      $this->date_add      = '';
-      $this->date_theater  = '';
-      $this->date_release  = '';
-      $this->link          = '';
-      $this->poster        = '';
-      $this->trailer       = '';
-      $this->id_url        = '';
-      $this->doodle        = '';
-      $this->date_doodle   = '';
-      $this->time_doodle   = '';
-      $this->restaurant    = '';
-      $this->place         = '';
-      $this->nb_comments   = 0;
-      $this->stars_user    = 0;
-      $this->participation = '';
-      $this->nb_users      = 0;
-      $this->average       = 0;
+      $this->id              = 0;
+      $this->film            = '';
+      $this->to_delete       = '';
+      $this->date_add        = '';
+      $this->identifiant_add = '';
+      $this->date_theater    = '';
+      $this->date_release    = '';
+      $this->link            = '';
+      $this->poster          = '';
+      $this->trailer         = '';
+      $this->id_url          = '';
+      $this->doodle          = '';
+      $this->date_doodle     = '';
+      $this->time_doodle     = '';
+      $this->restaurant      = '';
+      $this->place           = '';
+      $this->nb_comments     = 0;
+      $this->stars_user      = 0;
+      $this->participation   = '';
+      $this->nb_users        = 0;
+      $this->average         = 0;
     }
 
     // Constructeur de l'objet Movie en fonction des données
@@ -60,64 +62,67 @@
     protected function fill ($data)
     {
       if (isset($data['id']))
-        $this->id            = $data['id'];
+        $this->id              = $data['id'];
 
       if (isset($data['film']))
-        $this->film          = $data['film'];
+        $this->film            = $data['film'];
 
       if (isset($data['to_delete']))
-        $this->to_delete     = $data['to_delete'];
+        $this->to_delete       = $data['to_delete'];
 
       if (isset($data['date_add']))
-        $this->date_add      = $data['date_add'];
+        $this->date_add        = $data['date_add'];
+
+      if (isset($data['identifiant_add']))
+        $this->identifiant_add = $data['identifiant_add'];
 
       if (isset($data['date_theater']))
-        $this->date_theater  = $data['date_theater'];
+        $this->date_theater    = $data['date_theater'];
 
       if (isset($data['date_release']))
-        $this->date_release  = $data['date_release'];
+        $this->date_release    = $data['date_release'];
 
       if (isset($data['link']))
-        $this->link          = $data['link'];
+        $this->link            = $data['link'];
 
       if (isset($data['poster']))
-        $this->poster        = $data['poster'];
+        $this->poster          = $data['poster'];
 
       if (isset($data['trailer']))
-        $this->trailer       = $data['trailer'];
+        $this->trailer         = $data['trailer'];
 
       if (isset($data['id_url']))
-        $this->id_url        = $data['id_url'];
+        $this->id_url          = $data['id_url'];
 
       if (isset($data['doodle']))
-        $this->doodle        = $data['doodle'];
+        $this->doodle          = $data['doodle'];
 
       if (isset($data['date_doodle']))
-        $this->date_doodle   = $data['date_doodle'];
+        $this->date_doodle     = $data['date_doodle'];
 
       if (isset($data['time_doodle']))
-        $this->time_doodle   = $data['time_doodle'];
+        $this->time_doodle     = $data['time_doodle'];
 
       if (isset($data['restaurant']))
-        $this->restaurant    = $data['restaurant'];
+        $this->restaurant      = $data['restaurant'];
 
       if (isset($data['place']))
-        $this->place         = $data['place'];
+        $this->place           = $data['place'];
 
       if (isset($data['nb_comments']))
-        $this->nb_comments   = $data['nb_comments'];
+        $this->nb_comments     = $data['nb_comments'];
 
       if (isset($data['stars_user']))
-        $this->stars_user    = $data['stars_user'];
+        $this->stars_user      = $data['stars_user'];
 
       if (isset($data['participation']))
-        $this->participation = $data['participation'];
+        $this->participation   = $data['participation'];
 
       if (isset($data['nb_users']))
-        $this->nb_users      = $data['nb_users'];
+        $this->nb_users        = $data['nb_users'];
 
       if (isset($data['average']))
-        $this->average       = $data['average'];
+        $this->average         = $data['average'];
     }
 
     // getters et setters pour l'objet Movie
@@ -163,6 +168,17 @@
     public function getDate_add()
     {
       return $this->date_add;
+    }
+
+    // Identifiant ajout
+    public function setIdentifiant_add($identifiant_add)
+    {
+      $this->identifiant_add = $identifiant_add;
+    }
+
+    public function getIdentifiant_add()
+    {
+      return $this->identifiant_add;
     }
 
     // Date sortie cinéma

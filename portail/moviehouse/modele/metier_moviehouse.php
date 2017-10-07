@@ -413,7 +413,7 @@
 
   // METIER : Insertion film
   // RETOUR : Aucun
-  function insertFilmRapide($post, $year)
+  function insertFilmRapide($post, $year, $user)
   {
     // Sauvegarde en session en cas d'erreur
     $_SESSION['nom_film_saisi']      = $post['nom_film'];
@@ -446,26 +446,28 @@
 		{
       global $bdd;
 
-      $film = array('film'         => $post['nom_film'],
-                    'to_delete'    => "N",
-                    'date_add'     => date("Ymd"),
-                    'date_theater' => $date_theater,
-                    'date_release' => "",
-                    'link'         => "",
-                    'poster'       => "",
-                    'trailer'      => "",
-                    'id_url'       => "",
-                    'doodle'       => "",
-                    'date_doodle'  => "",
-                    'time_doodle'  => "",
-                    'restaurant'   => "",
-                    'place'        => ""
+      $film = array('film'            => $post['nom_film'],
+                    'to_delete'       => "N",
+                    'date_add'        => date("Ymd"),
+                    'identifiant_add' => $user,
+                    'date_theater'    => $date_theater,
+                    'date_release'    => "",
+                    'link'            => "",
+                    'poster'          => "",
+                    'trailer'         => "",
+                    'id_url'          => "",
+                    'doodle'          => "",
+                    'date_doodle'     => "",
+                    'time_doodle'     => "",
+                    'restaurant'      => "",
+                    'place'           => ""
                    );
 
 			// Stockage de l'enregistrement en table
       $req = $bdd->prepare('INSERT INTO movie_house(film,
 																										to_delete,
-																										date_add,
+                                                    date_add,
+																										identifiant_add,
 																										date_theater,
 																										date_release,
 																										link,
@@ -479,7 +481,8 @@
 																										place)
 																						VALUES(:film,
 																									 :to_delete,
-																									 :date_add,
+                                                   :date_add,
+																									 :identifiant_add,
 																									 :date_theater,
 																									 :date_release,
 																									 :link,
@@ -987,7 +990,7 @@
 
   // METIER : Insertion film saisie avancée
   // RETOUR : Id film créé
-  function insertFilmAvance($post)
+  function insertFilmAvance($post, $user)
   {
     $new_id = NULL;
 
@@ -1016,16 +1019,17 @@
     $_SESSION['place_saisie']      = $post['place'];
 
     // Récupération des variables
-    $nom_film     = $post['nom_film'];
-    $to_delete    = "N";
-    $date_add     = date("Ymd");
-    $date_theater = "";
-    $date_release = "";
-    $link         = $post['link'];
-    $poster       = $post['poster'];
-    $trailer      = $post['trailer'];
-    $doodle       = $post['doodle'];
-    $date_doodle  = "";
+    $nom_film        = $post['nom_film'];
+    $to_delete       = "N";
+    $date_add        = date("Ymd");
+    $identifiant_add = $user;
+    $date_theater    = "";
+    $date_release    = "";
+    $link            = $post['link'];
+    $poster          = $post['poster'];
+    $trailer         = $post['trailer'];
+    $doodle          = $post['doodle'];
+    $date_doodle     = "";
 
     if (!empty($post['date_doodle']) AND isset($post['hours_doodle']) AND isset($post['minutes_doodle']))
       $time_doodle = $post['hours_doodle'] . $post['minutes_doodle'];
@@ -1094,20 +1098,21 @@
 
       if ($_SESSION['wrong_date'] != true)
 			{
-        $film = array('film'         => $nom_film,
-                      'to_delete'    => $to_delete,
-                      'date_add'     => $date_add,
-                      'date_theater' => $date_theater,
-                      'date_release' => $date_release,
-                      'link'         => $link,
-                      'poster'       => $poster,
-                      'trailer'      => $trailer,
-                      'id_url'       => $id_url,
-                      'doodle'       => $doodle,
-                      'date_doodle'  => $date_doodle,
-                      'time_doodle'  => $time_doodle,
-                      'restaurant'   => $restaurant,
-                      'place'        => $place
+        $film = array('film'            => $nom_film,
+                      'to_delete'       => $to_delete,
+                      'date_add'        => $date_add,
+                      'identifiant_add' => $identifiant_add,
+                      'date_theater'    => $date_theater,
+                      'date_release'    => $date_release,
+                      'link'            => $link,
+                      'poster'          => $poster,
+                      'trailer'         => $trailer,
+                      'id_url'          => $id_url,
+                      'doodle'          => $doodle,
+                      'date_doodle'     => $date_doodle,
+                      'time_doodle'     => $time_doodle,
+                      'restaurant'      => $restaurant,
+                      'place'           => $place
                      );
 
         global $bdd;
@@ -1116,6 +1121,7 @@
         $req = $bdd->prepare('INSERT INTO movie_house(film,
         																							to_delete,
         																							date_add,
+                                                      identifiant_add,
         																							date_theater,
         																							date_release,
         																							link, poster,
@@ -1128,7 +1134,8 @@
         																							place)
         																			VALUES(:film,
         																						 :to_delete,
-        																						 :date_add,
+                                                     :date_add,
+        																						 :identifiant_add,
         																						 :date_theater,
         																						 :date_release,
         																						 :link, :poster,
@@ -1308,6 +1315,7 @@
     $details->setFilm(htmlspecialchars($details->getFilm()));
     $details->setTo_delete(htmlspecialchars($details->getTo_delete()));
     $details->setDate_add(htmlspecialchars($details->getDate_add()));
+    $details->setIdentifiant_add(htmlspecialchars($details->getIdentifiant_add()));
     $details->setDate_theater(htmlspecialchars($details->getDate_theater()));
     $details->setDate_release(htmlspecialchars($details->getDate_release()));
     $details->setLink(htmlspecialchars($details->getLink()));

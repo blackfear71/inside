@@ -377,3 +377,49 @@
 	font-weight: bold;
 	margin-bottom: 2%;
 }
+
+/*** Succès profil ***/
+.zone_succes_profil
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.succes_liste
+{
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin: 1%;
+	width: 140px;
+	background-color: #b3b3b3;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.logo_succes_unlocked
+{
+	width: 140px;
+}
+
+.logo_succes_locked
+{
+	filter: grayscale(100%);
+	width: 140px;
+	opacity: 0.5;
+}
+
+.titre_succes
+{
+	margin-top: 6px;
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 120%;
+}
+
+.description_succes
+{
+	margin-top: 10px;
+	font-family: robotolight_italic, Verdana, sans-serif;
+}

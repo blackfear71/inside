@@ -78,6 +78,7 @@
         $detailsFilm->setFilm(htmlspecialchars($detailsFilm->getFilm()));
         $detailsFilm->setTo_delete(htmlspecialchars($detailsFilm->getTo_delete()));
         $detailsFilm->setDate_add(htmlspecialchars($detailsFilm->getDate_add()));
+        $detailsFilm->setIdentifiant_add(htmlspecialchars($detailsFilm->getIdentifiant_add()));
         $detailsFilm->setDate_theater(htmlspecialchars($detailsFilm->getDate_theater()));
         $detailsFilm->setDate_release(htmlspecialchars($detailsFilm->getDate_release()));
         $detailsFilm->setLink(htmlspecialchars($detailsFilm->getLink()));
