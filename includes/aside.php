@@ -34,6 +34,9 @@
 	if (!isset($back))
 		$back = false;
 
+	if (!isset($modify_success))
+		$modify_success = false;
+
 	if (!isset($back_admin))
 		$back_admin = false;
 
@@ -113,6 +116,15 @@
 			echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
 			echo '<div class="hover_aside">Suppression</div>';
 		echo '</form>';
+	}
+
+	// Modifier les succès
+	if ($modify_success == true)
+	{
+		echo '<a href="/inside/administration/manage_success.php?action=goModifier" title="Modifier les succès" class="link_profile">';
+			echo '<img src="/inside/includes/icons/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';
+		echo '</a>';
+		echo '<div class="hover_aside">Modifier</div>';
 	}
 
 	// Retour à l'accueil

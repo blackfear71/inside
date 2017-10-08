@@ -4,6 +4,7 @@
 
   // Fonctions communes
   include('../../includes/fonctions_dates.php');
+  include('../../includes/fonctions_regex.php');
 
   // Contrôle si l'année est renseignée et numérique
 	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))

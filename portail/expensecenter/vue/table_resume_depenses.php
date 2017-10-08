@@ -88,7 +88,7 @@
 
 			          // Suppression ligne
 								echo '<span class="link_action_depenses">';
-			            echo '<input type="submit" name="delete_depense" value="" title="Supprimer la ligne" onclick="if(!confirm(\'Supprimer la dépense de ' . $ligneResume['name_b'] . ' du ' . $ligneResume['date'] . ' et d&rsquo;un montant de ' . $ligneResume['price'] . ' € ?\')) return false;" class="icone_supprimer_depense" />';
+			            echo '<input type="submit" name="delete_depense" value="" title="Supprimer la ligne" onclick="if(!confirm(\'Supprimer la dépense de ' . formatOnclick($ligneResume['name_b']) . ' du ' . $ligneResume['date'] . ' et d&rsquo;un montant de ' . $ligneResume['price'] . ' € ?\')) return false;" class="icone_supprimer_depense" />';
 								echo '</span>';
 			        echo '</td>';
 						echo '</form>';

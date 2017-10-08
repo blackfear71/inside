@@ -1136,8 +1136,6 @@
   // RETOUR : Aucun
   function insertSuccess($post, $files)
   {
-    var_dump($post);
-
     $reference     = $post['reference'];
     $order_success = $post['order_success'];
     $title         = $post['title'];
@@ -1264,16 +1262,129 @@
     }
   }
 
+  // METIER : Suppression succès
+  // RETOUR : Aucun
+  function deleteSuccess($id_success)
+  {
+    global $bdd;
+
+    // Suppression de l'image
+    $req1 = $bdd->query('SELECT id, reference FROM success WHERE id = ' . $id_success);
+    $data1 = $req1->fetch();
+
+    if (isset($data1['reference']) AND !empty($data1['reference']))
+      unlink ("../includes/icons/success/" . $data1['reference'] . ".png");
+
+    $req1->closeCursor();
+
+    // Suppression du succès de la base
+    $req2 = $bdd->exec('DELETE FROM success WHERE id = ' . $id_success);
+
+    $_SESSION['success_deleted'] = true;
+  }
 
 
+  // METIER : Modification succès
+  // RETOUR : Aucun
+  function updateSuccess($post)
+  {
+    $update     = array();
+    $control_ok = true;
+
+    // Sauvegarde en cas d'erreur
+    $_SESSION['save_success'] = $post;
+
+    // Construction tableau pour mise à jour
+    foreach ($post['id'] as $id)
+    {
+      $myUpdate = array('id'            => $post['id'][$id],
+                        'order_success' => $post['order_success'][$id],
+                        'title'         => $post['title'][$id],
+                        'description'   => $post['description'][$id],
+                        'limit_success' => $post['limit_success'][$id],
+                       );
+      array_push($update, $myUpdate);
+    }
+
+    global $bdd;
+
+    foreach ($update as $success)
+    {
+      // Contrôles ordonnancement
+      if ($control_ok == true)
+      {
+        if (is_numeric($success['order_success']))
+        {
+          $reponse = $bdd->query('SELECT * FROM success');
+          while($donnees = $reponse->fetch())
+          {
+            if ($success['id'] != $donnees['id'] AND $success['order_success'] == $donnees['order_success'])
+            {
+              $control_ok = false;
+              $_SESSION['already_ordered'] = true;
+              break;
+            }
+          }
+          $reponse->closeCursor();
+        }
+        else
+        {
+          $control_ok = false;
+          $_SESSION['order_not_numeric'] = true;
+        }
+      }
+
+      // Contrôle condition
+      if ($control_ok == true)
+      {
+        if (!is_numeric($success['limit_success']))
+        {
+          $control_ok = false;
+          $_SESSION['limit_not_numeric'] = true;
+        }
+      }
+
+      // Mise à jour si pas d'erreur
+      if ($control_ok == true)
+      {
+        $req = $bdd->prepare('UPDATE success SET order_success = :order_success, title = :title, description = :description, limit_success = :limit_success WHERE id = ' . $success['id']);
+        $req->execute(array(
+          'order_success' => $success['order_success'],
+          'title'         => $success['title'],
+          'description'   => $success['description'],
+          'limit_success' => $success['limit_success']
+        ));
+        $req->closeCursor();
+      }
+
+      // On quitte la boucle s'il y a une erreur
+      if ($control_ok != true)
+        break;
+    }
+
+    if ($control_ok != true)
+      $_SESSION['erreur_succes'] = true;
+    else
+      $_SESSION['erreur_succes'] = NULL;
+  }
+
+  // METIER : Initialisation champs erreur modification succès
+  // RETOUR : Aucun
+  function initModErrSucces($listSuccess, $session_succes)
+  {
+    foreach ($listSuccess as $success)
+    {
+      $success->setOrder_success($session_succes['order_success'][$success->getId()]);
+      $success->setTitle($session_succes['title'][$success->getId()]);
+      $success->setDescription($session_succes['description'][$success->getId()]);
+      $success->setLimit_success($session_succes['limit_success'][$success->getId()]);
+    }
+  }
 
   // METIER : Modification top Beginner
   // RETOUR : Aucun
   function changeBeginner($user, $topBeginner)
   {
-    var_dump($user);
-    var_dump($topBeginner);
-
     if ($topBeginner == 1)
       $topBeginner = 0;
     else
@@ -1292,9 +1403,6 @@
   // RETOUR : Aucun
   function changeDevelopper($user, $topDevelopper)
   {
-    var_dump($user);
-    var_dump($topDevelopper);
-
     global $bdd;
 
     if ($topDevelopper == 1)

@@ -110,4 +110,16 @@
 
 		return $text;
 	}
+
+	/////////////////////////////////////
+	// Fonction formatage pour Onclick //
+	/////////////////////////////////////
+	function formatOnclick($text)
+	{
+		$in   = array("'", '"', "é", "è", "ê", "ë", "à", "ç", "ô", "û");
+		$out  = array("&rsquo;", "	&quot;", "&eacute;", "&egrave;", "&ecirc;", "&euml;", "&agrave;", "&ocirc;", "&ucirc;");
+		$text = str_replace($in, $out, $text);
+
+		return $text;
+	}
 ?>

@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleAdmin.css" />
 
-		<title>Inside - Utilisateurs</title>
+		<title>Inside - Succès</title>
   </head>
 
 	<body>
@@ -27,8 +27,9 @@
 			<!-- Paramétrage des boutons de navigation -->
 			<aside>
 				<?php
-					$disconnect = true;
-					$back_admin = true;
+					$disconnect     = true;
+          $modify_success = true;
+					$back_admin     = true;
 
 					include('../includes/aside.php');
 				?>
@@ -66,25 +67,35 @@
             echo '<input type="text" name="description" placeholder="Description" value="' . $_SESSION['description_success'] . '" class="saisie_description" required />';
 
             // Condition
-            echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['limit_success'] . '" class="saisie_limit" required />';
+            echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['limit_success'] . '" maxlength="3" class="saisie_limit" required />';
           echo '</form>';
 
           // Affichage des succès
           echo '<div class="zone_succes_admin">';
             foreach ($listeSuccess as $success)
             {
-              echo '<div class="succes_liste">';
-                // Ordonnancement
-                echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
+              echo '<div class="ensemble_succes">';
+                // Suppression succès
+                echo '<form method="post" action="manage_success.php?id=' . $success->getId() . '&action=doSupprimer" class="form_suppression_succes">';
+                  echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" onclick="if(!confirm(\'Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?\')) return false;" class="bouton_delete" />';
+                echo '</form>';
 
-                // Logo succès
-                echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
+                echo '<div class="succes_liste">';
+                  // Ordonnancement
+                  echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
 
-                // Titre succès
-                echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
+                  // Condition
+                  echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
 
-                // Description succès
-                echo '<div class="description_succes">' . $success->getDescription() . '</div>';
+                  // Logo succès
+                  echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="success" class="logo_succes" />';
+
+                  // Titre succès
+                  echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
+
+                  // Description succès
+                  echo '<div class="description_succes">' . $success->getDescription() . '</div>';
+                echo '</div>';
               echo '</div>';
             }
           echo '</div>';

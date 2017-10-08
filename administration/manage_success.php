@@ -2,11 +2,13 @@
   // Contrôles communs Administrateur
   include_once('../includes/controls_admin.php');
 
+  // Fonctions communes
+	include('../includes/fonctions_regex.php');
+
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
 
   // Initialisation sauvegarde saisie succès
-
   if ((!isset($_SESSION['already_referenced']) OR $_SESSION['already_referenced'] != true)
   AND (!isset($_SESSION['order_not_numeric'])  OR $_SESSION['order_not_numeric'] != true)
   AND (!isset($_SESSION['already_ordered'])    OR $_SESSION['already_ordered'] != true)
@@ -18,7 +20,12 @@
     $_SESSION['description_success'] = "";
     $_SESSION['limit_success']       = "";
   }
-  
+
+  if (!isset($_SESSION['erreur_succes']) OR $_SESSION['erreur_succes'] != true)
+  {
+    $_SESSION['save_success'] = NULL;
+  }
+
   // Appel métier
   switch ($_GET['action'])
   {
@@ -27,8 +34,27 @@
 			$listeSuccess = getSuccess();
       break;
 
+    case 'goModifier':
+      // Lecture liste des données par le modèle
+      $listeSuccess = getSuccess();
+
+      if (isset($_SESSION['erreur_succes']) AND $_SESSION['erreur_succes'] == true)
+      {
+        initModErrSucces($listeSuccess, $_SESSION['save_success']);
+        $_SESSION['erreur_succes'] = NULL;
+      }
+      break;
+
     case "doAjouter":
       insertSuccess($_POST, $_FILES);
+      break;
+
+    case "doSupprimer":
+      deleteSuccess($_GET['id']);
+      break;
+
+    case "doModifier":
+      updateSuccess($_POST);
       break;
 
     default:
@@ -51,7 +77,20 @@
       }
       break;
 
+    case 'goModifier':
+      foreach ($listeSuccess as $success)
+      {
+        $success->setReference(htmlspecialchars($success->getReference()));
+        $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
+        $success->setTitle(htmlspecialchars($success->getTitle()));
+        $success->setDescription(htmlspecialchars($success->getDescription()));
+        $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+      }
+      break;
+
     case "doAjouter":
+    case "doSupprimer":
+    case "doModifier":
     default:
       break;
   }
@@ -59,8 +98,20 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case "doModifier":
+      if ($_SESSION['erreur_succes'] == true)
+        header('location: manage_success.php?action=goModifier');
+      else
+        header('location: manage_success.php?action=goConsulter');
+      break;
+
     case "doAjouter":
+    case "doSupprimer":
       header('location: manage_success.php?action=goConsulter');
+      break;
+
+    case 'goModifier':
+      include_once('vue/vue_modify_success.php');
       break;
 
     case 'goConsulter':

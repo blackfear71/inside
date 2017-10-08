@@ -142,6 +142,9 @@
   if (!isset($_SESSION['success_added']))
     $_SESSION['success_added'] = NULL;
 
+  if (!isset($_SESSION['success_deleted']))
+    $_SESSION['success_deleted'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -581,5 +584,13 @@
       echo 'Succès ajouté, ne pas oublier de modifier le code.';
     echo '</div>';
     $_SESSION['success_added'] = NULL;
+  }
+  // Alerte succès supprimé
+  elseif (isset($_SESSION['success_deleted']) AND $_SESSION['success_deleted'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Succès supprimé, ne pas oublier de modifier le code.';
+    echo '</div>';
+    $_SESSION['success_deleted'] = NULL;
   }
 ?>
