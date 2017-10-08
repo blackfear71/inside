@@ -1315,17 +1315,16 @@
       {
         if (is_numeric($success['order_success']))
         {
-          $reponse = $bdd->query('SELECT * FROM success');
-          while($donnees = $reponse->fetch())
+          // Contrôle doublons
+          foreach ($update as $test_order)
           {
-            if ($success['id'] != $donnees['id'] AND $success['order_success'] == $donnees['order_success'])
+            if ($success['id'] != $test_order['id'] AND $success['order_success'] == $test_order['order_success'])
             {
               $control_ok = false;
               $_SESSION['already_ordered'] = true;
               break;
             }
           }
-          $reponse->closeCursor();
         }
         else
         {
@@ -1355,6 +1354,8 @@
           'limit_success' => $success['limit_success']
         ));
         $req->closeCursor();
+
+        $_SESSION['success_updated'] = true;
       }
 
       // On quitte la boucle s'il y a une erreur

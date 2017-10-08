@@ -160,17 +160,22 @@
 	word-wrap: break-word;
 }
 
-.beginner
+.form_infos_users input
 {
-	float: left;
 	clear: both;
-	margin-top: 10px;
+	vertical-align: middle;
 	line-height: 30px;
 	border: 0;
 	width: 50%;
 	cursor: pointer;
-	background-color: rgb(255, 25, 55);
 	font-family: robotolight, Verdana, sans-serif;
+}
+
+.beginner
+{
+	float: left;
+	margin-top: 10px;
+	background-color: rgb(255, 25, 55);
 	color: white;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -179,15 +184,8 @@
 .not_beginner
 {
 	float: left;
-	clear: both;
-	background: blue;
 	margin-top: 10px;
-	line-height: 30px;
-	border: 0;
-	width: 50%;
-	cursor: pointer;
 	background-color: white;
-	font-family: robotolight, Verdana, sans-serif;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
@@ -195,15 +193,8 @@
 .developper
 {
 	float: right;
-	clear: both;
-	background: red;
 	margin-top: -30px;
-	line-height: 30px;
-	border: 0;
-	width: 50%;
-	cursor: pointer;
 	background-color: #ffad01;
-	font-family: robotolight, Verdana, sans-serif;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
@@ -211,15 +202,8 @@
 .not_developper
 {
 	float: right;
-	clear: both;
-	background: pink;
 	margin-top: -30px;
-	line-height: 30px;
-	border: 0;
-	width: 50%;
-	cursor: pointer;
 	background-color: #b3b3b3;
-	font-family: robotolight, Verdana, sans-serif;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
@@ -412,7 +396,7 @@
 
 .saisie_title
 {
-	width: 37.5%;
+	width: 37%;
 	margin-right: 1%;
 	border: solid 1px #a3a3a3;
 	padding-left: 1%;
@@ -518,7 +502,7 @@
 .saisie_description
 {
 	margin-top: 15px;
-	width: 76.6%;
+	width: 76.2%;
 	margin-right: 1%;
 	border: solid 1px #a3a3a3;
 	padding-left: 1%;
@@ -615,10 +599,47 @@
 	font-size: 120%;
 }
 
+.reference_succes
+{
+	margin-top: 6px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 120%;
+	background-color: rgb(255, 25, 55);
+	border-radius: 5px;
+	color: white;
+}
+
 .description_succes
 {
 	margin-top: 10px;
 	font-family: robotolight_italic, Verdana, sans-serif;
+}
+
+.succes_liste_mod
+{
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin: 1%;
+	width: 280px;
+	background-color: #ffad01;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.succes_mod_left
+{
+	padding-right: 5px;
+	width: 135px;
+	float: left;
+}
+
+.succes_mod_right
+{
+	padding-left: 5px;
+	width: 134px;
+	float: right;
+	border-left: solid 1px white;
 }
 
 .form_suppression_succes

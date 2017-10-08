@@ -28,13 +28,21 @@
   {
     global $bdd;
 
+    // Nombre de films ajoutés Movie House
+    $reponse0 = $bdd->query('SELECT COUNT(id) AS nb_films_ajoutes FROM movie_house WHERE identifiant_add = "' . $user . '"');
+    $donnees0 = $reponse0->fetch();
+
+    $nb_films_ajoutes = $donnees0['nb_films_ajoutes'];
+
+    $reponse0->closeCursor();
+
     // Nombre de commentaires Movie House
-    $reponse = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user . '"');
-    $donnees = $reponse->fetch();
+    $reponse1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user . '"');
+    $donnees1 = $reponse1->fetch();
 
-    $nb_comments = $donnees['nb_comments'];
+    $nb_comments = $donnees1['nb_comments'];
 
-    $reponse->closeCursor();
+    $reponse1->closeCursor();
 
     // Solde des dépenses
     $reponse2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
@@ -101,10 +109,11 @@
     $reponse5->closeCursor();
 
     // On construit un tableau avec les données statistiques
-    $myStats = array('nb_comments'   => $nb_comments,
-                     'expenses'      => $expenses,
-                     'nb_collectors' => $nb_collectors,
-                     'nb_ideas'      => $nb_ideas,
+    $myStats = array('nb_films_ajoutes' => $nb_films_ajoutes,
+                     'nb_comments'      => $nb_comments,
+                     'expenses'         => $expenses,
+                     'nb_collectors'    => $nb_collectors,
+                     'nb_ideas'         => $nb_ideas,
                     );
 
     // Instanciation d'un objet Statistiques à partir des données remontées de la bdd
@@ -438,8 +447,6 @@
   // RETOUR : Succès utilisateur
   function getSuccessUser($listSuccess, $user)
   {
-    //var_dump ($listSuccess);
-
     $successUser = array();
 
     global $bdd;

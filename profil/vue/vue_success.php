@@ -19,23 +19,36 @@
   echo '<div class="zone_succes_profil">';
     foreach ($listeSuccess as $success)
     {
-      if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
-        echo '<div class="succes_liste" style="background-color: #ffad01;">';
-      else
-        echo '<div class="succes_liste">';
-        // Logo succès
+      if (isset($successUser[$success->getOrder_success()]))
+      {
         if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
-          echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
+          echo '<div class="succes_liste" style="background-color: #ffad01;">';
         else
+          echo '<div class="succes_liste">';
+          // Logo succès
+          if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
+            echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
+          else
+            echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_locked" />';
+
+          // Titre succès
+          echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
+
+          // Description succès
+          if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
+            echo '<div class="description_succes">' . $success->getDescription() . '</div>';
+        echo '</div>';
+      }
+      else
+      {
+        echo '<div class="succes_liste" style="background-color: #ffad01;">';
+          // Logo succès
           echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_locked" />';
 
-        // Titre succès
-        echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
-
-        // Description succès
-        if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
-          echo '<div class="description_succes">' . $success->getDescription() . '</div>';
-      echo '</div>';
+          // Titre succès
+          echo '<div class="titre_succes">Succès non défini</div>';
+        echo '</div>';
+      }
     }
   echo '</div>';
 ?>

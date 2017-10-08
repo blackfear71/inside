@@ -49,31 +49,35 @@
           echo '<form method="post" action="manage_success.php?action=doModifier" class="zone_succes_admin">';
             foreach ($listeSuccess as $success)
             {
-              echo '<div class="succes_liste">';
-                // Id succès (caché)
-                echo '<input type="hidden" name="id[' . $success->getId() . ']" value="' . $success->getId() . '" />';
+              echo '<div class="succes_liste_mod">';
+                echo '<div class="succes_mod_left">';
+                  // Id succès (caché)
+                  echo '<input type="hidden" name="id[' . $success->getId() . ']" value="' . $success->getId() . '" />';
 
-                // Logo succès
-                echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="success" class="logo_succes" />';
+                  // Logo succès
+                  echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="success" class="logo_succes" />';
 
-                // Référence
-                echo '<div class="titre_succes" style="background-color: rgb(255, 25, 55); border-radius: 5px;">Ref. ' . $success->getReference() . '</div>';
+                  // Référence
+                  echo '<div class="reference_succes">Ref. ' . $success->getReference() . '</div>';
 
-                // Ordonnancement
-                echo '<div class="titre_succes">Ordre :</div>';
-                echo '<input type="text" value="' . $success->getOrder_success() . '" name="order_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                  // Ordonnancement
+                  echo '<div class="titre_succes">Ordre :</div>';
+                  echo '<input type="text" value="' . $success->getOrder_success() . '" name="order_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                echo '</div>';
 
-                // Titre succès
-                echo '<div class="titre_succes">Titre :</div>';
-                echo '<input type="text" value="' . $success->getTitle() . '" name="title[' . $success->getId() . ']" class="saisie_modification_succes" />';
+                echo '<div class="succes_mod_right">';
+                  // Titre succès
+                  echo '<div class="titre_succes">Titre :</div>';
+                  echo '<input type="text" value="' . $success->getTitle() . '" name="title[' . $success->getId() . ']" class="saisie_modification_succes" />';
 
-                // Description succès
-                echo '<div class="titre_succes">Description :</div>';
-                echo '<textarea name="description[' . $success->getId() . ']" class="textarea_modification_succes">' . $success->getDescription() . '</textarea>';
+                  // Description succès
+                  echo '<div class="titre_succes">Description :</div>';
+                  echo '<textarea name="description[' . $success->getId() . ']" class="textarea_modification_succes">' . $success->getDescription() . '</textarea>';
 
-                // Condition succès
-                echo '<div class="titre_succes">Condition :</div>';
-                echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                  // Condition succès
+                  echo '<div class="titre_succes">Condition :</div>';
+                  echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                echo '</div>';
               echo '</div>';
             }
 

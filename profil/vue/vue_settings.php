@@ -80,6 +80,22 @@
         MOVIE HOUSE
       </div>
 
+
+
+      <!-- Nombre de commentaires Movie House -->
+      <div class="sous_titre_preference">
+        Nombre de films ajoutés
+      </div>
+
+      <div class="contenu_contribution">
+        <?php
+          echo $statistiques->getNb_films_ajoutes();
+        ?>
+      </div>
+
+
+
+
       <!-- Nombre de commentaires Movie House -->
       <div class="sous_titre_preference">
         Nombre de commentaires

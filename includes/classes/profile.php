@@ -152,6 +152,7 @@
 
   class Statistiques
   {
+    private $nb_films_ajoutes;
     private $nb_comments;
     private $expenses;
     private $nb_collectors;
@@ -160,10 +161,11 @@
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->nb_comments   = 0;
-      $this->expenses      = 0;
-      $this->nb_collectors = 0;
-      $this->nb_ideas      = 0;
+      $this->nb_films_ajoutes = 0;
+      $this->nb_comments      = 0;
+      $this->expenses         = 0;
+      $this->nb_collectors    = 0;
+      $this->nb_ideas         = 0;
     }
 
     // Constructeur de l'objet Statistiques en fonction des données
@@ -178,20 +180,34 @@
 
     protected function fill ($data)
     {
+      if (isset($data['nb_films_ajoutes']))
+        $this->nb_films_ajoutes = $data['nb_films_ajoutes'];
+
       if (isset($data['nb_comments']))
-        $this->nb_comments   = $data['nb_comments'];
+        $this->nb_comments      = $data['nb_comments'];
 
       if (isset($data['expenses']))
-        $this->expenses      = $data['expenses'];
+        $this->expenses         = $data['expenses'];
 
       if (isset($data['nb_collectors']))
-        $this->nb_collectors = $data['nb_collectors'];
+        $this->nb_collectors    = $data['nb_collectors'];
 
       if (isset($data['nb_ideas']))
-        $this->nb_ideas      = $data['nb_ideas'];
+        $this->nb_ideas         = $data['nb_ideas'];
     }
 
     // getters et setters pour l'objet Statistiques
+    // Nombre de films ajoutés Movie House
+    public function setNb_films_ajoutes($nb_films_ajoutes)
+    {
+      $this->nb_films_ajoutes = $nb_films_ajoutes;
+    }
+
+    public function getNb_films_ajoutes()
+    {
+      return $this->nb_films_ajoutes;
+    }
+
     // Nombre de commentaires Movie House
     public function setNb_comments($nb_comments)
     {

@@ -9,6 +9,7 @@
 - CALENDARS : calendriers de l'équipe
 - COLLECTOR ROOM : collection de phrases cultes
 - #THEBOX : boîte à idées
+- PROFIL : gestion paramètres et succès
 
 ## Notes aux développeurs
 Ne pas toucher aux fichiers suivants lors de vos développements :
