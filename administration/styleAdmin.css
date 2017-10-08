@@ -160,11 +160,17 @@
 	word-wrap: break-word;
 }
 
-.form_infos_users input
+.zone_form_users
 {
 	clear: both;
+	padding-top: 10px;
+	height: 30px;
+}
+
+.form_infos_users input
+{
 	vertical-align: middle;
-	line-height: 30px;
+	height: 30px;
 	border: 0;
 	width: 50%;
 	cursor: pointer;
@@ -174,7 +180,6 @@
 .beginner
 {
 	float: left;
-	margin-top: 10px;
 	background-color: rgb(255, 25, 55);
 	color: white;
 	border-top-left-radius: 5px;
@@ -184,7 +189,6 @@
 .not_beginner
 {
 	float: left;
-	margin-top: 10px;
 	background-color: white;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -193,7 +197,6 @@
 .developper
 {
 	float: right;
-	margin-top: -30px;
 	background-color: #ffad01;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -202,7 +205,6 @@
 .not_developper
 {
 	float: right;
-	margin-top: -30px;
 	background-color: #b3b3b3;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
