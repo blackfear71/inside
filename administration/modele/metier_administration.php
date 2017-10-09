@@ -1202,6 +1202,12 @@
     // Si contrôles ok, insertion image puis table
     if ($control_ok == true)
     {
+      // Création dossier si inexistant
+      $name_success_dir = '../includes/icons/success';
+      
+      if (!is_dir($name_success_dir))
+         mkdir($name_success_dir);
+
       // Insertion image
       // Si on a bien une image
    		if ($files['success']['name'] != NULL)
