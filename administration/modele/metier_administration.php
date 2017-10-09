@@ -1152,27 +1152,18 @@
     $control_ok = true;
     global $bdd;
 
-    // Contrôles référence
-    if ($reference == "default")
+    // Contrôle référence
+    $reponse = $bdd->query('SELECT * FROM success');
+    while($donnees = $reponse->fetch())
     {
-      $control_ok = false;
-      $_SESSION['already_referenced'] = true;
-    }
-
-    if ($control_ok == true)
-    {
-      $reponse = $bdd->query('SELECT * FROM success');
-      while($donnees = $reponse->fetch())
+      if ($reference == $donnees['reference'])
       {
-        if ($reference == $donnees['reference'])
-        {
-          $control_ok = false;
-          $_SESSION['already_referenced'] = true;
-          break;
-        }
+        $control_ok = false;
+        $_SESSION['already_referenced'] = true;
+        break;
       }
-      $reponse->closeCursor();
     }
+    $reponse->closeCursor();
 
     // Contrôles ordonnancement
     if ($control_ok == true)

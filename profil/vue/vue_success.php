@@ -29,7 +29,7 @@
           if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
             echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
           else
-            echo '<img src="../includes/icons/success/default.png" alt="default" class="logo_succes_locked" />';
+            echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
 
           // Titre succès
           echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
@@ -43,7 +43,7 @@
       {
         echo '<div class="succes_liste">';
           // Logo succès
-          echo '<img src="../includes/icons/success/default.png" alt="default" class="logo_succes_locked" />';
+          echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
 
           // Titre succès
           echo '<div class="titre_succes">Succès non défini</div>';
