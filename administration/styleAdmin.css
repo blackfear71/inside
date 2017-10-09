@@ -622,7 +622,7 @@
 	vertical-align: top;
 	text-align: center;
 	margin: 1%;
-	width: 280px;
+	width: 300px;
 	background-color: #ffad01;
 	padding: 10px;
 	border-radius: 5px;
@@ -630,15 +630,14 @@
 
 .succes_mod_left
 {
-	padding-right: 5px;
-	width: 135px;
+	width: 140px;
 	float: left;
 }
 
 .succes_mod_right
 {
-	padding-left: 5px;
-	width: 134px;
+	padding-left: 10px;
+	width: 140px;
 	float: right;
 	border-left: solid 1px white;
 }
