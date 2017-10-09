@@ -135,7 +135,7 @@
                   // Participation
                   if ($detailsFilm->getParticipation() == "P")
                   {
-                    echo '<img src="icons/participate.png" alt="participate" class="star_vote" style="background-color: rgb(255, 25, 55);" />';
+                    echo '<img src="icons/participate.png" alt="participate" class="star_vote" style="background-color: #ffad01;" />';
                     echo '<input type="submit" name="participate" class="link_star_vote" />';
                   }
                   else
@@ -147,7 +147,7 @@
                   // Vue
                   if ($detailsFilm->getParticipation() == "S")
                   {
-                    echo '<img src="icons/seen.png" alt="seen" class="star_vote" style="background-color: rgb(255, 25, 55);" />';
+                    echo '<img src="icons/seen.png" alt="seen" class="star_vote" style="background-color: #ffad01;" />';
                     echo '<input type="submit" name="seen" class="link_star_vote" />';
                   }
                   else

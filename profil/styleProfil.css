@@ -406,7 +406,7 @@
 
 .logo_succes_locked
 {
-	filter: grayscale(100%);
+	filter: grayscale(1);
 	width: 140px;
 	opacity: 0.5;
 }

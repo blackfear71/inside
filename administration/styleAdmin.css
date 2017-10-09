@@ -292,7 +292,6 @@
 
 .zone_autorisations
 {
-	text-align: justify;
 	padding: 20px;
 }
 
@@ -365,7 +364,7 @@
 .title_calendar_to_delete
 {
 	margin-bottom: 10px;
-	background-color: #fffd4c;
+	background-color: #ffad01;
 	border-radius: 5px;
 	padding-top: 5px;
 	padding-bottom: 5px;
