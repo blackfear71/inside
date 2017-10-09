@@ -652,6 +652,72 @@
           $successUser[$success->getOrder_success()] = $nb_bugs_resolus;
           break;
 
+        // Mer il et fou !
+        case "generous":
+          $nb_expense_no_parts = 0;
+
+          $req1 = $bdd->query('SELECT * FROM expense_center WHERE buyer = "' . $user . '"');
+          while($data1 = $req1->fetch())
+          {
+            $no_parts = true;
+
+            $req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
+            while($data2 = $req2->fetch())
+            {
+              if ($data2['identifiant'] == $user)
+              {
+                $no_parts = false;
+                break;
+              }
+            }
+            $req2->closeCursor();
+
+            if ($no_parts == true)
+              $nb_expense_no_parts++;
+          }
+          $req1->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_expense_no_parts;
+          break;
+
+        // Auto-satisfait
+        case "self-satisfied":
+          $nb_auto_voted = 0;
+
+          $req1 = $bdd->query('SELECT * FROM collector WHERE speaker = "' . $user . '"');
+          while($data1 = $req1->fetch())
+          {
+            $req2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $data1['id']);
+            while($data2 = $req2->fetch())
+            {
+              if ($data2['identifiant'] == $user)
+              {
+                $nb_auto_voted++;
+                break;
+              }
+            }
+            $req2->closeCursor();
+          }
+          $req1->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $nb_auto_voted;
+          break;
+
+        // Véritable Jedi
+        case "padawan":
+          $star_wars_8 = 0;
+
+          $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = 16 AND identifiant = "' . $user . '" AND participation = "S"');
+          $data = $req->fetch();
+
+          if ($req->rowCount() > 0)
+            $star_wars_8 = 1;
+
+          $req->closeCursor();
+
+          $successUser[$success->getOrder_success()] = $star_wars_8;
+          break;
+
         default:
           break;
       }

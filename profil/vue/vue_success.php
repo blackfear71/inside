@@ -41,7 +41,7 @@
       }
       else
       {
-        echo '<div class="succes_liste" style="background-color: #ffad01;">';
+        echo '<div class="succes_liste">';
           // Logo succès
           echo '<img src="../includes/icons/success/default.png" alt="default" class="logo_succes_locked" />';
 
