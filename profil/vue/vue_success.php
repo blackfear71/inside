@@ -26,14 +26,14 @@
         $lvl = $success->getLevel();
       }
 
-      if (isset($successUser[$success->getOrder_success()]))
+      if (isset($successUser[$success->getId()]))
       {
-        if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
+        if ($successUser[$success->getId()] >= $success->getLimit_success())
           echo '<div class="succes_liste" style="background-color: #ffad01;">';
         else
           echo '<div class="succes_liste">';
           // Logo succès
-          if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
+          if ($successUser[$success->getId()] >= $success->getLimit_success())
             echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
           else
             echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
@@ -42,17 +42,12 @@
           echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
 
           // Description succès
-          if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
+          if ($successUser[$success->getId()] >= $success->getLimit_success())
             echo '<div class="description_succes">' . $success->getDescription() . '</div>';
 
           // Barre de progression succès
-          if ($successUser[$success->getOrder_success()] < $success->getLimit_success())
-            echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $successUser[$success->getOrder_success()] . '" class="progression_succes"></meter>';
-
-
-
-
-
+          if ($successUser[$success->getId()] < $success->getLimit_success())
+            echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $successUser[$success->getId()] . '" class="progression_succes"></meter>';
         echo '</div>';
       }
       else

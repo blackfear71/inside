@@ -455,6 +455,8 @@
     // Recherche des données
     foreach ($listSuccess as $success)
     {
+      echo $success->getReference() . '/' . $success->getId() . '<br />';
+
       switch($success->getReference())
       {
         // J'étais là
@@ -468,7 +470,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $true_insider;
+          $successUser[$success->getId()] = $true_insider;
           break;
 
         // Je l'ai fait !
@@ -482,7 +484,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $developper;
+          $successUser[$success->getId()] = $developper;
           break;
 
         // Cinéphile amateur
@@ -496,7 +498,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_films_publies;
+          $successUser[$success->getId()] = $nb_films_publies;
           break;
 
         // Cinéphile professionnel
@@ -510,7 +512,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_films_vus;
+          $successUser[$success->getId()] = $nb_films_vus;
           break;
 
         // Commentateur sportif
@@ -524,7 +526,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_commentaires_films;
+          $successUser[$success->getId()] = $nb_commentaires_films;
           break;
 
         // Expert acoustique
@@ -538,7 +540,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_collector_publiees;
+          $successUser[$success->getId()] = $nb_collector_publiees;
           break;
 
         // Dommage collatéral
@@ -552,7 +554,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_collector_speaker;
+          $successUser[$success->getId()] = $nb_collector_speaker;
           break;
 
         // Rigolo compulsif
@@ -566,7 +568,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_collector_user;
+          $successUser[$success->getId()] = $nb_collector_user;
           break;
 
         // Désigné volontaire
@@ -580,7 +582,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_buyer;
+          $successUser[$success->getId()] = $nb_buyer;
           break;
 
         // Profiteur occasionnel
@@ -594,7 +596,7 @@
           }
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_parts;
+          $successUser[$success->getId()] = $nb_parts;
           break;
 
         // Génie créatif
@@ -608,7 +610,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_idees_publiees;
+          $successUser[$success->getId()] = $nb_idees_publiees;
           break;
 
         // Top développeur
@@ -622,7 +624,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_idees_resolues;
+          $successUser[$success->getId()] = $nb_idees_resolues;
           break;
 
         // Débugger aguerri
@@ -636,7 +638,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_bugs_publies;
+          $successUser[$success->getId()] = $nb_bugs_publies;
           break;
 
         // Compilateur intégré
@@ -650,7 +652,7 @@
 
           $req->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_bugs_resolus;
+          $successUser[$success->getId()] = $nb_bugs_resolus;
           break;
 
         // Mer il et fou !
@@ -678,7 +680,7 @@
           }
           $req1->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_expense_no_parts;
+          $successUser[$success->getId()] = $nb_expense_no_parts;
           break;
 
         // Auto-satisfait
@@ -701,7 +703,7 @@
           }
           $req1->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $nb_auto_voted;
+          $successUser[$success->getId()] = $nb_auto_voted;
           break;
 
         // Véritable Jedi
@@ -725,7 +727,7 @@
 
           $req2->closeCursor();
 
-          $successUser[$success->getOrder_success()] = $star_wars_8;
+          $successUser[$success->getId()] = $star_wars_8;
           break;
 
         default:
@@ -735,6 +737,8 @@
 
     // Tri des succès
     ksort($successUser);
+
+    var_dump($successUser);
 
     return $successUser;
   }
