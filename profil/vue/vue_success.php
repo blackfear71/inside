@@ -15,10 +15,17 @@
     On remonte donc 2 tableaux, un des succès et l'autre contenant les données de l'utilisateur associé. On teste chaque succès et chaque
     limite pour déterminer si le succès est débloqué.
   */
+  $lvl = 0;
 
   echo '<div class="zone_succes_profil">';
     foreach ($listeSuccess as $success)
     {
+      if ($success->getLevel() != $lvl)
+      {
+        echo formatTitleLvl($success->getLevel());
+        $lvl = $success->getLevel();
+      }
+
       if (isset($successUser[$success->getOrder_success()]))
       {
         if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
@@ -37,6 +44,15 @@
           // Description succès
           if ($successUser[$success->getOrder_success()] >= $success->getLimit_success())
             echo '<div class="description_succes">' . $success->getDescription() . '</div>';
+
+          // Barre de progression succès
+          if ($successUser[$success->getOrder_success()] < $success->getLimit_success())
+            echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $successUser[$success->getOrder_success()] . '" class="progression_succes"></meter>';
+
+
+
+
+
         echo '</div>';
       }
       else

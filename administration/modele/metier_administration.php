@@ -1122,12 +1122,13 @@
     }
     $reponse->closeCursor();
 
-    // Tri sur ordonnancement
+    // Tri sur niveau puis ordonnancement
     foreach ($listSuccess as $success)
     {
+      $tri_level[] = $success->getLevel();
       $tri_order[] = $success->getOrder_success();
     }
-    array_multisort($tri_order, SORT_ASC, $listSuccess);
+    array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
 
     return $listSuccess;
   }
@@ -1137,6 +1138,7 @@
   function insertSuccess($post, $files)
   {
     $reference     = $post['reference'];
+    $level         = $post['level'];
     $order_success = $post['order_success'];
     $title         = $post['title'];
     $description   = $post['description'];
@@ -1144,6 +1146,7 @@
 
     // Sauvegarde en cas d'erreur
     $_SESSION['reference_success']   = $reference;
+    $_SESSION['level']               = $level;
     $_SESSION['order_success']       = $order_success;
     $_SESSION['title_success']       = $title;
     $_SESSION['description_success'] = $description;
@@ -1165,17 +1168,27 @@
     }
     $reponse->closeCursor();
 
+    // Contrôles niveau
+    if ($control_ok == true)
+    {
+      if (!is_numeric($level) OR $level <= 0)
+      {
+        $control_ok                    = false;
+        $_SESSION['level_not_numeric'] = true;
+      }
+    }
+
     // Contrôles ordonnancement
     if ($control_ok == true)
     {
       if (is_numeric($order_success))
       {
-        $reponse = $bdd->query('SELECT * FROM success');
+        $reponse = $bdd->query('SELECT * FROM success WHERE level = ' . $level);
         while($donnees = $reponse->fetch())
         {
           if ($order_success == $donnees['order_success'])
           {
-            $control_ok = false;
+            $control_ok                  = false;
             $_SESSION['already_ordered'] = true;
             break;
           }
@@ -1184,7 +1197,7 @@
       }
       else
       {
-        $control_ok = false;
+        $control_ok                    = false;
         $_SESSION['order_not_numeric'] = true;
       }
     }
@@ -1194,7 +1207,7 @@
     {
       if (!is_numeric($limit_success))
       {
-        $control_ok = false;
+        $control_ok                    = false;
         $_SESSION['limit_not_numeric'] = true;
       }
     }
@@ -1204,7 +1217,7 @@
     {
       // Création dossier si inexistant
       $name_success_dir = '../includes/icons/success';
-      
+
       if (!is_dir($name_success_dir))
          mkdir($name_success_dir);
 
@@ -1252,9 +1265,10 @@
    				echo "Le fichier a bien été uploadé";
 
    				// On stocke le nouveau succès dans la base
-          $reponse = $bdd->prepare('INSERT INTO success(reference, order_success, title, description, limit_success) VALUES(:reference, :order_success, :title, :description, :limit_success)');
+          $reponse = $bdd->prepare('INSERT INTO success(reference, level, order_success, title, description, limit_success) VALUES(:reference, :level, :order_success, :title, :description, :limit_success)');
   				$reponse->execute(array(
   					'reference'     => $reference,
+            'level'         => $level,
             'order_success' => $order_success,
             'title'         => $title,
             'description'   => $description,
@@ -1304,6 +1318,7 @@
     foreach ($post['id'] as $id)
     {
       $myUpdate = array('id'            => $post['id'][$id],
+                        'level'         => $post['level'][$id],
                         'order_success' => $post['order_success'][$id],
                         'title'         => $post['title'][$id],
                         'description'   => $post['description'][$id],
@@ -1316,6 +1331,16 @@
 
     foreach ($update as $success)
     {
+      // Contrôles niveau
+      if ($control_ok == true)
+      {
+        if (!is_numeric($success['level']) OR $success['level'] <= 0)
+        {
+          $control_ok                    = false;
+          $_SESSION['level_not_numeric'] = true;
+        }
+      }
+
       // Contrôles ordonnancement
       if ($control_ok == true)
       {
@@ -1324,7 +1349,7 @@
           // Contrôle doublons
           foreach ($update as $test_order)
           {
-            if ($success['id'] != $test_order['id'] AND $success['order_success'] == $test_order['order_success'])
+            if ($success['id'] != $test_order['id'] AND $success['order_success'] == $test_order['order_success'] AND $success['level'] == $test_order['level'])
             {
               $control_ok = false;
               $_SESSION['already_ordered'] = true;
@@ -1352,8 +1377,9 @@
       // Mise à jour si pas d'erreur
       if ($control_ok == true)
       {
-        $req = $bdd->prepare('UPDATE success SET order_success = :order_success, title = :title, description = :description, limit_success = :limit_success WHERE id = ' . $success['id']);
+        $req = $bdd->prepare('UPDATE success SET level = :level, order_success = :order_success, title = :title, description = :description, limit_success = :limit_success WHERE id = ' . $success['id']);
         $req->execute(array(
+          'level'         => $success['level'],
           'order_success' => $success['order_success'],
           'title'         => $success['title'],
           'description'   => $success['description'],
@@ -1376,16 +1402,25 @@
   }
 
   // METIER : Initialisation champs erreur modification succès
-  // RETOUR : Aucun
+  // RETOUR : Tableau sauvegardé et trié
   function initModErrSucces($listSuccess, $session_succes)
   {
     foreach ($listSuccess as $success)
     {
+      $success->setLevel($session_succes['level'][$success->getId()]);
       $success->setOrder_success($session_succes['order_success'][$success->getId()]);
       $success->setTitle($session_succes['title'][$success->getId()]);
       $success->setDescription($session_succes['description'][$success->getId()]);
       $success->setLimit_success($session_succes['limit_success'][$success->getId()]);
+
+      // Tri sur niveau puis ordonnancement
+      $tri_level[] = $success->getLevel();
+      $tri_order[] = $success->getOrder_success();
     }
+
+    array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
+
+    return $listSuccess;
   }
 
   // METIER : Modification top Beginner

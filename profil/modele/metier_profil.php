@@ -433,12 +433,13 @@
     }
     $reponse->closeCursor();
 
-    // Tri sur ordonnancement
+    // Tri sur niveau puis ordonnancement
     foreach ($listSuccess as $success)
     {
+      $tri_level[] = $success->getLevel();
       $tri_order[] = $success->getOrder_success();
     }
-    array_multisort($tri_order, SORT_ASC, $listSuccess);
+    array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
 
     return $listSuccess;
   }
@@ -707,13 +708,22 @@
         case "padawan":
           $star_wars_8 = 0;
 
-          $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = 16 AND identifiant = "' . $user . '" AND participation = "S"');
-          $data = $req->fetch();
+          // Date de sortie du film
+          $req1 = $bdd->query('SELECT id, date_theater FROM movie_house WHERE id = 16');
+          $data1 = $req1->fetch();
 
-          if ($req->rowCount() > 0)
+          $date_sw8 = $data1['date_theater'];
+
+          $req1->closeCursor();
+
+          // Participation utilisateur
+          $req2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = 16 AND identifiant = "' . $user . '" AND participation = "S"');
+          $data2 = $req2->fetch();
+
+          if ($req2->rowCount() > 0 AND date("Ymd") >= $date_sw8)
             $star_wars_8 = 1;
 
-          $req->closeCursor();
+          $req2->closeCursor();
 
           $successUser[$success->getOrder_success()] = $star_wars_8;
           break;

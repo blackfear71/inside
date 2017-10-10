@@ -80,9 +80,7 @@
         MOVIE HOUSE
       </div>
 
-
-
-      <!-- Nombre de commentaires Movie House -->
+      <!-- Nombre de films ajoutés Movie House -->
       <div class="sous_titre_preference">
         Nombre de films ajoutés
       </div>
@@ -93,15 +91,12 @@
         ?>
       </div>
 
-
-
-
       <!-- Nombre de commentaires Movie House -->
       <div class="sous_titre_preference">
         Nombre de commentaires
       </div>
 
-      <div class="contenu_contribution">
+      <div class="contenu_contribution_fin">
         <?php
           echo $statistiques->getNb_comments();
         ?>
@@ -119,7 +114,7 @@
         Solde
       </div>
 
-      <div class="contenu_contribution">
+      <div class="contenu_contribution_fin">
         <?php
           echo $statistiques->getExpenses() . ' €';
         ?>
@@ -137,7 +132,7 @@
         Nombre de phrases cultes soumises
       </div>
 
-      <div class="contenu_contribution">
+      <div class="contenu_contribution_fin">
         <?php
           echo $statistiques->getNb_collectors();
         ?>
@@ -155,7 +150,7 @@
         Nombre d'idées soumises
       </div>
 
-      <div class="contenu_contribution">
+      <div class="contenu_contribution_fin">
         <?php
           echo $statistiques->getNb_ideas();
         ?>

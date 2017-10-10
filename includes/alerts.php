@@ -130,6 +130,9 @@
   if (!isset($_SESSION['already_referenced']))
     $_SESSION['already_referenced'] = NULL;
 
+  if (!isset($_SESSION['level_not_numeric']))
+    $_SESSION['level_not_numeric'] = NULL;
+
   if (!isset($_SESSION['order_not_numeric']))
     $_SESSION['order_not_numeric'] = NULL;
 
@@ -556,6 +559,14 @@
     echo '</div>';
     $_SESSION['already_referenced'] = NULL;
   }
+  // Alerte niveau non numérique ou <= 0
+  elseif (isset($_SESSION['level_not_numeric']) AND $_SESSION['level_not_numeric'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Le niveau doit être numérique et supérieur à 0.';
+    echo '</div>';
+    $_SESSION['level_not_numeric'] = NULL;
+  }
   // Alerte ordonnancement non numérique
   elseif (isset($_SESSION['order_not_numeric']) AND $_SESSION['order_not_numeric'] == true)
   {
@@ -568,7 +579,7 @@
   elseif (isset($_SESSION['already_ordered']) AND $_SESSION['already_ordered'] == true)
   {
     echo '<div class="message_alerte">';
-      echo 'Cette ordonnancement est déjà pris.';
+      echo 'Cette ordonnancement est déjà pris pour ce niveau.';
     echo '</div>';
     $_SESSION['already_ordered'] = NULL;
   }

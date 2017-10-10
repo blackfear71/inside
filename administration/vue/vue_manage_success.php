@@ -50,6 +50,9 @@
             // Référence
             echo '<input type="text" name="reference" placeholder="Référence" value="' . $_SESSION['reference_success'] . '" maxlength="255" class="saisie_reference" required />';
 
+            // Niveau
+            echo '<input type="text" name="level" placeholder="Niveau" value="' . $_SESSION['level'] . '" maxlength="4" class="saisie_niveau" required />';
+
             // Ordonnancement
             echo '<input type="text" name="order_success" placeholder="Ordonnancement" value="' . $_SESSION['order_success'] . '" maxlength="3" class="saisie_order" required />';
 
@@ -71,9 +74,17 @@
           echo '</form>';
 
           // Affichage des succès
+          $lvl = 0;
+
           echo '<div class="zone_succes_admin">';
             foreach ($listeSuccess as $success)
             {
+              if ($success->getLevel() != $lvl)
+              {
+                echo formatTitleLvl($success->getLevel());
+                $lvl = $success->getLevel();
+              }
+
               echo '<div class="ensemble_succes">';
                 // Suppression succès
                 echo '<form method="post" action="manage_success.php?id=' . $success->getId() . '&action=doSupprimer" class="form_suppression_succes">';

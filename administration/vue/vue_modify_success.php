@@ -41,14 +41,22 @@
 
 			<article class="article_portail">
         <div class="avertissement_succes">
-          Il est possible de modifier ici l'ordonnancement, le titre, la description et la condition du succès. Bien contrôler l'ordonnancement pour éviter les doublons. Il n'est pas possible de modifier la référence ni l'image, il faut donc supprimer le succès via l'écran précédent.
+          Il est possible de modifier ici le niveau, l'ordonnancement, le titre, la description et la condition des succès. Bien contrôler l'ordonnancement par rapport au niveau pour éviter les doublons. Il n'est pas possible de modifier la référence ni l'image, il faut donc supprimer le succès via l'écran précédent.
         </div>
 
         <?php
           // Affichage des succès
+          $lvl = 0;
+
           echo '<form method="post" action="manage_success.php?action=doModifier" class="zone_succes_admin">';
             foreach ($listeSuccess as $success)
             {
+              if ($success->getLevel() != $lvl)
+              {
+                echo formatTitleLvl($success->getLevel());
+                $lvl = $success->getLevel();
+              }
+
               echo '<div class="succes_liste_mod">';
                 echo '<div class="succes_mod_left">';
                   // Id succès (caché)
@@ -59,6 +67,10 @@
 
                   // Référence
                   echo '<div class="reference_succes">Ref. ' . $success->getReference() . '</div>';
+
+                  // Niveau
+                  echo '<div class="titre_succes">Niveau :</div>';
+                  echo '<input type="text" value="' . $success->getLevel() . '" name="level[' . $success->getId() . ']" maxlength="4" class="saisie_modification_succes" />';
 
                   // Ordonnancement
                   echo '<div class="titre_succes">Ordre :</div>';

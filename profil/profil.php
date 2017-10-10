@@ -2,6 +2,9 @@
   // Contrôles communs Utilisateurs
   include_once('../includes/controls_users.php');
 
+  // Fonctions communes
+	include('../includes/fonctions_regex.php');
+
   // Modèle de données : "module métier"
   include_once('modele/metier_profil.php');
 
@@ -89,6 +92,7 @@
           foreach ($listeSuccess as $success)
           {
             $success->setReference(htmlspecialchars($success->getReference()));
+            $success->setLevel(htmlspecialchars($success->getLevel()));
             $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
             $success->setTitle(htmlspecialchars($success->getTitle()));
             $success->setDescription(htmlspecialchars($success->getDescription()));

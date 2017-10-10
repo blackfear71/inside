@@ -3,6 +3,7 @@
   {
     private $id;
     private $reference;
+    private $level;
     private $order_success;
     private $title;
     private $description;
@@ -13,6 +14,7 @@
     {
       $this->id            = 0;
       $this->reference     = '';
+      $this->level         = '';
       $this->order_success = '';
       $this->title         = '';
       $this->description   = '';
@@ -36,6 +38,9 @@
 
       if (isset($data['reference']))
         $this->reference     = $data['reference'];
+
+      if (isset($data['level']))
+        $this->level         = $data['level'];
 
       if (isset($data['order_success']))
         $this->order_success = $data['order_success'];
@@ -73,6 +78,17 @@
       return $this->reference;
     }
 
+    // Niveau
+    public function setLevel($level)
+    {
+      $this->level = $level;
+    }
+
+    public function getLevel()
+    {
+      return $this->level;
+    }
+    
     // Ordonnancement
     public function setOrder_success($order_success)
     {

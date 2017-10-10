@@ -10,11 +10,13 @@
 
   // Initialisation sauvegarde saisie succès
   if ((!isset($_SESSION['already_referenced']) OR $_SESSION['already_referenced'] != true)
+  AND (!isset($_SESSION['level_not_numeric'])    OR $_SESSION['level_not_numeric'] != true)
   AND (!isset($_SESSION['order_not_numeric'])  OR $_SESSION['order_not_numeric'] != true)
   AND (!isset($_SESSION['already_ordered'])    OR $_SESSION['already_ordered'] != true)
   AND (!isset($_SESSION['limit_not_numeric'])  OR $_SESSION['limit_not_numeric'] != true))
   {
     $_SESSION['reference_success']   = "";
+    $_SESSION['level']               = "";
     $_SESSION['order_success']       = "";
     $_SESSION['title_success']       = "";
     $_SESSION['description_success'] = "";
@@ -29,18 +31,18 @@
   // Appel métier
   switch ($_GET['action'])
   {
-    case 'goConsulter':
+    case "goConsulter":
       // Lecture liste des données par le modèle
 			$listeSuccess = getSuccess();
       break;
 
-    case 'goModifier':
+    case "goModifier":
       // Lecture liste des données par le modèle
       $listeSuccess = getSuccess();
 
       if (isset($_SESSION['erreur_succes']) AND $_SESSION['erreur_succes'] == true)
       {
-        initModErrSucces($listeSuccess, $_SESSION['save_success']);
+        $listeSuccess = initModErrSucces($listeSuccess, $_SESSION['save_success']);
         $_SESSION['erreur_succes'] = NULL;
       }
       break;
@@ -70,6 +72,7 @@
       foreach ($listeSuccess as $success)
       {
         $success->setReference(htmlspecialchars($success->getReference()));
+        $success->setLevel(htmlspecialchars($success->getLevel()));
         $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
         $success->setTitle(htmlspecialchars($success->getTitle()));
         $success->setDescription(htmlspecialchars($success->getDescription()));
@@ -81,6 +84,7 @@
       foreach ($listeSuccess as $success)
       {
         $success->setReference(htmlspecialchars($success->getReference()));
+        $success->setLevel(htmlspecialchars($success->getLevel()));
         $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
         $success->setTitle(htmlspecialchars($success->getTitle()));
         $success->setDescription(htmlspecialchars($success->getDescription()));

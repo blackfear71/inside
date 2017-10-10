@@ -392,13 +392,13 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
-	text-align: center;
 	line-height: 40px;
+	padding-left: 0.4%;
 }
 
 .saisie_title
 {
-	width: 37%;
+	width: 26.7%;
 	margin-right: 1%;
 	border: solid 1px #a3a3a3;
 	padding-left: 1%;
@@ -412,7 +412,21 @@
 
 .saisie_reference
 {
-	width: 17%;
+	width: 12%;
+	margin-right: 1%;
+	border: solid 1px #a3a3a3;
+	padding-left: 1%;
+	padding-right: 1%;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.saisie_niveau
+{
+	width: 12%;
 	margin-right: 1%;
 	border: solid 1px #a3a3a3;
 	padding-left: 1%;
@@ -440,12 +454,11 @@
 
 .zone_parcourir_succes
 {
-	/* 20% + 1% */
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: -4px;
+	margin-top: -5px;
 	margin-right: 1%;
-	height: 42px;
+	height: 43px;
 	width: 20%;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
@@ -464,7 +477,7 @@
 .bouton_parcourir_succes
 {
 	opacity: 0;
-	height: 42px;
+	height: 43px;
 	width: 100%;
 	margin-top: -40px;
 	display: block;
@@ -473,7 +486,7 @@
 
 .label_parcourir
 {
-	line-height: 42px;
+	line-height: 43px;
 	height: 40px;
 	width: 100%;
 }
@@ -482,8 +495,8 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: -4px;
-	height: 42px;
+	margin-top: -5px;
+	height: 43px;
 	width: 3%;
 	border: 0;
 	background-color: #e3e3e3;
@@ -633,14 +646,14 @@
 {
 	width: 140px;
 	float: left;
+	border-right: solid 1px white;
+	padding-right: 10px;
 }
 
 .succes_mod_right
 {
-	padding-left: 10px;
 	width: 140px;
 	float: right;
-	border-left: solid 1px white;
 }
 
 .form_suppression_succes
@@ -666,6 +679,25 @@
 	cursor: pointer;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+}
+
+.level_succes
+{
+	width: 100%;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+	border-bottom: solid 1px #b3b3b3;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #262626;
+	text-align: left;
+}
+
+.name_lvl
+{
+	font-family: robotothin, Verdana, sans-serif;
 }
 
 .bouton_delete:hover
