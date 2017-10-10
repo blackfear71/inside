@@ -455,8 +455,6 @@
     // Recherche des données
     foreach ($listSuccess as $success)
     {
-      echo $success->getReference() . '/' . $success->getId() . '<br />';
-
       switch($success->getReference())
       {
         // J'étais là
@@ -737,8 +735,6 @@
 
     // Tri des succès
     ksort($successUser);
-
-    var_dump($successUser);
 
     return $successUser;
   }
