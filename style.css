@@ -1836,6 +1836,7 @@ article
 {
 	padding-left: 20px;
 	padding-right: 20px;
+	border: solid 1px #b3b3b3;
 }
 
 .tr_manage_users
@@ -1855,6 +1856,7 @@ article
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotoregular, Verdana, sans-serif;
+	border: solid 1px #b3b3b3;
 }
 
 .reseted

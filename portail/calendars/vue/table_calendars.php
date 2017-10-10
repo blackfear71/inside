@@ -9,7 +9,6 @@
       {
           if ($i % $nombre_colonnes == 1) // modulo est le reste de la division de GAUCHE par DROITE
             echo '<tr>';
-
               echo '<td class="table_calendars_td">';
                 echo '<div class="zone_calendars_totale">';
                   echo '<div class="zone_calendar">';

@@ -573,7 +573,7 @@
         case "buyer":
           $nb_buyer = 0;
 
-          $req = $bdd->query('SELECT COUNT(id) AS nb_buyer FROM expense_center WHERE buyer = "' . $user . '"');
+          $req = $bdd->query('SELECT COUNT(id) AS nb_buyer FROM expense_center WHERE buyer = "' . $user . '" AND price > 0');
           $data = $req->fetch();
 
           $nb_buyer = $data['nb_buyer'];
@@ -657,7 +657,7 @@
         case "generous":
           $nb_expense_no_parts = 0;
 
-          $req1 = $bdd->query('SELECT * FROM expense_center WHERE buyer = "' . $user . '"');
+          $req1 = $bdd->query('SELECT * FROM expense_center WHERE buyer = "' . $user . '" AND price > 0');
           while($data1 = $req1->fetch())
           {
             $no_parts = true;
