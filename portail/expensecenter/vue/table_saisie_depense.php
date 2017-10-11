@@ -35,14 +35,14 @@
             foreach (array_slice($listeUsers, $premiere_entree, $nb_colonnes) as $user)
             {
               echo '<td class="titre_user_depense">';
-                echo '<div class="zone_avatar_films">';
+                echo '<div class="zone_avatar_depense">';
                   if (!empty($user->getAvatar()))
-                    echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
+                    echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
+                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
                 echo '</div>';
 
-                echo '<span class="pseudo_films">' . $user->getPseudo() . '</span>';
+                echo '<div class="pseudo_expense_center">' . $user->getPseudo() . '</div>';
               echo '</td>';
 
               $nb_users_line++;

@@ -32,6 +32,17 @@
           echo '<div class="succes_liste" style="background-color: #ffad01;">';
         else
           echo '<div class="succes_liste">';
+          // Médailles (en excluant ceux qui sont uniques)
+          if ($success->getLimit_success() > 1)
+          {
+            if ($successUser[$success->getId()] >= $success->getLimit_success())
+              echo '<img src="../includes/icons/medals/bronze.png" alt="bronze" class="medal" />';
+            if ($successUser[$success->getId()] >= $success->getLimit_success() * 1.5)
+              echo '<img src="../includes/icons/medals/argent.png" alt="argent" class="medal" />';
+            if ($successUser[$success->getId()] >= $success->getLimit_success() * 2)
+              echo '<img src="../includes/icons/medals/or.png" alt="or" class="medal" />';
+          }
+
           // Logo succès
           if ($successUser[$success->getId()] >= $success->getLimit_success())
             echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';

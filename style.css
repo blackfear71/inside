@@ -1449,31 +1449,6 @@ article
 }
 
 /*** Movie House ***/
-.zone_avatar_films
-{
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 40px;
-	overflow: hidden;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: white;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.avatar_films
-{
-	max-width: 40px;
-	max-height: 40px;
-}
-
-.pseudo_films
-{
-	font-size: 70%;
-}
-
 .table_users
 {
 	text-align: center;

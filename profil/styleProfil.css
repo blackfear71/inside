@@ -406,10 +406,22 @@
 	vertical-align: top;
 	text-align: center;
 	margin: 1%;
+	margin-left: 15px;
+	margin-right: 15px;
 	width: 140px;
 	background-color: #b3b3b3;
 	padding: 10px;
 	border-radius: 5px;
+}
+
+.medal
+{
+	float: left;
+	clear: both;
+	margin-left: -30px;
+	margin-bottom: -10px;
+	width: 30px;
+	filter: drop-shadow(0px 0px 1px #5c5c5c);
 }
 
 .logo_succes_unlocked

@@ -25,7 +25,7 @@
   							echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
   					echo '</div>';
 
-  					echo '<span class="pseudo_films">' . $user->getPseudo() . '</span>';
+  					echo '<div class="pseudo_films">' . $user->getPseudo() . '</div>';
   				echo '</td>';
         }
       echo '</tr>';
@@ -121,6 +121,18 @@
         $i++;
       }
 
+      if ($date_jour_present == false AND $preferences->getToday_movie_house() == "Y")
+      {
+        echo '<tr class="ligne_tableau_movie_house">';
+          echo '<td class="table_date_jour" colspan="100%"">';
+            echo 'Aujourd\'hui, le ' . date("d/m/Y");
+            echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+          echo '</td>';
+        echo '</tr>';
+
+        $date_jour_present = true;
+      }
+
       echo '<tr>';
         echo '<td class="table_titres" style="border: 0; border-top: 1px solid #e3e3e3;"></td>';
         echo '<td class="init_table_dates">Date de sortie</td>';
@@ -134,7 +146,7 @@
                 echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
             echo '</div>';
 
-            echo '<span class="pseudo_films">' . $user->getPseudo() . '</span>';
+            echo '<div class="pseudo_films">' . $user->getPseudo() . '</div>';
           echo '</td>';
         }
       echo '</tr>';
