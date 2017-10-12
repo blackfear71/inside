@@ -310,7 +310,7 @@
 	cursor: pointer;
 	text-align: left;
 	vertical-align: top;
-	box-shadow: 0 0 3px #7c7c7c;
+	filter: drop-shadow(0px 0px 2px #b3b3b3);
 }
 
 .label_preference_2
@@ -328,7 +328,7 @@
 	cursor: pointer;
 	text-align: left;
 	vertical-align: top;
-	box-shadow: 0 0 3px #7c7c7c;
+	filter: drop-shadow(0px 0px 2px #b3b3b3);
 }
 
 .label_preference_3
@@ -346,7 +346,7 @@
 	cursor: pointer;
 	text-align: left;
 	vertical-align: top;
-	box-shadow: 0 0 3px #7c7c7c;
+	filter: drop-shadow(0px 0px 2px #b3b3b3);
 }
 
 .label_preference:hover, .label_preference_2:hover, .label_preference_3:hover
@@ -405,9 +405,9 @@
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
-	margin: 1%;
 	margin-left: 15px;
 	margin-right: 15px;
+	margin-top: 15px;
 	width: 140px;
 	background-color: #b3b3b3;
 	padding: 10px;

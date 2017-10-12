@@ -1429,8 +1429,8 @@
 .zone_commentaire_user
 {
 	border-bottom: solid 1px #b3b3b3;
-	padding-top: 1%;
-	padding-bottom: 1%;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	min-height: 50px;
 }
 

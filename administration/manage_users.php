@@ -74,6 +74,7 @@
 			{
 				$statsCatIns['identifiant']  = htmlspecialchars($statsCatIns['identifiant']);
 				$statsCatIns['pseudo']       = htmlspecialchars($statsCatIns['pseudo']);
+        $statsCatIns['nb_ajouts']    = htmlspecialchars($statsCatIns['nb_ajouts']);
 				$statsCatIns['nb_comments']  = htmlspecialchars($statsCatIns['nb_comments']);
 				$statsCatIns['bilan']        = htmlspecialchars($statsCatIns['bilan']);
 				$statsCatIns['bilan_format'] = htmlspecialchars($statsCatIns['bilan_format']);
@@ -83,11 +84,13 @@
       {
         $statsCatDes['identifiant']  = htmlspecialchars($statsCatDes['identifiant']);
         $statsCatDes['pseudo']       = htmlspecialchars($statsCatDes['pseudo']);
+        $statsCatDes['nb_ajouts']    = htmlspecialchars($statsCatDes['nb_ajouts']);
         $statsCatDes['nb_comments']  = htmlspecialchars($statsCatDes['nb_comments']);
         $statsCatDes['bilan']        = htmlspecialchars($statsCatDes['bilan']);
         $statsCatDes['bilan_format'] = htmlspecialchars($statsCatDes['bilan_format']);
       }
 
+      $totalCategories['nb_tot_ajouts']       = htmlspecialchars($totalCategories['nb_tot_ajouts']);
       $totalCategories['nb_tot_commentaires'] = htmlspecialchars($totalCategories['nb_tot_commentaires']);
       $totalCategories['somme_bilans']        = htmlspecialchars($totalCategories['somme_bilans']);
       $totalCategories['somme_bilans_format'] = htmlspecialchars($totalCategories['somme_bilans_format']);

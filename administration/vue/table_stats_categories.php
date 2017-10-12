@@ -12,7 +12,7 @@
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 20%;">';
+			echo '<td colspan="2" class="init_td_manage_users" style="width: 20%;">';
 				echo 'Movie House';
 			echo '</td>';
 
@@ -27,7 +27,11 @@
 
 		echo '<tr class="init_tr_manage_users">';
 			echo '<td class="init_td_manage_users">';
-				echo 'Nombre de commentaires';
+				echo 'Films ajoutés';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users">';
+				echo 'Commentaires';
 			echo '</td>';
 
 			echo '<td class="init_td_manage_users">';
@@ -49,6 +53,10 @@
 
         echo '<td class="td_manage_users">';
           echo $statsCatIns['pseudo'];
+        echo '</td>';
+
+				echo '<td class="td_manage_users">';
+          echo $statsCatIns['nb_ajouts'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
@@ -88,12 +96,16 @@
 			echo '</tr>';
 		}
 
-		// Utilisateurs desinscrits
+		// Utilisateurs désinscrits
 		foreach ($tabCategoriesDes as $statsCatDes)
 		{
 			echo '<tr class="tr_manage_users">';
 				echo '<td colspan="2" class="td_manage_users">';
 					echo $statsCatDes['identifiant'];
+				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statsCatDes['nb_ajouts'];
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
@@ -125,6 +137,10 @@
 		echo '<tr>';
 			echo '<td colspan="2" class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
 				echo 'Total';
+			echo '</td>';
+
+			echo '<td class="td_manage_users">';
+				echo $totalCategories['nb_tot_ajouts'];
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';

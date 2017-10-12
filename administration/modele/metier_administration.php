@@ -362,9 +362,18 @@
     ////////////////////////////////////////
     foreach ($list_users as $user)
     {
+      $nb_ajouts     = 0;
       $nb_comments   = 0;
       $bilan         = 0;
       $nb_collectors = 0;
+
+      // Nombre films ajoutés Movie House
+      $req0 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house WHERE identifiant_add = "' . $user->getIdentifiant() . '"');
+      $data0 = $req0->fetch();
+
+      $nb_ajouts = $data0['nb_ajouts'];
+
+      $req0->closeCursor();
 
       // Nombre commentaires Movie House
       $req1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user->getIdentifiant() . '"');
@@ -426,6 +435,7 @@
 
       $cat = array('identifiant'   => $user->getIdentifiant(),
                    'pseudo'        => $user->getPseudo(),
+                   'nb_ajouts'     => $nb_ajouts,
                    'nb_comments'   => $nb_comments,
                    'bilan'         => $bilan,
                    'bilan_format'  => $bilan_format,
@@ -518,39 +528,47 @@
     // Utilisateurs désinscrits
     foreach($utilisateurs_desinscrits as $user_des)
     {
-      // Nombre de commentaires Movie House
-      $req3 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user_des . '"');
+      // Nombre films ajoutés Movie House
+      $req3 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house WHERE identifiant_add = "' . $user_des . '"');
       $data3 = $req3->fetch();
 
-      $nb_comments = $data3['nb_comments'];
+      $nb_ajouts = $data3['nb_ajouts'];
 
       $req3->closeCursor();
+
+      // Nombre de commentaires Movie House
+      $req4 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user_des . '"');
+      $data4 = $req4->fetch();
+
+      $nb_comments = $data4['nb_comments'];
+
+      $req4->closeCursor();
 
       // Calcul des bilans pour les utilisateurs désinscrits uniquement
       $bilan = 0;
 
-      $req4 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-      while($data4 = $req4->fetch())
+      $req5 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+      while($data5 = $req5->fetch())
       {
         // Prix d'achat
-        $prix_achat = $data4['price'];
+        $prix_achat = $data5['price'];
 
         // Identifiant de l'acheteur
-        $acheteur = $data4['buyer'];
+        $acheteur = $data5['buyer'];
 
         // Nombre de parts total et utilisateur
         $nb_parts_total = 0;
         $nb_parts_user = 0;
 
-        $req5 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data4['id']);
-        while($data5 = $req5->fetch())
+        $req6 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data5['id']);
+        while($data6 = $req6->fetch())
         {
           // Nombre de parts total
-          $nb_parts_total += $data5['parts'];
+          $nb_parts_total += $data6['parts'];
 
           // Nombre de parts de l'utilisateur
-          if ($user_des == $data5['identifiant'])
-            $nb_parts_user = $data5['parts'];
+          if ($user_des == $data6['identifiant'])
+            $nb_parts_user = $data6['parts'];
         }
 
         // Prix par parts
@@ -560,30 +578,30 @@
           $prix_par_part = 0;
 
         // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-        if ($data4['buyer'] == $user_des AND $nb_parts_user >= 0)
-          $bilan        += $prix_achat - ($prix_par_part * $nb_parts_user);
+        if ($data5['buyer'] == $user_des AND $nb_parts_user >= 0)
+          $bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
           //$somme_bilans += $bilan;
-        elseif ($data4['buyer'] != $user_des AND $nb_parts_user > 0)
+        elseif ($data5['buyer'] != $user_des AND $nb_parts_user > 0)
           $bilan -= $prix_par_part * $nb_parts_user;
           //$somme_bilans += $bilan;
 
-        $req5->closeCursor();
+        $req6->closeCursor();
       }
-      $req4->closeCursor();
+      $req5->closeCursor();
 
       $bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
 
-
       // Nombre phrases cultes Collector Room
-      $req6 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user_des . '"');
-      $data6 = $req6->fetch();
+      $req7 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user_des . '"');
+      $data7 = $req7->fetch();
 
-      $nb_collectors = $data6['nb_collectors'];
+      $nb_collectors = $data7['nb_collectors'];
 
-      $req6->closeCursor();
+      $req7->closeCursor();
 
       $cat = array('identifiant'   => $user_des,
                    'pseudo'        => '',
+                   'nb_ajouts'     => $nb_ajouts,
                    'nb_comments'   => $nb_comments,
                    'bilan'         => $bilan,
                    'bilan_format'  => $bilan_format,
@@ -602,12 +620,21 @@
   {
     // Initialisation tableau totaux catégories
     $tabTotCat           = array();
+    $nb_tot_ajouts       = 0;
     $nb_tot_commentaires = 0;
     $somme_bilans        = 0;
     $alerte_bilan        = false;
     $nb_tot_collectors   = 0;
 
     global $bdd;
+
+    // Nombre films ajoutés Movie House
+    $req0 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house');
+    $data0 = $req0->fetch();
+
+    $nb_tot_ajouts = $data0['nb_ajouts'];
+
+    $req0->closeCursor();
 
     // Nombre de commentaires total
     $req1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments');
@@ -663,7 +690,8 @@
 
     $req4->closeCursor();
 
-    $tabTotCat = array('nb_tot_commentaires' => $nb_tot_commentaires,
+    $tabTotCat = array('nb_tot_ajouts'       => $nb_tot_ajouts,
+                       'nb_tot_commentaires' => $nb_tot_commentaires,
                        'somme_bilans'        => $somme_bilans,
                        'somme_bilans_format' => $somme_bilans_format,
                        'alerte_bilan'        => $alerte_bilan,
