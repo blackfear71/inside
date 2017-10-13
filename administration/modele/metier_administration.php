@@ -5,6 +5,7 @@
   include_once('../includes/classes/bugs.php');
   include_once('../includes/classes/profile.php');
   include_once('../includes/classes/success.php');
+  include_once('../includes/imagethumb.php');
 
   // METIER : Contrôle alertes utilisateurs
   // RETOUR : Booléen
@@ -1290,7 +1291,10 @@
    					exit("Impossible de copier le fichier dans $success_dir");
    				}
 
-   				echo "Le fichier a bien été uploadé";
+          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+   				imagethumb($success_dir . $new_name, $success_dir . $new_name, 500, FALSE, TRUE);
+
+   				// echo "Le fichier a bien été uploadé";
 
    				// On stocke le nouveau succès dans la base
           $reponse = $bdd->prepare('INSERT INTO success(reference, level, order_success, title, description, limit_success) VALUES(:reference, :level, :order_success, :title, :description, :limit_success)');

@@ -48,7 +48,8 @@
 				<div class="switch_view">
 					<?php
             $listeSwitch = array('settings' => 'Paramètres',
-                                 'success'  => 'Succès'
+                                 'success'  => 'Succès',
+                                 'ranking'  => 'Classement'
                                 );
 
             foreach ($listeSwitch as $view => $lib_view)
@@ -72,6 +73,10 @@
           elseif ($_GET['view'] == "success")
           {
             include('vue/vue_success.php');
+          }
+          elseif ($_GET['view'] == "ranking")
+          {
+            include('vue/vue_ranking.php');
           }
         ?>
 			</article>

@@ -17,6 +17,7 @@
     {
       case 'settings':
       case 'success':
+      case 'ranking':
         break;
 
       default:
@@ -32,8 +33,10 @@
       switch ($_GET['view'])
       {
         case 'success':
-          $listeSuccess = getSuccess();
-          $successUser  = getSuccessUser($listeSuccess, $_SESSION['identifiant']);
+        case 'ranking':
+          $listeSuccess    = getSuccess();
+          $successUser     = getSuccessUser($listeSuccess, $_SESSION['identifiant']);
+          $classementUsers = getRankUsers($listeSuccess);
           break;
 
         case 'settings':
@@ -89,6 +92,7 @@
       switch ($_GET['view'])
       {
         case 'success':
+        case 'ranking':
           foreach ($listeSuccess as $success)
           {
             $success->setReference(htmlspecialchars($success->getReference()));
@@ -102,6 +106,16 @@
           foreach ($successUser as $limit)
           {
             $limit = htmlspecialchars($limit);
+          }
+
+          foreach ($classementUsers as $classement)
+          {
+            foreach ($classement['podium'] as $podium)
+            {
+              $podium['identifiant'] = htmlspecialchars($podium['identifiant']);
+              $podium['pseudo'] = htmlspecialchars($podium['pseudo']);
+              $podium['value']       = htmlspecialchars($podium['value']);
+            }
           }
           break;
 

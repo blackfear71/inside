@@ -217,7 +217,7 @@
  					exit("Impossible de copier le fichier dans $avatar_dir");
  				}
 
- 				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 200px (cf fonction imagethumb.php)
+ 				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
  				imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
 
  				// echo "Le fichier a bien été uploadé";
@@ -737,5 +737,68 @@
     ksort($successUser);
 
     return $successUser;
+  }
+
+  // METIER : Classement des succès des utilisateurs
+  // RETOUR : Tableau des classement
+  function getRankUsers($listSuccess)
+  {
+    $rankUsers = array();
+
+    global $bdd;
+
+    // Boucle pour parcourir tous les succès
+    foreach ($listSuccess as $success)
+    {
+      if ($success->getLimit_success() > 1)
+      {
+        $rankSuccess = array();
+
+        // Boucle pour parcourir tous les utilisateurs
+        $req = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+        while($data = $req->fetch())
+        {
+          // Récupération succès utilisateur courant
+          $successUser = getSuccessUser($listSuccess, $data['identifiant']);
+
+          if (isset($successUser[$success->getId()]))
+          {
+            if ($successUser[$success->getId()] >= $success->getLimit_success())
+            {
+              $myRank = array('identifiant' => $data['identifiant'],
+                              'pseudo'      => $data['pseudo'],
+                              'value'       => $successUser[$success->getId()]
+                            );
+              array_push($rankSuccess, $myRank);
+            }
+          }
+        }
+        $req->closeCursor();
+
+        // Tri tableau sur valeur du succès
+        if (!empty($rankSuccess))
+        {
+          $tri_rank = array();
+
+          foreach ($rankSuccess as $rank)
+          {
+            $tri_rank[] = $rank['value'];
+          }
+
+          array_multisort($tri_rank, SORT_DESC, $rankSuccess);
+
+          // On découpe le tableau pour ne garder que les 3 premiers
+          array_slice($rankSuccess, 3);
+
+          $myGlobalRanks = array('id'     => $success->getId(),
+                                 'podium' => $rankSuccess
+                                );
+
+          array_push($rankUsers, $myGlobalRanks);
+        }
+      }
+    }
+
+    return $rankUsers;
   }
 ?>
