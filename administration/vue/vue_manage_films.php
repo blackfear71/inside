@@ -8,19 +8,17 @@
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleAdmin.css" />
-    
+
 		<title>Inside - Films</title>
   </head>
 
 	<body>
 		<header>
-			<div class="main_title">
-				<img src="../includes/images/manage_films_band.png" alt="manage_films_band" class="bandeau_categorie_2" />
-			</div>
+      <?php
+        $title = "Gestion films";
 
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
+        include('../includes/header.php');
+      ?>
 		</header>
 
 		<section>

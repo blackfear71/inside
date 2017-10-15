@@ -14,13 +14,11 @@
 
 	<body>
 		<header>
-			<div class="main_title">
-				<img src="../includes/images/manage_calendars_band.png" alt="manage_calendars_band" class="bandeau_categorie_2" />
-			</div>
+      <?php
+        $title = "Gestion calendriers";
 
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
+        include('../includes/header.php');
+      ?>
 		</header>
 
 		<section>

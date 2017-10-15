@@ -13,13 +13,11 @@
 
 	<body>
 		<header>
-			<div class="main_title">
-				<img src="includes/images/password_band.png" alt="password_band" class="bandeau_categorie_2" />
-			</div>
+      <?php
+        $title = "Réinitialisation mot de passe";
 
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
+        include('includes/header.php');
+      ?>
 		</header>
 
 		<section>

@@ -14,13 +14,11 @@
 
 	<body>
 		<header>
-			<div class="main_title">
-				<img src="../includes/images/administration_band.png" alt="administration_band" class="bandeau_categorie_2" />
-			</div>
+      <?php
+        $title = "Administration";
 
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
+        include('../includes/header.php');
+      ?>
 		</header>
 
 		<section>
@@ -65,7 +63,7 @@
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
 							<div class="title_admin">Gestion
-								<div class="saut_ligne">SUCCES
+								<div class="saut_ligne">SUCCÈS
 								</div>
 							</div>
 						</div>

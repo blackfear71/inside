@@ -14,13 +14,11 @@
 
 	<body>
 		<header>
-			<div class="main_title">
-				<img src="../../includes/images/the_box_band.png" alt="the_box_band" class="bandeau_categorie_2" />
-			</div>
+      <?php
+        $title = "#TheBox";
 
-			<div class="mask">
-				<div class="triangle"></div>
-			</div>
+        include('../../includes/header.php');
+      ?>
 		</header>
 
 		<section>
