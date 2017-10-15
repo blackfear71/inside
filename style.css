@@ -381,6 +381,7 @@ header
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 200%;
 	text-transform: uppercase;
+	margin-top: -20px;
 }
 
 .triangle_titre_section
@@ -442,7 +443,7 @@ section
 	width: 300px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 150px;
+	margin-top: 50px;
 	text-align: center;
 }
 
@@ -487,7 +488,7 @@ section
 {
 	display: block;
 	text-align: center;
-	margin-top: 150px;
+	margin-top: 100px;
 	margin-bottom: 30px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 80%;
@@ -547,7 +548,7 @@ aside
 	margin-left: 20px;
 	float: left;
 	position: relative;
-	z-index: 2;
+	z-index: 3;
 }
 
 .icon_deconnexion
@@ -640,6 +641,7 @@ aside
 	color: white;
 	background-color: rgb(255, 25, 55);
 	line-height: 60px;
+	margin-bottom: 20px;
 }
 
 .logo_onglet
@@ -685,7 +687,7 @@ aside
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	margin-top: -30px;
+	margin-top: -50px;
 }
 
 .switch_view_2
@@ -1167,11 +1169,11 @@ aside
 {
 	position: absolute;
 	left: 50%;
-	width: 500px;
-	margin-left: -270px;
-	margin-top: -45px;
+	width: 460px;
+	margin-left: -250px;
+	margin-top: -50px;
 	line-height: 20px;
-	padding-top: 20px;
+	padding-top: 55px;
 	padding-bottom: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -1188,11 +1190,32 @@ aside
 {
 	position: absolute;
 	left: 50%;
-	width: 500px;
-	margin-left: -270px;
-	margin-top: -30px;
+	width: 460px;
+	margin-left: -250px;
+	margin-top: -20px;
 	line-height: 20px;
-	padding-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+	background-color: #fffd4c;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	box-shadow: 2px 2px 5px #a3a3a3;
+	z-index: 3;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
+.message_alerte_3
+{
+	position: absolute;
+	left: 50%;
+	width: 460px;
+	margin-left: -250px;
+	margin-top: -50px;
+	line-height: 20px;
+	padding-top: 30px;
 	padding-bottom: 10px;
 	padding-left: 20px;
 	padding-right: 20px;

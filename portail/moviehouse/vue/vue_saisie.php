@@ -21,7 +21,11 @@
 	<body>
     <!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+			<?php
+        $title = "Movie House";
+        
+        include('../../includes/onglets.php');
+      ?>
 		</header>
 
 		<section>

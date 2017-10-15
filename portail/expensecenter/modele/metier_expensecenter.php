@@ -480,7 +480,7 @@
     // Suppression des parts
     $req1 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_delete);
 
-    // Supression de la dépense
+    // Suppression de la dépense
     $req2 = $bdd->exec('DELETE FROM expense_center WHERE id = ' . $id_delete);
 
     // Message suppression effectuée

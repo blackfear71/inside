@@ -69,6 +69,9 @@
 	echo '</div>';
 
 	// Affichage titre section
-	echo '<div class="rectangle_titre_section">' . $title . '</div>';
-	echo '<div class="triangle_titre_section"></div>';
+	if (isset($title) AND !empty($title))
+	{
+		echo '<div class="rectangle_titre_section">' . $title . '</div>';
+		echo '<div class="triangle_titre_section"></div>';
+	}
 ?>

@@ -47,6 +47,10 @@
   						else
   							echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="button_idea" />';
   					echo '</form>';
+
+            echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce rapport ?\')) return false;">';
+              echo '<input type="submit" name="delete_bug" value="Supprimer" class="button_idea" />';
+            echo '</form>';
   				echo '</td>';
   			echo '</tr>';
 

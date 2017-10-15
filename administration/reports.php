@@ -34,6 +34,10 @@
 			updateBug($_GET['id'], $_POST);
 			break;
 
+    case "doSupprimer":
+      deleteBug($_GET['id']);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: reports.php?view=all&action=goConsulter');
@@ -57,6 +61,7 @@
       break;
 
 		case "doChangerStatut":
+    case "doSupprimer":
     default:
       break;
   }
@@ -65,6 +70,7 @@
   switch ($_GET['action'])
   {
 		case "doChangerStatut":
+    case "doSupprimer":
 			header('location: reports.php?view=' . $_GET['view'] . '&action=goConsulter');
 			break;
 

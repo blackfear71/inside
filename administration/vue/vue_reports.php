@@ -33,8 +33,13 @@
 				?>
 			</aside>
 
+      <!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+      
 			<article class="article_portail">
-				<div class="switch_view">
+				<div class="switch_view" style="margin-top: -30px;">
 					<?php
 						$listeSwitch = array('all'        => 'Tous',
 																 'unresolved' => 'En cours',

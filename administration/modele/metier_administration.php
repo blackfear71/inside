@@ -326,6 +326,17 @@
     $req->closeCursor();
   }
 
+  // METIER : Suppression d'un bug
+  // RETOUR : Aucun
+  function deleteBug($id)
+  {
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
+
+    $_SESSION['bug_deleted'] = true;
+  }
+
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
   function getUsers()
@@ -1007,7 +1018,7 @@
     // Suppression des préférences
     $req2 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $identifiant . '"');
 
-    // Supression utilisateur
+    // Suppression utilisateur
     $req3 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user);
   }
 
@@ -1045,7 +1056,7 @@
     ));
     $req5->closeCursor();
 
-    // Supression utilisateur
+    // Suppression utilisateur
     $req6 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
   }
 

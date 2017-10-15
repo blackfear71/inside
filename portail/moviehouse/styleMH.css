@@ -422,7 +422,7 @@
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
+	margin-top: 195px;
 }
 
 .detail_gauche
@@ -879,6 +879,7 @@
 	border-top-right-radius: 5px;
 	padding-left: 20px;
 	padding-right: 20px;
+	margin-top: 50px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 150%;
 	color: white;
@@ -1215,15 +1216,7 @@
 	transition: opacity 0.5s, margin-right 0.5s;
 }
 
-/*** New détails ***/
-.details
-{
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 240px;
-}
-
+/*** Détails ***/
 .left_details
 {
 	width: 30%;

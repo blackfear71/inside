@@ -243,7 +243,7 @@
  		}
   }
 
-  // METIER : Supression de l'avatar (base + fichier)
+  // METIER : Suppression de l'avatar (base + fichier)
   // RETOUR : Aucun
   function deleteAvatar($user)
   {

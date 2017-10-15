@@ -60,6 +60,9 @@
   if (!isset($_SESSION['bug_submitted']))
     $_SESSION['bug_submitted'] = NULL;
 
+  if (!isset($_SESSION['bug_deleted']))
+    $_SESSION['bug_deleted'] = NULL;
+
   // Initialisations profil
   if (!isset($_SESSION['pseudo_changed']))
     $_SESSION['pseudo_changed'] = NULL;
@@ -158,14 +161,14 @@
   // Alertes connexion
   if (isset($_SESSION['wrong_connexion']) AND $_SESSION['wrong_connexion'] == true)
   {
-    echo '<div class="message_alerte">';
+    echo '<div class="message_alerte_3">';
       echo 'Mot de passe incorrect ou utilisateur inconnu.';
     echo '</div>';
     $_SESSION['wrong_connexion'] = NULL;
   }
   elseif (isset($_SESSION['not_yet']) AND $_SESSION['not_yet'] == true)
   {
-    echo '<div class="message_alerte">';
+    echo '<div class="message_alerte_3">';
       echo 'Veuillez patienter jusqu\'à ce que l\'administrateur valide votre inscription.';
     echo '</div>';
     $_SESSION['not_yet'] = NULL;
@@ -308,6 +311,14 @@
 			echo 'Votre message a été envoyé à l\'administrateur.';
     echo '</div>';
     $_SESSION['bug_submitted'] = NULL;
+  }
+  // Alertes bugs (Admin)
+  elseif (isset($_SESSION['bug_deleted']) AND $_SESSION['bug_deleted'] == true)
+  {
+    echo '<div class="message_alerte">';
+      echo 'Le rapport a été supprimé.';
+    echo '</div>';
+    $_SESSION['bug_deleted'] = NULL;
   }
   // Alertes profil (Utilisateurs)
   elseif (isset($_SESSION['pseudo_changed'])
@@ -453,7 +464,7 @@
   elseif (isset($_SESSION['depense_deleted']) AND $_SESSION['depense_deleted'] == true)
   {
     echo '<div class="message_alerte_2">';
-      echo 'La dépense a bien été suprimée.';
+      echo 'La dépense a bien été supprimée.';
     echo '</div>';
     $_SESSION['depense_deleted'] = NULL;
   }

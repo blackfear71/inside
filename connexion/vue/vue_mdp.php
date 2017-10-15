@@ -42,7 +42,7 @@
 					puisse procéder à la création d'un nouveau mot de passe qu'il vous communiquera par la suite.
 				</div>
 
-				<div class="bloc_identification" style="margin-top: 100px;">
+				<div class="bloc_identification">
           <?php
   					echo '<form method="post" action="index.php?action=doDemanderMdp">';
   						echo '<input type="text" name="login" value="' . $_SESSION['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne" required />';
