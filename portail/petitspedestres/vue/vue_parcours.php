@@ -15,7 +15,11 @@
 	<body>
     <!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+      <?php
+        $title = "Les Petits Pédestres";
+
+        include('../../includes/onglets.php') ;
+      ?>
 		</header>
 
 		<section>
@@ -40,11 +44,6 @@
 			?>
 
 			<article class="article_portail">
-        <!-- Bandeau catégorie -->
-				<a href="parcours.php?action=liste">
-					<img src="../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
-				</a>
-
 				<div class="PP-parcours">
           <div class="PP-titre">
             <?php echo $parcours->getNom(); ?>

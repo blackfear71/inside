@@ -17,7 +17,11 @@
 	<body>
 		<!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+      <?php
+        $title = "Expense Center";
+
+        include('../../includes/onglets.php') ;
+      ?>
 		</header>
 
 		<section>
@@ -40,9 +44,6 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Bandeau catégorie -->
-				<img src="../../includes/images/expense_center_band.png" alt="expense_center_band" class="bandeau_categorie" />
-
         <?php
           // Saisie nouvelle ligne
           include('vue/table_saisie_depense.php');

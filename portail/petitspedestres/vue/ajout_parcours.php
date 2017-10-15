@@ -16,7 +16,11 @@
 	<body>
     <!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+      <?php
+        $title = "Les Petits Pédestres";
+
+        include('../../includes/onglets.php') ;
+      ?>
 		</header>
 
 		<section>
@@ -39,9 +43,6 @@
 			?>
 
 			<article class="article_portail">
-        <!-- Bandeau catégorie -->
-				<img src="../../includes/images/petits_pedestres_band.png" alt="petits_pedestres_band" class="bandeau_categorie" />
-
 				<div class="contenu_saisie_avancee">
 					<form method="post" action="parcours.php?action=doajouter" class="form_saisie_avancee">
 						<div class="zone_saisie_avancee_infos">

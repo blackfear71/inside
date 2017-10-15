@@ -20,7 +20,11 @@
 	<body>
 		<!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+      <?php
+        $title = "Movie House";
+
+			  include('../../includes/onglets.php') ;
+      ?>
 		</header>
 
 		<section>
@@ -44,9 +48,6 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Bandeau catégorie -->
-				<img src="../../includes/images/movie_house_band.png" alt="movie_house_band" class="bandeau_categorie" />
-
 				<!-- Switch entre accueil, vue générale et vue personnelle-->
 				<div class="switch_view_2">
 					<?php

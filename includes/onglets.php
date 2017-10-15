@@ -67,4 +67,8 @@
 	echo '<div class="main_title_2">';
 		echo $onglet_1, $onglet_2, $onglet_3, $onglet_4, $onglet_5;
 	echo '</div>';
+
+	// Affichage titre section
+	echo '<div class="rectangle_titre_section">' . $title . '</div>';
+	echo '<div class="triangle_titre_section"></div>';
 ?>

@@ -20,7 +20,11 @@
 	<body>
 		<!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+      <?php
+        $title = "Collector Room";
+
+        include('../../includes/onglets.php') ;
+      ?>
 		</header>
 
 		<section>
@@ -43,9 +47,6 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Bandeau catégorie -->
-				<img src="../../includes/images/collector_band.png" alt="collector_band" class="bandeau_categorie" />
-
         <?php
           // Saisie phrase culte
           echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';

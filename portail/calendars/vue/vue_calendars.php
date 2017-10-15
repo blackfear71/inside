@@ -15,7 +15,11 @@
 	<body>
 		<!-- Onglets -->
 		<header>
-			<?php include('../../includes/onglets.php') ; ?>
+      <?php
+        $title = "Calendars";
+
+			  include('../../includes/onglets.php') ;
+      ?>
 		</header>
 
 		<section>
@@ -38,9 +42,6 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Bandeau catégorie -->
-				<img src="../../includes/images/calendars_band.png" alt="calendars_band" class="bandeau_categorie" />
-
         <?php
           // Onglets années
           include('vue/onglets_calendars.php');
