@@ -14,9 +14,9 @@
             echo '<td class="ranking_line_left">';
               // Logo succès
               if ($successUser[$success->getId()] >= $success->getLimit_success())
-                echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_rank" />';
+                echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_rank" style="background-color: #ffad01;" />';
               else
-                echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_rank" style="filter: grayscale(1);" />';
+                echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_rank" />';
 
               // Titre succès
               echo '<div class="titre_rank">' . $success->getTitle() . '</div>';
