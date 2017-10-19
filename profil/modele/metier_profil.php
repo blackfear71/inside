@@ -728,6 +728,16 @@
           $successUser[$success->getId()] = $star_wars_8;
           break;
 
+        // Economie de marché
+        case "greedy":
+          $bilan = 0;
+
+          $stats = getStatistiques($user);
+          $bilan = str_replace(',', '.', $stats->getExpenses());
+
+          $successUser[$success->getId()] = $bilan;
+          break;
+
         default:
           break;
       }
@@ -778,6 +788,7 @@
         // Tri tableau sur valeur du succès
         if (!empty($rankSuccess))
         {
+          // Tri podium
           $tri_rank = array();
 
           foreach ($rankSuccess as $rank)
@@ -790,8 +801,10 @@
           // On découpe le tableau pour ne garder que les 3 premiers
           array_slice($rankSuccess, 3);
 
-          $myGlobalRanks = array('id'     => $success->getId(),
-                                 'podium' => $rankSuccess
+          $myGlobalRanks = array('id'             => $success->getId(),
+                                 'level'          => $success->getLevel(),
+                                 'order_success'  => $success->getOrder_success(),
+                                 'podium'         => $rankSuccess
                                 );
 
           array_push($rankUsers, $myGlobalRanks);

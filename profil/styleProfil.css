@@ -503,34 +503,47 @@
 	min-height: 60px;
 }
 
+.ranking_line .level_succes
+{
+	width: 100%;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+	border-bottom: none;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #262626;
+	text-align: center;
+	color: white;
+}
+
 .ranking_line_left
 {
-	float: left;
 	width: 50%;
 	min-height: 60px;
-	line-height: 60px;
 }
 
 .logo_rank
 {
-	display: inline-block;
+	float: left;
 	width: 40px;
 	background-color: #b3b3b3;
 	padding: 5px;
 	border-radius: 5px;
 	vertical-align: middle;
-	margin-left: 5px;
-	margin-top: -4px;
+	margin: 5px;
 }
 
 .titre_rank
 {
 	display: inline-block;
-	line-height: 20px;
+	height: 50px;
+	line-height: 50px;
 	vertical-align: middle;
 	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 110%;
-	margin-top: -4px;
+	margin-top: 5px;
 	margin-left: 10px;
 }
 

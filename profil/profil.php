@@ -113,7 +113,7 @@
             foreach ($classement['podium'] as $podium)
             {
               $podium['identifiant'] = htmlspecialchars($podium['identifiant']);
-              $podium['pseudo'] = htmlspecialchars($podium['pseudo']);
+              $podium['pseudo']      = htmlspecialchars($podium['pseudo']);
               $podium['value']       = htmlspecialchars($podium['value']);
             }
           }

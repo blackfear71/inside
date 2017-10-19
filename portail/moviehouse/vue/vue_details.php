@@ -59,12 +59,13 @@
                 echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="icons/right.png" alt="right" class="fleche_detail" style="padding-left: 50px;" /></a>';
                 echo '<span class="titre_next_movie">' . $listeNavigation['next']['film'] . '</span>';
               }
-              // Fond + Titre du film
+              // Fond
               if (!empty($detailsFilm->getPoster()))
-                echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" /><br />';
+                echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';
               else
                 echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';
 
+              // Titre du film
               echo '<div class="titre_film_details">' . $detailsFilm->getFilm() . '</div>';
             echo '</div>';
 

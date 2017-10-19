@@ -1,9 +1,16 @@
 <?php
   $i = 0;
+  $lvl = 0;
 
   echo '<table class="zone_ranking">';
     foreach ($listeSuccess as $success)
     {
+      if ($success->getLevel() != $lvl AND $success->getLimit_success() > 1)
+      {
+        echo '<tr class="ranking_line" style="background-color: rgb(255, 25, 55);"><td colspan="100%">' . formatTitleLvl($success->getLevel()) . '</td></tr>';
+        $lvl = $success->getLevel();
+      }
+
       if (isset($successUser[$success->getId()]) AND $success->getLimit_success() > 1)
       {
         if ($i % 2 == 0)

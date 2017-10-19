@@ -121,16 +121,19 @@
         $i++;
       }
 
-      if ($date_jour_present == false AND $preferences->getToday_movie_house() == "Y")
+      if (date("Y") == $_GET['year'])
       {
-        echo '<tr class="ligne_tableau_movie_house">';
-          echo '<td class="table_date_jour" colspan="100%"">';
-            echo 'Aujourd\'hui, le ' . date("d/m/Y");
-            echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
-          echo '</td>';
-        echo '</tr>';
+        if ($date_jour_present == false AND $preferences->getToday_movie_house() == "Y")
+        {
+          echo '<tr class="ligne_tableau_movie_house">';
+            echo '<td class="table_date_jour" colspan="100%"">';
+              echo 'Aujourd\'hui, le ' . date("d/m/Y");
+              echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+            echo '</td>';
+          echo '</tr>';
 
-        $date_jour_present = true;
+          $date_jour_present = true;
+        }
       }
 
       echo '<tr>';
