@@ -489,7 +489,7 @@
         case "publisher":
           $nb_films_publies = 0;
 
-          $req = $bdd->query('SELECT COUNT(id) AS nb_films_publies FROM movie_house WHERE identifiant_add = "' . $user . '"');
+          $req = $bdd->query('SELECT COUNT(id) AS nb_films_publies FROM movie_house WHERE identifiant_add = "' . $user . '" AND to_delete != "Y"');
           $data = $req->fetch();
 
           $nb_films_publies = $data['nb_films_publies'];
