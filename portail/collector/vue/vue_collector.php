@@ -12,6 +12,7 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="/inside/script.js"></script>
     <script type="text/javascript" src="scriptCO.js"></script>
 
 		<title>Inside - CO</title>
@@ -64,7 +65,7 @@
             echo '</select>';
 
             // Saisie date
-            echo '<input type="text" name="date_collector" value="' . $_SESSION['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker" class="saisie_date_collector" required />';
+            echo '<input type="text" name="date_collector" value="' . $_SESSION['date_collector'] . '" placeholder="Date" maxlength="10" id="datepickerSaisie" class="saisie_date_collector" required />';
 
             // Bouton
             echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';

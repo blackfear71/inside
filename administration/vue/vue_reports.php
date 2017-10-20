@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleAdmin.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+    
 		<title>Inside - Bugs</title>
   </head>
 
@@ -37,7 +39,7 @@
 			<?php
 				include('../includes/alerts.php');
 			?>
-      
+
 			<article class="article_portail">
 				<div class="switch_view" style="margin-top: -30px;">
 					<?php

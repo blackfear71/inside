@@ -9,6 +9,8 @@
   	<link rel="stylesheet" href="/inside/style.css" />
   	<link rel="stylesheet" href="stylePP.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+
   	<title>Inside - PP</title>
   </head>
 
@@ -46,13 +48,13 @@
 					<form method="post" action="parcours.php?id=<?php echo $parcours->getId(); ?>&action=domodifier" class="form_saisie_avancee">
 						<div class="zone_saisie_avancee_infos">
 							<label class="label_parcours">Nom : </label>
-							<input type="text" value="<?php echo $parcours->getNom(); ?>" name="name" class="monoligne_film" /><br />
+							<input type="text" value="<?php echo $name; ?>" name="name" class="monoligne_film" /><br />
 							<label class="label_parcours">Distance : </label>
-							<input type="text" value="<?php echo $parcours->getDistance(); ?>" name="dist" class="monoligne_film" /><br />
+							<input type="text" value="<?php echo $dist; ?>" name="dist" class="monoligne_film" /><br />
 							<label class="label_parcours">Lieu : </label>
-							<input type="text" value="<?php echo $parcours->getLieu(); ?>" name="location" class="monoligne_film" /><br />
+							<input type="text" value="<?php echo $location; ?>" name="location" class="monoligne_film" /><br />
 							<label class="label_parcours">Url image : </label>
-							<input type="text" value="<?php echo $parcours->getImage(); ?>" name="picurl" class="monoligne_film" /><br />
+							<input type="text" value="<?php echo $picture; ?>" name="picurl" class="monoligne_film" /><br />
 						</div>
 
             <br /><br />

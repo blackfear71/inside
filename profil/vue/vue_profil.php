@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleProfil.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
     <script type="text/javascript" src="scriptProfil.js"></script>
 
 		<title>Inside - Profil</title>

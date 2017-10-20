@@ -26,29 +26,38 @@
   // RETOUR : Objet Statistiques
   function getStatistiques($user)
   {
+    $nb_films_ajoutes = 0;
+    $nb_comments      = 0;
+    $expenses         = 0;
+    $nb_collectors    = 0;
+    $nb_ideas         = 0;
+
     global $bdd;
 
     // Nombre de films ajoutés Movie House
-    $reponse0 = $bdd->query('SELECT COUNT(id) AS nb_films_ajoutes FROM movie_house WHERE identifiant_add = "' . $user . '"');
-    $donnees0 = $reponse0->fetch();
+    $reponse = $bdd->query('SELECT COUNT(id) AS nb_films_ajoutes FROM movie_house WHERE identifiant_add = "' . $user . '" AND to_delete != "Y"');
+    $donnees = $reponse->fetch();
 
-    $nb_films_ajoutes = $donnees0['nb_films_ajoutes'];
+    $nb_films_ajoutes = $donnees['nb_films_ajoutes'];
 
-    $reponse0->closeCursor();
+    $reponse->closeCursor();
 
     // Nombre de commentaires Movie House
-    $reponse1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user . '"');
-    $donnees1 = $reponse1->fetch();
+    $reponse0 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY id ASC');
+    while($donnees0 = $reponse0->fetch())
+    {
+      $reponse1 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $donnees0['id'] . ' AND author = "' . $user . '"');
+      $donnees1 = $reponse1->fetch();
 
-    $nb_comments = $donnees1['nb_comments'];
+      if ($reponse1->rowCount() > 0)
+        $nb_comments++;
 
-    $reponse1->closeCursor();
+      $reponse1->closeCursor();
+    }
+    $reponse0->closeCursor();
 
     // Solde des dépenses
     $reponse2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-
-    $expenses = 0;
-
     while($donnees2 = $reponse2->fetch())
     {
       // Prix d'achat
@@ -85,9 +94,7 @@
         $expenses = $expenses - ($prix_par_part * $nb_parts_user);
 
       $reponse3->closeCursor();
-
     }
-
     $reponse2->closeCursor();
 
     $expenses = str_replace('.', ',', round($expenses, 2));
@@ -503,12 +510,18 @@
         case "viewer":
           $nb_films_vus = 0;
 
-          $req = $bdd->query('SELECT COUNT(id) AS nb_films_vus FROM movie_house_users WHERE identifiant = "' . $user . '" AND participation = "S"');
-          $data = $req->fetch();
+          $req1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY id ASC');
+          while($data1 = $req1->fetch())
+          {
+            $req2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $data1['id'] . ' AND identifiant = "' . $user . '" AND participation = "S"');
+            $data2 = $req2->fetch();
 
-          $nb_films_vus = $data['nb_films_vus'];
+            if ($req2->rowCount() > 0)
+              $nb_films_vus++;
 
-          $req->closeCursor();
+            $req2->closeCursor();
+          }
+          $req1->closeCursor();
 
           $successUser[$success->getId()] = $nb_films_vus;
           break;
@@ -517,12 +530,18 @@
         case "commentator":
           $nb_commentaires_films = 0;
 
-          $req = $bdd->query('SELECT COUNT(id) AS nb_commentaires_films FROM movie_house_comments WHERE author = "' . $user . '"');
-          $data = $req->fetch();
+          $req1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY id ASC');
+          while($data1 = $req1->fetch())
+          {
+            $req2 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $data1['id'] . ' AND author = "' . $user . '"');
+            $data2 = $req2->fetch();
 
-          $nb_commentaires_films = $data['nb_commentaires_films'];
+            if ($req2->rowCount() > 0)
+              $nb_commentaires_films++;
 
-          $req->closeCursor();
+            $req2->closeCursor();
+          }
+          $req1->closeCursor();
 
           $successUser[$success->getId()] = $nb_commentaires_films;
           break;

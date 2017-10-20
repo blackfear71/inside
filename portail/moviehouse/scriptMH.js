@@ -10,7 +10,7 @@ function afficherMasquer(id)
 // Génère un calendrier
 $(function()
 {
-  $( "#datepicker" ).datepicker(
+  $("#datepicker").datepicker(
   {
     firstDay: 1,
     altField: "#datepicker",
@@ -26,7 +26,7 @@ $(function()
     weekHeader: 'Sem.',
     dateFormat: 'dd/mm/yy'
   });
-  $( "#datepicker2" ).datepicker(
+  $("#datepicker2").datepicker(
   {
     firstDay: 1,
     altField: "#datepicker2",
@@ -42,7 +42,7 @@ $(function()
     weekHeader: 'Sem.',
     dateFormat: 'dd/mm/yy'
   });
-  $( "#datepicker3" ).datepicker(
+  $("#datepicker3").datepicker(
   {
     firstDay: 1,
     altField: "#datepicker3",

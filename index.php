@@ -13,7 +13,8 @@
 	 $_SESSION['connected'] = false;
 
 	// Initialisation sauvegarde saisie inscription
-	if (((!isset($_SESSION['already_exist'])  OR  $_SESSION['already_exist'] != true)
+	if (((!isset($_SESSION['too_short'])      OR  $_SESSION['too_short'] != true)
+	AND  (!isset($_SESSION['already_exist'])  OR  $_SESSION['already_exist'] != true)
 	AND  (!isset($_SESSION['wrong_confirm'])  OR  $_SESSION['wrong_confirm'] != true))
 	OR   (isset($_SESSION['ask_inscription']) AND $_SESSION['ask_inscription'] == true))
 	{
@@ -28,7 +29,7 @@
 	AND  (!isset($_SESSION['already_asked']) OR $_SESSION['already_asked'] != true))
 	OR   (isset($_SESSION['asked'])          AND $_SESSION['asked'] == true))
 		$_SESSION['identifiant_saisi_mdp'] = "";
-		
+
   // Modèle de données : "module métier"
   include_once('connexion/modele/metier_index.php');
 

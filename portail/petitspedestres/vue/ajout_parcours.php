@@ -10,6 +10,8 @@
   	<link rel="stylesheet" href="stylePP.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+
   	<title>Inside - PP</title>
   </head>
 
@@ -47,13 +49,13 @@
 					<form method="post" action="parcours.php?action=doajouter" class="form_saisie_avancee">
 						<div class="zone_saisie_avancee_infos">
 							<label class="label_parcours">Nom : </label>
-							<input type="text" placeholder="Nom parcours" name="name" class="monoligne_film" /><br />
+							<input type="text" placeholder="Nom parcours" value="<?php echo $_SESSION['save_add']['nom']; ?>" name="name" class="monoligne_film" /><br />
 							<label class="label_parcours">Distance : </label>
-							<input type="text" placeholder="Distance (km)" name="dist" class="monoligne_film" /><br />
+							<input type="text" placeholder="Distance (km)" value="<?php echo $_SESSION['save_add']['distance']; ?>" name="dist" class="monoligne_film" /><br />
 							<label class="label_parcours">Lieu : </label>
-							<input type="text" placeholder="Lieu" name="location" class="monoligne_film" /><br />
+							<input type="text" placeholder="Lieu" value="<?php echo $_SESSION['save_add']['lieu']; ?>" name="location" class="monoligne_film" /><br />
 							<label class="label_parcours">Url image : </label>
-							<input type="text" placeholder="Url de l'image" name="picurl" class="monoligne_film" /><br />
+							<input type="text" placeholder="Url de l'image" value="<?php echo $_SESSION['save_add']['image']; ?>" name="picurl" class="monoligne_film" /><br />
 						</div>
 
             <br /><br />

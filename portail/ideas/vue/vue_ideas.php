@@ -9,6 +9,8 @@
   	<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleTheBox.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+    
   	<title>Inside - &#35;TheBox</title>
   </head>
 

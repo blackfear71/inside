@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleMH.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+    
 		<title>Inside - MH</title>
   </head>
 

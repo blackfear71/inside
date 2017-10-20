@@ -34,10 +34,10 @@ $(function()
 // Génère un ou plusieurs calendrier
 $(function()
 {
-  $( "#datepicker" ).datepicker(
+  $("#datepickerSaisie").datepicker(
   {
     firstDay: 1,
-    altField: "#datepicker",
+    altField: "#datepickerSaisie",
     closeText: 'Fermer',
     prevText: 'Précédent',
     nextText: 'Suivant',

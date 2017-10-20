@@ -8,6 +8,8 @@
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
 		<link rel="stylesheet" href="/inside/style.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+    
 		<title>Inside - MDP</title>
   </head>
 

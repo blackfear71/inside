@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/inside/style.css" />
   	<link rel="stylesheet" href="styleEC.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
     <script type="text/javascript" src="scriptEC.js"></script>
 
 		<title>Inside - EC</title>

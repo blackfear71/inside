@@ -4,7 +4,8 @@
 
   // Métier : lecture d'un parcours en fonction de son id
   // Renvoie un objet Parcours
-  function getParcours ($id){
+  function getParcours ($id)
+  {
     // Pas de paramètre offset/limit, à ajouter le jour où on a 12 millions de parcours
     global $bdd;
     $reponse = $bdd->query('SELECT * FROM petits_pedestres_parcours WHERE id = ' . $id);
@@ -23,40 +24,45 @@
 
   // Métier : met un parcours à jour en fonction de son id et de données passées par formulaire
   // Renvoie un objet Parcours
-  function updateParcours ($id, $post){
-    $data = array (
-      'nom' => $post['name'],
-      'distance' => $post['dist'],
-      'lieu' => $post['location'],
-      'image' => $post['picurl']
-    );
+  function updateParcours ($id, $post)
+  {
+    $data = array ('nom'      => $post['name'],
+                   'distance' => $post['dist'],
+                   'lieu'     => $post['location'],
+                   'image'    => $post['picurl']
+                  );
 
-    $parcours = Parcours::withData($data);    
+    $_SESSION['save_mod'] = $data;
+
+    $parcours = Parcours::withData($data);
 
     if (is_numeric($parcours->getDistance()))
     {
-      global $bdd;      
-      $req = $bdd->prepare('UPDATE petits_pedestres_parcours SET nom = :nom, 
-                                                                 distance = :distance, 
-                                                                 lieu = :lieu, 
-                                                                 image = :image
-                                                              WHERE id = ' . $id);
+      global $bdd;
+      $req = $bdd->prepare('UPDATE petits_pedestres_parcours SET nom      = :nom,
+                                                                 distance = :distance,
+                                                                 lieu     = :lieu,
+                                                                 image    = :image
+                                                             WHERE id     = ' . $id);
       $req->execute($data);
       $req->closeCursor();
+
+      $_SESSION['parcours_modified'] = true;
 
       return $parcours;
     }
     else
     {
       $_SESSION['erreur_distance'] = true;
-      return new Parcours();      
+      return new Parcours();
     }
 
   }
 
   // Métier : liste des parcours, par ordre alphabétique
   // Renvoie une liste d'objets Parcours
-  function listParcours(){
+  function listParcours()
+  {
     global $bdd;
     $reponse = $bdd->query('SELECT * FROM petits_pedestres_parcours ORDER BY nom ASC');
 
@@ -76,29 +82,34 @@
   // Métier : insertion d'un nouveau parcours dans la base de données
   // Ne renvoie rien pour le moment
   function addParcours($post){
-    $data = array (
-      'nom' => $post['name'],
-      'distance' => $post['dist'],
-      'lieu' => $post['location'],
-      'image' => $post['picurl']
-    );
+    $data = array('nom'      => $post['name'],
+                  'distance' => $post['dist'],
+                  'lieu'     => $post['location'],
+                  'image'    => $post['picurl']
+                 );
 
-    if (is_numeric($data['distance'])){
+    $_SESSION['save_add'] = $data;
+
+    if (is_numeric($data['distance']))
+    {
       global $bdd;
       $req = $bdd->prepare('INSERT INTO petits_pedestres_parcours(nom, distance, lieu, image)
                                                        VALUES(:nom, :distance, :lieu, :image)');
       $req->execute($data);
       $req->closeCursor();
-      
+
       $parcours = Parcours::withData($data);
       $parcours->setId($bdd->lastInsertId());
 
+      $_SESSION['parcours_added'] = true;
+
       return $parcours;
     }
-    else{
-      $_SESSION['erreur_distance'] = true;      
+    else
+    {
+      $_SESSION['erreur_distance'] = true;
       return new Parcours();
     }
-    
+
   }
 ?>

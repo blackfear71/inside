@@ -109,61 +109,68 @@
 
     global $bdd;
 
-    // Contrôle trigramme déjà pris
-    $reponse = $bdd->query('SELECT id, identifiant FROM users');
-    while ($donnees = $reponse->fetch())
+    // Contrôle trigramme sur 3 caractères
+    if (strlen($trigramme) == 3)
     {
-      if ($donnees['identifiant'] == $trigramme)
+      // Contrôle trigramme déjà pris
+      $reponse = $bdd->query('SELECT id, identifiant FROM users');
+      while ($donnees = $reponse->fetch())
       {
-        $_SESSION['already_exist'] = true;
-        break;
+        if ($donnees['identifiant'] == $trigramme)
+        {
+          $_SESSION['already_exist'] = true;
+          break;
+        }
+        else
+          $_SESSION['already_exist'] = false;
       }
-      else
-        $_SESSION['already_exist'] = false;
+      $reponse->closeCursor();
+
+      // Contrôle confirmation mot de passe
+      if ($_SESSION['already_exist'] == false)
+      {
+        if ($password == $confirm_password)
+        {
+          // On créé l'utilisateur
+          $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar, email, beginner, developper) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar, :email, :beginner, :developper)');
+  				$req->execute(array(
+  					'identifiant'  => $trigramme,
+            'salt'         => $salt,
+            'mot_de_passe' => $password,
+            'reset'        => $reset,
+  					'pseudo'       => $pseudo,
+  					'avatar'       => $avatar,
+            'email'        => $email,
+            'beginner'     => $beginner,
+            'developper'   => $developper
+  					));
+  				$req->closeCursor();
+
+          // On créé les préférences
+          $req = $bdd->prepare('INSERT INTO preferences(identifiant, view_movie_house, categories_home, today_movie_house, view_the_box, manage_calendars) VALUES(:identifiant, :view_movie_house, :categories_home, :today_movie_house, :view_the_box, :manage_calendars)');
+          $req->execute(array(
+            'identifiant'       => $trigramme,
+            'view_movie_house'  => $view_movie_house,
+            'categories_home'   => $categories_home,
+            'today_movie_house' => $today_movie_house,
+            'view_the_box'      => $view_the_box,
+            'manage_calendars'  => $manage_calendars
+            ));
+          $req->closeCursor();
+
+          $_SESSION['ask_inscription'] = true;
+          $_SESSION['wrong_confirm']   = false;
+        }
+        else
+        {
+          $_SESSION['ask_inscription'] = false;
+          $_SESSION['wrong_confirm']   = true;
+        }
+      }
     }
-    $reponse->closeCursor();
+    else
+      $_SESSION['too_short'] = true;
 
-    // Contrôle confirmation mot de passe
-    if ($_SESSION['already_exist'] == false)
-    {
-      if ($password == $confirm_password)
-      {
-        // On créé l'utilisateur
-        $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar, email, beginner, developper) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar, :email, :beginner, :developper)');
-				$req->execute(array(
-					'identifiant'  => $trigramme,
-          'salt'         => $salt,
-          'mot_de_passe' => $password,
-          'reset'        => $reset,
-					'pseudo'       => $pseudo,
-					'avatar'       => $avatar,
-          'email'        => $email,
-          'beginner'     => $beginner,
-          'developper'   => $developper
-					));
-				$req->closeCursor();
-
-        // On créé les préférences
-        $req = $bdd->prepare('INSERT INTO preferences(identifiant, view_movie_house, categories_home, today_movie_house, view_the_box, manage_calendars) VALUES(:identifiant, :view_movie_house, :categories_home, :today_movie_house, :view_the_box, :manage_calendars)');
-        $req->execute(array(
-          'identifiant'       => $trigramme,
-          'view_movie_house'  => $view_movie_house,
-          'categories_home'   => $categories_home,
-          'today_movie_house' => $today_movie_house,
-          'view_the_box'      => $view_the_box,
-          'manage_calendars'  => $manage_calendars
-          ));
-        $req->closeCursor();
-
-        $_SESSION['ask_inscription'] = true;
-        $_SESSION['wrong_confirm']   = false;
-      }
-      else
-      {
-        $_SESSION['ask_inscription'] = false;
-        $_SESSION['wrong_confirm']   = true;
-      }
-    }
   }
 
   // METIER : Demande récupération mot de passe
