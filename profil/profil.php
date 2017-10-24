@@ -12,18 +12,18 @@
   if ($_GET['user'] != $_SESSION['identifiant'])
     header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
 
-    // Contrôle vue renseignée URL
-    switch ($_GET['view'])
-    {
-      case 'settings':
-      case 'success':
-      case 'ranking':
-        break;
+  // Contrôle vue renseignée URL
+  switch ($_GET['view'])
+  {
+    case 'settings':
+    case 'success':
+    case 'ranking':
+      break;
 
-      default:
-        header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
-        break;
-    }
+    default:
+      header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
+      break;
+  }
 
   // Appel métier
   switch ($_GET['action'])
@@ -64,7 +64,7 @@
       break;
 
     case 'doModifierPreferences':
-      modifyPreferences($_GET['user'], $_POST);
+      updatePreferences($_GET['user'], $_POST);
       break;
 
     case "doUpdateMail":
@@ -139,6 +139,7 @@
           $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
           $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
           $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
+          $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
           $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
           break;
       }

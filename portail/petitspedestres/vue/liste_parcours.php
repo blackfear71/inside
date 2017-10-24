@@ -11,7 +11,7 @@
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script type="text/javascript" src="/inside/script.js"></script>
-    
+
   	<title>Inside - PP</title>
   </head>
 
@@ -35,6 +35,7 @@
 					$back             = true;
 					$ideas            = true;
 					$reports          = true;
+          $notifs           = true;
 
 					include('../../includes/aside.php');
 				?>

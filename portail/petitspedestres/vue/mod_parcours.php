@@ -33,6 +33,7 @@
 					$back       = true;
 					$ideas      = true;
 					$reports    = true;
+          $notifs     = true;
 
 					include('../../includes/aside.php');
 				?>

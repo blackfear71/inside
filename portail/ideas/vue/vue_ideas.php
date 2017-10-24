@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styleTheBox.css" />
 
     <script type="text/javascript" src="/inside/script.js"></script>
-    
+
   	<title>Inside - &#35;TheBox</title>
   </head>
 
@@ -31,6 +31,7 @@
 					$profil     = true;
 					$back       = true;
 					$reports    = true;
+          $notifs     = true;
 
 					include('../../includes/aside.php');
 				?>

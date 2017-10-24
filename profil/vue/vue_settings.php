@@ -169,7 +169,7 @@
   <!-- Tableau modification préférences -->
   <div class="zone_profil_preferences_table">
     <?php
-      echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierPreferences">';
+      echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&view=settings&action=doModifierPreferences">';
     ?>
       <!-- Préférences Movie House -->
       <div class="zone_profil_contribution">
@@ -304,6 +304,58 @@
           <br />
           <input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" <?php if($checked_d){echo 'checked';} ?> required />
           <label for="done" class="label_preference_2">Terminées<br />& rejetées</label>
+        </div>
+      </div>
+
+      <!-- Préférences Notifications -->
+      <div class="zone_profil_contribution">
+        <div class="titre_preference">
+          NOTIFICATIONS
+        </div>
+
+        <div class="sous_titre_preference">
+          Choix de la vue par défaut
+        </div>
+
+        <div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+          <?php
+            $checked_m = false;
+            $checked_t = false;
+            $checked_w = false;
+            $checked_a = false;
+
+            switch ($preferences->getView_notifications())
+            {
+              case "M":
+                $checked_m = true;
+                break;
+
+              case "T":
+                $checked_t = true;
+                break;
+
+              case "W":
+                $checked_w = true;
+                break;
+
+              case "A":
+              default:
+                $checked_a = true;
+                break;
+            }
+          ?>
+
+          <input id="me" type= "radio" name="notifications_view" value="M" class="bouton_preference" <?php if($checked_m){echo 'checked';} ?> required />
+          <label for="me" class="label_preference_2">Moi</label>
+          <br />
+          <input id="today" type= "radio" name="notifications_view" value="T" class="bouton_preference" <?php if($checked_t){echo 'checked';} ?> required />
+          <label for="today" class="label_preference_2">Aujourd'hui</label>
+          <br />
+          <input id="week" type= "radio" name="notifications_view" value="W" class="bouton_preference" <?php if($checked_w){echo 'checked';} ?> required />
+          <label for="week" class="label_preference_2">7 jours</label>
+          <br />
+          <input id="all_n" type= "radio" name="notifications_view" value="A" class="bouton_preference" <?php if($checked_a){echo 'checked';} ?> required />
+          <label for="all_n" class="label_preference_2">Toutes</label>
         </div>
       </div>
 

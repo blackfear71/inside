@@ -46,6 +46,9 @@
 	if (!isset($reports))
 		$reports = false;
 
+	if (!isset($notifs))
+		$notifs = false;
+
 	// Déconnexion
 	if ($disconnect == true)
 	{
@@ -191,5 +194,63 @@
 			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_aside" />';
 		echo '</a>';
 		echo '<div class="hover_aside">Signaler</div>';
+	}
+
+	// Notifications
+	if ($notifs == true)
+	{
+		// Récupération des préférences
+		switch ($_SESSION['view_notifications'])
+		{
+			case "M":
+				$view_notifications = "me";
+				$page               = "&page=1";
+				break;
+
+			case "T":
+				$view_notifications = "today";
+				$page               = "";
+				break;
+
+			case "W":
+				$view_notifications = "week";
+				$page               = "";
+				break;
+
+			case "A":
+			default:
+				$view_notifications = "all";
+				$page               = "&page=1";
+				break;
+		}
+
+		// On compte le nombre de notifications du jour
+		$nb_notifs = 0;
+
+		$reponse = $bdd->query('SELECT COUNT(id) AS nb_notifs FROM notifications WHERE date = ' . date("Ymd"));
+		$donnees = $reponse->fetch();
+		$nb_notifs = $donnees['nb_notifs'];
+		$reponse->closeCursor();
+
+		// Affichage en fonction du nombre de notifications
+		if ($nb_notifs > 0)
+		{
+			echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_profile">';
+				echo '<img src="/inside/includes/icons/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+				if ($nb_notifs <= 9)
+					echo '<div class="number_notifications">' . $nb_notifs . '</div>';
+				else
+					echo '<div class="number_notifications">9+</div>';
+			echo '</a>';
+			echo '<div class="hover_aside">Notifications</div>';
+		}
+		else
+		{
+			echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_profile" style="background-color: #a3a3a3;">';
+				echo '<img src="/inside/includes/icons/notifications.png" alt="notifications" title="Notifications" class="icon_aside" />';
+				echo '<div class="number_notifications">0</div>';
+			echo '</a>';
+			echo '<div class="hover_aside" style="background-color: #a3a3a3;">Notifications</div>';
+		}
 	}
 ?>

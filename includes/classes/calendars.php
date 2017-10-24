@@ -19,7 +19,7 @@
       $this->calendar  = '';
     }
 
-    // Constructeur de l'objet Bugs en fonction des données
+    // Constructeur de l'objet Calendrier en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -47,7 +47,7 @@
         $this->calendar  = $data['calendar'];
     }
 
-    // getters et setters pour l'objet Bugs
+    // getters et setters pour l'objet Calendrier
     // id
     public function setId($id)
     {

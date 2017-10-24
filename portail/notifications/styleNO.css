@@ -1,0 +1,137 @@
+/*********************/
+/*** Notifications ***/
+/*********************/
+
+/*** Notifications ***/
+.date_notif
+{
+	width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+	border-bottom: solid 1px #b3b3b3;
+	line-height: 30px;
+  margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #262626;
+	text-align: left;
+}
+
+.lien_notification
+{
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.zone_notification
+{
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 3px #5c5c5c;
+  font-family: robotolight, Verdana, sans-serif;
+}
+
+.zone_notification_icone
+{
+  float: left;
+  background-color: rgb(255, 25, 55);
+  text-align: center;
+  vertical-align: top;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.icone_notification
+{
+  width: 40px;
+  margin-bottom: -5px;
+}
+
+.zone_notification_contenu
+{
+  display: block;
+  background-color: #e3e3e3;
+  line-height: 60px;
+  text-align: justify;
+  vertical-align: top;
+  margin-left: 100px;
+  margin-right: 120px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #262626;
+}
+
+.zone_notification_date
+{
+  float: right;
+  background-color: #d3d3d3;
+  line-height: 60px;
+  text-align: center;
+  width: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
+  vertical-align: top;
+  margin-top: -60px;
+  color: #7c7c7c;
+}
+
+/*** Pagination ***/
+.zone_pagination
+{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.numero_page_active
+{
+  background-color: rgb(255, 25, 55);
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: 40px;
+  border-radius: 50%;
+}
+
+.numero_page_inactive
+{
+  background-color: #a3a3a3;
+  font-family: robotolight, Verdana, sans-serif;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: 40px;
+  border-radius: 50%;
+}
+
+.numero_page_inactive:hover
+{
+  background-color: rgb(200, 25, 50);
+}
+
+.lien_pagination
+{
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: white;
+  border-radius: 50%;
+}

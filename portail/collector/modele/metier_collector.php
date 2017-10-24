@@ -64,9 +64,7 @@
 
     // Contrôle dernière page
     if ($page > $nb_pages)
-    {
       $page = $nb_pages;
-    }
 
     // Calcul première entrée
     $premiere_entree = ($page - 1) * $nb_par_page;

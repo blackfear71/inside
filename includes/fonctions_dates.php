@@ -34,6 +34,30 @@ function formatTimeForDisplay($time){
         return $time;
 }
 
+/* formatMonthForDisplay
+   On stocke le mois sur 2 caractères et le convertit en une chaîne de caractères pour obtenir le mot correspondant
+*/
+function formatMonthForDisplay($month)
+{
+  $listeMois = array('01' => 'Janvier',
+                     '02' => 'Février',
+                     '03' => 'Mars',
+                     '04' => 'Avril',
+                     '05' => 'Mai',
+                     '06' => 'Juin',
+                     '07' => 'Juillet',
+                     '08' => 'Août',
+                     '09' => 'Septembre',
+                     '10' => 'Octobre',
+                     '11' => 'Novembre',
+                     '12' => 'Décembre'
+                    );
+
+  $formatMonth = $listeMois[$month];
+
+  return $formatMonth;
+}
+
 /* formatDateForInsert
    Les dates sont stockées au format AAAAMMJJ. Cette fonction renvoie la date au format
    AAAAMMJJ pour l'insertion en base. Si elle ne comporte pas 8 caractères, on renvoie l'argument

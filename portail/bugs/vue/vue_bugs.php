@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="styleBugs.css" />
 
     <script type="text/javascript" src="/inside/script.js"></script>
-    
+
 		<title>Inside - Bug</title>
   </head>
 
@@ -31,6 +31,7 @@
 					$profil     = true;
 					$back       = true;
 					$ideas      = true;
+          $notifs     = true;
 
 					include('../../includes/aside.php');
 				?>

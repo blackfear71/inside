@@ -29,6 +29,7 @@
 					$profil     = true;
 					$ideas      = true;
 					$reports    = true;
+          $notifs     = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -37,7 +38,7 @@
 			<article class="article_portail">
 				<?php
 					echo '<div class="menu_portail">';
-						// Lien MovieHouse
+						// Préférence MovieHouse
 						switch ($preferences->getView_movie_house())
 						{
 							case "S":
@@ -54,6 +55,7 @@
 								break;
 						}
 
+            // Movie House
             echo '<a href="../moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="Movie House" class="lien_portail">';
               echo '<div class="text_portail">MOVIE<br />HOUSE</div>';
               echo '<div class="fond_lien_portail">';
@@ -61,6 +63,7 @@
               echo '</div>';
             echo '</a>';
 
+            // Expense Center
             echo '<a href="../expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="Expense Center" class="lien_portail">';
               echo '<div class="text_portail">EXPENSE CENTER</div>';
               echo '<div class="fond_lien_portail">';
@@ -68,6 +71,7 @@
               echo '</div>';
             echo '</a>';
 
+            // Les Petits Pédestres
             echo '<a href="../petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="lien_portail">';
               echo '<div class="text_portail">LES PETITS PEDESTRES</div>';
               echo '<div class="fond_lien_portail">';
@@ -75,6 +79,7 @@
               echo '</div>';
             echo '</a>';
 
+            // Calendars
             echo '<a href="../calendars/calendars.php?year=' . date("Y") . '&action=goConsulter" title="Calendars" class="lien_portail">';
               echo '<div class="text_portail">CALENDARS</div>';
               echo '<div class="fond_lien_portail">';
@@ -82,6 +87,7 @@
               echo '</div>';
             echo '</a>';
 
+            // Collector Room
             echo '<a href="../collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="lien_portail">';
               echo '<div class="text_portail">COLLECTOR ROOM</div>';
               echo '<div class="fond_lien_portail">';

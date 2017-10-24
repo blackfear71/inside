@@ -281,8 +281,10 @@
 
   // METIER : Mise à jour des préférences
   // RETOUR : Aucun
-  function modifyPreferences($user, $post)
+  function updatePreferences($user, $post)
   {
+    var_dump($post);
+
     $_SESSION['preferences_updated'] = false;
 
     global $bdd;
@@ -310,23 +312,29 @@
 		// Préférences #THEBOX
 		$view_the_box = $post['the_box_view'];
 
+    // Préférences Notifications
+    $view_notifications = $post['notifications_view'];
+
 		// Mise à jour de la table des préférences utilisateur
-		$reponse = $bdd->prepare('UPDATE preferences SET view_movie_house  = :view_movie_house,
-																								     categories_home   = :categories_home,
-																								     today_movie_house = :today_movie_house,
-																								     view_the_box      = :view_the_box
+		$reponse = $bdd->prepare('UPDATE preferences SET view_movie_house   = :view_movie_house,
+																								     categories_home    = :categories_home,
+																								     today_movie_house  = :today_movie_house,
+                                                     view_the_box       = :view_the_box,
+																								     view_notifications = :view_notifications
 																					     WHERE identifiant = "' . $user . '"');
 		$reponse->execute(array(
-			'view_movie_house'  => $view_movie_house,
-			'categories_home'   => $categories_home,
-			'today_movie_house' => $today_movie_house,
-			'view_the_box'      => $view_the_box
+			'view_movie_house'   => $view_movie_house,
+			'categories_home'    => $categories_home,
+			'today_movie_house'  => $today_movie_house,
+      'view_the_box'       => $view_the_box,
+			'view_notifications' => $view_notifications
 		));
 		$reponse->closeCursor();
 
     // Mise à jour des préférences stockées en SESSION
-    $_SESSION['view_movie_house']  = $view_movie_house;
-    $_SESSION['view_the_box']      = $view_the_box;
+    $_SESSION['view_movie_house']   = $view_movie_house;
+    $_SESSION['view_the_box']       = $view_the_box;
+    $_SESSION['view_notifications'] = $view_notifications;
 
 		$_SESSION['preferences_updated'] = true;
   }

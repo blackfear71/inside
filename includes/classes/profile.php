@@ -260,17 +260,19 @@
     private $categories_home;
     private $today_movie_house;
     private $view_the_box;
+    private $view_notifications;
     private $manage_calendars;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id                = 0;
-      $this->view_movie_house  = '';
-      $this->categories_home   = '';
-      $this->today_movie_house = '';
-      $this->view_the_box      = '';
-      $this->manage_calendars  = '';
+      $this->id                 = 0;
+      $this->view_movie_house   = '';
+      $this->categories_home    = '';
+      $this->today_movie_house  = '';
+      $this->view_the_box       = '';
+      $this->view_notifications = '';
+      $this->manage_calendars   = '';
     }
 
     // Constructeur de l'objet Preferences en fonction des données
@@ -286,22 +288,25 @@
     protected function fill ($data)
     {
       if (isset($data['id']))
-        $this->id                = $data['id'];
+        $this->id                 = $data['id'];
 
       if (isset($data['view_movie_house']))
-        $this->view_movie_house  = $data['view_movie_house'];
+        $this->view_movie_house   = $data['view_movie_house'];
 
       if (isset($data['categories_home']))
-        $this->categories_home   = $data['categories_home'];
+        $this->categories_home    = $data['categories_home'];
 
       if (isset($data['today_movie_house']))
-        $this->today_movie_house = $data['today_movie_house'];
+        $this->today_movie_house  = $data['today_movie_house'];
 
       if (isset($data['view_the_box']))
-        $this->view_the_box      = $data['view_the_box'];
+        $this->view_the_box       = $data['view_the_box'];
+
+      if (isset($data['view_notifications']))
+        $this->view_notifications = $data['view_notifications'];
 
       if (isset($data['manage_calendars']))
-        $this->manage_calendars  = $data['manage_calendars'];
+        $this->manage_calendars   = $data['manage_calendars'];
     }
 
     // getters et setters pour l'objet Preferences
@@ -358,6 +363,17 @@
     public function getView_the_box()
     {
       return $this->view_the_box;
+    }
+
+    // Préférence vue par défaut Notifications
+    public function setView_notifications($view_notifications)
+    {
+      $this->view_notifications = $view_notifications;
+    }
+
+    public function getView_notifications()
+    {
+      return $this->view_notifications;
     }
 
     // Préférence (admin) gestion des calendriers
