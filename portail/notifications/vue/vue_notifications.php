@@ -126,7 +126,7 @@
           }
           else
           {
-            echo '<div class="date_notif">Pas encore de notifications aujourd\'hui !</div>';
+            echo '<div class="date_notif">Pas encore de notifications !</div>';
           }
 
           // Pagination
