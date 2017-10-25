@@ -11,15 +11,15 @@
   // Contrôle vue renseignée URL
   switch ($_GET['view'])
   {
-    case 'me':
     case 'today':
     case 'week':
       break;
 
+    case 'me':
     case 'all':
       // Contrôle si la page renseignée et numérique
       if (!isset($_GET['page']) OR !is_numeric($_GET['page']))
-        header('location: notifications.php?view=all&action=goConsulter&page=1');
+        header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
       break;
 
     default:
