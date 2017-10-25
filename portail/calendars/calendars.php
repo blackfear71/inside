@@ -2,6 +2,9 @@
   // Contrôles communs Utilisateurs
   include_once('../../includes/controls_users.php');
 
+  // Fonctions communes
+  include('../../includes/fonctions_communes.php');
+
   // Contrôle si l'année est renseignée et numérique
 	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
 		header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
@@ -21,7 +24,7 @@
       break;
 
     case "doAjouter":
-      insertCalendrier($_POST, $_FILES);
+      insertCalendrier($_POST, $_FILES, $_SESSION['identifiant']);
       break;
 
     case "doSupprimer":

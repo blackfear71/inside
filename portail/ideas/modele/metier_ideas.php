@@ -77,12 +77,12 @@
 
   // METIER : Insertion d'une idée
   // RETOUR : Aucun
-  function insertIdea($post, $identifiant)
+  function insertIdea($post, $user)
   {
     // Récupération des données
     $subject    = $post['subject_idea'];
     $date       = date("Ymd");
-    $author     = $identifiant;
+    $author     = $user;
     $content    = $post['content_idea'];
     $status     = "O";
     $developper = "";
@@ -116,6 +116,11 @@
                                              )');
       $req->execute($ideas);
       $req->closeCursor();
+
+      // Génération notification idée ajoutée
+      $new_id = $bdd->lastInsertId();
+
+      insertNotification($user, 'idee', $new_id);
 
       $_SESSION['idea_submitted'] = true;
     }

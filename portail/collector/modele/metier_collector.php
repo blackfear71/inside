@@ -112,7 +112,7 @@
 
   // METIER : Insertion phrases cultes
   // RETOUR : Aucun
-  function insertCollector($post)
+  function insertCollector($post, $user)
   {
     // Sauvegarde en session en cas d'erreur
     $_SESSION['speaker']        = $post['speaker'];
@@ -152,6 +152,11 @@
       $req->execute($collector);
 		  $req->closeCursor();
 
+      // Génération notification phrase culte ajoutée
+      $new_id = $bdd->lastInsertId();
+
+      insertNotification($user, 'culte', $new_id);
+
       $_SESSION['collector_added'] = true;
     }
     else
@@ -165,6 +170,9 @@
     global $bdd;
 
     $req = $bdd->exec('DELETE FROM collector WHERE id = ' . $id_col);
+
+    // Suppression des notifications
+    deleteNotification('culte', $id_col);
 
     $_SESSION['collector_deleted'] = true;
   }

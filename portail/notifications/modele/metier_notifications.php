@@ -124,7 +124,7 @@
           $doodle     = $donnees['doodle'];
           $reponse->closeCursor();
 
-          $icone  = "doodle_2";
+          $icone  = "doodle";
           $phrase = "Un Doodle vient d'être mis en place pour le film <strong>" . $titre_film . "</strong>. N'oubliez pas d'y répondre si vous êtes intéressé(e) !";
           $lien   = $doodle;
           break;
@@ -179,12 +179,18 @@
 
             $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
             $donnees2 = $reponse2->fetch();
-            $author = $donnees2['pseudo'];
+            if ($reponse2->rowCount() > 0)
+              $author = $donnees2['pseudo'];
+            else
+              $author = '<i>un ancien utilisateur</i>';
             $reponse2->closeCursor();
 
             $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
             $donnees3 = $reponse3->fetch();
-            $speaker = $donnees3['pseudo'];
+            if ($reponse3->rowCount() > 0)
+              $speaker = $donnees3['pseudo'];
+            else
+              $speaker = '<i>un ancien utilisateur</i>';
             $reponse3->closeCursor();
 
           $reponse1->closeCursor();
@@ -200,16 +206,21 @@
           // Recherche pseudo + généreux
           $reponse1 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user1 . '"');
           $donnees1 = $reponse1->fetch();
-          $genereux = $donnees1['pseudo'];
+          if ($reponse1->rowCount() > 0)
+            $genereux = $donnees1['pseudo'];
+          else
+            $genereux = '<i>un ancien utilisateur</i>';
           $reponse1->closeCursor();
 
           // Recherche pseudo + radin
           $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user2 . '"');
           $donnees2 = $reponse2->fetch();
-          $radin = $donnees2['pseudo'];
+          if ($reponse2->rowCount() > 0)
+            $radin = $donnees2['pseudo'];
+          else
+            $radin = '<i>un ancien utilisateur</i>';
           $reponse2->closeCursor();
 
-          // batch + stockage somme
           $icone  = "expense_center";
           $phrase = "Cette semaine, <strong>" . $genereux . "</strong> a été le plus généreux, tandis que <strong>" . $radin . "</strong> a été carrément le plus radin...";
           $lien   = "";
@@ -219,7 +230,10 @@
           // Recherche pseudo
           $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
-          $inscrit = $donnees['pseudo'];
+          if ($reponse->rowCount() > 0)
+            $inscrit = $donnees['pseudo'];
+          else
+            $inscrit = '<i>un ancien utilisateur</i>';
           $reponse->closeCursor();
 
           $icone  = "inside";
@@ -237,7 +251,10 @@
           // Recherche pseudo
           $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
           $donnees2 = $reponse2->fetch();
-          $auteur = $donnees2['pseudo'];
+          if ($reponse2->rowCount() > 0)
+            $auteur = $donnees2['pseudo'];
+          else
+            $auteur = '<i>un ancien utilisateur</i>';
           $reponse2->closeCursor();
 
           $reponse1->closeCursor();
@@ -253,7 +270,10 @@
           // Recherche pseudo
           $reponse1 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user . '"');
           $donnees1 = $reponse1->fetch();
-          $pseudo = $donnees1['pseudo'];
+          if ($reponse1->rowCount() > 0)
+            $pseudo = $donnees1['pseudo'];
+          else
+            $pseudo = '<i>un ancien utilisateur</i>';
           $reponse1->closeCursor();
 
           // Recherche succès
@@ -279,7 +299,6 @@
               $phrase = "<strong>" . $pseudo . "</strong> se la pète un max avec son succès <strong>" . $succes . "</strong> ! Tu as trop le seum ma parole !";
               break;
           }
-
           $lien   = "";
           break;
 

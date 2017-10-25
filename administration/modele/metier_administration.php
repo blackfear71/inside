@@ -145,6 +145,11 @@
     // Suppression du film
     $req3 = $bdd->exec('DELETE FROM movie_house WHERE id = ' . $id_film );
 
+    // Suppression des notifications
+    deleteNotification('film', $id_film);
+    deleteNotification('doodle', $id_film);
+    deleteNotification('cinema', $id_film);
+
     $_SESSION['film_deleted'] = true;
   }
 
@@ -222,6 +227,9 @@
 
     // On efface la ligne de la base
     $reponse2 = $bdd->exec('DELETE FROM calendars WHERE id = ' . $id_cal);
+
+    // Suppression des notifications
+    deleteNotification('calendrier', $id_cal);
 
     $_SESSION['calendar_deleted'] = true;
   }
@@ -999,6 +1007,15 @@
       'reset' => $reset
     ));
     $req->closeCursor();
+
+    // On récupère l'identifiant
+    $req2 = $bdd->query('SELECT id, identifiant FROM users WHERE id = ' . $id_user);
+    $data2 = $req2->fetch();
+    $identifiant = $data2['identifiant'];
+    $req2->closeCursor();
+
+    // Génération notification nouvel inscrit
+    insertNotification('admin', 'inscrit', $identifiant);
   }
 
   // METIER : Refus inscription

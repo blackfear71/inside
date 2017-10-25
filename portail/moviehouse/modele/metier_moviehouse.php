@@ -497,6 +497,9 @@
       $req->execute($film);
 		  $req->closeCursor();
 
+      // Génération notification film ajouté
+      insertNotification($user, 'film', $bdd->lastInsertId());
+
       $_SESSION['film_added'] = true;
     }
     else
@@ -871,9 +874,9 @@
     $req = $bdd->prepare('INSERT INTO movie_house_comments(id_film, author, date, time, comment) VALUES(:id_film, :author, :date, :time, :comment)');
     $req->execute(array(
       'id_film' => $id_film,
-      'author' => $author,
-      'date' => $date,
-      'time' => $time,
+      'author'  => $author,
+      'date'    => $date,
+      'time'    => $time,
       'comment' => $comment
         ));
     $req->closeCursor();
@@ -1124,7 +1127,8 @@
                                                       identifiant_add,
         																							date_theater,
         																							date_release,
-        																							link, poster,
+        																							link,
+                                                      poster,
         																							trailer,
         																							id_url,
         																							doodle,
@@ -1138,7 +1142,8 @@
         																						 :identifiant_add,
         																						 :date_theater,
         																						 :date_release,
-        																						 :link, :poster,
+        																						 :link,
+                                                     :poster,
         																						 :trailer,
         																						 :id_url,
         																						 :doodle,
@@ -1149,9 +1154,17 @@
         $req->execute($film);
         $req->closeCursor();
 
-        $_SESSION['film_added'] = true;
-
+        // Id pour redirection sur détails
         $new_id = $bdd->lastInsertId();
+
+        // Génération notification film ajouté
+        insertNotification($user, 'film', $new_id);
+
+        // Génération notification Doodle renseigné
+        if (!empty($doodle))
+          insertNotification($user, 'doodle', $new_id);
+
+        $_SESSION['film_added'] = true;
       }
     }
     else
@@ -1162,7 +1175,7 @@
 
   // METIER : Modification film saisie avancée
   // RETOUR : Aucun
-  function modFilmAvance($id_film, $post)
+  function modFilmAvance($id_film, $post, $user)
   {
     // Sauvegarde en session en cas d'erreur
     $_SESSION['nom_film_saisi']      = $post['nom_film'];
@@ -1298,6 +1311,20 @@
 														                     WHERE id = ' . $id_film);
         $req->execute($film);
         $req->closeCursor();
+
+        // Génération notification si Doodle renseigné et notification inexistante
+        $notification_doodle_exist = controlNotification('doodle', $id_film);
+
+        if ($notification_doodle_exist != true)
+          insertNotification($user, 'doodle', $id_film);
+
+        // Suppression notification si Doodle supprimé
+        if (empty($doodle))
+          deleteNotification('doodle', $id_film);
+
+        // Suppression notification si Date sortie supprimée (cas notification générée par batch puis date supprimée le jour même)
+        if (empty($date_doodle))
+          deleteNotification('cinema', $id_film);
 
         $_SESSION['film_modified'] = true;
       }

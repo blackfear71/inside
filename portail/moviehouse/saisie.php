@@ -5,6 +5,7 @@
   // Fonctions communes
   include('../../includes/fonctions_dates.php');
   include('../../includes/fonctions_regex.php');
+  include('../../includes/fonctions_communes.php');
 
   // Modèle de données : "module métier"
   include_once('modele/metier_moviehouse.php');
@@ -68,7 +69,7 @@
       break;
 
     case "doModifier":
-      modFilmAvance($_GET['modify_id'], $_POST);
+      modFilmAvance($_GET['modify_id'], $_POST, $_SESSION['identifiant']);
       break;
 
     default:

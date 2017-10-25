@@ -98,7 +98,7 @@
 
   // METIER : Ajout calendrier avec création miniature
   // RETOUR : Aucun
-  function insertCalendrier($post, $files)
+  function insertCalendrier($post, $files, $user)
   {
     // On récupère les données
     $month     = $post['months'];
@@ -177,6 +177,11 @@
           'calendar'  => $new_name
 					));
 				$reponse->closeCursor();
+
+        // Génération notification calendrier ajouté
+        $new_id = $bdd->lastInsertId();
+
+        insertNotification($user, 'calendrier', $new_id);
 
         $_SESSION['calendar_added'] = true;
       }

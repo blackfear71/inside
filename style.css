@@ -1233,15 +1233,15 @@ aside
 
 .message_alerte
 {
-	animation: affichageAlerte 1s ease;
+	animation: affichageAlerte 0.5s ease;
 	animation-fill-mode: forwards;
-	-webkit-animation: affichageAlerte 1s ease;
+	-webkit-animation: affichageAlerte 0.5s ease;
 	-webkit-animation-fill-mode: forwards;
-	-moz-animation: affichageAlerte 1s ease;
+	-moz-animation: affichageAlerte 0.5s ease;
 	-moz-animation-fill-mode: forwards;
-	-ms-animation: affichageAlerte 1s ease;
+	-ms-animation: affichageAlerte 0.5s ease;
 	-ms-animation-fill-mode: forwards;
-	-o-animation: affichageAlerte 1s ease;
+	-o-animation: affichageAlerte 0.5s ease;
 	-o-animation-fill-mode: forwards;
 	width: 500px;
 	margin-left: auto;

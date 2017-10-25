@@ -60,19 +60,22 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($notifications as $notification)
+      if (!empty($notifications))
       {
-        $notification->setAuthor(htmlspecialchars($notification->getAuthor()));
-        $notification->setDate(htmlspecialchars($notification->getDate()));
-        $notification->setTime(htmlspecialchars($notification->getTime()));
-        $notification->setCategory(htmlspecialchars($notification->getCategory()));
-        $notification->setContent(htmlspecialchars($notification->getContent()));
-        $notification->setIcon(htmlspecialchars($notification->getIcon()));
-        $notification->setSentence(htmlspecialchars($notification->getSentence()));
-        $notification->setLink(htmlspecialchars($notification->getLink()));
-      }
+        foreach ($notifications as $notification)
+        {
+          $notification->setAuthor(htmlspecialchars($notification->getAuthor()));
+          $notification->setDate(htmlspecialchars($notification->getDate()));
+          $notification->setTime(htmlspecialchars($notification->getTime()));
+          $notification->setCategory(htmlspecialchars($notification->getCategory()));
+          $notification->setContent(htmlspecialchars($notification->getContent()));
+          $notification->setIcon(htmlspecialchars($notification->getIcon()));
+          $notification->setSentence(htmlspecialchars($notification->getSentence()));
+          $notification->setLink(htmlspecialchars($notification->getLink()));
+        }
 
-      $notifications = formatNotifications($notifications);
+        $notifications = formatNotifications($notifications);
+      }
       break;
 
     default:

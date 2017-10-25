@@ -4,6 +4,7 @@
 
   // Fonctions communes
   include('../../includes/fonctions_dates.php');
+  include('../../includes/fonctions_communes.php');
 
   // Contrôle si la page renseignée et numérique
 	if (!isset($_GET['page']) OR !is_numeric($_GET['page']))
@@ -44,7 +45,7 @@
       break;
 
     case "doAjouter":
-      insertCollector($_POST);
+      insertCollector($_POST, $_SESSION['identifiant']);
       break;
 
     case "doSupprimer":

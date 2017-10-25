@@ -4,6 +4,7 @@
 
   // Fonctions communes
   include('../../includes/fonctions_dates.php');
+  include('../../includes/fonctions_communes.php');
 
   // Modèle de données : "module métier"
   include_once('modele/metier_ideas.php');
