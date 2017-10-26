@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styleAdmin.css" />
 
     <script type="text/javascript" src="/inside/script.js"></script>
-    
+
 		<title>Inside - Calendriers</title>
   </head>
 

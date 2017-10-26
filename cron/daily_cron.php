@@ -1,4 +1,9 @@
 <?php
+  // Lancement de la session
+  if (empty(session_id()))
+    session_start();
+
+  // Fonctions communes
   include('../includes/appel_bdd.php');
   include('../includes/fonctions_communes.php');
 
@@ -12,6 +17,10 @@
 
   // Génération log
   // à développer (stocker des fichiers .txt)
+
+  // Redirection si asynchrone
+  if (isset($_POST['daily_cron']))
+    header('location: /inside/administration/cron.php?action=goConsulter');
 
   // Fonctions
   function isCinemaToday()
@@ -29,5 +38,7 @@
         insertNotification('admin', 'cinema', $data['id']);
     }
     $req->closeCursor();
+
+    $_SESSION['daily_cron'] = true;
   }
 ?>

@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleAdmin.css" />
 
+    <script type="text/javascript" src="/inside/script.js"></script>
+
 		<title>Inside - CRON</title>
   </head>
 
@@ -32,16 +34,22 @@
 				?>
 			</aside>
 
+      <?php var_dump($_SESSION); ?>
+      <!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article class="article_portail">
         <div class="zone_cron_asynchrone">
   				<div class="level_succes">Lancement asynchrone des tâches CRON</div>
 
           <form method="post" action="../cron/daily_cron.php">
-            <input type="submit" value="CRON journalier" class="bouton_modification_succes" />
+            <input type="submit" name="daily_cron" value="CRON journalier" class="bouton_modification_succes" />
           </form>
 
           <form method="post" action="../cron/weekly_cron.php">
-            <input type="submit" value="CRON hebdomadaire" class="bouton_modification_succes" />
+            <input type="submit" name="weekly_cron" value="CRON hebdomadaire" class="bouton_modification_succes" />
           </form>
         </div>
 			</article>

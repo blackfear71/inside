@@ -164,6 +164,13 @@
   if (!isset($_SESSION['success_updated']))
     $_SESSION['success_updated'] = NULL;
 
+  // Initialisations CRON
+  if (!isset($_SESSION['daily_cron']))
+    $_SESSION['daily_cron'] = NULL;
+
+  if (!isset($_SESSION['weekly_cron']))
+    $_SESSION['weekly_cron'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -543,6 +550,18 @@
   {
     $alerte = 'Succès mis à jour.';
     $_SESSION['success_updated'] = NULL;
+  }
+  // Alerte CRON journalier exécuté
+  elseif (isset($_SESSION['daily_cron']) AND $_SESSION['daily_cron'] == true)
+  {
+    $alerte = 'CRON journalier exécuté.';
+    $_SESSION['daily_cron'] = NULL;
+  }
+  // Alerte CRON hebdomadaire exécuté
+  elseif (isset($_SESSION['weekly_cron']) AND $_SESSION['weekly_cron'] == true)
+  {
+    $alerte = 'CRON hebdomadaire exécuté.';
+    $_SESSION['weekly_cron'] = NULL;
   }
 
   /*************/
