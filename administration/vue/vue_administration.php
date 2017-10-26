@@ -118,6 +118,18 @@
 						</div>
 					</a>
 
+          <a href="cron.php?action=goConsulter" class="new_menu_link_admin">
+            <div class="menu_admin_box">
+              <div class="mask_admin"></div>
+              <div class="mask_admin_triangle"></div>
+              <div class="title_admin">Gestion
+                <div class="saut_ligne">
+                  CRON
+                </div>
+              </div>
+            </div>
+          </a>
+
 					<a href="/phpmyadmin/" target="_blank" class="new_menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>

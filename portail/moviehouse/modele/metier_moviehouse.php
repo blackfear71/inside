@@ -498,7 +498,9 @@
 		  $req->closeCursor();
 
       // Génération notification film ajouté
-      insertNotification($user, 'film', $bdd->lastInsertId());
+      $new_id = $bdd->lastInsertId();
+
+      insertNotification($user, 'film', $new_id);
 
       $_SESSION['film_added'] = true;
     }

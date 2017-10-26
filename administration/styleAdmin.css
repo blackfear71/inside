@@ -764,3 +764,11 @@
 	background-color: rgb(255, 25, 55);
 	color: white;
 }
+
+/*** Tâches CRON ***/
+.zone_cron_asynchrone
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}

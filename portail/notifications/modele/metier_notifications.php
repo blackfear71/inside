@@ -222,7 +222,7 @@
           $reponse2->closeCursor();
 
           $icone  = "expense_center";
-          $phrase = "Cette semaine, <strong>" . $genereux . "</strong> a été le plus généreux, tandis que <strong>" . $radin . "</strong> a été carrément le plus radin...";
+          $phrase = "La semaine dernière, <strong>" . $genereux . "</strong> a été le plus généreux, tandis que <strong>" . $radin . "</strong> a carrément été le plus radin...";
           $lien   = "";
           break;
 

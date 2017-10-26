@@ -9,6 +9,7 @@
 - CALENDARS : calendriers de l'équipe
 - COLLECTOR ROOM : collection de phrases cultes
 - #THEBOX : boîte à idées
+- NOTIFICATIONS : centre de notifications générales
 - PROFIL : gestion paramètres et succès
 
 ## Notes aux développeurs
