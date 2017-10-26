@@ -34,7 +34,6 @@
 				?>
 			</aside>
 
-      <?php var_dump($_SESSION); ?>
       <!-- Messages d'alerte -->
 			<?php
 				include('../includes/alerts.php');
