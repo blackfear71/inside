@@ -106,17 +106,19 @@
                 echo '<div class="lien_notification">';
 
                   // Contenu (icône, phrase & date)
-                  echo '<div class="zone_notification">';
-                    echo '<div class="zone_notification_icone">';
-                      echo '<img src="../../includes/icons/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
-                    echo '</div>';
-                    echo '<div class="zone_notification_contenu">';
-                      echo $notification->getSentence();
-                    echo '</div>';
-                    echo '<div class="zone_notification_date">';
-                      echo formatTimeForDisplay($notification->getTime());
-                    echo '</div>';
-                  echo '</div>';
+                  echo '<table class="zone_notification">';
+                    echo '<tr>';
+                      echo '<td class="zone_notification_icone">';
+                        echo '<img src="../../includes/icons/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
+                      echo '</td>';
+                      echo '<td class="zone_notification_contenu">';
+                        echo $notification->getSentence();
+                      echo '</td>';
+                      echo '<td class="zone_notification_date">';
+                        echo formatTimeForDisplay($notification->getTime());
+                      echo '</td>';
+                    echo '</tr>';
+                  echo '</table>';
 
               if (!empty($notification->getLink()))
                 echo '</a>';

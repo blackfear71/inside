@@ -547,7 +547,6 @@
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 20px;
 	text-align: center;
 }
 
@@ -693,6 +692,7 @@
 	padding-bottom: 10px;
 	color: #262626;
 	text-align: left;
+	margin-top: 20px;
 }
 
 .name_lvl
@@ -771,4 +771,71 @@
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+}
+
+.zone_cron
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
+	box-shadow: 0 5px 8px #7b8084;
+	text-align: justify;
+}
+
+.titre_cron
+{
+	padding-left: 20px;
+	padding-right: 20px;
+	line-height: 50px;
+	background-color: rgb(255, 25, 55);
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 140%;
+	color: white;
+	border-bottom: solid 2px rgb(200, 25, 50);
+}
+
+.contenu_cron
+{
+	min-height: 80px;
+	line-height: 20px;
+	background-color: rgb(255, 25, 55);
+	padding: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	border-top: solid 1px #ff4961;
+}
+
+.boutons_cron
+{
+	height: 60px;
+	background-color: white;
+}
+
+.bouton_cron
+{
+	background-color: rgb(255, 25, 55);
+	float: right;
+	margin-right: 20px;
+	height: 35px;
+	line-height: 35px;
+	margin-top: 12.5px;
+	text-decoration: none;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	cursor: pointer;
+	border: 0;
+}
+
+.bouton_cron:hover
+{
+	background-color: rgb(200, 25, 50);
 }

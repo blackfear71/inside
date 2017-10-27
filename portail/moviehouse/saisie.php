@@ -1,11 +1,11 @@
 <?php
-  // Contrôles communs Utilisateurs
-  include_once('../../includes/controls_users.php');
+  // Fonction communes
+  include_once('../../includes/fonctions_communes.php');
+  include_once('../../includes/fonctions_dates.php');
+  include_once('../../includes/fonctions_regex.php');
 
-  // Fonctions communes
-  include('../../includes/fonctions_dates.php');
-  include('../../includes/fonctions_regex.php');
-  include('../../includes/fonctions_communes.php');
+  // Contrôles communs Utilisateur
+  controlsUser();
 
   // Modèle de données : "module métier"
   include_once('modele/metier_moviehouse.php');
@@ -86,26 +86,29 @@
   {
     case 'goAjouter':
     case "goModifier":
-      $film->setFilm(htmlspecialchars($film->getFilm()));
-      $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
-      $film->setDate_add(htmlspecialchars($film->getDate_add()));
-      $film->setIdentifiant_add(htmlspecialchars($film->getIdentifiant_add()));
-      $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
-      $film->setDate_release(htmlspecialchars($film->getDate_release()));
-      $film->setLink(htmlspecialchars($film->getLink()));
-      $film->setPoster(htmlspecialchars($film->getPoster()));
-      $film->setTrailer(htmlspecialchars($film->getTrailer()));
-      $film->setId_url(htmlspecialchars($film->getId_url()));
-      $film->setDoodle(htmlspecialchars($film->getDoodle()));
-      $film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
-      $film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
-      $film->setRestaurant(htmlspecialchars($film->getRestaurant()));
-      $film->setPlace(htmlspecialchars($film->getPlace()));
-      $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
-      $film->setStars_user(htmlspecialchars($film->getStars_user()));
-      $film->setParticipation(htmlspecialchars($film->getParticipation()));
-      $film->setNb_users(htmlspecialchars($film->getNb_users()));
-      $film->setAverage(htmlspecialchars($film->getAverage()));
+      if ($filmExistant == true OR ($filmExistant == false AND $initSaisie == true))
+      {
+        $film->setFilm(htmlspecialchars($film->getFilm()));
+        $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
+        $film->setDate_add(htmlspecialchars($film->getDate_add()));
+        $film->setIdentifiant_add(htmlspecialchars($film->getIdentifiant_add()));
+        $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
+        $film->setDate_release(htmlspecialchars($film->getDate_release()));
+        $film->setLink(htmlspecialchars($film->getLink()));
+        $film->setPoster(htmlspecialchars($film->getPoster()));
+        $film->setTrailer(htmlspecialchars($film->getTrailer()));
+        $film->setId_url(htmlspecialchars($film->getId_url()));
+        $film->setDoodle(htmlspecialchars($film->getDoodle()));
+        $film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
+        $film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
+        $film->setRestaurant(htmlspecialchars($film->getRestaurant()));
+        $film->setPlace(htmlspecialchars($film->getPlace()));
+        $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
+        $film->setStars_user(htmlspecialchars($film->getStars_user()));
+        $film->setParticipation(htmlspecialchars($film->getParticipation()));
+        $film->setNb_users(htmlspecialchars($film->getNb_users()));
+        $film->setAverage(htmlspecialchars($film->getAverage()));
+      }
       break;
 
     case "doInserer":

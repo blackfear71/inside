@@ -122,33 +122,4 @@
 
 		return $text;
 	}
-
-	//////////////////////////////////////////////
-	// Fonction formatage titres niveaux succès //
-	//////////////////////////////////////////////
-	function formatTitleLvl($lvl)
-	{
-		$name_lvl = "";
-
-		switch($lvl)
-		{
-			case "1";
-				$name_lvl = '<div class="level_succes">Niveau ' . $lvl . ' : <span class="name_lvl">Seuls les plus forts y parviendront.</span></div>';
-				break;
-
-			case "2";
-				$name_lvl = '<div class="level_succes">Niveau ' . $lvl . ' : <span class="name_lvl">Vous êtes encore là ?</span></div>';
-				break;
-
-			case "3";
-				$name_lvl = '<div class="level_succes">Niveau ' . $lvl . ' : <span class="name_lvl">Votre charisme doit être impressionnant.</span></div>';
-				break;
-
-			default:
-				$name_lvl = '<div class="level_succes">Niveau ' . $lvl . '</div>';
-				break;
-		}
-
-		return $name_lvl;
-	}
 ?>

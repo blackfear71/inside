@@ -3,6 +3,9 @@
 /* Les couleurs utilisées régulièrement sur le site sont répertoriées ici */
 /* Plus il y a de '+', plus la couleur est accentuée                      */
 /**************************************************************************/
+/*   #2c3840            -> ombre (++)                                     */
+/*   #7b8084            -> ombre (+)                                      */
+/*                                                                        */
 /*   #f3f3f3            -> gris clair (+++++++)                           */
 /*   #e6e6e6            -> gris clair (++++++)                            */
 /*   #e3e3e3            -> gris clair (+++++)                             */
@@ -516,7 +519,7 @@ section
 
 .avertissement
 {
-	width: 30%;
+	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
@@ -1250,7 +1253,7 @@ aside
 	z-index: 2;
 	left: 50%;
 	margin-left: -250px;
-	box-shadow: 0 5px 6px #2c3840;
+	box-shadow: 0 5px 8px #2c3840;
 }
 
 .inside_alerte

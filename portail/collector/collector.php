@@ -1,10 +1,10 @@
 <?php
-  // Contrôles communs Utilisateurs
-  include_once('../../includes/controls_users.php');
+  // Fonction communes
+  include_once('../../includes/fonctions_communes.php');
+  include_once('../../includes/fonctions_dates.php');
 
-  // Fonctions communes
-  include('../../includes/fonctions_dates.php');
-  include('../../includes/fonctions_communes.php');
+  // Contrôles communs Utilisateur
+  controlsUser();
 
   // Contrôle si la page renseignée et numérique
 	if (!isset($_GET['page']) OR !is_numeric($_GET['page']))

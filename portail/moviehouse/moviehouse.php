@@ -1,10 +1,10 @@
 <?php
-  // Contrôles communs Utilisateurs
-  include_once('../../includes/controls_users.php');
+  // Fonction communes
+  include_once('../../includes/fonctions_communes.php');
+  include_once('../../includes/fonctions_dates.php');
 
-  // Fonctions communes
-  include('../../includes/fonctions_dates.php');
-  include('../../includes/fonctions_communes.php');
+  // Contrôles communs Utilisateur
+  controlsUser();
 
   // Modèle de données : "module métier"
   include_once('modele/metier_moviehouse.php');

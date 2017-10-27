@@ -654,8 +654,6 @@
     $reponse->closeCursor();
 
     // Contrôle film non à supprimer
-    include('../../includes/appel_bdd.php');
-
     $reponse2 = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $id_film);
     $donnees2 = $reponse2->fetch();
 

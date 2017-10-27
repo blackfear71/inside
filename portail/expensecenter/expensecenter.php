@@ -1,10 +1,11 @@
 <?php
-  // Contrôles communs Utilisateurs
-  include_once('../../includes/controls_users.php');
+  // Fonction communes
+  include_once('../../includes/fonctions_communes.php');
+  include_once('../../includes/fonctions_dates.php');
+  include_once('../../includes/fonctions_regex.php');
 
-  // Fonctions communes
-  include('../../includes/fonctions_dates.php');
-  include('../../includes/fonctions_regex.php');
+  // Contrôles communs Utilisateur
+  controlsUser();
 
   // Contrôle si l'année est renseignée et numérique
 	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))

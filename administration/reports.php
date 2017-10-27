@@ -1,9 +1,10 @@
 <?php
-  // Contrôles communs Administrateur
-  include_once('../includes/controls_admin.php');
+  // Fonction communes
+  include_once('../includes/fonctions_communes.php');
+  include_once('../includes/fonctions_dates.php');
 
-	// Fonctions communes
-	include('../includes/fonctions_dates.php');
+  // Contrôles communs Administrateur
+  controlsAdmin();
 
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');

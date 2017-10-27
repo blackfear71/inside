@@ -4,8 +4,9 @@
     session_start();
 
   // Fonctions communes
-  include('../includes/appel_bdd.php');
-  include('../includes/fonctions_communes.php');
+  include_once('../includes/appel_bdd.php');
+  include_once('../includes/fonctions_communes.php');
+  include_once('fonctions_cron.php');
 
   /*** Traitements hebdomadaires (tous les lundi à 7h)***/
 

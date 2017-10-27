@@ -1,16 +1,17 @@
 <?php
-  // Contrôles communs Administrateur
-  include_once('../includes/controls_admin.php');
-
   // Fonctions communes
-	include('../includes/fonctions_regex.php');
+	include_once('../includes/fonctions_communes.php');
+  include_once('../includes/fonctions_regex.php');
+
+  // Contrôles communs Administrateur
+  controlsAdmin();
 
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
 
   // Initialisation sauvegarde saisie succès
   if ((!isset($_SESSION['already_referenced']) OR $_SESSION['already_referenced'] != true)
-  AND (!isset($_SESSION['level_not_numeric'])    OR $_SESSION['level_not_numeric'] != true)
+  AND (!isset($_SESSION['level_not_numeric'])  OR $_SESSION['level_not_numeric'] != true)
   AND (!isset($_SESSION['order_not_numeric'])  OR $_SESSION['order_not_numeric'] != true)
   AND (!isset($_SESSION['already_ordered'])    OR $_SESSION['already_ordered'] != true)
   AND (!isset($_SESSION['limit_not_numeric'])  OR $_SESSION['limit_not_numeric'] != true))

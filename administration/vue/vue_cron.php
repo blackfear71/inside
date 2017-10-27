@@ -43,13 +43,55 @@
         <div class="zone_cron_asynchrone">
   				<div class="level_succes">Lancement asynchrone des tâches CRON</div>
 
-          <form method="post" action="../cron/daily_cron.php">
-            <input type="submit" name="daily_cron" value="CRON journalier" class="bouton_modification_succes" />
-          </form>
+          <div class="zone_cron">
+            <div class="titre_cron">
+              CRON journalier
+            </div>
+            <div class="contenu_cron">
+              Exécute les tâches suivantes :<br />
+              <ul>
+                <li>Recherche les sorties cinéma du jour et insère une notification</li>
+                <li>Mise à jour des succès pour tous les utilisateurs (à venir)</li>
+                <li>Génération log journalier (à venir)</li>
+              </ul>
+              <u>Fréquence :</u> tous les jours à 7h.
+            </div>
+            <div class="boutons_cron">
+              <form method="post" action="../cron/daily_cron.php">
+                <input type="submit" name="daily_cron" value="Lancer" class="bouton_cron" />
+              </form>
+            </div>
+          </div>
 
-          <form method="post" action="../cron/weekly_cron.php">
-            <input type="submit" name="weekly_cron" value="CRON hebdomadaire" class="bouton_modification_succes" />
-          </form>
+          <div class="zone_cron">
+            <div class="titre_cron">
+              CRON hebdomadaire
+            </div>
+            <div class="contenu_cron">
+              Exécute les tâches suivantes :<br />
+              <ul>
+                <li>Recherche du plus dépensier et du moins dépensier et insère une notification (à venir)</li>
+                <li>Sauvegarde automatique de la base de données (à venir)</li>
+                <li>Génération log hebdomadaire (à venir)</li>
+              </ul>
+              <u>Fréquence :</u> tous les lundis à 7h.
+            </div>
+            <div class="boutons_cron">
+              <form method="post" action="../cron/weekly_cron.php">
+                <input type="submit" name="weekly_cron" value="Lancer" class="bouton_cron" />
+              </form>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
         </div>
 			</article>
 		</section>

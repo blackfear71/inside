@@ -1,8 +1,11 @@
 <?php
   @ini_set('display_errors', 'on');
 
-  // Contrôles communs Utilisateurs
-  include_once('../../includes/controls_users.php');
+  // Fonction communes
+  include_once('../../includes/fonctions_communes.php');
+
+  // Contrôles communs Utilisateur
+  controlsUser();
 
   // Modèle de données : "module métier"
   include_once('modele/metier_parcours.php');

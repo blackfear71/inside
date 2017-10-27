@@ -37,18 +37,18 @@
   box-shadow: 0 0 3px #5c5c5c;
   font-family: robotolight, Verdana, sans-serif;
 	background-color: #e3e3e3;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 .zone_notification_icone
 {
-  float: left;
   background-color: rgb(255, 25, 55);
   text-align: center;
-  vertical-align: top;
+  vertical-align: middle;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
+	width: 100px;
 }
 
 .icone_notification
@@ -59,30 +59,31 @@
 
 .zone_notification_contenu
 {
-  display: block;
   background-color: #e3e3e3;
-  line-height: 60px;
+  line-height: 30px;
   text-align: justify;
-  vertical-align: top;
-  margin-left: 100px;
-  margin-right: 120px;
-  padding-left: 30px;
-  padding-right: 30px;
+  vertical-align: middle;
+  padding-left: 20px;
+  padding-right: 20px;
   color: #262626;
 }
 
 .zone_notification_date
 {
-  float: right;
   background-color: #d3d3d3;
   line-height: 60px;
   text-align: center;
-  width: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
-  vertical-align: top;
-  margin-top: -60px;
+  width: 120px;
+  vertical-align: middle;
   color: #7c7c7c;
+}
+
+.smiley
+{
+	width: 30px;
+	vertical-align: middle;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 /*** Pagination ***/
