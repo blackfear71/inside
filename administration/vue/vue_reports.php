@@ -10,12 +10,11 @@
     <link rel="stylesheet" href="styleAdmin.css" />
 
     <script type="text/javascript" src="/inside/script.js"></script>
-    
+
 		<title>Inside - Bugs</title>
   </head>
 
 	<body>
-
 		<header>
       <?php
         $title = "Rapports de bugs";
@@ -41,22 +40,26 @@
 			?>
 
 			<article class="article_portail">
-				<div class="switch_view" style="margin-top: -30px;">
+        <!-- Onglets vues -->
+				<div class="switch_view">
 					<?php
 						$listeSwitch = array('all'        => 'Tous',
 																 'unresolved' => 'En cours',
 																 'resolved'   => 'Résolus'
 																);
 
-						foreach ($listeSwitch as $view => $lib_view)
-						{
-							if ($_GET['view'] == $view)
-								$switch = '<a href="reports.php?view=' . $view . '&action=goConsulter" class="link_switch_active">' . $lib_view . '</a>';
-							else
-								$switch = '<a href="reports.php?view=' . $view . '&action=goConsulter" class="link_switch_inactive">' . $lib_view . '</a>';
+            foreach ($listeSwitch as $view => $lib_view)
+            {
+              if ($_GET['view'] == $view)
+                $actif = 'active';
+              else
+                $actif = 'inactive';
 
-							echo $switch;
-						}
+              echo '<a href="reports.php?view=' . $view . '&action=goConsulter" class="zone_switch">';
+                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
+                echo '<div class="border_switch_' . $actif . '"></div>';
+              echo '</a>';
+            }
 					?>
 				</div>
 

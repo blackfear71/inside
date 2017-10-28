@@ -50,7 +50,7 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Switch entre accueil, vue générale et vue personnelle-->
+				<!-- Switch entre accueil, vue générale et vue personnelle -->
 				<div class="switch_view_2">
 					<?php
 						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
@@ -58,15 +58,18 @@
 																 'user' => array('lib' => 'Détails',  'date' => $_GET['year'])
 																);
 
-						foreach ($listeSwitch as $view => $lib_view)
+            foreach ($listeSwitch as $view => $lib_view)
 						{
-							if ($_GET['view'] == $view)
-								$switch = '<a href="moviehouse.php?view=' . $view . '&year=' . $lib_view['date'] . '&action=goConsulter" class="link_switch_active">' . $lib_view['lib'] . '</a>';
-							else
-								$switch = '<a href="moviehouse.php?view=' . $view . '&year=' . $lib_view['date'] . '&action=goConsulter" class="link_switch_inactive">' . $lib_view['lib'] . '</a>';
+              if ($_GET['view'] == $view)
+                $actif = 'active';
+              else
+                $actif = 'inactive';
 
-							echo $switch;
-						}
+              echo '<a href="moviehouse.php?view=' . $view . '&year=' . $lib_view['date'] . '&action=goConsulter" class="zone_switch">';
+                echo '<div class="titre_switch_' . $actif . '">' . $lib_view['lib'] . '</div>';
+                echo '<div class="border_switch_' . $actif . '"></div>';
+              echo '</a>';
+            }
 					?>
 				</div>
 

@@ -43,7 +43,7 @@
         <div class="zone_cron_asynchrone">
   				<div class="level_succes">Lancement asynchrone des tâches CRON</div>
 
-          <div class="zone_cron">
+          <div class="zone_cron" style="float: left;">
             <div class="titre_cron">
               CRON journalier
             </div>
@@ -63,7 +63,7 @@
             </div>
           </div>
 
-          <div class="zone_cron">
+          <div class="zone_cron" style="float: right;">
             <div class="titre_cron">
               CRON hebdomadaire
             </div>
@@ -82,16 +82,6 @@
               </form>
             </div>
           </div>
-
-
-
-
-
-
-
-
-
-
         </div>
 			</article>
 		</section>

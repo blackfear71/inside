@@ -55,11 +55,14 @@
             foreach ($listeSwitch as $view => $lib_view)
             {
               if ($_GET['view'] == $view)
-                $switch = '<a href="profil.php?user=' . $_SESSION['identifiant'] . '&view=' . $view . '&action=goConsulter" class="link_switch_active">' . $lib_view . '</a>';
+                $actif = 'active';
               else
-                $switch = '<a href="profil.php?user=' . $_SESSION['identifiant'] . '&view=' . $view . '&action=goConsulter" class="link_switch_inactive">' . $lib_view . '</a>';
+                $actif = 'inactive';
 
-              echo $switch;
+              echo '<a href="profil.php?user=' . $_SESSION['identifiant'] . '&view=' . $view . '&action=goConsulter" class="zone_switch">';
+                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
+                echo '<div class="border_switch_' . $actif . '"></div>';
+              echo '</a>';
             }
 					?>
 				</div>

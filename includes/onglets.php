@@ -1,5 +1,7 @@
 <?php
-	// Penser à changer le style="border-right: solid 1px white;" sur le dernier onglet
+	// Bordures à gauche et à droite des onglets
+	$onglet_init = '<div class="onglet_init"></div>';
+	$onglet_end  = '<div class="onglet_end"></div>';
 
 	// Récupération des préférences
 	switch ($_SESSION['view_movie_house'])
@@ -23,7 +25,7 @@
 	$onglet_2 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter" title="Expense Center" class="onglet_inactif""><img src="/inside/includes/icons/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 	$onglet_3 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 	$onglet_4 = '<a href="/inside/portail/calendars/calendars.php?year=' . date("Y") . '&action=goConsulter" title="Calendars" class="onglet_inactif"><img src="/inside/includes/icons/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
-	$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_inactif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
+	$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_inactif"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
 
 	// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 	$path = $_SERVER['PHP_SELF'];
@@ -60,12 +62,12 @@
 	// Collector Room
 	if ($path == '/inside/portail/collector/collector.php')
 	{
-		$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_actif" style="border-right: solid 1px white;"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
+		$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_actif"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
 	}
 
 	// Affichage des onglets
 	echo '<div class="main_title_2">';
-		echo $onglet_1, $onglet_2, $onglet_3, $onglet_4, $onglet_5;
+		echo $onglet_init, $onglet_1, $onglet_2, $onglet_3, $onglet_4, $onglet_5, $onglet_end;
 	echo '</div>';
 
 	// Affichage titre section

@@ -778,10 +778,8 @@
 {
 	display: inline-block;
 	vertical-align: top;
-	width: 45%;
+	width: 49%;
 	margin-top: 15px;
-	margin-left: 10px;
-	margin-right: 10px;
 	box-shadow: 0 5px 8px #7b8084;
 	text-align: justify;
 }

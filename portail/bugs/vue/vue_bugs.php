@@ -54,11 +54,14 @@
             foreach ($listeSwitch as $view => $lib_view)
             {
               if ($_GET['view'] == $view)
-                $switch = '<a href="bugs.php?view=' . $view . '&action=' . $lib_view['action'] . '" class="link_switch_active">' . $lib_view['lib'] . '</a>';
+                $actif = 'active';
               else
-                $switch = '<a href="bugs.php?view=' . $view . '&action=' . $lib_view['action'] . '" class="link_switch_inactive">' . $lib_view['lib'] . '</a>';
+                $actif = 'inactive';
 
-              echo $switch;
+              echo '<a href="bugs.php?view=' . $view . '&action=' . $lib_view['action'] . '" class="zone_switch">';
+                echo '<div class="titre_switch_' . $actif . '">' . $lib_view['lib'] . '</div>';
+                echo '<div class="border_switch_' . $actif . '"></div>';
+              echo '</a>';
             }
           ?>
         </div>

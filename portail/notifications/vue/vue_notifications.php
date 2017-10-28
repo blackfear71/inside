@@ -44,8 +44,8 @@
 			?>
 
 			<article class="article_portail">
-				<!-- Switch entre accueil, vue générale et vue personnelle-->
-				<div class="switch_view" style="margin-bottom: 30px;">
+				<!-- Switch entre notifications personnelles, notifications du jour, notifications de la semaine et toutes les notifications -->
+				<div class="switch_view">
 					<?php
 						$listeSwitch = array('me'    => 'Moi',
 																 'today' => 'Aujourd\'hui',
@@ -53,20 +53,23 @@
 																 'all'   => 'Toutes'
 																);
 
-						foreach ($listeSwitch as $view => $lib_view)
-						{
-              if ($view == "all")
+            foreach ($listeSwitch as $view => $lib_view)
+            {
+              if ($view == "all" OR $view == "me")
                 $page = '&page=1';
               else
                 $page = '';
 
-							if ($_GET['view'] == $view)
-								$switch = '<a href="notifications.php?view=' . $view . '&action=goConsulter' . $page . '" class="link_switch_active">' . $lib_view . '</a>';
-							else
-								$switch = '<a href="notifications.php?view=' . $view . '&action=goConsulter' . $page . '" class="link_switch_inactive">' . $lib_view . '</a>';
+              if ($_GET['view'] == $view)
+                $actif = 'active';
+              else
+                $actif = 'inactive';
 
-							echo $switch;
-						}
+              echo '<a href="notifications.php?view=' . $view . '&action=goConsulter' . $page . '" class="zone_switch">';
+                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
+                echo '<div class="border_switch_' . $actif . '"></div>';
+              echo '</a>';
+            }
 					?>
 				</div>
 
