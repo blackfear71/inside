@@ -32,13 +32,13 @@
 			<!-- Paramétrage des boutons de navigation -->
 			<aside>
 				<?php
-					$disconnect = true;
-					$profil     = true;
-					$add_film   = true;
-					$back       = true;
-					$ideas      = true;
-					$reports    = true;
-          $notifs     = true;
+					$disconnect  = true;
+					$profil_user = true;
+					$add_film    = true;
+					$back        = true;
+					$ideas       = true;
+					$reports     = true;
+          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>

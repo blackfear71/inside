@@ -26,13 +26,13 @@
 			<aside>
 				<?php
 					$disconnect  = true;
-					$profil      = true;
+					$profil_user = true;
 					$modify_film = true;
 					$delete_film = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
-          $notifs     = true;
+          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>

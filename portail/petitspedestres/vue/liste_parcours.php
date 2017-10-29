@@ -30,7 +30,7 @@
 			<aside>
 				<?php
 					$disconnect       = true;
-					$profil           = true;
+					$profil_user      = true;
 					$ajouter_parcours = true;
 					$back             = true;
 					$ideas            = true;

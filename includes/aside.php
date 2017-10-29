@@ -7,8 +7,8 @@
 	if (!isset($disconnect))
 		$disconnect = false;
 
-	if (!isset($profil))
-		$profil = false;
+	if (!isset($profil_user))
+		$profil_user = false;
 
 	if (!isset($add_article))
 		$add_article = false;
@@ -59,7 +59,7 @@
 	}
 
 	// Profil
-	if ($profil == true)
+	if ($profil_user == true)
 	{
 		echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter" title="Profil" class="link_profile">';
 			echo '<img src="/inside/includes/icons/profile.png" alt="profile" title="Profil" class="icon_aside" />';

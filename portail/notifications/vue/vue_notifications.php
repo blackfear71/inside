@@ -28,11 +28,11 @@
 			<!-- Paramétrage des boutons de navigation -->
 			<aside>
 				<?php
-					$disconnect = true;
-					$profil     = true;
-					$back       = true;
-					$ideas      = true;
-					$reports    = true;
+					$disconnect  = true;
+					$profil_user = true;
+					$back        = true;
+					$ideas       = true;
+					$reports     = true;
 
 					include('../../includes/aside.php');
 				?>
