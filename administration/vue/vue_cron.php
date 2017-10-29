@@ -70,6 +70,7 @@
             <div class="contenu_cron">
               Exécute les tâches suivantes :<br />
               <ul>
+                <li>Remise à plat des bilans des dépenses</li>
                 <li>Recherche du plus dépensier et du moins dépensier et insère une notification (à venir)</li>
                 <li>Sauvegarde automatique de la base de données (à venir)</li>
                 <li>Génération log hebdomadaire (à venir)</li>

@@ -21,5 +21,8 @@
 
   // Redirection si asynchrone
   if (isset($_POST['daily_cron']))
+  {
+    $_SESSION['daily_cron'] = true;
     header('location: /inside/administration/cron.php?action=goConsulter');
+  }
 ?>

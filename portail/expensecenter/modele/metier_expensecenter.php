@@ -50,7 +50,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -60,7 +60,8 @@
       $myUser = array('id'          => $user->getId(),
                       'identifiant' => $user->getIdentifiant(),
                       'pseudo'      => $user->getPseudo(),
-                      'avatar'      => $user->getAvatar()
+                      'avatar'      => $user->getAvatar(),
+                      'expenses'    => $user->getExpenses()
                     );
 
       // On ajoute la ligne au tableau
@@ -186,7 +187,7 @@
     global $bdd;
 
     // Récupération d'une liste des dépenses
-    $reponse = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4) = ' . $year . ' ORDER BY id DESC');
+    $reponse = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4) = ' . $year . ' ORDER BY date DESC, id DESC');
     while($donnees = $reponse->fetch())
     {
       // Ajout d'un objet Expenses (instancié à partir des données de la base) au tableau de dépenses
@@ -292,7 +293,7 @@
     return $tableauResume;
   }
 
-  // METIER : Insertion d'une dépense
+  // METIER : Insertion d'une dépense & mise à jour des dépenses utilisateur
   // RETOUR : Aucun
   function insertExpense($post, $list_users, $nb_users)
   {
@@ -320,9 +321,25 @@
       // On récupère le numéro permettant d'identifier la dépenses
       $id_expense = $bdd->lastInsertId();
 
+      // Lecture bilan actuel acheteur
+      $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $buyer . '"');
+      $data2 = $req2->fetch();
+      $expense_buyer = $data2['expenses'];
+      $req2->closeCursor();
+
+      // Mise à jour du bilan pour l'acheteur (on ajoute la dépense)
+      $expense_buyer += $price;
+
+      $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $buyer . '"');
+      $req3->execute(array(
+        'expenses' => $expense_buyer
+      ));
+      $req3->closeCursor();
+
       // On stocke le tableau des parts en fonction de l'utilisateur si la part n'est pas à 0
       $list_parts_users = array();
-      $i = 0;
+      $nb_parts_total   = 0;
+      $i                = 0;
 
       foreach ($list_users as $user)
       {
@@ -333,21 +350,39 @@
                                    );
 
           array_push($list_parts_users, $myList_parts_users);
+
+          $nb_parts_total += $post['depense_user'][$i];
         }
 
         $i++;
       }
 
-      // Insertions dans la table expense_center_users
+      // Insertions des parts & mise à jour du bilan pour chaque utilisateur
       foreach ($list_parts_users as $ligne)
       {
-        $req2 = $bdd->prepare('INSERT INTO expense_center_users(id_expense, identifiant, parts) VALUES(:id_expense, :identifiant, :parts)');
-        $req2->execute(array(
+        // Insertion dans la table expense_center_users
+        $req4 = $bdd->prepare('INSERT INTO expense_center_users(id_expense, identifiant, parts) VALUES(:id_expense, :identifiant, :parts)');
+        $req4->execute(array(
           'id_expense'  => $id_expense,
           'identifiant' => $ligne['identifiant'],
           'parts'       => $ligne['part']
             ));
-        $req2->closeCursor();
+        $req4->closeCursor();
+
+        // Lecture bilan actuel utilisateur
+        $req5 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $ligne['identifiant'] . '"');
+        $data5 = $req5->fetch();
+        $expense_user = $data5['expenses'];
+        $req5->closeCursor();
+
+        // Mise à jour du bilan pour chaque utilisateur (on retire au total)
+        $expense_user -= ($price / $nb_parts_total) * $ligne['part'];
+
+        $req6 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $ligne['identifiant'] . '"');
+        $req6->execute(array(
+          'expenses' => $expense_user
+        ));
+        $req6->closeCursor();
       }
 
       // Message insertion effectuée
@@ -381,94 +416,177 @@
   // RETOUR : Aucun
   function modifyExpense($id_modify, $post, $list_users)
   {
-    global $bdd;
+    $price_new   = str_replace(',', '.', htmlspecialchars($post['depense']));
+    $buyer_new   = $post['buyer_user'];
+    $comment_new = $post['comment'];
 
-    // Mise à jour du prix si modifié
-    $price = str_replace(',', '.', htmlspecialchars($post['depense']));
-
-    // Mise à jour de l'acheteur si modifié
-    $buyer = $post['buyer_user'];
-
-    // Mise à jour du commentaire si modifié
-    $comment = $post['comment'];
-
-    $req0 = $bdd->prepare('UPDATE expense_center SET price = :price, buyer = :buyer, comment = :comment WHERE id = ' . $id_modify);
-    $req0->execute(array(
-      'price'   => $price,
-      'buyer'   => $buyer,
-      'comment' => $comment
-    ));
-    $req0->closeCursor();
-
-    // On stocke le tableau des parts en fonction de l'utilisateur si la part n'est pas à 0
-    $list_parts_users = array();
-    $i = 0;
-
-    foreach ($list_users as $user)
+    if (is_numeric($price_new))
     {
-      $myList_parts_users = array('identifiant' => $user->getIdentifiant(),
-                                  'part'        => $post['depense_user'][$i]
-                               );
+      global $bdd;
 
-      array_push($list_parts_users, $myList_parts_users);
-      $i++;
-    }
+      // Lecture dépense (avant mise à jour)
+      $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_modify);
+      $data1 = $req1->fetch();
+      $myOldExpense = Expenses::withData($data1);
+      $req1->closeCursor();
 
-    foreach($list_parts_users as $ligne)
-    {
-      // Si la ligne est mise à 0, on la supprime
-      if ($ligne['part'] == 0)
+      //var_dump($myOldExpense);
+
+      // Lecture bilan actuel acheteur
+      $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $myOldExpense->getBuyer() . '"');
+      $data2 = $req2->fetch();
+      $expense_buyer = $data2['expenses'];
+      $req2->closeCursor();
+
+      //echo 'Ancien acheteur : ' . $myOldExpense->getBuyer() . '<br />';
+      //echo 'Ancien bilan acheteur : ' . $expense_buyer . '<br />';
+
+      // Mise à jour du bilan pour l'acheteur (on retire l'ancienne dépense)
+      $expense_buyer -= $myOldExpense->getPrice();
+
+      $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $myOldExpense->getBuyer() . '"');
+      $req3->execute(array(
+        'expenses' => $expense_buyer
+      ));
+      $req3->closeCursor();
+
+      //echo 'Nouveau bilan acheteur : ' . $expense_buyer . '<br />';
+
+      // Lecture des utilisateurs ayant une part
+      $old_list_parts_users = array();
+      $nb_parts_total_old   = 0;
+
+      $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myOldExpense->getId() . ' ORDER BY identifiant ASC');
+      while($data4 = $req4->fetch())
       {
-        $req1 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_modify . ' AND identifiant = "' . $ligne['identifiant'] . '"');
+        $myOld_list_parts_users = array('identifiant' => $data4['identifiant'],
+                                        'part'        => $data4['parts']
+                                       );
+
+        array_push($old_list_parts_users, $myOld_list_parts_users);
+
+        $nb_parts_total_old += $data4['parts'];
       }
-      else
+      $req4->closeCursor();
+
+      //var_dump($old_list_parts_users);
+      //var_dump($nb_parts_total_old);
+
+      // Mise à jour du bilan pour chaque utilisateur
+      foreach ($old_list_parts_users as $ligne)
       {
-        $a_modifier = false;
-        $a_inserer  = false;
-        $count      = 0;
+        // Lecture bilan actuel utilisateur
+        $req5 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $ligne['identifiant'] . '"');
+        $data5 = $req5->fetch();
+        $expense_user = $data5['expenses'];
+        $req5->closeCursor();
 
-        // On cherche si la ligne existe
-        $req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $id_modify);
-        while($data2 = $req2->fetch())
-        {
-          if ($ligne['identifiant'] == $data2['identifiant'])
-          {
-            if ($ligne['part'] != $data2['parts'])
-              $a_modifier = true;
+        // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+        $expense_user += ($myOldExpense->getPrice() / $nb_parts_total_old) * $ligne['part'];
 
-            $count++;
-          }
-        }
-        $req2->closeCursor();
+        $req6 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $ligne['identifiant'] . '"');
+        $req6->execute(array(
+          'expenses' => $expense_user
+        ));
+        $req6->closeCursor();
 
-        if ($count == 0)
-          $a_inserer = true;
-
-        // Si la ligne existe déjà et qu'elle a changé, on met à jour, sinon on ne fait rien
-        if ($a_modifier == true)
-        {
-          $req3 = $bdd->prepare('UPDATE expense_center_users SET parts = :parts WHERE id_expense = ' . $id_modify . ' AND identifiant = "' . $ligne['identifiant'] . '"');
-          $req3->execute(array(
-            'parts' => $ligne['part']
-          ));
-          $req3->closeCursor();
-        }
-        // Si la ligne n'existe pas, on l'insère
-        elseif ($a_inserer == true)
-        {
-          $req3 = $bdd->prepare('INSERT INTO expense_center_users(id_expense, identifiant, parts) VALUES(:id_expense, :identifiant, :parts)');
-          $req3->execute(array(
-            'id_expense'  => $id_modify,
-            'identifiant' => $ligne['identifiant'],
-            'parts'       => $ligne['part']
-              ));
-          $req3->closeCursor();
-        }
+        //echo 'ancienne dépense : ' . $myOldExpense->getPrice() . '<br />';
+        //echo 'parts total : ' . $nb_parts_total_old . '<br />';
+        //echo 'identifiant en cours : ' . $ligne['identifiant'] . '<br />';
+        //echo 'parts en cours : ' . $ligne['part'] . '<br />';
+        //echo 'depense en cours : ' . $expense_user . '<br />';
       }
-    }
 
-    // Message modification effectuée
-    $_SESSION['depense_modified'] = true;
+      // Mise à jour de la dépense
+      $req7 = $bdd->prepare('UPDATE expense_center SET price = :price, buyer = :buyer, comment = :comment WHERE id = ' . $id_modify);
+      $req7->execute(array(
+        'price'   => $price_new,
+        'buyer'   => $buyer_new,
+        'comment' => $comment_new
+      ));
+      $req7->closeCursor();
+
+      // On va lire le nouveau bilan du nouvel acheteur
+      $req8 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $buyer_new . '"');
+      $data8 = $req8->fetch();
+      $expense_buyer = $data8['expenses'];
+      $req8->closeCursor();
+
+      //echo 'Ancien bilan acheteur 2 : ' . $expense_buyer . '<br />';
+
+      // Mise à jour du bilan pour le nouvel acheteur (on ajoute la dépense)
+      $expense_buyer += $price_new;
+
+      $req9 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $buyer_new . '"');
+      $req9->execute(array(
+        'expenses' => $expense_buyer
+      ));
+      $req9->closeCursor();
+
+      //echo 'Nouveau bilan acheteur 2 : ' . $expense_buyer . '<br />';
+
+      // On stocke le nouveau tableau des parts en fonction de l'utilisateur si la part n'est pas à 0
+      $new_list_parts_users = array();
+      $nb_parts_total_new   = 0;
+      $i                    = 0;
+
+      foreach ($list_users as $user)
+      {
+        if ($post['depense_user'][$i] != 0)
+        {
+          $myNew_list_parts_users = array('identifiant' => $user->getIdentifiant(),
+                                          'part'        => $post['depense_user'][$i]
+                                         );
+
+          array_push($new_list_parts_users, $myNew_list_parts_users);
+
+          $nb_parts_total_new += $post['depense_user'][$i];
+        }
+
+        $i++;
+      }
+
+      //var_dump($new_list_parts_users);
+      //var_dump($nb_parts_total_new);
+
+      // Suppression de toutes les anciennes parts
+      $req10 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_modify);
+
+      // Insertions des nouvelles parts & mise à jour du bilan pour chaque utilisateur
+      foreach ($new_list_parts_users as $ligne)
+      {
+        // Insertion dans la table expense_center_users
+        $req11 = $bdd->prepare('INSERT INTO expense_center_users(id_expense, identifiant, parts) VALUES(:id_expense, :identifiant, :parts)');
+        $req11->execute(array(
+          'id_expense'  => $myOldExpense->getId(),
+          'identifiant' => $ligne['identifiant'],
+          'parts'       => $ligne['part']
+            ));
+        $req11->closeCursor();
+
+        // Lecture bilan actuel utilisateur
+        $req11 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $ligne['identifiant'] . '"');
+        $data11 = $req11->fetch();
+        $expense_user = $data11['expenses'];
+        $req11->closeCursor();
+
+        // Mise à jour du bilan pour chaque utilisateur (on retire au total)
+        $expense_user -= ($price_new / $nb_parts_total_new) * $ligne['part'];
+
+        //var_dump($expense_user);
+
+        $req12 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $ligne['identifiant'] . '"');
+        $req12->execute(array(
+          'expenses' => $expense_user
+        ));
+        $req12->closeCursor();
+      }
+
+      // Message modification effectuée
+      $_SESSION['depense_modified'] = true;
+    }
+    else
+      $_SESSION['not_numeric'] = true;
   }
 
   // METIER : Suppression d'une dépense
@@ -477,11 +595,68 @@
   {
     global $bdd;
 
-    // Suppression des parts
-    $req1 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_delete);
+    // Lecture dépense
+    $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_delete);
+    $data1 = $req1->fetch();
+    $myExpense = Expenses::withData($data1);
+    $req1->closeCursor();
 
-    // Suppression de la dépense
-    $req2 = $bdd->exec('DELETE FROM expense_center WHERE id = ' . $id_delete);
+    // Lecture bilan actuel acheteur
+    $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $myExpense->getBuyer() . '"');
+    $data2 = $req2->fetch();
+    $expense_buyer = $data2['expenses'];
+    $req2->closeCursor();
+
+    // Mise à jour du bilan pour l'acheteur (on retire la dépense)
+    $expense_buyer -= $myExpense->getPrice();
+
+    $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $myExpense->getBuyer() . '"');
+    $req3->execute(array(
+      'expenses' => $expense_buyer
+    ));
+    $req3->closeCursor();
+
+    // Lecture des utilisateurs ayant une part
+    $list_parts_users = array();
+    $nb_parts_total   = 0;
+
+    $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myExpense->getId() . ' ORDER BY identifiant ASC');
+    while($data4 = $req4->fetch())
+    {
+      $myList_parts_users = array('identifiant' => $data4['identifiant'],
+                                  'part'        => $data4['parts']
+                                 );
+
+      array_push($list_parts_users, $myList_parts_users);
+
+      $nb_parts_total += $data4['parts'];
+    }
+    $req4->closeCursor();
+
+    // Suppression des parts & mise à jour du bilan pour chaque utilisateur
+    foreach ($list_parts_users as $ligne)
+    {
+      // Lecture bilan actuel utilisateur
+      $req5 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $ligne['identifiant'] . '"');
+      $data5 = $req5->fetch();
+      $expense_user = $data5['expenses'];
+      $req5->closeCursor();
+
+      // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+      $expense_user += ($myExpense->getPrice() / $nb_parts_total) * $ligne['part'];
+
+      $req6 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $ligne['identifiant'] . '"');
+      $req6->execute(array(
+        'expenses' => $expense_user
+      ));
+      $req6->closeCursor();
+
+      // Suppression des parts
+      $req7 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_delete);
+
+      // Suppression de la dépense
+      $req8 = $bdd->exec('DELETE FROM expense_center WHERE id = ' . $id_delete);
+    }
 
     // Message suppression effectuée
     $_SESSION['depense_deleted'] = true;

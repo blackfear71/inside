@@ -13,7 +13,7 @@
       $i = 0;
 
       // Lignes utilisateurs
-      foreach ($listeBilans as $bilan)
+      foreach ($listeUsers as $bilan)
       {
         if ($_SESSION['identifiant'] == $bilan->getIdentifiant())
           echo '<tr style="background-color: #fffde8;">';
@@ -35,19 +35,19 @@
             echo '<div class="pseudo_total_depenses">' . $bilan->getPseudo() . "</div>";
           echo '</td>';
 
-          if ($bilan->getBilan() <= -6)
+          if ($bilan->getExpenses() <= -6)
             echo '<td class="td_depenses" style="background-color: #ee4949">';
-          elseif ($bilan->getBilan() <= -3 AND $bilan->getBilan() > -6)
+          elseif ($bilan->getExpenses() <= -3 AND $bilan->getExpenses() > -6)
             echo '<td class="td_depenses" style="background-color: #ff9147;">';
-          elseif ($bilan->getBilan() < 0 AND $bilan->getBilan() > -3)
+          elseif ($bilan->getExpenses() < -0.01 AND $bilan->getExpenses() > -3)
             echo '<td class="td_depenses" style="background-color: #fffd4c;">';
-          elseif ($bilan->getBilan() > 0 AND $bilan->getBilan() < 5)
+          elseif ($bilan->getExpenses() > 0.01 AND $bilan->getExpenses() < 5)
             echo '<td class="td_depenses" style="background-color: #b6fc78;">';
-          elseif ($bilan->getBilan() > 0 AND $bilan->getBilan() >= 5)
+          elseif ($bilan->getExpenses() > 0.01 AND $bilan->getExpenses() >= 5)
             echo '<td class="td_depenses" style="background-color: #71d058;">';
           else
             echo '<td class="td_depenses">';
-              echo '<span class="somme_bilan">' . $bilan->getBilan_format() . ' €</span>';
+              echo '<span class="somme_bilan">' . formatBilanForDisplay($bilan->getExpenses()) . '</span>';
             echo '</td>';
         echo '</tr>';
 

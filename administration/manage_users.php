@@ -1,6 +1,7 @@
 <?php
   // Fonction communes
   include_once('../includes/fonctions_communes.php');
+  include_once('../includes/fonctions_regex.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();

@@ -1,6 +1,7 @@
 <?php
   // Fonction communes
   include_once('../includes/fonctions_communes.php');
+  include_once('../includes/fonctions_regex.php');
 
   // Contrôles communs Utilisateur
   controlsUser();
@@ -128,6 +129,7 @@
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
           $profil->setBeginner(htmlspecialchars($profil->getBeginner()));
           $profil->setDevelopper(htmlspecialchars($profil->getDevelopper()));
+          $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
           $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));
           $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));

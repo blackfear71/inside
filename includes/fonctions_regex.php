@@ -122,4 +122,17 @@
 
 		return $text;
 	}
+
+	/////////////////////////////////////////////
+	// Fonction formatage bilan pour affichage //
+	/////////////////////////////////////////////
+	function formatBilanForDisplay($bilan)
+	{
+		if (!empty($bilan) AND is_numeric($bilan))
+			$bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
+		else
+			$bilan_format = '0,00 €';
+
+		return $bilan_format;
+	}
 ?>

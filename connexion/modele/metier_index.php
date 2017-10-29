@@ -100,6 +100,7 @@
     $email            = "";
     $beginner         = 0;
     $developper       = 0;
+    $expenses         = 0;
 
     // Initialisations préférences
     $view_movie_house   = "H";
@@ -134,7 +135,27 @@
         if ($password == $confirm_password)
         {
           // On créé l'utilisateur
-          $req = $bdd->prepare('INSERT INTO users(identifiant, salt, mot_de_passe, reset, pseudo, avatar, email, beginner, developper) VALUES(:identifiant, :salt, :mot_de_passe, :reset, :pseudo, :avatar, :email, :beginner, :developper)');
+          $req = $bdd->prepare('INSERT INTO users(identifiant,
+                                                  salt,
+                                                  mot_de_passe,
+                                                  reset,
+                                                  pseudo,
+                                                  avatar,
+                                                  email,
+                                                  beginner,
+                                                  developper,
+                                                  expenses)
+                                           VALUES(:identifiant,
+                                                  :salt,
+                                                  :mot_de_passe,
+                                                  :reset,
+                                                  :pseudo,
+                                                  :avatar,
+                                                  :email,
+                                                  :beginner,
+                                                  :developper,
+                                                  :expenses
+                                                 )');
   				$req->execute(array(
   					'identifiant'  => $trigramme,
             'salt'         => $salt,
@@ -144,7 +165,8 @@
   					'avatar'       => $avatar,
             'email'        => $email,
             'beginner'     => $beginner,
-            'developper'   => $developper
+            'developper'   => $developper,
+            'expenses'     => $expenses
   					));
   				$req->closeCursor();
 

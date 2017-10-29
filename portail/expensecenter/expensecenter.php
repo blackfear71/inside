@@ -31,7 +31,6 @@
       $anneeExistante  = controlYear($_GET['year']);
       $nbUsers         = countUsers();
       $listeUsers      = getUsers();
-      $listeBilans     = getBilans($listeUsers);
       $onglets         = getOnglets();
       $tableauExpenses = getExpenses($_GET['year'], $listeUsers, $nbUsers);
       break;
@@ -73,15 +72,7 @@
           $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
           $user->setPseudo(htmlspecialchars($user->getPseudo()));
           $user->setAvatar(htmlspecialchars($user->getAvatar()));
-        }
-
-        foreach ($listeBilans as $bilan)
-        {
-          $bilan->setIdentifiant(htmlspecialchars($bilan->getIdentifiant()));
-          $bilan->setPseudo(htmlspecialchars($bilan->getPseudo()));
-          $bilan->setAvatar(htmlspecialchars($bilan->getAvatar()));
-          $bilan->setBilan(htmlspecialchars($bilan->getBilan()));
-          $bilan->setBilan_format(htmlspecialchars($bilan->getBilan_format()));
+          $user->setExpenses(htmlspecialchars($user->getExpenses()));
         }
 
         foreach ($onglets as $year)

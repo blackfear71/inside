@@ -9,6 +9,7 @@
     private $email;
     private $beginner;
     private $developper;
+    private $expenses;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -21,6 +22,7 @@
       $this->email       = '';
       $this->beginner    = '';
       $this->developper  = '';
+      $this->expenses    = '';
     }
 
     // Constructeur de l'objet Profile en fonction des données
@@ -58,6 +60,9 @@
 
       if (isset($data['developper']))
         $this->developper  = $data['developper'];
+
+      if (isset($data['expenses']))
+        $this->expenses    = $data['expenses'];
     }
 
     // getters et setters pour l'objet Profile
@@ -147,6 +152,17 @@
     public function getDevelopper()
     {
       return $this->developper;
+    }
+
+    // Dépenses (total)
+    public function setExpenses($expenses)
+    {
+      $this->expenses = $expenses;
+    }
+
+    public function getExpenses()
+    {
+      return $this->expenses;
     }
   }
 

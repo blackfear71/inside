@@ -56,8 +56,15 @@
     }
     $reponse0->closeCursor();
 
+
+
+
+
+
+
+
     // Solde des dépenses
-    $reponse2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+    /*$reponse2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
     while($donnees2 = $reponse2->fetch())
     {
       // Prix d'achat
@@ -97,7 +104,17 @@
     }
     $reponse2->closeCursor();
 
-    $expenses = str_replace('.', ',', round($expenses, 2));
+    $expenses = str_replace('.', ',', round($expenses, 2));*/
+
+
+
+
+
+
+
+
+
+
 
     // Nombre de phrases cultes soumises
     $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
@@ -759,8 +776,13 @@
         case "greedy":
           $bilan = 0;
 
-          $stats = getStatistiques($user);
-          $bilan = str_replace(',', '.', $stats->getExpenses());
+          // Bilan des dépenses
+          $req = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
+          $data = $req->fetch();
+
+          $bilan = $data['expenses'];
+
+          $req->closeCursor();
 
           $successUser[$success->getId()] = $bilan;
           break;
@@ -791,12 +813,15 @@
       {
         $rankSuccess = array();
 
+        $liste_succes_unique = array();
+        array_push($liste_succes_unique, $success);
+
         // Boucle pour parcourir tous les utilisateurs
         $req = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
         while($data = $req->fetch())
         {
           // Récupération succès utilisateur courant
-          $successUser = getSuccessUser($listSuccess, $data['identifiant']);
+          $successUser = getSuccessUser($liste_succes_unique, $data['identifiant']);
 
           if (isset($successUser[$success->getId()]))
           {

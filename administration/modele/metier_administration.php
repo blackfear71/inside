@@ -404,54 +404,21 @@
       $req1->closeCursor();
 
       // Bilan des dépenses
-      $req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-      while($data2 = $req2->fetch())
-      {
-        // Prix d'achat
-        $prix_achat = $data2['price'];
+      $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user->getIdentifiant() . '"');
+      $data2 = $req2->fetch();
 
-        // Identifiant de l'acheteur
-        $acheteur   = $data2['buyer'];
+      $bilan = $data2['expenses'];
+      $bilan_format = formatBilanForDisplay($bilan);
 
-        // Nombre de parts et prix par parts
-        $nb_parts_total = 0;
-        $nb_parts_user = 0;
-
-        $req3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data2['id']);
-        while($data3 = $req3->fetch())
-        {
-          // Nombre de parts total
-          $nb_parts_total += $data3['parts'];
-
-          // Nombre de parts de l'utilisateur
-          if ($user->getIdentifiant() == $data3['identifiant'])
-            $nb_parts_user = $data3['parts'];
-        }
-
-        if ($nb_parts_total != 0)
-          $prix_par_part = $prix_achat / $nb_parts_total;
-        else
-          $prix_par_part = 0;
-
-        // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-        if ($data2['buyer'] == $user->getIdentifiant())
-          $bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
-        else
-          $bilan -= $prix_par_part * $nb_parts_user;
-
-        $req3->closeCursor();
-      }
       $req2->closeCursor();
 
-      $bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
-
       // Nombre phrases cultes Collector Room
-      $req4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user->getIdentifiant() . '"');
-      $data4 = $req4->fetch();
+      $req3 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user->getIdentifiant() . '"');
+      $data3 = $req3->fetch();
 
-      $nb_collectors = $data4['nb_collectors'];
+      $nb_collectors = $data3['nb_collectors'];
 
-      $req4->closeCursor();
+      $req3->closeCursor();
 
       $cat = array('identifiant'   => $user->getIdentifiant(),
                    'pseudo'        => $user->getPseudo(),

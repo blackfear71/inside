@@ -116,7 +116,7 @@
 
       <div class="contenu_contribution_fin">
         <?php
-          echo $statistiques->getExpenses() . ' €';
+          echo formatBilanForDisplay($profil->getExpenses());
         ?>
       </div>
     </div>
