@@ -53,7 +53,7 @@
       }
     }
     else
-      echo '<td colspan="3"class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
+      echo '<td colspan="3" class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
 
 		// Bas du tableau
 		echo '<tr>';
@@ -61,7 +61,7 @@
 				echo 'Alertes';
 			echo '</td>';
 
-			echo '<td colspan="2"class="td_manage_users">';
+			echo '<td colspan="2" class="td_manage_users">';
         if ($alerteFilms == true)
           echo '<span class="reset_warning">!</span>';
 			echo '</td>';

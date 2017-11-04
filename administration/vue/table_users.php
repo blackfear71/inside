@@ -107,7 +107,7 @@
 				echo 'Alertes';
 			echo '</td>';
 
-			echo '<td colspan="3"class="td_manage_users">';
+			echo '<td colspan="3" class="td_manage_users">';
         if ($alerteUsers == true)
           echo '<span class="reset_warning">!</span>';
 			echo '</td>';

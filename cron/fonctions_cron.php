@@ -143,7 +143,7 @@
       $type_log = "## Traitement automatique";
 
     // Date du traitement
-    $date_log = "## Date...................." . date("d/m/Y");
+    $date_log = "## Date................................." . date("d/m/Y");
 
     // Traitement global OK ou KO
     $control_ok = true;
@@ -158,9 +158,9 @@
     }
 
     if ($control_ok == true)
-      $etat_log = "## Etat traitements........OK";
+      $etat_log = "## Etat traitements.....................OK";
     else
-      $etat_log = "## Etat traitements........KO";
+      $etat_log = "## Etat traitements.....................KO";
 
     // Durée totale des traitements si non asynchrone (heure courante - 7 heures)
     if (!isset($_POST['daily_cron']))
@@ -172,7 +172,7 @@
       $minutes    = intval(abs($total / 60));
       $total      = $total - ($minutes * 60);
       $secondes   = $total;
-      $duree_log  = "## Durée traitements......." . $heures . " heures, " . $minutes . " minutes et " . $secondes . " secondes";
+      $duree_log  = "## Durée traitements...................." . $heures . " heures, " . $minutes . " minutes et " . $secondes . " secondes";
     }
 
     // Ouverture / création fichier
@@ -201,7 +201,7 @@
       {
         fputs($myJLog, "\r\n");
         $nom_trt    = $trt['trt'];
-        $statut_trt = "## Status.................." . $trt['status'];
+        $statut_trt = "## Status..............................." . $trt['status'];
         fputs($myJLog, $nom_trt);
         fputs($myJLog, "\r\n");
         fputs($myJLog, $statut_trt);
@@ -234,7 +234,7 @@
       $type_log = "## Traitement automatique";
 
     // Date du traitement
-    $date_log = "## Date...................." . date("d/m/Y");
+    $date_log = "## Date................................." . date("d/m/Y");
 
     // Traitement global OK ou KO
     $control_ok = true;
@@ -249,9 +249,9 @@
     }
 
     if ($control_ok == true)
-      $etat_log = "## Etat traitements........OK";
+      $etat_log = "## Etat traitements.....................OK";
     else
-      $etat_log = "## Etat traitements........KO";
+      $etat_log = "## Etat traitements.....................KO";
 
     // Durée totale des traitements si non asynchrone (heure courante - 7 heures)
     if (!isset($_POST['weekly_cron']))
@@ -263,7 +263,7 @@
       $minutes    = intval(abs($total / 60));
       $total      = $total - ($minutes * 60);
       $secondes   = $total;
-      $duree_log  = "## Durée traitements......." . $heures . " heures, " . $minutes . " minutes et " . $secondes . " secondes";
+      $duree_log  = "## Durée traitements...................." . $heures . " heures, " . $minutes . " minutes et " . $secondes . " secondes";
     }
 
     // Ouverture / création fichier
@@ -292,7 +292,7 @@
       {
         fputs($myHLog, "\r\n");
         $nom_trt    = $trt['trt'];
-        $statut_trt = "## Status.................." . $trt['status'];
+        $statut_trt = "## Status..............................." . $trt['status'];
         fputs($myHLog, $nom_trt);
         fputs($myHLog, "\r\n");
         fputs($myHLog, $statut_trt);
