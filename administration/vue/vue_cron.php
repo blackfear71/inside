@@ -196,6 +196,21 @@
               ?>
             </div>
           </div>
+
+          <!-- Cas pas de logs -->
+          <?php
+            if (sizeof($files) <= 2)
+            {
+              echo '<div class="zone_no_logs">';
+                echo '<div class="titre_no_logs">';
+                  echo 'Pas encore de logs';
+                echo '</div>';
+                echo '<div class="contenu_no_logs">';
+                  echo 'Aucun log n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient éxecutées automatiquement ou bien lancez-les manuellement.<br />';
+                echo '</div>';
+              echo '</div>';
+            }
+          ?>
         </div>
 
         <div class="clear"></div>
