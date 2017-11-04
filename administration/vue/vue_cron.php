@@ -206,7 +206,7 @@
                   echo 'Pas encore de logs';
                 echo '</div>';
                 echo '<div class="contenu_no_logs">';
-                  echo 'Aucun log n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient éxecutées automatiquement ou bien lancez-les manuellement.<br />';
+                  echo 'Aucun log n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
                 echo '</div>';
               echo '</div>';
             }
