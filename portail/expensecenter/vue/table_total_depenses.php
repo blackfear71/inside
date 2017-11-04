@@ -7,7 +7,7 @@
       // Titres
       echo '<tr>';
         echo '<td class="td_init_depenses">Utilisateurs</td>';
-        echo '<td class="td_init_depenses">Bilan</td>';
+        echo '<td class="td_init_depenses" style="width: 100px;">Bilan</td>';
       echo '</tr>';
 
       $i = 0;
@@ -36,7 +36,7 @@
           echo '</td>';
 
           if ($bilan->getExpenses() <= -6)
-            echo '<td class="td_depenses" style="background-color: #ee4949">';
+            echo '<td class="td_depenses" style="background-color: #ee4949;">';
           elseif ($bilan->getExpenses() <= -3 AND $bilan->getExpenses() > -6)
             echo '<td class="td_depenses" style="background-color: #ff9147;">';
           elseif ($bilan->getExpenses() < -0.01 AND $bilan->getExpenses() > -3)

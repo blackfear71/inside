@@ -9,9 +9,11 @@
   include_once('fonctions_cron.php');
 
   /*** Traitements hebdomadaires (tous les lundi à 7h)***/
+  $weekly_trt = array();
 
   // Remise à plat des bilans des dépenses
-  reinitializeExpenses();
+  $bilans_trt = reinitializeExpenses();
+  array_push($weekly_trt, $bilans_trt);
 
   // Détermination + généreux et + radin
   // à développer (après la refonte des dépenses), à conditionner sur "lundi" ?
@@ -20,7 +22,7 @@
   // à développer (stocker dans un dossier), à conditionner sur "lundi" ?
 
   // Génération log
-  // à développer (stocker des fichiers .txt)
+  generateHLog($weekly_trt);
 
   // Redirection si asynchrone
   if (isset($_POST['weekly_cron']))

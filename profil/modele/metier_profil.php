@@ -300,8 +300,6 @@
   // RETOUR : Aucun
   function updatePreferences($user, $post)
   {
-    var_dump($post);
-
     $_SESSION['preferences_updated'] = false;
 
     global $bdd;

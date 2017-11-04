@@ -112,7 +112,7 @@
           $reponse->closeCursor();
 
           $icone  = "movie_house";
-          $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir <img src='../../includes/icons/smileys/1.png' alt='smiley_1' class='smiley' />";
+          $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_1' class='smiley' />";
           $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
           break;
 
@@ -196,7 +196,7 @@
           $reponse1->closeCursor();
 
           $icone  = "collector";
-          $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> <img src='../../includes/icons/smileys/2.png' alt='smiley_2' class='smiley' />";
+          $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/smileys/2.png' alt='smiley_2' class='smiley' />";
           $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=1";
           break;
 

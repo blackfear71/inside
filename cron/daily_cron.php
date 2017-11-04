@@ -9,15 +9,17 @@
   include_once('fonctions_cron.php');
 
   /*** Traitements journaliers (tous les jours à 7h)***/
+  $daily_trt = array();
 
   // Sortie cinéma du jour
-  isCinemaToday();
+  $films_trt = isCinemaToday();
+  array_push($daily_trt, $films_trt);
 
   // Mise à jour des succès
   // à développer (après la refonte des succès)
 
   // Génération log
-  // à développer (stocker des fichiers .txt)
+  generateJLog($daily_trt);
 
   // Redirection si asynchrone
   if (isset($_POST['daily_cron']))
