@@ -938,6 +938,8 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #e3e3e3;
+	word-wrap: break-word;
+	text-align: left;
 }
 
 .zone_no_logs
