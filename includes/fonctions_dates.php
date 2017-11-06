@@ -91,4 +91,30 @@ function isBlankDate($date){
     }
 }
 
+/* calcDuree
+  <=> calcule la durée en heures/minutes/secondes pour un traitement
+  Retourne le temps sous forme d'un tableau
+*/
+function calcDuree($hdeb, $hfin)
+{
+  // Calcul (en secondes)
+  $hfin_sec  = substr($hfin, 0, 2)*60*60 + substr($hfin, 2, 2)*60 + substr($hfin, 4, 2);
+  $hdeb_sec  = substr($hdeb, 0, 2)*60*60 + substr($hdeb, 2, 2)*60 + substr($hdeb, 4, 2);
+  $duree_sec = $hfin - $hdeb;
+
+  // Conversion
+  $total      = $duree_sec;
+  $heures     = intval(abs($total / 3600));
+  $total      = $total - ($heures * 3600);
+  $minutes    = intval(abs($total / 60));
+  $total      = $total - ($minutes * 60);
+  $secondes   = $total;
+
+  $duree_format = array('heures'   => $heures,
+                        'minutes'  => $minutes,
+                        'secondes' => $secondes
+                      );
+
+  return $duree_format;
+}
 ?>

@@ -6,10 +6,13 @@
   // Fonctions communes
   include_once('../includes/appel_bdd.php');
   include_once('../includes/fonctions_communes.php');
+  include_once('../includes/fonctions_dates.php');
   include_once('fonctions_cron.php');
 
   /*** Traitements hebdomadaires (tous les lundi à 7h)***/
-  $weekly_trt = array();
+  $type_log    = 'h';
+  $heure_debut = date('His');
+  $weekly_trt  = array();
 
   // Remise à plat des bilans des dépenses
   $bilans_trt = reinitializeExpenses();
@@ -22,7 +25,8 @@
   // à développer (stocker dans un dossier), à conditionner sur "lundi" ?
 
   // Génération log
-  generateHLog($weekly_trt);
+  $heure_fin = date('His');
+  generateLog($type_log, $weekly_trt, $heure_debut, $heure_fin);
 
   // Redirection si asynchrone
   if (isset($_POST['weekly_cron']))

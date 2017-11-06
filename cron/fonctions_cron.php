@@ -122,10 +122,10 @@
     return $log;
   }
 
-  // FONCTION : Création fichier log journalier
+  // FONCTION : Création fichier log
   // RETOUR : Aucun
-  // Fréquence : tous les jours à 7h
-  function generateJLog($daily_trt)
+  // Fréquence : tous les jours à 7h pour les types 'j' et tous les lundis à 7h pour les types 'h'
+  function generateLog($type_log, $etat_trt, $hdeb, $hfin)
   {
     // On contrôle la présence du dossier, sinon on le créé
     $dossier = "logs";
@@ -134,13 +134,16 @@
       mkdir($dossier);
 
     // Titre
-    $titre_log = "/******************************/\r\n/* Traitement CRON journalier */\r\n/******************************/\r\n";
+    if ($type_log == 'j')
+      $titre_log = "/******************************/\r\n/* Traitement CRON journalier */\r\n/******************************/\r\n";
+    elseif ($type_log == 'h')
+      $titre_log = "/********************************/\r\n/* Traitement CRON hebdomadaire */\r\n/********************************/\r\n";
 
     // Type de traitement
-    if (isset($_POST['daily_cron']))
-      $type_log = "## Traitement asynchrone";
+    if (isset($_POST['daily_cron']) OR isset($_POST['weekly_cron']))
+      $exe_log = "## Traitement asynchrone";
     else
-      $type_log = "## Traitement automatique";
+      $exe_log = "## Traitement automatique";
 
     // Date du traitement
     $date_log = "## Date................................." . date("d/m/Y");
@@ -148,7 +151,7 @@
     // Traitement global OK ou KO
     $control_ok = true;
 
-    foreach ($daily_trt as $trt)
+    foreach ($etat_trt as $trt)
     {
       if ($trt['status'] == "KO")
       {
@@ -162,145 +165,42 @@
     else
       $etat_log = "## Etat traitements.....................KO";
 
-    // Durée totale des traitements si non asynchrone (heure courante - 7 heures)
-    if (!isset($_POST['daily_cron']))
-    {
-      $calc_duree = (date("H")*60*60 + date("i")*60 + date("s")) - 25200;
-      $total      = $calc_duree;
-      $heures     = intval(abs($total / 3600));
-      $total      = $total - ($heures * 3600);
-      $minutes    = intval(abs($total / 60));
-      $total      = $total - ($minutes * 60);
-      $secondes   = $total;
-      $duree_log  = "## Durée traitements...................." . $heures . " heures, " . $minutes . " minutes et " . $secondes . " secondes";
-    }
+    // Durée totale des traitements
+    $duree_tot = calcDuree($hdeb, $hfin);
+    $duree_log = "## Durée traitements...................." . $duree_tot['heures'] . " heures, " . $duree_tot['minutes'] . " minutes et " . $duree_tot['secondes'] . " secondes";
 
     // Ouverture / création fichier
-    $myJLog = fopen('logs/jlog_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
+    $myLog = fopen('logs/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
 
     // On repositionne le curseur du fichier au début
-    fseek($myJLog, 0);
+    fseek($myLog, 0);
 
     // On écrit dans le fichier
-    fputs($myJLog, $titre_log);
-    fputs($myJLog, "\r\n");
-    fputs($myJLog, $type_log);
-    fputs($myJLog, "\r\n");
-    fputs($myJLog, $date_log);
-    fputs($myJLog, "\r\n");
-    fputs($myJLog, $etat_log);
-    fputs($myJLog, "\r\n");
-    if (!isset($_POST['daily_cron']))
+    fputs($myLog, $titre_log);
+    fputs($myLog, "\r\n");
+    fputs($myLog, $exe_log);
+    fputs($myLog, "\r\n");
+    fputs($myLog, $date_log);
+    fputs($myLog, "\r\n");
+    fputs($myLog, $etat_log);
+    fputs($myLog, "\r\n");
+    fputs($myLog, $duree_log);
+    fputs($myLog, "\r\n");
+    if (!empty($etat_trt))
     {
-      fputs($myJLog, $duree_log);
-      fputs($myJLog, "\r\n");
-    }
-    if (!empty($daily_trt))
-    {
-      foreach ($daily_trt as $trt)
+      foreach ($etat_trt as $trt)
       {
-        fputs($myJLog, "\r\n");
+        fputs($myLog, "\r\n");
         $nom_trt    = $trt['trt'];
         $statut_trt = "## Status..............................." . $trt['status'];
-        fputs($myJLog, $nom_trt);
-        fputs($myJLog, "\r\n");
-        fputs($myJLog, $statut_trt);
-        fputs($myJLog, "\r\n");
+        fputs($myLog, $nom_trt);
+        fputs($myLog, "\r\n");
+        fputs($myLog, $statut_trt);
+        fputs($myLog, "\r\n");
       }
     }
 
     // Fermeture fichier
-    fclose($myJLog);
-  }
-
-  // FONCTION : Création fichier log hebdomadaire
-  // RETOUR : Aucun
-  // Fréquence : tous les lundis à 7h
-  function generateHLog($weekly_trt)
-  {
-    // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "logs";
-
-    if (!is_dir($dossier))
-      mkdir($dossier);
-
-    // Titre
-    $titre_log = "/********************************/\r\n/* Traitement CRON hebdomadaire */\r\n/********************************/\r\n";
-
-    // Type de traitement
-    if (isset($_POST['weekly_cron']))
-      $type_log = "## Traitement asynchrone";
-    else
-      $type_log = "## Traitement automatique";
-
-    // Date du traitement
-    $date_log = "## Date................................." . date("d/m/Y");
-
-    // Traitement global OK ou KO
-    $control_ok = true;
-
-    foreach ($weekly_trt as $trt)
-    {
-      if ($trt['status'] == "KO")
-      {
-        $control_ok = false;
-        break;
-      }
-    }
-
-    if ($control_ok == true)
-      $etat_log = "## Etat traitements.....................OK";
-    else
-      $etat_log = "## Etat traitements.....................KO";
-
-    // Durée totale des traitements si non asynchrone (heure courante - 7 heures)
-    if (!isset($_POST['weekly_cron']))
-    {
-      $calc_duree = (date("H")*60*60 + date("i")*60 + date("s")) - 25200;
-      $total      = $calc_duree;
-      $heures     = intval(abs($total / 3600));
-      $total      = $total - ($heures * 3600);
-      $minutes    = intval(abs($total / 60));
-      $total      = $total - ($minutes * 60);
-      $secondes   = $total;
-      $duree_log  = "## Durée traitements...................." . $heures . " heures, " . $minutes . " minutes et " . $secondes . " secondes";
-    }
-
-    // Ouverture / création fichier
-    $myHLog = fopen('logs/hlog_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
-
-    // On repositionne le curseur du fichier au début
-    fseek($myHLog, 0);
-
-    // On écrit dans le fichier
-    fputs($myHLog, $titre_log);
-    fputs($myHLog, "\r\n");
-    fputs($myHLog, $type_log);
-    fputs($myHLog, "\r\n");
-    fputs($myHLog, $date_log);
-    fputs($myHLog, "\r\n");
-    fputs($myHLog, $etat_log);
-    fputs($myHLog, "\r\n");
-    if (!isset($_POST['weekly_cron']))
-    {
-      fputs($myHLog, $duree_log);
-      fputs($myHLog, "\r\n");
-    }
-    if (!empty($weekly_trt))
-    {
-      foreach ($weekly_trt as $trt)
-      {
-        fputs($myHLog, "\r\n");
-        $nom_trt    = $trt['trt'];
-        $statut_trt = "## Status..............................." . $trt['status'];
-        fputs($myHLog, $nom_trt);
-        fputs($myHLog, "\r\n");
-        fputs($myHLog, $statut_trt);
-        fputs($myHLog, "\r\n");
-      }
-    }
-
-    // Fermeture fichier
-    fclose($myHLog);
+    fclose($myLog);
   }
 ?>
