@@ -243,25 +243,47 @@
 
         case "idee":
           // Recherche idée
-          $reponse1 = $bdd->query('SELECT id, subject, author FROM ideas WHERE id = "' . $notification->getContent() . '"');
+          $reponse1 = $bdd->query('SELECT id, subject, author, status FROM ideas WHERE id = "' . $notification->getContent() . '"');
           $donnees1 = $reponse1->fetch();
 
-          $sujet = $donnees1['subject'];
+            $sujet = $donnees1['subject'];
+            switch ($donnees1['status'])
+            {
+              // Ouverte
+              case "O":
+              // Prise en charge
+              case "C":
+              // En progrès
+              case "P":
+                $view = 'inprogress';
+                break;
 
-          // Recherche pseudo
-          $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
-          $donnees2 = $reponse2->fetch();
-          if ($reponse2->rowCount() > 0)
-            $auteur = $donnees2['pseudo'];
-          else
-            $auteur = '<i>un ancien utilisateur</i>';
-          $reponse2->closeCursor();
+              // Terminée
+              case "D":
+              // Rejetée
+              case "R":
+                $view = 'done';
+                break;
+
+              default:
+                $view = 'all';
+                break;
+            }
+
+            // Recherche pseudo
+            $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
+            $donnees2 = $reponse2->fetch();
+            if ($reponse2->rowCount() > 0)
+              $auteur = $donnees2['pseudo'];
+            else
+              $auteur = '<i>un ancien utilisateur</i>';
+            $reponse2->closeCursor();
 
           $reponse1->closeCursor();
 
           $icone  = "ideas";
           $phrase = "Une nouvelle idée <strong>" . $sujet . "</strong> vient tout juste d'être publiée par <strong>" . $auteur . "</strong> !";
-          $lien   = "/inside/portail/ideas/ideas.php?view=inprogress&action=goConsulter";
+          $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&action=goConsulter";
           break;
 
         case "succes":
