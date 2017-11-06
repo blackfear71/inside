@@ -84,6 +84,8 @@
           echo '<td class="table_dates">';
             if (!empty($film->getDoodle()))
               echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="icons/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
+            else
+              echo '<a href="https://doodle.com/fr/" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
           echo '</td>';
 
           // Date de sortie proposée

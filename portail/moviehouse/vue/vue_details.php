@@ -100,6 +100,12 @@
                           echo '<img src="icons/doodle.png" alt="doodle" title="Doodle" class="icon_details" />';
                         echo '</a>';
                       }
+                      else
+                      {
+                        echo '<a href="https://doodle.com/fr/" target="_blank" class="link_details">';
+                          echo '<img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="icon_details" />';
+                        echo '</a>';
+                      }
 
                       // Fiche du film
                       if (!empty($detailsFilm->getLink()))
