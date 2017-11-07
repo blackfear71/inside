@@ -102,7 +102,7 @@
                       }
                       else
                       {
-                        echo '<a href="https://doodle.com/fr/" target="_blank" class="link_details">';
+                        echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $detailsFilm->getId() . '&action=goModifier\';" target="_blank" class="link_details">';
                           echo '<img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="icon_details" />';
                         echo '</a>';
                       }

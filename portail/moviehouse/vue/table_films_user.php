@@ -85,7 +85,7 @@
             if (!empty($film->getDoodle()))
               echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="icons/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
             else
-              echo '<a href="https://doodle.com/fr/" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
+              echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
           echo '</td>';
 
           // Date de sortie proposée

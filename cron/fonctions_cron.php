@@ -146,7 +146,7 @@
       $exe_log = "## Traitement automatique";
 
     // Date du traitement
-    $date_log = "## Date................................." . date("d/m/Y");
+    $date_log = "## Date......................." . date("d/m/Y");
 
     // Traitement global OK ou KO
     $control_ok = true;
@@ -161,13 +161,13 @@
     }
 
     if ($control_ok == true)
-      $etat_log = "## Etat traitements.....................OK";
+      $etat_log = "## Etat traitements...........OK";
     else
-      $etat_log = "## Etat traitements.....................KO";
+      $etat_log = "## Etat traitements...........KO";
 
     // Durée totale des traitements
     $duree_tot = calcDuree($hdeb, $hfin);
-    $duree_log = "## Durée traitements...................." . $duree_tot['heures'] . " heures, " . $duree_tot['minutes'] . " minutes et " . $duree_tot['secondes'] . " secondes";
+    $duree_log = "## Durée traitements.........." . $duree_tot['heures'] . " heures, " . $duree_tot['minutes'] . " minutes et " . $duree_tot['secondes'] . " secondes";
 
     // Ouverture / création fichier
     $myLog = fopen('logs/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
@@ -192,7 +192,7 @@
       {
         fputs($myLog, "\r\n");
         $nom_trt    = $trt['trt'];
-        $statut_trt = "## Status..............................." . $trt['status'];
+        $statut_trt = "## Status....................." . $trt['status'];
         fputs($myLog, $nom_trt);
         fputs($myLog, "\r\n");
         fputs($myLog, $statut_trt);

@@ -113,7 +113,7 @@
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
                       echo '<tr>';
-                        if (substr($lines[6], 40, 2) == "OK")
+                        if (substr($lines[6], 30, 2) == "OK")
                           echo '<td class="log_ok">OK</td>';
                         else
                           echo '<td class="log_ko">KO</td>';
@@ -165,7 +165,7 @@
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
                       echo '<tr>';
-                        if (substr($lines[6], 40, 2) == "OK")
+                        if (substr($lines[6], 30, 2) == "OK")
                           echo '<td class="log_ok">OK</td>';
                         else
                           echo '<td class="log_ko">KO</td>';
