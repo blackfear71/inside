@@ -14,6 +14,7 @@
   if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
   {
     $_SESSION['speaker']        = "";
+    $_SESSION['other_speaker']  = "";
     $_SESSION['date_collector'] = "";
     $_SESSION['collector']      = "";
   }
@@ -86,6 +87,7 @@
           $collector->setName_a(htmlspecialchars($collector->getName_a()));
           $collector->setSpeaker(htmlspecialchars($collector->getSpeaker()));
           $collector->setName_s(htmlspecialchars($collector->getName_s()));
+          $collector->setType_s(htmlspecialchars($collector->getType_s()));
           $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
         }

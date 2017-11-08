@@ -235,14 +235,14 @@
 		// Affichage en fonction du nombre de notifications
 		if ($nb_notifs > 0)
 		{
-			echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_profile">';
+			echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_profile" style="background-color: #2980b9;">';
 				echo '<img src="/inside/includes/icons/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
 				if ($nb_notifs <= 9)
 					echo '<div class="number_notifications">' . $nb_notifs . '</div>';
 				else
 					echo '<div class="number_notifications">9+</div>';
 			echo '</a>';
-			echo '<div class="hover_aside">Notifications</div>';
+			echo '<div class="hover_aside" style="background-color: #2980b9;">Notifications</div>';
 		}
 		else
 		{

@@ -77,6 +77,7 @@
     {
       $myCollector = Collector::withData($donnees);
 
+      // Recherche pseudo
       foreach ($listUsers as $user)
       {
         if ($myCollector->getAuthor() == $user->getIdentifiant())
@@ -91,13 +92,22 @@
         }
       }
 
-      if (empty($myCollector->getName_a()))
+      // Auteur "autre"
+      if (!empty($myCollector->getSpeaker()) AND $myCollector->getType_s() == "other")
+      {
+        $myCollector->setName_s($myCollector->getSpeaker());
+        $myCollector->setSpeaker("other");
+      }
+
+      // Si pas de pseudo "auteur"
+      if (empty($myCollector->getName_a()) AND $myCollector->getType_s() == "user")
       {
         $myCollector->setAuthor("");
         $myCollector->setName_a("un ancien utilisateur");
       }
 
-      if (empty($myCollector->getName_s()))
+      // Si pas de pseudo "speaker"
+      if (empty($myCollector->getName_s())AND $myCollector->getType_s() == "user")
       {
         $myCollector->setSpeaker("");
         $myCollector->setName_s("un ancien utilisateur");
@@ -116,6 +126,7 @@
   {
     // Sauvegarde en session en cas d'erreur
     $_SESSION['speaker']        = $post['speaker'];
+    $_SESSION['other_speaker']  = $post['other_speaker'];
     $_SESSION['date_collector'] = $post['date_collector'];
     $_SESSION['collector']      = $post['collector'];
 
@@ -129,22 +140,38 @@
     {
       global $bdd;
 
-      $collector = array('author'         => $_SESSION['identifiant'],
-                         'speaker'        => $post['speaker'],
-                         'date_collector' => formatDateForInsert($date_a_verifier),
-                         'collector'      => $post['collector'],
-                         'date'           => date("Ymd")
-                        );
+      if ($post['speaker'] == "other")
+      {
+        $collector = array('author'         => $_SESSION['identifiant'],
+                           'speaker'        => $post['other_speaker'],
+                           'type_speaker'   => $post['speaker'],
+                           'date_collector' => formatDateForInsert($date_a_verifier),
+                           'collector'      => $post['collector'],
+                           'date'           => date("Ymd")
+                          );
+      }
+      else
+      {
+        $collector = array('author'         => $_SESSION['identifiant'],
+                           'speaker'        => $post['speaker'],
+                           'type_speaker'   => "user",
+                           'date_collector' => formatDateForInsert($date_a_verifier),
+                           'collector'      => $post['collector'],
+                           'date'           => date("Ymd")
+                          );
+      }
 
 			// Stockage de l'enregistrement en table
       $req = $bdd->prepare('INSERT INTO collector(author,
 																									speaker,
+                                                  type_speaker,
 																									date_collector,
 																									collector,
                                                   date
                                                  )
 																			     VALUES(:author,
 																									:speaker,
+                                                  :type_speaker,
 																								  :date_collector,
 																								  :collector,
                                                   :date
@@ -181,6 +208,8 @@
   // RETOUR : Aucun
   function modifyCollector($post, $id_col)
   {
+    var_dump($post);
+
     $date_a_verifier = $post['date_collector'];
 
     // On décompose la date à contrôler
@@ -191,23 +220,37 @@
     {
       global $bdd;
 
-      // On récupère éventuellement l'identifiant si l'utilisateur est désinscrit
-      if (!isset($post['speaker']))
+      if ($post['speaker'] == "other")
       {
-        $reponse = $bdd->query('SELECT id, speaker FROM collector WHERE id = ' . $id_col);
-        $donnees = $reponse->fetch();
-
-        $speaker = $donnees['speaker'];
-
-        $reponse->closeCursor();
+        $speaker      = $post['other_speaker'];
+        $type_speaker = "other";
       }
       else
-        $speaker = $post['speaker'];
+      {
+        // On récupère éventuellement l'identifiant si l'utilisateur est désinscrit
+        if (!isset($post['speaker']))
+        {
+          $reponse = $bdd->query('SELECT id, speaker FROM collector WHERE id = ' . $id_col);
+          $donnees = $reponse->fetch();
+
+          $speaker = $donnees['speaker'];
+
+          $reponse->closeCursor();
+        }
+        else
+          $speaker = $post['speaker'];
+
+        // Type speaker
+        $type_speaker = "user";
+      }
+
+      var_dump($speaker);
 
       // Modification de l'enregistrement en base
-      $req = $bdd->prepare('UPDATE collector SET speaker = :speaker, date_collector = :date_collector, collector = :collector WHERE id = ' . $id_col);
+      $req = $bdd->prepare('UPDATE collector SET speaker = :speaker, type_speaker = :type_speaker, date_collector = :date_collector, collector = :collector WHERE id = ' . $id_col);
       $req->execute(array(
         'speaker'        => $speaker,
+        'type_speaker'   => $type_speaker,
         'date_collector' => formatDateForInsert($post['date_collector']),
         'collector'      => $post['collector']
       ));

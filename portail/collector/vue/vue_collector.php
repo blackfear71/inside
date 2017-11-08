@@ -53,17 +53,33 @@
           // Saisie phrase culte
           echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
             // Saisie speaker
-            echo '<select name="speaker" class="saisie_speaker" required>';
-              echo '<option value="" hidden>Choisissez...</option>';
+            if (!empty($_SESSION['other_speaker']))
+              echo '<select name="speaker" id="speaker" onchange="afficherOther(\'speaker\', \'other_speaker\');" class="saisie_speaker" style="width: 17.4%;" required>';
+            else
+              echo '<select name="speaker" id="speaker" onchange="afficherOther(\'speaker\', \'other_speaker\');" class="saisie_speaker" required>';
 
-              foreach ($listeUsers as $user)
-              {
-                if ($user->getIdentifiant() == $_SESSION['speaker'])
-                  echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                echo '<option value="" hidden>Choisissez...</option>';
+
+                foreach ($listeUsers as $user)
+                {
+                  if ($user->getIdentifiant() == $_SESSION['speaker'])
+                    echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                  else
+                    echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                }
+
+                if (!empty($_SESSION['other_speaker']))
+                  echo '<option value="other" selected>Autre</option>';
                 else
-                  echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-              }
+                  echo '<option value="other">Autre</option>';
+
             echo '</select>';
+
+            // Saisie "Autre"
+            if (!empty($_SESSION['other_speaker']))
+              echo '<input type="text" name="other_speaker" value="' . $_SESSION['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_speaker" class="saisie_other_collector" />';
+            else
+              echo '<input type="text" name="other_speaker" value="' . $_SESSION['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_speaker" class="saisie_other_collector" style="display: none;" />';
 
             // Saisie date
             echo '<input type="text" name="date_collector" value="' . $_SESSION['date_collector'] . '" placeholder="Date" maxlength="10" id="datepickerSaisie" class="saisie_date_collector" required />';

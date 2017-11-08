@@ -185,13 +185,19 @@
               $author = '<i>un ancien utilisateur</i>';
             $reponse2->closeCursor();
 
-            $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
-            $donnees3 = $reponse3->fetch();
-            if ($reponse3->rowCount() > 0)
-              $speaker = $donnees3['pseudo'];
+            // Si speaker autre que "Autre"
+            if ($donnees1['type_speaker'] != "other")
+            {
+              $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
+              $donnees3 = $reponse3->fetch();
+              if ($reponse3->rowCount() > 0)
+                $speaker = $donnees3['pseudo'];
+              else
+                $speaker = '<i>un ancien utilisateur</i>';
+              $reponse3->closeCursor();
+            }
             else
-              $speaker = '<i>un ancien utilisateur</i>';
-            $reponse3->closeCursor();
+              $speaker = $donnees1['speaker'];
 
           $reponse1->closeCursor();
 

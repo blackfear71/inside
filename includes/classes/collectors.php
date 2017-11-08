@@ -7,6 +7,7 @@
     private $speaker;
     private $name_s;
     private $avatar_s;
+    private $type_s;
     private $date_collector;
     private $collector;
 
@@ -19,6 +20,7 @@
       $this->speaker        = '';
       $this->name_s         = '';
       $this->avatar_s       = '';
+      $this->type_s         = '';
       $this->date_collector = '';
       $this->collector      = '';
     }
@@ -43,6 +45,9 @@
 
       if (isset($data['speaker']))
         $this->speaker        = $data['speaker'];
+
+      if (isset($data['type_speaker']))
+        $this->type_s         = $data['type_speaker'];
 
       if (isset($data['date_collector']))
         $this->date_collector = $data['date_collector'];
@@ -116,6 +121,17 @@
     public function getAvatar_s()
     {
       return $this->avatar_s;
+    }
+
+    // Type personne
+    public function setType_s($type_s)
+    {
+      $this->type_s = $type_s;
+    }
+
+    public function getType_s()
+    {
+      return $this->type_s;
     }
 
     // Date Collector

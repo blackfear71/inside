@@ -16,6 +16,44 @@ function afficherMasquer(id)
     document.getElementById(id).style.display = "none";
 }
 
+// Affiche ou masque la zone de saisie "Autre" (insertion)
+function afficherOther(select, id)
+{
+  if (document.getElementById(select).value == "other")
+  {
+    if (document.getElementById(id).style.display == "none")
+    {
+      document.getElementById(id).style.display = "inline-block";
+      document.getElementById(id).required = true;
+      document.getElementById(select).style.width = "17.4%";
+    }
+  }
+  else
+  {
+    document.getElementById(id).style.display = "none";
+    document.getElementById(id).required = false;
+    document.getElementById(select).style.width = "49.5%";
+  }
+}
+
+// Affiche ou masque la zone de saisie "Autre" (modification)
+function afficherModifierOther(select, id)
+{
+  if (document.getElementById(select).value == "other")
+  {
+    if (document.getElementById(id).style.display == "none")
+    {
+      document.getElementById(id).style.display = "block";
+      document.getElementById(id).required = true;
+    }
+  }
+  else
+  {
+    document.getElementById(id).style.display = "none";
+    document.getElementById(id).required = false;
+  }
+}
+
 // Combiné avec afficherMasquer(), cela permet de fermer le formulaire en cliquant n'importe où sur le body
 $(function()
 {

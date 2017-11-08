@@ -159,7 +159,7 @@
                 // Modification speaker
                 if (!empty($collector->getSpeaker()))
                 {
-                  echo '<select name="speaker" class="modify_speaker" required>';
+                  echo '<select name="speaker" id="speaker[' . $collector->getId() . ']" onchange="afficherModifierOther(\'speaker[' . $collector->getId() . ']\', \'other_speaker[' . $collector->getId() . ']\');" class="modify_speaker" required>';
                     echo '<option value="" hidden>Choisissez...</option>';
 
                     foreach ($listeUsers as $user)
@@ -169,6 +169,11 @@
                       else
                         echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
                     }
+
+                    if ($collector->getType_s() == "other")
+                      echo '<option value="other" selected>Autre</option>';
+                    else
+                      echo '<option value="other">Autre</option>';
                   echo '</select>';
                 }
                 else
@@ -177,6 +182,12 @@
                     echo $collector->getName_s();
                   echo '</div>';
                 }
+
+                // Modification "Autre"
+                if ($collector->getType_s() == "other")
+                  echo '<input type="text" name="other_speaker" value="' . $collector->getName_s() . '" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" />';
+                else
+                  echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" style="display: none;" />';
 
                 // Modification date
                 echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
@@ -348,7 +359,7 @@
                 // Modification speaker
                 if (!empty($collector->getSpeaker()))
                 {
-                  echo '<select name="speaker" class="modify_speaker" required>';
+                  echo '<select name="speaker" id="speaker[' . $collector->getId() . ']" onchange="afficherModifierOther(\'speaker[' . $collector->getId() . ']\', \'other_speaker[' . $collector->getId() . ']\');" class="modify_speaker" required>';
                     echo '<option value="" hidden>Choisissez...</option>';
 
                     foreach ($listeUsers as $user)
@@ -358,6 +369,11 @@
                       else
                         echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
                     }
+
+                    if ($collector->getType_s() == "other")
+                      echo '<option value="other" selected>Autre</option>';
+                    else
+                      echo '<option value="other">Autre</option>';
                   echo '</select>';
                 }
                 else
@@ -366,6 +382,12 @@
                     echo $collector->getName_s();
                   echo '</div>';
                 }
+
+                // Modification "Autre"
+                if ($collector->getType_s() == "other")
+                  echo '<input type="text" name="other_speaker" value="' . $collector->getName_s() . '" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" />';
+                else
+                  echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" style="display: none;" />';
 
                 // Modification date
                 echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
