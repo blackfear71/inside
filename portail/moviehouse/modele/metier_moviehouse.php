@@ -1315,7 +1315,7 @@
         // Génération notification si Doodle renseigné et notification inexistante
         $notification_doodle_exist = controlNotification('doodle', $id_film);
 
-        if ($notification_doodle_exist != true)
+        if ($notification_doodle_exist != true AND !empty($doodle))
           insertNotification($user, 'doodle', $id_film);
 
         // Suppression notification si Doodle supprimé

@@ -8,60 +8,92 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 15px;
   text-align: center;
+}
+
+.table_saisie_collector
+{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 15px;
+}
+
+.td_saisie_collector_user
+{
+  width: 50%;
+  text-align: left;
 }
 
 .saisie_speaker
 {
-  width: 49.5%;
-  height: 44px;
+  width: 98%;
+  height: 45px;
   border-radius: 5px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
-  padding-left: 0.6%;
+  padding-left: 1%;
+  padding-right: 1%;
   background-color: transparent;
+}
+
+.td_saisie_collector_name
+{
+  width: 30%;
+  text-align: left;
 }
 
 .saisie_other_collector
 {
-  width: 29%;
-  border: solid 1px #a3a3a3;
-  padding-left: 1%;
-  padding-right: 1%;
-  line-height: 40px;
-  min-height: 40px;
+  width: 90%;
+  height: 41px;
+  line-height: 41px;
   border-radius: 5px;
-  margin-left: 1%;
+  border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  background-color: transparent;
+}
+
+.td_saisie_collector_date
+{
+  width: 30%;
+  text-align: left;
 }
 
 .saisie_date_collector
 {
-  width: 28%;
-  border: solid 1px #a3a3a3;
-  padding-left: 1%;
-  padding-right: 1%;
-  line-height: 40px;
-  min-height: 40px;
+  width: 90%;
+  height: 41px;
+  line-height: 41px;
   border-radius: 5px;
-  margin-left: 1%;
-  margin-right: 1%;
+  border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  background-color: transparent;
+}
+
+.td_saisie_collector_add
+{
+  width: 20%;
+  text-align: center;
 }
 
 .saisie_bouton
 {
-	width: 18%;
-	line-height: 43px;
+	width: 100%;
+  height: 45px;
+	line-height: 45px;
+  border-radius: 5px;
 	border: solid 1px #e3e3e3;
-	border-radius: 5px;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
 	background-color: #e3e3e3;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 100%;
 	cursor: pointer;
 }
 
@@ -72,10 +104,31 @@
 	color: white;
 }
 
+.td_saisie_collector
+{
+  text-align: center;
+}
+
 .saisie_collector
 {
-  margin-top: 1%;
-  width: 97.5%;
+  width: 98%;
+  height: 70px;
+  padding: 1%;
+  font-family: robotolight, Verdana, sans-serif;
+  resize: vertical;
+  border-radius: 5px;
+  border: solid 1px #a3a3a3;
+}
+
+.td_saisie_collector_cont
+{
+  text-align: center;
+}
+
+.saisie_contexte
+{
+  width: 98%;
+  height: 30px;
   padding: 1%;
   font-family: robotolight, Verdana, sans-serif;
   resize: vertical;
@@ -89,7 +142,7 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 15px;
   border-collapse: collapse;
 }
 
@@ -131,6 +184,7 @@
   float: right;
   width: 30px;
   filter: drop-shadow(0px 0px 1px #7c7c7c);
+  margin-top: -3px;
 }
 
 .circle_avatar
@@ -159,6 +213,21 @@
   text-align: justify;
   font-family: robotothin, Verdana, sans-serif;
   font-size: 150%;
+}
+
+.text_context
+{
+  clear: both;
+  margin-top: 40px;
+  background-color: #a3a3a3;
+  margin-left: 80px;
+  font-family: robotothin, Verdana, sans-serif;
+  font-style: italic;
+  text-align: justify;
+  color: white;
+  padding: 10px;
+  box-shadow: -3px 3px 5px #7c7c7c;
+  border-radius: 2px;
 }
 
 .name_collector
@@ -298,11 +367,26 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 13px;
   font-family: robotolight, Verdana, sans-serif;
   border-radius: 5px;
   border: solid 1px #a3a3a3;
-  min-height: 150px;
+  min-height: 120px;
+}
+
+.modify_context_collector
+{
+  clear: both;
+  resize: vertical;
+  width: 98%;
+  padding: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  font-family: robotolight, Verdana, sans-serif;
+  border-radius: 5px;
+  border: solid 1px #a3a3a3;
+  min-height: 30px;
 }
 
 .modify_speaker
@@ -340,6 +424,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 0;
   padding: 2%;

@@ -17,22 +17,24 @@ function afficherMasquer(id)
 }
 
 // Affiche ou masque la zone de saisie "Autre" (insertion)
-function afficherOther(select, id)
+function afficherOther(td, select, id, required)
 {
   if (document.getElementById(select).value == "other")
   {
     if (document.getElementById(id).style.display == "none")
     {
-      document.getElementById(id).style.display = "inline-block";
-      document.getElementById(id).required = true;
-      document.getElementById(select).style.width = "17.4%";
+      document.getElementById(id).style.display = "table-cell";
+      document.getElementById(required).required = true;
+      document.getElementById(td).style.width = "20%";
+      document.getElementById(select).style.width = "95%";
     }
   }
   else
   {
     document.getElementById(id).style.display = "none";
-    document.getElementById(id).required = false;
-    document.getElementById(select).style.width = "49.5%";
+    document.getElementById(required).required = false;
+    document.getElementById(td).style.width = "50%";
+    document.getElementById(select).style.width = "98%";
   }
 }
 

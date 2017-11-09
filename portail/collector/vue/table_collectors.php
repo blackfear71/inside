@@ -17,6 +17,8 @@
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
+              if (!empty($collector->getContext()))
+                echo '<div class="text_context">' . nl2br($collector->getContext()) . '</div>';
             echo '</td>';
 
             echo '<td colspan="2" class="speaker" style="border-top-right-radius: 5px;">';
@@ -143,8 +145,9 @@
               // Modification citation (gauche)
               echo '<td rowspan="100%" class="collector" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">';
                 echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
-                echo '<textarea name="collector" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
+                echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
                 echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
+                echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
               echo '</td>';
 
               echo '<td colspan="2" class="speaker" style="border-top-right-radius: 5px;">';
@@ -288,6 +291,8 @@
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
+              if (!empty($collector->getContext()))
+                echo '<div class="text_context">' . nl2br($collector->getContext()) . '</div>';
             echo '</td>';
           echo '<tr>';
 
@@ -396,8 +401,9 @@
               // Modification citation (gauche)
               echo '<td rowspan="100%" class="collector" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">';
                 echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
-                echo '<textarea name="collector" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
+                echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
                 echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
+                echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
               echo '</td>';
             echo '</tr>';
 

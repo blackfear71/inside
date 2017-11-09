@@ -129,6 +129,7 @@
     $_SESSION['other_speaker']  = $post['other_speaker'];
     $_SESSION['date_collector'] = $post['date_collector'];
     $_SESSION['collector']      = $post['collector'];
+    $_SESSION['context']        = $post['context'];
 
     $date_a_verifier = $post['date_collector'];
 
@@ -142,39 +143,43 @@
 
       if ($post['speaker'] == "other")
       {
-        $collector = array('author'         => $_SESSION['identifiant'],
+        $collector = array('date_add'       => date("Ymd"),
+                           'author'         => $_SESSION['identifiant'],
                            'speaker'        => $post['other_speaker'],
                            'type_speaker'   => $post['speaker'],
                            'date_collector' => formatDateForInsert($date_a_verifier),
                            'collector'      => $post['collector'],
-                           'date'           => date("Ymd")
+                           'context'        => $post['context']
                           );
       }
       else
       {
-        $collector = array('author'         => $_SESSION['identifiant'],
+        $collector = array('date_add'       => date("Ymd"),
+                           'author'         => $_SESSION['identifiant'],
                            'speaker'        => $post['speaker'],
                            'type_speaker'   => "user",
                            'date_collector' => formatDateForInsert($date_a_verifier),
                            'collector'      => $post['collector'],
-                           'date'           => date("Ymd")
+                           'context'        => $post['context']
                           );
       }
 
 			// Stockage de l'enregistrement en table
-      $req = $bdd->prepare('INSERT INTO collector(author,
+      $req = $bdd->prepare('INSERT INTO collector(date_add,
+                                                  author,
 																									speaker,
                                                   type_speaker,
 																									date_collector,
 																									collector,
-                                                  date
+                                                  context
                                                  )
-																			     VALUES(:author,
+																			     VALUES(:date_add,
+                                                  :author,
 																									:speaker,
                                                   :type_speaker,
 																								  :date_collector,
 																								  :collector,
-                                                  :date
+                                                  :context
                                                  )');
       $req->execute($collector);
 		  $req->closeCursor();
@@ -208,8 +213,6 @@
   // RETOUR : Aucun
   function modifyCollector($post, $id_col)
   {
-    var_dump($post);
-
     $date_a_verifier = $post['date_collector'];
 
     // On décompose la date à contrôler
@@ -244,15 +247,19 @@
         $type_speaker = "user";
       }
 
-      var_dump($speaker);
-
       // Modification de l'enregistrement en base
-      $req = $bdd->prepare('UPDATE collector SET speaker = :speaker, type_speaker = :type_speaker, date_collector = :date_collector, collector = :collector WHERE id = ' . $id_col);
+      $req = $bdd->prepare('UPDATE collector SET speaker        = :speaker,
+                                                 type_speaker   = :type_speaker,
+                                                 date_collector = :date_collector,
+                                                 collector      = :collector,
+                                                 context        = :context
+                                           WHERE id = ' . $id_col);
       $req->execute(array(
         'speaker'        => $speaker,
         'type_speaker'   => $type_speaker,
         'date_collector' => formatDateForInsert($post['date_collector']),
-        'collector'      => $post['collector']
+        'collector'      => $post['collector'],
+        'context'        => $post['context']
       ));
       $req->closeCursor();
 

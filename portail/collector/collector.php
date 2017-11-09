@@ -17,6 +17,7 @@
     $_SESSION['other_speaker']  = "";
     $_SESSION['date_collector'] = "";
     $_SESSION['collector']      = "";
+    $_SESSION['context']        = "";
   }
 
   // Modèle de données : "module métier"
@@ -90,6 +91,8 @@
           $collector->setType_s(htmlspecialchars($collector->getType_s()));
           $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
+          $collector->setContext(htmlspecialchars($collector->getContext()));
+          $collector->setDate_add(htmlspecialchars($collector->getDate_add()));
         }
 
         foreach ($listeVotesUsers as $vote)

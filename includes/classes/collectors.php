@@ -10,11 +10,14 @@
     private $type_s;
     private $date_collector;
     private $collector;
+    private $context;
+    private $date;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
       $this->id             = 0;
+      $this->date_add       = '';
       $this->author         = '';
       $this->name_a         = '';
       $this->speaker        = '';
@@ -23,6 +26,7 @@
       $this->type_s         = '';
       $this->date_collector = '';
       $this->collector      = '';
+      $this->context        = '';
     }
 
     // Constructeur de l'objet Collector en fonction des données
@@ -40,6 +44,9 @@
       if (isset($data['id']))
         $this->id             = $data['id'];
 
+      if (isset($data['date_add']))
+        $this->date_add       = $data['date_add'];
+
       if (isset($data['author']))
         $this->author         = $data['author'];
 
@@ -54,6 +61,9 @@
 
       if (isset($data['collector']))
         $this->collector      = $data['collector'];
+
+      if (isset($data['context']))
+        $this->context        = $data['context'];
     }
 
     // getters et setters pour l'objet Bugs
@@ -66,6 +76,17 @@
     public function getId()
     {
       return $this->id;
+    }
+
+    // Date ajout
+    public function setDate_add($date_add)
+    {
+      $this->date_add = $date_add;
+    }
+
+    public function getDate_add()
+    {
+      return $this->date_add;
     }
 
     // Auteur
@@ -154,6 +175,17 @@
     public function getCollector()
     {
       return $this->collector;
+    }
+
+    // Contexte collector
+    public function setContext($context)
+    {
+      $this->context = $context;
+    }
+
+    public function getContext()
+    {
+      return $this->context;
     }
   }
 
