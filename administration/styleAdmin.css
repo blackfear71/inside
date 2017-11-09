@@ -391,74 +391,107 @@
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	line-height: 40px;
-	padding-left: 0.4%;
+	margin-top: -15px;
+	text-align: center;
 }
 
-.saisie_title
+.table_saisie_succes
 {
-	width: 26.7%;
-	margin-right: 1%;
-	border: solid 1px #a3a3a3;
-	padding-left: 1%;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 15px;
+}
+
+.td_saisie_succes_tit
+{
+	width: 30%;
 	padding-right: 1%;
+}
+
+.saisie_succes_tit
+{
+	width: 94%;
+	padding-left: 3%;
+	padding-right: 3%;
+	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
 }
 
-.saisie_reference
+.td_saisie_succes_ref
 {
-	width: 12%;
-	margin-right: 1%;
-	border: solid 1px #a3a3a3;
-	padding-left: 1%;
+	width: 15%;
 	padding-right: 1%;
+}
+
+.saisie_succes_ref
+{
+	width: 90%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
 }
 
-.saisie_niveau
+.td_saisie_succes_niv
 {
-	width: 12%;
-	margin-right: 1%;
-	border: solid 1px #a3a3a3;
-	padding-left: 1%;
+	width: 15%;
 	padding-right: 1%;
+}
+
+.saisie_succes_niv
+{
+	width: 90%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
 }
 
-.saisie_order
+.td_saisie_succes_ord
 {
-	width: 12%;
-	margin-right: 1%;
-	border: solid 1px #a3a3a3;
-	padding-left: 1%;
+	width: 15%;
 	padding-right: 1%;
+}
+
+.saisie_succes_ord
+{
+	width: 90%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
+}
+
+.td_saisie_succes_par
+{
+	width: 20%;
+	padding-right: 1%;
 }
 
 .zone_parcourir_succes
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: -5px;
-	margin-right: 1%;
-	height: 43px;
-	width: 20%;
+	width: 100%;
+	height: 44px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
@@ -475,32 +508,34 @@
 
 .bouton_parcourir_succes
 {
-	opacity: 0;
-	height: 43px;
+	display: block;
 	width: 100%;
 	margin-top: -40px;
-	display: block;
+	opacity: 0;
+	height: 44px;
 	cursor: pointer;
 }
 
 .label_parcourir
 {
-	line-height: 43px;
+	line-height: 44px;
 	height: 40px;
 	width: 100%;
 }
 
+.td_saisie_succes_env
+{
+	width: 5%;
+}
+
 .send_succes
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: -5px;
-	height: 43px;
-	width: 3%;
+	height: 44px;
+	width: 100%;
 	border: 0;
 	background-color: #e3e3e3;
 	background-image: url("/inside/portail/calendars/icons/send_red.png");
-	background-size: 90%;
+	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -513,32 +548,62 @@
 	background-image: url("/inside/portail/calendars/icons/send.png");
 }
 
+.td_saisie_succes_desc
+{
+	width: 75%;
+	padding-right: 1%;
+}
+
 .saisie_description
 {
-	margin-top: 15px;
-	width: 76.2%;
-	margin-right: 1%;
-	border: solid 1px #a3a3a3;
+	width: 98%;
 	padding-left: 1%;
 	padding-right: 1%;
+	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
+}
+
+.td_saisie_succes_cond
+{
+	width: 25%;
 }
 
 .saisie_limit
 {
-	width: 18%;
+	width: 94%;
+	padding-left: 3%;
+	padding-right: 3%;
 	border: solid 1px #a3a3a3;
-	padding-left: 1%;
-	padding-right: 1%;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
+}
+
+.td_saisie_succes_expl
+{
+	width: 100%;
+}
+
+.saisie_explaination
+{
+	width: 98.4%;
+	padding-left: 0.8%;
+	padding-right: 0.8%;
+	border: solid 1px #a3a3a3;
+	line-height: 40px;
+	min-height: 40px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	background-color: transparent;
 }
 
 /*** Affichage succès ***/
@@ -626,7 +691,19 @@
 .description_succes
 {
 	margin-top: 10px;
+	margin-bottom: 10px;
 	font-family: robotolight_italic, Verdana, sans-serif;
+}
+
+.explications_succes
+{
+	background-color: #c48500;
+	margin: -10px;
+	margin-top: 0;
+	padding: 10px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
 }
 
 .succes_liste_mod
@@ -647,12 +724,19 @@
 	float: left;
 	border-right: solid 1px white;
 	padding-right: 10px;
+	margin-bottom: 10px;
 }
 
 .succes_mod_right
 {
 	width: 140px;
 	float: right;
+	margin-bottom: 10px;
+}
+
+.succes_mod_bottom
+{
+	clear: both;
 }
 
 .form_suppression_succes
@@ -738,6 +822,20 @@
 	padding: 2%;
 	width: 96%;
 	height: 100px;
+	margin-top: 10px;
+	resize: none;
+}
+
+.textarea_modification_succes_2
+{
+	border: 0;
+	background-color: white;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	padding: 2%;
+	width: 96%;
+	height: 60px;
 	margin-top: 10px;
 	resize: none;
 }

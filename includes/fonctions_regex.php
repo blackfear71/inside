@@ -135,4 +135,14 @@
 
 		return $bilan_format;
 	}
+
+	/////////////////////////////////////
+	// Fonction formatage explications //
+	/////////////////////////////////////
+	function formatExplanation($expl, $lim)
+	{
+		$explanations = str_replace('%limit%', $lim, $expl);
+
+		return $explanations;
+	}
 ?>

@@ -22,66 +22,65 @@
 .td_saisie_collector_user
 {
   width: 50%;
-  text-align: left;
+  padding-right: 1%;
 }
 
 .saisie_speaker
 {
-  width: 98%;
+  width: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
   height: 45px;
   border-radius: 5px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
   background-color: transparent;
 }
 
 .td_saisie_collector_name
 {
   width: 30%;
-  text-align: left;
+  padding-right: 1%;
 }
 
 .saisie_other_collector
 {
-  width: 90%;
+  width: 94%;
+  padding-left: 3%;
+  padding-right: 3%;
   height: 41px;
   line-height: 41px;
   border-radius: 5px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
-  padding-left: 3%;
-  padding-right: 3%;
   background-color: transparent;
 }
 
 .td_saisie_collector_date
 {
   width: 30%;
-  text-align: left;
+  padding-right: 1%;
 }
 
 .saisie_date_collector
 {
-  width: 90%;
+  width: 94%;
+  padding-left: 3%;
+  padding-right: 3%;
   height: 41px;
   line-height: 41px;
   border-radius: 5px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
-  padding-left: 3%;
-  padding-right: 3%;
   background-color: transparent;
 }
 
 .td_saisie_collector_add
 {
   width: 20%;
-  text-align: center;
 }
 
 .saisie_bouton

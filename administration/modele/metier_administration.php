@@ -1167,6 +1167,7 @@
     $title         = $post['title'];
     $description   = $post['description'];
     $limit_success = $post['limit_success'];
+    $explanation   = $post['explanation'];
 
     // Sauvegarde en cas d'erreur
     $_SESSION['reference_success']   = $reference;
@@ -1175,6 +1176,7 @@
     $_SESSION['title_success']       = $title;
     $_SESSION['description_success'] = $description;
     $_SESSION['limit_success']       = $limit_success;
+    $_SESSION['explanation_success'] = $explanation;
 
     $control_ok = true;
     global $bdd;
@@ -1292,14 +1294,28 @@
    				// echo "Le fichier a bien été uploadé";
 
    				// On stocke le nouveau succès dans la base
-          $reponse = $bdd->prepare('INSERT INTO success(reference, level, order_success, title, description, limit_success) VALUES(:reference, :level, :order_success, :title, :description, :limit_success)');
+          $reponse = $bdd->prepare('INSERT INTO success(reference,
+                                                        level,
+                                                        order_success,
+                                                        title,
+                                                        description,
+                                                        limit_success,
+                                                        explanation)
+                                                 VALUES(:reference,
+                                                        :level,
+                                                        :order_success,
+                                                        :title,
+                                                        :description,
+                                                        :limit_success,
+                                                        :explanation)');
   				$reponse->execute(array(
   					'reference'     => $reference,
             'level'         => $level,
             'order_success' => $order_success,
             'title'         => $title,
             'description'   => $description,
-  					'limit_success' => $limit_success
+  					'limit_success' => $limit_success,
+            'explanation'   => $explanation
   					));
   				$reponse->closeCursor();
 
@@ -1350,6 +1366,7 @@
                         'title'         => $post['title'][$id],
                         'description'   => $post['description'][$id],
                         'limit_success' => $post['limit_success'][$id],
+                        'explanation'   => $post['explanation'][$id],
                        );
       array_push($update, $myUpdate);
     }
@@ -1404,13 +1421,20 @@
       // Mise à jour si pas d'erreur
       if ($control_ok == true)
       {
-        $req = $bdd->prepare('UPDATE success SET level = :level, order_success = :order_success, title = :title, description = :description, limit_success = :limit_success WHERE id = ' . $success['id']);
+        $req = $bdd->prepare('UPDATE success SET level         = :level,
+                                                 order_success = :order_success,
+                                                 title         = :title,
+                                                 description   = :description,
+                                                 limit_success = :limit_success,
+                                                 explanation   = :explanation
+                                           WHERE id = ' . $success['id']);
         $req->execute(array(
           'level'         => $success['level'],
           'order_success' => $success['order_success'],
           'title'         => $success['title'],
           'description'   => $success['description'],
-          'limit_success' => $success['limit_success']
+          'limit_success' => $success['limit_success'],
+          'explanation'   => $success['explanation']
         ));
         $req->closeCursor();
 
@@ -1439,6 +1463,7 @@
       $success->setTitle($session_succes['title'][$success->getId()]);
       $success->setDescription($session_succes['description'][$success->getId()]);
       $success->setLimit_success($session_succes['limit_success'][$success->getId()]);
+      $success->setExplanation($session_succes['explanation'][$success->getId()]);
 
       // Tri sur niveau puis ordonnancement
       $tri_level[] = $success->getLevel();

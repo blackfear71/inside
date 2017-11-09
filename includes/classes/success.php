@@ -8,6 +8,7 @@
     private $title;
     private $description;
     private $limit_success;
+    private $explanation;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -19,6 +20,7 @@
       $this->title         = '';
       $this->description   = '';
       $this->limit_success = '';
+      $this->explanation   = '';
     }
 
     // Constructeur de l'objet Success en fonction des données
@@ -53,6 +55,9 @@
 
       if (isset($data['limit_success']))
         $this->limit_success = $data['limit_success'];
+
+      if (isset($data['explanation']))
+        $this->explanation   = $data['explanation'];
     }
 
     // getters et setters pour l'objet Success
@@ -88,7 +93,7 @@
     {
       return $this->level;
     }
-    
+
     // Ordonnancement
     public function setOrder_success($order_success)
     {
@@ -136,6 +141,17 @@
     public function getLimit_success()
     {
       return $this->limit_success;
+    }
+
+    // Explications
+    public function setExplanation($explanation)
+    {
+      $this->explanation = $explanation;
+    }
+
+    public function getExplanation()
+    {
+      return $this->explanation;
     }
   }
 ?>

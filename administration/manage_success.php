@@ -22,6 +22,7 @@
     $_SESSION['title_success']       = "";
     $_SESSION['description_success'] = "";
     $_SESSION['limit_success']       = "";
+		$_SESSION['explanation_success'] = "";
   }
 
   if (!isset($_SESSION['erreur_succes']) OR $_SESSION['erreur_succes'] != true)
@@ -77,7 +78,8 @@
         $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
         $success->setTitle(htmlspecialchars($success->getTitle()));
         $success->setDescription(htmlspecialchars($success->getDescription()));
-        $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+        $success->setExplanation(htmlspecialchars($success->getExplanation()));
       }
       break;
 
@@ -89,7 +91,8 @@
         $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
         $success->setTitle(htmlspecialchars($success->getTitle()));
         $success->setDescription(htmlspecialchars($success->getDescription()));
-        $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+        $success->setExplanation(htmlspecialchars($success->getExplanation()));
       }
       break;
 

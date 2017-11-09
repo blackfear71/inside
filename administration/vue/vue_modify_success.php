@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styleAdmin.css" />
 
     <script type="text/javascript" src="/inside/script.js"></script>
-    
+
 		<title>Inside - Succès</title>
   </head>
 
@@ -41,7 +41,7 @@
 
 			<article class="article_portail">
         <div class="avertissement_succes">
-          Il est possible de modifier ici le niveau, l'ordonnancement, le titre, la description et la condition des succès. Bien contrôler l'ordonnancement par rapport au niveau pour éviter les doublons. Il n'est pas possible de modifier la référence ni l'image, il faut donc supprimer le succès via l'écran précédent.
+          Il est possible de modifier ici le niveau, l'ordonnancement, le titre, la description et la condition des succès. Bien contrôler l'ordonnancement par rapport au niveau pour éviter les doublons. Il n'est pas possible de modifier la référence ni l'image, il faut donc supprimer le succès via l'écran précédent. Pour les explications, insérer les caractères <i>%limit%</i> permet de les remplacer par la valeur de la conditon d'obtention du succès.
         </div>
 
         <?php
@@ -89,6 +89,12 @@
                   // Condition succès
                   echo '<div class="titre_succes">Condition :</div>';
                   echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                echo '</div>';
+
+                echo '<div class="succes_mod_bottom">';
+                  // Explications
+                  echo '<div class="titre_succes">Explications :</div>';
+                  echo '<textarea name="explanation[' . $success->getId() . ']" class="textarea_modification_succes_2">' . $success->getExplanation() . '</textarea>';
                 echo '</div>';
               echo '</div>';
             }

@@ -53,7 +53,7 @@
           // Saisie phrase culte
           echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
             echo '<table class="table_saisie_collector">';
-              echo '<tr class="tr_saisie_collector">';
+              echo '<tr>';
                 // Saisie speaker
                 if (!empty($_SESSION['other_speaker']))
                   echo '<td class="td_saisie_collector_user" id="td_other" style="width: 20%;">';
@@ -96,17 +96,17 @@
                 echo '</td>';
               echo '</tr>';
 
-              echo '<tr class="tr_saisie_collector">';
+              echo '<tr>';
                 // Saisie phrase
                 echo '<td colspan="100%" class="td_saisie_collector">';
                   echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['collector'] . '</textarea>';
                 echo '</td>';
               echo '</tr>';
 
-              echo '<tr class="tr_saisie_collector">';
+              echo '<tr>';
                 // Saisie contexte
                 echo '<td colspan="100%" class="td_saisie_collector_cont">';
-                  echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte" required>' . $_SESSION['context'] . '</textarea>';
+                  echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['context'] . '</textarea>';
                 echo '</td>';
               echo '</tr>';
             echo '</table>';

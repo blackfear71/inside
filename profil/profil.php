@@ -102,6 +102,7 @@
             $success->setTitle(htmlspecialchars($success->getTitle()));
             $success->setDescription(htmlspecialchars($success->getDescription()));
             $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
+            $success->setExplanation(htmlspecialchars($success->getExplanation()));
           }
 
           foreach ($successUser as $limit)

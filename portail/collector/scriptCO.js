@@ -26,7 +26,8 @@ function afficherOther(td, select, id, required)
       document.getElementById(id).style.display = "table-cell";
       document.getElementById(required).required = true;
       document.getElementById(td).style.width = "20%";
-      document.getElementById(select).style.width = "95%";
+      document.getElementById(select).style.paddingLeft = "2%";
+      document.getElementById(select).style.paddingRight = "2%";
     }
   }
   else
@@ -34,7 +35,8 @@ function afficherOther(td, select, id, required)
     document.getElementById(id).style.display = "none";
     document.getElementById(required).required = false;
     document.getElementById(td).style.width = "50%";
-    document.getElementById(select).style.width = "98%";
+    document.getElementById(select).style.paddingLeft = "1%";
+    document.getElementById(select).style.paddingRight = "1%";
   }
 }
 
