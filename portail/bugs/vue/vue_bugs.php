@@ -82,17 +82,31 @@
             echo '</p>';
 
             echo '<form method="post" action="bugs.php?view=' . $_GET['view'] . '&action=doSignaler" class="form_saisie_bug">';
-              echo '<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_titre_bug" required />';
+              echo '<table class="table_saisie_bug">';
+                echo '<tr>';
+                  echo '<td class="td_saisie_objet">';
+                    echo '<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_titre_bug" required />';
+                  echo '</td>';
 
-              echo '<select name="type_bug" class="saisie_type_bug" required>';
-                echo '<option value="" hidden>Type de demande</option>';
-                echo '<option value="B">Bug</option>';
-                echo '<option value="E">Evolution</option>';
-              echo '</select>';
+                  echo '<td class="td_saisie_type">';
+                    echo '<select name="type_bug" class="saisie_type_bug" required>';
+                      echo '<option value="" hidden>Type de demande</option>';
+                      echo '<option value="B">Bug</option>';
+                      echo '<option value="E">Evolution</option>';
+                    echo '</select>';
+                  echo '</td>';
 
-              echo '<input type="submit" name="report" value="Soumettre" class="submit_bug" />';
+                  echo '<td class="td_saisie_envoyer">';
+                    echo '<input type="submit" name="report" value="Soumettre" class="submit_bug" />';
+                  echo '</td>';
+                echo '</tr>';
 
-              echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>';
+                echo '<tr>';
+                  echo '<td colspan="100%" class="td_saisie_bug">';
+                    echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>';
+                  echo '</td>';
+                echo '</tr>';
+              echo '</table>';
             echo '</form>';
           }
         ?>

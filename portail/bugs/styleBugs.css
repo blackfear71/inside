@@ -19,41 +19,66 @@
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 30px;
+	margin-top: 15px;
 	text-align: center;
+}
+
+
+.table_saisie_bug
+{
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0 15px;
+}
+
+.td_saisie_objet
+{
+	width: 60%;
+	padding-right: 1%;
 }
 
 .saisie_titre_bug
 {
-	width: 49.5%;
+	width: 97%;
+	padding-left: 1.5%;
+	padding-right: 1.5%;
 	border: solid 1px #a3a3a3;
-	padding-left: 1%;
-	padding-right: 1%;
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	background-color: transparent;
+}
+
+.td_saisie_type
+{
+	width: 25%;
+	padding-right: 1%;
 }
 
 .saisie_type_bug
 {
-	width: 28%;
+	width: 97%;
+	padding-left: 1.5%;
+	padding-right: 1.5%;
 	height: 44px;
-	margin-left: 1%;
-	margin-right: 1%;
 	border-radius: 5px;
 	border: solid 1px #a3a3a3;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	padding-left: 0.6%;
 	background-color: transparent;
+}
+
+.td_saisie_envoyer
+{
+	width: 15%;
 }
 
 .submit_bug
 {
-	width: 18%;
-	line-height: 43px;
+	width: 100%;
+	line-height: 42px;
 	border: solid 1px #e3e3e3;
 	border-radius: 5px;
 	background-color: #e3e3e3;
@@ -69,16 +94,21 @@
 	color: white;
 }
 
+.td_saisie_bug
+{
+	width: 100%;
+}
+
 .saisie_contenu_bug
 {
-	margin-top: 1%;
-	width: 97.5%;
+	width: 98%;
 	padding: 1%;
 	font-family: robotolight, Verdana, sans-serif;
 	resize: vertical;
 	border-radius: 5px;
 	border: solid 1px #a3a3a3;
 	min-height: 400px;
+	background-color: transparent;
 }
 
 .trait_bugs

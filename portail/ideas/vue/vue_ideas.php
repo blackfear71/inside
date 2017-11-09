@@ -70,11 +70,22 @@
         <!-- Zone de saisie idée -->
 				<?php
 					echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer" class="form_saisie_idea">';
-						echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="100" class="saisie_titre_idee" required />';
+            echo '<table class="table_saisie_idee">';
+              echo '<tr>';
+                echo '<td class="td_saisie_titre">';
+                  echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="100" class="saisie_titre_idee" required />';
+                echo '</td>';
 
-						echo '<input type="submit" name="new_idea" value="Soumettre" class="submit_idea" />';
-
-            echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_idee"></textarea>';
+                echo '<td class="td_saisie_envoyer">';
+                  echo '<input type="submit" name="new_idea" value="Soumettre" class="submit_idea" />';
+                echo '</td>';
+              echo '</tr>';
+              echo '<tr>';
+                echo '<td colspan="100%" class="td_saisie_idee">';
+                  echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_idee"></textarea>';
+                echo '</td>';
+              echo '</tr>';
+            echo '</table>';
 					echo '</form>';
 				?>
 
