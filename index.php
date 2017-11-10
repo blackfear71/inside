@@ -30,6 +30,20 @@
 	OR   (isset($_SESSION['asked'])          AND $_SESSION['asked'] == true))
 		$_SESSION['identifiant_saisi_mdp'] = "";
 
+	// Top erreur pour affichage
+	if ((isset($_SESSION['too_short'])     AND $_SESSION['too_short']     == true)
+	OR  (isset($_SESSION['already_exist']) AND $_SESSION['already_exist'] == true)
+	OR  (isset($_SESSION['wrong_confirm']) AND $_SESSION['wrong_confirm'] == true))
+		$error_inscription = true;
+	else
+		$error_inscription = false;
+
+	if ((isset($_SESSION['already_asked']) AND $_SESSION['already_asked'] == true)
+	OR  (isset($_SESSION['wrong_id'])      AND $_SESSION['wrong_id']      == true))
+		$error_password = true;
+	else
+		$error_password = false;
+
   // Modèle de données : "module métier"
   include_once('connexion/modele/metier_index.php');
 
@@ -38,10 +52,6 @@
 	{
 		switch ($_GET['action'])
 		{
-			case "goChangerMdp":
-			case "goInscription":
-				break;
-
 			case "doConnecter":
 				$connected = connectUser($_POST);
 				break;
@@ -65,8 +75,6 @@
 	{
 	  switch ($_GET['action'])
 	  {
-			case "goChangerMdp":
-			case "goInscription":
 			case "doConnecter":
 			case "doDemanderInscription":
 			case "doDemanderMdp":
@@ -80,14 +88,6 @@
 	{
 	  switch ($_GET['action'])
 	  {
-			case "goChangerMdp":
-				include_once('connexion/vue/vue_mdp.php');
-				break;
-
-			case "goInscription":
-				include_once('connexion/vue/vue_inscription.php');
-				break;
-
 			case "doConnecter":
 				if ($connected == true AND $_SESSION['identifiant'] == "admin")
 					header('location: administration/administration.php?action=goConsulter');
@@ -98,11 +98,8 @@
 				break;
 
 			case "doDemanderInscription":
-				header('location: index.php?action=goInscription');
-				break;
-
 			case "doDemanderMdp":
-				header('location: index.php?action=goChangerMdp');
+				header('location: index.php');
 				break;
 
 	    default:

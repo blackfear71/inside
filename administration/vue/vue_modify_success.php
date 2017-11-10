@@ -41,7 +41,7 @@
 
 			<article class="article_portail">
         <div class="avertissement_succes">
-          Il est possible de modifier ici le niveau, l'ordonnancement, le titre, la description et la condition des succès. Bien contrôler l'ordonnancement par rapport au niveau pour éviter les doublons. Il n'est pas possible de modifier la référence ni l'image, il faut donc supprimer le succès via l'écran précédent. Pour les explications, insérer les caractères <i>%limit%</i> permet de les remplacer par la valeur de la conditon d'obtention du succès.
+          Il est possible de modifier ici le niveau, l'ordonnancement, le titre, la description, la condition et les explications des succès. Bien contrôler l'ordonnancement par rapport au niveau pour éviter les doublons. Il n'est pas possible de modifier la référence ni l'image, il faut donc supprimer le succès via l'écran précédent. Pour les explications, insérer les caractères <i>%limit%</i> permet de les remplacer par la valeur de la conditon d'obtention du succès.
         </div>
 
         <?php
