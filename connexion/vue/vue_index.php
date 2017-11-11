@@ -25,19 +25,19 @@
           <img src="includes/icons/inside_index.png" alt="inside_index" class="logo_index" />
 
           <div class="categories_index">
-            <span class="zone_logo_categories_1">
+            <span class="zone_logo_categories" id="logo1">
               <img src="includes/icons/movie_house.png" alt="movie_house_grey" class="logo_categories" />
             </span>
-            <span class="zone_logo_categories_2">
+            <span class="zone_logo_categories" id="logo2">
               <img src="includes/icons/expense_center.png" alt="expense_center_grey" class="logo_categories" />
             </span>
-            <span class="zone_logo_categories_3">
+            <span class="zone_logo_categories" id="logo3">
               <img src="includes/icons/petits_pedestres.png" alt="petits_pedestres_grey" class="logo_categories" />
             </span>
-            <span class="zone_logo_categories_4">
+            <span class="zone_logo_categories" id="logo4">
               <img src="includes/icons/calendars.png" alt="calendars_grey" class="logo_categories" />
             </span>
-            <span class="zone_logo_categories_5">
+            <span class="zone_logo_categories" id="logo5">
               <img src="includes/icons/collector.png" alt="collector_grey" class="logo_categories" />
             </span>
           </div>

@@ -417,7 +417,10 @@ header
 .page_index
 {
 	overflow: hidden;
-	background-color: #g3g3g3;
+	background-color: #fbfbfb;
+	background-image:	linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px);
+	background-size: 100% 200px, 200px 100%;
+	background-repeat: repeat;
 }
 
 .left_index
@@ -459,7 +462,32 @@ header
 	}
 }
 
-.categories_index span
+#logo1
+{
+	animation: 0.6s ease 0s normal forwards 1 affichageCategorie;
+}
+
+#logo2
+{
+	animation: 0.8s ease 0s normal forwards 1 affichageCategorie;
+}
+
+#logo3
+{
+	animation: 1s ease 0s normal forwards 1 affichageCategorie;
+}
+
+#logo4
+{
+	animation: 1.2s ease 0s normal forwards 1 affichageCategorie;
+}
+
+#logo5
+{
+	animation: 1.4s ease 0s normal forwards 1 affichageCategorie;
+}
+
+.zone_logo_categories
 {
 	display: inline-block;
 	height: 50px;
@@ -470,31 +498,6 @@ header
 	margin-right: 5px;
 	text-align: center;
 	vertical-align: top;
-}
-
-.zone_logo_categories_1
-{
-	animation: 1s ease 0s normal forwards 1 affichageCategorie;
-}
-
-.zone_logo_categories_2
-{
-	animation: 1.2s ease 0s normal forwards 1 affichageCategorie;
-}
-
-.zone_logo_categories_3
-{
-	animation: 1.4s ease 0s normal forwards 1 affichageCategorie;
-}
-
-.zone_logo_categories_4
-{
-	animation: 1.6s ease 0s normal forwards 1 affichageCategorie;
-}
-
-.zone_logo_categories_5
-{
-	animation: 1.8s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .logo_categories
