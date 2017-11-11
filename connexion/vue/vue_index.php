@@ -62,7 +62,7 @@
           else
             echo '<div id="inscription" class="zone_ins_pass" style="display: none;">';
         ?>
-          <div class="bandeau_index">
+          <div class="bandeau_index" style="width: 100%;">
             <!-- Inscription -->
             <?php
               echo '<form method="post" action="index.php?action=doDemanderInscription" class="form_index">';
@@ -93,7 +93,7 @@
             echo '<div id="password" class="zone_ins_pass" style="display: none;">';
         ?>
 
-          <div class="bandeau_index">
+          <div class="bandeau_index" style="width: 100%;">
             <!-- Réinitialisation mot de passe -->
             <?php
               echo '<form method="post" action="index.php?action=doDemanderMdp" class="form_index">';

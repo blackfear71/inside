@@ -518,7 +518,7 @@ header
 {
 	display: flex;
 	background-color: rgb(255, 25, 55);
-	width: 20vw;
+	width: 60%;
 	height: 100vh;
 	border-right: solid 20px rgb(255, 25, 55);
 	align-items: center;
@@ -539,6 +539,7 @@ header
 	margin-top: -5vh;
 	text-align: right;
 	width: 80%;
+	max-height: 95vh;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -600,16 +601,15 @@ header
 	animation: affichageIndex 1s ease;
 	position: absolute;
 	left: 50%;
-	transform: translateX(-30%);
+	transform: translateX(-10vw);
 	display: inline-flex;
-	width: 35%;
+	width: 21%;
 	height: 100vh;
 	z-index: 1;
 }
 
 .close_index
 {
-	/*float: right;*/
 	width: 30px;
 	height: 30px;
 	margin-top: -40px;
