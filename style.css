@@ -430,7 +430,7 @@ header
 .logo_index
 {
 	display: block;
-	height: 70vh;
+	max-width: 60%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 15px;
@@ -441,7 +441,26 @@ header
 	text-align: center;
 }
 
-.zone_logo_categories
+@keyframes affichageCategorie
+{
+	0%
+	{
+		margin-top: 50px;
+		opacity: 0;
+	}
+	60%
+	{
+		opacity: 0;
+		margin-top: 50px;
+	}
+	100%
+	{
+		margin-top: 0;
+		opacity: 1;
+	}
+}
+
+.categories_index span
 {
 	display: inline-block;
 	height: 50px;
@@ -451,6 +470,32 @@ header
 	margin-left: 5px;
 	margin-right: 5px;
 	text-align: center;
+	vertical-align: top;
+}
+
+.zone_logo_categories_1
+{
+	animation: 1.2s ease 0s normal forwards 1 affichageCategorie;
+}
+
+.zone_logo_categories_2
+{
+	animation: 1.5s ease 0s normal forwards 1 affichageCategorie;
+}
+
+.zone_logo_categories_3
+{
+	animation: 1.8s ease 0s normal forwards 1 affichageCategorie;
+}
+
+.zone_logo_categories_4
+{
+	animation: 2.1s ease 0s normal forwards 1 affichageCategorie;
+}
+
+.zone_logo_categories_5
+{
+	animation: 2.4s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .logo_categories
@@ -477,6 +522,7 @@ header
 	height: 100vh;
 	border-right: solid 20px rgb(255, 25, 55);
 	align-items: center;
+	overflow-y: auto;
 }
 
 .rift_index
@@ -491,6 +537,7 @@ header
 .form_index
 {
 	margin-top: -5vh;
+	text-align: right;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -525,9 +572,29 @@ header
 	font-size: 18px;
 	color: white;
 	cursor: pointer;
+	transition: padding 0.2s ease;
+}
+
+.bouton_index:hover
+{
+	padding-left: 8%;
+	padding-right: 8%;
+	transition: padding 0.2s ease;
 }
 
 /*** Inscription & demande mot de passe***/
+@keyframes affichageIndex
+{
+	0%
+	{
+		left: -50%;
+	}
+	100%
+	{
+		left: 50%;
+	}
+}
+
 .zone_ins_pass
 {
 	animation: affichageIndex 1s ease;
@@ -542,7 +609,7 @@ header
 
 .close_index
 {
-	float: right;
+	/*float: right;*/
 	width: 30px;
 	height: 30px;
 	margin-top: -40px;
@@ -571,18 +638,6 @@ header
 	color: white;
 	text-align: justify;
 	margin-bottom: 30px;
-}
-
-@keyframes affichageIndex
-{
-	0%
-	{
-		left: -50%;
-	}
-	100%
-	{
-		left: 50%;
-	}
 }
 
 /*** Footer Index ***/
