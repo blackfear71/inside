@@ -433,7 +433,6 @@ header
 	max-width: 60%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 15px;
 }
 
 .categories_index
@@ -475,27 +474,27 @@ header
 
 .zone_logo_categories_1
 {
-	animation: 1.2s ease 0s normal forwards 1 affichageCategorie;
+	animation: 1s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .zone_logo_categories_2
 {
-	animation: 1.5s ease 0s normal forwards 1 affichageCategorie;
+	animation: 1.2s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .zone_logo_categories_3
 {
-	animation: 1.8s ease 0s normal forwards 1 affichageCategorie;
+	animation: 1.4s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .zone_logo_categories_4
 {
-	animation: 2.1s ease 0s normal forwards 1 affichageCategorie;
+	animation: 1.6s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .zone_logo_categories_5
 {
-	animation: 2.4s ease 0s normal forwards 1 affichageCategorie;
+	animation: 1.8s ease 0s normal forwards 1 affichageCategorie;
 }
 
 .logo_categories
@@ -601,7 +600,7 @@ header
 	animation: affichageIndex 1s ease;
 	position: absolute;
 	left: 50%;
-	transform: translateX(-10vw);
+	transform: translateX(-52%);
 	display: inline-flex;
 	width: 21%;
 	height: 100vh;
