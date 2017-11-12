@@ -166,7 +166,7 @@
       $etat_log = "## Etat traitements...........KO";
 
     // Durée totale des traitements
-    $duree_tot = calcDuree($hdeb, $hfin);
+    $duree_tot = calcDureeTrt($hdeb, $hfin);
     $duree_log = "## Durée traitements.........." . $duree_tot['heures'] . " heures, " . $duree_tot['minutes'] . " minutes et " . $duree_tot['secondes'] . " secondes";
 
     // Ouverture / création fichier

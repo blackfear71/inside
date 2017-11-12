@@ -91,11 +91,11 @@ function isBlankDate($date){
     }
 }
 
-/* calcDuree
+/* calcDureeTrt
   <=> calcule la durée en heures/minutes/secondes pour un traitement
   Retourne le temps sous forme d'un tableau
 */
-function calcDuree($hdeb, $hfin)
+function calcDureeTrt($hdeb, $hfin)
 {
   if (strlen($hdeb) == 6 AND strlen($hfin) == 6)
   {
@@ -119,5 +119,32 @@ function calcDuree($hdeb, $hfin)
 
     return $duree_format;
   }
+}
+
+/* dureeOldMovies
+  <=> calcule la date à partir de laquelle on cache les films
+  Retourne une date au format "Ymd"
+*/
+function dureeOldMovies($type, $duree)
+{
+  switch ($type)
+  {
+    case "J":
+      $date = date('Ymd', strtotime('now - ' . $duree . ' Days'));
+      break;
+
+    case "S":
+      $date = date('Ymd', strtotime('now - ' . $duree . ' Weeks'));
+      break;
+
+    case "M":
+      $date = date('Ymd', strtotime('now - ' . $duree . ' Months'));
+      break;
+
+    default:
+      break;
+  }
+
+  return $date;
 }
 ?>

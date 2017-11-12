@@ -56,81 +56,29 @@
     }
     $reponse0->closeCursor();
 
-
-
-
-
-
-
-
     // Solde des dépenses
-    /*$reponse2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-    while($donnees2 = $reponse2->fetch())
-    {
-      // Prix d'achat
-      $prix_achat = $donnees2['price'];
+    $reponse2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
+    $donnees2 = $reponse2->fetch();
 
-      // Identifiant de l'acheteur
-      $acheteur = $donnees2['buyer'];
+    $expenses = $donnees2['expenses'];
 
-      // Nombre de parts et prix par parts
-      $reponse3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $donnees2['id']);
-
-      $nb_parts_total = 0;
-      $nb_parts_user = 0;
-
-      while($donnees3 = $reponse3->fetch())
-      {
-        // Nombre de parts total
-        $nb_parts_total = $nb_parts_total + $donnees3['parts'];
-
-        // Nombre de parts de l'utilisateur
-        if ($user == $donnees3['identifiant'])
-          $nb_parts_user = $donnees3['parts'];
-      }
-
-      if ($nb_parts_total != 0)
-        $prix_par_part = $prix_achat / $nb_parts_total;
-      else
-        $prix_par_part = 0;
-
-      // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-      if ($donnees2['buyer'] == $user)
-        $expenses = $expenses + $prix_achat - ($prix_par_part * $nb_parts_user);
-      else
-        $expenses = $expenses - ($prix_par_part * $nb_parts_user);
-
-      $reponse3->closeCursor();
-    }
     $reponse2->closeCursor();
 
-    $expenses = str_replace('.', ',', round($expenses, 2));*/
-
-
-
-
-
-
-
-
-
-
-
     // Nombre de phrases cultes soumises
-    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
-    $donnees4 = $reponse4->fetch();
+    $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
+    $donnees3 = $reponse3->fetch();
 
-    $nb_collectors = $donnees4['nb_collectors'];
+    $nb_collectors = $donnees3['nb_collectors'];
 
-    $reponse4->closeCursor();
+    $reponse3->closeCursor();
 
     // Nombre d'idées soumises
-    $reponse5 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
-    $donnees5 = $reponse5->fetch();
+    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    $donnees4 = $reponse4->fetch();
 
-    $nb_ideas = $donnees5['nb_idees'];
+    $nb_ideas = $donnees4['nb_idees'];
 
-    $reponse5->closeCursor();
+    $reponse4->closeCursor();
 
     // On construit un tableau avec les données statistiques
     $myStats = array('nb_films_ajoutes' => $nb_films_ajoutes,
@@ -334,7 +282,38 @@
         $error                            = true;
       }
       else
+      {
+        switch ($post['type_duration'])
+        {
+          case "J":
+            if ($post['duration'] > 365)
+            {
+              $_SESSION['duration_too_long'] = true;
+              $error                         = true;
+            }
+            break;
+
+          case "S":
+            if ($post['duration'] > 52)
+            {
+              $_SESSION['duration_too_long'] = true;
+              $error                         = true;
+            }
+            break;
+
+          case "M":
+            if ($post['duration'] > 12)
+            {
+              $_SESSION['duration_too_long'] = true;
+              $error                         = true;
+            }
+            break;
+
+          default:
+            break;
+        }
         $view_old_movies = $post['old_movies_view'] . ";" . $post['type_duration'] . ";" . $post['duration'] . ";";
+      }
     }
 
 		// Préférences #THEBOX

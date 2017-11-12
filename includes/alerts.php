@@ -80,6 +80,9 @@
   if (!isset($_SESSION['duration_not_correct']))
     $_SESSION['duration_not_correct'] = NULL;
 
+  if (!isset($_SESSION['duration_too_long']))
+    $_SESSION['duration_too_long'] = NULL;
+
   if (!isset($_SESSION['mail_updated']))
     $_SESSION['mail_updated'] = NULL;
 
@@ -309,6 +312,7 @@
   OR      isset($_SESSION['avatar_changed'])
   OR      isset($_SESSION['avatar_deleted'])
   OR      isset($_SESSION['duration_not_correct'])
+  OR      isset($_SESSION['duration_too_long'])
   OR      isset($_SESSION['wrong_password'])
   OR      isset($_SESSION['preferences_updated'])
   OR      isset($_SESSION['mail_updated'])
@@ -358,6 +362,13 @@
     {
       $alerte = 'La durée correspondant à l\'affichage des films doit être un entier numérique positif.';
       $_SESSION['duration_not_correct'] = NULL;
+    }
+
+    // Durée trop longue incorrecte
+    if (isset($_SESSION['duration_too_long']) AND $_SESSION['duration_too_long'] == true)
+    {
+      $alerte = 'La durée saisie correspondant à l\'affichage des films est trop grande.';
+      $_SESSION['duration_too_long'] = NULL;
     }
 
     // Email mis à jour

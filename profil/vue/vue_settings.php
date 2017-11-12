@@ -116,7 +116,7 @@
 
       <div class="contenu_contribution_fin">
         <?php
-          echo formatBilanForDisplay($profil->getExpenses());
+          echo formatBilanForDisplay($statistiques->getExpenses());
         ?>
       </div>
     </div>
@@ -296,7 +296,6 @@
               <option value="J" <?php if($affichage == "P" AND $type == "J"){echo 'selected';} ?>>Jours</option>
               <option value="S" <?php if($affichage == "P" AND $type == "S"){echo 'selected';} ?>>Semaines</option>
               <option value="M" <?php if(empty($type) OR ($affichage == "P" AND $type == "M")){echo 'selected';} ?>>Mois</option>
-              <option value="A" <?php if($affichage == "P" AND $type == "A"){echo 'selected';} ?>>Années</option>
             </select>
           </div>
         </div>

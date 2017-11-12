@@ -139,6 +139,38 @@
 	font-family: robotoregular, Verdana, sans-serif;
 }
 
+.hidden_films
+{
+	line-height: 40px;
+	background-color: rgb(255, 25, 55);
+	position: relative;
+	z-index: 1;
+}
+
+.show_hidden_films
+{
+	display: block;
+	padding-left: 15px;
+	cursor: pointer;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+}
+
+.symbol_hidden
+{
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	line-height: 14px;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: -3px;
+	margin-right: 10px;
+	background-color: white;
+	border-radius: 2px;
+	color: #262626;
+}
+
 .logo_tableau_films
 {
 	margin-top: -2px;

@@ -1,3 +1,17 @@
+// Affiche ou masque les films cachés
+function afficherMasquerTbody(id, hidden)
+{
+  if (document.getElementById(hidden).innerHTML == '<div class="symbol_hidden">+</div> Films cachés')
+    document.getElementById(hidden).innerHTML = '<div class="symbol_hidden">-</div> Films cachés';
+  else
+    document.getElementById(hidden).innerHTML = '<div class="symbol_hidden">+</div> Films cachés';
+
+  if (document.getElementById(id).style.display == "none")
+    document.getElementById(id).style.display = "table-row-group";
+  else
+    document.getElementById(id).style.display = "none";
+}
+
 // Affiche ou masque la saisie des étoiles
 function afficherMasquer(id)
 {
