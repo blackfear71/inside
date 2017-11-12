@@ -106,6 +106,7 @@
     $view_movie_house   = "H";
     $categories_home    = "NN";
     $today_movie_house  = "N";
+    $view_old_movies    = "T;;;";
     $view_the_box       = "P";
     $view_notifications = "T";
     $manage_calendars   = "N";
@@ -171,12 +172,28 @@
   				$req->closeCursor();
 
           // On créé les préférences
-          $req = $bdd->prepare('INSERT INTO preferences(identifiant, view_movie_house, categories_home, today_movie_house, view_the_box, view_notifications, manage_calendars) VALUES(:identifiant, :view_movie_house, :categories_home, :today_movie_house, :view_the_box, :view_notifications, :manage_calendars)');
+          $req = $bdd->prepare('INSERT INTO preferences(identifiant,
+                                                        view_movie_house,
+                                                        categories_home,
+                                                        today_movie_house,
+                                                        view_old_movies,
+                                                        view_the_box,
+                                                        view_notifications,
+                                                        manage_calendars)
+                                                 VALUES(:identifiant,
+                                                        :view_movie_house,
+                                                        :categories_home,
+                                                        :today_movie_house,
+                                                        :view_old_movies,
+                                                        :view_the_box,
+                                                        :view_notifications,
+                                                        :manage_calendars)');
           $req->execute(array(
             'identifiant'        => $trigramme,
             'view_movie_house'   => $view_movie_house,
             'categories_home'    => $categories_home,
             'today_movie_house'  => $today_movie_house,
+            'view_old_movies'    => $view_old_movies,
             'view_the_box'       => $view_the_box,
             'view_notifications' => $view_notifications,
             'manage_calendars'   => $manage_calendars

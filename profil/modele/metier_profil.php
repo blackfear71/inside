@@ -300,7 +300,7 @@
   // RETOUR : Aucun
   function updatePreferences($user, $post)
   {
-    $_SESSION['preferences_updated'] = false;
+    $error                           = false;
 
     global $bdd;
 
@@ -324,34 +324,52 @@
 		else
 			$today_movie_house = "N";
 
+    if ($post['old_movies_view'] == "T")
+      $view_old_movies = "T;;;";
+    else
+    {
+      if (!is_numeric($post['duration']) OR !ctype_digit($post['duration']) OR $post['duration'] <= 0)
+      {
+        $_SESSION['duration_not_correct'] = true;
+        $error                            = true;
+      }
+      else
+        $view_old_movies = $post['old_movies_view'] . ";" . $post['type_duration'] . ";" . $post['duration'] . ";";
+    }
+
 		// Préférences #THEBOX
 		$view_the_box = $post['the_box_view'];
 
     // Préférences Notifications
     $view_notifications = $post['notifications_view'];
 
-		// Mise à jour de la table des préférences utilisateur
-		$reponse = $bdd->prepare('UPDATE preferences SET view_movie_house   = :view_movie_house,
-																								     categories_home    = :categories_home,
-																								     today_movie_house  = :today_movie_house,
-                                                     view_the_box       = :view_the_box,
-																								     view_notifications = :view_notifications
-																					     WHERE identifiant = "' . $user . '"');
-		$reponse->execute(array(
-			'view_movie_house'   => $view_movie_house,
-			'categories_home'    => $categories_home,
-			'today_movie_house'  => $today_movie_house,
-      'view_the_box'       => $view_the_box,
-			'view_notifications' => $view_notifications
-		));
-		$reponse->closeCursor();
+    if ($error == false)
+    {
+      // Mise à jour de la table des préférences utilisateur
+      $reponse = $bdd->prepare('UPDATE preferences SET view_movie_house   = :view_movie_house,
+                                                       categories_home    = :categories_home,
+                                                       today_movie_house  = :today_movie_house,
+                                                       view_old_movies    = :view_old_movies,
+                                                       view_the_box       = :view_the_box,
+                                                       view_notifications = :view_notifications
+                                                 WHERE identifiant = "' . $user . '"');
+      $reponse->execute(array(
+        'view_movie_house'   => $view_movie_house,
+        'categories_home'    => $categories_home,
+        'today_movie_house'  => $today_movie_house,
+        'view_old_movies'    => $view_old_movies,
+        'view_the_box'       => $view_the_box,
+        'view_notifications' => $view_notifications
+      ));
+      $reponse->closeCursor();
 
-    // Mise à jour des préférences stockées en SESSION
-    $_SESSION['view_movie_house']   = $view_movie_house;
-    $_SESSION['view_the_box']       = $view_the_box;
-    $_SESSION['view_notifications'] = $view_notifications;
+      // Mise à jour des préférences stockées en SESSION
+      $_SESSION['view_movie_house']   = $view_movie_house;
+      $_SESSION['view_the_box']       = $view_the_box;
+      $_SESSION['view_notifications'] = $view_notifications;
 
-		$_SESSION['preferences_updated'] = true;
+      $_SESSION['preferences_updated'] = true;
+    }
   }
 
   // METIER : Modification adresse mail

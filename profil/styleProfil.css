@@ -362,6 +362,50 @@
 	color: white;
 }
 
+.saisie_partiel
+{
+	padding-bottom: 10px;
+	padding-right: 4px;
+}
+
+.duration_old_movies
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 96px;
+	height: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px #b3b3b3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	text-align: left;
+	text-align-last: left;
+}
+
+.type_duration
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 116px;
+	padding-left: 6px;
+	height: 40px;
+	border: 0;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px #b3b3b3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	text-align: left;
+	text-align-last: left;
+}
+
 /*** Zone mot de passe & désinscription ***/
 .zone_profil_utilisateur_mdp
 {

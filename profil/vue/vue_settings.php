@@ -236,7 +236,7 @@
           Affichage de la date du jour dans la liste des films
         </div>
 
-        <div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+        <div class="contenu_preference">
           <?php
             switch ($preferences->getToday_movie_house())
             {
@@ -252,6 +252,53 @@
                 break;
             }
           ?>
+        </div>
+
+        <div class="sous_titre_preference">
+          Affichage des anciens films (date de sortie cinéma)
+        </div>
+
+        <div class="contenu_preference" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+          <?php
+            $checked_t = false;
+            $checked_p = false;
+
+            list($affichage, $type, $duree) = explode(";", $preferences->getView_old_movies());
+
+            switch ($affichage)
+            {
+              case "P":
+                $checked_p = true;
+                break;
+
+              case "T":
+              default:
+                $checked_t = true;
+                break;
+            }
+          ?>
+
+          <input id="tous" type="radio" name="old_movies_view" value="T" onclick="masquerSaisieFilms('saisie_old_movies', 'input_old_movies');" class="bouton_preference" <?php if($checked_t){echo 'checked';} ?> required />
+          <label for="tous" class="label_preference">Tous</label>
+          <br />
+          <input id="partiel" type="radio" name="old_movies_view" value="P" onclick="afficherSaisieFilms('saisie_old_movies', 'input_old_movies');" class="bouton_preference" <?php if($checked_p){echo 'checked';} ?> required />
+          <label for="partiel" class="label_preference">Partiel</label>
+
+          <?php
+            if ($affichage == "P")
+              echo '<div id="saisie_old_movies" class="saisie_partiel" style="display: block;">';
+            else
+              echo '<div id="saisie_old_movies" class="saisie_partiel" style="display: none;">';
+          ?>
+            <input type="text" name="duration" id="input_old_movies" placeholder="Durée" value="<?php echo $duree; ?>" maxlength="3" class="duration_old_movies" <?php if($affichage == "P"){echo 'required';} ?> />
+
+            <select name="type_duration" class="type_duration">
+              <option value="J" <?php if($affichage == "P" AND $type == "J"){echo 'selected';} ?>>Jours</option>
+              <option value="S" <?php if($affichage == "P" AND $type == "S"){echo 'selected';} ?>>Semaines</option>
+              <option value="M" <?php if(empty($type) OR ($affichage == "P" AND $type == "M")){echo 'selected';} ?>>Mois</option>
+              <option value="A" <?php if($affichage == "P" AND $type == "A"){echo 'selected';} ?>>Années</option>
+            </select>
+          </div>
         </div>
       </div>
 

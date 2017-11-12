@@ -275,6 +275,7 @@
     private $view_movie_house;
     private $categories_home;
     private $today_movie_house;
+    private $view_old_movies;
     private $view_the_box;
     private $view_notifications;
     private $manage_calendars;
@@ -286,6 +287,7 @@
       $this->view_movie_house   = '';
       $this->categories_home    = '';
       $this->today_movie_house  = '';
+      $this->view_old_movies    = '';
       $this->view_the_box       = '';
       $this->view_notifications = '';
       $this->manage_calendars   = '';
@@ -314,6 +316,9 @@
 
       if (isset($data['today_movie_house']))
         $this->today_movie_house  = $data['today_movie_house'];
+
+      if (isset($data['view_old_movies']))
+        $this->view_old_movies    = $data['view_old_movies'];
 
       if (isset($data['view_the_box']))
         $this->view_the_box       = $data['view_the_box'];
@@ -368,6 +373,17 @@
     public function getToday_movie_house()
     {
       return $this->today_movie_house;
+    }
+
+    // Préférence affichage anciens films
+    public function setView_old_movies($view_old_movies)
+    {
+      $this->view_old_movies = $view_old_movies;
+    }
+
+    public function getView_old_movies()
+    {
+      return $this->view_old_movies;
     }
 
     // Préférence vue par défaut #TheBox

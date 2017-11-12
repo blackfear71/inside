@@ -77,6 +77,9 @@
   if (!isset($_SESSION['avatar_deleted']))
     $_SESSION['avatar_deleted'] = NULL;
 
+  if (!isset($_SESSION['duration_not_correct']))
+    $_SESSION['duration_not_correct'] = NULL;
+
   if (!isset($_SESSION['mail_updated']))
     $_SESSION['mail_updated'] = NULL;
 
@@ -305,6 +308,7 @@
   elseif (isset($_SESSION['pseudo_changed'])
   OR      isset($_SESSION['avatar_changed'])
   OR      isset($_SESSION['avatar_deleted'])
+  OR      isset($_SESSION['duration_not_correct'])
   OR      isset($_SESSION['wrong_password'])
   OR      isset($_SESSION['preferences_updated'])
   OR      isset($_SESSION['mail_updated'])
@@ -349,6 +353,13 @@
       $_SESSION['avatar_deleted'] = NULL;
     }
 
+    // Durée affichage film incorrecte
+    if (isset($_SESSION['duration_not_correct']) AND $_SESSION['duration_not_correct'] == true)
+    {
+      $alerte = 'La durée correspondant à l\'affichage des films doit être un entier numérique positif.';
+      $_SESSION['duration_not_correct'] = NULL;
+    }
+
     // Email mis à jour
     if (isset($_SESSION['mail_updated']) AND $_SESSION['mail_updated'] == true)
     {
@@ -373,18 +384,9 @@
     }
 
     // Mise à jour préférences
-    if (isset($_SESSION['preferences_updated']) AND $_SESSION['preferences_updated'] == false)
-    {
-      $alerte = 'Les préférences n\'ont pas été modifiées.';
-      $_SESSION['preferences_updated'] = NULL;
-    }
-    elseif (isset($_SESSION['preferences_updated']) AND $_SESSION['preferences_updated'] == true)
+    if (isset($_SESSION['preferences_updated']) AND $_SESSION['preferences_updated'] == true)
     {
       $alerte = 'Les préférences ont été mises à jour avec succès.';
-      $_SESSION['preferences_updated'] = NULL;
-    }
-    else
-    {
       $_SESSION['preferences_updated'] = NULL;
     }
 
