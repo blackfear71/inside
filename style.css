@@ -395,7 +395,6 @@ header
 	vertical-align: top;
 	width: 300px;
 	max-width: calc(50vw - 210px);
-	margin-left: -5px;
 	height: 80px;
 }
 
