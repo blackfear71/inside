@@ -6,21 +6,24 @@
 		<meta name="keywords" content="Inside, portail, CDS Finance" />
 
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
+    <link rel="stylesheet" href="/inside/style.css" />
+		<link rel="stylesheet" href="/inside/connexion/styleIndex.css" />
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/script.js"></script>
 
 		<title>Inside</title>
   </head>
 
 	<body class="page_index">
-    <section>
+    <section class="section_index">
       <!-- Messages d'alerte -->
       <?php
         include('includes/alerts.php');
       ?>
 
-      <article>
+      <article class="article_index">
         <div class="left_index">
           <img src="includes/icons/inside_index.png" alt="inside_index" class="logo_index" />
 
@@ -127,7 +130,7 @@
         Mot de passe oublié ?
       </a>
 
-      <div class="copyright">© 2017 Inside</div>
+      <div class="copyright_index">© 2017 Inside</div>
     </footer>
   </body>
 </html>

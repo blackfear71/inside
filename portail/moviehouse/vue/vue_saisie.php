@@ -22,22 +22,22 @@
     <!-- Onglets -->
 		<header>
 			<?php
-        $title = "Movie House";
+        $title= "Movie House";
 
+        include('../../includes/header.php');
         include('../../includes/onglets.php');
       ?>
 		</header>
 
 		<section>
       <!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
 					$profil_user = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
-          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -48,7 +48,7 @@
 				include('../../includes/alerts.php');
 			?>
 
-			<article class="article_portail">
+			<article>
         <?php
           if ($filmExistant == true OR ($filmExistant == false AND $initSaisie == true))
           {

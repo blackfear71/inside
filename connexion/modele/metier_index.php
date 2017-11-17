@@ -7,72 +7,70 @@
   {
     $connected = false;
 
-    if ($post['login'] == "admin")
-      $login = htmlspecialchars($post['login']);
+    if (strtolower($post['login']) == "admin")
+      $login = htmlspecialchars(strtolower($post['login']));
     else
       $login = htmlspecialchars(strtoupper($post['login']));
 
     global $bdd;
 
+    $_SESSION['connected'] = NULL;
+
     // lecture par requête de la BDD
-  	$reponse = $bdd->query('SELECT * FROM users');
-  	while ($donnees = $reponse->fetch())
-  	{
-  		$_SESSION['connected'] = NULL;
+  	$reponse = $bdd->query('SELECT * FROM users WHERE identifiant = "' . $login . '"');
+  	$donnees = $reponse->fetch();
 
-  		if (isset($login) AND $login == $donnees['identifiant']) // 2 boucles if pour comparer pseudo et MDP
-  		{
-  			if ($donnees['reset'] == "I")
-  			{
-  				$_SESSION['not_yet']   = true;
-  				$_SESSION['connected'] = false;
-  				$_SESSION['wrong_connexion']     = false;
-  				break;
-  			}
-  			else
-  			{
-  				$mdp = htmlspecialchars(hash('sha1', $post['mdp'] . $donnees['salt'])); // On crypte de la même façon qu'à l'identification pour comparer, avec un grain de sel
-  				if (isset($mdp) AND $mdp == $donnees['mot_de_passe'])
-  				{
-  					// Sauvegarde des données utilisateur en SESSION
-  					$_SESSION['connected']       = true;
-  					$_SESSION['identifiant']     = $donnees['identifiant'];
-  					$_SESSION['pseudo']          = $donnees['pseudo'];
-  					$_SESSION['wrong_connexion'] = false;
+		if ($reponse->rowCount() > 0 AND isset($login) AND $login == $donnees['identifiant']) // 2 boucles if pour comparer pseudo et MDP
+		{
+			if ($donnees['reset'] == "I")
+			{
+				$_SESSION['not_yet']         = true;
+				$_SESSION['connected']       = false;
+				$_SESSION['wrong_connexion'] = false;
+			}
+			else
+			{
+				$mdp = htmlspecialchars(hash('sha1', $post['mdp'] . $donnees['salt'])); // On crypte de la même façon qu'à l'identification pour comparer, avec un grain de sel
+				if (isset($mdp) AND $mdp == $donnees['mot_de_passe'])
+				{
+					// Sauvegarde des données utilisateur en SESSION
+					$_SESSION['connected']       = true;
+					$_SESSION['identifiant']     = $donnees['identifiant'];
+          $_SESSION['pseudo']          = $donnees['pseudo'];
+					$_SESSION['avatar']          = $donnees['avatar'];
+					$_SESSION['wrong_connexion'] = false;
 
-  					// Recherche et sauvegarde des preferences utilisateur en SESSION
-  					if ($_SESSION['identifiant'] != "admin")
-  					{
-  						$reponse2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
-  						$donnees2 = $reponse2->fetch();
+					// Recherche et sauvegarde des preferences utilisateur en SESSION
+					if ($_SESSION['identifiant'] != "admin")
+					{
+						$reponse2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
+						$donnees2 = $reponse2->fetch();
 
-  						$_SESSION['view_movie_house']   = $donnees2['view_movie_house'];
-              $_SESSION['view_the_box']       = $donnees2['view_the_box'];
-  						$_SESSION['view_notifications'] = $donnees2['view_notifications'];
+						$_SESSION['view_movie_house']   = $donnees2['view_movie_house'];
+            $_SESSION['view_the_box']       = $donnees2['view_the_box'];
+						$_SESSION['view_notifications'] = $donnees2['view_notifications'];
 
-  						$reponse2->closeCursor();
-  					}
+						$reponse2->closeCursor();
+					}
 
-            $connected = true;
-  					break; // Important sinon la boucle continue et la variable connected passera forcément sur false alors qu'elle doit rester true !
-  				}
-          // Sinon, on affiche un message d'erreur
-  				else
-  				{
-  					$_SESSION['connected']       = false;
-  					$_SESSION['wrong_connexion'] = true;
-  					break;
-  				}
+          $connected = true;
+				}
+        // Sinon, on affiche un message d'erreur
+				else
+				{
+					$_SESSION['connected']       = false;
+					$_SESSION['wrong_connexion'] = true;
+					break;
+				}
 
-  				$_SESSION['not_yet'] = false;
-  			}
-  		}
-  		else
-  		{
-  			$_SESSION['connected']       = false;
-  			$_SESSION['wrong_connexion'] = true;
-  		}
-  	}
+				$_SESSION['not_yet'] = false;
+			}
+		}
+		else
+		{
+			$_SESSION['connected']       = false;
+			$_SESSION['wrong_connexion'] = true;
+		}
 
   	$reponse->closeCursor();
 
@@ -104,7 +102,7 @@
 
     // Initialisations préférences
     $view_movie_house   = "H";
-    $categories_home    = "NN";
+    $categories_home    = "YY";
     $today_movie_house  = "N";
     $view_old_movies    = "T;;;";
     $view_the_box       = "P";

@@ -21,6 +21,7 @@
           border-radius: 5px;
           overflow: hidden;
           background-color: #e3e3e3;
+          margin-top: 30px;
         }
 
         .entete_mail

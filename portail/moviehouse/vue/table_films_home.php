@@ -1,6 +1,6 @@
 <div class="zone_home">
   <!-- Ajouts récents -->
-  <div class="titre_home" style="margin-top: 0;">
+  <div class="titre_home">
     <img src="icons/recent.png" alt="recent" class="icone_home" />Ajouts récents
   </div>
 

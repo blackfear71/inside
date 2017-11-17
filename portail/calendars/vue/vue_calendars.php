@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/inside/style.css" />
   	<link rel="stylesheet" href="styleCA.css" />
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/script.js"></script>
 
 		<title>Inside - CA</title>
@@ -20,20 +22,20 @@
       <?php
         $title = "Calendars";
 
-			  include('../../includes/onglets.php') ;
+        include('../../includes/header.php');
+			  include('../../includes/onglets.php');
       ?>
 		</header>
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
 					$profil_user = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
-          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -44,7 +46,7 @@
 				include('../../includes/alerts.php');
 			?>
 
-			<article class="article_portail">
+			<article>
         <?php
           // Onglets années
           include('vue/onglets_calendars.php');

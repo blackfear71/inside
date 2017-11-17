@@ -8,7 +8,6 @@
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 15px;
 	text-align: center;
 }
 
@@ -95,7 +94,7 @@
 /*** Liste idées ***/
 .table_ideas
 {
-	margin-top: 30px;
+	margin-top: 15px;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;

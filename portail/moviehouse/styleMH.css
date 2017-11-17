@@ -31,7 +31,7 @@
 	height: 30px;
 	width: 80px;
 	text-align: center;
-	background-color: white;
+	background-color: transparent;
 	color: black;
 	text-decoration: none;
 	font-family: robotolight, Verdana, sans-serif;
@@ -1187,7 +1187,7 @@
 {
 	float: left;
 	position: relative;
-	z-index: 3;
+	z-index: 2;
 	height: 100px;
 	line-height: 97px;
 	margin-top: 95px;
@@ -1199,7 +1199,7 @@
 {
 	float: right;
 	position: relative;
-	z-index: 3;
+	z-index: 2;
 	height: 100px;
 	line-height: 97px;
 	margin-top: 95px;
@@ -1227,7 +1227,7 @@
 {
 	position: absolute;
 	left: 12.5%;
-	z-index: 2;
+	z-index: 1;
 	line-height: 290px;
 	opacity: 0;
 	margin-left: 20px;
@@ -1249,7 +1249,7 @@
 {
 	position: absolute;
 	right: 12.5%;
-	z-index: 2;
+	z-index: 1;
 	line-height: 290px;
 	margin-right: 1%;
 	opacity: 0;
@@ -1469,6 +1469,7 @@
 	clear: both;
 	width: 100%;
 	margin-top: 100px;
+	padding-bottom: 25px;
 }
 
 .zone_commentaire_user

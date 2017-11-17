@@ -9,6 +9,10 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleAdmin.css" />
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="/inside/script.js"></script>
+
 		<title>Inside - Administration</title>
   </head>
 
@@ -23,7 +27,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect = true;
 
@@ -31,7 +35,7 @@
 				?>
 			</aside>
 
-			<article class="article_portail">
+			<article>
 				<div class="new_menu_admin">
           <a href="infos_users.php?action=goConsulter" class="new_menu_link_admin">
             <div class="menu_admin_box">

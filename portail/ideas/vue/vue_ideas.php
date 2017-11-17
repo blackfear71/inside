@@ -9,6 +9,8 @@
   	<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleTheBox.css" />
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/script.js"></script>
 
   	<title>Inside - &#35;TheBox</title>
@@ -25,13 +27,12 @@
 
 		<section>
       <!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
 					$profil_user = true;
 					$back        = true;
 					$reports     = true;
-          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -42,7 +43,7 @@
 				include('../../includes/alerts.php');
 			?>
 
-			<article class="article_portail">
+			<article>
         <!-- Onglets vues -->
 				<div class="switch_view">
 					<?php
@@ -88,10 +89,7 @@
             echo '</table>';
 					echo '</form>';
 				?>
-
-        <!-- Séparation -->
-				<div class="trait_ideas"></div>
-
+        
         <!-- Tableaux des idées -->
 				<?php
           include('table_ideas.php');

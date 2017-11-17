@@ -10,6 +10,8 @@
   	<link rel="stylesheet" href="stylePP.css" />
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/script.js"></script>
 
   	<title>Inside - PP</title>
@@ -21,13 +23,14 @@
       <?php
         $title = "Les Petits Pédestres";
 
-        include('../../includes/onglets.php') ;
+        include('../../includes/header.php');
+        include('../../includes/onglets.php');
       ?>
 		</header>
 
     <section>
       <!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect       = true;
 					$profil_user      = true;
@@ -35,7 +38,6 @@
 					$back             = true;
 					$ideas            = true;
 					$reports          = true;
-          $notifs           = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -46,7 +48,7 @@
 				include('../../includes/alerts.php');
 			?>
 
-      <article class="article_portail">
+      <article>
 				<?php
 					// Tableau des parcours
         	echo '<table class="PP-table">';

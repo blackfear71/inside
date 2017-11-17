@@ -9,9 +9,11 @@
 		<link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleNO.css" />
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/script.js"></script>
 
-		<title>Inside - MH</title>
+		<title>Inside - Notifications</title>
   </head>
 
 	<body>
@@ -26,7 +28,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
 					$profil_user = true;
@@ -43,7 +45,7 @@
 				include('../../includes/alerts.php');
 			?>
 
-			<article class="article_portail">
+			<article>
 				<!-- Switch entre notifications personnelles, notifications du jour, notifications de la semaine et toutes les notifications -->
 				<div class="switch_view">
 					<?php

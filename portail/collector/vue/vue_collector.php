@@ -24,20 +24,20 @@
       <?php
         $title = "Collector Room";
 
-        include('../../includes/onglets.php') ;
+        include('../../includes/header.php');
+			  include('../../includes/onglets.php');
       ?>
 		</header>
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
 					$profil_user = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
-          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -48,7 +48,7 @@
 				include('../../includes/alerts.php');
 			?>
 
-			<article class="article_portail">
+			<article>
         <?php
           // Saisie phrase culte
           echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';

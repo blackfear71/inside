@@ -46,211 +46,123 @@
 	if (!isset($reports))
 		$reports = false;
 
-	if (!isset($notifs))
-		$notifs = false;
-
-	// Déconnexion
-	if ($disconnect == true)
-	{
-		echo '<form method="post" action="/inside/connexion/disconnect.php">';
-			echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
-			echo '<div class="hover_aside">Déconnexion</div>';
-		echo '</form>';
-	}
-
-	// Profil
-	if ($profil_user == true)
-	{
-		echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter" title="Profil" class="link_profile">';
-			echo '<img src="/inside/includes/icons/profile.png" alt="profile" title="Profil" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Profil</div>';
-	}
-
-	// Ajouter un article
-	if ($add_article == true)
-	{
-		echo '<a href="/inside/portail/referenceguide/saisie_article.php" title="Ajouter un article" class="link_profile">';
-			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un article" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Ajouter</div>';
-	}
-
-	// Ajouter un film (avancé)
-	if ($add_film == true)
-	{
-		echo '<a href="/inside/portail/moviehouse/saisie.php?action=goAjouter" title="Ajouter un film (avancé)" class="link_profile">';
-			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Ajouter</div>';
-	}
-
-	// Modifier les détails
-	if ($modify_film == true AND $_SESSION['doesnt_exist'] != true)
-	{
-		echo '<a href="/inside/portail/moviehouse/saisie.php?modify_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_profile">';
-			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Modifier</div>';
-	}
-
-	// Ajouter parcours
-	if ($ajouter_parcours == true)
-	{
-		echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goajouter" title="Ajouter parcours" class="link_profile">';
-			echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter parcours" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Ajouter</div>';
-	}
-
-	// Modifier parcours
-	if ($modify_parcours == true)
-	{
-		echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_profile">';
-			echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Modifier</div>';
-	}
-
-	// Demande suppression film
-	if ($delete_film == true AND $_SESSION['doesnt_exist'] != true)
-	{
-		echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Demander la suppression de ce film ?\')) return false;">';
-			echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
-			echo '<div class="hover_aside">Suppression</div>';
-		echo '</form>';
-	}
-
-	// Modifier les succès
-	if ($modify_success == true)
-	{
-		echo '<a href="/inside/administration/manage_success.php?action=goModifier" title="Modifier les succès" class="link_profile">';
-			echo '<img src="/inside/includes/icons/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Modifier</div>';
-	}
-
-	// Retour à l'accueil
-	if ($back_index == true)
-	{
-		echo '<a href="/inside/index.php" class="link_profile" title="Retour à l\'accueil" style="margin-top: 0;">';
-				echo '<img src="/inside/includes/icons/back.png" alt="accueil" title="Retour à l\'accueil" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Accueil</div>';
-	}
-
-	// Retour au portail
-	if ($back == true)
-	{
-		echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_profile">';
-			echo '<img src="/inside/includes/icons/home.png" alt="back" title="Retour au portail" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Accueil</div>';
-	}
-
-	// Retour au portail administration
-	if ($back_admin == true)
-	{
-		echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_profile">';
-			echo '<img src="/inside/includes/icons/home.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Accueil</div>';
-	}
-
-	// Boite à idées
-	if ($ideas == true)
-	{
-		// Récupération des préférences
-		switch ($_SESSION['view_the_box'])
+	echo '<div class="menu_aside_hidden">';
+		// Retour au portail
+		if ($back == true)
 		{
-			case "P":
-				$view_the_box = "inprogress";
-				break;
-
-			case "M":
-				$view_the_box = "mine";
-				break;
-
-			case "D":
-				$view_the_box = "done";
-				break;
-
-			case "A":
-			default:
-				$view_the_box = "all";
-				break;
-		}
-
-		echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_profile">';
-			echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">#TheBox</div>';
-	}
-
-	// Signaler un bug
-	if ($reports == true)
-	{
-		echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_profile">';
-			echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_aside" />';
-		echo '</a>';
-		echo '<div class="hover_aside">Signaler</div>';
-	}
-
-	// Notifications
-	if ($notifs == true)
-	{
-		// Récupération des préférences
-		switch ($_SESSION['view_notifications'])
-		{
-			case "M":
-				$view_notifications = "me";
-				$page               = "&page=1";
-				break;
-
-			case "T":
-				$view_notifications = "today";
-				$page               = "";
-				break;
-
-			case "W":
-				$view_notifications = "week";
-				$page               = "";
-				break;
-
-			case "A":
-			default:
-				$view_notifications = "all";
-				$page               = "&page=1";
-				break;
-		}
-
-		// On compte le nombre de notifications du jour
-		$nb_notifs = 0;
-
-		$reponse = $bdd->query('SELECT COUNT(id) AS nb_notifs FROM notifications WHERE date = ' . date("Ymd"));
-		$donnees = $reponse->fetch();
-		$nb_notifs = $donnees['nb_notifs'];
-		$reponse->closeCursor();
-
-		// Affichage en fonction du nombre de notifications
-		if ($nb_notifs > 0)
-		{
-			echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_profile" style="background-color: #2980b9;">';
-				echo '<img src="/inside/includes/icons/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
-				if ($nb_notifs <= 9)
-					echo '<div class="number_notifications">' . $nb_notifs . '</div>';
-				else
-					echo '<div class="number_notifications">9+</div>';
+			echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_aside">';
+				echo '<img src="/inside/includes/icons/home.png" alt="back" title="Retour au portail" class="icon_aside" />';
 			echo '</a>';
-			echo '<div class="hover_aside" style="background-color: #2980b9;">Notifications</div>';
 		}
-		else
+
+		// Retour au portail administration
+		if ($back_admin == true)
 		{
-			echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_profile" style="background-color: #a3a3a3;">';
-				echo '<img src="/inside/includes/icons/notifications.png" alt="notifications" title="Notifications" class="icon_aside" />';
-				echo '<div class="number_notifications">0</div>';
+			echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_aside">';
+				echo '<img src="/inside/includes/icons/home.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
 			echo '</a>';
-			echo '<div class="hover_aside" style="background-color: #a3a3a3;">Notifications</div>';
 		}
-	}
+
+		// Ajouter un film (avancé)
+		if ($add_film == true)
+		{
+			echo '<a href="/inside/portail/moviehouse/saisie.php?action=goAjouter" title="Ajouter un film (avancé)" class="link_aside">';
+				echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Modifier les détails
+		if ($modify_film == true AND $_SESSION['doesnt_exist'] != true)
+		{
+			echo '<a href="/inside/portail/moviehouse/saisie.php?modify_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
+				echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Ajouter parcours
+		if ($ajouter_parcours == true)
+		{
+			echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goajouter" title="Ajouter parcours" class="link_aside">';
+				echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter parcours" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Modifier parcours
+		if ($modify_parcours == true)
+		{
+			echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_aside">';
+				echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Demande suppression film
+		if ($delete_film == true AND $_SESSION['doesnt_exist'] != true)
+		{
+			echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Demander la suppression de ce film ?\')) return false;" class="bouton_aside">';
+				echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
+			echo '</form>';
+		}
+
+		// Modifier les succès
+		if ($modify_success == true)
+		{
+			echo '<a href="/inside/administration/manage_success.php?action=goModifier" title="Modifier les succès" class="link_aside">';
+				echo '<img src="/inside/includes/icons/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Boite à idées
+		if ($ideas == true)
+		{
+			// Récupération des préférences
+			switch ($_SESSION['view_the_box'])
+			{
+				case "P":
+					$view_the_box = "inprogress";
+					break;
+
+				case "M":
+					$view_the_box = "mine";
+					break;
+
+				case "D":
+					$view_the_box = "done";
+					break;
+
+				case "A":
+				default:
+					$view_the_box = "all";
+					break;
+			}
+
+			echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_aside">';
+				echo '<img src="/inside/includes/icons/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Signaler un bug
+		if ($reports == true)
+		{
+			echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_aside">';
+				echo '<img src="/inside/includes/icons/bug.png" alt="bug" title="Signaler un bug" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Déconnexion
+		if ($disconnect == true)
+		{
+			echo '<form method="post" action="/inside/connexion/disconnect.php" class="bouton_aside">';
+				echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
+			echo '</form>';
+		}
+	echo '</div>';
+
+	echo '<div class="menu_aside_visible" title="Menu" onclick="deployLeftMenu(\'left_menu\', \'icon_menu_m\', \'icon_menu_e\', \'icon_menu_n\', \'icon_menu_u\');">';
+		echo '<div class="logos_menu">';
+			echo '<img src="/inside/includes/icons/menu_m.png" alt="menu" id="icon_menu_m" class="icon_menu_aside" />';
+			echo '<img src="/inside/includes/icons/menu_e.png" alt="menu" id="icon_menu_e" class="icon_menu_aside" style="opacity: 0;" />';
+			echo '<img src="/inside/includes/icons/menu_n.png" alt="menu" id="icon_menu_n" class="icon_menu_aside" style="opacity: 0;" />';
+			echo '<img src="/inside/includes/icons/menu_u.png" alt="menu" id="icon_menu_u" class="icon_menu_aside" style="opacity: 0;" />';
+		echo '</div>';
+	echo '</div>';
 ?>

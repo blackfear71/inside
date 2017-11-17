@@ -24,13 +24,14 @@
       <?php
         $title = "Movie House";
 
-			  include('../../includes/onglets.php') ;
+        include('../../includes/header.php');
+			  include('../../includes/onglets.php');
       ?>
 		</header>
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside>
+			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
 					$profil_user = true;
@@ -38,7 +39,6 @@
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
-          $notifs      = true;
 
 					include('../../includes/aside.php');
 				?>
@@ -49,9 +49,9 @@
 				include('../../includes/alerts.php');
 			?>
 
-			<article class="article_portail">
+			<article>
 				<!-- Switch entre accueil, vue générale et vue personnelle -->
-				<div class="switch_view_2">
+				<div class="switch_view">
 					<?php
 						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
 																 'main' => array('lib' => 'Synthèse', 'date' => $_GET['year']),
