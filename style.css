@@ -64,7 +64,7 @@ section:not(.section_index)
 
 article:not(.article_index)
 {
-	width: calc(100% - 220px);
+	width: calc(100% - 15%);
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -394,7 +394,7 @@ header
 	display: inline-block;
 	vertical-align: top;
 	width: 300px;
-	max-width: calc(50vw - 210px);
+	max-width: calc(50vw - 222px);
 	height: 80px;
 }
 
@@ -505,7 +505,7 @@ header
 aside
 {
 	width: 108px;
-	height: calc(100% - 80px);
+	height: calc(100% - 130px);
 	float: left;
 	margin-left: -83px;
 	margin-top: -30px;
@@ -617,8 +617,8 @@ nav
 {
 	position: absolute;
 	margin-top: -83px;
-	width: calc(100% - 220px);
-	margin-left: 110px;
+	width: calc(100% - 15%);
+	margin-left: 7.5%;
 	z-index: -1;
 }
 
@@ -693,7 +693,7 @@ nav
 {
 	margin-top: 30px;
 	margin-bottom: 30px;
-	max-width: 80%;
+	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -826,7 +826,7 @@ nav
 /*** Saisie film avancée ***/
 .zone_saisie_avancee
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #e3e3e3;
@@ -1029,7 +1029,7 @@ nav
 /*** Bugs ***/
 .no_bugs
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
@@ -1041,7 +1041,7 @@ nav
 /*** Gestion des utilisateurs ***/
 .title_gestion
 {
-	width: 76%;
+	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: robotothin, Verdana, sans-serif;
@@ -1060,7 +1060,7 @@ nav
 .table_manage_users
 {
 	border-collapse: collapse;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -1107,7 +1107,7 @@ nav
 
 .reseted
 {
-	width: 80%;
+	width: 100%;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;

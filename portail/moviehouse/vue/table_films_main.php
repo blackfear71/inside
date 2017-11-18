@@ -101,14 +101,14 @@
                       if ($stars['identifiant'] == $_SESSION['identifiant'])
                       {
                         echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                          echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
+                          echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                         echo '</a>';
 
                         echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                           // Boutons vote
                           for($j = 0; $j <= 5; $j++)
                           {
-                            echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
+                            echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
                             if ($j == $stars['stars'])
                               echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
                             else
@@ -124,7 +124,7 @@
                       else
                       {
                         echo '<span class="link_vote" style="cursor: default;">';
-                          echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
+                          echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                         echo '</span>';
                       }
                   echo '</td>';
@@ -203,14 +203,14 @@
                   if ($stars['identifiant'] == $_SESSION['identifiant'])
                   {
                     echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                      echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
+                      echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                     echo '</a>';
 
                     echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                       // Boutons vote
                       for($j = 0; $j <= 5; $j++)
                       {
-                        echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
+                        echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
                         if ($j == $stars['stars'])
                           echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
                         else
@@ -226,7 +226,7 @@
                   else
                   {
                     echo '<span class="link_vote" style="cursor: default;">';
-                      echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="new_star" />';
+                      echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                     echo '</span>';
                   }
               echo '</td>';

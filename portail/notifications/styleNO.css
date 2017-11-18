@@ -5,7 +5,7 @@
 /*** Notifications ***/
 .date_notif
 {
-	width: 80%;
+	width: 100%;
   margin-left: auto;
   margin-right: auto;
 	font-family: robotoregular, Verdana, sans-serif;
@@ -23,7 +23,7 @@
 .lien_notification
 {
   display: block;
-  width: 80%;
+	width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-decoration: none;
@@ -89,7 +89,7 @@
 /*** Pagination ***/
 .zone_pagination
 {
-  width: 80%;
+	width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;

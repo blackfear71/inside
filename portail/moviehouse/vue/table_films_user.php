@@ -32,7 +32,8 @@
       	echo '<td class="init_table_dates">Bande-annonce</td>';
       	echo '<td class="init_table_dates">Doodle</td>';
       	echo '<td class="init_table_dates">Date proposée</td>';
-      	echo '<td class="init_table_dates">Commentaires</td>';
+        echo '<td class="init_table_dates">Commentaires</td>';
+      	echo '<td class="init_table_dates">Personnes intéressées</td>';
       	echo '<td class="init_table_dates">Vote</td>';
       	echo '<td class="init_table_dates">Actions</td>';
       echo '</tr>';
@@ -112,6 +113,11 @@
                   echo $film->getNb_comments();
                 echo '</td>';
 
+                // Nombre de personnes intéressées
+                echo '<td class="table_dates">';
+                  echo $film->getNb_users();
+                echo '</td>';
+
                 // Etoiles utilisateur + couleur de participation/vue
                 if ($film->getParticipation() == "S")
                   echo '<td class="table_users" style="background-color: #74cefb;">';
@@ -121,14 +127,14 @@
                   echo '<td class="table_users">';
 
                     echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                      echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="new_star" />';
+                      echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                     echo '</a>';
 
                     echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                       // Boutons vote
                       for($j = 0; $j <= 5; $j++)
                       {
-                        echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
+                        echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
                         if ($j == $film->getStars_user())
                           echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
@@ -253,6 +259,11 @@
               echo $film->getNb_comments();
             echo '</td>';
 
+            // Nombre de personnes intéressées
+            echo '<td class="table_dates">';
+              echo $film->getNb_users();
+            echo '</td>';
+
             // Etoiles utilisateur + couleur de participation/vue
             if ($film->getParticipation() == "S")
               echo '<td class="table_users" style="background-color: #74cefb;">';
@@ -262,14 +273,14 @@
               echo '<td class="table_users">';
 
                 echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                  echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="new_star" />';
+                  echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                 echo '</a>';
 
                 echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                   // Boutons vote
                   for($j = 0; $j <= 5; $j++)
                   {
-                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="new_star_2" />';
+                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
                     if ($j == $film->getStars_user())
                       echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
@@ -335,6 +346,7 @@
         echo '<td class="init_table_dates">Doodle</td>';
         echo '<td class="init_table_dates">Date proposée</td>';
         echo '<td class="init_table_dates">Commentaires</td>';
+        echo '<td class="init_table_dates">Personnes intéressées</td>';
         echo '<td class="init_table_dates">Vote</td>';
         echo '<td class="init_table_dates">Actions</td>';
       echo '</tr>';

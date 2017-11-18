@@ -880,6 +880,12 @@
       'comment' => $comment
         ));
     $req->closeCursor();
+
+    // Génération notification commentaires une fois par jour et par film
+    $notification_comments_exist = controlNotification('comments', $id_film);
+
+    if ($notification_comments_exist != true)
+      insertNotification($user, 'comments', $id_film);
   }
 
   // METIER : Suppression commentaire sur un détail film

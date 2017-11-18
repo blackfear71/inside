@@ -44,7 +44,7 @@
 
 			<article>
         <div class="zone_cron_asynchrone">
-  				<div class="level_succes">Lancement asynchrone des tâches CRON</div>
+  				<div class="level_succes" style="margin-top: 0;">Lancement asynchrone des tâches CRON</div>
 
           <div class="zone_cron" style="float: left;">
             <div class="titre_cron">

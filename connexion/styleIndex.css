@@ -192,7 +192,7 @@
 	display: inline-flex;
 	width: 21%;
 	height: 100vh;
-	z-index: 1;
+	z-index: 3;
 	opacity: 1;
 }
 
@@ -235,8 +235,8 @@
 	bottom: 0;
 	width: 100%;
 	background-color: #262626;
-	height: 10vh;
-	line-height: 10vh;
+	height: 80px;
+	line-height: 80px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	text-align: left;

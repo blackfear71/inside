@@ -3,14 +3,14 @@
 /**********************/
 
 /*** Menu ***/
-.new_menu_admin
+.menu_admin
 {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	max-width: 80%;
+	width: 100%;
 }
 
 .menu_admin_box
@@ -43,7 +43,7 @@
 	opacity: 0.1;
 }
 
-.new_menu_link_admin
+.menu_link_admin
 {
 	text-decoration: none;
 	display: inline-block;
@@ -103,7 +103,7 @@
 /*** Infos utilisateurs ***/
 .zone_infos
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -284,7 +284,7 @@
 .form_autorisations
 {
 	background-color: #e3e3e3;
-	width: 80%;
+	width: 100%;
 	border-radius: 5px;
 	margin-left: auto;
 	margin-right: auto;
@@ -377,7 +377,7 @@
 .table_bugs
 {
 	margin-top: 30px;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	border-collapse: collapse;
@@ -388,7 +388,7 @@
 /*** Saisie succès ***/
 .form_saisie_succes
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: -15px;
@@ -419,7 +419,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 .td_saisie_succes_ref
@@ -439,7 +439,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 .td_saisie_succes_niv
@@ -459,7 +459,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 .td_saisie_succes_ord
@@ -479,7 +479,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 .td_saisie_succes_par
@@ -565,7 +565,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 .td_saisie_succes_cond
@@ -584,7 +584,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 .td_saisie_succes_expl
@@ -603,13 +603,13 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: transparent;
+	background-color: white;
 }
 
 /*** Affichage succès ***/
 .zone_succes_admin
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -792,7 +792,7 @@
 
 .avertissement_succes
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
@@ -866,7 +866,7 @@
 /*** Tâches CRON ***/
 .zone_cron_asynchrone
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -940,7 +940,7 @@
 .zone_cron_logs
 {
 	clear: both;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }

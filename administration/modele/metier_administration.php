@@ -149,6 +149,7 @@
     deleteNotification('film', $id_film);
     deleteNotification('doodle', $id_film);
     deleteNotification('cinema', $id_film);
+    deleteNotification('comments', $id_film);
 
     $_SESSION['film_deleted'] = true;
   }

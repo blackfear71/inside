@@ -141,6 +141,18 @@
           $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
           break;
 
+        case 'comments':
+          // Recherche du titre du film
+          $reponse = $bdd->query('SELECT id, film FROM movie_house WHERE id = ' . $notification->getContent());
+          $donnees = $reponse->fetch();
+          $titre_film = $donnees['film'];
+          $reponse->closeCursor();
+
+          $icone  = "comments";
+          $phrase = "Des commentaires ont été publiés pour le film <strong>" . $titre_film . "</strong>, n'oubliez pas de les suivre dans la journée !";
+          $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter#comments";
+          break;
+
         case "mail_1":
           $icone  = "mailing";
           $phrase = "";

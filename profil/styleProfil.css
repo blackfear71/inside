@@ -5,7 +5,7 @@
 /*** Zone pseudo & avatar ***/
 .zone_profil_utilisateur
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -192,7 +192,7 @@
 .zone_profil_generique
 {
 	margin-top: 30px;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -445,7 +445,7 @@
 /*** Succès profil ***/
 .zone_succes_profil
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -539,7 +539,7 @@
 /*** Classement ***/
 .zone_ranking
 {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;

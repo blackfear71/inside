@@ -36,8 +36,8 @@
 			</aside>
 
 			<article>
-				<div class="new_menu_admin">
-          <a href="infos_users.php?action=goConsulter" class="new_menu_link_admin">
+				<div class="menu_admin">
+          <a href="infos_users.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -47,7 +47,7 @@
             </div>
           </a>
 
-					<a href="manage_users.php?action=goConsulter" class="new_menu_link_admin">
+					<a href="manage_users.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -62,7 +62,7 @@
 						</div>
 					</a>
 
-          <a href="manage_success.php?action=goConsulter" class="new_menu_link_admin">
+          <a href="manage_success.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -73,7 +73,7 @@
 						</div>
 					</a>
 
-					<a href="manage_films.php?action=goConsulter" class="new_menu_link_admin">
+					<a href="manage_films.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -88,7 +88,7 @@
 						</div>
 					</a>
 
-          <a href="manage_calendars.php?action=goConsulter" class="new_menu_link_admin">
+          <a href="manage_calendars.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -103,7 +103,7 @@
             </div>
           </a>
 
-					<a href="reports.php?view=unresolved&action=goConsulter" class="new_menu_link_admin">
+					<a href="reports.php?view=unresolved&action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -122,7 +122,7 @@
 						</div>
 					</a>
 
-          <a href="cron.php?action=goConsulter" class="new_menu_link_admin">
+          <a href="cron.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -134,7 +134,7 @@
             </div>
           </a>
 
-					<a href="/phpmyadmin/" target="_blank" class="new_menu_link_admin">
+					<a href="/phpmyadmin/" target="_blank" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -142,7 +142,7 @@
 						</div>
 					</a>
 
-					<form method="post" action="export_bdd.php" class="new_menu_link_admin">
+					<form method="post" action="export_bdd.php" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>

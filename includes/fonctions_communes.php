@@ -102,7 +102,10 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
+    if ($category == 'comments')
+      $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '" AND date = ' . date(Ymd));
+    else
+      $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
     $data = $req->fetch();
 
     if ($req->rowCount() > 0)

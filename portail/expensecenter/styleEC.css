@@ -6,14 +6,14 @@
 .zone_saisie_depense
 {
 	float: left;
-	width: 50%;
-	margin-left: 10%;
+	width: 68%;
 	margin-top: 30px;
 }
 
 .table_saisie_depense
 {
 	border-collapse: collapse;
+	background-color: white;
 }
 
 .table_saisie_depense td
@@ -78,7 +78,7 @@
 	color: black;
 	border-radius: 5px;
 	padding: 10px;
-	width: 80%;
+	width: 78%;
 	height: 60px;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -125,8 +125,7 @@
 .zone_total_depenses
 {
 	float: right;
-	width: 28%;
-	margin-right: 10%;
+	width: 30%;
 	margin-bottom: 30px;
 	margin-top: 30px;
 }
@@ -136,6 +135,7 @@
 	border-collapse: collapse;
 	width: 100%;
 	border: solid 1px #b3b3b3;
+	background-color: white;
 }
 
 .td_init_depenses
@@ -192,7 +192,7 @@
 .expense_year
 {
 	clear: both;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	border-bottom: solid 1px rgb(255, 25, 55);
@@ -236,7 +236,7 @@
 .zone_resume_depenses
 {
   margin-top: 50px;
-  width: 80%;
+	width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -249,6 +249,7 @@
 	margin-right: auto;
 	border-top: 1px solid #e3e3e3;
 	border-bottom: 1px solid #e3e3e3;
+	background-color: white;
 }
 
 .table_expense_center td
