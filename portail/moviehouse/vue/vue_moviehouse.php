@@ -51,7 +51,7 @@
 
 			<article>
 				<!-- Switch entre accueil, vue générale et vue personnelle -->
-				<div class="switch_view">
+				<div class="switch_view" style="margin-top: 30px;">
 					<?php
 						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
 																 'main' => array('lib' => 'Synthèse', 'date' => $_GET['year']),

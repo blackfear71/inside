@@ -34,6 +34,12 @@
 /*   #ffad01            -> jaune moyen                                    */
 /*   #fffd4c            -> jaune clair (++)                               */
 /*   #fffde8            -> jaune clair (+)                                */
+/*                                                                        */
+/* 	 blanc fondu : rgb(255, 255, 255, 0.1)                                */
+/*   rouge foncé : rgb(200, 25, 50)                                       */
+/*   rouge clair : rgb(255, 25, 55)                                       */
+/*   bleu notifs : #2980b9                                                */
+/*   gris notifs : #a3a3a3                                                */
 /**************************************************************************/
 
 /*** Corps ***/
@@ -692,7 +698,6 @@ nav
 /*** Switch ***/
 .switch_view
 {
-	margin-top: 30px;
 	margin-bottom: 30px;
 	max-width: 100%;
 	margin-left: auto;
