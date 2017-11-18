@@ -474,7 +474,8 @@
   background-color: white;
   box-shadow: 0 0 2px #5c5c5c;
   float: right;
-  margin-right: -231px;
+	margin-right: -27px;
+	width: 248px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;
@@ -487,7 +488,8 @@
   background-color: white;
   box-shadow: 0 0 2px #5c5c5c;
   float: left;
-  margin-left: -231px;
+  margin-left: -27px;
+	width: 248px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;

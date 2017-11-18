@@ -308,9 +308,10 @@ header
 
 .zone_bandeau_right
 {
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
 	max-width: 50vw;
-	margin-top: -100px;
 }
 
 .logo_bandeau
@@ -1063,6 +1064,7 @@ nav
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	background-color: white;
 }
 
 .table_manage_users td

@@ -61,9 +61,9 @@
 
         <?php
           if ($error_inscription == true)
-            echo '<div id="inscription" class="zone_ins_pass" style="display: block; animation: none;">';
+            echo '<div id="inscription" class="zone_ins_pass" style="display: block;">';
           else
-            echo '<div id="inscription" class="zone_ins_pass" style="display: none;">';
+            echo '<div id="inscription" class="zone_ins_pass" style="display: block;">';
         ?>
           <div class="bandeau_index" style="width: 100%;">
             <!-- Inscription -->
@@ -93,7 +93,7 @@
           if ($error_password == true)
             echo '<div id="password" class="zone_ins_pass" style="display: block; animation: none;">';
           else
-            echo '<div id="password" class="zone_ins_pass" style="display: none;">';
+            echo '<div id="password" class="zone_ins_pass" style="display: block;">';
         ?>
 
           <div class="bandeau_index" style="width: 100%;">

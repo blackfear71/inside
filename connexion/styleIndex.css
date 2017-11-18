@@ -171,24 +171,10 @@
 }
 
 /*** Inscription & demande mot de passe***/
-@keyframes affichageIndex
-{
-	0%
-	{
-		left: -50%;
-	}
-	100%
-	{
-		left: 50%;
-	}
-}
-
 .zone_ins_pass
 {
-	animation: affichageIndex 1s ease;
 	position: absolute;
-	left: 50%;
-	transform: translateX(-52%);
+	margin-left: -100%;
 	display: inline-flex;
 	width: 21%;
 	height: 100vh;

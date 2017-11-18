@@ -1,7 +1,7 @@
 <div class="zone_bandeau">
-  <div class="zone_bandeau_left">
-    <!-- Logo -->
-    <?php
+  <?php
+    echo '<div class="zone_bandeau_left">';
+      // Logo
       if ($_SESSION['identifiant'] == "admin")
         echo '<a href="/inside/administration/administration.php?action=goConsulter">';
       else
@@ -76,25 +76,26 @@
         echo '</div>';
       echo '</div>';
     }
+
+    echo '<div class="zone_bandeau_right">';
+      // Titre de la page
+      echo '<div class="zone_titre_page">';
+        echo '<span class="text_titre_page">';
+          echo $title;
+        echo '</span>';
+      echo '</div>';
+
+      // Profil
+      if ($_SESSION['identifiant'] == "admin")
+        echo '<a href="/inside/administration/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
+      else
+        echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
+          echo '<div class="pseudo_bandeau">' . $_SESSION['pseudo'] . '</div>';
+            if (isset($_SESSION['avatar']) AND !empty($_SESSION['avatar']))
+              echo '<img src="/inside/profil/avatars/' . $_SESSION['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
+            else
+              echo '<img src="/inside/includes/icons/default.png" alt="avatar" class="avatar_bandeau" />';
+        echo '</a>';
+    echo '</div>';
   ?>
-
-  <div class="zone_bandeau_right">
-    <!-- Titre de la page -->
-    <div class="zone_titre_page">
-      <span class="text_titre_page">
-        <?php echo $title; ?>
-      </span>
-    </div>
-
-    <!-- Profil -->
-    <a href="/inside/profil/profil.php?user=<?php echo $_SESSION['identifiant']; ?>&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">
-      <div class="pseudo_bandeau"><?php echo $_SESSION['pseudo']; ?></div>
-      <?php
-        if (isset($_SESSION['avatar']) AND !empty($_SESSION['avatar']))
-          echo '<img src="/inside/profil/avatars/' . $_SESSION['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
-        else
-          echo '<img src="/inside/includes/icons/default.png" alt="avatar" class="avatar_bandeau" />';
-      ?>
-    </a>
-  </div>
 </div>

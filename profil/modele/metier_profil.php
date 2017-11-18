@@ -4,7 +4,7 @@
   include_once('../includes/classes/success.php');
   include_once('../includes/imagethumb.php');
 
-  // METIER : Lecture des données préférences
+  // METIER : Lecture des données profil
   // RETOUR : Objet Profile
   function getProfile($user)
   {
@@ -210,6 +210,7 @@
  				));
  				$reponse2->closeCursor();
 
+        $_SESSION['avatar']         = $new_name;
  				$_SESSION['avatar_changed'] = true;
  			}
  		}
@@ -241,6 +242,7 @@
     ));
     $reponse2->closeCursor();
 
+    $_SESSION['avatar']         = '';
     $_SESSION['avatar_deleted'] = true;
   }
 
