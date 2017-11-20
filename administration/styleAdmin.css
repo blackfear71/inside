@@ -540,6 +540,7 @@
 	background-position: center;
 	cursor: pointer;
 	border-radius: 5px;
+	vertical-align: middle;
 }
 
 .send_succes:hover
