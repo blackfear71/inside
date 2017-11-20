@@ -29,7 +29,7 @@
 
               case "W":
                 $view_notifications = "week";
-                $page               = "";
+                $page               = "&page=1";
                 break;
 
               case "A":
