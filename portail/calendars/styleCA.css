@@ -60,7 +60,6 @@
 {
 	width: 100%;
 	border-collapse: collapse;
-	vertical-align: top;
 }
 
 .td_saisie_mois
@@ -159,6 +158,7 @@
 	background-position: center;
 	cursor: pointer;
 	border-radius: 5px;
+	vertical-align: middle;
 }
 
 .send_calendar:hover

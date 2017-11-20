@@ -60,7 +60,6 @@
 				{
 					$_SESSION['connected']       = false;
 					$_SESSION['wrong_connexion'] = true;
-					break;
 				}
 
 				$_SESSION['not_yet'] = false;
