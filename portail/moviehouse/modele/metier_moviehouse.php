@@ -890,11 +890,21 @@
 
   // METIER : Suppression commentaire sur un détail film
   // RETOUR : Aucun
-  function deleteComment($id_comment)
+  function deleteComment($id_comment, $id_film)
   {
     global $bdd;
 
-    $reponse = $bdd->exec('DELETE FROM movie_house_comments WHERE id = ' . $id_comment);
+    // Suppression commentaire
+    $reponse1 = $bdd->exec('DELETE FROM movie_house_comments WHERE id = ' . $id_comment);
+
+    // Vérification dernier commentaire de la journée et sinon suppression notification
+    $reponse2 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $id_film . ' AND date = ' . date('Ymd'));
+    $donnees2 = $reponse2->fetch();
+
+    if ($reponse2->rowCount() == 0)
+      deleteNotification('comments', $id_film);
+
+    $reponse2->closeCursor();
   }
 
   // METIER : Modification commentaire sur un détail film

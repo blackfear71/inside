@@ -60,6 +60,7 @@
 {
 	width: 100%;
 	border-collapse: collapse;
+	vertical-align: top;
 }
 
 .td_saisie_mois
@@ -153,7 +154,7 @@
 	border: 0;
 	background-color: #e3e3e3;
 	background-image: url("/inside/portail/calendars/icons/send_red.png");
-	background-size: 35px;
+	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;

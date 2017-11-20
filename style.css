@@ -333,24 +333,25 @@ header
 	display: inline-block;
 	margin-left: 10px;
 	margin-right: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	width: 50px;
+	width: 70px;
 	height: 80px;
+
 	background-color: #1b1b1b;
 }
 
 .link_notifications
 {
 	display: block;
-	width: 50px;
-	height: 50px;
-	margin-top: 15px;
+	width: 70px;
+	line-height: 80px;
+	text-align: center;
 }
 
 .icon_notifications
 {
 	width: 50px;
+	vertical-align: middle;
+	margin-top: -4px;
 }
 
 @keyframes rotateNotifs
@@ -385,9 +386,8 @@ header
 .number_notifications
 {
 	float: left;
-	margin-top: -86px;
-	line-height: 50px;
-	width: 50px;
+	margin-top: -82px;
+	width: 70px;
 	text-align: center;
 	color: #262626;
 	position: relative;

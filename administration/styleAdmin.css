@@ -400,6 +400,7 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0px 15px;
+	vertical-align: top;
 }
 
 .td_saisie_succes_tit
