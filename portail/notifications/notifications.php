@@ -13,9 +13,9 @@
   switch ($_GET['view'])
   {
     case 'today':
-    case 'week':
       break;
 
+    case 'week':
     case 'me':
     case 'all':
       // Contrôle si la page renseignée et numérique
@@ -33,7 +33,7 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      if ($_GET['view'] == 'all' OR $_GET['view'] == 'me')
+      if ($_GET['view'] == 'all' OR $_GET['view'] == 'week' OR $_GET['view'] == 'me')
       {
         $nbPages = getPages($_GET['view'], $_SESSION['identifiant']);
 

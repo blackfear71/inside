@@ -14,8 +14,14 @@
 
     if ($view == "me")
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE author = "' . $user . '" OR category = "' . $user . '"');
+    elseif ($view == "week")
+    {
+      $date_moins_7 = date("Ymd") - 7;
+      $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7);
+    }
     else
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications');
+
 
     $data = $req->fetch();
 
@@ -57,8 +63,18 @@
         break;
 
       case "week":
+        // Pagination
+        $nb_par_page = 20;
+
+        // Contrôle dernière page
+        if ($page > $nb_pages)
+          $page = $nb_pages;
+
+        // Calcul première entrée
+        $premiere_entree = ($page - 1) * $nb_par_page;
+
         $date_moins_7 = date("Ymd") - 7;
-        $reponse = $bdd->query('SELECT * FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7 . ' ORDER BY date DESC, id DESC');
+        $reponse = $bdd->query('SELECT * FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7 . ' ORDER BY date DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "all":

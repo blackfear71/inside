@@ -57,7 +57,7 @@
 
             foreach ($listeSwitch as $view => $lib_view)
             {
-              if ($view == "all" OR $view == "me")
+              if ($view == "all" OR $view == "week" OR $view == "me")
                 $page = '&page=1';
               else
                 $page = '';
@@ -137,7 +137,7 @@
           }
 
           // Pagination
-          if (($_GET['view'] == "all" OR $_GET['view'] == "me") AND $nbPages > 1)
+          if (($_GET['view'] == "all" OR $_GET['view'] == "week" OR $_GET['view'] == "me") AND $nbPages > 1)
           {
             echo '<div class="zone_pagination">';
               for($i = 1; $i <= $nbPages; $i++)
