@@ -44,8 +44,8 @@
   if (!isset($_SESSION['wrong_date']))
     $_SESSION['wrong_date'] = NULL;
 
-  if (!isset($_SESSION['doesnt_exist']))
-    $_SESSION['doesnt_exist'] = NULL;
+  if (!isset($_SESSION['film_doesnt_exist']))
+    $_SESSION['film_doesnt_exist'] = NULL;
 
   if (!isset($_SESSION['film_added']))
     $_SESSION['film_added'] = NULL;
@@ -177,6 +177,13 @@
   if (!isset($_SESSION['weekly_cron']))
     $_SESSION['weekly_cron'] = NULL;
 
+  // Initialisation missions
+  if (!isset($_SESSION['mission_achieved']))
+    $_SESSION['mission_achieved'] = NULL;
+
+  if (!isset($_SESSION['mission_doesnt_exist']))
+    $_SESSION['mission_doesnt_exist'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -253,10 +260,10 @@
     $_SESSION['wrong_date'] = NULL;
   }
   // Film inexistant
-  elseif (isset($_SESSION['doesnt_exist']) AND $_SESSION['doesnt_exist'] == true)
+  elseif (isset($_SESSION['film_doesnt_exist']) AND $_SESSION['film_doesnt_exist'] == true)
   {
     $alerte = 'Ce film n\'existe pas !';
-    $_SESSION['doesnt_exist'] = NULL;
+    $_SESSION['film_doesnt_exist'] = NULL;
   }
   // Film ajouté
   elseif (isset($_SESSION['film_added']) AND $_SESSION['film_added'] == true)
@@ -575,6 +582,17 @@
   {
     $alerte = 'CRON hebdomadaire exécuté.';
     $_SESSION['weekly_cron'] = NULL;
+  }
+  elseif (isset($_SESSION['mission_achieved']) AND $_SESSION['mission_achieved'] == true)
+  {
+    $alerte = 'Bien joué ! Ta mission est terminée pour aujourd\'hui !';
+    $_SESSION['mission_achieved'] = NULL;
+  }
+  // Mission inexistante
+  elseif (isset($_SESSION['mission_doesnt_exist']) AND $_SESSION['mission_doesnt_exist'] == true)
+  {
+    $alerte = 'Cette mission n\'existe pas !';
+    $_SESSION['mission_doesnt_exist'] = NULL;
   }
 
   /*************/

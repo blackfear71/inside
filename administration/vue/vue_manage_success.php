@@ -139,7 +139,7 @@
                   echo '<div class="description_succes">' . $success->getDescription() . '</div>';
 
                   // Explications succès
-                  echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success()) . '</div>';
+                  echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
                 echo '</div>';
               echo '</div>';
             }

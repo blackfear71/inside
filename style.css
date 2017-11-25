@@ -35,7 +35,7 @@
 /*   #fffd4c            -> jaune clair (++)                               */
 /*   #fffde8            -> jaune clair (+)                                */
 /*                                                                        */
-/* 	 blanc fondu : rgb(255, 255, 255, 0.1)                                */
+/*   blanc fondu : rgb(255, 255, 255, 0.1)                                */
 /*   rouge foncé : rgb(200, 25, 50)                                       */
 /*   rouge clair : rgb(255, 25, 55)                                       */
 /*   bleu notifs : #2980b9                                                */
@@ -455,7 +455,7 @@ header
 	font-size: 150%;
 	text-transform: uppercase;
 	color: white;
-	line-height: 20px;
+	line-height: 80px;
 	height: 80px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -466,7 +466,8 @@ header
 .text_titre_page
 {
 	display: inline-block;
-	line-height: 1;
+	line-height: 20px;
+	margin-top: -8px;
 	vertical-align: middle;
 }
 
@@ -669,9 +670,9 @@ nav
 	margin-left: 10px;
 	margin-right: 10px;
 	vertical-align: middle;
-	margin-top: -6px;
+	margin-top: -4px;
 	border-radius: 2px;
-	transition: padding ease 0.4s;
+	transition: padding ease 0.2s;
 }
 
 .onglet_inactif:hover, .onglet_actif:hover
@@ -690,9 +691,9 @@ nav
 	margin-left: 10px;
 	margin-right: 10px;
 	vertical-align: middle;
-	margin-top: -6px;
+	margin-top: -4px;
 	border-radius: 2px;
-	transition: width ease 0.2s;
+	transition: padding ease 0.2s;
 }
 
 /*** Switch ***/
@@ -835,6 +836,7 @@ nav
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: -20px;
 	background-color: #e3e3e3;
 	border-radius: 5px;
 }
@@ -1172,4 +1174,181 @@ footer
 	margin-right: 3%;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
+}
+
+/*** Missions ***/
+.header_left_mission
+{
+	position: absolute;
+	top: 15px;
+	left: 0;
+	height: 50px;
+	width: 50px;
+	z-index: 5;
+}
+
+.header_middle_mission
+{
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	margin-left: -25px;
+	height: 50px;
+	width: 50px;
+	z-index: 5;
+}
+
+.header_right_mission
+{
+	position: absolute;
+	top: 15px;
+	right: 0;
+	height: 50px;
+	width: 50px;
+	z-index: 5;
+}
+
+.aside_top_mission
+{
+	position: absolute;
+	top: 20px;
+	left: 0;
+	height: 50px;
+	width: 50px;
+	z-index: 5;
+}
+
+.aside_middle_mission
+{
+	position: absolute;
+	top: 50%;
+	margin-top: -25px;
+	left: 0;
+	height: 50px;
+	width: 50px;
+	z-index: 5;
+}
+
+.aside_bottom_mission
+{
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	height: 50px;
+	width: 50px;
+	z-index: 5;
+}
+
+.nav_left_mission
+{
+	position: absolute;
+	left: 0;
+	margin-top: -88px;
+	height: 40px;
+	width: 40px;
+	z-index: 5;
+}
+
+.nav_middle_mission
+{
+	position: absolute;
+	left: 50%;
+	margin-left: -20px;
+	margin-top: -68px;
+	height: 40px;
+	width: 40px;
+	z-index: 5;
+}
+
+.nav_right_mission
+{
+	position: absolute;
+	right: 0;
+	margin-top: -88px;
+	height: 40px;
+	width: 40px;
+	z-index: 5;
+}
+
+.footer_left_mission
+{
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 5px;
+	left: 0;
+	height: 40px;
+	width: 40px;
+	z-index: 5;
+}
+
+.footer_middle_mission
+{
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -20px;
+	height: 40px;
+	width: 40px;
+	z-index: 5;
+}
+
+.footer_right_mission
+{
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 5px;
+	right: 0;
+	height: 40px;
+	width: 40px;
+	z-index: 5;
+}
+
+.header_left_mission input, .header_middle_mission input, .header_right_mission input, .aside_top_mission input, .aside_middle_mission input, .aside_bottom_mission input
+{
+	border: 0;
+	background-color: transparent;
+	height: 50px;
+	width: 50px;
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.footer_left_mission input, .footer_middle_mission input, .footer_right_mission input, .nav_left_mission input, .nav_middle_mission input, .nav_right_mission input
+{
+	border: 0;
+	background-color: transparent;
+	height: 40px;
+	width: 40px;
+	background-size: 40px 40px;
+	background-repeat: no-repeat;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.zone_resume_mission
+{
+	margin-top: 70px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.link_mission
+{
+	display: block;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #262626;
+	box-shadow: 0 0 3px #5c5c5c;
+	display: inline-block;
+	text-align: justify;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: robotothin, Verdana, sans-serif;
+	color: white;
+	text-decoration: none;
+	border-radius: 2px;
 }

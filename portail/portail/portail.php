@@ -1,6 +1,7 @@
 <?php
   // Fonction communes
   include_once('../../includes/fonctions_communes.php');
+  include_once('../../includes/fonctions_dates.php');
 
   // Contrôles communs Utilisateur
   controlsUser();
@@ -13,7 +14,8 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $preferences      = getPreferences($_SESSION['identifiant']);
+      $preferences = getPreferences($_SESSION['identifiant']);
+      $mission     = getMission7();
       break;
 
     default:
@@ -33,6 +35,18 @@
       $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
       $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+
+      if (isset($mission) AND !empty($mission))
+      {
+        $mission->setMission(htmlspecialchars($mission->getMission()));
+        $mission->setReference(htmlspecialchars($mission->getReference()));
+        $mission->setDate_deb(htmlspecialchars($mission->getDate_deb()));
+        $mission->setDate_fin(htmlspecialchars($mission->getDate_fin()));
+        $mission->setHeure(htmlspecialchars($mission->getHeure()));
+        $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
+        $mission->setDescription(htmlspecialchars($mission->getDescription()));
+        $mission->setExplications(htmlspecialchars($mission->getExplications()));
+      }
       break;
 
     default:

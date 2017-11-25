@@ -27,6 +27,123 @@
       $log['status'] = 'OK';
     }
 
+    // Cas pas d'enregristrement en base
+    if ($req->rowCount() == 0)
+      $log['status'] = 'OK';
+
+    $req->closeCursor();
+
+    return $log;
+  }
+
+  // FONCTION : Vérification durée mission
+  // RETOUR : Booléen
+  // FREQUENCE : tous les jours à 7h
+  function isOneDayMission()
+  {
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE date_deb = ' . date("Ymd") . ' AND date_fin = ' . date("Ymd"));
+    if ($req->rowCount() > 0)
+      $oneDayMission = true;
+    else
+      $oneDayMission = false;
+    $req->closeCursor();
+
+    return $oneDayMission;
+  }
+
+  // FONCTION : Insertion notification début de mission
+  // RETOUR : Tableau log traitement
+  // FREQUENCE : tous les jours à 7h
+  function isFirstDayMission()
+  {
+    $log = array('trt' => '/* Début de mission */', 'status' => 'KO');
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, date_deb FROM missions WHERE date_deb = ' . date("Ymd") . ' ORDER BY id ASC');
+
+    while($data = $req->fetch())
+    {
+      // Contrôle notification non existante
+      $notification_mission_exist = controlNotification('start_mission', $data['id']);
+
+      // Génération notification sortie cinéma
+      if ($notification_mission_exist != true)
+        insertNotification('admin', 'start_mission', $data['id']);
+
+      // Traitement effectué
+      $log['status'] = 'OK';
+    }
+
+    // Cas pas d'enregristrement en base
+    if ($req->rowCount() == 0)
+      $log['status'] = 'OK';
+
+    $req->closeCursor();
+
+    return $log;
+  }
+
+  // FONCTION : Insertion notification fin de mission
+  // RETOUR : Tableau log traitement
+  // FREQUENCE : tous les jours à 7h
+  function isLastDayMission()
+  {
+    $log = array('trt' => '/* Fin de mission */', 'status' => 'KO');
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_fin = ' . date("Ymd") . ' ORDER BY id ASC');
+
+    while($data = $req->fetch())
+    {
+      // Contrôle notification non existante
+      $notification_mission_exist = controlNotification('end_mission', $data['id']);
+
+      // Génération notification sortie cinéma
+      if ($notification_mission_exist != true)
+        insertNotification('admin', 'end_mission', $data['id']);
+
+      // Traitement effectué
+      $log['status'] = 'OK';
+    }
+
+    // Cas pas d'enregristrement en base
+    if ($req->rowCount() == 0)
+      $log['status'] = 'OK';
+
+    $req->closeCursor();
+
+    return $log;
+  }
+
+  // FONCTION : Insertion notification mission unique
+  // RETOUR : Tableau log traitement
+  // FREQUENCE : tous les jours à 7h
+  function isOneMission()
+  {
+    $log = array('trt' => '/* Mission unique */', 'status' => 'KO');
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_deb = ' . date("Ymd") . ' AND date_fin = ' . date("Ymd"));
+
+    while($data = $req->fetch())
+    {
+      // Contrôle notification non existante
+      $notification_mission_exist = controlNotification('one_mission', $data['id']);
+
+      // Génération notification sortie cinéma
+      if ($notification_mission_exist != true)
+        insertNotification('admin', 'one_mission', $data['id']);
+
+      // Traitement effectué
+      $log['status'] = 'OK';
+    }
+
+    // Cas pas d'enregristrement en base
     if ($req->rowCount() == 0)
       $log['status'] = 'OK';
 

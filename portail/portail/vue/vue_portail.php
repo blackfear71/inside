@@ -94,10 +94,81 @@
             echo '<a href="../collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="lien_portail">';
               echo '<div class="text_portail">COLLECTOR ROOM</div>';
               echo '<div class="fond_lien_portail">';
-                echo '<img src="../../includes/icons/collector.png" alt="calendars" class="img_lien_portail" />';
+                echo '<img src="../../includes/icons/collector.png" alt="collector" class="img_lien_portail" />';
+              echo '</div>';
+            echo '</a>';
+
+            // Missions
+            echo '<a href="../missions/missions.php?action=goConsulter" title="Missions : Insider" class="lien_portail">';
+              echo '<div class="text_portail">MISSIONS : INSIDER</div>';
+              echo '<div class="fond_lien_portail">';
+                echo '<img src="../../includes/icons/missions.png" alt="missions" class="img_lien_portail" />';
               echo '</div>';
             echo '</a>';
 					echo '</div>';
+
+          // Résumé mission
+          if (isset($mission) AND !empty($mission))
+          {
+            echo '<div class="zone_resume_mission">';
+              if (isset($_SESSION['tableau_missions']) AND !empty($_SESSION['tableau_missions']) AND $mission->getDate_deb() != $mission->getDate_fin())
+              {
+                $nbRestants = count($_SESSION['tableau_missions']);
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  if (date('Ymd') == $mission->getDate_deb())
+                    echo 'La mission <strong>' . $mission->getMission() . '</strong> commence aujourd\'hui, trouve vite les objectifs avant les autres !<br />';
+
+                  if ($nbRestants == 1)
+                    echo 'Il reste encore ' . $nbRestants . ' objectif à trouver aujourd\'hui pour terminer la mission <strong>' . $mission->getMission() . '</strong>.';
+                  else
+                    echo 'Il reste encore ' . $nbRestants . ' objectifs à trouver aujourd\'hui pour terminer la mission <strong>' . $mission->getMission() . '</strong>.';
+
+                  if (date('Ymd') == $mission->getDate_fin())
+                    echo '<br />La mission <strong>' . $mission->getMission() . '</strong> se termine aujourd\'hui, trouve vite les derniers objectifs !';
+                echo '</a>';
+              }
+              if (isset($_SESSION['tableau_missions']) AND !empty($_SESSION['tableau_missions']) AND $mission->getDate_deb() == $mission->getDate_fin())
+              {
+                $nbRestants = count($_SESSION['tableau_missions']);
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  if ($nbRestants == 1)
+                    echo 'La mission <strong>' . $mission->getMission() . '</strong> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectif à trouver !';
+                  else
+                    echo 'La mission <strong>' . $mission->getMission() . '</strong> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectifs à trouver !';
+                echo '</a>';
+              }
+              elseif (empty($_SESSION['tableau_missions']) AND date('Ymd') < $mission->getDate_fin() AND date('His') >= $mission->getHeure())
+              {
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  echo 'La mission <strong>' . $mission->getMission() . '</strong> est terminée pour aujourd\'hui ! Reviens demain pour continuer...';
+                echo '</a>';
+              }
+              elseif (empty($_SESSION['tableau_missions']) AND date('Ymd') < $mission->getDate_fin() AND date('His') < $mission->getHeure())
+              {
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  echo 'La mission <strong>' . $mission->getMission() . '</strong> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...';
+                echo '</a>';
+              }
+              elseif (empty($_SESSION['tableau_missions']) AND date('Ymd') == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
+              {
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  echo 'La mission <strong>' . $mission->getMission() . '</strong> se termine aujourd\'hui. Tu as trouvé tous les objectifs, reviens demain pour voir les scores !';
+                echo '</a>';
+              }
+              elseif (empty($_SESSION['tableau_missions']) AND date('Ymd') == $mission->getDate_fin() AND date('His') < $mission->getHeure())
+              {
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  echo 'La mission <strong>' . $mission->getMission() . '</strong> se termine aujourd\'hui. Trouve les derniers objectifs à partir de ' . formatTimeForDisplayLight($mission->getHeure()) . '.';
+                echo '</a>';
+              }
+              elseif (empty($_SESSION['tableau_missions']) AND (date('Ymd') >= $mission->getDate_fin() + 1) AND (date('Ymd') <= $mission->getDate_fin() + 7))
+              {
+                echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
+                  echo 'La mission <strong>' . $mission->getMission() . '</strong> est terminée. Va voir les résultats en cliquant sur ce message.';
+                echo '</a>';
+              }
+            echo '</div>';
+          }
 				?>
 			</article>
 		</section>

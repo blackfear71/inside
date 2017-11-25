@@ -66,6 +66,33 @@ function deployTopMenu(id, icon)
   }
 }
 
+// Changement thème
+function changeTheme(background, header, footer)
+{
+  console.log(background);
+  console.log(header);
+  console.log(footer);
+
+  if (background != null)
+  {
+    document.body.style.backgroundImage  = "url('" + background + "')";
+    document.body.style.backgroundRepeat = "repeat-y";
+    document.body.style.backgroundSize   = "100%";
+  }
+
+  if (header != null)
+  {
+    document.getElementsByClassName("zone_bandeau")[0].style.backgroundImage  = "url('" + header + "')";
+    document.getElementsByClassName("zone_bandeau")[0].style.backgroundRepeat = "repeat-x";
+  }
+
+  if (footer != null)
+  {
+    document.getElementsByTagName("footer")[0].style.backgroundImage  = "url('" + footer + "')";
+    document.getElementsByTagName("footer")[0].style.backgroundRepeat = "repeat-x";
+  }
+}
+
 // Redimensionne la zone de recherche quand sélectionnée et la refemre quand on clique n'importe où sur le body
 $(function()
 {

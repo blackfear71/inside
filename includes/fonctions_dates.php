@@ -34,6 +34,17 @@ function formatTimeForDisplay($time){
         return $time;
 }
 
+/* formatTimeForDisplayLight
+   Les heures sont stockées au format HHMMSS. Cette fonction renvoie l'heure au format
+   HH:MM pour l'affichage. Si elle ne comporte pas 6 caractères, on renvoie l'argument
+*/
+function formatTimeForDisplayLight($time){
+    if (strlen($time) == 6)
+        return substr($time, 0, 2) . ':' . substr($time, 2, 2);
+    else
+        return $time;
+}
+
 /* formatMonthForDisplay
    On stocke le mois sur 2 caractères et le convertit en une chaîne de caractères pour obtenir le mot correspondant
 */
@@ -146,5 +157,24 @@ function dureeOldMovies($type, $duree)
   }
 
   return $date;
+}
+
+/* ecartDatesEvent
+  <=> calcule la durée en jours entre 2 dates pour une mission
+*/
+function ecartDatesEvent($date_deb, $date_fin)
+{
+  $ecart = 0;
+
+  // Calcul
+  $date1 = strtotime($date_deb);
+  $date2 = strtotime($date_fin);
+
+  $calcul = abs($date2 - $date1);
+
+  // Formatage
+  $ecart = $calcul / (60*60*24);
+
+  return $ecart;
 }
 ?>

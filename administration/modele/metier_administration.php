@@ -1041,8 +1041,14 @@
     ));
     $req5->closeCursor();
 
+    // Suppression des missions
+    $req6 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $identifiant . '"');
+
+    // Suppression notification inscription
+    deleteNotification('inscrit', $identifiant);
+
     // Suppression utilisateur
-    $req6 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
+    $req7 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
   }
 
   // METIER : Refus désinscription

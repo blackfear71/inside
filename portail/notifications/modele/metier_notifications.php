@@ -358,6 +358,52 @@
           $lien   = "";
           break;
 
+        case "start_mission":
+          // Recherche données mission
+          $reponse = $bdd->query('SELECT id, mission, date_fin FROM missions WHERE id = "' . $notification->getContent() . '"');
+          $donnees = $reponse->fetch();
+
+          $id_mission = $donnees['id'];
+          $mission    = $donnees['mission'];
+          $date_fin   = $donnees['date_fin'];
+
+          $reponse->closeCursor();
+
+          $icone  = "missions";
+          $phrase = "La mission <strong>" . $mission . "</strong> est lancée, n'oubliez pas de participer tous les jours jusqu'au <strong>" . formatDateForDisplay($date_fin) . "</strong>.";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          break;
+
+        case "end_mission":
+          // Recherche données mission
+          $reponse = $bdd->query('SELECT id, mission FROM missions WHERE id = "' . $notification->getContent() . '"');
+          $donnees = $reponse->fetch();
+
+          $id_mission = $donnees['id'];
+          $mission    = $donnees['mission'];
+
+          $reponse->closeCursor();
+
+          $icone  = "missions";
+          $phrase = "La mission <strong>" . $mission . "</strong> se termine aujourd'hui ! Trouvez vite les derniers objectifs !";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          break;
+
+        case "one_mission":
+          // Recherche données mission
+          $reponse = $bdd->query('SELECT id, mission FROM missions WHERE id = "' . $notification->getContent() . '"');
+          $donnees = $reponse->fetch();
+
+          $id_mission = $donnees['id'];
+          $mission    = $donnees['mission'];
+
+          $reponse->closeCursor();
+
+          $icone  = "missions";
+          $phrase = "La mission <strong>" . $mission . "</strong> se déroule aujourd'hui uniquement ! Trouvez vite les objectifs !";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          break;
+
         default:
           $icone  = "inside";
           $phrase = $notification->getContent();

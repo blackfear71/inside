@@ -72,7 +72,7 @@
 		}
 
 		// Modifier les détails
-		if ($modify_film == true AND $_SESSION['doesnt_exist'] != true)
+		if ($modify_film == true AND $_SESSION['film_doesnt_exist'] != true)
 		{
 			echo '<a href="/inside/portail/moviehouse/saisie.php?modify_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
 				echo '<img src="/inside/includes/icons/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
@@ -96,7 +96,7 @@
 		}
 
 		// Demande suppression film
-		if ($delete_film == true AND $_SESSION['doesnt_exist'] != true)
+		if ($delete_film == true AND $_SESSION['film_doesnt_exist'] != true)
 		{
 			echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Demander la suppression de ce film ?\')) return false;" class="bouton_aside">';
 				echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
@@ -165,4 +165,9 @@
 			echo '<img src="/inside/includes/icons/menu_u.png" alt="menu" id="icon_menu_u" class="icon_menu_aside" style="opacity: 0;" />';
 		echo '</div>';
 	echo '</div>';
+
+	// Boutons missions
+	$zone_inside = "aside";
+
+	include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
 ?>

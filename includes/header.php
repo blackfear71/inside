@@ -1,5 +1,6 @@
-<div class="zone_bandeau">
-  <?php
+<?php
+  echo '<div class="zone_bandeau">';
+    // Partie gauche header
     echo '<div class="zone_bandeau_left">';
       // Logo
       if ($_SESSION['identifiant'] == "admin")
@@ -77,6 +78,7 @@
       echo '</div>';
     }
 
+    // Partie droite header
     echo '<div class="zone_bandeau_right">';
       // Titre de la page
       echo '<div class="zone_titre_page">';
@@ -97,5 +99,10 @@
               echo '<img src="/inside/includes/icons/default.png" alt="avatar" class="avatar_bandeau" />';
         echo '</a>';
     echo '</div>';
-  ?>
-</div>
+
+    // Boutons missions
+    $zone_inside = "header";
+
+    include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
+  echo '</div>';
+?>

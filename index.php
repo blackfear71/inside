@@ -1,16 +1,9 @@
 <?php
-  // Contrôles communs
-	// Lancement de la session
-	if (empty(session_id()))
-	 session_start();
+	// Fonction communes
+	include_once('includes/fonctions_communes.php');
 
-	// Si déjà connecté
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
-	 header('location: portail/portail/portail.php?action=goConsulter');
-	elseif (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
-	 header('location: administration/administration.php?action=goConsulter');
-	else
-	 $_SESSION['connected'] = false;
+	// Contrôles communs
+	controlsIndex();
 
 	// Initialisation sauvegarde saisie inscription
 	if (((!isset($_SESSION['too_short'])      OR  $_SESSION['too_short'] != true)
@@ -53,7 +46,21 @@
 		switch ($_GET['action'])
 		{
 			case "doConnecter":
-				$connected = connectUser($_POST);
+				$connected                    = connectUser($_POST);
+				$_SESSION['tableau_missions'] = array();
+
+				if ($connected == true AND $_SESSION['identifiant'] != "admin")
+				{
+					$mission = getMission();
+
+					if (!empty($mission) AND date("His") >= $mission->getHeure())
+					{
+						$nbMissionToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
+
+						if ($nbMissionToGenerate > 0)
+							$_SESSION['tableau_missions'] = generateMissions($nbMissionToGenerate, $mission);
+					}
+				}
 				break;
 
 			case "doDemanderInscription":

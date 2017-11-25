@@ -21,6 +21,26 @@
   // Mise à jour des succès
   // à développer (après la refonte des succès)
 
+  // Durée mission
+  $one_day_mission = isOneDayMission();
+
+  if ($one_day_mission == false)
+  {
+    // Notification début de mission
+    $begin_mission = isFirstDayMission();
+    array_push($daily_trt, $begin_mission);
+
+    // Notification fin de mission
+    $end_mission = isLastDayMission();
+    array_push($daily_trt, $end_mission);
+  }
+  else
+  {
+    // Notification mission unique
+    $one_mission = isOneMission();
+    array_push($daily_trt, $one_mission);
+  }
+
   // Génération log
   $heure_fin = date('His');
   generateLog($type_log, $daily_trt, $heure_debut, $heure_fin);

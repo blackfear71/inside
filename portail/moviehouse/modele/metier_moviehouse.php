@@ -649,7 +649,7 @@
     $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() == 0)
-      $_SESSION['doesnt_exist'] = true;
+      $_SESSION['film_doesnt_exist'] = true;
 
     $reponse->closeCursor();
 
@@ -658,11 +658,11 @@
     $donnees2 = $reponse2->fetch();
 
     if ($donnees2['to_delete'] == "Y")
-      $_SESSION['doesnt_exist'] = true;
+      $_SESSION['film_doesnt_exist'] = true;
 
     $reponse2->closeCursor();
 
-    if ($_SESSION['doesnt_exist'] == false)
+    if ($_SESSION['film_doesnt_exist'] == false)
       $filmExistant = true;
 
     return $filmExistant;

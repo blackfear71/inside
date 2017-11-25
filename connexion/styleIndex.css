@@ -71,6 +71,11 @@
 	animation: 1.4s ease 0s normal forwards 1 affichageCategorie;
 }
 
+#logo6
+{
+	animation: 1.6s ease 0s normal forwards 1 affichageCategorie;
+}
+
 .zone_logo_categories
 {
 	display: inline-block;

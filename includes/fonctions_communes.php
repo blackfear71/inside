@@ -1,5 +1,23 @@
 <?php
   include_once('appel_bdd.php');
+  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/missions.php');
+
+  // Contrôles Index, initialisation session
+  // RETOUR : aucun
+  function controlsIndex()
+  {
+    // Lancement de la session
+  	if (empty(session_id()))
+  	 session_start();
+
+  	// Si déjà connecté
+  	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
+  	 header('location: /inside/portail/portail/portail.php?action=goConsulter');
+  	elseif (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
+  	 header('location: /inside/administration/administration.php?action=goConsulter');
+  	else
+  	 $_SESSION['connected'] = false;
+  }
 
   // Contrôles Utilisateur, initialisation session
   // RETOUR : aucun
@@ -12,6 +30,9 @@
     // Contrôle non administrateur
   	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
       header('location: /inside/administration/administration.php?action=goConsulter');
+
+    // Détermination fond d'écran
+    $_SESSION['theme'] = setTheme();
 
     // Contrôle utilisateur connecté
   	if ($_SESSION['connected'] == false)
@@ -33,6 +54,46 @@
     // Contrôle administrateur connecté
     if ($_SESSION['connected'] == false)
       header('location: /inside/index.php');
+  }
+
+  // METIER : Détermine le thème
+  // RETOUR : Tableau chemins & types de thème
+  function setTheme()
+  {
+    $theme = array();
+
+    // Détermination fond d'écran mission (prioritaire)
+    $missionActive = NULL;
+    $date_jour     = date('Ymd');
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin');
+    $donnees = $reponse->fetch();
+
+    if ($reponse->rowCount() > 0)
+      $missionActive = Mission::withData($donnees);
+
+    $reponse->closeCursor();
+
+    if (isset($missionActive) AND !empty($missionActive))
+    {
+      $theme = array('background' => '/inside/includes/themes/backgrounds/' . $missionActive->getReference() . '.png',
+                     'header'     => '/inside/includes/themes/headers/' . $missionActive->getReference() . '_h.png',
+                     'footer'     => '/inside/includes/themes/footers/' . $missionActive->getReference() . '_f.png',
+                    );
+    }
+
+    /*// Détermination fond d'écran utilisateur (à développer)
+    if (!isset($missionActive) OR empty($missionActive))
+    {
+      // Lecture données utilisateur
+      // ici, lire le background stocké sur le profil
+
+      $background = '/inside/includes/backgrounds/' . $missionActive->getReference() . '.png';
+    }*/
+
+    return $theme;
   }
 
   // Formatage titres niveaux (succès)

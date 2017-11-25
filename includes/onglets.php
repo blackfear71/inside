@@ -24,6 +24,7 @@
 			$onglet_3 = '<a href="/inside/portail/petitspedestres/parcours.php?action=liste" title="Les Petits Pédestres" class="onglet_inactif"><img src="/inside/includes/icons/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
 			$onglet_4 = '<a href="/inside/portail/calendars/calendars.php?year=' . date("Y") . '&action=goConsulter" title="Calendars" class="onglet_inactif"><img src="/inside/includes/icons/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
 			$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_inactif"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
+			$onglet_6 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_inactif"><img src="/inside/includes/icons/missions.png" alt="missions" title="Missions" class="logo_onglet" /></a>';
 
 			// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 			$path = $_SERVER['PHP_SELF'];
@@ -63,11 +64,23 @@
 				$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_actif"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
 			}
 
-			echo $onglet_1, $onglet_2, $onglet_3, $onglet_4, $onglet_5;
+			// Missions : Insider
+			if ($path == '/inside/portail/missions/missions.php'
+			OR  $path == '/inside/portail/missions/details.php')
+			{
+				$onglet_6 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_actif"><img src="/inside/includes/icons/missions.png" alt="missions" title="Missions" class="logo_onglet" /></a>';
+			}
+
+			echo $onglet_1, $onglet_2, $onglet_3, $onglet_4, $onglet_5, $onglet_6;
 		echo '</div>';
 
 		echo '<div class="menu_nav_visible" title="Catégories" onclick="deployTopMenu(\'top_menu\', \'icon_nav\');">';
 			echo '<img src="/inside/includes/icons/down.png" alt="down" id="icon_nav" class="icon_down" />';
 		echo '</div>';
+
+		// Boutons missions
+		$zone_inside = "nav";
+
+		include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
 	echo '</nav>';
 ?>

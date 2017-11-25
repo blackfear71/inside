@@ -784,6 +784,29 @@
           $successUser[$success->getId()] = $bilan;
           break;
 
+        // Lutin de Noël
+        case "christmas2017":
+          $mission2017 = 0;
+
+          // Récupération Id mission
+          $req = $bdd->query('SELECT * FROM missions WHERE reference = "noel_2017"');
+          $data = $req->fetch();
+
+          $id_mission = $data['id'];
+
+          $req->closeCursor();
+
+          // Nombre total d'objectifs sur la mission
+          $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user . '"');
+          while($data2 = $req2->fetch())
+          {
+            $mission2017 += $data2['avancement'];
+          }
+          $req->closeCursor();
+
+          $successUser[$success->getId()] = $mission2017;
+          break;
+
         default:
           break;
       }

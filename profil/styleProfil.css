@@ -506,8 +506,7 @@
 	width: 100%;
 	margin-top: 10px;
 	border-radius: 5px;
-	background-color: white;
-	color: red;
+	background: white;
 }
 
 .progression_succes::-moz-meter-bar

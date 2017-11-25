@@ -139,9 +139,9 @@
 	/////////////////////////////////////
 	// Fonction formatage explications //
 	/////////////////////////////////////
-	function formatExplanation($expl, $lim)
+	function formatExplanation($string, $replace, $search)
 	{
-		$explanations = str_replace('%limit%', $lim, $expl);
+		$explanations = str_replace($search, $replace, $string);
 
 		return $explanations;
 	}

@@ -43,6 +43,9 @@
             <span class="zone_logo_categories" id="logo5">
               <img src="includes/icons/collector.png" alt="collector_grey" class="logo_categories" />
             </span>
+            <span class="zone_logo_categories" id="logo6">
+              <img src="includes/icons/missions.png" alt="missions_grey" class="logo_categories" />
+            </span>
           </div>
         </div>
 
