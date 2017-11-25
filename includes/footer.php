@@ -7,7 +7,7 @@
 
   include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
 
-  // Chargement fond d'écran
-  if ($_SESSION['identifiant'] != "admin")
+  // Chargement thème
+  if ($_SESSION['identifiant'] != "admin" AND !empty($_SESSION['theme']))
     echo '<script>changeTheme("' . $_SESSION['theme']['background'] . '", "' . $_SESSION['theme']['header'] . '", "' . $_SESSION['theme']['footer'] . '");</script>';
 ?>
