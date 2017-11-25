@@ -7,7 +7,7 @@
     {
       if ($success->getLevel() != $lvl AND $success->getLimit_success() > 1)
       {
-        echo '<tr class="ranking_line" style="background-color: rgb(255, 25, 55);"><td colspan="100%">' . formatTitleLvl($success->getLevel()) . '</td></tr>';
+        echo '<tr class="title_ranking_line"><td colspan="100%">' . formatTitleLvl($success->getLevel()) . '</td></tr>';
         $lvl = $success->getLevel();
       }
 
@@ -62,9 +62,9 @@
             echo '</td>';
 
         echo '</tr>';
-      }
 
-      $i++;
+        $i++;
+      }
     }
   echo '</table>';
 ?>
