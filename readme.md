@@ -8,6 +8,7 @@
 - LES PETITS PEDESTRES : organisation d'entrainements ou de courses à pied
 - CALENDARS : calendriers de l'équipe
 - COLLECTOR ROOM : collection de phrases cultes
+- MISSIONS : INSIDER : évènements du site
 - #THEBOX : boîte à idées
 - NOTIFICATIONS : centre de notifications générales
 - PROFIL : gestion paramètres et succès
