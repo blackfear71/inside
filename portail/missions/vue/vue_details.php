@@ -103,7 +103,7 @@
                     echo '<div class="separation_details_mission"></div>';
                   echo '</td>';
 
-                  echo '<td >';
+                  echo '<td>';
                     echo '<div class="ligne_details_mission" style="text-align: center;"><meter min="0" max="' . $detailsMission->getObjectif() . '" value="' . $missionUser['daily'] . '" class="avancement_details_mission"></meter></div>';
                     echo '<div class="separation_details_mission_2"></div>';
                   echo '</td>';

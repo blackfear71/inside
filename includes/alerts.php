@@ -591,7 +591,7 @@
   // Mission inexistante
   elseif (isset($_SESSION['mission_doesnt_exist']) AND $_SESSION['mission_doesnt_exist'] == true)
   {
-    $alerte = 'Cette mission n\'existe pas !';
+    $alerte = 'Cette mission n\'existe pas ou n\'est pas encore accessible !';
     $_SESSION['mission_doesnt_exist'] = NULL;
   }
 

@@ -12,7 +12,7 @@
     $missionExistante = false;
 
     // Contrôle film existant
-    $reponse = $bdd->query('SELECT * FROM missions WHERE id = ' . $id);
+    $reponse = $bdd->query('SELECT * FROM missions WHERE id = ' . $id . ' AND date_deb <= ' . date("Ymd"));
 
     if ($reponse->rowCount() == 0)
       $_SESSION['mission_doesnt_exist'] = true;
