@@ -4,21 +4,33 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 10%;">';
+			echo '<td rowspan="2" class="init_td_manage_users" style="width: 25%;">';
 				echo 'Film';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users" style="width: 35%;">';
+			echo '<td colspan="2" class="init_td_manage_users" style="width: 30%;">';
 				echo 'Suppression du film';
+			echo '</td>';
+
+			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+				echo 'Demande suppression par';
+			echo '</td>';
+
+			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+				echo 'Ajouté par';
+			echo '</td>';
+
+			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+				echo 'Personnes intéressées';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users" style="width: 10%;">';
+			echo '<td class="init_td_manage_users" style="width: 15%;">';
 				echo 'Accepter';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 10%;">';
+			echo '<td class="init_td_manage_users" style="width: 15%;">';
 				echo 'Refuser';
 			echo '</td>';
 		echo '</tr>';
@@ -49,11 +61,23 @@
     					echo '</form>';
             }
   				echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $film->getPseudo_del() . ' (' . $film->getIdentifiant_del() . ')';
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $film->getPseudo_add() . ' (' . $film->getIdentifiant_add() . ')';
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $film->getNb_users();
+					echo '</td>';
   			echo '</tr>';
       }
     }
     else
-      echo '<td colspan="3" class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
+      echo '<td colspan="6" class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
 
 		// Bas du tableau
 		echo '<tr>';
@@ -61,7 +85,7 @@
 				echo 'Alertes';
 			echo '</td>';
 
-			echo '<td colspan="2" class="td_manage_users">';
+			echo '<td colspan="5" class="td_manage_users">';
         if ($alerteFilms == true)
           echo '<span class="reset_warning">!</span>';
 			echo '</td>';

@@ -6,6 +6,9 @@
     private $to_delete;
     private $date_add;
     private $identifiant_add;
+    private $pseudo_add;
+    private $identifiant_del;
+    private $pseudo_del;
     private $date_theater;
     private $date_release;
     private $link;
@@ -31,6 +34,9 @@
       $this->to_delete       = '';
       $this->date_add        = '';
       $this->identifiant_add = '';
+      $this->pseudo_add      = '';
+      $this->identifiant_del = '';
+      $this->pseudo_del      = '';
       $this->date_theater    = '';
       $this->date_release    = '';
       $this->link            = '';
@@ -75,6 +81,15 @@
 
       if (isset($data['identifiant_add']))
         $this->identifiant_add = $data['identifiant_add'];
+
+      if (isset($data['pseudo_add']))
+        $this->pseudo_add      = $data['pseudo_add'];
+
+      if (isset($data['identifiant_del']))
+        $this->identifiant_del = $data['identifiant_del'];
+
+      if (isset($data['pseudo_del']))
+        $this->pseudo_del      = $data['pseudo_del'];
 
       if (isset($data['date_theater']))
         $this->date_theater    = $data['date_theater'];
@@ -179,6 +194,39 @@
     public function getIdentifiant_add()
     {
       return $this->identifiant_add;
+    }
+
+    // Pseudo ajout
+    public function setPseudo_add($pseudo_add)
+    {
+      $this->pseudo_add = $pseudo_add;
+    }
+
+    public function getPseudo_add()
+    {
+      return $this->pseudo_add;
+    }
+
+    // Identifiant suppression
+    public function setIdentifiant_del($identifiant_del)
+    {
+      $this->identifiant_del = $identifiant_del;
+    }
+
+    public function getIdentifiant_del()
+    {
+      return $this->identifiant_del;
+    }
+
+    // Pseudo suppression
+    public function setPseudo_del($pseudo_del)
+    {
+      $this->pseudo_del = $pseudo_del;
+    }
+
+    public function getPseudo_del()
+    {
+      return $this->pseudo_del;
     }
 
     // Date sortie cinéma

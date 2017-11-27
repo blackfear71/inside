@@ -69,15 +69,11 @@ function deployTopMenu(id, icon)
 // Changement thème
 function changeTheme(background, header, footer)
 {
-  console.log(background);
-  console.log(header);
-  console.log(footer);
-
   if (background != null)
   {
-    document.body.style.backgroundImage  = "url('" + background + "')";
-    document.body.style.backgroundRepeat = "repeat-y";
-    document.body.style.backgroundSize   = "100%";
+    document.body.style.background = "url(" + background + "), linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px)";
+    document.body.style.backgroundRepeat = "repeat, repeat, repeat-y";
+    document.body.style.backgroundSize   = "100%, 100% 200px, 200px 100%";
   }
 
   if (header != null)

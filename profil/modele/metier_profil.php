@@ -793,18 +793,22 @@
           $data = $req->fetch();
 
           $id_mission = $data['id'];
+          $date_fin   = $data['date_fin'];
 
           $req->closeCursor();
 
-          // Nombre total d'objectifs sur la mission
-          $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user . '"');
-          while($data2 = $req2->fetch())
+          if (date('Ymd') > $date_fin)
           {
-            $mission2017 += $data2['avancement'];
+            // Nombre total d'objectifs sur la mission
+            $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user . '"');
+            while($data2 = $req2->fetch())
+            {
+              $mission2017 += $data2['avancement'];
+            }
+            $req2->closeCursor();
           }
-          $req->closeCursor();
 
-          $successUser[$success->getId()] = $mission2017;
+            $successUser[$success->getId()] = $mission2017;
           break;
 
         default:

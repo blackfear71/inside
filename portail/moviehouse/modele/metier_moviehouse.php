@@ -450,6 +450,7 @@
                     'to_delete'       => "N",
                     'date_add'        => date("Ymd"),
                     'identifiant_add' => $user,
+                    'identifiant_del' => "",
                     'date_theater'    => $date_theater,
                     'date_release'    => "",
                     'link'            => "",
@@ -467,7 +468,8 @@
       $req = $bdd->prepare('INSERT INTO movie_house(film,
 																										to_delete,
                                                     date_add,
-																										identifiant_add,
+                                                    identifiant_add,
+																										identifiant_del,
 																										date_theater,
 																										date_release,
 																										link,
@@ -482,7 +484,8 @@
 																						VALUES(:film,
 																									 :to_delete,
                                                    :date_add,
-																									 :identifiant_add,
+                                                   :identifiant_add,
+																									 :identifiant_del,
 																									 :date_theater,
 																									 :date_release,
 																									 :link,
@@ -923,16 +926,18 @@
 
   // METIER : Demande de suppression d'un film
   // RETOUR : Aucun
-  function deleteFilm($id_film)
+  function deleteFilm($id_film, $user)
   {
     global $bdd;
 
-    $to_delete = "Y";
+    $to_delete       = "Y";
+    $identifiant_del = $user;
 
     // Modification de l'enregistrement en table
-    $req = $bdd->prepare('UPDATE movie_house SET to_delete = :to_delete WHERE id = ' . $id_film);
+    $req = $bdd->prepare('UPDATE movie_house SET to_delete = :to_delete, identifiant_del = :identifiant_del WHERE id = ' . $id_film);
     $req->execute(array(
-      'to_delete' => $to_delete
+      'to_delete'       => $to_delete,
+      'identifiant_del' => $identifiant_del
     ));
     $req->closeCursor();
 
@@ -1042,6 +1047,7 @@
     $to_delete       = "N";
     $date_add        = date("Ymd");
     $identifiant_add = $user;
+    $identifiant_del = "";
     $date_theater    = "";
     $date_release    = "";
     $link            = $post['link'];
@@ -1121,6 +1127,7 @@
                       'to_delete'       => $to_delete,
                       'date_add'        => $date_add,
                       'identifiant_add' => $identifiant_add,
+                      'identifiant_del' => $identifiant_del,
                       'date_theater'    => $date_theater,
                       'date_release'    => $date_release,
                       'link'            => $link,
@@ -1141,6 +1148,7 @@
         																							to_delete,
         																							date_add,
                                                       identifiant_add,
+                                                      identifiant_del,
         																							date_theater,
         																							date_release,
         																							link,
@@ -1155,7 +1163,8 @@
         																			VALUES(:film,
         																						 :to_delete,
                                                      :date_add,
-        																						 :identifiant_add,
+                                                     :identifiant_add,
+        																						 :identifiant_del,
         																						 :date_theater,
         																						 :date_release,
         																						 :link,
@@ -1359,6 +1368,9 @@
     $details->setTo_delete(htmlspecialchars($details->getTo_delete()));
     $details->setDate_add(htmlspecialchars($details->getDate_add()));
     $details->setIdentifiant_add(htmlspecialchars($details->getIdentifiant_add()));
+    $details->setPseudo_add(htmlspecialchars($details->getPseudo_add()));
+    $details->setIdentifiant_del(htmlspecialchars($details->getIdentifiant_del()));
+    $details->setPseudo_del(htmlspecialchars($details->getPseudo_del()));
     $details->setDate_theater(htmlspecialchars($details->getDate_theater()));
     $details->setDate_release(htmlspecialchars($details->getDate_release()));
     $details->setLink(htmlspecialchars($details->getLink()));

@@ -129,6 +129,9 @@
             $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
             $film->setDate_add(htmlspecialchars($film->getDate_add()));
             $film->setIdentifiant_add(htmlspecialchars($film->getIdentifiant_add()));
+            $film->setPseudo_add(htmlspecialchars($film->getPseudo_add()));
+            $film->setIdentifiant_del(htmlspecialchars($film->getIdentifiant_del()));
+            $film->setPseudo_del(htmlspecialchars($film->getPseudo_del()));
             $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
             $film->setDate_release(htmlspecialchars($film->getDate_release()));
             $film->setLink(htmlspecialchars($film->getLink()));
@@ -155,6 +158,9 @@
             $recent->setTo_delete(htmlspecialchars($recent->getTo_delete()));
             $recent->setDate_add(htmlspecialchars($recent->getDate_add()));
             $recent->setIdentifiant_add(htmlspecialchars($recent->getIdentifiant_add()));
+            $recent->setPseudo_add(htmlspecialchars($recent->getPseudo_add()));
+            $recent->setIdentifiant_del(htmlspecialchars($recent->getIdentifiant_del()));
+            $recent->setPseudo_del(htmlspecialchars($recent->getPseudo_del()));
             $recent->setDate_theater(htmlspecialchars($recent->getDate_theater()));
             $recent->setDate_release(htmlspecialchars($recent->getDate_release()));
             $recent->setLink(htmlspecialchars($recent->getLink()));
@@ -176,6 +182,9 @@
               $attendu->setTo_delete(htmlspecialchars($attendu->getTo_delete()));
               $attendu->setDate_add(htmlspecialchars($attendu->getDate_add()));
               $attendu->setIdentifiant_add(htmlspecialchars($attendu->getIdentifiant_add()));
+              $attendu->setPseudo_add(htmlspecialchars($attendu->getPseudo_add()));
+              $attendu->setIdentifiant_del(htmlspecialchars($attendu->getIdentifiant_del()));
+              $attendu->setPseudo_del(htmlspecialchars($attendu->getPseudo_del()));
               $attendu->setDate_theater(htmlspecialchars($attendu->getDate_theater()));
               $attendu->setDate_release(htmlspecialchars($attendu->getDate_release()));
               $attendu->setLink(htmlspecialchars($attendu->getLink()));
@@ -200,6 +209,9 @@
               $sortie->setTo_delete(htmlspecialchars($sortie->getTo_delete()));
               $sortie->setDate_add(htmlspecialchars($sortie->getDate_add()));
               $sortie->setIdentifiant_add(htmlspecialchars($sortie->getIdentifiant_add()));
+              $sortie->setPseudo_add(htmlspecialchars($sortie->getPseudo_add()));
+              $sortie->setIdentifiant_del(htmlspecialchars($sortie->getIdentifiant_del()));
+              $sortie->setPseudo_del(htmlspecialchars($sortie->getPseudo_del()));
               $sortie->setDate_theater(htmlspecialchars($sortie->getDate_theater()));
               $sortie->setDate_release(htmlspecialchars($sortie->getDate_release()));
               $sortie->setLink(htmlspecialchars($sortie->getLink()));
