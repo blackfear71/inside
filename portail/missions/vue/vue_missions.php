@@ -67,9 +67,9 @@
                     $titre_a_venir = true;
                   }
 
-                  echo '<div class="zone_presentation_mission_first">';
-                    echo '<div class="titre_mission_first">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' !</div>';
-                    echo '<img src="../../includes/icons/default_mission.png" alt="' . $ligneMission->getReference() . '" title="A venir" class="img_mission" />';
+                  echo '<div class="zone_presentation_mission_default">';
+                    echo '<img src="../../includes/icons/default_mission.png" alt="default_mission" title="A venir" class="img_mission_default" />';
+                    echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' !</div>';
                   echo '</div>';
                 }
                 // Mission en cours

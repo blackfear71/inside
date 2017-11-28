@@ -415,7 +415,7 @@ header
 {
 	display: inline-block;
 	background-color: rgb(255, 25, 55);
-	width: 42px;
+	width: 48px;
 	height: 42px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
@@ -439,7 +439,7 @@ header
 	border-top-right-radius: 2px;
 	border-bottom-right-radius: 2px;
 	border: 0;
-	width: calc(100% - 62px);
+	width: calc(100% - 68px);
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	vertical-align: middle;
@@ -518,7 +518,7 @@ aside
 	margin-left: -83px;
 	margin-top: -30px;
 	position: absolute;
-	z-index: 2;
+	z-index: 3;
 }
 
 .menu_aside_hidden
