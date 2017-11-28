@@ -23,6 +23,7 @@
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-between;
+	width: 100%;
 }
 
 .zone_presentation_mission_first

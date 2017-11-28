@@ -425,7 +425,7 @@ header
 	background-image: url("/inside/includes/icons/search.png");
 	background-size: 24px;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: 45% center;
 	cursor: pointer;
 }
 
