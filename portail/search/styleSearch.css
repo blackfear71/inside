@@ -2,6 +2,11 @@
 /*** Recherche ***/
 /*****************/
 
+.zone_recherche
+{
+	margin-top: -30px;
+}
+
 .titre_search
 {
 	width: 100%;

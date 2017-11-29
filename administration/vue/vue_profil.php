@@ -44,7 +44,7 @@
 
 			<article>
         <!-- Bloc utilisateur 1 -->
-        <div class="zone_profil_utilisateur">
+        <div class="zone_profil_utilisateur" style="margin-top: -30px;">
           <!-- Affichage pseudo -->
           <div class="zone_profil_utilisateur_titre">
             <?php
