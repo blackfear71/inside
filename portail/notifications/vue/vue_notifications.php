@@ -31,7 +31,6 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
-					$profil_user = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
@@ -83,52 +82,55 @@
 
             foreach ($notifications as $notification)
             {
-              // Date en fonction de la vue
-              switch($_GET['view'])
+              if (!empty($notification->getIcon()) AND !empty($notification->getSentence()) AND !empty($notification->getLink()))
               {
-                case "me":
-                case "week":
-                case "all":
-                  if ($notification->getDate() != $date_notif)
-                  {
-                    echo '<div class="date_notif">' . formatDateForDisplay($notification->getDate()) . '</div>';
-                    $date_notif = $notification->getDate();
-                  }
-                  break;
+                // Date en fonction de la vue
+                switch($_GET['view'])
+                {
+                  case "me":
+                  case "week":
+                  case "all":
+                    if ($notification->getDate() != $date_notif)
+                    {
+                      echo '<div class="date_notif">' . formatDateForDisplay($notification->getDate()) . '</div>';
+                      $date_notif = $notification->getDate();
+                    }
+                    break;
 
-                case "today":
-                default:
-                  break;
-              }
+                  case "today":
+                  default:
+                    break;
+                }
 
-              // Lien si présent
-              if (!empty($notification->getLink()))
-                if ($notification->getCategory() == "doodle")
-                  echo '<a href="' . $notification->getLink() . '" target="_blank" class="lien_notification">';
+                // Lien si présent
+                if (!empty($notification->getLink()))
+                  if ($notification->getCategory() == "doodle")
+                    echo '<a href="' . $notification->getLink() . '" target="_blank" class="lien_notification">';
+                  else
+                    echo '<a href="' . $notification->getLink() . '" class="lien_notification">';
                 else
-                  echo '<a href="' . $notification->getLink() . '" class="lien_notification">';
-              else
-                echo '<div class="lien_notification">';
+                  echo '<div class="lien_notification">';
 
-                  // Contenu (icône, phrase & date)
-                  echo '<table class="zone_notification">';
-                    echo '<tr>';
-                      echo '<td class="zone_notification_icone">';
-                        echo '<img src="../../includes/icons/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
-                      echo '</td>';
-                      echo '<td class="zone_notification_contenu">';
-                        echo $notification->getSentence();
-                      echo '</td>';
-                      echo '<td class="zone_notification_date">';
-                        echo formatTimeForDisplay($notification->getTime());
-                      echo '</td>';
-                    echo '</tr>';
-                  echo '</table>';
+                    // Contenu (icône, phrase & date)
+                    echo '<table class="zone_notification">';
+                      echo '<tr>';
+                        echo '<td class="zone_notification_icone">';
+                          echo '<img src="../../includes/icons/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
+                        echo '</td>';
+                        echo '<td class="zone_notification_contenu">';
+                          echo $notification->getSentence();
+                        echo '</td>';
+                        echo '<td class="zone_notification_date">';
+                          echo formatTimeForDisplay($notification->getTime());
+                        echo '</td>';
+                      echo '</tr>';
+                    echo '</table>';
 
-              if (!empty($notification->getLink()))
-                echo '</a>';
-              else
-                echo '</div>';
+                if (!empty($notification->getLink()))
+                  echo '</a>';
+                else
+                  echo '</div>';
+              }
             }
           }
           else

@@ -30,7 +30,6 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
-					$profil_user = true;
 					$back        = true;
 					$reports     = true;
 
@@ -89,7 +88,7 @@
             echo '</table>';
 					echo '</form>';
 				?>
-        
+
         <!-- Tableaux des idées -->
 				<?php
           include('table_ideas.php');

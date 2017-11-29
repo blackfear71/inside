@@ -30,7 +30,6 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
-					$profil_user = true;
 					$back        = true;
 					$ideas       = true;
 

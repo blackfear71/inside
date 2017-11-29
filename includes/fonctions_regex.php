@@ -136,6 +136,16 @@
 		return $bilan_format;
 	}
 
+	////////////////////////////////////////////////
+	// Fonction formatage distance pour affichage //
+	////////////////////////////////////////////////
+	function formatDistanceForDisplay($dist)
+	{
+		$dist_format = str_replace('.', ',', $dist) . ' km';
+
+		return $dist_format;
+	}
+
 	/////////////////////////////////////
 	// Fonction formatage explications //
 	/////////////////////////////////////

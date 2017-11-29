@@ -22,7 +22,7 @@
 		<header>
 			<?php
         $title= "Movie House";
-        
+
         include('../../includes/header.php');
         include('../../includes/onglets.php');
       ?>
@@ -33,7 +33,6 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
-					$profil_user = true;
 					$modify_film = true;
 					$delete_film = true;
 					$back        = true;

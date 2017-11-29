@@ -122,39 +122,51 @@
       {
         case "film":
           // Recherche du titre du film
-          $reponse = $bdd->query('SELECT id, film FROM movie_house WHERE id = ' . $notification->getContent());
+          $reponse = $bdd->query('SELECT id, film, to_delete FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
           $titre_film = $donnees['film'];
+          $to_delete  = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          $icone  = "movie_house";
-          $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_1' class='smiley' />";
-          $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
+          if ($to_delete != "Y")
+          {
+            $icone  = "movie_house";
+            $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_1' class='smiley' />";
+            $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
+          }
           break;
 
         case "doodle":
           // Recherche du titre du film et du Doodle
-          $reponse = $bdd->query('SELECT id, film, doodle FROM movie_house WHERE id = ' . $notification->getContent());
+          $reponse = $bdd->query('SELECT id, film, doodle, to_delete FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
           $titre_film = $donnees['film'];
           $doodle     = $donnees['doodle'];
+          $to_delete  = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          $icone  = "doodle";
-          $phrase = "Un Doodle vient d'être mis en place pour le film <strong>" . $titre_film . "</strong>. N'oubliez pas d'y répondre si vous êtes intéressé(e) !";
-          $lien   = $doodle;
+          if ($to_delete != "Y")
+          {
+            $icone  = "doodle";
+            $phrase = "Un Doodle vient d'être mis en place pour le film <strong>" . $titre_film . "</strong>. N'oubliez pas d'y répondre si vous êtes intéressé(e) !";
+            $lien   = $doodle;
+          }
           break;
 
         case "cinema":
           // Recherche du titre du film
-          $reponse = $bdd->query('SELECT id, film FROM movie_house WHERE id = ' . $notification->getContent());
+          $reponse = $bdd->query('SELECT id, film, to_delete FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
           $titre_film = $donnees['film'];
+          $to_delete  = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          $icone  = "way_out";
-          $phrase = "Une sortie cinéma a été programmée <u>aujourd'hui</u> pour le film <strong>" . $titre_film . "</strong>.";
-          $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
+          if ($to_delete != "Y")
+          {
+            $icone  = "way_out";
+            $phrase = "Une sortie cinéma a été programmée <u>aujourd'hui</u> pour le film <strong>" . $titre_film . "</strong>.";
+            $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
+          }
           break;
 
         case 'comments':

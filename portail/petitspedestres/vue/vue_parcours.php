@@ -32,7 +32,6 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect       = true;
-					$profil_user      = true;
 					$ajouter_parcours = true;
 					$modify_parcours  = true;
 					$back             = true;

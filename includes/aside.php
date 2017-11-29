@@ -7,9 +7,6 @@
 	if (!isset($disconnect))
 		$disconnect = false;
 
-	if (!isset($profil_user))
-		$profil_user = false;
-
 	if (!isset($add_article))
 		$add_article = false;
 
