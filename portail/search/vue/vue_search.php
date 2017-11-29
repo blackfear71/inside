@@ -60,7 +60,7 @@
                         echo $resultatsMH->getFilm();
                       echo '</td>';
                       echo '<td class="zone_resultat_info">';
-                        echo 'Sorti au cinéma le ' . formatDateForDisplay($resultatsMH->getDate_theater());
+                        echo 'Sortie au cinéma le ' . formatDateForDisplay($resultatsMH->getDate_theater());
                       echo '</td>';
                     echo '</tr>';
                   echo '</table>';

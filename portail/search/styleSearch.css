@@ -59,6 +59,11 @@
   color: #262626;
 }
 
+.lien_resultat:hover .zone_resultat_titre
+{
+	background-color: #d3d3d3;
+}
+
 .zone_resultat_info
 {
   background-color: rgb(255, 25, 55);
