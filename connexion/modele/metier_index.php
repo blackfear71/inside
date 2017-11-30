@@ -350,7 +350,8 @@
                                        '/inside/portail/portail/portail.php',
                                        '/inside/portail/missions/missions.php',
                                        '/inside/portail/missions/details.php',
-                                       '/inside/profil/profil.php',
+                                       '/inside/portail/search/search.php',
+                                       '/inside/profil/profil.php'
                                       );
     $listZonesCompletes        = array('header',
                                        'nav',
@@ -386,6 +387,7 @@
       // Zone
       switch ($page)
       {
+        // Cas avec <nav>
         case '/inside/portail/calendars/calendars.php':
         case '/inside/portail/collector/collector.php':
         case '/inside/portail/expensecenter/expensecenter.php':
@@ -399,10 +401,12 @@
           $zone = $listZonesCompletes[array_rand($listZonesCompletes)];
           break;
 
+        // Cas sans <nav>
         case '/inside/portail/bugs/bugs.php':
         case '/inside/portail/notifications/notifications.php':
         case '/inside/portail/portail/portail.php':
         case '/inside/profil/profil.php':
+        case '/inside/portail/search/search.php':
         default:
           $zone = $listZonesPartielles[array_rand($listZonesPartielles)];
           break;
