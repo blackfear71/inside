@@ -160,7 +160,7 @@
                   echo 'La mission <strong>' . $mission->getMission() . '</strong> se termine aujourd\'hui. Trouve les derniers objectifs à partir de ' . formatTimeForDisplayLight($mission->getHeure()) . '.';
                 echo '</a>';
               }
-              elseif (empty($_SESSION['tableau_missions']) AND (date('Ymd') >= $mission->getDate_fin() + 1) AND (date('Ymd') <= $mission->getDate_fin() + 7))
+              elseif (empty($_SESSION['tableau_missions']) AND (date('Ymd') >= date('Ymd', strtotime($mission->getDate_fin() . ' + 1 day'))) AND (date('Ymd') <= date('Ymd', strtotime($mission->getDate_fin() . ' + 7 days'))))
               {
                 echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="link_mission">';
                   echo 'La mission <strong>' . $mission->getMission() . '</strong> est terminée. Va voir les résultats en cliquant sur ce message.';

@@ -16,12 +16,11 @@
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE author = "' . $user . '" OR category = "' . $user . '"');
     elseif ($view == "week")
     {
-      $date_moins_7 = date("Ymd") - 7;
+      $date_moins_7 = date("Ymd", strtotime(date("Ymd") . ' - 7 days'));
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7);
     }
     else
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications');
-
 
     $data = $req->fetch();
 
@@ -73,7 +72,7 @@
         // Calcul première entrée
         $premiere_entree = ($page - 1) * $nb_par_page;
 
-        $date_moins_7 = date("Ymd") - 7;
+        $date_moins_7 = date("Ymd", strtotime(date("Ymd") . ' - 7 days'));
         $reponse = $bdd->query('SELECT * FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7 . ' ORDER BY date DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 

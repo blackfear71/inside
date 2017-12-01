@@ -31,7 +31,9 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin + 7');
+    $date_jour_moins_7 = date("Ymd", strtotime(date("Ymd") . ' - 7 days'));
+
+    $reponse = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . $date_jour . ' AND date_fin >= ' . $date_jour_moins_7);
     $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() > 0)
