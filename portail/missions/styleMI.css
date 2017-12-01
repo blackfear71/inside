@@ -218,6 +218,7 @@
 {
   background-color: #d3d3d3;
   line-height: 30px;
+	min-height: 30px;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
@@ -233,6 +234,7 @@
 {
   background-color: #d3d3d3;
   line-height: 30px;
+	min-height: 30px;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
