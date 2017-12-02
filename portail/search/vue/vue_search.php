@@ -50,7 +50,7 @@
               if (!empty($resultats['movie_house']))
               {
                 // Titre section
-                echo '<div class="titre_search">Movie House</div>';
+                echo '<div class="titre_search">Movie House</div><div class="count_search">' . $resultats['nb_movie_house'] . '</div>';
 
                 // Résultats
                 foreach($resultats['movie_house'] as $resultatsMH)
@@ -73,7 +73,7 @@
               if (!empty($resultats['petits_pedestres']))
               {
                 // Titre section
-                echo '<div class="titre_search">Les Petits Pédestres</div>';
+                echo '<div class="titre_search">Les Petits Pédestres</div><div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div>';
 
                 // Résultats
                 foreach($resultats['petits_pedestres'] as $resultatsPP)
@@ -96,7 +96,7 @@
               if (!empty($resultats['missions']))
               {
                 // Titre section
-                echo '<div class="titre_search">Missions</div>';
+                echo '<div class="titre_search">Missions</div><div class="count_search">' . $resultats['nb_missions'] . '</div>';
 
                 // Résultats
                 foreach($resultats['missions'] as $resultatsMI)

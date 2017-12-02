@@ -12,6 +12,9 @@
     $results_MH = array();
     $results_PP = array();
     $results_MI = array();
+    $nb_MH      = 0;
+    $nb_PP      = 0;
+    $nb_MI      = 0;
 
     $recherche  = htmlspecialchars($search);
 
@@ -24,6 +27,7 @@
       while($donnees1 = $reponse1->fetch())
       {
         $myMovie = Movie::withData($donnees1);
+        $nb_MH = $reponse1->rowCount();
 
         // On ajoute la ligne au tableau
         array_push($results_MH, $myMovie);
@@ -35,6 +39,7 @@
       while($donnees2 = $reponse2->fetch())
       {
         $myParcours = Parcours::withData($donnees2);
+        $nb_PP = $reponse2->rowCount();
 
         // On ajoute la ligne au tableau
         array_push($results_PP, $myParcours);
@@ -46,6 +51,7 @@
       while($donnees3 = $reponse3->fetch())
       {
         $myMission = Mission::withData($donnees3);
+        $nb_MI = $reponse3->rowCount();
 
         // On ajoute la ligne au tableau
         array_push($results_MI, $myMission);
@@ -53,9 +59,12 @@
       $reponse3->closeCursor();
 
       // On ajoute les résultats au tableau final
-      $results = array('movie_house'      => $results_MH,
-                       'petits_pedestres' => $results_PP,
-                       'missions'         => $results_MI
+      $results = array('movie_house'         => $results_MH,
+                       'petits_pedestres'    => $results_PP,
+                       'missions'            => $results_MI,
+                       'nb_movie_house'      => $nb_MH,
+                       'nb_petits_pedestres' => $nb_PP,
+                       'nb_missions'         => $nb_MI
                       );
     }
 

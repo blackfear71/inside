@@ -1,4 +1,7 @@
 <?php
+  // Ce fichier génère les boutons de missions. Ceux-ci sont déterminés dans les fonctions communes (controlUser) et récupérés ici. Cette page est incluse dans les zones où l'on souhaite
+  // voir les boutons (header, aside, nav & footer). Leur position est déterminée par le style généré précédemment.
+  
   // Page courante
   $page_courante = $_SERVER['PHP_SELF'];
 
@@ -23,8 +26,4 @@
       }
     }
   }
-
-  /*echo'<div style="clear: both; line-height: 50px; margin-left: 100px;">';
-    var_dump($_SESSION['tableau_missions']);
-  echo '</div>';*/
 ?>

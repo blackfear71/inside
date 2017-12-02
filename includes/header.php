@@ -102,7 +102,6 @@
 
     // Boutons missions
     $zone_inside = "header";
-
     include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
   echo '</div>';
 ?>

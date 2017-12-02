@@ -46,21 +46,7 @@
 		switch ($_GET['action'])
 		{
 			case "doConnecter":
-				$connected                    = connectUser($_POST);
-				$_SESSION['tableau_missions'] = array();
-
-				if ($connected == true AND $_SESSION['identifiant'] != "admin")
-				{
-					$mission = getMission();
-
-					if (!empty($mission) AND date("His") >= $mission->getHeure())
-					{
-						$nbMissionToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
-
-						if ($nbMissionToGenerate > 0)
-							$_SESSION['tableau_missions'] = generateMissions($nbMissionToGenerate, $mission);
-					}
-				}
+				$connected = connectUser($_POST);
 				break;
 
 			case "doDemanderInscription":
