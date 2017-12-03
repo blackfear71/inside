@@ -959,13 +959,13 @@
     $salt  = rand();
 
     // On génère un nouveau mot de passe aléatoire
-    $chaine       = random_string(10);
-    $mot_de_passe = htmlspecialchars(hash('sha1', $chaine . $salt));
+    $chaine   = random_string(10);
+    $password = htmlspecialchars(hash('sha1', $chaine . $salt));
 
-    $req = $bdd->prepare('UPDATE users SET salt = :salt, mot_de_passe = :mot_de_passe, reset = :reset WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET salt = :salt, password = :password, reset = :reset WHERE id = ' . $id_user);
     $req->execute(array(
       'salt'         => $salt,
-      'mot_de_passe' => $mot_de_passe,
+      'password'     => $password,
       'reset'        => $reset
     ));
     $req->closeCursor();
@@ -1701,14 +1701,14 @@
       global $bdd;
 
       // Lecture des données actuelles de l'utilisateur
-      $reponse = $bdd->query('SELECT id, identifiant, salt, mot_de_passe FROM users WHERE identifiant = "' . $user . '"');
+      $reponse = $bdd->query('SELECT id, identifiant, salt, password FROM users WHERE identifiant = "' . $user . '"');
       $donnees = $reponse->fetch();
 
       $wrong_password = false;
 
       $old_password = htmlspecialchars(hash('sha1', $post['old_password'] . $donnees['salt']));
 
-      if ($old_password == $donnees['mot_de_passe'])
+      if ($old_password == $donnees['password'])
       {
         $salt                 = rand();
         $new_password         = htmlspecialchars(hash('sha1', $post['new_password'] . $salt));
@@ -1716,10 +1716,10 @@
 
         if ($new_password == $confirm_new_password)
         {
-          $req = $bdd->prepare('UPDATE users SET salt = :salt, mot_de_passe = :mot_de_passe WHERE identifiant = "' . $user . '"');
+          $req = $bdd->prepare('UPDATE users SET salt = :salt, password = :password WHERE identifiant = "' . $user . '"');
           $req->execute(array(
-            'salt' => $salt,
-            'mot_de_passe' => $new_password
+            'salt'     => $salt,
+            'password' => $new_password
           ));
           $req->closeCursor();
 

@@ -211,7 +211,7 @@
 
   // METIER : Modification phrases cultes
   // RETOUR : Aucun
-  function modifyCollector($post, $id_col)
+  function updateCollector($post, $id_col)
   {
     $date_a_verifier = $post['date_collector'];
 

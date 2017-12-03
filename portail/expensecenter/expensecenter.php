@@ -45,7 +45,7 @@
     case 'doModifier':
       // Update des données par le modèle
       $listeUsers = getUsers();
-      modifyExpense($_GET['id_modify'], $_POST, $listeUsers);
+      updateExpense($_GET['id_modify'], $_POST, $listeUsers);
       break;
 
     case 'doSupprimer':

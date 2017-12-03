@@ -99,7 +99,7 @@
         echo 'Participants';
       echo '</td>';
 
-      echo '<td class="td_details_mission_right" style="border: 0; padding-bottom: 0; padding-left: 10px;">';
+      echo '<td class="td_details_mission_right" style="border: 0; padding-bottom: 0; padding-top: 0; padding-left: 10px;">';
         foreach ($participants as $participant)
         {
           echo '<div class="zone_avatar_details_mission">';

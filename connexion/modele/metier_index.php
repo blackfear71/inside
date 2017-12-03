@@ -32,7 +32,7 @@
 			else
 			{
 				$mdp = htmlspecialchars(hash('sha1', $post['mdp'] . $donnees['salt'])); // On crypte de la même façon qu'à l'identification pour comparer, avec un grain de sel
-				if (isset($mdp) AND $mdp == $donnees['mot_de_passe'])
+				if (isset($mdp) AND $mdp == $donnees['password'])
 				{
 					// Sauvegarde des données utilisateur en SESSION
 					$_SESSION['connected']       = true;
@@ -136,7 +136,7 @@
           // On créé l'utilisateur
           $req = $bdd->prepare('INSERT INTO users(identifiant,
                                                   salt,
-                                                  mot_de_passe,
+                                                  password,
                                                   reset,
                                                   pseudo,
                                                   avatar,
@@ -146,7 +146,7 @@
                                                   expenses)
                                            VALUES(:identifiant,
                                                   :salt,
-                                                  :mot_de_passe,
+                                                  :password,
                                                   :reset,
                                                   :pseudo,
                                                   :avatar,
@@ -156,16 +156,16 @@
                                                   :expenses
                                                  )');
   				$req->execute(array(
-  					'identifiant'  => $trigramme,
-            'salt'         => $salt,
-            'mot_de_passe' => $password,
-            'reset'        => $reset,
-  					'pseudo'       => $pseudo,
-  					'avatar'       => $avatar,
-            'email'        => $email,
-            'beginner'     => $beginner,
-            'developper'   => $developper,
-            'expenses'     => $expenses
+  					'identifiant' => $trigramme,
+            'salt'        => $salt,
+            'password'    => $password,
+            'reset'       => $reset,
+  					'pseudo'      => $pseudo,
+  					'avatar'      => $avatar,
+            'email'       => $email,
+            'beginner'    => $beginner,
+            'developper'  => $developper,
+            'expenses'    => $expenses
   					));
   				$req->closeCursor();
 

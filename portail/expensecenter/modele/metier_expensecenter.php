@@ -329,7 +329,7 @@
 
   // METIER : Modification d'une dépense
   // RETOUR : Aucun
-  function modifyExpense($id_modify, $post, $list_users)
+  function updateExpense($id_modify, $post, $list_users)
   {
     $price_new   = str_replace(',', '.', htmlspecialchars($post['depense']));
     $buyer_new   = $post['buyer_user'];

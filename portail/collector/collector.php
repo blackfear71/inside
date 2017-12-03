@@ -56,7 +56,7 @@
       break;
 
     case "doModifier":
-      modifyCollector($_POST, $_GET['modify_id']);
+      updateCollector($_POST, $_GET['modify_id']);
       break;
 
     case "doVoter":
