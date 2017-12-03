@@ -75,14 +75,16 @@
     case "goConsulter":
       if ($nbPages > 0)
       {
-        foreach ($listeUsers as $user)
+        foreach ($listeUsers as &$user)
         {
           $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
           $user->setPseudo(htmlspecialchars($user->getPseudo()));
           $user->setAvatar(htmlspecialchars($user->getAvatar()));
         }
 
-        foreach ($listeCollectors as $collector)
+        unset($user);
+
+        foreach ($listeCollectors as &$collector)
         {
           $collector->setAuthor(htmlspecialchars($collector->getAuthor()));
           $collector->setName_a(htmlspecialchars($collector->getName_a()));
@@ -95,12 +97,16 @@
           $collector->setDate_add(htmlspecialchars($collector->getDate_add()));
         }
 
-        foreach ($listeVotesUsers as $vote)
+        unset($collector);
+
+        foreach ($listeVotesUsers as &$vote)
         {
           $vote->setId_collector(htmlspecialchars($vote->getId_collector()));
           $vote->setIdentifiant(htmlspecialchars($vote->getIdentifiant()));
           $vote->setVote(htmlspecialchars($vote->getVote()));
         }
+
+        unset($vote);
       }
       break;
 

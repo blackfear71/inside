@@ -63,7 +63,7 @@
     case 'goConsulter':
       if (!empty($notifications))
       {
-        foreach ($notifications as $notification)
+        foreach ($notifications as &$notification)
         {
           $notification->setAuthor(htmlspecialchars($notification->getAuthor()));
           $notification->setDate(htmlspecialchars($notification->getDate()));
@@ -74,6 +74,8 @@
           $notification->setSentence(htmlspecialchars($notification->getSentence()));
           $notification->setLink(htmlspecialchars($notification->getLink()));
         }
+
+        unset($notification);
 
         $notifications = formatNotifications($notifications);
       }

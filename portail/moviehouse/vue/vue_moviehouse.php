@@ -74,7 +74,7 @@
 
 				<!-- Affichage de la page en fonction de la vue -->
 				<?php
-          switch($_GET['view'])
+          switch ($_GET['view'])
           {
             case "main":
               include("vue/onglets_moviehouse.php");

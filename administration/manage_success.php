@@ -71,7 +71,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeSuccess as $success)
+      foreach ($listeSuccess as &$success)
       {
         $success->setReference(htmlspecialchars($success->getReference()));
         $success->setLevel(htmlspecialchars($success->getLevel()));
@@ -81,10 +81,12 @@
 				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));
         $success->setExplanation(htmlspecialchars($success->getExplanation()));
       }
+
+			unset($success);
       break;
 
     case 'goModifier':
-      foreach ($listeSuccess as $success)
+      foreach ($listeSuccess as &$success)
       {
         $success->setReference(htmlspecialchars($success->getReference()));
         $success->setLevel(htmlspecialchars($success->getLevel()));
@@ -94,6 +96,8 @@
 				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));
         $success->setExplanation(htmlspecialchars($success->getExplanation()));
       }
+
+			unset($success);
       break;
 
     case "doAjouter":

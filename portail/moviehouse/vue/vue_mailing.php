@@ -54,7 +54,7 @@
           echo '<div class="zone_destinataires_mail">';
             $email_present = false;
 
-            foreach($listeEtoiles as $participant)
+            foreach ($listeEtoiles as $participant)
             {
               if (!empty($participant->getEmail()))
               {

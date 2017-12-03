@@ -40,7 +40,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeSuppression as $calendar)
+			foreach ($listeSuppression as &$calendar)
 			{
 				$calendar->setId(htmlspecialchars($calendar->getId()));
         $calendar->setTo_delete(htmlspecialchars($calendar->getTo_delete()));
@@ -49,12 +49,16 @@
 				$calendar->setCalendar(htmlspecialchars($calendar->getCalendar()));
 			}
 
-      foreach ($listePreferences as $preference)
+      unset($calendar);
+
+      foreach ($listePreferences as &$preference)
       {
         $preference['identifiant']      = htmlspecialchars($preference['identifiant']);
         $preference['pseudo']           = htmlspecialchars($preference['pseudo']);
         $preference['manage_calendars'] = htmlspecialchars($preference['manage_calendars']);
       }
+
+      unset($preference);
       break;
 
     case "doChangerAutorisations":

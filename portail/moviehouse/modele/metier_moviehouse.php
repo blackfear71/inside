@@ -130,7 +130,7 @@
       $tri_1 = NULL;
       $tri_2 = NULL;
 
-      foreach($moyenne_stars as $ligne)
+      foreach ($moyenne_stars as $ligne)
       {
         $tri_1[] = $ligne[3];
         $tri_2[] = $ligne[2];

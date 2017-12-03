@@ -51,7 +51,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeIdeas as $idea)
+      foreach ($listeIdeas as &$idea)
       {
         $idea->setSubject(htmlspecialchars($idea->getSubject()));
         $idea->setDate(htmlspecialchars($idea->getDate()));
@@ -62,6 +62,8 @@
         $idea->setDevelopper(htmlspecialchars($idea->getDevelopper()));
         $idea->setName_d(htmlspecialchars($idea->getName_d()));
       }
+
+      unset($idea);
       break;
 
     case 'doInserer':

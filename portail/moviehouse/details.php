@@ -66,7 +66,7 @@
     case 'goConsulter':
       if ($filmExistant == true)
       {
-        foreach ($listeNavigation as $navigation)
+        foreach ($listeNavigation as &$navigation)
         {
           if (!empty($navigation))
           {
@@ -74,6 +74,8 @@
             $navigation['film'] = htmlspecialchars($navigation['film']);
           }
         }
+
+        unset($navigation);
 
         $detailsFilm->setId(htmlspecialchars($detailsFilm->getId()));
         $detailsFilm->setFilm(htmlspecialchars($detailsFilm->getFilm()));
@@ -99,7 +101,7 @@
         $detailsFilm->setNb_users(htmlspecialchars($detailsFilm->getNb_users()));
         $detailsFilm->setAverage(htmlspecialchars($detailsFilm->getAverage()));
 
-        foreach ($listeEtoiles as $etoiles)
+        foreach ($listeEtoiles as &$etoiles)
         {
           $etoiles->setId(htmlspecialchars($etoiles->getId()));
           $etoiles->setId_film(htmlspecialchars($etoiles->getId_film()));
@@ -111,7 +113,9 @@
           $etoiles->setParticipation(htmlspecialchars($etoiles->getParticipation()));
         }
 
-        foreach ($listeCommentaires as $comment)
+        unset($etoiles);
+
+        foreach ($listeCommentaires as &$comment)
         {
           $comment->setId(htmlspecialchars($comment->getId()));
           $comment->setId_film(htmlspecialchars($comment->getId_film()));
@@ -122,6 +126,8 @@
           $comment->setTime(htmlspecialchars($comment->getTime()));
           $comment->setComment(htmlspecialchars($comment->getComment()));
         }
+
+        unset($comment);
       }
       break;
 

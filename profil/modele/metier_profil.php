@@ -484,7 +484,7 @@
     // Recherche des données
     foreach ($listSuccess as $success)
     {
-      switch($success->getReference())
+      switch ($success->getReference())
       {
         // J'étais là
         case "beginning":

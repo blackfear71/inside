@@ -142,7 +142,7 @@
 		              echo '<td class="table_users_expense_center">';
 
 		              echo '<select name="depense_user[]" class="parts_2">';
-		              for($j = 0; $j <= $nb_max_parts; $j++)
+		              for ($j = 0; $j <= $nb_max_parts; $j++)
 		              {
 		                if ($j == $part['part'])
 		                  echo '<option value="' . $j . '" selected>' . $j . '</option>';

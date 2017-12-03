@@ -106,7 +106,7 @@
 
                         echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                           // Boutons vote
-                          for($j = 0; $j <= 5; $j++)
+                          for ($j = 0; $j <= 5; $j++)
                           {
                             echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
                             if ($j == $stars['stars'])
@@ -208,7 +208,7 @@
 
                     echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                       // Boutons vote
-                      for($j = 0; $j <= 5; $j++)
+                      for ($j = 0; $j <= 5; $j++)
                       {
                         echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
                         if ($j == $stars['stars'])

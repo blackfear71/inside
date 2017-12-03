@@ -94,7 +94,7 @@
       {
         case 'success':
         case 'ranking':
-          foreach ($listeSuccess as $success)
+          foreach ($listeSuccess as &$success)
           {
             $success->setReference(htmlspecialchars($success->getReference()));
             $success->setLevel(htmlspecialchars($success->getLevel()));
@@ -105,20 +105,28 @@
             $success->setExplanation(htmlspecialchars($success->getExplanation()));
           }
 
-          foreach ($successUser as $limit)
+          unset($success);
+
+          foreach ($successUser as &$limit)
           {
             $limit = htmlspecialchars($limit);
           }
 
-          foreach ($classementUsers as $classement)
+          unset($limit);
+
+          foreach ($classementUsers as &$classement)
           {
-            foreach ($classement['podium'] as $podium)
+            foreach ($classement['podium'] as &$podium)
             {
               $podium['identifiant'] = htmlspecialchars($podium['identifiant']);
               $podium['pseudo']      = htmlspecialchars($podium['pseudo']);
               $podium['value']       = htmlspecialchars($podium['value']);
             }
+
+            unset($podium);
           }
+
+          unset($classement);
           break;
 
         case 'settings':

@@ -67,7 +67,7 @@
       {
         $nbUsers = htmlspecialchars($nbUsers);
 
-        foreach ($listeUsers as $user)
+        foreach ($listeUsers as &$user)
         {
           $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
           $user->setPseudo(htmlspecialchars($user->getPseudo()));
@@ -75,12 +75,16 @@
           $user->setExpenses(htmlspecialchars($user->getExpenses()));
         }
 
-        foreach ($onglets as $year)
+        unset($user);
+
+        foreach ($onglets as &$year)
         {
           $year = htmlspecialchars($year);
         }
 
-        foreach ($tableauExpenses as $expense)
+        unset($year);
+
+        foreach ($tableauExpenses as &$expense)
         {
           $expense['id_expense'] = htmlspecialchars($expense['id_expense']);
           $expense['price']      = htmlspecialchars($expense['price']);
@@ -88,14 +92,18 @@
           $expense['name_b']     = htmlspecialchars($expense['name_b']);
           $expense['date']       = htmlspecialchars($expense['date']);
 
-          foreach ($expense['tableParts'] as $part)
+          foreach ($expense['tableParts'] as &$part)
           {
             $part['identifiant'] = htmlspecialchars($part['identifiant']);
-            $part['part']        = htmlspecialchars($part['identifiant']);
+            $part['part']        = htmlspecialchars($part['part']);
           }
+
+          unset($part);
 
           $expense['comment']    = htmlspecialchars($expense['comment']);
         }
+
+        unset($expense);
       }
       break;
 

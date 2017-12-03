@@ -53,7 +53,7 @@
                 echo '<div class="titre_search">Movie House</div><div class="count_search">' . $resultats['nb_movie_house'] . '</div>';
 
                 // Résultats
-                foreach($resultats['movie_house'] as $resultatsMH)
+                foreach ($resultats['movie_house'] as $resultatsMH)
                 {
                   echo '<a href="../moviehouse/details.php?id_film=' . $resultatsMH->getId() . '&action=goConsulter" class="lien_resultat">';
                     echo '<table class="zone_resultat">';
@@ -76,7 +76,7 @@
                 echo '<div class="titre_search">Les Petits Pédestres</div><div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div>';
 
                 // Résultats
-                foreach($resultats['petits_pedestres'] as $resultatsPP)
+                foreach ($resultats['petits_pedestres'] as $resultatsPP)
                 {
                   echo '<a href="../petitspedestres/parcours.php?id=' . $resultatsPP->getId() . '&action=consulter" class="lien_resultat">';
                     echo '<table class="zone_resultat">';
@@ -99,9 +99,9 @@
                 echo '<div class="titre_search">Missions</div><div class="count_search">' . $resultats['nb_missions'] . '</div>';
 
                 // Résultats
-                foreach($resultats['missions'] as $resultatsMI)
+                foreach ($resultats['missions'] as $resultatsMI)
                 {
-                  echo '<a href="../missions/details.php?id_mission=' . $resultatsMI->getId() . '&action=goConsulter" class="lien_resultat">';
+                  echo '<a href="../missions/details.php?id_mission=' . $resultatsMI->getId() . '&view=mission&action=goConsulter" class="lien_resultat">';
                     echo '<table class="zone_resultat">';
                       echo '<tr>';
                         echo '<td class="zone_resultat_titre">';

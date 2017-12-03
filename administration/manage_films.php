@@ -35,7 +35,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeSuppression as $film)
+			foreach ($listeSuppression as &$film)
 			{
 				$film->setId(htmlspecialchars($film->getId()));
 				$film->setFilm(htmlspecialchars($film->getFilm()));
@@ -61,6 +61,8 @@
 				$film->setNb_users(htmlspecialchars($film->getNb_users()));
 				$film->setAverage(htmlspecialchars($film->getAverage()));
 			}
+
+      unset($film);
       break;
 
 		case "doDeleteFilm":

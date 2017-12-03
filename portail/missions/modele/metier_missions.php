@@ -171,4 +171,69 @@
         $_SESSION['mission_achieved'] = true;
     }
   }
+
+  // METIER : Classement des utilisateurs sur la mission
+  // RETOUR : Tableau classement
+  function getRankingMission($id, $users)
+  {
+    $ranking = array();
+
+    global $bdd;
+
+    foreach ($users as $user)
+    {
+      $totalMission = 0;
+      $initRankUser = 0;
+
+      // Nombre total d'objectifs sur la mission
+      $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user->getIdentifiant() . '"');
+      while($donnees = $reponse->fetch())
+      {
+        $totalMission += $donnees['avancement'];
+      }
+      $reponse->closeCursor();
+
+      $myRanking = array('identifiant' => $user->getIdentifiant(),
+                         'pseudo'      => $user->getPseudo(),
+                         'avatar'      => $user->getAvatar(),
+                         'total'       => $totalMission,
+                         'rank'        => $initRankUser
+                       );
+
+      array_push($ranking, $myRanking);
+    }
+
+    if (!empty($ranking))
+    {
+      // Tri sur avancement puis identifiant
+      foreach ($ranking as $rankUser)
+      {
+        $tri_rank[]  = $rankUser['total'];
+        $tri_alpha[] = $rankUser['identifiant'];
+      }
+
+      array_multisort($tri_rank, SORT_DESC, $tri_alpha, SORT_ASC, $ranking);
+
+      // Affectation du rang
+      $prevTotal   = $ranking[0]['total'];
+      $currentRank = 1;
+
+      foreach ($ranking as &$rankUser)
+      {
+        $currentTotal = $rankUser['total'];
+
+        if ($currentTotal != $prevTotal)
+        {
+          $currentRank += 1;
+          $prevTotal = $rankUser['total'];
+        }
+
+        $rankUser['rank'] = $currentRank;
+      }
+
+      unset($rankUser);
+    }
+
+    return $ranking;
+  }
 ?>

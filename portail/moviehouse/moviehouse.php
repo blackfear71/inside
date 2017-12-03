@@ -97,33 +97,41 @@
       switch ($_GET['view'])
       {
         case 'main':
-          foreach ($ongletsYears as $onglet)
+          foreach ($ongletsYears as &$onglet)
           {
             $onglet = htmlspecialchars($onglet);
           }
 
-          foreach ($tableauFilms as $film)
+          unset($onglet);
+
+          foreach ($tableauFilms as &$film)
           {
             $film['id_film']          = htmlspecialchars($film['id_film']);
             $film['film']             = htmlspecialchars($film['film']);
             $film['date_theater']     = htmlspecialchars($film['date_theater']);
 
-            foreach ($film['tableStars'] as $stars)
+            foreach ($film['tableStars'] as &$stars)
             {
               $stars['identifiant']   = htmlspecialchars($stars['identifiant']);
               $stars['stars']         = htmlspecialchars($stars['stars']);
               $stars['participation'] = htmlspecialchars($stars['participation']);
             }
+
+            unset($stars);
           }
+
+          unset($film);
           break;
 
         case 'user':
-          foreach ($ongletsYears as $onglet)
+          foreach ($ongletsYears as &$onglet)
           {
             $onglet = htmlspecialchars($onglet);
           }
 
-          foreach ($listeFilms as $film)
+          unset($onglet);
+
+          foreach ($listeFilms as &$film)
           {
             $film->setFilm(htmlspecialchars($film->getFilm()));
             $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
@@ -148,11 +156,13 @@
             $film->setParticipation(htmlspecialchars($film->getParticipation()));
             $film->setNb_users(htmlspecialchars($film->getNb_users()));
           }
+
+          unset($film);
           break;
 
         case 'home':
         default:
-          foreach ($listeRecents as $recent)
+          foreach ($listeRecents as &$recent)
           {
             $recent->setFilm(htmlspecialchars($recent->getFilm()));
             $recent->setTo_delete(htmlspecialchars($recent->getTo_delete()));
@@ -174,9 +184,11 @@
             $recent->setPlace(htmlspecialchars($recent->getPlace()));
           }
 
+          unset($recent);
+
           if ($films_waited == "Y")
           {
-            foreach ($listeAttendus as $attendu)
+            foreach ($listeAttendus as &$attendu)
             {
               $attendu->setFilm(htmlspecialchars($attendu->getFilm()));
               $attendu->setTo_delete(htmlspecialchars($attendu->getTo_delete()));
@@ -199,11 +211,13 @@
               $attendu->setNb_users(htmlspecialchars($attendu->getNb_users()));
               $attendu->setAverage(htmlspecialchars($attendu->getAverage()));
             }
+
+            unset($attendu);
           }
 
           if ($films_way_out == "Y")
           {
-            foreach ($listeSorties as $sortie)
+            foreach ($listeSorties as &$sortie)
             {
               $sortie->setFilm(htmlspecialchars($sortie->getFilm()));
               $sortie->setTo_delete(htmlspecialchars($sortie->getTo_delete()));
@@ -224,6 +238,8 @@
               $sortie->setRestaurant(htmlspecialchars($sortie->getRestaurant()));
               $sortie->setPlace(htmlspecialchars($sortie->getPlace()));
             }
+
+            unset($sortie);
           }
           break;
       }

@@ -41,18 +41,22 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($onglets as $year)
+      foreach ($onglets as &$year)
       {
         $year = htmlspecialchars($year);
       }
 
-      foreach ($calendriers as $calendrier)
+      unset($year);
+
+      foreach ($calendriers as &$calendrier)
       {
         $calendrier->setMonth(htmlspecialchars($calendrier->getMonth()));
         $calendrier->setYear(htmlspecialchars($calendrier->getYear()));
         $calendrier->setTitle(htmlspecialchars($calendrier->getTitle()));
         $calendrier->setCalendar(htmlspecialchars($calendrier->getCalendar()));
       }
+
+      unset($calendrier);
 
       $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
       $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));

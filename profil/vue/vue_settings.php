@@ -204,13 +204,13 @@
             }
           ?>
 
-          <input id="accueil" type="radio" name="movie_house_view" value="H" class="bouton_preference" <?php if($checked_h){echo 'checked';} ?> required />
+          <input id="accueil" type="radio" name="movie_house_view" value="H" class="bouton_preference" <?php if ($checked_h){echo 'checked';} ?> required />
           <label for="accueil" class="label_preference">Accueil</label>
           <br />
-          <input id="synthese" type="radio" name="movie_house_view" value="S" class="bouton_preference" <?php if($checked_s){echo 'checked';} ?> required />
+          <input id="synthese" type="radio" name="movie_house_view" value="S" class="bouton_preference" <?php if ($checked_s){echo 'checked';} ?> required />
           <label for="synthese" class="label_preference">Synthèse</label>
           <br />
-          <input id="detail" type="radio" name="movie_house_view" value="D" class="bouton_preference" <?php if($checked_d){echo 'checked';} ?> required />
+          <input id="detail" type="radio" name="movie_house_view" value="D" class="bouton_preference" <?php if ($checked_d){echo 'checked';} ?> required />
           <label for="detail" class="label_preference">Détails</label>
         </div>
 
@@ -225,10 +225,10 @@
             $films_way_out   = $categories_home[1];
           ?>
 
-          <input id="films_waited" type="checkbox" name="films_waited" class="bouton_preference" <?php if($films_waited == "Y"){echo 'checked';} ?> />
+          <input id="films_waited" type="checkbox" name="films_waited" class="bouton_preference" <?php if ($films_waited == "Y"){echo 'checked';} ?> />
           <label for="films_waited" class="label_preference_3">Les plus attendus</label>
           <br />
-          <input id="films_way_out" type="checkbox" name="films_way_out" class="bouton_preference" <?php if($films_way_out == "Y"){echo 'checked';} ?> />
+          <input id="films_way_out" type="checkbox" name="films_way_out" class="bouton_preference" <?php if ($films_way_out == "Y"){echo 'checked';} ?> />
           <label for="films_way_out" class="label_preference_3">Les prochaines sorties</label>
         </div>
 
@@ -278,10 +278,10 @@
             }
           ?>
 
-          <input id="tous" type="radio" name="old_movies_view" value="T" onclick="masquerSaisieFilms('saisie_old_movies', 'input_old_movies');" class="bouton_preference" <?php if($checked_t){echo 'checked';} ?> required />
+          <input id="tous" type="radio" name="old_movies_view" value="T" onclick="masquerSaisieFilms('saisie_old_movies', 'input_old_movies');" class="bouton_preference" <?php if ($checked_t){echo 'checked';} ?> required />
           <label for="tous" class="label_preference">Tous</label>
           <br />
-          <input id="partiel" type="radio" name="old_movies_view" value="P" onclick="afficherSaisieFilms('saisie_old_movies', 'input_old_movies');" class="bouton_preference" <?php if($checked_p){echo 'checked';} ?> required />
+          <input id="partiel" type="radio" name="old_movies_view" value="P" onclick="afficherSaisieFilms('saisie_old_movies', 'input_old_movies');" class="bouton_preference" <?php if ($checked_p){echo 'checked';} ?> required />
           <label for="partiel" class="label_preference">Partiel</label>
 
           <?php
@@ -290,12 +290,12 @@
             else
               echo '<div id="saisie_old_movies" class="saisie_partiel" style="display: none;">';
           ?>
-            <input type="text" name="duration" id="input_old_movies" placeholder="Durée" value="<?php echo $duree; ?>" maxlength="3" class="duration_old_movies" <?php if($affichage == "P"){echo 'required';} ?> />
+            <input type="text" name="duration" id="input_old_movies" placeholder="Durée" value="<?php echo $duree; ?>" maxlength="3" class="duration_old_movies" <?php if ($affichage == "P"){echo 'required';} ?> />
 
             <select name="type_duration" class="type_duration">
-              <option value="J" <?php if($affichage == "P" AND $type == "J"){echo 'selected';} ?>>Jours</option>
-              <option value="S" <?php if($affichage == "P" AND $type == "S"){echo 'selected';} ?>>Semaines</option>
-              <option value="M" <?php if(empty($type) OR ($affichage == "P" AND $type == "M")){echo 'selected';} ?>>Mois</option>
+              <option value="J" <?php if ($affichage == "P" AND $type == "J"){echo 'selected';} ?>>Jours</option>
+              <option value="S" <?php if ($affichage == "P" AND $type == "S"){echo 'selected';} ?>>Semaines</option>
+              <option value="M" <?php if (empty($type) OR ($affichage == "P" AND $type == "M")){echo 'selected';} ?>>Mois</option>
             </select>
           </div>
         </div>
@@ -339,16 +339,16 @@
             }
           ?>
 
-          <input id="all" type= "radio" name="the_box_view" value="A" class="bouton_preference" <?php if($checked_a){echo 'checked';} ?> required />
+          <input id="all" type= "radio" name="the_box_view" value="A" class="bouton_preference" <?php if ($checked_a){echo 'checked';} ?> required />
           <label for="all" class="label_preference_2">Toutes</label>
           <br />
-          <input id="inprogress" type= "radio" name="the_box_view" value="P" class="bouton_preference" <?php if($checked_p){echo 'checked';} ?> required />
+          <input id="inprogress" type= "radio" name="the_box_view" value="P" class="bouton_preference" <?php if ($checked_p){echo 'checked';} ?> required />
           <label for="inprogress" class="label_preference_2">En cours</label>
           <br />
-          <input id="mine" type= "radio" name="the_box_view" value="M" class="bouton_preference" <?php if($checked_m){echo 'checked';} ?> required />
+          <input id="mine" type= "radio" name="the_box_view" value="M" class="bouton_preference" <?php if ($checked_m){echo 'checked';} ?> required />
           <label for="mine" class="label_preference_2">En charge</label>
           <br />
-          <input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" <?php if($checked_d){echo 'checked';} ?> required />
+          <input id="done" type= "radio" name="the_box_view" value="D" class="bouton_preference" <?php if ($checked_d){echo 'checked';} ?> required />
           <label for="done" class="label_preference_2">Terminées<br />& rejetées</label>
         </div>
       </div>
@@ -391,16 +391,16 @@
             }
           ?>
 
-          <input id="me" type= "radio" name="notifications_view" value="M" class="bouton_preference" <?php if($checked_m){echo 'checked';} ?> required />
+          <input id="me" type= "radio" name="notifications_view" value="M" class="bouton_preference" <?php if ($checked_m){echo 'checked';} ?> required />
           <label for="me" class="label_preference_2">Moi</label>
           <br />
-          <input id="today" type= "radio" name="notifications_view" value="T" class="bouton_preference" <?php if($checked_t){echo 'checked';} ?> required />
+          <input id="today" type= "radio" name="notifications_view" value="T" class="bouton_preference" <?php if ($checked_t){echo 'checked';} ?> required />
           <label for="today" class="label_preference_2">Aujourd'hui</label>
           <br />
-          <input id="week" type= "radio" name="notifications_view" value="W" class="bouton_preference" <?php if($checked_w){echo 'checked';} ?> required />
+          <input id="week" type= "radio" name="notifications_view" value="W" class="bouton_preference" <?php if ($checked_w){echo 'checked';} ?> required />
           <label for="week" class="label_preference_2">7 jours</label>
           <br />
-          <input id="all_n" type= "radio" name="notifications_view" value="A" class="bouton_preference" <?php if($checked_a){echo 'checked';} ?> required />
+          <input id="all_n" type= "radio" name="notifications_view" value="A" class="bouton_preference" <?php if ($checked_a){echo 'checked';} ?> required />
           <label for="all_n" class="label_preference_2">Toutes</label>
         </div>
       </div>

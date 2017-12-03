@@ -135,7 +135,7 @@
 
                     // Log
                     echo '<div class="log" id="logI' . $i . '" style="display: none;">';
-                      foreach($lines as $line)
+                      foreach ($lines as $line)
                       {
                         echo nl2br($line);
                       }
@@ -187,7 +187,7 @@
 
                     // Log
                     echo '<div class="log" id="logJ' . $j . '" style="display: none;">';
-                      foreach($lines as $line)
+                      foreach ($lines as $line)
                       {
                         echo nl2br($line);
                       }

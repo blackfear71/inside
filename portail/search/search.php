@@ -33,7 +33,7 @@
     case 'goSearch':
       if (!empty($resultats))
       {
-        foreach ($resultats['movie_house'] as $resultatsMH)
+        foreach ($resultats['movie_house'] as &$resultatsMH)
         {
           $resultatsMH->setId(htmlspecialchars($resultatsMH->getId()));
           $resultatsMH->setFilm(htmlspecialchars($resultatsMH->getFilm()));
@@ -60,7 +60,9 @@
           $resultatsMH->setAverage(htmlspecialchars($resultatsMH->getAverage()));
         }
 
-        foreach ($resultats['petits_pedestres'] as $resultatsPP)
+        unset($resultatsMH);
+
+        foreach ($resultats['petits_pedestres'] as &$resultatsPP)
         {
           $resultatsPP->setNom(htmlspecialchars($resultatsPP->getNom()));
           $resultatsPP->setDistance(htmlspecialchars($resultatsPP->getDistance()));
@@ -68,7 +70,9 @@
           $resultatsPP->setImage(htmlspecialchars($resultatsPP->getImage()));
         }
 
-        foreach ($resultats['missions'] as $resultatsMI)
+        unset($resultatsPP);
+
+        foreach ($resultats['missions'] as &$resultatsMI)
         {
           $resultatsMI->setMission(htmlspecialchars($resultatsMI->getMission()));
           $resultatsMI->setReference(htmlspecialchars($resultatsMI->getReference()));
@@ -79,6 +83,8 @@
           $resultatsMI->setDescription(htmlspecialchars($resultatsMI->getDescription()));
           $resultatsMI->setExplications(htmlspecialchars($resultatsMI->getExplications()));
         }
+
+        unset($resultatsMI);
       }
       break;
 

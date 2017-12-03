@@ -14,7 +14,7 @@
         // Initalisation position ligne tableau
         $ligne = 1;
 
-        for($i = 0; $i < $nb_lignes; $i++)
+        for ($i = 0; $i < $nb_lignes; $i++)
         {
           // Ligne titre & users
           echo '<tr>';
@@ -76,13 +76,13 @@
               echo '</td>';
             }
 
-            for($j = 0; $j < $nb_users_line; $j++)
+            for ($j = 0; $j < $nb_users_line; $j++)
             {
               $nb_max_parts = 5;
 
               echo '<td style="border-bottom: 1px solid #b3b3b3;">';
                 echo '<select name="depense_user[]" class="parts">';
-                  for($k = 0; $k <= $nb_max_parts; $k++)
+                  for ($k = 0; $k <= $nb_max_parts; $k++)
                   {
                     // On calcule l'indice où commencer à récupérer le tableau des parts en fonction de chaque ligne. Le premier numéro de ligne est 1, le premier indice 0 et on a 5 utilisateurs par ligne
                     $l = $j + 5 * ($ligne - 1);

@@ -118,9 +118,9 @@
           if ($nbPages > 1)
           {
             echo '<div class="zone_pagination">';
-              for($i = 1; $i <= $nbPages; $i++)
+              for ($i = 1; $i <= $nbPages; $i++)
               {
-                if($i == $_GET['page'])
+                if ($i == $_GET['page'])
                   echo '<div class="numero_page_active">' . $i . '</div>';
                 else
                 {

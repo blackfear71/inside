@@ -63,7 +63,7 @@
       $detailsFilm->setNb_users(htmlspecialchars($detailsFilm->getNb_users()));
       $detailsFilm->setAverage(htmlspecialchars($detailsFilm->getAverage()));
 
-      foreach ($listeEtoiles as $etoiles)
+      foreach ($listeEtoiles as &$etoiles)
       {
         $etoiles->setId(htmlspecialchars($etoiles->getId()));
         $etoiles->setId_film(htmlspecialchars($etoiles->getId_film()));
@@ -74,6 +74,8 @@
         $etoiles->setStars(htmlspecialchars($etoiles->getStars()));
         $etoiles->setParticipation(htmlspecialchars($etoiles->getParticipation()));
       }
+
+      unset($etoiles);
       break;
 
     case "sendMail":

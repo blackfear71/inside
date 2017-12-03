@@ -85,7 +85,7 @@
               if (!empty($notification->getIcon()) AND !empty($notification->getSentence()) AND !empty($notification->getLink()))
               {
                 // Date en fonction de la vue
-                switch($_GET['view'])
+                switch ($_GET['view'])
                 {
                   case "me":
                   case "week":
@@ -142,9 +142,9 @@
           if (($_GET['view'] == "all" OR $_GET['view'] == "week" OR $_GET['view'] == "me") AND $nbPages > 1)
           {
             echo '<div class="zone_pagination">';
-              for($i = 1; $i <= $nbPages; $i++)
+              for ($i = 1; $i <= $nbPages; $i++)
               {
-                if($i == $_GET['page'])
+                if ($i == $_GET['page'])
                   echo '<div class="numero_page_active">' . $i . '</div>';
                 else
                 {

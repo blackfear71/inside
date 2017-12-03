@@ -34,7 +34,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeUsers as $user)
+			foreach ($listeUsers as &$user)
 			{
 				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
 				$user->setReset(htmlspecialchars($user->getReset()));
@@ -44,6 +44,8 @@
         $user->setBeginner(htmlspecialchars($user->getBeginner()));
         $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
 			}
+
+      unset($user);
       break;
 
     case 'changeBeginnerStatus':

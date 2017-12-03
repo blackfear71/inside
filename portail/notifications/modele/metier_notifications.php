@@ -382,7 +382,7 @@
 
           $icone  = "missions";
           $phrase = "La mission <strong>" . $mission . "</strong> est lancée, n'oubliez pas de participer tous les jours jusqu'au <strong>" . formatDateForDisplay($date_fin) . "</strong>.";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
           break;
 
         case "end_mission":
@@ -397,7 +397,7 @@
 
           $icone  = "missions";
           $phrase = "La mission <strong>" . $mission . "</strong> se termine aujourd'hui ! Trouvez vite les derniers objectifs !";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
           break;
 
         case "one_mission":
@@ -412,7 +412,7 @@
 
           $icone  = "missions";
           $phrase = "La mission <strong>" . $mission . "</strong> se déroule aujourd'hui uniquement ! Trouvez vite les objectifs !";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
           break;
 
         default:

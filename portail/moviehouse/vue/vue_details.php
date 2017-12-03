@@ -76,7 +76,7 @@
               echo '<div class="titre_film_details">' . $detailsFilm->getFilm() . '</div>';
             echo '</div>';
 
-            echo '<div class="details">';
+            echo '<div class="zone_details">';
               // Partie gauche
               echo '<div class="left_details">';
                 echo '<table class="table_left_details">';
@@ -126,7 +126,7 @@
               // Actions
               echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doVoterFilm" class="form_stars_details_left">';
                 // Etoiles utilisateur
-                for($j = 0; $j <= 5; $j++)
+                for ($j = 0; $j <= 5; $j++)
                 {
 
                   if ($j == $detailsFilm->getStars_user())

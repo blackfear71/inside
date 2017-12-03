@@ -478,7 +478,7 @@
     {
       $founded = false;
 
-      foreach($list_users as $user_ins)
+      foreach ($list_users as $user_ins)
       {
         if ($data1['identifiant'] == $user_ins->getIdentifiant())
         {
@@ -502,7 +502,7 @@
 			$founded = false;
 
 			// On cherche déja s'il y a un acheteur qui n'est pas dans les inscrits
-			foreach($list_users as $user_ins)
+			foreach ($list_users as $user_ins)
 			{
 				if ($data2['buyer'] == $user_ins->getIdentifiant())
 				{
@@ -514,7 +514,7 @@
       // Si c'est le cas, on cherche s'il n'est pas déjà dans les désinscrits
 			if ($founded == false)
 			{
-				foreach($utilisateurs_desinscrits as $user_des)
+				foreach ($utilisateurs_desinscrits as $user_des)
 				{
 					if ($data2['buyer'] == $user_des)
 					{
@@ -534,7 +534,7 @@
     $req2->closeCursor();
 
     // Utilisateurs désinscrits
-    foreach($utilisateurs_desinscrits as $user_des)
+    foreach ($utilisateurs_desinscrits as $user_des)
     {
       // Nombre films ajoutés Movie House
       $req3 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house WHERE identifiant_add = "' . $user_des . '"');
@@ -924,7 +924,7 @@
 
     srand((double)microtime()*1000000);
 
-    for($i=0; $i < $car; $i++)
+    for ($i=0; $i < $car; $i++)
     {
       $string .= $chaine[rand()%strlen($chaine)];
     }

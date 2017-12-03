@@ -49,7 +49,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeBugs as $bug)
+      foreach ($listeBugs as &$bug)
       {
         $bug->setSubject(htmlspecialchars($bug->getSubject()));
         $bug->setDate(htmlspecialchars($bug->getDate()));
@@ -59,6 +59,8 @@
         $bug->getType(htmlspecialchars($bug->getType()));
         $bug->getResolved(htmlspecialchars($bug->getResolved()));
       }
+
+      unset($bug);
       break;
 
     case 'doSignaler':

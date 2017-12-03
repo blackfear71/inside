@@ -37,7 +37,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($tabMissions as $ligneMission)
+      foreach ($tabMissions as &$ligneMission)
       {
         $ligneMission->setMission(htmlspecialchars($ligneMission->getMission()));
         $ligneMission->setReference(htmlspecialchars($ligneMission->getReference()));
@@ -48,6 +48,8 @@
         $ligneMission->setDescription(htmlspecialchars($ligneMission->getDescription()));
         $ligneMission->setExplications(htmlspecialchars($ligneMission->getExplications()));
       }
+
+      unset($ligneMission);
       break;
 
     case 'doMission':

@@ -65,7 +65,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeUsers as $user)
+			foreach ($listeUsers as &$user)
 			{
 				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
 				$user->setReset(htmlspecialchars($user->getReset()));
@@ -74,7 +74,9 @@
 				$user->setEmail(htmlspecialchars($user->getEmail()));
 			}
 
-			foreach ($tabCategoriesIns as $statsCatIns)
+      unset($user);
+
+			foreach ($tabCategoriesIns as &$statsCatIns)
 			{
 				$statsCatIns['identifiant']  = htmlspecialchars($statsCatIns['identifiant']);
 				$statsCatIns['pseudo']       = htmlspecialchars($statsCatIns['pseudo']);
@@ -84,7 +86,9 @@
 				$statsCatIns['bilan_format'] = htmlspecialchars($statsCatIns['bilan_format']);
 			}
 
-      foreach ($tabCategoriesDes as $statsCatDes)
+      unset($statsCatIns);
+
+      foreach ($tabCategoriesDes as &$statsCatDes)
       {
         $statsCatDes['identifiant']  = htmlspecialchars($statsCatDes['identifiant']);
         $statsCatDes['pseudo']       = htmlspecialchars($statsCatDes['pseudo']);
@@ -94,12 +98,14 @@
         $statsCatDes['bilan_format'] = htmlspecialchars($statsCatDes['bilan_format']);
       }
 
+      unset($statsCatDes);
+
       $totalCategories['nb_tot_ajouts']       = htmlspecialchars($totalCategories['nb_tot_ajouts']);
       $totalCategories['nb_tot_commentaires'] = htmlspecialchars($totalCategories['nb_tot_commentaires']);
       $totalCategories['somme_bilans']        = htmlspecialchars($totalCategories['somme_bilans']);
       $totalCategories['somme_bilans_format'] = htmlspecialchars($totalCategories['somme_bilans_format']);
 
-			foreach ($tabStats as $stats)
+			foreach ($tabStats as &$stats)
 			{
 				$stats['identifiant']         = htmlspecialchars($stats['identifiant']);
 				$stats['pseudo']              = htmlspecialchars($stats['pseudo']);
@@ -109,6 +115,8 @@
 				$stats['nb_ideas_inprogress'] = htmlspecialchars($stats['nb_ideas_inprogress']);
 				$stats['nb_ideas_finished']   = htmlspecialchars($stats['nb_ideas_finished']);
 			}
+
+      unset($stats);
 
 			$totalStats['nb_tot_bugs']            = htmlspecialchars($totalStats['nb_tot_bugs']);
 			$totalStats['nb_tot_bugs_resolus']    = htmlspecialchars($totalStats['nb_tot_bugs_resolus']);

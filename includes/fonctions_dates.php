@@ -6,7 +6,7 @@
 function isLastDayOfYearWednesday($year){
     $lastDay = strtotime($year . '-12-31');
 
-    if(date('D', $lastDay) === 'Wed')
+    if (date('D', $lastDay) === 'Wed')
         return true;
     else
         return false;

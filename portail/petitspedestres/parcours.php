@@ -76,12 +76,14 @@
   if ($controlesDonnees){
     // Si on a fait une lecture de liste on traite chaque objet dans un foreach
     if ($lectureListe){
-      foreach ($parcours as $prcr){
+      foreach ($parcours as &$prcr){
         $prcr->setNom(htmlspecialchars($prcr->getNom()));
         $prcr->setDistance(htmlspecialchars($prcr->getDistance()));
         $prcr->setLieu(htmlspecialchars($prcr->getLieu()));
         $prcr->setImage(htmlspecialchars($prcr->getImage()));
       }
+
+      unset($prcr);
     }
     else{
       $parcours->setNom(htmlspecialchars($parcours->getNom()));

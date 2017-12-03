@@ -75,6 +75,11 @@ article:not(.article_index)
 	margin-right: auto;
 }
 
+a:link, a:visited, a:hover, a:active
+{
+	outline: none;
+}
+
 /*** Polices ***/
 @font-face
 {
@@ -906,7 +911,7 @@ nav
 	z-index: 2;
 	left: 50%;
 	margin-left: -250px;
-	box-shadow: 0 5px 8px #2c3840;
+	box-shadow: 0 5px 8px #262626;
 }
 
 .inside_alerte

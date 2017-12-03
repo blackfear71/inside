@@ -80,7 +80,7 @@
                     $titre_en_cours = true;
                   }
 
-                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&action=goConsulter" class="zone_presentation_mission_first">';
+                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_presentation_mission_first">';
                     echo '<div class="titre_mission_first">' . $ligneMission->getMission() . '</div>';
                     echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
                   echo '</a>';
@@ -94,7 +94,7 @@
                     $titre_passees = true;
                   }
 
-                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&action=goConsulter" class="zone_presentation_mission">';
+                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_presentation_mission">';
                     echo '<div class="titre_mission">' . $ligneMission->getMission() . '</div>';
                     echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
                   echo '</a>';

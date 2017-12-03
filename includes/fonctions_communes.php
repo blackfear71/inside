@@ -297,7 +297,7 @@
   {
     $name_lvl = "";
 
-    switch($lvl)
+    switch ($lvl)
     {
       case "1";
         $name_lvl = '<div class="level_succes">Niveau ' . $lvl . ' : <span class="name_lvl">Seuls les plus forts y parviendront.</span></div>';

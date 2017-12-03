@@ -57,7 +57,7 @@
         echo '</tr>';
 
         echo '<tbody id="hidden_films" style="display: none;">';
-          foreach($listeFilms as $film)
+          foreach ($listeFilms as $film)
           {
             // Liste des films cachés
             if ($film->getDate_theater() < $date_hide)
@@ -132,7 +132,7 @@
 
                     echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                       // Boutons vote
-                      for($j = 0; $j <= 5; $j++)
+                      for ($j = 0; $j <= 5; $j++)
                       {
                         echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
@@ -186,7 +186,7 @@
         echo '</tbody>';
       }
 
-      foreach($listeFilms as $film)
+      foreach ($listeFilms as $film)
       {
         // On affiche la date du jour
   			if (date("Y") == $_GET['year'])
@@ -278,7 +278,7 @@
 
                 echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                   // Boutons vote
-                  for($j = 0; $j <= 5; $j++)
+                  for ($j = 0; $j <= 5; $j++)
                   {
                     echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
