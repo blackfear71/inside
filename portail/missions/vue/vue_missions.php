@@ -57,8 +57,8 @@
             echo '<div class="zone_missions">';
               foreach ($tabMissions as $ligneMission)
               {
-                // Mission future
-                if (date('Ymd') < $ligneMission->getDate_deb())
+                // Missions future
+                if ($ligneMission->getStatut() == "V")
                 {
                   if ($titre_a_venir != true)
                   {
@@ -71,8 +71,8 @@
                     echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' !</div>';
                   echo '</div>';
                 }
-                // Mission en cours
-                elseif (date('Ymd') >= $ligneMission->getDate_deb() AND date('Ymd') <= $ligneMission->getDate_fin())
+                // Missions en cours
+                elseif ($ligneMission->getStatut() == "C")
                 {
                   if ($titre_en_cours != true)
                   {
@@ -86,7 +86,7 @@
                   echo '</a>';
                 }
                 // Missions précédentes
-                else
+                elseif ($ligneMission->getStatut() == "A")
                 {
                   if ($titre_passees != true)
                   {

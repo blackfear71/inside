@@ -90,28 +90,18 @@
         </div>
 
         <div class="zone_cron_logs">
-          <?php
-            // Récupération fichiers et tri
-            $dir   = '../cron/logs';
-            $files = scandir($dir, 1);
-          ?>
-
           <!-- Logs journaliers -->
           <div class="zone_jlog">
             <div class="level_succes">Logs journaliers</div>
             <div class="zone_logs">
               <?php
-                $i = 0;
-
-                foreach ($files as $file)
+                if (!empty($files['daily']))
                 {
-                  // On garde les 10 premiers journaliers
-                  if ($i >= 10)
-                    break;
+                  $i = 0;
 
-                  if ($file != '.'AND $file != '..' AND substr($file, 0, 1) == "j")
+                  foreach ($files['daily'] as $fileJ)
                   {
-                    $lines = file('../cron/logs/' . $file);
+                    $lines = file('../cron/logs/daily/' . $fileJ);
 
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
@@ -122,7 +112,7 @@
                           echo '<td class="log_ko">KO</td>';
 
                         echo '<td class="titre_log">';
-                          echo $file;
+                          echo $fileJ;
                         echo '</td>';
 
                         echo '<td class="voir_log">';
@@ -144,6 +134,17 @@
                     $i++;
                   }
                 }
+                else
+                {
+                  echo '<div class="zone_no_logs">';
+                    echo '<div class="titre_no_logs">';
+                      echo 'Pas encore de logs journaliers';
+                    echo '</div>';
+                    echo '<div class="contenu_no_logs">';
+                      echo 'Aucun log journalier n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
+                    echo '</div>';
+                  echo '</div>';
+                }
               ?>
             </div>
           </div>
@@ -153,17 +154,13 @@
             <div class="level_succes">Logs hebdomadaires</div>
             <div class="zone_logs">
               <?php
-                $j = 0;
-
-                foreach ($files as $file)
+                if (!empty($files['weekly']))
                 {
-                  // On garde les 10 premiers hebdomadaires
-                  if ($j >= 10)
-                    break;
+                  $j = 0;
 
-                  if ($file != '.'AND $file != '..' AND substr($file, 0, 1) == "h")
+                  foreach ($files['weekly'] as $fileH)
                   {
-                    $lines = file('../cron/logs/' . $file);
+                    $lines = file('../cron/logs/weekly/' . $fileH);
 
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
@@ -174,7 +171,7 @@
                           echo '<td class="log_ko">KO</td>';
 
                         echo '<td class="titre_log">';
-                          echo $file;
+                          echo $fileH;
                         echo '</td>';
 
                         echo '<td class="voir_log">';
@@ -196,24 +193,20 @@
                     $j++;
                   }
                 }
+                else
+                {
+                  echo '<div class="zone_no_logs">';
+                    echo '<div class="titre_no_logs">';
+                      echo 'Pas encore de logs hebdomadaires';
+                    echo '</div>';
+                    echo '<div class="contenu_no_logs">';
+                      echo 'Aucun log hebdomadaire n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
+                    echo '</div>';
+                  echo '</div>';
+                }
               ?>
             </div>
           </div>
-
-          <!-- Cas pas de logs -->
-          <?php
-            if (sizeof($files) <= 2)
-            {
-              echo '<div class="zone_no_logs">';
-                echo '<div class="titre_no_logs">';
-                  echo 'Pas encore de logs';
-                echo '</div>';
-                echo '<div class="contenu_no_logs">';
-                  echo 'Aucun log n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
-                echo '</div>';
-              echo '</div>';
-            }
-          ?>
         </div>
 
         <div class="clear"></div>

@@ -21,10 +21,10 @@
       // Contrôle Id mission renseigné
       $old_path = $_SERVER["HTTP_REFERER"];
 
-      if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
+      if (!isset($_GET['ref_mission']) OR !is_numeric($_GET['ref_mission']))
         header('location: ' . $old_path);
 
-      validateMission($_SESSION['identifiant'], $_GET['id_mission'], $_SESSION['tableau_missions']);
+      validateMission($_SESSION['identifiant'], $_GET['ref_mission'], $_GET['key_mission'], $_SESSION['tableau_missions'][$_GET['key_mission']]);
       break;
 
     default:
@@ -47,6 +47,7 @@
         $ligneMission->setObjectif(htmlspecialchars($ligneMission->getObjectif()));
         $ligneMission->setDescription(htmlspecialchars($ligneMission->getDescription()));
         $ligneMission->setExplications(htmlspecialchars($ligneMission->getExplications()));
+        $ligneMission->setStatut(htmlspecialchars($ligneMission->getStatut()));
       }
 
       unset($ligneMission);

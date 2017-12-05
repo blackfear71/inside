@@ -110,7 +110,7 @@
   {
     global $bdd;
 
-    foreach ($notifications as $notification)
+    foreach ($notifications as $key => $notification)
     {
       $icone  = "";
       $phrase = "";
@@ -425,6 +425,10 @@
       $notification->setIcon($icone);
       $notification->setSentence($phrase);
       $notification->setLink($lien);
+
+      // Si jamais la notification n'est pas générée, on ne l'affiche pas (exemple : film à supprimer)
+      if (empty($notification->getIcon()) AND empty($notification->getSentence()) AND empty($notification->getLink()))
+        unset($notifications[$key]);
     }
 
     return $notifications;

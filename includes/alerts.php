@@ -585,7 +585,7 @@
   }
   elseif (isset($_SESSION['mission_achieved']) AND $_SESSION['mission_achieved'] == true)
   {
-    $alerte = 'Bien joué ! Ta mission est terminée pour aujourd\'hui !';
+    $alerte = 'Bien joué ! Cette mission est terminée pour aujourd\'hui !';
     $_SESSION['mission_achieved'] = NULL;
   }
   // Mission inexistante

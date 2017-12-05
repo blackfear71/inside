@@ -39,47 +39,52 @@
   // FONCTION : Vérification durée mission
   // RETOUR : Booléen
   // FREQUENCE : tous les jours à 7h
-  function isOneDayMission()
+  function durationMissions()
   {
+    $oneDayMissions = array();
+
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE date_deb = ' . date("Ymd") . ' AND date_fin = ' . date("Ymd"));
-    if ($req->rowCount() > 0)
-      $oneDayMission = true;
-    else
-      $oneDayMission = false;
+    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE date_deb = ' . date("Ymd") . ' OR date_fin = ' . date("Ymd"));
+    while ($data = $req->fetch())
+    {
+      if ($data['date_deb'] == $data['date_fin'])
+        $myMission = array('id_mission' => $data['id'], 'one_day' => 'O');
+      elseif (date("Ymd") != $data['date_fin'] AND date("Ymd") == $data['date_deb'])
+        $myMission = array('id_mission' => $data['id'], 'one_day' => 'F');
+      elseif (date("Ymd") != $data['date_deb'] AND date("Ymd") == $data['date_fin'])
+        $myMission = array('id_mission' => $data['id'], 'one_day' => 'L');
+      else
+        $myMission = array('id_mission' => $data['id'], 'one_day' => 'N');
+
+      array_push($oneDayMissions, $myMission);
+    }
     $req->closeCursor();
 
-    return $oneDayMission;
+    return $oneDayMissions;
   }
 
   // FONCTION : Insertion notification début de mission
   // RETOUR : Tableau log traitement
   // FREQUENCE : tous les jours à 7h
-  function isFirstDayMission()
+  function isFirstDayMission($id_mission)
   {
     $log = array('trt' => '/* Début de mission */', 'status' => 'KO');
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_deb FROM missions WHERE date_deb = ' . date("Ymd") . ' ORDER BY id ASC');
+    $req = $bdd->query('SELECT id, date_deb FROM missions WHERE id = ' . $id_mission);
+    $data = $req->fetch();
 
-    while($data = $req->fetch())
-    {
-      // Contrôle notification non existante
-      $notification_mission_exist = controlNotification('start_mission', $data['id']);
+    // Contrôle notification non existante
+    $notification_mission_exist = controlNotification('start_mission', $id_mission);
 
-      // Génération notification sortie cinéma
-      if ($notification_mission_exist != true)
-        insertNotification('admin', 'start_mission', $data['id']);
+    // Génération notification début mission
+    if ($notification_mission_exist != true)
+      insertNotification('admin', 'start_mission', $data['id']);
 
-      // Traitement effectué
-      $log['status'] = 'OK';
-    }
-
-    // Cas pas d'enregristrement en base
-    if ($req->rowCount() == 0)
-      $log['status'] = 'OK';
+    // Traitement effectué
+    $log['status'] = 'OK';
 
     $req->closeCursor();
 
@@ -89,26 +94,24 @@
   // FONCTION : Insertion notification fin de mission
   // RETOUR : Tableau log traitement
   // FREQUENCE : tous les jours à 7h
-  function isLastDayMission()
+  function isLastDayMission($id_mission)
   {
     $log = array('trt' => '/* Fin de mission */', 'status' => 'KO');
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_fin = ' . date("Ymd") . ' ORDER BY id ASC');
+    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE id = ' . $id_mission);
+    $data = $req->fetch();
 
-    while($data = $req->fetch())
-    {
-      // Contrôle notification non existante
-      $notification_mission_exist = controlNotification('end_mission', $data['id']);
+    // Contrôle notification non existante
+    $notification_mission_exist = controlNotification('end_mission', $id_mission);
 
-      // Génération notification sortie cinéma
-      if ($notification_mission_exist != true)
-        insertNotification('admin', 'end_mission', $data['id']);
+    // Génération notification fin mission
+    if ($notification_mission_exist != true)
+      insertNotification('admin', 'end_mission', $data['id']);
 
-      // Traitement effectué
-      $log['status'] = 'OK';
-    }
+    // Traitement effectué
+    $log['status'] = 'OK';
 
     // Cas pas d'enregristrement en base
     if ($req->rowCount() == 0)
@@ -122,30 +125,24 @@
   // FONCTION : Insertion notification mission unique
   // RETOUR : Tableau log traitement
   // FREQUENCE : tous les jours à 7h
-  function isOneMission()
+  function isOneDayMission($id_mission)
   {
     $log = array('trt' => '/* Mission unique */', 'status' => 'KO');
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_deb = ' . date("Ymd") . ' AND date_fin = ' . date("Ymd"));
+    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE id = ' . $id_mission);
+    $data = $req->fetch();
 
-    while($data = $req->fetch())
-    {
-      // Contrôle notification non existante
-      $notification_mission_exist = controlNotification('one_mission', $data['id']);
+    // Contrôle notification non existante
+    $notification_mission_exist = controlNotification('one_mission', $data['id']);
 
-      // Génération notification sortie cinéma
-      if ($notification_mission_exist != true)
-        insertNotification('admin', 'one_mission', $data['id']);
+    // Génération notification mission unique
+    if ($notification_mission_exist != true)
+      insertNotification('admin', 'one_mission', $data['id']);
 
-      // Traitement effectué
-      $log['status'] = 'OK';
-    }
-
-    // Cas pas d'enregristrement en base
-    if ($req->rowCount() == 0)
-      $log['status'] = 'OK';
+    // Traitement effectué
+    $log['status'] = 'OK';
 
     $req->closeCursor();
 
@@ -244,11 +241,19 @@
   // Fréquence : tous les jours à 7h pour les types 'j' et tous les lundis à 7h pour les types 'h'
   function generateLog($type_log, $etat_trt, $hdeb, $hfin)
   {
-    // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "logs";
+    // On contrôle la présence des dossiers, sinon on les créé
+    $dossier        = "logs";
+    $sous_dossier_j = "daily";
+    $sous_dossier_h = "weekly";
 
     if (!is_dir($dossier))
       mkdir($dossier);
+
+    if (!is_dir($dossier . '/' . $sous_dossier_j))
+      mkdir($dossier . '/' . $sous_dossier_j);
+
+    if (!is_dir($dossier . '/' . $sous_dossier_h))
+      mkdir($dossier . '/' . $sous_dossier_h);
 
     // Titre
     if ($type_log == 'j')
@@ -287,7 +292,10 @@
     $duree_log = "## Durée traitements.........." . $duree_tot['heures'] . " heures, " . $duree_tot['minutes'] . " minutes et " . $duree_tot['secondes'] . " secondes";
 
     // Ouverture / création fichier
-    $myLog = fopen('logs/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
+    if ($type_log == 'j')
+      $myLog = fopen('logs/daily/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
+    elseif ($type_log == 'h')
+      $myLog = fopen('logs/weekly/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
 
     // On repositionne le curseur du fichier au début
     fseek($myLog, 0);

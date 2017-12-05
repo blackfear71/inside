@@ -74,6 +74,7 @@
         $detailsMission->setObjectif(htmlspecialchars($detailsMission->getObjectif()));
         $detailsMission->setDescription(htmlspecialchars($detailsMission->getDescription()));
         $detailsMission->setExplications(htmlspecialchars($detailsMission->getExplications()));
+        $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
 
         foreach ($participants as &$participant)
         {

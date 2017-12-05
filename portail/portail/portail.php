@@ -14,8 +14,8 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $preferences = getPreferences($_SESSION['identifiant']);
-      $mission     = getMission7();
+      $preferences      = getPreferences($_SESSION['identifiant']);
+      $messagesMissions = getMessagesMissions();
       break;
 
     default:
@@ -36,16 +36,20 @@
       $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
 
-      if (isset($mission) AND !empty($mission))
+      if (isset($messagesMissions) AND !empty($messagesMissions))
       {
-        $mission->setMission(htmlspecialchars($mission->getMission()));
-        $mission->setReference(htmlspecialchars($mission->getReference()));
-        $mission->setDate_deb(htmlspecialchars($mission->getDate_deb()));
-        $mission->setDate_fin(htmlspecialchars($mission->getDate_fin()));
-        $mission->setHeure(htmlspecialchars($mission->getHeure()));
-        $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
-        $mission->setDescription(htmlspecialchars($mission->getDescription()));
-        $mission->setExplications(htmlspecialchars($mission->getExplications()));
+        foreach ($messagesMissions as $mission)
+        {
+          $mission->setMission(htmlspecialchars($mission->getMission()));
+          $mission->setReference(htmlspecialchars($mission->getReference()));
+          $mission->setDate_deb(htmlspecialchars($mission->getDate_deb()));
+          $mission->setDate_fin(htmlspecialchars($mission->getDate_fin()));
+          $mission->setHeure(htmlspecialchars($mission->getHeure()));
+          $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
+          $mission->setDescription(htmlspecialchars($mission->getDescription()));
+          $mission->setExplications(htmlspecialchars($mission->getExplications()));
+          $mission->setStatut(htmlspecialchars($mission->getStatut()));
+        }
       }
       break;
 

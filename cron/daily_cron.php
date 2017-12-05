@@ -22,23 +22,34 @@
   // à développer (après la refonte des succès)
 
   // Durée mission
-  $one_day_mission = isOneDayMission();
+  $duration_missions = durationMissions();
 
-  if ($one_day_mission == false)
+  foreach($duration_missions as $mission)
   {
-    // Notification début de mission
-    $begin_mission = isFirstDayMission();
-    array_push($daily_trt, $begin_mission);
+    switch ($mission['one_day'])
+    {
+      case "O":
+        // Notification mission unique
+        $one_mission = isOneDayMission($mission['id_mission']);
+        array_push($daily_trt, $one_mission);
+        break;
 
-    // Notification fin de mission
-    $end_mission = isLastDayMission();
-    array_push($daily_trt, $end_mission);
-  }
-  else
-  {
-    // Notification mission unique
-    $one_mission = isOneMission();
-    array_push($daily_trt, $one_mission);
+      case "F":
+        // Notification début de mission
+        $begin_mission = isFirstDayMission($mission['id_mission']);
+        array_push($daily_trt, $begin_mission);
+        break;
+
+      case "L":
+        // Notification fin de mission
+        $end_mission = isLastDayMission($mission['id_mission']);
+        array_push($daily_trt, $end_mission);
+        break;
+
+      case "N":
+      default:
+        break;
+    }
   }
 
   // Génération log

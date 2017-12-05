@@ -22,25 +22,25 @@
     return $preferences;
   }
 
-  // METIER : Récupération mission active + 7jours pour les résultats
+  // METIER : Récupération missions actives + 7 jours pour les résultats
   // RETOUR : Objet mission
-  function getMission7()
+  function getMessagesMissions()
   {
-    $mission   = NULL;
+    $missions  = array();
     $date_jour = date('Ymd');
 
     global $bdd;
 
     $date_jour_moins_7 = date("Ymd", strtotime(date("Ymd") . ' - 7 days'));
 
-    $reponse = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . $date_jour . ' AND date_fin >= ' . $date_jour_moins_7);
-    $donnees = $reponse->fetch();
-
-    if ($reponse->rowCount() > 0)
-      $mission = Mission::withData($donnees);
-
+    $reponse = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . $date_jour . ' AND date_fin >= ' . $date_jour_moins_7 . ' ORDER BY date_deb ASC');
+    while($donnees = $reponse->fetch())
+    {
+      $myMission = Mission::withData($donnees);
+      array_push($missions, $myMission);
+    }
     $reponse->closeCursor();
 
-    return $mission;
+    return $missions;
   }
 ?>

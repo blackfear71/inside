@@ -10,6 +10,7 @@
     private $objectif;
     private $description;
     private $explications;
+    private $statut;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -23,6 +24,7 @@
       $this->objectif     = 0;
       $this->description  = '';
       $this->explications = '';
+      $this->statut       = '';
     }
 
     // Constructeur de l'objet Mission en fonction des données
@@ -163,6 +165,17 @@
     public function getExplications()
     {
       return $this->explications;
+    }
+
+    // Statut mission
+    public function setStatut($statut)
+    {
+      $this->statut = $statut;
+    }
+
+    public function getStatut()
+    {
+      return $this->statut;
     }
   }
 ?>

@@ -12,6 +12,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      $files = getLastLogs();
       break;
 
     default:
@@ -24,6 +25,19 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($files['daily'] as &$logJ)
+      {
+        $logJ = htmlspecialchars($logJ);
+      }
+
+      unset($logJ);
+
+      foreach ($files['weekly'] as &$logH)
+      {
+        $logH = htmlspecialchars($logH);
+      }
+
+      unset($logH);
       break;
 
     default:

@@ -54,20 +54,38 @@
 
     if ($_SESSION['connected'] == true)
     {
-      // Génération mission
+      // Initialisation génération mission
       if (!isset($_SESSION['tableau_missions']))
         $_SESSION['tableau_missions'] = array();
 
-      $mission = getMissionToGenerate();
+      // Récupération des missions à générer
+      $missions = getMissionsToGenerate();
 
-      if (empty($_SESSION['tableau_missions']))
+      //var_dump($missions);
+
+      // On supprime les missions en cours en trop en cas de mise à jour des missions en général
+      foreach ($_SESSION['tableau_missions'] as $keyCurrent => $currentMission)
       {
-        if (!empty($mission) AND date("His") >= $mission->getHeure())
-        {
-          $nbMissionToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
+        if (!isset($missions[$keyCurrent]) OR empty($missions[$keyCurrent]) OR date('His') < $missions[$keyCurrent]->getHeure())
+          unset($_SESSION['tableau_missions'][$keyCurrent]);
+      }
 
-          if ($nbMissionToGenerate > 0)
-            $_SESSION['tableau_missions'] = generateMissions($nbMissionToGenerate, $mission);
+      // On génère les boutons de mission si besoin pour chaque mission
+      foreach ($missions as $key => $mission)
+      {
+        if (empty($_SESSION['tableau_missions'][$key]))
+        {
+          if (!empty($mission) AND date("His") >= $mission->getHeure())
+          {
+            // Nombre de boutons à générer pour la mission en cours
+            $nbButtonsToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
+
+            if ($nbButtonsToGenerate > 0)
+            {
+              $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
+              $_SESSION['tableau_missions'][$key] = $missionGenerated;
+            }
+          }
         }
       }
 
@@ -78,24 +96,24 @@
     }
   }
 
-  // Récupération mission active
-  // RETOUR : Objet mission
-  function getMissionToGenerate()
+  // Récupération des missions actives
+  // RETOUR : Objets mission
+  function getMissionsToGenerate()
   {
-    $mission   = NULL;
+    $missions  = array();
     $date_jour = date('Ymd');
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin');
-    $donnees = $reponse->fetch();
-
-    if ($reponse->rowCount() > 0)
-      $mission = Mission::withData($donnees);
-
+    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin ORDER BY date_deb ASC');
+    while($donnees = $reponse->fetch())
+    {
+      $myMission = Mission::withData($donnees);
+      array_push($missions, $myMission);
+    }
     $reponse->closeCursor();
 
-    return $mission;
+    return $missions;
   }
 
   // Contrôle mission déjà complétée
@@ -131,9 +149,9 @@
 
   // Génération contexte mission (boutons)
   // RETOUR : Tableau contexte
-  function generateMissions($nb, $mission)
+  function generateMissions($nb, $mission, $key)
   {
-    $missions                  = array();
+    $missionButtons            = array();
 
     $listPages                 = array('/inside/portail/bugs/bugs.php',
                                        '/inside/portail/calendars/calendars.php',
@@ -236,19 +254,20 @@
       // Classe position
       $classe = $zone . '_' . $position . '_mission';
 
-      $myMission = array('id_mission'  => $id_mission,
-                         'ref_mission' => $ref_mission,
-                         'page'        => $page,
-                         'zone'        => $zone,
-                         'position'    => $position,
-                         'icon'        => $icone,
-                         'class'       => $classe
-                        );
+      $myMissionButtons = array('id_mission'  => $id_mission,
+                                'ref_mission' => $ref_mission,
+                                'key_mission' => $key,
+                                'page'        => $page,
+                                'zone'        => $zone,
+                                'position'    => $position,
+                                'icon'        => $icone,
+                                'class'       => $classe
+                               );
 
-      array_push($missions, $myMission);
+      array_push($missionButtons, $myMissionButtons);
     }
 
-    return $missions;
+    return $missionButtons;
   }
 
   // Détermination du thème
