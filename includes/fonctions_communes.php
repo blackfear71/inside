@@ -347,6 +347,41 @@
     return $name_lvl;
   }
 
+  // Formatage gagnants mission
+  // Retour : phrase formatée
+  function formatGagnants($listWinners)
+  {
+    switch (count($listWinners))
+    {
+      case 1:
+        $phrase = "Félicitations à <strong>" . $listWinners[0] . "</strong> pour sa victoire écrasante !";
+        break;
+
+      case 0:
+        $phrase = "";
+        break;
+
+      default:
+        $phrase = "Félicitations à ";
+
+        foreach ($listWinners as $winner)
+        {
+          if ($winner == end($listWinners))
+          {
+            $phrase = substr($phrase, 0, -2);
+            $phrase .= " et <strong>" . $winner . "</strong>";
+          }
+          else
+            $phrase .= "<strong>" . $winner . "</strong>, ";
+        }
+
+        $phrase .= " pour leur magnifique victoire !";
+        break;
+    }
+
+    return $phrase;
+  }
+
   // Génération notification
   // RETOUR : Aucun
   function insertNotification($author, $category, $content)

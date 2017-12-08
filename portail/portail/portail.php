@@ -16,6 +16,9 @@
       // Lecture des données par le modèle
       $preferences      = getPreferences($_SESSION['identifiant']);
       $messagesMissions = getMessagesMissions();
+
+      if (!empty($messagesMissions))
+        $gagnantsMissions = getWinners($messagesMissions);
       break;
 
     default:
@@ -49,6 +52,23 @@
           $mission->setDescription(htmlspecialchars($mission->getDescription()));
           $mission->setExplications(htmlspecialchars($mission->getExplications()));
           $mission->setStatut(htmlspecialchars($mission->getStatut()));
+        }
+      }
+
+      if (isset($gagnantsMissions) AND !empty($gagnantsMissions))
+      {
+        foreach ($gagnantsMissions as $gagnants)
+        {
+          foreach ($gagnants as &$gagnant)
+          {
+            $gagnant['id_mission']  = htmlspecialchars($gagnant['id_mission']);
+            $gagnant['identifiant'] = htmlspecialchars($gagnant['identifiant']);
+            $gagnant['pseudo']      = htmlspecialchars($gagnant['pseudo']);
+            $gagnant['total']       = htmlspecialchars($gagnant['total']);
+            $gagnant['rank']        = htmlspecialchars($gagnant['rank']);
+          }
+
+          unset($gagnant);
         }
       }
       break;

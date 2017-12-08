@@ -72,7 +72,24 @@
         elseif ((!isset($key_current_mission) OR empty($_SESSION['tableau_missions'][$key_current_mission])) AND (date('Ymd') >= date('Ymd', strtotime($mission->getDate_fin() . ' + 1 day'))) AND (date('Ymd') <= date('Ymd', strtotime($mission->getDate_fin() . ' + 7 days'))))
         {
           echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&view=ranking&action=goConsulter" class="link_mission">';
-            echo 'La mission <strong>' . $mission->getMission() . '</strong> est terminée. Va voir les résultats en cliquant sur ce message.';
+            echo 'La mission <strong>' . $mission->getMission() . '</strong> est terminée. Va voir les résultats en cliquant sur ce message.<br />';
+
+            // Noms des gagnants
+            if (!empty($gagnantsMissions))
+            {
+              $liste_gagnants = array();
+
+              foreach ($gagnantsMissions as $gagnants)
+              {
+                foreach ($gagnants as $gagnant)
+                {
+                  if ($gagnant['id_mission'] == $mission->getId())
+                    array_push($liste_gagnants, $gagnant['pseudo']);
+                }
+              }
+
+              echo formatGagnants($liste_gagnants);
+            }
           echo '</a>';
         }
         // Mission 1 jour (heure OK)
