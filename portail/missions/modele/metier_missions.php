@@ -144,45 +144,48 @@
 
       global $bdd;
 
-      // Contrôle mission commencée utilisateur
-      $reponse1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
-      if ($reponse1->rowCount() > 0)
-        $control_maj = true;
-      $reponse1->closeCursor();
-
-      if ($control_maj == true)
+      if (isset($_SERVER['HTTP_REFERER']) AND strpos($_SERVER['HTTP_REFERER'], $mission[$ref]['page']) !== false)
       {
-        // Lecture avancement mission
-        $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
-        $donnees2 = $reponse2->fetch();
-        $avancement = $donnees2['avancement'];
-        $reponse2->closeCursor();
+        // Contrôle mission commencée utilisateur
+        $reponse1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
+        if ($reponse1->rowCount() > 0)
+          $control_maj = true;
+        $reponse1->closeCursor();
 
-        // Mise à jour avancement mission
-        $avancement += 1;
+        if ($control_maj == true)
+        {
+          // Lecture avancement mission
+          $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
+          $donnees2 = $reponse2->fetch();
+          $avancement = $donnees2['avancement'];
+          $reponse2->closeCursor();
 
-        $reponse3 = $bdd->prepare('UPDATE missions_users SET avancement = :avancement WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
-        $reponse3->execute(array(
-          'avancement' => $avancement
-        ));
-        $reponse3->closeCursor();
+          // Mise à jour avancement mission
+          $avancement += 1;
+
+          $reponse3 = $bdd->prepare('UPDATE missions_users SET avancement = :avancement WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
+          $reponse3->execute(array(
+            'avancement' => $avancement
+          ));
+          $reponse3->closeCursor();
+        }
+        else
+        {
+          // Création mission du jour pour l'utilisateur et initialisation avancement à 1
+          $reponse2 = $bdd->prepare('INSERT INTO missions_users(id_mission, identifiant, avancement, date_mission) VALUES(:id_mission, :identifiant, :avancement, :date_mission)');
+          $reponse2->execute(array(
+            'id_mission'   => $mission[$ref]['id_mission'],
+            'identifiant'  => $user,
+            'avancement'   => 1,
+            'date_mission' => date("Ymd")
+              ));
+          $reponse2->closeCursor();
+        }
+
+        // On supprime le bouton correspondant pour ne pas cliquer dessus à nouveau
+        unset($mission[$ref]);
+        $_SESSION['tableau_missions'][$key] = $mission;
       }
-      else
-      {
-        // Création mission du jour pour l'utilisateur et initialisation avancement à 1
-        $reponse2 = $bdd->prepare('INSERT INTO missions_users(id_mission, identifiant, avancement, date_mission) VALUES(:id_mission, :identifiant, :avancement, :date_mission)');
-        $reponse2->execute(array(
-          'id_mission'   => $mission[$ref]['id_mission'],
-          'identifiant'  => $user,
-          'avancement'   => 1,
-          'date_mission' => date("Ymd")
-            ));
-        $reponse2->closeCursor();
-      }
-
-      // On supprime le bouton correspondant pour ne pas cliquer dessus à nouveau
-      unset($mission[$ref]);
-      $_SESSION['tableau_missions'][$key] = $mission;
 
       if (empty($mission))
         $_SESSION['mission_achieved'] = true;

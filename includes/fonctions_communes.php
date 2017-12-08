@@ -63,13 +63,6 @@
 
       //var_dump($missions);
 
-      // On supprime les missions en cours en trop en cas de mise à jour des missions en général
-      foreach ($_SESSION['tableau_missions'] as $keyCurrent => $currentMission)
-      {
-        if (!isset($missions[$keyCurrent]) OR empty($missions[$keyCurrent]) OR date('His') < $missions[$keyCurrent]->getHeure())
-          unset($_SESSION['tableau_missions'][$keyCurrent]);
-      }
-
       // On génère les boutons de mission si besoin pour chaque mission
       foreach ($missions as $key => $mission)
       {
@@ -81,6 +74,22 @@
             $nbButtonsToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
 
             if ($nbButtonsToGenerate > 0)
+            {
+              $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
+              $_SESSION['tableau_missions'][$key] = $missionGenerated;
+            }
+          }
+        }
+        else
+        {
+          if (date('His') < $mission->getHeure())
+            unset($_SESSION['tableau_missions'][$key]);
+          else
+          {
+            // Nombre de boutons à générer pour la mission en cours
+            $nbButtonsToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
+
+            if ($nbButtonsToGenerate != count($_SESSION['tableau_missions'][$key]))
             {
               $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
               $_SESSION['tableau_missions'][$key] = $missionGenerated;

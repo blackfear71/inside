@@ -18,13 +18,16 @@
       break;
 
     case 'doMission':
-      // Contrôle Id mission renseigné
-      $old_path = $_SERVER["HTTP_REFERER"];
+      if (isset($_SERVER["HTTP_REFERER"]))
+      {
+        // Contrôle Id mission renseigné
+        $old_path = $_SERVER["HTTP_REFERER"];
 
-      if (!isset($_GET['ref_mission']) OR !is_numeric($_GET['ref_mission']))
-        header('location: ' . $old_path);
+        if (!isset($_GET['ref_mission']) OR !is_numeric($_GET['ref_mission']))
+          header('location: ' . $old_path);
 
-      validateMission($_SESSION['identifiant'], $_GET['ref_mission'], $_GET['key_mission'], $_SESSION['tableau_missions'][$_GET['key_mission']]);
+        validateMission($_SESSION['identifiant'], $_GET['ref_mission'], $_GET['key_mission'], $_SESSION['tableau_missions'][$_GET['key_mission']]);
+      }
       break;
 
     default:
@@ -62,7 +65,8 @@
   switch ($_GET['action'])
   {
     case 'doMission':
-      header('location: ' . $old_path);
+      if (isset($_SERVER["HTTP_REFERER"]))
+        header('location: ' . $old_path);
       break;
 
     case 'goConsulter':

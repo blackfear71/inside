@@ -15,7 +15,7 @@
             {
               if ($rankUser['rank'] == 2)
               {
-                echo '<div class="zone_avatar_details_mission">';
+                echo '<div class="zone_avatar_details_mission" id="second">';
                   if (!empty($rankUser['avatar']))
                     echo '<img src="../../profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
@@ -46,7 +46,7 @@
             {
               if ($rankUser['rank'] == 1)
               {
-                echo '<div class="zone_avatar_details_mission">';
+                echo '<div class="zone_avatar_details_mission" id="first">';
                   if (!empty($rankUser['avatar']))
                     echo '<img src="../../profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
@@ -77,7 +77,7 @@
             {
               if ($rankUser['rank'] == 3)
               {
-                echo '<div class="zone_avatar_details_mission">';
+                echo '<div class="zone_avatar_details_mission" id="third">';
                   if (!empty($rankUser['avatar']))
                     echo '<img src="../../profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
