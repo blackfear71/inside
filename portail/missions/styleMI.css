@@ -54,13 +54,13 @@
 {
   width: 32%;
   margin-top: 15px;
-  border-radius: 2px;
   overflow: hidden;
 }
 
 .img_mission
 {
   width: 100%;
+	border-radius: 2px;
 }
 
 .zone_presentation_mission_default

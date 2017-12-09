@@ -19,7 +19,7 @@
 	<body>
 		<header>
       <?php
-        $title = "Succès";
+        $title = "Gestion succès";
 
         include('../includes/header.php');
       ?>

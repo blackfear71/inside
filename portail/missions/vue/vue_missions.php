@@ -49,7 +49,7 @@
 				<?php
           if (!empty($tabMissions))
           {
-            $i             = 0;
+            $i              = 0;
             $titre_en_cours = false;
             $titre_a_venir  = false;
             $titre_passees  = false;

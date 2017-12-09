@@ -62,6 +62,17 @@
 						</div>
 					</a>
 
+          <a href="manage_themes.php?action=goConsulter" class="menu_link_admin">
+            <div class="menu_admin_box">
+              <div class="mask_admin"></div>
+              <div class="mask_admin_triangle"></div>
+              <div class="title_admin">Gestion
+                <div class="saut_ligne">THEMES
+                </div>
+              </div>
+            </div>
+          </a>
+
           <a href="manage_success.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -98,6 +109,17 @@
                     if ($alerteCalendars == true)
                       echo '( ! )';
                   ?>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="manage_missions.php?action=goConsulter" class="menu_link_admin">
+            <div class="menu_admin_box">
+              <div class="mask_admin"></div>
+              <div class="mask_admin_triangle"></div>
+              <div class="title_admin">Gestion
+                <div class="saut_ligne">MISSIONS
                 </div>
               </div>
             </div>

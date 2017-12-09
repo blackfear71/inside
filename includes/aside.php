@@ -23,13 +23,16 @@
 		$modify_parcours = false;
 
 	if (!isset($delete_film))
-			$delete_film = false;
+		$delete_film = false;
 
 	if (!isset($back_index))
 		$back_index = false;
 
 	if (!isset($back))
 		$back = false;
+
+	if (!isset($add_mission))
+		$add_mission = false;
 
 	if (!isset($modify_success))
 		$modify_success = false;
@@ -105,6 +108,14 @@
 		{
 			echo '<a href="/inside/administration/manage_success.php?action=goModifier" title="Modifier les succès" class="link_aside">';
 				echo '<img src="/inside/includes/icons/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';
+			echo '</a>';
+		}
+
+		// Ajouter une mission
+		if ($add_mission == true)
+		{
+			echo '<a href="/inside/administration/manage_missions.php?action=goAjouter" title="Ajouter une mission" class="link_aside">';
+				echo '<img src="/inside/includes/icons/add.png" alt="add" title="Ajouter une mission" class="icon_aside" />';
 			echo '</a>';
 		}
 
