@@ -311,9 +311,10 @@
       if ($req2->rowCount() > 0)
       {
         $theme_present = true;
-        /*$myTheme       = Theme::withData($data2);
-        var_dump($myTheme);*/
+        $myTheme       = Theme::withData($data2);
+
         echo '**' . $theme_present . '**';
+        echo '**' . $myTheme->getReference() . '**';
       }
 
       $req2->closeCursor();
