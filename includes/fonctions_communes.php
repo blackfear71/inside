@@ -300,6 +300,8 @@
     // Thème automatique
     if (empty($preferences->getRef_theme()))
     {
+      echo 'auto';
+
       $theme_present = false;
 
       // Détermination thème automatique présent
@@ -333,6 +335,8 @@
     // Thème utilisateur
     else
     {
+      echo 'user';
+
       $req2 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
       $data2 = $req2->fetch();
 
