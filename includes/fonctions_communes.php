@@ -300,8 +300,6 @@
     // Thème automatique
     if (empty($preferences->getRef_theme()))
     {
-      echo 'auto';
-
       $theme_present = false;
 
       // Détermination thème automatique présent
@@ -312,15 +310,12 @@
       {
         $theme_present = true;
         $myTheme       = Theme::withData($data2);
-
-        echo '**' . $theme_present . '**';
-        echo '**' . $myTheme->getReference() . '**';
       }
 
       $req2->closeCursor();
 
       // Thème présent
-      /*if ($theme_present == true)
+      if ($theme_present == true)
       {
         $theme = array('background' => '/inside/includes/themes/backgrounds/' . $myTheme->getReference() . '.png',
                        'header'     => '/inside/includes/themes/headers/' . $myTheme->getReference() . '_h.png',
@@ -329,15 +324,11 @@
       }
       // Thème par défaut
       else
-        $theme = array();*/
-
-      var_dump($theme);
+        $theme = array();
     }
     // Thème utilisateur
     else
     {
-      echo 'user';
-
       $req2 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
       $data2 = $req2->fetch();
 
