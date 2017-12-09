@@ -101,6 +101,7 @@
     $expenses         = 0;
 
     // Initialisations préférences
+    $ref_theme          = "";
     $view_movie_house   = "H";
     $categories_home    = "YY";
     $today_movie_house  = "N";
@@ -171,6 +172,7 @@
 
           // On créé les préférences
           $req = $bdd->prepare('INSERT INTO preferences(identifiant,
+                                                        ref_theme,
                                                         view_movie_house,
                                                         categories_home,
                                                         today_movie_house,
@@ -179,6 +181,7 @@
                                                         view_notifications,
                                                         manage_calendars)
                                                  VALUES(:identifiant,
+                                                        :ref_theme,
                                                         :view_movie_house,
                                                         :categories_home,
                                                         :today_movie_house,
@@ -188,6 +191,7 @@
                                                         :manage_calendars)');
           $req->execute(array(
             'identifiant'        => $trigramme,
+            'ref_theme'          => $ref_theme,
             'view_movie_house'   => $view_movie_house,
             'categories_home'    => $categories_home,
             'today_movie_house'  => $today_movie_house,

@@ -272,6 +272,7 @@
   class Preferences
   {
     private $id;
+    private $ref_theme;
     private $view_movie_house;
     private $categories_home;
     private $today_movie_house;
@@ -284,6 +285,7 @@
     public function __construct()
     {
       $this->id                 = 0;
+      $this->ref_theme          = '';
       $this->view_movie_house   = '';
       $this->categories_home    = '';
       $this->today_movie_house  = '';
@@ -307,6 +309,9 @@
     {
       if (isset($data['id']))
         $this->id                 = $data['id'];
+
+      if (isset($data['ref_theme']))
+        $this->ref_theme          = $data['ref_theme'];
 
       if (isset($data['view_movie_house']))
         $this->view_movie_house   = $data['view_movie_house'];
@@ -340,6 +345,17 @@
     public function getId()
     {
       return $this->id;
+    }
+
+    // Référence thème
+    public function setRef_theme($ref_theme)
+    {
+      $this->ref_theme = $ref_theme;
+    }
+
+    public function getRef_theme()
+    {
+      return $this->ref_theme;
     }
 
     // Préférence vue par défaut Movie House

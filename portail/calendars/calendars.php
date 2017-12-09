@@ -58,6 +58,7 @@
 
       unset($calendrier);
 
+      $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
       $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
       $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
       $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));

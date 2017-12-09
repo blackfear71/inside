@@ -1,5 +1,7 @@
 <?php
   include_once('appel_bdd.php');
+  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/profile.php');
+  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/themes.php');
   include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/missions.php');
 
   // Contrôles Index, initialisation session
@@ -285,36 +287,63 @@
   {
     $theme = array();
 
-    // Détermination fond d'écran mission (prioritaire)
-    $missionActive = NULL;
-    $date_jour     = date('Ymd');
-
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin');
-    $donnees = $reponse->fetch();
+    // Lecture préférence thème utilisateur
+    $req1 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
+    $data1 = $req1->fetch();
 
-    if ($reponse->rowCount() > 0)
-      $missionActive = Mission::withData($donnees);
+    $preferences = Preferences::withData($data1);
 
-    $reponse->closeCursor();
+    $req1->closeCursor();
 
-    if (isset($missionActive) AND !empty($missionActive))
+    // Thème automatique
+    if (empty($preferences->getRef_theme()))
     {
-      $theme = array('background' => '/inside/includes/themes/backgrounds/' . $missionActive->getReference() . '.png',
-                     'header'     => '/inside/includes/themes/headers/' . $missionActive->getReference() . '_h.png',
-                     'footer'     => '/inside/includes/themes/footers/' . $missionActive->getReference() . '_f.png',
-                    );
+      $theme_present = false;
+
+      // Détermination thème automatique présent
+      $req2 = $bdd->query('SELECT * FROM themes WHERE ' . date("Ymd") . ' >= date_deb AND ' . date("Ymd") . ' <= date_fin');
+      $data2 = $req2->fetch();
+
+      if ($req2->rowCount() > 0)
+      {
+        $theme_present = true;
+        $myTheme       = Theme::withData($data2);
+      }
+
+      $req2->closeCursor();
+
+      // Thème présent
+      if ($theme_present == true)
+      {
+        $theme = array('background' => '/inside/includes/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                       'header'     => '/inside/includes/themes/headers/' . $myTheme->getReference() . '_h.png',
+                       'footer'     => '/inside/includes/themes/footers/' . $myTheme->getReference() . '_f.png',
+                      );
+      }
+      // Thème par défaut
+      else
+        $theme = array();
     }
-
-    /*// Détermination fond d'écran utilisateur (à développer)
-    if (!isset($missionActive) OR empty($missionActive))
+    // Thème utilisateur
+    else
     {
-      // Lecture données utilisateur
-      // ici, lire le background stocké sur le profil
+      $req2 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
+      $data2 = $req2->fetch();
 
-      $background = '/inside/includes/backgrounds/' . $missionActive->getReference() . '.png';
-    }*/
+      $myTheme = Theme::withData($data2);
+
+      $req2->closeCursor();
+
+      if (!empty($myTheme->getReference()))
+      {
+        $theme = array('background' => '/inside/includes/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                       'header'     => '/inside/includes/themes/headers/' . $myTheme->getReference() . '_h.png',
+                       'footer'     => '/inside/includes/themes/footers/' . $myTheme->getReference() . '_f.png',
+                      );
+      }
+    }
 
     return $theme;
   }
