@@ -310,6 +310,8 @@
       {
         $theme_present = true;
         $myTheme       = Theme::withData($data2);
+        var_dump($myTheme);
+        var_dump($theme_present);
       }
 
       $req2->closeCursor();
@@ -325,6 +327,8 @@
       // Thème par défaut
       else
         $theme = array();
+
+      var_dump($theme);
     }
     // Thème utilisateur
     else
