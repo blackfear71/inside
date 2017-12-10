@@ -1,7 +1,6 @@
 <?php
   if (!empty($tabMissions))
   {
-    $i              = 0;
     $titre_en_cours = false;
     $titre_a_venir  = false;
     $titre_passees  = false;
@@ -72,8 +71,6 @@
             echo '</form>';
           echo '</div>';
         }
-
-        $i++;
       }
     echo '</div>';
   }

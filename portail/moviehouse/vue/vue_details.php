@@ -33,6 +33,7 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
+          $add_film    = true;
 					$modify_film = true;
 					$delete_film = true;
 					$back        = true;

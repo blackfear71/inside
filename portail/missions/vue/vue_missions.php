@@ -49,7 +49,6 @@
 				<?php
           if (!empty($tabMissions))
           {
-            $i              = 0;
             $titre_en_cours = false;
             $titre_a_venir  = false;
             $titre_passees  = false;
@@ -99,8 +98,6 @@
                     echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
                   echo '</a>';
                 }
-
-                $i++;
               }
             echo '</div>';
           }

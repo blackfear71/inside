@@ -34,6 +34,7 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
+          $add_film    = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
