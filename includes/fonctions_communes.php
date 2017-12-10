@@ -106,7 +106,7 @@
       $_SESSION['theme'] = setTheme();
     }
 
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
   }
 
   // Récupération des missions actives
