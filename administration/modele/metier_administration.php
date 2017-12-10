@@ -170,7 +170,7 @@
     deleteNotification('cinema', $id_film);
     deleteNotification('comments', $id_film);
 
-    $_SESSION['film_deleted'] = true;
+    $_SESSION['alerts']['film_deleted'] = true;
   }
 
   // METIER : Réinitialise un film de la base
@@ -190,7 +190,7 @@
     ));
     $req->closeCursor();
 
-    $_SESSION['film_reseted'] = true;
+    $_SESSION['alerts']['film_reseted'] = true;
   }
 
   // METIER : Lecture des calendriers à supprimer
@@ -253,7 +253,7 @@
     // Suppression des notifications
     deleteNotification('calendrier', $id_cal);
 
-    $_SESSION['calendar_deleted'] = true;
+    $_SESSION['alerts']['calendar_deleted'] = true;
   }
 
   // METIER : Réinitialise un calendrier de la base
@@ -271,7 +271,7 @@
     ));
     $req->closeCursor();
 
-    $_SESSION['calendar_reseted'] = true;
+    $_SESSION['alerts']['calendar_reseted'] = true;
   }
 
   // METIER : Lecture liste des bugs
@@ -364,7 +364,7 @@
 
     $req = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
 
-    $_SESSION['bug_deleted'] = true;
+    $_SESSION['alerts']['bug_deleted'] = true;
   }
 
   // METIER : Lecture liste des utilisateurs
@@ -589,10 +589,8 @@
         // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
         if ($data5['buyer'] == $user_des AND $nb_parts_user >= 0)
           $bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
-          //$somme_bilans += $bilan;
         elseif ($data5['buyer'] != $user_des AND $nb_parts_user > 0)
           $bilan -= $prix_par_part * $nb_parts_user;
-          //$somme_bilans += $bilan;
 
         $req6->closeCursor();
       }
@@ -1153,7 +1151,7 @@
     }
     $req->closeCursor();
 
-    $_SESSION['autorizations_updated'] = true;
+    $_SESSION['alerts']['autorizations_updated'] = true;
   }
 
   // METIER : Lecture liste des succès
@@ -1216,7 +1214,7 @@
       if ($reference == $donnees['reference'])
       {
         $control_ok = false;
-        $_SESSION['already_referenced'] = true;
+        $_SESSION['alerts']['already_referenced'] = true;
         break;
       }
     }
@@ -1228,7 +1226,7 @@
       if (!is_numeric($level) OR $level <= 0)
       {
         $control_ok                    = false;
-        $_SESSION['level_not_numeric'] = true;
+        $_SESSION['alerts']['level_not_numeric'] = true;
       }
     }
 
@@ -1243,7 +1241,7 @@
           if ($order_success == $donnees['order_success'])
           {
             $control_ok                  = false;
-            $_SESSION['already_ordered'] = true;
+            $_SESSION['alerts']['already_ordered'] = true;
             break;
           }
         }
@@ -1252,7 +1250,7 @@
       else
       {
         $control_ok                    = false;
-        $_SESSION['order_not_numeric'] = true;
+        $_SESSION['alerts']['order_not_numeric'] = true;
       }
     }
 
@@ -1262,7 +1260,7 @@
       if (!is_numeric($limit_success))
       {
         $control_ok                    = false;
-        $_SESSION['limit_not_numeric'] = true;
+        $_SESSION['alerts']['limit_not_numeric'] = true;
       }
     }
 
@@ -1347,7 +1345,7 @@
   					));
   				$reponse->closeCursor();
 
-   				$_SESSION['success_added'] = true;
+   				$_SESSION['alerts']['success_added'] = true;
    			}
    		}
     }
@@ -1371,7 +1369,7 @@
     // Suppression du succès de la base
     $req2 = $bdd->exec('DELETE FROM success WHERE id = ' . $id_success);
 
-    $_SESSION['success_deleted'] = true;
+    $_SESSION['alerts']['success_deleted'] = true;
   }
 
 
@@ -1409,7 +1407,7 @@
         if (!is_numeric($success['level']) OR $success['level'] <= 0)
         {
           $control_ok                    = false;
-          $_SESSION['level_not_numeric'] = true;
+          $_SESSION['alerts']['level_not_numeric'] = true;
         }
       }
 
@@ -1424,7 +1422,7 @@
             if ($success['id'] != $test_order['id'] AND $success['order_success'] == $test_order['order_success'] AND $success['level'] == $test_order['level'])
             {
               $control_ok = false;
-              $_SESSION['already_ordered'] = true;
+              $_SESSION['alerts']['already_ordered'] = true;
               break;
             }
           }
@@ -1432,7 +1430,7 @@
         else
         {
           $control_ok = false;
-          $_SESSION['order_not_numeric'] = true;
+          $_SESSION['alerts']['order_not_numeric'] = true;
         }
       }
 
@@ -1442,7 +1440,7 @@
         if (!is_numeric($success['limit_success']))
         {
           $control_ok = false;
-          $_SESSION['limit_not_numeric'] = true;
+          $_SESSION['alerts']['limit_not_numeric'] = true;
         }
       }
 
@@ -1466,7 +1464,7 @@
         ));
         $req->closeCursor();
 
-        $_SESSION['success_updated'] = true;
+        $_SESSION['alerts']['success_updated'] = true;
       }
 
       // On quitte la boucle s'il y a une erreur
@@ -1573,16 +1571,15 @@
     $reponse->closeCursor();
 
     // Mise à jour du pseudo stocké en SESSION
-    $_SESSION['pseudo'] = $new_pseudo;
-
-    $_SESSION['pseudo_changed'] = true;
+    $_SESSION['user']['pseudo']           = $new_pseudo;
+    $_SESSION['alerts']['pseudo_changed'] = true;
   }
 
   // METIER : Mise à jour de l'avatar (base + fichier)
   // RETOUR : Aucun
   function changeAvatar($user, $files)
   {
-    $_SESSION['avatar_changed'] = false;
+    $_SESSION['alerts']['avatar_changed'] = false;
 
     global $bdd;
 
@@ -1655,8 +1652,8 @@
         ));
         $reponse2->closeCursor();
 
-        $_SESSION['avatar']         = $new_name;
-        $_SESSION['avatar_changed'] = true;
+        $_SESSION['user']['avatar']           = $new_name;
+        $_SESSION['alerts']['avatar_changed'] = true;
       }
     }
   }
@@ -1665,7 +1662,7 @@
   // RETOUR : Aucun
   function deleteAvatar($user)
   {
-    $_SESSION['avatar_deleted'] = false;
+    $_SESSION['alerts']['avatar_deleted'] = false;
 
     global $bdd;
 
@@ -1687,8 +1684,8 @@
     ));
     $reponse2->closeCursor();
 
-    $_SESSION['avatar']         = '';
-    $_SESSION['avatar_deleted'] = true;
+    $_SESSION['user']['avatar']           = '';
+    $_SESSION['alerts']['avatar_deleted'] = true;
   }
 
   // METIER : Mise à jour du mot de passe
@@ -1738,7 +1735,7 @@
 
       $reponse->closeCursor();
 
-      $_SESSION['wrong_password'] = $wrong_password;
+      $_SESSION['alerts']['wrong_password'] = $wrong_password;
     }
   }
 

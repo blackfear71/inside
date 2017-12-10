@@ -144,7 +144,7 @@
       if ($post['speaker'] == "other")
       {
         $collector = array('date_add'       => date("Ymd"),
-                           'author'         => $_SESSION['identifiant'],
+                           'author'         => $_SESSION['user']['identifiant'],
                            'speaker'        => $post['other_speaker'],
                            'type_speaker'   => $post['speaker'],
                            'date_collector' => formatDateForInsert($date_a_verifier),
@@ -155,7 +155,7 @@
       else
       {
         $collector = array('date_add'       => date("Ymd"),
-                           'author'         => $_SESSION['identifiant'],
+                           'author'         => $_SESSION['user']['identifiant'],
                            'speaker'        => $post['speaker'],
                            'type_speaker'   => "user",
                            'date_collector' => formatDateForInsert($date_a_verifier),
@@ -189,10 +189,10 @@
 
       insertNotification($user, 'culte', $new_id);
 
-      $_SESSION['collector_added'] = true;
+      $_SESSION['alerts']['collector_added'] = true;
     }
     else
-      $_SESSION['wrong_date'] = true;
+      $_SESSION['alerts']['wrong_date'] = true;
   }
 
   // METIER : Suppression phrases cultes
@@ -206,7 +206,7 @@
     // Suppression des notifications
     deleteNotification('culte', $id_col);
 
-    $_SESSION['collector_deleted'] = true;
+    $_SESSION['alerts']['collector_deleted'] = true;
   }
 
   // METIER : Modification phrases cultes
@@ -263,10 +263,10 @@
       ));
       $req->closeCursor();
 
-      $_SESSION['collector_modified'] = true;
+      $_SESSION['alerts']['collector_modified'] = true;
     }
     else
-      $_SESSION['wrong_date'] = true;
+      $_SESSION['alerts']['wrong_date'] = true;
   }
 
   // METIER : Lecture des votes utilisateur

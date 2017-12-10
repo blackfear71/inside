@@ -31,7 +31,7 @@
   // Redirection si asynchrone
   if (isset($_POST['weekly_cron']))
   {
-    $_SESSION['weekly_cron'] = true;
+    $_SESSION['alerts']['weekly_cron'] = true;
     header('location: /inside/administration/cron.php?action=goConsulter');
   }
 ?>

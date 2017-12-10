@@ -20,11 +20,11 @@
       $anneeExistante = controlYear($_GET['year']);
       $onglets        = getOnglets();
       $calendriers    = getCalendars($_GET['year']);
-      $preferences    = getPreferences($_SESSION['identifiant']);
+      $preferences    = getPreferences($_SESSION['user']['identifiant']);
       break;
 
     case "doAjouter":
-      insertCalendrier($_POST, $_FILES, $_SESSION['identifiant']);
+      insertCalendrier($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimer":

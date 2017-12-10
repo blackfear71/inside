@@ -14,7 +14,7 @@
 		header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
+  if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
     $_SESSION['nom_film_saisi']      = "";
     $_SESSION['date_theater_saisie'] = "";
@@ -44,7 +44,7 @@
       {
         case 'main':
           $ongletsYears = getOnglets();
-          $preferences  = getPreferences($_SESSION['identifiant']);
+          $preferences  = getPreferences($_SESSION['user']['identifiant']);
           $nbUsers      = countUsers();
           $listeUsers   = getUsers();
           $tableauFilms = getTabFilms($_GET['year'], $listeUsers, $nbUsers);
@@ -52,14 +52,14 @@
 
         case 'user':
           $ongletsYears = getOnglets();
-          $preferences  = getPreferences($_SESSION['identifiant']);
-          $listeFilms   = getFilms($_GET['year'], $_SESSION['identifiant']);
+          $preferences  = getPreferences($_SESSION['user']['identifiant']);
+          $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
           break;
 
         case 'home':
         default:
           $listeRecents  = getRecents();
-          $preferences   = getPreferences($_SESSION['identifiant']);
+          $preferences   = getPreferences($_SESSION['user']['identifiant']);
           $films_waited  = $preferences->getCategories_home()[0];
           $films_way_out = $preferences->getCategories_home()[1];
 
@@ -73,15 +73,15 @@
       break;
 
     case "doSaisieRapide":
-      insertFilmRapide($_POST, $_GET['year'], $_SESSION['identifiant']);
+      insertFilmRapide($_POST, $_GET['year'], $_SESSION['user']['identifiant']);
       break;
 
     case "doVoterFilm":
-      insertStars($_POST, $_GET, $_SESSION['identifiant']);
+      insertStars($_POST, $_GET, $_SESSION['user']['identifiant']);
       break;
 
     case "doParticiperFilm":
-      insertParticipation($_POST, $_GET, $_SESSION['identifiant']);
+      insertParticipation($_POST, $_GET, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -265,7 +265,7 @@
   switch ($_GET['action'])
   {
     case "doSaisieRapide":
-      if ($_SESSION['wrong_date'] == true OR empty($_POST['date_theater']))
+      if ($_SESSION['alerts']['wrong_date'] == true OR empty($_POST['date_theater']))
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter');
       else
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4) . '&action=goConsulter');

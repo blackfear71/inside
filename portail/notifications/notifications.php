@@ -35,7 +35,7 @@
       // Lecture liste des données par le modèle
       if ($_GET['view'] == 'all' OR $_GET['view'] == 'week' OR $_GET['view'] == 'me')
       {
-        $nbPages = getPages($_GET['view'], $_SESSION['identifiant']);
+        $nbPages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
 
         if ($nbPages > 0)
         {
@@ -44,11 +44,11 @@
           elseif ($_GET['page'] < 1)
             header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
           else
-            $notifications = getNotifications($_GET['view'], $_SESSION['identifiant'], $nbPages, $_GET['page']);
+            $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nbPages, $_GET['page']);
         }
       }
       else
-        $notifications = getNotifications($_GET['view'], $_SESSION['identifiant'], NULL, NULL);
+        $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], NULL, NULL);
       break;
 
     default:

@@ -47,13 +47,13 @@
       $req->execute($data);
       $req->closeCursor();
 
-      $_SESSION['parcours_modified'] = true;
+      $_SESSION['alerts']['parcours_modified'] = true;
 
       return $parcours;
     }
     else
     {
-      $_SESSION['erreur_distance'] = true;
+      $_SESSION['alerts']['erreur_distance'] = true;
       return new Parcours();
     }
 
@@ -101,13 +101,13 @@
       $parcours = Parcours::withData($data);
       $parcours->setId($bdd->lastInsertId());
 
-      $_SESSION['parcours_added'] = true;
+      $_SESSION['alerts']['parcours_added'] = true;
 
       return $parcours;
     }
     else
     {
-      $_SESSION['erreur_distance'] = true;
+      $_SESSION['alerts']['erreur_distance'] = true;
       return new Parcours();
     }
 

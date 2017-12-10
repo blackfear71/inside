@@ -9,7 +9,7 @@
 	//session_destroy();
 
 	// Après avoir détruit la variable, on la réinitialise pour éviter les erreurs au retour sur index.html
-	$_SESSION['connected'] = false;
+	$_SESSION['index']['connected'] = false;
 
 	// Retour sur index.php
 	header('location: /inside/index.php');

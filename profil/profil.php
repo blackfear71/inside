@@ -10,8 +10,8 @@
   include_once('modele/metier_profil.php');
 
   // Contrôle user renseignée URL
-  if ($_GET['user'] != $_SESSION['identifiant'])
-    header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
+  if ($_GET['user'] != $_SESSION['user']['identifiant'])
+    header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter');
 
   // Contrôle vue renseignée URL
   switch ($_GET['view'])
@@ -22,7 +22,7 @@
       break;
 
     default:
-      header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
+      header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter');
       break;
   }
 
@@ -36,7 +36,7 @@
         case 'success':
         case 'ranking':
           $listeSuccess    = getSuccess();
-          $successUser     = getSuccessUser($listeSuccess, $_SESSION['identifiant']);
+          $successUser     = getSuccessUser($listeSuccess, $_SESSION['user']['identifiant']);
           $classementUsers = getRankUsers($listeSuccess);
           break;
 
@@ -82,7 +82,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: profil.php?user=' . $_SESSION['identifiant'] . '&view=settings&action=goConsulter');
+      header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter');
       break;
   }
 

@@ -15,7 +15,7 @@
   $controlesDonnees = true;
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['erreur_distance']) OR $_SESSION['erreur_distance'] != true)
+  if (!isset($_SESSION['alerts']['erreur_distance']) OR $_SESSION['alerts']['erreur_distance'] != true)
   {
     $_SESSION['save_add'] = array('nom'      => '',
                                   'distance' => '',
@@ -91,10 +91,10 @@
       $parcours->setLieu(htmlspecialchars($parcours->getLieu()));
       $parcours->setImage(htmlspecialchars($parcours->getImage()));
 
-      $name     = (isset($_SESSION['erreur_distance']) AND $_SESSION['erreur_distance'] == true) ? $_SESSION['save_mod']['nom'] : $parcours->getNom();
-      $dist     = (isset($_SESSION['erreur_distance']) AND $_SESSION['erreur_distance'] == true) ? $_SESSION['save_mod']['distance'] : $parcours->getDistance();
-      $location = (isset($_SESSION['erreur_distance']) AND $_SESSION['erreur_distance'] == true) ? $_SESSION['save_mod']['lieu'] : $parcours->getLieu();
-      $picture  = (isset($_SESSION['erreur_distance']) AND $_SESSION['erreur_distance'] == true) ? $_SESSION['save_mod']['image'] : $parcours->getImage();
+      $name     = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['nom'] : $parcours->getNom();
+      $dist     = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['distance'] : $parcours->getDistance();
+      $location = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['lieu'] : $parcours->getLieu();
+      $picture  = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['image'] : $parcours->getImage();
     }
   }
 
@@ -110,14 +110,14 @@
       break;
 
     case 'doajouter':
-      if ($_SESSION['erreur_distance'] == true)
+      if ($_SESSION['alerts']['erreur_distance'] == true)
         include_once('vue/ajout_parcours.php');
       else
         include_once('vue/vue_parcours.php');
       break;
 
     case 'domodifier':
-      if ($_SESSION['erreur_distance'] == true)
+      if ($_SESSION['alerts']['erreur_distance'] == true)
         include_once('vue/mod_parcours.php');
       else
         include_once('vue/vue_parcours.php');

@@ -13,12 +13,12 @@
   	 session_start();
 
   	// Si déjà connecté
-    if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
+    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
       header('location: /inside/portail/portail/portail.php?action=goConsulter');
-    elseif (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
+    elseif (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == "admin")
       header('location: /inside/administration/administration.php?action=goConsulter');
     else
-      $_SESSION['connected'] = false;
+      $_SESSION['index']['connected'] = false;
   }
 
   // Contrôles Administrateur, initialisation session
@@ -30,11 +30,11 @@
       session_start();
 
     // Contrôle non utilisateur normal
-    if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] != "admin")
+    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
       header('location: /inside/portail/portail/portail.php?action=goConsulter');
 
     // Contrôle administrateur connecté
-    if ($_SESSION['connected'] == false)
+    if ($_SESSION['index']['connected'] == false)
       header('location: /inside/index.php');
   }
 
@@ -47,18 +47,18 @@
       session_start();
 
     // Contrôle non administrateur
-  	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true AND $_SESSION['identifiant'] == "admin")
+  	if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == "admin")
       header('location: /inside/administration/administration.php?action=goConsulter');
 
     // Contrôle utilisateur connecté
-  	if ($_SESSION['connected'] == false)
+  	if ($_SESSION['index']['connected'] == false)
       header('location: /inside/index.php');
 
-    if ($_SESSION['connected'] == true)
+    if ($_SESSION['index']['connected'] == true)
     {
       // Initialisation génération mission
-      if (!isset($_SESSION['tableau_missions']))
-        $_SESSION['tableau_missions'] = array();
+      if (!isset($_SESSION['missions']))
+        $_SESSION['missions'] = array();
 
       // Récupération des missions à générer
       $missions = getMissionsToGenerate();
@@ -68,43 +68,45 @@
       // On génère les boutons de mission si besoin pour chaque mission
       foreach ($missions as $key => $mission)
       {
-        if (empty($_SESSION['tableau_missions'][$key]))
+        if (empty($_SESSION['missions'][$key]))
         {
           if (!empty($mission) AND date("His") >= $mission->getHeure())
           {
             // Nombre de boutons à générer pour la mission en cours
-            $nbButtonsToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
+            $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
 
             if ($nbButtonsToGenerate > 0)
             {
               $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
-              $_SESSION['tableau_missions'][$key] = $missionGenerated;
+              $_SESSION['missions'][$key] = $missionGenerated;
             }
           }
         }
         else
         {
           if (date('His') < $mission->getHeure())
-            unset($_SESSION['tableau_missions'][$key]);
+            unset($_SESSION['missions'][$key]);
           else
           {
             // Nombre de boutons à générer pour la mission en cours
-            $nbButtonsToGenerate = controlMissionComplete($_SESSION['identifiant'], $mission);
+            $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
 
-            if ($nbButtonsToGenerate != count($_SESSION['tableau_missions'][$key]))
+            if ($nbButtonsToGenerate != count($_SESSION['missions'][$key]))
             {
               $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
-              $_SESSION['tableau_missions'][$key] = $missionGenerated;
+              $_SESSION['missions'][$key] = $missionGenerated;
             }
           }
         }
       }
 
-      //var_dump($_SESSION['tableau_missions']);
+      //var_dump($_SESSION['missions']);
 
       // Détermination thème
       $_SESSION['theme'] = setTheme();
     }
+
+    var_dump($_SESSION);
   }
 
   // Récupération des missions actives
@@ -290,7 +292,7 @@
     global $bdd;
 
     // Lecture préférence thème utilisateur
-    $req1 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
+    $req1 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
     $data1 = $req1->fetch();
 
     $preferences = Preferences::withData($data1);

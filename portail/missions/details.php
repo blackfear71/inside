@@ -48,7 +48,7 @@
 
           case 'mission':
           default:
-            $missionUser  = getMissionUser($_GET['id_mission'], $_SESSION['identifiant']);
+            $missionUser  = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
             break;
         }
       }

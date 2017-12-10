@@ -11,7 +11,7 @@
 		header('location: collector.php?action=goConsulter&page=1');
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
+  if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
     $_SESSION['speaker']        = "";
     $_SESSION['other_speaker']  = "";
@@ -40,14 +40,14 @@
         else
         {
           $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page']);
-          $listeVotesUsers = getVotesUser($listeCollectors, $_SESSION['identifiant']);
+          $listeVotesUsers = getVotesUser($listeCollectors, $_SESSION['user']['identifiant']);
           $listeVotes      = getVotes($listeCollectors);
         }
       }
       break;
 
     case "doAjouter":
-      insertCollector($_POST, $_SESSION['identifiant']);
+      insertCollector($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimer":
@@ -60,7 +60,7 @@
       break;
 
     case "doVoter":
-      voteCollector($_POST, $_SESSION['identifiant'], $_GET['id']);
+      voteCollector($_POST, $_SESSION['user']['identifiant'], $_GET['id']);
       break;
 
     default:

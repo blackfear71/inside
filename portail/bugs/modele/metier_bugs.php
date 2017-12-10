@@ -62,7 +62,7 @@
     // Récupération des données
     $subject  = $post['subject_bug'];
     $date     = date("Ymd");
-    $author   = $_SESSION['identifiant'];
+    $author   = $_SESSION['user']['identifiant'];
     $content  = $post['content_bug'];
     $type     = $post['type_bug'];
     $resolved = "N";
@@ -97,7 +97,7 @@
       $req->execute($bugs);
       $req->closeCursor();
 
-      $_SESSION['bug_submitted'] = true;
+      $_SESSION['alerts']['bug_submitted'] = true;
     }
   }
 ?>

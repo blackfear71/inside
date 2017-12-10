@@ -90,7 +90,7 @@
                 // Etoiles utilisateurs
                 foreach ($ligneFilm['tableStars'] as $stars)
                 {
-                  if ($stars['identifiant'] == $_SESSION['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
+                  if ($stars['identifiant'] == $_SESSION['user']['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
                     echo '<td class="table_users" style="background-color: #fffde8;">';
                   elseif ($stars['participation'] == "S")
                     echo '<td class="table_users" style="background-color: #74cefb;">';
@@ -98,7 +98,7 @@
                     echo '<td class="table_users" style="background-color: #91d784;">';
                   else
                     echo '<td class="table_users">';
-                      if ($stars['identifiant'] == $_SESSION['identifiant'])
+                      if ($stars['identifiant'] == $_SESSION['user']['identifiant'])
                       {
                         echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
                           echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
@@ -192,7 +192,7 @@
             // Etoiles utilisateurs
             foreach ($ligneFilm['tableStars'] as $stars)
             {
-              if ($stars['identifiant'] == $_SESSION['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
+              if ($stars['identifiant'] == $_SESSION['user']['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
                 echo '<td class="table_users" style="background-color: #fffde8;">';
               elseif ($stars['participation'] == "S")
                 echo '<td class="table_users" style="background-color: #74cefb;">';
@@ -200,7 +200,7 @@
                 echo '<td class="table_users" style="background-color: #91d784;">';
               else
                 echo '<td class="table_users">';
-                  if ($stars['identifiant'] == $_SESSION['identifiant'])
+                  if ($stars['identifiant'] == $_SESSION['user']['identifiant'])
                   {
                     echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
                       echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';

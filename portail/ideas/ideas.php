@@ -33,7 +33,7 @@
 
     case 'doInserer':
       // Insertion des données par le modèle
-      insertIdea($_POST, $_SESSION['identifiant']);
+      insertIdea($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doChangerStatut':

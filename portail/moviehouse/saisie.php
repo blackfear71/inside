@@ -11,7 +11,7 @@
   include_once('modele/metier_moviehouse.php');
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['wrong_date']) OR $_SESSION['wrong_date'] != true)
+  if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
     $_SESSION['nom_film_saisi']         = "";
     $_SESSION['date_theater_saisie']    = "";
@@ -30,7 +30,7 @@
   }
 
   // Récupération top si erreur date (écrasé par les alertes sinon)
-  if (isset($_SESSION['wrong_date']) AND $_SESSION['wrong_date'] == true)
+  if (isset($_SESSION['alerts']['wrong_date']) AND $_SESSION['alerts']['wrong_date'] == true)
     $wrong_date = true;
 
   // Appel métier
@@ -41,7 +41,7 @@
       $initSaisie   = true;
       $filmExistant = false;
 
-      if ($_SESSION['wrong_date'] == true)
+      if ($_SESSION['alerts']['wrong_date'] == true)
         $film = initCreErrFilm();
       else
         $film = initCreFilm();
@@ -57,7 +57,7 @@
 
       if ($filmExistant == true)
       {
-        if ($_SESSION['wrong_date'] == true)
+        if ($_SESSION['alerts']['wrong_date'] == true)
           $film = initModErrFilm($_GET['modify_id']);
         else
           $film = initModFilm($_GET['modify_id']);
@@ -65,11 +65,11 @@
       break;
 
     case "doInserer":
-      $new_id = insertFilmAvance($_POST, $_SESSION['identifiant']);
+      $new_id = insertFilmAvance($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doModifier":
-      modFilmAvance($_GET['modify_id'], $_POST, $_SESSION['identifiant']);
+      modFilmAvance($_GET['modify_id'], $_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -124,14 +124,14 @@
   switch ($_GET['action'])
   {
     case "doInserer":
-      if ($_SESSION['wrong_date'] == true)
+      if ($_SESSION['alerts']['wrong_date'] == true)
         header('location: saisie.php?action=goAjouter');
       else
         header('location: details.php?id_film=' . $new_id . '&action=goConsulter');
       break;
 
     case "doModifier":
-      if ($_SESSION['wrong_date'] == true)
+      if ($_SESSION['alerts']['wrong_date'] == true)
         header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
       else
         header('location: details.php?id_film=' . $_GET['modify_id'] . '&action=goConsulter');

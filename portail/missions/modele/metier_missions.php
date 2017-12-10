@@ -15,11 +15,11 @@
     $reponse = $bdd->query('SELECT * FROM missions WHERE id = ' . $id . ' AND date_deb <= ' . date("Ymd"));
 
     if ($reponse->rowCount() == 0)
-      $_SESSION['mission_doesnt_exist'] = true;
+      $_SESSION['alerts']['mission_doesnt_exist'] = true;
 
     $reponse->closeCursor();
 
-    if ($_SESSION['mission_doesnt_exist'] == false)
+    if ($_SESSION['alerts']['mission_doesnt_exist'] == false)
       $missionExistante = true;
 
     return $missionExistante;
@@ -184,11 +184,11 @@
 
         // On supprime le bouton correspondant pour ne pas cliquer dessus à nouveau
         unset($mission[$ref]);
-        $_SESSION['tableau_missions'][$key] = $mission;
+        $_SESSION['missions'][$key] = $mission;
       }
 
       if (empty($mission))
-        $_SESSION['mission_achieved'] = true;
+        $_SESSION['alerts']['mission_achieved'] = true;
     }
   }
 

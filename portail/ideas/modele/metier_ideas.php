@@ -17,7 +17,7 @@
     elseif ($view == "inprogress")
       $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "O" OR status = "C" OR status = "P" ORDER BY id DESC');
     elseif ($view == "mine")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['identifiant'] . '" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '" ORDER BY id DESC');
     else
       $reponse = $bdd->query('SELECT * FROM ideas ORDER BY id DESC');
 
@@ -122,11 +122,11 @@
 
       insertNotification($user, 'idee', $new_id);
 
-      $_SESSION['idea_submitted'] = true;
+      $_SESSION['alerts']['idea_submitted'] = true;
     }
     else
     {
-      $_SESSION['idea_submitted'] = false;
+      $_SESSION['alerts']['idea_submitted'] = false;
     }
   }
 
@@ -138,22 +138,22 @@
     {
       case 'take':
         $status     = "C";
-        $developper = $_SESSION['identifiant'];
+        $developper = $_SESSION['user']['identifiant'];
         break;
 
       case 'developp':
         $status     = "P";
-        $developper = $_SESSION['identifiant'];
+        $developper = $_SESSION['user']['identifiant'];
         break;
 
       case 'end':
         $status     = "D";
-        $developper = $_SESSION['identifiant'];
+        $developper = $_SESSION['user']['identifiant'];
         break;
 
       case 'reject':
         $status     = "R";
-        $developper = $_SESSION['identifiant'];
+        $developper = $_SESSION['user']['identifiant'];
         break;
 
       case 'reset':

@@ -185,7 +185,7 @@
                     foreach ($listeEtoiles as $etoiles)
                     {
                       // On affiche le nom correspondant à l'utilisateur et ses étoiles
-                      if ($etoiles->getIdentifiant() == $_SESSION['identifiant'])
+                      if ($etoiles->getIdentifiant() == $_SESSION['user']['identifiant'])
                         echo '<tr class="tr_interested" style="background-color: #fffde8;">';
                       else
                         echo '<tr class="tr_interested">';
@@ -353,7 +353,7 @@
                   echo '<div class="date_comments_films">Le ' . formatDateForDisplay($comment->getDate()) . ' à ' . formatTimeForDisplay($comment->getTime()) . '</div>';
 
                   // Actions sur commentaires seulement si l'auteur correspond à l'utilisateur connecté
-                  if ($comment->getAuthor() == $_SESSION['identifiant'])
+                  if ($comment->getAuthor() == $_SESSION['user']['identifiant'])
                   {
                     /***************************************************/
                     /* Ligne visualisation normale (sans modification) */

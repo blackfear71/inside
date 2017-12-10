@@ -15,7 +15,7 @@
 
     global $bdd;
 
-    $_SESSION['connected'] = NULL;
+    $_SESSION['index']['connected'] = NULL;
 
     // lecture par requête de la BDD
   	$reponse = $bdd->query('SELECT * FROM users WHERE identifiant = "' . $login . '"');
@@ -25,9 +25,9 @@
 		{
 			if ($donnees['reset'] == "I")
 			{
-				$_SESSION['not_yet']         = true;
-				$_SESSION['connected']       = false;
-				$_SESSION['wrong_connexion'] = false;
+				$_SESSION['alerts']['not_yet']         = true;
+				$_SESSION['index']['connected']        = false;
+				$_SESSION['alerts']['wrong_connexion'] = false;
 			}
 			else
 			{
@@ -35,21 +35,21 @@
 				if (isset($mdp) AND $mdp == $donnees['password'])
 				{
 					// Sauvegarde des données utilisateur en SESSION
-					$_SESSION['connected']       = true;
-					$_SESSION['identifiant']     = $donnees['identifiant'];
-          $_SESSION['pseudo']          = $donnees['pseudo'];
-					$_SESSION['avatar']          = $donnees['avatar'];
-					$_SESSION['wrong_connexion'] = false;
+					$_SESSION['index']['connected']        = true;
+					$_SESSION['user']['identifiant']       = $donnees['identifiant'];
+          $_SESSION['user']['pseudo']            = $donnees['pseudo'];
+					$_SESSION['user']['avatar']            = $donnees['avatar'];
+					$_SESSION['alerts']['wrong_connexion'] = false;
 
 					// Recherche et sauvegarde des preferences utilisateur en SESSION
-					if ($_SESSION['identifiant'] != "admin")
+					if ($_SESSION['user']['identifiant'] != "admin")
 					{
-						$reponse2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['identifiant'] . '"');
+						$reponse2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
 						$donnees2 = $reponse2->fetch();
 
-						$_SESSION['view_movie_house']   = $donnees2['view_movie_house'];
-            $_SESSION['view_the_box']       = $donnees2['view_the_box'];
-						$_SESSION['view_notifications'] = $donnees2['view_notifications'];
+						$_SESSION['user']['view_movie_house']   = $donnees2['view_movie_house'];
+            $_SESSION['user']['view_the_box']       = $donnees2['view_the_box'];
+						$_SESSION['user']['view_notifications'] = $donnees2['view_notifications'];
 
 						$reponse2->closeCursor();
 					}
@@ -59,17 +59,17 @@
         // Sinon, on affiche un message d'erreur
 				else
 				{
-					$_SESSION['connected']       = false;
-					$_SESSION['wrong_connexion'] = true;
+					$_SESSION['index']['connected']        = false;
+					$_SESSION['alerts']['wrong_connexion'] = true;
 				}
 
-				$_SESSION['not_yet'] = false;
+				$_SESSION['alerts']['not_yet'] = false;
 			}
 		}
 		else
 		{
-			$_SESSION['connected']       = false;
-			$_SESSION['wrong_connexion'] = true;
+			$_SESSION['index']['connected']        = false;
+			$_SESSION['alerts']['wrong_connexion'] = true;
 		}
 
   	$reponse->closeCursor();
@@ -82,10 +82,10 @@
   function subscribe($post)
   {
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['identifiant_saisi']               = $post['trigramme'];
-    $_SESSION['pseudo_saisi']                    = $post['pseudo'];
-    $_SESSION['mot_de_passe_saisi']              = $post['password'];
-    $_SESSION['confirmation_mot_de_passe_saisi'] = $post['confirm_password'];
+    $_SESSION['index']['identifiant_saisi']               = $post['trigramme'];
+    $_SESSION['index']['pseudo_saisi']                    = $post['pseudo'];
+    $_SESSION['index']['mot_de_passe_saisi']              = $post['password'];
+    $_SESSION['index']['confirmation_mot_de_passe_saisi'] = $post['confirm_password'];
 
     // Récupération des champs saisis et initialisations utilisateur
     $trigramme        = htmlspecialchars(strtoupper($post['trigramme']));
@@ -121,16 +121,16 @@
       {
         if ($donnees['identifiant'] == $trigramme)
         {
-          $_SESSION['already_exist'] = true;
+          $_SESSION['alerts']['already_exist'] = true;
           break;
         }
         else
-          $_SESSION['already_exist'] = false;
+          $_SESSION['alerts']['already_exist'] = false;
       }
       $reponse->closeCursor();
 
       // Contrôle confirmation mot de passe
-      if ($_SESSION['already_exist'] == false)
+      if ($_SESSION['alerts']['already_exist'] == false)
       {
         if ($password == $confirm_password)
         {
@@ -202,18 +202,18 @@
             ));
           $req->closeCursor();
 
-          $_SESSION['ask_inscription'] = true;
-          $_SESSION['wrong_confirm']   = false;
+          $_SESSION['alerts']['ask_inscription'] = true;
+          $_SESSION['alerts']['wrong_confirm']   = false;
         }
         else
         {
-          $_SESSION['ask_inscription'] = false;
-          $_SESSION['wrong_confirm']   = true;
+          $_SESSION['alerts']['ask_inscription'] = false;
+          $_SESSION['alerts']['wrong_confirm']   = true;
         }
       }
     }
     else
-      $_SESSION['too_short'] = true;
+      $_SESSION['alerts']['too_short'] = true;
 
   }
 
@@ -222,17 +222,17 @@
   function resetPassword($post)
   {
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['identifiant_saisi_mdp'] = $post['login'];
+    $_SESSION['index']['identifiant_saisi_mdp'] = $post['login'];
 
     // Récupération des champs saisis et initialisations utilisateur
 		$identifiant = htmlspecialchars(strtoupper($post['login']));
 		$reset       = "N";
 
     // Initialisation erreurs
-		$_SESSION['wrong_id']      = false;
-		$_SESSION['asked']         = false;
-		$_SESSION['already_asked'] = false;
-    $_SESSION['not_yet']       = false;
+		$_SESSION['alerts']['wrong_id']      = false;
+		$_SESSION['alerts']['asked']         = false;
+		$_SESSION['alerts']['already_asked'] = false;
+    $_SESSION['alerts']['not_yet']       = false;
 
     global $bdd;
 
@@ -244,17 +244,17 @@
 			{
 				if ($donnees['reset'] == "Y")
 				{
-					$_SESSION['wrong_id']      = false;
-					$_SESSION['asked']         = false;
-					$_SESSION['already_asked'] = true;
+					$_SESSION['alerts']['wrong_id']      = false;
+					$_SESSION['alerts']['asked']         = false;
+					$_SESSION['alerts']['already_asked'] = true;
 					break;
 				}
         elseif ($donnees['reset'] == "I")
         {
-          $_SESSION['wrong_id']      = false;
-          $_SESSION['asked']         = false;
-          $_SESSION['already_asked'] = false;
-          $_SESSION['not_yet']       = true;
+          $_SESSION['alerts']['wrong_id']      = false;
+          $_SESSION['alerts']['asked']         = false;
+          $_SESSION['alerts']['already_asked'] = false;
+          $_SESSION['alerts']['not_yet']       = true;
           break;
         }
 				else
@@ -268,17 +268,17 @@
 					));
 					$req->closeCursor();
 
-					$_SESSION['wrong_id']      = false;
-					$_SESSION['asked']         = true;
-					$_SESSION['already_asked'] = false;
+					$_SESSION['alerts']['wrong_id']      = false;
+					$_SESSION['alerts']['asked']         = true;
+					$_SESSION['alerts']['already_asked'] = false;
 					break;
 				}
 			}
 			else
 			{
-				$_SESSION['wrong_id']      = true;
-				$_SESSION['asked']         = false;
-				$_SESSION['already_asked'] = false;
+				$_SESSION['alerts']['wrong_id']      = true;
+				$_SESSION['alerts']['asked']         = false;
+				$_SESSION['alerts']['already_asked'] = false;
 			}
 		}
 		$reponse->closeCursor();

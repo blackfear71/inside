@@ -6,33 +6,33 @@
 	controlsIndex();
 
 	// Initialisation sauvegarde saisie inscription
-	if (((!isset($_SESSION['too_short'])      OR  $_SESSION['too_short'] != true)
-	AND  (!isset($_SESSION['already_exist'])  OR  $_SESSION['already_exist'] != true)
-	AND  (!isset($_SESSION['wrong_confirm'])  OR  $_SESSION['wrong_confirm'] != true))
-	OR   (isset($_SESSION['ask_inscription']) AND $_SESSION['ask_inscription'] == true))
+	if (((!isset($_SESSION['alerts']['too_short'])      OR  $_SESSION['alerts']['too_short']       != true)
+	AND  (!isset($_SESSION['alerts']['already_exist'])  OR  $_SESSION['alerts']['already_exist']   != true)
+	AND  (!isset($_SESSION['alerts']['wrong_confirm'])  OR  $_SESSION['alerts']['wrong_confirm']   != true))
+	OR   (isset($_SESSION['alerts']['ask_inscription']) AND $_SESSION['alerts']['ask_inscription'] == true))
 	{
-		$_SESSION['identifiant_saisi']               = "";
-    $_SESSION['pseudo_saisi']                    = "";
-    $_SESSION['mot_de_passe_saisi']              = "";
-    $_SESSION['confirmation_mot_de_passe_saisi'] = "";
+		$_SESSION['index']['identifiant_saisi']               = "";
+    $_SESSION['index']['pseudo_saisi']                    = "";
+    $_SESSION['index']['mot_de_passe_saisi']              = "";
+    $_SESSION['index']['confirmation_mot_de_passe_saisi'] = "";
 	}
 
 	// Initialisation sauvegarde saisie changement mot de passe
-	if (((!isset($_SESSION['wrong_id'])      OR $_SESSION['wrong_id'] != true)
-	AND  (!isset($_SESSION['already_asked']) OR $_SESSION['already_asked'] != true))
-	OR   (isset($_SESSION['asked'])          AND $_SESSION['asked'] == true))
-		$_SESSION['identifiant_saisi_mdp'] = "";
+	if (((!isset($_SESSION['alerts']['wrong_id'])      OR $_SESSION['alerts']['wrong_id']      != true)
+	AND  (!isset($_SESSION['alerts']['already_asked']) OR $_SESSION['alerts']['already_asked'] != true))
+	OR   (isset($_SESSION['alerts']['asked'])          AND $_SESSION['alerts']['asked']        == true))
+		$_SESSION['index']['identifiant_saisi_mdp'] = "";
 
 	// Top erreur pour affichage
-	if ((isset($_SESSION['too_short'])     AND $_SESSION['too_short']     == true)
-	OR  (isset($_SESSION['already_exist']) AND $_SESSION['already_exist'] == true)
-	OR  (isset($_SESSION['wrong_confirm']) AND $_SESSION['wrong_confirm'] == true))
+	if ((isset($_SESSION['alerts']['too_short'])     AND $_SESSION['alerts']['too_short']     == true)
+	OR  (isset($_SESSION['alerts']['already_exist']) AND $_SESSION['alerts']['already_exist'] == true)
+	OR  (isset($_SESSION['alerts']['wrong_confirm']) AND $_SESSION['alerts']['wrong_confirm'] == true))
 		$error_inscription = true;
 	else
 		$error_inscription = false;
 
-	if ((isset($_SESSION['already_asked']) AND $_SESSION['already_asked'] == true)
-	OR  (isset($_SESSION['wrong_id'])      AND $_SESSION['wrong_id']      == true))
+	if ((isset($_SESSION['alerts']['already_asked']) AND $_SESSION['alerts']['already_asked'] == true)
+	OR  (isset($_SESSION['alerts']['wrong_id'])      AND $_SESSION['alerts']['wrong_id']      == true))
 		$error_password = true;
 	else
 		$error_password = false;
@@ -82,9 +82,9 @@
 	  switch ($_GET['action'])
 	  {
 			case "doConnecter":
-				if ($connected == true AND $_SESSION['identifiant'] == "admin")
+				if ($connected == true AND $_SESSION['user']['identifiant'] == "admin")
 					header('location: administration/administration.php?action=goConsulter');
-				elseif ($connected == true AND $_SESSION['identifiant'] != "admin")
+				elseif ($connected == true AND $_SESSION['user']['identifiant'] != "admin")
 					header('location: portail/portail/portail.php?action=goConsulter');
 				else
 					header('location: index.php');

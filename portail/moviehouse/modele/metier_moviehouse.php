@@ -505,10 +505,10 @@
 
       insertNotification($user, 'film', $new_id);
 
-      $_SESSION['film_added'] = true;
+      $_SESSION['alerts']['film_added'] = true;
     }
     else
-      $_SESSION['wrong_date'] = true;
+      $_SESSION['alerts']['wrong_date'] = true;
   }
 
   // METIER : Insertion/modification étoiles
@@ -652,7 +652,7 @@
     $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() == 0)
-      $_SESSION['film_doesnt_exist'] = true;
+      $_SESSION['alerts']['film_doesnt_exist'] = true;
 
     $reponse->closeCursor();
 
@@ -661,11 +661,11 @@
     $donnees2 = $reponse2->fetch();
 
     if ($donnees2['to_delete'] == "Y")
-      $_SESSION['film_doesnt_exist'] = true;
+      $_SESSION['alerts']['film_doesnt_exist'] = true;
 
     $reponse2->closeCursor();
 
-    if ($_SESSION['film_doesnt_exist'] == false)
+    if ($_SESSION['alerts']['film_doesnt_exist'] == false)
       $filmExistant = true;
 
     return $filmExistant;
@@ -941,7 +941,7 @@
     ));
     $req->closeCursor();
 
-    $_SESSION['film_removed'] = true;
+    $_SESSION['alerts']['film_removed'] = true;
   }
 
   // METIER : Initialisation champs saisie avancée films
@@ -1104,7 +1104,7 @@
         if (checkdate($m, $d, $y))
           $date_release = formatDateForInsert($post['date_release']);
         else
-          $_SESSION['wrong_date'] = true;
+          $_SESSION['alerts']['wrong_date'] = true;
       }
 
       // Contrôle date Doodle
@@ -1118,10 +1118,10 @@
 				if (checkdate($m, $d, $y))
 					$date_doodle = formatDateForInsert($post['date_doodle']);
 				else
-					$_SESSION['wrong_date'] = true;
+					$_SESSION['alerts']['wrong_date'] = true;
 			}
 
-      if ($_SESSION['wrong_date'] != true)
+      if ($_SESSION['alerts']['wrong_date'] != true)
 			{
         $film = array('film'            => $nom_film,
                       'to_delete'       => $to_delete,
@@ -1189,11 +1189,11 @@
         if (!empty($doodle))
           insertNotification($user, 'doodle', $new_id);
 
-        $_SESSION['film_added'] = true;
+        $_SESSION['alerts']['film_added'] = true;
       }
     }
     else
-      $_SESSION['wrong_date'] = true;
+      $_SESSION['alerts']['wrong_date'] = true;
 
     return $new_id;
   }
@@ -1285,7 +1285,7 @@
         if (checkdate($m, $d, $y))
           $date_release = formatDateForInsert($post['date_release']);
         else
-          $_SESSION['wrong_date'] = true;
+          $_SESSION['alerts']['wrong_date'] = true;
       }
 
       // Contrôle date Doodle
@@ -1299,10 +1299,10 @@
         if (checkdate($m, $d, $y))
           $date_doodle = formatDateForInsert($post['date_doodle']);
         else
-          $_SESSION['wrong_date'] = true;
+          $_SESSION['alerts']['wrong_date'] = true;
       }
 
-      if ($_SESSION['wrong_date'] != true)
+      if ($_SESSION['alerts']['wrong_date'] != true)
 			{
         $film = array('film'         => $nom_film,
                       'date_theater' => $date_theater,
@@ -1351,11 +1351,11 @@
         if (empty($date_doodle))
           deleteNotification('cinema', $id_film);
 
-        $_SESSION['film_modified'] = true;
+        $_SESSION['alerts']['film_modified'] = true;
       }
     }
     else
-      $_SESSION['wrong_date'] = true;
+      $_SESSION['alerts']['wrong_date'] = true;
   }
 
   // METIER : Envoi mail sortie film
@@ -1402,7 +1402,7 @@
     // On envoie un mail par personne et non un mail groupé
     foreach ($participants as $participant)
     {
-      if ($_SESSION['mail_film_error'] != true)
+      if ($_SESSION['alerts']['mail_film_error'] != true)
       {
         if (!empty($participant->getEmail()))
         {
@@ -1423,13 +1423,13 @@
           if(!$mail->Send())
           {
             echo 'Erreur : ' . $mail->ErrorInfo;
-            $_SESSION['mail_film_error'] = true;
-            $_SESSION['mail_film_send']  = NULL;
+            $_SESSION['alerts']['mail_film_error'] = true;
+            $_SESSION['alerts']['mail_film_send']  = NULL;
           }
           else
           {
-            $_SESSION['mail_film_error'] = NULL;
-            $_SESSION['mail_film_send']  = true;
+            $_SESSION['alerts']['mail_film_error'] = NULL;
+            $_SESSION['alerts']['mail_film_send']  = true;
           }
 
           //var_dump($mail);

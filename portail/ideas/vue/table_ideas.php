@@ -70,7 +70,7 @@
 
           // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
           if ( empty($ligne->getDevelopper())
-          OR (!empty($ligne->getDevelopper()) AND $_SESSION['identifiant'] == $ligne->getDevelopper())
+          OR (!empty($ligne->getDevelopper()) AND $_SESSION['user']['identifiant'] == $ligne->getDevelopper())
           OR  $ligne->getStatus() == "D"
           OR  $ligne->getStatus() == "R")
           {

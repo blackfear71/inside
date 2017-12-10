@@ -14,7 +14,7 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $preferences      = getPreferences($_SESSION['identifiant']);
+      $preferences      = getPreferences($_SESSION['user']['identifiant']);
       $messagesMissions = getMessagesMissions();
 
       if (!empty($messagesMissions))

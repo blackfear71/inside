@@ -39,11 +39,11 @@
             {
               if ($classement['id'] == $success->getId())
               {
-                if (isset($classement['podium'][0]) AND $classement['podium'][0]['identifiant'] == $_SESSION['identifiant'])
+                if (isset($classement['podium'][0]) AND $classement['podium'][0]['identifiant'] == $_SESSION['user']['identifiant'])
                   echo '<img src="../includes/icons/medals/or.png" alt="or" class="medal" />';
-                elseif (isset($classement['podium'][1]) AND $classement['podium'][1]['identifiant'] == $_SESSION['identifiant'])
+                elseif (isset($classement['podium'][1]) AND $classement['podium'][1]['identifiant'] == $_SESSION['user']['identifiant'])
                   echo '<img src="../includes/icons/medals/argent.png" alt="argent" class="medal" />';
-                elseif (isset($classement['podium'][2]) AND $classement['podium'][2]['identifiant'] == $_SESSION['identifiant'])
+                elseif (isset($classement['podium'][2]) AND $classement['podium'][2]['identifiant'] == $_SESSION['user']['identifiant'])
                   echo '<img src="../includes/icons/medals/bronze.png" alt="bronze" class="medal" />';
 
                 break;

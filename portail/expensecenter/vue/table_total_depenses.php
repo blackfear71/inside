@@ -15,7 +15,7 @@
       // Lignes utilisateurs
       foreach ($listeUsers as $bilan)
       {
-        if ($_SESSION['identifiant'] == $bilan->getIdentifiant())
+        if ($_SESSION['user']['identifiant'] == $bilan->getIdentifiant())
           echo '<tr style="background-color: #fffde8;">';
         elseif ($i % 2 != 0)
           echo '<tr style="background-color: #f3f3f3;">';

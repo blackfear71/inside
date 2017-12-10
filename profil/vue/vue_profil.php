@@ -60,7 +60,7 @@
               else
                 $actif = 'inactive';
 
-              echo '<a href="profil.php?user=' . $_SESSION['identifiant'] . '&view=' . $view . '&action=goConsulter" class="zone_switch">';
+              echo '<a href="profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=' . $view . '&action=goConsulter" class="zone_switch">';
                 echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
                 echo '<div class="border_switch_' . $actif . '"></div>';
               echo '</a>';

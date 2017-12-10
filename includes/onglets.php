@@ -1,6 +1,6 @@
 <?php
 	// Récupération des préférences
-	switch ($_SESSION['view_movie_house'])
+	switch ($_SESSION['user']['view_movie_house'])
 	{
 		case "S":
 			$view_movie_house   = "main";

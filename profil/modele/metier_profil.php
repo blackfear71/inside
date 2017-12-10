@@ -128,16 +128,16 @@
     $reponse->closeCursor();
 
     // Mise à jour du pseudo stocké en SESSION
-    $_SESSION['pseudo'] = $new_pseudo;
+    $_SESSION['user']['pseudo'] = $new_pseudo;
 
-    $_SESSION['pseudo_changed'] = true;
+    $_SESSION['alerts']['pseudo_changed'] = true;
   }
 
   // METIER : Mise à jour de l'avatar (base + fichier)
   // RETOUR : Aucun
   function changeAvatar($user, $files)
   {
-    $_SESSION['avatar_changed'] = false;
+    $_SESSION['alerts']['avatar_changed'] = false;
 
     global $bdd;
 
@@ -210,8 +210,8 @@
  				));
  				$reponse2->closeCursor();
 
-        $_SESSION['avatar']         = $new_name;
- 				$_SESSION['avatar_changed'] = true;
+        $_SESSION['user']['avatar']         = $new_name;
+ 				$_SESSION['alerts']['avatar_changed'] = true;
  			}
  		}
   }
@@ -220,7 +220,7 @@
   // RETOUR : Aucun
   function deleteAvatar($user)
   {
-    $_SESSION['avatar_deleted'] = false;
+    $_SESSION['alerts']['avatar_deleted'] = false;
 
     global $bdd;
 
@@ -242,8 +242,8 @@
     ));
     $reponse2->closeCursor();
 
-    $_SESSION['avatar']         = '';
-    $_SESSION['avatar_deleted'] = true;
+    $_SESSION['user']['avatar']           = '';
+    $_SESSION['alerts']['avatar_deleted'] = true;
   }
 
   // METIER : Mise à jour des préférences
@@ -280,8 +280,8 @@
     {
       if (!is_numeric($post['duration']) OR !ctype_digit($post['duration']) OR $post['duration'] <= 0)
       {
-        $_SESSION['duration_not_correct'] = true;
-        $error                            = true;
+        $_SESSION['alerts']['duration_not_correct'] = true;
+        $error                                      = true;
       }
       else
       {
@@ -290,24 +290,24 @@
           case "J":
             if ($post['duration'] > 365)
             {
-              $_SESSION['duration_too_long'] = true;
-              $error                         = true;
+              $_SESSION['alerts']['duration_too_long'] = true;
+              $error                                   = true;
             }
             break;
 
           case "S":
             if ($post['duration'] > 52)
             {
-              $_SESSION['duration_too_long'] = true;
-              $error                         = true;
+              $_SESSION['alerts']['duration_too_long'] = true;
+              $error                                   = true;
             }
             break;
 
           case "M":
             if ($post['duration'] > 12)
             {
-              $_SESSION['duration_too_long'] = true;
-              $error                         = true;
+              $_SESSION['alerts']['duration_too_long'] = true;
+              $error                                   = true;
             }
             break;
 
@@ -345,11 +345,11 @@
       $reponse->closeCursor();
 
       // Mise à jour des préférences stockées en SESSION
-      $_SESSION['view_movie_house']   = $view_movie_house;
-      $_SESSION['view_the_box']       = $view_the_box;
-      $_SESSION['view_notifications'] = $view_notifications;
+      $_SESSION['user']['view_movie_house']   = $view_movie_house;
+      $_SESSION['user']['view_the_box']       = $view_the_box;
+      $_SESSION['user']['view_notifications'] = $view_notifications;
 
-      $_SESSION['preferences_updated'] = true;
+      $_SESSION['alerts']['preferences_updated'] = true;
     }
   }
 
@@ -371,7 +371,7 @@
 		));
 		$reponse->closeCursor();
 
-    $_SESSION['mail_updated'] = true;
+    $_SESSION['alerts']['mail_updated'] = true;
   }
 
   // METIER : Mise à jour du mot de passe
@@ -421,7 +421,7 @@
 
   		$reponse->closeCursor();
 
-  		$_SESSION['wrong_password'] = $wrong_password;
+  		$_SESSION['alerts']['wrong_password'] = $wrong_password;
     }
   }
 
@@ -429,7 +429,7 @@
   // RETOUR : Aucun
   function askUnsubscribe($user)
   {
-    $_SESSION['ask_desinscription'] = false;
+    $_SESSION['alerts']['ask_desinscription'] = false;
 
     global $bdd;
 
@@ -441,7 +441,7 @@
     ));
     $reponse->closeCursor();
 
-    $_SESSION['ask_desinscription'] = true;
+    $_SESSION['alerts']['ask_desinscription'] = true;
   }
 
   // METIER : Lecture liste des succès

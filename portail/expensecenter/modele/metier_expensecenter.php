@@ -301,7 +301,7 @@
       }
 
       // Message insertion effectuée
-      $_SESSION['depense_added'] = true;
+      $_SESSION['alerts']['depense_added'] = true;
     }
     // Sinon on sauve les données et on affiche une erreur
     else
@@ -323,7 +323,7 @@
       $_SESSION['tableau_parts'] = $list_parts;
 
       // Message prix non numérique
-      $_SESSION['not_numeric'] = true;
+      $_SESSION['alerts']['not_numeric'] = true;
     }
   }
 
@@ -498,10 +498,10 @@
       }
 
       // Message modification effectuée
-      $_SESSION['depense_modified'] = true;
+      $_SESSION['alerts']['depense_modified'] = true;
     }
     else
-      $_SESSION['not_numeric'] = true;
+      $_SESSION['alerts']['not_numeric'] = true;
   }
 
   // METIER : Suppression d'une dépense
@@ -574,6 +574,6 @@
     }
 
     // Message suppression effectuée
-    $_SESSION['depense_deleted'] = true;
+    $_SESSION['alerts']['depense_deleted'] = true;
   }
 ?>

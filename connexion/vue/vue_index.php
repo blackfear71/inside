@@ -80,10 +80,10 @@
                   votre inscription dans les plus brefs délais.';
                 echo '</div>';
 
-                echo '<input type="text" name="trigramme" value="' . $_SESSION['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" required />';
-                echo '<input type="text" name="pseudo" value="' . $_SESSION['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
-                echo '<input type="password" name="password" value="' . $_SESSION['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
-                echo '<input type="password" name="confirm_password" value="' . $_SESSION['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
+                echo '<input type="text" name="trigramme" value="' . $_SESSION['index']['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" required />';
+                echo '<input type="text" name="pseudo" value="' . $_SESSION['index']['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
+                echo '<input type="password" name="password" value="' . $_SESSION['index']['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
+                echo '<input type="password" name="confirm_password" value="' . $_SESSION['index']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
                 echo '<input type="submit" name="ask_inscription" value="SOUMETTRE" class="bouton_index" />';
               echo '</form>';
             ?>
@@ -111,7 +111,7 @@
         					puisse procéder à la création d\'un nouveau mot de passe qu\'il vous communiquera par la suite.';
                 echo '</div>';
 
-                echo '<input type="text" name="login" value="' . $_SESSION['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" required />';
+                echo '<input type="text" name="login" value="' . $_SESSION['index']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" required />';
     						echo '<input type="submit" name="ask_password" value="SOUMETTRE" class="bouton_index" />';
               echo '</form>';
             ?>

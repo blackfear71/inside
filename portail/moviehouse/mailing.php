@@ -18,13 +18,13 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['identifiant']);
+      $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
       $listeEtoiles = getDetailsStars($_GET['id_film']);
       break;
 
     case "sendMail":
       // Lecture liste des données par le modèle
-      $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['identifiant']);
+      $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
       $listeEtoiles = getDetailsStars($_GET['id_film']);
       sendMail($_GET['id_film'], $detailsFilm, $listeEtoiles);
       break;

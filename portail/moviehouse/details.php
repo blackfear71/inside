@@ -23,27 +23,27 @@
       if ($filmExistant == true)
       {
         $listeNavigation   = getNavigation($_GET['id_film']);
-        $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['identifiant']);
+        $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
         $listeEtoiles      = getDetailsStars($_GET['id_film']);
         $listeCommentaires = getComments($_GET['id_film']);
       }
       break;
 
     case "doVoterFilm":
-      insertStars($_POST, $_GET, $_SESSION['identifiant']);
+      insertStars($_POST, $_GET, $_SESSION['user']['identifiant']);
       break;
 
     case "doParticiperFilm":
-      insertParticipation($_POST, $_GET, $_SESSION['identifiant']);
+      insertParticipation($_POST, $_GET, $_SESSION['user']['identifiant']);
       break;
 
     case "doCommenter":
-      insertComment($_POST, $_GET, $_SESSION['identifiant']);
+      insertComment($_POST, $_GET, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimer":
-      $preferences = getPreferences($_SESSION['identifiant']);
-      deleteFilm($_GET['delete_id'], $_SESSION['identifiant']);
+      $preferences = getPreferences($_SESSION['user']['identifiant']);
+      deleteFilm($_GET['delete_id'], $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimerCommentaire":

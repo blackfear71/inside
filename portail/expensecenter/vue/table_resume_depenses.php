@@ -61,7 +61,7 @@
 			        // Parts des Utilisateurs
 			        foreach ($ligneResume['tableParts'] as $part)
 			        {
-			          if ($part['identifiant'] == $_SESSION['identifiant'])
+			          if ($part['identifiant'] == $_SESSION['user']['identifiant'])
 			            echo '<td class="table_users_expense_center" style="background-color: #fffde8;">';
 			          else
 			            echo '<td class="table_users_expense_center">';
@@ -136,7 +136,7 @@
 		          // Parts des Utilisateurs
 		          foreach ($ligneResume['tableParts'] as $part)
 		          {
-		            if ($part['identifiant'] == $_SESSION['identifiant'])
+		            if ($part['identifiant'] == $_SESSION['user']['identifiant'])
 		              echo '<td class="table_users_expense_center" style="background-color: #fffde8;">';
 		            else
 		              echo '<td class="table_users_expense_center">';
