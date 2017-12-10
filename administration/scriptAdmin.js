@@ -17,9 +17,9 @@ function rotateIcon(id)
 }
 
 // Insère une prévisualisation de l'image sur la page
-var loadFile = function(event)
+var loadFile = function(event, id)
 {
-  var output = document.getElementById('output');
+  var output = document.getElementById(id);
   output.src = URL.createObjectURL(event.target.files[0]);
 };
 
