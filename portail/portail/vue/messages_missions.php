@@ -23,7 +23,7 @@
       // Affichage des messages
       echo '<div class="zone_resume_mission">';
         // Mission > 1 jour (heure OK)
-        if (isset($id_current_mission) AND $mission->getId() == $id_current_mission AND isset($_SESSION['tableau_missions'][$key_current_mission]) AND !empty($_SESSION['tableau_missions'][$key_current_mission]) AND $mission->getDate_deb() != $mission->getDate_fin()  AND date('His') >= $mission->getHeure())
+        if (isset($id_current_mission) AND $mission->getId() == $id_current_mission AND isset($_SESSION['tableau_missions'][$key_current_mission]) AND !empty($_SESSION['tableau_missions'][$key_current_mission]) AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
           $nbRestants = count($_SESSION['tableau_missions'][$key_current_mission]);
 

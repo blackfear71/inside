@@ -39,7 +39,7 @@ function formatTimeForDisplay($time){
    HH:MM pour l'affichage. Si elle ne comporte pas 6 caractères, on renvoie l'argument
 */
 function formatTimeForDisplayLight($time){
-    if (strlen($time) == 4)
+    if (strlen($time) == 6)
         return substr($time, 0, 2) . ':' . substr($time, 2, 2);
     else
         return $time;
