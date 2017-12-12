@@ -39,6 +39,11 @@
 				?>
 			</aside>
 
+      <!-- Messages d'alerte -->
+			<?php
+				include('../includes/alerts.php');
+			?>
+
 			<article>
         <div class="zone_manage_missions">
           <?php

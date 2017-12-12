@@ -184,6 +184,28 @@
   if (!isset($_SESSION['alerts']['mission_doesnt_exist']))
     $_SESSION['alerts']['mission_doesnt_exist'] = NULL;
 
+  // Initialisations missions (admin)
+  if (!isset($_SESSION['alerts']['already_ref_mission']))
+    $_SESSION['alerts']['already_ref_mission'] = NULL;
+
+  if (!isset($_SESSION['alerts']['objective_not_numeric']))
+    $_SESSION['alerts']['objective_not_numeric'] = NULL;
+
+  if (!isset($_SESSION['alerts']['date_less']))
+    $_SESSION['alerts']['date_less'] = NULL;
+
+  if (!isset($_SESSION['alerts']['missing_mission_file']))
+    $_SESSION['alerts']['missing_mission_file'] = NULL;
+
+  if (!isset($_SESSION['alerts']['wrong_file']))
+    $_SESSION['alerts']['wrong_file'] = NULL;
+
+  if (!isset($_SESSION['alerts']['mission_added']))
+    $_SESSION['alerts']['mission_added'] = NULL;
+
+  if (!isset($_SESSION['alerts']['mission_updated']))
+    $_SESSION['alerts']['mission_updated'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -593,6 +615,48 @@
   {
     $alerte = 'Cette mission n\'existe pas ou n\'est pas encore accessible !';
     $_SESSION['alerts']['mission_doesnt_exist'] = NULL;
+  }
+  // Référence mission déjà existante
+  elseif (isset($_SESSION['alerts']['already_ref_mission']) AND $_SESSION['alerts']['already_ref_mission'] == true)
+  {
+    $alerte = 'La référence de cette mission existe déjà.';
+    $_SESSION['alerts']['already_ref_mission'] = NULL;
+  }
+  // Objectif non numérique ou < 0
+  elseif (isset($_SESSION['alerts']['objective_not_numeric']) AND $_SESSION['alerts']['objective_not_numeric'] == true)
+  {
+    $alerte = 'L\'objectif doit être numérique et positif.';
+    $_SESSION['alerts']['objective_not_numeric'] = NULL;
+  }
+  // Dates incohérentes
+  elseif (isset($_SESSION['alerts']['date_less']) AND $_SESSION['alerts']['date_less'] == true)
+  {
+    $alerte = 'La date de fin doit être supérieure ou égale à la date de début.';
+    $_SESSION['alerts']['date_less'] = NULL;
+  }
+  // Fichier mission manquant
+  elseif (isset($_SESSION['alerts']['missing_mission_file']) AND $_SESSION['alerts']['missing_mission_file'] == true)
+  {
+    $alerte = 'Un fichier est manquant pour la mission.';
+    $_SESSION['alerts']['missing_mission_file'] = NULL;
+  }
+  // Problème fichier mission
+  elseif (isset($_SESSION['alerts']['wrong_file']) AND $_SESSION['alerts']['wrong_file'] == true)
+  {
+    $alerte = 'Un problème a eu lieu avec l\'un des fichiers de la mission.';
+    $_SESSION['alerts']['wrong_file'] = NULL;
+  }
+  // Mission ajoutée
+  elseif (isset($_SESSION['alerts']['mission_added']) AND $_SESSION['alerts']['mission_added'] == true)
+  {
+    $alerte = 'La mission a bien été créée.';
+    $_SESSION['alerts']['mission_added'] = NULL;
+  }
+  // Mission modifiée
+  elseif (isset($_SESSION['alerts']['mission_updated']) AND $_SESSION['alerts']['mission_updated'] == true)
+  {
+    $alerte = 'La mission a bien été modifiée.';
+    $_SESSION['alerts']['mission_updated'] = NULL;
   }
 
   /*************/

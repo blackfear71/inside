@@ -4,6 +4,8 @@
   else
     echo '<form method="post" action="manage_missions.php?id_mission=' . $detailsMission->getId() . '&action=doModifier" enctype="multipart/form-data" runat="server" class="form_saisie_mission">';
 
+    echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+
     echo '<table cellpadding="0" class="table_mission">';
       // Image & titre
       echo '<tr>';
@@ -15,8 +17,6 @@
             echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" required />';
 
           // Image
-          echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
-
           if ($_GET['action'] == "goAjouter")
           {
             echo '<div class="zone_parcourir_mission_ajout">';
@@ -40,14 +40,12 @@
       echo '<tr>';
         // Gauche
         echo '<td class="icons_mission">';
-          echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
-
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône gauche (500 x 500 px)</div>';
             if ($_GET['action'] == "goAjouter")
               echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_2\')" required />';
             else
-              echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, output_2)" />';
+              echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_2\')" />';
 
             if (!empty($detailsMission->getReference()))
               echo '<img src="../portail/missions/icons/' . $detailsMission->getReference() . '_g.png" id="output_2" class="preview_icon_mission" />';
@@ -58,8 +56,6 @@
 
         // Milieu
         echo '<td class="icons_mission">';
-          echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
-
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône milieu (500 x 500 px)</div>';
             if ($_GET['action'] == "goAjouter")
@@ -76,8 +72,6 @@
 
         // Droite
         echo '<td class="icons_mission">';
-          echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
-
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône droite (500 x 500 px)</div>';
             if ($_GET['action'] == "goAjouter")
@@ -98,7 +92,7 @@
         echo '<td colspan="3" class="rift_saisie_mission"></td>';
       echo '</tr>';
 
-      // Date
+      // Dates
       echo '<tr>';
         echo '<td colspan="3" class="dates_saisie_mission">';
           echo 'Du <input type="text" name="date_deb" value="' . formatDateForDisplay($detailsMission->getDate_deb()) . '" placeholder="Date de début" maxlength="10" id="datepicker" class="input_mission_date" required />';
@@ -193,7 +187,10 @@
           if ($_GET['action'] == "goAjouter")
             echo '<input type="text" placeholder="Référence" name="reference" value="' . $detailsMission->getReference() . '" maxlength="255" class="input_mission_reference" required />';
           else
+          {
+            echo '<input type="hidden" name="reference" value="' . $detailsMission->getReference() . '" />';
             echo '<div class="reference_mission">' . $detailsMission->getReference() . '</div>';
+          }
         echo '</td>';
       echo '</tr>';
 
@@ -210,7 +207,10 @@
         echo '</td>';
 
         echo '<td colspan="2" class="td_saisie_mission_right">';
-          echo '<input type="text" placeholder="Objectif" name="objectif" value="' . $detailsMission->getObjectif() . '" class="input_mission_objectif" required />';
+          if ($_GET['action'] == "goAjouter")
+            echo '<input type="text" placeholder="Objectif" name="objectif" value="' . $detailsMission->getObjectif() . '" class="input_mission_objectif" required />';
+          else
+            echo '<input type="text" placeholder="Objectif" name="objectif" value="' . $detailsMission->getObjectif() . '" class="input_mission_objectif" required />';
         echo '</td>';
       echo '</tr>';
 
@@ -227,7 +227,7 @@
         echo '</td>';
 
         echo '<td colspan="2" class="td_saisie_mission_right" style="border: 0;">';
-          echo '<textarea placeholder="Explications (utiliser %objectif%)" class="textarea_explications_mission" required>' . $detailsMission->getExplications() . '</textarea>';
+          echo '<textarea name="explications" placeholder="Explications (utiliser %objectif%)" class="textarea_explications_mission" required>' . $detailsMission->getExplications() . '</textarea>';
         echo '</td>';
       echo '</tr>';
     echo '</table>';

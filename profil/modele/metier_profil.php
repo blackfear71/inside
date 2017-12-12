@@ -145,7 +145,7 @@
     $dossier = "avatars";
 
     if (!is_dir($dossier))
-       mkdir($dossier);
+      mkdir($dossier);
 
  		$avatar = rand();
 
@@ -210,7 +210,7 @@
  				));
  				$reponse2->closeCursor();
 
-        $_SESSION['user']['avatar']         = $new_name;
+        $_SESSION['user']['avatar']           = $new_name;
  				$_SESSION['alerts']['avatar_changed'] = true;
  			}
  		}

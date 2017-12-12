@@ -45,7 +45,7 @@
       if (isset($_SESSION['erreur_succes']) AND $_SESSION['erreur_succes'] == true)
       {
         $listeSuccess = initModErrSucces($listeSuccess, $_SESSION['save_success']);
-        $_SESSION['erreur_succes'] = NULL;
+        unset($_SESSION['erreur_succes']);
       }
       break;
 

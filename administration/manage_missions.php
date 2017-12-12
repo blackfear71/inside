@@ -7,6 +7,18 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
+  // Initialisation sauvegarde saisie
+	if ((!isset($_SESSION['alerts']['already_ref_mission'])   OR $_SESSION['alerts']['already_ref_mission']   != true)
+  AND (!isset($_SESSION['alerts']['objective_not_numeric']) OR $_SESSION['alerts']['objective_not_numeric'] != true)
+  AND (!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']            != true)
+  AND (!isset($_SESSION['alerts']['date_less'])             OR $_SESSION['alerts']['date_less']             != true)
+  AND (!isset($_SESSION['alerts']['missing_mission_file'])  OR $_SESSION['alerts']['missing_mission_file']  != true)
+  AND (!isset($_SESSION['alerts']['wrong_file'])            OR $_SESSION['alerts']['wrong_file']            != true))
+	{
+    unset($_SESSION['save']['new_mission']);
+		unset($_SESSION['save']['old_mission']);
+	}
+
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
 
@@ -19,14 +31,34 @@
       break;
 
     case 'goAjouter':
-      $detailsMission = initAddMission();
+      if (isset($_SESSION['erreur_mission']) AND $_SESSION['erreur_mission'] == true)
+      {
+        $detailsMission = initErrMission($_SESSION['save']['new_mission']['post']);
+        unset($_SESSION['erreur_mission']);
+      }
+      else
+        $detailsMission = initAddMission();
+      break;
+
+    case 'doAjouter':
+      insertMission($_POST, $_FILES);
+      break;
+
+    case 'doModifier':
+      updateMission($_GET['id_mission'], $_POST, $_FILES);
       break;
 
     case 'goModifier':
-      // Lecture liste des données par le modèle
-      $detailsMission = getMission($_GET['id_mission']);
-      $participants   = getParticipants($_GET['id_mission']);
-      $ranking        = getRankingMission($_GET['id_mission'], $participants);
+      if (isset($_SESSION['erreur_mission']) AND $_SESSION['erreur_mission'] == true)
+      {
+        $detailsMission = initErrMission($_SESSION['save']['old_mission']['post']);
+        unset($_SESSION['erreur_mission']);
+      }
+      else
+        $detailsMission = initModMission($_GET['id_mission']);
+
+      $participants = getParticipants($_GET['id_mission']);
+      $ranking      = getRankingMission($_GET['id_mission'], $participants);
       break;
 
     default:
@@ -99,6 +131,8 @@
       $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
       break;
 
+    case 'doAjouter':
+    case 'doModifier':
     default:
       break;
   }
@@ -106,6 +140,17 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doAjouter':
+      if ($_SESSION['erreur_mission'] == true)
+        header('location: manage_missions.php?action=goAjouter');
+      else
+        header('location: manage_missions.php?action=goConsulter');
+      break;
+
+    case 'doModifier':
+      header('location: manage_missions.php?id_mission=' . $_GET['id_mission'] . '&action=goModifier');
+      break;
+
     case 'goAjouter':
     case 'goModifier':
     case 'goConsulter':

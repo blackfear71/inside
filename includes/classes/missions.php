@@ -21,7 +21,7 @@
       $this->date_deb     = '';
       $this->date_fin     = '';
       $this->heure        = '';
-      $this->objectif     = 0;
+      $this->objectif     = '';
       $this->description  = '';
       $this->explications = '';
       $this->statut       = '';
