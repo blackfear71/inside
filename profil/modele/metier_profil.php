@@ -808,8 +808,35 @@
             $req2->closeCursor();
           }
 
-            $successUser[$success->getId()] = $mission2017;
-          break;
+          $successUser[$success->getId()] = $mission2017;
+        break;
+
+        // Je suis ton Père Noël !
+        case "christmas2017_2":
+          $mission2017_2 = 0;
+
+          // Récupération Id mission
+          $req = $bdd->query('SELECT * FROM missions WHERE reference = "noel_2017"');
+          $data = $req->fetch();
+
+          $id_mission = $data['id'];
+          $date_fin   = $data['date_fin'];
+
+          $req->closeCursor();
+
+          if (date('Ymd') > $date_fin)
+          {
+            // Nombre total d'objectifs sur la mission
+            $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user . '"');
+            while($data2 = $req2->fetch())
+            {
+              $mission2017_2 += $data2['avancement'];
+            }
+            $req2->closeCursor();
+          }
+
+          $successUser[$success->getId()] = $mission2017_2;
+        break;
 
         default:
           break;
