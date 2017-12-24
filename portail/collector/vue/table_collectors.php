@@ -15,7 +15,7 @@
             // Citation (gauche)
             echo '<td class="collector" style="border-top-left-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
-              echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
+              echo '<pre class="text_collector">' . nl2br($collector->getCollector()) . '</pre>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
               if (!empty($collector->getContext()))
                 echo '<div class="text_context">' . nl2br($collector->getContext()) . '</div>';
@@ -289,7 +289,7 @@
             // Citation (droite)
             echo '<td class="collector" style="border-top-right-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
-              echo '<div class="text_collector">' . nl2br($collector->getCollector()) . '</div>';
+              echo '<pre class="text_collector">' . nl2br($collector->getCollector()) . '</pre>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
               if (!empty($collector->getContext()))
                 echo '<div class="text_context">' . nl2br($collector->getContext()) . '</div>';
