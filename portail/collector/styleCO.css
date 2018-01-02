@@ -208,18 +208,15 @@
 
 .text_collector
 {
+	white-space: pre-wrap;
   margin-left: 40px;
   margin-right: 40px;
 	margin-top: 0;
 	margin-bottom: -30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-  text-align: justify;
   font-family: robotothin, Verdana, sans-serif;
   font-size: 150%;
-	line-height: 15px;
+	line-height: 1.2;
+	text-align: justify;
 }
 
 .text_context

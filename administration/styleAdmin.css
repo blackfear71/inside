@@ -1229,10 +1229,31 @@
 
 .zone_parcourir_mission_modification
 {
+	background: blue;
+
+
+
+
 	display: inline-block;
-	margin-top: -67px;
-	height: 470px;
-	line-height: 470px;
+	margin-top: -66px;
+
+
+
+
+
+
+
+
+
+
+	min-height: 150px;
+	/*height: 470px;
+	line-height: 470px;*/
+
+
+
+
+
 	width: calc(100% - 6px);
 	border-style: dashed;
 	border-color: #a3a3a3;
@@ -1248,11 +1269,23 @@
 
 .bouton_parcourir_mission_modification
 {
-	opacity: 0;
+	background: red;
+
+
+
+
+	opacity: 0.5;
 	height: 100%;
 	width: 100%;
 	display: block;
-	margin-top: -470px;
+
+	float: left;
+	min-height: 150px;
+	margin-bottom: -150px;
+
+
+	margin-top: -43px;
+	/*margin-top: -470px;*/
 	cursor: pointer;
 }
 
@@ -1261,7 +1294,17 @@
 	display: block;
 	max-height: 100%;
 	max-width: 100%;
-	margin-top: -470px;
+
+
+
+
+
+	margin-top: -43px;
+	/*margin-top: -470px;*/
+
+
+
+
 	margin-left: auto;
 	margin-right: auto;
 }
