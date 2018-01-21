@@ -83,7 +83,7 @@
               {
                 foreach ($gagnants as $gagnant)
                 {
-                  if ($gagnant['id_mission'] == $mission->getId())
+                  if ($gagnant['id_mission'] == $mission->getId() AND $gagnant['rank'] <= 3)
                     array_push($liste_gagnants, $gagnant['pseudo']);
                 }
               }

@@ -49,143 +49,148 @@
       {
         $date_hide = dureeOldMovies($type, $duree);
 
-        // Films cachés en fonction de la préférence utilisateur
-        echo '<tr class="hidden_films">';
-          echo '<td colspan="100%">';
-            echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
-          echo '</td>';
-        echo '</tr>';
-
-        echo '<tbody id="hidden_films" style="display: none;">';
-          foreach ($listeFilms as $film)
-          {
-            // Liste des films cachés
-            if ($film->getDate_theater() < $date_hide)
-            {
-              if ($i % 2 == 0)
-                echo '<tr class="ligne_tableau_movie_house">';
-              else
-                echo '<tr class="ligne_tableau_movie_house_2">';
-                // Nom du film
-                echo '<td class="table_titres">';
-                  echo '<a href="details.php?id_film=' . $film->getId() . '&action=goConsulter" id="' . $film->getId() . '" class="link_film">' . $film->getFilm() . '</a>';
-                echo '</td>';
-
-                // Date de sortie cinéma
-                echo '<td class="table_dates">';
-                  if (!empty($film->getDate_theater()))
-                  {
-                    if (isBlankDate($film->getDate_theater()))
-                      echo 'N.C.';
-                    else
-                      echo formatDateForDisplay($film->getDate_theater());
-                  }
-                echo '</td>';
-
-                // Fiche du film
-                echo '<td class="table_dates">';
-                  if (!empty($film->getLink()))
-                    echo '<a href="' . $film->getLink() . '" target="_blank"><img src="icons/pellicule.png" alt="pellicule" title="Fiche du film" class="logo_tableau_films" /></a>';
-                echo '</td>';
-
-                // Bande-annonce
-                echo '<td class="table_dates">';
-                  if (!empty($film->getTrailer()))
-                    echo '<a href="' . $film->getTrailer() . '" target="_blank"><img src="icons/youtube.png" alt="youtube" title="Bande-annonce du film" class="logo_tableau_films" /></a>';
-                echo '</td>';
-
-                // Lien Doodle
-                echo '<td class="table_dates">';
-                  if (!empty($film->getDoodle()))
-                    echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="icons/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
-                  else
-                    echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
-                echo '</td>';
-
-                // Date de sortie proposée
-                echo '<td class="table_dates">';
-                  if (!empty($film->getDate_doodle()))
-                    echo formatDateForDisplay($film->getDate_doodle());
-                echo '</td>';
-
-                // Commentaires
-                echo '<td class="table_dates">';
-                  echo $film->getNb_comments();
-                echo '</td>';
-
-                // Nombre de personnes intéressées
-                echo '<td class="table_dates">';
-                  echo $film->getNb_users();
-                echo '</td>';
-
-                // Etoiles utilisateur + couleur de participation/vue
-                if ($film->getParticipation() == "S")
-                  echo '<td class="table_users" style="background-color: #74cefb;">';
-                elseif ($film->getParticipation() == "P")
-                  echo '<td class="table_users" style="background-color: #91d784;">';
-                else
-                  echo '<td class="table_users">';
-
-                    echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                      echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
-                    echo '</a>';
-
-                    echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
-                      // Boutons vote
-                      for ($j = 0; $j <= 5; $j++)
-                      {
-                        echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
-
-                        if ($j == $film->getStars_user())
-                          echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
-                        else
-                          echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
-                      }
-
-                      // Bouton annulation
-                      echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Annuler" class="link_vote">';
-                        echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
-                      echo '</a>';
-                    echo '</form>';
-                echo '</td>';
-
-                // Actions
-                echo '<td class="table_dates">';
-                  if ($film->getStars_user() != 0)
-                  {
-                    echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
-                      // Je participe
-                      echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate" />';
-                      // J'ai vu
-                      echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';
-                    echo '</form>';
-                  }
-
-                  // Mailing
-                  if ($film->getNb_users() > 0)
-                  {
-                    echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
-                      echo '<img src="icons/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
-                    echo '</a>';
-                  }
-                echo '</td>';
-              echo '</tr>';
-
-              $i++;
-            }
-            else
-              break;
-          }
-
-          // Fin films cachés
+        // On n'affiche pas le bandeau des films cachés s'il n'y en a pas
+        if ($date_hide > $listeFilms[0]->getDate_theater())
+        {
+          // Films cachés en fonction de la préférence utilisateur
           echo '<tr class="hidden_films">';
             echo '<td colspan="100%">';
-              echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
+              echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
             echo '</td>';
           echo '</tr>';
-        echo '</tbody>';
+
+          echo '<tbody id="hidden_films" style="display: none;">';
+            foreach ($listeFilms as $film)
+            {
+              // Liste des films cachés
+              if ($film->getDate_theater() < $date_hide)
+              {
+                if ($i % 2 == 0)
+                  echo '<tr class="ligne_tableau_movie_house">';
+                else
+                  echo '<tr class="ligne_tableau_movie_house_2">';
+                  // Nom du film
+                  echo '<td class="table_titres">';
+                    echo '<a href="details.php?id_film=' . $film->getId() . '&action=goConsulter" id="' . $film->getId() . '" class="link_film">' . $film->getFilm() . '</a>';
+                  echo '</td>';
+
+                  // Date de sortie cinéma
+                  echo '<td class="table_dates">';
+                    if (!empty($film->getDate_theater()))
+                    {
+                      if (isBlankDate($film->getDate_theater()))
+                        echo 'N.C.';
+                      else
+                        echo formatDateForDisplay($film->getDate_theater());
+                    }
+                  echo '</td>';
+
+                  // Fiche du film
+                  echo '<td class="table_dates">';
+                    if (!empty($film->getLink()))
+                      echo '<a href="' . $film->getLink() . '" target="_blank"><img src="icons/pellicule.png" alt="pellicule" title="Fiche du film" class="logo_tableau_films" /></a>';
+                  echo '</td>';
+
+                  // Bande-annonce
+                  echo '<td class="table_dates">';
+                    if (!empty($film->getTrailer()))
+                      echo '<a href="' . $film->getTrailer() . '" target="_blank"><img src="icons/youtube.png" alt="youtube" title="Bande-annonce du film" class="logo_tableau_films" /></a>';
+                  echo '</td>';
+
+                  // Lien Doodle
+                  echo '<td class="table_dates">';
+                    if (!empty($film->getDoodle()))
+                      echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="icons/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
+                    else
+                      echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
+                  echo '</td>';
+
+                  // Date de sortie proposée
+                  echo '<td class="table_dates">';
+                    if (!empty($film->getDate_doodle()))
+                      echo formatDateForDisplay($film->getDate_doodle());
+                  echo '</td>';
+
+                  // Commentaires
+                  echo '<td class="table_dates">';
+                    echo $film->getNb_comments();
+                  echo '</td>';
+
+                  // Nombre de personnes intéressées
+                  echo '<td class="table_dates">';
+                    echo $film->getNb_users();
+                  echo '</td>';
+
+                  // Etoiles utilisateur + couleur de participation/vue
+                  if ($film->getParticipation() == "S")
+                    echo '<td class="table_users" style="background-color: #74cefb;">';
+                  elseif ($film->getParticipation() == "P")
+                    echo '<td class="table_users" style="background-color: #91d784;">';
+                  else
+                    echo '<td class="table_users">';
+
+                      echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                        echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
+                      echo '</a>';
+
+                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                        // Boutons vote
+                        for ($j = 0; $j <= 5; $j++)
+                        {
+                          echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
+
+                          if ($j == $film->getStars_user())
+                            echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
+                          else
+                            echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
+                        }
+
+                        // Bouton annulation
+                        echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Annuler" class="link_vote">';
+                          echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
+                        echo '</a>';
+                      echo '</form>';
+                  echo '</td>';
+
+                  // Actions
+                  echo '<td class="table_dates">';
+                    if ($film->getStars_user() != 0)
+                    {
+                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
+                        // Je participe
+                        echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate" />';
+                        // J'ai vu
+                        echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';
+                      echo '</form>';
+                    }
+
+                    // Mailing
+                    if ($film->getNb_users() > 0)
+                    {
+                      echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
+                        echo '<img src="icons/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
+                      echo '</a>';
+                    }
+                  echo '</td>';
+                echo '</tr>';
+
+                $i++;
+              }
+              else
+                break;
+            }
+
+            // Fin films cachés
+            echo '<tr class="hidden_films">';
+              echo '<td colspan="100%">';
+                echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
+              echo '</td>';
+            echo '</tr>';
+          echo '</tbody>';
+        }
       }
 
+      // Affichage films non cachés
       foreach ($listeFilms as $film)
       {
         // On affiche la date du jour

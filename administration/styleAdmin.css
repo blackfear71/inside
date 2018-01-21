@@ -1188,12 +1188,52 @@
 	z-index: 1;
 }
 
-.zone_parcourir_mission_ajout
+.zone_parcourir_missions
+{
+	width: 200px;
+	height: 45px;
+	margin-top: 80px;
+	margin-left: 17px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 50%;
+	color: white;
+	background-color: rgb(255, 25, 55);
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.zone_parcourir_missions:hover
+{
+	background-color: white;
+	color: black;
+}
+
+.bouton_parcourir_mission
+{
+	opacity: 0;
+	height: 45px;
+	margin-top: -40px;
+	display: block;
+	cursor: pointer;
+}
+
+.preview_image_mission
+{
+	display: block;
+	max-height: 100%;
+	max-width: 100%;
+	margin-top: -125px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.zone_image_mission
 {
 	display: inline-block;
 	margin-top: -67px;
-	height: 672px;
-	line-height: 672px;
+	min-height: 140px;
 	width: calc(100% - 6px);
 	border-style: dashed;
 	border-color: #a3a3a3;
@@ -1205,108 +1245,6 @@
 	overflow: hidden;
 	background-color: #d3d3d3;
 	margin-bottom: -4px;
-}
-
-.bouton_parcourir_mission_ajout
-{
-	opacity: 0;
-	height: 100%;
-	width: 100%;
-	display: block;
-	margin-top: -672px;
-	cursor: pointer;
-}
-
-.preview_image_mission_ajout
-{
-	display: block;
-	max-height: 100%;
-	max-width: 100%;
-	margin-top: -672px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.zone_parcourir_mission_modification
-{
-	background: blue;
-
-
-
-
-	display: inline-block;
-	margin-top: -66px;
-
-
-
-
-
-
-
-
-
-
-	min-height: 150px;
-	/*height: 470px;
-	line-height: 470px;*/
-
-
-
-
-
-	width: calc(100% - 6px);
-	border-style: dashed;
-	border-color: #a3a3a3;
-	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 200%;
-	color: #a3a3a3;
-	text-align: center;
-	overflow: hidden;
-	background-color: #d3d3d3;
-	margin-bottom: -4px;
-}
-
-.bouton_parcourir_mission_modification
-{
-	background: red;
-
-
-
-
-	opacity: 0.5;
-	height: 100%;
-	width: 100%;
-	display: block;
-
-	float: left;
-	min-height: 150px;
-	margin-bottom: -150px;
-
-
-	margin-top: -43px;
-	/*margin-top: -470px;*/
-	cursor: pointer;
-}
-
-.preview_image_mission_modification
-{
-	display: block;
-	max-height: 100%;
-	max-width: 100%;
-
-
-
-
-
-	margin-top: -43px;
-	/*margin-top: -470px;*/
-
-
-
-
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .icons_mission

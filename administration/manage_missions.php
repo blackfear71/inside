@@ -40,14 +40,6 @@
         $detailsMission = initAddMission();
       break;
 
-    case 'doAjouter':
-      insertMission($_POST, $_FILES);
-      break;
-
-    case 'doModifier':
-      updateMission($_GET['id_mission'], $_POST, $_FILES);
-      break;
-
     case 'goModifier':
       if (isset($_SESSION['erreur_mission']) AND $_SESSION['erreur_mission'] == true)
       {
@@ -59,6 +51,18 @@
 
       $participants = getParticipants($_GET['id_mission']);
       $ranking      = getRankingMission($_GET['id_mission'], $participants);
+      break;
+
+    case 'doAjouter':
+      insertMission($_POST, $_FILES);
+      break;
+
+    case 'doModifier':
+      updateMission($_GET['id_mission'], $_POST, $_FILES);
+      break;
+
+    case 'doSupprimer':
+      deleteMission($_GET['id_mission']);
       break;
 
     default:
@@ -133,6 +137,7 @@
 
     case 'doAjouter':
     case 'doModifier':
+    case 'doSupprimer':
     default:
       break;
   }
@@ -149,6 +154,10 @@
 
     case 'doModifier':
       header('location: manage_missions.php?id_mission=' . $_GET['id_mission'] . '&action=goModifier');
+      break;
+
+    case 'doSupprimer':
+      header('location: manage_missions.php?action=goConsulter');
       break;
 
     case 'goAjouter':

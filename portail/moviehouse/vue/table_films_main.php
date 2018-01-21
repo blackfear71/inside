@@ -54,98 +54,103 @@
       {
         $date_hide = dureeOldMovies($type, $duree);
 
-        // Films cachés en fonction de la préférence utilisateur
-        echo '<tr class="hidden_films">';
-          echo '<td colspan="100%">';
-            echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
-          echo '</td>';
-        echo '</tr>';
-
-        echo '<tbody id="hidden_films" style="display: none;">';
-          foreach ($tableauFilms as $ligneFilm)
-          {
-            if ($ligneFilm['date_theater'] < $date_hide)
-            {
-              // Liste des films cachés
-              if ($i % 2 == 0)
-                echo '<tr class="ligne_tableau_movie_house">';
-              else
-                echo '<tr class="ligne_tableau_movie_house_2">';
-                // Noms des films sur la 1ère colonne
-                echo '<td class="table_titres">';
-                  echo '<a href="details.php?id_film=' . $ligneFilm['id_film'] . '&action=goConsulter" id="' . $ligneFilm['id_film'] . '" class="link_film">' . $ligneFilm['film'] . '</a>';
-                echo '</td>';
-
-                // Date de sortie des films sur la 2ème colonne
-        				echo '<td class="table_dates">';
-        					if (!empty($ligneFilm['date_theater']))
-        					{
-        						if (isBlankDate($ligneFilm['date_theater']))
-        							echo 'N.C.';
-        						else
-        							echo formatDateForDisplay($ligneFilm['date_theater']);
-        					}
-        				echo '</td>';
-
-                // Etoiles utilisateurs
-                foreach ($ligneFilm['tableStars'] as $stars)
-                {
-                  if ($stars['identifiant'] == $_SESSION['user']['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
-                    echo '<td class="table_users" style="background-color: #fffde8;">';
-                  elseif ($stars['participation'] == "S")
-                    echo '<td class="table_users" style="background-color: #74cefb;">';
-                  elseif ($stars['participation'] == "P")
-                    echo '<td class="table_users" style="background-color: #91d784;">';
-                  else
-                    echo '<td class="table_users">';
-                      if ($stars['identifiant'] == $_SESSION['user']['identifiant'])
-                      {
-                        echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                          echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
-                        echo '</a>';
-
-                        echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
-                          // Boutons vote
-                          for ($j = 0; $j <= 5; $j++)
-                          {
-                            echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
-                            if ($j == $stars['stars'])
-                              echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
-                            else
-                              echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
-                          }
-
-                          // Bouton annulation
-                          echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Annuler" class="link_vote">';
-                            echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
-                          echo '</a>';
-                        echo '</form>';
-                      }
-                      else
-                      {
-                        echo '<span class="link_vote" style="cursor: default;">';
-                          echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
-                        echo '</span>';
-                      }
-                  echo '</td>';
-                }
-              echo '</tr>';
-
-              $i++;
-            }
-            else
-              break;
-          }
-
-          // Fin films cachés
+        // On n'affiche pas le bandeau des films cachés s'il n'y en a pas
+        if ($date_hide > $tableauFilms[0]['date_theater'])
+        {
+          // Films cachés en fonction de la préférence utilisateur
           echo '<tr class="hidden_films">';
             echo '<td colspan="100%">';
-              echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
+              echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
             echo '</td>';
           echo '</tr>';
-        echo '</tbody>';
+
+          echo '<tbody id="hidden_films" style="display: none;">';
+            foreach ($tableauFilms as $ligneFilm)
+            {
+              if ($ligneFilm['date_theater'] < $date_hide)
+              {
+                // Liste des films cachés
+                if ($i % 2 == 0)
+                  echo '<tr class="ligne_tableau_movie_house">';
+                else
+                  echo '<tr class="ligne_tableau_movie_house_2">';
+                  // Noms des films sur la 1ère colonne
+                  echo '<td class="table_titres">';
+                    echo '<a href="details.php?id_film=' . $ligneFilm['id_film'] . '&action=goConsulter" id="' . $ligneFilm['id_film'] . '" class="link_film">' . $ligneFilm['film'] . '</a>';
+                  echo '</td>';
+
+                  // Date de sortie des films sur la 2ème colonne
+          				echo '<td class="table_dates">';
+          					if (!empty($ligneFilm['date_theater']))
+          					{
+          						if (isBlankDate($ligneFilm['date_theater']))
+          							echo 'N.C.';
+          						else
+          							echo formatDateForDisplay($ligneFilm['date_theater']);
+          					}
+          				echo '</td>';
+
+                  // Etoiles utilisateurs
+                  foreach ($ligneFilm['tableStars'] as $stars)
+                  {
+                    if ($stars['identifiant'] == $_SESSION['user']['identifiant'] AND $stars['participation'] != "S" AND $stars['participation'] != "P")
+                      echo '<td class="table_users" style="background-color: #fffde8;">';
+                    elseif ($stars['participation'] == "S")
+                      echo '<td class="table_users" style="background-color: #74cefb;">';
+                    elseif ($stars['participation'] == "P")
+                      echo '<td class="table_users" style="background-color: #91d784;">';
+                    else
+                      echo '<td class="table_users">';
+                        if ($stars['identifiant'] == $_SESSION['user']['identifiant'])
+                        {
+                          echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                            echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
+                          echo '</a>';
+
+                          echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2[' . $ligneFilm['id_film'] . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                            // Boutons vote
+                            for ($j = 0; $j <= 5; $j++)
+                            {
+                              echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
+                              if ($j == $stars['stars'])
+                                echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
+                              else
+                                echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
+                            }
+
+                            // Bouton annulation
+                            echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Annuler" class="link_vote">';
+                              echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
+                            echo '</a>';
+                          echo '</form>';
+                        }
+                        else
+                        {
+                          echo '<span class="link_vote" style="cursor: default;">';
+                            echo '<img src="icons/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
+                          echo '</span>';
+                        }
+                    echo '</td>';
+                  }
+                echo '</tr>';
+
+                $i++;
+              }
+              else
+                break;
+            }
+
+            // Fin films cachés
+            echo '<tr class="hidden_films">';
+              echo '<td colspan="100%">';
+                echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
+              echo '</td>';
+            echo '</tr>';
+          echo '</tbody>';
+        }
       }
 
+      // Affichage films non cachés
       foreach ($tableauFilms as $ligneFilm)
       {
         // On affiche la date du jour

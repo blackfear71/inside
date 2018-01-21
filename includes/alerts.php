@@ -206,6 +206,9 @@
   if (!isset($_SESSION['alerts']['mission_updated']))
     $_SESSION['alerts']['mission_updated'] = NULL;
 
+  if (!isset($_SESSION['alerts']['mission_deleted']))
+    $_SESSION['alerts']['mission_deleted'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -657,6 +660,12 @@
   {
     $alerte = 'La mission a bien été modifiée.';
     $_SESSION['alerts']['mission_updated'] = NULL;
+  }
+  // Mission supprimée
+  elseif (isset($_SESSION['alerts']['mission_deleted']) AND $_SESSION['alerts']['mission_deleted'] == true)
+  {
+    $alerte = 'La mission a bien été supprimée.';
+    $_SESSION['alerts']['mission_deleted'] = NULL;
   }
 
   /*************/

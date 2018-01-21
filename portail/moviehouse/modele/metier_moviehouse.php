@@ -123,7 +123,7 @@
     $reponse->closeCursor();
 
     // On récupère seulement si on a trouvé des films attendus pour cette année
-    if (!empty($moyenne_stars))
+    if (isset($moyenne_stars) AND !empty($moyenne_stars))
     {
       // On trie le film par nombre d'utilisateur en premier et par moyenne en 2ème
       $moyenne_stars_tri = $moyenne_stars;
@@ -163,11 +163,14 @@
     }
 
     // Tri final sur la moyenne
-    foreach ($listAttendus as $attendu)
+    if (isset($listAttendus) AND !empty($listAttendus))
     {
-      $tri_average[] = $attendu->getAverage();
+      foreach ($listAttendus as $attendu)
+      {
+        $tri_average[] = $attendu->getAverage();
+      }
+      array_multisort($tri_average, SORT_DESC, $listAttendus);
     }
-    array_multisort($tri_average, SORT_DESC, $listAttendus);
 
     return $listAttendus;
   }

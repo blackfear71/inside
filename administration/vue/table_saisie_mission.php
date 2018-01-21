@@ -19,18 +19,26 @@
           // Image
           if ($_GET['action'] == "goAjouter")
           {
-            echo '<div class="zone_parcourir_mission_ajout">';
-              echo 'Bannière (1920 x 800 px)';
-              echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission_ajout" onchange="loadFile(event, \'output\')" required />';
-              echo '<img id="output" class="preview_image_mission_ajout" />';
+            echo '<div class="zone_image_mission">';
+              echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+              echo '<div class="zone_parcourir_missions">';
+                echo '<div class="label_parcourir">Bannière (1920 x 800 px)</div>';
+                echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'output\')" required />';
+              echo '</div>';
+
+              echo '<img id="output" class="preview_image_mission" />';
             echo '</div>';
           }
           else
           {
-            echo '<div class="zone_parcourir_mission_modification">';
-              echo 'Bannière (1920 x 800 px)';
-              echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission_modification" onchange="loadFile(event, \'output\')" />';
-              echo '<img src="../portail/missions/images/' . $detailsMission->getReference() . '.png" id="output" class="preview_image_mission_modification" />';
+            echo '<div class="zone_image_mission">';
+              echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+              echo '<div class="zone_parcourir_missions">';
+                echo '<div class="label_parcourir">Bannière (1920 x 800 px)</div>';
+                echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'output\')" />';
+              echo '</div>';
+
+              echo '<img src="../portail/missions/images/' . $detailsMission->getReference() . '.png" id="output" class="preview_image_mission" />';
             echo '</div>';
           }
         echo '</td>';

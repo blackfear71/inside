@@ -2413,4 +2413,36 @@
     else
       $_SESSION['erreur_mission'] = NULL;
   }
+
+  // METIER : Suppression d'une mission existante
+  // RETOUR : Aucun
+  function deleteMission($id)
+  {
+    global $bdd;
+
+    // Lecture référence mission
+    $reponse = $bdd->query('SELECT id, reference FROM missions WHERE id = ' . $id);
+    $donnees = $reponse->fetch();
+    $reference = $donnees['reference'];
+    $reponse->closeCursor();
+
+    // Suppression des images
+    unlink ("../portail/missions/images/" . $reference . ".png");
+    unlink ("../portail/missions/icons/" . $reference . "_g.png");
+    unlink ("../portail/missions/icons/" . $reference . "_m.png");
+    unlink ("../portail/missions/icons/" . $reference . "_d.png");
+
+    // Suppression de la mission en table
+    $reponse2 = $bdd->exec('DELETE FROM missions WHERE id = ' . $id);
+
+    // Suppression des participations en table
+    $reponse3 = $bdd->exec('DELETE FROM missions_users WHERE id_mission = ' . $id);
+
+    // Suppression des notifications
+    deleteNotification('start_mission', $id);
+    deleteNotification('end_mission', $id);
+    deleteNotification('one_mission', $id);
+
+    $_SESSION['alerts']['mission_deleted'] = true;
+  }
 ?>
