@@ -16,8 +16,8 @@
   // Initialisation sauvegarde saisie
   if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
-    $_SESSION['nom_film_saisi']      = "";
-    $_SESSION['date_theater_saisie'] = "";
+    $_SESSION['save']['nom_film_saisi']      = "";
+    $_SESSION['save']['date_theater_saisie'] = "";
   }
 
   // Contrôle vue renseignée URL

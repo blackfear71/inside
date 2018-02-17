@@ -11,27 +11,23 @@
   include_once('modele/metier_moviehouse.php');
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
+  if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date'] != true)
+  AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
   {
-    $_SESSION['nom_film_saisi']         = "";
-    $_SESSION['date_theater_saisie']    = "";
-    $_SESSION['date_release_saisie']    = "";
-    $_SESSION['trailer_saisi']          = "";
-    $_SESSION['link_saisi']             = "";
-    $_SESSION['poster_saisi']           = "";
-    $_SESSION['doodle_saisi']           = "";
-    $_SESSION['date_doodle_saisie']     = "";
-    $_SESSION['hours_doodle_saisies']   = "";
-    $_SESSION['minutes_doodle_saisies'] = "";
-    $_SESSION['time_doodle_saisi']      = "";
-    $_SESSION['restaurant_saisi']       = "";
-    $_SESSION['place_saisie']           = "";
-    $wrong_date                         = false;
+    $_SESSION['save']['nom_film_saisi']         = "";
+    $_SESSION['save']['date_theater_saisie']    = "";
+    $_SESSION['save']['date_release_saisie']    = "";
+    $_SESSION['save']['trailer_saisi']          = "";
+    $_SESSION['save']['link_saisi']             = "";
+    $_SESSION['save']['poster_saisi']           = "";
+    $_SESSION['save']['doodle_saisi']           = "";
+    $_SESSION['save']['date_doodle_saisie']     = "";
+    $_SESSION['save']['hours_doodle_saisies']   = "";
+    $_SESSION['save']['minutes_doodle_saisies'] = "";
+    $_SESSION['save']['time_doodle_saisi']      = "";
+    $_SESSION['save']['restaurant_saisi']       = "";
+    $_SESSION['save']['place_saisie']           = "";
   }
-
-  // Récupération top si erreur date (écrasé par les alertes sinon)
-  if (isset($_SESSION['alerts']['wrong_date']) AND $_SESSION['alerts']['wrong_date'] == true)
-    $wrong_date = true;
 
   // Appel métier
   switch ($_GET['action'])
@@ -41,7 +37,7 @@
       $initSaisie   = true;
       $filmExistant = false;
 
-      if ($_SESSION['alerts']['wrong_date'] == true)
+      if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
         $film = initCreErrFilm();
       else
         $film = initCreFilm();
@@ -57,7 +53,7 @@
 
       if ($filmExistant == true)
       {
-        if ($_SESSION['alerts']['wrong_date'] == true)
+        if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
           $film = initModErrFilm($_GET['modify_id']);
         else
           $film = initModFilm($_GET['modify_id']);
@@ -124,14 +120,14 @@
   switch ($_GET['action'])
   {
     case "doInserer":
-      if ($_SESSION['alerts']['wrong_date'] == true)
+      if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
         header('location: saisie.php?action=goAjouter');
       else
         header('location: details.php?id_film=' . $new_id . '&action=goConsulter');
       break;
 
     case "doModifier":
-      if ($_SESSION['alerts']['wrong_date'] == true)
+      if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
         header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
       else
         header('location: details.php?id_film=' . $_GET['modify_id'] . '&action=goConsulter');

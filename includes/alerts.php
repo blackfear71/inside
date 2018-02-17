@@ -44,6 +44,9 @@
   if (!isset($_SESSION['alerts']['wrong_date']))
     $_SESSION['alerts']['wrong_date'] = NULL;
 
+  if (!isset($_SESSION['alerts']['wrong_date_doodle']))
+    $_SESSION['alerts']['wrong_date_doodle'] = NULL;
+
   if (!isset($_SESSION['alerts']['film_doesnt_exist']))
     $_SESSION['alerts']['film_doesnt_exist'] = NULL;
 
@@ -283,6 +286,12 @@
   {
     $alerte = 'La date n\'a pas un format valide (jj/mm/yyyy).';
     $_SESSION['alerts']['wrong_date'] = NULL;
+  }
+  // Date Doodle < date sortie film
+  elseif (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true)
+  {
+    $alerte = 'La date du Doodle ne peut pas être inférieure à la date de sortie du film.';
+    $_SESSION['alerts']['wrong_date_doodle'] = NULL;
   }
   // Film inexistant
   elseif (isset($_SESSION['alerts']['film_doesnt_exist']) AND $_SESSION['alerts']['film_doesnt_exist'] == true)

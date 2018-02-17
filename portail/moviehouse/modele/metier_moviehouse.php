@@ -419,8 +419,8 @@
   function insertFilmRapide($post, $year, $user)
   {
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['nom_film_saisi']      = $post['nom_film'];
-    $_SESSION['date_theater_saisie'] = $post['date_theater'];
+    $_SESSION['save']['nom_film_saisi']      = $post['nom_film'];
+    $_SESSION['save']['date_theater_saisie'] = $post['date_theater'];
 
     $date_a_verifier = $post['date_theater'];
 
@@ -978,17 +978,17 @@
   {
     $initFilm = new Movie();
 
-    $initFilm->setFilm($_SESSION['nom_film_saisi']);
-    $initFilm->setDate_theater($_SESSION['date_theater_saisie']);
-    $initFilm->setDate_release($_SESSION['date_release_saisie']);
-    $initFilm->setTrailer($_SESSION['trailer_saisi']);
-    $initFilm->setLink($_SESSION['link_saisi']);
-    $initFilm->setPoster($_SESSION['poster_saisi']);
-    $initFilm->setDoodle($_SESSION['doodle_saisi']);
-    $initFilm->setDate_doodle($_SESSION['date_doodle_saisie']);
-    $initFilm->setTime_doodle($_SESSION['time_doodle_saisi']);
-    $initFilm->setRestaurant($_SESSION['restaurant_saisi']);
-    $initFilm->setPlace($_SESSION['place_saisie']);
+    $initFilm->setFilm($_SESSION['save']['nom_film_saisi']);
+    $initFilm->setDate_theater($_SESSION['save']['date_theater_saisie']);
+    $initFilm->setDate_release($_SESSION['save']['date_release_saisie']);
+    $initFilm->setTrailer($_SESSION['save']['trailer_saisi']);
+    $initFilm->setLink($_SESSION['save']['link_saisi']);
+    $initFilm->setPoster($_SESSION['save']['poster_saisi']);
+    $initFilm->setDoodle($_SESSION['save']['doodle_saisi']);
+    $initFilm->setDate_doodle($_SESSION['save']['date_doodle_saisie']);
+    $initFilm->setTime_doodle($_SESSION['save']['time_doodle_saisi']);
+    $initFilm->setRestaurant($_SESSION['save']['restaurant_saisi']);
+    $initFilm->setPlace($_SESSION['save']['place_saisie']);
 
     return $initFilm;
   }
@@ -1000,17 +1000,17 @@
     $initFilm = new Movie();
 
     $initFilm->setId($id_film);
-    $initFilm->setFilm($_SESSION['nom_film_saisi']);
-    $initFilm->setDate_theater($_SESSION['date_theater_saisie']);
-    $initFilm->setDate_release($_SESSION['date_release_saisie']);
-    $initFilm->setTrailer($_SESSION['trailer_saisi']);
-    $initFilm->setLink($_SESSION['link_saisi']);
-    $initFilm->setPoster($_SESSION['poster_saisi']);
-    $initFilm->setDoodle($_SESSION['doodle_saisi']);
-    $initFilm->setDate_doodle($_SESSION['date_doodle_saisie']);
-    $initFilm->setTime_doodle($_SESSION['time_doodle_saisi']);
-    $initFilm->setRestaurant($_SESSION['restaurant_saisi']);
-    $initFilm->setPlace($_SESSION['place_saisie']);
+    $initFilm->setFilm($_SESSION['save']['nom_film_saisi']);
+    $initFilm->setDate_theater($_SESSION['save']['date_theater_saisie']);
+    $initFilm->setDate_release($_SESSION['save']['date_release_saisie']);
+    $initFilm->setTrailer($_SESSION['save']['trailer_saisi']);
+    $initFilm->setLink($_SESSION['save']['link_saisi']);
+    $initFilm->setPoster($_SESSION['save']['poster_saisi']);
+    $initFilm->setDoodle($_SESSION['save']['doodle_saisi']);
+    $initFilm->setDate_doodle($_SESSION['save']['date_doodle_saisie']);
+    $initFilm->setTime_doodle($_SESSION['save']['time_doodle_saisi']);
+    $initFilm->setRestaurant($_SESSION['save']['restaurant_saisi']);
+    $initFilm->setPlace($_SESSION['save']['place_saisie']);
 
     return $initFilm;
   }
@@ -1022,28 +1022,28 @@
     $new_id = NULL;
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['nom_film_saisi']      = $post['nom_film'];
-    $_SESSION['date_theater_saisie'] = $post['date_theater'];
-    $_SESSION['date_release_saisie'] = $post['date_release'];
-    $_SESSION['trailer_saisi']       = $post['trailer'];
-    $_SESSION['link_saisi']          = $post['link'];
-    $_SESSION['poster_saisi']        = $post['poster'];
-    $_SESSION['doodle_saisi']        = $post['doodle'];
-    $_SESSION['date_doodle_saisie']  = $post['date_doodle'];
+    $_SESSION['save']['nom_film_saisi']      = $post['nom_film'];
+    $_SESSION['save']['date_theater_saisie'] = $post['date_theater'];
+    $_SESSION['save']['date_release_saisie'] = $post['date_release'];
+    $_SESSION['save']['trailer_saisi']       = $post['trailer'];
+    $_SESSION['save']['link_saisi']          = $post['link'];
+    $_SESSION['save']['poster_saisi']        = $post['poster'];
+    $_SESSION['save']['doodle_saisi']        = $post['doodle'];
+    $_SESSION['save']['date_doodle_saisie']  = $post['date_doodle'];
 
     if (isset($post['hours_doodle']))
-      $_SESSION['hours_doodle_saisies'] = $post['hours_doodle'];
+      $_SESSION['save']['hours_doodle_saisies'] = $post['hours_doodle'];
     else
-      $_SESSION['hours_doodle_saisies'] = "  ";
+      $_SESSION['save']['hours_doodle_saisies'] = "  ";
 
     if (isset($post['minutes_doodle']))
-      $_SESSION['minutes_doodle_saisies'] = $post['minutes_doodle'];
+      $_SESSION['save']['minutes_doodle_saisies'] = $post['minutes_doodle'];
     else
-      $_SESSION['minutes_doodle_saisies'] = "  ";
+      $_SESSION['save']['minutes_doodle_saisies'] = "  ";
 
-    $_SESSION['time_doodle_saisi'] = $_SESSION['hours_doodle_saisies'] . $_SESSION['minutes_doodle_saisies'];
-    $_SESSION['restaurant_saisi']  = $post['restaurant'];
-    $_SESSION['place_saisie']      = $post['place'];
+    $_SESSION['save']['time_doodle_saisi'] = $_SESSION['save']['hours_doodle_saisies'] . $_SESSION['save']['minutes_doodle_saisies'];
+    $_SESSION['save']['restaurant_saisi']  = $post['restaurant'];
+    $_SESSION['save']['place_saisie']      = $post['place'];
 
     // Récupération des variables
     $nom_film        = $post['nom_film'];
@@ -1124,7 +1124,14 @@
 					$_SESSION['alerts']['wrong_date'] = true;
 			}
 
-      if ($_SESSION['alerts']['wrong_date'] != true)
+      // Contrôle date Doodle >= date sortie film
+      if (isset($post['date_theater']) AND !empty($post['date_theater']) AND isset($post['date_doodle']) AND !empty($post['date_doodle']))
+      {
+        if ($date_doodle < $date_theater)
+          $_SESSION['alerts']['wrong_date_doodle'] = true;
+      }
+
+      if ($_SESSION['alerts']['wrong_date'] != true AND $_SESSION['alerts']['wrong_date_doodle'] != true)
 			{
         $film = array('film'            => $nom_film,
                       'to_delete'       => $to_delete,
@@ -1206,28 +1213,28 @@
   function modFilmAvance($id_film, $post, $user)
   {
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['nom_film_saisi']      = $post['nom_film'];
-    $_SESSION['date_theater_saisie'] = $post['date_theater'];
-    $_SESSION['date_release_saisie'] = $post['date_release'];
-    $_SESSION['trailer_saisi']       = $post['trailer'];
-    $_SESSION['link_saisi']          = $post['link'];
-    $_SESSION['poster_saisi']        = $post['poster'];
-    $_SESSION['doodle_saisi']        = $post['doodle'];
-    $_SESSION['date_doodle_saisie']  = $post['date_doodle'];
+    $_SESSION['save']['nom_film_saisi']      = $post['nom_film'];
+    $_SESSION['save']['date_theater_saisie'] = $post['date_theater'];
+    $_SESSION['save']['date_release_saisie'] = $post['date_release'];
+    $_SESSION['save']['trailer_saisi']       = $post['trailer'];
+    $_SESSION['save']['link_saisi']          = $post['link'];
+    $_SESSION['save']['poster_saisi']        = $post['poster'];
+    $_SESSION['save']['doodle_saisi']        = $post['doodle'];
+    $_SESSION['save']['date_doodle_saisie']  = $post['date_doodle'];
 
     if (isset($post['hours_doodle']))
-      $_SESSION['hours_doodle_saisies'] = $post['hours_doodle'];
+      $_SESSION['save']['hours_doodle_saisies'] = $post['hours_doodle'];
     else
-      $_SESSION['hours_doodle_saisies'] = "  ";
+      $_SESSION['save']['hours_doodle_saisies'] = "  ";
 
     if (isset($post['minutes_doodle']))
-      $_SESSION['minutes_doodle_saisies'] = $post['minutes_doodle'];
+      $_SESSION['save']['minutes_doodle_saisies'] = $post['minutes_doodle'];
     else
-      $_SESSION['minutes_doodle_saisies'] = "  ";
+      $_SESSION['save']['minutes_doodle_saisies'] = "  ";
 
-    $_SESSION['time_doodle_saisi'] = $_SESSION['hours_doodle_saisies'] . $_SESSION['minutes_doodle_saisies'];
-    $_SESSION['restaurant_saisi']  = $post['restaurant'];
-    $_SESSION['place_saisie']      = $post['place'];
+    $_SESSION['save']['time_doodle_saisi'] = $_SESSION['save']['hours_doodle_saisies'] . $_SESSION['save']['minutes_doodle_saisies'];
+    $_SESSION['save']['restaurant_saisi']  = $post['restaurant'];
+    $_SESSION['save']['place_saisie']      = $post['place'];
 
     // Récupération des variables
     $nom_film     = $post['nom_film'];
@@ -1305,7 +1312,14 @@
           $_SESSION['alerts']['wrong_date'] = true;
       }
 
-      if ($_SESSION['alerts']['wrong_date'] != true)
+      // Contrôle date Doodle >= date sortie film
+      if (isset($post['date_theater']) AND !empty($post['date_theater']) AND isset($post['date_doodle']) AND !empty($post['date_doodle']))
+      {
+        if ($date_doodle < $date_theater)
+          $_SESSION['alerts']['wrong_date_doodle'] = true;
+      }
+
+      if ($_SESSION['alerts']['wrong_date'] != true AND $_SESSION['alerts']['wrong_date_doodle'] != true)
 			{
         $film = array('film'         => $nom_film,
                       'date_theater' => $date_theater,
