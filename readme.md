@@ -2,6 +2,9 @@
 
 # INSIDE - Plateforme de partage créée par les membres pour les membres.
 
+## Lien
+Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
+
 ## Fonctionnalités
 - MOVIE HOUSE : base de données de films et organisation de soirées cinéma
 - EXPENSE CENTER : outil de suivi des dépenses des membres
