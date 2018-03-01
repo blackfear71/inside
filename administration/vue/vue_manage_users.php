@@ -38,16 +38,16 @@
 
 			<article>
 				<?php
-					if (isset($_SESSION['user_ask_id'])   AND !empty($_SESSION['user_ask_id'])
-					AND isset($_SESSION['user_ask_name']) AND !empty($_SESSION['user_ask_name'])
-					AND isset($_SESSION['new_password'])  AND !empty($_SESSION['new_password']))
+					if (isset($_SESSION['save']['user_ask_id'])   AND !empty($_SESSION['save']['user_ask_id'])
+					AND isset($_SESSION['save']['user_ask_name']) AND !empty($_SESSION['save']['user_ask_name'])
+					AND isset($_SESSION['save']['new_password'])  AND !empty($_SESSION['save']['new_password']))
 					{
-						echo '<div class="reseted">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['user_ask_id'] . ' / ' . $_SESSION['user_ask_name'] . '</b> : </div>';
-						echo '<p class="reseted_2"><b>' . $_SESSION['new_password'] . '</b></p>';
+						echo '<div class="reseted">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['save']['user_ask_id'] . ' / ' . $_SESSION['save']['user_ask_name'] . '</b> : </div>';
+						echo '<p class="reseted_2"><b>' . $_SESSION['save']['new_password'] . '</b></p>';
 
-						$_SESSION['user_ask_id']   = "";
-						$_SESSION['user_ask_name'] = "";
-						$_SESSION['new_password']  = "";
+						$_SESSION['save']['user_ask_id']   = "";
+						$_SESSION['save']['user_ask_name'] = "";
+						$_SESSION['save']['new_password']  = "";
 					}
 
 					// Tableau des utilisateurs

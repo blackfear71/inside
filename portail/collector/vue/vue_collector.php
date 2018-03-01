@@ -54,7 +54,7 @@
             echo '<table class="table_saisie_collector">';
               echo '<tr>';
                 // Saisie speaker
-                if (!empty($_SESSION['other_speaker']))
+                if (!empty($_SESSION['save']['other_speaker']))
                   echo '<td class="td_saisie_collector_user" id="td_other" style="width: 20%;">';
                 else
                   echo '<td class="td_saisie_collector_user" id="td_other">';
@@ -63,13 +63,13 @@
 
                       foreach ($listeUsers as $user)
                       {
-                        if ($user->getIdentifiant() == $_SESSION['speaker'])
+                        if ($user->getIdentifiant() == $_SESSION['save']['speaker'])
                           echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
                         else
                           echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
                       }
 
-                      if (!empty($_SESSION['other_speaker']))
+                      if (!empty($_SESSION['save']['other_speaker']))
                         echo '<option value="other" selected>Autre</option>';
                       else
                         echo '<option value="other">Autre</option>';
@@ -77,16 +77,16 @@
                 echo '</td>';
 
                 // Saisie "Autre"
-                if (!empty($_SESSION['other_speaker']))
+                if (!empty($_SESSION['save']['other_speaker']))
                   echo '<td class="td_saisie_collector_name" id="other_speaker">';
                 else
                   echo '<td class="td_saisie_collector_name" id="other_speaker" style="display: none;">';
-                    echo '<input type="text" name="other_speaker" value="' . $_SESSION['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name" class="saisie_other_collector" />';
+                    echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name" class="saisie_other_collector" />';
                 echo '</td>';
 
                 // Saisie date
                 echo '<td class="td_saisie_collector_date">';
-                  echo '<input type="text" name="date_collector" value="' . $_SESSION['date_collector'] . '" placeholder="Date" maxlength="10" id="datepickerSaisie" class="saisie_date_collector" required />';
+                  echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" id="datepickerSaisie" class="saisie_date_collector" required />';
                 echo '</td>';
 
                 // Bouton
@@ -98,14 +98,14 @@
               echo '<tr>';
                 // Saisie phrase
                 echo '<td colspan="100%" class="td_saisie_collector">';
-                  echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['collector'] . '</textarea>';
+                  echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['save']['collector'] . '</textarea>';
                 echo '</td>';
               echo '</tr>';
 
               echo '<tr>';
                 // Saisie contexte
                 echo '<td colspan="100%" class="td_saisie_collector_cont">';
-                  echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['context'] . '</textarea>';
+                  echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['save']['context'] . '</textarea>';
                 echo '</td>';
               echo '</tr>';
             echo '</table>';

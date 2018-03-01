@@ -56,7 +56,7 @@
             {
               echo '<td rowspan="' . ($nb_lignes * 2 - 1) . '" class="zone_saisie_prix">';
                 // Saisie prix
-                echo '<input type="text" name="depense" value="' . $_SESSION['price'] . '" placeholder="Prix" maxlength="6" class="saisie_prix" required /> <span class="euro">€</span>';
+                echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" placeholder="Prix" maxlength="6" class="saisie_prix" required /> <span class="euro">€</span>';
 
                 // Saisie acheteur
                 echo '<select name="buyer_user" class="buyer" required>';
@@ -64,15 +64,15 @@
 
                   foreach ($listeUsers as $user)
                   {
-                    if ($user->getIdentifiant() == $_SESSION['buyer'])
-                      echo '<option value="' . $_SESSION['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
+                    if ($user->getIdentifiant() == $_SESSION['save']['buyer'])
+                      echo '<option value="' . $_SESSION['save']['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
                     else
                       echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
                   }
                 echo '</select>';
 
                 // Saisie Commentaire
-                echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense" />' . $_SESSION['comment'] . '</textarea>';
+                echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense" />' . $_SESSION['save']['comment'] . '</textarea>';
               echo '</td>';
             }
 

@@ -16,13 +16,13 @@
   AND (!isset($_SESSION['alerts']['already_ordered'])    OR $_SESSION['alerts']['already_ordered']    != true)
   AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true))
   {
-    $_SESSION['reference_success']   = "";
-    $_SESSION['level']               = "";
-    $_SESSION['order_success']       = "";
-    $_SESSION['title_success']       = "";
-    $_SESSION['description_success'] = "";
-    $_SESSION['limit_success']       = "";
-		$_SESSION['explanation_success'] = "";
+    $_SESSION['save']['reference_success']   = "";
+    $_SESSION['save']['level']               = "";
+    $_SESSION['save']['order_success']       = "";
+    $_SESSION['save']['title_success']       = "";
+    $_SESSION['save']['description_success'] = "";
+    $_SESSION['save']['limit_success']       = "";
+		$_SESSION['save']['explanation_success'] = "";
   }
 
   if (!isset($_SESSION['erreur_succes']) OR $_SESSION['erreur_succes'] != true)

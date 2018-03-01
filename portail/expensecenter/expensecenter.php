@@ -14,9 +14,9 @@
   // Initialisation sauvegarde saisie
 	if (!isset($_SESSION['alerts']['not_numeric']) OR $_SESSION['alerts']['not_numeric'] != true)
 	{
-		$_SESSION['price']   = "";
-		$_SESSION['buyer']   = "";
-		$_SESSION['comment'] = "";
+		$_SESSION['save']['price']   = "";
+		$_SESSION['save']['buyer']   = "";
+		$_SESSION['save']['comment'] = "";
 		unset($_SESSION['tableau_parts']);
 	}
 

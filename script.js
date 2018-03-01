@@ -89,6 +89,22 @@ function changeTheme(background, header, footer)
   }
 }
 
+// Colorise la barre de recherche au survol
+function changeColorToWhite(id)
+{
+  document.getElementById(id).style.backgroundColor = "white";
+  document.getElementById(id).style.transition      = "background-color ease 0.2s";
+}
+
+function changeColorToGrey(id, active)
+{
+  if (document.getElementById(active).style.width != "100%")
+  {
+    document.getElementById(id).style.backgroundColor = "#e3e3e3";
+    document.getElementById(id).style.transition      = "background-color ease 0.2s";
+  }
+}
+
 // Redimensionne la zone de recherche quand sélectionnée et la refemre quand on clique n'importe où sur le body
 $(function()
 {

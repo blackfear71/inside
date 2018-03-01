@@ -44,7 +44,7 @@
             {
               // Message pas de résultats
               if (empty($resultats['movie_house']) AND empty($resultats['petits_pedestres']) AND empty($resultats['missions']))
-                echo '<div class="titre_search">Pas de résultats trouvés pour "' . $_SESSION['search'] . '" !</div>';
+                echo '<div class="titre_search">Pas de résultats trouvés pour "' . $_SESSION['save']['search'] . '" !</div>';
 
               // Résultats par section
               if (!empty($resultats['movie_house']))

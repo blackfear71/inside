@@ -14,11 +14,11 @@
   switch ($_GET['action'])
   {
     case 'doSearch':
-      $_SESSION['search'] = $_POST['text_search'];
+      $_SESSION['save']['search'] = $_POST['text_search'];
       break;
 
     case 'goSearch':
-      $resultats = getSearch($_SESSION['search']);
+      $resultats = getSearch($_SESSION['save']['search']);
       break;
 
     default:

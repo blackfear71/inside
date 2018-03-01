@@ -10,11 +10,11 @@
   include_once('modele/metier_administration.php');
 
 	// Initialisation sauvegarde saisie
-	if (!isset($_SESSION['user_ask_id']) OR !isset($_SESSION['user_ask_name']) OR !isset($_SESSION['new_password']))
+	if (!isset($_SESSION['save']['user_ask_id']) OR !isset($_SESSION['save']['user_ask_name']) OR !isset($_SESSION['save']['new_password']))
 	{
-		$_SESSION['user_ask_id']   = "";
-		$_SESSION['user_ask_name'] = "";
-		$_SESSION['new_password']  = "";
+		$_SESSION['save']['user_ask_id']   = "";
+		$_SESSION['save']['user_ask_name'] = "";
+		$_SESSION['save']['new_password']  = "";
 	}
 
   // Appel métier

@@ -72,7 +72,7 @@
         echo '<div id="resizeBar" class="zone_recherche_bandeau">';
           echo '<form method="post" action="/inside/portail/search/search.php?action=doSearch" class="form_recherche_bandeau">';
             echo '<input type="submit" name="search" value="" class="logo_rechercher" />';
-            echo '<input type="text" id="color_search" name="text_search" placeholder="Rechercher..." class="recherche_bandeau" />';
+            echo '<input onmouseover="changeColorToWhite(\'color_search\')" onmouseout="changeColorToGrey(\'color_search\', \'resizeBar\')" type="text" id="color_search" name="text_search" placeholder="Rechercher..." class="recherche_bandeau" />';
           echo '</form>';
         echo '</div>';
       echo '</div>';

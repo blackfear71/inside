@@ -13,11 +13,11 @@
   // Initialisation sauvegarde saisie
   if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
-    $_SESSION['speaker']        = "";
-    $_SESSION['other_speaker']  = "";
-    $_SESSION['date_collector'] = "";
-    $_SESSION['collector']      = "";
-    $_SESSION['context']        = "";
+    $_SESSION['save']['speaker']        = "";
+    $_SESSION['save']['other_speaker']  = "";
+    $_SESSION['save']['date_collector'] = "";
+    $_SESSION['save']['collector']      = "";
+    $_SESSION['save']['context']        = "";
   }
 
   // Modèle de données : "module métier"

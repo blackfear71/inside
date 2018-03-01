@@ -50,22 +50,22 @@
               echo '<tr>';
                 // Titre
                 echo '<td class="td_saisie_succes_tit">';
-                  echo '<input type="text" name="title" placeholder="Titre" value="' . $_SESSION['title_success'] . '" class="saisie_succes_tit" required />';
+                  echo '<input type="text" name="title" placeholder="Titre" value="' . $_SESSION['save']['title_success'] . '" class="saisie_succes_tit" required />';
                 echo '</td>';
 
                 // Référence
                 echo '<td class="td_saisie_succes_ref">';
-                  echo '<input type="text" name="reference" placeholder="Référence" value="' . $_SESSION['reference_success'] . '" maxlength="255" class="saisie_succes_ref" required />';
+                  echo '<input type="text" name="reference" placeholder="Référence" value="' . $_SESSION['save']['reference_success'] . '" maxlength="255" class="saisie_succes_ref" required />';
                 echo '</td>';
 
                 // Niveau
                 echo '<td class="td_saisie_succes_niv">';
-                  echo '<input type="text" name="level" placeholder="Niveau" value="' . $_SESSION['level'] . '" maxlength="4" class="saisie_succes_niv" required />';
+                  echo '<input type="text" name="level" placeholder="Niveau" value="' . $_SESSION['save']['level'] . '" maxlength="4" class="saisie_succes_niv" required />';
                 echo '</td>';
 
                 // Ordonnancement
                 echo '<td class="td_saisie_succes_ord">';
-                  echo '<input type="text" name="order_success" placeholder="Ordonnancement" value="' . $_SESSION['order_success'] . '" maxlength="3" class="saisie_succes_ord" required />';
+                  echo '<input type="text" name="order_success" placeholder="Ordonnancement" value="' . $_SESSION['save']['order_success'] . '" maxlength="3" class="saisie_succes_ord" required />';
                 echo '</td>';
 
                 // Bouton parcourir
@@ -86,19 +86,19 @@
               echo '<tr>';
                 // Description
                 echo '<td colspan="4" class="td_saisie_succes_desc">';
-                  echo '<input type="text" name="description" placeholder="Description" value="' . $_SESSION['description_success'] . '" class="saisie_description" required />';
+                  echo '<input type="text" name="description" placeholder="Description" value="' . $_SESSION['save']['description_success'] . '" class="saisie_description" required />';
                 echo '</td>';
 
                 // Condition
                 echo '<td colspan="2" class="td_saisie_succes_cond">';
-                  echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['limit_success'] . '" maxlength="3" class="saisie_limit" required />';
+                  echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="3" class="saisie_limit" required />';
                 echo '</td>';
               echo '</tr>';
 
               echo '<tr>';
                 // Explications
                 echo '<td colspan="100%" class="td_saisie_succes_expl">';
-                  echo '<input type="text" name="explanation" placeholder="Explications" value="' . $_SESSION['explanation_success'] . '" class="saisie_explaination" required />';
+                  echo '<input type="text" name="explanation" placeholder="Explications" value="' . $_SESSION['save']['explanation_success'] . '" class="saisie_explaination" required />';
                 echo '</td>';
               echo '</tr>';
             echo '</table>';

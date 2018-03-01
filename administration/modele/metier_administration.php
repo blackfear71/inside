@@ -973,9 +973,9 @@
     $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE id = ' . $id_user);
     $donnees = $reponse->fetch();
 
-    $_SESSION['user_ask_id'] = $donnees['identifiant'];
-    $_SESSION['user_ask_name'] = $donnees['pseudo'];
-    $_SESSION['new_password'] = $chaine;
+    $_SESSION['save']['user_ask_id']   = $donnees['identifiant'];
+    $_SESSION['save']['user_ask_name'] = $donnees['pseudo'];
+    $_SESSION['save']['new_password']  = $chaine;
 
     $reponse->closeCursor();
   }
@@ -1196,13 +1196,13 @@
     $explanation   = $post['explanation'];
 
     // Sauvegarde en cas d'erreur
-    $_SESSION['reference_success']   = $reference;
-    $_SESSION['level']               = $level;
-    $_SESSION['order_success']       = $order_success;
-    $_SESSION['title_success']       = $title;
-    $_SESSION['description_success'] = $description;
-    $_SESSION['limit_success']       = $limit_success;
-    $_SESSION['explanation_success'] = $explanation;
+    $_SESSION['save']['reference_success']   = $reference;
+    $_SESSION['save']['level']               = $level;
+    $_SESSION['save']['order_success']       = $order_success;
+    $_SESSION['save']['title_success']       = $title;
+    $_SESSION['save']['description_success'] = $description;
+    $_SESSION['save']['limit_success']       = $limit_success;
+    $_SESSION['save']['explanation_success'] = $explanation;
 
     $control_ok = true;
     global $bdd;

@@ -310,9 +310,9 @@
       $list_parts = array();
       $i = 0;
 
-      $_SESSION['price']   = $post['depense'];
-      $_SESSION['buyer']   = $buyer;
-      $_SESSION['comment'] = $comment;
+      $_SESSION['save']['price']   = $post['depense'];
+      $_SESSION['save']['buyer']   = $buyer;
+      $_SESSION['save']['comment'] = $comment;
 
       // Stockage de la liste des parts en fonction de l'utilisateur
       for ($i = 0; $i < $nb_users; $i++)

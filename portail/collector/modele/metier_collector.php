@@ -125,11 +125,11 @@
   function insertCollector($post, $user)
   {
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['speaker']        = $post['speaker'];
-    $_SESSION['other_speaker']  = $post['other_speaker'];
-    $_SESSION['date_collector'] = $post['date_collector'];
-    $_SESSION['collector']      = $post['collector'];
-    $_SESSION['context']        = $post['context'];
+    $_SESSION['save']['speaker']        = $post['speaker'];
+    $_SESSION['save']['other_speaker']  = $post['other_speaker'];
+    $_SESSION['save']['date_collector'] = $post['date_collector'];
+    $_SESSION['save']['collector']      = $post['collector'];
+    $_SESSION['save']['context']        = $post['context'];
 
     $date_a_verifier = $post['date_collector'];
 
