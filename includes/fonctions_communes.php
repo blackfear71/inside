@@ -465,4 +465,39 @@
 
     return $exist;
   }
+
+  // Formatage phrases cultes
+  // Retour : phrase formatée
+  function formatCollector($collector)
+  {
+    $formatted = "";
+
+    $search    = array("[", "]");
+    $replace   = array("<strong style='color: rgb(255, 25, 55);'>[", "]</strong>");
+    $formatted = str_replace($search, $replace, $collector);
+
+    return $formatted;
+  }
+
+  // Formatage contexte phrases cultes
+  // Retour : phrase formatée
+  function formatContext($context)
+  {
+    $formatted = "";
+
+    $search    = array("[", "]");
+    $replace   = array("<strong style='color: #e3e3e3;'>[", "]</strong>");
+    $formatted = str_replace($search, $replace, $context);
+
+    return $formatted;
+  }
+
+  // Suppression des caractères ASCII invisibles (?)
+  // Retour : phrase nettoyée
+  function deleteInvisible($phrase)
+  {
+    $cleaned = preg_replace('/[\xE2\x80\x8E]/', '', $phrase);
+
+    return $cleaned;
+  }
 ?>

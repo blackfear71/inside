@@ -140,7 +140,7 @@
     if (checkdate($m, $d, $y))
     {
       global $bdd;
-
+      
       if ($post['speaker'] == "other")
       {
         $collector = array('date_add'       => date("Ymd"),
@@ -148,8 +148,8 @@
                            'speaker'        => $post['other_speaker'],
                            'type_speaker'   => $post['speaker'],
                            'date_collector' => formatDateForInsert($date_a_verifier),
-                           'collector'      => $post['collector'],
-                           'context'        => $post['context']
+                           'collector'      => deleteInvisible($post['collector']),
+                           'context'        => deleteInvisible($post['context'])
                           );
       }
       else
@@ -159,8 +159,8 @@
                            'speaker'        => $post['speaker'],
                            'type_speaker'   => "user",
                            'date_collector' => formatDateForInsert($date_a_verifier),
-                           'collector'      => $post['collector'],
-                           'context'        => $post['context']
+                           'collector'      => deleteInvisible($post['collector']),
+                           'context'        => deleteInvisible($post['context'])
                           );
       }
 
