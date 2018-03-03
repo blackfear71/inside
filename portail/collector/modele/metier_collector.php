@@ -140,7 +140,7 @@
     if (checkdate($m, $d, $y))
     {
       global $bdd;
-      
+
       if ($post['speaker'] == "other")
       {
         $collector = array('date_add'       => date("Ymd"),
@@ -307,7 +307,7 @@
 
     foreach ($list_collectors as $collector)
     {
-      for ($i = 1; $i <= 6; $i++)
+      for ($i = 1; $i <= 7; $i++)
       {
         // Recherche du nombre de smileys
         $req = $bdd->query('SELECT COUNT(id) AS nb_smileys FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i);
@@ -370,6 +370,8 @@
       $vote = 5;
     elseif (isset($post['smiley_6']))
       $vote = 6;
+    elseif (isset($post['smiley_7']))
+      $vote = 7;
     else
       $vote = 0;
 

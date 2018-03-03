@@ -1,9 +1,20 @@
 <?php
   if (!empty($calendriers))
   {
-    $nombre_colonnes = 3;
     $i               = 1;
+    $nombre_colonnes = 3;
 
+    // Contrôle hauteur/largeur pour déterminer le nombre de calendriers à afficher par ligne
+    foreach ($calendriers as $calendrier)
+    {
+      if ($calendrier->getWidth() < $calendrier->getHeight())
+      {
+        $nombre_colonnes = 5;
+        break;
+      }
+    }
+
+    // Affichage des calendriers
     echo '<table class="table_calendars">';
       foreach ($calendriers as $calendrier)
       {

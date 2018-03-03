@@ -54,6 +54,8 @@
         $calendrier->setYear(htmlspecialchars($calendrier->getYear()));
         $calendrier->setTitle(htmlspecialchars($calendrier->getTitle()));
         $calendrier->setCalendar(htmlspecialchars($calendrier->getCalendar()));
+        $calendrier->setWidth(htmlspecialchars($calendrier->getWidth()));
+        $calendrier->setHeight(htmlspecialchars($calendrier->getHeight()));
       }
 
       unset($calendrier);

@@ -477,7 +477,7 @@
   box-shadow: 0 0 2px #5c5c5c;
   float: right;
 	margin-right: -27px;
-	width: 248px;
+	width: 282px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;
@@ -491,7 +491,7 @@
   box-shadow: 0 0 2px #5c5c5c;
   float: left;
   margin-left: -27px;
-	width: 248px;
+	width: 282px;
   margin-top: -55px;
   padding: 5px;
   border-radius: 50px;
@@ -604,7 +604,22 @@
   cursor: pointer;
 }
 
-.smiley_votes_left_1, .smiley_votes_left_2, .smiley_votes_left_3, .smiley_votes_left_4, .smiley_votes_left_5, .smiley_votes_left_6
+.smiley_7
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url("/inside/includes/icons/smileys/7.png");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.smiley_votes_left_1, .smiley_votes_left_2, .smiley_votes_left_3, .smiley_votes_left_4, .smiley_votes_left_5, .smiley_votes_left_6, .smiley_votes_left_7
 {
   float: left;
   width: 30px;
@@ -614,7 +629,7 @@
   border: solid 1px white;
 }
 
-.smiley_votes_right_1, .smiley_votes_right_2, .smiley_votes_right_3, .smiley_votes_right_4, .smiley_votes_right_5, .smiley_votes_right_6
+.smiley_votes_right_1, .smiley_votes_right_2, .smiley_votes_right_3, .smiley_votes_right_4, .smiley_votes_right_5, .smiley_votes_right_6, .smiley_votes_right_7
 {
   float: right;
   width: 30px;
@@ -624,7 +639,7 @@
   border: solid 1px white;
 }
 
-.nb_votes_left_1, .nb_votes_left_2, .nb_votes_left_3, .nb_votes_left_4, .nb_votes_left_5, .nb_votes_left_6
+.nb_votes_left_1, .nb_votes_left_2, .nb_votes_left_3, .nb_votes_left_4, .nb_votes_left_5, .nb_votes_left_6, .nb_votes_left_7
 {
   background-color: rgb(255, 25, 55);
   padding-top: 2px;
@@ -640,7 +655,7 @@
   display: none;
 }
 
-.nb_votes_right_1, .nb_votes_right_2, .nb_votes_right_3, .nb_votes_right_4, .nb_votes_right_5, .nb_votes_right_6
+.nb_votes_right_1, .nb_votes_right_2, .nb_votes_right_3, .nb_votes_right_4, .nb_votes_right_5, .nb_votes_right_6, .nb_votes_right_7
 {
   background-color: rgb(255, 25, 55);
   padding-top: 2px;
@@ -658,8 +673,10 @@
 
 .smiley_votes_left_1:hover ~ .nb_votes_left_1, .smiley_votes_left_2:hover ~ .nb_votes_left_2, .smiley_votes_left_3:hover ~ .nb_votes_left_3,
 .smiley_votes_left_4:hover ~ .nb_votes_left_4, .smiley_votes_left_5:hover ~ .nb_votes_left_5, .smiley_votes_left_6:hover ~ .nb_votes_left_6,
+.smiley_votes_left_7:hover ~ .nb_votes_left_7,
 .smiley_votes_right_1:hover ~ .nb_votes_right_1, .smiley_votes_right_2:hover ~ .nb_votes_right_2, .smiley_votes_right_3:hover ~ .nb_votes_right_3,
-.smiley_votes_right_4:hover ~ .nb_votes_right_4, .smiley_votes_right_5:hover ~ .nb_votes_right_5, .smiley_votes_right_6:hover ~ .nb_votes_right_6
+.smiley_votes_right_4:hover ~ .nb_votes_right_4, .smiley_votes_right_5:hover ~ .nb_votes_right_5, .smiley_votes_right_6:hover ~ .nb_votes_right_6,
+.smiley_votes_right_7:hover ~ .nb_votes_right_7
 {
   display: block;
   position: relative;

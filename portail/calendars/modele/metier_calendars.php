@@ -70,7 +70,13 @@
     while($donnees = $reponse->fetch())
     {
       $myCalendar = Calendrier::withData($donnees);
+
+      $fileinfo  = getimagesize("images/" . $myCalendar->getYear() . "/" . $myCalendar->getCalendar());
+
       $myCalendar->setTitle(strtoupper($listeMois[$myCalendar->getMonth()]));
+      $myCalendar->setWidth($fileinfo[0]);
+      $myCalendar->setHeight($fileinfo[1]);
+
       array_push($calendars, $myCalendar);
     }
     $reponse->closeCursor();

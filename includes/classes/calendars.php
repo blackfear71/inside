@@ -7,6 +7,8 @@
     private $year;
     private $title;
     private $calendar;
+    private $width;
+    private $height;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -17,6 +19,8 @@
       $this->year      = '';
       $this->title     = '';
       $this->calendar  = '';
+      $this->width     = '';
+      $this->height    = '';
     }
 
     // Constructeur de l'objet Calendrier en fonction des données
@@ -112,6 +116,28 @@
     public function getCalendar()
     {
       return $this->calendar;
+    }
+
+    // Largeur calendrier
+    public function setWidth($width)
+    {
+      $this->width = $width;
+    }
+
+    public function getWidth()
+    {
+      return $this->width;
+    }
+
+    // Hauteur calendrier
+    public function setHeight($height)
+    {
+      $this->height = $height;
+    }
+
+    public function getHeight()
+    {
+      return $this->height;
     }
   }
 ?>
