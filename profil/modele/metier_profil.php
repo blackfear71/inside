@@ -130,14 +130,14 @@
     // Mise à jour du pseudo stocké en SESSION
     $_SESSION['user']['pseudo'] = $new_pseudo;
 
-    $_SESSION['alerts']['pseudo_changed'] = true;
+    $_SESSION['alerts']['pseudo_updated'] = true;
   }
 
   // METIER : Mise à jour de l'avatar (base + fichier)
   // RETOUR : Aucun
   function changeAvatar($user, $files)
   {
-    $_SESSION['alerts']['avatar_changed'] = false;
+    $_SESSION['alerts']['avatar_updated'] = false;
 
     global $bdd;
 
@@ -211,7 +211,7 @@
  				$reponse2->closeCursor();
 
         $_SESSION['user']['avatar']           = $new_name;
- 				$_SESSION['alerts']['avatar_changed'] = true;
+ 				$_SESSION['alerts']['avatar_updated'] = true;
  			}
  		}
   }

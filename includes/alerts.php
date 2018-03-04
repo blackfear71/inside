@@ -71,11 +71,11 @@
     $_SESSION['alerts']['bug_deleted'] = NULL;
 
   // Initialisations profil
-  if (!isset($_SESSION['alerts']['pseudo_changed']))
-    $_SESSION['alerts']['pseudo_changed'] = NULL;
+  if (!isset($_SESSION['alerts']['pseudo_updated']))
+    $_SESSION['alerts']['pseudo_updated'] = NULL;
 
-  if (!isset($_SESSION['alerts']['avatar_changed']))
-    $_SESSION['alerts']['avatar_changed'] = NULL;
+  if (!isset($_SESSION['alerts']['avatar_updated']))
+    $_SESSION['alerts']['avatar_updated'] = NULL;
 
   if (!isset($_SESSION['alerts']['avatar_deleted']))
     $_SESSION['alerts']['avatar_deleted'] = NULL;
@@ -349,8 +349,8 @@
     $_SESSION['alerts']['bug_deleted'] = NULL;
   }
   // Alertes profil (Utilisateurs)
-  elseif (isset($_SESSION['alerts']['pseudo_changed'])
-  OR      isset($_SESSION['alerts']['avatar_changed'])
+  elseif (isset($_SESSION['alerts']['pseudo_updated'])
+  OR      isset($_SESSION['alerts']['avatar_updated'])
   OR      isset($_SESSION['alerts']['avatar_deleted'])
   OR      isset($_SESSION['alerts']['duration_not_correct'])
   OR      isset($_SESSION['alerts']['duration_too_long'])
@@ -360,26 +360,26 @@
   OR      isset($_SESSION['alerts']['ask_desinscription']))
   {
     // Changement pseudo
-    if (isset($_SESSION['alerts']['pseudo_changed']) AND $_SESSION['alerts']['pseudo_changed'] == true)
+    if (isset($_SESSION['alerts']['pseudo_updated']) AND $_SESSION['alerts']['pseudo_updated'] == true)
     {
       $alerte = 'Le pseudo a bien été modifié.';
-      $_SESSION['alerts']['pseudo_changed'] = NULL;
+      $_SESSION['alerts']['pseudo_updated'] = NULL;
     }
 
     // Changement avatar
-    if (isset($_SESSION['alerts']['avatar_changed']) AND $_SESSION['alerts']['avatar_changed'] == true)
+    if (isset($_SESSION['alerts']['avatar_updated']) AND $_SESSION['alerts']['avatar_updated'] == true)
     {
       $alerte = 'L\'avatar a bien été modifié.';
-      $_SESSION['alerts']['avatar_changed'] = NULL;
+      $_SESSION['alerts']['avatar_updated'] = NULL;
     }
-    elseif (isset($_SESSION['alerts']['avatar_changed']) AND $_SESSION['alerts']['avatar_changed'] == false)
+    elseif (isset($_SESSION['alerts']['avatar_updated']) AND $_SESSION['alerts']['avatar_updated'] == false)
     {
       $alerte = 'Un problème a eu lieu lors de la modification de l\'avatar.';
-      $_SESSION['alerts']['avatar_changed'] = NULL;
+      $_SESSION['alerts']['avatar_updated'] = NULL;
     }
     else
     {
-      $_SESSION['alerts']['avatar_changed'] = NULL;
+      $_SESSION['alerts']['avatar_updated'] = NULL;
     }
 
     // Suppression avatar
