@@ -473,7 +473,7 @@
     $formatted = "";
 
     $search    = array("[", "]");
-    $replace   = array("<strong style='color: rgb(255, 25, 55);'>[", "]</strong>");
+    $replace   = array("<strong style='color: rgb(255, 25, 55);'>", "</strong>");
     $formatted = str_replace($search, $replace, $collector);
 
     return $formatted;

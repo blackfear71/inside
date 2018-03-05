@@ -258,8 +258,8 @@
         'speaker'        => $speaker,
         'type_speaker'   => $type_speaker,
         'date_collector' => formatDateForInsert($post['date_collector']),
-        'collector'      => $post['collector'],
-        'context'        => $post['context']
+        'collector'      => deleteInvisible($post['collector']),
+        'context'        => deleteInvisible($post['context'])
       ));
       $req->closeCursor();
 
