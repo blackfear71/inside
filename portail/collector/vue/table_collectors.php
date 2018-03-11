@@ -13,7 +13,7 @@
         echo '<table class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
           echo '<tr>';
             // Citation (gauche)
-            echo '<td class="collector" style="border-top-left-radius: 5px;">';
+            echo '<td colspan="2" class="collector" style="border-top-left-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . formatCollector($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
@@ -92,7 +92,7 @@
 
           echo '<tr>';
             // Votes tous utilisateurs
-            echo '<td class="collector" style="border-bottom-left-radius: 5px;">';
+            echo '<td class="collector_react" style="border-bottom-left-radius: 5px;">';
               foreach ($listeVotes as $votes)
               {
                 if ($votes['id'] == $collector->getId())
@@ -120,6 +120,10 @@
                   }
                 }
               }
+            echo '</td>';
+
+            echo '<td class="collector_author" style="text-align: right;">';
+              echo 'Par ' . $collector->getName_a() . '.';
             echo '</td>';
 
             echo '<td class="speaker_actions" style="border-right: solid 1px white;">';
@@ -287,7 +291,7 @@
             echo '</td>';
 
             // Citation (droite)
-            echo '<td class="collector" style="border-top-right-radius: 5px;">';
+            echo '<td colspan="2" class="collector" style="border-top-right-radius: 5px;">';
               echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
               echo '<div class="text_collector">' . formatCollector($collector->getCollector()) . '</div>';
               echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
@@ -307,6 +311,10 @@
             echo '<td class="speaker_actions">';
               // Modification
               echo '<a onclick="afficherMasquerRow(\'modifier_collector_3[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_4[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_modify_collector"></a>';
+            echo '</td>';
+
+            echo '<td class="collector_author" style="text-align: left;">';
+              echo 'Par ' . $collector->getName_a() . '.';
             echo '</td>';
 
             // Votes tous utilisateurs

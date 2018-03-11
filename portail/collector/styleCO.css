@@ -156,6 +156,24 @@
   vertical-align: top;
 }
 
+.collector_react
+{
+	background-color: #e3e3e3;
+	width: 60%;
+	padding: 1%;
+}
+
+.collector_author
+{
+	background-color: #e3e3e3;
+	width: 24%;
+	padding: 1%;
+	vertical-align: middle;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 90%;
+	font-style: italic;
+}
+
 .speaker
 {
   background-color: #a3a3a3;
@@ -624,6 +642,7 @@
   float: left;
   width: 30px;
   margin-right: -8px;
+	margin-bottom: -2px;
   border-radius: 50%;
   box-shadow: 0 0 3px #5c5c5c;
   border: solid 1px white;
@@ -634,6 +653,7 @@
   float: right;
   width: 30px;
   margin-left: -8px;
+	margin-bottom: -2px;
   border-radius: 50%;
   box-shadow: 0 0 3px #5c5c5c;
   border: solid 1px white;
