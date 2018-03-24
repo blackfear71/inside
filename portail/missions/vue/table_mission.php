@@ -4,7 +4,7 @@
     echo '<tr>';
       echo '<td colspan="2">';
         echo '<div class="titre_mission_first">' . $detailsMission->getMission() . '</div>';
-        echo '<img src="images/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="img_mission"  style="margin-bottom: -4px;"/>';
+        echo '<img src="images/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="img_details_mission" />';
       echo '</td>';
     echo '</tr>';
 

@@ -96,6 +96,8 @@
           echo '</table>';
         ?>
     	</article>
+
+      <?php include('../../includes/chat/chat.php'); ?>
 		</section>
 
     <!-- Pied de page -->

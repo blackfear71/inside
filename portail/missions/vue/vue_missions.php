@@ -81,7 +81,7 @@
 
                   echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_presentation_mission_first">';
                     echo '<div class="titre_mission_first">' . $ligneMission->getMission() . '</div>';
-                    echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
+                    echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_presentation_mission" />';
                   echo '</a>';
                 }
                 // Missions précédentes
@@ -95,7 +95,7 @@
 
                   echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_presentation_mission">';
                     echo '<div class="titre_mission">' . $ligneMission->getMission() . '</div>';
-                    echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
+                    echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_presentation_mission" />';
                   echo '</a>';
                 }
               }
@@ -107,6 +107,8 @@
           }
         ?>
 			</article>
+
+      <?php include('../../includes/chat/chat.php'); ?>
 		</section>
 
 		<!-- Pied de page -->

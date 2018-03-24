@@ -131,3 +131,43 @@ $(function()
     }
   });
 })
+
+// Gestion des cookies
+function setCookie(cookieName, cookieValue)
+{
+  // Date expiration cookie (1 jour)
+  var today   = new Date();
+  var expires = new Date();
+
+  expires.setTime(today.getTime() + (1*24*60*60*1000));
+
+  // Cookie global (path=/)
+  document.cookie = cookieName + "=" + encodeURIComponent(cookieValue) + ";expires=" + expires.toGMTString() + ";path=/";
+}
+
+function getCookie(cookieName)
+{
+  var name          = cookieName + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca            = decodedCookie.split(';');
+
+  for(var i = 0; i < ca.length; i++)
+  {
+    var c = ca[i];
+
+    while (c.charAt(0) == ' ')
+    {
+      c = c.substring(1);
+    }
+
+    if (c.indexOf(name) == 0)
+      return c.substring(name.length, c.length);
+  }
+
+  return null;
+}
+
+function deleteCookie(cookieName)
+{
+  document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}

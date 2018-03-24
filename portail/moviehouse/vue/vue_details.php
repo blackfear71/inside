@@ -449,6 +449,8 @@
           }
 				?>
 			</article>
+
+      <?php include('../../includes/chat/chat.php'); ?>
 		</section>
 
 		<footer>

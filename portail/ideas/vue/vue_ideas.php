@@ -90,10 +90,10 @@
 				?>
 
         <!-- Tableaux des idées -->
-				<?php
-          include('table_ideas.php');
-				?>
+				<?php include('table_ideas.php'); ?>
 			</article>
+
+      <?php include('../../includes/chat/chat.php'); ?>
 		</section>
 
     <!-- Pied de page -->
