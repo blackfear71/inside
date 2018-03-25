@@ -8,7 +8,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	border-bottom: solid 1px rgb(255, 25, 55);
+	border-bottom: solid 1px #ff1937;
 	margin-top: 30px;
 }
 
@@ -19,7 +19,7 @@
 	height: 30px;
 	width: 80px;
 	text-align: center;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 	text-decoration: none;
 	font-family: robotolight, Verdana, sans-serif;
@@ -40,7 +40,7 @@
 .calendars_year_inactive:hover
 {
 	color: white;
-	background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 	text-decoration: none;
 }
 
@@ -119,7 +119,7 @@
 
 .zone_parcourir_calendars:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -162,7 +162,7 @@
 
 .send_calendar:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/portail/calendars/icons/send.png");
 }
 
@@ -263,7 +263,7 @@
 .download_calendar:hover, .download_calendar_2:hover
 {
 	color: white;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 }
 
 .delete_calendar
@@ -284,7 +284,7 @@
 
 .delete_calendar:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/portail/calendars/icons/delete.png");
 }
 

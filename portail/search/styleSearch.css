@@ -80,9 +80,9 @@
 
 .zone_resultat_info
 {
-  background-color: rgb(255, 25, 55);
-  line-height: 30px;
-  text-align: center;
-  vertical-align: middle;
-  color: white;
+	background-color: #ff1937;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	color: white;
 }

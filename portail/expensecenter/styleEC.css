@@ -116,7 +116,7 @@
 
 .add_depense:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 	cursor: pointer;
 }
@@ -195,7 +195,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	border-bottom: solid 1px rgb(255, 25, 55);
+	border-bottom: solid 1px #ff1937;
 	margin-bottom: -20px;
 }
 
@@ -206,7 +206,7 @@
 	height: 30px;
 	width: 80px;
 	text-align: center;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 	text-decoration: none;
 	font-family: robotolight, Verdana, sans-serif;
@@ -227,7 +227,7 @@
 .expense_year_inactive:hover
 {
 	color: white;
-	background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 	text-decoration: none;
 }
 
@@ -405,7 +405,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/edit.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -422,7 +422,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/delete.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -487,7 +487,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/validate.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -504,7 +504,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/cancel.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;

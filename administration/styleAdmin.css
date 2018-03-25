@@ -17,7 +17,7 @@
 	width: 300px;
 	display: inline-block;
 	margin-right: -4px;
-	background-color: rgb(55, 70, 80);
+	background-color: #374650;
 	border-radius: 5px;
 }
 
@@ -179,7 +179,7 @@
 .beginner
 {
 	float: left;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -223,7 +223,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/cancel.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -242,7 +242,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/validate.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -272,7 +272,7 @@
 
 .bouton_admin:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 	cursor: pointer;
 }
@@ -310,7 +310,7 @@
 
 .zone_check_autorisation:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -343,7 +343,7 @@
 
 .saisie_autorisations:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -499,7 +499,7 @@
 
 .zone_parcourir_succes:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -542,7 +542,7 @@
 
 .send_succes:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/portail/calendars/icons/send.png");
 }
 
@@ -641,7 +641,7 @@
 	line-height: 20px;
 	padding: 2px;
 	border-radius: 50%;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	margin-bottom: -24px;
@@ -656,7 +656,7 @@
 	line-height: 20px;
 	padding: 2px;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	margin-bottom: -24px;
@@ -681,7 +681,7 @@
 	margin-top: 6px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	border-radius: 5px;
 	color: white;
 }
@@ -784,7 +784,7 @@
 
 .bouton_delete:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/delete.png");
 }
 
@@ -857,7 +857,7 @@
 
 .bouton_modification_succes:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -885,18 +885,18 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	line-height: 50px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 140%;
 	color: white;
-	border-bottom: solid 2px rgb(200, 25, 50);
+	border-bottom: solid 2px #c81932;
 }
 
 .contenu_cron
 {
 	min-height: 80px;
 	line-height: 20px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	padding: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
@@ -912,7 +912,7 @@
 
 .bouton_cron
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	float: right;
 	margin-right: 20px;
 	height: 35px;
@@ -931,7 +931,7 @@
 
 .bouton_cron:hover
 {
-	background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 }
 
 /*** Logs ***/
@@ -989,7 +989,7 @@
 
 .log_ko
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	width: 40px;
 	height: 40px;
 	line-height: 40px;
@@ -1051,17 +1051,17 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	line-height: 50px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 140%;
 	color: white;
-	border-bottom: solid 2px rgb(200, 25, 50);
+	border-bottom: solid 2px #c81932;
 }
 
 .contenu_no_logs
 {
 	line-height: 20px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	padding: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
@@ -1126,7 +1126,7 @@
   margin-top: 5px;
   width: calc(80% - 10px);
   text-align: center;
-  background: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
   box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
   border-radius: 2px;
@@ -1151,7 +1151,7 @@
 
 .bouton_delete_mission:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/delete.png");
 }
 
@@ -1170,7 +1170,7 @@
   box-shadow: 0 0 5px #7c7c7c;
   border-radius: 2px;
   overflow: hidden;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 }
 
 .input_mission_title
@@ -1198,7 +1198,7 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 50%;
 	color: white;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	text-align: center;
 	position: relative;
 	overflow: hidden;
@@ -1249,7 +1249,7 @@
 
 .icons_mission
 {
-	border-bottom: solid 2px rgb(200, 25, 50);
+	border-bottom: solid 2px #c81932;
 	width: 33%;
 	text-align: center;
 	padding-top: 10px;
@@ -1303,17 +1303,17 @@
 .dates_saisie_mission
 {
 	width: calc(100% - 40px);
-	background-color: rgb(255, 25, 55);
-  line-height: 50px;
+	background-color: #ff1937;
+	line-height: 50px;
 	padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
+	padding-right: 20px;
+	padding-top: 10px;
 	padding-bottom: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
-  border-bottom: solid 2px rgb(200, 25, 50);
-  text-align: center;
+	border-bottom: solid 2px #c81932;
+	text-align: center;
 }
 
 .input_mission_date
@@ -1334,7 +1334,7 @@
 .heure_saisie_mission
 {
 	width: calc(100% - 40px);
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
   line-height: 30px;
 	padding-left: 20px;
   padding-right: 20px;
@@ -1407,8 +1407,8 @@
 .td_saisie_mission_left
 {
 	width: 25%;
-	background-color: rgb(255, 25, 55);
-	border-bottom: solid 2px rgb(200, 25, 50);
+	background-color: #ff1937;
+	border-bottom: solid 2px #c81932;
 	line-height: 30px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -1472,7 +1472,7 @@
 	border: 0;
 	line-height: 40px;
 	border-radius: 2px;
-	background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 18px;
 	color: white;
@@ -1500,7 +1500,7 @@
 
 .titre_classement
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	border-radius: 2px;
 	font-family: robotothin, Verdana, sans-serif;
 	font-size: 170%;
@@ -1533,7 +1533,7 @@
 .total_classement
 {
 	float: right;
-	background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 	border-radius: 2px;
 	width: 30px;
 	height: 30px;

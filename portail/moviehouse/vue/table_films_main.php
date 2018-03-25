@@ -113,7 +113,7 @@
                             {
                               echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
                               if ($j == $stars['stars'])
-                                echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
+                                echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
                               else
                                 echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
                             }
@@ -217,7 +217,7 @@
                       {
                         echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
                         if ($j == $stars['stars'])
-                          echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px rgb(200, 25, 50);" />';
+                          echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
                         else
                           echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
                       }

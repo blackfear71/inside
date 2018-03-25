@@ -30,7 +30,7 @@
           font-family: robotothin, Verdana, sans-serif;
           font-size: 50px;
           color: white;
-          background-color: rgb(255, 25, 55);
+          background-color: #ff1937;
           height: 100px;
         }
 
@@ -52,7 +52,7 @@
           height: 100%;
           left: 0px;
           top: 0px;
-          background: linear-gradient(to right bottom, rgb(255, 25, 55) 50%, transparent 50%);
+          background: linear-gradient(to right bottom, #ff1937 50%, transparent 50%);
         }
 
         .corps_mail

@@ -8,7 +8,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	border-bottom: solid 1px rgb(255, 25, 55);
+	border-bottom: solid 1px #ff1937;
 }
 
 .movie_year_active
@@ -18,7 +18,7 @@
 	height: 30px;
 	width: 80px;
 	text-align: center;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 	text-decoration: none;
 	font-family: robotolight, Verdana, sans-serif;
@@ -40,7 +40,7 @@
 .movie_year_inactive:hover
 {
 	color: white;
-	background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 	text-decoration: none;
 }
 
@@ -146,7 +146,7 @@
 .hidden_films
 {
 	line-height: 40px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	position: relative;
 	z-index: 1;
 }
@@ -298,8 +298,8 @@
 
 .add_saisie_rapide:hover
 {
-	background-color: rgb(255, 25, 55);
-	border: solid 1px rgb(255, 25, 55);
+	background-color: #ff1937;
+	border: solid 1px #ff1937;
 	color: white;
 }
 
@@ -368,20 +368,6 @@
 	margin-top: 250px;
 }
 
-.detail_gauche
-{
-	display: inline-block;
-	width: 60%;
-	vertical-align: top;
-}
-
-.detail_droite
-{
-	display: inline-block;
-	width: 40%;
-	overflow: hidden;
-}
-
 .video_container
 {
 	position: relative;
@@ -408,188 +394,9 @@
 	border: 0;
 }
 
-.date_sortie
-{
-	display: inline-block;
-	width: 46%;
-	padding-left: 2%;
-	padding-right: 2%;
-	background-color: #d3d3d3;
-	font-family: robotomedium_italic, Verdana, sans-serif;
-	border-bottom: solid 1px white;
-	line-height: 50px;
-	font-size: 110%;
-	vertical-align: top;
-}
-
-.date_sortie_2
-{
-	display: inline-block;
-	width: 46%;
-	padding-left: 2%;
-	padding-right: 2%;
-	background-color: #f3f3f3;
-	font-family: robotolight, Verdana, sans-serif;
-	border-bottom: solid 1px white;
-	line-height: 50px;
-	font-size: 110%;
-}
-
-.table_view_by
-{
-	width: 100%;
-	border-spacing: 0.5px;
-	border-collapse: collapse;
-}
-
-.td_view_by
-{
-	width: 50%;
-	border-bottom: solid 1px white;
-}
-
-.user_view_by
-{
-	margin-left: 50px;
-	padding-right: 10px;
-}
-
-.view_by
-{
-	display: inline-block;
-	width: 50%;
-	background-color: #f3f3f3;
-	font-family: robotolight, Verdana, sans-serif;
-	border-bottom: solid 1px white;
-	line-height: 48px;
-	font-size: 110%;
-}
-
-.links_details
-{
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	border: 2px solid #e3e3e3;
-	margin-bottom: 2px;
-	line-height: 70px;
-}
-
-.link_fiche
-{
-	background-color: rgb(255, 25, 55);
-	display: inline-block;
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 160px;
-	height: 50px;
-	border-radius: 50px;
-	box-shadow: 3px 3px #c3c3c3;
-	text-align: center;
-	cursor: pointer;
-	color: white;
-	text-decoration: none;
-	font-family: robotothin, Verdana, sans-serif;
-}
-
-.fiche_align
-{
-	line-height: 50px;
-}
-
-.fiche_absente
-{
-	background-color: rgb(255, 25, 55);
-	display: inline-block;
-	width: 160px;
-	margin-left: 20px;
-	margin-right: 20px;
-	border-radius: 50px;
-	box-shadow: 3px 3px #c3c3c3;
-	text-align: center;
-	color: white;
-	font-family: robotothin, Verdana, sans-serif;
-	line-height: 50px;
-}
-
-.link_doodle
-{
-	background-color: #0064dc;
-	display: inline-block;
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 160px;
-	height: 50px;
-	border-radius: 50px;
-	box-shadow: 3px 3px #c3c3c3;
-	text-align: center;
-	cursor: pointer;
-	color: white;
-	text-decoration: none;
-	font-family: robotothin, Verdana, sans-serif;
-	line-height: 50px;
-}
-
-.logo_doodle
-{
-	height: 16px;
-	margin-bottom: -1px;
-}
-
-.form_stars_details
-{
-	display: inline-block;
-	border: 2px solid #e3e3e3;
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 160px;
-	height: 50px;
-	border-radius: 50px;
-	box-shadow: 3px 3px #c3c3c3;
-	text-align: center;
-	line-height: 52px;
-}
-
 .form_not_interested
 {
 	display: inline-block;
-}
-
-.not_interested
-{
-	border: 0;
-	background-color: rgb(255, 25, 55);
-	display: inline-block;
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 160px;
-	height: 50px;
-	border-radius: 50px;
-	box-shadow: 3px 3px #c3c3c3;
-	text-align: center;
-	cursor: pointer;
-	color: white;
-	font-family: robotothin, Verdana, sans-serif;
-	font-size: 100%;
-}
-
-.send_mail_details
-{
-	display: inline-block;
-	background-color: rgb(255, 25, 55);
-	width: 160px;
-	height: 50px;
-	line-height: 50px;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: -5px;
-	border-radius: 50px;
-	box-shadow: 3px 3px #c3c3c3;
-	text-align: center;
-	cursor: pointer;
-	color: white;
-	font-family: robotothin, Verdana, sans-serif;
-	font-size: 100%;
 }
 
 .link_film
@@ -598,56 +405,6 @@
 	color: black;
 	text-decoration: none;
 	padding: 8px;
-}
-
-.zone_avatar_details_film
-{
-	float: left;
-	background-color: white;
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 20px;
-	overflow: hidden;
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-top: 8px;
-}
-
-.avatar_details_film
-{
-	max-width: 30px;
-	max-height: 30px;
-	vertical-align: middle;
-}
-
-.link_vote_3
-{
-	display: inline-block;
-	width: 20px;
-	height: 25px;
-	cursor: pointer;
-	background-color: transparent;
-	border: 0;
-	cursor: pointer;
-	margin-left: 2px;
-	margin-right: 2px;
-	position: relative;
-	z-index: 1;
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-
-.link_vote_details
-{
-	width: 30px;
-	height: 30px;
-	line-height: 20px;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .cancel_vote
@@ -671,8 +428,8 @@
 	color: white;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	background-color: rgb(255, 25, 55);
-	border-bottom: solid 5px rgb(200, 25, 50);
+	background-color: #ff1937;
+	border-bottom: solid 5px #c81932;
 	line-height: 50px;
 	padding-left: 15px;
 	margin-top: 30px;
@@ -714,7 +471,7 @@
 
 .link_home_film:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	box-shadow: 0 0 5px black;
 	color: white;
 }
@@ -744,7 +501,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 50%;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("icons/users.png");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
@@ -769,7 +526,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 50%;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/portail/moviehouse/icons/star.png");
 	background-size: 15px 15px;
 	background-repeat: no-repeat;
@@ -815,9 +572,9 @@
 /*** Saisie film avancée ***/
 .titre_saisie_avancee
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	line-height: 50px;
-	border-bottom: solid 5px rgb(200, 25, 50);
+	border-bottom: solid 5px #c81932;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding-left: 20px;
@@ -941,7 +698,7 @@
 
 .label_restaurant:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -964,7 +721,7 @@
 
 .saisie_valider_film:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -1003,7 +760,7 @@
 .avertissement_mail
 {
 	margin: 0;
-	color: rgb(255, 25, 55)
+	color: #ff1937;
 }
 
 .send_mail_film
@@ -1027,7 +784,7 @@
 
 .send_mail_film:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -1405,7 +1162,7 @@
 
 .bouton_commentaires:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -1467,7 +1224,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 50%;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/portail/moviehouse/icons/link.png");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
@@ -1509,7 +1266,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/edit.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -1527,7 +1284,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/delete.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -1544,7 +1301,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/validate.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
@@ -1562,7 +1319,7 @@
 	height: 30px;
 	border: 0;
 	border-radius: 5px;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/cancel.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;

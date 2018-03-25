@@ -12,9 +12,9 @@
 
 .zone_profil_utilisateur_titre
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	line-height: 50px;
-	border-bottom: solid 5px rgb(200, 25, 50);
+	border-bottom: solid 5px #c81932;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding-left: 10px;
@@ -109,7 +109,7 @@
 
 .bouton_profil:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -358,7 +358,7 @@
 
 .label_preference:hover, .label_preference_2:hover, .label_preference_3:hover
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	color: white;
 }
 
@@ -511,7 +511,7 @@
 
 .progression_succes::-moz-meter-bar
 {
-  background: rgb(255, 25, 55);
+  background: #ff1937;
 	border-radius: 5px;
 }
 
@@ -549,7 +549,7 @@
 
 .title_ranking_line
 {
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	width: 100%;
 	min-height: 60px;
 }
@@ -630,7 +630,7 @@
 	margin-top: -4px;
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
-	background-color: rgb(255, 25, 55);
+	background-color: #ff1937;
 	padding: 5px;
 	border-radius: 5px;
 	color: white;

@@ -43,11 +43,11 @@
 
 .zone_notification_icone
 {
-  background-color: rgb(255, 25, 55);
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 10px;
-  padding-bottom: 10px;
+	background-color: #ff1937;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	width: 100px;
 }
 
@@ -103,16 +103,16 @@
 
 .numero_page_active
 {
-  background-color: rgb(255, 25, 55);
-  font-family: robotolight, Verdana, sans-serif;
-  color: white;
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin-left: 5px;
-  margin-right: 5px;
-  line-height: 40px;
-  border-radius: 50%;
+	background-color: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-left: 5px;
+	margin-right: 5px;
+	line-height: 40px;
+	border-radius: 50%;
 }
 
 .numero_page_inactive
@@ -130,7 +130,7 @@
 
 .numero_page_inactive:hover
 {
-  background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 }
 
 .lien_pagination

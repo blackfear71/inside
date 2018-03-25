@@ -99,8 +99,8 @@
 
 .saisie_bouton:hover
 {
-	background-color: rgb(255, 25, 55);
-	border: solid 1px rgb(255, 25, 55);
+	background-color: #ff1937;
+	border: solid 1px #ff1937;
 	color: white;
 }
 
@@ -278,16 +278,16 @@
 
 .numero_page_active
 {
-  background-color: rgb(255, 25, 55);
-  font-family: robotolight, Verdana, sans-serif;
-  color: white;
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin-left: 5px;
-  margin-right: 5px;
-  line-height: 40px;
-  border-radius: 50%;
+	background-color: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-left: 5px;
+	margin-right: 5px;
+	line-height: 40px;
+	border-radius: 50%;
 }
 
 .numero_page_inactive
@@ -305,7 +305,7 @@
 
 .numero_page_inactive:hover
 {
-  background-color: rgb(200, 25, 50);
+	background-color: #c81932;
 }
 
 .lien_pagination
@@ -661,34 +661,34 @@
 
 .nb_votes_left_1, .nb_votes_left_2, .nb_votes_left_3, .nb_votes_left_4, .nb_votes_left_5, .nb_votes_left_6, .nb_votes_left_7
 {
-  background-color: rgb(255, 25, 55);
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  font-family: robotolight, Verdana, sans-serif;
-  color: white;
-  float: left;
-  margin-top: -30px;
-  margin-left: -25px;
-  display: none;
+	background-color: #ff1937;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	float: left;
+	margin-top: -30px;
+	margin-left: -25px;
+	display: none;
 }
 
 .nb_votes_right_1, .nb_votes_right_2, .nb_votes_right_3, .nb_votes_right_4, .nb_votes_right_5, .nb_votes_right_6, .nb_votes_right_7
 {
-  background-color: rgb(255, 25, 55);
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  font-family: robotolight, Verdana, sans-serif;
-  color: white;
-  float: right;
-  margin-top: -30px;
-  margin-right: -22px;
-  display: none;
+	background-color: #ff1937;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	float: right;
+	margin-top: -30px;
+	margin-right: -22px;
+	display: none;
 }
 
 .smiley_votes_left_1:hover ~ .nb_votes_left_1, .smiley_votes_left_2:hover ~ .nb_votes_left_2, .smiley_votes_left_3:hover ~ .nb_votes_left_3,

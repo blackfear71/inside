@@ -89,8 +89,8 @@
 
 .submit_bug:hover
 {
-	background-color: rgb(255, 25, 55);
-	border: solid 1px rgb(255, 25, 55);
+	background-color: #ff1937;
+	border: solid 1px #ff1937;
 	color: white;
 }
 
