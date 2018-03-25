@@ -22,7 +22,7 @@
 
   // Recherche des utilisateurs si pas déjà faite
   if (empty($_COOKIE['chat']['users']))
-    $_COOKIE['chat']['users']   = getUsersChat();
+    $_COOKIE['chat']['users'] = getUsersChat();
 
   $_COOKIE['chat']['current'] = $_SESSION['user']['identifiant'];
 
@@ -198,10 +198,8 @@
         });
 
         // On repositionne le scroll en bas si on a saisi un message ou que la page s'initialise
-        var height = $('#scroll_conversation')[0].scrollHeight;
-
         if (scrollUpdate == "init" || scrollUpdate == true)
-          $('#scroll_conversation').scrollTop(height);
+          setScrollbarDown();
 
       });
     }
@@ -227,10 +225,18 @@
     {
       // On met à jour la conversation après un petit temps afin de laisser le temps d'enregistrer le message pour le rafraichir
       setTimeout(rafraichirConversation, 500, true);
+      setTimeout(setScrollbarDown, 500);
 
       // On positionne le curseur dans la zone de saisie
       $('#message_chat').val('');
       $('#message_chat').focus();
+    }
+
+    // Positionne la scrollbar en bas en cas d'initialisation de l'écran ou d'envoi de messages
+    function setScrollbarDown()
+    {
+      var height = $('#scroll_conversation')[0].scrollHeight;
+      $('#scroll_conversation').scrollTop(height);
     }
 
     // Encodage des caractères spéciaux
