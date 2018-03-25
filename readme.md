@@ -28,7 +28,8 @@ Si des différences sont constatées, veuillez les annuler.
 
 ## Variables utiles
 ### Les couleurs
-Les couleurs RGB sont principalement utilisées pour la transparence. Dansles autres cas, utiliser les codes hexadécimaux. Voici les couleurs principalement représentées sur la plateforme :
+Les couleurs RGB sont principalement utilisées pour la transparence. Dans les autres cas, utiliser les codes hexadécimaux. Voici les couleurs principalement représentées sur la plateforme :
+
 | Nom             | Couleur                                                  | Code                         | Note                                   |
 | ----------------| -------------------------------------------------------- | ---------------------------- | -------------------------------------- |
 | Rouge           | ![#ff1937](https://placehold.it/15/ff1937/000000?text=+) | #ff1937 / rgb(255, 25, 55)   | Rouge CGI, couleur principale          |
@@ -54,6 +55,7 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dansles au
 
 ### Les variables globales
 Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées sous forme de tableaux regroupant leur contenu en catégories. Ceci facilite la lecture des données pour les développeurs.
+
 | SESSION  | Description                                              |
 | -------- | -------------------------------------------------------- |
 | index    | Contient les données de l'écran de connexion             |
