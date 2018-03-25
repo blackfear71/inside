@@ -798,7 +798,7 @@
             $reference = "paques_2018";
 
           // Récupération Id mission
-          $req = $bdd->query('SELECT * FROM missions WHERE reference = "noel_2017"');
+          $req = $bdd->query('SELECT * FROM missions WHERE reference = "' . $reference . '"');
           $data = $req->fetch();
 
           $id_mission = $data['id'];
