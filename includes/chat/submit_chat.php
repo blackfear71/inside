@@ -1,4 +1,17 @@
 <?php
+  // Contrôle existence fichier conversations
+  if (!file_exists('content_chat.xml'))
+  {
+    $file    = fopen('content_chat.xml', 'a+');
+    $balises =
+'<?xml version="1.0" encoding="UTF-8"?>
+<messagesChat>
+</messagesChat>
+';
+    fputs($file, $balises);
+    fclose($file);
+  }
+
   // Création des éléments
   $dom = new DOMDocument();
   $dom->load('content_chat.xml');
@@ -22,25 +35,4 @@
   $fragment->appendXML($ligne);
   $dom->documentElement->appendChild($fragment);
   $dom->save('content_chat.xml');
-
-  /* Ancienne version
-  // Récupération des données
-  $nom      = $_POST['nom'];
-  $message  = $_POST['message'];
-
-  // Formatage du message
-  $ligne    = '<message>';
-  $ligne   .= '<identifiant>' . $_POST['nom'] . '</identifiant>';
-  $ligne   .= '<text>' . $_POST['message'] . '</text>';
-  $ligne   .= '<date>' . date('d/m/Y') . '</date>';
-  $ligne   .= '<time>' . date('H:m') . '</time>';
-  $ligne   .= '</message>';
-
-  // On lit le fichier content_chat.xml et on stocke la réponse dans une variable (de type tableau)
-  $new_file = file('content_chat.xml');
-
-  // On insère dans le message le texte puis un saut de ligne et on écrit le fichier
-  array_push($new_file, $ligne);
-  array_push($new_file, "\n");
-  file_put_contents('content_chat.xml', $new_file);*/
 ?>
