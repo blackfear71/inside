@@ -51,12 +51,12 @@
     /***   Initialisations   ***/
     /***************************/
     var showChat = initCookieChat();
-    setInterval(rafraichirConversation, 3000, false);
+    setInterval(rafraichirConversation, 3000, false); // après avoir passé "init" en paramètre, on passe toujours false ensuite à rafraichirConversation()
 
     /******************/
     /***   Appels   ***/
     /******************/
-    rafraichirConversation(false);
+    rafraichirConversation("init");
 
     /*******************/
     /***   Actions   ***/
@@ -95,15 +95,15 @@
       // Initialisation affichage en fonction du cookie
       if (cookie == "true")
       {
-        document.getElementById('hide_chat').innerHTML = '-';
+        document.getElementById('hide_chat').innerHTML               = '-';
         document.getElementById('scroll_conversation').style.display = "block";
-        document.getElementById('form_chat').style.display = "block";
+        document.getElementById('form_chat').style.display           = "block";
       }
       else
       {
-        document.getElementById('hide_chat').innerHTML = '+';
+        document.getElementById('hide_chat').innerHTML               = '+';
         document.getElementById('scroll_conversation').style.display = "none";
-        document.getElementById('form_chat').style.display = "none";
+        document.getElementById('form_chat').style.display           = "none";
       }
 
       return cookie;
@@ -154,7 +154,7 @@
           var text        = decodeHtml($message.find('text').text());
           var date        = $message.find('date').text();
           var time        = $message.find('time').text();
-          var pseudo = "Un ancien utilisateur";
+          var pseudo      = "Un ancien utilisateur";
           var avatar;
           var html;
 
@@ -198,10 +198,9 @@
         });
 
         // On repositionne le scroll en bas si on a saisi un message ou que la page s'initialise
-        var position = $('#scroll_conversation').scrollTop();
-        var height   = $('#scroll_conversation')[0].scrollHeight;
+        var height = $('#scroll_conversation')[0].scrollHeight;
 
-        if (position == 0 || scrollUpdate == true)
+        if (scrollUpdate == "init" || scrollUpdate == true)
           $('#scroll_conversation').scrollTop(height);
 
       });
@@ -226,8 +225,8 @@
     // Fonction de rafraichissement après saisie message et repositionnement zone de saisie
     function afficheConversation()
     {
-      // On met à jour la conversation
-      rafraichirConversation(true);
+      // On met à jour la conversation après un petit temps afin de laisser le temps d'enregistrer le message pour le rafraichir
+      setTimeout(rafraichirConversation, 500, true);
 
       // On positionne le curseur dans la zone de saisie
       $('#message_chat').val('');
@@ -237,29 +236,29 @@
     // Encodage des caractères spéciaux
     function escapeHtml(str)
     {
-        var map =
-        {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-        };
-        return str.replace(/[&<>"']/g, function(m) {return map[m];});
+      var map =
+      {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return str.replace(/[&<>"']/g, function(m) {return map[m];});
     }
 
     // Décodage des caractères spéciaux
     function decodeHtml(str)
     {
-        var map =
-        {
-            '&amp;': '&',
-            '&lt;': '<',
-            '&gt;': '>',
-            '&quot;': '"',
-            '&#039;': "'"
-        };
-        return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
+      var map =
+      {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#039;': "'"
+      };
+      return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
     }
 
     /******************/

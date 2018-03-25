@@ -1386,8 +1386,8 @@ footer
 .contenu_chat
 {
 	height: 400px;
-	width: 400px;
-	max-width: 400px;
+	width: 390px;
+	max-width: 390px;
 	padding-left: 5px;
 	padding-right: 5px;
 	display: table-cell;
@@ -1468,7 +1468,7 @@ footer
 {
 	background-color: #2eb2f4;
 	display: inline-block;
-	max-width: calc(100% - 53px);
+	max-width: 280px;
 	margin-right: 5px;
 	padding: 5px;
 	text-align: justify;
@@ -1517,7 +1517,7 @@ footer
 {
 	background-color: #ff1937;
 	display: inline-block;
-	max-width: calc(100% - 53px);
+	max-width: 280px;
 	margin-left: 43px;
 	padding: 5px;
 	text-align: justify;
