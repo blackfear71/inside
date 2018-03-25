@@ -30,7 +30,7 @@ Si des différences sont constatées, veuillez les annuler.
 ### Les couleurs
 Les couleurs RGB sont principalement utilisées pour la transparence. Dans les autres cas, utiliser les codes hexadécimaux. Voici les couleurs principalement représentées sur la plateforme :
 
-| Nom             | Couleur                                                  | Code HEX | Code RGB           | Note                                   |
+| Nom             | Couleur                                                  | Code HEX | Code RGB           | Notes                                  |
 | ----------------| -------------------------------------------------------- | -------- | ------------------ | -------------------------------------- |
 | Rouge           | ![#ff1937](https://placehold.it/15/ff1937/000000?text=+) | #ff1937  | rgb(255, 25, 55)   | Rouge CGI, couleur principale          |
 | Rouge           | ![#c81932](https://placehold.it/15/c81932/000000?text=+) | #c81932  | rgb(200, 25, 50)   | Pour contraste (rift)                  |
