@@ -82,7 +82,7 @@
 
             foreach ($notifications as $notification)
             {
-              if (!empty($notification->getIcon()) AND !empty($notification->getSentence()) AND !empty($notification->getLink()))
+              if (!empty($notification->getIcon()) AND !empty($notification->getSentence()))
               {
                 // Date en fonction de la vue
                 switch ($_GET['view'])
