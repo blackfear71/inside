@@ -50,6 +50,7 @@
         $ligneMission->setObjectif(htmlspecialchars($ligneMission->getObjectif()));
         $ligneMission->setDescription(htmlspecialchars($ligneMission->getDescription()));
         $ligneMission->setExplications(htmlspecialchars($ligneMission->getExplications()));
+        $ligneMission->setConclusion(htmlspecialchars($ligneMission->getConclusion()));
         $ligneMission->setStatut(htmlspecialchars($ligneMission->getStatut()));
       }
 

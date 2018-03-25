@@ -230,12 +230,29 @@
 
       // Explications
       echo '<tr>';
-        echo '<td class="td_saisie_mission_left" style="border: 0;">';
+        echo '<td class="td_saisie_mission_left">';
           echo 'Explications';
         echo '</td>';
 
+        echo '<td colspan="2" class="td_saisie_mission_right">';
+          echo '<textarea name="explications" placeholder="Explications (utiliser %objectif%)" class="textarea_right_mission" required>' . $detailsMission->getExplications() . '</textarea>';
+        echo '</td>';
+      echo '</tr>';
+
+      // Rift
+      echo '<tr>';
+        echo '<td class="rift_saisie_mission_left"></td>';
+        echo '<td colspan="2" class="rift_saisie_mission_right"></td>';
+      echo '</tr>';
+
+      // Conclusion
+      echo '<tr>';
+        echo '<td class="td_saisie_mission_left" style="border: 0;">';
+          echo 'Conclusion';
+        echo '</td>';
+
         echo '<td colspan="2" class="td_saisie_mission_right" style="border: 0;">';
-          echo '<textarea name="explications" placeholder="Explications (utiliser %objectif%)" class="textarea_explications_mission" required>' . $detailsMission->getExplications() . '</textarea>';
+          echo '<textarea name="conclusion" placeholder="Conclusion (fin de mission)" class="textarea_right_mission" required>' . $detailsMission->getConclusion() . '</textarea>';
         echo '</td>';
       echo '</tr>';
     echo '</table>';

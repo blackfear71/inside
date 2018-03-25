@@ -85,6 +85,7 @@
         $ligneMission->setObjectif(htmlspecialchars($ligneMission->getObjectif()));
         $ligneMission->setDescription(htmlspecialchars($ligneMission->getDescription()));
         $ligneMission->setExplications(htmlspecialchars($ligneMission->getExplications()));
+        $ligneMission->setConclusion(htmlspecialchars($ligneMission->getConclusion()));
         $ligneMission->setStatut(htmlspecialchars($ligneMission->getStatut()));
       }
 
@@ -100,6 +101,7 @@
       $detailsMission->setObjectif(htmlspecialchars($detailsMission->getObjectif()));
       $detailsMission->setDescription(htmlspecialchars($detailsMission->getDescription()));
       $detailsMission->setExplications(htmlspecialchars($detailsMission->getExplications()));
+      $detailsMission->setConclusion(htmlspecialchars($detailsMission->getConclusion()));
       $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
 
       foreach ($participants as &$participant)
@@ -132,6 +134,7 @@
       $detailsMission->setObjectif(htmlspecialchars($detailsMission->getObjectif()));
       $detailsMission->setDescription(htmlspecialchars($detailsMission->getDescription()));
       $detailsMission->setExplications(htmlspecialchars($detailsMission->getExplications()));
+      $detailsMission->setConclusion(htmlspecialchars($detailsMission->getConclusion()));
       $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
       break;
 

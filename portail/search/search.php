@@ -82,6 +82,7 @@
           $resultatsMI->setObjectif(htmlspecialchars($resultatsMI->getObjectif()));
           $resultatsMI->setDescription(htmlspecialchars($resultatsMI->getDescription()));
           $resultatsMI->setExplications(htmlspecialchars($resultatsMI->getExplications()));
+          $resultatsMI->setConclusion(htmlspecialchars($resultatsMI->getConclusion()));
           $resultatsMI->setStatut(htmlspecialchars($resultatsMI->getStatut()));
         }
 

@@ -1887,6 +1887,7 @@
     $save_mission->setReference($save['reference']);
     $save_mission->setObjectif($save['objectif']);
     $save_mission->setExplications($save['explications']);
+    $save_mission->setConclusion($save['conclusion']);
 
     return $save_mission;
   }
@@ -1997,6 +1998,7 @@
     $reference    = $post['reference'];
     $objectif     = $post['objectif'];
     $explications = $post['explications'];
+    $conclusion   = $post['conclusion'];
 
     // Sauvegarde des données
     $_SESSION['save']['new_mission'] = array('post' => $post, 'files' => $files);
@@ -2184,7 +2186,8 @@
                                                   heure,
                                                   objectif,
                                                   description,
-                                                  explications)
+                                                  explications,
+                                                  conclusion)
                                           VALUES(:mission,
                                                  :reference,
                                                  :date_deb,
@@ -2192,7 +2195,8 @@
                                                  :heure,
                                                  :objectif,
                                                  :description,
-                                                 :explications)');
+                                                 :explications,
+                                                 :conclusion)');
       $req2->execute(array(
         'mission'      => $mission,
         'reference'    => $reference,
@@ -2201,7 +2205,8 @@
         'heure'        => $heure,
         'objectif'     => $objectif,
         'description'  => $description,
-        'explications' => $explications
+        'explications' => $explications,
+        'conclusion'   => $conclusion
         ));
       $req2->closeCursor();
 
@@ -2230,6 +2235,7 @@
     $reference    = $post['reference'];
     $objectif     = $post['objectif'];
     $explications = $post['explications'];
+    $conclusion   = $post['conclusion'];
 
     // Sauvegarde des données
     $_SESSION['save']['old_mission'] = array('post' => $post, 'files' => $files);
@@ -2392,7 +2398,8 @@
                                                  heure        = :heure,
                                                  objectif     = :objectif,
                                                  description  = :description,
-                                                 explications = :explications
+                                                 explications = :explications,
+                                                 conclusion   = :conclusion
                                            WHERE id = ' . $id);
       $req2->execute(array(
         'mission'      => $mission,
@@ -2401,7 +2408,8 @@
         'heure'        => $heure,
         'objectif'     => $objectif,
         'description'  => $description,
-        'explications' => $explications
+        'explications' => $explications,
+        'conclusion'   => $conclusion
       ));
       $req2->closeCursor();
 

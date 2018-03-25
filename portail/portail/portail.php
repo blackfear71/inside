@@ -52,6 +52,7 @@
           $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
           $mission->setDescription(htmlspecialchars($mission->getDescription()));
           $mission->setExplications(htmlspecialchars($mission->getExplications()));
+          $mission->setConclusion(htmlspecialchars($mission->getConclusion()));
           $mission->setStatut(htmlspecialchars($mission->getStatut()));
         }
       }

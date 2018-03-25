@@ -1447,7 +1447,7 @@
 	background-color: #e3e3e3;
 }
 
-.textarea_explications_mission
+.textarea_right_mission
 {
 	width: calc(100% - 20px);
 	min-height: 30px;

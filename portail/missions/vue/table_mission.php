@@ -34,6 +34,16 @@
       echo '</td>';
     echo '</tr>';
 
+    // Conclusion
+    if (date('Ymd') > $detailsMission->getDate_fin())
+    {
+      echo '<tr>';
+        echo '<td colspan="2" class="conclusion_details_mission">';
+          echo nl2br($detailsMission->getConclusion());
+        echo '</td>';
+      echo '</tr>';
+    }
+
     // Objectif
     echo '<tr>';
       echo '<td class="td_details_mission_left">';

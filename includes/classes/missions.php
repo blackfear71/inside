@@ -10,6 +10,7 @@
     private $objectif;
     private $description;
     private $explications;
+    private $conclusion;
     private $statut;
 
     // Constructeur par défaut (objet vide)
@@ -24,6 +25,7 @@
       $this->objectif     = '';
       $this->description  = '';
       $this->explications = '';
+      $this->conclusion = '';
       $this->statut       = '';
     }
 
@@ -65,6 +67,9 @@
 
       if (isset($data['explications']))
         $this->explications = $data['explications'];
+
+      if (isset($data['conclusion']))
+        $this->conclusion   = $data['conclusion'];
     }
 
     // getters et setters pour l'objet Mission
@@ -165,6 +170,17 @@
     public function getExplications()
     {
       return $this->explications;
+    }
+
+    // Conclusion
+    public function setConclusion($conclusion)
+    {
+      $this->conclusion = $conclusion;
+    }
+
+    public function getConclusion()
+    {
+      return $this->conclusion;
     }
 
     // Statut mission
