@@ -3,7 +3,8 @@ $(function()
   /***************************/
   /***   Initialisations   ***/
   /***************************/
-  var showChat = initCookieChat();
+  var showChat   = initCookieChat();
+
   setInterval(rafraichirConversation, 3000, false); // après avoir passé "init" en paramètre, on passe toujours false ensuite à rafraichirConversation()
 
   /******************/
@@ -91,7 +92,13 @@ $(function()
   // Fonction de rafraichissement du contenu & formatage des messages
   function rafraichirConversation(scrollUpdate)
   {
-    //$('#conversation').load('/inside/includes/chat/content_chat.xml');
+    // Si la scrollbar est déjà en bas on va quand même la remettre en bas en cas d'arrivée de nouveau messages
+    var scrollDown = isScrollbarDown();
+
+    if (scrollDown == true)
+      scrollUpdate = true;
+
+    // Gestion de l'affichage
     $.get('/inside/includes/chat/content_chat.xml', function(display)
     {
       $('#conversation').html('');
@@ -189,6 +196,14 @@ $(function()
   {
     var height = $('#scroll_conversation')[0].scrollHeight;
     $('#scroll_conversation').scrollTop(height);
+  }
+
+  // Détermine si la scrollabr est en bas
+  function isScrollbarDown()
+  {
+    var isScrollBottom = $('#scroll_conversation').scrollTop() + $('#scroll_conversation').innerHeight() >= $('#scroll_conversation')[0].scrollHeight;
+
+    return isScrollBottom;
   }
 
   // Encodage des caractères spéciaux
