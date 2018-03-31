@@ -111,12 +111,12 @@ $(function()
         if (identifiant != "" && text != "")
         {
           // Formatage pseudo à partir du tableau php récupéré
-          listUsers.forEach(function(user)
+          $.each(listUsers, function(key, value)
           {
-            if (identifiant == user.identifiant)
+            if (identifiant == value.identifiant)
             {
-              pseudo = user.pseudo;
-              avatar = user.avatar;
+              pseudo = value.pseudo;
+              avatar = value.avatar;
               return false;
             }
           });
@@ -153,7 +153,6 @@ $(function()
       // On repositionne le scroll en bas si on a saisi un message ou que la page s'initialise
       if (scrollUpdate == "init" || scrollUpdate == true)
         setScrollbarDown();
-
     });
   }
 
@@ -203,7 +202,13 @@ $(function()
       '"': '&quot;',
       "'": '&#039;'
     };
-    return str.replace(/[&<>"']/g, function(m) {return map[m];});
+
+    replace = str.replace(/[&<>"']/g, function(m)
+    {
+      return map[m];
+    });
+
+    return replace;
   }
 
   // Décodage des caractères spéciaux
@@ -211,13 +216,19 @@ $(function()
   {
     var map =
     {
-      '&amp;': '&',
-      '&lt;': '<',
-      '&gt;': '>',
+      '&amp;' : '&',
+      '&lt;'  : '<',
+      '&gt;'  : '>',
       '&quot;': '"',
       '&#039;': "'"
     };
-    return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
+
+    replace = str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m)
+    {
+      return map[m];
+    });
+
+    return replace;
   }
 
   /******************/
