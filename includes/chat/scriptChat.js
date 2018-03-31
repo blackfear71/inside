@@ -80,6 +80,7 @@ $(function()
       document.getElementById('scroll_conversation').style.display = "block";
       document.getElementById('form_chat').style.display           = "block";
       setCookie("showChat", true);
+      setScrollbarDown();
     }
 
     showChat = getCookie("showChat");
