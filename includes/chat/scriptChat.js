@@ -1,16 +1,11 @@
 $(function()
 {
-  /***************************/
-  /***   Initialisations   ***/
-  /***************************/
-  var showChat   = initCookieChat();
-
-  setInterval(rafraichirConversation, 3000, false); // après avoir passé "init" en paramètre, on passe toujours false ensuite à rafraichirConversation()
-
-  /******************/
-  /***   Appels   ***/
-  /******************/
-  rafraichirConversation("init");
+  /************************************/
+  /***   Initialisations / Appels   ***/
+  /************************************/
+  var showChat = initCookieChat();
+  rafraichirConversation(true);
+  setInterval(rafraichirConversation, 4000, false); // après avoir passé TRUE en paramètre, on passe toujours FALSE ensuite à rafraichirConversation()
 
   /*******************/
   /***   Actions   ***/
@@ -158,7 +153,7 @@ $(function()
       });
 
       // On repositionne le scroll en bas si on a saisi un message ou que la page s'initialise
-      if (scrollUpdate == "init" || scrollUpdate == true)
+      if (scrollUpdate == true)
         setScrollbarDown();
     });
   }
