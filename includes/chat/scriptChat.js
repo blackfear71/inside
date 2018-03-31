@@ -179,7 +179,6 @@ $(function()
   {
     // On met à jour la conversation après un petit temps afin de laisser le temps d'enregistrer le message pour le rafraichir
     setTimeout(rafraichirConversation, 500, true);
-    setTimeout(setScrollbarDown, 500);
 
     // On positionne le curseur dans la zone de saisie
     $('#message_chat').val('');
