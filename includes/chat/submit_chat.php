@@ -12,17 +12,19 @@
     fclose($file);
   }
 
-  // Création des éléments
-  $dom = new DOMDocument();
-  $dom->load('content_chat.xml');
-  $fragment = $dom->createDocumentFragment();
-
   // Récupération des données
   $nom      = $_POST['identifiant'];
   $message  = $_POST['message'];
 
-  // Formatage du message
-  $ligne =
+  if (!empty($nom) AND !empty($message))
+  {
+    // Création des éléments
+    $dom = new DOMDocument();
+    $dom->load('content_chat.xml');
+    $fragment = $dom->createDocumentFragment();
+
+    // Formatage du message
+    $ligne =
 '  <message>
     <identifiant>' . $nom . '</identifiant>
     <text>' . $message . '</text>
@@ -31,8 +33,9 @@
   </message>
 ';
 
-  // Insersion dans le noeud puis le fichier
-  $fragment->appendXML($ligne);
-  $dom->documentElement->appendChild($fragment);
-  $dom->save('content_chat.xml');
+    // Insersion dans le noeud puis le fichier
+    $fragment->appendXML($ligne);
+    $dom->documentElement->appendChild($fragment);
+    $dom->save('content_chat.xml');
+  }
 ?>

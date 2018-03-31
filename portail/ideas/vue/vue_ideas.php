@@ -5,15 +5,16 @@
     <meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
     <meta name="keywords" content="Inside, portail, CDS Finance" />
 
-  	<link rel="icon" type="image/png" href="/inside/favicon.png" />
-  	<link rel="stylesheet" href="/inside/style.css" />
+    <link rel="icon" type="image/png" href="/inside/favicon.png" />
+    <link rel="stylesheet" href="/inside/style.css" />
     <link rel="stylesheet" href="styleTheBox.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/script.js"></script>
 
-  	<title>Inside - &#35;TheBox</title>
+    <title>Inside - &#35;TheBox</title>
   </head>
 
 	<body>

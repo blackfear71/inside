@@ -63,8 +63,8 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | user     | Contient les données utilisateurs et préférences         |
 | missions | Contient les données des missions générées               |
 | theme    | Contient les données des thèmes                          |
+| chat     | Contient les données du chat (données utilisateurs)      |
 
 | COOKIE   | Description                                         |
 | -------- | --------------------------------------------------- |
 | showChat | Etat de la fenêtre de chat                          |
-| chat     | Contient les données du chat (données utilisateurs) |

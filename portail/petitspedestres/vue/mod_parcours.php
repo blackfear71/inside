@@ -8,6 +8,7 @@
   	<link rel="icon" type="image/png" href="/inside/favicon.png" />
   	<link rel="stylesheet" href="/inside/style.css" />
   	<link rel="stylesheet" href="stylePP.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -31,10 +32,11 @@
       <!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu">
 				<?php
-					$disconnect  = true;
-					$back        = true;
-					$ideas       = true;
-					$reports     = true;
+					$disconnect       = true;
+          $ajouter_parcours = true;
+					$back             = true;
+					$ideas            = true;
+					$reports          = true;
 
 					include('../../includes/aside.php');
 				?>

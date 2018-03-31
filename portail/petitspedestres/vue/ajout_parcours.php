@@ -6,7 +6,7 @@
     <meta name="keywords" content="Inside, portail, CDS Finance" />
 
   	<link rel="icon" type="image/png" href="../../favicon.png" />
-  	<link rel="stylesheet" href="../../style.css" />
+  	<link rel="stylesheet" href="/inside/style.css" />
   	<link rel="stylesheet" href="stylePP.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
