@@ -96,8 +96,6 @@ $(function()
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
     $.post('/inside/includes/chat/content_chat.xml', function(display)
     {
-      console.log(display);
-
       $('#conversation').html('');
 
       // Affichage et formatage de tous les messages
