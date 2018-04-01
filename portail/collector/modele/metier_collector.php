@@ -307,7 +307,7 @@
 
     foreach ($list_collectors as $collector)
     {
-      for ($i = 1; $i <= 7; $i++)
+      for ($i = 1; $i <= 8; $i++)
       {
         // Recherche du nombre de smileys
         $req = $bdd->query('SELECT COUNT(id) AS nb_smileys FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i);
@@ -372,6 +372,8 @@
       $vote = 6;
     elseif (isset($post['smiley_7']))
       $vote = 7;
+    elseif (isset($post['smiley_8']))
+      $vote = 8;
     else
       $vote = 0;
 

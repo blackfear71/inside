@@ -26,6 +26,23 @@ Ne pas toucher aux fichiers suivants lors de vos développements :
 
 Si des différences sont constatées, veuillez les annuler.
 
+## Les langages utilisé
+Au travers de l'architecture MVC (Modèle-Vue-Contrôleur) utilisée, plusieurs langages sont appliqués afin de correspondre aux différents besoins du site.
+### HTML
+> Utilisé pour la **structure des pages**. Il est conseillé de recopier la structure d'une page lors des développements afin de partir d'une base propre et ensuite apporter des modifications.
+### CSS
+> Utilisé pour la **mise en forme** et les **animations** basiques. Chaque section du site possède sa propre feuille de style.
+### PHP
+> Utilisé pour les **interactions côté serveur**. Dans l'architecture MVC, le Contrôleur et le Modèle sont codés en PHP. Il est conseillé de recopier un Contrôleur lors des développements afin de partir d'une base propre et ensuite apporter des modifications.
+### MySQL
+> Utilisé pour toutes les **requêtes** aux différentes tables de la base de données. Ces requêtes sont généralement décrites dans le Modèle et encapsulées dans du code PHP.
+### Javascript
+> Utilisé pour les **interactions côté client**. Chaque section du site possède généralement sa propre feuille de scripts. Des animations plus poussées sont codées en Javascript et permettent de modifier visuellement ce qui s'affiche à l'écran de l'utilisateur.
+### jQuery
+> Utilisé pour les **interactions côté client**. Le jQuery est une bibliothèque Javascript permettant de gérer également des animations et autres modifications sur l'écran de l'utilisateur. Il repose sur le même fonctionnement que l'Ajax en simplifiant toutefois les instructions à taper.
+### XML
+> Utilisé pour la **structure de données**. Actuellement utilisé uniquement afin de stocker les conversations du Chat, le formatage des données entre balises permet une extraction simple de chaque propriété d'un noeud.
+
 ## Variables utiles
 ### Les couleurs
 Les couleurs RGB sont principalement utilisées pour la transparence. Dans les autres cas, utiliser les codes hexadécimaux. Voici les couleurs principalement représentées sur la plateforme :
@@ -51,7 +68,6 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 | Jaune moyen     | ![#ffad01](https://placehold.it/15/ffad01/000000?text=+) | #ffad01  |                    |                                        |
 | Blanc           | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) | #ffffff  | rgb(255, 255, 255) |                                        |
 | Noir            | ![#000000](https://placehold.it/15/000000/000000?text=+) | #000000  | rgb(0, 0, 0)       |                                        |
-
 
 ### Les variables globales
 Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées sous forme de tableaux regroupant leur contenu en catégories. Ceci facilite la lecture des données pour les développeurs.

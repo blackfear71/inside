@@ -411,7 +411,8 @@
                           echo '<a onclick="insert_smiley(\':|\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\':D\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
                           echo '<a onclick="insert_smiley(\':O\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':P\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/7.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':P\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':facepalm:\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
                         echo '</div>';
                       echo '</form>';
                     echo '</span>';
@@ -443,7 +444,8 @@
                 	echo '<a onclick="insert_smiley(\':|\', \'insertComment\')"><img src="../../includes/icons/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
                 	echo '<a onclick="insert_smiley(\':D\', \'insertComment\')"><img src="../../includes/icons/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
                   echo '<a onclick="insert_smiley(\':O\', \'insertComment\')"><img src="../../includes/icons/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':P\', \'insertComment\')"><img src="../../includes/icons/smileys/7.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                  echo '<a onclick="insert_smiley(\':P\', \'insertComment\')"><img src="../../includes/icons/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\':facepalm:\', \'insertComment\')"><img src="../../includes/icons/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
                 echo '</div>';
   						echo '</form>';
             echo '</div>';

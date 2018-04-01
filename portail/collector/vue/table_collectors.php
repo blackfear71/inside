@@ -63,7 +63,7 @@
                     echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
 
                   // Gestion autres smileys
-                  for ($j = 1; $j <= 7; $j++)
+                  for ($j = 1; $j <= 8; $j++)
                   {
                     $founded = false;
                     foreach ($listeVotesUsers as $vote)
@@ -97,7 +97,7 @@
               {
                 if ($votes['id'] == $collector->getId())
                 {
-                  for ($k = 1; $k <= 7; $k++)
+                  for ($k = 1; $k <= 8; $k++)
                   {
                     if ($votes['smileys'][$k] != 0)
                     {
@@ -264,7 +264,7 @@
                     echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
 
                   // Gestion autres smileys
-                  for ($j = 1; $j <= 7; $j++)
+                  for ($j = 1; $j <= 8; $j++)
                   {
                     $founded = false;
                     foreach ($listeVotesUsers as $vote)
@@ -323,7 +323,7 @@
               {
                 if ($votes['id'] == $collector->getId())
                 {
-                  for ($k = 1; $k <= 7; $k++)
+                  for ($k = 1; $k <= 8; $k++)
                   {
                     if ($votes['smileys'][$k] != 0)
                     {

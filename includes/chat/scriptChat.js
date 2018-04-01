@@ -5,7 +5,7 @@ $(function()
   /************************************/
   var showChat = initCookieChat();
   rafraichirConversation(true);
-  setInterval(rafraichirConversation, 4000, false); // après avoir passé TRUE en paramètre, on passe toujours FALSE ensuite à rafraichirConversation()
+  setInterval(rafraichirConversation, 4000, false); // après avoir passé une fois TRUE en paramètre, on passe toujours FALSE ensuite à rafraichirConversation()
 
   /*******************/
   /***   Actions   ***/
@@ -177,7 +177,7 @@ $(function()
   // Fonction de rafraichissement après saisie message et repositionnement zone de saisie
   function afficheConversation()
   {
-    // On met à jour la conversation après un petit temps afin de laisser le temps d'enregistrer le message pour le rafraichir
+    // On met à jour la conversation après un petit temps
     setTimeout(rafraichirConversation, 500, true);
 
     // On positionne le curseur dans la zone de saisie

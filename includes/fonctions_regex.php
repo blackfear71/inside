@@ -93,7 +93,8 @@
 								htmlspecialchars(":O"),
 								htmlspecialchars(":-O"),
 								htmlspecialchars(":P"),
-								htmlspecialchars(":-P")
+								htmlspecialchars(":-P"),
+								htmlspecialchars(":facepalm:")
 							 );
 		$out = array('<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley" />',
 							 	 '<img src="/inside/includes/icons/smileys/1.png" alt=":-)" class="smiley" />',
@@ -108,7 +109,8 @@
 								 '<img src="/inside/includes/icons/smileys/6.png" alt=":O" class="smiley" />',
 								 '<img src="/inside/includes/icons/smileys/6.png" alt=":-O" class="smiley" />',
 								 '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley" />',
-								 '<img src="/inside/includes/icons/smileys/7.png" alt=":-P" class="smiley" />'
+								 '<img src="/inside/includes/icons/smileys/7.png" alt=":-P" class="smiley" />',
+								 '<img src="/inside/includes/icons/smileys/8.png" alt=":facepalm:" class="smiley" />'
 								);
 		$text = str_replace($in, $out, $text);
 

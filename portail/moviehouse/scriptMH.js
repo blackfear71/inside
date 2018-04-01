@@ -81,7 +81,7 @@ function insert_smiley(smiley, id)
   var where = document.getElementById(id);
 
   // Texte à insérer + espace
-  var phrase = smiley +" ";
+  var phrase = smiley + " ";
 
   // Contenu déjà présent + Texte à insérer
   where.value += phrase;
