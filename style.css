@@ -1320,10 +1320,10 @@ footer
 /*** Chat ***/
 .zone_chat
 {
-	max-width: 25%;
+	width: 400px;
 	position: absolute;
 	bottom: 50px;
-	right: 250px;
+	right: 7.5%;
 	box-shadow: 0 0 5px #5c5c5c;
 	z-index: 1;
 }
