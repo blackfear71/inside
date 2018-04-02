@@ -26,7 +26,7 @@ Ne pas toucher aux fichiers suivants lors de vos développements :
 
 Si des différences sont constatées, veuillez les annuler.
 
-## Les langages utilisé
+## Les langages utilisés
 Au travers de l'architecture MVC (Modèle-Vue-Contrôleur) utilisée, plusieurs langages sont appliqués afin de correspondre aux différents besoins du site.
 ### HTML
 > Utilisé pour la **structure des pages**. Il est conseillé de recopier la structure d'une page lors des développements afin de partir d'une base propre et ensuite apporter des modifications.
