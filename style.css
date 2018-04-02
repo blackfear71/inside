@@ -1540,3 +1540,11 @@ footer
 	margin-bottom: -20px;
 	margin-top: 4px;
 }
+
+.smiley_chat
+{
+	width: 25px;
+	vertical-align: middle;
+	border: solid 1px white;
+	border-radius: 50%;
+}

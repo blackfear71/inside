@@ -103,7 +103,7 @@ $(function()
       {
         var $message    = $(this);
         var identifiant = $message.find('identifiant').text();
-        var text        = decodeHtml($message.find('text').text());
+        var text        = changeSmileys(decodeHtml($message.find('text').text()));
         var date        = $message.find('date').text();
         var time        = $message.find('time').text();
         var pseudo      = "Un ancien utilisateur";
@@ -240,6 +240,46 @@ $(function()
     return replace;
   }
 
+  // Remplace les smileys
+  function changeSmileys(text)
+  {
+    var emoticons =
+    {
+      ':)'         : '<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley_chat" />',
+      ':-)'        : '<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley_chat" />',
+      ';)'         : '<img src="/inside/includes/icons/smileys/2.png" alt=":)" class="smiley_chat" />',
+      ';-)'        : '<img src="/inside/includes/icons/smileys/2.png" alt=":)" class="smiley_chat" />',
+      ':('         : '<img src="/inside/includes/icons/smileys/3.png" alt=":)" class="smiley_chat" />',
+      ':-('        : '<img src="/inside/includes/icons/smileys/3.png" alt=":)" class="smiley_chat" />',
+      ':|'         : '<img src="/inside/includes/icons/smileys/4.png" alt=":)" class="smiley_chat" />',
+      ':-|'        : '<img src="/inside/includes/icons/smileys/4.png" alt=":)" class="smiley_chat" />',
+      ':D'         : '<img src="/inside/includes/icons/smileys/5.png" alt=":)" class="smiley_chat" />',
+      ':-D'        : '<img src="/inside/includes/icons/smileys/5.png" alt=":)" class="smiley_chat" />',
+      ':O'         : '<img src="/inside/includes/icons/smileys/6.png" alt=":)" class="smiley_chat" />',
+      ':-O'        : '<img src="/inside/includes/icons/smileys/6.png" alt=":)" class="smiley_chat" />',
+      ':P'         : '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley_chat" />',
+      ':-P'        : '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley_chat" />',
+      ':facepalm:' : '<img src="/inside/includes/icons/smileys/8.png" alt=":facepalm:" class="smiley_chat" />'
+    };
+
+    var patterns = [];
+    var metachars = /[[\]{}()*+?.\\|^$\-,&#\s]/g;
+
+    // On définit un modèle pattern pour chaque propriété
+    for (var i in emoticons)
+    {
+      // On échappe les metachars
+      if (emoticons.hasOwnProperty(i))
+        patterns.push('(' + i.replace(metachars, "\\$&") + ')');
+    }
+
+    // On construit l'expression régulière et on remplace
+    return text.replace(new RegExp(patterns.join('|'),'g'), function (match)
+    {
+      return typeof emoticons[match] != 'undefined' ? emoticons[match] : match;
+    });
+  }
+
   /******************/
   /***   Debugg   ***/
   /******************/
@@ -267,4 +307,50 @@ $(function()
   }
 
   //console.log('cookie : ' + showChat);*/
+
+  /****************************/
+  /***   Saisie dynamique   ***/
+  /****************************/
+  /*var map =
+  {
+    //"<3": "\u2764\uFE0F",
+    //"</3": "\uD83D\uDC94",
+    //":D": "\uD83D\uDE00",
+    //":)": "\uD83D\uDE03",
+    //";)": "\uD83D\uDE09",
+    //":(": "\uD83D\uDE12",
+    //":p": "\uD83D\uDE1B",
+    //";p": "\uD83D\uDE1C",
+    //":'(": "\uD83D\uDE22"
+
+    ':)'         : '<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley_chat" />',
+    ':-)'        : '<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley_chat" />',
+    ';)'         : '<img src="/inside/includes/icons/smileys/2.png" alt=":)" class="smiley_chat" />',
+    ';-)'        : '<img src="/inside/includes/icons/smileys/2.png" alt=":)" class="smiley_chat" />',
+    ':('         : '<img src="/inside/includes/icons/smileys/3.png" alt=":)" class="smiley_chat" />',
+    ':-('        : '<img src="/inside/includes/icons/smileys/3.png" alt=":)" class="smiley_chat" />',
+    ':|'         : '<img src="/inside/includes/icons/smileys/4.png" alt=":)" class="smiley_chat" />',
+    ':-|'        : '<img src="/inside/includes/icons/smileys/4.png" alt=":)" class="smiley_chat" />',
+    ':D'         : '<img src="/inside/includes/icons/smileys/5.png" alt=":)" class="smiley_chat" />',
+    ':-D'        : '<img src="/inside/includes/icons/smileys/5.png" alt=":)" class="smiley_chat" />',
+    ':O'         : '<img src="/inside/includes/icons/smileys/6.png" alt=":)" class="smiley_chat" />',
+    ':-O'        : '<img src="/inside/includes/icons/smileys/6.png" alt=":)" class="smiley_chat" />',
+    ':P'         : '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley_chat" />',
+    ':-P'        : '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley_chat" />',
+    ':facepalm:' : '<img src="/inside/includes/icons/smileys/8.png" alt=":facepalm:" class="smiley_chat" />'
+  };
+
+  function escapeSpecialChars(regex)
+  {
+    return regex.replace(/([()[{*+.$^\\|?])/g, '\\$1');
+  }
+
+  document.getElementById('message_chat').oninput = function()
+  {
+    for (var i in map)
+    {
+      var regex = new RegExp(escapeSpecialChars(i), 'gim');
+      this.value = this.value = this.value.replace(regex, map[i]);
+    }
+  };*/
 });
