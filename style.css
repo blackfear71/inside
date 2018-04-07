@@ -1678,7 +1678,7 @@ footer
 .offline:before, .offline:after
 {
 	content: '';
-	width: 50px;
+	width: 52px;
 	border-bottom: solid 1px #b3b3b3;
 	display: inline-block;
 	vertical-align: middle;
