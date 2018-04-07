@@ -315,18 +315,14 @@ $(function()
   // Fonction de rafraichissement des utilisateurs
   function rafraichirUtilisateurs()
   {
-    //console.log('refresh_users');
-
-    $('#utilisateurs_chat').html('');
-
-    var html;
-
-    //console.log(listUsers);
+    console.log('refresh_users');
 
     // Lecture des utilisateurs et du statut de connexion
     $.post('/inside/includes/ping.php', {function: 'getPings'}, function(users)
     {
+      $('#utilisateurs_chat').html('');
       var offline = false;
+      var html;
 
       // Séparation des utilisateur connectés (toujours au minimum l'utilisateur en cours)
       html = '<div class="online">En ligne</div>';
