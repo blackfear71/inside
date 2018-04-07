@@ -93,6 +93,7 @@
     $salt             = rand();
     $password         = htmlspecialchars(hash('sha1', $post['password'] . $salt));
     $confirm_password = htmlspecialchars(hash('sha1', $post['confirm_password'] . $salt));
+    $ping             = "";
     $reset            = "I";
     $avatar           = "";
     $email            = "";
@@ -138,6 +139,7 @@
           $req = $bdd->prepare('INSERT INTO users(identifiant,
                                                   salt,
                                                   password,
+                                                  ping,
                                                   reset,
                                                   pseudo,
                                                   avatar,
@@ -148,6 +150,7 @@
                                            VALUES(:identifiant,
                                                   :salt,
                                                   :password,
+                                                  :ping,
                                                   :reset,
                                                   :pseudo,
                                                   :avatar,
@@ -160,6 +163,7 @@
   					'identifiant' => $trigramme,
             'salt'        => $salt,
             'password'    => $password,
+            'ping'        => $ping,
             'reset'       => $reset,
   					'pseudo'      => $pseudo,
   					'avatar'      => $avatar,

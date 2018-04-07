@@ -3,6 +3,8 @@
   {
     private $id;
     private $identifiant;
+    private $ping;
+    private $connected;
     private $reset;
     private $pseudo;
     private $avatar;
@@ -16,6 +18,8 @@
     {
       $this->id          = 0;
       $this->identifiant = '';
+      $this->ping        = '';
+      $this->connected   = '';
       $this->reset       = '';
       $this->pseudo      = '';
       $this->avatar      = '';
@@ -42,6 +46,9 @@
 
       if (isset($data['identifiant']))
         $this->identifiant = $data['identifiant'];
+
+      if (isset($data['ping']))
+        $this->ping        = $data['ping'];
 
       if (isset($data['reset']))
         $this->reset       = $data['reset'];
@@ -86,6 +93,28 @@
     public function getIdentifiant()
     {
       return $this->identifiant;
+    }
+
+    // Ping de connexion
+    public function setPing($ping)
+    {
+      $this->ping = $ping;
+    }
+
+    public function getPing()
+    {
+      return $this->ping;
+    }
+
+    // Statut de connexion
+    public function setConnected($connected)
+    {
+      $this->connected = $connected;
+    }
+
+    public function getConnected()
+    {
+      return $this->connected;
     }
 
     // Top statut inscription

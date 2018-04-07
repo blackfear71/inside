@@ -31,6 +31,7 @@
 			<aside id="left_menu">
 				<?php
 					$disconnect  = true;
+          $back        = true;
 					$ideas       = true;
 					$reports     = true;
 

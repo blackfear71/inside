@@ -105,33 +105,6 @@ function changeColorToGrey(id, active)
   }
 }
 
-// Redimensionne la zone de recherche quand sélectionnée et la refemre quand on clique n'importe où sur le body
-$(function()
-{
-  $("body").click(function()
-  {
-    // Barre de recherche
-    if (document.getElementById("resizeBar") != null && document.getElementById("color_search") != null)
-    {
-      document.getElementById("resizeBar").style.width              = "300px";
-      document.getElementById("resizeBar").style.transition         = "width ease 0.4s";
-      document.getElementById("color_search").style.backgroundColor = "#e3e3e3";
-      document.getElementById("color_search").style.transition      = "background-color ease 0.4s";
-    }
-  });
-  $(document.getElementById("color_search")).click(function(event)
-  {
-    if (document.getElementById("resizeBar") != null && document.getElementById("color_search") != null)
-    {
-      document.getElementById("resizeBar").style.width              = "100%";
-      document.getElementById("resizeBar").style.transition         = "width ease 0.4s";
-      document.getElementById("color_search").style.backgroundColor = "white";
-      document.getElementById("color_search").style.transition      = "background-color ease 0.4s";
-      event.stopPropagation();
-    }
-  });
-})
-
 // Gestion des cookies
 function setCookie(cookieName, cookieValue)
 {
@@ -171,3 +144,40 @@ function deleteCookie(cookieName)
 {
   document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
+
+// Quand le document est prêt
+$(function()
+{
+  // Redimensionne la zone de recherche quand sélectionnée et la referme quand on clique n'importe où sur le body
+  $("body").click(function()
+  {
+    // Barre de recherche
+    if ($('#resizeBar') != null && $('#color_search') != null)
+    {
+      $('#resizeBar').css('width', '300px');
+      $("#resizeBar").css('transition', 'width ease 0.4s');
+      $("#color_search").css('background-color', '#e3e3e3');
+      $("#color_search").css('transition', 'background-color ease 0.4s');
+    }
+  });
+  $($('#color_search')).click(function(event)
+  {
+    if ($('#resizeBar') != null && $('#color_search') != null)
+    {
+      $("#resizeBar").css('width', '100%');
+      $("#resizeBar").css('transition', 'width ease 0.4s');
+      $("#color_search").css('background-color', 'white');
+      $("#color_search").css('transition', 'background-color ease 0.4s');
+      event.stopPropagation();
+    }
+  });
+
+  // Mise à jour du ping à chaque chargement de page et toutes les minutes (si page ouverte)
+  updatePing();
+  setInterval(updatePing, 60000);
+
+  function updatePing()
+  {
+    $.post('/inside/includes/ping.php', {function: 'updatePing'});
+  }
+});

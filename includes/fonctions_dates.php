@@ -173,7 +173,7 @@ function ecartDatesEvent($date_deb, $date_fin)
   $calcul = abs($date2 - $date1);
 
   // Formatage
-  $ecart = $calcul / (60*60*24);
+  $ecart = ($calcul / (60*60*24)) + 1;
 
   return $ecart;
 }

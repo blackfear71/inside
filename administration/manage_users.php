@@ -68,6 +68,7 @@
 			foreach ($listeUsers as &$user)
 			{
 				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
+        $user->setPing(htmlspecialchars($user->getPing()));
 				$user->setReset(htmlspecialchars($user->getReset()));
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
         $user->setAvatar(htmlspecialchars($user->getAvatar()));
