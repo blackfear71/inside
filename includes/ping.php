@@ -8,13 +8,16 @@
   {
     // Mise à jour du ping
     case 'updatePing':
-      $ping = date("Y-m-d_H-i-s_") . rand(1,11111111);
+      if ($_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
+      {
+        $ping = date("Y-m-d_H-i-s_") . rand(1,11111111);
 
-      $req = $bdd->prepare('UPDATE users SET ping = :ping WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
-      $req->execute(array(
-        'ping' => $ping
-      ));
-      $req->closeCursor();
+        $req = $bdd->prepare('UPDATE users SET ping = :ping WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
+        $req->execute(array(
+          'ping' => $ping
+        ));
+        $req->closeCursor();
+      }
       break;
 
     // Lecture des utilisateurs et statut de connexion

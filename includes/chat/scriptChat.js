@@ -320,8 +320,6 @@ $(function()
     // Lecture des utilisateurs et du statut de connexion
     $.post('/inside/includes/ping.php', {function: 'getPings'}, function(users)
     {
-      console.log(users);
-
       $('#utilisateurs_chat').html('');
       var offline = false;
       var html;
