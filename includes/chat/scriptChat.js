@@ -89,6 +89,13 @@ $(function()
     if (e.which == 13)
     {
       envoyerMessage();
+
+      // Eventuel repli de la zone d'insertion de smileys
+      if ($('.zone_insert_smiley').css('display') == "block")
+      {
+        $('.zone_insert_smiley').css('display', 'none');
+        $('.triangle_chat_smileys').css('display', 'none');
+      }
       return false;
     }
   });
@@ -100,6 +107,37 @@ $(function()
       $('#onglet_users').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
     else if (windowChat == "2" && $('#onglet_chat').is(':hover'))
       $('#onglet_chat').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
+  });
+
+  // Afficher/masquer la fenêtre d'insertion de smileys au clic
+  $('#fenetres_chat').on('click', '#insert_smiley', function()
+  {
+    if ($('.zone_insert_smiley').css('display') == "none")
+    {
+      $('.zone_insert_smiley').css('display', 'block');
+      $('.triangle_chat_smileys').css('display', 'block');
+    }
+    else
+    {
+      $('.zone_insert_smiley').css('display', 'none');
+      $('.triangle_chat_smileys').css('display', 'none');
+    }
+  });
+
+  // Repli de la zone d'insertion de smileys au clic en dehors
+  $('#fenetres_chat').on('click', '#scroll_conversation, #message_chat, #send_message_chat', function()
+  {
+    if ($('.zone_insert_smiley').css('display') == "block")
+    {
+      $('.zone_insert_smiley').css('display', 'none');
+      $('.triangle_chat_smileys').css('display', 'none');
+    }
+  });
+
+  // Insertion smiley au clic
+  $('#fenetres_chat').on('click', '.click_smiley', function()
+  {
+    insertSmiley($(this));
   });
 
   /*********************/
@@ -196,9 +234,26 @@ $(function()
 
       // Saisie
       html += '<form action="#" method="post" id="form_chat" class="form_saisie_chat">';
+        html += '<div class="zone_insert_smiley">';
+          html += '<a id="smiley_1" class="click_smiley"><img src="/inside/includes/icons/smileys/1.png" alt="smiley" title=":)" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_2" class="click_smiley"><img src="/inside/includes/icons/smileys/2.png" alt="smiley" title=";)" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_3" class="click_smiley"><img src="/inside/includes/icons/smileys/3.png" alt="smiley" title=":(" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_4" class="click_smiley"><img src="/inside/includes/icons/smileys/4.png" alt="smiley" title=":|" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_5" class="click_smiley"><img src="/inside/includes/icons/smileys/5.png" alt="smiley" title=":D" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_6" class="click_smiley"><img src="/inside/includes/icons/smileys/6.png" alt="smiley" title=":O" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_7" class="click_smiley"><img src="/inside/includes/icons/smileys/7.png" alt="smiley" title=":P" class="insert_smiley_chat" /></a>';
+          html += '<a id="smiley_8" class="click_smiley"><img src="/inside/includes/icons/smileys/8.png" alt="smiley" title=":facepalm:" class="insert_smiley_chat" /></a>';
+        html += '</div>';
+        html += '<div class="triangle_chat_smileys"></div>';
+
         html += '<input type="hidden" id="identifiant_chat" value="' + currentUser + '" />';
-        html += '<a onclick="" class="inserer_smiley"><img src="/inside/includes/icons/smileys.png" alt="smileys" title="Insérer un smiley" class="smileys" /></a>';
+
+        html += '<a id="insert_smiley" class="inserer_smiley">';
+          html += '<img src="/inside/includes/icons/smileys.png" alt="smileys" title="Insérer un smiley" class="smileys" />';
+        html += '</a>';
+
         html += '<input type="text" id="message_chat" name="message_chat" placeholder="Saisir un message..." autocomplete="off" class="saisie_chat" />';
+
         html += '<button type="button" id="send_message_chat" title="Envoyer" class="bouton_chat"></button>';
       html += '</form>';
     }
@@ -484,77 +539,35 @@ $(function()
     });
   }
 
+  // Insère un smiley dans la zone de saisie
+  function insertSmiley(object)
+  {
+    var transco =
+    {
+      'smiley_1' : ' :) ',
+      'smiley_2' : ' ;) ',
+      'smiley_3' : ' :( ',
+      'smiley_4' : ' :| ',
+      'smiley_5' : ' :D ',
+      'smiley_6' : ' :O ',
+      'smiley_7' : ' :P ',
+      'smiley_8' : ' :facepalm: '
+    };
+
+    $('#message_chat').val($('#message_chat').val() + transco[object.attr("id")]);
+    $('#message_chat').focus();
+
+    // Repli de la zone d'insertion de smiley
+    if ($('.zone_insert_smiley').css('display') == "block")
+    {
+      $('.zone_insert_smiley').css('display', 'none');
+      $('.triangle_chat_smileys').css('display', 'none');
+    }
+  }
+
   /******************/
   /***   Debugg   ***/
   /******************/
-  /*deleteCookie("showChat");
-
+  //deleteCookie("showChat");
   //console.log('cookies : ' + document.cookie);
-
-  // Debugg liste utilisateurs
-  var listUsers = <?php //echo $listUsersJson; ?>;
-  listUsers.forEach(function(user)
-  {
-    test = afficherProps(user, "user");
-    console.log(test);
-  });
-
-  function afficherProps(obj, nomObjet)
-  {
-    var resultat = "";
-    for (var i in obj)
-    {
-      if (obj.hasOwnProperty(i))
-          resultat += nomObjet + "." + i + " = " + obj[i] + "\n";
-    }
-    return resultat;
-  }
-
-  //console.log('cookie : ' + showChat);*/
-
-  /****************************/
-  /***   Saisie dynamique   ***/
-  /****************************/
-  /*var map =
-  {
-    //"<3": "\u2764\uFE0F",
-    //"</3": "\uD83D\uDC94",
-    //":D": "\uD83D\uDE00",
-    //":)": "\uD83D\uDE03",
-    //";)": "\uD83D\uDE09",
-    //":(": "\uD83D\uDE12",
-    //":p": "\uD83D\uDE1B",
-    //";p": "\uD83D\uDE1C",
-    //":'(": "\uD83D\uDE22"
-
-    ':)'         : '<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley_chat" />',
-    ':-)'        : '<img src="/inside/includes/icons/smileys/1.png" alt=":)" class="smiley_chat" />',
-    ';)'         : '<img src="/inside/includes/icons/smileys/2.png" alt=":)" class="smiley_chat" />',
-    ';-)'        : '<img src="/inside/includes/icons/smileys/2.png" alt=":)" class="smiley_chat" />',
-    ':('         : '<img src="/inside/includes/icons/smileys/3.png" alt=":)" class="smiley_chat" />',
-    ':-('        : '<img src="/inside/includes/icons/smileys/3.png" alt=":)" class="smiley_chat" />',
-    ':|'         : '<img src="/inside/includes/icons/smileys/4.png" alt=":)" class="smiley_chat" />',
-    ':-|'        : '<img src="/inside/includes/icons/smileys/4.png" alt=":)" class="smiley_chat" />',
-    ':D'         : '<img src="/inside/includes/icons/smileys/5.png" alt=":)" class="smiley_chat" />',
-    ':-D'        : '<img src="/inside/includes/icons/smileys/5.png" alt=":)" class="smiley_chat" />',
-    ':O'         : '<img src="/inside/includes/icons/smileys/6.png" alt=":)" class="smiley_chat" />',
-    ':-O'        : '<img src="/inside/includes/icons/smileys/6.png" alt=":)" class="smiley_chat" />',
-    ':P'         : '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley_chat" />',
-    ':-P'        : '<img src="/inside/includes/icons/smileys/7.png" alt=":P" class="smiley_chat" />',
-    ':facepalm:' : '<img src="/inside/includes/icons/smileys/8.png" alt=":facepalm:" class="smiley_chat" />'
-  };
-
-  function escapeSpecialChars(regex)
-  {
-    return regex.replace(/([()[{*+.$^\\|?])/g, '\\$1');
-  }
-
-  document.getElementById('message_chat').oninput = function()
-  {
-    for (var i in map)
-    {
-      var regex = new RegExp(escapeSpecialChars(i), 'gim');
-      this.value = this.value = this.value.replace(regex, map[i]);
-    }
-  };*/
 });

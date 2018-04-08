@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/inside/includes/chat/styleChat.css" />
 <script type="text/javascript" src="/inside/includes/chat/scriptChat.js"></script>
 
 <?php
