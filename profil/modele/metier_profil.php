@@ -790,11 +790,13 @@
         case "christmas2017_2":
         // Un coeur en or
         case "golden-egg":
+        // Mettre tous ses oeufs dans le même panier
+        case "rainbow-egg":
           $mission = 0;
 
           if ($success->getReference() == "christmas2017" OR $success->getReference() == "christmas2017_2")
             $reference = "noel_2017";
-          elseif ($success->getReference() == "golden-egg")
+          elseif ($success->getReference() == "golden-egg" OR $success->getReference() == "rainbow-egg")
             $reference = "paques_2018";
 
           // Récupération Id mission
