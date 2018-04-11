@@ -437,7 +437,7 @@ $(function()
   function afficheConversation()
   {
     // On met à jour la conversation après un petit temps
-    setTimeout(rafraichirConversation, 500, true);
+    rafraichirConversation(true);
 
     // On positionne le curseur dans la zone de saisie
     $('#message_chat').val('');

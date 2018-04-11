@@ -333,7 +333,7 @@
 	padding-left: 5px;
 	padding-right: 5px;
 	display: table-cell;
-	vertical-align: bottom;
+	vertical-align: top;
 	font-family: robotolight, Verdana, sans-serif;
 	word-wrap: break-word;
 }

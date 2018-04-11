@@ -24,7 +24,7 @@
     case 'getPings':
       $listUsers = array();
 
-      $req = $bdd->query('SELECT id, identifiant, avatar, ping, pseudo FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+      $req = $bdd->query('SELECT id, identifiant, avatar, ping, pseudo FROM users WHERE identifiant != "admin" AND reset != "D" ORDER BY identifiant ASC');
       while($data = $req->fetch())
       {
         // Récupération des données en base
@@ -46,7 +46,7 @@
           $last_ping = $year . $month . $day . $hour . $minutes . $secondes;
 
           // Date - 5 minutes
-          $limite = date('YmdHis', strtotime('now - 5 minutes'));
+          $limite = date('YmdHis', strtotime('now - 3 minutes'));
 
           // Détermination statut connexion
           if ($last_ping < $limite)
