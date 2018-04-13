@@ -612,23 +612,35 @@
 	line-height: 60px;
 }
 
-.medal_rank
+.zone_medals
 {
 	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+}
+
+.zone_medals_img
+{
+	float: left;
+	border-radius: 2px;
+	background-color: #91d784;
+	margin-right: 10px;
+	height: 40px;
+}
+
+.medal_rank
+{
 	width: 30px;
 	filter: drop-shadow(0px 0px 1px #5c5c5c);
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-top: -4px;
+	padding: 5px;
 }
 
 .ranking_pseudo
 {
 	display: inline-block;
 	line-height: 20px;
-	margin-left: 10px;
-	margin-top: -4px;
-	vertical-align: middle;
+	margin-right: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	background-color: #ff1937;
 	padding: 5px;

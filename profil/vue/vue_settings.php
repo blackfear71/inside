@@ -479,7 +479,7 @@
             echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="bouton_profil" />';
           echo '</form>';
 
-          if ($profil->getReset() == "D")
+          if ($profil->getStatus() == "D")
             echo '<div class="message_profil_2">Une demande est déjà en cours.</div>';
           else
             echo '<div class="message_profil_2">Aucune demande en cours.</div>';

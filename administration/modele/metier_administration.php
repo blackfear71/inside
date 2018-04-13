@@ -16,10 +16,10 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, reset FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $req = $bdd->query('SELECT id, identifiant, pseudo, status FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($data = $req->fetch())
     {
-      if ($data['reset'] == "Y" OR $data['reset'] == "I" OR $data['reset'] == "D")
+      if ($data['status'] == "Y" OR $data['status'] == "I" OR $data['status'] == "D")
       {
         $alert = true;
         break;
@@ -376,7 +376,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, ping, reset, pseudo, avatar, email, beginner, developper FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, beginner, developper FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -938,11 +938,11 @@
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande)
-    $reset = "N";
+    $status = "N";
 
-    $req = $bdd->prepare('UPDATE users SET reset = :reset WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $id_user);
     $req->execute(array(
-      'reset' => $reset
+      'status' => $status
     ));
     $req->closeCursor();
   }
@@ -954,18 +954,18 @@
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande et du mot de passe)
-    $reset = "N";
+    $status = "N";
     $salt  = rand();
 
     // On génère un nouveau mot de passe aléatoire
     $chaine   = random_string(10);
     $password = htmlspecialchars(hash('sha1', $chaine . $salt));
 
-    $req = $bdd->prepare('UPDATE users SET salt = :salt, password = :password, reset = :reset WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET salt = :salt, password = :password, status = :status WHERE id = ' . $id_user);
     $req->execute(array(
-      'salt'         => $salt,
-      'password'     => $password,
-      'reset'        => $reset
+      'salt'     => $salt,
+      'password' => $password,
+      'status'   => $status
     ));
     $req->closeCursor();
 
@@ -987,11 +987,11 @@
     global $bdd;
 
     // On met simplement à jour le status de l'utilisateur
-    $reset = "N";
+    $status = "N";
 
-    $req = $bdd->prepare('UPDATE users SET reset = :reset WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $id_user);
     $req->execute(array(
-      'reset' => $reset
+      'status' => $status
     ));
     $req->closeCursor();
 
@@ -1076,11 +1076,11 @@
   {
     global $bdd;
 
-    $reset = "N";
+    $status = "N";
 
-    $req = $bdd->prepare('UPDATE users SET reset = :reset WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $id_user);
     $req->execute(array(
-      'reset' => $reset
+      'status' => $status
     ));
     $req->closeCursor();
   }

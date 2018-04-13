@@ -41,7 +41,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					switch ($user->getReset())
+					switch ($user->getStatus())
 					{
 						case "Y":
 							echo 'Mot de passe';
@@ -61,7 +61,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getReset() == "Y")
+					if ($user->getStatus() == "Y")
 					{
 						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doAnnulerMdp" class="form_manage_user">';
 							echo '<input type="submit" name="annuler_reinitialisation" title="Annuler" value="" class="icone_annuler" />';
@@ -74,7 +74,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getReset() == "I")
+					if ($user->getStatus() == "I")
 					{
 						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doRefuserInscription" class="form_manage_user">';
 							echo '<input type="submit" name="decline_inscription" title="Refuser" value="" class="icone_annuler" />';
@@ -87,7 +87,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getReset() == "D")
+					if ($user->getStatus() == "D")
 					{
 						echo '<form method="post" action="manage_users.php?id_user=' . $user->getId() . '&action=doRefuserDesinscription" class="form_manage_user">';
 							echo '<input type="submit" name="decline_desinscription" title="Refuser" value="" class="icone_annuler" />';

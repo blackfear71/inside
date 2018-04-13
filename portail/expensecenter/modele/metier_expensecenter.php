@@ -31,7 +31,7 @@
   {
     global $bdd;
 
-    $reponse = $bdd->query('SELECT COUNT(id) AS nb_users FROM users WHERE identifiant != "admin" AND reset != "I"');
+    $reponse = $bdd->query('SELECT COUNT(id) AS nb_users FROM users WHERE identifiant != "admin" AND status != "I"');
     $donnees = $reponse->fetch();
 
     $nb_users = $donnees['nb_users'];
@@ -50,7 +50,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd

@@ -69,7 +69,7 @@
 			{
 				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
         $user->setPing(htmlspecialchars($user->getPing()));
-				$user->setReset(htmlspecialchars($user->getReset()));
+				$user->setStatus(htmlspecialchars($user->getStatus()));
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
         $user->setAvatar(htmlspecialchars($user->getAvatar()));
 				$user->setEmail(htmlspecialchars($user->getEmail()));

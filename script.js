@@ -160,7 +160,7 @@ $(function()
       $("#color_search").css('transition', 'background-color ease 0.4s');
     }
   });
-  $($('#color_search')).click(function(event)
+  $('#color_search').click(function(event)
   {
     if ($('#resizeBar') != null && $('#color_search') != null)
     {

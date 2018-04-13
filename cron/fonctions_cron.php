@@ -161,7 +161,7 @@
 
     global $bdd;
 
-    $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant != "admin" AND reset != "I" ORDER BY identifiant ASC');
+    $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
     while($data1 = $req1->fetch())
     {
       // On calcule le bilan des dépenses de l'utilisateur courant

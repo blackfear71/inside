@@ -33,27 +33,55 @@
               // Médailles
               foreach ($classementUsers as $classement)
               {
+                $gold   = false;
+                $silver = false;
+                $bronze = false;
+
                 if ($classement['id'] == $success->getId())
                 {
-                  // Or
-                  if (isset($classement['podium'][0]))
+                  foreach ($classement['podium'] as $podium)
                   {
-                    echo '<img src="../includes/icons/medals/or.png" alt="or" class="medal_rank" />';
-                    echo '<div class="ranking_pseudo">' . $classement['podium'][0]['pseudo'] . '</div>';
-                  }
+                    // Or
+                    if ($podium['rank'] == 1)
+                    {
+                      echo '<div class="zone_medals">';
+                        if ($gold == false)
+                        {
+                          echo '<div class="zone_medals_img"><img src="../includes/icons/medals/or.png" alt="or" class="medal_rank" /></div>';
+                          $gold = true;
+                        }
 
-                  // Argent
-                  if (isset($classement['podium'][1]))
-                  {
-                    echo '<img src="../includes/icons/medals/argent.png" alt="argent" class="medal_rank" />';
-                    echo '<div class="ranking_pseudo">' . $classement['podium'][1]['pseudo'] . '</div>';
-                  }
+                        echo '<div class="ranking_pseudo">' . $podium['pseudo'] . '</div>';
+                      echo '</div>';
+                    }
 
-                  // Bronze
-                  if (isset($classement['podium'][2]))
-                  {
-                    echo '<img src="../includes/icons/medals/bronze.png" alt="bronze" class="medal_rank" />';
-                    echo '<div class="ranking_pseudo">' . $classement['podium'][2]['pseudo'] . '</div>';
+                    // Argent
+                    if ($podium['rank'] == 2)
+                    {
+                      echo '<div class="zone_medals">';
+                        if ($silver == false)
+                        {
+                          echo '<div class="zone_medals_img"><img src="../includes/icons/medals/argent.png" alt="argent" class="medal_rank" /></div>';
+                          $silver = true;
+                        }
+
+                        echo '<div class="ranking_pseudo">' . $podium['pseudo'] . '</div>';
+                      echo '</div>';
+                    }
+
+                    // Bronze
+                    if ($podium['rank'] == 3)
+                    {
+                      echo '<div class="zone_medals">';
+                        if ($bronze == false)
+                        {
+                          echo '<div class="zone_medals_img"><img src="../includes/icons/medals/bronze.png" alt="bronze" class="medal_rank" /></div>';
+                          $bronze = true;
+                        }
+
+                        echo '<div class="ranking_pseudo">' . $podium['pseudo'] . '</div>';
+                      echo '</div>';
+                    }
                   }
 
                   break;

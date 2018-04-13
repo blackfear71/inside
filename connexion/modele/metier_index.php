@@ -23,7 +23,7 @@
 
 		if ($reponse->rowCount() > 0 AND isset($login) AND $login == $donnees['identifiant']) // 2 boucles if pour comparer pseudo et MDP
 		{
-			if ($donnees['reset'] == "I")
+			if ($donnees['status'] == "I")
 			{
 				$_SESSION['alerts']['not_yet']         = true;
 				$_SESSION['index']['connected']        = false;
@@ -94,7 +94,7 @@
     $password         = htmlspecialchars(hash('sha1', $post['password'] . $salt));
     $confirm_password = htmlspecialchars(hash('sha1', $post['confirm_password'] . $salt));
     $ping             = "";
-    $reset            = "I";
+    $status           = "I";
     $avatar           = "";
     $email            = "";
     $beginner         = 0;
@@ -140,7 +140,7 @@
                                                   salt,
                                                   password,
                                                   ping,
-                                                  reset,
+                                                  status,
                                                   pseudo,
                                                   avatar,
                                                   email,
@@ -151,7 +151,7 @@
                                                   :salt,
                                                   :password,
                                                   :ping,
-                                                  :reset,
+                                                  :status,
                                                   :pseudo,
                                                   :avatar,
                                                   :email,
@@ -164,7 +164,7 @@
             'salt'        => $salt,
             'password'    => $password,
             'ping'        => $ping,
-            'reset'       => $reset,
+            'status'      => $status,
   					'pseudo'      => $pseudo,
   					'avatar'      => $avatar,
             'email'       => $email,
@@ -230,7 +230,7 @@
 
     // Récupération des champs saisis et initialisations utilisateur
 		$identifiant = htmlspecialchars(strtoupper($post['login']));
-		$reset       = "N";
+		$status      = "N";
 
     // Initialisation erreurs
 		$_SESSION['alerts']['wrong_id']      = false;
@@ -241,19 +241,19 @@
     global $bdd;
 
 		// On vérifie que l'identifiant existe bien
-		$reponse = $bdd->query('SELECT id, identifiant, reset FROM users');
+		$reponse = $bdd->query('SELECT id, identifiant, status FROM users');
 		while ($donnees = $reponse->fetch())
 		{
 			if ($identifiant == $donnees['identifiant'])
 			{
-				if ($donnees['reset'] == "Y")
+				if ($donnees['status'] == "Y")
 				{
 					$_SESSION['alerts']['wrong_id']      = false;
 					$_SESSION['alerts']['asked']         = false;
 					$_SESSION['alerts']['already_asked'] = true;
 					break;
 				}
-        elseif ($donnees['reset'] == "I")
+        elseif ($donnees['status'] == "I")
         {
           $_SESSION['alerts']['wrong_id']      = false;
           $_SESSION['alerts']['asked']         = false;
@@ -264,11 +264,11 @@
 				else
 				{
 					// Mise à jour de la table
-					$reset = "Y";
+					$status = "Y";
 
-					$req = $bdd->prepare('UPDATE users SET reset = :reset WHERE id = ' . $donnees['id']);
+					$req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $donnees['id']);
 					$req->execute(array(
-						'reset' => $reset
+						'status' => $status
 					));
 					$req->closeCursor();
 

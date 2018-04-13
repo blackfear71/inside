@@ -433,11 +433,11 @@
 
     global $bdd;
 
-    $reset = "D";
+    $status = "D";
 
-    $reponse = $bdd->prepare('UPDATE users SET reset = :reset WHERE identifiant = "' . $user . '"');
+    $reponse = $bdd->prepare('UPDATE users SET status = :status WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
-      'reset' => $reset
+      'status' => $status
     ));
     $reponse->closeCursor();
 
@@ -864,7 +864,8 @@
             {
               $myRank = array('identifiant' => $data['identifiant'],
                               'pseudo'      => $data['pseudo'],
-                              'value'       => $successUser[$success->getId()]
+                              'value'       => $successUser[$success->getId()],
+                              'rank'        => 0
                             );
               array_push($rankSuccess, $myRank);
             }
@@ -885,8 +886,28 @@
 
           array_multisort($tri_rank, SORT_DESC, $rankSuccess);
 
-          // On découpe le tableau pour ne garder que les 3 premiers
-          array_slice($rankSuccess, 3);
+          // Affectation du rang
+          $prevRank    = $rankSuccess[0]['value'];
+          $currentRank = 1;
+
+          foreach ($rankSuccess as $key => &$rankSuccessUser)
+          {
+          	$currentTotal = $rankSuccessUser['value'];
+
+          	if ($currentTotal != $prevRank)
+          	{
+          	  $currentRank += 1;
+          	  $prevRank = $rankSuccessUser['value'];
+          	}
+
+            // Suppression des rangs > 3 sinon on enregistre le rang
+            if ($currentRank > 3)
+              unset($rankSuccess[$key]);
+            else
+          	 $rankSuccessUser['rank'] = $currentRank;
+          }
+
+          unset($rankSuccessUser);
 
           $myGlobalRanks = array('id'             => $success->getId(),
                                  'level'          => $success->getLevel(),

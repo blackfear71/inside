@@ -5,7 +5,7 @@
     private $identifiant;
     private $ping;
     private $connected;
-    private $reset;
+    private $status;
     private $pseudo;
     private $avatar;
     private $email;
@@ -20,7 +20,7 @@
       $this->identifiant = '';
       $this->ping        = '';
       $this->connected   = '';
-      $this->reset       = '';
+      $this->status      = '';
       $this->pseudo      = '';
       $this->avatar      = '';
       $this->email       = '';
@@ -50,8 +50,8 @@
       if (isset($data['ping']))
         $this->ping        = $data['ping'];
 
-      if (isset($data['reset']))
-        $this->reset       = $data['reset'];
+      if (isset($data['status']))
+        $this->status      = $data['status'];
 
       if (isset($data['pseudo']))
         $this->pseudo      = $data['pseudo'];
@@ -118,14 +118,14 @@
     }
 
     // Top statut inscription
-    public function setReset($reset)
+    public function setStatus($status)
     {
-      $this->reset = $reset;
+      $this->status = $status;
     }
 
-    public function getReset()
+    public function getStatus()
     {
-      return $this->reset;
+      return $this->status;
     }
 
     // Pseudo

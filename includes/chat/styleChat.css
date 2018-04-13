@@ -369,7 +369,7 @@
 	color: white;
 	margin-top: 4px;
 	margin-left: 35px;
-	margin-right: 25px;
+	margin-right: 20px;
 }
 
 .user_chat_online
@@ -381,7 +381,7 @@
 	border-radius: 50%;
 	background-color: #70d55d;
 	margin-top: 11px;
-	margin-right: 10px;
+	margin-right: 8px;
 	box-shadow: 0 0 5px #70d55d;
 }
 
@@ -394,7 +394,7 @@
 	border-radius: 50%;
 	background-color: #ff1937;
 	margin-top: 11px;
-	margin-right: 10px;
+	margin-right: 8px;
 	box-shadow: 0 0 5px #ff1937;
 }
 
