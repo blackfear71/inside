@@ -1,6 +1,7 @@
 <?php
   include_once('appel_bdd.php');
   include_once('classes/profile.php');
+  include_once('fonctions_dates.php');
   session_start();
   global $bdd;
 
@@ -30,11 +31,13 @@
         // Récupération des données en base
         $currentUser = Profile::withData($data);
 
-        $myUser = array('identifiant' => $currentUser->getIdentifiant(),
-                        'pseudo'      => $currentUser->getPseudo(),
-                        'avatar'      => $currentUser->getAvatar(),
-                        'ping'        => $currentUser->getPing(),
-                        'connected'   => $currentUser->getConnected()
+        $myUser = array('identifiant'          => $currentUser->getIdentifiant(),
+                        'pseudo'               => $currentUser->getPseudo(),
+                        'avatar'               => $currentUser->getAvatar(),
+                        'ping'                 => $currentUser->getPing(),
+                        'connected'            => $currentUser->getConnected(),
+                        'date_last_connection' => '',
+                        'hour_last_connection' => ''
                        );
 
         // Extraction date et heure ping
@@ -45,7 +48,7 @@
           list($hour, $minutes, $secondes) = explode('-', $time);
           $last_ping = $year . $month . $day . $hour . $minutes . $secondes;
 
-          // Date - 5 minutes
+          // Date - 3 minutes
           $limite = date('YmdHis', strtotime('now - 3 minutes'));
 
           // Détermination statut connexion
@@ -53,10 +56,13 @@
             $myUser['connected'] = false;
           else
             $myUser['connected'] = true;
+
+          // Date et heure de dernière connexion
+          $myUser['date_last_connection'] = formatDateForDisplay($year . $month . $day);
+          $myUser['hour_last_connection'] = formatTimeForDisplayLight($hour . $minutes . $secondes);
         }
         else
           $myUser['connected'] = false;
-
 
         // On ajoute la ligne au tableau
         array_push($listUsers, $myUser);

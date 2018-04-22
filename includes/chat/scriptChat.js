@@ -3,8 +3,10 @@ $(function()
   /***************************/
   /***   Initialisations   ***/
   /***************************/
+  initCookies();
   var showChat   = initCookieChat();
   var windowChat = initWindowChat();
+  console.log(document.cookie);
   var refresh_chat;
   var refresh_users;
   var intervalRefreshChat  = 4000;
@@ -160,6 +162,29 @@ $(function()
   function stopTimerRefresh(interval)
   {
     clearInterval(interval);
+  }
+
+  // Fonction d'initialisation des cookies
+  function initCookies()
+  {
+    cookie = getCookie("identifiant")
+
+    // Initialisation cookie identifiant
+    if (cookie == null)
+    {
+      setCookie("identifiant", currentUser);
+      cookie = getCookie("identifiant");
+    }
+
+    //Si le cookie ne correspond pas à l'utilisateur, on détruit tous les cookies
+    if (cookie != currentUser)
+    {
+      deleteCookie("identifiant");
+      deleteCookie("showChat");
+      deleteCookie("windowChat");
+      setCookie("identifiant", currentUser);
+      cookie = getCookie("identifiant");
+    }
   }
 
   // Fonction initialisation cookie (affichage chat)
@@ -385,9 +410,11 @@ $(function()
 
       $.each(JSON.parse(users), function(key, value)
       {
-        var pseudo    = value.pseudo;
-        var avatar    = value.avatar;
-        var connected = value.connected;
+        var pseudo              = value.pseudo;
+        var avatar              = value.avatar;
+        var connected           = value.connected;
+        var date_last_connection = value.date_last_connection;
+        var hour_last_connection = value.hour_last_connection;
 
         // On va afficher la séparation des utilisateurs hors ligne à partir du premier
         if (offline != true && connected == false)
@@ -404,9 +431,9 @@ $(function()
             html += '<img src="/inside/includes/icons/default.png" alt="avatar" title="' + pseudo + '" class="avatar_chat_connected" />';
 
           if (connected == true)
-            html += '<div class="user_chat_online"></div>';
+            html += '<div class="user_chat_online" title="Connecté"></div>';
           else
-            html += '<div class="user_chat_offline"></div>';
+            html += '<div class="user_chat_offline" title="Dernière connexion le ' + date_last_connection + ' à ' + hour_last_connection + '"></div>';
 
           html += '<div class="text_chat_connected">' + pseudo + '</div>';
         html += '</div>';
