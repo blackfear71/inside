@@ -6,7 +6,6 @@ $(function()
   initCookies();
   var showChat   = initCookieChat();
   var windowChat = initWindowChat();
-  console.log(document.cookie);
   var refresh_chat;
   var refresh_users;
   var intervalRefreshChat  = 4000;
@@ -424,16 +423,35 @@ $(function()
           offline = true;
         }
 
+        // Zone utilisateur
         html = '<div class="zone_chat_connected">';
           if (avatar != "" && avatar != undefined)
             html += '<img src="/inside/profil/avatars/' + avatar + '" alt="avatar" title="' + pseudo + '" class="avatar_chat_connected" />';
           else
             html += '<img src="/inside/includes/icons/default.png" alt="avatar" title="' + pseudo + '" class="avatar_chat_connected" />';
 
+          // Indicateur connexion
           if (connected == true)
-            html += '<div class="user_chat_online" title="Connecté"></div>';
+          {
+            html += '<div class="zone_indicateur" title="Connecté">';
+              html += '<div class="user_chat_online"></div>';
+            html += '</div>';
+          }
           else
-            html += '<div class="user_chat_offline" title="Dernière connexion le ' + date_last_connection + ' à ' + hour_last_connection + '"></div>';
+          {
+            if (date_last_connection != "" && hour_last_connection != "")
+            {
+              html += '<div class="zone_indicateur" title="Dernière connexion le ' + date_last_connection + ' à ' + hour_last_connection + '">';
+                html += '<div class="user_chat_offline"></div>';
+              html += '</div>';
+            }
+            else
+            {
+              html += '<div class="zone_indicateur" title="Pas de connexion récente">';
+                html += '<div class="user_chat_offline"></div>';
+              html += '</div>';
+            }
+          }
 
           html += '<div class="text_chat_connected">' + pseudo + '</div>';
         html += '</div>';

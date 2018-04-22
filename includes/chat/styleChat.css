@@ -369,32 +369,38 @@
 	color: white;
 	margin-top: 4px;
 	margin-left: 35px;
-	margin-right: 20px;
+	margin-right: 35px;
+}
+
+.zone_indicateur
+{
+	float: right;
+	display: inline-block;
+	width: 30px;
+	min-height: 30px;
 }
 
 .user_chat_online
 {
-	float: right;
-	display: inline-block;
 	width: 8px;
 	height: 8px;
 	border-radius: 50%;
 	background-color: #70d55d;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 11px;
-	margin-right: 8px;
 	box-shadow: 0 0 5px #70d55d;
 }
 
 .user_chat_offline
 {
-	float: right;
-	display: inline-block;
 	width: 8px;
 	height: 8px;
 	border-radius: 50%;
 	background-color: #ff1937;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 11px;
-	margin-right: 8px;
 	box-shadow: 0 0 5px #ff1937;
 }
 
