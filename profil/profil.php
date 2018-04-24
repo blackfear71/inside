@@ -77,7 +77,15 @@
       break;
 
     case 'askDesinscription':
-      askUnsubscribe($_GET['user']);
+      changeStatus($_GET['user'], "D");
+      break;
+
+    case 'cancelDesinscription':
+      changeStatus($_GET['user'], "N");
+      break;
+
+    case 'cancelResetPassword':
+      changeStatus($_GET['user'], "N");
       break;
 
     default:
@@ -166,6 +174,8 @@
     case "doUpdateMail":
     case 'doChangeMdp':
     case 'askDesinscription':
+    case 'cancelDesinscription':
+    case 'cancelResetPassword':
     default:
       break;
   }
@@ -180,6 +190,8 @@
     case "doUpdateMail":
     case 'doChangeMdp':
     case 'askDesinscription':
+    case 'cancelDesinscription':
+    case 'cancelResetPassword':
       header('location: profil.php?user=' . $_GET['user'] . '&view=settings&action=goConsulter');
       break;
 

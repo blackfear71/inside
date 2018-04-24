@@ -425,15 +425,11 @@
     }
   }
 
-  // METIER : Mise à jour du top désinscription
+  // METIER : Mise à jour du statut par l'utilisateur (désinscription, mot de passe)
   // RETOUR : Aucun
-  function askUnsubscribe($user)
+  function changeStatus($user, $status)
   {
-    $_SESSION['alerts']['ask_desinscription'] = false;
-
     global $bdd;
-
-    $status = "D";
 
     $reponse = $bdd->prepare('UPDATE users SET status = :status WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
@@ -441,7 +437,19 @@
     ));
     $reponse->closeCursor();
 
-    $_SESSION['alerts']['ask_desinscription'] = true;
+    switch ($status)
+    {
+      case "D":
+        $_SESSION['alerts']['ask_desinscription'] = true;
+        break;
+
+      case "N":
+        $_SESSION['alerts']['cancel_status'] = true;
+        break;
+
+      default:
+        break;
+    }
   }
 
   // METIER : Lecture liste des succès

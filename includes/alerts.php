@@ -98,6 +98,9 @@
   if (!isset($_SESSION['alerts']['ask_desinscription']))
     $_SESSION['alerts']['ask_desinscription'] = NULL;
 
+  if (!isset($_SESSION['alerts']['cancel_status']))
+    $_SESSION['alerts']['cancel_status'] = NULL;
+
   // Initialisations Expense Center
   if (!isset($_SESSION['alerts']['not_numeric']))
     $_SESSION['alerts']['not_numeric'] = NULL;
@@ -357,7 +360,8 @@
   OR      isset($_SESSION['alerts']['wrong_password'])
   OR      isset($_SESSION['alerts']['preferences_updated'])
   OR      isset($_SESSION['alerts']['mail_updated'])
-  OR      isset($_SESSION['alerts']['ask_desinscription']))
+  OR      isset($_SESSION['alerts']['ask_desinscription'])
+  OR      isset($_SESSION['alerts']['cancel_status']))
   {
     // Changement pseudo
     if (isset($_SESSION['alerts']['pseudo_updated']) AND $_SESSION['alerts']['pseudo_updated'] == true)
@@ -447,6 +451,13 @@
     {
       $alerte = 'La demande de désinscription a bien été soumise.';
       $_SESSION['alerts']['ask_desinscription'] = NULL;
+    }
+
+    // Annulation désinscription
+    if (isset($_SESSION['alerts']['cancel_status']) AND $_SESSION['alerts']['cancel_status'] == true)
+    {
+      $alerte = 'La demande a bien été annulée.';
+      $_SESSION['alerts']['cancel_status'] = NULL;
     }
   }
   // Alerte dépenses : prix non numérique ou > 0

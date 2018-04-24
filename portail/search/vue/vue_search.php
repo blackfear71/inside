@@ -110,7 +110,10 @@
                           echo $resultatsMI->getMission();
                         echo '</td>';
                         echo '<td class="zone_resultat_info">';
-                          echo 'Débutée le ' . formatDateForDisplay($resultatsMI->getDate_deb());
+                          if (date('Ymd') > $resultatsMI->getDate_fin())
+                            echo 'Terminée le ' . formatDateForDisplay($resultatsMI->getDate_fin());
+                          else
+                            echo 'Débutée le ' . formatDateForDisplay($resultatsMI->getDate_deb());
                         echo '</td>';
                       echo '</tr>';
                     echo '</table>';
