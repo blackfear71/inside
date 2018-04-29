@@ -47,17 +47,17 @@
 			?>
 
 			<article>
-				<div class="contenu_saisie_avancee">
-					<form method="post" action="parcours.php?action=doajouter" class="form_saisie_avancee">
-						<div class="zone_saisie_avancee_infos">
+				<div class="PP-contenu-saisie">
+					<form method="post" action="parcours.php?action=doajouter" class="PP-form-saisie">
+						<div class="PP-zone-saisie-avancee-infos">
 							<label class="label_parcours">Nom : </label>
-							<input type="text" placeholder="Nom parcours" value="<?php echo $_SESSION['save_add']['nom']; ?>" name="name" class="monoligne_film" /><br />
+							<input type="text" placeholder="Nom parcours" value="<?php echo $_SESSION['save_add']['nom']; ?>" name="name" class="PP-monoligne" /><br />
 							<label class="label_parcours">Distance : </label>
-							<input type="text" placeholder="Distance (km)" value="<?php echo $_SESSION['save_add']['distance']; ?>" name="dist" class="monoligne_film" /><br />
+							<input type="text" placeholder="Distance (km)" value="<?php echo $_SESSION['save_add']['distance']; ?>" name="dist" class="PP-monoligne" /><br />
 							<label class="label_parcours">Lieu : </label>
-							<input type="text" placeholder="Lieu" value="<?php echo $_SESSION['save_add']['lieu']; ?>" name="location" class="monoligne_film" /><br />
+							<input type="text" placeholder="Lieu" value="<?php echo $_SESSION['save_add']['lieu']; ?>" name="location" class="PP-monoligne" /><br />
 							<label class="label_parcours">Url image : </label>
-							<input type="text" placeholder="Url de l'image" value="<?php echo $_SESSION['save_add']['image']; ?>" name="picurl" class="monoligne_film" /><br />
+							<input type="text" placeholder="Url de l'image" value="<?php echo $_SESSION['save_add']['image']; ?>" name="picurl" class="PP-monoligne" /><br />
 						</div>
 
             <br /><br />

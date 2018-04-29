@@ -72,24 +72,42 @@
                       echo '</div>';
 
                       // Titre du film
+                      echo '<div class="zone_icone_saisie">';
+                        echo '<img src="icons/titre.png" alt="titre" title="Titre du film" class="icone_saisie" />';
+                      echo '</div>';
                       echo '<input type="text" name="nom_film" value="' . $film->getFilm() . '" placeholder="Titre du film" maxlength="255" class="monoligne_film" required />';
 
                       // Date de sortie cinéma
+                      echo '<div class="zone_icone_saisie">';
+                        echo '<img src="icons/date.png" alt="date" title="Date de sortie cinéma" class="icone_saisie" />';
+                      echo '</div>';
                       if (isBlankDate($film->getDate_theater()))
                         echo '<input type="text" name="date_theater" value="" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="monoligne_film" />';
                       else
                         echo '<input type="text" name="date_theater" value="' . formatDateForDisplay($film->getDate_theater()) . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="monoligne_film" />';
 
                       // Date de sortie DVD
+                      echo '<div class="zone_icone_saisie">';
+                        echo '<img src="icons/date.png" alt="date" title="Date de sortie DVD/Bluray" class="icone_saisie" />';
+                      echo '</div>';
                       echo '<input type="text" name="date_release" value="' . formatDateForDisplay($film->getDate_release()) . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="monoligne_film" />';
 
                       // Lien trailer
+                      echo '<div class="zone_icone_saisie">';
+                        echo '<img src="icons/trailer.png" alt="trailer" title="Trailer" class="icone_saisie" />';
+                      echo '</div>';
                       echo '<input type="text" name="trailer" value="' . $film->getTrailer() . '" placeholder="Trailer (lien Youtube, Dailymotion ou Vimeo)" class="monoligne_film" />';
 
                       // Lien fiche
+                      echo '<div class="zone_icone_saisie">';
+                        echo '<img src="icons/lien.png" alt="lien" title="Lien" class="icone_saisie" />';
+                      echo '</div>';
                       echo '<input type="text" name="link" value="' . $film->getLink() . '" placeholder="Lien (Allociné, Wikipédia...)" class="monoligne_film" />';
 
                       // Lien poster
+                      echo '<div class="zone_icone_saisie">';
+                        echo '<img src="icons/poster.png" alt="poster" title="Poster" class="icone_saisie" />';
+                      echo '</div>';
                       echo '<input type="text" name="poster" value="' . $film->getPoster() . '" placeholder="URL poster" class="monoligne_film" style="margin-bottom: 0px;" />';
                     echo '</div>';
 
@@ -99,9 +117,15 @@
                       echo '</div>';
 
                         // Lien Doodle
+                        echo '<div class="zone_icone_saisie">';
+                          echo '<img src="icons/doodle_white.png" alt="doodle_white" title="Doodle" class="icone_saisie" />';
+                        echo '</div>';
                         echo '<input type="text" name="doodle" value="' . $film->getDoodle() . '" placeholder="Doodle" class="monoligne_film" />';
 
                         // Date sortie
+                        echo '<div class="zone_icone_saisie">';
+                          echo '<img src="icons/date.png" alt="date" title="Date proposée" class="icone_saisie" />';
+                        echo '</div>';
                         echo '<input type="text" name="date_doodle" value="' . formatDateForDisplay($film->getDate_doodle()) . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" id="datepicker3" class="monoligne_film_short" />';
 
                         // Selection de l'heure
@@ -188,6 +212,9 @@
                         echo '</div>';
 
                         // Lieu restaurant
+                        echo '<div class="zone_icone_saisie">';
+                          echo '<img src="icons/restaurant.png" alt="restaurant" title="Restaurant" class="icone_saisie" />';
+                        echo '</div>';
                         echo '<input type="text" name="place" value="' . $film->getPlace() . '" placeholder="Lieu proposé" class="monoligne_film" style="margin-bottom: 0px;" />';
                       echo '</div>';
 

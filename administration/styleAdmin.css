@@ -91,13 +91,6 @@
 	border-radius: 5px;
 }
 
-.td_stats_admin
-{
-	padding: 5px;
-	border: solid 1px #b3b3b3;
-	font-family: robotolight, Verdana, sans-serif;
-}
-
 /*** Infos utilisateurs ***/
 .zone_infos
 {
@@ -209,11 +202,169 @@
 	border-bottom-right-radius: 5px;
 }
 
-/*** Gestion utilisateurs ***/
+/*** Gestion des utilisateurs ***/
 .form_manage_user
 {
 	display: inline-block;
 	padding: 3px;
+}
+
+.title_gestion
+{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 120%;
+	text-align: center;
+	background-color: #ff1937;
+	color: white;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.table_manage_users
+{
+	border-collapse: collapse;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+}
+
+.table_manage_users td
+{
+	border: 1px solid #b3b3b3;
+}
+
+.init_tr_manage_users
+{
+	text-align: center;
+	background-color: #e3e3e3;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-weight: bold;
+}
+
+.init_td_manage_users
+{
+	padding-left: 20px;
+	padding-right: 20px;
+	border: solid 1px #b3b3b3;
+}
+
+.tr_manage_users
+{
+	text-align: center;
+}
+
+.tr_manage_users:hover
+{
+	background-color: #B3B3B3;
+}
+
+.td_manage_users
+{
+	text-align: center;
+	line-height: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotoregular, Verdana, sans-serif;
+	border: solid 1px #b3b3b3;
+}
+
+.reseted
+{
+	width: 100%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 120%;
+	margin-bottom: 30px;
+}
+
+.reseted_2
+{
+	width: 20%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 140%;
+	background-color: #e3e3e3;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 50px;
+}
+
+.reset_warning
+{
+	font-family: robotomedium, Verdana, sans-serif;
+	color: red;
+	font-size: 150%;
+}
+
+.td_stats_admin
+{
+	padding: 5px;
+	border: solid 1px #b3b3b3;
+	font-family: robotolight, Verdana, sans-serif;
+}
+
+.table_old_users
+{
+	line-height: 40px;
+	font-family: robotolight, Verdana, sans-serif;
+	background-color: #2eb2f4;
+	color: white;
+	text-align: center;
+}
+
+.banderole_left_1
+{
+	height: 42px;
+	width: 10px;
+	position: absolute;
+	background-color: #2eb2f4;
+	margin-left: -11px;
+	margin-top: -1px;
+}
+
+.banderole_left_2
+{
+	height: 10px;
+	width: 10px;
+	position: absolute;
+	background: linear-gradient(to left bottom, #74cefb 50%, transparent 50%);
+	margin-left: -11px;
+	margin-top: 41px;
+	z-index: 0;
+}
+
+.banderole_left_3
+{
+	height: 42px;
+	width: 10px;
+	float: right;
+	background-color: #2eb2f4;
+	margin-right: -11px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+}
+
+.banderole_left_4
+{
+	height: 10px;
+	width: 10px;
+	float: right;
+	background: linear-gradient(to right bottom, #74cefb 50%, transparent 50%);
+	margin-right: -11px;
+	margin-top: 41px;
+	margin-bottom: -11px;
 }
 
 .icone_annuler
@@ -380,6 +531,84 @@
 	border-collapse: collapse;
 	border-radius: 5px;
 	overflow: hidden;
+}
+
+.td_bugs_title
+{
+	background-color: #d3d3d3;
+	padding: 1%;
+	width: 15%;
+	border: solid 1px white;
+	font-family: robotomedium_italic, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.td_bugs_content
+{
+	background-color: #f3f3f3;
+	font-family: robotolight, Verdana, sans-serif;
+	border: solid 1px white;
+	padding: 1%;
+	width: 25%;
+}
+
+.td_bugs_actions
+{
+	width: 20%;
+	background-color: #d3d3d3;
+	border: solid 1px white;
+}
+
+.tr_bugs_bug
+{
+	background-color: #74cefb;
+}
+
+.tr_bugs_bug td p
+{
+	padding: 1%;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	min-height: 100px;
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: justify;
+}
+
+.button_bug
+{
+	display: block;
+	border: 0;
+	background-color: #e3e3e3;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.button_bug:hover
+{
+	background-color: #ff1937;
+	color: white;
+	cursor: pointer;
+}
+
+.no_bugs
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 120%;
+	color: black;
+	text-align: center;
 }
 
 /*** Saisie succès ***/

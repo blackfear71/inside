@@ -53,43 +53,43 @@
       echo '<table class="table_bugs">';
         echo '<tr>';
           // Titre idée
-          echo '<td class="td_ideas_title">';
+          echo '<td class="td_bugs_title">';
             echo $type_bug;
           echo '</td>';
-          echo '<td class="td_ideas_content">';
+          echo '<td class="td_bugs_content">';
             echo $ligne->getSubject();
           echo '</td>';
 
           // Date
-          echo '<td class="td_ideas_title">';
+          echo '<td class="td_bugs_title">';
             echo 'Date';
           echo '</td>';
-          echo '<td class="td_ideas_content">';
+          echo '<td class="td_bugs_content">';
             echo $date_bug;
           echo '</td>';
         echo '</tr>';
 
         // Proposé par
         echo '<tr>';
-          echo '<td class="td_ideas_title">';
+          echo '<td class="td_bugs_title">';
             echo $lib_author;
           echo '</td>';
-          echo '<td class="td_ideas_content">';
+          echo '<td class="td_bugs_content">';
             echo $ligne->getName_a();
           echo '</td>';
 
           // Statut & développeur
-          echo '<td class="td_ideas_title">';
+          echo '<td class="td_bugs_title">';
             echo 'Statut';
           echo '</td>';
-          echo '<td class="td_ideas_content">';
+          echo '<td class="td_bugs_content">';
             // Statut
             echo $etat_bug;
           echo '</td>';
         echo '</tr>';
 
         // Description idée
-        echo '<tr class="tr_ideas_idea">';
+        echo '<tr class="tr_bugs_bug">';
           echo '<td colspan="4">';
             echo '<p>' . nl2br($ligne->getContent()) . '</p>';
           echo '</td>';

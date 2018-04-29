@@ -88,7 +88,7 @@
 		if (!empty($tabCategoriesDes))
 		{
 			echo '<tr>';
-				echo '<td class="table_date_jour" colspan="100%">';
+				echo '<td class="table_old_users" colspan="100%">';
 					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
 					echo 'Anciens utilisateurs';
 					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';

@@ -43,8 +43,12 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
 	margin-bottom: -30px;
+	margin-bottom: -20px;
+	text-align: center;
+	/*display: inline-flex;
+	justify-content: space-between;
+	flex-wrap: wrap;*/
 }
 
 .lien_portail
@@ -58,7 +62,7 @@
 	overflow: hidden;
 	vertical-align: middle;
 	line-height: 200px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	margin-left: 15px;
 	margin-right: 15px;
 }
@@ -67,7 +71,6 @@
 {
 	display: inline-block;
 	line-height: 1.2;
-	margin-left: -20px;
 	vertical-align: middle;
 	width: 220px;
 	padding: 30px;
@@ -103,4 +106,31 @@
 	margin-top: 125px;
 	width: 150px;
 	margin-left: 80px;
+}
+
+/*** Messages missions ***/
+.zone_resume_mission
+{
+	margin-top: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.link_mission
+{
+	display: block;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #262626;
+	box-shadow: 0 0 3px #5c5c5c;
+	display: inline-block;
+	text-align: justify;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: robotothin, Verdana, sans-serif;
+	color: white;
+	text-decoration: none;
+	border-radius: 2px;
 }

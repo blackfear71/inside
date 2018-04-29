@@ -133,3 +133,38 @@
 	border-radius: 5px;
 	overflow: hidden;
 }
+
+.td_bugs_title
+{
+	background-color: #d3d3d3;
+	padding: 1%;
+	width: 15%;
+	border: solid 1px white;
+	font-family: robotomedium_italic, Verdana, sans-serif;
+	font-size: 100%;
+}
+
+.td_bugs_content
+{
+	background-color: #f3f3f3;
+	font-family: robotolight, Verdana, sans-serif;
+	border: solid 1px white;
+	padding: 1%;
+	width: 25%;
+}
+
+.tr_bugs_bug
+{
+	background-color: #74cefb;
+}
+
+.tr_bugs_bug td p
+{
+	padding: 1%;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	min-height: 100px;
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: justify;
+}

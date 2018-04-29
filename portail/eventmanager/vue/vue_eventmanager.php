@@ -7,7 +7,7 @@
 
 		<link rel="icon" type="image/png" href="/inside/favicon.png" />
     <link rel="stylesheet" href="/inside/style.css" />
-  	<link rel="stylesheet" href="styleEC.css" />
+  	<link rel="stylesheet" href="styleEM.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -15,14 +15,14 @@
     <script type="text/javascript" src="/inside/script.js"></script>
     <script type="text/javascript" src="scriptEC.js"></script>
 
-		<title>Inside - EC</title>
+		<title>Inside - EM</title>
   </head>
 
 	<body>
 		<!-- Onglets -->
 		<header>
       <?php
-        $title = "Expense Center";
+        $title = "Event Manager";
 
         include('../../includes/header.php');
 			  include('../../includes/onglets.php');
@@ -49,17 +49,7 @@
 
 			<article>
         <?php
-          // Saisie nouvelle ligne
-          include('vue/table_saisie_depense.php');
 
-          // Affichage bilan
-          include('vue/table_total_depenses.php');
-
-          // Affichage des onglets (années)
-          include('vue/onglets_expensecenter.php');
-
-          // Lignes saisies
-          include('vue/table_resume_depenses.php');
         ?>
 			</article>
 
