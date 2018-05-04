@@ -95,7 +95,8 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	height: 40px;
+	min-height: 40px;
+	line-height: 25px;
 	margin-top: 1.5%;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -105,6 +106,8 @@
 	border: 0;
 	border-radius: 5px;
 	cursor: pointer;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 
 .bouton_profil:hover
@@ -416,20 +419,22 @@
 }
 
 /*** Zone mot de passe & désinscription ***/
-.zone_profil_utilisateur_mdp
+.zone_profil_utilisateur_mail
 {
-	max-width: 50%;
-	min-width: 33%;
 	background-color: #e3e3e3;
 	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.zone_profil_utilisateur_mdp
+{
+	width: 33%;
+	background-color: #e3e3e3;
 }
 
 .zone_profil_utilisateur_desinscription
 {
-	max-width: 50%;
-	min-width: 33%;
 	background-color: #f3f3f3;
-	border-bottom-right-radius: 5px;
 }
 
 .message_profil

@@ -420,7 +420,7 @@
   <!-- Tableau modification mailing -->
   <table class="zone_profil_utilisateur_table">
     <tr>
-      <td class="zone_profil_utilisateur_mdp">
+      <td class="zone_profil_utilisateur_mail">
         <!-- Affichage adresse mail courante -->
         <div class="message_profil_mail">
           <?php
@@ -459,7 +459,7 @@
   <table class="zone_profil_utilisateur_table">
     <tr>
       <!-- Saisie mot de passe -->
-      <td class="zone_profil_utilisateur_mdp">
+      <td class="zone_profil_utilisateur_mdp" style="border-bottom-left-radius: 5px;">
         <?php
           echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangeMdp" class="zone_profil_utilisateur_pseudo_form">';
             echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_profil" required />';
@@ -470,35 +470,37 @@
         ?>
       </td>
 
-      <!-- Demande désinscription -->
-      <td class="zone_profil_utilisateur_desinscription">
-        <div class="message_profil">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l'administrateur à l'aide de ce bouton. Il validera votre choix après vérification.</div>
-
-        <?php
-          if ($profil->getStatus() == "D")
-          {
-            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=cancelDesinscription" class="form_desinscription">';
-              echo '<input type="submit" name="cancel_desinscription" value="Annuler la désinscription" class="bouton_profil" />';
-            echo '</form>';
-
-            echo '<div class="message_profil_2">Une demande est déjà en cours.</div>';
-          }
-          else
-          {
-            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=askDesinscription" class="form_desinscription">';
-              echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="bouton_profil" />';
-            echo '</form>';
-
-            echo '<div class="message_profil_2">Aucune demande en cours.</div>';
-          }
-        ?>
-      </td>
-
-      <!-- Réinitialisation mot de passe si demandée -->
       <?php
+        // Demande désinscription
+        if ($profil->getStatus() != "Y")
+          echo '<td class="zone_profil_utilisateur_desinscription" style="border-bottom-right-radius: 5px;">';
+        else
+          echo '<td class="zone_profil_utilisateur_desinscription">';
+
+        echo '<div class="message_profil">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l\'administrateur à l\'aide de ce bouton. Il validera votre choix après vérification.</div>';
+
+        if ($profil->getStatus() == "D")
+        {
+          echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=cancelDesinscription" class="form_desinscription">';
+            echo '<input type="submit" name="cancel_desinscription" value="Annuler la désinscription" class="bouton_profil" />';
+          echo '</form>';
+
+          echo '<div class="message_profil_2">Une demande est déjà en cours.</div>';
+        }
+        else
+        {
+          echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=askDesinscription" class="form_desinscription">';
+            echo '<input type="submit" name="ask_desinscription" value="Demander la désinscription" class="bouton_profil" />';
+          echo '</form>';
+
+          echo '<div class="message_profil_2">Aucune demande en cours.</div>';
+        }
+        echo '</td>';
+
+        // Réinitialisation mot de passe si demandée
         if ($profil->getStatus() == "Y")
         {
-          echo '<td class="zone_profil_utilisateur_mdp">';
+          echo '<td class="zone_profil_utilisateur_mdp" style="border-bottom-right-radius: 5px;">';
             echo '<div class="message_profil">Si vous avez fait la demande de changement de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
 
             echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=cancelResetPassword" class="form_desinscription">';

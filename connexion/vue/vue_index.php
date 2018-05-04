@@ -47,6 +47,9 @@
             <span class="zone_logo_categories" id="logo6">
               <img src="includes/icons/missions.png" alt="missions_grey" class="logo_categories" />
             </span>
+            <!--<span class="zone_logo_categories" id="logo7">
+              <img src="includes/icons/event_manager.png" alt="event_manager_grey" class="logo_categories" />
+            </span>-->
           </div>
         </div>
 

@@ -710,19 +710,22 @@
 
 .zone_icone_saisie
 {
-	background-color: #ff1937;
-	height: 42px;
-	width: 60px;
-	display: inline-block;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+	margin-bottom: 10px;
 }
 
 .icone_saisie
 {
+	display: inline-block;
 	height: 25px;
-	margin-top: 8.5px;
-	margin-bottom: -6px;
+	width: 25px;
+	padding-top: 8.5px;
+	padding-bottom: 8.5px;
+	padding-left: 17.5px;
+	padding-right: 17.5px;
+	background-color: #ff1937;
+	vertical-align: middle;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 
 .monoligne_film
@@ -731,7 +734,6 @@
 	width: calc(90% - 60px);
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 10px;
 	line-height: 40px;
 	min-height: 40px;
 	padding-left: 10px;
@@ -742,13 +744,13 @@
 	border-bottom-right-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	vertical-align: middle;
 }
 
 .monoligne_film_short
 {
 	display: inline-block;
 	width: calc(60% - 60px);
-	margin-bottom: 10px;
 	line-height: 40px;
 	min-height: 40px;
 	padding-left: 10px;
@@ -759,6 +761,7 @@
 	border-bottom-right-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	vertical-align: middle;
 }
 
 .select_time
@@ -775,6 +778,7 @@
 	border-bottom-left-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	vertical-align: middle;
 }
 
 .restaurant
