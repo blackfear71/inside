@@ -454,6 +454,7 @@
                     'date_add'        => date("Ymd"),
                     'identifiant_add' => $user,
                     'identifiant_del' => "",
+                    'synopsis'        => "",
                     'date_theater'    => $date_theater,
                     'date_release'    => "",
                     'link'            => "",
@@ -473,6 +474,7 @@
                                                     date_add,
                                                     identifiant_add,
 																										identifiant_del,
+                                                    synopsis,
 																										date_theater,
 																										date_release,
 																										link,
@@ -489,6 +491,7 @@
                                                    :date_add,
                                                    :identifiant_add,
 																									 :identifiant_del,
+                                                   :synopsis,
 																									 :date_theater,
 																									 :date_release,
 																									 :link,
@@ -979,6 +982,7 @@
     $initFilm = new Movie();
 
     $initFilm->setFilm($_SESSION['save']['nom_film_saisi']);
+    $initFilm->setSynopsis($_SESSION['save']['synopsis_saisi']);
     $initFilm->setDate_theater($_SESSION['save']['date_theater_saisie']);
     $initFilm->setDate_release($_SESSION['save']['date_release_saisie']);
     $initFilm->setTrailer($_SESSION['save']['trailer_saisi']);
@@ -1001,6 +1005,7 @@
 
     $initFilm->setId($id_film);
     $initFilm->setFilm($_SESSION['save']['nom_film_saisi']);
+    $initFilm->setSynopsis($_SESSION['save']['synopsis_saisi']);
     $initFilm->setDate_theater($_SESSION['save']['date_theater_saisie']);
     $initFilm->setDate_release($_SESSION['save']['date_release_saisie']);
     $initFilm->setTrailer($_SESSION['save']['trailer_saisi']);
@@ -1023,6 +1028,7 @@
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_film_saisi']      = $post['nom_film'];
+    $_SESSION['save']['synopsis_saisi']      = $post['synopsis'];
     $_SESSION['save']['date_theater_saisie'] = $post['date_theater'];
     $_SESSION['save']['date_release_saisie'] = $post['date_release'];
     $_SESSION['save']['trailer_saisi']       = $post['trailer'];
@@ -1051,6 +1057,7 @@
     $date_add        = date("Ymd");
     $identifiant_add = $user;
     $identifiant_del = "";
+    $synopsis        = $post['synopsis'];
     $date_theater    = "";
     $date_release    = "";
     $link            = $post['link'];
@@ -1138,6 +1145,7 @@
                       'date_add'        => $date_add,
                       'identifiant_add' => $identifiant_add,
                       'identifiant_del' => $identifiant_del,
+                      'synopsis'        => $synopsis,
                       'date_theater'    => $date_theater,
                       'date_release'    => $date_release,
                       'link'            => $link,
@@ -1159,6 +1167,7 @@
         																							date_add,
                                                       identifiant_add,
                                                       identifiant_del,
+                                                      synopsis,
         																							date_theater,
         																							date_release,
         																							link,
@@ -1175,6 +1184,7 @@
                                                      :date_add,
                                                      :identifiant_add,
         																						 :identifiant_del,
+                                                     :synopsis,
         																						 :date_theater,
         																						 :date_release,
         																						 :link,
@@ -1219,6 +1229,7 @@
     $_SESSION['save']['trailer_saisi']       = $post['trailer'];
     $_SESSION['save']['link_saisi']          = $post['link'];
     $_SESSION['save']['poster_saisi']        = $post['poster'];
+    $_SESSION['save']['synopsis_saisi']      = $post['synopsis'];
     $_SESSION['save']['doodle_saisi']        = $post['doodle'];
     $_SESSION['save']['date_doodle_saisie']  = $post['date_doodle'];
 
@@ -1243,6 +1254,7 @@
     $date_release = "";
     $link         = $post['link'];
     $poster       = $post['poster'];
+    $synopsis     = $post['synopsis'];
     $trailer      = $post['trailer'];
     $doodle       = $post['doodle'];
     $date_doodle  = "";
@@ -1322,6 +1334,7 @@
       if ($_SESSION['alerts']['wrong_date'] != true AND $_SESSION['alerts']['wrong_date_doodle'] != true)
 			{
         $film = array('film'         => $nom_film,
+                      'synopsis'     => $synopsis,
                       'date_theater' => $date_theater,
                       'date_release' => $date_release,
                       'link'         => $link,
@@ -1339,6 +1352,7 @@
 
         // Modification de l'enregistrement en table
 				$req = $bdd->prepare('UPDATE movie_house SET film         = :film,
+                                                     synopsis     = :synopsis,
 															                       date_theater = :date_theater,
 															                       date_release = :date_release,
 															                       link         = :link,
@@ -1388,6 +1402,7 @@
     $details->setPseudo_add(htmlspecialchars($details->getPseudo_add()));
     $details->setIdentifiant_del(htmlspecialchars($details->getIdentifiant_del()));
     $details->setPseudo_del(htmlspecialchars($details->getPseudo_del()));
+    $details->setSynopsis(htmlspecialchars($details->getSynopsis()));
     $details->setDate_theater(htmlspecialchars($details->getDate_theater()));
     $details->setDate_release(htmlspecialchars($details->getDate_release()));
     $details->setLink(htmlspecialchars($details->getLink()));

@@ -164,6 +164,8 @@
                           );
       }
 
+      echo deleteInvisible($post['collector']);
+
 			// Stockage de l'enregistrement en table
       $req = $bdd->prepare('INSERT INTO collector(date_add,
                                                   author,

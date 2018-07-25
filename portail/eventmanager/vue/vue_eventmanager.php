@@ -49,7 +49,17 @@
 
 			<article>
         <?php
+          echo '<div class="entete_event">';
+            echo 'Le prochain évènement';
+          echo '</div>';
 
+          echo '<div class="entete_event">';
+            echo 'Les évènements';
+          echo '</div>';
+
+          echo '<div class="entete_event">';
+            echo 'Le référentiel';
+          echo '</div>';
         ?>
 			</article>
 

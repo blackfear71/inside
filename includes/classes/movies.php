@@ -9,6 +9,7 @@
     private $pseudo_add;
     private $identifiant_del;
     private $pseudo_del;
+    private $synopsis;
     private $date_theater;
     private $date_release;
     private $link;
@@ -37,6 +38,7 @@
       $this->pseudo_add      = '';
       $this->identifiant_del = '';
       $this->pseudo_del      = '';
+      $this->synopsis        = '';
       $this->date_theater    = '';
       $this->date_release    = '';
       $this->link            = '';
@@ -90,6 +92,9 @@
 
       if (isset($data['pseudo_del']))
         $this->pseudo_del      = $data['pseudo_del'];
+
+      if (isset($data['synopsis']))
+        $this->synopsis        = $data['synopsis'];
 
       if (isset($data['date_theater']))
         $this->date_theater    = $data['date_theater'];
@@ -227,6 +232,17 @@
     public function getPseudo_del()
     {
       return $this->pseudo_del;
+    }
+
+    // Synopsis
+    public function setSynopsis($synopsis)
+    {
+      $this->synopsis = $synopsis;
+    }
+
+    public function getSynopsis()
+    {
+      return $this->synopsis;
     }
 
     // Date sortie cinéma

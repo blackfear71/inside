@@ -35,8 +35,6 @@
           // Médailles (en excluant ceux qui sont uniques)
           if ($success->getLimit_success() > 1)
           {
-
-
             foreach ($classementUsers as $classement)
             {
               //var_dump($classement);

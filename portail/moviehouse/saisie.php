@@ -15,6 +15,7 @@
   AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
   {
     $_SESSION['save']['nom_film_saisi']         = "";
+    $_SESSION['save']['synopsis_saisi']         = "";
     $_SESSION['save']['date_theater_saisie']    = "";
     $_SESSION['save']['date_release_saisie']    = "";
     $_SESSION['save']['trailer_saisi']          = "";
@@ -91,6 +92,7 @@
         $film->setPseudo_add(htmlspecialchars($film->getPseudo_add()));
         $film->setIdentifiant_del(htmlspecialchars($film->getIdentifiant_del()));
         $film->setPseudo_add(htmlspecialchars($film->getPseudo_del()));
+        $film->setSynopsis(htmlspecialchars($film->getSynopsis()));
         $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
         $film->setDate_release(htmlspecialchars($film->getDate_release()));
         $film->setLink(htmlspecialchars($film->getLink()));

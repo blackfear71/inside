@@ -254,6 +254,18 @@
                 echo '</div>';
               }
 
+              // Synopsis
+              if (!empty($detailsFilm->getSynopsis()))
+              {
+                echo '<div class="entete_detail">';
+                  echo 'Synopsis';
+                echo '</div>';
+
+                echo '<div class="contenu_synopsis">';
+                  echo nl2br($detailsFilm->getSynopsis());
+                echo '</div>';
+              }
+
               // Sortie cinéma
               echo '<div class="entete_detail">';
                 echo 'Sortie au cinéma';

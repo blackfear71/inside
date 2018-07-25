@@ -106,9 +106,15 @@
                       echo '</div>';
 
                       // Lien poster
-                      echo '<div class="zone_icone_saisie" style="margin-bottom: 0;">';
+                      echo '<div class="zone_icone_saisie">';
                         echo '<img src="icons/poster.png" alt="poster" title="Poster" class="icone_saisie" />';
-                        echo '<input type="text" name="poster" value="' . $film->getPoster() . '" placeholder="URL poster" class="monoligne_film" style="margin-bottom: 0px;" />';
+                        echo '<input type="text" name="poster" value="' . $film->getPoster() . '" placeholder="URL poster" class="monoligne_film" />';
+                      echo '</div>';
+
+                      // Synopsis
+                      echo '<div class="zone_icone_saisie" style="margin-bottom: 0;">';
+                        echo '<img src="icons/synopsis.png" alt="synopsis" title="Synopsis" class="icone_saisie" style="vertical-align: top;" />';
+                        echo '<textarea placeholder="Synopsis" name="synopsis" class="textarea_film" style="margin-bottom: 0px;">' . $film->getSynopsis() . '</textarea>';
                       echo '</div>';
                     echo '</div>';
 
@@ -127,7 +133,7 @@
                         echo '<div class="zone_icone_saisie">';
                           echo '<img src="icons/date.png" alt="date" title="Date proposée" class="icone_saisie" />';
                           echo '<input type="text" name="date_doodle" value="' . formatDateForDisplay($film->getDate_doodle()) . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" id="datepicker3" class="monoligne_film_short" />';
-                          
+
                           // Selection de l'heure
                           echo '<select name="hours_doodle" class="select_time">';
                             if (empty($film->getTime_doodle()))
