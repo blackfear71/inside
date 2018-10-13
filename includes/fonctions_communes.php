@@ -486,7 +486,7 @@
     $formatted = "";
 
     $search    = array("[", "]");
-    $replace   = array("<strong style='color: #e3e3e3;'>[", "]</strong>");
+    $replace   = array("<strong style='color: #ff1937;'>", "</strong>");
     $formatted = str_replace($search, $replace, $context);
 
     return $formatted;

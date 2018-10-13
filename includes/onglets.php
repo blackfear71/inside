@@ -25,7 +25,7 @@
 			$onglet_4 = '<a href="/inside/portail/calendars/calendars.php?year=' . date("Y") . '&action=goConsulter" title="Calendars" class="onglet_inactif"><img src="/inside/includes/icons/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
 			$onglet_5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1" title="Collector Room" class="onglet_inactif"><img src="/inside/includes/icons/collector.png" alt="collector" title="Collector" class="logo_onglet" /></a>';
 			$onglet_6 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_inactif"><img src="/inside/includes/icons/missions.png" alt="missions" title="Missions" class="logo_onglet" /></a>';
-			$onglet_7 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_inactif"><img src="/inside/includes/icons/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
+			//$onglet_7 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_inactif"><img src="/inside/includes/icons/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
 
 			// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 			$path = $_SERVER['PHP_SELF'];
@@ -72,10 +72,10 @@
 				$onglet_6 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_actif"><img src="/inside/includes/icons/missions.png" alt="missions" title="Missions" class="logo_onglet" /></a>';
 			}
 
-			if ($path == '/inside/portail/eventmanager/eventmanager.php')
+			/*if ($path == '/inside/portail/eventmanager/eventmanager.php')
 			{
 				$onglet_7 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_actif"><img src="/inside/includes/icons/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
-			}
+			}*/
 
 			echo $onglet_1, $onglet_2, $onglet_3, $onglet_4, $onglet_5, $onglet_6/*, $onglet_7*/;
 		echo '</div>';

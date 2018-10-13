@@ -39,7 +39,7 @@
   {
     $nb_pages    = 0;
     $nb_col      = 0;
-    $nb_par_page = 10;
+    $nb_par_page = 18;
 
     global $bdd;
 
@@ -60,7 +60,7 @@
   function getCollectors($listUsers, $nb_pages, $page)
   {
     $listCollectors = array();
-    $nb_par_page    = 10;
+    $nb_par_page    = 18;
 
     // Contrôle dernière page
     if ($page > $nb_pages)

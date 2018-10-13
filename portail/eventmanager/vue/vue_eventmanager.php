@@ -50,11 +50,11 @@
 			<article>
         <?php
           echo '<div class="entete_event">';
-            echo 'Le prochain évènement';
+            echo 'Les évènements à venir';
           echo '</div>';
 
           echo '<div class="entete_event">';
-            echo 'Les évènements';
+            echo 'Tous les évènements';
           echo '</div>';
 
           echo '<div class="entete_event">';
