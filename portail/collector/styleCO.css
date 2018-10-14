@@ -138,7 +138,7 @@
 	background-color: white;
 }
 
-/*** Actions et utilisateur ***/
+/*** Zone ***/
 .zone_collectors
 {
 	margin-top: 65px;
@@ -152,6 +152,7 @@
 	width: 525px;
 }
 
+/*** Actions et utilisateur ***/
 .zone_collector_haut
 {
 	background-color: #b3b3b3;

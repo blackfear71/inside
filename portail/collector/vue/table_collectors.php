@@ -11,7 +11,7 @@
       echo '<div class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
         echo '<div class="zone_collector_haut">';
           // Modification
-          echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Modifier la phrase culte" class="icone_modify_collector"></a>';
+          echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Modifier la phrase culte" class="icone_modify_collector"></a>';
 
           // Suppression
           echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
@@ -146,7 +146,7 @@
             echo '<input type="submit" name="delete_collector" value="" title="Valider" class="icon_validate_collector" />';
 
             // Annulation modification
-            echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\');" title="Annuler" class="icone_cancel_collector"></a>';
+            echo '<a onclick="afficherMasquerRow(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquerRow(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_collector"></a>';
 
             // Avatar
             if (!empty($collector->getAvatar_s()))
