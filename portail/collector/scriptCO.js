@@ -134,7 +134,10 @@ function initMasonry()
     columnWidth: 525,
     fitWidth: true,
     gutter: 20,
-    horizontalOrder: true,
+    horizontalOrder: true
     /*transitionDuration: 0*/
   });
+
+  $('.text_collector').wrapInner();
+
 }

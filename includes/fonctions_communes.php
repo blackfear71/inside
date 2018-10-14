@@ -496,7 +496,7 @@
   // Retour : phrase nettoyée
   function deleteInvisible($phrase)
   {
-    $cleaned = preg_replace('/[\xE2\x80\x8E]/', '', $phrase);
+    $cleaned = preg_replace('[\xE2\x80\x8E]', '', $phrase);
 
     return $cleaned;
   }
