@@ -141,16 +141,15 @@
 /*** Actions et utilisateur ***/
 .zone_collectors
 {
-  column-count: 3;
 	margin-top: 65px;
 	margin-bottom: -65px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .zone_collector
 {
-	display: inline-block;
-	width: 100%;
-	vertical-align: top;
+	width: 525px;
 }
 
 .zone_collector_haut
@@ -342,10 +341,11 @@
 	padding-left: 40px;
 	padding-right: 40px;
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 20px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
 	border-top: solid 3px #a3a3a3;
+	overflow: hidden;
 }
 
 /*** Vote ***/

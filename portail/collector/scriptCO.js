@@ -112,3 +112,14 @@ $(function()
         });
   });
 });
+
+$(document).ready(function()
+{
+  $('.zone_collectors').masonry({
+    // Options
+    itemSelector: '.zone_collector',
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+  });
+});
