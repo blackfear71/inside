@@ -102,11 +102,14 @@ $(function()
   });
 
   // Survol des onglets
-  $('.titre_onglet').hover(function(e)
+  $('#onglet_users').hover(function(e)
   {
-    if (windowChat == "1" && $('#onglet_users').is(':hover'))
+    if (windowChat == "1")
       $('#onglet_users').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
-    else if (windowChat == "2" && $('#onglet_chat').is(':hover'))
+  });
+  $('#onglet_chat').hover(function(e)
+  {
+    if (windowChat == "2")
       $('#onglet_chat').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
   });
 
