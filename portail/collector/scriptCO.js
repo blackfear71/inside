@@ -150,14 +150,19 @@ $(function()
 // Appel "Masonry"
 $(document).ready(function()
 {
-  $('.zone_collectors').masonry({
-    // Options
-    itemSelector: '.zone_collector',
-    columnWidth: 525,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
+  // On lance Masonry après avoir chargé les images
+  $('.zone_collectors').imagesLoaded(function()
+  {
+    $('.zone_collectors').masonry({
+      // Options
+      itemSelector: '.zone_collector',
+      columnWidth: 525,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
   });
+
 });
 
 function initMasonry()
