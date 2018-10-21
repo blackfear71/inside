@@ -9,6 +9,7 @@
     private $avatar_s;
     private $type_s;
     private $date_collector;
+    private $type_collector;
     private $collector;
     private $context;
     private $date;
@@ -25,6 +26,7 @@
       $this->avatar_s       = '';
       $this->type_s         = '';
       $this->date_collector = '';
+      $this->type_collector = '';
       $this->collector      = '';
       $this->context        = '';
     }
@@ -58,6 +60,9 @@
 
       if (isset($data['date_collector']))
         $this->date_collector = $data['date_collector'];
+
+      if (isset($data['type_collector']))
+        $this->type_collector = $data['type_collector'];
 
       if (isset($data['collector']))
         $this->collector      = $data['collector'];
@@ -164,6 +169,17 @@
     public function getDate_collector()
     {
       return $this->date_collector;
+    }
+
+    // Type Collector
+    public function setType_collector($type_collector)
+    {
+      $this->type_collector = $type_collector;
+    }
+
+    public function getType_collector()
+    {
+      return $this->type_collector;
     }
 
     // Phrase collector

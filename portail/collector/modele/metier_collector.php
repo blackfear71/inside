@@ -2,6 +2,7 @@
   include_once('../../includes/appel_bdd.php');
   include_once('../../includes/classes/collectors.php');
   include_once('../../includes/classes/profile.php');
+  include_once('../../includes/imagethumb.php');
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
@@ -122,14 +123,17 @@
 
   // METIER : Insertion phrases cultes
   // RETOUR : Aucun
-  function insertCollector($post, $user)
+  function insertCollector($post, $files, $user)
   {
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['speaker']        = $post['speaker'];
     $_SESSION['save']['other_speaker']  = $post['other_speaker'];
     $_SESSION['save']['date_collector'] = $post['date_collector'];
-    $_SESSION['save']['collector']      = $post['collector'];
+    $_SESSION['save']['type_collector'] = $post['type_collector'];
     $_SESSION['save']['context']        = $post['context'];
+
+    if ($post['type_collector'] == "T")
+      $_SESSION['save']['collector']    = $post['collector'];
 
     $date_a_verifier = $post['date_collector'];
 
@@ -139,6 +143,12 @@
     // On vérifie le format de la date
     if (checkdate($m, $d, $y))
     {
+      //Formatage du texte ou insertion image
+      if ($post['type_collector'] == "T")
+        $collector = deleteInvisible($post['collector']);
+      elseif ($post['type_collector'] == "I")
+        $collector = uploadImage($files, rand());
+
       global $bdd;
 
       if ($post['speaker'] == "other")
@@ -148,7 +158,8 @@
                            'speaker'        => $post['other_speaker'],
                            'type_speaker'   => $post['speaker'],
                            'date_collector' => formatDateForInsert($date_a_verifier),
-                           'collector'      => deleteInvisible($post['collector']),
+                           'type_collector' => $post['type_collector'],
+                           'collector'      => $collector,
                            'context'        => deleteInvisible($post['context'])
                           );
       }
@@ -159,7 +170,8 @@
                            'speaker'        => $post['speaker'],
                            'type_speaker'   => "user",
                            'date_collector' => formatDateForInsert($date_a_verifier),
-                           'collector'      => deleteInvisible($post['collector']),
+                           'type_collector' => $post['type_collector'],
+                           'collector'      => $collector,
                            'context'        => deleteInvisible($post['context'])
                           );
       }
@@ -170,6 +182,7 @@
 																									speaker,
                                                   type_speaker,
 																									date_collector,
+                                                  type_collector,
 																									collector,
                                                   context
                                                  )
@@ -178,6 +191,7 @@
 																									:speaker,
                                                   :type_speaker,
 																								  :date_collector,
+                                                  :type_collector,
 																								  :collector,
                                                   :context
                                                  )');
@@ -187,12 +201,75 @@
       // Génération notification phrase culte ajoutée
       $new_id = $bdd->lastInsertId();
 
-      insertNotification($user, 'culte', $new_id);
+      if ($post['type_collector'] == "T")
+        insertNotification($user, 'culte', $new_id);
+      elseif ($post['type_collector'] == "I")
+        insertNotification($user, 'culte_image', $new_id);
 
-      $_SESSION['alerts']['collector_added'] = true;
+      // Message d'alerte
+      if ($post['type_collector'] == "T")
+        $_SESSION['alerts']['collector_added'] = true;
+      elseif ($post['type_collector'] == "I")
+        $_SESSION['alerts']['image_collector_added'] = true;
     }
     else
       $_SESSION['alerts']['wrong_date'] = true;
+  }
+
+  // METIER : Formatage et insertion image Collector
+  // RETOUR : Nom fichier avec extension
+  function uploadImage($files, $name)
+  {
+    $new_name = "";
+
+    // On contrôle la présence du dossier, sinon on le créé
+    $dossier = "images";
+
+    if (!is_dir($dossier))
+      mkdir($dossier);
+
+    // Si on a bien une image
+ 		if ($files['image']['name'] != NULL)
+ 		{
+ 			// Dossier de destination
+ 			$image_dir = $dossier . '/';
+
+ 			// Données du fichier
+ 			$file      = $files['image']['name'];
+ 			$tmp_file  = $files['image']['tmp_name'];
+ 			$size_file = $files['image']['size'];
+      $maxsize   = 8388608; // 8Mo
+
+      // Si le fichier n'est pas trop grand
+ 			if ($size_file < $maxsize)
+ 			{
+ 				// Contrôle fichier temporaire existant
+ 				if (!is_uploaded_file($tmp_file))
+ 					exit("Le fichier est introuvable");
+
+ 				// Contrôle type de fichier
+ 				$type_file = $files['image']['type'];
+
+ 				if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+ 					exit("Le fichier n'est pas une image valide");
+ 				else
+ 				{
+ 					$type_image = pathinfo($file, PATHINFO_EXTENSION);
+ 					$new_name   = $name . '.' . $type_image;
+ 				}
+
+ 				// Contrôle upload (si tout est bon, l'image est envoyée)
+ 				if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
+ 					exit("Impossible de copier le fichier dans $image_dir");
+
+ 				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 1000px (cf fonction imagethumb.php)
+ 				imagethumb($image_dir . $new_name, $image_dir . $new_name, 1000, FALSE, FALSE);
+
+ 				// echo "Le fichier a bien été uploadé";
+ 			}
+ 		}
+
+    return $new_name;
   }
 
   // METIER : Suppression phrases cultes
@@ -201,18 +278,38 @@
   {
     global $bdd;
 
-    $req = $bdd->exec('DELETE FROM collector WHERE id = ' . $id_col);
+    // Suppression image
+    $req1 = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
+    $data1 = $req1->fetch();
+
+    if (isset($data1['collector']) AND !empty($data1['collector']) AND $data1['type_collector'] == "I")
+      unlink ("images/" . $data1['collector']);
+
+    $type_collector = $data1['type_collector'];
+
+    $req1->closeCursor();
+
+    // Suppression enregistrement base
+    $req2 = $bdd->exec('DELETE FROM collector WHERE id = ' . $id_col);
 
     // Suppression des notifications
-    deleteNotification('culte', $id_col);
+    if ($type_collector == "T")
+      deleteNotification('culte', $id_col);
+    elseif ($type_collector == "I")
+      deleteNotification('culte_image', $id_col);
 
-    $_SESSION['alerts']['collector_deleted'] = true;
+    // Message d'alerte
+    if ($type_collector == "T")
+      $_SESSION['alerts']['collector_deleted'] = true;
+    elseif ($type_collector == "I")
+      $_SESSION['alerts']['image_collector_deleted'] = true;
   }
 
   // METIER : Modification phrases cultes
   // RETOUR : Aucun
   function updateCollector($post, $id_col)
   {
+    $collector       = $post['collector'];
     $date_a_verifier = $post['date_collector'];
 
     // On décompose la date à contrôler
@@ -223,6 +320,18 @@
     {
       global $bdd;
 
+      // On récupère éventuellement le nom du fichier en cas d'image
+      if ($post['type_collector'] == "I")
+      {
+        $reponse = $bdd->query('SELECT id, collector FROM collector WHERE id = ' . $id_col);
+        $donnees = $reponse->fetch();
+
+        $collector = $donnees['collector'];
+
+        $reponse->closeCursor();
+      }
+
+      // Speaker
       if ($post['speaker'] == "other")
       {
         $speaker      = $post['other_speaker'];
@@ -258,12 +367,16 @@
         'speaker'        => $speaker,
         'type_speaker'   => $type_speaker,
         'date_collector' => formatDateForInsert($post['date_collector']),
-        'collector'      => deleteInvisible($post['collector']),
+        'collector'      => deleteInvisible($collector),
         'context'        => deleteInvisible($post['context'])
       ));
       $req->closeCursor();
 
-      $_SESSION['alerts']['collector_modified'] = true;
+      // Message d'alerte
+      if ($post['type_collector'] == "T")
+        $_SESSION['alerts']['collector_modified'] = true;
+      elseif ($post['type_collector'] == "I")
+        $_SESSION['alerts']['image_collector_modified'] = true;
     }
     else
       $_SESSION['alerts']['wrong_date'] = true;

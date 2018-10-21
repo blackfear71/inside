@@ -153,7 +153,7 @@
  		if ($files['avatar']['name'] != NULL)
  		{
  			// Dossier de destination
- 			$avatar_dir = 'avatars/';
+ 			$avatar_dir = $dossier . '/';
 
  			// Données du fichier
  			$file      = $files['avatar']['name'];

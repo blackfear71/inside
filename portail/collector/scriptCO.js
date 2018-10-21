@@ -1,13 +1,30 @@
-// Affiche ou masque la modification de phrase culte
-function afficherMasquerRow(id)
+// Affiche la saisie d'un phrase culte
+function afficherMasquerSaisiePhraseCulte()
 {
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "table";
+  if (document.getElementById('zone_add_collector').style.display == "none")
+    document.getElementById('zone_add_collector').style.display = "block";
   else
-    document.getElementById(id).style.display = "none";
+    document.getElementById('zone_add_collector').style.display = "none";
 }
 
-// Affiche ou masque la modification du vote
+// Affiche la saisie d'une image
+function afficherMasquerSaisieImage()
+{
+  if (document.getElementById('zone_add_image').style.display == "none")
+    document.getElementById('zone_add_image').style.display = "block";
+  else
+    document.getElementById('zone_add_image').style.display = "none";
+}
+
+// Insère une prévisualisation de l'image sur la zone
+var loadFile = function(event)
+{
+  var output = document.getElementById('image_collector');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.src.SizeHeight = "115px";
+};
+
+// Affiche ou masque un élément
 function afficherMasquer(id)
 {
   if (document.getElementById(id).style.display == "none")
@@ -25,7 +42,7 @@ function afficherOther(td, select, id, required)
     {
       document.getElementById(id).style.display = "table-cell";
       document.getElementById(required).required = true;
-      document.getElementById(td).style.width = "20%";
+      document.getElementById(td).style.width = "19%";
       document.getElementById(select).style.paddingLeft = "2%";
       document.getElementById(select).style.paddingRight = "2%";
     }
@@ -76,10 +93,27 @@ $(function()
 // Génère un ou plusieurs calendrier
 $(function()
 {
-  $("#datepickerSaisie").datepicker(
+  $("#datepicker1").datepicker(
   {
     firstDay: 1,
-    altField: "#datepickerSaisie",
+    altField: "#datepicker1",
+    closeText: 'Fermer',
+    prevText: 'Précédent',
+    nextText: 'Suivant',
+    currentText: 'Aujourd\'hui',
+    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+    monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+    weekHeader: 'Sem.',
+    dateFormat: 'dd/mm/yy'
+  });
+
+  $("#datepicker2").datepicker(
+  {
+    firstDay: 1,
+    altField: "#datepicker2",
     closeText: 'Fermer',
     prevText: 'Précédent',
     nextText: 'Suivant',

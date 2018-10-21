@@ -245,6 +245,40 @@
           $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=1";
           break;
 
+        case "culte_image":
+          // Recherche auteur et coupable ;)
+          $reponse1 = $bdd->query('SELECT * FROM collector WHERE id = ' . $notification->getContent());
+          $donnees1 = $reponse1->fetch();
+
+            $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
+            $donnees2 = $reponse2->fetch();
+            if ($reponse2->rowCount() > 0)
+              $author = $donnees2['pseudo'];
+            else
+              $author = '<i>un ancien utilisateur</i>';
+            $reponse2->closeCursor();
+
+            // Si speaker autre que "Autre"
+            if ($donnees1['type_speaker'] != "other")
+            {
+              $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
+              $donnees3 = $reponse3->fetch();
+              if ($reponse3->rowCount() > 0)
+                $speaker = $donnees3['pseudo'];
+              else
+                $speaker = '<i>un ancien utilisateur</i>';
+              $reponse3->closeCursor();
+            }
+            else
+              $speaker = $donnees1['speaker'];
+
+          $reponse1->closeCursor();
+
+          $icone  = "collector";
+          $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_2' class='smiley' />";
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=1";
+          break;
+
         case "depense":
           list($user1, $user2) = explode(";", $notification->getContent());
 

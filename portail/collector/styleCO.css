@@ -3,27 +3,209 @@
 /**********************/
 
 /*** Saisie ***/
+.zone_liens_saisie
+{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.lien_saisie_collector
+{
+	display: inline-block;
+	margin-right: 15px;
+	cursor: pointer;
+	background-color: #e3e3e3;
+	padding: 10px;
+	border-radius: 2px;
+	margin-bottom: 15px;
+}
+
+.zone_logo_add
+{
+	float: left;
+	width: 80px;
+	height: 80px;
+	background-color: #ff1937;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.zone_texte_add
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	line-height: 80px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+}
+
+.image_saisie_collector
+{
+	width: 60px;
+	height: 60px;
+	margin-top: 10px;
+}
+
+@keyframes affichageFond
+{
+	0%
+	{
+		background-color: rgb(0, 0, 0, 0);
+	}
+	100%
+	{
+		background-color: rgb(0, 0, 0, 0.5);
+	}
+}
+
+.fond_saisie_collector
+{
+	animation: 0.4s ease 0s normal forwards 1 affichageFond;
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+@keyframes affichageSaisie
+{
+	0%
+	{
+		margin-top: -300px;
+	}
+	100%
+	{
+		margin-top: 200px;
+	}
+}
+
+.zone_saisie_collector
+{
+	animation: 0.4s ease 0s normal forwards 1 affichageSaisie;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: auto;
+	border-radius: 2px;
+}
+
+.titre_saisie_collector
+{
+	display: inline-block;
+	line-height: 50px;
+	background-color: #c3c3c3;
+	width: calc(100% - 40px);
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 120%;
+	color: #262626;
+	border-bottom: solid 2px #a3a3a3;
+}
+
+.close_index
+{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin-top: -40px;
+	margin-right: 10px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.close_img
+{
+	width: 20px;
+	padding: 5px;
+	transform: rotate(0deg);
+	transition: transform 0.2s ease;
+}
+
+.close_img:hover
+{
+	transform: rotate(90deg);
+	transition: transform 0.2s ease;
+}
+
 .form_saisie_collector
 {
 	width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;
-  margin-bottom: -15px;
   text-align: center;
+	background-color: white;
+	border-top: solid 1px #d3d3d3;
 }
 
 .table_saisie_collector
 {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0px 15px;
+  border-spacing: 15px 15px;
+}
+
+.zone_parcourir_image
+{
+	width: 118px;
+	height: 118px;
+	margin-top: -5px;
+	border-style: dashed;
+	border-width: 3px;
+	border-radius: 2px;
+	border-color: #a3a3a3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 300%;
+	color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+}
+
+.symbole_saisie_image
+{
+	width: 118px;
+	height: 118px;
+	line-height: 118px;
+}
+
+.bouton_parcourir_image
+{
+	display: block;
+	opacity: 0;
+	width: 118px;
+	height: 118px;
+	width: 100%;
+	margin-top: -118px;
+	cursor: pointer;
+}
+
+.mask_image
+{
+	width: 118px;
+	height: 118px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -121px;
+	line-height: 115px;
+}
+
+.image
+{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
 }
 
 .td_saisie_collector_user
 {
   width: 50%;
-  padding-right: 0.8%;
 }
 
 .saisie_speaker
@@ -32,7 +214,7 @@
   padding-left: 1%;
   padding-right: 1%;
   height: 45px;
-  border-radius: 5px;
+  border-radius: 2px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
@@ -42,7 +224,6 @@
 .td_saisie_collector_name
 {
   width: 30%;
-  padding-right: 1%;
 }
 
 .saisie_other_collector
@@ -52,7 +233,7 @@
   padding-right: 3%;
   height: 41px;
   line-height: 41px;
-  border-radius: 5px;
+  border-radius: 2px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
@@ -62,7 +243,6 @@
 .td_saisie_collector_date
 {
   width: 30%;
-  padding-right: 1%;
 }
 
 .saisie_date_collector
@@ -72,7 +252,7 @@
   padding-right: 3%;
   height: 41px;
   line-height: 41px;
-  border-radius: 5px;
+  border-radius: 2px;
   border: solid 1px #a3a3a3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
@@ -89,7 +269,7 @@
 	width: 100%;
   height: 45px;
 	line-height: 45px;
-  border-radius: 5px;
+  border-radius: 2px;
 	border: solid 1px #e3e3e3;
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
@@ -116,7 +296,7 @@
   padding: 1%;
   font-family: robotolight, Verdana, sans-serif;
   resize: vertical;
-  border-radius: 5px;
+  border-radius: 2px;
   border: solid 1px #a3a3a3;
 	background-color: white;
 }
@@ -133,7 +313,7 @@
   padding: 1%;
   font-family: robotolight, Verdana, sans-serif;
   resize: vertical;
-  border-radius: 5px;
+  border-radius: 2px;
   border: solid 1px #a3a3a3;
 	background-color: white;
 }
@@ -306,6 +486,12 @@
 	margin-top: -30px;
   width: 20px;
   filter: drop-shadow(0px 0px 1px #7c7c7c);
+}
+
+.image_collector
+{
+	width: 100%;
+	margin-bottom: -4px;
 }
 
 .author_collector

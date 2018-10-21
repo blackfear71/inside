@@ -50,69 +50,189 @@
 
 			<article>
         <?php
-          // Saisie phrase culte
-          echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
-            echo '<table class="table_saisie_collector">';
-              echo '<tr>';
-                // Saisie speaker
-                if (!empty($_SESSION['save']['other_speaker']))
-                  echo '<td class="td_saisie_collector_user" id="td_other" style="width: 20%;">';
-                else
-                  echo '<td class="td_saisie_collector_user" id="td_other">';
-                    echo '<select name="speaker" id="speaker" onchange="afficherOther(\'td_other\', \'speaker\', \'other_speaker\', \'other_name\');" class="saisie_speaker" required>';
-                      echo '<option value="" hidden>Choisissez...</option>';
+          /*******************/
+          /* Liens de saisie */
+          /*******************/
+          echo '<div class="zone_liens_saisie">';
+            echo '<a onclick="afficherMasquerSaisiePhraseCulte();" title="Ajouter une phrase culte" class="lien_saisie_collector">';
+              echo '<div class="zone_logo_add"><img src="icons/phrases.png" alt="comments" class="image_saisie_collector"/></div>';
+              echo '<div class="zone_texte_add">Ajouter une phrase culte</div>';
+            echo '</a>';
 
-                      foreach ($listeUsers as $user)
-                      {
-                        if ($user->getIdentifiant() == $_SESSION['save']['speaker'])
-                          echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
-                        else
-                          echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                      }
+            echo '<a onclick="afficherMasquerSaisieImage();" title="Ajouter une image" class="lien_saisie_collector">';
+              echo '<div class="zone_logo_add"><img src="icons/images.png" alt="images" class="image_saisie_collector"/></div>';
+              echo '<div class="zone_texte_add">Ajouter une image</div>';
+            echo '</a>';
+          echo '</div>';
 
-                      if (!empty($_SESSION['save']['other_speaker']))
-                        echo '<option value="other" selected>Autre</option>';
-                      else
-                        echo '<option value="other">Autre</option>';
-                  echo '</select>';
-                echo '</td>';
+          /**********************************/
+          /* Zone de saisie de phrase culte */
+          /**********************************/
+          echo '<div id="zone_add_collector" style="display: none;" class="fond_saisie_collector">';
+            echo '<div class="zone_saisie_collector">';
+              // Titre
+              echo '<div class="titre_saisie_collector">Ajouter une phrase culte</div>';
 
-                // Saisie "Autre"
-                if (!empty($_SESSION['save']['other_speaker']))
-                  echo '<td class="td_saisie_collector_name" id="other_speaker">';
-                else
-                  echo '<td class="td_saisie_collector_name" id="other_speaker" style="display: none;">';
-                    echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name" class="saisie_other_collector" />';
-                echo '</td>';
+              // Bouton fermeture
+              echo '<a onclick="afficherMasquerSaisiePhraseCulte();" class="close_index"><img src="../../includes/icons/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
-                // Saisie date
-                echo '<td class="td_saisie_collector_date">';
-                  echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" id="datepickerSaisie" class="saisie_date_collector" required />';
-                echo '</td>';
+              // Saisie phrase culte
+              echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
+                echo '<table class="table_saisie_collector">';
+                  // Type de saisie
+                  echo '<input type="hidden" name="type_collector" value="T" />';
 
-                // Bouton
-                echo '<td class="td_saisie_collector_add">';
-                  echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
-                echo '</td>';
-              echo '</tr>';
+                  // Tableau de saisie
+                  echo '<tr>';
+                    // Saisie speaker
+                    if (!empty($_SESSION['save']['other_speaker']))
+                      echo '<td class="td_saisie_collector_user" id="td_other" style="width: 20%;">';
+                    else
+                      echo '<td class="td_saisie_collector_user" id="td_other">';
+                        echo '<select name="speaker" id="speaker" onchange="afficherOther(\'td_other\', \'speaker\', \'other_speaker\', \'other_name\');" class="saisie_speaker" required>';
+                          echo '<option value="" hidden>Choisissez...</option>';
 
-              echo '<tr>';
-                // Saisie phrase
-                echo '<td colspan="100%" class="td_saisie_collector">';
-                  echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['save']['collector'] . '</textarea>';
-                echo '</td>';
-              echo '</tr>';
+                          foreach ($listeUsers as $user)
+                          {
+                            if ($user->getIdentifiant() == $_SESSION['save']['speaker'])
+                              echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                            else
+                              echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                          }
 
-              echo '<tr>';
-                // Saisie contexte
-                echo '<td colspan="100%" class="td_saisie_collector_cont">';
-                  echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['save']['context'] . '</textarea>';
-                echo '</td>';
-              echo '</tr>';
-            echo '</table>';
-          echo '</form>';
+                          if (!empty($_SESSION['save']['other_speaker']))
+                            echo '<option value="other" selected>Autre</option>';
+                          else
+                            echo '<option value="other">Autre</option>';
+                      echo '</select>';
+                    echo '</td>';
 
-          // Affichage des phrases cultes
+                    // Saisie "Autre"
+                    if (!empty($_SESSION['save']['other_speaker']))
+                      echo '<td class="td_saisie_collector_name" id="other_speaker">';
+                    else
+                      echo '<td class="td_saisie_collector_name" id="other_speaker" style="display: none;">';
+                        echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name" class="saisie_other_collector" />';
+                    echo '</td>';
+
+                    // Saisie date
+                    echo '<td class="td_saisie_collector_date">';
+                      echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker1" class="saisie_date_collector" required />';
+                    echo '</td>';
+
+                    // Bouton
+                    echo '<td class="td_saisie_collector_add">';
+                      echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
+                    echo '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                    // Saisie phrase
+                    echo '<td colspan="100%" class="td_saisie_collector">';
+                      echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['save']['collector'] . '</textarea>';
+                    echo '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                    // Saisie contexte
+                    echo '<td colspan="100%" class="td_saisie_collector_cont">';
+                      echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['save']['context'] . '</textarea>';
+                    echo '</td>';
+                  echo '</tr>';
+                echo '</table>';
+              echo '</form>';
+            echo '</div>';
+          echo '</div>';
+
+          /**************************/
+          /* Zone de saisie d'image */
+          /**************************/
+          echo '<div id="zone_add_image" style="display: none;" class="fond_saisie_collector">';
+            echo '<div class="zone_saisie_collector">';
+              // Titre
+              echo '<div class="titre_saisie_collector">Ajouter une image</div>';
+
+              // Bouton fermeture
+              echo '<a onclick="afficherMasquerSaisieImage();" class="close_index"><img src="/inside/includes/icons/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+
+              // Saisie image
+              echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" runat="server" class="form_saisie_collector">';
+                echo '<table class="table_saisie_collector">';
+                  // Type de saisie
+                  echo '<input type="hidden" name="type_collector" value="I" />';
+
+                  // Tableau de saisie
+                  echo '<tr>';
+                    // Saisie image
+                    echo '<td rowspan="2" class="td_saisie_collector_image">';
+                      echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+
+                      echo '<div class="zone_parcourir_image">';
+                        echo '<div class="symbole_saisie_image">+</div>';
+                        echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image" onchange="loadFile(event)" required />';
+                      echo '</div>';
+
+                      echo '<div class="mask_image">';
+                        echo '<img id="image_collector" class="image" />';
+                      echo '</div>';
+                    echo '</td>';
+
+                    // Saisie speaker
+                    if (!empty($_SESSION['save']['other_speaker']))
+                      echo '<td class="td_saisie_collector_user" id="td_other_2" style="width: 20%;">';
+                    else
+                      echo '<td class="td_saisie_collector_user" id="td_other_2">';
+                        echo '<select name="speaker" id="speaker_2" onchange="afficherOther(\'td_other_2\', \'speaker_2\', \'other_speaker_2\', \'other_name_2\');" class="saisie_speaker" required>';
+                          echo '<option value="" hidden>Choisissez...</option>';
+
+                          foreach ($listeUsers as $user)
+                          {
+                            if ($user->getIdentifiant() == $_SESSION['save']['speaker'])
+                              echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                            else
+                              echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                          }
+
+                          if (!empty($_SESSION['save']['other_speaker']))
+                            echo '<option value="other" selected>Autre</option>';
+                          else
+                            echo '<option value="other">Autre</option>';
+                      echo '</select>';
+                    echo '</td>';
+
+                    // Saisie "Autre"
+                    if (!empty($_SESSION['save']['other_speaker']))
+                      echo '<td class="td_saisie_collector_name" id="other_speaker_2">';
+                    else
+                      echo '<td class="td_saisie_collector_name" id="other_speaker_2" style="display: none;">';
+                        echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name_2" class="saisie_other_collector" />';
+                    echo '</td>';
+
+                    // Saisie date
+                    echo '<td class="td_saisie_collector_date">';
+                      echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker2" class="saisie_date_collector" required />';
+                    echo '</td>';
+
+                    // Bouton
+                    echo '<td class="td_saisie_collector_add">';
+                      echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
+                    echo '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                    // Saisie contexte
+                    echo '<td colspan="100%" class="td_saisie_collector_cont">';
+                      echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['save']['context'] . '</textarea>';
+                    echo '</td>';
+                  echo '</tr>';
+                echo '</table>';
+              echo '</form>';
+            echo '</div>';
+          echo '</div>';
+
+          /********************************/
+          /* Affichage des phrases cultes */
+          /********************************/
           include('vue/table_collectors.php');
 
           // Pagination

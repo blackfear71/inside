@@ -16,6 +16,7 @@
     $_SESSION['save']['speaker']        = "";
     $_SESSION['save']['other_speaker']  = "";
     $_SESSION['save']['date_collector'] = "";
+    $_SESSION['save']['type_collector'] = "";
     $_SESSION['save']['collector']      = "";
     $_SESSION['save']['context']        = "";
   }
@@ -47,7 +48,7 @@
       break;
 
     case "doAjouter":
-      insertCollector($_POST, $_SESSION['user']['identifiant']);
+      insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimer":
@@ -92,6 +93,7 @@
           $collector->setName_s(htmlspecialchars($collector->getName_s()));
           $collector->setType_s(htmlspecialchars($collector->getType_s()));
           $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
+          $collector->setType_collector(htmlspecialchars($collector->getType_collector()));
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
           $collector->setContext(htmlspecialchars($collector->getContext()));
           $collector->setDate_add(htmlspecialchars($collector->getDate_add()));

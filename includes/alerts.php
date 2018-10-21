@@ -138,11 +138,20 @@
   if (!isset($_SESSION['alerts']['collector_added']))
     $_SESSION['alerts']['collector_added'] = NULL;
 
+  if (!isset($_SESSION['alerts']['image_collector_added']))
+    $_SESSION['alerts']['image_collector_added'] = NULL;
+
   if (!isset($_SESSION['alerts']['collector_deleted']))
     $_SESSION['alerts']['collector_deleted'] = NULL;
 
+  if (!isset($_SESSION['alerts']['image_collector_deleted']))
+    $_SESSION['alerts']['image_collector_deleted'] = NULL;
+
   if (!isset($_SESSION['alerts']['collector_modified']))
     $_SESSION['alerts']['collector_modified'] = NULL;
+
+  if (!isset($_SESSION['alerts']['image_collector_modified']))
+    $_SESSION['alerts']['image_collector_modified'] = NULL;
 
   // Initialisations emails
   if (!isset($_SESSION['alerts']['mail_film_send']))
@@ -544,17 +553,35 @@
     $alerte = 'La phrase culte a été ajoutée.';
     $_SESSION['alerts']['collector_added'] = NULL;
   }
+  // ALerte image culte ajoutée
+  elseif (isset($_SESSION['alerts']['image_collector_added']) AND $_SESSION['alerts']['image_collector_added'] == true)
+  {
+    $alerte = 'L\'image a été ajoutée.';
+    $_SESSION['alerts']['image_collector_added'] = NULL;
+  }
   // Alerte phrase culte supprimée
   elseif (isset($_SESSION['alerts']['collector_deleted']) AND $_SESSION['alerts']['collector_deleted'] == true)
   {
     $alerte = 'La phrase culte a été supprimée.';
     $_SESSION['alerts']['collector_deleted'] = NULL;
   }
+  // Alerte image culte supprimée
+  elseif (isset($_SESSION['alerts']['image_collector_deleted']) AND $_SESSION['alerts']['image_collector_deleted'] == true)
+  {
+    $alerte = 'L\'image a été supprimée.';
+    $_SESSION['alerts']['image_collector_deleted'] = NULL;
+  }
   // Alerte phrase culte modifiée
   elseif (isset($_SESSION['alerts']['collector_modified']) AND $_SESSION['alerts']['collector_modified'] == true)
   {
     $alerte = 'La phrase culte a été modifiée.';
     $_SESSION['alerts']['collector_modified'] = NULL;
+  }
+  // Alerte image culte modifiée
+  elseif (isset($_SESSION['alerts']['image_collector_modified']) AND $_SESSION['alerts']['image_collector_modified'] == true)
+  {
+    $alerte = 'L\'image a été modifiée.';
+    $_SESSION['alerts']['image_collector_modified'] = NULL;
   }
   // Alerte email film
   elseif (isset($_SESSION['alerts']['mail_film_send']) AND $_SESSION['alerts']['mail_film_send'] == true)
