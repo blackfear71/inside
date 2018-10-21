@@ -161,12 +161,15 @@ $(document).ready(function()
       gutter: 20,
       horizontalOrder: true
     });
+
+    $('.zone_collectors').addClass('masonry');
   });
 
 });
 
 function initMasonry()
 {
+  // On lance Masonry
   $('.zone_collectors').masonry({
     // Options
     itemSelector: '.zone_collector',
@@ -177,6 +180,6 @@ function initMasonry()
     /*transitionDuration: 0*/
   });
 
+  // Découpe le texte si besoin
   $('.text_collector').wrapInner();
-
 }

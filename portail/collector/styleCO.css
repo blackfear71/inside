@@ -323,6 +323,13 @@
 {
 	margin-left: auto;
 	margin-right: auto;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_collectors.masonry
+{
+	opacity: 1;
 }
 
 .zone_collector
