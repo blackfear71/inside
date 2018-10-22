@@ -8,7 +8,7 @@
         /* Visualisation normale (sans modification) */
         /*********************************************/
         echo '<div class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
-          echo '<div class="zone_collector_haut">';
+          echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
             // Modification
             echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
 

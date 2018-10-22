@@ -41,6 +41,7 @@
 
     global $bdd;
 
+    // Récupération des notifications en fonction de la vue
     switch ($view)
     {
       case "me":
@@ -240,9 +241,12 @@
 
           $reponse1->closeCursor();
 
+          // Recherche du numéro de page
+          $num_page = numPageCollector($notification->getContent());
+
           $icone  = "collector";
           $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/smileys/2.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=1";
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "#" . $notification->getContent();
           break;
 
         case "culte_image":
@@ -274,9 +278,12 @@
 
           $reponse1->closeCursor();
 
+          // Recherche du numéro de page
+          $num_page = numPageCollector($notification->getContent());
+
           $icone  = "collector";
           $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=1";
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "#" . $notification->getContent();
           break;
 
         case "depense":
@@ -384,7 +391,7 @@
           $level  = $donnees2['level'];
           $reponse2->closeCursor();
 
-          $icone  = "success";
+          $icone = "success";
           switch ($level)
           {
             case "3":
@@ -400,7 +407,7 @@
               $phrase = "<strong>" . $pseudo . "</strong> se la pète un max avec son succès <strong>" . $succes . "</strong> ! Tu as trop le seum ma parole !";
               break;
           }
-          $lien   = "";
+          $lien = "";
           break;
 
         case "start_mission":
@@ -466,5 +473,31 @@
     }
 
     return $notifications;
+  }
+
+  // METIER : Récupère le numéro de page pour une notification Collector
+  // RETOUR : Numéro de page
+  function numPageCollector($id)
+  {
+    $numPage     = 0;
+    $nb_par_page = 18;
+    $position    = 1;
+
+    global $bdd;
+
+    // On cherche la position de la phrase culte dans la table
+    $reponse = $bdd->query('SELECT id, date_collector FROM collector ORDER BY date_collector DESC, id DESC');
+    while($donnees = $reponse->fetch())
+    {
+      if ($id == $donnees['id'])
+        break;
+      else
+        $position++;
+    }
+    $reponse->closeCursor();
+
+    $numPage = $nb_pages = ceil($position / $nb_par_page);
+
+    return $numPage;
   }
 ?>

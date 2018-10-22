@@ -125,6 +125,8 @@
   // RETOUR : Aucun
   function insertCollector($post, $files, $user)
   {
+    $new_id = NULL;
+    
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['speaker']        = $post['speaker'];
     $_SESSION['save']['other_speaker']  = $post['other_speaker'];
@@ -214,6 +216,8 @@
     }
     else
       $_SESSION['alerts']['wrong_date'] = true;
+
+    return $new_id;
   }
 
   // METIER : Formatage et insertion image Collector
@@ -532,5 +536,31 @@
     global $bdd;
 
     $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $id_col);
+  }
+
+  // METIER : Récupère le numéro de page pour une notification Collector
+  // RETOUR : Numéro de page
+  function numPageCollector($id)
+  {
+    $numPage     = 0;
+    $nb_par_page = 18;
+    $position    = 1;
+
+    global $bdd;
+
+    // On cherche la position de la phrase culte dans la table
+    $reponse = $bdd->query('SELECT id, date_collector FROM collector ORDER BY date_collector DESC, id DESC');
+    while($donnees = $reponse->fetch())
+    {
+      if ($id == $donnees['id'])
+        break;
+      else
+        $position++;
+    }
+    $reponse->closeCursor();
+
+    $numPage = $nb_pages = ceil($position / $nb_par_page);
+
+    return $numPage;
   }
 ?>

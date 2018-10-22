@@ -162,9 +162,27 @@ $(document).ready(function()
       horizontalOrder: true
     });
 
+    // On associe une classe pour y ajouter une transition dans le css
     $('.zone_collectors').addClass('masonry');
-  });
 
+    // On récupère le nom de l'ancre
+    var nameHash = window.location.href;
+    nameHash = nameHash.replace(/^.*#/, '');
+    var anchor = $('#' + nameHash);
+
+    if (anchor.length > 0)
+    {
+      // On récupère la position en Y de l'ancre
+      var posY = anchor.offset().top;
+
+      // On défini la vitesse d'animation et la position finale
+      var speed = 750;
+      var posScroll = posY - 70;
+
+      // On lance l'animation
+      $('html, body').animate({scrollTop: posScroll}, speed);
+    }
+  });
 });
 
 function initMasonry()

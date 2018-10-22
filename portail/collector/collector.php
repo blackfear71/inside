@@ -48,7 +48,9 @@
       break;
 
     case "doAjouter":
-      insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $new_id   = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $num_page = numPageCollector($new_id);
+      var_dump($num_page);
       break;
 
     case "doSupprimer":
@@ -124,13 +126,19 @@
   switch ($_GET['action'])
   {
     case "doAjouter":
-      header('location: collector.php?action=goConsulter&page=1');
+      header('location: collector.php?action=goConsulter&page=' . $num_page . '#' . $new_id);
       break;
 
     case "doSupprimer":
-    case "doModifier":
-    case "doVoter":
       header('location: collector.php?action=goConsulter&page=' . $_GET['page']);
+      break;
+
+    case "doModifier":
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '#' . $_GET['modify_id']);
+      break;
+
+    case "doVoter":
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '#' . $_GET['id']);
       break;
 
     case "goConsulter":
