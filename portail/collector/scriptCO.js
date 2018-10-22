@@ -170,7 +170,7 @@ $(document).ready(function()
     nameHash = nameHash.replace(/^.*#/, '');
     var anchor = $('#' + nameHash);
 
-    if (anchor.length > 0)
+    if (nameHash.length > 0)
     {
       // On récupère la position en Y de l'ancre
       var posY = anchor.offset().top;
