@@ -147,7 +147,25 @@ $(function()
   });
 });
 
-// Appel "Masonry"
+// Initialisation manuelle de "Masonry"
+function initMasonry()
+{
+  // On lance Masonry
+  $('.zone_collectors').masonry({
+    // Options
+    itemSelector: '.zone_collector',
+    columnWidth: 525,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+    /*transitionDuration: 0*/
+  });
+
+  // Découpe le texte si besoin
+  $('.text_collector').wrapInner();
+}
+
+// Appel "Masonry" et scroll
 $(document).ready(function()
 {
   // On lance Masonry après avoir chargé les images
@@ -165,39 +183,11 @@ $(document).ready(function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_collectors').addClass('masonry');
 
-    // On récupère le nom de l'ancre
-    var nameHash = window.location.href;
-    nameHash = nameHash.replace(/^.*#/, '');
-    var anchor = $('#' + nameHash);
+    // On récupère l'id de l'ancre dans l'url (fonction JS)
+    var id     = $_GET('anchor');
+    var offset = 70;
 
-    if (nameHash.length > 0)
-    {
-      // On récupère la position en Y de l'ancre
-      var posY = anchor.offset().top;
-
-      // On défini la vitesse d'animation et la position finale
-      var speed = 750;
-      var posScroll = posY - 70;
-
-      // On lance l'animation
-      $('html, body').animate({scrollTop: posScroll}, speed);
-    }
+    // Scroll vers l'id
+    scrollToId(id, offset);
   });
 });
-
-function initMasonry()
-{
-  // On lance Masonry
-  $('.zone_collectors').masonry({
-    // Options
-    itemSelector: '.zone_collector',
-    columnWidth: 525,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-    /*transitionDuration: 0*/
-  });
-
-  // Découpe le texte si besoin
-  $('.text_collector').wrapInner();
-}

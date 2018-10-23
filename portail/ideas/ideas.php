@@ -76,7 +76,7 @@
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
-      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter#' . $_GET['id']);
+      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter&anchor=' . $_GET['id']);
       break;
 
     case 'doInserer':

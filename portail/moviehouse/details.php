@@ -151,7 +151,7 @@
       break;
 
     case "doCommenter":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter#comments');
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=comments');
       break;
 
     case "doSupprimer":
@@ -175,11 +175,11 @@
       break;
 
     case "doSupprimerCommentaire":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter#comments');
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=comments');
       break;
 
     case "doModifierCommentaire":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter#' . $_GET['comment_id']);
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=' . $_GET['comment_id']);
       break;
 
     case 'goConsulter':

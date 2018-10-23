@@ -126,7 +126,7 @@
   switch ($_GET['action'])
   {
     case "doAjouter":
-      header('location: collector.php?action=goConsulter&page=' . $num_page . '#' . $new_id);
+      header('location: collector.php?action=goConsulter&page=' . $num_page . '&anchor=' . $new_id);
       break;
 
     case "doSupprimer":
@@ -134,11 +134,11 @@
       break;
 
     case "doModifier":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '#' . $_GET['modify_id']);
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&anchor=' . $_GET['modify_id']);
       break;
 
     case "doVoter":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '#' . $_GET['id']);
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&anchor=' . $_GET['id']);
       break;
 
     case "goConsulter":

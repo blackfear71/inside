@@ -717,7 +717,7 @@
 	display: none;
 }
 
-.smiley_votes_1:hover ~ .noms_votes_1, .smiley_votes_2:hover ~ .noms_votes_2, .smiley_votes_3:hover ~ .noms_votes_4,
+.smiley_votes_1:hover ~ .noms_votes_1, .smiley_votes_2:hover ~ .noms_votes_2, .smiley_votes_3:hover ~ .noms_votes_3,
 .smiley_votes_4:hover ~ .noms_votes_4, .smiley_votes_5:hover ~ .noms_votes_5, .smiley_votes_6:hover ~ .noms_votes_6,
 .smiley_votes_7:hover ~ .noms_votes_7, .smiley_votes_8:hover ~ .noms_votes_8
 {

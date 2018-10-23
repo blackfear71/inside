@@ -91,3 +91,14 @@ function insert_smiley(smiley, id)
   // Positionnement du curseur
   where.focus();
 }
+
+// Déclenchement du scroll
+$(document).ready(function()
+{
+  // On récupère l'id de l'ancre dans l'url (fonction JS)
+  var id     = $_GET('anchor');
+  var offset = 20;
+
+  // Scroll vers l'id
+  scrollToId(id, offset);
+});

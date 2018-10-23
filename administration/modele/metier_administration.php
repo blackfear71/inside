@@ -333,6 +333,8 @@
   // RETOUR : Aucun
   function updateBug($id, $post)
   {
+    $resolved = "N";
+
     global $bdd;
 
     switch (key($post))
@@ -354,6 +356,8 @@
       'resolved' => $resolved
     ));
     $req->closeCursor();
+
+    return $resolved;
   }
 
   // METIER : Suppression d'un bug

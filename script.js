@@ -181,3 +181,45 @@ $(function()
     $.post('/inside/includes/ping.php', {function: 'updatePing'});
   }
 });
+
+// Fonction équivalente au $_GET en php
+function $_GET(param)
+{
+	var vars = {};
+	window.location.href.replace(location.hash, '').replace(
+		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+		function(m, key, value)
+    {
+      // callback
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
+
+	if (param)
+  {
+		return vars[param] ? vars[param] : null;
+	}
+	return vars;
+}
+
+// Positionnement du scroll vertical en fonction de l'id et de l'offset (en px)
+function scrollToId(id, offset)
+{
+  if (offset == null)
+    offset = 0;
+    
+  if (id != null && id.length > 0)
+  {
+    var anchor = $('#' + id);
+
+    // On récupère la position en Y de l'ancre
+    var posY = anchor.offset().top;
+
+    // On défini la vitesse d'animation et la position finale
+    var speed     = 750;
+    var posScroll = posY - offset;
+
+    // On lance l'animation
+    $('html, body').animate({scrollTop: posScroll}, speed);
+  }
+}

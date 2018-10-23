@@ -178,7 +178,7 @@
 
           $icone  = "comments";
           $phrase = "Des commentaires ont été publiés pour le film <strong>" . $titre_film . "</strong>, n'oubliez pas de les suivre dans la journée !";
-          $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter#comments";
+          $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter&anchor=comments";
           break;
 
         case "mail_1":
@@ -246,7 +246,7 @@
 
           $icone  = "collector";
           $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/smileys/2.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "#" . $notification->getContent();
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&anchor=" . $notification->getContent();
           break;
 
         case "culte_image":
@@ -283,7 +283,7 @@
 
           $icone  = "collector";
           $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "#" . $notification->getContent();
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&anchor=" . $notification->getContent();
           break;
 
         case "depense":

@@ -272,11 +272,11 @@
       break;
 
     case "doVoterFilm":
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter#' . $_GET['id_film']);
+      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $_GET['id_film']);
       break;
 
     case "doParticiperFilm":
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter#' . $_GET['id_film']);
+      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $_GET['id_film']);
       break;
 
     case 'goConsulter':

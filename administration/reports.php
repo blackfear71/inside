@@ -32,7 +32,7 @@
 
 		case "doChangerStatut":
 			// Mise à jour des données par le modèle
-			updateBug($_GET['id'], $_POST);
+			$resolved = updateBug($_GET['id'], $_POST);
 			break;
 
     case "doSupprimer":
@@ -73,6 +73,12 @@
   switch ($_GET['action'])
   {
 		case "doChangerStatut":
+      if ($resolved == "Y")
+        header('location: reports.php?view=resolved&action=goConsulter&anchor=' . $_GET['id']);
+      else
+        header('location: reports.php?view=unresolved&action=goConsulter&anchor=' . $_GET['id']);
+      break;
+
     case "doSupprimer":
 			header('location: reports.php?view=' . $_GET['view'] . '&action=goConsulter');
 			break;
