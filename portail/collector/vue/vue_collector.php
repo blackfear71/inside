@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<meta charset="utf-8" />
-		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside, portail, CDS Finance" />
+    <!-- Head commun & spécifique-->
+    <?php
+      $title_head  = "CO";
+      $style_head  = "styleCO.css";
+      $script_head = "scriptCO.js";
 
-		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-    <link rel="stylesheet" href="/inside/style.css" />
-  	<link rel="stylesheet" href="styleCO.css" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+    ?>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="/inside/includes/masonry/masonry.pkgd.js"></script>
     <script type="text/javascript" src="/inside/includes/masonry/imagesloaded.pkgd.js"></script>
-    <script type="text/javascript" src="/inside/script.js"></script>
-    <script type="text/javascript" src="scriptCO.js"></script>
-
-		<title>Inside - CO</title>
   </head>
 
 	<body>

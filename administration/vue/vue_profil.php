@@ -1,21 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<meta charset="utf-8" />
-		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside, portail, CDS Finance" />
+    <!-- Head commun & spécifique-->
+    <?php
+      $title_head  = "Administrateur";
+      $style_head  = "../profil/styleProfil.css";
+      $script_head = "../profil/scriptProfil.js";
 
-		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
-    <link rel="stylesheet" href="/inside/profil/styleProfil.css" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="/inside/script.js"></script>
-    <script type="text/javascript" src="/inside/profil/scriptProfil.js"></script>
-
-		<title>Inside - Administrateur</title>
+      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+    ?>
   </head>
 
 	<body>

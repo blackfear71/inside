@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Head commun -->
+    <!-- Head commun & spécifique-->
     <?php
+      $title_head  = "Administration";
+      $style_head  = "styleAdmin.css";
+      $script_head = "";
+
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
-
-    <!-- Head spécifique -->
-    <link rel="stylesheet" href="styleAdmin.css" />
-		<title>Inside - Administration</title>
   </head>
 
 	<body>

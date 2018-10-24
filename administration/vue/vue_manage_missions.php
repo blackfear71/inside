@@ -1,21 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<meta charset="utf-8" />
-		<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />
-		<meta name="keywords" content="Inside, portail, CDS Finance" />
+    <!-- Head commun & spécifique-->
+    <?php
+      $title_head  = "Missions";
+      $style_head  = "styleAdmin.css";
+      $script_head = "scriptAdmin.js";
 
-		<link rel="icon" type="image/png" href="/inside/favicon.png" />
-		<link rel="stylesheet" href="/inside/style.css" />
-    <link rel="stylesheet" href="styleAdmin.css" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="/inside/script.js"></script>
-    <script type="text/javascript" src="scriptAdmin.js"></script>
-
-		<title>Inside - Missions</title>
+      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+    ?>
   </head>
 
 	<body>
