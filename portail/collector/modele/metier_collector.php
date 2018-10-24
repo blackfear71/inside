@@ -2,7 +2,6 @@
   include_once('../../includes/appel_bdd.php');
   include_once('../../includes/classes/collectors.php');
   include_once('../../includes/classes/profile.php');
-  include_once('../../includes/imagethumb.php');
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
@@ -126,7 +125,7 @@
   function insertCollector($post, $files, $user)
   {
     $new_id = NULL;
-    
+
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['speaker']        = $post['speaker'];
     $_SESSION['save']['other_speaker']  = $post['other_speaker'];
@@ -265,9 +264,6 @@
  				// Contrôle upload (si tout est bon, l'image est envoyée)
  				if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
  					exit("Impossible de copier le fichier dans $image_dir");
-
- 				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 1000px (cf fonction imagethumb.php)
- 				imagethumb($image_dir . $new_name, $image_dir . $new_name, 1000, FALSE, FALSE);
 
  				// echo "Le fichier a bien été uploadé";
  			}
