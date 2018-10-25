@@ -24,13 +24,13 @@
     echo '<link rel="stylesheet" href="' . $style_head . '?version=' . $last_modification_css2 . '" />';
 
   // Scripts
-  echo '<script type="text/javascript" src="/inside/script.js?version=' . $last_modification_js . '"></script>';
-  echo '<script src="https://code.jquery.com/jquery-1.12.4.js"></script>';
-  echo '<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>';
+  //echo '<script type="text/javascript" src="/inside/script.js?version=' . $last_modification_js . '"></script>';
+  //echo '<script src="https://code.jquery.com/jquery-1.12.4.js"></script>';
+  //echo '<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>';
 
   // Script spécifique
-  if (!empty($script_head))
-    echo '<script type="text/javascript" src="' . $script_head . '?version=' . $last_modification_js2 . '"></script>';
+  /*if (!empty($script_head))
+    echo '<script type="text/javascript" src="' . $script_head . '?version=' . $last_modification_js2 . '"></script>';*/
 
   // Title
   if (!empty($title_head))
@@ -38,3 +38,13 @@
   else
     echo '<title>Inside</title>';
 ?>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script type="text/javascript" src="/inside/script.js?version=<?php echo $last_modification_js; ?>"></script>
+
+<!-- Script spécifique -->
+<?php if (!empty($script_head)) { ?>
+  <script type="text/javascript" src="<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
+<?php } ?>
