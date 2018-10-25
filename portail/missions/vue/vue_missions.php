@@ -6,6 +6,7 @@
       $title_head  = "MI";
       $style_head  = "styleMI.css";
       $script_head = "";
+      $chat_head   = true;
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>

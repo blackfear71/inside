@@ -6,7 +6,8 @@
       $title_head  = "PP";
       $style_head  = "stylePP.css";
       $script_head = "";
-
+      $chat_head   = true;
+      
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
   </head>

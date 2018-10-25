@@ -6,7 +6,8 @@
       $title_head  = "MH";
       $style_head  = "styleMH.css";
       $script_head = "scriptMH.js";
-
+      $chat_head   = true;
+      
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
   </head>

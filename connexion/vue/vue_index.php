@@ -134,8 +134,4 @@
       <div class="copyright_index">© 2017-2018 Inside</div>
     </footer>
   </body>
-
-  <script>
-    showChat = true;
-  </script>
 </html>

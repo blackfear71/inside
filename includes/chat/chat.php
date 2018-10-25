@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="/inside/includes/chat/styleChat.css" />
-<script type="text/javascript" src="/inside/includes/chat/scriptChat.js"></script>
-
 <?php
   // Zone de chat à intégrer
   echo '<div id="zone_chat_position" class="zone_chat">';

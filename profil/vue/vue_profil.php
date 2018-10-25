@@ -6,6 +6,7 @@
       $title_head  = "Profil";
       $style_head  = "styleProfil.css";
       $script_head = "scriptProfil.js";
+      $chat_head   = true;
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>

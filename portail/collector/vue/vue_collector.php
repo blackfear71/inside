@@ -3,15 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "CO";
-      $style_head  = "styleCO.css";
-      $script_head = "scriptCO.js";
+      $title_head        = "CO";
+      $style_head        = "styleCO.css";
+      $script_head       = "scriptCO.js";
+      $chat_head         = true;
+      $masonry_head      = true;
+      $image_loaded_head = true;
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
-
-    <script type="text/javascript" src="/inside/includes/masonry/masonry.pkgd.js"></script>
-    <script type="text/javascript" src="/inside/includes/masonry/imagesloaded.pkgd.js"></script>
   </head>
 
 	<body>

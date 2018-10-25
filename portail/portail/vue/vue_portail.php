@@ -6,6 +6,7 @@
       $title_head  = "Portail";
       $style_head  = "stylePortail.css";
       $script_head = "";
+      $chat_head   = true;
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>

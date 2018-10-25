@@ -6,7 +6,8 @@
       $title_head  = "EC";
       $style_head  = "styleEC.css";
       $script_head = "scriptEC.js";
-
+      $chat_head   = true;
+      
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
   </head>
