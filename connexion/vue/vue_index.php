@@ -4,7 +4,7 @@
     <!-- Head commun & spécifique-->
     <?php
       $title_head  = "";
-      $style_head  = "connexion/styleIndex.css";
+      $style_head  = "styleIndex.css";
       $script_head = "";
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');

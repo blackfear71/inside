@@ -4,8 +4,8 @@
     <!-- Head commun & spécifique-->
     <?php
       $title_head  = "Administrateur";
-      $style_head  = "../profil/styleProfil.css";
-      $script_head = "../profil/scriptProfil.js";
+      $style_head  = "styleProfil.css";
+      $script_head = "scriptProfil.js";
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
