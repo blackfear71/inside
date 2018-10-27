@@ -50,7 +50,6 @@
     case "doAjouter":
       $new_id   = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
       $num_page = numPageCollector($new_id);
-      var_dump($num_page);
       break;
 
     case "doSupprimer":

@@ -160,7 +160,7 @@
         array_push($tableauParts, $myParts);
       }
 
-      // var_dump($tableauParts);
+      //var_dump($tableauParts);
 
       // On compte le nombre d'utilisateurs et on remplit le tableau final seulement si on a atteint le nombre total d'utilisateurs inscrits
       if (count($tableauParts) == $nb_users)
@@ -195,7 +195,7 @@
                           'comment'    => $listeExpenses[$i]->getComment()
                          );
 
-         // var_dump($myResume);
+         //var_dump($myResume);
 
          array_push($tableauResume, $myResume);
       }
@@ -203,7 +203,7 @@
       $i++;
     }
 
-    // var_dump($tableauResume);
+    //var_dump($tableauResume);
 
     return $tableauResume;
   }

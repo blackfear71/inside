@@ -169,6 +169,7 @@
     $listPages                 = array('/inside/portail/bugs/bugs.php',
                                        '/inside/portail/calendars/calendars.php',
                                        '/inside/portail/collector/collector.php',
+                                       //'/inside/portail/eventmanager/eventmanager.php',
                                        '/inside/portail/expensecenter/expensecenter.php',
                                        '/inside/portail/moviehouse/details.php',
                                        '/inside/portail/moviehouse/mailing.php',
@@ -204,6 +205,8 @@
 
     for ($i = 0; $i < $nb; $i++)
     {
+      $myMissionButtons = array();
+
       // Id mission
       $id_mission = $mission->getId();
 
@@ -219,6 +222,7 @@
         // Cas avec <nav>
         case '/inside/portail/calendars/calendars.php':
         case '/inside/portail/collector/collector.php':
+        //case '/inside/portail/eventmanager/eventmanager.php':
         case '/inside/portail/expensecenter/expensecenter.php':
         case '/inside/portail/moviehouse/details.php':
         case '/inside/portail/moviehouse/mailing.php':
@@ -277,10 +281,41 @@
                                 'class'       => $classe
                                );
 
-      array_push($missionButtons, $myMissionButtons);
+      $duplicate = controlGeneratedMission($missionButtons, $myMissionButtons);
+
+      // Si mission non dupliquée alors on l'insère dans le tableau, sinon on revient une occurence en arrière pour la regénérer
+      if ($duplicate == false)
+        array_push($missionButtons, $myMissionButtons);
+      else
+        $i--;
     }
 
     return $missionButtons;
+  }
+
+  // Contrôle missions en double
+  // RETOUR : booléen
+  function controlGeneratedMission($tableauMissions, $mission)
+  {
+    $duplicated = false;
+
+    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 5*3*3*3 + 10*4*3*3 = 495 emplacements possibles)
+    if (!empty($tableauMissions) AND count($tableauMissions) <= 495)
+    {
+      foreach ($tableauMissions as $missionExistante)
+      {
+        if ($mission['id_mission'] == $missionExistante['id_mission']
+        AND $mission['page']       == $missionExistante['page']
+        AND $mission['zone']       == $missionExistante['zone']
+        AND $mission['position']   == $missionExistante['position'])
+        {
+          $duplicated = true;
+          break;
+        }
+      }
+    }
+
+    return $duplicated;
   }
 
   // Détermination du thème
