@@ -38,7 +38,7 @@
 
     case 'doChangerStatut':
       // Mise à jour des données par le modèle
-      updateIdea($_GET['id'], $_POST);
+      $view = updateIdea($_GET['id'], $_GET['view'], $_POST);
       break;
 
     default:
@@ -76,7 +76,7 @@
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
-      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter&anchor=' . $_GET['id']);
+      header('location: ideas.php?view=' . $view . '&action=goConsulter&anchor=' . $_GET['id']);
       break;
 
     case 'doInserer':

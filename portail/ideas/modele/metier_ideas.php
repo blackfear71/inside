@@ -131,8 +131,8 @@
   }
 
   // METIER : Mise à jour du statut d'une idée
-  // RETOUR : Aucun
-  function updateIdea($id, $post)
+  // RETOUR : Vue à afficher
+  function updateIdea($id, $view, $post)
   {
     switch (key($post))
     {
@@ -149,17 +149,20 @@
       case 'end':
         $status     = "D";
         $developper = $_SESSION['user']['identifiant'];
+        $view       = "done";
         break;
 
       case 'reject':
         $status     = "R";
         $developper = $_SESSION['user']['identifiant'];
+        $view       = "done";
         break;
 
       case 'reset':
       default:
         $status     = "O";
         $developper = "";
+        $view       = "inprogress";
         break;
     }
 
@@ -175,5 +178,7 @@
                                      WHERE id         = ' . $id);
     $req->execute($data);
     $req->closeCursor();
+
+    return $view;
   }
 ?>

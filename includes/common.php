@@ -1,16 +1,17 @@
 <?php
   // Dates de dernière modification (CSS et JS)
   $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/style.css');
-  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/script.js');
 
   if (!empty($style_head))
     $last_modification_css2 = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $style_head);
 
-  if (!empty($script_head))
-    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $script_head);
-
   if (isset($chat_head) AND $chat_head == true)
     $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/styleChat.css');
+
+  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/script.js');
+
+  if (!empty($script_head))
+    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $script_head);
 
   // Metas
   echo '<meta charset="utf-8" />';
@@ -46,14 +47,14 @@
   <script type="text/javascript" src="/inside/includes/assets/js/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
 <?php } ?>
 
+<?php if (isset($chat_head) AND $chat_head == true) { ?>
+  <script type="text/javascript" src="/inside/includes/assets/js/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
+<?php } ?>
+
 <?php if (isset($masonry_head) AND $masonry_head == true) { ?>
   <script type="text/javascript" src="/inside/includes/masonry/masonry.pkgd.js"></script>
 <?php } ?>
 
 <?php if (isset($image_loaded_head) AND $image_loaded_head == true) { ?>
   <script type="text/javascript" src="/inside/includes/masonry/imagesloaded.pkgd.js"></script>
-<?php } ?>
-
-<?php if (isset($chat_head) AND $chat_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/assets/js/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
 <?php } ?>
