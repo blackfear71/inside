@@ -207,7 +207,7 @@ function scrollToId(id, offset)
 {
   if (offset == null)
     offset = 0;
-    
+
   if (id != null && id.length > 0)
   {
     var anchor = $('#' + id);

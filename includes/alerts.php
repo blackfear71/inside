@@ -628,13 +628,13 @@
   // Alerte succès ajouté
   elseif (isset($_SESSION['alerts']['success_added']) AND $_SESSION['alerts']['success_added'] == true)
   {
-    $alerte = 'Succès ajouté, ne pas oublier de modifier le code.';
+    $alerte = 'Succès ajouté, ne pas oublier d\'ajouter le code de la fonction getSuccess() dans metier_profil.php.';
     $_SESSION['alerts']['success_added'] = NULL;
   }
   // Alerte succès supprimé
   elseif (isset($_SESSION['alerts']['success_deleted']) AND $_SESSION['alerts']['success_deleted'] == true)
   {
-    $alerte = 'Succès supprimé, ne pas oublier de modifier le code.';
+    $alerte = 'Succès supprimé, ne pas oublier de supprimer le code de la fonction getSuccess() dans metier_profil.php.';
     $_SESSION['alerts']['success_deleted'] = NULL;
   }
   // Alerte succès mis à jour

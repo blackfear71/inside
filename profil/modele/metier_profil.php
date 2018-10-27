@@ -806,12 +806,16 @@
         case "golden-egg":
         // Mettre tous ses oeufs dans le même panier
         case "rainbow-egg":
+        // Apprenti sorcier
+        case "wizard":
           $mission = 0;
 
           if ($success->getReference() == "christmas2017" OR $success->getReference() == "christmas2017_2")
             $reference = "noel_2017";
           elseif ($success->getReference() == "golden-egg" OR $success->getReference() == "rainbow-egg")
             $reference = "paques_2018";
+          elseif ($success->getReference() == "wizard" OR $success->getReference() == "wizard")
+            $reference = "halloween_2018";
 
           // Récupération Id mission
           $req = $bdd->query('SELECT * FROM missions WHERE reference = "' . $reference . '"');
