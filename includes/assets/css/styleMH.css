@@ -1037,7 +1037,7 @@
 	opacity: 0;
 	margin-left: 20px;
 	transition: opacity 0.5s, margin-left 0.5s;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	text-shadow: 0 0 1px black;
@@ -1060,7 +1060,7 @@
 	opacity: 0;
 	margin-right: 20px;
 	transition: opacity 0.5s, margin-right 0.5s;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	text-shadow: 0 0 1px black;

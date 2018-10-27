@@ -26,10 +26,6 @@
 
         .entete_mail
         {
-          line-height: 110px;
-          font-family: robotothin, Verdana, sans-serif;
-          font-size: 50px;
-          color: white;
           background-color: #ff1937;
           height: 100px;
         }
