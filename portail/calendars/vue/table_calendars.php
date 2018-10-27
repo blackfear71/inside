@@ -23,7 +23,7 @@
               echo '<td class="table_calendars_td">';
                 echo '<div class="zone_calendars_totale">';
                   echo '<div class="zone_calendar">';
-                    echo '<img src="images/' . $calendrier->getYear() . '/mini/' . $calendrier->getCalendar() . '" alt="' . $calendrier->getTitle() . '" title="' . $calendrier->getTitle() . '" class="calendar" />';
+                    echo '<img src="../../includes/images/calendars/' . $calendrier->getYear() . '/mini/' . $calendrier->getCalendar() . '" alt="' . $calendrier->getTitle() . '" title="' . $calendrier->getTitle() . '" class="calendar" />';
 
                     echo '<div class="mask_calendar_square"></div>';
 
@@ -34,7 +34,7 @@
 
                   if ($preferences->getManage_calendars() == "Y")
                   {
-                    echo '<a href="images/' . $calendrier->getYear() . '/' . $calendrier->getCalendar() . '" class="download_calendar" download>Télécharger</a>';
+                    echo '<a href="../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar() . '" class="download_calendar" download>Télécharger</a>';
 
                     echo '<form method="post" action="calendars.php?year=' . $_GET['year'] . '&id_cal=' . $calendrier->getId() . '&action=doSupprimer">';
                       echo '<input type="submit" name="delete_calendar" value="" title="Supprimer le calendrier" onclick="if(!confirm(\'Demander la suppression de ce calendrier ?\')) return false;" class="delete_calendar" />';
@@ -42,7 +42,7 @@
                   }
                   else
                   {
-                    echo '<a href="images/' . $calendrier->getYear() . '/' . $calendrier->getCalendar() . '" class="download_calendar_2" download>Télécharger</a>';
+                    echo '<a href="../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar() . '" class="download_calendar_2" download>Télécharger</a>';
                   }
                 echo '</div>';
             echo '</td>';

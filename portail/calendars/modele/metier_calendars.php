@@ -71,7 +71,7 @@
     {
       $myCalendar = Calendrier::withData($donnees);
 
-      $fileinfo  = getimagesize("images/" . $myCalendar->getYear() . "/" . $myCalendar->getCalendar());
+      $fileinfo  = getimagesize("../../includes/images/calendars/" . $myCalendar->getYear() . "/" . $myCalendar->getCalendar());
 
       $myCalendar->setTitle(strtoupper($listeMois[$myCalendar->getMonth()]));
       $myCalendar->setWidth($fileinfo[0]);
@@ -114,13 +114,19 @@
     global $bdd;
 
     // On contrôle la présence du dossier des calendriers, sinon on le créé
-    $dossier_calendriers = "images/" . $post['years'];
+    $dossier = "../../includes/images/calendars";
+
+    if (!is_dir($dossier))
+       mkdir($dossier_calendriers);
+
+    // On contrôle la présence du dossier des années, sinon on le créé
+    $dossier_calendriers = $dossier . "/" . $post['years'];
 
     if (!is_dir($dossier_calendriers))
        mkdir($dossier_calendriers);
 
     // On contrôle la présence du dossier des miniatures, sinon on le créé
-    $dossier_miniatures = "images/" . $post['years'] . "/mini";
+    $dossier_miniatures = $dossier_calendriers . "/mini";
 
     if (!is_dir($dossier_miniatures))
       mkdir($dossier_miniatures);

@@ -7,7 +7,7 @@
       $style_head  = "styleMH.css";
       $script_head = "";
       $chat_head   = true;
-      
+
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
   </head>
@@ -62,9 +62,9 @@
                 }
                 echo '<p class="destinataires">';
                   if (!empty($participant->getAvatar()))
-                    echo '<img src="../../profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
+                    echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
 
                   echo $participant->getPseudo();
                 echo '</p>';

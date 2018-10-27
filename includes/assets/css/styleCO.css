@@ -356,7 +356,7 @@
 	margin-top: 10px;
   width: 30px;
   height: 30px;
-  background-image: url("/inside/portail/collector/icons/edit.png");
+  background-image: url("/inside/includes/icons/common/edit.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -372,7 +372,7 @@
   width: 30px;
   height: 30px;
   border: 0;
-  background-image: url("/inside/portail/collector/icons/delete.png");
+  background-image: url("/inside/includes/icons/common/delete.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -388,7 +388,7 @@
   width: 30px;
   height: 30px;
   border: 0;
-  background-image: url("/inside/portail/collector/icons/validate.png");
+  background-image: url("/inside/includes/icons/common/validate.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -404,7 +404,7 @@
   width: 30px;
   height: 30px;
   border: 0;
-  background-image: url("/inside/portail/collector/icons/cancel.png");
+  background-image: url("/inside/includes/icons/common/cancel.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -565,7 +565,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/0.png");
+  background-image: url("/inside/includes/icons/common/smileys/0.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -580,7 +580,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/1.png");
+  background-image: url("/inside/includes/icons/common/smileys/1.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -595,7 +595,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/2.png");
+  background-image: url("/inside/includes/icons/common/smileys/2.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -610,7 +610,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/3.png");
+  background-image: url("/inside/includes/icons/common/smileys/3.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -625,7 +625,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/4.png");
+  background-image: url("/inside/includes/icons/common/smileys/4.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -640,7 +640,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/5.png");
+  background-image: url("/inside/includes/icons/common/smileys/5.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -655,7 +655,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/6.png");
+  background-image: url("/inside/includes/icons/common/smileys/6.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -670,7 +670,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/7.png");
+  background-image: url("/inside/includes/icons/common/smileys/7.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -685,7 +685,7 @@
   border-radius: 50%;
   margin-left: 2px;
   margin-right: 2px;
-  background-image: url("/inside/includes/icons/smileys/8.png");
+  background-image: url("/inside/includes/icons/common/smileys/8.png");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;

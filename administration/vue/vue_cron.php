@@ -111,7 +111,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a onclick="afficherMasquer(\'logI' . $i . '\'); rotateIcon(\'rotateI' . $i . '\');">';
-                            echo '<img src="../includes/icons/see_log.png" alt="see_log" class="see_log" style="transform: rotate(0deg);" id="rotateI' . $i . '" />';
+                            echo '<img src="../includes/icons/logs/see_log.png" alt="see_log" class="see_log" style="transform: rotate(0deg);" id="rotateI' . $i . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
@@ -170,7 +170,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a onclick="afficherMasquer(\'logJ' . $j . '\'); rotateIcon(\'rotateJ' . $j . '\');">';
-                            echo '<img src="../includes/icons/see_log.png" alt="see_log" class="see_log" style="transform: rotate(0deg);" id="rotateJ' . $j . '" />';
+                            echo '<img src="../includes/icons/logs/see_log.png" alt="see_log" class="see_log" style="transform: rotate(0deg);" id="rotateJ' . $j . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';

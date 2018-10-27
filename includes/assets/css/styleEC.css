@@ -406,7 +406,7 @@
 	border: 0;
 	border-radius: 5px;
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/edit.png");
+	background-image: url("/inside/includes/icons/common/edit.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -423,7 +423,7 @@
 	border: 0;
 	border-radius: 5px;
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/delete.png");
+	background-image: url("/inside/includes/icons/common/delete.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -488,7 +488,7 @@
 	border: 0;
 	border-radius: 5px;
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/validate.png");
+	background-image: url("/inside/includes/icons/common/validate.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -505,7 +505,7 @@
 	border: 0;
 	border-radius: 5px;
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/cancel.png");
+	background-image: url("/inside/includes/icons/common/cancel.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;

@@ -21,9 +21,9 @@
             echo '<td class="ranking_line_left">';
               // Logo succès
               if ($successUser[$success->getId()] >= $success->getLimit_success())
-                echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_rank" style="background-color: #ffad01;" />';
+                echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_rank" style="background-color: #ffad01;" />';
               else
-                echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_rank" />';
+                echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_rank" />';
 
               // Titre succès
               echo '<div class="titre_rank">' . $success->getTitle() . '</div>';
@@ -47,7 +47,7 @@
                       echo '<div class="zone_medals">';
                         if ($gold == false)
                         {
-                          echo '<div class="zone_medals_img"><img src="../includes/icons/medals/or.png" alt="or" class="medal_rank" /></div>';
+                          echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/or.png" alt="or" class="medal_rank" /></div>';
                           $gold = true;
                         }
 
@@ -61,7 +61,7 @@
                       echo '<div class="zone_medals">';
                         if ($silver == false)
                         {
-                          echo '<div class="zone_medals_img"><img src="../includes/icons/medals/argent.png" alt="argent" class="medal_rank" /></div>';
+                          echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" /></div>';
                           $silver = true;
                         }
 
@@ -75,7 +75,7 @@
                       echo '<div class="zone_medals">';
                         if ($bronze == false)
                         {
-                          echo '<div class="zone_medals_img"><img src="../includes/icons/medals/bronze.png" alt="bronze" class="medal_rank" /></div>';
+                          echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" /></div>';
                           $bronze = true;
                         }
 

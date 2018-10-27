@@ -37,9 +37,9 @@
               echo '<td class="titre_user_depense">';
                 echo '<div class="zone_avatar_depense">';
                   if (!empty($user->getAvatar()))
-                    echo '<img src="../../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
+                    echo '<img src="../../includes/images/profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
                 echo '</div>';
 
                 echo '<div class="pseudo_expense_center">' . $user->getPseudo() . '</div>';

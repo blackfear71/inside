@@ -20,29 +20,29 @@
 
       <article class="article_index">
         <div class="left_index">
-          <img src="includes/icons/inside_index.png" alt="inside_index" class="logo_index" />
+          <img src="includes/icons/common/inside_index.png" alt="inside_index" class="logo_index" />
 
           <div class="categories_index">
             <span class="zone_logo_categories" id="logo1">
-              <img src="includes/icons/movie_house.png" alt="movie_house_grey" class="logo_categories" />
+              <img src="includes/icons/common/movie_house.png" alt="movie_house_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo2">
-              <img src="includes/icons/expense_center.png" alt="expense_center_grey" class="logo_categories" />
+              <img src="includes/icons/common/expense_center.png" alt="expense_center_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo3">
-              <img src="includes/icons/petits_pedestres.png" alt="petits_pedestres_grey" class="logo_categories" />
+              <img src="includes/icons/common/petits_pedestres.png" alt="petits_pedestres_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo4">
-              <img src="includes/icons/calendars.png" alt="calendars_grey" class="logo_categories" />
+              <img src="includes/icons/common/calendars.png" alt="calendars_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo5">
-              <img src="includes/icons/collector.png" alt="collector_grey" class="logo_categories" />
+              <img src="includes/icons/common/collector.png" alt="collector_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo6">
-              <img src="includes/icons/missions.png" alt="missions_grey" class="logo_categories" />
+              <img src="includes/icons/common/missions.png" alt="missions_grey" class="logo_categories" />
             </span>
             <!--<span class="zone_logo_categories" id="logo7">
-              <img src="includes/icons/event_manager.png" alt="event_manager_grey" class="logo_categories" />
+              <img src="includes/icons/common/event_manager.png" alt="event_manager_grey" class="logo_categories" />
             </span>-->
           </div>
         </div>
@@ -70,7 +70,7 @@
             <!-- Inscription -->
             <?php
               echo '<form method="post" action="index.php?action=doDemanderInscription" class="form_index">';
-                echo '<a onclick="masquerIndex(\'inscription\')" class="close_index"><img src="includes/icons/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                echo '<a onclick="masquerIndex(\'inscription\')" class="close_index"><img src="includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
                 echo '<div class="avertissement_ins_pass">';
                   echo 'Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu\'un mot de passe.
@@ -101,7 +101,7 @@
             <!-- Réinitialisation mot de passe -->
             <?php
               echo '<form method="post" action="index.php?action=doDemanderMdp" class="form_index">';
-                echo '<a onclick="masquerIndex(\'password\')" class="close_index"><img src="includes/icons/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                echo '<a onclick="masquerIndex(\'password\')" class="close_index"><img src="includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
                 echo '<div class="avertissement_ins_pass">';
                   echo 'Si vous avez perdu votre mot de passe, vous pouvez effectuer une demande de réinitialisation du mot de passe à l\'administrateur via le formulaire ci-dessous.

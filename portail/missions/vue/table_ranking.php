@@ -17,9 +17,9 @@
               {
                 echo '<div class="zone_avatar_details_mission" id="second">';
                   if (!empty($rankUser['avatar']))
-                    echo '<img src="../../profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
+                    echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
 
                   echo '<div class="pseudo_details_mission">' . $rankUser['pseudo'] . '</div>';
                 echo '</div>';
@@ -30,7 +30,7 @@
           echo '</div>';
 
           echo '<div class="podium_argent">';
-            echo '<img src="../../includes/icons/medals/argent.png" alt="argent" class="medaille_podium" />';
+            echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medaille_podium" />';
 
             if ($total_classement > 0)
               echo '<div class="total_classement">' . $total_classement . '</div>';
@@ -48,9 +48,9 @@
               {
                 echo '<div class="zone_avatar_details_mission" id="first">';
                   if (!empty($rankUser['avatar']))
-                    echo '<img src="../../profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
+                    echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
 
                   echo '<div class="pseudo_details_mission">' . $rankUser['pseudo'] . '</div>';
                 echo '</div>';
@@ -61,7 +61,7 @@
           echo '</div>';
 
           echo '<div class="podium_or">';
-            echo '<img src="../../includes/icons/medals/or.png" alt="or" class="medaille_podium" />';
+            echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medaille_podium" />';
 
             if ($total_classement > 0)
               echo '<div class="total_classement">' . $total_classement . '</div>';
@@ -79,9 +79,9 @@
               {
                 echo '<div class="zone_avatar_details_mission" id="third">';
                   if (!empty($rankUser['avatar']))
-                    echo '<img src="../../profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
+                    echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
 
                   echo '<div class="pseudo_details_mission">' . $rankUser['pseudo'] . '</div>';
                 echo '</div>';
@@ -92,7 +92,7 @@
           echo '</div>';
 
           echo '<div class="podium_bronze">';
-            echo '<img src="../../includes/icons/medals/bronze.png" alt="bronze" class="medaille_podium" />';
+            echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medaille_podium" />';
 
             if ($total_classement > 0)
               echo '<div class="total_classement">' . $total_classement . '</div>';

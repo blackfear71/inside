@@ -26,9 +26,9 @@
             // Avatars
             echo '<div class="zone_avatar_total_depenses">';
               if (!empty($bilan->getAvatar()))
-                echo '<img src="../../profil/avatars/' . $bilan->getAvatar() . '" alt="avatar" title="' . $bilan->getPseudo() . '" class="avatar_total_depenses" />';
+                echo '<img src="../../includes/images/profil/avatars/' . $bilan->getAvatar() . '" alt="avatar" title="' . $bilan->getPseudo() . '" class="avatar_total_depenses" />';
               else
-                echo '<img src="../../includes/icons/profile.png" alt="avatar" title="' . $bilan->getPseudo() . '" class="avatar_total_depenses" />';
+                echo '<img src="../../includes/icons/common/profile.png" alt="avatar" title="' . $bilan->getPseudo() . '" class="avatar_total_depenses" />';
             echo '</div>';
 
             // Pseudos

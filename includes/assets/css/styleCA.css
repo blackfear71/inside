@@ -151,7 +151,7 @@
 	height: 45px;
 	border: 0;
 	background-color: #e3e3e3;
-	background-image: url("/inside/portail/calendars/icons/send_red.png");
+	background-image: url("/inside/includes/icons/common/send_red.png");
 	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -163,7 +163,7 @@
 .send_calendar:hover
 {
 	background-color: #ff1937;
-	background-image: url("/inside/portail/calendars/icons/send.png");
+	background-image: url("/inside/includes/icons/common/send.png");
 }
 
 /*** Tableau calendriers ***/
@@ -274,7 +274,7 @@
 	height: 40px;
 	border: 0;
 	background-color: #d3d3d3;
-	background-image: url("/inside/portail/calendars/icons/delete_red.png");
+	background-image: url("/inside/includes/icons/common/delete_red.png");
 	background-size: 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -285,7 +285,7 @@
 .delete_calendar:hover
 {
 	background-color: #ff1937;
-	background-image: url("/inside/portail/calendars/icons/delete.png");
+	background-image: url("/inside/includes/icons/common/delete.png");
 }
 
 .zone_no_calendars

@@ -3,7 +3,7 @@
   <!-- Affichage pseudo -->
   <div class="zone_profil_utilisateur_titre">
     <?php
-      echo '<img src="icons/profile.png" alt="profile" class="icone_profil" />' . $profil->getPseudo();
+      echo '<img src="../includes/icons/profil/user.png" alt="profile" class="icone_profil" />' . $profil->getPseudo();
     ?>
   </div>
 
@@ -46,7 +46,7 @@
           if (!empty($profil->getAvatar()))
           {
             echo '<div class="zone_profil_utilisateur_suppr_mask">';
-              echo '<img src="avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
+              echo '<img src="../includes/images/profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
             echo '</div>';
 
             echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data" runat="server">';
@@ -56,7 +56,7 @@
           else
           {
             echo '<div class="zone_profil_utilisateur_suppr_mask">';
-              echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
+              echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
             echo '</div>';
           }
         ?>
@@ -69,7 +69,7 @@
 <div class="zone_profil_generique">
   <!-- Titre -->
   <div class="zone_profil_utilisateur_titre">
-    <img src="icons/stats.png" alt="stats" class="icone_profil" />Mes contributions
+    <img src="../includes/icons/profil/stats.png" alt="stats" class="icone_profil" />Mes contributions
   </div>
 
   <!-- Tableau contributions -->
@@ -163,7 +163,7 @@
 <div class="zone_profil_generique">
   <!-- Titre -->
   <div class="zone_profil_utilisateur_titre">
-    <img src="icons/settings.png" alt="settings" class="icone_profil" />Préférences
+    <img src="../includes/icons/profil/settings.png" alt="settings" class="icone_profil" />Préférences
   </div>
 
   <!-- Tableau modification préférences -->
@@ -414,7 +414,7 @@
 <div class="zone_profil_generique">
   <!-- Titre -->
   <div class="zone_profil_utilisateur_titre">
-    <img src="icons/mailing.png" alt="mailing" class="icone_profil" />Mailing
+    <img src="../includes/icons/profil/mailing.png" alt="mailing" class="icone_profil" />Mailing
   </div>
 
   <!-- Tableau modification mailing -->
@@ -452,7 +452,7 @@
 <div class="zone_profil_generique">
   <!-- Titre -->
   <div class="zone_profil_utilisateur_titre">
-    <img src="icons/connexion.png" alt="connexion" class="icone_profil" />Utilisateur
+    <img src="../includes/icons/profil/connexion.png" alt="connexion" class="icone_profil" />Utilisateur
   </div>
 
   <!-- Tableau modification mot de passe & désinscription -->

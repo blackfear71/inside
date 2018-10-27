@@ -131,7 +131,7 @@
       $modele .= '<body>';
         $modele .= '<div class="zone_mail">';
           $modele .= '<div class="entete_mail">';
-            $modele .= '<img src="../../includes/icons/inside.png" alt="inside" class="logo_inside_mail" />';
+            $modele .= '<img src="../../includes/icons/common/inside.png" alt="inside" class="logo_inside_mail" />';
           $modele .= '</div>';
 
           $modele .= '<div class="mask_mail">';
@@ -156,9 +156,9 @@
                   //$modele .= '<p class="participants_mail">- ' . $participant->getPseudo() . '</p>';
                   $modele .= '<p class="destinataires_mail">';
                     if (!empty($participant->getAvatar()))
-                      $modele .= '<img src="../../profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest_mail" />';
+                      $modele .= '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest_mail" />';
                     else
-                      $modele .= '<img src="../../includes/icons/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest_mail" />';
+                      $modele .= '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest_mail" />';
 
                     $modele .= $participant->getPseudo();
                   $modele .= '</p>';
@@ -174,12 +174,12 @@
               if (!empty($details->getPoster()))
                 $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail"/>';
               else
-                $modele .= '<img src="images/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail"/>';
+                $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail"/>';
             $modele .= '</div>';
           $modele .= '</div>';
 
           $modele .= '<div class="footer_mail">';
-            $modele .= '<img src="../../includes/icons/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
+            $modele .= '<img src="../../includes/icons/common/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
           $modele .= '</div>';
         $modele .= '</div>';
       $modele .= '</body>';

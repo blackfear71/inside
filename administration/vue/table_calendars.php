@@ -29,7 +29,7 @@
       {
         echo '<tr class="tr_manage_users">';
   				echo '<td class="td_manage_users" style="padding-bottom: 10px;">';
-  					echo '<img src="../portail/calendars/images/' . $calendrier->getYear() . '/mini/' . $calendrier->getCalendar() . '" alt="calendrier" title="' . $calendrier->getTitle() . '" class="calendar_to_delete" />';
+  					echo '<img src="../includes/images/calendars/' . $calendrier->getYear() . '/mini/' . $calendrier->getCalendar() . '" alt="calendrier" title="' . $calendrier->getTitle() . '" class="calendar_to_delete" />';
             echo '<span class="title_calendar_to_delete">' . $calendrier->getTitle() . '</span>';
   				echo '</td>';
 

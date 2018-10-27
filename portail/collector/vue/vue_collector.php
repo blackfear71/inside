@@ -50,12 +50,12 @@
           /*******************/
           echo '<div class="zone_liens_saisie">';
             echo '<a onclick="afficherMasquerSaisiePhraseCulte();" title="Ajouter une phrase culte" class="lien_saisie_collector">';
-              echo '<div class="zone_logo_add"><img src="icons/phrases.png" alt="comments" class="image_saisie_collector"/></div>';
+              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_saisie_collector"/></div>';
               echo '<div class="zone_texte_add">Ajouter une phrase culte</div>';
             echo '</a>';
 
             echo '<a onclick="afficherMasquerSaisieImage();" title="Ajouter une image" class="lien_saisie_collector">';
-              echo '<div class="zone_logo_add"><img src="icons/images.png" alt="images" class="image_saisie_collector"/></div>';
+              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/images.png" alt="images" class="image_saisie_collector"/></div>';
               echo '<div class="zone_texte_add">Ajouter une image</div>';
             echo '</a>';
           echo '</div>';
@@ -69,7 +69,7 @@
               echo '<div class="titre_saisie_collector">Ajouter une phrase culte</div>';
 
               // Bouton fermeture
-              echo '<a onclick="afficherMasquerSaisiePhraseCulte();" class="close_index"><img src="../../includes/icons/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+              echo '<a onclick="afficherMasquerSaisiePhraseCulte();" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
               // Saisie phrase culte
               echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
@@ -148,7 +148,7 @@
               echo '<div class="titre_saisie_collector">Ajouter une image</div>';
 
               // Bouton fermeture
-              echo '<a onclick="afficherMasquerSaisieImage();" class="close_index"><img src="/inside/includes/icons/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+              echo '<a onclick="afficherMasquerSaisieImage();" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
               // Saisie image
               echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" runat="server" class="form_saisie_collector">';

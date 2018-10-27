@@ -7,7 +7,7 @@
         echo '<a href="/inside/administration/administration.php?action=goConsulter">';
       else
         echo '<a href="/inside/portail/portail/portail.php?action=goConsulter">';
-          echo '<img src="/inside/includes/icons/inside.png" alt="inside" class="logo_bandeau" />';
+          echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
         echo '</a>';
 
       // Notifications & Recherche (utilisateur)
@@ -52,7 +52,7 @@
             if ($nb_notifs > 0)
             {
               echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_notifications">';
-                echo '<img src="/inside/includes/icons/notifications_blue.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+                echo '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" title="Notifications" class="icon_notifications" />';
                 if ($nb_notifs <= 9)
                   echo '<div class="number_notifications" style="color: white;">' . $nb_notifs . '</div>';
                 else
@@ -62,7 +62,7 @@
             else
             {
               echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_notifications">';
-                echo '<img src="/inside/includes/icons/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+                echo '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
                 echo '<div class="number_notifications">0</div>';
               echo '</a>';
             }
@@ -94,9 +94,9 @@
         echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
           echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
             if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
-              echo '<img src="/inside/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
+              echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
             else
-              echo '<img src="/inside/includes/icons/default.png" alt="avatar" class="avatar_bandeau" />';
+              echo '<img src="/inside/includes/icons/common/default.png" alt="avatar" class="avatar_bandeau" />';
         echo '</a>';
     echo '</div>';
 

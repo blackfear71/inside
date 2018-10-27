@@ -4,7 +4,7 @@
     echo '<tr>';
       echo '<td colspan="2">';
         echo '<div class="titre_mission_first">' . $detailsMission->getMission() . '</div>';
-        echo '<img src="images/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="img_details_mission" />';
+        echo '<img src="../../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="img_details_mission" />';
       echo '</td>';
     echo '</tr>';
 
@@ -117,9 +117,9 @@
         {
           echo '<div class="zone_avatar_details_mission">';
             if (!empty($participant->getAvatar()))
-              echo '<img src="../../profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+              echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
             else
-              echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+              echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
 
             echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
           echo '</div>';

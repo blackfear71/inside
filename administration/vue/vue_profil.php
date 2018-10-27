@@ -42,7 +42,7 @@
           <!-- Affichage pseudo -->
           <div class="zone_profil_utilisateur_titre">
             <?php
-              echo '<img src="../profil/icons/profile.png" alt="profile" class="icone_profil" />' . $profil->getPseudo();
+              echo '<img src="../includes/icons/profil/user.png" alt="profile" class="icone_profil" />' . $profil->getPseudo();
             ?>
           </div>
 
@@ -85,7 +85,7 @@
                   if (!empty($profil->getAvatar()))
                   {
                     echo '<div class="zone_profil_utilisateur_suppr_mask">';
-                      echo '<img src="../profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
+                      echo '<img src="../includes/images/profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
                     echo '</div>';
 
                     echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data" runat="server">';
@@ -95,7 +95,7 @@
                   else
                   {
                     echo '<div class="zone_profil_utilisateur_suppr_mask">';
-                      echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
+                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
                     echo '</div>';
                   }
                 ?>
@@ -108,7 +108,7 @@
         <div class="zone_profil_generique">
           <!-- Titre -->
           <div class="zone_profil_utilisateur_titre">
-            <img src="../profil/icons/connexion.png" alt="connexion" class="icone_profil" />Utilisateur
+            <img src="../includes/icons/profil/connexion.png" alt="connexion" class="icone_profil" />Utilisateur
           </div>
 
           <!-- Tableau modification mot de passe & désinscription -->

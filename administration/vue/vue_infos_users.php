@@ -40,9 +40,9 @@
                 // Avatar
                 echo '<div class="circle_avatar">';
                   if (!empty($user->getAvatar()))
-                    echo '<img src="../profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="infos_avatar" />';
+                    echo '<img src="../includes/images/profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="infos_avatar" />';
                   else
-                    echo '<img src="../includes/icons/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="infos_avatar" />';
+                    echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="infos_avatar" />';
                 echo '</div>';
 
                 // Pseudo

@@ -1,7 +1,7 @@
 <div class="zone_home">
   <!-- Ajouts récents -->
   <div class="titre_home">
-    <img src="icons/recent.png" alt="recent" class="icone_home" />Ajouts récents
+    <img src="../../includes/icons/moviehouse/recent.png" alt="recent" class="icone_home" />Ajouts récents
   </div>
 
   <div class="zone_home_films">
@@ -13,7 +13,7 @@
           if (!empty($filmRecent->getPoster()))
             echo '<img src="' . $filmRecent->getPoster() . '" alt="poster" title="' . $filmRecent->getFilm() . '" class="img_home_film" />';
           else
-            echo '<img src="images/cinema.jpg" alt="poster" title="' . $filmRecent->getFilm() . '" class="img_home_film" />';
+            echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $filmRecent->getFilm() . '" class="img_home_film" />';
 
           // Titre du film
           echo '<div class="titre_home_film">';
@@ -29,7 +29,7 @@
     if ($films_waited == "Y")
     {
       echo '<div class="titre_home">';
-        echo '<img src="icons/waited.png" alt="recent" class="icone_home" />Les plus attendus en ' . $_GET['year'];
+        echo '<img src="../../includes/icons/moviehouse/waited.png" alt="recent" class="icone_home" />Les plus attendus en ' . $_GET['year'];
       echo '</div>';
 
       echo '<div class="zone_home_films">';
@@ -42,7 +42,7 @@
               if (!empty($filmAttendu->getPoster()))
                 echo '<img src="' . $filmAttendu->getPoster() . '" alt="poster" title="' . $filmAttendu->getFilm() . '" class="img_home_film" />';
               else
-                echo '<img src="images/cinema.jpg" alt="poster" title="' . $filmAttendu->getFilm() . '" class="img_home_film" />';
+                echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $filmAttendu->getFilm() . '" class="img_home_film" />';
 
               // Titre du film
               echo '<div class="titre_home_film">';
@@ -69,7 +69,7 @@
     if ($films_way_out == "Y")
     {
       echo '<div class="titre_home">';
-        echo '<img src="icons/way_out.png" alt="recent" class="icone_home" />Les prochaines sorties';
+        echo '<img src="../../includes/icons/moviehouse/way_out.png" alt="recent" class="icone_home" />Les prochaines sorties';
       echo '</div>';
 
       echo '<div class="zone_home_films">';
@@ -82,7 +82,7 @@
               if (!empty($filmSortie->getPoster()))
                 echo '<img src="' . $filmSortie->getPoster() . '" alt="poster" title="' . $filmSortie->getPoster() . '" class="img_home_film" />';
               else
-                echo '<img src="images/cinema.jpg" alt="poster" title="' . $filmSortie->getPoster() . '" class="img_home_film" />';
+                echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $filmSortie->getPoster() . '" class="img_home_film" />';
 
               // Titre du film
               echo '<div class="titre_home_film">';

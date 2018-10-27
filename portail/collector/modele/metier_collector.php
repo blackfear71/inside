@@ -226,7 +226,7 @@
     $new_name = "";
 
     // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "images";
+    $dossier = "../../includes/images/collector";
 
     if (!is_dir($dossier))
       mkdir($dossier);
@@ -283,7 +283,7 @@
     $data1 = $req1->fetch();
 
     if (isset($data1['collector']) AND !empty($data1['collector']) AND $data1['type_collector'] == "I")
-      unlink ("images/" . $data1['collector']);
+      unlink ("../../includes/images/collector/" . $data1['collector']);
 
     $type_collector = $data1['type_collector'];
 

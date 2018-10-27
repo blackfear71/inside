@@ -131,7 +131,7 @@
           if ($to_delete != "Y")
           {
             $icone  = "movie_house";
-            $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_1' class='smiley' />";
+            $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir &nbsp;<img src='../../includes/icons/common/smileys/1.png' alt='smiley_1' class='smiley' />";
             $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
           }
           break;
@@ -245,7 +245,7 @@
           $num_page = numPageCollector($notification->getContent());
 
           $icone  = "collector";
-          $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/smileys/2.png' alt='smiley_2' class='smiley' />";
+          $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/common/smileys/2.png' alt='smiley_2' class='smiley' />";
           $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&anchor=" . $notification->getContent();
           break;
 
@@ -282,7 +282,7 @@
           $num_page = numPageCollector($notification->getContent());
 
           $icone  = "collector";
-          $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/smileys/1.png' alt='smiley_2' class='smiley' />";
+          $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/common/smileys/1.png' alt='smiley_2' class='smiley' />";
           $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&anchor=" . $notification->getContent();
           break;
 

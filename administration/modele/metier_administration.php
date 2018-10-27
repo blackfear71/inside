@@ -241,8 +241,8 @@
 
     if (isset($donnees['calendar']) AND !empty($donnees['calendar']))
     {
-      unlink ("../portail/calendars/images/" . $donnees['year'] . "/" . $donnees['calendar']);
-      unlink ("../portail/calendars/images/" . $donnees['year'] . "/mini/" . $donnees['calendar']);
+      unlink ("../includes/images/calendars/" . $donnees['year'] . "/" . $donnees['calendar']);
+      unlink ("../includes/images/calendars/" . $donnees['year'] . "/mini/" . $donnees['calendar']);
     }
 
     $reponse->closeCursor();
@@ -1271,18 +1271,24 @@
     // Si contrôles ok, insertion image puis table
     if ($control_ok == true)
     {
-      // Création dossier si inexistant
-      $name_success_dir = '../includes/icons/success';
+      // On contrôle la présence du dossier, sinon on le créé
+      $dossier = "../includes/images/profil";
 
-      if (!is_dir($name_success_dir))
-         mkdir($name_success_dir);
+      if (!is_dir($dossier))
+         mkdir($dossier);
+
+      // On contrôle la présence du dossier des succès, sinon on le créé
+      $dossier_succes = $dossier . '/success';
+
+      if (!is_dir($dossier_succes))
+         mkdir($dossier_succes);
 
       // Insertion image
       // Si on a bien une image
    		if ($files['success']['name'] != NULL)
    		{
    			// Dossier de destination
-   			$success_dir = '../includes/icons/success/';
+   			$success_dir = $dossier_succes . '/';
 
    			// Données du fichier
    			$file      = $files['success']['name'];
@@ -1366,7 +1372,7 @@
     $data1 = $req1->fetch();
 
     if (isset($data1['reference']) AND !empty($data1['reference']))
-      unlink ("../includes/icons/success/" . $data1['reference'] . ".png");
+      unlink ("../includes/images/profil/success/" . $data1['reference'] . ".png");
 
     $req1->closeCursor();
 
@@ -1588,10 +1594,16 @@
     global $bdd;
 
     // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "../profil/avatars";
+    $dossier = "../includes/images/profil";
 
     if (!is_dir($dossier))
-       mkdir($dossier);
+      mkdir($dossier);
+
+    // On contrôle la présence du dossier d'avatars, sinon on le créé
+    $dossier_avatars = $dossier . "/avatars";
+
+    if (!is_dir($dossier_avatars))
+       mkdir($dossier_avatars);
 
     $avatar = rand();
 
@@ -1599,7 +1611,7 @@
     if ($files['avatar']['name'] != NULL)
     {
       // Dossier de destination
-      $avatar_dir = '../profil/avatars/';
+      $avatar_dir = $dossier_avatars . '/';
 
       // Données du fichier
       $file      = $files['avatar']['name'];
@@ -1645,7 +1657,7 @@
         $donnees1 = $reponse1->fetch();
 
         if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink ("avatars/" . $donnees1['avatar'] . "");
+          unlink ($avatar_dir . $donnees1['avatar'] . "");
 
         $reponse1->closeCursor();
 
@@ -1675,7 +1687,7 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink ("../profil/avatars/" . $donnees1['avatar'] . "");
+      unlink ("../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
 
     $reponse1->closeCursor();
 
@@ -2098,13 +2110,19 @@
     if ($control_ok == true)
     {
       // On contrôle la présence du dossier des images, sinon on le créé
-      $dossier_images = "../portail/missions/images";
+      $dossier = "../includes/images/missions";
+
+      if (!is_dir($dossier))
+        mkdir($dossier);
+
+      // On contrôle la présence du dossier des bannières, sinon on le créé
+      $dossier_images = $dossier . "/banners";
 
       if (!is_dir($dossier_images))
         mkdir($dossier_images);
 
-      // On contrôle la présence du dossier des icônes, sinon on le créé
-      $dossier_icones = "../portail/missions/icons";
+      // On contrôle la présence du dossier des boutons, sinon on le créé
+      $dossier_icones = $dossier . "/buttons";
 
       if (!is_dir($dossier_icones))
         mkdir($dossier_icones);
@@ -2317,8 +2335,8 @@
         if (!empty($file['name']) AND !$file['name'] == NULL)
         {
           // Chemins
-          $dossier_images = "../portail/missions/images";
-          $dossier_icones = "../portail/missions/icons";
+          $dossier_images = "../includes/images/missions/banners";
+          $dossier_icones = "../includes/images/missions/buttons";
 
           // Dossier de destination
           if ($key_file == "mission_image")
@@ -2439,10 +2457,10 @@
     $reponse->closeCursor();
 
     // Suppression des images
-    unlink ("../portail/missions/images/" . $reference . ".png");
-    unlink ("../portail/missions/icons/" . $reference . "_g.png");
-    unlink ("../portail/missions/icons/" . $reference . "_m.png");
-    unlink ("../portail/missions/icons/" . $reference . "_d.png");
+    unlink ("../includes/images/missions/banners/" . $reference . ".png");
+    unlink ("../includes/images/missions/buttons/" . $reference . "_g.png");
+    unlink ("../includes/images/missions/buttons/" . $reference . "_m.png");
+    unlink ("../includes/images/missions/buttons/" . $reference . "_d.png");
 
     // Suppression de la mission en table
     $reponse2 = $bdd->exec('DELETE FROM missions WHERE id = ' . $id);

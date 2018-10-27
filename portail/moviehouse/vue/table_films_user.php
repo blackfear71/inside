@@ -88,21 +88,21 @@
                   // Fiche du film
                   echo '<td class="table_dates">';
                     if (!empty($film->getLink()))
-                      echo '<a href="' . $film->getLink() . '" target="_blank"><img src="icons/pellicule.png" alt="pellicule" title="Fiche du film" class="logo_tableau_films" /></a>';
+                      echo '<a href="' . $film->getLink() . '" target="_blank"><img src="../../includes/icons/moviehouse/pellicule.png" alt="pellicule" title="Fiche du film" class="logo_tableau_films" /></a>';
                   echo '</td>';
 
                   // Bande-annonce
                   echo '<td class="table_dates">';
                     if (!empty($film->getTrailer()))
-                      echo '<a href="' . $film->getTrailer() . '" target="_blank"><img src="icons/youtube.png" alt="youtube" title="Bande-annonce du film" class="logo_tableau_films" /></a>';
+                      echo '<a href="' . $film->getTrailer() . '" target="_blank"><img src="../../includes/icons/moviehouse/youtube.png" alt="youtube" title="Bande-annonce du film" class="logo_tableau_films" /></a>';
                   echo '</td>';
 
                   // Lien Doodle
                   echo '<td class="table_dates">';
                     if (!empty($film->getDoodle()))
-                      echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="icons/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
+                      echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
                     else
-                      echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
+                      echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
                   echo '</td>';
 
                   // Date de sortie proposée
@@ -130,14 +130,14 @@
                     echo '<td class="table_users">';
 
                       echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                        echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
+                        echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                       echo '</a>';
 
                       echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                         // Boutons vote
                         for ($j = 0; $j <= 5; $j++)
                         {
-                          echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
+                          echo '<img src="../../includes/icons/moviehouse/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
                           if ($j == $film->getStars_user())
                             echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
@@ -147,7 +147,7 @@
 
                         // Bouton annulation
                         echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Annuler" class="link_vote">';
-                          echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
+                          echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                         echo '</a>';
                       echo '</form>';
                   echo '</td>';
@@ -168,7 +168,7 @@
                     if ($film->getNb_users() > 0)
                     {
                       echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
-                        echo '<img src="icons/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
+                        echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
                       echo '</a>';
                     }
                   echo '</td>';
@@ -236,21 +236,21 @@
             // Fiche du film
             echo '<td class="table_dates">';
               if (!empty($film->getLink()))
-                echo '<a href="' . $film->getLink() . '" target="_blank"><img src="icons/pellicule.png" alt="pellicule" title="Fiche du film" class="logo_tableau_films" /></a>';
+                echo '<a href="' . $film->getLink() . '" target="_blank"><img src="../../includes/icons/moviehouse/pellicule.png" alt="pellicule" title="Fiche du film" class="logo_tableau_films" /></a>';
             echo '</td>';
 
             // Bande-annonce
             echo '<td class="table_dates">';
               if (!empty($film->getTrailer()))
-                echo '<a href="' . $film->getTrailer() . '" target="_blank"><img src="icons/youtube.png" alt="youtube" title="Bande-annonce du film" class="logo_tableau_films" /></a>';
+                echo '<a href="' . $film->getTrailer() . '" target="_blank"><img src="../../includes/icons/moviehouse/youtube.png" alt="youtube" title="Bande-annonce du film" class="logo_tableau_films" /></a>';
             echo '</td>';
 
             // Lien Doodle
             echo '<td class="table_dates">';
               if (!empty($film->getDoodle()))
-                echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="icons/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
+                echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
               else
-                echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
+                echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
             echo '</td>';
 
             // Date de sortie proposée
@@ -278,14 +278,14 @@
               echo '<td class="table_users">';
 
                 echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
-                  echo '<img src="icons/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
+                  echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                 echo '</a>';
 
                 echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                   // Boutons vote
                   for ($j = 0; $j <= 5; $j++)
                   {
-                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
+                    echo '<img src="../../includes/icons/moviehouse/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
                     if ($j == $film->getStars_user())
                       echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
@@ -295,7 +295,7 @@
 
                   // Bouton annulation
                   echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Annuler" class="link_vote">';
-                    echo '<img src="icons/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
+                    echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                   echo '</a>';
                 echo '</form>';
             echo '</td>';
@@ -316,7 +316,7 @@
               if ($film->getNb_users() > 0)
               {
                 echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
-                  echo '<img src="icons/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
+                  echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
                 echo '</a>';
               }
     				echo '</td>';

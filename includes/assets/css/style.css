@@ -386,7 +386,7 @@ header
 	vertical-align: middle;
 	margin-top: -4px;
 	border: 0;
-	background-image: url("/inside/includes/icons/search.png");
+	background-image: url("/inside/includes/icons/common/search.png");
 	background-size: 24px;
 	background-repeat: no-repeat;
 	background-position: 45% center;
@@ -531,7 +531,7 @@ aside
 	height: 50px;
 	border: 0;
 	border-radius: 2px;
-	background-image: url("/inside/includes/icons/logout.png");
+	background-image: url("/inside/includes/icons/common/logout.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -570,7 +570,7 @@ aside
 	height: 50px;
 	border: 0;
 	border-radius: 2px;
-	background-image: url("/inside/includes/icons/delete.png");
+	background-image: url("/inside/includes/icons/common/delete.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;

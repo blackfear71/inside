@@ -375,7 +375,7 @@
 	border: 0;
 	border-radius: 5px;
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/cancel.png");
+	background-image: url("/inside/includes/icons/common/cancel.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -394,7 +394,7 @@
 	border: 0;
 	border-radius: 5px;
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/validate.png");
+	background-image: url("/inside/includes/icons/common/validate.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -760,7 +760,7 @@
 	width: 100%;
 	border: 0;
 	background-color: #e3e3e3;
-	background-image: url("/inside/portail/calendars/icons/send_red.png");
+	background-image: url("/inside/includes/icons/common/send_red.png");
 	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -772,7 +772,7 @@
 .send_succes:hover
 {
 	background-color: #ff1937;
-	background-image: url("/inside/portail/calendars/icons/send.png");
+	background-image: url("/inside/includes/icons/common/send.png");
 }
 
 .td_saisie_succes_desc
@@ -982,7 +982,7 @@
 	height: 30px;
 	margin-top: -2px;
 	background-color: #d3d3d3;
-	background-image: url("/inside/includes/icons/delete_red.png");
+	background-image: url("/inside/includes/icons/common/delete_red.png");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -1014,7 +1014,7 @@
 .bouton_delete:hover
 {
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/delete.png");
+	background-image: url("/inside/includes/icons/common/delete.png");
 }
 
 .avertissement_succes
@@ -1369,7 +1369,7 @@
 	width: calc(20% - 20px);
 	min-height: 30px;
 	background-color: #d3d3d3;
-	background-image: url("/inside/includes/icons/delete_red.png");
+	background-image: url("/inside/includes/icons/common/delete_red.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -1381,7 +1381,7 @@
 .bouton_delete_mission:hover
 {
 	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/delete.png");
+	background-image: url("/inside/includes/icons/common/delete.png");
 }
 
 /*** Saisie mission ***/

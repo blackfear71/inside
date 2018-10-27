@@ -19,7 +19,7 @@
 
           echo '<div class="zone_presentation_mission">';
             echo '<a href="manage_missions.php?id_mission=' . $ligneMission->getId() . '&action=goModifier">';
-              echo '<img src="../portail/missions/images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
+              echo '<img src="../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
             echo '</a>';
 
             echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
@@ -40,7 +40,7 @@
 
           echo '<div class="zone_presentation_mission">';
             echo '<a href="manage_missions.php?id_mission=' . $ligneMission->getId() . '&action=goModifier">';
-              echo '<img src="../portail/missions/images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
+              echo '<img src="../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
             echo '</a>';
 
             echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
@@ -61,7 +61,7 @@
 
           echo '<div class="zone_presentation_mission">';
             echo '<a href="manage_missions.php?id_mission=' . $ligneMission->getId() . '&action=goModifier">';
-              echo '<img src="../portail/missions/images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
+              echo '<img src="../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
             echo '</a>';
 
             echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';

@@ -28,9 +28,9 @@
 
             // Avatar
             if (!empty($collector->getAvatar_s()))
-              echo '<img src="../../profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+              echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
             else
-              echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+              echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
 
             // Vote
             echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" name="vote_user" class="link_current_vote">';
@@ -40,14 +40,14 @@
               {
                 if ($vote->getId_collector() == $collector->getId())
                 {
-                  echo '<img src="../../includes/icons/smileys/' . $vote->getVote() . '.png" alt="smiley" class="current_vote" />';
+                  echo '<img src="../../includes/icons/common/smileys/' . $vote->getVote() . '.png" alt="smiley" class="current_vote" />';
                   $founded = true;
                   break;
                 }
               }
 
               if ($founded == false)
-                echo '<img src="../../includes/icons/smileys/0.png" alt="smiley" class="current_vote" />';
+                echo '<img src="../../includes/icons/common/smileys/0.png" alt="smiley" class="current_vote" />';
             echo '</a>';
 
             // Formulaire vote
@@ -97,18 +97,18 @@
               if ($collector->getType_collector() == "T")
               {
                 // Apostrophe gauche
-                echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
+                echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
 
                 // Citation
                 echo '<div class="text_collector">' . nl2br(formatCollector($collector->getCollector())) . '</div>';
 
                 // Apostrophe droite
-                echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
+                echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
               }
               elseif ($collector->getType_collector() == "I")
               {
                 // Image
-                echo '<img src="images/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
+                echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
               }
 
               // Rapporteur
@@ -131,7 +131,7 @@
                     {
                       if ($votes['smileys'][$k] != 0)
                       {
-                        echo '<img src="../../includes/icons/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
+                        echo '<img src="../../includes/icons/common/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
 
                         // Pseudos
                         $listeUsersSmiley = '';
@@ -166,9 +166,9 @@
 
               // Avatar
               if (!empty($collector->getAvatar_s()))
-                echo '<img src="../../profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+                echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
               else
-                echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
 
               // Modification speaker
               if (!empty($collector->getSpeaker()))
@@ -215,13 +215,13 @@
 
                 echo '<div class="zone_modify_text_collector">';
                   // Apostrophe gauche
-                  echo '<img src="icons/quote_1.png" alt="quote_1" class="quote_1" />';
+                  echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
 
                   // Modification citation
                   echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
 
                   // Apostrophe droite
-                  echo '<img src="icons/quote_2.png" alt="quote_2" class="quote_2" />';
+                  echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
                 echo '</div>';
               }
               elseif ($collector->getType_collector() == "I")
@@ -230,7 +230,7 @@
                 echo '<input type="hidden" name="type_collector" value="I" />';
 
                 // Image
-                echo '<img src="images/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
+                echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
               }
 
               // Contexte

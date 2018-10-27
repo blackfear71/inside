@@ -7,7 +7,7 @@
       $style_head  = "styleMH.css";
       $script_head = "scriptMH.js";
       $chat_head   = true;
-      
+
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
   </head>
@@ -53,20 +53,20 @@
               // Lien film précédent
               if (!empty($listeNavigation['previous']['id']) AND !empty($listeNavigation['previous']['film']))
               {
-                echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="icons/left.png" alt="left" class="fleche_detail" style="padding-right: 50px;" /></a>';
+                echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="../../includes/icons/moviehouse/left.png" alt="left" class="fleche_detail" style="padding-right: 50px;" /></a>';
                 echo '<span class="titre_prev_movie">' . $listeNavigation['previous']['film'] . '</span>';
               }
               // Lien film suivant
               if (!empty($listeNavigation['next']['id']) AND !empty($listeNavigation['next']['film']))
               {
-                echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="icons/right.png" alt="right" class="fleche_detail" style="padding-left: 50px;" /></a>';
+                echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="../../includes/icons/moviehouse/right.png" alt="right" class="fleche_detail" style="padding-left: 50px;" /></a>';
                 echo '<span class="titre_next_movie">' . $listeNavigation['next']['film'] . '</span>';
               }
               // Fond
               if (!empty($detailsFilm->getPoster()))
                 echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';
               else
-                echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';
+                echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';
 
               // Titre du film
               echo '<div class="titre_film_details">' . $detailsFilm->getFilm() . '</div>';
@@ -82,7 +82,7 @@
                       if (!empty($detailsFilm->getPoster()))
                         echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="img_details" /><br />';
                       else
-                        echo '<img src="images/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details" />';
+                        echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $detailsFilm->getFilm() . '" class="img_details" />';
                     echo '</td>';
 
                     echo '<td class="zone_link">';
@@ -90,7 +90,7 @@
                       if ($detailsFilm->getNb_users() > 0)
                       {
                         echo '<a href="mailing.php?id_film=' . $detailsFilm->getId() . '&action=goConsulter" class="link_details">';
-                          echo '<img src="icons/mailing_red.png" alt="mailing" title="Envoyer mail" class="icon_details" />';
+                          echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing" title="Envoyer mail" class="icon_details" />';
                         echo '</a>';
                       }
 
@@ -98,13 +98,13 @@
                       if (!empty($detailsFilm->getDoodle()))
                       {
                         echo '<a href="' . $detailsFilm->getDoodle() . '" target="_blank" class="link_details">';
-                          echo '<img src="icons/doodle.png" alt="doodle" title="Doodle" class="icon_details" />';
+                          echo '<img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Doodle" class="icon_details" />';
                         echo '</a>';
                       }
                       else
                       {
                         echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?modify_id=' . $detailsFilm->getId() . '&action=goModifier\';" target="_blank" class="link_details">';
-                          echo '<img src="icons/doodle_grey.png" alt="doodle_grey" title="Doodle" class="icon_details" />';
+                          echo '<img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" title="Doodle" class="icon_details" />';
                         echo '</a>';
                       }
 
@@ -112,7 +112,7 @@
                       if (!empty($detailsFilm->getLink()))
                       {
                         echo '<a href="' . $detailsFilm->getLink() . '" target="_blank" class="link_details">';
-                          echo '<img src="icons/pellicule.png" alt="pellicule" title="Fiche du film" class="icon_details" />';
+                          echo '<img src="../../includes/icons/moviehouse/pellicule.png" alt="pellicule" title="Fiche du film" class="icon_details" />';
                         echo '</a>';
                       }
                     echo '</td>';
@@ -127,12 +127,12 @@
 
                   if ($j == $detailsFilm->getStars_user())
                   {
-                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_vote" style="border: solid 1px #7c7c7c;" />';
+                    echo '<img src="../../includes/icons/moviehouse/stars/star' . $j .'.png" alt="star' . $j . '" class="star_vote" style="border: solid 1px #7c7c7c;" />';
                     echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_star_vote" />';
                   }
                   else
                   {
-                    echo '<img src="icons/stars/star' . $j .'.png" alt="star' . $j . '" class="star_vote" />';
+                    echo '<img src="../../includes/icons/moviehouse/stars/star' . $j .'.png" alt="star' . $j . '" class="star_vote" />';
                     echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_star_vote" />';
                   }
                 }
@@ -145,24 +145,24 @@
                   // Participation
                   if ($detailsFilm->getParticipation() == "P")
                   {
-                    echo '<img src="icons/participate.png" alt="participate" class="star_vote" style="background-color: #ffad01;" />';
+                    echo '<img src="../../includes/icons/moviehouse/participate.png" alt="participate" class="star_vote" style="background-color: #ffad01;" />';
                     echo '<input type="submit" name="participate" class="link_star_vote" />';
                   }
                   else
                   {
-                    echo '<img src="icons/participate.png" alt="participate" class="star_vote" />';
+                    echo '<img src="../../includes/icons/moviehouse/participate.png" alt="participate" class="star_vote" />';
                     echo '<input type="submit" name="participate" class="link_star_vote" />';
                   }
 
                   // Vue
                   if ($detailsFilm->getParticipation() == "S")
                   {
-                    echo '<img src="icons/seen.png" alt="seen" class="star_vote" style="background-color: #ffad01;" />';
+                    echo '<img src="../../includes/icons/moviehouse/seen.png" alt="seen" class="star_vote" style="background-color: #ffad01;" />';
                     echo '<input type="submit" name="seen" class="link_star_vote" />';
                   }
                   else
                   {
-                    echo '<img src="icons/seen.png" alt="seen" class="star_vote" />';
+                    echo '<img src="../../includes/icons/moviehouse/seen.png" alt="seen" class="star_vote" />';
                     echo '<input type="submit" name="seen" class="link_star_vote" />';
                   }
 
@@ -188,9 +188,9 @@
 
                         echo '<td class="td_interested_left">';
                           if (!empty($etoiles->getAvatar()))
-                            echo '<img src="../../profil/avatars/' . $etoiles->getAvatar() . '" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
+                            echo '<img src="../../includes/images/profil/avatars/' . $etoiles->getAvatar() . '" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
                           else
-                            echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
+                            echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
                         echo '</td>';
 
                         echo '<td class="td_interested_middle">';
@@ -205,7 +205,7 @@
                           else
                             echo '<div class="circle_star_interested">';
 
-                            echo '<img src="icons/stars/star' . $etoiles->getStars() . '.png" alt="star' . $etoiles->getStars() . '" class="star_interested" />';
+                            echo '<img src="../../includes/icons/moviehouse/stars/star' . $etoiles->getStars() . '.png" alt="star' . $etoiles->getStars() . '" class="star_interested" />';
                           echo '</div>';
                         echo '</td>';
                       echo '</tr>';
@@ -347,9 +347,9 @@
                 echo '<div class="zone_commentaire_user" id="' . $comment->getId() . '">';
                   // Photo de profil
                   if (!empty($comment->getAvatar()))
-                    echo '<img src="../../profil/avatars/' . $comment->getAvatar() . '" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
+                    echo '<img src="../../includes/images/profil/avatars/' . $comment->getAvatar() . '" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
                   else
-                    echo '<img src="../../includes/icons/default.png" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
 
                   // Pseudo
                   if (!empty($comment->getPseudo()))
@@ -411,14 +411,14 @@
                         echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="modifyComment' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
 
                         echo '<div class="zone_saisie_smileys">';
-                          echo '<a onclick="insert_smiley(\':)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\';)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':(\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':|\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':D\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':O\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':P\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                          echo '<a onclick="insert_smiley(\':facepalm:\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\';)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':(\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':|\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':D\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':O\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':P\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                          echo '<a onclick="insert_smiley(\':facepalm:\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
                         echo '</div>';
                       echo '</form>';
                     echo '</span>';
@@ -444,14 +444,14 @@
   							echo '<input type="submit" name="submit_comment" value="Envoyer" class="bouton_commentaires" />';
 
                 echo '<div class="zone_saisie_smileys">';
-                	echo '<a onclick="insert_smiley(\':)\', \'insertComment\')"><img src="../../includes/icons/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\';)\', \'insertComment\')"><img src="../../includes/icons/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':(\', \'insertComment\')"><img src="../../includes/icons/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':|\', \'insertComment\')"><img src="../../includes/icons/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':D\', \'insertComment\')"><img src="../../includes/icons/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                  echo '<a onclick="insert_smiley(\':O\', \'insertComment\')"><img src="../../includes/icons/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                  echo '<a onclick="insert_smiley(\':P\', \'insertComment\')"><img src="../../includes/icons/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':facepalm:\', \'insertComment\')"><img src="../../includes/icons/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\':)\', \'insertComment\')"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\';)\', \'insertComment\')"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\':(\', \'insertComment\')"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\':|\', \'insertComment\')"><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\':D\', \'insertComment\')"><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
+                  echo '<a onclick="insert_smiley(\':O\', \'insertComment\')"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                  echo '<a onclick="insert_smiley(\':P\', \'insertComment\')"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                	echo '<a onclick="insert_smiley(\':facepalm:\', \'insertComment\')"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
                 echo '</div>';
   						echo '</form>';
             echo '</div>';

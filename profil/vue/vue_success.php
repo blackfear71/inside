@@ -45,17 +45,17 @@
                 {
                   if ($podium['identifiant'] == $_SESSION['user']['identifiant'] AND $podium['rank'] == 1)
                   {
-                    echo '<img src="../includes/icons/medals/or.png" alt="or" class="medal" />';
+                    echo '<img src="../includes/icons/common/medals/or.png" alt="or" class="medal" />';
                     break;
                   }
                   elseif ($podium['identifiant'] == $_SESSION['user']['identifiant'] AND $podium['rank'] == 2)
                   {
-                    echo '<img src="../includes/icons/medals/argent.png" alt="argent" class="medal" />';
+                    echo '<img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal" />';
                     break;
                   }
                   elseif ($podium['identifiant'] == $_SESSION['user']['identifiant'] AND $podium['rank'] == 3)
                   {
-                    echo '<img src="../includes/icons/medals/bronze.png" alt="bronze" class="medal" />';
+                    echo '<img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal" />';
                     break;
                   }
                 }
@@ -67,9 +67,9 @@
 
           // Logo succès
           if ($successUser[$success->getId()] >= $success->getLimit_success())
-            echo '<img src="../includes/icons/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
+            echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
           else
-            echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+            echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
 
           // Titre succès
           echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
@@ -87,7 +87,7 @@
       {
         echo '<div class="succes_liste">';
           // Logo succès
-          echo '<img src="../includes/icons/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+          echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
 
           // Titre succès
           echo '<div class="titre_succes">Succès non défini</div>';

@@ -111,7 +111,7 @@
                     echo '<table class="zone_notification">';
                       echo '<tr>';
                         echo '<td class="zone_notification_icone">';
-                          echo '<img src="../../includes/icons/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
+                          echo '<img src="../../includes/icons/common/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
                         echo '</td>';
                         echo '<td class="zone_notification_contenu">';
                           echo $notification->getSentence();

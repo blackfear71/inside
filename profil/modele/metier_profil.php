@@ -142,10 +142,16 @@
     global $bdd;
 
     // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "avatars";
+    $dossier = "../includes/images/profil";
 
     if (!is_dir($dossier))
       mkdir($dossier);
+
+    // On contrôle la présence du dossier d'avatars, sinon on le créé
+    $dossier_avatars = $dossier . "/avatars";
+
+    if (!is_dir($dossier_avatars))
+      mkdir($dossier_avatars);
 
  		$avatar = rand();
 
@@ -153,7 +159,7 @@
  		if ($files['avatar']['name'] != NULL)
  		{
  			// Dossier de destination
- 			$avatar_dir = $dossier . '/';
+ 			$avatar_dir = $dossier_avatars . '/';
 
  			// Données du fichier
  			$file      = $files['avatar']['name'];
@@ -199,7 +205,7 @@
  				$donnees1 = $reponse1->fetch();
 
  				if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
- 					unlink ("avatars/" . $donnees1['avatar'] . "");
+ 					unlink ($dossier . "/" . $donnees1['avatar'] . "");
 
  				$reponse1->closeCursor();
 
@@ -229,7 +235,7 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink ("avatars/" . $donnees1['avatar'] . "");
+      unlink ("../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
 
     $reponse1->closeCursor();
 

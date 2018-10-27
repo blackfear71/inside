@@ -62,7 +62,7 @@
                   }
 
                   echo '<div class="zone_presentation_mission_default">';
-                    echo '<img src="../../includes/icons/default_mission.png" alt="default_mission" title="A venir" class="img_mission_default" />';
+                    echo '<img src="../../includes/icons/missions/default_mission.png" alt="default_mission" title="A venir" class="img_mission_default" />';
                     echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' !</div>';
                   echo '</div>';
                 }
@@ -77,7 +77,7 @@
 
                   echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_presentation_mission_first">';
                     echo '<div class="titre_mission_first">' . $ligneMission->getMission() . '</div>';
-                    echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_presentation_mission" />';
+                    echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_presentation_mission" />';
                   echo '</a>';
                 }
                 // Missions précédentes
@@ -91,7 +91,7 @@
 
                   echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_presentation_mission">';
                     echo '<div class="titre_mission">' . $ligneMission->getMission() . '</div>';
-                    echo '<img src="images/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_presentation_mission" />';
+                    echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_presentation_mission" />';
                   echo '</a>';
                 }
               }

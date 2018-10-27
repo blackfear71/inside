@@ -120,7 +120,7 @@
 	cursor: pointer;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: black;
-	background-image: url("/inside/includes/icons/send_red.png");
+	background-image: url("/inside/includes/icons/common/send_red.png");
 	background-size: 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -131,7 +131,7 @@
 	background-color: #ff1937;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: white;
-	background-image: url("/inside/includes/icons/send.png");
+	background-image: url("/inside/includes/icons/common/send.png");
 	background-size: 30px;
 	background-repeat: no-repeat;
 	background-position: center;
