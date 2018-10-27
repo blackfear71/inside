@@ -117,7 +117,7 @@
     $dossier = "../../includes/images/calendars";
 
     if (!is_dir($dossier))
-       mkdir($dossier_calendriers);
+       mkdir($dossier);
 
     // On contrôle la présence du dossier des années, sinon on le créé
     $dossier_calendriers = $dossier . "/" . $post['years'];
