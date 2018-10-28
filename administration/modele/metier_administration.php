@@ -2576,6 +2576,19 @@
       }
     }
 
+    // Contrôle chevauchement dates
+    if ($control_ok == true)
+    {
+      $conflict = false;
+      $conflict = controlGeneratedTheme($date_deb, $date_fin, NULL);
+
+      if ($conflict == true)
+      {
+        $_SESSION['alerts']['date_conflict'] = true;
+        $control_ok                          = false;
+      }
+    }
+
     // Contrôle images présentes
     if ($control_ok == true)
     {
@@ -2769,6 +2782,19 @@
       }
     }
 
+    // Contrôle chevauchement dates
+    if ($control_ok == true)
+    {
+      $conflict = false;
+      $conflict = controlGeneratedTheme($date_deb, $date_fin, $id_theme);
+
+      if ($conflict == true)
+      {
+        $_SESSION['alerts']['date_conflict'] = true;
+        $control_ok                          = false;
+      }
+    }
+
     // Modification de l'enregistrement en base
     if ($control_ok == true)
     {
@@ -2811,5 +2837,34 @@
 
     // Message d'alerte
     $_SESSION['alerts']['theme_deleted'] = true;
+  }
+
+  // METIER : Contrôle dates thème non superposées
+  // RETOUR : Booléen
+  function controlGeneratedTheme($date_deb, $date_fin, $id_theme)
+  {
+    global $bdd;
+
+    $conflict = false;
+
+    if (!empty($id_theme))
+      $reponse = $bdd->query('SELECT * FROM themes WHERE id != ' . $id_theme . ' ORDER BY date_deb DESC ');
+    else
+      $reponse = $bdd->query('SELECT * FROM themes ORDER BY date_deb DESC');
+
+    while($donnees = $reponse->fetch())
+    {
+      if (($date_deb >= $donnees['date_deb'] AND $date_deb <= $donnees['date_fin'])
+      OR  ($date_fin >= $donnees['date_deb'] AND $date_fin <= $donnees['date_fin'])
+      OR  ($date_deb <= $donnees['date_deb'] AND $date_fin >= $donnees['date_fin']))
+      {
+        $conflict = true;
+        break;
+      }
+    }
+
+    $reponse->closeCursor();
+
+    return $conflict;
   }
 ?>

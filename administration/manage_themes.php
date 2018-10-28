@@ -11,6 +11,7 @@
 
   // Initialisation sauvegarde saisie thème
   if ((!isset($_SESSION['alerts']['date_less'])          OR $_SESSION['alerts']['date_less']          != true)
+  AND (!isset($_SESSION['alerts']['date_conflict'])      OR $_SESSION['alerts']['date_conflict']      != true)
   AND (!isset($_SESSION['alerts']['wrong_date'])         OR $_SESSION['alerts']['wrong_date']         != true)
   AND (!isset($_SESSION['alerts']['already_ref_theme'])  OR $_SESSION['alerts']['already_ref_theme']  != true)
   AND (!isset($_SESSION['alerts']['missing_theme_file']) OR $_SESSION['alerts']['missing_theme_file'] != true)
@@ -76,7 +77,10 @@
   {
     case "doAjouter":
     case "doModifier":
-      header ('location: manage_themes.php?action=goConsulter&anchorTheme=' . $new_id);
+      if (!empty($new_id))
+        header ('location: manage_themes.php?action=goConsulter&anchorTheme=' . $new_id);
+      else
+        header ('location: manage_themes.php?action=goConsulter');
       break;
 
 		case "doSupprimer":

@@ -231,6 +231,9 @@
   if (!isset($_SESSION['alerts']['missing_theme_file']))
     $_SESSION['alerts']['missing_theme_file'] = NULL;
 
+  if (!isset($_SESSION['alerts']['date_conflict']))
+    $_SESSION['alerts']['date_conflict'] = NULL;
+
   if (!isset($_SESSION['alerts']['theme_added']))
     $_SESSION['alerts']['theme_added'] = NULL;
 
@@ -741,6 +744,12 @@
   {
     $alerte = 'Un fichier est manquant pour le thème.';
     $_SESSION['alerts']['missing_theme_file'] = NULL;
+  }
+  // Dates incohérentes
+  elseif (isset($_SESSION['alerts']['date_conflict']) AND $_SESSION['alerts']['date_conflict'] == true)
+  {
+    $alerte = 'Les dates de thèmes ne peuvent pas se superposer.';
+    $_SESSION['alerts']['date_conflict'] = NULL;
   }
   // Thème ajouté
   elseif (isset($_SESSION['alerts']['theme_added']) AND $_SESSION['alerts']['theme_added'] == true)
