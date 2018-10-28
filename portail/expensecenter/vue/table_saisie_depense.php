@@ -80,7 +80,7 @@
             {
               $nb_max_parts = 5;
 
-              echo '<td style="border-bottom: 1px solid #b3b3b3;">';
+              echo '<td class="saisie_part_user">';
                 echo '<select name="depense_user[]" class="parts">';
                   for ($k = 0; $k <= $nb_max_parts; $k++)
                   {

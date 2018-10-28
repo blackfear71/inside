@@ -13,7 +13,6 @@
 .table_saisie_depense
 {
 	border-collapse: collapse;
-	background-color: white;
 }
 
 .table_saisie_depense td
@@ -50,6 +49,7 @@
 {
 	text-align: center;
 	border-bottom: 1px solid #b3b3b3;
+	background-color: white;
 }
 
 .saisie_prix
@@ -85,6 +85,12 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 90%;
 	resize: none;
+}
+
+.saisie_part_user
+{
+	border-bottom: 1px solid #b3b3b3;
+	background-color: white;
 }
 
 .parts
