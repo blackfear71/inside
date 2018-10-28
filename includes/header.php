@@ -7,7 +7,7 @@
         echo '<a href="/inside/administration/administration.php?action=goConsulter">';
       else
         echo '<a href="/inside/portail/portail/portail.php?action=goConsulter">';
-          echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
+          echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
         echo '</a>';
 
       // Notifications & Recherche (utilisateur)

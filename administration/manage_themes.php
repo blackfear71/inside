@@ -58,6 +58,7 @@
       {
         $theme->setReference(htmlspecialchars($theme->getReference()));
         $theme->setName(htmlspecialchars($theme->getName()));
+        $theme->setLogo(htmlspecialchars($theme->getLogo()));
         $theme->setDate_deb(htmlspecialchars($theme->getDate_deb()));
         $theme->setDate_fin(htmlspecialchars($theme->getDate_fin()));
       }

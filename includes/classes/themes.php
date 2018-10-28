@@ -4,6 +4,7 @@
     private $id;
     private $reference;
     private $name;
+    private $logo;
     private $date_deb;
     private $date_fin;
 
@@ -13,6 +14,7 @@
       $this->id        = 0;
       $this->reference = '';
       $this->name      = '';
+      $this->logo      = '';
       $this->date_deb  = '';
       $this->date_fin  = '';
     }
@@ -37,6 +39,9 @@
 
       if (isset($data['name']))
         $this->name      = $data['name'];
+
+      if (isset($data['logo']))
+        $this->logo      = $data['logo'];
 
       if (isset($data['date_deb']))
         $this->date_deb  = $data['date_deb'];
@@ -77,6 +82,17 @@
     public function getName()
     {
       return $this->name;
+    }
+
+    // Présence logo
+    public function setLogo($logo)
+    {
+      $this->logo = $logo;
+    }
+
+    public function getLogo()
+    {
+      return $this->logo;
     }
 
     // Date début

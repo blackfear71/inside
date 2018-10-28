@@ -67,7 +67,7 @@ function deployTopMenu(id, icon)
 }
 
 // Changement thème
-function changeTheme(background, header, footer)
+function changeTheme(background, header, footer, logo)
 {
   if (background != null)
   {
@@ -86,6 +86,13 @@ function changeTheme(background, header, footer)
   {
     document.getElementsByTagName("footer")[0].style.backgroundImage  = "url('" + footer + "')";
     document.getElementsByTagName("footer")[0].style.backgroundRepeat = "repeat-x";
+  }
+
+  if (logo != null)
+  {
+    var image  = document.getElementById("logo_inside_header");
+    var source = image.getAttribute("src");
+    image.setAttribute("src", logo);
   }
 }
 

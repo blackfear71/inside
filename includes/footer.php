@@ -8,5 +8,5 @@
 
   // Chargement thème
   if ($_SESSION['user']['identifiant'] != "admin" AND !empty($_SESSION['theme']))
-    echo '<script>changeTheme("' . $_SESSION['theme']['background'] . '", "' . $_SESSION['theme']['header'] . '", "' . $_SESSION['theme']['footer'] . '");</script>';
+    echo '<script>changeTheme("' . $_SESSION['theme']['background'] . '", "' . $_SESSION['theme']['header'] . '", "' . $_SESSION['theme']['footer'] . '", "' . $_SESSION['theme']['logo'] . '");</script>';
 ?>

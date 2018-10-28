@@ -354,10 +354,22 @@
       // Thème présent
       if ($theme_present == true)
       {
-        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                      );
+        if ($myTheme->getLogo() == "Y")
+        {
+          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                         'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
+                        );
+        }
+        else
+        {
+          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                         'logo'       => NULL
+                        );
+        }
       }
       // Thème par défaut
       else
@@ -375,10 +387,22 @@
 
       if (!empty($myTheme->getReference()))
       {
-        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                      );
+        if ($myTheme->getLogo() == "Y")
+        {
+          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                         'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
+                        );
+        }
+        else
+        {
+          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                         'logo'       => NULL
+                        );
+        }
       }
     }
 
