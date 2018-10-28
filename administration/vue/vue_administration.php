@@ -62,7 +62,7 @@
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
               <div class="title_admin">Gestion
-                <div class="saut_ligne">THEMES
+                <div class="saut_ligne">THÈMES
                 </div>
               </div>
             </div>
