@@ -41,7 +41,9 @@
 			<article>
         <?php
           echo '<div class="zone_themes">';
-            // Saisie nouveau thème
+            /************************/
+            /* Saisie nouveau thème */
+            /************************/
             echo '<form method="post" action="manage_themes.php?action=doAjouter" enctype="multipart/form-data" runat="server" class="zone_theme">';
               echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
@@ -76,6 +78,16 @@
               echo '</div>';
 
               echo '<div class="zone_theme_titre" style="margin-top: 8px; padding-top: 7px; padding-bottom: 7px;">';
+                // Logo
+                echo '<div class="zone_parcourir_logo">';
+                  echo '<div class="titre_saisie_logo">Logo</div>';
+                  echo '<input type="file" accept=".png" name="logo" class="bouton_parcourir_logo" onchange="loadFile(event, \'theme_logo\')" />';
+                echo '</div>';
+
+                echo '<div class="mask_logo">';
+                  echo '<img id="theme_logo" class="img_logo" />';
+                echo '</div>';
+
                 // Titre
                 echo '<input type="text" name="theme_title" value="' . $_SESSION['save']['theme_title'] . '" placeholder="Titre" maxlength="255" class="saisie_titre_theme" required />';
 
@@ -97,14 +109,22 @@
               echo '</div>';
             echo '</form>';
 
-            // Affichage thèmes existants
+            /******************************/
+            /* Affichage thèmes existants */
+            /******************************/
             if (!empty($themes))
             {
               foreach ($themes as $theme)
               {
                 echo '<div class="zone_theme" id="' . $theme->getId() . '">';
                   // Images
-                  echo '<img src="../includes/images/themes/headers/' . $theme->getReference() . '_h.png" alt="' . $theme->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                  echo '<div class="zone_header_theme">';
+                    if ($theme->getLogo() == "Y")
+                      echo '<img src="../includes/images/themes/logos/' . $theme->getReference() . '_l.png" alt="' . $theme->getReference() . '_l" title="Logo" class="theme_logo" />';
+
+                    echo '<img src="../includes/images/themes/headers/' . $theme->getReference() . '_h.png" alt="' . $theme->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                  echo '</div>';
+
                   echo '<img src="../includes/images/themes/backgrounds/' . $theme->getReference() . '.png" alt="' . $theme->getReference() . '" title="Background" class="theme_background" />';
                   echo '<img src="../includes/images/themes/footers/' . $theme->getReference() . '_f.png" alt="' . $theme->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
