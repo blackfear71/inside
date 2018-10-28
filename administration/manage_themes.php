@@ -31,11 +31,16 @@
       break;
 
 		case "doAjouter":
-      insertTheme($_POST, $_FILES);
+      $new_id = insertTheme($_POST, $_FILES);
+			break;
+
+    case "doModifier":
+      updateTheme($_POST, $_GET['modify_id']);
+      $new_id = $_GET['modify_id'];
 			break;
 
 		case "doSupprimer":
-
+      deleteTheme($_GET['delete_id']);
 			break;
 
     default:
@@ -59,7 +64,8 @@
       unset($theme);
       break;
 
-		case "doAjouter":
+    case "doAjouter":
+		case "doModifier":
 		case "doSupprimer":
     default:
       break;
@@ -68,7 +74,11 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-		case "doAjouter":
+    case "doAjouter":
+    case "doModifier":
+      header ('location: manage_themes.php?action=goConsulter&anchorTheme=' . $new_id);
+      break;
+
 		case "doSupprimer":
 			header ('location: manage_themes.php?action=goConsulter');
 			break;

@@ -75,7 +75,7 @@
                 echo '<img id="theme_footer" class="img_footer" />';
               echo '</div>';
 
-              echo '<div class="theme_titre" style="margin-top: 8px; padding-top: 7px; padding-bottom: 7px;">';
+              echo '<div class="zone_theme_titre" style="margin-top: 8px; padding-top: 7px; padding-bottom: 7px;">';
                 // Titre
                 echo '<input type="text" name="theme_title" value="' . $_SESSION['save']['theme_title'] . '" placeholder="Titre" maxlength="255" class="saisie_titre_theme" required />';
 
@@ -90,9 +90,9 @@
 
               // Dates de début et de fin
               echo '<div class="theme_dates" style="padding-top: 7px; padding-bottom: 7px;">';
-                echo 'Du ';
+                echo '<div class="theme_texte_dates">Du&nbsp;</div>';
                 echo '<input type="text" name="theme_date_deb" value="' . $_SESSION['save']['theme_date_deb'] . '" placeholder="Date début" maxlength="10" id="datepicker" class="saisie_date_theme" required />';
-                echo ' au ';
+                echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';
                 echo '<input type="text" name="theme_date_fin" value="' . $_SESSION['save']['theme_date_fin'] . '" placeholder="Date fin" maxlength="10" id="datepicker2" class="saisie_date_theme" required />';
               echo '</div>';
             echo '</form>';
@@ -102,14 +102,64 @@
             {
               foreach ($themes as $theme)
               {
-                echo '<div class="zone_theme">';
+                echo '<div class="zone_theme" id="' . $theme->getId() . '">';
+                  // Images
                   echo '<img src="../includes/images/themes/headers/' . $theme->getReference() . '_h.png" alt="' . $theme->getReference() . '_h" title="Header" class="theme_header_footer" />';
                   echo '<img src="../includes/images/themes/backgrounds/' . $theme->getReference() . '.png" alt="' . $theme->getReference() . '" title="Background" class="theme_background" />';
                   echo '<img src="../includes/images/themes/footers/' . $theme->getReference() . '_f.png" alt="' . $theme->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
-                  echo '<div class="theme_titre">' . $theme->getName() . '</div>';
-                  echo '<div class="theme_ref">' . $theme->getReference() . '</div>';
-                  echo '<div class="theme_dates">Du ' . formatDateForDisplay($theme->getDate_deb()) . ' au ' . formatDateForDisplay($theme->getDate_fin()) . '</div>';
+                  /*********************************************/
+                  /* Visualisation normale (sans modification) */
+                  /*********************************************/
+                  echo '<div id="modifier_theme_2[' . $theme->getId() . ']">';
+                    echo '<div class="zone_theme_titre">';
+                      // Bouton suppression
+                      echo '<form method="post" action="manage_themes.php?delete_id=' . $theme->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce thème ?\')) return false;">';
+                        echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme" />';
+                      echo '</form>';
+
+                      // Bouton modification
+                      echo '<a onclick="afficherMasquer(\'modifier_theme[' . $theme->getId() . ']\'); afficherMasquer(\'modifier_theme_2[' . $theme->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_theme"></a>';
+
+                      // Titre
+                      echo '<div class="theme_titre">';
+                        echo $theme->getName();
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Référence et dates
+                    echo '<div class="theme_ref">' . $theme->getReference() . '</div>';
+                    echo '<div class="theme_dates">Du ' . formatDateForDisplay($theme->getDate_deb()) . ' au ' . formatDateForDisplay($theme->getDate_fin()) . '</div>';
+                  echo '</div>';
+
+                  /***************************/
+                  /* Caché pour modification */
+                  /***************************/
+                  echo '<div id="modifier_theme[' . $theme->getId() . ']" style="display: none;">';
+                    echo '<form method="post" action="manage_themes.php?modify_id=' . $theme->getId() . '&action=doModifier">';
+                      echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
+                        // Annulation modification
+                        echo '<a onclick="afficherMasquer(\'modifier_theme[' . $theme->getId() . ']\'); afficherMasquer(\'modifier_theme_2[' . $theme->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_theme"></a>';
+
+                        // Validation modification
+                        echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
+
+                        // Titre
+                        echo '<input type="text" name="theme_title" value="' . $theme->getName() . '" placeholder="Titre" maxlength="255" class="modify_titre_theme" required />';
+                      echo '</div>';
+
+                      // Référence
+                      echo '<div class="theme_ref">' . $theme->getReference() . '</div>';
+
+                      // Dates de début et de fin
+                      echo '<div class="theme_dates" style="padding-top: 7px; padding-bottom: 7px;">';
+                        echo '<div class="theme_texte_dates">Du&nbsp;</div>';
+                        echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($theme->getDate_deb()) . '" placeholder="Date début" maxlength="10" id="datepicker_mod_deb[' . $theme->getId() . ']" class="modify_date_deb_theme" required />';
+                        echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';
+                        echo '<input type="text" name="theme_date_fin" value="' . formatDateForDisplay($theme->getDate_fin()) . '" placeholder="Date fin" maxlength="10" id="datepicker_mod_fin[' . $theme->getId() . ']" class="modify_date_fin_theme" required />';
+                      echo '</div>';
+                    echo '</form>';
+                  echo '</div>';
                 echo '</div>';
               }
             }

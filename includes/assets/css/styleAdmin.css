@@ -1960,6 +1960,7 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	vertical-align: middle;
 }
 
 .saisie_theme_bouton
@@ -1990,9 +1991,10 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	vertical-align: middle;
 }
 
-.saisie_date_theme
+.saisie_date_theme, .modify_date_deb_theme, .modify_date_fin_theme
 {
 	display: inline-block;
 	width: 38.9%;
@@ -2000,6 +2002,7 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	vertical-align: middle;
 }
 
 /*** Visualisation thème ***/
@@ -2016,7 +2019,7 @@
 	display: block;
 }
 
-.theme_titre
+.zone_theme_titre
 {
 	display: block;
 	margin-top: 5px;
@@ -2025,9 +2028,88 @@
 	padding: 10px;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
+	border-bottom: solid 2px #a3a3a3;
+}
+
+.theme_titre
+{
+	display: inline-block;
+	width: calc(100% - 80px);
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
-	border-bottom: solid 2px #a3a3a3;
+	text-align: justify;
+}
+
+.icon_delete_theme
+{
+	float: right;
+	margin-top: -3px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/includes/icons/common/delete.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+	background-color: transparent;
+  cursor: pointer;
+}
+
+.icone_modify_theme
+{
+	float: right;
+	margin-right: 10px;
+	margin-top: -3px;
+  width: 30px;
+  height: 30px;
+  background-image: url("/inside/includes/icons/common/edit.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+	background-color: transparent;
+  cursor: pointer;
+}
+
+.icon_validate_theme
+{
+	float: right;
+	margin-right: 10px;
+	margin-top: -3px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/includes/icons/common/validate.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.icone_cancel_theme
+{
+	float: right;
+	margin-top: -3px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/includes/icons/common/cancel.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.modify_titre_theme
+{
+	display: inline-block;
+	width: calc(100% - 90px);
+	padding: 5px;
+	border: 0;
+	border-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	vertical-align: middle;
 }
 
 .theme_ref
@@ -2041,6 +2123,7 @@
 	border-bottom-left-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
+	vertical-align: middle;
 }
 
 .theme_dates
@@ -2053,4 +2136,11 @@
 	border-bottom-right-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
+	vertical-align: middle;
+}
+
+.theme_texte_dates
+{
+	display: inline-block;
+	vertical-align: middle;
 }

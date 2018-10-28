@@ -159,7 +159,7 @@
           echo '<form method="post" action="collector.php?modify_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '">';
             echo '<div class="zone_collector_haut">';
               // Validation modification
-              echo '<input type="submit" name="delete_collector" value="" title="Valider" class="icon_validate_collector" />';
+              echo '<input type="submit" name="modify_collector" value="" title="Valider" class="icon_validate_collector" />';
 
               // Annulation modification
               echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_collector"></a>';

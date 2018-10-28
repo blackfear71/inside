@@ -2501,7 +2501,7 @@
   }
 
   // METIER : Insertion nouveau thème
-  // RETOUR : aucun
+  // RETOUR : Id enregistrement créé
   function insertTheme($post, $files)
   {
     global $bdd;
@@ -2512,6 +2512,7 @@
     $_SESSION['save']['theme_date_deb'] = $post['theme_date_deb'];
     $_SESSION['save']['theme_date_fin'] = $post['theme_date_fin'];
 
+    $new_id     = NULL;
     $control_ok = true;
 
     $theme     = $post['theme_title'];
@@ -2706,7 +2707,109 @@
         ));
       $req2->closeCursor();
 
+      $new_id = $bdd->lastInsertId();
+
       $_SESSION['alerts']['theme_added'] = true;
     }
+
+    return $new_id;
+  }
+
+  // METIER : Modification phrases cultes
+  // RETOUR : Aucun
+  function updateTheme($post, $id_theme)
+  {
+    global $bdd;
+
+    $control_ok = true;
+
+    $theme    = $post['theme_title'];
+    $date_deb = $post['theme_date_deb'];
+    $date_fin = $post['theme_date_fin'];
+
+    // Contrôle format date début
+    if ($control_ok == true)
+    {
+      // On décompose la date à contrôler
+      list($d, $m, $y) = explode('/', $date_deb);
+
+      // On vérifie le format de la date
+      if (!checkdate($m, $d, $y))
+      {
+        $_SESSION['alerts']['wrong_date'] = true;
+        $control_ok                       = false;
+      }
+      else
+        $date_deb = formatDateForInsert($date_deb);
+    }
+
+    // Contrôle format date fin
+    if ($control_ok == true)
+    {
+      // On décompose la date à contrôler
+      list($d, $m, $y) = explode('/', $date_fin);
+
+      // On vérifie le format de la date
+      if (!checkdate($m, $d, $y))
+      {
+        $_SESSION['alerts']['wrong_date'] = true;
+        $control_ok                       = false;
+      }
+      else
+        $date_fin = formatDateForInsert($date_fin);
+    }
+
+    // Contrôle date début <= date fin
+    if ($control_ok == true)
+    {
+      if ($date_fin < $date_deb)
+      {
+        $_SESSION['alerts']['date_less'] = true;
+        $control_ok                      = false;
+      }
+    }
+
+    // Modification de l'enregistrement en base
+    if ($control_ok == true)
+    {
+      $req = $bdd->prepare('UPDATE themes SET name     = :name,
+                                              date_deb = :date_deb,
+                                              date_fin = :date_fin
+                                        WHERE id       = ' . $id_theme);
+      $req->execute(array(
+        'name'     => $theme,
+        'date_deb' => formatDateForInsert($date_deb),
+        'date_fin' => formatDateForInsert($date_fin)
+      ));
+      $req->closeCursor();
+
+      $_SESSION['alerts']['theme_modified'] = true;
+    }
+  }
+
+  // METIER : Suppression thème
+  // RETOUR : Aucun
+  function deleteTheme($id_theme)
+  {
+    global $bdd;
+
+    // Suppression images
+    $req1 = $bdd->query('SELECT id, reference FROM themes WHERE id = ' . $id_theme);
+    $data1 = $req1->fetch();
+
+    if (isset($data1['reference']) AND !empty($data1['reference']))
+    {
+      unlink ("../includes/images/themes/headers/" . $data1['reference'] . "_h.png");
+      unlink ("../includes/images/themes/backgrounds/" . $data1['reference'] . ".png");
+      unlink ("../includes/images/themes/footers/" . $data1['reference'] . "_f.png");
+    }
+
+    $req1->closeCursor();
+
+    // Suppression enregistrement base
+    $req2 = $bdd->exec('DELETE FROM themes WHERE id = ' . $id_theme);
+
+    // Message d'alerte
+    $_SESSION['alerts']['theme_deleted'] = true;
   }
 ?>

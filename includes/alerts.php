@@ -234,6 +234,12 @@
   if (!isset($_SESSION['alerts']['theme_added']))
     $_SESSION['alerts']['theme_added'] = NULL;
 
+  if (!isset($_SESSION['alerts']['theme_modified']))
+    $_SESSION['alerts']['theme_modified'] = NULL;
+
+  if (!isset($_SESSION['alerts']['theme_deleted']))
+    $_SESSION['alerts']['theme_deleted'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -741,6 +747,18 @@
   {
     $alerte = 'Le thème a bien été ajouté.';
     $_SESSION['alerts']['theme_added'] = NULL;
+  }
+  // Thème modifié
+  elseif (isset($_SESSION['alerts']['theme_modified']) AND $_SESSION['alerts']['theme_modified'] == true)
+  {
+    $alerte = 'Le thème a été modifié.';
+    $_SESSION['alerts']['theme_modified'] = NULL;
+  }
+  // Thème supprimé
+  elseif (isset($_SESSION['alerts']['theme_deleted']) AND $_SESSION['alerts']['theme_deleted'] == true)
+  {
+    $alerte = 'Le thème a été supprimé.';
+    $_SESSION['alerts']['theme_deleted'] = NULL;
   }
 
   /*************/

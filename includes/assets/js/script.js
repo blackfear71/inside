@@ -205,6 +205,9 @@ function $_GET(param)
 // Positionnement du scroll vertical en fonction de l'id et de l'offset (en px)
 function scrollToId(id, offset)
 {
+  console.log(id);
+  console.log(offset);
+
   if (offset == null)
     offset = 0;
 

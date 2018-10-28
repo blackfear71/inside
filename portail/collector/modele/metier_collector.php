@@ -121,7 +121,7 @@
   }
 
   // METIER : Insertion phrases cultes
-  // RETOUR : Aucun
+  // RETOUR : Id enregistrement créé
   function insertCollector($post, $files, $user)
   {
     $new_id = NULL;
@@ -362,7 +362,7 @@
                                                  date_collector = :date_collector,
                                                  collector      = :collector,
                                                  context        = :context
-                                           WHERE id = ' . $id_col);
+                                           WHERE id             = ' . $id_col);
       $req->execute(array(
         'speaker'        => $speaker,
         'type_speaker'   => $type_speaker,
