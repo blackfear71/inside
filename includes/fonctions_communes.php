@@ -354,9 +354,9 @@
       // Thème présent
       if ($theme_present == true)
       {
-        $theme = array('background' => '/inside/includes/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                       'header'     => '/inside/includes/themes/headers/' . $myTheme->getReference() . '_h.png',
-                       'footer'     => '/inside/includes/themes/footers/' . $myTheme->getReference() . '_f.png',
+        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
                       );
       }
       // Thème par défaut
@@ -375,9 +375,9 @@
 
       if (!empty($myTheme->getReference()))
       {
-        $theme = array('background' => '/inside/includes/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                       'header'     => '/inside/includes/themes/headers/' . $myTheme->getReference() . '_h.png',
-                       'footer'     => '/inside/includes/themes/footers/' . $myTheme->getReference() . '_f.png',
+        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
                       );
       }
     }

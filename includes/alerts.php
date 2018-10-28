@@ -224,6 +224,16 @@
   if (!isset($_SESSION['alerts']['mission_deleted']))
     $_SESSION['alerts']['mission_deleted'] = NULL;
 
+  // Initialisations thèmes (admin)
+  if (!isset($_SESSION['alerts']['already_ref_theme']))
+    $_SESSION['alerts']['already_ref_theme'] = NULL;
+
+  if (!isset($_SESSION['alerts']['missing_theme_file']))
+    $_SESSION['alerts']['missing_theme_file'] = NULL;
+
+  if (!isset($_SESSION['alerts']['theme_added']))
+    $_SESSION['alerts']['theme_added'] = NULL;
+
   /***********/
   /* Alertes */
   /***********/
@@ -693,7 +703,7 @@
   // Problème fichier mission
   elseif (isset($_SESSION['alerts']['wrong_file']) AND $_SESSION['alerts']['wrong_file'] == true)
   {
-    $alerte = 'Un problème a eu lieu avec l\'un des fichiers de la mission.';
+    $alerte = 'Un problème a eu lieu avec l\'un des fichiers.';
     $_SESSION['alerts']['wrong_file'] = NULL;
   }
   // Mission ajoutée
@@ -713,6 +723,24 @@
   {
     $alerte = 'La mission a bien été supprimée.';
     $_SESSION['alerts']['mission_deleted'] = NULL;
+  }
+  // Référence mission déjà existante
+  elseif (isset($_SESSION['alerts']['already_ref_theme']) AND $_SESSION['alerts']['already_ref_theme'] == true)
+  {
+    $alerte = 'La référence de ce thème existe déjà.';
+    $_SESSION['alerts']['already_ref_theme'] = NULL;
+  }
+  // Fichier thème manquant
+  elseif (isset($_SESSION['alerts']['missing_theme_file']) AND $_SESSION['alerts']['missing_theme_file'] == true)
+  {
+    $alerte = 'Un fichier est manquant pour le thème.';
+    $_SESSION['alerts']['missing_theme_file'] = NULL;
+  }
+  // Thème ajouté
+  elseif (isset($_SESSION['alerts']['theme_added']) AND $_SESSION['alerts']['theme_added'] == true)
+  {
+    $alerte = 'Le thème a bien été ajouté.';
+    $_SESSION['alerts']['theme_added'] = NULL;
   }
 
   /*************/

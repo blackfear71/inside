@@ -1773,3 +1773,284 @@
 	color: white;
 	text-align: center;
 }
+
+/*** Thèmes ***/
+.zone_themes
+{
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_themes.masonry
+{
+	opacity: 1;
+}
+
+.zone_theme
+{
+	margin-bottom: 15px;
+}
+
+/*** Saisie thème ***/
+.zone_parcourir_header
+{
+	width: 494px;
+	height: 75.5px;
+	border-style: dashed;
+	border-width: 3px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-color: #a3a3a3;
+	color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+	background-color: #262626;
+}
+
+.titre_saisie_header
+{
+	width: 494px;
+	height: 75.5px;
+	line-height: 75.5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 150%;
+}
+
+.bouton_parcourir_header
+{
+	display: block;
+	opacity: 0;
+	width: 494px;
+	height: 75.5px;
+	margin-top: -75.5px;
+	cursor: pointer;
+}
+
+.mask_header
+{
+	width: 494px;
+	height: 75.5px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: -78.5px;
+	line-height: 75.5px;
+}
+
+.img_header
+{
+	margin-top: -3px;
+	height: 75.5px;
+	max-width: 494px;
+	vertical-align: middle;
+}
+
+.zone_parcourir_background
+{
+	width: 494px;
+	height: 278px;
+	border-style: dashed;
+	border-width: 3px;
+	border-color: #a3a3a3;
+	color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+}
+
+.titre_saisie_background
+{
+	width: 494px;
+	height: 278px;
+	line-height: 278px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 150%;
+}
+
+.bouton_parcourir_background
+{
+	display: block;
+	opacity: 0;
+	width: 494px;
+	height: 278px;
+	margin-top: -278px;
+	cursor: pointer;
+}
+
+.mask_background
+{
+	width: 494px;
+	height: 278px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: -281px;
+	line-height: 278px;
+}
+
+.img_background
+{
+	margin-top: -3px;
+	width: 494px;
+	vertical-align: middle;
+}
+
+.zone_parcourir_footer
+{
+	width: 494px;
+	height: 45.5px;
+	border-style: dashed;
+	border-width: 3px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-color: #a3a3a3;
+	color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+	background-color: #262626;
+}
+
+.titre_saisie_footer
+{
+	width: 494px;
+	height: 45.5px;
+	line-height: 45.5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 150%;
+}
+
+.bouton_parcourir_footer
+{
+	display: block;
+	opacity: 0;
+	width: 494px;
+	height: 45.5px;
+	margin-top: -45.5px;
+	cursor: pointer;
+}
+
+.mask_footer
+{
+	width: 494px;
+	height: 45.5px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: -48.5px;
+	line-height: 45.5px;
+}
+
+.img_footer
+{
+	margin-top: -3px;
+	height: 45.5px;
+	max-width: 494px;
+	vertical-align: middle;
+}
+
+.saisie_titre_theme
+{
+	display: inline-block;
+	width: calc(100% - 120px);
+	padding: 5px;
+	border: 0;
+	border-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
+.saisie_theme_bouton
+{
+	display: inline-block;
+	margin-left: 10px;
+	width: 100px;
+	line-height: 28px;
+	border: 0;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	background-color: #e3e3e3;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.saisie_theme_bouton:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.saisie_ref_theme
+{
+	width: calc(100% - 10px);
+	padding: 5px;
+	border: 0;
+	border-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
+.saisie_date_theme
+{
+	display: inline-block;
+	width: 38.9%;
+	padding: 5px;
+	border: 0;
+	border-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
+/*** Visualisation thème ***/
+.theme_header_footer
+{
+	width: 500px;
+	display: block;
+	background-color: #262626;
+}
+
+.theme_background
+{
+	width: 500px;
+	display: block;
+}
+
+.theme_titre
+{
+	display: block;
+	margin-top: 5px;
+	width: 480px;
+	background-color: #c3c3c3;
+	padding: 10px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+	border-bottom: solid 2px #a3a3a3;
+}
+
+.theme_ref
+{
+	display: inline-block;
+	padding: 10px;
+	width: calc(500px / 3 - 22px);
+	border-top: solid 1px #b3b3b3;
+	border-right: solid 2px #b3b3b3;
+	background-color: #d3d3d3;
+	border-bottom-left-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+}
+
+.theme_dates
+{
+	display: inline-block;
+	padding: 10px;
+	width: calc((500px / 3) * 2 - 20px);
+	border-top: solid 1px #b3b3b3;
+	background-color: #d3d3d3;
+	border-bottom-right-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+}
