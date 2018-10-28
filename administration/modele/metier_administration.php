@@ -2504,9 +2504,6 @@
   // RETOUR : Id enregistrement créé
   function insertTheme($post, $files)
   {
-    var_dump($post);
-    var_dump($files);
-
     global $bdd;
 
     // Sauvegarde en session en cas d'erreur
@@ -2646,9 +2643,6 @@
 
       foreach ($files as $key_file => $file)
       {
-        var_dump($key_file);
-        var_dump($logo);
-
         // Insertion logo si présent ou autre que logo
         if (($key_file =="logo" AND $logo == "Y") OR $key_file != "logo")
         {
