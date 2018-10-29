@@ -164,7 +164,7 @@
 
                       echo '<div class="zone_parcourir_image">';
                         echo '<div class="symbole_saisie_image">+</div>';
-                        echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image" onchange="loadFile(event)" required />';
+                        echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image" onchange="loadFile(event, \'image_collector\')" required />';
                       echo '</div>';
 
                       echo '<div class="mask_image">';

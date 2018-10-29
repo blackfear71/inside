@@ -24,10 +24,10 @@
 
               echo '<div class="zone_parcourir_missions">';
                 echo '<div class="label_parcourir">Bannière (1920 x 800 px)</div>';
-                echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'output\')" required />';
+                echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'banner\')" required />';
               echo '</div>';
 
-              echo '<img id="output" class="preview_image_mission" />';
+              echo '<img id="banner" class="preview_image_mission" />';
             echo '</div>';
           }
           else
@@ -37,10 +37,10 @@
 
               echo '<div class="zone_parcourir_missions">';
                 echo '<div class="label_parcourir">Bannière (1920 x 800 px)</div>';
-                echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'output\')" />';
+                echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'banner\')" />';
               echo '</div>';
 
-              echo '<img src="../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" id="output" class="preview_image_mission" />';
+              echo '<img src="../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" id="banner" class="preview_image_mission" />';
             echo '</div>';
           }
         echo '</td>';
@@ -53,14 +53,14 @@
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône gauche (500 x 500 px)</div>';
             if ($_GET['action'] == "goAjouter")
-              echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_2\')" required />';
+              echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_g\')" required />';
             else
-              echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_2\')" />';
+              echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_g\')" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" id="output_2" class="preview_icon_mission" />';
+              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" id="button_g" class="preview_icon_mission" />';
             else
-              echo '<img id="output_2" class="preview_icon_mission" />';
+              echo '<img id="button_g" class="preview_icon_mission" />';
           echo '</div>';
         echo '</td>';
 
@@ -69,14 +69,14 @@
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône milieu (500 x 500 px)</div>';
             if ($_GET['action'] == "goAjouter")
-              echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_3\')" required />';
+              echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_m\')" required />';
             else
-              echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_3\')" />';
+              echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_m\')" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" id="output_3" class="preview_icon_mission" />';
+              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" id="button_m" class="preview_icon_mission" />';
             else
-              echo '<img id="output_3" class="preview_icon_mission" />';
+              echo '<img id="button_m" class="preview_icon_mission" />';
           echo '</div>';
         echo '</td>';
 
@@ -85,14 +85,14 @@
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône droite (500 x 500 px)</div>';
             if ($_GET['action'] == "goAjouter")
-              echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_4\')" required />';
+              echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_d\')" required />';
             else
-              echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'output_4\')" />';
+              echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_d\')" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" id="output_4" class="preview_icon_mission" />';
+              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" id="button_d" class="preview_icon_mission" />';
             else
-              echo '<img id="output_4" class="preview_icon_mission" />';
+              echo '<img id="button_d" class="preview_icon_mission" />';
           echo '</div>';
         echo '</td>';
       echo '</tr>';

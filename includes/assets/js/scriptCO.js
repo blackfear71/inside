@@ -44,11 +44,10 @@ function afficherMasquerSaisieImage()
 }
 
 // Insère une prévisualisation de l'image sur la zone
-var loadFile = function(event)
+var loadFile = function(event, id)
 {
-  var output = document.getElementById('image_collector');
+  var output = document.getElementById(id);
   output.src = URL.createObjectURL(event.target.files[0]);
-  output.src.SizeHeight = "115px";
 };
 
 // Affiche ou masque un élément
