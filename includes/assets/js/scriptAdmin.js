@@ -1,3 +1,51 @@
+// Au chargement du document
+$(document).ready(function()
+{
+  // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id     = $_GET('anchor');
+  var offset = 30;
+
+  // Scroll vers l'id
+  scrollToId(id, offset);
+
+  // On lance Masonry après avoir chargé les images
+  $('.zone_themes').imagesLoaded(function()
+  {
+    $('.zone_themes').masonry({
+      // Options
+      itemSelector: '.zone_theme',
+      columnWidth: 500,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_themes').addClass('masonry');
+
+    // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
+    var id     = $_GET('anchorTheme');
+    var offset = 30;
+
+    // Scroll vers l'id
+    scrollToId(id, offset);
+  });
+});
+
+// Initialisation manuelle de "Masonry"
+function initMasonry()
+{
+  // On lance Masonry
+  $('.zone_themes').masonry({
+    // Options
+    itemSelector: '.zone_theme',
+    columnWidth: 500,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+  });
+}
+
 // Affiche ou masque le log
 function afficherMasquer(id)
 {
@@ -97,51 +145,3 @@ $(function()
         });
   });
 });
-
-// Déclenchement du scroll & Masonry
-$(document).ready(function()
-{
-  // On récupère l'id de l'ancre dans l'url (fonction JS)
-  /*var id     = $_GET('anchor');
-  var offset = 30;
-
-  // Scroll vers l'id
-  scrollToId(id, offset);*/
-
-  // On lance Masonry après avoir chargé les images
-  $('.zone_themes').imagesLoaded(function()
-  {
-    $('.zone_themes').masonry({
-      // Options
-      itemSelector: '.zone_theme',
-      columnWidth: 500,
-      fitWidth: true,
-      gutter: 20,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_themes').addClass('masonry');
-
-    // On récupère l'id de l'ancre dans l'url (fonction JS)
-    var id     = $_GET('anchorTheme');
-    var offset = 30;
-
-    // Scroll vers l'id
-    scrollToId(id, offset);
-  });
-});
-
-// Initialisation manuelle de "Masonry"
-function initMasonry()
-{
-  // On lance Masonry
-  $('.zone_themes').masonry({
-    // Options
-    itemSelector: '.zone_theme',
-    columnWidth: 500,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-  });
-}

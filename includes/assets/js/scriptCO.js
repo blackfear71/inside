@@ -1,3 +1,30 @@
+// Au chargement du document
+$(document).ready(function()
+{
+  // On lance Masonry et le scroll après avoir chargé les images
+  $('.zone_collectors').imagesLoaded(function()
+  {
+    $('.zone_collectors').masonry({
+      // Options
+      itemSelector: '.zone_collector',
+      columnWidth: 525,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_collectors').addClass('masonry');
+
+    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+    var id     = $_GET('anchor');
+    var offset = 70;
+
+    // Scroll vers l'id
+    scrollToId(id, offset);
+  });
+});
+
 // Affiche la saisie d'un phrase culte
 function afficherMasquerSaisiePhraseCulte()
 {
@@ -164,30 +191,3 @@ function initMasonry()
   // Découpe le texte si besoin
   $('.text_collector').wrapInner();
 }
-
-// Appel "Masonry" et scroll
-$(document).ready(function()
-{
-  // On lance Masonry après avoir chargé les images
-  $('.zone_collectors').imagesLoaded(function()
-  {
-    $('.zone_collectors').masonry({
-      // Options
-      itemSelector: '.zone_collector',
-      columnWidth: 525,
-      fitWidth: true,
-      gutter: 20,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_collectors').addClass('masonry');
-
-    // On récupère l'id de l'ancre dans l'url (fonction JS)
-    var id     = $_GET('anchor');
-    var offset = 70;
-
-    // Scroll vers l'id
-    scrollToId(id, offset);
-  });
-});

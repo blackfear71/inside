@@ -51,7 +51,7 @@
           <div class="bandeau_index">
             <!-- Connexion -->
             <form method="post" action="index.php?action=doConnecter" class="form_index">
-              <input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne_index" required />
+              <input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne_index" id="focus_identifiant" required />
               <input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />
               <input type="submit" name="connect" value="CONNEXION" class="bouton_index" />
             </form>

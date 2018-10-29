@@ -1,3 +1,10 @@
+// Au chargement du document
+$(document).ready(function()
+{
+  // Positionnement du curseur sur "Identifiant" pour se connecter
+  $('#focus_identifiant').focus();
+});
+
 // Masque la fenêtre des alertes
 function masquerAlerte(id)
 {
