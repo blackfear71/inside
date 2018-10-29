@@ -56,12 +56,18 @@
                 echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="../../includes/icons/moviehouse/left.png" alt="left" class="fleche_detail" style="padding-right: 50px;" /></a>';
                 echo '<span class="titre_prev_movie">' . $listeNavigation['previous']['film'] . '</span>';
               }
+              else
+                echo '<div class="link_prev_movie_empty"></div>';
+
               // Lien film suivant
               if (!empty($listeNavigation['next']['id']) AND !empty($listeNavigation['next']['film']))
               {
                 echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="../../includes/icons/moviehouse/right.png" alt="right" class="fleche_detail" style="padding-left: 50px;" /></a>';
                 echo '<span class="titre_next_movie">' . $listeNavigation['next']['film'] . '</span>';
               }
+              else
+                echo '<div class="link_next_movie_empty"></div>';
+
               // Fond
               if (!empty($detailsFilm->getPoster()))
                 echo '<img src="' . $detailsFilm->getPoster() . '" alt="' . $detailsFilm->getPoster() . '" title="' . $detailsFilm->getFilm() . '" class="bandeau_poster" />';

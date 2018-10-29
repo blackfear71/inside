@@ -988,12 +988,35 @@
 	text-shadow: 0 0 2px black;
 }
 
+.link_prev_movie_empty
+{
+	float: left;
+	position: relative;
+	z-index: 2;
+	height: 100px;
+	width: 70px;
+	margin-top: 100px;
+	margin-left: 9%;
+}
+
+.link_next_movie_empty
+{
+	float: right;
+	position: relative;
+	z-index: 2;
+	height: 100px;
+	width: 70px;
+	margin-top: 100px;
+	margin-right: 9%;
+}
+
 .link_prev_movie
 {
 	float: left;
 	position: relative;
 	z-index: 2;
 	height: 100px;
+	width: 70px;
 	line-height: 97px;
 	margin-top: 100px;
 	margin-left: 9%;
@@ -1006,6 +1029,7 @@
 	position: relative;
 	z-index: 2;
 	height: 100px;
+	width: 70px;
 	line-height: 97px;
 	margin-top: 100px;
 	margin-right: 9%;
