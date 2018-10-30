@@ -90,6 +90,7 @@ $(function()
     weekHeader: 'Sem.',
     dateFormat: 'dd/mm/yy'
   });
+
   $("#datepicker2").datepicker(
   {
     firstDay: 1,

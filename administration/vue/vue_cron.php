@@ -3,9 +3,11 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "CRON";
-      $style_head  = "styleAdmin.css";
-      $script_head = "scriptAdmin.js";
+      $title_head        = "CRON";
+      $style_head        = "styleAdmin.css";
+      $script_head       = "scriptAdmin.js";
+      $masonry_head      = true;
+      $image_loaded_head = true;
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>

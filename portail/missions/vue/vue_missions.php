@@ -63,7 +63,7 @@
 
                   echo '<div class="zone_presentation_mission_default">';
                     echo '<img src="../../includes/icons/missions/default_mission.png" alt="default_mission" title="A venir" class="img_mission_default" />';
-                    echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' !</div>';
+                    echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' à ' . formatTimeForDisplayLight($ligneMission->getHeure()) . ' !</div>';
                   echo '</div>';
                 }
                 // Missions en cours

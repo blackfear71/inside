@@ -37,10 +37,10 @@
     while($donnees = $reponse->fetch())
     {
       $myMission = Mission::withData($donnees);
-
-      if (date('Ymd') < $myMission->getDate_deb())
+      
+      if (date('Ymd') < $myMission->getDate_deb() OR (date('Ymd') == $myMission->getDate_deb() AND date('His') < $myMission->getHeure()))
         $myMission->setStatut('V');
-      elseif (date('Ymd') >= $myMission->getDate_deb() AND date('Ymd') <= $myMission->getDate_fin())
+      elseif (date('Ymd') >= $myMission->getDate_deb() AND date('Ymd') <= $myMission->getDate_fin() AND date('His') >= $myMission->getHeure())
         $myMission->setStatut('C');
       elseif (date('Ymd') > $myMission->getDate_fin())
         $myMission->setStatut('A');

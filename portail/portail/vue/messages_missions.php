@@ -40,7 +40,14 @@
               echo '<br />La mission <strong>' . $mission->getMission() . '</strong> se termine aujourd\'hui, trouve vite les derniers objectifs !';
           echo '</a>';
         }
-        // Mission > 1 jour (heure KO)
+        // Mission > 1 jour (heure KO), 1er jour
+        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure())
+        {
+          echo '<a href="../missions/missions.php?action=goConsulter" class="link_mission">';
+            echo 'La mission <strong>' . $mission->getMission() . '</strong> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...';
+          echo '</a>';
+        }
+        // Mission > 1 jour (heure KO), autre jour
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') < $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
           echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter" class="link_mission">';
@@ -107,7 +114,7 @@
         // Mission 1 jour (heure KO)
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND $mission->getDate_deb() == $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
-          echo '<a href="../missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter" class="link_mission">';
+          echo '<a href="../missions/missions.php?action=goConsulter" class="link_mission">';
             echo 'La mission <strong>' . $mission->getMission() . '</strong> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...';
           echo '</a>';
         }
