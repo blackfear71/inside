@@ -74,7 +74,7 @@
                                           'image'     => '../../includes/icons/common/calendars.png',
                                           'alt'       => 'calendars'),
                                     array('categorie' => 'COLLECTOR<br />ROOM',
-                                          'lien'      => '../collector/collector.php?action=goConsulter&page=1',
+                                          'lien'      => '../collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
                                           'title'     => 'Collector Room',
                                           'image'     => '../../includes/icons/common/collector.png',
                                           'alt'       => 'collector'),

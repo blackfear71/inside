@@ -22,8 +22,41 @@ $(document).ready(function()
 
     // Scroll vers l'id
     scrollToId(id, offset);
+
+    // On applique un style pour mettre en valeur l'élément puis on le fait disparaitre au bout de 5 secondes
+    if (id != null)
+    {
+      $('#' + id).css('box-shadow', '0 3px 10px #262626');
+      $('#bas_' + id).css('box-shadow', '0 3px 10px #262626');
+
+      setTimeout(function()
+      {
+        $('#' + id).css('box-shadow', 'none');
+        $('#' + id).css({transition : "box-shadow ease 1s"});
+        $('#bas_' + id).css('box-shadow', 'none');
+        $('#bas_' + id).css({transition : "box-shadow ease 1s"});
+      }, 5000);
+    }
   });
 });
+
+// Initialisation manuelle de "Masonry"
+function initMasonry()
+{
+  // On lance Masonry
+  $('.zone_collectors').masonry({
+    // Options
+    itemSelector: '.zone_collector',
+    columnWidth: 525,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+    /*transitionDuration: 0*/
+  });
+
+  // Découpe le texte si besoin
+  $('.text_collector').wrapInner();
+}
 
 // Affiche la saisie d'un phrase culte
 function afficherMasquerSaisiePhraseCulte()
@@ -101,6 +134,12 @@ function afficherModifierOther(select, id)
   }
 }
 
+// Redirige pour appliquer le tri ou le filtre
+function applySortOrFilter(sort, filter)
+{
+  document.location.href = "collector.php?action=goConsulter&page=1&sort=" + sort + "&filter=" + filter;
+}
+
 // Combiné avec afficherMasquer(), cela permet de fermer le formulaire en cliquant n'importe où sur le body
 $(function()
 {
@@ -172,21 +211,3 @@ $(function()
         });
   });
 });
-
-// Initialisation manuelle de "Masonry"
-function initMasonry()
-{
-  // On lance Masonry
-  $('.zone_collectors').masonry({
-    // Options
-    itemSelector: '.zone_collector',
-    columnWidth: 525,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-    /*transitionDuration: 0*/
-  });
-
-  // Découpe le texte si besoin
-  $('.text_collector').wrapInner();
-}

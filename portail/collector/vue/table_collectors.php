@@ -51,7 +51,7 @@
             echo '</a>';
 
             // Formulaire vote
-            echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
+            echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
               // Gestion smiley par défaut
               $no_vote = true;
               foreach ($listeVotesUsers as $vote)
@@ -91,7 +91,7 @@
             echo '</div>';
           echo '</div>';
 
-          echo '<div class="zone_collector_bas">';
+          echo '<div class="zone_collector_bas" id="bas_' . $collector->getId() . '">';
             if (!empty($collector->getCollector()))
             {
               if ($collector->getType_collector() == "T")
@@ -131,6 +131,7 @@
                     {
                       if ($votes['smileys'][$k] != 0)
                       {
+                        // Smileys
                         echo '<img src="../../includes/icons/common/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
 
                         // Pseudos
@@ -156,7 +157,7 @@
         /* Caché pour modification */
         /***************************/
         echo '<div class="zone_collector" id="modifier_collector[' . $collector->getId() . ']" style="display: none;">';
-          echo '<form method="post" action="collector.php?modify_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '">';
+          echo '<form method="post" action="collector.php?modify_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '">';
             echo '<div class="zone_collector_haut">';
               // Validation modification
               echo '<input type="submit" name="modify_collector" value="" title="Valider" class="icon_validate_collector" />';

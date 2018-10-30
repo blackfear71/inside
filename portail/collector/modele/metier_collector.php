@@ -33,20 +33,74 @@
     return $listeUsers;
   }
 
-  // METIER : Lecture nombre de pages
+  // METIER : Lecture nombre de pages en fonction du filtre
   // RETOUR : Nombre de pages
-  function getPages()
+  function getPages($filtre, $identifiant)
   {
-    $nb_pages    = 0;
-    $nb_col      = 0;
-    $nb_par_page = 18;
+    $nb_pages     = 0;
+    $nb_col       = 0;
+    $nb_par_page  = 18;
+    $min_golden   = 6;
 
     global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector');
+    // Calcul du nombre total d'enregistrements pour chaque filtre
+    switch ($filtre)
+    {
+      case "noVote":
+        $req = $bdd->query('SELECT COUNT(collector.id)
+                            AS nb_col
+                            FROM collector
+                            WHERE NOT EXISTS (SELECT id, id_collector, identifiant
+                                              FROM collector_users
+                                              WHERE (collector.id = collector_users.id_collector
+                                              AND    collector_users.identifiant = "' . $identifiant . '"))');
+
+        break;
+
+      case "meOnly":
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE speaker = "' . $identifiant . '"');
+        break;
+
+      case "byMe":
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE author = "' . $identifiant . '"');
+        break;
+
+      case "usersOnly":
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '")');
+        break;
+
+      case "othersOnly":
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE type_speaker = "other"');
+        break;
+
+      case "textOnly":
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE type_collector = "T"');
+        break;
+
+      case "picturesOnly":
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE type_collector = "I"');
+        break;
+
+      case "topCulte":
+        $req = $bdd->query('SELECT COUNT(collector.id)
+                            AS nb_col
+                            FROM collector
+                            WHERE (SELECT COUNT(collector_users.id)
+                                   FROM collector_users
+                                   WHERE collector_users.id_collector = collector.id) >= ' . $min_golden);
+        break;
+
+      case "none":
+      default:
+        $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector');
+        break;
+    }
+
     $data = $req->fetch();
 
-    $nb_col = $data['nb_col'];
+    if (isset($data['nb_col']))
+      $nb_col = $data['nb_col'];
 
     $req->closeCursor();
 
@@ -57,10 +111,11 @@
 
   // METIER : Lecture des phrases cultes
   // RETOUR : Liste phrases cultes
-  function getCollectors($listUsers, $nb_pages, $page)
+  function getCollectors($listUsers, $nb_pages, $page, $identifiant, $tri, $filtre)
   {
     $listCollectors = array();
     $nb_par_page    = 18;
+    $min_golden     = 6;
 
     // Contrôle dernière page
     if ($page > $nb_pages)
@@ -69,10 +124,74 @@
     // Calcul première entrée
     $premiere_entree = ($page - 1) * $nb_par_page;
 
-    // Lecture des enregistrements
+    // Détermination sens tri
+    switch ($tri)
+    {
+      case "dateAsc":
+        $order = "collector.date_collector ASC, collector.id ASC";
+        break;
+
+      case "dateDesc":
+      default:
+        $order = "collector.date_collector DESC, collector.id DESC";
+        break;
+    }
+
+    // Lecture des enregistrements en fonction du filtre
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM collector ORDER BY date_collector DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+    switch ($filtre)
+    {
+      case "noVote":
+        $reponse = $bdd->query('SELECT *
+                                FROM collector
+                                WHERE NOT EXISTS (SELECT id, id_collector, identifiant
+                                                  FROM collector_users
+                                                  WHERE (collector.id = collector_users.id_collector
+                                                  AND    collector_users.identifiant = "' . $identifiant . '"))
+                                                  ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+
+        break;
+
+      case "meOnly":
+        $reponse = $bdd->query('SELECT * FROM collector WHERE (speaker = "' . $identifiant . '") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "byMe":
+        $reponse = $bdd->query('SELECT * FROM collector WHERE (author = "' . $identifiant . '") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "usersOnly":
+        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "othersOnly":
+        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_speaker = "other") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "textOnly":
+        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_collector = "T") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "picturesOnly":
+        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_collector = "I") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "topCulte":
+        $reponse = $bdd->query('SELECT *
+                                FROM collector
+                                WHERE (SELECT COUNT(collector_users.id)
+                                       FROM collector_users
+                                       WHERE collector_users.id_collector = collector.id) >= ' . $min_golden . '
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+
+      case "none":
+      default:
+        $reponse = $bdd->query('SELECT * FROM collector ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        break;
+    }
+
     while($donnees = $reponse->fetch())
     {
       $myCollector = Collector::withData($donnees);

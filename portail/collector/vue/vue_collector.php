@@ -45,9 +45,9 @@
 
 			<article>
         <?php
-          /*******************/
-          /* Liens de saisie */
-          /*******************/
+          /******************************/
+          /* Liens de saisie et filtres */
+          /******************************/
           echo '<div class="zone_liens_saisie">';
             echo '<a onclick="afficherMasquerSaisiePhraseCulte();" title="Ajouter une phrase culte" class="lien_saisie_collector">';
               echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_saisie_collector"/></div>';
@@ -58,6 +58,69 @@
               echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/images.png" alt="images" class="image_saisie_collector"/></div>';
               echo '<div class="zone_texte_add">Ajouter une image</div>';
             echo '</a>';
+
+            echo '<div class="zone_filtres">';
+              // Tris
+              echo '<select onchange="applySortOrFilter(this.value, \'' . $_GET['filter'] . '\');" class="collector_sort">';
+                if ($_GET['sort'] == "dateDesc")
+                  echo '<option value="dateDesc" selected>Du plus récent au plus vieux</option>';
+                else
+                  echo '<option value="dateDesc">Du plus récent au plus vieux</option>';
+
+                if ($_GET['sort'] == "dateAsc")
+                  echo '<option value="dateAsc" selected>Du plus vieux au plus récent</option>';
+                else
+                  echo '<option value="dateAsc">Du plus vieux au plus récent</option>';
+              echo '</select>';
+
+              // Filtres
+              echo '<select onchange="applySortOrFilter(\'' . $_GET['sort'] . '\', this.value);" class="collector_filter">';
+                if ($_GET['filter'] == "none")
+                  echo '<option value="none" selected>Aucun filtre</option>';
+                else
+                  echo '<option value="none">Aucun filtre</option>';
+
+                if ($_GET['filter'] == "noVote")
+                  echo '<option value="noVote" selected>Non votés</option>';
+                else
+                  echo '<option value="noVote">Non votés</option>';
+
+                if ($_GET['filter'] == "meOnly")
+                  echo '<option value="meOnly" selected>Mes phrases cultes</option>';
+                else
+                  echo '<option value="meOnly">Mes phrases cultes</option>';
+
+                if ($_GET['filter'] == "byMe")
+                  echo '<option value="byMe" selected>Mes phrases rapportées</option>';
+                else
+                  echo '<option value="byMe">Mes phrases rapportées</option>';
+
+                if ($_GET['filter'] == "usersOnly")
+                  echo '<option value="usersOnly" selected>Les phrases cultes des autres utilisateurs</option>';
+                else
+                  echo '<option value="usersOnly">Les phrases cultes des autres utilisateurs</option>';
+
+                if ($_GET['filter'] == "othersOnly")
+                  echo '<option value="othersOnly" selected>Les phrases cultes hors utilisateurs</option>';
+                else
+                  echo '<option value="othersOnly">Les phrases cultes hors utilisateurs</option>';
+
+                if ($_GET['filter'] == "textOnly")
+                  echo '<option value="textOnly" selected>Seulement les phrases cultes</option>';
+                else
+                  echo '<option value="textOnly">Seulement les phrases cultes</option>';
+
+                if ($_GET['filter'] == "picturesOnly")
+                  echo '<option value="picturesOnly" selected>Seulement les images</option>';
+                else
+                  echo '<option value="picturesOnly">Seulement les images</option>';
+
+                if ($_GET['filter'] == "topCulte")
+                  echo '<option value="topCulte" selected>Les tops cultes</option>';
+                else
+                  echo '<option value="topCulte">Les tops cultes</option>';
+              echo '</select>';
+            echo '</div>';
           echo '</div>';
 
           /**********************************/
@@ -241,7 +304,7 @@
                 else
                 {
                   echo '<div class="numero_page_inactive">';
-                    echo '<a href="collector.php?action=goConsulter&page=' . $i . '" class="lien_pagination">' . $i . '</a>';
+                    echo '<a href="collector.php?action=goConsulter&page=' . $i . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="lien_pagination">' . $i . '</a>';
                   echo '</div>';
                 }
               }

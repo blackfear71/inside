@@ -246,7 +246,7 @@
 
           $icone  = "collector";
           $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/common/smileys/2.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&anchor=" . $notification->getContent();
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $notification->getContent();
           break;
 
         case "culte_image":
@@ -283,7 +283,7 @@
 
           $icone  = "collector";
           $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/common/smileys/1.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&anchor=" . $notification->getContent();
+          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $notification->getContent();
           break;
 
         case "depense":
