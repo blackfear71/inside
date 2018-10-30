@@ -11,8 +11,12 @@
 
     $missionExistante = false;
 
-    // Contrôle film existant
-    $reponse = $bdd->query('SELECT * FROM missions WHERE id = ' . $id . ' AND date_deb <= ' . date("Ymd"));
+    // Contrôle mission existante
+    $reponse = $bdd->query('SELECT *
+                            FROM missions
+                            WHERE (id = ' . $id . '
+                              AND (date_deb < ' . date("Ymd") . '
+                              OR  (date_deb = ' . date("Ymd") . ' AND heure <= ' . date("His") . ')))');
 
     if ($reponse->rowCount() == 0)
       $_SESSION['alerts']['mission_doesnt_exist'] = true;
@@ -37,7 +41,7 @@
     while($donnees = $reponse->fetch())
     {
       $myMission = Mission::withData($donnees);
-      
+
       if (date('Ymd') < $myMission->getDate_deb() OR (date('Ymd') == $myMission->getDate_deb() AND date('His') < $myMission->getHeure()))
         $myMission->setStatut('V');
       elseif (date('Ymd') >= $myMission->getDate_deb() AND date('Ymd') <= $myMission->getDate_fin() AND date('His') >= $myMission->getHeure())
