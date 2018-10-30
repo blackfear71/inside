@@ -32,9 +32,9 @@ $(document).ready(function()
       setTimeout(function()
       {
         $('#' + id).css('box-shadow', 'none');
-        $('#' + id).css({transition : "box-shadow ease 1s"});
+        $('#' + id).css({transition : "box-shadow ease 0.5s"});
         $('#bas_' + id).css('box-shadow', 'none');
-        $('#bas_' + id).css({transition : "box-shadow ease 1s"});
+        $('#bas_' + id).css({transition : "box-shadow ease 0.5s"});
       }, 5000);
     }
   });
