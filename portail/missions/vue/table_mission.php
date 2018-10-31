@@ -39,10 +39,15 @@
     {
       echo '<tr>';
         echo '<td colspan="2" class="conclusion_details_mission">';
-          echo nl2br($detailsMission->getConclusion());
-          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" class="img_conclusion_mission_g" />';
-          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" class="img_conclusion_mission_m" />';
-          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" class="img_conclusion_mission_d" />';
+          echo '<div class="zone_texte_conclusion">';
+            echo nl2br($detailsMission->getConclusion());
+          echo '</div>';
+
+          echo '<div class="zone_images_conclusion">';
+            echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" class="img_conclusion_mission_g" />';
+            echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" class="img_conclusion_mission_m" />';
+            echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" class="img_conclusion_mission_d" />';
+          echo '</div>';
         echo '</td>';
       echo '</tr>';
     }

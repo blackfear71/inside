@@ -412,18 +412,30 @@
 
         case "start_mission":
           // Recherche données mission
-          $reponse = $bdd->query('SELECT id, mission, date_fin FROM missions WHERE id = "' . $notification->getContent() . '"');
+          $reponse = $bdd->query('SELECT id, mission, date_deb, date_fin, heure FROM missions WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
           $id_mission = $donnees['id'];
           $mission    = $donnees['mission'];
+          $date_deb   = $donnees['date_deb'];
           $date_fin   = $donnees['date_fin'];
+          $heure_deb  = $donnees['heure'];
 
           $reponse->closeCursor();
 
           $icone  = "missions";
-          $phrase = "La mission <strong>" . $mission . "</strong> est lancée, n'oubliez pas de participer tous les jours jusqu'au <strong>" . formatDateForDisplay($date_fin) . "</strong>.";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+          $phrase = "La mission <strong>" . $mission . "</strong> se lance à " . formatTimeForDisplayLight($heure_deb) . ", n'oubliez pas de participer tous les jours jusqu'au <strong>" . formatDateForDisplay($date_fin) . "</strong>.";
+
+          // Premier jour, avant l'heure
+          if (date("Ymd") == $date_deb AND date("His") < $heure_deb)
+            $lien = "/inside/portail/missions/missions.php?action=goConsulter";
+          // Premier jour, après l'heure
+          elseif (date("Ymd") == $date_deb AND date("His") >= $heure_deb)
+            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+          // Autre jour
+          else
+            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+
           break;
 
         case "end_mission":
@@ -443,17 +455,25 @@
 
         case "one_mission":
           // Recherche données mission
-          $reponse = $bdd->query('SELECT id, mission FROM missions WHERE id = "' . $notification->getContent() . '"');
+          $reponse = $bdd->query('SELECT id, mission, heure FROM missions WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
           $id_mission = $donnees['id'];
           $mission    = $donnees['mission'];
+          $heure_deb  = $donnees['heure'];
 
           $reponse->closeCursor();
 
           $icone  = "missions";
-          $phrase = "La mission <strong>" . $mission . "</strong> se déroule aujourd'hui uniquement ! Trouvez vite les objectifs !";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+          $phrase = "La mission <strong>" . $mission . "</strong> se déroule aujourd'hui uniquement à partir de " . formatTimeForDisplayLight($heure_deb) . " ! Trouvez vite les objectifs !";
+
+          // Mission de 1 jour (avant l'heure)
+          if (date("His") < $heure_deb)
+            $lien = "/inside/portail/missions/missions.php?action=goConsulter";
+          // Mission de 1 jour (après l'heure)
+          else
+            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+
           break;
 
         default:

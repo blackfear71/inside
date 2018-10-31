@@ -192,16 +192,21 @@
   text-align: justify;
 }
 
-.description_details_mission::first-letter, .conclusion_details_mission::first-letter
+.description_details_mission::first-letter, .zone_texte_conclusion::first-letter
 {
   font-size: 250%;
   font-family: robotoregular, Verdana, sans-serif;
 }
 
+.zone_images_conclusion
+{
+	padding-top: 5px;
+}
+
 .img_conclusion_mission_g
 {
 	display: block;
-	width: 60px;
+	height: 60px;
 	margin-left: -20px;
 	margin-bottom: -60px;
 }
@@ -211,14 +216,14 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 60px;
+	height: 60px;
 	margin-bottom: -60px;
 }
 
 .img_conclusion_mission_d
 {
 	float: right;
-	width: 60px;
+	height: 60px;
 	margin-right: -20px;
 }
 
