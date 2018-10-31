@@ -13,7 +13,7 @@
         {
           if ($titre_a_venir != true)
           {
-            echo '<div class="titre_accueil_mission">Mission à venir</div>';
+            echo '<div class="titre_accueil_mission">Missions à venir</div>';
             $titre_a_venir = true;
           }
 
@@ -34,7 +34,7 @@
         {
           if ($titre_en_cours != true)
           {
-            echo '<div class="titre_accueil_mission">Mission en cours</div>';
+            echo '<div class="titre_accueil_mission">Missions en cours</div>';
             $titre_en_cours = true;
           }
 

@@ -23,7 +23,10 @@
     // Heure
     echo '<tr>';
       echo '<td colspan="2" class="heure_details_mission">';
-        echo 'Chaque jour à partir de <strong>' . formatTimeForDisplayLight($detailsMission->getHeure()) . '</strong>.';
+        if ($detailsMission->getDate_deb() == $detailsMission->getDate_fin())
+          echo 'A partir de <strong>' . formatTimeForDisplayLight($detailsMission->getHeure()) . '</strong>.';
+        else
+          echo 'Chaque jour à partir de <strong>' . formatTimeForDisplayLight($detailsMission->getHeure()) . '</strong>.';
       echo '</td>';
     echo '</tr>';
 
