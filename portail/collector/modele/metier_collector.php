@@ -143,58 +143,99 @@
     switch ($filtre)
     {
       case "noVote":
-        $reponse = $bdd->query('SELECT *
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE NOT EXISTS (SELECT id, id_collector, identifiant
                                                   FROM collector_users
                                                   WHERE (collector.id = collector_users.id_collector
                                                   AND    collector_users.identifiant = "' . $identifiant . '"))
-                                                  ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
 
         break;
 
       case "meOnly":
-        $reponse = $bdd->query('SELECT * FROM collector WHERE (speaker = "' . $identifiant . '") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                WHERE (speaker = "' . $identifiant . '")
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "byMe":
-        $reponse = $bdd->query('SELECT * FROM collector WHERE (author = "' . $identifiant . '") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                WHERE (author = "' . $identifiant . '")
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "usersOnly":
-        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '")
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "othersOnly":
-        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_speaker = "other") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                WHERE (type_speaker = "other")
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "textOnly":
-        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_collector = "T") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                WHERE (type_collector = "T")
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "picturesOnly":
-        $reponse = $bdd->query('SELECT * FROM collector WHERE (type_collector = "I") ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                WHERE (type_collector = "I")
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "topCulte":
-        $reponse = $bdd->query('SELECT *
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (SELECT COUNT(collector_users.id)
                                        FROM collector_users
                                        WHERE collector_users.id_collector = collector.id) >= ' . $min_golden . '
+                                GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
 
       case "none":
       default:
-        $reponse = $bdd->query('SELECT * FROM collector ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
+                                FROM collector
+                                LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                                GROUP BY collector.id
+                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
     }
 
     while($donnees = $reponse->fetch())
     {
       $myCollector = Collector::withData($donnees);
+
+      // Nombre de votes
+      $myCollector->setNb_votes($donnees['nb_votes']);
 
       // Recherche pseudo
       foreach ($listUsers as $user)

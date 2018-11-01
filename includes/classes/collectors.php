@@ -2,6 +2,7 @@
   class Collector
   {
     private $id;
+    private $date_add;
     private $author;
     private $name_a;
     private $speaker;
@@ -12,7 +13,7 @@
     private $type_collector;
     private $collector;
     private $context;
-    private $date;
+    private $nbVotes;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -29,6 +30,7 @@
       $this->type_collector = '';
       $this->collector      = '';
       $this->context        = '';
+      $this->nbVotes        = 0;
     }
 
     // Constructeur de l'objet Collector en fonction des données
@@ -71,7 +73,7 @@
         $this->context        = $data['context'];
     }
 
-    // getters et setters pour l'objet Bugs
+    // getters et setters pour l'objet Collector
     // id
     public function setId($id)
     {
@@ -203,6 +205,17 @@
     {
       return $this->context;
     }
+
+    // Nombre de votes
+    public function setNb_votes($nbVotes)
+    {
+      $this->nbVotes = $nbVotes;
+    }
+
+    public function getNb_votes()
+    {
+      return $this->nbVotes;
+    }
   }
 
   class VotesCollector
@@ -246,7 +259,7 @@
         $this->vote         = $data['vote'];
     }
 
-    // getters et setters pour l'objet Bugs
+    // getters et setters pour l'objet VotesCollector
     // id
     public function setId($id)
     {

@@ -1,4 +1,6 @@
 <?php
+  $min_golden = 6;
+
   echo '<div class="zone_collectors">';
     if ($nbPages > 0)
     {
@@ -8,7 +10,11 @@
         /* Visualisation normale (sans modification) */
         /*********************************************/
         echo '<div class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
-          echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
+          if ($collector->getNb_votes() >= $min_golden)
+            echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';
+          else
+            echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
+
             // Modification
             echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
 
@@ -117,7 +123,12 @@
 
             // Contexte
             if (!empty($collector->getContext()))
-              echo '<div class="text_context">' . nl2br(formatContext($collector->getContext())) . '</div>';
+            {
+              if ($collector->getNb_votes() >= $min_golden)
+                echo '<div class="text_context_golden">' . nl2br(formatContext($collector->getContext())) . '</div>';
+              else
+                echo '<div class="text_context">' . nl2br(formatContext($collector->getContext())) . '</div>';
+            }
 
             // Votes tous utilisateurs
             if ($listeVotes != null)
@@ -158,7 +169,10 @@
         /***************************/
         echo '<div class="zone_collector" id="modifier_collector[' . $collector->getId() . ']" style="display: none;">';
           echo '<form method="post" action="collector.php?modify_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '">';
-            echo '<div class="zone_collector_haut">';
+            if ($collector->getNb_votes() >= $min_golden)
+              echo '<div class="zone_collector_haut_golden">';
+            else
+              echo '<div class="zone_collector_haut">';
               // Validation modification
               echo '<input type="submit" name="modify_collector" value="" title="Valider" class="icon_validate_collector" />';
 
@@ -235,7 +249,11 @@
               }
 
               // Contexte
-              echo '<div class="text_context">';
+              if ($collector->getNb_votes() >= $min_golden)
+                echo '<div class="text_context_golden">';
+              else
+                echo '<div class="text_context">';
+                
                 echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
               echo '</div>';
             echo '</form>';
