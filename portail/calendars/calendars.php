@@ -6,8 +6,11 @@
   controlsUser();
 
   // Contrôle si l'année est renseignée et numérique
-	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-		header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
+  if ($_GET['action'] != "goConsulterAnnexes" AND $_GET['action'] != "doAjouterAnnexe" AND $_GET['action'] != "doSupprimerAnnexe")
+  {
+    if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
+      header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
+  }
 
   // Modèle de données : "module métier"
   include_once('modele/metier_calendars.php');
@@ -23,12 +26,26 @@
       $preferences    = getPreferences($_SESSION['user']['identifiant']);
       break;
 
+    case 'goConsulterAnnexes':
+      $onglets     = getOnglets();
+      $annexes     = getAnnexes();
+      $preferences = getPreferences($_SESSION['user']['identifiant']);
+      break;
+
     case "doAjouter":
       insertCalendrier($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
+    case "doAjouterAnnexe":
+      insertAnnexe($_POST, $_FILES);
+      break;
+
     case "doSupprimer":
       deleteCalendrier($_GET['id_cal']);
+      break;
+
+    case "doSupprimerAnnexe":
+      deleteAnnexe($_GET['id_annexe']);
       break;
 
     default:
@@ -50,6 +67,7 @@
 
       foreach ($calendriers as &$calendrier)
       {
+        $calendrier->setTo_delete(htmlspecialchars($calendrier->getTo_delete()));
         $calendrier->setMonth(htmlspecialchars($calendrier->getMonth()));
         $calendrier->setYear(htmlspecialchars($calendrier->getYear()));
         $calendrier->setTitle(htmlspecialchars($calendrier->getTitle()));
@@ -70,8 +88,21 @@
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
       break;
 
+    case 'goConsulterAnnexes':
+      foreach ($annexes as &$annexe)
+      {
+        $annexe->setTo_delete(htmlspecialchars($annexe->getTo_delete()));
+        $annexe->setAnnexe(htmlspecialchars($annexe->getAnnexe()));
+        $annexe->setTitle(htmlspecialchars($annexe->getTitle()));
+      }
+
+      unset($annexe);
+      break;
+
     case "doAjouter":
+    case "doAjouterAnnexe":
     case "doSupprimer":
+    case "doSupprimerAnnexe":
     default:
       break;
   }
@@ -83,10 +114,19 @@
       header('location: calendars.php?year=' . $_POST['years'] . '&action=goConsulter');
       break;
 
+    case "doAjouterAnnexe":
+      header('location: calendars.php?action=goConsulterAnnexes');
+      break;
+
     case "doSupprimer":
       header('location: calendars.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;
 
+    case "doSupprimerAnnexe":
+      header('location: calendars.php?action=goConsulterAnnexes');
+      break;
+
+    case 'goConsulterAnnexes':
     case 'goConsulter':
     default:
       include_once('vue/vue_calendars.php');

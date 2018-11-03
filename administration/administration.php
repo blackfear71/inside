@@ -16,6 +16,7 @@
 			$alerteUsers     = getAlerteUsers();
 			$alerteFilms     = getAlerteFilms();
       $alerteCalendars = getAlerteCalendars();
+      $alerteAnnexes   = getAlerteAnnexes();
 			$nbBugs          = getNbBugs();
 			$nbEvols         = getNbEvols();
       break;

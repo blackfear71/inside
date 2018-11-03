@@ -63,10 +63,11 @@
             echo '<input type="submit" name="saisie_autorisations" value="Mettre à jour" class="saisie_autorisations" />';
           echo '</form>';
 
-          echo '<br /><br />';
-
-					// Tableau des demandes
+          // Tableau des demandes de suppression de calendriers
 					include('table_calendars.php');
+
+        	// Tableau des demandes de suppression de annexes
+          include('table_annexes.php');
 				?>
 			</article>
 		</section>

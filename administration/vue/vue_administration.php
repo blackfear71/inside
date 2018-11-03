@@ -101,7 +101,7 @@
               <div class="title_admin">Gestion
                 <div class="saut_ligne">CALENDARS
                   <?php
-                    if ($alerteCalendars == true)
+                    if ($alerteCalendars == true OR $alerteAnnexes == true)
                       echo '( ! )';
                   ?>
                 </div>

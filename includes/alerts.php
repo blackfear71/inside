@@ -63,7 +63,7 @@
   if (!isset($_SESSION['alerts']['idea_submitted']))
     $_SESSION['alerts']['idea_submitted'] = NULL;
 
-  // Initialisations bugs
+  // Initialisations Bugs
   if (!isset($_SESSION['alerts']['bug_submitted']))
     $_SESSION['alerts']['bug_submitted'] = NULL;
 
@@ -124,12 +124,28 @@
   if (!isset($_SESSION['alerts']['parcours_modified']))
     $_SESSION['alerts']['parcours_modified'] = NULL;
 
+  // Initialisations Calendars
+  if (!isset($_SESSION['alerts']['calendar_added']))
+    $_SESSION['alerts']['calendar_added'] = NULL;
+
+  if (!isset($_SESSION['alerts']['calendar_removed']))
+    $_SESSION['alerts']['calendar_removed'] = NULL;
+
+  if (!isset($_SESSION['alerts']['annexe_removed']))
+    $_SESSION['alerts']['annexe_removed'] = NULL;
+
   // Initialisations Calendars (Administrateur)
   if (!isset($_SESSION['alerts']['calendar_deleted']))
     $_SESSION['alerts']['calendar_deleted'] = NULL;
 
   if (!isset($_SESSION['alerts']['calendar_reseted']))
     $_SESSION['alerts']['calendar_reseted'] = NULL;
+
+  if (!isset($_SESSION['alerts']['annexe_deleted']))
+    $_SESSION['alerts']['annexe_deleted'] = NULL;
+
+  if (!isset($_SESSION['alerts']['annexe_reseted']))
+    $_SESSION['alerts']['annexe_reseted'] = NULL;
 
   if (!isset($_SESSION['alerts']['autorizations_updated']))
     $_SESSION['alerts']['autorizations_updated'] = NULL;
@@ -153,14 +169,14 @@
   if (!isset($_SESSION['alerts']['image_collector_modified']))
     $_SESSION['alerts']['image_collector_modified'] = NULL;
 
-  // Initialisations emails
+  // Initialisations Emails
   if (!isset($_SESSION['alerts']['mail_film_send']))
     $_SESSION['alerts']['mail_film_send'] = NULL;
 
   if (!isset($_SESSION['alerts']['mail_film_error']))
     $_SESSION['alerts']['mail_film_error'] = NULL;
 
-  // Initialisations gestion succès
+  // Initialisations Gestion succès
   if (!isset($_SESSION['alerts']['already_referenced']))
     $_SESSION['alerts']['already_referenced'] = NULL;
 
@@ -192,14 +208,14 @@
   if (!isset($_SESSION['alerts']['weekly_cron']))
     $_SESSION['alerts']['weekly_cron'] = NULL;
 
-  // Initialisation missions
+  // Initialisation Missions
   if (!isset($_SESSION['alerts']['mission_achieved']))
     $_SESSION['alerts']['mission_achieved'] = NULL;
 
   if (!isset($_SESSION['alerts']['mission_doesnt_exist']))
     $_SESSION['alerts']['mission_doesnt_exist'] = NULL;
 
-  // Initialisations missions (admin)
+  // Initialisations Missions (admin)
   if (!isset($_SESSION['alerts']['already_ref_mission']))
     $_SESSION['alerts']['already_ref_mission'] = NULL;
 
@@ -224,7 +240,7 @@
   if (!isset($_SESSION['alerts']['mission_deleted']))
     $_SESSION['alerts']['mission_deleted'] = NULL;
 
-  // Initialisations thèmes (admin)
+  // Initialisations Thèmes (admin)
   if (!isset($_SESSION['alerts']['already_ref_theme']))
     $_SESSION['alerts']['already_ref_theme'] = NULL;
 
@@ -542,9 +558,23 @@
     $alerte = 'La demande de suppression a bien été prise en compte.';
     $_SESSION['calendar_removed'] = NULL;
   }
+  // Alerte annexe ajoutée
+  elseif (isset($_SESSION['annexe_added']) AND $_SESSION['annexe_added'] == true)
+  {
+    $alerte = 'L\'annexe a bien été ajoutée.';
+    $_SESSION['annexe_added'] = NULL;
+  }
+  // Alerte annexe supprimé
+  elseif (isset($_SESSION['annexe_removed']) AND $_SESSION['annexe_removed'] == true)
+  {
+    $alerte = 'La demande de suppression a bien été prise en compte.';
+    $_SESSION['annexe_removed'] = NULL;
+  }
   // Alertes gestion des calendriers (Administrateur)
   elseif (isset($_SESSION['alerts']['calendar_deleted'])
-  OR      isset($_SESSION['alerts']['calendar_reseted']))
+  OR      isset($_SESSION['alerts']['calendar_reseted'])
+  OR      isset($_SESSION['alerts']['annexe_deleted'])
+  OR      isset($_SESSION['alerts']['annexe_reseted']))
   {
     // Calendrier supprimé
     if (isset($_SESSION['alerts']['calendar_deleted']) AND $_SESSION['alerts']['calendar_deleted'] == true)
@@ -558,6 +588,20 @@
     {
       $alerte = 'Le calendrier a bien été remis dans la liste.';
       $_SESSION['alerts']['calendar_reseted'] = NULL;
+    }
+
+    // Annexe supprimée
+    if (isset($_SESSION['alerts']['annexe_deleted']) AND $_SESSION['alerts']['annexe_deleted'] == true)
+    {
+      $alerte = 'L\'annexe a bien été supprimée de la base de données.';
+      $_SESSION['alerts']['annexe_deleted'] = NULL;
+    }
+
+    // Annexe réinitialisée
+    if (isset($_SESSION['alerts']['annexe_reseted']) AND $_SESSION['alerts']['annexe_reseted'] == true)
+    {
+      $alerte = 'L\'annexe a bien été remise dans la liste.';
+      $_SESSION['alerts']['annexe_reseted'] = NULL;
     }
   }
   // Alerte autorisations mises à jour (Administrateur)

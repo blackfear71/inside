@@ -44,6 +44,110 @@
 	text-decoration: none;
 }
 
+/*** Saisie annexe ***/
+.zone_parcourir_image
+{
+	display: block;
+	width: 210px;
+	height: 297px;
+	border-style: dashed;
+	border-width: 3px;
+	border-radius: 2px;
+	border-color: #a3a3a3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 300%;
+	color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+}
+
+.symbole_saisie_image
+{
+	width: 210px;
+	height: 297px;
+	line-height: 297px;
+}
+
+.bouton_parcourir_image
+{
+	display: block;
+	opacity: 0;
+	width: 210px;
+	height: 297px;
+	margin-top: -297px;
+	cursor: pointer;
+}
+
+.mask_image
+{
+	width: 210px;
+	height: 297px;
+	overflow: hidden;
+	margin-left: 3px;
+	margin-top: -300px;
+	line-height: 297px;
+}
+
+.image
+{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.zone_saisie_nom_divers
+{
+	display: block;
+	width: 216px;
+	margin-top: 10px;
+	background: blue;
+}
+
+.input_calendar_text
+{
+	float: left;
+	width: 142px;
+	border: solid 1px #a3a3a3;
+	border-radius: 5px;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 100%;
+	background-color: white;
+	line-height: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+
+.send_annexe
+{
+	float: right;
+	height: 44px;
+	width: 44px;
+	border: 0;
+	background-color: #e3e3e3;
+	background-image: url("/inside/includes/icons/common/send_red.png");
+	background-size: 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+.send_annexe:hover
+{
+	background-color: #ff1937;
+	background-image: url("/inside/includes/icons/common/send.png");
+}
+
+.align_saisie
+{
+	clear: both;
+	width: 100%;
+	height: 45px;
+}
+
 /*** Saisie ***/
 .form_saisie_calendar
 {
@@ -164,6 +268,49 @@
 {
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/send.png");
+}
+
+/*** Annexes ***/
+.zone_annexes
+{
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_annexes.masonry
+{
+	opacity: 1;
+}
+
+.zone_annexe
+{
+	width: 216px;
+	margin-top: 15px;
+	text-align: center;
+}
+
+.img_annexe
+{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.text_annexe
+{
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 110%;
+	line-height: 35px;
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #262626;
+	border-radius: 2px;
+	text-align: center;
+	margin-bottom: -5px;
 }
 
 /*** Tableau calendriers ***/

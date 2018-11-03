@@ -74,6 +74,28 @@
     return $alert;
   }
 
+  // METIER : Contrôle alertes Annexes
+  // RETOUR : Booléen
+  function getAlerteAnnexes()
+  {
+    $alert = false;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, to_delete FROM calendars_annexes WHERE to_delete = "Y"');
+    while($data = $req->fetch())
+    {
+      if ($data['to_delete'] == "Y")
+      {
+        $alert = true;
+        break;
+      }
+    }
+    $req->closeCursor();
+
+    return $alert;
+  }
+
   // METIER : Nombre de bugs en attente
   // RETOUR : Nombre de bugs
   function getNbBugs()
@@ -229,6 +251,27 @@
     return $listToDelete;
   }
 
+  // METIER : Lecture des annexes à supprimer
+  // RETOUR : Liste des annexes à supprimer
+  function getAnnexesToDelete()
+  {
+    $listToDelete = array();
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE to_delete = "Y" ORDER BY id DESC');
+    while($donnees = $reponse->fetch())
+    {
+      $myDelete = Annexe::withData($donnees);
+
+      // On ajoute la ligne au tableau
+      array_push($listToDelete, $myDelete);
+    }
+    $reponse->closeCursor();
+
+    return $listToDelete;
+  }
+
   // METIER : Supprime un calendrier de la base
   // RETOUR : Aucun
   function deleteCalendrier($id_cal)
@@ -256,6 +299,30 @@
     $_SESSION['alerts']['calendar_deleted'] = true;
   }
 
+  // METIER : Supprime une annexe de la base
+  // RETOUR : Aucun
+  function deleteAnnexe($id_annexe)
+  {
+    global $bdd;
+
+    // On efface l'annexe si présent
+    $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE id = ' . $id_annexe);
+    $donnees = $reponse->fetch();
+
+    if (isset($donnees['annexe']) AND !empty($donnees['annexe']))
+    {
+      unlink ("../includes/images/calendars/annexes/" . $donnees['annexe']);
+      unlink ("../includes/images/calendars/annexes/mini/" . $donnees['annexe']);
+    }
+
+    $reponse->closeCursor();
+
+    // On efface la ligne de la base
+    $reponse2 = $bdd->exec('DELETE FROM calendars_annexes WHERE id = ' . $id_annexe);
+
+    $_SESSION['alerts']['annexe_deleted'] = true;
+  }
+
   // METIER : Réinitialise un calendrier de la base
   // RETOUR : Aucun
   function resetCalendrier($id_cal)
@@ -272,6 +339,24 @@
     $req->closeCursor();
 
     $_SESSION['alerts']['calendar_reseted'] = true;
+  }
+
+  // METIER : Réinitialise une annexe de la base
+  // RETOUR : Aucun
+  function resetAnnexe($id_annexe)
+  {
+    global $bdd;
+
+    // Mise à jour de la table (remise à N de l'indicateur de demande)
+    $to_delete = "N";
+
+    $req = $bdd->prepare('UPDATE calendars_annexes SET to_delete = :to_delete WHERE id = ' . $id_annexe);
+    $req->execute(array(
+      'to_delete' => $to_delete
+    ));
+    $req->closeCursor();
+
+    $_SESSION['alerts']['annexe_reseted'] = true;
   }
 
   // METIER : Lecture liste des bugs
