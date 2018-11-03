@@ -70,7 +70,7 @@
   if (!isset($_SESSION['alerts']['bug_deleted']))
     $_SESSION['alerts']['bug_deleted'] = NULL;
 
-  // Initialisations profil
+  // Initialisations Profil
   if (!isset($_SESSION['alerts']['pseudo_updated']))
     $_SESSION['alerts']['pseudo_updated'] = NULL;
 
