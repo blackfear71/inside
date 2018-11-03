@@ -198,9 +198,14 @@
   font-family: robotoregular, Verdana, sans-serif;
 }
 
+.zone_texte_conclusion
+{
+	padding-bottom: 60px;
+	margin-bottom: -65px;
+}
+
 .zone_images_conclusion
 {
-	display: block;
 	padding-top: 5px;
 }
 
