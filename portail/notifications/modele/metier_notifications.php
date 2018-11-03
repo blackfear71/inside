@@ -455,11 +455,12 @@
 
         case "one_mission":
           // Recherche données mission
-          $reponse = $bdd->query('SELECT id, mission, heure FROM missions WHERE id = "' . $notification->getContent() . '"');
+          $reponse = $bdd->query('SELECT id, mission, date_deb, heure FROM missions WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
           $id_mission = $donnees['id'];
           $mission    = $donnees['mission'];
+          $date_deb   = $donnees['date_deb'];
           $heure_deb  = $donnees['heure'];
 
           $reponse->closeCursor();
@@ -468,7 +469,7 @@
           $phrase = "La mission <strong>" . $mission . "</strong> se déroule aujourd'hui uniquement à partir de " . formatTimeForDisplayLight($heure_deb) . " ! Trouvez vite les objectifs !";
 
           // Mission de 1 jour (avant l'heure)
-          if (date("His") < $heure_deb)
+          if (date("Ymd") <= $date_deb AND date("His") < $heure_deb)
             $lien = "/inside/portail/missions/missions.php?action=goConsulter";
           // Mission de 1 jour (après l'heure)
           else
