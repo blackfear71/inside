@@ -198,12 +198,6 @@
   font-family: robotoregular, Verdana, sans-serif;
 }
 
-.zone_texte_conclusion
-{
-	padding-bottom: 60px;
-	margin-bottom: -65px;
-}
-
 .zone_images_conclusion
 {
 	padding-top: 5px;
@@ -214,7 +208,6 @@
 	display: block;
 	height: 60px;
 	margin-left: -20px;
-	margin-bottom: -60px;
 }
 
 .img_conclusion_mission_m
@@ -223,7 +216,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	height: 60px;
-	margin-bottom: -60px;
+	margin-top: -60px;
 }
 
 .img_conclusion_mission_d
@@ -231,6 +224,7 @@
 	float: right;
 	height: 60px;
 	margin-right: -20px;
+	margin-top: -60px;
 }
 
 .td_details_mission_left
