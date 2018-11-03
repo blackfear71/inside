@@ -93,8 +93,8 @@
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: white;
 	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #262626;
 }
 
 .avatar_films
@@ -907,9 +907,8 @@
 {
 	border-radius: 50%;
 	width: 40px;
-	background-color: #b3b3b3;
-	border: solid 1px white;
-	box-shadow: 0 0 2px #7c7c7c;
+	background-color: #262626;
+	box-shadow: 0 0 3px #7c7c7c;
 	vertical-align: middle;
 	margin-right: 10px;
 }
@@ -1254,9 +1253,10 @@
 	margin-top: -3px;
 	height: 40px;
 	border-radius: 50%;
-	background-color: #a3a3a3;
 	margin-left: 5px;
 	margin-right: 5px;
+	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #262626;
 }
 
 .td_interested_middle
@@ -1377,9 +1377,10 @@
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	background-color: #a3a3a3;
 	float: left;
 	clear: both;
+	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #262626;
 }
 
 .pseudo_comments_films

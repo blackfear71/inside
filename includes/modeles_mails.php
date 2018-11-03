@@ -82,8 +82,8 @@
         {
         	border-radius: 50%;
         	width: 40px;
-        	background-color: #b3b3b3;
-        	border: solid 1px white;
+          box-shadow: 0 0 3px #7c7c7c;
+        	background-color: #262626;
         	vertical-align: middle;
         	margin-right: 10px;
         }

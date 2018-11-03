@@ -181,6 +181,7 @@
 	border-radius: 50%;
 	overflow: hidden;
 	vertical-align: middle;
+	box-shadow: 0 0 3px #7c7c7c;
 	background-color: #262626;
 }
 

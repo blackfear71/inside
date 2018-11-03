@@ -93,10 +93,11 @@
       else
         echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
           echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
-            if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
-              echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
-            else
-              echo '<img src="/inside/includes/icons/common/default.png" alt="avatar" class="avatar_bandeau" />';
+          
+          if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
+            echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
+          else
+            echo '<img src="/inside/includes/icons/common/default.png" alt="avatar" class="avatar_bandeau" />';
         echo '</a>';
     echo '</div>';
 

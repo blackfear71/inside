@@ -226,7 +226,8 @@
 	height: 30px;
 	border-radius: 50%;
 	vertical-align: middle;
-	background-color: #a3a3a3;
+	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #262626;
 	margin-bottom: -40px;
 }
 
@@ -275,7 +276,8 @@
 	height: 30px;
 	border-radius: 50%;
 	vertical-align: middle;
-	background-color: #a3a3a3;
+	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #262626;
 	margin-bottom: -40px;
 }
 
@@ -361,7 +363,7 @@
 	height: 30px;
 	border-radius: 50%;
 	vertical-align: middle;
-	background-color: #a3a3a3;
+	background-color: #262626;
 }
 
 .text_chat_connected

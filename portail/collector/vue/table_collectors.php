@@ -33,10 +33,12 @@
             }
 
             // Avatar
-            if (!empty($collector->getAvatar_s()))
-              echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
-            else
-              echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+            echo '<div class="zone_avatar_collector">';
+              if (!empty($collector->getAvatar_s()))
+                echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+              else
+                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+            echo '</div>';
 
             // Vote
             echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" name="vote_user" class="link_current_vote">';
@@ -180,10 +182,12 @@
               echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_collector"></a>';
 
               // Avatar
-              if (!empty($collector->getAvatar_s()))
-                echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+              echo '<div class="zone_avatar_collector">';
+                if (!empty($collector->getAvatar_s()))
+                  echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+                else
+                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+              echo '</div>';
 
               // Modification speaker
               if (!empty($collector->getSpeaker()))
@@ -253,7 +257,7 @@
                 echo '<div class="text_context_golden">';
               else
                 echo '<div class="text_context">';
-                
+
                 echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
               echo '</div>';
             echo '</form>';

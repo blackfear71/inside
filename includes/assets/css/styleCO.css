@@ -465,18 +465,28 @@
   cursor: pointer;
 }
 
-.avatar_collector
+.zone_avatar_collector
 {
-	background-color: #d3d3d3;
-	border: solid 5px #fbfbfb;
-	width: 100px;
-	border-radius: 50%;
+	float: left;
 	margin-left: calc(50% - 135px);
 	margin-top: -50px;
+	border: solid 5px #fbfbfb;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}
+
+.avatar_collector
+{
+	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #262626;
+	width: 100px;
+	border-radius: 50%;
 }
 
 .pseudo
 {
+	clear: both;
 	text-align: center;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
