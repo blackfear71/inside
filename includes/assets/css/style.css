@@ -774,6 +774,15 @@ nav
 	border-bottom: solid 2px #c81932;
 }
 
+.logo_alerte
+{
+	height: 25px;
+	vertical-align: middle;
+	margin-right: 5px;
+	margin-left: -5px;
+	margin-top: -3px;
+}
+
 .texte_alerte
 {
 	width: 460px;
