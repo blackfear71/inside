@@ -97,37 +97,30 @@
                   );
 
     // On insère dans la table
-    if (!empty($subject))
-    {
-      global $bdd;
-      $req = $bdd->prepare('INSERT INTO ideas(subject,
-                                              date,
-                                              author,
-                                              content,
-                                              status,
-                                              developper
-                                             )
-                                       VALUES(:subject,
-                                              :date,
-                                              :author,
-                                              :content,
-                                              :status,
-                                              :developper
-                                             )');
-      $req->execute($ideas);
-      $req->closeCursor();
+    global $bdd;
+    $req = $bdd->prepare('INSERT INTO ideas(subject,
+                                            date,
+                                            author,
+                                            content,
+                                            status,
+                                            developper
+                                           )
+                                     VALUES(:subject,
+                                            :date,
+                                            :author,
+                                            :content,
+                                            :status,
+                                            :developper
+                                           )');
+    $req->execute($ideas);
+    $req->closeCursor();
 
-      // Génération notification idée ajoutée
-      $new_id = $bdd->lastInsertId();
+    // Génération notification idée ajoutée
+    $new_id = $bdd->lastInsertId();
 
-      insertNotification($user, 'idee', $new_id);
+    insertNotification($user, 'idee', $new_id);
 
-      $_SESSION['alerts']['idea_submitted'] = true;
-    }
-    else
-    {
-      $_SESSION['alerts']['idea_submitted'] = false;
-    }
+    $_SESSION['alerts']['idea_submitted'] = true;
   }
 
   // METIER : Mise à jour du statut d'une idée

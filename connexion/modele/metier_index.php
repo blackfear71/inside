@@ -25,9 +25,8 @@
 		{
 			if ($donnees['status'] == "I")
 			{
-				$_SESSION['alerts']['not_yet']         = true;
-				$_SESSION['index']['connected']        = false;
-				$_SESSION['alerts']['wrong_connexion'] = false;
+        $_SESSION['index']['connected'] = false;
+				$_SESSION['alerts']['not_yet']  = true;
 			}
 			else
 			{
@@ -35,11 +34,10 @@
 				if (isset($mdp) AND $mdp == $donnees['password'])
 				{
 					// Sauvegarde des données utilisateur en SESSION
-					$_SESSION['index']['connected']        = true;
-					$_SESSION['user']['identifiant']       = $donnees['identifiant'];
-          $_SESSION['user']['pseudo']            = $donnees['pseudo'];
-					$_SESSION['user']['avatar']            = $donnees['avatar'];
-					$_SESSION['alerts']['wrong_connexion'] = false;
+					$_SESSION['index']['connected']  = true;
+					$_SESSION['user']['identifiant'] = $donnees['identifiant'];
+          $_SESSION['user']['pseudo']      = $donnees['pseudo'];
+					$_SESSION['user']['avatar']      = $donnees['avatar'];
 
 					// Recherche et sauvegarde des preferences utilisateur en SESSION
 					if ($_SESSION['user']['identifiant'] != "admin")
@@ -62,8 +60,6 @@
 					$_SESSION['index']['connected']        = false;
 					$_SESSION['alerts']['wrong_connexion'] = true;
 				}
-
-				$_SESSION['alerts']['not_yet'] = false;
 			}
 		}
 		else
@@ -125,13 +121,11 @@
           $_SESSION['alerts']['already_exist'] = true;
           break;
         }
-        else
-          $_SESSION['alerts']['already_exist'] = false;
       }
       $reponse->closeCursor();
 
       // Contrôle confirmation mot de passe
-      if ($_SESSION['alerts']['already_exist'] == false)
+      if ($_SESSION['alerts']['already_exist'] != true)
       {
         if ($password == $confirm_password)
         {
@@ -207,18 +201,13 @@
           $req->closeCursor();
 
           $_SESSION['alerts']['ask_inscription'] = true;
-          $_SESSION['alerts']['wrong_confirm']   = false;
         }
         else
-        {
-          $_SESSION['alerts']['ask_inscription'] = false;
           $_SESSION['alerts']['wrong_confirm']   = true;
-        }
       }
     }
     else
       $_SESSION['alerts']['too_short'] = true;
-
   }
 
   // METIER : Demande récupération mot de passe
@@ -232,59 +221,35 @@
 		$identifiant = htmlspecialchars(strtoupper($post['login']));
 		$status      = "N";
 
-    // Initialisation erreurs
-		$_SESSION['alerts']['wrong_id']      = false;
-		$_SESSION['alerts']['asked']         = false;
-		$_SESSION['alerts']['already_asked'] = false;
-    $_SESSION['alerts']['not_yet']       = false;
-
     global $bdd;
 
 		// On vérifie que l'identifiant existe bien
-		$reponse = $bdd->query('SELECT id, identifiant, status FROM users');
-		while ($donnees = $reponse->fetch())
+		$reponse = $bdd->query('SELECT id, identifiant, status FROM users WHERE identifiant = "' . $identifiant . '"');
+		$donnees = $reponse->fetch();
+
+    if ($reponse->rowCount() > 0)
 		{
-			if ($identifiant == $donnees['identifiant'])
-			{
-				if ($donnees['status'] == "Y")
-				{
-					$_SESSION['alerts']['wrong_id']      = false;
-					$_SESSION['alerts']['asked']         = false;
-					$_SESSION['alerts']['already_asked'] = true;
-					break;
-				}
-        elseif ($donnees['status'] == "I")
-        {
-          $_SESSION['alerts']['wrong_id']      = false;
-          $_SESSION['alerts']['asked']         = false;
-          $_SESSION['alerts']['already_asked'] = false;
-          $_SESSION['alerts']['not_yet']       = true;
-          break;
-        }
-				else
-				{
-					// Mise à jour de la table
-					$status = "Y";
-
-					$req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $donnees['id']);
-					$req->execute(array(
-						'status' => $status
-					));
-					$req->closeCursor();
-
-					$_SESSION['alerts']['wrong_id']      = false;
-					$_SESSION['alerts']['asked']         = true;
-					$_SESSION['alerts']['already_asked'] = false;
-					break;
-				}
-			}
+			if ($donnees['status'] == "Y")
+				$_SESSION['alerts']['already_asked'] = true;
+      elseif ($donnees['status'] == "I")
+        $_SESSION['alerts']['not_yet'] = true;
 			else
 			{
-				$_SESSION['alerts']['wrong_id']      = true;
-				$_SESSION['alerts']['asked']         = false;
-				$_SESSION['alerts']['already_asked'] = false;
+				// Mise à jour de la table
+				$status = "Y";
+
+				$req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $donnees['id']);
+				$req->execute(array(
+					'status' => $status
+				));
+				$req->closeCursor();
+
+				$_SESSION['alerts']['password_asked'] = true;
 			}
 		}
+    else
+      $_SESSION['alerts']['wrong_id'] = true;
+
 		$reponse->closeCursor();
   }
 ?>

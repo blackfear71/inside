@@ -25,11 +25,6 @@
 		$_SESSION['save']['explanation_success'] = "";
   }
 
-  if (!isset($_SESSION['erreur_succes']) OR $_SESSION['erreur_succes'] != true)
-  {
-    $_SESSION['save_success'] = NULL;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
@@ -42,11 +37,10 @@
       // Lecture liste des données par le modèle
       $listeSuccess = getSuccess();
 
-      if (isset($_SESSION['erreur_succes']) AND $_SESSION['erreur_succes'] == true)
-      {
-        $listeSuccess = initModErrSucces($listeSuccess, $_SESSION['save_success']);
-        unset($_SESSION['erreur_succes']);
-      }
+			if (!isset($_GET['error']) OR $_GET['error'] != true)
+		    $_SESSION['save']['save_success'] = NULL;
+			else
+        $listeSuccess = initModErrSucces($listeSuccess, $_SESSION['save']['save_success']);
       break;
 
     case "doAjouter":
@@ -58,7 +52,7 @@
       break;
 
     case "doModifier":
-      updateSuccess($_POST);
+      $erreurUpdateSucces = updateSuccess($_POST);
       break;
 
     default:
@@ -111,8 +105,8 @@
   switch ($_GET['action'])
   {
     case "doModifier":
-      if ($_SESSION['erreur_succes'] == true)
-        header('location: manage_success.php?action=goModifier');
+      if ($erreurUpdateSucces == true)
+        header('location: manage_success.php?error=true&action=goModifier');
       else
         header('location: manage_success.php?action=goConsulter');
       break;

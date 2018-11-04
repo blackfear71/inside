@@ -323,7 +323,7 @@
       $_SESSION['tableau_parts'] = $list_parts;
 
       // Message prix non numérique
-      $_SESSION['alerts']['not_numeric'] = true;
+      $_SESSION['alerts']['depense_not_numeric'] = true;
     }
   }
 
@@ -501,7 +501,7 @@
       $_SESSION['alerts']['depense_modified'] = true;
     }
     else
-      $_SESSION['alerts']['not_numeric'] = true;
+      $_SESSION['alerts']['depense_not_numeric'] = true;
   }
 
   // METIER : Suppression d'une dépense

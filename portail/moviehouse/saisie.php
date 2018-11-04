@@ -38,7 +38,8 @@
       $initSaisie   = true;
       $filmExistant = false;
 
-      if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
+      if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true)
+      OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
         $film = initCreErrFilm();
       else
         $film = initCreFilm();
@@ -54,7 +55,8 @@
 
       if ($filmExistant == true)
       {
-        if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
+        if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true)
+        OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
           $film = initModErrFilm($_GET['modify_id']);
         else
           $film = initModFilm($_GET['modify_id']);
@@ -122,14 +124,16 @@
   switch ($_GET['action'])
   {
     case "doInserer":
-      if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
+      if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true )
+      OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
         header('location: saisie.php?action=goAjouter');
       else
         header('location: details.php?id_film=' . $new_id . '&action=goConsulter');
       break;
 
     case "doModifier":
-      if ($_SESSION['alerts']['wrong_date'] == true OR $_SESSION['alerts']['wrong_date_doodle'] == true)
+      if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true )
+      OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
         header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
       else
         header('location: details.php?id_film=' . $_GET['modify_id'] . '&action=goConsulter');

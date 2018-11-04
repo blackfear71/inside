@@ -29,8 +29,13 @@
 				<?php
 					$disconnect  = true;
           $add_film    = true;
-					$modify_film = true;
-					$delete_film = true;
+
+          if ($filmExistant == true)
+          {
+            $modify_film = true;
+            $delete_film = true;
+          }
+
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;

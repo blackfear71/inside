@@ -47,7 +47,7 @@
       $req->execute($data);
       $req->closeCursor();
 
-      $_SESSION['alerts']['parcours_modified'] = true;
+      $_SESSION['alerts']['parcours_updated'] = true;
 
       return $parcours;
     }

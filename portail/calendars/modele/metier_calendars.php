@@ -118,7 +118,7 @@
     ));
     $reponse->closeCursor();
 
-    $_SESSION['calendar_removed'] = true;
+    $_SESSION['alerts']['calendar_removed'] = true;
   }
 
   // METIER : Demande suppression annexe
@@ -136,7 +136,7 @@
     ));
     $reponse->closeCursor();
 
-    $_SESSION['annexe_removed'] = true;
+    $_SESSION['alerts']['annexe_removed'] = true;
   }
 
   // METIER : Ajout calendrier avec création miniature
@@ -232,7 +232,7 @@
 
         insertNotification($user, 'calendrier', $new_id);
 
-        $_SESSION['calendar_added'] = true;
+        $_SESSION['alerts']['calendar_added'] = true;
       }
     }
   }
@@ -323,7 +323,7 @@
 					));
 				$reponse->closeCursor();
 
-        $_SESSION['annexe_added'] = true;
+        $_SESSION['alerts']['annexe_added'] = true;
       }
     }
   }

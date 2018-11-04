@@ -14,13 +14,13 @@
     // Contrôle mission existante
     $reponse = $bdd->query('SELECT * FROM missions WHERE (id = ' . $id . ' AND (date_deb < ' . date("Ymd") . ' OR (date_deb = ' . date("Ymd") . ' AND heure <= ' . date("His") . ')))');
 
-    if ($reponse->rowCount() == 0)
-      $_SESSION['alerts']['mission_doesnt_exist'] = true;
+    if ($reponse->rowCount() > 0)
+      $missionExistante = true;
 
     $reponse->closeCursor();
 
-    if ($_SESSION['alerts']['mission_doesnt_exist'] == false)
-      $missionExistante = true;
+    if ($missionExistante == false)
+      $_SESSION['alerts']['mission_doesnt_exist'] = true;
 
     return $missionExistante;
   }

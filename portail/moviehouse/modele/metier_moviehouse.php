@@ -657,22 +657,25 @@
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $id_film);
     $donnees = $reponse->fetch();
 
-    if ($reponse->rowCount() == 0)
-      $_SESSION['alerts']['film_doesnt_exist'] = true;
+    if ($reponse->rowCount() > 0)
+      $filmExistant = true;
 
     $reponse->closeCursor();
 
-    // Contrôle film non à supprimer
-    $reponse2 = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $id_film);
-    $donnees2 = $reponse2->fetch();
+    if ($filmExistant == true)
+    {
+      // Contrôle film non à supprimer
+      $reponse2 = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $id_film);
+      $donnees2 = $reponse2->fetch();
 
-    if ($donnees2['to_delete'] == "Y")
+      if ($donnees2['to_delete'] == "Y")
+        $filmExistant = false;
+
+      $reponse2->closeCursor();
+    }
+
+    if ($filmExistant == false)
       $_SESSION['alerts']['film_doesnt_exist'] = true;
-
-    $reponse2->closeCursor();
-
-    if ($_SESSION['alerts']['film_doesnt_exist'] == false)
-      $filmExistant = true;
 
     return $filmExistant;
   }
@@ -1138,7 +1141,8 @@
           $_SESSION['alerts']['wrong_date_doodle'] = true;
       }
 
-      if ($_SESSION['alerts']['wrong_date'] != true AND $_SESSION['alerts']['wrong_date_doodle'] != true)
+      if ((!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date']        != true)
+      AND (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
 			{
         $film = array('film'            => $nom_film,
                       'to_delete'       => $to_delete,
@@ -1331,7 +1335,8 @@
           $_SESSION['alerts']['wrong_date_doodle'] = true;
       }
 
-      if ($_SESSION['alerts']['wrong_date'] != true AND $_SESSION['alerts']['wrong_date_doodle'] != true)
+      if ((!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date']        != true)
+      AND (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
 			{
         $film = array('film'         => $nom_film,
                       'synopsis'     => $synopsis,
@@ -1382,7 +1387,7 @@
         if (empty($date_doodle))
           deleteNotification('cinema', $id_film);
 
-        $_SESSION['alerts']['film_modified'] = true;
+        $_SESSION['alerts']['film_updated'] = true;
       }
     }
     else
@@ -1434,7 +1439,7 @@
     // On envoie un mail par personne et non un mail groupé
     foreach ($participants as $participant)
     {
-      if ($_SESSION['alerts']['mail_film_error'] != true)
+      if (!isset($_SESSION['alerts']['mail_film_error']) OR $_SESSION['alerts']['mail_film_error'] != true)
       {
         if (!empty($participant->getEmail()))
         {
@@ -1456,13 +1461,9 @@
           {
             echo 'Erreur : ' . $mail->ErrorInfo;
             $_SESSION['alerts']['mail_film_error'] = true;
-            $_SESSION['alerts']['mail_film_send']  = NULL;
           }
           else
-          {
-            $_SESSION['alerts']['mail_film_error'] = NULL;
             $_SESSION['alerts']['mail_film_send']  = true;
-          }
 
           //var_dump($mail);
           //echo $message;

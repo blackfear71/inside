@@ -265,7 +265,7 @@
   switch ($_GET['action'])
   {
     case "doSaisieRapide":
-      if ($_SESSION['alerts']['wrong_date'] == true OR empty($_POST['date_theater']))
+      if ((isset($_SESSION['alerts']['wrong_date']) AND $_SESSION['alerts']['wrong_date'] == true) OR empty($_POST['date_theater']))
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter');
       else
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4) . '&action=goConsulter');

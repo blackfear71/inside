@@ -110,14 +110,14 @@
       break;
 
     case 'doajouter':
-      if ($_SESSION['alerts']['erreur_distance'] == true)
+      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
         include_once('vue/ajout_parcours.php');
       else
         include_once('vue/vue_parcours.php');
       break;
 
     case 'domodifier':
-      if ($_SESSION['alerts']['erreur_distance'] == true)
+      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
         include_once('vue/mod_parcours.php');
       else
         include_once('vue/vue_parcours.php');

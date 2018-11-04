@@ -62,7 +62,7 @@
 
         <?php
           if ($error_inscription == true)
-            echo '<div id="inscription" class="zone_ins_pass" style="display: block;">';
+            echo '<div id="inscription" class="zone_ins_pass" style="display: block; animation: none;">';
           else
             echo '<div id="inscription" class="zone_ins_pass" style="display: block;">';
         ?>

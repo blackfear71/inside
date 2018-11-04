@@ -12,7 +12,7 @@
 		header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter');
 
   // Initialisation sauvegarde saisie
-	if (!isset($_SESSION['alerts']['not_numeric']) OR $_SESSION['alerts']['not_numeric'] != true)
+	if (!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
 	{
 		$_SESSION['save']['price']   = "";
 		$_SESSION['save']['buyer']   = "";

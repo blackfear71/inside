@@ -137,8 +137,6 @@
   // RETOUR : Aucun
   function changeAvatar($user, $files)
   {
-    $_SESSION['alerts']['avatar_updated'] = false;
-
     global $bdd;
 
     // On contrôle la présence du dossier, sinon on le créé
@@ -226,8 +224,6 @@
   // RETOUR : Aucun
   function deleteAvatar($user)
   {
-    $_SESSION['alerts']['avatar_deleted'] = false;
-
     global $bdd;
 
     // On efface l'ancien avatar si présent
@@ -394,8 +390,6 @@
   		$reponse = $bdd->query('SELECT id, identifiant, salt, password FROM users WHERE identifiant = "' . $user . '"');
   		$donnees = $reponse->fetch();
 
-  		$wrong_password = false;
-
   		$old_password = htmlspecialchars(hash('sha1', $post['old_password'] . $donnees['salt']));
 
   		if ($old_password == $donnees['password'])
@@ -413,21 +407,15 @@
   				));
   				$req->closeCursor();
 
-  				$wrong_password = false;
+  				$_SESSION['alerts']['password_updated'] = true;
   			}
   			else
-  			{
-  				$wrong_password = true;
-  			}
+  			   $_SESSION['alerts']['wrong_password'] = true;
   		}
   		else
-  		{
-  			$wrong_password = true;
-  		}
+  		  $_SESSION['alerts']['wrong_password'] = true;
 
   		$reponse->closeCursor();
-
-  		$_SESSION['alerts']['wrong_password'] = $wrong_password;
     }
   }
 
