@@ -1,30 +1,7 @@
-// Au chargement du document
-$(document).ready(function()
-{
-  // Positionnement du curseur sur "Identifiant" pour se connecter
-  $('#focus_identifiant').focus();
-});
-
 // Masque la fenêtre des alertes
 function masquerAlerte(id)
 {
   document.getElementById(id).style.display = "none";
-}
-
-// Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)
-function afficherIndex(id_open, id_close)
-{
-  document.getElementById(id_open).style.display    = "block";
-  document.getElementById(id_open).style.marginLeft = "39.5%";
-  document.getElementById(id_open).style.transition = "margin-left 1s";
-
-  document.getElementById(id_close).style.marginLeft = "-100%";
-}
-
-// Masque la fenêtre d'inscription ou de mot de passe perdu
-function masquerIndex(id)
-{
-  document.getElementById(id).style.marginLeft = "-100%";
 }
 
 // Affiche ou masque le menu latéral gauche + rotation icône menu
