@@ -1,6 +1,4 @@
 <?php
-  phpinfo();
-  
   // Fonction communes
   include_once('../../includes/fonctions_communes.php');
   include_once('../../includes/fonctions_dates.php');
