@@ -582,4 +582,74 @@
 
     return $listeUsers;
   }
+
+  // Rotation automatique des images en mode Portrait
+  // RETOUR : Aucun
+  function rotateImage($image, $type)
+  {
+    $degrees = 0;
+    
+    // Récupération des données EXIF
+    $exif = exif_read_data($image);
+
+    // Rotation
+    if (!empty($exif['Orientation']))
+    {
+      switch ($exif['Orientation'])
+      {
+        case 3:
+          $degrees = 180;
+          break;
+
+        case 6:
+          $degrees = -90;
+          break;
+
+        case 8:
+          $degrees = 90;
+          break;
+
+        case 1:
+        default:
+          $degrees = 0;
+          break;
+      }
+    }
+
+    if ($degrees != 0)
+    {
+      echo 'test';
+
+      switch($type)
+      {
+        case 'jpeg':
+        case 'jpg':
+          $source = imagecreatefromjpeg($image);
+          $rotate = imagerotate($source, $degrees, 0);
+          imagejpeg($rotate, $image);
+          break;
+
+        case 'png':
+          $source = imagecreatefrompng($image);
+          $rotate = imagerotate($source, $degrees, 0);
+          imagepng($rotate, $image);
+          break;
+
+        case 'gif':
+          $source = imagecreatefromgif($image);
+          $rotate = imagerotate($source, $degrees, 0);
+          imagegif($rotate, $image);
+          break;
+
+        case 'bmp':
+          $source = imagecreatefrombmp($image);
+          $rotate = imagerotate($source, $degrees, 0);
+          imagebmp($rotate, $image);
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
 ?>

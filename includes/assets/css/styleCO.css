@@ -225,6 +225,8 @@
 	height: 118px;
 	margin-top: -118px;
 	cursor: pointer;
+	position: relative;
+	z-index: 1;
 }
 
 .mask_image

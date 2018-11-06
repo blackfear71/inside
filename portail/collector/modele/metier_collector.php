@@ -426,6 +426,9 @@
  					exit("Impossible de copier le fichier dans $image_dir");
 
  				// echo "Le fichier a bien été uploadé";
+
+        // Rotation de l'image
+        $rotate = rotateImage($image_dir . $new_name, $type_image);
  			}
  		}
 
