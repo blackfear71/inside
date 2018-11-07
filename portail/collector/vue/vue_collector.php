@@ -9,6 +9,7 @@
       $chat_head         = true;
       $masonry_head      = true;
       $image_loaded_head = true;
+      $exif_head         = true;
 
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
