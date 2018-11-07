@@ -5,9 +5,9 @@
     <?php
       $title_head  = "Bugs";
       $style_head  = "styleBugs.css";
-      $script_head = "";
+      $script_head = "scriptBugs.js";
       $chat_head   = true;
-      
+
       include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
     ?>
   </head>

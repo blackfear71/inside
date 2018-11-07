@@ -385,6 +385,11 @@
 	padding-top: 50px;
 }
 
+.zone_shadow
+{
+	border-radius: 2px;
+}
+
 /*** Actions et utilisateur ***/
 .zone_collector_haut
 {

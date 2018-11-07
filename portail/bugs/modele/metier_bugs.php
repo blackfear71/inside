@@ -56,9 +56,11 @@
   }
 
   // METIER : Insertion d'un bug
-  // RETOUR : Aucun
+  // RETOUR : Id enregistrement créé
   function insertBug($post)
   {
+    $new_id   = NULL;
+
     // Récupération des données
     $subject  = $post['subject_bug'];
     $date     = date("Ymd");
@@ -97,7 +99,11 @@
       $req->execute($bugs);
       $req->closeCursor();
 
+      $new_id = $bdd->lastInsertId();
+
       $_SESSION['alerts']['bug_submitted'] = true;
     }
+
+    return $new_id;
   }
 ?>

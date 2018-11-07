@@ -369,7 +369,7 @@
 
           $icone  = "ideas";
           $phrase = "Une nouvelle idée <strong>" . $sujet . "</strong> vient tout juste d'être publiée par <strong>" . $auteur . "</strong> !";
-          $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&action=goConsulter";
+          $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&action=goConsulter&anchor=" . $notification->getContent();
           break;
 
         case "succes":

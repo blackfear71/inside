@@ -743,7 +743,7 @@ nav
 	}
 	100%
 	{
-		top: 200px;
+		top: 20%;
 	}
 }
 
@@ -753,11 +753,13 @@ nav
 	width: 500px;
 	margin-left: auto;
 	margin-right: auto;
-	position: absolute;
+	position: fixed;
 	z-index: 2;
 	left: 50%;
 	margin-left: -250px;
 	box-shadow: 0 5px 8px #262626;
+	border-radius: 2px;
+	overflow: hidden;
 }
 
 .inside_alerte

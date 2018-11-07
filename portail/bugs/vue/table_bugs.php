@@ -50,8 +50,8 @@
       $date_bug = formatDateForDisplay($ligne->getDate());
 
       // Affichage des idées
-      echo '<table class="table_bugs">';
-        echo '<tr>';
+      echo '<table class="table_bugs" id="zone_shadow_' . $ligne->getId() . '">';
+        echo '<tr id="' . $ligne->getId() . '">';
           // Titre idée
           echo '<td class="td_bugs_title">';
             echo $type_bug;

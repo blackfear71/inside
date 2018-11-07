@@ -50,7 +50,7 @@
       $date_idee = formatDateForDisplay($ligne->getDate());
 
       // Affichage des idées
-      echo '<table class="table_ideas">';
+      echo '<table class="table_ideas" id="zone_shadow_' . $ligne->getId() . '">';
         echo '<tr id="' . $ligne->getId() . '">';
           // Titre idée
           echo '<td class="td_ideas_title">';

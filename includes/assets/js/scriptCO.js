@@ -26,15 +26,12 @@ $(document).ready(function()
     // On applique un style pour mettre en valeur l'élément puis on le fait disparaitre au bout de 5 secondes
     if (id != null)
     {
-      $('#' + id).css('box-shadow', '0 3px 10px #262626');
-      $('#bas_' + id).css('box-shadow', '0 3px 10px #262626');
+      $('#zone_shadow_' + id).css('box-shadow', '0 3px 10px #262626');
 
       setTimeout(function()
       {
-        $('#' + id).css('box-shadow', 'none');
-        $('#' + id).css({transition : "box-shadow ease 0.2s"});
-        $('#bas_' + id).css('box-shadow', 'none');
-        $('#bas_' + id).css({transition : "box-shadow ease 0.2s"});
+        $('#zone_shadow_' + id).css('box-shadow', 'none');
+        $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
       }, 5000);
     }
   });

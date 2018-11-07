@@ -76,9 +76,11 @@
   }
 
   // METIER : Insertion d'une idée
-  // RETOUR : Aucun
+  // RETOUR : Id enregistrement créé
   function insertIdea($post, $user)
   {
+    $new_id     = NULL;
+
     // Récupération des données
     $subject    = $post['subject_idea'];
     $date       = date("Ymd");
@@ -121,6 +123,8 @@
     insertNotification($user, 'idee', $new_id);
 
     $_SESSION['alerts']['idea_submitted'] = true;
+
+    return $new_id;
   }
 
   // METIER : Mise à jour du statut d'une idée

@@ -32,7 +32,7 @@
 
     case 'doSignaler':
       // Insertion des données par le modèle
-      insertBug($_POST);
+      $new_id = insertBug($_POST);
       break;
 
     case 'goSignaler':
@@ -73,7 +73,7 @@
   switch ($_GET['action'])
   {
     case 'doSignaler':
-      header('location: bugs.php?view=unresolved&action=goConsulter');
+      header('location: bugs.php?view=unresolved&action=goConsulter&anchor=' . $new_id);
       break;
 
     case 'goConsulter':

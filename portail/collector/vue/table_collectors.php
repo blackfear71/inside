@@ -10,159 +10,161 @@
         /* Visualisation normale (sans modification) */
         /*********************************************/
         echo '<div class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
-          if ($collector->getNb_votes() >= $min_golden)
-            echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';
-          else
-            echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
+          echo '<div class="zone_shadow" id="zone_shadow_' . $collector->getId() . '">';
+            if ($collector->getNb_votes() >= $min_golden)
+              echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';
+            else
+              echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
 
-            // Modification
-            echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
+              // Modification
+              echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
 
-            // Suppression
-            if ($collector->getType_collector() == "T")
-            {
-              echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector" />';
-              echo '</form>';
-            }
-            elseif ($collector->getType_collector() == "I")
-            {
-              echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette image ?\')) return false;">';
-                echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector" />';
-              echo '</form>';
-            }
-
-            // Avatar
-            echo '<div class="zone_avatar_collector">';
-              if (!empty($collector->getAvatar_s()))
-                echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
-            echo '</div>';
-
-            // Vote
-            echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" name="vote_user" class="link_current_vote">';
-              $founded = false;
-
-              foreach ($listeVotesUsers as $vote)
+              // Suppression
+              if ($collector->getType_collector() == "T")
               {
-                if ($vote->getId_collector() == $collector->getId())
-                {
-                  echo '<img src="../../includes/icons/common/smileys/' . $vote->getVote() . '.png" alt="smiley" class="current_vote" />';
-                  $founded = true;
-                  break;
-                }
+                echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
+                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector" />';
+                echo '</form>';
+              }
+              elseif ($collector->getType_collector() == "I")
+              {
+                echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette image ?\')) return false;">';
+                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector" />';
+                echo '</form>';
               }
 
-              if ($founded == false)
-                echo '<img src="../../includes/icons/common/smileys/0.png" alt="smiley" class="current_vote" />';
-            echo '</a>';
+              // Avatar
+              echo '<div class="zone_avatar_collector">';
+                if (!empty($collector->getAvatar_s()))
+                  echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+                else
+                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+              echo '</div>';
 
-            // Formulaire vote
-            echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
-              // Gestion smiley par défaut
-              $no_vote = true;
-              foreach ($listeVotesUsers as $vote)
-              {
-                if ($vote->getId_collector() == $collector->getId() AND !empty($vote->getVote()))
-                  $no_vote = false;
-              }
-
-              if ($no_vote == true)
-                echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 30px; width: 30px; height: 30px;" />';
-              else
-                echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
-
-              // Gestion autres smileys
-              for ($j = 1; $j <= 8; $j++)
-              {
+              // Vote
+              echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" name="vote_user" class="link_current_vote">';
                 $founded = false;
+
                 foreach ($listeVotesUsers as $vote)
                 {
-                  if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
+                  if ($vote->getId_collector() == $collector->getId())
                   {
-                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" style="background-size: 30px; width: 30px; height: 30px;" />';
+                    echo '<img src="../../includes/icons/common/smileys/' . $vote->getVote() . '.png" alt="smiley" class="current_vote" />';
                     $founded = true;
+                    break;
                   }
                 }
 
                 if ($founded == false)
-                  echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" />';
-              }
-            echo '</form>';
+                  echo '<img src="../../includes/icons/common/smileys/0.png" alt="smiley" class="current_vote" />';
+              echo '</a>';
 
-            // Pseudo & date
-            echo '<div class="pseudo">';
-              echo $collector->getName_s();
-              echo '<br />';
-              echo formatDateForDisplay($collector->getDate_collector());
-            echo '</div>';
-          echo '</div>';
-
-          echo '<div class="zone_collector_bas" id="bas_' . $collector->getId() . '">';
-            if (!empty($collector->getCollector()))
-            {
-              if ($collector->getType_collector() == "T")
-              {
-                // Apostrophe gauche
-                echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
-
-                // Citation
-                echo '<div class="text_collector">' . nl2br(formatCollector($collector->getCollector())) . '</div>';
-
-                // Apostrophe droite
-                echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
-              }
-              elseif ($collector->getType_collector() == "I")
-              {
-                // Image
-                echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
-              }
-
-              // Rapporteur
-              echo '<div class="author_collector">Par ' . $collector->getName_a() . '.</div>';
-            }
-
-            // Contexte
-            if (!empty($collector->getContext()))
-            {
-              if ($collector->getNb_votes() >= $min_golden)
-                echo '<div class="text_context_golden">' . nl2br(formatContext($collector->getContext())) . '</div>';
-              else
-                echo '<div class="text_context">' . nl2br(formatContext($collector->getContext())) . '</div>';
-            }
-
-            // Votes tous utilisateurs
-            if ($listeVotes != null)
-            {
-              echo '<div class="zone_votes_users">';
-                foreach ($listeVotes as $votes)
+              // Formulaire vote
+              echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
+                // Gestion smiley par défaut
+                $no_vote = true;
+                foreach ($listeVotesUsers as $vote)
                 {
-                  if ($votes['id'] == $collector->getId())
+                  if ($vote->getId_collector() == $collector->getId() AND !empty($vote->getVote()))
+                    $no_vote = false;
+                }
+
+                if ($no_vote == true)
+                  echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 30px; width: 30px; height: 30px;" />';
+                else
+                  echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
+
+                // Gestion autres smileys
+                for ($j = 1; $j <= 8; $j++)
+                {
+                  $founded = false;
+                  foreach ($listeVotesUsers as $vote)
                   {
-                    for ($k = 1; $k <= 8; $k++)
+                    if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
                     {
-                      if ($votes['smileys'][$k] != 0)
+                      echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" style="background-size: 30px; width: 30px; height: 30px;" />';
+                      $founded = true;
+                    }
+                  }
+
+                  if ($founded == false)
+                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" />';
+                }
+              echo '</form>';
+
+              // Pseudo & date
+              echo '<div class="pseudo">';
+                echo $collector->getName_s();
+                echo '<br />';
+                echo formatDateForDisplay($collector->getDate_collector());
+              echo '</div>';
+            echo '</div>';
+
+            echo '<div class="zone_collector_bas">';
+              if (!empty($collector->getCollector()))
+              {
+                if ($collector->getType_collector() == "T")
+                {
+                  // Apostrophe gauche
+                  echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
+
+                  // Citation
+                  echo '<div class="text_collector">' . nl2br(formatCollector($collector->getCollector())) . '</div>';
+
+                  // Apostrophe droite
+                  echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
+                }
+                elseif ($collector->getType_collector() == "I")
+                {
+                  // Image
+                  echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
+                }
+
+                // Rapporteur
+                echo '<div class="author_collector">Par ' . $collector->getName_a() . '.</div>';
+              }
+
+              // Contexte
+              if (!empty($collector->getContext()))
+              {
+                if ($collector->getNb_votes() >= $min_golden)
+                  echo '<div class="text_context_golden">' . nl2br(formatContext($collector->getContext())) . '</div>';
+                else
+                  echo '<div class="text_context">' . nl2br(formatContext($collector->getContext())) . '</div>';
+              }
+
+              // Votes tous utilisateurs
+              if ($listeVotes != null)
+              {
+                echo '<div class="zone_votes_users">';
+                  foreach ($listeVotes as $votes)
+                  {
+                    if ($votes['id'] == $collector->getId())
+                    {
+                      for ($k = 1; $k <= 8; $k++)
                       {
-                        // Smileys
-                        echo '<img src="../../includes/icons/common/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
-
-                        // Pseudos
-                        $listeUsersSmiley = '';
-                        foreach ($votes['identifiants'][$k] as $identifiants)
+                        if ($votes['smileys'][$k] != 0)
                         {
-                          $listeUsersSmiley .= $identifiants['pseudo'] . ', ';
-                        }
+                          // Smileys
+                          echo '<img src="../../includes/icons/common/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
 
-                        echo '<span class="noms_votes_' . $k . '">';
-                          echo substr($listeUsersSmiley, 0, -2);
-                        echo '</span>';
+                          // Pseudos
+                          $listeUsersSmiley = '';
+                          foreach ($votes['identifiants'][$k] as $identifiants)
+                          {
+                            $listeUsersSmiley .= $identifiants['pseudo'] . ', ';
+                          }
+
+                          echo '<span class="noms_votes_' . $k . '">';
+                            echo substr($listeUsersSmiley, 0, -2);
+                          echo '</span>';
+                        }
                       }
                     }
                   }
-                }
-              echo '</div>';
-            }
+                echo '</div>';
+              }
+            echo '</div>';
           echo '</div>';
         echo '</div>';
 
