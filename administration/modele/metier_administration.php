@@ -6,7 +6,7 @@
   include_once('../includes/classes/profile.php');
   include_once('../includes/classes/success.php');
   include_once('../includes/classes/missions.php');
-  include_once('../includes/imagethumb.php');
+  include_once('../includes/libraries/imagethumb.php');
 
   // METIER : Contrôle alertes utilisateurs
   // RETOUR : Booléen

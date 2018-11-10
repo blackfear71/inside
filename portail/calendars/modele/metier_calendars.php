@@ -2,7 +2,7 @@
   include_once('../../includes/appel_bdd.php');
   include_once('../../includes/classes/calendars.php');
   include_once('../../includes/classes/profile.php');
-  include_once('../../includes/imagethumb.php');
+  include_once('../../includes/libraries/imagethumb.php');
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen

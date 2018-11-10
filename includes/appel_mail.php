@@ -1,5 +1,5 @@
 <?php
-  require('phpmailer/class.phpmailer.php');
+  require('libraries/phpmailer/class.phpmailer.php');
 
   $mail             = new PHPMailer();
   $mail->Host       = 'smtp.gmail.com';
