@@ -8,6 +8,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: -20px;
 	opacity: 0;
 	transition: opacity 0.2s;
 }
@@ -75,7 +76,7 @@
 /*** Messages missions ***/
 .zone_resume_mission
 {
-	margin-top: 10px;
+	margin-top: 30px;
 	line-height: 30px;
 	text-align: center;
 }

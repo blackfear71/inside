@@ -472,6 +472,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: -30px;
 	opacity: 0;
 	transition: opacity 0.2s;
 }
@@ -486,7 +487,7 @@
 	display: block;
 	vertical-align: top;
 	text-align: center;
-	margin-top: 15px;
+	margin-bottom: 30px;
 	width: 140px;
 	background-color: #b3b3b3;
 	padding: 10px;
@@ -556,6 +557,7 @@
 	color: #262626;
 	text-align: left;
 	margin-top: 20px;
+	margin-bottom: 15px;
 }
 
 .name_lvl
