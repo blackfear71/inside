@@ -52,13 +52,13 @@
 <?php } ?>
 
 <?php if (isset($masonry_head) AND $masonry_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/libraries/masonry.pkgd.js"></script>
+  <script type="text/javascript" src="/inside/includes/libraries/js/masonry.pkgd.js"></script>
 <?php } ?>
 
 <?php if (isset($image_loaded_head) AND $image_loaded_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/libraries/imagesloaded.pkgd.js"></script>
+  <script type="text/javascript" src="/inside/includes/libraries/js/imagesloaded.pkgd.js"></script>
 <?php } ?>
 
 <?php if (isset($exif_head) AND $exif_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/libraries/exif.js"></script>
+  <script type="text/javascript" src="/inside/includes/libraries/js/exif.js"></script>
 <?php } ?>
