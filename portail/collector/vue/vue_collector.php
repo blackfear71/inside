@@ -3,13 +3,12 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head        = "CO";
-      $style_head        = "styleCO.css";
-      $script_head       = "scriptCO.js";
-      $chat_head         = true;
-      $masonry_head      = true;
-      $image_loaded_head = true;
-      $exif_head         = true;
+      $title_head   = "CO";
+      $style_head   = "styleCO.css";
+      $script_head  = "scriptCO.js";
+      $chat_head    = true;
+      $masonry_head = true;
+      $exif_head    = true;
 
       include('../../includes/common/head.php');
     ?>

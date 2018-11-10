@@ -465,16 +465,27 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
+}
+
+.zone_niveau_succes
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_niveau_succes.masonry
+{
+	opacity: 1;
 }
 
 .succes_liste
 {
-	display: inline-block;
+	display: block;
 	vertical-align: top;
 	text-align: center;
-	margin-left: 15px;
-	margin-right: 15px;
 	margin-top: 15px;
 	width: 140px;
 	background-color: #b3b3b3;

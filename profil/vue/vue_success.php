@@ -18,12 +18,15 @@
   $lvl = 0;
 
   echo '<div class="zone_succes_profil">';
-    foreach ($listeSuccess as $success)
+    foreach ($listeSuccess as $keySuccess => $success)
     {
       if ($success->getLevel() != $lvl)
       {
         echo formatTitleLvl($success->getLevel());
         $lvl = $success->getLevel();
+
+        // Définit une zone pour appliquer la Masonry
+        echo '<div class="zone_niveau_succes">';
       }
 
       if (isset($successUser[$success->getId()]))
@@ -91,6 +94,12 @@
 
           // Titre succès
           echo '<div class="titre_succes">Succès non défini</div>';
+        echo '</div>';
+      }
+
+      if (!isset($listeSuccess[$keySuccess + 1]) OR $success->getLevel() != $listeSuccess[$keySuccess + 1]->getLevel())
+      {
+        // Termine la zone Masonry du niveau
         echo '</div>';
       }
     }

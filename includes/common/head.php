@@ -53,9 +53,6 @@
 
 <?php if (isset($masonry_head) AND $masonry_head == true) { ?>
   <script type="text/javascript" src="/inside/includes/libraries/js/masonry.pkgd.js"></script>
-<?php } ?>
-
-<?php if (isset($image_loaded_head) AND $image_loaded_head == true) { ?>
   <script type="text/javascript" src="/inside/includes/libraries/js/imagesloaded.pkgd.js"></script>
 <?php } ?>
 

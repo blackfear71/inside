@@ -3,11 +3,10 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head        = "Bugs";
-      $style_head        = "styleAdmin.css";
-      $script_head       = "scriptAdmin.js";
-      $masonry_head      = true;
-      $image_loaded_head = true;
+      $title_head   = "Bugs";
+      $style_head   = "styleAdmin.css";
+      $script_head  = "scriptAdmin.js";
+      $masonry_head = true;
 
       include('../includes/common/head.php');
     ?>

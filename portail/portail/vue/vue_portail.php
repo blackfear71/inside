@@ -3,10 +3,11 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "Portail";
-      $style_head  = "stylePortail.css";
-      $script_head = "";
-      $chat_head   = true;
+      $title_head   = "Portail";
+      $style_head   = "stylePortail.css";
+      $script_head  = "scriptPortail.js";
+      $chat_head    = true;
+      $masonry_head = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -99,7 +100,6 @@
                 echo '<div class="fond_lien_portail">';
                   echo '<img src="' . $categorie['image'] . '" alt="' . $categorie['alt'] . '" class="img_lien_portail" />';
                 echo '</div>';
-
               echo '</a>';
             }
 					echo '</div>';

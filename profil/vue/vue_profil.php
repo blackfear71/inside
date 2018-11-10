@@ -3,10 +3,11 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "Profil";
-      $style_head  = "styleProfil.css";
-      $script_head = "scriptProfil.js";
-      $chat_head   = true;
+      $title_head   = "Profil";
+      $style_head   = "styleProfil.css";
+      $script_head  = "scriptProfil.js";
+      $chat_head    = true;
+      $masonry_head = true;
 
       include('../includes/common/head.php');
     ?>
