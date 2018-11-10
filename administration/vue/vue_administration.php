@@ -7,7 +7,7 @@
       $style_head  = "styleAdmin.css";
       $script_head = "";
 
-      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+      include('../includes/common/head.php');
     ?>
   </head>
 
@@ -16,7 +16,7 @@
       <?php
         $title = "Administration";
 
-        include('../includes/header.php');
+        include('../includes/common/header.php');
       ?>
 		</header>
 
@@ -26,7 +26,7 @@
 				<?php
 					$disconnect = true;
 
-					include('../includes/aside.php');
+					include('../includes/common/aside.php');
 				?>
 			</aside>
 
@@ -159,7 +159,7 @@
 						</div>
 					</a>
 
-					<form method="post" action="export_bdd.php" class="menu_link_admin">
+					<form method="post" action="../includes/functions/export_bdd.php" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -175,7 +175,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/footer.php'); ?>
+			<?php include('../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

@@ -8,7 +8,7 @@
       $script_head = "scriptBugs.js";
       $chat_head   = true;
 
-      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -17,7 +17,7 @@
       <?php
         $title = "Demandes d'évolution";
 
-        include('../../includes/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -29,13 +29,13 @@
 					$back        = true;
 					$ideas       = true;
 
-					include('../../includes/aside.php');
+					include('../../includes/common/aside.php');
 				?>
 			</aside>
 
 			<!-- Messages d'alerte -->
 			<?php
-				include('../../includes/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -113,7 +113,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../../includes/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

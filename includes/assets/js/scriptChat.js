@@ -400,7 +400,7 @@ $(window).load(function()
     //console.log('refresh_users');
 
     // Lecture des utilisateurs et du statut de connexion
-    $.post('/inside/includes/ping.php', {function: 'getPings'}, function(users)
+    $.post('/inside/includes/functions/ping.php', {function: 'getPings'}, function(users)
     {
       $('#utilisateurs_chat').html('');
       var offline = false;

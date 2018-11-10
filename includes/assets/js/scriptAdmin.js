@@ -8,6 +8,18 @@ $(document).ready(function()
   // Scroll vers l'id
   scrollToId(id, offset);
 
+  // On applique un style pour mettre en valeur l'élément puis on le fait disparaitre au bout de 5 secondes
+  if (id != null)
+  {
+    $('#zone_shadow_' + id).css('box-shadow', '0 3px 10px #262626');
+
+    setTimeout(function()
+    {
+      $('#zone_shadow_' + id).css('box-shadow', 'none');
+      $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
+    }, 5000);
+  }
+
   // On lance Masonry après avoir chargé les images
   $('.zone_themes').imagesLoaded(function()
   {

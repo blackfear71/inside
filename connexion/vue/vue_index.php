@@ -7,7 +7,7 @@
       $style_head  = "styleIndex.css";
       $script_head = "scriptIndex.js";
 
-      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+      include('includes/common/head.php');
     ?>
   </head>
 
@@ -15,7 +15,7 @@
     <section class="section_index">
       <!-- Messages d'alerte -->
       <?php
-        include('includes/alerts.php');
+        include('includes/common/alerts.php');
       ?>
 
       <article class="article_index">

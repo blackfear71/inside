@@ -4,9 +4,9 @@
     session_start();
 
   // Fonctions communes
-  include_once('../includes/appel_bdd.php');
-  include_once('../includes/fonctions_communes.php');
-  include_once('../includes/fonctions_dates.php');
+  include_once('../includes/functions/appel_bdd.php');
+  include_once('../includes/functions/fonctions_communes.php');
+  include_once('../includes/functions/fonctions_dates.php');
   include_once('fonctions_cron.php');
 
   /*** Traitements journaliers (tous les jours à 7h)***/

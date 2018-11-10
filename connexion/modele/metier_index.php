@@ -1,5 +1,5 @@
 <?php
-  include_once('includes/appel_bdd.php');
+  include_once('includes/functions/appel_bdd.php');
   include_once('includes/classes/missions.php');
 
   // METIER : Connexion utilisateur

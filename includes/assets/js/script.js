@@ -169,7 +169,7 @@ $(function()
 
   function updatePing()
   {
-    $.post('/inside/includes/ping.php', {function: 'updatePing'});
+    $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
   }
 });
 

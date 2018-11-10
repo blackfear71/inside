@@ -8,7 +8,7 @@
       $script_head = "";
       $chat_head   = true;
 
-      include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -17,7 +17,7 @@
       <?php
         $title = "Portail";
 
-        include('../../includes/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -29,7 +29,7 @@
 					$ideas       = true;
 					$reports     = true;
 
-					include('../../includes/aside.php');
+					include('../../includes/common/aside.php');
 				?>
 			</aside>
 
@@ -114,7 +114,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../../includes/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

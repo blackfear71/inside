@@ -1,5 +1,5 @@
 <?php
-  include_once('../includes/appel_bdd.php');
+  include_once('../includes/functions/appel_bdd.php');
   include_once('../includes/classes/movies.php');
   include_once('../includes/classes/calendars.php');
   include_once('../includes/classes/bugs.php');

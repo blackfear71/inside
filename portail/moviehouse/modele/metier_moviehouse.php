@@ -1,8 +1,9 @@
 <?php
-  include_once('../../includes/appel_bdd.php');
+  include_once('../../includes/functions/appel_bdd.php');
+  include_once('../../includes/functions/appel_mail.php');
+  include_once('../../includes/functions/modeles_mails.php');
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
-  include_once('../../includes/modeles_mails.php');
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
@@ -1443,8 +1444,6 @@
       {
         if (!empty($participant->getEmail()))
         {
-          include_once('../../includes/appel_mail.php');
-
           // Destinataire
           $mail->clearAddresses();
           $mail->AddAddress($participant->getEmail(), $participant->getPseudo());

@@ -86,6 +86,6 @@
 
 		// Boutons missions
 		$zone_inside = "nav";
-		include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
+		include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 	echo '</nav>';
 ?>

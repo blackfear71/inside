@@ -4,7 +4,7 @@
 
   // Boutons missions
   $zone_inside = "footer";
-  include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
+  include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
   // Chargement thème
   if ($_SESSION['user']['identifiant'] != "admin" AND !empty($_SESSION['theme']))

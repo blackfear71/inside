@@ -1,7 +1,7 @@
 <?php
   // Fonction communes
-  include_once('../includes/fonctions_communes.php');
-  include_once('../includes/fonctions_dates.php');
+  include_once('../includes/functions/fonctions_communes.php');
+  include_once('../includes/functions/fonctions_dates.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();

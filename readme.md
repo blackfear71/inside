@@ -22,7 +22,6 @@ Ne pas toucher aux fichiers suivants lors de vos développements :
 - appel_bdd.php
 - appel_mail.php
 - export_bdd.php
-- content_chat.xml
 
 Si des différences sont constatées, veuillez les annuler.
 

@@ -176,5 +176,5 @@
 
 	// Boutons missions
 	$zone_inside = "aside";
-	include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/missions.php');
+	include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 ?>

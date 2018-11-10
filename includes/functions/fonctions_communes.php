@@ -588,7 +588,7 @@
   function rotateImage($image, $type)
   {
     $degrees = 0;
-    
+
     // Récupération des données EXIF
     $exif = exif_read_data($image);
 
