@@ -74,6 +74,38 @@ $(document).ready(function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_infos').addClass('masonry');
   });
+
+  // On lance Masonry après avoir chargé les images (Succès)
+  $('.zone_niveau_succes_admin').imagesLoaded(function()
+  {
+    $('.zone_niveau_succes_admin').masonry({
+      // Options
+      itemSelector: '.ensemble_succes',
+      columnWidth: 180,
+      fitWidth: true,
+      gutter: 10,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_niveau_succes_admin').addClass('masonry');
+  });
+
+  // On lance Masonry après avoir chargé les images (Modification succès)
+  $('.zone_niveau_mod_succes_admin').imagesLoaded(function()
+  {
+    $('.zone_niveau_mod_succes_admin').masonry({
+      // Options
+      itemSelector: '.succes_liste_mod',
+      columnWidth: 320,
+      fitWidth: true,
+      gutter: 25,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_niveau_mod_succes_admin').addClass('masonry');
+  });
 });
 
 // Initialisation manuelle de "Masonry"

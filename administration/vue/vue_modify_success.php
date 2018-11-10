@@ -3,9 +3,10 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "Succès";
-      $style_head  = "styleAdmin.css";
-      $script_head = "";
+      $title_head   = "Succès";
+      $style_head   = "styleAdmin.css";
+      $script_head  = "scriptAdmin.js";
+      $masonry_head = true;
 
       include('../includes/common/head.php');
     ?>
@@ -46,12 +47,15 @@
           $lvl = 0;
 
           echo '<form method="post" action="manage_success.php?action=doModifier" class="zone_succes_admin">';
-            foreach ($listeSuccess as $success)
+            foreach ($listeSuccess as $keySuccess => $success)
             {
               if ($success->getLevel() != $lvl)
               {
                 echo formatTitleLvl($success->getLevel());
                 $lvl = $success->getLevel();
+
+                // Définit une zone pour appliquer la Masonry
+                echo '<div class="zone_niveau_mod_succes_admin">';
               }
 
               echo '<div class="succes_liste_mod">';
@@ -94,6 +98,12 @@
                   echo '<textarea name="explanation[' . $success->getId() . ']" class="textarea_modification_succes_2">' . $success->getExplanation() . '</textarea>';
                 echo '</div>';
               echo '</div>';
+
+              if (!isset($listeSuccess[$keySuccess + 1]) OR $success->getLevel() != $listeSuccess[$keySuccess + 1]->getLevel())
+              {
+                // Termine la zone Masonry du niveau
+                echo '</div>';
+              }
             }
 
             echo '<input type="submit" value="Mettre à jour les succès" class="bouton_modification_succes" />';

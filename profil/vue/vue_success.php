@@ -1,7 +1,7 @@
 <?php
   // Notes explicatives succès
   /*
-    Les succès sont stockés dans la table "success" de la base. Ils ont tous d'abord lus afin de récupérer la liste.
+    Les succès sont stockés dans la table "success" de la base. Ils sont tout d'abord lus afin de récupérer la liste.
     Ils sont composés d'une référence (non modifiable), d'un indicateur d'ordonnancement (modifiable), d'un titre (modifiable),
     d'une description (modifiable) et d'une limite (modifiable). La référence est non modifiable pour pouvoir être reliée à la
     recherche associée, l'ordonnancement permet lui de réorganiser l'ordre des succès en cas de nouvel ajout ou de modification.

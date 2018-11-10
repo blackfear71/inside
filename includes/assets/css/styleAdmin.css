@@ -851,23 +851,34 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
 }
 
 .ensemble_succes
 {
-	display: inline-block;
-	vertical-align: top;
-	margin-right: 5px;
-	margin-left: 5px;
+	margin-bottom: 25px;
+	padding-right: 20px;
+}
+
+.zone_niveau_succes_admin
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -25px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_niveau_succes_admin.masonry
+{
+	opacity: 1;
 }
 
 .succes_liste
 {
-	display: inline-block;
+	display: block;
 	vertical-align: top;
 	text-align: center;
-	margin: 1%;
 	width: 140px;
 	background-color: #ffad01;
 	padding: 10px;
@@ -945,16 +956,31 @@
 	font-family: robotolight, Verdana, sans-serif;
 }
 
+.zone_niveau_mod_succes_admin
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -25px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_niveau_mod_succes_admin.masonry
+{
+	opacity: 1;
+}
+
 .succes_liste_mod
 {
-	display: inline-block;
+	display: block;
 	vertical-align: top;
 	text-align: center;
-	margin: 1%;
 	width: 300px;
 	background-color: #ffad01;
 	padding: 10px;
 	border-radius: 5px;
+	margin-bottom: 25px;
 }
 
 .succes_mod_left
@@ -981,10 +1007,8 @@
 .form_suppression_succes
 {
 	float: right;
-	margin-right: -8px;
-	margin-left: 8px;
-	margin-top: 50px;
-	margin-bottom: -70px;
+	margin-right: -20px;
+	margin-top: 40px;
 }
 
 .bouton_delete
@@ -1016,6 +1040,7 @@
 	color: #262626;
 	text-align: left;
 	margin-top: 20px;
+	margin-bottom: 15px;
 }
 
 .name_lvl
@@ -1085,7 +1110,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	height: 40px;
-	margin-top: 1.5%;
+	margin-top: 30px;
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
