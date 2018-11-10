@@ -20,7 +20,7 @@ $(document).ready(function()
     }, 5000);
   }
 
-  // On lance Masonry après avoir chargé les images
+  // On lance Masonry après avoir chargé les images (Thèmes)
   $('.zone_themes').imagesLoaded(function()
   {
     $('.zone_themes').masonry({
@@ -41,6 +41,38 @@ $(document).ready(function()
 
     // Scroll vers l'id
     scrollToId(id, offset);
+  });
+
+  // On lance Masonry après avoir chargé les zones (Portail)
+  $('.menu_admin').ready(function()
+  {
+    $('.menu_admin').masonry({
+      // Options
+      itemSelector: '.menu_link_admin',
+      columnWidth: 300,
+      fitWidth: true,
+      gutter: 15,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.menu_admin').addClass('masonry');
+  });
+
+  // On lance Masonry après avoir chargé les images (Infos utilisateurs)
+  $('.zone_infos').imagesLoaded(function()
+  {
+    $('.zone_infos').masonry({
+      // Options
+      itemSelector: '.zone_infos_user',
+      columnWidth: 300,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_infos').addClass('masonry');
   });
 });
 

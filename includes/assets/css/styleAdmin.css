@@ -7,8 +7,15 @@
 {
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
 	width: 100%;
+	margin-bottom: -15px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.menu_admin.masonry
+{
+	opacity: 1;
 }
 
 .menu_admin_box
@@ -44,13 +51,10 @@
 .menu_link_admin
 {
 	text-decoration: none;
-	display: inline-block;
+	display: block;
 	height: 200px;
 	width: 300px;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 6px;
-	margin-bottom: 6px;
+	margin-bottom: 15px;
 }
 
 .title_admin
@@ -97,15 +101,22 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
+	margin-bottom: -15px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_infos.masonry
+{
+	opacity: 1;
 }
 
 .zone_infos_user
 {
 	background-color: #e3e3e3;
-	display: inline-block;
+	display: block;
 	width: 280px;
-	margin: 0.5%;
+	margin-bottom: 15px;
 	padding: 10px;
 	border-radius: 5px;
 	border: solid 1px #d3d3d3;
