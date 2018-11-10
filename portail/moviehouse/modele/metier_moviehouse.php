@@ -1,6 +1,5 @@
 <?php
   include_once('../../includes/functions/appel_bdd.php');
-  include_once('../../includes/functions/appel_mail.php');
   include_once('../../includes/functions/modeles_mails.php');
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
@@ -1444,6 +1443,8 @@
       {
         if (!empty($participant->getEmail()))
         {
+          include_once('../../includes/functions/appel_mail.php');
+          
           // Destinataire
           $mail->clearAddresses();
           $mail->AddAddress($participant->getEmail(), $participant->getPseudo());
