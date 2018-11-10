@@ -590,7 +590,7 @@
 	min-height: 60px;
 }
 
-.ranking_line .level_succes, .title_ranking_line .level_succes
+.title_ranking_line .level_succes
 {
 	width: 100%;
 	font-family: robotoregular, Verdana, sans-serif;
@@ -604,6 +604,7 @@
 	text-align: center;
 	color: white;
 	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .ranking_line_left
