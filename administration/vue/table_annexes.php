@@ -1,7 +1,7 @@
 <?php
 	echo '<div class="title_gestion">Demandes de suppression des annexes</div>';
 
-	echo '<table class="table_manage_users">';
+	echo '<table class="table_manage_users" style="	margin-bottom: 0;">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
 			echo '<td rowspan="2" class="init_td_manage_users" style="width: 10%;">';

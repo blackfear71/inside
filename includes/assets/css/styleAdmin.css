@@ -213,7 +213,6 @@
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 30px;
 	font-family: robotothin, Verdana, sans-serif;
 	font-size: 120%;
 	text-align: center;
@@ -234,6 +233,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	background-color: white;
+	margin-bottom: 30px;
 }
 
 .table_manage_users td
@@ -437,6 +437,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .zone_autorisations
