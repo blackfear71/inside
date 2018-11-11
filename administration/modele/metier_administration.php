@@ -1,11 +1,12 @@
 <?php
   include_once('../includes/functions/appel_bdd.php');
-  include_once('../includes/classes/movies.php');
-  include_once('../includes/classes/calendars.php');
+  include_once('../includes/classes/alerts.php');
   include_once('../includes/classes/bugs.php');
+  include_once('../includes/classes/calendars.php');
+  include_once('../includes/classes/missions.php');
+  include_once('../includes/classes/movies.php');
   include_once('../includes/classes/profile.php');
   include_once('../includes/classes/success.php');
-  include_once('../includes/classes/missions.php');
   include_once('../includes/libraries/php/imagethumb.php');
 
   // METIER : Contrôle alertes utilisateurs
@@ -2970,5 +2971,26 @@
     $reponse->closeCursor();
 
     return $conflict;
+  }
+
+  // METIER : Liste des messages d'alerte
+  // RETOUR : Messages d'alerte
+  function getAlerts()
+  {
+    $alerts = array();
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM alerts ORDER BY category ASC, type DESC, alert ASC');
+    while($donnees = $reponse->fetch())
+    {
+      $myAlert = Alerte::withData($donnees);
+
+      // On ajoute la ligne au tableau
+      array_push($alerts, $myAlert);
+    }
+    $reponse->closeCursor();
+
+    return $alerts;
   }
 ?>
