@@ -5,7 +5,7 @@ $(window).load(function()
   $('.zone_annexes').masonry({
     // Options
     itemSelector: '.zone_annexe',
-    columnWidth: 216,
+    columnWidth: 214,
     fitWidth: true,
     gutter: 20,
     horizontalOrder: true
