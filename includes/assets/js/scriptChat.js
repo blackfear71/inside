@@ -36,7 +36,7 @@ $(window).load(function()
     setTimeout(function()
     {
       initPositionChat();
-    }, 300);
+    }, 350);
   });
 
   // Afficher/masquer la fenêtre de chat au clic
