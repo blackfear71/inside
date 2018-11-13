@@ -1,6 +1,6 @@
 <?php
   // Zone de chat à intégrer
-  echo '<div id="zone_chat_position" class="zone_chat">';
+  echo '<div id="zone_chat_position" class="zone_chat" style="display: none;">';
     // Titre et repli
     echo '<div class="zone_titre_chat">';
       echo '<a id="onglet_chat" class="titre_onglet">';

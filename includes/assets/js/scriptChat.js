@@ -1,33 +1,30 @@
 $(window).load(function()
 {
-  $(window).imagesLoaded(function()
+  /***************************/
+  /***   Initialisations   ***/
+  /***************************/
+  initCookies();
+  var showChat   = initCookieChat();
+  var windowChat = initWindowChat();
+  var refresh_chat;
+  var refresh_users;
+  var intervalRefreshChat  = 4000;
+  var intervalRefreshUsers = 30000;
+
+  initPositionChat();
+  initView(showChat, windowChat);
+
+  // On lance le rafraichissement des messages toujours après l'affichage des zones
+  if (showChat == "true" && windowChat == "1")
   {
-    /***************************/
-    /***   Initialisations   ***/
-    /***************************/
-    initCookies();
-    var showChat   = initCookieChat();
-    var windowChat = initWindowChat();
-    var refresh_chat;
-    var refresh_users;
-    var intervalRefreshChat  = 4000;
-    var intervalRefreshUsers = 30000;
-
-    initPositionChat();
-    initView(showChat, windowChat);
-
-    // On lance le rafraichissement des messages toujours après l'affichage des zones
-    if (showChat == "true" && windowChat == "1")
-    {
-      refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
-      stopTimerRefresh(refresh_users);
-    }
-    else if ((showChat == "true" && windowChat == "2") || showChat == "false")
-    {
-      refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
-      stopTimerRefresh(refresh_chat);
-    }
-  });
+    refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
+    stopTimerRefresh(refresh_users);
+  }
+  else if ((showChat == "true" && windowChat == "2") || showChat == "false")
+  {
+    refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
+    stopTimerRefresh(refresh_chat);
+  }
 
   /*******************/
   /***   Actions   ***/
@@ -225,16 +222,26 @@ $(window).load(function()
   // Fonction initialisation position chat
   function initPositionChat()
   {
-    var total_height = $('body')[0].scrollHeight - $(window).height();
-    var difference   = $('footer').height() - (total_height - $(window).scrollTop());
+    setTimeout(function()
+    {
+      var total_height = $('body')[0].scrollHeight - $(window).height();
+      var difference   = $('footer').height() - (total_height - $(window).scrollTop());
 
-    console.log(total_height);
-    console.log(difference);
+      /*console.log("$('body')[0].scrollHeight = " + $('body')[0].scrollHeight);
+      console.log("$(window).height() = " + $(window).height());
+      console.log("total_height = " + total_height);
+      console.log("$('footer').height() = " + $('footer').height());
+      console.log("$(window).scrollTop() = " + $(window).scrollTop());
+      console.log("difference = " + difference);
+      console.log("----------------------");*/
 
-    if (difference > 0)
-      $('#zone_chat_position').css('bottom', difference + 'px');
-    else
-      $('#zone_chat_position').css('bottom', '0px');
+      $("#zone_chat_position").css('display', 'block');
+      
+      if (difference > 0)
+        $('#zone_chat_position').css('bottom', difference + 'px');
+      else
+        $('#zone_chat_position').css('bottom', '0px');
+    }, 350);
   }
 
   // Fonction mise à jour de la vue
