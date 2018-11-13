@@ -1,30 +1,33 @@
 $(window).load(function()
 {
-  /***************************/
-  /***   Initialisations   ***/
-  /***************************/
-  initCookies();
-  var showChat   = initCookieChat();
-  var windowChat = initWindowChat();
-  var refresh_chat;
-  var refresh_users;
-  var intervalRefreshChat  = 4000;
-  var intervalRefreshUsers = 30000;
-
-  initPositionChat();
-  initView(showChat, windowChat);
-
-  // On lance le rafraichissement des messages toujours après l'affichage des zones
-  if (showChat == "true" && windowChat == "1")
+  $(window).imagesLoaded(function()
   {
-    refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
-    stopTimerRefresh(refresh_users);
-  }
-  else if ((showChat == "true" && windowChat == "2") || showChat == "false")
-  {
-    refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
-    stopTimerRefresh(refresh_chat);
-  }
+    /***************************/
+    /***   Initialisations   ***/
+    /***************************/
+    initCookies();
+    var showChat   = initCookieChat();
+    var windowChat = initWindowChat();
+    var refresh_chat;
+    var refresh_users;
+    var intervalRefreshChat  = 4000;
+    var intervalRefreshUsers = 30000;
+
+    initPositionChat();
+    initView(showChat, windowChat);
+
+    // On lance le rafraichissement des messages toujours après l'affichage des zones
+    if (showChat == "true" && windowChat == "1")
+    {
+      refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
+      stopTimerRefresh(refresh_users);
+    }
+    else if ((showChat == "true" && windowChat == "2") || showChat == "false")
+    {
+      refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
+      stopTimerRefresh(refresh_chat);
+    }
+  });
 
   /*******************/
   /***   Actions   ***/
@@ -224,6 +227,9 @@ $(window).load(function()
   {
     var total_height = $('body')[0].scrollHeight - $(window).height();
     var difference   = $('footer').height() - (total_height - $(window).scrollTop());
+
+    console.log(total_height);
+    console.log(difference);
 
     if (difference > 0)
       $('#zone_chat_position').css('bottom', difference + 'px');
