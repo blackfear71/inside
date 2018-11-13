@@ -1,5 +1,5 @@
-// Au chargement du document
-$(document).ready(function()
+// Au chargement du document complet
+$(window).load(function()
 {
   // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
@@ -21,27 +21,24 @@ $(document).ready(function()
   }
 
   // On lance Masonry après avoir chargé les images (Thèmes)
-  $('.zone_themes').imagesLoaded(function()
-  {
-    $('.zone_themes').masonry({
-      // Options
-      itemSelector: '.zone_theme',
-      columnWidth: 500,
-      fitWidth: true,
-      gutter: 20,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_themes').addClass('masonry');
-
-    // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
-    var id     = $_GET('anchorTheme');
-    var offset = 30;
-
-    // Scroll vers l'id
-    scrollToId(id, offset);
+  $('.zone_themes').masonry({
+    // Options
+    itemSelector: '.zone_theme',
+    columnWidth: 500,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
   });
+
+  // On associe une classe pour y ajouter une transition dans le css
+  $('.zone_themes').addClass('masonry');
+
+  // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id_theme     = $_GET('anchorTheme');
+  var offset_theme = 30;
+
+  // Scroll vers l'id
+  scrollToId(id_theme, offset_theme);
 
   // On lance Masonry après avoir chargé les zones (Portail)
   $('.menu_admin').ready(function()
@@ -60,52 +57,43 @@ $(document).ready(function()
   });
 
   // On lance Masonry après avoir chargé les images (Infos utilisateurs)
-  $('.zone_infos').imagesLoaded(function()
-  {
-    $('.zone_infos').masonry({
-      // Options
-      itemSelector: '.zone_infos_user',
-      columnWidth: 300,
-      fitWidth: true,
-      gutter: 20,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_infos').addClass('masonry');
+  $('.zone_infos').masonry({
+    // Options
+    itemSelector: '.zone_infos_user',
+    columnWidth: 300,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
   });
+
+  // On associe une classe pour y ajouter une transition dans le css
+  $('.zone_infos').addClass('masonry');
 
   // On lance Masonry après avoir chargé les images (Succès)
-  $('.zone_niveau_succes_admin').imagesLoaded(function()
-  {
-    $('.zone_niveau_succes_admin').masonry({
-      // Options
-      itemSelector: '.ensemble_succes',
-      columnWidth: 180,
-      fitWidth: true,
-      gutter: 10,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_niveau_succes_admin').addClass('masonry');
+  $('.zone_niveau_succes_admin').masonry({
+    // Options
+    itemSelector: '.ensemble_succes',
+    columnWidth: 180,
+    fitWidth: true,
+    gutter: 10,
+    horizontalOrder: true
   });
+
+  // On associe une classe pour y ajouter une transition dans le css
+  $('.zone_niveau_succes_admin').addClass('masonry');
 
   // On lance Masonry après avoir chargé les images (Modification succès)
-  $('.zone_niveau_mod_succes_admin').imagesLoaded(function()
-  {
-    $('.zone_niveau_mod_succes_admin').masonry({
-      // Options
-      itemSelector: '.succes_liste_mod',
-      columnWidth: 320,
-      fitWidth: true,
-      gutter: 25,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_niveau_mod_succes_admin').addClass('masonry');
+  $('.zone_niveau_mod_succes_admin').masonry({
+    // Options
+    itemSelector: '.succes_liste_mod',
+    columnWidth: 320,
+    fitWidth: true,
+    gutter: 25,
+    horizontalOrder: true
   });
+
+  // On associe une classe pour y ajouter une transition dans le css
+  $('.zone_niveau_mod_succes_admin').addClass('masonry');
 });
 
 // Initialisation manuelle de "Masonry"

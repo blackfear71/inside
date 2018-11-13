@@ -31,7 +31,13 @@ $(window).load(function()
   /*******************/
   // Positionnement de la fenêtre de chat en fonction du scroll ou du redimensionnement de la fenêtre
   $(window).scroll(initPositionChat);
-  $(window).resize(initPositionChat);
+  $(window).resize(function()
+  {
+    setTimeout(function()
+    {
+      initPositionChat();
+    }, 300);
+  });
 
   // Afficher/masquer la fenêtre de chat au clic
   $('#hide_chat').click(function()
@@ -225,14 +231,13 @@ $(window).load(function()
     var total_height = $('body')[0].scrollHeight - $(window).height();
     var difference   = $('footer').height() - (total_height - $(window).scrollTop());
 
-    console.log("$('body')[0].scrollHeight = " + $('body')[0].scrollHeight);
+    /*console.log("$('body')[0].scrollHeight = " + $('body')[0].scrollHeight);
     console.log("$(window).height() = " + $(window).height());
     console.log("total_height = " + total_height);
     console.log("$('footer').height() = " + $('footer').height());
     console.log("$(window).scrollTop() = " + $(window).scrollTop());
     console.log("difference = " + difference);
-    console.log("----------------------");
-
+    console.log("----------------------");*/
     $("#zone_chat_position").css('display', 'block');
 
     if (difference > 0)

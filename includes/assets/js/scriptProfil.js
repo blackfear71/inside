@@ -1,21 +1,18 @@
-// Au chargement du document
-$(document).ready(function()
+// Au chargement du document complet
+$(window).load(function()
 {
   // On lance Masonry et le scroll après avoir chargé les images
-  $('.zone_niveau_succes').imagesLoaded(function()
-  {
-    $('.zone_niveau_succes').masonry({
-      // Options
-      itemSelector: '.succes_liste',
-      columnWidth: 160,
-      fitWidth: true,
-      gutter: 30,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_niveau_succes').addClass('masonry');
+  $('.zone_niveau_succes').masonry({
+    // Options
+    itemSelector: '.succes_liste',
+    columnWidth: 160,
+    fitWidth: true,
+    gutter: 30,
+    horizontalOrder: true
   });
+
+  // On associe une classe pour y ajouter une transition dans le css
+  $('.zone_niveau_succes').addClass('masonry');
 });
 
 // Insère une prévisualisation de l'image sur la page
