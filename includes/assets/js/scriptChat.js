@@ -222,26 +222,23 @@ $(window).load(function()
   // Fonction initialisation position chat
   function initPositionChat()
   {
-    setTimeout(function()
-    {
-      var total_height = $('body')[0].scrollHeight - $(window).height();
-      var difference   = $('footer').height() - (total_height - $(window).scrollTop());
+    var total_height = $('body')[0].scrollHeight - $(window).height();
+    var difference   = $('footer').height() - (total_height - $(window).scrollTop());
 
-      /*console.log("$('body')[0].scrollHeight = " + $('body')[0].scrollHeight);
-      console.log("$(window).height() = " + $(window).height());
-      console.log("total_height = " + total_height);
-      console.log("$('footer').height() = " + $('footer').height());
-      console.log("$(window).scrollTop() = " + $(window).scrollTop());
-      console.log("difference = " + difference);
-      console.log("----------------------");*/
+    console.log("$('body')[0].scrollHeight = " + $('body')[0].scrollHeight);
+    console.log("$(window).height() = " + $(window).height());
+    console.log("total_height = " + total_height);
+    console.log("$('footer').height() = " + $('footer').height());
+    console.log("$(window).scrollTop() = " + $(window).scrollTop());
+    console.log("difference = " + difference);
+    console.log("----------------------");
 
-      $("#zone_chat_position").css('display', 'block');
-      
-      if (difference > 0)
-        $('#zone_chat_position').css('bottom', difference + 'px');
-      else
-        $('#zone_chat_position').css('bottom', '0px');
-    }, 350);
+    $("#zone_chat_position").css('display', 'block');
+
+    if (difference > 0)
+      $('#zone_chat_position').css('bottom', difference + 'px');
+    else
+      $('#zone_chat_position').css('bottom', '0px');
   }
 
   // Fonction mise à jour de la vue
