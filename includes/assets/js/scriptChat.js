@@ -238,6 +238,7 @@ $(window).load(function()
     console.log("$(window).scrollTop() = " + $(window).scrollTop());
     console.log("difference = " + difference);
     console.log("----------------------");*/
+    
     $("#zone_chat_position").css('display', 'block');
 
     if (difference > 0)

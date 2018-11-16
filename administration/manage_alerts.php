@@ -8,6 +8,15 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
 
+  // Initialisation sauvegarde saisie alerte
+  if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
+  {
+    $_SESSION['save']['type_alert']      = "";
+    $_SESSION['save']['category_alert']  = "";
+    $_SESSION['save']['reference_alert'] = "";
+    $_SESSION['save']['message_alert']   = "";
+  }
+
   // Appel métier
   switch ($_GET['action'])
   {
@@ -16,16 +25,16 @@
       $listeAlertes = getAlerts();
       break;
 
-    case "doAjouterAlerte":
-      /*$new_id = insertAlert($_POST);*/
+    case "doAjouter":
+      $new_id = insertAlert($_POST);
       break;
 
-		case "doModifierAlerte":
-			/*updateAlert($_GET['update_id']);*/
+		case "doModifier":
+			updateAlert($_POST, $_GET['update_id']);
 			break;
 
-    case "doSupprimerAlerte":
-      /*deleteAlert($_GET['delete_id']);*/
+    case "doSupprimer":
+      deleteAlert($_GET['delete_id']);
       break;
 
     default:
@@ -59,15 +68,18 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAjouterAlerte":
-      header('location: manage_alerts.php?action=goConsulter&anchor=' . $new_id);
+    case "doAjouter":
+      if (!empty($new_id))
+        header('location: manage_alerts.php?action=goConsulter&anchor=' . $new_id);
+      else
+        header('location: manage_alerts.php?action=goConsulter');
       break;
 
-    case "doModifierAlerte":
+    case "doModifier":
       header('location: manage_alerts.php?action=goConsulter&anchor=' . $_GET['update_id']);
       break;
 
-    case "doSupprimerAlerte":
+    case "doSupprimer":
       header('location: manage_alerts.php?action=goConsulter');
       break;
 

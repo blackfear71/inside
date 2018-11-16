@@ -36,8 +36,8 @@
 			break;
 
     case "doModifier":
-      updateTheme($_POST, $_GET['modify_id']);
-      $new_id = $_GET['modify_id'];
+      updateTheme($_POST, $_GET['update_id']);
+      $new_id = $_GET['update_id'];
 			break;
 
 		case "doSupprimer":

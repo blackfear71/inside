@@ -74,7 +74,7 @@
 		// Modifier les détails
 		if ($modify_film == true)
 		{
-			echo '<a href="/inside/portail/moviehouse/saisie.php?modify_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
+			echo '<a href="/inside/portail/moviehouse/saisie.php?update_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
 			echo '</a>';
 		}

@@ -42,7 +42,7 @@
 						echo '<tr class="ligne_tableau_expense_center" id="modifier_depense_2[' . $ligneResume['id_expense'] . ']">';
 					else
 		      	echo '<tr class="ligne_tableau_expense_center_2" id="modifier_depense_2[' . $ligneResume['id_expense'] . ']">';
-						echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&id_delete=' . $ligneResume['id_expense'] . '&action=doSupprimer">';
+						echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&delete_id=' . $ligneResume['id_expense'] . '&action=doSupprimer">';
 							// Prix sur la 1ère colonne
 			        echo '<td class="table_price_expense_center" id=' . $ligneResume['id_expense'] . '>';
 			          echo $ligneResume['price'] . ' €';
@@ -101,7 +101,7 @@
 						echo '<tr class="ligne_tableau_expense_center" id="modifier_depense[' . $ligneResume['id_expense'] . ']" style="display: none;">';
 					else
 		      	echo '<tr class="ligne_tableau_expense_center_2" id="modifier_depense[' . $ligneResume['id_expense'] . ']" style="display: none;">';
-						echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&id_modify=' . $ligneResume['id_expense'] . '&action=doModifier" title="Valider la modification">';
+						echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&update_id=' . $ligneResume['id_expense'] . '&action=doModifier" title="Valider la modification">';
 							// Prix sur la 1ère colonne
 							echo '<td class="table_price_expense_center">';
 								echo '<input type="text" name="depense" value="' . $ligneResume['price'] . '" placeholder="Prix" maxlength="6" class="saisie_prix_2" required /> <span class="euro">€</span>';

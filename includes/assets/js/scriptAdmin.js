@@ -119,6 +119,17 @@ function afficherMasquer(id)
     document.getElementById(id).style.display = "none";
 }
 
+// Affiche ou masque les lignes de visualisation/modification du tableau
+function afficherMasquerRow(id)
+{
+  console.log(id);
+  
+  if (document.getElementById(id).style.display == "none")
+    document.getElementById(id).style.display = "table-row";
+  else
+    document.getElementById(id).style.display = "none";
+}
+
 // Rotation icône affichage log
 function rotateIcon(id)
 {

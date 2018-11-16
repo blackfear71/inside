@@ -47,19 +47,19 @@
 
     case "goModifier":
       // Contrôle si l'id est renseignée et numérique
-      if (!isset($_GET['modify_id']) OR !is_numeric($_GET['modify_id']))
+      if (!isset($_GET['update_id']) OR !is_numeric($_GET['update_id']))
         header('location: saisie.php?action=goAjouter');
 
       $initSaisie   = false;
-      $filmExistant = controlFilm($_GET['modify_id']);
+      $filmExistant = controlFilm($_GET['update_id']);
 
       if ($filmExistant == true)
       {
         if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true)
         OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
-          $film = initModErrFilm($_GET['modify_id']);
+          $film = initModErrFilm($_GET['update_id']);
         else
-          $film = initModFilm($_GET['modify_id']);
+          $film = initModFilm($_GET['update_id']);
       }
       break;
 
@@ -68,13 +68,13 @@
       break;
 
     case "doModifier":
-      modFilmAvance($_GET['modify_id'], $_POST, $_SESSION['user']['identifiant']);
+      modFilmAvance($_GET['update_id'], $_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:
       // Contrôle action renseignée URL
-      if (isset($_GET['modify_id']) AND is_numeric($_GET['modify_id']))
-        header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
+      if (isset($_GET['update_id']) AND is_numeric($_GET['update_id']))
+        header('location: saisie.php?update_id=' . $_GET['update_id'] . '&action=goModifier');
       else
         header('location: saisie.php?action=goAjouter');
       break;
@@ -134,9 +134,9 @@
     case "doModifier":
       if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true )
       OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
-        header('location: saisie.php?modify_id=' . $_GET['modify_id'] . '&action=goModifier');
+        header('location: saisie.php?update_id=' . $_GET['update_id'] . '&action=goModifier');
       else
-        header('location: details.php?id_film=' . $_GET['modify_id'] . '&action=goConsulter');
+        header('location: details.php?id_film=' . $_GET['update_id'] . '&action=goConsulter');
       break;
 
     case 'goAjouter':

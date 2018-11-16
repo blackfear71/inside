@@ -58,7 +58,7 @@
                 if ($initSaisie == true)
   								echo '<form method="post" action="saisie.php?action=doInserer" class="form_saisie_avancee">';
   							else
-                  echo '<form method="post" action="saisie.php?modify_id=' . $film->getId() . '&action=doModifier" class="form_saisie_avancee">';
+                  echo '<form method="post" action="saisie.php?update_id=' . $film->getId() . '&action=doModifier" class="form_saisie_avancee">';
 
                     echo '<div class="zone_saisie_avancee_infos">';
                       echo '<div class="sous_titre_saisie_avancee">';

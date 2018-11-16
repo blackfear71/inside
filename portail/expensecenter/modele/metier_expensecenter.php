@@ -329,7 +329,7 @@
 
   // METIER : Modification d'une dépense
   // RETOUR : Aucun
-  function updateExpense($id_modify, $post, $list_users)
+  function updateExpense($id_expense, $post, $list_users)
   {
     $price_new   = str_replace(',', '.', htmlspecialchars($post['depense']));
     $buyer_new   = $post['buyer_user'];
@@ -340,7 +340,7 @@
       global $bdd;
 
       // Lecture dépense (avant mise à jour)
-      $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_modify);
+      $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_expense);
       $data1 = $req1->fetch();
       $myOldExpense = Expenses::withData($data1);
       $req1->closeCursor();
@@ -413,7 +413,7 @@
       }
 
       // Mise à jour de la dépense
-      $req7 = $bdd->prepare('UPDATE expense_center SET price = :price, buyer = :buyer, comment = :comment WHERE id = ' . $id_modify);
+      $req7 = $bdd->prepare('UPDATE expense_center SET price = :price, buyer = :buyer, comment = :comment WHERE id = ' . $id_expense);
       $req7->execute(array(
         'price'   => $price_new,
         'buyer'   => $buyer_new,
@@ -465,7 +465,7 @@
       //var_dump($nb_parts_total_new);
 
       // Suppression de toutes les anciennes parts
-      $req10 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_modify);
+      $req10 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_expense);
 
       // Insertions des nouvelles parts & mise à jour du bilan pour chaque utilisateur
       foreach ($new_list_parts_users as $ligne)
@@ -506,12 +506,12 @@
 
   // METIER : Suppression d'une dépense
   // RETOUR : Aucun
-  function deleteExpense($id_delete)
+  function deleteExpense($id_expense)
   {
     global $bdd;
 
     // Lecture dépense
-    $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_delete);
+    $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_expense);
     $data1 = $req1->fetch();
     $myExpense = Expenses::withData($data1);
     $req1->closeCursor();
@@ -567,10 +567,10 @@
       $req6->closeCursor();
 
       // Suppression des parts
-      $req7 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_delete);
+      $req7 = $bdd->exec('DELETE FROM expense_center_users WHERE id_expense = ' . $id_expense);
 
       // Suppression de la dépense
-      $req8 = $bdd->exec('DELETE FROM expense_center WHERE id = ' . $id_delete);
+      $req8 = $bdd->exec('DELETE FROM expense_center WHERE id = ' . $id_expense);
     }
 
     // Message suppression effectuée

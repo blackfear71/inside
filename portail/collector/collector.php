@@ -62,7 +62,7 @@
       break;
 
     case "doModifier":
-      updateCollector($_POST, $_GET['modify_id']);
+      updateCollector($_POST, $_GET['update_id']);
       break;
 
     case "doVoter":
@@ -140,7 +140,7 @@
       break;
 
     case "doModifier":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $_GET['modify_id']);
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $_GET['update_id']);
       break;
 
     case "doVoter":
