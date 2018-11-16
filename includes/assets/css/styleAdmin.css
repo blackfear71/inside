@@ -2406,7 +2406,7 @@
 
 .title_type_alerts
 {
-	width: 5%;
+	width: 10%;
 }
 
 .title_category_alerts
@@ -2421,7 +2421,7 @@
 
 .title_message_alerts
 {
-	width: 55%;
+	width: 50%;
 }
 
 .title_actions_alerts
@@ -2450,6 +2450,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	vertical-align: middle;
+	filter: drop-shadow(0px 0px 2px #7c7c7c);
 }
 
 .td_alerts
