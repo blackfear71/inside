@@ -74,6 +74,8 @@
   width: 98%;
   padding: 1%;
   font-family: robotolight, Verdana, sans-serif;
+	height: 70px;
+	min-height: 70px;
   resize: vertical;
   border-radius: 5px;
   border: solid 1px #a3a3a3;

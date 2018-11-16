@@ -737,8 +737,8 @@
 	margin-right: auto;
 	margin-top: 0;
 	line-height: 25px;
-	min-height: 50px;
-	max-height: 180px;
+	min-height: 100px;
+	max-height: 160px;
 	padding: 10px;
 	border: 0;
 	background-color: white;
