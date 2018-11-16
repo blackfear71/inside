@@ -125,7 +125,7 @@
                     echo '<td class="td_alerts">' . $alerte->getCategory() . '</td>';
 
                     // Référence
-                    echo '<td class="td_alerts">' . $alerte->getAlert() . '</td>';
+                    echo '<td class="td_reference_alerts">' . $alerte->getAlert() . '</td>';
 
                     // Message
                     echo '<td class="td_alerts">' . $alerte->getMessage() . '</td>';
