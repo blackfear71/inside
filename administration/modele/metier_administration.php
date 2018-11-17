@@ -1966,9 +1966,12 @@
 
   // METIER : Initialisation mission en cas d'erreur de saisie (ajout et modification)
   // RETOUR : Objet mission
-  function initErrMission($save)
+  function initErrMission($save, $id_mission)
   {
     $save_mission = new Mission();
+
+    if (!empty($id_mission))
+      $save_mission->setId($id_mission);
 
     $save_mission->setMission($save['mission']);
     $save_mission->setDate_deb($save['date_deb']);
@@ -2074,7 +2077,7 @@
   }
 
   // METIER : Insertion d'une nouvelle mission
-  // RETOUR : Aucun
+  // RETOUR : Erreur éventuelle
   function insertMission($post, $files)
   {
     global $bdd;
@@ -2116,16 +2119,6 @@
     }
     $req1->closeCursor();
 
-    // Contrôle objectif > 0
-    if ($control_ok == true)
-    {
-      if (!is_numeric($objectif) OR $objectif <= 0)
-      {
-        $_SESSION['alerts']['objective_not_numeric'] = true;
-        $control_ok                                  = false;
-      }
-    }
-
     // Contrôle format date début
     if ($control_ok == true)
     {
@@ -2165,6 +2158,16 @@
       {
         $_SESSION['alerts']['date_less'] = true;
         $control_ok                      = false;
+      }
+    }
+
+    // Contrôle objectif > 0
+    if ($control_ok == true)
+    {
+      if (!is_numeric($objectif) OR $objectif <= 0)
+      {
+        $_SESSION['alerts']['objective_not_numeric'] = true;
+        $control_ok                                  = false;
       }
     }
 
@@ -2311,9 +2314,11 @@
     }
 
     if ($control_ok != true)
-      $_SESSION['erreur_mission'] = true;
+      $erreur_mission = true;
     else
-      $_SESSION['erreur_mission'] = NULL;
+      $erreur_mission = NULL;
+
+    return $erreur_mission;
   }
 
   // METIER : Modification d'une mission existante
@@ -2349,16 +2354,6 @@
 
     // Formatage heure
     $heure = $heures . $minutes . '00';
-
-    // Contrôle objectif > 0
-    if ($control_ok == true)
-    {
-      if (!is_numeric($objectif) OR $objectif <= 0)
-      {
-        $_SESSION['alerts']['objective_not_numeric'] = true;
-        $control_ok                                  = false;
-      }
-    }
 
     // Contrôle format date début
     if ($control_ok == true)
@@ -2399,6 +2394,16 @@
       {
         $_SESSION['alerts']['date_less'] = true;
         $control_ok                      = false;
+      }
+    }
+
+    // Contrôle objectif > 0
+    if ($control_ok == true)
+    {
+      if (!is_numeric($objectif) OR $objectif <= 0)
+      {
+        $_SESSION['alerts']['objective_not_numeric'] = true;
+        $control_ok                                  = false;
       }
     }
 
@@ -2512,11 +2517,6 @@
 
       $_SESSION['alerts']['mission_updated'] = true;
     }
-
-    if ($control_ok != true)
-      $_SESSION['erreur_mission'] = true;
-    else
-      $_SESSION['erreur_mission'] = NULL;
   }
 
   // METIER : Suppression d'une mission existante

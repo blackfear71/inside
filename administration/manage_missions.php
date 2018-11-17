@@ -19,6 +19,16 @@
 		unset($_SESSION['save']['old_mission']);
 	}
 
+  if ((isset($_SESSION['alerts']['already_ref_mission'])   AND $_SESSION['alerts']['already_ref_mission']   = true)
+  OR  (isset($_SESSION['alerts']['objective_not_numeric']) AND $_SESSION['alerts']['objective_not_numeric'] = true)
+  OR  (isset($_SESSION['alerts']['wrong_date'])            AND $_SESSION['alerts']['wrong_date']            = true)
+  OR  (isset($_SESSION['alerts']['date_less'])             AND $_SESSION['alerts']['date_less']             = true)
+  OR  (isset($_SESSION['alerts']['missing_mission_file'])  AND $_SESSION['alerts']['missing_mission_file']  = true)
+  OR  (isset($_SESSION['alerts']['wrong_file'])            AND $_SESSION['alerts']['wrong_file']            = true))
+  {
+    $erreur_mission = true;
+  }
+
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
 
@@ -31,20 +41,20 @@
       break;
 
     case 'goAjouter':
-      if (isset($_SESSION['erreur_mission']) AND $_SESSION['erreur_mission'] == true)
+      if (isset($erreur_mission) AND $erreur_mission == true)
       {
-        $detailsMission = initErrMission($_SESSION['save']['new_mission']['post']);
-        unset($_SESSION['erreur_mission']);
+        $detailsMission = initErrMission($_SESSION['save']['new_mission']['post'], NULL);
+        unset($erreur_mission);
       }
       else
         $detailsMission = initAddMission();
       break;
 
     case 'goModifier':
-      if (isset($_SESSION['erreur_mission']) AND $_SESSION['erreur_mission'] == true)
+      if (isset($erreur_mission) AND $erreur_mission == true)
       {
-        $detailsMission = initErrMission($_SESSION['save']['old_mission']['post']);
-        unset($_SESSION['erreur_mission']);
+        $detailsMission = initErrMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
+        unset($erreur_mission);
       }
       else
         $detailsMission = initModMission($_GET['id_mission']);
@@ -54,7 +64,7 @@
       break;
 
     case 'doAjouter':
-      insertMission($_POST, $_FILES);
+      $erreur_mission = insertMission($_POST, $_FILES);
       break;
 
     case 'doModifier':
@@ -149,7 +159,7 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if ($_SESSION['erreur_mission'] == true)
+      if ($erreur_mission == true)
         header('location: manage_missions.php?action=goAjouter');
       else
         header('location: manage_missions.php?action=goConsulter');
