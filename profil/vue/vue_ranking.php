@@ -11,16 +11,18 @@
         $lvl = $success->getLevel();
       }
 
-      if (isset($successUser[$success->getId()]) AND $success->getLimit_success() > 1)
+      if ($success->getLimit_success() > 1)
       {
         if ($i % 2 == 0)
           echo '<tr class="ranking_line">';
         else
           echo '<tr class="ranking_line" style="background-color: #d3d3d3;">';
 
+          if ($success->getDefined() == "Y")
+          {
             echo '<td class="ranking_line_left">';
               // Logo succès
-              if ($successUser[$success->getId()] >= $success->getLimit_success())
+              if ($success->getValue_user() >= $success->getLimit_success())
                 echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_rank" style="background-color: #ffad01;" />';
               else
                 echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_rank" />';
@@ -88,7 +90,19 @@
                 }
               }
             echo '</td>';
+          }
+          else
+          {
+            echo '<td class="ranking_line_left">';
+              // Succès non défini
+              echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_rank" />';
 
+              // Titre
+              echo '<div class="titre_rank">Succès non défini</div>';
+            echo '</td>';
+
+            echo '<td class="ranking_line_right"></td>';
+          }
         echo '</tr>';
 
         $i++;

@@ -9,6 +9,8 @@
     private $description;
     private $limit_success;
     private $explanation;
+    private $defined;
+    private $value_user;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -21,6 +23,8 @@
       $this->description   = '';
       $this->limit_success = '';
       $this->explanation   = '';
+      $this->defined       = '';
+      $this->value_user    = 0;
     }
 
     // Constructeur de l'objet Success en fonction des données
@@ -46,6 +50,9 @@
 
       if (isset($data['order_success']))
         $this->order_success = $data['order_success'];
+
+      if (isset($data['defined']))
+        $this->defined       = $data['defined'];
 
       if (isset($data['title']))
         $this->title         = $data['title'];
@@ -105,6 +112,17 @@
       return $this->order_success;
     }
 
+    // Succès défini
+    public function setDefined($defined)
+    {
+      $this->defined = $defined;
+    }
+
+    public function getDefined()
+    {
+      return $this->defined;
+    }
+    
     // Titre succès
     public function setTitle($title)
     {
@@ -152,6 +170,17 @@
     public function getExplanation()
     {
       return $this->explanation;
+    }
+
+    // Valeur utilisateur
+    public function setValue_user($value_user)
+    {
+      $this->value_user = $value_user;
+    }
+
+    public function getValue_user()
+    {
+      return $this->value_user;
     }
   }
 ?>

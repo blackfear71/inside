@@ -182,6 +182,9 @@
           $reponse2->closeCursor();
         }
 
+        // Génération succès mission
+        insertOrUpdateSuccesMission($mission[$ref]['reference'], $user);
+
         // On supprime le bouton correspondant pour ne pas cliquer dessus à nouveau
         unset($mission[$ref]);
         $_SESSION['missions'][$key] = $mission;

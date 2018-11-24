@@ -116,19 +116,22 @@
   // RETOUR : Aucun
   function changePseudo($user, $post)
   {
-    $new_pseudo = $post['new_pseudo'];
+    $new_pseudo = trim($post['new_pseudo']);
 
-    global $bdd;
+    if (!empty($new_pseudo))
+    {
+      global $bdd;
 
-    // Mise à jour du pseudo
-    $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
-    $reponse->execute(array(
-      'pseudo' => $new_pseudo
-    ));
-    $reponse->closeCursor();
+      // Mise à jour du pseudo
+      $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
+      $reponse->execute(array(
+        'pseudo' => $new_pseudo
+      ));
+      $reponse->closeCursor();
 
-    // Mise à jour du pseudo stocké en SESSION
-    $_SESSION['user']['pseudo'] = $new_pseudo;
+      // Mise à jour du pseudo stocké en SESSION
+      $_SESSION['user']['pseudo'] = $new_pseudo;
+    }
 
     $_SESSION['alerts']['pseudo_updated'] = true;
   }
@@ -447,8 +450,8 @@
   }
 
   // METIER : Lecture liste des succès
-  // RETOUR : Liste des succès
-  function getSuccess()
+  // RETOUR : Liste des succès et déblocages
+  function getSuccess($user)
   {
     $listSuccess = array();
 
@@ -460,6 +463,16 @@
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
       $mySuccess = Success::withData($donnees);
+
+      // Recherche des données utilisateur
+      $reponse2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $donnees['reference'] . '" AND identifiant = "' . $user . '"');
+      $donnees2 = $reponse2->fetch();
+
+      if ($reponse2->rowCount() > 0)
+        $mySuccess->setValue_user($donnees2['value']);
+
+      $reponse2->closeCursor();
+
       array_push($listSuccess, $mySuccess);
     }
     $reponse->closeCursor();
@@ -475,457 +488,108 @@
     return $listSuccess;
   }
 
-  // METIER : Succès de l'utilisateur courant
-  // RETOUR : Succès utilisateur
-  function getSuccessUser($listSuccess, $user)
-  {
-    $successUser = array();
-
-    global $bdd;
-
-    // Recherche des données
-    foreach ($listSuccess as $success)
-    {
-      switch ($success->getReference())
-      {
-        // J'étais là
-        case "beginning":
-          $true_insider = 0;
-
-          $req = $bdd->query('SELECT id, identifiant, beginner FROM users WHERE identifiant = "' . $user . '"');
-          $data = $req->fetch();
-
-          $true_insider = $data['beginner'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $true_insider;
-          break;
-
-        // Je l'ai fait !
-        case "developper":
-          $developper = 0;
-
-          $req = $bdd->query('SELECT id, identifiant, developper FROM users WHERE identifiant = "' . $user . '"');
-          $data = $req->fetch();
-
-          $developper = $data['developper'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $developper;
-          break;
-
-        // Cinéphile amateur
-        case "publisher":
-          $nb_films_publies = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_films_publies FROM movie_house WHERE identifiant_add = "' . $user . '" AND to_delete != "Y"');
-          $data = $req->fetch();
-
-          $nb_films_publies = $data['nb_films_publies'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_films_publies;
-          break;
-
-        // Cinéphile professionnel
-        case "viewer":
-          $nb_films_vus = 0;
-
-          $req1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY id ASC');
-          while($data1 = $req1->fetch())
-          {
-            $req2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $data1['id'] . ' AND identifiant = "' . $user . '" AND participation = "S"');
-            $data2 = $req2->fetch();
-
-            if ($req2->rowCount() > 0)
-              $nb_films_vus++;
-
-            $req2->closeCursor();
-          }
-          $req1->closeCursor();
-
-          $successUser[$success->getId()] = $nb_films_vus;
-          break;
-
-        // Commentateur sportif
-        case "commentator":
-          $nb_commentaires_films = 0;
-
-          $req1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY id ASC');
-          while($data1 = $req1->fetch())
-          {
-            $req2 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $data1['id'] . ' AND author = "' . $user . '"');
-            $data2 = $req2->fetch();
-
-            if ($req2->rowCount() > 0)
-              $nb_commentaires_films++;
-
-            $req2->closeCursor();
-          }
-          $req1->closeCursor();
-
-          $successUser[$success->getId()] = $nb_commentaires_films;
-          break;
-
-        // Expert acoustique
-        case "listener":
-          $nb_collector_publiees = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_collector_publiees FROM collector WHERE author = "' . $user . '"');
-          $data = $req->fetch();
-
-          $nb_collector_publiees = $data['nb_collector_publiees'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_collector_publiees;
-          break;
-
-        // Dommage collatéral
-        case "speaker":
-          $nb_collector_speaker = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_collector_speaker FROM collector WHERE speaker = "' . $user . '"');
-          $data = $req->fetch();
-
-          $nb_collector_speaker = $data['nb_collector_speaker'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_collector_speaker;
-          break;
-
-        // Rigolo compulsif
-        case "funny":
-          $nb_collector_user = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_collector_user FROM collector_users WHERE identifiant = "' . $user . '"');
-          $data = $req->fetch();
-
-          $nb_collector_user = $data['nb_collector_user'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_collector_user;
-          break;
-
-        // Désigné volontaire
-        case "buyer":
-          $nb_buyer = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_buyer FROM expense_center WHERE buyer = "' . $user . '" AND price > 0');
-          $data = $req->fetch();
-
-          $nb_buyer = $data['nb_buyer'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_buyer;
-          break;
-
-        // Profiteur occasionnel
-        case "eater":
-          $nb_parts = 0;
-
-          $req = $bdd->query('SELECT * FROM expense_center_users WHERE identifiant = "' . $user . '"');
-          while($data = $req->fetch())
-          {
-            $nb_parts += $data['parts'];
-          }
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_parts;
-          break;
-
-        // Génie créatif
-        case "creator":
-          $nb_idees_publiees = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_idees_publiees FROM ideas WHERE author = "' . $user . '"');
-          $data = $req->fetch();
-
-          $nb_idees_publiees = $data['nb_idees_publiees'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_idees_publiees;
-          break;
-
-        // Top développeur
-        case "applier":
-          $nb_idees_resolues = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_idees_resolues FROM ideas WHERE developper = "' . $user . '" AND status = "D"');
-          $data = $req->fetch();
-
-          $nb_idees_resolues = $data['nb_idees_resolues'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_idees_resolues;
-          break;
-
-        // Débugger aguerri
-        case "debugger":
-          $nb_bugs_publies = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_bugs_publies FROM bugs WHERE author = "' . $user . '"');
-          $data = $req->fetch();
-
-          $nb_bugs_publies = $data['nb_bugs_publies'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_bugs_publies;
-          break;
-
-        // Compilateur intégré
-        case "compiler":
-          $nb_bugs_resolus = 0;
-
-          $req = $bdd->query('SELECT COUNT(id) AS nb_bugs_resolus FROM bugs WHERE author = "' . $user . '" AND resolved = "Y"');
-          $data = $req->fetch();
-
-          $nb_bugs_resolus = $data['nb_bugs_resolus'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $nb_bugs_resolus;
-          break;
-
-        // Mer il et fou !
-        case "generous":
-          $nb_expense_no_parts = 0;
-
-          $req1 = $bdd->query('SELECT * FROM expense_center WHERE buyer = "' . $user . '" AND price > 0');
-          while($data1 = $req1->fetch())
-          {
-            $no_parts = true;
-
-            $req2 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data1['id']);
-            while($data2 = $req2->fetch())
-            {
-              if ($data2['identifiant'] == $user)
-              {
-                $no_parts = false;
-                break;
-              }
-            }
-            $req2->closeCursor();
-
-            if ($no_parts == true)
-              $nb_expense_no_parts++;
-          }
-          $req1->closeCursor();
-
-          $successUser[$success->getId()] = $nb_expense_no_parts;
-          break;
-
-        // Auto-satisfait
-        case "self-satisfied":
-          $nb_auto_voted = 0;
-
-          $req1 = $bdd->query('SELECT * FROM collector WHERE speaker = "' . $user . '"');
-          while($data1 = $req1->fetch())
-          {
-            $req2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $data1['id']);
-            while($data2 = $req2->fetch())
-            {
-              if ($data2['identifiant'] == $user)
-              {
-                $nb_auto_voted++;
-                break;
-              }
-            }
-            $req2->closeCursor();
-          }
-          $req1->closeCursor();
-
-          $successUser[$success->getId()] = $nb_auto_voted;
-          break;
-
-        // Véritable Jedi
-        case "padawan":
-          $star_wars_8 = 0;
-
-          // Date de sortie du film
-          $req1 = $bdd->query('SELECT id, date_theater FROM movie_house WHERE id = 16');
-          $data1 = $req1->fetch();
-
-          $date_sw8 = $data1['date_theater'];
-
-          $req1->closeCursor();
-
-          // Participation utilisateur
-          $req2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = 16 AND identifiant = "' . $user . '" AND participation = "S"');
-          $data2 = $req2->fetch();
-
-          if ($req2->rowCount() > 0 AND date("Ymd") >= $date_sw8)
-            $star_wars_8 = 1;
-
-          $req2->closeCursor();
-
-          $successUser[$success->getId()] = $star_wars_8;
-          break;
-
-        // Economie de marché
-        case "greedy":
-          $bilan = 0;
-
-          // Bilan des dépenses
-          $req = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
-          $data = $req->fetch();
-
-          $bilan = $data['expenses'];
-
-          $req->closeCursor();
-
-          $successUser[$success->getId()] = $bilan;
-          break;
-
-        // Lutin de Noël
-        case "christmas2017":
-        // Je suis ton Père Noël !
-        case "christmas2017_2":
-        // Un coeur en or
-        case "golden-egg":
-        // Mettre tous ses oeufs dans le même panier
-        case "rainbow-egg":
-        // Apprenti sorcier
-        case "wizard":
-          $mission = 0;
-
-          if ($success->getReference() == "christmas2017" OR $success->getReference() == "christmas2017_2")
-            $reference = "noel_2017";
-          elseif ($success->getReference() == "golden-egg" OR $success->getReference() == "rainbow-egg")
-            $reference = "paques_2018";
-          elseif ($success->getReference() == "wizard" OR $success->getReference() == "wizard")
-            $reference = "halloween_2018";
-
-          // Récupération Id mission
-          $req = $bdd->query('SELECT * FROM missions WHERE reference = "' . $reference . '"');
-          $data = $req->fetch();
-
-          $id_mission = $data['id'];
-          $date_fin   = $data['date_fin'];
-
-          $req->closeCursor();
-
-          if (date('Ymd') > $date_fin)
-          {
-            // Nombre total d'objectifs sur la mission
-            $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user . '"');
-            while($data2 = $req2->fetch())
-            {
-              $mission += $data2['avancement'];
-            }
-            $req2->closeCursor();
-          }
-
-          $successUser[$success->getId()] = $mission;
-        break;
-
-        default:
-          break;
-      }
-    }
-
-    // Tri des succès
-    ksort($successUser);
-
-    return $successUser;
-  }
-
   // METIER : Classement des succès des utilisateurs
   // RETOUR : Tableau des classement
-  function getRankUsers($listSuccess)
+  function getRankUsers($listSuccess, $listUsers)
   {
-    $rankUsers = array();
+    // Création tableau de correspondance identifiant / pseudo
+    $tablePseudos = array();
+
+    foreach ($listUsers AS $user)
+    {
+      $tablePseudos[$user->getIdentifiant()] = $user->getPseudo();
+    }
+
+    // Création tableau des classements en fonction du succès
+    $globalRanks = array();
 
     global $bdd;
 
     // Boucle pour parcourir tous les succès
     foreach ($listSuccess as $success)
     {
-      if ($success->getLimit_success() > 1)
+      if ($success->getDefined() == "Y" AND $success->getLimit_success() > 1)
       {
         $rankSuccess = array();
 
-        $liste_succes_unique = array();
-        array_push($liste_succes_unique, $success);
-
-        // Boucle pour parcourir tous les utilisateurs
-        $req = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-        while($data = $req->fetch())
+        // Boucle pour parcourir tous les succès débloqués par les utilisateurs
+        $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" ORDER BY value DESC');
+        while ($donnees = $reponse->fetch())
         {
-          // Récupération succès utilisateur courant
-          $successUser = getSuccessUser($liste_succes_unique, $data['identifiant']);
-
-          if (isset($successUser[$success->getId()]))
+          // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
+          if ($donnees['value'] >= $success->getLimit_success())
           {
-            if ($successUser[$success->getId()] >= $success->getLimit_success())
-            {
-              $myRank = array('identifiant' => $data['identifiant'],
-                              'pseudo'      => $data['pseudo'],
-                              'value'       => $successUser[$success->getId()],
-                              'rank'        => 0
-                            );
-              array_push($rankSuccess, $myRank);
-            }
+            $myRankSuccess = array('identifiant' => $donnees['identifiant'],
+                                   'pseudo'      => $tablePseudos[$donnees['identifiant']],
+                                   'value'       => $donnees['value'],
+                                   'rank'        => 0
+                                  );
+            array_push($rankSuccess, $myRankSuccess);
           }
         }
-        $req->closeCursor();
+        $reponse->closeCursor();
 
-        // Tri tableau sur valeur du succès
+        // On filtre le tableau
         if (!empty($rankSuccess))
         {
-          // Tri podium
-          $tri_rank = array();
-
-          foreach ($rankSuccess as $rank)
-          {
-            $tri_rank[] = $rank['value'];
-          }
-
-          array_multisort($tri_rank, SORT_DESC, $rankSuccess);
-
-          // Affectation du rang
+          // Affectation du rang et suppression si rang > 3 (médaille de bronze)
           $prevRank    = $rankSuccess[0]['value'];
           $currentRank = 1;
 
           foreach ($rankSuccess as $key => &$rankSuccessUser)
           {
-          	$currentTotal = $rankSuccessUser['value'];
+            $currentTotal = $rankSuccessUser['value'];
 
-          	if ($currentTotal != $prevRank)
-          	{
-          	  $currentRank += 1;
-          	  $prevRank = $rankSuccessUser['value'];
-          	}
+            if ($currentTotal != $prevRank)
+            {
+              $currentRank += 1;
+              $prevRank = $rankSuccessUser['value'];
+            }
 
             // Suppression des rangs > 3 sinon on enregistre le rang
             if ($currentRank > 3)
               unset($rankSuccess[$key]);
             else
-          	 $rankSuccessUser['rank'] = $currentRank;
+             $rankSuccessUser['rank'] = $currentRank;
           }
 
           unset($rankSuccessUser);
 
+          // On créé un tableau correspondant au classement sur un succès et on l'ajoute au tableau global
           $myGlobalRanks = array('id'             => $success->getId(),
                                  'level'          => $success->getLevel(),
                                  'order_success'  => $success->getOrder_success(),
                                  'podium'         => $rankSuccess
                                 );
 
-          array_push($rankUsers, $myGlobalRanks);
+          array_push($globalRanks, $myGlobalRanks);
         }
       }
     }
 
-    return $rankUsers;
+    return $globalRanks;
+  }
+
+  // METIER : Lecture liste des utilisateurs
+  // RETOUR : Tableau d'utilisateurs
+  function getUsers()
+  {
+    // Initialisation tableau d'utilisateurs
+    $listeUsers = array();
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    while($donnees = $reponse->fetch())
+    {
+      // Instanciation d'un objet User à partir des données remontées de la bdd
+      $user = Profile::withData($donnees);
+
+      // On ajoute la ligne au tableau
+      array_push($listeUsers, $user);
+    }
+    $reponse->closeCursor();
+
+    return $listeUsers;
   }
 ?>

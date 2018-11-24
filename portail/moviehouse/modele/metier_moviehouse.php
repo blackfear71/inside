@@ -511,6 +511,9 @@
 
       insertNotification($user, 'film', $new_id);
 
+      // Génération succès
+      insertOrUpdateSuccesValue('publisher', $user, 1);
+
       $_SESSION['alerts']['film_added'] = true;
     }
     else
@@ -607,6 +610,10 @@
 
   		$req->closeCursor();
 
+      // Génération succès
+      if ($participation == "S")
+        insertOrUpdateSuccesValue('viewer', $user, -1);
+
   		// Inversion de la participation
   		if ($participation == "P")
   			$participation = "N";
@@ -619,6 +626,10 @@
   			'participation' => $participation
   		));
   		$req2->closeCursor();
+
+      // Génération succès
+      if ($id_film == 16)
+        insertOrUpdateSuccesValue('padawan', $user, 0);
   	}
   	elseif(isset($post['seen']))
   	{
@@ -642,6 +653,20 @@
   			'participation' => $participation
   		));
   		$req2->closeCursor();
+
+      // Génération succès
+      if ($participation == "S")
+        insertOrUpdateSuccesValue('viewer', $user, 1);
+      else
+        insertOrUpdateSuccesValue('viewer', $user, -1);
+
+      if ($id_film == 16)
+      {
+        if ($participation == "S")
+          insertOrUpdateSuccesValue('padawan', $user, 1);
+        else
+          insertOrUpdateSuccesValue('padawan', $user, 0);
+      }
   	}
   }
 
@@ -898,11 +923,14 @@
 
     if ($notification_comments_exist != true)
       insertNotification($user, 'comments', $id_film);
+
+    // Génération succès
+    insertOrUpdateSuccesValue('commentator', $user, 1);
   }
 
   // METIER : Suppression commentaire sur un détail film
   // RETOUR : Aucun
-  function deleteComment($id_comment, $id_film)
+  function deleteComment($id_comment, $id_film, $user)
   {
     global $bdd;
 
@@ -917,6 +945,9 @@
       deleteNotification('comments', $id_film);
 
     $reponse2->closeCursor();
+
+    // Génération succès
+    insertOrUpdateSuccesValue('commentator', $user, -1);
   }
 
   // METIER : Modification commentaire sur un détail film
@@ -1213,6 +1244,9 @@
         if (!empty($doodle))
           insertNotification($user, 'doodle', $new_id);
 
+        // Génération succès
+        insertOrUpdateSuccesValue('publisher', $user, 1);
+
         $_SESSION['alerts']['film_added'] = true;
       }
     }
@@ -1444,7 +1478,7 @@
         if (!empty($participant->getEmail()))
         {
           include_once('../../includes/functions/appel_mail.php');
-          
+
           // Destinataire
           $mail->clearAddresses();
           $mail->AddAddress($participant->getEmail(), $participant->getPseudo());

@@ -13,7 +13,7 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-			$listeUsers = getUsers();
+			$listeUsers  = getUsers();
       break;
 
     case 'changeBeginnerStatus':

@@ -159,7 +159,7 @@
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                WHERE (speaker = "' . $identifiant . '")
+                                WHERE (collector.speaker = "' . $identifiant . '")
                                 GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
@@ -168,7 +168,7 @@
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                WHERE (author = "' . $identifiant . '")
+                                WHERE (collector.author = "' . $identifiant . '")
                                 GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
@@ -177,7 +177,7 @@
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '")
+                                WHERE (collector.type_speaker = "user" AND collector.speaker != "' . $identifiant . '")
                                 GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
@@ -186,7 +186,7 @@
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                WHERE (type_speaker = "other")
+                                WHERE (collector.type_speaker = "other")
                                 GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
@@ -195,7 +195,7 @@
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                WHERE (type_collector = "T")
+                                WHERE (collector.type_collector = "T")
                                 GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
@@ -204,7 +204,7 @@
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                WHERE (type_collector = "I")
+                                WHERE (collector.type_collector = "I")
                                 GROUP BY collector.id
                                 ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
         break;
@@ -315,7 +315,7 @@
       if ($post['speaker'] == "other")
       {
         $collector = array('date_add'       => date("Ymd"),
-                           'author'         => $_SESSION['user']['identifiant'],
+                           'author'         => $user,
                            'speaker'        => $post['other_speaker'],
                            'type_speaker'   => $post['speaker'],
                            'date_collector' => formatDateForInsert($date_a_verifier),
@@ -327,7 +327,7 @@
       else
       {
         $collector = array('date_add'       => date("Ymd"),
-                           'author'         => $_SESSION['user']['identifiant'],
+                           'author'         => $user,
                            'speaker'        => $post['speaker'],
                            'type_speaker'   => "user",
                            'date_collector' => formatDateForInsert($date_a_verifier),
@@ -372,6 +372,12 @@
         $_SESSION['alerts']['collector_added'] = true;
       elseif ($post['type_collector'] == "I")
         $_SESSION['alerts']['image_collector_added'] = true;
+
+      // Génération succès
+      insertOrUpdateSuccesValue('listener', $user, 1);
+
+      if ($post['speaker'] != "other")
+        insertOrUpdateSuccesValue('speaker', $post['speaker'], 1);
     }
     else
       $_SESSION['alerts']['wrong_date'] = true;
@@ -634,6 +640,8 @@
   // RETOUR : Aucun
   function voteCollector($post, $user, $id_col)
   {
+    $selfSatisfied = false;
+
     if (isset($post['smiley_1']))
       $vote = 1;
     elseif (isset($post['smiley_2']))
@@ -683,6 +691,31 @@
         'vote'         => $vote
         ));
       $reponse2->closeCursor();
+    }
+
+    // Génération succès (quand on vote, une seule prise en compte, et quand on retire son vote)
+    $reponse3 = $bdd->query('SELECT * FROM collector WHERE id = ' . $id_col . ' AND speaker = "' . $user . '"');
+    $donnees3 = $reponse3->fetch();
+
+    if ($reponse3->rowCount() > 0)
+      $selfSatisfied = true;
+
+    $reponse3->closeCursor();
+
+    if ($reponse->rowCount() == 0 AND $vote > 0)
+    {
+      insertOrUpdateSuccesValue('funny', $user, 1);
+
+      if ($selfSatisfied == true)
+        insertOrUpdateSuccesValue('self-satisfied', $user, 1);
+    }
+
+    if ($reponse->rowCount() > 0 AND $vote == 0)
+    {
+      insertOrUpdateSuccesValue('funny', $user, -1);
+
+      if ($selfSatisfied == true)
+        insertOrUpdateSuccesValue('self-satisfied', $user, -1);
     }
 
     $reponse->closeCursor();

@@ -47,7 +47,7 @@
       break;
 
     case "doSupprimerCommentaire":
-      deleteComment($_GET['comment_id'], $_GET['id_film']);
+      deleteComment($_GET['comment_id'], $_GET['id_film'], $_SESSION['user']['identifiant']);
       break;
 
     case "doModifierCommentaire":

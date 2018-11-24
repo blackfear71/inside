@@ -123,7 +123,7 @@ function afficherMasquer(id)
 function afficherMasquerRow(id)
 {
   console.log(id);
-  
+
   if (document.getElementById(id).style.display == "none")
     document.getElementById(id).style.display = "table-row";
   else

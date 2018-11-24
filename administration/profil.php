@@ -52,8 +52,6 @@
       $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
       $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
       $profil->setEmail(htmlspecialchars($profil->getEmail()));
-      $profil->setBeginner(htmlspecialchars($profil->getBeginner()));
-      $profil->setDevelopper(htmlspecialchars($profil->getDevelopper()));
       $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
       break;
 

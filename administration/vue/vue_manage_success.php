@@ -41,6 +41,10 @@
 			<article>
         <?php
           // Ajout succès
+          echo '<div class="entete_admin">';
+            echo 'Ajouter un succès';
+          echo '</div>';
+
           echo '<form method="post" action="manage_success.php?action=doAjouter" class="form_saisie_succes" enctype="multipart/form-data" runat="server">';
             echo '<table class="table_saisie_succes">';
               echo '<tr>';
@@ -100,6 +104,21 @@
             echo '</table>';
           echo '</form>';
 
+          // Initialisation des succès
+          echo '<div class="entete_admin">';
+            echo 'Initialiser les succès';
+          echo '</div>';
+
+          echo '<form method="post" action="manage_success.php?action=doInitialiser" class="form_init_succes">';
+            echo '<input type="submit" name="init_success" value="Initialiser les succès" onclick="if(!confirm(\'Voulez-vous vraiment initialiser les succès ?\')) return false;" class="bouton_init" />';
+          echo '</form>';
+
+          echo '<div class="explications_init">';
+            echo 'Ce bouton permet d\'initialiser les succès pour tous les utilisateurs. Il faut faire attention lors de son utilisation car il va remplacer les valeurs déjà
+            acquises par tous les utilisateurs et potentiellement bloquer des succès déjà débloqués. Le traitement peut prendre du temps en fonction du nombre de succès et d\'utilisateurs. Une
+            purge est effectuée en fin de traitement sur tous les éventuels succès à 0.';
+          echo '</div>';
+
           // Affichage des succès
           $lvl = 0;
 
@@ -121,7 +140,11 @@
                   echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" onclick="if(!confirm(\'Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?\')) return false;" class="bouton_delete" />';
                 echo '</form>';
 
-                echo '<div class="succes_liste">';
+                if ($success->getDefined() == "Y")
+                  echo '<div class="succes_liste">';
+                else
+                  echo '<div class="succes_liste" style="background-color: #b3b3b3;">';
+
                   // Ordonnancement
                   echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
 
@@ -138,7 +161,10 @@
                   echo '<div class="description_succes">' . $success->getDescription() . '</div>';
 
                   // Explications succès
-                  echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
+                  if ($success->getDefined() == "Y")
+                    echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
+                  else
+                    echo '<div class="explications_succes" style="background-color: #979797;">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
                 echo '</div>';
               echo '</div>';
 

@@ -83,23 +83,26 @@
     {
       global $bdd;
       $req = $bdd->prepare('INSERT INTO bugs(subject,
-                                              date,
-                                              author,
-                                              content,
-                                              type,
-                                              resolved
-                                             )
-                                       VALUES(:subject,
-                                              :date,
-                                              :author,
-                                              :content,
-                                              :type,
-                                              :resolved
-                                             )');
+                                             date,
+                                             author,
+                                             content,
+                                             type,
+                                             resolved
+                                            )
+                                      VALUES(:subject,
+                                             :date,
+                                             :author,
+                                             :content,
+                                             :type,
+                                             :resolved
+                                            )');
       $req->execute($bugs);
       $req->closeCursor();
 
       $new_id = $bdd->lastInsertId();
+
+      // Génération succès
+      insertOrUpdateSuccesValue('debugger', $author, 1);
 
       $_SESSION['alerts']['bug_submitted'] = true;
     }

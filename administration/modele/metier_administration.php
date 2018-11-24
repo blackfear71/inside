@@ -443,6 +443,18 @@
     ));
     $req->closeCursor();
 
+    // Lecture des données
+    $req2 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
+    $data2 = $req2->fetch();
+    $author = $data2['author'];
+    $req2->closeCursor();
+
+    // Génération succès
+    if ($resolved == "Y")
+      insertOrUpdateSuccesValue('compiler', $author, 1);
+    else
+      insertOrUpdateSuccesValue('compiler', $author, -1);
+
     return $resolved;
   }
 
@@ -452,7 +464,21 @@
   {
     global $bdd;
 
-    $req = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
+    // Lecture des données
+    $req = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
+    $data = $req->fetch();
+    $author   = $data['author'];
+    $resolved = $data['resolved'];
+    $req->closeCursor();
+
+    // Génération succès
+    insertOrUpdateSuccesValue('debugger', $author, -1);
+
+    if ($resolved == "Y")
+      insertOrUpdateSuccesValue('compiler', $author, -1);
+
+    // Suppression de la table
+    $req2 = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
 
     $_SESSION['alerts']['bug_deleted'] = true;
   }
@@ -466,11 +492,14 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, beginner, developper FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
+
+      // Récupération succès Beginner / Developper
+      getSuccessAdmin($user);
 
       // On ajoute la ligne au tableau
       array_push($listeUsers, $user);
@@ -478,6 +507,43 @@
     $reponse->closeCursor();
 
     return $listeUsers;
+  }
+
+  // METIER : Lecture succès Beginner et Developper
+  // RETOUR : Liste succès
+  function getSuccessAdmin($user)
+  {
+    $listSuccess = array('beginning', 'developper');
+
+    global $bdd;
+
+    foreach ($listSuccess as $success)
+    {
+      $value = 0;
+
+      // Lecture valeur succès
+      $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success . '" AND identifiant = "' . $user->getIdentifiant() . '"');
+      $donnees = $reponse->fetch();
+
+      if ($reponse->rowCount() > 0)
+        $value = $donnees['value'];
+
+      $reponse->closeCursor();
+
+      switch ($success)
+      {
+        case 'beginning':
+          $user->setBeginner($value);
+          break;
+
+        case 'developper':
+          $user->setDevelopper($value);
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 
   // METIER : Lecture statistiques catégories des utilisateurs inscrits
@@ -1125,9 +1191,7 @@
     // Récupération identifiant
     $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE id = ' . $id_user);
     $data1 = $req1->fetch();
-
     $identifiant = $data1['identifiant'];
-
     $req1->closeCursor();
 
     // Suppression des avis movie_house_users
@@ -1156,8 +1220,11 @@
     // Suppression notification inscription
     deleteNotification('inscrit', $identifiant);
 
+    // Suppression des succès
+    $req7 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $identifiant . '"');
+
     // Suppression utilisateur
-    $req7 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
+    $req8 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
   }
 
   // METIER : Refus désinscription
@@ -1280,6 +1347,7 @@
     $reference     = $post['reference'];
     $level         = $post['level'];
     $order_success = $post['order_success'];
+    $defined       = "N";
     $title         = $post['title'];
     $description   = $post['description'];
     $limit_success = $post['limit_success'];
@@ -1419,6 +1487,7 @@
           $reponse = $bdd->prepare('INSERT INTO success(reference,
                                                         level,
                                                         order_success,
+                                                        defined,
                                                         title,
                                                         description,
                                                         limit_success,
@@ -1426,6 +1495,7 @@
                                                  VALUES(:reference,
                                                         :level,
                                                         :order_success,
+                                                        :defined,
                                                         :title,
                                                         :description,
                                                         :limit_success,
@@ -1434,6 +1504,7 @@
   					'reference'     => $reference,
             'level'         => $level,
             'order_success' => $order_success,
+            'defined'       => $defined,
             'title'         => $title,
             'description'   => $description,
   					'limit_success' => $limit_success,
@@ -1458,12 +1529,18 @@
     $data1 = $req1->fetch();
 
     if (isset($data1['reference']) AND !empty($data1['reference']))
+    {
+      $reference = $data1['reference'];
       unlink ("../includes/images/profil/success/" . $data1['reference'] . ".png");
+    }
 
     $req1->closeCursor();
 
+    // Suppression des données utilisateurs
+    $req2 = $bdd->exec('DELETE FROM success_users WHERE reference = "' . $reference . '"');
+
     // Suppression du succès de la base
-    $req2 = $bdd->exec('DELETE FROM success WHERE id = ' . $id_success);
+    $req3 = $bdd->exec('DELETE FROM success WHERE id = ' . $id_success);
 
     $_SESSION['alerts']['success_deleted'] = true;
   }
@@ -1486,6 +1563,7 @@
       $myUpdate = array('id'            => $post['id'][$id],
                         'level'         => $post['level'][$id],
                         'order_success' => $post['order_success'][$id],
+                        'defined'       => $post['defined'][$id],
                         'title'         => $post['title'][$id],
                         'description'   => $post['description'][$id],
                         'limit_success' => $post['limit_success'][$id],
@@ -1546,6 +1624,7 @@
       {
         $req = $bdd->prepare('UPDATE success SET level         = :level,
                                                  order_success = :order_success,
+                                                 defined       = :defined,
                                                  title         = :title,
                                                  description   = :description,
                                                  limit_success = :limit_success,
@@ -1554,6 +1633,7 @@
         $req->execute(array(
           'level'         => $success['level'],
           'order_success' => $success['order_success'],
+          'defined'       => $success['defined'],
           'title'         => $success['title'],
           'description'   => $success['description'],
           'limit_success' => $success['limit_success'],
@@ -1583,6 +1663,7 @@
     {
       $success->setLevel($session_succes['level'][$success->getId()]);
       $success->setOrder_success($session_succes['order_success'][$success->getId()]);
+      $success->setDefined($session_succes['defined'][$success->getId()]);
       $success->setTitle($session_succes['title'][$success->getId()]);
       $success->setDescription($session_succes['description'][$success->getId()]);
       $success->setLimit_success($session_succes['limit_success'][$success->getId()]);
@@ -1600,38 +1681,407 @@
 
   // METIER : Modification top Beginner
   // RETOUR : Aucun
-  function changeBeginner($user, $topBeginner)
+  function changeBeginner($identifiant, $topBeginner)
   {
     if ($topBeginner == 1)
-      $topBeginner = 0;
+      $value = 0;
     else
-      $topBeginner = 1;
+      $value = 1;
 
-    global $bdd;
-
-    $req = $bdd->prepare('UPDATE users SET beginner = :beginner WHERE identifiant = "' . $user . '"');
-    $req->execute(array(
-      'beginner' => $topBeginner
-    ));
-    $req->closeCursor();
+    insertOrUpdateSuccesValue('beginning', $identifiant, $value);
   }
 
   // METIER : Modification top Developper
   // RETOUR : Aucun
-  function changeDevelopper($user, $topDevelopper)
+  function changeDevelopper($identifiant, $topDevelopper)
+  {
+    if ($topDevelopper == 1)
+      $value = 0;
+    else
+      $value = 1;
+
+    insertOrUpdateSuccesValue('developper', $identifiant, $value);
+  }
+
+  // METIER : Initialisation des succès
+  // RETOUR : Aucun
+  function initializeSuccess($listSuccess, $listUsers)
   {
     global $bdd;
 
-    if ($topDevelopper == 1)
-      $topDevelopper = 0;
-    else
-      $topDevelopper = 1;
+    if (!empty($listSuccess) AND !empty($listUsers))
+    {
+      // Boucle de traitement sur les utilisateurs
+      foreach ($listUsers as $user)
+      {
+        // Boucle de traitement sur les succès
+        foreach ($listSuccess as $success)
+        {
+          $value  = NULL;
+          $action = NULL;
 
-    $req = $bdd->prepare('UPDATE users SET developper = :developper WHERE identifiant = "' . $user . '"');
-    $req->execute(array(
-      'developper' => $topDevelopper
-    ));
-    $req->closeCursor();
+          /**************************************/
+          /*** Détermination valeur à insérer ***/
+          /**************************************/
+          switch ($success->getReference())
+          {
+            // J'étais là
+            case "beginning":
+            // Je l'ai fait !
+            case "developper":
+              $req = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" AND identifiant = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+
+              if ($req->rowCount() > 0)
+                $value = $data['value'];
+
+              $req->closeCursor();
+              break;
+
+            // Cinéphile amateur
+            case "publisher":
+              $nb_films_publies = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_films_publies FROM movie_house WHERE identifiant_add = "' . $user->getIdentifiant() . '" AND to_delete != "Y"');
+              $data = $req->fetch();
+              $nb_films_publies = $data['nb_films_publies'];
+              $req->closeCursor();
+
+              $value = $nb_films_publies;
+              break;
+
+            // Cinéphile professionnel
+            case "viewer":
+              $nb_films_vus = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_films_vus FROM movie_house_users WHERE identifiant = "' . $user->getIdentifiant() . '" AND participation = "S"');
+              $data = $req->fetch();
+              $nb_films_vus = $data['nb_films_vus'];
+              $req->closeCursor();
+
+              $value = $nb_films_vus;
+              break;
+
+            // Commentateur sportif
+            case "commentator":
+              $nb_commentaires_films = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_commentaires_films FROM movie_house_comments WHERE author = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_commentaires_films = $data['nb_commentaires_films'];
+              $req->closeCursor();
+
+              $value = $nb_commentaires_films;
+              break;
+
+            // Expert acoustique
+            case "listener":
+              $nb_collector_publiees = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_collector_publiees FROM collector WHERE author = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_collector_publiees = $data['nb_collector_publiees'];
+              $req->closeCursor();
+
+              $value = $nb_collector_publiees;
+              break;
+
+            // Dommage collatéral
+            case "speaker":
+              $nb_collector_speaker = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_collector_speaker FROM collector WHERE speaker = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_collector_speaker = $data['nb_collector_speaker'];
+              $req->closeCursor();
+
+              $value = $nb_collector_speaker;
+              break;
+
+            // Rigolo compulsif
+            case "funny":
+              $nb_collector_user = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_collector_user FROM collector_users WHERE identifiant = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_collector_user = $data['nb_collector_user'];
+              $req->closeCursor();
+
+              $value = $nb_collector_user;
+              break;
+
+            // Auto-satisfait
+            case "self-satisfied":
+              $nb_auto_voted = 0;
+
+              $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_auto_voted
+                                  FROM collector
+                                  LEFT JOIN collector_users
+                                  ON (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $user->getIdentifiant() . '")
+                                  WHERE collector.speaker = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_auto_voted = $data['nb_auto_voted'];
+              $req->closeCursor();
+
+              $value = $nb_auto_voted;
+              break;
+
+            // Désigné volontaire
+            case "buyer":
+              $nb_buyer = 0;
+
+              $req = $bdd->query('SELECT COUNT(expense_center.id) AS nb_buyer
+                                  FROM expense_center
+                                  WHERE (expense_center.buyer = "' . $user->getIdentifiant() . '" AND expense_center.price > 0)
+                                  AND EXISTS (SELECT * FROM expense_center_users
+                                              WHERE (expense_center.id = expense_center_users.id_expense))');
+              $data = $req->fetch();
+              $nb_buyer = $data['nb_buyer'];
+              $req->closeCursor();
+
+              $value = $nb_buyer;
+              break;
+
+            // Profiteur occasionnel
+            case "eater":
+              $nb_parts = 0;
+
+              $req = $bdd->query('SELECT * FROM expense_center_users WHERE identifiant = "' . $user->getIdentifiant() . '"');
+              while($data = $req->fetch())
+              {
+                $nb_parts += $data['parts'];
+              }
+              $req->closeCursor();
+
+              $value = $nb_parts;
+              break;
+
+            // Mer il et fou !
+            case "generous":
+              $nb_expense_no_parts = 0;
+
+              $req = $bdd->query('SELECT COUNT(expense_center.id) AS nb_expense_no_parts
+                                  FROM expense_center
+                                  WHERE (expense_center.buyer = "' . $user->getIdentifiant() . '" AND expense_center.price > 0)
+                                  AND NOT EXISTS (SELECT * FROM expense_center_users
+                                                  WHERE (expense_center.id = expense_center_users.id_expense
+                                                  AND    expense_center_users.identifiant = "' . $user->getIdentifiant() . '"))');
+              $data = $req->fetch();
+              $nb_expense_no_parts = $data['nb_expense_no_parts'];
+              $req->closeCursor();
+
+              $value = $nb_expense_no_parts;
+              break;
+
+            // Economie de marché
+            case "greedy":
+              $bilan = 0;
+
+              $req0 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user->getIdentifiant() . '"');
+              $data0 = $req0->fetch();
+              $bilan = $data0['expenses'];
+              $req0->closeCursor();
+
+              // Contrôle si total inférieur au total précédent
+              $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" AND identifiant = "' . $user->getIdentifiant() . '"');
+              $data1 = $req1->fetch();
+
+              if ($req1->rowCount() > 0)
+              {
+                if ($bilan > $data1['value'])
+                  $value = $bilan;
+              }
+              else
+                $value = $bilan;
+
+              $req1->closeCursor();
+              break;
+
+            // Génie créatif
+            case "creator":
+              $nb_idees_publiees = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_idees_publiees FROM ideas WHERE author = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_idees_publiees = $data['nb_idees_publiees'];
+              $req->closeCursor();
+
+              $value = $nb_idees_publiees;
+              break;
+
+            // Top développeur
+            case "applier":
+              $nb_idees_resolues = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_idees_resolues FROM ideas WHERE developper = "' . $user->getIdentifiant() . '" AND status = "D"');
+              $data = $req->fetch();
+              $nb_idees_resolues = $data['nb_idees_resolues'];
+              $req->closeCursor();
+
+              $value = $nb_idees_resolues;
+              break;
+
+            // Débugger aguerri
+            case "debugger":
+              $nb_bugs_publies = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_bugs_publies FROM bugs WHERE author = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_bugs_publies = $data['nb_bugs_publies'];
+              $req->closeCursor();
+
+              $value = $nb_bugs_publies;
+              break;
+
+            // Compilateur intégré
+            case "compiler":
+              $nb_bugs_resolus = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_bugs_resolus FROM bugs WHERE author = "' . $user->getIdentifiant() . '" AND resolved = "Y"');
+              $data = $req->fetch();
+              $nb_bugs_resolus = $data['nb_bugs_resolus'];
+              $req->closeCursor();
+
+              $value = $nb_bugs_resolus;
+              break;
+
+            // Véritable Jedi
+            case "padawan":
+              $star_wars_8 = 0;
+
+              // Date de sortie du film
+              $req0 = $bdd->query('SELECT id, date_theater FROM movie_house WHERE id = 16');
+              $data0 = $req0->fetch();
+              $date_sw8 = $data0['date_theater'];
+              $req0->closeCursor();
+
+              if (date("Ymd") >= $date_sw8)
+              {
+                // Participation utilisateur
+                $req1 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = 16 AND identifiant = "' . $user->getIdentifiant() . '" AND participation = "S"');
+                $data1 = $req1->fetch();
+
+                if ($req1->rowCount() > 0)
+                  $star_wars_8 = 1;
+
+                $req1->closeCursor();
+
+                $value = $star_wars_8;
+              }
+              break;
+
+            // Lutin de Noël
+            case "christmas2017":
+            // Je suis ton Père Noël !
+            case "christmas2017_2":
+            // Un coeur en or
+            case "golden-egg":
+            // Mettre tous ses oeufs dans le même panier
+            case "rainbow-egg":
+            // Apprenti sorcier
+            case "wizard":
+              $mission = 0;
+
+              if ($success->getReference() == "christmas2017" OR $success->getReference() == "christmas2017_2")
+                $reference = "noel_2017";
+              elseif ($success->getReference() == "golden-egg" OR $success->getReference() == "rainbow-egg")
+                $reference = "paques_2018";
+              elseif ($success->getReference() == "wizard" OR $success->getReference() == "wizard")
+                $reference = "halloween_2018";
+
+              // Récupération Id mission et date de fin
+              $req0 = $bdd->query('SELECT * FROM missions WHERE reference = "' . $reference . '"');
+              $data0 = $req0->fetch();
+
+              $id_mission = $data0['id'];
+              $date_fin   = $data0['date_fin'];
+
+              $req0->closeCursor();
+
+              if (date('Ymd') > $date_fin)
+              {
+                // Nombre total d'objectifs sur la mission
+                $req1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user->getIdentifiant() . '"');
+                while($data1 = $req1->fetch())
+                {
+                  $mission += $data1['avancement'];
+                }
+                $req1->closeCursor();
+              }
+
+              $value = $mission;
+              break;
+
+            default:
+              break;
+          }
+
+          /****************************************/
+          /*** Détermination action à effectuer ***/
+          /****************************************/
+          if (!is_null($value))
+          {
+            if ($value != 0)
+            {
+              $req2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" AND identifiant = "' . $user->getIdentifiant() . '"');
+              $data2 = $req2->fetch();
+
+              if ($req2->rowCount() > 0)
+              {
+                // On ne met à jour que si la nouvelle valeur est supérieure à l'ancienne
+                if ($value > $data2['value'])
+                  $action = 'update';
+              }
+              else
+                $action = 'insert';
+
+              $req2->closeCursor();
+            }
+          }
+
+          /*************************************************/
+          /*** Insertion / modification de chaque succès ***/
+          /*************************************************/
+          switch ($action)
+          {
+            case 'insert':
+              $req3 = $bdd->prepare('INSERT INTO success_users(reference,
+                                                               identifiant,
+                                                               value)
+                                                        VALUES(:reference,
+                                                               :identifiant,
+                                                               :value)');
+              $req3->execute(array(
+                'reference'   => $success->getReference(),
+                'identifiant' => $user->getIdentifiant(),
+                'value'       => $value
+                ));
+              $req3->closeCursor();
+              break;
+
+            case 'update':
+              $req3 = $bdd->prepare('UPDATE success_users
+                                     SET value = :value
+                                     WHERE reference = "' . $success->getReference() . '" AND identifiant = "' . $user->getIdentifiant() . '"');
+              $req3->execute(array(
+                'value' => $value
+              ));
+              $req3->closeCursor();
+              break;
+
+            default:
+              break;
+          }
+
+          /***************************************/
+          /*** Purge éventuelle des succès à 0 ***/
+          /***************************************/
+          $req4 = $bdd->exec('DELETE FROM success_users WHERE value = 0');
+        }
+      }
+
+      $_SESSION['alerts']['success_initialized'] = true;
+    }
   }
 
   // METIER : Lecture des données profil
@@ -1656,19 +2106,23 @@
   // RETOUR : Aucun
   function changePseudo($user, $post)
   {
-    $new_pseudo = $post['new_pseudo'];
+    $new_pseudo = trim($post['new_pseudo']);
 
-    global $bdd;
+    if (!empty($new_pseudo))
+    {
+      global $bdd;
 
-    // Mise à jour du pseudo
-    $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
-    $reponse->execute(array(
-      'pseudo' => $new_pseudo
-    ));
-    $reponse->closeCursor();
+      // Mise à jour du pseudo
+      $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
+      $reponse->execute(array(
+        'pseudo' => $new_pseudo
+      ));
+      $reponse->closeCursor();
 
-    // Mise à jour du pseudo stocké en SESSION
-    $_SESSION['user']['pseudo']           = $new_pseudo;
+      // Mise à jour du pseudo stocké en SESSION
+      $_SESSION['user']['pseudo'] = $new_pseudo;
+    }
+
     $_SESSION['alerts']['pseudo_updated'] = true;
   }
 

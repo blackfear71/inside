@@ -35,9 +35,9 @@
       {
         case 'success':
         case 'ranking':
-          $listeSuccess    = getSuccess();
-          $successUser     = getSuccessUser($listeSuccess, $_SESSION['user']['identifiant']);
-          $classementUsers = getRankUsers($listeSuccess);
+          $listeUsers      = getUsers();
+          $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
+          $classementUsers = getRankUsers($listeSuccess, $listeUsers);
           break;
 
         case 'settings':
@@ -107,20 +107,15 @@
             $success->setReference(htmlspecialchars($success->getReference()));
             $success->setLevel(htmlspecialchars($success->getLevel()));
             $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
+            $success->setDefined(htmlspecialchars($success->getDefined()));
             $success->setTitle(htmlspecialchars($success->getTitle()));
             $success->setDescription(htmlspecialchars($success->getDescription()));
             $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
             $success->setExplanation(htmlspecialchars($success->getExplanation()));
+            $success->setValue_user(htmlspecialchars($success->getValue_user()));
           }
 
           unset($success);
-
-          foreach ($successUser as &$limit)
-          {
-            $limit = htmlspecialchars($limit);
-          }
-
-          unset($limit);
 
           foreach ($classementUsers as &$classement)
           {
@@ -145,8 +140,6 @@
           $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
           $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
-          $profil->setBeginner(htmlspecialchars($profil->getBeginner()));
-          $profil->setDevelopper(htmlspecialchars($profil->getDevelopper()));
           $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
           $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));

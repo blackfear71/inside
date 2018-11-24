@@ -18,7 +18,7 @@
   {
     $_SESSION['save']['reference_success']   = "";
     $_SESSION['save']['level']               = "";
-    $_SESSION['save']['order_success']       = "";
+		$_SESSION['save']['order_success']       = "";
     $_SESSION['save']['title_success']       = "";
     $_SESSION['save']['description_success'] = "";
     $_SESSION['save']['limit_success']       = "";
@@ -55,6 +55,13 @@
       $erreurUpdateSucces = updateSuccess($_POST);
       break;
 
+		case "doInitialiser":
+			// Lecture liste des données par le modèle
+			$listeUsers   = getUsers();
+			$listeSuccess = getSuccess();
+			initializeSuccess($listeSuccess, $listeUsers);
+			break;
+
     default:
       // Contrôle action renseignée URL
       header('location: manage_success.php?action=goConsulter');
@@ -65,26 +72,13 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+		case 'goModifier':
       foreach ($listeSuccess as &$success)
       {
         $success->setReference(htmlspecialchars($success->getReference()));
         $success->setLevel(htmlspecialchars($success->getLevel()));
         $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
-        $success->setTitle(htmlspecialchars($success->getTitle()));
-        $success->setDescription(htmlspecialchars($success->getDescription()));
-				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));
-        $success->setExplanation(htmlspecialchars($success->getExplanation()));
-      }
-
-			unset($success);
-      break;
-
-    case 'goModifier':
-      foreach ($listeSuccess as &$success)
-      {
-        $success->setReference(htmlspecialchars($success->getReference()));
-        $success->setLevel(htmlspecialchars($success->getLevel()));
-        $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
+				$success->setDefined(htmlspecialchars($success->getDefined()));
         $success->setTitle(htmlspecialchars($success->getTitle()));
         $success->setDescription(htmlspecialchars($success->getDescription()));
 				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));
@@ -97,6 +91,7 @@
     case "doAjouter":
     case "doSupprimer":
     case "doModifier":
+		case "doInitialiser":
     default:
       break;
   }
@@ -115,6 +110,10 @@
     case "doSupprimer":
       header('location: manage_success.php?action=goConsulter');
       break;
+
+		case "doInitialiser":
+			header('location: manage_success.php?action=goConsulter');
+			break;
 
     case 'goModifier':
       include_once('vue/vue_modify_success.php');

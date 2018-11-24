@@ -29,12 +29,13 @@
         echo '<div class="zone_niveau_succes">';
       }
 
-      if (isset($successUser[$success->getId()]))
+      if ($success->getDefined() == "Y")
       {
-        if ($successUser[$success->getId()] >= $success->getLimit_success())
+        if ($success->getValue_user() >= $success->getLimit_success())
           echo '<div class="succes_liste" style="background-color: #ffad01;">';
         else
           echo '<div class="succes_liste">';
+
           // Médailles (en excluant ceux qui sont uniques)
           if ($success->getLimit_success() > 1)
           {
@@ -69,7 +70,7 @@
           }
 
           // Logo succès
-          if ($successUser[$success->getId()] >= $success->getLimit_success())
+          if ($success->getValue_user() >= $success->getLimit_success())
             echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
           else
             echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
@@ -78,12 +79,12 @@
           echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
 
           // Description succès
-          if ($successUser[$success->getId()] >= $success->getLimit_success())
+          if ($success->getValue_user() >= $success->getLimit_success())
             echo '<div class="description_succes">' . $success->getDescription() . '</div>';
 
           // Barre de progression succès
-          if ($successUser[$success->getId()] < $success->getLimit_success())
-            echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $successUser[$success->getId()] . '" class="progression_succes"></meter>';
+          if ($success->getValue_user() < $success->getLimit_success())
+            echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $success->getValue_user() . '" class="progression_succes"></meter>';
         echo '</div>';
       }
       else

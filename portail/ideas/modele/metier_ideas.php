@@ -122,6 +122,9 @@
 
     insertNotification($user, 'idee', $new_id);
 
+    // Génération succès
+    insertOrUpdateSuccesValue('creator', $user, 1);
+
     $_SESSION['alerts']['idea_submitted'] = true;
 
     return $new_id;
@@ -131,6 +134,8 @@
   // RETOUR : Vue à afficher
   function updateIdea($id, $view, $post)
   {
+    global $bdd;
+
     switch (key($post))
     {
       case 'take':
@@ -168,13 +173,27 @@
                   'developper' => $developper
                  );
 
+    // Génération succès
+    if ($status == "O")
+    {
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE id = ' . $id);
+      $donnees = $reponse->fetch();
+      insertOrUpdateSuccesValue('applier', $donnees['developper'], -1);
+      $reponse->closeCursor();
+    }
+
     // On met à jour la table
-    global $bdd;
     $req = $bdd->prepare('UPDATE ideas SET status     = :status,
                                            developper = :developper
                                      WHERE id         = ' . $id);
     $req->execute($data);
     $req->closeCursor();
+
+    var_dump($status);
+
+    // Génération succès
+    if ($status == "D")
+      insertOrUpdateSuccesValue('applier', $developper, 1);
 
     return $view;
   }

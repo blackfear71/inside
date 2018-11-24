@@ -58,7 +58,11 @@
                 echo '<div class="zone_niveau_mod_succes_admin">';
               }
 
-              echo '<div class="succes_liste_mod">';
+              if ($success->getDefined() == "Y")
+                echo '<div class="succes_liste_mod">';
+              else
+                echo '<div class="succes_liste_mod" style="background-color: #b3b3b3;">';
+
                 echo '<div class="succes_mod_left">';
                   // Id succès (caché)
                   echo '<input type="hidden" name="id[' . $success->getId() . ']" value="' . $success->getId() . '" />';
@@ -90,6 +94,21 @@
                   // Condition succès
                   echo '<div class="titre_succes">Condition :</div>';
                   echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+
+                  // Code défini
+                  echo '<div class="titre_succes">Code défini :</div>';
+                  echo '<div class="defined_succes">';
+                    if ($success->getDefined() == "Y")
+                    {
+                      echo '<input type="radio" name="defined[' . $success->getId() . ']" value="Y" checked /><div class="radio_space">Oui</div>';
+                      echo '<input type="radio" name="defined[' . $success->getId() . ']" value="N" />Non';
+                    }
+                    else
+                    {
+                      echo '<input type="radio" name="defined[' . $success->getId() . ']" value="Y" /><div class="radio_space">Oui</div>';
+                      echo '<input type="radio" name="defined[' . $success->getId() . ']" value="N" checked />Non';
+                    }
+                  echo '</div>';
                 echo '</div>';
 
                 echo '<div class="succes_mod_bottom">';

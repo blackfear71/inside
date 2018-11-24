@@ -210,6 +210,9 @@
       // Id mission
       $id_mission = $mission->getId();
 
+      // Référence mission
+      $reference = $mission->getReference();
+      
       // Référence mission remplie
       $ref_mission = $i;
 
@@ -272,6 +275,7 @@
       $classe = $zone . '_' . $position . '_mission';
 
       $myMissionButtons = array('id_mission'  => $id_mission,
+                                'reference'   => $reference,
                                 'ref_mission' => $ref_mission,
                                 'key_mission' => $key,
                                 'page'        => $page,
@@ -650,6 +654,154 @@
         default:
           break;
       }
+    }
+  }
+
+  // Génération valeur succès mission
+  // RETOUR : Aucun
+  function insertOrUpdateSuccesMission($reference, $identifiant)
+  {
+    switch ($reference)
+    {
+      case 'noel_2017':
+        insertOrUpdateSuccesValue('christmas2017', $identifiant, 1);
+        insertOrUpdateSuccesValue('christmas2017_2', $identifiant, 1);
+        break;
+
+      case 'paques_2018':
+        insertOrUpdateSuccesValue('golden-egg', $identifiant, 1);
+        insertOrUpdateSuccesValue('rainbow-egg', $identifiant, 1);
+        break;
+
+      case 'halloween_2018':
+        insertOrUpdateSuccesValue('wizard', $identifiant, 1);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  // Génération valeur succès
+  // RETOUR : Aucun
+  function insertOrUpdateSuccesValue($reference, $identifiant, $incoming)
+  {
+    $value  = NULL;
+    $action = NULL;
+
+    global $bdd;
+
+    // Détermination valeur à insérer
+    switch ($reference)
+    {
+      // Valeur saisie conservée
+      case "beginning":
+      case "developper":
+      case "padawan":
+        $value = $incoming;
+        break;
+
+      // Incrémentation de la valeur précédente
+      case "publisher":
+      case "viewer":
+      case "commentator":
+      case "listener":
+      case "speaker":
+      case "funny":
+      case "self-satisfied":
+      case "buyer":
+      case "eater":
+      case "generous":
+      case "creator":
+      case "applier":
+      case "debugger":
+      case "compiler":
+      case "christmas2017":
+      case "christmas2017_2":
+      case "golden-egg":
+      case "rainbow-egg":
+      case "wizard":
+        $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $data0 = $req0->fetch();
+
+        if ($req0->rowCount() > 0)
+          $value = $data0['value'] + $incoming;
+        else
+          $value = $incoming;
+
+        $req0->closeCursor();
+        break;
+
+      // Valeur maximale conservée
+      case "greedy":
+        $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $data0 = $req0->fetch();
+
+        if ($req0->rowCount() > 0)
+        {
+          if ($incoming > $data0['value'])
+            $value = $incoming;
+        }
+        else
+          $value = $incoming;
+
+        $req0->closeCursor();
+        break;
+
+      default:
+        $value = NULL;
+        break;
+    }
+
+    /****************************************/
+    /*** Détermination action à effectuer ***/
+    /****************************************/
+    if (!is_null($value))
+    {
+      if ($value == 0)
+        $action = 'delete';
+      else
+      {
+        $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $data1 = $req1->fetch();
+
+        if ($req1->rowCount() > 0)
+          $action = 'update';
+        else
+          $action = 'insert';
+
+        $req1->closeCursor();
+      }
+    }
+
+    /***************************************************************/
+    /*** Insertion / modification / suppression de chaque succès ***/
+    /***************************************************************/
+    switch ($action)
+    {
+      case 'insert':
+        $req2 = $bdd->prepare('INSERT INTO success_users(reference, identifiant, value) VALUES(:reference, :identifiant, :value)');
+        $req2->execute(array(
+          'reference'   => $reference,
+          'identifiant' => $identifiant,
+          'value'       => $value
+          ));
+        $req2->closeCursor();
+        break;
+
+      case 'update':
+        $req2 = $bdd->prepare('UPDATE success_users SET value = :value WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $req2->execute(array(
+          'value' => $value
+        ));
+        $req2->closeCursor();
+        break;
+
+      case 'delete':
+        $req2 = $bdd->exec('DELETE FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+
+      default:
+        break;
     }
   }
 ?>

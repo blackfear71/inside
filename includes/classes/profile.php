@@ -24,8 +24,8 @@
       $this->pseudo      = '';
       $this->avatar      = '';
       $this->email       = '';
-      $this->beginner    = '';
-      $this->developper  = '';
+      $this->beginner    = 0;
+      $this->developper  = 0;
       $this->expenses    = '';
     }
 
@@ -61,12 +61,6 @@
 
       if (isset($data['email']))
         $this->email       = $data['email'];
-
-      if (isset($data['beginner']))
-        $this->beginner    = $data['beginner'];
-
-      if (isset($data['developper']))
-        $this->developper  = $data['developper'];
 
       if (isset($data['expenses']))
         $this->expenses    = $data['expenses'];
@@ -161,7 +155,18 @@
       return $this->email;
     }
 
-    // True Insider
+    // Dépenses (total)
+    public function setExpenses($expenses)
+    {
+      $this->expenses = $expenses;
+    }
+
+    public function getExpenses()
+    {
+      return $this->expenses;
+    }
+
+    // Succès Beginner
     public function setBeginner($beginner)
     {
       $this->beginner = $beginner;
@@ -172,7 +177,7 @@
       return $this->beginner;
     }
 
-    // Développeur
+    // Succès Developper
     public function setDevelopper($developper)
     {
       $this->developper = $developper;
@@ -181,17 +186,6 @@
     public function getDevelopper()
     {
       return $this->developper;
-    }
-
-    // Dépenses (total)
-    public function setExpenses($expenses)
-    {
-      $this->expenses = $expenses;
-    }
-
-    public function getExpenses()
-    {
-      return $this->expenses;
     }
   }
 
