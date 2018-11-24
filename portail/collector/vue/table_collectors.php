@@ -225,7 +225,7 @@
                 echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" style="display: none;" />';
 
               // Modification date
-              echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
+              echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
             echo '</div>';
 
             echo '<div class="zone_collector_bas">';

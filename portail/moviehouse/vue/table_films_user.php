@@ -8,7 +8,7 @@
         echo '</td>';
 
         echo '<td class="td_saisie_date">';
-          echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="date_saisie_rapide" />';
+          echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker" class="date_saisie_rapide" />';
         echo '</td>';
 
         echo '<td class="td_saisie_ajouter">';
@@ -369,7 +369,7 @@
         echo '</td>';
 
         echo '<td class="td_saisie_date">';
-          echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="date_saisie_rapide" />';
+          echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker2" class="date_saisie_rapide" />';
         echo '</td>';
 
         echo '<td class="td_saisie_ajouter">';

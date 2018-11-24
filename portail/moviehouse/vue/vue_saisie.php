@@ -76,15 +76,15 @@
                         echo '<img src="../../includes/icons/moviehouse/date.png" alt="date" title="Date de sortie cinéma" class="icone_saisie" />';
 
                         if (isBlankDate($film->getDate_theater()))
-                          echo '<input type="text" name="date_theater" value="" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="monoligne_film" />';
+                          echo '<input type="text" name="date_theater" value="" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker" class="monoligne_film" />';
                         else
-                          echo '<input type="text" name="date_theater" value="' . formatDateForDisplay($film->getDate_theater()) . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" id="datepicker" class="monoligne_film" />';
+                          echo '<input type="text" name="date_theater" value="' . formatDateForDisplay($film->getDate_theater()) . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker" class="monoligne_film" />';
                       echo '</div>';
 
                       // Date de sortie DVD
                       echo '<div class="zone_icone_saisie">';
                         echo '<img src="../../includes/icons/moviehouse/date.png" alt="date" title="Date de sortie DVD/Bluray" class="icone_saisie" />';
-                        echo '<input type="text" name="date_release" value="' . formatDateForDisplay($film->getDate_release()) . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" id="datepicker2" class="monoligne_film" />';
+                        echo '<input type="text" name="date_release" value="' . formatDateForDisplay($film->getDate_release()) . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker2" class="monoligne_film" />';
                       echo '</div>';
 
                       // Lien trailer
@@ -126,7 +126,7 @@
                         // Date sortie
                         echo '<div class="zone_icone_saisie">';
                           echo '<img src="../../includes/icons/moviehouse/date.png" alt="date" title="Date proposée" class="icone_saisie" />';
-                          echo '<input type="text" name="date_doodle" value="' . formatDateForDisplay($film->getDate_doodle()) . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" id="datepicker3" class="monoligne_film_short" />';
+                          echo '<input type="text" name="date_doodle" value="' . formatDateForDisplay($film->getDate_doodle()) . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker3" class="monoligne_film_short" />';
 
                           // Selection de l'heure
                           echo '<select name="hours_doodle" class="select_time">';

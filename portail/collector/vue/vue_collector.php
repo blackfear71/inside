@@ -175,7 +175,7 @@
 
                     // Saisie date
                     echo '<td class="td_saisie_collector_date">';
-                      echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker1" class="saisie_date_collector" required />';
+                      echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker1" class="saisie_date_collector" required />';
                     echo '</td>';
 
                     // Bouton
@@ -268,7 +268,7 @@
 
                     // Saisie date
                     echo '<td class="td_saisie_collector_date">';
-                      echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" id="datepicker2" class="saisie_date_collector" required />';
+                      echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker2" class="saisie_date_collector" required />';
                     echo '</td>';
 
                     // Bouton
