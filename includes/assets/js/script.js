@@ -1,4 +1,24 @@
-// Masque la fenêtre des alertes
+// Au chargement du document
+$(document).ready(function()
+{
+  $('#progress_circle_header').circlize(
+  {
+		radius: 31,
+    percentage: $('#progress_circle_header').attr('data-perc'),
+		text: $('#progress_circle_header').attr('data-text'),
+    min: $('#progress_circle_header').attr('data-perc'),
+    max: 100,
+    typeUse: "useText",
+		useAnimations: false,
+		useGradient: false,
+		background: "#d3d3d3",
+		foreground: "#ff1937",
+		stroke: 3,
+		duration: 1000
+	});
+});
+
+  // Masque la fenêtre des alertes
 function masquerAlerte(id)
 {
   document.getElementById(id).style.display = "none";

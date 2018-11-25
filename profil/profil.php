@@ -45,6 +45,7 @@
           $profil       = getProfile($_GET['user']);
           $preferences  = getPreferences($_GET['user']);
           $statistiques = getStatistiques($_GET['user']);
+          $progression  = getProgress($profil->getExperience());
           break;
       }
       break;
@@ -140,6 +141,7 @@
           $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
           $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
+          $profil->setExperience(htmlspecialchars($profil->getExperience()));
           $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
           $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));
@@ -156,6 +158,13 @@
           $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
           $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
           $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+
+          $progression['niveau']   = htmlspecialchars($progression['niveau']);
+          $progression['exp_min']  = htmlspecialchars($progression['exp_min']);
+          $progression['exp_max']  = htmlspecialchars($progression['exp_max']);
+          $progression['exp_lvl']  = htmlspecialchars($progression['exp_lvl']);
+          $progression['progress'] = htmlspecialchars($progression['progress']);
+          $progression['percent']  = htmlspecialchars($progression['percent']);
           break;
       }
       break;

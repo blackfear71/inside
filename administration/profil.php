@@ -52,6 +52,7 @@
       $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
       $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
       $profil->setEmail(htmlspecialchars($profil->getEmail()));
+      $profil->setExperience(htmlspecialchars($profil->getExperience()));
       $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
       break;
 

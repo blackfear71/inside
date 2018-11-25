@@ -1,3 +1,23 @@
+// Au chargement du document
+$(document).ready(function()
+{
+  $('#progress_circle').circlize(
+  {
+		radius: 60,
+    percentage: $('#progress_circle').attr('data-perc'),
+		text: $('#progress_circle').attr('data-text'),
+    min: $('#progress_circle').attr('data-perc'),
+    max: 100,
+    typeUse: "useText",
+		useAnimations: true,
+		useGradient: false,
+		background: "#d3d3d3",
+		foreground: "#a3a3a3",
+		stroke: 5,
+		duration: 1000
+	});
+});
+
 // Au chargement du document complet
 $(window).load(function()
 {

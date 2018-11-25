@@ -162,6 +162,15 @@
 	word-wrap: break-word;
 }
 
+.infos_niveau
+{
+	margin-left: 120px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #ff1937;
+	text-align: left;
+	word-wrap: break-word;
+}
+
 .zone_form_users
 {
 	clear: both;

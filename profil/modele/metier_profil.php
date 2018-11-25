@@ -112,6 +112,28 @@
     return $preferences;
   }
 
+  // METIER : Récupération des données de progression
+  // RETOUR : Tableau des données de progression
+  function getProgress($experience)
+  {
+    $niveau   = floor(sqrt($experience / 10));
+    $exp_min  = 10 * $niveau ** 2;
+    $exp_max  = 10 * ($niveau + 1) ** 2;
+    $exp_lvl  = $exp_max - $exp_min;
+    $progress = $experience - $exp_min;
+    $percent  = floor($progress * 100 / $exp_lvl);
+
+    $progression = array('niveau'   => $niveau,
+                         'exp_min'  => $exp_min,
+                         'exp_max'  => $exp_max,
+                         'exp_lvl'  => $exp_lvl,
+                         'progress' => $progress,
+                         'percent'  => $percent
+                        );
+
+    return $progression;
+  }
+
   // METIER : Mise à jour du pseudo
   // RETOUR : Aucun
   function changePseudo($user, $post)

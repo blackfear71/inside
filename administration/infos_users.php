@@ -13,7 +13,8 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-			$listeUsers  = getUsers();
+			$listeUsers   = getUsers();
+      $listeNiveaux = getProgress($listeUsers);
       break;
 
     case 'changeBeginnerStatus':
@@ -42,11 +43,19 @@
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
 				$user->setAvatar(htmlspecialchars($user->getAvatar()));
         $user->setEmail(htmlspecialchars($user->getEmail()));
+        $user->setExperience(htmlspecialchars($user->getExperience()));
         $user->setBeginner(htmlspecialchars($user->getBeginner()));
         $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
 			}
 
       unset($user);
+
+      foreach ($listeNiveaux as &$niveau)
+      {
+        $niveau = htmlspecialchars($niveau);
+      }
+
+      unset($niveau);
       break;
 
     case 'changeBeginnerStatus':

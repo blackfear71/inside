@@ -56,6 +56,9 @@
 
     if ($_SESSION['index']['connected'] == true)
     {
+      // Récupération expérience
+      getExperience($_SESSION['user']['identifiant']);
+
       // Initialisation génération mission
       if (!isset($_SESSION['missions']))
         $_SESSION['missions'] = array();
@@ -107,6 +110,34 @@
     }
 
     //var_dump($_SESSION);
+  }
+
+  // Récupération expérience utilisateur
+  // RETOUR : tableau d'expérience
+  function getExperience($identifiant)
+  {
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT id, identifiant, experience FROM users WHERE identifiant = "' . $identifiant . '"');
+    $donnees = $reponse->fetch();
+
+    $experience = $donnees['experience'];
+    $niveau     = floor(sqrt($experience / 10));
+    $exp_min    = 10 * $niveau ** 2;
+    $exp_max    = 10 * ($niveau + 1) ** 2;
+    $exp_lvl    = $exp_max - $exp_min;
+    $progress   = $experience - $exp_min;
+    $percent    = floor($progress * 100 / $exp_lvl);
+
+    $_SESSION['user']['experience'] = array('niveau'   => $niveau,
+                                            'exp_min'  => $exp_min,
+                                            'exp_max'  => $exp_max,
+                                            'exp_lvl'  => $exp_lvl,
+                                            'progress' => $progress,
+                                            'percent'  => $percent
+                                           );
+
+    $reponse->closeCursor();
   }
 
   // Récupération des missions actives
@@ -212,7 +243,7 @@
 
       // Référence mission
       $reference = $mission->getReference();
-      
+
       // Référence mission remplie
       $ref_mission = $i;
 
@@ -803,5 +834,62 @@
       default:
         break;
     }
+  }
+
+  // Mise à jour expérience
+  // RETOUR : Aucun
+  function insertExperience($identifiant, $action)
+  {
+    global $bdd;
+
+    $experience = 0;
+
+    switch($action)
+    {
+      case 'add_expense':
+        $experience = 5;
+        break;
+
+      case 'add_film':
+      case 'add_idea':
+      case 'all_missions':
+        $experience = 10;
+        break;
+
+      case 'add_collector':
+      case 'add_bug':
+        $experience = 15;
+        break;
+
+      case 'winner_mission_3':
+        $experience = 30;
+        break;
+
+      case 'winner_mission_2':
+        $experience = 50;
+        break;
+
+      case 'winner_mission_1':
+        $experience = 100;
+        break;
+
+      default:
+        break;
+    }
+
+    // Lecture expérience actuelle de l'utilisateur
+    $req = $bdd->query('SELECT id, identifiant, experience FROM users WHERE identifiant = "' . $identifiant . '"');
+    $data = $req->fetch();
+    $current_experience = $data['experience'];
+    $req->closeCursor();
+
+    $new_experience = $current_experience + $experience;
+
+    // Mise à jour de l'utilisateur
+    $req2 = $bdd->prepare('UPDATE users SET experience = :experience WHERE identifiant = "' . $identifiant . '"');
+    $req2->execute(array(
+      'experience' => $new_experience
+    ));
+    $req2->closeCursor();
   }
 ?>

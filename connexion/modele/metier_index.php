@@ -93,6 +93,7 @@
     $status           = "I";
     $avatar           = "";
     $email            = "";
+    $experience       = 0;
     $expenses         = 0;
 
     // Initialisations préférences
@@ -136,6 +137,7 @@
                                                   pseudo,
                                                   avatar,
                                                   email,
+                                                  experience,
                                                   expenses)
                                            VALUES(:identifiant,
                                                   :salt,
@@ -145,6 +147,7 @@
                                                   :pseudo,
                                                   :avatar,
                                                   :email,
+                                                  :experience,
                                                   :expenses
                                                  )');
   				$req->execute(array(
@@ -156,6 +159,7 @@
   					'pseudo'      => $pseudo,
   					'avatar'      => $avatar,
             'email'       => $email,
+            'experience'  => $experience,
             'expenses'    => $expenses
   					));
   				$req->closeCursor();

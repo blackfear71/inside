@@ -9,9 +9,10 @@
     private $pseudo;
     private $avatar;
     private $email;
+    private $experience;
+    private $expenses;
     private $beginner;
     private $developper;
-    private $expenses;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -24,9 +25,10 @@
       $this->pseudo      = '';
       $this->avatar      = '';
       $this->email       = '';
+      $this->experience  = '';
+      $this->expenses    = '';
       $this->beginner    = 0;
       $this->developper  = 0;
-      $this->expenses    = '';
     }
 
     // Constructeur de l'objet Profile en fonction des données
@@ -61,6 +63,9 @@
 
       if (isset($data['email']))
         $this->email       = $data['email'];
+
+      if (isset($data['experience']))
+        $this->experience  = $data['experience'];
 
       if (isset($data['expenses']))
         $this->expenses    = $data['expenses'];
@@ -153,6 +158,17 @@
     public function getEmail()
     {
       return $this->email;
+    }
+
+    // Expérience
+    public function setExperience($experience)
+    {
+      $this->experience = $experience;
+    }
+
+    public function getExperience()
+    {
+      return $this->experience;
     }
 
     // Dépenses (total)

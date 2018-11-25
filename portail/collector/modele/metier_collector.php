@@ -367,17 +367,20 @@
       elseif ($post['type_collector'] == "I")
         insertNotification($user, 'culte_image', $new_id);
 
-      // Message d'alerte
-      if ($post['type_collector'] == "T")
-        $_SESSION['alerts']['collector_added'] = true;
-      elseif ($post['type_collector'] == "I")
-        $_SESSION['alerts']['image_collector_added'] = true;
-
       // Génération succès
       insertOrUpdateSuccesValue('listener', $user, 1);
 
       if ($post['speaker'] != "other")
         insertOrUpdateSuccesValue('speaker', $post['speaker'], 1);
+
+      // Ajout expérience
+      insertExperience($user, 'add_collector');
+
+      // Message d'alerte
+      if ($post['type_collector'] == "T")
+        $_SESSION['alerts']['collector_added'] = true;
+      elseif ($post['type_collector'] == "I")
+        $_SESSION['alerts']['image_collector_added'] = true;
     }
     else
       $_SESSION['alerts']['wrong_date'] = true;

@@ -149,6 +149,151 @@
     return $log;
   }
 
+  // FONCTION : Attribution expérience fin de mission
+  // RETOUR : Tableau log traitement
+  // Fréquence : tous les jours à 7h
+  function insertExperienceWinners()
+  {
+    $log      = NULL;
+    $done_yet = false;
+
+    // Détermination si chaîne déjà passée
+    $dirJ = '../cron/logs/daily';
+
+    $filesJ = scandir($dirJ, 1);
+
+    // Suppression racines de dossier
+    unset($filesJ[array_search('..', $filesJ)]);
+    unset($filesJ[array_search('.', $filesJ)]);
+
+    if (!empty($filesJ))
+    {
+      // Tri sur date
+      foreach ($filesJ as $fileJ)
+      {
+        $tri_anneeJ[]   = substr($fileJ, 12, 4);
+        $tri_moisJ[]    = substr($fileJ, 9, 2);
+        $tri_jourJ[]    = substr($fileJ, 6, 2);
+        $tri_heureJ[]   = substr($fileJ, 17, 2);
+        $tri_minuteJ[]  = substr($fileJ, 20, 2);
+        $tri_secondeJ[] = substr($fileJ, 23, 2);
+      }
+
+      array_multisort($tri_anneeJ, SORT_DESC, $tri_moisJ, SORT_DESC, $tri_jourJ, SORT_DESC, $tri_heureJ, SORT_DESC, $tri_minuteJ, SORT_DESC, $tri_secondeJ, SORT_DESC, $filesJ);
+
+      // Test si CRON déjà passé
+      foreach ($filesJ as $fileJ)
+      {
+        $date_fichier = substr($fileJ, 12, 4) . substr($fileJ, 9, 2) . substr($fileJ, 6, 2);
+
+        // Si fichier ancien, on arrête la boucle
+        if ($date_fichier < date('Ymd'))
+          break;
+
+        // Si fichier du jour alors on sait qu'on a déjà attribué l'expérience
+        if ($date_fichier == date('Ymd'))
+        {
+          $done_yet = true;
+          break;
+        }
+      }
+    }
+
+    if ($done_yet == false)
+    {
+      $log = array('trt' => '/* Expérience missions */', 'status' => 'KO');
+
+      global $bdd;
+
+      $date_moins_1 = date('Ymd', strtotime('now - 1 Days'));
+
+      // Lecture des missions se terminant la veille
+      $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_fin = ' . $date_moins_1);
+
+      while($data = $req->fetch())
+      {
+        $id_mission = $data['id'];
+
+        $tableau_users = array();
+
+        // Construction tableau des participants
+        $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' ORDER BY identifiant ASC');
+        while($data2 = $req2->fetch())
+        {
+          // Récupération des valeurs d'avancement de chaque mission par utilisateur
+          if (!isset($tableau_users[$data2['identifiant']]) OR empty($tableau_users[$data2['identifiant']]))
+            $tableau_users[$data2['identifiant']] = array('avancement' => intval($data2['avancement']), 'rank' => 0);
+          else
+            $tableau_users[$data2['identifiant']] = array('avancement' => $tableau_users[$data2['identifiant']]['avancement'] + intval($data2['avancement']), 'rank' => 0);
+        }
+        $req2->closeCursor();
+
+        if (!empty($tableau_users))
+        {
+          // Tri sur avancement
+          foreach ($tableau_users as $user)
+          {
+            $tri_rank[] = $user['avancement'];
+          }
+
+          array_multisort($tri_rank, SORT_DESC, $tableau_users);
+
+          // Affectation du rang
+          $prevTotal   = 0;
+          $currentRank = 0;
+
+          foreach ($tableau_users as $key => &$user)
+          {
+            $currentTotal = $user['avancement'];
+
+            if ($currentTotal != $prevTotal)
+            {
+              $currentRank += 1;
+              $prevTotal = $user['avancement'];
+            }
+
+            // Suppression des rangs > 3 sinon on enregistre le rang
+            if ($currentRank > 3)
+              unset($tableau_users[$key]);
+            else
+             $user['rank'] = $currentRank;
+          }
+
+          unset($user);
+
+          // Ajout expérience pour chaque gagnant
+          foreach ($tableau_users as $key => $user)
+          {
+            switch ($user['rank'])
+            {
+              case 1:
+                insertExperience($key, 'winner_mission_1');
+                break;
+
+              case 2:
+                insertExperience($key, 'winner_mission_2');
+                break;
+
+              case 3:
+                insertExperience($key, 'winner_mission_3');
+                break;
+
+              default:
+                break;
+            }
+          }
+        }
+      }
+
+      // Traitement effectué
+      $log['status'] = 'OK';
+
+      $req->closeCursor();
+    }
+
+    return $log;
+  }
+
   // FONCTION : Recalcul des dépenses pour tous les utilisateurs
   // RETOUR : Tableau log traitement
   // Fréquence : tous les lundis à 7h

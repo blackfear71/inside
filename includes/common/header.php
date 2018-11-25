@@ -94,6 +94,9 @@
         echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
           echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
 
+          if ($_SESSION['user']['identifiant'] != "admin")
+            echo '<div class="circular_bar_header" id="progress_circle_header" data-perc="' . $_SESSION['user']['experience']['percent'] . '" data-text=""></div>';
+
           if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
             echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
           else

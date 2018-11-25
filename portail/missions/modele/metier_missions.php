@@ -191,7 +191,12 @@
       }
 
       if (empty($mission))
+      {
+        // Ajout expérience
+        insertExperience($user, 'all_missions');
+
         $_SESSION['alerts']['mission_achieved'] = true;
+      }
     }
   }
 

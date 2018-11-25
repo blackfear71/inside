@@ -39,20 +39,29 @@
 	border-collapse: collapse;
 }
 
+.zone_profil_utilisateur_experience
+{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 25%;
+	background-color: #f3f3f3;
+	border-bottom-left-radius: 5px;
+	text-align: center;
+}
+
 .zone_profil_utilisateur_pseudo
 {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	width: 40%;
+	width: 25%;
 	background-color: #e3e3e3;
-	border-bottom-left-radius: 5px;
 }
 
 .zone_profil_utilisateur_avatar
 {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	width: 40%;
+	width: 25%;
 	background-color: #f3f3f3;
 }
 
@@ -61,6 +70,7 @@
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	width: 25%;
 	background-color: #e3e3e3;
 	border-bottom-right-radius: 5px;
 }
@@ -70,6 +80,16 @@
 	margin-bottom: 20px;
 	margin-top: 20px;
 	text-align: center;
+}
+
+.circular_bar
+{
+	font-family: robotolight, Verdana, sans-serif;
+}
+
+.total_xp
+{
+	font-family: robotolight, Verdana, sans-serif;
 }
 
 .monoligne_profil

@@ -41,6 +41,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script type="text/javascript" src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
+<script type="text/javascript" src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
 <?php if (!empty($script_head)) { ?>

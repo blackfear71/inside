@@ -104,6 +104,9 @@
       // Génération succès
       insertOrUpdateSuccesValue('debugger', $author, 1);
 
+      // Ajout expérience
+      insertExperience($author, 'add_bug');
+
       $_SESSION['alerts']['bug_submitted'] = true;
     }
 

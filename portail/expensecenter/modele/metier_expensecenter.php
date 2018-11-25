@@ -359,6 +359,9 @@
             insertOrUpdateSuccesValue('generous', $buyer, 1);
         }
 
+        // Ajout expérience
+        insertExperience($_SESSION['user']['identifiant'], 'add_expense');
+
         // Message insertion effectuée
         $_SESSION['alerts']['depense_added'] = true;
       }

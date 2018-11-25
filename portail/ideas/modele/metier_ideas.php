@@ -125,6 +125,9 @@
     // Génération succès
     insertOrUpdateSuccesValue('creator', $user, 1);
 
+    // Ajout expérience
+    insertExperience($user, 'add_idea');
+
     $_SESSION['alerts']['idea_submitted'] = true;
 
     return $new_id;
@@ -188,8 +191,6 @@
                                      WHERE id         = ' . $id);
     $req->execute($data);
     $req->closeCursor();
-
-    var_dump($status);
 
     // Génération succès
     if ($status == "D")

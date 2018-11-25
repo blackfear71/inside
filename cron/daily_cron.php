@@ -18,9 +18,6 @@
   $films_trt = isCinemaToday();
   array_push($daily_trt, $films_trt);
 
-  // Mise à jour des succès
-  // à développer (après la refonte des succès)
-
   // Durée mission
   $duration_missions = durationMissions();
 
@@ -51,6 +48,12 @@
         break;
     }
   }
+
+  // Ajout expérience pour les gagnants
+  $experience_missions = insertExperienceWinners();
+
+  if (!empty($experience_missions))
+    array_push($daily_trt, $experience_missions);
 
   // Génération log
   $heure_fin = date('His');

@@ -492,7 +492,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, experience FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
@@ -507,6 +507,28 @@
     $reponse->closeCursor();
 
     return $listeUsers;
+  }
+
+  // METIER : Récupération des données de progression
+  // RETOUR : Tableau des données de progression
+  function getProgress($listUsers)
+  {
+    $listProgression = array();
+
+    foreach ($listUsers as $user)
+    {
+      $experience = $user->getExperience();
+      $niveau   = floor(sqrt($experience / 10));
+      $exp_min  = 10 * $niveau ** 2;
+      $exp_max  = 10 * ($niveau + 1) ** 2;
+      $exp_lvl  = $exp_max - $exp_min;
+      $progress = $experience - $exp_min;
+      $percent  = floor($progress * 100 / $exp_lvl);
+
+      $listProgression[$user->getIdentifiant()] = $niveau;
+    }
+    
+    return $listProgression;
   }
 
   // METIER : Lecture succès Beginner et Developper

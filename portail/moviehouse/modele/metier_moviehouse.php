@@ -514,6 +514,9 @@
       // Génération succès
       insertOrUpdateSuccesValue('publisher', $user, 1);
 
+      // Ajout expérience
+      insertExperience($user, 'add_film');
+
       $_SESSION['alerts']['film_added'] = true;
     }
     else
@@ -1246,6 +1249,9 @@
 
         // Génération succès
         insertOrUpdateSuccesValue('publisher', $user, 1);
+
+        // Ajout expérience
+        insertExperience($user, 'add_film');
 
         $_SESSION['alerts']['film_added'] = true;
       }

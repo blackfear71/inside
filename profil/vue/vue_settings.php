@@ -10,6 +10,14 @@
   <!-- Tableau modification pseudo & avatar -->
   <table class="zone_profil_utilisateur_table">
     <tr>
+      <!-- Visualisation expérience -->
+      <td class="zone_profil_utilisateur_experience">
+        <?php
+          echo '<div class="circular_bar" id="progress_circle" data-perc="' . $progression['percent'] . '" data-text="Niveau ' . $progression['niveau'] . '"></div>';
+          echo '<div class="total_xp">Total expérience : <strong>' . $profil->getExperience() . 'XP</strong></div>';
+        ?>
+      </td>
+
       <!-- Saisie pseudo -->
       <td class="zone_profil_utilisateur_pseudo">
         <?php
