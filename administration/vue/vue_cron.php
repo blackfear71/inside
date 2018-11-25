@@ -49,7 +49,6 @@
               Exécute les tâches suivantes :<br />
               <ul>
                 <li>Recherche les sorties cinéma du jour et insère une notification</li>
-                <li>Mise à jour des succès pour tous les utilisateurs (à venir)</li>
                 <li>Notification début et fin de mission</li>
                 <li>Attribution expérience fin de mission</li>
                 <li>Génération log journalier</li>
