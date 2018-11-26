@@ -122,7 +122,7 @@
           // Affichage des succès
           $lvl = 0;
 
-          echo '<div class="zone_succes_admin">';
+          echo '<div class="zone_succes_admin" style="display: none;">';
             foreach ($listeSuccess as $keySuccess => $success)
             {
               if ($success->getLevel() != $lvl)

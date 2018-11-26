@@ -69,6 +69,9 @@ $(window).load(function()
   // On associe une classe pour y ajouter une transition dans le css
   $('.zone_infos').addClass('masonry');
 
+  // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_succes_admin').css('display', 'block');
+
   // On lance Masonry après avoir chargé les images (Succès)
   $('.zone_niveau_succes_admin').masonry({
     // Options

@@ -17,7 +17,7 @@
   */
   $lvl = 0;
 
-  echo '<div class="zone_succes_profil">';
+  echo '<div class="zone_succes_profil" style="display: none;">';
     foreach ($listeSuccess as $keySuccess => $success)
     {
       if ($success->getLevel() != $lvl)
