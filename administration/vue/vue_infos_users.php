@@ -56,7 +56,7 @@
                 echo '<div class="infos_mail">' . $user->getEmail() . '</div>';
 
                 // Niveau
-                echo '<div class="infos_niveau">Niveau ' . $listeNiveaux[$user->getIdentifiant()] . '</div>';
+                echo '<div class="infos_niveau">Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
 
                 echo '<div class="zone_form_users">';
                   // Formulaire True Insider
