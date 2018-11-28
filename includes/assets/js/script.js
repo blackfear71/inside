@@ -73,26 +73,28 @@ function deployTopMenu(id, icon)
 // Changement thème
 function changeTheme(background, header, footer, logo)
 {
-  if (background != null)
+  if (background != "")
   {
     document.body.style.backgroundImage  = "url(" + background + "), linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px)";
     document.body.style.backgroundRepeat = "repeat-y, repeat, repeat";
     document.body.style.backgroundSize   = "100%, 100% 200px, 200px 100%";
   }
 
-  if (header != null)
+  if (header != "")
   {
     document.getElementsByClassName("zone_bandeau")[0].style.backgroundImage  = "url('" + header + "')";
     document.getElementsByClassName("zone_bandeau")[0].style.backgroundRepeat = "repeat-x";
   }
 
-  if (footer != null)
+  if (footer != "")
   {
     document.getElementsByTagName("footer")[0].style.backgroundImage  = "url('" + footer + "')";
     document.getElementsByTagName("footer")[0].style.backgroundRepeat = "repeat-x";
   }
 
-  if (logo != null)
+  console.log(">" + logo + "<");
+
+  if (logo != "")
   {
     var image  = document.getElementById("logo_inside_header");
     var source = image.getAttribute("src");
