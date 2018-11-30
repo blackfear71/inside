@@ -40,7 +40,7 @@
 
       if (date('Ymd') < $myMission->getDate_deb() OR (date('Ymd') == $myMission->getDate_deb() AND date('His') < $myMission->getHeure()))
         $myMission->setStatut('V');
-      elseif (date('Ymd') >= $myMission->getDate_deb() AND date('Ymd') <= $myMission->getDate_fin() AND date('His') >= $myMission->getHeure())
+      elseif (((date('Ymd') == $myMission->getDate_deb() AND date('His') >= $myMission->getHeure()) OR date('Ymd') > $myMission->getDate_deb()) AND date('Ymd') <= $myMission->getDate_fin())
         $myMission->setStatut('C');
       elseif (date('Ymd') > $myMission->getDate_fin())
         $myMission->setStatut('A');
