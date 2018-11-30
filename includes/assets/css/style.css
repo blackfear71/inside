@@ -831,6 +831,7 @@ nav
 	padding: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	text-align: justify;
 	color: white;
 	border-top: solid 1px #ff4961;
 }

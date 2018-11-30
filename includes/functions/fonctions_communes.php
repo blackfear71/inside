@@ -708,6 +708,11 @@
         insertOrUpdateSuccesValue('wizard', $identifiant, 1);
         break;
 
+      case 'noel_2018':
+        insertOrUpdateSuccesValue('christmas2018', $identifiant, 1);
+        insertOrUpdateSuccesValue('christmas2018_2', $identifiant, 1);
+        break;
+
       default:
         break;
     }
@@ -752,6 +757,8 @@
       case "golden-egg":
       case "rainbow-egg":
       case "wizard":
+      case "christmas2018":
+      case "christmas2018_2":
         $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
         $data0 = $req0->fetch();
 

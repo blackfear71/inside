@@ -491,7 +491,15 @@
       $donnees2 = $reponse2->fetch();
 
       if ($reponse2->rowCount() > 0)
-        $mySuccess->setValue_user($donnees2['value']);
+      {
+        // Contrôle pour les missions que la date de fin soit passée
+        $ended = isMissionEnded($donnees['reference']);
+
+        if ($ended == true)
+        {
+          $mySuccess->setValue_user($donnees2['value']);
+        }
+      }
 
       $reponse2->closeCursor();
 
@@ -538,15 +546,21 @@
         $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" ORDER BY value DESC');
         while ($donnees = $reponse->fetch())
         {
-          // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
-          if ($donnees['value'] >= $success->getLimit_success())
+          // Contrôle pour les missions que la date de fin soit passée
+          $ended = isMissionEnded($success->getReference());
+
+          if ($ended == true)
           {
-            $myRankSuccess = array('identifiant' => $donnees['identifiant'],
-                                   'pseudo'      => $tablePseudos[$donnees['identifiant']],
-                                   'value'       => $donnees['value'],
-                                   'rank'        => 0
-                                  );
-            array_push($rankSuccess, $myRankSuccess);
+            // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
+            if ($donnees['value'] >= $success->getLimit_success())
+            {
+              $myRankSuccess = array('identifiant' => $donnees['identifiant'],
+                                     'pseudo'      => $tablePseudos[$donnees['identifiant']],
+                                     'value'       => $donnees['value'],
+                                     'rank'        => 0
+                                    );
+              array_push($rankSuccess, $myRankSuccess);
+            }
           }
         }
         $reponse->closeCursor();
@@ -590,6 +604,56 @@
     }
 
     return $globalRanks;
+  }
+
+  // METIER : Contrôle pour les missions que la date de fin soit passée
+  // RETOUR : Booléen
+  function isMissionEnded($reference)
+  {
+    $ended            = false;
+    $ref_mission      = "";
+    $date_fin_mission = "";
+
+    // Contrôle pour les missions que la date de fin soit passée
+    switch ($reference)
+    {
+      case "christmas2017":
+      case "christmas2017_2":
+        $ref_mission = "noel_2017";
+        break;
+
+      case "golden-egg":
+      case "rainbow-egg":
+        $ref_mission = "paques_2018";
+        break;
+
+      case "wizard":
+        $ref_mission = "halloween_2018";
+        break;
+
+      case "christmas2018":
+      case "christmas2018_2":
+        $ref_mission = "noel_2018";
+        break;
+
+      default:
+        break;
+    }
+
+    if (!empty($ref_mission))
+    {
+      global $bdd;
+
+      $reponse = $bdd->query('SELECT * FROM missions WHERE reference = "' . $ref_mission . '"');
+      $donnees = $reponse->fetch();
+      $date_fin_mission = $donnees['date_fin'];
+      $reponse->closeCursor();
+    }
+
+    if (empty($ref_mission) OR (!empty($ref_mission) AND date('Ymd') > $date_fin_mission))
+      $ended = true;
+
+    return $ended;
   }
 
   // METIER : Lecture liste des utilisateurs

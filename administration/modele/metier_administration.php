@@ -2002,6 +2002,10 @@
             case "rainbow-egg":
             // Apprenti sorcier
             case "wizard":
+            // Le plein de cadeaux !
+            case "christmas2018":
+            // C'est tout ce que j'ai ?!
+            case "christmas2018_2":
               $mission = 0;
 
               if ($success->getReference() == "christmas2017" OR $success->getReference() == "christmas2017_2")
@@ -2010,6 +2014,8 @@
                 $reference = "paques_2018";
               elseif ($success->getReference() == "wizard" OR $success->getReference() == "wizard")
                 $reference = "halloween_2018";
+              elseif ($success->getReference() == "christmas2018" OR $success->getReference() == "christmas2018_2")
+                $reference = "noel_2018";
 
               // Récupération Id mission et date de fin
               $req0 = $bdd->query('SELECT * FROM missions WHERE reference = "' . $reference . '"');
