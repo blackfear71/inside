@@ -21,7 +21,7 @@
   // Durée mission
   $duration_missions = durationMissions();
 
-  foreach($duration_missions as $mission)
+  foreach ($duration_missions as $mission)
   {
     switch ($mission['one_day'])
     {

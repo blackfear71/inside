@@ -27,21 +27,24 @@
               <img src="includes/icons/common/movie_house.png" alt="movie_house_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo2">
-              <img src="includes/icons/common/expense_center.png" alt="expense_center_grey" class="logo_categories" />
+              <img src="includes/icons/common/food_advisor.png" alt="food_advisor_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo3">
-              <img src="includes/icons/common/petits_pedestres.png" alt="petits_pedestres_grey" class="logo_categories" />
+              <img src="includes/icons/common/expense_center.png" alt="expense_center_grey" class="logo_categories" />
             </span>
             <span class="zone_logo_categories" id="logo4">
-              <img src="includes/icons/common/calendars.png" alt="calendars_grey" class="logo_categories" />
-            </span>
-            <span class="zone_logo_categories" id="logo5">
               <img src="includes/icons/common/collector.png" alt="collector_grey" class="logo_categories" />
             </span>
+            <span class="zone_logo_categories" id="logo5">
+              <img src="includes/icons/common/calendars.png" alt="calendars_grey" class="logo_categories" />
+            </span>
             <span class="zone_logo_categories" id="logo6">
+              <img src="includes/icons/common/petits_pedestres.png" alt="petits_pedestres_grey" class="logo_categories" />
+            </span>
+            <span class="zone_logo_categories" id="logo7">
               <img src="includes/icons/common/missions.png" alt="missions_grey" class="logo_categories" />
             </span>
-            <!--<span class="zone_logo_categories" id="logo7">
+            <!--<span class="zone_logo_categories" id="logo8">
               <img src="includes/icons/common/event_manager.png" alt="event_manager_grey" class="logo_categories" />
             </span>-->
           </div>

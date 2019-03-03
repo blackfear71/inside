@@ -653,8 +653,6 @@
 
     if ($degrees != 0)
     {
-      echo 'test';
-
       switch($type)
       {
         case 'jpeg':
@@ -752,6 +750,7 @@
       case "applier":
       case "debugger":
       case "compiler":
+      case "restaurant-finder":
       case "christmas2017":
       case "christmas2017_2":
       case "golden-egg":
@@ -859,6 +858,7 @@
 
       case 'add_film':
       case 'add_idea':
+      case 'add_restaurant':
       case 'all_missions':
         $experience = 10;
         break;
@@ -898,5 +898,40 @@
       'experience' => $new_experience
     ));
     $req2->closeCursor();
+  }
+
+  // Formatage Id type de restaurant
+  // RETOUR : Id formaté
+  function formatIdRestaurant($id)
+  {
+    // Transforme les caractères accentués en entités HTML
+    $formatted = htmlentities($id, ENT_NOQUOTES, "utf-8");
+
+    // Remplace les entités HTML pour avoir juste le premier caractères non accentué
+    $formatted = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $formatted);
+
+    // Remplace les ligatures tel que : œ, Æ ...
+    $formatted = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $formatted);
+
+    // Supprime tout le reste
+    $formatted = preg_replace('#&[^;]+;#', '', $formatted);
+
+    // Remplace les espaces
+    $formatted = str_replace(" ", "_", $formatted);
+
+    // Passe en minuscule
+    $formatted = strtolower($formatted);
+
+    return $formatted;
+  }
+
+
+  // Formatage du numéro de téléphone
+  // RETOUR : Numéro formaté
+  function formatPhoneNumber($phone)
+  {
+    $formattedPhone = substr($phone, 0, 2) . "." . substr($phone, 2, 2) . "." . substr($phone, 4, 2) . "." . substr($phone, 6, 2) . "." . substr($phone, 8, 2);
+
+    return $formattedPhone;
   }
 ?>

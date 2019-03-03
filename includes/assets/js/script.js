@@ -92,8 +92,6 @@ function changeTheme(background, header, footer, logo)
     document.getElementsByTagName("footer")[0].style.backgroundRepeat = "repeat-x";
   }
 
-  console.log(">" + logo + "<");
-
   if (logo != "")
   {
     var image  = document.getElementById("logo_inside_header");

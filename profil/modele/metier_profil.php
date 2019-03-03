@@ -277,7 +277,7 @@
   // RETOUR : Aucun
   function updatePreferences($user, $post)
   {
-    $error                           = false;
+    $error = false;
 
     global $bdd;
 

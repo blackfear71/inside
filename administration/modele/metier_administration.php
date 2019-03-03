@@ -1992,6 +1992,11 @@
               }
               break;
 
+            // Radar à bouffe
+            case "restaurant-finder":
+              $value = 0;
+              break;
+
             // Lutin de Noël
             case "christmas2017":
             // Je suis ton Père Noël !

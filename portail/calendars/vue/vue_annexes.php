@@ -1,7 +1,7 @@
 <?php
   if (!empty($annexes))
   {
-    foreach($annexes as $annexe)
+    foreach ($annexes as $annexe)
     {
       echo '<div class="zone_annexe">';
         // Image

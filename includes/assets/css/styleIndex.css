@@ -87,6 +87,12 @@
 	opacity: 0;
 }
 
+#logo8
+{
+	animation: 0.6s ease 1.6s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
 .zone_logo_categories
 {
 	display: inline-block;
