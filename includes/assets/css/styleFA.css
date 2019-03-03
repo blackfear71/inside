@@ -381,14 +381,12 @@
 {
 	min-height: 30px;
 	width: calc(100% - 22px);
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 5px 10px 5px 10px;
 	border: solid 1px #a3a3a3;
 	background-color: white;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
-	line-height: 30px;
 	resize: vertical;
 }
 
@@ -662,14 +660,12 @@
 	margin-top: 10px;
 	min-height: 30px;
 	width: calc(100% - 20px);
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 5px 10px 5px 10px;
 	border: 0;
 	background-color: white;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
-	line-height: 30px;
 	resize: vertical;
 }
 

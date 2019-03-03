@@ -244,7 +244,7 @@
                         if (!empty($restaurant->getPhone()))
                           echo '<div class="phone_number">Réservation au ' . formatPhoneNumber($restaurant->getPhone()) . '</div>';
 
-                        echo '<div>' . $restaurant->getDescription() . '</div>';
+                        echo '<div>' . nl2br($restaurant->getDescription()) . '</div>';
                       echo '</div>';
                     }
                   echo '</div>';
