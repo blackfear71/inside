@@ -14,6 +14,8 @@
     $_SESSION['save']['types_restaurants']      = "";
     $_SESSION['save']['description_restaurant'] = "";
     $_SESSION['save']['location']               = "";
+    $_SESSION['save']['website_restaurant']     = "";
+    $_SESSION['save']['plan_restaurant']        = "";
     $_SESSION['save']['saisie_other_location']  = "";
   }
 
@@ -75,6 +77,8 @@
           $restaurant->setTypes(htmlspecialchars($restaurant->getTypes()));
           $restaurant->setLocation(htmlspecialchars($restaurant->getLocation()));
           $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
+          $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
+          $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
           $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
         }
 

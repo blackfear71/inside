@@ -192,6 +192,8 @@
 
                 // Description
                 echo '<div class="zone_saisie_under">';
+                  echo '<input type="text" name="website_restaurant" value="' . $_SESSION['save']['website_restaurant'] . '" placeholder="Site web" class="saisie_lien_restaurant" style="margin-right: 10px;" />';
+                  echo '<input type="text" name="plan_restaurant" value="' . $_SESSION['save']['plan_restaurant'] . '" placeholder="Plan" class="saisie_lien_restaurant" />';
                   echo '<textarea placeholder="Description" name="description_restaurant" class="textarea_saisie_description_restaurant">' . $_SESSION['save']['description_restaurant'] . '</textarea>';
                 echo '</div>';
               echo '</form>';
@@ -235,6 +237,28 @@
                     {
                       if (!empty($exploded))
                         echo '<span class="type_restaurant">' . $exploded . '</span>';
+                    }
+
+                    // Site web et plan
+                    if (!empty($restaurant->getWebsite()) OR !empty($restaurant->getPlan()))
+                    {
+                      echo '<div class="zone_icones_fiches">';
+                        // Site web
+                        if (!empty($restaurant->getWebsite()))
+                        {
+                          echo '<a href="' . $restaurant->getWebsite() . '" target="_blank">';
+                            echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" />';
+                          echo '</a>';
+                        }
+
+                        // Plan
+                        if (!empty($restaurant->getPlan()))
+                        {
+                          echo '<a href="' . $restaurant->getPlan() . '" target="_blank">';
+                            echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche" />';
+                          echo '</a>';
+                        }
+                      echo '</div>';
                     }
 
                     // Numéro et description
@@ -333,6 +357,15 @@
                         $k++;
                       }
                     echo '</div>';
+
+                    // Site web
+                    echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="update_icone_fiche" />';
+                    echo '<input type="text" name="website_restaurant" value="' . $restaurant->getWebsite() . '" placeholder="Site web" class="update_lien_restaurant" />';
+
+                    // Plan
+                    echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="update_icone_fiche" />';
+                    echo '<input type="text" name="plan_restaurant" value="' . $restaurant->getPlan() . '" placeholder="Plan" class="update_lien_restaurant" />';
+
 
                     echo '<div class="description_restaurant">';
                       // Téléphone

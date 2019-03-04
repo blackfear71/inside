@@ -202,6 +202,8 @@
                                        '/inside/portail/collector/collector.php',
                                        //'/inside/portail/eventmanager/eventmanager.php',
                                        '/inside/portail/expensecenter/expensecenter.php',
+                                       '/inside/portail/foodadvisor/foodadvisor.php',
+                                       '/inside/portail/foodadvisor/restaurants.php',
                                        '/inside/portail/moviehouse/details.php',
                                        '/inside/portail/moviehouse/mailing.php',
                                        '/inside/portail/moviehouse/moviehouse.php',
@@ -258,6 +260,8 @@
         case '/inside/portail/collector/collector.php':
         //case '/inside/portail/eventmanager/eventmanager.php':
         case '/inside/portail/expensecenter/expensecenter.php':
+        case '/inside/portail/foodadvisor/foodadvisor.php':
+        case '/inside/portail/foodadvisor/restaurants.php':
         case '/inside/portail/moviehouse/details.php':
         case '/inside/portail/moviehouse/mailing.php':
         case '/inside/portail/moviehouse/moviehouse.php':
@@ -334,8 +338,8 @@
   {
     $duplicated = false;
 
-    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 5*3*3*3 + 10*4*3*3 = 495 emplacements possibles)
-    if (!empty($tableauMissions) AND count($tableauMissions) <= 495)
+    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 5*(3+3+3) + 12*(3+3+3+3) = 189 emplacements possibles)
+    if (!empty($tableauMissions) AND count($tableauMissions) <= 189)
     {
       foreach ($tableauMissions as $missionExistante)
       {

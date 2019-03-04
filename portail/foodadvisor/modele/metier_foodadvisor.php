@@ -90,6 +90,8 @@
     {
       $nom_restaurant         = $post['name_restaurant'];
       $telephone_restaurant   = $post['phone_restaurant'];
+      $website_restaurant     = $post['website_restaurant'];
+      $plan_restaurant        = $post['plan_restaurant'];
       $description_restaurant = $post['description_restaurant'];
 
       if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
@@ -110,6 +112,8 @@
 
       $_SESSION['save']['name_restaurant']        = $post['name_restaurant'];
       $_SESSION['save']['phone_restaurant']       = $post['phone_restaurant'];
+      $_SESSION['save']['website_restaurant']     = $post['website_restaurant'];
+      $_SESSION['save']['plan_restaurant']        = $post['plan_restaurant'];
       $_SESSION['save']['description_restaurant'] = $post['description_restaurant'];
       $_SESSION['save']['location']               = $post['location'];
       $_SESSION['save']['saisie_other_location']  = $post['saisie_other_location'];
@@ -214,6 +218,8 @@
                           'types'       => $types_formatted,
                           'location'    => $lieu_restaurant,
                           'phone'       => $telephone_restaurant,
+                          'website'     => $website_restaurant,
+                          'plan'        => $plan_restaurant,
                           'description' => $description_restaurant
                         );
 
@@ -221,7 +227,9 @@
                                                                  picture,
                     																						 types,
                                                                  location,
-                    																						 phone,
+                                                                 phone,
+                                                                 website,
+                    																						 plan,
                                                                  description
                                                                 )
                     																      VALUES(:name,
@@ -229,6 +237,8 @@
                     																						 :types,
                                                                  :location,
                     																					   :phone,
+                                                                 :website,
+                                                                 :plan,
                                                                  :description
                                                                 )');
       $req->execute($restaurant);
@@ -263,6 +273,8 @@
     {
       $nom_restaurant         = $post['name_restaurant'];
       $telephone_restaurant   = $post['phone_restaurant'];
+      $website_restaurant     = $post['website_restaurant'];
+      $plan_restaurant        = $post['plan_restaurant'];
       $description_restaurant = $post['description_restaurant'];
 
       if ($post['location'] == "other_location" AND !empty($post['update_other_location']))
@@ -396,6 +408,8 @@
                           'types'       => $types_formatted,
                           'location'    => $lieu_restaurant,
                           'phone'       => $telephone_restaurant,
+                          'website'     => $website_restaurant,
+                          'plan'        => $plan_restaurant,
                           'description' => $description_restaurant
                         );
 
@@ -404,6 +418,8 @@
                                                                  types       = :types,
                                                                  location    = :location,
                                                                  phone       = :phone,
+                                                                 website     = :website,
+                                                                 plan        = :plan,
                                                                  description = :description
                                                            WHERE id = ' . $id_restaurant);
       $req2->execute($restaurant);

@@ -7,6 +7,8 @@
     private $types;
     private $location;
     private $phone;
+    private $website;
+    private $plan;
     private $description;
 
     // Constructeur par défaut (objet vide)
@@ -18,6 +20,8 @@
       $this->types       = '';
       $this->location    = '';
       $this->phone       = '';
+      $this->website     = '';
+      $this->plan        = '';
       $this->description = '';
     }
 
@@ -50,6 +54,12 @@
 
       if (isset($data['phone']))
         $this->phone       = $data['phone'];
+
+      if (isset($data['website']))
+        $this->website     = $data['website'];
+
+      if (isset($data['plan']))
+        $this->plan        = $data['plan'];
 
       if (isset($data['description']))
         $this->description = $data['description'];
@@ -120,6 +130,28 @@
     public function getPhone()
     {
       return $this->phone;
+    }
+
+    // Site web
+    public function setWebsite($website)
+    {
+      $this->website = $website;
+    }
+
+    public function getWebsite()
+    {
+      return $this->website;
+    }
+
+    // Plan
+    public function setPlan($plan)
+    {
+      $this->plan = $plan;
+    }
+
+    public function getPlan()
+    {
+      return $this->plan;
     }
 
     // Description
