@@ -264,11 +264,20 @@
                     // Numéro et description
                     if (!empty($restaurant->getPhone()) OR !empty($restaurant->getDescription()))
                     {
+                      $longueur_max = 300;
+
                       echo '<div class="description_restaurant">';
                         if (!empty($restaurant->getPhone()))
                           echo '<div class="phone_number">Réservation au ' . formatPhoneNumber($restaurant->getPhone()) . '</div>';
 
-                        echo '<div>' . nl2br($restaurant->getDescription()) . '</div>';
+                        if (strlen($restaurant->getDescription()) > $longueur_max)
+                        {
+                          echo '<div id="long_description_' . $restaurant->getId() . '" style="display: none;">' . nl2br($restaurant->getDescription()) . '</div>';
+                          echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . substr(nl2br($restaurant->getDescription()), 0, $longueur_max) . '...</div>';
+                          echo '<a onclick="afficherMasquer(\'short_description_' . $restaurant->getId() . '\'); afficherMasquer(\'long_description_' . $restaurant->getId() . '\'); initMasonry();"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
+                        }
+                        else
+                          echo '<div>' . nl2br($restaurant->getDescription()) . '</div>';
                       echo '</div>';
                     }
                   echo '</div>';
@@ -365,7 +374,6 @@
                     // Plan
                     echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="update_icone_fiche" />';
                     echo '<input type="text" name="plan_restaurant" value="' . $restaurant->getPlan() . '" placeholder="Plan" class="update_lien_restaurant" />';
-
 
                     echo '<div class="description_restaurant">';
                       // Téléphone
