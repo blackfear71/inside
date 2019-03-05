@@ -488,6 +488,12 @@
 	text-align: justify;
 }
 
+.zone_types_fiche
+{
+	margin-left: 100px;
+	margin-right: 50px;
+}
+
 .type_restaurant
 {
   display: inline-block;

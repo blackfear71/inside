@@ -231,13 +231,15 @@
                     echo '<div class="nom_restaurant" id="' . $restaurant->getId() . '">' . $restaurant->getName() . '</div>';
 
                     // Types
-                    $explodedTypes = explode(";", $restaurant->getTypes());
+                    echo '<div class="zone_types_fiche">';
+                      $explodedTypes = explode(";", $restaurant->getTypes());
 
-                    foreach ($explodedTypes as $exploded)
-                    {
-                      if (!empty($exploded))
-                        echo '<span class="type_restaurant">' . $exploded . '</span>';
-                    }
+                      foreach ($explodedTypes as $exploded)
+                      {
+                        if (!empty($exploded))
+                          echo '<span class="type_restaurant">' . $exploded . '</span>';
+                      }
+                    echo '</div>';
 
                     // Site web et plan
                     if (!empty($restaurant->getWebsite()) OR !empty($restaurant->getPlan()))
