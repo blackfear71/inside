@@ -238,7 +238,7 @@ $(window).load(function()
     console.log("$(window).scrollTop() = " + $(window).scrollTop());
     console.log("difference = " + difference);
     console.log("----------------------");*/
-    
+
     $("#zone_chat_position").css('display', 'block');
 
     if (difference > 0)
@@ -428,9 +428,9 @@ $(window).load(function()
 
       $.each(JSON.parse(users), function(key, value)
       {
-        var pseudo              = value.pseudo;
-        var avatar              = value.avatar;
-        var connected           = value.connected;
+        var pseudo               = value.pseudo;
+        var avatar               = value.avatar;
+        var connected            = value.connected;
         var date_last_connection = value.date_last_connection;
         var hour_last_connection = value.hour_last_connection;
 

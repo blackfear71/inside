@@ -1997,6 +1997,17 @@
               $value = 0;
               break;
 
+            case "star-chief":
+              $nb_repas_organises = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_repas_organises FROM food_advisor_choices WHERE caller = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $nb_repas_organises = $data['nb_repas_organises'];
+              $req->closeCursor();
+
+              $value = $nb_repas_organises;
+              break;
+
             // Lutin de Noël
             case "christmas2017":
             // Je suis ton Père Noël !

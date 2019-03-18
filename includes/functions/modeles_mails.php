@@ -168,9 +168,9 @@
 
             $modele .= '<div class="corps_mail_right">';
               if (!empty($details->getPoster()))
-                $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail"/>';
+                $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
               else
-                $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail"/>';
+                $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
             $modele .= '</div>';
           $modele .= '</div>';
 

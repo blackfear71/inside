@@ -25,7 +25,7 @@
       $this->objectif     = '';
       $this->description  = '';
       $this->explications = '';
-      $this->conclusion = '';
+      $this->conclusion   = '';
       $this->statut       = '';
     }
 

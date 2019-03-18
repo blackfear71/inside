@@ -48,7 +48,7 @@
           // Saisie
           echo '<div class="zone_liens_saisie">';
             echo '<a onclick="afficherMasquer(\'zone_add_restaurant\');" title="Ajouter un restaurant" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_lien"/></div>';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Ajouter un restaurant</div>';
             echo '</a>';
           echo '</div>';
@@ -57,7 +57,7 @@
           echo '<div id="zone_add_restaurant" style="display: none;" class="fond_saisie_restaurant">';
             echo '<div class="zone_saisie_restaurant">';
               // Titre
-              echo '<div class="titre_saisie_collector">Ajouter un restaurant</div>';
+              echo '<div class="titre_saisie_restaurant">Ajouter un restaurant</div>';
 
               // Bouton fermeture
               echo '<a onclick="afficherMasquer(\'zone_add_restaurant\');" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
@@ -119,7 +119,7 @@
 
                   // Types
                   echo '<div id="types_restaurants">';
-                    echo '<a name="type_other" onclick="addOtherType(\'types_restaurants\');" class="button_type_other">+ Autre</a>';
+                    echo '<a name="type_other" onclick="addOtherType(\'types_restaurants\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
 
                     $i = 0;
 
@@ -145,12 +145,12 @@
 
                         if ($checked == true)
                         {
-                          echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants[' . $i . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\');" class="checkbox_type" checked />';
+                          echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants[' . $i . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" checked />';
                           echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type_checked">' . $type . '</label>';
                         }
                         else
                         {
-                          echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants[' . $i . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\');" class="checkbox_type" />';
+                          echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants[' . $i . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" />';
                           echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type">' . $type . '</label>';
                         }
                       echo '</div>';
@@ -331,7 +331,7 @@
 
                     // Types
                     echo '<div id="types_restaurants_update_' . $restaurant->getId() . '" class="zone_update_types">';
-                      echo '<a name="type_other" onclick="addOtherType(\'types_restaurants_update_' . $restaurant->getId() . '\');" class="button_type_other" style="margin-left: 5px;">+ Autre</a>';
+                      echo '<a name="type_other" onclick="addOtherType(\'types_restaurants_update_' . $restaurant->getId() . '\');" class="bouton_type_autre" style="margin-left: 5px;"><span class="fond_plus">+</span>Autre</a>';
 
                       $explodedTypes = explode(";", $restaurant->getTypes());
                       $k             = 0;

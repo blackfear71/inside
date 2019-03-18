@@ -739,7 +739,7 @@
         $value = $incoming;
         break;
 
-      // Incrémentation de la valeur précédente
+      // Incrémentation de la valeur précédente avec "incoming"
       case "publisher":
       case "viewer":
       case "commentator":
@@ -755,6 +755,7 @@
       case "debugger":
       case "compiler":
       case "restaurant-finder":
+      case "star-chief":
       case "christmas2017":
       case "christmas2017_2":
       case "golden-egg":

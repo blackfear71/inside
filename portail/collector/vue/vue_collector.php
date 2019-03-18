@@ -50,12 +50,12 @@
           /******************************/
           echo '<div class="zone_liens_saisie">';
             echo '<a onclick="afficherMasquerSaisiePhraseCulte();" title="Ajouter une phrase culte" class="lien_saisie_collector">';
-              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_saisie_collector"/></div>';
+              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_saisie_collector" /></div>';
               echo '<div class="zone_texte_add">Ajouter une phrase culte</div>';
             echo '</a>';
 
             echo '<a onclick="afficherMasquerSaisieImage();" title="Ajouter une image" class="lien_saisie_collector">';
-              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/images.png" alt="images" class="image_saisie_collector"/></div>';
+              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/images.png" alt="images" class="image_saisie_collector" /></div>';
               echo '<div class="zone_texte_add">Ajouter une image</div>';
             echo '</a>';
 

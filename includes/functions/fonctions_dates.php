@@ -43,7 +43,7 @@ function formatTimeForDisplay($time)
 */
 function formatTimeForDisplayLight($time)
 {
-  if (strlen($time) == 6)
+  if (strlen($time) == 6 OR strlen($time) == 4)
     return substr($time, 0, 2) . ':' . substr($time, 2, 2);
   else
     return $time;

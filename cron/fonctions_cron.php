@@ -249,7 +249,7 @@
             if ($currentTotal != $prevTotal)
             {
               $currentRank += 1;
-              $prevTotal = $user['avancement'];
+              $prevTotal    = $currentTotal;
             }
 
             // Suppression des rangs > 3 sinon on enregistre le rang

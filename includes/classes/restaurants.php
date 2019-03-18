@@ -165,4 +165,350 @@
       return $this->description;
     }
   }
+
+  class Proposition
+  {
+    private $id_restaurant;
+    private $name;
+    private $picture;
+    private $location;
+    private $nb_participants;
+    private $classement;
+    private $determined;
+    private $caller;
+    private $pseudo;
+    private $avatar;
+    private $phone;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->id_restaurant   = '';
+      $this->name            = '';
+      $this->picture         = '';
+      $this->location        = '';
+      $this->nb_participants = 0;
+      $this->classement      = 0;
+      $this->determined      = 'N';
+      $this->caller          = '';
+      $this->pseudo          = '';
+      $this->avatar          = '';
+      $this->phone           = '';
+    }
+
+    // Constructeur de l'objet Proposition en fonction des données
+    // -> il faut passer une variable $data contenant le résultat de la requête fetch
+    public static function withData($data)
+    {
+      $choix = new self();
+      $choix->fill($data);
+
+      return $choix;
+    }
+
+    protected function fill ($data)
+    {
+      if (isset($data['id_restaurant']))
+        $this->id_restaurant = $data['id_restaurant'];
+
+      if (isset($data['caller']))
+        $this->caller        = $data['caller'];
+    }
+
+    // getters et setters pour l'objet Proposition
+    // id restaurant
+    public function setId_restaurant($id_restaurant)
+    {
+      $this->id_restaurant = $id_restaurant;
+    }
+
+    public function getId_restaurant()
+    {
+      return $this->id_restaurant;
+    }
+
+    // Restaurant
+    public function setName($name)
+    {
+      $this->name = $name;
+    }
+
+    public function getName()
+    {
+      return $this->name;
+    }
+
+    // Image
+    public function setPicture($picture)
+    {
+      $this->picture = $picture;
+    }
+
+    public function getPicture()
+    {
+      return $this->picture;
+    }
+
+    // Lieu
+    public function setLocation($location)
+    {
+      $this->location = $location;
+    }
+
+    public function getLocation()
+    {
+      return $this->location;
+    }
+
+    // Nombre de participants
+    public function setNb_participants($nb_participants)
+    {
+      $this->nb_participants = $nb_participants;
+    }
+
+    public function getNb_participants()
+    {
+      return $this->nb_participants;
+    }
+
+    // Classement
+    public function setClassement($classement)
+    {
+      $this->classement = $classement;
+    }
+
+    public function getClassement()
+    {
+      return $this->classement;
+    }
+
+    // Proposition déterminée
+    public function setDetermined($determined)
+    {
+      $this->determined = $determined;
+    }
+
+    public function getDetermined()
+    {
+      return $this->determined;
+    }
+
+    // Participant qui appelle
+    public function setCaller($caller)
+    {
+      $this->caller = $caller;
+    }
+
+    public function getCaller()
+    {
+      return $this->caller;
+    }
+
+    // Pseudo de celui qui appelle
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Avatar de celui qui appelle
+    public function setAvatar($avatar)
+    {
+      $this->avatar = $avatar;
+    }
+
+    public function getAvatar()
+    {
+      return $this->avatar;
+    }
+
+    // Numéro de téléphone
+    public function setPhone($phone)
+    {
+      $this->phone = $phone;
+    }
+
+    public function getPhone()
+    {
+      return $this->phone;
+    }
+  }
+
+  class Choix
+  {
+    private $id;
+    private $id_restaurant;
+    private $identifiant;
+    private $date;
+    private $time;
+    private $transport;
+    private $menu;
+    private $name;
+    private $picture;
+    private $location;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->id            = 0;
+      $this->id_restaurant = '';
+      $this->identifiant   = '';
+      $this->date          = '';
+      $this->time          = '';
+      $this->transport     = '';
+      $this->menu          = '';
+      $this->name          = '';
+      $this->picture       = '';
+      $this->location      = '';
+    }
+
+    // Constructeur de l'objet Choix en fonction des données
+    // -> il faut passer une variable $data contenant le résultat de la requête fetch
+    public static function withData($data)
+    {
+      $choix = new self();
+      $choix->fill($data);
+
+      return $choix;
+    }
+
+    protected function fill ($data)
+    {
+      if (isset($data['id']))
+        $this->id            = $data['id'];
+
+      if (isset($data['id_restaurant']))
+        $this->id_restaurant = $data['id_restaurant'];
+
+      if (isset($data['identifiant']))
+        $this->identifiant   = $data['identifiant'];
+
+      if (isset($data['date']))
+        $this->date          = $data['date'];
+
+      if (isset($data['time']))
+        $this->time          = $data['time'];
+
+      if (isset($data['transport']))
+        $this->transport     = $data['transport'];
+
+      if (isset($data['menu']))
+        $this->menu          = $data['menu'];
+    }
+
+    // getters et setters pour l'objet Choix
+    // id
+    public function setId($id)
+    {
+      $this->id = $id;
+    }
+
+    public function getId()
+    {
+      return $this->id;
+    }
+
+    // id restaurant
+    public function setId_restaurant($id_restaurant)
+    {
+      $this->id_restaurant = $id_restaurant;
+    }
+
+    public function getId_restaurant()
+    {
+      return $this->id_restaurant;
+    }
+
+    // Identifiant
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Date
+    public function setDate($date)
+    {
+      $this->date = $date;
+    }
+
+    public function getDate()
+    {
+      return $this->date;
+    }
+
+    // Heure
+    public function setTime($time)
+    {
+      $this->time = $time;
+    }
+
+    public function getTime()
+    {
+      return $this->time;
+    }
+
+    // Transport
+    public function setTransport($transport)
+    {
+      $this->transport = $transport;
+    }
+
+    public function getTransport()
+    {
+      return $this->transport;
+    }
+
+    // Menu
+    public function setMenu($menu)
+    {
+      $this->menu = $menu;
+    }
+
+    public function getMenu()
+    {
+      return $this->menu;
+    }
+
+    // Restaurant
+    public function setName($name)
+    {
+      $this->name = $name;
+    }
+
+    public function getName()
+    {
+      return $this->name;
+    }
+
+    // Image
+    public function setPicture($picture)
+    {
+      $this->picture = $picture;
+    }
+
+    public function getPicture()
+    {
+      return $this->picture;
+    }
+
+    // Lieu
+    public function setLocation($location)
+    {
+      $this->location = $location;
+    }
+
+    public function getLocation()
+    {
+      return $this->location;
+    }
+  }
 ?>

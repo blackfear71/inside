@@ -7,12 +7,14 @@ Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
 
 ## Fonctionnalités
 - MOVIE HOUSE : base de données de films et organisation de soirées cinéma
+- LES ENFANTS ! À TABLE ! : outil de détermination du repas du jour
 - EXPENSE CENTER : outil de suivi des dépenses des membres
-- LES PETITS PEDESTRES : organisation d'entrainements ou de courses à pied
-- CALENDARS : calendriers de l'équipe
 - COLLECTOR ROOM : collection de phrases cultes
+- CALENDARS : calendriers de l'équipe
+- LES PETITS PEDESTRES : organisation d'entrainements ou de courses à pied
 - MISSIONS : INSIDER : évènements du site
 - #THEBOX : boîte à idées
+- DEMANDES D'ÉVOLUTION : soumission de bugs et améliorations
 - NOTIFICATIONS : centre de notifications générales
 - PROFIL : gestion paramètres et succès
 - INSIDE ROOM : chat général
