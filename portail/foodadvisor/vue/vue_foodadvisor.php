@@ -92,11 +92,11 @@
                     echo '</a>';
                   echo '</div>';
 
-                  // Choix transport
-                  echo '<div id="zone_checkbox_transport_1" class="zone_listbox">';
-                    echo '<a id="choix_transport_1" onclick="afficherMasquer(\'choix_transport_1\'); afficherCheckboxTransport(\'zone_checkbox_transport_1\');" class="bouton_choix">';
+                  // Choix transports
+                  echo '<div id="zone_checkbox_transports_1" class="zone_listbox">';
+                    echo '<a id="choix_transports_1" onclick="afficherMasquer(\'choix_transports_1\'); afficherCheckboxTransports(\'zone_checkbox_transports_1\');" class="bouton_choix">';
                       echo '<span class="fond_plus">+</span>';
-                      echo 'Transport';
+                      echo 'Transports';
                     echo '</a>';
                   echo '</div>';
 
@@ -276,9 +276,9 @@
                       echo '<span class="horaire_mon_choix">' . formatTimeForDisplayLight($monChoix->getTime()) . '</span>';
 
                     // Moyens de transport
-                    if (!empty($monChoix->getTransport()))
+                    if (!empty($monChoix->getTransports()))
                     {
-                      $explodedTransports = explode(";", $monChoix->getTransport());
+                      $explodedTransports = explode(";", $monChoix->getTransports());
 
                       echo '<div class="zone_transports_mes_choix">';
                         foreach ($explodedTransports as $transport)

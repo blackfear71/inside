@@ -345,7 +345,7 @@
     private $identifiant;
     private $date;
     private $time;
-    private $transport;
+    private $transports;
     private $menu;
     private $name;
     private $picture;
@@ -359,7 +359,7 @@
       $this->identifiant   = '';
       $this->date          = '';
       $this->time          = '';
-      $this->transport     = '';
+      $this->transports    = '';
       $this->menu          = '';
       $this->name          = '';
       $this->picture       = '';
@@ -393,8 +393,8 @@
       if (isset($data['time']))
         $this->time          = $data['time'];
 
-      if (isset($data['transport']))
-        $this->transport     = $data['transport'];
+      if (isset($data['transports']))
+        $this->transports    = $data['transports'];
 
       if (isset($data['menu']))
         $this->menu          = $data['menu'];
@@ -456,15 +456,15 @@
       return $this->time;
     }
 
-    // Transport
-    public function setTransport($transport)
+    // Transports
+    public function setTransports($transports)
     {
-      $this->transport = $transport;
+      $this->transports = $transports;
     }
 
-    public function getTransport()
+    public function getTransports()
     {
-      return $this->transport;
+      return $this->transports;
     }
 
     // Menu

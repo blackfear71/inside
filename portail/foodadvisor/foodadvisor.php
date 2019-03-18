@@ -100,7 +100,7 @@
         $monChoix->setIdentifiant(htmlspecialchars($monChoix->getIdentifiant()));
         $monChoix->setDate(htmlspecialchars($monChoix->getDate()));
         $monChoix->setTime(htmlspecialchars($monChoix->getTime()));
-        $monChoix->setTransport(htmlspecialchars($monChoix->getTransport()));
+        $monChoix->setTransports(htmlspecialchars($monChoix->getTransports()));
         $monChoix->setMenu(htmlspecialchars($monChoix->getMenu()));
         $monChoix->setName(htmlspecialchars($monChoix->getName()));
         $monChoix->setPicture(htmlspecialchars($monChoix->getPicture()));

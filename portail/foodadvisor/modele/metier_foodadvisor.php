@@ -472,7 +472,7 @@
           {
             if (isset($post['select_lieu'][$j]) AND !empty($post['select_lieu'][$j]) AND isset($post['select_restaurant'][$j]) AND !empty($post['select_restaurant'][$j]))
             {
-              if ($i != $j AND $post['select_lieu'][$i] == $post['select_lieu'][$j])
+              if ($i != $j AND $post['select_lieu'][$i] == $post['select_lieu'][$j] AND $post['select_restaurant'][$i] == $post['select_restaurant'][$j])
               {
                 $control_ok                         = false;
                 $_SESSION['alerts']['wrong_choice'] = true;
@@ -560,7 +560,7 @@
                           'identifiant'   => $identifiant,
                           'date'          => $date,
                           'time'          => $time,
-                          'transport'     => $transports,
+                          'transports'    => $transports,
                           'menu'          => $menu
                         );
 
@@ -569,14 +569,14 @@
                                                                 identifiant,
                                                                 date,
                                                                 time,
-                                                                transport,
+                                                                transports,
                                                                 menu
                                                               )
                                                         VALUES(:id_restaurant,
                                                                :identifiant,
                                                                :date,
                                                                :time,
-                                                               :transport,
+                                                               :transports,
                                                                :menu
                                                               )');
           $req2->execute($choice);

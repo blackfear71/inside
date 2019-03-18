@@ -184,7 +184,7 @@ function cacherListboxHoraires(heures, minutes, bouton)
 }
 
 // Affiche les checkbox des transports
-function afficherCheckboxTransport(id)
+function afficherCheckboxTransports(id)
 {
   var html;
   var num        = id.substr(-1);
@@ -197,7 +197,7 @@ function afficherCheckboxTransport(id)
   var id_label_t = 'label_tram_' + num;
   var id_check_c = 'checkbox_car_' + num;
   var id_label_c = 'label_car_' + num;
-  var id_annuler = 'annuler_transport_' + num;
+  var id_annuler = 'annuler_transports_' + num;
 
   html = '<div id="' + id_zone + '" class="zone_checkbox">';
     html += '<input type="checkbox" id="' + id_check_f + '" name="checkbox_feet[' + num + ']" value="F" onchange="changeCheckedColor(\'' + id_check_f + '\', \'' + id_label_f + '\', \'label_transport_checked\', \'label_transport\');" class="checkbox_transport" />';
@@ -213,19 +213,19 @@ function afficherCheckboxTransport(id)
     html += '<label for="' + id_check_c + '" id="' + id_label_c + '" class="label_transport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherCheckboxTransport(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 31px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" onclick="cacherCheckboxTransports(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 31px;">Annuler</a>';
 
   $("#" + id).append(html);
 }
 
 // Cache les checkbox des transports
-function cacherCheckboxTransport(zone, bouton)
+function cacherCheckboxTransports(zone, bouton)
 {
   var num = zone.substr(-1);
 
   $('#' + zone).remove();
   $('#' + bouton).remove();
-  $('#choix_transport_' + num).css('display', 'block');
+  $('#choix_transports_' + num).css('display', 'block');
 }
 
 // Affiche la saisie du menu
@@ -277,8 +277,8 @@ function addChoice(id)
     html += '<a id="choix_horaire_' + new_num + '" onclick="afficherMasquer(\'choix_horaire_' + new_num + '\'); afficherListboxHoraires(\'zone_listbox_horaire_' + new_num + '\')" class="bouton_choix"><span class="fond_plus">+</span>Horaire</a>';
   html += '</div>';
 
-  html += '<div id="zone_checkbox_transport_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_transport_' + new_num + '" onclick="afficherMasquer(\'choix_transport_' + new_num + '\'); afficherCheckboxTransport(\'zone_checkbox_transport_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Transport</a>';
+  html += '<div id="zone_checkbox_transports_' + new_num + '" class="zone_listbox">';
+    html += '<a id="choix_transports_' + new_num + '" onclick="afficherMasquer(\'choix_transports_' + new_num + '\'); afficherCheckboxTransports(\'zone_checkbox_transports_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Transport</a>';
   html += '</div>';
 
   html += '<div id="zone_saisie_menu_' + new_num + '" class="zone_listbox">';
