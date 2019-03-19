@@ -197,9 +197,58 @@
     return $listPropositions;
   }
 
+  // METIER : Récupère un des restaurants pouvant être déterminé ce jour
+  // RETOUR : Id restaurant déterminé
+  function getRestaurantDetermined($propositions)
+  {
+    $control_ok    = true;
+    $id_restaurant = NULL;
+
+    // Calcul des dates de la semaine
+    $nb_jours_lundi    = 1 - date("N");
+    $nb_jours_vendredi = 5 - date("N");
+    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
+    $friday            = date("Ymd", strtotime('+' . $nb_jours_vendredi . ' days'));
+
+    // Contrôle date de détermination
+    if (date("Ymd") < $monday OR date("Ymd") > $friday)
+    {
+      $control_ok                                   = false;
+      $_SESSION['alerts']['week_end_determination'] = true;
+    }
+
+    // Contrôle heure de détermination
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                                = false;
+        $_SESSION['alerts']['heure_determination'] = true;
+      }
+    }
+
+    // Détermination Id restaurant aléatoire
+    if ($control_ok == true)
+    {
+      $id_restaurants = array();
+
+      foreach ($propositions as $proposition)
+      {
+        if ($proposition->getClassement() == 1)
+        {
+          array_push($id_restaurants, $proposition->getId_restaurant());
+        }
+      }
+
+      $id_restaurant = $id_restaurants[array_rand($id_restaurants, 1)];
+    }
+
+    return $id_restaurant;
+  }
+
   // METIER : Récupère un des participants du jour n'ayant pas appelé dans la semaine
   // RETOUR : Participant pouvant appeler
-  function getCallers()
+  function getCallers($id_restaurant)
   {
     global $bdd;
 
@@ -211,66 +260,61 @@
     $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
     $friday            = date("Ymd", strtotime('+' . $nb_jours_vendredi . ' days'));
 
-    if (date("Ymd") >= $monday AND date("Ymd") <= $friday)
+    // Liste des participants du jour
+    $listUsers = array();
+
+    $req1 = $bdd->query('SELECT DISTINCT identifiant FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $id_restaurant . ' ORDER BY identifiant ASC');
+    while($data1 = $req1->fetch())
     {
-      // Liste des participants du jour
-      $listUsers = array();
+      $req2 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
+      $data2 = $req2->fetch();
+      $identifiant = $data2['identifiant'];
+      $req2->closeCursor();
 
-      $req1 = $bdd->query('SELECT DISTINCT identifiant FROM food_advisor_users WHERE date = "' . date("Ymd") . '" ORDER BY identifiant ASC');
-      while($data1 = $req1->fetch())
+      array_push($listUsers, $identifiant);
+    }
+    $req1->closeCursor();
+
+    // Liste des appelants de la semaine
+    $listCallersWeek = array();
+
+    $req3 = $bdd->query('SELECT DISTINCT caller FROM food_advisor_choices WHERE date != "' . date("Ymd") . '"
+                                                                            AND date >= "' . $monday . '"
+                                                                            AND date <= "' . $friday . '"
+                                                                       ORDER BY caller ASC');
+    while($data3 = $req3->fetch())
+    {
+      array_push($listCallersWeek, $data3['caller']);
+    }
+    $req3->closeCursor();
+
+    // On ne concerve que ceux qui n'ont pas appelé dans la liste des utilisateurs
+    $listCallers = $listUsers;
+
+    foreach ($listCallers as $key => $user)
+    {
+      foreach ($listCallersWeek as $callerWeek)
       {
-        $req2 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
-        $data2 = $req2->fetch();
-        $identifiant = $data2['identifiant'];
-        $req2->closeCursor();
-
-        array_push($listUsers, $identifiant);
-      }
-      $req1->closeCursor();
-
-      // Liste des appelants de la semaine
-      $listCallersWeek = array();
-
-      $req3 = $bdd->query('SELECT DISTINCT caller FROM food_advisor_choices WHERE date != "' . date("Ymd") . '"
-                                                                              AND date >= "' . $monday . '"
-                                                                              AND date <= "' . $friday . '"
-                                                                         ORDER BY caller ASC');
-      while($data3 = $req3->fetch())
-      {
-        array_push($listCallersWeek, $data3['caller']);
-      }
-      $req3->closeCursor();
-
-      // On ne concerve que ceux qui n'ont pas appelé dans la liste des utilisateurs
-      $listCallers = $listUsers;
-
-      foreach ($listCallers as $key => $user)
-      {
-        foreach ($listCallersWeek as $callerWeek)
+        if ($user == $callerWeek)
         {
-          if ($user == $callerWeek)
-          {
-            unset($listCallers[$key]);
-            break;
-          }
+          unset($listCallers[$key]);
+          break;
         }
       }
-
-      // Détermination appelant aléatoire parmi ceux restant, ou par défaut une des personnes du jour
-      if (!empty($listCallers))
-        $caller = $listCallers[array_rand($listCallers, 1)];
-      else
-        $caller = $listUsers[array_rand($listUsers, 1)];
     }
+
+    // Détermination appelant aléatoire parmi ceux restant, ou par défaut une des personnes du jour
+    if (!empty($listCallers))
+      $caller = $listCallers[array_rand($listCallers, 1)];
     else
-      $_SESSION['alerts']['week_end_determination'] = true;
+      $caller = $listUsers[array_rand($listUsers, 1)];
 
     return $caller;
   }
 
   // METIER : Détermine celui qui réserve
   // RETOUR : Aucun
-  function setDetermination($propositions, $caller)
+  function setDetermination($propositions, $id_restaurant, $caller)
   {
     if (!empty($propositions))
     {
@@ -290,20 +334,6 @@
       }
 
       $req1->closeCursor();
-
-      // Détermination restaurant et insertion en base
-      $id_restaurants = array();
-
-      foreach ($propositions as $proposition)
-      {
-        if ($proposition->getClassement() == 1)
-        {
-          // Détermination Id restaurant aléatoire
-          array_push($id_restaurants, $proposition->getId_restaurant());
-        }
-      }
-
-      $id_restaurant = $id_restaurants[array_rand($id_restaurants, 1)];
 
       // Mise à jour ou insertion
       if ($existant == true)
@@ -413,7 +443,7 @@
         $req2->closeCursor();
 
         // Nombre de participants
-        $req3 = $bdd->query('SELECT COUNT(id_restaurant) AS nb_participants FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myWeekChoice->getId_restaurant());
+        $req3 = $bdd->query('SELECT COUNT(id) AS nb_participants FROM food_advisor_users WHERE date = "' . $i . '" AND id_restaurant = ' . $myWeekChoice->getId_restaurant());
         $data3 = $req3->fetch();
 
         $myWeekChoice->setNb_participants($data3['nb_participants']);
@@ -459,6 +489,16 @@
     {
       $control_ok                            = false;
       $_SESSION['alerts']['week_end_saisie'] = true;
+    }
+
+    // Contrôle saisie possible en fonction de l'heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                         = false;
+        $_SESSION['alerts']['heure_saisie'] = true;
+      }
     }
 
     // Contrôle choix saisi en double
@@ -649,11 +689,15 @@
       // Relance de la détermination
       if ($nb_choix_restants > 0)
       {
-        $appelants    = getCallers();
         $propositions = getPropositions();
+        $idRestaurant = getRestaurantDetermined($propositions);
 
-        if (!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
-          setDetermination($propositions, $appelants);
+        if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
+        AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true))
+        {
+          $appelant = getCallers($idRestaurant);
+          setDetermination($propositions, $idRestaurant, $appelant);
+        }
       }
       // Suppression de la détermination
       else

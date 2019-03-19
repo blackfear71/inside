@@ -134,10 +134,7 @@
 
             echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" class="image_refresh" /></a>';
 
-            $monday = date("Ymd", strtotime("Monday"));
-            $friday = date("Ymd", strtotime("Friday"));
-
-            if (!empty($propositions))
+            if (!empty($propositions) AND date("H") < 13)
             {
               echo '<form method="post" action="foodadvisor.php?action=doDeterminer">';
                 echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
@@ -252,9 +249,12 @@
               {
                 echo '<div class="zone_mon_choix">';
                   // Suppression
-                  echo '<form method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce choix ?\')) return false;">';
-                    echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix" />';
-                  echo '</form>';
+                  if (date("H") < 13)
+                  {
+                    echo '<form method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce choix ?\')) return false;">';
+                      echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix" />';
+                    echo '</form>';
+                  }
 
                   // Image + lien
                   echo '<a href="restaurants.php?action=goConsulter&anchor=' . $monChoix->getId_restaurant() . '" class="lien_mon_choix">';
@@ -375,7 +375,7 @@
                     echo '<span class="lieu_proposition">' . $choixJour->getLocation() . '</span>';
 
                     // Nombre de participants
-                    if ($proposition->getNb_participants() == 1)
+                    if ($choixJour->getNb_participants() == 1)
                       echo '<span class="horaire_proposition">' . $choixJour->getNb_participants() . ' participant</span>';
                     else
                       echo '<span class="horaire_proposition">' . $choixJour->getNb_participants() . ' participants</span>';

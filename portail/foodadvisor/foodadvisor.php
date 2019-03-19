@@ -28,11 +28,15 @@
       break;
 
     case 'doDeterminer':
-      $appelants    = getCallers();
       $propositions = getPropositions();
+      $idRestaurant = getRestaurantDetermined($propositions);
 
-      if (!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
-        setDetermination($propositions, $appelants);
+      if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
+      AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true))
+      {
+        $appelant = getCallers($idRestaurant);
+        setDetermination($propositions, $idRestaurant, $appelant);
+      }
       break;
 
     case 'doAjouter':
