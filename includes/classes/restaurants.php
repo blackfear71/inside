@@ -7,6 +7,7 @@
     private $types;
     private $location;
     private $phone;
+    private $opened;
     private $website;
     private $plan;
     private $description;
@@ -20,6 +21,7 @@
       $this->types       = '';
       $this->location    = '';
       $this->phone       = '';
+      $this->opened      = '';
       $this->website     = '';
       $this->plan        = '';
       $this->description = '';
@@ -54,6 +56,9 @@
 
       if (isset($data['phone']))
         $this->phone       = $data['phone'];
+
+      if (isset($data['opened']))
+        $this->opened      = $data['opened'];
 
       if (isset($data['website']))
         $this->website     = $data['website'];
@@ -132,6 +137,17 @@
       return $this->phone;
     }
 
+    // Jours d'ouverture
+    public function setOpened($opened)
+    {
+      $this->opened = $opened;
+    }
+
+    public function getOpened()
+    {
+      return $this->opened;
+    }
+
     // Site web
     public function setWebsite($website)
     {
@@ -179,6 +195,7 @@
     private $pseudo;
     private $avatar;
     private $phone;
+    private $opened;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -194,16 +211,17 @@
       $this->pseudo          = '';
       $this->avatar          = '';
       $this->phone           = '';
+      $this->opened          = 'Y;Y;Y;Y;Y;';
     }
 
     // Constructeur de l'objet Proposition en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
-      $choix = new self();
-      $choix->fill($data);
+      $proposition = new self();
+      $proposition->fill($data);
 
-      return $choix;
+      return $proposition;
     }
 
     protected function fill ($data)
@@ -336,6 +354,17 @@
     {
       return $this->phone;
     }
+
+    // Jours d'ouverture
+    public function setOpened($opened)
+    {
+      $this->opened = $opened;
+    }
+
+    public function getOpened()
+    {
+      return $this->opened;
+    }
   }
 
   class Choix
@@ -350,6 +379,7 @@
     private $name;
     private $picture;
     private $location;
+    private $opened;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -364,6 +394,7 @@
       $this->name          = '';
       $this->picture       = '';
       $this->location      = '';
+      $this->opened        = '';
     }
 
     // Constructeur de l'objet Choix en fonction des données
@@ -509,6 +540,17 @@
     public function getLocation()
     {
       return $this->location;
+    }
+
+    // Jours d'ouverture
+    public function setOpened($opened)
+    {
+      $this->opened = $opened;
+    }
+
+    public function getOpened()
+    {
+      return $this->opened;
     }
   }
 ?>

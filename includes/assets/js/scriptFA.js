@@ -407,3 +407,12 @@ function afficherModifierOther(select, id)
     document.getElementById(id).required = false;
   }
 }
+
+// Fixe la couleur de fond lors du changement de statut
+function changeCheckedDay(id_checkbox, id_label, class_checked, class_no_check)
+{
+  if (document.getElementById(id_checkbox).checked == true)
+    document.getElementById(id_label).className  = class_no_check;
+  else
+    document.getElementById(id_label).className  = class_checked;
+}

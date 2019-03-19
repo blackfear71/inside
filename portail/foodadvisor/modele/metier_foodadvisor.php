@@ -125,6 +125,7 @@
       $myProposition->setPicture($data2['picture']);
       $myProposition->setLocation($data2['location']);
       $myProposition->setPhone($data2['phone']);
+      $myProposition->setOpened($data2['opened']);
 
       $req2->closeCursor();
 
@@ -396,6 +397,7 @@
       $myChoice->setName($donnees2['name']);
       $myChoice->setPicture($donnees2['picture']);
       $myChoice->setLocation($donnees2['location']);
+      $myChoice->setOpened($donnees2['opened']);
 
       $reponse2->closeCursor();
 
@@ -709,44 +711,60 @@
   // RETOUR : Id enregistrement créé
   function insertRestaurant($post, $files, $user)
   {
+    var_dump($post);
+
     $new_id     = NULL;
     $control_ok = true;
 
     // Récupération des données et sauvegarde en session
+    $nom_restaurant         = $post['name_restaurant'];
+    $telephone_restaurant   = $post['phone_restaurant'];
+    $website_restaurant     = $post['website_restaurant'];
+    $plan_restaurant        = $post['plan_restaurant'];
+    $description_restaurant = $post['description_restaurant'];
+    $ouverture_restaurant   = $post['ouverture_restaurant'];
+
+    if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
+      $lieu_restaurant      = $post['saisie_other_location'];
+    else
+      $lieu_restaurant      = $post['location'];
+
+    if (isset($post['types_restaurants']))
+    {
+      $types_restaurant     = array_unique($post['types_restaurants']);
+
+      foreach ($types_restaurant as $keyType => $type)
+      {
+        if (empty($type))
+          unset($types_restaurant[$keyType]);
+      }
+    }
+
+    $_SESSION['save']['name_restaurant']        = $post['name_restaurant'];
+    $_SESSION['save']['phone_restaurant']       = $post['phone_restaurant'];
+    $_SESSION['save']['website_restaurant']     = $post['website_restaurant'];
+    $_SESSION['save']['plan_restaurant']        = $post['plan_restaurant'];
+    $_SESSION['save']['description_restaurant'] = $post['description_restaurant'];
+    $_SESSION['save']['location']               = $post['location'];
+    $_SESSION['save']['saisie_other_location']  = $post['saisie_other_location'];
+
+    if (isset($post['ouverture_restaurant']))
+      $_SESSION['save']['ouverture_restaurant'] = $ouverture_restaurant;
+
+    if (isset($post['types_restaurants']))
+      $_SESSION['save']['types_restaurants']    = $types_restaurant;
+
+    // Contrôle numéro téléphone numérique
     if ($control_ok == true)
     {
-      $nom_restaurant         = $post['name_restaurant'];
-      $telephone_restaurant   = $post['phone_restaurant'];
-      $website_restaurant     = $post['website_restaurant'];
-      $plan_restaurant        = $post['plan_restaurant'];
-      $description_restaurant = $post['description_restaurant'];
-
-      if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
-        $lieu_restaurant      = $post['saisie_other_location'];
-      else
-        $lieu_restaurant      = $post['location'];
-
-      if (isset($post['types_restaurants']))
+      if (!empty($telephone_restaurant))
       {
-        $types_restaurant     = array_unique($post['types_restaurants']);
-
-        foreach ($types_restaurant as $keyType => $type)
+        if (!is_numeric($telephone_restaurant) OR strlen($telephone_restaurant) != 10)
         {
-          if (empty($type))
-            unset($types_restaurant[$keyType]);
+          $_SESSION['alerts']['wrong_phone_number'] = true;
+          $control_ok                               = false;
         }
       }
-
-      $_SESSION['save']['name_restaurant']        = $post['name_restaurant'];
-      $_SESSION['save']['phone_restaurant']       = $post['phone_restaurant'];
-      $_SESSION['save']['website_restaurant']     = $post['website_restaurant'];
-      $_SESSION['save']['plan_restaurant']        = $post['plan_restaurant'];
-      $_SESSION['save']['description_restaurant'] = $post['description_restaurant'];
-      $_SESSION['save']['location']               = $post['location'];
-      $_SESSION['save']['saisie_other_location']  = $post['saisie_other_location'];
-
-      if (isset($post['types_restaurants']))
-        $_SESSION['save']['types_restaurants']    = $types_restaurant;
     }
 
     // Tri et formatage types de restaurants
@@ -768,16 +786,17 @@
       }
     }
 
-    // Contrôle numéro téléphone numérique
+    // Récupération des jours d'ouverture
     if ($control_ok == true)
     {
-      if (!empty($telephone_restaurant))
+      $ouvertures = "";
+
+      for ($i = 0; $i < 5; $i++)
       {
-        if (!is_numeric($telephone_restaurant) OR strlen($telephone_restaurant) != 10)
-        {
-          $_SESSION['alerts']['wrong_phone_number'] = true;
-          $control_ok                               = false;
-        }
+        if (isset($ouverture_restaurant[$i]))
+          $ouvertures .= "Y;";
+        else
+          $ouvertures .= "N;";
       }
     }
 
@@ -845,6 +864,7 @@
                           'types'       => $types_formatted,
                           'location'    => $lieu_restaurant,
                           'phone'       => $telephone_restaurant,
+                          'opened'      => $ouvertures,
                           'website'     => $website_restaurant,
                           'plan'        => $plan_restaurant,
                           'description' => $description_restaurant
@@ -855,6 +875,7 @@
                     																						 types,
                                                                  location,
                                                                  phone,
+                                                                 opened,
                                                                  website,
                     																						 plan,
                                                                  description
@@ -864,6 +885,7 @@
                     																						 :types,
                                                                  :location,
                     																					   :phone,
+                                                                 :opened,
                                                                  :website,
                                                                  :plan,
                                                                  :description
@@ -891,6 +913,8 @@
   // RETOUR : Aucun
   function updateRestaurant($post, $files, $id_restaurant)
   {
+    var_dump($post);
+
     $control_ok = true;
 
     global $bdd;
@@ -903,6 +927,7 @@
       $website_restaurant     = $post['website_restaurant'];
       $plan_restaurant        = $post['plan_restaurant'];
       $description_restaurant = $post['description_restaurant'];
+      $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
 
       if ($post['location'] == "other_location" AND !empty($post['update_other_location']))
         $lieu_restaurant      = $post['update_other_location'];
@@ -917,6 +942,19 @@
         {
           if (empty($type))
             unset($types_restaurant[$keyType]);
+        }
+      }
+    }
+
+    // Contrôle numéro téléphone numérique
+    if ($control_ok == true)
+    {
+      if (!empty($telephone_restaurant))
+      {
+        if (!is_numeric($telephone_restaurant) OR strlen($telephone_restaurant) != 10)
+        {
+          $_SESSION['alerts']['wrong_phone_number'] = true;
+          $control_ok                               = false;
         }
       }
     }
@@ -940,16 +978,17 @@
       }
     }
 
-    // Contrôle numéro téléphone numérique
+    // Récupération des jours d'ouverture
     if ($control_ok == true)
     {
-      if (!empty($telephone_restaurant))
+      $ouvertures = "";
+
+      for ($i = 0; $i < 5; $i++)
       {
-        if (!is_numeric($telephone_restaurant) OR strlen($telephone_restaurant) != 10)
-        {
-          $_SESSION['alerts']['wrong_phone_number'] = true;
-          $control_ok                               = false;
-        }
+        if (isset($ouverture_restaurant[$i]))
+          $ouvertures .= "Y;";
+        else
+          $ouvertures .= "N;";
       }
     }
 
@@ -1035,6 +1074,7 @@
                           'types'       => $types_formatted,
                           'location'    => $lieu_restaurant,
                           'phone'       => $telephone_restaurant,
+                          'opened'      => $ouvertures,
                           'website'     => $website_restaurant,
                           'plan'        => $plan_restaurant,
                           'description' => $description_restaurant
@@ -1045,6 +1085,7 @@
                                                                  types       = :types,
                                                                  location    = :location,
                                                                  phone       = :phone,
+                                                                 opened      = :opened,
                                                                  website     = :website,
                                                                  plan        = :plan,
                                                                  description = :description

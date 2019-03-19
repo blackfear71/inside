@@ -167,6 +167,26 @@
                       echo '<div class="nom_proposition_determined">' . $proposition->getName() . '</div>';
 
                       echo '<div class="zone_icones_mon_choix">';
+                        // Jours d'ouverture
+                        echo '<div class="zone_ouverture_mes_choix">';
+                          $explodedOpened = explode(";", $proposition->getOpened());
+                          $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+                          $i              = 0;
+
+                          foreach ($explodedOpened as $opened)
+                          {
+                            if (!empty($opened))
+                            {
+                              if ($opened == "Y")
+                                echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
+                              else
+                                echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
+                            }
+
+                            $i++;
+                          }
+                        echo '</div>';
+
                         // Lieu
                         echo '<span class="lieu_proposition">' . $proposition->getLocation() . '</span>';
 
@@ -196,6 +216,26 @@
                       // Nom du restaurant
                       echo '<div class="nom_mon_choix">' . $proposition->getName() . '</div>';
 
+                      // Jours d'ouverture
+                      echo '<div class="zone_ouverture_mes_choix">';
+                        $explodedOpened = explode(";", $proposition->getOpened());
+                        $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+                        $i              = 0;
+
+                        foreach ($explodedOpened as $opened)
+                        {
+                          if (!empty($opened))
+                          {
+                            if ($opened == "Y")
+                              echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
+                            else
+                              echo '<div class="jour_non_fa" style="background-color: white;">' . $semaine_short[$i] . '</div>';
+                          }
+
+                          $i++;
+                        }
+                      echo '</div>';
+
                       // Lieu
                       echo '<span class="lieu_proposition">' . $proposition->getLocation() . '</span>';
 
@@ -220,6 +260,26 @@
 
                     // Nom du restaurant
                     echo '<div class="nom_mon_choix">' . $proposition->getName() . '</div>';
+
+                    // Jours d'ouverture
+                    echo '<div class="zone_ouverture_mes_choix">';
+                      $explodedOpened = explode(";", $proposition->getOpened());
+                      $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+                      $i              = 0;
+
+                      foreach ($explodedOpened as $opened)
+                      {
+                        if (!empty($opened))
+                        {
+                          if ($opened == "Y")
+                            echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
+                          else
+                            echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
+                        }
+
+                        $i++;
+                      }
+                    echo '</div>';
 
                     // Lieu
                     echo '<span class="lieu_proposition">' . $proposition->getLocation() . '</span>';
@@ -268,6 +328,26 @@
                   echo '<div class="nom_mon_choix">' . $monChoix->getName() . '</div>';
 
                   echo '<div class="zone_icones_mon_choix">';
+                    // Jours d'ouverture
+                    echo '<div class="zone_ouverture_mes_choix">';
+                      $explodedOpened = explode(";", $monChoix->getOpened());
+                      $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+                      $j              = 0;
+
+                      foreach ($explodedOpened as $opened)
+                      {
+                        if (!empty($opened))
+                        {
+                          if ($opened == "Y")
+                            echo '<div class="jour_oui_fa">' . $semaine_short[$j] . '</div>';
+                          else
+                            echo '<div class="jour_non_fa">' . $semaine_short[$j] . '</div>';
+                        }
+
+                        $j++;
+                      }
+                    echo '</div>';
+
                     // Lieu
                     echo '<span class="lieu_mon_choix">' . $monChoix->getLocation() . '</span>';
 

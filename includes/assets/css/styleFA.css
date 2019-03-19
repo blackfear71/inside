@@ -629,6 +629,47 @@
 	margin-bottom: 10px;
 }
 
+.zone_ouverture_mes_choix
+{
+	display: block;
+}
+
+.jour_oui_fa
+{
+	display: inline-block;
+	border: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #262626;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	color: white;
+	line-height: 20px;
+	vertical-align: top;
+	text-align: center;
+}
+
+.jour_non_fa
+{
+	display: inline-block;
+	border: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #e3e3e3;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	color: #262626;
+	line-height: 20px;
+	vertical-align: top;
+	text-align: center;
+}
+
 .horaire_mon_choix
 {
   display: inline-block;
@@ -1021,10 +1062,53 @@
 	padding: 0 10px 10px 10px;
 }
 
+.checkbox_jour
+{
+	display: none;
+}
+
+.label_jour_checked
+{
+	display: inline-block;
+	border: 0;
+	width: 34px;
+	height: 34px;
+	background-color: #ff1937;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	line-height: 34px;
+	text-align: center;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.label_jour
+{
+	display: inline-block;
+	border: 0;
+	width: 34px;
+	height: 34px;
+	background-color: #e3e3e3;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 34px;
+	text-align: center;
+	vertical-align: top;
+	cursor: pointer;
+}
+
 .saisie_lien_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 27px);
+	width: calc(50% - 123px);
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;
@@ -1159,11 +1243,47 @@
 	margin-bottom: 10px;
 }
 
+.jour_oui
+{
+	display: inline-block;
+	border: 0;
+	width: 30px;
+	height: 30px;
+	background-color: #ff1937;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	line-height: 30px;
+	vertical-align: top;
+	text-align: center;
+}
+
+.jour_non
+{
+	display: inline-block;
+	border: 0;
+	width: 30px;
+	height: 30px;
+	background-color: white;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 30px;
+	vertical-align: top;
+	text-align: center;
+}
+
 .icone_fiche
 {
 	display: inline-block;
 	width: 30px;
-	margin-right: 10px;
+	margin-left: 10px;
 }
 
 .phone_number
@@ -1343,6 +1463,31 @@
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	line-height: 30px;
+}
+
+.opened_restaurant_update
+{
+	display: block;
+	margin-left: 105px;
+}
+
+.update_label_jour
+{
+	display: inline-block;
+	border: 0;
+	width: 34px;
+	height: 34px;
+	background-color: white;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 34px;
+	text-align: center;
+	vertical-align: top;
+	cursor: pointer;
 }
 
 .update_icone_fiche

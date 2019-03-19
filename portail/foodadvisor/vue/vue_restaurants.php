@@ -53,7 +53,9 @@
             echo '</a>';
           echo '</div>';
 
-          // Zone de saisie de restaurant
+          /************************************/
+          /*** Zone de saisie de restaurant ***/
+          /************************************/
           echo '<div id="zone_add_restaurant" style="display: none;" class="fond_saisie_restaurant">';
             echo '<div class="zone_saisie_restaurant">';
               // Titre
@@ -190,17 +192,49 @@
                   echo '</div>';
                 echo '</div>';
 
-                // Description
+                // Jours d'ouverture, site web, plan et description
                 echo '<div class="zone_saisie_under">';
-                  echo '<input type="text" name="website_restaurant" value="' . $_SESSION['save']['website_restaurant'] . '" placeholder="Site web" class="saisie_lien_restaurant" style="margin-right: 10px;" />';
-                  echo '<input type="text" name="plan_restaurant" value="' . $_SESSION['save']['plan_restaurant'] . '" placeholder="Plan" class="saisie_lien_restaurant" />';
+                  // Jours d'ouverture
+                  $semaine = array("Lu" => "lundi",
+                                   "Ma" => "mardi",
+                                   "Me" => "mercredi",
+                                   "Je" => "jeudi",
+                                   "Ve" => "vendredi");
+
+                  $i = 0;
+
+                  foreach ($semaine as $j => $jour)
+                  {
+                    if (empty($_SESSION['save']['ouverture_restaurant']) OR isset($_SESSION['save']['ouverture_restaurant'][$i]))
+                    {
+                      echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
+                      echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" onclick="changeCheckedDay(\'saisie_checkbox_ouverture_' . $jour . '\', \'saisie_label_ouverture_' . $jour . '\', \'label_jour_checked\', \'label_jour\');" class="label_jour_checked">' . $j . '</label>';
+                    }
+                    else
+                    {
+                      echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
+                      echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" onclick="changeCheckedDay(\'saisie_checkbox_ouverture_' . $jour . '\', \'saisie_label_ouverture_' . $jour . '\', \'label_jour_checked\', \'label_jour\');" class="label_jour">' . $j . '</label>';
+                    }
+
+                    $i++;
+                  }
+
+                  // Site web
+                  echo '<input type="text" name="website_restaurant" value="' . $_SESSION['save']['website_restaurant'] . '" placeholder="Site web" class="saisie_lien_restaurant" style="margin-left: 7px;" />';
+
+                  // Plan
+                  echo '<input type="text" name="plan_restaurant" value="' . $_SESSION['save']['plan_restaurant'] . '" placeholder="Plan" class="saisie_lien_restaurant" style="margin-left: 10px;" />';
+
+                  // Description
                   echo '<textarea placeholder="Description" name="description_restaurant" class="textarea_saisie_description_restaurant">' . $_SESSION['save']['description_restaurant'] . '</textarea>';
                 echo '</div>';
               echo '</form>';
             echo '</div>';
           echo '</div>';
 
-          // Fiches des restaurants
+          /******************************/
+          /*** Fiches des restaurants ***/
+          /******************************/
           foreach ($listeRestaurants as $lieu => $restaurantsParLieux)
           {
             echo '<div class="titre_section">' . $lieu . '</div>';
@@ -241,27 +275,42 @@
                       }
                     echo '</div>';
 
-                    // Site web et plan
-                    if (!empty($restaurant->getWebsite()) OR !empty($restaurant->getPlan()))
-                    {
-                      echo '<div class="zone_icones_fiches">';
-                        // Site web
-                        if (!empty($restaurant->getWebsite()))
-                        {
-                          echo '<a href="' . $restaurant->getWebsite() . '" target="_blank">';
-                            echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" />';
-                          echo '</a>';
-                        }
+                    // Jours d'ouverture, site web et plan
+                    echo '<div class="zone_icones_fiches">';
+                      // Jours d'ouverture
+                      $explodedOpened = explode(";", $restaurant->getOpened());
+                      $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+                      $k              = 0;
 
-                        // Plan
-                        if (!empty($restaurant->getPlan()))
+                      foreach ($explodedOpened as $opened)
+                      {
+                        if (!empty($opened))
                         {
-                          echo '<a href="' . $restaurant->getPlan() . '" target="_blank">';
-                            echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche" />';
-                          echo '</a>';
+                          if ($opened == "Y")
+                            echo '<div class="jour_oui">' . $semaine_short[$k] . '</div>';
+                          else
+                            echo '<div class="jour_non">' . $semaine_short[$k] . '</div>';
                         }
-                      echo '</div>';
-                    }
+                        
+                        $k++;
+                      }
+
+                      // Site web
+                      if (!empty($restaurant->getWebsite()))
+                      {
+                        echo '<a href="' . $restaurant->getWebsite() . '" target="_blank">';
+                          echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" style="margin-left: 7px;" />';
+                        echo '</a>';
+                      }
+
+                      // Plan
+                      if (!empty($restaurant->getPlan()))
+                      {
+                        echo '<a href="' . $restaurant->getPlan() . '" target="_blank">';
+                          echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche" />';
+                        echo '</a>';
+                      }
+                    echo '</div>';
 
                     // Numéro et description
                     if (!empty($restaurant->getPhone()) OR !empty($restaurant->getDescription()))
@@ -366,6 +415,37 @@
                         echo '</div>';
 
                         $k++;
+                      }
+                    echo '</div>';
+
+                    // Jours d'ouverture
+                    echo '<div class="opened_restaurant_update">';
+                      $explodedOpened = explode(";", $restaurant->getOpened());
+                      $semaine        = array("Lu" => "lundi",
+                                              "Ma" => "mardi",
+                                              "Me" => "mercredi",
+                                              "Je" => "jeudi",
+                                              "Ve" => "vendredi");
+
+                      $l = 0;
+
+                      foreach ($semaine as $j => $jour)
+                      {
+                        $id_opened    = "checkbox_update_ouverture_" . $jour . "_" . $restaurant->getId();
+                        $label_opened = "label_update_ouverture_" . $jour . "_" . $restaurant->getId();
+
+                        if ($explodedOpened[$l] == "Y")
+                        {
+                          echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
+                          echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'label_jour_checked\', \'update_label_jour\');" class="label_jour_checked">' . $j . '</label>';
+                        }
+                        else
+                        {
+                          echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
+                          echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'label_jour_checked\', \'update_label_jour\');" class="update_label_jour">' . $j . '</label>';
+                        }
+
+                        $l++;
                       }
                     echo '</div>';
 

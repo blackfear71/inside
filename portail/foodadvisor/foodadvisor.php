@@ -94,6 +94,7 @@
         $proposition->setPseudo(htmlspecialchars($proposition->getPseudo()));
         $proposition->setAvatar(htmlspecialchars($proposition->getAvatar()));
         $proposition->setPhone(htmlspecialchars($proposition->getPhone()));
+        $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
       }
 
       unset($proposition);
@@ -109,6 +110,7 @@
         $monChoix->setName(htmlspecialchars($monChoix->getName()));
         $monChoix->setPicture(htmlspecialchars($monChoix->getPicture()));
         $monChoix->setLocation(htmlspecialchars($monChoix->getLocation()));
+        $monChoix->setOpened(htmlspecialchars($monChoix->getOpened()));
       }
 
       unset($monChoix);
