@@ -1,16 +1,11 @@
 // Au chargement du document complet
 $(window).load(function()
 {
-  // On lance Masonry et le scroll après avoir chargé les images
-  $('.zone_fiches_restaurants').masonry({
-    // Options
-    itemSelector: '.fiche_restaurant',
-    columnWidth: 400,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-  });
+  // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_propositions_determination').css('display', 'block');
+  $('.zone_restaurants').css('display', 'block');
 
+  // On lance Masonry et le scroll après avoir chargé les images
   $('.zone_propositions').masonry({
     // Options
     itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top',
@@ -20,19 +15,18 @@ $(window).load(function()
     horizontalOrder: true
   });
 
-  $('.zone_mes_choix').masonry({
+  $('.zone_fiches_restaurants').masonry({
     // Options
-    itemSelector: '.zone_mon_choix',
-    columnWidth: 200,
+    itemSelector: '.fiche_restaurant',
+    columnWidth: 400,
     fitWidth: true,
-    gutter: 50,
+    gutter: 20,
     horizontalOrder: true
   });
 
   // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_fiches_restaurants').addClass('masonry');
   $('.zone_propositions').addClass('masonry');
-  $('.zone_mes_choix').addClass('masonry');
+  $('.zone_fiches_restaurants').addClass('masonry');
 
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');

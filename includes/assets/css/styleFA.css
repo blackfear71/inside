@@ -412,7 +412,14 @@
 	text-align: center;
 }
 
-/*** Affichage propositions ***/
+/*** Commun ***/
+.zone_propositions_determination
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .zone_propositions
 {
 	margin-left: auto;
@@ -436,6 +443,7 @@
 	text-align: center;
 }
 
+/*** Affichage propositions ***/
 .zone_proposition_determined
 {
 	width: 180px;
@@ -541,29 +549,6 @@
 }
 
 /*** Affichage Mes choix ***/
-.zone_mes_choix
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	opacity: 0;
-	transition: opacity 0.2s;
-	margin-bottom: -10px;
-}
-
-.zone_mes_choix.masonry
-{
-	opacity: 1;
-}
-
-.zone_mon_choix
-{
-	width: 200px;
-	vertical-align: top;
-	margin-bottom: 10px;
-	text-align: center;
-}
-
 .icon_delete_choix
 {
 	float: right;
@@ -1136,6 +1121,13 @@
 }
 
 /*** Fiches restaurants ***/
+.zone_restaurants
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .zone_fiches_restaurants
 {
 	width: 100%;
