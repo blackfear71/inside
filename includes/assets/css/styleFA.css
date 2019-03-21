@@ -427,7 +427,8 @@
 	width: 100%;
 	opacity: 0;
 	transition: opacity 0.2s;
-	margin-bottom: -10px;
+	margin-top: 20px;
+	margin-bottom: -20px;
 }
 
 .zone_propositions.masonry
@@ -439,7 +440,7 @@
 {
 	width: 200px;
 	vertical-align: top;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	text-align: center;
 }
 
@@ -448,7 +449,7 @@
 {
 	width: 180px;
 	vertical-align: top;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	background-color: #ff1937;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -471,7 +472,7 @@
 {
 	width: 180px;
 	vertical-align: top;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	background-color: #e3e3e3;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;

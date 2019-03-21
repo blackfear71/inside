@@ -11,7 +11,7 @@ $(window).load(function()
     itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top',
     columnWidth: 200,
     fitWidth: true,
-    gutter: 50,
+    gutter: 30,
     horizontalOrder: true
   });
 
