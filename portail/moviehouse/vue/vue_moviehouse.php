@@ -25,7 +25,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu">
+			<aside id="left_menu" class="aside_nav">
 				<?php
 					$disconnect  = true;
 					$add_film    = true;
@@ -44,7 +44,7 @@
 
 			<article>
 				<!-- Switch entre accueil, vue générale et vue personnelle -->
-				<div class="switch_view" style="margin-top: 30px;">
+				<div class="switch_view">
 					<?php
 						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
 																 'main' => array('lib' => 'Synthèse', 'date' => $_GET['year']),

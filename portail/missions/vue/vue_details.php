@@ -25,7 +25,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu">
+			<aside id="left_menu" class="aside_nav">
 				<?php
 					$disconnect  = true;
 					$back        = true;
@@ -48,7 +48,7 @@
             // Switch entre mission et classement (seulement après la fin de mission)
             if (date('Ymd') > $detailsMission->getDate_fin())
             {
-              echo '<div class="switch_view" style="margin-top: 30px;">';
+              echo '<div class="switch_view">';
                 $listeSwitch = array('mission' => 'Mission',
                                      'ranking' => 'Classement',
                                     );

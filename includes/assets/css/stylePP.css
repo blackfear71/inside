@@ -17,7 +17,6 @@
 	color: #c81932;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 20px;
 	position: relative;
 	z-index: -2;
 }
@@ -38,7 +37,6 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 30px;
 	border: solid 1px #e3e3e3;
 	background-color: white;
 }

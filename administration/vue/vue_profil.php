@@ -22,7 +22,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu">
+			<aside id="left_menu" class="aside_no_nav">
 				<?php
 					$disconnect = true;
 					$back_admin = true;

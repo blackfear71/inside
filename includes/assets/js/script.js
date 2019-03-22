@@ -52,24 +52,6 @@ function deployLeftMenu(id, icon1, icon2, icon3, icon4)
   }
 }
 
-// Affiche ou masque le menu de navigation + rotation icône menu
-function deployTopMenu(id, icon)
-{
-  document.getElementById(id).style.transition   = "all ease 0.4s";
-  document.getElementById(icon).style.transition = "all ease 0.4s";
-
-  if (document.getElementById(id).style.marginTop != "0px")
-  {
-    document.getElementById(id).style.marginTop   = "0px";
-    document.getElementById(icon).style.transform = "rotateZ(180deg)";
-  }
-  else
-  {
-    document.getElementById(id).style.marginTop   = "-83px";
-    document.getElementById(icon).style.transform = "rotateZ(0deg)";
-  }
-}
-
 // Changement thème
 function changeTheme(background, header, footer, logo)
 {

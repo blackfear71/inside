@@ -25,7 +25,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu">
+			<aside id="left_menu" class="aside_nav">
 				<?php
 					$disconnect  = true;
 					$back        = true;
@@ -98,9 +98,7 @@
             echo '</div>';
           }
           else
-          {
             echo '<div class="titre_accueil_mission">Pas encore de missions !</div>';
-          }
         ?>
 			</article>
 

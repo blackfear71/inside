@@ -217,12 +217,6 @@
                                        '/inside/profil/profil.php'
                                       );
     $listZonesCompletes        = array('header',
-                                       'nav',
-                                       'aside',
-                                       'footer',
-                                       //'article'
-                                      );
-    $listZonesPartielles       = array('header',
                                        'aside',
                                        'footer',
                                        //'article'
@@ -253,35 +247,7 @@
       $page = $listPages[array_rand($listPages)];
 
       // Zone
-      switch ($page)
-      {
-        // Cas avec <nav>
-        case '/inside/portail/calendars/calendars.php':
-        case '/inside/portail/collector/collector.php':
-        //case '/inside/portail/eventmanager/eventmanager.php':
-        case '/inside/portail/expensecenter/expensecenter.php':
-        case '/inside/portail/foodadvisor/foodadvisor.php':
-        case '/inside/portail/foodadvisor/restaurants.php':
-        case '/inside/portail/moviehouse/details.php':
-        case '/inside/portail/moviehouse/mailing.php':
-        case '/inside/portail/moviehouse/moviehouse.php':
-        case '/inside/portail/moviehouse/saisie.php':
-        case '/inside/portail/petitspedestres/parcours.php':
-        case '/inside/portail/missions/missions.php':
-        case '/inside/portail/missions/details.php':
-          $zone = $listZonesCompletes[array_rand($listZonesCompletes)];
-          break;
-
-        // Cas sans <nav>
-        case '/inside/portail/bugs/bugs.php':
-        case '/inside/portail/notifications/notifications.php':
-        case '/inside/portail/portail/portail.php':
-        case '/inside/profil/profil.php':
-        case '/inside/portail/search/search.php':
-        default:
-          $zone = $listZonesPartielles[array_rand($listZonesPartielles)];
-          break;
-      }
+      $zone = $listZonesCompletes[array_rand($listZonesCompletes)];
 
       // Position
       switch ($zone)
@@ -338,8 +304,8 @@
   {
     $duplicated = false;
 
-    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 5*(3+3+3) + 12*(3+3+3+3) = 189 emplacements possibles)
-    if (!empty($tableauMissions) AND count($tableauMissions) <= 189)
+    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 17*(3+3+3) = 153 emplacements possibles)
+    if (!empty($tableauMissions) AND count($tableauMissions) <= 153)
     {
       foreach ($tableauMissions as $missionExistante)
       {

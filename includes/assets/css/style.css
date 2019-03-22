@@ -514,12 +514,21 @@ header
 aside
 {
 	width: 108px;
-	height: calc(100% - 130px);
 	float: left;
 	margin-left: -83px;
 	margin-top: -30px;
 	position: absolute;
 	z-index: 3;
+}
+
+.aside_nav
+{
+	height: calc(100% - 180px);
+}
+
+.aside_no_nav
+{
+	height: calc(100% - 130px);
 }
 
 .menu_aside_hidden
@@ -622,32 +631,11 @@ aside
 }
 
 /*** Nav (menu catégories) ***/
-nav
+.menu_nav
 {
-	position: absolute;
-	margin-top: -83px;
-	width: calc(100% - 15%);
-	margin-left: 7.5%;
-	z-index: -1;
-}
-
-.menu_nav_hidden
-{
-	background-color: #ff1937;
-	border-bottom: solid 2px #c81932;
-	line-height: 80px;
+	background-color: #303030;
 	text-align: center;
-}
-
-.menu_nav_visible
-{
-	background-color: #ff1937;
-	border-top: solid 1px rgb(255, 255, 255, 0.1);
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
-	height: 25px;
-	text-align: center;
-	cursor: pointer;
+	height: 50px;
 }
 
 .icon_down
@@ -657,44 +645,28 @@ nav
 
 .logo_onglet
 {
-	height: 50px;
-	width: 50px;
-	margin-top: 10px;
+	height: 30px;
+	width: 30px;
+	padding: 10px 20px 10px 20px;
 }
 
 .onglet_inactif
 {
 	display: inline-block;
-	background-color: #c81932;
-	width: 70px;
-	height: 70px;
-	margin-left: 10px;
-	margin-right: 10px;
-	vertical-align: middle;
-	margin-top: -4px;
-	border-radius: 2px;
-	transition: padding ease 0.2s;
+	height: 50px;
+	background-color: #303030;
 }
 
-.onglet_inactif:hover, .onglet_actif:hover
+.onglet_inactif:hover
 {
-	padding-left: 10px;
-	padding-right: 10px;
-	transition: padding ease 0.2s;
+	background-color: #262626;
 }
 
 .onglet_actif
 {
 	display: inline-block;
+	height: 50px;
 	background-color: #262626;
-	width: 70px;
-	height: 70px;
-	margin-left: 10px;
-	margin-right: 10px;
-	vertical-align: middle;
-	margin-top: -4px;
-	border-radius: 2px;
-	transition: padding ease 0.2s;
 }
 
 /*** Switch ***/

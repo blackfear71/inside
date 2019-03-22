@@ -4,7 +4,9 @@
 
 .zone_recherche
 {
-	margin-top: -30px;
+	width: 100%;
+	margin-top: -20px;
+	margin-bottom: -10px;
 }
 
 .titre_search
@@ -19,8 +21,8 @@
 	padding-bottom: 10px;
 	color: #262626;
 	text-align: left;
-  margin-top: 20px;
-	margin-bottom: 15px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .count_search

@@ -25,7 +25,7 @@
 
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu">
+			<aside id="left_menu" class="aside_nav">
 				<?php
 					$disconnect  = true;
           $add_film    = true;
