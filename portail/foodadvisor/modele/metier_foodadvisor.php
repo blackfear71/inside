@@ -635,10 +635,20 @@
   // RETOUR : Aucun
   function deleteChoice($id)
   {
+    $control_ok = true;
+
     global $bdd;
 
+    // Contrôle saisie possible en fonction de l'heure
+    if (date("H") >= 13)
+    {
+      $control_ok                              = false;
+      $_SESSION['alerts']['heure_suppression'] = true;
+    }
+
     // Suppression de la base
-    $req = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id);
+    if ($control_ok == true)
+      $req = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id);
 
     // Relance de la détermination si besoin
     relanceDetermination();

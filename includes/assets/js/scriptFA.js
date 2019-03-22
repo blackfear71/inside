@@ -20,7 +20,7 @@ $(window).load(function()
     itemSelector: '.fiche_restaurant',
     columnWidth: 400,
     fitWidth: true,
-    gutter: 20,
+    gutter: 30,
     horizontalOrder: true
   });
 
