@@ -134,7 +134,7 @@
         Mot de passe oublié ?
       </a>
 
-      <div class="copyright_index">© 2017-2018 Inside</div>
+      <div class="copyright_index">© 2017-2019 Inside</div>
     </footer>
   </body>
 </html>
