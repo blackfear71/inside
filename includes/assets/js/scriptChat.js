@@ -40,7 +40,7 @@ $(window).load(function()
   });
 
   // Afficher/masquer la fenêtre de chat au clic
-  $('#hide_chat').click(function()
+  $('#zone_hide_chat').click(function()
   {
     // Si le chat est ouvert, on le ferme
     if (showChat == "true")

@@ -7,8 +7,13 @@
         echo '<img src="/inside/includes/icons/common/comments.png" alt="comments" title="Inside Room" class="logo_inside_room" />';
         echo 'INSIDE Room';
       echo '</a>';
+
       echo '<a id="onglet_users" class="titre_onglet">Connectés</a>';
-      echo '<a id="hide_chat" class="reduire_chat"></a>';
+
+      echo '<a id="zone_hide_chat" class="lien_reduire_chat">';
+        echo '<div class="triangle_reduire_chat"></div>';
+        echo '<div id="hide_chat" class="reduire_chat"></div>';
+      echo '</a>';
     echo '</div>';
 
     // Fenêtres paramétrées (JS)

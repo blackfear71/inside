@@ -16,6 +16,8 @@
 			break;
 	}
 
+	echo '<div class="separation_nav"></div>';
+
   echo '<nav class="menu_nav">';
 		// Par défaut, tous les onglets sont off
 		$onglet_1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/common/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
