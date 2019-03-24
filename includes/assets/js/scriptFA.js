@@ -75,6 +75,24 @@ function afficherMasquer(id)
     document.getElementById(id).style.display = "none";
 }
 
+// Affiche ou masque une zone de saisie
+function afficherMasquerSaisieChoix(id, zone)
+{
+  var num   = (($("#" + zone + " span").length - 1) / 4) - 1;
+  var marge = 200 - num * 25 + 'px';
+
+  if ($('#' + id).css('display') == "none")
+  {
+    $('#' + id).css('display', 'block');
+    $('#' + zone).animate({marginTop: marge}, 400);
+  }
+  else
+  {
+    $('#' + id).css('display', 'none');
+    $('#' + zone).css('margin-top', '-500px');
+  }
+}
+
 // Affiche la listbox des lieux
 function afficherListboxLieux(id)
 {
@@ -255,12 +273,13 @@ function cacherSaisieMenu(zone, bouton)
 }
 
 // Génère une nouvelle zone pour saisir un choix
-function addChoice(id)
+function addChoice(id, zone)
 {
   var html;
   var num     = $("#" + id + " span").length / 4;
   var new_num = num + 1;
 
+  // On ajoute de nouveaux champs de saisie
   html  = '<div class="titre_choix">Proposition ' + new_num + '</div>';
 
   html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_listbox">';
@@ -283,8 +302,13 @@ function addChoice(id)
 
   $("#" + id).append(html);
 
+  // On remonte la zone de saisie sur l'écran
+  var marge = 200 - num * 25 + 'px';
+  $('#' + zone).animate({marginTop: marge}, 400);
+
+  // On supprime le bouton d'ajout si on a 5 propositions
   if (new_num == 5)
-    $("#saisie_autre_choix").css("display", "none");
+    $('#saisie_autre_choix').css('display', 'none');
 }
 
 // Insère une prévisualisation de l'image sur la page
