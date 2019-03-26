@@ -25,6 +25,10 @@
       $propositions = getPropositions();
       $mesChoix     = getMyChoices($_SESSION['user']['identifiant']);
       $choixSemaine = getWeekChoices();
+
+      // Détails
+      if (!empty($propositions) AND $propositions[0]->getDetermined() == "Y")
+        $detailsProposition = getDetailsProposition($propositions[0]);
       break;
 
     case 'doDeterminer':
@@ -93,7 +97,10 @@
         $proposition->setCaller(htmlspecialchars($proposition->getCaller()));
         $proposition->setPseudo(htmlspecialchars($proposition->getPseudo()));
         $proposition->setAvatar(htmlspecialchars($proposition->getAvatar()));
+        $proposition->setTypes(htmlspecialchars($proposition->getTypes()));
         $proposition->setPhone(htmlspecialchars($proposition->getPhone()));
+        $proposition->setWebsite(htmlspecialchars($proposition->getWebsite()));
+        $proposition->setPlan(htmlspecialchars($proposition->getPlan()));
         $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
       }
 
@@ -134,6 +141,21 @@
       }
 
       unset($choixJour);
+
+      if (!empty($propositions) AND $propositions[0]->getDetermined() == "Y")
+      {
+        foreach ($detailsProposition as &$detailsUser)
+        {
+          $detailsUser['identifiant'] = htmlspecialchars($detailsUser['identifiant']);
+          $detailsUser['pseudo']      = htmlspecialchars($detailsUser['pseudo']);
+          $detailsUser['avatar']      = htmlspecialchars($detailsUser['avatar']);
+          $detailsUser['transports']  = htmlspecialchars($detailsUser['transports']);
+          $detailsUser['horaire']     = htmlspecialchars($detailsUser['horaire']);
+          $detailsUser['menu']        = htmlspecialchars($detailsUser['menu']);
+        }
+
+        unset($detailsUser);
+      }
       break;
 
     case 'doDeterminer':

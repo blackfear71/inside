@@ -405,12 +405,12 @@
 
                             if ($matching == true)
                             {
-                              echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants_update_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\');" class="checkbox_type" checked />';
+                              echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants_update_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" checked />';
                               echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type_checked">' . $type . '</label>';
                             }
                             else
                             {
-                              echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants_update_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\');" class="checkbox_type" />';
+                              echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants_update_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" />';
                               echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type">' . $type . '</label>';
                             }
                           echo '</div>';

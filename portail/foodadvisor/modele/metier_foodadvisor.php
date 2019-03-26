@@ -12,7 +12,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT DISTINCT location FROM food_advisor_restaurants ORDER BY location ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       array_push($listLocations, $donnees['location']);
     }
@@ -32,7 +32,7 @@
 
     // Lecture des types
     $reponse = $bdd->query('SELECT DISTINCT types FROM food_advisor_restaurants');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $stringTypes .= $donnees['types'];
     }
@@ -66,7 +66,7 @@
       $restaurants_by_location = array();
 
       $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         array_push($restaurants_by_location, Restaurant::withData($donnees));
       }
@@ -113,7 +113,7 @@
     global $bdd;
 
     $req1 = $bdd->query('SELECT DISTINCT id_restaurant FROM food_advisor_users WHERE date = "' . date("Ymd") . '"');
-    while($data1 = $req1->fetch())
+    while ($data1 = $req1->fetch())
     {
       $myProposition = Proposition::withData($data1);
 
@@ -124,7 +124,10 @@
       $myProposition->setName($data2['name']);
       $myProposition->setPicture($data2['picture']);
       $myProposition->setLocation($data2['location']);
+      $myProposition->setTypes($data2['types']);
       $myProposition->setPhone($data2['phone']);
+      $myProposition->setWebsite($data2['website']);
+      $myProposition->setPlan($data2['plan']);
       $myProposition->setOpened($data2['opened']);
 
       $req2->closeCursor();
@@ -198,6 +201,38 @@
     return $listPropositions;
   }
 
+  // METIER : Récupère les détails utilisateurs de la proposition déterminée
+  // RETOUR : Tableau des détails
+  function getDetailsProposition($proposition)
+  {
+    $details = array();
+
+    global $bdd;
+
+    $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $proposition->getId_restaurant() . ' ORDER BY identifiant ASC');
+    while ($data1 = $req1->fetch())
+    {
+      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
+      $data2 = $req2->fetch();
+      $pseudo      = $data2['pseudo'];
+      $avatar      = $data2['avatar'];
+      $req2->closeCursor();
+
+      $detailsUser = array("identifiant" => $data1['identifiant'],
+                           "pseudo"      => $pseudo,
+                           "avatar"      => $avatar,
+                           "transports"  => $data1['transports'],
+                           "horaire"     => $data1['time'],
+                           "menu"        => $data1['menu']
+                          );
+
+      array_push($details, $detailsUser);
+    }
+    $req1->closeCursor();
+
+    return $details;
+  }
+
   // METIER : Récupère un des restaurants pouvant être déterminé ce jour
   // RETOUR : Id restaurant déterminé
   function getRestaurantDetermined($propositions)
@@ -265,7 +300,7 @@
     $listUsers = array();
 
     $req1 = $bdd->query('SELECT DISTINCT identifiant FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $id_restaurant . ' ORDER BY identifiant ASC');
-    while($data1 = $req1->fetch())
+    while ($data1 = $req1->fetch())
     {
       $req2 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
       $data2 = $req2->fetch();
@@ -283,7 +318,7 @@
                                                                             AND date >= "' . $monday . '"
                                                                             AND date <= "' . $friday . '"
                                                                        ORDER BY caller ASC');
-    while($data3 = $req3->fetch())
+    while ($data3 = $req3->fetch())
     {
       array_push($listCallersWeek, $data3['caller']);
     }
@@ -386,7 +421,7 @@
 
     // Récupération des choix
     $reponse1 = $bdd->query('SELECT * FROM food_advisor_users WHERE identifiant = "' . $user . '" AND date = "' . date("Ymd") . '" ORDER BY id ASC');
-    while($donnees1 = $reponse1->fetch())
+    while ($donnees1 = $reponse1->fetch())
     {
       $myChoice = Choix::withData($donnees1);
 

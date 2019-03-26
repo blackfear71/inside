@@ -194,7 +194,10 @@
     private $caller;
     private $pseudo;
     private $avatar;
+    private $types;
     private $phone;
+    private $website;
+    private $plan;
     private $opened;
 
     // Constructeur par défaut (objet vide)
@@ -210,7 +213,10 @@
       $this->caller          = '';
       $this->pseudo          = '';
       $this->avatar          = '';
+      $this->types           = '';
       $this->phone           = '';
+      $this->website         = '';
+      $this->plan            = '';
       $this->opened          = 'Y;Y;Y;Y;Y;';
     }
 
@@ -344,6 +350,17 @@
       return $this->avatar;
     }
 
+    // Types de restaurant
+    public function setTypes($types)
+    {
+      $this->types = $types;
+    }
+
+    public function getTypes()
+    {
+      return $this->types;
+    }
+
     // Numéro de téléphone
     public function setPhone($phone)
     {
@@ -353,6 +370,28 @@
     public function getPhone()
     {
       return $this->phone;
+    }
+
+    // Site web
+    public function setWebsite($website)
+    {
+      $this->website = $website;
+    }
+
+    public function getWebsite()
+    {
+      return $this->website;
+    }
+
+    // Plan
+    public function setPlan($plan)
+    {
+      $this->plan = $plan;
+    }
+
+    public function getPlan()
+    {
+      return $this->plan;
     }
 
     // Jours d'ouverture
