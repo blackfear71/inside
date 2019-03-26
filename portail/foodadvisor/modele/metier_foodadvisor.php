@@ -756,8 +756,6 @@
   // RETOUR : Id enregistrement créé
   function insertRestaurant($post, $files, $user)
   {
-    var_dump($post);
-
     $new_id     = NULL;
     $control_ok = true;
 
@@ -958,8 +956,6 @@
   // RETOUR : Aucun
   function updateRestaurant($post, $files, $id_restaurant)
   {
-    var_dump($post);
-
     $control_ok = true;
 
     global $bdd;
