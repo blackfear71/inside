@@ -199,6 +199,7 @@
     private $website;
     private $plan;
     private $opened;
+    private $details;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -218,6 +219,7 @@
       $this->website         = '';
       $this->plan            = '';
       $this->opened          = 'Y;Y;Y;Y;Y;';
+      $this->details         = array();
     }
 
     // Constructeur de l'objet Proposition en fonction des données
@@ -403,6 +405,17 @@
     public function getOpened()
     {
       return $this->opened;
+    }
+
+    // Détails
+    public function setDetails($details)
+    {
+      $this->details = $details;
+    }
+
+    public function getDetails()
+    {
+      return $this->details;
     }
   }
 

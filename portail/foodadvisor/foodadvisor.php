@@ -25,10 +25,6 @@
       $propositions = getPropositions();
       $mesChoix     = getMyChoices($_SESSION['user']['identifiant']);
       $choixSemaine = getWeekChoices();
-
-      // Détails
-      if (!empty($propositions) AND $propositions[0]->getDetermined() == "Y")
-        $detailsProposition = getDetailsProposition($propositions[0]);
       break;
 
     case 'doDeterminer':
@@ -102,6 +98,21 @@
         $proposition->setWebsite(htmlspecialchars($proposition->getWebsite()));
         $proposition->setPlan(htmlspecialchars($proposition->getPlan()));
         $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
+
+        if (!empty($proposition->getDetails()))
+        {
+          foreach ($proposition->getDetails() as &$detailsUser)
+          {
+            $detailsUser['identifiant'] = htmlspecialchars($detailsUser['identifiant']);
+            $detailsUser['pseudo']      = htmlspecialchars($detailsUser['pseudo']);
+            $detailsUser['avatar']      = htmlspecialchars($detailsUser['avatar']);
+            $detailsUser['transports']  = htmlspecialchars($detailsUser['transports']);
+            $detailsUser['horaire']     = htmlspecialchars($detailsUser['horaire']);
+            $detailsUser['menu']        = htmlspecialchars($detailsUser['menu']);
+          }
+
+          unset($detailsUser);
+        }
       }
 
       unset($proposition);
@@ -141,21 +152,6 @@
       }
 
       unset($choixJour);
-
-      if (!empty($propositions) AND $propositions[0]->getDetermined() == "Y")
-      {
-        foreach ($detailsProposition as &$detailsUser)
-        {
-          $detailsUser['identifiant'] = htmlspecialchars($detailsUser['identifiant']);
-          $detailsUser['pseudo']      = htmlspecialchars($detailsUser['pseudo']);
-          $detailsUser['avatar']      = htmlspecialchars($detailsUser['avatar']);
-          $detailsUser['transports']  = htmlspecialchars($detailsUser['transports']);
-          $detailsUser['horaire']     = htmlspecialchars($detailsUser['horaire']);
-          $detailsUser['menu']        = htmlspecialchars($detailsUser['menu']);
-        }
-
-        unset($detailsUser);
-      }
       break;
 
     case 'doDeterminer':

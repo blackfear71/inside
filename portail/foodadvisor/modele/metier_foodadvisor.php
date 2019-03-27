@@ -192,6 +192,10 @@
 
         // On enregistre le rang
         $proposition->setClassement($currentClassement);
+
+        // Récupération détails proposition
+        if ($proposition->getDetermined() == "Y" OR $proposition->getClassement() == 1)
+          $proposition->setDetails(getDetailsProposition($proposition));
       }
 
       // Tri par détermination puis nombre de participants pour affichage

@@ -432,8 +432,21 @@
 }
 
 /*** Affichage détails ***/
+@keyframes affichageDetails
+{
+	0%
+	{
+		opacity: 0;
+	}
+	100%
+	{
+		opacity: 1;
+	}
+}
+
 .zone_details_proposition
 {
+	animation: 0.4s ease 0s normal forwards 1 affichageDetails;
 	width: calc(85% - 40px);
 	margin-left: auto;
 	margin-right: auto;
@@ -667,6 +680,7 @@
 	background-color: #e3e3e3;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
+	overflow: hidden;
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align: center;
@@ -689,6 +703,26 @@
 .lien_details_determined:hover
 {
 	border-color: transparent #e3e3e3 transparent transparent;
+	color: #262626;
+}
+
+.lien_details_top
+{
+	float: right;
+	margin-right: -10px;
+	margin-bottom: -40px;
+	cursor: pointer;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 40px 40px 0;
+	border-color: transparent #262626 transparent transparent;
+	color: white;
+}
+
+.lien_details_top:hover
+{
+	border-color: transparent #c3c3c3 transparent transparent;
 	color: #262626;
 }
 
