@@ -282,10 +282,13 @@
                   echo '<div class="titre_details" style="margin-top: 40px;">Les menus proposés</div>';
 
                   // Menus
+                  $menuPresent = false;
+
                   foreach ($detailsProposition as $detailsUser)
                   {
                     if ($detailsUser['menu'] != ";;;")
                     {
+                      $menuPresent = true;
                       list($entree, $plat, $dessert) = explode(";", $detailsUser['menu']);
 
                       echo '<div class="zone_details_user_bottom">';
@@ -321,6 +324,9 @@
                       echo '</div>';
                     }
                   }
+
+                  if ($menuPresent == false)
+                    echo '<div class="no_menu_details">Pas de menus proposés pour ce choix.</div>';
                 echo '</div>';
               echo '</div>';
             echo '</div>';
@@ -537,19 +543,19 @@
                       echo '<div class="zone_ouverture_mes_choix">';
                         $explodedOpened = explode(";", $monChoix->getOpened());
                         $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
-                        $j              = 0;
+                        $i              = 0;
 
                         foreach ($explodedOpened as $opened)
                         {
                           if (!empty($opened))
                           {
                             if ($opened == "Y")
-                              echo '<div class="jour_oui_fa">' . $semaine_short[$j] . '</div>';
+                              echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
                             else
-                              echo '<div class="jour_non_fa">' . $semaine_short[$j] . '</div>';
+                              echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
                           }
 
-                          $j++;
+                          $i++;
                         }
                       echo '</div>';
 

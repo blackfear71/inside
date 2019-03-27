@@ -615,6 +615,13 @@
 	border-left: solid 1px #c3c3c3;
 }
 
+.no_menu_details
+{
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	line-height: 40px;
+}
+
 .avatar_menus
 {
 	display: block;
@@ -1594,8 +1601,10 @@
 	margin-right: 50px;
 	margin-bottom: 10px;
 	text-align: left;
-	max-height: 150px;
+	min-height: 150px;
+	height: 150px;
 	overflow-y: auto;
+	resize: vertical;
 }
 
 .icon_validate_restaurant
