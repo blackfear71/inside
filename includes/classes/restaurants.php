@@ -8,6 +8,8 @@
     private $location;
     private $phone;
     private $opened;
+    private $min_price;
+    private $max_price;
     private $website;
     private $plan;
     private $description;
@@ -22,6 +24,8 @@
       $this->location    = '';
       $this->phone       = '';
       $this->opened      = '';
+      $this->min_price   = '';
+      $this->max_price   = '';
       $this->website     = '';
       $this->plan        = '';
       $this->description = '';
@@ -59,6 +63,12 @@
 
       if (isset($data['opened']))
         $this->opened      = $data['opened'];
+
+      if (isset($data['min_price']))
+        $this->min_price   = $data['min_price'];
+
+      if (isset($data['max_price']))
+        $this->max_price   = $data['max_price'];
 
       if (isset($data['website']))
         $this->website     = $data['website'];
@@ -148,6 +158,28 @@
       return $this->opened;
     }
 
+    // Prix minimum
+    public function setMin_price($min_price)
+    {
+      $this->min_price = $min_price;
+    }
+
+    public function getMin_price()
+    {
+      return $this->min_price;
+    }
+
+    // Prix maximum
+    public function setMax_price($max_price)
+    {
+      $this->max_price = $max_price;
+    }
+
+    public function getMax_price()
+    {
+      return $this->max_price;
+    }
+
     // Site web
     public function setWebsite($website)
     {
@@ -199,6 +231,8 @@
     private $website;
     private $plan;
     private $opened;
+    private $min_price;
+    private $max_price;
     private $details;
 
     // Constructeur par défaut (objet vide)
@@ -219,6 +253,8 @@
       $this->website         = '';
       $this->plan            = '';
       $this->opened          = 'Y;Y;Y;Y;Y;';
+      $this->min_price       = '';
+      $this->max_price       = '';
       $this->details         = array();
     }
 
@@ -405,6 +441,28 @@
     public function getOpened()
     {
       return $this->opened;
+    }
+
+    // Prix minimum
+    public function setMin_price($min_price)
+    {
+      $this->min_price = $min_price;
+    }
+
+    public function getMin_price()
+    {
+      return $this->min_price;
+    }
+
+    // Prix maximum
+    public function setMax_price($max_price)
+    {
+      $this->max_price = $max_price;
+    }
+
+    public function getMax_price()
+    {
+      return $this->max_price;
     }
 
     // Détails

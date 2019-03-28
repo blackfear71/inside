@@ -7,9 +7,15 @@
   controlsUser();
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['alerts']['wrong_phone_number']) OR $_SESSION['alerts']['wrong_phone_number'] != true)
+  if ((!isset($_SESSION['alerts']['wrong_phone_number']) OR $_SESSION['alerts']['wrong_phone_number'] != true)
+  AND (!isset($_SESSION['alerts']['wrong_price_min'])    OR $_SESSION['alerts']['wrong_price_min']    != true)
+  AND (!isset($_SESSION['alerts']['wrong_price_max'])    OR $_SESSION['alerts']['wrong_price_max']    != true)
+  AND (!isset($_SESSION['alerts']['miss_price'])         OR $_SESSION['alerts']['miss_price']         != true)
+  AND (!isset($_SESSION['alerts']['price_max_min'])      OR $_SESSION['alerts']['price_max_min']      != true))
   {
     $_SESSION['save']['name_restaurant']        = "";
+    $_SESSION['save']['prix_min']               = "";
+    $_SESSION['save']['prix_max']               = "";
     $_SESSION['save']['phone_restaurant']       = "";
     $_SESSION['save']['types_restaurants']      = "";
     $_SESSION['save']['description_restaurant'] = "";
@@ -79,6 +85,8 @@
           $restaurant->setLocation(htmlspecialchars($restaurant->getLocation()));
           $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
           $restaurant->setOpened(htmlspecialchars($restaurant->getOpened()));
+          $restaurant->setMin_price(htmlspecialchars($restaurant->getMin_price()));
+          $restaurant->setMax_price(htmlspecialchars($restaurant->getMax_price()));
           $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
           $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
           $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));

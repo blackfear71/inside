@@ -171,6 +171,13 @@
                           }
                         echo '</div>';
 
+                        // Prix
+                        if (!empty($proposition->getMin_price()) AND !empty($proposition->getMax_price()))
+                        {
+                          echo '<div class="price_details">Prix min. ' . $proposition->getMin_price() . '€</div>';
+                          echo '<div class="price_details">Prix max. ' . $proposition->getMax_price() . '€</div>';
+                        }
+
                         // Lieu
                         echo '<span class="lieu_proposition">' . $proposition->getLocation() . '</span>';
 

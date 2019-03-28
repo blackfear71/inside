@@ -98,6 +98,8 @@
         $proposition->setWebsite(htmlspecialchars($proposition->getWebsite()));
         $proposition->setPlan(htmlspecialchars($proposition->getPlan()));
         $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
+        $proposition->setMin_price(htmlspecialchars($proposition->getMin_price()));
+        $proposition->setMax_price(htmlspecialchars($proposition->getMax_price()));
 
         if (!empty($proposition->getDetails()))
         {

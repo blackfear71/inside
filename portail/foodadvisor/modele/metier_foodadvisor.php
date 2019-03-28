@@ -68,7 +68,11 @@
       $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
       while ($donnees = $reponse->fetch())
       {
-        array_push($restaurants_by_location, Restaurant::withData($donnees));
+        $myRestaurant = Restaurant::withData($donnees);
+        $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
+        $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
+
+        array_push($restaurants_by_location, $myRestaurant);
       }
       $reponse->closeCursor();
 
@@ -129,6 +133,8 @@
       $myProposition->setWebsite($data2['website']);
       $myProposition->setPlan($data2['plan']);
       $myProposition->setOpened($data2['opened']);
+      $myProposition->setMin_price(str_replace('.', ',', $data2['min_price']));
+      $myProposition->setMax_price(str_replace('.', ',', $data2['max_price']));
 
       $req2->closeCursor();
 
@@ -770,6 +776,8 @@
     $plan_restaurant        = $post['plan_restaurant'];
     $description_restaurant = $post['description_restaurant'];
     $ouverture_restaurant   = $post['ouverture_restaurant'];
+    $prix_min               = str_replace(',', '.', htmlspecialchars($post['prix_min_restaurant']));
+    $prix_max               = str_replace(',', '.', htmlspecialchars($post['prix_max_restaurant']));
 
     if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
       $lieu_restaurant      = $post['saisie_other_location'];
@@ -794,12 +802,61 @@
     $_SESSION['save']['description_restaurant'] = $post['description_restaurant'];
     $_SESSION['save']['location']               = $post['location'];
     $_SESSION['save']['saisie_other_location']  = $post['saisie_other_location'];
+    $_SESSION['save']['prix_min']               = $post['prix_min_restaurant'];
+    $_SESSION['save']['prix_max']               = $post['prix_max_restaurant'];
 
     if (isset($post['ouverture_restaurant']))
       $_SESSION['save']['ouverture_restaurant'] = $ouverture_restaurant;
 
     if (isset($post['types_restaurants']))
       $_SESSION['save']['types_restaurants']    = $types_restaurant;
+
+    // Contrôle prix min et max renseigné
+    if ($control_ok == true)
+    {
+      if ((!empty($prix_min) AND empty($prix_max))
+      OR  (empty($prix_min)  AND !empty($prix_max)))
+      {
+        $_SESSION['alerts']['miss_price'] = true;
+        $control_ok                       = false;
+      }
+    }
+
+    // Contrôle prix min numérique
+    if ($control_ok == true)
+    {
+      if (!empty($prix_min))
+      {
+        if (!is_numeric($prix_min))
+        {
+          $_SESSION['alerts']['wrong_price_min'] = true;
+          $control_ok                            = false;
+        }
+      }
+    }
+
+    // Contrôle prix max numérique
+    if ($control_ok == true)
+    {
+      if (!empty($prix_max))
+      {
+        if (!is_numeric($prix_max))
+        {
+          $_SESSION['alerts']['wrong_price_max'] = true;
+          $control_ok                            = false;
+        }
+      }
+    }
+
+    // Contrôle prix min <= prix max
+    if ($control_ok == true)
+    {
+      if ($prix_min > $prix_max)
+      {
+        $_SESSION['alerts']['price_max_min'] = true;
+        $control_ok                          = false;
+      }
+    }
 
     // Contrôle numéro téléphone numérique
     if ($control_ok == true)
@@ -912,6 +969,8 @@
                           'location'    => $lieu_restaurant,
                           'phone'       => $telephone_restaurant,
                           'opened'      => $ouvertures,
+                          'min_price'   => $prix_min,
+                          'max_price'   => $prix_max,
                           'website'     => $website_restaurant,
                           'plan'        => $plan_restaurant,
                           'description' => $description_restaurant
@@ -923,6 +982,8 @@
                                                                  location,
                                                                  phone,
                                                                  opened,
+                                                                 min_price,
+                                                                 max_price,
                                                                  website,
                     																						 plan,
                                                                  description
@@ -933,6 +994,8 @@
                                                                  :location,
                     																					   :phone,
                                                                  :opened,
+                                                                 :min_price,
+                                                                 :max_price,
                                                                  :website,
                                                                  :plan,
                                                                  :description
@@ -967,27 +1030,76 @@
     // Récupération des données
     if ($control_ok == true)
     {
-      $nom_restaurant         = $post['name_restaurant'];
-      $telephone_restaurant   = $post['phone_restaurant'];
-      $website_restaurant     = $post['website_restaurant'];
-      $plan_restaurant        = $post['plan_restaurant'];
-      $description_restaurant = $post['description_restaurant'];
+      $nom_restaurant         = $post['update_name_restaurant_' . $id_restaurant];
+      $telephone_restaurant   = $post['update_phone_restaurant_' . $id_restaurant];
+      $website_restaurant     = $post['update_website_restaurant_' . $id_restaurant];
+      $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
+      $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
       $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
+      $prix_min               = str_replace(',', '.', htmlspecialchars($post['update_prix_min_restaurant_' . $id_restaurant]));
+      $prix_max               = str_replace(',', '.', htmlspecialchars($post['update_prix_max_restaurant_' . $id_restaurant]));
 
-      if ($post['location'] == "other_location" AND !empty($post['update_other_location']))
-        $lieu_restaurant      = $post['update_other_location'];
+      if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
+        $lieu_restaurant      = $post['update_other_location_' . $id_restaurant];
       else
-        $lieu_restaurant      = $post['location'];
+        $lieu_restaurant      = $post['update_location_' . $id_restaurant];
 
-      if (isset($post['types_restaurants_update_' . $id_restaurant]))
+      if (isset($post['update_types_restaurants_' . $id_restaurant]))
       {
-        $types_restaurant     = array_unique($post['types_restaurants_update_' . $id_restaurant]);
+        $types_restaurant     = array_unique($post['update_types_restaurants_' . $id_restaurant]);
 
         foreach ($types_restaurant as $keyType => $type)
         {
           if (empty($type))
             unset($types_restaurant[$keyType]);
         }
+      }
+    }
+
+    // Contrôle prix min et max renseigné
+    if ($control_ok == true)
+    {
+      if ((!empty($prix_min) AND empty($prix_max))
+      OR  (empty($prix_min)  AND !empty($prix_max)))
+      {
+        $_SESSION['alerts']['miss_price'] = true;
+        $control_ok                       = false;
+      }
+    }
+
+    // Contrôle prix min numérique
+    if ($control_ok == true)
+    {
+      if (!empty($prix_min))
+      {
+        if (!is_numeric($prix_min))
+        {
+          $_SESSION['alerts']['wrong_price_min'] = true;
+          $control_ok                            = false;
+        }
+      }
+    }
+
+    // Contrôle prix max numérique
+    if ($control_ok == true)
+    {
+      if (!empty($prix_max))
+      {
+        if (!is_numeric($prix_max))
+        {
+          $_SESSION['alerts']['wrong_price_max'] = true;
+          $control_ok                            = false;
+        }
+      }
+    }
+
+    // Contrôle prix min <= prix max
+    if ($control_ok == true)
+    {
+      if ($prix_min > $prix_max)
+      {
+        $_SESSION['alerts']['price_max_min'] = true;
+        $control_ok                          = false;
       }
     }
 
@@ -1049,7 +1161,7 @@
         mkdir($dossier);
 
       // Si on a bien une image
-      if ($files['image_restaurant']['name'] != NULL)
+      if ($files['update_image_restaurant_' . $id_restaurant]['name'] != NULL)
       {
         // Dossier de destination
         $restaurant_dir = $dossier . '/';
@@ -1064,9 +1176,9 @@
         $req1->closeCursor();
 
         // Données du fichier
-        $file      = $files['image_restaurant']['name'];
-        $tmp_file  = $files['image_restaurant']['tmp_name'];
-        $size_file = $files['image_restaurant']['size'];
+        $file      = $files['update_image_restaurant_' . $id_restaurant]['name'];
+        $tmp_file  = $files['update_image_restaurant_' . $id_restaurant]['tmp_name'];
+        $size_file = $files['update_image_restaurant_' . $id_restaurant]['size'];
         $maxsize   = 8388608; // 8Mo
 
         // Si le fichier n'est pas trop grand
@@ -1077,7 +1189,7 @@
             exit("Le fichier est introuvable");
 
           // Contrôle type de fichier
-          $type_file = $files['image_restaurant']['type'];
+          $type_file = $files['update_image_restaurant_' . $id_restaurant]['type'];
 
           if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
             exit("Le fichier n'est pas une image valide");
@@ -1120,6 +1232,8 @@
                           'location'    => $lieu_restaurant,
                           'phone'       => $telephone_restaurant,
                           'opened'      => $ouvertures,
+                          'min_price'   => $prix_min,
+                          'max_price'   => $prix_max,
                           'website'     => $website_restaurant,
                           'plan'        => $plan_restaurant,
                           'description' => $description_restaurant
@@ -1131,6 +1245,8 @@
                                                                  location    = :location,
                                                                  phone       = :phone,
                                                                  opened      = :opened,
+                                                                 min_price   = :min_price,
+                                                                 max_price   = :max_price,
                                                                  website     = :website,
                                                                  plan        = :plan,
                                                                  description = :description

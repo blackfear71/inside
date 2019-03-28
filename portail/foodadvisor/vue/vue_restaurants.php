@@ -71,7 +71,7 @@
                   // Photo
                   echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-                  echo '<span class="zone_parcourir_restaurant">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant" onchange="loadFile(event, \'img_restaurant_saisie\')" /></span>';
+                  echo '<span class="zone_parcourir_restaurant_saisie">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie" onchange="loadFile(event, \'img_restaurant_saisie\')" /></span>';
 
                   echo '<div class="mask_saisie_restaurant">';
                     echo '<img id="img_restaurant_saisie" class="image_saisie_restaurant" />';
@@ -101,6 +101,11 @@
 
                     $i++;
                   }
+
+                  echo '<div class="zone_saisie_prix">';
+                    echo '<input type="text" name="prix_min_restaurant" value="' . $_SESSION['save']['prix_min'] . '" maxlength="5" placeholder="Prix min." class="saisie_prix_min_restaurant" />';
+                    echo '<input type="text" name="prix_max_restaurant" value="' . $_SESSION['save']['prix_max'] . '" maxlength="5" placeholder="Prix max." class="saisie_prix_max_restaurant" />';
+                  echo '</div>';
                 echo '</div>';
 
                 // Nom, lieu, action et types
@@ -265,6 +270,13 @@
                       // Nom
                       echo '<div class="nom_restaurant" id="' . $restaurant->getId() . '">' . $restaurant->getName() . '</div>';
 
+                      // Prix
+                      if (!empty($restaurant->getMin_price()) AND !empty($restaurant->getMax_price()))
+                      {
+                        echo '<div class="price">Prix min. ' . $restaurant->getMin_price() . '€</div>';
+                        echo '<div class="price">Prix max. ' . $restaurant->getMax_price() . '€</div>';
+                      }
+
                       // Types
                       echo '<div class="zone_types_fiche">';
                         $explodedTypes = explode(";", $restaurant->getTypes());
@@ -350,27 +362,27 @@
                       echo '<div class="zone_update_image">';
                         echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-                        echo '<span class="zone_parcourir_restaurant">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant" onchange="loadFile(event, \'img_restaurant[' . $restaurant->getId() . ']\')" /></span>';
+                        echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update" onchange="loadFile(event, \'img_restaurant[' . $restaurant->getId() . ']\')" /></span>';
 
                         echo '<div class="mask_update_restaurant">';
                           if (!empty($restaurant->getPicture()))
-                            echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" id="img_restaurant[' . $restaurant->getId() . ']" class="image_saisie_restaurant" />';
+                            echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
                           else
-                            echo '<img id="img_restaurant[' . $restaurant->getId() . ']" class="image_saisie_restaurant" />';
+                            echo '<img id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
                           echo '</div>';
                       echo '</div>';
 
                       // Validation modification
-                      echo '<input type="submit" name="modify_restaurant" value="" title="Valider" class="icon_validate_restaurant" />';
+                      echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" class="icon_validate_restaurant" />';
 
                       // Annulation modification
                       echo '<a onclick="afficherMasquer(\'modifier_restaurant[' . $restaurant->getId() . ']\'); afficherMasquer(\'modifier_restaurant_2[' . $restaurant->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_restaurant"></a>';
 
                       // Nom
-                      echo '<input type="text" name="name_restaurant" value="' . $restaurant->getName() . '" placeholder="Nom du restaurant" class="update_nom_restaurant" required />';
+                      echo '<input type="text" name="update_name_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getName() . '" placeholder="Nom du restaurant" class="update_nom_restaurant" required />';
 
                       // Lieu
-                      echo '<select name="location" id="update_location_' . $restaurant->getId() . '" class="update_lieu_restaurant" onchange="afficherModifierOther(\'update_location_' . $restaurant->getId() . '\', \'other_location_' . $restaurant->getId() . '\');" required>';
+                      echo '<select name="update_location_' . $restaurant->getId() . '" id="update_location_' . $restaurant->getId() . '" class="update_lieu_restaurant" onchange="afficherModifierOther(\'update_location_' . $restaurant->getId() . '\', \'other_location_' . $restaurant->getId() . '\');" required>';
                         foreach ($listeLieux as $lieu)
                         {
                           if ($lieu == $restaurant->getLocation())
@@ -383,7 +395,7 @@
                       echo '</select>';
 
                       // Lieu "Autre"
-                      echo '<input type="text" name="update_other_location" placeholder="Lieu personnalisé" maxlength="255" id="other_location_' . $restaurant->getId() . '" class="update_lieu_autre_restaurant" style="display: none;" />';
+                      echo '<input type="text" name="update_other_location_' . $restaurant->getId() . '" placeholder="Lieu personnalisé" maxlength="255" id="other_location_' . $restaurant->getId() . '" class="update_lieu_autre_restaurant" style="display: none;" />';
 
                       // Jours d'ouverture
                       echo '<div class="opened_restaurant_update">';
@@ -416,9 +428,15 @@
                         }
                       echo '</div>';
 
+                      // Prix
+                      echo '<div class="zone_update_prix">';
+                        echo '<input type="text" name="update_prix_min_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMin_price() . '" maxlength="5" placeholder="Prix min." class="update_prix_min_restaurant" /> €';
+                        echo '<input type="text" name="update_prix_max_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMax_price() . '" maxlength="5" placeholder="Prix max." class="update_prix_max_restaurant" /> €';
+                      echo '</div>';
+
                       // Types
-                      echo '<div id="types_restaurants_update_' . $restaurant->getId() . '" class="zone_update_types">';
-                        echo '<a name="type_other" onclick="addOtherType(\'types_restaurants_update_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
+                      echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
+                        echo '<a name="type_other" onclick="addOtherType(\'update_types_restaurants_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
 
                         $explodedTypes = explode(";", $restaurant->getTypes());
                         $k             = 0;
@@ -442,12 +460,12 @@
 
                             if ($matching == true)
                             {
-                              echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants_update_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" checked />';
+                              echo '<input type="checkbox" id="' . $id_type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" checked />';
                               echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type_checked">' . $type . '</label>';
                             }
                             else
                             {
-                              echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants_update_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" />';
+                              echo '<input type="checkbox" id="' . $id_type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" />';
                               echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type">' . $type . '</label>';
                             }
                           echo '</div>';
@@ -458,19 +476,19 @@
 
                       // Site web
                       echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="update_icone_fiche" />';
-                      echo '<input type="text" name="website_restaurant" value="' . $restaurant->getWebsite() . '" placeholder="Site web" class="update_lien_restaurant" />';
+                      echo '<input type="text" name="update_website_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getWebsite() . '" placeholder="Site web" class="update_lien_restaurant" />';
 
                       // Plan
                       echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="update_icone_fiche" />';
-                      echo '<input type="text" name="plan_restaurant" value="' . $restaurant->getPlan() . '" placeholder="Plan" class="update_lien_restaurant" />';
+                      echo '<input type="text" name="update_plan_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPlan() . '" placeholder="Plan" class="update_lien_restaurant" />';
 
                       // Téléphone
                       echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" title="Téléphone" class="update_icone_fiche" />';
-                      echo '<input type="text" name="phone_restaurant" value="' . $restaurant->getPhone() . '" maxlength="10" placeholder="Téléphone du restaurant" class="update_lien_restaurant" />';
+                      echo '<input type="text" name="update_phone_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPhone() . '" maxlength="10" placeholder="Téléphone du restaurant" class="update_lien_restaurant" />';
 
                       // Description
                       echo '<div class="description_restaurant">';
-                        echo '<textarea placeholder="Description" name="description_restaurant" class="textarea_update_description_restaurant">' . $restaurant->getDescription() . '</textarea>';
+                        echo '<textarea placeholder="Description" name="update_description_restaurant_' . $restaurant->getId() . '" class="textarea_update_description_restaurant">' . $restaurant->getDescription() . '</textarea>';
                       echo '</div>';
 
                     echo '</form>';
