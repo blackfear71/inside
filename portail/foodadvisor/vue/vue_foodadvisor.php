@@ -174,8 +174,13 @@
                         // Prix
                         if (!empty($proposition->getMin_price()) AND !empty($proposition->getMax_price()))
                         {
-                          echo '<div class="price_details">Prix min. ' . $proposition->getMin_price() . '€</div>';
-                          echo '<div class="price_details">Prix max. ' . $proposition->getMax_price() . '€</div>';
+                          if ($proposition->getMin_price() == $proposition->getMax_price())
+                            echo '<div class="price_details">Prix moy. ' . $proposition->getMin_price() . '€</div>';
+                          else
+                          {
+                            echo '<div class="price_details">Prix min. ' . $proposition->getMin_price() . '€</div>';
+                            echo '<div class="price_details">Prix max. ' . $proposition->getMax_price() . '€</div>';
+                          }
                         }
 
                         // Lieu

@@ -273,8 +273,13 @@
                       // Prix
                       if (!empty($restaurant->getMin_price()) AND !empty($restaurant->getMax_price()))
                       {
-                        echo '<div class="price">Prix min. ' . $restaurant->getMin_price() . '€</div>';
-                        echo '<div class="price">Prix max. ' . $restaurant->getMax_price() . '€</div>';
+                        if ($restaurant->getMin_price() == $restaurant->getMax_price())
+                          echo '<div class="price">Prix moy. ' . $restaurant->getMin_price() . '€</div>';
+                        else
+                        {
+                          echo '<div class="price">Prix min. ' . $restaurant->getMin_price() . '€</div>';
+                          echo '<div class="price">Prix max. ' . $restaurant->getMax_price() . '€</div>';
+                        }
                       }
 
                       // Types
