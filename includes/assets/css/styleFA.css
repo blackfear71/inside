@@ -451,10 +451,11 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 100px;
-	margin-bottom: 100px;
 	padding: 20px;
 	border-radius: 2px;
 	background-color: white;
+	max-height: calc(100vh - 250px);
+	overflow-y: auto;
 }
 
 .zone_details_proposition_left
@@ -495,14 +496,18 @@
 	display: inline-block;
 	line-height: 50px;
 	padding-right: 10px;
-	border-right: solid 1px #c3c3c3;
 	color: #262626;
+}
+
+.zone_avatar_details
+{
+	display: inline-block;
+	border-left: solid 1px #c3c3c3;
 }
 
 .avatar_caller_details
 {
 	vertical-align: middle;
-	margin-top: -4px;
 	width: 50px;
 	border-radius: 50%;
 	margin-left: 10px;
@@ -615,6 +620,11 @@
 }
 
 .zone_details_user_bottom
+{
+	margin-bottom: 10px;
+}
+
+.zone_details_user_menu
 {
 	display: inline-block;
 	vertical-align: top;
@@ -1112,20 +1122,6 @@
 	line-height: 80px;
 }
 
-.saisie_telephone_restaurant
-{
-	width: calc(100% - 20px);
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: solid 1px #a3a3a3;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 100%;
-	line-height: 30px;
-	text-align: center;
-}
-
 .zone_saisie_right
 {
 	display: inline-block;
@@ -1312,16 +1308,16 @@
 {
 	display: inline-block;
 	border: 0;
-	width: 34px;
-	height: 34px;
+	width: 32px;
+	height: 32px;
 	background-color: #ff1937;
-	margin-right: 3px;
-	margin-bottom: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
-	line-height: 34px;
+	line-height: 32px;
 	text-align: center;
 	vertical-align: top;
 	cursor: pointer;
@@ -1331,25 +1327,40 @@
 {
 	display: inline-block;
 	border: 0;
-	width: 34px;
-	height: 34px;
+	width: 32px;
+	height: 32px;
 	background-color: #e3e3e3;
-	margin-right: 3px;
-	margin-bottom: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 34px;
+	line-height: 32px;
 	text-align: center;
 	vertical-align: top;
 	cursor: pointer;
 }
 
+.saisie_telephone_restaurant
+{
+	width: calc(11% - 20px);
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: white;
+	border-radius: 2px;
+	border: solid 1px #a3a3a3;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 100%;
+	line-height: 30px;
+	text-align: center;
+}
+
 .saisie_lien_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 123px);
+	width: calc(45% - 42px);
+	margin-left: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;
@@ -1530,13 +1541,29 @@
 .icone_fiche
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 30px;
 	margin-left: 10px;
 }
 
+.numero_restaurant
+{
+	margin-left: 100px;
+	margin-bottom: 10px;
+}
+
+.icone_fiche_phone
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 30px;
+	margin-right: 10px;
+}
+
 .phone_number
 {
-	margin-bottom: 15px;
+	display: inline-block;
+  font-family: robotoregular, Verdana, sans-serif;
 }
 
 .description_restaurant
@@ -1631,8 +1658,8 @@
 	background-color: white;
 	border-radius: 2px;
 	padding: 10px 5px 0 5px;
-	margin-left: 105px;
-	margin-right: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
 	margin-bottom: 10px;
 	text-align: left;
 	min-height: 150px;
@@ -1745,31 +1772,18 @@
 .update_icone_fiche
 {
 	float: left;
-	margin-left: 65px;
+	margin-left: 10px;
+	margin-right: 10px;
 	margin-top: 1px;
 	width: 30px;
 }
 
 .update_lien_restaurant
 {
-	width: 224px;
+	width: calc(100% - 80px);
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;
-	margin-left: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 100%;
-	line-height: 30px;
-}
-
-.update_telephone_restaurant
-{
-	width: 50%;
-	padding-left: 10px;
-	padding-right: 10px;
 	border: 0;
 	background-color: white;
 	border-radius: 2px;
@@ -1780,9 +1794,8 @@
 
 .textarea_update_description_restaurant
 {
-	margin-top: 10px;
-	min-height: 30px;
-	height: 200px;
+	min-height: 50px;
+	height: 150px;
 	width: calc(100% - 20px);
 	padding: 5px 10px 5px 10px;
 	border: 0;

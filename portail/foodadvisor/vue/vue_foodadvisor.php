@@ -55,7 +55,7 @@
             echo '</a>';
 
             // Restaurants
-            echo '<a href="restaurants.php?action=goConsulter" class="lien_categorie">';
+            echo '<a href="restaurants.php?action=goConsulter" title="Les restaurants" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Les restaurants</div>';
             echo '</a>';
@@ -190,7 +190,7 @@
                           foreach ($explodedTypes as $exploded)
                           {
                             if (!empty($exploded))
-                              echo '<span class="type_restaurant">' . $exploded . '</span>';
+                              echo '<span class="horaire_proposition">' . $exploded . '</span>';
                           }
                         echo '</div>';
                       }
@@ -203,10 +203,15 @@
                           echo '<div class="telephone_details">' . formatPhoneNumber($proposition->getPhone()) . '</div>';
 
                         // Avatar
-                        if (!empty($proposition->getAvatar()))
-                          echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
-                        else
-                          echo '<img src="../../includes/icons/common/default.png' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
+                        if ($proposition->getDetermined() == "Y")
+                        {
+                          echo '<div class="zone_avatar_details">';
+                            if (!empty($proposition->getAvatar()))
+                              echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
+                            else
+                              echo '<img src="../../includes/icons/common/default.png' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
+                          echo '</div>';
+                        }
                       echo '</div>';
 
                       // Liens
@@ -292,51 +297,53 @@
                       echo '<div class="titre_details" style="margin-top: 40px;">Les menus proposés</div>';
 
                       // Menus
-                      $menuPresent = false;
+                      echo '<div class="zone_details_user_bottom">';
+                        $menuPresent = false;
 
-                      foreach ($proposition->getDetails() as $detailsUser)
-                      {
-                        if ($detailsUser['menu'] != ";;;")
+                        foreach ($proposition->getDetails() as $detailsUser)
                         {
-                          $menuPresent = true;
-                          list($entree, $plat, $dessert) = explode(";", $detailsUser['menu']);
+                          if ($detailsUser['menu'] != ";;;")
+                          {
+                            $menuPresent = true;
+                            list($entree, $plat, $dessert) = explode(";", $detailsUser['menu']);
 
-                          echo '<div class="zone_details_user_bottom">';
-                            // Avatar
-                            if (!empty($detailsUser['avatar']))
-                              echo '<img src="../../includes/images/profil/avatars/' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
-                            else
-                              echo '<img src="../../includes/icons/common/default.png' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
+                            echo '<div class="zone_details_user_menu">';
+                              // Avatar
+                              if (!empty($detailsUser['avatar']))
+                                echo '<img src="../../includes/images/profil/avatars/' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
+                              else
+                                echo '<img src="../../includes/icons/common/default.png' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
 
-                            if (!empty($entree))
-                            {
-                              echo '<div class="zone_menu_mes_choix">';
-                                echo '<span class="titre_texte_mon_choix">Entrée</span>';
-                                echo '<div class="texte_mon_choix">' . $entree . '</div>';
-                              echo '</div>';
-                            }
+                              if (!empty($entree))
+                              {
+                                echo '<div class="zone_menu_mes_choix">';
+                                  echo '<span class="titre_texte_mon_choix">Entrée</span>';
+                                  echo '<div class="texte_mon_choix">' . $entree . '</div>';
+                                echo '</div>';
+                              }
 
-                            if (!empty($plat))
-                            {
-                              echo '<div class="zone_menu_mes_choix">';
-                                echo '<span class="titre_texte_mon_choix">Plat</span>';
-                                echo '<div class="texte_mon_choix">' . $plat . '</div>';
-                              echo '</div>';
-                            }
+                              if (!empty($plat))
+                              {
+                                echo '<div class="zone_menu_mes_choix">';
+                                  echo '<span class="titre_texte_mon_choix">Plat</span>';
+                                  echo '<div class="texte_mon_choix">' . $plat . '</div>';
+                                echo '</div>';
+                              }
 
-                            if (!empty($dessert))
-                            {
-                              echo '<div class="zone_menu_mes_choix">';
-                                echo '<span class="titre_texte_mon_choix">Dessert</span>';
-                                echo '<div class="texte_mon_choix">' . $dessert . '</div>';
-                              echo '</div>';
-                            }
-                          echo '</div>';
+                              if (!empty($dessert))
+                              {
+                                echo '<div class="zone_menu_mes_choix">';
+                                  echo '<span class="titre_texte_mon_choix">Dessert</span>';
+                                  echo '<div class="texte_mon_choix">' . $dessert . '</div>';
+                                echo '</div>';
+                              }
+                            echo '</div>';
+                          }
                         }
-                      }
 
-                      if ($menuPresent == false)
-                        echo '<div class="no_menu_details">Pas de menus proposés pour ce choix.</div>';
+                        if ($menuPresent == false)
+                          echo '<div class="no_menu_details">Pas de menus proposés pour ce choix.</div>';
+                      echo '</div>';
                     echo '</div>';
                   echo '</div>';
                 echo '</div>';
