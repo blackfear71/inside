@@ -418,7 +418,7 @@
 
                       // Types
                       echo '<div id="types_restaurants_update_' . $restaurant->getId() . '" class="zone_update_types">';
-                        echo '<a name="type_other" onclick="addOtherType(\'types_restaurants_update_' . $restaurant->getId() . '\');" class="bouton_type_autre" style="margin-left: 5px;"><span class="fond_plus">+</span>Autre</a>';
+                        echo '<a name="type_other" onclick="addOtherType(\'types_restaurants_update_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
 
                         $explodedTypes = explode(";", $restaurant->getTypes());
                         $k             = 0;
