@@ -776,8 +776,8 @@
     $plan_restaurant        = $post['plan_restaurant'];
     $description_restaurant = $post['description_restaurant'];
     $ouverture_restaurant   = $post['ouverture_restaurant'];
-    $prix_min               = str_replace(',', '.', htmlspecialchars($post['prix_min_restaurant']));
-    $prix_max               = str_replace(',', '.', htmlspecialchars($post['prix_max_restaurant']));
+    $prix_min               = number_format(str_replace(',', '.', htmlspecialchars($post['prix_min_restaurant'])), 2);
+    $prix_max               = number_format(str_replace(',', '.', htmlspecialchars($post['prix_max_restaurant'])), 2);
 
     if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
       $lieu_restaurant      = $post['saisie_other_location'];
@@ -1036,8 +1036,8 @@
       $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
       $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
       $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
-      $prix_min               = str_replace(',', '.', htmlspecialchars($post['update_prix_min_restaurant_' . $id_restaurant]));
-      $prix_max               = str_replace(',', '.', htmlspecialchars($post['update_prix_max_restaurant_' . $id_restaurant]));
+      $prix_min               = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_min_restaurant_' . $id_restaurant])), 2);
+      $prix_max               = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_max_restaurant_' . $id_restaurant])), 2);
 
       if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
         $lieu_restaurant      = $post['update_other_location_' . $id_restaurant];
