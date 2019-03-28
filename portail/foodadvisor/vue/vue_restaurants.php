@@ -404,12 +404,12 @@
                           if ($explodedOpened[$l] == "Y")
                           {
                             echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
-                            echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'label_jour_checked\', \'update_label_jour\');" class="label_jour_checked">' . $j . '</label>';
+                            echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'update_label_jour_checked\', \'update_label_jour\');" class="update_label_jour_checked">' . $j . '</label>';
                           }
                           else
                           {
                             echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
-                            echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'label_jour_checked\', \'update_label_jour\');" class="update_label_jour">' . $j . '</label>';
+                            echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'update_label_jour_checked\', \'update_label_jour\');" class="update_label_jour">' . $j . '</label>';
                           }
 
                           $l++;

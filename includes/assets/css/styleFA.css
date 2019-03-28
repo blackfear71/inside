@@ -1353,7 +1353,6 @@
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	line-height: 30px;
-	text-align: center;
 }
 
 .saisie_lien_restaurant
@@ -1374,7 +1373,7 @@
 
 .textarea_saisie_description_restaurant
 {
-	min-height: 30px;
+	min-height: 50px;
 	width: calc(100% - 22px);
 	padding: 5px 10px 5px 10px;
 	border: solid 1px #a3a3a3;
@@ -1506,16 +1505,15 @@
 {
 	display: inline-block;
 	border: 0;
-	width: 30px;
-	height: 30px;
+	width: 32px;
+	height: 32px;
 	background-color: #ff1937;
-	margin-right: 3px;
-	margin-bottom: 10px;
+	margin-right: 4px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
-	line-height: 30px;
+	line-height: 32px;
 	vertical-align: top;
 	text-align: center;
 }
@@ -1524,16 +1522,15 @@
 {
 	display: inline-block;
 	border: 0;
-	width: 30px;
-	height: 30px;
+	width: 32px;
+	height: 32px;
 	background-color: white;
-	margin-right: 3px;
-	margin-bottom: 10px;
+	margin-right: 4px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 	vertical-align: top;
 	text-align: center;
 }
@@ -1543,7 +1540,8 @@
 	display: inline-block;
 	vertical-align: middle;
 	width: 30px;
-	margin-left: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .numero_restaurant
@@ -1748,22 +1746,40 @@
 {
 	display: block;
 	margin-left: 105px;
+	margin-bottom: 10px;
 }
 
 .update_label_jour
 {
 	display: inline-block;
 	border: 0;
-	width: 34px;
-	height: 34px;
+	width: 32px;
+	height: 32px;
 	background-color: white;
-	margin-right: 3px;
-	margin-bottom: 10px;
+	margin-right: 4px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 34px;
+	line-height: 32px;
+	text-align: center;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.update_label_jour_checked
+{
+	display: inline-block;
+	border: 0;
+	width: 32px;
+	height: 32px;
+	background-color: #ff1937;
+	margin-right: 4px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	line-height: 32px;
 	text-align: center;
 	vertical-align: top;
 	cursor: pointer;
@@ -1805,5 +1821,3 @@
 	font-size: 100%;
 	resize: vertical;
 }
-
-/*** Page archives ***/
