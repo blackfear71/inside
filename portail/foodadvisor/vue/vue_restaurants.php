@@ -317,7 +317,7 @@
                         if (!empty($restaurant->getWebsite()))
                         {
                           echo '<a href="' . $restaurant->getWebsite() . '" target="_blank">';
-                            echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" style="margin-left: 7px;" />';
+                            echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" style="margin-left: 2px;"/>';
                           echo '</a>';
                         }
 

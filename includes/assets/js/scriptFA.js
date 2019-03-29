@@ -52,6 +52,15 @@ $(window).load(function()
 function initMasonry()
 {
   // On lance Masonry
+  $('.zone_propositions').masonry({
+    // Options
+    itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top',
+    columnWidth: 200,
+    fitWidth: true,
+    gutter: 30,
+    horizontalOrder: true
+  });
+
   $('.zone_fiches_restaurants').masonry({
     // Options
     itemSelector: '.fiche_restaurant',
@@ -59,7 +68,6 @@ function initMasonry()
     fitWidth: true,
     gutter: 20,
     horizontalOrder: true
-    /*transitionDuration: 0*/
   });
 
   // Découpe le texte si besoin
@@ -151,15 +159,37 @@ function cacherListboxRestaurants(zone, bouton)
 }
 
 // Affiche les listbox des horaires
-function afficherListboxHoraires(id)
+function afficherListboxHoraires(id, zone, type, idChoix)
 {
   var html;
-  var num         = id.substr(-1);
+  var num;
+  var name_select_h;
+  var name_select_m;
+  var class_listbox;
+  var class_bouton;
+
+  if (type == "create")
+  {
+    num           = id.substr(-1);
+    name_select_h = 'select_heures[' + num + ']';
+    name_select_m = 'select_minutes[' + num + ']';
+    class_listbox = "listbox_horaires";
+    class_bouton  = "bouton_annuler";
+  }
+  else if (type == "update")
+  {
+    num           = idChoix;
+    name_select_h = 'select_heures_' + num;
+    name_select_m = 'select_minutes_' + num;
+    class_listbox = "listbox_horaires_update";
+    class_bouton  = "bouton_annuler_update";
+  }
+
   var id_select_h = 'select_heures_' + num;
   var id_select_m = 'select_minutes_' + num;
   var id_annuler  = 'annuler_horaires_' + num;
 
-  html = '<select id="' + id_select_h + '" name="select_heures[' + num + ']" class="listbox_horaires">';
+  html = '<select id="' + id_select_h + '" name="' + name_select_h + '" class="' + class_listbox + '">';
     for (var i = 11; i < 14; i++)
     {
       if (i == 12)
@@ -169,7 +199,7 @@ function afficherListboxHoraires(id)
     }
   html += '</select>';
 
-  html += '<select id="' + id_select_m + '" name="select_minutes[' + num + ']" class="listbox_horaires">';
+  html += '<select id="' + id_select_m + '" name="' + name_select_m + '" class="' + class_listbox + '">';
     for (var j = 0; j < 4; j++)
     {
       if (j == 0)
@@ -179,20 +209,20 @@ function afficherListboxHoraires(id)
     }
   html += '</select>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherListboxHoraires(\'' + id_select_h + '\',\'' + id_select_m + '\', \'' + id_annuler + '\')" class="bouton_annuler">Annuler</a>';
+  html += '<a id="' + id_annuler + '" onclick="cacherListboxHoraires(\'' + id_select_h + '\',\'' + id_select_m + '\', \'' + id_annuler + '\', \'' + zone + '\')" class="' + class_bouton + '">Annuler</a>';
 
   $("#" + id).append(html);
 }
 
 // Cache les lisbox des horaires
-function cacherListboxHoraires(heures, minutes, bouton)
+function cacherListboxHoraires(heures, minutes, bouton, lien)
 {
   var num = heures.substr(-1);
 
   $('#' + heures).remove();
   $('#' + minutes).remove();
   $('#' + bouton).remove();
-  $('#choix_horaire_' + num).css('display', 'block');
+  $('#' + lien).css('display', 'block');
 }
 
 // Affiche les checkbox des transports
@@ -287,7 +317,7 @@ function addChoice(id, zone)
   html += '</div>';
 
   html += '<div id="zone_listbox_horaire_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_horaire_' + new_num + '" onclick="afficherMasquer(\'choix_horaire_' + new_num + '\'); afficherListboxHoraires(\'zone_listbox_horaire_' + new_num + '\')" class="bouton_choix"><span class="fond_plus">+</span>Horaire</a>';
+    html += '<a id="choix_horaire_' + new_num + '" onclick="afficherMasquer(\'choix_horaire_' + new_num + '\'); afficherListboxHoraires(\'zone_listbox_horaire_' + new_num + '\', \'choix_horaire_' + new_num + '\', \'create\', \'\')" class="bouton_choix"><span class="fond_plus">+</span>Horaire</a>';
   html += '</div>';
 
   html += '<div id="zone_checkbox_transports_' + new_num + '" class="zone_listbox">';

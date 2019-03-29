@@ -676,6 +676,73 @@
     }
   }
 
+  // METIER : Met à jour un choix
+  // RETOUR : Aucun
+  function updateChoice($post, $id, $user)
+  {
+    global $bdd;
+
+    $control_ok = true;
+
+    // Contrôle saisie possible en fonction de l'heure
+    if (date("H") >= 13)
+    {
+      $control_ok                         = false;
+      $_SESSION['alerts']['heure_saisie'] = true;
+    }
+
+    // Récupération des données et insertion en base
+    if ($control_ok == true)
+    {
+      // Heure choisie
+      if (isset($post['select_heures_' . $id])  AND !empty($post['select_heures_' . $id])
+      AND isset($post['select_minutes_' . $id]) AND !empty($post['select_minutes_' . $id]))
+        $time        = $post['select_heures_' . $id] . $post['select_minutes_' . $id];
+      else
+        $time        = "";
+
+      // Transports choisis
+      $transports    = "";
+
+      if (isset($post['checkbox_feet_' . $id]) AND $post['checkbox_feet_' . $id] == "F")
+        $transports .= $post['checkbox_feet_' . $id] . ';';
+
+      if (isset($post['checkbox_bike_' . $id]) AND $post['checkbox_bike_' . $id] == "B")
+        $transports .= $post['checkbox_bike_' . $id] . ';';
+
+      if (isset($post['checkbox_tram_' . $id]) AND $post['checkbox_tram_' . $id] == "T")
+        $transports .= $post['checkbox_tram_' . $id] . ';';
+
+      if (isset($post['checkbox_car_' . $id]) AND $post['checkbox_car_' . $id] == "C")
+        $transports .= $post['checkbox_car_' . $id] . ';';
+
+      // Menu saisi
+      $menu          = "";
+
+      if (!isset($post['update_entree_' . $id]) AND !isset($post['update_plat_' . $id]) AND !isset($post['update_dessert_' . $id]))
+        $menu       .= ";;;";
+      else
+      {
+        $menu       .= str_replace(";", " ", $post['update_entree_' . $id]) . ';';
+        $menu       .= str_replace(";", " ", $post['update_plat_' . $id]) . ';';
+        $menu       .= str_replace(";", " ", $post['update_dessert_' . $id]) . ';';
+      }
+
+      // Tableau de mise à jour d'un choix
+      $choice = array('time'          => $time,
+                      'transports'    => $transports,
+                      'menu'          => $menu
+                     );
+
+      $req = $bdd->prepare('UPDATE food_advisor_users SET time       = :time,
+                                                          transports = :transports,
+                                                          menu       = :menu
+                                                    WHERE id = ' . $id . ' AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
+      $req->execute($choice);
+      $req->closeCursor();
+    }
+  }
+
   // METIER : Supprime un choix utilisateur
   // RETOUR : Aucun
   function deleteChoice($id)
@@ -776,8 +843,16 @@
     $plan_restaurant        = $post['plan_restaurant'];
     $description_restaurant = $post['description_restaurant'];
     $ouverture_restaurant   = $post['ouverture_restaurant'];
-    $prix_min               = number_format(str_replace(',', '.', htmlspecialchars($post['prix_min_restaurant'])), 2);
-    $prix_max               = number_format(str_replace(',', '.', htmlspecialchars($post['prix_max_restaurant'])), 2);
+
+    if (isset($post['prix_min_restaurant']) AND is_numeric($post['prix_min_restaurant']))
+      $prix_min             = number_format(str_replace(',', '.', htmlspecialchars($post['prix_min_restaurant'])), 2);
+    else
+      $prix_min             = "";
+
+    if (isset($post['prix_max_restaurant']) AND is_numeric($post['prix_max_restaurant']))
+      $prix_max             = number_format(str_replace(',', '.', htmlspecialchars($post['prix_max_restaurant'])), 2);
+    else
+      $prix_max             = "";
 
     if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
       $lieu_restaurant      = $post['saisie_other_location'];
@@ -822,12 +897,12 @@
       }
     }
 
-    // Contrôle prix min numérique
+    // Contrôle prix min numérique et positif
     if ($control_ok == true)
     {
       if (!empty($prix_min))
       {
-        if (!is_numeric($prix_min))
+        if (!is_numeric($prix_min) OR $prix_min <= 0)
         {
           $_SESSION['alerts']['wrong_price_min'] = true;
           $control_ok                            = false;
@@ -835,12 +910,12 @@
       }
     }
 
-    // Contrôle prix max numérique
+    // Contrôle prix max numérique et positif
     if ($control_ok == true)
     {
       if (!empty($prix_max))
       {
-        if (!is_numeric($prix_max))
+        if (!is_numeric($prix_max) OR $prix_max <= 0)
         {
           $_SESSION['alerts']['wrong_price_max'] = true;
           $control_ok                            = false;
@@ -1036,8 +1111,16 @@
       $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
       $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
       $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
-      $prix_min               = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_min_restaurant_' . $id_restaurant])), 2);
-      $prix_max               = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_max_restaurant_' . $id_restaurant])), 2);
+
+      if (isset($post['update_prix_min_restaurant_' . $id_restaurant]) AND is_numeric($post['update_prix_min_restaurant_' . $id_restaurant]))
+        $prix_min             = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_min_restaurant_' . $id_restaurant])), 2);
+      else
+        $prix_min             = "";
+
+      if (isset($post['update_prix_max_restaurant_' . $id_restaurant]) AND is_numeric($post['update_prix_max_restaurant_' . $id_restaurant]))
+        $prix_max             = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_max_restaurant_' . $id_restaurant])), 2);
+      else
+        $prix_max             = "";
 
       if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
         $lieu_restaurant      = $post['update_other_location_' . $id_restaurant];
@@ -1067,12 +1150,12 @@
       }
     }
 
-    // Contrôle prix min numérique
+    // Contrôle prix min numérique et positif
     if ($control_ok == true)
     {
       if (!empty($prix_min))
       {
-        if (!is_numeric($prix_min))
+        if (!is_numeric($prix_min) OR $prix_min <= 0)
         {
           $_SESSION['alerts']['wrong_price_min'] = true;
           $control_ok                            = false;
@@ -1080,12 +1163,12 @@
       }
     }
 
-    // Contrôle prix max numérique
+    // Contrôle prix max numérique et positif
     if ($control_ok == true)
     {
       if (!empty($prix_max))
       {
-        if (!is_numeric($prix_max))
+        if (!is_numeric($prix_max) OR $prix_max <= 0)
         {
           $_SESSION['alerts']['wrong_price_max'] = true;
           $control_ok                            = false;

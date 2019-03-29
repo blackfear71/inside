@@ -43,6 +43,10 @@
       insertChoices($_POST, $_SESSION['user']['identifiant']);
       break;
 
+    case "doModifier":
+      updateChoice($_POST, $_GET['update_id'], $_SESSION['user']['identifiant']);
+      break;
+
     case 'doSupprimer':
       deleteChoice($_GET['delete_id']);
       break;
@@ -158,6 +162,7 @@
 
     case 'doDeterminer':
     case 'doAjouter':
+    case "doModifier":
     case 'doSupprimer':
     default:
       break;
@@ -168,6 +173,7 @@
   {
     case 'doDeterminer':
     case 'doAjouter':
+    case "doModifier":
     case 'doSupprimer':
       header('location: foodadvisor.php?action=goConsulter');
       break;
