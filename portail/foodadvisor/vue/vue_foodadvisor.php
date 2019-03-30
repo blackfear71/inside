@@ -60,21 +60,21 @@
           echo '</div>';
 
           // Saisie choix
-          include('vue/saisie_choix.php');
+          include('vue/vue_saisie_choix.php');
 
           // Détails détermination
-          include('vue/details_determination.php');
+          include('vue/vue_details_determination.php');
 
           // Propositions, choix et résumé de la semaine
           echo '<div class="zone_propositions_determination" style="display: none;">';
             // Propositions
-            include('vue/propositions.php');
+            include('vue/vue_propositions.php');
 
             // Mes choix
-            include('vue/mes_choix.php');
+            include('vue/vue_mes_choix.php');
 
             // Résumé de la semaine
-            include('vue/resume_semaine.php');
+            include('vue/vue_resume_semaine.php');
           echo '</div>';
         ?>
 			</article>

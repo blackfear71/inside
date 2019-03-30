@@ -62,7 +62,7 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 | Gris foncé      | ![#2c3840](https://placehold.it/15/2c3840/000000?text=+) | #2c3840  |                    | Pour ombres & contraste (rift switchs) |
 | Gris foncé      | ![#303030](https://placehold.it/15/303030/000000?text=+) | #303030  |                    | Nav                                    |
 | Gris foncé      | ![#262626](https://placehold.it/15/262626/000000?text=+) | #262626  |                    | Header & footer                        |
-| Gris/bleu foncé | ![#374650](https://placehold.it/15/374650/000000?text=+) | #374650  |                    | Lien portail & switchs                 |
+| Gris/bleu foncé | ![#374650](https://placehold.it/15/374650/000000?text=+) | #374650  |                    | Lien portail                           |
 | Bleu clair      | ![#74cefb](https://placehold.it/15/74cefb/000000?text=+) | #74cefb  |                    |                                        |
 | Bleu clair      | ![#2eb2f4](https://placehold.it/15/2eb2f4/000000?text=+) | #2eb2f4  |                    |                                        |
 | Bleu clair      | ![#13a2e9](https://placehold.it/15/13a2e9/000000?text=+) | #13a2e9  |                    |                                        |

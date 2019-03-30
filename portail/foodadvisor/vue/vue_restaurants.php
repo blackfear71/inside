@@ -54,10 +54,21 @@
           echo '</div>';
 
           // Saisie restaurant
-          include('vue/saisie_restaurant.php');
+          include('vue/vue_saisie_restaurant.php');
+
+          // Liens vers lieux
+          echo '<div class="zone_liens_lieux">';
+            foreach ($listeLieux as $lieu)
+            {
+              echo '<a onclick="scrollToId(\'' . formatId($lieu) . '\', 20)" class="lien_lieu">';
+                echo '<div class="image_lieu"></div>';
+                echo $lieu;
+              echo '</a>';
+            }
+          echo '</div>';
 
           // Fiches des restaurants
-          include('vue/fiches_restaurants.php');
+          include('vue/vue_fiches_restaurants.php');
         ?>
 			</article>
 

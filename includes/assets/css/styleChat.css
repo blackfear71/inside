@@ -87,7 +87,7 @@
 .lien_reduire_chat:hover .reduire_chat
 {
 	background-color: #e3e3e3;
-	color: black;
+	color: #262626;
 }
 
 /*** Zone chat ***/
@@ -131,6 +131,7 @@
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 }
 
 .bouton_chat
@@ -141,8 +142,6 @@
 	height: 40px;
 	width: 60px;
 	cursor: pointer;
-	font-family: robotoregular, Verdana, sans-serif;
-	color: black;
 	background-image: url("/inside/includes/icons/common/send_red.png");
 	background-size: 30px;
 	background-repeat: no-repeat;

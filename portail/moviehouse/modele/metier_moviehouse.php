@@ -1175,8 +1175,8 @@
           $_SESSION['alerts']['wrong_date_doodle'] = true;
       }
 
-      if ((!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date']        != true)
-      AND (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
+      if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date']        != true)
+      AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
 			{
         $film = array('film'            => $nom_film,
                       'to_delete'       => $to_delete,
@@ -1375,8 +1375,8 @@
           $_SESSION['alerts']['wrong_date_doodle'] = true;
       }
 
-      if ((!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date']        != true)
-      AND (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
+      if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date']        != true)
+      AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
 			{
         $film = array('film'         => $nom_film,
                       'synopsis'     => $synopsis,

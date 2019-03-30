@@ -19,27 +19,27 @@
       {
         // Ouverte
         case "O":
-          $etat_idee = '<span style="color: red;">Ouverte</span>';
+          $etat_idee = '<span class="red">Ouverte</span>';
           break;
 
         // Prise en charge
         case "C":
-          $etat_idee = '<span style="color: red;">Prise en charge</span>';
+          $etat_idee = '<span class="red">Prise en charge</span>';
           break;
 
         // En progrès
         case "P":
-          $etat_idee = '<span style="color: red;">En cours de développement</span>';
+          $etat_idee = '<span class="red">En cours de développement</span>';
           break;
 
         // Terminée
         case "D":
-          $etat_idee = '<span style="color: green;">Terminée</span>';
+          $etat_idee = '<span class="green">Terminée</span>';
           break;
 
         // Rejetée
         case "R":
-          $etat_idee = '<span style="color: red;">Rejetée</span>';
+          $etat_idee = '<span class="red">Rejetée</span>';
           break;
 
         default:

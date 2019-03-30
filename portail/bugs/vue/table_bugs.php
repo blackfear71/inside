@@ -34,12 +34,12 @@
       {
         // Résolu
         case "Y":
-          $etat_bug = '<span style="color: green;">Résolu</span>';
+          $etat_bug = '<span class="green">Résolu</span>';
           break;
 
         // En cours
         case "N":
-          $etat_bug = '<span style="color: red;">En cours</span>';
+          $etat_bug = '<span class="red">En cours</span>';
           break;
 
         default:

@@ -32,7 +32,7 @@
 	width: 80px;
 	text-align: center;
 	background-color: transparent;
-	color: black;
+	color: #262626;
 	text-decoration: none;
 	font-family: robotolight, Verdana, sans-serif;
 }
@@ -70,6 +70,7 @@
 	border-bottom: 1px solid #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 }
 
 .init_table_users
@@ -108,6 +109,7 @@
 	font-size: 70%;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 	margin-top: 5px;
 	line-height: 15px;
 }
@@ -133,6 +135,7 @@
 	padding-right: 10px;
 	line-height: 30px;
 	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
 }
 
 .table_dates
@@ -141,6 +144,7 @@
 	text-align: center;
 	line-height: 30px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 }
 
 .table_users
@@ -148,6 +152,7 @@
 	text-align: center;
 	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .table_date_jour
@@ -315,6 +320,7 @@
 	border-radius: 5px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -335,6 +341,7 @@
 	border-radius: 5px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -351,6 +358,7 @@
 	border-radius: 5px;
 	background-color: #e3e3e3;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	font-size: 100%;
 	cursor: pointer;
 }
@@ -461,7 +469,7 @@
 .link_film
 {
 	display: block;
-	color: black;
+	color: #262626;
 	text-decoration: none;
 	padding: 8px;
 }
@@ -525,7 +533,7 @@
 	width: 17%;
 	vertical-align: top;
 	text-decoration: none;
-	color: black;
+	color: #262626;
 }
 
 .link_home_film:hover
@@ -618,13 +626,14 @@
 	margin-left: auto;
 	border-radius: 5px;
 	font-family: robotomedium_italic, Verdana, sans-serif;
-	color: black;
+	color: #262626;
 }
 
 .no_films_waited
 {
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	line-height: 200px;
 }
 
@@ -742,6 +751,7 @@
 	background-color: white;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -764,6 +774,7 @@
 	border-bottom-right-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -781,6 +792,7 @@
 	border-bottom-right-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -798,6 +810,7 @@
 	border-bottom-left-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -817,6 +830,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 }
 
 .zone_select_restaurant
@@ -847,6 +861,7 @@
 	margin-left: -30px;
 	border-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
+	color: #262626;
 	cursor: pointer;
 	text-align: left;
 }
@@ -866,6 +881,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	font-size: 100%;
 	background-color: #e3e3e3;
 	border: 0;
@@ -891,6 +907,7 @@
 	padding: 20px;
 	margin-top: 30px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	text-align: justify;
 }
 
@@ -933,6 +950,7 @@
 	background-color: #e3e3e3;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	border: solid 1px #d3d3d3;
 }
 
@@ -1213,6 +1231,7 @@
 .contenu_synopsis
 {
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	text-align: justify;
 	line-height: 25px;
 	background-color: #d3d3d3;
@@ -1225,6 +1244,7 @@
 .contenu_detail
 {
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	line-height: 50px;
 }
 
@@ -1261,6 +1281,7 @@
 {
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	line-height: 20px;
 }
 
@@ -1290,6 +1311,7 @@
 .no_interested
 {
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	line-height: 20px;
 	margin-top: 10px;
 }
@@ -1331,6 +1353,7 @@
 	height: 100px;
 	padding: 1%;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	resize: none;
 	border: solid 1px #b3b3b3;
 }
@@ -1345,6 +1368,7 @@
 	margin-top: 1%;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	background-color: #e3e3e3;
 	cursor: pointer;
 	border-radius: 2px;
@@ -1384,6 +1408,7 @@
 .pseudo_comments_films
 {
 	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
 	margin-left: 60px;
 }
 
@@ -1397,6 +1422,7 @@
 .texte_commentaire
 {
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 	text-align: justify;
 	margin-left: 60px;
 	margin-top: 20px;
@@ -1434,6 +1460,7 @@
 	height: 100px;
 	padding: 1%;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	resize: none;
 	border: solid 1px #b3b3b3;
 }

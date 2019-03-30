@@ -143,6 +143,7 @@
 {
 	margin-left: 120px;
 	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
 	text-align: left;
 	word-wrap: break-word;
 }
@@ -151,6 +152,7 @@
 {
 	margin-left: 120px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	text-align: left;
 }
 
@@ -158,6 +160,7 @@
 {
 	margin-left: 120px;
 	font-family: robotolight_italic, Verdana, sans-serif;
+	color: #262626;
 	text-align: left;
 	word-wrap: break-word;
 }
@@ -201,6 +204,7 @@
 {
 	float: left;
 	background-color: white;
+	color: #262626;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
@@ -209,6 +213,7 @@
 {
 	float: right;
 	background-color: #ffad01;
+	color: #262626;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
@@ -217,6 +222,7 @@
 {
 	float: right;
 	background-color: #b3b3b3;
+	color: #262626;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
@@ -267,6 +273,7 @@
 	background-color: #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 }
 
 .init_td_manage_users
@@ -293,6 +300,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 	border: solid 1px #b3b3b3;
 }
 
@@ -304,6 +312,7 @@
 	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	margin-bottom: 30px;
 }
 
@@ -315,6 +324,7 @@
 	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 140%;
+	color: #262626;
 	background-color: #e3e3e3;
 	padding: 10px;
 	border-radius: 5px;
@@ -324,7 +334,7 @@
 .reset_warning
 {
 	font-family: robotomedium, Verdana, sans-serif;
-	color: red;
+	color: #ff1937;
 	font-size: 150%;
 }
 
@@ -333,6 +343,7 @@
 	padding: 5px;
 	border: solid 1px #b3b3b3;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .table_old_users
@@ -430,6 +441,7 @@
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border-radius: 5px;
@@ -438,7 +450,6 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	background-color: #e3e3e3;
-	color: black;
 }
 
 .bouton_admin:hover
@@ -471,7 +482,7 @@
 	display: inline-block;
 	margin-left: 10px;
 	margin-right: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-left: 10px;
@@ -490,6 +501,7 @@
 {
 	margin-left: 10px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	cursor: pointer;
 	padding: 10px;
 	padding-left: 40px;
@@ -510,6 +522,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	cursor: pointer;
 }
 
@@ -562,12 +575,14 @@
 	border-bottom: solid 1px white;
 	font-family: robotomedium_italic, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 }
 
 .td_bugs_content
 {
 	background-color: #f3f3f3;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	border-bottom: solid 1px white;
 	padding: 1%;
 	width: 25%;
@@ -590,6 +605,7 @@
 	padding: 1%;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	min-height: 100px;
 	margin-top: 0;
 	margin-bottom: 0;
@@ -607,6 +623,7 @@
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	border-radius: 5px;
 	margin-left: auto;
 	margin-right: auto;
@@ -628,8 +645,18 @@
 	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
-	color: black;
+	color: #262626;
 	text-align: center;
+}
+
+.green
+{
+	color: #70d55d;
+}
+
+.red
+{
+	color: #ff1937;
 }
 
 /*** Saisie succès ***/
@@ -678,6 +705,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -698,6 +726,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -718,6 +747,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -738,6 +768,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -754,7 +785,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
-	color: black;
+	color: #262626;
 	background-color: #e3e3e3;
 	text-align: center;
 }
@@ -825,6 +856,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -844,6 +876,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -863,6 +896,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -880,6 +914,7 @@
 	margin-top: 15px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: #d3d3d3;
 	border: 0;
 	border-radius: 5px;
@@ -901,6 +936,7 @@
 	margin-top: 15px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	text-align: justify;
 	line-height: 30px;
 }
@@ -986,6 +1022,7 @@
 	margin-top: 6px;
 	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 }
 
 .reference_succes
@@ -1003,12 +1040,14 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	font-family: robotolight_italic, Verdana, sans-serif;
+	color: #262626;
 }
 
 .defined_succes
 {
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 }
 
 .radio_space
@@ -1026,6 +1065,7 @@
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .zone_niveau_mod_succes_admin
@@ -1105,11 +1145,11 @@
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 150%;
 	font-weight: bold;
+	color: #262626;
 	border-bottom: solid 1px #b3b3b3;
 	line-height: 30px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	color: #262626;
 	text-align: left;
 	margin-top: 20px;
 	margin-bottom: 15px;
@@ -1118,6 +1158,7 @@
 .name_lvl
 {
 	font-family: robotothin, Verdana, sans-serif;
+	color: #262626;
 }
 
 .bouton_delete:hover
@@ -1133,6 +1174,7 @@
 	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	text-align: justify;
 }
 
@@ -1143,6 +1185,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	padding: 2%;
 	width: 96%;
 	margin-top: 10px;
@@ -1155,6 +1198,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	padding: 2%;
 	width: 96%;
 	height: 100px;
@@ -1169,6 +1213,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	padding: 2%;
 	width: 96%;
 	height: 60px;
@@ -1187,6 +1232,7 @@
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: #d3d3d3;
 	border: 0;
 	border-radius: 5px;
@@ -1343,6 +1389,7 @@
 	padding-right: 10px;
 	background-color: #d3d3d3;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .voir_log
@@ -1366,6 +1413,7 @@
 .log
 {
 	font-family: Courier, Verdana, sans-serif;
+	color: #262626;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 10px;
@@ -1456,7 +1504,7 @@
 .titre_mission
 {
 	float: left;
-  font-family: robotolight, Verdana, sans-serif;
+	font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
   color: white;
   padding: 10px;
@@ -1519,6 +1567,7 @@
 	margin-left: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
+	color: #262626;
 	padding: 10px;
 	border-radius: 2px;
 	width: calc(100% - 60px);
@@ -1544,7 +1593,7 @@
 .zone_parcourir_missions:hover
 {
 	background-color: white;
-	color: black;
+	color: #262626;
 }
 
 .bouton_parcourir_mission
@@ -1658,6 +1707,7 @@
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	padding: 10px;
 	border-radius: 2px;
 }
@@ -1688,6 +1738,7 @@
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	padding: 5px;
 	border-radius: 2px;
 	margin-left: 10px;
@@ -1720,6 +1771,7 @@
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	padding: 10px;
 	border-radius: 2px;
 }
@@ -1728,6 +1780,7 @@
 {
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	margin-left: 5px;
 }
 
@@ -1737,6 +1790,7 @@
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	padding: 10px;
 	border-radius: 2px;
 }
@@ -2128,6 +2182,7 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -2142,6 +2197,7 @@
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: #e3e3e3;
 	cursor: pointer;
 	vertical-align: middle;
@@ -2160,6 +2216,7 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -2171,6 +2228,7 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -2296,6 +2354,7 @@
 	border: 0;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 	vertical-align: middle;
 }
 
@@ -2365,6 +2424,7 @@
 	border: solid 1px #a3a3a3;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -2385,6 +2445,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -2405,6 +2466,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 
@@ -2427,6 +2489,7 @@
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	background-color: white;
 }
 

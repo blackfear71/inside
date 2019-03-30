@@ -873,7 +873,7 @@
 
   // Formatage Id type de restaurant
   // RETOUR : Id formaté
-  function formatIdRestaurant($id)
+  function formatId($id)
   {
     // Transforme les caractères accentués en entités HTML
     $formatted = htmlentities($id, ENT_NOQUOTES, "utf-8");

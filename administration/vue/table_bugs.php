@@ -11,9 +11,9 @@
 
       // Libellé état
       if ($bug->getResolved() == "Y")
-        $etat_bug = '<span style="color: green;">Résolu</span>';
+        $etat_bug = '<span class="green">Résolu</span>';
       else
-        $etat_bug = '<span style="color: red;">En cours</span>';
+        $etat_bug = '<span class="red">En cours</span>';
 
       // Formatage date
       $date_bug = formatDateForDisplay($bug->getDate());

@@ -35,7 +35,7 @@
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 0 3px #5c5c5c;
-  font-family: robotolight, Verdana, sans-serif;
+	font-family: robotolight, Verdana, sans-serif;
 	background-color: #e3e3e3;
 	border-collapse: collapse;
 	width: 100%;
@@ -118,7 +118,8 @@
 .numero_page_inactive
 {
   background-color: #a3a3a3;
-  font-family: robotolight, Verdana, sans-serif;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
   display: inline-block;
   width: 40px;
   height: 40px;

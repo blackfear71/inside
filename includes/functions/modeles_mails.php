@@ -68,6 +68,7 @@
           text-align: justify;
           padding: 20px;
           font-family: robotolight, Calibri, Verdana, sans-serif;
+          color: #262626;
         }
 
         .destinataires_mail

@@ -32,6 +32,7 @@
 	background-color: #ffad01;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 	border-top: 1px solid #b3b3b3;
 }
 
@@ -55,7 +56,6 @@
 {
 	border: 0;
 	background-color: #e3e3e3;
-	color: black;
 	border-radius: 5px;
 	padding: 10px;
 	width: 70%;
@@ -63,18 +63,19 @@
 	margin-bottom: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 90%;
+	color: #262626;
 }
 
 .euro
 {
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .saisie_commentaire_depense
 {
 	border: 0;
 	background-color: #e3e3e3;
-	color: black;
 	border-radius: 5px;
 	padding: 10px;
 	width: 78%;
@@ -83,6 +84,7 @@
 	margin-bottom: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 90%;
+	color: #262626;
 	resize: none;
 }
 
@@ -99,6 +101,7 @@
 	width: 100%;
 	padding: 10px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .add_depense
@@ -112,6 +115,7 @@
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 	border-radius: 5px;
 	margin-left: auto;
 	margin-right: auto;
@@ -149,6 +153,7 @@
 	background-color: #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 }
 
 .td_depenses
@@ -157,6 +162,7 @@
 	border-left: solid 1px #b3b3b3;
 	border-right: solid 1px #b3b3b3;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .zone_avatar_total_depenses
@@ -223,7 +229,7 @@
 	height: 30px;
 	width: 80px;
 	text-align: center;
-	color: black;
+	color: #262626;
 	text-decoration: none;
 	font-family: robotolight, Verdana, sans-serif;
 }
@@ -268,6 +274,7 @@
 	background-color: #f3f3f3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 	border-bottom: 1px solid #e3e3e3;
 	border-top: 1px solid #e3e3e3;
 }
@@ -328,6 +335,7 @@
 	font-size: 70%;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 	margin-top: 5px;
 	line-height: 15px;
 }
@@ -346,12 +354,14 @@
 {
 	text-align: center;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .table_buyer_expense_center
 {
 	text-align: center;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 	max-width: 100px;
 	padding: 5px;
 }
@@ -362,6 +372,7 @@
 	text-align: center;
 	line-height: 30px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 }
 
 .table_users_expense_center
@@ -369,6 +380,7 @@
 	text-align: center;
 	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .part_bold
@@ -385,6 +397,7 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .action_depenses
@@ -440,7 +453,7 @@
 {
 	border: 0;
 	background-color: #e3e3e3;
-	color: black;
+	color: #262626;
 	border-radius: 5px;
 	padding: 10px;
 	width: 60px;
@@ -448,6 +461,7 @@
 	margin-bottom: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 90%;
+	color: #262626;
 	width: 50%;
 }
 
@@ -458,6 +472,7 @@
 	width: 88%;
 	padding: 10px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .parts_2
@@ -466,13 +481,14 @@
 	margin-right: auto;
 	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .saisie_commentaire_depense_2
 {
 	border: 0;
 	background-color: #e3e3e3;
-	color: black;
+	color: #262626;
 	border-radius: 5px;
 	padding: 10px;
 	width: 80%;
@@ -525,4 +541,5 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
 }

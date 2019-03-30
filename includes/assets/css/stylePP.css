@@ -2,6 +2,7 @@
 {
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
+	color: #262626;
 	width: 100%;
 	padding-left: 0.5%;
 	padding-right: 0.5%;
@@ -29,6 +30,7 @@
 	padding-left: 10px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .PP-table
@@ -61,6 +63,7 @@
 	border-top: 1px solid #e3e3e3;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-weight: bold;
+	color: #262626;
 }
 
 .PP-table-ligne
@@ -68,6 +71,7 @@
 	text-align: center;
 	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .PP-image
@@ -120,4 +124,5 @@
 	border-radius: 5px;
 	font-family: robotolight_italic, Verdana, sans-serif;
 	font-size: 110%;
+	color: #262626;
 }

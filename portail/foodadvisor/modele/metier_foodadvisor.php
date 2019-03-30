@@ -855,7 +855,11 @@
       $prix_max             = "";
 
     if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
-      $lieu_restaurant      = $post['saisie_other_location'];
+    {
+      $search               = array("'", '"');
+      $replace              = array("", "");
+      $lieu_restaurant      = str_replace($search, $replace, $post['saisie_other_location']);
+    }
     else
       $lieu_restaurant      = $post['location'];
 
@@ -1123,7 +1127,11 @@
         $prix_max             = "";
 
       if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
-        $lieu_restaurant      = $post['update_other_location_' . $id_restaurant];
+      {
+        $search               = array("'", '"');
+        $replace              = array("", "");
+        $lieu_restaurant      = str_replace($search, $replace, $post['update_other_location_' . $id_restaurant]);
+      }
       else
         $lieu_restaurant      = $post['update_location_' . $id_restaurant];
 

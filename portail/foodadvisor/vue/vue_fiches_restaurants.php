@@ -5,7 +5,7 @@
   echo '<div class="zone_restaurants" style="display: none;">';
     foreach ($listeRestaurants as $lieu => $restaurantsParLieux)
     {
-      echo '<div class="titre_section">' . $lieu . '</div>';
+      echo '<div class="titre_section" id="' . formatId($lieu) . '">' . $lieu . '</div>';
 
       echo '<div class="zone_fiches_restaurants">';
         foreach ($restaurantsParLieux as $restaurant)
@@ -210,8 +210,8 @@
 
                 foreach ($listeTypes as $type)
                 {
-                  $id_type    = "type_" . formatIdRestaurant($type) . "_" . $restaurant->getId();
-                  $label_type = "label_" . formatIdRestaurant($type) . "_" . $restaurant->getId();
+                  $id_type    = "type_" . formatId($type) . "_" . $restaurant->getId();
+                  $label_type = "label_" . formatId($type) . "_" . $restaurant->getId();
 
                   echo '<div class="zone_type">';
                     $matching = false;

@@ -101,8 +101,8 @@
             // Types existants
             foreach ($listeTypes as $type)
             {
-              $id_type    = "type_" . formatIdRestaurant($type);
-              $label_type = "label_" . formatIdRestaurant($type);
+              $id_type    = "type_" . formatId($type);
+              $label_type = "label_" . formatId($type);
               $checked    = false;
 
               echo '<div class="zone_type">';
@@ -153,8 +153,8 @@
 
                 if ($custom_type == true)
                 {
-                  $id_custom_type    = "type_" . formatIdRestaurant($saved_types);
-                  $label_custom_type = "label_" . formatIdRestaurant($saved_types);
+                  $id_custom_type    = "type_" . formatId($saved_types);
+                  $label_custom_type = "label_" . formatId($saved_types);
 
                   echo '<input type="text" placeholder="Type" value="' . $saved_types . '" id="' . $id_custom_type . '" name="types_restaurants[' . $j . ']" oninput="changeTypeColor(\'' . $id_custom_type . '\')" class="type_other" style="background-color: #70d55d; color: white;" />';
 
