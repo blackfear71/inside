@@ -97,7 +97,7 @@
 
               echo '<tr>';
                 // Explications
-                echo '<td colspan="100%" class="td_saisie_succes_expl">';
+                echo '<td colspan="6" class="td_saisie_succes_expl">';
                   echo '<input type="text" name="explanation" placeholder="Explications (utiliser %limit%)" value="' . $_SESSION['save']['explanation_success'] . '" class="saisie_explaination" required />';
                 echo '</td>';
               echo '</tr>';

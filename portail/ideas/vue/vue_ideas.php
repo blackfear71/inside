@@ -77,7 +77,7 @@
                 echo '</td>';
               echo '</tr>';
               echo '<tr>';
-                echo '<td colspan="100%" class="td_saisie_idee">';
+                echo '<td colspan="2" class="td_saisie_idee">';
                   echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_idee"></textarea>';
                 echo '</td>';
               echo '</tr>';

@@ -181,7 +181,7 @@
 			else
 			{
 				echo '<tr>';
-					echo '<td colspan="100%" class="no_expenses">';
+					echo '<td colspan="100" class="no_expenses">';
 						echo 'Pas de dépenses à afficher';
 					echo '</td>';
 				echo '</tr>';

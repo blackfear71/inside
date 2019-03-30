@@ -59,7 +59,7 @@
         {
           // Films cachés en fonction de la préférence utilisateur
           echo '<tr class="hidden_films">';
-            echo '<td colspan="100%">';
+            echo '<td colspan="100">';
               echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
             echo '</td>';
           echo '</tr>';
@@ -142,7 +142,7 @@
 
             // Fin films cachés
             echo '<tr class="hidden_films">';
-              echo '<td colspan="100%">';
+              echo '<td colspan="100">';
                 echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
               echo '</td>';
             echo '</tr>';
@@ -159,7 +159,7 @@
           if ($ligneFilm['date_theater'] >= $date_jour AND $date_jour_present == false AND $preferences->getToday_movie_house() == "Y")
           {
             echo '<tr class="ligne_tableau_movie_house">';
-              echo '<td class="table_date_jour" colspan="100%">';
+              echo '<td class="table_date_jour" colspan="100">';
                 echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
                 echo 'Aujourd\'hui, le ' . date("d/m/Y");
                 echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
@@ -248,7 +248,7 @@
         if ($date_jour_present == false AND $preferences->getToday_movie_house() == "Y")
         {
           echo '<tr class="ligne_tableau_movie_house">';
-            echo '<td class="table_date_jour" colspan="100%"">';
+            echo '<td class="table_date_jour" colspan="100">';
               echo 'Aujourd\'hui, le ' . date("d/m/Y");
               echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
             echo '</td>';

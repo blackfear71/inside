@@ -7,7 +7,7 @@
     {
       if ($success->getLevel() != $lvl AND $success->getLimit_success() > 1)
       {
-        echo '<tr class="title_ranking_line"><td colspan="100%">' . formatTitleLvl($success->getLevel()) . '</td></tr>';
+        echo '<tr class="title_ranking_line"><td colspan="2">' . formatTitleLvl($success->getLevel()) . '</td></tr>';
         $lvl = $success->getLevel();
       }
 

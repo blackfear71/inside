@@ -98,7 +98,7 @@
                 echo '</tr>';
 
                 echo '<tr>';
-                  echo '<td colspan="100%" class="td_saisie_bug">';
+                  echo '<td colspan="3" class="td_saisie_bug">';
                     echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>';
                   echo '</td>';
                 echo '</tr>';
