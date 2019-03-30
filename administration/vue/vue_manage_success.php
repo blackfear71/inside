@@ -152,7 +152,7 @@
                   echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
 
                   // Logo succès
-                  echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="success" class="logo_succes" />';
+                  echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="' . $success->getReference() . '" class="logo_succes" />';
 
                   // Titre succès
                   echo '<div class="titre_succes">' . $success->getTitle() . '</div>';

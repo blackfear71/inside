@@ -53,7 +53,7 @@
               echo '</div>';
 
               echo '<div class="mask_header">';
-                echo '<img id="theme_header" class="img_header" />';
+                echo '<img id="theme_header" alt="" class="img_header" />';
               echo '</div>';
 
               // Background
@@ -63,7 +63,7 @@
               echo '</div>';
 
               echo '<div class="mask_background">';
-                echo '<img id="theme_background" class="img_background" />';
+                echo '<img id="theme_background" alt="" class="img_background" />';
               echo '</div>';
 
               // Footer
@@ -73,7 +73,7 @@
               echo '</div>';
 
               echo '<div class="mask_footer">';
-                echo '<img id="theme_footer" class="img_footer" />';
+                echo '<img id="theme_footer" alt="" class="img_footer" />';
               echo '</div>';
 
               echo '<div class="zone_theme_titre" style="margin-top: 8px; padding-top: 7px; padding-bottom: 7px;">';
@@ -84,7 +84,7 @@
                 echo '</div>';
 
                 echo '<div class="mask_logo">';
-                  echo '<img id="theme_logo" class="img_logo" />';
+                  echo '<img id="theme_logo" alt="" class="img_logo" />';
                 echo '</div>';
 
                 // Titre

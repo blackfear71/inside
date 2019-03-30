@@ -68,7 +68,7 @@
                   echo '<input type="hidden" name="id[' . $success->getId() . ']" value="' . $success->getId() . '" />';
 
                   // Logo succès
-                  echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="success" class="logo_succes" />';
+                  echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" alt="' . $success->getReference() . '" class="logo_succes" />';
 
                   // Référence
                   echo '<div class="reference_succes">Ref. ' . $success->getReference() . '</div>';
