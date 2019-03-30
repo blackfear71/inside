@@ -186,14 +186,14 @@
 
                   echo '<tr>';
                     // Saisie phrase
-                    echo '<td colspan="3" class="td_saisie_collector">';
+                    echo '<td colspan="4" class="td_saisie_collector">';
                       echo '<textarea placeholder="Phrase culte" name="collector" class="saisie_collector" required>' . $_SESSION['save']['collector'] . '</textarea>';
                     echo '</td>';
                   echo '</tr>';
 
                   echo '<tr>';
                     // Saisie contexte
-                    echo '<td colspan="3" class="td_saisie_collector_cont">';
+                    echo '<td colspan="4" class="td_saisie_collector_cont">';
                       echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['save']['context'] . '</textarea>';
                     echo '</td>';
                   echo '</tr>';
@@ -231,7 +231,7 @@
                       echo '</div>';
 
                       echo '<div class="mask_image">';
-                        echo '<img id="image_collector" class="image" />';
+                        echo '<img id="image_collector" alt="" class="image" />';
                       echo '</div>';
                     echo '</td>';
 

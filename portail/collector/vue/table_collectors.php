@@ -42,7 +42,7 @@
               echo '</div>';
 
               // Vote
-              echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" name="vote_user" class="link_current_vote">';
+              echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote">';
                 $founded = false;
 
                 foreach ($listeVotesUsers as $vote)
@@ -259,11 +259,10 @@
                 echo '<div class="text_context_golden">';
               else
                 echo '<div class="text_context">';
-
-                echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
-              echo '</div>';
-            echo '</form>';
-          echo '</div>';
+                  echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
+                echo '</div>';
+            echo '</div>';
+          echo '</form>';
         echo '</div>';
       }
     }
