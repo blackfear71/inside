@@ -43,7 +43,7 @@
   $currentUserJson = json_encode($_SESSION['chat']['current']);
 ?>
 
-<script type="text/javascript">
+<script>
   // Récupération liste utilisateurs & identifiant pour le script
   var listUsers   = <?php echo $listUsersJson; ?>;
   var currentUser = <?php echo $currentUserJson; ?>;

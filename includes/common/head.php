@@ -40,22 +40,22 @@
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<script type="text/javascript" src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
-<script type="text/javascript" src="/inside/includes/libraries/js/jCirclize.js"></script>
+<script src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
+<script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
 <?php if (!empty($script_head)) { ?>
-  <script type="text/javascript" src="/inside/includes/assets/js/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
 <?php } ?>
 
 <?php if (isset($chat_head) AND $chat_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/assets/js/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
+  <script src="/inside/includes/assets/js/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
 <?php } ?>
 
 <?php if (isset($masonry_head) AND $masonry_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/libraries/js/masonry.pkgd.js"></script>
+  <script src="/inside/includes/libraries/js/masonry.pkgd.js"></script>
 <?php } ?>
 
 <?php if (isset($exif_head) AND $exif_head == true) { ?>
-  <script type="text/javascript" src="/inside/includes/libraries/js/exif.js"></script>
+  <script src="/inside/includes/libraries/js/exif.js"></script>
 <?php } ?>

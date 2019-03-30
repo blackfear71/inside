@@ -88,7 +88,7 @@
 		</footer>
 
     <!-- Données JSON -->
-    <script type="text/javascript">
+    <script>
       // Récupération liste utilisateurs & identifiant pour le script
       var listLieux        = <?php echo $listeLieuxJson; ?>;
       var listeRestaurants = <?php echo $listeRestaurantsJson; ?>;
