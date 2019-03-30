@@ -75,8 +75,8 @@
             echo '<input onmouseover="changeColorToWhite(\'color_search\')" onmouseout="changeColorToGrey(\'color_search\', \'resizeBar\')" type="text" id="color_search" name="text_search" placeholder="Rechercher..." class="recherche_bandeau" />';
           echo '</form>';
         echo '</div>';
-      echo '</div>';
-    }
+      }
+    echo '</div>';
 
     // Partie droite header
     echo '<div class="zone_bandeau_right">';
