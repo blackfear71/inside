@@ -6,7 +6,7 @@
   {
     $modele = '';
 
-    $modele = '<html>';
+    $modele = '<html lang="fr">';
       $modele .= '<head>';
         // CSS
         $modele .= '<style type="text/css">';
