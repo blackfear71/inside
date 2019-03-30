@@ -27,7 +27,7 @@
                 echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'banner\')" required />';
               echo '</div>';
 
-              echo '<img id="banner" class="preview_image_mission" />';
+              echo '<img id="banner" alt="" class="preview_image_mission" />';
             echo '</div>';
           }
           else
@@ -60,7 +60,7 @@
             if (!empty($detailsMission->getReference()))
               echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" id="button_g" class="preview_icon_mission" />';
             else
-              echo '<img id="button_g" class="preview_icon_mission" />';
+              echo '<img id="button_g" alt="" class="preview_icon_mission" />';
           echo '</div>';
         echo '</td>';
 
@@ -76,7 +76,7 @@
             if (!empty($detailsMission->getReference()))
               echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" id="button_m" class="preview_icon_mission" />';
             else
-              echo '<img id="button_m" class="preview_icon_mission" />';
+              echo '<img id="button_m" alt="" class="preview_icon_mission" />';
           echo '</div>';
         echo '</td>';
 
@@ -92,7 +92,7 @@
             if (!empty($detailsMission->getReference()))
               echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" id="button_d" class="preview_icon_mission" />';
             else
-              echo '<img id="button_d" class="preview_icon_mission" />';
+              echo '<img id="button_d" alt="" class="preview_icon_mission" />';
           echo '</div>';
         echo '</td>';
       echo '</tr>';
