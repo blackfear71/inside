@@ -117,6 +117,8 @@
 								else
 								{
 									echo '<select name="buyer_user" class="buyer" required>';
+										echo '<option value="" hidden>Choisissez...</option>';
+
 										foreach ($listeUsers as $user)
 										{
 											if ($user->getIdentifiant() == $ligneResume['buyer'])
@@ -156,7 +158,7 @@
 
 		          // Saisie Commentaire
 		          echo '<td class="table_users_expense_center">';
-		              echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense_2" />' . nl2br($ligneResume['comment']) . '</textarea>';
+		              echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense_2">' . nl2br($ligneResume['comment']) . '</textarea>';
 		          echo '</td>';
 
 							// Boutons d'action
