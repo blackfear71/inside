@@ -45,7 +45,7 @@
             echo 'Ajouter un succès';
           echo '</div>';
 
-          echo '<form method="post" action="manage_success.php?action=doAjouter" class="form_saisie_succes" enctype="multipart/form-data" runat="server">';
+          echo '<form method="post" action="manage_success.php?action=doAjouter" class="form_saisie_succes" enctype="multipart/form-data">';
             echo '<table class="table_saisie_succes">';
               echo '<tr>';
                 // Titre

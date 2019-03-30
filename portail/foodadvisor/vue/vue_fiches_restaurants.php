@@ -124,7 +124,7 @@
           /* Caché pour modification */
           /***************************/
           echo '<div class="fiche_restaurant" id="modifier_restaurant[' . $restaurant->getId() . ']" style="display: none; position: relative; z-index: 2;">';
-            echo '<form method="post" action="restaurants.php?action=doModifier&update_id=' . $restaurant->getId() . '" enctype="multipart/form-data" runat="server">';
+            echo '<form method="post" action="restaurants.php?action=doModifier&update_id=' . $restaurant->getId() . '" enctype="multipart/form-data">';
               // Image
               echo '<div class="zone_update_image">';
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';

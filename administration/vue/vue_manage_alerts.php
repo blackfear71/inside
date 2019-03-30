@@ -40,7 +40,7 @@
 			<article>
         <?php
           // Ajout alerte
-          echo '<form method="post" action="manage_alerts.php?action=doAjouter" class="form_saisie_alert" enctype="multipart/form-data" runat="server">';
+          echo '<form method="post" action="manage_alerts.php?action=doAjouter" class="form_saisie_alert">';
             echo '<table class="table_saisie_alert">';
               echo '<tr>';
                 // Type

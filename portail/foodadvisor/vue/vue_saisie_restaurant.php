@@ -11,7 +11,7 @@
       echo '<a onclick="afficherMasquer(\'zone_add_restaurant\');" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       // Saisie restaurant
-      echo '<form method="post" action="restaurants.php?action=doAjouter" enctype="multipart/form-data" runat="server" class="form_saisie_restaurant">';
+      echo '<form method="post" action="restaurants.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_restaurant">';
         // Photo & numéro
         echo '<div class="zone_saisie_left">';
           // Photo

@@ -214,7 +214,7 @@
               echo '<a onclick="afficherMasquerSaisieImage();" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
               // Saisie image
-              echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" runat="server" class="form_saisie_collector">';
+              echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_collector">';
                 echo '<table class="table_saisie_collector">';
                   // Type de saisie
                   echo '<input type="hidden" name="type_collector" value="I" />';

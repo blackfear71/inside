@@ -32,7 +32,7 @@
       <td class="zone_profil_utilisateur_avatar">
         <div class="zone_avatar">
           <?php
-            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangeAvatar" enctype="multipart/form-data" runat="server">';
+            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangeAvatar" enctype="multipart/form-data">';
               echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
               echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event, \'avatar\')" required /></span>';
@@ -57,7 +57,7 @@
               echo '<img src="../includes/images/profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
             echo '</div>';
 
-            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data" runat="server">';
+            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data">';
               echo '<input type="submit" name="delete_avatar" value="Supprimer l\'avatar" class="bouton_profil" />';
             echo '</form>';
           }

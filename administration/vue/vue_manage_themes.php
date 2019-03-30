@@ -43,7 +43,7 @@
             /************************/
             /* Saisie nouveau thème */
             /************************/
-            echo '<form method="post" action="manage_themes.php?action=doAjouter" enctype="multipart/form-data" runat="server" class="zone_theme">';
+            echo '<form method="post" action="manage_themes.php?action=doAjouter" enctype="multipart/form-data" class="zone_theme">';
               echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
               // Header

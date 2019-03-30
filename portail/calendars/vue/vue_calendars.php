@@ -53,7 +53,7 @@
               // Saisie annexe
               if ($preferences->getManage_calendars() == "Y")
               {
-                echo '<form method="post" action="calendars.php?action=doAjouterAnnexe" class="zone_annexe" enctype="multipart/form-data" runat="server">';
+                echo '<form method="post" action="calendars.php?action=doAjouterAnnexe" class="zone_annexe" enctype="multipart/form-data">';
                   // Image
                   echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
@@ -104,7 +104,7 @@
               $annee_debut = date('Y') - 2;
               $annee_fin   = date('Y') + 2;
 
-              echo '<form method="post" action="calendars.php?action=doAjouter" class="form_saisie_calendar" enctype="multipart/form-data" runat="server">';
+              echo '<form method="post" action="calendars.php?action=doAjouter" class="form_saisie_calendar" enctype="multipart/form-data">';
                 echo '<table class="table_saisie_calendar">';
                   echo '<tr>';
                     // Selection mois
