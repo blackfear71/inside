@@ -74,7 +74,7 @@
           OR  $ligne->getStatus() == "D"
           OR  $ligne->getStatus() == "R")
           {
-            echo '<td rowspan="100%" class="td_ideas_actions">';
+            echo '<td rowspan="3" class="td_ideas_actions">';
               echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doChangerStatut&id=' . $ligne->getId() . '">';
                 switch ($ligne->getStatus())
                 {

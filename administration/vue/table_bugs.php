@@ -40,7 +40,7 @@
   				echo '</td>';
 
   				// Boutons de prise en charge
-  				echo '<td rowspan="100%" class="td_bugs_actions">';
+  				echo '<td rowspan="3" class="td_bugs_actions">';
   					echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doChangerStatut">';
   						if ($bug->getResolved() == "N")
   							echo '<input type="submit" name="resolve_bug" value="Résoudre" class="button_bug" />';
