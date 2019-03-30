@@ -63,7 +63,7 @@
                   echo '</div>';
 
                   echo '<div class="mask_image">';
-                    echo '<img id="image_calendar_divers" class="image" />';
+                    echo '<img id="image_calendar_divers" alt="" class="image" />';
                   echo '</div>';
 
                   echo '<div class="zone_saisie_nom_divers">';
