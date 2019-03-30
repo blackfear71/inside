@@ -56,7 +56,7 @@
             <?php
               if ($parcours->isImageSet())
               {
-                echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . ' class="PP-image" /><br/>';
+                echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . '" class="PP-image" /><br/>';
               }
             ?>
           </p>
