@@ -40,7 +40,7 @@
                 echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission" onchange="loadFile(event, \'banner\')" />';
               echo '</div>';
 
-              echo '<img src="../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" id="banner" class="preview_image_mission" />';
+              echo '<img src="../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" id="banner" alt="' . $detailsMission->getReference() . '" class="preview_image_mission" />';
             echo '</div>';
           }
         echo '</td>';
@@ -58,7 +58,7 @@
               echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_g\')" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" id="button_g" class="preview_icon_mission" />';
+              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="preview_icon_mission" />';
             else
               echo '<img id="button_g" alt="" class="preview_icon_mission" />';
           echo '</div>';
@@ -74,7 +74,7 @@
               echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_m\')" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" id="button_m" class="preview_icon_mission" />';
+              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="preview_icon_mission" />';
             else
               echo '<img id="button_m" alt="" class="preview_icon_mission" />';
           echo '</div>';
@@ -90,7 +90,7 @@
               echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones" onchange="loadFile(event, \'button_d\')" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" id="button_d" class="preview_icon_mission" />';
+              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="preview_icon_mission" />';
             else
               echo '<img id="button_d" alt="" class="preview_icon_mission" />';
           echo '</div>';
