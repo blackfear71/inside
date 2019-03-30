@@ -119,7 +119,7 @@
                             }
 
                             // Bouton annulation
-                            echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Annuler" class="link_vote">';
+                            echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" title="Annuler" class="link_vote">';
                               echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                             echo '</a>';
                           echo '</form>';
@@ -223,7 +223,7 @@
                       }
 
                       // Bouton annulation
-                      echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" id="preference[' . $ligneFilm['id_film'] . ']" title="Annuler" class="link_vote">';
+                      echo '<a onclick="afficherMasquer(\'preference[' . $ligneFilm['id_film'] . ']\'); afficherMasquer(\'preference2[' . $ligneFilm['id_film'] . ']\');" title="Annuler" class="link_vote">';
                         echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                       echo '</a>';
                     echo '</form>';
