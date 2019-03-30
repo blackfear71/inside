@@ -15,7 +15,7 @@
             {
               if ($rankUser['rank'] == 2)
               {
-                echo '<div class="zone_avatar_details_mission" id="second">';
+                echo '<div class="zone_avatar_details_mission second">';
                   if (!empty($rankUser['avatar']))
                     echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
@@ -46,7 +46,7 @@
             {
               if ($rankUser['rank'] == 1)
               {
-                echo '<div class="zone_avatar_details_mission" id="first">';
+                echo '<div class="zone_avatar_details_mission first">';
                   if (!empty($rankUser['avatar']))
                     echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
@@ -77,7 +77,7 @@
             {
               if ($rankUser['rank'] == 3)
               {
-                echo '<div class="zone_avatar_details_mission" id="third">';
+                echo '<div class="zone_avatar_details_mission third">';
                   if (!empty($rankUser['avatar']))
                     echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_details_mission" />';
                   else
@@ -100,7 +100,7 @@
         echo '</td>';
       echo '</tr>';
 
-      echo '<tr style="height: 20px;"></tr>';
+      echo '<tr style="height: 20px;"><td colspan="3"></td></tr>';
 
       // Autres participants
       foreach ($ranking as $rankUser)

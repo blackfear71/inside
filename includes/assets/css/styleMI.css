@@ -324,19 +324,19 @@
 	}
 }
 
-#first
+.first
 {
 	animation: 0.6s ease 0.5s normal forwards 1 affichagePodium;
 	opacity: 0;
 }
 
-#second
+.second
 {
 	animation: 0.6s ease 1s normal forwards 1 affichagePodium;
 	opacity: 0;
 }
 
-#third
+.third
 {
 	animation: 0.6s ease 1.5s normal forwards 1 affichagePodium;
 	opacity: 0;
