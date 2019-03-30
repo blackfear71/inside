@@ -1245,8 +1245,14 @@
     // Suppression des succès
     $req7 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $identifiant . '"');
 
+    // Suppression propositions restaurants
+    $req8 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $identifiant . '"');
+
+    // Suppression déterminations restaurants
+    $req9 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $identifiant . '"');
+
     // Suppression utilisateur
-    $req8 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
+    $req10 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
   }
 
   // METIER : Refus désinscription
