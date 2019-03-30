@@ -69,7 +69,7 @@
                       echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event, \'avatar\')" required /></span>';
 
                       echo '<div class="mask_avatar" style="margin-top: -147px;">';
-                        echo '<img id="avatar" class="avatar_profil" style="margin-top: -3px;" />';
+                        echo '<img id="avatar" src="//:0" alt="" class="avatar_profil" style="margin-top: -3px;" />';
                       echo '</div>';
 
                       echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="bouton_profil" />';
