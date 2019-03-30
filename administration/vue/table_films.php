@@ -77,7 +77,11 @@
       }
     }
     else
-      echo '<td colspan="6" class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
+		{
+			echo '<tr>';
+				echo '<td colspan="6" class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
+			echo '</tr>';
+		}
 
 		// Bas du tableau
 		echo '<tr>';
