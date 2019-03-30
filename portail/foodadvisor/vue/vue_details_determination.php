@@ -59,13 +59,13 @@
                 }
 
                 // Lieu
-                echo '<span class="lieu_proposition">' . $proposition->getLocation() . '</span>';
+                echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $proposition->getLocation() . '</span>';
 
                 // Nombre de participants
                 if ($proposition->getNb_participants() == 1)
-                  echo '<span class="horaire_proposition">' . $proposition->getNb_participants() . ' participant</span>';
+                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
                 else
-                  echo '<span class="horaire_proposition">' . $proposition->getNb_participants() . ' participants</span>';
+                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
               echo '</div>';
 
               // Type de restaurant

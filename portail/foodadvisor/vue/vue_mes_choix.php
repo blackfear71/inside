@@ -57,7 +57,7 @@
             echo '</div>';
 
             // Lieu
-            echo '<span class="lieu_mon_choix">' . $monChoix->getLocation() . '</span>';
+            echo '<span class="lieu_mon_choix"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $monChoix->getLocation() . '</span>';
 
             // Horaire souhaitée
             if (!empty($monChoix->getTime()))
