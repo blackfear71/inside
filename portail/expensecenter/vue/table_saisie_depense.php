@@ -72,7 +72,7 @@
                 echo '</select>';
 
                 // Saisie Commentaire
-                echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense" />' . $_SESSION['save']['comment'] . '</textarea>';
+                echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire_depense">' . $_SESSION['save']['comment'] . '</textarea>';
               echo '</td>';
             }
 
