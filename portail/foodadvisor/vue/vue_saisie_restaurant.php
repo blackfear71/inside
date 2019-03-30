@@ -20,7 +20,7 @@
           echo '<span class="zone_parcourir_restaurant_saisie">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie" onchange="loadFile(event, \'img_restaurant_saisie\')" /></span>';
 
           echo '<div class="mask_saisie_restaurant">';
-            echo '<img id="img_restaurant_saisie" class="image_saisie_restaurant" />';
+            echo '<img id="img_restaurant_saisie" alt="" class="image_saisie_restaurant" />';
           echo '</div>';
 
           // Jours d'ouverture
@@ -94,7 +94,7 @@
 
           // Types
           echo '<div id="types_restaurants">';
-            echo '<a name="type_other" onclick="addOtherType(\'types_restaurants\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
+            echo '<a onclick="addOtherType(\'types_restaurants\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
 
             $i = 0;
 

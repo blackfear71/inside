@@ -133,9 +133,9 @@
 
                 echo '<div class="mask_update_restaurant">';
                   if (!empty($restaurant->getPicture()))
-                    echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
+                    echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="" id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
                   else
-                    echo '<img id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
+                    echo '<img id="img_restaurant[' . $restaurant->getId() . ']" alt="" class="update_image_restaurant" />';
                   echo '</div>';
               echo '</div>';
 
@@ -203,7 +203,7 @@
 
               // Types
               echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
-                echo '<a name="type_other" onclick="addOtherType(\'update_types_restaurants_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
+                echo '<a onclick="addOtherType(\'update_types_restaurants_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
 
                 $explodedTypes = explode(";", $restaurant->getTypes());
                 $k             = 0;

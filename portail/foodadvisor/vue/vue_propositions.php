@@ -5,7 +5,7 @@
   echo '<div class="titre_section">';
     echo 'Les propositions du jour';
 
-    echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" class="image_refresh" /></a>';
+    echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
 
     if (!empty($propositions) AND date("H") < 13)
     {
