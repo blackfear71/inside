@@ -150,6 +150,8 @@
 
               // Lieu
               echo '<select name="update_location_' . $restaurant->getId() . '" id="update_location_' . $restaurant->getId() . '" class="update_lieu_restaurant" onchange="afficherModifierOther(\'update_location_' . $restaurant->getId() . '\', \'other_location_' . $restaurant->getId() . '\');" required>';
+                echo '<option value="" hidden>Choisissez...</option>';
+                
                 foreach ($listeLieux as $lieu)
                 {
                   if ($lieu == $restaurant->getLocation())
