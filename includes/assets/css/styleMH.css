@@ -1329,7 +1329,6 @@
 {
 	clear: both;
 	width: 100%;
-	margin-top: 100px;
 	padding-bottom: 25px;
 }
 
@@ -1437,6 +1436,7 @@
 .link_comment
 {
 	display: inline-block;
+	margin-bottom: 5px;
 	vertical-align: middle;
 	width: 30px;
 	height: 30px;
