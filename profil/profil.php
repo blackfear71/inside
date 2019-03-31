@@ -146,9 +146,12 @@
 
           $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));
           $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
+          $statistiques->setNb_reservations(htmlspecialchars($statistiques->getNb_reservations()));
           $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));
           $statistiques->setNb_collectors(htmlspecialchars($statistiques->getNb_collectors()));
           $statistiques->setNb_ideas(htmlspecialchars($statistiques->getNb_ideas()));
+          $statistiques->setNb_bugs(htmlspecialchars($statistiques->getNb_bugs()));
+          $statistiques->setNb_evolutions(htmlspecialchars($statistiques->getNb_evolutions()));
 
           $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
           $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));

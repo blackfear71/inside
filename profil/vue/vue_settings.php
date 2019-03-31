@@ -111,6 +111,24 @@
       </div>
     </div>
 
+    <!-- Contributions Food Advisor -->
+    <div class="zone_profil_contribution">
+      <div class="titre_preference">
+        LES ENFANTS ! À TABLE !
+      </div>
+
+      <!-- Solde des dépenses -->
+      <div class="sous_titre_preference">
+        Nombre de réservations
+      </div>
+
+      <div class="contenu_contribution_fin">
+        <?php
+          echo $statistiques->getNb_reservations();
+        ?>
+      </div>
+    </div>
+
     <!-- Contributions Expense Center -->
     <div class="zone_profil_contribution">
       <div class="titre_preference">
@@ -164,6 +182,42 @@
         ?>
       </div>
     </div>
+
+
+
+
+    <!-- Contributions Bugs / Evolutions -->
+    <div class="zone_profil_contribution">
+      <div class="titre_preference">
+        BUGS & EVOLUTIONS
+      </div>
+
+      <!-- Nombre de bugs rapportés -->
+      <div class="sous_titre_preference">
+        Nombre de bugs rapportés
+      </div>
+
+      <div class="contenu_contribution_fin">
+        <?php
+          echo $statistiques->getNb_bugs();
+        ?>
+      </div>
+
+      <!-- Nombre d'évolutions proposées -->
+      <div class="sous_titre_preference">
+        Nombre d'évolutions proposées
+      </div>
+
+      <div class="contenu_contribution_fin">
+        <?php
+          echo $statistiques->getNb_evolutions();
+        ?>
+      </div>
+    </div>
+
+
+
+
   </div>
 </div>
 

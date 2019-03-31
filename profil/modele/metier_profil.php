@@ -28,9 +28,12 @@
   {
     $nb_films_ajoutes = 0;
     $nb_comments      = 0;
+    $nb_reservations  = 0;
     $expenses         = 0;
     $nb_collectors    = 0;
     $nb_ideas         = 0;
+    $nb_bugs          = 0;
+    $nb_evolutions    = 0;
 
     global $bdd;
 
@@ -56,36 +59,63 @@
     }
     $reponse0->closeCursor();
 
-    // Solde des dépenses
-    $reponse2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
+    // Nombre de réservations de restaurants
+    $reponse2 = $bdd->query('SELECT COUNT(id) AS nb_reservations FROM food_advisor_choices WHERE caller = "' . $user . '"');
     $donnees2 = $reponse2->fetch();
 
-    $expenses = $donnees2['expenses'];
+    $nb_reservations = $donnees2['nb_reservations'];
 
     $reponse2->closeCursor();
 
-    // Nombre de phrases cultes soumises
-    $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
+    // Solde des dépenses
+    $reponse3 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
     $donnees3 = $reponse3->fetch();
 
-    $nb_collectors = $donnees3['nb_collectors'];
+    $expenses = $donnees3['expenses'];
 
     $reponse3->closeCursor();
 
-    // Nombre d'idées soumises
-    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    // Nombre de phrases cultes soumises
+    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
     $donnees4 = $reponse4->fetch();
 
-    $nb_ideas = $donnees4['nb_idees'];
+    $nb_collectors = $donnees4['nb_collectors'];
 
     $reponse4->closeCursor();
+
+    // Nombre d'idées soumises
+    $reponse5 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    $donnees5 = $reponse5->fetch();
+
+    $nb_ideas = $donnees5['nb_idees'];
+
+    $reponse5->closeCursor();
+
+    // Nombre de bugs rapportés
+    $reponse6 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user . '" AND type = "B"');
+    $donnees6 = $reponse6->fetch();
+
+    $nb_bugs = $donnees6['nb_bugs'];
+
+    $reponse6->closeCursor();
+
+    // Nombre d'évolutions proposées
+    $reponse7 = $bdd->query('SELECT COUNT(id) AS nb_evolutions FROM bugs WHERE author = "' . $user . '" AND type = "E"');
+    $donnees7 = $reponse7->fetch();
+
+    $nb_evolutions = $donnees7['nb_evolutions'];
+
+    $reponse7->closeCursor();
 
     // On construit un tableau avec les données statistiques
     $myStats = array('nb_films_ajoutes' => $nb_films_ajoutes,
                      'nb_comments'      => $nb_comments,
+                     'nb_reservations'  => $nb_reservations,
                      'expenses'         => $expenses,
                      'nb_collectors'    => $nb_collectors,
                      'nb_ideas'         => $nb_ideas,
+                     'nb_bugs'          => $nb_bugs,
+                     'nb_evolutions'    => $nb_evolutions
                     );
 
     // Instanciation d'un objet Statistiques à partir des données remontées de la bdd

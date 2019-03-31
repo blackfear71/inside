@@ -209,18 +209,24 @@
   {
     private $nb_films_ajoutes;
     private $nb_comments;
+    private $nb_reservations;
     private $expenses;
     private $nb_collectors;
     private $nb_ideas;
+    private $nb_bugs;
+    private $nb_evolutions;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
       $this->nb_films_ajoutes = 0;
       $this->nb_comments      = 0;
+      $this->nb_reservations  = 0;
       $this->expenses         = 0;
       $this->nb_collectors    = 0;
       $this->nb_ideas         = 0;
+      $this->nb_bugs          = 0;
+      $this->nb_evolutions    = 0;
     }
 
     // Constructeur de l'objet Statistiques en fonction des données
@@ -241,6 +247,9 @@
       if (isset($data['nb_comments']))
         $this->nb_comments      = $data['nb_comments'];
 
+      if (isset($data['nb_reservations']))
+        $this->nb_reservations  = $data['nb_reservations'];
+
       if (isset($data['expenses']))
         $this->expenses         = $data['expenses'];
 
@@ -249,6 +258,12 @@
 
       if (isset($data['nb_ideas']))
         $this->nb_ideas         = $data['nb_ideas'];
+
+      if (isset($data['nb_bugs']))
+        $this->nb_bugs          = $data['nb_bugs'];
+
+      if (isset($data['nb_evolutions']))
+        $this->nb_evolutions    = $data['nb_evolutions'];
     }
 
     // getters et setters pour l'objet Statistiques
@@ -272,6 +287,17 @@
     public function getNb_comments()
     {
       return $this->nb_comments;
+    }
+
+    // Nombre de réservations Food Advisor
+    public function setNb_reservations($nb_reservations)
+    {
+      $this->nb_reservations = $nb_reservations;
+    }
+
+    public function getNb_reservations()
+    {
+      return $this->nb_reservations;
     }
 
     // Solde des dépenses
@@ -305,6 +331,28 @@
     public function getNb_ideas()
     {
       return $this->nb_ideas;
+    }
+
+    // Nombre de bugs rapportés
+    public function setNb_bugs($nb_bugs)
+    {
+      $this->nb_bugs = $nb_bugs;
+    }
+
+    public function getNb_bugs()
+    {
+      return $this->nb_bugs;
+    }
+
+    // Nombre d'évolutions proposées
+    public function setNb_evolutions($nb_evolutions)
+    {
+      $this->nb_evolutions = $nb_evolutions;
+    }
+
+    public function getNb_evolutions()
+    {
+      return $this->nb_evolutions;
     }
   }
 
