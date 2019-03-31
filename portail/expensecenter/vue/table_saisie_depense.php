@@ -47,6 +47,14 @@
 
               $nb_users_line++;
             }
+
+            if ($nb_users_line < $nb_colonnes)
+            {
+              for ($i = $nb_users_line; $i < $nb_colonnes; $i++)
+              {
+                echo '<td style="border: 0;"></td>';
+              }
+            }
           echo '</tr>';
 
           // Lignes de saisie
@@ -76,25 +84,30 @@
               echo '</td>';
             }
 
-            for ($j = 0; $j < $nb_users_line; $j++)
+            for ($j = 0; $j < $nb_colonnes; $j++)
             {
               $nb_max_parts = 5;
 
-              echo '<td class="saisie_part_user">';
-                echo '<select name="depense_user[]" class="parts">';
-                  for ($k = 0; $k <= $nb_max_parts; $k++)
-                  {
-                    // On calcule l'indice où commencer à récupérer le tableau des parts en fonction de chaque ligne. Le premier numéro de ligne est 1, le premier indice 0 et on a 5 utilisateurs par ligne
-                    $l = $j + 5 * ($ligne - 1);
+              if ($nb_users_line < $nb_colonnes AND $j >= $nb_users_line)
+                echo '<td style="border: 0;"></td>';
+              else
+              {
+                echo '<td class="saisie_part_user">';
+                  echo '<select name="depense_user[]" class="parts">';
+                    for ($k = 0; $k <= $nb_max_parts; $k++)
+                    {
+                      // On calcule l'indice où commencer à récupérer le tableau des parts en fonction de chaque ligne. Le premier numéro de ligne est 1, le premier indice 0 et on a 5 utilisateurs par ligne
+                      $l = $j + 5 * ($ligne - 1);
 
-                    // On affiche les parts en mémoire si il y a eu une erreur de saisie
-                    if (isset($_SESSION['tableau_parts']) AND is_numeric($_SESSION['tableau_parts'][$l]) AND $_SESSION['tableau_parts'][$l] == $k)
-                      echo '<option value="' . $k . '" selected>' . $k . '</option>';
-                    else
-                      echo '<option value="' . $k . '">' . $k . '</option>';
-                  }
-                echo '</select>';
-              echo '</td>';
+                      // On affiche les parts en mémoire si il y a eu une erreur de saisie
+                      if (isset($_SESSION['tableau_parts']) AND is_numeric($_SESSION['tableau_parts'][$l]) AND $_SESSION['tableau_parts'][$l] == $k)
+                        echo '<option value="' . $k . '" selected>' . $k . '</option>';
+                      else
+                        echo '<option value="' . $k . '">' . $k . '</option>';
+                    }
+                  echo '</select>';
+                echo '</td>';
+              }
             }
           echo '</tr>';
 

@@ -147,6 +147,7 @@
 
 .rift_details_mission
 {
+	padding: 0;
 	height: 1px;
 	background-color: #ff475f;
 }
@@ -260,12 +261,14 @@
 
 .rift_details_mission_left
 {
+	padding: 0;
 	height: 1px;
 	background-color: #ff475f;
 }
 
 .rift_details_mission_right
 {
+	padding: 0;
 	height: 1px;
 	background-color: #e3e3e3;
 }

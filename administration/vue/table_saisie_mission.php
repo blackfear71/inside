@@ -6,10 +6,10 @@
 
     echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-    echo '<table cellpadding="0" class="table_mission">';
+    echo '<table class="table_mission">';
       // Image & titre
       echo '<tr>';
-        echo '<td colspan="3">';
+        echo '<td colspan="3" style="padding: 0;">';
           // Titre
           if ($_GET['action'] == "goAjouter")
             echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" style="width: calc(100% - 60px);" required />';

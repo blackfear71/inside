@@ -1,8 +1,8 @@
 <?php
-  echo '<table cellpadding="0" class="table_mission">';
+  echo '<table class="table_mission">';
     // Image & titre
     echo '<tr>';
-      echo '<td colspan="2">';
+      echo '<td colspan="2" style="padding: 0;">';
         echo '<div class="titre_mission_first">' . $detailsMission->getMission() . '</div>';
         echo '<img src="../../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="img_details_mission" />';
       echo '</td>';

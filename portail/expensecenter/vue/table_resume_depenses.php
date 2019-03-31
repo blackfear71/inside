@@ -182,8 +182,10 @@
 			// S'il n'y a pas de dépenses à afficher
 			else
 			{
+				$colspan = count($listeUsers) + 5;
+
 				echo '<tr>';
-					echo '<td colspan="100" class="no_expenses">';
+					echo '<td colspan="' . $colspan . '" class="no_expenses">';
 						echo 'Pas de dépenses à afficher';
 					echo '</td>';
 				echo '</tr>';
