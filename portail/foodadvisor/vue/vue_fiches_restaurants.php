@@ -5,7 +5,7 @@
   echo '<div class="zone_restaurants" style="display: none;">';
     foreach ($listeRestaurants as $lieu => $restaurantsParLieux)
     {
-      echo '<div class="titre_section" id="' . formatId($lieu) . '">' . $lieu . '</div>';
+      echo '<div class="titre_section" id="' . formatId($lieu) . '"><img src="../../includes/icons/foodadvisor/location_grey.png" alt="location" class="logo_titre_section" />' . $lieu . '</div>';
 
       echo '<div class="zone_fiches_restaurants">';
         foreach ($restaurantsParLieux as $restaurant)
@@ -151,7 +151,7 @@
               // Lieu
               echo '<select name="update_location_' . $restaurant->getId() . '" id="update_location_' . $restaurant->getId() . '" class="update_lieu_restaurant" onchange="afficherModifierOther(\'update_location_' . $restaurant->getId() . '\', \'other_location_' . $restaurant->getId() . '\');" required>';
                 echo '<option value="" hidden>Choisissez...</option>';
-                
+
                 foreach ($listeLieux as $lieu)
                 {
                   if ($lieu == $restaurant->getLocation())

@@ -31,6 +31,14 @@
 	text-align: left;
 }
 
+.logo_titre_section
+{
+	height: 25px;
+	vertical-align: middle;
+	margin-top: -5px;
+	margin-right: 5px;
+}
+
 .bouton_determination
 {
 	float: right;
