@@ -1116,13 +1116,16 @@
       $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
       $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
 
-      if (isset($post['update_prix_min_restaurant_' . $id_restaurant]) AND is_numeric($post['update_prix_min_restaurant_' . $id_restaurant]))
-        $prix_min             = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_min_restaurant_' . $id_restaurant])), 2);
+      $prix_min_test          = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
+      $prix_max_test          = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
+
+      if (is_numeric($prix_min_test))
+        $prix_min             = number_format($prix_min_test, 2);
       else
         $prix_min             = "";
 
-      if (isset($post['update_prix_max_restaurant_' . $id_restaurant]) AND is_numeric($post['update_prix_max_restaurant_' . $id_restaurant]))
-        $prix_max             = number_format(str_replace(',', '.', htmlspecialchars($post['update_prix_max_restaurant_' . $id_restaurant])), 2);
+      if (is_numeric($prix_max_test))
+        $prix_max             = number_format($prix_max_test, 2);
       else
         $prix_max             = "";
 
