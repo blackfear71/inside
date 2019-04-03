@@ -39,24 +39,31 @@
           echo '<div class="zone_portail_left">';
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" />INSIDE News</div>';
 
-            foreach ($news as $messageNews)
-            {
-              echo '<a href="' . $messageNews->getLink() . '" class="zone_news">';
-                echo '<img src="/inside/includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
+            echo '<div class="timeline">';
+              foreach ($news as $messageNews)
+              {
+                echo '<div class="trait_timeline"></div>';
 
-                echo '<div class="zone_contenu_news">';
-                  echo '<div class="titre_news">' . $messageNews->getTitle() . '</div>';
-                  echo '<div class="contenu_news">' . $messageNews->getContent() . '</div>';
-                echo '</div>';
+                if ($messageNews == end($news))
+                  echo '<a href="' . $messageNews->getLink() . '" class="zone_news" style="margin-bottom: -2px;">';
+                else
+                  echo '<a href="' . $messageNews->getLink() . '" class="zone_news">';
+                    echo '<img src="/inside/includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
 
-                if (!empty($messageNews->getDetails()))
-                {
-                  echo '<div class="zone_details_news">';
-                    echo $messageNews->getDetails();
-                  echo '</div>';
-                }
-              echo '</a>';
-            }
+                    echo '<div class="zone_contenu_news">';
+                      echo '<div class="titre_news">' . $messageNews->getTitle() . '</div>';
+                      echo '<div class="contenu_news">' . $messageNews->getContent() . '</div>';
+                    echo '</div>';
+
+                    if (!empty($messageNews->getDetails()))
+                    {
+                      echo '<div class="zone_details_news">';
+                        echo $messageNews->getDetails();
+                      echo '</div>';
+                    }
+                  echo '</a>';
+              }
+            echo '</div>';
           echo '</div>';
 
           echo '<div class="zone_portail_right">';

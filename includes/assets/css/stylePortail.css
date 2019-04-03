@@ -10,10 +10,26 @@
 	vertical-align: top;
 }
 
+.timeline
+{
+	border-left: solid 1px #b3b3b3;
+}
+
+.trait_timeline
+{
+	float: left;
+	width: 20px;
+	height: 1px;
+	background-color: #b3b3b3;
+	margin-top: 25px;
+}
+
 .zone_news
 {
-	display: block;
-	width: 100%;
+	display: inline-block;
+	width: calc(100% - 21px);
+	margin-top: -25px;
+	margin-left: 20px;
 	margin-bottom: 20px;
 	background-color: #ff1937;
 	min-height: 50px;
