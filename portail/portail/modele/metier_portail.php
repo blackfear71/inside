@@ -94,7 +94,7 @@
     $myNews->setContent($data3['film']);
     $myNews->setDetails("");
     $myNews->setLogo("movie_house");
-    $myNews->setLink("http://localhost/inside/portail/moviehouse/details.php?id_film=" . $data3['id'] . "&action=goConsulter");
+    $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data3['id'] . "&action=goConsulter");
 
     $req3->closeCursor();
 
@@ -112,14 +112,14 @@
       $myNews->setContent($data4['film']);
       $myNews->setDetails("Rendez-vous le " . formatDateForDisplay($data4['date_doodle']) . " au cinéma !");
       $myNews->setLogo("movie_house");
-      $myNews->setLink("http://localhost/inside/portail/moviehouse/details.php?id_film=" . $data4['id'] . "&action=goConsulter");
+      $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data4['id'] . "&action=goConsulter");
 
       array_push($tabNews, $myNews);
     }
 
     $req4->closeCursor();
 
-    // Missions
+    // Messages missions
     $missions = getMissions();
 
     if (!empty($missions))
