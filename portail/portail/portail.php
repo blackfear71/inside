@@ -15,10 +15,8 @@
     case 'goConsulter':
       // Lecture des données par le modèle
       $preferences      = getPreferences($_SESSION['user']['identifiant']);
-      $messagesMissions = getMessagesMissions();
-
-      if (!empty($messagesMissions))
-        $gagnantsMissions = getWinners($messagesMissions);
+      $news             = getNews($_SESSION['user']['identifiant']);
+      $portail          = getPortail($preferences);
       break;
 
     default:
@@ -39,6 +37,17 @@
       $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
       $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+
+      foreach ($news as &$messageNews)
+      {
+        $messageNews->setTitle(htmlspecialchars($messageNews->getTitle()));
+        //$messageNews->setContent(htmlspecialchars($messageNews->getContent()));
+        $messageNews->setDetails(htmlspecialchars($messageNews->getDetails()));
+        $messageNews->setLogo(htmlspecialchars($messageNews->getLogo()));
+        $messageNews->setLink(htmlspecialchars($messageNews->getLink()));
+      }
+
+      unset($messageNews);
 
       if (isset($messagesMissions) AND !empty($messagesMissions))
       {
