@@ -844,13 +844,16 @@
     $description_restaurant = $post['description_restaurant'];
     $ouverture_restaurant   = $post['ouverture_restaurant'];
 
-    if (isset($post['prix_min_restaurant']) AND is_numeric($post['prix_min_restaurant']))
-      $prix_min             = number_format(str_replace(',', '.', htmlspecialchars($post['prix_min_restaurant'])), 2);
+    $prix_min_test          = str_replace(',', '.', $post['prix_min_restaurant']);
+    $prix_max_test          = str_replace(',', '.', $post['prix_max_restaurant']);
+
+    if (is_numeric($prix_min_test))
+      $prix_min             = number_format($prix_min_test, 2);
     else
       $prix_min             = "";
 
-    if (isset($post['prix_max_restaurant']) AND is_numeric($post['prix_max_restaurant']))
-      $prix_max             = number_format(str_replace(',', '.', htmlspecialchars($post['prix_max_restaurant'])), 2);
+    if (is_numeric($prix_max_test))
+      $prix_max             = number_format($prix_max_test, 2);
     else
       $prix_max             = "";
 
