@@ -732,6 +732,57 @@
 	text-align: center;
 }
 
+.titre_solo
+{
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.zone_solo
+{
+	margin-bottom: 10px;
+	text-align: justify;
+	min-height: 30px;
+}
+
+.avatar_solo
+{
+	float: left;
+	width: 30px;
+	border-radius: 50%;
+	margin-right: 10px;
+	background-color: #262626;
+}
+
+.pseudo_solo
+{
+	margin-left: 40px;
+	padding-top: 3px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+}
+
+.bouton_solo
+{
+	padding: 10px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	border: 0;
+	border-radius: 2px;
+	background-color: #e3e3e3;
+	text-align: center;
+	font-size: 100%;
+	cursor: pointer;
+}
+
+.bouton_solo:hover
+{
+	color: white;
+	background-color: #ff1937;
+}
+
 .lien_details_determined
 {
 	float: right;

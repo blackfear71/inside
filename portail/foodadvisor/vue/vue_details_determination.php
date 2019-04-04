@@ -96,7 +96,7 @@
                       if (!empty($proposition->getAvatar()))
                         echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
                       else
-                        echo '<img src="../../includes/icons/common/default.png' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
+                        echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller_details" />';
                     echo '</div>';
                   }
                 echo '</div>';
@@ -138,7 +138,7 @@
                   if (!empty($detailsUser['avatar']))
                     echo '<img src="../../includes/images/profil/avatars/' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_details" />';
                   else
-                    echo '<img src="../../includes/icons/common/default.png' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_details" />';
+                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_details" />';
 
                   // Pseudo
                   echo '<div class="pseudo_details">' . $detailsUser['pseudo'] . '</div>';
@@ -200,7 +200,7 @@
                       if (!empty($detailsUser['avatar']))
                         echo '<img src="../../includes/images/profil/avatars/' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
                       else
-                        echo '<img src="../../includes/icons/common/default.png' . $detailsUser['avatar'] . '" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
+                        echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $detailsUser['pseudo'] . '" class="avatar_menus" />';
 
                       if (!empty($entree))
                       {

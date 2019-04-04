@@ -42,7 +42,7 @@
             if (!empty($choixJour->getAvatar()))
               echo '<img src="../../includes/images/profil/avatars/' . $choixJour->getAvatar() . '" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
             else
-              echo '<img src="../../includes/icons/common/default.png' . $choixJour->getAvatar() . '" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
+              echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
           echo '</div>';
         echo '</div>';
       }

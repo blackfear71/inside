@@ -7,17 +7,49 @@
 
     echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
 
-    if (!empty($propositions) AND date("H") < 13)
+    // Lancer la détermination
+    if ($actions["determiner"] == true)
     {
       echo '<form method="post" action="foodadvisor.php?action=doDeterminer">';
         echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
       echo '</form>';
     }
+
+    // Faire bande à part
+    if ($actions["solo"] == true)
+    {
+      echo '<form method="post" action="foodadvisor.php?action=doSolo">';
+        echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_determination" />';
+      echo '</form>';
+    }
   echo '</div>';
 
-  if (!empty($propositions))
+  if (!empty($propositions) OR !empty($solos))
   {
     echo '<div class="zone_propositions">';
+      // Bande à part
+      if (!empty($solos))
+      {
+        echo '<div class="zone_proposition_top">';
+          echo '<div class="titre_solo">Bande à part</div>';
+
+          foreach ($solos as $solo)
+          {
+            echo '<div class="zone_solo">';
+              // Avatar
+              if (!empty($solo->getAvatar()))
+                echo '<img src="../../includes/images/profil/avatars/' . $solo->getAvatar() . '" alt="avatar" title="' . $solo->getPseudo() . '" class="avatar_solo" />';
+              else
+                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $solo->getPseudo() . '" class="avatar_solo" />';
+
+              // Pseudo
+              echo '<div class="pseudo_solo">' . $solo->getPseudo() . '</div>';
+            echo '</div>';
+          }
+        echo '</div>';
+      }
+
+      // Propositions
       foreach ($propositions as $proposition)
       {
         if ($proposition->getClassement() == 1)
@@ -83,7 +115,7 @@
                 if (!empty($proposition->getAvatar()))
                   echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
                 else
-                  echo '<img src="../../includes/icons/common/default.png' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
 
                 // Numéro de téléphone
                 if (!empty($proposition->getPhone()))

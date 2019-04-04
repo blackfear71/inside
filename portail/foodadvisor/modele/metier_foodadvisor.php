@@ -108,7 +108,48 @@
     return $listeRestaurantsAConvertir;
   }
 
-  // METIER : Détermine le choix du jour
+  // METIER : Détermine la présence des boutons d'action
+  // RETOUR : Booléen
+  function getActions($propositions, $myChoices, $isSolo, $user)
+  {
+    $actions = array("determiner" => true,
+                     "solo"       => true,
+                     "choix"      => true
+                    );
+
+    // Contrôle heure
+    if (date("H") > 13)
+    {
+      $actions["determiner"] = false;
+      $actions["solo"]       = false;
+      $actions["choix"]      = false;
+    }
+
+    // Contrôle propositions présentes (pour bouton détermination)
+    if ($actions["determiner"] == true)
+    {
+      if (empty($propositions) OR empty($myChoices))
+        $actions["determiner"] = false;
+    }
+
+    // Contrôle choix présents (pour bouton bande à part)
+    if ($actions["solo"] == true)
+    {
+      if (!empty($myChoices))
+        $actions["solo"] = false;
+    }
+
+    // Contrôle vote solo présent
+    if ($actions["solo"] == true)
+    {
+      if ($isSolo == true)
+        $actions["solo"] = false;
+    }
+
+    return $actions;
+  }
+
+  // METIER : Récupère les choix du jour
   // RETOUR : Liste des choix du jour (tous)
   function getPropositions()
   {
@@ -116,7 +157,7 @@
 
     global $bdd;
 
-    $req1 = $bdd->query('SELECT DISTINCT id_restaurant FROM food_advisor_users WHERE date = "' . date("Ymd") . '"');
+    $req1 = $bdd->query('SELECT DISTINCT id_restaurant FROM food_advisor_users WHERE id_restaurant != 0 AND date = "' . date("Ymd") . '"');
     while ($data1 = $req1->fetch())
     {
       $myProposition = Proposition::withData($data1);
@@ -241,6 +282,29 @@
     $req1->closeCursor();
 
     return $details;
+  }
+
+  // METIER : Récupère les personnes faisant bande à part
+  // RETOUR : Tableau des utilisateurs
+  function getSolos()
+  {
+    global $bdd;
+
+    $solos = array();
+
+    $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = 0 AND date = "' . date("Ymd") . '" ORDER BY identifiant ASC');
+    while ($data1 = $req1->fetch())
+    {
+      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
+      $data2 = $req2->fetch();
+      $mySolo = Profile::withData($data2);
+      $req2->closeCursor();
+
+      array_push($solos, $mySolo);
+    }
+    $req1->closeCursor();
+
+    return $solos;
   }
 
   // METIER : Récupère un des restaurants pouvant être déterminé ce jour
@@ -421,6 +485,88 @@
     }
   }
 
+  // METIER : Insère un choix "bande à part"
+  // RETOUR : Aucun
+  function setSolo($myChoices, $isSolo, $user)
+  {
+    global $bdd;
+
+    $control_ok  = true;
+
+    // Contrôle déjà solo
+    if ($isSolo == true)
+      $control_ok = false;
+
+    // Contrôle heure
+    if ($control_ok == true)
+    {
+      if (date("H") > 13)
+      {
+        $control_ok                       = false;
+        $_SESSION['alerts']['heure_solo'] = true;
+      }
+    }
+
+    // Contrôle choix saisis
+    if ($control_ok == true)
+    {
+      if (!empty($myChoices))
+      {
+        $control_ok                       = false;
+        $_SESSION['alerts']['choix_solo'] = true;
+      }
+    }
+
+    // Insertion en base
+    if ($control_ok == true)
+    {
+      // Tableau d'un choix
+      $solo = array('id_restaurant' => 0,
+                    'identifiant'   => $user,
+                    'date'          => date("Ymd"),
+                    'time'          => "",
+                    'transports'    => "",
+                    'menu'          => ";;;"
+                   );
+
+       $req = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
+                                                            identifiant,
+                                                            date,
+                                                            time,
+                                                            transports,
+                                                            menu
+                                                           )
+                                                    VALUES(:id_restaurant,
+                                                           :identifiant,
+                                                           :date,
+                                                           :time,
+                                                           :transports,
+                                                           :menu
+                                                          )');
+       $req->execute($solo);
+       $req->closeCursor();
+    }
+  }
+
+  // METIER : Supprime un choix "bande à part"
+  // RETOUR : Aucun
+  function deleteSolo($user)
+  {
+    global $bdd;
+
+    $control_ok  = true;
+
+    // Contrôle heure
+    if (date("H") > 13)
+    {
+      $control_ok                                   = false;
+      $_SESSION['alerts']['heure_suppression_solo'] = true;
+    }
+
+    if ($control_ok == true)
+      $reponse = $bdd->exec('DELETE FROM food_advisor_users WHERE id_restaurant = 0 AND date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
+  }
+
   // METIER : Récupère les choix de l'utilisateur
   // RETOUR : Liste des choix du jour (utilisateur)
   function getMyChoices($user)
@@ -430,7 +576,7 @@
     global $bdd;
 
     // Récupération des choix
-    $reponse1 = $bdd->query('SELECT * FROM food_advisor_users WHERE identifiant = "' . $user . '" AND date = "' . date("Ymd") . '" ORDER BY id ASC');
+    $reponse1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant != 0 AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '" ORDER BY id ASC');
     while ($donnees1 = $reponse1->fetch())
     {
       $myChoice = Choix::withData($donnees1);
@@ -451,6 +597,25 @@
     $reponse1->closeCursor();
 
     return $listChoices;
+  }
+
+  // METIER : Détermine si l'utilisateur fait bande à part
+  // RETOUR : Booléen
+  function getSolo($user)
+  {
+    global $bdd;
+
+    $solo = false;
+
+    $reponse = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = 0 AND date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
+    $donnees = $reponse->fetch();
+
+    if ($reponse->rowCount() > 0)
+      $solo = true;
+
+    $reponse->closeCursor();
+
+    return $solo;
   }
 
   // METIER : Récupère les choix de la semaine
@@ -518,7 +683,7 @@
 
   // METIER : Insère un ou plusieurs choix utilisateur
   // RETOUR : Aucun
-  function insertChoices($post, $user)
+  function insertChoices($post, $isSolo, $user)
   {
     global $bdd;
 
@@ -545,6 +710,16 @@
       {
         $control_ok                         = false;
         $_SESSION['alerts']['heure_saisie'] = true;
+      }
+    }
+
+    // Contrôle bande à part
+    if ($control_ok == true)
+    {
+      if ($isSolo == true)
+      {
+        $control_ok                        = false;
+        $_SESSION['alerts']['solo_saisie'] = true;
       }
     }
 
@@ -805,7 +980,7 @@
     if ($existant == true)
     {
       // Nombre de choix restants
-      $req2 = $bdd->query('SELECT COUNT(id) AS nb_choix_restants FROM food_advisor_users WHERE date = "' . date("Ymd") . '"');
+      $req2 = $bdd->query('SELECT COUNT(id) AS nb_choix_restants FROM food_advisor_users WHERE id_restaurant != 0 AND date = "' . date("Ymd") . '"');
       $data2 = $req2->fetch();
       $nb_choix_restants = $data2['nb_choix_restants'];
       $req2->closeCursor();

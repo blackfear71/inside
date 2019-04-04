@@ -23,24 +23,40 @@
 
       // Propositions, choix et semaine
       $propositions = getPropositions();
+      $solos        = getSolos();
       $mesChoix     = getMyChoices($_SESSION['user']['identifiant']);
+      $isSolo       = getSolo($_SESSION['user']['identifiant']);
       $choixSemaine = getWeekChoices();
+      $actions      = getActions($propositions, $mesChoix, $isSolo, $_SESSION['user']['identifiant']);
       break;
 
     case 'doDeterminer':
       $propositions = getPropositions();
       $idRestaurant = getRestaurantDetermined($propositions);
+      $isSolo       = getSolo($_SESSION['user']['identifiant']);
 
       if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
-      AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true))
+      AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
+      AND  $isSolo != true)
       {
         $appelant = getCallers($idRestaurant);
         setDetermination($propositions, $idRestaurant, $appelant);
       }
       break;
 
+    case 'doSolo':
+      $mesChoix = getMyChoices($_SESSION['user']['identifiant']);
+      $isSolo   = getSolo($_SESSION['user']['identifiant']);
+      setSolo($mesChoix, $isSolo, $_SESSION['user']['identifiant']);
+      break;
+
+    case 'doSupprimerSolo':
+      deleteSolo($_SESSION['user']['identifiant']);
+      break;
+
     case 'doAjouter':
-      insertChoices($_POST, $_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      insertChoices($_POST, $isSolo, $_SESSION['user']['identifiant']);
       break;
 
     case "doModifier":
@@ -123,6 +139,15 @@
 
       unset($proposition);
 
+      foreach ($solos as &$solo)
+      {
+        $solo->setIdentifiant(htmlspecialchars($solo->getIdentifiant()));
+        $solo->setPseudo(htmlspecialchars($solo->getPseudo()));
+        $solo->setAvatar(htmlspecialchars($solo->getAvatar()));
+      }
+
+      unset($solo);
+
       foreach ($mesChoix as &$monChoix)
       {
         $monChoix->setId_restaurant(htmlspecialchars($monChoix->getId_restaurant()));
@@ -161,6 +186,8 @@
       break;
 
     case 'doDeterminer':
+    case 'doSolo':
+    case 'doSupprimerSolo':
     case 'doAjouter':
     case "doModifier":
     case 'doSupprimer':
@@ -172,6 +199,8 @@
   switch ($_GET['action'])
   {
     case 'doDeterminer':
+    case 'doSolo':
+    case 'doSupprimerSolo':
     case 'doAjouter':
     case "doModifier":
     case 'doSupprimer':
