@@ -8,7 +8,7 @@ $(window).load(function()
   $('.menu_portail').masonry({
     // Options
     itemSelector: '.lien_portail',
-    columnWidth: 500,
+    //columnWidth: 500,
     fitWidth: true,
     gutter: 20,
     horizontalOrder: true
@@ -37,7 +37,7 @@ $(window).resize(function()
 // Adaptations du portail sur mobiles
 function adaptPortail()
 {
-  if ($(window).width() < 1000)
+  if ($(window).width() < 1080)
   {
     $('.zone_portail_left').css('display', 'block');
     $('.zone_portail_left').css('width', '100%');
