@@ -169,12 +169,13 @@ $(function()
 {
   $("body").click(function()
   {
-    $(document.getElementsByName("form_vote_user")).hide();
-    $(document.getElementsByName("vote_user")).show();
+    $(".zone_smileys").hide();
+    $(".link_current_vote").show();
   });
-  $(document.getElementsByName("vote_user")).click(function(event)
+
+  $(".link_current_vote").click(function(event)
   {
-    $(document.getElementById("modifier_vote")).show();
+    $("#modifier_vote").show();
     event.stopPropagation();
   });
 })
