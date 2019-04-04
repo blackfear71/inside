@@ -63,6 +63,7 @@
               echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
                 // Gestion smiley par défaut
                 $no_vote = true;
+
                 foreach ($listeVotesUsers as $vote)
                 {
                   if ($vote->getId_collector() == $collector->getId() AND !empty($vote->getVote()))
@@ -70,7 +71,7 @@
                 }
 
                 if ($no_vote == true)
-                  echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 30px; width: 30px; height: 30px;" />';
+                  echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 35px; width: 35px; height: 35px;" />';
                 else
                   echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
 
@@ -82,7 +83,7 @@
                   {
                     if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
                     {
-                      echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" style="background-size: 30px; width: 30px; height: 30px;" />';
+                      echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" style="background-size: 35px; width: 35px; height: 35px;" />';
                       $founded = true;
                     }
                   }
