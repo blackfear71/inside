@@ -39,9 +39,20 @@
 	margin-right: 5px;
 }
 
-.bouton_determination
+.zone_actions
 {
 	float: right;
+}
+
+.form_action
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -4px;
+}
+
+.bouton_determination
+{
 	border: 0;
 	background-color: #d3d3d3;
 	margin-top: -25px;
@@ -65,7 +76,7 @@
 
 .image_refresh
 {
-	float: right;
+	vertical-align: middle;
 	width: 30px;
 	padding: 5px;
 	transform: rotate(0deg);

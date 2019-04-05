@@ -5,23 +5,25 @@
   echo '<div class="titre_section">';
     echo 'Les propositions du jour';
 
-    echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
+    echo '<div class="zone_actions">';
+      // Faire bande à part
+      if ($actions["solo"] == true)
+      {
+        echo '<form method="post" action="foodadvisor.php?action=doSolo" class="form_action">';
+          echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_determination" />';
+        echo '</form>';
+      }
 
-    // Lancer la détermination
-    if ($actions["determiner"] == true)
-    {
-      echo '<form method="post" action="foodadvisor.php?action=doDeterminer">';
-        echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
-      echo '</form>';
-    }
+      // Lancer la détermination
+      if ($actions["determiner"] == true)
+      {
+        echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="form_action">';
+          echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
+        echo '</form>';
+      }
 
-    // Faire bande à part
-    if ($actions["solo"] == true)
-    {
-      echo '<form method="post" action="foodadvisor.php?action=doSolo">';
-        echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_determination" />';
-      echo '</form>';
-    }
+      echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
+    echo '</div>';
   echo '</div>';
 
   if (!empty($propositions) OR !empty($solos))
