@@ -48,7 +48,7 @@
           echo '<div class="zone_liens_saisie">';
             // Saisie utilisateur
             echo '<a onclick="afficherMasquerSaisieChoix(\'zone_saisie_choix\', \'zone_marge_choix\');" title="Proposer où manger" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" style="border-radius: 50%;" /></div>';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Proposer où manger</div>';
             echo '</a>';
 
