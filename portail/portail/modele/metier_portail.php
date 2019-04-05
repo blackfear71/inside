@@ -60,7 +60,7 @@
     }
 
     // Vote repas
-    if (date("H") < 13)
+    if (date("H") < 13 AND date("N") <= 5)
     {
       $myNews = new News();
 

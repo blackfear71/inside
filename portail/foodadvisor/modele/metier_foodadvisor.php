@@ -117,7 +117,7 @@
                      "choix"      => true
                     );
 
-    // Contrôle heure
+    /*// Contrôle heure
     if (date("H") > 13)
     {
       $actions["determiner"] = false;
@@ -144,7 +144,7 @@
     {
       if ($isSolo == true)
         $actions["solo"] = false;
-    }
+    }*/
 
     return $actions;
   }
@@ -307,21 +307,15 @@
     return $solos;
   }
 
-  // METIER : Récupère un des restaurants pouvant être déterminé ce jour
+  // METIER : Contrôle la date et récupère un des restaurants pouvant être déterminé ce jour
   // RETOUR : Id restaurant déterminé
   function getRestaurantDetermined($propositions)
   {
     $control_ok    = true;
     $id_restaurant = NULL;
 
-    // Calcul des dates de la semaine
-    $nb_jours_lundi    = 1 - date("N");
-    $nb_jours_vendredi = 5 - date("N");
-    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
-    $friday            = date("Ymd", strtotime('+' . $nb_jours_vendredi . ' days'));
-
     // Contrôle date de détermination
-    if (date("Ymd") < $monday OR date("Ymd") > $friday)
+    if (date("N") > 5)
     {
       $control_ok                                   = false;
       $_SESSION['alerts']['week_end_determination'] = true;
@@ -690,14 +684,8 @@
     $max_choices = 5;
     $control_ok  = true;
 
-    // Calcul des dates de la semaine
-    $nb_jours_lundi    = 1 - date("N");
-    $nb_jours_vendredi = 5 - date("N");
-    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
-    $friday            = date("Ymd", strtotime('+' . $nb_jours_vendredi . ' days'));
-
     // Contrôle saisie possible en fonction des dates
-    if (date("Ymd") < $monday OR date("Ymd") > $friday)
+    if (date("N") > 5)
     {
       $control_ok                            = false;
       $_SESSION['alerts']['week_end_saisie'] = true;
@@ -990,9 +978,11 @@
       {
         $propositions = getPropositions();
         $idRestaurant = getRestaurantDetermined($propositions);
+        $isSolo       = getSolo($_SESSION['user']['identifiant']);
 
         if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
-        AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true))
+        AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
+        AND  $isSolo != true)
         {
           $appelant = getCallers($idRestaurant);
           setDetermination($propositions, $idRestaurant, $appelant);
