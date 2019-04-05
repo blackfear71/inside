@@ -44,23 +44,33 @@
               {
                 echo '<div class="trait_timeline"></div>';
 
-                if ($messageNews == end($news))
-                  echo '<a href="' . $messageNews->getLink() . '" class="zone_news" style="margin-bottom: -2px;">';
+                if (empty($messageNews->getLink()))
+                  echo '<div class="zone_news">';
                 else
-                  echo '<a href="' . $messageNews->getLink() . '" class="zone_news">';
-                    echo '<img src="/inside/includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
+                {
+                  if ($messageNews == end($news))
+                    echo '<a href="' . $messageNews->getLink() . '" class="zone_news" style="margin-bottom: -2px;">';
+                  else
+                    echo '<a href="' . $messageNews->getLink() . '" class="zone_news">';
+                }
 
-                    echo '<div class="zone_contenu_news">';
-                      echo '<div class="titre_news">' . $messageNews->getTitle() . '</div>';
-                      echo '<div class="contenu_news">' . $messageNews->getContent() . '</div>';
-                    echo '</div>';
+                echo '<img src="/inside/includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
 
-                    if (!empty($messageNews->getDetails()))
-                    {
-                      echo '<div class="zone_details_news">';
-                        echo $messageNews->getDetails();
-                      echo '</div>';
-                    }
+                echo '<div class="zone_contenu_news">';
+                  echo '<div class="titre_news">' . $messageNews->getTitle() . '</div>';
+                  echo '<div class="contenu_news">' . $messageNews->getContent() . '</div>';
+                echo '</div>';
+
+                if (!empty($messageNews->getDetails()))
+                {
+                  echo '<div class="zone_details_news">';
+                    echo $messageNews->getDetails();
+                  echo '</div>';
+                }
+
+                if (empty($messageNews->getLink()))
+                  echo '</div>';
+                else
                   echo '</a>';
               }
             echo '</div>';

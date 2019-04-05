@@ -40,7 +40,7 @@
       $myNews->setContent("...et toute l'équipe Inside vous souhaite de passer une agréable semaine !");
       $myNews->setDetails("Maintenant au boulot.");
       $myNews->setLogo("inside");
-      $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
+      $myNews->setLink("");
 
       array_push($tabNews, $myNews);
     }
@@ -54,7 +54,7 @@
       $myNews->setContent("Bon week-end à tous et à la semaine prochaine.");
       $myNews->setDetails("");
       $myNews->setLogo("inside");
-      $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
+      $myNews->setLink("");
 
       array_push($tabNews, $myNews);
     }
