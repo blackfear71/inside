@@ -10,18 +10,19 @@ $(window).load(function()
     $('#zone_solo').css('min-height', $('#zone_first').height());
 
   // Taille des zones de résumé en fonction de la plus grande
-  var height_jour    = $('.jour_semaine').height() + 10;
-  var height_text    = $('.no_proposal').height();
-  var height_max     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
-  var calcul_padding = (height_max - (height_jour + height_text + 10)) / 2;
+  var day_height     = $('.jour_semaine').height() + 10;
+  var text_height    = $('.no_proposal').height();
+  var max_height     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
+  var calcul_padding = (max_height - (day_height + text_height + 10)) / 2;
 
   $('.no_proposal').css('padding-top', calcul_padding);
   $('.no_proposal').css('padding-bottom', calcul_padding);
+  $('.zone_proposition_resume').css('min-height', max_height);
 
   // On lance Masonry et le scroll après avoir chargé les images
   $('.zone_propositions').masonry({
     // Options
-    itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top',
+    itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
     columnWidth: 200,
     fitWidth: true,
     gutter: 30,
@@ -67,7 +68,7 @@ function initMasonry()
   // On lance Masonry
   $('.zone_propositions').masonry({
     // Options
-    itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top',
+    itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
     columnWidth: 200,
     fitWidth: true,
     gutter: 30,

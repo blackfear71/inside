@@ -1265,6 +1265,20 @@
 }
 
 /*** Affichage résumé semaine ***/
+.zone_proposition_resume
+{
+	width: 180px;
+	vertical-align: top;
+	margin-bottom: 20px;
+	background-color: #e3e3e3;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	overflow: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+}
+
 .jour_semaine
 {
 	font-family: robotolight, Verdana, sans-serif;
