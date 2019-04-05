@@ -76,7 +76,7 @@
     }
 
     if (strlen($data2['collector']) > 90)
-      $myNews->setContent(nl2br(substr($data2['collector'], 0, 90) . "..."));
+      $myNews->setContent(nl2br(substr(unformatCollector($data2['collector']), 0, 90) . "..."));
     else
       $myNews->setContent(nl2br($data2['collector']));
 

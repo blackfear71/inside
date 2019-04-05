@@ -543,6 +543,19 @@
     return $formatted;
   }
 
+  // Dé-formatage phrases cultes
+  // Retour : phrase dé-formatée
+  function unformatCollector($collector)
+  {
+    $unformatted = "";
+
+    $search    = array("[", "]");
+    $replace   = array("", "");
+    $unformatted = str_replace($search, $replace, $collector);
+
+    return $unformatted;
+  }
+
   // Formatage contexte phrases cultes
   // Retour : phrase formatée
   function formatContext($context)
