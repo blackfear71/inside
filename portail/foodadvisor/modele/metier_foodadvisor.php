@@ -117,8 +117,8 @@
                      "choix"      => true
                     );
 
-    /*// Contrôle heure
-    if (date("H") > 13)
+    // Contrôle date et heure
+    if (date("N") > 5 OR date("H") > 13)
     {
       $actions["determiner"] = false;
       $actions["solo"]       = false;
@@ -144,7 +144,7 @@
     {
       if ($isSolo == true)
         $actions["solo"] = false;
-    }*/
+    }
 
     return $actions;
   }
@@ -491,6 +491,16 @@
     if ($isSolo == true)
       $control_ok = false;
 
+    // Contrôle saisie possible en fonction des dates
+    if ($control_ok == true)
+    {
+      if (date("N") > 5)
+      {
+        $control_ok                            = false;
+        $_SESSION['alerts']['week_end_saisie'] = true;
+      }
+    }
+
     // Contrôle heure
     if ($control_ok == true)
     {
@@ -550,11 +560,21 @@
 
     $control_ok  = true;
 
-    // Contrôle heure
-    if (date("H") > 13)
+    // Contrôle date
+    if (date("N") > 5)
     {
-      $control_ok                                   = false;
-      $_SESSION['alerts']['heure_suppression_solo'] = true;
+      $control_ok                                 = false;
+      $_SESSION['alerts']['week_end_delete_solo'] = true;
+    }
+
+    // Contrôle heure
+    if ($control_ok == true)
+    {
+      if (date("H") > 13)
+      {
+        $control_ok                              = false;
+        $_SESSION['alerts']['heure_delete_solo'] = true;
+      }
     }
 
     if ($control_ok == true)
