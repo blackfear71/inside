@@ -9,7 +9,7 @@
     {
       if (!empty($choixJour))
       {
-        echo '<div class="zone_proposition_top">';
+        echo '<div class="zone_proposition_top" id="zone_resume_' . $jour . '">';
           // Jour
           echo '<div class="jour_semaine">' . $jour . '</div>';
 
@@ -48,7 +48,7 @@
       }
       else
       {
-        echo '<div class="zone_proposition_top">';
+        echo '<div class="zone_proposition_top" id="zone_resume_' . $jour . '">';
           // Jour
           echo '<div class="jour_semaine">' . $jour . '</div>';
 

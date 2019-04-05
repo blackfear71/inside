@@ -5,6 +5,19 @@ $(window).load(function()
   $('.zone_propositions_determination').css('display', 'block');
   $('.zone_restaurants').css('display', 'block');
 
+  // Taille de la zone bande à part à part en fonction de la zone suivante si elle existe
+  if ($('#zone_first').length)
+    $('#zone_solo').css('min-height', $('#zone_first').height());
+
+  // Taille des zones de résumé en fonction de la plus grande
+  var height_jour    = $('.jour_semaine').height() + 10;
+  var height_text    = $('.no_proposal').height();
+  var height_max     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
+  var calcul_padding = (height_max - (height_jour + height_text + 10)) / 2;
+
+  $('.no_proposal').css('padding-top', calcul_padding);
+  $('.no_proposal').css('padding-bottom', calcul_padding);
+
   // On lance Masonry et le scroll après avoir chargé les images
   $('.zone_propositions').masonry({
     // Options

@@ -30,7 +30,7 @@
       // Bande à part
       if (!empty($solos))
       {
-        echo '<div class="zone_proposition_top">';
+        echo '<div class="zone_proposition_top" id="zone_solo">';
           echo '<div class="titre_solo">Bande à part</div>';
 
           foreach ($solos as $solo)
@@ -55,9 +55,19 @@
         if ($proposition->getClassement() == 1)
         {
           if ($proposition->getDetermined() == "Y")
-            echo '<div class="zone_proposition_determined">';
+          {
+            if ($proposition == $propositions[0])
+              echo '<div class="zone_proposition_determined" id="zone_first">';
+            else
+              echo '<div class="zone_proposition_determined">';
+          }
           else
-            echo '<div class="zone_proposition_top">';
+          {
+            if ($proposition == $propositions[0])
+              echo '<div class="zone_proposition_top" id="zone_first">';
+            else
+              echo '<div class="zone_proposition_top">';
+          }
             // Lien détails
             if ($proposition->getDetermined() == "Y")
               echo '<a onclick="afficherMasquer(\'zone_details_determined_' . $proposition->getId_restaurant() . '\');" class="lien_details_determined" title="Plus de détails"><span class="lien_plus">+</span></a>';
