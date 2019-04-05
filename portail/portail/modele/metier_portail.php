@@ -31,6 +31,34 @@
 
     global $bdd;
 
+    // Message début semaine
+    if (date("N") == 1 AND date("H") <= 12)
+    {
+      $myNews = new News();
+
+      $myNews->setTitle("Une nouvelle ère commence...");
+      $myNews->setContent("...et toute l'équipe Inside vous souhaite de passer une agréable semaine !");
+      $myNews->setDetails("Maintenant au boulot.");
+      $myNews->setLogo("inside");
+      $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
+
+      array_push($tabNews, $myNews);
+    }
+
+    // Message fin de semaine
+    if (date("N") == 5 AND date("H") >= 14)
+    {
+      $myNews = new News();
+
+      $myNews->setTitle("C'est bientôt la fin, courage !");
+      $myNews->setContent("Bon week-end à tous et à la semaine prochaine.");
+      $myNews->setDetails("");
+      $myNews->setLogo("inside");
+      $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
+
+      array_push($tabNews, $myNews);
+    }
+
     // Vote repas
     if (date("H") < 13)
     {
