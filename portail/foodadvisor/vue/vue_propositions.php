@@ -54,7 +54,7 @@
       // Propositions
       foreach ($propositions as $proposition)
       {
-        if ($proposition->getClassement() == 1)
+        if ($proposition->getClassement() == 1 OR $proposition->getDetermined() == "Y")
         {
           if ($proposition->getDetermined() == "Y")
           {
@@ -168,6 +168,31 @@
               else
                 echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
             }
+
+            // Bouton réservation / annulation
+            if ($actions["reserver"] == true)
+            {
+              echo '<div class="zone_reservation">';
+                echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
+                  echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                echo '</form>';
+              echo '</div>';
+            }
+
+            if ($proposition->getDetermined() == "Y" AND (!empty($isReserved) OR $actions["annuler_reserver"] == true))
+            {
+              echo '<div class="zone_reservation">';
+                if (!empty($isReserved))
+                  echo '<div class="reserved">Réservé !</div>';
+
+                if ($actions["annuler_reserver"] == true)
+                {
+                  echo '<form method="post" action="foodadvisor.php?delete_id=' . $proposition->getId_restaurant() . '&action=doAnnulerReserver">';
+                    echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;"/>';
+                  echo '</form>';
+                }
+              echo '</div>';
+            }
           echo '</div>';
         }
         else
@@ -212,6 +237,16 @@
               echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
             else
               echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
+
+            // Bouton réservation
+            if ($actions["reserver"] == true)
+            {
+              echo '<div class="zone_reservation">';
+                echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
+                  echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                echo '</form>';
+              echo '</div>';
+            }
           echo '</div>';
         }
       }

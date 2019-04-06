@@ -110,19 +110,23 @@
 
   // METIER : Détermine la présence des boutons d'action
   // RETOUR : Booléen
-  function getActions($propositions, $myChoices, $isSolo, $user)
+  function getActions($propositions, $myChoices, $isSolo, $isReserved, $user)
   {
-    $actions = array("determiner" => true,
-                     "solo"       => true,
-                     "choix"      => true
+    $actions = array("determiner"       => true,
+                     "solo"             => true,
+                     "choix"            => true,
+                     "reserver"         => true,
+                     "annuler_reserver" => false
                     );
 
     // Contrôle date et heure
-    if (date("N") > 5 OR date("H") > 13)
+    if (date("N") > 5 OR date("H") >= 13)
     {
-      $actions["determiner"] = false;
-      $actions["solo"]       = false;
-      $actions["choix"]      = false;
+      $actions["determiner"]       = false;
+      $actions["solo"]             = false;
+      $actions["choix"]            = false;
+      $actions["reserver"]         = false;
+      $actions["annuler_reserver"] = false;
     }
 
     // Contrôle propositions présentes (pour bouton détermination)
@@ -144,6 +148,23 @@
     {
       if ($isSolo == true)
         $actions["solo"] = false;
+    }
+
+    // Contrôle réservation effectuée
+    if ($actions["reserver"] == true)
+    {
+      if (!empty($isReserved))
+      {
+        $actions["reserver"]   = false;
+        $actions["determiner"] = false;
+      }
+    }
+
+    // Contrôle réserveur pour annulation
+    if ($actions["reserver"] == false)
+    {
+      if ($isReserved == $user)
+        $actions["annuler_reserver"] = true;
     }
 
     return $actions;
@@ -307,6 +328,25 @@
     return $solos;
   }
 
+  // METIER : Vérification si réservé et retour identifiant
+  // RETOUR : Identifiant réservation
+  function getReserved($user)
+  {
+    $caller = "";
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND reserved = "Y"');
+    $donnees = $reponse->fetch();
+
+    if ($reponse->rowCount() > 0)
+      $caller = $donnees['caller'];
+
+    $reponse->closeCursor();
+
+    return $caller;
+  }
+
   // METIER : Contrôle la date et récupère un des restaurants pouvant être déterminé ce jour
   // RETOUR : Id restaurant déterminé
   function getRestaurantDetermined($propositions)
@@ -459,16 +499,19 @@
       {
         $choice = array('id_restaurant' => $id_restaurant,
                         'date'          => date("Ymd"),
-                        'caller'        => $caller
+                        'caller'        => $caller,
+                        'reserved'      => "N"
                        );
 
         $req2 = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
                                                                 date,
-                                                                caller
+                                                                caller,
+                                                                reserved
                                                                )
                                                         VALUES(:id_restaurant,
                                                                :date,
-                                                               :caller
+                                                               :caller,
+                                                               :reserved
                                                               )');
         $req2->execute($choice);
         $req2->closeCursor();
@@ -504,7 +547,7 @@
     // Contrôle heure
     if ($control_ok == true)
     {
-      if (date("H") > 13)
+      if (date("H") >= 13)
       {
         $control_ok                       = false;
         $_SESSION['alerts']['heure_solo'] = true;
@@ -564,13 +607,13 @@
     if (date("N") > 5)
     {
       $control_ok                                 = false;
-      $_SESSION['alerts']['week_end_delete_solo'] = true;
+      $_SESSION['alerts']['week_end_delete'] = true;
     }
 
     // Contrôle heure
     if ($control_ok == true)
     {
-      if (date("H") > 13)
+      if (date("H") >= 13)
       {
         $control_ok                              = false;
         $_SESSION['alerts']['heure_delete_solo'] = true;
@@ -579,6 +622,139 @@
 
     if ($control_ok == true)
       $reponse = $bdd->exec('DELETE FROM food_advisor_users WHERE id_restaurant = 0 AND date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
+  }
+
+  // METIER : Insère ou met à jour une réservation
+  // RETOUR : Aucun
+  function insertReservation($id_restaurant, $caller)
+  {
+    global $bdd;
+
+    $control_ok  = true;
+
+    // Contrôle date
+    if (date("N") > 5)
+    {
+      $control_ok                                 = false;
+      $_SESSION['alerts']['week_end_reservation'] = true;
+    }
+
+    // Contrôle heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                              = false;
+        $_SESSION['alerts']['heure_reservation'] = true;
+      }
+    }
+
+    // Contrôle si choix déjà existant
+    if ($control_ok == true)
+    {
+      $existant = false;
+      $reserved = false;
+
+      $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '"');
+      $data1 = $req1->fetch();
+
+      if ($req1->rowCount() > 0)
+      {
+        $existant   = true;
+        $old_caller = $data1['caller'];
+        $id         = $data1['id'];
+
+        if ($data1['reserved'] == "Y")
+          $reserved = true;
+      }
+
+      $req1->closeCursor();
+
+      // Mise à jour ou insertion si pas déjà réservé
+      if ($reserved == false)
+      {
+        if ($existant == true)
+        {
+          $choice = array('id_restaurant' => $id_restaurant,
+                          'caller'        => $caller,
+                          'reserved'      => "Y"
+                         );
+
+          $req2 = $bdd->prepare('UPDATE food_advisor_choices SET id_restaurant = :id_restaurant,
+                                                                 caller        = :caller,
+                                                                 reserved      = :reserved
+                                                           WHERE id = ' . $id);
+          $req2->execute($choice);
+          $req2->closeCursor();
+
+          // Génération succès (pour l'appelant si modifié)
+          insertOrUpdateSuccesValue('star-chief', $old_caller, -1);
+        }
+        else
+        {
+          $choice = array('id_restaurant' => $id_restaurant,
+                          'date'          => date("Ymd"),
+                          'caller'        => $caller,
+                          'reserved'      => "Y"
+                         );
+
+          $req2 = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
+                                                                  date,
+                                                                  caller,
+                                                                  reserved
+                                                                 )
+                                                          VALUES(:id_restaurant,
+                                                                 :date,
+                                                                 :caller,
+                                                                 :reserved
+                                                                )');
+          $req2->execute($choice);
+          $req2->closeCursor();
+        }
+
+        // Génération succès (pour le nouvel appelant)
+        insertOrUpdateSuccesValue('star-chief', $caller, 1);
+      }
+      else
+        $_SESSION['alerts']['already_reserved'] = true;
+    }
+  }
+
+  // METIER : Supprime une réservation
+  // RETOUR : Aucun
+  function deleteReservation($id_restaurant, $user)
+  {
+    global $bdd;
+
+    $control_ok  = true;
+
+    // Contrôle date
+    if (date("N") > 5)
+    {
+      $control_ok                                 = false;
+      $_SESSION['alerts']['week_end_reservation'] = true;
+    }
+
+    // Contrôle heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                                          = false;
+        $_SESSION['alerts']['heure_suppression_reservation'] = true;
+      }
+    }
+
+    // Annulation réservation
+    if ($control_ok == true)
+    {
+      $choice = array('reserved' => "N");
+
+      $reponse = $bdd->prepare('UPDATE food_advisor_choices SET reserved = :reserved
+                                                          WHERE id_restaurant = ' . $id_restaurant . ' AND date = "' . date("Ymd") . '" AND caller = "' . $user . '"');
+      $reponse->execute($choice);
+      $reponse->closeCursor();
+    }
   }
 
   // METIER : Récupère les choix de l'utilisateur
@@ -762,7 +938,7 @@
         if (isset($post['select_lieu'][$i]) AND !empty($post['select_lieu'][$i]) AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
         {
           $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = "' . $post['select_restaurant'][$i] . '" AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
-          $donnees = $req1->fetch();
+          $data1 = $req1->fetch();
 
           if ($req1->rowCount() > 0)
           {
@@ -867,11 +1043,21 @@
 
     $control_ok = true;
 
-    // Contrôle saisie possible en fonction de l'heure
-    if (date("H") >= 13)
+    // Contrôle saisie possible en fonction des dates
+    if (date("N") > 5)
     {
-      $control_ok                         = false;
-      $_SESSION['alerts']['heure_saisie'] = true;
+      $control_ok                            = false;
+      $_SESSION['alerts']['week_end_saisie'] = true;
+    }
+
+    // Contrôle saisie possible en fonction de l'heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                         = false;
+        $_SESSION['alerts']['heure_saisie'] = true;
+      }
     }
 
     // Récupération des données et insertion en base
@@ -934,19 +1120,44 @@
 
     global $bdd;
 
-    // Contrôle saisie possible en fonction de l'heure
-    if (date("H") >= 13)
+    // Contrôle suppression possible en fonction des dates
+    if (date("N") > 5)
     {
-      $control_ok                              = false;
-      $_SESSION['alerts']['heure_suppression'] = true;
+      $control_ok                            = false;
+      $_SESSION['alerts']['week_end_delete'] = true;
     }
 
-    // Suppression de la base
+    // Contrôle suppression possible en fonction de l'heure
     if ($control_ok == true)
-      $req = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id);
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                              = false;
+        $_SESSION['alerts']['heure_suppression'] = true;
+      }
+    }
+
+    // On vérifie que l'on n'était pas l'appelant quand on supprime le choix
+    if ($control_ok == true)
+    {
+      // Recherche Id restaurant correspondant au choix
+      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id = ' . $id);
+      $data1 = $req1->fetch();
+      $id_restaurant = $data1['id_restaurant'];
+      $identifiant   = $data1['identifiant'];
+      $req1->closeCursor();
+
+      // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
+      $req2 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant . ' AND date = "' . date("Ymd") . '" AND caller = "' . $identifiant . '"');
+    }
+
+    // Suppression choix de la base
+    if ($control_ok == true)
+      $req3 = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id);
 
     // Relance de la détermination si besoin
-    relanceDetermination();
+    if ($control_ok == true)
+      relanceDetermination();
   }
 
   // METIER : Tri des propositions
@@ -985,6 +1196,8 @@
 
     $req1->closeCursor();
 
+    var_dump($existant);
+
     if ($existant == true)
     {
       // Nombre de choix restants
@@ -993,16 +1206,17 @@
       $nb_choix_restants = $data2['nb_choix_restants'];
       $req2->closeCursor();
 
-      // Relance de la détermination
+      // Relance de la détermination si possible
       if ($nb_choix_restants > 0)
       {
         $propositions = getPropositions();
         $idRestaurant = getRestaurantDetermined($propositions);
         $isSolo       = getSolo($_SESSION['user']['identifiant']);
+        $isReserved   = getReserved($_SESSION['user']['identifiant']);
 
         if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
         AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
-        AND  $isSolo != true)
+        AND  $isSolo != true AND empty($isReserved))
         {
           $appelant = getCallers($idRestaurant);
           setDetermination($propositions, $idRestaurant, $appelant);

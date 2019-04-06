@@ -520,6 +520,12 @@
 	line-height: 15px;
 }
 
+.zone_types_details
+{
+	border-top: solid 1px #c3c3c3;
+	padding-top: 10px;
+}
+
 .zone_caller_details
 {
 	font-family: robotolight, Verdana, sans-serif;
@@ -566,6 +572,7 @@
 {
 	border-top: solid 1px #c3c3c3;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 .icone_lien_details
@@ -574,6 +581,7 @@
 	width: 40px;
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-bottom: -4px;
 }
 
 .zone_details_proposition_right
@@ -918,6 +926,59 @@
 	margin-left: 10px;
 	margin-right: -10px;
 	background-color: #262626;
+}
+
+.zone_reservation
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top: solid 1px #c3c3c3;
+}
+
+.reserved
+{
+	text-align: center;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: white;
+}
+
+.reserved_details
+{
+	text-align: center;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+}
+
+.bouton_reserver
+{
+	background-color: white;
+	text-align: center;
+	line-height: 32px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	cursor: pointer;
+	border: 0;
+}
+
+.bouton_reserver:hover, .bouton_reserver_details:hover
+{
+	color: white;
+	background-color: #c81932;
+}
+
+.bouton_reserver_details
+{
+	background-color: #d3d3d3;
+	text-align: center;
+	line-height: 32px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	cursor: pointer;
+	border: 0;
 }
 
 /*** Affichage Mes choix ***/

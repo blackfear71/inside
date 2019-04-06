@@ -26,18 +26,20 @@
       $solos        = getSolos();
       $mesChoix     = getMyChoices($_SESSION['user']['identifiant']);
       $isSolo       = getSolo($_SESSION['user']['identifiant']);
+      $isReserved   = getReserved($_SESSION['user']['identifiant']);
       $choixSemaine = getWeekChoices();
-      $actions      = getActions($propositions, $mesChoix, $isSolo, $_SESSION['user']['identifiant']);
+      $actions      = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
       break;
 
     case 'doDeterminer':
       $propositions = getPropositions();
       $idRestaurant = getRestaurantDetermined($propositions);
       $isSolo       = getSolo($_SESSION['user']['identifiant']);
+      $isReserved   = getReserved($_SESSION['user']['identifiant']);
 
       if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
       AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
-      AND  $isSolo != true)
+      AND  $isSolo != true AND empty($isReserved))
       {
         $appelant = getCallers($idRestaurant);
         setDetermination($propositions, $idRestaurant, $appelant);
@@ -54,6 +56,14 @@
       deleteSolo($_SESSION['user']['identifiant']);
       break;
 
+    case "doReserver":
+      insertReservation($_GET['id'], $_SESSION['user']['identifiant']);
+      break;
+
+    case 'doAnnulerReserver':
+      deleteReservation($_GET['delete_id'], $_SESSION['user']['identifiant']);
+      break;
+
     case 'doAjouter':
       $isSolo = getSolo($_SESSION['user']['identifiant']);
       insertChoices($_POST, $isSolo, $_SESSION['user']['identifiant']);
@@ -64,7 +74,7 @@
       break;
 
     case 'doSupprimer':
-      deleteChoice($_GET['delete_id']);
+      deleteChoice($_GET['delete_id'], $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -188,6 +198,8 @@
     case 'doDeterminer':
     case 'doSolo':
     case 'doSupprimerSolo':
+    case "doReserver":
+    case 'doAnnulerReserver':
     case 'doAjouter':
     case "doModifier":
     case 'doSupprimer':
@@ -201,6 +213,8 @@
     case 'doDeterminer':
     case 'doSolo':
     case 'doSupprimerSolo':
+    case "doReserver":
+    case 'doAnnulerReserver':
     case 'doAjouter':
     case "doModifier":
     case 'doSupprimer':
