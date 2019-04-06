@@ -7,6 +7,7 @@
   controlsUser();
 
   // Modèle de données : "module métier"
+  include_once('modele/metier_commun.php');
   include_once('modele/metier_foodadvisor.php');
 
   // Appel métier

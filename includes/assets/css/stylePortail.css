@@ -54,7 +54,7 @@
 	width: calc(100% - 70px);
 	padding: 5px 10px 10px 10px;
 	vertical-align: top;
-	background-color: #d3d3d3;
+	background-color: #e3e3e3;
 }
 
 .titre_news
@@ -90,7 +90,7 @@
 	margin-left: 50px;
 	width: calc(100% - 70px);
 	padding: 5px 10px 5px 10px;
-	background-color: #b3b3b3;
+	background-color: #d3d3d3;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;

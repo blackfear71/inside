@@ -27,7 +27,8 @@
   }
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_foodadvisor.php');
+  include_once('modele/metier_commun.php');
+  include_once('modele/metier_restaurants.php');
 
   // Appel métier
   switch ($_GET['action'])
