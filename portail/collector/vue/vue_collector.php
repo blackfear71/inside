@@ -49,12 +49,12 @@
           /* Liens de saisie et filtres */
           /******************************/
           echo '<div class="zone_liens_saisie">';
-            echo '<a onclick="afficherMasquerSaisiePhraseCulte();" title="Ajouter une phrase culte" class="lien_saisie_collector">';
+            echo '<a onclick="afficherMasquer(\'zone_add_collector\');" title="Ajouter une phrase culte" class="lien_saisie_collector">';
               echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_saisie_collector" /></div>';
               echo '<div class="zone_texte_add">Ajouter une phrase culte</div>';
             echo '</a>';
 
-            echo '<a onclick="afficherMasquerSaisieImage();" title="Ajouter une image" class="lien_saisie_collector">';
+            echo '<a onclick="afficherMasquer(\'zone_add_image\');" title="Ajouter une image" class="lien_saisie_collector">';
               echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/images.png" alt="images" class="image_saisie_collector" /></div>';
               echo '<div class="zone_texte_add">Ajouter une image</div>';
             echo '</a>';
@@ -126,13 +126,13 @@
           /**********************************/
           /* Zone de saisie de phrase culte */
           /**********************************/
-          echo '<div id="zone_add_collector" style="display: none;" class="fond_saisie_collector">';
+          echo '<div id="zone_add_collector" class="fond_saisie_collector">';
             echo '<div class="zone_saisie_collector">';
               // Titre
               echo '<div class="titre_saisie_collector">Ajouter une phrase culte</div>';
 
               // Bouton fermeture
-              echo '<a onclick="afficherMasquerSaisiePhraseCulte();" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+              echo '<a onclick="afficherMasquer(\'zone_add_collector\');" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
               // Saisie phrase culte
               echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
@@ -205,13 +205,13 @@
           /**************************/
           /* Zone de saisie d'image */
           /**************************/
-          echo '<div id="zone_add_image" style="display: none;" class="fond_saisie_collector">';
+          echo '<div id="zone_add_image" class="fond_saisie_collector">';
             echo '<div class="zone_saisie_collector">';
               // Titre
               echo '<div class="titre_saisie_collector">Ajouter une image</div>';
 
               // Bouton fermeture
-              echo '<a onclick="afficherMasquerSaisieImage();" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+              echo '<a onclick="afficherMasquer(\'zone_add_image\');" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
               // Saisie image
               echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_collector">';

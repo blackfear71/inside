@@ -52,22 +52,22 @@ function initMasonry()
   $('.text_collector').wrapInner();
 }
 
-// Affiche la saisie d'un phrase culte
-function afficherMasquerSaisiePhraseCulte()
+// Affiche ou masque un élément (délai 400ms)
+function afficherMasquer(id)
 {
-  if (document.getElementById('zone_add_collector').style.display == "none")
-    document.getElementById('zone_add_collector').style.display = "block";
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(200);
   else
-    document.getElementById('zone_add_collector').style.display = "none";
+    $('#' + id).fadeOut(200);
 }
 
-// Affiche la saisie d'une image
-function afficherMasquerSaisieImage()
+// Affiche ou masque un élément (délai 0s)
+function afficherMasquerNoDelay(id)
 {
-  if (document.getElementById('zone_add_image').style.display == "none")
-    document.getElementById('zone_add_image').style.display = "block";
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(0);
   else
-    document.getElementById('zone_add_image').style.display = "none";
+    $('#' + id).fadeOut(0);
 }
 
 // Insère une prévisualisation de l'image sur la zone
@@ -106,15 +106,6 @@ var loadFile = function(event, id)
     output.setAttribute('style','transform: rotate(' + degrees + 'deg)');
   });
 };
-
-// Affiche ou masque un élément
-function afficherMasquer(id)
-{
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "block";
-  else
-    document.getElementById(id).style.display = "none";
-}
 
 // Affiche ou masque la zone de saisie "Autre" (insertion)
 function afficherOther(td, select, id, required)
