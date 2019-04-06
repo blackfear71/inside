@@ -3,6 +3,8 @@
   /*** Propositions du jour ***/
   /****************************/
   echo '<div class="titre_section">';
+    echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
+
     echo 'Les propositions du jour';
 
     echo '<div class="zone_actions">';
@@ -115,9 +117,9 @@
 
                 // Nombre de participants
                 if ($proposition->getNb_participants() == 1)
-                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
+                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
                 else
-                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
+                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
               echo '</div>';
 
               echo '<div class="caller">';
@@ -164,9 +166,9 @@
 
               // Nombre de participants
               if ($proposition->getNb_participants() == 1)
-                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
+                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
               else
-                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
+                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
             }
 
             // Bouton réservation / annulation
@@ -179,10 +181,10 @@
               echo '</div>';
             }
 
-            if ($proposition->getDetermined() == "Y" AND (!empty($isReserved) OR $actions["annuler_reserver"] == true))
+            if ($proposition->getDetermined() == "Y" AND ($proposition->getReserved() == "Y" OR $actions["annuler_reserver"] == true))
             {
               echo '<div class="zone_reservation">';
-                if (!empty($isReserved))
+                if ($proposition->getReserved() == "Y")
                   echo '<div class="reserved">Réservé !</div>';
 
                 if ($actions["annuler_reserver"] == true)
@@ -234,9 +236,9 @@
 
             // Nombre de participants
             if ($proposition->getNb_participants() == 1)
-              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
+              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
             else
-              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
+              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
 
             // Bouton réservation
             if ($actions["reserver"] == true)

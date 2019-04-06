@@ -63,9 +63,9 @@
 
                 // Nombre de participants
                 if ($proposition->getNb_participants() == 1)
-                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
+                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
                 else
-                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
+                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
               echo '</div>';
 
               // Type de restaurant
@@ -134,10 +134,10 @@
                 echo '</div>';
               }
 
-              if ($proposition->getDetermined() == "Y" AND (!empty($isReserved) OR $actions["annuler_reserver"] == true))
+              if ($proposition->getDetermined() == "Y" AND ($proposition->getReserved() == "Y" OR $actions["annuler_reserver"] == true))
               {
                 echo '<div class="zone_reservation">';
-                  if (!empty($isReserved))
+                  if ($proposition->getReserved() == "Y")
                     echo '<div class="reserved_details">Réservé !</div>';
 
                   if ($actions["annuler_reserver"] == true)
@@ -152,7 +152,7 @@
 
             // Détails utilisateurs
             echo '<div class="zone_details_proposition_right">';
-              echo '<div class="titre_details" style="margin-top: -10px;">Les participants</div>';
+              echo '<div class="titre_details" style="margin-top: -10px;"><img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />Les participants</div>';
 
               // Bouton fermeture
               echo '<a onclick="afficherMasquer(\'zone_details_determined_' . $proposition->getId_restaurant() . '\');" class="close_details"><img src="../../includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
@@ -209,7 +209,7 @@
                 echo '</div>';
               }
 
-              echo '<div class="titre_details" style="margin-top: 40px;">Les menus proposés</div>';
+              echo '<div class="titre_details" style="margin-top: 40px;"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />Les menus proposés</div>';
 
               // Menus
               echo '<div class="zone_details_user_bottom">';

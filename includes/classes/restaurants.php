@@ -226,6 +226,7 @@
     private $caller;
     private $pseudo;
     private $avatar;
+    private $reserved;
     private $types;
     private $phone;
     private $website;
@@ -248,6 +249,7 @@
       $this->caller          = '';
       $this->pseudo          = '';
       $this->avatar          = '';
+      $this->reserved        = '';
       $this->types           = '';
       $this->phone           = '';
       $this->website         = '';
@@ -275,6 +277,9 @@
 
       if (isset($data['caller']))
         $this->caller        = $data['caller'];
+
+      if (isset($data['reserved']))
+        $this->reserved      = $data['reserved'];
     }
 
     // getters et setters pour l'objet Proposition
@@ -386,6 +391,17 @@
     public function getAvatar()
     {
       return $this->avatar;
+    }
+
+    // Indicateur réservation
+    public function setReserved($reserved)
+    {
+      $this->reserved = $reserved;
+    }
+
+    public function getReserved()
+    {
+      return $this->reserved;
     }
 
     // Types de restaurant

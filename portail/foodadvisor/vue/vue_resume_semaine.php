@@ -2,7 +2,7 @@
   /**************************/
   /*** Historique semaine ***/
   /**************************/
-  echo '<div class="titre_section">Le résumé de la semaine</div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/week_grey.png" alt="week_grey" class="logo_titre_section" />Le résumé de la semaine</div>';
 
   echo '<div class="zone_propositions">';
     foreach ($choixSemaine as $jour => $choixJour)
@@ -30,9 +30,9 @@
 
             // Nombre de participants
             if ($choixJour->getNb_participants() == 1)
-              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participant</span>';
+              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participant</span>';
             else
-              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/user.png" alt="user" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participants</span>';
+              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participants</span>';
           echo '</div>';
 
           echo '<div class="caller">';

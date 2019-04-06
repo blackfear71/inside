@@ -124,6 +124,7 @@
         $proposition->setCaller(htmlspecialchars($proposition->getCaller()));
         $proposition->setPseudo(htmlspecialchars($proposition->getPseudo()));
         $proposition->setAvatar(htmlspecialchars($proposition->getAvatar()));
+        $proposition->setReserved(htmlspecialchars($proposition->getReserved()));
         $proposition->setTypes(htmlspecialchars($proposition->getTypes()));
         $proposition->setPhone(htmlspecialchars($proposition->getPhone()));
         $proposition->setWebsite(htmlspecialchars($proposition->getWebsite()));
@@ -189,6 +190,7 @@
           $choixJour->setCaller(htmlspecialchars($choixJour->getCaller()));
           $choixJour->setPseudo(htmlspecialchars($choixJour->getPseudo()));
           $choixJour->setAvatar(htmlspecialchars($choixJour->getAvatar()));
+          $choixJour->setReserved(htmlspecialchars($choixJour->getReserved()));
           $choixJour->setPhone(htmlspecialchars($choixJour->getPhone()));
         }
       }

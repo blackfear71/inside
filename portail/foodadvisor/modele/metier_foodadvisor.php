@@ -83,7 +83,7 @@
     // Contrôle réserveur pour annulation
     if ($actions["reserver"] == false)
     {
-      if ($isReserved == $user)
+      if ($isReserved == $user AND date("N") <= 5 AND date("H") < 13)
         $actions["annuler_reserver"] = true;
     }
 
@@ -136,6 +136,7 @@
       {
         $myProposition->setDetermined("Y");
         $myProposition->setCaller($data3['caller']);
+        $myProposition->setReserved($data3['reserved']);
 
         // Récupération pseudo et avatar
         $req4 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myProposition->getCaller() . '"');
@@ -1115,8 +1116,6 @@
     }
 
     $req1->closeCursor();
-
-    var_dump($existant);
 
     if ($existant == true)
     {

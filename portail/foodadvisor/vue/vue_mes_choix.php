@@ -2,7 +2,7 @@
   /*************************/
   /*** Choix utilisateur ***/
   /*************************/
-  echo '<div class="titre_section">Mes choix du jour</div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />Mes choix du jour</div>';
 
   if (!empty($mesChoix) OR $isSolo == true)
   {

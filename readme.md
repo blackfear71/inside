@@ -6,6 +6,7 @@
 Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
 
 ## Fonctionnalités
+- PORTAIL : Liens vers les sections et news
 - MOVIE HOUSE : base de données de films et organisation de soirées cinéma
 - LES ENFANTS ! À TABLE ! : outil de détermination du repas du jour
 - EXPENSE CENTER : outil de suivi des dépenses des membres
