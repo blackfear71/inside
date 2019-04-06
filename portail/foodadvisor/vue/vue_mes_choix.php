@@ -36,11 +36,11 @@
           /*********************************************/
           /* Visualisation normale (sans modification) */
           /*********************************************/
-          echo '<div class="zone_proposition" id="modifier_choix_2[' . $monChoix->getId() . ']">';
+          echo '<div class="zone_proposition" id="visualiser_choix_' . $monChoix->getId() . '">';
             if ($actions["choix"] == true)
             {
               // Modification
-              echo '<a onclick="afficherMasquer(\'modifier_choix[' . $monChoix->getId() . ']\'); afficherMasquer(\'modifier_choix_2[' . $monChoix->getId() . ']\'); initMasonry();" title="Modifier le choix" class="icone_modify_choix"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_choix_' . $monChoix->getId() . '\'); afficherMasquerNoDelay(\'visualiser_choix_' . $monChoix->getId() . '\'); initMasonry();" title="Modifier le choix" class="icone_modify_choix"></a>';
 
               // Suppression
               echo '<form method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce choix ?\')) return false;">';
@@ -155,13 +155,13 @@
           /***************************/
           /* Caché pour modification */
           /***************************/
-          echo '<div class="zone_proposition" id="modifier_choix[' . $monChoix->getId() . ']" style="display: none;">';
+          echo '<div class="zone_proposition" id="modifier_choix_' . $monChoix->getId() . '" style="display: none;">';
             echo '<form method="post" action="foodadvisor.php?action=doModifier&update_id=' . $monChoix->getId() . '">';
               // Validation modification
               echo '<input type="submit" name="modify_choix_' . $monChoix->getId() . '" value="" title="Valider" class="icon_validate_choix" />';
 
               // Annulation modification
-              echo '<a onclick="afficherMasquer(\'modifier_choix[' . $monChoix->getId() . ']\'); afficherMasquer(\'modifier_choix_2[' . $monChoix->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_choix"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_choix_' . $monChoix->getId() . '\'); afficherMasquerNoDelay(\'visualiser_choix_' . $monChoix->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_choix"></a>';
 
               // Image + lien
               echo '<div class="lien_mon_choix">';
@@ -180,7 +180,7 @@
                 if (!empty($monChoix->getTime()))
                 {
                   echo '<div id="zone_update_listbox_horaire_' . $monChoix->getId() . '">';
-                    echo '<a id="update_horaire_' . $monChoix->getId() . '" onclick="afficherMasquer(\'update_horaire_' . $monChoix->getId() . '\'); afficherListboxHoraires(\'zone_update_listbox_horaire_' . $monChoix->getId() . '\', \'update_horaire_' . $monChoix->getId() . '\', \'update\', \'' . $monChoix->getId() . '\');" class="bouton_choix_update" style="display: none">';
+                    echo '<a id="update_horaire_' . $monChoix->getId() . '" onclick="afficherMasquerNoDelay(\'update_horaire_' . $monChoix->getId() . '\'); afficherListboxHoraires(\'zone_update_listbox_horaire_' . $monChoix->getId() . '\', \'update_horaire_' . $monChoix->getId() . '\', \'update\', \'' . $monChoix->getId() . '\');" class="bouton_choix_update" style="display: none">';
                       echo '<span class="fond_plus">+</span>';
                       echo 'Horaire';
                     echo '</a>';
@@ -215,7 +215,7 @@
                 else
                 {
                   echo '<div id="zone_update_listbox_horaire_' . $monChoix->getId() . '">';
-                    echo '<a id="update_horaire_' . $monChoix->getId() . '" onclick="afficherMasquer(\'update_horaire_' . $monChoix->getId() . '\'); afficherListboxHoraires(\'zone_update_listbox_horaire_' . $monChoix->getId() . '\', \'update_horaire_' . $monChoix->getId() . '\', \'update\', \'' . $monChoix->getId() . '\');" class="bouton_choix_update">';
+                    echo '<a id="update_horaire_' . $monChoix->getId() . '" onclick="afficherMasquerNoDelay(\'update_horaire_' . $monChoix->getId() . '\'); afficherListboxHoraires(\'zone_update_listbox_horaire_' . $monChoix->getId() . '\', \'update_horaire_' . $monChoix->getId() . '\', \'update\', \'' . $monChoix->getId() . '\');" class="bouton_choix_update">';
                       echo '<span class="fond_plus">+</span>';
                       echo 'Horaire';
                     echo '</a>';

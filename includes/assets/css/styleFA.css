@@ -10,7 +10,7 @@
 	margin-right: auto;
 	overflow: auto;
 	border-radius: 2px;
-	margin-top: -500px;
+	margin-top: 200px;
 	margin-bottom: 100px;
 }
 
@@ -458,21 +458,8 @@
 }
 
 /*** Affichage détails ***/
-@keyframes affichageDetails
-{
-	0%
-	{
-		opacity: 0;
-	}
-	100%
-	{
-		opacity: 1;
-	}
-}
-
 .zone_details_proposition
 {
-	animation: 0.4s ease 0s normal forwards 1 affichageDetails;
 	width: calc(85% - 40px);
 	margin-left: auto;
 	margin-right: auto;
@@ -1374,21 +1361,10 @@
 }
 
 /*** Ajout restaurant ***/
-@keyframes affichageFond
-{
-	0%
-	{
-		background-color: rgb(0, 0, 0, 0);
-	}
-	100%
-	{
-		background-color: rgb(0, 0, 0, 0.5);
-	}
-}
-
 .fond_saisie_restaurant
 {
-	animation: 0.4s ease 0s normal forwards 1 affichageFond;
+	display: none;
+	background-color: rgb(0, 0, 0, 0.5);
 	position: fixed;
 	z-index: 10;
 	left: 0;
@@ -1398,22 +1374,10 @@
 	overflow: auto;
 }
 
-@keyframes affichageSaisie
-{
-	0%
-	{
-		margin-top: -300px;
-	}
-	100%
-	{
-		margin-top: 200px;
-	}
-}
-
 .zone_saisie_restaurant
 {
-	animation: 0.4s ease 0s normal forwards 1 affichageSaisie;
 	width: 85%;
+	margin-top: 200px;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: auto;

@@ -88,31 +88,22 @@ function initMasonry()
   $('.description_restaurant').wrapInner();
 }
 
-// Affiche ou masque un élément
+// Affiche ou masque un élément (délai 400ms)
 function afficherMasquer(id)
 {
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "block";
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(200);
   else
-    document.getElementById(id).style.display = "none";
+    $('#' + id).fadeOut(200);
 }
 
-// Affiche ou masque une zone de saisie
-function afficherMasquerSaisieChoix(id, zone)
+// Affiche ou masque un élément (délai 0s)
+function afficherMasquerNoDelay(id)
 {
-  var num   = (($("#" + zone + " span").length - 1) / 4) - 1;
-  var marge = 200 - num * 25 + 'px';
-
   if ($('#' + id).css('display') == "none")
-  {
-    $('#' + id).css('display', 'block');
-    $('#' + zone).animate({marginTop: marge}, 400);
-  }
+    $('#' + id).fadeIn(0);
   else
-  {
-    $('#' + id).css('display', 'none');
-    $('#' + zone).css('margin-top', '-500px');
-  }
+    $('#' + id).fadeOut(0);
 }
 
 // Affiche la listbox des lieux
@@ -327,19 +318,19 @@ function addChoice(id, zone)
   html  = '<div class="titre_choix">Proposition ' + new_num + '</div>';
 
   html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_restaurant_' + new_num + '" onclick="afficherMasquer(\'choix_restaurant_' + new_num + '\'); afficherListboxLieux(\'zone_listbox_restaurant_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Restaurant</a>';
+    html += '<a id="choix_restaurant_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_restaurant_' + new_num + '\'); afficherListboxLieux(\'zone_listbox_restaurant_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Restaurant</a>';
   html += '</div>';
 
   html += '<div id="zone_listbox_horaire_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_horaire_' + new_num + '" onclick="afficherMasquer(\'choix_horaire_' + new_num + '\'); afficherListboxHoraires(\'zone_listbox_horaire_' + new_num + '\', \'choix_horaire_' + new_num + '\', \'create\', \'\')" class="bouton_choix"><span class="fond_plus">+</span>Horaire</a>';
+    html += '<a id="choix_horaire_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_horaire_' + new_num + '\'); afficherListboxHoraires(\'zone_listbox_horaire_' + new_num + '\', \'choix_horaire_' + new_num + '\', \'create\', \'\')" class="bouton_choix"><span class="fond_plus">+</span>Horaire</a>';
   html += '</div>';
 
   html += '<div id="zone_checkbox_transports_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_transports_' + new_num + '" onclick="afficherMasquer(\'choix_transports_' + new_num + '\'); afficherCheckboxTransports(\'zone_checkbox_transports_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Transport</a>';
+    html += '<a id="choix_transports_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_transports_' + new_num + '\'); afficherCheckboxTransports(\'zone_checkbox_transports_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Transport</a>';
   html += '</div>';
 
   html += '<div id="zone_saisie_menu_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_menu_' + new_num + '" onclick="afficherMasquer(\'choix_menu_' + new_num + '\'); afficherSaisieMenu(\'zone_saisie_menu_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Menu</a>';
+    html += '<a id="choix_menu_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_menu_' + new_num + '\'); afficherSaisieMenu(\'zone_saisie_menu_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Menu</a>';
   html += '</div>';
 
   html += '<div class="separation_choix"></div>';

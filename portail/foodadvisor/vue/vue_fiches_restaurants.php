@@ -13,7 +13,7 @@
           /*********************************************/
           /* Visualisation normale (sans modification) */
           /*********************************************/
-          echo '<div class="fiche_restaurant" id="modifier_restaurant_2[' . $restaurant->getId() . ']">';
+          echo '<div class="fiche_restaurant" id="visualiser_restaurant_' . $restaurant->getId() . '">';
             echo '<div id="zone_shadow_' . $restaurant->getId() . '" class="zone_shadow">';
               // Image
               if (!empty($restaurant->getPicture()))
@@ -22,7 +22,7 @@
                 echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" title="' . $restaurant->getName() . '" class="image_restaurant" />';
 
               // Modification
-              echo '<a onclick="afficherMasquer(\'modifier_restaurant[' . $restaurant->getId() . ']\'); afficherMasquer(\'modifier_restaurant_2[' . $restaurant->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_restaurant"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_restaurant_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'visualiser_restaurant_' . $restaurant->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_restaurant"></a>';
 
               // Suppression
               echo '<form method="post" action="restaurants.php?delete_id=' . $restaurant->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce restaurant de la liste ?\')) return false;">';
@@ -111,7 +111,7 @@
                   {
                     echo '<div id="long_description_' . $restaurant->getId() . '" style="display: none;">' . nl2br($restaurant->getDescription()) . '</div>';
                     echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . substr(nl2br($restaurant->getDescription()), 0, $longueur_max) . '...</div>';
-                    echo '<a onclick="afficherMasquer(\'short_description_' . $restaurant->getId() . '\'); afficherMasquer(\'long_description_' . $restaurant->getId() . '\'); initMasonry();"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
+                    echo '<a onclick="afficherMasquerNoDelay(\'short_description_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'long_description_' . $restaurant->getId() . '\'); initMasonry();"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
                   }
                   else
                     echo '<div>' . nl2br($restaurant->getDescription()) . '</div>';
@@ -123,7 +123,7 @@
           /***************************/
           /* Caché pour modification */
           /***************************/
-          echo '<div class="fiche_restaurant" id="modifier_restaurant[' . $restaurant->getId() . ']" style="display: none; position: relative; z-index: 2;">';
+          echo '<div class="fiche_restaurant" id="modifier_restaurant_' . $restaurant->getId() . '" style="display: none; position: relative; z-index: 2;">';
             echo '<form method="post" action="restaurants.php?action=doModifier&update_id=' . $restaurant->getId() . '" enctype="multipart/form-data">';
               // Image
               echo '<div class="zone_update_image">';
@@ -143,7 +143,7 @@
               echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" class="icon_validate_restaurant" />';
 
               // Annulation modification
-              echo '<a onclick="afficherMasquer(\'modifier_restaurant[' . $restaurant->getId() . ']\'); afficherMasquer(\'modifier_restaurant_2[' . $restaurant->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_restaurant"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_restaurant_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'visualiser_restaurant_' . $restaurant->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_restaurant"></a>';
 
               // Nom
               echo '<input type="text" name="update_name_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getName() . '" placeholder="Nom du restaurant" class="update_nom_restaurant" required />';

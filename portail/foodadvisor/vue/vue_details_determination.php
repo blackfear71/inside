@@ -8,7 +8,7 @@
     {
       if ($proposition->getDetermined() == "Y" OR $proposition->getClassement() == 1)
       {
-        echo '<div id="zone_details_determined_' . $proposition->getId_restaurant() . '" style="display: none;" class="fond_saisie_restaurant">';
+        echo '<div id="zone_details_determined_' . $proposition->getId_restaurant() . '" class="fond_saisie_restaurant">';
           echo '<div class="zone_details_proposition">';
             // Détails restaurant
             echo '<div class="zone_details_proposition_left">';
