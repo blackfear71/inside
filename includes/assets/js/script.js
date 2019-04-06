@@ -21,7 +21,7 @@ $(document).ready(function()
   // Masque la fenêtre des alertes
 function masquerAlerte(id)
 {
-  document.getElementById(id).style.display = "none";
+  $('#' + id).fadeOut(200);
 }
 
 // Affiche ou masque le menu latéral gauche + rotation icône menu
