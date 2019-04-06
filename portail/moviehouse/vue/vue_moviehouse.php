@@ -3,10 +3,11 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "MH";
-      $style_head  = "styleMH.css";
-      $script_head = "scriptMH.js";
-      $chat_head   = true;
+      $title_head   = "MH";
+      $style_head   = "styleMH.css";
+      $script_head  = "scriptMH.js";
+      $chat_head    = true;
+      $masonry_head = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -71,18 +72,18 @@
           switch ($_GET['view'])
           {
             case "main":
-              include("vue/onglets_moviehouse.php");
-              include("vue/table_films_main.php");
+              include("vue/vue_onglets_moviehouse.php");
+              include("vue/vue_table_films_synthese.php");
               break;
 
             case "user":
-              include("vue/onglets_moviehouse.php");
-              include("vue/table_films_user.php");
+              include("vue/vue_onglets_moviehouse.php");
+              include("vue/vue_table_films_details.php");
               break;
 
             case "home":
             default:
-              include("vue/table_films_home.php");
+              include("vue/vue_films_accueil.php");
               break;
           }
 				?>

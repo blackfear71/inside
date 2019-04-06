@@ -486,155 +486,97 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	display: none;
 }
 
-.titre_home
+.zone_films_accueil
 {
-	font-family: robotolight_italic, Verdana, sans-serif;
-	font-size: 150%;
-	color: white;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	background-color: #ff1937;
-	border-bottom: solid 5px #c81932;
-	line-height: 50px;
-	padding-left: 15px;
-	margin-top: 30px;
-}
-
-.icone_home
-{
-	width: 30px;
-	margin-top: -5px;
-	vertical-align: middle;
-	margin-right: 10px;
-}
-
-.zone_home_films
-{
-	width: 96%;
-	text-align: center;
-	padding: 2%;
-	background-color: #f3f3f3;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-}
-
-.link_home_film
-{
-	display: inline-block;
-	margin-left: 1%;
-	margin-right: 1%;
-	background-color: #d3d3d3;
-	padding: 0.5%;
-	cursor: pointer;
-	border-radius: 5px;
-	transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
-	width: 17%;
-	vertical-align: top;
-	text-decoration: none;
-	color: #262626;
-}
-
-.link_home_film:hover
-{
-	background-color: #ff1937;
-	box-shadow: 0 0 5px black;
-	color: white;
-}
-
-.img_home_film
-{
-	max-width: 100%;
-	border-radius: 5px;
-}
-
-.titre_home_film
-{
-	padding: 10px;
-	font-family: robotolight, Verdana, sans-serif;
-}
-
-.stats_home_film
-{
-	margin-bottom: 5px;
-}
-
-.stats_home_icon_1
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	border-radius: 50%;
-	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/moviehouse/users.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	transition: background-color 0.2s, background-image 0.2s;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-.link_home_film:hover .stats_home_icon_1
-{
-	background-color: white;
-	background-image: url("/inside/includes/icons/moviehouse/users_red.png");
-}
-
-.stats_home_icon_2
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	border-radius: 50%;
-	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/moviehouse/star.png");
-	background-size: 15px 15px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	transition: background-color 0.2s, background-image 0.2s;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-.link_home_film:hover .stats_home_icon_2
-{
-	background-color: white;
-	background-image: url("/inside/includes/icons/moviehouse/star_red.png");
-}
-
-.stats_home_number
-{
-	display: inline-block;
-	font-family: robotolight, Verdana, sans-serif;
-	vertical-align: middle;
-}
-
-.date_home_film
-{
-	background-color: white;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	margin-right: auto;
 	margin-left: auto;
-	border-radius: 5px;
-	font-family: robotomedium_italic, Verdana, sans-serif;
+	margin-right: auto;
+	width: 100%;
+	opacity: 0.5;
+	transition: opacity 0.2s;
+	margin-bottom: -20px;
+}
+
+.zone_films_accueil.masonry
+{
+	opacity: 1;
+}
+
+.zone_film_accueil
+{
+	width: 250px;
+	vertical-align: top;
+	margin-bottom: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.image_accueil
+{
+	width: 100%;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.titre_film_accueil
+{
+	padding: 5px 10px 5px 10px;
+	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 }
 
-.no_films_waited
+.empty
 {
+	margin-left: auto;
+	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 120%;
 	color: #262626;
-	line-height: 200px;
+	font-size: 150%;
+	text-align: center;
+	line-height: 100px;
+}
+
+.zone_icones_accueil
+{
+	display: block;
+}
+
+.users_interested
+{
+  display: inline-block;
+  background-color: #70d55d;
+	margin-left: 5px;
+	margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+  color: white;
+}
+
+.average_star
+{
+  display: inline-block;
+  background-color: #2eb2f4;
+	margin-left: 5px;
+	margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+  color: white;
+}
+
+.icone_accueil
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -5px;
+	margin-right: 5px;
+	width: 20px;
+	height: 20px;
 }
 
 /*** Saisie film avancée ***/

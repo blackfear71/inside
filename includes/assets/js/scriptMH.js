@@ -1,6 +1,22 @@
-// Au chargement du document
-$(document).ready(function()
+// Au chargement du document complet
+$(window).load(function()
 {
+  // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_home').css('display', 'block');
+
+  // On lance Masonry et le scroll après avoir chargé les images
+  $('.zone_films_accueil').masonry({
+    // Options
+    itemSelector: '.zone_film_accueil',
+    columnWidth: 250,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+  });
+
+  // On associe une classe pour y ajouter une transition dans le css
+  $('.zone_films_accueil').addClass('masonry');
+
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
   var offset = 20;

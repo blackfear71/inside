@@ -66,7 +66,7 @@
           include('vue/vue_details_determination.php');
 
           // Propositions, choix et résumé de la semaine
-          echo '<div class="zone_propositions_determination" style="display: none;">';
+          echo '<div class="zone_propositions_determination">';
             // Propositions
             include('vue/vue_propositions.php');
 
