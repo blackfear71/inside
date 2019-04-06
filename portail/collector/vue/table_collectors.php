@@ -9,7 +9,7 @@
         /*********************************************/
         /* Visualisation normale (sans modification) */
         /*********************************************/
-        echo '<div class="zone_collector" id="modifier_collector_2[' . $collector->getId() . ']">';
+        echo '<div class="zone_collector" id="visualiser_collector_' . $collector->getId() . '">';
           echo '<div class="zone_shadow" id="zone_shadow_' . $collector->getId() . '">';
             if ($collector->getNb_votes() >= $min_golden)
               echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';
@@ -17,7 +17,7 @@
               echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
 
               // Modification
-              echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_collector_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'visualiser_collector_' . $collector->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
 
               // Suppression
               if ($collector->getType_collector() == "T")
@@ -42,7 +42,7 @@
               echo '</div>';
 
               // Vote
-              echo '<a onclick="afficherMasquer(\'modifier_vote[' . $collector->getId() . ']\'); afficherMasquer(\'link_form_vote[' . $collector->getId() . ']\');" id="link_form_vote[' . $collector->getId() . ']" class="link_current_vote">';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_vote_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'link_form_vote_' . $collector->getId() . '\');" id="link_form_vote_' . $collector->getId() . '" class="link_current_vote">';
                 $founded = false;
 
                 foreach ($listeVotesUsers as $vote)
@@ -60,7 +60,7 @@
               echo '</a>';
 
               // Formulaire vote
-              echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote[' . $collector->getId() . ']" class="zone_smileys" style="display: none;">';
+              echo '<form method="post" action="collector.php?id=' . $collector->getId() . '&action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote_' . $collector->getId() . '" class="zone_smileys" style="display: none;">';
                 // Gestion smiley par défaut
                 $no_vote = true;
 
@@ -172,7 +172,7 @@
         /***************************/
         /* Caché pour modification */
         /***************************/
-        echo '<div class="zone_collector" id="modifier_collector[' . $collector->getId() . ']" style="display: none; position: relative; z-index: 2;">';
+        echo '<div class="zone_collector" id="modifier_collector_' . $collector->getId() . '" style="display: none; position: relative; z-index: 2;">';
           echo '<form method="post" action="collector.php?update_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '">';
             if ($collector->getNb_votes() >= $min_golden)
               echo '<div class="zone_collector_haut_golden">';
@@ -182,7 +182,7 @@
               echo '<input type="submit" name="modify_collector" value="" title="Valider" class="icon_validate_collector" />';
 
               // Annulation modification
-              echo '<a onclick="afficherMasquer(\'modifier_collector[' . $collector->getId() . ']\'); afficherMasquer(\'modifier_collector_2[' . $collector->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_collector"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_collector_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'visualiser_collector_' . $collector->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_collector"></a>';
 
               // Avatar
               echo '<div class="zone_avatar_collector">';
