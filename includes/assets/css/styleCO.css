@@ -563,10 +563,7 @@
   font-style: italic;
 	color: #262626;
   text-align: justify;
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-top: 10px;
-	padding-bottom: 20px;
+	padding: 10px 40px 20px 40px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
 	overflow: hidden;
@@ -582,10 +579,7 @@
   font-style: italic;
 	color: #262626;
   text-align: justify;
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-top: 10px;
-	padding-bottom: 20px;
+	padding: 10px 40px 20px 40px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
 	overflow: hidden;
@@ -695,6 +689,12 @@
 }
 
 /*** Modification phrases cultes ***/
+.zone_modify_speaker
+{
+	clear: both;
+	padding-top: 5px;
+}
+
 .modify_speaker
 {
   display: block;
@@ -702,10 +702,10 @@
 	height: 30px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5px;
+	margin-bottom: 5px;
   border-radius: 2px;
   border: 0;
-  padding: 1%;
+  padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
   font-size: 80%;
 	color: #262626;
@@ -718,10 +718,10 @@
 	height: 20px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5px;
+	margin-bottom: 5px;
   border-radius: 2px;
   border: 0;
-  padding: 1%;
+  padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
   font-size: 80%;
 	color: #262626;
@@ -741,6 +741,11 @@
   word-wrap: break-word;
 }
 
+.zone_modify_date
+{
+	padding-bottom: 5px;
+}
+
 .modify_date_collector
 {
   display: block;
@@ -748,11 +753,9 @@
 	height: 20px;
   margin-left: auto;
   margin-right: auto;
-	margin-top: 5px;
-  margin-bottom: 5px;
   border-radius: 2px;
   border: 0;
-  padding: 1%;
+  padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
   font-size: 80%;
 	color: #262626;
@@ -761,8 +764,8 @@
 .modify_text_collector
 {
   resize: vertical;
-  width: calc(98% - 80px);
-  padding: 1%;
+  width: calc(100% - 100px);
+  padding: 10px;
   margin-left: 40px;
   margin-right: 40px;
   margin-top: -20px;
@@ -770,19 +773,19 @@
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
   border-radius: 2px;
-  border: solid 1px #a3a3a3;
+	border: 0;
   min-height: 120px;
 }
 
 .modify_context_collector
 {
   resize: vertical;
-  width: 98%;
-  padding: 1%;
+	width: calc(100% - 20px);
+  padding: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
   border-radius: 2px;
-  border: solid 1px #a3a3a3;
+	border: 0;
   min-height: 70px;
 }
 

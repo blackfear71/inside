@@ -176,7 +176,7 @@
         /* Caché pour modification */
         /***************************/
         echo '<div class="zone_collector" id="modifier_collector_' . $collector->getId() . '" style="display: none; position: relative; z-index: 2;">';
-          echo '<form method="post" action="collector.php?update_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '">';
+          echo '<form method="post" action="collector.php?update_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="zone_shadow">';
             if ($collector->getNb_votes() >= $min_golden)
               echo '<div class="zone_collector_haut_golden">';
             else
@@ -198,22 +198,24 @@
               // Modification speaker
               if (!empty($collector->getSpeaker()))
               {
-                echo '<select name="speaker" id="speaker[' . $collector->getId() . ']" onchange="afficherModifierOther(\'speaker[' . $collector->getId() . ']\', \'other_speaker[' . $collector->getId() . ']\');" class="modify_speaker" required>';
-                  echo '<option value="" hidden>Choisissez...</option>';
+                echo '<div class="zone_modify_speaker">';
+                  echo '<select name="speaker" id="speaker[' . $collector->getId() . ']" onchange="afficherModifierOther(\'speaker[' . $collector->getId() . ']\', \'other_speaker[' . $collector->getId() . ']\');" class="modify_speaker" required>';
+                    echo '<option value="" hidden>Choisissez...</option>';
 
-                  foreach ($listeUsers as $user)
-                  {
-                    if ($user->getIdentifiant() == $collector->getSpeaker())
-                      echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
+                    foreach ($listeUsers as $user)
+                    {
+                      if ($user->getIdentifiant() == $collector->getSpeaker())
+                        echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
+                      else
+                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                    }
+
+                    if ($collector->getType_s() == "other")
+                      echo '<option value="other" selected>Autre</option>';
                     else
-                      echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                  }
-
-                  if ($collector->getType_s() == "other")
-                    echo '<option value="other" selected>Autre</option>';
-                  else
-                    echo '<option value="other">Autre</option>';
-                echo '</select>';
+                      echo '<option value="other">Autre</option>';
+                    echo '</select>';
+                echo '</div>';
               }
               else
               {
@@ -229,7 +231,9 @@
                 echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" style="display: none;" />';
 
               // Modification date
-              echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
+              echo '<div class="zone_modify_date">';
+                echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
+              echo '</div>';
             echo '</div>';
 
             echo '<div class="zone_collector_bas">';
@@ -238,16 +242,14 @@
                 // Type de saisie
                 echo '<input type="hidden" name="type_collector" value="T" />';
 
-                echo '<div class="zone_modify_text_collector">';
-                  // Apostrophe gauche
-                  echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
+                // Apostrophe gauche
+                echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
 
-                  // Modification citation
-                  echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
+                // Modification citation
+                echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
 
-                  // Apostrophe droite
-                  echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
-                echo '</div>';
+                // Apostrophe droite
+                echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
               }
               elseif ($collector->getType_collector() == "I")
               {
@@ -260,9 +262,9 @@
 
               // Contexte
               if ($collector->getNb_votes() >= $min_golden)
-                echo '<div class="text_context_golden">';
+                echo '<div class="text_context_golden" style="padding-bottom: 10px;">';
               else
-                echo '<div class="text_context">';
+                echo '<div class="text_context" style="padding-bottom: 10px;">';
                   echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
                 echo '</div>';
             echo '</div>';
