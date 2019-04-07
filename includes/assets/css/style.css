@@ -752,6 +752,52 @@ aside
 	border-top: solid 1px #5c5c5c;
 }
 
+/*** Liens de saisie ***/
+.zone_liens_saisie
+{
+	text-align: center;
+}
+
+.lien_categorie
+{
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+	background-color: #e3e3e3;
+	border-radius: 2px;
+	margin-bottom: 15px;
+	overflow: hidden;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.zone_logo_lien
+{
+	float: left;
+	width: 50px;
+	height: 50px;
+	background-color: #ff1937;
+	text-align: center;
+}
+
+.zone_texte_lien
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height: 50px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+}
+
+.image_lien
+{
+	width: 35px;
+	height: 35px;
+	margin-top: 7.5px;
+}
+
 /*** Titres sections ***/
 .titre_section
 {
@@ -776,6 +822,16 @@ aside
 	vertical-align: middle;
 	margin-top: -5px;
 	margin-right: 10px;
+}
+
+/*** Texte zone vide ***/
+.empty
+{
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 150%;
+	text-align: center;
+	line-height: 100px;
 }
 
 /*** Alertes ***/

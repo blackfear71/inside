@@ -2,56 +2,11 @@
 /*** Collector Room ***/
 /**********************/
 
-/*** Saisie ***/
-.zone_liens_saisie
-{
-	text-align: center;
-}
-
-.lien_saisie_collector
-{
-	display: inline-block;
-	margin-right: 15px;
-	cursor: pointer;
-	background-color: #e3e3e3;
-	padding: 10px;
-	border-radius: 2px;
-	margin-bottom: 15px;
-}
-
-.zone_logo_add
-{
-	float: left;
-	width: 80px;
-	height: 80px;
-	background-color: #ff1937;
-	border-radius: 50%;
-	text-align: center;
-}
-
-.zone_texte_add
-{
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
-	line-height: 80px;
-	font-family: robotoregular, Verdana, sans-serif;
-	color: #262626;
-}
-
-.image_saisie_collector
-{
-	width: 60px;
-	height: 60px;
-	margin-top: 10px;
-}
-
 /*** Filtres et tris ***/
 .zone_filtres
 {
-	display: inline-block;
-	height: 100px;
-	vertical-align: middle;
+	display: block;
+	margin-bottom: 10px;
 }
 
 .zone_filtres option
@@ -59,35 +14,20 @@
 	background-color: white;
 }
 
-.collector_sort
+.listbox_filtre
 {
-	display: block;
-	width: 100%;
-	height: 40px;
-	margin-bottom: 20px;
+	display: inline-block;
+	height: 30px;
+	margin: 0 10px 0 10px;
 	padding-left: 5px;
 	padding-right: 5px;
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 120%;
+	font-size: 100%;
 	color: #262626;
 	border: 0;
 	border-radius: 2px;
 	background-color: #e3e3e3;
-}
-
-.collector_filter
-{
-	display: block;
-	width: 100%;
-	height: 40px;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 120%;
-	color: #262626;
-	border: 0;
-	border-radius: 2px;
-	background-color: #e3e3e3;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 /*** Saisie cachée ***/
@@ -372,16 +312,16 @@
 .zone_shadow
 {
 	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 /*** Actions et utilisateur ***/
 .zone_collector_haut
 {
-	background-color: #b3b3b3;
+	background-color: #d3d3d3;
 	width: 100%;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
-	border-bottom: solid 3px #a3a3a3;
 }
 
 .zone_collector_haut_golden
@@ -390,7 +330,6 @@
 	width: 100%;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
-	border-bottom: solid 3px #ff1937;
 }
 
 .icone_modify_collector
@@ -475,7 +414,7 @@
 	border-radius: 50%;
 }
 
-.pseudo
+.pseudo_collector
 {
 	clear: both;
 	text-align: center;
@@ -485,8 +424,42 @@
 	width: calc(100% - 100px);
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	padding: 5px;
+	word-wrap: break-word;
+}
+
+.zone_date_collector
+{
+	text-align: center;
+  background-color: #2eb2f4;
+	margin-left: auto;
+	margin-right: auto;
+  padding: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+  color: white;
+}
+
+.icone_collector
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -3px;
+	margin-right: 5px;
+	width: 20px;
+	height: 20px;
+}
+
+.date_collector
+{
+	clear: both;
+	text-align: center;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	width: calc(100% - 100px);
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
 	word-wrap: break-word;
 }
 
@@ -524,7 +497,7 @@
 .zone_collector_bas
 {
 	width: 100%;
-	background-color: #d3d3d3;
+	background-color: #e3e3e3;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
 	min-height: 40px;
@@ -585,7 +558,7 @@
 .text_context
 {
 	width: calc(100% - 80px);
-  background-color: #b3b3b3;
+  background-color: #d3d3d3;
 	font-family: robotolight, Verdana, sans-serif;
   font-style: italic;
 	color: #262626;
@@ -596,7 +569,6 @@
 	padding-bottom: 20px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
-	border-top: solid 3px #a3a3a3;
 	overflow: hidden;
 	word-wrap: break-word;
 	max-width: calc(525px - 80px);
@@ -616,7 +588,6 @@
 	padding-bottom: 20px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
-	border-top: solid 3px #ff1937;
 	overflow: hidden;
 	word-wrap: break-word;
 	max-width: calc(525px - 80px);

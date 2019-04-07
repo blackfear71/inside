@@ -93,11 +93,14 @@
                 }
               echo '</form>';
 
-              // Pseudo & date
-              echo '<div class="pseudo">';
+              // Pseudo
+              echo '<div class="pseudo_collector">';
                 echo $collector->getName_s();
-                echo '<br />';
-                echo formatDateForDisplay($collector->getDate_collector());
+              echo '</div>';
+
+              // Date
+              echo '<div class="zone_date_collector">';
+                echo '<img src="../../includes/icons/collector/date.png" alt="date" class="icone_collector" />' . formatDateForDisplay($collector->getDate_collector());
               echo '</div>';
             echo '</div>';
 
@@ -122,7 +125,7 @@
                 }
 
                 // Rapporteur
-                echo '<div class="author_collector">Par ' . $collector->getName_a() . '.</div>';
+                echo '<div class="author_collector">Par ' . $collector->getName_a() . '</div>';
               }
 
               // Contexte

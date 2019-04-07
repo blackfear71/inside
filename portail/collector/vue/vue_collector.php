@@ -49,19 +49,19 @@
           /* Liens de saisie et filtres */
           /******************************/
           echo '<div class="zone_liens_saisie">';
-            echo '<a onclick="afficherMasquer(\'zone_add_collector\');" title="Ajouter une phrase culte" class="lien_saisie_collector">';
-              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_saisie_collector" /></div>';
-              echo '<div class="zone_texte_add">Ajouter une phrase culte</div>';
+            echo '<a onclick="afficherMasquer(\'zone_add_collector\');" title="Ajouter une phrase culte" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Ajouter une phrase culte</div>';
             echo '</a>';
 
-            echo '<a onclick="afficherMasquer(\'zone_add_image\');" title="Ajouter une image" class="lien_saisie_collector">';
-              echo '<div class="zone_logo_add"><img src="../../includes/icons/collector/images.png" alt="images" class="image_saisie_collector" /></div>';
-              echo '<div class="zone_texte_add">Ajouter une image</div>';
+            echo '<a onclick="afficherMasquer(\'zone_add_image\');" title="Ajouter une image" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/collector/images.png" alt="images" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Ajouter une image</div>';
             echo '</a>';
 
             echo '<div class="zone_filtres">';
               // Tris
-              echo '<select onchange="applySortOrFilter(this.value, \'' . $_GET['filter'] . '\');" class="collector_sort">';
+              echo '<select onchange="applySortOrFilter(this.value, \'' . $_GET['filter'] . '\');" class="listbox_filtre">';
                 if ($_GET['sort'] == "dateDesc")
                   echo '<option value="dateDesc" selected>Du plus récent au plus vieux</option>';
                 else
@@ -74,7 +74,7 @@
               echo '</select>';
 
               // Filtres
-              echo '<select onchange="applySortOrFilter(\'' . $_GET['sort'] . '\', this.value);" class="collector_filter">';
+              echo '<select onchange="applySortOrFilter(\'' . $_GET['sort'] . '\', this.value);" class="listbox_filtre">';
                 if ($_GET['filter'] == "none")
                   echo '<option value="none" selected>Aucun filtre</option>';
                 else

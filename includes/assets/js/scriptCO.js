@@ -28,7 +28,7 @@ $(window).load(function()
 
     setTimeout(function()
     {
-      $('#zone_shadow_' + id).css('box-shadow', 'none');
+      $('#zone_shadow_' + id).css('box-shadow', '0 0 3px #7c7c7c');
       $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
     }, 5000);
   }
