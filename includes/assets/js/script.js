@@ -16,9 +16,27 @@ $(document).ready(function()
 		stroke: 3,
 		duration: 1000
 	});
+
+  animateLogos();
 });
 
-  // Masque la fenêtre des alertes
+// Anime les logos Index
+function animateLogos()
+{
+  var i = 1;
+
+  $('.zone_logo_categories').each(function()
+  {
+    $('#logo' + i).delay(i * 200).animate({
+      opacity: 1,
+      marginTop: 0
+    }, 600);
+
+    i++;
+  });
+}
+
+// Masque la fenêtre des alertes
 function masquerAlerte(id)
 {
   $('#' + id).fadeOut(200);

@@ -5,19 +5,8 @@ $(window).load(function()
   $('.zone_propositions_determination').css('display', 'block');
   $('.zone_restaurants').css('display', 'block');
 
-  // Taille de la zone bande à part à part en fonction de la zone suivante si elle existe
-  if ($('#zone_first').length)
-    $('#zone_solo').css('min-height', $('#zone_first').height());
-
-  // Taille des zones de résumé en fonction de la plus grande
-  var day_height     = $('.jour_semaine').height() + 10;
-  var text_height    = $('.no_proposal').height();
-  var max_height     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
-  var calcul_padding = (max_height - (day_height + text_height + 10)) / 2;
-
-  $('.no_proposal').css('padding-top', calcul_padding);
-  $('.no_proposal').css('padding-bottom', calcul_padding);
-  $('.zone_proposition_resume').css('min-height', max_height);
+  // Calcul automatique des tailles des zones
+  tailleAutoZones();
 
   // On lance Masonry et le scroll après avoir chargé les images
   $('.zone_propositions').masonry({
@@ -86,6 +75,24 @@ function initMasonry()
 
   // Découpe le texte si besoin
   $('.description_restaurant').wrapInner();
+}
+
+// Calcul les tailles des zones automatiquement
+function tailleAutoZones()
+{
+  // Taille de la zone bande à part à part en fonction de la zone suivante si elle existe
+  if ($('#zone_first').length)
+    $('#zone_solo').css('min-height', $('#zone_first').height());
+
+  // Taille des zones de résumé en fonction de la plus grande
+  var day_height     = $('.jour_semaine').height() + 10;
+  var text_height    = $('.no_proposal').height();
+  var max_height     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
+  var calcul_padding = (max_height - (day_height + text_height + 10)) / 2;
+
+  $('.no_proposal').css('padding-top', calcul_padding);
+  $('.no_proposal').css('padding-bottom', calcul_padding);
+  $('.zone_proposition_resume').css('min-height', max_height);
 }
 
 // Affiche ou masque un élément (délai 400ms)
