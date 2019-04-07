@@ -71,9 +71,9 @@
                 }
 
                 if ($no_vote == true)
-                  echo '<input type="submit" name="smiley_0" value="" class="smiley_0" style="background-size: 35px; width: 35px; height: 35px;" />';
+                  echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0" style="background-size: 35px; width: 35px; height: 35px;" />';
                 else
-                  echo '<input type="submit" name="smiley_0" value="" class="smiley_0" />';
+                  echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0" />';
 
                 // Gestion autres smileys
                 for ($j = 1; $j <= 8; $j++)
@@ -83,13 +83,13 @@
                   {
                     if ($vote->getId_collector() == $collector->getId() AND $vote->getVote() == $j)
                     {
-                      echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" style="background-size: 35px; width: 35px; height: 35px;" />';
+                      echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . '" style="background-size: 35px; width: 35px; height: 35px;" />';
                       $founded = true;
                     }
                   }
 
                   if ($founded == false)
-                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley_' . $j . '" />';
+                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . '" />';
                 }
               echo '</form>';
 

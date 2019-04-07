@@ -486,7 +486,7 @@
   box-shadow: 0 0 2px #5c5c5c;
   float: right;
 	padding: 5px;
-	margin-top: -58px;
+	margin-top: -57px;
 	margin-right: 3px;
 	border-radius: 40px;
 	position: relative;
@@ -601,139 +601,63 @@
 	margin-bottom: -12.5px;
 }
 
+.smiley
+{
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 50%;
+	margin-left: 2px;
+	margin-right: 2px;
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+
 .smiley_0
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/0.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_1
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/1.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_2
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/2.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_3
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/3.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_4
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/4.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_5
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/5.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_6
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/6.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_7
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/7.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_8
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 2px;
   background-image: url("/inside/includes/icons/common/smileys/8.png");
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .smiley_votes_1, .smiley_votes_2, .smiley_votes_3, .smiley_votes_4, .smiley_votes_5, .smiley_votes_6, .smiley_votes_7, .smiley_votes_8
