@@ -822,6 +822,7 @@
 	width: calc(100% - 6px);
 	height: calc(100% - 6px);
 	overflow: hidden;
+	text-align: center;
 }
 
 .image_update
