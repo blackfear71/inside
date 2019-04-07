@@ -16,30 +16,7 @@ $(document).ready(function()
 		stroke: 3,
 		duration: 1000
 	});
-
-  animateLogos();
 });
-
-// Anime les logos Index
-function animateLogos()
-{
-  var i = 1;
-
-  $('.zone_logo_categories').each(function()
-  {
-    /*$('#logo' + i).delay(i * 200).animate({
-      opacity: 1,
-      marginTop: 0
-    }, 600);*/
-
-    $('#logo' + i).css('margin-top', 0);
-    $('#logo' + i).css('opacity', 1);
-    $('#logo' + i).css('transition', 'all ease 0.6s');
-    $('#logo' + i).css('transition-delay', i * 0.2 + 's');
-
-    i++;
-  });
-}
 
 // Masque la fenêtre des alertes
 function masquerAlerte(id)

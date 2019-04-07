@@ -30,11 +30,72 @@
 	bottom: 100px;
 }
 
+@keyframes affichageCategorie
+{
+	0%
+	{
+		opacity: 0;
+		margin-top: -50px;
+	}
+	100%
+	{
+		opacity: 1;
+		margin-top: 0;
+	}
+}
+
+/* animation : animation-duration / animation-timing-function / animation-delay / animation-direction / animation-fill-mode / animation-name */
+#logo1
+{
+	animation: 0.6s ease 0.2s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo2
+{
+	animation: 0.6s ease 0.4s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo3
+{
+	animation: 0.6s ease 0.6s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo4
+{
+	animation: 0.6s ease 0.8s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo5
+{
+	animation: 0.6s ease 1s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo6
+{
+	animation: 0.6s ease 1.2s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo7
+{
+	animation: 0.6s ease 1.4s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
+#logo8
+{
+	animation: 0.6s ease 1.6s normal forwards 1 affichageCategorie;
+	opacity: 0;
+}
+
 .zone_logo_categories
 {
 	display: inline-block;
-	margin-top: -100px;
-	opacity: 0;
 	height: 50px;
 	width: 50px;
 	background-color: #b3b3b3;
