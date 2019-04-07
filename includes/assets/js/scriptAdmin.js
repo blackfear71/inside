@@ -1,5 +1,5 @@
 // Au chargement du document complet
-$(window).load(function()
+$(window).on('load', function()
 {
   // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');

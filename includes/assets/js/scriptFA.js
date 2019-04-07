@@ -1,5 +1,5 @@
 // Au chargement du document complet
-$(window).load(function()
+$(window).on('load', function()
 {
   // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_propositions_determination').css('display', 'block');

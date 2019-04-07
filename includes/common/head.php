@@ -38,8 +38,8 @@
 ?>
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 

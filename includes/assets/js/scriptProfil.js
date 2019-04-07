@@ -19,7 +19,7 @@ $(document).ready(function()
 });
 
 // Au chargement du document complet
-$(window).load(function()
+$(window).on('load', function()
 {
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_profil').css('display', 'block');

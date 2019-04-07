@@ -1,5 +1,5 @@
 // Au chargement du document complet
-$(window).load(function()
+$(window).on('load', function()
 {
   // On lance Masonry et le scroll après avoir chargé les images
   $('.zone_collectors').masonry({
