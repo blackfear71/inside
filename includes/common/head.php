@@ -18,17 +18,20 @@
   echo '<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />';
   echo '<meta name="keywords" content="Inside, portail, CDS Finance" />';
 
-  // Links
+  // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
   echo '<link rel="stylesheet" href="/inside/includes/assets/css/style.css?version=' . $last_modification_css . '" />';
-  echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">';
+  //echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">';
 
-  // Style spécifique
+  // Styles spécifiques
   if (!empty($style_head))
     echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $style_head . '?version=' . $last_modification_css2 . '" />';
 
   if (isset($chat_head) AND $chat_head == true)
     echo '<link rel="stylesheet" href="/inside/includes/assets/css/styleChat.css?version=' . $last_modification_css_chat . '" />';
+
+  if (isset($datepicker_head) AND $datepicker_head == true)
+    echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css">';
 
   // Title
   if (!empty($title_head))
@@ -37,9 +40,9 @@
     echo '<title>Inside</title>';
 ?>
 
-<!-- Scripts -->
+<!-- Scripts communs -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 <script src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
@@ -58,4 +61,8 @@
 
 <?php if (isset($exif_head) AND $exif_head == true) { ?>
   <script src="/inside/includes/libraries/js/exif.js"></script>
+<?php } ?>
+
+<?php if (isset($datepicker_head) AND $datepicker_head == true) { ?>
+  <script src="/inside/includes/libraries/js/datepicker.js"></script>
 <?php } ?>

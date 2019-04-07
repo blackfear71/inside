@@ -3,10 +3,11 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "MH";
-      $style_head  = "styleMH.css";
-      $script_head = "scriptMH.js";
-      $chat_head   = true;
+      $title_head      = "MH";
+      $style_head      = "styleMH.css";
+      $script_head     = "scriptMH.js";
+      $chat_head       = true;
+      $datepicker_head = true;
 
       include('../../includes/common/head.php');
     ?>
