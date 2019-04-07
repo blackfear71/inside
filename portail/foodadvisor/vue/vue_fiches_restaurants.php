@@ -136,7 +136,7 @@
                     echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="" id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
                   else
                     echo '<img id="img_restaurant[' . $restaurant->getId() . ']" alt="" class="update_image_restaurant" />';
-                  echo '</div>';
+                echo '</div>';
               echo '</div>';
 
               // Validation modification

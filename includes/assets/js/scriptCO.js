@@ -70,6 +70,16 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeOut(0);
 }
 
+// Adapte la zone "Parcourir" en fonction de la taille de l'image à son chargement
+function adaptBrowse(id)
+{
+  var image_height = $('#image_collector_' + id).height();
+  var marge        = -1 * (image_height + 6);
+
+  $('#zone_parcourir_' + id).height(image_height);
+  $('#mask_collector_' + id).css('margin-top', marge);
+}
+
 // Insère une prévisualisation de l'image sur la zone
 var loadFile = function(event, id)
 {

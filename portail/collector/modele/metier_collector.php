@@ -454,10 +454,11 @@
     $req1 = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
     $data1 = $req1->fetch();
 
-    if (isset($data1['collector']) AND !empty($data1['collector']) AND $data1['type_collector'] == "I")
-      unlink ("../../includes/images/collector/" . $data1['collector']);
-
+    $collector      = $data1['collector'];
     $type_collector = $data1['type_collector'];
+
+    if (isset($collector) AND !empty($collector) AND $type_collector == "I")
+      unlink ("../../includes/images/collector/" . $data1['collector']);
 
     $req1->closeCursor();
 
@@ -479,9 +480,31 @@
 
   // METIER : Modification phrases cultes
   // RETOUR : Aucun
-  function updateCollector($post, $id_col)
+  function updateCollector($post, $files, $id_col)
   {
-    $collector       = $post['collector'];
+    global $bdd;
+
+    if ($post['type_collector'] == "I")
+    {
+      // On récupère le nom de l'image existante
+      $reponse = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
+      $donnees = $reponse->fetch();
+      $collector      = $donnees['collector'];
+      $type_collector = $donnees['type_collector'];
+      $reponse->closeCursor();
+
+      // Si on modifie l'image, on supprime l'ancienne et on insère la nouvelle
+      if ($files['image']['name'] != NULL)
+      {        
+        if (isset($collector) AND !empty($collector) AND $type_collector == "I")
+          unlink ("../../includes/images/collector/" . $collector);
+
+        $collector   = uploadImage($files, rand());
+      }
+    }
+    else
+      $collector     = $post['collector'];
+
     $date_a_verifier = $post['date_collector'];
 
     // On décompose la date à contrôler
@@ -490,9 +513,7 @@
     // On vérifie le format de la date
     if (checkdate($m, $d, $y))
     {
-      global $bdd;
-
-      // On récupère éventuellement le nom du fichier en cas d'image
+      /*// On récupère éventuellement le nom du fichier en cas d'image
       if ($post['type_collector'] == "I")
       {
         $reponse = $bdd->query('SELECT id, collector FROM collector WHERE id = ' . $id_col);
@@ -501,7 +522,7 @@
         $collector = $donnees['collector'];
 
         $reponse->closeCursor();
-      }
+      }*/
 
       // Speaker
       if ($post['speaker'] == "other")

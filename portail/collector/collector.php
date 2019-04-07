@@ -62,7 +62,7 @@
       break;
 
     case "doModifier":
-      updateCollector($_POST, $_GET['update_id']);
+      updateCollector($_POST, $_FILES, $_GET['update_id']);
       break;
 
     case "doVoter":

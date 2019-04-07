@@ -17,7 +17,7 @@
               echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
 
               // Modification
-              echo '<a onclick="afficherMasquerNoDelay(\'modifier_collector_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'visualiser_collector_' . $collector->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
+              echo '<a onclick="afficherMasquerNoDelay(\'modifier_collector_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'visualiser_collector_' . $collector->getId() . '\'); adaptBrowse(\'' . $collector->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
 
               // Suppression
               if ($collector->getType_collector() == "T")
@@ -176,7 +176,7 @@
         /* Caché pour modification */
         /***************************/
         echo '<div class="zone_collector" id="modifier_collector_' . $collector->getId() . '" style="display: none; position: relative; z-index: 2;">';
-          echo '<form method="post" action="collector.php?update_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="zone_shadow">';
+          echo '<form method="post" action="collector.php?update_id=' . $collector->getId() . '&action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" enctype="multipart/form-data" class="zone_shadow">';
             if ($collector->getNb_votes() >= $min_golden)
               echo '<div class="zone_collector_haut_golden">';
             else
@@ -257,7 +257,17 @@
                 echo '<input type="hidden" name="type_collector" value="I" />';
 
                 // Image
-                echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
+                echo '<div class="zone_update_image">';
+                  echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+
+                  echo '<span class="zone_parcourir_update" id="zone_parcourir_' . $collector->getId() . '">';
+                    echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_update" onchange="loadFile(event, \'image_collector_' . $collector->getId() . '\',  \'' . $collector->getId() . '\');" />';
+                  echo '</span>';
+
+                  echo '<div class="mask_update" id="mask_collector_' . $collector->getId() . '">';
+                    echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" onload="adaptBrowse(\'' . $collector->getId() . '\'); initMasonry();" id="image_collector_' . $collector->getId() . '" alt="' . $collector->getCollector() . '" class="image_update" />';
+                  echo '</div>';
+                echo '</div>';
               }
 
               // Contexte
