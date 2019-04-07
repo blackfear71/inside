@@ -129,13 +129,13 @@
               echo '<div class="zone_update_image">';
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-                echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update" onchange="loadFile(event, \'img_restaurant[' . $restaurant->getId() . ']\')" /></span>';
+                echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update" onchange="loadFile(event, \'img_restaurant_' . $restaurant->getId() . '\')" /></span>';
 
                 echo '<div class="mask_update_restaurant">';
                   if (!empty($restaurant->getPicture()))
-                    echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="" id="img_restaurant[' . $restaurant->getId() . ']" class="update_image_restaurant" />';
+                    echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="" id="img_restaurant_' . $restaurant->getId() . '" class="update_image_restaurant" />';
                   else
-                    echo '<img id="img_restaurant[' . $restaurant->getId() . ']" alt="" class="update_image_restaurant" />';
+                    echo '<img id="img_restaurant_' . $restaurant->getId() . '" alt="" class="update_image_restaurant" />';
                 echo '</div>';
               echo '</div>';
 
