@@ -1018,7 +1018,10 @@
       length = getDaysInMonth(viewYear, viewMonth); // The visible length of next month (42 means 6 rows and 7 columns)
 
       //n = 42 - (prevItems.length + length); // The last day of current month
-      n = 35 - (prevItems.length + length); // (35 means 5 rows and 7 columns)
+      if (prevItems.length + length > 35)
+        n = 42 - (prevItems.length + length); // (42 means 6 rows and 7 columns)
+      else
+        n = 35 - (prevItems.length + length); // (35 means 5 rows and 7 columns)
 
       var lastDate = new Date(viewYear, viewMonth, length);
 
