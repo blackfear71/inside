@@ -11,7 +11,8 @@
 	overflow: auto;
 	border-radius: 2px;
 	margin-top: 200px;
-	margin-bottom: 100px;
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
 }
 
 .zone_actions
@@ -81,17 +82,26 @@
 {
 	background-color: #d3d3d3;
 	display: inline-block;
-	width: 240px;
+	width: 200px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	text-align: center;
 	line-height: 94px;
 }
 
+.logo_proposition
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -5px;
+	margin-right: 10px;
+	height: 30px;
+}
+
 .zone_listbox
 {
 	display: inline-block;
-	width: calc(25% - 60px);
+	width: calc(25% - 50px);
 	margin-top: -5px;
 	vertical-align: middle;
 }
@@ -1302,11 +1312,13 @@
 .zone_saisie_restaurant
 {
 	width: 85%;
-	margin-top: 200px;
+	margin-top: 100px;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: auto;
 	border-radius: 2px;
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
 }
 
 .titre_saisie_restaurant

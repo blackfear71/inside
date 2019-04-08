@@ -14,7 +14,7 @@
       echo '<form method="post" action="foodadvisor.php?action=doAjouter" class="form_choices">';
         echo '<div id="zone_choix">';
           // Titre
-          echo '<div class="titre_choix">Proposition 1</div>';
+          echo '<div class="titre_choix"><img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_proposition" />Proposition 1</div>';
 
           // Choix restaurant
           echo '<div id="zone_listbox_restaurant_1" class="zone_listbox">';

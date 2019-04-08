@@ -320,9 +320,34 @@ function addChoice(id, zone)
   var html;
   var num     = $("#" + id + " span").length / 4;
   var new_num = num + 1;
+  var icon;
+
+  // Sélection du logo
+  switch (new_num)
+  {
+    case 2:
+      icon = "location_grey";
+      break;
+
+    case 3:
+      icon = "menu_grey";
+      break;
+
+    case 4:
+      icon = "feet";
+      break;
+
+    case 5:
+      icon = "restaurants_grey";
+      break;
+
+    default:
+      icon = "propositions_grey";
+      break;
+  }
 
   // On ajoute de nouveaux champs de saisie
-  html  = '<div class="titre_choix">Proposition ' + new_num + '</div>';
+  html  = '<div class="titre_choix"><img src="../../includes/icons/foodadvisor/' + icon + '.png" alt="' + icon + '" class="logo_proposition" />Proposition ' + new_num + '</div>';
 
   html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_listbox">';
     html += '<a id="choix_restaurant_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_restaurant_' + new_num + '\'); afficherListboxLieux(\'zone_listbox_restaurant_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Restaurant</a>';
