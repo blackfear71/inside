@@ -10,7 +10,7 @@
         /* Visualisation normale (sans modification) */
         /*********************************************/
         echo '<div class="zone_collector" id="visualiser_collector_' . $collector->getId() . '">';
-          echo '<div class="zone_shadow" id="zone_shadow_' . $collector->getId() . '">';
+          echo '<div id="zone_shadow_' . $collector->getId() . '" class="zone_shadow">';
             if ($collector->getNb_votes() >= $min_golden)
               echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';
             else

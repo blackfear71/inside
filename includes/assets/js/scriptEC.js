@@ -4,9 +4,10 @@ $(document).ready(function()
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
   var offset = 30;
+  var shadow = false;
 
   // Scroll vers l'id
-  scrollToId(id, offset);
+  scrollToId(id, offset, shadow);
 });
 
 // Affiche ou masque les lignes de visualisation/modification du tableau

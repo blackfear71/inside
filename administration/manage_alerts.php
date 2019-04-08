@@ -70,13 +70,13 @@
   {
     case "doAjouter":
       if (!empty($new_id))
-        header('location: manage_alerts.php?action=goConsulter&anchor=' . $new_id);
+        header('location: manage_alerts.php?action=goConsulter&anchorAlerts=' . $new_id);
       else
         header('location: manage_alerts.php?action=goConsulter');
       break;
 
     case "doModifier":
-      header('location: manage_alerts.php?action=goConsulter&anchor=' . $_GET['update_id']);
+      header('location: manage_alerts.php?action=goConsulter&anchorAlerts=' . $_GET['update_id']);
       break;
 
     case "doSupprimer":

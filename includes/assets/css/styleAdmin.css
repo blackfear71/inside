@@ -565,6 +565,7 @@
 	border-collapse: collapse;
 	border-radius: 5px;
 	overflow: hidden;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .td_bugs_title

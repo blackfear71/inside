@@ -196,7 +196,7 @@ function $_GET(param)
 }
 
 // Positionnement du scroll vertical en fonction de l'id et de l'offset (en px)
-function scrollToId(id, offset)
+function scrollToId(id, offset, shadow = false)
 {
   if (offset == null)
     offset = 0;
@@ -214,5 +214,19 @@ function scrollToId(id, offset)
 
     // On lance l'animation
     $('html, body').animate({scrollTop: posScroll}, speed);
+
+    // Affichage d'une ombre pour un id "#zone_shadow_id"
+    if (shadow == true)
+    {
+      // On applique un style pour mettre en valeur l'élément puis on le fait disparaitre au bout de 5 secondes
+      $('#zone_shadow_' + id).css('box-shadow', '0 3px 10px #262626');
+
+      setTimeout(function()
+      {
+        $('#zone_shadow_' + id).css('box-shadow', '0 0 3px #7c7c7c');
+        $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
+      }, 5000);
+    }
+
   }
 }

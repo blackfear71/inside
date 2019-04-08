@@ -19,7 +19,7 @@
       $date_bug = formatDateForDisplay($bug->getDate());
 
       // Affichage des idées
-  		echo '<table class="table_bugs" id="zone_shadow_' . $bug->getId() . '">';
+  		echo '<table id="zone_shadow_' . $bug->getId() . '" class="table_bugs">';
   			echo '<tr id="' . $bug->getId() . '">';
   				// Titre idée
   				echo '<td class="td_bugs_title">';

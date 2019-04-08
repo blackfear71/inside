@@ -1,25 +1,6 @@
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
-  // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
-  var id     = $_GET('anchor');
-  var offset = 30;
-
-  // Scroll vers l'id
-  scrollToId(id, offset);
-
-  // On applique un style pour mettre en valeur l'élément puis on le fait disparaitre au bout de 5 secondes
-  if (id != null)
-  {
-    $('#zone_shadow_' + id).css('box-shadow', '0 3px 10px #262626');
-
-    setTimeout(function()
-    {
-      $('#zone_shadow_' + id).css('box-shadow', 'none');
-      $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
-    }, 5000);
-  }
-
   // Masonry (Thèmes)
   if ($('.zone_themes').length)
   {
@@ -35,13 +16,6 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_themes').addClass('masonry');
   }
-
-  // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
-  var id_theme     = $_GET('anchorTheme');
-  var offset_theme = 30;
-
-  // Scroll vers l'id
-  scrollToId(id_theme, offset_theme);
 
   // Masonry (Portail)
   if ($('.menu_admin').length)
@@ -109,6 +83,30 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_niveau_mod_succes_admin').addClass('masonry');
   }
+
+  // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id     = $_GET('anchor');
+  var offset = 30;
+  var shadow = true;
+
+  // Scroll vers l'id
+  scrollToId(id, offset, shadow);
+
+  // Déclenchement du scroll pour "anchorAlerts" : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id_alerts     = $_GET('anchorAlerts');
+  var offset_alerts = 30;
+  var shadow_alerts = false;
+
+  // Scroll vers l'id
+  scrollToId(id_alerts, offset_alerts, shadow_alerts);
+
+  // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id_theme     = $_GET('anchorTheme');
+  var offset_theme = 30;
+  var shadow_theme = false;
+
+  // Scroll vers l'id
+  scrollToId(id_theme, offset_theme, shadow_theme);
 });
 
 // Initialisation manuelle de "Masonry"
