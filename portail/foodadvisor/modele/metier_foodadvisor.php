@@ -40,14 +40,14 @@
                     );
 
     // Contrôle date et heure
-    if (date("N") > 5 OR date("H") >= 13)
+    /*if (date("N") > 5 OR date("H") >= 13)
     {
       $actions["determiner"]       = false;
       $actions["solo"]             = false;
       $actions["choix"]            = false;
       $actions["reserver"]         = false;
       $actions["annuler_reserver"] = false;
-    }
+    }*/
 
     // Contrôle propositions présentes (pour bouton détermination)
     if ($actions["determiner"] == true)
@@ -183,8 +183,7 @@
         $proposition->setClassement($currentClassement);
 
         // Récupération détails proposition
-        if ($proposition->getDetermined() == "Y" OR $proposition->getClassement() == 1)
-          $proposition->setDetails(getDetailsProposition($proposition));
+        $proposition->setDetails(getDetailsProposition($proposition));
       }
 
       // Tri par détermination puis nombre de participants pour affichage
@@ -194,7 +193,7 @@
     return $listPropositions;
   }
 
-  // METIER : Récupère les détails utilisateurs de la proposition déterminée
+  // METIER : Récupère les détails utilisateurs de la proposition
   // RETOUR : Tableau des détails
   function getDetailsProposition($proposition)
   {

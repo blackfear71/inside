@@ -174,11 +174,26 @@
             // Bouton réservation / annulation
             if ($actions["reserver"] == true)
             {
-              echo '<div class="zone_reservation">';
-                echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
-                  echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
-                echo '</form>';
-              echo '</div>';
+              // On vérifie si on participe à chacun des restaurants pour pouvoir réserver
+              $participe = false;
+
+              foreach ($proposition->getDetails() as $detailsUser)
+              {
+                if ($_SESSION['user']['identifiant'] == $detailsUser['identifiant'])
+                {
+                  $participe = true;
+                  break;
+                }
+              }
+
+              if ($participe == true)
+              {
+                echo '<div class="zone_reservation">';
+                  echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
+                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                  echo '</form>';
+                echo '</div>';
+              }
             }
 
             if ($proposition->getDetermined() == "Y" AND ($proposition->getReserved() == "Y" OR $actions["annuler_reserver"] == true))
@@ -243,11 +258,26 @@
             // Bouton réservation
             if ($actions["reserver"] == true)
             {
-              echo '<div class="zone_reservation">';
-                echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
-                  echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
-                echo '</form>';
-              echo '</div>';
+              // On vérifie si on participe à chacun des restaurants pour pouvoir réserver
+              $participe = false;
+
+              foreach ($proposition->getDetails() as $detailsUser)
+              {
+                if ($_SESSION['user']['identifiant'] == $detailsUser['identifiant'])
+                {
+                  $participe = true;
+                  break;
+                }
+              }
+
+              if ($participe == true)
+              {
+                echo '<div class="zone_reservation">';
+                  echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
+                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                  echo '</form>';
+                echo '</div>';
+              }
             }
           echo '</div>';
         }
