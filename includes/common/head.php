@@ -1,5 +1,5 @@
 <?php
-  // Dates de dernière modification (CSS et JS)
+  // Dates de dernière modification (CSS et JS) pour mise à jour automatique du cache du navigateur
   $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/style.css');
 
   if (!empty($style_head))
@@ -8,12 +8,15 @@
   if (isset($chat_head) AND $chat_head == true)
     $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/styleChat.css');
 
+  if (isset($datepicker_head) AND $datepicker_head == true)
+    $last_modification_css_datepicker = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/libraries/css/datepicker.css');
+
   $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/script.js');
 
   if (!empty($script_head))
     $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $script_head);
 
-  // Metas
+  // Meta-données
   echo '<meta charset="utf-8" />';
   echo '<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />';
   echo '<meta name="keywords" content="Inside, portail, CDS Finance" />';
@@ -21,7 +24,6 @@
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
   echo '<link rel="stylesheet" href="/inside/includes/assets/css/style.css?version=' . $last_modification_css . '" />';
-  //echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">';
 
   // Styles spécifiques
   if (!empty($style_head))
@@ -31,7 +33,7 @@
     echo '<link rel="stylesheet" href="/inside/includes/assets/css/styleChat.css?version=' . $last_modification_css_chat . '" />';
 
   if (isset($datepicker_head) AND $datepicker_head == true)
-    echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css">';
+    echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $last_modification_css_datepicker . '">';
 
   // Title
   if (!empty($title_head))
@@ -42,7 +44,6 @@
 
 <!-- Scripts communs -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 <script src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
