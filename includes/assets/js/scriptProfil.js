@@ -24,18 +24,21 @@ $(window).on('load', function()
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_profil').css('display', 'block');
 
-  // On lance Masonry et le scroll après avoir chargé les images
-  $('.zone_niveau_succes').masonry({
-    // Options
-    itemSelector: '.succes_liste',
-    columnWidth: 160,
-    fitWidth: true,
-    gutter: 30,
-    horizontalOrder: true
-  });
+  // Masonry
+  if ($('.zone_niveau_succes').length)
+  {
+    $('.zone_niveau_succes').masonry({
+      // Options
+      itemSelector: '.succes_liste',
+      columnWidth: 160,
+      fitWidth: true,
+      gutter: 30,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_niveau_succes').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_niveau_succes').addClass('masonry');
+  }
 });
 
 // Insère une prévisualisation de l'image sur la page

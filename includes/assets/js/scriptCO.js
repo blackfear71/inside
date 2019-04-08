@@ -1,18 +1,21 @@
 // Au chargement du document complet
 $(window).on('load', function()
 {
-  // On lance Masonry et le scroll après avoir chargé les images
-  $('.zone_collectors').masonry({
-    // Options
-    itemSelector: '.zone_collector',
-    columnWidth: 525,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-  });
+  // Masonry
+  if ($('.zone_collectors').length)
+  {
+    $('.zone_collectors').masonry({
+      // Options
+      itemSelector: '.zone_collector',
+      columnWidth: 525,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_collectors').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_collectors').addClass('masonry');
+  }
 
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
@@ -184,18 +187,21 @@ $(function()
 // Génère un ou plusieurs calendrier
 $(function()
 {
-  $("#datepicker_collector, #datepicker_image").datepicker(
+  if ($("#datepicker_collector").length || $("#datepicker_image").length)
   {
-    autoHide: true,
-    language: 'fr-FR',
-    format: 'dd/mm/yyyy',
-    weekStart: 1,
-    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-    daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-    daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-    monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-  });
+    $("#datepicker_collector, #datepicker_image").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
 
   $('.modify_date_collector').each(function()
   {

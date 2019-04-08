@@ -1,4 +1,4 @@
-// Au chargement du document complet
+// Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
   // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
@@ -20,18 +20,21 @@ $(window).on('load', function()
     }, 5000);
   }
 
-  // On lance Masonry après avoir chargé les images (Thèmes)
-  $('.zone_themes').masonry({
-    // Options
-    itemSelector: '.zone_theme',
-    columnWidth: 500,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-  });
+  // Masonry (Thèmes)
+  if ($('.zone_themes').length)
+  {
+    $('.zone_themes').masonry({
+      // Options
+      itemSelector: '.zone_theme',
+      columnWidth: 500,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_themes').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_themes').addClass('masonry');
+  }
 
   // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id_theme     = $_GET('anchorTheme');
@@ -40,8 +43,8 @@ $(window).on('load', function()
   // Scroll vers l'id
   scrollToId(id_theme, offset_theme);
 
-  // On lance Masonry après avoir chargé les zones (Portail)
-  $('.menu_admin').ready(function()
+  // Masonry (Portail)
+  if ($('.menu_admin').length)
   {
     $('.menu_admin').masonry({
       // Options
@@ -54,49 +57,58 @@ $(window).on('load', function()
 
     // On associe une classe pour y ajouter une transition dans le css
     $('.menu_admin').addClass('masonry');
-  });
+  }
 
-  // On lance Masonry après avoir chargé les images (Infos utilisateurs)
-  $('.zone_infos').masonry({
-    // Options
-    itemSelector: '.zone_infos_user',
-    columnWidth: 300,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-  });
+  // Masonry (Infos utilisateurs)
+  if ($('.zone_infos').length)
+  {
+    $('.zone_infos').masonry({
+      // Options
+      itemSelector: '.zone_infos_user',
+      columnWidth: 300,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_infos').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_infos').addClass('masonry');
+  }
 
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_admin').css('display', 'block');
 
-  // On lance Masonry après avoir chargé les images (Succès)
-  $('.zone_niveau_succes_admin').masonry({
-    // Options
-    itemSelector: '.ensemble_succes',
-    columnWidth: 180,
-    fitWidth: true,
-    gutter: 10,
-    horizontalOrder: true
-  });
+  // Masonry (Succès)
+  if ($('.zone_niveau_succes_admin').length)
+  {
+    $('.zone_niveau_succes_admin').masonry({
+      // Options
+      itemSelector: '.ensemble_succes',
+      columnWidth: 180,
+      fitWidth: true,
+      gutter: 10,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_niveau_succes_admin').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_niveau_succes_admin').addClass('masonry');
+  }
 
-  // On lance Masonry après avoir chargé les images (Modification succès)
-  $('.zone_niveau_mod_succes_admin').masonry({
-    // Options
-    itemSelector: '.succes_liste_mod',
-    columnWidth: 320,
-    fitWidth: true,
-    gutter: 25,
-    horizontalOrder: true
-  });
+  // Masonry (Modification succès)
+  if ($('.zone_niveau_mod_succes_admin').length)
+  {
+    $('.zone_niveau_mod_succes_admin').masonry({
+      // Options
+      itemSelector: '.succes_liste_mod',
+      columnWidth: 320,
+      fitWidth: true,
+      gutter: 25,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_niveau_mod_succes_admin').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_niveau_mod_succes_admin').addClass('masonry');
+  }
 });
 
 // Initialisation manuelle de "Masonry"
@@ -150,18 +162,21 @@ var loadFile = function(event, id)
 // Génère un calendrier
 $(function()
 {
-  $("#datepicker_saisie_deb, #datepicker_saisie_fin").datepicker(
+  if ($("#datepicker_saisie_deb").length || $("#datepicker_saisie_fin").length)
   {
-    autoHide: true,
-    language: 'fr-FR',
-    format: 'dd/mm/yyyy',
-    weekStart: 1,
-    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-    daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-    daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-    monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-  });
+    $("#datepicker_saisie_deb, #datepicker_saisie_fin").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
 
   $('.modify_date_deb_theme, .modify_date_fin_theme').each(function()
   {

@@ -8,28 +8,37 @@ $(window).on('load', function()
   // Calcul automatique des tailles des zones
   tailleAutoZones();
 
-  // On lance Masonry et le scroll après avoir chargé les images
-  $('.zone_propositions').masonry({
-    // Options
-    itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
-    columnWidth: 200,
-    fitWidth: true,
-    gutter: 30,
-    horizontalOrder: true
-  });
+  // Masonry (Propositions)
+  if ($('.zone_propositions').length)
+  {
+    $('.zone_propositions').masonry({
+      // Options
+      itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
+      columnWidth: 200,
+      fitWidth: true,
+      gutter: 30,
+      horizontalOrder: true
+    });
 
-  $('.zone_fiches_restaurants').masonry({
-    // Options
-    itemSelector: '.fiche_restaurant',
-    columnWidth: 400,
-    fitWidth: true,
-    gutter: 30,
-    horizontalOrder: true
-  });
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_propositions').addClass('masonry');
+  }
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_propositions').addClass('masonry');
-  $('.zone_fiches_restaurants').addClass('masonry');
+  // Masonry (Restaurants)
+  if ($('.zone_fiches_restaurants').length)
+  {
+    $('.zone_fiches_restaurants').masonry({
+      // Options
+      itemSelector: '.fiche_restaurant',
+      columnWidth: 400,
+      fitWidth: true,
+      gutter: 30,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_fiches_restaurants').addClass('masonry');
+  }
 
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');

@@ -1,21 +1,24 @@
-// Au chargement du document complet
+// Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
   // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_home').css('display', 'block');
 
-  // On lance Masonry et le scroll après avoir chargé les images
-  $('.zone_films_accueil').masonry({
-    // Options
-    itemSelector: '.zone_film_accueil',
-    columnWidth: 250,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true
-  });
+  // Masonry
+  if ($('.zone_films_accueil').length)
+  {
+    $('.zone_films_accueil').masonry({
+      // Options
+      itemSelector: '.zone_film_accueil',
+      columnWidth: 250,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
 
-  // On associe une classe pour y ajouter une transition dans le css
-  $('.zone_films_accueil').addClass('masonry');
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_films_accueil').addClass('masonry');
+  }
 
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
@@ -51,18 +54,21 @@ function afficherMasquer(id)
 // Génère un calendrier
 $(function()
 {
-  $("#datepicker_sortie_1, #datepicker_sortie_2, #datepicker_doodle").datepicker(
+  if ($("#datepicker_sortie_1").length || $("#datepicker_sortie_2").length || $("#datepicker_doodle").length)
   {
-    autoHide: true,
-    language: 'fr-FR',
-    format: 'dd/mm/yyyy',
-    weekStart: 1,
-    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-    daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-    daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-    monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-  });
+    $("#datepicker_sortie_1, #datepicker_sortie_2, #datepicker_doodle").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
 });
 
 // Insère un smiley dans la zone de saisie
