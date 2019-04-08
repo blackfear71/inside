@@ -44,7 +44,6 @@
 
 .datepicker-dropdown
 {
-  border: 1px solid #cccccc;
   -webkit-box-shadow: 0 0 3px #7c7c7c;
   box-shadow: 0 0 3px #7c7c7c;
   -webkit-box-sizing: content-box;
@@ -83,8 +82,8 @@
 .datepicker-top-left::after,
 .datepicker-top-right::after
 {
-  border-bottom-color: white;
-  top: -4px;
+  border-bottom-color: #262626;
+  top: -5px;
 }
 
 .datepicker-bottom-left,
@@ -194,7 +193,7 @@
 }
 
 .datepicker-panel > ul > li.disabled,
-.datepicker-panel > ul > li.disabled:hove
+.datepicker-panel > ul > li.disabled:hover
 {
   background-color: white;
   color: #cccccc;

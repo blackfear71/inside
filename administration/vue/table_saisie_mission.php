@@ -105,8 +105,8 @@
       // Dates
       echo '<tr>';
         echo '<td colspan="3" class="dates_saisie_mission">';
-          echo 'Du <input type="text" name="date_deb" value="' . formatDateForDisplay($detailsMission->getDate_deb()) . '" placeholder="Date de début" maxlength="10" autocomplete="off" id="datepicker" class="input_mission_date" required />';
-          echo ' au <input type="text" name="date_fin" value="' . formatDateForDisplay($detailsMission->getDate_fin()) . '" placeholder="Date de fin" maxlength="10" autocomplete="off" id="datepicker2" class="input_mission_date" style="margin-left: 2px;" required />';
+          echo 'Du <input type="text" name="date_deb" value="' . formatDateForDisplay($detailsMission->getDate_deb()) . '" placeholder="Date de début" maxlength="10" autocomplete="off" id="datepicker_saisie_deb" class="input_mission_date" required />';
+          echo ' au <input type="text" name="date_fin" value="' . formatDateForDisplay($detailsMission->getDate_fin()) . '" placeholder="Date de fin" maxlength="10" autocomplete="off" id="datepicker_saisie_fin" class="input_mission_date" style="margin-left: 2px;" required />';
         echo '</td>';
       echo '</tr>';
 

@@ -103,9 +103,9 @@
               // Dates de début et de fin
               echo '<div class="theme_dates" style="padding-top: 7px; padding-bottom: 7px;">';
                 echo '<div class="theme_texte_dates">Du&nbsp;</div>';
-                echo '<input type="text" name="theme_date_deb" value="' . $_SESSION['save']['theme_date_deb'] . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker" class="saisie_date_theme" required />';
+                echo '<input type="text" name="theme_date_deb" value="' . $_SESSION['save']['theme_date_deb'] . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_saisie_deb" class="saisie_date_theme" required />';
                 echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';
-                echo '<input type="text" name="theme_date_fin" value="' . $_SESSION['save']['theme_date_fin'] . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker2" class="saisie_date_theme" required />';
+                echo '<input type="text" name="theme_date_fin" value="' . $_SESSION['save']['theme_date_fin'] . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_saisie_fin" class="saisie_date_theme" required />';
               echo '</div>';
             echo '</form>';
 
