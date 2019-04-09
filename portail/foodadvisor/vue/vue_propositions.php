@@ -31,21 +31,8 @@
   if (!empty($propositions) OR !empty($solos))
   {
     echo '<div class="zone_propositions">';
-
-
-
-
-
-
-
-
-
-
-
-
-
       // Bande à part et votants restants
-      if (!empty($solos) OR (!empty($sansPropositions)/* AND date("N") <= 5 AND date("H") < 13*/))
+      if (!empty($solos) OR (!empty($sansPropositions) AND date("N") <= 5 AND date("H") < 13))
       {
         echo '<div id="zone_solo_no_votes">';
           // Bande à part
@@ -71,7 +58,7 @@
           }
 
           // Utilisateurs sans votes
-          //if (date("N") <= 5 AND date("H") < 13)
+          if (date("N") <= 5 AND date("H") < 13)
           {
             if (!empty($sansPropositions))
             {
@@ -96,17 +83,6 @@
           }
         echo '</div>';
       }
-
-
-
-
-
-
-
-
-
-
-
 
       // Propositions
       foreach ($propositions as $proposition)
