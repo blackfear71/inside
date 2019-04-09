@@ -13,7 +13,7 @@ $(window).on('load', function()
   {
     $('.zone_propositions').masonry({
       // Options
-      itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
+      itemSelector: '.zone_proposition, #zone_solo_no_votes, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
       columnWidth: 200,
       fitWidth: true,
       gutter: 30,
@@ -80,7 +80,7 @@ function tailleAutoZones()
 {
   // Taille de la zone bande à part à part en fonction de la zone suivante si elle existe
   if ($('#zone_first').length)
-    $('#zone_solo').css('min-height', $('#zone_first').height());
+    $('#zone_solo_no_votes').css('min-height', $('#zone_first').height());
 
   // Taille des zones de résumé en fonction de la plus grande
   var day_height     = $('.jour_semaine').height() + 10;

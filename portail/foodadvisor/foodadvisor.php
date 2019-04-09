@@ -25,12 +25,14 @@
       // Propositions, choix et semaine
       $propositions     = getPropositions();
       $solos            = getSolos();
-      $sansPropositions = getNoPropositions();
       $mesChoix         = getMyChoices($_SESSION['user']['identifiant']);
       $isSolo           = getSolo($_SESSION['user']['identifiant']);
       $isReserved       = getReserved($_SESSION['user']['identifiant']);
       $choixSemaine     = getWeekChoices();
       $actions          = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
+
+      if (!empty($propositions))
+        $sansPropositions = getNoPropositions();
       break;
 
     case 'doDeterminer':
@@ -161,15 +163,6 @@
 
       unset($solo);
 
-      foreach ($sansPropositions as &$userNoChoice)
-      {
-        $userNoChoice->setIdentifiant(htmlspecialchars($userNoChoice->getIdentifiant()));
-        $userNoChoice->setPseudo(htmlspecialchars($userNoChoice->getPseudo()));
-        $userNoChoice->setAvatar(htmlspecialchars($userNoChoice->getAvatar()));
-      }
-
-      unset($userNoChoice);
-
       foreach ($mesChoix as &$monChoix)
       {
         $monChoix->setId_restaurant(htmlspecialchars($monChoix->getId_restaurant()));
@@ -206,6 +199,18 @@
       }
 
       unset($choixJour);
+
+      if (!empty($sansPropositions))
+      {
+        foreach ($sansPropositions as &$userNoChoice)
+        {
+          $userNoChoice->setIdentifiant(htmlspecialchars($userNoChoice->getIdentifiant()));
+          $userNoChoice->setPseudo(htmlspecialchars($userNoChoice->getPseudo()));
+          $userNoChoice->setAvatar(htmlspecialchars($userNoChoice->getAvatar()));
+        }
+
+        unset($userNoChoice);
+      }
       break;
 
     case 'doDeterminer':

@@ -40,14 +40,14 @@
                     );
 
     // Contrôle date et heure
-    if (date("N") > 5 OR date("H") >= 13)
+    /*if (date("N") > 5 OR date("H") >= 13)
     {
       $actions["determiner"]       = false;
       $actions["solo"]             = false;
       $actions["choix"]            = false;
       $actions["reserver"]         = false;
       $actions["annuler_reserver"] = false;
-    }
+    }*/
 
     // Contrôle propositions présentes (pour bouton détermination)
     if ($actions["determiner"] == true)
