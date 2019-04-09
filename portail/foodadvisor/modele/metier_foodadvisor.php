@@ -563,7 +563,7 @@
       if (date("H") >= 13)
       {
         $control_ok                              = false;
-        $_SESSION['alerts']['heure_delete_solo'] = true;
+        $_SESSION['alerts']['heure_suppression_solo'] = true;
       }
     }
 
