@@ -263,11 +263,12 @@
       $data2 = $req2->fetch();
 
       if ($req2->rowCount() == 0)
+      {
         $myUser = Profile::withData($data1);
+        array_push($noPropositions, $myUser);
+      }
 
       $req2->closeCursor();
-
-      array_push($noPropositions, $myUser);
     }
     $req1->closeCursor();
 
