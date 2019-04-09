@@ -51,7 +51,7 @@
           // Bande à part
           if (!empty($solos))
           {
-            echo '<div class="zone_proposition_solo_no_votes">';
+            echo '<div class="zone_proposition_solo_no_votes" id="zone_solo">';
               echo '<div class="titre_solo">Bande à part</div>';
 
               foreach ($solos as $solo)
@@ -75,7 +75,7 @@
           {
             if (!empty($sansPropositions))
             {
-              echo '<div class="zone_proposition_solo_no_votes">';
+              echo '<div class="zone_proposition_solo_no_votes" id="zone_no_votes">';
                 echo '<div class="titre_solo">Ils n\'ont pas encore fait de choix</div>';
 
                 foreach ($sansPropositions as $userNoChoice)

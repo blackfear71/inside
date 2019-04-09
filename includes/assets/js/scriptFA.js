@@ -78,9 +78,25 @@ function initMasonry()
 // Calcul les tailles des zones automatiquement
 function tailleAutoZones()
 {
-  // Taille de la zone bande à part à part en fonction de la zone suivante si elle existe
-  if ($('#zone_first').length)
-    $('#zone_solo_no_votes').css('min-height', $('#zone_first').height());
+  // Taille de la zone bande à part / sans votes en fonction de la zone suivante si elle existe
+  if ($('#zone_first').length && ($('#zone_solo').length || $('#zone_no_votes').length))
+  {
+    var hauteur_min = $('#zone_first').height();
+
+    $('#zone_solo_no_votes').css('min-height', hauteur_min);
+
+    // Les 2 zones sont présentes
+    if ($('#zone_solo').length && $('#zone_no_votes').length)
+      $('#zone_no_votes').css('min-height', hauteur_min - $('#zone_solo').length);
+
+    // Il n'y a que la zone "bande à part"
+    if (!$('#zone_no_votes').length)
+      $('#zone_solo').css('min-height', hauteur_min);
+
+    // Il n'y a que la zone des non votants
+    if (!$('#zone_solo').length)
+      $('#zone_no_votes').css('min-height', hauteur_min);
+  }
 
   // Taille des zones de résumé en fonction de la plus grande
   var day_height     = $('.jour_semaine').height() + 10;
