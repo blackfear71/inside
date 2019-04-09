@@ -44,47 +44,9 @@
 
 			<article>
         <?php
-          // Onglets années
-          include('vue/onglets_calendars.php');
-
-          if ($_GET['action'] == "goConsulterAnnexes")
-          {
-            echo '<div class="zone_annexes">';
-              // Saisie annexe
-              if ($preferences->getManage_calendars() == "Y")
-              {
-                echo '<form method="post" action="calendars.php?action=doAjouterAnnexe" class="zone_annexe" enctype="multipart/form-data">';
-                  // Image
-                  echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
-
-                  echo '<div class="zone_parcourir_image">';
-                    echo '<div class="symbole_saisie_image">+</div>';
-                    echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="annexe" class="bouton_parcourir_image" onchange="loadFile(event, \'image_calendar_divers\')" required />';
-                  echo '</div>';
-
-                  echo '<div class="mask_image">';
-                    echo '<img id="image_calendar_divers" alt="" class="image" />';
-                  echo '</div>';
-
-                  echo '<div class="zone_saisie_nom_divers">';
-                    // Nom
-                    echo '<input type="text" name="title" value="" placeholder="Nom" maxlength="255" class="input_calendar_text" required />';
-
-                    // Validation
-                    echo '<input type="submit" name="send_annexe" value="" class="send_annexe" />';
-                  echo '</div>';
-
-                  echo '<div class="align_saisie"></div>';
-                echo '</form>';
-              }
-
-              // Affichage des annexes
-              include('vue/vue_annexes.php');
-            echo '</div>';
-          }
-          else
-          {
-            // Saisie calendrier
+          // Saisie & Années
+          echo '<div class="zone_calendars_left">';
+            // Saisie
             if ($preferences->getManage_calendars() == "Y")
             {
               $listeMois = array('01' => 'Janvier',
@@ -104,52 +66,135 @@
               $annee_debut = date('Y') - 2;
               $annee_fin   = date('Y') + 2;
 
-              echo '<form method="post" action="calendars.php?action=doAjouter" class="form_saisie_calendar" enctype="multipart/form-data">';
-                echo '<table class="table_saisie_calendar">';
-                  echo '<tr>';
-                    // Selection mois
-                    echo '<td class="td_saisie_mois">';
-                      echo '<select name="months" class="select_month" required>';
-                        echo '<option value="" disabled selected hidden>Mois</option>';
-                        foreach ($listeMois as $number => $month)
-                        {
-                          echo '<option value="' . $number . '">' . $month . '</option>';
-                        }
-                      echo '</select>';
-                    echo '</td>';
+              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />Saisir un calendrier</div>';
 
-                    // Selection année
-                    echo '<td class="td_saisie_annee">';
-                      echo '<select name="years" class="select_year" required>';
-                        echo '<option value="" disabled selected hidden>Année</option>';
-                        for ($i = $annee_debut; $i <= $annee_fin; $i++)
-                        {
-                          echo '<option value="' . $i . '">' . $i . '</option>';
-                        }
-                      echo '</select>';
-                    echo '</td>';
+              echo '<div class="zone_saisie_calendrier">';
+                echo '<form method="post" action="calendars.php?action=doAjouter" enctype="multipart/form-data">';
+                  // Listbox mois
+                  echo '<select name="months" class="listbox" required>';
+                    echo '<option value="" disabled selected hidden>Mois</option>';
+                    foreach ($listeMois as $number => $month)
+                    {
+                      echo '<option value="' . $number . '">' . $month . '</option>';
+                    }
+                  echo '</select>';
 
-                    // Bouton parcourir
-                    echo '<td class="td_saisie_calendar">';
-                      echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
-                      echo '<div class="zone_parcourir_calendars">';
-                        echo '<div class="label_parcourir">Parcourir</div>';
-                        echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_calendars" required />';
-                      echo '</div>';
-                    echo '</td>';
+                  // Listbox année
+                  echo '<select name="years" class="listbox" required>';
+                    echo '<option value="" disabled selected hidden>Année</option>';
+                    for ($i = $annee_debut; $i <= $annee_fin; $i++)
+                    {
+                      echo '<option value="' . $i . '">' . $i . '</option>';
+                    }
+                  echo '</select>';
 
-                    // Bouton envoi
-                    echo '<td class="td_saisie_ajouter">';
-                      echo '<input type="submit" name="send" value="" class="send_calendar" />';
-                    echo '</td>';
-                  echo '</tr>';
-                echo '</table>';
-              echo '</form>';
+                  // Image
+                  echo '<div class="zone_saisie_image">';
+                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+
+                    echo '<div class="zone_parcourir_image">';
+                      echo '<div class="symbole_saisie_image">+</div>';
+                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_image" onchange="loadFile(event, \'image_calendars\')" required />';
+                    echo '</div>';
+
+                    echo '<div class="mask_image">';
+                      echo '<img id="image_calendars" alt="" class="image" />';
+                    echo '</div>';
+                  echo '</div>';
+
+                  // Bouton validation
+                  echo '<input type="submit" name="send" value="Valider" class="bouton_validation" />';
+                echo '</form>';
+              echo '</div>';
             }
 
-            // Affichage des calendriers
-            include('vue/table_calendars.php');
-          }
+            // Années
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" />Années & annexes</div>';
+
+            echo '<div class="zone_annees_calendrier">';
+              if ($_GET['action'] == "goConsulterAnnexes")
+                echo '<span class="year active margin_right">Annexes</span>';
+              else
+                echo '<a href="calendars.php?action=goConsulterAnnexes" class="year inactive margin_right">Annexes</a>';
+
+              $i            = 0;
+              $previousYear = $onglets[0];
+              $lastYear     = true;
+
+              foreach ($onglets as $year)
+              {
+                // Année inexistante (première ou au milieu)
+                if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
+                {
+                  if ($i % 2 == 0)
+                    echo '<span class="year active">' . $_GET['year'] . '</span>';
+                  else
+                    echo '<span class="year active margin_right">' . $_GET['year'] . '</span>';
+
+                  $lastYear = false;
+                  $i++;
+                }
+
+                // Année existante
+                if ($i % 2 == 0)
+                {
+                  if (isset($_GET['year']) AND $year == $_GET['year'])
+                    echo '<span class="year active">' . $year . '</span>';
+                  else
+                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
+                }
+                else
+                {
+                  if (isset($_GET['year']) AND $year == $_GET['year'])
+                    echo '<span class="year active margin_right">' . $year . '</span>';
+                  else
+                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right">' . $year . '</a>';
+                }
+
+                $previousYear = $year;
+                $i++;
+              }
+
+              // Année inexistante (dernière)
+              if ($lastYear == true AND $anneeExistante == false)
+                echo '<span class="year active">' . $_GET['year'] . '</span>';
+            echo '</div>';
+          echo '</div>';
+
+          // Calendriers
+          echo '<div class="zone_calendars_right">';
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />Les calendriers</div>';
+
+            if (!empty($calendriers))
+            {
+              echo '<div class="zone_calendriers">';
+                foreach ($calendriers as $calendrier)
+                {
+                  echo '<div class="zone_calendrier">';
+                    // Image
+                    echo '<img src="../../includes/images/calendars/' . $calendrier->getYear() . '/mini/' . $calendrier->getCalendar() . '" alt="' . $calendrier->getTitle() . '" title="' . $calendrier->getTitle() . '" class="calendrier" />';
+
+                    // Nom
+                    echo '<div class="titre_calendrier">' . $calendrier->getTitle() . '</div>';
+
+                    // Boutons
+                    echo '<div class="zone_boutons">';
+                      echo '<a href="../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar() . '" class="download_calendar" download><img src="../../includes/icons/calendars/download_grey.png" alt="download_grey" title="Télécharger" class="download_icon" /></a>';
+
+                      if ($preferences->getManage_calendars() == "Y")
+                      {
+                        echo '<form method="post" action="calendars.php?year=' . $_GET['year'] . '&id_cal=' . $calendrier->getId() . '&action=doSupprimer" class="download_calendar" >';
+                          echo '<input type="submit" name="delete_calendar" value="" title="Supprimer le calendrier" onclick="if(!confirm(\'Demander la suppression de ce calendrier ?\')) return false;" class="delete_calendar" />';
+                        echo '</form>';
+                      }
+                    echo '</div>';
+                  echo '</div>';
+                }
+              echo '</div>';
+            }
+            else
+              echo '<div class="empty">Pas de calendriers pour cette année...</div>';
+          echo '</div>';
         ?>
       </article>
 

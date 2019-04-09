@@ -6,7 +6,9 @@
   controlsUser();
 
   // Contrôle si l'année est renseignée et numérique
-  if ($_GET['action'] != "goConsulterAnnexes" AND $_GET['action'] != "doAjouterAnnexe" AND $_GET['action'] != "doSupprimerAnnexe")
+  if ($_GET['action'] != "goConsulterAnnexes"
+  AND $_GET['action'] != "doAjouterAnnexe"
+  AND $_GET['action'] != "doSupprimerAnnexe")
   {
     if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
       header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
@@ -127,6 +129,9 @@
       break;
 
     case 'goConsulterAnnexes':
+      include_once('vue/vue_annexes.php');
+      break;
+
     case 'goConsulter':
     default:
       include_once('vue/vue_calendars.php');

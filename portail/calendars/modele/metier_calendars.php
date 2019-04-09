@@ -34,7 +34,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year ASC');
+    $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year DESC');
     while($donnees = $reponse->fetch())
     {
       array_push($onglets, $donnees['year']);
@@ -213,7 +213,7 @@
         }
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-        imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
+        imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 100, FALSE, FALSE);
 
         //echo "Le fichier a bien été uploadé";
 

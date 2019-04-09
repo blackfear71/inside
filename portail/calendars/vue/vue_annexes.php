@@ -1,27 +1,159 @@
-<?php
-  if (!empty($annexes))
-  {
-    foreach ($annexes as $annexe)
-    {
-      echo '<div class="zone_annexe">';
-        // Image
-        echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexe->getAnnexe() . '" alt="' . $annexe->getAnnexe() . '" title="' . $annexe->getTitle() . '" class="img_annexe" />';
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- Head commun & spécifique-->
+    <?php
+      $title_head   = "CA";
+      $style_head   = "styleCA.css";
+      $script_head  = "scriptCA.js";
+      $chat_head    = true;
+      $masonry_head = true;
 
-        // Nom
-        echo '<div class="text_annexe">' . $annexe->getTitle() . '</div>';
+      include('../../includes/common/head.php');
+    ?>
+  </head>
 
-        // Actions
-        if ($preferences->getManage_calendars() == "Y")
-        {
-          echo '<a href="../../includes/images/calendars/annexes/' . $annexe->getAnnexe() . '" class="download_calendar" download>Télécharger</a>';
+	<body>
+		<!-- Onglets -->
+		<header>
+      <?php
+        $title = "Calendars";
 
-          echo '<form method="post" action="calendars.php?id_annexe=' . $annexe->getId() . '&action=doSupprimerAnnexe">';
-            echo '<input type="submit" name="delete_annexe" value="" title="Supprimer l\'annexe" onclick="if(!confirm(\'Demander la suppression de cette annexe ?\')) return false;" class="delete_calendar" />';
-          echo '</form>';
-        }
-        else
-          echo '<a href="../../includes/images/calendars/annexes/' . $annexe->getAnnexe() . '" class="download_calendar_2" download>Télécharger</a>';
-      echo '</div>';
-    }
-  }
-?>
+        include('../../includes/common/header.php');
+			  include('../../includes/common/onglets.php');
+      ?>
+		</header>
+
+		<section>
+			<!-- Paramétrage des boutons de navigation -->
+			<aside id="left_menu" class="aside_nav">
+				<?php
+					$disconnect  = true;
+					$back        = true;
+					$ideas       = true;
+					$reports     = true;
+
+					include('../../includes/common/aside.php');
+				?>
+			</aside>
+
+			<!-- Messages d'alerte -->
+			<?php
+				include('../../includes/common/alerts.php');
+			?>
+
+			<article>
+        <?php
+          // Saisie & Années
+          echo '<div class="zone_calendars_left">';
+            // Saisie
+            if ($preferences->getManage_calendars() == "Y")
+            {
+              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />Saisir une annexe</div>';
+
+              echo '<div class="zone_saisie_calendrier">';
+                echo '<form method="post" action="calendars.php?action=doAjouterAnnexe" enctype="multipart/form-data">';
+                  // Image
+                  echo '<div class="zone_saisie_image">';
+                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+
+                    echo '<div class="zone_parcourir_image">';
+                      echo '<div class="symbole_saisie_image">+</div>';
+                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="annexe" class="bouton_parcourir_image" onchange="loadFile(event, \'image_annexes\')" required />';
+                    echo '</div>';
+
+                    echo '<div class="mask_image">';
+                      echo '<img id="image_annexes" alt="" class="image" />';
+                    echo '</div>';
+                  echo '</div>';
+
+                  // Titre annexe
+                  echo '<input type="text" name="title" value="" placeholder="Nom" maxlength="255" class="titre_annexe" required />';
+
+                  // Bouton validation
+                  echo '<input type="submit" name="send_annexe" value="Valider" class="bouton_validation" />';
+                echo '</form>';
+              echo '</div>';
+            }
+
+            // Années
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" />Années & annexes</div>';
+
+            echo '<div class="zone_annees_calendrier">';
+              if ($_GET['action'] == "goConsulterAnnexes")
+                echo '<span class="year active margin_right">Annexes</span>';
+              else
+                echo '<a href="calendars.php?action=goConsulterAnnexes" class="year inactive margin_right">Annexes</a>';
+
+              $i = 0;
+
+              foreach ($onglets as $year)
+              {
+                if ($i % 2 == 0)
+                {
+                  if (isset($_GET['year']) AND $year == $_GET['year'])
+                    echo '<span class="year active">' . $year . '</span>';
+                  else
+                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
+                }
+                else
+                {
+                  if (isset($_GET['year']) AND $year == $_GET['year'])
+                    echo '<span class="year active margin_right">' . $year . '</span>';
+                  else
+                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right">' . $year . '</a>';
+                }
+
+                $i++;
+              }
+            echo '</div>';
+          echo '</div>';
+
+          // Calendriers
+          echo '<div class="zone_calendars_right">';
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />Les annexes</div>';
+            
+            if (!empty($annexes))
+            {
+              echo '<div class="zone_calendriers">';
+                foreach ($annexes as $annexe)
+                {
+                  echo '<div class="zone_calendrier">';
+                    // Image
+                    echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexe->getAnnexe() . '" alt="' . $annexe->getAnnexe() . '" title="' . $annexe->getTitle() . '" class="calendrier" />';
+
+                    // Nom
+                    echo '<div class="titre_calendrier">' . $annexe->getTitle() . '</div>';
+
+                    // Boutons
+                    echo '<div class="zone_boutons">';
+                      // Télécharger
+                      echo '<a href="../../includes/images/calendars/annexes/' . $annexe->getAnnexe() . '" class="download_calendar" download><img src="../../includes/icons/calendars/download_grey.png" alt="download_grey" title="Télécharger" class="download_icon" /></a>';
+
+                      // Supprimer
+                      if ($preferences->getManage_calendars() == "Y")
+                      {
+                        echo '<form method="post" action="calendars.php?id_annexe=' . $annexe->getId() . '&action=doSupprimerAnnexe" class="download_calendar" >';
+                          echo '<input type="submit" name="delete_annexe" value="" title="Supprimer l\'annexe" onclick="if(!confirm(\'Demander la suppression de cette annexe ?\')) return false;" class="delete_calendar" />';
+                        echo '</form>';
+                      }
+                    echo '</div>';
+                  echo '</div>';
+                }
+              echo '</div>';
+            }
+            else
+              echo '<div class="empty">Pas d\'annexes présentes...</div>';
+          echo '</div>';
+        ?>
+      </article>
+
+      <?php include('../../includes/chat/chat.php'); ?>
+		</section>
+
+		<!-- Pied de page -->
+		<footer>
+			<?php include('../../includes/common/footer.php'); ?>
+		</footer>
+  </body>
+</html>
