@@ -87,7 +87,7 @@ function tailleAutoZones()
 
     // Les 2 zones sont présentes
     if ($('#zone_solo').length && $('#zone_no_votes').length)
-      $('#zone_no_votes').css('min-height', hauteur_min - $('#zone_solo').length);
+      $('#zone_no_votes').css('min-height', hauteur_min - $('#zone_solo').height());
 
     // Il n'y a que la zone "bande à part"
     if (!$('#zone_no_votes').length)
