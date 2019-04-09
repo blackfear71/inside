@@ -385,10 +385,17 @@
 
 .zone_proposition
 {
-	width: 200px;
+	width: 180px;
 	vertical-align: top;
 	margin-bottom: 20px;
+	background-color: #ff1937;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	overflow: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
 	text-align: center;
+	background-color: white;
 }
 
 /*** Affichage détails ***/
@@ -907,7 +914,6 @@
 .icon_delete_choix
 {
 	float: right;
-	margin-right: 5px;
 	margin-left: -35px;
 	margin-top: 35px;
   width: 30px;
@@ -924,9 +930,9 @@
 .icone_modify_choix
 {
 	float: right;
-	margin-right: 8px;
+	margin-right: 3px;
 	margin-left: -35px;
-	margin-top: 5px;
+	margin-top: 8px;
   width: 25px;
   height: 25px;
   border: 0;
@@ -941,7 +947,6 @@
 .icon_validate_choix
 {
 	float: right;
-	margin-right: 5px;
 	margin-left: -35px;
 	margin-top: -5px;
 	width: 30px;
@@ -958,7 +963,6 @@
 .icone_cancel_choix
 {
 	float: right;
-	margin-right: 5px;
 	margin-left: -35px;
 	margin-top: 25px;
 	width: 30px;
@@ -1095,6 +1099,7 @@
 {
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+	margin-bottom: 10px;
 }
 
 .zone_menu_mes_choix
@@ -1162,10 +1167,10 @@
 {
 	display: inline-block;
 	height: 32px;
-	width: 55px;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-right: 10px;
+	width: 50px;
+	padding-left: 2.5px;
+	padding-right: 2.5px;
+	margin-right: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	border-radius: 2px;
@@ -1210,7 +1215,7 @@
 .label_transport_update
 {
 	display: inline-block;
-	width: 55px;
+	width: 45px;
 	height: 25px;
 	background-color: #e3e3e3;
 	padding: 5px 10px 5px 30px;
@@ -1224,7 +1229,7 @@
 .label_transport_update_checked
 {
 	display: inline-block;
-	width: 55px;
+	width: 45px;
 	height: 25px;
 	background-color: #70d55d;
 	padding: 5px 10px 5px 30px;
