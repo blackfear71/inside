@@ -282,6 +282,28 @@
           echo '</div>';
         }
       }
+
+      // Utilisateurs sans votes
+      if (!empty($sansPropositions))
+      {
+        echo '<div class="zone_proposition_top" id="zone_solo">';
+          echo '<div class="titre_solo">Ils n\'ont pas encore fait de choix</div>';
+
+          foreach ($sansPropositions as $userNoChoice)
+          {
+            echo '<div class="zone_no_vote">';
+              // Avatar
+              if (!empty($userNoChoice->getAvatar()))
+                echo '<img src="../../includes/images/profil/avatars/' . $userNoChoice->getAvatar() . '" alt="avatar" title="' . $userNoChoice->getPseudo() . '" class="avatar_no_vote" />';
+              else
+                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $userNoChoice->getPseudo() . '" class="avatar_no_vote" />';
+
+              // Pseudo
+              echo '<div class="pseudo_no_vote">' . $userNoChoice->getPseudo() . '</div>';
+            echo '</div>';
+          }
+        echo '</div>';
+      }
     echo '</div>';
   }
   else

@@ -248,6 +248,32 @@
     return $solos;
   }
 
+  // METIER : Récupère les utilisateurs qui n'ont pas fait de propositions
+  // RETOUR : Liste des utilisateurs
+  function getNoPropositions()
+  {
+    global $bdd;
+
+    $noPropositions = array();
+
+    $req1 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" AND status != "D" ORDER BY identifiant ASC');
+    while ($data1 = $req1->fetch())
+    {
+      $req2 = $bdd->query('SELECT * FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND identifiant = "' . $data1['identifiant'] . '"');
+      $data2 = $req2->fetch();
+
+      if ($req2->rowCount() == 0)
+        $myUser = Profile::withData($data1);
+
+      $req2->closeCursor();
+
+      array_push($noPropositions, $myUser);
+    }
+    $req1->closeCursor();
+
+    return $noPropositions;
+  }
+
   // METIER : Vérification si réservé et retour identifiant
   // RETOUR : Identifiant réservation
   function getReserved($user)

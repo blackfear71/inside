@@ -730,6 +730,28 @@
 	background-color: #ff1937;
 }
 
+.zone_no_vote
+{
+	display: inline-block;
+	margin: 0 5px 10px 5px;
+	text-align: center;
+}
+
+.avatar_no_vote
+{
+	width: 30px;
+	border-radius: 50%;
+	background-color: #262626;
+}
+
+.pseudo_no_vote
+{
+	display: block;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 60%;
+	color: #262626;
+}
+
 .lien_details_determined
 {
 	float: right;

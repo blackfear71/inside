@@ -23,13 +23,14 @@
       $listeRestaurantsJson = json_encode(convertForJson($listeRestaurants));
 
       // Propositions, choix et semaine
-      $propositions = getPropositions();
-      $solos        = getSolos();
-      $mesChoix     = getMyChoices($_SESSION['user']['identifiant']);
-      $isSolo       = getSolo($_SESSION['user']['identifiant']);
-      $isReserved   = getReserved($_SESSION['user']['identifiant']);
-      $choixSemaine = getWeekChoices();
-      $actions      = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
+      $propositions     = getPropositions();
+      $solos            = getSolos();
+      $sansPropositions = getNoPropositions();
+      $mesChoix         = getMyChoices($_SESSION['user']['identifiant']);
+      $isSolo           = getSolo($_SESSION['user']['identifiant']);
+      $isReserved       = getReserved($_SESSION['user']['identifiant']);
+      $choixSemaine     = getWeekChoices();
+      $actions          = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
       break;
 
     case 'doDeterminer':
@@ -159,6 +160,15 @@
       }
 
       unset($solo);
+
+      foreach ($sansPropositions as &$userNoChoice)
+      {
+        $userNoChoice->setIdentifiant(htmlspecialchars($userNoChoice->getIdentifiant()));
+        $userNoChoice->setPseudo(htmlspecialchars($userNoChoice->getPseudo()));
+        $userNoChoice->setAvatar(htmlspecialchars($userNoChoice->getAvatar()));
+      }
+
+      unset($userNoChoice);
 
       foreach ($mesChoix as &$monChoix)
       {
