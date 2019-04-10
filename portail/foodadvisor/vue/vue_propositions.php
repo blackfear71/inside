@@ -305,7 +305,7 @@
               {
                 echo '<div class="zone_reservation">';
                   echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
-                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver_details"/>';
                   echo '</form>';
                 echo '</div>';
               }

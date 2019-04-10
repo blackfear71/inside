@@ -930,12 +930,6 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.bouton_reserver:hover, .bouton_reserver_details:hover
-{
-	color: white;
-	background-color: #c81932;
-}
-
 .bouton_reserver_details
 {
 	background-color: #d3d3d3;
@@ -947,6 +941,13 @@
 	color: #262626;
 	cursor: pointer;
 	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.bouton_reserver:hover, .bouton_reserver_details:hover
+{
+	color: white;
+	background-color: #c81932;
 }
 
 /*** Affichage Mes choix ***/
