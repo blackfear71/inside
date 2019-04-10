@@ -109,56 +109,7 @@
             }
 
             // Années
-            echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" />Années & annexes</div>';
-
-            echo '<div class="zone_annees_calendrier">';
-              if ($_GET['action'] == "goConsulterAnnexes")
-                echo '<span class="year active margin_right">Annexes</span>';
-              else
-                echo '<a href="calendars.php?action=goConsulterAnnexes" class="year inactive margin_right">Annexes</a>';
-
-              $i            = 0;
-              $previousYear = $onglets[0];
-              $lastYear     = true;
-
-              foreach ($onglets as $year)
-              {
-                // Année inexistante (première ou au milieu)
-                if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
-                {
-                  if ($i % 2 == 0)
-                    echo '<span class="year active">' . $_GET['year'] . '</span>';
-                  else
-                    echo '<span class="year active margin_right">' . $_GET['year'] . '</span>';
-
-                  $lastYear = false;
-                  $i++;
-                }
-
-                // Année existante
-                if ($i % 2 == 0)
-                {
-                  if (isset($_GET['year']) AND $year == $_GET['year'])
-                    echo '<span class="year active">' . $year . '</span>';
-                  else
-                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
-                }
-                else
-                {
-                  if (isset($_GET['year']) AND $year == $_GET['year'])
-                    echo '<span class="year active margin_right">' . $year . '</span>';
-                  else
-                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right">' . $year . '</a>';
-                }
-
-                $previousYear = $year;
-                $i++;
-              }
-
-              // Année inexistante (dernière)
-              if ($lastYear == true AND $anneeExistante == false)
-                echo '<span class="year active">' . $_GET['year'] . '</span>';
-            echo '</div>';
+            include('vue/vue_onglets.php');
           echo '</div>';
 
           // Calendriers

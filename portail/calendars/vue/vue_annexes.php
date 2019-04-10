@@ -77,42 +77,13 @@
             }
 
             // Années
-            echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" />Années & annexes</div>';
-
-            echo '<div class="zone_annees_calendrier">';
-              if ($_GET['action'] == "goConsulterAnnexes")
-                echo '<span class="year active margin_right">Annexes</span>';
-              else
-                echo '<a href="calendars.php?action=goConsulterAnnexes" class="year inactive margin_right">Annexes</a>';
-
-              $i = 0;
-
-              foreach ($onglets as $year)
-              {
-                if ($i % 2 == 0)
-                {
-                  if (isset($_GET['year']) AND $year == $_GET['year'])
-                    echo '<span class="year active">' . $year . '</span>';
-                  else
-                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
-                }
-                else
-                {
-                  if (isset($_GET['year']) AND $year == $_GET['year'])
-                    echo '<span class="year active margin_right">' . $year . '</span>';
-                  else
-                    echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right">' . $year . '</a>';
-                }
-
-                $i++;
-              }
-            echo '</div>';
+            include('vue/vue_onglets.php');
           echo '</div>';
 
           // Calendriers
           echo '<div class="zone_calendars_right">';
             echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />Les annexes</div>';
-            
+
             if (!empty($annexes))
             {
               echo '<div class="zone_calendriers">';

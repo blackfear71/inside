@@ -7,7 +7,7 @@ $(window).on('load', function()
     $('.zone_calendriers').masonry({
       // Options
       itemSelector: '.zone_calendrier',
-      columnWidth: 300,
+      columnWidth: 250,
       fitWidth: true,
       gutter: 20,
       horizontalOrder: true
