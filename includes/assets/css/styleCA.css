@@ -220,8 +220,11 @@
 
 .titre_calendrier
 {
-	width: calc(100% - 125px);
-	padding: 5px 10px 5px 20px;
+	max-width: calc(100% - 130px);
+	word-wrap: break-word;
+	text-align: justify;
+	margin-left: 20px;
+	padding: 4px 5px 4px 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	display: inline-block;
@@ -244,8 +247,8 @@
 .download_icon
 {
 	display: inline-block;
-	vertical-align: middle;
-	margin-top: -2px;
+	vertical-align: bottom;
+	padding: 2.5px;
 	width: 25px;
 }
 
