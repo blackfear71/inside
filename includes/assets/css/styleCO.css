@@ -222,14 +222,14 @@
 .zone_image_left
 {
 	display: inline-block;
-	width: 146px;
+	width: 136px;
 	min-height: 146px;
 }
 
 .zone_image_right
 {
 	display: inline-block;
-	width: calc(100% - 146px);
+	width: calc(100% - 136px);
 	vertical-align: top;
 }
 
@@ -292,8 +292,8 @@
 	width: calc(100% - 40px);
 	margin-top: 10px;
 	margin-bottom: 10px;
-	height: 70px;
-	min-height: 70px;
+	height: 72px;
+	min-height: 72px;
 	padding: 5px 10px 5px 10px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
