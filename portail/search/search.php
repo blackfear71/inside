@@ -62,6 +62,24 @@
 
         unset($resultatsMH);
 
+        foreach ($resultats['food_advisor'] as &$resultatsFA)
+        {
+          $resultatsFA->setId(htmlspecialchars($resultatsFA->getId()));
+          $resultatsFA->setName(htmlspecialchars($resultatsFA->getName()));
+          $resultatsFA->setPicture(htmlspecialchars($resultatsFA->getPicture()));
+          $resultatsFA->setTypes(htmlspecialchars($resultatsFA->getTypes()));
+          $resultatsFA->setLocation(htmlspecialchars($resultatsFA->getLocation()));
+          $resultatsFA->setPhone(htmlspecialchars($resultatsFA->getPhone()));
+          $resultatsFA->setOpened(htmlspecialchars($resultatsFA->getOpened()));
+          $resultatsFA->setMin_price(htmlspecialchars($resultatsFA->getMin_price()));
+          $resultatsFA->setMax_price(htmlspecialchars($resultatsFA->getMax_price()));
+          $resultatsFA->setWebsite(htmlspecialchars($resultatsFA->getWebsite()));
+          $resultatsFA->setPlan(htmlspecialchars($resultatsFA->getPlan()));
+          $resultatsFA->setDescription(htmlspecialchars($resultatsFA->getDescription()));
+        }
+
+        unset($resultatsFA);
+
         foreach ($resultats['petits_pedestres'] as &$resultatsPP)
         {
           $resultatsPP->setNom(htmlspecialchars($resultatsPP->getNom()));

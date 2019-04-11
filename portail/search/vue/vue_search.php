@@ -40,14 +40,17 @@
             if (!empty($resultats))
             {
               // Message pas de résultats
-              if (empty($resultats['movie_house']) AND empty($resultats['petits_pedestres']) AND empty($resultats['missions']))
-                echo '<div class="titre_search">Pas de résultats trouvés pour "' . $_SESSION['save']['search'] . '" !</div>';
+              if (empty($resultats['movie_house'])
+              AND empty($resultats['food_advisor'])
+              AND empty($resultats['petits_pedestres'])
+              AND empty($resultats['missions']))
+                echo '<div class="titre_section"><img src="../../includes/icons/search/search.png" alt="search" class="logo_titre_section" />Pas de résultats trouvés pour "' . $_SESSION['save']['search'] . '" !</div>';
 
               // Résultats par section
               if (!empty($resultats['movie_house']))
               {
                 // Titre section
-                echo '<div class="titre_search">Movie House</div><div class="count_search">' . $resultats['nb_movie_house'] . '</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/search/movie_house.png" alt="movie_house" class="logo_titre_section" />Movie House</div><div class="count_search">' . $resultats['nb_movie_house'] . '</div>';
 
                 // Résultats
                 foreach ($resultats['movie_house'] as $resultatsMH)
@@ -67,10 +70,33 @@
                 }
               }
 
+              if (!empty($resultats['food_advisor']))
+              {
+                // Titre section
+                echo '<div class="titre_section"><img src="../../includes/icons/search/restaurants.png" alt="restaurants" class="logo_titre_section" />Restaurants</div><div class="count_search">' . $resultats['nb_food_advisor'] . '</div>';
+
+                // Résultats
+                foreach ($resultats['food_advisor'] as $resultatsFA)
+                {
+                  echo '<a href="../foodadvisor/restaurants.php?action=goConsulter&anchor=' . $resultatsFA->getId() . '" class="lien_resultat">';
+                    echo '<table class="zone_resultat">';
+                      echo '<tr>';
+                        echo '<td class="zone_resultat_titre">';
+                          echo $resultatsFA->getName();
+                        echo '</td>';
+                        echo '<td class="zone_resultat_info">';
+                          echo $resultatsFA->getLocation();
+                        echo '</td>';
+                      echo '</tr>';
+                    echo '</table>';
+                  echo '</a>';
+                }
+              }
+
               if (!empty($resultats['petits_pedestres']))
               {
                 // Titre section
-                echo '<div class="titre_search">Les Petits Pédestres</div><div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/search/petits_pedestres.png" alt="petits_pedestres" class="logo_titre_section" />Les Petits Pédestres</div><div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div>';
 
                 // Résultats
                 foreach ($resultats['petits_pedestres'] as $resultatsPP)
@@ -93,7 +119,7 @@
               if (!empty($resultats['missions']))
               {
                 // Titre section
-                echo '<div class="titre_search">Missions</div><div class="count_search">' . $resultats['nb_missions'] . '</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/search/missions.png" alt="missions" class="logo_titre_section" />Missions</div><div class="count_search">' . $resultats['nb_missions'] . '</div>';
 
                 // Résultats
                 foreach ($resultats['missions'] as $resultatsMI)
@@ -117,9 +143,7 @@
               }
             }
             else
-            {
-              echo '<div class="titre_search">Veuillez relancer la recherche afin d\'obtenir des résultats</div>';
-            }
+              echo '<div class="titre_section"><img src="../../includes/icons/search/search.png" alt="search" class="logo_titre_section" />Veuillez relancer la recherche afin d\'obtenir des résultats</div>';
           echo '</div>';
 				?>
 			</article>
