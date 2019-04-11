@@ -10,77 +10,63 @@
       // Bouton fermeture
       echo '<a onclick="afficherMasquer(\'zone_add_image\');" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
-      // Saisie image
       echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_collector">';
-        echo '<table class="table_saisie_collector">';
-          // Type de saisie
-          echo '<input type="hidden" name="type_collector" value="I" />';
+        // Type de saisie
+        echo '<input type="hidden" name="type_collector" value="I" />';
 
-          // Tableau de saisie
-          echo '<tr>';
-            // Saisie image
-            echo '<td rowspan="2" class="td_saisie_collector_image">';
-              echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+        // Zone saisie image
+        echo '<div class="zone_image_left">';
+          // Saisie image
+          echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-              echo '<div class="zone_parcourir_image">';
-                echo '<div class="symbole_saisie_image">+</div>';
-                echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image" onchange="loadFile(event, \'image_collector\')" required />';
-              echo '</div>';
+          echo '<div class="zone_parcourir_image">';
+            echo '<div class="symbole_saisie_image">+</div>';
+            echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image" onchange="loadFile(event, \'image_collector\')" required />';
+          echo '</div>';
 
-              echo '<div class="mask_image">';
-                echo '<img id="image_collector" alt="" class="image" />';
-              echo '</div>';
-            echo '</td>';
+          echo '<div class="mask_image">';
+            echo '<img id="image_collector" alt="" class="image" />';
+          echo '</div>';
+        echo '</div>';
 
-            // Saisie speaker
-            if (!empty($_SESSION['save']['other_speaker']))
-              echo '<td class="td_saisie_collector_user" id="td_other_2" style="width: 20%;">';
-            else
-              echo '<td class="td_saisie_collector_user" id="td_other_2">';
-                echo '<select name="speaker" id="speaker_2" onchange="afficherOther(\'td_other_2\', \'speaker_2\', \'other_speaker_2\', \'other_name_2\');" class="saisie_speaker" required>';
-                  echo '<option value="" hidden>Choisissez...</option>';
+        // Zone saisie infos
+        echo '<div class="zone_image_right">';
+          // Saisie speaker
+          if (!empty($_SESSION['save']['other_speaker']))
+            echo '<select name="speaker" id="speaker_2" onchange="afficherOther(\'speaker_2\', \'other_name_2\');" class="saisie_speaker speaker_autre" required>';
+          else
+            echo '<select name="speaker" id="speaker_2" onchange="afficherOther(\'speaker_2\', \'other_name_2\');" class="saisie_speaker" required>';
+              echo '<option value="" hidden>Choisissez...</option>';
 
-                  foreach ($listeUsers as $user)
-                  {
-                    if ($user->getIdentifiant() == $_SESSION['save']['speaker'])
-                      echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
-                    else
-                      echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                  }
+              foreach ($listeUsers as $user)
+              {
+                if ($user->getIdentifiant() == $_SESSION['save']['speaker'])
+                  echo '<option value="' . $user->getIdentifiant() . '" selected>' . $user->getPseudo() . '</option>';
+                else
+                  echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+              }
 
-                  if (!empty($_SESSION['save']['other_speaker']))
-                    echo '<option value="other" selected>Autre</option>';
-                  else
-                    echo '<option value="other">Autre</option>';
-              echo '</select>';
-            echo '</td>';
+              if (!empty($_SESSION['save']['other_speaker']))
+                echo '<option value="other" selected>Autre</option>';
+              else
+                echo '<option value="other">Autre</option>';
+            echo '</select>';
 
-            // Saisie "Autre"
-            if (!empty($_SESSION['save']['other_speaker']))
-              echo '<td class="td_saisie_collector_name" id="other_speaker_2">';
-            else
-              echo '<td class="td_saisie_collector_name" id="other_speaker_2" style="display: none;">';
-                echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name_2" class="saisie_other_collector" />';
-            echo '</td>';
+          // Saisie "Autre"
+          if (!empty($_SESSION['save']['other_speaker']))
+            echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name_2" class="saisie_other_collector" />';
+          else
+            echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name_2" class="saisie_other_collector" style="display: none;" />';
 
-            // Saisie date
-            echo '<td class="td_saisie_collector_date">';
-              echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_image" class="saisie_date_collector" required />';
-            echo '</td>';
+          // Saisie date
+          echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_image" class="saisie_date_collector" required />';
 
-            // Bouton
-            echo '<td class="td_saisie_collector_add">';
-              echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
-            echo '</td>';
-          echo '</tr>';
+          // Bouton
+          echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
 
-          echo '<tr>';
-            // Saisie contexte
-            echo '<td colspan="4" class="td_saisie_collector_cont">';
-              echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte">' . $_SESSION['save']['context'] . '</textarea>';
-            echo '</td>';
-          echo '</tr>';
-        echo '</table>';
+          // Saisie contexte
+          echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte_image">' . $_SESSION['save']['context'] . '</textarea>';
+        echo '</div>';
       echo '</form>';
     echo '</div>';
   echo '</div>';

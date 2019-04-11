@@ -110,44 +110,34 @@ var loadFile = function(event, id)
 };
 
 // Affiche ou masque la zone de saisie "Autre" (insertion)
-function afficherOther(td, select, id, required)
+function afficherOther(select, required)
 {
-  if (document.getElementById(select).value == "other")
+  if ($('#' + select).val() == "other")
   {
-    if (document.getElementById(id).style.display == "none")
-    {
-      document.getElementById(id).style.display = "table-cell";
-      document.getElementById(required).required = true;
-      document.getElementById(td).style.width = "19%";
-      document.getElementById(select).style.paddingLeft = "2%";
-      document.getElementById(select).style.paddingRight = "2%";
-    }
+    $('#' + required).css('display', 'inline-block');
+    $('#' + required).prop('required', true);
+    $('#' + select).addClass('saisie_speaker speaker_autre');
   }
   else
   {
-    document.getElementById(id).style.display = "none";
-    document.getElementById(required).required = false;
-    document.getElementById(td).style.width = "50%";
-    document.getElementById(select).style.paddingLeft = "1%";
-    document.getElementById(select).style.paddingRight = "1%";
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
+    $('#' + select).removeClass('speaker_autre');
   }
 }
 
 // Affiche ou masque la zone de saisie "Autre" (modification)
 function afficherModifierOther(select, id)
 {
-  if (document.getElementById(select).value == "other")
+  if ($('#' + select).val() == "other")
   {
-    if (document.getElementById(id).style.display == "none")
-    {
-      document.getElementById(id).style.display = "block";
-      document.getElementById(id).required = true;
-    }
+    $('#' + id).css('display', 'block');
+    $('#' + id).prop('required', true);
   }
   else
   {
-    document.getElementById(id).style.display = "none";
-    document.getElementById(id).required = false;
+    $('#' + id).css('display', 'none');
+    $('#' + id).prop('required', false);
   }
 }
 

@@ -199,7 +199,7 @@
               if (!empty($collector->getSpeaker()))
               {
                 echo '<div class="zone_modify_speaker">';
-                  echo '<select name="speaker" id="speaker[' . $collector->getId() . ']" onchange="afficherModifierOther(\'speaker[' . $collector->getId() . ']\', \'other_speaker[' . $collector->getId() . ']\');" class="modify_speaker" required>';
+                  echo '<select name="speaker" id="speaker_' . $collector->getId() . '" onchange="afficherModifierOther(\'speaker_' . $collector->getId() . '\', \'other_speaker_' . $collector->getId() . '\');" class="modify_speaker" required>';
                     echo '<option value="" hidden>Choisissez...</option>';
 
                     foreach ($listeUsers as $user)
@@ -226,9 +226,9 @@
 
               // Modification "Autre"
               if ($collector->getType_s() == "other")
-                echo '<input type="text" name="other_speaker" value="' . $collector->getName_s() . '" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" />';
+                echo '<input type="text" name="other_speaker" value="' . $collector->getName_s() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
               else
-                echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker[' . $collector->getId() . ']" class="modify_other" style="display: none;" />';
+                echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" style="display: none;" />';
 
               // Modification date
               echo '<div class="zone_modify_date">';

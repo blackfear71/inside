@@ -495,7 +495,7 @@
 
       // Si on modifie l'image, on supprime l'ancienne et on insère la nouvelle
       if ($files['image']['name'] != NULL)
-      {        
+      {
         if (isset($collector) AND !empty($collector) AND $type_collector == "I")
           unlink ("../../includes/images/collector/" . $collector);
 
@@ -513,17 +513,6 @@
     // On vérifie le format de la date
     if (checkdate($m, $d, $y))
     {
-      /*// On récupère éventuellement le nom du fichier en cas d'image
-      if ($post['type_collector'] == "I")
-      {
-        $reponse = $bdd->query('SELECT id, collector FROM collector WHERE id = ' . $id_col);
-        $donnees = $reponse->fetch();
-
-        $collector = $donnees['collector'];
-
-        $reponse->closeCursor();
-      }*/
-
       // Speaker
       if ($post['speaker'] == "other")
       {
