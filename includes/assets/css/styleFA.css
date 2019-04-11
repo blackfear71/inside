@@ -212,7 +212,8 @@
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -230,7 +231,8 @@
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -245,6 +247,8 @@
 	background-color: #e3e3e3;
 	padding: 5px 10px 5px 10px;
 	border-radius: 2px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -343,7 +347,8 @@
 	padding-right: 10px;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1213,7 +1218,8 @@
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1229,6 +1235,8 @@
 	text-align: center;
 	line-height: 32px;
 	border-radius: 2px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1296,7 +1304,8 @@
 	padding-right: 10px;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1483,30 +1492,32 @@
 	display: inline-block;
 	width: calc(50% - 25px);
 	margin-right: 10px;
-	padding-left: 9px;
-	padding-right: 9px;
+	padding-left: 10px;
+	padding-right: 10px;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 }
 
 .saisie_prix_max_restaurant
 {
 	display: inline-block;
 	width: calc(50% - 25px);
-	padding-left: 9px;
-	padding-right: 9px;
+	padding-left: 10px;
+	padding-right: 10px;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 }
 
 .zone_saisie_right
@@ -1526,11 +1537,11 @@
 	border: 0;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 }
 
 .saisie_lieu
@@ -1542,7 +1553,8 @@
   padding-right: 10px;
   height: 34px;
   border-radius: 2px;
-  border: solid 1px #a3a3a3;
+	border: 0;
+  box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
   font-size: 100%;
 	color: #262626;
@@ -1559,11 +1571,11 @@
 	border: 0;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 }
 
 .saisie_bouton
@@ -1579,6 +1591,7 @@
 	color: #262626;
 	background-color: #e3e3e3;
 	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .saisie_bouton:hover
@@ -1744,41 +1757,44 @@
 
 .saisie_telephone_restaurant
 {
-	width: 158px;
+	width: 160px;
 	padding-left: 10px;
 	padding-right: 10px;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 }
 
 .saisie_lien_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 122px);
+	width: calc(50% - 120px);
 	margin-left: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;
 	background-color: white;
 	border-radius: 2px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	line-height: 30px;
+	line-height: 32px;
 }
 
 .textarea_saisie_description_restaurant
 {
 	min-height: 50px;
-	width: calc(100% - 22px);
+	width: calc(100% - 20px);
 	padding: 5px 10px 5px 10px;
-	border: solid 1px #a3a3a3;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
 	background-color: white;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
