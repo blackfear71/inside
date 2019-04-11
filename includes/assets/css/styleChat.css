@@ -81,13 +81,13 @@
 
 .lien_reduire_chat:hover .triangle_reduire_chat
 {
-	border-color: transparent transparent #e3e3e3 transparent;
+	border-color: transparent transparent #262626 transparent;
 }
 
 .lien_reduire_chat:hover .reduire_chat
 {
-	background-color: #e3e3e3;
-	color: #262626;
+	background-color: #262626;
+	color: white;
 }
 
 /*** Zone chat ***/
