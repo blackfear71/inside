@@ -202,7 +202,7 @@
 {
 	display: block;
 	height: 32px;
-	width: calc(100% - 22px);
+	width: calc(100% - 20px);
 	padding-left: 5px;
 	padding-right: 5px;
 	margin-left: auto;
@@ -339,7 +339,7 @@
 .saisie_menu
 {
 	display: block;
-	width: calc(100% - 32px);
+	width: calc(100% - 30px);
 	height: 20px;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -1296,7 +1296,7 @@
 .update_menu
 {
 	display: block;
-	width: calc(100% - 22px);
+	width: calc(100% - 20px);
 	height: 30px;
 	margin-top: 5px;
 	margin-bottom: 5px;
