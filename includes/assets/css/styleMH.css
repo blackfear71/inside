@@ -476,8 +476,9 @@
 
 .cancel_vote
 {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
+	margin-top: -6px;
 }
 
 /*** Accueil Movie House ***/
