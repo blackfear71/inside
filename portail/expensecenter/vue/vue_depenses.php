@@ -60,7 +60,7 @@
               echo '<div class="commentaire_depense">' . $depense->getComment() . '</div>';
 
               // Modifier
-              echo '<a onclick="updateExpense(\'' . $depense->getId() . '\', \'' . $_GET['year'] . '\');" title="Modifier" class="lien_depense"><img src="../../includes/icons/expensecenter/edit_grey.png" alt="edit_grey" class="icone_depense" /></a>';
+              echo '<a onclick="updateExpense(\'' . $depense->getId() . '\', \'' . $_GET['year'] . '\');" title="Modifier" class="lien_depense"><img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_depense" /></a>';
 
               // Supprimer
               echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&delete_id=' . $depense->getId() . '&action=doSupprimer" class="form_supprimer_depense">';

@@ -1131,7 +1131,7 @@
 	height: 30px;
 	margin-top: -2px;
 	background-color: #d3d3d3;
-	background-image: url("/inside/includes/icons/common/delete_red.png");
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -1526,7 +1526,7 @@
 	width: calc(20% - 20px);
 	min-height: 30px;
 	background-color: #d3d3d3;
-	background-image: url("/inside/includes/icons/common/delete_red.png");
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;

@@ -963,7 +963,7 @@
   width: 30px;
   height: 30px;
   border: 0;
-  background-image: url("/inside/includes/icons/common/delete_red.png");
+  background-image: url("/inside/includes/icons/common/delete_grey.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -980,7 +980,7 @@
   width: 25px;
   height: 25px;
   border: 0;
-  background-image: url("/inside/includes/icons/common/edit_red.png");
+  background-image: url("/inside/includes/icons/common/edit_grey.png");
   background-size: 25px 25px;
   background-repeat: no-repeat;
   background-position: center;
@@ -996,7 +996,7 @@
 	width: 30px;
 	height: 30px;
 	border: 0;
-	background-image: url("/inside/includes/icons/common/validate_red.png");
+	background-image: url("/inside/includes/icons/common/validate_grey.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -1012,7 +1012,7 @@
 	width: 30px;
 	height: 30px;
 	border: 0;
-	background-image: url("/inside/includes/icons/common/cancel_red.png");
+	background-image: url("/inside/includes/icons/common/cancel_grey.png");
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;

@@ -66,7 +66,7 @@
               $annee_debut = date('Y') - 2;
               $annee_fin   = date('Y') + 2;
 
-              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />Saisir un calendrier</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" />Saisir un calendrier</div>';
 
               echo '<div class="zone_saisie_calendrier">';
                 echo '<form method="post" action="calendars.php?action=doAjouter" enctype="multipart/form-data">';
