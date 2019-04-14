@@ -1,6 +1,6 @@
 <?php
   echo '<div class="version">V.2</div>';
-  echo '<div class="copyright">© 2017-2019 Inside</div>';
+  echo '<div class="copyright">© 2017-' . date("Y") . ' Inside</div>';
 
   // Boutons missions
   $zone_inside = "footer";

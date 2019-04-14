@@ -134,7 +134,9 @@
         Mot de passe oublié ?
       </a>
 
-      <div class="copyright_index">© 2017-2019 Inside</div>
+      <?php
+        echo '<div class="copyright_index">© 2017-' . date("Y") . ' Inside</div>';
+      ?>
     </footer>
   </body>
 </html>
