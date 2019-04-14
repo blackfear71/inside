@@ -212,6 +212,18 @@
           $lien   = "/inside/portail/calendars/calendars.php?year=" . $annee . "&action=goConsulter";
           break;
 
+        case "annexe":
+          // Recherche titre
+          $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE id = ' . $notification->getContent());
+          $donnees = $reponse->fetch();
+          $titre = $donnees['title'];
+          $reponse->closeCursor();
+
+          $icone  = "calendars";
+          $phrase = "Une annexe vient d'être mise en ligne (<strong>" . $titre . "</strong>).";
+          $lien   = "/inside/portail/calendars/calendars.php?action=goConsulterAnnexes";
+          break;
+
         case "culte":
           // Recherche auteur et coupable ;)
           $reponse1 = $bdd->query('SELECT * FROM collector WHERE id = ' . $notification->getContent());

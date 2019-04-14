@@ -239,7 +239,7 @@
 
   // METIER : Ajout annexe avec création miniature
   // RETOUR : Aucun
-  function insertAnnexe($post, $files)
+  function insertAnnexe($post, $files, $user)
   {
     // On récupère les données
     $title     = $post['title'];
@@ -322,6 +322,11 @@
           'title'     => $title
 					));
 				$reponse->closeCursor();
+
+        // Génération notification calendrier ajouté
+        $new_id = $bdd->lastInsertId();
+
+        insertNotification($user, 'annexe', $new_id);
 
         $_SESSION['alerts']['annexe_added'] = true;
       }

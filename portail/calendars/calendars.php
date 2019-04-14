@@ -39,7 +39,7 @@
       break;
 
     case "doAjouterAnnexe":
-      insertAnnexe($_POST, $_FILES);
+      insertAnnexe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimer":
