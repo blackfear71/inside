@@ -27,6 +27,8 @@ $(window).on('load', function()
   // Masonry
   if ($('.zone_niveau_succes').length)
   {
+    $('.zone_niveau_succes').masonry('destroy');
+
     $('.zone_niveau_succes').masonry({
       // Options
       itemSelector: '.succes_liste',

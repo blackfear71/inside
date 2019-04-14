@@ -4,6 +4,8 @@ $(window).on('load', function()
   // Masonry
   if ($('.zone_collectors').length)
   {
+    $('.zone_collectors').masonry('destroy');
+
     $('.zone_collectors').masonry({
       // Options
       itemSelector: '.zone_collector',

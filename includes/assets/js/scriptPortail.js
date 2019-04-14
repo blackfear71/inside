@@ -7,6 +7,8 @@ $(window).on('load', function()
   // Masonry
   if ($('.menu_portail').length)
   {
+    $('.menu_portail').masonry('destroy');
+
     $('.menu_portail').masonry({
       // Options
       itemSelector: '.lien_portail',

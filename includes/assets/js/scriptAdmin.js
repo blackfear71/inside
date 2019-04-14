@@ -4,6 +4,8 @@ $(window).on('load', function()
   // Masonry (Thèmes)
   if ($('.zone_themes').length)
   {
+    $('.zone_themes').masonry('destroy');
+
     $('.zone_themes').masonry({
       // Options
       itemSelector: '.zone_theme',
@@ -20,6 +22,8 @@ $(window).on('load', function()
   // Masonry (Portail)
   if ($('.menu_admin').length)
   {
+    $('.menu_admin').masonry('destroy');
+
     $('.menu_admin').masonry({
       // Options
       itemSelector: '.menu_link_admin',
@@ -36,6 +40,8 @@ $(window).on('load', function()
   // Masonry (Infos utilisateurs)
   if ($('.zone_infos').length)
   {
+    $('.zone_infos').masonry('destroy');
+
     $('.zone_infos').masonry({
       // Options
       itemSelector: '.zone_infos_user',
@@ -55,6 +61,8 @@ $(window).on('load', function()
   // Masonry (Succès)
   if ($('.zone_niveau_succes_admin').length)
   {
+    $('.zone_niveau_succes_admin').masonry('destroy');
+
     $('.zone_niveau_succes_admin').masonry({
       // Options
       itemSelector: '.ensemble_succes',
@@ -71,6 +79,8 @@ $(window).on('load', function()
   // Masonry (Modification succès)
   if ($('.zone_niveau_mod_succes_admin').length)
   {
+    $('.zone_niveau_mod_succes_admin').masonry('destroy');
+
     $('.zone_niveau_mod_succes_admin').masonry({
       // Options
       itemSelector: '.succes_liste_mod',

@@ -4,6 +4,8 @@ $(window).on('load', function()
   // Masonry (Calendriers & annexes)
   if ($('.zone_calendriers').length)
   {
+    $('.zone_calendriers').masonry('destroy');
+
     $('.zone_calendriers').masonry({
       // Options
       itemSelector: '.zone_calendrier',

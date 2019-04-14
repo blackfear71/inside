@@ -7,6 +7,8 @@ $(window).on('load', function()
   // Masonry
   if ($('.zone_films_accueil').length)
   {
+    $('.zone_films_accueil').masonry('destroy');
+
     $('.zone_films_accueil').masonry({
       // Options
       itemSelector: '.zone_film_accueil',

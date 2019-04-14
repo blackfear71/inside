@@ -11,6 +11,8 @@ $(window).on('load', function()
   // Masonry (Propositions)
   if ($('.zone_propositions').length)
   {
+    $('.zone_propositions').masonry('destroy');
+
     $('.zone_propositions').masonry({
       // Options
       itemSelector: '.zone_proposition, #zone_solo_no_votes, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
@@ -27,6 +29,8 @@ $(window).on('load', function()
   // Masonry (Restaurants)
   if ($('.zone_fiches_restaurants').length)
   {
+    $('.zone_fiches_restaurants').masonry('destroy');
+
     $('.zone_fiches_restaurants').masonry({
       // Options
       itemSelector: '.fiche_restaurant',
