@@ -1868,8 +1868,8 @@
 .fiche_restaurant
 {
   background-color: #e3e3e3;
-  display: inline-block;
-  width: 400px;
+  display: block;
+  width: 500px;
   border-radius: 2px;
   color: #262626;
   margin-bottom: 20px;
@@ -1877,57 +1877,37 @@
 
 .zone_shadow
 {
+	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.zone_fiche_left
+{
 	display: inline-block;
-	width: 400px;
+	width: 100px;
+	height: 100px;
+	vertical-align: top;
 }
 
 .image_restaurant
 {
-  float: left;
+	margin-left: auto;
+	margin-right: auto;
   width: 80px;
   height: 80px;
-  margin: 10px;
+	padding: 10px;
   border-radius: 50%;
 	filter: drop-shadow(0px 0px 2px #7c7c7c);
 }
 
-.icone_modify_restaurant
+.zone_fiche_middle
 {
-	float: right;
-	margin-right: 10px;
-	margin-left: 10px;
-	margin-top: 10px;
-  width: 30px;
-  height: 30px;
-  background-image: url("/inside/includes/icons/common/edit.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-	background-color: transparent;
-  cursor: pointer;
-}
-
-.icon_delete_restaurant
-{
-	float: right;
-	margin-right: -40px;
-	margin-left: 10px;
-	margin-top: 45px;
-  width: 30px;
-  height: 30px;
-  border: 0;
-  background-image: url("/inside/includes/icons/common/delete.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  cursor: pointer;
+	display: inline-block;
+	width: 350px;
 }
 
 .nom_restaurant
 {
-  margin-left: 100px;
   padding: 10px 10px 5px 0px;
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
@@ -1945,12 +1925,6 @@
 	line-height: 15px;
 }
 
-.zone_types_fiche
-{
-	margin-left: 100px;
-	margin-right: 50px;
-}
-
 .type_restaurant
 {
   display: inline-block;
@@ -1966,8 +1940,6 @@
 .zone_icones_fiches
 {
 	display: block;
-	margin-left: 100px;
-	margin-right: 50px;
 	min-height: 32px;
 	margin-bottom: 10px;
 }
@@ -2016,7 +1988,6 @@
 
 .numero_restaurant
 {
-	margin-left: 100px;
 	margin-bottom: 10px;
 }
 
@@ -2033,6 +2004,44 @@
 	display: inline-block;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
+}
+
+.zone_fiche_right
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 50px;
+}
+
+.lien_modifier_restaurant
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.icone_modify_restaurant
+{
+	width: 30px;
+}
+
+.icon_delete_restaurant
+{
+	margin-left: 10px;
+	margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/includes/icons/common/delete.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .description_restaurant
@@ -2067,15 +2076,12 @@
 	background-color: #e3e3e3;
 }
 
-.zone_update_image
-{
-	float: left;
-	margin: 10px;
-}
-
 .zone_parcourir_restaurant_update
 {
-	display: inline-block;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 6px;
 	height: 80px;
 	width: 80px;
 	border-style: dashed;
@@ -2109,7 +2115,7 @@
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -86px;
+	margin-top: -83px;
 	line-height: 80px;
 }
 
@@ -2119,14 +2125,12 @@
 	margin-right: auto;
 	max-width: 80px;
 	max-height: 80px;
+	margin-top: -3px;
 	vertical-align: middle;
-	margin-top: -4px;
 }
 
 .zone_update_prix
 {
-	margin-left: 105px;
-	margin-right: 50px;
 	margin-bottom: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
@@ -2135,7 +2139,7 @@
 .update_prix_min_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 40px);
+	width: 25%;
 	padding-left: 10px;
 	padding-right: 10px;
 	background-color: white;
@@ -2150,7 +2154,7 @@
 .update_prix_max_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 40px);
+	width: 25%;
 	margin-left: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -2214,7 +2218,7 @@
 
 .update_nom_restaurant
 {
-	width: 224px;
+	width: calc(100% - 20px);
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-top: 10px;
@@ -2230,7 +2234,7 @@
 
 .update_lieu_restaurant
 {
-	width: 244px;
+	width: 100%;
 	margin-bottom: 10px;
 	padding-left: 5px;
 	padding-right: 5px;
@@ -2244,7 +2248,7 @@
 
 .update_lieu_autre_restaurant
 {
-	width: 224px;
+	width: calc(100% - 20px);
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;
@@ -2260,7 +2264,6 @@
 .opened_restaurant_update
 {
 	display: block;
-	margin-left: 105px;
 	margin-bottom: 10px;
 }
 

@@ -34,7 +34,7 @@ $(window).on('load', function()
     $('.zone_fiches_restaurants').masonry({
       // Options
       itemSelector: '.fiche_restaurant',
-      columnWidth: 400,
+      columnWidth: 500,
       fitWidth: true,
       gutter: 30,
       horizontalOrder: true
@@ -69,7 +69,7 @@ function initMasonry()
   $('.zone_fiches_restaurants').masonry({
     // Options
     itemSelector: '.fiche_restaurant',
-    columnWidth: 400,
+    columnWidth: 500,
     fitWidth: true,
     gutter: 20,
     horizontalOrder: true

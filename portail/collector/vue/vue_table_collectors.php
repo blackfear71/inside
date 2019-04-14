@@ -257,7 +257,7 @@
                 echo '<input type="hidden" name="type_collector" value="I" />';
 
                 // Image
-                echo '<div class="zone_update_image">';
+                echo '<div>';
                   echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
                   echo '<span class="zone_parcourir_update" id="zone_parcourir_' . $collector->getId() . '">';
