@@ -89,7 +89,7 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste utilisateurs & identifiant pour le script
+      // Récupération liste lieux et restaurants pour le script
       var listLieux        = <?php echo $listeLieuxJson; ?>;
       var listeRestaurants = <?php echo $listeRestaurantsJson; ?>;
     </script>

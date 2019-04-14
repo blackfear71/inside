@@ -8,7 +8,6 @@
 	width: 85%;
 	margin-left: auto;
 	margin-right: auto;
-	overflow: auto;
 	border-radius: 2px;
 	margin-top: 200px;
 	max-height: calc(100vh - 200px);
@@ -1368,7 +1367,6 @@
 	margin-top: 100px;
 	margin-left: auto;
 	margin-right: auto;
-	overflow: auto;
 	border-radius: 2px;
 	max-height: calc(100vh - 200px);
 	overflow-y: auto;
@@ -1859,7 +1857,6 @@
 	margin-right: auto;
 	opacity: 0;
 	transition: opacity 0.2s;
-  margin-bottom: -20px;
 }
 
 .zone_fiches_restaurants.masonry

@@ -21,7 +21,6 @@
         array_push($listeParLieu, $restaurantAConvertir);
       }
 
-      //array_push($listeRestaurantsAConvertir, $listeParLieu);
       $listeRestaurantsAConvertir[$keyLieu] = $listeParLieu;
     }
 

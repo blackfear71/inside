@@ -5,7 +5,10 @@
     private $date;
     private $price;
     private $buyer;
+    private $pseudo;
+    private $avatar;
     private $comment;
+    private $parts;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -14,7 +17,10 @@
       $this->date    = '';
       $this->price   = '';
       $this->buyer   = '';
+      $this->pseudo  = '';
+      $this->avatar  = '';
       $this->comment = '';
+      $this->parts   = array();
     }
 
     // Constructeur de l'objet Expenses en fonction des données
@@ -90,92 +96,6 @@
       return $this->buyer;
     }
 
-    // Commentaire
-    public function setComment($comment)
-    {
-      $this->comment = $comment;
-    }
-
-    public function getComment()
-    {
-      return $this->comment;
-    }
-  }
-
-  class Bilans
-  {
-    private $id;
-    private $identifiant;
-    private $pseudo;
-    private $avatar;
-    private $bilan;
-    private $bilan_format;
-
-    // Constructeur par défaut (objet vide)
-    public function __construct()
-    {
-      $this->id           = 0;
-      $this->identifiant  = '';
-      $this->pseudo       = '';
-      $this->avatar       = '';
-      $this->bilan        = 0;
-      $this->bilan_format = '';
-    }
-
-    // Constructeur de l'objet Bilans en fonction des données
-    // -> il faut passer une variable $data contenant le résultat de la requête fetch
-    public static function withData($data)
-    {
-      $bilans = new self();
-      $bilans->fill($data);
-
-      return $bilans;
-    }
-
-    protected function fill ($data)
-    {
-      if (isset($data['id']))
-        $this->id           = $data['id'];
-
-      if (isset($data['identifiant']))
-        $this->identifiant  = $data['identifiant'];
-
-      if (isset($data['pseudo']))
-        $this->pseudo       = $data['pseudo'];
-
-      if (isset($data['avatar']))
-        $this->avatar       = $data['avatar'];
-
-      if (isset($data['bilan']))
-        $this->bilan        = $data['bilan'];
-
-      if (isset($data['bilan_format']))
-        $this->bilan_format = $data['bilan_format'];
-    }
-
-    // getters et setters pour l'objet Bilans
-    // id
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-
-    public function getId()
-    {
-      return $this->id;
-    }
-
-    // Identifiant
-    public function setIdentifiant($identifiant)
-    {
-      $this->identifiant = $identifiant;
-    }
-
-    public function getIdentifiant()
-    {
-      return $this->identifiant;
-    }
-
     // Pseudo
     public function setPseudo($pseudo)
     {
@@ -198,26 +118,26 @@
       return $this->avatar;
     }
 
-    // Bilan numérique
-    public function setBilan($bilan)
+    // Commentaire
+    public function setComment($comment)
     {
-      $this->bilan = $bilan;
+      $this->comment = $comment;
     }
 
-    public function getBilan()
+    public function getComment()
     {
-      return $this->bilan;
+      return $this->comment;
     }
 
-    // Bilan formaté
-    public function setBilan_format($bilan_format)
+    // Tableau des parts
+    public function setParts($parts)
     {
-      $this->bilan_format = $bilan_format;
+      $this->parts = $parts;
     }
 
-    public function getBilan_format()
+    public function getParts()
     {
-      return $this->bilan_format;
+      return $this->parts;
     }
   }
 
@@ -225,16 +145,22 @@
   {
     private $id;
     private $id_expense;
+    private $id_identifiant;
     private $identifiant;
+    private $pseudo;
+    private $avatar;
     private $parts;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id          = 0;
-      $this->id_expense  = 0;
-      $this->identifiant = '';
-      $this->parts       = 0;
+      $this->id             = 0;
+      $this->id_expense     = 0;
+      $this->id_identifiant = 0;
+      $this->identifiant    = '';
+      $this->pseudo         = '';
+      $this->avatar         = '';
+      $this->parts          = 0;
     }
 
     // Constructeur de l'objet Parts en fonction des données
@@ -274,7 +200,7 @@
       return $this->id;
     }
 
-    // Date
+    // Id dépense
     public function setId_expense($id_expense)
     {
       $this->id_expense = $id_expense;
@@ -285,7 +211,18 @@
       return $this->id_expense;
     }
 
-    // Prix
+    // Id identifiant
+    public function setId_identifiant($id_identifiant)
+    {
+      $this->id_identifiant = $id_identifiant;
+    }
+
+    public function getId_identifiant()
+    {
+      return $this->id_identifiant;
+    }
+
+    // Identifiant
     public function setIdentifiant($identifiant)
     {
       $this->identifiant = $identifiant;
@@ -296,7 +233,29 @@
       return $this->identifiant;
     }
 
-    // Acheteur
+    // Pseudo
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Avatar
+    public function setAvatar($avatar)
+    {
+      $this->avatar = $avatar;
+    }
+
+    public function getAvatar()
+    {
+      return $this->avatar;
+    }
+
+    // Parts
     public function setParts($parts)
     {
       $this->parts = $parts;

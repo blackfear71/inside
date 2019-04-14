@@ -18,7 +18,7 @@
 		$_SESSION['save']['price']   = "";
 		$_SESSION['save']['buyer']   = "";
 		$_SESSION['save']['comment'] = "";
-		unset($_SESSION['tableau_parts']);
+		unset($_SESSION['save']['tableau_parts']);
 	}
 
   // Modèle de données : "module métier"
@@ -29,24 +29,21 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $anneeExistante  = controlYear($_GET['year']);
-      $nbUsers         = countUsers();
-      $listeUsers      = getUsers();
-      $onglets         = getOnglets();
-      $tableauExpenses = getExpenses($_GET['year'], $listeUsers, $nbUsers);
+      $anneeExistante    = controlYear($_GET['year']);
+      $listeUsers        = getUsers();
+      $onglets           = getOnglets();
+      $listeDepenses     = getExpenses($_GET['year']);
+      $listeDepensesJson = json_encode(convertForJson($listeDepenses));
       break;
 
     case 'doInserer':
       // Insertion des données par le modèle
-      $nbUsers    = countUsers();
-      $listeUsers = getUsers();
-      insertExpense($_POST, $listeUsers, $nbUsers);
+      insertExpense($_POST);
       break;
 
     case 'doModifier':
-      // Update des données par le modèle
-      $listeUsers = getUsers();
-      updateExpense($_GET['update_id'], $_POST, $listeUsers);
+      // Mise à jour des données par le modèle
+      updateExpense($_GET['update_id'], $_POST);
       break;
 
     case 'doSupprimer':
@@ -66,8 +63,6 @@
     case 'goConsulter':
       if ($anneeExistante == true)
       {
-        $nbUsers = htmlspecialchars($nbUsers);
-
         foreach ($listeUsers as &$user)
         {
           $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
@@ -85,26 +80,29 @@
 
         unset($year);
 
-        foreach ($tableauExpenses as &$expense)
+        foreach ($listeDepenses as &$depense)
         {
-          $expense['id_expense'] = htmlspecialchars($expense['id_expense']);
-          $expense['price']      = htmlspecialchars($expense['price']);
-          $expense['buyer']      = htmlspecialchars($expense['buyer']);
-          $expense['name_b']     = htmlspecialchars($expense['name_b']);
-          $expense['date']       = htmlspecialchars($expense['date']);
+          $depense->setDate(htmlspecialchars($depense->getDate()));
+          $depense->setPrice(htmlspecialchars($depense->getPrice()));
+          $depense->setBuyer(htmlspecialchars($depense->getBuyer()));
+          $depense->setPseudo(htmlspecialchars($depense->getPseudo()));
+          $depense->setAvatar(htmlspecialchars($depense->getAvatar()));
+          $depense->setComment(htmlspecialchars($depense->getComment()));
 
-          foreach ($expense['tableParts'] as &$part)
+          foreach ($depense->getParts() as &$parts)
           {
-            $part['identifiant'] = htmlspecialchars($part['identifiant']);
-            $part['part']        = htmlspecialchars($part['part']);
+            $parts->setId_expense(htmlspecialchars($parts->getId_expense()));
+            $parts->setId_identifiant(htmlspecialchars($parts->getId_identifiant()));
+            $parts->setIdentifiant(htmlspecialchars($parts->getIdentifiant()));
+            $parts->setPseudo(htmlspecialchars($parts->getPseudo()));
+            $parts->setAvatar(htmlspecialchars($parts->getAvatar()));
+            $parts->setParts(htmlspecialchars($parts->getParts()));
           }
 
           unset($part);
-
-          $expense['comment']    = htmlspecialchars($expense['comment']);
         }
 
-        unset($expense);
+        unset($depense);
       }
       break;
 
