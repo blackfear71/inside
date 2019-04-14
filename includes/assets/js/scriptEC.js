@@ -124,6 +124,10 @@ function updateExpense(id, year)
 
   $('.zone_saisie_utilisateur').each(function()
   {
+    $(this).children('.qte').val('0');
+    $(this).css('background-color', '#e3e3e3');
+    $(this).css('color', '#262626');
+
     identifiant = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()];
 
     if (identifiant != null)
@@ -165,7 +169,7 @@ function resetSaisie(zone, year)
 
     $('.zone_saisie_utilisateur').each(function()
     {
-      $('.qte').val('0');
+      $(this).children('.qte').val('0');
       $(this).css('background-color', '#e3e3e3');
       $(this).css('color', '#262626');
     });
