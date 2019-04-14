@@ -10,8 +10,7 @@
 	margin-right: auto;
 	border-radius: 2px;
 	margin-top: 200px;
-	max-height: calc(100vh - 200px);
-	overflow-y: auto;
+	overflow: hidden;
 }
 
 .zone_actions
@@ -67,14 +66,13 @@
 .form_choices
 {
 	width: 100%;
-	padding-top: 9px;
-	padding-bottom: 10px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -10px;
 	background-color: white;
 	border-top: solid 1px #d3d3d3;
 	color: #262626;
+	max-height: calc(100vh - 250px);
+	overflow-y: auto;
 }
 
 .titre_choix
@@ -152,6 +150,7 @@
 	display: inline-block;
 	width: 250px;
 	margin-top: 9px;
+	margin-bottom: 10px;
 	margin-left: 10px;
 	background-color: #e3e3e3;
 	padding: 5px 10px 5px 10px;
@@ -1369,8 +1368,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 2px;
-	max-height: calc(100vh - 200px);
-	overflow-y: auto;
+	overflow: hidden;
 }
 
 .titre_saisie_restaurant
@@ -1421,6 +1419,8 @@
 	background-color: white;
 	border-top: solid 1px #d3d3d3;
 	color: #262626;
+	max-height: calc(100vh - 250px);
+	overflow-y: auto;
 }
 
 .zone_saisie_left
@@ -1529,7 +1529,7 @@
 .saisie_nom_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 20px);
+	width: calc(100% - 420px);
 	margin-right: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -1546,7 +1546,7 @@
 .saisie_lieu
 {
 	display: inline-block;
-  width: calc(50% - 225px);
+  width: 180px;
 	margin-right: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -1563,7 +1563,7 @@
 .saisie_lieu_autre_restaurant
 {
 	display: inline-block;
-	width: calc(20% - 20px);
+	width: 180px;
 	margin-right: 10px;
 	padding-left: 10px;
 	padding-right: 10px;

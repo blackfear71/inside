@@ -23,8 +23,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 2px;
-	max-height: calc(100vh - 200px);
-	overflow-y: auto;
+	overflow: hidden;
 	background-color: white;
 }
 
@@ -180,6 +179,8 @@
 	padding-top: 10px;
 	text-align: left;
 	margin-bottom: -4px;
+	max-height: calc(100vh - 250px);
+	overflow-y: auto;
 }
 
 .zone_saisie_utilisateurs

@@ -135,7 +135,7 @@ function afficherMasquerNoDelay(id)
 function afficherListboxLieux(id)
 {
   var num        = id.substr(-1);
-  var id_zone    = "zone_listbox_" + num;
+  var id_zone    = 'zone_listbox_' + num;
   var id_select  = 'select_lieu_' + num;
   var id_annuler = 'annuler_restaurant_' + num;
   var html;
@@ -477,17 +477,17 @@ function afficherOther(select, id, name)
   {
     if (document.getElementById(id).style.display == "none")
     {
-      document.getElementById(select).style.width = "calc(33% - 100px)";
-      document.getElementById(id).style.width     = "calc(33% - 100px)";
-      document.getElementById(name).style.width   = "calc(34% - 77px)";
+      document.getElementById(select).style.width = "200px";
+      document.getElementById(name).style.width   = "calc(100% - 670px)";
+      document.getElementById(id).style.width     = "200px";
       document.getElementById(id).style.display   = "inline-block";
       document.getElementById(id).required = true;
     }
   }
   else
   {
-    document.getElementById(select).style.width = "calc(50% - 225px)";
-    document.getElementById(name).style.width = "calc(50% - 20px)";
+    document.getElementById(select).style.width = "180px";
+    document.getElementById(name).style.width = "calc(100% - 420px)";
     document.getElementById(id).style.display = "none";
     document.getElementById(id).required = false;
   }
