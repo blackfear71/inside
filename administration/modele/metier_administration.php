@@ -774,7 +774,7 @@
       }
       $req5->closeCursor();
 
-      $bilan_format = str_replace('.', ',', number_format($bilan, 2)) . ' €';
+      $bilan_format = str_replace('.', ',', number_format($bilan, 2, ',', '')) . ' €';
 
       // Nombre phrases cultes Collector Room
       $req7 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user_des . '"');
@@ -861,7 +861,7 @@
 		$somme_bilans = $somme_bilans - $depense_0_parts;
 
     // Formattage
-    $somme_bilans_format = str_replace('.', ',', number_format($somme_bilans, 2)) . ' €';
+    $somme_bilans_format = str_replace('.', ',', number_format($somme_bilans, 2, ',', '')) . ' €';
 
     // Alerte si bilan non nul (proche de 0 à cause de l'arrondi)
     if ($somme_bilans > 0.01 OR $somme_bilans < -0.01)

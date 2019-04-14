@@ -439,6 +439,7 @@
 
 .zone_achat
 {
+	width: calc(50% + 105px);
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -448,7 +449,7 @@
 	display: inline-block;
 	padding-left: 10px;
 	padding-right: 10px;
-	width: 180px;
+	width: calc(100% - 270px);
 	vertical-align: middle;
 	font-family: robotoregular, Verdana, sans-serif;
 	text-align: justify;
@@ -492,7 +493,7 @@
 .zone_parts
 {
 	display: inline-block;
-	width: calc(100% - 450px);
+	width: calc(50% - 105px);
 	text-align: right;
 	vertical-align: middle;
 }

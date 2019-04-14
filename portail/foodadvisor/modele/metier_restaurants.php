@@ -54,12 +54,12 @@
     $prix_max_test          = str_replace(',', '.', $post['prix_max_restaurant']);
 
     if (is_numeric($prix_min_test))
-      $prix_min             = number_format($prix_min_test, 2);
+      $prix_min             = number_format($prix_min_test, 2, '.', '');
     else
       $prix_min             = "";
 
     if (is_numeric($prix_max_test))
-      $prix_max             = number_format($prix_max_test, 2);
+      $prix_max             = number_format($prix_max_test, 2, '.', '');
     else
       $prix_max             = "";
 
@@ -329,12 +329,12 @@
       $prix_max_test          = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
 
       if (is_numeric($prix_min_test))
-        $prix_min             = number_format($prix_min_test, 2);
+        $prix_min             = number_format($prix_min_test, 2, '.', '');
       else
         $prix_min             = "";
 
       if (is_numeric($prix_max_test))
-        $prix_max             = number_format($prix_max_test, 2);
+        $prix_max             = number_format($prix_max_test, 2, '.', '');
       else
         $prix_max             = "";
 

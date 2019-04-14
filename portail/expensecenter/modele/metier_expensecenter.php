@@ -89,6 +89,8 @@
       $listeParts = array();
       $myExpense  = Expenses::withData($donnees1);
 
+      $myExpense->setPrice(str_replace('.', ',', $myExpense->getPrice()));
+
       // Recherche pseudo et avatar Acheteur
       $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myExpense->getBuyer() . '"');
       $donnees2 = $reponse2->fetch();
@@ -175,6 +177,9 @@
     $price   = str_replace(',', '.', htmlspecialchars($post['depense']));
     $buyer   = $post['buyer_user'];
     $comment = $post['comment'];
+
+    if (is_numeric($price))
+      $price = number_format($price, 2, '.', '');
 
     $list_parts = array();
 
@@ -321,6 +326,9 @@
     $price_new   = str_replace(',', '.', htmlspecialchars($post['depense']));
     $buyer_new   = $post['buyer_user'];
     $comment_new = $post['comment'];
+
+    if (is_numeric($price_new))
+      $price = number_format($price_new, 2, '.', '');
 
     $list_parts_new = array();
 
