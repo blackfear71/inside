@@ -825,6 +825,13 @@ aside
 	margin-right: 10px;
 }
 
+/*** Ombre ancres ***/
+.zone_shadow
+{
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 /*** Texte zone vide ***/
 .empty
 {
