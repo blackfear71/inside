@@ -35,6 +35,12 @@
 
           // Bouton validation
           echo '<input type="submit" name="add_depense" value="Valider" class="bouton_validation" />';
+
+          // Afficahge explications
+          echo '<a onclick="afficherExplications()" class="lien_explications">';
+            echo '<span class="fond_plus">+</span>';
+            echo 'Fonctionnement';
+          echo '</a>';
         echo '</div>';
 
         // Parts utilisateurs
@@ -80,6 +86,19 @@
                 echo '<div onclick="addPart(\'zone_user_' . $user->getId() . '\', \'quantite_user_' . $user->getId() . '\', 1)" class="bouton_qte">+</div>';
               echo '</div>';
             }
+          echo '</div>';
+
+          // Explication
+          echo '<div class="explications" style="display: none;">';
+            echo 'Vous pouvez saisir ici une dépense dont le coût sera ensuite réparti équitablement sur chaque participant en fonction du nombre de parts. <strong>Les parts sont limitées à 5 maximum par personne.</strong>';
+
+            echo '<br /><br />';
+
+            echo '2 types de saisies peuvent être effectuées :';
+            echo '<ul>';
+              echo '<li>Une dépense : <strong>le prix doit être positif et des parts doivent être présentes sur au moins un utilisateur</strong>. Le coût est réparti proportionnellement entre chaque participant.</li>';
+              echo '<li>Une régularisation : <strong>le prix est soit positif soit négatif, mais le nombre de parts doit être nul pour tous</strong>. Le coût est simplement ajouté au bilan de l\'acheteur.</li>';
+            echo '</ul>';
           echo '</div>';
         echo '</div>';
       echo '</form>';

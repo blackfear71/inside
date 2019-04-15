@@ -16,12 +16,15 @@ $(document).ready(function()
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
+  // Décalage pour mobile
   adaptEC();
 });
 
 // Adaptations de la section sur mobiles
 function adaptEC()
 {
+  initMasonry();
+
   if ($(window).width() < 1080)
   {
     $('.zone_expenses_left').css('display', 'block');
@@ -72,6 +75,24 @@ function initMasonry()
     gutter: 10,
     horizontalOrder: true
   });
+
+  // Calcul automatique des tailles des zones
+  tailleAutoTexte();
+}
+
+// Calcul la taille des explications automatiquement
+function tailleAutoTexte()
+{
+  var width = $('.zone_saisie_utilisateurs').width() - 20;
+
+  $('.explications').width(width);
+}
+
+// Affiche les explications
+function afficherExplications()
+{
+  $('.lien_explications').css('display', 'none');
+  $('.explications').css('display', 'block');
 }
 
 // Ajoute une part à un utilisateur
@@ -146,7 +167,7 @@ function resetSaisie(zone, year)
   // Fermeture zone de saisie
   afficherMasquer(zone);
 
-  // Test si
+  // Test si action = modification
   var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
   var call          = currentAction[currentAction.length-1]
 
@@ -172,4 +193,8 @@ function resetSaisie(zone, year)
       $(this).css('color', '#262626');
     });
   }
+
+  // On réinitialise l'affichage des explications
+  $('.lien_explications').css('display', 'block');
+  $('.explications').css('display', 'none');
 }
