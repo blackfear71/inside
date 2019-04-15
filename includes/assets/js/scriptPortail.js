@@ -40,7 +40,7 @@ function adaptPortail()
     $('.zone_portail_right').css('display', 'block');
     $('.zone_portail_right').css('width', '100%');
     $('.zone_portail_right').css('margin-left', '0');
-    $('.zone_portail_right').css('margin-top', '30px');
+    $('.zone_portail_right').css('margin-top', '10px');
   }
   else
   {

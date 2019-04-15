@@ -30,7 +30,6 @@ function adaptEC()
     $('.zone_expenses_right').css('display', 'block');
     $('.zone_expenses_right').css('width', '100%');
     $('.zone_expenses_right').css('margin-left', '0');
-    $('.zone_expenses_right').css('margin-top', '30px');
   }
   else
   {
@@ -40,7 +39,6 @@ function adaptEC()
     $('.zone_expenses_right').css('display', 'inline-block');
     $('.zone_expenses_right').css('width', 'calc(100% - 420px');
     $('.zone_expenses_right').css('margin-left', '20px');
-    $('.zone_expenses_right').css('margin-top', '0');
   }
 }
 
