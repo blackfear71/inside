@@ -90,7 +90,7 @@
 
           // Explication
           echo '<div class="explications" style="display: none;">';
-            echo 'Vous pouvez saisir ici une dépense dont le coût sera ensuite réparti équitablement sur chaque participant en fonction du nombre de parts. <strong>Les parts sont limitées à 5 maximum par personne.</strong>';
+            echo 'Vous pouvez saisir ici une dépense dont le coût sera ensuite réparti équitablement sur chaque participant en fonction du nombre de parts. <strong>Les parts sont limitées à 5 maximum par personne</strong>.';
 
             echo '<br /><br />';
 
