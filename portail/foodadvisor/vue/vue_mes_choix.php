@@ -13,7 +13,7 @@
         if ($actions["choix"] == true)
         {
           echo '<div class="zone_proposition">';
-            echo '<div class="titre_solo">Vous avez choisi de faire bande à part. Vous pouvez annuler ce choix en cliquant sur ce bouton :</div>';
+            echo '<div class="titre_solo_choix">Vous avez choisi de faire bande à part. Vous pouvez annuler ce choix en cliquant sur ce bouton :</div>';
 
             // Suppression
             echo '<form method="post" action="foodadvisor.php?action=doSupprimerSolo">';
@@ -24,7 +24,7 @@
         else
         {
           echo '<div class="zone_proposition">';
-            echo '<div class="titre_solo">Vous avez choisi de faire bande à part aujourd\'hui.</div>';
+            echo '<div class="titre_solo_choix">Vous avez choisi de faire bande à part aujourd\'hui.</div>';
           echo '</div>';
         }
       }
