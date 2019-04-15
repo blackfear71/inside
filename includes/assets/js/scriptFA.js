@@ -71,7 +71,7 @@ function initMasonry()
     itemSelector: '.fiche_restaurant',
     columnWidth: 500,
     fitWidth: true,
-    gutter: 20,
+    gutter: 30,
     horizontalOrder: true
   });
 
