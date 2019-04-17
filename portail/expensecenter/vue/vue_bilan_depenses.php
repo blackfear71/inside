@@ -31,7 +31,10 @@
           echo '<div class="pseudo_bilan">' . $user->getPseudo() . "</div>";
 
           // Total
-          echo '<div class="total_bilan">' . formatBilanForDisplay($user->getExpenses()) . '</div>';
+          if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)
+            echo '<div class="total_bilan">' . formatBilanForDisplay(abs($user->getExpenses())) . '</div>';
+          else
+            echo '<div class="total_bilan">' . formatBilanForDisplay($user->getExpenses()) . '</div>';
         echo '</div>';
       }
     echo '</div>';
