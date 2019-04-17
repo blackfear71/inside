@@ -205,7 +205,17 @@
                   echo '<input type="text" name="update_prix_min_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMin_price() . '" maxlength="5" placeholder="Prix min." class="update_prix_min_restaurant" /> €';
                   echo '<input type="text" name="update_prix_max_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMax_price() . '" maxlength="5" placeholder="Prix max." class="update_prix_max_restaurant" /> €';
                 echo '</div>';
+              echo '</div>';
 
+              echo '<div class="zone_fiche_right">';
+                // Validation modification
+                echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" class="icon_validate_restaurant" />';
+
+                // Annulation modification
+                echo '<a onclick="afficherMasquerNoDelay(\'modifier_restaurant_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'visualiser_restaurant_' . $restaurant->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_restaurant"></a>';
+              echo '</div>';
+
+              echo '<div class="zone_fiche_bottom">';
                 // Types
                 echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
                   echo '<a onclick="addOtherType(\'update_types_restaurants_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
@@ -257,14 +267,6 @@
                 // Téléphone
                 echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" title="Téléphone" class="update_icone_fiche" />';
                 echo '<input type="text" name="update_phone_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPhone() . '" maxlength="10" placeholder="Téléphone du restaurant" class="update_lien_restaurant" />';
-              echo '</div>';
-
-              echo '<div class="zone_fiche_right">';
-                // Validation modification
-                echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" class="icon_validate_restaurant" />';
-
-                // Annulation modification
-                echo '<a onclick="afficherMasquerNoDelay(\'modifier_restaurant_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'visualiser_restaurant_' . $restaurant->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_restaurant"></a>';
               echo '</div>';
 
               // Description

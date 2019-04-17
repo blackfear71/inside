@@ -2053,6 +2053,11 @@
   cursor: pointer;
 }
 
+.zone_fiche_bottom
+{
+	display: block;
+}
+
 .description_restaurant
 {
   clear: both;
