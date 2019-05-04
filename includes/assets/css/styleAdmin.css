@@ -1514,7 +1514,7 @@
   text-align: center;
 	background-color: #ff1937;
 	color: white;
-  box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
+	box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
   border-radius: 2px;
 }
 
@@ -1553,7 +1553,7 @@
 {
 	width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 0 5px #7c7c7c;
+	box-shadow: 0 0 5px #7c7c7c;
   border-radius: 2px;
   overflow: hidden;
 	background-color: #ff1937;

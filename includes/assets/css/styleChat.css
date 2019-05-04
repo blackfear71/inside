@@ -190,7 +190,7 @@
 	height: 80px;
 	width: 160px;
 	border-radius: 2px;
-	box-shadow: 0 1px 2px #5c5c5c;
+	box-shadow: 0 0 3px #7c7c7c;
 	z-index: 1;
 	display: none;
 }
@@ -263,7 +263,7 @@
 	text-align: justify;
 	line-height: 20px;
 	border-radius: 2px;
-	box-shadow: 0 1px 2px #5c5c5c;
+	box-shadow: 0 0 3px #7c7c7c;
 	color: white;
 }
 
@@ -313,7 +313,7 @@
 	text-align: justify;
 	line-height: 20px;
 	border-radius: 2px;
-	box-shadow: 0 1px 2px #5c5c5c;
+	box-shadow: 0 0 3px #7c7c7c;
 	color: white;
 }
 
@@ -374,7 +374,7 @@
 	vertical-align: top;
 	background-color: #262626;
 	border-radius: 2px;
-	box-shadow: 0 1px 2px #5c5c5c;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .avatar_chat_connected

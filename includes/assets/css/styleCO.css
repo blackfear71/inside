@@ -497,7 +497,7 @@
 .zone_smileys
 {
   background-color: white;
-  box-shadow: 0 0 2px #5c5c5c;
+	box-shadow: 0 0 3px #7c7c7c;
   float: right;
 	padding: 5px;
 	margin-top: -57px;
@@ -674,7 +674,7 @@
   width: 25px;
   margin-right: -7px;
   border-radius: 50%;
-  box-shadow: 0 0 3px #5c5c5c;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .noms_votes_1, .noms_votes_2, .noms_votes_3, .noms_votes_4, .noms_votes_5, .noms_votes_6, .noms_votes_7, .noms_votes_8

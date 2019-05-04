@@ -47,7 +47,7 @@
   max-width: calc(100% - 15% - 150px);
   text-align: center;
   background: linear-gradient(-70deg, rgb(255, 255, 255, 0.8) 0%, rgb(255, 255, 255, 0.8) 50%, rgb(227, 227, 227, 0.8) 50.1%, rgb(227, 227, 227, 0.8) 100%);
-  box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
+	box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
   border-radius: 2px;
 }
 
@@ -109,7 +109,7 @@
   max-width: calc(100% - 15% - 125px);
   text-align: center;
   background: linear-gradient(-70deg, rgb(255, 255, 255, 0.8) 0%, rgb(255, 255, 255, 0.8) 50%, rgb(227, 227, 227, 0.8) 50.1%, rgb(227, 227, 227, 0.8) 100%);
-  box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
+	box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
   border-radius: 2px;
 }
 
@@ -118,7 +118,7 @@
 {
   border-collapse: collapse;
   width: 100%;
-  box-shadow: 0 0 5px #7c7c7c;
+	box-shadow: 0 0 5px #7c7c7c;
   border-radius: 2px;
   overflow: hidden;
 }
@@ -279,7 +279,7 @@
 	width: calc(100% - 50px);
 	border-radius: 20px;
 	background: white;
-  box-shadow: 0 0 5px #a3a3a3;
+	box-shadow: 0 0 5px #a3a3a3;
 }
 
 .avancement_details_mission::-moz-meter-bar
@@ -399,7 +399,7 @@
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	text-align: center;
-	box-shadow: 0 0 3px #262626;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .td_argent
@@ -426,7 +426,7 @@
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
 	text-align: center;
-	box-shadow: 0 0 3px #262626;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .td_bronze
@@ -453,7 +453,7 @@
 	border-top-right-radius: 2px;
 	border-bottom-right-radius: 2px;
 	text-align: center;
-	box-shadow: 0 0 3px #262626;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .medaille_podium
