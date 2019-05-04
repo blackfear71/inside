@@ -27,8 +27,6 @@
 			<aside id="left_menu" class="aside_no_nav">
 				<?php
 					$disconnect  = true;
-					$ideas       = true;
-					$reports     = true;
 
 					include('../../includes/common/aside.php');
 				?>

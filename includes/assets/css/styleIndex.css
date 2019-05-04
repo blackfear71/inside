@@ -255,9 +255,8 @@
 .link_index
 {
 	display: inline-block;
-	margin-left: 2%;
-	padding-left: 1%;
-	padding-right: 1%;
+	padding-left: 30px;
+	padding-right: 30px;
 	text-decoration: none;
 	color: white;
 	cursor: pointer;
@@ -271,7 +270,5 @@
 .copyright_index
 {
 	float: right;
-	margin-right: 3%;
-	padding-left: 1%;
-	padding-right: 1%;
+	margin-right: 20px;
 }

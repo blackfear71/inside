@@ -27,7 +27,6 @@
 				<?php
 					$disconnect  = true;
 					$back        = true;
-					$reports     = true;
 
 					include('../../includes/common/aside.php');
 				?>

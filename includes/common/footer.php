@@ -1,5 +1,45 @@
 <?php
+  // Version
   echo '<div class="version">V.2</div>';
+
+  // Lien #TheBox
+  if ($_SESSION['user']['identifiant'] != "admin")
+  {
+    // Récupération des préférences
+    switch ($_SESSION['user']['view_the_box'])
+    {
+      case "P":
+        $view_the_box = "inprogress";
+        break;
+
+      case "M":
+        $view_the_box = "mine";
+        break;
+
+      case "D":
+        $view_the_box = "done";
+        break;
+
+      case "A":
+      default:
+        $view_the_box = "all";
+        break;
+    }
+
+    echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer">';
+      echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
+    echo '</a>';
+  }
+
+  // Lien Bugs
+  if ($_SESSION['user']['identifiant'] != "admin")
+  {
+    echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_footer">';
+      echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
+    echo '</a>';
+  }
+
+  // Copyright
   echo '<div class="copyright">© 2017-' . date("Y") . ' Inside</div>';
 
   // Boutons missions

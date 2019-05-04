@@ -13,9 +13,6 @@
 	if (!isset($modify_parcours))
 		$modify_parcours = false;
 
-	if (!isset($delete_film))
-		$delete_film = false;
-
 	if (!isset($back_index))
 		$back_index = false;
 
@@ -30,12 +27,6 @@
 
 	if (!isset($back_admin))
 		$back_admin = false;
-
-	if (!isset($ideas))
-		$ideas = false;
-
-	if (!isset($reports))
-		$reports = false;
 
 	echo '<div class="menu_aside_hidden">';
 		// Retour au portail
@@ -70,14 +61,6 @@
 			echo '</a>';
 		}
 
-		// Demande suppression film
-		if ($delete_film == true)
-		{
-			echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Demander la suppression de ce film ?\')) return false;" class="bouton_aside">';
-				echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_delete" />';
-			echo '</form>';
-		}
-
 		// Modifier les succès
 		if ($modify_success == true)
 		{
@@ -91,43 +74,6 @@
 		{
 			echo '<a href="/inside/administration/manage_missions.php?action=goAjouter" title="Ajouter une mission" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter une mission" class="icon_aside" />';
-			echo '</a>';
-		}
-
-		// Boite à idées
-		if ($ideas == true)
-		{
-			// Récupération des préférences
-			switch ($_SESSION['user']['view_the_box'])
-			{
-				case "P":
-					$view_the_box = "inprogress";
-					break;
-
-				case "M":
-					$view_the_box = "mine";
-					break;
-
-				case "D":
-					$view_the_box = "done";
-					break;
-
-				case "A":
-				default:
-					$view_the_box = "all";
-					break;
-			}
-
-			echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icon_aside" />';
-			echo '</a>';
-		}
-
-		// Signaler un bug
-		if ($reports == true)
-		{
-			echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icon_aside" />';
 			echo '</a>';
 		}
 
