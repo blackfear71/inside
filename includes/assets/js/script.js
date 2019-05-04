@@ -3,7 +3,7 @@ $(document).ready(function()
 {
   $('#progress_circle_header').circlize(
   {
-		radius: 31,
+		radius: 32,
     percentage: $('#progress_circle_header').attr('data-perc'),
 		text: $('#progress_circle_header').attr('data-text'),
     min: $('#progress_circle_header').attr('data-perc'),
@@ -11,7 +11,7 @@ $(document).ready(function()
     typeUse: "useText",
 		useAnimations: false,
 		useGradient: false,
-		background: "#d3d3d3",
+		background: "white",
 		foreground: "#ff1937",
 		stroke: 3,
 		duration: 1000

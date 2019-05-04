@@ -537,8 +537,8 @@ header
 .circular_bar_header
 {
 	position: absolute;
-  right: 32.5px;
-	margin-top: -9px;
+  right: 30.5px;
+	margin-top: -10.5px;
 	height: 89px;
 	overflow: hidden;
 }
