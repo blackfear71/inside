@@ -1154,6 +1154,7 @@
 	width: 70px;
 	margin-top: 100px;
 	margin-left: 9%;
+	background: blue;
 }
 
 .link_next_movie_empty
@@ -1237,7 +1238,7 @@
 	right: 12.5%;
 	z-index: 1;
 	line-height: 300px;
-	margin-right: 1%;
+	margin-right: 20px;
 	opacity: 0;
 	margin-right: 20px;
 	transition: opacity 0.5s, margin-right 0.5s;
