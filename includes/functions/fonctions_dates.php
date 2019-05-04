@@ -1,4 +1,13 @@
 <?php
+/* controlDate
+   Fonction qui contrôle qu'une date est valide
+*/
+function validateDate($date, $format = 'Y-m-d H:i:s')
+{
+  $d = DateTime::createFromFormat($format, $date);
+  return $d && $d->format($format) == $date;
+}
+
 /* isLastDayOfYearWednesday
    Fonction pour déterminer si le 31 décembre de l'année en cours est un mercredi
    afin de gérer le cas où on afficherait "N.C." pour 31/12 qui est effectivement une date de sortie
@@ -93,12 +102,12 @@ function formatDateForInsert($date)
 */
 function isBlankDate($date)
 {
-  $isLastDayWednesday = isLastDayOfYearWednesday(date('Y'));
-  $thirtiethOfDecember = date ('Y') . '1230';
-  $thirtyFirstOfDecember = date ('Y') . '1231';
+  $isLastDayWednesday    = isLastDayOfYearWednesday(date('Y'));
+  $thirtiethOfDecember   = date('Y') . '1230';
+  $thirtyFirstOfDecember = date('Y') . '1231';
 
   if (($date == $thirtyFirstOfDecember && !$isLastDayWednesday)
-  ||  ($date == $thirtiethOfDecember && $isLastDayWednesday))
+  ||  ($date == $thirtiethOfDecember   && $isLastDayWednesday))
   {
     return true;
   }

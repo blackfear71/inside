@@ -3,6 +3,7 @@ $(window).on('load', function()
 {
   // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_home').css('display', 'block');
+  $('.zone_films').css('display', 'block');
 
   // Masonry
   if ($('.zone_films_accueil').length)
@@ -22,14 +23,191 @@ $(window).on('load', function()
     $('.zone_films_accueil').addClass('masonry');
   }
 
+  if ($('.zone_fiches_films').length)
+  {
+    $('.zone_fiches_films').masonry('destroy');
+
+    $('.zone_fiches_films').masonry({
+      // Options
+      itemSelector: '.zone_fiche_film',
+      columnWidth: 350,
+      fitWidth: true,
+      gutter: 10,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_fiches_films').addClass('masonry');
+  }
+
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
   var offset = 20;
-  var shadow = false;
+  var shadow = true;
 
   // Scroll vers l'id
   scrollToId(id, offset, shadow);
+
+  // Ouverture modification si création Doodle
+  var doodle = $_GET('doodle');
+  
+  if (doodle == "true")
+    updateFilm('zone_saisie_film');
 });
+
+// Affiche ou masque un élément (délai 200ms)
+function afficherMasquer(id)
+{
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(200);
+  else
+    $('#' + id).fadeOut(200);
+}
+
+// Affiche ou masque un élément (délai 0s)
+function afficherMasquerNoDelay(id)
+{
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(0);
+  else
+    $('#' + id).fadeOut(0);
+}
+
+// Change la couleur des radio boutons (saisie film)
+function changeCheckedColor(id)
+{
+  switch (id)
+  {
+    case "label_none":
+      $('#label_none').addClass('label_checked');
+      $('#label_before').removeClass('label_checked');
+      $('#label_after').removeClass('label_checked');
+      break;
+
+    case "label_before":
+      $('#label_none').removeClass('label_checked');
+      $('#label_before').addClass('label_checked');
+      $('#label_after').removeClass('label_checked');
+      break;
+
+    case "label_after":
+      $('#label_none').removeClass('label_checked');
+      $('#label_before').removeClass('label_checked');
+      $('#label_after').addClass('label_checked');
+      break;
+
+    default:
+      break;
+  }
+}
+
+// Affiche ou masque des films
+function afficherMasquerFilms(month)
+{
+  switch (month)
+  {
+    case "fold_all":
+      for (var i = 1; i <= 12; i++)
+      {
+        if (i < 10)
+        {
+          if ($('#hide_films_0' + i).length && $('#lien_hide_0' + i).length)
+          {
+            $('#hide_films_0' + i).css('display', 'none');
+            $('#lien_hide_0' + i).html('+');
+          }
+        }
+        else
+        {
+          if ($('#hide_films_' + i).length && $('#lien_hide_' + i).length)
+          {
+            $('#hide_films_' + i).css('display', 'none');
+            $('#lien_hide_' + i).html('+');
+          }
+        }
+      }
+      break;
+
+    case "unfold_all":
+      for (var i = 1; i <= 12; i++)
+      {
+        if (i < 10)
+        {
+          if ($('#hide_films_0' + i).length && $('#lien_hide_0' + i).length)
+          {
+            $('#hide_films_0' + i).css('display', 'block');
+            $('#lien_hide_0' + i).html('-');
+          }
+        }
+        else
+        {
+          if ($('#hide_films_' + i).length && $('#lien_hide_' + i).length)
+          {
+            $('#hide_films_' + i).css('display', 'block');
+            $('#lien_hide_' + i).html('-');
+          }
+        }
+      }
+      break;
+
+    default:
+      if ($('#hide_films_' + month).css('display') == "none")
+      {
+        $('#hide_films_' + month).css('display', 'block');
+        $('#lien_hide_' + month).html('-');
+      }
+      else
+      {
+        $('#hide_films_' + month).css('display', 'none');
+        $('#lien_hide_' + month).html('+');
+      }
+      break;
+  }
+}
+
+// Affiche la saisie préférence d'un film
+function afficherSaisiePreference(titre, stars, view, year, id_film)
+{
+  var html;
+
+  html  = '<div class="fond_saisie_preference">';
+    html += '<div class="zone_saisie_preference">';
+      // Bouton fermeture
+      html += '<a onclick="masquerSaisiePreference();" class="close_preference"><img src="../../includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
+
+      // Titre
+      html += '<div class="titre_saisie_preference">';
+        html += 'Votre préférence pour "' + titre + '"';
+      html += '</div>';
+
+      // Etoiles
+      html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&id_film=' + id_film + '&action=doVoterFilm">';
+        for (var i = 0; i <= 5; i++)
+        {
+          html += '<img src="../../includes/icons/moviehouse/stars/star' + i + '" alt="star' + i + '" class="icone_preference" />';
+
+          if (i == stars)
+            html += '<input type="submit" name="preference_' + i + '" value="" class="input_preference rounded" />';
+          else
+            html += '<input type="submit" name="preference_' + i + '" value="" class="input_preference" />';
+        }
+      html += '</form>';
+    html += '</div>';
+  html += '</div>';
+
+  $('body').append(html);
+
+  $('.fond_saisie_preference').hide().fadeIn(200);
+}
+
+// Masque la saisie préférence d'un film
+function masquerSaisiePreference()
+{
+  $('.fond_saisie_preference').fadeOut(200, function()
+  {
+    $(this).remove();
+  });
+}
 
 // Affiche ou masque les films cachés
 function afficherMasquerTbody(id, hidden)
@@ -41,15 +219,6 @@ function afficherMasquerTbody(id, hidden)
 
   if (document.getElementById(id).style.display == "none")
     document.getElementById(id).style.display = "table-row-group";
-  else
-    document.getElementById(id).style.display = "none";
-}
-
-// Affiche ou masque la saisie des étoiles
-function afficherMasquer(id)
-{
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "block";
   else
     document.getElementById(id).style.display = "none";
 }
@@ -88,4 +257,76 @@ function insert_smiley(smiley, id)
 
   // Positionnement du curseur
   where.focus();
+}
+
+// Modification d'un film
+function updateFilm(zone)
+{
+  var titre  = "Modifier un film";
+  var bouton = "Modifier le film";
+  var action = 'details.php?id_film=' + detailsFilm['id'] + '&action=doModifier';
+
+  // Affichage zone de saisie
+  afficherMasquer(zone);
+
+  // Modification des données
+  $('.titre_saisie_film').html(titre);
+  $('.form_saisie_film').attr('action', action);
+
+  $('input[name=nom_film]').val(detailsFilm['film']);
+  $('input[name=date_theater]').val(detailsFilm['date_theater']);
+  $('input[name=date_release]').val(detailsFilm['date_release']);
+  $('input[name=trailer]').val(detailsFilm['trailer']);
+  $('input[name=link]').val(detailsFilm['link']);
+  $('input[name=poster]').val(detailsFilm['poster']);
+  $('textarea[name=synopsis]').html(detailsFilm['synopsis']);
+
+  $('input[name=doodle]').val(detailsFilm['doodle']);
+  $('input[name=date_doodle]').val(detailsFilm['date_doodle']);
+  $('input[name=place]').val(detailsFilm['place']);
+
+  switch (detailsFilm['restaurant'])
+  {
+    case "N":
+      $("#none").prop("checked", true);
+      $("#before").prop("checked", false);
+      $("#after").prop("checked", false);
+      $('#label_none').addClass('label_checked');
+      $('#label_before').removeClass('label_checked');
+      $('#label_after').removeClass('label_checked');
+      break;
+
+    case "B":
+      $("#none").prop("checked", false);
+      $("#before").prop("checked", true);
+      $("#after").prop("checked", false);
+      $('#label_none').removeClass('label_checked');
+      $('#label_before').addClass('label_checked');
+      $('#label_after').removeClass('label_checked');
+      break;
+
+    case "A":
+      $("#none").prop("checked", false);
+      $("#before").prop("checked", false);
+      $("#after").prop("checked", true);
+      $('#label_none').removeClass('label_checked');
+      $('#label_before').removeClass('label_checked');
+      $('#label_after').addClass('label_checked');
+      break;
+
+    default:
+      break;
+  }
+
+  if (detailsFilm['hours_doodle'] != '')
+    $('select[name=hours_doodle]').val(detailsFilm['hours_doodle']);
+  else
+    $('select[name=hours_doodle]').val('');
+
+  if (detailsFilm['minutes_doodle'] != '')
+    $('select[name=minutes_doodle]').val(detailsFilm['minutes_doodle']);
+  else
+    $('select[name=minutes_doodle]').val('');
+
+  $('.saisie_bouton').val(bouton);
 }

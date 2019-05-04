@@ -1,7 +1,4 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
-  include_once('../../includes/classes/restaurants.php');
-
   // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
   // RETOUR : Tableau des restaurants par lieu
   function convertForJson($listeRestaurants)
@@ -759,7 +756,12 @@
   function getWeekChoices()
   {
     $listWeekChoices = array();
-    $semaine         = array("lundi", "mardi", "mercredi", "jeudi", "vendredi");
+    $semaine         = array(1 => "lundi",
+                             2 => "mardi",
+                             3 => "mercredi",
+                             4 => "jeudi",
+                             5 => "vendredi"
+                            );
 
     // Calcul des dates de la semaine
     $nb_jours_lundi    = 1 - date("N");
@@ -769,7 +771,7 @@
 
     global $bdd;
 
-    for ($i = $monday; $i <= $friday; $i++)
+    for ($i = $monday; $i <= $friday; $i = date("Ymd", strtotime($i . ' + 1 days')))
     {
       $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . $i . '"');
       $data1 = $req1->fetch();
@@ -808,11 +810,12 @@
         $req4->closeCursor();
       }
 
+      $req1->closeCursor();
+
       // Ajout au tableau
-      $jour                             = $i - $monday;
+      $jour = date("N", strtotime($i));
       $listWeekChoices[$semaine[$jour]] = $myWeekChoice;
     }
-    $req1->closeCursor();
 
     return $listWeekChoices;
   }

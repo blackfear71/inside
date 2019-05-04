@@ -98,11 +98,9 @@
         echo '</div>';
       }
 
+      // Termine la zone Masonry du niveau
       if (!isset($listeSuccess[$keySuccess + 1]) OR $success->getLevel() != $listeSuccess[$keySuccess + 1]->getLevel())
-      {
-        // Termine la zone Masonry du niveau
         echo '</div>';
-      }
     }
   echo '</div>';
 ?>

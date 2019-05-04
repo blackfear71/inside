@@ -248,6 +248,7 @@
             $checked_s = false;
             $checked_d = false;
             $checked_h = false;
+            $checked_c = false;
 
             switch ($preferences->getView_movie_house())
             {
@@ -257,6 +258,10 @@
 
               case "D":
                 $checked_d = true;
+                break;
+
+              case "C":
+                $checked_c = true;
                 break;
 
               case "H":
@@ -274,6 +279,9 @@
           <br />
           <input id="detail" type="radio" name="movie_house_view" value="D" class="bouton_preference" <?php if ($checked_d){echo 'checked';} ?> required />
           <label for="detail" class="label_preference">Détails</label>
+          <br />
+          <input id="cards" type="radio" name="movie_house_view" value="C" class="bouton_preference" <?php if ($checked_c){echo 'checked';} ?> required />
+          <label for="cards" class="label_preference">Fiches</label>
         </div>
 
         <div class="sous_titre_preference">

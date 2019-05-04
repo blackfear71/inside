@@ -210,6 +210,10 @@
         $view_movie_house = "user";
         break;
 
+      case "C":
+        $view_movie_house = "cards";
+        break;
+
       case "H":
       default:
         $view_movie_house = "home";

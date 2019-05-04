@@ -2626,11 +2626,7 @@
     // Contrôle format date début
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_deb);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_deb, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -2642,11 +2638,7 @@
     // Contrôle format date fin
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_fin);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_fin, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -2862,11 +2854,7 @@
     // Contrôle format date début
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_deb);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_deb, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -2878,11 +2866,7 @@
     // Contrôle format date fin
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_fin);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_fin, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -3117,11 +3101,7 @@
     // Contrôle format date début
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_deb);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_deb, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -3133,11 +3113,7 @@
     // Contrôle format date fin
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_fin);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_fin, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -3349,11 +3325,7 @@
     // Contrôle format date début
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_deb);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_deb, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -3365,11 +3337,7 @@
     // Contrôle format date fin
     if ($control_ok == true)
     {
-      // On décompose la date à contrôler
-      list($d, $m, $y) = explode('/', $date_fin);
-
-      // On vérifie le format de la date
-      if (!checkdate($m, $d, $y))
+      if (validateDate($date_fin, "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;

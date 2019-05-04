@@ -113,7 +113,7 @@ function tailleAutoZones()
   $('.zone_proposition_resume').css('min-height', max_height);
 }
 
-// Affiche ou masque un élément (délai 400ms)
+// Affiche ou masque un élément (délai 200ms)
 function afficherMasquer(id)
 {
   if ($('#' + id).css('display') == "none")

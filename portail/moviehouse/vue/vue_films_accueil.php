@@ -3,23 +3,28 @@
     /******************/
     /* Ajouts récents */
     /******************/
-    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Les derniers films ajoutés</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Les derniers films ajoutés en ' . $_GET['year'] . '</div>';
 
-    echo '<div class="zone_films_accueil">';
-      foreach ($listeRecents as $filmRecent)
-      {
-        echo '<a href="details.php?id_film=' . $filmRecent->getId() . '&action=goConsulter" class="zone_film_accueil">';
-          // Poster
-          if (!empty($filmRecent->getPoster()))
-            echo '<img src="' . $filmRecent->getPoster() . '" alt="poster" title="' . $filmRecent->getFilm() . '" class="image_accueil" />';
-          else
-            echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $filmRecent->getFilm() . '" class="image_accueil" />';
+    if (!empty($listeRecents))
+    {
+      echo '<div class="zone_films_accueil">';
+        foreach ($listeRecents as $filmRecent)
+        {
+          echo '<a href="details.php?id_film=' . $filmRecent->getId() . '&action=goConsulter" class="zone_film_accueil">';
+            // Poster
+            if (!empty($filmRecent->getPoster()))
+              echo '<img src="' . $filmRecent->getPoster() . '" alt="poster" title="' . $filmRecent->getFilm() . '" class="image_accueil" />';
+            else
+              echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $filmRecent->getFilm() . '" class="image_accueil" />';
 
-          // Titre du film
-          echo '<div class="titre_film_accueil">' . $filmRecent->getFilm() . '</div>';
-        echo '</a>';
-      }
-    echo '</div>';
+            // Titre du film
+            echo '<div class="titre_film_accueil">' . $filmRecent->getFilm() . '</div>';
+          echo '</a>';
+        }
+      echo '</div>';
+    }
+    else
+      echo '<div class="empty">Pas de films encore ajoutés pour cette année...</div>';
 
     /*********************/
     /* Les plus attendus */
@@ -61,7 +66,10 @@
     /**************************/
     if ($films_way_out == "Y")
     {
-      echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" />Les prochaines sorties organisées</div>';
+      if ($_GET['year'] >= date("Y"))
+        echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" />Les prochaines sorties organisées en ' . $_GET['year'] . '</div>';
+      else
+        echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" />Les anciennes sorties organisées en ' . $_GET['year'] . '</div>';
 
       if (!empty($listeSorties))
       {

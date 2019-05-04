@@ -30,7 +30,6 @@
 			<aside id="left_menu" class="aside_nav">
 				<?php
 					$disconnect  = true;
-					$add_film    = true;
 					$back        = true;
 					$ideas       = true;
 					$reports     = true;
@@ -45,49 +44,47 @@
 			?>
 
 			<article>
-				<!-- Switch entre accueil, vue générale et vue personnelle -->
-				<div class="switch_view">
-					<?php
-						$listeSwitch = array('home' => array('lib' => 'Accueil',  'date' => date("Y")),
-																 'main' => array('lib' => 'Synthèse', 'date' => $_GET['year']),
-																 'user' => array('lib' => 'Détails',  'date' => $_GET['year'])
-																);
+        <?php
+          // Liens
+          echo '<div class="zone_liens_saisie">';
+            // Bouton saisie
+            echo '<a onclick="afficherMasquer(\'zone_saisie_film\');" title="Ajouter un film" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/movie_house.png" alt="movie_house" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Ajouter un film</div>';
+            echo '</a>';
+          echo '</div>';
 
-            foreach ($listeSwitch as $view => $lib_view)
-						{
-              if ($_GET['view'] == $view)
-                $actif = 'active';
-              else
-                $actif = 'inactive';
+          // Saisie film
+          include('vue/vue_saisie_film.php');
 
-              echo '<a href="moviehouse.php?view=' . $view . '&year=' . $lib_view['date'] . '&action=goConsulter" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view['lib'] . '</div>';
-                echo '<div class="border_switch_' . $actif . '"></div>';
-              echo '</a>';
+          // Vues & Années
+          echo '<div class="zone_movies_left">';
+            include('vue/vue_onglets.php');
+          echo '</div>';
+
+          // Accueil ou fiches
+          echo '<div class="zone_movies_right">';
+            switch ($_GET['view'])
+            {
+              case "main":
+                include("vue/vue_table_films_synthese.php");
+                break;
+
+              case "user":
+                include("vue/vue_table_films_details.php");
+                break;
+
+              case "cards":
+                include("vue/vue_films_fiches.php");
+               break;
+
+              case "home":
+              default:
+                include("vue/vue_films_accueil.php");
+                break;
             }
-					?>
-				</div>
-
-				<!-- Affichage de la page en fonction de la vue -->
-				<?php
-          switch ($_GET['view'])
-          {
-            case "main":
-              include("vue/vue_onglets_moviehouse.php");
-              include("vue/vue_table_films_synthese.php");
-              break;
-
-            case "user":
-              include("vue/vue_onglets_moviehouse.php");
-              include("vue/vue_table_films_details.php");
-              break;
-
-            case "home":
-            default:
-              include("vue/vue_films_accueil.php");
-              break;
-          }
-				?>
+          echo '</div>';
+        ?>
 			</article>
 
       <?php include('../../includes/chat/chat.php'); ?>

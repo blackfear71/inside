@@ -46,7 +46,7 @@ function initMasonry()
   $('.text_collector').wrapInner();
 }
 
-// Affiche ou masque un élément (délai 400ms)
+// Affiche ou masque un élément (délai 200ms)
 function afficherMasquer(id)
 {
   if ($('#' + id).css('display') == "none")

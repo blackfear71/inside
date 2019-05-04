@@ -3,16 +3,20 @@
 	switch ($_SESSION['user']['view_movie_house'])
 	{
 		case "S":
-			$view_movie_house   = "main";
+			$view_movie_house = "main";
 			break;
 
 		case "D":
-			$view_movie_house   = "user";
+			$view_movie_house = "user";
+			break;
+
+		case "C":
+			$view_movie_house = "cards";
 			break;
 
 		case "H":
 		default:
-			$view_movie_house   = "home";
+			$view_movie_house = "home";
 			break;
 	}
 
@@ -36,7 +40,6 @@
 
 		// Movie House
 		if ($path == '/inside/portail/moviehouse/moviehouse.php'
-		OR  $path == '/inside/portail/moviehouse/saisie.php'
 		OR  $path == '/inside/portail/moviehouse/details.php'
 		OR  $path == '/inside/portail/moviehouse/mailing.php')
 		{

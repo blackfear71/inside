@@ -7,7 +7,8 @@
   controlsUser();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_moviehouse.php');
+  include_once('modele/metier_commun.php');
+  include_once('modele/metier_details.php');
 
   // Contrôle si l'id est renseignée et numérique
   if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))

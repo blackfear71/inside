@@ -207,7 +207,6 @@
                                        '/inside/portail/moviehouse/details.php',
                                        '/inside/portail/moviehouse/mailing.php',
                                        '/inside/portail/moviehouse/moviehouse.php',
-                                       '/inside/portail/moviehouse/saisie.php',
                                        '/inside/portail/notifications/notifications.php',
                                        '/inside/portail/petitspedestres/parcours.php',
                                        '/inside/portail/portail/portail.php',
@@ -304,8 +303,8 @@
   {
     $duplicated = false;
 
-    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 17*(3+3+3) = 153 emplacements possibles)
-    if (!empty($tableauMissions) AND count($tableauMissions) <= 153)
+    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 16*(3+3+3) = 144 emplacements possibles)
+    if (!empty($tableauMissions) AND count($tableauMissions) <= 144)
     {
       foreach ($tableauMissions as $missionExistante)
       {

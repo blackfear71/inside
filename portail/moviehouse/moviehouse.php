@@ -2,11 +2,13 @@
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');
+  include_once('../../includes/functions/fonctions_regex.php');
 
   // Contrôles communs Utilisateur
   controlsUser();
 
   // Modèle de données : "module métier"
+  include_once('modele/metier_commun.php');
   include_once('modele/metier_moviehouse.php');
 
   // Contrôle si l'année est renseignée et numérique
@@ -14,10 +16,23 @@
 		header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
 
   // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
+  if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date'] != true)
+  AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
   {
-    $_SESSION['save']['nom_film_saisi']      = "";
-    $_SESSION['save']['date_theater_saisie'] = "";
+    $_SESSION['save']['nom_film_saisi']         = "";
+    $_SESSION['save']['date_theater_saisie']    = "";
+    $_SESSION['save']['date_release_saisie']    = "";
+    $_SESSION['save']['trailer_saisi']          = "";
+    $_SESSION['save']['link_saisi']             = "";
+    $_SESSION['save']['poster_saisi']           = "";
+    $_SESSION['save']['synopsis_saisi']         = "";
+    $_SESSION['save']['doodle_saisi']           = "";
+    $_SESSION['save']['date_doodle_saisie']     = "";
+    $_SESSION['save']['time_doodle_saisi']      = "";
+    $_SESSION['save']['hours_doodle_saisies']   = "";
+    $_SESSION['save']['minutes_doodle_saisies'] = "";
+    $_SESSION['save']['restaurant_saisi']       = "";
+    $_SESSION['save']['place_saisie']           = "";
   }
 
   // Contrôle vue renseignée URL
@@ -26,6 +41,7 @@
     case 'home':
     case 'main':
     case 'user':
+    case 'cards':
       break;
 
     default:
@@ -39,27 +55,31 @@
     case 'goConsulter':
       // Lecture liste des données par le modèle
       $anneeExistante = controlYear($_GET['year']);
+      $ongletsYears   = getOnglets();
+      $preferences    = getPreferences($_SESSION['user']['identifiant']);
 
       switch ($_GET['view'])
       {
         case 'main':
-          $ongletsYears = getOnglets();
-          $preferences  = getPreferences($_SESSION['user']['identifiant']);
           $nbUsers      = countUsers();
           $listeUsers   = getUsers();
           $tableauFilms = getTabFilms($_GET['year'], $listeUsers, $nbUsers);
           break;
 
         case 'user':
-          $ongletsYears = getOnglets();
-          $preferences  = getPreferences($_SESSION['user']['identifiant']);
           $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+          break;
+
+        case 'cards':
+          $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+
+          if (!empty($listeFilms))
+            $listeEtoiles = getStarsFiches($listeFilms);
           break;
 
         case 'home':
         default:
-          $listeRecents  = getRecents();
-          $preferences   = getPreferences($_SESSION['user']['identifiant']);
+          $listeRecents  = getRecents($_GET['year']);
           $films_waited  = $preferences->getCategories_home()[0];
           $films_way_out = $preferences->getCategories_home()[1];
 
@@ -72,8 +92,8 @@
       }
       break;
 
-    case "doSaisieRapide":
-      insertFilmRapide($_POST, $_GET['year'], $_SESSION['user']['identifiant']);
+    case "doAjouter":
+      $new_id = insertFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doVoterFilm":
@@ -94,16 +114,16 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($ongletsYears as &$onglet)
+      {
+        $onglet = htmlspecialchars($onglet);
+      }
+
+      unset($onglet);
+
       switch ($_GET['view'])
       {
         case 'main':
-          foreach ($ongletsYears as &$onglet)
-          {
-            $onglet = htmlspecialchars($onglet);
-          }
-
-          unset($onglet);
-
           foreach ($tableauFilms as &$film)
           {
             $film['id_film']          = htmlspecialchars($film['id_film']);
@@ -124,13 +144,6 @@
           break;
 
         case 'user':
-          foreach ($ongletsYears as &$onglet)
-          {
-            $onglet = htmlspecialchars($onglet);
-          }
-
-          unset($onglet);
-
           foreach ($listeFilms as &$film)
           {
             $film->setFilm(htmlspecialchars($film->getFilm()));
@@ -158,6 +171,54 @@
           }
 
           unset($film);
+          break;
+
+        case 'cards':
+          foreach ($listeFilms as &$film)
+          {
+            $film->setFilm(htmlspecialchars($film->getFilm()));
+            $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
+            $film->setDate_add(htmlspecialchars($film->getDate_add()));
+            $film->setIdentifiant_add(htmlspecialchars($film->getIdentifiant_add()));
+            $film->setPseudo_add(htmlspecialchars($film->getPseudo_add()));
+            $film->setIdentifiant_del(htmlspecialchars($film->getIdentifiant_del()));
+            $film->setPseudo_del(htmlspecialchars($film->getPseudo_del()));
+            $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
+            $film->setDate_release(htmlspecialchars($film->getDate_release()));
+            $film->setLink(htmlspecialchars($film->getLink()));
+            $film->setPoster(htmlspecialchars($film->getPoster()));
+            $film->setTrailer(htmlspecialchars($film->getTrailer()));
+            $film->setId_url(htmlspecialchars($film->getId_url()));
+            $film->setDoodle(htmlspecialchars($film->getDoodle()));
+            $film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
+            $film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
+            $film->setRestaurant(htmlspecialchars($film->getRestaurant()));
+            $film->setPlace(htmlspecialchars($film->getPlace()));
+            $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
+            $film->setStars_user(htmlspecialchars($film->getStars_user()));
+            $film->setParticipation(htmlspecialchars($film->getParticipation()));
+            $film->setNb_users(htmlspecialchars($film->getNb_users()));
+          }
+
+          unset($film);
+
+          if (isset($listeEtoiles) AND !empty($listeEtoiles))
+          {
+            foreach ($listeEtoiles as &$etoilesFilm)
+            {
+              foreach ($etoilesFilm as &$ligneEtoilesFilm)
+              {
+                $ligneEtoilesFilm['identifiant'] = htmlspecialchars($ligneEtoilesFilm['identifiant']);
+                $ligneEtoilesFilm['pseudo']      = htmlspecialchars($ligneEtoilesFilm['pseudo']);
+                $ligneEtoilesFilm['avatar']      = htmlspecialchars($ligneEtoilesFilm['avatar']);
+                $ligneEtoilesFilm['stars']       = htmlspecialchars($ligneEtoilesFilm['stars']);
+              }
+
+              unset($ligneEtoilesFilm);
+            }
+
+            unset($etoilesFilm);
+          }
           break;
 
         case 'home':
@@ -254,7 +315,7 @@
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
       break;
 
-    case "doSaisieRapide":
+    case "doAjouter":
     case "doVoterFilm":
     case "doParticiperFilm":
     default:
@@ -264,11 +325,12 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doSaisieRapide":
-      if ((isset($_SESSION['alerts']['wrong_date']) AND $_SESSION['alerts']['wrong_date'] == true) OR empty($_POST['date_theater']))
+    case "doAjouter":
+      if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true)
+      OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter');
       else
-        header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . substr($_POST['date_theater'], 6, 4) . '&action=goConsulter');
+        header('location: details.php?id_film=' . $new_id . '&action=goConsulter');
       break;
 
     case "doVoterFilm":

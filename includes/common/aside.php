@@ -7,15 +7,6 @@
 	if (!isset($disconnect))
 		$disconnect = false;
 
-	if (!isset($add_article))
-		$add_article = false;
-
-	if (!isset($add_film))
-		$add_film = false;
-
-	if (!isset($modify_film))
-		$modify_film = false;
-
 	if (!isset($ajouter_parcours))
 		$ajouter_parcours = false;
 
@@ -60,22 +51,6 @@
 		{
 			echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/home.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
-			echo '</a>';
-		}
-
-		// Ajouter un film (avancé)
-		if ($add_film == true)
-		{
-			echo '<a href="/inside/portail/moviehouse/saisie.php?action=goAjouter" title="Ajouter un film (avancé)" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter un film (avancé)" class="icon_aside" />';
-			echo '</a>';
-		}
-
-		// Modifier les détails
-		if ($modify_film == true)
-		{
-			echo '<a href="/inside/portail/moviehouse/saisie.php?update_id=' . $_GET['id_film'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
 			echo '</a>';
 		}
 

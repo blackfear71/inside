@@ -8,7 +8,8 @@
   controlsUser();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_moviehouse.php');
+  include_once('modele/metier_commun.php');
+  include_once('modele/metier_details.php');
 
   // Contrôle si l'id est renseignée et numérique
   if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
@@ -26,7 +27,17 @@
         $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
         $listeEtoiles      = getDetailsStars($_GET['id_film']);
         $listeCommentaires = getComments($_GET['id_film']);
+        $detailsFilmJson   = json_encode(convertForJson($detailsFilm));
       }
+      break;
+
+    case "doModifier":
+      updateFilm($_GET['id_film'], $_POST, $_SESSION['user']['identifiant']);
+      break;
+
+    case "doSupprimer":
+      $preferences = getPreferences($_SESSION['user']['identifiant']);
+      deleteFilm($_GET['delete_id'], $_SESSION['user']['identifiant']);
       break;
 
     case "doVoterFilm":
@@ -39,11 +50,6 @@
 
     case "doCommenter":
       insertComment($_POST, $_GET, $_SESSION['user']['identifiant']);
-      break;
-
-    case "doSupprimer":
-      $preferences = getPreferences($_SESSION['user']['identifiant']);
-      deleteFilm($_GET['delete_id'], $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimerCommentaire":
@@ -96,6 +102,7 @@
         $detailsFilm->setDate_doodle(htmlspecialchars($detailsFilm->getDate_doodle()));
         $detailsFilm->setTime_doodle(htmlspecialchars($detailsFilm->getTime_doodle()));
         $detailsFilm->setRestaurant(htmlspecialchars($detailsFilm->getRestaurant()));
+        $detailsFilm->setPlace(htmlspecialchars($detailsFilm->getPlace()));
         $detailsFilm->setNb_comments(htmlspecialchars($detailsFilm->getNb_comments()));
         $detailsFilm->setStars_user(htmlspecialchars($detailsFilm->getStars_user()));
         $detailsFilm->setParticipation(htmlspecialchars($detailsFilm->getParticipation()));
@@ -132,10 +139,11 @@
       }
       break;
 
+    case "doModifier":
+    case "doSupprimer":
     case "doVoterFilm":
     case "doParticiperFilm":
     case "doCommenter":
-    case "doSupprimer":
     case "doSupprimerCommentaire":
     case "doModifierCommentaire":
     default:
@@ -145,13 +153,8 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doVoterFilm":
-    case "doParticiperFilm":
+    case "doModifier":
       header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
-      break;
-
-    case "doCommenter":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=comments');
       break;
 
     case "doSupprimer":
@@ -165,6 +168,10 @@
           $view_movie_house = "user";
           break;
 
+        case "C":
+          $view_movie_house = "cards";
+          break;
+
         case "H":
         default:
           $view_movie_house = "home";
@@ -172,6 +179,15 @@
       }
 
       header('location: moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter');
+      break;
+
+    case "doVoterFilm":
+    case "doParticiperFilm":
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
+      break;
+
+    case "doCommenter":
+      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=comments');
       break;
 
     case "doSupprimerCommentaire":
@@ -184,7 +200,7 @@
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_details.php');
+      include_once('vue/vue_details_film.php');
       break;
   }
 ?>

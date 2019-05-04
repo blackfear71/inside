@@ -284,7 +284,8 @@
   // RETOUR : Id enregistrement créé
   function insertCollector($post, $files, $user)
   {
-    $new_id = NULL;
+    $new_id     = NULL;
+    $control_ok = true;
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['speaker']        = $post['speaker'];
@@ -296,13 +297,19 @@
     if ($post['type_collector'] == "T")
       $_SESSION['save']['collector']    = $post['collector'];
 
-    $date_a_verifier = $post['date_collector'];
+    // On contrôle la date
+    if ($control_ok == true)
+    {
+      $date_a_verifier = $post['date_collector'];
 
-    // On décompose la date à contrôler
-    list($d, $m, $y) = explode('/', $date_a_verifier);
+      if (validateDate($date_a_verifier, "d/m/Y") != true)
+      {
+        $_SESSION['alerts']['wrong_date'] = true;
+        $control_ok                       = false;
+      }
+    }
 
-    // On vérifie le format de la date
-    if (checkdate($m, $d, $y))
+    if ($control_ok == true)
     {
       //Formatage du texte ou insertion image
       if ($post['type_collector'] == "T")
@@ -382,8 +389,6 @@
       elseif ($post['type_collector'] == "I")
         $_SESSION['alerts']['image_collector_added'] = true;
     }
-    else
-      $_SESSION['alerts']['wrong_date'] = true;
 
     return $new_id;
   }
@@ -482,36 +487,49 @@
   // RETOUR : Aucun
   function updateCollector($post, $files, $id_col)
   {
+    $control_ok = true;
+
     global $bdd;
 
-    if ($post['type_collector'] == "I")
+    // On contrôle la date
+    if ($control_ok == true)
     {
-      // On récupère le nom de l'image existante
-      $reponse = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
-      $donnees = $reponse->fetch();
-      $collector      = $donnees['collector'];
-      $type_collector = $donnees['type_collector'];
-      $reponse->closeCursor();
+      $date_a_verifier = $post['date_collector'];
 
-      // Si on modifie l'image, on supprime l'ancienne et on insère la nouvelle
-      if ($files['image']['name'] != NULL)
+      if (validateDate($date_a_verifier, "d/m/Y") != true)
       {
-        if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-          unlink ("../../includes/images/collector/" . $collector);
-
-        $collector   = uploadImage($files, rand());
+        $_SESSION['alerts']['wrong_date'] = true;
+        $control_ok                       = false;
       }
     }
-    else
-      $collector     = $post['collector'];
 
-    $date_a_verifier = $post['date_collector'];
+    // Suppression ancienne image ou récupération collector
+    if ($control_ok == true)
+    {
+      if ($post['type_collector'] == "I")
+      {
+        // On récupère le nom de l'image existante
+        $reponse = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
+        $donnees = $reponse->fetch();
+        $collector      = $donnees['collector'];
+        $type_collector = $donnees['type_collector'];
+        $reponse->closeCursor();
 
-    // On décompose la date à contrôler
-    list($d, $m, $y) = explode('/', $date_a_verifier);
+        // Si on modifie l'image, on supprime l'ancienne et on insère la nouvelle
+        if ($files['image']['name'] != NULL)
+        {
+          if (isset($collector) AND !empty($collector) AND $type_collector == "I")
+            unlink ("../../includes/images/collector/" . $collector);
 
-    // On vérifie le format de la date
-    if (checkdate($m, $d, $y))
+          $collector   = uploadImage($files, rand());
+        }
+      }
+      else
+        $collector     = $post['collector'];
+    }
+
+    // Mise à jour en base
+    if ($control_ok == true)
     {
       // Speaker
       if ($post['speaker'] == "other")
@@ -526,9 +544,7 @@
         {
           $reponse = $bdd->query('SELECT id, speaker FROM collector WHERE id = ' . $id_col);
           $donnees = $reponse->fetch();
-
           $speaker = $donnees['speaker'];
-
           $reponse->closeCursor();
         }
         else
@@ -560,8 +576,6 @@
       elseif ($post['type_collector'] == "I")
         $_SESSION['alerts']['image_collector_updated'] = true;
     }
-    else
-      $_SESSION['alerts']['wrong_date'] = true;
   }
 
   // METIER : Lecture des votes utilisateur

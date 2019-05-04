@@ -974,6 +974,10 @@
         n += 7;
       }*/
 
+      if (n < 0) {
+        n += 7;
+      }
+
       if (startDate) {
         prevDisabled = firstDay.getTime() <= startDate.getTime();
       }

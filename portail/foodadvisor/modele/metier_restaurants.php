@@ -1,8 +1,4 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
-  include_once('../../includes/classes/restaurants.php');
-  include_once('../../includes/libraries/php/imagethumb.php');
-
   // METIER : Récupération de la liste des types
   // RETOUR : Liste des types
   function getTypesRestaurants()

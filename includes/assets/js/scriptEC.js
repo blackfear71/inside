@@ -45,7 +45,7 @@ function adaptEC()
   }
 }
 
-// Affiche ou masque un élément (délai 400ms)
+// Affiche ou masque un élément (délai 200ms)
 function afficherMasquer(id)
 {
   if ($('#' + id).css('display') == "none")
@@ -167,34 +167,37 @@ function resetSaisie(zone, year)
   // Fermeture zone de saisie
   afficherMasquer(zone);
 
-  // Test si action = modification
-  var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
-  var call          = currentAction[currentAction.length-1]
-
-  if (call == "doModifier")
+  setTimeout(function()
   {
-    var titre   = 'Saisir une dépense';
-    var buyer   = "";
-    var price   = "";
-    var comment = "";
-    var action  = 'expensecenter.php?year=' + year + '&action=doInserer';
+    // Test si action = modification
+    var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
+    var call          = currentAction[currentAction.length-1]
 
-    // Modification des données
-    $('.titre_saisie_depense').html(titre);
-    $('.form_saisie_depense').attr('action', action);
-    $('#select_user').val(buyer);
-    $('.saisie_prix').val(price);
-    $('.saisie_commentaire').html(comment);
-
-    $('.zone_saisie_utilisateur').each(function()
+    if (call == "doModifier")
     {
-      $(this).children('.qte').val('0');
-      $(this).css('background-color', '#e3e3e3');
-      $(this).css('color', '#262626');
-    });
-  }
+      var titre   = 'Saisir une dépense';
+      var buyer   = "";
+      var price   = "";
+      var comment = "";
+      var action  = 'expensecenter.php?year=' + year + '&action=doInserer';
 
-  // On réinitialise l'affichage des explications
-  $('.lien_explications').css('display', 'block');
-  $('.explications').css('display', 'none');
+      // Modification des données
+      $('.titre_saisie_depense').html(titre);
+      $('.form_saisie_depense').attr('action', action);
+      $('#select_user').val(buyer);
+      $('.saisie_prix').val(price);
+      $('.saisie_commentaire').html(comment);
+
+      $('.zone_saisie_utilisateur').each(function()
+      {
+        $(this).children('.qte').val('0');
+        $(this).css('background-color', '#e3e3e3');
+        $(this).css('color', '#262626');
+      });
+    }
+
+    // On réinitialise l'affichage des explications
+    $('.lien_explications').css('display', 'block');
+    $('.explications').css('display', 'none');
+  }, 200);
 }

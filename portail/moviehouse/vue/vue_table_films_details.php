@@ -1,26 +1,9 @@
 <?php
-  // Saisie rapide
-  echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doSaisieRapide" class="form_saisie_rapide">';
-    echo '<table class="table_saisie_rapide">';
-      echo '<tr>';
-        echo '<td class="td_saisie_film">';
-          echo '<input type="text" name="nom_film" value="' . $_SESSION['save']['nom_film_saisi'] . '" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />';
-        echo '</td>';
-
-        echo '<td class="td_saisie_date">';
-          echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="date_saisie_rapide" />';
-        echo '</td>';
-
-        echo '<td class="td_saisie_ajouter">';
-          echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
-        echo '</td>';
-      echo '</tr>';
-    echo '</table>';
-  echo '</form>';
-
 	/***************************/
 	/* Tableau vue utilisateur */
 	/***************************/
+  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />Les films de ' . $_GET['year'] . '</div>';
+
   if ($anneeExistante == true AND !empty($listeFilms))
   {
   	echo '<table class="table_movie_house">';
@@ -102,7 +85,7 @@
                     if (!empty($film->getDoodle()))
                       echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
                     else
-                      echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?update_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
+                      echo '<a href="https://doodle.com/fr/" onclick="location.href=\'details.php?id_film=' . $film->getId() . '&doodle=true&action=goConsulter\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="logo_tableau_films" /></a>';
                   echo '</td>';
 
                   // Date de sortie proposée
@@ -129,24 +112,24 @@
                   else
                     echo '<td class="table_users">';
 
-                      echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                      echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" id="preference_' . $film->getId() . '" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
                         echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                       echo '</a>';
 
-                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2_' . $film->getId() . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                         // Boutons vote
                         for ($j = 0; $j <= 5; $j++)
                         {
                           echo '<img src="../../includes/icons/moviehouse/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
                           if ($j == $film->getStars_user())
-                            echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
+                            echo '<input type="submit" name="preference_' . $j . '" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
                           else
-                            echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
+                            echo '<input type="submit" name="preference_' . $j . '" value="" class="link_vote_2" />';
                         }
 
                         // Bouton annulation
-                        echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" title="Annuler" class="link_vote">';
+                        echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" title="Annuler" class="link_vote">';
                           echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                         echo '</a>';
                       echo '</form>';
@@ -250,7 +233,7 @@
               if (!empty($film->getDoodle()))
                 echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
               else
-                echo '<a href="https://doodle.com/fr/" onclick="location.href=\'saisie.php?update_id=' . $film->getId() . '&action=goModifier\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" title="Doodle" class="logo_tableau_films" /></a>';
+                echo '<a href="https://doodle.com/fr/" onclick="location.href=\'details.php?id_film=' . $film->getId() . '&doodle=true&action=goConsulter\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="logo_tableau_films" /></a>';
             echo '</td>';
 
             // Date de sortie proposée
@@ -277,24 +260,24 @@
             else
               echo '<td class="table_users">';
 
-                echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" id="preference[' . $film->getId() . ']" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" id="preference_' . $film->getId() . '" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
                   echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                 echo '</a>';
 
-                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2[' . $film->getId() . ']" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2_' . $film->getId() . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
                   // Boutons vote
                   for ($j = 0; $j <= 5; $j++)
                   {
                     echo '<img src="../../includes/icons/moviehouse/stars/star' . $j .'.png" alt="star' . $j . '" class="star_2" />';
 
                     if ($j == $film->getStars_user())
-                      echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
+                      echo '<input type="submit" name="preference_' . $j . '" value="" class="link_vote_2" style="border-bottom: solid 3px #c81932;" />';
                     else
-                      echo '<input type="submit" name="preference[' . $j . ']" value="" class="link_vote_2" />';
+                      echo '<input type="submit" name="preference_' . $j . '" value="" class="link_vote_2" />';
                   }
 
                   // Bouton annulation
-                  echo '<a onclick="afficherMasquer(\'preference[' . $film->getId() . ']\'); afficherMasquer(\'preference2[' . $film->getId() . ']\');" title="Annuler" class="link_vote">';
+                  echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" title="Annuler" class="link_vote">';
                     echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                   echo '</a>';
                 echo '</form>';
@@ -355,27 +338,8 @@
         echo '<td class="init_table_dates">Vote</td>';
         echo '<td class="init_table_dates">Actions</td>';
       echo '</tr>';
-      echo '</table>';
-    }
-    else
-      echo '<p class="no_films">Pas encore de films pour cette année...</p>';
-
-  // Saisie rapide
-  echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doSaisieRapide" class="form_saisie_rapide" style="margin-bottom: 0px;">';
-    echo '<table class="table_saisie_rapide">';
-      echo '<tr>';
-        echo '<td class="td_saisie_film">';
-          echo '<input type="text" name="nom_film" value="' . $_SESSION['save']['nom_film_saisi'] . '" placeholder="Nom du film" maxlength="255" class="name_saisie_rapide" required />';
-        echo '</td>';
-
-        echo '<td class="td_saisie_date">';
-          echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_2" class="date_saisie_rapide" />';
-        echo '</td>';
-
-        echo '<td class="td_saisie_ajouter">';
-          echo '<input type="submit" name="saisie_rapide" value="Ajouter à la liste" class="add_saisie_rapide" />';
-        echo '</td>';
-      echo '</tr>';
     echo '</table>';
-  echo '</form>';
+  }
+  else
+    echo '<p class="no_films">Pas encore de films pour cette année...</p>';
 ?>
