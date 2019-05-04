@@ -284,6 +284,7 @@ header
 	top: 0;
 	right: 0;
 	max-width: 50vw;
+	height: 80px;
 }
 
 .logo_bandeau
@@ -444,7 +445,7 @@ header
 	line-height: 80px;
 	height: 80px;
 	padding-left: 20px;
-	padding-right: 20px;
+	padding-right: 10px;
 	vertical-align: top;
 }
 
@@ -473,6 +474,36 @@ header
 {
 	transform: rotateY(360deg);
 	transition: transform 0.6s ease;
+}
+
+.zone_actions_header
+{
+	display: inline-block;
+	width: 40px;
+	height: 80px;
+	vertical-align: top;
+	background-color: #1b1b1b;
+}
+
+.icone_action_header
+{
+	display: block;
+	height: 30px;
+	padding: 5px;
+}
+
+.icone_deconnexion_header
+{
+	display: block;
+	width: 40px;
+	height: 40px;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/logout.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 /*** Barre de progression niveau ***/
@@ -506,7 +537,7 @@ header
 .circular_bar_header
 {
 	position: absolute;
-  right: 2.5px;
+  right: 32.5px;
 	margin-top: -9px;
 	height: 89px;
 	overflow: hidden;

@@ -92,16 +92,25 @@
         echo '<a href="/inside/administration/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
       else
         echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
-          echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
+        echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
 
-          if ($_SESSION['user']['identifiant'] != "admin")
-            echo '<div class="circular_bar_header" id="progress_circle_header" data-perc="' . $_SESSION['user']['experience']['percent'] . '" data-text=""></div>';
+        if ($_SESSION['user']['identifiant'] != "admin")
+          echo '<div class="circular_bar_header" id="progress_circle_header" data-perc="' . $_SESSION['user']['experience']['percent'] . '" data-text=""></div>';
 
-          if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
-            echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
-          else
-            echo '<img src="/inside/includes/icons/common/default.png" alt="avatar" class="avatar_bandeau" />';
-        echo '</a>';
+        if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
+          echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
+        else
+          echo '<img src="/inside/includes/icons/common/default.png" alt="avatar" class="avatar_bandeau" />';
+      echo '</a>';
+
+      echo '<div class="zone_actions_header">';
+        echo '<form method="post" action="/inside/connexion/disconnect.php" title="Déconnexion">';
+          echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icone_deconnexion_header" />';
+        echo '</form>';
+
+        if ($_SESSION['user']['identifiant'] != "admin")
+          echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=success&action=goConsulter" title="Expérience & Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
+      echo '</div>';
     echo '</div>';
 
     // Boutons missions

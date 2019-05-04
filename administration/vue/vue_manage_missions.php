@@ -26,9 +26,7 @@
 			<!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu" class="aside_no_nav">
 				<?php
-					$disconnect  = true;
           $add_mission = true;
-					$back_admin  = true;
 
 					include('../includes/common/aside.php');
 				?>

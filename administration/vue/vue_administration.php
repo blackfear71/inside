@@ -22,15 +22,6 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$disconnect = true;
-
-					include('../includes/common/aside.php');
-				?>
-			</aside>
-
 			<article>
 				<div class="menu_admin">
           <a href="infos_users.php?action=goConsulter" class="menu_link_admin">

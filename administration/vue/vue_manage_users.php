@@ -21,16 +21,6 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$disconnect = true;
-					$back_admin = true;
-
-					include('../includes/common/aside.php');
-				?>
-			</aside>
-
 			<article>
 				<?php
 					if (isset($_SESSION['save']['user_ask_id'])   AND !empty($_SESSION['save']['user_ask_id'])

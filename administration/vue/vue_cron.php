@@ -22,16 +22,6 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$disconnect = true;
-          $back_admin = true;
-
-					include('../includes/common/aside.php');
-				?>
-			</aside>
-
       <!-- Messages d'alerte -->
 			<?php
 				include('../includes/common/alerts.php');

@@ -4,8 +4,8 @@
 	//////////////////////////////////////
 
 	// Initialisations
-	if (!isset($disconnect))
-		$disconnect = false;
+	if (!isset($back))
+		$back = false;
 
 	if (!isset($ajouter_parcours))
 		$ajouter_parcours = false;
@@ -13,20 +13,11 @@
 	if (!isset($modify_parcours))
 		$modify_parcours = false;
 
-	if (!isset($back_index))
-		$back_index = false;
-
-	if (!isset($back))
-		$back = false;
-
 	if (!isset($add_mission))
 		$add_mission = false;
 
 	if (!isset($modify_success))
 		$modify_success = false;
-
-	if (!isset($back_admin))
-		$back_admin = false;
 
 	echo '<div class="menu_aside_hidden">';
 		// Retour au portail
@@ -34,14 +25,6 @@
 		{
 			echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/home.png" alt="back" title="Retour au portail" class="icon_aside" />';
-			echo '</a>';
-		}
-
-		// Retour au portail administration
-		if ($back_admin == true)
-		{
-			echo '<a href="/inside/administration/administration.php?action=goConsulter" title="Retour au portail administration" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/home.png" alt="back_admin" title="Retour au portail administration" class="icon_aside" />';
 			echo '</a>';
 		}
 
@@ -75,14 +58,6 @@
 			echo '<a href="/inside/administration/manage_missions.php?action=goAjouter" title="Ajouter une mission" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter une mission" class="icon_aside" />';
 			echo '</a>';
-		}
-
-		// Déconnexion
-		if ($disconnect == true)
-		{
-			echo '<form method="post" action="/inside/connexion/disconnect.php" class="bouton_aside">';
-				echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icon_deconnexion" />';
-			echo '</form>';
 		}
 	echo '</div>';
 
