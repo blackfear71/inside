@@ -29,7 +29,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $year . '" ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC LIMIT 6');
+    $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $year . '" ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC LIMIT 5');
     while($donnees = $reponse->fetch())
     {
       $myRecent = Movie::withData($donnees);
@@ -106,8 +106,8 @@
 
       array_multisort($tri_1, SORT_DESC, $tri_2, SORT_DESC, $listAttendus);
 
-      // On extrait les 6 premièrs films les plus attentus
-      $listAttendus = array_slice($listAttendus, 0, 6);
+      // On extrait les 5 premièrs films les plus attentus
+      $listAttendus = array_slice($listAttendus, 0, 5);
 
       // Tri final sur la moyenne
       foreach ($listAttendus as $attendu)
@@ -129,9 +129,9 @@
     global $bdd;
 
     if ($year == date("Y"))
-      $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND date_doodle >= ' . date("Ymd") . ' ORDER BY date_doodle ASC, id DESC LIMIT 6');
+      $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND date_doodle >= ' . date("Ymd") . ' ORDER BY date_doodle ASC, id DESC LIMIT 5');
     else
-      $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC LIMIT 6');
+      $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC LIMIT 5');
     while($donnees = $reponse->fetch())
     {
       $mySortie = Movie::withData($donnees);
