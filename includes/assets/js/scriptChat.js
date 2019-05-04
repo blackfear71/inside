@@ -225,7 +225,7 @@ $(window).on('load', function()
     return cookie;
   }
 
-  // Fonction initialisation position chat
+  // Fonction initialisation position chat (aussi présente dans scriptMH.js)
   function initPositionChat()
   {
     var total_height = $('body')[0].scrollHeight - $(window).height();

@@ -50,7 +50,7 @@ $(window).on('load', function()
 
   // Ouverture modification si création Doodle
   var doodle = $_GET('doodle');
-  
+
   if (doodle == "true")
     updateFilm('zone_saisie_film');
 });
@@ -163,6 +163,22 @@ function afficherMasquerFilms(month)
       }
       break;
   }
+
+  initPositionChat();
+}
+
+// Fonction initialisation position chat
+function initPositionChat()
+{
+  var total_height = $('body')[0].scrollHeight - $(window).height();
+  var difference   = $('footer').height() - (total_height - $(window).scrollTop());
+
+  $("#zone_chat_position").css('display', 'block');
+
+  if (difference > 0)
+    $('#zone_chat_position').css('bottom', difference + 'px');
+  else
+    $('#zone_chat_position').css('bottom', '0px');
 }
 
 // Affiche la saisie préférence d'un film
