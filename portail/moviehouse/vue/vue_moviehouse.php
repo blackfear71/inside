@@ -26,15 +26,6 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_nav">
-				<?php
-					$back = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
 			<!-- Messages d'alerte -->
 			<?php
 				include('../../includes/common/alerts.php');
@@ -42,6 +33,10 @@
 
 			<article>
         <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
           // Liens
           echo '<div class="zone_liens_saisie">';
             // Bouton saisie

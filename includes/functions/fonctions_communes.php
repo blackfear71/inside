@@ -204,21 +204,21 @@
                                        '/inside/portail/expensecenter/expensecenter.php',
                                        '/inside/portail/foodadvisor/foodadvisor.php',
                                        '/inside/portail/foodadvisor/restaurants.php',
+                                       '/inside/portail/ideas/ideas.php',
+                                       '/inside/portail/missions/missions.php',
+                                       '/inside/portail/missions/details.php',
                                        '/inside/portail/moviehouse/details.php',
                                        '/inside/portail/moviehouse/mailing.php',
                                        '/inside/portail/moviehouse/moviehouse.php',
                                        '/inside/portail/notifications/notifications.php',
                                        '/inside/portail/petitspedestres/parcours.php',
                                        '/inside/portail/portail/portail.php',
-                                       '/inside/portail/missions/missions.php',
-                                       '/inside/portail/missions/details.php',
                                        '/inside/portail/search/search.php',
                                        '/inside/profil/profil.php'
                                       );
     $listZonesCompletes        = array('header',
-                                       'aside',
                                        'footer',
-                                       //'article'
+                                       'article'
                                       );
     $listPositionsHorizontales = array('left',
                                        'right',
@@ -227,6 +227,13 @@
     $listPositionsVerticales   = array('top',
                                        'bottom',
                                        'middle'
+                                      );
+    $listPositionsArticle      = array('top_left',
+                                       'top_right',
+                                       'middle_left',
+                                       'middle_right',
+                                       'bottom_left',
+                                       'bottom_right',
                                       );
 
     for ($i = 0; $i < $nb; $i++)
@@ -248,31 +255,74 @@
       // Zone
       $zone = $listZonesCompletes[array_rand($listZonesCompletes)];
 
-      // Position
+      // Positions
       switch ($zone)
       {
+        case 'article':
+          $position = $listPositionsArticle[array_rand($listPositionsArticle)];
+          break;
+
         case 'header':
         case 'nav':
         case 'footer':
           $position = $listPositionsHorizontales[array_rand($listPositionsHorizontales)];
           break;
 
-        case 'aside':
         default:
-          $position = $listPositionsVerticales[array_rand($listPositionsVerticales)];
+          $position = '';
           break;
       }
 
       // Icônes
-      if ($position == 'left' OR $position == 'top' OR $position =='bottom' OR ($position == 'middle' AND $zone == 'aside'))
-        $icone = $mission->getReference() . '_g';
-      elseif ($position == 'right')
-        $icone = $mission->getReference() . '_d';
-      elseif ($position == 'middle' AND $zone != 'aside')
-        $icone = $mission->getReference() . '_m';
+      switch ($position)
+      {
+        case 'left':
+          $icone = $mission->getReference() . '_g';
+          break;
+
+        case 'middle':
+          $icone = $mission->getReference() . '_m';
+          break;
+
+        case 'right':
+          $icone = $mission->getReference() . '_d';
+          break;
+
+        case 'top_left':
+        case 'middle_left':
+        case 'bottom_left':
+          $icone = $mission->getReference() . '_g';
+          break;
+
+        case 'top_right':
+        case 'middle_right':
+        case 'bottom_right':
+          $icone = $mission->getReference() . '_d';
+          break;
+
+        default:
+          $icone = '';
+          break;
+      }
 
       // Classe position
-      $classe = $zone . '_' . $position . '_mission';
+      if (!empty($zone) AND !empty($position))
+      {
+        if  ($zone == 'article'
+        AND ($position == 'top_left'
+        OR   $position == 'top_right')
+        AND ($page == '/inside/portail/bugs/bugs.php'
+        OR   $page == '/inside/portail/ideas/ideas.php'
+        OR   $page == '/inside/portail/notifications/notifications.php'
+        OR   $page == '/inside/portail/portail/portail.php'
+        OR   $page == '/inside/portail/search/search.php'
+        OR   $page == '/inside/profil/profil.php'))
+          $classe = $zone . '_' . $position . '_mission_no_nav';
+        else
+          $classe = $zone . '_' . $position . '_mission';
+      }
+      else
+        $classe = '';
 
       $myMissionButtons = array('id_mission'  => $id_mission,
                                 'reference'   => $reference,
@@ -303,8 +353,8 @@
   {
     $duplicated = false;
 
-    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 16*(3+3+3) = 144 emplacements possibles)
-    if (!empty($tableauMissions) AND count($tableauMissions) <= 144)
+    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 17*(3+3+6) = 204 emplacements possibles)
+    if (!empty($tableauMissions) AND count($tableauMissions) <= 204)
     {
       foreach ($tableauMissions as $missionExistante)
       {

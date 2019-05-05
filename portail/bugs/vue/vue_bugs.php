@@ -22,24 +22,19 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$back = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
 			<!-- Messages d'alerte -->
 			<?php
 				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
-        <!-- Onglets vues -->
-        <div class="switch_view">
-          <?php
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
+          // Onglets vues
+          echo '<div class="switch_view">';
             $listeSwitch = array('submit'     => array('lib' => 'Saisie',   'action' => 'goSignaler'),
                                  'unresolved' => array('lib' => 'En cours', 'action' => 'goConsulter'),
                                  'resolved'   => array('lib' => 'Résolu(e)s',  'action' => 'goConsulter')
@@ -57,10 +52,8 @@
                 echo '<div class="border_switch_' . $actif . '"></div>';
               echo '</a>';
             }
-          ?>
-        </div>
+          echo '</div>';
 
-        <?php
           // Vue listes
           if (isset($_GET['view']) AND ($_GET['view'] == "resolved" OR $_GET['view'] == "unresolved"))
           {

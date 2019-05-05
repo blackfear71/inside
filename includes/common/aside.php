@@ -4,9 +4,6 @@
 	//////////////////////////////////////
 
 	// Initialisations
-	if (!isset($back))
-		$back = false;
-
 	if (!isset($ajouter_parcours))
 		$ajouter_parcours = false;
 
@@ -20,14 +17,6 @@
 		$modify_success = false;
 
 	echo '<div class="menu_aside_hidden">';
-		// Retour au portail
-		if ($back == true)
-		{
-			echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" title="Retour au portail" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/home.png" alt="back" title="Retour au portail" class="icon_aside" />';
-			echo '</a>';
-		}
-
 		// Ajouter parcours
 		if ($ajouter_parcours == true)
 		{
@@ -69,8 +58,4 @@
 			echo '<img src="/inside/includes/icons/common/menu_u.png" alt="menu" id="icon_menu_u" class="icon_menu_aside" style="opacity: 0;" />';
 		echo '</div>';
 	echo '</div>';
-
-	// Boutons missions
-	$zone_inside = "aside";
-	include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 ?>

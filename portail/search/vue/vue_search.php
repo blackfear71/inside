@@ -22,17 +22,13 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$back = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
 			<article>
-				<?php
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
+          // Résultats recherche
           echo '<div class="zone_recherche">';
             if (!empty($resultats))
             {

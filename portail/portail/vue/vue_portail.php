@@ -23,15 +23,13 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
 			<article>
-				<?php
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
+          // Inside News
           echo '<div class="zone_portail_left">';
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" />INSIDE News</div>';
 
@@ -72,6 +70,7 @@
             echo '</div>';
           echo '</div>';
 
+          // Portail
           echo '<div class="zone_portail_right">';
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />Portail</div>';
 

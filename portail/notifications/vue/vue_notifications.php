@@ -23,24 +23,19 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$back = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
 			<!-- Messages d'alerte -->
 			<?php
 				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
-				<!-- Switch entre notifications personnelles, notifications du jour, notifications de la semaine et toutes les notifications -->
-				<div class="switch_view">
-					<?php
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
+		      // Switch entre notifications personnelles, notifications du jour, notifications de la semaine et toutes les notifications
+		      echo '<div class="switch_view">';
 						$listeSwitch = array('me'    => 'Moi',
 																 'today' => 'Aujourd\'hui',
                                  'week'  => '7 jours',
@@ -64,11 +59,8 @@
                 echo '<div class="border_switch_' . $actif . '"></div>';
               echo '</a>';
             }
-					?>
-				</div>
+	        echo '</div>';
 
-        <!-- Affichage de la page -->
-        <?php
           if (!empty($notifications))
           {
             $date_notif = "";

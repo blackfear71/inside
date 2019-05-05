@@ -23,24 +23,19 @@
 		</header>
 
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$back = true;
-
-					include('../includes/common/aside.php');
-				?>
-			</aside>
-
 			<!-- Messages d'alerte -->
 			<?php
 				include('../includes/common/alerts.php');
 			?>
 
 			<article>
-        <!-- Onglets vues -->
-				<div class="switch_view">
-					<?php
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
+          // Onglets vues
+		      echo '<div class="switch_view">';
             $listeSwitch = array('settings' => 'Paramètres',
                                  'success'  => 'Succès',
                                  'ranking'  => 'Classement'
@@ -58,11 +53,9 @@
                 echo '<div class="border_switch_' . $actif . '"></div>';
               echo '</a>';
             }
-					?>
-				</div>
+	        echo '</div>';
 
-        <!-- Affichage en fonction des vues -->
-        <?php
+          // Affichage en fonction des vues
           if ($_GET['view'] == "settings")
           {
             include('vue/vue_settings.php');

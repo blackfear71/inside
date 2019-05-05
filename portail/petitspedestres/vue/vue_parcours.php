@@ -29,7 +29,6 @@
 				<?php
 					$ajouter_parcours = true;
 					$modify_parcours  = true;
-					$back             = true;
 
 					include('../../includes/common/aside.php');
 				?>
@@ -41,6 +40,12 @@
 			?>
 
 			<article>
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+        ?>
+
 				<div class="PP-parcours">
           <div class="PP-titre">
             <?php echo $parcours->getNom(); ?>

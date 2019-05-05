@@ -1,6 +1,6 @@
 <?php
   // Ce fichier génère les boutons de missions. Ceux-ci sont déterminés dans les fonctions communes (controlUser) et récupérés ici. Cette page est incluse dans les zones où l'on souhaite
-  // voir les boutons (header, aside, nav & footer). Leur position est déterminée par le style généré précédemment.
+  // voir les boutons (header, article & footer). Leur position est déterminée par le style généré précédemment.
 
   if (isset($_SESSION['missions']) AND !empty($_SESSION['missions']))
   {

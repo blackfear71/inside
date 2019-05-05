@@ -22,24 +22,19 @@
 		</header>
 
 		<section>
-      <!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-					$back = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
 			<!-- Messages d'alerte -->
 			<?php
 				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
-        <!-- Onglets vues -->
-				<div class="switch_view">
-					<?php
+        <?php
+          // Boutons missions
+          $zone_inside = "article";
+          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+
+          // Onglets vues
+				  echo '<div class="switch_view">';
             $listeSwitch = array('all'        => 'Toutes',
                                  'inprogress' => 'En cours',
                                  'mine'       => 'En charge',
@@ -58,11 +53,9 @@
                 echo '<div class="border_switch_' . $actif . '"></div>';
               echo '</a>';
             }
-					?>
-				</div>
+			    echo '</div>';
 
-        <!-- Zone de saisie idée -->
-				<?php
+          // Zone de saisie idée
 					echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer" class="form_saisie_idea">';
             echo '<table class="table_saisie_idee">';
               echo '<tr>';
