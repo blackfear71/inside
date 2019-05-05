@@ -109,7 +109,7 @@
         echo '</form>';
 
         if ($_SESSION['user']['identifiant'] != "admin")
-          echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=success&action=goConsulter" title="Expérience & Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
+          echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=success&action=goConsulter" title="Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
       echo '</div>';
     echo '</div>';
 
