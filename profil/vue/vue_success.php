@@ -83,7 +83,9 @@
             echo '<div class="description_succes">' . $success->getDescription() . '</div>';
 
           // Barre de progression succès
-          if ($success->getValue_user() < $success->getLimit_success())
+          if ($success->getValue_user() <= 0)
+            echo '<meter min="0" max="' . $success->getLimit_success() . '" value="0" class="progression_succes"></meter>';  
+          elseif ($success->getValue_user() < $success->getLimit_success())
             echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $success->getValue_user() . '" class="progression_succes"></meter>';
         echo '</div>';
       }
