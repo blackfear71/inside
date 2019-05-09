@@ -73,6 +73,7 @@
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
         $user->setAvatar(htmlspecialchars($user->getAvatar()));
 				$user->setEmail(htmlspecialchars($user->getEmail()));
+        $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
 			}
 
       unset($user);

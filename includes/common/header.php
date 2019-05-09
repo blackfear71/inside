@@ -91,7 +91,7 @@
       if ($_SESSION['user']['identifiant'] == "admin")
         echo '<a href="/inside/administration/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
       else
-        echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
+        echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
         echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
 
         if ($_SESSION['user']['identifiant'] != "admin")

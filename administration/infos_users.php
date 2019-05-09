@@ -43,6 +43,7 @@
 				$user->setPseudo(htmlspecialchars($user->getPseudo()));
 				$user->setAvatar(htmlspecialchars($user->getAvatar()));
         $user->setEmail(htmlspecialchars($user->getEmail()));
+        $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
         $user->setExperience(htmlspecialchars($user->getExperience()));
         $user->setBeginner(htmlspecialchars($user->getBeginner()));
         $user->setDevelopper(htmlspecialchars($user->getDevelopper()));

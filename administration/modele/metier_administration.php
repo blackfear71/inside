@@ -2152,33 +2152,34 @@
     return $profile;
   }
 
-  // METIER : Mise à jour du pseudo
+  // METIER : Mise à jour des informations
   // RETOUR : Aucun
-  function changePseudo($user, $post)
+  function updateInfos($user, $post)
   {
-    $new_pseudo = trim($post['new_pseudo']);
+    global $bdd;
 
-    if (!empty($new_pseudo))
+    // Récupération des données
+    $pseudo = trim($post['pseudo']);
+
+    // Mise à jour pseudo seulement si renseigné
+    if (!empty($pseudo))
     {
-      global $bdd;
-
-      // Mise à jour du pseudo
-      $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
-      $reponse->execute(array(
-        'pseudo' => $new_pseudo
+      $req1 = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
+      $req1->execute(array(
+        'pseudo' => $pseudo
       ));
-      $reponse->closeCursor();
+      $req1->closeCursor();
 
       // Mise à jour du pseudo stocké en SESSION
-      $_SESSION['user']['pseudo'] = $new_pseudo;
-    }
+      $_SESSION['user']['pseudo'] = $pseudo;
 
-    $_SESSION['alerts']['pseudo_updated'] = true;
+      $_SESSION['alerts']['infos_updated'] = true;
+    }
   }
 
   // METIER : Mise à jour de l'avatar (base + fichier)
   // RETOUR : Aucun
-  function changeAvatar($user, $files)
+  function updateAvatar($user, $files)
   {
     global $bdd;
 
@@ -2293,7 +2294,7 @@
 
   // METIER : Mise à jour du mot de passe
   // RETOUR : Aucun
-  function changeMdp($user, $post)
+  function updatePassword($user, $post)
   {
     if (!empty($post['old_password'])
     AND !empty($post['new_password'])

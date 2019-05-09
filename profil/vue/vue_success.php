@@ -32,7 +32,7 @@
       if ($success->getDefined() == "Y")
       {
         if ($success->getValue_user() >= $success->getLimit_success())
-          echo '<div class="succes_liste" style="background-color: #ffad01;">';
+          echo '<div class="succes_liste yellow">';
         else
           echo '<div class="succes_liste">';
 

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <!-- Head commun & spécifique-->
-    <?php
-      $title_head  = "Administrateur";
-      $style_head  = "styleProfil.css";
-      $script_head = "scriptProfil.js";
+<head>
+  <!-- Head commun & spécifique-->
+  <?php
+    $title_head      = "Administrateur";
+    $style_head      = "styleProfil.css";
+    $script_head     = "scriptProfil.js";
+    $chat_head       = true;
+    $datepicker_head = true;
+    $masonry_head    = true;
 
-      include('../includes/common/head.php');
-    ?>
-  </head>
+    include('../includes/common/head.php');
+  ?>
+</head>
 
 	<body>
 		<header>
@@ -27,97 +30,61 @@
 			?>
 
 			<article>
-        <!-- Bloc utilisateur 1 -->
-        <div class="zone_profil_utilisateur" style="margin-top: -30px;">
-          <!-- Affichage pseudo -->
-          <div class="zone_profil_utilisateur_titre">
-            <?php
-              echo '<img src="../includes/icons/profil/user.png" alt="profile" class="icone_profil" />' . $profil->getPseudo();
-            ?>
-          </div>
+        <?php
+          echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />Mes informations</div>';
 
-          <!-- Tableau modification pseudo & avatar -->
-          <table class="zone_profil_utilisateur_table">
-            <tr>
-              <!-- Saisie pseudo -->
-              <td class="zone_profil_utilisateur_pseudo">
-                <?php
-                  echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangePseudo" class="zone_profil_utilisateur_pseudo_form">';
-                    echo '<input type="text" name="new_pseudo" placeholder="Nouveau pseudo" maxlength="255" class="monoligne_profil" required />';
-                    echo '<input type="submit" name="saisie_pseudo" value="Valider" class="bouton_profil" />';
-                  echo '</form>';
-                ?>
-              </td>
+          // Avatar actuel & suppression
+          echo '<div class="zone_profil_avatar_parametres">';
+            if (!empty($profil->getAvatar()))
+              echo '<img src="../includes/images/profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="avatar_profil" />';
+            else
+              echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="avatar_profil" />';
 
-              <!-- Saisie avatar -->
-              <td class="zone_profil_utilisateur_avatar">
-                <div class="zone_avatar">
-                  <?php
-                    echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangeAvatar" enctype="multipart/form-data">';
-                      echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+            echo '<div class="texte_parametres">Avatar actuel</div>';
 
-                      echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event, \'avatar\')" required /></span>';
+            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data">';
+              echo '<input type="submit" name="delete_avatar" value="Supprimer" class="bouton_validation" />';
+            echo '</form>';
+          echo '</div>';
 
-                      echo '<div class="mask_avatar" style="margin-top: -147px;">';
-                        echo '<img id="avatar" alt="" class="avatar_profil" style="margin-top: -3px;" />';
-                      echo '</div>';
+          // Modification avatar
+          echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierAvatar" enctype="multipart/form-data" class="form_update_avatar">';
+            echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-                      echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="bouton_profil" />';
-                    echo '</form>';
-                  ?>
-                </div>
-              </td>
+            echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event, \'avatar\')" required /></span>';
 
-              <!-- Suppression avatar -->
-              <td class="zone_profil_utilisateur_suppr">
-                <?php
-                  // Affichage avatar
-                  if (!empty($profil->getAvatar()))
-                  {
-                    echo '<div class="zone_profil_utilisateur_suppr_mask">';
-                      echo '<img src="../includes/images/profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
-                    echo '</div>';
+            echo '<div class="mask_avatar">';
+              echo '<img id="avatar" alt="" class="avatar_update_profil" />';
+            echo '</div>';
 
-                    echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data">';
-                      echo '<input type="submit" name="delete_avatar" value="Supprimer l\'avatar" class="bouton_profil" />';
-                    echo '</form>';
-                  }
-                  else
-                  {
-                    echo '<div class="zone_profil_utilisateur_suppr_mask">';
-                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="zone_profil_utilisateur_suppr_avatar" />';
-                    echo '</div>';
-                  }
-                ?>
-              </td>
-            </tr>
-          </table>
-        </div>
+            echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="bouton_validation" />';
+          echo '</form>';
 
-        <!-- Bloc utilisateur 2 -->
-        <div class="zone_profil_generique">
-          <!-- Titre -->
-          <div class="zone_profil_utilisateur_titre">
-            <img src="../includes/icons/profil/connexion.png" alt="connexion" class="icone_profil" />Utilisateur
-          </div>
+          // Mise à jour informations
+          echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdateInfos" class="form_update_infos">';
+            // Pseudo
+            echo '<img src="../includes/icons/common/inside_red.png" alt="inside_red" class="logo_parametres" />';
+            echo '<input type="text" name="pseudo" placeholder="Pseudo" value="' . $profil->getPseudo() . '" maxlength="255" class="monoligne_saisie" />';
 
-          <!-- Tableau modification mot de passe & désinscription -->
-          <table class="zone_profil_utilisateur_table">
-            <tr>
-              <!-- Saisie mot de passe -->
-              <td class="zone_profil_utilisateur_mdp">
-                <?php
-                  echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doChangeMdp" class="zone_profil_utilisateur_pseudo_form">';
-                    echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_profil" required />';
-                    echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_profil" required />';
-                    echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_profil" required />';
-                    echo '<input type="submit" name="saisie_mdp" value="Valider" class="bouton_profil" />';
-                  echo '</form>';
-                ?>
-              </td>
-            </tr>
-          </table>
-        </div>
+            echo '<input type="submit" name="saisie_pseudo" value="Mettre à jour" class="bouton_validation" />';
+          echo '</form>';
+
+          // Mot de passe
+          echo '<div class="titre_section"><img src="../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" />Administrateur</div>';
+
+          echo '<div class="zone_action_user">';
+            echo '<div class="titre_contribution">CHANGER MOT DE PASSE</div>';
+
+            // Modification mot de passe
+            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdatePassword">';
+              echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_saisie" required />';
+              echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';
+              echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';
+
+              echo '<input type="submit" name="saisie_mdp" value="Valider" class="bouton_validation" />';
+            echo '</form>';
+          echo '</div>';
+        ?>
 			</article>
 		</section>
 

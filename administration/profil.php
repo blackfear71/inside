@@ -17,14 +17,9 @@
       $profil = getProfile('admin');
       break;
 
-    case 'doChangePseudo':
-      // Mise à jour des données par le modèle
-      changePseudo('admin', $_POST);
-      break;
-
-    case 'doChangeAvatar':
+    case 'doModifierAvatar':
       // Mise à jour des données par le modèle & enregistrement fichier
-      changeAvatar('admin', $_FILES);
+      updateAvatar('admin', $_FILES);
       break;
 
     case 'doSupprimerAvatar':
@@ -32,8 +27,12 @@
       deleteAvatar('admin');
       break;
 
-    case 'doChangeMdp':
-      changeMdp($_GET['user'], $_POST);
+    case 'doUpdateInfos':
+      updateInfos($_GET['user'], $_POST);
+      break;
+
+    case 'doUpdatePassword':
+      updatePassword($_GET['user'], $_POST);
       break;
 
     default:
@@ -52,14 +51,15 @@
       $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
       $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
       $profil->setEmail(htmlspecialchars($profil->getEmail()));
+      $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
       $profil->setExperience(htmlspecialchars($profil->getExperience()));
       $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
       break;
 
-    case 'doChangePseudo':
-    case 'doChangeAvatar':
+    case 'doModifierAvatar':
     case 'doSupprimerAvatar':
-    case 'doChangeMdp':
+    case 'doUpdateInfos':
+    case 'doUpdatePassword':
     default:
       break;
   }
@@ -67,10 +67,10 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case 'doChangePseudo':
-    case 'doChangeAvatar':
+    case 'doModifierAvatar':
     case 'doSupprimerAvatar':
-    case 'doChangeMdp':
+    case 'doUpdateInfos':
+    case 'doUpdatePassword':
       header('location: profil.php?action=goConsulter');
       break;
 

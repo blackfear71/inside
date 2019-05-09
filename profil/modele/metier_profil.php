@@ -164,33 +164,9 @@
     return $progression;
   }
 
-  // METIER : Mise à jour du pseudo
-  // RETOUR : Aucun
-  function changePseudo($user, $post)
-  {
-    $new_pseudo = trim($post['new_pseudo']);
-
-    if (!empty($new_pseudo))
-    {
-      global $bdd;
-
-      // Mise à jour du pseudo
-      $reponse = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
-      $reponse->execute(array(
-        'pseudo' => $new_pseudo
-      ));
-      $reponse->closeCursor();
-
-      // Mise à jour du pseudo stocké en SESSION
-      $_SESSION['user']['pseudo'] = $new_pseudo;
-    }
-
-    $_SESSION['alerts']['pseudo_updated'] = true;
-  }
-
   // METIER : Mise à jour de l'avatar (base + fichier)
   // RETOUR : Aucun
-  function changeAvatar($user, $files)
+  function updateAvatar($user, $files)
   {
     global $bdd;
 
@@ -258,7 +234,7 @@
  				$donnees1 = $reponse1->fetch();
 
  				if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
- 					unlink ($dossier . "/" . $donnees1['avatar'] . "");
+ 					unlink ($dossier_avatars . "/" . $donnees1['avatar'] . "");
 
  				$reponse1->closeCursor();
 
@@ -301,6 +277,71 @@
 
     $_SESSION['user']['avatar']           = '';
     $_SESSION['alerts']['avatar_deleted'] = true;
+  }
+
+  // METIER : Mise à jour des informations
+  // RETOUR : Aucun
+  function updateInfos($user, $post)
+  {
+    $control_ok = true;
+    global $bdd;
+
+    // Récupération des données
+    $pseudo      = trim($post['pseudo']);
+    $email       = $post['email'];
+    $anniversary = $post['anniversaire'];
+
+    // Contrôle date anniversaire
+    if ($control_ok == true)
+    {
+      if (isset($anniversary) AND !empty($anniversary))
+      {
+        // On contrôle la date
+        if (validateDate($anniversary, "d/m/Y") != true)
+        {
+          $_SESSION['alerts']['wrong_date'] = true;
+          $control_ok                       = false;
+        }
+        else
+          $anniversary = formatDateForInsert($anniversary);
+      }
+    }
+
+    // Mise à jour pseudo seulement si renseigné
+    if ($control_ok == true AND !empty($pseudo))
+    {
+      $req1 = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
+      $req1->execute(array(
+        'pseudo' => $pseudo
+      ));
+      $req1->closeCursor();
+
+      // Mise à jour du pseudo stocké en SESSION
+      $_SESSION['user']['pseudo'] = $pseudo;
+    }
+
+    // Mise à jour de l'adresse mail
+    if ($control_ok == true)
+    {
+      $req2 = $bdd->prepare('UPDATE users SET email  = :email WHERE identifiant = "' . $user . '"');
+      $req2->execute(array(
+        'email'  => $email
+      ));
+      $req2->closeCursor();
+    }
+
+    // Mise à jour date anniversaire
+    if ($control_ok == true)
+    {
+      $req3 = $bdd->prepare('UPDATE users SET anniversary  = :anniversary WHERE identifiant = "' . $user . '"');
+      $req3->execute(array(
+        'anniversary'  => $anniversary
+      ));
+      $req3->closeCursor();
+    }
+
+    if ($control_ok == true)
+      $_SESSION['alerts']['infos_updated'] = true;
   }
 
   // METIER : Mise à jour des préférences
@@ -410,30 +451,9 @@
     }
   }
 
-  // METIER : Modification adresse mail
-  // RETOUR : Aucun
-  function updateMail($user, $post)
-  {
-    if (isset($post['suppression_mail']))
-      $mail = "";
-    else
-      $mail = $post['mail'];
-
-    global $bdd;
-
-    // Mise à jour de l'adresse mail utilisateur
-		$reponse = $bdd->prepare('UPDATE users SET email  = :email WHERE identifiant = "' . $user . '"');
-		$reponse->execute(array(
-			'email'  => $mail
-		));
-		$reponse->closeCursor();
-
-    $_SESSION['alerts']['mail_updated'] = true;
-  }
-
   // METIER : Mise à jour du mot de passe
   // RETOUR : Aucun
-  function changeMdp($user, $post)
+  function updatePassword($user, $post)
   {
     if (!empty($post['old_password'])
     AND !empty($post['new_password'])
@@ -476,7 +496,7 @@
 
   // METIER : Mise à jour du statut par l'utilisateur (désinscription, mot de passe)
   // RETOUR : Aucun
-  function changeStatus($user, $status)
+  function updateStatus($user, $status)
   {
     global $bdd;
 
@@ -552,12 +572,14 @@
   // RETOUR : Tableau des classement
   function getRankUsers($listSuccess, $listUsers)
   {
-    // Création tableau de correspondance identifiant / pseudo
-    $tablePseudos = array();
+    // Création tableau de correspondance identifiant / pseudo / avatar
+    $tableUsers = array();
 
     foreach ($listUsers AS $user)
     {
-      $tablePseudos[$user->getIdentifiant()] = $user->getPseudo();
+      $tableUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
+                                                   'avatar' => $user->getAvatar()
+                                                  );
     }
 
     // Création tableau des classements en fonction du succès
@@ -585,7 +607,8 @@
             if ($donnees['value'] >= $success->getLimit_success())
             {
               $myRankSuccess = array('identifiant' => $donnees['identifiant'],
-                                     'pseudo'      => $tablePseudos[$donnees['identifiant']],
+                                     'pseudo'      => $tableUsers[$donnees['identifiant']]['pseudo'],
+                                     'avatar'      => $tableUsers[$donnees['identifiant']]['avatar'],
                                      'value'       => $donnees['value'],
                                      'rank'        => 0
                                     );

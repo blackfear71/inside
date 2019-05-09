@@ -9,6 +9,7 @@
     private $pseudo;
     private $avatar;
     private $email;
+    private $anniversary;
     private $experience;
     private $expenses;
     private $beginner;
@@ -26,6 +27,7 @@
       $this->avatar      = '';
       $this->email       = '';
       $this->experience  = '';
+      $this->anniversary = '';
       $this->expenses    = '';
       $this->beginner    = 0;
       $this->developper  = 0;
@@ -63,6 +65,9 @@
 
       if (isset($data['email']))
         $this->email       = $data['email'];
+
+      if (isset($data['anniversary']))
+        $this->anniversary = $data['anniversary'];
 
       if (isset($data['experience']))
         $this->experience  = $data['experience'];
@@ -158,6 +163,17 @@
     public function getEmail()
     {
       return $this->email;
+    }
+
+    // Anniversaire
+    public function setAnniversary($anniversary)
+    {
+      $this->anniversary = $anniversary;
+    }
+
+    public function getAnniversary()
+    {
+      return $this->anniversary;
     }
 
     // Expérience

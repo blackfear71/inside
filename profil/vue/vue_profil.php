@@ -3,11 +3,12 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head   = "Profil";
-      $style_head   = "styleProfil.css";
-      $script_head  = "scriptProfil.js";
-      $chat_head    = true;
-      $masonry_head = true;
+      $title_head      = "Profil";
+      $style_head      = "styleProfil.css";
+      $script_head     = "scriptProfil.js";
+      $chat_head       = true;
+      $datepicker_head = true;
+      $masonry_head    = true;
 
       include('../includes/common/head.php');
     ?>
@@ -34,40 +35,54 @@
           $zone_inside = "article";
           include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
-          // Onglets vues
-		      echo '<div class="switch_view">';
-            $listeSwitch = array('settings' => 'Paramètres',
-                                 'success'  => 'Succès',
-                                 'ranking'  => 'Classement'
-                                );
+          // Saisie & Années
+          echo '<div class="zone_profil_left">';
+            include('vue/vue_onglets.php');
+          echo '</div>';
 
-            foreach ($listeSwitch as $view => $lib_view)
+          // Contenu
+          echo '<div class="zone_profil_right">';
+            // Affichage en fonction des vues
+            switch ($_GET['view'])
             {
-              if ($_GET['view'] == $view)
-                $actif = 'active';
-              else
-                $actif = 'inactive';
+              case 'settings':
+                include('vue/vue_settings.php');
+                break;
 
-              echo '<a href="profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=' . $view . '&action=goConsulter" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
-                echo '<div class="border_switch_' . $actif . '"></div>';
-              echo '</a>';
+              case 'success':
+                include('vue/vue_success.php');
+                break;
+
+              case 'ranking':
+                include('vue/vue_ranking.php');
+                break;
+
+              case 'profile':
+              default:
+                include('vue/vue_infos.php');
+                break;
             }
-	        echo '</div>';
+          echo '</div>';
 
-          // Affichage en fonction des vues
-          if ($_GET['view'] == "settings")
-          {
-            include('vue/vue_settings.php');
-          }
-          elseif ($_GET['view'] == "success")
-          {
-            include('vue/vue_success.php');
-          }
-          elseif ($_GET['view'] == "ranking")
-          {
-            include('vue/vue_ranking.php');
-          }
+          // Contributions
+          echo '<div class="zone_profil_bottom">';
+            switch ($_GET['view'])
+            {
+              case 'success':
+              case 'ranking':
+                break;
+
+              case 'settings':
+                include('vue/vue_utilisateur.php');
+                include('vue/vue_preferences.php');
+                break;
+
+              case 'profile':
+              default:
+                include('vue/vue_contributions.php');
+                break;
+            }
+          echo '</div>';
         ?>
 			</article>
 

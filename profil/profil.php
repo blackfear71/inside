@@ -1,6 +1,7 @@
 <?php
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
+  include_once('../includes/functions/fonctions_dates.php');
   include_once('../includes/functions/fonctions_regex.php');
 
   // Contrôles communs Utilisateur
@@ -11,20 +12,7 @@
 
   // Contrôle user renseignée URL
   if ($_GET['user'] != $_SESSION['user']['identifiant'])
-    header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter');
-
-  // Contrôle vue renseignée URL
-  switch ($_GET['view'])
-  {
-    case 'settings':
-    case 'success':
-    case 'ranking':
-      break;
-
-    default:
-      header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter');
-      break;
-  }
+    header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
 
   // Appel métier
   switch ($_GET['action'])
@@ -41,23 +29,25 @@
           break;
 
         case 'settings':
-        default:
           $profil       = getProfile($_GET['user']);
           $preferences  = getPreferences($_GET['user']);
+          break;
+
+        case 'profile':
+          $profil       = getProfile($_GET['user']);
           $statistiques = getStatistiques($_GET['user']);
           $progression  = getProgress($profil->getExperience());
+          break;
+
+        default:
+          header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
           break;
       }
       break;
 
-    case 'doChangePseudo':
-      // Mise à jour des données par le modèle
-      changePseudo($_GET['user'], $_POST);
-      break;
-
-    case 'doChangeAvatar':
+    case 'doModifierAvatar':
       // Mise à jour des données par le modèle & enregistrement fichier
-      changeAvatar($_GET['user'], $_FILES);
+      updateAvatar($_GET['user'], $_FILES);
       break;
 
     case 'doSupprimerAvatar':
@@ -65,33 +55,33 @@
       deleteAvatar($_GET['user']);
       break;
 
-    case 'doModifierPreferences':
+    case 'doUpdateInfos':
+      updateInfos($_GET['user'], $_POST);
+      break;
+
+    case 'doUpdatePreferences':
       updatePreferences($_GET['user'], $_POST);
       break;
 
-    case "doUpdateMail":
-      updateMail($_GET['user'], $_POST);
-      break;
-
-    case 'doChangeMdp':
-      changeMdp($_GET['user'], $_POST);
+    case 'doUpdatePassword':
+      updatePassword($_GET['user'], $_POST);
       break;
 
     case 'askDesinscription':
-      changeStatus($_GET['user'], "D");
+      updateStatus($_GET['user'], "D");
       break;
 
     case 'cancelDesinscription':
-      changeStatus($_GET['user'], "N");
+      updateStatus($_GET['user'], "N");
       break;
 
     case 'cancelResetPassword':
-      changeStatus($_GET['user'], "N");
+      updateStatus($_GET['user'], "N");
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=settings&action=goConsulter');
+      header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
       break;
   }
 
@@ -124,6 +114,7 @@
             {
               $podium['identifiant'] = htmlspecialchars($podium['identifiant']);
               $podium['pseudo']      = htmlspecialchars($podium['pseudo']);
+              $podium['avatar']      = htmlspecialchars($podium['avatar']);
               $podium['value']       = htmlspecialchars($podium['value']);
             }
 
@@ -134,6 +125,27 @@
           break;
 
         case 'settings':
+          $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
+          $profil->setPing(htmlspecialchars($profil->getPing()));
+          $profil->setStatus(htmlspecialchars($profil->getStatus()));
+          $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
+          $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
+          $profil->setEmail(htmlspecialchars($profil->getEmail()));
+          $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
+          $profil->setExperience(htmlspecialchars($profil->getExperience()));
+          $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
+
+          $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
+          $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
+          $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
+          $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
+          $preferences->setView_old_movies(htmlspecialchars($preferences->getView_old_movies()));
+          $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
+          $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
+          $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+          break;
+
+        case 'profile':
         default:
           $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
           $profil->setPing(htmlspecialchars($profil->getPing()));
@@ -141,6 +153,7 @@
           $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
           $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
+          $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
           $profil->setExperience(htmlspecialchars($profil->getExperience()));
           $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
@@ -153,15 +166,6 @@
           $statistiques->setNb_bugs(htmlspecialchars($statistiques->getNb_bugs()));
           $statistiques->setNb_evolutions(htmlspecialchars($statistiques->getNb_evolutions()));
 
-          $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-          $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-          $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
-          $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
-          $preferences->setView_old_movies(htmlspecialchars($preferences->getView_old_movies()));
-          $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-          $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-          $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
-
           $progression['niveau']   = htmlspecialchars($progression['niveau']);
           $progression['exp_min']  = htmlspecialchars($progression['exp_min']);
           $progression['exp_max']  = htmlspecialchars($progression['exp_max']);
@@ -172,12 +176,11 @@
       }
       break;
 
-    case 'doChangePseudo':
-    case 'doChangeAvatar':
+    case 'doModifierAvatar':
     case 'doSupprimerAvatar':
-    case 'doModifierPreferences':
-    case "doUpdateMail":
-    case 'doChangeMdp':
+    case 'doUpdateInfos':
+    case 'doUpdatePreferences':
+    case 'doUpdatePassword':
     case 'askDesinscription':
     case 'cancelDesinscription':
     case 'cancelResetPassword':
@@ -188,12 +191,11 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case 'doChangePseudo':
-    case 'doChangeAvatar':
+    case 'doModifierAvatar':
     case 'doSupprimerAvatar':
-    case 'doModifierPreferences':
-    case "doUpdateMail":
-    case 'doChangeMdp':
+    case 'doUpdateInfos':
+    case 'doUpdatePreferences':
+    case 'doUpdatePassword':
     case 'askDesinscription':
     case 'cancelDesinscription':
     case 'cancelResetPassword':

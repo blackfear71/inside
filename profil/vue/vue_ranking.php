@@ -1,112 +1,116 @@
 <?php
-  $i = 0;
+  // Notes explicatives succès
   $lvl = 0;
 
-  echo '<table class="zone_ranking">';
-    foreach ($listeSuccess as $success)
+  echo '<div class="zone_succes_profil" style="display: none;">';
+    foreach ($listeSuccess as $keySuccess => $success)
     {
-      if ($success->getLevel() != $lvl AND $success->getLimit_success() > 1)
+      if ($success->getLevel() != $lvl)
       {
-        echo '<tr class="title_ranking_line"><td colspan="2">' . formatTitleLvl($success->getLevel()) . '</td></tr>';
+        echo formatTitleLvl($success->getLevel());
         $lvl = $success->getLevel();
+
+        // Définit une zone pour appliquer la Masonry
+        echo '<div class="zone_niveau_succes margin_bottom">';
       }
 
-      if ($success->getLimit_success() > 1)
+      if ($success->getDefined() == "Y")
       {
-        if ($i % 2 == 0)
-          echo '<tr class="ranking_line">';
+        if ($success->getValue_user() >= $success->getLimit_success())
+          echo '<div class="classement_liste yellow">';
         else
-          echo '<tr class="ranking_line" style="background-color: #d3d3d3;">';
+          echo '<div class="classement_liste">';
+          // Logo succès
+          if ($success->getValue_user() >= $success->getLimit_success())
+            echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_classement_unlocked" />';
+          else
+            echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
 
-          if ($success->getDefined() == "Y")
+          // Titre succès
+          echo '<div class="titre_classement">' . $success->getTitle() . '</div>';
+
+          // Médailles
+          foreach ($classementUsers as $classement)
           {
-            echo '<td class="ranking_line_left">';
-              // Logo succès
-              if ($success->getValue_user() >= $success->getLimit_success())
-                echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_rank" style="background-color: #ffad01;" />';
-              else
-                echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_rank" />';
+            $gold   = false;
+            $silver = false;
+            $bronze = false;
 
-              // Titre succès
-              echo '<div class="titre_rank">' . $success->getTitle() . '</div>';
-            echo '</td>';
-
-            echo '<td class="ranking_line_right">';
-              // Médailles
-              foreach ($classementUsers as $classement)
+            if ($classement['id'] == $success->getId())
+            {
+              foreach ($classement['podium'] as $podium)
               {
-                $gold   = false;
-                $silver = false;
-                $bronze = false;
-
-                if ($classement['id'] == $success->getId())
+                // Or
+                if ($podium['rank'] == 1)
                 {
-                  foreach ($classement['podium'] as $podium)
-                  {
-                    // Or
-                    if ($podium['rank'] == 1)
+                  echo '<div class="zone_medals">';
+                    if ($gold == false)
                     {
-                      echo '<div class="zone_medals">';
-                        if ($gold == false)
-                        {
-                          echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/or.png" alt="or" class="medal_rank" /></div>';
-                          $gold = true;
-                        }
-
-                        echo '<div class="ranking_pseudo">' . $podium['pseudo'] . '</div>';
-                      echo '</div>';
+                      echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/or.png" alt="or" class="medal_rank" /></div>';
+                      $gold = true;
                     }
 
-                    // Argent
-                    if ($podium['rank'] == 2)
-                    {
-                      echo '<div class="zone_medals">';
-                        if ($silver == false)
-                        {
-                          echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" /></div>';
-                          $silver = true;
-                        }
+                    if (!empty($podium['avatar']))
+                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                    else
+                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                  echo '</div>';
+                }
 
-                        echo '<div class="ranking_pseudo">' . $podium['pseudo'] . '</div>';
-                      echo '</div>';
+                // Argent
+                if ($podium['rank'] == 2)
+                {
+                  echo '<div class="zone_medals">';
+                    if ($silver == false)
+                    {
+                      echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" /></div>';
+                      $silver = true;
                     }
 
-                    // Bronze
-                    if ($podium['rank'] == 3)
+                    if (!empty($podium['avatar']))
+                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                    else
+                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                  echo '</div>';
+                }
+
+                // Bronze
+                if ($podium['rank'] == 3)
+                {
+                  echo '<div class="zone_medals">';
+                    if ($bronze == false)
                     {
-                      echo '<div class="zone_medals">';
-                        if ($bronze == false)
-                        {
-                          echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" /></div>';
-                          $bronze = true;
-                        }
-
-                        echo '<div class="ranking_pseudo">' . $podium['pseudo'] . '</div>';
-                      echo '</div>';
+                      echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" /></div>';
+                      $bronze = true;
                     }
-                  }
 
-                  break;
+                    if (!empty($podium['avatar']))
+                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                    else
+                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                  echo '</div>';
                 }
               }
-            echo '</td>';
+
+              break;
+            }
           }
-          else
-          {
-            echo '<td class="ranking_line_left">';
-              // Succès non défini
-              echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_rank" />';
-
-              // Titre
-              echo '<div class="titre_rank">Succès non défini</div>';
-            echo '</td>';
-
-            echo '<td class="ranking_line_right"></td>';
-          }
-        echo '</tr>';
-
-        $i++;
+        echo '</div>';
       }
+      else
+      {
+        echo '<div class="classement_liste">';
+          // Logo succès
+          echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
+
+          // Titre succès
+          echo '<div class="titre_classement">Succès non défini</div>';
+        echo '</div>';
+      }
+
+      // Termine la zone Masonry du niveau
+      if (!isset($listeSuccess[$keySuccess + 1]) OR $success->getLevel() != $listeSuccess[$keySuccess + 1]->getLevel())
+        echo '</div>';
     }
-  echo '</table>';
+  echo '</div>';
 ?>

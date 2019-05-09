@@ -1156,10 +1156,17 @@
 	margin-bottom: 15px;
 }
 
-.name_lvl
+.number_level
 {
-	font-family: robotothin, Verdana, sans-serif;
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
+	font-size: 60%;
+	text-align: center;
+	margin: -2px 10px 0 -35px;
+	vertical-align: top;
 }
 
 .bouton_delete:hover
