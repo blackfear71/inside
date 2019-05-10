@@ -59,6 +59,22 @@
       array_push($tabNews, $myNews);
     }
 
+    // Anniversaires
+    $req0 = $bdd->query('SELECT id, identifiant, pseudo, anniversary FROM users WHERE SUBSTR(anniversary, 5, 4) = "' . date("md") . '" ORDER BY identifiant ASC');
+    while($data0 = $req0->fetch())
+    {
+      $myNews = new News();
+
+      $myNews->setTitle("Joyeux anniversaire !");
+      $myNews->setContent("C'est l'anniversaire de <strong>" . $data0['pseudo'] . "</strong> aujourd'hui, souhaitez-lui de passer une excellente journée !");
+      $myNews->setDetails("Vous n'avez pas oublié les cadeaux au moins ?");
+      $myNews->setLogo("anniversary");
+      $myNews->setLink("");
+
+      array_push($tabNews, $myNews);
+    }
+    $req0->closeCursor();
+
     // Vote repas
     if (date("H") < 13 AND date("N") <= 5)
     {

@@ -39,7 +39,7 @@
     echo '<input type="email" name="email" placeholder="Adresse mail" value="' . $profil->getEmail() . '" maxlength="255" class="monoligne_saisie" />';
 
     // Anniversaire
-    echo '<img src="../includes/icons/profil/date_grey.png" alt="date_grey" class="logo_parametres" />';
+    echo '<img src="../includes/icons/profil/anniversary_grey.png" alt="anniversary_grey" class="logo_parametres" />';
     echo '<input type="text" name="anniversaire" placeholder="Anniversaire (jj/mm/yyyy)" value="' . formatDateForDisplay($profil->getAnniversary()) . '" maxlength="10" id="datepicker_anniversary" class="monoligne_saisie" />';
 
     echo '<input type="submit" name="saisie_pseudo" value="Mettre à jour" class="bouton_validation" />';

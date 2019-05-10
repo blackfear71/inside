@@ -33,7 +33,7 @@
       if (!empty($profil->getAnniversary()))
       {
         echo '<div class="zone_info">';
-          echo '<img src="../includes/icons/profil/date_grey.png" alt="date_grey" class="logo_profil" />';
+          echo '<img src="../includes/icons/profil/anniversary_grey.png" alt="anniversary_grey" class="logo_profil" />';
           echo '<div class="texte_profil">Anniversaire le ' . formatDateForDisplay($profil->getAnniversary()) . '</div>';
         echo '</div>';
       }
