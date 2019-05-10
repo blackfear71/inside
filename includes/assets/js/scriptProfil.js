@@ -32,6 +32,7 @@ $(window).on('load', function()
     $('.zone_niveau_succes').masonry({
       // Options
       itemSelector: '.succes_liste, .classement_liste',
+      columnWidth: 160,
       fitWidth: true,
       gutter: 30,
       horizontalOrder: true
@@ -48,6 +49,7 @@ $(window).on('load', function()
     $('.zone_niveau_succes').masonry({
       // Options
       itemSelector: '.classement_liste',
+      columnWidth: 195,
       fitWidth: true,
       gutter: 10,
       horizontalOrder: true
@@ -94,39 +96,6 @@ var loadFile = function(event, id)
   var output = document.getElementById(id);
   output.src = URL.createObjectURL(event.target.files[0]);
 };
-
-
-
-
-
-
-
-
-// Affiche la zone de saisie des anciens films si "partiel" est sélectionné
-function afficherSaisieFilms(id, required)
-{
-  if (document.getElementById(id).style.display == "none")
-  {
-    document.getElementById(id).style.display = "block";
-    document.getElementById(required).required = true;
-  }
-}
-
-// Masque la zone de saisie des anciens films si "tous" est sélectionné
-function masquerSaisieFilms(id, required)
-{
-  if (document.getElementById(id).style.display == "block")
-  {
-    document.getElementById(id).style.display = "none";
-    document.getElementById(required).required = false;
-  }
-}
-
-
-
-
-
-
 
 // Change la couleur des radio boutons (préférences)
 function switchCheckedColor(zone, input)

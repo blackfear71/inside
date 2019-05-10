@@ -604,7 +604,7 @@
 	display: block;
 	vertical-align: top;
 	margin-bottom: 10px;
-	width: 180px;
+	width: 195px;
 	background-color: #e3e3e3;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -649,10 +649,25 @@
 
 .zone_medals
 {
-	display: block;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	display: inline-block;
+	width: calc(100% - 40px);
+}
+
+.zone_medals:last-child
+{
+	margin-bottom: -5px;
+}
+
+.yellow_strong
+{
 	background-color: #c48500;
+	padding: 5px 5px 5px 10px;
+}
+
+.grey_strong
+{
+	background-color: #d3d3d3;
+	padding: 5px 5px 5px 10px;
 }
 
 .medal_rank
@@ -660,7 +675,6 @@
 	display: inline-block;
 	width: 30px;
 	height: 30px;
-	margin-left: 5px;
 	margin-right: 10px;
 	vertical-align: top;
 	filter: drop-shadow(0px 0px 1px #5c5c5c);
@@ -670,8 +684,9 @@
 {
 	display: inline-block;
 	width: 30px;
-	vertical-align: top;
+	vertical-align: middle;
 	margin-right: 5px;
+	margin-bottom: 5px;
 	border-radius: 50%;
 	background-color: #262626;
 	box-shadow: 0 0 3px #7c7c7c;
