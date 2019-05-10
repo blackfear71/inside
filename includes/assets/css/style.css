@@ -459,6 +459,11 @@ header
 	vertical-align: top;
 }
 
+.margin_right_header
+{
+	margin-right: 20px;
+}
+
 .avatar_bandeau
 {
 	float: right;

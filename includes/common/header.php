@@ -92,10 +92,14 @@
         echo '<a href="/inside/administration/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
       else
         echo '<a href="/inside/profil/profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
-        echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
 
         if ($_SESSION['user']['identifiant'] != "admin")
+        {
+          echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
           echo '<div class="circular_bar_header" id="progress_circle_header" data-perc="' . $_SESSION['user']['experience']['percent'] . '" data-text=""></div>';
+        }
+        else
+          echo '<div class="pseudo_bandeau margin_right_header">' . $_SESSION['user']['pseudo'] . '</div>';
 
         if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
           echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
