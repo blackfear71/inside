@@ -155,9 +155,7 @@
           echo '<div class="sous_titre_contribution">Catégories accueil</div>';
 
           echo '<div class="zone_contribution large">';
-            $categories_home = $preferences->getCategories_home();
-            $films_waited    = $categories_home[0];
-            $films_way_out   = $categories_home[1];
+            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_home());
 
             if ($films_waited == "Y")
             {

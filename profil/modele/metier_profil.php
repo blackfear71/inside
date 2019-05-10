@@ -358,14 +358,14 @@
 		$categories_home = "";
 
 		if (isset($post['films_waited']))
-			$categories_home .= "Y";
+			$categories_home .= "Y;";
 		else
-			$categories_home .= "N";
+			$categories_home .= "N;";
 
 		if (isset($post['films_way_out']))
-			$categories_home .= "Y";
+			$categories_home .= "Y;";
 		else
-			$categories_home .= "N";
+			$categories_home .= "N;";
 
 		if (isset($post['affiche_date']))
 			$today_movie_house = "Y";
