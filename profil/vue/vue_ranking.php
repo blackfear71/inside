@@ -32,64 +32,66 @@
           // Médailles
           foreach ($classementUsers as $classement)
           {
-            $gold   = false;
-            $silver = false;
-            $bronze = false;
-
             if ($classement['id'] == $success->getId())
             {
-              foreach ($classement['podium'] as $podium)
+              $rank = 0;
+
+              foreach ($classement['podium'] as $keyRank => $podium)
               {
-                // Or
+                if ($podium['rank'] != $rank)
+                {
+                  echo '<div class="zone_medals">';
+
+                  switch ($podium['rank'])
+                  {
+                    case 1:
+                      echo '<img src="../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
+                      break;
+
+                    case 2:
+                      echo '<img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
+                      break;
+
+                    case 3:
+                      echo '<img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
+                      break;
+
+                    default:
+                      break;
+                  }
+
+                  $rank = $podium['rank'];
+                }
+
+                // Avatar Or
                 if ($podium['rank'] == 1)
                 {
-                  echo '<div class="zone_medals">';
-                    if ($gold == false)
-                    {
-                      echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/or.png" alt="or" class="medal_rank" /></div>';
-                      $gold = true;
-                    }
-
-                    if (!empty($podium['avatar']))
-                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    else
-                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                  echo '</div>';
+                  if (!empty($podium['avatar']))
+                    echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                  else
+                    echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
                 }
 
-                // Argent
+                // Avatar Argent
                 if ($podium['rank'] == 2)
                 {
-                  echo '<div class="zone_medals">';
-                    if ($silver == false)
-                    {
-                      echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" /></div>';
-                      $silver = true;
-                    }
-
-                    if (!empty($podium['avatar']))
-                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    else
-                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                  echo '</div>';
+                  if (!empty($podium['avatar']))
+                    echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                  else
+                    echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
                 }
 
-                // Bronze
+                // Avatar Bronze
                 if ($podium['rank'] == 3)
                 {
-                  echo '<div class="zone_medals">';
-                    if ($bronze == false)
-                    {
-                      echo '<div class="zone_medals_img"><img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" /></div>';
-                      $bronze = true;
-                    }
-
-                    if (!empty($podium['avatar']))
-                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    else
-                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                  echo '</div>';
+                  if (!empty($podium['avatar']))
+                    echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                  else
+                    echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
                 }
+
+                if (!isset($classement['podium'][$keyRank + 1]) OR $podium['rank'] != $classement['podium'][$keyRank + 1]['rank'])
+                  echo '</div>';
               }
 
               break;
