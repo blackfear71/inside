@@ -16,6 +16,7 @@
 	width: calc(100% - 280px);
 	margin-left: 20px;
 	vertical-align: top;
+	text-align: center;
 }
 
 .zone_profil_bottom
@@ -81,10 +82,9 @@
 }
 
 /*** Profil ***/
-.margin_top
+.margin_top_infos
 {
 	margin-top: -10px;
-	text-align: center;
 }
 
 .zone_profil_avatar

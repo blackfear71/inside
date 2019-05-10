@@ -1,6 +1,9 @@
 // Au chargement du document
 $(document).ready(function()
 {
+  // Adaptation mobile
+  adaptProfil();
+
   $('#progress_circle').circlize(
   {
 		radius: 60,
@@ -16,6 +19,13 @@ $(document).ready(function()
 		stroke: 5,
 		duration: 1000
 	});
+});
+
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Décalage pour mobile
+  adaptProfil();
 });
 
 // Au chargement du document complet
@@ -88,6 +98,29 @@ function initMasonry()
     gutter: 40,
     horizontalOrder: true
   });
+}
+
+// Adaptations de la section sur mobiles
+function adaptProfil()
+{
+  if ($(window).width() < 1200)
+  {
+    $('.form_update_infos').css('display', 'block');
+    $('.form_update_infos').css('width', '100%');
+    $('.form_update_infos').css('margin-left', '0');
+    $('.form_update_infos').css('margin-top', '20px');
+
+    $('.form_update_avatar').css('border', '0');
+  }
+  else
+  {
+    $('.form_update_infos').css('display', 'inline-block');
+    $('.form_update_infos').css('width', 'calc(100% - 442px)');
+    $('.form_update_infos').css('margin-left', '20px');
+    $('.form_update_infos').css('margin-top', '0');
+
+    $('.form_update_avatar').css('border-right', 'solid 1px #b3b3b3');
+  }
 }
 
 // Insère une prévisualisation de l'image sur la page
