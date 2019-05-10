@@ -566,12 +566,13 @@
 	background-color: #ff1937;
 	color: white;
 	border-radius: 50%;
+	border: solid 2px #e3e3e3;
 	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 70%;
 	text-align: center;
 	line-height: 15px;
-	margin-top: 30px;
-	margin-left: -10px;
+	margin-top: 27px;
+	margin-left: -13px;
 	position: relative;
 	z-index: 1;
 }
