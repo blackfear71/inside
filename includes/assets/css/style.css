@@ -452,11 +452,11 @@ header
 .pseudo_bandeau
 {
 	display: inline-block;
-	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #7c7c7c;
 	text-decoration: none;
+	vertical-align: top;
 }
 
 .avatar_bandeau
@@ -536,10 +536,9 @@ header
 
 .circular_bar_header
 {
-	position: absolute;
-  right: 30.5px;
-	margin-top: -10.5px;
-	height: 89px;
+	margin-top: -10px;
+	margin-right: -80px;
+	height: 90px;
 	overflow: hidden;
 }
 
