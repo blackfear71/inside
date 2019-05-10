@@ -427,10 +427,7 @@
 	border: 0;
 	background-color: #d3d3d3;
 	margin-left: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding: 5px 10px 5px 10px;
 	border-radius: 2px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 60%;
