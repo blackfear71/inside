@@ -658,6 +658,35 @@
     return $globalRanks;
   }
 
+  // METIER : Retourne un tableau trié des utilisateurs par expérience
+  // RETOUR : Tableau utilisateurs trié
+  function getExperienceUsers($listUsers)
+  {
+    $experienceUsers = array();
+
+    foreach ($listUsers as $user)
+    {
+      $myExperienceUser = array('identifiant' => $user->getIdentifiant(),
+                                'pseudo'      => $user->getPseudo(),
+                                'avatar'      => $user->getAvatar(),
+                                'experience'  => $user->getExperience(),
+                                'niveau'      => floor(sqrt($user->getExperience() / 10))
+                               );
+      array_push($experienceUsers, $myExperienceUser);
+    }
+
+    // Tri sur expérience puis identifiant
+    foreach ($experienceUsers as $expUser)
+    {
+      $tri_exp[] = $expUser['experience'];
+      $tri_id[]  = $expUser['identifiant'];
+    }
+
+    array_multisort($tri_exp, SORT_DESC, $tri_id, SORT_ASC, $experienceUsers);
+
+    return $experienceUsers;
+  }
+
   // METIER : Contrôle pour les missions que la date de fin soit passée
   // RETOUR : Booléen
   function isMissionEnded($reference)
@@ -717,7 +746,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, experience FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd

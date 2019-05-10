@@ -38,6 +38,9 @@
           // Onglets
           echo '<div class="zone_profil_left">';
             include('vue/vue_onglets.php');
+
+            if ($_GET['view'] == 'ranking')
+              include('vue/vue_experience.php');
           echo '</div>';
 
           // Contenu

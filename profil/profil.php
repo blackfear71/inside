@@ -27,6 +27,9 @@
             $listeUsers      = getUsers();
             $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
             $classementUsers = getRankUsers($listeSuccess, $listeUsers);
+
+            if ($_GET['view'] == 'ranking')
+              $experienceUsers = getExperienceUsers($listeUsers);
             break;
 
           case 'settings':
@@ -124,6 +127,20 @@
           }
 
           unset($classement);
+
+          if ($_GET['view'] == 'ranking')
+          {
+            foreach ($experienceUsers as &$expUser)
+            {
+              $expUser['identifiant'] = htmlspecialchars($expUser['identifiant']);
+              $expUser['pseudo']      = htmlspecialchars($expUser['pseudo']);
+              $expUser['avatar']      = htmlspecialchars($expUser['avatar']);
+              $expUser['experience']  = htmlspecialchars($expUser['experience']);
+              $expUser['niveau']      = htmlspecialchars($expUser['niveau']);
+            }
+
+            unset($expUser);
+          }
           break;
 
         case 'settings':

@@ -47,6 +47,7 @@
                   {
                     if ($podium['rank'] != $rank)
                     {
+                      // Médailles
                       switch ($podium['rank'])
                       {
                         case 1:
@@ -70,32 +71,11 @@
                       echo '<div class="zone_medals">';
                     }
 
-                    // Avatar Or
-                    if ($podium['rank'] == 1)
-                    {
-                      if (!empty($podium['avatar']))
-                        echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                      else
-                        echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    }
-
-                    // Avatar Argent
-                    if ($podium['rank'] == 2)
-                    {
-                      if (!empty($podium['avatar']))
-                        echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                      else
-                        echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    }
-
-                    // Avatar Bronze
-                    if ($podium['rank'] == 3)
-                    {
-                      if (!empty($podium['avatar']))
-                        echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                      else
-                        echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    }
+                    // Avatar
+                    if (!empty($podium['avatar']))
+                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                    else
+                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
 
                     if (!isset($classement['podium'][$keyRank + 1]) OR $podium['rank'] != $classement['podium'][$keyRank + 1]['rank'])
                       echo '</div>';
