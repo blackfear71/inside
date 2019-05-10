@@ -5,15 +5,6 @@
   // Contrôles communs Utilisateur
   controlsUser();
 
-  // Contrôle si l'année est renseignée et numérique
-  if ($_GET['action'] != "goConsulterAnnexes"
-  AND $_GET['action'] != "doAjouterAnnexe"
-  AND $_GET['action'] != "doSupprimerAnnexe")
-  {
-    if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-      header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
-  }
-
   // Modèle de données : "module métier"
   include_once('modele/metier_calendars.php');
 
@@ -21,11 +12,17 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
-      $anneeExistante = controlYear($_GET['year']);
-      $onglets        = getOnglets();
-      $calendriers    = getCalendars($_GET['year']);
-      $preferences    = getPreferences($_SESSION['user']['identifiant']);
+      // Contrôle si l'année est renseignée et numérique
+      if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
+        header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
+      else
+      {
+        // Lecture des données par le modèle
+        $anneeExistante = controlYear($_GET['year']);
+        $onglets        = getOnglets();
+        $calendriers    = getCalendars($_GET['year']);
+        $preferences    = getPreferences($_SESSION['user']['identifiant']);
+      }
       break;
 
     case 'goConsulterAnnexes':

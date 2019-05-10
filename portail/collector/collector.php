@@ -6,12 +6,9 @@
   // Contrôles communs Utilisateur
   controlsUser();
 
-  // Contrôle si la page renseignée et numérique
-	if (!isset($_GET['page'])   OR !is_numeric($_GET['page'])
-  OR  !isset($_GET['sort'])   OR empty($_GET['sort'])
-  OR  !isset($_GET['filter']) OR empty($_GET['filter']))
-		header('location: collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none');
-
+  // Modèle de données : "module métier"
+  include_once('modele/metier_collector.php');
+  
   // Initialisation sauvegarde saisie
   if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
@@ -23,28 +20,33 @@
     $_SESSION['save']['context']        = "";
   }
 
-  // Modèle de données : "module métier"
-  include_once('modele/metier_collector.php');
-
   // Appel métier
   switch ($_GET['action'])
   {
     case "goConsulter":
-      // Lecture des données par le modèle
-      $listeUsers = getUsers();
-      $nbPages    = getPages($_GET['filter'], $_SESSION['user']['identifiant']);
-
-      if ($nbPages > 0)
+      // Contrôle si la page renseignée et numérique, si le tri et le filtre sont présents
+      if (!isset($_GET['page'])   OR !is_numeric($_GET['page'])
+      OR  !isset($_GET['sort'])   OR  empty($_GET['sort'])
+      OR  !isset($_GET['filter']) OR  empty($_GET['filter']))
+        header('location: collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none');
+      else
       {
-        if ($_GET['page'] > $nbPages)
-          header('location: collector.php?action=goConsulter&page=' . $nbPages . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
-        elseif ($_GET['page'] < 1)
-          header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
-        else
+        // Lecture des données par le modèle
+        $listeUsers = getUsers();
+        $nbPages    = getPages($_GET['filter'], $_SESSION['user']['identifiant']);
+
+        if ($nbPages > 0)
         {
-          $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
-          $listeVotesUsers = getVotesUser($listeCollectors, $_SESSION['user']['identifiant']);
-          $listeVotes      = getVotes($listeCollectors);
+          if ($_GET['page'] > $nbPages)
+            header('location: collector.php?action=goConsulter&page=' . $nbPages . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
+          elseif ($_GET['page'] < 1)
+            header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
+          else
+          {
+            $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
+            $listeVotesUsers = getVotesUser($listeCollectors, $_SESSION['user']['identifiant']);
+            $listeVotes      = getVotes($listeCollectors);
+          }
         }
       }
       break;

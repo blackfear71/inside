@@ -9,46 +9,43 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_notifications.php');
 
-  // Contrôle vue renseignée URL
-  switch ($_GET['view'])
-  {
-    case 'today':
-      break;
-
-    case 'week':
-    case 'me':
-    case 'all':
-      // Contrôle si la page renseignée et numérique
-      if (!isset($_GET['page']) OR !is_numeric($_GET['page']))
-        header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
-      break;
-
-    default:
-      header('location: notifications.php?view=today&action=goConsulter');
-      break;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      if ($_GET['view'] == 'all' OR $_GET['view'] == 'week' OR $_GET['view'] == 'me')
+      switch ($_GET['view'])
       {
-        $nbPages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
-
-        if ($nbPages > 0)
-        {
-          if ($_GET['page'] > $nbPages)
-            header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=' . $nbPages);
-          elseif ($_GET['page'] < 1)
+        case 'all':
+        case 'week':
+        case 'me':
+          // Contrôle si la page renseignée et numérique
+          if (!isset($_GET['page']) OR !is_numeric($_GET['page']))
             header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
           else
-            $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nbPages, $_GET['page']);
-        }
+          {
+            $nbPages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
+
+            if ($nbPages > 0)
+            {
+              if ($_GET['page'] > $nbPages)
+                header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=' . $nbPages);
+              elseif ($_GET['page'] < 1)
+                header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
+              else
+                $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nbPages, $_GET['page']);
+            }
+          }
+          break;
+
+        case 'today':
+          $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], NULL, NULL);
+          break;
+
+        default:
+          header('location: notifications.php?view=today&action=goConsulter');
+          break;
       }
-      else
-        $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], NULL, NULL);
       break;
 
     default:

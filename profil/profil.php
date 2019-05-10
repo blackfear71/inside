@@ -10,38 +10,40 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_profil.php');
 
-  // Contrôle user renseignée URL
-  if ($_GET['user'] != $_SESSION['user']['identifiant'])
-    header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
-      switch ($_GET['view'])
+      // Contrôle user renseignée URL
+      if ($_GET['user'] != $_SESSION['user']['identifiant'])
+        header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
+      else
       {
-        case 'success':
-        case 'ranking':
-          $listeUsers      = getUsers();
-          $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
-          $classementUsers = getRankUsers($listeSuccess, $listeUsers);
-          break;
+        // Lecture des données par le modèle
+        switch ($_GET['view'])
+        {
+          case 'success':
+          case 'ranking':
+            $listeUsers      = getUsers();
+            $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
+            $classementUsers = getRankUsers($listeSuccess, $listeUsers);
+            break;
 
-        case 'settings':
-          $profil       = getProfile($_GET['user']);
-          $preferences  = getPreferences($_GET['user']);
-          break;
+          case 'settings':
+            $profil       = getProfile($_GET['user']);
+            $preferences  = getPreferences($_GET['user']);
+            break;
 
-        case 'profile':
-          $profil       = getProfile($_GET['user']);
-          $statistiques = getStatistiques($_GET['user']);
-          $progression  = getProgress($profil->getExperience());
-          break;
+          case 'profile':
+            $profil       = getProfile($_GET['user']);
+            $statistiques = getStatistiques($_GET['user']);
+            $progression  = getProgress($profil->getExperience());
+            break;
 
-        default:
-          header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
-          break;
+          default:
+            header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
+            break;
+        }
       }
       break;
 

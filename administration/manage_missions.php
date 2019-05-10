@@ -7,6 +7,9 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
+  // Modèle de données : "module métier"
+  include_once('modele/metier_administration.php');
+
   // Initialisation sauvegarde saisie
 	if ((!isset($_SESSION['alerts']['already_ref_mission'])   OR $_SESSION['alerts']['already_ref_mission']   != true)
   AND (!isset($_SESSION['alerts']['objective_not_numeric']) OR $_SESSION['alerts']['objective_not_numeric'] != true)
@@ -29,9 +32,6 @@
     $erreur_mission = true;
   }
 
-  // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
-
   // Appel métier
   switch ($_GET['action'])
   {
@@ -51,16 +51,22 @@
       break;
 
     case 'goModifier':
-      if (isset($erreur_mission) AND $erreur_mission == true)
-      {
-        $detailsMission = initErrMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
-        unset($erreur_mission);
-      }
+      // Contrôle si l'id est renseignée et numérique
+      if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
+        header('location: manage_missions.php?action=goConsulter');
       else
-        $detailsMission = initModMission($_GET['id_mission']);
+      {
+        if (isset($erreur_mission) AND $erreur_mission == true)
+        {
+          $detailsMission = initErrMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
+          unset($erreur_mission);
+        }
+        else
+          $detailsMission = initModMission($_GET['id_mission']);
 
-      $participants = getParticipants($_GET['id_mission']);
-      $ranking      = getRankingMission($_GET['id_mission'], $participants);
+        $participants = getParticipants($_GET['id_mission']);
+        $ranking      = getRankingMission($_GET['id_mission'], $participants);
+      }
       break;
 
     case 'doAjouter':

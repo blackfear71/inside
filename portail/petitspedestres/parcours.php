@@ -11,7 +11,7 @@
   include_once('modele/metier_parcours.php');
 
   // Initialisations booléens
-  $lectureListe = false;
+  $lectureListe     = false;
   $controlesDonnees = true;
 
   // Initialisation sauvegarde saisie

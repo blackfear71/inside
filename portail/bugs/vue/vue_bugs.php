@@ -35,9 +35,9 @@
 
           // Onglets vues
           echo '<div class="switch_view">';
-            $listeSwitch = array('submit'     => array('lib' => 'Saisie',   'action' => 'goSignaler'),
-                                 'unresolved' => array('lib' => 'En cours', 'action' => 'goConsulter'),
-                                 'resolved'   => array('lib' => 'Résolu(e)s',  'action' => 'goConsulter')
+            $listeSwitch = array('submit'     => 'Saisie',
+                                 'unresolved' => 'En cours',
+                                 'resolved'   => 'Résolu(e)s'
                                 );
 
             foreach ($listeSwitch as $view => $lib_view)
@@ -47,8 +47,8 @@
               else
                 $actif = 'inactive';
 
-              echo '<a href="bugs.php?view=' . $view . '&action=' . $lib_view['action'] . '" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view['lib'] . '</div>';
+              echo '<a href="bugs.php?view=' . $view . '&action=goConsulter" class="zone_switch">';
+                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
                 echo '<div class="border_switch_' . $actif . '"></div>';
               echo '</a>';
             }
@@ -56,9 +56,7 @@
 
           // Vue listes
           if (isset($_GET['view']) AND ($_GET['view'] == "resolved" OR $_GET['view'] == "unresolved"))
-          {
             include('table_bugs.php');
-          }
           // Vue saisie
           else
           {

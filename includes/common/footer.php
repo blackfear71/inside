@@ -34,7 +34,7 @@
   // Lien Bugs
   if ($_SESSION['user']['identifiant'] != "admin")
   {
-    echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goSignaler" title="Signaler un bug" class="link_footer">';
+    echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
     echo '</a>';
   }

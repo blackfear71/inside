@@ -6,6 +6,10 @@
   // Contrôles communs Utilisateur
   controlsUser();
 
+  // Modèle de données : "module métier"
+  include_once('modele/metier_commun.php');
+  include_once('modele/metier_restaurants.php');
+  
   // Initialisation sauvegarde saisie
   if ((!isset($_SESSION['alerts']['wrong_phone_number']) OR $_SESSION['alerts']['wrong_phone_number'] != true)
   AND (!isset($_SESSION['alerts']['wrong_price_min'])    OR $_SESSION['alerts']['wrong_price_min']    != true)
@@ -25,10 +29,6 @@
     $_SESSION['save']['plan_restaurant']        = "";
     $_SESSION['save']['saisie_other_location']  = "";
   }
-
-  // Modèle de données : "module métier"
-  include_once('modele/metier_commun.php');
-  include_once('modele/metier_restaurants.php');
 
   // Appel métier
   switch ($_GET['action'])

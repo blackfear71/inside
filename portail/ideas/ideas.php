@@ -9,26 +9,24 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_ideas.php');
 
-  // Contrôle vue renseignée URL
-  switch ($_GET['view'])
-  {
-    case 'all':
-    case 'done':
-    case 'mine':
-    case 'inprogress':
-      break;
-
-    default:
-      header('location: ideas.php?view=all&action=goConsulter');
-      break;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      $listeIdeas = getIdeas($_GET['view']);
+      switch ($_GET['view'])
+      {
+        case 'all':
+        case 'done':
+        case 'mine':
+        case 'inprogress':
+          $listeIdeas = getIdeas($_GET['view']);
+          break;
+
+        default:
+          header('location: ideas.php?view=all&action=goConsulter');
+          break;
+      }
       break;
 
     case 'doInserer':

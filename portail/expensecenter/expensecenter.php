@@ -7,9 +7,8 @@
   // Contrôles communs Utilisateur
   controlsUser();
 
-  // Contrôle si l'année est renseignée et numérique
-	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-		header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter');
+  // Modèle de données : "module métier"
+  include_once('modele/metier_expensecenter.php');
 
   // Initialisation sauvegarde saisie
 	if ((!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
@@ -21,19 +20,22 @@
 		unset($_SESSION['save']['tableau_parts']);
 	}
 
-  // Modèle de données : "module métier"
-  include_once('modele/metier_expensecenter.php');
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
-      $anneeExistante    = controlYear($_GET['year']);
-      $listeUsers        = getUsers();
-      $onglets           = getOnglets();
-      $listeDepenses     = getExpenses($_GET['year']);
-      $listeDepensesJson = json_encode(convertForJson($listeDepenses));
+      // Contrôle si l'année est renseignée et numérique
+      if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
+        header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter');
+      else
+      {
+        // Lecture des données par le modèle
+        $anneeExistante    = controlYear($_GET['year']);
+        $listeUsers        = getUsers();
+        $onglets           = getOnglets();
+        $listeDepenses     = getExpenses($_GET['year']);
+        $listeDepensesJson = json_encode(convertForJson($listeDepenses));
+      }
       break;
 
     case 'doInserer':

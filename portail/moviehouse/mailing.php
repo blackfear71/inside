@@ -10,17 +10,19 @@
   include_once('modele/metier_commun.php');
   include_once('modele/metier_details.php');
 
-  // Contrôle si l'id est renseignée et numérique
-  if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
-    header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
-      $listeEtoiles = getDetailsStars($_GET['id_film']);
+      // Contrôle si l'id est renseignée et numérique
+      if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
+        header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+      else
+      {
+        // Lecture liste des données par le modèle
+        $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
+        $listeEtoiles = getDetailsStars($_GET['id_film']);
+      }
       break;
 
     case "sendMail":

@@ -5,6 +5,9 @@
 	// Contrôles communs
 	controlsIndex();
 
+	// Modèle de données : "module métier"
+  include_once('connexion/modele/metier_index.php');
+	
 	// Initialisation sauvegarde saisie inscription
 	if (((!isset($_SESSION['alerts']['too_short'])      OR  $_SESSION['alerts']['too_short']       != true)
 	AND  (!isset($_SESSION['alerts']['already_exist'])  OR  $_SESSION['alerts']['already_exist']   != true)
@@ -36,9 +39,6 @@
 		$error_password = true;
 	else
 		$error_password = false;
-
-  // Modèle de données : "module métier"
-  include_once('connexion/modele/metier_index.php');
 
   // Appel métier
 	if (isset($_GET['action']))

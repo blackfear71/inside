@@ -9,25 +9,23 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
 
-	// Contrôle vue renseignée URL
-	switch ($_GET['view'])
-	{
-		case 'all':
-		case 'resolved':
-		case 'unresolved':
-			break;
-
-		default:
-			header('location: reports.php?view=all&action=goConsulter');
-			break;
-	}
-
   // Appel métier
   switch ($_GET['action'])
   {
+    // Lecture liste des données par le modèle
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-			$listeBugs = getBugs($_GET['view']);
+      switch ($_GET['view'])
+      {
+        case 'all':
+        case 'resolved':
+        case 'unresolved':
+          $listeBugs = getBugs($_GET['view']);
+          break;
+
+        default:
+          header('location: reports.php?view=all&action=goConsulter');
+          break;
+      }
       break;
 
 		case "doChangerStatut":

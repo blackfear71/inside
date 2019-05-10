@@ -11,23 +11,25 @@
   include_once('modele/metier_commun.php');
   include_once('modele/metier_details.php');
 
-  // Contrôle si l'id est renseignée et numérique
-  if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
-    header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      $filmExistant = controlFilm($_GET['id_film']);
-      if ($filmExistant == true)
+      // Contrôle si l'id est renseignée et numérique
+      if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
+        header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+      else
       {
-        $listeNavigation   = getNavigation($_GET['id_film']);
-        $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
-        $listeEtoiles      = getDetailsStars($_GET['id_film']);
-        $listeCommentaires = getComments($_GET['id_film']);
-        $detailsFilmJson   = json_encode(convertForJson($detailsFilm));
+        // Lecture liste des données par le modèle
+        $filmExistant = controlFilm($_GET['id_film']);
+        if ($filmExistant == true)
+        {
+          $listeNavigation   = getNavigation($_GET['id_film']);
+          $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
+          $listeEtoiles      = getDetailsStars($_GET['id_film']);
+          $listeCommentaires = getComments($_GET['id_film']);
+          $detailsFilmJson   = json_encode(convertForJson($detailsFilm));
+        }
       }
       break;
 

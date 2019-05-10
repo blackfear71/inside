@@ -9,25 +9,26 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_bugs.php');
 
-  // Contrôle vue renseignée URL
-  switch ($_GET['view'])
-  {
-    case 'submit':
-    case 'resolved':
-    case 'unresolved':
-      break;
-
-    default:
-      header('location: bugs.php?view=submit&action=goSignaler');
-      break;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      $listeBugs = getBugs($_GET['view']);
+      switch ($_GET['view'])
+      {
+        case 'submit':
+          // Pas de traitement
+          break;
+
+        case 'resolved':
+        case 'unresolved':
+          $listeBugs = getBugs($_GET['view']);
+          break;
+
+        default:
+          header('location: bugs.php?view=submit&action=goConsulter');
+          break;
+      }
       break;
 
     case 'doSignaler':
@@ -35,13 +36,9 @@
       $new_id = insertBug($_POST);
       break;
 
-    case 'goSignaler':
-      // Pas de traitement
-      break;
-
     default:
       // Contrôle action renseignée URL
-      header('location: bugs.php?view=' . $_GET['view'] . '&action=goSignaler');
+      header('location: bugs.php?view=' . $_GET['view'] . '&action=goConsulter');
       break;
   }
 
@@ -49,22 +46,24 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeBugs as &$bug)
+      if ($_GET['view'] != 'submit')
       {
-        $bug->setSubject(htmlspecialchars($bug->getSubject()));
-        $bug->setDate(htmlspecialchars($bug->getDate()));
-        $bug->setAuthor(htmlspecialchars($bug->getAuthor()));
-        $bug->setName_a(htmlspecialchars($bug->getName_a()));
-        $bug->setContent(htmlspecialchars($bug->getContent()));
-        $bug->getType(htmlspecialchars($bug->getType()));
-        $bug->getResolved(htmlspecialchars($bug->getResolved()));
-      }
+        foreach ($listeBugs as &$bug)
+        {
+          $bug->setSubject(htmlspecialchars($bug->getSubject()));
+          $bug->setDate(htmlspecialchars($bug->getDate()));
+          $bug->setAuthor(htmlspecialchars($bug->getAuthor()));
+          $bug->setName_a(htmlspecialchars($bug->getName_a()));
+          $bug->setContent(htmlspecialchars($bug->getContent()));
+          $bug->getType(htmlspecialchars($bug->getType()));
+          $bug->getResolved(htmlspecialchars($bug->getResolved()));
+        }
 
-      unset($bug);
+        unset($bug);
+      }
       break;
 
     case 'doSignaler':
-    case 'goSignaler':
     default:
       break;
   }
@@ -77,7 +76,6 @@
       break;
 
     case 'goConsulter':
-    case 'goSignaler':
     default:
       include_once('vue/vue_bugs.php');
       break;

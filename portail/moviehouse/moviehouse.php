@@ -11,10 +11,6 @@
   include_once('modele/metier_commun.php');
   include_once('modele/metier_moviehouse.php');
 
-  // Contrôle si l'année est renseignée et numérique
-	if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-		header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
-
   // Initialisation sauvegarde saisie
   if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date'] != true)
   AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
@@ -35,60 +31,54 @@
     $_SESSION['save']['place_saisie']           = "";
   }
 
-  // Contrôle vue renseignée URL
-  switch ($_GET['view'])
-  {
-    case 'home':
-    case 'main':
-    case 'user':
-    case 'cards':
-      break;
-
-    default:
-      header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
-      break;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      $anneeExistante = controlYear($_GET['year']);
-      $ongletsYears   = getOnglets();
-      $preferences    = getPreferences($_SESSION['user']['identifiant']);
-
-      switch ($_GET['view'])
+      // Contrôle si l'année est renseignée et numérique
+      if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
+        header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+      else
       {
-        case 'main':
-          $nbUsers      = countUsers();
-          $listeUsers   = getUsers();
-          $tableauFilms = getTabFilms($_GET['year'], $listeUsers, $nbUsers);
-          break;
+        // Lecture liste des données par le modèle
+        $anneeExistante = controlYear($_GET['year']);
+        $ongletsYears   = getOnglets();
+        $preferences    = getPreferences($_SESSION['user']['identifiant']);
 
-        case 'user':
-          $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
-          break;
+        switch ($_GET['view'])
+        {
+          case 'home':
+            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_home());
+            $listeRecents = getRecents($_GET['year']);
 
-        case 'cards':
-          $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+            if ($films_waited == "Y")
+              $listeAttendus = getAttendus($_GET['year']);
 
-          if (!empty($listeFilms))
-            $listeEtoiles = getStarsFiches($listeFilms);
-          break;
+            if ($films_way_out == "Y")
+              $listeSorties = getSorties($_GET['year']);
+            break;
 
-        case 'home':
-        default:
-          $listeRecents  = getRecents($_GET['year']);
-          $films_waited  = $preferences->getCategories_home()[0];
-          $films_way_out = $preferences->getCategories_home()[1];
+          case 'main':
+            $nbUsers      = countUsers();
+            $listeUsers   = getUsers();
+            $tableauFilms = getTabFilms($_GET['year'], $listeUsers, $nbUsers);
+            break;
 
-          if ($films_waited == "Y")
-            $listeAttendus = getAttendus($_GET['year']);
+          case 'user':
+            $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+            break;
 
-          if ($films_way_out == "Y")
-            $listeSorties = getSorties($_GET['year']);
-          break;
+          case 'cards':
+            $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+
+            if (!empty($listeFilms))
+              $listeEtoiles = getStarsFiches($listeFilms);
+            break;
+
+          default:
+            header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+            break;
+        }
       }
       break;
 

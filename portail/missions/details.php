@@ -10,45 +10,46 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_missions.php');
 
-  // Contrôle si l'id est renseignée et numérique
-  if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
-    header('location: missions.php?action=goConsulter');
-
-  // Contrôle vue renseignée URL
-  switch ($_GET['view'])
-  {
-    case 'mission':
-    case 'ranking':
-      break;
-
-    default:
-      header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
-      break;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      $missionExistante = controlMission($_GET['id_mission']);
-      if ($missionExistante == true)
+      // Contrôle si l'id est renseignée et numérique
+      if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
+        header('location: missions.php?action=goConsulter');
+      else
       {
-        $detailsMission = getMission($_GET['id_mission']);
-        $participants   = getParticipants($_GET['id_mission']);
-
+        // Lecture liste des données par le modèle
         switch ($_GET['view'])
         {
-          case 'ranking':
-            if (date('Ymd') > $detailsMission->getDate_fin())
-              $ranking = getRankingMission($_GET['id_mission'], $participants);
-            else
-              header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
+          case 'mission':
+            $missionExistante = controlMission($_GET['id_mission']);
+
+            if ($missionExistante == true)
+            {
+              $detailsMission = getMission($_GET['id_mission']);
+              $participants   = getParticipants($_GET['id_mission']);
+              $missionUser    = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
+            }
             break;
 
-          case 'mission':
+          case 'ranking':
+            $missionExistante = controlMission($_GET['id_mission']);
+
+            if ($missionExistante == true)
+            {
+              $detailsMission = getMission($_GET['id_mission']);
+              $participants   = getParticipants($_GET['id_mission']);
+
+              if (date('Ymd') > $detailsMission->getDate_fin())
+                $ranking = getRankingMission($_GET['id_mission'], $participants);
+              else
+                header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
+            }
+            break;
+
           default:
-            $missionUser  = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
+            header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
             break;
         }
       }
