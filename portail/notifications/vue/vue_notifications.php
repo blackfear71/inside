@@ -34,94 +34,77 @@
           $zone_inside = "article";
           include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
-		      // Switch entre notifications personnelles, notifications du jour, notifications de la semaine et toutes les notifications
-		      echo '<div class="switch_view">';
-						$listeSwitch = array('me'    => 'Moi',
-																 'today' => 'Aujourd\'hui',
-                                 'week'  => '7 jours',
-																 'all'   => 'Toutes'
-																);
+          // Onglets
+          echo '<div class="zone_notifications_left">';
+            include('vue/vue_onglets.php');
+          echo '</div>';
 
-            foreach ($listeSwitch as $view => $lib_view)
+          // Notifications
+          echo '<div class="zone_notifications_right">';
+            if (!empty($notifications))
             {
-              if ($view == "all" OR $view == "week" OR $view == "me")
-                $page = '&page=1';
-              else
-                $page = '';
+              $date_notif = "";
 
-              if ($_GET['view'] == $view)
-                $actif = 'active';
-              else
-                $actif = 'inactive';
-
-              echo '<a href="notifications.php?view=' . $view . '&action=goConsulter' . $page . '" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
-                echo '<div class="border_switch_' . $actif . '"></div>';
-              echo '</a>';
-            }
-	        echo '</div>';
-
-          if (!empty($notifications))
-          {
-            $date_notif = "";
-
-            foreach ($notifications as $notification)
-            {
-              if (!empty($notification->getIcon()) AND !empty($notification->getSentence()))
+              foreach ($notifications as $notification)
               {
-                // Date en fonction de la vue
-                switch ($_GET['view'])
+                if (!empty($notification->getIcon()) AND !empty($notification->getSentence()))
                 {
-                  case "me":
-                  case "week":
-                  case "all":
-                    if ($notification->getDate() != $date_notif)
-                    {
-                      echo '<div class="date_notif">' . formatDateForDisplay($notification->getDate()) . '</div>';
-                      $date_notif = $notification->getDate();
-                    }
-                    break;
+                  // Date en fonction de la vue
+                  switch ($_GET['view'])
+                  {
+                    case "me":
+                    case "week":
+                    case "all":
+                      if ($notification->getDate() != $date_notif)
+                      {
+                        echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />' . formatDateForDisplay($notification->getDate()) . '</div>';
+                        $date_notif = $notification->getDate();
+                      }
+                      break;
 
-                  case "today":
-                  default:
-                    break;
-                }
+                    case "today":
+                    default:
+                      break;
+                  }
 
-                // Lien si présent
-                if (!empty($notification->getLink()))
-                  if ($notification->getCategory() == "doodle")
-                    echo '<a href="' . $notification->getLink() . '" target="_blank" class="lien_notification">';
+                  // Lien si présent
+                  if (!empty($notification->getLink()))
+                    if ($notification->getCategory() == "doodle")
+                      echo '<a href="' . $notification->getLink() . '" target="_blank" class="lien_notification">';
+                    else
+                      echo '<a href="' . $notification->getLink() . '" class="lien_notification">';
                   else
-                    echo '<a href="' . $notification->getLink() . '" class="lien_notification">';
-                else
-                  echo '<div class="lien_notification">';
+                    echo '<div class="lien_notification">';
 
-                    // Contenu (icône, phrase & date)
-                    echo '<table class="zone_notification">';
-                      echo '<tr>';
-                        echo '<td class="zone_notification_icone">';
-                          echo '<img src="../../includes/icons/common/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
-                        echo '</td>';
-                        echo '<td class="zone_notification_contenu">';
-                          echo $notification->getSentence();
-                        echo '</td>';
-                        echo '<td class="zone_notification_date">';
-                          echo formatTimeForDisplay($notification->getTime());
-                        echo '</td>';
-                      echo '</tr>';
-                    echo '</table>';
+                      // Contenu (icône, phrase & date)
+                      echo '<table class="zone_notification">';
+                        echo '<tr>';
+                          echo '<td class="zone_notification_icone">';
+                            echo '<img src="../../includes/icons/common/' . $notification->getIcon() . '.png" alt="' . $notification->getIcon() . '" class="icone_notification" />';
+                          echo '</td>';
+                          echo '<td class="zone_notification_contenu">';
+                            echo $notification->getSentence();
+                          echo '</td>';
+                          echo '<td class="zone_notification_date">';
+                            echo formatTimeForDisplay($notification->getTime());
+                          echo '</td>';
+                        echo '</tr>';
+                      echo '</table>';
 
-                if (!empty($notification->getLink()))
-                  echo '</a>';
-                else
-                  echo '</div>';
+                  if (!empty($notification->getLink()))
+                    echo '</a>';
+                  else
+                    echo '</div>';
+                }
               }
             }
-          }
-          else
-          {
-            echo '<div class="date_notif">Pas encore de notifications !</div>';
-          }
+            else
+            {
+              echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />' . formatDateForDisplay(date("Ymd")) . '</div>';
+
+              echo '<div class="empty">Pas encore de notifications...</div>';
+            }
+          echo '</div>';
 
           // Pagination
           if (($_GET['view'] == "all" OR $_GET['view'] == "week" OR $_GET['view'] == "me") AND $nbPages > 1)

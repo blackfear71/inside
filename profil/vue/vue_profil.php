@@ -35,7 +35,7 @@
           $zone_inside = "article";
           include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
-          // Saisie & Années
+          // Onglets
           echo '<div class="zone_profil_left">';
             include('vue/vue_onglets.php');
           echo '</div>';

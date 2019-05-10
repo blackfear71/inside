@@ -136,7 +136,11 @@
               }
             }
             else
-              echo '<div class="titre_section"><img src="../../includes/icons/search/search.png" alt="search" class="logo_titre_section" />Veuillez relancer la recherche afin d\'obtenir des résultats</div>';
+            {
+              echo '<div class="titre_section"><img src="../../includes/icons/search/search.png" alt="search" class="logo_titre_section" />Pas de résultats</div>';
+
+              echo '<div class="empty">Veuillez saisir et relancer la recherche afin d\'obtenir des résultats...</div>';
+            }
           echo '</div>';
 				?>
 			</article>
