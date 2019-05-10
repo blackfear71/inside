@@ -262,7 +262,7 @@
                                     'title'     => 'Calendars',
                                     'image'     => '../../includes/icons/common/calendars.png',
                                     'alt'       => 'calendars'),
-                              array('categorie' => 'LES PETITS<br />PEDESTRES',
+                              array('categorie' => 'LES PETITS<br />PÉDESTRES',
                                     'lien'      => '../petitspedestres/parcours.php?action=liste',
                                     'title'     => 'Les Petits Pédestres',
                                     'image'     => '../../includes/icons/common/petits_pedestres.png',
