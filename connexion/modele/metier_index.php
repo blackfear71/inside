@@ -99,7 +99,7 @@
     // Initialisations préférences
     $ref_theme          = "";
     $view_movie_house   = "H";
-    $categories_home    = "YY";
+    $categories_home    = "Y;Y;";
     $today_movie_house  = "N";
     $view_old_movies    = "T;;;";
     $view_the_box       = "P";

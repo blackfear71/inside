@@ -354,8 +354,7 @@
 
 		// Préférences MOVIE HOUSE
 		$view_movie_house = $post['movie_house_view'];
-
-		$categories_home = "";
+		$categories_home  = "";
 
 		if (isset($post['films_waited']))
 			$categories_home .= "Y;";
