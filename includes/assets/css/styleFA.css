@@ -760,8 +760,10 @@
 .zone_no_vote
 {
 	display: inline-block;
-	margin: 0 5px 10px 5px;
 	text-align: center;
+	vertical-align: top;
+	width: 55px;
+	margin: 5px 2.5px 5px 2.5px;
 }
 
 .avatar_no_vote
