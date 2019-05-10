@@ -492,7 +492,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, experience FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, anniversary, experience FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd

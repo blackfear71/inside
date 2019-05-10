@@ -42,11 +42,16 @@
                 // Identifiant
                 echo '<div class="infos_identifiant">' . $user->getIdentifiant() . '</div>';
 
-                // Email
-                echo '<div class="infos_mail">' . $user->getEmail() . '</div>';
+                // Anniversaire
+                if (!empty($user->getAnniversary()))
+                  echo '<div class="infos_identifiant"><img src="../includes/icons/admin/date_grey.png" alt="date_grey" class="logo_infos" />' . formatDateForDisplay($user->getAnniversary()) . '</div>';
 
                 // Niveau
-                echo '<div class="infos_niveau">Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
+                echo '<div class="infos_niveau"><img src="../includes/icons/admin/inside_red.png" alt="inside_red" class="logo_infos" />Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
+
+                // Email
+                if (!empty($user->getEmail()))
+                  echo '<div class="infos_mail"><img src="../includes/icons/admin/mailing_red.png" alt="mailing_red" class="logo_infos" />' . $user->getEmail() . '</div>';
 
                 echo '<div class="zone_form_users">';
                   // Formulaire True Insider
