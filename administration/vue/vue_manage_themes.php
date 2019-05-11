@@ -121,7 +121,7 @@
                   /*********************************************/
                   /* Visualisation normale (sans modification) */
                   /*********************************************/
-                  echo '<div id="modifier_theme_2[' . $theme->getId() . ']">';
+                  echo '<div id="modifier_theme_2_' . $theme->getId() . '">';
                     echo '<div class="zone_theme_titre">';
                       // Bouton suppression
                       echo '<form method="post" action="manage_themes.php?delete_id=' . $theme->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce thème ?\')) return false;">';
@@ -129,7 +129,7 @@
                       echo '</form>';
 
                       // Bouton modification
-                      echo '<a onclick="afficherMasquer(\'modifier_theme[' . $theme->getId() . ']\'); afficherMasquer(\'modifier_theme_2[' . $theme->getId() . ']\'); initMasonry();" title="Modifier" class="icone_modify_theme"></a>';
+                      echo '<a onclick="afficherMasquer(\'modifier_theme_' . $theme->getId() . '\'); afficherMasquer(\'modifier_theme_2_' . $theme->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_theme"></a>';
 
                       // Titre
                       echo '<div class="theme_titre">';
@@ -145,11 +145,11 @@
                   /***************************/
                   /* Caché pour modification */
                   /***************************/
-                  echo '<div id="modifier_theme[' . $theme->getId() . ']" style="display: none;">';
+                  echo '<div id="modifier_theme_' . $theme->getId() . '" style="display: none;">';
                     echo '<form method="post" action="manage_themes.php?update_id=' . $theme->getId() . '&action=doModifier">';
                       echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
                         // Annulation modification
-                        echo '<a onclick="afficherMasquer(\'modifier_theme[' . $theme->getId() . ']\'); afficherMasquer(\'modifier_theme_2[' . $theme->getId() . ']\'); initMasonry();" title="Annuler" class="icone_cancel_theme"></a>';
+                        echo '<a onclick="afficherMasquer(\'modifier_theme_' . $theme->getId() . '\'); afficherMasquer(\'modifier_theme_2_' . $theme->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_theme"></a>';
 
                         // Validation modification
                         echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';

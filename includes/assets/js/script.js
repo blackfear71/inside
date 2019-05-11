@@ -27,28 +27,27 @@ function masquerAlerte(id)
 // Affiche ou masque le menu latéral gauche + rotation icône menu
 function deployLeftMenu(id, icon1, icon2, icon3, icon4)
 {
-  document.getElementById(id).style.transition    = "all ease 0.4s";
-  document.getElementById(icon1).style.transition = "all ease 0.2s";
-  document.getElementById(icon2).style.transition = "all ease 0.2s";
-  document.getElementById(icon3).style.transition = "all ease 0.2s";
-  document.getElementById(icon4).style.transition = "all ease 0.2s";
+  $('#' + id).css('transition', 'all ease 0.4s');
+  $('#' + icon1).css('transition', 'all ease 0.2s');
+  $('#' + icon2).css('transition', 'all ease 0.2s');
+  $('#' + icon3).css('transition', 'all ease 0.2s');
+  $('#' + icon4).css('transition', 'all ease 0.2s');
 
-  if (document.getElementById(id).style.marginLeft != "0px")
+  if ($('#' + id).css('margin-left') != '0px')
   {
-    document.getElementById(id).style.marginLeft   = "0px";
-    document.getElementById(icon1).style.transform = "rotateZ(90deg)";
-    document.getElementById(icon2).style.opacity   = "1";
-    document.getElementById(icon3).style.opacity   = "1";
-    document.getElementById(icon4).style.opacity   = "1";
-
+    $('#' + id).css('margin-left', '0px');
+    $('#' + icon1).css('transform', 'rotateZ(90deg)');
+    $('#' + icon2).css('opacity', '1');
+    $('#' + icon3).css('opacity', '1');
+    $('#' + icon4).css('opacity', '1');
   }
   else
   {
-    document.getElementById(id).style.marginLeft   = "-83px";
-    document.getElementById(icon1).style.transform = "rotateZ(0deg)";
-    document.getElementById(icon2).style.opacity   = "0";
-    document.getElementById(icon3).style.opacity   = "0";
-    document.getElementById(icon4).style.opacity   = "0";
+    $('#' + id).css('margin-left', '-83px');
+    $('#' + icon1).css('transform', 'rotateZ(0deg)');
+    $('#' + icon2).css('opacity', '0');
+    $('#' + icon3).css('opacity', '0');
+    $('#' + icon4).css('opacity', '0');
   }
 }
 
@@ -57,44 +56,40 @@ function changeTheme(background, header, footer, logo)
 {
   if (background != "")
   {
-    document.body.style.backgroundImage  = "url(" + background + "), linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px)";
-    document.body.style.backgroundRepeat = "repeat-y, repeat, repeat";
-    document.body.style.backgroundSize   = "100%, 100% 200px, 200px 100%";
+    $('body').css('background-image', 'url(' + background + '), linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px)');
+    $('body').css('background-repeat', 'repeat-y, repeat, repeat');
+    $('body').css('background-size', '100%, 100% 200px, 200px 100%');
   }
 
   if (header != "")
   {
-    document.getElementsByClassName("zone_bandeau")[0].style.backgroundImage  = "url('" + header + "')";
-    document.getElementsByClassName("zone_bandeau")[0].style.backgroundRepeat = "repeat-x";
+    $('.zone_bandeau').css('background-image', 'url(' + header + ')');
+    $('.zone_bandeau').css('background-repeat', 'repeat-x');
   }
 
   if (footer != "")
   {
-    document.getElementsByTagName("footer")[0].style.backgroundImage  = "url('" + footer + "')";
-    document.getElementsByTagName("footer")[0].style.backgroundRepeat = "repeat-x";
+    $('footer').css('background-image', 'url(' + footer + ')');
+    $('footer').css('background-repeat', 'repeat-x');
   }
 
   if (logo != "")
-  {
-    var image  = document.getElementById("logo_inside_header");
-    var source = image.getAttribute("src");
-    image.setAttribute("src", logo);
-  }
+    $('#logo_inside_header').attr('src', logo);
 }
 
 // Colorise la barre de recherche au survol
 function changeColorToWhite(id)
 {
-  document.getElementById(id).style.backgroundColor = "white";
-  document.getElementById(id).style.transition      = "background-color ease 0.2s";
+  $('#' + id).css('background-color', 'white');
+  $('#' + id).css('transition', 'background-color ease 0.2s');
 }
 
 function changeColorToGrey(id, active)
 {
-  if (document.getElementById(active).style.width != "100%")
+  if (document.getElementById(active).style.width != '100%')
   {
-    document.getElementById(id).style.backgroundColor = "#e3e3e3";
-    document.getElementById(id).style.transition      = "background-color ease 0.2s";
+    $('#' + id).css('background-color', '#e3e3e3');
+    $('#' + id).css('transition', 'background-color ease 0.2s');
   }
 }
 
@@ -153,6 +148,7 @@ $(function()
       $("#color_search").css('transition', 'background-color ease 0.4s');
     }
   });
+
   $('#color_search').click(function(event)
   {
     if ($('#resizeBar') != null && $('#color_search') != null)

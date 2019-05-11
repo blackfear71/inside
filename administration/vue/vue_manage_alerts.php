@@ -92,7 +92,7 @@
                 /***************************************************/
                 /* Ligne visualisation normale (sans modification) */
                 /***************************************************/
-                echo '<tr id="modifier_alerte_2[' . $alerte->getId() . ']">';
+                echo '<tr id="modifier_alerte_2_' . $alerte->getId() . '">';
                   echo '<form method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer">';
                     // Type
                     echo '<td class="td_type_alerts" id=' . $alerte->getId() . '>';
@@ -124,7 +124,7 @@
                     echo '<td class="actions_alerte">';
                       // Modification ligne
                       echo '<span class="link_action_alerte">';
-                        echo '<a onclick="afficherMasquerRow(\'modifier_alerte[' . $alerte->getId() . ']\'); afficherMasquerRow(\'modifier_alerte_2[' . $alerte->getId() . ']\');" title="Modifier la ligne" class="icone_modifier_alerte"></a>';
+                        echo '<a onclick="afficherMasquerRow(\'modifier_alerte_' . $alerte->getId() . '\'); afficherMasquerRow(\'modifier_alerte_2_' . $alerte->getId() . '\');" title="Modifier la ligne" class="icone_modifier_alerte"></a>';
                       echo '</span>';
 
                       // Suppression ligne
@@ -138,7 +138,7 @@
                 /**********************************/
                 /* Ligne cachée pour modification */
                 /**********************************/
-                echo '<tr id="modifier_alerte[' . $alerte->getId() . ']" style="display: none;">';
+                echo '<tr id="modifier_alerte_' . $alerte->getId() . '" style="display: none;">';
                   echo '<form method="post" action="manage_alerts.php?update_id=' . $alerte->getId() . '&action=doModifier">';
                     // Type
                     echo '<td class="td_type_alerts">';
@@ -181,7 +181,7 @@
 
                       // Annulation modification ligne
                       echo '<span class="link_action_alerte">';
-                        echo '<a onclick="afficherMasquerRow(\'modifier_alerte[' . $alerte->getId() . ']\'); afficherMasquerRow(\'modifier_alerte_2[' . $alerte->getId() . ']\');" title="Annuler la modification" class="icone_annuler_alerte"></a>';
+                        echo '<a onclick="afficherMasquerRow(\'modifier_alerte_' . $alerte->getId() . '\'); afficherMasquerRow(\'modifier_alerte_2_' . $alerte->getId() . '\');" title="Annuler la modification" class="icone_annuler_alerte"></a>';
                       echo '</span>';
                     echo '</td>';
                   echo '</form>';

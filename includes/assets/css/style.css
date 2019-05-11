@@ -979,7 +979,7 @@ footer
 
 .version
 {
-	float: left;
+	display: inline-block;
 	line-height: 50px;
 	margin-left: 20px;
 	margin-right: 20px;
@@ -993,6 +993,7 @@ footer
 	vertical-align: bottom;
 	width: 60px;
 	height: 50px;
+	background-color: #262626;
 }
 
 .link_footer:hover

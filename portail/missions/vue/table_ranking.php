@@ -1,8 +1,6 @@
 <?php
   if (!empty($ranking))
   {
-    //var_dump($ranking);
-
     echo '<table class="table_classement">';
       // Podium
       echo '<tr class="background_podium">';

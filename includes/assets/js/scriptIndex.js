@@ -37,15 +37,15 @@ $(document).ready(function()
 // Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)
 function afficherIndex(id_open, id_close)
 {
-  document.getElementById(id_open).style.display    = "block";
-  document.getElementById(id_open).style.marginLeft = "39.5%";
-  document.getElementById(id_open).style.transition = "margin-left 1s";
+  $('#' + id_open).css('display', 'block');
+  $('#' + id_open).css('margin-left', '39.5%');
+  $('#' + id_open).css('transition', 'margin-left 1s');
 
-  document.getElementById(id_close).style.marginLeft = "-100%";
+  $('#' + id_close).css('margin-left', '-100%');
 }
 
 // Masque la fenêtre d'inscription ou de mot de passe perdu
 function masquerIndex(id)
 {
-  document.getElementById(id).style.marginLeft = "-100%";
+  $('#' + id).css('margin-left', '-100%');
 }

@@ -2,7 +2,7 @@
   // Version
   echo '<div class="version">V.2</div>';
 
-  // Lien #TheBox
+  // Liens
   if ($_SESSION['user']['identifiant'] != "admin")
   {
     // Récupération des préférences
@@ -26,14 +26,12 @@
         break;
     }
 
+    // Lien #TheBox
     echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
     echo '</a>';
-  }
 
-  // Lien Bugs
-  if ($_SESSION['user']['identifiant'] != "admin")
-  {
+    // Lien Bugs
     echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
     echo '</a>';

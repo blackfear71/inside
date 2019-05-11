@@ -474,52 +474,58 @@ function addOtherType(id)
   $("#" + id).append(html);
 }
 
-// Affiche ou masque la zone de saisie "Autre" (insertion)
+// Affiche ou masque la zone de saisie lieu "Autre" (insertion)
 function afficherOther(select, id, name)
 {
-  if (document.getElementById(select).value == "other_location")
+  if ($('#' + select).val() == 'other_location')
   {
-    if (document.getElementById(id).style.display == "none")
+    if ($('#' + id).css('display') == 'none')
     {
-      document.getElementById(select).style.width = "200px";
-      document.getElementById(name).style.width   = "calc(100% - 670px)";
-      document.getElementById(id).style.width     = "200px";
-      document.getElementById(id).style.display   = "inline-block";
-      document.getElementById(id).required = true;
+      $('#' + select).css('width', '200px');
+      $('#' + name).css('width', 'calc(100% - 670px)');
+      $('#' + id).css('width', '200px');
+      $('#' + id).css('display', 'inline-block');
+      $('#' + id).prop('required', true);
     }
   }
   else
   {
-    document.getElementById(select).style.width = "180px";
-    document.getElementById(name).style.width = "calc(100% - 420px)";
-    document.getElementById(id).style.display = "none";
-    document.getElementById(id).required = false;
+    $('#' + select).css('width', '180px');
+    $('#' + name).css('width', 'calc(100% - 420px)');
+    $('#' + id).css('display', 'none');
+    $('#' + id).prop('required', false);
   }
 }
 
 // Affiche ou masque la zone de saisie "Autre" (modification)
 function afficherModifierOther(select, id)
 {
-  if (document.getElementById(select).value == "other_location")
+  if ($('#' + select).val() == 'other_location')
   {
-    if (document.getElementById(id).style.display == "none")
+    if ($('#' + id).css('display') == 'none')
     {
-      document.getElementById(id).style.display = "block";
-      document.getElementById(id).required = true;
+      $('#' + id).css('display', 'block');
+      $('#' + id).prop('required', true);
     }
   }
   else
   {
-    document.getElementById(id).style.display = "none";
-    document.getElementById(id).required = false;
+    $('#' + id).css('display', 'none');
+    $('#' + id).prop('required', false);
   }
 }
 
 // Fixe la couleur de fond lors du changement de statut
 function changeCheckedDay(id_checkbox, id_label, class_checked, class_no_check)
 {
-  if (document.getElementById(id_checkbox).checked == true)
-    document.getElementById(id_label).className  = class_no_check;
+  if ($('#' + id_checkbox).prop('checked') == true)
+  {
+    $('#' + id_label).removeClass(class_checked);
+    $('#' + id_label).addClass(class_no_check);
+  }
   else
-    document.getElementById(id_label).className  = class_checked;
+  {
+    $('#' + id_label).addClass(class_checked);
+    $('#' + id_label).removeClass(class_no_check);
+  }
 }

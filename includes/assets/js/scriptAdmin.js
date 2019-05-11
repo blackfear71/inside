@@ -133,31 +133,33 @@ function initMasonry()
   });
 }
 
-// Affiche ou masque le log
+// Affiche ou masque une zone
 function afficherMasquer(id)
 {
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "block";
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).css('display', 'block');
   else
-    document.getElementById(id).style.display = "none";
+    $('#' + id).css('display', 'none');
 }
 
 // Affiche ou masque les lignes de visualisation/modification du tableau
 function afficherMasquerRow(id)
 {
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "table-row";
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).css('display', 'table-row');
   else
-    document.getElementById(id).style.display = "none";
+    $('#' + id).css('display', 'none');
 }
 
 // Rotation icône affichage log
 function rotateIcon(id)
 {
+  $('#' + id).css('transition', 'all ease 0.4s');
+
   if (document.getElementById(id).style.transform == "rotate(0deg)")
-    document.getElementById(id).style.transform = "rotate(180deg)";
+    $('#' + id).css('transform', 'rotate(180deg)');
   else
-    document.getElementById(id).style.transform = "rotate(0deg)";
+    $('#' + id).css('transform', 'rotate(0deg)');
 }
 
 // Insère une prévisualisation de l'image sur la page

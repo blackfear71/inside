@@ -73,7 +73,6 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeOut(0);
 }
 
-
 // Change la couleur des radio boutons (saisie film)
 function switchCheckedColor(zone, input)
 {
@@ -214,15 +213,15 @@ function masquerSaisiePreference()
 // Affiche ou masque les films cachés
 function afficherMasquerTbody(id, hidden)
 {
-  if (document.getElementById(hidden).innerHTML == '<div class="symbol_hidden">+</div> Films cachés')
-    document.getElementById(hidden).innerHTML = '<div class="symbol_hidden">-</div> Films cachés';
+  if ($('#' + hidden).html() == '<div class="symbol_hidden">+</div> Films cachés')
+    $('#' + hidden).html('<div class="symbol_hidden">-</div> Films cachés');
   else
-    document.getElementById(hidden).innerHTML = '<div class="symbol_hidden">+</div> Films cachés';
+    $('#' + hidden).html('<div class="symbol_hidden">+</div> Films cachés');
 
-  if (document.getElementById(id).style.display == "none")
-    document.getElementById(id).style.display = "table-row-group";
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).css('display', 'table-row-group');
   else
-    document.getElementById(id).style.display = "none";
+    $('#' + id).css('display', 'none');
 }
 
 // Génère un calendrier
@@ -248,17 +247,14 @@ $(function()
 // Insère un smiley dans la zone de saisie
 function insert_smiley(smiley, id)
 {
-  // Emplacement
-  var where = document.getElementById(id);
+  // Texte à insérer
+  var texte = smiley + " ";
 
-  // Texte à insérer + espace
-  var phrase = smiley + " ";
-
-  // Contenu déjà présent + Texte à insérer
-  where.value += phrase;
+  // Ajout du texte au contenu déjà présent
+  $('#' + id).append(texte);
 
   // Positionnement du curseur
-  where.focus();
+  $('#' + id).focus();
 }
 
 // Modification d'un film

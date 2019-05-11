@@ -268,8 +268,6 @@
     }
     $reponse->closeCursor();
 
-    //var_dump($listeFilms);
-
     // Récupération d'une liste des étoiles
     $reponse2 = $bdd->query('SELECT * FROM movie_house_users ORDER BY identifiant ASC');
     while($donnees2 = $reponse2->fetch())
@@ -278,8 +276,6 @@
       array_push($listeStars, Stars::withData($donnees2));
     }
     $reponse2->closeCursor();
-
-    //var_dump($listeStars);
 
     // On consolide un nouveau tableau repésentant chaque ligne du tableau des films
     $i = 0;
@@ -324,8 +320,6 @@
         array_push($tableauStars, $myStars);
       }
 
-      //var_dump($tableauStars);
-
       // On compte le nombre d'utilisateurs et on remplit le tableau final seulement si on a atteint le nombre total d'utilisateurs inscrits
       if (count($tableauStars) == $nb_users)
       {
@@ -336,15 +330,11 @@
                             'tableStars'   => $tableauStars
                            );
 
-        //var_dump($mySynthese);
-
         array_push($tableauFilms, $mySynthese);
      }
 
      $i++;
    }
-
-   //var_dump($tableauFilms);
 
    return $tableauFilms;
   }
