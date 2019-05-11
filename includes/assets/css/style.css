@@ -457,10 +457,6 @@ header
 	color: #7c7c7c;
 	text-decoration: none;
 	vertical-align: top;
-}
-
-.margin_right_header
-{
 	margin-right: 20px;
 }
 
@@ -541,8 +537,9 @@ header
 
 .circular_bar_header
 {
+	position: absolute;
 	margin-top: -10px;
-	margin-right: -80px;
+	right: 30px;
 	height: 90px;
 	overflow: hidden;
 }
