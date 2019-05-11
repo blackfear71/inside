@@ -227,30 +227,31 @@
                   {
                     $id_type    = "type_" . formatId($type) . "_" . $restaurant->getId();
                     $label_type = "label_" . formatId($type) . "_" . $restaurant->getId();
+                    $matching = false;
 
-                    echo '<div class="zone_type">';
-                      $matching = false;
+                    foreach ($explodedTypes as $exploded)
+                    {
+                      if (!empty($exploded) AND $exploded == $type)
+                      {
+                        $matching = true;
+                        break;
+                      }
+                    }
 
-                      foreach ($explodedTypes as $exploded)
-                      {
-                        if (!empty($exploded) AND $exploded == $type)
-                        {
-                          $matching = true;
-                          break;
-                        }
-                      }
-
-                      if ($matching == true)
-                      {
-                        echo '<input type="checkbox" id="' . $id_type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" checked />';
-                        echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type_checked">' . $type . '</label>';
-                      }
-                      else
-                      {
-                        echo '<input type="checkbox" id="' . $id_type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" />';
-                        echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type">' . $type . '</label>';
-                      }
-                    echo '</div>';
+                    if ($matching == true)
+                    {
+                      echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types bouton_checked">';
+                        echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" checked />';
+                        echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                      echo '</div>';
+                    }
+                    else
+                    {
+                      echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types">';
+                        echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" />';
+                        echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                      echo '</div>';
+                    }
 
                     $k++;
                   }

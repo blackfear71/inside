@@ -262,30 +262,34 @@ function afficherCheckboxTransports(id)
   var num        = id.substr(-1);
   var id_zone    = "zone_checkbox_" + num;
   var id_check_f = 'checkbox_feet_' + num;
-  var id_label_f = 'label_feet_' + num;
   var id_check_b = 'checkbox_bike_' + num;
-  var id_label_b = 'label_bike_' + num;
   var id_check_t = 'checkbox_tram_' + num;
-  var id_label_t = 'label_tram_' + num;
   var id_check_c = 'checkbox_car_' + num;
-  var id_label_c = 'label_car_' + num;
   var id_annuler = 'annuler_transports_' + num;
 
   html = '<div id="' + id_zone + '" class="zone_checkbox">';
-    html += '<input type="checkbox" id="' + id_check_f + '" name="checkbox_feet[' + num + ']" value="F" onchange="changeCheckedColor(\'' + id_check_f + '\', \'' + id_label_f + '\', \'label_transport_checked\', \'label_transport\');" class="checkbox_transport" />';
-    html += '<label for="' + id_check_f + '" id="' + id_label_f + '" class="label_transport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + id_check_f + '" onclick="changeCheckedColor(\'bouton_' + id_check_f + '\');" class="switch_transport">';
+      html += '<input id="' + id_check_f + '" type="checkbox" value="F" name="checkbox_feet[' + num + ']" />';
+      html += '<label for="' + id_check_f + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
+    html += '</div>';
 
-    html += '<input type="checkbox" id="' + id_check_b + '" name="checkbox_bike[' + num + ']" value="B" onchange="changeCheckedColor(\'' + id_check_b + '\', \'' + id_label_b + '\', \'label_transport_checked\', \'label_transport\');" class="checkbox_transport" />';
-    html += '<label for="' + id_check_b + '" id="' + id_label_b + '" class="label_transport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + id_check_b + '" onclick="changeCheckedColor(\'bouton_' + id_check_b + '\');" class="switch_transport">';
+      html += '<input id="' + id_check_b + '" type="checkbox" value="B" name="checkbox_bike[' + num + ']" />';
+      html += '<label for="' + id_check_b + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
+    html += '</div>';
 
-    html += '<input type="checkbox" id="' + id_check_t + '" name="checkbox_tram[' + num + ']" value="T" onchange="changeCheckedColor(\'' + id_check_t + '\', \'' + id_label_t + '\', \'label_transport_checked\', \'label_transport\');" class="checkbox_transport" />';
-    html += '<label for="' + id_check_t + '" id="' + id_label_t + '" class="label_transport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + id_check_t + '" onclick="changeCheckedColor(\'bouton_' + id_check_t + '\');" class="switch_transport">';
+      html += '<input id="' + id_check_t + '" type="checkbox" value="T" name="checkbox_tram[' + num + ']" />';
+      html += '<label for="' + id_check_t + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
+    html += '</div>';
 
-    html += '<input type="checkbox" id="' + id_check_c + '" name="checkbox_car[' + num + ']" value="C" onchange="changeCheckedColor(\'' + id_check_c + '\', \'' + id_label_c + '\', \'label_transport_checked\', \'label_transport\');" class="checkbox_transport" />';
-    html += '<label for="' + id_check_c + '" id="' + id_label_c + '" class="label_transport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + id_check_c + '" onclick="changeCheckedColor(\'bouton_' + id_check_c + '\');" class="switch_transport">';
+      html += '<input id="' + id_check_c + '" type="checkbox" value="C" name="checkbox_car[' + num + ']" />';
+      html += '<label for="' + id_check_c + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
+    html += '</div>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherCheckboxTransports(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 31px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" onclick="cacherCheckboxTransports(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 25px;">Annuler</a>';
 
   $("#" + id).append(html);
 }
@@ -433,27 +437,27 @@ var loadFile = function(event, id)
   });
 };
 
-// Fixe la couleur de fond lors de la sélection
-function changeCheckedColor(id_checkbox, id_label, class_checked, class_no_check)
+// Change la couleur des checkbox (saisie restaurant)
+function changeCheckedColor(input)
 {
-  if (document.getElementById(id_checkbox).checked == true)
-    document.getElementById(id_label).className = class_checked;
+  if ($('#' + input).children('input').prop('checked'))
+    $('#' + input).addClass('bouton_checked');
   else
-    document.getElementById(id_label).className = class_no_check;
+    $('#' + input).removeClass('bouton_checked');
 }
 
-// Fixe la couleur de fond lors de la saisie de texte
+// Change la couleur de fond lors de la saisie de texte
 function changeTypeColor(id)
 {
-  if (document.getElementById(id).value != "")
+  if ($('#' + id).val() != "")
   {
-    document.getElementById(id).style.background = "#70d55d";
-    document.getElementById(id).style.color = "white";
+    $('#' + id).css('background-color', '#70d55d');
+    $('#' + id).css('color', 'white');
   }
   else
   {
-    document.getElementById(id).style.background = "#e3e3e3";
-    document.getElementById(id).style.color = "#262626";
+    $('#' + id).css('background-color', '#e3e3e3');
+    $('#' + id).css('color', '262626');
   }
 }
 

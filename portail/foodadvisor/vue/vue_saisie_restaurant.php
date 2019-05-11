@@ -103,33 +103,34 @@
             foreach ($listeTypes as $type)
             {
               $id_type    = "type_" . formatId($type);
-              $label_type = "label_" . formatId($type);
               $checked    = false;
 
-              echo '<div class="zone_type">';
-                if (!empty($_SESSION['save']['types_restaurants']))
+              if (!empty($_SESSION['save']['types_restaurants']))
+              {
+                foreach ($_SESSION['save']['types_restaurants'] as $saved_types)
                 {
-                  foreach ($_SESSION['save']['types_restaurants'] as $saved_types)
+                  if ($saved_types == $type)
                   {
-                    if ($saved_types == $type)
-                    {
-                      $checked = true;
-                      break;
-                    }
+                    $checked = true;
+                    break;
                   }
                 }
+              }
 
-                if ($checked == true)
-                {
-                  echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants[' . $i . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" checked />';
-                  echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type_checked">' . $type . '</label>';
-                }
-                else
-                {
-                  echo '<input type="checkbox" id="' . $id_type . '" name="types_restaurants[' . $i . ']" value="' . $type . '" onchange="changeCheckedColor(\'' . $id_type . '\', \'' . $label_type . '\', \'label_type_checked\', \'label_type\');" class="checkbox_type" />';
-                  echo '<label for="' . $id_type . '" id="' . $label_type . '" class="label_type">' . $type . '</label>';
-                }
-              echo '</div>';
+              if ($checked == true)
+              {
+                echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types bouton_checked">';
+                  echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" checked />';
+                  echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                echo '</div>';
+              }
+              else
+              {
+                echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types">';
+                  echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" />';
+                  echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                echo '</div>';
+              }
 
               $i++;
             }
@@ -157,7 +158,7 @@
                   $id_custom_type    = "type_" . formatId($saved_types);
                   $label_custom_type = "label_" . formatId($saved_types);
 
-                  echo '<input type="text" placeholder="Type" value="' . $saved_types . '" id="' . $id_custom_type . '" name="types_restaurants[' . $j . ']" oninput="changeTypeColor(\'' . $id_custom_type . '\')" class="type_other" style="background-color: #70d55d; color: white;" />';
+                  echo '<input type="text" placeholder="Type" value="' . $saved_types . '" id="' . $id_custom_type . '" name="types_restaurants[' . $j . ']" oninput="changeTypeColor(\'' . $id_custom_type . '\')" class="type_other filled" />';
 
                   $j++;
                 }
