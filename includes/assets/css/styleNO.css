@@ -78,28 +78,22 @@
 {
 	background-color: #ff1937;
 	text-align: center;
-	vertical-align: middle;
-	padding-top: 10px;
-	padding-bottom: 10px;
 	width: 100px;
 }
 
 .icone_notification
 {
   width: 40px;
-  margin-bottom: -5px;
+  vertical-align: middle;
 }
 
 .zone_notification_contenu
 {
   background-color: #e3e3e3;
-  line-height: 30px;
+  line-height: 25px;
   text-align: justify;
   vertical-align: middle;
-  padding-left: 20px;
-  padding-right: 20px;
-	padding-bottom: 5px;
-	padding-top: 5px;
+	padding: 5px 20px 5px 20px;
   color: #262626;
 }
 

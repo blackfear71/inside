@@ -375,10 +375,8 @@
 {
   display: inline-block;
   background-color: #70d55d;
-	margin-left: 5px;
-	margin-right: 5px;
-  margin-bottom: 10px;
-  padding: 5px;
+	margin: 0 5px 10px 5px;
+	padding: 5px;
   border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
   color: white;
@@ -388,10 +386,8 @@
 {
   display: inline-block;
   background-color: #2eb2f4;
-	margin-left: 5px;
-	margin-right: 5px;
-  margin-bottom: 10px;
-  padding: 5px;
+	margin: 0 5px 10px 5px;
+	padding: 5px;
   border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
   color: white;
@@ -1208,6 +1204,16 @@
 	transition: height 0.2s;
 }
 
+.padding_left
+{
+	padding-left: 50px;
+}
+
+.padding_right
+{
+	padding-right: 50px;
+}
+
 .titre_prev_movie
 {
 	position: absolute;
@@ -1785,10 +1791,7 @@
 {
 	border: 0;
 	display: block;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px 20px 10px 20px;
 	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
