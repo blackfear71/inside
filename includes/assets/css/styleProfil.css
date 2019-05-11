@@ -19,6 +19,13 @@
 	text-align: center;
 }
 
+.zone_profil_admin
+{
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
 .zone_profil_bottom
 {
 	display: block;
@@ -341,7 +348,7 @@
 	display: inline-block;
 	width: calc(100% - 442px);
 	margin-left: 20px;
-	height: 200px;
+	max-height: 200px;
 }
 
 .logo_parametres
