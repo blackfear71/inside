@@ -153,37 +153,49 @@
 
           // Choix restaurant
           echo '<div class="zone_saisie_ligne margins">';
-            if ($_SESSION['save']['restaurant_saisi'] == "N" OR $_SESSION['save']['restaurant_saisi'] == "")
+            if ($_SESSION['save']['restaurant_saisi'] == "N")
             {
-              echo '<input id="none" type="radio" name="restaurant" value="N" onchange="changeCheckedColor(\'label_none\');" class="bouton_restaurant" checked />';
-              echo '<label id="label_none" for="none" class="label_restaurant label_checked">Aucun</label>';
+              echo '<div id="bouton_none" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_none\');" class="switch_restaurant bouton_checked">';
+                echo '<input id="none" type="radio" name="restaurant" value="N" checked />';
+                echo '<label for="none" class="label_switch">Aucun</label>';
+              echo '</div>';
             }
             else
             {
-              echo '<input id="none" type="radio" name="restaurant" value="N" onchange="changeCheckedColor(\'label_none\');" class="bouton_restaurant" />';
-              echo '<label id="label_none" for="none" class="label_restaurant">Aucun</label>';
+              echo '<div id="bouton_none" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_none\');" class="switch_restaurant">';
+                echo '<input id="none" type="radio" name="restaurant" value="N" />';
+                echo '<label for="none" class="label_switch">Aucun</label>';
+              echo '</div>';
             }
 
             if ($_SESSION['save']['restaurant_saisi'] == "B")
             {
-              echo '<input id="before" type="radio" name="restaurant" value="B" onchange="changeCheckedColor(\'label_before\');" class="bouton_restaurant" checked />';
-              echo '<label id="label_before" for="before" class="label_restaurant label_checked">Avant</label>';
+              echo '<div id="bouton_before" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_before\');" class="switch_restaurant bouton_checked">';
+                echo '<input id="before" type="radio" name="restaurant" value="B" checked />';
+                echo '<label for="before" class="label_switch">Avant</label>';
+              echo '</div>';
             }
             else
             {
-              echo '<input id="before" type="radio" name="restaurant" value="B" onchange="changeCheckedColor(\'label_before\');" class="bouton_restaurant" />';
-              echo '<label id="label_before" for="before" class="label_restaurant">Avant</label>';
+              echo '<div id="bouton_before" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_before\');" class="switch_restaurant">';
+                echo '<input id="before" type="radio" name="restaurant" value="B" />';
+                echo '<label for="before" class="label_switch">Avant</label>';
+              echo '</div>';
             }
 
             if ($_SESSION['save']['restaurant_saisi'] == "A")
             {
-              echo '<input id="after" type="radio" name="restaurant" value="A" onchange="changeCheckedColor(\'label_after\');" class="bouton_restaurant" checked />';
-              echo '<label id="label_after" for="after" class="label_restaurant label_checked">Après</label>';
+              echo '<div id="bouton_after" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_after\');" class="switch_restaurant bouton_checked">';
+                echo '<input id="after" type="radio" name="restaurant" value="A" checked />';
+                echo '<label for="after" class="label_switch">Après</label>';
+              echo '</div>';
             }
             else
             {
-              echo '<input id="after" type="radio" name="restaurant" value="A" onchange="changeCheckedColor(\'label_after\');" class="bouton_restaurant" />';
-              echo '<label id="label_after" for="after" class="label_restaurant">Après</label>';
+              echo '<div id="bouton_after" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_after\');" class="switch_restaurant">';
+                echo '<input id="after" type="radio" name="restaurant" value="A" />';
+                echo '<label for="after" class="label_switch">Après</label>';
+              echo '</div>';
             }
           echo '</div>';
 

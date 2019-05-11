@@ -73,32 +73,18 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeOut(0);
 }
 
+
 // Change la couleur des radio boutons (saisie film)
-function changeCheckedColor(id)
+function switchCheckedColor(zone, input)
 {
-  switch (id)
+  $('.' + zone).each(function()
   {
-    case "label_none":
-      $('#label_none').addClass('label_checked');
-      $('#label_before').removeClass('label_checked');
-      $('#label_after').removeClass('label_checked');
-      break;
+    $(this).removeClass('bouton_checked');
+    $(this).children('input').prop('checked', false);
+  })
 
-    case "label_before":
-      $('#label_none').removeClass('label_checked');
-      $('#label_before').addClass('label_checked');
-      $('#label_after').removeClass('label_checked');
-      break;
-
-    case "label_after":
-      $('#label_none').removeClass('label_checked');
-      $('#label_before').removeClass('label_checked');
-      $('#label_after').addClass('label_checked');
-      break;
-
-    default:
-      break;
-  }
+  $('#' + input).addClass('bouton_checked');
+  $('#' + input).children('input').prop('checked', true);
 }
 
 // Affiche ou masque des films
@@ -304,30 +290,15 @@ function updateFilm(zone)
   switch (detailsFilm['restaurant'])
   {
     case "N":
-      $("#none").prop("checked", true);
-      $("#before").prop("checked", false);
-      $("#after").prop("checked", false);
-      $('#label_none').addClass('label_checked');
-      $('#label_before').removeClass('label_checked');
-      $('#label_after').removeClass('label_checked');
+      switchCheckedColor('switch_restaurant', 'bouton_none');
       break;
 
     case "B":
-      $("#none").prop("checked", false);
-      $("#before").prop("checked", true);
-      $("#after").prop("checked", false);
-      $('#label_none').removeClass('label_checked');
-      $('#label_before').addClass('label_checked');
-      $('#label_after').removeClass('label_checked');
+      switchCheckedColor('switch_restaurant', 'bouton_before');
       break;
 
     case "A":
-      $("#none").prop("checked", false);
-      $("#before").prop("checked", false);
-      $("#after").prop("checked", true);
-      $('#label_none').removeClass('label_checked');
-      $('#label_before').removeClass('label_checked');
-      $('#label_after').addClass('label_checked');
+      switchCheckedColor('switch_restaurant', 'bouton_after');
       break;
 
     default:
