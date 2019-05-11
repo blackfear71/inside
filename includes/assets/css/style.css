@@ -943,11 +943,11 @@ aside
 	background-color: white;
 }
 
-.close_alerte
+.bouton_alerte
 {
 	background-color: #ff1937;
 	float: right;
-	margin-right: 20px;
+	margin-right: 10px;
 	text-decoration: none;
 	height: 30px;
 	line-height: 30px;
@@ -960,7 +960,7 @@ aside
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.close_alerte:hover
+.bouton_alerte:hover
 {
 	background-color: #c81932;
 }

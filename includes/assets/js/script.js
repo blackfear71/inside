@@ -245,8 +245,8 @@ function confirmAction(form, message)
     html += '</div>';
 
     html += '<div class="boutons_alerte">';
-      html += '<a onclick="executeAction(\'' + form + '\', \'cancel\');" class="close_alerte">Annuler</a>';
-      html += '<a onclick="executeAction(\'' + form + '\', \'validate\');" class="close_alerte">Oui</a>';
+      html += '<a onclick="executeAction(\'' + form + '\', \'cancel\');" class="bouton_alerte">Annuler</a>';
+      html += '<a onclick="executeAction(\'' + form + '\', \'validate\');" class="bouton_alerte">Oui</a>';
     html += '</div>';
   html += '</div>';
 
