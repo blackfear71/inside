@@ -476,38 +476,48 @@
 
 .zone_autorisations
 {
-	padding: 20px;
+	padding: 10px;
 }
 
-.zone_check_autorisation
+.switch_autorisation
 {
-	background-color: white;
 	display: inline-block;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	border-radius: 5px;
+	margin: 10px 5px 0 5px;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	padding-left: 5px;
 	cursor: pointer;
-	box-shadow: 0 0 3px #b3b3b3;
+	background-color: white;
 }
 
-.zone_check_autorisation:hover
+.switch_autorisation input
 {
-	background-color: #ff1937;
+	cursor: pointer;
+}
+
+.switch_autorisation:hover
+{
+	background-color: #262626;
 	color: white;
 }
 
-.label_autorisation
+.bouton_checked
 {
-	margin-left: 10px;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
+	background-color: #262626;
+	color: white;
+}
+
+.label_switch
+{
+	display: inline-block;
+	margin-left: -25px;
+	padding-left: 30px;
+	padding-right: 10px;
 	cursor: pointer;
-	padding: 10px 10px 10px 40px;
-	margin-left: -32px;
 }
 
 .saisie_autorisations

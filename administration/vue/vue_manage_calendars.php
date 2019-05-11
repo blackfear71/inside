@@ -5,7 +5,7 @@
     <?php
       $title_head  = "Calendriers";
       $style_head  = "styleAdmin.css";
-      $script_head = "";
+      $script_head = "scriptAdmin.js";
 
       include('../includes/common/head.php');
     ?>
@@ -35,18 +35,20 @@
             echo '<div class="zone_autorisations">';
               foreach ($listePreferences as $preference)
               {
-                echo '<div class="zone_check_autorisation">';
-                  if ($preference['manage_calendars'] == "Y")
-                  {
-                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']" checked>';
-                    echo '<label for="autorisation' . $preference['id'] . '" class="label_autorisation">' . $preference['pseudo'] . '</label>';
-                  }
-                  else
-                  {
-                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']">';
-                    echo '<label for="autorisation' . $preference['id'] . '" class="label_autorisation">' . $preference['pseudo'] . '</label>';
-                  }
-                echo '</div>';
+                if ($preference['manage_calendars'] == "Y")
+                {
+                  echo '<div id="bouton_' . $preference['id'] . '" onclick="changeCheckedColor(\'bouton_' . $preference['id'] . '\');" class="switch_autorisation bouton_checked">';
+                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']" checked />';
+                    echo '<label for="autorisation' . $preference['id'] . '" class="label_switch">' . $preference['pseudo'] . '</label>';
+                  echo '</div>';
+                }
+                else
+                {
+                  echo '<div id="bouton_' . $preference['id'] . '" onclick="changeCheckedColor(\'bouton_' . $preference['id'] . '\');" class="switch_autorisation ">';
+                    echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']" />';
+                    echo '<label for="autorisation' . $preference['id'] . '" class="label_switch">' . $preference['pseudo'] . '</label>';
+                  echo '</div>';
+                }
               }
             echo '</div>';
 

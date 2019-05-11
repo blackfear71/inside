@@ -167,6 +167,15 @@ var loadFile = function(event, id)
   output.src = URL.createObjectURL(event.target.files[0]);
 };
 
+// Change la couleur des checkbox (autorisations)
+function changeCheckedColor(input)
+{
+  if ($('#' + input).children('input').prop('checked'))
+    $('#' + input).addClass('bouton_checked');
+  else
+    $('#' + input).removeClass('bouton_checked');
+}
+
 // Génère un calendrier
 $(function()
 {
