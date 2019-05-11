@@ -261,7 +261,7 @@ a:link, a:visited, a:hover, a:active
 header
 {
 	position: relative;
-	z-index: 3;
+	z-index: 2;
 }
 
 .zone_bandeau
@@ -888,10 +888,8 @@ aside
 {
 	animation: 0.5s ease 0s normal forwards 1 affichageAlerte;
 	width: 500px;
-	margin-left: auto;
-	margin-right: auto;
 	position: fixed;
-	z-index: 2;
+	z-index: 3;
 	left: 50%;
 	margin-left: -250px;
 	box-shadow: 0 5px 8px #262626;
@@ -939,7 +937,9 @@ aside
 .boutons_alerte
 {
 	width: 500px;
-	height: 60px;
+	height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: white;
 }
 
@@ -948,16 +948,16 @@ aside
 	background-color: #ff1937;
 	float: right;
 	margin-right: 20px;
-	height: 35px;
-	line-height: 35px;
-	margin-top: 12.5px;
 	text-decoration: none;
-	padding-left: 30px;
-	padding-right: 30px;
-	border-radius: 5px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .close_alerte:hover

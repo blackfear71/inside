@@ -42,6 +42,7 @@
       echo '<div class="inside_alerte">';
         echo 'Inside';
       echo '</div>';
+      
       echo '<div class="texte_alerte">';
         foreach ($messages as $message)
         {
@@ -62,6 +63,7 @@
           echo $message['texte'];
         }
       echo '</div>';
+
       echo '<div class="boutons_alerte">';
         echo '<a onclick="masquerAlerte(\'alerte\')" class="close_alerte">Fermer</a>';
       echo '</div>';

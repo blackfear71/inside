@@ -123,7 +123,7 @@
 	function formatOnclick($text)
 	{
 		$in   = array("'", '"', "é", "è", "ê", "ë", "à", "ç", "ô", "û");
-		$out  = array("&rsquo;", "&quot;", "&eacute;", "&egrave;", "&ecirc;", "&euml;", "&agrave;", "&ocirc;", "&ucirc;");
+		$out  = array("&rsquo;", "&quot;", "&eacute;", "&egrave;", "&ecirc;", "&euml;", "&agrave;", "&ccedil;", "&ocirc;", "&ucirc;");
 		$text = str_replace($in, $out, $text);
 
 		return $text;

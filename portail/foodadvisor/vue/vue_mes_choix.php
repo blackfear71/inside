@@ -43,8 +43,8 @@
               echo '<a onclick="afficherMasquerNoDelay(\'modifier_choix_' . $monChoix->getId() . '\'); afficherMasquerNoDelay(\'visualiser_choix_' . $monChoix->getId() . '\'); initMasonry();" title="Modifier le choix" class="icone_modify_choix"></a>';
 
               // Suppression
-              echo '<form method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce choix ?\')) return false;">';
-                echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix" />';
+              echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer">';
+                echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" onclick="if(!confirmAction(\'delete_choice_' . $monChoix->getId() . '\', \'Supprimer ce choix ?\')) return false;" class="icon_delete_choix" />';
               echo '</form>';
             }
 

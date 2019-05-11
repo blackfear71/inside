@@ -91,8 +91,8 @@
                   echo '</a>';
 
                   // Supprimer
-                  echo '<form method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" onclick="if(!confirm(\'Demander la suppression de ce film ?\')) return false;" class="link_details">';
-                    echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_details_delete" />';
+                  echo '<form id="delete_film" method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" class="link_details">';
+                    echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" onclick="if(!confirmAction(\'delete_film\', \'Demander la suppression de ce film ?\')) return false;" class="icon_details_delete" />';
                   echo '</form>';
 
                   // Mailing
@@ -355,7 +355,7 @@
                         /* Ligne visualisation normale (sans modification) */
                         /***************************************************/
                         echo '<div id="modifier_comment_2_' . $comment->getId() . '">';
-                          echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire">';
+                          echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire">';
                             echo '<div class="actions_commentaires">';
                               // Modification commentaire
                               echo '<span class="link_actions_commentaires">';
@@ -364,7 +364,7 @@
 
                               // Suppression commentaire
                               echo '<span class="link_actions_commentaires">';
-                                echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" onclick="if(!confirm(\'Supprimer ce commentaire ?\')) return false;" class="icone_supprimer_comment" />';
+                                echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" onclick="if(!confirmAction(\'delete_comment_' . $comment->getId() . '\', \'Supprimer ce commentaire ?\')) return false;" class="icone_supprimer_comment" />';
                               echo '</span>';
                             echo '</div>';
                           echo '</form>';

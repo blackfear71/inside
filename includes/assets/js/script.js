@@ -223,6 +223,41 @@ function scrollToId(id, offset, shadow = false)
         $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
       }, 5000);
     }
-
   }
+}
+
+// Ouvre une fenêtre de confirmation
+function confirmAction(form, message)
+{
+  if ($('#confirmBox').length)
+    $('#confirmBox').remove();
+
+  var html = "";
+
+  html += '<div class="message_alerte" id="confirmBox">';
+    html += '<div class="inside_alerte">';
+      html += 'Inside';
+    html += '</div>';
+
+    html += '<div class="texte_alerte">';
+      html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
+      html += message;
+    html += '</div>';
+
+    html += '<div class="boutons_alerte">';
+      html += '<a onclick="executeAction(\'' + form + '\', \'cancel\');" class="close_alerte">Annuler</a>';
+      html += '<a onclick="executeAction(\'' + form + '\', \'validate\');" class="close_alerte">Oui</a>';
+    html += '</div>';
+  html += '</div>';
+
+  $('body').append(html);
+}
+
+// Ferme la fenêtre ou execute le formulaire
+function executeAction(form, action)
+{
+  if (action == 'cancel')
+    $('#confirmBox').remove();
+  else
+    $('#' + form).submit();
 }

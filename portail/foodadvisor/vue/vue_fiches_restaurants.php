@@ -104,8 +104,8 @@
                 echo '</a>';
 
                 // Suppression
-                echo '<form method="post" action="restaurants.php?delete_id=' . $restaurant->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce restaurant de la liste ?\')) return false;">';
-                  echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer le restaurant" class="icon_delete_restaurant" />';
+                echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?delete_id=' . $restaurant->getId() . '&action=doSupprimer">';
+                  echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer le restaurant" onclick="if(!confirmAction(\'delete_restaurant_' . $restaurant->getId() . '\', \'Supprimer ce restaurant de la liste ?\')) return false;" class="icon_delete_restaurant" />';
                 echo '</form>';
               echo '</div>';
 

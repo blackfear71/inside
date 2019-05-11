@@ -22,14 +22,14 @@
               // Suppression
               if ($collector->getType_collector() == "T")
               {
-                echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette phrase culte ?\')) return false;">';
-                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector" />';
+                echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '">';
+                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" onclick="if(!confirmAction(\'delete_collector_' . $collector->getId() . '\', \'Supprimer cette phrase culte ?\')) return false;" class="icon_delete_collector" />';
                 echo '</form>';
               }
               elseif ($collector->getType_collector() == "I")
               {
-                echo '<form method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '" onclick="if(!confirm(\'Supprimer cette image ?\')) return false;">';
-                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector" />';
+                echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '">';
+                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" onclick="if(!confirmAction(\'delete_image_' . $collector->getId() . '\', \'Supprimer cette image ?\')) return false;" class="icon_delete_collector" />';
                 echo '</form>';
               }
 

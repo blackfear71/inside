@@ -93,7 +93,7 @@
                 /* Ligne visualisation normale (sans modification) */
                 /***************************************************/
                 echo '<tr id="modifier_alerte_2_' . $alerte->getId() . '">';
-                  echo '<form method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer">';
+                  echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer">';
                     // Type
                     echo '<td class="td_type_alerts" id=' . $alerte->getId() . '>';
                       switch ($alerte->getType())
@@ -129,7 +129,7 @@
 
                       // Suppression ligne
                       echo '<span class="link_action_alerte">';
-                        echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" onclick="if(!confirm(\'Supprimer l&rsquo;alerte &quot;' . $alerte->getAlert() . '&quot; (' . $alerte->getCategory() . ') ?\')) return false;" class="icone_supprimer_alerte" />';
+                        echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" onclick="if(!confirmAction(\'delete_alert_' . $alerte->getId() . '\', \'Supprimer l&rsquo;alerte &quot;' . $alerte->getAlert() . '&quot; (' . $alerte->getCategory() . ') ?\')) return false;" class="icone_supprimer_alerte" />';
                       echo '</span>';
                     echo '</td>';
                   echo '</form>';

@@ -48,8 +48,8 @@
   							echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="button_bug" />';
   					echo '</form>';
 
-            echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doSupprimer" onclick="if(!confirm(\'Supprimer ce rapport ?\')) return false;">';
-              echo '<input type="submit" name="delete_bug" value="Supprimer" class="button_bug" />';
+            echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doSupprimer">';
+              echo '<input type="submit" name="delete_bug" value="Supprimer" onclick="if(!confirmAction(\'delete_report_' . $bug->getId() . '\', \'Supprimer ce rapport ?\')) return false;" class="button_bug" />';
             echo '</form>';
   				echo '</td>';
   			echo '</tr>';
