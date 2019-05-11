@@ -152,7 +152,7 @@
           echo '</div>';
 
           // Choix restaurant
-          echo '<div class="zone_saisie_ligne margins">';
+          echo '<div class="zone_saisie_ligne">';
             if ($_SESSION['save']['restaurant_saisi'] == "N")
             {
               echo '<div id="bouton_none" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_none\');" class="switch_restaurant bouton_checked">';

@@ -206,16 +206,10 @@
 	border-radius: 2px;
 }
 
-.margins
-{
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
 .switch_restaurant
 {
 	display: inline-block;
-	margin: 10px 5px 0 5px;
+	margin: 0 5px 0 5px;
 	height: 35px;
 	line-height: 35px;
 	border-radius: 2px;
