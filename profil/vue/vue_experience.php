@@ -9,7 +9,7 @@
     if ($expUser['niveau'] != $lvl)
     {
       echo '<div class="zone_avatars_niveaux">';
-        echo '<div class="titre_classement_niveaux">Niveau ' . $expUser['niveau'] . '</div>';
+        echo '<div class="titre_classement_niveaux">Niveau <span class="number_exp">' . $expUser['niveau'] . '</span></div>';
 
       $lvl = $expUser['niveau'];
     }

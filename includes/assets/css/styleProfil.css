@@ -603,7 +603,7 @@
 {
 	display: block;
 	vertical-align: top;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	width: 195px;
 	background-color: #e3e3e3;
 	border-radius: 2px;
@@ -712,6 +712,18 @@
 	text-align: center;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.number_exp
+{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 50%;
+	background: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
 }
 
 .zone_user_niveaux

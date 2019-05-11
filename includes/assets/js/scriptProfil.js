@@ -35,13 +35,30 @@ $(window).on('load', function()
   $('.zone_succes_profil').css('display', 'block');
 
   // Masonry
+  if ($('.zone_profil_contributions').length)
+  {
+    $('.zone_profil_contributions').masonry('destroy');
+
+    $('.zone_profil_contributions').masonry({
+      // Options
+      itemSelector: '.zone_contributions',
+      columnWidth: 360,
+      fitWidth: true,
+      gutter: 40,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_profil_contributions').addClass('masonry');
+  }
+
   if ($('.succes_liste').length)
   {
     $('.zone_niveau_succes').masonry('destroy');
 
     $('.zone_niveau_succes').masonry({
       // Options
-      itemSelector: '.succes_liste, .classement_liste',
+      itemSelector: '.succes_liste',
       columnWidth: 160,
       fitWidth: true,
       gutter: 30,
@@ -61,29 +78,12 @@ $(window).on('load', function()
       itemSelector: '.classement_liste',
       columnWidth: 195,
       fitWidth: true,
-      gutter: 10,
+      gutter: 20,
       horizontalOrder: true
     });
 
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_niveau_succes').addClass('masonry');
-  }
-
-  if ($('.zone_profil_contributions').length)
-  {
-    $('.zone_profil_contributions').masonry('destroy');
-
-    $('.zone_profil_contributions').masonry({
-      // Options
-      itemSelector: '.zone_contributions',
-      columnWidth: 360,
-      fitWidth: true,
-      gutter: 40,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_profil_contributions').addClass('masonry');
   }
 });
 
