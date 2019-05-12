@@ -71,7 +71,7 @@
   switch ($_GET['action'])
   {
 		case "doChangerStatut":
-      if ($resolved == "Y")
+      if ($resolved == "Y" OR $resolved == "R")
         header('location: reports.php?view=resolved&action=goConsulter&anchor=' . $_GET['id']);
       else
         header('location: reports.php?view=unresolved&action=goConsulter&anchor=' . $_GET['id']);

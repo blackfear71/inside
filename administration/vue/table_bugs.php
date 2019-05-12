@@ -10,10 +10,23 @@
         $type_bug = "Evolution";;
 
       // Libellé état
-      if ($bug->getResolved() == "Y")
-        $etat_bug = '<span class="green">Résolu</span>';
-      else
-        $etat_bug = '<span class="red">En cours</span>';
+      switch ($bug->getResolved())
+      {
+        case 'Y':
+          $etat_bug = '<span class="green">Résolu</span>';
+          break;
+
+        case 'N':
+          $etat_bug = '<span class="red">En cours</span>';
+          break;
+
+        case 'R':
+          $etat_bug = '<span class="red">Rejeté</span>';
+          break;
+
+        default:
+          break;
+      }
 
       // Formatage date
       $date_bug = formatDateForDisplay($bug->getDate());
@@ -41,13 +54,18 @@
 
   				// Boutons de prise en charge
   				echo '<td rowspan="3" class="td_bugs_actions">';
+            // Résoudre, rejeter ou remettre en cours
   					echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doChangerStatut">';
   						if ($bug->getResolved() == "N")
+              {
   							echo '<input type="submit" name="resolve_bug" value="Résoudre" class="button_bug" />';
+                echo '<input type="submit" name="reject_bug" value="Rejeter" class="button_bug" />';
+              }
   						else
   							echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="button_bug" />';
   					echo '</form>';
 
+            // Supprimer
             echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doSupprimer">';
               echo '<input type="submit" name="delete_bug" value="Supprimer" onclick="if(!confirmAction(\'delete_report_' . $bug->getId() . '\', \'Supprimer ce rapport ?\')) return false;" class="button_bug" />';
             echo '</form>';

@@ -42,6 +42,11 @@
           $etat_bug = '<span class="red">En cours</span>';
           break;
 
+        // Rejetés
+        case "R":
+          $etat_bug = '<span class="red">Rejeté</span>';
+          break;
+
         default:
           break;
       }

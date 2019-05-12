@@ -13,7 +13,7 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "resolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" OR resolved = "R" ORDER BY id DESC');
     else
       $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "N" ORDER BY id DESC');
 

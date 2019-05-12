@@ -371,7 +371,7 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "resolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" OR resolved = "R" ORDER BY id DESC');
     elseif ($view == "unresolved")
       $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "N" ORDER BY id DESC');
     else
@@ -416,13 +416,23 @@
   }
 
   // METIER : Mise à jour du statut d'un bug
-  // RETOUR : Aucun
+  // RETOUR : Top redirection
   function updateBug($id, $post)
   {
     $resolved = "N";
 
     global $bdd;
 
+    // Lecture des données
+    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
+    $data1 = $req1->fetch();
+
+    $author = $data1['author'];
+    $status = $data1['resolved'];
+
+    $req1->closeCursor();
+
+    // Mise à jour du statut
     switch (key($post))
     {
       case 'resolve_bug':
@@ -433,27 +443,28 @@
         $resolved = "N";
         break;
 
+      case 'reject_bug':
+        $resolved = "R";
+        break;
+
       default:
         break;
     }
 
-    $req = $bdd->prepare('UPDATE bugs SET resolved = :resolved WHERE id = ' . $id);
-    $req->execute(array(
+    $req2 = $bdd->prepare('UPDATE bugs SET resolved = :resolved WHERE id = ' . $id);
+    $req2->execute(array(
       'resolved' => $resolved
     ));
-    $req->closeCursor();
-
-    // Lecture des données
-    $req2 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
-    $data2 = $req2->fetch();
-    $author = $data2['author'];
     $req2->closeCursor();
 
-    // Génération succès
-    if ($resolved == "Y")
-      insertOrUpdateSuccesValue('compiler', $author, 1);
-    else
-      insertOrUpdateSuccesValue('compiler', $author, -1);
+    // Génération succès (sauf si rejeté ou remis en cours après rejet)
+    if ($resolved != "R" AND $status != "R")
+    {
+      if ($resolved == "Y")
+        insertOrUpdateSuccesValue('compiler', $author, 1);
+      else
+        insertOrUpdateSuccesValue('compiler', $author, -1);
+    }
 
     return $resolved;
   }
@@ -467,8 +478,10 @@
     // Lecture des données
     $req = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
     $data = $req->fetch();
+
     $author   = $data['author'];
     $resolved = $data['resolved'];
+
     $req->closeCursor();
 
     // Génération succès
