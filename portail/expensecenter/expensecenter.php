@@ -34,7 +34,6 @@
         $listeUsers        = getUsers();
         $onglets           = getOnglets();
         $listeDepenses     = getExpenses($_GET['year']);
-        $listeDepensesJson = json_encode(convertForJson($listeDepenses));
       }
       break;
 
@@ -105,6 +104,9 @@
         }
 
         unset($depense);
+
+        // Conversion JSON
+        $listeDepensesJson = json_encode(convertForJson($listeDepenses));
       }
       break;
 

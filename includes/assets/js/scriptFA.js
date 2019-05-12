@@ -56,7 +56,7 @@ $(window).on('load', function()
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {
-  // On lance Masonry
+  // Masonry (Propositions)
   $('.zone_propositions').masonry({
     // Options
     itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
@@ -66,6 +66,7 @@ function initMasonry()
     horizontalOrder: true
   });
 
+  // Masonry (Restaurants)
   $('.zone_fiches_restaurants').masonry({
     // Options
     itemSelector: '.fiche_restaurant',
@@ -143,7 +144,7 @@ function afficherListboxLieux(id)
   html = '<div id="' + id_zone + '" class="zone_listbox_restaurant">';
     html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_choix" onchange="afficherListboxRestaurants(\'' + id_select + '\', \'' + id_zone + '\', \'' + id_annuler + '\')" required>';
       html += '<option value="" hidden>Choisissez...</option>';
-      $.each(listLieux, function(key, value)
+      $.each(listeLieux, function(key, value)
       {
         html += '<option value="' + value + '">' + value + '</option>';
       });

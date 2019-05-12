@@ -66,7 +66,7 @@ function afficherMasquerNoDelay(id)
 // Lance Masonry quand on fait apparaitre la zone
 function initMasonry()
 {
-  // On lance Masonry
+  // Masonry (Saisie)
   $('.zone_saisie_utilisateurs').masonry({
     // Options
     itemSelector: '.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts',

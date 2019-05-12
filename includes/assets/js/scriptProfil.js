@@ -34,7 +34,7 @@ $(window).on('load', function()
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_profil').css('display', 'block');
 
-  // Masonry
+  // Masonry (Contributions)
   if ($('.zone_profil_contributions').length)
   {
     $('.zone_profil_contributions').masonry('destroy');
@@ -52,6 +52,7 @@ $(window).on('load', function()
     $('.zone_profil_contributions').addClass('masonry');
   }
 
+  // Masonry (Succès)
   if ($('.succes_liste').length)
   {
     $('.zone_niveau_succes').masonry('destroy');
@@ -69,6 +70,7 @@ $(window).on('load', function()
     $('.zone_niveau_succes').addClass('masonry');
   }
 
+  // Masonry (Classement)
   if ($('.classement_liste').length)
   {
     $('.zone_niveau_succes').masonry('destroy');

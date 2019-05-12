@@ -1,7 +1,7 @@
 // Au chargement du document complet
 $(window).on('load', function()
 {
-  // Masonry
+  // Masonry (Phrases cultes & images)
   if ($('.zone_collectors').length)
   {
     $('.zone_collectors').masonry('destroy');

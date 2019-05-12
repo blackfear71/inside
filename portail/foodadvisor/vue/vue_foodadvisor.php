@@ -82,8 +82,8 @@
     <!-- Données JSON -->
     <script>
       // Récupération liste lieux et restaurants pour le script
-      var listLieux        = <?php echo $listeLieuxJson; ?>;
-      var listeRestaurants = <?php echo $listeRestaurantsJson; ?>;
+      var listeLieux          = <?php echo $listeLieuxJson; ?>;
+      var listeRestaurants    = <?php echo $listeRestaurantsJson; ?>;
     </script>
   </body>
 </html>

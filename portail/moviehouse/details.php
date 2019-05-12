@@ -22,13 +22,13 @@
       {
         // Lecture liste des données par le modèle
         $filmExistant = controlFilm($_GET['id_film']);
+
         if ($filmExistant == true)
         {
           $listeNavigation   = getNavigation($_GET['id_film']);
           $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
           $listeEtoiles      = getDetailsStars($_GET['id_film']);
           $listeCommentaires = getComments($_GET['id_film']);
-          $detailsFilmJson   = json_encode(convertForJson($detailsFilm));
         }
       }
       break;
@@ -138,6 +138,9 @@
         }
 
         unset($comment);
+
+        // Conversion JSON
+        $detailsFilmJson = json_encode(convertForJson($detailsFilm));
       }
       break;
 

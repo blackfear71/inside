@@ -5,7 +5,7 @@ $(window).on('load', function()
   $('.zone_home').css('display', 'block');
   $('.zone_films').css('display', 'block');
 
-  // Masonry
+  // Masonry (Accueil)
   if ($('.zone_films_accueil').length)
   {
     $('.zone_films_accueil').masonry('destroy');
@@ -23,6 +23,7 @@ $(window).on('load', function()
     $('.zone_films_accueil').addClass('masonry');
   }
 
+  // Masonry (Fiches films)
   if ($('.zone_fiches_films').length)
   {
     $('.zone_fiches_films').masonry('destroy');

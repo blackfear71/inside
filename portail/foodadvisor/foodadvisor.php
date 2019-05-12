@@ -18,10 +18,6 @@
       $listeLieux       = getLieux();
       $listeRestaurants = getRestaurants($listeLieux);
 
-      // Conversion JSON
-      $listeLieuxJson       = json_encode($listeLieux);
-      $listeRestaurantsJson = json_encode(convertForJson($listeRestaurants));
-
       // Propositions, choix et semaine
       $propositions     = getPropositions();
       $solos            = getSolos();
@@ -211,6 +207,10 @@
 
         unset($userNoChoice);
       }
+
+      // Conversion JSON
+      $listeLieuxJson       = json_encode($listeLieux);
+      $listeRestaurantsJson = json_encode(convertForJson($listeRestaurants));
       break;
 
     case 'doDeterminer':

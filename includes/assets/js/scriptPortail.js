@@ -4,7 +4,7 @@ $(window).on('load', function()
   // Adaptation mobile
   adaptPortail();
 
-  // Masonry
+  // Masonry (Portail)
   if ($('.menu_portail').length)
   {
     $('.menu_portail').masonry('destroy');
