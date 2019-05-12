@@ -101,15 +101,15 @@
                         echo '</td>';
 
                         echo '<td class="voir_log">';
-                          echo '<a onclick="afficherMasquer(\'logI' . $i . '\'); rotateIcon(\'rotateI' . $i . '\');">';
-                            echo '<img src="../includes/icons/admin/see_log.png" alt="see_log" class="see_log" style="transform: rotate(0deg);" id="rotateI' . $i . '" />';
+                          echo '<a class="detailsLogs">';
+                            echo '<img src="../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="daily_arrow_' . $i . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
                     echo '</table>';
 
                     // Log
-                    echo '<div class="log" id="logI' . $i . '" style="display: none;">';
+                    echo '<div class="log" id="daily_log_' . $i . '" style="display: none;">';
                       foreach ($lines as $line)
                       {
                         echo nl2br($line);
@@ -160,15 +160,15 @@
                         echo '</td>';
 
                         echo '<td class="voir_log">';
-                          echo '<a onclick="afficherMasquer(\'logJ' . $j . '\'); rotateIcon(\'rotateJ' . $j . '\');">';
-                            echo '<img src="../includes/icons/admin/see_log.png" alt="see_log" class="see_log" style="transform: rotate(0deg);" id="rotateJ' . $j . '" />';
+                          echo '<a class="detailsLogs">';
+                            echo '<img src="../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="weekly_arrow_' . $j . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
                     echo '</table>';
 
                     // Log
-                    echo '<div class="log" id="logJ' . $j . '" style="display: none;">';
+                    echo '<div class="log" id="weekly_log_' . $j . '" style="display: none;">';
                       foreach ($lines as $line)
                       {
                         echo nl2br($line);

@@ -1,6 +1,10 @@
+/***************/
+/*** Actions ***/
+/***************/
 // Au chargement du document
 $(document).ready(function()
 {
+  /*** Actions au chargement ***/
   $('#progress_circle_header').circlize(
   {
 		radius: 32,
@@ -16,8 +20,22 @@ $(document).ready(function()
 		stroke: 3,
 		duration: 1000
 	});
+
+  /*** Actions au clic ***/
+  // Messages de confirmation
+  $('.event_confirm').click(function()
+  {
+    var id_form = $(this).closest('form').attr('id');
+    var message = $(this).closest('form').find('.event_message').val();
+
+    if(!confirmAction(id_form, message))
+      return false;
+  });
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Masque la fenêtre des alertes
 function masquerAlerte(id)
 {

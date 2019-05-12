@@ -93,46 +93,45 @@
                 /* Ligne visualisation normale (sans modification) */
                 /***************************************************/
                 echo '<tr id="modifier_alerte_2_' . $alerte->getId() . '">';
-                  echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer">';
-                    // Type
-                    echo '<td class="td_type_alerts" id=' . $alerte->getId() . '>';
-                      switch ($alerte->getType())
-                      {
-                        case 'info':
-                          echo '<img src="../includes/icons/common/info.png" alt="info" title="Info" class="img_alert" />';
-                          break;
+                  // Type
+                  echo '<td class="td_type_alerts" id=' . $alerte->getId() . '>';
+                    switch ($alerte->getType())
+                    {
+                      case 'info':
+                        echo '<img src="../includes/icons/common/info.png" alt="info" title="Info" class="img_alert" />';
+                        break;
 
-                        case 'erreur':
-                          echo '<img src="../includes/icons/common/bug.png" alt="erreur" title="Erreur" class="img_alert" />';
-                          break;
+                      case 'erreur':
+                        echo '<img src="../includes/icons/common/bug.png" alt="erreur" title="Erreur" class="img_alert" />';
+                        break;
 
-                        default:
-                          break;
-                      }
-                    echo '</td>';
+                      default:
+                        break;
+                    }
+                  echo '</td>';
 
-                    // Catégorie
-                    echo '<td class="td_alerts">' . $alerte->getCategory() . '</td>';
+                  // Catégorie
+                  echo '<td class="td_alerts">' . $alerte->getCategory() . '</td>';
 
-                    // Référence
-                    echo '<td class="td_reference_alerts">' . $alerte->getAlert() . '</td>';
+                  // Référence
+                  echo '<td class="td_reference_alerts">' . $alerte->getAlert() . '</td>';
 
-                    // Message
-                    echo '<td class="td_alerts">' . $alerte->getMessage() . '</td>';
+                  // Message
+                  echo '<td class="td_alerts">' . $alerte->getMessage() . '</td>';
 
-                    // Boutons d'action
-                    echo '<td class="actions_alerte">';
-                      // Modification ligne
-                      echo '<span class="link_action_alerte">';
-                        echo '<a onclick="afficherMasquerRow(\'modifier_alerte_' . $alerte->getId() . '\'); afficherMasquerRow(\'modifier_alerte_2_' . $alerte->getId() . '\');" title="Modifier la ligne" class="icone_modifier_alerte"></a>';
-                      echo '</span>';
+                  // Boutons d'action
+                  echo '<td class="actions_alerte">';
+                    // Modification ligne
+                    echo '<span class="link_action_alerte">';
+                      echo '<a id="alerte_' . $alerte->getId() . '" title="Modifier la ligne" class="icone_modifier_alerte modifierAlerte"></a>';
+                    echo '</span>';
 
-                      // Suppression ligne
-                      echo '<span class="link_action_alerte">';
-                        echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" onclick="if(!confirmAction(\'delete_alert_' . $alerte->getId() . '\', \'Supprimer l&rsquo;alerte &quot;' . $alerte->getAlert() . '&quot; (' . $alerte->getCategory() . ') ?\')) return false;" class="icone_supprimer_alerte" />';
-                      echo '</span>';
-                    echo '</td>';
-                  echo '</form>';
+                    // Suppression ligne
+                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer" class="link_action_alerte">';
+                      echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_alerte event_confirm" />';
+                      echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="event_message" />';
+                    echo '</form>';
+                  echo '</td>';
                 echo '</tr>';
 
                 /**********************************/
@@ -181,7 +180,7 @@
 
                       // Annulation modification ligne
                       echo '<span class="link_action_alerte">';
-                        echo '<a onclick="afficherMasquerRow(\'modifier_alerte_' . $alerte->getId() . '\'); afficherMasquerRow(\'modifier_alerte_2_' . $alerte->getId() . '\');" title="Annuler la modification" class="icone_annuler_alerte"></a>';
+                        echo '<a id="annuler_' . $alerte->getId() . '" title="Annuler la modification" class="icone_annuler_alerte annulerAlerte"></a>';
                       echo '</span>';
                     echo '</td>';
                   echo '</form>';

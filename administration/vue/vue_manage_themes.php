@@ -125,11 +125,12 @@
                     echo '<div class="zone_theme_titre">';
                       // Bouton suppression
                       echo '<form id="delete_theme_' . $theme->getId() . '" method="post" action="manage_themes.php?delete_id=' . $theme->getId() . '&action=doSupprimer">';
-                        echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" onclick="if(!confirmAction(\'delete_theme_' . $theme->getId() . '\', \'Supprimer ce thème ?\')) return false;" class="icon_delete_theme" />';
+                        echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme event_confirm" />';
+                        echo '<input type="hidden" value="Supprimer ce thème ?" class="event_message" />';
                       echo '</form>';
 
                       // Bouton modification
-                      echo '<a onclick="afficherMasquer(\'modifier_theme_' . $theme->getId() . '\'); afficherMasquer(\'modifier_theme_2_' . $theme->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_theme"></a>';
+                      echo '<a id="theme_' . $theme->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
 
                       // Titre
                       echo '<div class="theme_titre">';
@@ -149,7 +150,7 @@
                     echo '<form method="post" action="manage_themes.php?update_id=' . $theme->getId() . '&action=doModifier">';
                       echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
                         // Annulation modification
-                        echo '<a onclick="afficherMasquer(\'modifier_theme_' . $theme->getId() . '\'); afficherMasquer(\'modifier_theme_2_' . $theme->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_theme"></a>';
+                        echo '<a id="annuler_' . $theme->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
 
                         // Validation modification
                         echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';

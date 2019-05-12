@@ -1,3 +1,77 @@
+/***************/
+/*** Actions ***/
+/***************/
+$(document).ready(function()
+{
+  /*** Actions au clic ***/
+  // Affiche les détails d'un log et applique une rotation à la flèche
+  $('.detailsLogs').click(function()
+  {
+    var time;
+    var num;
+    var id_image = $(this).children('img').attr('id');
+
+    if (id_image.search('daily') != -1)
+      time = 'daily';
+    else
+      time = 'weekly';
+
+    num = id_image.replace(time + '_arrow_', '');
+
+    afficherMasquer(time + '_log_' + num);
+    rotateIcon(time + '_arrow_' + num);
+  });
+
+  // Affiche la ligne de modification d'une alerte
+  $('.modifierAlerte').click(function()
+  {
+    var id_alerte = $(this).attr('id').replace('alerte_', '');
+
+    afficherMasquerRow('modifier_alerte_' + id_alerte);
+    afficherMasquerRow('modifier_alerte_2_' + id_alerte);
+  });
+
+  // Masque la ligne de modification d'une alerte
+  $('.annulerAlerte').click(function()
+  {
+    var id_alerte = $(this).attr('id').replace('annuler_', '');
+
+    afficherMasquerRow('modifier_alerte_' + id_alerte);
+    afficherMasquerRow('modifier_alerte_2_' + id_alerte);
+  });
+
+  // Affiche la zone de modification d'un thème
+  $('.modifierTheme').click(function()
+  {
+    var id_theme = $(this).attr('id').replace('theme_', '');
+
+    afficherMasquer('modifier_theme_' + id_theme);
+    afficherMasquer('modifier_theme_2_' + id_theme);
+    initMasonry();
+  });
+
+  // Masque la zone de modification d'un thème
+  $('.annulerTheme').click(function()
+  {
+    var id_theme = $(this).attr('id').replace('annuler_', '');
+
+    afficherMasquer('modifier_theme_' + id_theme);
+    afficherMasquer('modifier_theme_2_' + id_theme);
+    initMasonry();
+  });
+
+  // Change la couleur des boutons radio autorisations calendriers
+  $('.switch_autorisation').click(function()
+  {
+    var id_bouton = $(this).attr('id');
+
+    changeCheckedColor(id_bouton);
+  });
+});
+
+/***************/
+/*** Masonry ***/
+/***************/
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
@@ -119,6 +193,9 @@ $(window).on('load', function()
   scrollToId(id_theme, offset_theme, shadow_theme);
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {
@@ -154,9 +231,26 @@ function afficherMasquerRow(id)
 // Rotation icône affichage log
 function rotateIcon(id)
 {
+  // Calcul de l'angle
+  var matrix = $('#' + id).css('transform');
+
+  if (matrix !== 'none')
+  {
+    var values = matrix.split('(')[1].split(')')[0].split(',');
+    var a      = values[0];
+    var b      = values[1];
+    var angle  = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+
+    if (angle < 0)
+      angle = angle + 360;
+  }
+  else
+    var angle = 0;
+
+  // Application style
   $('#' + id).css('transition', 'all ease 0.4s');
 
-  if (document.getElementById(id).style.transform == "rotate(0deg)")
+  if (angle == 0)
     $('#' + id).css('transform', 'rotate(180deg)');
   else
     $('#' + id).css('transform', 'rotate(0deg)');
