@@ -36,7 +36,10 @@
 
       // Solde
       echo '<div class="zone_contribution large">';
-        echo '<div class="stat_contribution">' . formatBilanForDisplay($statistiques->getExpenses()) . '</div>';
+        if ($statistiques->getExpenses() > -0.01 AND $statistiques->getExpenses() < 0.01)
+          echo '<div class="stat_contribution">' . formatBilanForDisplay(abs($statistiques->getExpenses())) . '</div>';
+        else
+          echo '<div class="stat_contribution">' . formatBilanForDisplay($statistiques->getExpenses()) . '</div>';
         echo '<div class="texte_contribution">solde des dépenses</div>';
       echo '</div>';
     echo '</div>';
