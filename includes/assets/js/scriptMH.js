@@ -186,7 +186,7 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
       html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&id_film=' + id_film + '&action=doVoterFilm">';
         for (var i = 0; i <= 5; i++)
         {
-          html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '" alt="star' + i + '" class="icone_preference" />';
+          html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '.png" alt="star' + i + '" class="icone_preference" />';
 
           if (i == stars)
             html += '<input type="submit" name="preference_' + i + '" value="" class="input_preference rounded" />';
