@@ -44,7 +44,7 @@
 
                 // Anniversaire
                 if (!empty($user->getAnniversary()))
-                  echo '<div class="infos_identifiant"><img src="../includes/icons/admin/date_grey.png" alt="date_grey" class="logo_infos" />' . formatDateForDisplay($user->getAnniversary()) . '</div>';
+                  echo '<div class="infos_identifiant"><img src="../includes/icons/admin/anniversary_grey.png" alt="anniversary_grey" class="logo_infos" />' . formatDateForDisplay($user->getAnniversary()) . '</div>';
 
                 // Niveau
                 echo '<div class="infos_niveau"><img src="../includes/icons/admin/inside_red.png" alt="inside_red" class="logo_infos" />Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
