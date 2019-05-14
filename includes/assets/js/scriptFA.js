@@ -2,7 +2,7 @@
 /*** Actions ***/
 /***************/
 // Au chargement du document
-$(document).ready(function()
+$(function()
 {
   /*** Actions au clic ***/
   // Affiche la saisie lieu restaurant

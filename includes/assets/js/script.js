@@ -2,7 +2,7 @@
 /*** Actions ***/
 /***************/
 // Au chargement du document
-$(document).ready(function()
+$(function()
 {
   /*** Actions au chargement ***/
   $('#progress_circle_header').circlize(
@@ -21,7 +21,43 @@ $(document).ready(function()
 		duration: 1000
 	});
 
+  // Mise à jour du ping à chaque chargement de page et toutes les minutes (si page ouverte)
+  updatePing();
+  setInterval(updatePing, 60000);
+
   /*** Actions au clic ***/
+  // Referme la barre de recherche quand on clique n'importe où sur le body
+  $('body').click(function()
+  {
+    // Barre de recherche
+    if ($('#resizeBar') != null && $('#color_search') != null)
+    {
+      $('#resizeBar').css('width', '300px');
+      $("#resizeBar").css('transition', 'width ease 0.4s');
+      $("#color_search").css('background-color', '#e3e3e3');
+      $("#color_search").css('transition', 'background-color ease 0.4s');
+    }
+  });
+
+  // Redimensionne la zone de recherche quand sélectionnée et gère le changement de couleur
+  $('#color_search').click(function(event)
+  {
+    if ($('#resizeBar') != null && $('#color_search') != null)
+    {
+      $("#resizeBar").css('width', '100%');
+      $("#resizeBar").css('transition', 'width ease 0.4s');
+      $("#color_search").css('background-color', 'white');
+      $("#color_search").css('transition', 'background-color ease 0.4s');
+      event.stopPropagation();
+    }
+  });
+
+  // Bouton fermer alerte
+  $('#boutonFermer').click(function()
+  {
+    masquerAlerte('alerte');
+  });
+
   // Messages de confirmation
   $('.event_confirm').click(function()
   {
@@ -46,6 +82,12 @@ $(document).ready(function()
     var action_form = $('#actionForm').val();
 
     executeAction(action_form, 'validate');
+  });
+
+  // Déployer menu latéral
+  $('#menuLateral').click(function()
+  {
+    deployLeftMenu('left_menu', 'icon_menu_m', 'icon_menu_e', 'icon_menu_n', 'icon_menu_u');
   });
 });
 
@@ -167,43 +209,11 @@ function deleteCookie(cookieName)
   document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=' + location.host;
 }
 
-// Quand le document est prêt
-$(function()
+// Exécute le script php de mise à jour du ping
+function updatePing()
 {
-  // Redimensionne la zone de recherche quand sélectionnée et la referme quand on clique n'importe où sur le body
-  $("body").click(function()
-  {
-    // Barre de recherche
-    if ($('#resizeBar') != null && $('#color_search') != null)
-    {
-      $('#resizeBar').css('width', '300px');
-      $("#resizeBar").css('transition', 'width ease 0.4s');
-      $("#color_search").css('background-color', '#e3e3e3');
-      $("#color_search").css('transition', 'background-color ease 0.4s');
-    }
-  });
-
-  $('#color_search').click(function(event)
-  {
-    if ($('#resizeBar') != null && $('#color_search') != null)
-    {
-      $("#resizeBar").css('width', '100%');
-      $("#resizeBar").css('transition', 'width ease 0.4s');
-      $("#color_search").css('background-color', 'white');
-      $("#color_search").css('transition', 'background-color ease 0.4s');
-      event.stopPropagation();
-    }
-  });
-
-  // Mise à jour du ping à chaque chargement de page et toutes les minutes (si page ouverte)
-  updatePing();
-  setInterval(updatePing, 60000);
-
-  function updatePing()
-  {
-    $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
-  }
-});
+  $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
+}
 
 // Fonction équivalente au $_GET en php
 function $_GET(param)
@@ -293,7 +303,12 @@ function confirmAction(form, message)
 function executeAction(form, action)
 {
   if (action == 'cancel')
-    $('#confirmBox').remove();
+  {
+    $('#confirmBox').fadeOut(200, function()
+    {
+      $(this).remove();
+    });
+  }
   else
     $('#' + form).submit();
 }

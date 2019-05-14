@@ -65,7 +65,7 @@
       echo '</div>';
 
       echo '<div class="boutons_alerte">';
-        echo '<a onclick="masquerAlerte(\'alerte\')" class="bouton_alerte">Fermer</a>';
+        echo '<a id="boutonFermer" class="bouton_alerte">Fermer</a>';
       echo '</div>';
     echo '</div>';
 

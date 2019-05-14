@@ -1,5 +1,8 @@
+/***************/
+/*** Actions ***/
+/***************/
 // Au chargement du document
-$(document).ready(function()
+$(function()
 {
   // Adaptation mobile
   adaptProfil();
@@ -19,6 +22,23 @@ $(document).ready(function()
 		stroke: 5,
 		duration: 1000
 	});
+
+  /*** Calendriers ***/
+  if ($("#datepicker_anniversary").length)
+  {
+    $("#datepicker_anniversary").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
 });
 
 // Au redimensionnement de la fenêtre
@@ -28,6 +48,9 @@ $(window).resize(function()
   adaptProfil();
 });
 
+/***************/
+/*** Masonry ***/
+/***************/
 // Au chargement du document complet
 $(window).on('load', function()
 {
@@ -89,6 +112,9 @@ $(window).on('load', function()
   }
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {
@@ -170,23 +196,3 @@ function afficherMasquerOldMovies(old, id, required)
 
   initMasonry();
 }
-
-// Génère un calendrier
-$(function()
-{
-  if ($("#datepicker_anniversary").length)
-  {
-    $("#datepicker_anniversary").datepicker(
-    {
-      autoHide: true,
-      language: 'fr-FR',
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-    });
-  }
-});

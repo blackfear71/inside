@@ -2,7 +2,7 @@
 /*** Actions ***/
 /***************/
 // Au chargement du document
-$(document).ready(function()
+$(function()
 {
   /*** Actions au chargement ***/
   // Positionnement du curseur sur "Identifiant" pour se connecter

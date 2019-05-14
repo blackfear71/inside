@@ -1,3 +1,105 @@
+/***************/
+/*** Actions ***/
+/***************/
+// Au chargement du document
+$(function()
+{
+  /*** Actions au clic ***/
+  // Ferme le formulaire de vote en cliquant n'importe où sur le body
+  $('body').click(function()
+  {
+    $('.zone_smileys').each(function()
+    {
+      $(this).css('display', 'none');
+    });
+
+    $('.link_current_vote').each(function()
+    {
+      if ($(this).css('display') == 'none')
+        $(this).css('display', 'block');
+    });
+  });
+
+  // Ajouter une phrase culte
+  $('#ajouterCollector, #fermerCollector').click(function()
+  {
+    afficherMasquer('zone_add_collector');
+  });
+
+  // Ajouter une image culte
+  $('#ajouterImage, #fermerImage').click(function()
+  {
+    afficherMasquer('zone_add_image');
+  });
+
+  // Affiche la zone de modification d'une phrase/image culte
+  $('.modifierCollector').click(function()
+  {
+    var id_collector = $(this).attr('id').replace('modifier_', '');
+
+    afficherMasquerNoDelay('modifier_collector_' + id_collector);
+    afficherMasquerNoDelay('visualiser_collector_' + id_collector);
+    adaptBrowse(id_collector);
+    initMasonry();
+  });
+
+  // Ferme la zone de modification d'une phrase/image culte
+  $('.annulerCollector').click(function()
+  {
+    var id_collector = $(this).attr('id').replace('annuler_', '');
+
+    afficherMasquerNoDelay('modifier_collector_' + id_collector);
+    afficherMasquerNoDelay('visualiser_collector_' + id_collector);
+    initMasonry();
+  });
+
+  // Affiche la zone de modification d'un vote d'une phrase/image culte
+  $('.modifierVote').click(function(event)
+  {
+    var id_collector = $(this).attr('id').replace('link_form_vote_', '');
+
+    afficherMasquerNoDelay('modifier_vote_' + id_collector);
+    afficherMasquerNoDelay('link_form_vote_' + id_collector);
+    event.stopPropagation();
+  });
+
+  /*** Calendriers ***/
+  if ($("#datepicker_collector").length || $("#datepicker_image").length)
+  {
+    $("#datepicker_collector, #datepicker_image").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
+
+  $('.modify_date_collector').each(function()
+  {
+    $(this).datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  });
+});
+
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet
 $(window).on('load', function()
 {
@@ -28,6 +130,9 @@ $(window).on('load', function()
   scrollToId(id, offset, shadow);
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {
@@ -68,7 +173,7 @@ function afficherMasquerNoDelay(id)
 function adaptBrowse(id)
 {
   var image_height = $('#image_collector_' + id).height();
-  var marge        = -1 * (image_height + 6);
+  var marge        = -1 * (image_height + 6.5);
 
   $('#zone_parcourir_' + id).height(image_height);
   $('#mask_collector_' + id).css('margin-top', marge);
@@ -148,55 +253,3 @@ function applySortOrFilter(sort, filter)
 {
   document.location.href = "collector.php?action=goConsulter&page=1&sort=" + sort + "&filter=" + filter;
 }
-
-// Combiné avec afficherMasquer(), cela permet de fermer le formulaire en cliquant n'importe où sur le body
-$(function()
-{
-  $("body").click(function()
-  {
-    $(".zone_smileys").hide();
-    $(".link_current_vote").show();
-  });
-
-  $(".link_current_vote").click(function(event)
-  {
-    $("#modifier_vote").show();
-    event.stopPropagation();
-  });
-})
-
-// Génère un ou plusieurs calendrier
-$(function()
-{
-  if ($("#datepicker_collector").length || $("#datepicker_image").length)
-  {
-    $("#datepicker_collector, #datepicker_image").datepicker(
-    {
-      autoHide: true,
-      language: 'fr-FR',
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-    });
-  }
-
-  $('.modify_date_collector').each(function()
-  {
-    $(this).datepicker(
-    {
-      autoHide: true,
-      language: 'fr-FR',
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-    });
-  });
-});

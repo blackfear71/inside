@@ -1,3 +1,37 @@
+/***************/
+/*** Actions ***/
+/***************/
+// Au chargement du document
+$(function()
+{
+  /*** Actions au clic ***/
+  // Masque la saisie de préférence d'une fiche
+  $(document).on('click', '#masquerPreference', function()
+  {
+    masquerSaisiePreference();
+  });
+
+  /*** Calendriers ***/
+  if ($("#datepicker_sortie_1").length || $("#datepicker_sortie_2").length || $("#datepicker_doodle").length)
+  {
+    $("#datepicker_sortie_1, #datepicker_sortie_2, #datepicker_doodle").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
+});
+
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
@@ -56,6 +90,9 @@ $(window).on('load', function()
     updateFilm('zone_saisie_film');
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Affiche ou masque un élément (délai 200ms)
 function afficherMasquer(id)
 {
@@ -175,7 +212,7 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
   html  = '<div class="fond_saisie_preference">';
     html += '<div class="zone_saisie_preference">';
       // Bouton fermeture
-      html += '<a onclick="masquerSaisiePreference();" class="close_preference"><img src="/inside/includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
+      html += '<a id="masquerPreference" class="close_preference"><img src="/inside/includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
 
       // Titre
       html += '<div class="titre_saisie_preference">';
@@ -224,26 +261,6 @@ function afficherMasquerTbody(id, hidden)
   else
     $('#' + id).css('display', 'none');
 }
-
-// Génère un calendrier
-$(function()
-{
-  if ($("#datepicker_sortie_1").length || $("#datepicker_sortie_2").length || $("#datepicker_doodle").length)
-  {
-    $("#datepicker_sortie_1, #datepicker_sortie_2, #datepicker_doodle").datepicker(
-    {
-      autoHide: true,
-      language: 'fr-FR',
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-    });
-  }
-});
 
 // Insère un smiley dans la zone de saisie
 function insert_smiley(smiley, id)

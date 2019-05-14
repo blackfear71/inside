@@ -50,7 +50,7 @@
 		}
 	echo '</div>';
 
-	echo '<div class="menu_aside_visible" title="Menu" onclick="deployLeftMenu(\'left_menu\', \'icon_menu_m\', \'icon_menu_e\', \'icon_menu_n\', \'icon_menu_u\');">';
+	echo '<div id="menuLateral" class="menu_aside_visible" title="Menu">';
 		echo '<div class="logos_menu">';
 			echo '<img src="/inside/includes/icons/common/menu_m.png" alt="menu" id="icon_menu_m" class="icon_menu_aside" />';
 			echo '<img src="/inside/includes/icons/common/menu_e.png" alt="menu" id="icon_menu_e" class="icon_menu_aside" style="opacity: 0;" />';

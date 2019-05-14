@@ -1,7 +1,7 @@
 /***************/
 /*** Actions ***/
 /***************/
-$(document).ready(function()
+$(function()
 {
   /*** Actions au clic ***/
   // Affiche les détails d'un log et applique une rotation à la flèche
@@ -66,6 +66,39 @@ $(document).ready(function()
     var id_bouton = $(this).attr('id');
 
     changeCheckedColor(id_bouton);
+  });
+
+  /*** Calendriers ***/
+  if ($("#datepicker_saisie_deb").length || $("#datepicker_saisie_fin").length)
+  {
+    $("#datepicker_saisie_deb, #datepicker_saisie_fin").datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
+
+  $('.modify_date_deb_theme, .modify_date_fin_theme').each(function()
+  {
+    $(this).datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
   });
 });
 
@@ -271,39 +304,3 @@ function changeCheckedColor(input)
   else
     $('#' + input).removeClass('bouton_checked');
 }
-
-// Génère un calendrier
-$(function()
-{
-  if ($("#datepicker_saisie_deb").length || $("#datepicker_saisie_fin").length)
-  {
-    $("#datepicker_saisie_deb, #datepicker_saisie_fin").datepicker(
-    {
-      autoHide: true,
-      language: 'fr-FR',
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-    });
-  }
-
-  $('.modify_date_deb_theme, .modify_date_fin_theme').each(function()
-  {
-    $(this).datepicker(
-    {
-      autoHide: true,
-      language: 'fr-FR',
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
-    });
-  });
-});

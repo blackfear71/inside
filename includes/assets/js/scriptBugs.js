@@ -1,6 +1,10 @@
+/***************/
+/*** Actions ***/
+/***************/
 // Au chargement du document
-$(document).ready(function()
+$(function()
 {
+  /*** Actions au chargement ***/
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
   var offset = 70;

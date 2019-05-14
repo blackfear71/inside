@@ -1,3 +1,15 @@
+/***************/
+/*** Actions ***/
+/***************/
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  adaptPortail();
+});
+
+/***************/
+/*** Masonry ***/
+/***************/
 // Au chargement du document complet
 $(window).on('load', function()
 {
@@ -23,12 +35,9 @@ $(window).on('load', function()
   }
 });
 
-// Au redimensionnement de la fenêtre
-$(window).resize(function()
-{
-  adaptPortail();
-});
-
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Adaptations du portail sur mobiles
 function adaptPortail()
 {

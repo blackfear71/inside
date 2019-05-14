@@ -1,6 +1,10 @@
+/***************/
+/*** Actions ***/
+/***************/
 // Au chargement du document
-$(document).ready(function()
+$(function()
 {
+  /*** Actions au chargement ***/
   // Adaptation mobile
   adaptEC();
 
@@ -20,6 +24,9 @@ $(window).resize(function()
   adaptEC();
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Adaptations de la section sur mobiles
 function adaptEC()
 {

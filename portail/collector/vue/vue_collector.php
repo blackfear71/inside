@@ -42,12 +42,12 @@
           /* Liens de saisie et filtres */
           /******************************/
           echo '<div class="zone_liens_saisie">';
-            echo '<a onclick="afficherMasquer(\'zone_add_collector\');" title="Ajouter une phrase culte" class="lien_categorie">';
+            echo '<a id="ajouterCollector" title="Ajouter une phrase culte" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/collector/phrases.png" alt="comments" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Ajouter une phrase culte</div>';
             echo '</a>';
 
-            echo '<a onclick="afficherMasquer(\'zone_add_image\');" title="Ajouter une image" class="lien_categorie">';
+            echo '<a id="ajouterImage" title="Ajouter une image" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/collector/images.png" alt="images" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Ajouter une image</div>';
             echo '</a>';

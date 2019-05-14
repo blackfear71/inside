@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_collector">Ajouter une image</div>';
 
       // Bouton fermeture
-      echo '<a onclick="afficherMasquer(\'zone_add_image\');" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="fermerImage" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_collector">';
         // Type de saisie

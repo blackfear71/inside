@@ -17,19 +17,21 @@
               echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
 
               // Modification
-              echo '<a onclick="afficherMasquerNoDelay(\'modifier_collector_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'visualiser_collector_' . $collector->getId() . '\'); adaptBrowse(\'' . $collector->getId() . '\'); initMasonry();" title="Modifier" class="icone_modify_collector"></a>';
+              echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
 
               // Suppression
               if ($collector->getType_collector() == "T")
               {
                 echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '">';
-                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" onclick="if(!confirmAction(\'delete_collector_' . $collector->getId() . '\', \'Supprimer cette phrase culte ?\')) return false;" class="icon_delete_collector" />';
+                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector event_confirm" />';
+                  echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="event_message" />';
                 echo '</form>';
               }
               elseif ($collector->getType_collector() == "I")
               {
                 echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?delete_id=' . $collector->getId() . '&action=doSupprimer&page=' . $_GET['page'] . '">';
-                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" onclick="if(!confirmAction(\'delete_image_' . $collector->getId() . '\', \'Supprimer cette image ?\')) return false;" class="icon_delete_collector" />';
+                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector event_confirm" />';
+                  echo '<input type="hidden" value="Supprimer cette image ?" class="event_message" />';
                 echo '</form>';
               }
 
@@ -42,7 +44,7 @@
               echo '</div>';
 
               // Vote
-              echo '<a onclick="afficherMasquerNoDelay(\'modifier_vote_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'link_form_vote_' . $collector->getId() . '\');" id="link_form_vote_' . $collector->getId() . '" class="link_current_vote">';
+              echo '<a id="link_form_vote_' . $collector->getId() . '" class="link_current_vote modifierVote">';
                 $founded = false;
 
                 foreach ($listeVotesUsers as $vote)
@@ -185,7 +187,7 @@
               echo '<input type="submit" name="modify_collector" value="" title="Valider" class="icon_validate_collector" />';
 
               // Annulation modification
-              echo '<a onclick="afficherMasquerNoDelay(\'modifier_collector_' . $collector->getId() . '\'); afficherMasquerNoDelay(\'visualiser_collector_' . $collector->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_collector"></a>';
+              echo '<a id="annuler_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
 
               // Avatar
               echo '<div class="zone_avatar_collector">';

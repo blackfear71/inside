@@ -1,3 +1,6 @@
+/***************/
+/*** Masonry ***/
+/***************/
 // Au chargement du document complet
 $(window).on('load', function()
 {
@@ -20,6 +23,9 @@ $(window).on('load', function()
   }
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Insère une prévisualisation de l'image sur la zone
 var loadFile = function(event, id)
 {
