@@ -128,8 +128,8 @@
 
                     // Suppression ligne
                     echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer" class="link_action_alerte">';
-                      echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_alerte event_confirm" />';
-                      echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="event_message" />';
+                      echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_alerte eventConfirm" />';
+                      echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="eventMessage" />';
                     echo '</form>';
                   echo '</td>';
                 echo '</tr>';

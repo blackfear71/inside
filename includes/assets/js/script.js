@@ -59,10 +59,10 @@ $(function()
   });
 
   // Messages de confirmation
-  $('.event_confirm').click(function()
+  $('.eventConfirm').click(function()
   {
     var id_form = $(this).closest('form').attr('id');
-    var message = $(this).closest('form').find('.event_message').val();
+    var message = $(this).closest('form').find('.eventMessage').val();
 
     if(!confirmAction(id_form, message))
       return false;

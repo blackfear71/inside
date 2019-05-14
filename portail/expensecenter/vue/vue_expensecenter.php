@@ -39,7 +39,7 @@
           // Liens
           echo '<div class="zone_liens_saisie">';
             // Saisie nouvelle dépense
-            echo '<a onclick="afficherMasquer(\'zone_add_depense\'); initMasonry();" title="Saisir une dépense" class="lien_categorie">';
+            echo '<a id="ajouterDepense" title="Saisir une dépense" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/expense_center.png" alt="expense_center" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Saisir une dépense</div>';
             echo '</a>';

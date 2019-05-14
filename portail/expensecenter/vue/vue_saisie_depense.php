@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_depense">Saisir une dépense</div>';
 
       // Bouton fermeture
-      echo '<a onclick="resetSaisie(\'zone_add_depense\', \'' . $_GET['year'] . '\');" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="resetDepense" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       // Saisie dépense
       echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie_depense">';
@@ -37,7 +37,7 @@
           echo '<input type="submit" name="add_depense" value="Valider" class="bouton_validation" />';
 
           // Afficahge explications
-          echo '<a onclick="afficherExplications()" class="lien_explications">';
+          echo '<a id="afficherExplications" class="lien_explications">';
             echo '<span class="fond_plus">+</span>';
             echo 'Fonctionnement';
           echo '</a>';
@@ -73,7 +73,7 @@
                 echo '<input type="hidden" name="identifiant_qte[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
 
                 // Bouton -
-                echo '<div onclick="addPart(\'zone_user_' . $user->getId() . '\', \'quantite_user_' . $user->getId() . '\', -1)" class="bouton_qte">-</div>';
+                echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_qte retirerPart">-</div>';
 
                 // Quantité
                 if ($saved_parts == true)
@@ -83,7 +83,7 @@
                   echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="qte" readonly />';
 
                 // Bouton +
-                echo '<div onclick="addPart(\'zone_user_' . $user->getId() . '\', \'quantite_user_' . $user->getId() . '\', 1)" class="bouton_qte">+</div>';
+                echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_qte ajouterPart">+</div>';
               echo '</div>';
             }
           echo '</div>';

@@ -67,8 +67,8 @@
 
             // Supprimer
             echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doSupprimer">';
-              echo '<input type="submit" name="delete_bug" value="Supprimer" class="button_bug event_confirm" />';
-              echo '<input type="hidden" value="Supprimer ce rapport ?" class="event_message" />';
+              echo '<input type="submit" name="delete_bug" value="Supprimer" class="button_bug eventConfirm" />';
+              echo '<input type="hidden" value="Supprimer ce rapport ?" class="eventMessage" />';
             echo '</form>';
   				echo '</td>';
   			echo '</tr>';

@@ -108,8 +108,8 @@
           echo '</div>';
 
           echo '<form id="initializeSuccess" method="post" action="manage_success.php?action=doInitialiser" class="form_init_succes">';
-            echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_init event_confirm" />';
-            echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="event_message" />';
+            echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_init eventConfirm" />';
+            echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="eventMessage" />';
           echo '</form>';
 
           echo '<div class="explications_init">';
@@ -136,8 +136,8 @@
               echo '<div class="ensemble_succes">';
                 // Suppression succès
                 echo '<form method="post" id="delete_success_' . $success->getId() . '" action="manage_success.php?id=' . $success->getId() . '&action=doSupprimer" class="form_suppression_succes">';
-                  echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" class="bouton_delete event_confirm" />';
-                  echo '<input type="hidden" value="Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?" class="event_message" />';
+                  echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" class="bouton_delete eventConfirm" />';
+                  echo '<input type="hidden" value="Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?" class="eventMessage" />';
                 echo '</form>';
 
                 if ($success->getDefined() == "Y")

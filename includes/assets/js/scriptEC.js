@@ -15,6 +15,50 @@ $(function()
 
   // Scroll vers l'id
   scrollToId(id, offset, shadow);
+
+  /*** Actions au clic ***/
+  // Ajouter une dépense
+  $('#ajouterDepense').click(function()
+  {
+    afficherMasquer('zone_add_depense');
+    initMasonry();
+  });
+
+  // Réinitialise la saisie dépense à la fermeture
+  $('#resetDepense').click(function()
+  {
+    resetSaisie('zone_add_depense', $_GET('year'));
+  });
+
+  // Affiche les explications
+  $('#afficherExplications').click(function()
+  {
+    afficherExplications();
+  });
+
+  // Ajoute une part
+  $('.ajouterPart').click(function()
+  {
+    var id_user = $(this).attr('id').replace('ajouter_part_', '');
+
+    saisirPart('zone_user_' + id_user, 'quantite_user_' + id_user, 1);
+  });
+
+  // Retire une part
+  $('.retirerPart').click(function()
+  {
+    var id_user = $(this).attr('id').replace('retirer_part_', '');
+
+    saisirPart('zone_user_' + id_user, 'quantite_user_' + id_user, -1);
+  });
+
+  // Modifier une dépense
+  $('.modifierDepense').click(function()
+  {
+    var id_depense = $(this).attr('id').replace('modifier_', '');
+
+    updateExpense(id_depense, $_GET('year'));
+  });
 });
 
 // Au redimensionnement de la fenêtre
@@ -103,7 +147,7 @@ function afficherExplications()
 }
 
 // Ajoute une part à un utilisateur
-function addPart(zone, quantite, value)
+function saisirPart(zone, quantite, value)
 {
   var currentValue = parseInt($('#' + quantite).val());
   var newValue     = currentValue + value;

@@ -125,8 +125,8 @@
                     echo '<div class="zone_theme_titre">';
                       // Bouton suppression
                       echo '<form id="delete_theme_' . $theme->getId() . '" method="post" action="manage_themes.php?delete_id=' . $theme->getId() . '&action=doSupprimer">';
-                        echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme event_confirm" />';
-                        echo '<input type="hidden" value="Supprimer ce thème ?" class="event_message" />';
+                        echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
+                        echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
                       echo '</form>';
 
                       // Bouton modification
