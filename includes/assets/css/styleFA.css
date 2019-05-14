@@ -46,7 +46,8 @@
 .image_refresh
 {
 	vertical-align: middle;
-	width: 30px;
+	width: 29px;
+	margin-top: 2px;
 	transform: rotate(0deg);
 	transition: transform 0.2s ease;
 }
