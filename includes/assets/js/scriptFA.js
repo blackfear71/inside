@@ -5,6 +5,50 @@
 $(document).ready(function()
 {
   /*** Actions au clic ***/
+  // Affiche la saisie lieu restaurant
+  $(document).on('click', '.afficherLieu', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('choix_restaurant_', '');
+    var id_listbox = 'zone_listbox_restaurant_' + num;
+
+    afficherMasquerNoDelay(id_bouton);
+    afficherListboxLieux(id_listbox);
+  });
+
+  // Affiche la saisie horaire restaurant
+  $(document).on('click', '.afficherHoraire', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('choix_horaire_', '');
+    var id_listbox = 'zone_listbox_horaire_' + num;
+
+    afficherMasquerNoDelay(id_bouton);
+    afficherListboxHoraires(id_listbox, id_bouton, 'create', '');
+  });
+
+  // Affiche la saisie transports restaurant
+  $(document).on('click', '.afficherTransports', function()
+  {
+    var id_bouton   = $(this).attr('id');
+    var num         = $(this).attr('id').replace('choix_transports_', '');
+    var id_checkbox = 'zone_checkbox_transports_' + num;
+
+    afficherMasquerNoDelay(id_bouton);
+    afficherCheckboxTransports(id_checkbox);
+  });
+
+  // Affiche la saisie menu restaurant
+  $(document).on('click', '.afficherMenu', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('choix_menu_', '');
+    var id_saisie = 'zone_saisie_menu_' + num;
+
+    afficherMasquerNoDelay(id_bouton);
+    afficherSaisieMenu(id_saisie);
+  });
+
   // Masque la saisie lieu restaurant
   $(document).on('click', '.annulerLieu', function()
   {
@@ -25,6 +69,34 @@ $(document).ready(function()
     var id_select_m = 'select_minutes_' + num;
 
     cacherListboxHoraires(id_zone, id_annuler, id_select_h, id_select_m);
+  });
+
+  // Masque la saisie transports restaurant
+  $(document).on('click', '.annulerTransports', function()
+  {
+    var id_annuler = $(this).attr('id');
+    var num        = $(this).attr('id').replace('annuler_transports_', '');
+    var id_zone    = 'zone_checkbox_' + num;
+
+    cacherCheckboxTransports(id_zone, id_annuler);
+  });
+
+  // Masque la saisie menu restaurant
+  $(document).on('click', '.annulerMenu', function()
+  {
+    var id_annuler = $(this).attr('id');
+    var num        = $(this).attr('id').replace('annuler_menu_', '');
+    var id_zone    = 'zone_menu_' + num;
+
+    cacherSaisieMenu(id_zone, id_annuler);
+  });
+
+  // Coche / décoche le mode de transport
+  $(document).on('click', '.cocherTransport', function()
+  {
+    var id_check = $(this).closest('div').attr('id');
+
+    changeCheckedColor(id_check);
   });
 });
 
@@ -306,28 +378,28 @@ function afficherCheckboxTransports(id)
   var id_annuler = 'annuler_transports_' + num;
 
   html = '<div id="' + id_zone + '" class="zone_checkbox">';
-    html += '<div id="bouton_' + id_check_f + '" onclick="changeCheckedColor(\'bouton_' + id_check_f + '\');" class="switch_transport">';
+    html += '<div id="bouton_' + id_check_f + '" class="switch_transport">';
       html += '<input id="' + id_check_f + '" type="checkbox" value="F" name="checkbox_feet[' + num + ']" />';
-      html += '<label for="' + id_check_f + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
+      html += '<label for="' + id_check_f + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
     html += '</div>';
 
-    html += '<div id="bouton_' + id_check_b + '" onclick="changeCheckedColor(\'bouton_' + id_check_b + '\');" class="switch_transport">';
+    html += '<div id="bouton_' + id_check_b + '" class="switch_transport">';
       html += '<input id="' + id_check_b + '" type="checkbox" value="B" name="checkbox_bike[' + num + ']" />';
-      html += '<label for="' + id_check_b + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
+      html += '<label for="' + id_check_b + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
     html += '</div>';
 
-    html += '<div id="bouton_' + id_check_t + '" onclick="changeCheckedColor(\'bouton_' + id_check_t + '\');" class="switch_transport">';
+    html += '<div id="bouton_' + id_check_t + '" class="switch_transport">';
       html += '<input id="' + id_check_t + '" type="checkbox" value="T" name="checkbox_tram[' + num + ']" />';
-      html += '<label for="' + id_check_t + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
+      html += '<label for="' + id_check_t + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
     html += '</div>';
 
-    html += '<div id="bouton_' + id_check_c + '" onclick="changeCheckedColor(\'bouton_' + id_check_c + '\');" class="switch_transport">';
+    html += '<div id="bouton_' + id_check_c + '" class="switch_transport">';
       html += '<input id="' + id_check_c + '" type="checkbox" value="C" name="checkbox_car[' + num + ']" />';
-      html += '<label for="' + id_check_c + '" class="label_switch_transport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
+      html += '<label for="' + id_check_c + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
     html += '</div>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherCheckboxTransports(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 25px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerTransports" style="margin-top: 25px;">Annuler</a>';
 
   $("#" + id).append(html);
 }
@@ -359,7 +431,7 @@ function afficherSaisieMenu(id)
     html += '<input type="text" placeholder="Dessert" name="saisie_dessert[' + num + ']" class="saisie_menu" />';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherSaisieMenu(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 30px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerMenu" style="margin-top: 30px;">Annuler</a>';
 
   $("#" + id).append(html);
 }
@@ -407,22 +479,22 @@ function addChoice(id, zone)
   }
 
   // On ajoute de nouveaux champs de saisie
-  html  = '<div class="titre_choix"><img src="../../includes/icons/foodadvisor/' + icon + '.png" alt="' + icon + '" class="logo_proposition" />Proposition ' + new_num + '</div>';
+  html  = '<div class="titre_choix"><img src="/inside/includes/icons/foodadvisor/' + icon + '.png" alt="' + icon + '" class="logo_proposition" />Proposition ' + new_num + '</div>';
 
   html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_restaurant_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_restaurant_' + new_num + '\'); afficherListboxLieux(\'zone_listbox_restaurant_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Restaurant</a>';
+    html += '<a id="choix_restaurant_' + new_num + '" class="bouton_choix afficherLieu"><span class="fond_plus">+</span>Restaurant</a>';
   html += '</div>';
 
   html += '<div id="zone_listbox_horaire_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_horaire_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_horaire_' + new_num + '\'); afficherListboxHoraires(\'zone_listbox_horaire_' + new_num + '\', \'choix_horaire_' + new_num + '\', \'create\', \'\')" class="bouton_choix"><span class="fond_plus">+</span>Horaire</a>';
+    html += '<a id="choix_horaire_' + new_num + '" class="bouton_choix afficherHoraire"><span class="fond_plus">+</span>Horaire</a>';
   html += '</div>';
 
   html += '<div id="zone_checkbox_transports_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_transports_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_transports_' + new_num + '\'); afficherCheckboxTransports(\'zone_checkbox_transports_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Transport</a>';
+    html += '<a id="choix_transports_' + new_num + '" class="bouton_choix afficherTransports"><span class="fond_plus">+</span>Transport</a>';
   html += '</div>';
 
   html += '<div id="zone_saisie_menu_' + new_num + '" class="zone_listbox">';
-    html += '<a id="choix_menu_' + new_num + '" onclick="afficherMasquerNoDelay(\'choix_menu_' + new_num + '\'); afficherSaisieMenu(\'zone_saisie_menu_' + new_num + '\');" class="bouton_choix"><span class="fond_plus">+</span>Menu</a>';
+    html += '<a id="choix_menu_' + new_num + '" class="bouton_choix afficherMenu"><span class="fond_plus">+</span>Menu</a>';
   html += '</div>';
 
   html += '<div class="separation_choix"></div>';
@@ -479,9 +551,9 @@ var loadFile = function(event, id)
 function changeCheckedColor(input)
 {
   if ($('#' + input).children('input').prop('checked'))
-    $('#' + input).addClass('bouton_checked');
-  else
     $('#' + input).removeClass('bouton_checked');
+  else
+    $('#' + input).addClass('bouton_checked');
 }
 
 // Change la couleur de fond lors de la saisie de texte

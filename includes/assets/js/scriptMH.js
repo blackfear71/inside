@@ -175,7 +175,7 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
   html  = '<div class="fond_saisie_preference">';
     html += '<div class="zone_saisie_preference">';
       // Bouton fermeture
-      html += '<a onclick="masquerSaisiePreference();" class="close_preference"><img src="../../includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
+      html += '<a onclick="masquerSaisiePreference();" class="close_preference"><img src="/inside/includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
 
       // Titre
       html += '<div class="titre_saisie_preference">';
@@ -186,7 +186,7 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
       html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&id_film=' + id_film + '&action=doVoterFilm">';
         for (var i = 0; i <= 5; i++)
         {
-          html += '<img src="../../includes/icons/moviehouse/stars/star' + i + '" alt="star' + i + '" class="icone_preference" />';
+          html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '" alt="star' + i + '" class="icone_preference" />';
 
           if (i == stars)
             html += '<input type="submit" name="preference_' + i + '" value="" class="input_preference rounded" />';
