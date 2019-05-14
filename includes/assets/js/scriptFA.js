@@ -1,3 +1,36 @@
+/***************/
+/*** Actions ***/
+/***************/
+// Au chargement du document
+$(document).ready(function()
+{
+  /*** Actions au clic ***/
+  // Masque la saisie lieu restaurant
+  $(document).on('click', '.annulerLieu', function()
+  {
+    var id_annuler = $(this).attr('id');
+    var num        = $(this).attr('id').replace('annuler_restaurant_', '');
+    var id_zone    = 'zone_listbox_' + num;
+
+    cacherListboxRestaurants(id_zone, id_annuler);
+  });
+
+  // Masque la saisie horaire restaurant
+  $(document).on('click', '.annulerHoraire', function()
+  {
+    var id_annuler  = $(this).attr('id');
+    var num         = $(this).attr('id').replace('annuler_horaires_', '');
+    var id_zone     = 'choix_horaire_' + num;
+    var id_select_h = 'select_heures_' + num;
+    var id_select_m = 'select_minutes_' + num;
+
+    cacherListboxHoraires(id_zone, id_annuler, id_select_h, id_select_m);
+  });
+});
+
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet
 $(window).on('load', function()
 {
@@ -53,6 +86,9 @@ $(window).on('load', function()
   scrollToId(id, offset, shadow);
 });
 
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {
@@ -151,7 +187,7 @@ function afficherListboxLieux(id)
     html += '</select>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherListboxRestaurants(\'' + id_zone + '\', \'' + id_annuler + '\')" class="bouton_annuler" style="margin-top: 10px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerLieu" style="margin-top: 10px;">Annuler</a>';
 
   $("#" + id).append(html);
 }
@@ -219,6 +255,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
   var id_select_h = 'select_heures_' + num;
   var id_select_m = 'select_minutes_' + num;
   var id_annuler  = 'annuler_horaires_' + num;
+  var id_zone     = zone;
 
   html = '<select id="' + id_select_h + '" name="' + name_select_h + '" class="' + class_listbox + '">';
     for (var i = 11; i < 14; i++)
@@ -240,20 +277,20 @@ function afficherListboxHoraires(id, zone, type, idChoix)
     }
   html += '</select>';
 
-  html += '<a id="' + id_annuler + '" onclick="cacherListboxHoraires(\'' + id_select_h + '\',\'' + id_select_m + '\', \'' + id_annuler + '\', \'' + zone + '\')" class="' + class_bouton + '">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="' + class_bouton + ' annulerHoraire">Annuler</a>';
 
   $("#" + id).append(html);
 }
 
 // Cache les lisbox des horaires
-function cacherListboxHoraires(heures, minutes, bouton, lien)
+function cacherListboxHoraires(zone, bouton, heures, minutes)
 {
   var num = heures.substr(-1);
 
   $('#' + heures).remove();
   $('#' + minutes).remove();
   $('#' + bouton).remove();
-  $('#' + lien).css('display', 'block');
+  $('#' + zone).css('display', 'block');
 }
 
 // Affiche les checkbox des transports

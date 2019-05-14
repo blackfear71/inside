@@ -153,7 +153,7 @@
 
           // Choix restaurant
           echo '<div class="zone_saisie_ligne">';
-            if ($_SESSION['save']['restaurant_saisi'] == "N")
+            if ($_SESSION['save']['restaurant_saisi'] == "N" OR $_SESSION['save']['restaurant_saisi'] == "")
             {
               echo '<div id="bouton_none" onclick="switchCheckedColor(\'switch_restaurant\', \'bouton_none\');" class="switch_restaurant bouton_checked">';
                 echo '<input id="none" type="radio" name="restaurant" value="N" checked />';
