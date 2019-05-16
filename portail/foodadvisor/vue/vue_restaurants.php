@@ -39,7 +39,7 @@
 
           // Liens
           echo '<div class="zone_liens_saisie">';
-            echo '<a onclick="afficherMasquer(\'zone_add_restaurant\');" title="Ajouter un restaurant" class="lien_categorie">';
+            echo '<a id="saisieRestaurant" title="Ajouter un restaurant" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Ajouter un restaurant</div>';
             echo '</a>';
@@ -52,7 +52,7 @@
           echo '<div class="zone_liens_lieux">';
             foreach ($listeLieux as $lieu)
             {
-              echo '<a onclick="scrollToId(\'' . formatId($lieu) . '\', 20)" class="lien_lieu">';
+              echo '<a id="link_' . formatId($lieu) . '" class="lien_lieu lienLieu">';
                 echo '<div class="image_lieu"></div>';
                 echo $lieu;
               echo '</a>';

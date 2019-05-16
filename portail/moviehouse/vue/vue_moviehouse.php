@@ -40,7 +40,7 @@
           // Liens
           echo '<div class="zone_liens_saisie">';
             // Bouton saisie
-            echo '<a onclick="afficherMasquer(\'zone_saisie_film\');" title="Ajouter un film" class="lien_categorie">';
+            echo '<a id="ajouterFilm" title="Ajouter un film" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/movie_house.png" alt="movie_house" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Ajouter un film</div>';
             echo '</a>';

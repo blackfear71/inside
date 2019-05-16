@@ -105,9 +105,9 @@
           }
             // Lien détails
             if ($proposition->getDetermined() == "Y")
-              echo '<a onclick="afficherMasquer(\'zone_details_determined_' . $proposition->getId_restaurant() . '\');" class="lien_details_determined" title="Plus de détails"><span class="lien_plus">+</span></a>';
+              echo '<a id="afficher_details_' . $proposition->getId_restaurant() . '" class="lien_details_determined afficherDetails" title="Plus de détails"><span class="lien_plus">+</span></a>';
             else
-              echo '<a onclick="afficherMasquer(\'zone_details_determined_' . $proposition->getId_restaurant() . '\');" class="lien_details_top" title="Plus de détails"><span class="lien_plus">+</span></a>';
+              echo '<a id="afficher_details_' . $proposition->getId_restaurant() . '" class="lien_details_top afficherDetails" title="Plus de détails"><span class="lien_plus">+</span></a>';
 
             // Image + lien
             echo '<a href="restaurants.php?action=goConsulter&anchor=' . $proposition->getId_restaurant() . '" class="lien_proposition_top">';

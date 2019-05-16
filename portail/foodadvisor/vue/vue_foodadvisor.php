@@ -39,7 +39,7 @@
           // Liens
           echo '<div class="zone_liens_saisie">';
             // Saisie utilisateur
-            echo '<a onclick="afficherMasquer(\'zone_saisie_choix\');" title="Proposer où manger" class="lien_categorie">';
+            echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Proposer où manger</div>';
             echo '</a>';

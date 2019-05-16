@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_restaurant">Ajouter un restaurant</div>';
 
       // Bouton fermeture
-      echo '<a onclick="afficherMasquer(\'zone_add_restaurant\');" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="fermerRestaurant" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       // Saisie restaurant
       echo '<form method="post" action="restaurants.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_restaurant">';
@@ -37,12 +37,12 @@
             if (empty($_SESSION['save']['ouverture_restaurant']) OR isset($_SESSION['save']['ouverture_restaurant'][$i]))
             {
               echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
-              echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" onclick="changeCheckedDay(\'saisie_checkbox_ouverture_' . $jour . '\', \'saisie_label_ouverture_' . $jour . '\', \'label_jour_checked\', \'label_jour\');" class="label_jour_checked">' . $j . '</label>';
+              echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" class="label_jour_checked checkDay">' . $j . '</label>';
             }
             else
             {
               echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
-              echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" onclick="changeCheckedDay(\'saisie_checkbox_ouverture_' . $jour . '\', \'saisie_label_ouverture_' . $jour . '\', \'label_jour_checked\', \'label_jour\');" class="label_jour">' . $j . '</label>';
+              echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" class="label_jour checkDay">' . $j . '</label>';
             }
 
             $i++;
@@ -95,7 +95,7 @@
 
           // Types
           echo '<div id="types_restaurants">';
-            echo '<a onclick="addOtherType(\'types_restaurants\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
+            echo '<a id="addType" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
 
             $i = 0;
 
@@ -119,16 +119,16 @@
 
               if ($checked == true)
               {
-                echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types bouton_checked">';
+                echo '<div id="bouton_' . $id_type . '" class="switch_types bouton_checked">';
                   echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" checked />';
-                  echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                  echo '<label for="' . $id_type . '" class="label_switch checkType">' . $type . '</label>';
                 echo '</div>';
               }
               else
               {
-                echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types">';
+                echo '<div id="bouton_' . $id_type . '" class="switch_types">';
                   echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" />';
-                  echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                  echo '<label for="' . $id_type . '" class="label_switch checkType">' . $type . '</label>';
                 echo '</div>';
               }
 

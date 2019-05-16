@@ -99,7 +99,7 @@
 
               echo '<div class="zone_fiche_right">';
                 // Modification
-                echo '<a onclick="afficherMasquerNoDelay(\'modifier_restaurant_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'visualiser_restaurant_' . $restaurant->getId() . '\'); initMasonry();" title="Modifier le restaurant" class="lien_modifier_restaurant">';
+                echo '<a id="modifier_' . $restaurant->getId() . '" title="Modifier le restaurant" class="lien_modifier_restaurant modifierRestaurant">';
                   echo '<img src="../../includes/icons/common/edit.png" alt="edit" class="icone_modify_restaurant" />';
                 echo '</a>';
 
@@ -120,7 +120,7 @@
                   {
                     echo '<div id="long_description_' . $restaurant->getId() . '" style="display: none;">' . nl2br($restaurant->getDescription()) . '</div>';
                     echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . substr(nl2br($restaurant->getDescription()), 0, $longueur_max) . '...</div>';
-                    echo '<a onclick="afficherMasquerNoDelay(\'short_description_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'long_description_' . $restaurant->getId() . '\'); initMasonry();"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
+                    echo '<a id="description_' . $restaurant->getId() . '" class="descriptionRestaurant"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
                   }
                   else
                     echo '<div>' . nl2br($restaurant->getDescription()) . '</div>';
@@ -189,12 +189,12 @@
                     if ($explodedOpened[$l] == "Y")
                     {
                       echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
-                      echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'update_label_jour_checked\', \'update_label_jour\');" class="update_label_jour_checked">' . $j . '</label>';
+                      echo '<label for="' . $id_opened . '" id="' . $label_opened . '" class="update_label_jour_checked checkDayUpdate">' . $j . '</label>';
                     }
                     else
                     {
                       echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
-                      echo '<label for="' . $id_opened . '" id="' . $label_opened . '" onclick="changeCheckedDay(\'' . $id_opened . '\', \'' . $label_opened . '\', \'update_label_jour_checked\', \'update_label_jour\');" class="update_label_jour">' . $j . '</label>';
+                      echo '<label for="' . $id_opened . '" id="' . $label_opened . '" class="update_label_jour checkDayUpdate">' . $j . '</label>';
                     }
 
                     $l++;
@@ -213,21 +213,20 @@
                 echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" class="icon_validate_restaurant" />';
 
                 // Annulation modification
-                echo '<a onclick="afficherMasquerNoDelay(\'modifier_restaurant_' . $restaurant->getId() . '\'); afficherMasquerNoDelay(\'visualiser_restaurant_' . $restaurant->getId() . '\'); initMasonry();" title="Annuler" class="icone_cancel_restaurant"></a>';
+                echo '<a id="annuler_' . $restaurant->getId() . '" title="Annuler" class="icone_cancel_restaurant annulerRestaurant"></a>';
               echo '</div>';
 
               echo '<div class="zone_fiche_bottom">';
                 // Types
                 echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
-                  echo '<a onclick="addOtherType(\'update_types_restaurants_' . $restaurant->getId() . '\');" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
+                  echo '<a id="type_update_' . $restaurant->getId() . '" class="bouton_type_autre addTypeUpdate"><span class="fond_plus">+</span>Autre</a>';
 
                   $explodedTypes = explode(";", $restaurant->getTypes());
                   $k             = 0;
 
                   foreach ($listeTypes as $type)
                   {
-                    $id_type    = "type_" . formatId($type) . "_" . $restaurant->getId();
-                    $label_type = "label_" . formatId($type) . "_" . $restaurant->getId();
+                    $id_type  = "type_" . formatId($type) . "_" . $restaurant->getId();
                     $matching = false;
 
                     foreach ($explodedTypes as $exploded)
@@ -241,16 +240,16 @@
 
                     if ($matching == true)
                     {
-                      echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types bouton_checked">';
+                      echo '<div id="bouton_' . $id_type . '" class="switch_types bouton_checked">';
                         echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" checked />';
-                        echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                        echo '<label for="' . $id_type . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
                       echo '</div>';
                     }
                     else
                     {
-                      echo '<div id="bouton_' . $id_type . '" onclick="changeCheckedColor(\'bouton_' . $id_type . '\');" class="switch_types">';
+                      echo '<div id="bouton_' . $id_type . '" class="switch_types">';
                         echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" />';
-                        echo '<label for="' . $id_type . '" class="label_switch">' . $type . '</label>';
+                        echo '<label for="' . $id_type . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
                       echo '</div>';
                     }
 

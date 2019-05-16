@@ -86,13 +86,14 @@
                 // Actions
                 echo '<div class="zone_details_actions">';
                   // Modifier
-                  echo '<a onclick="updateFilm(\'zone_saisie_film\');" class="link_details">';
+                  echo '<a id="modifierFilm" class="link_details">';
                     echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" title="Modifier le film" class="icon_details" />';
                   echo '</a>';
 
                   // Supprimer
                   echo '<form id="delete_film" method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" class="link_details">';
-                    echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" onclick="if(!confirmAction(\'delete_film\', \'Demander la suppression de ce film ?\')) return false;" class="icon_details_delete" />';
+                    echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_details_delete eventConfirm" />';
+                    echo '<input type="hidden" value="Demander la suppression de ce film ?" class="eventMessage" />';
                   echo '</form>';
 
                   // Mailing
@@ -112,7 +113,7 @@
                   }
                   else
                   {
-                    echo '<a href="https://doodle.com/fr/" onclick="updateFilm(\'zone_saisie_film\');" target="_blank" class="link_details">';
+                    echo '<a id="doodleFilm" href="https://doodle.com/fr/" target="_blank" class="link_details">';
                       echo '<img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="icon_details" />';
                     echo '</a>';
                   }
@@ -364,7 +365,8 @@
 
                               // Suppression commentaire
                               echo '<span class="link_actions_commentaires">';
-                                echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" onclick="if(!confirmAction(\'delete_comment_' . $comment->getId() . '\', \'Supprimer ce commentaire ?\')) return false;" class="icone_supprimer_comment" />';
+                                echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" class="icone_supprimer_comment eventConfirm" />';
+                                echo '<input type="hidden" value="Supprimer ce commentaire ?" class="eventMessage" />';
                               echo '</span>';
                             echo '</div>';
                           echo '</form>';

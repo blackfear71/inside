@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_film">Ajouter un film</div>';
 
       // Bouton fermeture
-      echo '<a onclick="afficherMasquer(\'zone_saisie_film\');" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="annulerFilm" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       // Saisie film
       if ($_SERVER['PHP_SELF'] == '/inside/portail/moviehouse/moviehouse.php')

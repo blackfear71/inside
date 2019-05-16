@@ -9,8 +9,8 @@
       echo '<div class="zone_actions">';
         if (!empty($listeFilms))
         {
-          echo '<a onclick="afficherMasquerFilms(\'fold_all\')" class="bouton_fold">Tout plier</a>';
-          echo '<a onclick="afficherMasquerFilms(\'unfold_all\')" class="bouton_fold">Tout déplier</a>';
+          echo '<a id="fold_all" class="bouton_fold">Tout plier</a>';
+          echo '<a id="unfold_all" class="bouton_fold">Tout déplier</a>';
         }
       echo '</div>';
     echo '</div>';

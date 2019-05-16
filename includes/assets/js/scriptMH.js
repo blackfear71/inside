@@ -5,10 +5,30 @@
 $(function()
 {
   /*** Actions au clic ***/
+  // Affiche la zone de saisie d'un film
+  $('#ajouterFilm, #annulerFilm').click(function()
+  {
+    afficherMasquer('zone_saisie_film');
+  });
+
+  // Plie ou déplie les fiches des films
+  $('#fold_all, #unfold_all').click(function()
+  {
+    id_fold = $(this).attr('id');
+
+    afficherMasquerFilms(id_fold);
+  });
+
   // Masque la saisie de préférence d'une fiche
   $(document).on('click', '#masquerPreference', function()
   {
     masquerSaisiePreference();
+  });
+
+  // Affiche la zone de modification d'un film
+  $('#modifierFilm, #doodleFilm').click(function()
+  {
+    updateFilm('zone_saisie_film');
   });
 
   /*** Calendriers ***/

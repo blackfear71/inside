@@ -5,6 +5,18 @@
 $(function()
 {
   /*** Actions au clic ***/
+  // Affiche la saisie de propositions
+  $('#saisiePropositions, #fermerPropositions').click(function()
+  {
+    afficherMasquer('zone_saisie_choix');
+  });
+
+  // Ajoute une nouvelle proposition
+  $('#saisie_autre_choix').click(function()
+  {
+    addChoice('zone_choix', 'zone_marge_choix');
+  });
+
   // Affiche la saisie lieu restaurant
   $(document).on('click', '.afficherLieu', function()
   {
@@ -97,6 +109,152 @@ $(function()
     var id_check = $(this).closest('div').attr('id');
 
     changeCheckedColor(id_check);
+  });
+
+  // Affiche la modification d'un choix
+  $('.modifierChoix').click(function()
+  {
+    var id_choix = $(this).attr('id').replace('modifier_', '');
+
+    afficherMasquerNoDelay('modifier_choix_' + id_choix);
+    afficherMasquerNoDelay('visualiser_choix_' + id_choix);
+    initMasonry();
+  });
+
+  // Ferme la modification d'un choix
+  $('.annulerChoix').click(function()
+  {
+    var id_choix = $(this).attr('id').replace('annuler_', '');
+
+    afficherMasquerNoDelay('modifier_choix_' + id_choix);
+    afficherMasquerNoDelay('visualiser_choix_' + id_choix);
+    initMasonry();
+  });
+
+  // Affiche la modification de l'horaire d'un choix
+  $(document).on('click', '.afficherHoraireUpdate', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('update_horaire_', '');
+    var id_listbox = 'zone_update_listbox_horaire_' + num;
+
+    afficherMasquerNoDelay(id_bouton);
+    afficherListboxHoraires(id_listbox, id_bouton, 'update', num);
+  });
+
+  // Masque la modification de l'horaire d'un choix
+  $(document).on('click', '.annulerHoraireUpdate', function()
+  {
+    var id_annuler  = $(this).attr('id');
+    var num         = $(this).attr('id').replace('annuler_horaires_', '');
+    var id_zone     = 'update_horaire_' + num;
+    var id_select_h = 'select_heures_' + num;
+    var id_select_m = 'select_minutes_' + num;
+
+    cacherListboxHoraires(id_zone, id_annuler, id_select_h, id_select_m);
+  });
+
+  // Affiche les détails d'une proposition
+  $('.afficherDetails').click(function()
+  {
+    var id_details = $(this).attr('id').replace('afficher_details_', '');
+
+    afficherMasquer('zone_details_determined_' + id_details);
+  });
+
+  // Ferme les détails d'une proposition
+  $('.fermerDetails').click(function()
+  {
+    var id_details = $(this).attr('id').replace('fermer_details_', '');
+
+    afficherMasquer('zone_details_determined_' + id_details);
+  });
+
+  // Affiche la saisie de restaurant
+  $('#saisieRestaurant, #fermerRestaurant').click(function()
+  {
+    afficherMasquer('zone_add_restaurant');
+  });
+
+  // Change le statut d'un jour d'ouverture (saisie)
+  $('.checkDay').click(function()
+  {
+    var id_jour = $(this).attr('id').split('_');
+    var day     = id_jour[id_jour.length - 1];
+
+    changeCheckedDay('saisie_checkbox_ouverture_' + day, 'saisie_label_ouverture_' + day, 'label_jour_checked', 'label_jour');
+  });
+
+  // Ajoute un champ de saisie libre type de restaurant (saisie)
+  $('#addType').click(function()
+  {
+    addOtherType('types_restaurants');
+  });
+
+  // Change la couleur des checkbox types de restaurant (saisie & modification)
+  $('.checkType, .checkTypeUpdate').click(function()
+  {
+    var id_type = $(this).closest('div').attr('id');
+
+    changeCheckedColor(id_type);
+  });
+
+  // Scroll vers un lieu
+  $('.lienLieu').click(function()
+  {
+    var id_lieu = $(this).attr('id').replace('link_', '');
+    var offset  = 20;
+    var shadow  = false;
+
+    scrollToId(id_lieu, offset, shadow);
+  });
+
+  // Affiche la description longue d'un restaurant
+  $('.descriptionRestaurant').click(function()
+  {
+    var id_restaurant = $(this).attr('id').replace('description_', '');
+
+    afficherMasquerNoDelay('short_description_' + id_restaurant);
+    afficherMasquerNoDelay('long_description_' + id_restaurant);
+    initMasonry();
+  });
+
+  // Affiche la zone de modification d'un restaurant
+  $('.modifierRestaurant').click(function()
+  {
+    var id_restaurant = $(this).attr('id').replace('modifier_', '');
+
+    afficherMasquerNoDelay('modifier_restaurant_' + id_restaurant);
+    afficherMasquerNoDelay('visualiser_restaurant_' + id_restaurant);
+    initMasonry();
+  });
+
+  // Ferme la zone de modification d'un restaurant
+  $('.annulerRestaurant').click(function()
+  {
+    var id_restaurant = $(this).attr('id').replace('annuler_', '');
+
+    afficherMasquerNoDelay('modifier_restaurant_' + id_restaurant);
+    afficherMasquerNoDelay('visualiser_restaurant_' + id_restaurant);
+    initMasonry();
+  });
+
+  // Change le statut d'un jour d'ouverture (modification)
+  $('.checkDayUpdate').click(function()
+  {
+    var id_jour = $(this).attr('id').split('_');
+    var num     = id_jour[id_jour.length - 1];
+    var day     = id_jour[id_jour.length - 2];
+
+    changeCheckedDay('checkbox_update_ouverture_' + day + '_' + num, 'label_update_ouverture_' + day + '_' + num, 'update_label_jour_checked', 'update_label_jour');
+  });
+
+  // Ajoute un champ de saisie libre type de restaurant (modification)
+  $('.addTypeUpdate').click(function()
+  {
+    var id_restaurant = $(this).attr('id').replace('type_update_', '');
+
+    addOtherType('update_types_restaurants_' + id_restaurant);
   });
 });
 
@@ -313,7 +471,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
     name_select_h = 'select_heures[' + num + ']';
     name_select_m = 'select_minutes[' + num + ']';
     class_listbox = "listbox_horaires";
-    class_bouton  = "bouton_annuler";
+    class_bouton  = "bouton_annuler annulerHoraire";
   }
   else if (type == "update")
   {
@@ -321,7 +479,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
     name_select_h = 'select_heures_' + num;
     name_select_m = 'select_minutes_' + num;
     class_listbox = "listbox_horaires_update";
-    class_bouton  = "bouton_annuler_update";
+    class_bouton  = "bouton_annuler_update annulerHoraireUpdate";
   }
 
   var id_select_h = 'select_heures_' + num;
@@ -349,7 +507,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
     }
   html += '</select>';
 
-  html += '<a id="' + id_annuler + '" class="' + class_bouton + ' annulerHoraire">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="' + class_bouton + '">Annuler</a>';
 
   $("#" + id).append(html);
 }
