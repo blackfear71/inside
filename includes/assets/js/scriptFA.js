@@ -635,7 +635,7 @@ function afficherSaisieMenu(id)
     html += '<input type="text" placeholder="Dessert" name="saisie_dessert[' + num + ']" class="saisie_menu" />';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerMenu" style="margin-top: 30px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerMenu" style="margin-top: 27px;">Annuler</a>';
 
   $("#" + id).append(html);
 }

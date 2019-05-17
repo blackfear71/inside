@@ -111,6 +111,10 @@
 	cursor: pointer;
 	text-align: center;
 	vertical-align: top;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .zone_boutons
@@ -250,6 +254,10 @@
 	text-align: center;
 	border: 0;
 	vertical-align: top;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .bouton_annuler:hover
@@ -1210,6 +1218,10 @@
 	cursor: pointer;
 	text-align: center;
 	line-height: 32px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .bouton_choix_update:hover
@@ -1259,6 +1271,10 @@
 	color: #262626;
 	cursor: pointer;
 	border: 0;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .bouton_annuler_update:hover
@@ -1598,6 +1614,10 @@
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	cursor: pointer;
+	-moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .bouton_type_autre:hover

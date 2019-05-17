@@ -432,6 +432,10 @@
 	font-size: 60%;
 	color: #262626;
 	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .bouton_fold:hover
@@ -473,6 +477,10 @@
 	text-align: center;
 	line-height: 20px;
 	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .fond_hide:hover
@@ -979,6 +987,10 @@
 	cursor: pointer;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .symbol_hidden
