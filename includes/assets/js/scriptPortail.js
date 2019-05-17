@@ -19,7 +19,7 @@ $(window).on('load', function()
   // Masonry (Portail)
   if ($('.menu_portail').length)
   {
-    $('.menu_portail').masonry('destroy');
+    $('.menu_portail').masonry().masonry('destroy');
 
     $('.menu_portail').masonry({
       // Options

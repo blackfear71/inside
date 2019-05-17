@@ -320,7 +320,7 @@ $(window).on('load', function()
   // Masonry (Propositions)
   if ($('.zone_propositions').length)
   {
-    $('.zone_propositions').masonry('destroy');
+    $('.zone_propositions').masonry().masonry('destroy');
 
     $('.zone_propositions').masonry({
       // Options
@@ -338,7 +338,7 @@ $(window).on('load', function()
   // Masonry (Restaurants)
   if ($('.zone_fiches_restaurants').length)
   {
-    $('.zone_fiches_restaurants').masonry('destroy');
+    $('.zone_fiches_restaurants').masonry().masonry('destroy');
 
     $('.zone_fiches_restaurants').masonry({
       // Options

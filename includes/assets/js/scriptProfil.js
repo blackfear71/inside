@@ -121,7 +121,7 @@ $(window).on('load', function()
   // Masonry (Contributions)
   if ($('.zone_profil_contributions').length)
   {
-    $('.zone_profil_contributions').masonry('destroy');
+    $('.zone_profil_contributions').masonry().masonry('destroy');
 
     $('.zone_profil_contributions').masonry({
       // Options
@@ -139,7 +139,7 @@ $(window).on('load', function()
   // Masonry (Succès)
   if ($('.succes_liste').length)
   {
-    $('.zone_niveau_succes').masonry('destroy');
+    $('.zone_niveau_succes').masonry().masonry('destroy');
 
     $('.zone_niveau_succes').masonry({
       // Options
@@ -157,7 +157,7 @@ $(window).on('load', function()
   // Masonry (Classement)
   if ($('.classement_liste').length)
   {
-    $('.zone_niveau_succes').masonry('destroy');
+    $('.zone_niveau_succes').masonry().masonry('destroy');
 
     $('.zone_niveau_succes').masonry({
       // Options

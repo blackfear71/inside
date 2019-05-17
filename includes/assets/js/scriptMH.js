@@ -145,7 +145,7 @@ $(window).on('load', function()
   // Masonry (Accueil)
   if ($('.zone_films_accueil').length)
   {
-    $('.zone_films_accueil').masonry('destroy');
+    $('.zone_films_accueil').masonry().masonry('destroy');
 
     $('.zone_films_accueil').masonry({
       // Options
@@ -163,7 +163,7 @@ $(window).on('load', function()
   // Masonry (Fiches films)
   if ($('.zone_fiches_films').length)
   {
-    $('.zone_fiches_films').masonry('destroy');
+    $('.zone_fiches_films').masonry().masonry('destroy');
 
     $('.zone_fiches_films').masonry({
       // Options

@@ -163,28 +163,10 @@ $(function()
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
-  // Masonry (Thèmes)
-  if ($('.zone_themes').length)
-  {
-    $('.zone_themes').masonry('destroy');
-
-    $('.zone_themes').masonry({
-      // Options
-      itemSelector: '.zone_theme',
-      columnWidth: 500,
-      fitWidth: true,
-      gutter: 20,
-      horizontalOrder: true
-    });
-
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_themes').addClass('masonry');
-  }
-
   // Masonry (Portail)
   if ($('.menu_admin').length)
   {
-    $('.menu_admin').masonry('destroy');
+    $('.menu_admin').masonry().masonry('destroy');
 
     $('.menu_admin').masonry({
       // Options
@@ -202,7 +184,7 @@ $(window).on('load', function()
   // Masonry (Infos utilisateurs)
   if ($('.zone_infos').length)
   {
-    $('.zone_infos').masonry('destroy');
+    $('.zone_infos').masonry().masonry('destroy');
 
     $('.zone_infos').masonry({
       // Options
@@ -216,6 +198,24 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_infos').addClass('masonry');
   }
+  
+  // Masonry (Thèmes)
+  if ($('.zone_themes').length)
+  {
+    $('.zone_themes').masonry().masonry('destroy');
+
+    $('.zone_themes').masonry({
+      // Options
+      itemSelector: '.zone_theme',
+      columnWidth: 500,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_themes').addClass('masonry');
+  }
 
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_admin').css('display', 'block');
@@ -223,7 +223,7 @@ $(window).on('load', function()
   // Masonry (Succès)
   if ($('.zone_niveau_succes_admin').length)
   {
-    $('.zone_niveau_succes_admin').masonry('destroy');
+    $('.zone_niveau_succes_admin').masonry().masonry('destroy');
 
     $('.zone_niveau_succes_admin').masonry({
       // Options
@@ -241,7 +241,7 @@ $(window).on('load', function()
   // Masonry (Modification succès)
   if ($('.zone_niveau_mod_succes_admin').length)
   {
-    $('.zone_niveau_mod_succes_admin').masonry('destroy');
+    $('.zone_niveau_mod_succes_admin').masonry().masonry('destroy');
 
     $('.zone_niveau_mod_succes_admin').masonry({
       // Options

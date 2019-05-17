@@ -157,7 +157,7 @@ $(window).on('load', function()
   // Masonry (Phrases cultes & images)
   if ($('.zone_collectors').length)
   {
-    $('.zone_collectors').masonry('destroy');
+    $('.zone_collectors').masonry().masonry('destroy');
 
     $('.zone_collectors').masonry({
       // Options
