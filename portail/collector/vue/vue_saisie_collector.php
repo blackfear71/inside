@@ -17,9 +17,9 @@
 
         // Saisie speaker
         if (!empty($_SESSION['save']['other_speaker']))
-          echo '<select name="speaker" id="speaker" onchange="afficherOther(\'speaker\', \'other_name\');" class="saisie_speaker speaker_autre" required>';
+          echo '<select name="speaker" id="speaker" class="saisie_speaker speaker_autre" required>';
         else
-          echo '<select name="speaker" id="speaker" onchange="afficherOther(\'speaker\', \'other_name\');" class="saisie_speaker" required>';
+          echo '<select name="speaker" id="speaker" class="saisie_speaker" required>';
             echo '<option value="" hidden>Choisissez...</option>';
 
             foreach ($listeUsers as $user)

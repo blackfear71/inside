@@ -28,6 +28,18 @@ $(function()
     afficherListboxLieux(id_listbox);
   });
 
+  // Affiche la saisie restaurant liée au lieu
+  $(document).on('change', '.afficherRestaurant', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('select_lieu_', '');
+
+    console.log(id_bouton);
+    console.log(num);
+
+    afficherListboxRestaurants('select_lieu_' + num, 'zone_listbox_' + num, 'annuler_restaurant_' + num);
+  });
+
   // Affiche la saisie horaire restaurant
   $(document).on('click', '.afficherHoraire', function()
   {
@@ -256,6 +268,43 @@ $(function()
 
     addOtherType('update_types_restaurants_' + id_restaurant);
   });
+
+  /*** Actions au changement ***/
+  // Change la couleur du type à la saisie
+  $(document).on('input', '.saisieType', function()
+  {
+    id_type = $(this).attr('id');
+
+    changeTypeColor(id_type);
+  });
+
+  // Affiche la saisie "Autre" (saisie)
+  $('#saisie_location').on('change', function()
+  {
+    afficherOther('saisie_location', 'saisie_other_location', 'saisie_nom');
+  });
+
+  // Charge l'image (saisie)
+  $('.loadSaisieRestaurant').on('change', function()
+  {
+    loadFile(event, 'img_restaurant_saisie');
+  });
+
+  // Affiche la saisie "Autre" (modification)
+  $('.changeLieu').on('change', function()
+  {
+    id_restaurant = $(this).attr('id').replace('update_location_', '');
+
+    afficherModifierOther('update_location_' + id_restaurant, 'other_location_' + id_restaurant, 'saisie_nom');
+  });
+
+  // Charge l'image (modification)
+  $('.loadModifierRestaurant').on('change', function()
+  {
+    id_restaurant = $(this).attr('id').replace('modifier_image_', '');
+
+    loadFile(event, 'img_restaurant_' + id_restaurant);
+  });
 });
 
 /************************/
@@ -408,7 +457,7 @@ function afficherListboxLieux(id)
   var html;
 
   html = '<div id="' + id_zone + '" class="zone_listbox_restaurant">';
-    html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_choix" onchange="afficherListboxRestaurants(\'' + id_select + '\', \'' + id_zone + '\', \'' + id_annuler + '\')" required>';
+    html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_choix afficherRestaurant" required>';
       html += '<option value="" hidden>Choisissez...</option>';
       $.each(listeLieux, function(key, value)
       {
@@ -725,7 +774,7 @@ function changeTypeColor(id)
   else
   {
     $('#' + id).css('background-color', '#e3e3e3');
-    $('#' + id).css('color', '262626');
+    $('#' + id).css('color', '#262626');
   }
 }
 
@@ -737,7 +786,7 @@ function addOtherType(id)
   var new_length = length + 1;
   var id_type    = id + '_' + new_length;
 
-  html = '<input type="text" placeholder="Type" value="" id="' + id_type + '" name="' + id + '[' + new_length + ']" oninput="changeTypeColor(\'' + id_type + '\')" class="type_other" />';
+  html = '<input type="text" placeholder="Type" value="" id="' + id_type + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
 
   $("#" + id).append(html);
 }

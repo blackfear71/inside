@@ -17,7 +17,7 @@
           // Photo
           echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-          echo '<span class="zone_parcourir_restaurant_saisie">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie" onchange="loadFile(event, \'img_restaurant_saisie\')" /></span>';
+          echo '<span class="zone_parcourir_restaurant_saisie">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie loadSaisieRestaurant" /></span>';
 
           echo '<div class="mask_saisie_restaurant">';
             echo '<img id="img_restaurant_saisie" alt="" class="image_saisie_restaurant" />';
@@ -65,9 +65,9 @@
 
           // Lieu
           if ($_SESSION['save']['location'] == "other_location")
-            echo '<select name="location" id="saisie_location" onchange="afficherOther(\'saisie_location\', \'saisie_other_location\', \'saisie_nom\');" class="saisie_lieu" style="width: calc(33% - 100px);" required>';
+            echo '<select name="location" id="saisie_location" class="saisie_lieu" style="width: calc(33% - 100px);" required>';
           else
-            echo '<select name="location" id="saisie_location" onchange="afficherOther(\'saisie_location\', \'saisie_other_location\', \'saisie_nom\');" class="saisie_lieu" required>';
+            echo '<select name="location" id="saisie_location" class="saisie_lieu" required>';
               echo '<option value="" hidden>Choisissez...</option>';
 
               foreach ($listeLieux as $lieu)
@@ -158,7 +158,7 @@
                   $id_custom_type    = "type_" . formatId($saved_types);
                   $label_custom_type = "label_" . formatId($saved_types);
 
-                  echo '<input type="text" placeholder="Type" value="' . $saved_types . '" id="' . $id_custom_type . '" name="types_restaurants[' . $j . ']" oninput="changeTypeColor(\'' . $id_custom_type . '\')" class="type_other filled" />';
+                  echo '<input type="text" placeholder="Type" value="' . $saved_types . '" id="' . $id_custom_type . '" name="types_restaurants[' . $j . ']" class="type_other filled saisieType" />';
 
                   $j++;
                 }

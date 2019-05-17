@@ -21,7 +21,7 @@
 
           echo '<div class="zone_parcourir_image">';
             echo '<div class="symbole_saisie_image">+</div>';
-            echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image" onchange="loadFile(event, \'image_collector\')" required />';
+            echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image loadSaisieCollector" required />';
           echo '</div>';
 
           echo '<div class="mask_image">';
@@ -33,9 +33,9 @@
         echo '<div class="zone_image_right">';
           // Saisie speaker
           if (!empty($_SESSION['save']['other_speaker']))
-            echo '<select name="speaker" id="speaker_2" onchange="afficherOther(\'speaker_2\', \'other_name_2\');" class="saisie_speaker speaker_autre" required>';
+            echo '<select name="speaker" id="speaker_2" class="saisie_speaker speaker_autre" required>';
           else
-            echo '<select name="speaker" id="speaker_2" onchange="afficherOther(\'speaker_2\', \'other_name_2\');" class="saisie_speaker" required>';
+            echo '<select name="speaker" id="speaker_2" class="saisie_speaker" required>';
               echo '<option value="" hidden>Choisissez...</option>';
 
               foreach ($listeUsers as $user)

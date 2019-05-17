@@ -138,7 +138,7 @@
               echo '<div class="zone_fiche_left">';
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-                echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update" onchange="loadFile(event, \'img_restaurant_' . $restaurant->getId() . '\')" /></span>';
+                echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" id="modifier_image_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update loadModifierRestaurant" /></span>';
 
                 echo '<div class="mask_update_restaurant">';
                   if (!empty($restaurant->getPicture()))
@@ -153,7 +153,7 @@
                 echo '<input type="text" name="update_name_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getName() . '" placeholder="Nom du restaurant" class="update_nom_restaurant" required />';
 
                 // Lieu
-                echo '<select name="update_location_' . $restaurant->getId() . '" id="update_location_' . $restaurant->getId() . '" class="update_lieu_restaurant" onchange="afficherModifierOther(\'update_location_' . $restaurant->getId() . '\', \'other_location_' . $restaurant->getId() . '\');" required>';
+                echo '<select name="update_location_' . $restaurant->getId() . '" id="update_location_' . $restaurant->getId() . '" class="update_lieu_restaurant changeLieu" required>';
                   echo '<option value="" hidden>Choisissez...</option>';
 
                   foreach ($listeLieux as $lieu)

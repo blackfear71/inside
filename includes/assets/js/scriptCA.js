@@ -1,3 +1,23 @@
+/**************/
+/*** Action ***/
+/**************/
+// Au chargement du document
+$(function()
+{
+  /*** Actions au changement ***/
+  // Charge le calendrier
+  $('.loadCalendrier').on('change', function()
+  {
+    loadFile(event, 'image_calendars');
+  });
+
+  // Charge l'annexe
+  $('.loadAnnexe').on('change', function()
+  {
+    loadFile(event, 'image_annexes');
+  });
+});
+
 /***************/
 /*** Masonry ***/
 /***************/

@@ -19,7 +19,7 @@
   echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierAvatar" enctype="multipart/form-data" class="form_update_avatar">';
     echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
-    echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar" onchange="loadFile(event, \'avatar\')" required /></span>';
+    echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar loadAvatar" required /></span>';
 
     echo '<div class="mask_avatar">';
       echo '<img id="avatar" alt="" class="avatar_update_profil" />';

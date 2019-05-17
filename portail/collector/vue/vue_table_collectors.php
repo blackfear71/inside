@@ -201,7 +201,7 @@
               if (!empty($collector->getSpeaker()))
               {
                 echo '<div class="zone_modify_speaker">';
-                  echo '<select name="speaker" id="speaker_' . $collector->getId() . '" onchange="afficherModifierOther(\'speaker_' . $collector->getId() . '\', \'other_speaker_' . $collector->getId() . '\');" class="modify_speaker" required>';
+                  echo '<select name="speaker" id="speaker_' . $collector->getId() . '" class="modify_speaker changeSpeaker" required>';
                     echo '<option value="" hidden>Choisissez...</option>';
 
                     foreach ($listeUsers as $user)
@@ -263,11 +263,11 @@
                   echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
                   echo '<span class="zone_parcourir_update" id="zone_parcourir_' . $collector->getId() . '">';
-                    echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_update" onchange="loadFile(event, \'image_collector_' . $collector->getId() . '\',  \'' . $collector->getId() . '\');" />';
+                    echo '<input id="fichier_' . $collector->getId() . '" type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_update loadModifierCollector" />';
                   echo '</span>';
 
                   echo '<div class="mask_update" id="mask_collector_' . $collector->getId() . '">';
-                    echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" onload="adaptBrowse(\'' . $collector->getId() . '\'); initMasonry();" id="image_collector_' . $collector->getId() . '" alt="' . $collector->getCollector() . '" class="image_update" />';
+                    echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" id="image_collector_' . $collector->getId() . '" alt="' . $collector->getCollector() . '" class="image_update loadImage" />';
                   echo '</div>';
                 echo '</div>';
               }

@@ -63,6 +63,57 @@ $(function()
     event.stopPropagation();
   });
 
+  /*** Actions au changement ***/
+  // Applique les filtres
+  $('#applySort, #applyFilter').on('change', function()
+  {
+    if ($(this).val() == 'dateDesc' || $(this).val() == 'dateAsc')
+      applySortOrFilter($(this).val(), $_GET('filter'));
+    else
+      applySortOrFilter($_GET('sort'), $(this).val());
+  });
+
+  // Affiche la saisie "Autre" (phrase culte)
+  $('#speaker').on('change', function()
+  {
+    afficherOther('speaker', 'other_name');
+  });
+
+  // Affiche la saisie "Autre" (image)
+  $('#speaker_2').on('change', function()
+  {
+    afficherOther('speaker_2', 'other_name_2');
+  });
+
+  // Charge l'image (saisie)
+  $('.loadSaisieCollector').on('change', function()
+  {
+    loadFile(event, 'image_collector');
+  });
+
+  // Affiche la saisie "Autre" (modification)
+  $('.changeSpeaker').on('change', function()
+  {
+    id_collector = $(this).attr('id').replace('speaker_', '');
+
+    afficherModifierOther('speaker_' + id_collector, 'other_speaker_' + id_collector);
+  });
+
+  // Charge l'image (modification)
+  $('.loadModifierCollector').on('change', function()
+  {
+    var id_image = $(this).attr('id').replace('fichier_', '');
+    loadFile(event, 'image_collector_' + id_image);
+  });
+
+  $('.loadImage').on('load', function()
+  {
+    var id_image = $(this).attr('id').replace('image_collector_', '');
+
+    adaptBrowse(id_image);
+    initMasonry();
+  });
+
   /*** Calendriers ***/
   if ($("#datepicker_collector").length || $("#datepicker_image").length)
   {
@@ -182,8 +233,8 @@ function adaptBrowse(id)
 // Insère une prévisualisation de l'image sur la zone
 var loadFile = function(event, id)
 {
-  var output = document.getElementById(id);
-  output.src = URL.createObjectURL(event.target.files[0]);
+  var output   = document.getElementById(id);
+  output.src   = URL.createObjectURL(event.target.files[0]);
 
   // Rotation automatique
   EXIF.getData(event.target.files[0], function()

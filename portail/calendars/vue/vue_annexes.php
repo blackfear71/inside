@@ -51,7 +51,7 @@
 
                     echo '<div class="zone_parcourir_image">';
                       echo '<div class="symbole_saisie_image">+</div>';
-                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="annexe" class="bouton_parcourir_image" onchange="loadFile(event, \'image_annexes\')" required />';
+                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="annexe" class="bouton_parcourir_image loadAnnexe" required />';
                     echo '</div>';
 
                     echo '<div class="mask_image">';

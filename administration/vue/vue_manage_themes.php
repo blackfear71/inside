@@ -40,7 +40,7 @@
               // Header
               echo '<div class="zone_parcourir_header">';
                 echo '<div class="titre_saisie_header">Header</div>';
-                echo '<input type="file" accept=".png" name="header" class="bouton_parcourir_header" onchange="loadFile(event, \'theme_header\')" required />';
+                echo '<input type="file" accept=".png" name="header" class="bouton_parcourir_header loadHeader" required />';
               echo '</div>';
 
               echo '<div class="mask_header">';
@@ -50,7 +50,7 @@
               // Background
               echo '<div class="zone_parcourir_background">';
                 echo '<div class="titre_saisie_background">Background</div>';
-                echo '<input type="file" accept=".png" name="background" class="bouton_parcourir_background" onchange="loadFile(event, \'theme_background\')" required />';
+                echo '<input type="file" accept=".png" name="background" class="bouton_parcourir_background loadBackground" required />';
               echo '</div>';
 
               echo '<div class="mask_background">';
@@ -60,7 +60,7 @@
               // Footer
               echo '<div class="zone_parcourir_footer">';
                 echo '<div class="titre_saisie_footer">Footer</div>';
-                echo '<input type="file" accept=".png" name="footer" class="bouton_parcourir_footer" onchange="loadFile(event, \'theme_footer\')" required />';
+                echo '<input type="file" accept=".png" name="footer" class="bouton_parcourir_footer loadFooter" required />';
               echo '</div>';
 
               echo '<div class="mask_footer">';
@@ -71,7 +71,7 @@
                 // Logo
                 echo '<div class="zone_parcourir_logo">';
                   echo '<div class="titre_saisie_logo">Logo</div>';
-                  echo '<input type="file" accept=".png" name="logo" class="bouton_parcourir_logo" onchange="loadFile(event, \'theme_logo\')" />';
+                  echo '<input type="file" accept=".png" name="logo" class="bouton_parcourir_logo loadLogo" />';
                 echo '</div>';
 
                 echo '<div class="mask_logo">';

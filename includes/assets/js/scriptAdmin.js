@@ -68,6 +68,61 @@ $(function()
     changeCheckedColor(id_bouton);
   });
 
+  /*** Actions au changement ***/
+  // Charge l'avatar
+  $('.loadAvatar').on('change', function()
+  {
+    loadFile(event, 'avatar');
+  });
+
+  // Charge le thème (header)
+  $('.loadHeader').on('change', function()
+  {
+    loadFile(event, 'theme_header');
+  });
+
+  // Charge le thème (background)
+  $('.loadBackground').on('change', function()
+  {
+    loadFile(event, 'theme_background');
+  });
+
+  // Charge le thème (footer)
+  $('.loadFooter').on('change', function()
+  {
+    loadFile(event, 'theme_footer');
+  });
+
+  // Charge le thème (logo)
+  $('.loadLogo').on('change', function()
+  {
+    loadFile(event, 'theme_logo');
+  });
+
+  // Charge la bannière (mission)
+  $('.loadBanner').on('change', function()
+  {
+    loadFile(event, 'banner');
+  });
+
+  // Charge le bouton gauche (mission)
+  $('.loadLeft').on('change', function()
+  {
+    loadFile(event, 'button_g');
+  });
+
+  // Charge le bouton milieu (mission)
+  $('.loadMiddle').on('change', function()
+  {
+    loadFile(event, 'button_m');
+  });
+
+  // Charge le bouton droite (mission)
+  $('.loadRight').on('change', function()
+  {
+    loadFile(event, 'button_d');
+  });
+
   /*** Calendriers ***/
   if ($("#datepicker_saisie_deb").length || $("#datepicker_saisie_fin").length)
   {

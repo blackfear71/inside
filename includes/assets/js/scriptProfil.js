@@ -25,12 +25,10 @@ $(function()
 	});
 
   /*** Actions au clic ***/
-  // Change la couleur des switch préférences
+  // Change la couleur des boutons préférences
   $('.label_switch').click(function()
   {
     var id_bouton = $(this).closest('div').attr('id');
-
-    console.log(id_bouton);
 
     switch (id_bouton)
     {
@@ -77,6 +75,13 @@ $(function()
       default:
         break;
     }
+  });
+
+  /*** Actions au changement ***/
+  // Charge l'avatar
+  $('.loadAvatar').on('change', function()
+  {
+    loadFile(event, 'avatar');
   });
 
   /*** Calendriers ***/

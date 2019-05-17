@@ -54,7 +54,7 @@
 
             echo '<div class="zone_filtres">';
               // Tris
-              echo '<select onchange="applySortOrFilter(this.value, \'' . $_GET['filter'] . '\');" class="listbox_filtre">';
+              echo '<select id="applySort" class="listbox_filtre">';
                 if ($_GET['sort'] == "dateDesc")
                   echo '<option value="dateDesc" selected>Du plus récent au plus vieux</option>';
                 else
@@ -67,7 +67,7 @@
               echo '</select>';
 
               // Filtres
-              echo '<select onchange="applySortOrFilter(\'' . $_GET['sort'] . '\', this.value);" class="listbox_filtre">';
+              echo '<select id="applyFilter" class="listbox_filtre">';
                 if ($_GET['filter'] == "none")
                   echo '<option value="none" selected>Aucun filtre</option>';
                 else

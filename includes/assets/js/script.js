@@ -48,7 +48,7 @@ $(function()
       $("#resizeBar").css('transition', 'width ease 0.4s');
       $("#color_search").css('background-color', 'white');
       $("#color_search").css('transition', 'background-color ease 0.4s');
-      
+
       event.stopPropagation();
     }
   });
@@ -89,6 +89,17 @@ $(function()
   $('#menuLateral').click(function()
   {
     deployLeftMenu('left_menu', 'icon_menu_m', 'icon_menu_e', 'icon_menu_n', 'icon_menu_u');
+  });
+
+  /*** Actions au passage de la souris ***/
+  $('#color_search').mouseover(function()
+  {
+    changeColorToWhite('color_search');
+  });
+
+  $('#color_search').mouseout(function()
+  {
+    changeColorToGrey('color_search', 'resizeBar')
   });
 });
 

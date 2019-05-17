@@ -86,7 +86,7 @@
 
                     echo '<div class="zone_parcourir_image">';
                       echo '<div class="symbole_saisie_image">+</div>';
-                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_image" onchange="loadFile(event, \'image_calendars\')" required />';
+                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_image loadCalendrier" required />';
                     echo '</div>';
 
                     echo '<div class="mask_image">';
