@@ -168,9 +168,9 @@ $(window).on('load', function()
     $('.zone_fiches_films').masonry({
       // Options
       itemSelector: '.zone_fiche_film',
-      columnWidth: 350,
+      columnWidth: 420,
       fitWidth: true,
-      gutter: 10,
+      gutter: 20,
       horizontalOrder: true
     });
 
@@ -314,16 +314,17 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
 
   html  = '<div class="fond_saisie_preference">';
     html += '<div class="zone_saisie_preference">';
-      // Bouton fermeture
-      html += '<a id="masquerPreference" class="close_preference"><img src="/inside/includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
-
-      // Titre
+      // Zone titre
       html += '<div class="titre_saisie_preference">';
-        html += 'Votre préférence pour "' + titre + '"';
+        // Bouton fermeture
+        html += '<a id="masquerPreference" class="close_preference"><img src="/inside/includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+
+        // Titre
+        html += '<div class="titre_preference">Votre préférence pour "' + titre + '"</div>';
       html += '</div>';
 
       // Etoiles
-      html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&id_film=' + id_film + '&action=doVoterFilm">';
+      html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&id_film=' + id_film + '&action=doVoterFilm" class="form_saisie_preference">';
         for (var i = 0; i <= 5; i++)
         {
           html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '.png" alt="star' + i + '" class="icone_preference" />';

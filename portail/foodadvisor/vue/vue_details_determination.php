@@ -170,7 +170,7 @@
               echo '<div class="titre_details" style="margin-top: -10px;"><img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />Les participants</div>';
 
               // Bouton fermeture
-              echo '<a id="fermer_details_' . $proposition->getId_restaurant() . '" class="close_details fermerDetails"><img src="../../includes/icons/common/close_black.png" alt="close_black" title="Fermer" class="close_img" /></a>';
+              echo '<a id="fermer_details_' . $proposition->getId_restaurant() . '" class="close_details fermerDetails"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="close_img" /></a>';
 
               // Transports et horaires
               foreach ($proposition->getDetails() as $detailsUser)
