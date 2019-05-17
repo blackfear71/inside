@@ -34,9 +34,6 @@ $(function()
     var id_bouton  = $(this).attr('id');
     var num        = $(this).attr('id').replace('select_lieu_', '');
 
-    console.log(id_bouton);
-    console.log(num);
-
     afficherListboxRestaurants('select_lieu_' + num, 'zone_listbox_' + num, 'annuler_restaurant_' + num);
   });
 
