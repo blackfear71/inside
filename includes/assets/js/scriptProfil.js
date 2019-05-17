@@ -4,6 +4,7 @@
 // Au chargement du document
 $(function()
 {
+  /*** Actions au chargement ***/
   // Adaptation mobile
   adaptProfil();
 
@@ -22,6 +23,61 @@ $(function()
 		stroke: 5,
 		duration: 1000
 	});
+
+  /*** Actions au clic ***/
+  // Change la couleur des switch préférences
+  $('.label_switch').click(function()
+  {
+    var id_bouton = $(this).closest('div').attr('id');
+
+    console.log(id_bouton);
+
+    switch (id_bouton)
+    {
+      // Notifications
+      case 'bouton_me':
+      case 'bouton_today':
+      case 'bouton_week':
+      case 'bouton_all_n':
+        switchCheckedColor('switch_default_view_notifications', id_bouton);
+        break;
+
+      // Films
+      case 'bouton_accueil':
+      case 'bouton_cards':
+      case 'bouton_synthese':
+      case 'bouton_details':
+        switchCheckedColor('switch_default_view_movies', id_bouton);
+        break;
+
+      case 'bouton_waited':
+      case 'bouton_way_out':
+      case 'bouton_date':
+        changeCheckedColor(id_bouton);
+        break;
+
+      case 'bouton_tous':
+        switchCheckedColor('switch_show_films', id_bouton);
+        afficherMasquerOldMovies('all', 'saisie_old_movies', 'input_old_movies');
+        break;
+
+      case 'bouton_partiel':
+        switchCheckedColor('switch_show_films', id_bouton);
+        afficherMasquerOldMovies('', 'saisie_old_movies', 'input_old_movies');
+        break;
+
+      // #TheBox
+      case 'bouton_all':
+      case 'bouton_inprogress':
+      case 'bouton_mine':
+      case 'bouton_done':
+        switchCheckedColor('switch_default_view_ideas', id_bouton);
+        break;
+
+      default:
+        break;
+    }
+  });
 
   /*** Calendriers ***/
   if ($("#datepicker_anniversary").length)
@@ -175,9 +231,9 @@ function switchCheckedColor(zone, input)
 function changeCheckedColor(input)
 {
   if ($('#' + input).children('input').prop('checked'))
-    $('#' + input).addClass('bouton_checked');
-  else
     $('#' + input).removeClass('bouton_checked');
+  else
+    $('#' + input).addClass('bouton_checked');
 }
 
 // Affiche ou masque la saisie vue anciens films

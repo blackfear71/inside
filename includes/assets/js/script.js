@@ -48,6 +48,7 @@ $(function()
       $("#resizeBar").css('transition', 'width ease 0.4s');
       $("#color_search").css('background-color', 'white');
       $("#color_search").css('transition', 'background-color ease 0.4s');
+      
       event.stopPropagation();
     }
   });

@@ -5,7 +5,7 @@
     <?php
       $title_head  = "Notifications";
       $style_head  = "styleNO.css";
-      $script_head = "";
+      $script_head = "scriptNO.js";
       $chat_head   = true;
 
       include('../../includes/common/head.php');
@@ -70,7 +70,7 @@
                   // Lien si présent
                   if (!empty($notification->getLink()))
                     if ($notification->getCategory() == "doodle")
-                      echo '<a href="' . $notification->getLink() . '" target="_blank" class="lien_notification">';
+                      echo '<a href="' . $notification->getLink() . '" id="lien_details_' . $notification->getContent() . '" target="_blank" class="lien_notification lienDetails">';
                     else
                       echo '<a href="' . $notification->getLink() . '" class="lien_notification">';
                   else

@@ -5,18 +5,65 @@
 $(function()
 {
   /*** Actions au clic ***/
+  // Affiche/masque les films cachés (tableaux)
+  $('#show_hidden, #show_hidden_2').click(function()
+  {
+    afficherMasquerTbody('hidden_films', 'show_hidden');
+  });
+
+  // Affiche la saisie de préférence d'un film (tableaux)
+  $('.afficherVote').click(function()
+  {
+    var id_film = $(this).attr('id').replace('preference_', '');
+
+    afficherMasquerNoDelay('preference_' + id_film);
+    afficherMasquerNoDelay('preference2_' + id_film);
+  });
+
+  // Masque la saisie de préférence d'un film (tableaux)
+  $('.annulerVote').click(function()
+  {
+    var id_film = $(this).attr('id').replace('annuler_preference_', '');
+
+    afficherMasquerNoDelay('preference_' + id_film);
+    afficherMasquerNoDelay('preference2_' + id_film);
+  });
+
   // Affiche la zone de saisie d'un film
   $('#ajouterFilm, #annulerFilm').click(function()
   {
     afficherMasquer('zone_saisie_film');
   });
 
-  // Plie ou déplie les fiches des films
-  $('#fold_all, #unfold_all').click(function()
+  // Change la couleur des switch restaurant film
+  $('.label_switch').click(function()
   {
-    id_fold = $(this).attr('id');
+    var id_bouton = $(this).closest('div').attr('id');
+
+    switchCheckedColor('switch_restaurant', id_bouton);
+  });
+
+  // Plie ou déplie les fiches des films
+  $('#fold_all, #unfold_all, .cacherFilms').click(function()
+  {
+    var id_fold = $(this).attr('id');
+
+    if (id_fold != 'fold_all' && id_fold != 'unfold_all')
+      id_fold = $(this).attr('id').replace('lien_hide_', '');
 
     afficherMasquerFilms(id_fold);
+  });
+
+  // Affiche la saisie de préférence d'une fiche
+  $('.afficherPreference').click(function()
+  {
+    var id_film    = $(this).attr('id').replace('fiche_', '');
+    var titre_film = $('#titre_film_' + id_film).val();
+    var vote_film  = $('#vote_film_' + id_film).val();
+    var view       = $_GET('view');
+    var year       = $_GET('year');
+
+    afficherSaisiePreference(titre_film, vote_film, view, year, id_film);
   });
 
   // Masque la saisie de préférence d'une fiche
@@ -25,10 +72,46 @@ $(function()
     masquerSaisiePreference();
   });
 
+  // Redirige vers le détail des films au clic Doodle des fiches
+  $('.lienDetails').click(function()
+  {
+    var id_film = $(this).attr('id').replace('lien_details_', '');
+
+    document.location.href = 'details.php?id_film=' + id_film + '&doodle=true&action=goConsulter';
+  });
+
   // Affiche la zone de modification d'un film
   $('#modifierFilm, #doodleFilm').click(function()
   {
     updateFilm('zone_saisie_film');
+  });
+
+  // Affiche la zone de modification d'un commentaire
+  $('.modifierCommentaire').click(function()
+  {
+    var id_comment = $(this).attr('id').replace('modifier_commentaire_', '');
+
+    afficherMasquerNoDelay('modifier_comment_' + id_comment);
+    afficherMasquerNoDelay('visualiser_comment_' + id_comment);
+  });
+
+  // Masque la zone de modification d'un commentaire
+  $('.annulerCommentaire').click(function()
+  {
+    var id_comment = $(this).attr('id').replace('annuler_commentaire_', '');
+
+    afficherMasquerNoDelay('modifier_comment_' + id_comment);
+    afficherMasquerNoDelay('visualiser_comment_' + id_comment);
+  });
+
+  // Insère un smiley en saisie/modification de commentaire
+  $('.ajouterSmiley, .modifierSmiley').click(function()
+  {
+    var id_smiley  = $(this).attr('id').split('_');
+    var id_comment = id_smiley[id_smiley.length - 1];
+    var smiley     = id_smiley[id_smiley.length - 2];
+
+    insert_smiley(smiley, 'textarea_comment_' + id_comment);
   });
 
   /*** Calendriers ***/
@@ -285,8 +368,48 @@ function afficherMasquerTbody(id, hidden)
 // Insère un smiley dans la zone de saisie
 function insert_smiley(smiley, id)
 {
+  var chars = "";
+
+  switch (smiley)
+  {
+    case '1':
+      chars = ':)';
+      break;
+
+    case '2':
+      chars = ';)';
+      break;
+
+    case '3':
+      chars = ':(';
+      break;
+
+    case '4':
+      chars = ':|';
+      break;
+
+    case '5':
+      chars = ':D';
+      break;
+
+    case '6':
+      chars = ':O';
+      break;
+
+    case '7':
+      chars = ':P';
+      break;
+
+    case '8':
+      chars = ':facepalm:';
+      break;
+
+    default:
+      break;
+  }
+
   // Texte à insérer
-  var texte = smiley + " ";
+  var texte = chars + " ";
 
   // Ajout du texte au contenu déjà présent
   $('#' + id).append(texte);

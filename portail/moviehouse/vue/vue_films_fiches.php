@@ -41,9 +41,9 @@
           $prevMonth = $currentMonth;
 
           if ($currentMonth == date("m"))
-            echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" onclick="afficherMasquerFilms(\'' . $currentMonth . '\')" class="fond_hide">-</a>' . $listMonths[$currentMonth] . '</div>';
+            echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
           else
-            echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" onclick="afficherMasquerFilms(\'' . $currentMonth . '\')" class="fond_hide">-</a>' . $listMonths[$currentMonth] . '</div>';
+            echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
           echo '<div class="zone_fiches_films" id="hide_films_' . $currentMonth . '">';
         }
 
@@ -105,7 +105,7 @@
                   if (!empty($film->getDoodle()))
                     echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="icone_fiche_2" /></a>';
                   else
-                    echo '<a href="https://doodle.com/fr/" onclick="location.href=\'details.php?id_film=' . $film->getId() . '&doodle=true&action=goConsulter\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="icone_fiche_2" /></a>';
+                    echo '<a href="https://doodle.com/fr/" id="lien_details_' . $film->getId() . '" target="_blank" class="lienDetails"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="icone_fiche_2" /></a>';
 
                   // Mail
                   if ($film->getNb_users() > 0)
@@ -125,7 +125,9 @@
                 // Actions
                 echo '<div class="zone_fiche_infos_bottom">';
                   // Vote utilisateur
-                  echo '<a onclick="afficherSaisiePreference(\'' . $film->getFilm() . '\', \'' . $film->getStars_user() . '\', \'' . $_GET['view'] . '\', \'' . $_GET['year'] . '\', \'' . $film->getId() . '\');" class="vote_fiche">';
+                  echo '<a id="fiche_' . $film->getId() . '" class="vote_fiche afficherPreference">';
+                    echo '<input type="hidden" id="titre_film_' . $film->getId() . '" value="' . $film->getFilm() . '" />';
+                    echo '<input type="hidden" id="vote_film_' . $film->getId() . '" value="' . $film->getStars_user() . '" />';
                     echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="icone_fiche_3" />';
                   echo '</a>';
 

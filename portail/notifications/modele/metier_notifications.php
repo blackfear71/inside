@@ -149,7 +149,7 @@
           {
             $icone  = "doodle";
             $phrase = "Un Doodle vient d'être mis en place pour le film <strong>" . $titre_film . "</strong>. N'oubliez pas d'y répondre si vous êtes intéressé(e) !";
-            $lien   = $doodle . '" onclick="location.href=\'/inside/portail/moviehouse/details.php?id_film=' . $notification->getContent() . '&action=goConsulter\';';
+            $lien   = $doodle;
           }
           break;
 

@@ -38,7 +38,7 @@
           // Films cachés en fonction de la préférence utilisateur
           echo '<tr class="hidden_films">';
             echo '<td colspan="10">';
-              echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
+              echo '<a id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
             echo '</td>';
           echo '</tr>';
 
@@ -85,7 +85,7 @@
                     if (!empty($film->getDoodle()))
                       echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
                     else
-                      echo '<a href="https://doodle.com/fr/" onclick="location.href=\'details.php?id_film=' . $film->getId() . '&doodle=true&action=goConsulter\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="logo_tableau_films" /></a>';
+                      echo '<a href="https://doodle.com/fr/" target="_blank" class="lienDetails"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="logo_tableau_films" /></a>';
                   echo '</td>';
 
                   // Date de sortie proposée
@@ -112,7 +112,7 @@
                   else
                     echo '<td class="table_users">';
 
-                      echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" id="preference_' . $film->getId() . '" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                      echo '<a id="preference_' . $film->getId() . '" title="Préférence" class="link_vote afficherVote" style="margin-left: auto; margin-right: auto;">';
                         echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                       echo '</a>';
 
@@ -129,7 +129,7 @@
                         }
 
                         // Bouton annulation
-                        echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" title="Annuler" class="link_vote">';
+                        echo '<a id="annuler_preference_' . $film->getId() . '" title="Annuler" class="link_vote annulerVote">';
                           echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                         echo '</a>';
                       echo '</form>';
@@ -166,7 +166,7 @@
             // Fin films cachés
             echo '<tr class="hidden_films">';
               echo '<td colspan="10">';
-                echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
+                echo '<a id="show_hidden_2" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
               echo '</td>';
             echo '</tr>';
           echo '</tbody>';
@@ -233,7 +233,7 @@
               if (!empty($film->getDoodle()))
                 echo '<a href="' . $film->getDoodle() . '" target="_blank"><img src="../../includes/icons/moviehouse/doodle.png" alt="doodle" title="Lien Doodle" class="logo_tableau_films" /></a>';
               else
-                echo '<a href="https://doodle.com/fr/" onclick="location.href=\'details.php?id_film=' . $film->getId() . '&doodle=true&action=goConsulter\';" target="_blank"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="logo_tableau_films" /></a>';
+                echo '<a href="https://doodle.com/fr/" target="_blank" class="lienDetails"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="logo_tableau_films" /></a>';
             echo '</td>';
 
             // Date de sortie proposée
@@ -260,7 +260,7 @@
             else
               echo '<td class="table_users">';
 
-                echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" id="preference_' . $film->getId() . '" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                echo '<a id="preference_' . $film->getId() . '" title="Préférence" class="link_vote afficherVote" style="margin-left: auto; margin-right: auto;">';
                   echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                 echo '</a>';
 
@@ -277,7 +277,7 @@
                   }
 
                   // Bouton annulation
-                  echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $film->getId() . '\'); afficherMasquerNoDelay(\'preference2_' . $film->getId() . '\');" title="Annuler" class="link_vote">';
+                  echo '<a id="annuler_preference_' . $film->getId() . '" title="Annuler" class="link_vote annulerVote">';
                     echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                   echo '</a>';
                 echo '</form>';

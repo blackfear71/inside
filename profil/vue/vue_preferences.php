@@ -16,14 +16,14 @@
           echo '<div class="zone_contribution large">';
             if ($preferences->getView_notifications() == "M")
             {
-              echo '<div id="bouton_me" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_me\');" class="switch_default_view_notifications bouton_checked">';
+              echo '<div id="bouton_me" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="me" type="radio" name="notifications_view" value="M" checked required />';
                 echo '<label for="me" class="label_switch">Moi</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_me" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_me\');" class="switch_default_view_notifications">';
+              echo '<div id="bouton_me" class="switch_default_view_notifications">';
                 echo '<input id="me" type="radio" name="notifications_view" value="M" required />';
                 echo '<label for="me" class="label_switch">Moi</label>';
               echo '</div>';
@@ -31,14 +31,14 @@
 
             if ($preferences->getView_notifications() == "T")
             {
-              echo '<div id="bouton_today" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_today\');" class="switch_default_view_notifications bouton_checked">';
+              echo '<div id="bouton_today" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="today" type="radio" name="notifications_view" value="T" checked required />';
                 echo '<label for="today" class="label_switch">Aujourd\'hui</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_today" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_today\');" class="switch_default_view_notifications">';
+              echo '<div id="bouton_today" class="switch_default_view_notifications">';
                 echo '<input id="today" type="radio" name="notifications_view" value="T" required />';
                 echo '<label for="today" class="label_switch">Aujourd\'hui</label>';
               echo '</div>';
@@ -48,14 +48,14 @@
 
             if ($preferences->getView_notifications() == "W")
             {
-              echo '<div id="bouton_week" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_week\');" class="switch_default_view_notifications margin_bottom bouton_checked">';
+              echo '<div id="bouton_week" class="switch_default_view_notifications margin_bottom bouton_checked">';
                 echo '<input id="week" type="radio" name="notifications_view" value="W" checked required />';
                 echo '<label for="week" class="label_switch">7 jours</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_week" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_week\');" class="switch_default_view_notifications margin_bottom">';
+              echo '<div id="bouton_week" class="switch_default_view_notifications margin_bottom">';
                 echo '<input id="week" type="radio" name="notifications_view" value="W" required />';
                 echo '<label for="week" class="label_switch">7 jours</label>';
               echo '</div>';
@@ -63,14 +63,14 @@
 
             if ($preferences->getView_notifications() == "A")
             {
-              echo '<div id="bouton_all_n" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_all_n\');" class="switch_default_view_notifications margin_bottom bouton_checked">';
+              echo '<div id="bouton_all_n" class="switch_default_view_notifications margin_bottom bouton_checked">';
                 echo '<input id="all_n" type="radio" name="notifications_view" value="A" checked required />';
                 echo '<label for="all_n" class="label_switch">Toutes</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_all_n" onclick="switchCheckedColor(\'switch_default_view_notifications\', \'bouton_all_n\');" class="switch_default_view_notifications margin_bottom">';
+              echo '<div id="bouton_all_n" class="switch_default_view_notifications margin_bottom">';
                 echo '<input id="all_n" type="radio" name="notifications_view" value="A" required />';
                 echo '<label for="all_n" class="label_switch">Toutes</label>';
               echo '</div>';
@@ -90,14 +90,14 @@
           echo '<div class="zone_contribution large">';
             if ($preferences->getView_movie_house() == "H")
             {
-              echo '<div id="bouton_accueil" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_accueil\');" class="switch_default_view_movies bouton_checked">';
+              echo '<div id="bouton_accueil" class="switch_default_view_movies bouton_checked">';
                 echo '<input id="home" type="radio" name="movie_house_view" value="H" checked required />';
                 echo '<label for="home" class="label_switch">Accueil</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_accueil" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_accueil\');" class="switch_default_view_movies">';
+              echo '<div id="bouton_accueil" class="switch_default_view_movies">';
                 echo '<input id="home" type="radio" name="movie_house_view" value="H" required />';
                 echo '<label for="home" class="label_switch">Accueil</label>';
               echo '</div>';
@@ -105,14 +105,14 @@
 
             if ($preferences->getView_movie_house() == "C")
             {
-              echo '<div id="bouton_cards" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_cards\');" class="switch_default_view_movies bouton_checked">';
+              echo '<div id="bouton_cards" class="switch_default_view_movies bouton_checked">';
                 echo '<input id="cards" type="radio" name="movie_house_view" value="C" checked required />';
                 echo '<label for="cards" class="label_switch">Fiches</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_cards" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_cards\');" class="switch_default_view_movies">';
+              echo '<div id="bouton_cards" class="switch_default_view_movies">';
                 echo '<input id="cards" type="radio" name="movie_house_view" value="C" required />';
                 echo '<label for="cards" class="label_switch">Fiches</label>';
               echo '</div>';
@@ -122,14 +122,14 @@
 
             if ($preferences->getView_movie_house() == "S")
             {
-              echo '<div id="bouton_synthese" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_synthese\');" class="switch_default_view_movies bouton_checked">';
+              echo '<div id="bouton_synthese" class="switch_default_view_movies bouton_checked">';
                 echo '<input id="synthese" type="radio" name="movie_house_view" value="S" checked required />';
                 echo '<label for="synthese" class="label_switch">Synthèse</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_synthese" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_synthese\');" class="switch_default_view_movies">';
+              echo '<div id="bouton_synthese" class="switch_default_view_movies">';
                 echo '<input id="synthese" type="radio" name="movie_house_view" value="S" required />';
                 echo '<label for="synthese" class="label_switch">Synthèse</label>';
               echo '</div>';
@@ -137,14 +137,14 @@
 
             if ($preferences->getView_movie_house() == "D")
             {
-              echo '<div id="bouton_details" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_details\');" class="switch_default_view_movies bouton_checked">';
+              echo '<div id="bouton_details" class="switch_default_view_movies bouton_checked">';
                 echo '<input id="details" type="radio" name="movie_house_view" value="D" checked required />';
                 echo '<label for="details" class="label_switch">Détails</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_details" onclick="switchCheckedColor(\'switch_default_view_movies\', \'bouton_details\');" class="switch_default_view_movies">';
+              echo '<div id="bouton_details" class="switch_default_view_movies">';
                 echo '<input id="details" type="radio" name="movie_house_view" value="D" required />';
                 echo '<label for="details" class="label_switch">Détails</label>';
               echo '</div>';
@@ -159,14 +159,14 @@
 
             if ($films_waited == "Y")
             {
-              echo '<div id="bouton_waited" onclick="changeCheckedColor(\'bouton_waited\');" class="switch_default_view_categories bouton_checked">';
+              echo '<div id="bouton_waited" class="switch_default_view_categories bouton_checked">';
                 echo '<input id="films_waited" type="checkbox" name="films_waited" checked />';
                 echo '<label for="films_waited" class="label_switch">Les plus attendus</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_waited" onclick="changeCheckedColor(\'bouton_waited\');" class="switch_default_view_categories">';
+              echo '<div id="bouton_waited" class="switch_default_view_categories">';
                 echo '<input id="films_waited" type="checkbox" name="films_waited" />';
                 echo '<label for="films_waited" class="label_switch">Les plus attendus</label>';
               echo '</div>';
@@ -174,14 +174,14 @@
 
             if ($films_way_out == "Y")
             {
-              echo '<div id="bouton_way_out" onclick="changeCheckedColor(\'bouton_way_out\');" class="switch_default_view_categories bouton_checked">';
+              echo '<div id="bouton_way_out" class="switch_default_view_categories bouton_checked">';
                 echo '<input id="films_way_out" type="checkbox" name="films_way_out" checked />';
                 echo '<label for="films_way_out" class="label_switch">Les prochaines sorties</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_way_out" onclick="changeCheckedColor(\'bouton_way_out\');" class="switch_default_view_categories">';
+              echo '<div id="bouton_way_out" class="switch_default_view_categories">';
                 echo '<input id="films_way_out" type="checkbox" name="films_way_out" />';
                 echo '<label for="films_way_out" class="label_switch">Les prochaines sorties</label>';
               echo '</div>';
@@ -194,14 +194,14 @@
           echo '<div class="zone_contribution large">';
             if ($preferences->getToday_movie_house() == "Y")
             {
-              echo '<div id="bouton_date" onclick="changeCheckedColor(\'bouton_date\');" class="switch_default_view_date bouton_checked">';
+              echo '<div id="bouton_date" class="switch_default_view_date bouton_checked">';
                 echo '<input id="show_date" type="checkbox" name="affiche_date" checked />';
                 echo '<label for="show_date" class="label_switch">Afficher</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_date" onclick="changeCheckedColor(\'bouton_date\');" class="switch_default_view_date">';
+              echo '<div id="bouton_date" class="switch_default_view_date">';
                 echo '<input id="show_date" type="checkbox" name="affiche_date" />';
                 echo '<label for="show_date" class="label_switch">Afficher</label>';
               echo '</div>';
@@ -216,14 +216,14 @@
 
             if ($affichage == "T")
             {
-              echo '<div id="bouton_tous" onclick="switchCheckedColor(\'switch_show_films\', \'bouton_tous\'); afficherMasquerOldMovies(\'all\', \'saisie_old_movies\', \'input_old_movies\');" class="switch_show_films bouton_checked">';
+              echo '<div id="bouton_tous" class="switch_show_films bouton_checked">';
                 echo '<input id="tous" type="radio" name="old_movies_view" value="T" checked required />';
                 echo '<label for="tous" class="label_switch">Tous</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_tous" onclick="switchCheckedColor(\'switch_show_films\', \'bouton_tous\'); afficherMasquerOldMovies(\'all\', \'saisie_old_movies\', \'input_old_movies\');" class="switch_show_films">';
+              echo '<div id="bouton_tous" class="switch_show_films">';
                 echo '<input id="tous" type="radio" name="old_movies_view" value="T" required />';
                 echo '<label for="tous" class="label_switch">Tous</label>';
               echo '</div>';
@@ -231,14 +231,14 @@
 
             if ($affichage == "P")
             {
-              echo '<div id="bouton_partiel" onclick="switchCheckedColor(\'switch_show_films\', \'bouton_partiel\'); afficherMasquerOldMovies(\'\', \'saisie_old_movies\', \'input_old_movies\');" class="switch_show_films bouton_checked">';
+              echo '<div id="bouton_partiel" class="switch_show_films bouton_checked">';
                 echo '<input id="partiel" type="radio" name="old_movies_view" value="P" checked required />';
                 echo '<label for="partiel" class="label_switch">Partiel</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_partiel" onclick="switchCheckedColor(\'switch_show_films\', \'bouton_partiel\'); afficherMasquerOldMovies(\'\', \'saisie_old_movies\', \'input_old_movies\');" class="switch_show_films">';
+              echo '<div id="bouton_partiel" class="switch_show_films">';
                 echo '<input id="partiel" type="radio" name="old_movies_view" value="P" required />';
                 echo '<label for="partiel" class="label_switch">Partiel</label>';
               echo '</div>';
@@ -344,14 +344,14 @@
           echo '<div class="zone_contribution large">';
             if ($preferences->getView_the_box() == "A")
             {
-              echo '<div id="bouton_all" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_all\');" class="switch_default_view_ideas bouton_checked">';
+              echo '<div id="bouton_all" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="all" type="radio" name="the_box_view" value="A" checked required />';
                 echo '<label for="all" class="label_switch">Toutes</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_all" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_all\');" class="switch_default_view_ideas">';
+              echo '<div id="bouton_all" class="switch_default_view_ideas">';
                 echo '<input id="all" type="radio" name="the_box_view" value="A" required />';
                 echo '<label for="all" class="label_switch">Toutes</label>';
               echo '</div>';
@@ -359,14 +359,14 @@
 
             if ($preferences->getView_the_box() == "P")
             {
-              echo '<div id="bouton_inprogress" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_inprogress\');" class="switch_default_view_ideas bouton_checked">';
+              echo '<div id="bouton_inprogress" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="inprogress" type="radio" name="the_box_view" value="P" checked required />';
                 echo '<label for="inprogress" class="label_switch">En cours</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_inprogress" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_inprogress\');" class="switch_default_view_ideas">';
+              echo '<div id="bouton_inprogress" class="switch_default_view_ideas">';
                 echo '<input id="inprogress" type="radio" name="the_box_view" value="P" required />';
                 echo '<label for="inprogress" class="label_switch">En cours</label>';
               echo '</div>';
@@ -376,14 +376,14 @@
 
             if ($preferences->getView_the_box() == "M")
             {
-              echo '<div id="bouton_mine" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_mine\');" class="switch_default_view_ideas margin_bottom bouton_checked">';
+              echo '<div id="bouton_mine" class="switch_default_view_ideas margin_bottom bouton_checked">';
                 echo '<input id="mine" type="radio" name="the_box_view" value="M" checked required />';
                 echo '<label for="mine" class="label_switch">En charge</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_mine" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_mine\');" class="switch_default_view_ideas margin_bottom">';
+              echo '<div id="bouton_mine" class="switch_default_view_ideas margin_bottom">';
                 echo '<input id="mine" type="radio" name="the_box_view" value="M" required />';
                 echo '<label for="mine" class="label_switch">En charge</label>';
               echo '</div>';
@@ -391,14 +391,14 @@
 
             if ($preferences->getView_the_box() == "D")
             {
-              echo '<div id="bouton_done" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_done\');" class="switch_default_view_ideas margin_bottom bouton_checked">';
+              echo '<div id="bouton_done" class="switch_default_view_ideas margin_bottom bouton_checked">';
                 echo '<input id="done" type="radio" name="the_box_view" value="D" checked required />';
                 echo '<label for="done" class="label_switch">Terminées & rejetées</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_done" onclick="switchCheckedColor(\'switch_default_view_ideas\', \'bouton_done\');" class="switch_default_view_ideas margin_bottom">';
+              echo '<div id="bouton_done" class="switch_default_view_ideas margin_bottom">';
                 echo '<input id="done" type="radio" name="the_box_view" value="D" required />';
                 echo '<label for="done" class="label_switch">Terminées & rejetées</label>';
               echo '</div>';

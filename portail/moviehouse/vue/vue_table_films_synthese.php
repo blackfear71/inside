@@ -45,7 +45,7 @@
           // Films cachés en fonction de la préférence utilisateur
           echo '<tr class="hidden_films">';
             echo '<td colspan="' . $colspan .'">';
-              echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
+              echo '<a id="show_hidden" class="show_hidden_films"><div class="symbol_hidden">+</div> Films cachés</a>';
             echo '</td>';
           echo '</tr>';
 
@@ -88,7 +88,7 @@
                       echo '<td class="table_users">';
                         if ($stars['identifiant'] == $_SESSION['user']['identifiant'])
                         {
-                          echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $ligneFilm['id_film'] . '\'); afficherMasquerNoDelay(\'preference2_' . $ligneFilm['id_film'] . '\');" id="preference_' . $ligneFilm['id_film'] . '" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                          echo '<a id="preference_' . $ligneFilm['id_film'] . '" title="Préférence" class="link_vote afficherVote" style="margin-left: auto; margin-right: auto;">';
                             echo '<img src="../../includes/icons/moviehouse/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                           echo '</a>';
 
@@ -104,7 +104,7 @@
                             }
 
                             // Bouton annulation
-                            echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $ligneFilm['id_film'] . '\'); afficherMasquerNoDelay(\'preference2_' . $ligneFilm['id_film'] . '\');" title="Annuler" class="link_vote">';
+                            echo '<a id="annuler_preference_' . $ligneFilm['id_film'] . '" title="Annuler" class="link_vote annulerVote">';
                               echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                             echo '</a>';
                           echo '</form>';
@@ -128,7 +128,7 @@
             // Fin films cachés
             echo '<tr class="hidden_films">';
               echo '<td colspan="' . $colspan . '">';
-                echo '<a onclick="afficherMasquerTbody(\'hidden_films\', \'show_hidden\');" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
+                echo '<a id="show_hidden_2" class="show_hidden_films"><div class="symbol_hidden">-</div> Films cachés</a>';
               echo '</td>';
             echo '</tr>';
           echo '</tbody>';
@@ -194,7 +194,7 @@
                 echo '<td class="table_users">';
                   if ($stars['identifiant'] == $_SESSION['user']['identifiant'])
                   {
-                    echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $ligneFilm['id_film'] . '\'); afficherMasquerNoDelay(\'preference2_' . $ligneFilm['id_film'] . '\');" id="preference_' . $ligneFilm['id_film'] . '" title="Préférence" class="link_vote" style="margin-left: auto; margin-right: auto;">';
+                    echo '<a id="preference_' . $ligneFilm['id_film'] . '" title="Préférence" class="link_vote afficherVote" style="margin-left: auto; margin-right: auto;">';
                       echo '<img src="../../includes/icons/moviehouse/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                     echo '</a>';
 
@@ -210,7 +210,7 @@
                       }
 
                       // Bouton annulation
-                      echo '<a onclick="afficherMasquerNoDelay(\'preference_' . $ligneFilm['id_film'] . '\'); afficherMasquerNoDelay(\'preference2_' . $ligneFilm['id_film'] . '\');" title="Annuler" class="link_vote">';
+                      echo '<a id="annuler_preference_' . $ligneFilm['id_film'] . '" title="Annuler" class="link_vote annulerVote">';
                         echo '<img src="../../includes/icons/moviehouse/not_interested.png" alt="not_interested" title="Annuler" class="cancel_vote" />';
                       echo '</a>';
                     echo '</form>';

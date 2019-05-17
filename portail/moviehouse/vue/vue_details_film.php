@@ -355,21 +355,19 @@
                         /***************************************************/
                         /* Ligne visualisation normale (sans modification) */
                         /***************************************************/
-                        echo '<div id="modifier_comment_2_' . $comment->getId() . '">';
-                          echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire">';
-                            echo '<div class="actions_commentaires">';
-                              // Modification commentaire
-                              echo '<span class="link_actions_commentaires">';
-                                echo '<a onclick="afficherMasquerNoDelay(\'modifier_comment_' . $comment->getId() . '\'); afficherMasquerNoDelay(\'modifier_comment_2_' . $comment->getId() . '\');" title="Modifier le commentaire" class="icone_modifier_comment"></a>';
-                              echo '</span>';
+                        echo '<div id="visualiser_comment_' . $comment->getId() . '">';
+                          echo '<div class="actions_commentaires">';
+                            // Modification commentaire
+                            echo '<span class="link_actions_commentaires">';
+                              echo '<a id="modifier_commentaire_' . $comment->getId() . '" title="Modifier le commentaire" class="icone_modifier_comment modifierCommentaire"></a>';
+                            echo '</span>';
 
-                              // Suppression commentaire
-                              echo '<span class="link_actions_commentaires">';
-                                echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" class="icone_supprimer_comment eventConfirm" />';
-                                echo '<input type="hidden" value="Supprimer ce commentaire ?" class="eventMessage" />';
-                              echo '</span>';
-                            echo '</div>';
-                          echo '</form>';
+                            // Suppression commentaire
+                            echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire" class="link_actions_commentaires">';
+                              echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" class="icone_supprimer_comment eventConfirm" />';
+                              echo '<input type="hidden" value="Supprimer ce commentaire ?" class="eventMessage" />';
+                            echo '</form>';
+                          echo '</div>';
 
                           // On cherche les smileys dans les commentaires
                           $commentaire = extract_smiley($comment->getComment());
@@ -394,21 +392,21 @@
 
                               // Annulation modification
                               echo '<span class="link_actions_commentaires">';
-                                echo '<a onclick="afficherMasquerNoDelay(\'modifier_comment_' . $comment->getId() . '\'); afficherMasquerNoDelay(\'modifier_comment_2_' . $comment->getId() . '\');" title="Annuler la modification" class="icone_annuler_comment"></a>';
+                                echo '<a id="annuler_commentaire_' . $comment->getId() . '" title="Annuler la modification" class="icone_annuler_comment annulerCommentaire"></a>';
                               echo '</span>';
                             echo '</div>';
 
-                            echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="modifyComment' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
+                            echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
 
                             echo '<div class="zone_saisie_smileys">';
-                              echo '<a onclick="insert_smiley(\':)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\';)\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\':(\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\':|\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\':D\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\':O\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\':P\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                              echo '<a onclick="insert_smiley(\':facepalm:\', \'modifyComment' . $comment->getId() . '\')"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_1_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_2_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_3_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_4_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_5_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_6_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_7_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                              echo '<a id="modifier_smiley_8_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
                             echo '</div>';
                           echo '</form>';
                         echo '</div>';
@@ -432,18 +430,18 @@
 
               // Saisie commentaire
   						echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doCommenter" id="comments" class="saisie_commentaires_films">';
-  							echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="insertComment" class="zone_saisie_comment" required></textarea>';
+  							echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_0" class="zone_saisie_comment" required></textarea>';
   							echo '<input type="submit" name="submit_comment" value="Envoyer" class="bouton_commentaires" />';
 
                 echo '<div class="zone_saisie_smileys">';
-                	echo '<a onclick="insert_smiley(\':)\', \'insertComment\')"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\';)\', \'insertComment\')"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':(\', \'insertComment\')"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':|\', \'insertComment\')"><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':D\', \'insertComment\')"><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                  echo '<a onclick="insert_smiley(\':O\', \'insertComment\')"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                  echo '<a onclick="insert_smiley(\':P\', \'insertComment\')"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                	echo '<a onclick="insert_smiley(\':facepalm:\', \'insertComment\')"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_1_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_2_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_3_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_4_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_5_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
+                  echo '<a id="modifier_smiley_6_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                  echo '<a id="modifier_smiley_7_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_8_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
                 echo '</div>';
   						echo '</form>';
             echo '</div>';
