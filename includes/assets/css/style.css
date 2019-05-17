@@ -599,26 +599,6 @@ aside
 	margin-left: 5px;
 }
 
-.bouton_aside
-{
-	margin-top: 20px;
-}
-
-.icon_deconnexion
-{
-	background-color: #c81932;
-	width: 50px;
-	height: 50px;
-	border: 0;
-	border-radius: 2px;
-	background-image: url("/inside/includes/icons/common/logout.png");
-	background-size: 30px 30px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	transition: width ease 0.2s;
-}
-
 .link_aside
 {
 	display: block;
@@ -635,33 +615,18 @@ aside
 	text-decoration: none;
 }
 
+.link_aside:hover
+{
+	width: 60px;
+	transition: width ease 0.2s;
+}
+
 .icon_aside
 {
 	width: 30px;
 	height: 30px;
 	vertical-align: middle;
 	margin-top: -3px;
-}
-
-.icon_delete
-{
-	background-color: #c81932;
-	width: 50px;
-	height: 50px;
-	border: 0;
-	border-radius: 2px;
-	background-image: url("/inside/includes/icons/common/delete.png");
-	background-size: 30px 30px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	transition: width ease 0.2s;
-}
-
-.icon_deconnexion:hover, .link_aside:hover, .icon_delete:hover
-{
-	width: 60px;
-	transition: width ease 0.2s;
 }
 
 /*** Nav (menu catégories) ***/
