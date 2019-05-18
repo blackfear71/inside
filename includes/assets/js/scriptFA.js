@@ -168,15 +168,13 @@ $(function()
   {
     var id_details = $(this).attr('id').replace('afficher_details_', '');
 
-    afficherMasquer('zone_details_determined_' + id_details);
+    showDetails('zone_details', id_details);
   });
 
   // Ferme les détails d'une proposition
-  $('.fermerDetails').click(function()
+  $('#fermerDetails').click(function()
   {
-    var id_details = $(this).attr('id').replace('fermer_details_', '');
-
-    afficherMasquer('zone_details_determined_' + id_details);
+    afficherMasquer('zone_details');
   });
 
   // Affiche la saisie de restaurant
@@ -842,4 +840,365 @@ function changeCheckedDay(id_checkbox, id_label, class_checked, class_no_check)
     $('#' + id_label).addClass(class_checked);
     $('#' + id_label).removeClass(class_no_check);
   }
+}
+
+function showDetails(zone, id)
+{
+  // Modification des données
+  var details = detailsPropositions[id];
+
+  /*******************/
+  /*** Restaurant ***/
+  /*******************/
+  // Lien image
+  $('#lien_details_proposition').attr('href', 'restaurants.php?action=goConsulter&anchor=' + details['id_restaurant']);
+
+  // Image restaurant
+  if (details['picture'] != "")
+    $('#image_details_proposition').attr('src', '../../includes/images/foodadvisor/' + details['picture']);
+  else
+    $('#image_details_proposition').attr('src', '../../includes/icons/foodadvisor/restaurants.png');
+
+  // Nom du restaurant
+  $('#nom_details_proposition').html(details['name']);
+
+  // Jours d'ouverture
+  var opened = details['opened'].split(';');
+
+  $.each(opened, function(key, value)
+  {
+    if (value != "")
+    {
+      if (value == "Y")
+        $('#jour_details_proposition_' + key).addClass('jour_oui_fa');
+      else
+        $('#jour_details_proposition_' + key).addClass('jour_non_fa');
+    }
+  });
+
+  // Prix
+  if (details['min_price'] != "" && details['max_price'] != "")
+  {
+    var price;
+
+    if (details['min_price'] == details['max_price'])
+      price = "Prix ~ " + details['min_price'] + "€";
+    else
+      price = "Prix " + details['min_price'] + " - " + details['max_price'] + "€";
+
+    $('.zone_price_details').css('display', 'block');
+    $('#prix_details_proposition').html(price);
+  }
+  else
+  {
+    $('.zone_price_details').css('display', 'none');
+    $('#prix_details_proposition').html();
+  }
+
+  // Lieu
+  $('#lieu_details_proposition').html(details['location']);
+
+  // Nombre de participants
+  var nbParticipants;
+
+  if (details['nb_participants'] == 1)
+    nbParticipants = details['nb_participants'] + " participant";
+  else
+    nbParticipants = details['nb_participants'] + " participants";
+
+  $('#participants_details_proposition').html(nbParticipants);
+
+  // Type de restaurant
+  $('#types_details_proposition').empty();
+
+  if (details['types'] != "")
+  {
+    $('#types_details_proposition').css('display', 'block');
+
+    var types = details['types'].split(';');
+
+    $.each(types, function()
+    {
+      if (this != "")
+        $('#types_details_proposition').append('<span class="horaire_proposition">' + this + '</span>');
+    });
+  }
+  else
+  {
+    $('#types_details_proposition').css('display', 'none');
+    $('#types_details_proposition').html();
+  }
+
+  // Appelant
+  if (details['phone'] != "" || details['determined'] == "Y")
+  {
+    $('.zone_caller_details').css('display', 'block');
+
+    if (details['phone'] != "")
+      $('#telephone_details_proposition').html(details['phone']);
+
+    if (details['determined'] == "Y")
+    {
+      $('#caller_details_propositions').parent().css('display', 'inline-block');
+
+      if (details['avatar'] != "")
+      {
+        $('#caller_details_propositions').attr('src', '../../includes/images/profil/avatars/' + details['avatar']);
+        $('#caller_details_propositions').attr('title', details['caller']);
+      }
+      else
+      {
+        $('#caller_details_propositions').attr('src', '../../includes/icons/common/default.png');
+        $('#caller_details_propositions').attr('title', details['caller']);
+      }
+    }
+    else
+    {
+      $('#caller_details_propositions').parent().css('display', 'none');
+      $('#caller_details_propositions').attr('src', '../../includes/icons/common/default.png');
+      $('#caller_details_propositions').attr('title', 'avatar');
+    }
+  }
+  else
+  {
+    $('.zone_caller_details').css('display', 'none');
+    $('#caller_details_propositions').parent().css('display', 'none');
+    $('#caller_details_propositions').attr('src', '../../includes/icons/common/default.png');
+    $('#caller_details_propositions').attr('title', 'avatar');
+  }
+
+  // Liens
+  if (details['website'] != "" || details['plan'] != "")
+  {
+    $('.zone_liens_details').css('display', 'block');
+
+    if (details['website'] == "")
+    {
+      $('#website_details_proposition').css('display', 'none');
+      $('#website_details_proposition').attr('href', '');
+    }
+    else
+    {
+      $('#website_details_proposition').css('display', 'inline-block');
+      $('#website_details_proposition').attr('href', details['website']);
+    }
+
+    if (details['plan'] == "")
+    {
+      $('#plan_details_proposition').css('display', 'none');
+      $('#plan_details_proposition').attr('href', '');
+    }
+    else
+    {
+      $('#plan_details_proposition').css('display', 'inline-block');
+      $('#plan_details_proposition').attr('href', details['plan']);
+    }
+  }
+  else
+  {
+    $('.zone_liens_details').css('display', 'none');
+    $('#website_details_proposition').attr('href', '');
+    $('#plan_details_proposition').attr('href', '');
+  }
+
+  // Bouton réservation (si on a participé)
+  var participe = false;
+
+  if (details['reserved'] != "Y")
+  {
+    $.each(details['details'], function()
+    {
+      if (userSession == this['identifiant'])
+      {
+        participe = true;
+        return false;
+      }
+    });
+  }
+
+  if (participe == true)
+  {
+    $('#reserver_details_proposition').css('display', 'block');
+    $('#reserver_details_proposition').attr('action', 'foodadvisor.php?id=' + id + '&action=doReserver');
+  }
+  else
+  {
+    $('#reserver_details_proposition').css('display', 'none');
+    $('#reserver_details_proposition').attr('action', '');
+  }
+
+  // Indicateur réservation
+  if (details['reserved'] == "Y")
+    $('#reserved_details_proposition').css('display', 'block');
+  else
+    $('#reserved_details_proposition').css('display', 'none');
+
+  // Bouton annulation réservation (si on a participé)
+  var reserved = false;
+
+  if (details['reserved'] == "Y")
+  {
+    if (userSession == details['caller'])
+      reserved = true;
+  }
+
+  if (reserved == true)
+  {
+    $('#annuler_details_proposition').css('display', 'block');
+    $('#annuler_details_proposition').attr('action', 'foodadvisor.php?delete_id=' + id + '&action=doAnnulerReserver');
+  }
+  else
+  {
+    $('#annuler_details_proposition').css('display', 'none');
+    $('#annuler_details_proposition').attr('action', '');
+  }
+
+  // On cache la zone si tout est vide
+  if (participe == false && reserved == false && details['reserved'] != "Y")
+    $('#indicateurs_details_proposition').css('display', 'none');
+  else
+    $('#indicateurs_details_proposition').css('display', 'block');
+
+  /********************/
+  /*** Participants ***/
+  /********************/
+  $('#top_details_proposition').empty();
+  var ligne;
+  var transports;
+
+  $.each(details['details'], function()
+  {
+    ligne      = '';
+    transports = '';
+
+    ligne += '<div class="zone_details_user_top">';
+
+    // Avatar
+    if (this['avatar'] != "")
+      ligne += '<img src="../../includes/images/profil/avatars/' + this['avatar'] + '" alt="avatar" title="' + this['pseudo'] + '" class="avatar_details" />';
+    else
+      ligne += '<img src="../../includes/icons/common/default.png" alt="avatar" title="' + this['pseudo'] + '" class="avatar_details" />';
+
+    // Pseudo
+    ligne += '<div class="pseudo_details">' + this['pseudo'] + '</div>';
+
+    // Transports
+    if (this['transports'] != "")
+    {
+      transports = this['transports'].split(';');
+
+      ligne += '<div class="zone_details_transports">';
+        $.each(transports, function(key, value)
+        {
+          switch (value)
+          {
+            case 'F':
+              ligne += '<img src="../../includes/icons/foodadvisor/feet.png" alt="feet" class="icone_details" />';
+              break;
+
+            case 'B':
+              ligne += '<img src="../../includes/icons/foodadvisor/bike.png" alt="bike" class="icone_details" />';
+              break;
+
+            case 'T':
+              ligne += '<img src="../../includes/icons/foodadvisor/tram.png" alt="tram" class="icone_details" />';
+              break;
+
+            case 'C':
+              ligne += '<img src="../../includes/icons/foodadvisor/car.png" alt="car" class="icone_details" />';
+              break;
+
+            default:
+              break;
+          }
+        });
+      ligne += '</div>';
+    }
+
+    // Horaires
+    if (this['horaire'] != "")
+      ligne += '<div class="horaire_details">' + formatTimeForDisplayLight(this['horaire']) + '</div>';
+
+    ligne += '</div>';
+
+    $('#top_details_proposition').append(ligne);
+  });
+
+  /*************/
+  /*** Menus ***/
+  /*************/
+  $('.zone_details_user_bottom').empty();
+  var menuPresent = false;
+  var colonne;
+  var menu;
+
+  $.each(details['details'], function()
+  {
+    colonne = '';
+
+    if (this['menu'] != ';;;')
+    {
+      menuPresent = true;
+      menu        = this['menu'].split(';');
+
+      colonne += '<div class="zone_details_user_menu">';
+
+      // Avatar
+      if (this['avatar'] != "")
+        colonne += '<img src="../../includes/images/profil/avatars/' + this['avatar'] + '" alt="avatar" title="' + this['pseudo'] + '" class="avatar_menus" />';
+      else
+        colonne += '<img src="../../includes/icons/common/default.png" alt="avatar" title="' + this['pseudo'] + '" class="avatar_menus" />';
+
+      // Entrée
+      if (menu[0] != "")
+      {
+        colonne += '<div class="zone_menu_mes_choix">';
+          colonne += '<span class="titre_texte_mon_choix">Entrée</span>';
+          colonne += '<div class="texte_mon_choix">' + menu[0] + '</div>';
+        colonne += '</div>';
+      }
+
+      // Plat
+      if (menu[1] != "")
+      {
+        colonne += '<div class="zone_menu_mes_choix">';
+          colonne += '<span class="titre_texte_mon_choix">Plat</span>';
+          colonne += '<div class="texte_mon_choix">' + menu[1] + '</div>';
+        colonne += '</div>';
+      }
+
+      // Dessert
+      if (menu[2] != "")
+      {
+        colonne += '<div class="zone_menu_mes_choix">';
+          colonne += '<span class="titre_texte_mon_choix">Dessert</span>';
+          colonne += '<div class="texte_mon_choix">' + menu[2] + '</div>';
+        colonne += '</div>';
+      }
+
+      colonne += '</div>';
+
+      $('.zone_details_user_bottom').append(colonne);
+    }
+  });
+
+  // Pas de menus
+  if (menuPresent == false)
+    $('.zone_details_user_bottom').html('<div class="no_menu_details">Pas de menus proposés pour ce choix.</div>');
+
+  // Affichage de la zone
+  afficherMasquer(zone);
+}
+
+// Formate l'horaire
+function formatTimeForDisplayLight(time)
+{
+  var horaire;
+
+  if (time.length == 6 || time.length == 4)
+    horaire = time.substr(0, 2) + ':' + time.substr(2, 2);
+  else
+    horaire = time;
+
+  return horaire;
 }

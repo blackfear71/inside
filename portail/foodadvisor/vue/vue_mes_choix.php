@@ -44,7 +44,7 @@
 
               // Suppression
               echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer">';
-                echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" return false;" class="icon_delete_choix eventConfirm" />';
+                echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix eventConfirm" />';
                 echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
               echo '</form>';
             }

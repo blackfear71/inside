@@ -87,175 +87,53 @@
       // Propositions
       foreach ($propositions as $proposition)
       {
-        if ($proposition->getClassement() == 1 OR $proposition->getDetermined() == "Y")
-        {
-          if ($proposition->getDetermined() == "Y")
-          {
-            if ($proposition == $propositions[0])
-              echo '<div class="zone_proposition_determined" id="zone_first">';
-            else
-              echo '<div class="zone_proposition_determined">';
-          }
-          else
-          {
-            if ($proposition == $propositions[0])
-              echo '<div class="zone_proposition_top" id="zone_first">';
-            else
-              echo '<div class="zone_proposition_top">';
-          }
-            // Lien détails
-            if ($proposition->getDetermined() == "Y")
-              echo '<a id="afficher_details_' . $proposition->getId_restaurant() . '" class="lien_details_determined afficherDetails" title="Plus de détails"><span class="lien_plus">+</span></a>';
-            else
-              echo '<a id="afficher_details_' . $proposition->getId_restaurant() . '" class="lien_details_top afficherDetails" title="Plus de détails"><span class="lien_plus">+</span></a>';
+        if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
+          echo '<div class="zone_proposition_determined" id="zone_first">';
+        elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
+          echo '<div class="zone_proposition_determined">';
+        elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
+          echo '<div class="zone_proposition_top" id="zone_first">';
+        elseif ($proposition->getClassement() == 1 AND $proposition != $propositions[0])
+          echo '<div class="zone_proposition_top">';
+        elseif ($proposition == $propositions[0])
+          echo '<div class="zone_proposition" id="zone_first">';
+        else
+          echo '<div class="zone_proposition">';
 
-            // Image + lien
+          // Lien détails
+          if ($proposition->getDetermined() == "Y")
+            echo '<a id="afficher_details_' . $proposition->getId_restaurant() . '" class="lien_details_determined afficherDetails" title="Plus de détails"><span class="lien_plus">+</span></a>';
+          else
+            echo '<a id="afficher_details_' . $proposition->getId_restaurant() . '" class="lien_details_top afficherDetails" title="Plus de détails"><span class="lien_plus">+</span></a>';
+
+          // Image + lien
+          if ($proposition->getDetermined() == "Y" OR $proposition->getClassement() == 1)
+          {
             echo '<a href="restaurants.php?action=goConsulter&anchor=' . $proposition->getId_restaurant() . '" class="lien_proposition_top">';
               if (!empty($proposition->getPicture()))
                 echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition_top" />';
               else
                 echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition_top" />';
             echo '</a>';
-
-            if ($proposition->getDetermined() == "Y")
-            {
-              // Nom du restaurant
-              echo '<div class="nom_proposition_determined">' . $proposition->getName() . '</div>';
-
-              echo '<div class="zone_icones_mon_choix">';
-                // Jours d'ouverture
-                echo '<div class="zone_ouverture_mes_choix">';
-                  $explodedOpened = explode(";", $proposition->getOpened());
-                  $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
-                  $i              = 0;
-
-                  foreach ($explodedOpened as $opened)
-                  {
-                    if (!empty($opened))
-                    {
-                      if ($opened == "Y")
-                        echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
-                      else
-                        echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
-                    }
-
-                    $i++;
-                  }
-                echo '</div>';
-
-                // Lieu
-                echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $proposition->getLocation() . '</span>';
-
-                // Nombre de participants
-                if ($proposition->getNb_participants() == 1)
-                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
-                else
-                  echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
-              echo '</div>';
-
-              echo '<div class="caller">';
-                echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';
-
-                // Avatar
-                if (!empty($proposition->getAvatar()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
-
-                // Numéro de téléphone
-                if (!empty($proposition->getPhone()))
-                  echo formatPhoneNumber($proposition->getPhone());
-              echo '</div>';
-            }
-            else
-            {
-              // Nom du restaurant
-              echo '<div class="nom_mon_choix">' . $proposition->getName() . '</div>';
-
-              // Jours d'ouverture
-              echo '<div class="zone_ouverture_mes_choix">';
-                $explodedOpened = explode(";", $proposition->getOpened());
-                $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
-                $i              = 0;
-
-                foreach ($explodedOpened as $opened)
-                {
-                  if (!empty($opened))
-                  {
-                    if ($opened == "Y")
-                      echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
-                    else
-                      echo '<div class="jour_non_fa" style="background-color: white;">' . $semaine_short[$i] . '</div>';
-                  }
-
-                  $i++;
-                }
-              echo '</div>';
-
-              // Lieu
-              echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $proposition->getLocation() . '</span>';
-
-              // Nombre de participants
-              if ($proposition->getNb_participants() == 1)
-                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
-              else
-                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
-            }
-
-            // Bouton réservation / annulation
-            if ($actions["reserver"] == true)
-            {
-              // On vérifie si on participe à chacun des restaurants pour pouvoir réserver
-              $participe = false;
-
-              foreach ($proposition->getDetails() as $detailsUser)
-              {
-                if ($_SESSION['user']['identifiant'] == $detailsUser['identifiant'])
-                {
-                  $participe = true;
-                  break;
-                }
-              }
-
-              if ($participe == true)
-              {
-                echo '<div class="zone_reservation">';
-                  echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
-                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
-                  echo '</form>';
-                echo '</div>';
-              }
-            }
-
-            if ($proposition->getDetermined() == "Y" AND ($proposition->getReserved() == "Y" OR $actions["annuler_reserver"] == true))
-            {
-              echo '<div class="zone_reservation">';
-                if ($proposition->getReserved() == "Y")
-                  echo '<div class="reserved">Réservé !</div>';
-
-                if ($actions["annuler_reserver"] == true)
-                {
-                  echo '<form method="post" action="foodadvisor.php?delete_id=' . $proposition->getId_restaurant() . '&action=doAnnulerReserver">';
-                    echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;"/>';
-                  echo '</form>';
-                }
-              echo '</div>';
-            }
-          echo '</div>';
-        }
-        else
-        {
-          echo '<div class="zone_proposition">';
-            // Image + lien
+          }
+          else
+          {
             echo '<a href="restaurants.php?action=goConsulter&anchor=' . $proposition->getId_restaurant() . '" class="lien_mon_choix">';
               if (!empty($proposition->getPicture()))
                 echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_mon_choix" />';
               else
                 echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_mon_choix" />';
             echo '</a>';
+          }
 
-            // Nom du restaurant
+          // Nom du restaurant
+          if ($proposition->getDetermined() == "Y")
+            echo '<div class="nom_proposition_determined">' . $proposition->getName() . '</div>';
+          else
             echo '<div class="nom_mon_choix">' . $proposition->getName() . '</div>';
+
+          if ($proposition->getDetermined() == "Y")
+            echo '<div class="zone_icones_mon_choix">';
 
             // Jours d'ouverture
             echo '<div class="zone_ouverture_mes_choix">';
@@ -270,12 +148,19 @@
                   if ($opened == "Y")
                     echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
                   else
-                    echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
+                  {
+                    if ($proposition->getClassement() == 1)
+                      echo '<div class="jour_non_fa" style="background-color: white;">' . $semaine_short[$i] . '</div>';
+                    else
+                      echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
+                  }
                 }
 
                 $i++;
               }
-            echo '</div>';
+              
+            if ($proposition->getDetermined() == "Y")
+              echo '</div>';
 
             // Lieu
             echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $proposition->getLocation() . '</span>';
@@ -285,33 +170,66 @@
               echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participant</span>';
             else
               echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $proposition->getNb_participants() . ' participants</span>';
+          echo '</div>';
 
-            // Bouton réservation
-            if ($actions["reserver"] == true)
+          // Réserveur
+          if ($proposition->getDetermined() == "Y")
+          {
+            echo '<div class="caller">';
+              echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';
+
+              // Avatar
+              if (!empty($proposition->getAvatar()))
+                echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+              else
+                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+
+              // Numéro de téléphone
+              if (!empty($proposition->getPhone()))
+                echo formatPhoneNumber($proposition->getPhone());
+            echo '</div>';
+          }
+
+          // Bouton réservation / annulation
+          if ($actions["reserver"] == true)
+          {
+            // On vérifie si on participe à chacun des restaurants pour pouvoir réserver
+            $participe = false;
+
+            foreach ($proposition->getDetails() as $detailsUser)
             {
-              // On vérifie si on participe à chacun des restaurants pour pouvoir réserver
-              $participe = false;
-
-              foreach ($proposition->getDetails() as $detailsUser)
+              if ($_SESSION['user']['identifiant'] == $detailsUser['identifiant'])
               {
-                if ($_SESSION['user']['identifiant'] == $detailsUser['identifiant'])
-                {
-                  $participe = true;
-                  break;
-                }
-              }
-
-              if ($participe == true)
-              {
-                echo '<div class="zone_reservation">';
-                  echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
-                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver_details"/>';
-                  echo '</form>';
-                echo '</div>';
+                $participe = true;
+                break;
               }
             }
-          echo '</div>';
-        }
+
+            if ($participe == true)
+            {
+              echo '<div class="zone_reservation">';
+                echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
+                  echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                echo '</form>';
+              echo '</div>';
+            }
+          }
+
+          if ($proposition->getDetermined() == "Y" AND ($proposition->getReserved() == "Y" OR $actions["annuler_reserver"] == true))
+          {
+            echo '<div class="zone_reservation">';
+              if ($proposition->getReserved() == "Y")
+                echo '<div class="reserved">Réservé !</div>';
+
+              if ($actions["annuler_reserver"] == true)
+              {
+                echo '<form method="post" action="foodadvisor.php?delete_id=' . $proposition->getId_restaurant() . '&action=doAnnulerReserver">';
+                  echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;"/>';
+                echo '</form>';
+              }
+            echo '</div>';
+          }
+        echo '</div>';
       }
     echo '</div>';
   }

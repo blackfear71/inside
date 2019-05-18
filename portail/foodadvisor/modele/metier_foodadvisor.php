@@ -24,6 +24,47 @@
     return $listeRestaurantsAConvertir;
   }
 
+  // METIER : Converstion du tableau d'objet des propositions en tableau simple pour JSON
+  // RETOUR : Tableau des détails
+  function convertForJson2($propositions)
+  {
+    // On transforme les objets en tableau pour envoyer au Javascript
+    $listePopositionsAConvertir = array();
+
+    foreach ($propositions as $proposition)
+    {
+      $phone = "";
+
+      if (!empty($proposition->getPhone()))
+        $phone = formatPhoneNumber($proposition->getPhone());
+
+      $propositionAConvertir = array('id_restaurant'   => $proposition->getId_restaurant(),
+                                     'name'            => $proposition->getName(),
+                                     'picture'         => $proposition->getPicture(),
+                                     'location'        => $proposition->getLocation(),
+                                     'nb_participants' => $proposition->getNb_participants(),
+                                     'classement'      => $proposition->getClassement(),
+                                     'determined'      => $proposition->getDetermined(),
+                                     'caller'          => $proposition->getCaller(),
+                                     'pseudo'          => $proposition->getPseudo(),
+                                     'avatar'          => $proposition->getAvatar(),
+                                     'reserved'        => $proposition->getReserved(),
+                                     'types'           => $proposition->getTypes(),
+                                     'phone'           => $phone,
+                                     'website'         => $proposition->getWebsite(),
+                                     'plan'            => $proposition->getPlan(),
+                                     'opened'          => $proposition->getOpened(),
+                                     'min_price'       => $proposition->getMin_price(),
+                                     'max_price'       => $proposition->getMax_price(),
+                                     'details'         => $proposition->getDetails()
+                                   );
+
+      $listePopositionsAConvertir[$proposition->getId_restaurant()] = $propositionAConvertir;
+    }
+
+    return $listePopositionsAConvertir;
+  }
+
   // METIER : Détermine la présence des boutons d'action
   // RETOUR : Booléen
   function getActions($propositions, $myChoices, $isSolo, $isReserved, $user)

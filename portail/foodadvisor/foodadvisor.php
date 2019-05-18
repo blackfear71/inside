@@ -211,6 +211,7 @@
       // Conversion JSON
       $listeLieuxJson       = json_encode($listeLieux);
       $listeRestaurantsJson = json_encode(convertForJson($listeRestaurants));
+      $detailsPropositions  = json_encode(convertForJson2($propositions));
       break;
 
     case 'doDeterminer':
