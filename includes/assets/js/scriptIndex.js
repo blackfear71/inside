@@ -57,7 +57,7 @@ $(function()
 function afficherIndex(id_open, id_close)
 {
   $('#' + id_open).css('display', 'block');
-  $('#' + id_open).css('margin-left', '39.5%');
+  $('#' + id_open).css('margin-left', 'calc(50% - 200px)');
   $('#' + id_open).css('transition', 'margin-left 1s');
 
   $('#' + id_close).css('margin-left', '-100%');
