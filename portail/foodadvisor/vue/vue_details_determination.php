@@ -49,12 +49,9 @@
                 {
                   echo '<div class="zone_price_details">';
                     if ($proposition->getMin_price() == $proposition->getMax_price())
-                      echo '<div class="price_details">Prix moy. ' . $proposition->getMin_price() . '€</div>';
+                      echo '<div class="price_details">Prix ~ ' . $proposition->getMin_price() . '€</div>';
                     else
-                    {
-                      echo '<div class="price_details">Prix min. ' . $proposition->getMin_price() . '€</div>';
-                      echo '<div class="price_details">Prix max. ' . $proposition->getMax_price() . '€</div>';
-                    }
+                      echo '<div class="price_details">Prix ' . $proposition->getMin_price() . ' - ' . $proposition->getMax_price() . '€</div>';
                   echo '</div>';
                 }
 
