@@ -583,8 +583,8 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 40%;
-	margin-right: 50px;
+	width: calc(50% - 185px);
+	margin-right: 10px;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
@@ -594,9 +594,8 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(40% - 50px);
+	width: 250px;
 	min-height: 40px;
-	margin-top: -4px;
 }
 
 .icone_details
@@ -604,7 +603,8 @@
 	display: inline-block;
 	height: 30px;
 	margin-top: 6px;
-	margin-right: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .horaire_details
