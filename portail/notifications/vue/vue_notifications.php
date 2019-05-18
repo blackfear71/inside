@@ -49,22 +49,11 @@
               {
                 if (!empty($notification->getIcon()) AND !empty($notification->getSentence()))
                 {
-                  // Date en fonction de la vue
-                  switch ($_GET['view'])
+                  // Date
+                  if ($notification->getDate() != $date_notif)
                   {
-                    case "me":
-                    case "week":
-                    case "all":
-                      if ($notification->getDate() != $date_notif)
-                      {
-                        echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />' . formatDateForDisplay($notification->getDate()) . '</div>';
-                        $date_notif = $notification->getDate();
-                      }
-                      break;
-
-                    case "today":
-                    default:
-                      break;
+                    echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />' . formatDateForDisplay($notification->getDate()) . '</div>';
+                    $date_notif = $notification->getDate();
                   }
 
                   // Lien si présent

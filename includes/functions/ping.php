@@ -2,7 +2,9 @@
   include_once('appel_bdd.php');
   include_once('fonctions_dates.php');
   include_once('../classes/profile.php');
+
   session_start();
+  
   global $bdd;
 
   switch ($_POST['function'])

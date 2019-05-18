@@ -14,59 +14,7 @@
       if ($_SESSION['user']['identifiant'] != "admin")
       {
         // Notifications
-        echo '<div class="zone_notifications_bandeau">';
-            // Récupération des préférences
-            switch ($_SESSION['user']['view_notifications'])
-            {
-              case "M":
-                $view_notifications = "me";
-                $page               = "&page=1";
-                break;
-
-              case "T":
-                $view_notifications = "today";
-                $page               = "";
-                break;
-
-              case "W":
-                $view_notifications = "week";
-                $page               = "&page=1";
-                break;
-
-              case "A":
-              default:
-                $view_notifications = "all";
-                $page               = "&page=1";
-                break;
-            }
-
-            // On compte le nombre de notifications du jour
-            $nb_notifs = 0;
-
-            $reponse = $bdd->query('SELECT COUNT(id) AS nb_notifs FROM notifications WHERE date = ' . date("Ymd"));
-            $donnees = $reponse->fetch();
-            $nb_notifs = $donnees['nb_notifs'];
-            $reponse->closeCursor();
-
-            // Affichage en fonction du nombre de notifications
-            if ($nb_notifs > 0)
-            {
-              echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_notifications">';
-                echo '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" title="Notifications" class="icon_notifications" />';
-                if ($nb_notifs <= 9)
-                  echo '<div class="number_notifications" style="color: white;">' . $nb_notifs . '</div>';
-                else
-                  echo '<div class="number_notifications" style="color: white;">9+</div>';
-              echo '</a>';
-            }
-            else
-            {
-              echo '<a href="/inside/portail/notifications/notifications.php?view=' . $view_notifications . '&action=goConsulter' . $page . '" title="Notifications" class="link_notifications">';
-                echo '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
-                echo '<div class="number_notifications">0</div>';
-              echo '</a>';
-            }
-        echo '</div>';
+        echo '<div class="zone_notifications_bandeau"></div>';
 
         // Recherche
         echo '<div id="resizeBar" class="zone_recherche_bandeau">';

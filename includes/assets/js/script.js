@@ -5,6 +5,7 @@
 $(function()
 {
   /*** Actions au chargement ***/
+  // Affiche la barre d'expérience autour de l'avatar
   $('#progress_circle_header').circlize(
   {
 		radius: 32,
@@ -21,9 +22,13 @@ $(function()
 		duration: 1000
 	});
 
-  // Mise à jour du ping à chaque chargement de page et toutes les minutes (si page ouverte)
+  // Mise à jour du ping à chaque chargement de page et toutes 60 secondes
   updatePing();
   setInterval(updatePing, 60000);
+
+  // Mise à jour du compteur des notifications toutes les 60 secondes
+  updateNotifications();
+  majNotifications = setInterval(updateNotifications, 60000);
 
   /*** Actions au clic ***/
   // Referme la barre de recherche quand on clique n'importe où sur le body
@@ -225,6 +230,66 @@ function deleteCookie(cookieName)
 function updatePing()
 {
   $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
+}
+
+// Exécute le script php de mise à jour du compteur de notifications
+function updateNotifications()
+{
+  $.get('/inside/includes/functions/notifications.php', function(data)
+  {
+    var identifiant     = data.identifiant;
+    var nbNotifications = data.nbNotifications;
+    var view            = data.view;
+    var page            = data.page;
+    var html            = "";
+
+    // On n'exécute de manière récurrente que si on n'est pas l'admin
+    if (identifiant != 'admin')
+    {
+      // La première fois on génère la zone
+      if (!$('.link_notifications').length)
+      {
+        html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" title="Notifications" class="link_notifications">';
+
+          if (nbNotifications > 0)
+            html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+          else
+            html += '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+
+          html += '<div class="number_notifications"></div>';
+        html += '</a>';
+
+        $('.zone_notifications_bandeau').html(html);
+      }
+
+      // On met à jour le contenu
+      if (nbNotifications > 0)
+      {
+        $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
+        $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications_blue.png');
+
+        if (nbNotifications <= 9)
+        {
+          $('.number_notifications').html(nbNotifications);
+          $('.number_notifications').css('color', 'white');
+        }
+        else
+        {
+          $('.number_notifications').html('9+');
+          $('.number_notifications').css('color', 'white');
+        }
+      }
+      else
+      {
+        $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
+        $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications.png');
+        $('.number_notifications').html('0');
+        $('.number_notifications').css('color', '#262626');
+      }
+    }
+    else
+      clearInterval(majNotifications);
+  }, "json");
 }
 
 // Fonction équivalente au $_GET en php
