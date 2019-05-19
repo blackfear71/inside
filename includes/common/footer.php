@@ -1,6 +1,6 @@
 <?php
   // Version
-  echo '<div class="version">V.2</div>';
+  echo '<div class="version">v2.1</div>';
 
   // Liens
   if ($_SESSION['user']['identifiant'] != "admin")

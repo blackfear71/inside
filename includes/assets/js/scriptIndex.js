@@ -12,29 +12,88 @@ $(function()
   // Affiche la zone d'inscription + focus
   $('#afficherInscription').click(function()
   {
-    afficherIndex('inscription', 'password');
-    $('#focus_identifiant_2').focus();
+    var showButton;
+    var hideButton = 'afficherInscription';
+    var showForm   = 'formInscription';
+    var hideForm;
+    var showText   = 'texteInscription';
+    var hideText;
+    var focus      = 'focus_identifiant_2';
+
+    if ($('#afficherConnexion').css('display') == 'none')
+    {
+      showButton = 'afficherConnexion';
+      hideForm   = 'formConnexion';
+      hideText   = 'logo';
+    }
+    else
+    {
+      showButton = 'afficherPassword';
+      hideForm   = 'formPassword';
+      hideText   = 'textePassword';
+    }
+
+    switchIndex(showButton, hideButton);
+    switchIndex(showForm, hideForm, focus);
+    switchIndex(showText, hideText);
   });
 
-  // Affiche la zone de demande de réinitialisation de mot de passe + focus
+  // Affiche la zone de connexion + focus
+  $('#afficherConnexion').click(function()
+  {
+    var showButton;
+    var hideForm;
+    var hideButton = 'afficherConnexion';
+    var showForm   = 'formConnexion';
+    var showText   = 'logo';
+    var hideText;
+    var focus      = 'focus_identifiant';
+
+    if ($('#afficherInscription').css('display') == 'none')
+    {
+      showButton = 'afficherInscription';
+      hideForm   = 'formInscription';
+      hideText   = 'texteInscription';
+    }
+    else
+    {
+      showButton = 'afficherPassword';
+      hideForm   = 'formPassword';
+      hideText   = 'textePassword';
+    }
+
+    switchIndex(showButton, hideButton);
+    switchIndex(showForm, hideForm, focus);
+    switchIndex(showText, hideText);
+  });
+
+  // Affiche la zone de réinitialisation mot de passe + focus
   $('#afficherPassword').click(function()
   {
-    afficherIndex('password', 'inscription');
-    $('#focus_identifiant_3').focus();
-  });
+    var showButton;
+    var hideForm;
+    var hideButton = 'afficherPassword';
+    var showForm   = 'formPassword';
+    var showText   = 'textePassword';
+    var hideText;
+    var focus      = 'focus_identifiant_3';
 
-  // Ferme la demande d'inscription
-  $('#masquerInscription').click(function()
-  {
-    masquerIndex('inscription');
-    $('#focus_identifiant').focus();
-  });
+    if ($('#afficherInscription').css('display') == 'none')
+    {
+      showButton = 'afficherInscription';
+      hideForm   = 'formInscription';
+      hideText   = 'texteInscription';
+    }
+    else
+    {
+      showButton = 'afficherConnexion';
+      hideForm   = 'formConnexion';
+      hideText   = 'logo';
+    }
 
-  // Ferme la demande de réinitialisation de mot de passe + focus
-  $('#masquerPassword').click(function()
-  {
-    masquerIndex('password');
-    $('#focus_identifiant').focus();
+    switchIndex(showButton, hideButton);
+    switchIndex(showForm, hideForm, focus);
+    switchIndex(showText, hideText);
   });
 
   /*** Actions au changement ***/
@@ -54,17 +113,14 @@ $(function()
 /*** Fonctions ***/
 /*****************/
 // Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)
-function afficherIndex(id_open, id_close)
+function switchIndex(id_open, id_close, focus = null)
 {
-  $('#' + id_open).css('display', 'block');
-  $('#' + id_open).css('margin-left', 'calc(50% - 200px)');
-  $('#' + id_open).css('transition', 'margin-left 1s');
-
-  $('#' + id_close).css('margin-left', '-100%');
-}
-
-// Masque la fenêtre d'inscription ou de mot de passe perdu
-function masquerIndex(id)
-{
-  $('#' + id).css('margin-left', '-100%');
+  $('#' + id_close).fadeOut(200, function()
+  {
+    $('#' + id_open).fadeIn(200, function()
+    {
+      if (focus != null)
+        $('#' + focus).focus();
+    });
+  });
 }
