@@ -443,10 +443,10 @@
             $lien = "/inside/portail/missions/missions.php?action=goConsulter";
           // Premier jour, après l'heure
           elseif (date("Ymd") == $date_deb AND date("His") >= $heure_deb)
-            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
           // Autre jour
           else
-            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
 
           break;
 
@@ -462,7 +462,7 @@
 
           $icone  = "missions";
           $phrase = "La mission <strong>" . $mission . "</strong> se termine aujourd'hui ! Trouvez vite les derniers objectifs !";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
           break;
 
         case "one_mission":
@@ -485,7 +485,7 @@
             $lien = "/inside/portail/missions/missions.php?action=goConsulter";
           // Mission de 1 jour (après l'heure)
           else
-            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&view=mission&action=goConsulter";
+            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
 
           break;
 

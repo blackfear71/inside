@@ -392,18 +392,18 @@
           }
 
           unset($rankUser);
+
+          // On ne garde que les gagnants
+          foreach ($ranking as &$rankUser)
+          {
+            if ($rankUser['rank'] != 1)
+              unset($rankUser);
+          }
+
+          unset($rankUser);
+
+          array_push($gagnants, $ranking);
         }
-
-        // On ne garde que les gagnants
-        foreach ($ranking as &$rankUser)
-        {
-          if ($rankUser['rank'] != 1)
-            unset($rankUser);
-        }
-
-        unset($rankUser);
-
-        array_push($gagnants, $ranking);
       }
     }
 
@@ -449,7 +449,7 @@
           $nbRestants = count($_SESSION['missions'][$key_current_mission]);
           $content    = "";
 
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
           if (date('Ymd') == $mission->getDate_deb())
             $content .= '<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence aujourd\'hui, trouve vite les objectifs avant les autres !</div>';
@@ -473,31 +473,31 @@
         // Mission > 1 jour (heure KO), autre jour
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') < $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
         // Mission > 1 jour (terminée)
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') < $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée pour aujourd\'hui ! Reviens demain pour continuer...</div>');
         }
         // Mission > 1 jour (terminée, jour de fin)
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Tu as trouvé tous les objectifs, reviens demain pour voir les scores !</div>');
         }
         // Mission > 1 jour (heure KO, jour de fin)
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') == $mission->getDate_fin() AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Trouve les derniers objectifs à partir de ' . formatTimeForDisplayLight($mission->getHeure()) . '.</div>');
         }
         // Mission > 1 jour (terminée, de jour de fin + 1 jours à + 3 jours)
         elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND (date('Ymd') >= date('Ymd', strtotime($mission->getDate_fin() . ' + 1 day'))) AND (date('Ymd') <= date('Ymd', strtotime($mission->getDate_fin() . ' + 3 days'))))
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=ranking&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
           $content = '<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée. Va voir les résultats en cliquant sur ce message.</div>';
 
@@ -506,9 +506,9 @@
           {
             $liste_gagnants = array();
 
-            foreach ($gagnants as $gagnants)
+            foreach ($gagnants as $missionGagnants)
             {
-              foreach ($gagnants as $gagnant)
+              foreach ($missionGagnants as $gagnant)
               {
                 if ($gagnant['id_mission'] == $mission->getId() AND $gagnant['rank'] <= 3)
                   array_push($liste_gagnants, $gagnant['pseudo']);
@@ -525,7 +525,7 @@
         {
           $nbRestants = count($_SESSION['missions'][$key_current_mission]);
 
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&view=mission&action=goConsulter');
+          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
           if ($nbRestants == 1)
             $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectif à trouver !</div>');

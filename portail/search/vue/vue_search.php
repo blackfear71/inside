@@ -117,7 +117,7 @@
                 // Résultats
                 foreach ($resultats['missions'] as $resultatsMI)
                 {
-                  echo '<a href="../missions/details.php?id_mission=' . $resultatsMI->getId() . '&view=mission&action=goConsulter" class="lien_resultat">';
+                  echo '<a href="../missions/details.php?id_mission=' . $resultatsMI->getId() . '&action=goConsulter" class="lien_resultat">';
                     echo '<table class="zone_resultat">';
                       echo '<tr>';
                         echo '<td class="zone_resultat_titre">';

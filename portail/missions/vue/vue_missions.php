@@ -72,7 +72,7 @@
                     echo '<div class="zone_missions_accueil">';
                   }
 
-                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_mission_accueil">';
+                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&action=goConsulter" class="zone_mission_accueil">';
                     echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="image_mission_accueil" />';
                     echo '<div class="titre_mission_accueil">' . $ligneMission->getMission() . '</div>';
                   echo '</a>';
@@ -89,7 +89,7 @@
                     echo '<div class="zone_missions_accueil">';
                   }
 
-                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&view=mission&action=goConsulter" class="zone_mission_accueil">';
+                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&action=goConsulter" class="zone_mission_accueil">';
                     echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="image_mission_accueil" />';
                     echo '<div class="titre_mission_accueil">' . $ligneMission->getMission() . '</div>';
                   echo '</a>';

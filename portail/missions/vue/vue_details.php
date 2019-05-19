@@ -38,40 +38,210 @@
           // Détails mission
           if ($missionExistante == true)
           {
-            // Switch entre mission et classement (seulement après la fin de mission)
-            if (date('Ymd') > $detailsMission->getDate_fin())
-            {
-              echo '<div class="switch_view">';
-                $listeSwitch = array('mission' => 'Mission',
-                                     'ranking' => 'Classement',
-                                    );
+            echo '<div class="zone_details_mission_left">';
+              // Titre
+              switch ($detailsMission->getStatut())
+              {
+                case 'V':
+                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" />' . $detailsMission->getMission() . '</div>';
+                  break;
 
-                foreach ($listeSwitch as $view => $lib_view)
-                {
-                  if ($_GET['view'] == $view)
-                    $actif = 'active';
-                  else
-                    $actif = 'inactive';
+                case 'C':
+                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" />' . $detailsMission->getMission() . '</div>';
+                  break;
 
-                  echo '<a href="details.php?id_mission=' . $detailsMission->getId() . '&view=' . $view . '&action=goConsulter" class="zone_switch">';
-                    echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
-                    echo '<div class="border_switch_' . $actif . '"></div>';
-                  echo '</a>';
-                }
+                case 'A':
+                default:
+                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" />' . $detailsMission->getMission() . '</div>';
+                  break;
+              }
+
+              // Image
+              echo '<img src="../../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="image_details_mission" />';
+
+              // Histoire
+              echo '<div class="titre_section"><img src="../../includes/icons/missions/story_grey.png" alt="story_grey" class="logo_titre_section" />Il était une fois...</div>';
+
+              echo '<div class="texte_details_mission">';
+                echo nl2br($detailsMission->getDescription());
               echo '</div>';
-            }
 
-            switch ($_GET['view'])
-            {
-              case "ranking":
-                include('vue/table_ranking.php');
-                break;
+              // Conclusion
+              if (date('Ymd') > $detailsMission->getDate_fin())
+              {
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/end_grey.png" alt="end_grey" class="logo_titre_section" />Le fin mot de l\'histoire</div>';
 
-              case "mission":
-              default:
-                include('vue/table_mission.php');
-                break;
-            }
+                echo '<div class="texte_details_mission">';
+                  echo nl2br($detailsMission->getConclusion());
+                echo '</div>';
+
+                echo '<div class="zone_images_conclusion">';
+                  echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" class="img_conclusion_mission_g" />';
+                  echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" class="img_conclusion_mission_m" />';
+                  echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" class="img_conclusion_mission_d" />';
+                echo '</div>';
+              }
+            echo '</div>';
+
+            echo '<div class="zone_details_mission_right">';
+              // Classement
+              if (date('Ymd') > $detailsMission->getDate_fin())
+              {
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" />Classement</div>';
+
+                if (!empty($ranking))
+                {
+                  $rank = 0;
+                  $finGagnants = false;
+
+                  foreach ($ranking as $keyRank => $rankUser)
+                  {
+                    if ($rank == 0)
+                    {
+                      echo '<div class="zone_gagnants">';
+                        echo '<div class="zone_titre_gagnants">Les gagnants</div>';
+                    }
+
+                    if ($rankUser['rank'] != $rank)
+                    {
+                      // Médailles
+                      if ($rankUser['rank'] <= 3)
+                      {
+                        switch ($rankUser['rank'])
+                        {
+                          case 1:
+                            echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
+                            break;
+
+                          case 2:
+                            echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
+                            break;
+
+                          case 3:
+                            echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
+                            break;
+
+                          default:
+                            break;
+                        }
+                      }
+                      else
+                      {
+                        // Fin zone gagnants si rang > 3
+                        if ($finGagnants == false)
+                        {
+                          echo '</div>';
+                          $finGagnants = true;
+                        }
+                      }
+
+                      $rank = $rankUser['rank'];
+
+                      if ($rank > 3)
+                        echo '<div class="score_classement margin_left">' . $rankUser['total'] . '</div>';
+                      else
+                        echo '<div class="score_classement">' . $rankUser['total'] . '</div>';
+
+                      echo '<div class="zone_medals">';
+                    }
+
+                    // Avatar
+                    if (!empty($rankUser['avatar']))
+                      echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_classement" />';
+                    else
+                      echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_classement" />';
+
+                    // Fin zone gagnants si moins de 3 médailles présentes
+                    if ($rank <= 3 AND $finGagnants == false AND !isset($ranking[$keyRank + 1]))
+                    {
+                      echo '</div>';
+                      $finGagnants = true;
+                    }
+
+                    if (!isset($ranking[$keyRank + 1]) OR $rankUser['rank'] != $ranking[$keyRank + 1]['rank'])
+                      echo '</div>';
+                  }
+                }
+                else
+                  echo '<div class="empty">Personne n\'a été classé sur cette mission...</div>';
+              }
+
+              // Informations mission
+              echo '<div class="titre_section"><img src="../../includes/icons/missions/informations_grey.png" alt="informations_grey" class="logo_titre_section" />Informations</div>';
+
+              // Dates et horaires
+              echo '<div class="zone_info_details_mission">';
+                echo '<img src="../../includes/icons/missions/date_grey.png" alt="date_grey" class="logo_details_mission" />';
+
+                echo '<div class="texte_info_details_mission">';
+                  if ($detailsMission->getDate_deb() == $detailsMission->getDate_fin())
+                    echo 'Evènement le <strong>' . formatDateForDisplay($detailsMission->getDate_deb()) . '</strong> à partir de <strong>' . formatTimeForDisplayLight($detailsMission->getHeure()) . '</strong>.';
+                  else
+                    echo 'Evènement du <strong>' . formatDateForDisplay($detailsMission->getDate_deb()) . '</strong> au <strong>' . formatDateForDisplay($detailsMission->getDate_fin()) . '</strong>, chaque jour à partir de <strong>' . formatTimeForDisplayLight($detailsMission->getHeure()) . '</strong>.';
+                echo '</div>';
+              echo '</div>';
+
+              // Objectif mission
+              echo '<div class="zone_info_details_mission">';
+                echo '<img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_details_mission" />';
+
+                echo '<div class="texte_info_details_mission">';
+                  echo formatExplanation($detailsMission->getExplications(), $detailsMission->getObjectif(), '%objectif%');
+                echo '</div>';
+              echo '</div>';
+
+              // Objectif du jour
+              if (date('Ymd') <= $detailsMission->getDate_fin())
+              {
+                echo '<div class="zone_info_details_mission">';
+                  echo '<img src="../../includes/icons/missions/progress_day.png" alt="progress_day" class="logo_details_mission" />';
+
+                  echo '<div class="texte_info_details_mission">';
+                    echo 'Progression du jour :';
+                  echo '</div>';
+
+                  echo '<div class="barre_info_details_mission">';
+                    echo '<meter min="0" max="' . $detailsMission->getObjectif() . '" value="' . $missionUser['daily'] . '" class="progression_details_mission"></meter>';
+                    echo '<div class="score_details_mission">' . $missionUser['daily'] . '</div>';
+                  echo '</div>';
+                echo '</div>';
+              }
+
+              // Objectif total
+              echo '<div class="zone_info_details_mission">';
+                echo '<img src="../../includes/icons/missions/progress_mission.png" alt="progress_mission" class="logo_details_mission" />';
+
+                echo '<div class="texte_info_details_mission">';
+                  echo 'Progression totale :';
+                echo '</div>';
+
+                echo '<div class="barre_info_details_mission">';
+                  $nb_jours_event = ecartDatesEvent($detailsMission->getDate_deb(), $detailsMission->getDate_fin());
+                  $objectif_total = $detailsMission->getObjectif() * $nb_jours_event;
+
+                  echo '<meter min="0" max="' . $objectif_total . '" value="' . $missionUser['event'] . '" class="progression_details_mission"></meter>';
+                  echo '<div class="score_details_mission">' . $missionUser['event'] . '</div>';
+                echo '</div>';
+              echo '</div>';
+
+              // Paticipants
+              if (date('Ymd') <= $detailsMission->getDate_fin())
+              {
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" />Participants</div>';
+
+                foreach ($participants as $participant)
+                {
+                  echo '<div class="zone_avatar_details_mission">';
+                    if (!empty($participant->getAvatar()))
+                      echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+                    else
+                      echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+
+                    echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
+                  echo '</div>';
+                }
+              }
+            echo '</div>';
           }
         ?>
 			</article>

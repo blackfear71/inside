@@ -74,6 +74,13 @@
 
     $mission = Mission::withData($donnees);
 
+    if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
+      $mission->setStatut('V');
+    elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
+      $mission->setStatut('C');
+    elseif (date('Ymd') > $mission->getDate_fin())
+      $mission->setStatut('A');
+
     $reponse->closeCursor();
 
     return $mission;

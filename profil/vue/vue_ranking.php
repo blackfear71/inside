@@ -86,11 +86,6 @@
               }
             echo '</div>';
           }
-
-
-
-
-
         echo '</div>';
       }
       else

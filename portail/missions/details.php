@@ -20,44 +20,23 @@
       else
       {
         // Lecture liste des données par le modèle
-        switch ($_GET['view'])
+        $missionExistante = controlMission($_GET['id_mission']);
+
+        if ($missionExistante == true)
         {
-          case 'mission':
-            $missionExistante = controlMission($_GET['id_mission']);
+          $detailsMission = getMission($_GET['id_mission']);
+          $participants   = getParticipants($_GET['id_mission']);
+          $missionUser    = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
 
-            if ($missionExistante == true)
-            {
-              $detailsMission = getMission($_GET['id_mission']);
-              $participants   = getParticipants($_GET['id_mission']);
-              $missionUser    = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
-            }
-            break;
-
-          case 'ranking':
-            $missionExistante = controlMission($_GET['id_mission']);
-
-            if ($missionExistante == true)
-            {
-              $detailsMission = getMission($_GET['id_mission']);
-              $participants   = getParticipants($_GET['id_mission']);
-
-              if (date('Ymd') > $detailsMission->getDate_fin())
-                $ranking = getRankingMission($_GET['id_mission'], $participants);
-              else
-                header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
-            }
-            break;
-
-          default:
-            header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
-            break;
+          if (date('Ymd') > $detailsMission->getDate_fin())
+            $ranking = getRankingMission($_GET['id_mission'], $participants);
         }
       }
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: details.php?id_mission=' . $_GET['id_mission'] . '&view=mission&action=goConsulter');
+      header('location: details.php?id_mission=' . $_GET['id_mission'] . '&action=goConsulter');
       break;
   }
 
@@ -87,29 +66,21 @@
 
         unset($participant);
 
-        switch ($_GET['view'])
+        $missionUser['daily'] = htmlspecialchars($missionUser['daily']);
+        $missionUser['event'] = htmlspecialchars($missionUser['event']);
+
+        if (date('Ymd') > $detailsMission->getDate_fin())
         {
-          case 'ranking':
-            if (date('Ymd') > $detailsMission->getDate_fin())
-            {
-              foreach ($ranking as &$rankUser)
-              {
-                $rankUser['identifiant'] = htmlspecialchars($rankUser['identifiant']);
-                $rankUser['pseudo']      = htmlspecialchars($rankUser['pseudo']);
-                $rankUser['avatar']      = htmlspecialchars($rankUser['avatar']);
-                $rankUser['total']       = htmlspecialchars($rankUser['total']);
-                $rankUser['rank']        = htmlspecialchars($rankUser['rank']);
-              }
+          foreach ($ranking as &$rankUser)
+          {
+            $rankUser['identifiant'] = htmlspecialchars($rankUser['identifiant']);
+            $rankUser['pseudo']      = htmlspecialchars($rankUser['pseudo']);
+            $rankUser['avatar']      = htmlspecialchars($rankUser['avatar']);
+            $rankUser['total']       = htmlspecialchars($rankUser['total']);
+            $rankUser['rank']        = htmlspecialchars($rankUser['rank']);
+          }
 
-              unset($rankUser);
-            }
-            break;
-
-          case 'mission':
-          default:
-            $missionUser['daily'] = htmlspecialchars($missionUser['daily']);
-            $missionUser['event'] = htmlspecialchars($missionUser['event']);
-            break;
+          unset($rankUser);
         }
       }
       break;
