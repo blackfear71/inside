@@ -4,8 +4,7 @@
 /*** Zones ***/
 .article_index
 {
-	padding-top: 5%;
-	padding-bottom: calc(5% + 40px);
+	overflow: hidden;
 }
 
 .zone_index
@@ -17,6 +16,7 @@
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: calc(50vh - 320px);
 }
 
 .zone_index_left
