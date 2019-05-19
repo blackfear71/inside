@@ -212,7 +212,7 @@
                     }
                   }
                   else
-                    echo '<div class="empty">Aucune personne encore intéressée.</div>';
+                    echo '<div class="empty">Aucune personne encore intéressée</div>';
                 echo '</div>';
               echo '</div>';
 
