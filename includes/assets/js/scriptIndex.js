@@ -139,7 +139,7 @@ function switchIndex(id_open, id_close, focus = null)
 function adaptIndex()
 {
   if ($(window).width() < 1300)
-    $('.texte_index').css('font-size', '120%');
+    $('.texte_index').css('font-size', '100%');
   else
     $('.texte_index').css('font-size', '150%');
 }
