@@ -37,6 +37,11 @@
 }
 
 /*** Partie gauche ***/
+.zone_logo_index
+{
+	height: 540px;
+}
+
 .logo_index
 {
 	display: block;
@@ -50,6 +55,7 @@
 {
 	display: block;
 	text-align: center;
+	vertical-align: bottom;
 }
 
 .zone_logo_categories
@@ -67,6 +73,26 @@
 	height: 30px;
 	width: 30px;
 	margin-top: 10px;
+}
+
+/*** Texte ***/
+.zone_texte_index
+{
+	height: 540px;
+	line-height: 540px;
+	overflow-y: auto;
+}
+
+.texte_index
+{
+	display: inline-block;
+	vertical-align: middle;
+	padding: 20px;
+	line-height: 1.5;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 150%;
+	text-align: justify;
 }
 
 /*** Connexion ***/
@@ -140,26 +166,6 @@
 .lien_index:hover
 {
 	background-color: #d3d3d3;
-}
-
-/*** Texte ***/
-.zone_texte_index
-{
-	height: 540px;
-	line-height: 540px;
-	overflow-y: auto;
-}
-
-.texte_index
-{
-	display: inline-block;
-	vertical-align: middle;
-	padding: 20px;
-	line-height: 1.5;
-	font-family: robotolight, Verdana, sans-serif;
-	color: white;
-	font-size: 150%;
-	text-align: justify;
 }
 
 /*** Footer Index ***/

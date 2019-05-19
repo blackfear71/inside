@@ -23,10 +23,13 @@
           echo '<div class="zone_index">';
             echo '<div class="zone_index_left">';
               // Logo Inside
+
               if ($error_inscription == true OR $error_password == true)
-                echo '<img src="includes/icons/common/inside_index.png" alt="inside_index" id="logo" class="logo_index" style="display: none;" />';
+                echo '<div id="logo" class="zone_logo_index" style="display: none;">';
               else
-                echo '<img src="includes/icons/common/inside_index.png" alt="inside_index" id="logo" class="logo_index" />';
+                echo '<div id="logo" class="zone_logo_index">';
+                echo '<img src="includes/icons/common/inside_index.png" alt="inside_index" class="logo_index" />';
+              echo '</div>';
 
               // Texte inscription
               if ($error_inscription == true)
