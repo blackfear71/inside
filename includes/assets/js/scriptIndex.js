@@ -8,6 +8,9 @@ $(function()
   // Positionnement du curseur sur "Identifiant" pour se connecter
   $('#focus_identifiant').focus();
 
+  // Adaptation mobile
+  adaptIndex();
+
   /*** Actions au clic ***/
   // Affiche la zone d'inscription + focus
   $('#afficherInscription').click(function()
@@ -109,6 +112,13 @@ $(function()
   });
 });
 
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Décalage pour mobile
+  adaptIndex();
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
@@ -123,4 +133,13 @@ function switchIndex(id_open, id_close, focus = null)
         $('#' + focus).focus();
     });
   });
+}
+
+// Adaptations de la section sur mobiles
+function adaptIndex()
+{
+  if ($(window).width() < 1300)
+    $('.texte_index').css('font-size', '120%');
+  else
+    $('.texte_index').css('font-size', '150%');
 }
