@@ -147,6 +147,7 @@
 {
 	height: 540px;
 	line-height: 540px;
+	overflow-y: auto;
 }
 
 .texte_index

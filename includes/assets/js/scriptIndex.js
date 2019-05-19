@@ -139,7 +139,23 @@ function switchIndex(id_open, id_close, focus = null)
 function adaptIndex()
 {
   if ($(window).width() < 1300)
+  {
     $('.texte_index').css('font-size', '100%');
+    $('.zone_logo_categories').css('width', '25px');
+    $('.zone_logo_categories').css('height', '25px');
+    $('.zone_logo_categories').css('margin-bottom', '5px');
+    $('.logo_categories').css('width', '20px');
+    $('.logo_categories').css('height', '20px');
+    $('.logo_categories').css('margin-top', '2.5px');
+  }
   else
+  {
     $('.texte_index').css('font-size', '150%');
+    $('.zone_logo_categories').css('width', '50px');
+    $('.zone_logo_categories').css('height', '50px');
+    $('.zone_logo_categories').css('margin-bottom', '10px');
+    $('.logo_categories').css('width', '30px');
+    $('.logo_categories').css('height', '30px');
+    $('.logo_categories').css('margin-top', '10px');
+  }
 }
