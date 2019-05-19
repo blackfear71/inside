@@ -292,11 +292,16 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+.zone_participants_details_missions
+{
+	text-align: center;
+}
+
 .zone_avatar_details_mission
 {
 	display: inline-block;
 	text-align: center;
-	margin: 0 10px 10px 10px;
+	margin: 0 5px 10px 5px;
 	padding: 5px;
 	width: 60px;
 	vertical-align: top;

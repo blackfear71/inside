@@ -229,17 +229,19 @@
               {
                 echo '<div class="titre_section"><img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" />Participants</div>';
 
-                foreach ($participants as $participant)
-                {
-                  echo '<div class="zone_avatar_details_mission">';
-                    if (!empty($participant->getAvatar()))
-                      echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
-                    else
-                      echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+                echo '<div class="zone_participants_details_missions">';
+                  foreach ($participants as $participant)
+                  {
+                    echo '<div class="zone_avatar_details_mission">';
+                      if (!empty($participant->getAvatar()))
+                        echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+                      else
+                        echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
 
-                    echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
-                  echo '</div>';
-                }
+                      echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
+                    echo '</div>';
+                  }
+                echo '</div>';
               }
             echo '</div>';
           }
