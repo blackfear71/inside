@@ -194,7 +194,6 @@
 	width: 100%;
 	opacity: 0;
 	transition: opacity 0.2s;
-	margin-bottom: -20px;
 }
 
 .zone_calendriers.masonry
