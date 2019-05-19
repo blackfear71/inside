@@ -3,38 +3,91 @@
 /****************/
 
 /*** Accueil Missions ***/
-.titre_accueil_mission
-{
-	width: 100%;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 150%;
-	font-weight: bold;
-	border-bottom: solid 1px #b3b3b3;
-	line-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	color: #262626;
-	text-align: left;
-	margin-top: 20px;
-}
-
 .zone_missions
 {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 	width: 100%;
-	margin-top: -20px;
 }
 
-.zone_presentation_mission_first
+/*** Missions à venir ***/
+.zone_mission_default
 {
-  width: 100%;
-  margin-top: 15px;
-  border-radius: 2px;
-  overflow: hidden;
+	background-color: #ff1937;
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	overflow: hidden;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+	margin-bottom: 15px;
 }
 
+.image_mission_default
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	margin: -10px 10px 0 10px;
+}
+
+.titre_mission_default
+{
+	display: inline-block;
+	width: calc(100% - 140px);
+	margin-top: -10px;
+	vertical-align: middle;
+	line-height: 30px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 150%;
+	color: white;
+}
+
+/*** Masonry ***/
+.zone_missions_accueil
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_missions_accueil.masonry
+{
+	opacity: 1;
+}
+
+/*** Missions en cours ***/
+.zone_mission_accueil
+{
+	display: block;
+	width: 500px;
+	margin-bottom: 15px;
+	text-decoration: none;
+}
+
+.image_mission_accueil
+{
+	width: 100%;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+}
+
+.titre_mission_accueil
+{
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	text-align: center;
+	line-height: 40px;
+}
+
+
+
+
+
+
+
+/*** Détails mission ***/
 .titre_mission_first
 {
 	font-family: robotolight, Verdana, sans-serif;
@@ -51,69 +104,6 @@
   border-radius: 2px;
 }
 
-.zone_presentation_mission
-{
-  width: 32%;
-  margin-top: 15px;
-	border-radius: 2px;
-  overflow: hidden;
-}
-
-.img_presentation_mission
-{
-  width: 100%;
-	margin-bottom: -5px;
-	border-radius: 2px;
-}
-
-.zone_presentation_mission_default
-{
-	background-color: #ff1937;
-	width: 100%;
-	height: 100px;
-	line-height: 100px;
-	margin-top: 15px;
-	overflow: hidden;
-	box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
-	border-radius: 2px;
-}
-
-.titre_mission_default
-{
-	display: inline-block;
-	line-height: 30px;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 150%;
-	color: white;
-	vertical-align: middle;
-}
-
-.img_mission_default
-{
-	float: left;
-	margin-left: 20px;
-	margin-right: -80px;
-	margin-top: -10px;
-	height: 120px;
-}
-
-.titre_mission
-{
-	font-family: robotolight, Verdana, sans-serif;
-  font-size: 100%;
-  color: #262626;
-	padding: 10px;
-  position: absolute;
-  margin-top: 25px;
-  margin-left: 25px;
-  max-width: calc(100% - 15% - 125px);
-  text-align: center;
-  background: linear-gradient(-70deg, rgb(255, 255, 255, 0.8) 0%, rgb(255, 255, 255, 0.8) 50%, rgb(227, 227, 227, 0.8) 50.1%, rgb(227, 227, 227, 0.8) 100%);
-	box-shadow: 0 0 5px rgb(0, 0, 0, 0.7);
-  border-radius: 2px;
-}
-
-/*** Détails mission ***/
 .table_mission
 {
   border-collapse: collapse;
