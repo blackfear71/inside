@@ -122,7 +122,7 @@
     $donnees = $reponse->fetch();
 
     $experience = $donnees['experience'];
-    $niveau     = floor(sqrt($experience / 10));
+    $niveau     = convertExperience($experience);
     $exp_min    = 10 * $niveau ** 2;
     $exp_max    = 10 * ($niveau + 1) ** 2;
     $exp_lvl    = $exp_max - $exp_min;
@@ -427,25 +427,30 @@
       {
         $req3 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
         $data3 = $req3->fetch();
-        $myTheme = Theme::withData($data3);
-        $req3->closeCursor();
 
-        if ($myTheme->getLogo() == "Y")
+        if ($req3->rowCount() > 0)
         {
-          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                         'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
-                        );
+          $myTheme = Theme::withData($data3);
+
+          if ($myTheme->getLogo() == "Y")
+          {
+            $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                           'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                           'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                           'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
+                          );
+          }
+          else
+          {
+            $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                           'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                           'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                           'logo'       => NULL
+                          );
+          }
         }
-        else
-        {
-          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                         'logo'       => NULL
-                        );
-        }
+
+        $req3->closeCursor();
       }
     }
 
@@ -947,7 +952,6 @@
     return $formatted;
   }
 
-
   // Formatage du numéro de téléphone
   // RETOUR : Numéro formaté
   function formatPhoneNumber($phone)
@@ -955,5 +959,14 @@
     $formattedPhone = substr($phone, 0, 2) . "." . substr($phone, 2, 2) . "." . substr($phone, 4, 2) . "." . substr($phone, 6, 2) . "." . substr($phone, 8, 2);
 
     return $formattedPhone;
+  }
+
+  // Conversion de l'expérience en niveau
+  // RETOUR : Niveau
+  function convertExperience($exp)
+  {
+    $level = floor(sqrt($exp / 10));
+
+    return $level;
   }
 ?>

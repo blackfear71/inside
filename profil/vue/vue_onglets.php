@@ -6,7 +6,8 @@
   $listeVues = array('profile'  => 'Profil',
                      'settings' => 'Paramètres',
                      'success'  => 'Succès',
-                     'ranking'  => 'Classement'
+                     'ranking'  => 'Classement',
+                     'themes'   => 'Thèmes'
                     );
 
   foreach ($listeVues as $view => $vue)

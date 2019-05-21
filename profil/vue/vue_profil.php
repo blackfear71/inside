@@ -60,6 +60,10 @@
                 include('vue/vue_ranking.php');
                 break;
 
+              case 'themes':
+                include('vue/vue_infos_themes.php');
+                break;
+
               case 'profile':
               default:
                 include('vue/vue_infos.php');
@@ -78,6 +82,10 @@
               case 'settings':
                 include('vue/vue_utilisateur.php');
                 include('vue/vue_preferences.php');
+                break;
+
+              case 'themes':
+                include('vue/vue_themes.php');
                 break;
 
               case 'profile':

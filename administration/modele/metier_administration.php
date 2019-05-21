@@ -531,7 +531,7 @@
     foreach ($listUsers as $user)
     {
       $experience = $user->getExperience();
-      $niveau   = floor(sqrt($experience / 10));
+      $niveau   = convertExperience($experience);
       $exp_min  = 10 * $niveau ** 2;
       $exp_max  = 10 * ($niveau + 1) ** 2;
       $exp_lvl  = $exp_max - $exp_min;

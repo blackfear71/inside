@@ -223,6 +223,9 @@ $(window).on('load', function()
     $('.zone_infos').addClass('masonry');
   }
 
+  // On n'affiche la zone des thèmes qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_themes_admin').css('display', 'block');
+
   // Masonry (Thèmes)
   if ($('.zone_themes').length)
   {

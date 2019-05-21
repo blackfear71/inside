@@ -146,7 +146,7 @@
   // RETOUR : Tableau des données de progression
   function getProgress($experience)
   {
-    $niveau   = floor(sqrt($experience / 10));
+    $niveau   = convertExperience($experience);
     $exp_min  = 10 * $niveau ** 2;
     $exp_max  = 10 * ($niveau + 1) ** 2;
     $exp_lvl  = $exp_max - $exp_min;
@@ -670,7 +670,7 @@
                                 'pseudo'      => $user->getPseudo(),
                                 'avatar'      => $user->getAvatar(),
                                 'experience'  => $user->getExperience(),
-                                'niveau'      => floor(sqrt($user->getExperience() / 10))
+                                'niveau'      => convertExperience($user->getExperience())
                                );
       array_push($experienceUsers, $myExperienceUser);
     }
@@ -758,5 +758,52 @@
     $reponse->closeCursor();
 
     return $listeUsers;
+  }
+
+  // METIER : Supprime la préférence utilisateur du thème
+  // RETOUR : Aucun
+  function deleteTheme($user)
+  {
+    global $bdd;
+
+    $ref_theme = "";
+
+    $reponse = $bdd->prepare('UPDATE preferences SET ref_theme = :ref_theme WHERE identifiant = "' . $user . '"');
+    $reponse->execute(array(
+      'ref_theme' => $ref_theme
+    ));
+    $reponse->closeCursor();
+
+    $_SESSION['alerts']['theme_deleted'] = true;
+  }
+
+  // METIER : Lecture des thèmes existants par type
+  // RETOUR : Tableau des thèmes
+  function getThemes($type, $experience)
+  {
+    $themes = array();
+
+    global $bdd;
+
+    // Lecture de la base des thèmes
+    if ($type == "U")
+    {
+      $niveau  = convertExperience($experience);
+      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND level <= ' . $niveau . ' ORDER BY level ASC');
+    }
+    else
+      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date("Ymd") . ' ORDER BY date_deb ASC');
+
+    while($donnees = $reponse->fetch())
+    {
+      $myTheme = Theme::withData($donnees);
+
+      // On ajoute la ligne au tableau
+      array_push($themes, $myTheme);
+    }
+
+    $reponse->closeCursor();
+
+    return $themes;
   }
 ?>

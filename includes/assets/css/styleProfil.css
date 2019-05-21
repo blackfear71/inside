@@ -730,6 +730,7 @@
 	background: #ff1937;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
+	text-align: center;
 }
 
 .zone_user_niveaux
@@ -755,4 +756,42 @@
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
 	font-size: 60%;
+}
+
+/*** Thèmes ***/
+.texte_themes
+{
+	text-align: justify;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	margin-bottom: 10px;
+}
+
+.zone_actions
+{
+	float: right;
+	margin-top: -5px;
+}
+
+.bouton_fold
+{
+	border: 0;
+	background-color: #d3d3d3;
+	margin-left: 10px;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 60%;
+	color: #262626;
+	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_fold:hover
+{
+	background-color: #ff1937;
+	color: white;
 }

@@ -6,13 +6,13 @@
     echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />';
       echo 'Les films de ' . $_GET['year'];
 
-      echo '<div class="zone_actions">';
-        if (!empty($listeFilms))
-        {
+      if (!empty($listeFilms))
+      {
+        echo '<div class="zone_actions">';
           echo '<a id="fold_all" class="bouton_fold">Tout plier</a>';
           echo '<a id="unfold_all" class="bouton_fold">Tout déplier</a>';
-        }
-      echo '</div>';
+        echo '</div>';
+      }
     echo '</div>';
 
     $prevMonth  = "";

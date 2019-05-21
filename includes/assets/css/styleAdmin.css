@@ -2421,6 +2421,20 @@
 	vertical-align: middle;
 }
 
+.number_exp
+{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 50%;
+	background: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 90%;
+	text-align: center;
+}
+
 .theme_texte_dates
 {
 	display: inline-block;

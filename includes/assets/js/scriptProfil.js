@@ -77,6 +77,14 @@ $(function()
     }
   });
 
+  // Plie ou déplie les thèmes
+  $('#fold_themes_user, #fold_themes_missions').click(function()
+  {
+    var id_fold = $(this).attr('id').replace('fold_', '');
+
+    afficherMasquerThemes(id_fold);
+  });
+
   /*** Actions au changement ***/
   // Charge l'avatar
   $('.loadAvatar').on('change', function()
@@ -171,6 +179,9 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_niveau_succes').addClass('masonry');
   }
+
+  // On n'affiche la zone des thèmes qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_themes_user').css('display', 'block');
 });
 
 /*****************/
@@ -256,4 +267,21 @@ function afficherMasquerOldMovies(old, id, required)
   }
 
   initMasonry();
+}
+
+// Affiche ou masque les thèmes
+function afficherMasquerThemes(id)
+{
+  console.log(id);
+  
+  if ($('#' + id).css('display') == 'block')
+  {
+    $('#' + id).css('display', 'none');
+    $('#fold_' + id).html('Déplier');
+  }
+  else
+  {
+    $('#' + id).css('display', 'block');
+    $('#fold_' + id).html('Plier');
+  }
 }
