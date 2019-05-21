@@ -75,28 +75,52 @@ $(function()
     loadFile(event, 'avatar');
   });
 
-  // Charge le thème (header)
-  $('.loadHeader').on('change', function()
+  // Charge le thème (header utilisateurs)
+  $('.loadHeaderUsers').on('change', function()
   {
-    loadFile(event, 'theme_header');
+    loadFile(event, 'theme_header_users');
   });
 
-  // Charge le thème (background)
-  $('.loadBackground').on('change', function()
+  // Charge le thème (background utilisateurs)
+  $('.loadBackgroundUsers').on('change', function()
   {
-    loadFile(event, 'theme_background');
+    loadFile(event, 'theme_background_users');
   });
 
-  // Charge le thème (footer)
-  $('.loadFooter').on('change', function()
+  // Charge le thème (footer utilisateurs)
+  $('.loadFooterUsers').on('change', function()
   {
-    loadFile(event, 'theme_footer');
+    loadFile(event, 'theme_footer_users');
   });
 
-  // Charge le thème (logo)
-  $('.loadLogo').on('change', function()
+  // Charge le thème (logo utilisateurs)
+  $('.loadLogoUsers').on('change', function()
   {
-    loadFile(event, 'theme_logo');
+    loadFile(event, 'theme_logo_users');
+  });
+
+  // Charge le thème (header mission)
+  $('.loadHeaderMission').on('change', function()
+  {
+    loadFile(event, 'theme_header_mission');
+  });
+
+  // Charge le thème (background mission)
+  $('.loadBackgroundMission').on('change', function()
+  {
+    loadFile(event, 'theme_background_mission');
+  });
+
+  // Charge le thème (footer mission)
+  $('.loadFooterMission').on('change', function()
+  {
+    loadFile(event, 'theme_footer_mission');
+  });
+
+  // Charge le thème (logo mission)
+  $('.loadLogoMission').on('change', function()
+  {
+    loadFile(event, 'theme_logo_mission');
   });
 
   // Charge la bannière (mission)
@@ -198,7 +222,7 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_infos').addClass('masonry');
   }
-  
+
   // Masonry (Thèmes)
   if ($('.zone_themes').length)
   {

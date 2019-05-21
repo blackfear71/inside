@@ -4,6 +4,8 @@
     private $id;
     private $reference;
     private $name;
+    private $type;
+    private $level;
     private $logo;
     private $date_deb;
     private $date_fin;
@@ -14,6 +16,8 @@
       $this->id        = 0;
       $this->reference = '';
       $this->name      = '';
+      $this->type      = '';
+      $this->level     = '';
       $this->logo      = '';
       $this->date_deb  = '';
       $this->date_fin  = '';
@@ -39,6 +43,12 @@
 
       if (isset($data['name']))
         $this->name      = $data['name'];
+
+      if (isset($data['type']))
+        $this->type      = $data['type'];
+
+      if (isset($data['level']))
+        $this->level     = $data['level'];
 
       if (isset($data['logo']))
         $this->logo      = $data['logo'];
@@ -82,6 +92,28 @@
     public function getName()
     {
       return $this->name;
+    }
+
+    // Type
+    public function setType($type)
+    {
+      $this->type = $type;
+    }
+
+    public function getType()
+    {
+      return $this->type;
+    }
+
+    // Niveau
+    public function setLevel($level)
+    {
+      $this->level = $level;
+    }
+
+    public function getLevel()
+    {
+      return $this->level;
     }
 
     // Présence logo

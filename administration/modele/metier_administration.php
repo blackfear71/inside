@@ -3053,16 +3053,16 @@
     $_SESSION['alerts']['mission_deleted'] = true;
   }
 
-  // METIER : Lecture des thèmes existants
+  // METIER : Lecture des thèmes existants par type
   // RETOUR : Tableau des thèmes
-  function getThemes()
+  function getThemes($type)
   {
     $themes = array();
 
     global $bdd;
 
     // Lecture de la base des thèmes
-    $reponse = $bdd->query('SELECT * FROM themes ORDER BY date_deb DESC');
+    $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" ORDER BY date_deb DESC, level ASC');
 
     while($donnees = $reponse->fetch())
     {
@@ -3081,22 +3081,48 @@
   // RETOUR : Id enregistrement créé
   function insertTheme($post, $files)
   {
+    var_dump($post);
+
     global $bdd;
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['save']['theme_title']    = $post['theme_title'];
-    $_SESSION['save']['theme_ref']      = $post['theme_ref'];
-    $_SESSION['save']['theme_date_deb'] = $post['theme_date_deb'];
-    $_SESSION['save']['theme_date_fin'] = $post['theme_date_fin'];
+    $_SESSION['save']['theme_title']      = $post['theme_title'];
+    $_SESSION['save']['theme_ref']        = $post['theme_ref'];
+
+    if ($post['theme_type'] == "M")
+    {
+      $_SESSION['save']['theme_date_deb'] = $post['theme_date_deb'];
+      $_SESSION['save']['theme_date_fin'] = $post['theme_date_fin'];
+      $_SESSION['save']['theme_level']    = '';
+    }
+    else
+    {
+      $_SESSION['save']['theme_date_deb'] = '';
+      $_SESSION['save']['theme_date_fin'] = '';
+      $_SESSION['save']['theme_level']    = $post['theme_level'];
+    }
 
     $new_id     = NULL;
     $control_ok = true;
 
+    // Récupération des données
     $theme     = $post['theme_title'];
     $reference = $post['theme_ref'];
-    $date_deb  = $post['theme_date_deb'];
-    $date_fin  = $post['theme_date_fin'];
     $logo      = "N";
+    $type      = $post['theme_type'];
+
+    if ($type == "M")
+    {
+      $date_deb = $post['theme_date_deb'];
+      $date_fin = $post['theme_date_fin'];
+      $level    = '';
+    }
+    else
+    {
+      $date_deb = '';
+      $date_fin = '';
+      $level    = $post['theme_level'];
+    }
 
     // Remplacement des caractères spéciaux pour la référence
     $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");
@@ -3112,50 +3138,65 @@
     }
     $req1->closeCursor();
 
-    // Contrôle format date début
-    if ($control_ok == true)
+    if ($type == "M")
     {
-      if (validateDate($date_deb, "d/m/Y") != true)
+      // Contrôle format date début
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
+        if (validateDate($date_deb, "d/m/Y") != true)
+        {
+          $_SESSION['alerts']['wrong_date'] = true;
+          $control_ok                       = false;
+        }
+        else
+          $date_deb = formatDateForInsert($date_deb);
       }
-      else
-        $date_deb = formatDateForInsert($date_deb);
-    }
 
-    // Contrôle format date fin
-    if ($control_ok == true)
-    {
-      if (validateDate($date_fin, "d/m/Y") != true)
+      // Contrôle format date fin
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
+        if (validateDate($date_fin, "d/m/Y") != true)
+        {
+          $_SESSION['alerts']['wrong_date'] = true;
+          $control_ok                       = false;
+        }
+        else
+          $date_fin = formatDateForInsert($date_fin);
       }
-      else
-        $date_fin = formatDateForInsert($date_fin);
-    }
 
-    // Contrôle date début <= date fin
-    if ($control_ok == true)
-    {
-      if ($date_fin < $date_deb)
+      // Contrôle date début <= date fin
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['date_less'] = true;
-        $control_ok                      = false;
+        if ($date_fin < $date_deb)
+        {
+          $_SESSION['alerts']['date_less'] = true;
+          $control_ok                      = false;
+        }
+      }
+
+      // Contrôle chevauchement dates
+      if ($control_ok == true)
+      {
+        $conflict = false;
+        $conflict = controlGeneratedTheme($date_deb, $date_fin, NULL);
+
+        if ($conflict == true)
+        {
+          $_SESSION['alerts']['date_conflict'] = true;
+          $control_ok                          = false;
+        }
       }
     }
-
-    // Contrôle chevauchement dates
-    if ($control_ok == true)
+    else
     {
-      $conflict = false;
-      $conflict = controlGeneratedTheme($date_deb, $date_fin, NULL);
-
-      if ($conflict == true)
+      // Contrôle niveau numérique
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['date_conflict'] = true;
-        $control_ok                          = false;
+        if (!is_numeric($level) OR $level < 0)
+        {
+          $_SESSION['alerts']['level_theme_numeric'] = true;
+          $control_ok                                = false;
+        }
       }
     }
 
@@ -3299,17 +3340,23 @@
     {
       $req2 = $bdd->prepare('INSERT INTO themes(reference,
                                                 name,
+                                                type,
+                                                level,
                                                 logo,
                                                 date_deb,
                                                 date_fin)
                                         VALUES(:reference,
                                                :name,
+                                               :type,
+                                               :level,
                                                :logo,
                                                :date_deb,
                                                :date_fin)');
       $req2->execute(array(
         'reference' => $reference,
         'name'      => $theme,
+        'type'      => $type,
+        'level'     => $level,
         'logo'      => $logo,
         'date_deb'  => $date_deb,
         'date_fin'  => $date_fin
@@ -3333,53 +3380,80 @@
     $control_ok = true;
 
     $theme    = $post['theme_title'];
-    $date_deb = $post['theme_date_deb'];
-    $date_fin = $post['theme_date_fin'];
+    $type     = $post['theme_type'];
 
-    // Contrôle format date début
-    if ($control_ok == true)
+    if ($type == "M")
     {
-      if (validateDate($date_deb, "d/m/Y") != true)
-      {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
-      }
-      else
-        $date_deb = formatDateForInsert($date_deb);
+      $date_deb = $post['theme_date_deb'];
+      $date_fin = $post['theme_date_fin'];
+      $level    = '';
+    }
+    else
+    {
+      $date_deb = '';
+      $date_fin = '';
+      $level    = $post['theme_level'];
     }
 
-    // Contrôle format date fin
-    if ($control_ok == true)
+    if ($type == "M")
     {
-      if (validateDate($date_fin, "d/m/Y") != true)
+      // Contrôle format date début
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
+        if (validateDate($date_deb, "d/m/Y") != true)
+        {
+          $_SESSION['alerts']['wrong_date'] = true;
+          $control_ok                       = false;
+        }
+        else
+          $date_deb = formatDateForInsert($date_deb);
       }
-      else
-        $date_fin = formatDateForInsert($date_fin);
-    }
 
-    // Contrôle date début <= date fin
-    if ($control_ok == true)
-    {
-      if ($date_fin < $date_deb)
+      // Contrôle format date fin
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['date_less'] = true;
-        $control_ok                      = false;
+        if (validateDate($date_fin, "d/m/Y") != true)
+        {
+          $_SESSION['alerts']['wrong_date'] = true;
+          $control_ok                       = false;
+        }
+        else
+          $date_fin = formatDateForInsert($date_fin);
+      }
+
+      // Contrôle date début <= date fin
+      if ($control_ok == true)
+      {
+        if ($date_fin < $date_deb)
+        {
+          $_SESSION['alerts']['date_less'] = true;
+          $control_ok                      = false;
+        }
+      }
+
+      // Contrôle chevauchement dates
+      if ($control_ok == true)
+      {
+        $conflict = false;
+        $conflict = controlGeneratedTheme($date_deb, $date_fin, $id_theme);
+
+        if ($conflict == true)
+        {
+          $_SESSION['alerts']['date_conflict'] = true;
+          $control_ok                          = false;
+        }
       }
     }
-
-    // Contrôle chevauchement dates
-    if ($control_ok == true)
+    else
     {
-      $conflict = false;
-      $conflict = controlGeneratedTheme($date_deb, $date_fin, $id_theme);
-
-      if ($conflict == true)
+      // Contrôle niveau numérique
+      if ($control_ok == true)
       {
-        $_SESSION['alerts']['date_conflict'] = true;
-        $control_ok                          = false;
+        if (!is_numeric($level) OR $level < 0)
+        {
+          $_SESSION['alerts']['level_theme_numeric'] = true;
+          $control_ok                                = false;
+        }
       }
     }
 
@@ -3387,13 +3461,17 @@
     if ($control_ok == true)
     {
       $req = $bdd->prepare('UPDATE themes SET name     = :name,
+                                              type     = :type,
+                                              level    = :level,
                                               date_deb = :date_deb,
                                               date_fin = :date_fin
                                         WHERE id       = ' . $id_theme);
       $req->execute(array(
         'name'     => $theme,
-        'date_deb' => formatDateForInsert($date_deb),
-        'date_fin' => formatDateForInsert($date_fin)
+        'type'     => $type,
+        'level'    => $level,
+        'date_deb' => $date_deb,
+        'date_fin' => $date_fin
       ));
       $req->closeCursor();
 
@@ -3439,9 +3517,9 @@
     $conflict = false;
 
     if (!empty($id_theme))
-      $reponse = $bdd->query('SELECT * FROM themes WHERE id != ' . $id_theme . ' ORDER BY date_deb DESC ');
+      $reponse = $bdd->query('SELECT * FROM themes WHERE id != ' . $id_theme . ' AND type = "M" ORDER BY date_deb DESC ');
     else
-      $reponse = $bdd->query('SELECT * FROM themes ORDER BY date_deb DESC');
+      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" ORDER BY date_deb DESC');
 
     while($donnees = $reponse->fetch())
     {

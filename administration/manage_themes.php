@@ -10,15 +10,17 @@
   include_once('modele/metier_administration.php');
 
   // Initialisation sauvegarde saisie thème
-  if ((!isset($_SESSION['alerts']['date_less'])          OR $_SESSION['alerts']['date_less']          != true)
-  AND (!isset($_SESSION['alerts']['date_conflict'])      OR $_SESSION['alerts']['date_conflict']      != true)
-  AND (!isset($_SESSION['alerts']['wrong_date'])         OR $_SESSION['alerts']['wrong_date']         != true)
-  AND (!isset($_SESSION['alerts']['already_ref_theme'])  OR $_SESSION['alerts']['already_ref_theme']  != true)
-  AND (!isset($_SESSION['alerts']['missing_theme_file']) OR $_SESSION['alerts']['missing_theme_file'] != true)
-  AND (!isset($_SESSION['alerts']['wrong_file'])         OR $_SESSION['alerts']['wrong_file']         != true))
+  if ((!isset($_SESSION['alerts']['date_less'])           OR $_SESSION['alerts']['date_less']           != true)
+  AND (!isset($_SESSION['alerts']['date_conflict'])       OR $_SESSION['alerts']['date_conflict']       != true)
+  AND (!isset($_SESSION['alerts']['wrong_date'])          OR $_SESSION['alerts']['wrong_date']          != true)
+  AND (!isset($_SESSION['alerts']['already_ref_theme'])   OR $_SESSION['alerts']['already_ref_theme']   != true)
+  AND (!isset($_SESSION['alerts']['missing_theme_file'])  OR $_SESSION['alerts']['missing_theme_file']  != true)
+  AND (!isset($_SESSION['alerts']['wrong_file'])          OR $_SESSION['alerts']['wrong_file']          != true)
+  AND (!isset($_SESSION['alerts']['level_theme_numeric']) OR $_SESSION['alerts']['level_theme_numeric'] != true))
   {
     $_SESSION['save']['theme_title']    = "";
     $_SESSION['save']['theme_ref']      = "";
+    $_SESSION['save']['theme_level']    = "";
     $_SESSION['save']['theme_date_deb'] = "";
     $_SESSION['save']['theme_date_fin'] = "";
   }
@@ -28,7 +30,8 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      $themes = getThemes();
+      $themes_users    = getThemes("U");
+      $themes_missions = getThemes("M");
       break;
 
 		case "doAjouter":
@@ -54,16 +57,37 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($themes as &$theme)
+      if (!empty($themes_users))
       {
-        $theme->setReference(htmlspecialchars($theme->getReference()));
-        $theme->setName(htmlspecialchars($theme->getName()));
-        $theme->setLogo(htmlspecialchars($theme->getLogo()));
-        $theme->setDate_deb(htmlspecialchars($theme->getDate_deb()));
-        $theme->setDate_fin(htmlspecialchars($theme->getDate_fin()));
+        foreach ($themes_users as &$theme_users)
+        {
+          $theme_users->setReference(htmlspecialchars($theme_users->getReference()));
+          $theme_users->setName(htmlspecialchars($theme_users->getName()));
+          $theme_users->setType(htmlspecialchars($theme_users->getType()));
+          $theme_users->setLevel(htmlspecialchars($theme_users->getLevel()));
+          $theme_users->setLogo(htmlspecialchars($theme_users->getLogo()));
+          $theme_users->setDate_deb(htmlspecialchars($theme_users->getDate_deb()));
+          $theme_users->setDate_fin(htmlspecialchars($theme_users->getDate_fin()));
+        }
+
+        unset($theme_users);
       }
 
-      unset($theme);
+      if (!empty($themes_missions))
+      {
+        foreach ($themes_missions as &$theme_mission)
+        {
+          $theme_mission->setReference(htmlspecialchars($theme_mission->getReference()));
+          $theme_mission->setName(htmlspecialchars($theme_mission->getName()));
+          $theme_mission->setType(htmlspecialchars($theme_mission->getType()));
+          $theme_mission->setLevel(htmlspecialchars($theme_mission->getLevel()));
+          $theme_mission->setLogo(htmlspecialchars($theme_mission->getLogo()));
+          $theme_mission->setDate_deb(htmlspecialchars($theme_mission->getDate_deb()));
+          $theme_mission->setDate_fin(htmlspecialchars($theme_mission->getDate_fin()));
+        }
+
+        unset($theme_mission);
+      }
       break;
 
     case "doAjouter":
