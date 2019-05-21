@@ -3081,8 +3081,6 @@
   // RETOUR : Id enregistrement créé
   function insertTheme($post, $files)
   {
-    var_dump($post);
-
     global $bdd;
 
     // Sauvegarde en session en cas d'erreur

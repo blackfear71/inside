@@ -380,67 +380,56 @@
 
     global $bdd;
 
-    // Lecture préférence thème utilisateur
-    $req1 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
+    // Contrôle thème mission en cours
+    $theme_present = false;
+
+    $req1 = $bdd->query('SELECT * FROM themes WHERE type = "M" AND ' . date("Ymd") . ' >= date_deb AND ' . date("Ymd") . ' <= date_fin');
     $data1 = $req1->fetch();
 
-    $preferences = Preferences::withData($data1);
+    if ($req1->rowCount() > 0)
+    {
+      $theme_present = true;
+      $myTheme       = Theme::withData($data1);
+    }
 
     $req1->closeCursor();
 
-    // Thème automatique
-    if (empty($preferences->getRef_theme()))
+    // Thème mission si en cours
+    if ($theme_present == true)
     {
-      $theme_present = false;
-
-      // Détermination thème automatique présent
-      $req2 = $bdd->query('SELECT * FROM themes WHERE ' . date("Ymd") . ' >= date_deb AND ' . date("Ymd") . ' <= date_fin');
-      $data2 = $req2->fetch();
-
-      if ($req2->rowCount() > 0)
+      if ($myTheme->getLogo() == "Y")
       {
-        $theme_present = true;
-        $myTheme       = Theme::withData($data2);
+        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                       'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
+                      );
       }
-
-      $req2->closeCursor();
-
-      // Thème présent
-      if ($theme_present == true)
-      {
-        if ($myTheme->getLogo() == "Y")
-        {
-          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                         'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
-                        );
-        }
-        else
-        {
-          $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                         'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                         'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                         'logo'       => NULL
-                        );
-        }
-      }
-      // Thème par défaut
       else
-        $theme = array();
+      {
+        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
+                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
+                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
+                       'logo'       => NULL
+                      );
+      }
     }
-    // Thème utilisateur
+    // Thème personnalisé
     else
     {
-      $req2 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
+      // Lecture préférence thème utilisateur
+      $req2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
       $data2 = $req2->fetch();
-
-      $myTheme = Theme::withData($data2);
-
+      $preferences = Preferences::withData($data2);
       $req2->closeCursor();
 
-      if (!empty($myTheme->getReference()))
+      if (!empty($preferences->getRef_theme()))
       {
+        $req3 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
+        $data3 = $req3->fetch();
+        $myTheme = Theme::withData($data3);
+        $req3->closeCursor();
+
         if ($myTheme->getLogo() == "Y")
         {
           $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
