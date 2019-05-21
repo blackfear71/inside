@@ -113,6 +113,7 @@ $(window).on('load', function()
     if (windowChat == "1")
       $('#onglet_users').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
   });
+
   $('#onglet_chat').hover(function(e)
   {
     if (windowChat == "2")
@@ -472,7 +473,10 @@ $(window).on('load', function()
             }
           }
 
-          html += '<div class="text_chat_connected">' + pseudo + '</div>';
+          if (pseudo.length < 30)
+            html += '<div class="text_chat_connected">' + pseudo + '</div>';
+          else
+            html += '<div class="text_chat_connected">' + pseudo.substr(0, 30) + '...</div>';
         html += '</div>';
 
         // Insertion dans la zone
