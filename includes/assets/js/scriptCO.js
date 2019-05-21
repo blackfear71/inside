@@ -63,6 +63,35 @@ $(function()
     event.stopPropagation();
   });
 
+  // Affiche une image culte en grand
+  $('.agrandirImage').click(function()
+  {
+    var html;
+    var path      = $(this).children().attr('src');
+    var split     = path.split('/');
+    var collector = split[split.length - 1];
+
+    html += '<div id="zoom_image" class="fond_zoom">';
+      html += '<div class="zone_image_zoom">';
+        html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+        html += '<img src="' + path + '" alt="' + collector + '" class="image_zoom" />';
+      html += '</div>';
+    html += '</div>';
+
+    $('body').append(html);
+
+    $('#zoom_image').fadeIn(200);
+  });
+
+  // Ferme le zoom d'une image culte
+  $(document).on('click', '#fermerImage', function()
+  {
+    $('#zoom_image').fadeOut(200, function()
+    {
+      $('#zoom_image').remove();
+    });
+  });
+
   /*** Actions au changement ***/
   // Applique les filtres
   $('#applySort, #applyFilter').on('change', function()

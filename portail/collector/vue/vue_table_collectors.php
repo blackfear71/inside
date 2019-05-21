@@ -123,7 +123,7 @@
                 elseif ($collector->getType_collector() == "I")
                 {
                   // Image
-                  echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
+                  echo '<a class="agrandirImage"><img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" /></a>';
                 }
 
                 // Rapporteur
