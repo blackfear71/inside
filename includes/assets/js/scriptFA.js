@@ -547,7 +547,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
       if (j == 0)
         html += '<option value="0' + j + '" selected>0' + j + '</option>';
       else
-        html += '<option value="' + j*15 + '">' + j*15 + '</option>';
+        html += '<option value="' + j * 15 + '">' + j * 15 + '</option>';
     }
   html += '</select>';
 

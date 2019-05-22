@@ -208,14 +208,14 @@
                           if ($j * 15 == substr($monChoix->getTime(), 2, 2))
                           {
                             if ($j == 0)
-                              echo '<option value="0' . $j * 15 . '" selected>0' . $j * 15 . '</option>';
+                              echo '<option value="0' . $j . '" selected>0' . $j . '</option>';
                             else
                               echo '<option value="' . $j * 15 . '" selected>' . $j * 15 . '</option>';
                           }
                           else
                           {
                             if ($j == 0)
-                              echo '<option value="0' . $j * 15 . '">0' . $j * 15 . '</option>';
+                              echo '<option value="0' . $j . '">0' . $j . '</option>';
                             else
                               echo '<option value="' . $j * 15 . '">' . $j * 15 . '</option>';
                           }
