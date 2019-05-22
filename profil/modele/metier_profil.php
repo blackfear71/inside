@@ -792,7 +792,7 @@
       $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND level <= ' . $niveau . ' ORDER BY level ASC');
     }
     else
-      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date("Ymd") . ' ORDER BY date_deb ASC');
+      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date("Ymd") . ' ORDER BY date_deb DESC');
 
     while($donnees = $reponse->fetch())
     {
