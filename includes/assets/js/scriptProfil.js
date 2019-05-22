@@ -85,6 +85,30 @@ $(function()
     afficherMasquerThemes(id_fold);
   });
 
+  // Affiche un aperçu d'un thème
+  $('.apercuTheme').click(function()
+  {
+    var reference = '';
+    var withLogo  = $(this).attr('id').split('_')[0];
+    var logo      = '';
+
+    if (withLogo == 'nologo')
+      reference = $(this).attr('id').replace('nologo_', '');
+    else
+      reference = $(this).attr('id');
+
+    var background = '/inside/includes/images/themes/backgrounds/' + reference + '.png';
+    var header     = '/inside/includes/images/themes/headers/' + reference + '_h.png';
+    var footer     = '/inside/includes/images/themes/footers/' + reference + '_f.png';
+
+    if (withLogo != 'nologo')
+      logo = '/inside/includes/images/themes/logos/' + reference + '_l.png';
+    else
+      logo = '/inside/includes/icons/common/inside.png';
+
+    changeTheme(background, header, footer, logo);
+  });
+
   /*** Actions au changement ***/
   // Charge l'avatar
   $('.loadAvatar').on('change', function()
@@ -182,6 +206,42 @@ $(window).on('load', function()
 
   // On n'affiche la zone des thèmes qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_themes_user').css('display', 'block');
+
+  // Masonry (Thèmes utilisateur)
+  if ($('#themes_user').length)
+  {
+    $('#themes_user').masonry().masonry('destroy');
+
+    $('#themes_user').masonry({
+      // Options
+      itemSelector: '.zone_theme',
+      columnWidth: 500,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('#themes_user').addClass('masonry');
+  }
+
+  // Masonry (Thèmes missions)
+  if ($('#themes_missions').length)
+  {
+    $('#themes_missions').masonry().masonry('destroy');
+
+    $('#themes_missions').masonry({
+      // Options
+      itemSelector: '.zone_theme',
+      columnWidth: 500,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('#themes_missions').addClass('masonry');
+  }
 });
 
 /*****************/
@@ -272,8 +332,6 @@ function afficherMasquerOldMovies(old, id, required)
 // Affiche ou masque les thèmes
 function afficherMasquerThemes(id)
 {
-  console.log(id);
-  
   if ($('#' + id).css('display') == 'block')
   {
     $('#' + id).css('display', 'none');

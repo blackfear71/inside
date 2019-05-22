@@ -95,6 +95,10 @@
       deleteTheme($_GET['user']);
       break;
 
+    case 'doModifierTheme':
+      updateTheme($_GET['user'], $_GET['id']);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
@@ -268,6 +272,7 @@
     case 'cancelDesinscription':
     case 'cancelResetPassword':
     case 'doSupprimerTheme':
+    case 'doModifierTheme':
     default:
       break;
   }
@@ -287,6 +292,7 @@
       break;
 
     case 'doSupprimerTheme':
+    case 'doModifierTheme':
       header('location: profil.php?user=' . $_GET['user'] . '&view=themes&action=goConsulter');
       break;
 

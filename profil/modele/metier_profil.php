@@ -806,4 +806,26 @@
 
     return $themes;
   }
+
+  // METIER : Mise à jour de la préférence thème utilisateur
+  // RETOUR : Aucun
+  function updateTheme($user, $id)
+  {
+    global $bdd;
+
+    // Lecture de la référence du thème
+    $reponse = $bdd->query('SELECT * FROM themes WHERE id = ' . $id);
+    $donnees = $reponse->fetch();
+    $ref_theme = $donnees['reference'];
+    $reponse->closeCursor();
+
+    // Mise à jour de la préférence utilisateur
+    $reponse2 = $bdd->prepare('UPDATE preferences SET ref_theme = :ref_theme WHERE identifiant = "' . $user . '"');
+    $reponse2->execute(array(
+      'ref_theme' => $ref_theme
+    ));
+    $reponse2->closeCursor();
+
+    $_SESSION['alerts']['theme_updated'] = true;
+  }
 ?>
