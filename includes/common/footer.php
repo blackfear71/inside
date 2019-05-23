@@ -5,6 +5,8 @@
   // Liens
   if ($_SESSION['user']['identifiant'] != "admin")
   {
+    $path = $_SERVER['PHP_SELF'];
+
     // Récupération des préférences
     switch ($_SESSION['user']['view_the_box'])
     {
@@ -27,12 +29,18 @@
     }
 
     // Lien #TheBox
-    echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer">';
+    if ($path == '/inside/portail/ideas/ideas.php')
+      echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer_active">';
+    else
+      echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
     echo '</a>';
 
     // Lien Bugs
-    echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer">';
+    if ($path == '/inside/portail/bugs/bugs.php')
+      echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer_active">';
+    else
+      echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
     echo '</a>';
   }
