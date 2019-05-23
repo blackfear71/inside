@@ -1273,8 +1273,10 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 49%;
-	box-shadow: 0 5px 8px #7b8084;
+	box-shadow: 0 0 3px #7c7c7c;
 	text-align: justify;
+	border-radius: 2px;
+	overflow: hidden;
 }
 
 .titre_cron
@@ -1438,8 +1440,10 @@
 {
 	display: inline-block;
 	width: 100%;
-	box-shadow: 0 5px 8px #7b8084;
+	box-shadow: 0 0 3px #7c7c7c;
 	text-align: justify;
+	border-radius: 2px;
+	overflow: hidden;
 }
 
 .titre_no_logs
