@@ -73,7 +73,7 @@ $(function()
 
     html += '<div id="zoom_image" class="fond_zoom">';
       html += '<div class="zone_image_zoom">';
-        html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+        html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
         html += '<img src="' + path + '" alt="' + collector + '" class="image_zoom" />';
       html += '</div>';
     html += '</div>';
