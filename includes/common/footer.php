@@ -52,7 +52,14 @@
   $zone_inside = "footer";
   include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
-  // Chargement thème
+  // Chargement des données du thème pour le script
   if ($_SESSION['user']['identifiant'] != "admin" AND !empty($_SESSION['theme']))
-    echo '<script>changeTheme("' . $_SESSION['theme']['background'] . '", "' . $_SESSION['theme']['header'] . '", "' . $_SESSION['theme']['footer'] . '", "' . $_SESSION['theme']['logo'] . '");</script>';
+    $themeUser = json_encode($_SESSION['theme']);
+  else
+    $themeUser = json_encode('');
 ?>
+
+<script>
+  // Récupération du thème pour le script
+  var themeUser = <?php if (isset($themeUser)) {echo $themeUser;} ?>;
+</script>

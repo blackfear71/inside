@@ -5,6 +5,10 @@
 $(function()
 {
   /*** Actions au chargement ***/
+  // Applique le thème utilisateur si présent
+  if (themeUser != null)
+    changeTheme(themeUser.background, themeUser.header, themeUser.footer, themeUser.logo);
+
   // Affiche la barre d'expérience autour de l'avatar
   $('#progress_circle_header').circlize(
   {
