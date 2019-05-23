@@ -44,7 +44,7 @@
                 }
                 else
                 {
-                  echo '<div id="bouton_' . $preference['id'] . '" class="switch_autorisation ">';
+                  echo '<div id="bouton_' . $preference['id'] . '" class="switch_autorisation">';
                     echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']" />';
                     echo '<label for="autorisation' . $preference['id'] . '" class="label_switch">' . $preference['pseudo'] . '</label>';
                   echo '</div>';

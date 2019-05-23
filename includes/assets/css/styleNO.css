@@ -95,6 +95,7 @@
   vertical-align: middle;
 	padding: 5px 20px 5px 20px;
   color: #262626;
+	word-break: break-word;
 }
 
 .lien_notification:hover .zone_notification_contenu

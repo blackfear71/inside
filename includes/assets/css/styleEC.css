@@ -410,6 +410,7 @@
 	font-size: 80%;
 	color: #262626;
 	line-height: 15px;
+	word-break: break-word;
 }
 
 .total_bilan
@@ -510,6 +511,7 @@
 	font-size: 80%;
 	color: #262626;
 	line-height: 15px;
+	word-break: break-word;
 }
 
 .date_achat

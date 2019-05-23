@@ -463,6 +463,7 @@ header
 	line-height: 20px;
 	text-align: justify;
 	margin-right: 75px;
+	word-break: break-word;
 }
 
 .avatar_bandeau
@@ -814,6 +815,7 @@ aside
 	padding-bottom: 10px;
 	color: #262626;
 	text-align: left;
+	word-break: break-word;
 }
 
 .logo_titre_section

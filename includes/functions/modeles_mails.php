@@ -76,6 +76,7 @@
         	margin-left: 30px;
         	margin-bottom: 10px;
         	margin-top: 10px;
+          word-break: break-word;
         }
 
         .avatar_dest_mail

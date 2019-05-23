@@ -93,6 +93,8 @@ $(function()
 
     afficherMasquerNoDelay('modifier_comment_' + id_comment);
     afficherMasquerNoDelay('visualiser_comment_' + id_comment);
+    afficherMasquerNoDelay('actions_comment_' + id_comment);
+    afficherMasquerNoDelay('annuler_actions_comment_' + id_comment);
   });
 
   // Masque la zone de modification d'un commentaire
@@ -102,6 +104,8 @@ $(function()
 
     afficherMasquerNoDelay('modifier_comment_' + id_comment);
     afficherMasquerNoDelay('visualiser_comment_' + id_comment);
+    afficherMasquerNoDelay('actions_comment_' + id_comment);
+    afficherMasquerNoDelay('annuler_actions_comment_' + id_comment);
   });
 
   // Insère un smiley en saisie/modification de commentaire

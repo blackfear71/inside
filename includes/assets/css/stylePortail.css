@@ -72,6 +72,7 @@
 	color: #262626;
 	text-align: justify;
 	line-height: 20px;
+	word-break: break-word;
 }
 
 .contenu_paragraphe
@@ -96,6 +97,7 @@
 	text-align: justify;
 	font-style: italic;
 	font-size: 80%;
+	word-break: break-word;
 }
 
 /*** Liens portail ***/

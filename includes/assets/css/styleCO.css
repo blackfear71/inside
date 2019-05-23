@@ -551,6 +551,7 @@
 	font-size: 80%;
 	color: #262626;
 	font-style: italic;
+	word-break: break-word;
 }
 
 .text_collector

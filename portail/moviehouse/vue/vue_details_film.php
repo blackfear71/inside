@@ -352,23 +352,36 @@
                       // Actions sur commentaires seulement si l'auteur correspond à l'utilisateur connecté
                       if ($comment->getAuthor() == $_SESSION['user']['identifiant'])
                       {
+                        // Boutons
+                        echo '<div id="actions_comment_' . $comment->getId() . '" class="actions_commentaires">';
+                          // Modification commentaire
+                          echo '<span class="link_actions_commentaires">';
+                            echo '<a id="modifier_commentaire_' . $comment->getId() . '" title="Modifier le commentaire" class="icone_modifier_comment modifierCommentaire"></a>';
+                          echo '</span>';
+
+                          // Suppression commentaire
+                          echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire" class="link_actions_commentaires">';
+                            echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" class="icone_supprimer_comment eventConfirm" />';
+                            echo '<input type="hidden" value="Supprimer ce commentaire ?" class="eventMessage" />';
+                          echo '</form>';
+                        echo '</div>';
+
+                        echo '<div id="annuler_actions_comment_' . $comment->getId() . '" class="actions_commentaires" style="display: none;">';
+                          // Validation modification
+                          echo '<span class="link_actions_commentaires">';
+                            echo '<input type="submit" name="modify_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
+                          echo '</span>';
+
+                          // Annulation modification
+                          echo '<span class="link_actions_commentaires">';
+                            echo '<a id="annuler_commentaire_' . $comment->getId() . '" title="Annuler la modification" class="icone_annuler_comment annulerCommentaire"></a>';
+                          echo '</span>';
+                        echo '</div>';
+
                         /***************************************************/
                         /* Ligne visualisation normale (sans modification) */
                         /***************************************************/
                         echo '<div id="visualiser_comment_' . $comment->getId() . '">';
-                          echo '<div class="actions_commentaires">';
-                            // Modification commentaire
-                            echo '<span class="link_actions_commentaires">';
-                              echo '<a id="modifier_commentaire_' . $comment->getId() . '" title="Modifier le commentaire" class="icone_modifier_comment modifierCommentaire"></a>';
-                            echo '</span>';
-
-                            // Suppression commentaire
-                            echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire" class="link_actions_commentaires">';
-                              echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" class="icone_supprimer_comment eventConfirm" />';
-                              echo '<input type="hidden" value="Supprimer ce commentaire ?" class="eventMessage" />';
-                            echo '</form>';
-                          echo '</div>';
-
                           // On cherche les smileys dans les commentaires
                           $commentaire = extract_smiley($comment->getComment());
 
@@ -384,18 +397,6 @@
                         /**********************************/
                         echo '<div id="modifier_comment_' . $comment->getId() . '" style="display: none;">';
                           echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doModifierCommentaire">';
-                            echo '<div class="actions_commentaires" style="margin-top: -45px;">';
-                              // Validation modification
-                              echo '<span class="link_actions_commentaires">';
-                                echo '<input type="submit" name="modify_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
-                              echo '</span>';
-
-                              // Annulation modification
-                              echo '<span class="link_actions_commentaires">';
-                                echo '<a id="annuler_commentaire_' . $comment->getId() . '" title="Annuler la modification" class="icone_annuler_comment annulerCommentaire"></a>';
-                              echo '</span>';
-                            echo '</div>';
-
                             echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
 
                             echo '<div class="zone_saisie_smileys">';
