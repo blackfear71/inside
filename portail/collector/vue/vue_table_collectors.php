@@ -143,6 +143,20 @@
               if ($listeVotes != null)
               {
                 echo '<div class="zone_votes_users">';
+                  // Smileys
+                  foreach ($listeVotes as $votes)
+                  {
+                    if ($votes['id'] == $collector->getId())
+                    {
+                      for ($k = 1; $k <= 8; $k++)
+                      {
+                        if ($votes['smileys'][$k] != 0)
+                          echo '<img src="../../includes/icons/common/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
+                      }
+                    }
+                  }
+
+                  // Pseudos
                   foreach ($listeVotes as $votes)
                   {
                     if ($votes['id'] == $collector->getId())
@@ -151,10 +165,6 @@
                       {
                         if ($votes['smileys'][$k] != 0)
                         {
-                          // Smileys
-                          echo '<img src="../../includes/icons/common/smileys/' . $k . '.png" alt="smiley" class="smiley_votes_' . $k . '" />';
-
-                          // Pseudos
                           $listeUsersSmiley = '';
                           foreach ($votes['identifiants'][$k] as $identifiants)
                           {
