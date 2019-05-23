@@ -583,18 +583,19 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(50% - 185px);
+	width: calc(40% - 70px);
 	margin-right: 10px;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
+	word-wrap: break-word;
 }
 
 .zone_details_transports
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 250px;
+	width: calc(60% - 50px);
 	min-height: 40px;
 }
 
@@ -609,14 +610,16 @@
 
 .horaire_details
 {
-	float: right;
+	display: inline-block;
+	width: 40px;
 	margin-top: 5px;
 	background-color: #70d55d;
-	margin-left: 5px;
+	margin-left: 10px;
 	padding: 5px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
+	text-align: center;
 }
 
 .zone_details_user_bottom

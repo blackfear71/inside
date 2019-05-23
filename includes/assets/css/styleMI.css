@@ -322,4 +322,5 @@
 	font-family: robotoregular, Verdana, sans-serif;
 	line-height: 15px;
   color: #262626;
+	word-wrap: break-word;
 }
