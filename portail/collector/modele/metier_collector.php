@@ -594,12 +594,13 @@
       if ($reponse->rowCount() > 0)
       {
         $myVote = VotesCollector::withData($donnees);
-        array_push($listVotes, $myVote);
+
+        $listVotes[$collector->getId()] = $myVote;
       }
 
       $reponse->closeCursor();
     }
-
+    
     return $listVotes;
   }
 
@@ -618,15 +619,7 @@
     {
       for ($i = 1; $i <= 8; $i++)
       {
-        // Recherche du nombre de smileys
-        $req = $bdd->query('SELECT COUNT(id) AS nb_smileys FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i);
-        $data = $req->fetch();
-
-        $listSmileys[$i] = $data['nb_smileys'];
-
-        $req->closeCursor();
-
-        // Recherche des noms
+        // Recherche des pseudos ayant un vote
         $myArray = array();
 
         $req2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i . ' ORDER BY identifiant ASC');
@@ -652,12 +645,7 @@
         $listUsers[$i] = $myArray;
       }
 
-      $myVotes = array('id'           => $collector->getId(),
-                       'identifiants' => $listUsers,
-                       'smileys'      => $listSmileys
-                      );
-
-      array_push($listVotes, $myVotes);
+      $listVotes[$collector->getId()] = $listUsers;
     }
 
     return $listVotes;

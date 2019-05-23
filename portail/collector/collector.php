@@ -8,7 +8,7 @@
 
   // Modèle de données : "module métier"
   include_once('modele/metier_collector.php');
-  
+
   // Initialisation sauvegarde saisie
   if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
