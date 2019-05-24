@@ -1083,11 +1083,11 @@ function showDetails(zone, id)
     ligne += '<div class="pseudo_details">' + this['pseudo'] + '</div>';
 
     // Transports
-    if (this['transports'] != "")
-    {
-      transports = this['transports'].split(';');
+    ligne += '<div class="zone_details_transports">';
+      if (this['transports'] != "")
+      {
+        transports = this['transports'].split(';');
 
-      ligne += '<div class="zone_details_transports">';
         $.each(transports, function(key, value)
         {
           switch (value)
@@ -1112,8 +1112,8 @@ function showDetails(zone, id)
               break;
           }
         });
-      ligne += '</div>';
-    }
+      } 
+    ligne += '</div>';
 
     // Horaires
     if (this['horaire'] != "")
