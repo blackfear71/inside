@@ -52,7 +52,7 @@
           /****************/
           /*** Rapports ***/
           /****************/
-          include('vue_liste_rapports.php');
+          include('vue/vue_liste_rapports.php');
 				?>
 			</article>
 		</section>
