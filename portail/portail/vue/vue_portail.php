@@ -29,7 +29,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Inside News
+          /***************/
+          /* Inside News */
+          /***************/
           echo '<div class="zone_portail_left">';
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" />INSIDE News</div>';
 
@@ -70,7 +72,9 @@
             echo '</div>';
           echo '</div>';
 
-          // Portail
+          /***********/
+          /* Portail */
+          /***********/
           echo '<div class="zone_portail_right">';
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />Portail</div>';
 

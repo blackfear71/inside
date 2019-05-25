@@ -36,7 +36,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Modification film
+          /*********************/
+          /* Modification film */
+          /*********************/
           include('vue/vue_saisie_film.php');
 
           if ($filmExistant == true)
@@ -71,7 +73,9 @@
               echo '<div class="titre_film_details">' . $detailsFilm->getFilm() . '</div>';
             echo '</div>';
 
-            // Détails
+            /***********/
+            /* Détails */
+            /***********/
             echo '<div class="zone_details">';
               // Poster, actions & intéressés
               echo '<div class="zone_details_left">';

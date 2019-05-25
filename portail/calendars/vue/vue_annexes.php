@@ -36,7 +36,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Saisie & Années
+          /*******************/
+          /* Saisie & Années */
+          /*******************/
           echo '<div class="zone_calendars_left">';
             // Saisie
             if ($preferences->getManage_calendars() == "Y")
@@ -72,7 +74,9 @@
             include('vue/vue_onglets.php');
           echo '</div>';
 
-          // Calendriers
+          /***********/
+          /* Annexes */
+          /***********/
           echo '<div class="zone_calendars_right">';
             echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />Les annexes</div>';
 

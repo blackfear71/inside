@@ -35,7 +35,9 @@
           $zone_inside = "article";
           include('../includes/common/missions.php');
 
-          // Onglets
+          /***********/
+          /* Onglets */
+          /***********/
           echo '<div class="zone_profil_left">';
             include('vue/vue_onglets.php');
 
@@ -43,7 +45,9 @@
               include('vue/vue_experience.php');
           echo '</div>';
 
-          // Contenu
+          /********************/
+          /* Contenu (droite) */
+          /********************/
           echo '<div class="zone_profil_right">';
             // Affichage en fonction des vues
             switch ($_GET['view'])
@@ -71,7 +75,9 @@
             }
           echo '</div>';
 
-          // Contributions
+          /*****************/
+          /* Contenu (bas) */
+          /*****************/
           echo '<div class="zone_profil_bottom">';
             switch ($_GET['view'])
             {

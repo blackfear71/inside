@@ -36,7 +36,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Liens
+          /*********/
+          /* Liens */
+          /*********/
           echo '<div class="zone_liens_saisie">';
             // Saisie utilisateur
             echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_categorie">';
@@ -51,13 +53,19 @@
             echo '</a>';
           echo '</div>';
 
-          // Saisie choix
+          /****************/
+          /* Saisie choix */
+          /****************/
           include('vue/vue_saisie_choix.php');
 
-          // Détails détermination
+          /*************************/
+          /* Détails détermination */
+          /*************************/
           include('vue/vue_details_determination.php');
 
-          // Propositions, choix et résumé de la semaine
+          /***********************************************/
+          /* Propositions, choix et résumé de la semaine */
+          /***********************************************/
           echo '<div class="zone_propositions_determination">';
             // Propositions
             include('vue/vue_propositions.php');

@@ -39,9 +39,9 @@
           /***********/
           include('vue/vue_onglets.php');
 
-          /*********************/
-          /*** Notifications ***/
-          /*********************/
+          /*****************/
+          /* Notifications */
+          /*****************/
           echo '<div class="zone_notifications_right">';
             if (!empty($notifications))
             {

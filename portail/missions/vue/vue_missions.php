@@ -36,7 +36,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Liste des missions
+          /**********************/
+          /* Liste des missions */
+          /**********************/
           if (!empty($tabMissions))
           {
             $titre_en_cours = false;

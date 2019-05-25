@@ -35,7 +35,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Détails mission
+          /*******************/
+          /* Détails mission */
+          /*******************/
           if ($missionExistante == true)
           {
             echo '<div class="zone_details_mission_left">';

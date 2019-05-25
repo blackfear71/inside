@@ -54,9 +54,9 @@
           /***********/
           include('vue/vue_onglets.php');
 
-          /****************/
-          /*** Rapports ***/
-          /****************/
+          /************/
+          /* Rapports */
+          /************/
           include('vue/vue_liste_rapports.php');
         ?>
 			</article>

@@ -36,7 +36,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Liens
+          /*******************/
+          /* Liens de saisie */
+          /*******************/
           echo '<div class="zone_liens_saisie">';
             // Saisie nouvelle dépense
             echo '<a id="ajouterDepense" title="Saisir une dépense" class="lien_categorie">';
@@ -45,13 +47,19 @@
             echo '</a>';
           echo '</div>';
 
-          // Saisie nouvelle ligne
+          /*************************/
+          /* Saisie nouvelle ligne */
+          /*************************/
           include('vue/vue_saisie_depense.php');
 
-          // Affichage bilan
+          /*******************/
+          /* Affichage bilan */
+          /*******************/
           include('vue/vue_bilan_depenses.php');
 
-          // Dépenses saisies
+          /********************/
+          /* Dépenses saisies */
+          /********************/
           include('vue/vue_depenses.php');
         ?>
 			</article>

@@ -35,10 +35,15 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
+          /***************/
+          /* Modèle mail */
+          /***************/
           $modele_mail = getModeleFilm($detailsFilm, $listeEtoiles);
           echo $modele_mail;
 
-          // Encadré destinataires
+          /*************************/
+          /* Encadré destinataires */
+          /*************************/
           echo '<div class="zone_destinataires_mail">';
             $email_present = false;
 
@@ -68,7 +73,9 @@
               echo '<p class="avertissement_mail">N\'oubliez pas d\'avertir les éventuelles personnes n\'ayant pas renseigné d\'adresse mail.</p>';
           echo '</div>';
 
-          // Bouton envoi mail
+          /*********************/
+          /* Bouton envoi mail */
+          /*********************/
           if ($email_present == true)
           {
             echo '<form method="post" action="mailing.php?id_film=' . $_GET['id_film'] . '&action=sendMail">';

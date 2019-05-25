@@ -37,7 +37,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Liens
+          /*******************/
+          /* Liens de saisie */
+          /*******************/
           echo '<div class="zone_liens_saisie">';
             // Bouton saisie
             echo '<a id="ajouterFilm" title="Ajouter un film" class="lien_categorie">';
@@ -46,13 +48,19 @@
             echo '</a>';
           echo '</div>';
 
-          // Saisie film
+          /***************/
+          /* Saisie film */
+          /***************/
           include('vue/vue_saisie_film.php');
 
-          // Vues & Années
+          /*****************/
+          /* Vues & Années */
+          /*****************/
           include('vue/vue_onglets.php');
 
-          // Accueil ou fiches
+          /*********************/
+          /* Accueil ou fiches */
+          /*********************/
           echo '<div class="zone_movies_right">';
             switch ($_GET['view'])
             {

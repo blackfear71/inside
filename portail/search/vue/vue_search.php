@@ -28,7 +28,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Résultats recherche
+          /***********************/
+          /* Résultats recherche */
+          /***********************/
           echo '<div class="zone_recherche">';
             if (!empty($resultats))
             {

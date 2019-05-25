@@ -37,7 +37,9 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Liens
+          /*******************/
+          /* Liens de saisie */
+          /*******************/
           echo '<div class="zone_liens_saisie">';
             echo '<a id="saisieRestaurant" title="Ajouter un restaurant" class="lien_categorie">';
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_lien" /></div>';
@@ -45,7 +47,9 @@
             echo '</a>';
           echo '</div>';
 
-          // Saisie restaurant
+          /*********************/
+          /* Saisie restaurant */
+          /*********************/
           include('vue/vue_saisie_restaurant.php');
 
           // Liens vers lieux
@@ -59,7 +63,9 @@
             }
           echo '</div>';
 
-          // Fiches des restaurants
+          /**************************/
+          /* Fiches des restaurants */
+          /**************************/
           include('vue/vue_fiches_restaurants.php');
         ?>
 			</article>
