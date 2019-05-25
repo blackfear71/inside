@@ -1,6 +1,24 @@
 <?php
   echo '<div class="zone_ideas_right">';
-    echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées proposées</div>';
+    switch ($_GET['view'])
+    {
+      case 'inprogress':
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées proposées</div>';
+        break;
+
+      case 'mine':
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées que j\'ai en charge</div>';
+        break;
+
+      case 'done':
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées terminées ou rejetées</div>';
+        break;
+
+      case 'all':
+      default:
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Toutes les idées</div>';
+        break;
+    }
 
     if (!empty($listeIdeas))
     {
@@ -167,6 +185,26 @@
       echo '</div>';
     }
     else
-      echo '<div class="empty">Pas d\'idées proposées</div>';
+    {
+      switch ($_GET['view'])
+      {
+        case 'inprogress':
+          echo '<div class="empty">Pas d\'idées proposées</div>';
+          break;
+
+        case 'mine':
+          echo '<div class="empty">Pas d\'idées en charge</div>';
+          break;
+
+        case 'done':
+          echo '<div class="empty">Pas d\'idées terminées ou rejetées</div>';
+          break;
+
+        case 'all':
+        default:
+          echo '<div class="empty">Pas d\'idées proposées</div>';
+          break;
+      }
+    }
   echo '</div>';
 ?>

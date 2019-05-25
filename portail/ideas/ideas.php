@@ -59,21 +59,24 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeIdeas as &$idea)
+      if (!empty($listeIdeas))
       {
-        $idea->setSubject(htmlspecialchars($idea->getSubject()));
-        $idea->setDate(htmlspecialchars($idea->getDate()));
-        $idea->setAuthor(htmlspecialchars($idea->getAuthor()));
-        $idea->setPseudo_a(htmlspecialchars($idea->getPseudo_a()));
-        $idea->setAvatar_a(htmlspecialchars($idea->getAvatar_a()));
-        $idea->setContent(htmlspecialchars($idea->getContent()));
-        $idea->setStatus(htmlspecialchars($idea->getStatus()));
-        $idea->setDevelopper(htmlspecialchars($idea->getDevelopper()));
-        $idea->setPseudo_d(htmlspecialchars($idea->getPseudo_d()));
-        $idea->setAvatar_d(htmlspecialchars($idea->getAvatar_d()));
-      }
+        foreach ($listeIdeas as &$idea)
+        {
+          $idea->setSubject(htmlspecialchars($idea->getSubject()));
+          $idea->setDate(htmlspecialchars($idea->getDate()));
+          $idea->setAuthor(htmlspecialchars($idea->getAuthor()));
+          $idea->setPseudo_a(htmlspecialchars($idea->getPseudo_a()));
+          $idea->setAvatar_a(htmlspecialchars($idea->getAvatar_a()));
+          $idea->setContent(htmlspecialchars($idea->getContent()));
+          $idea->setStatus(htmlspecialchars($idea->getStatus()));
+          $idea->setDevelopper(htmlspecialchars($idea->getDevelopper()));
+          $idea->setPseudo_d(htmlspecialchars($idea->getPseudo_d()));
+          $idea->setAvatar_d(htmlspecialchars($idea->getAvatar_d()));
+        }
 
-      unset($idea);
+        unset($idea);
+      }
       break;
 
     case 'doInserer':
