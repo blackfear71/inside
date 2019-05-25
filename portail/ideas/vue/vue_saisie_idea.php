@@ -17,11 +17,7 @@
             echo 'Le cycle de vie d\'une idée';
           echo '</div>';
 
-
-
-
-
-
+          echo '<img src="../../includes/images/ideas/cycle_idee.png" alt="cycle_idee" class="cycle_vie" />';
         echo '</div>';
 
         // Zone saisie idée

@@ -48,9 +48,6 @@
   // RETOUR : Id enregistrement créé
   function insertBug($post, $files, $author)
   {
-    var_dump($post);
-    var_dump($files);
-
     $new_id   = NULL;
 
     // Récupération des données
