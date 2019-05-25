@@ -36,13 +36,13 @@
 					}
 
 					// Tableau des utilisateurs
-					include('table_users.php');
+					include('vue/table_users.php');
 
 					// Tableau des statistiques des catégories
-					include('table_stats_categories.php');
+					include('vue/table_stats_categories.php');
 
 					// Tableau des statistiques demandes
-					include('table_stats_requests.php');
+					include('vue/table_stats_requests.php');
 				?>
 
 			</article>

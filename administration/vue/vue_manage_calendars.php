@@ -56,10 +56,10 @@
           echo '</form>';
 
           // Tableau des demandes de suppression de calendriers
-					include('table_calendars.php');
+					include('vue/table_calendars.php');
 
         	// Tableau des demandes de suppression de annexes
-          include('table_annexes.php');
+          include('vue/table_annexes.php');
 				?>
 			</article>
 		</section>

@@ -27,7 +27,7 @@
         <?php
           // Boutons missions
           $zone_inside = "article";
-          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+          include('../../includes/common/missions.php');
 
           // Inside News
           echo '<div class="zone_portail_left">';

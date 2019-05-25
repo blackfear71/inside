@@ -35,7 +35,7 @@
         <?php
           // Boutons missions
           $zone_inside = "article";
-          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+          include('../../includes/common/missions.php');
 
           // Liens
           echo '<div class="zone_liens_saisie">';
@@ -50,9 +50,7 @@
           include('vue/vue_saisie_film.php');
 
           // Vues & Années
-          echo '<div class="zone_movies_left">';
-            include('vue/vue_onglets.php');
-          echo '</div>';
+          include('vue/vue_onglets.php');
 
           // Accueil ou fiches
           echo '<div class="zone_movies_right">';

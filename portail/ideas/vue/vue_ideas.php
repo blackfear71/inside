@@ -31,7 +31,7 @@
         <?php
           // Boutons missions
           $zone_inside = "article";
-          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+          include('../../includes/common/missions.php');
 
           // Onglets vues
 				  echo '<div class="switch_view">';
@@ -74,10 +74,10 @@
               echo '</tr>';
             echo '</table>';
 					echo '</form>';
-				?>
 
-        <!-- Tableaux des idées -->
-				<?php include('table_ideas.php'); ?>
+          // Tableaux des idées
+  				include('vue/table_ideas.php');
+				?>
 			</article>
 
       <?php include('../../includes/chat/chat.php'); ?>

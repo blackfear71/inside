@@ -32,12 +32,10 @@
         <?php
           // Boutons missions
           $zone_inside = "article";
-          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+          include('../../includes/common/missions.php');
 
           // Onglets
-          echo '<div class="zone_notifications_left">';
-            include('vue/vue_onglets.php');
-          echo '</div>';
+          include('vue/vue_onglets.php');
 
           // Notifications
           echo '<div class="zone_notifications_right">';

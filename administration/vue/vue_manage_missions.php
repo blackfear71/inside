@@ -43,12 +43,12 @@
             switch ($_GET['action'])
             {
               case "goConsulter":
-                include('table_vue_missions.php');
+                include('vue/table_vue_missions.php');
                 break;
 
               case "goAjouter":
               case "goModifier":
-                include('table_saisie_mission.php');
+                include('vue/table_saisie_mission.php');
                 break;
 
               default:

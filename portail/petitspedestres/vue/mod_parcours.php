@@ -33,7 +33,7 @@
         <?php
           // Boutons missions
           $zone_inside = "article";
-          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+          include('../../includes/common/missions.php');
         ?>
 
 				<div class="PP-contenu-saisie">

@@ -34,7 +34,7 @@
 				<?php
           // Boutons missions
           $zone_inside = "article";
-          include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+          include('../../includes/common/missions.php');
 
           // Modification film
           include('vue/vue_saisie_film.php');

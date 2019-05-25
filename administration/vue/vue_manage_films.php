@@ -29,7 +29,7 @@
 			<article>
 				<?php
 					// Tableau des demandes
-					include('table_films.php');
+					include('vue/table_films.php');
 				?>
 			</article>
 		</section>
