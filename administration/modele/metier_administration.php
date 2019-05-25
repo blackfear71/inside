@@ -375,7 +375,7 @@
     elseif ($view == "unresolved")
       $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND resolved = "N" ORDER BY date DESC, id DESC');
     else
-      $reponse = $bdd->query('SELECT * FROM bugs ORDER BY date DESC, id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" ORDER BY date DESC, id DESC');
 
     while ($donnees = $reponse->fetch())
     {
