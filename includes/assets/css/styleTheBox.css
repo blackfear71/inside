@@ -290,7 +290,7 @@
 .date_idea
 {
 	display: inline-block;
-	margin-left: 10px;
+	margin: 5px 0 5px 10px;
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
@@ -312,7 +312,7 @@
 .idea_status
 {
 	display: inline-block;
-	margin-left: 10px;
+	margin: 5px 0 5px 10px;
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;

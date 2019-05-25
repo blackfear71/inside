@@ -357,7 +357,7 @@
 .date_report
 {
 	display: inline-block;
-	margin-left: 10px;
+	margin: 5px 0 5px 10px;
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
@@ -379,7 +379,7 @@
 .report_in_progress
 {
 	display: inline-block;
-	margin-left: 10px;
+	margin: 5px 0 5px 10px;
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
@@ -391,7 +391,7 @@
 .report_ended
 {
 	display: inline-block;
-	margin-left: 10px;
+	margin: 5px 0 5px 10px;
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
