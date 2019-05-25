@@ -16,24 +16,21 @@
       // Lecture liste des données par le modèle
       switch ($_GET['view'])
       {
-        case 'submit':
-          // Pas de traitement
-          break;
-
         case 'resolved':
         case 'unresolved':
-          $listeBugs = getBugs($_GET['view']);
+          $listeBugs       = getBugs($_GET['view'], 'B');
+          $listeEvolutions = getBugs($_GET['view'], 'E');
           break;
 
         default:
-          header('location: bugs.php?view=submit&action=goConsulter');
+          header('location: bugs.php?view=unresolved&action=goConsulter');
           break;
       }
       break;
 
     case 'doSignaler':
       // Insertion des données par le modèle
-      $new_id = insertBug($_POST);
+      $new_id = insertBug($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -46,21 +43,35 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      if ($_GET['view'] != 'submit')
+      foreach ($listeBugs as &$bug)
       {
-        foreach ($listeBugs as &$bug)
-        {
-          $bug->setSubject(htmlspecialchars($bug->getSubject()));
-          $bug->setDate(htmlspecialchars($bug->getDate()));
-          $bug->setAuthor(htmlspecialchars($bug->getAuthor()));
-          $bug->setName_a(htmlspecialchars($bug->getName_a()));
-          $bug->setContent(htmlspecialchars($bug->getContent()));
-          $bug->getType(htmlspecialchars($bug->getType()));
-          $bug->getResolved(htmlspecialchars($bug->getResolved()));
-        }
-
-        unset($bug);
+        $bug->setSubject(htmlspecialchars($bug->getSubject()));
+        $bug->setDate(htmlspecialchars($bug->getDate()));
+        $bug->setAuthor(htmlspecialchars($bug->getAuthor()));
+        $bug->setPseudo(htmlspecialchars($bug->getPseudo()));
+        $bug->setAvatar(htmlspecialchars($bug->getAvatar()));
+        $bug->setContent(htmlspecialchars($bug->getContent()));
+        $bug->setPicture(htmlspecialchars($bug->getPicture()));
+        $bug->getType(htmlspecialchars($bug->getType()));
+        $bug->getResolved(htmlspecialchars($bug->getResolved()));
       }
+
+      unset($bug);
+
+      foreach ($listeEvolutions as &$evolution)
+      {
+        $evolution->setSubject(htmlspecialchars($evolution->getSubject()));
+        $evolution->setDate(htmlspecialchars($evolution->getDate()));
+        $evolution->setAuthor(htmlspecialchars($evolution->getAuthor()));
+        $evolution->setPseudo(htmlspecialchars($evolution->getPseudo()));
+        $evolution->setAvatar(htmlspecialchars($evolution->getAvatar()));
+        $evolution->setContent(htmlspecialchars($evolution->getContent()));
+        $evolution->setPicture(htmlspecialchars($evolution->getPicture()));
+        $evolution->getType(htmlspecialchars($evolution->getType()));
+        $evolution->getResolved(htmlspecialchars($evolution->getResolved()));
+      }
+
+      unset($evolution);
       break;
 
     case 'doSignaler':

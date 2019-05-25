@@ -360,9 +360,9 @@
     $_SESSION['alerts']['annexe_reseted'] = true;
   }
 
-  // METIER : Lecture liste des bugs
-  // RETOUR : Tableau des bugs
-  function getBugs($view)
+  // METIER : Lecture liste des bugs / évolutions
+  // RETOUR : Tableau des bugs / évolutions
+  function getBugs($view, $type)
   {
     // Initialisation tableau des bugs
     $listeBugs = array();
@@ -371,43 +371,32 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "resolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "Y" OR resolved = "R" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R") ORDER BY date DESC, id DESC');
     elseif ($view == "unresolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE resolved = "N" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND resolved = "N" ORDER BY date DESC, id DESC');
     else
-      $reponse = $bdd->query('SELECT * FROM bugs ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM bugs ORDER BY date DESC, id DESC');
 
     while ($donnees = $reponse->fetch())
     {
-      // Initilialisation variables
-      $auteur_bug = "";
-
       // Instanciation d'un objet Idea à partir des données remontées de la bdd
       $bug = Bugs::withData($donnees);
 
-      // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');
+      // Recherche du pseudo et de l'avatar de l'auteur
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
       if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
-        $auteur_bug = $donnees2['pseudo'];
+        $bug->setPseudo($donnees2['pseudo']);
       else
-        $auteur_bug = "un ancien utilisateur";
+        $bug->setPseudo("Un ancien utilisateur");
+
+      if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
+        $bug->setAvatar($donnees2['avatar']);
 
       $reponse2->closeCursor();
 
-      // On construit un tableau qu'on alimente avec les données d'un bug
-      $myBug = array('id'       => $bug->getId(),
-                     'subject'  => $bug->getSubject(),
-                     'date'     => $bug->getDate(),
-                     'author'   => $bug->getAuthor(),
-                     'name_a'   => $auteur_bug,
-                     'content'  => $bug->getContent(),
-                     'type'     => $bug->getType(),
-                     'resolved' => $bug->getResolved()
-                     );
-
-      array_push($listeBugs, Bugs::withData($myBug));
+      array_push($listeBugs, $bug);
     }
 
     $reponse->closeCursor();
@@ -475,23 +464,26 @@
   {
     global $bdd;
 
-    // Lecture des données
-    $req = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
-    $data = $req->fetch();
+    // Lecture des données et suppression image si présente
+    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
+    $data1 = $req1->fetch();
 
-    $author   = $data['author'];
-    $resolved = $data['resolved'];
+    $author   = $data1['author'];
+    $resolved = $data1['resolved'];
 
-    $req->closeCursor();
+    if (isset($data1['picture']) AND !empty($data1['picture']))
+      unlink ("../includes/images/reports/" . $data1['picture']);
+
+    $req1->closeCursor();
+
+    // Suppression de la table
+    $req2 = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
 
     // Génération succès
     insertOrUpdateSuccesValue('debugger', $author, -1);
 
     if ($resolved == "Y")
       insertOrUpdateSuccesValue('compiler', $author, -1);
-
-    // Suppression de la table
-    $req2 = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
 
     $_SESSION['alerts']['bug_deleted'] = true;
   }

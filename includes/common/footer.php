@@ -38,9 +38,9 @@
 
     // Lien Bugs
     if ($path == '/inside/portail/bugs/bugs.php')
-      echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer_active">';
+      echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer_active">';
     else
-      echo '<a href="/inside/portail/bugs/bugs.php?view=submit&action=goConsulter" title="Signaler un bug" class="link_footer">';
+      echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
     echo '</a>';
   }

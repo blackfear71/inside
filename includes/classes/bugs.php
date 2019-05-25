@@ -5,8 +5,10 @@
     private $subject;
     private $date;
     private $author;
-    private $name_a;
+    private $pseudo;
+    private $avatar;
     private $content;
+    private $picture;
     private $type;
     private $resolved;
 
@@ -17,8 +19,10 @@
       $this->subject  = '';
       $this->date     = '';
       $this->author   = '';
-      $this->name_a   = '';
+      $this->pseudo   = '';
+      $this->avatar   = '';
       $this->content  = '';
+      $this->picture  = '';
       $this->type     = '';
       $this->resolved = '';
     }
@@ -47,11 +51,17 @@
       if (isset($data['author']))
         $this->author   = $data['author'];
 
-      if (isset($data['name_a']))
-        $this->name_a   = $data['name_a'];
+      if (isset($data['pseudo']))
+        $this->pseudo   = $data['pseudo'];
+
+      if (isset($data['avatar']))
+        $this->avatar   = $data['avatar'];
 
       if (isset($data['content']))
         $this->content  = $data['content'];
+
+      if (isset($data['picture']))
+        $this->picture  = $data['picture'];
 
       if (isset($data['type']))
         $this->type     = $data['type'];
@@ -105,15 +115,26 @@
       return $this->author;
     }
 
-    // Nom complet auteur
-    public function setName_a($name_a)
+    // Pseudo auteur
+    public function setPseudo($pseudo)
     {
-      $this->name_a = $name_a;
+      $this->pseudo = $pseudo;
     }
 
-    public function getName_a()
+    public function getPseudo()
     {
-      return $this->name_a;
+      return $this->pseudo;
+    }
+
+    // Avatar auteur
+    public function setAvatar($avatar)
+    {
+      $this->avatar = $avatar;
+    }
+
+    public function getAvatar()
+    {
+      return $this->avatar;
     }
 
     // Contenu
@@ -125,6 +146,17 @@
     public function getContent()
     {
       return $this->content;
+    }
+
+    // Image
+    public function setPicture($picture)
+    {
+      $this->picture = $picture;
+    }
+
+    public function getPicture()
+    {
+      return $this->picture;
     }
 
     // Type

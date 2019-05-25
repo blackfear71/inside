@@ -68,6 +68,35 @@ $(function()
     changeCheckedColor(id_bouton);
   });
 
+  // Affiche une image de bug / évolution en grand
+  $('.agrandirImage').click(function()
+  {
+    var html;
+    var path   = $(this).children().attr('src');
+    var split  = path.split('/');
+    var report = split[split.length - 1];
+
+    html += '<div id="zoom_image" class="fond_zoom">';
+      html += '<div class="zone_image_zoom">';
+        html += '<a id="fermerImage" class="lien_zoom"><img src="../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
+        html += '<img src="' + path + '" alt="' + report + '" class="image_zoom" />';
+      html += '</div>';
+    html += '</div>';
+
+    $('body').append(html);
+
+    $('#zoom_image').fadeIn(200);
+  });
+
+  // Ferme le zoom d'une image de bug / évolution
+  $(document).on('click', '#fermerImage', function()
+  {
+    $('#zoom_image').fadeOut(200, function()
+    {
+      $('#zoom_image').remove();
+    });
+  });
+
   /*** Actions au changement ***/
   // Charge l'avatar
   $('.loadAvatar').on('change', function()

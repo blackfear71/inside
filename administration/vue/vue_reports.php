@@ -4,7 +4,7 @@
     <!-- Head commun & spécifique-->
     <?php
       $title_head   = "Bugs";
-      $style_head   = "styleAdmin.css";
+      $style_head   = "styleBugs.css";
       $script_head  = "scriptAdmin.js";
       $masonry_head = true;
 
@@ -28,34 +28,32 @@
 			?>
 
 			<article>
-        <!-- Onglets vues -->
-				<div class="switch_view">
-					<?php
-						$listeSwitch = array('all'        => 'Tous',
-																 'unresolved' => 'En cours',
-																 'resolved'   => 'Résolus'
-																);
+				<?php
+          /***************/
+          /*** Onglets ***/
+          /***************/
+          echo '<div class="zone_vues">';
+            echo '<div class="titre_section"><img src="../includes/icons/reports/view_grey.png" alt="view_grey" class="logo_titre_section" />Vues</div>';
 
-            foreach ($listeSwitch as $view => $lib_view)
+            $listeVues = array('all'        => 'Tous',
+                               'unresolved' => 'En cours',
+                               'resolved'   => 'Résolu(e)s'
+                              );
+
+            foreach ($listeVues as $view => $vue)
             {
               if ($_GET['view'] == $view)
-                $actif = 'active';
+                echo '<span class="view active">' . $vue . '</span>';
               else
-                $actif = 'inactive';
-
-              echo '<a href="reports.php?view=' . $view . '&action=goConsulter" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
-                echo '<div class="border_switch_' . $actif . '"></div>';
-              echo '</a>';
+                echo '<a href="reports.php?view=' . $view . '&action=goConsulter" class="view inactive">' . $vue . '</a>';
             }
-					?>
-				</div>
+          echo '</div>';
 
-				<div class="liste_bugs">
-					<?php
-						include('table_bugs.php');
-					?>
-				</div>
+          /****************/
+          /*** Rapports ***/
+          /****************/
+          include('vue_liste_rapports.php');
+				?>
 			</article>
 		</section>
 

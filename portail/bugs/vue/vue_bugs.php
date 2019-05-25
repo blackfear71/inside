@@ -33,67 +33,30 @@
           $zone_inside = "article";
           include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
-          // Onglets vues
-          echo '<div class="switch_view">';
-            $listeSwitch = array('submit'     => 'Saisie',
-                                 'unresolved' => 'En cours',
-                                 'resolved'   => 'Résolu(e)s'
-                                );
-
-            foreach ($listeSwitch as $view => $lib_view)
-            {
-              if ($_GET['view'] == $view)
-                $actif = 'active';
-              else
-                $actif = 'inactive';
-
-              echo '<a href="bugs.php?view=' . $view . '&action=goConsulter" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
-                echo '<div class="border_switch_' . $actif . '"></div>';
-              echo '</a>';
-            }
+          /*******************/
+          /* Liens de saisie */
+          /*******************/
+          echo '<div class="zone_liens_saisie">';
+            echo '<a id="ajouterRapport" title="Rapporter un bug ou une évolution" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/bug.png" alt="bug" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Rapporter un bug ou une évolution</div>';
+            echo '</a>';
           echo '</div>';
 
-          // Vue listes
-          if (isset($_GET['view']) AND ($_GET['view'] == "resolved" OR $_GET['view'] == "unresolved"))
-            include('table_bugs.php');
-          // Vue saisie
-          else
-          {
-            echo '<p class="intro_bug">';
-              echo 'Le site ne présente aucun bug. Si toutefois vous pensez être tombé sur ce qui prétend en être un, vous pouvez le signaler via le formulaire ci-dessous.
-    					Ce que nous appellerons désormais "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à votre écoute pour vous
-    					servir au mieux.';
-            echo '</p>';
+          /*****************************/
+          /* Zone de saisie de rapport */
+          /*****************************/
+          include('vue/vue_saisie_rapport.php');
 
-            echo '<form method="post" action="bugs.php?view=' . $_GET['view'] . '&action=doSignaler" class="form_saisie_bug">';
-              echo '<table class="table_saisie_bug">';
-                echo '<tr>';
-                  echo '<td class="td_saisie_objet">';
-                    echo '<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_titre_bug" required />';
-                  echo '</td>';
+          /***********/
+          /* Onglets */
+          /***********/
+          include('vue/vue_onglets.php');
 
-                  echo '<td class="td_saisie_type">';
-                    echo '<select name="type_bug" class="saisie_type_bug" required>';
-                      echo '<option value="" hidden>Type de demande</option>';
-                      echo '<option value="B">Bug</option>';
-                      echo '<option value="E">Evolution</option>';
-                    echo '</select>';
-                  echo '</td>';
-
-                  echo '<td class="td_saisie_envoyer">';
-                    echo '<input type="submit" name="report" value="Soumettre" class="submit_bug" />';
-                  echo '</td>';
-                echo '</tr>';
-
-                echo '<tr>';
-                  echo '<td colspan="3" class="td_saisie_bug">';
-                    echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu_bug"></textarea>';
-                  echo '</td>';
-                echo '</tr>';
-              echo '</table>';
-            echo '</form>';
-          }
+          /****************/
+          /*** Rapports ***/
+          /****************/
+          include('vue_liste_rapports.php');
         ?>
 			</article>
 
