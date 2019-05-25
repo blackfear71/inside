@@ -30,9 +30,9 @@
 
     // Lien #TheBox
     if ($path == '/inside/portail/ideas/ideas.php')
-      echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer_active">';
+      echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer_active">';
     else
-      echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter" title="&#35;TheBox" class="link_footer">';
+      echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer">';
       echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
     echo '</a>';
 

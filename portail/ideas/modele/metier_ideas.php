@@ -2,24 +2,105 @@
   include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/ideas.php');
 
+  // METIER : Lecture nombre de pages en fonction de la vue
+  // RETOUR : Nombre de pages
+  function getPages($vue, $user)
+  {
+    $nb_pages     = 0;
+    $nb_idees     = 0;
+    $nb_par_page  = 18;
+
+    global $bdd;
+
+    // Calcul du nombre total d'enregistrements pour chaque vue
+    switch ($vue)
+    {
+      case 'inprogress':
+        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE status = "O" OR status = "C" OR status = "P"');
+        break;
+
+      case 'mine':
+        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $user . '"');
+        break;
+
+      case 'done':
+        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE status = "D" OR status = "R"');
+        break;
+
+      case 'all':
+      default:
+        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas');
+        break;
+    }
+
+    $data = $req->fetch();
+
+    if (isset($data['nb_idees']))
+      $nb_idees = $data['nb_idees'];
+
+    $req->closeCursor();
+
+    $nb_pages = ceil($nb_idees / $nb_par_page);
+
+    return $nb_pages;
+  }
+
   // METIER : Lecture liste des idées
   // RETOUR : Tableau d'idées
-  function getIdeas($view)
+  function getIdeas($view, $page, $nb_pages)
   {
     // Initialisation tableau d'idées
-    $listeIdeas = array();
+    $listeIdeas  = array();
+    $nb_par_page = 18;
+
+    // Contrôle dernière page
+    if ($page > $nb_pages)
+      $page = $nb_pages;
+
+    // Calcul première entrée
+    $premiere_entree = ($page - 1) * $nb_par_page;
 
     global $bdd;
 
     // Lecture de la base en fonction de la vue
-    if ($view == "done")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "D" OR status = "R" ORDER BY date DESC, id DESC');
-    elseif ($view == "inprogress")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "O" OR status = "C" OR status = "P" ORDER BY date DESC, id DESC');
-    elseif ($view == "mine")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '" ORDER BY date DESC, id DESC');
-    else
-      $reponse = $bdd->query('SELECT * FROM ideas ORDER BY date DESC, id DESC');
+    switch ($view)
+    {
+      case 'done':
+        $reponse = $bdd->query('SELECT *
+                                FROM ideas
+                                WHERE status = "D" OR status = "R"
+                                ORDER BY date DESC, id DESC
+                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                              );
+        break;
+
+      case 'inprogress':
+        $reponse = $bdd->query('SELECT *
+                                FROM ideas
+                                WHERE status = "O" OR status = "C" OR status = "P"
+                                ORDER BY date DESC, id DESC
+                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                              );
+        break;
+
+      case 'mine':
+        $reponse = $bdd->query('SELECT *
+                                FROM ideas
+                                WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '"
+                                ORDER BY date DESC, id DESC
+                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                              );
+        break;
+
+      case 'all':
+      default:
+        $reponse = $bdd->query('SELECT *
+                                FROM ideas
+                                ORDER BY date DESC, id DESC
+                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                              );
+        break;
+    }
 
     while ($donnees = $reponse->fetch())
     {
@@ -191,5 +272,65 @@
       insertOrUpdateSuccesValue('applier', $developper, 1);
 
     return $view;
+  }
+
+  // METIER : Récupère le numéro de page pour une notification #TheBox
+  // RETOUR : Numéro de page
+  function numPageIdea($id, $view)
+  {
+    $numPage     = 0;
+    $nb_par_page = 18;
+    $position    = 1;
+
+    global $bdd;
+
+    // On cherche la position de l'idée dans la table en fonction de la vue
+    switch ($view)
+    {
+      case 'done':
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                WHERE status = "D" OR status = "R"
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+
+      case 'inprogress':
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                WHERE status = "O" OR status = "C" OR status = "P"
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+
+      case 'mine':
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '"
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+
+      case 'all':
+      default:
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+    }
+
+    while($donnees = $reponse->fetch())
+    {
+      if ($id == $donnees['id'])
+        break;
+      else
+        $position++;
+    }
+    $reponse->closeCursor();
+
+    $numPage = ceil($position / $nb_par_page);
+
+    return $numPage;
   }
 ?>

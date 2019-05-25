@@ -58,6 +58,11 @@
           /*** Idées ***/
           /*************/
           include('vue/vue_liste_ideas.php');
+
+          /**************/
+          /* Pagination */
+          /**************/
+          include('vue/vue_pagination.php');
 				?>
 			</article>
 

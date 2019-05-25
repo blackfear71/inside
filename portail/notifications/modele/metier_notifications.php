@@ -344,44 +344,48 @@
           $reponse1 = $bdd->query('SELECT id, subject, author, status FROM ideas WHERE id = "' . $notification->getContent() . '"');
           $donnees1 = $reponse1->fetch();
 
-            $sujet = $donnees1['subject'];
-            switch ($donnees1['status'])
-            {
-              // Ouverte
-              case "O":
-              // Prise en charge
-              case "C":
-              // En progrès
-              case "P":
-                $view = 'inprogress';
-                break;
+          $sujet = $donnees1['subject'];
 
-              // Terminée
-              case "D":
-              // Rejetée
-              case "R":
-                $view = 'done';
-                break;
+          switch ($donnees1['status'])
+          {
+            // Ouverte
+            case "O":
+            // Prise en charge
+            case "C":
+            // En progrès
+            case "P":
+              $view = 'inprogress';
+              break;
 
-              default:
-                $view = 'all';
-                break;
-            }
+            // Terminée
+            case "D":
+            // Rejetée
+            case "R":
+              $view = 'done';
+              break;
 
-            // Recherche pseudo
-            $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
-            $donnees2 = $reponse2->fetch();
-            if ($reponse2->rowCount() > 0)
-              $auteur = $donnees2['pseudo'];
-            else
-              $auteur = '<i>un ancien utilisateur</i>';
-            $reponse2->closeCursor();
+            default:
+              $view = 'all';
+              break;
+          }
+
+          // Recherche pseudo
+          $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
+          $donnees2 = $reponse2->fetch();
+          if ($reponse2->rowCount() > 0)
+            $auteur = $donnees2['pseudo'];
+          else
+            $auteur = '<i>un ancien utilisateur</i>';
+          $reponse2->closeCursor();
 
           $reponse1->closeCursor();
 
+          // Recherche du numéro de page
+          $num_page = numPageIdea($notification->getContent(), $view);
+
           $icone  = "ideas";
           $phrase = "Une nouvelle idée <strong>" . $sujet . "</strong> vient tout juste d'être publiée par <strong>" . $auteur . "</strong> !";
-          $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&action=goConsulter&anchor=" . $notification->getContent();
+          $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&page=" . $num_page . "&action=goConsulter&anchor=" . $notification->getContent();
           break;
 
         case "succes":
@@ -529,7 +533,67 @@
     }
     $reponse->closeCursor();
 
-    $numPage = $nb_pages = ceil($position / $nb_par_page);
+    $numPage = ceil($position / $nb_par_page);
+
+    return $numPage;
+  }
+
+  // METIER : Récupère le numéro de page pour une notification #TheBox
+  // RETOUR : Numéro de page
+  function numPageIdea($id, $view)
+  {
+    $numPage     = 0;
+    $nb_par_page = 18;
+    $position    = 1;
+
+    global $bdd;
+
+    // On cherche la position de l'idée dans la table en fonction de la vue
+    switch ($view)
+    {
+      case 'done':
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                WHERE status = "D" OR status = "R"
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+
+      case 'inprogress':
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                WHERE status = "O" OR status = "C" OR status = "P"
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+
+      case 'mine':
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '"
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+
+      case 'all':
+      default:
+        $reponse = $bdd->query('SELECT id, date
+                                FROM ideas
+                                ORDER BY date DESC, id DESC'
+                              );
+        break;
+    }
+
+    while($donnees = $reponse->fetch())
+    {
+      if ($id == $donnees['id'])
+        break;
+      else
+        $position++;
+    }
+    $reponse->closeCursor();
+
+    $numPage = ceil($position / $nb_par_page);
 
     return $numPage;
   }

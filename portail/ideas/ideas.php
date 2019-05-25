@@ -13,19 +13,28 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      switch ($_GET['view'])
+      // Contrôle si la page renseignée et numérique
+      if (!isset($_GET['page']) OR !is_numeric($_GET['page']))
+        header('location: ideas.php?view=all&action=goConsulter&page=1');
+      else
       {
-        case 'all':
-        case 'done':
-        case 'mine':
-        case 'inprogress':
-          $listeIdeas = getIdeas($_GET['view']);
-          break;
+        // Lecture liste des données par le modèle
+        switch ($_GET['view'])
+        {
+          case 'all':
+          case 'done':
+          case 'mine':
+          case 'inprogress':
+            $nbPages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
 
-        default:
-          header('location: ideas.php?view=all&action=goConsulter');
-          break;
+            if ($nbPages > 0)
+              $listeIdeas = getIdeas($_GET['view'], $_GET['page'], $nbPages);
+            break;
+
+          default:
+            header('location: ideas.php?view=all&action=goConsulter&page=1');
+            break;
+        }
       }
       break;
 
@@ -36,12 +45,13 @@
 
     case 'doChangerStatut':
       // Mise à jour des données par le modèle
-      $view = updateIdea($_GET['id'], $_GET['view'], $_POST);
+      $view     = updateIdea($_GET['id'], $_GET['view'], $_POST);
+      $num_page = numPageIdea($_GET['id'], $view);
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter');
+      header('location: ideas.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
       break;
   }
 
@@ -76,11 +86,11 @@
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
-      header('location: ideas.php?view=' . $view . '&action=goConsulter&anchor=' . $_GET['id']);
+      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $num_page . '&anchor=' . $_GET['id']);
       break;
 
     case 'doInserer':
-      header('location: ideas.php?view=inprogress&action=goConsulter&anchor=' . $new_id);
+      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $new_id);
       break;
 
     case 'goConsulter':

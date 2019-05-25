@@ -13,7 +13,7 @@
       if ($_GET['view'] == $view)
         echo '<span class="view active">' . $vue . '</span>';
       else
-        echo '<a href="ideas.php?view=' . $view . '&action=goConsulter" class="view inactive">' . $vue . '</a>';
+        echo '<a href="ideas.php?view=' . $view . '&action=goConsulter&page=1" class="view inactive">' . $vue . '</a>';
     }
   echo '</div>';
 ?>
