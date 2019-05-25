@@ -337,6 +337,11 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+.explications li:last-child
+{
+	margin-bottom: -15px; 
+}
+
 /*** Bilan & Années***/
 .zone_expenses_left
 {

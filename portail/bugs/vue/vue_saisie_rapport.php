@@ -12,19 +12,21 @@
 
       echo '<form method="post" action="bugs.php?action=doSignaler" enctype="multipart/form-data" class="form_saisie_report">';
         // Explications
-        echo '<div class="text_saisie_report">';
-          echo 'Le site ne présente aucun bug. Si toutefois vous pensez être tombé sur ce qui prétend en être un, vous pouvez le signaler via le formulaire ci-dessous.
-          Ce que nous appellerons désormais "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à votre écoute pour vous
-          servir au mieux.';
-        echo '</div>';
+        echo '<div class="explications">';
+          echo '<div class="text_saisie_report">';
+            echo 'Le site ne présente aucun bug. Si toutefois vous pensez être tombé sur ce qui prétend en être un, vous pouvez le signaler via le formulaire ci-dessous.
+            Ce que nous appellerons désormais "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à votre écoute pour vous
+            servir au mieux.';
+          echo '</div>';
 
-        echo '<div class="text_saisie_report">';
-          echo 'Cette page vous permet de remonter d\'éventuelles <strong>évolutions techniques</strong> à apporter au site et les rapports seront remontés à l\'administrateur. Vous pouvez inclure
-          une image pour plus de précision.';
-        echo '</div>';
+          echo '<div class="text_saisie_report">';
+            echo 'Cette page vous permet de remonter d\'éventuelles <strong>évolutions techniques</strong> à apporter au site et les rapports seront remontés à l\'administrateur. Vous pouvez inclure
+            une image pour plus de précision.';
+          echo '</div>';
 
-        echo '<div class="text_saisie_report">';
-          echo 'Pour toute demande d\'<strong>évolution fonctionnelle</strong>, veuillez utiliser la page #TheBox.';
+          echo '<div class="text_saisie_report">';
+            echo 'Pour toute demande d\'<strong>évolution fonctionnelle</strong>, veuillez utiliser la page #TheBox.';
+          echo '</div>';
         echo '</div>';
 
         // Zone saisie image

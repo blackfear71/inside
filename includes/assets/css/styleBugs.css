@@ -133,12 +133,29 @@
 	border-top: solid 1px #d3d3d3;
 }
 
+.explications
+{
+	width: calc(100% - 40px);
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #e3e3e3;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	padding: 10px;
+}
+
 .text_saisie_report
 {
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
-	padding: 10px 10px 0 10px;
+	margin-bottom: 10px;
+}
+
+.text_saisie_report:last-child
+{
+	margin-bottom: 0;
 }
 
 .zone_saisie_left
