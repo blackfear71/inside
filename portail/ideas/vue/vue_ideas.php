@@ -3,10 +3,11 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "&#35;TheBox";
-      $style_head  = "styleTheBox.css";
-      $script_head = "scriptTheBox.js";
-      $chat_head   = true;
+      $title_head   = "&#35;TheBox";
+      $style_head   = "styleTheBox.css";
+      $script_head  = "scriptTheBox.js";
+      $chat_head    = true;
+      $masonry_head = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -33,50 +34,30 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          // Onglets vues
-				  echo '<div class="switch_view">';
-            $listeSwitch = array('all'        => 'Toutes',
-                                 'inprogress' => 'En cours',
-                                 'mine'       => 'En charge',
-                                 'done'       => 'Terminées'
-                                );
+          /*******************/
+          /* Liens de saisie */
+          /*******************/
+          echo '<div class="zone_liens_saisie">';
+            echo '<a id="ajouterIdee" title="Proposer une idée" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/ideas.png" alt="ideas" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Proposer une idée</div>';
+            echo '</a>';
+          echo '</div>';
 
-            foreach ($listeSwitch as $view => $lib_view)
-            {
-              if ($_GET['view'] == $view)
-                $actif = 'active';
-              else
-                $actif = 'inactive';
+          /*************************/
+          /* Zone de saisie d'idée */
+          /*************************/
+          include('vue/vue_saisie_idea.php');
 
-              echo '<a href="ideas.php?view=' . $view . '&action=goConsulter" class="zone_switch">';
-                echo '<div class="titre_switch_' . $actif . '">' . $lib_view . '</div>';
-                echo '<div class="border_switch_' . $actif . '"></div>';
-              echo '</a>';
-            }
-			    echo '</div>';
+          /***********/
+          /* Onglets */
+          /***********/
+          include('vue/vue_onglets.php');
 
-          // Zone de saisie idée
-					echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer" class="form_saisie_idea">';
-            echo '<table class="table_saisie_idee">';
-              echo '<tr>';
-                echo '<td class="td_saisie_titre">';
-                  echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="100" class="saisie_titre_idee" required />';
-                echo '</td>';
-
-                echo '<td class="td_saisie_envoyer">';
-                  echo '<input type="submit" name="new_idea" value="Soumettre" class="submit_idea" />';
-                echo '</td>';
-              echo '</tr>';
-              echo '<tr>';
-                echo '<td colspan="2" class="td_saisie_idee">';
-                  echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu_idee"></textarea>';
-                echo '</td>';
-              echo '</tr>';
-            echo '</table>';
-					echo '</form>';
-
-          // Tableaux des idées
-  				include('vue/table_ideas.php');
+          /*************/
+          /*** Idées ***/
+          /*************/
+          include('vue/vue_liste_ideas.php');
 				?>
 			</article>
 

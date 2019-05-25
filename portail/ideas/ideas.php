@@ -54,11 +54,13 @@
         $idea->setSubject(htmlspecialchars($idea->getSubject()));
         $idea->setDate(htmlspecialchars($idea->getDate()));
         $idea->setAuthor(htmlspecialchars($idea->getAuthor()));
-        $idea->setName_a(htmlspecialchars($idea->getName_a()));
+        $idea->setPseudo_a(htmlspecialchars($idea->getPseudo_a()));
+        $idea->setAvatar_a(htmlspecialchars($idea->getAvatar_a()));
         $idea->setContent(htmlspecialchars($idea->getContent()));
         $idea->setStatus(htmlspecialchars($idea->getStatus()));
         $idea->setDevelopper(htmlspecialchars($idea->getDevelopper()));
-        $idea->setName_d(htmlspecialchars($idea->getName_d()));
+        $idea->setPseudo_d(htmlspecialchars($idea->getPseudo_d()));
+        $idea->setAvatar_d(htmlspecialchars($idea->getAvatar_d()));
       }
 
       unset($idea);

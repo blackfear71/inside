@@ -57,9 +57,9 @@ $(function()
   });
 });
 
-/****************/
-/*** Fonction ***/
-/****************/
+/*****************/
+/*** Fonctions ***/
+/*****************/
 // Affiche ou masque un élément (délai 200ms)
 function afficherMasquer(id)
 {

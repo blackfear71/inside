@@ -6,7 +6,7 @@
       $title_head   = "Bugs";
       $style_head   = "styleBugs.css";
       $script_head  = "scriptAdmin.js";
-      $masonry_head = true;
+      $exif_head    = true;
 
       include('../includes/common/head.php');
     ?>

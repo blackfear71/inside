@@ -13,13 +13,13 @@
 
     // Lecture de la base en fonction de la vue
     if ($view == "done")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "D" OR status = "R" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "D" OR status = "R" ORDER BY date DESC, id DESC');
     elseif ($view == "inprogress")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "O" OR status = "C" OR status = "P" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE status = "O" OR status = "C" OR status = "P" ORDER BY date DESC, id DESC');
     elseif ($view == "mine")
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '" ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '" ORDER BY date DESC, id DESC');
     else
-      $reponse = $bdd->query('SELECT * FROM ideas ORDER BY id DESC');
+      $reponse = $bdd->query('SELECT * FROM ideas ORDER BY date DESC, id DESC');
 
     while ($donnees = $reponse->fetch())
     {
@@ -30,44 +30,38 @@
       // Instanciation d'un objet Idea à partir des données remontées de la bdd
       $idea = Ideas::withData($donnees);
 
-      // Recherche du nom complet de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $idea->getAuthor() . '"');
+      // Recherche du pseudo et de l'avatar de l'auteur
+      $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
       if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
-        $auteur_idee = $donnees2['pseudo'];
+        $idea->setPseudo_a($donnees2['pseudo']);
       else
-        $auteur_idee = "<i>un ancien utilisateur</i>";
+        $idea->setPseudo_a("Un ancien utilisateur");
+
+      if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
+        $idea->setAvatar_a($donnees2['avatar']);
 
       $reponse2->closeCursor();
 
-      // Recherche du nom complet du developpeur si renseigné
+      // Recherche du pseudo et de l'avatar du developpeur si renseigné
       if (!empty($idea->getDevelopper()))
       {
-        $reponse3 = $bdd->query('SELECT identifiant, pseudo FROM users WHERE identifiant = "' . $idea->getDevelopper() . '"');
+        $reponse3 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getDevelopper() . '"');
         $donnees3 = $reponse3->fetch();
 
         if (isset($donnees3['pseudo']) AND !empty($donnees3['pseudo']))
-          $developpeur_idee = $donnees3['pseudo'];
+          $idea->setPseudo_d($donnees3['pseudo']);
         else
-          $developpeur_idee = "<i>un ancien utilisateur</i>";
+          $idea->setPseudo_d("Un ancien utilisateur");
+
+        if (isset($donnees3['avatar']) AND !empty($donnees3['avatar']))
+          $idea->setAvatar_d($donnees3['avatar']);
 
         $reponse3->closeCursor();
       }
 
-      // On construit un tableau qu'on alimente avec les données d'une idée
-      $myIdea = array('id'         => $idea->getId(),
-                      'subject'    => $idea->getSubject(),
-                      'date'       => $idea->getDate(),
-                      'author'     => $idea->getAuthor(),
-                      'name_a'     => $auteur_idee,
-                      'content'    => $idea->getContent(),
-                      'status'     => $idea->getStatus(),
-                      'developper' => $idea->getDevelopper(),
-                      'name_d'     => $developpeur_idee
-                     );
-
-      array_push($listeIdeas, Ideas::withData($myIdea));
+      array_push($listeIdeas, $idea);
     }
 
     $reponse->closeCursor();
@@ -77,29 +71,29 @@
 
   // METIER : Insertion d'une idée
   // RETOUR : Id enregistrement créé
-  function insertIdea($post, $user)
+  function insertIdea($post, $author)
   {
     $new_id     = NULL;
 
     // Récupération des données
     $subject    = $post['subject_idea'];
-    $date       = date("Ymd");
-    $author     = $user;
     $content    = $post['content_idea'];
+    $date       = date("Ymd");
     $status     = "O";
     $developper = "";
 
     // On construit un tableau avec les données
-    $ideas = array('subject'    => $subject,
-                   'date'       => $date,
-                   'author'     => $author,
-                   'content'    => $content,
-                   'status'     => $status,
-                   'developper' => $developper
-                  );
+    $idea = array('subject'    => $subject,
+                  'date'       => $date,
+                  'author'     => $author,
+                  'content'    => $content,
+                  'status'     => $status,
+                  'developper' => $developper
+                 );
 
     // On insère dans la table
     global $bdd;
+
     $req = $bdd->prepare('INSERT INTO ideas(subject,
                                             date,
                                             author,
@@ -114,19 +108,19 @@
                                             :status,
                                             :developper
                                            )');
-    $req->execute($ideas);
+    $req->execute($idea);
     $req->closeCursor();
 
     // Génération notification idée ajoutée
     $new_id = $bdd->lastInsertId();
 
-    insertNotification($user, 'idee', $new_id);
+    insertNotification($author, 'idee', $new_id);
 
     // Génération succès
-    insertOrUpdateSuccesValue('creator', $user, 1);
+    insertOrUpdateSuccesValue('creator', $author, 1);
 
     // Ajout expérience
-    insertExperience($user, 'add_idea');
+    insertExperience($author, 'add_idea');
 
     $_SESSION['alerts']['idea_submitted'] = true;
 

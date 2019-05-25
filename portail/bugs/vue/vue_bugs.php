@@ -7,6 +7,7 @@
       $style_head  = "styleBugs.css";
       $script_head = "scriptBugs.js";
       $chat_head   = true;
+      $exif_head   = true;
 
       include('../../includes/common/head.php');
     ?>

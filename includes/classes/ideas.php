@@ -5,11 +5,13 @@
     private $subject;
     private $date;
     private $author;
-    private $name_a;
+    private $pseudo_a;
+    private $avatar_a;
     private $content;
     private $status;
     private $developper;
-    private $name_d;
+    private $pseudo_d;
+    private $avatar_d;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -18,11 +20,13 @@
       $this->subject    = '';
       $this->date       = '';
       $this->author     = '';
-      $this->name_a     = '';
+      $this->pseudo_a   = '';
+      $this->avatar_a   = '';
       $this->content    = '';
       $this->status     = '';
       $this->developper = '';
-      $this->name_d     = '';
+      $this->pseudo_d   = '';
+      $this->avatar_d   = '';
     }
 
     // Constructeur de l'objet Ideas en fonction des données
@@ -49,8 +53,11 @@
       if (isset($data['author']))
         $this->author     = $data['author'];
 
-      if (isset($data['name_a']))
-        $this->name_a     = $data['name_a'];
+      if (isset($data['pseudo_a']))
+        $this->pseudo_a   = $data['pseudo_a'];
+
+      if (isset($data['avatar_a']))
+        $this->avatar_a   = $data['avatar_a'];
 
       if (isset($data['content']))
         $this->content    = $data['content'];
@@ -61,8 +68,11 @@
       if (isset($data['developper']))
         $this->developper = $data['developper'];
 
-      if (isset($data['name_d']))
-        $this->name_d     = $data['name_d'];
+      if (isset($data['pseudo_d']))
+        $this->pseudo_d   = $data['pseudo_d'];
+
+      if (isset($data['avatar_d']))
+        $this->avatar_d   = $data['avatar_d'];
     }
 
     // getters et setters pour l'objet Ideas
@@ -110,15 +120,26 @@
       return $this->author;
     }
 
-    // Nom complet auteur
-    public function setName_a($name_a)
+    // Pseudo auteur
+    public function setPseudo_a($pseudo_a)
     {
-      $this->name_a = $name_a;
+      $this->pseudo_a = $pseudo_a;
     }
 
-    public function getName_a()
+    public function getPseudo_a()
     {
-      return $this->name_a;
+      return $this->pseudo_a;
+    }
+
+    // Avatar auteur
+    public function setAvatar_a($avatar_a)
+    {
+      $this->avatar_a = $avatar_a;
+    }
+
+    public function getAvatar_a()
+    {
+      return $this->avatar_a;
     }
 
     // Contenu
@@ -154,15 +175,26 @@
       return $this->developper;
     }
 
-    // Nom complet développeur
-    public function setName_d($name_d)
+    // Pseudo développeur
+    public function setPseudo_d($pseudo_d)
     {
-      $this->name_d = $name_d;
+      $this->pseudo_d = $pseudo_d;
     }
 
-    public function getName_d()
+    public function getPseudo_d()
     {
-      return $this->name_d;
+      return $this->pseudo_d;
+    }
+
+    // Avatar développeur
+    public function setAvatar_d($avatar_d)
+    {
+      $this->avatar_d = $avatar_d;
+    }
+
+    public function getAvatar_d()
+    {
+      return $this->avatar_d;
     }
   }
 ?>
