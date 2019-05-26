@@ -100,12 +100,26 @@
                     echo '<input type="hidden" value="Demander la suppression de ce film ?" class="eventMessage" />';
                   echo '</form>';
 
-                  // Mailing
+                  // Mailing (si on participe)
                   if ($detailsFilm->getNb_users() > 0)
                   {
-                    echo '<a href="mailing.php?id_film=' . $detailsFilm->getId() . '&action=goConsulter" class="link_details">';
-                      echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing" title="Envoyer mail" class="icon_details" />';
-                    echo '</a>';
+                    $participation = false;
+
+                    foreach ($listeEtoiles as $etoiles)
+                    {
+                      if ($etoiles->getIdentifiant() == $_SESSION['user']['identifiant'])
+                      {
+                        $participation = true;
+                        break;
+                      }
+                    }
+
+                    if ($participation == true)
+                    {
+                      echo '<a href="mailing.php?id_film=' . $detailsFilm->getId() . '&action=goConsulter" class="link_details">';
+                        echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing" title="Envoyer mail" class="icon_details" />';
+                      echo '</a>';
+                    }
                   }
 
                   // Doodle

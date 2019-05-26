@@ -110,9 +110,23 @@
                   // Mail
                   if ($film->getNb_users() > 0)
                   {
-                    echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
-                      echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="icone_fiche_2" />';
-                    echo '</a>';
+                    $participation = false;
+
+                    foreach ($listeEtoiles[$film->getId()] as $etoilesFilm)
+                    {
+                      if ($etoilesFilm['identifiant'] == $_SESSION['user']['identifiant'])
+                      {
+                        $participation = true;
+                        break;
+                      }
+                    }
+
+                    if ($participation == true)
+                    {
+                      echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
+                        echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="icone_fiche_2" />';
+                      echo '</a>';
+                    }
                   }
 
                   // Commentaires
