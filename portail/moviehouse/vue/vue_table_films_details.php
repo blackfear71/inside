@@ -137,7 +137,7 @@
 
                   // Actions
                   echo '<td class="table_dates">';
-                    if ($film->getStars_user() != 0)
+                    if ($film->getStars_user() > 0)
                     {
                       echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
                         // Je participe
@@ -145,11 +145,8 @@
                         // J'ai vu
                         echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';
                       echo '</form>';
-                    }
 
-                    // Mailing
-                    if ($film->getNb_users() > 0)
-                    {
+                      // Mailing
                       echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
                         echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
                       echo '</a>';
@@ -285,7 +282,7 @@
 
             // Actions
     				echo '<td class="table_dates">';
-    					if ($film->getStars_user() != 0)
+    					if ($film->getStars_user() > 0)
     					{
     						echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
     							// Je participe
@@ -293,11 +290,8 @@
     							// J'ai vu
     							echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';
     						echo '</form>';
-    					}
 
-              // Mailing
-              if ($film->getNb_users() > 0)
-              {
+                // Mailing
                 echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
                   echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="mailing" />';
                 echo '</a>';

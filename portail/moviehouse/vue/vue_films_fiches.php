@@ -107,26 +107,12 @@
                   else
                     echo '<a href="https://doodle.com/fr/" id="lien_details_' . $film->getId() . '" target="_blank" class="lienDetails"><img src="../../includes/icons/moviehouse/doodle_none.png" alt="doodle_none" title="Doodle" class="icone_fiche_2" /></a>';
 
-                  // Mail
-                  if ($film->getNb_users() > 0)
+                  // Mailing (si on participe)
+                  if ($film->getStars_user() > 0)
                   {
-                    $participation = false;
-
-                    foreach ($listeEtoiles[$film->getId()] as $etoilesFilm)
-                    {
-                      if ($etoilesFilm['identifiant'] == $_SESSION['user']['identifiant'])
-                      {
-                        $participation = true;
-                        break;
-                      }
-                    }
-
-                    if ($participation == true)
-                    {
-                      echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
-                        echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="icone_fiche_2" />';
-                      echo '</a>';
-                    }
+                    echo '<a href="mailing.php?id_film=' . $film->getId() . '&action=goConsulter">';
+                      echo '<img src="../../includes/icons/moviehouse/mailing_red.png" alt="mailing_red" title="Envoyer mail" class="icone_fiche_2" />';
+                    echo '</a>';
                   }
 
                   // Commentaires
@@ -145,7 +131,7 @@
                     echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="icone_fiche_3" />';
                   echo '</a>';
 
-                  if ($film->getStars_user() != 0)
+                  if ($film->getStars_user() > 0)
                   {
                     // Participation / vue
                     echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_participation">';
