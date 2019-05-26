@@ -20,7 +20,7 @@
           echo '</div>';
 
           echo '<div class="text_saisie_report">';
-            echo 'Cette page vous permet de remonter d\'éventuelles <strong>évolutions techniques</strong> à apporter au site et les rapports seront remontés à l\'administrateur. Vous pouvez inclure
+            echo 'Cette page vous permet de remonter d\'éventuelles <strong>évolutions techniques</strong> à apporter au site et les rapports seront envoyés à l\'administrateur. Vous pouvez inclure
             une image pour plus de précision.';
           echo '</div>';
 
