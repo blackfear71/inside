@@ -14,94 +14,88 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Contrôle user renseignée URL
-      if ($_GET['user'] != $_SESSION['user']['identifiant'])
-        header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
-      else
+      // Lecture des données par le modèle
+      switch ($_GET['view'])
       {
-        // Lecture des données par le modèle
-        switch ($_GET['view'])
-        {
-          case 'success':
-          case 'ranking':
-            $listeUsers      = getUsers();
-            $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
-            $classementUsers = getRankUsers($listeSuccess, $listeUsers);
+        case 'success':
+        case 'ranking':
+          $listeUsers      = getUsers();
+          $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
+          $classementUsers = getRankUsers($listeSuccess, $listeUsers);
 
-            if ($_GET['view'] == 'ranking')
-              $experienceUsers = getExperienceUsers($listeUsers);
-            break;
+          if ($_GET['view'] == 'ranking')
+            $experienceUsers = getExperienceUsers($listeUsers);
+          break;
 
-          case 'settings':
-            $profil       = getProfile($_GET['user']);
-            $preferences  = getPreferences($_GET['user']);
-            break;
+        case 'settings':
+          $profil       = getProfile($_SESSION['user']['identifiant']);
+          $preferences  = getPreferences($_SESSION['user']['identifiant']);
+          break;
 
-          case 'themes':
-            $profil          = getProfile($_GET['user']);
-            $preferences     = getPreferences($_GET['user']);
-            $themes_users    = getThemes("U", $profil->getExperience());
-            $themes_missions = getThemes("M", NULL);
-            break;
+        case 'themes':
+          $profil          = getProfile($_SESSION['user']['identifiant']);
+          $preferences     = getPreferences($_SESSION['user']['identifiant']);
+          $themes_users    = getThemes("U", $profil->getExperience());
+          $themes_missions = getThemes("M", NULL);
+          break;
 
-          case 'profile':
-            $profil       = getProfile($_GET['user']);
-            $statistiques = getStatistiques($_GET['user']);
-            $progression  = getProgress($profil->getExperience());
-            break;
+        case 'profile':
+          $profil       = getProfile($_SESSION['user']['identifiant']);
+          $statistiques = getStatistiques($_SESSION['user']['identifiant']);
+          $progression  = getProgress($profil->getExperience());
+          break;
 
-          default:
-            header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
-            break;
-        }
+        default:
+          header('location: profil.php?view=profile&action=goConsulter');
+          break;
       }
       break;
 
     case 'doModifierAvatar':
       // Mise à jour des données par le modèle & enregistrement fichier
-      updateAvatar($_GET['user'], $_FILES);
+      updateAvatar($_SESSION['user']['identifiant'], $_FILES);
       break;
 
     case 'doSupprimerAvatar':
       // Suppression des données par le modèle & suppression fichier
-      deleteAvatar($_GET['user']);
+      deleteAvatar($_SESSION['user']['identifiant']);
       break;
 
     case 'doUpdateInfos':
-      updateInfos($_GET['user'], $_POST);
+      updateInfos($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'doUpdatePreferences':
-      updatePreferences($_GET['user'], $_POST);
+      updatePreferences($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'doUpdatePassword':
-      updatePassword($_GET['user'], $_POST);
+      updatePassword($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'askDesinscription':
-      updateStatus($_GET['user'], "D");
+      updateStatus($_SESSION['user']['identifiant'], "D");
       break;
 
     case 'cancelDesinscription':
-      updateStatus($_GET['user'], "N");
+      updateStatus($_SESSION['user']['identifiant'], "N");
       break;
 
     case 'cancelResetPassword':
-      updateStatus($_GET['user'], "N");
+      updateStatus($_SESSION['user']['identifiant'], "N");
       break;
 
     case 'doSupprimerTheme':
-      deleteTheme($_GET['user']);
+      deleteTheme($_SESSION['user']['identifiant']);
       break;
 
     case 'doModifierTheme':
-      updateTheme($_GET['user'], $_GET['id']);
+      updateTheme($_SESSION['user']['identifiant'], $_GET['id']);
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=profile&action=goConsulter');
+      header('location: profil.php?view=profile&action=goConsulter');
       break;
   }
 
@@ -288,12 +282,12 @@
     case 'askDesinscription':
     case 'cancelDesinscription':
     case 'cancelResetPassword':
-      header('location: profil.php?user=' . $_GET['user'] . '&view=settings&action=goConsulter');
+      header('location: profil.php?view=settings&action=goConsulter');
       break;
 
     case 'doSupprimerTheme':
     case 'doModifierTheme':
-      header('location: profil.php?user=' . $_GET['user'] . '&view=themes&action=goConsulter');
+      header('location: profil.php?view=themes&action=goConsulter');
       break;
 
     case 'goConsulter':

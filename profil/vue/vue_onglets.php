@@ -17,14 +17,14 @@
       if ($_GET['view'] == $view)
         echo '<span class="view active margin_right">' . $vue . '</span>';
       else
-        echo '<a href="profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=' . $view . '&action=goConsulter" class="view inactive margin_right">' . $vue . '</a>';
+        echo '<a href="profil.php?view=' . $view . '&action=goConsulter" class="view inactive margin_right">' . $vue . '</a>';
     }
     else
     {
       if ($_GET['view'] == $view)
         echo '<span class="view active">' . $vue . '</span>';
       else
-        echo '<a href="profil.php?user=' . $_SESSION['user']['identifiant'] . '&view=' . $view . '&action=goConsulter" class="view inactive">' . $vue . '</a>';
+        echo '<a href="profil.php?view=' . $view . '&action=goConsulter" class="view inactive">' . $vue . '</a>';
     }
 
     $i++;

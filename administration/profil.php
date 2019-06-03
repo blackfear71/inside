@@ -14,7 +14,7 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $profil = getProfile('admin');
+      $profil = getProfile($_SESSION['user']['identifiant']);
       break;
 
     case 'doModifierAvatar':
@@ -28,11 +28,11 @@
       break;
 
     case 'doUpdateInfos':
-      updateInfos($_GET['user'], $_POST);
+      updateInfos($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'doUpdatePassword':
-      updatePassword($_GET['user'], $_POST);
+      updatePassword($_SESSION['user']['identifiant'], $_POST);
       break;
 
     default:

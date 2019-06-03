@@ -42,13 +42,13 @@
 
               echo '<div class="texte_parametres">Avatar actuel</div>';
 
-              echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerAvatar" enctype="multipart/form-data">';
+              echo '<form method="post" action="profil.php?action=doSupprimerAvatar" enctype="multipart/form-data">';
                 echo '<input type="submit" name="delete_avatar" value="Supprimer" class="bouton_validation" />';
               echo '</form>';
             echo '</div>';
 
             // Modification avatar
-            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doModifierAvatar" enctype="multipart/form-data" class="form_update_avatar">';
+            echo '<form method="post" action="profil.php?action=doModifierAvatar" enctype="multipart/form-data" class="form_update_avatar">';
               echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
               echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar loadAvatar" required /></span>';
@@ -61,7 +61,7 @@
             echo '</form>';
 
             // Mise à jour informations
-            echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdateInfos" class="form_update_infos">';
+            echo '<form method="post" action="profil.php?action=doUpdateInfos" class="form_update_infos">';
               // Pseudo
               echo '<img src="../includes/icons/common/inside_red.png" alt="inside_red" class="logo_parametres" />';
               echo '<input type="text" name="pseudo" placeholder="Pseudo" value="' . $profil->getPseudo() . '" maxlength="255" class="monoligne_saisie" />';
@@ -78,7 +78,7 @@
               echo '<div class="titre_contribution">CHANGER MOT DE PASSE</div>';
 
               // Modification mot de passe
-              echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdatePassword">';
+              echo '<form method="post" action="profil.php?action=doUpdatePassword">';
                 echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_saisie" required />';
                 echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';
                 echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';

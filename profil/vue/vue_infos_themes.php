@@ -20,7 +20,7 @@
   echo '<div class="texte_themes">';
     echo 'Vous pouvez également désactiver le thème courant (<strong>hors mission en cours</strong>) en cliquant sur ce bouton :';
 
-    echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doSupprimerTheme">';
+    echo '<form method="post" action="profil.php?action=doSupprimerTheme">';
       echo '<input type="submit" name="delete_theme" value="Désactiver le thème" class="bouton_validation margin_top" />';
     echo '</form>';
   echo '</div>';

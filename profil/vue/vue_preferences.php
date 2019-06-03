@@ -2,7 +2,7 @@
   echo '<div class="zone_profil_bottom_right">';
     echo '<div class="titre_section"><img src="../includes/icons/profil/settings_grey.png" alt="settings_grey" class="logo_titre_section" />Préférences</div>';
 
-    echo '<form method="post" action="profil.php?user=' . $profil->getIdentifiant() . '&action=doUpdatePreferences">';
+    echo '<form method="post" action="profil.php?action=doUpdatePreferences">';
       echo '<div class="zone_profil_contributions">';
         /*********************/
         /*** Notifications ***/
