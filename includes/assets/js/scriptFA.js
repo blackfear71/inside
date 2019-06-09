@@ -1048,7 +1048,7 @@ function showDetails(zone, id)
   {
     $('input[name=id_restaurant]').val(id);
     $('#annuler_details_proposition').css('display', 'block');
-    $('#annuler_details_proposition').attr('action', 'foodadvisor.php?delete_id=' + id + '&action=doAnnulerReserver');
+    $('#annuler_details_proposition').attr('action', 'foodadvisor.php?action=doAnnulerReserver');
   }
   else
   {
