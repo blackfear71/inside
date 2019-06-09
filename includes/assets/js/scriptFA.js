@@ -1018,11 +1018,13 @@ function showDetails(zone, id)
 
   if (participe == true)
   {
+    $('input[name=id_restaurant]').val(id);
     $('#reserver_details_proposition').css('display', 'block');
-    $('#reserver_details_proposition').attr('action', 'foodadvisor.php?id=' + id + '&action=doReserver');
+    $('#reserver_details_proposition').attr('action', 'foodadvisor.php?action=doReserver');
   }
   else
   {
+    $('input[name=id_restaurant]').val('');
     $('#reserver_details_proposition').css('display', 'none');
     $('#reserver_details_proposition').attr('action', '');
   }
@@ -1044,11 +1046,13 @@ function showDetails(zone, id)
 
   if (reserved == true)
   {
+    $('input[name=id_restaurant]').val(id);
     $('#annuler_details_proposition').css('display', 'block');
     $('#annuler_details_proposition').attr('action', 'foodadvisor.php?delete_id=' + id + '&action=doAnnulerReserver');
   }
   else
   {
+    $('input[name=id_restaurant]').val('');
     $('#annuler_details_proposition').css('display', 'none');
     $('#annuler_details_proposition').attr('action', '');
   }
@@ -1112,7 +1116,7 @@ function showDetails(zone, id)
               break;
           }
         });
-      } 
+      }
     ligne += '</div>';
 
     // Horaires

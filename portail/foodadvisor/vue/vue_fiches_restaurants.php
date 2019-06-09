@@ -104,7 +104,8 @@
                 echo '</a>';
 
                 // Suppression
-                echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?delete_id=' . $restaurant->getId() . '&action=doSupprimer">';
+                echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doSupprimer">';
+                  echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
                   echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer le restaurant" class="icon_delete_restaurant eventConfirm" />';
                   echo '<input type="hidden" value="Supprimer ce restaurant de la liste ?" class="eventMessage" />';
                 echo '</form>';
@@ -134,6 +135,8 @@
           /***************************/
           echo '<div class="fiche_restaurant" id="modifier_restaurant_' . $restaurant->getId() . '" style="display: none; position: relative; z-index: 2;">';
             echo '<form method="post" action="restaurants.php?action=doModifier&update_id=' . $restaurant->getId() . '" enctype="multipart/form-data">';
+              echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
+
               // Image
               echo '<div class="zone_fiche_left">';
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';

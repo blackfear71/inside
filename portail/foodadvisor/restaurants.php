@@ -9,7 +9,7 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_commun.php');
   include_once('modele/metier_restaurants.php');
-  
+
   // Initialisation sauvegarde saisie
   if ((!isset($_SESSION['alerts']['wrong_phone_number']) OR $_SESSION['alerts']['wrong_phone_number'] != true)
   AND (!isset($_SESSION['alerts']['wrong_price_min'])    OR $_SESSION['alerts']['wrong_price_min']    != true)
@@ -45,11 +45,11 @@
       break;
 
     case 'doModifier':
-      updateRestaurant($_POST, $_FILES, $_GET['update_id']);
+      $id_restaurant = updateRestaurant($_POST, $_FILES);
       break;
 
     case 'doSupprimer':
-      deleteRestaurant($_GET['delete_id']);
+      deleteRestaurant($_POST);
       break;
 
     default:
@@ -115,7 +115,7 @@
       break;
 
     case 'doModifier':
-      header('location: restaurants.php?action=goConsulter&anchor=' . $_GET['update_id']);
+      header('location: restaurants.php?action=goConsulter&anchor=' . $id_restaurant);
       break;
 
     case 'doSupprimer':

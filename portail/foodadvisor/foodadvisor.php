@@ -57,11 +57,11 @@
       break;
 
     case "doReserver":
-      insertReservation($_GET['id'], $_SESSION['user']['identifiant']);
+      insertReservation($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doAnnulerReserver':
-      deleteReservation($_GET['delete_id'], $_SESSION['user']['identifiant']);
+      deleteReservation($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouter':
@@ -70,11 +70,11 @@
       break;
 
     case "doModifier":
-      updateChoice($_POST, $_GET['update_id'], $_SESSION['user']['identifiant']);
+      updateChoice($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doSupprimer':
-      deleteChoice($_GET['delete_id'], $_SESSION['user']['identifiant']);
+      deleteChoice($_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:

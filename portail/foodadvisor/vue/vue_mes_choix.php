@@ -43,7 +43,8 @@
               echo '<a id="modifier_' . $monChoix->getId() . '" title="Modifier le choix" class="icone_modify_choix modifierChoix"></a>';
 
               // Suppression
-              echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?delete_id=' . $monChoix->getId() . '&action=doSupprimer">';
+              echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer">';
+                echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
                 echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix eventConfirm" />';
                 echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
               echo '</form>';
@@ -159,7 +160,9 @@
           if ($actions["choix"] == true)
           {
             echo '<div class="zone_proposition" id="modifier_choix_' . $monChoix->getId() . '" style="display: none;">';
-              echo '<form method="post" action="foodadvisor.php?action=doModifier&update_id=' . $monChoix->getId() . '">';
+              echo '<form method="post" action="foodadvisor.php?action=doModifier">';
+                echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+
                 // Validation modification
                 echo '<input type="submit" name="modify_choix_' . $monChoix->getId() . '" value="" title="Valider" class="icon_validate_choix" />';
 

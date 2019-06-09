@@ -158,7 +158,7 @@
 
                 $i++;
               }
-              
+
             if ($proposition->getDetermined() == "Y")
               echo '</div>';
 
@@ -208,7 +208,8 @@
             if ($participe == true)
             {
               echo '<div class="zone_reservation">';
-                echo '<form method="post" action="foodadvisor.php?id=' . $proposition->getId_restaurant() . '&action=doReserver">';
+                echo '<form method="post" action="foodadvisor.php?action=doReserver">';
+                  echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
                   echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
                 echo '</form>';
               echo '</div>';
@@ -223,7 +224,8 @@
 
               if ($actions["annuler_reserver"] == true)
               {
-                echo '<form method="post" action="foodadvisor.php?delete_id=' . $proposition->getId_restaurant() . '&action=doAnnulerReserver">';
+                echo '<form method="post" action="foodadvisor.php?action=doAnnulerReserver">';
+                  echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
                   echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;"/>';
                 echo '</form>';
               }

@@ -304,54 +304,52 @@
   }
 
   // METIER : Mise à jour d'un restaurant
-  // RETOUR : Aucun
-  function updateRestaurant($post, $files, $id_restaurant)
+  // RETOUR : Id restaurant
+  function updateRestaurant($post, $files)
   {
     $control_ok = true;
 
     global $bdd;
 
     // Récupération des données
-    if ($control_ok == true)
+    $id_restaurant          = $post['id_restaurant'];
+    $nom_restaurant         = $post['update_name_restaurant_' . $id_restaurant];
+    $telephone_restaurant   = $post['update_phone_restaurant_' . $id_restaurant];
+    $website_restaurant     = $post['update_website_restaurant_' . $id_restaurant];
+    $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
+    $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
+    $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
+
+    $prix_min_test          = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
+    $prix_max_test          = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
+
+    if (is_numeric($prix_min_test))
+      $prix_min             = number_format($prix_min_test, 2, '.', '');
+    else
+      $prix_min             = "";
+
+    if (is_numeric($prix_max_test))
+      $prix_max             = number_format($prix_max_test, 2, '.', '');
+    else
+      $prix_max             = "";
+
+    if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
     {
-      $nom_restaurant         = $post['update_name_restaurant_' . $id_restaurant];
-      $telephone_restaurant   = $post['update_phone_restaurant_' . $id_restaurant];
-      $website_restaurant     = $post['update_website_restaurant_' . $id_restaurant];
-      $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
-      $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
-      $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
+      $search               = array("'", '"');
+      $replace              = array("", "");
+      $lieu_restaurant      = str_replace($search, $replace, $post['update_other_location_' . $id_restaurant]);
+    }
+    else
+      $lieu_restaurant      = $post['update_location_' . $id_restaurant];
 
-      $prix_min_test          = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
-      $prix_max_test          = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
+    if (isset($post['update_types_restaurants_' . $id_restaurant]))
+    {
+      $types_restaurant     = array_unique($post['update_types_restaurants_' . $id_restaurant]);
 
-      if (is_numeric($prix_min_test))
-        $prix_min             = number_format($prix_min_test, 2, '.', '');
-      else
-        $prix_min             = "";
-
-      if (is_numeric($prix_max_test))
-        $prix_max             = number_format($prix_max_test, 2, '.', '');
-      else
-        $prix_max             = "";
-
-      if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
+      foreach ($types_restaurant as $keyType => $type)
       {
-        $search               = array("'", '"');
-        $replace              = array("", "");
-        $lieu_restaurant      = str_replace($search, $replace, $post['update_other_location_' . $id_restaurant]);
-      }
-      else
-        $lieu_restaurant      = $post['update_location_' . $id_restaurant];
-
-      if (isset($post['update_types_restaurants_' . $id_restaurant]))
-      {
-        $types_restaurant     = array_unique($post['update_types_restaurants_' . $id_restaurant]);
-
-        foreach ($types_restaurant as $keyType => $type)
-        {
-          if (empty($type))
-            unset($types_restaurant[$keyType]);
-        }
+        if (empty($type))
+          unset($types_restaurant[$keyType]);
       }
     }
 
@@ -556,12 +554,16 @@
       // Message d'alerte
       $_SESSION['alerts']['restaurant_updated'] = true;
     }
+
+    return $id_restaurant;
   }
 
   // METIER : Supprime un restaurant
   // RETOUR : Aucun
-  function deleteRestaurant($id_restaurant)
+  function deleteRestaurant($post)
   {
+    $id_restaurant = $post['id_restaurant'];
+
     global $bdd;
 
     // Suppression image

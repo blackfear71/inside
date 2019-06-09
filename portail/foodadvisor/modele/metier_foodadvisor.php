@@ -610,11 +610,12 @@
 
   // METIER : Insère ou met à jour une réservation
   // RETOUR : Aucun
-  function insertReservation($id_restaurant, $caller)
+  function insertReservation($post, $caller)
   {
-    global $bdd;
+    $id_restaurant = $post['id_restaurant'];
+    $control_ok    = true;
 
-    $control_ok  = true;
+    global $bdd;
 
     // Contrôle date
     if (date("N") > 5)
@@ -706,11 +707,12 @@
 
   // METIER : Supprime une réservation
   // RETOUR : Aucun
-  function deleteReservation($id_restaurant, $user)
+  function deleteReservation($post, $user)
   {
-    global $bdd;
+    $id_restaurant = $post['id_restaurant'];
+    $control_ok    = true;
 
-    $control_ok  = true;
+    global $bdd;
 
     // Contrôle date
     if (date("N") > 5)
@@ -1027,11 +1029,12 @@
 
   // METIER : Met à jour un choix
   // RETOUR : Aucun
-  function updateChoice($post, $id, $user)
+  function updateChoice($post, $user)
   {
-    global $bdd;
-
+    $id_choix   = $post['id_choix'];
     $control_ok = true;
+
+    global $bdd;
 
     // Contrôle saisie possible en fonction des dates
     if (date("N") > 5)
@@ -1054,37 +1057,37 @@
     if ($control_ok == true)
     {
       // Heure choisie
-      if (isset($post['select_heures_' . $id])  AND !empty($post['select_heures_' . $id])
-      AND isset($post['select_minutes_' . $id]) AND !empty($post['select_minutes_' . $id]))
-        $time        = $post['select_heures_' . $id] . $post['select_minutes_' . $id];
+      if (isset($post['select_heures_' . $id_choix])  AND !empty($post['select_heures_' . $id_choix])
+      AND isset($post['select_minutes_' . $id_choix]) AND !empty($post['select_minutes_' . $id_choix]))
+        $time        = $post['select_heures_' . $id_choix] . $post['select_minutes_' . $id_choix];
       else
         $time        = "";
 
       // Transports choisis
       $transports    = "";
 
-      if (isset($post['checkbox_feet_' . $id]) AND $post['checkbox_feet_' . $id] == "F")
-        $transports .= $post['checkbox_feet_' . $id] . ';';
+      if (isset($post['checkbox_feet_' . $id_choix]) AND $post['checkbox_feet_' . $id_choix] == "F")
+        $transports .= $post['checkbox_feet_' . $id_choix] . ';';
 
-      if (isset($post['checkbox_bike_' . $id]) AND $post['checkbox_bike_' . $id] == "B")
-        $transports .= $post['checkbox_bike_' . $id] . ';';
+      if (isset($post['checkbox_bike_' . $id_choix]) AND $post['checkbox_bike_' . $id_choix] == "B")
+        $transports .= $post['checkbox_bike_' . $id_choix] . ';';
 
-      if (isset($post['checkbox_tram_' . $id]) AND $post['checkbox_tram_' . $id] == "T")
-        $transports .= $post['checkbox_tram_' . $id] . ';';
+      if (isset($post['checkbox_tram_' . $id_choix]) AND $post['checkbox_tram_' . $id_choix] == "T")
+        $transports .= $post['checkbox_tram_' . $id_choix] . ';';
 
-      if (isset($post['checkbox_car_' . $id]) AND $post['checkbox_car_' . $id] == "C")
-        $transports .= $post['checkbox_car_' . $id] . ';';
+      if (isset($post['checkbox_car_' . $id_choix]) AND $post['checkbox_car_' . $id_choix] == "C")
+        $transports .= $post['checkbox_car_' . $id_choix] . ';';
 
       // Menu saisi
       $menu          = "";
 
-      if (!isset($post['update_entree_' . $id]) AND !isset($post['update_plat_' . $id]) AND !isset($post['update_dessert_' . $id]))
+      if (!isset($post['update_entree_' . $id_choix]) AND !isset($post['update_plat_' . $id_choix]) AND !isset($post['update_dessert_' . $id_choix]))
         $menu       .= ";;;";
       else
       {
-        $menu       .= str_replace(";", " ", $post['update_entree_' . $id]) . ';';
-        $menu       .= str_replace(";", " ", $post['update_plat_' . $id]) . ';';
-        $menu       .= str_replace(";", " ", $post['update_dessert_' . $id]) . ';';
+        $menu       .= str_replace(";", " ", $post['update_entree_' . $id_choix]) . ';';
+        $menu       .= str_replace(";", " ", $post['update_plat_' . $id_choix]) . ';';
+        $menu       .= str_replace(";", " ", $post['update_dessert_' . $id_choix]) . ';';
       }
 
       // Tableau de mise à jour d'un choix
@@ -1096,7 +1099,7 @@
       $req = $bdd->prepare('UPDATE food_advisor_users SET time       = :time,
                                                           transports = :transports,
                                                           menu       = :menu
-                                                    WHERE id = ' . $id . ' AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
+                                                    WHERE id = ' . $id_choix . ' AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
       $req->execute($choice);
       $req->closeCursor();
     }
@@ -1104,8 +1107,9 @@
 
   // METIER : Supprime un choix utilisateur
   // RETOUR : Aucun
-  function deleteChoice($id)
+  function deleteChoice($post)
   {
+    $id_choix   = $post['id_choix'];
     $control_ok = true;
 
     global $bdd;
@@ -1131,7 +1135,7 @@
     if ($control_ok == true)
     {
       // Recherche Id restaurant correspondant au choix
-      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id = ' . $id);
+      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id = ' . $id_choix);
       $data1 = $req1->fetch();
       $id_restaurant = $data1['id_restaurant'];
       $identifiant   = $data1['identifiant'];
@@ -1143,7 +1147,7 @@
 
     // Suppression choix de la base
     if ($control_ok == true)
-      $req3 = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id);
+      $req3 = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id_choix);
 
     // Relance de la détermination si besoin
     if ($control_ok == true)

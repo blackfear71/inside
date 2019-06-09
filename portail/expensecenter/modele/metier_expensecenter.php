@@ -317,7 +317,7 @@
   }
 
   // METIER : Modification d'une dépense
-  // RETOUR : Aucun
+  // RETOUR : Id dépense
   function updateExpense($post)
   {
     $control_ok = true;

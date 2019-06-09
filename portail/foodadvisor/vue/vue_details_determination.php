@@ -74,6 +74,7 @@
           if ($actions["reserver"] == true)
           {
             echo '<form id="reserver_details_proposition" method="post" action="">';
+              echo '<input type="hidden" name="id_restaurant" value="" />';
               echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver_details"/>';
             echo '</form>';
           }
