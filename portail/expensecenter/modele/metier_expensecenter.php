@@ -318,11 +318,12 @@
 
   // METIER : Modification d'une dépense
   // RETOUR : Aucun
-  function updateExpense($id_expense, $post)
+  function updateExpense($post)
   {
     $control_ok = true;
 
     // Récupération des données
+    $id_expense  = $post['id_expense'];
     $price_new   = str_replace(',', '.', htmlspecialchars($post['depense']));
     $buyer_new   = $post['buyer_user'];
     $comment_new = $post['comment'];
@@ -536,12 +537,16 @@
       // Message modification effectuée
       $_SESSION['alerts']['depense_modified'] = true;
     }
+
+    return $id_expense;
   }
 
   // METIER : Suppression d'une dépense
   // RETOUR : Aucun
-  function deleteExpense($id_expense)
+  function deleteExpense($post)
   {
+    $id_expense = $post['id_expense'];
+
     global $bdd;
 
     // Lecture dépense

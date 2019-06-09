@@ -176,7 +176,7 @@ function updateExpense(id, year)
   var buyer   = listExpenses[id]['buyer'];
   var price   = listExpenses[id]['price'];
   var comment = listExpenses[id]['comment'];
-  var action  = 'expensecenter.php?year=' + year + '&update_id=' + id + '&action=doModifier';
+  var action  = 'expensecenter.php?year=' + year + '&action=doModifier';
   var identifiant;
   var id_identifiant;
   var parts;
@@ -186,6 +186,7 @@ function updateExpense(id, year)
   initMasonry();
 
   // Modification des données
+  $('input[name=id_expense]').val(id);
   $('.titre_saisie_depense').html(titre);
   $('.form_saisie_depense').attr('action', action);
   $('#select_user').val(buyer);
@@ -233,6 +234,7 @@ function resetSaisie(zone, year)
       var action  = 'expensecenter.php?year=' + year + '&action=doInserer';
 
       // Modification des données
+      $('input[name=id_expense]').val('');
       $('.titre_saisie_depense').html(titre);
       $('.form_saisie_depense').attr('action', action);
       $('#select_user').val(buyer);

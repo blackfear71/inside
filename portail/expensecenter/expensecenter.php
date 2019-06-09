@@ -44,12 +44,12 @@
 
     case 'doModifier':
       // Mise à jour des données par le modèle
-      updateExpense($_GET['update_id'], $_POST);
+      $id_expense = updateExpense($_POST);
       break;
 
     case 'doSupprimer':
       // Suppression des données par le modèle
-      deleteExpense($_GET['delete_id']);
+      deleteExpense($_POST);
       break;
 
     default:
@@ -126,7 +126,7 @@
       break;
 
     case 'doModifier':
-      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $_GET['update_id']);
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $id_expense);
       break;
 
     case 'goConsulter':

@@ -12,6 +12,8 @@
 
       // Saisie dépense
       echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie_depense">';
+        echo '<input type="hidden" name="id_expense" value="" />';
+
         // Achat
         echo '<div class="zone_saisie_left">';
           // Acheteur
