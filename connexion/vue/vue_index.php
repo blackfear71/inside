@@ -151,5 +151,10 @@
         echo '<div class="copyright_index">© 2017-' . date("Y") . ' Inside</div>';
       ?>
     </footer>
+
+    <script>
+      // Initialisation du thème pour le script
+      var themeUser = null;
+    </script>
   </body>
 </html>

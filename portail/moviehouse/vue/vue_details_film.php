@@ -467,5 +467,4 @@
       var detailsFilm = <?php echo $detailsFilmJson; ?>;
     </script>
   </body>
-
 </html>
