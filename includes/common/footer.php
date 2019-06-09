@@ -53,8 +53,6 @@
   include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
 
   // Chargement des données du thème pour le script
-  var_dump($_SESSION['theme']);
-  
   if ($_SESSION['user']['identifiant'] != "admin" AND !empty($_SESSION['theme']))
     $themeUser = json_encode($_SESSION['theme']);
   else
