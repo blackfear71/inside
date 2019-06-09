@@ -25,7 +25,9 @@
         {
           if ($zone_mission == $zone_inside)
           {
-            echo '<form method="post" action="/inside/portail/missions/missions.php?ref_mission=' . $ref_mission . '&key_mission=' . $key_mission . '&action=doMission" class="' . $class_icon_mission . '">';
+            echo '<form method="post" action="/inside/portail/missions/missions.php?action=doMission" class="' . $class_icon_mission . '">';
+              echo '<input type="hidden" name="ref_mission" value="' . $ref_mission . '" />';
+              echo '<input type="hidden" name="key_mission" value="' . $key_mission . '" />';
               echo '<input type="submit" name="' . $ref_mission . '" value="" style="background-image: url(/inside/includes/images/missions/buttons/' . $icon_mission . '.png);" />';
             echo '</form>';
           }

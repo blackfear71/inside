@@ -143,8 +143,11 @@
 
   // METIER : Validation mission en cours
   // RETOUR : Aucun
-  function validateMission($user, $ref, $key, $mission)
+  function validateMission($post, $user, $mission)
   {
+    $ref = $post['ref_mission'];
+    $key = $post['key_mission'];
+
     if (!empty($mission))
     {
       $control_maj = false;
