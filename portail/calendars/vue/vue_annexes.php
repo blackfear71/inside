@@ -100,7 +100,8 @@
                       // Supprimer
                       if ($preferences->getManage_calendars() == "Y")
                       {
-                        echo '<form id="delete_annexe_' . $annexe->getId() . '" method="post" action="calendars.php?id_annexe=' . $annexe->getId() . '&action=doSupprimerAnnexe" class="download_calendar" >';
+                        echo '<form id="delete_annexe_' . $annexe->getId() . '" method="post" action="calendars.php?action=doSupprimerAnnexe" class="download_calendar" >';
+                          echo '<input type="hidden" name="id_annexe" value="' . $annexe->getId() . '" />';
                           echo '<input type="submit" name="delete_annexe" value="" title="Supprimer l\'annexe" class="delete_calendar eventConfirm" />';
                           echo '<input type="hidden" value="Demander la suppression de cette annexe ?" class="eventMessage" />';
                         echo '</form>';

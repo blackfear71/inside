@@ -105,8 +105,9 @@
 
   // METIER : Demande suppression calendrier
   // RETOUR : Aucun
-  function deleteCalendrier($id_cal)
+  function deleteCalendrier($post)
   {
+    $id_cal    = $post['id_cal'];
     $to_delete = "Y";
 
     global $bdd;
@@ -123,8 +124,9 @@
 
   // METIER : Demande suppression annexe
   // RETOUR : Aucun
-  function deleteAnnexe($id_annexe)
+  function deleteAnnexe($post)
   {
+    $id_annexe = $post['id_annexe'];
     $to_delete = "Y";
 
     global $bdd;

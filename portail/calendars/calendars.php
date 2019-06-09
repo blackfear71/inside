@@ -40,11 +40,11 @@
       break;
 
     case "doSupprimer":
-      deleteCalendrier($_GET['id_cal']);
+      deleteCalendrier($_POST);
       break;
 
     case "doSupprimerAnnexe":
-      deleteAnnexe($_GET['id_annexe']);
+      deleteAnnexe($_POST);
       break;
 
     default:
