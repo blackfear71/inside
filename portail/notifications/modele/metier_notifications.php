@@ -203,25 +203,33 @@
           // Recherche mois et année
           $reponse = $bdd->query('SELECT * FROM calendars WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $mois  = formatMonthForDisplay($donnees['month']);
-          $annee = $donnees['year'];
+          $mois      = formatMonthForDisplay($donnees['month']);
+          $annee     = $donnees['year'];
+          $to_delete = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          $icone  = "calendars";
-          $phrase = "Un calendrier vient d'être mis en ligne pour le mois de <strong>" . $mois . " " . $annee . "</strong>.";
-          $lien   = "/inside/portail/calendars/calendars.php?year=" . $annee . "&action=goConsulter";
+          if ($to_delete != "Y")
+          {
+            $icone  = "calendars";
+            $phrase = "Un calendrier vient d'être mis en ligne pour le mois de <strong>" . $mois . " " . $annee . "</strong>.";
+            $lien   = "/inside/portail/calendars/calendars.php?year=" . $annee . "&action=goConsulter";
+          }
           break;
 
         case "annexe":
           // Recherche titre
           $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $titre = $donnees['title'];
+          $titre     = $donnees['title'];
+          $to_delete = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          $icone  = "calendars";
-          $phrase = "Une annexe vient d'être mise en ligne (<strong>" . $titre . "</strong>).";
-          $lien   = "/inside/portail/calendars/calendars.php?action=goConsulterAnnexes";
+          if ($to_delete != "Y")
+          {
+            $icone  = "calendars";
+            $phrase = "Une annexe vient d'être mise en ligne (<strong>" . $titre . "</strong>).";
+            $lien   = "/inside/portail/calendars/calendars.php?action=goConsulterAnnexes";
+          }
           break;
 
         case "culte":
