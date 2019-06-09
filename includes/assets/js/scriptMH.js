@@ -94,7 +94,6 @@ $(function()
     afficherMasquerNoDelay('modifier_comment_' + id_comment);
     afficherMasquerNoDelay('visualiser_comment_' + id_comment);
     afficherMasquerNoDelay('actions_comment_' + id_comment);
-    afficherMasquerNoDelay('annuler_actions_comment_' + id_comment);
   });
 
   // Masque la zone de modification d'un commentaire
@@ -105,7 +104,6 @@ $(function()
     afficherMasquerNoDelay('modifier_comment_' + id_comment);
     afficherMasquerNoDelay('visualiser_comment_' + id_comment);
     afficherMasquerNoDelay('actions_comment_' + id_comment);
-    afficherMasquerNoDelay('annuler_actions_comment_' + id_comment);
   });
 
   // Insère un smiley en saisie/modification de commentaire
@@ -328,7 +326,9 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
       html += '</div>';
 
       // Etoiles
-      html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&id_film=' + id_film + '&action=doVoterFilm" class="form_saisie_preference">';
+      html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&action=doVoterFilm" class="form_saisie_preference">';
+        html += '<input type="hidden" name="id_film" value="' + id_film + '" />';
+
         for (var i = 0; i <= 5; i++)
         {
           html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '.png" alt="star' + i + '" class="icone_preference" />';
@@ -428,7 +428,7 @@ function updateFilm(zone)
 {
   var titre  = "Modifier un film";
   var bouton = "Modifier le film";
-  var action = 'details.php?id_film=' + detailsFilm['id'] + '&action=doModifier';
+  var action = 'details.php?action=doModifier';
 
   // Affichage zone de saisie
   afficherMasquer(zone);
@@ -437,6 +437,7 @@ function updateFilm(zone)
   $('.titre_saisie_film').html(titre);
   $('.form_saisie_film').attr('action', action);
 
+  $('input[name=id_film]').val(detailsFilm['id']);
   $('input[name=nom_film]').val(detailsFilm['film']);
   $('input[name=date_theater]').val(detailsFilm['date_theater']);
   $('input[name=date_release]').val(detailsFilm['date_release']);

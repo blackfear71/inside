@@ -34,32 +34,32 @@
       break;
 
     case "doModifier":
-      updateFilm($_GET['id_film'], $_POST, $_SESSION['user']['identifiant']);
+      $id_film = updateFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimer":
       $preferences = getPreferences($_SESSION['user']['identifiant']);
-      deleteFilm($_GET['delete_id'], $_SESSION['user']['identifiant']);
+      deleteFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doVoterFilm":
-      insertStars($_POST, $_GET, $_SESSION['user']['identifiant']);
+      $id_film = insertStars($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doParticiperFilm":
-      insertParticipation($_POST, $_GET, $_SESSION['user']['identifiant']);
+      $id_film = insertParticipation($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doCommenter":
-      insertComment($_POST, $_GET, $_SESSION['user']['identifiant']);
+      $id_film = insertComment($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimerCommentaire":
-      deleteComment($_GET['comment_id'], $_GET['id_film'], $_SESSION['user']['identifiant']);
+      $id_film = deleteComment($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doModifierCommentaire":
-      updateComment($_GET['comment_id'], $_POST);
+      $ids = updateComment($_POST);
       break;
 
     default:
@@ -159,7 +159,7 @@
   switch ($_GET['action'])
   {
     case "doModifier":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
+      header('location: details.php?id_film=' . $id_film . '&action=goConsulter');
       break;
 
     case "doSupprimer":
@@ -188,19 +188,19 @@
 
     case "doVoterFilm":
     case "doParticiperFilm":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
+      header('location: details.php?id_film=' . $id_film . '&action=goConsulter');
       break;
 
     case "doCommenter":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=comments');
+      header('location: details.php?id_film=' . $id_film . '&action=goConsulter&anchor=comments');
       break;
 
     case "doSupprimerCommentaire":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=comments');
+      header('location: details.php?id_film=' . $id_film . '&action=goConsulter&anchor=comments');
       break;
 
     case "doModifierCommentaire":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter&anchor=' . $_GET['comment_id']);
+      header('location: details.php?id_film=' . $ids['id_film'] . '&action=goConsulter&anchor=' . $ids['id_comment']);
       break;
 
     case 'goConsulter':

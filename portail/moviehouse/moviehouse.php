@@ -87,11 +87,11 @@
       break;
 
     case "doVoterFilm":
-      insertStars($_POST, $_GET, $_SESSION['user']['identifiant']);
+      $id_film = insertStars($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doParticiperFilm":
-      insertParticipation($_POST, $_GET, $_SESSION['user']['identifiant']);
+      $id_film = insertParticipation($_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -324,11 +324,11 @@
       break;
 
     case "doVoterFilm":
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $_GET['id_film']);
+      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $id_film);
       break;
 
     case "doParticiperFilm":
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $_GET['id_film']);
+      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $id_film);
       break;
 
     case 'goConsulter':

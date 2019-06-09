@@ -70,10 +70,10 @@
 
     return $listFilms;
   }
-  
+
   // METIER : Insertion/modification étoiles
-  // RETOUR : Aucun
-  function insertStars($post, $get, $user)
+  // RETOUR : Id film
+  function insertStars($post, $user)
   {
     // On récupère le choix utilisateur
     if (isset($post['preference_0']))
@@ -94,7 +94,7 @@
     global $bdd;
 
     // On récupère le numéro du film
-    $id_film = $get['id_film'];
+    $id_film = $post['id_film'];
 
     // On récupère l'identifiant de l'utilisateur
     $identifiant = $user;
@@ -141,15 +141,17 @@
 				$req3->closeCursor();
 			}
 		}
+
+    return $id_film;
   }
 
   // METIER : Insertion/modification participation
-  // RETOUR : Aucun
-  function insertParticipation($post, $get, $user)
+  // RETOUR : Id film
+  function insertParticipation($post, $user)
   {
     global $bdd;
 
-    $id_film = $get['id_film'];
+    $id_film = $post['id_film'];
 
     if(isset($post['participate']))
     {
@@ -219,5 +221,7 @@
           insertOrUpdateSuccesValue('padawan', $user, 0);
       }
     }
+
+    return $id_film;
   }
 ?>

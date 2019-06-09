@@ -15,6 +15,8 @@
         echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouter" class="form_saisie_film">';
       else
         echo '<form method="post" action="moviehouse.php?action=doAjouter" class="form_saisie_film">';
+        echo '<input type="hidden" name="id_film" value="" />';
+
         // Informations film
         echo '<div class="zone_saisie_left">';
           // Sous-titre

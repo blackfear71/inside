@@ -92,7 +92,9 @@
                             echo '<img src="../../includes/icons/moviehouse/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                           echo '</a>';
 
-                          echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2_' . $ligneFilm['id_film'] . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                          echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doVoterFilm" id="preference2_' . $ligneFilm['id_film'] . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                            echo '<input type="hidden" name="id_film" value="' . $ligneFilm['id_film'] . '" />';
+
                             // Boutons vote
                             for ($j = 0; $j <= 5; $j++)
                             {
@@ -198,7 +200,9 @@
                       echo '<img src="../../includes/icons/moviehouse/stars/star' . $stars['stars'] . '.png" alt="star' . $stars['stars'] . '" class="star" />';
                     echo '</a>';
 
-                    echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $ligneFilm['id_film'] . '&action=doVoterFilm" id="preference2_' . $ligneFilm['id_film'] . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                    echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doVoterFilm" id="preference2_' . $ligneFilm['id_film'] . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                      echo '<input type="hidden" name="id_film" value="' . $ligneFilm['id_film'] . '" />';
+
                       // Boutons vote
                       for ($j = 0; $j <= 5; $j++)
                       {

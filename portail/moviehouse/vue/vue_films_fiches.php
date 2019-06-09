@@ -134,7 +134,8 @@
                   if ($film->getStars_user() > 0)
                   {
                     // Participation / vue
-                    echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_participation">';
+                    echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doParticiperFilm" class="form_participation">';
+                      echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
                       // Je participe
                       echo '<input type="submit" name="participate" value="" title="Je participe !" class="input_participate" />';
                       // J'ai vu

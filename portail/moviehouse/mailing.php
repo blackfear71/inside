@@ -27,9 +27,10 @@
 
     case "sendMail":
       // Lecture liste des données par le modèle
-      $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
-      $listeEtoiles = getDetailsStars($_GET['id_film']);
-      sendMail($_GET['id_film'], $detailsFilm, $listeEtoiles);
+      $id_film      = $_POST['id_film'];
+      $detailsFilm  = getDetails($id_film, $_SESSION['user']['identifiant']);
+      $listeEtoiles = getDetailsStars($id_film);
+      sendMail($detailsFilm, $listeEtoiles);
       break;
 
     default:
@@ -90,7 +91,7 @@
   switch ($_GET['action'])
   {
     case "sendMail":
-      header('location: details.php?id_film=' . $_GET['id_film'] . '&action=goConsulter');
+      header('location: details.php?id_film=' . $id_film . '&action=goConsulter');
       break;
 
     case 'goConsulter':

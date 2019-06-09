@@ -215,12 +215,13 @@
   }
 
   // METIER : Modification film
-  // RETOUR : Aucun
-  function updateFilm($id_film, $post, $user)
+  // RETOUR : Id film
+  function updateFilm($post, $user)
   {
     $control_ok = true;
 
     // Récupération des variables
+    $id_film      = $post['id_film'];
     $nom_film     = $post['nom_film'];
     $to_delete    = "N";
     $date_theater = "";
@@ -357,7 +358,7 @@
                                                    time_doodle  = :time_doodle,
                                                    restaurant   = :restaurant,
                                                    place        = :place
-                                               WHERE id = ' . $id_film);
+                                             WHERE id = ' . $id_film);
       $req->execute($film);
       $req->closeCursor();
 
@@ -379,22 +380,24 @@
     }
     else
       $_SESSION['alerts']['wrong_date'] = true;
+
+    return $id_film;
   }
 
   // METIER : Demande de suppression d'un film
   // RETOUR : Aucun
-  function deleteFilm($id_film, $user)
+  function deleteFilm($post, $user)
   {
     global $bdd;
 
-    $to_delete       = "Y";
-    $identifiant_del = $user;
+    $id_film   = $post['id_film'];
+    $to_delete = "Y";
 
     // Modification de l'enregistrement en table
     $req = $bdd->prepare('UPDATE movie_house SET to_delete = :to_delete, identifiant_del = :identifiant_del WHERE id = ' . $id_film);
     $req->execute(array(
       'to_delete'       => $to_delete,
-      'identifiant_del' => $identifiant_del
+      'identifiant_del' => $user
     ));
     $req->closeCursor();
 
@@ -435,13 +438,13 @@
   }
 
   // METIER : Insertion commentaire sur un détail film
-  // RETOUR : Aucun
-  function insertComment($post, $get, $user)
+  // RETOUR : Id film
+  function insertComment($post, $user)
   {
     global $bdd;
 
     // On récupère les données
-    $id_film = $get['id_film'];
+    $id_film = $post['id_film'];
     $author  = $user;
     $date    = date("Ymd");
     $time    = date("His");
@@ -466,26 +469,35 @@
 
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $user, 1);
+
+    return $id_film;
   }
 
   // METIER : Modification commentaire sur un détail film
-  // RETOUR : Aucun
-  function updateComment($id_comment, $post)
+  // RETOUR : Id film et commentaire
+  function updateComment($post)
   {
+    $ids = array('id_film' => $post['id_film'], 'id_comment' => $post['id_comment']);
+
     global $bdd;
 
     // Modification de l'enregistrement en table
-    $req = $bdd->prepare('UPDATE movie_house_comments SET comment = :comment WHERE id = ' . $id_comment);
+    $req = $bdd->prepare('UPDATE movie_house_comments SET comment = :comment WHERE id = ' . $ids['id_comment']);
     $req->execute(array(
       'comment' => $post['comment']
     ));
     $req->closeCursor();
+
+    return $ids;
   }
 
   // METIER : Suppression commentaire sur un détail film
-  // RETOUR : Aucun
-  function deleteComment($id_comment, $id_film, $user)
+  // RETOUR : Id film
+  function deleteComment($post, $user)
   {
+    $id_film    = $post['id_film'];
+    $id_comment = $post['id_comment'];
+
     global $bdd;
 
     // Suppression commentaire
@@ -502,11 +514,13 @@
 
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $user, -1);
+
+    return $id_film;
   }
 
   // METIER : Envoi mail sortie film
   // RETOUR : Aucun
-  function sendMail($id_film, $details, $participants)
+  function sendMail($details, $participants)
   {
     // Traitement de sécurité
     $details->setId(htmlspecialchars($details->getId()));

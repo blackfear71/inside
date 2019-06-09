@@ -116,7 +116,9 @@
                         echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                       echo '</a>';
 
-                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2_' . $film->getId() . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doVoterFilm" id="preference2_' . $film->getId() . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                        echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
+
                         // Boutons vote
                         for ($j = 0; $j <= 5; $j++)
                         {
@@ -139,7 +141,8 @@
                   echo '<td class="table_dates">';
                     if ($film->getStars_user() > 0)
                     {
-                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
+                      echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doParticiperFilm" class="form_not_interested">';
+                        echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
                         // Je participe
                         echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate" />';
                         // J'ai vu
@@ -261,7 +264,9 @@
                   echo '<img src="../../includes/icons/moviehouse/stars/star' . $film->getStars_user() . '.png" alt="star' . $film->getStars_user() . '" class="star" />';
                 echo '</a>';
 
-                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doVoterFilm" id="preference2_' . $film->getId() . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doVoterFilm" id="preference2_' . $film->getId() . '" style="display: none; min-width: 240px; padding-top: 10px; padding-bottom: 10px;">';
+                  echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
+
                   // Boutons vote
                   for ($j = 0; $j <= 5; $j++)
                   {
@@ -284,8 +289,9 @@
     				echo '<td class="table_dates">';
     					if ($film->getStars_user() > 0)
     					{
-    						echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&id_film=' . $film->getId() . '&action=doParticiperFilm" class="form_not_interested">';
-    							// Je participe
+    						echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doParticiperFilm" class="form_not_interested">';
+    							echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
+                  // Je participe
     							echo '<input type="submit" name="participate" value="" title="Je participe !" class="participate" />';
     							// J'ai vu
     							echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="seen" />';

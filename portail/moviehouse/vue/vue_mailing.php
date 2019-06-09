@@ -78,7 +78,8 @@
           /*********************/
           if ($email_present == true)
           {
-            echo '<form method="post" action="mailing.php?id_film=' . $_GET['id_film'] . '&action=sendMail">';
+            echo '<form method="post" action="mailing.php?action=sendMail">';
+              echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
               echo '<input type="submit" name="send_mail_film" value="Envoyer l\'e-mail" class="send_mail_film" />';
             echo '</form>';
           }

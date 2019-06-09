@@ -95,7 +95,8 @@
                   echo '</a>';
 
                   // Supprimer
-                  echo '<form id="delete_film" method="post" action="details.php?delete_id=' . $_GET['id_film'] . '&action=doSupprimer" class="link_details">';
+                  echo '<form id="delete_film" method="post" action="details.php?action=doSupprimer" class="link_details">';
+                    echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
                     echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icon_details_delete eventConfirm" />';
                     echo '<input type="hidden" value="Demander la suppression de ce film ?" class="eventMessage" />';
                   echo '</form>';
@@ -133,7 +134,9 @@
 
                 // Vote utilisateur
                 echo '<div class="zone_details_vote_user">';
-                  echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doVoterFilm" class="form_vote_left">';
+                  echo '<form method="post" action="details.php?action=doVoterFilm" class="form_vote_left">';
+                    echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
+
                     // Etoiles utilisateur
                     for ($j = 0; $j <= 5; $j++)
                     {
@@ -153,7 +156,9 @@
                   // Si l'utilisateur a des étoiles
                   if ($detailsFilm->getStars_user() > 0)
                   {
-                    echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doParticiperFilm" class="form_vote_right">';
+                    echo '<form method="post" action="details.php?action=doParticiperFilm" class="form_vote_right">';
+                      echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
+
                       // Participation
                       if ($detailsFilm->getParticipation() == "P")
                       {
@@ -356,6 +361,9 @@
                       // Actions sur commentaires seulement si l'auteur correspond à l'utilisateur connecté
                       if ($comment->getAuthor() == $_SESSION['user']['identifiant'])
                       {
+                        /***************************************************/
+                        /* Ligne visualisation normale (sans modification) */
+                        /***************************************************/
                         // Boutons
                         echo '<div id="actions_comment_' . $comment->getId() . '" class="actions_commentaires">';
                           // Modification commentaire
@@ -364,27 +372,15 @@
                           echo '</span>';
 
                           // Suppression commentaire
-                          echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doSupprimerCommentaire" class="link_actions_commentaires">';
+                          echo '<form id="delete_comment_' . $comment->getId() . '" method="post" action="details.php?action=doSupprimerCommentaire" class="link_actions_commentaires">';
+                            echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
+                            echo '<input type="hidden" name="id_comment" value="' . $comment->getId() . '" />';
                             echo '<input type="submit" name="delete_comment" value="" title="Supprimer le commentaire" class="icone_supprimer_comment eventConfirm" />';
                             echo '<input type="hidden" value="Supprimer ce commentaire ?" class="eventMessage" />';
                           echo '</form>';
                         echo '</div>';
 
-                        echo '<div id="annuler_actions_comment_' . $comment->getId() . '" class="actions_commentaires" style="display: none;">';
-                          // Validation modification
-                          echo '<span class="link_actions_commentaires">';
-                            echo '<input type="submit" name="modify_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
-                          echo '</span>';
-
-                          // Annulation modification
-                          echo '<span class="link_actions_commentaires">';
-                            echo '<a id="annuler_commentaire_' . $comment->getId() . '" title="Annuler la modification" class="icone_annuler_comment annulerCommentaire"></a>';
-                          echo '</span>';
-                        echo '</div>';
-
-                        /***************************************************/
-                        /* Ligne visualisation normale (sans modification) */
-                        /***************************************************/
+                        // Commentaire
                         echo '<div id="visualiser_comment_' . $comment->getId() . '">';
                           // On cherche les smileys dans les commentaires
                           $commentaire = extract_smiley($comment->getComment());
@@ -399,22 +395,37 @@
                         /**********************************/
                         /* Ligne cachée pour modification */
                         /**********************************/
-                        echo '<div id="modifier_comment_' . $comment->getId() . '" style="display: none;">';
-                          echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&comment_id=' . $comment->getId() . '&action=doModifierCommentaire">';
-                            echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
+                        echo '<form method="post" action="details.php?action=doModifierCommentaire" id="modifier_comment_' . $comment->getId() . '" style="display: none;">';
+                          // Boutons
+                          echo '<div class="actions_commentaires">';
+                            // Validation modification
+                            echo '<span class="link_actions_commentaires">';
+                              echo '<input type="submit" name="modify_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
+                            echo '</span>';
 
-                            echo '<div class="zone_saisie_smileys">';
-                              echo '<a id="modifier_smiley_1_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_2_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_3_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_4_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_5_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_6_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_7_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                              echo '<a id="modifier_smiley_8_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
-                            echo '</div>';
-                          echo '</form>';
-                        echo '</div>';
+                            // Annulation modification
+                            echo '<span class="link_actions_commentaires">';
+                              echo '<a id="annuler_commentaire_' . $comment->getId() . '" title="Annuler la modification" class="icone_annuler_comment annulerCommentaire"></a>';
+                            echo '</span>';
+                          echo '</div>';
+
+                          // Formulaire
+                          echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
+                          echo '<input type="hidden" name="id_comment" value="' . $comment->getId() . '" />';
+
+                          echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
+
+                          echo '<div class="zone_saisie_smileys">';
+                            echo '<a id="modifier_smiley_1_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_2_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_3_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_4_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_5_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_6_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_7_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_8_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                          echo '</div>';
+                        echo '</form>';
                       }
                       // Affichage commentaire normal
                       else
@@ -434,8 +445,10 @@
               }
 
               // Saisie commentaire
-  						echo '<form method="post" action="details.php?id_film=' . $detailsFilm->getId() . '&action=doCommenter" id="comments" class="saisie_commentaires_films">';
-  							echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_0" class="zone_saisie_comment" required></textarea>';
+  						echo '<form method="post" action="details.php?action=doCommenter" id="comments" class="saisie_commentaires_films">';
+  							echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
+
+                echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_0" class="zone_saisie_comment" required></textarea>';
   							echo '<input type="submit" name="submit_comment" value="Envoyer" class="bouton_commentaires" />';
 
                 echo '<div class="zone_saisie_smileys">';
