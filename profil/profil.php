@@ -90,7 +90,7 @@
       break;
 
     case 'doModifierTheme':
-      updateTheme($_SESSION['user']['identifiant'], $_GET['id']);
+      updateTheme($_SESSION['user']['identifiant'], $_POST);
       break;
 
     default:

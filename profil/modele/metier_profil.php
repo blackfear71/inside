@@ -809,12 +809,15 @@
 
   // METIER : Mise à jour de la préférence thème utilisateur
   // RETOUR : Aucun
-  function updateTheme($user, $id)
+  function updateTheme($user, $post)
   {
+    // Récupération des données
+    $id_theme = $post['id_theme'];
+
     global $bdd;
 
     // Lecture de la référence du thème
-    $reponse = $bdd->query('SELECT * FROM themes WHERE id = ' . $id);
+    $reponse = $bdd->query('SELECT * FROM themes WHERE id = ' . $id_theme);
     $donnees = $reponse->fetch();
     $ref_theme = $donnees['reference'];
     $reponse->closeCursor();

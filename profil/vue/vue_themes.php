@@ -50,7 +50,8 @@
 
             echo '<div class="zone_theme_actions">';
               // Bouton
-              echo '<form method="post" action="profil.php?id=' . $theme_users->getId() . '&action=doModifierTheme" class="form_theme">';
+              echo '<form method="post" action="profil.php?action=doModifierTheme" class="form_theme">';
+                echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
                 echo '<input type="submit" name="update_theme" value="Utiliser ce thème" class="bouton_theme" />';
               echo '</form>';
 
@@ -107,6 +108,7 @@
             echo '<div class="zone_theme_actions">';
               // Bouton
               echo '<form method="post" action="profil.php?id=' . $theme_mission->getId() . '&action=doModifierTheme" class="form_theme">';
+                echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
                 echo '<input type="submit" name="update_theme" value="Utiliser ce thème" class="bouton_theme" />';
               echo '</form>';
 
