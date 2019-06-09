@@ -210,11 +210,16 @@
 
   // METIER : Mise à jour du statut d'une idée
   // RETOUR : Vue à afficher
-  function updateIdea($id, $view, $post)
+  function updateIdea($post, $view)
   {
+    $id_idea = $post['id_idea'];
+    $action  = $post;
+
+    unset($action['id_idea']);
+
     global $bdd;
 
-    switch (key($post))
+    switch (key($action))
     {
       case 'take':
         $status     = "C";
@@ -254,7 +259,7 @@
     // Génération succès
     if ($status == "O")
     {
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE id = ' . $id);
+      $reponse = $bdd->query('SELECT * FROM ideas WHERE id = ' . $id_idea);
       $donnees = $reponse->fetch();
       insertOrUpdateSuccesValue('applier', $donnees['developper'], -1);
       $reponse->closeCursor();
@@ -263,7 +268,7 @@
     // On met à jour la table
     $req = $bdd->prepare('UPDATE ideas SET status     = :status,
                                            developper = :developper
-                                     WHERE id         = ' . $id);
+                                     WHERE id         = ' . $id_idea);
     $req->execute($data);
     $req->closeCursor();
 
