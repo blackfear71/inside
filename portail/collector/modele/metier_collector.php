@@ -451,8 +451,10 @@
 
   // METIER : Suppression phrases cultes
   // RETOUR : Aucun
-  function deleteCollector($id_col)
+  function deleteCollector($post)
   {
+    $id_col = $post['id_col'];
+
     global $bdd;
 
     // Suppression image
@@ -484,10 +486,11 @@
   }
 
   // METIER : Modification phrases cultes
-  // RETOUR : Aucun
-  function updateCollector($post, $files, $id_col)
+  // RETOUR : Id collector
+  function updateCollector($post, $files)
   {
     $control_ok = true;
+    $id_col     = $post['id_col'];
 
     global $bdd;
 
@@ -576,6 +579,8 @@
       elseif ($post['type_collector'] == "I")
         $_SESSION['alerts']['image_collector_updated'] = true;
     }
+
+    return $id_col;
   }
 
   // METIER : Lecture des votes utilisateur
@@ -600,7 +605,7 @@
 
       $reponse->closeCursor();
     }
-    
+
     return $listVotes;
   }
 
@@ -652,9 +657,10 @@
   }
 
   // METIER : Insertion ou mise à jour vote
-  // RETOUR : Aucun
-  function voteCollector($post, $user, $id_col)
+  // RETOUR : Id collector
+  function voteCollector($post, $user)
   {
+    $id_col        = $post['id_col'];
     $selfSatisfied = false;
 
     if (isset($post['smiley_1']))
@@ -734,12 +740,16 @@
     }
 
     $reponse->closeCursor();
+
+    return $id_col;
   }
 
   // METIER : Suppression des votes si phrase culte supprimée
   // RETOUR : Aucun
-  function deleteVotes($id_col)
+  function deleteVotes($post)
   {
+    $id_col = $post['id_col'];
+
     global $bdd;
 
     $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $id_col);

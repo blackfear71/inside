@@ -59,16 +59,16 @@
       break;
 
     case "doSupprimer":
-      deleteVotes($_GET['delete_id']);
-      deleteCollector($_GET['delete_id']);
+      deleteVotes($_POST);
+      deleteCollector($_POST);
       break;
 
     case "doModifier":
-      updateCollector($_POST, $_FILES, $_GET['update_id']);
+      $id_col = updateCollector($_POST, $_FILES);
       break;
 
     case "doVoter":
-      voteCollector($_POST, $_SESSION['user']['identifiant'], $_GET['id']);
+      $id_col = voteCollector($_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -142,11 +142,11 @@
       break;
 
     case "doModifier":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $_GET['update_id']);
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $id_col);
       break;
 
     case "doVoter":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $_GET['id']);
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $id_col);
       break;
 
     case "goConsulter":
