@@ -26,8 +26,8 @@
       $isReserved       = getReserved($_SESSION['user']['identifiant']);
       $choixSemaine     = getWeekChoices();
       $actions          = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
-
-      if (!empty($propositions))
+      
+      if (!empty($propositions) OR !empty($solos))
         $sansPropositions = getNoPropositions();
       break;
 
