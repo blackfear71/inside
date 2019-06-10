@@ -655,8 +655,6 @@
 
       $req1->closeCursor();
 
-      var_dump($id_restaurant);
-      
       // Mise à jour ou insertion si pas déjà réservé
       if ($reserved == false)
       {
