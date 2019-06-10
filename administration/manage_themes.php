@@ -35,16 +35,15 @@
       break;
 
 		case "doAjouter":
-      $new_id = insertTheme($_POST, $_FILES);
+      $id_theme = insertTheme($_POST, $_FILES);
 			break;
 
     case "doModifier":
-      updateTheme($_POST, $_GET['update_id']);
-      $new_id = $_GET['update_id'];
+      $id_theme = updateTheme($_POST);
 			break;
 
 		case "doSupprimer":
-      deleteTheme($_GET['delete_id']);
+      deleteTheme($_POST);
 			break;
 
     default:
@@ -102,8 +101,8 @@
   {
     case "doAjouter":
     case "doModifier":
-      if (!empty($new_id))
-        header ('location: manage_themes.php?action=goConsulter&anchorTheme=' . $new_id);
+      if (!empty($id_theme))
+        header ('location: manage_themes.php?action=goConsulter&anchorTheme=' . $id_theme);
       else
         header ('location: manage_themes.php?action=goConsulter');
       break;

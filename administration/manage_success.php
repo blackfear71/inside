@@ -48,7 +48,7 @@
       break;
 
     case "doSupprimer":
-      deleteSuccess($_GET['id']);
+      deleteSuccess($_POST);
       break;
 
     case "doModifier":

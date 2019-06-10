@@ -135,7 +135,8 @@
 
               echo '<div class="ensemble_succes">';
                 // Suppression succès
-                echo '<form method="post" id="delete_success_' . $success->getId() . '" action="manage_success.php?id=' . $success->getId() . '&action=doSupprimer" class="form_suppression_succes">';
+                echo '<form method="post" id="delete_success_' . $success->getId() . '" action="manage_success.php?action=doSupprimer" class="form_suppression_succes">';
+                  echo '<input type="hidden" name="id_success" value="' . $success->getId() . '" />';
                   echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" class="bouton_delete eventConfirm" />';
                   echo '<input type="hidden" value="Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?" class="eventMessage" />';
                 echo '</form>';

@@ -32,27 +32,27 @@
       break;
 
     case "doAnnulerMdp":
-      resetOldPassword($_GET['id_user']);
+      resetOldPassword($_POST);
       break;
 
     case "doChangerMdp":
-      setNewPassword($_GET['id_user']);
+      setNewPassword($_POST);
       break;
 
     case "doAccepterInscription":
-      acceptInscription($_GET['id_user']);
+      acceptInscription($_POST);
       break;
 
     case "doRefuserInscription":
-      resetInscription($_GET['id_user']);
+      resetInscription($_POST);
       break;
 
     case "doAccepterDesinscription":
-      acceptDesinscription($_GET['id_user']);
+      acceptDesinscription($_POST);
       break;
 
     case "doRefuserDesinscription":
-      resetDesinscription($_GET['id_user']);
+      resetDesinscription($_POST);
       break;
 
     default:

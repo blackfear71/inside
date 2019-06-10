@@ -93,6 +93,7 @@
     $status           = "I";
     $avatar           = "";
     $email            = "";
+    $anniversary      = "";
     $experience       = 0;
     $expenses         = 0;
 
@@ -137,6 +138,7 @@
                                                   pseudo,
                                                   avatar,
                                                   email,
+                                                  anniversary,
                                                   experience,
                                                   expenses)
                                            VALUES(:identifiant,
@@ -147,6 +149,7 @@
                                                   :pseudo,
                                                   :avatar,
                                                   :email,
+                                                  :anniversary,
                                                   :experience,
                                                   :expenses
                                                  )');
@@ -159,6 +162,7 @@
   					'pseudo'      => $pseudo,
   					'avatar'      => $avatar,
             'email'       => $email,
+            'anniversary' => $anniversary,
             'experience'  => $experience,
             'expenses'    => $expenses
   					));

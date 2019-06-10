@@ -1128,14 +1128,16 @@
 
   // METIER : Refus réinitialisation mot de passe
   // RETOUR : Aucun
-  function resetOldPassword($id_user)
+  function resetOldPassword($post)
   {
+    $id_user = $post['id_user'];
+
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande)
     $status = "N";
 
-    $req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET status = :status WHERE identifiant = "' . $id_user . '"');
     $req->execute(array(
       'status' => $status
     ));
@@ -1144,8 +1146,10 @@
 
   // METIER : Réinitialisation mot de passe
   // RETOUR : Aucun
-  function setNewPassword($id_user)
+  function setNewPassword($post)
   {
+    $id_user = $post['id_user'];
+
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande et du mot de passe)
@@ -1156,131 +1160,119 @@
     $chaine   = random_string(10);
     $password = htmlspecialchars(hash('sha1', $chaine . $salt));
 
-    $req = $bdd->prepare('UPDATE users SET salt = :salt, password = :password, status = :status WHERE id = ' . $id_user);
-    $req->execute(array(
+    $req1 = $bdd->prepare('UPDATE users SET salt = :salt, password = :password, status = :status WHERE identifiant = "' . $id_user . '"');
+    $req1->execute(array(
       'salt'     => $salt,
       'password' => $password,
       'status'   => $status
     ));
-    $req->closeCursor();
+    $req1->closeCursor();
 
-    // Récupération identifiant et pseudo
-    $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE id = ' . $id_user);
-    $donnees = $reponse->fetch();
+    // Récupération pseudo
+    $req2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $id_user . '"');
+    $data2 = $req2->fetch();
 
-    $_SESSION['save']['user_ask_id']   = $donnees['identifiant'];
-    $_SESSION['save']['user_ask_name'] = $donnees['pseudo'];
+    $_SESSION['save']['user_ask_id']   = $id_user;
+    $_SESSION['save']['user_ask_name'] = $data2['pseudo'];
     $_SESSION['save']['new_password']  = $chaine;
 
-    $reponse->closeCursor();
+    $req2->closeCursor();
   }
 
   // METIER : Validation inscription (mise à jour du status utilisateur)
   // RETOUR : Aucun
-  function acceptInscription($id_user)
+  function acceptInscription($post)
   {
+    $id_user = $post['id_user'];
+
     global $bdd;
 
     // On met simplement à jour le status de l'utilisateur
     $status = "N";
 
-    $req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET status = :status WHERE identifiant = "' . $id_user . '"');
     $req->execute(array(
       'status' => $status
     ));
     $req->closeCursor();
 
-    // On récupère l'identifiant
-    $req2 = $bdd->query('SELECT id, identifiant FROM users WHERE id = ' . $id_user);
-    $data2 = $req2->fetch();
-    $identifiant = $data2['identifiant'];
-    $req2->closeCursor();
-
     // Génération notification nouvel inscrit
-    insertNotification('admin', 'inscrit', $identifiant);
+    insertNotification('admin', 'inscrit', $id_user);
   }
 
   // METIER : Refus inscription
   // RETOUR : Aucun
-  function resetInscription($id_user)
+  function resetInscription($post)
   {
+    $id_user = $post['id_user'];
+
     global $bdd;
 
-    // Récupération identifiant
-    $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE id = ' . $id_user);
-    $data1 = $req1->fetch();
-
-    $identifiant = $data1['identifiant'];
-
-    $req1->closeCursor();
-
     // Suppression des préférences
-    $req2 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $identifiant . '"');
+    $req1 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
 
     // Suppression utilisateur
-    $req3 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user);
+    $req2 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
   }
 
   // METIER : Validation désinscription
   // RETOUR : Aucun
-  function acceptDesinscription($id_user)
+  function acceptDesinscription($post)
   {
+    $id_user = $post['id_user'];
+
     global $bdd;
 
-    // Récupération identifiant
-    $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE id = ' . $id_user);
-    $data1 = $req1->fetch();
-    $identifiant = $data1['identifiant'];
-    $req1->closeCursor();
-
     // Suppression des avis movie_house_users
-    $req2 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $identifiant . '"');
+    $req1 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
 
     // Suppression des préférences
-    $req3 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $identifiant . '"');
+    $req2 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
 
     // Suppression des votes collector
-    $req4 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $identifiant . '"');
+    $req3 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
 
     // Remise en cours des idées non terminées ou rejetées
     $status     = "O";
     $developper = "";
 
-    $req5 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $identifiant . '" AND status != "D" AND status != "R"');
-    $req5->execute(array(
+    $req4 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
+    $req4->execute(array(
       'status'     => $status,
       'developper' => $developper
     ));
-    $req5->closeCursor();
+    $req4->closeCursor();
 
     // Suppression des missions
-    $req6 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $identifiant . '"');
+    $req5 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
 
     // Suppression notification inscription
-    deleteNotification('inscrit', $identifiant);
+    deleteNotification('inscrit', $id_user);
 
     // Suppression des succès
-    $req7 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $identifiant . '"');
+    $req6 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
 
     // Suppression propositions restaurants
-    $req8 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $identifiant . '"');
+    $req7 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
 
     // Suppression déterminations restaurants
-    $req9 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $identifiant . '"');
+    $req8 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
 
     // Suppression utilisateur
-    $req10 = $bdd->exec('DELETE FROM users WHERE id = ' . $id_user . ' AND identifiant = "' . $identifiant . '"');
+    $req9 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
   }
 
   // METIER : Refus désinscription
   // RETOUR : Aucun
-  function resetDesinscription($id_user)
+  function resetDesinscription($post)
   {
+    $id_user = $post['id_user'];
+
     global $bdd;
 
     $status = "N";
 
-    $req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $id_user);
+    $req = $bdd->prepare('UPDATE users SET status = :status WHERE identifiant = "' . $id_user . '"');
     $req->execute(array(
       'status' => $status
     ));
@@ -1565,8 +1557,10 @@
 
   // METIER : Suppression succès
   // RETOUR : Aucun
-  function deleteSuccess($id_success)
+  function deleteSuccess($post)
   {
+    $id_success = $post['id_success'];
+
     global $bdd;
 
     // Suppression de l'image
@@ -3385,13 +3379,14 @@
   }
 
   // METIER : Modification phrases cultes
-  // RETOUR : Aucun
-  function updateTheme($post, $id_theme)
+  // RETOUR : Id thème
+  function updateTheme($post)
   {
     global $bdd;
 
     $control_ok = true;
 
+    $id_theme = $post['id_theme'];
     $theme    = $post['theme_title'];
     $type     = $post['theme_type'];
 
@@ -3490,12 +3485,16 @@
 
       $_SESSION['alerts']['theme_updated'] = true;
     }
+
+    return $id_theme;
   }
 
   // METIER : Suppression thème
   // RETOUR : Aucun
-  function deleteTheme($id_theme)
+  function deleteTheme($post)
   {
+    $id_theme = $post['id_theme'];
+
     global $bdd;
 
     // Suppression images

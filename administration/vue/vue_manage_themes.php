@@ -128,7 +128,8 @@
                     echo '<div id="modifier_theme_2_' . $theme_users->getId() . '">';
                       echo '<div class="zone_theme_titre">';
                         // Bouton suppression
-                        echo '<form id="delete_theme_' . $theme_users->getId() . '" method="post" action="manage_themes.php?delete_id=' . $theme_users->getId() . '&action=doSupprimer">';
+                        echo '<form id="delete_theme_' . $theme_users->getId() . '" method="post" action="manage_themes.php?action=doSupprimer">';
+                          echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
                           echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                           echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
                         echo '</form>';
@@ -153,7 +154,9 @@
                     /* Caché pour modification */
                     /***************************/
                     echo '<div id="modifier_theme_' . $theme_users->getId() . '" style="display: none;">';
-                      echo '<form method="post" action="manage_themes.php?update_id=' . $theme_users->getId() . '&action=doModifier">';
+                      echo '<form method="post" action="manage_themes.php?action=doModifier">';
+                        echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
+
                         echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
                           echo '<input type="hidden" name="theme_type" value="U" />';
 
@@ -282,7 +285,8 @@
                     echo '<div id="modifier_theme_2_' . $theme_mission->getId() . '">';
                       echo '<div class="zone_theme_titre">';
                         // Bouton suppression
-                        echo '<form id="delete_theme_' . $theme_mission->getId() . '" method="post" action="manage_themes.php?delete_id=' . $theme_mission->getId() . '&action=doSupprimer">';
+                        echo '<form id="delete_theme_' . $theme_mission->getId() . '" method="post" action="manage_themes.php?action=doSupprimer">';
+                          echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
                           echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                           echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
                         echo '</form>';
@@ -305,7 +309,9 @@
                     /* Caché pour modification */
                     /***************************/
                     echo '<div id="modifier_theme_' . $theme_mission->getId() . '" style="display: none;">';
-                      echo '<form method="post" action="manage_themes.php?update_id=' . $theme_mission->getId() . '&action=doModifier">';
+                      echo '<form method="post" action="manage_themes.php?action=doModifier">';
+                        echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
+
                         echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
                           echo '<input type="hidden" name="theme_type" value="M" />';
 
