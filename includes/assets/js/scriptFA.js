@@ -1018,13 +1018,11 @@ function showDetails(zone, id)
 
   if (participe == true)
   {
-    $('input[name=id_restaurant]').val(id);
     $('#reserver_details_proposition').css('display', 'block');
     $('#reserver_details_proposition').attr('action', 'foodadvisor.php?action=doReserver');
   }
   else
   {
-    $('input[name=id_restaurant]').val('');
     $('#reserver_details_proposition').css('display', 'none');
     $('#reserver_details_proposition').attr('action', '');
   }
@@ -1046,16 +1044,25 @@ function showDetails(zone, id)
 
   if (reserved == true)
   {
-    $('input[name=id_restaurant]').val(id);
     $('#annuler_details_proposition').css('display', 'block');
     $('#annuler_details_proposition').attr('action', 'foodadvisor.php?action=doAnnulerReserver');
   }
   else
   {
-    $('input[name=id_restaurant]').val('');
     $('#annuler_details_proposition').css('display', 'none');
     $('#annuler_details_proposition').attr('action', '');
   }
+
+  // Id restaurant
+  if (participe == true)
+    $('#reserver_details_proposition > input[name=id_restaurant]').val(id);
+  else
+    $('#reserver_details_proposition > input[name=id_restaurant]').val('');
+
+  if (reserved == true)
+    $('#annuler_details_proposition > input[name=id_restaurant]').val(id);
+  else
+    $('#annuler_details_proposition > input[name=id_restaurant]').val('');
 
   // On cache la zone si tout est vide
   if (participe == false && reserved == false && details['reserved'] != "Y")

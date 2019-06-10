@@ -1714,8 +1714,11 @@
 
   // METIER : Modification top Beginner
   // RETOUR : Aucun
-  function changeBeginner($identifiant, $topBeginner)
+  function changeBeginner($post)
   {
+    $identifiant = $post['user_infos'];
+    $topBeginner = $post['top_infos'];
+
     if ($topBeginner == 1)
       $value = 0;
     else
@@ -1726,8 +1729,11 @@
 
   // METIER : Modification top Developper
   // RETOUR : Aucun
-  function changeDevelopper($identifiant, $topDevelopper)
+  function changeDevelopper($post)
   {
+    $identifiant   = $post['user_infos'];
+    $topDevelopper = $post['top_infos'];
+
     if ($topDevelopper == 1)
       $value = 0;
     else

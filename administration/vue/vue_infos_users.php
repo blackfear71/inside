@@ -55,7 +55,10 @@
 
                 echo '<div class="zone_form_users">';
                   // Formulaire True Insider
-                  echo '<form method="post" action="infos_users.php?user=' . $user->getIdentifiant() . '&top=' . $user->getBeginner() . '&action=changeBeginnerStatus" class="form_infos_users">';
+                  echo '<form method="post" action="infos_users.php?action=changeBeginnerStatus" class="form_infos_users">';
+                    echo '<input type="hidden" name="user_infos" value="' . $user->getIdentifiant() . '" />';
+                    echo '<input type="hidden" name="top_infos" value="' . $user->getBeginner() . '" />';
+
                     if ($user->getBeginner() == "1")
                       echo '<input type="submit" value="True Insider" class="beginner" />';
                     else
@@ -63,7 +66,10 @@
                   echo '</form>';
 
                   // Formulaire Developpeur
-                  echo '<form method="post" action="infos_users.php?user=' . $user->getIdentifiant() . '&top=' . $user->getDevelopper() . '&action=changeDevelopperStatus" class="form_infos_users">';
+                  echo '<form method="post" action="infos_users.php?action=changeDevelopperStatus" class="form_infos_users">';
+                    echo '<input type="hidden" name="user_infos" value="' . $user->getIdentifiant() . '" />';
+                    echo '<input type="hidden" name="top_infos" value="' . $user->getDevelopper() . '" />';
+
                     if ($user->getDevelopper() == "1")
                       echo '<input type="submit" value="Développeur" class="developper" />';
                     else

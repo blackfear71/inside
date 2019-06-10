@@ -19,11 +19,11 @@
       break;
 
     case 'changeBeginnerStatus':
-      changeBeginner($_GET['user'], $_GET['top']);
+      changeBeginner($_POST);
       break;
 
     case 'changeDevelopperStatus':
-      changeDevelopper($_GET['user'], $_GET['top']);
+      changeDevelopper($_POST);
       break;
 
     default:
