@@ -19,12 +19,12 @@
 
     case 'doModifierAvatar':
       // Mise à jour des données par le modèle & enregistrement fichier
-      updateAvatar('admin', $_FILES);
+      updateAvatar($_SESSION['user']['identifiant'], $_FILES);
       break;
 
     case 'doSupprimerAvatar':
       // Suppression des données par le modèle & suppression fichier
-      deleteAvatar('admin');
+      deleteAvatar($_SESSION['user']['identifiant']);
       break;
 
     case 'doUpdateInfos':

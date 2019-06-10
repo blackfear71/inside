@@ -60,8 +60,10 @@
             // Actions
             echo '<div class="zone_report_actions">';
               // Résoudre, rejeter ou remettre en cours
-    					echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doChangerStatut" class="form_manage_bug">';
-    						if ($bug->getResolved() == "N")
+    					echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_bug">';
+    						echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
+
+                if ($bug->getResolved() == "N")
                 {
     							echo '<input type="submit" name="resolve_bug" value="Résoudre" class="saisie_bouton margin_button" />';
                   echo '<input type="submit" name="reject_bug" value="Rejeter" class="saisie_bouton margin_button" />';
@@ -71,7 +73,8 @@
     					echo '</form>';
 
               // Supprimer
-              echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $bug->getId() . '&action=doSupprimer" class="form_manage_bug">';
+              echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_manage_bug">';
+                echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
                 echo '<input type="submit" name="delete_bug" value="Supprimer" class="saisie_bouton margin_button eventConfirm" />';
                 echo '<input type="hidden" value="Supprimer ce rapport ?" class="eventMessage" />';
               echo '</form>';
@@ -145,7 +148,9 @@
             // Actions
             echo '<div class="zone_report_actions">';
               // Résoudre, rejeter ou remettre en cours
-              echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $evolution->getId() . '&action=doChangerStatut" class="form_manage_bug">';
+              echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_bug">';
+                echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
+
                 if ($evolution->getResolved() == "N")
                 {
                   echo '<input type="submit" name="resolve_bug" value="Résoudre" class="saisie_bouton margin_button" />';
@@ -156,7 +161,8 @@
               echo '</form>';
 
               // Supprimer
-              echo '<form id="delete_report_' . $evolution->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&id=' . $evolution->getId() . '&action=doSupprimer" class="form_manage_bug">';
+              echo '<form id="delete_report_' . $evolution->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_manage_bug">';
+                echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
                 echo '<input type="submit" name="delete_bug" value="Supprimer" class="saisie_bouton margin_button eventConfirm" />';
                 echo '<input type="hidden" value="Supprimer ce rapport ?" class="eventMessage" />';
               echo '</form>';

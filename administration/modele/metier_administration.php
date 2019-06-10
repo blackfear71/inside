@@ -418,14 +418,18 @@
 
   // METIER : Mise à jour du statut d'un bug
   // RETOUR : Top redirection
-  function updateBug($id, $post)
+  function updateBug($post)
   {
-    $resolved = "N";
+    $id_report = $post['id_report'];
+    $action    = $post;
+    $resolved  = "N";
+
+    unset($action['id_report']);
 
     global $bdd;
 
     // Lecture des données
-    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
+    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id_report);
     $data1 = $req1->fetch();
 
     $author = $data1['author'];
@@ -434,7 +438,7 @@
     $req1->closeCursor();
 
     // Mise à jour du statut
-    switch (key($post))
+    switch (key($action))
     {
       case 'resolve_bug':
         $resolved = "Y";
@@ -452,7 +456,7 @@
         break;
     }
 
-    $req2 = $bdd->prepare('UPDATE bugs SET resolved = :resolved WHERE id = ' . $id);
+    $req2 = $bdd->prepare('UPDATE bugs SET resolved = :resolved WHERE id = ' . $id_report);
     $req2->execute(array(
       'resolved' => $resolved
     ));
@@ -472,12 +476,14 @@
 
   // METIER : Suppression d'un bug
   // RETOUR : Aucun
-  function deleteBug($id)
+  function deleteBug($post)
   {
+    $id_report = $post['id_report'];
+
     global $bdd;
 
     // Lecture des données et suppression image si présente
-    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id);
+    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id_report);
     $data1 = $req1->fetch();
 
     $author   = $data1['author'];
@@ -489,7 +495,7 @@
     $req1->closeCursor();
 
     // Suppression de la table
-    $req2 = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id);
+    $req2 = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id_report);
 
     // Génération succès
     insertOrUpdateSuccesValue('debugger', $author, -1);
