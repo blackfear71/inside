@@ -26,7 +26,7 @@
       break;
 
     case "doAjouter":
-      $new_id = insertAlert($_POST);
+      $id_alerte = insertAlert($_POST);
       break;
 
 		case "doModifier":
@@ -69,8 +69,8 @@
   switch ($_GET['action'])
   {
     case "doAjouter":
-      if (!empty($new_id))
-        header('location: manage_alerts.php?action=goConsulter&anchorAlerts=' . $new_id);
+      if (!empty($id_alerte))
+        header('location: manage_alerts.php?action=goConsulter&anchorAlerts=' . $id_alerte);
       else
         header('location: manage_alerts.php?action=goConsulter');
       break;

@@ -40,7 +40,7 @@
 
     case 'doInserer':
       // Insertion des données par le modèle
-      $new_id = insertIdea($_POST, $_SESSION['user']['identifiant']);
+      $id_idea = insertIdea($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doChangerStatut':
@@ -94,7 +94,7 @@
       break;
 
     case 'doInserer':
-      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $new_id);
+      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $id_idea);
       break;
 
     case 'goConsulter':

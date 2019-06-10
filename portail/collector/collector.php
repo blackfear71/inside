@@ -52,10 +52,10 @@
       break;
 
     case "doAjouter":
-      $new_id = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $id_col = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
 
-      if (!empty($new_id))
-        $num_page = numPageCollector($new_id);
+      if (!empty($id_col))
+        $num_page = numPageCollector($id_col);
       break;
 
     case "doSupprimer":
@@ -131,8 +131,8 @@
   switch ($_GET['action'])
   {
     case "doAjouter":
-      if (!empty($new_id) AND !empty($num_page))
-        header('location: collector.php?action=goConsulter&page=' . $num_page . '&sort=dateDesc&filter=none&anchor=' . $new_id);
+      if (!empty($id_col) AND !empty($num_page))
+        header('location: collector.php?action=goConsulter&page=' . $num_page . '&sort=dateDesc&filter=none&anchor=' . $id_col);
       else
         header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;

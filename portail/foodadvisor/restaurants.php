@@ -41,7 +41,7 @@
       break;
 
     case 'doAjouter':
-      $new_id = insertRestaurant($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $id_restaurant = insertRestaurant($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doModifier':
@@ -108,8 +108,8 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if (!empty($new_id))
-        header('location: restaurants.php?action=goConsulter&anchor=' . $new_id);
+      if (!empty($id_restaurant))
+        header('location: restaurants.php?action=goConsulter&anchor=' . $id_restaurant);
       else
         header('location: restaurants.php?action=goConsulter');
       break;

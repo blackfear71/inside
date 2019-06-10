@@ -83,7 +83,7 @@
       break;
 
     case "doAjouter":
-      $new_id = insertFilm($_POST, $_SESSION['user']['identifiant']);
+      $id_film = insertFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case "doVoterFilm":
@@ -320,7 +320,7 @@
       OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter');
       else
-        header('location: details.php?id_film=' . $new_id . '&action=goConsulter');
+        header('location: details.php?id_film=' . $id_film . '&action=goConsulter');
       break;
 
     case "doVoterFilm":
