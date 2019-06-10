@@ -18,11 +18,11 @@
       break;
 
 		case "doDeleteFilm":
-			deleteFilm($_GET['delete_id']);
+			deleteFilm($_POST);
 			break;
 
 		case "doResetFilm":
-			resetFilm($_GET['delete_id']);
+			resetFilm($_POST);
 			break;
 
     default:

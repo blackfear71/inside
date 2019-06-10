@@ -30,11 +30,11 @@
       break;
 
 		case "doModifier":
-			updateAlert($_POST, $_GET['update_id']);
+			$id_alerte = updateAlert($_POST);
 			break;
 
     case "doSupprimer":
-      deleteAlert($_GET['delete_id']);
+      deleteAlert($_POST);
       break;
 
     default:
@@ -58,9 +58,9 @@
       unset($alerte);
       break;
 
-    case "doAjouterAlerte":
-    case "doModifierAlerte":
-		case "doSupprimerAlerte":
+    case "doAjouter":
+    case "doModifier":
+		case "doSupprimer":
     default:
       break;
   }
@@ -76,7 +76,7 @@
       break;
 
     case "doModifier":
-      header('location: manage_alerts.php?action=goConsulter&anchorAlerts=' . $_GET['update_id']);
+      header('location: manage_alerts.php?action=goConsulter&anchorAlerts=' . $id_alerte);
       break;
 
     case "doSupprimer":

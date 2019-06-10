@@ -174,8 +174,10 @@
 
   // METIER : Supprime un film de la base
   // RETOUR : Aucun
-  function deleteFilm($id_film)
+  function deleteFilm($post)
   {
+    $id_film = $post['id_film'];
+
     global $bdd;
 
     // Suppression des avis movie_house_users
@@ -198,8 +200,10 @@
 
   // METIER : Réinitialise un film de la base
   // RETOUR : Aucun
-  function resetFilm($id_film)
+  function resetFilm($post)
   {
+    $id_film = $post['id_film'];
+
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande et effacement identifiant suppression)
@@ -275,8 +279,10 @@
 
   // METIER : Supprime un calendrier de la base
   // RETOUR : Aucun
-  function deleteCalendrier($id_cal)
+  function deleteCalendrier($post)
   {
+    $id_cal = $post['id_cal'];
+
     global $bdd;
 
     // On efface le calendrier si présent
@@ -302,8 +308,10 @@
 
   // METIER : Supprime une annexe de la base
   // RETOUR : Aucun
-  function deleteAnnexe($id_annexe)
+  function deleteAnnexe($post)
   {
+    $id_annexe = $post['id_annexe'];
+
     global $bdd;
 
     // On efface l'annexe si présent
@@ -326,8 +334,10 @@
 
   // METIER : Réinitialise un calendrier de la base
   // RETOUR : Aucun
-  function resetCalendrier($id_cal)
+  function resetCalendrier($post)
   {
+    $id_cal = $post['id_cal'];
+
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande)
@@ -344,8 +354,10 @@
 
   // METIER : Réinitialise une annexe de la base
   // RETOUR : Aucun
-  function resetAnnexe($id_annexe)
+  function resetAnnexe($post)
   {
+    $id_annexe = $post['id_annexe'];
+
     global $bdd;
 
     // Mise à jour de la table (remise à N de l'indicateur de demande)
@@ -2830,12 +2842,13 @@
   }
 
   // METIER : Modification d'une mission existante
-  // RETOUR : Aucun
-  function updateMission($id, $post, $files)
+  // RETOUR : Id mission
+  function updateMission($post, $files)
   {
     global $bdd;
 
     // Récupération des données
+    $id_mission   = $post['id_mission'];
     $mission      = $post['mission'];
     $date_deb     = $post['date_deb'];
     $date_fin     = $post['date_fin'];
@@ -3002,7 +3015,7 @@
                                                  description  = :description,
                                                  explications = :explications,
                                                  conclusion   = :conclusion
-                                           WHERE id = ' . $id);
+                                           WHERE id = ' . $id_mission);
       $req2->execute(array(
         'mission'      => $mission,
         'date_deb'     => $date_deb,
@@ -3017,16 +3030,20 @@
 
       $_SESSION['alerts']['mission_updated'] = true;
     }
+
+    return $id_mission;
   }
 
   // METIER : Suppression d'une mission existante
   // RETOUR : Aucun
-  function deleteMission($id)
+  function deleteMission($post)
   {
+    $id_mission = $post['id_mission'];
+
     global $bdd;
 
     // Lecture référence mission
-    $reponse = $bdd->query('SELECT id, reference FROM missions WHERE id = ' . $id);
+    $reponse = $bdd->query('SELECT id, reference FROM missions WHERE id = ' . $id_mission);
     $donnees = $reponse->fetch();
     $reference = $donnees['reference'];
     $reponse->closeCursor();
@@ -3038,15 +3055,15 @@
     unlink ("../includes/images/missions/buttons/" . $reference . "_d.png");
 
     // Suppression de la mission en table
-    $reponse2 = $bdd->exec('DELETE FROM missions WHERE id = ' . $id);
+    $reponse2 = $bdd->exec('DELETE FROM missions WHERE id = ' . $id_mission);
 
     // Suppression des participations en table
-    $reponse3 = $bdd->exec('DELETE FROM missions_users WHERE id_mission = ' . $id);
+    $reponse3 = $bdd->exec('DELETE FROM missions_users WHERE id_mission = ' . $id_mission);
 
     // Suppression des notifications
-    deleteNotification('start_mission', $id);
-    deleteNotification('end_mission', $id);
-    deleteNotification('one_mission', $id);
+    deleteNotification('start_mission', $id_mission);
+    deleteNotification('end_mission', $id_mission);
+    deleteNotification('one_mission', $id_mission);
 
     $_SESSION['alerts']['mission_deleted'] = true;
   }
@@ -3613,9 +3630,10 @@
   }
 
   // METIER : Modification d'une alerte
-  // RETOUR : Aucun
+  // RETOUR : Id alerte
   function updateAlert($post, $id_alert)
   {
+    $id_alert  = $post['id_alert'];
     $type      = $post['type_alert'];
     $category  = $post['category_alert'];
     $reference = $post['reference_alert'];
@@ -3655,12 +3673,16 @@
 
       $_SESSION['alerts']['alert_updated'] = true;
     }
+
+    return $id_alert;
   }
 
   // METIER : Suppression d'une alerte
   // RETOUR : Aucun
-  function deleteAlert($id_alert)
+  function deleteAlert($post)
   {
+    $id_alert = $post['id_alert'];
+
     global $bdd;
 
     // Suppression de l'alerte de la base

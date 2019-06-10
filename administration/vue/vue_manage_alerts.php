@@ -127,7 +127,8 @@
                     echo '</span>';
 
                     // Suppression ligne
-                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?delete_id=' . $alerte->getId() . '&action=doSupprimer" class="link_action_alerte">';
+                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?action=doSupprimer" class="link_action_alerte">';
+                      echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
                       echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_alerte eventConfirm" />';
                       echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="eventMessage" />';
                     echo '</form>';
@@ -138,7 +139,9 @@
                 /* Ligne cachée pour modification */
                 /**********************************/
                 echo '<tr id="modifier_alerte_' . $alerte->getId() . '" style="display: none;">';
-                  echo '<form method="post" action="manage_alerts.php?update_id=' . $alerte->getId() . '&action=doModifier">';
+                  echo '<form method="post" action="manage_alerts.php?action=doModifier">';
+                    echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
+
                     // Type
                     echo '<td class="td_type_alerts">';
                       echo '<select name="type_alert" class="saisie_alert_typ" required>';

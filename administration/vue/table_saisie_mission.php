@@ -2,8 +2,11 @@
   if ($_GET['action'] == "goAjouter")
     echo '<form method="post" action="manage_missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission" style="width: 100%;">';
   else
-    echo '<form method="post" action="manage_missions.php?id_mission=' . $detailsMission->getId() . '&action=doModifier" enctype="multipart/form-data" class="form_saisie_mission">';
-
+  {
+    echo '<form method="post" action="manage_missions.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_mission">';
+      echo '<input type="hidden" name="id_mission" value="' . $detailsMission->getId() . '" />';
+  }
+  
     echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
     echo '<table class="table_mission">';

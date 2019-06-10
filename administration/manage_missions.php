@@ -74,11 +74,11 @@
       break;
 
     case 'doModifier':
-      updateMission($_GET['id_mission'], $_POST, $_FILES);
+      $id_mission = updateMission($_POST, $_FILES);
       break;
 
     case 'doSupprimer':
-      deleteMission($_GET['id_mission']);
+      deleteMission($_POST);
       break;
 
     default:
@@ -172,7 +172,7 @@
       break;
 
     case 'doModifier':
-      header('location: manage_missions.php?id_mission=' . $_GET['id_mission'] . '&action=goModifier');
+      header('location: manage_missions.php?id_mission=' . $id_mission . '&action=goModifier');
       break;
 
     case 'doSupprimer':

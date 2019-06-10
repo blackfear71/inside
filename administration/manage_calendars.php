@@ -25,19 +25,19 @@
       break;
 
 		case "doDeleteCalendrier":
-			deleteCalendrier($_GET['delete_id']);
+			deleteCalendrier($_POST);
 			break;
 
     case "doDeleteAnnexe":
-      deleteAnnexe($_GET['delete_id']);
+      deleteAnnexe($_POST);
       break;
 
 		case "doResetCalendrier":
-			resetCalendrier($_GET['delete_id']);
+			resetCalendrier($_POST);
 			break;
 
     case "doResetAnnexe":
-      resetAnnexe($_GET['delete_id']);
+      resetAnnexe($_POST);
       break;
 
     default:

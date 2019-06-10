@@ -36,7 +36,8 @@
           echo '<td class="td_manage_users">';
             if ($annexes->getTo_delete() == "Y")
             {
-    					echo '<form method="post" action="manage_calendars.php?delete_id=' . $annexes->getId() . '&action=doDeleteAnnexe">';
+    					echo '<form method="post" action="manage_calendars.php?action=doDeleteAnnexe">';
+								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
     						echo '<input type="submit" name="accepter_suppression_annexe" value="ACCEPTER" class="bouton_admin" />';
     					echo '</form>';
             }
@@ -45,7 +46,8 @@
           echo '<td class="td_manage_users">';
             if ($annexes->getTo_delete() == "Y")
             {
-    					echo '<form method="post" action="manage_calendars.php?delete_id=' . $annexes->getId() . '&action=doResetAnnexe">';
+    					echo '<form method="post" action="manage_calendars.php?action=doResetAnnexe">';
+								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
     						echo '<input type="submit" name="annuler_suppression_annexe" value="REFUSER" class="bouton_admin" />';
     					echo '</form>';
             }
@@ -58,7 +60,7 @@
 			echo '<tr>';
 				echo '<td colspan="3" class="td_manage_users" style="line-height: 100px;">Pas d\'annexes à supprimer !</td>';
 			echo '</tr>';
-		}    
+		}
 
 		// Bas du tableau
 		echo '<tr>';

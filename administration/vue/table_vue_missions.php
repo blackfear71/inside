@@ -24,7 +24,8 @@
 
             echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
 
-            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="manage_missions.php?id_mission=' . $ligneMission->getId() . '&action=doSupprimer" class="form_suppression_mission">';
+            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="manage_missions.php?action=doSupprimer" class="form_suppression_mission">';
+              echo '<input type="hidden" name="id_mission" value="' . $ligneMission->getId() . '" />';
               echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
               echo '<input type="hidden" value="Supprimer la mission &quot;' . $ligneMission->getMission() . '&quot; ?" class="eventMessage" />';
             echo '</form>';
@@ -46,7 +47,8 @@
 
             echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
 
-            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="manage_missions.php?id_mission=' . $ligneMission->getId() . '&action=doSupprimer" class="form_suppression_mission">';
+            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="manage_missions.php?action=doSupprimer" class="form_suppression_mission">';
+              echo '<input type="hidden" name="id_mission" value="' . $ligneMission->getId() . '" />';
               echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
               echo '<input type="hidden" value="Supprimer la mission &quot;' . $ligneMission->getMission() . '&quot; ?" class="eventMessage" />';
             echo '</form>';
@@ -68,7 +70,8 @@
 
             echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
 
-            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="manage_missions.php?id_mission=' . $ligneMission->getId() . '&action=doSupprimer" class="form_suppression_mission">';
+            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="manage_missions.php?action=doSupprimer" class="form_suppression_mission">';
+              echo '<input type="hidden" name="id_mission" value="' . $ligneMission->getId() . '" />';
               echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
               echo '<input type="hidden" value="Supprimer la mission &quot;' . $ligneMission->getMission() . '&quot; ?" class="eventMessage" />';
             echo '</form>';
