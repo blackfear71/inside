@@ -170,7 +170,7 @@
         // Téléphone, site web, plan et description
         echo '<div class="zone_saisie_under">';
           // Numéro
-          echo '<input type="text" name="phone_restaurant" value="' . $_SESSION['save']['phone_restaurant'] . '" maxlength="10" placeholder="Téléphone" class="saisie_telephone_restaurant" />';
+          echo '<input type="text" name="phone_restaurant" value="' . $_SESSION['save']['phone_restaurant'] . '" maxlength="15" placeholder="Téléphone" class="saisie_telephone_restaurant" />';
 
           // Site web
           echo '<input type="text" name="website_restaurant" value="' . $_SESSION['save']['website_restaurant'] . '" placeholder="Site web" class="saisie_lien_restaurant" />';

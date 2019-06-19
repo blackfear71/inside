@@ -40,11 +40,14 @@
 
     // Récupération des données et sauvegarde en session
     $nom_restaurant         = $post['name_restaurant'];
-    $telephone_restaurant   = $post['phone_restaurant'];
     $website_restaurant     = $post['website_restaurant'];
     $plan_restaurant        = $post['plan_restaurant'];
     $description_restaurant = $post['description_restaurant'];
     $ouverture_restaurant   = $post['ouverture_restaurant'];
+
+    $search                 = array(" ", ".");
+    $replace                = array("", "");
+    $telephone_restaurant   = str_replace($search, $replace, $post['phone_restaurant']);
 
     $prix_min_test          = str_replace(',', '.', $post['prix_min_restaurant']);
     $prix_max_test          = str_replace(',', '.', $post['prix_max_restaurant']);
@@ -315,11 +318,14 @@
     // Récupération des données
     $id_restaurant          = $post['id_restaurant'];
     $nom_restaurant         = $post['update_name_restaurant_' . $id_restaurant];
-    $telephone_restaurant   = $post['update_phone_restaurant_' . $id_restaurant];
     $website_restaurant     = $post['update_website_restaurant_' . $id_restaurant];
     $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
     $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
     $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
+
+    $search                 = array(" ", ".");
+    $replace                = array("", "");
+    $telephone_restaurant   = str_replace($search, $replace, $post['update_phone_restaurant_' . $id_restaurant]);
 
     $prix_min_test          = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
     $prix_max_test          = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);

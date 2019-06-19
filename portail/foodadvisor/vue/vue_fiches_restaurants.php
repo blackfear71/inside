@@ -270,7 +270,7 @@
 
                 // Téléphone
                 echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" title="Téléphone" class="update_icone_fiche" />';
-                echo '<input type="text" name="update_phone_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPhone() . '" maxlength="10" placeholder="Téléphone du restaurant" class="update_lien_restaurant" />';
+                echo '<input type="text" name="update_phone_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPhone() . '" maxlength="15" placeholder="Téléphone du restaurant" class="update_lien_restaurant" />';
               echo '</div>';
 
               // Description
