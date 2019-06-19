@@ -768,6 +768,7 @@
 	padding-top: 3px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+	word-break: break-word;
 }
 
 .bouton_solo
@@ -815,6 +816,7 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 60%;
 	color: #262626;
+	word-break: break-word;
 }
 
 .lien_details_determined
