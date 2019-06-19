@@ -36,15 +36,15 @@
         foreach ($propositions as $proposition)
         {
           if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
-            echo '<div class="zone_proposition_determined" id="zone_first">';
+            echo '<div class="zone_proposition_determined">';
           elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
             echo '<div class="zone_proposition_determined">';
           elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
-            echo '<div class="zone_proposition_top" id="zone_first">';
+            echo '<div class="zone_proposition_top">';
           elseif ($proposition->getClassement() == 1 AND $proposition != $propositions[0])
             echo '<div class="zone_proposition_top">';
           elseif ($proposition == $propositions[0])
-            echo '<div class="zone_proposition" id="zone_first">';
+            echo '<div class="zone_proposition">';
           else
             echo '<div class="zone_proposition">';
 
