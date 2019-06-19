@@ -442,7 +442,8 @@
  				// echo "Le fichier a bien été uploadé";
 
         // Rotation de l'image
-        $rotate = rotateImage($image_dir . $new_name, $type_image);
+        if ($type_image == 'jpg' OR $type_image == 'jpeg')
+          $rotate = rotateImage($image_dir . $new_name, $type_image);
  			}
  		}
 

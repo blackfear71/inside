@@ -233,8 +233,11 @@
           if (!move_uploaded_file($tmp_file, $restaurant_dir . $new_name))
             exit("Impossible de copier le fichier dans $restaurant_dir");
 
-          // Rotation de l'image
-          $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
+          // Rotation de l'image (si JPEG)
+          var_dump($type_image);
+
+          if ($type_image == 'jpg' OR $type_image == 'jpeg')
+            $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
           imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
@@ -501,7 +504,8 @@
             exit("Impossible de copier le fichier dans $restaurant_dir");
 
           // Rotation de l'image
-          $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
+          if ($type_image == 'jpg' OR $type_image == 'jpeg')
+            $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
           imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
