@@ -322,7 +322,7 @@ $(window).on('load', function()
 
     $('.zone_propositions').masonry({
       // Options
-      itemSelector: '.zone_proposition, #zone_solo_no_votes, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
+      itemSelector: '.zone_proposition, .zone_proposition_determined, .zone_proposition_top, .zone_proposition_resume',
       columnWidth: 200,
       fitWidth: true,
       gutter: 30,

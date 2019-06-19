@@ -67,6 +67,9 @@
           /* Propositions, choix et résumé de la semaine */
           /***********************************************/
           echo '<div class="zone_propositions_determination">';
+            // Utilisateurs
+            include('vue/vue_utilisateurs.php');
+
             // Propositions
             include('vue/vue_propositions.php');
 

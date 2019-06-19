@@ -234,8 +234,6 @@
             exit("Impossible de copier le fichier dans $restaurant_dir");
 
           // Rotation de l'image (si JPEG)
-          var_dump($type_image);
-
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
             $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
 
