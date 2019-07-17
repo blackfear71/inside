@@ -1818,6 +1818,8 @@
 .zone_liens_lieux
 {
 	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .lien_lieu
@@ -1828,7 +1830,7 @@
 	background-color: #262626;
 	padding: 5px;
 	border-radius: 2px;
-	margin: 15px 5px 10px 5px;
+	margin: 5px;
 	cursor: pointer;
 }
 
