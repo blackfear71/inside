@@ -113,7 +113,7 @@
                 // Choix rapide
                 if ($choixRapide == true)
                 {
-                  echo '<form id="fast_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doChoixRapide">';
+                  echo '<form method="post" action="restaurants.php?action=doChoixRapide">';
                     echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
                     echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_restaurant" />';
                   echo '</form>';
