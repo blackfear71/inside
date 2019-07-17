@@ -2025,45 +2025,54 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	cursor: pointer;
+	border-radius: 50%;
+	background-color: #c3c3c3;
+	text-align: center;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icone_modify_restaurant
 {
-	width: 30px;
+	width: 28px;
+	margin-top: 3.5px;
 }
 
 .icon_delete_restaurant
 {
-	margin-left: 10px;
+	margin-left: 8px;
 	margin-top: 10px;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: 0;
+	border-radius: 50%;
   background-image: url("/inside/includes/icons/common/delete.png");
   background-size: 25px 25px;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
+  background-color: #c3c3c3;
   cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icon_fast_restaurant
 {
-	margin-left: 10px;
+	margin-left: 8px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	border: 0;
+	border-radius: 50%;
 	background-image: url("/inside/includes/icons/common/food_advisor.png");
 	background-size: 25px 25px;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-color: transparent;
+	background-color: #c3c3c3;
 	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_fiche_bottom
@@ -2212,35 +2221,37 @@
 .icon_validate_restaurant
 {
 	float: right;
-	margin-right: 10px;
-	margin-left: 10px;
+	margin-right: 8px;
 	margin-top: 10px;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: 0;
+	border-radius: 50%;
   background-image: url("/inside/includes/icons/common/validate.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
+  background-color: #c3c3c3;
   cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icone_cancel_restaurant
 {
 	float: right;
-	margin-right: -40px;
-	margin-left: 10px;
-	margin-top: 45px;
-  width: 30px;
-  height: 30px;
+	margin-right: -35px;
+	margin-top: 55px;
+  width: 35px;
+  height: 35px;
   border: 0;
+	border-radius: 50%;
   background-image: url("/inside/includes/icons/common/cancel.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
+	background-color: #c3c3c3;
   cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .update_nom_restaurant
