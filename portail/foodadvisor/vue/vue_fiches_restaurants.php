@@ -143,7 +143,7 @@
           /* Caché pour modification */
           /***************************/
           echo '<div class="fiche_restaurant" id="modifier_restaurant_' . $restaurant->getId() . '" style="display: none; position: relative; z-index: 2;">';
-            echo '<form method="post" action="restaurants.php?action=doModifier" enctype="multipart/form-data">';
+            echo '<form method="post" action="restaurants.php?action=doModifier" enctype="multipart/form-data" class="zone_shadow">';
               echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
 
               // Image
