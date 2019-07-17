@@ -153,7 +153,7 @@
 
     $id_film = $post['id_film'];
 
-    if(isset($post['participate']))
+    if (isset($post['participate']))
     {
       // Lecture de l'état de la participation
       $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
@@ -184,7 +184,7 @@
       if ($id_film == 16)
         insertOrUpdateSuccesValue('padawan', $user, 0);
     }
-    elseif(isset($post['seen']))
+    elseif (isset($post['seen']))
     {
       // Lecture de l'état de la vue
       $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');

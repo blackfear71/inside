@@ -38,6 +38,7 @@
       $listeLieux       = getLieux();
       $listeTypes       = getTypesRestaurants();
       $listeRestaurants = getRestaurants($listeLieux);
+      $choixRapide      = getFastActions($_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouter':
@@ -50,6 +51,11 @@
 
     case 'doSupprimer':
       deleteRestaurant($_POST);
+      break;
+
+    case 'doChoixRapide':
+      $isSolo        = getSolo($_SESSION['user']['identifiant']);
+      $id_restaurant = insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -100,6 +106,7 @@
     case 'doAjouter':
     case 'doModifier':
     case 'doSupprimer':
+    case 'doChoixRapide':
     default:
       break;
   }
@@ -120,6 +127,10 @@
 
     case 'doSupprimer':
       header('location: restaurants.php?action=goConsulter');
+      break;
+
+    case 'doChoixRapide':
+      header('location: restaurants.php?action=goConsulter&anchor=' . $id_restaurant);
       break;
 
     case 'goConsulter':

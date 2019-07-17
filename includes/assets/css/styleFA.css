@@ -2050,6 +2050,22 @@
   cursor: pointer;
 }
 
+.icon_fast_restaurant
+{
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/food_advisor.png");
+	background-size: 25px 25px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
+}
+
 .zone_fiche_bottom
 {
 	display: block;

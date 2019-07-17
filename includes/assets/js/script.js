@@ -74,7 +74,7 @@ $(function()
     var id_form = $(this).closest('form').attr('id');
     var message = $(this).closest('form').find('.eventMessage').val();
 
-    if(!confirmAction(id_form, message))
+    if (!confirmAction(id_form, message))
       return false;
   });
 

@@ -109,6 +109,15 @@
                   echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer le restaurant" class="icon_delete_restaurant eventConfirm" />';
                   echo '<input type="hidden" value="Supprimer ce restaurant de la liste ?" class="eventMessage" />';
                 echo '</form>';
+
+                // Choix rapide
+                if ($choixRapide == true)
+                {
+                  echo '<form id="fast_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doChoixRapide">';
+                    echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
+                    echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_restaurant" />';
+                  echo '</form>';
+                }
               echo '</div>';
 
               // Description

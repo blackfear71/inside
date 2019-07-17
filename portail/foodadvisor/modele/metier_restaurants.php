@@ -31,6 +31,119 @@
     return $listTypes;
   }
 
+  // METIER : Détermine la présence des boutons d'action (choix rapide)
+  // RETOUR : Booléen
+  function getFastActions($user)
+  {
+    $choixRapide = true;
+    $solo        = false;
+
+    // Contrôle date et heure
+    if (date("N") > 5 OR date("H") >= 13)
+      $choixRapide = false;
+
+    // Contrôle bande à part
+    $solo = getSolo($user);
+
+    if ($solo == true)
+      $choixRapide = false;
+
+    return $choixRapide;
+  }
+
+  // METIER : Insère un choix rapide
+  // RETOUR : Id restaurant
+  function insertFastChoice($post, $isSolo, $user)
+  {
+    global $bdd;
+
+    $control_ok    = true;
+    $id_restaurant = $post['id_restaurant'];
+
+    // Contrôle saisie possible en fonction des dates
+    if (date("N") > 5)
+    {
+      $control_ok                            = false;
+      $_SESSION['alerts']['week_end_saisie'] = true;
+    }
+
+    // Contrôle saisie possible en fonction de l'heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                         = false;
+        $_SESSION['alerts']['heure_saisie'] = true;
+      }
+    }
+
+    // Contrôle bande à part
+    if ($control_ok == true)
+    {
+      if ($isSolo == true)
+      {
+        $control_ok                        = false;
+        $_SESSION['alerts']['solo_saisie'] = true;
+      }
+    }
+
+    // Contrôle choix déjà existant
+    if ($control_ok == true)
+    {
+      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = "' . $id_restaurant . '" AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
+      $data1 = $req1->fetch();
+
+      if ($req1->rowCount() > 0)
+      {
+        $control_ok                                 = false;
+        $_SESSION['alerts']['wrong_fast'] = true;
+      }
+
+      $req1->closeCursor();
+    }
+
+    // Récupération des données et insertion en base
+    if ($control_ok == true)
+    {
+      $date       = date("Ymd");
+      $time       = "";
+      $transports = "";
+      $menu       = ";;;";
+
+      // Tableau du choix
+      $choice = array('id_restaurant' => $id_restaurant,
+                      'identifiant'   => $user,
+                      'date'          => $date,
+                      'time'          => $time,
+                      'transports'    => $transports,
+                      'menu'          => $menu
+                    );
+
+      // On insère dans la table
+      $req2 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
+                                                            identifiant,
+                                                            date,
+                                                            time,
+                                                            transports,
+                                                            menu
+                                                          )
+                                                    VALUES(:id_restaurant,
+                                                           :identifiant,
+                                                           :date,
+                                                           :time,
+                                                           :transports,
+                                                           :menu
+                                                          )');
+      $req2->execute($choice);
+      $req2->closeCursor();
+
+      // Relance de la détermination si besoin
+      relanceDetermination();
+    }
+
+    return $id_restaurant;
+  }
+
   // METIER : Insère un nouveau restaurant
   // RETOUR : Id enregistrement créé
   function insertRestaurant($post, $files, $user)
