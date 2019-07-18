@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- <div class="PP-bloc"> -->
+            <div class="col-md-2">
+                <p>
+                    <input size="14" placeholder="Rechercher" ng-model="$ctrl.query"/>
+                </p>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <select ng-model="$ctrl.orderProp">
+                        <option value="" disabled="disabled">Trier par...</option>
+                        <option value="nom">Nom</option>
+                        <option value="distance">Distance</option>
+                        <option value="lieu">Lieu</option>
+                    </select>
+                </p>
+            <!-- </div> -->
+        </div>
+    </div>
+    <!-- <div class="col-md-10"> -->
+    <div class="row"></div>
+            <table class="PP-table">
+                <tr>
+                    <td class="PP-table-titre">Nom du parcours</td>
+                    <td class="PP-table-titre">Distance</td>
+                    <td class="PP-table-titre">Lieu</td>
+                </tr>
+                <tr class="PP-tr" ng-repeat="parcours in $ctrl.listeParcours | filter:$ctrl.query | orderBy:$ctrl.orderProp"> <!--    -->
+                    <td class="PP-table-ligne">
+                        <div>
+                            <a href="parcours.php?id={{parcours.id}}&action=consulter">{{ parcours.nom }}</a>
+                        </div>
+                    </td>
+                    <td class="PP-table-ligne">
+                        <div>{{ parcours.distance }} km</div>
+                    </td>
+                    <td class="PP-table-ligne">
+                        <div>{{ parcours.lieu }}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
