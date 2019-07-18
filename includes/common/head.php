@@ -35,6 +35,9 @@
   if (isset($datepicker_head) AND $datepicker_head == true)
     echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $last_modification_css_datepicker . '">';
 
+  if (isset($bootstrap) AND $bootstrap == true)
+    echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">'; 
+
   // Title
   if (!empty($title_head))
     echo '<title>Inside - ' . $title_head . '</title>';
@@ -48,6 +51,12 @@
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
+<?php if (isset($angular) AND $angular == true) { ?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-resource.min.js"></script>
+<?php } ?>
+
 <?php if (!empty($script_head)) { ?>
   <script src="/inside/includes/assets/js/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
 <?php } ?>
@@ -67,3 +76,4 @@
 <?php if (isset($datepicker_head) AND $datepicker_head == true) { ?>
   <script src="/inside/includes/libraries/js/datepicker.js"></script>
 <?php } ?>
+

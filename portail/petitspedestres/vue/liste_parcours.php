@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" ng-app="parcoursApp">
   <head>
     <!-- Head commun & spécifique-->
     <?php
       $title_head  = "PP";
       $style_head  = "stylePP.css";
-      $script_head = "";
+      $script_head = "scriptPP.js";
       $chat_head   = true;
+      $angular = true;
+      $bootstrap = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -39,57 +41,20 @@
 			?>
 
       <article>
+        
         <?php
           // Boutons missions
           $zone_inside = "article";
           include('../../includes/common/missions.php');
-
-					// Tableau des parcours
-        	echo '<table class="PP-table">';
-          	echo '<tr>';
-              echo '<td class="PP-table-titre">Nom du parcours</td>';
-              echo '<td class="PP-table-titre">Distance</td>';
-              echo '<td class="PP-table-titre">Lieu</td>';
-            echo '</tr>';
-
-            $i = 0;
-
-            foreach ($parcours as $prcr)
-            {
-              if ($i % 2 == 0)
-                echo '<tr>';
-              else
-                echo '<tr class="PP-tr">';
-                  echo '<td class="PP-table-ligne">';
-                    echo '<div>';
-                      echo '<a href="parcours.php?id=' . $prcr->getId() . '&action=consulter">'. $prcr->getNom() . '</a>';
-                    echo '</div>';
-                  echo '</td>';
-
-  								/*
-  								Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
-  								Réponse : Parcours.
-  								C'est nul ? Oui, c'est nul.
-  								*/
-
-                  echo '<td class="PP-table-ligne">';
-                    echo '<div>';
-                      echo $prcr->getDistance() . ' km';
-                    echo '</div>';
-                  echo '</td>';
-
-                  echo '<td class="PP-table-ligne">';
-                    echo '<div>';
-                      echo $prcr->getLieu();
-                    echo '</div>';
-                  echo '</td>';
-              echo '</tr>';
-
-              $i++;
-            }
-
-          echo '</table>';
         ?>
+
+        
+        <parcours-list></parcours-list>
+
+  				<!-- Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
+  				     Réponse : Parcours.
+  				     C'est nul ? Oui, c'est nul. -->
+        
     	</article>
 
       <?php include('../../includes/chat/chat.php'); ?>
@@ -99,5 +64,9 @@
 		<footer>
 			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
+
+    <script>
+      var listeParcoursJson = <?php echo $parcoursJson; ?>;
+    </script>
   </body>
 </html>

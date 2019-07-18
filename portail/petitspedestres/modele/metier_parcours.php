@@ -112,4 +112,32 @@
     }
 
   }
+
+  // METIER : Conversion du tableau d'objets des parcours en tableau simple pour JSON
+  // RETOUR : Tableau des parcours
+  function convertForJson($listeParcours)
+  {
+    // On transforme les objets en tableau pour y envoyer au Javascript
+    $listeParcoursAConvertir = array();
+
+    foreach ($listeParcours as $parcours)
+    {
+      /* Structure de l'objet parcours
+          private $id;
+          private $nom;
+          private $distance;
+          private $lieu;
+          (url image mais on n'en a pas besoin là)
+      */
+      $myParcours = array('id'      => $parcours->getId(),
+                          'nom'     => $parcours->getNom(),
+                          'distance'=> $parcours->getDistance(),
+                          'lieu'    => $parcours->getLieu()
+                         );
+
+      array_push($listeParcoursAConvertir, $myParcours);
+    }
+
+    return $listeParcoursAConvertir;
+  }
 ?>

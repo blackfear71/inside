@@ -34,6 +34,7 @@
     case 'liste':
       // Récupération de tous les parcours. Attention, $parcours est un tableau d'objets Parcours
       $parcours = listParcours();
+      $parcoursJson = json_encode(convertForJson($parcours));
       $lectureListe = true;
       break;
 
