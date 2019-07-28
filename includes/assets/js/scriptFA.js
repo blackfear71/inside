@@ -1057,6 +1057,21 @@ function showDetails(zone, id)
   var ligne;
   var transports;
 
+  // Bouton choix rapide
+  if (participe == true)
+  {
+    $('#choix_rapide_details_proposition').css('display', 'none');
+    $('#choix_rapide_details_proposition').attr('action', '');
+    $('#choix_rapide_details_proposition > input[name=id_restaurant]').val('');
+  }
+  else
+  {
+    $('#choix_rapide_details_proposition').css('display', 'inline-block');
+    $('#choix_rapide_details_proposition').attr('action', 'foodadvisor.php?action=doChoixRapide');
+    $('#choix_rapide_details_proposition > input[name=id_restaurant]').val(id);
+  }
+
+  // Participants
   $.each(details['details'], function()
   {
     ligne      = '';
@@ -1123,6 +1138,7 @@ function showDetails(zone, id)
   var colonne;
   var menu;
 
+  // Menus
   $.each(details['details'], function()
   {
     colonne = '';

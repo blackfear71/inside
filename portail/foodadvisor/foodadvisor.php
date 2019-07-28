@@ -77,6 +77,11 @@
       deleteChoice($_POST, $_SESSION['user']['identifiant']);
       break;
 
+    case 'doChoixRapide':
+      $isSolo        = getSolo($_SESSION['user']['identifiant']);
+      insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: foodadvisor.php?action=goConsulter');
@@ -220,8 +225,9 @@
     case "doReserver":
     case 'doAnnulerReserver':
     case 'doAjouter':
-    case "doModifier":
+    case 'doModifier':
     case 'doSupprimer':
+    case 'doChoixRapide':
     default:
       break;
   }
@@ -235,8 +241,9 @@
     case "doReserver":
     case 'doAnnulerReserver':
     case 'doAjouter':
-    case "doModifier":
+    case 'doModifier':
     case 'doSupprimer':
+    case 'doChoixRapide':
       header('location: foodadvisor.php?action=goConsulter');
       break;
 

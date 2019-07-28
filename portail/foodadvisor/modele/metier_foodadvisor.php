@@ -73,7 +73,8 @@
                      "solo"             => true,
                      "choix"            => true,
                      "reserver"         => true,
-                     "annuler_reserver" => false
+                     "annuler_reserver" => false,
+                     "choix_rapide"     => true
                     );
 
     // Contrôle date et heure
@@ -84,6 +85,7 @@
       $actions["choix"]            = false;
       $actions["reserver"]         = false;
       $actions["annuler_reserver"] = false;
+      $actions["choix_rapide"]     = false;
     }
 
     // Contrôle propositions présentes (pour bouton détermination)
@@ -104,7 +106,10 @@
     if ($actions["solo"] == true)
     {
       if ($isSolo == true)
-        $actions["solo"] = false;
+      {
+        $actions["solo"]         = false;
+        $actions["choix_rapide"] = false;
+      }
     }
 
     // Contrôle réservation effectuée
