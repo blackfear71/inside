@@ -8,7 +8,6 @@
       $script_head = "scriptPP.js";
       $chat_head   = true;
       $angular = true;
-      //$bootstrap = true;
 
       include('../../includes/common/head.php');
     ?>

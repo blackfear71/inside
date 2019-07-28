@@ -35,9 +35,6 @@
   if (isset($datepicker_head) AND $datepicker_head == true)
     echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $last_modification_css_datepicker . '">';
 
-  /*if (isset($bootstrap) AND $bootstrap == true)
-    echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">';*/
-
   // Title
   if (!empty($title_head))
     echo '<title>Inside - ' . $title_head . '</title>';
