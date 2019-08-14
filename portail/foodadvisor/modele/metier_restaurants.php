@@ -603,8 +603,14 @@
 
     $req1->closeCursor();
 
+    // Suppression choix utilisateurs
+    $req2 = $bdd->exec('DELETE FROM food_advisor_users WHERE id_restaurant = ' . $id_restaurant);
+
+    // Suppression détermination
+    $req3 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant);
+
     // Suppression enregistrement en base
-    $req2 = $bdd->exec('DELETE FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
+    $req4 = $bdd->exec('DELETE FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
 
     // Message alerte
     $_SESSION['alerts']['restaurant_deleted'] = true;
