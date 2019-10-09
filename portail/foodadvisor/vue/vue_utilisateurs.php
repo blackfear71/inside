@@ -24,7 +24,10 @@
                 echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $solo->getPseudo() . '" class="avatar_solo" />';
 
               // Pseudo
-              echo '<div class="pseudo_solo">' . $solo->getPseudo() . '</div>';
+              if (strlen($solo->getPseudo()) > 15)
+                echo '<div class="pseudo_solo">' . substr($solo->getPseudo(), 0, 15) . '...</div>';
+              else
+                echo '<div class="pseudo_solo">' . $solo->getPseudo() . '</div>';
             echo '</div>';
           }
         echo '</div>';
@@ -49,7 +52,10 @@
                 echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $userNoChoice->getPseudo() . '" class="avatar_no_vote" />';
 
               // Pseudo
-              echo '<div class="pseudo_no_vote">' . $userNoChoice->getPseudo() . '</div>';
+              if (strlen($userNoChoice->getPseudo()) > 15)
+                echo '<div class="pseudo_no_vote">' . substr($userNoChoice->getPseudo(), 0, 15) . '...</div>';
+              else
+                echo '<div class="pseudo_no_vote">' . $userNoChoice->getPseudo() . '</div>';
             echo '</div>';
           }
         echo '</div>';
