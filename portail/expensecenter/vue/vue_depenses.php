@@ -57,7 +57,7 @@
             // Partie inférieure
             echo '<div class="zone_depense_bottom">';
               // Commentaire
-              echo '<div class="commentaire_depense">' . $depense->getComment() . '</div>';
+              echo '<div class="commentaire_depense">' . nl2br($depense->getComment()) . '</div>';
 
               // Modifier
               echo '<a id="modifier_' . $depense->getId() . '" title="Modifier" class="lien_depense modifierDepense"><img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_depense" /></a>';
