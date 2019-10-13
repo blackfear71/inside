@@ -181,11 +181,9 @@ $(function()
   $(document).on('click', '.afficherResume', function()
   {
     var id_bouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('choix_resume_', '');
-    var id_listbox = 'zone_choix_resume_' + num;
 
     afficherMasquerNoDelay(id_bouton);
-    afficherListboxLieuxResume(id_listbox);
+    afficherListboxLieuxResume(id_bouton);
   });
 
   // Affiche la saisie restaurant liée au lieu (résumé)
@@ -425,20 +423,31 @@ function initMasonry()
 function tailleAutoZones()
 {
   // Taille des zones de résumé en fonction de la plus grande
+  var button_height;
   var day_height     = $('.jour_semaine').height();
   var text_height    = $('.no_proposal').height();
   var max_height     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
-  var calcul_padding = (max_height - (day_height + text_height + 10)) / 2;
+  var calcul_padding = (max_height - (day_height + text_height + 20)) / 2;
+  var calcul_padding_no_proposal;
 
-  /*// Cas si ajout choix résumé présent
+  // Cas si ajout choix résumé présent
   for (var i = 1; i <= 5; i++)
   {
-    if ($('#zone_choix_resume_' + i).length)
-      calcul_padding = calcul_padding - (($('#zone_choix_resume_' + i).height() - 11) / 2);
-  }*/
+    if ($('#choix_resume_' + i).length)
+    {
+      button_height              = $('#choix_resume_' + i).height();
+      calcul_padding_no_proposal = calcul_padding - ((button_height + 20) / 2);
 
-  $('.no_proposal').css('padding-top', calcul_padding);
-  $('.no_proposal').css('padding-bottom', calcul_padding);
+      $('#no_proposal_' + i).css('padding-top', calcul_padding_no_proposal);
+      $('#no_proposal_' + i).css('padding-bottom', calcul_padding_no_proposal);
+    }
+    else
+    {
+      $('#no_proposal_' + i).css('padding-top', calcul_padding);
+      $('#no_proposal_' + i).css('padding-bottom', calcul_padding);
+    }
+  }
+
   $('.zone_proposition_resume').css('min-height', max_height);
 }
 
@@ -738,7 +747,11 @@ function afficherListboxLieuxResume(id)
   var id_select  = 'select_lieu_resume_' + num;
   var id_annuler = 'annuler_restaurant_resume_' + num;
   var id_replace = 'no_proposal_' + num;
+  var id_bouton  = 'choix_resume_' + num;
+
   var html;
+
+  var previous_height = $('#' + id_replace).outerHeight() + $('#' + id_bouton).height() + 20;
 
   html = '<div id="' + id_zone + '" class="zone_listbox_restaurant_resume">';
     html += '<select id="' + id_select + '" name="select_lieu_resume_' + num + '" class="listbox_choix_resume afficherRestaurantResume" required>';
@@ -748,15 +761,18 @@ function afficherListboxLieuxResume(id)
         html += '<option value="' + value + '">' + value + '</option>';
       });
     html += '</select>';
-  html += '</div>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
+    html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
+  html += '</div>';
 
   $("#" + id_replace).html(html);
 
-  $("#" + id_replace).css('padding-top', '10px');
-  $("#" + id_replace).css('padding-bottom', '0px');
-  $("#" + id_replace).css('margin-bottom', '-10px');
+  // Calcul marges en fonction des éléments
+  var actions_height = $('#' + id_zone).height();
+  var new_padding    = (previous_height - actions_height) / 2;
+
+  $('#' + id_replace).css('padding-top', new_padding);
+  $('#' + id_replace).css('padding-bottom', new_padding);
 }
 
 // Affiche la listbox des restaurants associés (résumé)
@@ -768,10 +784,16 @@ function afficherListboxRestaurantsResume(id, zone)
   var id_replace  = 'no_proposal_' + num;
   var id_valider  = 'valider_restaurant_resume_' + num;
   var id_annuler  = 'annuler_restaurant_resume_' + num;
+
   var html;
+
+  var previous_height = $('#' + id_replace).outerHeight();
 
   if ($('#' + id_valider).length)
     $('#' + id_valider).remove();
+
+  if ($('#' + id_annuler).length)
+    $('#' + id_annuler).remove();
 
   html = '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
     html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
@@ -786,24 +808,37 @@ function afficherListboxRestaurantsResume(id, zone)
     html += '<input type="submit" name="submit_resume" value="Valider" class="bouton_valider_resume" style="margin-bottom: 10px;" />';
   html += '</form>';
 
+  html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
+
   $("#" + zone).append(html);
 
-  $("#" + id_replace).css('padding-top', '10px');
-  $("#" + id_replace).css('padding-bottom', '0px');
-  $("#" + id_replace).css('margin-bottom', '-10px');
+  // Calcul marges en fonction des éléments
+  var actions_height = $('#' + zone).height();
+  var new_padding    = (previous_height - actions_height) / 2;
+
+  $('#' + id_replace).css('padding-top', new_padding);
+  $('#' + id_replace).css('padding-bottom', new_padding);
 }
 
 // Cache les lisbox des restaurants (résumé)
 function cacherListboxRestaurantsResume(zone, bouton_valider, bouton_annuler)
 {
   var num = zone.substr(-1);
+  var previous_height  = $('#no_proposal_' + num).outerHeight();
 
   $('#' + zone).remove();
   $('#' + bouton_valider).remove();
   $('#' + bouton_annuler).remove();
-  $("#no_proposal_" + num).html("Pas de proposition pour ce jour");
+  $('#no_proposal_' + num).html("Pas de proposition pour ce jour");
 
   $('#choix_resume_' + num).css('display', 'block');
+
+  // Calcul marges en fonction des éléments
+  var text_height = $('#no_proposal_' + num).height() + $('#choix_resume_' + num).height() + 20;
+  var new_padding = (previous_height - text_height) / 2;
+
+  $('#no_proposal_' + num).css('padding-top', new_padding);
+  $('#no_proposal_' + num).css('padding-bottom', new_padding);
 }
 
 // Insère une prévisualisation de l'image sur la page

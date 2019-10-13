@@ -1380,23 +1380,17 @@
 {
 	padding-top: 50px;
 	padding-bottom: 50px;
+	margin-bottom: 10px;
 	text-align: center;
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
-}
-
-.zone_choix_resume
-{
-	display: inline-block;
-	width: 100%;
-	margin-bottom: 10px;
-	vertical-align: middle;
 }
 
 .bouton_resume
 {
 	display: block;
 	width: calc(100% - 20px);
+	margin-bottom: 10px;
 	background-color: white;
 	padding: 5px 10px 5px 10px;
 	border-radius: 2px;

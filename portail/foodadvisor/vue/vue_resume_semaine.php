@@ -65,12 +65,10 @@
           // Bouton ajout choix (si pas de choix fait dans la matinée)
           if ($numero_jour <= date("N") AND $actions["choix_resume"] == true)
           {
-            echo '<div id="zone_choix_resume_' . $numero_jour . '" class="zone_choix_resume">';
-              echo '<a id="choix_resume_' . $numero_jour . '" class="bouton_resume afficherResume">';
-                echo '<span class="fond_plus">+</span>';
-                echo 'Ajouter un choix';
-              echo '</a>';
-            echo '</div>';
+            echo '<a id="choix_resume_' . $numero_jour . '" class="bouton_resume afficherResume">';
+              echo '<span class="fond_plus">+</span>';
+              echo 'Ajouter un choix';
+            echo '</a>';
           }
 
         echo '</div>';

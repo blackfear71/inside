@@ -133,15 +133,6 @@
         $actions["annuler_reserver"] = true;
     }
 
-
-
-    $actions["choix_resume"] = true;
-
-
-
-
-
-
     return $actions;
   }
 
