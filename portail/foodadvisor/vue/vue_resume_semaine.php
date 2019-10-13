@@ -33,10 +33,13 @@
             echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $choixJour->getLocation() . '</span>';
 
             // Nombre de participants
-            if ($choixJour->getNb_participants() == 1)
-              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participant</span>';
-            else
-              echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participants</span>';
+            if ($choixJour->getNb_participants() >= 1)
+            {
+              if ($choixJour->getNb_participants() == 1)
+                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participant</span>';
+              else
+                echo '<span class="horaire_proposition"><img src="../../includes/icons/foodadvisor/users.png" alt="users" class="image_lieu_proposition" />' . $choixJour->getNb_participants() . ' participants</span>';
+            }
           echo '</div>';
 
           if (!empty($choixJour->getCaller()))
