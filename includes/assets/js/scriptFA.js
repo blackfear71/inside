@@ -177,6 +177,37 @@ $(function()
     afficherMasquer('zone_details');
   });
 
+  // Affiche la saisie lieu restaurant (résumé)
+  $(document).on('click', '.afficherResume', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('choix_resume_', '');
+    var id_listbox = 'zone_choix_resume_' + num;
+
+    afficherMasquerNoDelay(id_bouton);
+    afficherListboxLieuxResume(id_listbox);
+  });
+
+  // Affiche la saisie restaurant liée au lieu (résumé)
+  $(document).on('change', '.afficherRestaurantResume', function()
+  {
+    var id_bouton  = $(this).attr('id');
+    var num        = $(this).attr('id').replace('select_lieu_resume_', '');
+
+    afficherListboxRestaurantsResume('select_lieu_resume_' + num, 'zone_listbox_resume_' + num);
+  });
+
+  // Masque la saisie lieu restaurant
+  $(document).on('click', '.annulerLieuResume', function()
+  {
+    var id_annuler = $(this).attr('id');
+    var id_valider = 'valider_restaurant_resume_' + num;
+    var num        = $(this).attr('id').replace('annuler_restaurant_resume_', '');
+    var id_zone    = 'zone_listbox_resume_' + num;
+
+    cacherListboxRestaurantsResume(id_zone, id_valider, id_annuler);
+  });
+
   // Affiche la saisie de restaurant
   $('#saisieRestaurant, #fermerRestaurant').click(function()
   {
@@ -394,10 +425,17 @@ function initMasonry()
 function tailleAutoZones()
 {
   // Taille des zones de résumé en fonction de la plus grande
-  var day_height     = $('.jour_semaine').height() + 10;
+  var day_height     = $('.jour_semaine').height();
   var text_height    = $('.no_proposal').height();
   var max_height     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
   var calcul_padding = (max_height - (day_height + text_height + 10)) / 2;
+
+  /*// Cas si ajout choix résumé présent
+  for (var i = 1; i <= 5; i++)
+  {
+    if ($('#zone_choix_resume_' + i).length)
+      calcul_padding = calcul_padding - (($('#zone_choix_resume_' + i).height() - 11) / 2);
+  }*/
 
   $('.no_proposal').css('padding-top', calcul_padding);
   $('.no_proposal').css('padding-bottom', calcul_padding);
@@ -690,6 +728,82 @@ function addChoice(id, zone)
   // On supprime le bouton d'ajout si on a 5 propositions
   if (new_num == 5)
     $('#saisie_autre_choix').css('display', 'none');
+}
+
+// Affiche la listbox des lieux (résumé)
+function afficherListboxLieuxResume(id)
+{
+  var num        = id.substr(-1);
+  var id_zone    = 'zone_listbox_resume_' + num;
+  var id_select  = 'select_lieu_resume_' + num;
+  var id_annuler = 'annuler_restaurant_resume_' + num;
+  var id_replace = 'no_proposal_' + num;
+  var html;
+
+  html = '<div id="' + id_zone + '" class="zone_listbox_restaurant_resume">';
+    html += '<select id="' + id_select + '" name="select_lieu_resume_' + num + '" class="listbox_choix_resume afficherRestaurantResume" required>';
+      html += '<option value="" hidden>Choisissez...</option>';
+      $.each(listeLieux, function(key, value)
+      {
+        html += '<option value="' + value + '">' + value + '</option>';
+      });
+    html += '</select>';
+  html += '</div>';
+
+  html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
+
+  $("#" + id_replace).html(html);
+
+  $("#" + id_replace).css('padding-top', '10px');
+  $("#" + id_replace).css('padding-bottom', '0px');
+  $("#" + id_replace).css('margin-bottom', '-10px');
+}
+
+// Affiche la listbox des restaurants associés (résumé)
+function afficherListboxRestaurantsResume(id, zone)
+{
+  var lieu        = $('#' + id).val();
+  var num         = id.substr(-1);
+  var id_select_2 = 'select_restaurant_resume_' + num;
+  var id_replace  = 'no_proposal_' + num;
+  var id_valider  = 'valider_restaurant_resume_' + num;
+  var id_annuler  = 'annuler_restaurant_resume_' + num;
+  var html;
+
+  if ($('#' + id_valider).length)
+    $('#' + id_valider).remove();
+
+  html = '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
+    html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
+      html += '<option value="" hidden>Choisissez...</option>';
+      $.each(listeRestaurants[lieu], function(key, value)
+      {
+        html += '<option value="' + value.id + '">' + value.name + '</option>';
+      });
+    html += '</select>';
+
+    html += '<input type="hidden" name="num_jour" value="' + num + '" />';
+    html += '<input type="submit" name="submit_resume" value="Valider" class="bouton_valider_resume" style="margin-bottom: 10px;" />';
+  html += '</form>';
+
+  $("#" + zone).append(html);
+
+  $("#" + id_replace).css('padding-top', '10px');
+  $("#" + id_replace).css('padding-bottom', '0px');
+  $("#" + id_replace).css('margin-bottom', '-10px');
+}
+
+// Cache les lisbox des restaurants (résumé)
+function cacherListboxRestaurantsResume(zone, bouton_valider, bouton_annuler)
+{
+  var num = zone.substr(-1);
+
+  $('#' + zone).remove();
+  $('#' + bouton_valider).remove();
+  $('#' + bouton_annuler).remove();
+  $("#no_proposal_" + num).html("Pas de proposition pour ce jour");
+
+  $('#choix_resume_' + num).css('display', 'block');
 }
 
 // Insère une prévisualisation de l'image sur la page

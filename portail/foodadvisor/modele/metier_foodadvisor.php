@@ -74,10 +74,11 @@
                      "choix"            => true,
                      "reserver"         => true,
                      "annuler_reserver" => false,
-                     "choix_rapide"     => true
+                     "choix_rapide"     => true,
+                     "choix_resume"     => false
                     );
 
-    // Contrôle date et heure
+    // Contrôles date et heure
     if (date("N") > 5 OR date("H") >= 13)
     {
       $actions["determiner"]       = false;
@@ -87,6 +88,9 @@
       $actions["annuler_reserver"] = false;
       $actions["choix_rapide"]     = false;
     }
+
+    if (date("N") <= 5 AND date("H") >= 13)
+      $actions["choix_resume"] = true;
 
     // Contrôle propositions présentes (pour bouton détermination)
     if ($actions["determiner"] == true)
@@ -128,6 +132,15 @@
       if ($isReserved == $user AND date("N") <= 5 AND date("H") < 13)
         $actions["annuler_reserver"] = true;
     }
+
+
+
+    $actions["choix_resume"] = true;
+
+
+
+
+
 
     return $actions;
   }
@@ -809,5 +822,38 @@
     // Relance de la détermination si besoin
     if ($control_ok == true)
       relanceDetermination();
+  }
+
+  // METIER : Insère un choix dans le résumé
+  // RETOUR : Aucun
+  function insertResume($post)
+  {
+    // Calcul date à insérer
+    $jour_courant  = date('N');
+    $jour_saisie   = $post['num_jour'];
+    $ecart_jours   = $jour_courant - $jour_saisie;
+    $date_saisie   = date('Ymd', strtotime('now - ' . $ecart_jours . ' Days'));
+
+    // Insertion en base
+    global $bdd;
+
+    $choice = array('id_restaurant' => $post['select_restaurant_resume_' . $jour_saisie],
+                    'date'          => $date_saisie,
+                    'caller'        => "",
+                    'reserved'      => "N"
+                   );
+
+    $req = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
+                                                           date,
+                                                           caller,
+                                                           reserved
+                                                           )
+                                                   VALUES(:id_restaurant,
+                                                          :date,
+                                                          :caller,
+                                                          :reserved
+                                                         )');
+    $req->execute($choice);
+    $req->closeCursor();
   }
 ?>

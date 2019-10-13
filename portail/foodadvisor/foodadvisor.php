@@ -78,8 +78,12 @@
       break;
 
     case 'doChoixRapide':
-      $isSolo        = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']['identifiant']);
       insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      break;
+
+    case 'doAjouterResume':
+      insertResume($_POST);
       break;
 
     default:
@@ -228,6 +232,7 @@
     case 'doModifier':
     case 'doSupprimer':
     case 'doChoixRapide':
+    case 'doAjouterResume':
     default:
       break;
   }
@@ -244,6 +249,7 @@
     case 'doModifier':
     case 'doSupprimer':
     case 'doChoixRapide':
+    case 'doAjouterResume':
       header('location: foodadvisor.php?action=goConsulter');
       break;
 

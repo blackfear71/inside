@@ -61,7 +61,7 @@
             // Nom du restaurant
             echo '<div class="nom_mon_choix">' . $monChoix->getName() . '</div>';
 
-            echo '<div class="zone_icones_mon_choix">';
+            echo '<div class="zone_icones_mon_choix" style="border-bottom: solid 1px #c3c3c3;">';
               // Jours d'ouverture
               echo '<div class="zone_ouverture_mes_choix">';
                 $explodedOpened = explode(";", $monChoix->getOpened());

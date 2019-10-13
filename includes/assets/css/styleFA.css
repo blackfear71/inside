@@ -183,7 +183,7 @@
 	line-height: 20px;
 }
 
-.bouton_choix:hover .fond_plus, .bouton_autre_choix:hover .fond_plus
+.bouton_choix:hover .fond_plus, .bouton_autre_choix:hover .fond_plus, .bouton_resume:hover .fond_plus
 {
 	background-color: white;
 	color: #262626;
@@ -1355,6 +1355,15 @@
 	text-align: center;
 }
 
+.caller_resume
+{
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	border-top: solid 1px #c3c3c3;
+}
+
 .jour_semaine
 {
 	font-family: robotolight, Verdana, sans-serif;
@@ -1372,9 +1381,121 @@
 	padding-top: 50px;
 	padding-bottom: 50px;
 	text-align: center;
-	margin-bottom: 10px;
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
+}
+
+.zone_choix_resume
+{
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+
+.bouton_resume
+{
+	display: block;
+	width: calc(100% - 20px);
+	background-color: white;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	cursor: pointer;
+	text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_resume:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.zone_listbox_restaurant_resume
+{
+	display: block;
+	width: 100%;
+}
+
+.listbox_choix_resume
+{
+	display: block;
+	height: 32px;
+	width: 100%;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	border-radius: 2px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	background-color: white;
+}
+
+.bouton_annuler_resume
+{
+	display: block;
+	background-color: #e3e3e3;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	cursor: pointer;
+	text-align: center;
+	border: 0;
+	vertical-align: top;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_valider_resume
+{
+	display: block;
+	width: 100%;
+	background-color: #e3e3e3;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	cursor: pointer;
+	text-align: center;
+	border: 0;
+	vertical-align: top;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_valider_resume:hover
+{
+	color: white;
+	background-color: #70d55d;
+}
+
+.bouton_annuler_resume:hover
+{
+	color: white;
+	background-color: #ff1937;
 }
 
 /*** Ajout restaurant ***/
