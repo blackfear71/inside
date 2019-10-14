@@ -54,6 +54,18 @@ $(function()
     afficherMasquerFilms(id_fold);
   });
 
+  // Scroll vers le mois en cours
+  $('.naviguerMois').click(function()
+  {
+    var full_date     = new Date();
+    var current_month = full_date.getMonth() + 1;
+    var id_month      = 'lien_hide_' + current_month;
+    var offset        = 50;
+    var shadow        = false;
+
+    scrollToId(id_month, offset, shadow);
+  });
+
   // Affiche la saisie de préférence d'une fiche
   $('.afficherPreference').click(function()
   {

@@ -310,6 +310,7 @@
 
 .date_jour
 {
+	display: block;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	text-align: center;
@@ -320,6 +321,7 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	box-shadow: 0 0 3px #7c7c7c;
+	cursor: pointer;
 }
 
 /*** Accueil ***/

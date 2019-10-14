@@ -34,7 +34,7 @@
     echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Années</div>';
 
     // Date du jour
-    echo '<div class="date_jour">Aujourd\'hui le ' . date("d/m/Y") . '</div>';
+    echo '<a class="date_jour naviguerMois">Aujourd\'hui le ' . date("d/m/Y") . '</a>';
 
     // Onglets
     if (!empty($ongletsYears))
