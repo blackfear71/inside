@@ -73,7 +73,6 @@
               echo 'Ajouter un choix';
             echo '</a>';
           }
-
         echo '</div>';
       }
     }

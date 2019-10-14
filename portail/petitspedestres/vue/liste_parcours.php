@@ -40,20 +40,17 @@
 			?>
 
       <article>
-
         <?php
           // Boutons missions
           $zone_inside = "article";
           include('../../includes/common/missions.php');
         ?>
 
-
         <parcours-list></parcours-list>
 
-  				<!-- Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
-  				     Réponse : Parcours.
-  				     C'est nul ? Oui, c'est nul. -->
-
+  			<!-- Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
+  				   Réponse : Parcours.
+  				   C'est nul ? Oui, c'est nul. -->
     	</article>
 
       <?php include('../../includes/chat/chat.php'); ?>
