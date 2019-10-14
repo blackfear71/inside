@@ -20,7 +20,10 @@
       else
         echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $expUser['pseudo'] . '" class="avatar_niveau" />';
 
-      echo '<div class="pseudo_niveau">' . $expUser['pseudo'] . '</div>';
+      if (strlen($expUser['pseudo']) > 15)
+        echo '<div class="pseudo_niveau">' . substr($expUser['pseudo'], 0, 15) . '...</div>';
+      else
+        echo '<div class="pseudo_niveau">' . $expUser['pseudo'] . '</div>';
     echo '</div>';
 
     if (!isset($experienceUsers[$keyExp + 1]) OR $expUser['niveau'] != $experienceUsers[$keyExp + 1]['niveau'])

@@ -736,6 +736,7 @@
 .zone_user_niveaux
 {
 	display: inline-block;
+	text-align: center;
 	width: 55px;
 	vertical-align: top;
 	margin: 5px 2.5px 5px 2.5px;
@@ -743,9 +744,7 @@
 
 .avatar_niveau
 {
-	display: inline-block;
 	width: 30px;
-	vertical-align: middle;
 	border-radius: 50%;
 	background-color: #262626;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -753,7 +752,8 @@
 
 .pseudo_niveau
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	display: block;
+	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	font-size: 60%;
 	word-break: break-word;
