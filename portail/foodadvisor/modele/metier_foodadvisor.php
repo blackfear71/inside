@@ -74,8 +74,7 @@
                      "choix"            => true,
                      "reserver"         => true,
                      "annuler_reserver" => false,
-                     "choix_rapide"     => true,
-                     "choix_resume"     => false
+                     "choix_rapide"     => true
                     );
 
     // Contrôles date et heure
@@ -88,9 +87,6 @@
       $actions["annuler_reserver"] = false;
       $actions["choix_rapide"]     = false;
     }
-
-    if (date("N") <= 5 AND date("H") >= 13)
-      $actions["choix_resume"] = true;
 
     // Contrôle propositions présentes (pour bouton détermination)
     if ($actions["determiner"] == true)

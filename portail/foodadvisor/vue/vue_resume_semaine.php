@@ -18,7 +18,7 @@
           echo '<div class="jour_semaine">' . $jour . '</div>';
 
           // Suppression si disponible
-          if (empty($choixJour->getCaller()) AND $numero_jour <= date("N") AND $actions["choix_resume"] == true)
+          if (empty($choixJour->getCaller()) AND (($numero_jour < date("N")) OR ($numero_jour == date("N") AND date("H") >= 13)))
           {
             echo '<form id="delete_resume_' . $numero_jour . '" method="post" action="foodadvisor.php?action=doSupprimerResume">';
               echo '<input type="hidden" name="id_resume" value="' . $choixJour->getId_restaurant() . '" />';
@@ -78,7 +78,7 @@
           echo '<div id="no_proposal_' . $numero_jour . '" class="no_proposal">Pas de proposition pour ce jour</div>';
 
           // Bouton ajout choix (si pas de choix fait dans la matinée)
-          if ($numero_jour <= date("N") AND $actions["choix_resume"] == true)
+          if (($numero_jour < date("N")) OR ($numero_jour == date("N") AND date("H") >= 13))
           {
             echo '<a id="choix_resume_' . $numero_jour . '" class="bouton_resume afficherResume">';
               echo '<span class="fond_plus">+</span>';
