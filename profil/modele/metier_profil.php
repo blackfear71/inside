@@ -303,7 +303,16 @@
           $control_ok                       = false;
         }
         else
+        {
           $anniversary = formatDateForInsert($anniversary);
+
+          // Contrôle date dans le futur
+          if ($anniversary >= date("Ymd"))
+          {
+            $_SESSION['alerts']['date_future'] = true;
+            $control_ok                        = false;
+          }
+        }
       }
     }
 
