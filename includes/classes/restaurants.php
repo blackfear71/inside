@@ -223,6 +223,7 @@
     private $nb_participants;
     private $classement;
     private $determined;
+    private $date;
     private $caller;
     private $pseudo;
     private $avatar;
@@ -246,6 +247,7 @@
       $this->nb_participants = 0;
       $this->classement      = 0;
       $this->determined      = 'N';
+      $this->date            = '';
       $this->caller          = '';
       $this->pseudo          = '';
       $this->avatar          = '';
@@ -274,6 +276,9 @@
     {
       if (isset($data['id_restaurant']))
         $this->id_restaurant = $data['id_restaurant'];
+
+      if (isset($data['date']))
+        $this->date          = $data['date'];
 
       if (isset($data['caller']))
         $this->caller        = $data['caller'];
@@ -358,6 +363,17 @@
     public function getDetermined()
     {
       return $this->determined;
+    }
+
+    // Date
+    public function setDate($date)
+    {
+      $this->date = $date;
+    }
+
+    public function getDate()
+    {
+      return $this->date;
     }
 
     // Participant qui appelle

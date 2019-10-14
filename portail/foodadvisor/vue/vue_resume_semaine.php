@@ -17,6 +17,17 @@
           // Jour
           echo '<div class="jour_semaine">' . $jour . '</div>';
 
+          // Suppression si disponible
+          if (empty($choixJour->getCaller()) AND $numero_jour <= date("N") AND $actions["choix_resume"] == true)
+          {
+            echo '<form id="delete_resume_' . $numero_jour . '" method="post" action="foodadvisor.php?action=doSupprimerResume">';
+              echo '<input type="hidden" name="id_resume" value="' . $choixJour->getId_restaurant() . '" />';
+              echo '<input type="hidden" name="date_resume" value="' . $choixJour->getDate() . '" />';
+              echo '<input type="submit" name="delete_resume" value="" title="Supprimer le choix" class="icon_delete_resume eventConfirm" />';
+              echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
+            echo '</form>';
+          }
+
           // Image + lien
           echo '<a href="restaurants.php?action=goConsulter&anchor=' . $choixJour->getId_restaurant() . '" class="lien_mon_choix">';
             if (!empty($choixJour->getPicture()))
@@ -42,6 +53,7 @@
             }
           echo '</div>';
 
+          // Appelant si renseigné
           if (!empty($choixJour->getCaller()))
           {
             echo '<div class="caller_resume">';

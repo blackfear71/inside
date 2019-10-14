@@ -847,4 +847,17 @@
     $req->execute($choice);
     $req->closeCursor();
   }
+
+  // METIER : Supprime un choix dans le résumé
+  // RETOUR : Aucun
+  function deleteResume($post)
+  {
+    $id_resume   = $post['id_resume'];
+    $date_resume = $post['date_resume'];
+
+    global $bdd;
+
+    // Suppression choix résumé (restaurant = choix, date = jour)
+    $req = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_resume . ' AND date = "' . $date_resume . '"');
+  }
 ?>

@@ -86,6 +86,10 @@
       insertResume($_POST);
       break;
 
+    case 'doSupprimerResume':
+      deleteResume($_POST);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: foodadvisor.php?action=goConsulter');
@@ -129,6 +133,7 @@
         $proposition->setNb_participants(htmlspecialchars($proposition->getNb_participants()));
         $proposition->setClassement(htmlspecialchars($proposition->getClassement()));
         $proposition->setDetermined(htmlspecialchars($proposition->getDetermined()));
+        $proposition->setDate(htmlspecialchars($proposition->getDate()));
         $proposition->setCaller(htmlspecialchars($proposition->getCaller()));
         $proposition->setPseudo(htmlspecialchars($proposition->getPseudo()));
         $proposition->setAvatar(htmlspecialchars($proposition->getAvatar()));
@@ -195,6 +200,7 @@
           $choixJour->setNb_participants(htmlspecialchars($choixJour->getNb_participants()));
           $choixJour->setClassement(htmlspecialchars($choixJour->getClassement()));
           $choixJour->setDetermined(htmlspecialchars($choixJour->getDetermined()));
+          $choixJour->setDate(htmlspecialchars($choixJour->getDate()));
           $choixJour->setCaller(htmlspecialchars($choixJour->getCaller()));
           $choixJour->setPseudo(htmlspecialchars($choixJour->getPseudo()));
           $choixJour->setAvatar(htmlspecialchars($choixJour->getAvatar()));
@@ -233,6 +239,7 @@
     case 'doSupprimer':
     case 'doChoixRapide':
     case 'doAjouterResume':
+    case 'doSupprimerResume':
     default:
       break;
   }
@@ -250,6 +257,7 @@
     case 'doSupprimer':
     case 'doChoixRapide':
     case 'doAjouterResume':
+    case 'doSupprimerResume':
       header('location: foodadvisor.php?action=goConsulter');
       break;
 

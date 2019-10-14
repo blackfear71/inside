@@ -1386,6 +1386,22 @@
 	color: #262626;
 }
 
+.icon_delete_resume
+{
+	float: right;
+	margin-left: -35px;
+	margin-top: -25px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/includes/icons/common/delete_grey.png");
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .bouton_resume
 {
 	display: block;
