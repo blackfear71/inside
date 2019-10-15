@@ -34,7 +34,10 @@
     echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Années</div>';
 
     // Date du jour
-    echo '<a class="date_jour naviguerMois">Aujourd\'hui le ' . date("d/m/Y") . '</a>';
+    if ($_GET['view'] == "cards")
+      echo '<a class="date_jour pointer naviguerMois">Aujourd\'hui le ' . date("d/m/Y") . '</a>';
+    else
+      echo '<div class="date_jour">Aujourd\'hui le ' . date("d/m/Y") . '</div>';
 
     // Onglets
     if (!empty($ongletsYears))
