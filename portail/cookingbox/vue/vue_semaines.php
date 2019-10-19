@@ -13,6 +13,9 @@
         else
           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $currentWeek->getPseudo() . '" class="avatar_week" />';
 
+        // Pseudo
+        echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
+
         // Boutons d'action
         echo '<div class="zone_boutons" id="zone_current_week">';
           if ($currentWeek->getCooked() == 'N')
@@ -73,6 +76,9 @@
           echo '<img src="../../includes/images/profil/avatars/' . $nextWeek->getAvatar() . '" alt="avatar" title="' . $nextWeek->getPseudo() . '" class="avatar_week" />';
         else
           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $nextWeek->getPseudo() . '" class="avatar_week" />';
+
+        // Pseudo
+        echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
       }
       else
       {

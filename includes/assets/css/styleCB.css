@@ -37,6 +37,18 @@
   background-color: #262626;
 }
 
+.pseudo_week
+{
+  display: inline-block;
+  vertical-align: middle;
+  width: 20%;
+  padding: 10px;
+  text-align: center;
+  font-family: robotomedium, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+}
+
 .empty_week
 {
   display: inline-block;
@@ -55,7 +67,7 @@
 {
   display: inline-block;
   vertical-align: middle;
-  width: calc(100% - 150px);
+  width: calc(80% - 170px);
 }
 
 .bouton_semaine
