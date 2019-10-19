@@ -59,12 +59,10 @@
   // RETOUR : Aucun
   function updateCake($post)
   {
-    var_dump($post);
-
-    $week         = $post['week'];
-    $year         = date('Y');
-    $identifiant  = $post['select_user'];
-    $exist        = false;
+    $week        = $post['week'];
+    $year        = date('Y');
+    $identifiant = $post['select_user'];
+    $exist       = false;
 
     global $bdd;
 
