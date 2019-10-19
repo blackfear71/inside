@@ -779,6 +779,7 @@
       case "compiler":
       case "restaurant-finder":
       case "star-chief":
+      case "cooker":
       case "christmas2017":
       case "christmas2017_2":
       case "golden-egg":

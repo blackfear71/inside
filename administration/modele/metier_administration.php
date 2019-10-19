@@ -2037,6 +2037,17 @@
               $value = $nb_repas_organises;
               break;
 
+            case "cooker":
+              $nb_gateaux_realises = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_gateaux_realises FROM cooking_box WHERE identifiant = "' . $user->getIdentifiant() . '" AND cooked = "Y"');
+              $data = $req->fetch();
+              $nb_gateaux_realises = $data['nb_gateaux_realises'];
+              $req->closeCursor();
+
+              $value = $nb_gateaux_realises;
+              break;
+
             // Lutin de Noël
             case "christmas2017":
             // Je suis ton Père Noël !

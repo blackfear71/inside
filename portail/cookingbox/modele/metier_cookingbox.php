@@ -116,10 +116,22 @@
   {
     global $bdd;
 
-    $req = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
-    $req->execute(array(
+    // Mise à jour du statut
+    $req1 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
+    $req1->execute(array(
       'cooked' => $cooked
     ));
-    $req->closeCursor();
+    $req1->closeCursor();
+
+    // Lecture des données
+    $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
+    $data2 = $req2->fetch();
+    $identifiant = $data2['identifiant'];
+    $req2->closeCursor();
+
+    if ($cooked == "Y")
+      insertOrUpdateSuccesValue('cooker', $identifiant, 1);
+    else
+      insertOrUpdateSuccesValue('cooker', $identifiant, -1);
   }
 ?>
