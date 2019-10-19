@@ -97,71 +97,105 @@
       array_push($tabNews, $myNews);
     }
 
+    // Gâteau de la semaine
+    $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
+    $data2 = $req2->fetch();
+
+    if ($req2->rowCount() > 0)
+    {
+      $myNews = new News();
+
+      $myNews->setTitle("La douceur de la semaine");
+      $myNews->setLogo("cooking_box");
+      $myNews->setLink("/inside/portail/cookingbox/cookingbox.php?action=goConsulter");
+
+      // Pseudo
+      $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data2['identifiant'] . '"');
+      $donnees = $reponse->fetch();
+      $pseudo = $donnees['pseudo'];
+      $reponse->closeCursor();
+
+      if ($data2['cooked'] == "Y")
+      {
+        $myNews->setContent("Le gâteau a été fait par <strong>" . $pseudo . "</strong>, c'était très bon !");
+        $myNews->setDetails("A la semaine prochaine pour de nouvelles expériences...");
+      }
+      else
+      {
+        $myNews->setContent("Cette semaine, c'est à <strong>" . $pseudo . "</strong> de faire le gâteau !");
+        $myNews->setDetails("Spécialité culinaire en préparation...");
+      }
+
+      array_push($tabNews, $myNews);
+    }
+
+    $req2->closeCursor();
+
     // Dernière phrase culte ajoutée
     $myNews = new News();
 
-    $req2 = $bdd->query('SELECT * FROM collector WHERE type_collector = "T" ORDER BY date_add DESC, id DESC LIMIT 1');
-    $data2 = $req2->fetch();
+    $req3 = $bdd->query('SELECT * FROM collector WHERE type_collector = "T" ORDER BY date_add DESC, id DESC LIMIT 1');
+    $data3 = $req3->fetch();
 
-    $num_page = numPageCollector($data2['id']);
+    $num_page = numPageCollector($data3['id']);
 
     $myNews->setTitle("La der des ders");
     $myNews->setLogo("collector");
-    $myNews->setLink("/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $data2['id']);
+    $myNews->setLink("/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $data3['id']);
 
-    if ($data2['type_speaker'] == "other")
-      $myNews->setDetails("Par " . $data2['speaker']);
+    if ($data3['type_speaker'] == "other")
+      $myNews->setDetails("Par " . $data3['speaker']);
     else
     {
-      $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data2['speaker'] . '"');
+      $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data3['speaker'] . '"');
       $donnees = $reponse->fetch();
       $myNews->setDetails("Par " . $donnees['pseudo']);
       $reponse->closeCursor();
     }
 
-    if (strlen($data2['collector']) > 90)
-      $myNews->setContent(nl2br(substr(unformatCollector($data2['collector']), 0, 90) . "..."));
+    if (strlen($data3['collector']) > 90)
+      $myNews->setContent(nl2br(substr(unformatCollector($data3['collector']), 0, 90) . "..."));
     else
-      $myNews->setContent(nl2br($data2['collector']));
+      $myNews->setContent(nl2br($data3['collector']));
 
-    $req2->closeCursor();
+    $req3->closeCursor();
 
     array_push($tabNews, $myNews);
 
     // Dernier film ajouté
     $myNews = new News();
 
-    $req3 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY date_add DESC, id DESC LIMIT 1');
-    $data3 = $req3->fetch();
+    $req4 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY date_add DESC, id DESC LIMIT 1');
+    $data4 = $req4->fetch();
 
     $myNews->setTitle("Le dernier de la collection");
-    $myNews->setContent($data3['film']);
+    $myNews->setContent($data4['film']);
     $myNews->setDetails("");
     $myNews->setLogo("movie_house");
-    $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data3['id'] . "&action=goConsulter");
+    $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data4['id'] . "&action=goConsulter");
 
-    $req3->closeCursor();
+    $req4->closeCursor();
 
     array_push($tabNews, $myNews);
 
     // Prochaine sortie cinéma
-    $req4 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle >= "' . date("Ymd") . '" ORDER BY date_doodle ASC, id ASC LIMIT 1');
-    $data4 = $req4->fetch();
+    $req5 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle >= "' . date("Ymd") . '" ORDER BY date_doodle ASC, id ASC LIMIT 1');
+    $data5 = $req5->fetch();
 
-    if ($req4->rowCount() > 0)
+    if ($req5->rowCount() > 0)
     {
       $myNews = new News();
 
       $myNews->setTitle("On y court !");
-      $myNews->setContent($data4['film']);
-      $myNews->setDetails("Rendez-vous le " . formatDateForDisplay($data4['date_doodle']) . " au cinéma !");
+      $myNews->setContent($data5['film']);
+      $myNews->setDetails("Rendez-vous le " . formatDateForDisplay($data5['date_doodle']) . " au cinéma !");
       $myNews->setLogo("movie_house");
-      $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data4['id'] . "&action=goConsulter");
+      $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data5['id'] . "&action=goConsulter");
 
       array_push($tabNews, $myNews);
     }
 
-    $req4->closeCursor();
+    $req5->closeCursor();
 
     // Messages missions
     $missions = getMissions();
