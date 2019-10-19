@@ -19,13 +19,13 @@
       $listeRestaurants = getRestaurants($listeLieux);
 
       // Propositions, choix et semaine
-      $propositions     = getPropositions(true);
-      $solos            = getSolos();
-      $mesChoix         = getMyChoices($_SESSION['user']['identifiant']);
-      $isSolo           = getSolo($_SESSION['user']['identifiant']);
-      $isReserved       = getReserved($_SESSION['user']['identifiant']);
-      $choixSemaine     = getWeekChoices();
-      $actions          = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
+      $propositions = getPropositions(true);
+      $solos        = getSolos();
+      $mesChoix     = getMyChoices($_SESSION['user']['identifiant']);
+      $isSolo       = getSolo($_SESSION['user']['identifiant']);
+      $isReserved   = getReserved($_SESSION['user']['identifiant']);
+      $choixSemaine = getWeekChoices();
+      $actions      = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
 
       if (!empty($propositions) OR !empty($solos))
         $sansPropositions = getNoPropositions();
