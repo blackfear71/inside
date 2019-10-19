@@ -14,7 +14,10 @@
           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $currentWeek->getPseudo() . '" class="avatar_week" />';
 
         // Pseudo
-        echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
+        if (strlen($currentWeek->getPseudo()) > 110)
+          echo '<div class="pseudo_week">' . substr($currentWeek->getPseudo(), 0, 110) . '...</div>';
+        else
+          echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
 
         // Boutons d'action
         echo '<div class="zone_boutons" id="zone_current_week">';
@@ -78,7 +81,10 @@
           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $nextWeek->getPseudo() . '" class="avatar_week" />';
 
         // Pseudo
-        echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
+        if (strlen($nextWeek->getPseudo()) > 110)
+          echo '<div class="pseudo_week">' . substr($nextWeek->getPseudo(), 0, 110) . '...</div>';
+        else
+          echo '<div class="pseudo_week">' . $nextWeek->getPseudo() . '</div>';
       }
       else
       {
