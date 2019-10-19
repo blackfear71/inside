@@ -14,9 +14,9 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $preferences      = getPreferences($_SESSION['user']['identifiant']);
-      $news             = getNews($_SESSION['user']['identifiant']);
-      $portail          = getPortail($preferences);
+      $preferences = getPreferences($_SESSION['user']['identifiant']);
+      $news        = getNews($_SESSION['user']['identifiant']);
+      $portail     = getPortail($preferences);
       break;
 
     default:

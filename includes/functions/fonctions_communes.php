@@ -200,6 +200,7 @@
     $listPages                 = array('/inside/portail/bugs/bugs.php',
                                        '/inside/portail/calendars/calendars.php',
                                        '/inside/portail/collector/collector.php',
+                                       '/inside/portail/cookingbox/cookingbox.php',
                                        //'/inside/portail/eventmanager/eventmanager.php',
                                        '/inside/portail/expensecenter/expensecenter.php',
                                        '/inside/portail/foodadvisor/foodadvisor.php',

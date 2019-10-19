@@ -1,0 +1,178 @@
+/*******************/
+/*** Cooking Box ***/
+/*******************/
+
+/*** Semaines ***/
+.zone_semaines_left
+{
+  display: inline-block;
+  vertical-align: top;
+  width: calc(50% - 10px);
+}
+
+.zone_semaines_right
+{
+  display: inline-block;
+  vertical-align: top;
+  width: calc(50% - 10px);
+  margin-left: 20px;
+}
+
+.zone_semaine
+{
+  width: calc(100% - 20px);
+  background-color: #e3e3e3;
+  border-radius: 2px;
+  box-shadow: 0 0 3px #7c7c7c;
+  padding: 10px;
+}
+
+.avatar_week
+{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #7c7c7c;
+  vertical-align: middle;
+  background-color: #262626;
+}
+
+.empty_week
+{
+  display: inline-block;
+  vertical-align: middle;
+  width: 150px;
+  line-height: 20px;
+  padding-top: 55px;
+  padding-bottom: 55px;
+  text-align: center;
+  font-family: robotomedium, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+}
+
+.zone_boutons
+{
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 150px);
+}
+
+.bouton_semaine
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	background-color: white;
+  padding-top: 5px;
+	padding-bottom: 5px;
+  width: 50%;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	cursor: pointer;
+	text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_semaine:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.bouton_semaine_2
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  background-color: white;
+  padding-top: 5px;
+	padding-bottom: 5px;
+  width: 50%;
+  border-radius: 2px;
+  border: 0;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+  cursor: pointer;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bouton_semaine_2:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.cake_done
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  font-family: robotomedium, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+  text-align: center;
+}
+
+.listbox_users
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  background-color: white;
+  border-radius: 2px;
+  width: 50%;
+  height: 32px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+}
+
+.bouton_valider_week, .bouton_annuler_week
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+	background-color: white;
+  padding-top: 5px;
+	padding-bottom: 5px;
+  width: 50%;
+	border-radius: 2px;
+  border: 0;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+	color: #262626;
+	cursor: pointer;
+	text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_valider_week:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.bouton_annuler_week:hover
+{
+	background-color: #ff1937;
+	color: white;
+}

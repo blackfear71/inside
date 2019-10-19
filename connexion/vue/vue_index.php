@@ -56,31 +56,24 @@
               echo '</div>';
 
               // Logos catégories
+              $icons = array("movie_house",
+                             "food_advisor",
+                             "cooking_box",
+                             "expense_center",
+                             "collector",
+                             "calendars",
+                             //event_manager,
+                             "petits_pedestres",
+                             "missions"
+                            );
+
               echo '<div class="zone_logos">';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/movie_house.png" alt="movie_house_grey" class="logo_categories" />';
-                echo '</span>';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/food_advisor.png" alt="food_advisor_grey" class="logo_categories" />';
-                echo '</span>';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/expense_center.png" alt="expense_center_grey" class="logo_categories" />';
-                echo '</span>';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/collector.png" alt="collector_grey" class="logo_categories" />';
-                echo '</span>';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/calendars.png" alt="calendars_grey" class="logo_categories" />';
-                echo '</span>';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/petits_pedestres.png" alt="petits_pedestres_grey" class="logo_categories" />';
-                echo '</span>';
-                echo '<span class="zone_logo_categories">';
-                  echo '<img src="includes/icons/common/missions.png" alt="missions_grey" class="logo_categories" />';
-                echo '</span>';
-                //echo '<span class="zone_logo_categories">';
-                  //echo '<img src="includes/icons/common/event_manager.png" alt="event_manager_grey" class="logo_categories" />';
-                //echo '</span>';
+                foreach ($icons as $icon)
+                {
+                  echo '<span class="zone_logo_categories">';
+                    echo '<img src="includes/icons/common/' . $icon . '.png" alt="' . $icon . '_grey" class="logo_categories" />';
+                  echo '</span>';
+                }
               echo '</div>';
             echo '</div>';
 

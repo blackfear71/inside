@@ -178,7 +178,7 @@ $(function()
   });
 
   // Affiche la saisie lieu restaurant (résumé)
-  $(document).on('click', '.afficherResume', function()
+  $('.afficherResume').click(function()
   {
     var id_bouton  = $(this).attr('id');
 
@@ -798,6 +798,7 @@ function afficherListboxRestaurantsResume(id, zone)
   html = '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
     html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
+      
       $.each(listeRestaurants[lieu], function(key, value)
       {
         html += '<option value="' + value.id + '">' + value.name + '</option>';
