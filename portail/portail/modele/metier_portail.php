@@ -98,17 +98,17 @@
     }
 
     // Gâteau de la semaine
+    $myNews = new News();
+
+    $myNews->setTitle("La douceur de la semaine");
+    $myNews->setLogo("cooking_box");
+    $myNews->setLink("/inside/portail/cookingbox/cookingbox.php?action=goConsulter");
+
     $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
     $data2 = $req2->fetch();
 
     if ($req2->rowCount() > 0)
     {
-      $myNews = new News();
-
-      $myNews->setTitle("La douceur de la semaine");
-      $myNews->setLogo("cooking_box");
-      $myNews->setLink("/inside/portail/cookingbox/cookingbox.php?action=goConsulter");
-
       // Pseudo
       $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data2['identifiant'] . '"');
       $donnees = $reponse->fetch();
@@ -125,11 +125,16 @@
         $myNews->setContent("Cette semaine, c'est à <strong>" . $pseudo . "</strong> de faire le gâteau !");
         $myNews->setDetails("Spécialité culinaire en préparation...");
       }
-
-      array_push($tabNews, $myNews);
+    }
+    else
+    {
+      $myNews->setContent("Personne n'a encore été désigné pour faire le gâteau !");
+      $myNews->setDetails("Dépêchez-vous de le dénoncer...");
     }
 
     $req2->closeCursor();
+
+    array_push($tabNews, $myNews);
 
     // Dernière phrase culte ajoutée
     $myNews = new News();
