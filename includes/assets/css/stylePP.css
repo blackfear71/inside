@@ -34,25 +34,25 @@
 .PP-recherche
 {
 	display: inline-block;
-	width: 70%;
+	width: calc(70% - 20px);
 	border: 0;
 	background-color: white;
-	padding: 5px 10px 5px 10px;
+	padding: 6px 10px 6px 10px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 110%;
+	font-size: 100%;
 }
 
 .PP-tri
 {
 	display: inline-block;
-	width: calc(30% - 40px);
-	margin-left: 14px;
+	width: calc(30% - 25px);
+	margin-left: 20px;
 	margin-bottom: 20px;
-	padding: 3px 5px 3px 5px;
+	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
-	font-size: 110%;
+	font-size: 100%;
 	color: #262626;
 	border: 0;
 	border-radius: 2px;

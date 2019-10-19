@@ -815,33 +815,52 @@
   // RETOUR : Aucun
   function insertResume($post)
   {
+    $control_ok = true;
+
+    $jour_saisie   = $post['num_jour'];
+    $id_restaurant = $post['select_restaurant_resume_' . $jour_saisie];
+
     // Calcul date à insérer
     $jour_courant  = date('N');
-    $jour_saisie   = $post['num_jour'];
     $ecart_jours   = $jour_courant - $jour_saisie;
     $date_saisie   = date('Ymd', strtotime('now - ' . $ecart_jours . ' Days'));
 
-    // Insertion en base
     global $bdd;
 
-    $choice = array('id_restaurant' => $post['select_restaurant_resume_' . $jour_saisie],
-                    'date'          => $date_saisie,
-                    'caller'        => "",
-                    'reserved'      => "N"
-                   );
+    // Contrôle choix non existant
+    $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . $date_saisie . '"');
+    $data1 = $req1->fetch();
 
-    $req = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
-                                                           date,
-                                                           caller,
-                                                           reserved
-                                                           )
-                                                   VALUES(:id_restaurant,
-                                                          :date,
-                                                          :caller,
-                                                          :reserved
-                                                         )');
-    $req->execute($choice);
-    $req->closeCursor();
+    if ($req1->rowCount() > 0)
+    {
+      $control_ok                           = false;
+      $_SESSION['alerts']['already_resume'] = true;
+    }
+
+    $req1->closeCursor();
+
+    // Insertion en base
+    if ($control_ok == true)
+    {
+      $choice = array('id_restaurant' => $id_restaurant,
+                      'date'          => $date_saisie,
+                      'caller'        => "",
+                      'reserved'      => "N"
+                     );
+
+      $req2 = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
+                                                             date,
+                                                             caller,
+                                                             reserved
+                                                             )
+                                                     VALUES(:id_restaurant,
+                                                            :date,
+                                                            :caller,
+                                                            :reserved
+                                                           )');
+      $req2->execute($choice);
+      $req2->closeCursor();
+    }
   }
 
   // METIER : Supprime un choix dans le résumé
