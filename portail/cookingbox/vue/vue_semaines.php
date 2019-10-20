@@ -14,8 +14,8 @@
           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $currentWeek->getPseudo() . '" class="avatar_week" />';
 
         // Pseudo
-        if (strlen($currentWeek->getPseudo()) > 110)
-          echo '<div class="pseudo_week">' . substr($currentWeek->getPseudo(), 0, 110) . '...</div>';
+        if (strlen($currentWeek->getPseudo()) > 50)
+          echo '<div class="pseudo_week">' . substr($currentWeek->getPseudo(), 0, 50) . '...</div>';
         else
           echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
 
@@ -30,7 +30,7 @@
 
               if ($currentWeek->getIdentifiant() == $_SESSION['user']['identifiant'])
               {
-                echo '<form method="post" action="cookingbox.php?action=doValider">';
+                echo '<form method="post" action="cookingbox.php?year=' . $_GET["year"] . '&action=doValider">';
                   echo '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_semaine_2" />';
                 echo '</form>';
               }
@@ -42,7 +42,7 @@
 
             if ($currentWeek->getIdentifiant() == $_SESSION['user']['identifiant'])
             {
-              echo '<form method="post" action="cookingbox.php?action=doAnnuler">';
+              echo '<form method="post" action="cookingbox.php?year=' . $_GET["year"] . '&action=doAnnuler">';
                 echo '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_semaine_2" />';
               echo '</form>';
             }
@@ -56,7 +56,7 @@
         echo '</div>';
 
         // Bouton d'action
-        echo '<div class="zone_boutons" id="zone_current_week">';
+        echo '<div class="zone_boutons_2" id="zone_current_week">';
           echo '<div id="boutons_current_week">';
             echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursCurrent">';
               echo 'Modifier';
@@ -81,25 +81,35 @@
           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $nextWeek->getPseudo() . '" class="avatar_week" />';
 
         // Pseudo
-        if (strlen($nextWeek->getPseudo()) > 110)
-          echo '<div class="pseudo_week">' . substr($nextWeek->getPseudo(), 0, 110) . '...</div>';
+        if (strlen($nextWeek->getPseudo()) > 50)
+          echo '<div class="pseudo_week">' . substr($nextWeek->getPseudo(), 0, 50) . '...</div>';
         else
           echo '<div class="pseudo_week">' . $nextWeek->getPseudo() . '</div>';
+
+        // Bouton d'action
+        echo '<div class="zone_boutons" id="zone_next_week">';
+          echo '<div id="boutons_next_week">';
+            echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursNext">';
+              echo 'Modifier';
+            echo '</a>';
+          echo '</div>';
+        echo '</div>';
       }
       else
       {
         echo '<div class="empty_week">';
           echo 'Encore personne d\'affecté...';
         echo '</div>';
-      }
-      // Bouton d'action
-      echo '<div class="zone_boutons" id="zone_next_week">';
-        echo '<div id="boutons_next_week">';
-          echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursNext">';
-            echo 'Modifier';
-          echo '</a>';
+
+        // Bouton d'action
+        echo '<div class="zone_boutons_2" id="zone_next_week">';
+          echo '<div id="boutons_next_week">';
+            echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursNext">';
+              echo 'Modifier';
+            echo '</a>';
+          echo '</div>';
         echo '</div>';
-      echo '</div>';
+      }
     echo '</div>';
   echo '</div>';
 ?>

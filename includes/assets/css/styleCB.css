@@ -70,6 +70,13 @@
   width: calc(80% - 170px);
 }
 
+.zone_boutons_2
+{
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 150px);
+}
+
 .bouton_semaine
 {
   display: block;
@@ -187,4 +194,160 @@
 {
 	background-color: #ff1937;
 	color: white;
+}
+
+/*** Onglets ***/
+.zone_cooking_left
+{
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+  margin-top: 20px;
+}
+
+.view, .year
+{
+	display: inline-block;
+	margin-bottom: 10px;
+	width: calc(50% - 10px);
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	font-family: robotolight, Verdana, sans-serif;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.margin_right
+{
+	margin-right: 20px;
+}
+
+.active
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.inactive
+{
+	background-color: white;
+	color: #262626;
+}
+
+.inactive:hover
+{
+	color: white;
+	background-color: #262626;
+	text-decoration: none;
+}
+
+/*** Recettes ***/
+.zone_cooking_right
+{
+  display: inline-block;
+  width: calc(100% - 220px);
+  margin-top: 20px;
+  margin-left: 20px;
+  vertical-align: top;
+}
+
+.zone_recettes
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_recettes.masonry
+{
+	opacity: 1;
+}
+
+.zone_recette
+{
+  display: block;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.icone_recette
+{
+  float: right;
+  width: 20px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 10px 10px -40px 0px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 3px #7c7c7c;
+}
+
+.lien_recette
+{
+  cursor: pointer;
+}
+
+.image_recette
+{
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.semaine_recette
+{
+  display: inline-block;
+  vertical-align: top;
+  background-color: #2eb2f4;
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 2px;
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+}
+
+.form_delete_week, .lien_update_week
+{
+  float: right;
+  vertical-align: top;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.icon_update_week
+{
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.icon_delete_week
+{
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background-image: url("/inside/includes/icons/common/delete_grey.png");
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.avatar_recette
+{
+  float: right;
+  vertical-align: top;
+  height: 30px;
+  width: 30px;
+  margin-top: 5px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #7c7c7c;
+  background-color: #262626;
 }

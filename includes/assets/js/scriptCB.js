@@ -43,6 +43,31 @@ $(function()
   });
 });
 
+/***************/
+/*** Masonry ***/
+/***************/
+// Au chargement du document complet
+$(window).on('load', function()
+{
+  // Masonry (Calendriers & annexes)
+  if ($('.zone_recettes').length)
+  {
+    $('.zone_recettes').masonry().masonry('destroy');
+
+    $('.zone_recettes').masonry({
+      // Options
+      itemSelector: '.zone_recette',
+      columnWidth: 300,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_recettes').addClass('masonry');
+  }
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
@@ -64,12 +89,12 @@ function afficherListboxUtilisateurs(id_zone)
 
   if (id_zone == 'zone_current_week')
   {
-    html = '<form method="post" id="form_current_week" action="cookingbox.php?action=doModifier">';
+    html = '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
       html += '<input type="hidden" name="week" value="' + week + '" />';
   }
   else
   {
-    html = '<form method="post" id="form_next_week" action="cookingbox.php?action=doModifier">';
+    html = '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
       html += '<input type="hidden" name="week" value="' + (week + 1) + '" />';
   }
     // Listbox

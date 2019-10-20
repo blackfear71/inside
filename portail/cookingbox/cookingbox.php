@@ -13,9 +13,18 @@
   switch ($_GET['action'])
   {
     case "goConsulter":
-      $currentWeek = getWeek(date('W'));
-      $nextWeek    = getWeek(date('W') + 1);
-      $listeUsers  = getUsers();
+      // Contrôle si l'année est renseignée et numérique
+      if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
+        header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
+      else
+      {
+        $currentWeek    = getWeek(date('W'));
+        $nextWeek       = getWeek(date('W') + 1);
+        $listeUsers     = getUsers();
+        $anneeExistante = controlYear($_GET['year']);
+        $ongletsYears   = getOnglets();
+        $recettes       = getRecipes($_GET['year']);
+      }
       break;
 
     case "doModifier":
@@ -32,7 +41,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: cookingbox.php?action=goConsulter');
+      header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
       break;
   }
 
@@ -45,12 +54,22 @@
       $currentWeek->setAvatar(htmlspecialchars($currentWeek->getAvatar()));
       $currentWeek->setWeek(htmlspecialchars($currentWeek->getWeek()));
       $currentWeek->setCooked(htmlspecialchars($currentWeek->getCooked()));
+      $currentWeek->setName(htmlspecialchars($currentWeek->getName()));
+      $currentWeek->setPicture(htmlspecialchars($currentWeek->getPicture()));
+      $currentWeek->setIngredients(htmlspecialchars($currentWeek->getIngredients()));
+      $currentWeek->setRecipe(htmlspecialchars($currentWeek->getRecipe()));
+      $currentWeek->setTips(htmlspecialchars($currentWeek->getTips()));
 
       $nextWeek->setIdentifiant(htmlspecialchars($nextWeek->getIdentifiant()));
       $nextWeek->setPseudo(htmlspecialchars($nextWeek->getPseudo()));
       $nextWeek->setAvatar(htmlspecialchars($nextWeek->getAvatar()));
       $nextWeek->setWeek(htmlspecialchars($nextWeek->getWeek()));
       $nextWeek->setCooked(htmlspecialchars($nextWeek->getCooked()));
+      $nextWeek->setName(htmlspecialchars($nextWeek->getName()));
+      $nextWeek->setPicture(htmlspecialchars($nextWeek->getPicture()));
+      $nextWeek->setIngredients(htmlspecialchars($nextWeek->getIngredients()));
+      $nextWeek->setRecipe(htmlspecialchars($nextWeek->getRecipe()));
+      $nextWeek->setTips(htmlspecialchars($nextWeek->getTips()));
 
       foreach ($listeUsers as &$user)
       {
@@ -58,6 +77,29 @@
       }
 
       unset($user);
+
+      foreach ($ongletsYears as &$onglet)
+      {
+        $onglet = htmlspecialchars($onglet);
+      }
+
+      unset($onglet);
+
+      foreach ($recettes as &$recette)
+      {
+        $recette->setIdentifiant(htmlspecialchars($recette->getIdentifiant()));
+        $recette->setPseudo(htmlspecialchars($recette->getPseudo()));
+        $recette->setAvatar(htmlspecialchars($recette->getAvatar()));
+        $recette->setWeek(htmlspecialchars($recette->getWeek()));
+        $recette->setCooked(htmlspecialchars($recette->getCooked()));
+        $recette->setName(htmlspecialchars($recette->getName()));
+        $recette->setPicture(htmlspecialchars($recette->getPicture()));
+        $recette->setIngredients(htmlspecialchars($recette->getIngredients()));
+        $recette->setRecipe(htmlspecialchars($recette->getRecipe()));
+        $recette->setTips(htmlspecialchars($recette->getTips()));
+      }
+
+      unset($recette);
 
       // Conversion JSON
       $listeUsersJson = json_encode($listeUsers);
@@ -76,7 +118,7 @@
     case "doModifier":
     case "doValider":
     case "doAnnuler":
-      header('location: cookingbox.php?action=goConsulter');
+      header('location: cookingbox.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;
 
     case "goConsulter":

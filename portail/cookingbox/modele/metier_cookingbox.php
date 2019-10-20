@@ -81,18 +81,33 @@
       $cooking = array('identifiant' => $identifiant,
                        'week'        => $week,
                        'year'        => $year,
-                       'cooked'      => "N"
+                       'cooked'      => "N",
+                       'name'        => "",
+                       'picture'     => "",
+                       'ingredients' => "",
+                       'recipe'      => "",
+                       'tips'        => ""
                      );
 
       $req2 = $bdd->prepare('INSERT INTO cooking_box(identifiant,
                                                      week,
                                                      year,
-                                                     cooked
+                                                     cooked,
+                                                     name,
+                                                     picture,
+                                                     ingredients,
+                                                     recipe,
+                                                     tips
                                                     )
                                              VALUES(:identifiant,
                                                     :week,
                                                     :year,
-                                                    :cooked
+                                                    :cooked,
+                                                    :name,
+                                                    :picture,
+                                                    :ingredients,
+                                                    :recipe,
+                                                    :tips
                                                    )');
       $req2->execute($cooking);
       $req2->closeCursor();
@@ -131,5 +146,76 @@
       insertOrUpdateSuccesValue('cooker', $identifiant, 1);
     else
       insertOrUpdateSuccesValue('cooker', $identifiant, -1);
+  }
+
+  // METIER : Contrôle année existante (pour les onglets)
+  // RETOUR : Booléen
+  function controlYear($year)
+  {
+    $annee_existante = false;
+
+    if (isset($year) AND is_numeric($year))
+    {
+      global $bdd;
+
+      $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box ORDER BY year ASC');
+      while($donnees = $reponse->fetch())
+      {
+        if ($year == $donnees['year'])
+          $annee_existante = true;
+      }
+      $reponse->closeCursor();
+    }
+
+    return $annee_existante;
+  }
+
+  // METIER : Lecture des années distinctes
+  // RETOUR : Liste des années
+  function getOnglets()
+  {
+    $listOnglets = array();
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box ORDER BY year DESC');
+    while($donnees = $reponse->fetch())
+    {
+      // On ajoute la ligne au tableau
+      array_push($listOnglets, $donnees['year']);
+    }
+    $reponse->closeCursor();
+
+    return $listOnglets;
+  }
+
+  // METIER : Lecture des recettes
+  // RETOUR : Liste des recettes
+  function getRecipes($year)
+  {
+    $listRecipes = array();
+
+    global $bdd;
+
+    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND picture != "" ORDER BY week DESC');
+    while($data1 = $req1->fetch())
+    {
+      $myRecipe = WeekCake::withData($data1);
+
+      // Données utilisateur
+      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myRecipe->getIdentifiant() . '"');
+      $data2 = $req2->fetch();
+
+      $myRecipe->setPseudo($data2['pseudo']);
+      $myRecipe->setAvatar($data2['avatar']);
+
+      $req2->closeCursor();
+
+      // On ajoute la ligne au tableau
+      array_push($listRecipes, $myRecipe);
+    }
+    $req1->closeCursor();
+
+    return $listRecipes;
   }
 ?>

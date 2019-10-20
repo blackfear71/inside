@@ -102,7 +102,7 @@
 
     $myNews->setTitle("La douceur de la semaine");
     $myNews->setLogo("cooking_box");
-    $myNews->setLink("/inside/portail/cookingbox/cookingbox.php?action=goConsulter");
+    $myNews->setLink("/inside/portail/cookingbox/cookingbox.php?year=" . date('Y') . "&action=goConsulter");
 
     $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
     $data2 = $req2->fetch();
@@ -287,7 +287,7 @@
                                     'image'     => '../../includes/icons/common/food_advisor.png',
                                     'alt'       => 'food_advisor'),
                               array('categorie' => 'COOKING<br />BOX',
-                                    'lien'      => '../cookingbox/cookingbox.php?action=goConsulter',
+                                    'lien'      => '../cookingbox/cookingbox.php?year=' . date("Y") . '&action=goConsulter',
                                     'title'     => 'Cooking Box',
                                     'image'     => '../../includes/icons/common/cooking_box.png',
                                     'alt'       => 'cooking_box'),
