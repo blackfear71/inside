@@ -7,19 +7,21 @@ $(function()
   // Affiche la liste des utilisateurs (semaine courante)
   $('.afficherUtilisateursCurrent').click(function()
   {
-    var id_boutons = 'boutons_current_week';
+    var id_boutons  = 'boutons_current_week';
+    var week_number = parseInt($(this).attr('id').replace('choix_semaine_courante_', ''));
 
     afficherMasquerNoDelay(id_boutons);
-    afficherListboxUtilisateurs('zone_current_week');
+    afficherListboxUtilisateurs('zone_current_week', week_number);
   });
 
   // Affiche la liste des utilisateurs (semaine suivante)
   $('.afficherUtilisateursNext').click(function()
   {
-    var id_boutons = 'boutons_next_week';
+    var id_boutons  = 'boutons_next_week';
+    var week_number = parseInt($(this).attr('id').replace('choix_semaine_suivante_', ''));
 
     afficherMasquerNoDelay(id_boutons);
-    afficherListboxUtilisateurs('zone_next_week');
+    afficherListboxUtilisateurs('zone_next_week', week_number);
   });
 
   // Masque la liste des utilisateurs (semaine courante)
@@ -81,22 +83,17 @@ function afficherMasquerNoDelay(id)
 }
 
 // Affiche une liste des utilisateurs
-function afficherListboxUtilisateurs(id_zone)
+function afficherListboxUtilisateurs(id_zone, week)
 {
-  var full_date = new Date();
-  var week      = full_date.getWeek();
   var html;
 
   if (id_zone == 'zone_current_week')
-  {
     html = '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
-      html += '<input type="hidden" name="week" value="' + week + '" />';
-  }
   else
-  {
     html = '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
-      html += '<input type="hidden" name="week" value="' + (week + 1) + '" />';
-  }
+
+    html += '<input type="hidden" name="week" value="' + week + '" />';
+
     // Listbox
     html += '<select name="select_user" class="listbox_users" required>';
       html += '<option value="" hidden>Choisissez...</option>';
@@ -119,14 +116,3 @@ function afficherListboxUtilisateurs(id_zone)
 
   $("#" + id_zone).append(html);
 }
-
-// Retourne le numéro de semaine
-Date.prototype.getWeek = function()
-{
-  var oneJan     = new Date(this.getFullYear(), 0, 1);
-  var today      = new Date(this.getFullYear(), this.getMonth(), this.getDate());
-  var dayOfYear  = ((today - oneJan + 1) / 86400000);
-  var weekOfYear = Math.ceil(dayOfYear / 7);
-
-  return weekOfYear;
-};

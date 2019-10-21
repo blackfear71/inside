@@ -24,7 +24,7 @@
           if ($currentWeek->getCooked() == 'N')
           {
             echo '<div id="boutons_current_week">';
-              echo '<a id="choix_semaine_courante" class="bouton_semaine afficherUtilisateursCurrent">';
+              echo '<a id="choix_semaine_courante_' . date("W") . '" class="bouton_semaine afficherUtilisateursCurrent">';
                 echo 'Modifier';
               echo '</a>';
 
@@ -58,7 +58,7 @@
         // Bouton d'action
         echo '<div class="zone_boutons_2" id="zone_current_week">';
           echo '<div id="boutons_current_week">';
-            echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursCurrent">';
+            echo '<a id="choix_semaine_courante_' . date("W") . '" class="bouton_semaine afficherUtilisateursCurrent">';
               echo 'Modifier';
             echo '</a>';
           echo '</div>';
@@ -72,6 +72,8 @@
     echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/date_grey.png" alt="date_grey" class="logo_titre_section" />Pour la semaine prochaine</div>';
     // Zone semaine suivante
     echo '<div class="zone_semaine">';
+      $week_next = date("W", strtotime('+ 1 week'));
+
       if (!empty($nextWeek->getIdentifiant()))
       {
         // Avatar
@@ -89,7 +91,7 @@
         // Bouton d'action
         echo '<div class="zone_boutons" id="zone_next_week">';
           echo '<div id="boutons_next_week">';
-            echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursNext">';
+            echo '<a id="choix_semaine_suivante_' . $week_next . '" class="bouton_semaine afficherUtilisateursNext">';
               echo 'Modifier';
             echo '</a>';
           echo '</div>';
@@ -104,7 +106,7 @@
         // Bouton d'action
         echo '<div class="zone_boutons_2" id="zone_next_week">';
           echo '<div id="boutons_next_week">';
-            echo '<a id="choix_semaine_suivante" class="bouton_semaine afficherUtilisateursNext">';
+            echo '<a id="choix_semaine_suivante_' . $week_next . '" class="bouton_semaine afficherUtilisateursNext">';
               echo 'Modifier';
             echo '</a>';
           echo '</div>';
