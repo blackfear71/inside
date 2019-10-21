@@ -76,7 +76,7 @@ $(function()
     var split  = path.split('/');
     var report = split[split.length - 1];
 
-    html += '<div id="zoom_image" class="fond_zoom">';
+    html = '<div id="zoom_image" class="fond_zoom">';
       html += '<div class="zone_image_zoom">';
         html += '<a id="fermerImage" class="lien_zoom"><img src="../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
         html += '<img src="' + path + '" alt="' + report + '" class="image_zoom" />';
