@@ -887,7 +887,6 @@ aside
 {
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: 15px;
 }
 
 .lien_zoom
@@ -921,6 +920,35 @@ aside
 	max-width: calc(100vw - 100px);
 	max-height: calc(100vh - 150px);
 	border-radius: 2px;
+}
+
+.image_zoom_2
+{
+	display: block;
+	max-width: calc(100vw - 515px);
+	max-height: calc(100vh - 150px);
+	border-radius: 2px;
+}
+
+.zone_texte_zoom
+{
+	display: inline-block;
+	max-height: calc(100vh - 150px);
+	width: 400px;
+	vertical-align: middle;
+	margin-left: 15px;
+	border-radius: 2px;
+	background-color: white;
+}
+
+.texte_zoom
+{
+	height: 100%;
+	overflow-y: auto;
+	line-height: 100%;
+	text-align: justify;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 /*** Pagination ***/

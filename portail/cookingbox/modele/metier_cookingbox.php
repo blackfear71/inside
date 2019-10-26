@@ -218,4 +218,32 @@
 
     return $listRecipes;
   }
+
+  // METIER : Converstion du tableau d'objet des recettes en tableau simple pour JSON
+  // RETOUR : Tableau des recettes
+  function convertForJson($recipes)
+  {
+    // On transforme les objets en tableau pour envoyer au Javascript
+    $listeRecettesAConvertir = array();
+
+    foreach ($recipes as $recipe)
+    {
+      $recetteAConvertir = array('id'          => $recipe->getId(),
+                                 'identifiant' => $recipe->getIdentifiant(),
+                                 'pseudo'      => $recipe->getPseudo(),
+                                 'avatar'      => $recipe->getAvatar(),
+                                 'week'        => $recipe->getWeek(),
+                                 'cooked'      => $recipe->getCooked(),
+                                 'name'        => $recipe->getName(),
+                                 'picture'     => $recipe->getPicture(),
+                                 'ingredients' => $recipe->getIngredients(),
+                                 'recipe'      => $recipe->getRecipe(),
+                                 'tips'        => $recipe->getTips()
+                                );
+
+      $listeRecettesAConvertir[$recipe->getId()] = $recetteAConvertir;
+    }
+
+    return $listeRecettesAConvertir;
+  }
 ?>

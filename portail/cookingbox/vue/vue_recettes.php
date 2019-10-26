@@ -12,13 +12,17 @@
             // Présence recette & photo
             if (!empty($recette->getIngredients()) OR !empty($recette->getRecipe()) OR !empty($recette->getTips()))
             {
-              echo '<a class="lien_recette agrandirRecette">';
+              echo '<a id="afficher_recette_' . $recette->getId() . '" class="lien_recette afficherRecette">';
                 echo '<img src="../../includes/icons/cookingbox/recipe_grey.png" alt="recipe_grey" title="Recette" class="icone_recette" />';
                 echo '<img src="../../includes/images/cookingbox/' . $_GET['year'] . '/mini/' . $recette->getPicture() . '" alt="' . $recette->getPicture() . '" title="' . $recette->getName() . '" class="image_recette" />';
               echo '</a>';
             }
             else
-              echo '<img src="../../includes/images/cookingbox/' . $_GET['year'] . '/mini/' . $recette->getPicture() . '" alt="' . $recette->getPicture() . '" title="' . $recette->getName() . '" class="image_recette" />';
+            {
+              echo '<a id="afficher_recette_' . $recette->getId() . '" class="lien_recette afficherRecette">';
+                echo '<img src="../../includes/images/cookingbox/' . $_GET['year'] . '/mini/' . $recette->getPicture() . '" alt="' . $recette->getPicture() . '" title="' . $recette->getName() . '" class="image_recette" />';
+              echo '</a>';
+            }
 
             // Zone infos
             echo '<div class="">';

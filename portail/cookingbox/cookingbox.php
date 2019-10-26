@@ -103,6 +103,7 @@
 
       // Conversion JSON
       $listeUsersJson = json_encode($listeUsers);
+      $recettesJson   = json_encode(convertForJson($recettes));
       break;
 
     case "doModifier":

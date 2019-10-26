@@ -76,6 +76,9 @@
     <script>
       // Récupération liste utilisateurs pour le script
       var listeUsers = <?php echo $listeUsersJson; ?>;
+
+      // Récupération liste recettes pour le script
+      var listeRecipes = <?php echo $recettesJson; ?>;
     </script>
   </body>
 </html>
