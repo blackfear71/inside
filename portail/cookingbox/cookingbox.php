@@ -39,6 +39,10 @@
       validateCake("N");
       break;
 
+    case "doSupprimer":
+      deleteRecipe($_POST, $_GET['year']);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
@@ -109,6 +113,7 @@
     case "doModifier":
     case "doValider":
     case "doAnnuler":
+    case "doSupprimer":
     default:
       break;
   }
@@ -119,6 +124,7 @@
     case "doModifier":
     case "doValider":
     case "doAnnuler":
+    case "doSupprimer":
       header('location: cookingbox.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;
 

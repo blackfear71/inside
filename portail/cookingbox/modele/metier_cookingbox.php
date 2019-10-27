@@ -246,4 +246,48 @@
 
     return $listeRecettesAConvertir;
   }
+
+  // METIER : Supprime une recette
+  // RETOUR : Aucun
+  function deleteRecipe($post, $year)
+  {
+    var_dump($post);
+    var_dump($year);
+
+    $week = $post['week_cake'];
+
+    global $bdd;
+
+    // Lecture des données recette
+    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND week = "' . $week . '"');
+    $data1 = $req1->fetch();
+    $recipe = WeekCake::withData($data1);
+    $req1->closeCursor();
+
+    var_dump($recipe);
+
+    // Suppression des images
+    if (!empty($recipe->getPicture()))
+    {
+      unlink ("../../includes/images/cookingbox/" . $year . "/" . $recipe->getPicture());
+      unlink ("../../includes/images/cookingbox/" . $year . "/mini/" . $recipe->getPicture());
+    }
+
+    // Mise à jour des données
+    $update = array('name'        => "",
+                    'picture'     => "",
+                    'ingredients' => "",
+                    'recipe'      => "",
+                    'tips'        => ""
+                   );
+    $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
+                                                  picture     = :picture,
+                                                  ingredients = :ingredients,
+                                                  recipe      = :recipe,
+                                                  tips        = :tips
+                                            WHERE year = "' . $year . '"
+                                            AND   week = "' . $week . '"');
+    $req2->execute($update);
+    $req2->closeCursor();
+  }
 ?>
