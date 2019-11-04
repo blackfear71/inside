@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_collector">Ajouter une phrase culte</div>';
 
       // Bouton fermeture
-      echo '<a id="fermerCollector" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="fermerCollector" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       // Saisie phrase culte
       echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';

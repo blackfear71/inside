@@ -8,6 +8,7 @@
       $script_head  = "scriptCB.js";
       $chat_head    = true;
       $masonry_head = true;
+      $exif_head    = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -39,13 +40,21 @@
           /*******************/
           /* Liens de saisie */
           /*******************/
-          /*echo '<div class="zone_liens_saisie">';
-            // Bouton saisie
-            echo '<a id="ajouterRecette" title="Ajouter un gâteau ou une recette" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/cooking_box.png" alt="cooking_box" class="image_lien" /></div>';
-              echo '<div class="zone_texte_lien">Ajouter un gâteau ou une recette</div>';
-            echo '</a>';
-          echo '</div>';*/
+          if (!empty($listeSemaines))
+          {
+            echo '<div class="zone_liens_saisie">';
+              // Bouton saisie
+              echo '<a id="ajouterRecette" title="Ajouter un gâteau ou une recette" class="lien_categorie">';
+                echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/cooking_box.png" alt="cooking_box" class="image_lien" /></div>';
+                echo '<div class="zone_texte_lien">Ajouter un gâteau ou une recette</div>';
+              echo '</a>';
+            echo '</div>';
+          }
+
+          /*****************************/
+          /* Zone de saisie de recette */
+          /*****************************/
+          include('vue/vue_saisie_recette.php');
 
           /*********************************/
           /* Gâteaux des semaines n et n+1 */
@@ -74,11 +83,17 @@
 
     <!-- Données JSON -->
     <script>
+      // Récupération liste semaines par années pour le script
+      var listeSemaines = <?php echo $listeSemainesJson; ?>;
+
       // Récupération liste utilisateurs pour le script
       var listeUsers = <?php echo $listeUsersJson; ?>;
 
       // Récupération liste recettes pour le script
       var listeRecipes = <?php echo $recettesJson; ?>;
+
+      // Récupération utilisateur connecté
+      var userSession = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
     </script>
   </body>
 </html>

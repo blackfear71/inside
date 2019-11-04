@@ -95,7 +95,10 @@
 
           // Types
           echo '<div id="types_restaurants">';
-            echo '<a id="addType" class="bouton_type_autre"><span class="fond_plus">+</span>Autre</a>';
+            echo '<a id="addType" class="bouton_type_autre">';
+              echo '<span class="fond_plus">+</span>';
+              echo 'Autre';
+            echo '</a>';
 
             $i = 0;
 

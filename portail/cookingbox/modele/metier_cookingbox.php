@@ -37,7 +37,7 @@
   function getUsers()
   {
     // Initialisation tableau d'utilisateurs
-    $listeUsers = array();
+    $listUsers = array();
 
     global $bdd;
 
@@ -48,11 +48,46 @@
       $user = Profile::withData($donnees);
 
       // On construit un tableau des utilisateurs
-      $listeUsers[$user->getIdentifiant()] = $user->getPseudo();
+      $listUsers[$user->getIdentifiant()] = $user->getPseudo();
     }
     $reponse->closeCursor();
 
-    return $listeUsers;
+    return $listUsers;
+  }
+
+  // METIER : Récupères les semaines par années pour la saisie de recette
+  // RETOUR : Liste des semaines par années
+  function getWeeks($user)
+  {
+    $listYears    = array();
+    $previousYear = "";
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM cooking_box WHERE identifiant = "' . $user . '" AND name = "" AND picture = "" ORDER BY year DESC, week DESC');
+    while($donnees = $reponse->fetch())
+    {
+      if ($donnees['year'] != $previousYear)
+      {
+        if (!empty($previousYear))
+          $listYears[$previousYear] = $listWeeks;
+
+        $listWeeks    = array();
+        $previousYear = $donnees['year'];
+      }
+
+      array_push($listWeeks, $donnees['week']);
+    }
+    $reponse->closeCursor();
+
+    // Dernière occurence
+    end($listYears);
+    $lastKey = key($listYears);
+
+    if ($lastKey != $previousYear)
+      $listYears[$previousYear] = $listWeeks;
+
+    return $listYears;
   }
 
   // METIER : Insère ou met à jour l'utilisateur
@@ -125,19 +160,19 @@
 
   // METIER : Valide le gâteau de la semaine
   // RETOUR : Aucun
-  function validateCake($cooked)
+  function validateCake($cooked, $week, $year)
   {
     global $bdd;
 
     // Mise à jour du statut
-    $req1 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
+    $req1 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . $week . '" AND year = "' . $year . '"');
     $req1->execute(array(
       'cooked' => $cooked
     ));
     $req1->closeCursor();
 
     // Lecture des données
-    $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
+    $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
     $data2 = $req2->fetch();
     $identifiant = $data2['identifiant'];
     $req2->closeCursor();
@@ -224,7 +259,7 @@
   function convertForJson($recipes)
   {
     // On transforme les objets en tableau pour envoyer au Javascript
-    $listeRecettesAConvertir = array();
+    $listRecipesToConvert = array();
 
     foreach ($recipes as $recipe)
     {
@@ -233,6 +268,7 @@
                                  'pseudo'      => $recipe->getPseudo(),
                                  'avatar'      => $recipe->getAvatar(),
                                  'week'        => $recipe->getWeek(),
+                                 'year'        => $recipe->getYear(),
                                  'cooked'      => $recipe->getCooked(),
                                  'name'        => $recipe->getName(),
                                  'picture'     => $recipe->getPicture(),
@@ -241,10 +277,10 @@
                                  'tips'        => $recipe->getTips()
                                 );
 
-      $listeRecettesAConvertir[$recipe->getId()] = $recetteAConvertir;
+      $listRecipesToConvert[$recipe->getId()] = $recetteAConvertir;
     }
 
-    return $listeRecettesAConvertir;
+    return $listRecipesToConvert;
   }
 
   // METIER : Supprime une recette

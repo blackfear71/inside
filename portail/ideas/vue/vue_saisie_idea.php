@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_idea">Proposer une idée</div>';
 
       // Bouton fermeture
-      echo '<a id="fermerIdee" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="fermerIdee" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer" class="form_saisie_idea">';
         // Explications

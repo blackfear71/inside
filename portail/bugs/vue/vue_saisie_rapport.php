@@ -8,7 +8,7 @@
       echo '<div class="titre_saisie_report">Rapporter un bug ou une évolution</div>';
 
       // Bouton fermeture
-      echo '<a id="fermerRapport" class="close_index"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+      echo '<a id="fermerRapport" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       echo '<form method="post" action="bugs.php?action=doSignaler" enctype="multipart/form-data" class="form_saisie_report">';
         // Explications

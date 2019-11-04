@@ -352,6 +352,375 @@
   background-color: #262626;
 }
 
+/*** Saisie phrase culte ***/
+.fond_saisie_recette
+{
+	display: none;
+	background-color: rgb(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.zone_saisie_recette
+{
+	width: 85%;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: auto;
+	border-radius: 2px;
+}
+
+.titre_saisie_recette
+{
+	display: inline-block;
+	line-height: 50px;
+	background-color: #ff1937;
+	width: calc(100% - 40px);
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 120%;
+	color: white;
+	border-bottom: solid 2px #c81932;
+}
+
+.zone_close
+{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin-top: -40px;
+	margin-right: 10px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.close_img
+{
+	width: 20px;
+	padding: 5px;
+	transform: rotate(0deg);
+	transition: transform 0.2s ease;
+}
+
+.close_img:hover
+{
+	transform: rotate(90deg);
+	transition: transform 0.2s ease;
+}
+
+.form_saisie_recette
+{
+	width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+	background-color: white;
+	border-top: solid 1px #d3d3d3;
+  max-height: calc(100vh - 250px);
+	overflow-y: auto;
+}
+
+.zone_recette_left
+{
+	display: inline-block;
+	width: 206px;
+  margin: 10px 10px 0px 10px;
+}
+
+.zone_parcourir_image
+{
+	width: 200px;
+	height: 200px;
+	border-style: dashed;
+	border-width: 3px;
+	border-radius: 2px;
+	border-color: #a3a3a3;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 300%;
+	color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+}
+
+.symbole_saisie_image
+{
+	line-height: 200px;
+}
+
+.bouton_parcourir_image
+{
+	display: block;
+	opacity: 0;
+	width: 200px;
+	height: 200px;
+	margin-top: -200px;
+	cursor: pointer;
+	position: relative;
+	z-index: 1;
+}
+
+.mask_image
+{
+	width: 200px;
+	height: 200px;
+	line-height: 200px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -203px;
+}
+
+.image
+{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+	margin-top: -3px;
+}
+
+.saisie_bouton
+{
+	display: block;
+  margin-top: 13px;
+	width: 100%;
+  height: 32px;
+	line-height: 32px;
+  border-radius: 2px;
+	border: 0;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+	color: #262626;
+	background-color: #e3e3e3;
+	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.saisie_bouton:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.zone_recette_right
+{
+	display: inline-block;
+	width: calc(100% - 237px);
+	vertical-align: top;
+  margin-top: 10px;
+}
+
+.saisie_annee_semaine
+{
+	display: inline-block;
+  width: 120px;
+	margin-right: 10px;
+	padding-left: 10px;
+  padding-right: 10px;
+  height: 34px;
+  border-radius: 2px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotoregular, Verdana, sans-serif;
+  font-size: 100%;
+	color: #262626;
+  background-color: white;
+}
+
+.saisie_nom_recette
+{
+	display: inline-block;
+	width: calc(100% - 150px);
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 32px;
+}
+
+#zone_ingredients
+{
+  display: block;
+  margin-top: 10px;
+}
+
+.sous_titre_1
+{
+  display: inline-block;
+  width: calc(100% - 260px);
+  font-family: robotolight_italic, Verdana, sans-serif;
+  font-weight: bold;
+  color: #262626;
+  font-size: 110%;
+  line-height: 32px;
+}
+
+.bouton_ingredient
+{
+  display: inline-block;
+  width: 250px;
+	background-color: #e3e3e3;
+	padding: 5px 0px 5px 0px;
+	margin-left: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	cursor: pointer;
+	text-align: center;
+	vertical-align: top;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_ingredient:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.fond_plus
+{
+	display: inline-block;
+	margin-right: 8px;
+	width: 20px;
+	height: 20px;
+	background-color: #70d55d;
+	border-radius: 50%;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	text-align: center;
+	line-height: 20px;
+}
+
+.bouton_ingredient:hover .fond_plus
+{
+	background-color: white;
+	color: #262626;
+}
+
+.zone_ingredient
+{
+  display: inline-block;
+  width: 320px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.input_ingredient
+{
+	display: inline-block;
+	border: 0;
+	width: calc(50% - 40px);
+	height: 32px;
+	background-color: #e3e3e3;
+	padding-left: 10px;
+	padding-right: 10px;
+  margin-right: 10px;
+	vertical-align: top;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+}
+
+.input_quantite
+{
+	display: inline-block;
+	border: 0;
+	width: calc(25% - 20px);
+	height: 32px;
+	background-color: #e3e3e3;
+	padding-left: 10px;
+	padding-right: 10px;
+  margin-right: 10px;
+	vertical-align: top;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+}
+
+.select_unite
+{
+  display: inline-block;
+  width: 25%;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 34px;
+  border-radius: 2px;
+  border: 0;
+  box-shadow: 0 0 3px #7c7c7c;
+  font-family: robotoregular, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+  background-color: white;
+}
+
+.filled
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.zones_preparation
+{
+  display: block;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.zone_preparation
+{
+  display: inline-block;
+  width: calc(50% - 5px);
+  vertical-align: top;
+}
+
+.margin_right
+{
+  margin-right: 10px;
+}
+
+.sous_titre_2
+{
+  display: inline-block;
+  width: 100%;
+  font-family: robotolight_italic, Verdana, sans-serif;
+  font-weight: bold;
+  color: #262626;
+  font-size: 110%;
+  line-height: 32px;
+}
+
+.textarea_saisie
+{
+  min-height: 100px;
+  width: calc(100% - 20px);
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  box-shadow: 0 0 3px #7c7c7c;
+  background-color: white;
+  border-radius: 2px;
+  font-family: robotoregular, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+  resize: vertical;
+}
+
 /*** Détails recette ***/
 .avatar_details_recette
 {
@@ -433,8 +802,38 @@
 .contenu_recette_details
 {
   margin-top: 10px;
+  margin-bottom: 10px;
   line-height: 120%;
   font-family: robotolight, Verdana, sans-serif;
   color: #262626;
   text-align: justify;
+}
+
+.bouton_details
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  background-color: #e3e3e3;
+  padding-top: 5px;
+	padding-bottom: 5px;
+  width: 50%;
+  border-radius: 2px;
+  border: 0;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+  color: #262626;
+  cursor: pointer;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bouton_details:hover
+{
+	background-color: #ff1937;
+	color: white;
 }

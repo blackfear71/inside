@@ -6,6 +6,7 @@
     private $pseudo;
     private $avatar;
     private $week;
+    private $year;
     private $cooked;
     private $name;
     private $picture;
@@ -21,6 +22,7 @@
       $this->pseudo      = '';
       $this->avatar      = '';
       $this->week        = '';
+      $this->year        = '';
       $this->cooked      = '';
       $this->name        = '';
       $this->picture     = '';
@@ -49,6 +51,9 @@
 
       if (isset($data['week']))
         $this->week        = $data['week'];
+
+      if (isset($data['year']))
+        $this->year        = $data['year'];
 
       if (isset($data['cooked']))
         $this->cooked      = $data['cooked'];
@@ -123,6 +128,17 @@
     public function getWeek()
     {
       return $this->week;
+    }
+
+    // Année
+    public function setYear($year)
+    {
+      $this->year = $year;
+    }
+
+    public function getYear()
+    {
+      return $this->year;
     }
 
     // Réalisé

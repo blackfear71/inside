@@ -18,9 +18,15 @@
         header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
       else
       {
+        // Gâteaux semaines n et n + 1
         $currentWeek    = getWeek(date('W'));
         $nextWeek       = getWeek(date('W') + 1);
         $listeUsers     = getUsers();
+
+        // Saisie
+        $listeSemaines  = getWeeks($_SESSION['user']['identifiant']);
+
+        // Recettes
         $anneeExistante = controlYear($_GET['year']);
         $ongletsYears   = getOnglets();
         $recettes       = getRecipes($_GET['year']);
@@ -32,11 +38,11 @@
       break;
 
     case "doValider":
-      validateCake("Y");
+      validateCake("Y", $_POST['week_cake'], $_GET['year']);
       break;
 
     case "doAnnuler":
-      validateCake("N");
+      validateCake("N", $_POST['week_cake'], $_GET['year']);
       break;
 
     case "doSupprimer":
@@ -57,6 +63,7 @@
       $currentWeek->setPseudo(htmlspecialchars($currentWeek->getPseudo()));
       $currentWeek->setAvatar(htmlspecialchars($currentWeek->getAvatar()));
       $currentWeek->setWeek(htmlspecialchars($currentWeek->getWeek()));
+      $currentWeek->setYear(htmlspecialchars($currentWeek->getYear()));
       $currentWeek->setCooked(htmlspecialchars($currentWeek->getCooked()));
       $currentWeek->setName(htmlspecialchars($currentWeek->getName()));
       $currentWeek->setPicture(htmlspecialchars($currentWeek->getPicture()));
@@ -68,6 +75,7 @@
       $nextWeek->setPseudo(htmlspecialchars($nextWeek->getPseudo()));
       $nextWeek->setAvatar(htmlspecialchars($nextWeek->getAvatar()));
       $nextWeek->setWeek(htmlspecialchars($nextWeek->getWeek()));
+      $nextWeek->setYear(htmlspecialchars($nextWeek->getYear()));
       $nextWeek->setCooked(htmlspecialchars($nextWeek->getCooked()));
       $nextWeek->setName(htmlspecialchars($nextWeek->getName()));
       $nextWeek->setPicture(htmlspecialchars($nextWeek->getPicture()));
@@ -82,6 +90,17 @@
 
       unset($user);
 
+      foreach ($listeSemaines as &$year)
+      {
+        foreach ($year as &$week)
+        {
+          $week = htmlspecialchars($week);
+        }
+      }
+
+      unset($year);
+      unset($week);
+
       foreach ($ongletsYears as &$onglet)
       {
         $onglet = htmlspecialchars($onglet);
@@ -95,6 +114,7 @@
         $recette->setPseudo(htmlspecialchars($recette->getPseudo()));
         $recette->setAvatar(htmlspecialchars($recette->getAvatar()));
         $recette->setWeek(htmlspecialchars($recette->getWeek()));
+        $recette->setYear(htmlspecialchars($recette->getYear()));
         $recette->setCooked(htmlspecialchars($recette->getCooked()));
         $recette->setName(htmlspecialchars($recette->getName()));
         $recette->setPicture(htmlspecialchars($recette->getPicture()));
@@ -106,8 +126,9 @@
       unset($recette);
 
       // Conversion JSON
-      $listeUsersJson = json_encode($listeUsers);
-      $recettesJson   = json_encode(convertForJson($recettes));
+      $listeSemainesJson = json_encode($listeSemaines);
+      $listeUsersJson    = json_encode($listeUsers);
+      $recettesJson      = json_encode(convertForJson($recettes));
       break;
 
     case "doModifier":

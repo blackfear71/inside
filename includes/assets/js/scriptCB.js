@@ -45,6 +45,18 @@ $(function()
     $('#' + id_form).remove();
   });
 
+  // Ajouter une recette
+  $('#ajouterRecette, #fermerRecette').click(function()
+  {
+    afficherMasquer('zone_add_recipe');
+  });
+
+  // Ajoute un champ de saisie ingrédient (saisie)
+  $('#addIngredient').click(function()
+  {
+    addIngredient('zone_ingredients');
+  });
+
   // Affiche une recette en grand
   $('.afficherRecette').click(function()
   {
@@ -60,6 +72,27 @@ $(function()
     {
       $('#zoom_image').remove();
     });
+  });
+
+  /*** Actions au changement ***/
+  // Charge l'image (saisie)
+  $('.loadSaisieRecette').on('change', function()
+  {
+    loadFile(event, 'image_recette');
+  });
+
+  // Affiche la saisie semaine (saisie)
+  $('#saisie_annee').on('change', function()
+  {
+    afficherSemaines('saisie_annee');
+  });
+
+  // Change la couleur de l'ingrédient à la saisie
+  $(document).on('input', '.saisieIngredient', function()
+  {
+    id_ingredient = $(this).attr('id');
+
+    changeIngredientColor(id_ingredient);
   });
 });
 
@@ -107,6 +140,15 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeOut(0);
 }
 
+// Affiche ou masque un élément (délai 200ms)
+function afficherMasquer(id)
+{
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(200);
+  else
+    $('#' + id).fadeOut(200);
+}
+
 // Affiche une liste des utilisateurs
 function afficherListboxUtilisateurs(id_zone, week)
 {
@@ -142,6 +184,96 @@ function afficherListboxUtilisateurs(id_zone, week)
   $("#" + id_zone).append(html);
 }
 
+// Insère une prévisualisation de l'image sur la zone
+var loadFile = function(event, id)
+{
+  var output   = document.getElementById(id);
+  output.src   = URL.createObjectURL(event.target.files[0]);
+
+  // Rotation automatique
+  EXIF.getData(event.target.files[0], function()
+  {
+    var orientation = EXIF.getTag(this, "Orientation");
+    var degrees     = 0;
+
+    // Les valeurs sont inversées par rapport à la fonction rotateImage() dans fonctions_communes.php
+    switch(orientation)
+    {
+      case 3:
+        degrees = 180;
+        break;
+
+      case 6:
+        degrees = 90;
+        break;
+
+      case 8:
+        degrees = -90;
+        break;
+
+      case 1:
+      default:
+        degrees = 0;
+        break;
+    }
+
+    output.setAttribute('style','transform: rotate(' + degrees + 'deg)');
+  });
+};
+
+// Affiche ou la zone de saisie semaine correspondant à l'année (insertion)
+function afficherSemaines(select)
+{
+  var html;
+  var semaines = listeSemaines[$('#' + select).val()];
+
+  html = '<select name="week_recipe" id="saisie_semaine" class="saisie_annee_semaine" required>';
+    html += '<option value="" hidden>Semaine</option>';
+
+    $.each(semaines, function(key, value)
+    {
+      html += '<option value="' + value + '">' + value + '</option>';
+    });
+  html += '</select>';
+
+  if ($('#saisie_semaine').length)
+    $('#saisie_semaine').remove();
+
+  $('#saisie_nom').css('width', 'calc(100% - 280px)');
+
+  $('#' + select).after(html);
+}
+
+// Affiche un champ de saisie d'ingrédient
+function addIngredient(id)
+{
+  var html;
+  var length        = $("#" + id + " .input_ingredient").length;
+  var new_length    = length + 1;
+  var id_ingredient = 'ingredient_' + new_length;
+  var unites        = ['g', 'kg', 'ml', 'cl', 'L'];
+
+  html = '<div class="zone_ingredient">';
+    // Ingrédient
+    html += '<input type="text" placeholder="Ingrédient" value="" id="' + id_ingredient + '" name="' + id_ingredient + '" class="input_ingredient saisieIngredient" />';
+
+    // Quantité
+    html += '<input type="text" placeholder="Quantité" value="" id="quantite_' + id_ingredient + '" name="quantite_' + id_ingredient + '" class="input_quantite" />';
+
+    // Unité
+    html += '<select id="unite_' + id_ingredient + '" name="unite_' + id_ingredient + '" class="select_unite">';
+      html += '<option value="" hidden>Unité</option>';
+
+      $.each(unites, function(key, value)
+      {
+        html += '<option value="' + value + '">' + value + '</option>';
+      });
+    html += '</select>';
+  html += '</div>';
+
+  $("#" + id).append(html);
+}
+
 // Affiche les détails de la recette
 function showRecipe(link, id)
 {
@@ -168,7 +300,7 @@ function showRecipe(link, id)
       html += '<a id="fermerRecette" class="lien_zoom" style="display: none;"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
 
       // Détails recette
-      html += '<div class="texte_zoom">';
+      html += '<div class="texte_zoom" style="display: none;">';
         // Nom
         html += '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" />' + recipe['name'] + '</div>';
 
@@ -228,6 +360,25 @@ function showRecipe(link, id)
         // Cas vide
         if (recipe['ingredients'] == "" && recipe['recipe'] == "" && recipe['tips'] == "")
           html += '<div class="empty">Pas de recette disponible</div>';
+
+        // Bouton "Je l'ai fait"
+        if (recipe['identifiant'] == userSession)
+        {
+          if (recipe['cooked'] == "Y")
+          {
+            html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnuler">';
+              html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
+              html += '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_details" />';
+            html += '</form>';
+          }
+          else
+          {
+            html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValider">';
+              html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
+              html += '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_details" />';
+            html += '</form>';
+          }
+        }
       html += '</div>';
     html += '</div>';
   html += '</div>';
@@ -241,13 +392,17 @@ function showRecipe(link, id)
 // Taille automatique zone recette + fondu
 function tailleAutoRecette(speed)
 {
+  // Apparition de la zone
   $('#zoom_image').fadeIn(200, function()
   {
+    // Réglage de la hauteur
     $('.zone_texte_zoom').animate(
     {
       height: $('.image_zoom_2').height()
     }, speed, function()
     {
+      // Apparition du texte et de la croix
+      $('.texte_zoom').fadeIn(200);
       $('.lien_zoom').fadeIn(200);
     });
   });
@@ -259,4 +414,19 @@ function nl2br (str)
   var nl2br = str.replace(/(\r\n|\n\r|\r|\n)/g, '<br />');
 
   return nl2br;
+}
+
+// Change la couleur de fond lors de la saisie de texte
+function changeIngredientColor(id)
+{
+  if ($('#' + id).val() != "")
+  {
+    $('#' + id).css('background-color', '#70d55d');
+    $('#' + id).css('color', 'white');
+  }
+  else
+  {
+    $('#' + id).css('background-color', '#e3e3e3');
+    $('#' + id).css('color', '#262626');
+  }
 }
