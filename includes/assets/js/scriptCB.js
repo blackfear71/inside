@@ -126,6 +126,14 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_recettes').addClass('masonry');
   }
+
+  // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id     = $_GET('anchor');
+  var offset = 70;
+  var shadow = true;
+
+  // Scroll vers l'id
+  scrollToId(id, offset, shadow);
 });
 
 /*****************/
@@ -251,17 +259,17 @@ function addIngredient(id)
   var length        = $("#" + id + " .input_ingredient").length;
   var new_length    = length + 1;
   var id_ingredient = 'ingredient_' + new_length;
-  var unites        = ['g', 'kg', 'ml', 'cl', 'L'];
+  var unites        = ['sans', 'g', 'kg', 'ml', 'cl', 'L'];
 
   html = '<div class="zone_ingredient">';
     // Ingrédient
-    html += '<input type="text" placeholder="Ingrédient" value="" id="' + id_ingredient + '" name="' + id_ingredient + '" class="input_ingredient saisieIngredient" />';
+    html += '<input type="text" placeholder="Ingrédient" value="" id="' + id_ingredient + '" name="ingredients[' + new_length + ']" class="input_ingredient saisieIngredient" />';
 
     // Quantité
-    html += '<input type="text" placeholder="Quantité" value="" id="quantite_' + id_ingredient + '" name="quantite_' + id_ingredient + '" class="input_quantite" />';
+    html += '<input type="text" placeholder="Quantité" value="" id="quantite_' + id_ingredient + '" name="quantites_ingredients[' + new_length + ']" class="input_quantite" />';
 
     // Unité
-    html += '<select id="unite_' + id_ingredient + '" name="unite_' + id_ingredient + '" class="select_unite">';
+    html += '<select id="unite_' + id_ingredient + '" name="unites_ingredients[' + new_length + ']" class="select_unite">';
       html += '<option value="" hidden>Unité</option>';
 
       $.each(unites, function(key, value)

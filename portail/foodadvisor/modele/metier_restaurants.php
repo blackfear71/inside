@@ -58,7 +58,7 @@
     $new_id     = NULL;
     $control_ok = true;
 
-    // Récupération des données et sauvegarde en session
+    // Récupération des données
     $nom_restaurant         = $post['name_restaurant'];
     $website_restaurant     = $post['website_restaurant'];
     $plan_restaurant        = $post['plan_restaurant'];
@@ -102,6 +102,7 @@
       }
     }
 
+    // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['name_restaurant']        = $post['name_restaurant'];
     $_SESSION['save']['phone_restaurant']       = $post['phone_restaurant'];
     $_SESSION['save']['website_restaurant']     = $post['website_restaurant'];

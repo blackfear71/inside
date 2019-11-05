@@ -299,6 +299,11 @@
   border-radius: 2px;
 }
 
+.zone_infos_recette
+{
+  display: block;
+}
+
 .semaine_recette
 {
   display: inline-block;
@@ -550,6 +555,11 @@
 	line-height: 32px;
 }
 
+.short
+{
+  width: calc(100% - 280px);
+}
+
 #zone_ingredients
 {
   display: block;
@@ -635,6 +645,12 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
+}
+
+.colored
+{
+  background-color: #70d55d;
+  color: white;
 }
 
 .input_quantite
@@ -764,6 +780,7 @@
   font-weight: bold;
   color: #262626;
   font-size: 120%;
+  margin-bottom: 5px;
 }
 
 .ingredient_details_recette
@@ -802,7 +819,6 @@
 .contenu_recette_details
 {
   margin-top: 10px;
-  margin-bottom: 10px;
   line-height: 120%;
   font-family: robotolight, Verdana, sans-serif;
   color: #262626;

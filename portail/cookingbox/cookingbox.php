@@ -9,6 +9,19 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_cookingbox.php');
 
+  // Initialisation sauvegarde saisie
+  if ((!isset($_SESSION['alerts']['quantity_not_numeric']) OR $_SESSION['alerts']['quantity_not_numeric'] != true))
+  {
+    $_SESSION['save']['year_recipe']           = "";
+    $_SESSION['save']['week_recipe']           = "";
+    $_SESSION['save']['name_recipe']           = "";
+    $_SESSION['save']['ingredients']           = array();
+    $_SESSION['save']['quantites_ingredients'] = array();
+    $_SESSION['save']['unites_ingredients']    = array();
+    $_SESSION['save']['preparation']           = "";
+    $_SESSION['save']['remarks']               = "";
+  }
+
   // Appel métier
   switch ($_GET['action'])
   {
@@ -45,7 +58,15 @@
       validateCake("N", $_POST['week_cake'], $_GET['year']);
       break;
 
-    case "doSupprimer":
+    case "doAjouterRecette":
+      $year       = $_POST['year_recipe'];
+      $id_recette = insertRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      break;
+
+    case "doModifierRecette":
+      break;
+
+    case "doSupprimerRecette":
       deleteRecipe($_POST, $_GET['year']);
       break;
 
@@ -134,7 +155,9 @@
     case "doModifier":
     case "doValider":
     case "doAnnuler":
-    case "doSupprimer":
+    case "doAjouterRecette":
+    case "doModifierRecette":
+    case "doSupprimerRecette":
     default:
       break;
   }
@@ -145,8 +168,13 @@
     case "doModifier":
     case "doValider":
     case "doAnnuler":
-    case "doSupprimer":
+    case "doSupprimerRecette":
       header('location: cookingbox.php?year=' . $_GET['year'] . '&action=goConsulter');
+      break;
+
+    case "doAjouterRecette":
+    case "doModifierRecette":
+      header('location: cookingbox.php?year=' . $year . '&action=goConsulter&anchor=' . $id_recette);
       break;
 
     case "goConsulter":

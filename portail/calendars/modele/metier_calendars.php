@@ -156,13 +156,13 @@
     $dossier = "../../includes/images/calendars";
 
     if (!is_dir($dossier))
-       mkdir($dossier);
+      mkdir($dossier);
 
     // On contrôle la présence du dossier des années, sinon on le créé
     $dossier_calendriers = $dossier . "/" . $post['years'];
 
     if (!is_dir($dossier_calendriers))
-       mkdir($dossier_calendriers);
+      mkdir($dossier_calendriers);
 
     // On contrôle la présence du dossier des miniatures, sinon on le créé
     $dossier_miniatures = $dossier_calendriers . "/mini";
@@ -253,13 +253,13 @@
     $dossier = "../../includes/images/calendars";
 
     if (!is_dir($dossier))
-       mkdir($dossier);
+      mkdir($dossier);
 
     // On contrôle la présence du dossier des annexes, sinon on le créé
     $dossier_annexes = $dossier . "/annexes";
 
     if (!is_dir($dossier_annexes))
-       mkdir($dossier_annexes);
+      mkdir($dossier_annexes);
 
     // On contrôle la présence du dossier des miniatures, sinon on le créé
     $dossier_miniatures = $dossier_annexes . "/mini";

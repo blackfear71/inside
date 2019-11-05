@@ -191,7 +191,7 @@
               }
             }
             else
-              echo '<tr class="">Pas d\'alertes paramétrées</tr>';
+              echo '<tr>Pas d\'alertes paramétrées</tr>';
           echo '</table>';
         ?>
 			</article>

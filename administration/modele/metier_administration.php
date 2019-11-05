@@ -2227,7 +2227,7 @@
     $dossier_avatars = $dossier . "/avatars";
 
     if (!is_dir($dossier_avatars))
-       mkdir($dossier_avatars);
+      mkdir($dossier_avatars);
 
     $avatar = rand();
 
