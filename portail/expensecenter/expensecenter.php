@@ -14,10 +14,11 @@
 	if ((!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
   AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true))
 	{
+    unset($_SESSION['save']);
+
 		$_SESSION['save']['price']   = "";
 		$_SESSION['save']['buyer']   = "";
 		$_SESSION['save']['comment'] = "";
-		unset($_SESSION['save']['tableau_parts']);
 	}
 
   // Appel métier

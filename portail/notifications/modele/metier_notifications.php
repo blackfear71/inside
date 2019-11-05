@@ -501,6 +501,21 @@
 
           break;
 
+        case "recipe":
+          // Recherche données recette
+          $reponse = $bdd->query('SELECT id, year FROM cooking_box WHERE id = "' . $notification->getContent() . '"');
+          $donnees = $reponse->fetch();
+
+          $id_recette = $donnees['id'];
+          $year       = $donnees['year'];
+
+          $reponse->closeCursor();
+
+          $icone  = "cooking_box";
+          $phrase = "Une <strong>nouvelle recette</strong> vient d'être ajoutée, allez vite la consulter !";
+          $lien   = "/inside/portail/cookingbox/cookingbox.php?year=" . $year . "&action=goConsulter&anchor=" . $id_recette;
+          break;
+
         default:
           $icone  = "inside";
           $phrase = $notification->getContent();

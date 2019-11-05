@@ -18,8 +18,7 @@
   AND (!isset($_SESSION['alerts']['missing_mission_file'])  OR $_SESSION['alerts']['missing_mission_file']  != true)
   AND (!isset($_SESSION['alerts']['wrong_file'])            OR $_SESSION['alerts']['wrong_file']            != true))
 	{
-    unset($_SESSION['save']['new_mission']);
-		unset($_SESSION['save']['old_mission']);
+    unset($_SESSION['save']);
 	}
 
   if ((isset($_SESSION['alerts']['already_ref_mission'])   AND $_SESSION['alerts']['already_ref_mission']   = true)

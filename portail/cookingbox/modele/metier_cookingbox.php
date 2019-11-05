@@ -313,7 +313,7 @@
     {
       if (!empty($ingredient))
       {
-        if (!is_numeric($post['quantites_ingredients'][$key]))
+        if (!empty($post['quantites_ingredients'][$key]) AND !is_numeric($post['quantites_ingredients'][$key]))
         {
           $_SESSION['alerts']['quantity_not_numeric'] = true;
           $control_ok                                 = false;
@@ -425,6 +425,9 @@
       $new_id = $data2['id'];
       $req2->closeCursor();
 
+      // Génération notification nouvelle recette
+      insertNotification($user, 'recipe', $new_id);
+
       $_SESSION['alerts']['recipe_added'] = true;
     }
 
@@ -468,5 +471,8 @@
                                             AND   week = "' . $week . '"');
     $req2->execute($update);
     $req2->closeCursor();
+
+    // Suppression des notifications
+    deleteNotification('recipe', $recipe->getId());
   }
 ?>

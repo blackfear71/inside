@@ -17,6 +17,8 @@
   AND (!isset($_SESSION['alerts']['miss_price'])         OR $_SESSION['alerts']['miss_price']         != true)
   AND (!isset($_SESSION['alerts']['price_max_min'])      OR $_SESSION['alerts']['price_max_min']      != true))
   {
+    unset($_SESSION['save']);
+    
     $_SESSION['save']['name_restaurant']        = "";
     $_SESSION['save']['prix_min']               = "";
     $_SESSION['save']['prix_max']               = "";

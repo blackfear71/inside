@@ -18,6 +18,8 @@
   AND (!isset($_SESSION['alerts']['wrong_file'])          OR $_SESSION['alerts']['wrong_file']          != true)
   AND (!isset($_SESSION['alerts']['level_theme_numeric']) OR $_SESSION['alerts']['level_theme_numeric'] != true))
   {
+    unset($_SESSION['save']);
+    
     $_SESSION['save']['theme_title']    = "";
     $_SESSION['save']['theme_ref']      = "";
     $_SESSION['save']['theme_level']    = "";

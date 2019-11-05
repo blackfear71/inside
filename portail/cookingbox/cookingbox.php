@@ -12,6 +12,8 @@
   // Initialisation sauvegarde saisie
   if ((!isset($_SESSION['alerts']['quantity_not_numeric']) OR $_SESSION['alerts']['quantity_not_numeric'] != true))
   {
+    unset($_SESSION['save']);
+
     $_SESSION['save']['year_recipe']           = "";
     $_SESSION['save']['week_recipe']           = "";
     $_SESSION['save']['name_recipe']           = "";

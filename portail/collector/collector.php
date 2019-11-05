@@ -12,6 +12,8 @@
   // Initialisation sauvegarde saisie
   if (!isset($_SESSION['alerts']['wrong_date']) OR $_SESSION['alerts']['wrong_date'] != true)
   {
+    unset($_SESSION['save']);
+
     $_SESSION['save']['speaker']        = "";
     $_SESSION['save']['other_speaker']  = "";
     $_SESSION['save']['date_collector'] = "";

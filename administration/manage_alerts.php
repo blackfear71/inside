@@ -11,6 +11,8 @@
   // Initialisation sauvegarde saisie alerte
   if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
   {
+    unset($_SESSION['save']);
+    
     $_SESSION['save']['type_alert']      = "";
     $_SESSION['save']['category_alert']  = "";
     $_SESSION['save']['reference_alert'] = "";

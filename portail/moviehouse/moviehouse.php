@@ -15,6 +15,8 @@
   if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date'] != true)
   AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
   {
+    unset($_SESSION['save']);
+    
     $_SESSION['save']['nom_film_saisi']         = "";
     $_SESSION['save']['date_theater_saisie']    = "";
     $_SESSION['save']['date_release_saisie']    = "";

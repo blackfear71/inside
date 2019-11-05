@@ -12,6 +12,8 @@
 	// Initialisation sauvegarde saisie
 	if (!isset($_SESSION['save']['user_ask_id']) OR !isset($_SESSION['save']['user_ask_name']) OR !isset($_SESSION['save']['new_password']))
 	{
+    unset($_SESSION['save']);
+    
 		$_SESSION['save']['user_ask_id']   = "";
 		$_SESSION['save']['user_ask_name'] = "";
 		$_SESSION['save']['new_password']  = "";

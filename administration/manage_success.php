@@ -16,6 +16,8 @@
   AND (!isset($_SESSION['alerts']['already_ordered'])    OR $_SESSION['alerts']['already_ordered']    != true)
   AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true))
   {
+		unset($_SESSION['save']);
+		
     $_SESSION['save']['reference_success']   = "";
     $_SESSION['save']['level']               = "";
 		$_SESSION['save']['order_success']       = "";
