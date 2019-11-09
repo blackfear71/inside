@@ -2026,6 +2026,7 @@
               $value = 0;
               break;
 
+            // Chef étoilé
             case "star-chief":
               $nb_repas_organises = 0;
 
@@ -2037,6 +2038,7 @@
               $value = $nb_repas_organises;
               break;
 
+            // Cuisto expérimental
             case "cooker":
               $nb_gateaux_realises = 0;
 
@@ -2046,6 +2048,18 @@
               $req->closeCursor();
 
               $value = $nb_gateaux_realises;
+              break;
+
+            // Maître pâtissier
+            case "recipe-master":
+              $nb_recettes_saisies = 0;
+
+              $req = $bdd->query('SELECT COUNT(id) AS nb_recettes_saisies FROM cooking_box WHERE identifiant = "' . $user->getIdentifiant() . '" AND name != "" AND picture != ""');
+              $data = $req->fetch();
+              $nb_recettes_saisies = $data['nb_recettes_saisies'];
+              $req->closeCursor();
+
+              $value = $nb_recettes_saisies;
               break;
 
             // Lutin de Noël

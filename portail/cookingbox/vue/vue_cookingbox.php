@@ -84,13 +84,13 @@
     <!-- Données JSON -->
     <script>
       // Récupération liste semaines par années pour le script
-      var listeSemaines = <?php echo $listeSemainesJson; ?>;
+      var listWeeks = <?php echo $listeSemainesJson; ?>;
 
       // Récupération liste utilisateurs pour le script
-      var listeUsers = <?php echo $listeUsersJson; ?>;
+      var listUsers = <?php echo $listeUsersJson; ?>;
 
       // Récupération liste recettes pour le script
-      var listeRecipes = <?php echo $recettesJson; ?>;
+      var listRecipes = <?php echo $recettesJson; ?>;
 
       // Récupération utilisateur connecté
       var userSession = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;

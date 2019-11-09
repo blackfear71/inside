@@ -46,9 +46,23 @@ $(function()
   });
 
   // Ajouter une recette
-  $('#ajouterRecette, #fermerRecette').click(function()
+  $('#ajouterRecette').click(function()
   {
     afficherMasquer('zone_add_recipe');
+  });
+
+  // Réinitialise la saisie recette à la fermeture
+  $('#fermerRecette').click(function()
+  {
+    resetSaisie('zone_add_recipe');
+  });
+
+  // Modifier une recette
+  $('.modifierRecette').click(function()
+  {
+    var id_recette = $(this).attr('id').replace('modifier_', '');
+
+    updateRecipe(id_recette, 'zone_add_recipe');
   });
 
   // Ajoute un champ de saisie ingrédient (saisie)
@@ -173,7 +187,7 @@ function afficherListboxUtilisateurs(id_zone, week)
     html += '<select name="select_user" class="listbox_users" required>';
       html += '<option value="" hidden>Choisissez...</option>';
 
-      $.each(listeUsers, function(key, value)
+      $.each(listUsers, function(key, value)
       {
         html += '<option value="' + key + '">' + value + '</option>';
       });
@@ -233,7 +247,7 @@ var loadFile = function(event, id)
 function afficherSemaines(select)
 {
   var html;
-  var semaines = listeSemaines[$('#' + select).val()];
+  var semaines = listWeeks[$('#' + select).val()];
 
   html = '<select name="week_recipe" id="saisie_semaine" class="saisie_annee_semaine" required>';
     html += '<option value="" hidden>Semaine</option>';
@@ -291,7 +305,7 @@ function showRecipe(link, id)
   var path_full        = path_mini.replace('mini/', '');
   var split            = path_mini.split('/');
   var image            = split[split.length - 1];
-  var recipe           = listeRecipes[id];
+  var recipe           = listRecipes[id];
   var ingredientsSplit = new Array();
   var ingredientSplit  = new Array();
   var ingredients      = new Array();
@@ -332,8 +346,8 @@ function showRecipe(link, id)
           {
             ingredientSplit = value.split('@');
 
-            if (ingredientSplit[0] != "" && ingredientSplit[1] != "")
-              ingredients.push({ingredient: ingredientSplit[0], quantity: ingredientSplit[1]});
+            if (ingredientSplit[0] != "")
+              ingredients.push({ingredient: ingredientSplit[0], quantity: ingredientSplit[1], unity: ingredientSplit[2]});
           });
 
           html += '<div class="zone_ingredients_details">';
@@ -342,7 +356,7 @@ function showRecipe(link, id)
             $.each(ingredients, function(key, value)
             {
               html += '<div class="ingredient_details_recette">' + this['ingredient'] + '</div>';
-              html += '<div class="quantite_details_recette">' + this['quantity'] + '</div>';
+              html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
             });
           html += '</div>';
         }
@@ -395,6 +409,135 @@ function showRecipe(link, id)
 
   // Affichage des différentes zones en fondu
   tailleAutoRecette(500)
+}
+
+// Affiche la zone de mise à jour d'une recette
+function updateRecipe(id, zone)
+{
+  // Affichage zone de saisie
+  afficherMasquer(zone);
+
+  var image       = listRecipes[id]['picture'];
+  var annee       = listRecipes[id]['year'];
+  var semaine     = listRecipes[id]['week'];
+  var nom         = listRecipes[id]['name'];
+  var ingredients = listRecipes[id]['ingredients'].split(';');
+  var preparation = listRecipes[id]['recipe'];
+  var remarques   = listRecipes[id]['tips'];
+  var titre       = 'Modifier la recette de la semaine ' + semaine + ' (' + annee + ')';
+  var action      = 'cookingbox.php?year=' + annee + '&action=doModifierRecette';
+
+  // Modification des données
+  generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, "mod");
+}
+
+// Réinitialise la zone de saisie d'une recette si fermeture modification
+function resetSaisie(zone)
+{
+  // Fermeture zone de saisie
+  afficherMasquer(zone);
+
+  setTimeout(function()
+  {
+    // Test si action = modification
+    var currentAction = $('.form_saisie_recette').attr('action').split('&action=');
+    var call          = currentAction[currentAction.length - 1]
+
+    if (call == "doModifierRecette")
+    {
+      var id          = "";
+      var image       = "";
+      var annee       = "";
+      var semaine     = "";
+      var nom         = "";
+      var ingredients = "";
+      var preparation = "";
+      var remarques   = "";
+      var titre       = 'Ajouter une recette';
+      var action      = 'cookingbox.php?action=doAjouterRecette';
+
+      generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, "reset");
+    }
+  }, 200);
+}
+
+// Génère la zone de saisie recette
+function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, mode)
+{
+  var ingredient;
+  var numIngredient;
+
+  // Modification des données générales
+  $('input[name=id_recipe]').val(id);
+  $('.titre_saisie_recette').html(titre);
+  $('.form_saisie_recette').attr('action', action);
+  $('#saisie_nom').val(nom);
+  $('#saisie_preparation').val(preparation);
+  $('#saisie_remarques').val(remarques);
+
+  // Modification des données spécifiques
+  if (mode == "mod")
+  {
+    $('#saisie_annee').css('display', 'none');
+    $('#saisie_annee').prop('required', false);
+
+    $('#saisie_semaine').css('display', 'none');
+    $('#saisie_semaine').prop('required', false);
+
+    $('.zone_recette_right').prepend('<input type="hidden" id="hidden_week_recipe" name="hidden_week_recipe" value="' + semaine + '" />');
+    $('.zone_recette_right').prepend('<input type="hidden" id="hidden_year_recipe" name="hidden_year_recipe" value="' + annee + '" />');
+
+    $('#saisie_nom').css('width', 'calc(100% - 20px)');
+
+    $('#image_recette').attr('src', '../../includes/images/cookingbox/' + annee + '/mini/' + image);
+    $('input[name=image]').prop('required', false);
+    $('input[name=insert_recipe]').val("Modifier");
+  }
+  else
+  {
+    $('#saisie_annee').css('display', 'inline-block');
+    $('#saisie_annee').prop('required', true);
+
+    $('#hidden_week_recipe').remove();
+    $('#hidden_year_recipe').remove();
+
+    $('#saisie_nom').css('width', 'calc(100% - 150px)');
+
+    $('#image_recette').removeAttr('src');
+    $('input[name=image]').prop('required', true);
+    $('input[name=insert_recipe]').val("Ajouter");
+  }
+
+  // Modification des données ingrédients
+  $('.zone_ingredient').remove();
+  addIngredient('zone_ingredients');
+  addIngredient('zone_ingredients');
+  addIngredient('zone_ingredients');
+  addIngredient('zone_ingredients');
+
+  $.each(ingredients, function(key, value)
+  {
+    ingredient = "";
+
+    if (value != "")
+    {
+      ingredient    = value.split('@');
+      numIngredient = key + 1;
+
+      if (numIngredient > 4)
+        addIngredient('zone_ingredients');
+
+      $('#ingredient_' + numIngredient).val(ingredient[0]);
+      $('#quantite_ingredient_' + numIngredient).val(ingredient[1]);
+
+      $('#ingredient_' + numIngredient).addClass('filled');
+
+      if (ingredient[2] == "")
+        $('#unite_ingredient_' + numIngredient).val("sans");
+      else
+        $('#unite_ingredient_' + numIngredient).val(ingredient[2]);
+    }
+  });
 }
 
 // Taille automatique zone recette + fondu

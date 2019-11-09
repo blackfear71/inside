@@ -66,10 +66,12 @@
       break;
 
     case "doModifierRecette":
+      $year       = $_POST['hidden_year_recipe'];
+      $id_recette = updateRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case "doSupprimerRecette":
-      deleteRecipe($_POST, $_GET['year']);
+      deleteRecipe($_POST, $_GET['year'], $_SESSION['user']['identifiant']);
       break;
 
     default:

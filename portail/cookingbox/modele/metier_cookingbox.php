@@ -284,7 +284,7 @@
     return $listRecipesToConvert;
   }
 
-  // METIER : Met à jour une recette
+  // METIER : Insère une recette (mise à jour)
   // RETOUR : Id recette
   function insertRecipe($post, $files, $user)
   {
@@ -313,7 +313,8 @@
     {
       if (!empty($ingredient))
       {
-        if (!empty($post['quantites_ingredients'][$key]) AND !is_numeric($post['quantites_ingredients'][$key]))
+        if  (!empty($post['quantites_ingredients'][$key])
+        AND (!is_numeric($post['quantites_ingredients'][$key]) OR $post['quantites_ingredients'][$key] <= 0))
         {
           $_SESSION['alerts']['quantity_not_numeric'] = true;
           $control_ok                                 = false;
@@ -323,10 +324,10 @@
         {
           $ingredient = str_replace(".", ",", $ingredient);
 
-          if (empty($post['unites_ingredients'][$key]) OR $post['unites_ingredients'][$key] == "sans")
-            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . ";";
+          if ($post['unites_ingredients'][$key] == "sans")
+            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@;";
           else
-            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . $post['unites_ingredients'][$key] . ";";
+            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@" . $post['unites_ingredients'][$key] . ";";
         }
       }
     }
@@ -337,19 +338,19 @@
       $new_name = "";
 
       // On contrôle la présence du dossier, sinon on le créé
-      $dossier = "../../includes/images/cookingbox";
+      $dossier = '../../includes/images/cookingbox';
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // On contrôle la présence du dossier d'avatars, sinon on le créé
-      $dossier_annee = $dossier . "/" . $year_recipe;
+      // On contrôle la présence du dossier des années, sinon on le créé
+      $dossier_annee = $dossier . '/' . $year_recipe;
 
       if (!is_dir($dossier_annee))
         mkdir($dossier_annee);
 
       // On contrôle la présence du dossier des miniatures, sinon on le créé
-      $dossier_miniatures = $dossier_annee . "/mini";
+      $dossier_miniatures = $dossier_annee . '/mini';
 
       if (!is_dir($dossier_miniatures))
         mkdir($dossier_miniatures);
@@ -409,13 +410,13 @@
                        );
 
       $req1 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
-                                                   picture     = :picture,
-                                                   ingredients = :ingredients,
-                                                   recipe      = :recipe,
-                                                   tips        = :tips
-                                             WHERE year        = "' . $year_recipe . '"
-                                               AND week        = "' . $week_recipe . '"
-                                               AND identifiant = "' . $user . '"');
+                                                    picture     = :picture,
+                                                    ingredients = :ingredients,
+                                                    recipe      = :recipe,
+                                                    tips        = :tips
+                                              WHERE year        = "' . $year_recipe . '"
+                                                AND week        = "' . $week_recipe . '"
+                                                AND identifiant = "' . $user . '"');
       $req1->execute($myRecipe);
       $req1->closeCursor();
 
@@ -428,15 +429,150 @@
       // Génération notification nouvelle recette
       insertNotification($user, 'recipe', $new_id);
 
+      // Génération succès
+      insertOrUpdateSuccesValue('recipe-master', $user, 1);
+
+      // Ajout expérience
+      insertExperience($user, 'add_recipe');
+
       $_SESSION['alerts']['recipe_added'] = true;
     }
 
     return $new_id;
   }
 
+  // METIER : Met à jour une recette
+  // RETOUR : Id recette
+  function updateRecipe($post, $files, $user)
+  {
+    $new_id     = NULL;
+    $control_ok = true;
+
+    global $bdd;
+
+    // Récupération des données
+    $year_recipe = $post['hidden_year_recipe'];
+    $week_recipe = $post['hidden_week_recipe'];
+    $name_recipe = $post['name_recipe'];
+    $recipe      = $post['preparation'];
+    $tips        = $post['remarks'];
+    $ingredients = "";
+
+    foreach ($post['ingredients'] as $key => $ingredient)
+    {
+      if (!empty($ingredient))
+      {
+        if  (!empty($post['quantites_ingredients'][$key])
+        AND (!is_numeric($post['quantites_ingredients'][$key]) OR $post['quantites_ingredients'][$key] <= 0))
+        {
+          $_SESSION['alerts']['quantity_not_numeric'] = true;
+          $control_ok                                 = false;
+          break;
+        }
+        else
+        {
+          $ingredient = str_replace(".", ",", $ingredient);
+
+          if ($post['unites_ingredients'][$key] == "sans")
+            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@;";
+          else
+            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@" . $post['unites_ingredients'][$key] . ";";
+        }
+      }
+    }
+
+    if ($control_ok == true)
+    {
+      // Récupération des données
+      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+      $data1 = $req1->fetch();
+      $datasRecipe = WeekCake::withData($data1);
+      $req1->closeCursor();
+
+      $idRecipe = $datasRecipe->getId();
+      $new_name = $datasRecipe->getPicture();
+
+      // Insertion nouvelles images
+      if ($files['image']['name'] != NULL)
+      {
+        // Dossiers de destination
+        $image_dir = '../../includes/images/cookingbox/' . $year_recipe . '/';
+        $mini_dir  = $image_dir . '/mini/';
+
+        // Données du fichier
+        $file      = $files['image']['name'];
+        $tmp_file  = $files['image']['tmp_name'];
+        $size_file = $files['image']['size'];
+        $maxsize   = 8388608; // 8Mo
+
+        // Si le fichier n'est pas trop grand
+        if ($size_file < $maxsize)
+        {
+          // Contrôle fichier temporaire existant
+          if (!is_uploaded_file($tmp_file))
+            exit("Le fichier est introuvable");
+
+          // Contrôle type de fichier
+          $type_file = $files['image']['type'];
+
+          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+            exit("Le fichier n'est pas une image valide");
+          else
+          {
+            $type_image = pathinfo($file, PATHINFO_EXTENSION);
+            $new_name   = $year_recipe . '-' . $week_recipe . '-' . rand() . '.' . $type_image;
+          }
+
+          // Contrôle upload (si tout est bon, l'image est envoyée)
+          if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
+            exit("Impossible de copier le fichier dans $image_dir");
+
+          // Rotation de l'image (si JPEG)
+          if ($type_image == 'jpg' OR $type_image == 'jpeg')
+            $rotate = rotateImage($image_dir . $new_name, $type_image);
+
+          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+          imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
+
+          // Suppression des anciennes images
+          if (!empty($datasRecipe->getPicture()))
+          {
+            unlink($image_dir . $datasRecipe->getPicture());
+            unlink($mini_dir . $datasRecipe->getPicture());
+          }
+        }
+      }
+
+      // Mise à jour de l'enregistrement concerné
+      $myRecipe = array('name'        => $name_recipe,
+                        'picture'     => $new_name,
+                        'ingredients' => $ingredients,
+                        'recipe'      => $recipe,
+                        'tips'        => $tips
+                       );
+
+     var_dump($myRecipe);
+
+      $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
+                                                    picture     = :picture,
+                                                    ingredients = :ingredients,
+                                                    recipe      = :recipe,
+                                                    tips        = :tips
+                                              WHERE year        = "' . $year_recipe . '"
+                                                AND week        = "' . $week_recipe . '"
+                                                AND identifiant = "' . $user . '"');
+      $req2->execute($myRecipe);
+      $req2->closeCursor();
+
+      $_SESSION['alerts']['recipe_updated'] = true;
+    }
+
+    return $idRecipe;
+  }
+
   // METIER : Supprime une recette
   // RETOUR : Aucun
-  function deleteRecipe($post, $year)
+  function deleteRecipe($post, $year, $user)
   {
     $week = $post['week_cake'];
 
@@ -451,8 +587,8 @@
     // Suppression des images
     if (!empty($recipe->getPicture()))
     {
-      unlink ("../../includes/images/cookingbox/" . $year . "/" . $recipe->getPicture());
-      unlink ("../../includes/images/cookingbox/" . $year . "/mini/" . $recipe->getPicture());
+      unlink("../../includes/images/cookingbox/" . $year . "/" . $recipe->getPicture());
+      unlink("../../includes/images/cookingbox/" . $year . "/mini/" . $recipe->getPicture());
     }
 
     // Mise à jour des données
@@ -474,5 +610,8 @@
 
     // Suppression des notifications
     deleteNotification('recipe', $recipe->getId());
+
+    // Génération succès
+    insertOrUpdateSuccesValue('recipe-master', $user, -1);
   }
 ?>

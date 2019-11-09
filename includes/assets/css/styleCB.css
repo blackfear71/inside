@@ -478,6 +478,7 @@
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
+  text-align: center;
 	margin-top: -203px;
 }
 
@@ -756,6 +757,7 @@
   vertical-align: top;
   width: calc(100% - 70px);
   margin-top: -10px;
+  margin-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
   font-family: robotolight, Verdana, sans-serif;
@@ -768,7 +770,6 @@
   background-color: #e3e3e3;
   border-radius: 2px;
   padding: 10px;
-  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -814,6 +815,7 @@
 {
   padding-left: 10px;
   padding-right: 10px;
+  margin-bottom: 10px;
 }
 
 .contenu_recette_details

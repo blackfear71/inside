@@ -780,6 +780,7 @@
       case "restaurant-finder":
       case "star-chief":
       case "cooker":
+      case "recipe-master":
       case "christmas2017":
       case "christmas2017_2":
       case "golden-egg":
@@ -894,6 +895,7 @@
 
       case 'add_collector':
       case 'add_bug':
+      case 'add_recipe':
         $experience = 15;
         break;
 

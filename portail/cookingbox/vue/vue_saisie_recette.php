@@ -11,6 +11,8 @@
       echo '<a id="fermerRecette" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
       echo '<form method="post" action="cookingbox.php?action=doAjouterRecette" enctype="multipart/form-data" class="form_saisie_recette">';
+        echo '<input type="hidden" name="id_recipe" value="" />';
+
         // Zone saisie image
         echo '<div class="zone_recette_left">';
           // Saisie image
@@ -104,7 +106,7 @@
                     echo '<select id="unite_ingredient_' . $i . '" name="unites_ingredients[' . $i . ']" class="select_unite">';
                       echo '<option value="" hidden>Unité</option>';
 
-                      foreach($unites as $unite)
+                      foreach ($unites as $unite)
                       {
                         if ($unite == $_SESSION['save']['unites_ingredients'][$key])
                           echo '<option value="' . $unite . '" selected>' . $unite . '</option>';
@@ -132,7 +134,7 @@
                     echo '<select id="unite_ingredient_' . $j . '" name="unites_ingredients[' . $j . ']" class="select_unite">';
                       echo '<option value="" hidden>Unité</option>';
 
-                      foreach($unites as $unite)
+                      foreach ($unites as $unite)
                       {
                         echo '<option value="' . $unite . '">' . $unite . '</option>';
                       }
@@ -157,7 +159,7 @@
                   echo '<select id="unite_ingredient_' . $i . '" name="unites_ingredients[' . $i . ']" class="select_unite">';
                     echo '<option value="" hidden>Unité</option>';
 
-                    foreach($unites as $unite)
+                    foreach ($unites as $unite)
                     {
                       echo '<option value="' . $unite . '">' . $unite . '</option>';
                     }
@@ -176,9 +178,9 @@
 
               // Saisie
               if (isset($_SESSION['save']['preparation']) AND !empty($_SESSION['save']['preparation']))
-                echo '<textarea placeholder="Préparation" name="preparation" class="textarea_saisie">' . $_SESSION['save']['preparation'] . '</textarea>';
+                echo '<textarea placeholder="Préparation" name="preparation" id="saisie_preparation" class="textarea_saisie">' . $_SESSION['save']['preparation'] . '</textarea>';
               else
-                echo '<textarea placeholder="Préparation" name="preparation" class="textarea_saisie"></textarea>';
+                echo '<textarea placeholder="Préparation" name="preparation" id="saisie_preparation" class="textarea_saisie"></textarea>';
             echo '</div>';
 
             // Remarques & astuces
@@ -188,9 +190,9 @@
 
               // Saisie
               if (isset($_SESSION['save']['remarks']) AND !empty($_SESSION['save']['remarks']))
-                echo '<textarea placeholder="Remarques & astuces" name="remarks" class="textarea_saisie">' . $_SESSION['save']['remarks'] . '</textarea>';
+                echo '<textarea placeholder="Remarques & astuces" name="remarks" id="saisie_remarques" class="textarea_saisie">' . $_SESSION['save']['remarks'] . '</textarea>';
               else
-                echo '<textarea placeholder="Remarques & astuces" name="remarks" class="textarea_saisie"></textarea>';
+                echo '<textarea placeholder="Remarques & astuces" name="remarks" id="saisie_remarques" class="textarea_saisie"></textarea>';
             echo '</div>';
           echo '</div>';
         echo '</div>';

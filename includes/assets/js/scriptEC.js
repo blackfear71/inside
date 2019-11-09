@@ -223,7 +223,7 @@ function resetSaisie(zone, year)
   {
     // Test si action = modification
     var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
-    var call          = currentAction[currentAction.length-1]
+    var call          = currentAction[currentAction.length - 1]
 
     if (call == "doModifier")
     {
