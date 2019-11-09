@@ -973,4 +973,15 @@
 
     return $level;
   }
+
+  // Décode certains caractères
+  // RETOUR : Chaîne décodée
+  function decodeString($chaine)
+  {
+    $search  = array("&amp;", "&quot;", "&#039;", "&lt;", "&gt;");
+    $replace = array("et", "", "", "", "");
+    $chaine  = str_replace($search, $replace, $chaine);
+
+    return $chaine;
+  }
 ?>

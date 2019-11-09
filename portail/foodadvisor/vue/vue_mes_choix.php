@@ -124,7 +124,7 @@
             echo '</div>';
 
             // Menu
-            list($entree, $plat, $dessert) = explode(";", htmlspecialchars_decode($monChoix->getMenu()));
+            list($entree, $plat, $dessert) = explode(";", decodeString($monChoix->getMenu()));
 
             if (empty($entree) AND empty($plat) AND empty($dessert))
               echo '<div class="no_menu_mes_choix">Pas de menu saisi</div>';
@@ -337,7 +337,7 @@
                 echo '</div>';
 
                 // Menu
-                list($entree, $plat, $dessert) = explode(";", htmlspecialchars_decode($monChoix->getMenu()));
+                list($entree, $plat, $dessert) = explode(";", decodeString($monChoix->getMenu()));
 
                 echo '<input type="text" value="' . $entree . '" placeholder="Entrée" name="update_entree_' . $monChoix->getId() . '" class="update_menu" />';
                 echo '<input type="text" value="' . $plat . '" placeholder="Plat" name="update_plat_' . $monChoix->getId() . '" class="update_menu" />';
