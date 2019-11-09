@@ -3,20 +3,20 @@
     switch ($_GET['view'])
     {
       case 'inprogress':
-        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées proposées</div>';
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" /><div class="texte_titre_section">Idées proposées</div></div>';
         break;
 
       case 'mine':
-        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées que j\'ai en charge</div>';
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" /><div class="texte_titre_section">Idées que j\'ai en charge</div></div>';
         break;
 
       case 'done':
-        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Idées terminées ou rejetées</div>';
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" /><div class="texte_titre_section">Idées terminées ou rejetées</div></div>';
         break;
 
       case 'all':
       default:
-        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />Toutes les idées</div>';
+        echo '<div class="titre_section"><img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" /><div class="texte_titre_section">Toutes les idées</div></div>';
         break;
     }
 

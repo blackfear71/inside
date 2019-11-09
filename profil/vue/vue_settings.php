@@ -1,5 +1,5 @@
 <?php
-  echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />Mes informations</div>';
+  echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes informations</div></div>';
 
   // Avatar actuel & suppression
   echo '<div class="zone_profil_avatar_parametres">';

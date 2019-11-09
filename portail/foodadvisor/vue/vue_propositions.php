@@ -5,27 +5,29 @@
   echo '<div class="zone_propositions_right">';
     echo '<div class="titre_section">';
       echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
+      
+      echo '<div class="texte_titre_section">';
+        echo 'Les propositions du jour';
 
-      echo 'Les propositions du jour';
+        echo '<div class="zone_actions">';
+          // Faire bande à part
+          if ($actions["solo"] == true)
+          {
+            echo '<form method="post" action="foodadvisor.php?action=doSolo" class="form_action">';
+              echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_determination" />';
+            echo '</form>';
+          }
 
-      echo '<div class="zone_actions">';
-        // Faire bande à part
-        if ($actions["solo"] == true)
-        {
-          echo '<form method="post" action="foodadvisor.php?action=doSolo" class="form_action">';
-            echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_determination" />';
-          echo '</form>';
-        }
+          // Lancer la détermination
+          if ($actions["determiner"] == true)
+          {
+            echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="form_action">';
+              echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
+            echo '</form>';
+          }
 
-        // Lancer la détermination
-        if ($actions["determiner"] == true)
-        {
-          echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="form_action">';
-            echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
-          echo '</form>';
-        }
-
-        echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
+          echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
+        echo '</div>';
       echo '</div>';
     echo '</div>';
 

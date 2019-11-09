@@ -34,7 +34,7 @@
             /***********************/
             /* Thèmes utilisateurs */
             /***********************/
-            echo '<div class="titre_section"><img src="../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" />Thèmes utilisateurs</div>';
+            echo '<div class="titre_section"><img src="../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Thèmes utilisateurs</div></div>';
 
             echo '<div class="zone_themes">';
               /***************************************/
@@ -187,7 +187,7 @@
             /*******************/
             /* Thèmes missions */
             /*******************/
-            echo '<div class="titre_section"><img src="../includes/icons/admin/missions_grey.png" alt="missions_grey" class="logo_titre_section" />Thèmes missions</div>';
+            echo '<div class="titre_section"><img src="../includes/icons/admin/missions_grey.png" alt="missions_grey" class="logo_titre_section" /><div class="texte_titre_section">Thèmes missions</div></div>';
 
             echo '<div class="zone_themes">';
               /**********************************/

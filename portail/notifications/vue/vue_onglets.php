@@ -1,7 +1,7 @@
 <?php
   echo '<div class="zone_notifications_left">';
     // Onglets
-    echo '<div class="titre_section"><img src="../../includes/icons/notifications/notifications_grey.png" alt="notifications_grey" class="logo_titre_section" />Vues</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/notifications/notifications_grey.png" alt="notifications_grey" class="logo_titre_section" /><div class="texte_titre_section">Vues</div></div>';
 
     $listeVues = array('me'    => 'Moi',
                        'today' => 'Aujourd\'hui',

@@ -31,7 +31,7 @@
 			<article>
         <?php
           echo '<div class="zone_profil_admin">';
-            echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />Mes informations</div>';
+            echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes informations</div></div>';
 
             // Avatar actuel & suppression
             echo '<div class="zone_profil_avatar_parametres">';
@@ -72,7 +72,7 @@
 
           // Mot de passe
           echo '<div class="zone_profil_bottom">';
-            echo '<div class="titre_section"><img src="../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" />Administrateur</div>';
+            echo '<div class="titre_section"><img src="../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" /><div class="texte_titre_section">Administrateur</div></div>';
 
             echo '<div class="zone_action_user">';
               echo '<div class="titre_contribution">CHANGER MOT DE PASSE</div>';

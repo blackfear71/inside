@@ -324,7 +324,7 @@ function showRecipe(link, id)
       // Détails recette
       html += '<div class="texte_zoom" style="display: none;">';
         // Nom
-        html += '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" />' + recipe['name'] + '</div>';
+        html += '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" /><div class="texte_titre_section">' + recipe['name'] + '</div></div>';
 
         // Avatar
         if (recipe['avatar'] != "")

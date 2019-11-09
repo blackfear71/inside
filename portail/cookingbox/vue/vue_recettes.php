@@ -1,7 +1,7 @@
 <?php
   // Recettes & photos des semaines passées
   echo '<div class="zone_cooking_right">';
-    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" />Les anciennes recettes</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" /><div class="texte_titre_section">Les anciennes recettes</div></div>';
 
     if (!empty($recettes))
     {

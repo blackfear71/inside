@@ -33,7 +33,7 @@
           /* Inside News */
           /***************/
           echo '<div class="zone_portail_left">';
-            echo '<div class="titre_section"><img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" />INSIDE News</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" /><div class="texte_titre_section">INSIDE News</div></div>';
 
             echo '<div class="timeline">';
               foreach ($news as $messageNews)
@@ -76,7 +76,7 @@
           /* Portail */
           /***********/
           echo '<div class="zone_portail_right">';
-            echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />Portail</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Portail</div></div>';
 
             echo '<div class="menu_portail">';
               // Liens des catégories

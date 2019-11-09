@@ -1,6 +1,6 @@
 <?php
   echo '<div class="zone_bugs">';
-    echo '<div class="titre_section"><img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" />Bugs</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" /><div class="texte_titre_section">Bugs</div></div>';
 
     if (!empty($listeBugs))
     {
@@ -65,7 +65,7 @@
   echo '</div>';
 
   echo '<div class="zone_evolutions">';
-    echo '<div class="titre_section"><img src="../../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" />Evolutions</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" /><div class="texte_titre_section">Evolutions</div></div>';
 
     if (!empty($listeEvolutions))
     {

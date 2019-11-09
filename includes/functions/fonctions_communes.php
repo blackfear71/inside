@@ -467,15 +467,15 @@
     switch ($lvl)
     {
       case "1";
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div>Seuls les plus forts y parviendront.</div>';
+        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Seuls les plus forts y parviendront.</div></div></div>';
         break;
 
       case "2";
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div>Vous êtes encore là ?</div>';
+        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Vous êtes encore là ?</div></div>';
         break;
 
       case "3";
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div>Votre charisme doit être impressionnant.</div>';
+        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Votre charisme doit être impressionnant.</div></div>';
         break;
 
       default:

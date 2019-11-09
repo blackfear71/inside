@@ -33,7 +33,7 @@
           /*** Onglets ***/
           /***************/
           echo '<div class="zone_vues">';
-            echo '<div class="titre_section"><img src="../includes/icons/reports/view_grey.png" alt="view_grey" class="logo_titre_section" />Vues</div>';
+            echo '<div class="titre_section"><img src="../includes/icons/reports/view_grey.png" alt="view_grey" class="logo_titre_section" /><div class="texte_titre_section">Vues</div></div>';
 
             $listeVues = array('all'        => 'Tous',
                                'unresolved' => 'En cours',

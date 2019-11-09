@@ -10,15 +10,16 @@
 .count_search
 {
 	float: right;
-	margin-top: -60px;
+	margin-top: -5px;
 	width: 30px;
 	height: 30px;
 	text-align: center;
 	line-height: 30px;
 	background-color: #262626;
 	border-radius: 50%;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: robotothin, Verdana, sans-serif;
 	color: white;
+	font-size: 80%;
 }
 
 .lien_resultat

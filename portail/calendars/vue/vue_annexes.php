@@ -43,7 +43,7 @@
             // Saisie
             if ($preferences->getManage_calendars() == "Y")
             {
-              echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" />Saisir une annexe</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir une annexe</div></div>';
 
               echo '<div class="zone_saisie_calendrier">';
                 echo '<form method="post" action="calendars.php?action=doAjouterAnnexe" enctype="multipart/form-data">';
@@ -78,7 +78,7 @@
           /* Annexes */
           /***********/
           echo '<div class="zone_calendars_right">';
-            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />Les annexes</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Les annexes</div></div>';
 
             if (!empty($annexes))
             {

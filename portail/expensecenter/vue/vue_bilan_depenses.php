@@ -4,7 +4,7 @@
   /**********************/
   echo '<div class="zone_expenses_left">';
     // Bilan
-    echo '<div class="titre_section"><img src="../../includes/icons/expensecenter/total_grey.png" alt="total_grey" class="logo_titre_section" />Bilan</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/expensecenter/total_grey.png" alt="total_grey" class="logo_titre_section" /><div class="texte_titre_section">Bilan</div></div>';
 
     echo '<div class="zone_bilan_expenses">';
       foreach ($listeUsers as $user)
@@ -40,7 +40,7 @@
     echo '</div>';
 
     // Années
-    echo '<div class="titre_section"><img src="../../includes/icons/expensecenter/year_grey.png" alt="year_grey" class="logo_titre_section" />Années</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/expensecenter/year_grey.png" alt="year_grey" class="logo_titre_section" /><div class="texte_titre_section">Années</div></div>';
 
     echo '<div class="zone_annees_expenses">';
       if (!empty($onglets))

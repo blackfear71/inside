@@ -1,5 +1,5 @@
 <?php
-  echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" />Années & annexes</div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" /><div class="texte_titre_section">Années & annexes</div></div>';
 
   echo '<div class="zone_annees_calendrier">';
     if ($_GET['action'] == "goConsulterAnnexes")

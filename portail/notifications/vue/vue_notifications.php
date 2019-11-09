@@ -54,7 +54,7 @@
                   // Date
                   if ($notification->getDate() != $date_notif)
                   {
-                    echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />' . formatDateForDisplay($notification->getDate()) . '</div>';
+                    echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">' . formatDateForDisplay($notification->getDate()) . '</div></div>';
                     $date_notif = $notification->getDate();
                   }
 
@@ -91,7 +91,7 @@
             }
             else
             {
-              echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />' . formatDateForDisplay(date("Ymd")) . '</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">' . formatDateForDisplay(date("Ymd")) . '</div></div>';
 
               echo '<div class="empty">Pas encore de notifications...</div>';
             }

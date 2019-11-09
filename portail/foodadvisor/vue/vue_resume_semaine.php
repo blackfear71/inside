@@ -2,7 +2,7 @@
   /**************************/
   /*** Historique semaine ***/
   /**************************/
-  echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/week_grey.png" alt="week_grey" class="logo_titre_section" />Le résumé de la semaine</div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/week_grey.png" alt="week_grey" class="logo_titre_section" /><div class="texte_titre_section">Le résumé de la semaine</div></div>';
 
   echo '<div class="zone_propositions">';
     $numero_jour = 0;

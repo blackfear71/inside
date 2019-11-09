@@ -1,5 +1,5 @@
 <?php
-  echo '<div class="titre_section"><img src="../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" />Mes contributions</div>';
+  echo '<div class="titre_section"><img src="../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes contributions</div></div>';
 
   echo '<div class="zone_profil_contributions">';
     // Movie House

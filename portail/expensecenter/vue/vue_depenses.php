@@ -4,7 +4,7 @@
   /****************/
   echo '<div class="zone_expenses_right">';
     // Dépenses
-    echo '<div class="titre_section"><img src="../../includes/icons/expensecenter/expense_center_grey.png" alt="expense_center_grey" class="logo_titre_section" />Les dépenses</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/expensecenter/expense_center_grey.png" alt="expense_center_grey" class="logo_titre_section" /><div class="texte_titre_section">Les dépenses</div></div>';
 
     if (!empty($listeDepenses))
     {

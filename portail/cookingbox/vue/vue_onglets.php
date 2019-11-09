@@ -1,7 +1,7 @@
 <?php
   echo '<div class="zone_cooking_left">';
     // Années
-    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Années</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/recent_grey.png" alt="recent_grey" class="logo_titre_section" /><div class="texte_titre_section">Années</div></div>';
 
     // Onglets
     if (!empty($ongletsYears))

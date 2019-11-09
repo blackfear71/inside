@@ -190,7 +190,7 @@
                 // Personnes intéressées
                 echo '<div class="zone_details_votes">';
                   // Titre
-                  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/users_grey.png" alt="users_grey" class="logo_titre_section" />Personnes intéressées</div>';
+                  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Personnes intéressées</div></div>';
 
                   // Liste des étoiles
                   if (!empty($listeEtoiles))
@@ -260,12 +260,12 @@
                 if (!empty($detailsFilm->getSynopsis()))
                 {
                   // Titre
-                  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />Synopsis</div>';
+                  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" /><div class="texte_titre_section">Synopsis</div></div>';
                   echo '<div class="contenu_synopsis">' . nl2br($detailsFilm->getSynopsis()) . '</div>';
                 }
 
                 // Date sortie cinéma
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" />Sortie au cinéma</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie au cinéma</div></div>';
                 echo '<div class="contenu_detail">';
                   if (isBlankDate($detailsFilm->getDate_theater()))
                     echo 'N.C.';
@@ -274,7 +274,7 @@
                 echo '</div>';
 
                 // Date sortie DVD / Bluray
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" />Sortie en DVD / Bluray</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie en DVD / Bluray</div></div>';
                 echo '<div class="contenu_detail">';
                   if (!empty($detailsFilm->getDate_release()))
                     echo formatDateForDisplay($detailsFilm->getDate_release());
@@ -283,7 +283,7 @@
                 echo '</div>';
 
                 // Date Doodle proposée
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" class="logo_titre_section" />Sortie proposée</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/doodle_grey.png" alt="doodle_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie proposée</div></div>';
                 echo '<div class="contenu_detail">';
                   if (!empty($detailsFilm->getDate_doodle()))
                   {
@@ -302,7 +302,7 @@
                 echo '</div>';
 
                 // Restaurant
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/restaurant.png" alt="restaurant" class="logo_titre_section" />Restaurant</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/restaurant.png" alt="restaurant" class="logo_titre_section" /><div class="texte_titre_section">Restaurant</div></div>';
                 echo '<div class="contenu_detail">';
                   switch ($detailsFilm->getRestaurant())
                   {
@@ -330,7 +330,7 @@
             // Commentaires
             echo '<div class="zone_commentaires">';
               // Titre
-              echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/comments_grey.png" alt="comments_grey" class="logo_titre_section" />Commentaires</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/comments_grey.png" alt="comments_grey" class="logo_titre_section" /><div class="texte_titre_section">Commentaires</div></div>';
 
               if (!empty($listeCommentaires))
               {

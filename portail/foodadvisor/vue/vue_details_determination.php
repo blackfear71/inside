@@ -100,18 +100,21 @@
         // Participants
         echo '<div class="titre_details" style="margin-top: -10px;">';
           echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-          echo 'Les participants';
 
-          // Choix rapide
-          if ($actions["choix_rapide"] == true)
-          {
-            echo '<form id="choix_rapide_details_proposition" method="post" action="">';
-              echo '<input type="hidden" name="id_restaurant" value="" />';
-              echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_proposition" />';
-            echo '</form>';
-          }
+          echo '<div class="texte_titre_section">';
+            echo 'Les participants';
+
+            // Choix rapide
+            if ($actions["choix_rapide"] == true)
+            {
+              echo '<form id="choix_rapide_details_proposition" method="post" action="">';
+                echo '<input type="hidden" name="id_restaurant" value="" />';
+                echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_proposition" />';
+              echo '</form>';
+            }
+          echo '</div>';
         echo '</div>';
-        
+
         // Bouton fermeture
         echo '<a id="fermerDetails" class="close_details"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="close_img" /></a>';
 
@@ -119,7 +122,7 @@
         echo '<div id="top_details_proposition"></div>';
 
         // Menus proposés
-        echo '<div class="titre_details" style="margin-top: 40px;"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />Les menus proposés</div>';
+        echo '<div class="titre_details" style="margin-top: 40px;"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" /><div class="texte_titre_section">Les menus proposés</div></div>';
 
         // Menus
         echo '<div class="zone_details_user_bottom"></div>';

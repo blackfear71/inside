@@ -2,7 +2,7 @@
   /************************/
 	/* Tableau vue générale */
 	/************************/
-  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />Les films de ' . $_GET['year'] . '</div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" /><div class="texte_titre_section">Les films de ' . $_GET['year'] . '</div></div>';
 
   if ($anneeExistante == true AND !empty($tableauFilms))
   {

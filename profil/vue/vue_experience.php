@@ -1,6 +1,6 @@
 <?php
   // Classement expérience
-  echo '<div class="titre_section"><img src="../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" />Expérience</div>';
+  echo '<div class="titre_section"><img src="../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Expérience</div></div>';
 
   $lvl = 0;
 

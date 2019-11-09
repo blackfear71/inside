@@ -2,14 +2,16 @@
   echo '<div class="zone_themes_user" style="display: none;">';
     // Récompenses de niveaux
     echo '<div class="titre_section"><img src="../includes/icons/profil/rewards_grey.png" alt="rewards_grey" class="logo_titre_section" />';
-      echo 'Mes récompenses';
+      echo '<div class="texte_titre_section">';
+        echo 'Mes récompenses';
 
-      if (!empty($themes_users))
-      {
-        echo '<div class="zone_actions">';
-          echo '<a id="fold_themes_user" class="bouton_fold">Plier</a>';
-        echo '</div>';
-      }
+        if (!empty($themes_users))
+        {
+          echo '<div class="zone_actions">';
+            echo '<a id="fold_themes_user" class="bouton_fold">Plier</a>';
+          echo '</div>';
+        }
+      echo '</div>';
     echo '</div>';
 
     if (!empty($themes_users))
@@ -70,14 +72,16 @@
 
     // Thèmes de missions
     echo '<div class="titre_section"><img src="../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
-      echo 'Les thèmes de missions';
+      echo '<div class="texte_titre_section">';
+        echo 'Les thèmes de missions';
 
-      if (!empty($themes_missions))
-      {
-        echo '<div class="zone_actions">';
-          echo '<a id="fold_themes_missions" class="bouton_fold">Plier</a>';
-        echo '</div>';
-      }
+        if (!empty($themes_missions))
+        {
+          echo '<div class="zone_actions">';
+            echo '<a id="fold_themes_missions" class="bouton_fold">Plier</a>';
+          echo '</div>';
+        }
+      echo '</div>';
     echo '</div>';
 
     if (!empty($themes_missions))

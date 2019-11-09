@@ -1,7 +1,7 @@
 <?php
   echo '<div class="zone_movies_left">';
     // Vues
-    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/view_grey.png" alt="view_grey" class="logo_titre_section" />Vues</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/view_grey.png" alt="view_grey" class="logo_titre_section" /><div class="texte_titre_section">Vues</div></div>';
 
     $i         = 0;
     $listeVues = array('home'  => 'Accueil',
@@ -31,7 +31,7 @@
     }
 
     // Années
-    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Années</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" /><div class="texte_titre_section">Années</div></div>';
 
     // Date du jour
     if ($_GET['view'] == "cards" AND $_GET['year'] == date('Y'))

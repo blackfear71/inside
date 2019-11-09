@@ -5,7 +5,7 @@
   echo '<div class="zone_restaurants" style="display: none;">';
     foreach ($listeRestaurants as $lieu => $restaurantsParLieux)
     {
-      echo '<div class="titre_section" id="' . formatId($lieu) . '"><img src="../../includes/icons/foodadvisor/location_grey.png" alt="location" class="logo_titre_section" />' . $lieu . '</div>';
+      echo '<div class="titre_section" id="' . formatId($lieu) . '"><img src="../../includes/icons/foodadvisor/location_grey.png" alt="location" class="logo_titre_section" /><div class="texte_titre_section">' . $lieu . '</div></div>';
 
       echo '<div class="zone_fiches_restaurants">';
         foreach ($restaurantsParLieux as $restaurant)

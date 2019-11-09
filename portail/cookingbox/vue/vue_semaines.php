@@ -1,7 +1,7 @@
 <?php
   // Semaine en cours
   echo '<div class="zone_semaines_left">';
-    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" />Le gâteau de la semaine</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" /><div class="texte_titre_section">Le gâteau de la semaine</div></div>';
 
     // Zone semaine courante
     echo '<div class="zone_semaine">';
@@ -71,7 +71,7 @@
 
   // Semaine suivante
   echo '<div class="zone_semaines_right">';
-    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/date_grey.png" alt="date_grey" class="logo_titre_section" />Pour la semaine prochaine</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Pour la semaine prochaine</div></div>';
     // Zone semaine suivante
     echo '<div class="zone_semaine">';
       $week_next = date("W", strtotime('+ 1 week'));

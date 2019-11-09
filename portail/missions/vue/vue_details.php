@@ -45,16 +45,16 @@
               switch ($detailsMission->getStatut())
               {
                 case 'V':
-                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" />' . $detailsMission->getMission() . '</div>';
+                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" /><div class="texte_titre_section">' . $detailsMission->getMission() . '</div></div>';
                   break;
 
                 case 'C':
-                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" />' . $detailsMission->getMission() . '</div>';
+                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">' . $detailsMission->getMission() . '</div></div>';
                   break;
 
                 case 'A':
                 default:
-                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" />' . $detailsMission->getMission() . '</div>';
+                  echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" /><div class="texte_titre_section">' . $detailsMission->getMission() . '</div></div>';
                   break;
               }
 
@@ -62,7 +62,7 @@
               echo '<img src="../../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" alt="' . $detailsMission->getReference() . '" title="' . $detailsMission->getMission() . '" class="image_details_mission" />';
 
               // Histoire
-              echo '<div class="titre_section"><img src="../../includes/icons/missions/story_grey.png" alt="story_grey" class="logo_titre_section" />Il était une fois...</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/missions/story_grey.png" alt="story_grey" class="logo_titre_section" /><div class="texte_titre_section">Il était une fois...</div></div>';
 
               echo '<div class="texte_details_mission">';
                 echo nl2br($detailsMission->getDescription());
@@ -71,7 +71,7 @@
               // Conclusion
               if (date('Ymd') > $detailsMission->getDate_fin())
               {
-                echo '<div class="titre_section"><img src="../../includes/icons/missions/end_grey.png" alt="end_grey" class="logo_titre_section" />Le fin mot de l\'histoire</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/end_grey.png" alt="end_grey" class="logo_titre_section" /><div class="texte_titre_section">Le fin mot de l\'histoire</div></div>';
 
                 echo '<div class="texte_details_mission">';
                   echo nl2br($detailsMission->getConclusion());
@@ -89,7 +89,7 @@
               // Classement
               if (date('Ymd') > $detailsMission->getDate_fin())
               {
-                echo '<div class="titre_section"><img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" />Classement</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" /><div class="texte_titre_section">Classement</div></div>';
 
                 if (!empty($ranking))
                 {
@@ -169,7 +169,7 @@
               }
 
               // Informations mission
-              echo '<div class="titre_section"><img src="../../includes/icons/missions/informations_grey.png" alt="informations_grey" class="logo_titre_section" />Informations</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/missions/informations_grey.png" alt="informations_grey" class="logo_titre_section" /><div class="texte_titre_section">Informations</div></div>';
 
               // Dates et horaires
               echo '<div class="zone_info_details_mission">';
@@ -229,7 +229,7 @@
               // Paticipants
               if (date('Ymd') <= $detailsMission->getDate_fin())
               {
-                echo '<div class="titre_section"><img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" />Participants</div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Participants</div></div>';
 
                 if (!empty($participants))
                 {

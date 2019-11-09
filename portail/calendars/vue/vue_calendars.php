@@ -60,7 +60,7 @@
               $annee_debut = date('Y') - 2;
               $annee_fin   = date('Y') + 2;
 
-              echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" />Saisir un calendrier</div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir un calendrier</div></div>';
 
               echo '<div class="zone_saisie_calendrier">';
                 echo '<form method="post" action="calendars.php?action=doAjouter" enctype="multipart/form-data">';
@@ -110,7 +110,7 @@
           /* Calendriers */
           /***************/
           echo '<div class="zone_calendars_right">';
-            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />Les calendriers</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Les calendriers</div></div>';
 
             if (!empty($calendriers))
             {

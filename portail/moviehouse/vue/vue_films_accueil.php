@@ -3,7 +3,7 @@
     /******************/
     /* Ajouts récents */
     /******************/
-    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" />Les derniers films ajoutés en ' . $_GET['year'] . '</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" /><div class="texte_titre_section">Les derniers films ajoutés en ' . $_GET['year'] . '</div></div>';
 
     if (!empty($listeRecents))
     {
@@ -31,7 +31,7 @@
     /*********************/
     if ($films_waited == "Y")
     {
-      echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/waited_grey.png" alt="waited_grey" class="logo_titre_section" />Les films les plus attendus en ' . $_GET['year'] . '</div>';
+      echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/waited_grey.png" alt="waited_grey" class="logo_titre_section" /><div class="texte_titre_section">Les films les plus attendus en ' . $_GET['year'] . '</div></div>';
 
       if (!empty($listeAttendus))
       {
@@ -67,9 +67,9 @@
     if ($films_way_out == "Y")
     {
       if ($_GET['year'] >= date("Y"))
-        echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" />Les prochaines sorties organisées en ' . $_GET['year'] . '</div>';
+        echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" /><div class="texte_titre_section">Les prochaines sorties organisées en ' . $_GET['year'] . '</div></div>';
       else
-        echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" />Les anciennes sorties organisées en ' . $_GET['year'] . '</div>';
+        echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" /><div class="texte_titre_section">Les anciennes sorties organisées en ' . $_GET['year'] . '</div></div>';
 
       if (!empty($listeSorties))
       {

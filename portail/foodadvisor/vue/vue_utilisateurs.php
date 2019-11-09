@@ -3,7 +3,7 @@
   /*** Utilisateurs ***/
   /********************/
   echo '<div class="zone_propositions_left">';
-    echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />Utilisateurs</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Utilisateurs</div></div>';
 
     // Bande à part et votants restants
     if (!empty($solos) OR !empty($sansPropositions))
