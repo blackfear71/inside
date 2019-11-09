@@ -46,6 +46,7 @@
             echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
           else
             echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
+
           echo '<div class="zone_fiches_films" id="hide_films_' . $currentMonth . '">';
         }
 

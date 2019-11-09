@@ -63,7 +63,8 @@ $(function()
     var offset        = 50;
     var shadow        = false;
 
-    scrollToId(id_month, offset, shadow);
+    if ($('#' + id_month).length)
+      scrollToId(id_month, offset, shadow);
   });
 
   // Affiche la saisie de préférence d'une fiche
