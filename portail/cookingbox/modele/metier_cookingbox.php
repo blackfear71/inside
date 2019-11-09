@@ -550,9 +550,7 @@
                         'recipe'      => $recipe,
                         'tips'        => $tips
                        );
-
-     var_dump($myRecipe);
-
+                       
       $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
                                                     picture     = :picture,
                                                     ingredients = :ingredients,
