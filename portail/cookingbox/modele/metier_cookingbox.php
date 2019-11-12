@@ -315,6 +315,8 @@
     $new_id     = NULL;
     $control_ok = true;
 
+    global $bdd;
+
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['year_recipe']           = $post['year_recipe'];
     $_SESSION['save']['week_recipe']           = $post['week_recipe'];
@@ -353,6 +355,21 @@
           else
             $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@" . $post['unites_ingredients'][$key] . ";";
         }
+      }
+    }
+
+    // Contrôle doublon si on double-clique sur Ajouter (on ne met pas à jour mais on récupère l'id pour rediriger vers la recette déjà existante)
+    if ($control_ok == true)
+    {
+      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+      $data1 = $req1->fetch();
+      $datasRecipe = WeekCake::withData($data1);
+      $req1->closeCursor();
+
+      if (!empty($datasRecipe->getName()) OR !empty($datasRecipe->getPicture()) OR !empty($datasRecipe->getIngredients()) OR !empty($datasRecipe->getRecipe()) OR !empty($datasRecipe->getTips()))
+      {
+        $control_ok = false;
+        $new_id     = $data1['id'];
       }
     }
 
@@ -427,8 +444,6 @@
       }
 
       // Mise à jour de l'enregistrement concerné
-      global $bdd;
-
       $myRecipe = array('name'        => $name_recipe,
                         'picture'     => $new_name,
                         'ingredients' => $ingredients,
@@ -436,7 +451,7 @@
                         'tips'        => $tips
                        );
 
-      $req1 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
+      $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
                                                     picture     = :picture,
                                                     ingredients = :ingredients,
                                                     recipe      = :recipe,
@@ -444,14 +459,14 @@
                                               WHERE year        = "' . $year_recipe . '"
                                                 AND week        = "' . $week_recipe . '"
                                                 AND identifiant = "' . $user . '"');
-      $req1->execute($myRecipe);
-      $req1->closeCursor();
+      $req2->execute($myRecipe);
+      $req2->closeCursor();
 
       // Lecture Id recette
-      $req2 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
-      $data2 = $req2->fetch();
-      $new_id = $data2['id'];
-      $req2->closeCursor();
+      $req3 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+      $data3 = $req3->fetch();
+      $new_id = $data3['id'];
+      $req3->closeCursor();
 
       // Génération notification nouvelle recette
       insertNotification($user, 'recipe', $new_id);
