@@ -107,7 +107,10 @@
     $data1 = $req1->fetch();
 
     if ($req1->rowCount() > 0)
-      $exist = true;
+    {
+      $already_cooked = $data1['cooked'];
+      $exist          = true;
+    }
 
     $req1->closeCursor();
 
@@ -151,37 +154,58 @@
     // Sinon : mise à jour
     else
     {
-      $req2 = $bdd->prepare('UPDATE cooking_box SET identifiant = :identifiant WHERE week = "' . $week . '" AND year = "' . $year . '"');
-      $req2->execute(array(
-        'identifiant' => $identifiant
-      ));
-      $req2->closeCursor();
+      if ($already_cooked != "Y")
+      {
+        $req2 = $bdd->prepare('UPDATE cooking_box SET identifiant = :identifiant WHERE week = "' . $week . '" AND year = "' . $year . '"');
+        $req2->execute(array(
+          'identifiant' => $identifiant
+        ));
+        $req2->closeCursor();
+      }
+      else
+        $_SESSION['alerts']['already_cooked'] = true;
     }
   }
 
   // METIER : Valide le gâteau de la semaine
   // RETOUR : Aucun
-  function validateCake($cooked, $week, $year)
+  function validateCake($cooked, $week, $year, $user)
   {
     global $bdd;
 
-    // Mise à jour du statut
-    $req1 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . $week . '" AND year = "' . $year . '"');
-    $req1->execute(array(
-      'cooked' => $cooked
-    ));
+    $other_cooker = false;
+
+    // Lecture des anciennes données
+    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
+    $data1 = $req1->fetch();
+
+    if ($data1['identifiant'] != $user)
+      $other_cooker = true;
+
     $req1->closeCursor();
 
-    // Lecture des données
-    $req2 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
-    $data2 = $req2->fetch();
-    $identifiant = $data2['identifiant'];
-    $req2->closeCursor();
+    if ($other_cooker == false)
+    {
+      // Mise à jour du statut
+      $req2 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . $week . '" AND year = "' . $year . '"');
+      $req2->execute(array(
+        'cooked' => $cooked
+      ));
+      $req2->closeCursor();
 
-    if ($cooked == "Y")
-      insertOrUpdateSuccesValue('cooker', $identifiant, 1);
+      // Lecture des nouvelles données
+      $req3 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
+      $data3 = $req3->fetch();
+      $identifiant = $data3['identifiant'];
+      $req3->closeCursor();
+
+      if ($cooked == "Y")
+        insertOrUpdateSuccesValue('cooker', $identifiant, 1);
+      else
+        insertOrUpdateSuccesValue('cooker', $identifiant, -1);
+    }
     else
-      insertOrUpdateSuccesValue('cooker', $identifiant, -1);
+      $_SESSION['alerts']['other_cooker'] = true;
   }
 
   // METIER : Contrôle année existante (pour les onglets)

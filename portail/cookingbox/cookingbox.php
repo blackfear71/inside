@@ -53,11 +53,11 @@
       break;
 
     case "doValider":
-      validateCake("Y", $_POST['week_cake'], $_GET['year']);
+      validateCake("Y", $_POST['week_cake'], $_GET['year'], $_SESSION['user']['identifiant']);
       break;
 
     case "doAnnuler":
-      validateCake("N", $_POST['week_cake'], $_GET['year']);
+      validateCake("N", $_POST['week_cake'], $_GET['year'], $_SESSION['user']['identifiant']);
       break;
 
     case "doAjouterRecette":
