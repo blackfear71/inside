@@ -211,7 +211,12 @@
           if ($to_delete != "Y")
           {
             $icone  = "calendars";
-            $phrase = "Un calendrier vient d'être mis en ligne pour le mois de <strong>" . $mois . " " . $annee . "</strong>.";
+
+            if (strtolower(substr($mois, 0, 1)) == "a" OR strtolower(substr($mois, 0, 1)) == "o")
+              $phrase = "Un calendrier vient d'être mis en ligne pour le mois d'<strong>" . $mois . " " . $annee . "</strong>.";
+            else
+              $phrase = "Un calendrier vient d'être mis en ligne pour le mois de <strong>" . $mois . " " . $annee . "</strong>.";
+
             $lien   = "/inside/portail/calendars/calendars.php?year=" . $annee . "&action=goConsulter";
           }
           break;
