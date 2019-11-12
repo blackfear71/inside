@@ -394,7 +394,10 @@
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
             $rotate = rotateImage($image_dir . $new_name, $type_image);
 
-          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+          // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
+          imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
+
+          // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
           imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
         }
       }
@@ -531,7 +534,10 @@
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
             $rotate = rotateImage($image_dir . $new_name, $type_image);
 
-          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+          // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
+          imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
+
+          // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
           imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
 
           // Suppression des anciennes images
@@ -550,7 +556,7 @@
                         'recipe'      => $recipe,
                         'tips'        => $tips
                        );
-                       
+
       $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
                                                     picture     = :picture,
                                                     ingredients = :ingredients,
