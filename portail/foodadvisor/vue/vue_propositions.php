@@ -5,7 +5,7 @@
   echo '<div class="zone_propositions_right">';
     echo '<div class="titre_section">';
       echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
-      
+
       echo '<div class="texte_titre_section">';
         echo 'Les propositions du jour';
 
@@ -82,9 +82,8 @@
             else
               echo '<div class="nom_mon_choix">' . $proposition->getName() . '</div>';
 
-            if ($proposition->getDetermined() == "Y")
-              echo '<div class="zone_icones_mon_choix">';
-
+            // Ouverture, lieu et participants
+            echo '<div class="zone_icones_mon_choix">';
               // Jours d'ouverture
               echo '<div class="zone_ouverture_mes_choix">';
                 $explodedOpened = explode(";", $proposition->getOpened());
@@ -108,9 +107,7 @@
 
                   $i++;
                 }
-
-              if ($proposition->getDetermined() == "Y")
-                echo '</div>';
+              echo '</div>';
 
               // Lieu
               echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $proposition->getLocation() . '</span>';
@@ -123,20 +120,29 @@
             echo '</div>';
 
             // Réserveur
-            if ($proposition->getDetermined() == "Y")
+            if ($proposition->getDetermined() == "Y" AND (!empty($proposition->getAvatar()) OR !empty($proposition->getPhone())))
             {
               echo '<div class="caller">';
                 echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';
 
                 // Avatar
-                if (!empty($proposition->getAvatar()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+                if (!empty($proposition->getCaller()))
+                {
+                  echo '<div class="zone_avatar_caller">';
+                    if (!empty($proposition->getAvatar()))
+                      echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+                    else
+                      echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+                  echo '</div>';
+                }
 
                 // Numéro de téléphone
                 if (!empty($proposition->getPhone()))
-                  echo formatPhoneNumber($proposition->getPhone());
+                {
+                  echo '<div class="zone_phone_caller">';
+                    echo formatPhoneNumber($proposition->getPhone());
+                  echo '</div>';
+                }
               echo '</div>';
             }
 

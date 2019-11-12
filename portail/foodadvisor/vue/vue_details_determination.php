@@ -16,7 +16,8 @@
         // Nom du restaurant
         echo '<div id="nom_details_proposition" class="nom_restaurant_details"></div>';
 
-        echo '<div>';
+        // Ouverture, prix, lieu et participants
+        echo '<div class="zone_icones_mon_choix">';
           // Jours d'ouverture
           echo '<div class="zone_ouverture_mes_choix">';
             $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");

@@ -61,7 +61,8 @@
             // Nom du restaurant
             echo '<div class="nom_mon_choix">' . $monChoix->getName() . '</div>';
 
-            echo '<div class="zone_icones_mon_choix" style="border-bottom: solid 1px #c3c3c3;">';
+            // Ouverture, lieu, horaire et transports
+            echo '<div class="zone_icones_mon_choix">';
               // Jours d'ouverture
               echo '<div class="zone_ouverture_mes_choix">';
                 $explodedOpened = explode(";", $monChoix->getOpened());
@@ -128,28 +129,32 @@
 
             if (empty($entree) AND empty($plat) AND empty($dessert))
               echo '<div class="no_menu_mes_choix">Pas de menu saisi</div>';
-
-            if (!empty($entree))
+            else
             {
-              echo '<div class="zone_menu_mes_choix">';
-                echo '<span class="titre_texte_mon_choix">Entrée</span>';
-                echo '<div class="texte_mon_choix">' . $entree . '</div>';
-              echo '</div>';
-            }
+              echo '<div class="zone_menus_mes_choix">';
+                if (!empty($entree))
+                {
+                  echo '<div class="zone_menu_mes_choix">';
+                    echo '<span class="titre_texte_mon_choix">Entrée</span>';
+                    echo '<div class="texte_mon_choix">' . $entree . '</div>';
+                  echo '</div>';
+                }
 
-            if (!empty($plat))
-            {
-              echo '<div class="zone_menu_mes_choix">';
-                echo '<span class="titre_texte_mon_choix">Plat</span>';
-                echo '<div class="texte_mon_choix">' . $plat . '</div>';
-              echo '</div>';
-            }
+                if (!empty($plat))
+                {
+                  echo '<div class="zone_menu_mes_choix">';
+                    echo '<span class="titre_texte_mon_choix">Plat</span>';
+                    echo '<div class="texte_mon_choix">' . $plat . '</div>';
+                  echo '</div>';
+                }
 
-            if (!empty($dessert))
-            {
-              echo '<div class="zone_menu_mes_choix">';
-                echo '<span class="titre_texte_mon_choix">Dessert</span>';
-                echo '<div class="texte_mon_choix">' . $dessert . '</div>';
+                if (!empty($dessert))
+                {
+                  echo '<div class="zone_menu_mes_choix">';
+                    echo '<span class="titre_texte_mon_choix">Dessert</span>';
+                    echo '<div class="texte_mon_choix">' . $dessert . '</div>';
+                  echo '</div>';
+                }
               echo '</div>';
             }
           echo '</div>';

@@ -39,7 +39,8 @@
           // Nom du restaurant
           echo '<div class="nom_mon_choix">' . $choixJour->getName() . '</div>';
 
-          echo '<div>';
+          // Lieu et participants
+          echo '<div class="zone_icones_mon_choix">';
             // Lieu
             echo '<span class="lieu_proposition"><img src="../../includes/icons/foodadvisor/location.png" alt="location" class="image_lieu_proposition" />' . $choixJour->getLocation() . '</span>';
 
@@ -60,10 +61,12 @@
               echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';
 
               // Avatar
-              if (!empty($choixJour->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $choixJour->getAvatar() . '" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
+              echo '<div class="zone_avatar_caller">';
+                if (!empty($choixJour->getAvatar()))
+                  echo '<img src="../../includes/images/profil/avatars/' . $choixJour->getAvatar() . '" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
+                else
+                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
+              echo '</div>';
             echo '</div>';
           }
         echo '</div>';
