@@ -1260,9 +1260,9 @@
 /*** Modification Mes choix ***/
 .zone_icones_update_mon_choix
 {
-	border-bottom: solid 1px #c3c3c3;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
+	border-top: solid 1px #c3c3c3;
+	padding-top: 10px;
+	margin-bottom: 5px;
 }
 
 .bouton_choix_update
@@ -1343,13 +1343,18 @@
 	background-color: #ff1937;
 }
 
+.zone_update_menu
+{
+	padding-top: 5px;
+	border-top: solid 1px #c3c3c3;
+}
+
 .update_menu
 {
 	display: block;
 	width: calc(100% - 20px);
 	height: 30px;
 	margin-top: 5px;
-	margin-bottom: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
 	background-color: white;

@@ -344,9 +344,11 @@
                 // Menu
                 list($entree, $plat, $dessert) = explode(";", decodeString($monChoix->getMenu()));
 
-                echo '<input type="text" value="' . $entree . '" placeholder="Entrée" name="update_entree_' . $monChoix->getId() . '" class="update_menu" />';
-                echo '<input type="text" value="' . $plat . '" placeholder="Plat" name="update_plat_' . $monChoix->getId() . '" class="update_menu" />';
-                echo '<input type="text" value="' . $dessert . '" placeholder="Dessert" name="update_dessert_' . $monChoix->getId() . '" class="update_menu" style="margin-bottom: 10px;" />';
+                echo '<div class="zone_update_menu">';
+                  echo '<input type="text" value="' . $entree . '" placeholder="Entrée" name="update_entree_' . $monChoix->getId() . '" class="update_menu" />';
+                  echo '<input type="text" value="' . $plat . '" placeholder="Plat" name="update_plat_' . $monChoix->getId() . '" class="update_menu" />';
+                  echo '<input type="text" value="' . $dessert . '" placeholder="Dessert" name="update_dessert_' . $monChoix->getId() . '" class="update_menu" style="margin-bottom: 10px;" />';
+                echo '</div>';
               echo '</form>';
             echo '</div>';
           }
