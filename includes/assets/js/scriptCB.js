@@ -114,7 +114,7 @@ $(function()
 $(window).resize(function()
 {
   // Affichage des différentes zones en fondu
-  tailleAutoRecette(0)
+  tailleAutoRecette(0);
 });
 
 /***************/
@@ -408,7 +408,10 @@ function showRecipe(link, id)
   $('body').append(html);
 
   // Affichage des différentes zones en fondu
-  tailleAutoRecette(500)
+  $('.image_zoom_2').on('load', function()
+  {
+    tailleAutoRecette(500);
+  });
 }
 
 // Affiche la zone de mise à jour d'une recette
