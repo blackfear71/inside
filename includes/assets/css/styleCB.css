@@ -744,11 +744,13 @@
   display: inline-block;
   vertical-align: top;
   margin-top: -10px;
+  margin-bottom: 10px;
   height: 50px;
   width: 50px;
   border-radius: 50%;
   box-shadow: 0 0 3px #7c7c7c;
   background-color: #262626;
+  vertical-align: middle;
 }
 
 .zone_pseudo_details
@@ -763,6 +765,7 @@
   font-family: robotolight, Verdana, sans-serif;
   color: #262626;
   line-height: 130%;
+  vertical-align: middle;
 }
 
 .zone_ingredients_details
