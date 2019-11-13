@@ -1198,7 +1198,7 @@ function showDetails(zone, id)
 
   // On cache la zone si tout est vide
   if ((!$('#reserver_details_proposition').length || $('#reserver_details_proposition').css('display') == "none")
-  &&  (!$('#annuler_details_proposition').length  || $('#annuler_details_proposition').css('display') == "none")
+  &&  (!$('#annuler_details_proposition').length  || $('#annuler_details_proposition').css('display')  == "none")
   &&  (!$('#reserved_details_proposition').length || $('#reserved_details_proposition').css('display') == "none"))
     $('#indicateurs_details_proposition').css('display', 'none');
   else
