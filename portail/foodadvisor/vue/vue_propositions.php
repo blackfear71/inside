@@ -120,7 +120,7 @@
             echo '</div>';
 
             // Réserveur
-            if ($proposition->getDetermined() == "Y" AND (!empty($proposition->getAvatar()) OR !empty($proposition->getPhone())))
+            if ($proposition->getDetermined() == "Y" AND (!empty($proposition->getCaller()) OR !empty($proposition->getPhone())))
             {
               echo '<div class="caller">';
                 echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';

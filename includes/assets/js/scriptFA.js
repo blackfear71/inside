@@ -798,7 +798,7 @@ function afficherListboxRestaurantsResume(id, zone)
   html = '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
     html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
-      
+
       $.each(listeRestaurants[lieu], function(key, value)
       {
         html += '<option value="' + value.id + '">' + value.name + '</option>';
@@ -1060,34 +1060,39 @@ function showDetails(zone, id)
   }
 
   // Appelant
-  if (details['phone'] != "" || details['determined'] == "Y")
+  if (details['caller'] != "" || details['phone'] != "" || details['determined'] == "Y")
   {
-    $('.zone_caller_details').css('display', 'block');
-
-    if (details['phone'] != "")
-      $('#telephone_details_proposition').html(details['phone']);
-
-    if (details['determined'] == "Y")
+    if (details['caller'] != "" || details['phone'] != "")
     {
-      $('#caller_details_propositions').parent().css('display', 'inline-block');
+      $('.zone_caller_details').css('display', 'block');
 
-      if (details['avatar'] != "")
+      if (details['phone'] != "")
+        $('#telephone_details_proposition').html(details['phone']);
+
+      if (details['determined'] == "Y")
       {
-        $('#caller_details_propositions').attr('src', '../../includes/images/profil/avatars/' + details['avatar']);
-        $('#caller_details_propositions').attr('title', details['caller']);
+        $('#caller_details_propositions').parent().css('display', 'inline-block');
+
+        if (details['avatar'] != "")
+        {
+          $('#caller_details_propositions').attr('src', '../../includes/images/profil/avatars/' + details['avatar']);
+          $('#caller_details_propositions').attr('title', details['pseudo']);
+        }
+        else
+        {
+          $('#caller_details_propositions').attr('src', '../../includes/icons/common/default.png');
+          $('#caller_details_propositions').attr('title', details['pseudo']);
+        }
       }
       else
       {
+        $('#caller_details_propositions').parent().css('display', 'none');
         $('#caller_details_propositions').attr('src', '../../includes/icons/common/default.png');
-        $('#caller_details_propositions').attr('title', details['caller']);
+        $('#caller_details_propositions').attr('title', 'avatar');
       }
     }
     else
-    {
-      $('#caller_details_propositions').parent().css('display', 'none');
-      $('#caller_details_propositions').attr('src', '../../includes/icons/common/default.png');
-      $('#caller_details_propositions').attr('title', 'avatar');
-    }
+      $('.zone_caller_details').css('display', 'none');
   }
   else
   {
@@ -1166,11 +1171,8 @@ function showDetails(zone, id)
   // Bouton annulation réservation (si on a participé)
   var reserved = false;
 
-  if (details['reserved'] == "Y")
-  {
-    if (userSession == details['caller'])
-      reserved = true;
-  }
+  if (details['reserved'] == "Y" && userSession == details['caller'])
+    reserved = true;
 
   if (reserved == true)
   {
@@ -1195,7 +1197,9 @@ function showDetails(zone, id)
     $('#annuler_details_proposition > input[name=id_restaurant]').val('');
 
   // On cache la zone si tout est vide
-  if (participe == false && reserved == false && details['reserved'] != "Y")
+  if ((!$('#reserver_details_proposition').length || $('#reserver_details_proposition').css('display') == "none")
+  &&  (!$('#annuler_details_proposition').length  || $('#annuler_details_proposition').css('display') == "none")
+  &&  (!$('#reserved_details_proposition').length || $('#reserved_details_proposition').css('display') == "none"))
     $('#indicateurs_details_proposition').css('display', 'none');
   else
     $('#indicateurs_details_proposition').css('display', 'block');
