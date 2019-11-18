@@ -1069,7 +1069,7 @@ function showDetails(zone, id)
       if (details['phone'] != "")
         $('#telephone_details_proposition').html(details['phone']);
 
-      if (details['determined'] == "Y")
+      if (details['determined'] == "Y" && details['caller'] != "")
       {
         $('#caller_details_propositions').parent().css('display', 'inline-block');
 
