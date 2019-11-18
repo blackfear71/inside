@@ -170,7 +170,7 @@ function adaptRecipes()
     $('.zone_semaines_right').css('display', 'block');
     $('.zone_semaines_right').css('width', '100%');
     $('.zone_semaines_right').css('margin-left', '0');
-    $('.zone_semaines_right').css('margin-top', '20px');
+    $('.zone_semaines_right').css('margin-top', '10px');
   }
   else
   {

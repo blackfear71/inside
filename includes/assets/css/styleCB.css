@@ -201,7 +201,7 @@
 	display: inline-block;
 	width: 200px;
 	vertical-align: top;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .view, .year
@@ -247,7 +247,7 @@
 {
   display: inline-block;
   width: calc(100% - 220px);
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 20px;
   vertical-align: top;
 }
