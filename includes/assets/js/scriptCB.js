@@ -171,6 +171,14 @@ function adaptRecipes()
     $('.zone_semaines_right').css('width', '100%');
     $('.zone_semaines_right').css('margin-left', '0');
     $('.zone_semaines_right').css('margin-top', '10px');
+
+    $('.zone_cooking_left').css('display', 'block');
+    $('.zone_cooking_left').css('width', '100%');
+
+    $('.zone_cooking_right').css('display', 'block');
+    $('.zone_cooking_right').css('width', '100%');
+    $('.zone_cooking_right').css('margin-left', '0');
+    $('.zone_cooking_right').css('margin-top', '10px');
   }
   else
   {
@@ -181,6 +189,14 @@ function adaptRecipes()
     $('.zone_semaines_right').css('width', 'calc(50% - 10px)');
     $('.zone_semaines_right').css('margin-left', '20px');
     $('.zone_semaines_right').css('margin-top', '0');
+
+    $('.zone_cooking_left').css('display', 'inline-block');
+    $('.zone_cooking_left').css('width', '200px');
+
+    $('.zone_cooking_right').css('display', 'inline-block');
+    $('.zone_cooking_right').css('width', 'calc(100% - 220px)');
+    $('.zone_cooking_right').css('margin-left', '20px');
+    $('.zone_cooking_right').css('margin-top', '10px');
   }
 }
 
