@@ -241,6 +241,8 @@
           $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));
           $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
           $statistiques->setNb_reservations(htmlspecialchars($statistiques->getNb_reservations()));
+          $statistiques->setNb_gateaux(htmlspecialchars($statistiques->getNb_gateaux()));
+          $statistiques->setNb_recettes(htmlspecialchars($statistiques->getNb_recettes()));
           $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));
           $statistiques->setNb_collectors(htmlspecialchars($statistiques->getNb_collectors()));
           $statistiques->setNb_ideas(htmlspecialchars($statistiques->getNb_ideas()));

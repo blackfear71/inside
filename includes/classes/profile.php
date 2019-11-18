@@ -226,6 +226,8 @@
     private $nb_films_ajoutes;
     private $nb_comments;
     private $nb_reservations;
+    private $nb_gateaux;
+    private $nb_recettes;
     private $expenses;
     private $nb_collectors;
     private $nb_ideas;
@@ -238,6 +240,8 @@
       $this->nb_films_ajoutes = 0;
       $this->nb_comments      = 0;
       $this->nb_reservations  = 0;
+      $this->nb_gateaux       = 0;
+      $this->nb_recettes      = 0;
       $this->expenses         = 0;
       $this->nb_collectors    = 0;
       $this->nb_ideas         = 0;
@@ -265,6 +269,12 @@
 
       if (isset($data['nb_reservations']))
         $this->nb_reservations  = $data['nb_reservations'];
+
+      if (isset($data['nb_gateaux']))
+        $this->nb_gateaux       = $data['nb_gateaux'];
+
+      if (isset($data['nb_recettes']))
+        $this->nb_recettes      = $data['nb_recettes'];
 
       if (isset($data['expenses']))
         $this->expenses         = $data['expenses'];
@@ -314,6 +324,28 @@
     public function getNb_reservations()
     {
       return $this->nb_reservations;
+    }
+
+    // Nombre de gâteaux faits
+    public function setNb_gateaux($nb_gateaux)
+    {
+      $this->nb_gateaux = $nb_gateaux;
+    }
+
+    public function getNb_gateaux()
+    {
+      return $this->nb_gateaux;
+    }
+
+    // Nombre de recettes saisies
+    public function setNb_recettes($nb_recettes)
+    {
+      $this->nb_recettes = $nb_recettes;
+    }
+
+    public function getNb_recettes()
+    {
+      return $this->nb_recettes;
     }
 
     // Solde des dépenses

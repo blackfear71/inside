@@ -29,6 +29,8 @@
     $nb_films_ajoutes = 0;
     $nb_comments      = 0;
     $nb_reservations  = 0;
+    $nb_gateaux       = 0;
+    $nb_recettes      = 0;
     $expenses         = 0;
     $nb_collectors    = 0;
     $nb_ideas         = 0;
@@ -67,50 +69,68 @@
 
     $reponse2->closeCursor();
 
-    // Solde des dépenses
-    $reponse3 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
+    // Nombre de gâteaux faits
+    $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_gateaux FROM cooking_box WHERE identifiant = "' . $user . '" AND cooked = "Y"');
     $donnees3 = $reponse3->fetch();
 
-    $expenses = $donnees3['expenses'];
+    $nb_gateaux = $donnees3['nb_gateaux'];
 
     $reponse3->closeCursor();
 
-    // Nombre de phrases cultes soumises
-    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
+    // Nombre de recettes saisies
+    $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_recettes FROM cooking_box WHERE identifiant = "' . $user . '" AND name != "" AND picture != ""');
     $donnees4 = $reponse4->fetch();
 
-    $nb_collectors = $donnees4['nb_collectors'];
+    $nb_recettes = $donnees4['nb_recettes'];
 
     $reponse4->closeCursor();
 
-    // Nombre d'idées soumises
-    $reponse5 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    // Solde des dépenses
+    $reponse5 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $user . '"');
     $donnees5 = $reponse5->fetch();
 
-    $nb_ideas = $donnees5['nb_idees'];
+    $expenses = $donnees5['expenses'];
 
     $reponse5->closeCursor();
 
-    // Nombre de bugs rapportés
-    $reponse6 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user . '" AND type = "B"');
+    // Nombre de phrases cultes soumises
+    $reponse6 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
     $donnees6 = $reponse6->fetch();
 
-    $nb_bugs = $donnees6['nb_bugs'];
+    $nb_collectors = $donnees6['nb_collectors'];
 
     $reponse6->closeCursor();
 
-    // Nombre d'évolutions proposées
-    $reponse7 = $bdd->query('SELECT COUNT(id) AS nb_evolutions FROM bugs WHERE author = "' . $user . '" AND type = "E"');
-    $donnees7 = $reponse7->fetch();
+    // Nombre d'idées soumises
+    $reponse7 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
+    $donnees7 = $reponse5->fetch();
 
-    $nb_evolutions = $donnees7['nb_evolutions'];
+    $nb_ideas = $donnees7['nb_idees'];
 
     $reponse7->closeCursor();
+
+    // Nombre de bugs rapportés
+    $reponse8 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user . '" AND type = "B"');
+    $donnees8 = $reponse8->fetch();
+
+    $nb_bugs = $donnees8['nb_bugs'];
+
+    $reponse8->closeCursor();
+
+    // Nombre d'évolutions proposées
+    $reponse9 = $bdd->query('SELECT COUNT(id) AS nb_evolutions FROM bugs WHERE author = "' . $user . '" AND type = "E"');
+    $donnees9 = $reponse9->fetch();
+
+    $nb_evolutions = $donnees9['nb_evolutions'];
+
+    $reponse9->closeCursor();
 
     // On construit un tableau avec les données statistiques
     $myStats = array('nb_films_ajoutes' => $nb_films_ajoutes,
                      'nb_comments'      => $nb_comments,
                      'nb_reservations'  => $nb_reservations,
+                     'nb_gateaux'       => $nb_gateaux,
+                     'nb_recettes'      => $nb_recettes,
                      'expenses'         => $expenses,
                      'nb_collectors'    => $nb_collectors,
                      'nb_ideas'         => $nb_ideas,
