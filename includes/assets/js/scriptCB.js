@@ -113,6 +113,9 @@ $(function()
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
+  // Adaptation mobile
+  adaptRecipes();
+
   // Affichage des différentes zones en fondu
   tailleAutoRecette(0);
 });
@@ -123,6 +126,9 @@ $(window).resize(function()
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptRecipes();
+  
   // Masonry (Calendriers & annexes)
   if ($('.zone_recettes').length)
   {
@@ -153,6 +159,32 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Adaptations des recettes sur mobiles
+function adaptRecipes()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_semaines_left').css('display', 'block');
+    $('.zone_semaines_left').css('width', '100%');
+
+    $('.zone_semaines_right').css('display', 'block');
+    $('.zone_semaines_right').css('width', '100%');
+    $('.zone_semaines_right').css('margin-left', '0');
+    $('.zone_semaines_right').css('margin-top', '10px');
+  }
+  else
+  {
+    $('.zone_semaines_left').css('display', 'inline-block');
+    $('.zone_semaines_left').css('width', 'calc(50% - 10px)');
+
+    $('.zone_semaines_right').css('display', 'inline-block');
+    $('.zone_semaines_right').css('width', 'calc(50% - 10px)');
+    $('.zone_semaines_right').css('margin-left', '20px');
+    $('.zone_semaines_right').css('margin-top', '0');
+  }
+}
+
+
 // Affiche ou masque un élément (délai 0s)
 function afficherMasquerNoDelay(id)
 {

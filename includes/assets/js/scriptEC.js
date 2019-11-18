@@ -91,7 +91,7 @@ function adaptEC()
     $('.zone_expenses_left').css('width', '400px');
 
     $('.zone_expenses_right').css('display', 'inline-block');
-    $('.zone_expenses_right').css('width', 'calc(100% - 420px');
+    $('.zone_expenses_right').css('width', 'calc(100% - 420px)');
     $('.zone_expenses_right').css('margin-left', '20px');
   }
 }

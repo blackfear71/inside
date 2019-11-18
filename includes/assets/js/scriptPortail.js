@@ -4,6 +4,7 @@
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
+  // Adaptation mobile
   adaptPortail();
 });
 
@@ -57,7 +58,7 @@ function adaptPortail()
     $('.zone_portail_left').css('width', '400px');
 
     $('.zone_portail_right').css('display', 'inline-block');
-    $('.zone_portail_right').css('width', 'calc(100% - 420px');
+    $('.zone_portail_right').css('width', 'calc(100% - 420px)');
     $('.zone_portail_right').css('margin-left', '20px');
     $('.zone_portail_right').css('margin-top', '0');
   }

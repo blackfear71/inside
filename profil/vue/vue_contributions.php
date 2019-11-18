@@ -30,9 +30,6 @@
       echo '</div>';
     echo '</div>';
 
-
-
-
     // Cooking Box
     echo '<div class="zone_contributions">';
       echo '<div class="titre_contribution"><img src="../includes/icons/profil/cooking_box_grey.png" alt="cooking_box_grey" class="logo_titre_contribution" />COOKING BOX</div>';
@@ -49,10 +46,6 @@
         echo '<div class="texte_contribution">recettes saisies</div>';
       echo '</div>';
     echo '</div>';
-
-
-
-
 
     // Expense Center
     echo '<div class="zone_contributions">';
