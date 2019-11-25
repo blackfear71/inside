@@ -74,6 +74,7 @@
                      "choix"            => true,
                      "reserver"         => true,
                      "annuler_reserver" => false,
+                     "supprimer_choix"  => true,
                      "choix_rapide"     => true
                     );
 
@@ -85,6 +86,7 @@
       $actions["choix"]            = false;
       $actions["reserver"]         = false;
       $actions["annuler_reserver"] = false;
+      $actions["supprimer_choix"]  = false;
       $actions["choix_rapide"]     = false;
     }
 
@@ -94,6 +96,10 @@
       if (empty($propositions) OR empty($myChoices))
         $actions["determiner"] = false;
     }
+
+    // Contrôle choix présents (pour bouton suppression de tous les choix)
+    if (empty($myChoices))
+      $actions["supprimer_choix"] = false;
 
     // Contrôle choix présents (pour bouton bande à part)
     if ($actions["solo"] == true)
@@ -107,8 +113,9 @@
     {
       if ($isSolo == true)
       {
-        $actions["solo"]         = false;
-        $actions["choix_rapide"] = false;
+        $actions["solo"]            = false;
+        $actions["supprimer_choix"] = false;
+        $actions["choix_rapide"]    = false;
       }
     }
 
@@ -798,13 +805,78 @@
       $identifiant   = $data1['identifiant'];
       $req1->closeCursor();
 
+      // Génération succès (pour l'appelant si supprimé)
+      $req2 = $bdd->query('SELECT * FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant . ' AND date = "' . date("Ymd") . '" AND caller = "' . $identifiant . '"');
+      $data2 = $req2->fetch();
+
+      if ($req2->rowCount() > 0)
+        insertOrUpdateSuccesValue('star-chief', $identifiant, -1);
+
+      $req2->closeCursor();
+
       // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-      $req2 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant . ' AND date = "' . date("Ymd") . '" AND caller = "' . $identifiant . '"');
+      $req3 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant . ' AND date = "' . date("Ymd") . '" AND caller = "' . $identifiant . '"');
     }
 
     // Suppression choix de la base
     if ($control_ok == true)
-      $req3 = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id_choix);
+      $req4 = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id_choix);
+
+    // Relance de la détermination si besoin
+    if ($control_ok == true)
+      relanceDetermination();
+  }
+
+  // METIER : Supprime tous les choix utilisateur
+  // RETOUR : Aucun
+  function deleteAllChoices($user)
+  {
+    $control_ok = true;
+
+    global $bdd;
+
+    // Contrôle suppression possible en fonction des dates
+    if (date("N") > 5)
+    {
+      $control_ok                            = false;
+      $_SESSION['alerts']['week_end_delete'] = true;
+    }
+
+    // Contrôle suppression possible en fonction de l'heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                              = false;
+        $_SESSION['alerts']['heure_suppression'] = true;
+      }
+    }
+
+    // On vérifie que l'on n'était pas l'appelant quand on supprime le choix
+    if ($control_ok == true)
+    {
+      $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND caller = "' . $user . '"');
+      $data1 = $req1->fetch();
+
+      if ($req1->rowCount() > 0)
+      {
+        $id_restaurant = $data1['id_restaurant'];
+        $caller        = $data1['caller'];
+
+        // Génération succès (pour l'appelant si supprimé)
+        if ($user == $caller)
+          insertOrUpdateSuccesValue('star-chief', $user, -1);
+
+        // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
+        $req2 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant . ' AND date = "' . date("Ymd") . '" AND caller = "' . $user . '"');
+      }
+
+      $req1->closeCursor();
+    }
+
+    // Suppression de tous les choix de l'utilisateur'
+    if ($control_ok == true)
+      $req3 = $bdd->exec('DELETE FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
 
     // Relance de la détermination si besoin
     if ($control_ok == true)

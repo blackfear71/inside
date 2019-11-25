@@ -74,7 +74,11 @@
       break;
 
     case 'doSupprimer':
-      deleteChoice($_POST, $_SESSION['user']['identifiant']);
+      deleteChoice($_POST);
+      break;
+
+    case 'doSupprimerChoix':
+      deleteAllChoices($_SESSION['user']['identifiant']);
       break;
 
     case 'doChoixRapide':
@@ -237,6 +241,7 @@
     case 'doAjouter':
     case 'doModifier':
     case 'doSupprimer':
+    case 'doSupprimerChoix':
     case 'doChoixRapide':
     case 'doAjouterResume':
     case 'doSupprimerResume':
@@ -255,6 +260,7 @@
     case 'doAjouter':
     case 'doModifier':
     case 'doSupprimer':
+    case 'doSupprimerChoix':
     case 'doChoixRapide':
     case 'doAjouterResume':
     case 'doSupprimerResume':

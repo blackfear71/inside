@@ -2,7 +2,24 @@
   /*************************/
   /*** Choix utilisateur ***/
   /*************************/
-  echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes choix du jour</div></div>';
+  echo '<div class="titre_section">';
+    echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
+
+    echo '<div class="texte_titre_section">';
+      echo 'Mes choix du jour';
+
+      echo '<div class="zone_actions">';
+        // Supprimer tous les choix
+        if ($actions["supprimer_choix"] == true)
+        {
+          echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix" class="form_action">';
+            echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="bouton_determination eventConfirm" />';
+            echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
+          echo '</form>';
+        }
+      echo '</div>';
+    echo '</div>';
+  echo '</div>';
 
   if (!empty($mesChoix) OR $isSolo == true)
   {
