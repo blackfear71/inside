@@ -146,7 +146,7 @@
               echo '</div>';
             }
 
-            // Bouton réservation / annulation
+            // Bouton réservation / complet
             if ($actions["reserver"] == true)
             {
               // On vérifie si on participe à chacun des restaurants pour pouvoir réserver
@@ -163,15 +163,28 @@
 
               if ($participe == true)
               {
+                // Zone boutons
                 echo '<div class="zone_reservation">';
+                  // Bouton réservation
                   echo '<form method="post" action="foodadvisor.php?action=doReserver">';
                     echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
                     echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
                   echo '</form>';
+
+                  // Bouton complet
+                  if ($proposition->getDetermined() == "Y" AND $proposition->getCaller() == $_SESSION['user']['identifiant'])
+                  {
+                    echo '<form id="choice_complete" method="post" action="foodadvisor.php?action=doComplet" class="margin_top">';
+                      echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
+                      echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver eventConfirm"/>';
+                      echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';
+                    echo '</form>';
+                  }
                 echo '</div>';
               }
             }
 
+            // Bouton annulation
             if ($proposition->getDetermined() == "Y" AND ($proposition->getReserved() == "Y" OR $actions["annuler_reserver"] == true))
             {
               echo '<div class="zone_reservation">';

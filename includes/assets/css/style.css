@@ -799,7 +799,7 @@ aside
 	animation: 0.5s ease 0s normal forwards 1 affichageAlerte;
 	width: 500px;
 	position: fixed;
-	z-index: 3;
+	z-index: 15;
 	left: 50%;
 	margin-left: -250px;
 	box-shadow: 0 5px 8px #262626;

@@ -426,6 +426,43 @@
     }
   }
 
+  // METIER : Supprime les choix de tous les utilisateurs d'un restaurant et relance la détermination
+  // RETOUR : Aucun
+  function completeChoice($post)
+  {
+    $id_restaurant = $post['id_restaurant'];
+    $control_ok    = true;
+
+    global $bdd;
+
+    // Contrôle suppression possible en fonction des dates
+    if (date("N") > 5)
+    {
+      $control_ok                            = false;
+      $_SESSION['alerts']['week_end_delete'] = true;
+    }
+
+    // Contrôle suppression possible en fonction de l'heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                              = false;
+        $_SESSION['alerts']['heure_suppression'] = true;
+      }
+    }
+
+    // Suppression et détermination
+    if ($control_ok == true)
+    {
+      // Suppression de tous les choix utilisateurs pour ce restaurant
+      $req = $bdd->exec('DELETE FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = "' . $id_restaurant . '"');
+
+      // Relance de la détermination si besoin
+      relanceDetermination();
+    }
+  }
+
   // METIER : Récupère les choix de l'utilisateur
   // RETOUR : Liste des choix du jour (utilisateur)
   function getMyChoices($user)

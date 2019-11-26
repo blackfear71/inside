@@ -64,6 +64,10 @@
       deleteReservation($_POST, $_SESSION['user']['identifiant']);
       break;
 
+    case 'doComplet':
+      completeChoice($_POST);
+      break;
+
     case 'doAjouter':
       $isSolo = getSolo($_SESSION['user']['identifiant']);
       insertChoices($_POST, $isSolo, $_SESSION['user']['identifiant']);
@@ -238,6 +242,7 @@
     case 'doSupprimerSolo':
     case "doReserver":
     case 'doAnnulerReserver':
+    case 'doComplet':
     case 'doAjouter':
     case 'doModifier':
     case 'doSupprimer':
@@ -257,6 +262,7 @@
     case 'doSupprimerSolo':
     case "doReserver":
     case 'doAnnulerReserver':
+    case 'doComplet':
     case 'doAjouter':
     case 'doModifier':
     case 'doSupprimer':

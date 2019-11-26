@@ -1000,6 +1000,11 @@
 	color: #262626;
 }
 
+.margin_top
+{
+	margin-top: 10px;
+}
+
 .bouton_reserver
 {
 	background-color: white;

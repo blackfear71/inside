@@ -70,13 +70,21 @@
           echo '</a>';
         echo '</div>';
 
-        // Bouton réservation
+        // Zone boutons
         echo '<div id="indicateurs_details_proposition" class="zone_reservation">';
           if ($actions["reserver"] == true)
           {
+            // Bouton réservation
             echo '<form id="reserver_details_proposition" method="post" action="">';
               echo '<input type="hidden" name="id_restaurant" value="" />';
               echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver_details"/>';
+            echo '</form>';
+
+            // Bouton complet
+            echo '<form id="choice_complete_details_proposition" method="post" action="" class="margin_top">';
+              echo '<input type="hidden" name="id_restaurant" value="" />';
+              echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver_details eventConfirm"/>';
+              echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';
             echo '</form>';
           }
 

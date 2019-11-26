@@ -1162,6 +1162,18 @@ function showDetails(zone, id)
     $('#reserver_details_proposition').attr('action', '');
   }
 
+  // Bouton complet (si appelant sur choix déterminé)
+  if (participe == true && details['determined'] == "Y" && userSession == details['caller'])
+  {
+    $('#choice_complete_details_proposition').css('display', 'block');
+    $('#choice_complete_details_proposition').attr('action', 'foodadvisor.php?action=doComplet');
+  }
+  else
+  {
+    $('#choice_complete_details_proposition').css('display', 'none');
+    $('#choice_complete_details_proposition').attr('action', '');
+  }
+
   // Indicateur réservation
   if (details['reserved'] == "Y")
     $('#reserved_details_proposition').css('display', 'block');
@@ -1190,6 +1202,11 @@ function showDetails(zone, id)
     $('#reserver_details_proposition > input[name=id_restaurant]').val(id);
   else
     $('#reserver_details_proposition > input[name=id_restaurant]').val('');
+
+  if (participe == true && details['determined'] == "Y" && userSession == details['caller'])
+    $('#choice_complete_details_proposition > input[name=id_restaurant]').val(id);
+  else
+    $('#choice_complete_details_proposition > input[name=id_restaurant]').val('');
 
   if (reserved == true)
     $('#annuler_details_proposition > input[name=id_restaurant]').val(id);
