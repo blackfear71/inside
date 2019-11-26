@@ -1214,9 +1214,10 @@ function showDetails(zone, id)
     $('#annuler_details_proposition > input[name=id_restaurant]').val('');
 
   // On cache la zone si tout est vide
-  if ((!$('#reserver_details_proposition').length || $('#reserver_details_proposition').css('display') == "none")
-  &&  (!$('#annuler_details_proposition').length  || $('#annuler_details_proposition').css('display')  == "none")
-  &&  (!$('#reserved_details_proposition').length || $('#reserved_details_proposition').css('display') == "none"))
+  if ((!$('#reserver_details_proposition').length         || $('#reserver_details_proposition').css('display')         == "none")
+  &&  (!$('#choice_complete_details_proposition').length  || $('#choice_complete_details_proposition').css('display')  == "none")
+  &&  (!$('#annuler_details_proposition').length          || $('#annuler_details_proposition').css('display')          == "none")
+  &&  (!$('#reserved_details_proposition').length         || $('#reserved_details_proposition').css('display')         == "none"))
     $('#indicateurs_details_proposition').css('display', 'none');
   else
     $('#indicateurs_details_proposition').css('display', 'block');
