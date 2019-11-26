@@ -41,10 +41,13 @@
           /*********/
           echo '<div class="zone_liens_saisie">';
             // Saisie utilisateur
-            echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" /></div>';
-              echo '<div class="zone_texte_lien">Proposer où manger</div>';
-            echo '</a>';
+            if ($actions["saisir_choix"] == true)
+            {
+              echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_categorie">';
+                echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" /></div>';
+                echo '<div class="zone_texte_lien">Proposer où manger</div>';
+              echo '</a>';
+            }
 
             // Restaurants
             echo '<a href="restaurants.php?action=goConsulter" title="Les restaurants" class="lien_categorie">';
@@ -56,7 +59,8 @@
           /****************/
           /* Saisie choix */
           /****************/
-          include('vue/vue_saisie_choix.php');
+          if ($actions["saisir_choix"] == true)
+            include('vue/vue_saisie_choix.php');
 
           /*************************/
           /* Détails détermination */

@@ -69,7 +69,8 @@
   // RETOUR : Booléen
   function getActions($propositions, $myChoices, $isSolo, $isReserved, $user)
   {
-    $actions = array("determiner"       => true,
+    $actions = array("saisir_choix"     => true,
+                     "determiner"       => true,
                      "solo"             => true,
                      "choix"            => true,
                      "reserver"         => true,
@@ -81,6 +82,7 @@
     // Contrôles date et heure
     if (date("N") > 5 OR date("H") >= 13)
     {
+      $actions["saisir_choix"]     = false;
       $actions["determiner"]       = false;
       $actions["solo"]             = false;
       $actions["choix"]            = false;
@@ -113,6 +115,7 @@
     {
       if ($isSolo == true)
       {
+        $actions["saisir_choix"]    = false;
         $actions["solo"]            = false;
         $actions["supprimer_choix"] = false;
         $actions["choix_rapide"]    = false;
@@ -124,8 +127,9 @@
     {
       if (!empty($isReserved))
       {
-        $actions["reserver"]   = false;
-        $actions["determiner"] = false;
+        $actions["saisir_choix"] = false;
+        $actions["reserver"]     = false;
+        $actions["determiner"]   = false;
       }
     }
 
