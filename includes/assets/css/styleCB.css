@@ -49,6 +49,21 @@
   color: #262626;
 }
 
+.numero_week
+{
+  float: right;
+  background-color: #ff1937;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-left: -30px;
+}
+
 .empty_week
 {
   display: inline-block;

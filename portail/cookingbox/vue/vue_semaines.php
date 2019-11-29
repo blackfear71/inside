@@ -1,3 +1,12 @@
+<script>
+  $(window).on('load', function()
+  {
+    console.log($('.numero_week'));
+    console.log($('.numero_week').css('width'));
+    console.log($('.numero_week').css('height'));
+  });
+</script>
+
 <?php
   // Semaine en cours
   echo '<div class="zone_semaines_left">';
@@ -5,6 +14,9 @@
 
     // Zone semaine courante
     echo '<div class="zone_semaine">';
+      // Numéro semaine
+      echo '<div class="numero_week">' . date("W") . '</div>';
+
       if (!empty($currentWeek->getIdentifiant()))
       {
         // Avatar
@@ -74,6 +86,9 @@
     echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Pour la semaine prochaine</div></div>';
     // Zone semaine suivante
     echo '<div class="zone_semaine">';
+      // Numéro semaine
+      echo '<div class="numero_week">' . date("W", strtotime('+ 1 week')) . '</div>';
+
       $week_next = date("W", strtotime('+ 1 week'));
 
       if (!empty($nextWeek->getIdentifiant()))
