@@ -37,11 +37,11 @@
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
-          /*******************/
-          /* Liens de saisie */
-          /*******************/
           if (!empty($listeSemaines))
           {
+            /*******************/
+            /* Liens de saisie */
+            /*******************/
             echo '<div class="zone_liens_saisie">';
               // Bouton saisie
               echo '<a id="ajouterRecette" title="Ajouter un gâteau ou une recette" class="lien_categorie">';
@@ -49,12 +49,12 @@
                 echo '<div class="zone_texte_lien">Ajouter un gâteau ou une recette</div>';
               echo '</a>';
             echo '</div>';
-          }
 
-          /*****************************/
-          /* Zone de saisie de recette */
-          /*****************************/
-          include('vue/vue_saisie_recette.php');
+            /*****************************/
+            /* Zone de saisie de recette */
+            /*****************************/
+            include('vue/vue_saisie_recette.php');
+          }
 
           /*********************************/
           /* Gâteaux des semaines n et n+1 */
