@@ -65,7 +65,11 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM cooking_box WHERE identifiant = "' . $user . '" AND name = "" AND picture = "" ORDER BY year DESC, week DESC');
+    $reponse = $bdd->query('SELECT * FROM cooking_box WHERE identifiant = "' . $user . '"
+                                                        AND name        = ""
+                                                        AND picture     = ""
+                                                        AND (year < ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week <= ' . date("W") . ')) 
+                                                   ORDER BY year DESC, week DESC');
     while($donnees = $reponse->fetch())
     {
       if ($donnees['year'] != $previousYear)
