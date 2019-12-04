@@ -52,7 +52,16 @@
           /*********************/
           include('vue/vue_saisie_restaurant.php');
 
-          // Liens vers lieux
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /********************/
+          /* Liens vers lieux */
+          /********************/
           echo '<div class="zone_liens_lieux">';
             foreach ($listeLieux as $lieu)
             {

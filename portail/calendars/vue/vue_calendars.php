@@ -37,6 +37,13 @@
           include('../../includes/common/missions.php');
 
           /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+          
+          /*******************/
           /* Saisie & Années */
           /*******************/
           echo '<div class="zone_calendars_left">';

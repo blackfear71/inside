@@ -62,6 +62,13 @@
           if ($actions["saisir_choix"] == true)
             include('vue/vue_saisie_choix.php');
 
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
           /*************************/
           /* Détails détermination */
           /*************************/

@@ -41,6 +41,9 @@
           /*********************/
           include('vue/vue_saisie_film.php');
 
+          /*********************/
+          /* Affichage détails */
+          /*********************/
           if ($filmExistant == true)
           {
             // Bandeau avec poster
