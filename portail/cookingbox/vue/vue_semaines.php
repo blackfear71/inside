@@ -1,12 +1,3 @@
-<script>
-  $(window).on('load', function()
-  {
-    console.log($('.numero_week'));
-    console.log($('.numero_week').css('width'));
-    console.log($('.numero_week').css('height'));
-  });
-</script>
-
 <?php
   // Semaine en cours
   echo '<div class="zone_semaines_left">';
