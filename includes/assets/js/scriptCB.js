@@ -62,6 +62,8 @@ $(function()
   {
     var id_recette = $(this).attr('id').replace('modifier_', '');
 
+    console.log(id_recette);
+    
     updateRecipe(id_recette, 'zone_add_recipe');
   });
 
