@@ -49,6 +49,13 @@
           /*****************************/
           include('vue/vue_saisie_rapport.php');
 
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+          
           /***********/
           /* Onglets */
           /***********/

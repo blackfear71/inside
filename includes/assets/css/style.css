@@ -875,6 +875,22 @@ aside
 	background-color: #c81932;
 }
 
+/*** Symbole chargement page ***/
+.zone_loading_page
+{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.loading_page
+{
+	width: 0px;
+	background-color: #262626;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 /*** Zoom images ***/
 .fond_zoom
 {

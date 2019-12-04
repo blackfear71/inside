@@ -34,6 +34,10 @@ $(function()
   updateNotifications();
   majNotifications = setInterval(updateNotifications, 60000);
 
+  // Animation symbole chargement de la page
+  if ($('.zone_loading_page').length)
+    loadingPage();
+
   /*** Actions au clic ***/
   // Referme la barre de recherche quand on clique n'importe où sur le body
   $('body').click(function()
@@ -110,6 +114,12 @@ $(function()
   {
     changeColorToGrey('color_search', 'resizeBar')
   });
+});
+
+// Au chargement du document complet
+$(window).on('load', function()
+{
+  $('.zone_loading_page').remove();
 });
 
 /*****************/
@@ -392,4 +402,35 @@ function executeAction(form, action)
   }
   else
     $('#' + form).submit();
+}
+
+// Animation chargement de la page en boucle
+function loadingPage()
+{
+  $('.zone_loading_page').css("padding-top", "40px");
+  $('.zone_loading_page').css("padding-bottom", "40px");
+  $('#loading_page').css("height", "5px");
+  $('#loading_page').css("margin-left", 0);
+  $('#loading_page').css("opacity", 1);
+
+  $('#loading_page').animate(
+  {
+    width: "+=100%",
+    marginLeft: "0%"
+  }, 800, function()
+  {
+    $('#loading_page').animate(
+    {
+      width: "-=100%",
+      marginLeft: "100%"
+    }, 800, function()
+    {
+      $('#loading_page').css("opacity", 0);
+
+      setTimeout(function()
+      {
+        loadingPage()
+      }, 400);
+    });
+  });
 }
