@@ -49,12 +49,12 @@
                 echo '<div class="zone_texte_lien">Ajouter un gâteau ou une recette</div>';
               echo '</a>';
             echo '</div>';
-
-            /*****************************/
-            /* Zone de saisie de recette */
-            /*****************************/
-            include('vue/vue_saisie_recette.php');
           }
+
+          /*****************************/
+          /* Zone de saisie de recette */
+          /*****************************/
+          include('vue/vue_saisie_recette.php');
 
           /*********************************/
           /* Gâteaux des semaines n et n+1 */
