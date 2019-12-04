@@ -119,6 +119,7 @@ $(function()
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // Suppression de la barre de chargement de la page
   $('.zone_loading_page').remove();
 });
 
