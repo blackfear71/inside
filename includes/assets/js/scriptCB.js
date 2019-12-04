@@ -404,7 +404,9 @@ function showRecipe(link, id)
             $.each(ingredients, function(key, value)
             {
               html += '<div class="ingredient_details_recette">' + this['ingredient'] + '</div>';
-              html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
+
+              if (this['quantity'] != "")
+                html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
             });
           html += '</div>';
         }
