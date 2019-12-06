@@ -418,20 +418,20 @@ function loadingPage()
   {
     width: "+=100%",
     marginLeft: "0%"
-  }, 800, function()
+  }, 800, "easeInOutCubic", function()
   {
     $('#loading_page').animate(
     {
       width: "-=100%",
       marginLeft: "100%"
-    }, 800, function()
+    }, 800, "easeInOutCubic", function()
     {
       $('#loading_page').css("opacity", 0);
 
       setTimeout(function()
       {
         loadingPage()
-      }, 400);
+      }, 200);
     });
   });
 }
