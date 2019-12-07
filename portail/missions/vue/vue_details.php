@@ -41,7 +41,7 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-          
+
           /*******************/
           /* Détails mission */
           /*******************/
@@ -249,7 +249,10 @@
                         else
                           echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
 
-                        echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
+                        if (strlen($participant->getPseudo()) > 15)
+                          echo '<div class="pseudo_details_mission">' . substr($participant->getPseudo(), 0, 15) . '...</div>';
+                        else
+                          echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
                       echo '</div>';
                     }
                   echo '</div>';
