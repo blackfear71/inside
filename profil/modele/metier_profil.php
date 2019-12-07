@@ -746,6 +746,10 @@
         $ref_mission = "noel_2018";
         break;
 
+      case "christmas2019":
+        $ref_mission = "noel_2019";
+        break;
+
       default:
         break;
     }

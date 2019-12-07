@@ -738,6 +738,10 @@
         insertOrUpdateSuccesValue('christmas2018_2', $identifiant, 1);
         break;
 
+      case 'noel_2019':
+        insertOrUpdateSuccesValue('christmas2019', $identifiant, 1);
+        break;
+
       default:
         break;
     }
@@ -788,6 +792,7 @@
       case "wizard":
       case "christmas2018":
       case "christmas2018_2":
+      case "christmas2019":
         $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
         $data0 = $req0->fetch();
 
