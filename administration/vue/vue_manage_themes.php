@@ -302,7 +302,11 @@
 
                       // Référence et dates
                       echo '<div class="theme_ref">' . $theme_mission->getReference() . '</div>';
-                      echo '<div class="theme_dates">Du ' . formatDateForDisplay($theme_mission->getDate_deb()) . ' au ' . formatDateForDisplay($theme_mission->getDate_fin()) . '</div>';
+
+                      if ($theme_mission->getDate_deb() != $theme_mission->getDate_fin())
+                        echo '<div class="theme_dates">Du ' . formatDateForDisplay($theme_mission->getDate_deb()) . ' au ' . formatDateForDisplay($theme_mission->getDate_fin()) . '</div>';
+                      else
+                        echo '<div class="theme_dates">Le ' . formatDateForDisplay($theme_mission->getDate_deb()) . ' seulement</div>';
                     echo '</div>';
 
                     /***************************/

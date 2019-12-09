@@ -37,6 +37,7 @@
           $preferences     = getPreferences($_SESSION['user']['identifiant']);
           $themes_users    = getThemes("U", $profil->getExperience());
           $themes_missions = getThemes("M", NULL);
+          $isThemeMission  = getThemeMission();
           break;
 
         case 'profile':

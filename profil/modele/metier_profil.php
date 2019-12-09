@@ -840,6 +840,25 @@
     return $themes;
   }
 
+  // METIER : Détermine si on a un thème de mission en cours
+  // RETOUR : Booléen
+  function getThemeMission()
+  {
+    $isThemeMission = false;
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" AND date_deb <= ' . date("Ymd") . ' AND date_fin >= ' . date("Ymd") . ' ORDER BY id ASC');
+    $donnees = $reponse->fetch();
+
+    if ($reponse->rowCount() > 0)
+      $isThemeMission = true;
+
+    $reponse->closeCursor();
+
+    return $isThemeMission;
+  }
+
   // METIER : Mise à jour de la préférence thème utilisateur
   // RETOUR : Aucun
   function updateTheme($user, $post)

@@ -21,6 +21,10 @@
         {
           echo '<div class="zone_theme">';
             echo '<div class="zone_theme_infos">';
+              // Indicateur sélection
+              if ($isThemeMission != true AND $preferences->getRef_theme() == $theme_users->getReference())
+                echo '<div class="selection_theme">Sélectionné</div>';
+
               // Header (Logo + header)
               echo '<div class="zone_header_theme">';
                 if ($theme_users->getLogo() == "Y")
@@ -91,6 +95,14 @@
         {
           echo '<div class="zone_theme">';
             echo '<div class="zone_theme_infos">';
+              // Indicateur sélection
+              if ($isThemeMission != true AND $preferences->getRef_theme() == $theme_mission->getReference())
+                echo '<div class="selection_theme">Sélectionné</div>';
+
+              // Indicateur sélection (mission)
+              if ($isThemeMission == true AND date("Ymd") >= $theme_mission->getDate_deb() AND date("Ymd") <= $theme_mission->getDate_fin())
+                echo '<div class="selection_theme">Mission en cours</div>';
+
               // Header (Logo + header)
               echo '<div class="zone_header_theme">';
                 if ($theme_mission->getLogo() == "Y")

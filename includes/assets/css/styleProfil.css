@@ -822,6 +822,24 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+.selection_theme
+{
+  float: right;
+	position: relative;
+	z-index: 2;
+	margin-left: -150px;
+	margin-right: 10px;
+	margin-top: 25px;
+	width: 140px;
+	line-height: 30px;
+	text-align: center;
+  background-color: #70d55d;
+  border-radius: 2px;
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 .zone_header_theme
 {
 	width: 500px;
