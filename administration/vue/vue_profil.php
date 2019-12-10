@@ -35,10 +35,9 @@
 
             // Avatar actuel & suppression
             echo '<div class="zone_profil_avatar_parametres">';
-              if (!empty($profil->getAvatar()))
-                echo '<img src="../includes/images/profil/avatars/' . $profil->getAvatar() . '" alt="avatar" title="' . $profil->getPseudo() . '" class="avatar_profil" />';
-              else
-                echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $profil->getPseudo() . '" class="avatar_profil" />';
+              $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 1, "avatar");
+
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_profil" />';
 
               echo '<div class="texte_parametres">Avatar actuel</div>';
 

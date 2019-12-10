@@ -31,6 +31,7 @@
                 echo formatDateForDisplay($bug->getDate());
               echo '</div>';
 
+              // Statut
               switch ($bug->getResolved())
               {
                 case 'Y':
@@ -98,6 +99,7 @@
                 echo formatDateForDisplay($evolution->getDate());
               echo '</div>';
 
+              // Statut
               switch ($evolution->getResolved())
               {
                 case 'Y':

@@ -29,11 +29,10 @@
             {
               echo '<div class="zone_infos_user">';
                 // Avatar
+                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 1, "avatar");
+
                 echo '<div class="circle_avatar">';
-                  if (!empty($user->getAvatar()))
-                    echo '<img src="../includes/images/profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="infos_avatar" />';
-                  else
-                    echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="infos_avatar" />';
+                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="infos_avatar" />';
                 echo '</div>';
 
                 // Pseudo
