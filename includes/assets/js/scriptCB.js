@@ -357,6 +357,7 @@ function showRecipe(link, id)
   var ingredientsSplit = new Array();
   var ingredientSplit  = new Array();
   var ingredients      = new Array();
+  var avatarFormatted;
 
   html = '<div id="zoom_image" class="fond_zoom">';
     // Photo
@@ -375,10 +376,9 @@ function showRecipe(link, id)
         html += '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" /><div class="texte_titre_section">' + recipe['name'] + '</div></div>';
 
         // Avatar
-        if (recipe['avatar'] != "")
-          html += '<img src="../../includes/images/profil/avatars/' + recipe['avatar'] + '" alt="avatar" title="' + recipe['pseudo'] + '" class="avatar_details_recette" />';
-        else
-          html += '<img src="../../includes/icons/common/default.png" alt="avatar" title="' + recipe['pseudo'] + '" class="avatar_details_recette" />';
+        avatarFormatted = formatAvatar(recipe['avatar'], recipe['pseudo'], 2, "avatar");
+
+        html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_details_recette" />';
 
         // Réalisateur
         html += '<div class="zone_pseudo_details">';

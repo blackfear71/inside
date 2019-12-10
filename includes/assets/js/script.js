@@ -435,3 +435,38 @@ function loadingPage()
     });
   });
 }
+
+// Génère le chemin vers l'avatar
+function formatAvatar(avatar, pseudo, niveau, alt)
+{
+  var level;
+  var path;
+
+  // Niveau chemin
+  switch (niveau)
+  {
+    case 1:
+      level = "..";
+      break;
+
+    case 2:
+      level = "../..";
+      break;
+
+    case 0:
+    default:
+      level = "/inside";
+      break;
+  }
+
+  // Chemin
+  if (avatar != "" && avatar != undefined)
+    path = level + "/includes/images/profil/avatars/" + avatar;
+  else
+    path = level + "/includes/icons/common/default.png";
+
+  // Formatage
+  var formattedAvatar = {"path" : path, "alt" : alt, "title" : pseudo};
+
+  return formattedAvatar;
+}

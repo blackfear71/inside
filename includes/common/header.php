@@ -49,10 +49,9 @@
         echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
 
         // Avatar
-        if (isset($_SESSION['user']['avatar']) AND !empty($_SESSION['user']['avatar']))
-          echo '<img src="/inside/includes/images/profil/avatars/' . $_SESSION['user']['avatar'] . '" alt="avatar" class="avatar_bandeau" />';
-        else
-          echo '<img src="/inside/includes/icons/common/default.png" alt="avatar" class="avatar_bandeau" />';
+        $avatarFormatted = formatAvatar($_SESSION['user']['avatar'], $_SESSION['user']['pseudo'], 0, "avatar");
+
+        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_bandeau" />';
       echo '</a>';
 
       // Actions

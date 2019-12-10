@@ -1005,13 +1005,14 @@
         $level = "../..";
         break;
 
+      case 0:
       default:
         $level = "/inside";
         break;
     }
 
     // Chemin
-    if (!empty($avatar))
+    if (isset($avatar) AND !empty($avatar))
       $path = $level . "/includes/images/profil/avatars/" . $avatar;
     else
       $path = $level . "/includes/icons/common/default.png";

@@ -976,6 +976,7 @@ function showDetails(zone, id)
 {
   // Modification des données
   var details = detailsPropositions[id];
+  var avatarFormatted;
 
   /*******************/
   /*** Restaurant ***/
@@ -1252,10 +1253,9 @@ function showDetails(zone, id)
     ligne += '<div class="zone_details_user_top">';
 
     // Avatar
-    if (this['avatar'] != "")
-      ligne += '<img src="../../includes/images/profil/avatars/' + this['avatar'] + '" alt="avatar" title="' + this['pseudo'] + '" class="avatar_details" />';
-    else
-      ligne += '<img src="../../includes/icons/common/default.png" alt="avatar" title="' + this['pseudo'] + '" class="avatar_details" />';
+    avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, "avatar");
+
+    ligne += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_details" />';
 
     // Pseudo
     ligne += '<div class="pseudo_details">' + this['pseudo'] + '</div>';
@@ -1323,10 +1323,9 @@ function showDetails(zone, id)
       colonne += '<div class="zone_details_user_menu">';
 
       // Avatar
-      if (this['avatar'] != "")
-        colonne += '<img src="../../includes/images/profil/avatars/' + this['avatar'] + '" alt="avatar" title="' + this['pseudo'] + '" class="avatar_menus" />';
-      else
-        colonne += '<img src="../../includes/icons/common/default.png" alt="avatar" title="' + this['pseudo'] + '" class="avatar_menus" />';
+      avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, "avatar");
+
+      colonne += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_menus" />';
 
       // Entrée
       if (menu[0] != "")

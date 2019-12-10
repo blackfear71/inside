@@ -377,13 +377,12 @@ $(window).on('load', function()
           });
 
           // Formatage du message complet
+          var avatarFormatted = formatAvatar(avatar, pseudo, 0, "avatar");
+
           if (currentUser == identifiant)
           {
             html = '<div class="zone_chat_user">';
-              if (avatar != "" && avatar != undefined)
-                html += '<img src="/inside/includes/images/profil//avatars/' + avatar + '" alt="avatar" title="' + pseudo + '" class="avatar_chat_user" />';
-              else
-                html += '<img src="/inside/includes/icons/common/default.png" alt="avatar" title="' + pseudo + '" class="avatar_chat_user" />';
+              html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_user" />';
               html += '<div class="triangle_chat_user"></div>';
               html += '<div class="text_chat_user">' + text + '</div>';
             html += '</div>';
@@ -391,10 +390,7 @@ $(window).on('load', function()
           else
           {
             html = '<div class="zone_chat_other">';
-              if (avatar != "" && avatar != undefined)
-                html += '<img src="/inside/includes/images/profil/avatars/' + avatar + '" alt="avatar" title="' + pseudo + '" class="avatar_chat_other" />';
-              else
-                html += '<img src="/inside/includes/icons/common/default.png" alt="avatar" title="' + pseudo + '" class="avatar_chat_other" />';
+              html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_other" />';
               html += '<div class="triangle_chat_other"></div>';
               html += '<div class="text_chat_other">' + text + '</div>';
             html += '</div>';
@@ -445,10 +441,10 @@ $(window).on('load', function()
 
         // Zone utilisateur
         html = '<div class="zone_chat_connected">';
-          if (avatar != "" && avatar != undefined)
-            html += '<img src="/inside/includes/images/profil/avatars/' + avatar + '" alt="avatar" title="' + pseudo + '" class="avatar_chat_connected" />';
-          else
-            html += '<img src="/inside/includes/icons/common/default.png" alt="avatar" title="' + pseudo + '" class="avatar_chat_connected" />';
+          // Avatar
+          var avatarFormatted = formatAvatar(avatar, pseudo, 0, "avatar");
+
+          html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_connected" />';
 
           // Indicateur connexion
           if (connected == true)
