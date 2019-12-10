@@ -17,13 +17,15 @@
 
             // Infos
             echo '<div class="zone_report_middle">';
-              if (!empty($bug->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $bug->getAvatar() . '" alt="avatar" title="' . $bug->getPseudo() . '" class="avatar_report" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $bug->getPseudo() . '" class="avatar_report" />';
+              // Avatar
+              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 2, "avatar");
 
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
+
+              // Pseudo
               echo '<div class="pseudo_report">' . $bug->getPseudo() . '</div>';
 
+              // Date
               echo '<div class="date_report">';
                 echo '<img src="../../includes/icons/reports/date.png" alt="date" class="icone_report" />';
                 echo formatDateForDisplay($bug->getDate());
@@ -82,13 +84,15 @@
 
             // Infos
             echo '<div class="zone_report_middle">';
-              if (!empty($evolution->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $evolution->getAvatar() . '" alt="avatar" title="' . $evolution->getPseudo() . '" class="avatar_report" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $evolution->getPseudo() . '" class="avatar_report" />';
+              // Avatar
+              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 2, "avatar");
 
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
+
+              // Pseudo
               echo '<div class="pseudo_report">' . $evolution->getPseudo() . '</div>';
 
+              // Date
               echo '<div class="date_report">';
                 echo '<img src="../../includes/icons/reports/date.png" alt="date" class="icone_report" />';
                 echo formatDateForDisplay($evolution->getDate());
