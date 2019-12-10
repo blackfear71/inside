@@ -16,10 +16,9 @@
             echo '<div class="zone_depense_top">';
               echo '<div class="zone_achat">';
                 // Avatar acheteur
-                if (!empty($depense->getAvatar()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $depense->getAvatar() . '" alt="avatar" title="' . $depense->getPseudo() . '" class="avatar" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $depense->getPseudo() . '" class="avatar" />';
+                $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
+
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
 
                 // Pseudo acheteur
                 echo '<div class="pseudo_achat">' . $depense->getPseudo() . '</div>';
@@ -39,11 +38,10 @@
                   {
                     echo '<div class="zone_parts_utilisateur">';
                       // Avatar utilisateur
-                      if (!empty($parts->getAvatar()))
-                        echo '<img src="../../includes/images/profil/avatars/' . $parts->getAvatar() . '" alt="avatar" title="' . $parts->getPseudo() . '" class="avatar_depense" />';
-                      else
-                        echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $parts->getPseudo() . '" class="avatar_depense" />';
+                      $avatarFormatted = formatAvatar($parts->getAvatar(), $parts->getPseudo(), 2, "avatar");
 
+                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
+                      
                       // Nombre de parts
                       echo '<div class="parts_depense">' . $parts->getParts() . '</div>';
                     echo '</div>';

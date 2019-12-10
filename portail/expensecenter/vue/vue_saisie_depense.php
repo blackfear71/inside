@@ -66,10 +66,9 @@
                 echo '<div class="pseudo_depense">' . $user->getPseudo() . '</div>';
 
                 // Avatar
-                if (!empty($user->getAvatar()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_depense" />';
+                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 
                 // Identifiant (caché)
                 echo '<input type="hidden" name="identifiant_qte[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
