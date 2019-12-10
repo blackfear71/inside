@@ -36,13 +36,15 @@
 
               // Infos
               echo '<div class="zone_idea_middle">';
-                if (!empty($idea->getAvatar_a()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $idea->getAvatar_a() . '" alt="avatar" title="' . $idea->getPseudo_a() . '" class="avatar_idea" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $idea->getPseudo_a() . '" class="avatar_idea" />';
+                // Avatar
+                $avatarFormatted = formatAvatar($idea->getAvatar_a(), $idea->getPseudo_a(), 2, "avatar");
 
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
+
+                // Pseudo
                 echo '<div class="pseudo_idea">' . $idea->getPseudo_a() . '</div>';
 
+                // Date
                 echo '<div class="date_idea">';
                   echo '<img src="../../includes/icons/ideas/date.png" alt="date" class="icone_idea" />';
                   echo formatDateForDisplay($idea->getDate());
@@ -110,11 +112,12 @@
                     break;
                 }
 
-                  if (!empty($idea->getAvatar_d()))
-                    echo '<img src="../../includes/images/profil/avatars/' . $idea->getAvatar_d() . '" alt="avatar" title="' . $idea->getPseudo_d() . '" class="avatar_idea" />';
-                  else
-                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $idea->getPseudo_d() . '" class="avatar_idea" />';
+                  // Avatar
+                  $avatarFormatted = formatAvatar($idea->getAvatar_d(), $idea->getPseudo_d(), 2, "avatar");
 
+                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
+
+                  // Pseudo
                   echo '<div class="pseudo_idea white">' . $idea->getPseudo_d() . '</div>';
                 echo '</div>';
               }
