@@ -72,10 +72,9 @@
                     }
 
                     // Avatar
-                    if (!empty($podium['avatar']))
-                      echo '<img src="../includes/images/profil/avatars/' . $podium['avatar'] . '" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
-                    else
-                      echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $podium['pseudo'] . '" class="avatar_classement" />';
+                    $avatarFormatted = formatAvatar($podium['avatar'], $podium['pseudo'], 1, "avatar");
+
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
                     if (!isset($classement['podium'][$keyRank + 1]) OR $podium['rank'] != $classement['podium'][$keyRank + 1]['rank'])
                       echo '</div>';

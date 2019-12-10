@@ -989,4 +989,48 @@
 
     return $chaine;
   }
+
+  // Génère le chemin vers l'avatar
+  // RETOUR : Chemin & titre image
+  function formatAvatar($avatar, $pseudo, $niveau, $alt)
+  {
+    // Niveau chemin
+    switch ($niveau)
+    {
+      case 1:
+        $level = "..";
+        break;
+
+      case 2:
+        $level = "../..";
+        break;
+
+      default:
+        $level = "/inside";
+        break;
+    }
+
+    // Chemin
+    if (!empty($avatar))
+      $path = $level . "/includes/images/profil/avatars/" . $avatar;
+    else
+      $path = $level . "/includes/icons/common/default.png";
+
+    // Formatage
+    $formattedAvatar = array("path" => $path, "alt" => $alt, "title" => $pseudo);
+
+    return $formattedAvatar;
+  }
+
+  // Formate le pseudo en longueur
+  // RETOUR : Pseudo formaté
+  function formatPseudo($pseudo)
+  {
+    if (strlen($pseudo) > 15)
+      $formattedPseudo = substr($pseudo, 0, 15) . "...";
+    else
+      $formattedPseudo = $pseudo;
+
+    return $formattedPseudo;
+  }
 ?>

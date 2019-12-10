@@ -15,15 +15,11 @@
     }
 
     echo '<div class="zone_user_niveaux">';
-      if (!empty($expUser['avatar']))
-        echo '<img src="../includes/images/profil/avatars/' . $expUser['avatar'] . '" alt="avatar" title="' . $expUser['pseudo'] . '" class="avatar_niveau" />';
-      else
-        echo '<img src="../includes/icons/common/default.png" alt="avatar" title="' . $expUser['pseudo'] . '" class="avatar_niveau" />';
+      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 1, "avatar");
+      $pseudoFormatted = formatPseudo($expUser['pseudo']);
 
-      if (strlen($expUser['pseudo']) > 15)
-        echo '<div class="pseudo_niveau">' . substr($expUser['pseudo'], 0, 15) . '...</div>';
-      else
-        echo '<div class="pseudo_niveau">' . $expUser['pseudo'] . '</div>';
+      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_niveau" />';
+      echo '<div class="pseudo_niveau">' . $pseudoFormatted . '</div>';
     echo '</div>';
 
     if (!isset($experienceUsers[$keyExp + 1]) OR $expUser['niveau'] != $experienceUsers[$keyExp + 1]['niveau'])
