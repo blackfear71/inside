@@ -128,11 +128,10 @@
                 // Avatar
                 if (!empty($proposition->getCaller()))
                 {
+                  $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, "avatar");
+
                   echo '<div class="zone_avatar_caller">';
-                    if (!empty($proposition->getAvatar()))
-                      echo '<img src="../../includes/images/profil/avatars/' . $proposition->getAvatar() . '" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
-                    else
-                      echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $proposition->getPseudo() . '" class="avatar_caller" />';
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_caller" />';
                   echo '</div>';
                 }
 

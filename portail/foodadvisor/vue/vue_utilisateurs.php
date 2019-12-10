@@ -17,17 +17,14 @@
           foreach ($solos as $solo)
           {
             echo '<div class="zone_solo">';
+              $avatarFormatted = formatAvatar($solo->getAvatar(), $solo->getPseudo(), 2, "avatar");
+              $pseudoFormatted = formatPseudo($solo->getPseudo());
+
               // Avatar
-              if (!empty($solo->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $solo->getAvatar() . '" alt="avatar" title="' . $solo->getPseudo() . '" class="avatar_solo" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $solo->getPseudo() . '" class="avatar_solo" />';
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo" />';
 
               // Pseudo
-              if (strlen($solo->getPseudo()) > 15)
-                echo '<div class="pseudo_solo">' . substr($solo->getPseudo(), 0, 15) . '...</div>';
-              else
-                echo '<div class="pseudo_solo">' . $solo->getPseudo() . '</div>';
+              echo '<div class="pseudo_solo">' . $pseudoFormatted . '</div>';
             echo '</div>';
           }
         echo '</div>';
@@ -45,17 +42,14 @@
           foreach ($sansPropositions as $userNoChoice)
           {
             echo '<div class="zone_no_vote">';
+              $avatarFormatted = formatAvatar($userNoChoice->getAvatar(), $userNoChoice->getPseudo(), 2, "avatar");
+              $pseudoFormatted = formatPseudo($userNoChoice->getPseudo());
+
               // Avatar
-              if (!empty($userNoChoice->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $userNoChoice->getAvatar() . '" alt="avatar" title="' . $userNoChoice->getPseudo() . '" class="avatar_no_vote" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $userNoChoice->getPseudo() . '" class="avatar_no_vote" />';
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_no_vote" />';
 
               // Pseudo
-              if (strlen($userNoChoice->getPseudo()) > 15)
-                echo '<div class="pseudo_no_vote">' . substr($userNoChoice->getPseudo(), 0, 15) . '...</div>';
-              else
-                echo '<div class="pseudo_no_vote">' . $userNoChoice->getPseudo() . '</div>';
+              echo '<div class="pseudo_no_vote">' . $pseudoFormatted . '</div>';
             echo '</div>';
           }
         echo '</div>';

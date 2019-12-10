@@ -61,11 +61,10 @@
               echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';
 
               // Avatar
+              $avatarFormatted = formatAvatar($choixJour->getAvatar(), $choixJour->getPseudo(), 2, "avatar");
+
               echo '<div class="zone_avatar_caller">';
-                if (!empty($choixJour->getAvatar()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $choixJour->getAvatar() . '" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $choixJour->getPseudo() . '" class="avatar_caller" />';
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_caller" />';
               echo '</div>';
             echo '</div>';
           }
