@@ -155,10 +155,9 @@
                     }
 
                     // Avatar
-                    if (!empty($rankUser['avatar']))
-                      echo '<img src="../../includes/images/profil/avatars/' . $rankUser['avatar'] . '" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_classement" />';
-                    else
-                      echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $rankUser['pseudo'] . '" class="avatar_classement" />';
+                    $avatarFormatted = formatAvatar($rankUser['avatar'], $rankUser['pseudo'], 2, "avatar");
+
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
                     // Fin zone gagnants si moins de 3 médailles présentes
                     if ($rank <= 3 AND $finGagnants == false AND !isset($ranking[$keyRank + 1]))
@@ -244,15 +243,14 @@
                     foreach ($participants as $participant)
                     {
                       echo '<div class="zone_avatar_details_mission">';
-                        if (!empty($participant->getAvatar()))
-                          echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
-                        else
-                          echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_details_mission" />';
+                        $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
+                        $pseudoFormatted = formatPseudo($participant->getPseudo());
 
-                        if (strlen($participant->getPseudo()) > 15)
-                          echo '<div class="pseudo_details_mission">' . substr($participant->getPseudo(), 0, 15) . '...</div>';
-                        else
-                          echo '<div class="pseudo_details_mission">' . $participant->getPseudo() . '</div>';
+                        // Avatar
+                        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_details_mission" />';
+
+                        // Pseudo
+                        echo '<div class="pseudo_details_mission">' . $pseudoFormatted . '</div>';
                       echo '</div>';
                     }
                   echo '</div>';
