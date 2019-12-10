@@ -41,7 +41,7 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-          
+
           /***************/
           /* Modèle mail */
           /***************/
@@ -63,14 +63,14 @@
                   echo 'L\'email sera envoyé aux personnes suivantes :<br />';
                   $email_present = true;
                 }
-                echo '<p class="destinataires">';
-                  if (!empty($participant->getAvatar()))
-                    echo '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
-                  else
-                    echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest" />';
+                echo '<div class="destinataires">';
+                  // Avatar
+                  $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
 
-                  echo $participant->getPseudo();
-                echo '</p>';
+                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_dest" />';
+
+                  echo '<div class="pseudo_dest">' . $participant->getPseudo() . '</div>';
+                echo '</div>';
               }
             }
 

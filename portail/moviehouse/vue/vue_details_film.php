@@ -210,10 +210,9 @@
                         echo '<div class="zone_etoiles_user">';
 
                         // Avatar
-                        if (!empty($etoiles->getAvatar()))
-                          echo '<img src="../../includes/images/profil/avatars/' . $etoiles->getAvatar() . '" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
-                        else
-                          echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $etoiles->getPseudo() . '" class="avatar_interested" />';
+                        $avatarFormatted = formatAvatar($etoiles->getAvatar(), $etoiles->getPseudo(), 2, "avatar");
+
+                        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_interested" />';
 
                         // Pseudo
                         echo '<div class="pseudo_interested">' . $etoiles->getPseudo() . '</div>';
@@ -344,10 +343,9 @@
                     echo '<div class="zone_commentaire_user" id="' . $comment->getId() . '">';
                       // Avatar
                       echo '<div class="zone_avatar_commentaire">';
-                        if (!empty($comment->getAvatar()))
-                          echo '<img src="../../includes/images/profil/avatars/' . $comment->getAvatar() . '" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
-                        else
-                          echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $comment->getPseudo() . '" class="avatar_comments" />';
+                        $avatarFormatted = formatAvatar($comment->getAvatar(), $comment->getPseudo(), 2, "avatar");
+
+                        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_comments" />';
                       echo '</div>';
 
                       echo '<div class="infos_commentaire_user">';

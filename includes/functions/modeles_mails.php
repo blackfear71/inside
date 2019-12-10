@@ -73,20 +73,28 @@
 
         .destinataires_mail
         {
-        	margin-left: 30px;
-        	margin-bottom: 10px;
-        	margin-top: 10px;
-          word-break: break-word;
+        	margin: 10px 0 10px 30px;
         }
 
         .avatar_dest_mail
         {
+          display: inline-block;
         	border-radius: 50%;
         	width: 40px;
-          box-shadow: 0 0 3px #7c7c7c;
         	background-color: #262626;
+        	box-shadow: 0 0 3px #7c7c7c;
         	vertical-align: middle;
         	margin-right: 10px;
+        	vertical-align: middle;
+        }
+
+        .pseudo_dest_mail
+        {
+        	width: calc(100% - 50px);
+        	display: inline-block;
+        	word-break: break-word;
+        	font-size: 80%;
+        	vertical-align: middle;
         }
 
         .participants_mail
@@ -150,15 +158,12 @@
                 $modele .= 'Les personnes intéressées sont :<br />';
                 foreach ($participants as $participant)
                 {
-                  //$modele .= '<p class="participants_mail">- ' . $participant->getPseudo() . '</p>';
-                  $modele .= '<p class="destinataires_mail">';
-                    if (!empty($participant->getAvatar()))
-                      $modele .= '<img src="../../includes/images/profil/avatars/' . $participant->getAvatar() . '" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest_mail" />';
-                    else
-                      $modele .= '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $participant->getPseudo() . '" class="avatar_dest_mail" />';
+                  $modele .= '<div class="destinataires_mail">';
+                    $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
 
-                    $modele .= $participant->getPseudo();
-                  $modele .= '</p>';
+                    $modele .= '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_dest_mail" />';
+                    $modele .= '<div class="pseudo_dest_mail">' . $participant->getPseudo() . '</div>';
+                  $modele .= '</div>';
                 }
                 $modele .= '<br /><br /><br />';
                 $modele .= 'Cordialement,';

@@ -158,10 +158,10 @@
                   {
                     if ($etoilesFilm['stars'] == $previousStars)
                     {
-                      if (!empty($etoilesFilm['avatar']))
-                        echo '<img src="../../includes/images/profil/avatars/' . $etoilesFilm['avatar'] . '" alt="avatar" title="' . $etoilesFilm['pseudo'] . '" class="avatar_fiche" />';
-                      else
-                        echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $etoilesFilm['pseudo'] . '" class="avatar_fiche" />';
+                      // Avatar
+                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, "avatar");
+
+                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_fiche" />';
                     }
                     else
                     {
@@ -172,10 +172,10 @@
 
                       echo '<img src="../../includes/icons/moviehouse/stars/star' . $etoilesFilm['stars'] . '.png" alt="star' . $etoilesFilm['stars'] . '" class="icone_fiche_4" />';
 
-                      if (!empty($etoilesFilm['avatar']))
-                        echo '<img src="../../includes/images/profil/avatars/' . $etoilesFilm['avatar'] . '" alt="avatar" title="' . $etoilesFilm['pseudo'] . '" class="avatar_fiche" />';
-                      else
-                        echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $etoilesFilm['pseudo'] . '" class="avatar_fiche" />';
+                      // Avatar
+                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, "avatar");
+
+                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_fiche" />';
 
                       $previousStars = $etoilesFilm['stars'];
                     }

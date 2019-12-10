@@ -15,12 +15,13 @@
         {
           echo '<td class="init_table_users">';
   					echo '<div class="zone_avatar_films">';
-  						if (!empty($user->getAvatar()))
-  							echo '<img src="../../includes/images/profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
-  						else
-  							echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
+              // Avatar
+              $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_films" />';
   					echo '</div>';
 
+            // Pseudo
   					echo '<div class="pseudo_films">' . $user->getPseudo() . '</div>';
   				echo '</td>';
         }
@@ -259,12 +260,13 @@
         {
           echo '<td class="init_table_users">';
             echo '<div class="zone_avatar_films">';
-              if (!empty($user->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $user->getAvatar() . '" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $user->getPseudo() . '" class="avatar_films" />';
+              // Avatar
+              $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_films" />';
             echo '</div>';
 
+            // Pseudo
             echo '<div class="pseudo_films">' . $user->getPseudo() . '</div>';
           echo '</td>';
         }

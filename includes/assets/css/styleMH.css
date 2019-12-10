@@ -1817,20 +1817,28 @@
 
 .destinataires
 {
-	margin-left: 30px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	word-break: break-word;
+	margin: 10px 0 10px 30px;
 }
 
 .avatar_dest
 {
+	display: inline-block;
 	border-radius: 50%;
 	width: 40px;
 	background-color: #262626;
 	box-shadow: 0 0 3px #7c7c7c;
 	vertical-align: middle;
 	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.pseudo_dest
+{
+	width: calc(100% - 50px);
+	display: inline-block;
+	word-break: break-word;
+	font-size: 80%;
+	vertical-align: middle;
 }
 
 .avertissement_mail
