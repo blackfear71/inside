@@ -108,12 +108,12 @@
     }
 
     // Pseudo auteur
-    public function setName_a($name_a)
+    public function setPseudo_a($name_a)
     {
       $this->name_a = $name_a;
     }
 
-    public function getName_a()
+    public function getPseudo_a()
     {
       return $this->name_a;
     }
@@ -130,12 +130,12 @@
     }
 
     // Pseudo personne
-    public function setName_s($name_s)
+    public function setPseudo_s($name_s)
     {
       $this->name_s = $name_s;
     }
 
-    public function getName_s()
+    public function getPseudo_s()
     {
       return $this->name_s;
     }

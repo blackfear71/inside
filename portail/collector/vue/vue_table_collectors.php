@@ -38,11 +38,10 @@
               }
 
               // Avatar
+              $avatarFormatted = formatAvatar($collector->getAvatar_s(), $collector->getPseudo_s(), 2, "avatar");
+
               echo '<div class="zone_avatar_collector">';
-                if (!empty($collector->getAvatar_s()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_collector" />';
               echo '</div>';
 
               // Vote utilisateur
@@ -74,7 +73,7 @@
 
               // Pseudo
               echo '<div class="pseudo_collector">';
-                echo $collector->getName_s();
+                echo $collector->getPseudo_s();
               echo '</div>';
 
               // Date
@@ -104,7 +103,7 @@
                 }
 
                 // Rapporteur
-                echo '<div class="author_collector">Par ' . $collector->getName_a() . '</div>';
+                echo '<div class="author_collector">Par ' . $collector->getPseudo_a() . '</div>';
               }
 
               // Contexte
@@ -171,11 +170,10 @@
               echo '<a id="annuler_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
 
               // Avatar
+              $avatarFormatted = formatAvatar($collector->getAvatar_s(), $collector->getPseudo_s(), 2, "avatar");
+
               echo '<div class="zone_avatar_collector">';
-                if (!empty($collector->getAvatar_s()))
-                  echo '<img src="../../includes/images/profil/avatars/' . $collector->getAvatar_s() . '" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
-                else
-                  echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $collector->getName_s() . '" class="avatar_collector" />';
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_collector" />';
               echo '</div>';
 
               // Modification speaker
@@ -203,13 +201,13 @@
               else
               {
                 echo '<div class="old_user">';
-                  echo $collector->getName_s();
+                  echo $collector->getPseudo_s();
                 echo '</div>';
               }
 
               // Modification "Autre"
               if ($collector->getType_s() == "other")
-                echo '<input type="text" name="other_speaker" value="' . $collector->getName_s() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
+                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_s() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
               else
                 echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" style="display: none;" />';
 

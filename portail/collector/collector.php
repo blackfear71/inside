@@ -97,9 +97,9 @@
         foreach ($listeCollectors as &$collector)
         {
           $collector->setAuthor(htmlspecialchars($collector->getAuthor()));
-          $collector->setName_a(htmlspecialchars($collector->getName_a()));
+          $collector->setPseudo_a(htmlspecialchars($collector->getPseudo_a()));
           $collector->setSpeaker(htmlspecialchars($collector->getSpeaker()));
-          $collector->setName_s(htmlspecialchars($collector->getName_s()));
+          $collector->setPseudo_s(htmlspecialchars($collector->getPseudo_s()));
           $collector->setType_s(htmlspecialchars($collector->getType_s()));
           $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
           $collector->setType_collector(htmlspecialchars($collector->getType_collector()));

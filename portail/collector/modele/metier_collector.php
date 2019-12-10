@@ -242,12 +242,12 @@
       {
         if ($myCollector->getAuthor() == $user->getIdentifiant())
         {
-          $myCollector->setName_a($user->getPseudo());
+          $myCollector->setPseudo_a($user->getPseudo());
         }
 
         if ($myCollector->getSpeaker() == $user->getIdentifiant())
         {
-          $myCollector->setName_s($user->getPseudo());
+          $myCollector->setPseudo_s($user->getPseudo());
           $myCollector->setAvatar_s($user->getAvatar());
         }
       }
@@ -255,22 +255,22 @@
       // Auteur "autre"
       if (!empty($myCollector->getSpeaker()) AND $myCollector->getType_s() == "other")
       {
-        $myCollector->setName_s($myCollector->getSpeaker());
+        $myCollector->setPseudo_s($myCollector->getSpeaker());
         $myCollector->setSpeaker("other");
       }
 
       // Si pas de pseudo "auteur"
-      if (empty($myCollector->getName_a()) AND $myCollector->getType_s() == "user")
+      if (empty($myCollector->getPseudo_a()) AND $myCollector->getType_s() == "user")
       {
         $myCollector->setAuthor("");
-        $myCollector->setName_a("un ancien utilisateur");
+        $myCollector->setPseudo_a("un ancien utilisateur");
       }
 
       // Si pas de pseudo "speaker"
-      if (empty($myCollector->getName_s())AND $myCollector->getType_s() == "user")
+      if (empty($myCollector->getPseudo_s())AND $myCollector->getType_s() == "user")
       {
         $myCollector->setSpeaker("");
-        $myCollector->setName_s("un ancien utilisateur");
+        $myCollector->setPseudo_s("un ancien utilisateur");
       }
 
       array_push($listCollectors, $myCollector);
