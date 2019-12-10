@@ -18,7 +18,7 @@
           {
             echo '<div class="zone_solo">';
               $avatarFormatted = formatAvatar($solo->getAvatar(), $solo->getPseudo(), 2, "avatar");
-              $pseudoFormatted = formatPseudo($solo->getPseudo());
+              $pseudoFormatted = formatPseudo($solo->getPseudo(), 15);
 
               // Avatar
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo" />';
@@ -43,7 +43,7 @@
           {
             echo '<div class="zone_no_vote">';
               $avatarFormatted = formatAvatar($userNoChoice->getAvatar(), $userNoChoice->getPseudo(), 2, "avatar");
-              $pseudoFormatted = formatPseudo($userNoChoice->getPseudo());
+              $pseudoFormatted = formatPseudo($userNoChoice->getPseudo(), 15);
 
               // Avatar
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_no_vote" />';

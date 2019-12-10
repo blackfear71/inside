@@ -1024,10 +1024,10 @@
 
   // Formate le pseudo en longueur
   // RETOUR : Pseudo formaté
-  function formatPseudo($pseudo)
+  function formatPseudo($pseudo, $limit)
   {
-    if (strlen($pseudo) > 15)
-      $formattedPseudo = substr($pseudo, 0, 15) . "...";
+    if (strlen($pseudo) > $limit)
+      $formattedPseudo = substr($pseudo, 0, $limit) . "...";
     else
       $formattedPseudo = $pseudo;
 

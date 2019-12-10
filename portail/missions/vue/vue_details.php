@@ -244,7 +244,7 @@
                     {
                       echo '<div class="zone_avatar_details_mission">';
                         $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
-                        $pseudoFormatted = formatPseudo($participant->getPseudo());
+                        $pseudoFormatted = formatPseudo($participant->getPseudo(), 15);
 
                         // Avatar
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_details_mission" />';

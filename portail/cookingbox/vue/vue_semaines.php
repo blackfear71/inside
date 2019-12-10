@@ -11,10 +11,9 @@
       if (!empty($currentWeek->getIdentifiant()))
       {
         // Avatar
-        if (!empty($currentWeek->getAvatar()))
-          echo '<img src="../../includes/images/profil/avatars/' . $currentWeek->getAvatar() . '" alt="avatar" title="' . $currentWeek->getPseudo() . '" class="avatar_week" />';
-        else
-          echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $currentWeek->getPseudo() . '" class="avatar_week" />';
+        $avatarFormatted = formatAvatar($currentWeek->getAvatar(), $currentWeek->getPseudo(), 2, "avatar");
+
+        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_week" />';
 
         // Pseudo
         if (strlen($currentWeek->getPseudo()) > 50)
@@ -84,17 +83,14 @@
 
       if (!empty($nextWeek->getIdentifiant()))
       {
+        $avatarFormatted = formatAvatar($nextWeek->getAvatar(), $nextWeek->getPseudo(), 2, "avatar");
+        $pseudoFormatted = formatPseudo($nextWeek->getPseudo(), 50);
+
         // Avatar
-        if (!empty($nextWeek->getAvatar()))
-          echo '<img src="../../includes/images/profil/avatars/' . $nextWeek->getAvatar() . '" alt="avatar" title="' . $nextWeek->getPseudo() . '" class="avatar_week" />';
-        else
-          echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $nextWeek->getPseudo() . '" class="avatar_week" />';
+        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_week" />';
 
         // Pseudo
-        if (strlen($nextWeek->getPseudo()) > 50)
-          echo '<div class="pseudo_week">' . substr($nextWeek->getPseudo(), 0, 50) . '...</div>';
-        else
-          echo '<div class="pseudo_week">' . $nextWeek->getPseudo() . '</div>';
+        echo '<div class="pseudo_week">' . $pseudoFormatted . '</div>';
 
         // Bouton d'action
         echo '<div class="zone_boutons" id="zone_next_week">';

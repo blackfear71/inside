@@ -34,24 +34,23 @@
               echo '</div>';
 
               // Avatar
-              if (!empty($recette->getAvatar()))
-                echo '<img src="../../includes/images/profil/avatars/' . $recette->getAvatar() . '" alt="avatar" title="' . $recette->getPseudo() . '" class="avatar_recette" />';
-              else
-                echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="' . $recette->getPseudo() . '" class="avatar_recette" />';
+              $avatarFormatted = formatAvatar($recette->getAvatar(), $recette->getPseudo(), 2, "avatar");
 
-                // Boutons d'action
-                if ($recette->getIdentifiant() == $_SESSION['user']['identifiant'])
-                {
-                  // Supprimer
-                  echo '<form id="delete_recipe_' . $recette->getWeek() . '" method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doSupprimerRecette" class="form_delete_week">';
-                    echo '<input type="hidden" name="week_cake" value="' . $recette->getWeek() . '" />';
-                    echo '<input type="submit" name="delete_week" value="" title="Supprimer la photo et la recette" class="icon_delete_week eventConfirm" />';
-                    echo '<input type="hidden" value="Supprimer la photo et la recette de cette semaine ?" class="eventMessage" />';
-                  echo '</form>';
+              echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_recette" />';
 
-                  // Modifier
-                  echo '<a id="modifier_' . $recette->getId() . '" title="Modifier" class="lien_update_week modifierRecette"><img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icon_update_week" /></a>';
-                }
+              // Boutons d'action
+              if ($recette->getIdentifiant() == $_SESSION['user']['identifiant'])
+              {
+                // Supprimer
+                echo '<form id="delete_recipe_' . $recette->getWeek() . '" method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doSupprimerRecette" class="form_delete_week">';
+                  echo '<input type="hidden" name="week_cake" value="' . $recette->getWeek() . '" />';
+                  echo '<input type="submit" name="delete_week" value="" title="Supprimer la photo et la recette" class="icon_delete_week eventConfirm" />';
+                  echo '<input type="hidden" value="Supprimer la photo et la recette de cette semaine ?" class="eventMessage" />';
+                echo '</form>';
+
+                // Modifier
+                echo '<a id="modifier_' . $recette->getId() . '" title="Modifier" class="lien_update_week modifierRecette"><img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icon_update_week" /></a>';
+              }
             echo '</div>';
           echo '</div>';
         }
