@@ -260,7 +260,7 @@
       }
 
       // Si pas de pseudo "auteur"
-      if (empty($myCollector->getPseudo_a()) AND $myCollector->getType_s() == "user")
+      if (empty($myCollector->getPseudo_a()))
       {
         $myCollector->setAuthor("");
         $myCollector->setPseudo_a("un ancien utilisateur");

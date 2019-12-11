@@ -42,7 +42,10 @@
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
                 // Pseudo
-                echo '<div class="pseudo_idea">' . $idea->getPseudo_a() . '</div>';
+                if ($idea->getPseudo_a() == "Un ancien utilisateur")
+                  echo '<div class="pseudo_idea"><i>' . $idea->getPseudo_a() . '</i></div>';
+                else
+                  echo '<div class="pseudo_idea">' . $idea->getPseudo_a() . '</div>';
 
                 // Date
                 echo '<div class="date_idea">';
@@ -118,7 +121,10 @@
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
                   // Pseudo
-                  echo '<div class="pseudo_idea white">' . $idea->getPseudo_d() . '</div>';
+                  if ($idea->getPseudo_d() == "Un ancien utilisateur")
+                    echo '<div class="pseudo_idea white"><i>' . $idea->getPseudo_d() . '</i></div>';
+                  else
+                    echo '<div class="pseudo_idea white">' . $idea->getPseudo_d() . '</div>';
                 echo '</div>';
               }
 

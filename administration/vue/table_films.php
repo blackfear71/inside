@@ -65,11 +65,17 @@
   				echo '</td>';
 
 					echo '<td class="td_manage_users">';
-						echo $film->getPseudo_del() . ' (' . $film->getIdentifiant_del() . ')';
+						if (!empty($film->getPseudo_del()))
+							echo $film->getPseudo_del() . ' (' . $film->getIdentifiant_del() . ')';
+						else
+							echo 'Un ancien utilisateur (' . $film->getIdentifiant_del() . ')';
 					echo '</td>';
 
 					echo '<td class="td_manage_users">';
-						echo $film->getPseudo_add() . ' (' . $film->getIdentifiant_add() . ')';
+						if (!empty($film->getPseudo_add()))
+							echo $film->getPseudo_add() . ' (' . $film->getIdentifiant_add() . ')';
+						else
+							echo 'Un ancien utilisateur (' . $film->getIdentifiant_add() . ')';
 					echo '</td>';
 
 					echo '<td class="td_manage_users">';

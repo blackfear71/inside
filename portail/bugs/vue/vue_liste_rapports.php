@@ -23,7 +23,10 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
               // Pseudo
-              echo '<div class="pseudo_report">' . $bug->getPseudo() . '</div>';
+              if ($bug->getPseudo() == "Un ancien utilisateur")
+                echo '<div class="pseudo_report"><i>' . $bug->getPseudo() . '</i></div>';
+              else
+                echo '<div class="pseudo_report">' . $bug->getPseudo() . '</div>';
 
               // Date
               echo '<div class="date_report">';
@@ -91,7 +94,10 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
               // Pseudo
-              echo '<div class="pseudo_report">' . $evolution->getPseudo() . '</div>';
+              if ($evolution->getPseudo() == "Un ancien utilisateur")
+                echo '<div class="pseudo_report"><i>' . $evolution->getPseudo() . '</i></div>';
+              else
+                echo '<div class="pseudo_report">' . $evolution->getPseudo() . '</div>';
 
               // Date
               echo '<div class="date_report">';

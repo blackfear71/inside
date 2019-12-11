@@ -16,12 +16,18 @@
             echo '<div class="zone_depense_top">';
               echo '<div class="zone_achat">';
                 // Avatar acheteur
-                $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
+                if (!empty($depense->getPseudo()))
+                  $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
+                else
+                  $avatarFormatted = formatAvatar($depense->getAvatar(), "Un ancien utilisateur", 2, "avatar");
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
 
                 // Pseudo acheteur
-                echo '<div class="pseudo_achat">' . $depense->getPseudo() . '</div>';
+                if (!empty($depense->getPseudo()))
+                  echo '<div class="pseudo_achat">' . $depense->getPseudo() . '</div>';
+                else
+                  echo '<div class="pseudo_achat"><i>Un ancien utilisateur</i></div>';
 
                 // Date achat
                 echo '<div class="date_achat">' . formatDateForDisplay($depense->getDate()) . '</div>';
@@ -41,7 +47,7 @@
                       $avatarFormatted = formatAvatar($parts->getAvatar(), $parts->getPseudo(), 2, "avatar");
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
-                      
+
                       // Nombre de parts
                       echo '<div class="parts_depense">' . $parts->getParts() . '</div>';
                     echo '</div>';

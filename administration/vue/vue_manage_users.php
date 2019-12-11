@@ -21,6 +21,11 @@
 		</header>
 
 		<section>
+      <!-- Messages d'alerte -->
+      <?php
+        include('../includes/common/alerts.php');
+      ?>
+
 			<article>
 				<?php
 					if (isset($_SESSION['save']['user_ask_id'])   AND !empty($_SESSION['save']['user_ask_id'])

@@ -1225,47 +1225,77 @@
   // RETOUR : Aucun
   function acceptDesinscription($post)
   {
-    $id_user = $post['id_user'];
+    $id_user    = $post['id_user'];
+    $control_ok = true;
 
     global $bdd;
 
-    // Suppression des avis movie_house_users
-    $req1 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
+    // Contrôle dépenses nulles
+    $req0 = $bdd->query('SELECT id, identifiant, pseudo, expenses FROM users WHERE identifiant = "' . $id_user . '"');
+    $data0 = $req0->fetch();
 
-    // Suppression des préférences
-    $req2 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
+    if ($data0['expenses'] > 0.01 OR $data0['expenses'] < -0.01)
+    {
+      $_SESSION['alerts']['expenses_not_null'] = true;
+      $control_ok                              = false;
+    }
+    else
+      $pseudo = $data0['pseudo'];
 
-    // Suppression des votes collector
-    $req3 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
+    $req0->closeCursor();
 
-    // Remise en cours des idées non terminées ou rejetées
-    $status     = "O";
-    $developper = "";
+    // Enregistrement du pseudo dans les phrases cultes (speaker avec passage à "other")
+    if ($control_ok == true)
+    {
+      $req1 = $bdd->prepare('UPDATE collector SET speaker = :speaker, type_speaker = :type_speaker WHERE speaker = "' . $id_user . '"');
+      $req1->execute(array(
+        'speaker'      => substr($pseudo, 0, 100),
+        'type_speaker' => "other"
+      ));
+      $req1->closeCursor();
+    }
 
-    $req4 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
-    $req4->execute(array(
-      'status'     => $status,
-      'developper' => $developper
-    ));
-    $req4->closeCursor();
+    // Suppressions
+    if ($control_ok == true)
+    {
+      // Suppression des avis movie_house_users
+      $req1 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
 
-    // Suppression des missions
-    $req5 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
+      // Suppression des préférences
+      $req2 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
 
-    // Suppression notification inscription
-    deleteNotification('inscrit', $id_user);
+      // Suppression des votes collector
+      $req3 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
 
-    // Suppression des succès
-    $req6 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
+      // Remise en cours des idées non terminées ou rejetées
+      $status     = "O";
+      $developper = "";
 
-    // Suppression propositions restaurants
-    $req7 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
+      $req4 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
+      $req4->execute(array(
+        'status'     => $status,
+        'developper' => $developper
+      ));
+      $req4->closeCursor();
 
-    // Suppression déterminations restaurants
-    $req8 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
+      // Suppression des missions
+      $req5 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
 
-    // Suppression utilisateur
-    $req9 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
+      // Suppression notification inscription
+      deleteNotification('inscrit', $id_user);
+
+      // Suppression des succès
+      $req6 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
+
+      // Suppression propositions restaurants
+      $req7 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
+
+      // Suppression déterminations restaurants
+      $req8 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
+
+      // Suppression utilisateur
+      $req9 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
+    }
   }
 
   // METIER : Refus désinscription

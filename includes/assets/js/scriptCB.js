@@ -382,7 +382,10 @@ function showRecipe(link, id)
 
         // Réalisateur
         html += '<div class="zone_pseudo_details">';
-          html += 'Par <strong>' + recipe['pseudo'] + '</strong>';
+          if (recipe['pseudo'] != "")
+            html += 'Par <strong>' + recipe['pseudo'] + '</strong>';
+          else
+            html += 'Par <strong><i>un ancien utilisateur</i></strong>';          
         html += '</div>';
 
         // Ingrédients
