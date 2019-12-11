@@ -1259,42 +1259,42 @@
     if ($control_ok == true)
     {
       // Suppression des avis movie_house_users
-      $req1 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
+      $req2 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression des préférences
-      $req2 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
+      $req3 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
 
       // Suppression des votes collector
-      $req3 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
+      $req4 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
 
       // Remise en cours des idées non terminées ou rejetées
       $status     = "O";
       $developper = "";
 
-      $req4 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
-      $req4->execute(array(
+      $req5 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
+      $req5->execute(array(
         'status'     => $status,
         'developper' => $developper
       ));
-      $req4->closeCursor();
+      $req5->closeCursor();
 
       // Suppression des missions
-      $req5 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
+      $req6 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression notification inscription
       deleteNotification('inscrit', $id_user);
 
       // Suppression des succès
-      $req6 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
+      $req7 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression propositions restaurants
-      $req7 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
+      $req8 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression déterminations restaurants
-      $req8 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
+      $req9 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
 
       // Suppression utilisateur
-      $req9 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
+      $req10 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
     }
   }
 
@@ -1528,17 +1528,13 @@
    			{
    				// Contrôle fichier temporaire existant
    				if (!is_uploaded_file($tmp_file))
-   				{
    					exit("Le fichier est introuvable");
-   				}
 
    				// Contrôle type de fichier
    				$type_file = $files['success']['type'];
 
    				if (!strstr($type_file, 'png'))
-   				{
    					exit("Le fichier n'est pas une image valide");
-   				}
    				else
    				{
    					$type_image = pathinfo($file, PATHINFO_EXTENSION);
@@ -2296,17 +2292,13 @@
       {
         // Contrôle fichier temporaire existant
         if (!is_uploaded_file($tmp_file))
-        {
           exit("Le fichier est introuvable");
-        }
 
         // Contrôle type de fichier
         $type_file = $files['avatar']['type'];
 
         if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-        {
           exit("Le fichier n'est pas une image valide");
-        }
         else
         {
           $type_image = pathinfo($file, PATHINFO_EXTENSION);
@@ -2315,9 +2307,7 @@
 
         // Contrôle upload (si tout est bon, l'image est envoyée)
         if (!move_uploaded_file($tmp_file, $avatar_dir . $new_name))
-        {
           exit("Impossible de copier le fichier dans $avatar_dir");
-        }
 
         // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
         imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);

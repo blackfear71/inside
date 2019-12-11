@@ -221,17 +221,13 @@
  			{
  				// Contrôle fichier temporaire existant
  				if (!is_uploaded_file($tmp_file))
- 				{
  					exit("Le fichier est introuvable");
- 				}
 
  				// Contrôle type de fichier
  				$type_file = $files['avatar']['type'];
 
  				if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
- 				{
  					exit("Le fichier n'est pas une image valide");
- 				}
  				else
  				{
  					$type_image = pathinfo($file, PATHINFO_EXTENSION);
@@ -240,9 +236,7 @@
 
  				// Contrôle upload (si tout est bon, l'image est envoyée)
  				if (!move_uploaded_file($tmp_file, $avatar_dir . $new_name))
- 				{
  					exit("Impossible de copier le fichier dans $avatar_dir");
- 				}
 
  				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
  				imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
