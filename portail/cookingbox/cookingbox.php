@@ -1,4 +1,17 @@
 <?php
+  /**********************************
+  *********** Cooking Box ***********
+  ***********************************
+  Fonctionnalités :
+  - Consultation des tours de gâteau
+  - Modification des tours de gâteau
+  - Consultation des recettes
+  - Ajout des recettes
+  - Modification des recettes
+  - Suppression des recettes
+  - Détail des recettes
+  **********************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

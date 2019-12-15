@@ -1,4 +1,11 @@
 <?php
+  /********************************
+  ********* Notifications *********
+  *********************************
+  Fonctionnalités :
+  - Consultation des notifications
+  ********************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

@@ -1,4 +1,14 @@
 <?php
+  /**************************
+  ******** Recherche ********
+  ***************************
+  Fonctionnalités :
+  - Recherche de films
+  - Recherche de restaurants
+  - Recherche de courses
+  - Recherche de missions
+  **************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

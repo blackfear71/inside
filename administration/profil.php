@@ -1,4 +1,12 @@
 <?php
+  /******************************
+  **** Profil administrateur ****
+  *******************************
+  Fonctionnalités :
+  - Modification des informations
+  - Modification du mot de passe
+  ******************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_regex.php');

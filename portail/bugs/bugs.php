@@ -1,4 +1,12 @@
 <?php
+  /*********************************
+  ****** Demandes d'évolution ******
+  **********************************
+  Fonctionnalités :
+  - Consultation des bugs/évolutions
+  - Ajout de bugs/évolutions
+  *********************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

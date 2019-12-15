@@ -1,4 +1,19 @@
 <?php
+  /*********************************
+  ********* Collector Room *********
+  **********************************
+  Fonctionnalités :
+  - Consultation des phrases cultes
+  - Ajout des phrases cultes
+  - Modification des phrases cultes
+  - Suppression des phrases cultes
+  - Consultation des images cultes
+  - Ajout des images cultes
+  - Modification des images cultes
+  - Suppression des images cultes
+  - Filtrage
+  *********************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

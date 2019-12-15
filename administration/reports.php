@@ -1,4 +1,13 @@
 <?php
+  /*****************************
+  **** Gestion des rapports ****
+  ******************************
+  Fonctionnalités :
+  - Résolution de bug/évolution
+  - Suppression de bug/évolution
+  - Rejet de bug/évolution
+  *****************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_dates.php');

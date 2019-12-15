@@ -181,24 +181,6 @@
           $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter&anchor=comments";
           break;
 
-        case "mail_1":
-          $icone  = "mailing";
-          $phrase = "";
-          $lien   = "";
-          break;
-
-        case "mail_2":
-          $icone  = "mailing";
-          $phrase = "";
-          $lien   = "";
-          break;
-
-        case "mail_3":
-          $icone  = "mailing";
-          $phrase = "";
-          $lien   = "";
-          break;
-
         case "calendrier":
           // Recherche mois et année
           $reponse = $bdd->query('SELECT * FROM calendars WHERE id = ' . $notification->getContent());
@@ -399,44 +381,6 @@
           $icone  = "ideas";
           $phrase = "Une nouvelle idée <strong>" . $sujet . "</strong> vient tout juste d'être publiée par <strong>" . $auteur . "</strong> !";
           $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&page=" . $num_page . "&action=goConsulter&anchor=" . $notification->getContent();
-          break;
-
-        case "succes":
-          list($user, $success) = explode(";", $notification->getContent());
-
-          // Recherche pseudo
-          $reponse1 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user . '"');
-          $donnees1 = $reponse1->fetch();
-          if ($reponse1->rowCount() > 0)
-            $pseudo = $donnees1['pseudo'];
-          else
-            $pseudo = '<i>un ancien utilisateur</i>';
-          $reponse1->closeCursor();
-
-          // Recherche succès
-          $reponse2 = $bdd->query('SELECT id, level, title FROM success WHERE id = ' . $success);
-          $donnees2 = $reponse2->fetch();
-          $succes = $donnees2['title'];
-          $level  = $donnees2['level'];
-          $reponse2->closeCursor();
-
-          $icone = "success";
-          switch ($level)
-          {
-            case "3":
-              $phrase = "Une vie normale ne suffit plus pour <strong>" . $pseudo . "</strong>. Bien joué pour <strong>" . $succes . "</strong>.";
-              break;
-
-            case "2":
-              $phrase = "Mais qui va bien pouvoir détrôner <strong>" . $pseudo . "</strong> sur <strong>" . $succes . "</strong> ?";
-              break;
-
-            case "1":
-            default:
-              $phrase = "<strong>" . $pseudo . "</strong> se la pète un max avec son succès <strong>" . $succes . "</strong> ! Tu as trop le seum ma parole !";
-              break;
-          }
-          $lien = "";
           break;
 
         case "start_mission":

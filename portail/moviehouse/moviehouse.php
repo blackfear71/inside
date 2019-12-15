@@ -1,4 +1,14 @@
 <?php
+  /************************
+  ****** Movie House ******
+  *************************
+  Fonctionnalités :
+  - Accueil des films
+  - Fiches des films
+  - Gestion des préférences
+  - Ajout de films
+  ************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');
@@ -16,7 +26,7 @@
   AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
   {
     unset($_SESSION['save']);
-    
+
     $_SESSION['save']['nom_film_saisi']         = "";
     $_SESSION['save']['date_theater_saisie']    = "";
     $_SESSION['save']['date_release_saisie']    = "";

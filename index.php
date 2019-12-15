@@ -1,4 +1,13 @@
 <?php
+	/**************************
+	********** Index **********
+	***************************
+	Fonctionnalités :
+	- Connexion
+	- Inscription
+	- Récupération mot de passe
+	**************************/
+
 	// Fonction communes
 	include_once('includes/functions/fonctions_communes.php');
 
@@ -7,7 +16,7 @@
 
 	// Modèle de données : "module métier"
   include_once('connexion/modele/metier_index.php');
-	
+
 	// Initialisation sauvegarde saisie inscription
 	if (((!isset($_SESSION['alerts']['too_short'])      OR  $_SESSION['alerts']['too_short']       != true)
 	AND  (!isset($_SESSION['alerts']['already_exist'])  OR  $_SESSION['alerts']['already_exist']   != true)

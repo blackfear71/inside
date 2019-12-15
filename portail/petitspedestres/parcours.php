@@ -1,4 +1,13 @@
 <?php
+  /***************************
+  *** Les petits pédestres ***
+  ****************************
+  Fonctionnalités :
+  - Recherche de course
+  - Ajout de course
+  - Modification de course
+  ***************************/
+
   @ini_set('display_errors', 'on');
 
   // Fonction communes

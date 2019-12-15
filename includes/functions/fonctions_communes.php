@@ -1013,7 +1013,13 @@
 
     // Chemin
     if (isset($avatar) AND !empty($avatar))
+    {
       $path = $level . "/includes/images/profil/avatars/" . $avatar;
+
+      // Contrôle existence fichier
+      if (!file_exists($path))
+        $path = $level . "/includes/icons/common/default.png";
+    }
     else
       $path = $level . "/includes/icons/common/default.png";
 

@@ -1,4 +1,11 @@
 <?php
+  /****************************
+  ******* Event Manager *******
+  *****************************
+  Fonctionnalités :
+  - Consultation des évènements
+  ****************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

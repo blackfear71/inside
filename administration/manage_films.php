@@ -1,4 +1,11 @@
 <?php
+  /***********************
+  *** Gestion des fims ***
+  ************************
+  Fonctionnalités :
+  - Suppression des films
+  ***********************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
 

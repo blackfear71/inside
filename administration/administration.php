@@ -1,4 +1,13 @@
 <?php
+  /*********************
+  *** Administration ***
+  **********************
+  Fonctionnalités :
+  - Menu administration
+  - Sauvegarde BDD
+  - Accès phpMyAdmin
+  *********************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
 

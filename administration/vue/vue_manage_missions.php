@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Missions";
+      $title_head      = "Missions : Insider";
       $style_head      = "styleAdmin.css";
       $script_head     = "scriptAdmin.js";
       $datepicker_head = true;

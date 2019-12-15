@@ -1,4 +1,13 @@
 <?php
+  /**************************
+  *** Gestion des alertes ***
+  ***************************
+  Fonctionnalités :
+  - Ajout d'alertes
+  - Modification d'alertes
+  - Suppression d'alertes
+  **************************/
+  
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
 
@@ -12,7 +21,7 @@
   if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
   {
     unset($_SESSION['save']);
-    
+
     $_SESSION['save']['type_alert']      = "";
     $_SESSION['save']['category_alert']  = "";
     $_SESSION['save']['reference_alert'] = "";

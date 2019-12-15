@@ -1,4 +1,14 @@
 <?php
+  /*****************************
+  **** Gestion des missions ****
+  ******************************
+  Fonctionnalités :
+  - Création des missions
+  - Modification des missions
+  - Suppression des missions
+  - Consultation des classements
+  *****************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_dates.php');

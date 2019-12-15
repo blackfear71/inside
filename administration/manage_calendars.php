@@ -1,4 +1,12 @@
 <?php
+  /******************************
+  *** Gestion des calendriers ***
+  *******************************
+  Fonctionnalités :
+  - Autorisations d'édition
+  - Suppression des calendriers
+  ******************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
 

@@ -1230,19 +1230,22 @@
 
     global $bdd;
 
-    // Contrôle dépenses nulles
-    $req0 = $bdd->query('SELECT id, identifiant, pseudo, expenses FROM users WHERE identifiant = "' . $id_user . '"');
+    // Récupération des données utilisateur
+    $req0 = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses FROM users WHERE identifiant = "' . $id_user . '"');
     $data0 = $req0->fetch();
 
-    if ($data0['expenses'] > 0.01 OR $data0['expenses'] < -0.01)
+    $pseudo   = $data0['pseudo'];
+    $avatar   = $data0['avatar'];
+    $expenses = $data0['expenses'];
+
+    $req0->closeCursor();
+
+    // Contrôle dépenses nulles
+    if ($expenses > 0.01 OR $expenses < -0.01)
     {
       $_SESSION['alerts']['expenses_not_null'] = true;
       $control_ok                              = false;
     }
-    else
-      $pseudo = $data0['pseudo'];
-
-    $req0->closeCursor();
 
     // Enregistrement du pseudo dans les phrases cultes (speaker avec passage à "other")
     if ($control_ok == true)
@@ -1255,28 +1258,31 @@
       $req1->closeCursor();
     }
 
+    // Remise en cours des idées non terminées ou rejetées
+    if ($control_ok == true)
+    {
+      $status     = "O";
+      $developper = "";
+
+      $req2 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
+      $req2->execute(array(
+        'status'     => $status,
+        'developper' => $developper
+      ));
+      $req2->closeCursor();
+    }
+
     // Suppressions
     if ($control_ok == true)
     {
       // Suppression des avis movie_house_users
-      $req2 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
+      $req3 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression des préférences
-      $req3 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
+      $req4 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
 
       // Suppression des votes collector
-      $req4 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
-
-      // Remise en cours des idées non terminées ou rejetées
-      $status     = "O";
-      $developper = "";
-
-      $req5 = $bdd->prepare('UPDATE ideas SET status = :status, developper = :developper WHERE developper = "' . $id_user . '" AND status != "D" AND status != "R"');
-      $req5->execute(array(
-        'status'     => $status,
-        'developper' => $developper
-      ));
-      $req5->closeCursor();
+      $req5 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression des missions
       $req6 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
@@ -1292,6 +1298,9 @@
 
       // Suppression déterminations restaurants
       $req9 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
+
+      // Suppression avatar
+      unlink ('../includes/images/profil/avatars/' . $avatar);
 
       // Suppression utilisateur
       $req10 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');

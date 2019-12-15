@@ -1,4 +1,15 @@
 <?php
+  /*********************************
+  ********* Expense Center *********
+  **********************************
+  Fonctionnalités :
+  - Consultation soldes utilisateurs
+  - Ajout de dépenses
+  - Consultation des dépense
+  - Modification des dépenses
+  - Suppression des dépenses
+  *********************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

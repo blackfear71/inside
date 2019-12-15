@@ -1,4 +1,14 @@
 <?php
+  /*********************************************
+  ************* Profil utilisateur *************
+  **********************************************
+  Fonctionnalités :
+  - Consultation des données personnelles
+  - Modification des informations et paramètres
+  - Consultation des succès et de l'expérience
+  - Modification du thème
+  *********************************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_dates.php');

@@ -1,4 +1,15 @@
 <?php
+  /************************
+  ****** Movie House ******
+  *************************
+  Fonctionnalités :
+  - Détails du films
+  - Modification du films
+  - Suppression du films
+  - Gestion des préférences
+  - Commentaires
+  ************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

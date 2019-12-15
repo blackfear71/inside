@@ -1,4 +1,13 @@
 <?php
+  /**********************
+  ******* #TheBox *******
+  ***********************
+  Fonctionnalités :
+  - Consulation des idées
+  - Ajout d'une idée
+  - Gestion d'une idée
+  **********************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

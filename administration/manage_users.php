@@ -1,4 +1,14 @@
 <?php
+  /*******************************
+  *** Gestion des utilisateurs ***
+  ********************************
+  Fonctionnalités :
+  - Réinitialisation mot de passe
+  - Inscriptions
+  - Désinscriptions
+  - Consultation des statistiques
+  *******************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_regex.php');
@@ -13,7 +23,7 @@
 	if (!isset($_SESSION['save']['user_ask_id']) OR !isset($_SESSION['save']['user_ask_name']) OR !isset($_SESSION['save']['new_password']))
 	{
     unset($_SESSION['save']);
-    
+
 		$_SESSION['save']['user_ask_id']   = "";
 		$_SESSION['save']['user_ask_name'] = "";
 		$_SESSION['save']['new_password']  = "";

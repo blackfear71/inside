@@ -1,4 +1,12 @@
 <?php
+  /**************************
+  ******* Tâches CRON *******
+  ***************************
+  Fonctionnalités :
+  - Consultation logs
+  - Déclenchement manuel CRON
+  **************************/
+
   // Fonction communes
   include_once('../includes/functions/fonctions_communes.php');
 

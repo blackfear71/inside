@@ -1,4 +1,14 @@
 <?php
+  /******************************
+  *** Les enfants ! A table ! ***
+  *******************************
+  Fonctionnalités :
+  - Consultation restaurants
+  - Ajout restaurants
+  - Modification restaurants
+  - Suppression restaurants
+  ******************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');
@@ -18,7 +28,7 @@
   AND (!isset($_SESSION['alerts']['price_max_min'])      OR $_SESSION['alerts']['price_max_min']      != true))
   {
     unset($_SESSION['save']);
-    
+
     $_SESSION['save']['name_restaurant']        = "";
     $_SESSION['save']['prix_min']               = "";
     $_SESSION['save']['prix_max']               = "";

@@ -1,4 +1,14 @@
 <?php
+	/***************************
+	**** Gestion des succès ****
+	****************************
+	Fonctionnalités :
+	- Création des succès
+	- Modification des succès
+	- Suppression des succès
+	- Initialisation des succès
+	***************************/
+
   // Fonctions communes
 	include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_regex.php');
@@ -17,7 +27,7 @@
   AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true))
   {
 		unset($_SESSION['save']);
-		
+
     $_SESSION['save']['reference_success']   = "";
     $_SESSION['save']['level']               = "";
 		$_SESSION['save']['order_success']       = "";

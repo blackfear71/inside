@@ -1,4 +1,12 @@
 <?php
+  /******************
+  *** Movie House ***
+  *******************
+  Fonctionnalités :
+  - Aperçu du mail
+  - Envoi du mail
+  ******************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');

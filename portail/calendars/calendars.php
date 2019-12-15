@@ -1,4 +1,16 @@
 <?php
+  /******************************
+  ********** Calendars **********
+  *******************************
+  Fonctionnalités :
+  - Consultation des calendriers
+  - Ajout des calendriers
+  - Suppression des calendriers
+  - Consultation des annexes
+  - Ajout des annexes
+  - Suppression des annexes
+  ******************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
 

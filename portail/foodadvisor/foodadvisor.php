@@ -1,4 +1,21 @@
 <?php
+  /**********************************
+  ***** Les enfants ! A table ! *****
+  ***********************************
+  Fonctionnalités :
+  - Consultation propositions
+  - Bande à part
+  - Utilisateurs en attente
+  - Ajout de propositions
+  - Modification de propositions
+  - Suppression de propositions
+  - Consultation détails propositions
+  - Détermination choix
+  - Réservation choix
+  - Choix complet
+  - Modification jour sans choix
+  **********************************/
+
   // Fonction communes
   include_once('../../includes/functions/fonctions_communes.php');
   include_once('../../includes/functions/fonctions_dates.php');
