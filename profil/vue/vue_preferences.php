@@ -117,45 +117,13 @@
                 echo '<label for="cards" class="label_switch">Fiches</label>';
               echo '</div>';
             }
-
-            echo '<div></div>';
-
-            if ($preferences->getView_movie_house() == "S")
-            {
-              echo '<div id="bouton_synthese" class="switch_default_view_movies bouton_checked">';
-                echo '<input id="synthese" type="radio" name="movie_house_view" value="S" checked required />';
-                echo '<label for="synthese" class="label_switch">Synthèse</label>';
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="bouton_synthese" class="switch_default_view_movies">';
-                echo '<input id="synthese" type="radio" name="movie_house_view" value="S" required />';
-                echo '<label for="synthese" class="label_switch">Synthèse</label>';
-              echo '</div>';
-            }
-
-            if ($preferences->getView_movie_house() == "D")
-            {
-              echo '<div id="bouton_details" class="switch_default_view_movies bouton_checked">';
-                echo '<input id="details" type="radio" name="movie_house_view" value="D" checked required />';
-                echo '<label for="details" class="label_switch">Détails</label>';
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="bouton_details" class="switch_default_view_movies">';
-                echo '<input id="details" type="radio" name="movie_house_view" value="D" required />';
-                echo '<label for="details" class="label_switch">Détails</label>';
-              echo '</div>';
-            }
           echo '</div>';
 
           // Catégories accueil
           echo '<div class="sous_titre_contribution">Catégories accueil</div>';
 
           echo '<div class="zone_contribution large">';
-            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_home());
+            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
 
             if ($films_waited == "Y")
             {
@@ -188,148 +156,9 @@
             }
           echo '</div>';
 
-          // Affichage date du jour (tableaux)
-          echo '<div class="sous_titre_contribution">Date du jour (tableaux)</div>';
-
-          echo '<div class="zone_contribution large">';
-            if ($preferences->getToday_movie_house() == "Y")
-            {
-              echo '<div id="bouton_date" class="switch_default_view_date bouton_checked">';
-                echo '<input id="show_date" type="checkbox" name="affiche_date" checked />';
-                echo '<label for="show_date" class="label_switch">Afficher</label>';
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="bouton_date" class="switch_default_view_date">';
-                echo '<input id="show_date" type="checkbox" name="affiche_date" />';
-                echo '<label for="show_date" class="label_switch">Afficher</label>';
-              echo '</div>';
-            }
-          echo '</div>';
-
-          // Masquage films (tableaux)
-          echo '<div class="sous_titre_contribution">Affichage des films (tableaux)</div>';
-
-          echo '<div class="zone_contribution large">';
-            list($affichage, $type, $duree) = explode(";", $preferences->getView_old_movies());
-
-            if ($affichage == "T")
-            {
-              echo '<div id="bouton_tous" class="switch_show_films bouton_checked">';
-                echo '<input id="tous" type="radio" name="old_movies_view" value="T" checked required />';
-                echo '<label for="tous" class="label_switch">Tous</label>';
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="bouton_tous" class="switch_show_films">';
-                echo '<input id="tous" type="radio" name="old_movies_view" value="T" required />';
-                echo '<label for="tous" class="label_switch">Tous</label>';
-              echo '</div>';
-            }
-
-            if ($affichage == "P")
-            {
-              echo '<div id="bouton_partiel" class="switch_show_films bouton_checked">';
-                echo '<input id="partiel" type="radio" name="old_movies_view" value="P" checked required />';
-                echo '<label for="partiel" class="label_switch">Partiel</label>';
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="bouton_partiel" class="switch_show_films">';
-                echo '<input id="partiel" type="radio" name="old_movies_view" value="P" required />';
-                echo '<label for="partiel" class="label_switch">Partiel</label>';
-              echo '</div>';
-            }
-
-            if ($affichage == "P")
-            {
-              echo '<div id="saisie_old_movies">';
-                echo '<input type="text" name="duration" id="input_old_movies" placeholder="Durée" value="' . $duree . '" maxlength="3" class="duration_old_movies" required />';
-
-                switch ($type)
-                {
-                  case 'J':
-                    echo '<select name="type_duration" class="type_duration">';
-                      echo '<option value="J" selected>Jours</option>';
-                      echo '<option value="S">Semaines</option>';
-                      echo '<option value="M">Mois</option>';
-                    echo '</select>';
-                    break;
-
-                  case 'S':
-                    echo '<select name="type_duration" class="type_duration">';
-                      echo '<option value="J">Jours</option>';
-                      echo '<option value="S" selected>Semaines</option>';
-                      echo '<option value="M">Mois</option>';
-                    echo '</select>';
-                    break;
-
-                  case 'M':
-                  default:
-                    echo '<select name="type_duration" class="type_duration">';
-                      echo '<option value="J">Jours</option>';
-                      echo '<option value="S">Semaines</option>';
-                      echo '<option value="M" selected>Mois</option>';
-                    echo '</select>';
-                    break;
-                }
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="saisie_old_movies" style="display: none;">';
-                echo '<input type="text" name="duration" id="input_old_movies" placeholder="Durée" value="' . $duree . '" maxlength="3" class="duration_old_movies" />';
-
-                switch ($type)
-                {
-                  case 'J':
-                    echo '<select name="type_duration" class="type_duration">';
-                      echo '<option value="J" selected>Jours</option>';
-                      echo '<option value="S">Semaines</option>';
-                      echo '<option value="M">Mois</option>';
-                    echo '</select>';
-                    break;
-
-                  case 'S':
-                    echo '<select name="type_duration" class="type_duration">';
-                      echo '<option value="J">Jours</option>';
-                      echo '<option value="S" selected>Semaines</option>';
-                      echo '<option value="M">Mois</option>';
-                    echo '</select>';
-                    break;
-
-                  case 'M':
-                  default:
-                    echo '<select name="type_duration" class="type_duration">';
-                      echo '<option value="J">Jours</option>';
-                      echo '<option value="S">Semaines</option>';
-                      echo '<option value="M" selected>Mois</option>';
-                    echo '</select>';
-                    break;
-                }
-              echo '</div>';
-            }
-          echo '</div>';
-
-
-
-
-
           // Masquage films (fiches)
-          /*echo '<div class="sous_titre_contribution">Affichage des films (fiches)</div>';
-          echo 'à faire';*/
-
-
-
-
-
-
-
-
-
+          /* TODO : à faire */
+          /*echo '<div class="sous_titre_contribution">Affichage des films (fiches)</div>';*/
         echo '</div>';
 
         /***************/

@@ -371,72 +371,21 @@
   // RETOUR : Aucun
   function updatePreferences($user, $post)
   {
-    $error = false;
-
     global $bdd;
 
 		// Préférences MOVIE HOUSE
 		$view_movie_house = $post['movie_house_view'];
-		$categories_home  = "";
+		$categories_movie_house  = "";
 
 		if (isset($post['films_waited']))
-			$categories_home .= "Y;";
+			$categories_movie_house .= "Y;";
 		else
-			$categories_home .= "N;";
+			$categories_movie_house .= "N;";
 
 		if (isset($post['films_way_out']))
-			$categories_home .= "Y;";
+			$categories_movie_house .= "Y;";
 		else
-			$categories_home .= "N;";
-
-		if (isset($post['affiche_date']))
-			$today_movie_house = "Y";
-		else
-			$today_movie_house = "N";
-
-    if ($post['old_movies_view'] == "T")
-      $view_old_movies = "T;;;";
-    else
-    {
-      if (!is_numeric($post['duration']) OR !ctype_digit($post['duration']) OR $post['duration'] <= 0)
-      {
-        $_SESSION['alerts']['duration_not_correct'] = true;
-        $error                                      = true;
-      }
-      else
-      {
-        switch ($post['type_duration'])
-        {
-          case "J":
-            if ($post['duration'] > 365)
-            {
-              $_SESSION['alerts']['duration_too_long'] = true;
-              $error                                   = true;
-            }
-            break;
-
-          case "S":
-            if ($post['duration'] > 52)
-            {
-              $_SESSION['alerts']['duration_too_long'] = true;
-              $error                                   = true;
-            }
-            break;
-
-          case "M":
-            if ($post['duration'] > 12)
-            {
-              $_SESSION['alerts']['duration_too_long'] = true;
-              $error                                   = true;
-            }
-            break;
-
-          default:
-            break;
-        }
-        $view_old_movies = $post['old_movies_view'] . ";" . $post['type_duration'] . ";" . $post['duration'] . ";";
-      }
-    }
+			$categories_movie_house .= "N;";
 
 		// Préférences #THEBOX
 		$view_the_box = $post['the_box_view'];
@@ -444,33 +393,26 @@
     // Préférences Notifications
     $view_notifications = $post['notifications_view'];
 
-    if ($error == false)
-    {
-      // Mise à jour de la table des préférences utilisateur
-      $reponse = $bdd->prepare('UPDATE preferences SET view_movie_house   = :view_movie_house,
-                                                       categories_home    = :categories_home,
-                                                       today_movie_house  = :today_movie_house,
-                                                       view_old_movies    = :view_old_movies,
-                                                       view_the_box       = :view_the_box,
-                                                       view_notifications = :view_notifications
-                                                 WHERE identifiant = "' . $user . '"');
-      $reponse->execute(array(
-        'view_movie_house'   => $view_movie_house,
-        'categories_home'    => $categories_home,
-        'today_movie_house'  => $today_movie_house,
-        'view_old_movies'    => $view_old_movies,
-        'view_the_box'       => $view_the_box,
-        'view_notifications' => $view_notifications
-      ));
-      $reponse->closeCursor();
+    // Mise à jour de la table des préférences utilisateur
+    $reponse = $bdd->prepare('UPDATE preferences SET view_movie_house       = :view_movie_house,
+                                                     categories_movie_house = :categories_movie_house,
+                                                     view_the_box           = :view_the_box,
+                                                     view_notifications     = :view_notifications
+                                               WHERE identifiant = "' . $user . '"');
+    $reponse->execute(array(
+      'view_movie_house'       => $view_movie_house,
+      'categories_movie_house' => $categories_movie_house,
+      'view_the_box'           => $view_the_box,
+      'view_notifications'     => $view_notifications
+    ));
+    $reponse->closeCursor();
 
-      // Mise à jour des préférences stockées en SESSION
-      $_SESSION['user']['view_movie_house']   = $view_movie_house;
-      $_SESSION['user']['view_the_box']       = $view_the_box;
-      $_SESSION['user']['view_notifications'] = $view_notifications;
+    // Mise à jour des préférences stockées en SESSION
+    $_SESSION['user']['view_movie_house']   = $view_movie_house;
+    $_SESSION['user']['view_the_box']       = $view_the_box;
+    $_SESSION['user']['view_notifications'] = $view_notifications;
 
-      $_SESSION['alerts']['preferences_updated'] = true;
-    }
+    $_SESSION['alerts']['preferences_updated'] = true;
   }
 
   // METIER : Mise à jour du mot de passe

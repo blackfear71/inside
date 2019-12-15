@@ -98,14 +98,12 @@
     $expenses         = 0;
 
     // Initialisations préférences
-    $ref_theme          = "";
-    $view_movie_house   = "H";
-    $categories_home    = "Y;Y;";
-    $today_movie_house  = "N";
-    $view_old_movies    = "T;;;";
-    $view_the_box       = "P";
-    $view_notifications = "T";
-    $manage_calendars   = "N";
+    $ref_theme              = "";
+    $view_movie_house       = "H";
+    $categories_movie_house = "Y;Y;";
+    $view_the_box           = "P";
+    $view_notifications     = "T";
+    $manage_calendars       = "N";
 
     global $bdd;
 
@@ -172,31 +170,25 @@
           $req = $bdd->prepare('INSERT INTO preferences(identifiant,
                                                         ref_theme,
                                                         view_movie_house,
-                                                        categories_home,
-                                                        today_movie_house,
-                                                        view_old_movies,
+                                                        categories_movie_house,
                                                         view_the_box,
                                                         view_notifications,
                                                         manage_calendars)
                                                  VALUES(:identifiant,
                                                         :ref_theme,
                                                         :view_movie_house,
-                                                        :categories_home,
-                                                        :today_movie_house,
-                                                        :view_old_movies,
+                                                        :categories_movie_house,
                                                         :view_the_box,
                                                         :view_notifications,
                                                         :manage_calendars)');
           $req->execute(array(
-            'identifiant'        => $trigramme,
-            'ref_theme'          => $ref_theme,
-            'view_movie_house'   => $view_movie_house,
-            'categories_home'    => $categories_home,
-            'today_movie_house'  => $today_movie_house,
-            'view_old_movies'    => $view_old_movies,
-            'view_the_box'       => $view_the_box,
-            'view_notifications' => $view_notifications,
-            'manage_calendars'   => $manage_calendars
+            'identifiant'            => $trigramme,
+            'ref_theme'              => $ref_theme,
+            'view_movie_house'       => $view_movie_house,
+            'categories_movie_house' => $categories_movie_house,
+            'view_the_box'           => $view_the_box,
+            'view_notifications'     => $view_notifications,
+            'manage_calendars'       => $manage_calendars
             ));
           $req->closeCursor();
 

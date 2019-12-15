@@ -43,25 +43,12 @@ $(function()
       // Films
       case 'bouton_accueil':
       case 'bouton_cards':
-      case 'bouton_synthese':
-      case 'bouton_details':
         switchCheckedColor('switch_default_view_movies', id_bouton);
         break;
 
       case 'bouton_waited':
       case 'bouton_way_out':
-      case 'bouton_date':
         changeCheckedColor(id_bouton);
-        break;
-
-      case 'bouton_tous':
-        switchCheckedColor('switch_show_films', id_bouton);
-        afficherMasquerOldMovies('all', 'saisie_old_movies', 'input_old_movies');
-        break;
-
-      case 'bouton_partiel':
-        switchCheckedColor('switch_show_films', id_bouton);
-        afficherMasquerOldMovies('', 'saisie_old_movies', 'input_old_movies');
         break;
 
       // #TheBox
@@ -310,23 +297,6 @@ function changeCheckedColor(input)
     $('#' + input).removeClass('bouton_checked');
   else
     $('#' + input).addClass('bouton_checked');
-}
-
-// Affiche ou masque la saisie vue anciens films
-function afficherMasquerOldMovies(old, id, required)
-{
-  if (old == "all")
-  {
-    $('#' + id).css('display', 'none');
-    $('#' + required).prop('required', false);
-  }
-  else
-  {
-    $('#' + id).css('display', 'block');
-    $('#' + required).prop('required', true);
-  }
-
-  initMasonry();
 }
 
 // Affiche ou masque les thèmes

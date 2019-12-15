@@ -60,7 +60,7 @@
         switch ($_GET['view'])
         {
           case 'home':
-            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_home());
+            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
             $listeRecents = getRecents($_GET['year']);
 
             if ($films_waited == "Y")
@@ -70,18 +70,8 @@
               $listeSorties = getSorties($_GET['year']);
             break;
 
-          case 'main':
-            $nbUsers      = countUsers();
-            $listeUsers   = getUsers();
-            $tableauFilms = getTabFilms($_GET['year'], $listeUsers, $nbUsers);
-            break;
-
-          case 'user':
-            $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
-            break;
-
           case 'cards':
-            $listeFilms   = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+            $listeFilms = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
 
             if (!empty($listeFilms))
               $listeEtoiles = getStarsFiches($listeFilms);
@@ -125,56 +115,6 @@
 
       switch ($_GET['view'])
       {
-        case 'main':
-          foreach ($tableauFilms as &$film)
-          {
-            $film['id_film']          = htmlspecialchars($film['id_film']);
-            $film['film']             = htmlspecialchars($film['film']);
-            $film['date_theater']     = htmlspecialchars($film['date_theater']);
-
-            foreach ($film['tableStars'] as &$stars)
-            {
-              $stars['identifiant']   = htmlspecialchars($stars['identifiant']);
-              $stars['stars']         = htmlspecialchars($stars['stars']);
-              $stars['participation'] = htmlspecialchars($stars['participation']);
-            }
-
-            unset($stars);
-          }
-
-          unset($film);
-          break;
-
-        case 'user':
-          foreach ($listeFilms as &$film)
-          {
-            $film->setFilm(htmlspecialchars($film->getFilm()));
-            $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
-            $film->setDate_add(htmlspecialchars($film->getDate_add()));
-            $film->setIdentifiant_add(htmlspecialchars($film->getIdentifiant_add()));
-            $film->setPseudo_add(htmlspecialchars($film->getPseudo_add()));
-            $film->setIdentifiant_del(htmlspecialchars($film->getIdentifiant_del()));
-            $film->setPseudo_del(htmlspecialchars($film->getPseudo_del()));
-            $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
-            $film->setDate_release(htmlspecialchars($film->getDate_release()));
-            $film->setLink(htmlspecialchars($film->getLink()));
-            $film->setPoster(htmlspecialchars($film->getPoster()));
-            $film->setTrailer(htmlspecialchars($film->getTrailer()));
-            $film->setId_url(htmlspecialchars($film->getId_url()));
-            $film->setDoodle(htmlspecialchars($film->getDoodle()));
-            $film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
-            $film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
-            $film->setRestaurant(htmlspecialchars($film->getRestaurant()));
-            $film->setPlace(htmlspecialchars($film->getPlace()));
-            $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
-            $film->setStars_user(htmlspecialchars($film->getStars_user()));
-            $film->setParticipation(htmlspecialchars($film->getParticipation()));
-            $film->setNb_users(htmlspecialchars($film->getNb_users()));
-          }
-
-          unset($film);
-          break;
-
         case 'cards':
           foreach ($listeFilms as &$film)
           {
@@ -309,9 +249,7 @@
 
       $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
       $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-      $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
-      $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
-      $preferences->setView_old_movies(htmlspecialchars($preferences->getView_old_movies()));
+      $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
       $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
       $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));

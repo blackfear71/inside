@@ -5,9 +5,7 @@
 
     $i         = 0;
     $listeVues = array('home'  => 'Accueil',
-                       'cards' => 'Fiches',
-                       'main'  => 'Synthèse',
-                       'user'  => 'Détails'
+                       'cards' => 'Fiches'
                       );
 
     foreach ($listeVues as $view => $vue)

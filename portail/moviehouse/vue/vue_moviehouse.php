@@ -59,7 +59,7 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-          
+
           /*****************/
           /* Vues & Années */
           /*****************/
@@ -71,14 +71,6 @@
           echo '<div class="zone_movies_right">';
             switch ($_GET['view'])
             {
-              case "main":
-                include("vue/vue_table_films_synthese.php");
-                break;
-
-              case "user":
-                include("vue/vue_table_films_details.php");
-                break;
-
               case "cards":
                 include("vue/vue_films_fiches.php");
                break;

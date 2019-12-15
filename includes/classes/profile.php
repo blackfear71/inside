@@ -409,9 +409,7 @@
     private $id;
     private $ref_theme;
     private $view_movie_house;
-    private $categories_home;
-    private $today_movie_house;
-    private $view_old_movies;
+    private $categories_movie_house;
     private $view_the_box;
     private $view_notifications;
     private $manage_calendars;
@@ -419,15 +417,13 @@
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id                 = 0;
-      $this->ref_theme          = '';
-      $this->view_movie_house   = '';
-      $this->categories_home    = '';
-      $this->today_movie_house  = '';
-      $this->view_old_movies    = '';
-      $this->view_the_box       = '';
-      $this->view_notifications = '';
-      $this->manage_calendars   = '';
+      $this->id                     = 0;
+      $this->ref_theme              = '';
+      $this->view_movie_house       = '';
+      $this->categories_movie_house = '';
+      $this->view_the_box           = '';
+      $this->view_notifications     = '';
+      $this->manage_calendars       = '';
     }
 
     // Constructeur de l'objet Preferences en fonction des données
@@ -443,31 +439,25 @@
     protected function fill ($data)
     {
       if (isset($data['id']))
-        $this->id                 = $data['id'];
+        $this->id                     = $data['id'];
 
       if (isset($data['ref_theme']))
-        $this->ref_theme          = $data['ref_theme'];
+        $this->ref_theme              = $data['ref_theme'];
 
       if (isset($data['view_movie_house']))
-        $this->view_movie_house   = $data['view_movie_house'];
+        $this->view_movie_house       = $data['view_movie_house'];
 
-      if (isset($data['categories_home']))
-        $this->categories_home    = $data['categories_home'];
-
-      if (isset($data['today_movie_house']))
-        $this->today_movie_house  = $data['today_movie_house'];
-
-      if (isset($data['view_old_movies']))
-        $this->view_old_movies    = $data['view_old_movies'];
+      if (isset($data['categories_movie_house']))
+        $this->categories_movie_house = $data['categories_movie_house'];
 
       if (isset($data['view_the_box']))
-        $this->view_the_box       = $data['view_the_box'];
+        $this->view_the_box           = $data['view_the_box'];
 
       if (isset($data['view_notifications']))
-        $this->view_notifications = $data['view_notifications'];
+        $this->view_notifications     = $data['view_notifications'];
 
       if (isset($data['manage_calendars']))
-        $this->manage_calendars   = $data['manage_calendars'];
+        $this->manage_calendars       = $data['manage_calendars'];
     }
 
     // getters et setters pour l'objet Preferences
@@ -505,36 +495,14 @@
     }
 
     // Préférence catégories affichéees Movie House
-    public function setCategories_home($categories_home)
+    public function setCategories_movie_house($categories_movie_house)
     {
-      $this->categories_home = $categories_home;
+      $this->categories_movie_house = $categories_movie_house;
     }
 
-    public function getCategories_home()
+    public function getCategories_movie_house()
     {
-      return $this->categories_home;
-    }
-
-    // Préférence affichage date du jour Movie House
-    public function setToday_movie_house($today_movie_house)
-    {
-      $this->today_movie_house = $today_movie_house;
-    }
-
-    public function getToday_movie_house()
-    {
-      return $this->today_movie_house;
-    }
-
-    // Préférence affichage anciens films
-    public function setView_old_movies($view_old_movies)
-    {
-      $this->view_old_movies = $view_old_movies;
-    }
-
-    public function getView_old_movies()
-    {
-      return $this->view_old_movies;
+      return $this->categories_movie_house;
     }
 
     // Préférence vue par défaut #TheBox

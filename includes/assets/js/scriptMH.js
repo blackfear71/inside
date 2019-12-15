@@ -5,30 +5,6 @@
 $(function()
 {
   /*** Actions au clic ***/
-  // Affiche/masque les films cachés (tableaux)
-  $('#show_hidden, #show_hidden_2').click(function()
-  {
-    afficherMasquerTbody('hidden_films', 'show_hidden');
-  });
-
-  // Affiche la saisie de préférence d'un film (tableaux)
-  $('.afficherVote').click(function()
-  {
-    var id_film = $(this).attr('id').replace('preference_', '');
-
-    afficherMasquerNoDelay('preference_' + id_film);
-    afficherMasquerNoDelay('preference2_' + id_film);
-  });
-
-  // Masque la saisie de préférence d'un film (tableaux)
-  $('.annulerVote').click(function()
-  {
-    var id_film = $(this).attr('id').replace('annuler_preference_', '');
-
-    afficherMasquerNoDelay('preference_' + id_film);
-    afficherMasquerNoDelay('preference2_' + id_film);
-  });
-
   // Affiche la zone de saisie d'un film
   $('#ajouterFilm, #annulerFilm').click(function()
   {
@@ -367,20 +343,6 @@ function masquerSaisiePreference()
   {
     $(this).remove();
   });
-}
-
-// Affiche ou masque les films cachés
-function afficherMasquerTbody(id, hidden)
-{
-  if ($('#' + hidden).html() == '<div class="symbol_hidden">+</div> Films cachés')
-    $('#' + hidden).html('<div class="symbol_hidden">-</div> Films cachés');
-  else
-    $('#' + hidden).html('<div class="symbol_hidden">+</div> Films cachés');
-
-  if ($('#' + id).css('display') == 'none')
-    $('#' + id).css('display', 'table-row-group');
-  else
-    $('#' + id).css('display', 'none');
 }
 
 // Insère un smiley dans la zone de saisie

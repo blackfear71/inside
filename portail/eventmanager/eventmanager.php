@@ -21,15 +21,6 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-
-
-
-
-      /*$preferences      = getPreferences($_SESSION['user']['identifiant']);*/
-
-
-
-
       break;
 
     default:
@@ -42,23 +33,6 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-
-
-
-
-      /*$preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-      $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-      $preferences->setCategories_home(htmlspecialchars($preferences->getCategories_home()));
-      $preferences->setToday_movie_house(htmlspecialchars($preferences->getToday_movie_house()));
-      $preferences->setView_old_movies(htmlspecialchars($preferences->getView_old_movies()));
-      $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-      $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-      $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));*/
-
-
-
-
-
       break;
 
     default:
