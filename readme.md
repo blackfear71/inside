@@ -68,7 +68,6 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 | Bleu clair      | ![#74cefb](https://placehold.it/15/74cefb/000000?text=+) | #74cefb  |                    |                                        |
 | Bleu clair      | ![#2eb2f4](https://placehold.it/15/2eb2f4/000000?text=+) | #2eb2f4  |                    |                                        |
 | Bleu clair      | ![#13a2e9](https://placehold.it/15/13a2e9/000000?text=+) | #13a2e9  |                    |                                        |
-| Vert clair      | ![#91d784](https://placehold.it/15/91d784/000000?text=+) | #91d784  |                    |                                        |
 | Vert clair      | ![#70d55d](https://placehold.it/15/70d55d/000000?text=+) | #70d55d  |                    | Icône utilisateur connecté (chat)      |
 | Jaune clair     | ![#fffde8](https://placehold.it/15/fffde8/000000?text=+) | #fffde8  |                    | Survol ligne tableau                   |
 | Jaune clair     | ![#fffd4c](https://placehold.it/15/fffd4c/000000?text=+) | #fffd4c  |                    |                                        |
