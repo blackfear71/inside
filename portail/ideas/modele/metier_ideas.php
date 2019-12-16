@@ -115,13 +115,11 @@
       $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
-      if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
+      if ($reponse2->rowCount() > 0)
+      {
         $idea->setPseudo_a($donnees2['pseudo']);
-      else
-        $idea->setPseudo_a("Un ancien utilisateur");
-
-      if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
         $idea->setAvatar_a($donnees2['avatar']);
+      }
 
       $reponse2->closeCursor();
 
@@ -131,13 +129,11 @@
         $reponse3 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getDevelopper() . '"');
         $donnees3 = $reponse3->fetch();
 
-        if (isset($donnees3['pseudo']) AND !empty($donnees3['pseudo']))
+        if ($reponse3->rowCount() > 0)
+        {
           $idea->setPseudo_d($donnees3['pseudo']);
-        else
-          $idea->setPseudo_d("Un ancien utilisateur");
-
-        if (isset($donnees3['avatar']) AND !empty($donnees3['avatar']))
           $idea->setAvatar_d($donnees3['avatar']);
+        }
 
         $reponse3->closeCursor();
       }

@@ -73,7 +73,7 @@
 
               // Pseudo
               echo '<div class="pseudo_collector">';
-                echo $collector->getPseudo_s();
+                echo formatUnknownUser($collector->getPseudo_s(), true, true);
               echo '</div>';
 
               // Date
@@ -103,7 +103,7 @@
                 }
 
                 // Rapporteur
-                echo '<div class="author_collector">Par ' . $collector->getPseudo_a() . '</div>';
+                echo '<div class="author_collector">Par ' . formatUnknownUser($collector->getPseudo_a(), false, false) . '</div>';
               }
 
               // Contexte
@@ -137,7 +137,7 @@
 
                         foreach ($votes as $identifiants)
                         {
-                          $listeUsersSmiley .= $identifiants['pseudo'] . ', ';
+                          $listeUsersSmiley .= formatUnknownUser($identifiants['pseudo'], true, false) . ', ';
                         }
 
                         echo '<span class="noms_votes_' . $keyVote . '">';
@@ -177,33 +177,24 @@
               echo '</div>';
 
               // Modification speaker
-              if (!empty($collector->getSpeaker()))
-              {
-                echo '<div class="zone_modify_speaker">';
-                  echo '<select name="speaker" id="speaker_' . $collector->getId() . '" class="modify_speaker changeSpeaker" required>';
-                    echo '<option value="" hidden>Choisissez...</option>';
+              echo '<div class="zone_modify_speaker">';
+                echo '<select name="speaker" id="speaker_' . $collector->getId() . '" class="modify_speaker changeSpeaker" required>';
+                  echo '<option value="" hidden>Choisissez...</option>';
 
-                    foreach ($listeUsers as $user)
-                    {
-                      if ($user->getIdentifiant() == $collector->getSpeaker())
-                        echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
-                      else
-                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                    }
-
-                    if ($collector->getType_s() == "other")
-                      echo '<option value="other" selected>Autre</option>';
+                  foreach ($listeUsers as $user)
+                  {
+                    if ($user->getIdentifiant() == $collector->getSpeaker())
+                      echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
                     else
-                      echo '<option value="other">Autre</option>';
-                    echo '</select>';
-                echo '</div>';
-              }
-              else
-              {
-                echo '<div class="old_user">';
-                  echo $collector->getPseudo_s();
-                echo '</div>';
-              }
+                      echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                  }
+
+                  if ($collector->getType_s() == "other")
+                    echo '<option value="other" selected>Autre</option>';
+                  else
+                    echo '<option value="other">Autre</option>';
+                echo '</select>';
+              echo '</div>';
 
               // Modification "Autre"
               if ($collector->getType_s() == "other")

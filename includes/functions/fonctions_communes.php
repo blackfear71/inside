@@ -1017,8 +1017,14 @@
     else
       $path = $level . "/includes/icons/common/default.png";
 
+    // Pseudo
+    $pseudo = formatUnknownUser($pseudo, true, false);
+
     // Formatage
-    $formattedAvatar = array("path" => $path, "alt" => $alt, "title" => $pseudo);
+    $formattedAvatar = array("path"  => $path,
+                             "alt"   => $alt,
+                             "title" => $pseudo
+                            );
 
     return $formattedAvatar;
   }
@@ -1033,5 +1039,30 @@
       $formattedPseudo = $pseudo;
 
     return $formattedPseudo;
+  }
+
+  // Formate le pseudo utilisateur désinscrit
+  // RETOUR : Pseudo ancien utilisateur
+  function formatUnknownUser($pseudo, $majuscule, $italique)
+  {
+    if (!isset($pseudo) OR empty($pseudo))
+    {
+      if ($majuscule == true)
+      {
+        if ($italique == true)
+          $pseudo = "<i>Un ancien utilisateur</i>";
+        else
+          $pseudo = "Un ancien utilisateur";
+      }
+      else
+      {
+        if ($italique == true)
+          $pseudo = "<i>un ancien utilisateur</i>";
+        else
+          $pseudo = "un ancien utilisateur";
+      }
+    }
+
+    return $pseudo;
   }
 ?>

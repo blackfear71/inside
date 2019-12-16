@@ -226,10 +226,12 @@
 
             $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
             $donnees2 = $reponse2->fetch();
+
             if ($reponse2->rowCount() > 0)
               $author = $donnees2['pseudo'];
             else
-              $author = '<i>un ancien utilisateur</i>';
+              $author = formatUnknownUser("", false, true);
+
             $reponse2->closeCursor();
 
             // Si speaker autre que "Autre"
@@ -237,10 +239,12 @@
             {
               $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
               $donnees3 = $reponse3->fetch();
+
               if ($reponse3->rowCount() > 0)
                 $speaker = $donnees3['pseudo'];
               else
-                $speaker = '<i>un ancien utilisateur</i>';
+                $speaker = formatUnknownUser("", false, true);
+
               $reponse3->closeCursor();
             }
             else
@@ -263,10 +267,12 @@
 
             $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
             $donnees2 = $reponse2->fetch();
+
             if ($reponse2->rowCount() > 0)
               $author = $donnees2['pseudo'];
             else
-              $author = '<i>un ancien utilisateur</i>';
+              $author = formatUnknownUser("", false, true);
+
             $reponse2->closeCursor();
 
             // Si speaker autre que "Autre"
@@ -274,10 +280,12 @@
             {
               $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
               $donnees3 = $reponse3->fetch();
+
               if ($reponse3->rowCount() > 0)
                 $speaker = $donnees3['pseudo'];
               else
-                $speaker = '<i>un ancien utilisateur</i>';
+                $speaker = formatUnknownUser("", false, true);
+
               $reponse3->closeCursor();
             }
             else
@@ -299,19 +307,23 @@
           // Recherche pseudo + généreux
           $reponse1 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user1 . '"');
           $donnees1 = $reponse1->fetch();
+
           if ($reponse1->rowCount() > 0)
             $genereux = $donnees1['pseudo'];
           else
-            $genereux = '<i>un ancien utilisateur</i>';
+            $genereux = formatUnknownUser("", false, true);
+
           $reponse1->closeCursor();
 
           // Recherche pseudo + radin
           $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user2 . '"');
           $donnees2 = $reponse2->fetch();
+
           if ($reponse2->rowCount() > 0)
             $radin = $donnees2['pseudo'];
           else
-            $radin = '<i>un ancien utilisateur</i>';
+            $radin = formatUnknownUser("", false, true);
+
           $reponse2->closeCursor();
 
           $icone  = "expense_center";
@@ -323,10 +335,12 @@
           // Recherche pseudo
           $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
+
           if ($reponse->rowCount() > 0)
             $inscrit = $donnees['pseudo'];
           else
-            $inscrit = '<i>un ancien utilisateur</i>';
+            $inscrit = formatUnknownUser("", false, true);
+
           $reponse->closeCursor();
 
           $icone  = "inside";
@@ -367,10 +381,12 @@
           // Recherche pseudo
           $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['author'] . '"');
           $donnees2 = $reponse2->fetch();
+
           if ($reponse2->rowCount() > 0)
             $auteur = $donnees2['pseudo'];
           else
-            $auteur = '<i>un ancien utilisateur</i>';
+            $auteur = formatUnknownUser("", false, true);
+
           $reponse2->closeCursor();
 
           $reponse1->closeCursor();

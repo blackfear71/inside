@@ -23,7 +23,7 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
               // Pseudo
-              echo '<div class="pseudo_report">' . $bug->getPseudo() . '</div>';
+              echo '<div class="pseudo_report">' . formatUnknownUser($bug->getPseudo(), true, true) . '</div>';
 
               // Date
               echo '<div class="date_report">';
@@ -114,7 +114,7 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
               // Pseudo
-              echo '<div class="pseudo_report">' . $evolution->getPseudo() . '</div>';
+              echo '<div class="pseudo_report">' . formatUnknownUser($evolution->getPseudo(), true, true) . '</div>';
 
               // Date
               echo '<div class="date_report">';

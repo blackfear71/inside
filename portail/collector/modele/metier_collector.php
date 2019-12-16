@@ -252,26 +252,9 @@
         }
       }
 
-      // Auteur "autre"
+      // Pseudo auteur "autre"
       if (!empty($myCollector->getSpeaker()) AND $myCollector->getType_s() == "other")
-      {
         $myCollector->setPseudo_s($myCollector->getSpeaker());
-        $myCollector->setSpeaker("other");
-      }
-
-      // Si pas de pseudo "auteur"
-      if (empty($myCollector->getPseudo_a()))
-      {
-        $myCollector->setAuthor("");
-        $myCollector->setPseudo_a("un ancien utilisateur");
-      }
-
-      // Si pas de pseudo "speaker"
-      if (empty($myCollector->getPseudo_s())AND $myCollector->getType_s() == "user")
-      {
-        $myCollector->setSpeaker("");
-        $myCollector->setPseudo_s("un ancien utilisateur");
-      }
 
       array_push($listCollectors, $myCollector);
     }

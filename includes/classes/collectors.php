@@ -4,9 +4,9 @@
     private $id;
     private $date_add;
     private $author;
-    private $name_a;
+    private $pseudo_a;
     private $speaker;
-    private $name_s;
+    private $pseudo_s;
     private $avatar_s;
     private $type_s;
     private $date_collector;
@@ -21,9 +21,9 @@
       $this->id             = 0;
       $this->date_add       = '';
       $this->author         = '';
-      $this->name_a         = '';
+      $this->pseudo_a       = '';
       $this->speaker        = '';
-      $this->name_s         = '';
+      $this->pseudo_s       = '';
       $this->avatar_s       = '';
       $this->type_s         = '';
       $this->date_collector = '';
@@ -108,14 +108,14 @@
     }
 
     // Pseudo auteur
-    public function setPseudo_a($name_a)
+    public function setPseudo_a($pseudo_a)
     {
-      $this->name_a = $name_a;
+      $this->pseudo_a = $pseudo_a;
     }
 
     public function getPseudo_a()
     {
-      return $this->name_a;
+      return $this->pseudo_a;
     }
 
     // Personne
@@ -130,14 +130,14 @@
     }
 
     // Pseudo personne
-    public function setPseudo_s($name_s)
+    public function setPseudo_s($pseudo_s)
     {
-      $this->name_s = $name_s;
+      $this->pseudo_s = $pseudo_s;
     }
 
     public function getPseudo_s()
     {
-      return $this->name_s;
+      return $this->pseudo_s;
     }
 
     // Avatar personne

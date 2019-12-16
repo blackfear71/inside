@@ -359,7 +359,7 @@ $(window).on('load', function()
         var text        = changeSmileys(decodeHtml($message.find('text').text()));
         var date        = $message.find('date').text();
         var time        = $message.find('time').text();
-        var pseudo      = "Un ancien utilisateur";
+        var pseudo      = formatUnknownUser("", true, false);
         var avatar;
         var html;
 

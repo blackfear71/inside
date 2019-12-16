@@ -26,13 +26,11 @@
       $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');
       $donnees2 = $reponse2->fetch();
 
-      if (isset($donnees2['pseudo']) AND !empty($donnees2['pseudo']))
+      if ($reponse2->rowCount() > 0)
+      {
         $bug->setPseudo($donnees2['pseudo']);
-      else
-        $bug->setPseudo("Un ancien utilisateur");
-
-      if (isset($donnees2['avatar']) AND !empty($donnees2['avatar']))
         $bug->setAvatar($donnees2['avatar']);
+      }
 
       $reponse2->closeCursor();
 

@@ -98,6 +98,11 @@
 	word-break: break-word;
 }
 
+.zone_notification_contenu::first-letter
+{
+	text-transform: uppercase;
+}
+
 .lien_notification:hover .zone_notification_contenu
 {
 	background-color: #d3d3d3;

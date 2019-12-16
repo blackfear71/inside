@@ -343,20 +343,14 @@
                     echo '<div class="zone_commentaire_user" id="' . $comment->getId() . '">';
                       // Avatar
                       echo '<div class="zone_avatar_commentaire">';
-                        if (!empty($comment->getPseudo()))
-                          $avatarFormatted = formatAvatar($comment->getAvatar(), $comment->getPseudo(), 2, "avatar");
-                        else
-                          $avatarFormatted = formatAvatar($comment->getAvatar(), "Un ancien utilisateur", 2, "avatar");
+                        $avatarFormatted = formatAvatar($comment->getAvatar(), $comment->getPseudo(), 2, "avatar");
 
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_comments" />';
                       echo '</div>';
 
                       echo '<div class="infos_commentaire_user">';
                         // Pseudo
-                        if (!empty($comment->getPseudo()))
-                          echo '<div class="pseudo_comments_films">' . $comment->getPseudo() . '</div>';
-                        else
-                          echo '<div class="pseudo_comments_films"><i>Un ancien utilisateur</i></div>';
+                        echo '<div class="pseudo_comments_films">' . formatUnknownUser($comment->getPseudo(), true, true) . '</div>';
 
                         // Date et heure
                         echo '<div class="date_comments_films">Le ' . formatDateForDisplay($comment->getDate()) . ' à ' . formatTimeForDisplay($comment->getTime()) . '</div>';

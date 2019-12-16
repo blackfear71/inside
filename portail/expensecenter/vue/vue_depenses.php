@@ -16,18 +16,12 @@
             echo '<div class="zone_depense_top">';
               echo '<div class="zone_achat">';
                 // Avatar acheteur
-                if (!empty($depense->getPseudo()))
-                  $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
-                else
-                  $avatarFormatted = formatAvatar($depense->getAvatar(), "Un ancien utilisateur", 2, "avatar");
+                $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
 
                 // Pseudo acheteur
-                if (!empty($depense->getPseudo()))
-                  echo '<div class="pseudo_achat">' . $depense->getPseudo() . '</div>';
-                else
-                  echo '<div class="pseudo_achat"><i>Un ancien utilisateur</i></div>';
+                echo '<div class="pseudo_achat">' . formatUnknownUser($depense->getPseudo(), true, true) . '</div>';
 
                 // Date achat
                 echo '<div class="date_achat">' . formatDateForDisplay($depense->getDate()) . '</div>';

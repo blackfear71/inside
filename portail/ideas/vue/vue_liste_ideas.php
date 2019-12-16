@@ -42,10 +42,7 @@
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
                 // Pseudo
-                if ($idea->getPseudo_a() == "Un ancien utilisateur")
-                  echo '<div class="pseudo_idea"><i>' . $idea->getPseudo_a() . '</i></div>';
-                else
-                  echo '<div class="pseudo_idea">' . $idea->getPseudo_a() . '</div>';
+                echo '<div class="pseudo_idea">' . formatUnknownUser($idea->getPseudo_a(), true, true) . '</div>';
 
                 // Date
                 echo '<div class="date_idea">';
@@ -121,10 +118,7 @@
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
                   // Pseudo
-                  if ($idea->getPseudo_d() == "Un ancien utilisateur")
-                    echo '<div class="pseudo_idea white"><i>' . $idea->getPseudo_d() . '</i></div>';
-                  else
-                    echo '<div class="pseudo_idea white">' . $idea->getPseudo_d() . '</div>';
+                  echo '<div class="pseudo_idea white">' . formatUnknownUser($idea->getPseudo_d(), true, true) . '</div>';
                 echo '</div>';
               }
 
@@ -136,7 +130,7 @@
               // Actions
               if ( empty($idea->getDevelopper())
               OR (!empty($idea->getDevelopper()) AND $idea->getDevelopper() == $_SESSION['user']['identifiant'])
-              OR (!empty($idea->getDevelopper()) AND $idea->getPseudo_d()   == "Un ancien utilisateur")
+              OR (!empty($idea->getDevelopper()) AND $idea->getPseudo_d()   == "")
               OR  $idea->getStatus() == "D"
               OR  $idea->getStatus() == "R")
               {
@@ -156,7 +150,7 @@
                       case "C":
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
-                        if ($idea->getPseudo_d() != "Un ancien utilisateur")
+                        if ($idea->getPseudo_d() != "")
                         {
                           echo '<input type="submit" name="developp" value="Développer" title="Commencer les développements" class="saisie_bouton margin_button" />';
                           echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="saisie_bouton margin_button" />';
@@ -167,7 +161,7 @@
                       case "P":
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
-                        if ($idea->getPseudo_d() != "Un ancien utilisateur")
+                        if ($idea->getPseudo_d() != "")
                         {
                           echo '<input type="submit" name="take" value="Remise à prise en charge" title="Remettre à prise en charge" class="saisie_bouton margin_button" />';
                           echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="saisie_bouton margin_button" />';

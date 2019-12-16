@@ -470,3 +470,27 @@ function formatAvatar(avatar, pseudo, niveau, alt)
 
   return formattedAvatar;
 }
+
+// Formate le pseudo utilisateur désinscrit
+function formatUnknownUser(pseudo, majuscule, italique)
+{
+  if (pseudo == "")
+  {
+    if (majuscule == true)
+    {
+      if (italique == true)
+        pseudo = "<i>Un ancien utilisateur</i>";
+      else
+        pseudo = "Un ancien utilisateur";
+    }
+    else
+    {
+      if (italique == true)
+        pseudo = "<i>un ancien utilisateur</i>";
+      else
+        pseudo = "un ancien utilisateur";
+    }
+  }
+
+  return pseudo;
+}
