@@ -471,6 +471,15 @@ function formatAvatar(avatar, pseudo, niveau, alt)
   return formattedAvatar;
 }
 
+// Formate le pseudo en longueur
+function formatPseudo(pseudo, limit)
+{
+  if (pseudo.length > limit)
+    pseudo = pseudo.substr(0, limit) + "...";
+
+  return pseudo;
+}
+
 // Formate le pseudo utilisateur désinscrit
 function formatUnknownUser(pseudo, majuscule, italique)
 {

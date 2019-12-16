@@ -1960,7 +1960,7 @@
               $value = $nb_expense_no_parts;
               break;
 
-            // Economie de marché
+            // Economie de marché (doit être initialisé manuellement si réinitialisation des succès)
             case "greedy":
               $bilan = 0;
 
@@ -2057,7 +2057,7 @@
               }
               break;
 
-            // Radar à bouffe
+            // Radar à bouffe (doit être initialisé manuellement si réinitialisation des succès)
             case "restaurant-finder":
               $value = 0;
               break;

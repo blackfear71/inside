@@ -469,10 +469,7 @@ $(window).on('load', function()
             }
           }
 
-          if (pseudo.length < 30)
-            html += '<div class="text_chat_connected">' + pseudo + '</div>';
-          else
-            html += '<div class="text_chat_connected">' + pseudo.substr(0, 30) + '...</div>';
+          html += '<div class="text_chat_connected">' + formatPseudo(pseudo, 30) + '</div>';
         html += '</div>';
 
         // Insertion dans la zone
