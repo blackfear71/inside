@@ -248,29 +248,47 @@
     }
 
     // On construit un tableau avec les données à modifier
-    $data = array('status'     => $status,
-                  'developper' => $developper
-                 );
+    $datas = array('status'     => $status,
+                   'developper' => $developper
+                  );
 
-    // Génération succès
-    if ($status == "O")
-    {
-      $reponse = $bdd->query('SELECT * FROM ideas WHERE id = ' . $id_idea);
-      $donnees = $reponse->fetch();
-      insertOrUpdateSuccesValue('applier', $donnees['developper'], -1);
-      $reponse->closeCursor();
-    }
+    // Lecture des données
+    $req1 = $bdd->query('SELECT * FROM ideas WHERE id = ' . $id_idea);
+    $data1 = $req1->fetch();
+    $author     = $data1['author'];
+    $developper = $data1['developper'];
+    $old_status = $data1['status'];
+    $req1->closeCursor();
 
     // On met à jour la table
-    $req = $bdd->prepare('UPDATE ideas SET status     = :status,
+    $req2 = $bdd->prepare('UPDATE ideas SET status     = :status,
                                            developper = :developper
                                      WHERE id         = ' . $id_idea);
-    $req->execute($data);
-    $req->closeCursor();
+    $req2->execute($datas);
+    $req2->closeCursor();
 
     // Génération succès
-    if ($status == "D")
-      insertOrUpdateSuccesValue('applier', $developper, 1);
+    switch ($status)
+    {
+      case "D":
+        insertOrUpdateSuccesValue('applier', $developper, 1);
+        break;
+
+      case "R":
+        insertOrUpdateSuccesValue('creator', $author, -1);
+        break;
+
+      case "O":
+        if ($old_status == "D")
+          insertOrUpdateSuccesValue('applier', $developper, -1);
+
+        if ($old_status == "R")
+          insertOrUpdateSuccesValue('creator', $author, 1);
+        break;
+
+      default:
+        break;
+    }
 
     return $view;
   }
