@@ -1276,32 +1276,35 @@
       // Suppression des avis movie_house_users
       $req3 = $bdd->exec('DELETE FROM movie_house_users WHERE identifiant = "' . $id_user . '"');
 
-      // Suppression des préférences
-      $req4 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
-
       // Suppression des votes collector
-      $req5 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
+      $req4 = $bdd->exec('DELETE FROM collector_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression des missions
-      $req6 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
+      $req5 = $bdd->exec('DELETE FROM missions_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression notification inscription
       deleteNotification('inscrit', $id_user);
 
       // Suppression des succès
-      $req7 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
+      $req6 = $bdd->exec('DELETE FROM success_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression propositions restaurants
-      $req8 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
+      $req7 = $bdd->exec('DELETE FROM food_advisor_users WHERE identifiant = "' . $id_user . '"');
 
       // Suppression déterminations restaurants
-      $req9 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
+      $req8 = $bdd->exec('DELETE FROM food_advisor_choices WHERE caller = "' . $id_user . '"');
+
+      // Suppression semaines gâteau
+      $req9 = $bdd->exec('DELETE FROM cooking_box WHERE (year > ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week > ' . date("W") . ')) AND identifiant = "' . $id_user . '"');
 
       // Suppression avatar
       unlink ('../includes/images/profil/avatars/' . $avatar);
 
+      // Suppression des préférences
+      $req10 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');
+
       // Suppression utilisateur
-      $req10 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
+      $req11 = $bdd->exec('DELETE FROM users WHERE identifiant = "' . $id_user . '"');
     }
   }
 

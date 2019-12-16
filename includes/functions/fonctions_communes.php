@@ -1034,11 +1034,9 @@
   function formatPseudo($pseudo, $limit)
   {
     if (strlen($pseudo) > $limit)
-      $formattedPseudo = substr($pseudo, 0, $limit) . "...";
-    else
-      $formattedPseudo = $pseudo;
+      $pseudo = substr($pseudo, 0, $limit) . "...";
 
-    return $formattedPseudo;
+    return $pseudo;
   }
 
   // Formate le pseudo utilisateur désinscrit

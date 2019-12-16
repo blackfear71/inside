@@ -17,14 +17,13 @@
           foreach ($solos as $solo)
           {
             echo '<div class="zone_solo">';
-              $avatarFormatted = formatAvatar($solo->getAvatar(), $solo->getPseudo(), 2, "avatar");
-              $pseudoFormatted = formatPseudo($solo->getPseudo(), 15);
-
               // Avatar
+              $avatarFormatted = formatAvatar($solo->getAvatar(), $solo->getPseudo(), 2, "avatar");
+
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo" />';
 
               // Pseudo
-              echo '<div class="pseudo_solo">' . $pseudoFormatted . '</div>';
+              echo '<div class="pseudo_solo">' . formatPseudo($solo->getPseudo(), 15) . '</div>';
             echo '</div>';
           }
         echo '</div>';
@@ -42,14 +41,13 @@
           foreach ($sansPropositions as $userNoChoice)
           {
             echo '<div class="zone_no_vote">';
-              $avatarFormatted = formatAvatar($userNoChoice->getAvatar(), $userNoChoice->getPseudo(), 2, "avatar");
-              $pseudoFormatted = formatPseudo($userNoChoice->getPseudo(), 15);
-
               // Avatar
+              $avatarFormatted = formatAvatar($userNoChoice->getAvatar(), $userNoChoice->getPseudo(), 2, "avatar");
+
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_no_vote" />';
 
               // Pseudo
-              echo '<div class="pseudo_no_vote">' . $pseudoFormatted . '</div>';
+              echo '<div class="pseudo_no_vote">' . formatPseudo($userNoChoice->getPseudo(), 15) . '</div>';
             echo '</div>';
           }
         echo '</div>';

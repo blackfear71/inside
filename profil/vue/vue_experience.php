@@ -15,14 +15,13 @@
     }
 
     echo '<div class="zone_user_niveaux">';
-      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 1, "avatar");
-      $pseudoFormatted = formatPseudo($expUser['pseudo'], 15);
-
       // Avatar
+      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 1, "avatar");
+
       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_niveau" />';
 
       // Pseudo
-      echo '<div class="pseudo_niveau">' . $pseudoFormatted . '</div>';
+      echo '<div class="pseudo_niveau">' . formatPseudo($expUser['pseudo'], 15) . '</div>';
     echo '</div>';
 
     if (!isset($experienceUsers[$keyExp + 1]) OR $expUser['niveau'] != $experienceUsers[$keyExp + 1]['niveau'])
