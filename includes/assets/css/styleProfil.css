@@ -768,6 +768,11 @@
 	margin-bottom: 10px;
 }
 
+.italique
+{
+	font-style: italic;
+}
+
 .zone_actions
 {
 	float: right;

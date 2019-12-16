@@ -9,8 +9,8 @@
     echo 'Vous avez le choix de sélectionner soit un thème débloqué par votre niveau <span class="number_exp">' . convertExperience($profil->getExperience()) . '</span> en accumulant de l\'expérience, soit un thème utilisé lors d\'une mission passée.';
   echo '</div>';
 
-  echo '<div class="texte_themes">';
-    echo '<i>Le meilleur moyen d\'accumuler de l\'expérience reste de faire vivre le site pour tous !</i>';
+  echo '<div class="texte_themes italique">';
+    echo 'Le meilleur moyen d\'accumuler de l\'expérience reste de faire vivre le site pour tous !';
   echo '</div>';
 
   echo '<div class="texte_themes">';
