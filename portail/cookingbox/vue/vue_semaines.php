@@ -16,10 +16,7 @@
         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_week" />';
 
         // Pseudo
-        if (strlen($currentWeek->getPseudo()) > 50)
-          echo '<div class="pseudo_week">' . substr($currentWeek->getPseudo(), 0, 50) . '...</div>';
-        else
-          echo '<div class="pseudo_week">' . $currentWeek->getPseudo() . '</div>';
+        echo '<div class="pseudo_week">' . formatPseudo($currentWeek->getPseudo(), 50) . '</div>';
 
         // Boutons d'action
         echo '<div class="zone_boutons" id="zone_current_week">';

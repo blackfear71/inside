@@ -31,9 +31,9 @@
 
   foreach ($_SESSION['chat']['users'] as $user)
   {
-    $user_chat = array('identifiant' => $user->getIdentifiant(),
-                       'pseudo'      => $user->getPseudo(),
-                       'avatar'      => $user->getAvatar()
+    $user_chat = array('identifiant' => htmlspecialchars($user->getIdentifiant()),
+                       'pseudo'      => htmlspecialchars($user->getPseudo()),
+                       'avatar'      => htmlspecialchars($user->getAvatar())
                       );
     array_push($listUsers, $user_chat);
   }

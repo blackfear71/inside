@@ -103,7 +103,7 @@
 
     // Nombre d'idées soumises
     $reponse7 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
-    $donnees7 = $reponse5->fetch();
+    $donnees7 = $reponse7->fetch();
 
     $nb_ideas = $donnees7['nb_idees'];
 
