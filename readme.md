@@ -9,6 +9,7 @@ Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
 - PORTAIL : liens vers les sections et news
 - MOVIE HOUSE : base de données de films et organisation de soirées cinéma
 - LES ENFANTS ! À TABLE ! : outil de détermination du repas du jour
+- COOKING BOX : recettes des gâteaux de la semaine
 - EXPENSE CENTER : outil de suivi des dépenses des membres
 - COLLECTOR ROOM : collection de phrases cultes
 - CALENDARS : calendriers de l'équipe
