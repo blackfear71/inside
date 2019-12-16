@@ -9,6 +9,8 @@
 	- Initialisation des succès
 	***************************/
 
+	@ini_set('display_errors', 'on');
+	
   // Fonctions communes
 	include_once('../includes/functions/fonctions_communes.php');
   include_once('../includes/functions/fonctions_regex.php');
