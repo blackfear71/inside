@@ -1,0 +1,13 @@
+#############################
+# Configuration et sécurité #
+#############################
+
+# Bloque l'accès aux répértoires
+Options -Indexes
+
+# Pages d'erreur personnalisées
+ErrorDocument 403 /inside/includes/errors/403.php
+ErrorDocument 404 /inside/includes/errors/404.php
+ErrorDocument 408 /inside/includes/errors/408.php
+ErrorDocument 500 /inside/includes/errors/500.php
+ErrorDocument 503 /inside/includes/errors/503.php
