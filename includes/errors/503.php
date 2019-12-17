@@ -6,5 +6,8 @@
   echo '<link rel="stylesheet" href="/inside/includes/assets/css/styleErrors.css?version=' . $last_modification_errors . '" />';
 
   // Erreur
-  echo '<div class="error_title">Service non disponible</div>';
+  echo '<div class="error_title">';
+    echo '<img src="/inside/includes/icons/common/inside_red.png" alt="inside" title="Inside" class="error_logo" />';
+    echo 'Service non disponible';
+  echo '</div>';
 ?>
