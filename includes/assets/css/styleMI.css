@@ -267,6 +267,7 @@
 	border-radius: 20px;
 	background: white;
 	box-shadow: 0 0 3px #7c7c7c;
+	overflow: hidden;
 }
 
 .progression_details_mission::-moz-meter-bar
