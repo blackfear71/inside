@@ -541,6 +541,23 @@ header
 	justify-self: center;
 }
 
+.level_header
+{
+	position: absolute;
+	top: 5px;
+	right: 95px;
+	border-radius: 50%;
+	background-color: #ff1937;
+	width: 22px;
+	height: 22px;
+	line-height: 20px;
+	z-index: 3;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 80%;
+	color: white;
+	text-align: center;
+}
+
 .circular_bar_header
 {
 	position: absolute;

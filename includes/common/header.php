@@ -43,7 +43,10 @@
 
         // Expérience utilisateur
         if ($_SESSION['user']['identifiant'] != "admin")
+        {
+          echo '<div class="level_header">' . $_SESSION['user']['experience']['niveau'] . '</div>';
           echo '<div class="circular_bar_header" id="progress_circle_header" data-perc="' . $_SESSION['user']['experience']['percent'] . '" data-text=""></div>';
+        }
 
         // Pseudo
         echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
