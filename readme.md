@@ -79,14 +79,15 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 ### Les variables globales
 Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées sous forme de tableaux regroupant leur contenu en catégories. Ceci facilite la lecture des données pour les développeurs.
 
-| SESSION  | Description                                              |
-| -------- | -------------------------------------------------------- |
-| index    | Contient les données de l'écran de connexion             |
-| alerts   | Contient les tops de déclenchement des messages d'alerte |
-| user     | Contient les données utilisateurs et préférences         |
-| missions | Contient les données des missions générées               |
-| theme    | Contient les données des thèmes                          |
-| chat     | Contient les données du chat (données utilisateurs)      |
+| SESSION   | Description                                              |
+| --------- | -------------------------------------------------------- |
+| index     | Contient les données de l'écran de connexion             |
+| alerts    | Contient les tops de déclenchement des messages d'alerte |
+| user      | Contient les données utilisateurs et préférences         |
+| missions  | Contient les données des missions générées               |
+| theme     | Contient les données des thèmes                          |
+| chat      | Contient les données du chat (données utilisateurs)      |
+| generator | Contient les données du générateur de code               |
 
 | COOKIE     | Description                                         |
 | ---------- | --------------------------------------------------- |

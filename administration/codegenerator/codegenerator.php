@@ -20,12 +20,14 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
-      if (!isset($generatorParameters))
+      if (!isset($generatorParameters) AND !isset($_SESSION['generator']))
         $generatorParameters = initializeGenerator();
+      else
+        $generatorParameters = getGenerator($_SESSION['generator']);
       break;
 
     case 'generateCode':
-      var_dump($_POST);
+      saveParameters($_POST);
       break;
 
     default:
@@ -63,6 +65,7 @@
   switch ($_GET['action'])
   {
     case 'generateCode':
+      header('location: codegenerator.php?action=goConsulter');
       break;
 
     case 'goConsulter':
