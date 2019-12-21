@@ -173,7 +173,7 @@
                   // Bouton complet
                   if ($proposition->getDetermined() == "Y" AND $proposition->getCaller() == $_SESSION['user']['identifiant'])
                   {
-                    echo '<form id="choice_complete" method="post" action="foodadvisor.php?action=doComplet" class="margin_top">';
+                    echo '<form id="choice_complete" method="post" action="foodadvisor.php?action=doComplet" class="margin_top_10">';
                       echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
                       echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver eventConfirm"/>';
                       echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';

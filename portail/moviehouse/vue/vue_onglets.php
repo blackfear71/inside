@@ -13,9 +13,9 @@
       if ($i % 2 == 0)
       {
         if ($_GET['view'] == $view)
-          echo '<span class="view active margin_right">' . $vue . '</span>';
+          echo '<span class="view active margin_right_20">' . $vue . '</span>';
         else
-          echo '<a href="moviehouse.php?view=' . $view . '&year=' . $_GET['year'] . '&action=goConsulter" class="view inactive margin_right">' . $vue . '</a>';
+          echo '<a href="moviehouse.php?view=' . $view . '&year=' . $_GET['year'] . '&action=goConsulter" class="view inactive margin_right_20">' . $vue . '</a>';
       }
       else
       {
@@ -50,7 +50,7 @@
         if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $ongletsYears[0]))
         {
           if ($i % 2 == 0)
-            echo '<span class="year active margin_right">' . $_GET['year'] . '</span>';
+            echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
           else
             echo '<span class="year active">' . $_GET['year'] . '</span>';
 
@@ -62,9 +62,9 @@
         if ($i % 2 == 0)
         {
           if (isset($_GET['year']) AND $year == $_GET['year'])
-            echo '<span class="year active margin_right">' . $year . '</span>';
+            echo '<span class="year active margin_right_20">' . $year . '</span>';
           else
-            echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $year . '&action=goConsulter" class="year inactive margin_right">' . $year . '</a>';
+            echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
         }
         else
         {
@@ -83,6 +83,6 @@
         echo '<span class="year active">' . $_GET['year'] . '</span>';
     }
     else
-      echo '<span class="year active margin_right">' . $_GET['year'] . '</span>';
+      echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
   echo '</div>';
 ?>

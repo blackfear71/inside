@@ -11,7 +11,7 @@
         $lvl = $success->getLevel();
 
         // Définit une zone pour appliquer la Masonry
-        echo '<div class="zone_niveau_succes margin_bottom">';
+        echo '<div class="zone_niveau_succes">';
       }
 
       if ($success->getDefined() == "Y")

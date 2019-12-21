@@ -60,14 +60,6 @@ $(function()
     initMasonry();
   });
 
-  // Change la couleur des boutons radio autorisations calendriers
-  $('.switch_autorisation').click(function()
-  {
-    var id_bouton = $(this).attr('id');
-
-    changeCheckedColor(id_bouton);
-  });
-
   // Affiche une image de bug / évolution en grand
   $('.agrandirImage').click(function()
   {
@@ -95,6 +87,14 @@ $(function()
     {
       $('#zoom_image').remove();
     });
+  });
+
+  // Change la couleur des switch
+  $('.label_switch').click(function()
+  {
+    var id_bouton = $(this).closest('div').attr('id');
+
+    changeCheckedColor(id_bouton);
   });
 
   /*** Actions au changement ***/
@@ -407,11 +407,11 @@ var loadFile = function(event, id)
   output.src = URL.createObjectURL(event.target.files[0]);
 };
 
-// Change la couleur des checkbox (autorisations)
+// Change la couleur des checkbox
 function changeCheckedColor(input)
 {
   if ($('#' + input).children('input').prop('checked'))
-    $('#' + input).addClass('bouton_checked');
+    $('#' + input).removeClass('switch_checked');
   else
-    $('#' + input).removeClass('bouton_checked');
+    $('#' + input).addClass('switch_checked');
 }

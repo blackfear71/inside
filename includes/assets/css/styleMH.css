@@ -120,11 +120,6 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.margin_top
-{
-	margin-top: 10px;
-}
-
 .zone_saisie_ligne
 {
 	display: block;
@@ -282,11 +277,6 @@
 	font-family: robotolight, Verdana, sans-serif;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.margin_right
-{
-	margin-right: 20px;
 }
 
 .active

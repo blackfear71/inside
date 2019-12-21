@@ -147,7 +147,7 @@
                       $rank = $rankUser['rank'];
 
                       if ($rank > 3)
-                        echo '<div class="score_classement margin_left">' . $rankUser['total'] . '</div>';
+                        echo '<div class="score_classement margin_left_50">' . $rankUser['total'] . '</div>';
                       else
                         echo '<div class="score_classement">' . $rankUser['total'] . '</div>';
 
@@ -245,7 +245,7 @@
                       echo '<div class="zone_avatar_details_mission">';
                         // Avatar
                         $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
-                        
+
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_details_mission" />';
 
                         // Pseudo

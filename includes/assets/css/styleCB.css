@@ -233,11 +233,6 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.margin_right
-{
-	margin-right: 20px;
-}
-
 .active
 {
 	background-color: #ff1937;
@@ -719,11 +714,6 @@
   display: inline-block;
   width: calc(50% - 5px);
   vertical-align: top;
-}
-
-.margin_right
-{
-  margin-right: 10px;
 }
 
 .sous_titre_2

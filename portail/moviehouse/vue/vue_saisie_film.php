@@ -149,7 +149,7 @@
           echo '</div>';
 
           // Sous-titre
-          echo '<div class="sous_titre_saisie_film margin_top">';
+          echo '<div class="sous_titre_saisie_film margin_top_10">';
             echo 'Restaurant';
           echo '</div>';
 

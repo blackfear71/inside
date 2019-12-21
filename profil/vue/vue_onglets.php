@@ -15,9 +15,9 @@
     if ($i % 2 == 0)
     {
       if ($_GET['view'] == $view)
-        echo '<span class="view active margin_right">' . $vue . '</span>';
+        echo '<span class="view active margin_right_20">' . $vue . '</span>';
       else
-        echo '<a href="profil.php?view=' . $view . '&action=goConsulter" class="view inactive margin_right">' . $vue . '</a>';
+        echo '<a href="profil.php?view=' . $view . '&action=goConsulter" class="view inactive margin_right_20">' . $vue . '</a>';
     }
     else
     {

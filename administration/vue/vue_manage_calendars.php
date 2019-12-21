@@ -37,7 +37,7 @@
               {
                 if ($preference['manage_calendars'] == "Y")
                 {
-                  echo '<div id="bouton_' . $preference['id'] . '" class="switch_autorisation bouton_checked">';
+                  echo '<div id="bouton_' . $preference['id'] . '" class="switch_autorisation switch_checked">';
                     echo '<input id="autorisation' . $preference['id'] . '" type="checkbox" name="autorization[' . $preference['id'] . ']" checked />';
                     echo '<label for="autorisation' . $preference['id'] . '" class="label_switch">' . $preference['pseudo'] . '</label>';
                   echo '</div>';

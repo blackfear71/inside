@@ -48,14 +48,14 @@
 
             if ($preferences->getView_notifications() == "W")
             {
-              echo '<div id="bouton_week" class="switch_default_view_notifications margin_bottom bouton_checked">';
+              echo '<div id="bouton_week" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="week" type="radio" name="notifications_view" value="W" checked required />';
                 echo '<label for="week" class="label_switch">7 jours</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_week" class="switch_default_view_notifications margin_bottom">';
+              echo '<div id="bouton_week" class="switch_default_view_notifications">';
                 echo '<input id="week" type="radio" name="notifications_view" value="W" required />';
                 echo '<label for="week" class="label_switch">7 jours</label>';
               echo '</div>';
@@ -63,14 +63,14 @@
 
             if ($preferences->getView_notifications() == "A")
             {
-              echo '<div id="bouton_all_n" class="switch_default_view_notifications margin_bottom bouton_checked">';
+              echo '<div id="bouton_all_n" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="all_n" type="radio" name="notifications_view" value="A" checked required />';
                 echo '<label for="all_n" class="label_switch">Toutes</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_all_n" class="switch_default_view_notifications margin_bottom">';
+              echo '<div id="bouton_all_n" class="switch_default_view_notifications">';
                 echo '<input id="all_n" type="radio" name="notifications_view" value="A" required />';
                 echo '<label for="all_n" class="label_switch">Toutes</label>';
               echo '</div>';
@@ -205,14 +205,14 @@
 
             if ($preferences->getView_the_box() == "M")
             {
-              echo '<div id="bouton_mine" class="switch_default_view_ideas margin_bottom bouton_checked">';
+              echo '<div id="bouton_mine" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="mine" type="radio" name="the_box_view" value="M" checked required />';
                 echo '<label for="mine" class="label_switch">En charge</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_mine" class="switch_default_view_ideas margin_bottom">';
+              echo '<div id="bouton_mine" class="switch_default_view_ideas">';
                 echo '<input id="mine" type="radio" name="the_box_view" value="M" required />';
                 echo '<label for="mine" class="label_switch">En charge</label>';
               echo '</div>';
@@ -220,14 +220,14 @@
 
             if ($preferences->getView_the_box() == "D")
             {
-              echo '<div id="bouton_done" class="switch_default_view_ideas margin_bottom bouton_checked">';
+              echo '<div id="bouton_done" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="done" type="radio" name="the_box_view" value="D" checked required />';
                 echo '<label for="done" class="label_switch">Terminées & rejetées</label>';
               echo '</div>';
             }
             else
             {
-              echo '<div id="bouton_done" class="switch_default_view_ideas margin_bottom">';
+              echo '<div id="bouton_done" class="switch_default_view_ideas">';
                 echo '<input id="done" type="radio" name="the_box_view" value="D" required />';
                 echo '<label for="done" class="label_switch">Terminées & rejetées</label>';
               echo '</div>';
@@ -237,7 +237,7 @@
       echo '</div>';
 
       // Bouton validation
-      echo '<input type="submit" name="saisie_preferences" value="Mettre à jour" class="bouton_validation margin_top" />';
+      echo '<input type="submit" name="saisie_preferences" value="Mettre à jour" class="bouton_validation margin_top_20" />';
     echo '</form>';
   echo '</div>';
 ?>

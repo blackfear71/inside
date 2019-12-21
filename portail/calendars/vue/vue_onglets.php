@@ -21,7 +21,7 @@
           if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
           {
             if ($i % 2 == 0)
-              echo '<span class="year active margin_right">' . $_GET['year'] . '</span>';
+              echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
             else
               echo '<span class="year active">' . $_GET['year'] . '</span>';
 
@@ -34,9 +34,9 @@
         if ($i % 2 == 0)
         {
           if (isset($_GET['year']) AND $year == $_GET['year'])
-            echo '<span class="year active margin_right">' . $year . '</span>';
+            echo '<span class="year active margin_right_20">' . $year . '</span>';
           else
-            echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right">' . $year . '</a>';
+            echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
         }
         else
         {
@@ -60,7 +60,7 @@
     else
     {
       if ($_GET['action'] != "goConsulterAnnexes")
-        echo '<span class="year active margin_right">' . $_GET['year'] . '</span>';
+        echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
     }
   echo '</div>';
 ?>

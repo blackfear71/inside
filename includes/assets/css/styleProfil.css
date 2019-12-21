@@ -64,11 +64,6 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.margin_right
-{
-	margin-right: 20px;
-}
-
 .active
 {
 	background-color: #ff1937;
@@ -89,11 +84,6 @@
 }
 
 /*** Profil ***/
-.margin_top_infos
-{
-	margin-top: -10px;
-}
-
 .zone_profil_avatar
 {
 	display: inline-block;
@@ -464,11 +454,6 @@
 	margin: 10px 5px 0 5px;
 }
 
-.margin_top
-{
-	margin-top: 20px;
-}
-
 /*** Utilisateur ***/
 .zone_action_user
 {
@@ -600,11 +585,6 @@
 }
 
 /*** Classement ***/
-.margin_bottom
-{
-	margin-bottom: 0;
-}
-
 .classement_liste
 {
 	display: block;

@@ -507,21 +507,6 @@
 	color: white;
 }
 
-.bouton_checked
-{
-	background-color: #262626;
-	color: white;
-}
-
-.label_switch
-{
-	display: inline-block;
-	margin-left: -25px;
-	padding-left: 30px;
-	padding-right: 10px;
-	cursor: pointer;
-}
-
 .saisie_autorisations
 {
 	display: block;
@@ -2645,4 +2630,97 @@
 	overflow: hidden;
 	vertical-align: middle;
 	box-shadow: 0 0 3px #7c7c7c;
+}
+
+/*** Générateur de code ***/
+.zone_generator_left
+{
+	display: inline-block;
+	width: calc(50% - 10px);
+	vertical-align: top;
+}
+
+.zone_generator_right
+{
+	display: inline-block;
+	width: calc(50% - 10px);
+	vertical-align: top;
+}
+
+.explications_generator
+{
+	font-family: robotoregular, Verdana, sans-serif;
+	text-align: justify;
+	color: #262626;
+}
+
+.saisie_generator
+{
+	display: inline-block;
+	width: calc(50% - 30px);
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+	border: 0;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 32px;
+}
+
+.switch_generator
+{
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	padding-left: 5px;
+	cursor: pointer;
+	background-color: white;
+}
+
+.switch_checked, .switch_generator:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.label_switch
+{
+	display: inline-block;
+	margin-left: -25px;
+	padding-left: 30px;
+	padding-right: 10px;
+	cursor: pointer;
+}
+
+.bouton_generator
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 30px 5px 30px;
+	margin-top: 20px;
+  border-radius: 2px;
+	border: 0;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 100%;
+	color: #262626;
+	background-color: #e3e3e3;
+	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.bouton_generator:hover
+{
+	background-color: #ff1937;
+	color: white;
 }

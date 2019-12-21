@@ -172,7 +172,7 @@
           // Préparation & remarques
           echo '<div class="zones_preparation">';
             // Préparation
-            echo '<div class="zone_preparation margin_right">';
+            echo '<div class="zone_preparation margin_right_10">';
               // Titre
               echo '<div class="sous_titre_2">Préparation</div>';
 

@@ -1,7 +1,7 @@
 <?php
   echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">' . $profil->getPseudo() . '</div></div>';
 
-  echo '<div class="margin_top_infos">';
+  echo '<div class="margin_top_moins_10">';
     // Avatar
     echo '<div class="zone_profil_avatar">';
       $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 1, "avatar");

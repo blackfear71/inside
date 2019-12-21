@@ -24,6 +24,7 @@
 		<section>
 			<article>
 				<div class="menu_admin">
+          <!-- Informations utilisateurs -->
           <a href="infos_users.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
@@ -34,6 +35,7 @@
             </div>
           </a>
 
+          <!-- Gestion utilisateurs -->
 					<a href="manage_users.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -49,6 +51,7 @@
 						</div>
 					</a>
 
+          <!-- Gestion thèmes -->
           <a href="manage_themes.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
@@ -60,6 +63,7 @@
             </div>
           </a>
 
+          <!-- Gestion succès -->
           <a href="manage_success.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -71,6 +75,7 @@
 						</div>
 					</a>
 
+          <!-- Gestion films -->
 					<a href="manage_films.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -86,6 +91,7 @@
 						</div>
 					</a>
 
+          <!-- Gestion calendriers -->
           <a href="manage_calendars.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
@@ -101,6 +107,7 @@
             </div>
           </a>
 
+          <!-- Gestion missions -->
           <a href="manage_missions.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
@@ -112,6 +119,7 @@
             </div>
           </a>
 
+          <!-- Gestion bugs/évolutions -->
 					<a href="reports.php?view=unresolved&action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -131,6 +139,7 @@
 						</div>
 					</a>
 
+          <!-- Gestion alertes -->
           <a href="manage_alerts.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
@@ -143,6 +152,7 @@
             </div>
           </a>
 
+          <!-- Gestion CRON -->
           <a href="cron.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
@@ -155,6 +165,20 @@
             </div>
           </a>
 
+          <!-- Générateur de code -->
+          <a href="codegenerator/codegenerator.php?action=goConsulter" class="menu_link_admin">
+            <div class="menu_admin_box">
+              <div class="mask_admin"></div>
+              <div class="mask_admin_triangle"></div>
+              <div class="title_admin">Générateur
+                <div class="saut_ligne">
+                  de code
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Accès phpMyAdmin -->
 					<a href="/phpmyadmin/" target="_blank" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
@@ -163,6 +187,7 @@
 						</div>
 					</a>
 
+          <!-- Sauvegarde BDD -->
 					<form method="post" action="../includes/functions/export_bdd.php" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>

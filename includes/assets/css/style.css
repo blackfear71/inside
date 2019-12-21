@@ -1286,3 +1286,34 @@ footer
 	vertical-align: top;
 	cursor: pointer;
 }
+
+/*** Marges ***/
+.margin_top_moins_10
+{
+	margin-top: -10px;
+}
+
+.margin_top_10
+{
+	margin-top: 10px;
+}
+
+.margin_top_20
+{
+	margin-top: 20px;
+}
+
+.margin_right_10
+{
+	margin-right: 10px;
+}
+
+.margin_right_20
+{
+	margin-right: 20px;
+}
+
+.margin_left_50
+{
+	margin-left: 50px;
+}

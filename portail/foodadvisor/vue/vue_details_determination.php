@@ -81,7 +81,7 @@
             echo '</form>';
 
             // Bouton complet
-            echo '<form id="choice_complete_details_proposition" method="post" action="" class="margin_top">';
+            echo '<form id="choice_complete_details_proposition" method="post" action="" class="margin_top_10">';
               echo '<input type="hidden" name="id_restaurant" value="" />';
               echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver_details eventConfirm"/>';
               echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';
