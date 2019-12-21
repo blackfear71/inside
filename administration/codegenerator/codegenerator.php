@@ -20,6 +20,12 @@
   {
     case 'goConsulter':
       // Lecture liste des données par le modèle
+      if (!isset($generatorParameters))
+        $generatorParameters = initializeGenerator();
+      break;
+
+    case 'generateCode':
+      var_dump($_POST);
       break;
 
     default:
@@ -32,34 +38,23 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      $generatorParameters->setNom_section(htmlspecialchars($generatorParameters->getNom_section()));
+      $generatorParameters->setNom_technique(htmlspecialchars($generatorParameters->getNom_technique()));
+      $generatorParameters->setStyle_specifique(htmlspecialchars($generatorParameters->getStyle_specifique()));
+      $generatorParameters->setScript_specifique(htmlspecialchars($generatorParameters->getScript_specifique()));
 
+      foreach ($generatorParameters->getOptions() as &$generatorOption)
+      {
+        $generatorOption->setOption(htmlspecialchars($generatorOption->getOption()));
+        $generatorOption->setChecked(htmlspecialchars($generatorOption->getChecked()));
+        $generatorOption->setTitre(htmlspecialchars($generatorOption->getTitre()));
+        $generatorOption->setCategorie(htmlspecialchars($generatorOption->getCategorie()));
+      }
 
-
-
-    
-      /*$checkbox_admin      = "N";
-      $checkbox_angular    = "N";
-      $checkbox_chat       = "Y";
-      $checkbox_datepicker = "N";
-      $checkbox_masonry    = "N";
-      $checkbox_exif       = "N";
-      $checkbox_alerts     = "Y";*/
-
-
-
-
-
-
-      $checkboxes = array(array('checked' => 'N', 'option' => 'admin', 'titre' => 'Page admin'),
-                          array('checked' => 'N', 'option' => 'angular', 'titre' => 'Angular'),
-                          array('checked' => 'Y', 'option' => 'chat', 'titre' => 'Chat'),
-                          array('checked' => 'N', 'option' => 'datepicker', 'titre' => 'Datepicker'),
-                          array('checked' => 'N', 'option' => 'masonry', 'titre' => 'Masonry'),
-                          array('checked' => 'N', 'option' => 'exif', 'titre' => 'Données EXIF'),
-                          array('checked' => 'Y', 'option' => 'alerts', 'titre' => 'Alertes')
-                         );
+      unset($generatorOption);
       break;
 
+    case 'generateCode':
     default:
       break;
   }
@@ -67,6 +62,9 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'generateCode':
+      break;
+
     case 'goConsulter':
     default:
       include_once('vue/vue_codegenerator.php');
