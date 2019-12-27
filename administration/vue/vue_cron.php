@@ -34,6 +34,15 @@
 			?>
 
 			<article>
+        <?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+        ?>
+
         <div class="zone_cron_asynchrone">
   				<div class="level_succes" style="margin-top: 0;">Lancement asynchrone des tâches CRON</div>
 

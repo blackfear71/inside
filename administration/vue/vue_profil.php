@@ -35,6 +35,16 @@
 
 			<article>
         <?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /***********/
+          /* Contenu */
+          /***********/
           echo '<div class="zone_profil_admin">';
             echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes informations</div></div>';
 

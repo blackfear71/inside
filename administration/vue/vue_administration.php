@@ -29,6 +29,15 @@
     <!-- Contenu -->
 		<section>
 			<article>
+        <?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+        ?>
+        
 				<div class="menu_admin">
           <!-- Informations utilisateurs -->
           <a href="infos_users.php?action=goConsulter" class="menu_link_admin">

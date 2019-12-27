@@ -35,7 +35,16 @@
 
 			<article>
 				<?php
-          // Formulaire autorisation saisie calendriers
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /**********************************************/
+          /* Formulaire autorisation saisie calendriers */
+          /**********************************************/
           echo '<div class="title_gestion">Autorisations de gestion des calendriers</div>';
 
           echo '<form method="post" action="manage_calendars.php?action=doChangerAutorisations" class="form_autorisations">';
@@ -62,10 +71,14 @@
             echo '<input type="submit" name="saisie_autorisations" value="Mettre à jour" class="saisie_autorisations" />';
           echo '</form>';
 
-          // Tableau des demandes de suppression de calendriers
+          /*******************************************************/
+          /* Tableau des demandes de suppression des calendriers */
+          /*******************************************************/
 					include('vue/table_calendars.php');
 
-        	// Tableau des demandes de suppression de annexes
+          /***************************************************/
+          /* Tableau des demandes de suppression des annexes */
+          /***************************************************/
           include('vue/table_annexes.php');
 				?>
 			</article>

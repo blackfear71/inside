@@ -35,6 +35,16 @@
 
 			<article>
 				<?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /***********************************/
+          /* Mot de passe (réinitialisation) */
+          /***********************************/
 					if (isset($_SESSION['save']['user_ask_id'])   AND !empty($_SESSION['save']['user_ask_id'])
 					AND isset($_SESSION['save']['user_ask_name']) AND !empty($_SESSION['save']['user_ask_name'])
 					AND isset($_SESSION['save']['new_password'])  AND !empty($_SESSION['save']['new_password']))
@@ -47,13 +57,19 @@
 						$_SESSION['save']['new_password']  = "";
 					}
 
-					// Tableau des utilisateurs
+          /****************************/
+          /* Tableau des utilisateurs */
+          /****************************/
 					include('vue/table_users.php');
 
-					// Tableau des statistiques des catégories
+          /*******************************************/
+          /* Tableau des statistiques des catégories */
+          /*******************************************/
 					include('vue/table_stats_categories.php');
 
-					// Tableau des statistiques demandes
+          /*************************************/
+          /* Tableau des statistiques demandes */
+          /*************************************/
 					include('vue/table_stats_requests.php');
 				?>
 

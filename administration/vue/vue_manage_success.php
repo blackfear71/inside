@@ -44,7 +44,16 @@
 
 			<article>
         <?php
-          // Ajout succès
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /****************/
+          /* Ajout succès */
+          /****************/
           echo '<div class="entete_admin">';
             echo 'Ajouter un succès';
           echo '</div>';

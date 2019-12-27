@@ -35,7 +35,16 @@
 
 			<article>
         <?php
-          // Ajout alerte
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /****************/
+          /* Ajout alerte */
+          /****************/
           echo '<form method="post" action="manage_alerts.php?action=doAjouter" class="form_saisie_alert">';
             echo '<table class="table_saisie_alert">';
               echo '<tr>';
@@ -81,7 +90,9 @@
             echo '</table>';
           echo '</form>';
 
-          // Tableau des alertes
+          /***********************/
+          /* Tableau des alertes */
+          /***********************/
           echo '<table class="table_alerts">';
             echo '<tr class="title_table_alerts">';
               echo '<td class="title_type_alerts">Type</td>';

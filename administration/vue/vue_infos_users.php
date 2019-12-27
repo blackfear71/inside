@@ -29,8 +29,18 @@
     <!-- Contenu -->
 		<section>
 			<article>
-        <div class="zone_infos">
-  				<?php
+        <?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /***********/
+          /* Contenu */
+          /***********/
+          echo '<div class="zone_infos">';
             foreach ($listeUsers as $user)
             {
               echo '<div class="zone_infos_user">';
@@ -83,8 +93,8 @@
                 echo '</div>';
               echo '</div>';
             }
-  				?>
-        </div>
+          echo '</div>';
+        ?>
 			</article>
 		</section>
 

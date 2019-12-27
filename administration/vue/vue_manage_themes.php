@@ -35,6 +35,16 @@
 
 			<article>
         <?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /***********/
+          /* Contenu */
+          /***********/
           echo '<div class="zone_themes_admin" style="display: none;">';
             /***********************/
             /* Thèmes utilisateurs */

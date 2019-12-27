@@ -43,8 +43,18 @@
 			?>
 
 			<article>
-        <div class="zone_manage_missions">
-          <?php
+        <?php
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /***********/
+          /* Contenu */
+          /***********/
+          echo '<div class="zone_manage_missions">';
             switch ($_GET['action'])
             {
               case "goConsulter":
@@ -59,8 +69,8 @@
               default:
                 break;
             }
-          ?>
-        </div>
+          echo '</div>';
+        ?>
 			</article>
 		</section>
 

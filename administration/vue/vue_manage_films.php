@@ -35,7 +35,16 @@
 
 			<article>
 				<?php
-					// Tableau des demandes
+          /*******************/
+          /* Chargement page */
+          /*******************/
+          echo '<div class="zone_loading_page">';
+            echo '<div id="loading_page" class="loading_page"></div>';
+          echo '</div>';
+
+          /************************/
+          /* Tableau des demandes */
+          /************************/
 					include('vue/table_films.php');
 				?>
 			</article>

@@ -408,6 +408,8 @@ function executeAction(form, action)
 // Animation chargement de la page en boucle
 function loadingPage()
 {
+  console.log('test');
+  
   $('.zone_loading_page').css("padding-top", "40px");
   $('.zone_loading_page').css("padding-bottom", "40px");
   $('#loading_page').css("height", "5px");
