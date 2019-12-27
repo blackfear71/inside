@@ -34,7 +34,9 @@
 
 			<article>
         <?php
-          // Boutons missions
+          /********************/
+          /* Boutons missions */
+          /********************/
           $zone_inside = "article";
           include('../../includes/common/missions.php');
 
