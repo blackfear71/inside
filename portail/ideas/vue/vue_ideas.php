@@ -3,11 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head   = "&#35;TheBox";
-      $style_head   = "styleTheBox.css";
-      $script_head  = "scriptTheBox.js";
-      $chat_head    = true;
-      $masonry_head = true;
+      $title_head      = "&#35;TheBox";
+      $style_head      = "styleTheBox.css";
+      $script_head     = "scriptTheBox.js";
+      $angular_head    = false;
+      $chat_head       = true;
+      $datepicker_head = false;
+      $masonry_head    = true;
+      $exif_head       = false;
 
       include('../../includes/common/head.php');
     ?>

@@ -3,9 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "";
-      $style_head  = "styleIndex.css";
-      $script_head = "scriptIndex.js";
+      $title_head      = "";
+      $style_head      = "styleIndex.css";
+      $script_head     = "scriptIndex.js";
+      $angular_head    = false;
+      $chat_head       = false;
+      $datepicker_head = false;
+      $masonry_head    = false;
+      $exif_head       = false;
 
       include('includes/common/head.php');
     ?>

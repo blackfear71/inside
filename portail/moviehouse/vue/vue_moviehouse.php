@@ -6,9 +6,11 @@
       $title_head      = "MH";
       $style_head      = "styleMH.css";
       $script_head     = "scriptMH.js";
+      $angular_head    = false;
       $chat_head       = true;
       $datepicker_head = true;
       $masonry_head    = true;
+      $exif_head       = false;
 
       include('../../includes/common/head.php');
     ?>

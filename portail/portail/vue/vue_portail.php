@@ -3,11 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head   = "Portail";
-      $style_head   = "stylePortail.css";
-      $script_head  = "scriptPortail.js";
-      $chat_head    = true;
-      $masonry_head = true;
+      $title_head      = "Portail";
+      $style_head      = "stylePortail.css";
+      $script_head     = "scriptPortail.js";
+      $angular_head    = false;
+      $chat_head       = true;
+      $datepicker_head = false;
+      $masonry_head    = true;
+      $exif_head       = false;
 
       include('../../includes/common/head.php');
     ?>

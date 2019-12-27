@@ -3,11 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head   = "PP";
-      $style_head   = "stylePP.css";
-      $script_head  = "scriptPP.js";
-      $chat_head    = true;
-      $angular_head = true;
+      $title_head      = "PP";
+      $style_head      = "stylePP.css";
+      $script_head     = "scriptPP.js";
+      $angular_head    = true;
+      $chat_head       = true;
+      $datepicker_head = false;
+      $masonry_head    = false;
+      $exif_head       = false;
 
       include('../../includes/common/head.php');
     ?>

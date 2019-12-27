@@ -3,11 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head   = "CA";
-      $style_head   = "styleCA.css";
-      $script_head  = "scriptCA.js";
-      $chat_head    = true;
-      $masonry_head = true;
+      $title_head      = "CA";
+      $style_head      = "styleCA.css";
+      $script_head     = "scriptCA.js";
+      $angular_head    = false;
+      $chat_head       = true;
+      $datepicker_head = false;
+      $masonry_head    = true;
+      $exif_head       = false;
 
       include('../../includes/common/head.php');
     ?>

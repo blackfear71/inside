@@ -6,6 +6,7 @@
       $title_head      = "CO";
       $style_head      = "styleCO.css";
       $script_head     = "scriptCO.js";
+      $angular_head    = false;
       $chat_head       = true;
       $datepicker_head = true;
       $masonry_head    = true;

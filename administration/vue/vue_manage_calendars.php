@@ -3,9 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "Calendriers";
-      $style_head  = "styleAdmin.css";
-      $script_head = "scriptAdmin.js";
+      $title_head      = "Calendriers";
+      $style_head      = "styleAdmin.css";
+      $script_head     = "scriptAdmin.js";
+      $angular_head    = false;
+      $chat_head       = false;
+      $datepicker_head = false;
+      $masonry_head    = false;
+      $exif_head       = false;
 
       include('../includes/common/head.php');
     ?>

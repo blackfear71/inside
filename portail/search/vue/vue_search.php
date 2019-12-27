@@ -3,10 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "Recherche";
-      $style_head  = "styleSearch.css";
-      $script_head = "";
-      $chat_head   = true;
+      $title_head      = "Recherche";
+      $style_head      = "styleSearch.css";
+      $script_head     = "";
+      $angular_head    = false;
+      $chat_head       = true;
+      $datepicker_head = false;
+      $masonry_head    = false;
+      $exif_head       = false;
 
       include('../../includes/common/head.php');
     ?>

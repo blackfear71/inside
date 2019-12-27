@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <!-- Head commun & spécifique-->
-  <?php
-    $title_head      = "Administrateur";
-    $style_head      = "styleProfil.css";
-    $script_head     = "scriptProfil.js";
-    $datepicker_head = true;
-    $masonry_head    = true;
+  <head>
+    <!-- Head commun & spécifique-->
+    <?php
+      $title_head      = "Administrateur";
+      $style_head      = "styleProfil.css";
+      $script_head     = "scriptProfil.js";
+      $angular_head    = false;
+      $chat_head       = false;
+      $datepicker_head = true;
+      $masonry_head    = true;
+      $exif_head       = false;
 
-    include('../includes/common/head.php');
-  ?>
-</head>
+      include('../includes/common/head.php');
+    ?>
+  </head>
 
 	<body>
     <!-- Entête -->
