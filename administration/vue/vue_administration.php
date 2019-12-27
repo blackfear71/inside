@@ -13,6 +13,7 @@
   </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Administration";
@@ -21,6 +22,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<article>
 				<div class="menu_admin">

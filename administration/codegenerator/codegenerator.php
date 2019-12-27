@@ -23,7 +23,12 @@
       if (!isset($generatorParameters) AND !isset($_SESSION['generator']))
         $generatorParameters = initializeGenerator();
       else
+      {
         $generatorParameters = getGenerator($_SESSION['generator']);
+        $controler           = getControler($generatorParameters);
+        $metier              = getMetier($generatorParameters);
+        $vue                 = getVue($generatorParameters);
+      }
       break;
 
     case 'generateCode':
@@ -54,6 +59,16 @@
       }
 
       unset($generatorOption);
+
+      if (isset($controler))
+        $controler['content'] = htmlspecialchars($controler['content']);
+
+      if (isset($metier))
+        $metier['content'] = htmlspecialchars($metier['content']);
+
+      if (isset($vue))
+        $vue['content'] = htmlspecialchars($vue['content']);
+        
       break;
 
     case 'generateCode':

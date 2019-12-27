@@ -13,7 +13,7 @@
   </head>
 
 	<body>
-		<!-- Onglets -->
+		<!-- Entête -->
 		<header>
       <?php
         $title = "Notifications";
@@ -22,6 +22,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php

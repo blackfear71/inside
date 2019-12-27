@@ -12,6 +12,7 @@
   </head>
 
 	<body>
+    <!-- Contenu -->
     <section class="section_index">
       <!-- Messages d'alerte -->
       <?php
@@ -138,6 +139,7 @@
       </article>
     </section>
 
+    <!-- Pied de page -->
     <footer class="footer_index">
       <?php
         // Copyright

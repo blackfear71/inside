@@ -12,6 +12,7 @@
     {
       $this->nom_section       = '';
       $this->nom_technique     = '';
+      $this->nom_head          = '';
       $this->style_specifique  = '';
       $this->script_specifique = '';
       $this->options           = array();
@@ -34,6 +35,9 @@
 
       if (isset($data['nom_technique']))
         $this->nom_technique     = $data['nom_technique'];
+
+      if (isset($data['nom_head']))
+        $this->nom_head          = $data['nom_head'];
 
       if (isset($data['style_specifique']))
         $this->style_specifique  = $data['style_specifique'];
@@ -66,6 +70,17 @@
     public function getNom_technique()
     {
       return $this->nom_technique;
+    }
+
+    // Nom Head
+    public function setNom_head($nom_head)
+    {
+      $this->nom_head = $nom_head;
+    }
+
+    public function getNom_head()
+    {
+      return $this->nom_head;
     }
 
     // Style spécifique

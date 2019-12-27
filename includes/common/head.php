@@ -49,7 +49,7 @@
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
-<?php if (isset($angular) AND $angular == true) { ?>
+<?php if (isset($angular_head) AND $angular_head == true) { ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-animate.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-resource.min.js"></script>

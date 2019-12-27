@@ -14,7 +14,7 @@
   </head>
 
 	<body>
-		<!-- Onglets -->
+		<!-- Entête -->
 		<header>
       <?php
         $title = "Les enfants ! À table !";
@@ -24,6 +24,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php

@@ -97,6 +97,14 @@ $(function()
     changeCheckedColor(id_bouton);
   });
 
+  // Copie le code du générateur
+  $('.copyCode').click(function()
+  {
+    var id = $(this).attr('id');
+
+    $('#code_' + id).select();
+    document.execCommand('copy');
+  });
   /*** Actions au changement ***/
   // Charge l'avatar
   $('.loadAvatar').on('change', function()

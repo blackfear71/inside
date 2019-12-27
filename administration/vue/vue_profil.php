@@ -14,6 +14,7 @@
 </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Administrateur";
@@ -22,6 +23,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php

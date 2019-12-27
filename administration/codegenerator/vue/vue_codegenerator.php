@@ -12,6 +12,7 @@
   </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Générateur de code";
@@ -20,6 +21,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
       <!-- Messages d'alerte -->
 			<?php
@@ -61,6 +63,9 @@
 
                 // Nom technique
                 echo '<input type="text" name="nom_technique" placeholder="Nom technique" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
+
+                // Nom head
+                echo '<input type="text" name="nom_head" placeholder="Nom Head" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator margin_right_20" required>';
 
                 // Style spécifique
                 echo '<input type="text" name="style_specifique" placeholder="Style CSS spécifique" value="' . $generatorParameters->getStyle_specifique() . '" class="saisie_generator margin_right_20">';
@@ -108,6 +113,55 @@
           if (!empty($generatorParameters->getNom_section()) AND !empty($generatorParameters->getNom_technique()))
           {
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Code généré</div></div>';
+
+            echo '<div class="zone_generator_left margin_right_20">';
+              // Zone contrôleur
+              echo '<div class="zone_code_generator">';
+                // Nom du fichier
+                echo '<div class="nom_fichier_generator">';
+                  echo 'Contrôleur : ' . $controler['filename'];
+
+                  echo '<a id="controler" class="copie_generator copyCode">Copier le code</a>';
+                echo '</div>';
+
+                // Contenu du fichier
+                echo '<textarea id="code_controler" class="code_generator">';
+                  echo $controler['content'];
+                echo '</textarea>';
+              echo '</div>';
+            echo '</div>';
+
+            echo '<div class="zone_generator_right">';
+              // Zone Métier
+              echo '<div class="zone_code_generator">';
+                // Nom du fichier
+                echo '<div class="nom_fichier_generator">';
+                  echo 'Métier : ' . $metier['filename'];
+
+                  echo '<a id="metier" class="copie_generator copyCode">Copier le code</a>';
+                echo '</div>';
+
+                // Contenu du fichier
+                echo '<textarea id="code_metier" class="code_generator_small">';
+                  echo $metier['content'];
+                echo '</textarea>';
+              echo '</div>';
+
+              // Zone Vue
+              echo '<div class="zone_code_generator">';
+                // Nom du fichier
+                echo '<div class="nom_fichier_generator">';
+                  echo 'Vue : ' . $vue['filename'];
+
+                  echo '<a id="vue" class="copie_generator copyCode">Copier le code</a>';
+                echo '</div>';
+
+                // Contenu du fichier
+                echo '<textarea id="code_vue" class="code_generator_small">';
+                  echo $vue['content'];
+                echo '</textarea>';
+              echo '</div>';
+            echo '</div>';
           }
         ?>
 			</article>

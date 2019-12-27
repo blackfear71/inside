@@ -13,7 +13,7 @@
   </head>
 
 	<body>
-    <!-- Onglets -->
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Les Petits Pédestres";
@@ -23,6 +23,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php

@@ -13,6 +13,7 @@
   </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Rapports de bugs";
@@ -21,6 +22,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
       <!-- Messages d'alerte -->
 			<?php

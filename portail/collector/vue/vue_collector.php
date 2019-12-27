@@ -16,7 +16,7 @@
   </head>
 
 	<body>
-		<!-- Onglets -->
+		<!-- Entête -->
 		<header>
       <?php
         $title = "Collector Room";
@@ -26,6 +26,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php

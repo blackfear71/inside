@@ -13,6 +13,7 @@
   </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Informations utilisateurs";
@@ -21,6 +22,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<article>
         <div class="zone_infos">

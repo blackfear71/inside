@@ -15,6 +15,7 @@
   </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Profil";
@@ -23,6 +24,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
@@ -41,7 +43,7 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-          
+
           /***********/
           /* Onglets */
           /***********/

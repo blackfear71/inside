@@ -13,7 +13,7 @@
   </head>
 
 	<body>
-		<!-- Onglets -->
+		<!-- Entête -->
 		<header>
       <?php
         $title = "Event Manager";
@@ -23,6 +23,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
@@ -41,7 +42,7 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-          
+
           echo '<div class="entete_event">';
             echo 'Les évènements à venir';
           echo '</div>';

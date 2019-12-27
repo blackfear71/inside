@@ -3,18 +3,18 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head  = "PP";
-      $style_head  = "stylePP.css";
-      $script_head = "scriptPP.js";
-      $chat_head   = true;
-      $angular = true;
+      $title_head   = "PP";
+      $style_head   = "stylePP.css";
+      $script_head  = "scriptPP.js";
+      $chat_head    = true;
+      $angular_head = true;
 
       include('../../includes/common/head.php');
     ?>
   </head>
 
 	<body>
-    <!-- Onglets -->
+    <!-- Entête -->
     <header>
       <?php
         $title = "Les Petits Pédestres";
@@ -24,6 +24,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
     <section>
       <!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu" class="aside_nav">

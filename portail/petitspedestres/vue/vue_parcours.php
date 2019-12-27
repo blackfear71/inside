@@ -13,7 +13,7 @@
   </head>
 
 	<body>
-    <!-- Onglets -->
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Les Petits Pédestres";
@@ -23,6 +23,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
       <!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu" class="aside_nav">

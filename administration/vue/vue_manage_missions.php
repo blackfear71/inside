@@ -14,6 +14,7 @@
   </head>
 
 	<body>
+    <!-- Entête -->
 		<header>
       <?php
         $title = "Gestion missions";
@@ -22,6 +23,7 @@
       ?>
 		</header>
 
+    <!-- Contenu -->
 		<section>
 			<!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu" class="aside_no_nav">
