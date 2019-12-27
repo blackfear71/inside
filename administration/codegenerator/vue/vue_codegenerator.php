@@ -114,7 +114,7 @@
           {
             echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Code généré</div></div>';
 
-            echo '<div class="zone_generator_left margin_right_20">';
+            echo '<div class="zone_generated_left margin_right_20">';
               // Zone contrôleur
               echo '<div class="zone_code_generator">';
                 // Nom du fichier
@@ -146,7 +146,7 @@
               echo '</div>';
             echo '</div>';
 
-            echo '<div class="zone_generator_right">';
+            echo '<div class="zone_generated_right">';
               // Zone Vue
               echo '<div class="zone_code_generator">';
                 // Nom du fichier
