@@ -2750,7 +2750,9 @@
 	background-color: #d3d3d3;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	padding: 5px 10px 5px 10px;
+	padding: 0 10px 0 10px;
+	height: 30px;
+	line-height: 30px;
 	width: calc(100% - 20px);
 	margin-bottom: 10px;
 	font-family: robotoregular, Verdana, sans-serif;
@@ -2761,8 +2763,9 @@
 .copie_generator
 {
 	float: right;
-	padding: 5px 10px 5px 10px;
-	margin-top: -5px;
+	padding: 0 10px 0 10px;
+	height: 30px;
+	line-height: 30px;
 	margin-right: -10px;
 	border-top-right-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -2777,7 +2780,7 @@
 	color: white;
 }
 
-.code_generator
+.code_generator_controler
 {
 	width: calc(100% - 20px);
 	height: 400px;
@@ -2791,11 +2794,25 @@
 	margin-bottom: 20px;
 }
 
-.code_generator_small
+.code_generator_metier
 {
 	width: calc(100% - 20px);
 	height: 200px;
 	min-height: 200px;
+	resize: vertical;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	background-color: white;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	margin-bottom: 20px;
+}
+
+.code_generator_vue
+{
+	width: calc(100% - 20px);
+	height: 670px;
+	min-height: 670px;
 	resize: vertical;
 	padding: 5px 10px 5px 10px;
 	border-radius: 2px;

@@ -125,13 +125,11 @@
                 echo '</div>';
 
                 // Contenu du fichier
-                echo '<textarea id="code_controler" class="code_generator">';
+                echo '<textarea id="code_controler" class="code_generator_controler">';
                   echo $controler['content'];
                 echo '</textarea>';
               echo '</div>';
-            echo '</div>';
 
-            echo '<div class="zone_generator_right">';
               // Zone Métier
               echo '<div class="zone_code_generator">';
                 // Nom du fichier
@@ -142,11 +140,13 @@
                 echo '</div>';
 
                 // Contenu du fichier
-                echo '<textarea id="code_metier" class="code_generator_small">';
+                echo '<textarea id="code_metier" class="code_generator_metier">';
                   echo $metier['content'];
                 echo '</textarea>';
               echo '</div>';
+            echo '</div>';
 
+            echo '<div class="zone_generator_right">';
               // Zone Vue
               echo '<div class="zone_code_generator">';
                 // Nom du fichier
@@ -157,7 +157,7 @@
                 echo '</div>';
 
                 // Contenu du fichier
-                echo '<textarea id="code_vue" class="code_generator_small">';
+                echo '<textarea id="code_vue" class="code_generator_vue">';
                   echo $vue['content'];
                 echo '</textarea>';
               echo '</div>';

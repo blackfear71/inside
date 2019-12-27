@@ -218,12 +218,22 @@ $(function()
   });
 });
 
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Adaptation mobile
+  adaptGenerator();
+});
+
 /***************/
 /*** Masonry ***/
 /***************/
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptGenerator();
+
   // Masonry (Portail)
   if ($('.menu_admin').length)
   {
@@ -348,6 +358,29 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Adaptations des recettes sur mobiles
+function adaptGenerator()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_generator_left').css('display', 'block');
+    $('.zone_generator_left').css('width', '100%');
+    $('.zone_semaines_right').css('margin-right', '0');
+
+    $('.zone_generator_right').css('display', 'block');
+    $('.zone_generator_right').css('width', '100%');
+  }
+  else
+  {
+    $('.zone_generator_left').css('display', 'inline-block');
+    $('.zone_generator_left').css('width', 'calc(50% - 10px)');
+    $('.zone_semaines_right').css('margin-right', '20px');
+
+    $('.zone_generator_right').css('display', 'inline-block');
+    $('.zone_generator_right').css('width', 'calc(50% - 10px)');
+  }
+}
+
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {

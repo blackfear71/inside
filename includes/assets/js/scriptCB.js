@@ -200,7 +200,6 @@ function adaptRecipes()
   }
 }
 
-
 // Affiche ou masque un élément (délai 0s)
 function afficherMasquerNoDelay(id)
 {
@@ -382,7 +381,7 @@ function showRecipe(link, id)
 
         // Réalisateur
         html += '<div class="zone_pseudo_details">';
-          html += 'Par <strong>' + formatUnknownUser(recipe['pseudo'], false, true) + '</strong>';     
+          html += 'Par <strong>' + formatUnknownUser(recipe['pseudo'], false, true) + '</strong>';
         html += '</div>';
 
         // Ingrédients
