@@ -366,6 +366,7 @@ function adaptGenerator()
     $('.zone_generated_left').css('display', 'block');
     $('.zone_generated_left').css('width', '100%');
     $('.zone_generated_left').css('margin-right', '0');
+    $('.zone_generated_left').css('margin-bottom', '20px');
 
     $('.zone_generated_right').css('display', 'block');
     $('.zone_generated_right').css('width', '100%');
@@ -375,6 +376,7 @@ function adaptGenerator()
     $('.zone_generated_left').css('display', 'inline-block');
     $('.zone_generated_left').css('width', 'calc(50% - 10px)');
     $('.zone_generated_left').css('margin-right', '20px');
+    $('.zone_generated_left').css('margin-bottom', '0');
 
     $('.zone_generated_right').css('display', 'inline-block');
     $('.zone_generated_right').css('width', 'calc(50% - 10px)');
