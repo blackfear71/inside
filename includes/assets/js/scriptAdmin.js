@@ -363,6 +363,14 @@ function adaptGenerator()
 {
   if ($(window).width() < 1080)
   {
+    $('.zone_generator_left').css('display', 'block');
+    $('.zone_generator_left').css('width', '100%');
+    $('.zone_generator_left').css('margin-right', '0');
+
+    $('.zone_generator_right').css('display', 'block');
+    $('.zone_generator_right').css('width', '100%');
+    $('.zone_generator_right').css('margin-bottom', '10px');
+
     $('.zone_generated_left').css('display', 'block');
     $('.zone_generated_left').css('width', '100%');
     $('.zone_generated_left').css('margin-right', '0');
@@ -373,6 +381,14 @@ function adaptGenerator()
   }
   else
   {
+    $('.zone_generator_left').css('display', 'inline-block');
+    $('.zone_generator_left').css('width', 'calc(50% - 10px)');
+    $('.zone_generator_left').css('margin-right', '20px');
+
+    $('.zone_generator_right').css('display', 'inline-block');
+    $('.zone_generator_right').css('width', 'calc(50% - 10px)');
+    $('.zone_generator_right').css('margin-bottom', '0');
+
     $('.zone_generated_left').css('display', 'inline-block');
     $('.zone_generated_left').css('width', 'calc(50% - 10px)');
     $('.zone_generated_left').css('margin-right', '20px');
