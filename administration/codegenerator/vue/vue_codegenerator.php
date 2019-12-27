@@ -48,6 +48,7 @@
                 echo '<li>Respecter l\'<strong>architecture MVC</strong> du site</li>';
                 echo '<li>Ajouter une <strong>icône</strong> sur la page d\'index</li>';
                 echo '<li>Si la nouvelle section implique l\'utilisation d\'une <strong>préférence utilisateur</strong>, en tenir compte à l\'<strong>inscription</strong> d\'un nouvel utilisateur</li>';
+                echo '<li>Si la nouvelle section implique la création d\'<strong>enregistrements personnalisés</strong>, en tenir compte à la <strong>désinscription</strong></li>';
                 echo '<li>Modifier les commentaires dans le <strong>contrôleur</strong> généré</li>';
                 echo '<li>Si c\'est une page utilisateur, ajouter un <strong>lien sur le portail</strong> principal</li>';
                 echo '<li>Si c\'est une page utilisateur, ajouter un <strong>lien dans les onglets</strong> de navigation</li>';
