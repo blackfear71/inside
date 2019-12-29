@@ -9,14 +9,14 @@
   *************************/
 
   // Fonction communes
-  include_once('../includes/functions/fonctions_communes.php');
-  include_once('../includes/functions/fonctions_dates.php');
+  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_dates.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
+  include_once('modele/metier_themes.php');
 
   // Initialisation sauvegarde saisie thème
   if ((!isset($_SESSION['alerts']['date_less'])           OR $_SESSION['alerts']['date_less']           != true)
@@ -59,7 +59,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: manage_themes.php?action=goConsulter');
+      header('location: themes.php?action=goConsulter');
       break;
   }
 
@@ -113,18 +113,18 @@
     case "doAjouter":
     case "doModifier":
       if (!empty($id_theme))
-        header ('location: manage_themes.php?action=goConsulter&anchorTheme=' . $id_theme);
+        header ('location: themes.php?action=goConsulter&anchorTheme=' . $id_theme);
       else
-        header ('location: manage_themes.php?action=goConsulter');
+        header ('location: themes.php?action=goConsulter');
       break;
 
 		case "doSupprimer":
-			header ('location: manage_themes.php?action=goConsulter');
+			header ('location: themes.php?action=goConsulter');
 			break;
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_manage_themes.php');
+      include_once('vue/vue_themes.php');
       break;
   }
 ?>

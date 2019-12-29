@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Gestion thèmes";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -49,13 +49,13 @@
             /***********************/
             /* Thèmes utilisateurs */
             /***********************/
-            echo '<div class="titre_section"><img src="../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Thèmes utilisateurs</div></div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Thèmes utilisateurs</div></div>';
 
             echo '<div class="zone_themes">';
               /***************************************/
               /* Saisie nouveau thème (utilisateurs) */
               /***************************************/
-              echo '<form method="post" action="manage_themes.php?action=doAjouter" enctype="multipart/form-data" class="zone_theme">';
+              echo '<form method="post" action="themes.php?action=doAjouter" enctype="multipart/form-data" class="zone_theme">';
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
                 echo '<input type="hidden" name="theme_type" value="U" />';
 
@@ -129,13 +129,13 @@
                     // Images
                     echo '<div class="zone_header_theme">';
                       if ($theme_users->getLogo() == "Y")
-                        echo '<img src="../includes/images/themes/logos/' . $theme_users->getReference() . '_l.png" alt="' . $theme_users->getReference() . '_l" title="Logo" class="theme_logo" />';
+                        echo '<img src="../../includes/images/themes/logos/' . $theme_users->getReference() . '_l.png" alt="' . $theme_users->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                      echo '<img src="../includes/images/themes/headers/' . $theme_users->getReference() . '_h.png" alt="' . $theme_users->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                      echo '<img src="../../includes/images/themes/headers/' . $theme_users->getReference() . '_h.png" alt="' . $theme_users->getReference() . '_h" title="Header" class="theme_header_footer" />';
                     echo '</div>';
 
-                    echo '<img src="../includes/images/themes/backgrounds/' . $theme_users->getReference() . '.png" alt="' . $theme_users->getReference() . '" title="Background" class="theme_background" />';
-                    echo '<img src="../includes/images/themes/footers/' . $theme_users->getReference() . '_f.png" alt="' . $theme_users->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+                    echo '<img src="../../includes/images/themes/backgrounds/' . $theme_users->getReference() . '.png" alt="' . $theme_users->getReference() . '" title="Background" class="theme_background" />';
+                    echo '<img src="../../includes/images/themes/footers/' . $theme_users->getReference() . '_f.png" alt="' . $theme_users->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
                     /*********************************************/
                     /* Visualisation normale (sans modification) */
@@ -143,7 +143,7 @@
                     echo '<div id="modifier_theme_2_' . $theme_users->getId() . '">';
                       echo '<div class="zone_theme_titre">';
                         // Bouton suppression
-                        echo '<form id="delete_theme_' . $theme_users->getId() . '" method="post" action="manage_themes.php?action=doSupprimer">';
+                        echo '<form id="delete_theme_' . $theme_users->getId() . '" method="post" action="themes.php?action=doSupprimer">';
                           echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
                           echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                           echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
@@ -169,7 +169,7 @@
                     /* Caché pour modification */
                     /***************************/
                     echo '<div id="modifier_theme_' . $theme_users->getId() . '" style="display: none;">';
-                      echo '<form method="post" action="manage_themes.php?action=doModifier">';
+                      echo '<form method="post" action="themes.php?action=doModifier">';
                         echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
 
                         echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
@@ -202,13 +202,13 @@
             /*******************/
             /* Thèmes missions */
             /*******************/
-            echo '<div class="titre_section"><img src="../includes/icons/admin/missions_grey.png" alt="missions_grey" class="logo_titre_section" /><div class="texte_titre_section">Thèmes missions</div></div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/admin/missions_grey.png" alt="missions_grey" class="logo_titre_section" /><div class="texte_titre_section">Thèmes missions</div></div>';
 
             echo '<div class="zone_themes">';
               /**********************************/
               /* Saisie nouveau thème (mission) */
               /**********************************/
-              echo '<form method="post" action="manage_themes.php?action=doAjouter" enctype="multipart/form-data" class="zone_theme">';
+              echo '<form method="post" action="themes.php?action=doAjouter" enctype="multipart/form-data" class="zone_theme">';
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
                 echo '<input type="hidden" name="theme_type" value="M" />';
                 echo '<input type="hidden" name="theme_level" value="" />';
@@ -286,13 +286,13 @@
                     // Images
                     echo '<div class="zone_header_theme">';
                       if ($theme_mission->getLogo() == "Y")
-                        echo '<img src="../includes/images/themes/logos/' . $theme_mission->getReference() . '_l.png" alt="' . $theme_mission->getReference() . '_l" title="Logo" class="theme_logo" />';
+                        echo '<img src="../../includes/images/themes/logos/' . $theme_mission->getReference() . '_l.png" alt="' . $theme_mission->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                      echo '<img src="../includes/images/themes/headers/' . $theme_mission->getReference() . '_h.png" alt="' . $theme_mission->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                      echo '<img src="../../includes/images/themes/headers/' . $theme_mission->getReference() . '_h.png" alt="' . $theme_mission->getReference() . '_h" title="Header" class="theme_header_footer" />';
                     echo '</div>';
 
-                    echo '<img src="../includes/images/themes/backgrounds/' . $theme_mission->getReference() . '.png" alt="' . $theme_mission->getReference() . '" title="Background" class="theme_background" />';
-                    echo '<img src="../includes/images/themes/footers/' . $theme_mission->getReference() . '_f.png" alt="' . $theme_mission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+                    echo '<img src="../../includes/images/themes/backgrounds/' . $theme_mission->getReference() . '.png" alt="' . $theme_mission->getReference() . '" title="Background" class="theme_background" />';
+                    echo '<img src="../../includes/images/themes/footers/' . $theme_mission->getReference() . '_f.png" alt="' . $theme_mission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
                     /*********************************************/
                     /* Visualisation normale (sans modification) */
@@ -300,7 +300,7 @@
                     echo '<div id="modifier_theme_2_' . $theme_mission->getId() . '">';
                       echo '<div class="zone_theme_titre">';
                         // Bouton suppression
-                        echo '<form id="delete_theme_' . $theme_mission->getId() . '" method="post" action="manage_themes.php?action=doSupprimer">';
+                        echo '<form id="delete_theme_' . $theme_mission->getId() . '" method="post" action="themes.php?action=doSupprimer">';
                           echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
                           echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                           echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
@@ -328,7 +328,7 @@
                     /* Caché pour modification */
                     /***************************/
                     echo '<div id="modifier_theme_' . $theme_mission->getId() . '" style="display: none;">';
-                      echo '<form method="post" action="manage_themes.php?action=doModifier">';
+                      echo '<form method="post" action="themes.php?action=doModifier">';
                         echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
 
                         echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
@@ -367,7 +367,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>
