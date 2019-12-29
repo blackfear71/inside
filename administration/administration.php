@@ -16,6 +16,7 @@
 
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
+  //include_once('modele/metier_calendars.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -24,8 +25,8 @@
       // Lecture liste des données par le modèle
 			$alerteUsers     = getAlerteUsers();
 			$alerteFilms     = getAlerteFilms();
-      $alerteCalendars = getAlerteCalendars();
-      $alerteAnnexes   = getAlerteAnnexes();
+      //$alerteCalendars = getAlerteCalendars();
+      //$alerteAnnexes   = getAlerteAnnexes();
 			$nbBugs          = getNbBugs();
 			$nbEvols         = getNbEvols();
       break;

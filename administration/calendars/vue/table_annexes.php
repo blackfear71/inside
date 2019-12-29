@@ -29,14 +29,14 @@
       {
         echo '<tr class="tr_manage_users">';
   				echo '<td class="td_manage_users" style="padding-bottom: 10px;">';
-  					echo '<img src="../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="calendrier" title="' . $annexes->getTitle() . '" class="calendar_to_delete" />';
+  					echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="calendrier" title="' . $annexes->getTitle() . '" class="calendar_to_delete" />';
             echo '<span class="title_calendar_to_delete">' . $annexes->getTitle() . '</span>';
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
             if ($annexes->getTo_delete() == "Y")
             {
-    					echo '<form method="post" action="manage_calendars.php?action=doDeleteAnnexe">';
+    					echo '<form method="post" action="calendars.php?action=doDeleteAnnexe">';
 								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
     						echo '<input type="submit" name="accepter_suppression_annexe" value="ACCEPTER" class="bouton_admin" />';
     					echo '</form>';
@@ -46,7 +46,7 @@
           echo '<td class="td_manage_users">';
             if ($annexes->getTo_delete() == "Y")
             {
-    					echo '<form method="post" action="manage_calendars.php?action=doResetAnnexe">';
+    					echo '<form method="post" action="calendars.php?action=doResetAnnexe">';
 								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
     						echo '<input type="submit" name="annuler_suppression_annexe" value="REFUSER" class="bouton_admin" />';
     					echo '</form>';
