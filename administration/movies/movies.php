@@ -7,13 +7,13 @@
   ***********************/
 
   // Fonction communes
-  include_once('../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_communes.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
+  include_once('modele/metier_movies.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -34,7 +34,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: manage_films.php?action=goConsulter');
+      header('location: movies.php?action=goConsulter');
       break;
   }
 
@@ -83,12 +83,12 @@
   {
 		case "doDeleteFilm":
 		case "doResetFilm":
-			header ('location: manage_films.php?action=goConsulter');
+			header ('location: movies.php?action=goConsulter');
 			break;
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_manage_films.php');
+      include_once('vue/vue_movies.php');
       break;
   }
 ?>

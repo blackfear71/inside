@@ -12,7 +12,7 @@
       $masonry_head    = false;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Gestion films";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -45,14 +45,14 @@
           /************************/
           /* Tableau des demandes */
           /************************/
-					include('vue/table_films.php');
+					include('vue/vue_table_films.php');
 				?>
 			</article>
 		</section>
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

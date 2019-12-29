@@ -17,6 +17,7 @@
   // Modèle de données : "module métier"
   include_once('modele/metier_administration.php');
   //include_once('modele/metier_calendars.php');
+  //include_once('modele/metier_movies.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -24,7 +25,7 @@
     case 'goConsulter':
       // Lecture liste des données par le modèle
 			$alerteUsers     = getAlerteUsers();
-			$alerteFilms     = getAlerteFilms();
+			//$alerteFilms     = getAlerteFilms();
       //$alerteCalendars = getAlerteCalendars();
       //$alerteAnnexes   = getAlerteAnnexes();
 			$nbBugs          = getNbBugs();

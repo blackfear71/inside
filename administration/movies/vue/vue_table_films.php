@@ -47,7 +47,7 @@
           echo '<td class="td_manage_users">';
             if ($film->getTo_delete() == "Y")
             {
-    					echo '<form method="post" action="manage_films.php?action=doDeleteFilm">';
+    					echo '<form method="post" action="movies.php?action=doDeleteFilm">';
     						echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
 								echo '<input type="submit" name="accepter_suppression_film" value="ACCEPTER" class="bouton_admin" />';
     					echo '</form>';
@@ -57,7 +57,7 @@
           echo '<td class="td_manage_users">';
             if ($film->getTo_delete() == "Y")
             {
-    					echo '<form method="post" action="manage_films.php?action=doResetFilm">';
+    					echo '<form method="post" action="movies.php?action=doResetFilm">';
     						echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
 								echo '<input type="submit" name="annuler_suppression_film" value="REFUSER" class="bouton_admin" />';
     					echo '</form>';
