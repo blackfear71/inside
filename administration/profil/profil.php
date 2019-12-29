@@ -8,14 +8,14 @@
   ******************************/
 
   // Fonction communes
-  include_once('../includes/functions/fonctions_communes.php');
-  include_once('../includes/functions/fonctions_regex.php');
+  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_regex.php');
 
   // Contrôles communs Utilisateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
+  include_once('modele/metier_profil.php');
 
   // Appel métier
   switch ($_GET['action'])

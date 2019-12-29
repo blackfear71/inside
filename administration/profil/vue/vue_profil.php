@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Administrateur";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -46,11 +46,11 @@
           /* Contenu */
           /***********/
           echo '<div class="zone_profil_admin">';
-            echo '<div class="titre_section"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes informations</div></div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes informations</div></div>';
 
             // Avatar actuel & suppression
             echo '<div class="zone_profil_avatar_parametres">';
-              $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 1, "avatar");
+              $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 2, "avatar");
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_profil" />';
 
@@ -77,7 +77,7 @@
             // Mise à jour informations
             echo '<form method="post" action="profil.php?action=doUpdateInfos" class="form_update_infos">';
               // Pseudo
-              echo '<img src="../includes/icons/common/inside_red.png" alt="inside_red" class="logo_parametres" />';
+              echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_parametres" />';
               echo '<input type="text" name="pseudo" placeholder="Pseudo" value="' . $profil->getPseudo() . '" maxlength="255" class="monoligne_saisie" />';
 
               echo '<input type="submit" name="saisie_pseudo" value="Mettre à jour" class="bouton_validation" />';
@@ -86,7 +86,7 @@
 
           // Mot de passe
           echo '<div class="zone_profil_bottom">';
-            echo '<div class="titre_section"><img src="../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" /><div class="texte_titre_section">Administrateur</div></div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" /><div class="texte_titre_section">Administrateur</div></div>';
 
             echo '<div class="zone_action_user">';
               echo '<div class="titre_contribution">CHANGER MOT DE PASSE</div>';
@@ -107,7 +107,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>
