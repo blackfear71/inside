@@ -8,14 +8,14 @@
   ********************************/
 
   // Fonction communes
-  include_once('../includes/functions/fonctions_communes.php');
-  include_once('../includes/functions/fonctions_dates.php');
+  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_dates.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
+  include_once('modele/metier_infosusers.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -36,7 +36,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: infos_users.php?action=goConsulter');
+      header('location: infosusers.php?action=goConsulter');
       break;
   }
 
@@ -79,12 +79,12 @@
   {
     case 'changeBeginnerStatus':
     case 'changeDevelopperStatus':
-      header('location: infos_users.php?action=goConsulter');
+      header('location: infosusers.php?action=goConsulter');
       break;
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_infos_users.php');
+      include_once('vue/vue_infosusers.php');
       break;
   }
 ?>

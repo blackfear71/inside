@@ -40,7 +40,7 @@
 
 				<div class="menu_admin">
           <!-- Informations utilisateurs -->
-          <a href="infos_users.php?action=goConsulter" class="menu_link_admin">
+          <a href="infosusers/infosusers.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>

@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Informations utilisateurs";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -45,7 +45,7 @@
             {
               echo '<div class="zone_infos_user">';
                 // Avatar
-                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 1, "avatar");
+                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
 
                 echo '<div class="circle_avatar">';
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="infos_avatar" />';
@@ -59,18 +59,18 @@
 
                 // Anniversaire
                 if (!empty($user->getAnniversary()))
-                  echo '<div class="infos_identifiant"><img src="../includes/icons/admin/anniversary_grey.png" alt="anniversary_grey" class="logo_infos" />' . formatDateForDisplay($user->getAnniversary()) . '</div>';
+                  echo '<div class="infos_identifiant"><img src="../../includes/icons/admin/anniversary_grey.png" alt="anniversary_grey" class="logo_infos" />' . formatDateForDisplay($user->getAnniversary()) . '</div>';
 
                 // Niveau
-                echo '<div class="infos_niveau"><img src="../includes/icons/admin/inside_red.png" alt="inside_red" class="logo_infos" />Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
+                echo '<div class="infos_niveau"><img src="../../includes/icons/admin/inside_red.png" alt="inside_red" class="logo_infos" />Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
 
                 // Email
                 if (!empty($user->getEmail()))
-                  echo '<div class="infos_mail"><img src="../includes/icons/admin/mailing_red.png" alt="mailing_red" class="logo_infos" />' . $user->getEmail() . '</div>';
+                  echo '<div class="infos_mail"><img src="../../includes/icons/admin/mailing_red.png" alt="mailing_red" class="logo_infos" />' . $user->getEmail() . '</div>';
 
                 echo '<div class="zone_form_users">';
                   // Formulaire True Insider
-                  echo '<form method="post" action="infos_users.php?action=changeBeginnerStatus" class="form_infos_users">';
+                  echo '<form method="post" action="infosusers.php?action=changeBeginnerStatus" class="form_infos_users">';
                     echo '<input type="hidden" name="user_infos" value="' . $user->getIdentifiant() . '" />';
                     echo '<input type="hidden" name="top_infos" value="' . $user->getBeginner() . '" />';
 
@@ -81,7 +81,7 @@
                   echo '</form>';
 
                   // Formulaire Developpeur
-                  echo '<form method="post" action="infos_users.php?action=changeDevelopperStatus" class="form_infos_users">';
+                  echo '<form method="post" action="infosusers.php?action=changeDevelopperStatus" class="form_infos_users">';
                     echo '<input type="hidden" name="user_infos" value="' . $user->getIdentifiant() . '" />';
                     echo '<input type="hidden" name="top_infos" value="' . $user->getDevelopper() . '" />';
 
@@ -100,7 +100,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>
