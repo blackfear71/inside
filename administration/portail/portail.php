@@ -1,23 +1,24 @@
 <?php
-  /*********************
-  *** Administration ***
-  **********************
+  /********************
+  ****** Portail ******
+  *********************
   Fonctionnalités :
   - Menu administration
   - Sauvegarde BDD
   - Accès phpMyAdmin
-  *********************/
+  ********************/
 
   // Fonction communes
-  include_once('../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_communes.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
-  //include_once('modele/metier_calendars.php');
-  //include_once('modele/metier_movies.php');
+  include_once('modele/metier_portail.php');
+  include_once('../manageusers/modele/metier_manageusers.php');
+  include_once('../calendars/modele/metier_calendars.php');
+  include_once('../movies/modele/metier_movies.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -25,16 +26,16 @@
     case 'goConsulter':
       // Lecture liste des données par le modèle
 			$alerteUsers     = getAlerteUsers();
-			//$alerteFilms     = getAlerteFilms();
-      //$alerteCalendars = getAlerteCalendars();
-      //$alerteAnnexes   = getAlerteAnnexes();
+			$alerteFilms     = getAlerteFilms();
+      $alerteCalendars = getAlerteCalendars();
+      $alerteAnnexes   = getAlerteAnnexes();
 			$nbBugs          = getNbBugs();
 			$nbEvols         = getNbEvols();
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: administration.php?action=goConsulter');
+      header('location: portail.php?action=goConsulter');
       break;
   }
 
@@ -53,7 +54,7 @@
   {
     case 'goConsulter':
     default:
-      include_once('vue/vue_administration.php');
+      include_once('vue/vue_portail.php');
       break;
   }
 ?>

@@ -16,7 +16,7 @@
     if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
       header('location: /inside/portail/portail/portail.php?action=goConsulter');
     elseif (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == "admin")
-      header('location: /inside/administration/administration.php?action=goConsulter');
+      header('location: /inside/administration/portail/portail.php?action=goConsulter');
     else
       $_SESSION['index']['connected'] = false;
   }
@@ -48,7 +48,7 @@
 
     // Contrôle non administrateur
   	if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == "admin")
-      header('location: /inside/administration/administration.php?action=goConsulter');
+      header('location: /inside/administration/portail/portail.php?action=goConsulter');
 
     // Contrôle utilisateur connecté
   	if ($_SESSION['index']['connected'] == false)

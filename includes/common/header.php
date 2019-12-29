@@ -4,7 +4,7 @@
     echo '<div class="zone_bandeau_left">';
       // Logo
       if ($_SESSION['user']['identifiant'] == "admin")
-        echo '<a href="/inside/administration/administration.php?action=goConsulter">';
+        echo '<a href="/inside/administration/portail/portail.php?action=goConsulter">';
       else
         echo '<a href="/inside/portail/portail/portail.php?action=goConsulter">';
           echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';

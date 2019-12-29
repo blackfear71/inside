@@ -9,27 +9,6 @@
   include_once('../includes/classes/success.php');
   include_once('../includes/libraries/php/imagethumb.php');
 
-  // METIER : Contrôle alertes utilisateurs
-  // RETOUR : Booléen
-  function getAlerteUsers()
-  {
-    $alert = false;
-
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, pseudo, status FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-    while($data = $req->fetch())
-    {
-      if ($data['status'] == "Y" OR $data['status'] == "I" OR $data['status'] == "D")
-      {
-        $alert = true;
-        break;
-      }
-    }
-    $req->closeCursor();
-
-    return $alert;
-  }
 
 
 
@@ -37,41 +16,8 @@
 
 
 
-  // METIER : Nombre de bugs en attente
-  // RETOUR : Nombre de bugs
-  function getNbBugs()
-  {
-    $nb_bugs = 0;
 
-    global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "B" AND resolved = "N"');
-    $data = $req->fetch();
-
-    $nb_bugs = $data['nb_bugs'];
-
-    $req->closeCursor();
-
-    return $nb_bugs;
-  }
-
-  // METIER : Nombre d'évolutions en attente
-  // RETOUR : Nombre d'évolutions
-  function getNbEvols()
-  {
-    $nb_evols = 0;
-
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "E" AND resolved = "N"');
-    $data = $req->fetch();
-
-    $nb_evols = $data['nb_bugs'];
-
-    $req->closeCursor();
-
-    return $nb_evols;
-  }
 
 
 
@@ -1195,7 +1141,7 @@
     return $listSuccess;
   }
 
-  
+
 
   // METIER : Initialisation des succès
   // RETOUR : Aucun

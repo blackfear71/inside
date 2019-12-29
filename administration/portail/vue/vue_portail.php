@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Administration";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -40,7 +40,7 @@
 
 				<div class="menu_admin">
           <!-- Informations utilisateurs -->
-          <a href="infosusers/infosusers.php?action=goConsulter" class="menu_link_admin">
+          <a href="../infosusers/infosusers.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -67,7 +67,7 @@
 					</a>
 
           <!-- Gestion thèmes -->
-          <a href="themes/themes.php?action=goConsulter" class="menu_link_admin">
+          <a href="../themes/themes.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -91,7 +91,7 @@
 					</a>
 
           <!-- Gestion films -->
-					<a href="movies/movies.php?action=goConsulter" class="menu_link_admin">
+					<a href="../movies/movies.php?action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -107,7 +107,7 @@
 					</a>
 
           <!-- Gestion calendriers -->
-          <a href="calendars/calendars.php?action=goConsulter" class="menu_link_admin">
+          <a href="../calendars/calendars.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -135,7 +135,7 @@
           </a>
 
           <!-- Gestion bugs/évolutions -->
-					<a href="reports/reports.php?view=unresolved&action=goConsulter" class="menu_link_admin">
+					<a href="../reports/reports.php?view=unresolved&action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -155,7 +155,7 @@
 					</a>
 
           <!-- Gestion alertes -->
-          <a href="alerts/alerts.php?action=goConsulter" class="menu_link_admin">
+          <a href="../alerts/alerts.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -168,7 +168,7 @@
           </a>
 
           <!-- Gestion CRON -->
-          <a href="cron/cron.php?action=goConsulter" class="menu_link_admin">
+          <a href="../cron/cron.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -181,7 +181,7 @@
           </a>
 
           <!-- Générateur de code -->
-          <a href="codegenerator/codegenerator.php?action=goConsulter" class="menu_link_admin">
+          <a href="../codegenerator/codegenerator.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
@@ -203,7 +203,7 @@
 					</a>
 
           <!-- Sauvegarde BDD -->
-					<form method="post" action="../includes/functions/export_bdd.php" class="menu_link_admin">
+					<form method="post" action="../../includes/functions/export_bdd.php" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
@@ -219,7 +219,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

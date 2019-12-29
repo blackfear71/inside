@@ -92,7 +92,7 @@
 	  {
 			case "doConnecter":
 				if ($connected == true AND $_SESSION['user']['identifiant'] == "admin")
-					header('location: administration/administration.php?action=goConsulter');
+					header('location: administration/portail/portail.php?action=goConsulter');
 				elseif ($connected == true AND $_SESSION['user']['identifiant'] != "admin")
 					header('location: portail/portail/portail.php?action=goConsulter');
 				else
