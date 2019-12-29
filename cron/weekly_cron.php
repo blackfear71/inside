@@ -32,6 +32,6 @@
   if (isset($_POST['weekly_cron']))
   {
     $_SESSION['alerts']['weekly_cron'] = true;
-    header('location: /inside/administration/cron.php?action=goConsulter');
+    header('location: /inside/administration/cron/cron.php?action=goConsulter');
   }
 ?>

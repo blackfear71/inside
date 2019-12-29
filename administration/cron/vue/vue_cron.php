@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Tâches CRON";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
       <!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -61,7 +61,7 @@
               <u>Fréquence :</u> tous les jours à 7h.
             </div>
             <div class="boutons_cron">
-              <form method="post" action="../cron/daily_cron.php">
+              <form method="post" action="../../cron/daily_cron.php">
                 <input type="submit" name="daily_cron" value="Lancer" class="bouton_cron" />
               </form>
             </div>
@@ -82,7 +82,7 @@
               <u>Fréquence :</u> tous les lundis à 7h.
             </div>
             <div class="boutons_cron">
-              <form method="post" action="../cron/weekly_cron.php">
+              <form method="post" action="../../cron/weekly_cron.php">
                 <input type="submit" name="weekly_cron" value="Lancer" class="bouton_cron" />
               </form>
             </div>
@@ -101,7 +101,7 @@
 
                   foreach ($files['daily'] as $fileJ)
                   {
-                    $lines = file('../cron/logs/daily/' . $fileJ);
+                    $lines = file('../../cron/logs/daily/' . $fileJ);
 
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
@@ -117,7 +117,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a class="detailsLogs">';
-                            echo '<img src="../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="daily_arrow_' . $i . '" />';
+                            echo '<img src="../../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="daily_arrow_' . $i . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
@@ -160,7 +160,7 @@
 
                   foreach ($files['weekly'] as $fileH)
                   {
-                    $lines = file('../cron/logs/weekly/' . $fileH);
+                    $lines = file('../../cron/logs/weekly/' . $fileH);
 
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
@@ -176,7 +176,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a class="detailsLogs">';
-                            echo '<img src="../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="weekly_arrow_' . $j . '" />';
+                            echo '<img src="../../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="weekly_arrow_' . $j . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
@@ -215,7 +215,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

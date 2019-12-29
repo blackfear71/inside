@@ -63,6 +63,6 @@
   if (isset($_POST['daily_cron']))
   {
     $_SESSION['alerts']['daily_cron'] = true;
-    header('location: /inside/administration/cron.php?action=goConsulter');
+    header('location: /inside/administration/cron/cron.php?action=goConsulter');
   }
 ?>
