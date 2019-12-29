@@ -12,7 +12,7 @@
       $masonry_head    = false;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Gestion alertes";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -45,7 +45,7 @@
           /****************/
           /* Ajout alerte */
           /****************/
-          echo '<form method="post" action="manage_alerts.php?action=doAjouter" class="form_saisie_alert">';
+          echo '<form method="post" action="alerts.php?action=doAjouter" class="form_saisie_alert">';
             echo '<table class="table_saisie_alert">';
               echo '<tr>';
                 // Type
@@ -115,11 +115,11 @@
                     switch ($alerte->getType())
                     {
                       case 'info':
-                        echo '<img src="../includes/icons/common/info.png" alt="info" title="Info" class="img_alert" />';
+                        echo '<img src="../../includes/icons/common/info.png" alt="info" title="Info" class="img_alert" />';
                         break;
 
                       case 'erreur':
-                        echo '<img src="../includes/icons/common/bug.png" alt="erreur" title="Erreur" class="img_alert" />';
+                        echo '<img src="../../includes/icons/common/bug.png" alt="erreur" title="Erreur" class="img_alert" />';
                         break;
 
                       default:
@@ -144,7 +144,7 @@
                     echo '</span>';
 
                     // Suppression ligne
-                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="manage_alerts.php?action=doSupprimer" class="link_action_alerte">';
+                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="alerts.php?action=doSupprimer" class="link_action_alerte">';
                       echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
                       echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_alerte eventConfirm" />';
                       echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="eventMessage" />';
@@ -156,7 +156,7 @@
                 /* Ligne cachée pour modification */
                 /**********************************/
                 echo '<tr id="modifier_alerte_' . $alerte->getId() . '" style="display: none;">';
-                  echo '<form method="post" action="manage_alerts.php?action=doModifier">';
+                  echo '<form method="post" action="alerts.php?action=doModifier">';
                     echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
 
                     // Type
@@ -216,7 +216,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

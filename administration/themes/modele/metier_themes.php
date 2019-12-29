@@ -1,4 +1,7 @@
 <?php
+  include_once('../../includes/functions/appel_bdd.php');
+  include_once('../../includes/classes/themes.php');
+
   // METIER : Lecture des thèmes existants par type
   // RETOUR : Tableau des thèmes
   function getThemes($type)

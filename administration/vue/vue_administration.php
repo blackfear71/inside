@@ -155,7 +155,7 @@
 					</a>
 
           <!-- Gestion alertes -->
-          <a href="manage_alerts.php?action=goConsulter" class="menu_link_admin">
+          <a href="alerts/alerts.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
