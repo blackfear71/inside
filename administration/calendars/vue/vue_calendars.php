@@ -74,12 +74,12 @@
           /*******************************************************/
           /* Tableau des demandes de suppression des calendriers */
           /*******************************************************/
-					include('vue/table_calendars.php');
+					include('vue/vue_table_calendars.php');
 
           /***************************************************/
           /* Tableau des demandes de suppression des annexes */
           /***************************************************/
-          include('vue/table_annexes.php');
+          include('vue/vue_table_annexes.php');
 				?>
 			</article>
 		</section>
