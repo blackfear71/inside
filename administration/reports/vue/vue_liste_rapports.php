@@ -1,6 +1,6 @@
 <?php
   echo '<div class="zone_bugs">';
-    echo '<div class="titre_section"><img src="../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" /><div class="texte_titre_section">Bugs</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" /><div class="texte_titre_section">Bugs</div></div>';
 
     if (!empty($listeBugs))
     {
@@ -18,7 +18,7 @@
             // Infos
             echo '<div class="zone_report_middle">';
               // Avatar
-              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 1, "avatar");
+              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 2, "avatar");
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
@@ -27,7 +27,7 @@
 
               // Date
               echo '<div class="date_report">';
-                echo '<img src="../includes/icons/reports/date.png" alt="date" class="icone_report" />';
+                echo '<img src="../../includes/icons/reports/date.png" alt="date" class="icone_report" />';
                 echo formatDateForDisplay($bug->getDate());
               echo '</div>';
 
@@ -52,7 +52,7 @@
             // Contenu
             echo '<div class="zone_report_bottom">';
               if (!empty($bug->getPicture()))
-                echo '<a class="agrandirImage"><img src="../includes/images/reports/' . $bug->getPicture() . '" alt="' . $bug->getPicture() . '" class="image_report" /></a>';
+                echo '<a class="agrandirImage"><img src="../../includes/images/reports/' . $bug->getPicture() . '" alt="' . $bug->getPicture() . '" class="image_report" /></a>';
 
               echo '<div class="content_report">' . nl2br($bug->getContent()) . '</div>';
 
@@ -91,7 +91,7 @@
   echo '</div>';
 
   echo '<div class="zone_evolutions">';
-    echo '<div class="titre_section"><img src="../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" /><div class="texte_titre_section">Evolutions</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" /><div class="texte_titre_section">Evolutions</div></div>';
 
     if (!empty($listeEvolutions))
     {
@@ -109,7 +109,7 @@
             // Infos
             echo '<div class="zone_report_middle">';
               // Avatar
-              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 1, "avatar");
+              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 2, "avatar");
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
@@ -118,7 +118,7 @@
 
               // Date
               echo '<div class="date_report">';
-                echo '<img src="../includes/icons/reports/date.png" alt="date" class="icone_report" />';
+                echo '<img src="../../includes/icons/reports/date.png" alt="date" class="icone_report" />';
                 echo formatDateForDisplay($evolution->getDate());
               echo '</div>';
 
@@ -143,7 +143,7 @@
             // Contenu
             echo '<div class="zone_report_bottom">';
               if (!empty($evolution->getPicture()))
-                echo '<a class="agrandirImage"><img src="../includes/images/reports/' . $evolution->getPicture() . '" alt="' . $evolution->getPicture() . '" class="image_report" /></a>';
+                echo '<a class="agrandirImage"><img src="../../includes/images/reports/' . $evolution->getPicture() . '" alt="' . $evolution->getPicture() . '" class="image_report" /></a>';
 
               echo '<div class="content_report">' . nl2br($evolution->getContent()) . '</div>';
 

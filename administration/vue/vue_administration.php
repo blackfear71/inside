@@ -135,7 +135,7 @@
           </a>
 
           <!-- Gestion bugs/évolutions -->
-					<a href="reports.php?view=unresolved&action=goConsulter" class="menu_link_admin">
+					<a href="reports/reports.php?view=unresolved&action=goConsulter" class="menu_link_admin">
 						<div class="menu_admin_box">
 							<div class="mask_admin"></div>
 							<div class="mask_admin_triangle"></div>
