@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Gestion missions";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -33,13 +33,13 @@
 				<?php
           $add_mission = true;
 
-					include('../includes/common/aside.php');
+					include('../../includes/common/aside.php');
 				?>
 			</aside>
 
       <!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -58,12 +58,12 @@
             switch ($_GET['action'])
             {
               case "goConsulter":
-                include('vue/table_vue_missions.php');
+                include('vue/vue_table_missions.php');
                 break;
 
               case "goAjouter":
               case "goModifier":
-                include('vue/table_saisie_mission.php');
+                include('vue/vue_saisie_mission.php');
                 break;
 
               default:
@@ -76,7 +76,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

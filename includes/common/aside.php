@@ -44,7 +44,7 @@
 		// Ajouter une mission
 		if ($add_mission == true)
 		{
-			echo '<a href="/inside/administration/manage_missions.php?action=goAjouter" title="Ajouter une mission" class="link_aside">';
+			echo '<a href="/inside/administration/missions/missions.php?action=goAjouter" title="Ajouter une mission" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter une mission" class="icon_aside" />';
 			echo '</a>';
 		}

@@ -1,12 +1,12 @@
 <?php
   if ($_GET['action'] == "goAjouter")
-    echo '<form method="post" action="manage_missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission" style="width: 100%;">';
+    echo '<form method="post" action="missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission" style="width: 100%;">';
   else
   {
-    echo '<form method="post" action="manage_missions.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_mission">';
+    echo '<form method="post" action="missions.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_mission">';
       echo '<input type="hidden" name="id_mission" value="' . $detailsMission->getId() . '" />';
   }
-  
+
     echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
 
     echo '<table class="table_mission">';
@@ -43,7 +43,7 @@
                 echo '<input type="file" accept=".png" name="mission_image" class="bouton_parcourir_mission loadBanner" />';
               echo '</div>';
 
-              echo '<img src="../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" id="banner" alt="' . $detailsMission->getReference() . '" class="preview_image_mission" />';
+              echo '<img src="../../includes/images/missions/banners/' . $detailsMission->getReference() . '.png" id="banner" alt="' . $detailsMission->getReference() . '" class="preview_image_mission" />';
             echo '</div>';
           }
         echo '</td>';
@@ -61,7 +61,7 @@
               echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones loadLeft" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="preview_icon_mission" />';
+              echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="preview_icon_mission" />';
             else
               echo '<img id="button_g" alt="" class="preview_icon_mission" />';
           echo '</div>';
@@ -77,7 +77,7 @@
               echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones loadMiddle" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="preview_icon_mission" />';
+              echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="preview_icon_mission" />';
             else
               echo '<img id="button_m" alt="" class="preview_icon_mission" />';
           echo '</div>';
@@ -93,7 +93,7 @@
               echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones loadRight" />';
 
             if (!empty($detailsMission->getReference()))
-              echo '<img src="../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="preview_icon_mission" />';
+              echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="preview_icon_mission" />';
             else
               echo '<img id="button_d" alt="" class="preview_icon_mission" />';
           echo '</div>';

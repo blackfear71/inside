@@ -10,15 +10,15 @@
   *****************************/
 
   // Fonction communes
-  include_once('../includes/functions/fonctions_communes.php');
-  include_once('../includes/functions/fonctions_dates.php');
-  include_once('../includes/functions/fonctions_regex.php');
+  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_dates.php');
+  include_once('../../includes/functions/fonctions_regex.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
+  include_once('modele/metier_missions.php');
 
   // Initialisation sauvegarde saisie
 	if ((!isset($_SESSION['alerts']['already_ref_mission'])   OR $_SESSION['alerts']['already_ref_mission']   != true)
@@ -62,7 +62,7 @@
     case 'goModifier':
       // Contrôle si l'id est renseignée et numérique
       if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
-        header('location: manage_missions.php?action=goConsulter');
+        header('location: missions.php?action=goConsulter');
       else
       {
         if (isset($erreur_mission) AND $erreur_mission == true)
@@ -92,7 +92,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: manage_missions.php?action=goConsulter');
+      header('location: missions.php?action=goConsulter');
       break;
   }
 
@@ -175,24 +175,24 @@
   {
     case 'doAjouter':
       if ($erreur_mission == true)
-        header('location: manage_missions.php?action=goAjouter');
+        header('location: missions.php?action=goAjouter');
       else
-        header('location: manage_missions.php?action=goConsulter');
+        header('location: missions.php?action=goConsulter');
       break;
 
     case 'doModifier':
-      header('location: manage_missions.php?id_mission=' . $id_mission . '&action=goModifier');
+      header('location: missions.php?id_mission=' . $id_mission . '&action=goModifier');
       break;
 
     case 'doSupprimer':
-      header('location: manage_missions.php?action=goConsulter');
+      header('location: missions.php?action=goConsulter');
       break;
 
     case 'goAjouter':
     case 'goModifier':
     case 'goConsulter':
     default:
-      include_once('vue/vue_manage_missions.php');
+      include_once('vue/vue_missions.php');
       break;
   }
 ?>

@@ -123,7 +123,7 @@
           </a>
 
           <!-- Gestion missions -->
-          <a href="manage_missions.php?action=goConsulter" class="menu_link_admin">
+          <a href="../missions/missions.php?action=goConsulter" class="menu_link_admin">
             <div class="menu_admin_box">
               <div class="mask_admin"></div>
               <div class="mask_admin_triangle"></div>
