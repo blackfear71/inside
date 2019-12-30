@@ -42,16 +42,16 @@
           /***********/
           echo '<div class="menu_admin">';
             // Lien générés
-            foreach ($portail as $lien)
+            foreach ($portail as $lienPortail)
             {
-              echo '<a href="' . $lien['lien'] . '" class="menu_link_admin">';
+              echo '<a href="' . $lienPortail['lien'] . '" class="menu_link_admin">';
                 echo '<div class="menu_admin_box">';
                   echo '<div class="mask_admin"></div>';
                   echo '<div class="mask_admin_triangle"></div>';
                   echo '<div class="title_admin">';
-                    echo '<div>' . $lien['ligne_1'] . '</div>';
-                    echo '<div class="margin_top_20">' . $lien['ligne_2'] . '</div>';
-                    echo '<div>' . $lien['ligne_3'] . '</div>';
+                    echo '<div>' . $lienPortail['ligne_1'] . '</div>';
+                    echo '<div class="margin_top_20">' . $lienPortail['ligne_2'] . '</div>';
+                    echo '<div>' . $lienPortail['ligne_3'] . '</div>';
                   echo '</div>';
                 echo '</div>';
               echo '</a>';

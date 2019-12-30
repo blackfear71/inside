@@ -44,15 +44,15 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($portail as &$lien)
+      foreach ($portail as &$lienPortail)
       {
-        $lien['ligne_1'] = htmlspecialchars($lien['ligne_1']);
-        $lien['ligne_2'] = htmlspecialchars($lien['ligne_2']);
-        $lien['ligne_3'] = htmlspecialchars($lien['ligne_3']);
-        $lien['lien']    = htmlspecialchars($lien['lien']);
+        $lienPortail['ligne_1'] = htmlspecialchars($lienPortail['ligne_1']);
+        $lienPortail['ligne_2'] = htmlspecialchars($lienPortail['ligne_2']);
+        $lienPortail['ligne_3'] = htmlspecialchars($lienPortail['ligne_3']);
+        $lienPortail['lien']    = htmlspecialchars($lienPortail['lien']);
       }
 
-      unset($lien);
+      unset($lienPortail);
       break;
 
     default:

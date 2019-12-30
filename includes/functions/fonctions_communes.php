@@ -593,8 +593,8 @@
   {
     $unformatted = "";
 
-    $search    = array("[", "]");
-    $replace   = array("", "");
+    $search      = array("[", "]");
+    $replace     = array("", "");
     $unformatted = str_replace($search, $replace, $collector);
 
     return $unformatted;
