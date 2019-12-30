@@ -31,6 +31,7 @@
       $alerteAnnexes   = getAlerteAnnexes();
 			$nbBugs          = getNbBugs();
 			$nbEvols         = getNbEvols();
+      $portail         = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nbBugs, $nbEvols);
       break;
 
     default:
@@ -43,6 +44,15 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($portail as &$lien)
+      {
+        $lien['ligne_1'] = htmlspecialchars($lien['ligne_1']);
+        $lien['ligne_2'] = htmlspecialchars($lien['ligne_2']);
+        $lien['ligne_3'] = htmlspecialchars($lien['ligne_3']);
+        $lien['lien']    = htmlspecialchars($lien['lien']);
+      }
+
+      unset($lien);
       break;
 
     default:
