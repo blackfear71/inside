@@ -180,10 +180,6 @@
     // Appel métier
     $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nom_technique . '.php\');', $controler);
 
-    // Chemins
-    if ($options['admin']->getChecked() == 'Y')
-      $controler = str_replace('../../', '../', $controler);
-
     // Contrôle action URL renseignée
     $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nom_technique . '.php?action=goConsulter\');', $controler);
 
@@ -204,16 +200,6 @@
     $metier        = array('filename' => 'metier_' . $nom_technique . '.php',
                            'content'  => file_get_contents($file)
                           );
-
-    // On met les options dans un tableau associatif
-    foreach ($generatorParameters->getOptions() as $generatorOption)
-    {
-      $options[$generatorOption->getOption()] = $generatorOption;
-    }
-
-    // Chemins
-    if ($options['admin']->getChecked() == 'Y')
-      $metier = str_replace('../../', '../', $metier);
 
     return $metier;
   }
@@ -327,10 +313,6 @@
       $vue = str_replace('/*chat*/', '
 
       <?php include(\'../../includes/chat/chat.php\'); ?>', $vue);
-
-    // Chemins
-    if ($options['admin']->getChecked() == 'Y')
-      $vue = str_replace('../../', '../', $vue);
 
     return $vue;
   }
