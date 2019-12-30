@@ -63,12 +63,12 @@
 				echo '<td class="td_manage_users">';
 					if ($user->getStatus() == "Y")
 					{
-						echo '<form method="post" action="manage_users.php?action=doAnnulerMdp" class="form_manage_user">';
+						echo '<form method="post" action="manageusers.php?action=doAnnulerMdp" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 							echo '<input type="submit" name="annuler_reinitialisation" title="Annuler" value="" class="icone_annuler" />';
 						echo '</form>';
 
-						echo '<form method="post" action="manage_users.php?action=doChangerMdp" class="form_manage_user">';
+						echo '<form method="post" action="manageusers.php?action=doChangerMdp" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 							echo '<input type="submit" name="reinitialiser" title="Réinitialiser" value="" class="icone_accepter" />';
 						echo '</form>';
@@ -78,12 +78,12 @@
 				echo '<td class="td_manage_users">';
 					if ($user->getStatus() == "I")
 					{
-						echo '<form method="post" action="manage_users.php?action=doRefuserInscription" class="form_manage_user">';
+						echo '<form method="post" action="manageusers.php?action=doRefuserInscription" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 							echo '<input type="submit" name="decline_inscription" title="Refuser" value="" class="icone_annuler" />';
 						echo '</form>';
 
-						echo '<form method="post" action="manage_users.php?action=doAccepterInscription" class="form_manage_user">';
+						echo '<form method="post" action="manageusers.php?action=doAccepterInscription" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 							echo '<input type="submit" name="accept_inscription" title="Accepter" value="" class="icone_accepter" />';
 						echo '</form>';
@@ -93,12 +93,12 @@
 				echo '<td class="td_manage_users">';
 					if ($user->getStatus() == "D")
 					{
-						echo '<form method="post" action="manage_users.php?action=doRefuserDesinscription" class="form_manage_user">';
+						echo '<form method="post" action="manageusers.php?action=doRefuserDesinscription" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 							echo '<input type="submit" name="decline_desinscription" title="Refuser" value="" class="icone_annuler" />';
 						echo '</form>';
 
-						echo '<form method="post" action="manage_users.php?action=doAccepterDesinscription" class="form_manage_user">';
+						echo '<form method="post" action="manageusers.php?action=doAccepterDesinscription" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 							echo '<input type="submit" name="accept_desinscription" title="Accepter" value="" class="icone_accepter" />';
 						echo '</form>';
