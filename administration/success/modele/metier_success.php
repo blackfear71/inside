@@ -1,13 +1,7 @@
 <?php
-  include_once('../includes/functions/appel_bdd.php');
-  include_once('../includes/classes/alerts.php');
-  include_once('../includes/classes/bugs.php');
-  include_once('../includes/classes/calendars.php');
-  include_once('../includes/classes/missions.php');
-  include_once('../includes/classes/movies.php');
-  include_once('../includes/classes/profile.php');
-  include_once('../includes/classes/success.php');
-  include_once('../includes/libraries/php/imagethumb.php');
+  include_once('../../includes/functions/appel_bdd.php');
+  include_once('../../includes/classes/success.php');
+  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Lecture liste des succès
   // RETOUR : Liste des succès
@@ -124,7 +118,7 @@
     if ($control_ok == true)
     {
       // On contrôle la présence du dossier, sinon on le créé
-      $dossier = "../includes/images/profil";
+      $dossier = "../../includes/images/profil";
 
       if (!is_dir($dossier))
          mkdir($dossier);
@@ -227,7 +221,7 @@
     if (isset($data1['reference']) AND !empty($data1['reference']))
     {
       $reference = $data1['reference'];
-      unlink ("../includes/images/profil/success/" . $data1['reference'] . ".png");
+      unlink ("../../includes/images/profil/success/" . $data1['reference'] . ".png");
     }
 
     $req1->closeCursor();
@@ -240,7 +234,6 @@
 
     $_SESSION['alerts']['success_deleted'] = true;
   }
-
 
   // METIER : Modification succès
   // RETOUR : Aucun

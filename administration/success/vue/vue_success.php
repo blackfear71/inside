@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Gestion succès";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -33,13 +33,13 @@
 				<?php
           $modify_success = true;
 
-					include('../includes/common/aside.php');
+					include('../../includes/common/aside.php');
 				?>
 			</aside>
 
       <!-- Messages d'alerte -->
       <?php
-        include('../includes/common/alerts.php');
+        include('../../includes/common/alerts.php');
       ?>
 
 			<article>
@@ -58,7 +58,7 @@
             echo 'Ajouter un succès';
           echo '</div>';
 
-          echo '<form method="post" action="manage_success.php?action=doAjouter" class="form_saisie_succes" enctype="multipart/form-data">';
+          echo '<form method="post" action="success.php?action=doAjouter" class="form_saisie_succes" enctype="multipart/form-data">';
             echo '<table class="table_saisie_succes">';
               echo '<tr>';
                 // Titre
@@ -122,7 +122,7 @@
             echo 'Initialiser les succès';
           echo '</div>';
 
-          echo '<form id="initializeSuccess" method="post" action="manage_success.php?action=doInitialiser" class="form_init_succes">';
+          echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiser" class="form_init_succes">';
             echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_init eventConfirm" />';
             echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="eventMessage" />';
           echo '</form>';
@@ -150,7 +150,7 @@
 
               echo '<div class="ensemble_succes">';
                 // Suppression succès
-                echo '<form method="post" id="delete_success_' . $success->getId() . '" action="manage_success.php?action=doSupprimer" class="form_suppression_succes">';
+                echo '<form method="post" id="delete_success_' . $success->getId() . '" action="success.php?action=doSupprimer" class="form_suppression_succes">';
                   echo '<input type="hidden" name="id_success" value="' . $success->getId() . '" />';
                   echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" class="bouton_delete eventConfirm" />';
                   echo '<input type="hidden" value="Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?" class="eventMessage" />';
@@ -168,7 +168,7 @@
                   echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
 
                   // Logo succès
-                  echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
+                  echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
 
                   // Titre succès
                   echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
@@ -197,7 +197,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

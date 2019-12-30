@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Gestion succès";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
       <!-- Messages d'alerte -->
       <?php
-        include('../includes/common/alerts.php');
+        include('../../includes/common/alerts.php');
       ?>
 
 			<article>
@@ -54,7 +54,7 @@
           /************************/
           $lvl = 0;
 
-          echo '<form method="post" action="manage_success.php?action=doModifier" class="zone_succes_admin" style="display: none;">';
+          echo '<form method="post" action="success.php?action=doModifier" class="zone_succes_admin" style="display: none;">';
             foreach ($listeSuccess as $keySuccess => $success)
             {
               if ($success->getLevel() != $lvl)
@@ -76,7 +76,7 @@
                   echo '<input type="hidden" name="id[' . $success->getId() . ']" value="' . $success->getId() . '" />';
 
                   // Logo succès
-                  echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
+                  echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
 
                   // Référence
                   echo '<div class="reference_succes">Ref. ' . $success->getReference() . '</div>';
@@ -141,7 +141,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>

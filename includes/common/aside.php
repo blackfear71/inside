@@ -36,7 +36,7 @@
 		// Modifier les succès
 		if ($modify_success == true)
 		{
-			echo '<a href="/inside/administration/manage_success.php?action=goModifier" title="Modifier les succès" class="link_aside">';
+			echo '<a href="/inside/administration/success/success.php?action=goModifier" title="Modifier les succès" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';
 			echo '</a>';
 		}

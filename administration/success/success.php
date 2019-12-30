@@ -10,14 +10,15 @@
 	***************************/
 
   // Fonctions communes
-	include_once('../includes/functions/fonctions_communes.php');
-  include_once('../includes/functions/fonctions_regex.php');
+	include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_regex.php');
 
   // Contrôles communs Administrateur
   controlsAdmin();
 
   // Modèle de données : "module métier"
-  include_once('modele/metier_administration.php');
+	include_once('modele/metier_success.php');
+  include_once('../infosusers/modele/metier_infosusers.php');
 
   // Initialisation sauvegarde saisie succès
   if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)
@@ -76,7 +77,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: manage_success.php?action=goConsulter');
+      header('location: success.php?action=goConsulter');
       break;
   }
 
@@ -113,27 +114,27 @@
   {
     case "doModifier":
       if ($erreurUpdateSucces == true)
-        header('location: manage_success.php?error=true&action=goModifier');
+        header('location: success.php?error=true&action=goModifier');
       else
-        header('location: manage_success.php?action=goConsulter');
+        header('location: success.php?action=goConsulter');
       break;
 
     case "doAjouter":
     case "doSupprimer":
-      header('location: manage_success.php?action=goConsulter');
+      header('location: success.php?action=goConsulter');
       break;
 
 		case "doInitialiser":
-			header('location: manage_success.php?action=goConsulter');
+			header('location: success.php?action=goConsulter');
 			break;
 
     case 'goModifier':
-      include_once('vue/vue_modify_success.php');
+      include_once('vue/vue_update_success.php');
       break;
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_manage_success.php');
+      include_once('vue/vue_success.php');
       break;
   }
 ?>
