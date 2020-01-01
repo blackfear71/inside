@@ -1,6 +1,6 @@
 <?php
   echo '<div class="zone_profil_bottom_left">';
-    echo '<div class="titre_section"><img src="../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" /><div class="texte_titre_section">Utilisateur</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" /><div class="texte_titre_section">Utilisateur</div></div>';
 
     // Mot de passe
     echo '<div class="zone_action_user">';

@@ -1,10 +1,10 @@
 <?php
-  echo '<div class="titre_section"><img src="../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes contributions</div></div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes contributions</div></div>';
 
   echo '<div class="zone_profil_contributions">';
     // Movie House
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_contribution" />MOVIE HOUSE</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_contribution" />MOVIE HOUSE</div>';
 
       // Films ajoutés
       echo '<div class="zone_contribution">';
@@ -21,7 +21,7 @@
 
     // Food Advisor
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/food_advisor_grey.png" alt="food_advisor_grey" class="logo_titre_contribution" />LES ENFANTS ! À TABLE !</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/food_advisor_grey.png" alt="food_advisor_grey" class="logo_titre_contribution" />LES ENFANTS ! À TABLE !</div>';
 
       // Réservations
       echo '<div class="zone_contribution">';
@@ -32,7 +32,7 @@
 
     // Cooking Box
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/cooking_box_grey.png" alt="cooking_box_grey" class="logo_titre_contribution" />COOKING BOX</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/cooking_box_grey.png" alt="cooking_box_grey" class="logo_titre_contribution" />COOKING BOX</div>';
 
       // Films ajoutés
       echo '<div class="zone_contribution">';
@@ -49,7 +49,7 @@
 
     // Expense Center
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/expense_center_grey.png" alt="expense_center_grey" class="logo_titre_contribution" />EXPENSE CENTER</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/expense_center_grey.png" alt="expense_center_grey" class="logo_titre_contribution" />EXPENSE CENTER</div>';
 
       // Solde
       echo '<div class="zone_contribution large">';
@@ -63,7 +63,7 @@
 
     // Collector Room
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/collector_grey.png" alt="collector_grey" class="logo_titre_contribution" />COLLECTOR ROOM</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/collector_grey.png" alt="collector_grey" class="logo_titre_contribution" />COLLECTOR ROOM</div>';
 
       // Phrases cultes rapportées
       echo '<div class="zone_contribution large">';
@@ -74,7 +74,7 @@
 
     // #TheBox
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/ideas_grey.png" alt="ideas_grey" class="logo_titre_contribution" />#THEBOX</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/ideas_grey.png" alt="ideas_grey" class="logo_titre_contribution" />#THEBOX</div>';
 
       // Idées soumises
       echo '<div class="zone_contribution">';
@@ -85,7 +85,7 @@
 
     // Bugs & Evolutions
     echo '<div class="zone_contributions">';
-      echo '<div class="titre_contribution"><img src="../includes/icons/profil/bugs_grey.png" alt="bugs_grey" class="logo_titre_contribution" />BUGS & ÉVOLUTIONS</div>';
+      echo '<div class="titre_contribution"><img src="../../includes/icons/profil/bugs_grey.png" alt="bugs_grey" class="logo_titre_contribution" />BUGS & ÉVOLUTIONS</div>';
 
       // Bugs
       echo '<div class="zone_contribution">';

@@ -214,8 +214,8 @@
                                        '/inside/portail/notifications/notifications.php',
                                        '/inside/portail/petitspedestres/parcours.php',
                                        '/inside/portail/portail/portail.php',
-                                       '/inside/portail/search/search.php',
-                                       '/inside/profil/profil.php'
+                                       '/inside/portail/profil/profil.php',
+                                       '/inside/portail/search/search.php'
                                       );
     $listZonesCompletes        = array('header',
                                        'footer',
@@ -317,7 +317,7 @@
         OR   $page == '/inside/portail/notifications/notifications.php'
         OR   $page == '/inside/portail/portail/portail.php'
         OR   $page == '/inside/portail/search/search.php'
-        OR   $page == '/inside/profil/profil.php'))
+        OR   $page == '/inside/portail/profil/profil.php'))
           $classe = $zone . '_' . $position . '_mission_no_nav';
         else
           $classe = $zone . '_' . $position . '_mission';

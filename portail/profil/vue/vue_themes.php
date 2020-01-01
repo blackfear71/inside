@@ -1,7 +1,7 @@
 <?php
   echo '<div class="zone_themes_user" style="display: none;">';
     // Récompenses de niveaux
-    echo '<div class="titre_section"><img src="../includes/icons/profil/rewards_grey.png" alt="rewards_grey" class="logo_titre_section" />';
+    echo '<div class="titre_section"><img src="../../includes/icons/profil/rewards_grey.png" alt="rewards_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section">';
         echo 'Mes récompenses';
 
@@ -28,16 +28,16 @@
               // Header (Logo + header)
               echo '<div class="zone_header_theme">';
                 if ($theme_users->getLogo() == "Y")
-                  echo '<img src="../includes/images/themes/logos/' . $theme_users->getReference() . '_l.png" alt="' . $theme_users->getReference() . '_l" title="Logo" class="theme_logo" />';
+                  echo '<img src="../../includes/images/themes/logos/' . $theme_users->getReference() . '_l.png" alt="' . $theme_users->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                echo '<img src="../includes/images/themes/headers/' . $theme_users->getReference() . '_h.png" alt="' . $theme_users->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                echo '<img src="../../includes/images/themes/headers/' . $theme_users->getReference() . '_h.png" alt="' . $theme_users->getReference() . '_h" title="Header" class="theme_header_footer" />';
               echo '</div>';
 
               // Background
-              echo '<img src="../includes/images/themes/backgrounds/' . $theme_users->getReference() . '.png" alt="' . $theme_users->getReference() . '" title="Background" class="theme_background" />';
+              echo '<img src="../../includes/images/themes/backgrounds/' . $theme_users->getReference() . '.png" alt="' . $theme_users->getReference() . '" title="Background" class="theme_background" />';
 
               // Footer
-              echo '<img src="../includes/images/themes/footers/' . $theme_users->getReference() . '_f.png" alt="' . $theme_users->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+              echo '<img src="../../includes/images/themes/footers/' . $theme_users->getReference() . '_f.png" alt="' . $theme_users->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
               echo '<table class="theme_infos">';
                 echo '<tr>';
@@ -75,7 +75,7 @@
       echo '<div class="empty">Pas de thèmes disponibles. Gagnez un peu d\'expérience !</div>';
 
     // Thèmes de missions
-    echo '<div class="titre_section"><img src="../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
+    echo '<div class="titre_section"><img src="../../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section">';
         echo 'Les thèmes de missions';
 
@@ -106,16 +106,16 @@
               // Header (Logo + header)
               echo '<div class="zone_header_theme">';
                 if ($theme_mission->getLogo() == "Y")
-                  echo '<img src="../includes/images/themes/logos/' . $theme_mission->getReference() . '_l.png" alt="' . $theme_mission->getReference() . '_l" title="Logo" class="theme_logo" />';
+                  echo '<img src="../../includes/images/themes/logos/' . $theme_mission->getReference() . '_l.png" alt="' . $theme_mission->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                echo '<img src="../includes/images/themes/headers/' . $theme_mission->getReference() . '_h.png" alt="' . $theme_mission->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                echo '<img src="../../includes/images/themes/headers/' . $theme_mission->getReference() . '_h.png" alt="' . $theme_mission->getReference() . '_h" title="Header" class="theme_header_footer" />';
               echo '</div>';
 
               // Background
-              echo '<img src="../includes/images/themes/backgrounds/' . $theme_mission->getReference() . '.png" alt="' . $theme_mission->getReference() . '" title="Background" class="theme_background" />';
+              echo '<img src="../../includes/images/themes/backgrounds/' . $theme_mission->getReference() . '.png" alt="' . $theme_mission->getReference() . '" title="Background" class="theme_background" />';
 
               // Footer
-              echo '<img src="../includes/images/themes/footers/' . $theme_mission->getReference() . '_f.png" alt="' . $theme_mission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+              echo '<img src="../../includes/images/themes/footers/' . $theme_mission->getReference() . '_f.png" alt="' . $theme_mission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
               // Nom mission
               echo '<div class="theme_name_mission">' . $theme_mission->getName() . '</div>';

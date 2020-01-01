@@ -1,6 +1,6 @@
 <?php
   // Classement expérience
-  echo '<div class="titre_section"><img src="../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Expérience</div></div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/profil/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Expérience</div></div>';
 
   $lvl = 0;
 
@@ -16,7 +16,7 @@
 
     echo '<div class="zone_user_niveaux">';
       // Avatar
-      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 1, "avatar");
+      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 2, "avatar");
 
       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_niveau" />';
 

@@ -2,7 +2,7 @@
 # Configuration et sécurité #
 #############################
 
-# Bloque l'accès aux répértoires
+# Bloque l'accès aux répertoires
 Options -Indexes
 
 # Pages d'erreur personnalisées

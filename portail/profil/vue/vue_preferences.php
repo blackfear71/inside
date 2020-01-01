@@ -1,6 +1,6 @@
 <?php
   echo '<div class="zone_profil_bottom_right">';
-    echo '<div class="titre_section"><img src="../includes/icons/profil/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Préférences</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/profil/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Préférences</div></div>';
 
     echo '<form method="post" action="profil.php?action=doUpdatePreferences">';
       echo '<div class="zone_profil_contributions">';
@@ -8,7 +8,7 @@
         /*** Notifications ***/
         /*********************/
         echo '<div class="zone_contributions">';
-          echo '<div class="titre_contribution"><img src="../includes/icons/profil/notifications_grey.png" alt="notifications_grey" class="logo_titre_contribution" />NOTIFICATIONS</div>';
+          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/notifications_grey.png" alt="notifications_grey" class="logo_titre_contribution" />NOTIFICATIONS</div>';
 
           // Vue par défaut
           echo '<div class="sous_titre_contribution">Vue par défaut</div>';
@@ -82,7 +82,7 @@
         /*** Movie House ***/
         /*******************/
         echo '<div class="zone_contributions">';
-          echo '<div class="titre_contribution"><img src="../includes/icons/profil/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_contribution" />MOVIE HOUSE</div>';
+          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_contribution" />MOVIE HOUSE</div>';
 
           // Vue par défaut
           echo '<div class="sous_titre_contribution">Vue par défaut</div>';
@@ -165,7 +165,7 @@
         /*** #TheBox ***/
         /***************/
         echo '<div class="zone_contributions">';
-          echo '<div class="titre_contribution"><img src="../includes/icons/profil/ideas_grey.png" alt="ideas_grey" class="logo_titre_contribution" />#THEBOX</div>';
+          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/ideas_grey.png" alt="ideas_grey" class="logo_titre_contribution" />#THEBOX</div>';
 
           // Vue par défaut
           echo '<div class="sous_titre_contribution">Vue par défaut</div>';

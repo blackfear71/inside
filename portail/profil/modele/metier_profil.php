@@ -1,8 +1,8 @@
 <?php
-  include_once('../includes/functions/appel_bdd.php');
-  include_once('../includes/classes/profile.php');
-  include_once('../includes/classes/success.php');
-  include_once('../includes/libraries/php/imagethumb.php');
+  include_once('../../includes/functions/appel_bdd.php');
+  include_once('../../includes/classes/profile.php');
+  include_once('../../includes/classes/success.php');
+  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Lecture des données profil
   // RETOUR : Objet Profile
@@ -191,7 +191,7 @@
     global $bdd;
 
     // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "../includes/images/profil";
+    $dossier = "../../includes/images/profil";
 
     if (!is_dir($dossier))
       mkdir($dossier);
@@ -276,7 +276,7 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink ("../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
+      unlink ("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
 
     $reponse1->closeCursor();
 

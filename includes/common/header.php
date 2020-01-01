@@ -39,7 +39,7 @@
       if ($_SESSION['user']['identifiant'] == "admin")
         echo '<a href="/inside/administration/profil/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
       else
-        echo '<a href="/inside/profil/profil.php?view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
+        echo '<a href="/inside/portail/profil/profil.php?view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
 
         // Expérience utilisateur
         if ($_SESSION['user']['identifiant'] != "admin")
@@ -66,7 +66,7 @@
 
         // Succès
         if ($_SESSION['user']['identifiant'] != "admin")
-          echo '<a href="/inside/profil/profil.php?view=success&action=goConsulter" title="Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
+          echo '<a href="/inside/portail/profil/profil.php?view=success&action=goConsulter" title="Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
       echo '</div>';
     echo '</div>';
 

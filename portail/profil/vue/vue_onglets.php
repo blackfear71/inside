@@ -1,6 +1,6 @@
 <?php
   // Onglets
-  echo '<div class="titre_section"><img src="../includes/icons/profil/user_grey.png" alt="user_grey" class="logo_titre_section" /><div class="texte_titre_section">Mon profil</div></div>';
+  echo '<div class="titre_section"><img src="../../includes/icons/profil/user_grey.png" alt="user_grey" class="logo_titre_section" /><div class="texte_titre_section">Mon profil</div></div>';
 
   $i         = 0;
   $listeVues = array('profile'  => 'Profil',

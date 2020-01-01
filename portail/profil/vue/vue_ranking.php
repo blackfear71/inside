@@ -22,9 +22,9 @@
           echo '<div class="classement_liste">';
           // Logo succès
           if ($success->getValue_user() >= $success->getLimit_success())
-            echo '<img src="../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_classement_unlocked" />';
+            echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_classement_unlocked" />';
           else
-            echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
+            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
 
           // Titre succès
           echo '<div class="titre_classement">' . $success->getTitle() . '</div>';
@@ -51,15 +51,15 @@
                       switch ($podium['rank'])
                       {
                         case 1:
-                          echo '<img src="../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
+                          echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
                           break;
 
                         case 2:
-                          echo '<img src="../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
+                          echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
                           break;
 
                         case 3:
-                          echo '<img src="../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
+                          echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
                           break;
 
                         default:
@@ -72,7 +72,7 @@
                     }
 
                     // Avatar
-                    $avatarFormatted = formatAvatar($podium['avatar'], $podium['pseudo'], 1, "avatar");
+                    $avatarFormatted = formatAvatar($podium['avatar'], $podium['pseudo'], 2, "avatar");
 
                     echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
@@ -91,7 +91,7 @@
       {
         echo '<div class="classement_liste">';
           // Logo succès
-          echo '<img src="../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
+          echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
 
           // Titre succès
           echo '<div class="titre_classement">Succès non défini</div>';

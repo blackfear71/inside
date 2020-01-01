@@ -12,7 +12,7 @@
       $masonry_head    = true;
       $exif_head       = false;
 
-      include('../includes/common/head.php');
+      include('../../includes/common/head.php');
     ?>
   </head>
 
@@ -22,7 +22,7 @@
       <?php
         $title = "Profil";
 
-        include('../includes/common/header.php');
+        include('../../includes/common/header.php');
       ?>
 		</header>
 
@@ -30,7 +30,7 @@
 		<section>
 			<!-- Messages d'alerte -->
 			<?php
-				include('../includes/common/alerts.php');
+				include('../../includes/common/alerts.php');
 			?>
 
 			<article>
@@ -39,7 +39,7 @@
           /* Boutons missions */
           /********************/
           $zone_inside = "article";
-          include('../includes/common/missions.php');
+          include('../../includes/common/missions.php');
 
           /*******************/
           /* Chargement page */
@@ -116,12 +116,12 @@
         ?>
 			</article>
 
-      <?php include('../includes/chat/chat.php'); ?>
+      <?php include('../../includes/chat/chat.php'); ?>
 		</section>
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
   </body>
 </html>
