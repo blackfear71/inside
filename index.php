@@ -15,7 +15,7 @@
 	controlsIndex();
 
 	// Modèle de données : "module métier"
-  include_once('portail/connexion/modele/metier_index.php');
+  include_once('portail/index/modele/metier_index.php');
 
 	// Initialisation sauvegarde saisie inscription
 	if (((!isset($_SESSION['alerts']['too_short'])      OR  $_SESSION['alerts']['too_short']       != true)
@@ -105,10 +105,10 @@
 				break;
 
 	    default:
-	      include_once('portail/connexion/vue/vue_index.php');
+	      include_once('portail/index/vue/vue_index.php');
 	      break;
 	  }
 	}
 	else
-		include_once('portail/connexion/vue/vue_index.php');
+		include_once('portail/index/vue/vue_index.php');
 ?>
