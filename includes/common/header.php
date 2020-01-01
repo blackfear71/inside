@@ -60,7 +60,7 @@
       // Actions
       echo '<div class="zone_actions_header">';
         // Déconnexion
-        echo '<form method="post" action="/inside/connexion/disconnect.php" title="Déconnexion">';
+        echo '<form method="post" action="/inside/includes/functions/disconnect.php" title="Déconnexion">';
           echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icone_deconnexion_header" />';
         echo '</form>';
 
