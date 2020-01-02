@@ -16,19 +16,19 @@
     ?>
   </head>
 
-	<body>
-		<!-- Entête -->
-		<header>
+  <body>
+  <!-- Entête -->
+    <header>
       <?php
         $title = /*title*/;
 
         include('../../includes/common/header.php');/*onglets*/
       ?>
-		</header>
+    </header>
 
     <!-- Contenu -->
-		<section>/*alerts*/
-			<article>
+    <section>/*alerts*/
+      <article>
         <?php/*missions*/
           /*******************/
           /* Chargement page */
@@ -42,11 +42,11 @@
           /***********/
         ?>
       </article>/*chat*/
-		</section>
+    </section>
 
-		<!-- Pied de page -->
-		<footer>
-			<?php include('../../includes/common/footer.php'); ?>
-		</footer>
+    <!-- Pied de page -->
+    <footer>
+      <?php include('../../includes/common/footer.php'); ?>
+    </footer>
   </body>
 </html>
