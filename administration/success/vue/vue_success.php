@@ -128,7 +128,7 @@
           echo '<div class="explications_init">';
             echo 'Ce bouton permet d\'effacer tous les succès des utilisateurs dans la base de données sauf les suivants :';
 
-            echo '<ul class="margin_top_0">';
+            echo '<ul class="margin_top_0 margin_bottom_0">';
               echo '<li>greedy</li>';
               echo '<li>restaurant-finder</li>';
             echo '</ul>';
