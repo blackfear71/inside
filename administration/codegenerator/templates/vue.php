@@ -17,7 +17,7 @@
   </head>
 
   <body>
-  <!-- Entête -->
+    <!-- Entête -->
     <header>
       <?php
         $title = /*title*/;
