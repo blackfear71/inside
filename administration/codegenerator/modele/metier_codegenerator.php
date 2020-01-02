@@ -305,12 +305,13 @@
 ', $vue);
 
     // Chat
-    if ($options['admin']->getChecked() == 'Y')
-      $vue = str_replace('/*chat*/', '', $vue);
-    else
+    if ($options['chat']->getChecked() == 'Y' AND $options['admin']->getChecked() != 'Y')
       $vue = str_replace('/*chat*/', '
 
+      <!-- Chat -->
       <?php include(\'../../includes/chat/chat.php\'); ?>', $vue);
+    else
+      $vue = str_replace('/*chat*/', '', $vue);
 
     return $vue;
   }

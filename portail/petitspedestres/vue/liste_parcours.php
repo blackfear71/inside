@@ -64,6 +64,7 @@
   				   C'est nul ? Oui, c'est nul. -->
     	</article>
 
+      <!-- Chat -->
       <?php include('../../includes/chat/chat.php'); ?>
 		</section>
 

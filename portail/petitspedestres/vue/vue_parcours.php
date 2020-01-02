@@ -77,6 +77,7 @@
         </div>
       </article>
 
+      <!-- Chat -->
       <?php include('../../includes/chat/chat.php'); ?>
     </section>
 
