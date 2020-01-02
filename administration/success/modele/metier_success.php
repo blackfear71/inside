@@ -807,8 +807,13 @@
     global $bdd;
 
     // Suppression des succès concernés
-    $reponse = $bdd->exec('DELETE FROM success_users WHERE reference != "greedy"
-                                                       AND reference != "restaurant-finder"');
+    $req1 = $bdd->exec('DELETE FROM success_users WHERE reference != "greedy"
+                                                    AND reference != "restaurant-finder"');
+
+    // Rénumérotation des enregistrements restants
+    $req2 = $bdd->exec('SET @new_id = 0;
+                        UPDATE success_users SET id = (@new_id := @new_id + 1);
+                        ALTER TABLE success_users AUTO_INCREMENT = 1;');
 
     $_SESSION['alerts']['success_purged'] = true;
   }
