@@ -193,6 +193,7 @@
 	width: 50%;
 	cursor: pointer;
 	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
 }
 
 .beginner
@@ -229,6 +230,16 @@
 	color: #262626;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+}
+
+.date_infos_users
+{
+	clear: both;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 80%;
+	text-align: justify;
+	padding-top: 10px;
 }
 
 /*** Gestion des utilisateurs ***/
