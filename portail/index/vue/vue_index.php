@@ -20,9 +20,7 @@
     <!-- Contenu -->
     <section class="section_index">
       <!-- Messages d'alerte -->
-      <?php
-        include('includes/common/alerts.php');
-      ?>
+      <?php include('includes/common/alerts.php'); ?>
 
       <article class="article_index">
         <?php

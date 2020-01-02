@@ -286,10 +286,8 @@
     // Alertes
     if ($options['alerts']->getChecked() == 'Y')
       $vue = str_replace('/*alerts*/', '
-			<!-- Messages d\'alerte -->
-			<?php
-				include(\'../../includes/common/alerts.php\');
-			?>
+      <!-- Messages d\'alerte -->
+      <?php include(\'../../includes/common/alerts.php\'); ?>
 ', $vue);
     else
       $vue = str_replace('/*alerts*/', '', $vue);
