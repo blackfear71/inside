@@ -799,4 +799,17 @@
       $_SESSION['alerts']['success_initialized'] = true;
     }
   }
+
+  // METIER : Purge tous les succès
+  // RETOUR : Aucun
+  function purgeSuccess()
+  {
+    global $bdd;
+
+    // Suppression des succès concernés
+    $reponse = $bdd->exec('DELETE FROM success_users WHERE reference != "greedy"
+                                                       AND reference != "restaurant-finder"');
+
+    $_SESSION['alerts']['success_purged'] = true;
+  }
 ?>

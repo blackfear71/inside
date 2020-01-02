@@ -117,7 +117,21 @@
 
           // Initialisation des succès
           echo '<div class="entete_admin">';
-            echo 'Initialiser les succès';
+            echo 'Gérer les succès des utilisateurs';
+          echo '</div>';
+
+          echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurger" class="form_init_succes">';
+            echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_init eventConfirm" />';
+            echo '<input type="hidden" value="Voulez-vous vraiment purger les succès ? Ceci est définitif." class="eventMessage" />';
+          echo '</form>';
+
+          echo '<div class="explications_init">';
+            echo 'Ce bouton permet d\'effacer tous les succès des utilisateurs dans la base de données sauf les suivants :';
+
+            echo '<ul class="margin_top_0">';
+              echo '<li>greedy</li>';
+              echo '<li>restaurant-finder</li>';
+            echo '</ul>';
           echo '</div>';
 
           echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiser" class="form_init_succes">';

@@ -75,6 +75,10 @@
 			initializeSuccess($listeSuccess, $listeUsers);
 			break;
 
+		case "doPurger":
+			purgeSuccess();
+			break;
+
     default:
       // Contrôle action renseignée URL
       header('location: success.php?action=goConsulter');
@@ -105,6 +109,7 @@
     case "doSupprimer":
     case "doModifier":
 		case "doInitialiser":
+		case "doPurger":
     default:
       break;
   }
@@ -125,6 +130,7 @@
       break;
 
 		case "doInitialiser":
+		case "doPurger":
 			header('location: success.php?action=goConsulter');
 			break;
 
