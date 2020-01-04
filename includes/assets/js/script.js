@@ -377,9 +377,14 @@ function confirmAction(form, message)
       html += 'Inside';
     html += '</div>';
 
-    html += '<div class="texte_alerte">';
-      html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
-      html += message;
+    html += '<div class="zone_alertes">';
+      html += '<div class="zone_alerte">';
+        html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
+
+        html += '<div class="texte_alerte">';
+          html += message;
+        html += '</div>';
+      html += '</div>';
     html += '</div>';
 
     html += '<div class="boutons_alerte">';
@@ -409,7 +414,7 @@ function executeAction(form, action)
 function loadingPage()
 {
   console.log('test');
-  
+
   $('.zone_loading_page').css("padding-top", "40px");
   $('.zone_loading_page').css("padding-bottom", "40px");
   $('#loading_page').css("height", "5px");
