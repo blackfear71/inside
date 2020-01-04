@@ -68,7 +68,7 @@
     $reponse = $bdd->query('SELECT * FROM cooking_box WHERE identifiant = "' . $user . '"
                                                         AND name        = ""
                                                         AND picture     = ""
-                                                        AND (year < ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week <= ' . date("W") . ')) 
+                                                        AND (year < ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week <= ' . date("W") . '))
                                                    ORDER BY year DESC, week DESC');
     while($donnees = $reponse->fetch())
     {
@@ -380,7 +380,7 @@
     if ($control_ok == true)
     {
       // Enregistrement image
-      $new_name = "";
+      $new_name = '';
 
       // On contrôle la présence du dossier, sinon on le créé
       $dossier = '../../includes/images/cookingbox';
@@ -408,80 +408,107 @@
         $mini_dir  = $dossier_miniatures . '/';
 
         // Données du fichier
-        $file      = $files['image']['name'];
-        $tmp_file  = $files['image']['tmp_name'];
-        $size_file = $files['image']['size'];
-        $maxsize   = 15728640; // 15 Mo
+        $file       = $files['image']['name'];
+        $tmp_file   = $files['image']['tmp_name'];
+        $size_file  = $files['image']['size'];
+        $error_file = $files['image']['error'];
+        $maxsize    = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
-        if ($size_file < $maxsize)
+        if ($error_file != 2 AND $size_file < $maxsize)
         {
           // Contrôle fichier temporaire existant
           if (!is_uploaded_file($tmp_file))
-            exit("Le fichier est introuvable");
+          {
+            $_SESSION['alerts']['temp_not_found'] = true;
+            $control_ok                           = false;
+          }
 
           // Contrôle type de fichier
-          $type_file = $files['image']['type'];
-
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-            exit("Le fichier n'est pas une image valide");
-          else
+          if ($control_ok == true)
           {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name   = $year_recipe . '-' . $week_recipe . '-' . rand() . '.' . $type_image;
+            $type_file = $files['image']['type'];
+
+            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+            {
+              $_SESSION['alerts']['wrong_file_type'] = true;
+              $control_ok                            = false;
+            }
+            else
+            {
+              $type_image = pathinfo($file, PATHINFO_EXTENSION);
+              $new_name   = $year_recipe . '-' . $week_recipe . '-' . rand() . '.' . $type_image;
+            }
           }
 
           // Contrôle upload (si tout est bon, l'image est envoyée)
-          if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
-            exit("Impossible de copier le fichier dans $image_dir");
+          if ($control_ok == true)
+          {
+            if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
+            {
+              $_SESSION['alerts']['wrong_file'] = true;
+              $control_ok                       = false;
+            }
+          }
 
-          // Rotation de l'image (si JPEG)
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($image_dir . $new_name, $type_image);
+          if ($control_ok == true)
+          {
+            // Rotation de l'image (si JPEG)
+            if ($type_image == 'jpg' OR $type_image == 'jpeg')
+              $rotate = rotateImage($image_dir . $new_name, $type_image);
 
-          // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
+            // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
+            imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
 
-          // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
+            // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+            imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
+          }
+        }
+        else
+        {
+          $_SESSION['alerts']['file_too_big'] = true;
+          $control_ok                         = false;
         }
       }
 
-      // Mise à jour de l'enregistrement concerné
-      $myRecipe = array('name'        => $name_recipe,
-                        'picture'     => $new_name,
-                        'ingredients' => $ingredients,
-                        'recipe'      => $recipe,
-                        'tips'        => $tips
-                       );
+      if ($control_ok == true)
+      {
+        // Mise à jour de l'enregistrement concerné
+        $myRecipe = array('name'        => $name_recipe,
+                          'picture'     => $new_name,
+                          'ingredients' => $ingredients,
+                          'recipe'      => $recipe,
+                          'tips'        => $tips
+                         );
 
-      $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
-                                                    picture     = :picture,
-                                                    ingredients = :ingredients,
-                                                    recipe      = :recipe,
-                                                    tips        = :tips
-                                              WHERE year        = "' . $year_recipe . '"
-                                                AND week        = "' . $week_recipe . '"
-                                                AND identifiant = "' . $user . '"');
-      $req2->execute($myRecipe);
-      $req2->closeCursor();
+        $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
+                                                      picture     = :picture,
+                                                      ingredients = :ingredients,
+                                                      recipe      = :recipe,
+                                                      tips        = :tips
+                                                WHERE year        = "' . $year_recipe . '"
+                                                  AND week        = "' . $week_recipe . '"
+                                                  AND identifiant = "' . $user . '"');
+        $req2->execute($myRecipe);
+        $req2->closeCursor();
 
-      // Lecture Id recette
-      $req3 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
-      $data3 = $req3->fetch();
-      $new_id = $data3['id'];
-      $req3->closeCursor();
+        // Lecture Id recette
+        $req3 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+        $data3 = $req3->fetch();
+        $new_id = $data3['id'];
+        $req3->closeCursor();
 
-      // Génération notification nouvelle recette
-      insertNotification($user, 'recipe', $new_id);
+        // Génération notification nouvelle recette
+        insertNotification($user, 'recipe', $new_id);
 
-      // Génération succès
-      insertOrUpdateSuccesValue('recipe-master', $user, 1);
+        // Génération succès
+        insertOrUpdateSuccesValue('recipe-master', $user, 1);
 
-      // Ajout expérience
-      insertExperience($user, 'add_recipe');
+        // Ajout expérience
+        insertExperience($user, 'add_recipe');
 
-      $_SESSION['alerts']['recipe_added'] = true;
+        $_SESSION['alerts']['recipe_added'] = true;
+      }
     }
 
     return $new_id;
@@ -546,72 +573,99 @@
         $mini_dir  = $image_dir . '/mini/';
 
         // Données du fichier
-        $file      = $files['image']['name'];
-        $tmp_file  = $files['image']['tmp_name'];
-        $size_file = $files['image']['size'];
-        $maxsize   = 15728640; // 15 Mo
+        $file       = $files['image']['name'];
+        $tmp_file   = $files['image']['tmp_name'];
+        $size_file  = $files['image']['size'];
+        $error_file = $files['image']['error'];
+        $maxsize    = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
-        if ($size_file < $maxsize)
+        if ($error_file != 2 AND $size_file < $maxsize)
         {
           // Contrôle fichier temporaire existant
           if (!is_uploaded_file($tmp_file))
-            exit("Le fichier est introuvable");
+          {
+            $_SESSION['alerts']['temp_not_found'] = true;
+            $control_ok                           = false;
+          }
 
           // Contrôle type de fichier
-          $type_file = $files['image']['type'];
-
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-            exit("Le fichier n'est pas une image valide");
-          else
+          if ($control_ok == true)
           {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name   = $year_recipe . '-' . $week_recipe . '-' . rand() . '.' . $type_image;
+            $type_file = $files['image']['type'];
+
+            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+            {
+              $_SESSION['alerts']['wrong_file_type'] = true;
+              $control_ok                            = false;
+            }
+            else
+            {
+              $type_image = pathinfo($file, PATHINFO_EXTENSION);
+              $new_name   = $year_recipe . '-' . $week_recipe . '-' . rand() . '.' . $type_image;
+            }
           }
 
           // Contrôle upload (si tout est bon, l'image est envoyée)
-          if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
-            exit("Impossible de copier le fichier dans $image_dir");
-
-          // Rotation de l'image (si JPEG)
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($image_dir . $new_name, $type_image);
-
-          // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
-
-          // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
-
-          // Suppression des anciennes images
-          if (!empty($datasRecipe->getPicture()))
+          if ($control_ok == true)
           {
-            unlink($image_dir . $datasRecipe->getPicture());
-            unlink($mini_dir . $datasRecipe->getPicture());
+            if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
+            {
+              $_SESSION['alerts']['wrong_file'] = true;
+              $control_ok                       = false;
+            }
           }
+
+          if ($control_ok == true)
+          {
+            // Rotation de l'image (si JPEG)
+            if ($type_image == 'jpg' OR $type_image == 'jpeg')
+              $rotate = rotateImage($image_dir . $new_name, $type_image);
+
+            // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
+            imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
+
+            // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+            imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
+
+            // Suppression des anciennes images
+            if (!empty($datasRecipe->getPicture()))
+            {
+              unlink($image_dir . $datasRecipe->getPicture());
+              unlink($mini_dir . $datasRecipe->getPicture());
+            }
+          }
+        }
+        else
+        {
+          $_SESSION['alerts']['file_too_big'] = true;
+          $control_ok                         = false;
         }
       }
 
-      // Mise à jour de l'enregistrement concerné
-      $myRecipe = array('name'        => $name_recipe,
-                        'picture'     => $new_name,
-                        'ingredients' => $ingredients,
-                        'recipe'      => $recipe,
-                        'tips'        => $tips
-                       );
+      if ($control_ok == true)
+      {
+        // Mise à jour de l'enregistrement concerné
+        $myRecipe = array('name'        => $name_recipe,
+                          'picture'     => $new_name,
+                          'ingredients' => $ingredients,
+                          'recipe'      => $recipe,
+                          'tips'        => $tips
+                         );
 
-      $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
-                                                    picture     = :picture,
-                                                    ingredients = :ingredients,
-                                                    recipe      = :recipe,
-                                                    tips        = :tips
-                                              WHERE year        = "' . $year_recipe . '"
-                                                AND week        = "' . $week_recipe . '"
-                                                AND identifiant = "' . $user . '"');
-      $req2->execute($myRecipe);
-      $req2->closeCursor();
+        $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
+                                                      picture     = :picture,
+                                                      ingredients = :ingredients,
+                                                      recipe      = :recipe,
+                                                      tips        = :tips
+                                                WHERE year        = "' . $year_recipe . '"
+                                                  AND week        = "' . $week_recipe . '"
+                                                  AND identifiant = "' . $user . '"');
+        $req2->execute($myRecipe);
+        $req2->closeCursor();
 
-      $_SESSION['alerts']['recipe_updated'] = true;
+        $_SESSION['alerts']['recipe_updated'] = true;
+      }
     }
 
     return $idRecipe;

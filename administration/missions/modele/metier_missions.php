@@ -307,10 +307,11 @@
           $dest_dir = $dossier_icones . '/';
 
         // Fichier
-        $name_file = $file['name'];
-        $tmp_file  = $file['tmp_name'];
-        $size_file = $file['size'];
-        $type_file = $file['type'];
+        $name_file  = $file['name'];
+        $tmp_file   = $file['tmp_name'];
+        $size_file  = $file['size'];
+        $type_file  = $file['type'];
+        $error_file = $file['error'];
 
         // Taille max
         $maxsize = 15728640; // 15 Mo
@@ -337,34 +338,39 @@
         }
 
         // Si le fichier n'est pas trop grand
-        if ($size_file < $maxsize)
+        if ($error_file != 2 AND $size_file < $maxsize)
         {
           // Contrôle fichier temporaire existant
           if (!is_uploaded_file($tmp_file))
           {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-            // exit("Le fichier est introuvable");
+            $_SESSION['alerts']['temp_not_found'] = true;
+            $control_ok                           = false;
           }
 
           // Contrôle type de fichier
-          if (!strstr($type_file, 'png'))
+          if ($control_ok == true)
           {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-            // exit("Le fichier n'est pas une image valide");
+            if (!strstr($type_file, 'png'))
+            {
+              $_SESSION['alerts']['wrong_file_type'] = true;
+              $control_ok                            = false;
+            }
           }
 
           // Contrôle upload (si tout est bon, l'image est envoyée)
-          if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
+          if ($control_ok == true)
           {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-            // exit("Impossible de copier le fichier dans $dest_dir");
+            if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
+            {
+              $_SESSION['alerts']['wrong_file'] = true;
+              $control_ok                       = false;
+            }
           }
-
-          /*if ($control_ok == true)
-            echo "Le fichier a bien été uploadé";*/
+        }
+        else
+        {
+          $_SESSION['alerts']['file_too_big'] = true;
+          $control_ok                         = false;
         }
       }
     }
@@ -511,10 +517,11 @@
             $dest_dir = $dossier_icones . '/';
 
           // Fichier
-          $name_file = $file['name'];
-          $tmp_file  = $file['tmp_name'];
-          $size_file = $file['size'];
-          $type_file = $file['type'];
+          $name_file  = $file['name'];
+          $tmp_file   = $file['tmp_name'];
+          $size_file  = $file['size'];
+          $type_file  = $file['type'];
+          $error_file = $file['error'];
 
           // Taille max
           $maxsize = 15728640; // 15 Mo
@@ -544,34 +551,39 @@
           unlink ($dest_dir . $new_name . '.png');
 
           // Insertion nouvelle image
-          if ($size_file < $maxsize)
+          if ($error_file != 2 AND $size_file < $maxsize)
           {
             // Contrôle fichier temporaire existant
             if (!is_uploaded_file($tmp_file))
             {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-              // exit("Le fichier est introuvable");
+              $_SESSION['alerts']['temp_not_found'] = true;
+              $control_ok                           = false;
             }
 
             // Contrôle type de fichier
-            if (!strstr($type_file, 'png'))
+            if ($control_ok == true)
             {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-              // exit("Le fichier n'est pas une image valide");
+              if (!strstr($type_file, 'png'))
+              {
+                $_SESSION['alerts']['wrong_file_type'] = true;
+                $control_ok                            = false;
+              }
             }
 
             // Contrôle upload (si tout est bon, l'image est envoyée)
-            if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
+            if ($control_ok == true)
             {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-              // exit("Impossible de copier le fichier dans $dest_dir");
+              if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
+              {
+                $_SESSION['alerts']['wrong_file'] = true;
+                $control_ok                       = false;
+              }
             }
-
-            /*if ($control_ok == true)
-              echo "Le fichier a bien été uploadé";*/
+          }
+          else
+          {
+            $_SESSION['alerts']['file_too_big'] = true;
+            $control_ok                         = false;
           }
         }
       }

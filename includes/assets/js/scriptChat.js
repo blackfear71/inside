@@ -185,7 +185,7 @@ $(window).on('load', function()
       cookie = getCookie("identifiant");
     }
 
-    //Si le cookie ne correspond pas à l'utilisateur, on détruit tous les cookies
+    // Si le cookie ne correspond pas à l'utilisateur, on détruit tous les cookies
     if (cookie != currentUser)
     {
       deleteCookie("identifiant");

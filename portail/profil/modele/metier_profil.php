@@ -190,6 +190,8 @@
   {
     global $bdd;
 
+    $control_ok = true;
+
     // On contrôle la présence du dossier, sinon on le créé
     $dossier = "../../includes/images/profil";
 
@@ -211,57 +213,79 @@
  			$avatar_dir = $dossier_avatars . '/';
 
  			// Données du fichier
- 			$file      = $files['avatar']['name'];
- 			$tmp_file  = $files['avatar']['tmp_name'];
- 			$size_file = $files['avatar']['size'];
-      $maxsize   = 15728640; // 15 Mo
+ 			$file       = $files['avatar']['name'];
+ 			$tmp_file   = $files['avatar']['tmp_name'];
+ 			$size_file  = $files['avatar']['size'];
+      $error_file = $files['avatar']['error'];
+      $maxsize    = 15728640; // 15 Mo
 
       // Si le fichier n'est pas trop grand
- 			if ($size_file < $maxsize)
+ 			if ($error_file != 2 AND $size_file < $maxsize)
  			{
  				// Contrôle fichier temporaire existant
  				if (!is_uploaded_file($tmp_file))
- 					exit("Le fichier est introuvable");
+        {
+          $_SESSION['alerts']['temp_not_found'] = true;
+          $control_ok                           = false;
+        }
 
  				// Contrôle type de fichier
- 				$type_file = $files['avatar']['type'];
+        if ($control_ok == true)
+        {
+   				$type_file = $files['avatar']['type'];
 
- 				if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
- 					exit("Le fichier n'est pas une image valide");
- 				else
- 				{
- 					$type_image = pathinfo($file, PATHINFO_EXTENSION);
- 					$new_name   = $avatar . '.' . $type_image;
- 				}
+   				if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+          {
+            $_SESSION['alerts']['wrong_file_type'] = true;
+            $control_ok                            = false;
+          }
+   				else
+   				{
+   					$type_image = pathinfo($file, PATHINFO_EXTENSION);
+   					$new_name   = $avatar . '.' . $type_image;
+   				}
+        }
 
  				// Contrôle upload (si tout est bon, l'image est envoyée)
- 				if (!move_uploaded_file($tmp_file, $avatar_dir . $new_name))
- 					exit("Impossible de copier le fichier dans $avatar_dir");
+        if ($control_ok == true)
+        {
+   				if (!move_uploaded_file($tmp_file, $avatar_dir . $new_name))
+          {
+            $_SESSION['alerts']['wrong_file'] = true;
+            $control_ok                       = false;
+          }
+        }
 
- 				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
- 				imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
+        if ($control_ok == true)
+        {
+   				// Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
+   				imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
 
- 				// echo "Le fichier a bien été uploadé";
+   				// On efface l'ancien avatar si présent
+   				$reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
+   				$donnees1 = $reponse1->fetch();
 
- 				// On efface l'ancien avatar si présent
- 				$reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
- 				$donnees1 = $reponse1->fetch();
+   				if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
+   					unlink ($dossier_avatars . "/" . $donnees1['avatar'] . "");
 
- 				if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
- 					unlink ($dossier_avatars . "/" . $donnees1['avatar'] . "");
+   				$reponse1->closeCursor();
 
- 				$reponse1->closeCursor();
+   				// On stocke la référence du nouvel avatar dans la base
+   				$reponse2 = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE identifiant = "' . $user . '"');
+   				$reponse2->execute(array(
+   					'avatar' => $new_name
+   				));
+   				$reponse2->closeCursor();
 
- 				// On stocke la référence du nouvel avatar dans la base
- 				$reponse2 = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE identifiant = "' . $user . '"');
- 				$reponse2->execute(array(
- 					'avatar' => $new_name
- 				));
- 				$reponse2->closeCursor();
-
-        $_SESSION['user']['avatar']           = $new_name;
- 				$_SESSION['alerts']['avatar_updated'] = true;
+          $_SESSION['user']['avatar']           = $new_name;
+   				$_SESSION['alerts']['avatar_updated'] = true;
+        }
  			}
+      else
+      {
+        $_SESSION['alerts']['file_too_big'] = true;
+        $control_ok                         = false;
+      }
  		}
   }
 
