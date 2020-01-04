@@ -44,6 +44,9 @@
     case "goConsulter":
       // Lecture liste des données par le modèle
 			$listeSuccess = getSuccess();
+			$_SESSION['alerts']['test'] = true;
+			$_SESSION['alerts']['test2'] = true;
+			$_SESSION['alerts']['test3'] = true;
       break;
 
     case "goModifier":

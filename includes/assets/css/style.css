@@ -838,27 +838,37 @@ aside
 	border-bottom: solid 2px #c81932;
 }
 
+.zone_alertes
+{
+	width: 460px;
+	min-height: 80px;
+	background-color: #ff1937;
+	padding: 20px 20px 15px 20px;
+	border-top: solid 1px #ff4961;
+}
+
+.zone_alerte
+{
+	display: block;
+	margin-bottom: 5px;
+}
+
 .logo_alerte
 {
 	height: 25px;
-	vertical-align: middle;
 	margin-right: 5px;
 	margin-left: -5px;
-	margin-top: -3px;
 }
 
 .texte_alerte
 {
-	width: 460px;
-	min-height: 80px;
+	margin-left: 30px;
+	margin-top: -26px;
 	line-height: 20px;
-	background-color: #ff1937;
-	padding: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	text-align: justify;
 	color: white;
-	border-top: solid 1px #ff4961;
 }
 
 .boutons_alerte
