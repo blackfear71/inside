@@ -51,7 +51,7 @@
       $file      = $files['avatar']['name'];
       $tmp_file  = $files['avatar']['tmp_name'];
       $size_file = $files['avatar']['size'];
-      $maxsize   = 8388608; // 8Mo
+      $maxsize   = 15728640; // 15 Mo
 
       // Si le fichier n'est pas trop grand
       if ($size_file < $maxsize)

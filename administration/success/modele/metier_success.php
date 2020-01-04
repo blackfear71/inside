@@ -140,7 +140,7 @@
    			$file      = $files['success']['name'];
    			$tmp_file  = $files['success']['tmp_name'];
    			$size_file = $files['success']['size'];
-        $maxsize   = 8388608; // 8Mo
+        $maxsize   = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
    			if ($size_file < $maxsize)

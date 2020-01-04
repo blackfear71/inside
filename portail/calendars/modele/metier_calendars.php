@@ -184,7 +184,7 @@
       $file      = $files['calendar']['name'];
       $tmp_file  = $files['calendar']['tmp_name'];
       $size_file = $files['calendar']['size'];
-      $maxsize   = 8388608; // 8Mo
+      $maxsize   = 15728640; // 15 Mo
 
       // Si le fichier n'est pas trop grand
       if ($size_file < $maxsize)
@@ -275,7 +275,7 @@
       $file      = $files['annexe']['name'];
       $tmp_file  = $files['annexe']['tmp_name'];
       $size_file = $files['annexe']['size'];
-      $maxsize   = 8388608; // 8Mo
+      $maxsize   = 15728640; // 15 Mo
 
       // Si le fichier n'est pas trop grand
       if ($size_file < $maxsize)

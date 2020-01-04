@@ -411,7 +411,7 @@
         $file      = $files['image']['name'];
         $tmp_file  = $files['image']['tmp_name'];
         $size_file = $files['image']['size'];
-        $maxsize   = 8388608; // 8Mo
+        $maxsize   = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
         if ($size_file < $maxsize)
@@ -549,7 +549,7 @@
         $file      = $files['image']['name'];
         $tmp_file  = $files['image']['tmp_name'];
         $size_file = $files['image']['size'];
-        $maxsize   = 8388608; // 8Mo
+        $maxsize   = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
         if ($size_file < $maxsize)

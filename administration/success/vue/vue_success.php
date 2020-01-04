@@ -81,7 +81,7 @@
 
                 // Bouton parcourir
                 echo '<td class="td_saisie_succes_par">';
-                  echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+                  echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
                   echo '<div class="zone_parcourir_succes">';
                     echo '<div class="label_parcourir">Parcourir</div>';
                     echo '<input type="file" accept=".png" name="success" class="bouton_parcourir_succes" required />';

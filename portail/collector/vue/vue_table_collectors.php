@@ -230,7 +230,7 @@
 
                 // Image
                 echo '<div>';
-                  echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+                  echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
                   echo '<span class="zone_parcourir_update" id="zone_parcourir_' . $collector->getId() . '">';
                     echo '<input id="fichier_' . $collector->getId() . '" type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_update loadModifierCollector" />';

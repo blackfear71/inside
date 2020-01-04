@@ -233,7 +233,7 @@
         $file      = $files['image_restaurant']['name'];
         $tmp_file  = $files['image_restaurant']['tmp_name'];
         $size_file = $files['image_restaurant']['size'];
-        $maxsize   = 8388608; // 8Mo
+        $maxsize   = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
         if ($size_file < $maxsize)
@@ -504,7 +504,7 @@
         $file      = $files['update_image_restaurant_' . $id_restaurant]['name'];
         $tmp_file  = $files['update_image_restaurant_' . $id_restaurant]['tmp_name'];
         $size_file = $files['update_image_restaurant_' . $id_restaurant]['size'];
-        $maxsize   = 8388608; // 8Mo
+        $maxsize   = 15728640; // 15 Mo
 
         // Si le fichier n'est pas trop grand
         if ($size_file < $maxsize)

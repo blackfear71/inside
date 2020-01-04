@@ -313,7 +313,7 @@
         $type_file = $file['type'];
 
         // Taille max
-        $maxsize = 8388608; // 8Mo
+        $maxsize = 15728640; // 15 Mo
 
         // Nouveau nom
         switch ($key_file)
@@ -517,7 +517,7 @@
           $type_file = $file['type'];
 
           // Taille max
-          $maxsize = 8388608; // 8Mo
+          $maxsize = 15728640; // 15 Mo
 
           // Nouveau nom
           switch ($key_file)

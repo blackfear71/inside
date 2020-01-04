@@ -7,7 +7,7 @@
       echo '<input type="hidden" name="id_mission" value="' . $detailsMission->getId() . '" />';
   }
 
-    echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+    echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
     echo '<table class="table_mission">';
       // Image & titre
@@ -23,7 +23,7 @@
           if ($_GET['action'] == "goAjouter")
           {
             echo '<div class="zone_image_mission">';
-              echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+              echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
               echo '<div class="zone_parcourir_missions">';
                 echo '<div class="label_parcourir">Bannière (1920 x 800 px)</div>';
@@ -36,7 +36,7 @@
           else
           {
             echo '<div class="zone_image_mission">';
-              echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+              echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
               echo '<div class="zone_parcourir_missions">';
                 echo '<div class="label_parcourir">Bannière (1920 x 800 px)</div>';
