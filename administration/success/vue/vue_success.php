@@ -115,7 +115,33 @@
             echo '</table>';
           echo '</form>';
 
-          // Initialisation des succès
+          // Indications ajout succès
+          echo '<div class="titre_explications">Lors de l\'ajout d\'un succès</div>';
+
+          echo '<div class="contenu_explications">';
+            echo 'Ne pas oublier d\'ajouter le code de la fonction <strong>initializeSuccess()</strong> dans <strong>metier_administration.php</strong> ainsi que la fonction
+            <strong>insertOrUpdateSuccesValue()</strong> dans <strong>fonctions_communes.php</strong>.';
+          echo '</div>';
+
+          echo '<div class="contenu_explications">';
+            echo 'Si c\'est un succès relatif à une mission, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>fonctions_communes.php</strong>
+            et la fonction <strong>isMissionEnded()</strong> dans <strong>metier_profil.php</strong>. Une fois le code ajouté, modifier le succès pour changer son état à "<strong>Défini</strong>".';
+          echo '</div>';
+
+          // Indications suppression succès
+          echo '<div class="titre_explications">Lors de la suppression d\'un succès</div>';
+
+          echo '<div class="contenu_explications">';
+            echo 'Ne pas oublier de supprimer le code de la fonction <strong>initializeSuccess()</strong> dans <strong>metier_administration.php</strong> et
+            <strong>insertOrUpdateSuccesValue()</strong> dans <strong>fonction_communes.php</strong>.';
+          echo '</div>';
+
+          echo '<div class="contenu_explications">';
+            echo 'Si c\'est un succès relatif à une mission, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>fonctions_communes.php</strong>
+            et la fonction <strong>isMissionEnded()</strong> dans <strong>metier_profil.php</strong>.';
+          echo '</div>';
+          
+          // Gestion des succès
           echo '<div class="entete_admin">';
             echo 'Gérer les succès des utilisateurs';
           echo '</div>';
