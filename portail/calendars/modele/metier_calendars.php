@@ -172,87 +172,45 @@
     if (!is_dir($dossier_miniatures))
       mkdir($dossier_miniatures);
 
+    // Dossiers de destination
+    $calendars_dir = $dossier_calendriers . '/';
+    $minis_dir     = $dossier_miniatures . '/';
+
     // On définit le nom du fichier
     $namefile = $post['months'] . "-" . $post['years'] . "-" . rand();
 
-    // Si on a bien une image
-    if ($files['calendar']['name'] != NULL)
+    // Contrôles fichier
+    $controlsFile = controlsUploadFile($files['calendar'], $namefile, 'all');
+
+    // Traitements fichier
+    if ($controlsFile['control_ok'] == true)
     {
-      // Dossiers de destination
-      $calendars_dir = $dossier_calendriers . '/';
-      $minis_dir     = $dossier_miniatures . '/';
+      // Upload fichier
+      $control_ok = uploadFile($files['calendar'], $controlsFile, $calendars_dir);
 
-      // Données du fichier
-      $file       = $files['calendar']['name'];
-      $tmp_file   = $files['calendar']['tmp_name'];
-      $size_file  = $files['calendar']['size'];
-      $error_file = $files['calendar']['error'];
-      $maxsize    = 15728640; // 15 Mo
-
-      // Si le fichier n'est pas trop grand
-      if ($error_file != 2 AND $size_file < $maxsize)
+      if ($control_ok == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-        {
-          $_SESSION['alerts']['temp_not_found'] = true;
-          $control_ok                           = false;
-        }
+        $new_name = $controlsFile['new_name'];
 
-        // Contrôle type de fichier
-        if ($control_ok == true)
-        {
-          $type_file = $files['calendar']['type'];
+        // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
+        imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
 
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          {
-            $_SESSION['alerts']['wrong_file_type'] = true;
-            $control_ok                            = false;
-          }
-          else
-          {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name   = $namefile . '.' . $type_image;
-          }
-        }
+        // On stocke la référence du nouveau calendrier dans la base
+        $reponse = $bdd->prepare('INSERT INTO calendars(to_delete, month, year, calendar) VALUES(:to_delete, :month, :year, :calendar)');
+        $reponse->execute(array(
+          'to_delete' => $to_delete,
+          'month'     => $month,
+          'year'      => $year,
+          'calendar'  => $new_name
+        ));
+        $reponse->closeCursor();
 
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if ($control_ok == true)
-        {
-          if (!move_uploaded_file($tmp_file, $calendars_dir . $new_name))
-          {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-          }
-        }
+        // Génération notification calendrier ajouté
+        $new_id = $bdd->lastInsertId();
 
-        if ($control_ok == true)
-        {
-          // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
+        insertNotification($user, 'calendrier', $new_id);
 
-          // On stocke la référence du nouveau calendrier dans la base
-          $reponse = $bdd->prepare('INSERT INTO calendars(to_delete, month, year, calendar) VALUES(:to_delete, :month, :year, :calendar)');
-  				$reponse->execute(array(
-            'to_delete' => $to_delete,
-  					'month'     => $month,
-            'year'      => $year,
-            'calendar'  => $new_name
-  					));
-  				$reponse->closeCursor();
-
-          // Génération notification calendrier ajouté
-          $new_id = $bdd->lastInsertId();
-
-          insertNotification($user, 'calendrier', $new_id);
-
-          $_SESSION['alerts']['calendar_added'] = true;
-        }
-      }
-      else
-      {
-        $_SESSION['alerts']['file_too_big'] = true;
-        $control_ok                         = false;
+        $_SESSION['alerts']['calendar_added'] = true;
       }
     }
   }
@@ -287,86 +245,44 @@
     if (!is_dir($dossier_miniatures))
       mkdir($dossier_miniatures);
 
+    // Dossiers de destination
+    $annexes_dir = $dossier_annexes . '/';
+    $minis_dir   = $dossier_miniatures . '/';
+
     // On définit le nom du fichier
     $namefile = rand();
 
-    // Si on a bien une image
-    if ($files['annexe']['name'] != NULL)
+    // Contrôles fichier
+    $controlsFile = controlsUploadFile($files['annexe'], $namefile, 'all');
+
+    // Traitements fichier
+    if ($controlsFile['control_ok'] == true)
     {
-      // Dossiers de destination
-      $annexes_dir = $dossier_annexes . '/';
-      $minis_dir   = $dossier_miniatures . '/';
+      // Upload fichier
+      $control_ok = uploadFile($files['annexe'], $controlsFile, $annexes_dir);
 
-      // Données du fichier
-      $file       = $files['annexe']['name'];
-      $tmp_file   = $files['annexe']['tmp_name'];
-      $size_file  = $files['annexe']['size'];
-      $error_file = $files['annexe']['error'];
-      $maxsize    = 15728640; // 15 Mo
-
-      // Si le fichier n'est pas trop grand
-      if ($error_file != 2 AND $size_file < $maxsize)
+      if ($control_ok == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-        {
-          $_SESSION['alerts']['temp_not_found'] = true;
-          $control_ok                           = false;
-        }
+        $new_name = $controlsFile['new_name'];
 
-        // Contrôle type de fichier
-        if ($control_ok == true)
-        {
-          $type_file = $files['annexe']['type'];
+        // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
+        imagethumb($annexes_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
 
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          {
-            $_SESSION['alerts']['wrong_file_type'] = true;
-            $control_ok                            = false;
-          }
-          else
-          {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name   = $namefile . '.' . $type_image;
-          }
-        }
+        // On stocke la référence du nouveau fichier dans la base
+        $reponse = $bdd->prepare('INSERT INTO calendars_annexes(to_delete, annexe, title) VALUES(:to_delete, :annexe, :title)');
+        $reponse->execute(array(
+          'to_delete' => $to_delete,
+          'annexe'    => $new_name,
+          'title'     => $title
+        ));
+        $reponse->closeCursor();
 
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if ($control_ok == true)
-        {
-          if (!move_uploaded_file($tmp_file, $annexes_dir . $new_name))
-          {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-          }
-        }
+        // Génération notification calendrier ajouté
+        $new_id = $bdd->lastInsertId();
 
-        if ($control_ok == true)
-        {
-          // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($annexes_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
+        insertNotification($user, 'annexe', $new_id);
 
-          // On stocke la référence du nouveau fichier dans la base
-          $reponse = $bdd->prepare('INSERT INTO calendars_annexes(to_delete, annexe, title) VALUES(:to_delete, :annexe, :title)');
-  				$reponse->execute(array(
-            'to_delete' => $to_delete,
-  					'annexe'    => $new_name,
-            'title'     => $title
-  					));
-  				$reponse->closeCursor();
-
-          // Génération notification calendrier ajouté
-          $new_id = $bdd->lastInsertId();
-
-          insertNotification($user, 'annexe', $new_id);
-
-          $_SESSION['alerts']['annexe_added'] = true;
-        }
-      }
-      else
-      {
-        $_SESSION['alerts']['file_too_big'] = true;
-        $control_ok                         = false;
+        $_SESSION['alerts']['annexe_added'] = true;
       }
     }
   }

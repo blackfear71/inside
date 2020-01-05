@@ -1063,4 +1063,123 @@
 
     return $pseudo;
   }
+
+  // Contrôle une image avant de la télécharger
+  // RETOUR : Booléen
+  function controlsUploadFile($file, $name, $types)
+  {
+    var_dump($file);
+    var_dump($name);
+
+    $control_ok = true;
+
+    $output = array('control_ok' => false,
+                    'new_name'   => '',
+                    'tmp_file'   => '',
+                    'type_file'  => ''
+                   );
+
+    // Si on a bien une image
+    if ($file['name'] != NULL)
+    {
+      // Données du fichier
+      $name_file  = $file['name'];
+      $type_file  = $file['type'];
+      $tmp_file   = $file['tmp_name'];
+      $error_file = $file['error'];
+      $size_file  = $file['size'];
+
+      // Limite taille maximale fichier (15 Mo)
+      $maxsize = 15728640;
+
+      // Contrôle taille fichier
+      if ($error_file == 2 OR $size_file > $maxsize)
+      {
+        $_SESSION['alerts']['file_too_big'] = true;
+        $control_ok                         = false;
+      }
+
+      // Contrôle fichier temporaire existant
+      if ($control_ok == true)
+      {
+        if (!is_uploaded_file($tmp_file))
+        {
+          $_SESSION['alerts']['temp_not_found'] = true;
+          $control_ok                           = false;
+        }
+      }
+
+      // Contrôle type de fichier
+      if ($control_ok == true)
+      {
+        switch ($types)
+        {
+          case 'jpg':
+          case 'jpeg':
+            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg'))
+            {
+              $_SESSION['alerts']['wrong_file_type'] = true;
+              $control_ok                            = false;
+            }
+            break;
+
+          case 'png':
+            if (!strstr($type_file, 'png'))
+            {
+              $_SESSION['alerts']['wrong_file_type'] = true;
+              $control_ok                            = false;
+            }
+            break;
+
+          case 'all':
+          default:
+            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+            {
+              $_SESSION['alerts']['wrong_file_type'] = true;
+              $control_ok                            = false;
+            }
+            break;
+        }
+      }
+
+      // Récupération infos
+      if ($control_ok == true)
+      {
+        $type_image = pathinfo($name_file, PATHINFO_EXTENSION);
+        $new_name   = $name . '.' . $type_image;
+
+        $output = array('control_ok' => true,
+                        'new_name'   => $new_name,
+                        'tmp_file'   => $tmp_file,
+                        'type_file'  => $type_image
+                       );
+      }
+    }
+
+    var_dump($output);
+
+    return $output;
+  }
+
+  // Télécharge une image sur le serveur
+  // RETOUR : Booléen
+  function uploadFile($file, $controls, $folder)
+  {
+    var_dump($file);
+    var_dump($controls);
+    var_dump($folder);
+
+    $control_ok = true;
+
+    $tmp_file = $controls['tmp_file'];
+    $name     = $controls['new_name'];
+
+    if (!move_uploaded_file($tmp_file, $folder . $name))
+    {
+      $_SESSION['alerts']['wrong_file'] = true;
+      $control_ok                       = false;
+    }
+
+    return $control_ok;
+  }
 ?>

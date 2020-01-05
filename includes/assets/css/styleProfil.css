@@ -293,7 +293,7 @@
 	height: 120px;
 	border-radius: 50%;
 	overflow: hidden;
-	margin-top: -147px;
+	margin-top: -146px;
 	margin-bottom: 20px;
 	line-height: 120px;
 }
@@ -304,6 +304,7 @@
 	max-height: 120px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: -5px;
 	vertical-align: middle;
 }
 

@@ -130,100 +130,57 @@
       if (!is_dir($dossier_succes))
          mkdir($dossier_succes);
 
-      // Insertion image
-      // Si on a bien une image
-   		if ($files['success']['name'] != NULL)
-   		{
-   			// Dossier de destination
-   			$success_dir = $dossier_succes . '/';
+      // Dossier de destination
+      $success_dir = $dossier_succes . '/';
 
-   			// Données du fichier
-   			$file       = $files['success']['name'];
-   			$tmp_file   = $files['success']['tmp_name'];
-   			$size_file  = $files['success']['size'];
-        $error_file = $files['success']['error'];
-        $maxsize    = 15728640; // 15 Mo
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['success'], $reference, 'png');
 
-        // Si le fichier n'est pas trop grand
-   			if ($error_file != 2 AND $size_file < $maxsize)
-   			{
-   				// Contrôle fichier temporaire existant
-   				if (!is_uploaded_file($tmp_file))
-          {
-            $_SESSION['alerts']['temp_not_found'] = true;
-            $control_ok                           = false;
-          }
+      // Traitements fichier
+      if ($controlsFile['control_ok'] == true)
+      {
+        // Upload fichier
+        $control_ok = uploadFile($files['success'], $controlsFile, $success_dir);
 
-   				// Contrôle type de fichier
-          if ($control_ok == true)
-          {
-     				$type_file = $files['success']['type'];
-
-     				if (!strstr($type_file, 'png'))
-            {
-              $_SESSION['alerts']['wrong_file_type'] = true;
-              $control_ok                            = false;
-            }
-     				else
-     				{
-     					$type_image = pathinfo($file, PATHINFO_EXTENSION);
-     					$new_name   = $reference . '.' . $type_image;
-     				}
-          }
-
-   				// Contrôle upload (si tout est bon, l'image est envoyée)
-          if ($control_ok == true)
-          {
-     				if (!move_uploaded_file($tmp_file, $success_dir . $new_name))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-            }
-          }
-
-          if ($control_ok == true)
-          {
-            // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-     				imagethumb($success_dir . $new_name, $success_dir . $new_name, 500, FALSE, TRUE);
-
-     				// On stocke le nouveau succès dans la base
-            $reponse = $bdd->prepare('INSERT INTO success(reference,
-                                                          level,
-                                                          order_success,
-                                                          defined,
-                                                          title,
-                                                          description,
-                                                          limit_success,
-                                                          explanation)
-                                                   VALUES(:reference,
-                                                          :level,
-                                                          :order_success,
-                                                          :defined,
-                                                          :title,
-                                                          :description,
-                                                          :limit_success,
-                                                          :explanation)');
-    				$reponse->execute(array(
-    					'reference'     => $reference,
-              'level'         => $level,
-              'order_success' => $order_success,
-              'defined'       => $defined,
-              'title'         => $title,
-              'description'   => $description,
-    					'limit_success' => $limit_success,
-              'explanation'   => $explanation
-    					));
-    				$reponse->closeCursor();
-
-     				$_SESSION['alerts']['success_added'] = true;
-          }
-   			}
-        else
+        if ($control_ok == true)
         {
-          $_SESSION['alerts']['file_too_big'] = true;
-          $control_ok                         = false;
+          $new_name = $controlsFile['new_name'];
+
+          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+          imagethumb($success_dir . $new_name, $success_dir . $new_name, 500, FALSE, TRUE);
+
+          // On stocke le nouveau succès dans la base
+          $reponse = $bdd->prepare('INSERT INTO success(reference,
+                                                        level,
+                                                        order_success,
+                                                        defined,
+                                                        title,
+                                                        description,
+                                                        limit_success,
+                                                        explanation)
+                                                VALUES(:reference,
+                                                       :level,
+                                                       :order_success,
+                                                       :defined,
+                                                       :title,
+                                                       :description,
+                                                       :limit_success,
+                                                       :explanation)');
+          $reponse->execute(array(
+            'reference'     => $reference,
+            'level'         => $level,
+            'order_success' => $order_success,
+            'defined'       => $defined,
+            'title'         => $title,
+            'description'   => $description,
+            'limit_success' => $limit_success,
+            'explanation'   => $explanation
+          ));
+          $reponse->closeCursor();
+
+          $_SESSION['alerts']['success_added'] = true;
         }
-   		}
+      }
     }
   }
 

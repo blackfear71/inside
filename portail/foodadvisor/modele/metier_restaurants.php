@@ -223,70 +223,30 @@
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // Si on a bien une image
-      if ($files['image_restaurant']['name'] != NULL)
+      // Dossier de destination et nom du fichier
+      $restaurant_dir = $dossier . '/';
+      $name           = rand();
+
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['image_restaurant'], $name, 'all');
+
+      // Traitements fichier
+      if ($controlsFile['control_ok'] == true)
       {
-        // Dossier de destination
-        $restaurant_dir = $dossier . '/';
+        // Upload fichier
+        $control_ok = uploadFile($files['image_restaurant'], $controlsFile, $restaurant_dir);
 
-        // Données du fichier
-        $file       = $files['image_restaurant']['name'];
-        $tmp_file   = $files['image_restaurant']['tmp_name'];
-        $size_file  = $files['image_restaurant']['size'];
-        $error_file = $files['image_restaurant']['error'];
-        $maxsize    = 15728640; // 15 Mo
-
-        // Si le fichier n'est pas trop grand
-        if ($error_file != 2 AND $size_file < $maxsize)
+        if ($control_ok == true)
         {
-          // Contrôle fichier temporaire existant
-          if (!is_uploaded_file($tmp_file))
-          {
-            $_SESSION['alerts']['temp_not_found'] = true;
-            $control_ok                           = false;
-          }
+          $new_name   = $controlsFile['new_name'];
+          $type_image = $controlsFile['type_file'];
 
-          // Contrôle type de fichier
-          if ($control_ok == true)
-          {
-            $type_file = $files['image_restaurant']['type'];
+          // Rotation de l'image (si JPEG)
+          if ($type_image == 'jpg' OR $type_image == 'jpeg')
+            $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
 
-            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-            {
-              $_SESSION['alerts']['wrong_file_type'] = true;
-              $control_ok                            = false;
-            }
-            else
-            {
-              $type_image = pathinfo($file, PATHINFO_EXTENSION);
-              $new_name   = rand() . '.' . $type_image;
-            }
-          }
-
-          // Contrôle upload (si tout est bon, l'image est envoyée)
-          if ($control_ok == true)
-          {
-            if (!move_uploaded_file($tmp_file, $restaurant_dir . $new_name))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-            }
-          }
-
-          if ($control_ok == true)
-          {
-            // Rotation de l'image (si JPEG)
-            if ($type_image == 'jpg' OR $type_image == 'jpeg')
-              $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
-
-            // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-            imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
-          }
-        }
-        else
-        {
-          $_SESSION['alerts']['file_too_big'] = true;
-          $control_ok                         = false;
+          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+          imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
         }
       }
     }
@@ -501,7 +461,7 @@
     // Enregistrement et contrôles image
     if ($control_ok == true)
     {
-      $new_name = "";
+      $new_name = '';
 
       // On contrôle la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/foodadvisor";
@@ -509,12 +469,16 @@
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // Si on a bien une image
-      if ($files['update_image_restaurant_' . $id_restaurant]['name'] != NULL)
-      {
-        // Dossier de destination
-        $restaurant_dir = $dossier . '/';
+      // Dossier de destination et nom du fichier
+      $restaurant_dir = $dossier . '/';
+      $name           = rand();
 
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['update_image_restaurant_' . $id_restaurant], $name, 'all');
+
+      // Traitements fichier
+      if ($controlsFile['control_ok'] == true)
+      {
         // Suppression ancienne image
         $req1 = $bdd->query('SELECT id, picture FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
         $data1 = $req1->fetch();
@@ -524,64 +488,20 @@
 
         $req1->closeCursor();
 
-        // Données du fichier
-        $file       = $files['update_image_restaurant_' . $id_restaurant]['name'];
-        $tmp_file   = $files['update_image_restaurant_' . $id_restaurant]['tmp_name'];
-        $size_file  = $files['update_image_restaurant_' . $id_restaurant]['size'];
-        $error_file = $files['update_image_restaurant_' . $id_restaurant]['error'];
-        $maxsize    = 15728640; // 15 Mo
+        // Upload fichier
+        $control_ok = uploadFile($files['update_image_restaurant_' . $id_restaurant], $controlsFile, $restaurant_dir);
 
-        // Si le fichier n'est pas trop grand
-        if ($error_file != 2 AND $size_file < $maxsize)
+        if ($control_ok == true)
         {
-          // Contrôle fichier temporaire existant
-          if (!is_uploaded_file($tmp_file))
-          {
-            $_SESSION['alerts']['temp_not_found'] = true;
-            $control_ok                           = false;
-          }
+          $new_name   = $controlsFile['new_name'];
+          $type_image = $controlsFile['type_file'];
 
-          // Contrôle type de fichier
-          if ($control_ok == true)
-          {
-            $type_file = $files['update_image_restaurant_' . $id_restaurant]['type'];
+          // Rotation de l'image
+          if ($type_image == 'jpg' OR $type_image == 'jpeg')
+            $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
 
-            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-            {
-              $_SESSION['alerts']['wrong_file_type'] = true;
-              $control_ok                            = false;
-            }
-            else
-            {
-              $type_image = pathinfo($file, PATHINFO_EXTENSION);
-              $new_name   = rand() . '.' . $type_image;
-            }
-          }
-
-          // Contrôle upload (si tout est bon, l'image est envoyée)
-          if ($control_ok == true)
-          {
-            if (!move_uploaded_file($tmp_file, $restaurant_dir . $new_name))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-            }
-          }
-
-          if ($control_ok == true)
-          {
-            // Rotation de l'image
-            if ($type_image == 'jpg' OR $type_image == 'jpeg')
-              $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
-
-            // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-            imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
-          }
-        }
-        else
-        {
-          $_SESSION['alerts']['file_too_big'] = true;
-          $control_ok                         = false;
+          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
+          imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
         }
       }
       else

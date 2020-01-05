@@ -60,73 +60,55 @@
     // On insère l'image si présente
     if ($files['image']['name'] != NULL)
     {
-      $name = rand();
-
       // On contrôle la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/reports";
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // Dossier de destination
+
+
+
+
+
+
+
+
+      // Dossier de destination et nom du fichier
       $image_dir = $dossier . '/';
+      $name      = rand();
 
-      // Données du fichier
-      $file       = $files['image']['name'];
-      $tmp_file   = $files['image']['tmp_name'];
-      $size_file  = $files['image']['size'];
-      $error_file = $files['image']['error'];
-      $maxsize    = 15728640; // 15 Mo
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['image'], $name, 'all');
 
-      // Si le fichier n'est pas trop grand
-      if ($error_file != 2 AND $size_file < $maxsize)
+      // Récupération contrôles
+      $control_ok = $controlsFile['control_ok'];
+      
+      if ($controlsFile['control_ok'] == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-        {
-          $_SESSION['alerts']['temp_not_found'] = true;
-          $control_ok                           = false;
-        }
-
-        // Contrôle type de fichier
-        if ($control_ok == true)
-        {
-          $type_file = $files['image']['type'];
-
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          {
-            $_SESSION['alerts']['wrong_file_type'] = true;
-            $control_ok                            = false;
-          }
-          else
-          {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $picture    = $name . '.' . $type_image;
-          }
-        }
-
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if ($control_ok == true)
-        {
-          if (!move_uploaded_file($tmp_file, $image_dir . $picture))
-          {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-          }
-        }
+        // Upload fichier
+        $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
 
         // Rotation de l'image
         if ($control_ok == true)
         {
+          $picture    = $controlsFile['new_name'];
+          $type_image = $controlsFile['type_file'];
+
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
             $rotate = rotateImage($image_dir . $picture, $type_image);
         }
       }
-      else
-      {
-        $_SESSION['alerts']['file_too_big'] = true;
-        $control_ok                         = false;
-      }
+
+
+
+
+
+
+
+
+
+
     }
 
     if ($control_ok == true)
@@ -172,7 +154,7 @@
 
       $_SESSION['alerts']['bug_submitted'] = true;
     }
-  
+
     return $new_id;
   }
 ?>
