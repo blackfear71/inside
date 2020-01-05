@@ -732,7 +732,7 @@
       $req9 = $bdd->exec('DELETE FROM cooking_box WHERE (year > ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week > ' . date("W") . ')) AND identifiant = "' . $id_user . '"');
 
       // Suppression avatar
-      unlink ('../../includes/images/profil/avatars/' . $avatar);
+      unlink('../../includes/images/profil/avatars/' . $avatar);
 
       // Suppression des préférences
       $req10 = $bdd->exec('DELETE FROM preferences WHERE identifiant = "' . $id_user . '"');

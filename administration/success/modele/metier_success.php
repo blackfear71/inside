@@ -199,7 +199,7 @@
     if (isset($data1['reference']) AND !empty($data1['reference']))
     {
       $reference = $data1['reference'];
-      unlink ("../../includes/images/profil/success/" . $data1['reference'] . ".png");
+      unlink("../../includes/images/profil/success/" . $data1['reference'] . ".png");
     }
 
     $req1->closeCursor();

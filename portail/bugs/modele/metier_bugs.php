@@ -66,14 +66,6 @@
       if (!is_dir($dossier))
         mkdir($dossier);
 
-
-
-
-
-
-
-
-
       // Dossier de destination et nom du fichier
       $image_dir = $dossier . '/';
       $name      = rand();
@@ -83,7 +75,7 @@
 
       // Récupération contrôles
       $control_ok = $controlsFile['control_ok'];
-      
+
       if ($controlsFile['control_ok'] == true)
       {
         // Upload fichier
@@ -99,16 +91,6 @@
             $rotate = rotateImage($image_dir . $picture, $type_image);
         }
       }
-
-
-
-
-
-
-
-
-
-
     }
 
     if ($control_ok == true)

@@ -437,7 +437,7 @@
     $type_collector = $data1['type_collector'];
 
     if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-      unlink ("../../includes/images/collector/" . $data1['collector']);
+      unlink("../../includes/images/collector/" . $data1['collector']);
 
     $req1->closeCursor();
 
@@ -494,7 +494,7 @@
         if ($files['image']['name'] != NULL)
         {
           if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-            unlink ("../../includes/images/collector/" . $collector);
+            unlink("../../includes/images/collector/" . $collector);
 
           $collector = uploadImage($files, rand());
 

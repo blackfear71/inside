@@ -484,7 +484,7 @@
         $data1 = $req1->fetch();
 
         if (isset($data1['picture']) AND !empty($data1['picture']))
-          unlink ("../../includes/images/foodadvisor/" . $data1['picture']);
+          unlink("../../includes/images/foodadvisor/" . $data1['picture']);
 
         $req1->closeCursor();
 
@@ -568,7 +568,7 @@
     $data1 = $req1->fetch();
 
     if (isset($data1['picture']) AND !empty($data1['picture']))
-      unlink ("../../includes/images/foodadvisor/" . $data1['picture']);
+      unlink("../../includes/images/foodadvisor/" . $data1['picture']);
 
     $req1->closeCursor();
 

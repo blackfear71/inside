@@ -41,15 +41,6 @@
     if (!is_dir($dossier_avatars))
       mkdir($dossier_avatars);
 
-
-
-
-
-
-
-
-
-
     // Dossier de destination et nom du fichier
     $avatar_dir = $dossier_avatars . '/';
     $avatar     = rand();
@@ -75,7 +66,7 @@
         $donnees1 = $reponse1->fetch();
 
         if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink ($avatar_dir . $donnees1['avatar'] . "");
+          unlink($avatar_dir . $donnees1['avatar'] . "");
 
         $reponse1->closeCursor();
 
@@ -90,15 +81,6 @@
         $_SESSION['alerts']['avatar_updated'] = true;
       }
     }
-
-
-
-
-
-
-
-
-
   }
 
   // METIER : Suppression de l'avatar (base + fichier)
@@ -112,7 +94,7 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink ("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
+      unlink("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
 
     $reponse1->closeCursor();
 

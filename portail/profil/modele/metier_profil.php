@@ -229,7 +229,7 @@
         $donnees1 = $reponse1->fetch();
 
         if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink ($dossier_avatars . "/" . $donnees1['avatar'] . "");
+          unlink($dossier_avatars . "/" . $donnees1['avatar'] . "");
 
         $reponse1->closeCursor();
 
@@ -257,7 +257,7 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink ("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
+      unlink("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
 
     $reponse1->closeCursor();
 

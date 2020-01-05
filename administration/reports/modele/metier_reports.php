@@ -118,7 +118,7 @@
     $resolved = $data1['resolved'];
 
     if (isset($data1['picture']) AND !empty($data1['picture']))
-      unlink ("../../includes/images/reports/" . $data1['picture']);
+      unlink("../../includes/images/reports/" . $data1['picture']);
 
     $req1->closeCursor();
 

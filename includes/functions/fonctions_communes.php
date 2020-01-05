@@ -1068,9 +1068,6 @@
   // RETOUR : Booléen
   function controlsUploadFile($file, $name, $types)
   {
-    var_dump($file);
-    var_dump($name);
-
     $control_ok = true;
 
     $output = array('control_ok' => false,
@@ -1156,8 +1153,6 @@
       }
     }
 
-    var_dump($output);
-
     return $output;
   }
 
@@ -1165,10 +1160,6 @@
   // RETOUR : Booléen
   function uploadFile($file, $controls, $folder)
   {
-    var_dump($file);
-    var_dump($controls);
-    var_dump($folder);
-
     $control_ok = true;
 
     $tmp_file = $controls['tmp_file'];
