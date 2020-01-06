@@ -11,6 +11,9 @@ $(function()
     var id_boutons  = 'boutons_current_week';
     var week_number = parseInt($(this).attr('id').replace('choix_semaine_courante_', ''));
 
+    if (week_number < 10)
+      week_number = '0' + week_number;
+
     afficherMasquerNoDelay(id_boutons);
     afficherListboxUtilisateurs('zone_current_week', week_number);
   });
@@ -20,6 +23,9 @@ $(function()
   {
     var id_boutons  = 'boutons_next_week';
     var week_number = parseInt($(this).attr('id').replace('choix_semaine_suivante_', ''));
+
+    if (week_number < 10)
+      week_number = '0' + week_number;
 
     afficherMasquerNoDelay(id_boutons);
     afficherListboxUtilisateurs('zone_next_week', week_number);

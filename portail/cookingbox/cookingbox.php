@@ -52,7 +52,7 @@
       {
         // Gâteaux semaines n et n + 1
         $currentWeek    = getWeek(date('W'));
-        $nextWeek       = getWeek(date('W') + 1);
+        $nextWeek       = getWeek(date('W', strtotime('+ 1 week')));
         $listeUsers     = getUsers();
 
         // Saisie
@@ -70,11 +70,11 @@
       break;
 
     case "doValider":
-      validateCake("Y", $_POST['week_cake'], $_GET['year'], $_SESSION['user']['identifiant']);
+      validateCake("Y", $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
       break;
 
     case "doAnnuler":
-      validateCake("N", $_POST['week_cake'], $_GET['year'], $_SESSION['user']['identifiant']);
+      validateCake("N", $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
       break;
 
     case "doAjouterRecette":
