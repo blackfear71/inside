@@ -7,7 +7,7 @@
   // METIER : Récupère les données d'une semaine (N ou N+1)
   // RETOUR : Données semaine
   function getWeek($week)
-  {    
+  {
     $myWeek = new WeekCake();
 
     global $bdd;
@@ -222,7 +222,7 @@
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box ORDER BY year ASC');
+      $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE name != "" AND picture != "" ORDER BY year DESC');
       while($donnees = $reponse->fetch())
       {
         if ($year == $donnees['year'])
@@ -242,7 +242,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE (name != "" AND picture != "") OR year = ' . date("Y") . ' ORDER BY year DESC');
+    $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE name != "" AND picture != "" ORDER BY year DESC');
     while($donnees = $reponse->fetch())
     {
       // On ajoute la ligne au tableau
