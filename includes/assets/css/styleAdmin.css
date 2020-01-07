@@ -382,7 +382,7 @@
 	height: 10px;
 	width: 10px;
 	position: absolute;
-	background: linear-gradient(to left bottom, #74cefb 50%, transparent 50%);
+	background: linear-gradient(to left bottom, #262626 50%, transparent 50%);
 	margin-left: -11px;
 	margin-top: 41px;
 	z-index: 0;
@@ -404,7 +404,7 @@
 	height: 10px;
 	width: 10px;
 	float: right;
-	background: linear-gradient(to right bottom, #74cefb 50%, transparent 50%);
+	background: linear-gradient(to right bottom, #262626 50%, transparent 50%);
 	margin-right: -11px;
 	margin-top: 41px;
 	margin-bottom: -11px;
@@ -2563,7 +2563,7 @@
 
 .table_alerts tr:hover:not(.title_table_alerts)
 {
-	background-color: #fffde8;
+	background-color: #fffd4c;
 }
 
 /*** Modification alerte ***/
