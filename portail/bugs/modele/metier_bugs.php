@@ -57,6 +57,11 @@
     $resolved = "N";
     $picture  = "";
 
+    // Sauvegarde des données
+    $_SESSION['save']['subject_bug'] = $post['subject_bug'];
+    $_SESSION['save']['type_bug']    = $post['type_bug'];
+    $_SESSION['save']['content_bug'] = $post['content_bug'];
+
     // On insère l'image si présente
     if ($files['image']['name'] != NULL)
     {

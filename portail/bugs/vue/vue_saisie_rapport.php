@@ -46,17 +46,25 @@
 
         // Zone saisie rapport
         echo '<div class="zone_saisie_right">';
-          echo '<input type="text" name="subject_bug" placeholder="Objet" maxlength="255" class="saisie_objet" required />';
+          echo '<input type="text" name="subject_bug" placeholder="Objet" value="' . $_SESSION['save']['subject_bug'] . '" maxlength="255" class="saisie_objet" required />';
 
           echo '<select name="type_bug" class="saisie_type" required>';
             echo '<option value="" hidden>Type de demande</option>';
-            echo '<option value="B">Bug</option>';
-            echo '<option value="E">Evolution</option>';
+
+            if (isset($_SESSION['save']['type_bug']) AND $_SESSION['save']['type_bug'] == "B")
+              echo '<option value="B" selected>Bug</option>';
+            else
+              echo '<option value="B">Bug</option>';
+
+            if (isset($_SESSION['save']['type_bug']) AND $_SESSION['save']['type_bug'] == "E")
+              echo '<option value="E" selected>Evolution</option>';
+            else
+              echo '<option value="E">Evolution</option>';
           echo '</select>';
 
           echo '<input type="submit" name="report" value="Soumettre" class="saisie_bouton" />';
 
-          echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu"></textarea>';
+          echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu">' . $_SESSION['save']['content_bug'] . '</textarea>';
         echo '</div>';
       echo '</form>';
     echo '</div>';
