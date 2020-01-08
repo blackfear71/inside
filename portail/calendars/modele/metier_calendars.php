@@ -152,6 +152,8 @@
 
     global $bdd;
 
+    $control_ok = true;
+
     // On contrôle la présence du dossier des calendriers, sinon on le créé
     $dossier = "../../includes/images/calendars";
 
@@ -170,58 +172,38 @@
     if (!is_dir($dossier_miniatures))
       mkdir($dossier_miniatures);
 
+    // Dossiers de destination
+    $calendars_dir = $dossier_calendriers . '/';
+    $minis_dir     = $dossier_miniatures . '/';
+
     // On définit le nom du fichier
     $namefile = $post['months'] . "-" . $post['years'] . "-" . rand();
 
-    // Si on a bien une image
-    if ($files['calendar']['name'] != NULL)
+    // Contrôles fichier
+    $controlsFile = controlsUploadFile($files['calendar'], $namefile, 'all');
+
+    // Traitements fichier
+    if ($controlsFile['control_ok'] == true)
     {
-      // Dossiers de destination
-      $calendars_dir = $dossier_calendriers . '/';
-      $minis_dir     = $dossier_miniatures . '/';
+      // Upload fichier
+      $control_ok = uploadFile($files['calendar'], $controlsFile, $calendars_dir);
 
-      // Données du fichier
-      $file      = $files['calendar']['name'];
-      $tmp_file  = $files['calendar']['tmp_name'];
-      $size_file = $files['calendar']['size'];
-      $maxsize   = 8388608; // 8Mo
-
-      // Si le fichier n'est pas trop grand
-      if ($size_file < $maxsize)
+      if ($control_ok == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-          exit("Le fichier est introuvable");
-
-        // Contrôle type de fichier
-        $type_file = $files['calendar']['type'];
-
-        if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          exit("Le fichier n'est pas une image valide");
-        else
-        {
-          $type_image = pathinfo($file, PATHINFO_EXTENSION);
-          $new_name   = $namefile . '.' . $type_image;
-        }
-
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if (!move_uploaded_file($tmp_file, $calendars_dir . $new_name))
-          exit("Impossible de copier le fichier dans $calendars_dir");
+        $new_name = $controlsFile['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
         imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
 
-        //echo "Le fichier a bien été uploadé";
-
         // On stocke la référence du nouveau calendrier dans la base
         $reponse = $bdd->prepare('INSERT INTO calendars(to_delete, month, year, calendar) VALUES(:to_delete, :month, :year, :calendar)');
-				$reponse->execute(array(
+        $reponse->execute(array(
           'to_delete' => $to_delete,
-					'month'     => $month,
+          'month'     => $month,
           'year'      => $year,
           'calendar'  => $new_name
-					));
-				$reponse->closeCursor();
+        ));
+        $reponse->closeCursor();
 
         // Génération notification calendrier ajouté
         $new_id = $bdd->lastInsertId();
@@ -243,6 +225,8 @@
 
     global $bdd;
 
+    $control_ok = true;
+
     // On contrôle la présence du dossier des calendriers, sinon on le créé
     $dossier = "../../includes/images/calendars";
 
@@ -261,57 +245,37 @@
     if (!is_dir($dossier_miniatures))
       mkdir($dossier_miniatures);
 
+    // Dossiers de destination
+    $annexes_dir = $dossier_annexes . '/';
+    $minis_dir   = $dossier_miniatures . '/';
+
     // On définit le nom du fichier
     $namefile = rand();
 
-    // Si on a bien une image
-    if ($files['annexe']['name'] != NULL)
+    // Contrôles fichier
+    $controlsFile = controlsUploadFile($files['annexe'], $namefile, 'all');
+
+    // Traitements fichier
+    if ($controlsFile['control_ok'] == true)
     {
-      // Dossiers de destination
-      $annexes_dir = $dossier_annexes . '/';
-      $minis_dir   = $dossier_miniatures . '/';
+      // Upload fichier
+      $control_ok = uploadFile($files['annexe'], $controlsFile, $annexes_dir);
 
-      // Données du fichier
-      $file      = $files['annexe']['name'];
-      $tmp_file  = $files['annexe']['tmp_name'];
-      $size_file = $files['annexe']['size'];
-      $maxsize   = 8388608; // 8Mo
-
-      // Si le fichier n'est pas trop grand
-      if ($size_file < $maxsize)
+      if ($control_ok == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-          exit("Le fichier est introuvable");
-
-        // Contrôle type de fichier
-        $type_file = $files['annexe']['type'];
-
-        if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          exit("Le fichier n'est pas une image valide");
-        else
-        {
-          $type_image = pathinfo($file, PATHINFO_EXTENSION);
-          $new_name   = $namefile . '.' . $type_image;
-        }
-
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if (!move_uploaded_file($tmp_file, $annexes_dir . $new_name))
-          exit("Impossible de copier le fichier dans $annexes_dir");
+        $new_name = $controlsFile['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
         imagethumb($annexes_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
 
-        //echo "Le fichier a bien été uploadé";
-
         // On stocke la référence du nouveau fichier dans la base
         $reponse = $bdd->prepare('INSERT INTO calendars_annexes(to_delete, annexe, title) VALUES(:to_delete, :annexe, :title)');
-				$reponse->execute(array(
+        $reponse->execute(array(
           'to_delete' => $to_delete,
-					'annexe'    => $new_name,
+          'annexe'    => $new_name,
           'title'     => $title
-					));
-				$reponse->closeCursor();
+        ));
+        $reponse->closeCursor();
 
         // Génération notification calendrier ajouté
         $new_id = $bdd->lastInsertId();

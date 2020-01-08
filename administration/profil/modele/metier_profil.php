@@ -27,6 +27,8 @@
   {
     global $bdd;
 
+    $control_ok = true;
+
     // On contrôle la présence du dossier, sinon on le créé
     $dossier = "../../includes/images/profil";
 
@@ -39,53 +41,32 @@
     if (!is_dir($dossier_avatars))
       mkdir($dossier_avatars);
 
-    $avatar = rand();
+    // Dossier de destination et nom du fichier
+    $avatar_dir = $dossier_avatars . '/';
+    $avatar     = rand();
 
-    // Si on a bien une image
-    if ($files['avatar']['name'] != NULL)
+    // Contrôles fichier
+    $controlsFile = controlsUploadFile($files['avatar'], $avatar, 'all');
+
+    // Traitements fichier
+    if ($controlsFile['control_ok'] == true)
     {
-      // Dossier de destination
-      $avatar_dir = $dossier_avatars . '/';
+      // Upload fichier
+      $control_ok = uploadFile($files['avatar'], $controlsFile, $avatar_dir);
 
-      // Données du fichier
-      $file      = $files['avatar']['name'];
-      $tmp_file  = $files['avatar']['tmp_name'];
-      $size_file = $files['avatar']['size'];
-      $maxsize   = 8388608; // 8Mo
-
-      // Si le fichier n'est pas trop grand
-      if ($size_file < $maxsize)
+      if ($control_ok == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-          exit("Le fichier est introuvable");
-
-        // Contrôle type de fichier
-        $type_file = $files['avatar']['type'];
-
-        if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          exit("Le fichier n'est pas une image valide");
-        else
-        {
-          $type_image = pathinfo($file, PATHINFO_EXTENSION);
-          $new_name   = $avatar . '.' . $type_image;
-        }
-
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if (!move_uploaded_file($tmp_file, $avatar_dir . $new_name))
-          exit("Impossible de copier le fichier dans $avatar_dir");
+        $new_name = $controlsFile['new_name'];
 
         // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
         imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
-
-        // echo "Le fichier a bien été uploadé";
 
         // On efface l'ancien avatar si présent
         $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
         $donnees1 = $reponse1->fetch();
 
         if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink ($avatar_dir . $donnees1['avatar'] . "");
+          unlink($avatar_dir . $donnees1['avatar'] . "");
 
         $reponse1->closeCursor();
 
@@ -113,7 +94,7 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink ("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
+      unlink("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
 
     $reponse1->closeCursor();
 

@@ -298,6 +298,44 @@
       if (!is_dir($dossier_icones))
         mkdir($dossier_icones);
 
+      // Contrôle des fichiers
+      foreach ($files as $key_file => $file)
+      {
+        // Nom du fichier
+        switch ($key_file)
+        {
+          case "mission_icone_g":
+            $name = $reference . '_g';
+            break;
+
+          case "mission_icone_m":
+            $name = $reference . '_m';
+            break;
+
+          case "mission_icone_d":
+            $name = $reference . '_d';
+            break;
+
+          case "mission_image":
+          default:
+            $name = $reference;
+            break;
+        }
+
+        $controlsFile = controlsUploadFile($file, $name, 'png');
+
+        if ($controlsFile['control_ok'] == false)
+        {
+          $control_ok = false;
+          break;
+        }
+      }
+    }
+
+    // Insertion des images dans les dossiers
+    if ($control_ok == true)
+    {
+      // Insertion des fichiers
       foreach ($files as $key_file => $file)
       {
         // Dossier de destination
@@ -306,65 +344,41 @@
         else
           $dest_dir = $dossier_icones . '/';
 
-        // Fichier
-        $name_file = $file['name'];
-        $tmp_file  = $file['tmp_name'];
-        $size_file = $file['size'];
-        $type_file = $file['type'];
-
-        // Taille max
-        $maxsize = 8388608; // 8Mo
-
         // Nouveau nom
         switch ($key_file)
         {
           case "mission_icone_g":
-            $new_name = $reference . '_g';
+            $new_name = $reference . '_g.png';
             break;
 
           case "mission_icone_m":
-            $new_name = $reference . '_m';
+            $new_name = $reference . '_m.png';
             break;
 
           case "mission_icone_d":
-            $new_name = $reference . '_d';
+            $new_name = $reference . '_d.png';
             break;
 
           case "mission_image":
           default:
-            $new_name = $reference;
+            $new_name = $reference . '.png';
             break;
         }
 
-        // Si le fichier n'est pas trop grand
-        if ($size_file < $maxsize)
+        // Données à envoyer pour l'upload
+        $controlsFile = array('control_ok' => true,
+                              'new_name'   => $new_name,
+                              'tmp_file'   => $file['tmp_name'],
+                              'type_file'  => $file['type']
+                             );
+
+        // Upload fichier
+        $control_ok = uploadFile($file, $controlsFile, $dest_dir);
+
+        if ($controlsFile['control_ok'] == false)
         {
-          // Contrôle fichier temporaire existant
-          if (!is_uploaded_file($tmp_file))
-          {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-            // exit("Le fichier est introuvable");
-          }
-
-          // Contrôle type de fichier
-          if (!strstr($type_file, 'png'))
-          {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-            // exit("Le fichier n'est pas une image valide");
-          }
-
-          // Contrôle upload (si tout est bon, l'image est envoyée)
-          if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
-          {
-            $_SESSION['alerts']['wrong_file'] = true;
-            $control_ok                       = false;
-            // exit("Impossible de copier le fichier dans $dest_dir");
-          }
-
-          /*if ($control_ok == true)
-            echo "Le fichier a bien été uploadé";*/
+          $control_ok = false;
+          break;
         }
       }
     }
@@ -400,7 +414,7 @@
         'description'  => $description,
         'explications' => $explications,
         'conclusion'   => $conclusion
-        ));
+      ));
       $req2->closeCursor();
 
       $_SESSION['alerts']['mission_added'] = true;
@@ -496,82 +510,99 @@
     // Contrôle images présentes, si présentes alors on modifie l'image
     if ($control_ok == true)
     {
+      // Chemins
+      $dossier_images = "../../includes/images/missions/banners";
+      $dossier_icones = "../../includes/images/missions/buttons";
+
+      // Contrôle des fichiers
       foreach ($files as $key_file => $file)
       {
-        if (!empty($file['name']) AND !$file['name'] == NULL)
+        if (!empty($file['name']))
         {
-          // Chemins
-          $dossier_images = "../../includes/images/missions/banners";
-          $dossier_icones = "../../includes/images/missions/buttons";
+          // Nom du fichier
+          switch ($key_file)
+          {
+            case "mission_icone_g":
+              $name = $reference . '_g';
+              break;
 
+            case "mission_icone_m":
+              $name = $reference . '_m';
+              break;
+
+            case "mission_icone_d":
+              $name = $reference . '_d';
+              break;
+
+            case "mission_image":
+            default:
+              $name = $reference;
+              break;
+          }
+
+          $controlsFile = controlsUploadFile($file, $name, 'png');
+
+          if ($controlsFile['control_ok'] == false)
+          {
+            $control_ok = false;
+            break;
+          }
+        }
+      }
+    }
+
+    // Insertion des images dans les dossiers
+    if ($control_ok == true)
+    {
+      // Insertion des fichiers
+      foreach ($files as $key_file => $file)
+      {
+        if (!empty($file['name']))
+        {
           // Dossier de destination
           if ($key_file == "mission_image")
             $dest_dir = $dossier_images . '/';
           else
             $dest_dir = $dossier_icones . '/';
 
-          // Fichier
-          $name_file = $file['name'];
-          $tmp_file  = $file['tmp_name'];
-          $size_file = $file['size'];
-          $type_file = $file['type'];
-
-          // Taille max
-          $maxsize = 8388608; // 8Mo
-
           // Nouveau nom
           switch ($key_file)
           {
             case "mission_icone_g":
-              $new_name = $reference . '_g';
+              $new_name = $reference . '_g.png';
               break;
 
             case "mission_icone_m":
-              $new_name = $reference . '_m';
+              $new_name = $reference . '_m.png';
               break;
 
             case "mission_icone_d":
-              $new_name = $reference . '_d';
+              $new_name = $reference . '_d.png';
               break;
 
             case "mission_image":
             default:
-              $new_name = $reference;
+              $new_name = $reference . '.png';
               break;
           }
 
           // Suppression ancienne image
-          unlink ($dest_dir . $new_name . '.png');
+          unlink($dest_dir . $new_name);
 
-          // Insertion nouvelle image
-          if ($size_file < $maxsize)
+          // Données à envoyer pour l'upload
+          $controlsFile = array('control_ok' => true,
+                                'new_name'   => $new_name,
+                                'tmp_file'   => $file['tmp_name'],
+                                'type_file'  => $file['type']
+                               );
+
+          // Upload fichier
+          $control_ok = uploadFile($file, $controlsFile, $dest_dir);
+
+          if ($controlsFile['control_ok'] == false)
           {
-            // Contrôle fichier temporaire existant
-            if (!is_uploaded_file($tmp_file))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-              // exit("Le fichier est introuvable");
-            }
-
-            // Contrôle type de fichier
-            if (!strstr($type_file, 'png'))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-              // exit("Le fichier n'est pas une image valide");
-            }
-
-            // Contrôle upload (si tout est bon, l'image est envoyée)
-            if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-              // exit("Impossible de copier le fichier dans $dest_dir");
-            }
-
-            /*if ($control_ok == true)
-              echo "Le fichier a bien été uploadé";*/
+            $control_ok = false;
+            break;
           }
         }
       }
@@ -622,10 +653,10 @@
     $reponse->closeCursor();
 
     // Suppression des images
-    unlink ("../../includes/images/missions/banners/" . $reference . ".png");
-    unlink ("../../includes/images/missions/buttons/" . $reference . "_g.png");
-    unlink ("../../includes/images/missions/buttons/" . $reference . "_m.png");
-    unlink ("../../includes/images/missions/buttons/" . $reference . "_d.png");
+    unlink("../../includes/images/missions/banners/" . $reference . ".png");
+    unlink("../../includes/images/missions/buttons/" . $reference . "_g.png");
+    unlink("../../includes/images/missions/buttons/" . $reference . "_m.png");
+    unlink("../../includes/images/missions/buttons/" . $reference . "_d.png");
 
     // Suppression de la mission en table
     $reponse2 = $bdd->exec('DELETE FROM missions WHERE id = ' . $id_mission);

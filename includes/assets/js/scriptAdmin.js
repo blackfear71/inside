@@ -105,13 +105,8 @@ $(function()
     $('#code_' + id).select();
     document.execCommand('copy');
   });
-  /*** Actions au changement ***/
-  // Charge l'avatar
-  $('.loadAvatar').on('change', function()
-  {
-    loadFile(event, 'avatar');
-  });
 
+  /*** Actions au changement ***/
   // Charge le thème (header utilisateurs)
   $('.loadHeaderUsers').on('change', function()
   {

@@ -215,7 +215,7 @@
     // Enregistrement et contrôles image
     if ($control_ok == true)
     {
-      $new_name = "";
+      $new_name = '';
 
       // On contrôle la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/foodadvisor";
@@ -223,39 +223,23 @@
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // Si on a bien une image
-      if ($files['image_restaurant']['name'] != NULL)
+      // Dossier de destination et nom du fichier
+      $restaurant_dir = $dossier . '/';
+      $name           = rand();
+
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['image_restaurant'], $name, 'all');
+
+      // Traitements fichier
+      if ($controlsFile['control_ok'] == true)
       {
-        // Dossier de destination
-        $restaurant_dir = $dossier . '/';
+        // Upload fichier
+        $control_ok = uploadFile($files['image_restaurant'], $controlsFile, $restaurant_dir);
 
-        // Données du fichier
-        $file      = $files['image_restaurant']['name'];
-        $tmp_file  = $files['image_restaurant']['tmp_name'];
-        $size_file = $files['image_restaurant']['size'];
-        $maxsize   = 8388608; // 8Mo
-
-        // Si le fichier n'est pas trop grand
-        if ($size_file < $maxsize)
+        if ($control_ok == true)
         {
-          // Contrôle fichier temporaire existant
-          if (!is_uploaded_file($tmp_file))
-            exit("Le fichier est introuvable");
-
-          // Contrôle type de fichier
-          $type_file = $files['image_restaurant']['type'];
-
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-            exit("Le fichier n'est pas une image valide");
-          else
-          {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name   = rand() . '.' . $type_image;
-          }
-
-          // Contrôle upload (si tout est bon, l'image est envoyée)
-          if (!move_uploaded_file($tmp_file, $restaurant_dir . $new_name))
-            exit("Impossible de copier le fichier dans $restaurant_dir");
+          $new_name   = $controlsFile['new_name'];
+          $type_image = $controlsFile['type_file'];
 
           // Rotation de l'image (si JPEG)
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
@@ -477,7 +461,7 @@
     // Enregistrement et contrôles image
     if ($control_ok == true)
     {
-      $new_name = "";
+      $new_name = '';
 
       // On contrôle la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/foodadvisor";
@@ -485,48 +469,32 @@
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // Si on a bien une image
-      if ($files['update_image_restaurant_' . $id_restaurant]['name'] != NULL)
-      {
-        // Dossier de destination
-        $restaurant_dir = $dossier . '/';
+      // Dossier de destination et nom du fichier
+      $restaurant_dir = $dossier . '/';
+      $name           = rand();
 
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['update_image_restaurant_' . $id_restaurant], $name, 'all');
+
+      // Traitements fichier
+      if ($controlsFile['control_ok'] == true)
+      {
         // Suppression ancienne image
         $req1 = $bdd->query('SELECT id, picture FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
         $data1 = $req1->fetch();
 
         if (isset($data1['picture']) AND !empty($data1['picture']))
-          unlink ("../../includes/images/foodadvisor/" . $data1['picture']);
+          unlink("../../includes/images/foodadvisor/" . $data1['picture']);
 
         $req1->closeCursor();
 
-        // Données du fichier
-        $file      = $files['update_image_restaurant_' . $id_restaurant]['name'];
-        $tmp_file  = $files['update_image_restaurant_' . $id_restaurant]['tmp_name'];
-        $size_file = $files['update_image_restaurant_' . $id_restaurant]['size'];
-        $maxsize   = 8388608; // 8Mo
+        // Upload fichier
+        $control_ok = uploadFile($files['update_image_restaurant_' . $id_restaurant], $controlsFile, $restaurant_dir);
 
-        // Si le fichier n'est pas trop grand
-        if ($size_file < $maxsize)
+        if ($control_ok == true)
         {
-          // Contrôle fichier temporaire existant
-          if (!is_uploaded_file($tmp_file))
-            exit("Le fichier est introuvable");
-
-          // Contrôle type de fichier
-          $type_file = $files['update_image_restaurant_' . $id_restaurant]['type'];
-
-          if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-            exit("Le fichier n'est pas une image valide");
-          else
-          {
-            $type_image = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name   = rand() . '.' . $type_image;
-          }
-
-          // Contrôle upload (si tout est bon, l'image est envoyée)
-          if (!move_uploaded_file($tmp_file, $restaurant_dir . $new_name))
-            exit("Impossible de copier le fichier dans $restaurant_dir");
+          $new_name   = $controlsFile['new_name'];
+          $type_image = $controlsFile['type_file'];
 
           // Rotation de l'image
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
@@ -600,7 +568,7 @@
     $data1 = $req1->fetch();
 
     if (isset($data1['picture']) AND !empty($data1['picture']))
-      unlink ("../../includes/images/foodadvisor/" . $data1['picture']);
+      unlink("../../includes/images/foodadvisor/" . $data1['picture']);
 
     $req1->closeCursor();
 

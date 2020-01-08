@@ -165,7 +165,7 @@
       }
     }
 
-    // Insertion des images dans les dossiers
+    // Contrôle des fichiers
     if ($control_ok == true)
     {
       // On contrôle la présence du dossier des images, sinon on le créé
@@ -198,10 +198,52 @@
       if (!is_dir($dossier_logos))
         mkdir($dossier_logos);
 
+      // Contrôle des fichiers
+      foreach ($files as $key_file => $file)
+      {
+        // Si logo présent ou autre fichier que logo
+        if (($key_file == "logo" AND $logo == "Y") OR $key_file != "logo")
+        {
+          // Nom du fichier
+          switch ($key_file)
+          {
+            case "header":
+              $name = $reference . '_h';
+              break;
+
+            case "footer":
+              $name = $reference . '_f';
+              break;
+
+            case "logo":
+              $name = $reference . '_l';
+              break;
+
+            case "background":
+            default:
+              $name = $reference;
+              break;
+          }
+
+          $controlsFile = controlsUploadFile($file, $name, 'png');
+
+          if ($controlsFile['control_ok'] == false)
+          {
+            $control_ok = false;
+            break;
+          }
+        }
+      }
+    }
+
+    // Insertion des images dans les dossiers
+    if ($control_ok == true)
+    {
+      // Insertion des fichiers
       foreach ($files as $key_file => $file)
       {
         // Insertion logo si présent ou autre que logo
-        if (($key_file =="logo" AND $logo == "Y") OR $key_file != "logo")
+        if (($key_file == "logo" AND $logo == "Y") OR $key_file != "logo")
         {
           // Dossier de destination
           switch ($key_file)
@@ -224,59 +266,41 @@
               break;
           }
 
-          // Fichier
-          $name_file = $file['name'];
-          $tmp_file  = $file['tmp_name'];
-          $size_file = $file['size'];
-          $type_file = $file['type'];
-
-          // Taille max
-          $maxsize = 8388608; // 8Mo
-
           // Nouveau nom
           switch ($key_file)
           {
             case "header":
-              $new_name = $reference . '_h';
+              $new_name = $reference . '_h.png';
               break;
 
             case "footer":
-              $new_name = $reference . '_f';
+              $new_name = $reference . '_f.png';
               break;
 
             case "logo":
-              $new_name = $reference . '_l';
+              $new_name = $reference . '_l.png';
               break;
 
             case "background":
             default:
-              $new_name = $reference;
+              $new_name = $reference . '.png';
               break;
           }
 
-          // Si le fichier n'est pas trop grand
-          if ($size_file < $maxsize)
+          // Données à envoyer pour l'upload
+          $controlsFile = array('control_ok' => true,
+                                'new_name'   => $new_name,
+                                'tmp_file'   => $file['tmp_name'],
+                                'type_file'  => $file['type']
+                               );
+
+          // Upload fichier
+          $control_ok = uploadFile($file, $controlsFile, $dest_dir);
+
+          if ($controlsFile['control_ok'] == false)
           {
-            // Contrôle fichier temporaire existant
-            if (!is_uploaded_file($tmp_file))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-            }
-
-            // Contrôle type de fichier
-            if (!strstr($type_file, 'png'))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-            }
-
-            // Contrôle upload (si tout est bon, l'image est envoyée)
-            if (!move_uploaded_file($tmp_file, $dest_dir . $new_name . '.png'))
-            {
-              $_SESSION['alerts']['wrong_file'] = true;
-              $control_ok                       = false;
-            }
+            $control_ok = false;
+            break;
           }
         }
       }
@@ -307,7 +331,7 @@
         'logo'      => $logo,
         'date_deb'  => $date_deb,
         'date_fin'  => $date_fin
-        ));
+      ));
       $req2->closeCursor();
 
       $new_id = $bdd->lastInsertId();
@@ -472,12 +496,12 @@
 
     if (isset($data1['reference']) AND !empty($data1['reference']))
     {
-      unlink ("../../includes/images/themes/headers/" . $data1['reference'] . "_h.png");
-      unlink ("../../includes/images/themes/backgrounds/" . $data1['reference'] . ".png");
-      unlink ("../../includes/images/themes/footers/" . $data1['reference'] . "_f.png");
+      unlink("../../includes/images/themes/headers/" . $data1['reference'] . "_h.png");
+      unlink("../../includes/images/themes/backgrounds/" . $data1['reference'] . ".png");
+      unlink("../../includes/images/themes/footers/" . $data1['reference'] . "_f.png");
 
       if ($data1['logo'] == "Y")
-        unlink ("../../includes/images/themes/logos/" . $data1['reference'] . "_l.png");
+        unlink("../../includes/images/themes/logos/" . $data1['reference'] . "_l.png");
     }
 
     $req1->closeCursor();

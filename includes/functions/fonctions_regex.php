@@ -7,7 +7,7 @@
 		// Initialisation
 		$url = "";
 
-		//DAILYMOTION
+		// DAILYMOTION
 		preg_match('#&lt;object[^&gt;]+&gt;.+?http://www.dailymotion.com/swf/video/([A-Za-z0-9]+).+?&lt;/object&gt;#s', $adress, $matches);
 
 		if (!isset($matches[1]))
@@ -38,7 +38,7 @@
 			}
 		}
 
-		//YOUTUBE
+		// YOUTUBE
 		if (preg_match('#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#', $adress, $videoid))
 		{
 			if (strlen($videoid[0]))
@@ -47,7 +47,7 @@
 			}
 		}
 
-		//VIMEO
+		// VIMEO
 		if (preg_match('#(https?://)?(www.)?(player.)?vimeo.com/([a-z]*/)*([0-9]{6,11})[?]?.*#', $adress, $videoid))
 		{
 			if (strlen($videoid[5]))

@@ -15,7 +15,7 @@
         // Photo & numéro
         echo '<div class="zone_saisie_left">';
           // Photo
-          echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+          echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
           echo '<span class="zone_parcourir_restaurant_saisie">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie loadSaisieRestaurant" /></span>';
 

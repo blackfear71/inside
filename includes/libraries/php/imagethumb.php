@@ -1,5 +1,5 @@
 <?php
-
+	// Fonction création miniature
 	function imagethumb($image_src , $image_dest = NULL , $max_size = 100, $expand = FALSE, $square = FALSE)
 	{
 		if (!file_exists($image_src))
@@ -7,6 +7,7 @@
 
 		// Récupère les infos de l'image
 		$fileinfo = getimagesize($image_src);
+
 		if (!$fileinfo)
 			return FALSE;
 
@@ -15,7 +16,7 @@
 		$type_mime = $fileinfo['mime'];
 		$type      = str_replace('image/', '', $type_mime);
 
-		if (!$expand && max($width, $height) <= $max_size && (!$square || ($square && $width==$height)))
+		if (!$expand && max($width, $height) <= $max_size && (!$square || ($square && $width == $height)))
 		{
 			// L'image est plus petite que max_size
 			if ($image_dest)
@@ -75,16 +76,18 @@
 
 		// Ouvre l'image originale
 		$func = 'imagecreatefrom' . $type;
+
 		if (!function_exists($func))
 			return FALSE;
 
 		$image_src = $func($image_src);
-		$new_image = imagecreatetruecolor($new_width,$new_height);
+		$new_image = imagecreatetruecolor($new_width, $new_height);
 
 		// Gestion de la transparence pour les png
 		if ($type=='png')
 		{
 			imagealphablending($new_image,false);
+
 			if (function_exists('imagesavealpha'))
 				imagesavealpha($new_image,true);
 		}
@@ -100,18 +103,13 @@
 		}
 
 		// Redimensionnement de l'image
-		imagecopyresampled(
-			$new_image, $image_src,
-			0, 0, $src_x, $src_y,
-			$new_width, $new_height, $src_w, $src_h
-		);
+		imagecopyresampled($new_image, $image_src, 0, 0, $src_x, $src_y, $new_width, $new_height, $src_w, $src_h);
 
 		// Enregistrement de l'image
 		$func = 'image'. $type;
+
 		if ($image_dest)
-		{
 			$func($new_image, $image_dest);
-		}
 		else
 		{
 			header('Content-Type: '. $type_mime);
@@ -123,5 +121,4 @@
 
 		return TRUE;
 	}
-
 ?>

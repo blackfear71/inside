@@ -148,7 +148,7 @@
 
               // Image
               echo '<div class="zone_fiche_left">';
-                echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+                echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
                 echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" id="modifier_image_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update loadModifierRestaurant" /></span>';
 

@@ -52,8 +52,14 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 
 | Nom             | Couleur                                                  | Code HEX | Code RGB           | Notes                                  |
 | ----------------| :------------------------------------------------------: | -------- | ------------------ | -------------------------------------- |
+| Jaune clair     | ![#fffd4c](https://placehold.it/15/fffd4c/000000?text=+) | #fffd4c  |                    |                                        |
+| Jaune moyen     | ![#ffad01](https://placehold.it/15/ffad01/000000?text=+) | #ffad01  |                    |                                        |
 | Rouge           | ![#ff1937](https://placehold.it/15/ff1937/000000?text=+) | #ff1937  | rgb(255, 25, 55)   | Rouge CGI, couleur principale          |
 | Rouge           | ![#c81932](https://placehold.it/15/c81932/000000?text=+) | #c81932  | rgb(200, 25, 50)   | Pour contraste (rift)                  |
+| Bleu clair      | ![#2eb2f4](https://placehold.it/15/2eb2f4/000000?text=+) | #2eb2f4  |                    |                                        |
+| Bleu clair      | ![#13a2e9](https://placehold.it/15/13a2e9/000000?text=+) | #13a2e9  |                    |                                        |
+| Vert clair      | ![#70d55d](https://placehold.it/15/70d55d/000000?text=+) | #70d55d  |                    | Icône utilisateur connecté (chat)      |
+| Blanc           | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) | #ffffff  | rgb(255, 255, 255) |                                        |
 | Gris clair      | ![#f3f3f3](https://placehold.it/15/f3f3f3/000000?text=+) | #f3f3f3  |                    |                                        |
 | Gris clair      | ![#e3e3e3](https://placehold.it/15/e3e3e3/000000?text=+) | #e3e3e3  | rgb(227, 227, 227) |                                        |
 | Gris clair      | ![#d3d3d3](https://placehold.it/15/d3d3d3/000000?text=+) | #d3d3d3  |                    |                                        |
@@ -66,14 +72,6 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 | Gris foncé      | ![#303030](https://placehold.it/15/303030/000000?text=+) | #303030  |                    | Nav                                    |
 | Gris foncé      | ![#262626](https://placehold.it/15/262626/000000?text=+) | #262626  |                    | Header & footer                        |
 | Gris foncé      | ![#1b1b1b](https://placehold.it/15/1b1b1b/000000?text=+) | #1b1b1b  |                    | Boutons actifs                         |
-| Bleu clair      | ![#74cefb](https://placehold.it/15/74cefb/000000?text=+) | #74cefb  |                    |                                        |
-| Bleu clair      | ![#2eb2f4](https://placehold.it/15/2eb2f4/000000?text=+) | #2eb2f4  |                    |                                        |
-| Bleu clair      | ![#13a2e9](https://placehold.it/15/13a2e9/000000?text=+) | #13a2e9  |                    |                                        |
-| Vert clair      | ![#70d55d](https://placehold.it/15/70d55d/000000?text=+) | #70d55d  |                    | Icône utilisateur connecté (chat)      |
-| Jaune clair     | ![#fffde8](https://placehold.it/15/fffde8/000000?text=+) | #fffde8  |                    | Survol ligne tableau                   |
-| Jaune clair     | ![#fffd4c](https://placehold.it/15/fffd4c/000000?text=+) | #fffd4c  |                    |                                        |
-| Jaune moyen     | ![#ffad01](https://placehold.it/15/ffad01/000000?text=+) | #ffad01  |                    |                                        |
-| Blanc           | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) | #ffffff  | rgb(255, 255, 255) |                                        |
 | Noir            | ![#000000](https://placehold.it/15/000000/000000?text=+) | #000000  | rgb(0, 0, 0)       |                                        |
 
 ### Les variables globales
@@ -81,13 +79,13 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 
 | SESSION   | Description                                              |
 | --------- | -------------------------------------------------------- |
-| index     | Contient les données de l'écran de connexion             |
 | alerts    | Contient les tops de déclenchement des messages d'alerte |
-| user      | Contient les données utilisateurs et préférences         |
-| missions  | Contient les données des missions générées               |
-| theme     | Contient les données des thèmes                          |
 | chat      | Contient les données du chat (données utilisateurs)      |
 | generator | Contient les données du générateur de code               |
+| index     | Contient les données de l'écran de connexion             |
+| missions  | Contient les données des missions générées               |
+| theme     | Contient les données des thèmes                          |
+| user      | Contient les données utilisateurs et préférences         |
 
 | COOKIE     | Description                                         |
 | ---------- | --------------------------------------------------- |

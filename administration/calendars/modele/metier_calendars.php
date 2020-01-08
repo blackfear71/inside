@@ -186,8 +186,8 @@
 
     if (isset($donnees['calendar']) AND !empty($donnees['calendar']))
     {
-      unlink ("../../includes/images/calendars/" . $donnees['year'] . "/" . $donnees['calendar']);
-      unlink ("../../includes/images/calendars/" . $donnees['year'] . "/mini/" . $donnees['calendar']);
+      unlink("../../includes/images/calendars/" . $donnees['year'] . "/" . $donnees['calendar']);
+      unlink("../../includes/images/calendars/" . $donnees['year'] . "/mini/" . $donnees['calendar']);
     }
 
     $reponse->closeCursor();
@@ -215,8 +215,8 @@
 
     if (isset($donnees['annexe']) AND !empty($donnees['annexe']))
     {
-      unlink ("../../includes/images/calendars/annexes/" . $donnees['annexe']);
-      unlink ("../../includes/images/calendars/annexes/mini/" . $donnees['annexe']);
+      unlink("../../includes/images/calendars/annexes/" . $donnees['annexe']);
+      unlink("../../includes/images/calendars/annexes/mini/" . $donnees['annexe']);
     }
 
     $reponse->closeCursor();

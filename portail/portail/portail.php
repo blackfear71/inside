@@ -47,7 +47,10 @@
       foreach ($news as &$messageNews)
       {
         $messageNews->setTitle(htmlspecialchars($messageNews->getTitle()));
-        $messageNews->setContent(htmlspecialchars($messageNews->getContent()));
+
+        if ($messageNews->getLogo() != 'cooking_box')
+          $messageNews->setContent(htmlspecialchars($messageNews->getContent()));
+
         $messageNews->setDetails(htmlspecialchars($messageNews->getDetails()));
         $messageNews->setLogo(htmlspecialchars($messageNews->getLogo()));
         $messageNews->setLink(htmlspecialchars($messageNews->getLink()));

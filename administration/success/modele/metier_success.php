@@ -54,8 +54,9 @@
     $_SESSION['save']['limit_success']       = $limit_success;
     $_SESSION['save']['explanation_success'] = $explanation;
 
-    $control_ok = true;
     global $bdd;
+
+    $control_ok = true;
 
     // Contrôle référence
     $reponse = $bdd->query('SELECT * FROM success');
@@ -129,49 +130,26 @@
       if (!is_dir($dossier_succes))
          mkdir($dossier_succes);
 
-      // Insertion image
-      // Si on a bien une image
-   		if ($files['success']['name'] != NULL)
-   		{
-   			// Dossier de destination
-   			$success_dir = $dossier_succes . '/';
+      // Dossier de destination
+      $success_dir = $dossier_succes . '/';
 
-   			// Données du fichier
-   			$file      = $files['success']['name'];
-   			$tmp_file  = $files['success']['tmp_name'];
-   			$size_file = $files['success']['size'];
-        $maxsize   = 8388608; // 8Mo
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['success'], $reference, 'png');
 
-        // Si le fichier n'est pas trop grand
-   			if ($size_file < $maxsize)
-   			{
-   				// Contrôle fichier temporaire existant
-   				if (!is_uploaded_file($tmp_file))
-   					exit("Le fichier est introuvable");
+      // Traitements fichier
+      if ($controlsFile['control_ok'] == true)
+      {
+        // Upload fichier
+        $control_ok = uploadFile($files['success'], $controlsFile, $success_dir);
 
-   				// Contrôle type de fichier
-   				$type_file = $files['success']['type'];
-
-   				if (!strstr($type_file, 'png'))
-   					exit("Le fichier n'est pas une image valide");
-   				else
-   				{
-   					$type_image = pathinfo($file, PATHINFO_EXTENSION);
-   					$new_name   = $reference . '.' . $type_image;
-   				}
-
-   				// Contrôle upload (si tout est bon, l'image est envoyée)
-   				if (!move_uploaded_file($tmp_file, $success_dir . $new_name))
-   				{
-   					exit("Impossible de copier le fichier dans $success_dir");
-   				}
+        if ($control_ok == true)
+        {
+          $new_name = $controlsFile['new_name'];
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-   				imagethumb($success_dir . $new_name, $success_dir . $new_name, 500, FALSE, TRUE);
+          imagethumb($success_dir . $new_name, $success_dir . $new_name, 500, FALSE, TRUE);
 
-   				// echo "Le fichier a bien été uploadé";
-
-   				// On stocke le nouveau succès dans la base
+          // On stocke le nouveau succès dans la base
           $reponse = $bdd->prepare('INSERT INTO success(reference,
                                                         level,
                                                         order_success,
@@ -180,29 +158,29 @@
                                                         description,
                                                         limit_success,
                                                         explanation)
-                                                 VALUES(:reference,
-                                                        :level,
-                                                        :order_success,
-                                                        :defined,
-                                                        :title,
-                                                        :description,
-                                                        :limit_success,
-                                                        :explanation)');
-  				$reponse->execute(array(
-  					'reference'     => $reference,
+                                                VALUES(:reference,
+                                                       :level,
+                                                       :order_success,
+                                                       :defined,
+                                                       :title,
+                                                       :description,
+                                                       :limit_success,
+                                                       :explanation)');
+          $reponse->execute(array(
+            'reference'     => $reference,
             'level'         => $level,
             'order_success' => $order_success,
             'defined'       => $defined,
             'title'         => $title,
             'description'   => $description,
-  					'limit_success' => $limit_success,
+            'limit_success' => $limit_success,
             'explanation'   => $explanation
-  					));
-  				$reponse->closeCursor();
+          ));
+          $reponse->closeCursor();
 
-   				$_SESSION['alerts']['success_added'] = true;
-   			}
-   		}
+          $_SESSION['alerts']['success_added'] = true;
+        }
+      }
     }
   }
 
@@ -221,7 +199,7 @@
     if (isset($data1['reference']) AND !empty($data1['reference']))
     {
       $reference = $data1['reference'];
-      unlink ("../../includes/images/profil/success/" . $data1['reference'] . ".png");
+      unlink("../../includes/images/profil/success/" . $data1['reference'] . ".png");
     }
 
     $req1->closeCursor();
@@ -798,5 +776,23 @@
 
       $_SESSION['alerts']['success_initialized'] = true;
     }
+  }
+
+  // METIER : Purge tous les succès
+  // RETOUR : Aucun
+  function purgeSuccess()
+  {
+    global $bdd;
+
+    // Suppression des succès concernés
+    $req1 = $bdd->exec('DELETE FROM success_users WHERE reference != "greedy"
+                                                    AND reference != "restaurant-finder"');
+
+    // Rénumérotation des enregistrements restants
+    $req2 = $bdd->exec('SET @new_id = 0;
+                        UPDATE success_users SET id = (@new_id := @new_id + 1);
+                        ALTER TABLE success_users AUTO_INCREMENT = 1;');
+
+    $_SESSION['alerts']['success_purged'] = true;
   }
 ?>

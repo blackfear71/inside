@@ -231,6 +231,16 @@
 	border-bottom-right-radius: 5px;
 }
 
+.date_infos_users
+{
+	clear: both;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 80%;
+	text-align: justify;
+	padding-top: 10px;
+}
+
 /*** Gestion des utilisateurs ***/
 .form_manage_user
 {
@@ -372,7 +382,7 @@
 	height: 10px;
 	width: 10px;
 	position: absolute;
-	background: linear-gradient(to left bottom, #74cefb 50%, transparent 50%);
+	background: linear-gradient(to left bottom, #262626 50%, transparent 50%);
 	margin-left: -11px;
 	margin-top: 41px;
 	z-index: 0;
@@ -394,7 +404,7 @@
 	height: 10px;
 	width: 10px;
 	float: right;
-	background: linear-gradient(to right bottom, #74cefb 50%, transparent 50%);
+	background: linear-gradient(to right bottom, #262626 50%, transparent 50%);
 	margin-right: -11px;
 	margin-top: 41px;
 	margin-bottom: -11px;
@@ -782,6 +792,23 @@
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
+}
+
+.titre_explications
+{
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 110%;
+	text-align: justify;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.contenu_explications
+{
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	text-align: justify;
+	margin-bottom: 10px;
 }
 
 /*** Initialisation succès ***/
@@ -2536,7 +2563,7 @@
 
 .table_alerts tr:hover:not(.title_table_alerts)
 {
-	background-color: #fffde8;
+	background-color: #fffd4c;
 }
 
 /*** Modification alerte ***/

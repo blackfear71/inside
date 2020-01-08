@@ -46,7 +46,8 @@
   // RETOUR : Id enregistrement créé
   function insertBug($post, $files, $author)
   {
-    $new_id   = NULL;
+    $new_id     = NULL;
+    $control_ok = true;
 
     // Récupération des données
     $subject  = $post['subject_bug'];
@@ -56,96 +57,90 @@
     $resolved = "N";
     $picture  = "";
 
+    // Sauvegarde des données
+    $_SESSION['save']['subject_bug'] = $post['subject_bug'];
+    $_SESSION['save']['type_bug']    = $post['type_bug'];
+    $_SESSION['save']['content_bug'] = $post['content_bug'];
+
     // On insère l'image si présente
     if ($files['image']['name'] != NULL)
     {
-      $name = rand();
-
       // On contrôle la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/reports";
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // Dossier de destination
+      // Dossier de destination et nom du fichier
       $image_dir = $dossier . '/';
+      $name      = rand();
 
-      // Données du fichier
-      $file      = $files['image']['name'];
-      $tmp_file  = $files['image']['tmp_name'];
-      $size_file = $files['image']['size'];
-      $maxsize   = 8388608; // 8Mo
+      // Contrôles fichier
+      $controlsFile = controlsUploadFile($files['image'], $name, 'all');
 
-      // Si le fichier n'est pas trop grand
-      if ($size_file < $maxsize)
+      // Récupération contrôles
+      $control_ok = $controlsFile['control_ok'];
+
+      if ($controlsFile['control_ok'] == true)
       {
-        // Contrôle fichier temporaire existant
-        if (!is_uploaded_file($tmp_file))
-          exit("Le fichier est introuvable");
-
-        // Contrôle type de fichier
-        $type_file = $files['image']['type'];
-
-        if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
-          exit("Le fichier n'est pas une image valide");
-        else
-        {
-          $type_image = pathinfo($file, PATHINFO_EXTENSION);
-          $picture    = $name . '.' . $type_image;
-        }
-
-        // Contrôle upload (si tout est bon, l'image est envoyée)
-        if (!move_uploaded_file($tmp_file, $image_dir . $picture))
-          exit("Impossible de copier le fichier dans $image_dir");
-
-        // echo "Le fichier a bien été uploadé";
+        // Upload fichier
+        $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
 
         // Rotation de l'image
-        if ($type_image == 'jpg' OR $type_image == 'jpeg')
-          $rotate = rotateImage($image_dir . $picture, $type_image);
+        if ($control_ok == true)
+        {
+          $picture    = $controlsFile['new_name'];
+          $type_image = $controlsFile['type_file'];
+
+          if ($type_image == 'jpg' OR $type_image == 'jpeg')
+            $rotate = rotateImage($image_dir . $picture, $type_image);
+        }
       }
     }
 
-    // On insère dans la table
-    $bugs = array('subject'  => $subject,
-                  'date'     => $date,
-                  'author'   => $author,
-                  'content'  => $content,
-                  'picture'  => $picture,
-                  'type'     => $type,
-                  'resolved' => $resolved
-                 );
+    if ($control_ok == true)
+    {
+      // On insère dans la table
+      $bugs = array('subject'  => $subject,
+                    'date'     => $date,
+                    'author'   => $author,
+                    'content'  => $content,
+                    'picture'  => $picture,
+                    'type'     => $type,
+                    'resolved' => $resolved
+                   );
 
-    global $bdd;
+      global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO bugs(subject,
-                                           date,
-                                           author,
-                                           content,
-                                           picture,
-                                           type,
-                                           resolved
-                                          )
-                                    VALUES(:subject,
-                                           :date,
-                                           :author,
-                                           :content,
-                                           :picture,
-                                           :type,
-                                           :resolved
-                                          )');
-    $req->execute($bugs);
-    $req->closeCursor();
+      $req = $bdd->prepare('INSERT INTO bugs(subject,
+                                             date,
+                                             author,
+                                             content,
+                                             picture,
+                                             type,
+                                             resolved
+                                            )
+                                      VALUES(:subject,
+                                             :date,
+                                             :author,
+                                             :content,
+                                             :picture,
+                                             :type,
+                                             :resolved
+                                            )');
+      $req->execute($bugs);
+      $req->closeCursor();
 
-    $new_id = $bdd->lastInsertId();
+      $new_id = $bdd->lastInsertId();
 
-    // Génération succès
-    insertOrUpdateSuccesValue('debugger', $author, 1);
+      // Génération succès
+      insertOrUpdateSuccesValue('debugger', $author, 1);
 
-    // Ajout expérience
-    insertExperience($author, 'add_bug');
+      // Ajout expérience
+      insertExperience($author, 'add_bug');
 
-    $_SESSION['alerts']['bug_submitted'] = true;
+      $_SESSION['alerts']['bug_submitted'] = true;
+    }
 
     return $new_id;
   }

@@ -2330,6 +2330,7 @@
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 	margin-top: -83px;
 	line-height: 80px;
 }
@@ -2340,7 +2341,7 @@
 	margin-right: auto;
 	max-width: 80px;
 	max-height: 80px;
-	margin-top: -3px;
+	margin-top: -5px;
 	vertical-align: middle;
 }
 

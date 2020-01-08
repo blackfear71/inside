@@ -307,7 +307,6 @@
 /*** Rapports ***/
 .zone_report
 {
-	border-radius: 2px;
 	margin-bottom: 20px;
 }
 
@@ -315,6 +314,8 @@
 {
 	background-color: #c3c3c3;
 	padding: 10px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
 }
 
 .zone_report_titre
@@ -404,6 +405,8 @@
 {
 	background-color: #e3e3e3;
 	padding: 10px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
 }
 
 .image_report

@@ -26,17 +26,23 @@
   AND (!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']            != true)
   AND (!isset($_SESSION['alerts']['date_less'])             OR $_SESSION['alerts']['date_less']             != true)
   AND (!isset($_SESSION['alerts']['missing_mission_file'])  OR $_SESSION['alerts']['missing_mission_file']  != true)
+  AND (!isset($_SESSION['alerts']['file_too_big'])          OR $_SESSION['alerts']['file_too_big']          != true)
+  AND (!isset($_SESSION['alerts']['temp_not_found'])        OR $_SESSION['alerts']['temp_not_found']        != true)
+  AND (!isset($_SESSION['alerts']['wrong_file_type'])       OR $_SESSION['alerts']['wrong_file_type']       != true)
   AND (!isset($_SESSION['alerts']['wrong_file'])            OR $_SESSION['alerts']['wrong_file']            != true))
 	{
     unset($_SESSION['save']);
 	}
 
-  if ((isset($_SESSION['alerts']['already_ref_mission'])   AND $_SESSION['alerts']['already_ref_mission']   = true)
-  OR  (isset($_SESSION['alerts']['objective_not_numeric']) AND $_SESSION['alerts']['objective_not_numeric'] = true)
-  OR  (isset($_SESSION['alerts']['wrong_date'])            AND $_SESSION['alerts']['wrong_date']            = true)
-  OR  (isset($_SESSION['alerts']['date_less'])             AND $_SESSION['alerts']['date_less']             = true)
-  OR  (isset($_SESSION['alerts']['missing_mission_file'])  AND $_SESSION['alerts']['missing_mission_file']  = true)
-  OR  (isset($_SESSION['alerts']['wrong_file'])            AND $_SESSION['alerts']['wrong_file']            = true))
+  if ((isset($_SESSION['alerts']['already_ref_mission'])   AND $_SESSION['alerts']['already_ref_mission']   == true)
+  OR  (isset($_SESSION['alerts']['objective_not_numeric']) AND $_SESSION['alerts']['objective_not_numeric'] == true)
+  OR  (isset($_SESSION['alerts']['wrong_date'])            AND $_SESSION['alerts']['wrong_date']            == true)
+  OR  (isset($_SESSION['alerts']['date_less'])             AND $_SESSION['alerts']['date_less']             == true)
+  OR  (isset($_SESSION['alerts']['missing_mission_file'])  AND $_SESSION['alerts']['missing_mission_file']  == true)
+  OR  (isset($_SESSION['alerts']['file_too_big'])          AND $_SESSION['alerts']['file_too_big']          == true)
+  OR  (isset($_SESSION['alerts']['temp_not_found'])        AND $_SESSION['alerts']['temp_not_found']        == true)
+  OR  (isset($_SESSION['alerts']['wrong_file_type'])       AND $_SESSION['alerts']['wrong_file_type']       == true)
+  OR  (isset($_SESSION['alerts']['wrong_file'])            AND $_SESSION['alerts']['wrong_file']            == true))
   {
     $erreur_mission = true;
   }

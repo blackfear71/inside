@@ -21,9 +21,9 @@
 
         // On ajoute la ligne au tableau (logo + message)
         if ($reponse2->rowCount() > 0)
-          $ligneMessage = array('logo' => $donnees2['type'], 'texte' => $donnees2['message'] . '<br />');
+          $ligneMessage = array('logo' => $donnees2['type'], 'texte' => $donnees2['message']);
         else
-          $ligneMessage = array('logo' => '', 'texte' => 'Message d\'alerte non défini pour : ' . $key_alert . '<br />');
+          $ligneMessage = array('logo' => 'question', 'texte' => 'Message d\'alerte non défini pour : ' . $key_alert);
 
         array_push($messages, $ligneMessage);
 
@@ -43,24 +43,34 @@
         echo 'Inside';
       echo '</div>';
 
-      echo '<div class="texte_alerte">';
+      echo '<div class="zone_alertes">';
         foreach ($messages as $message)
         {
-          switch ($message['logo'])
-          {
-            case "info":
-              echo '<img src="/inside/includes/icons/common/info.png" alt="info" title="Information" class="logo_alerte" />';
-              break;
+          echo '<div class="zone_alerte">';
+            // Icône
+            switch ($message['logo'])
+            {
+              case "erreur":
+                echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Erreur" class="logo_alerte" />';
+                break;
 
-            case "erreur":
-              echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Erreur" class="logo_alerte" />';
-              break;
+              case "info":
+                echo '<img src="/inside/includes/icons/common/info.png" alt="info" title="Information" class="logo_alerte" />';
+                break;
 
-            default:
-              break;
-          }
+              case "question":
+                echo '<img src="/inside/includes/icons/common/question.png" alt="question" title="Inconnu" class="logo_alerte" />';
+                break;
 
-          echo $message['texte'];
+              default:
+                break;
+            }
+
+            // Texte
+            echo '<div class="texte_alerte">';
+              echo $message['texte'];
+            echo '</div>';
+          echo '</div>';
         }
       echo '</div>';
 

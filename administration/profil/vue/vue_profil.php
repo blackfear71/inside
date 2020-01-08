@@ -61,7 +61,7 @@
 
             // Modification avatar
             echo '<form method="post" action="profil.php?action=doModifierAvatar" enctype="multipart/form-data" class="form_update_avatar">';
-              echo '<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />';
+              echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
               echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar loadAvatar" required /></span>';
 

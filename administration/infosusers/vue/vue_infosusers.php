@@ -68,6 +68,16 @@
                 if (!empty($user->getEmail()))
                   echo '<div class="infos_mail"><img src="../../includes/icons/admin/mailing_red.png" alt="mailing_red" class="logo_infos" />' . $user->getEmail() . '</div>';
 
+                // Date de dernière connexion
+                echo '<div class="date_infos_users">';
+                  echo 'Date de dernière connexion : ';
+
+                  if (!empty($user->getPing()))
+                    echo formatDateForDisplay(substr($user->getPing(), 0, 4) . substr($user->getPing(), 5, 2) . substr($user->getPing(), 8, 2));
+                  else
+                    echo 'Pas de connexion récente';
+                echo '</div>';
+                
                 echo '<div class="zone_form_users">';
                   // Formulaire True Insider
                   echo '<form method="post" action="infosusers.php?action=changeBeginnerStatus" class="form_infos_users">';

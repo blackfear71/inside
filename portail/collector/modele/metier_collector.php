@@ -292,14 +292,20 @@
       }
     }
 
+    // Formatage du texte ou insertion image
     if ($control_ok == true)
     {
-      //Formatage du texte ou insertion image
       if ($post['type_collector'] == "T")
         $collector = deleteInvisible($post['collector']);
       elseif ($post['type_collector'] == "I")
         $collector = uploadImage($files, rand());
 
+      if (empty($collector))
+        $control_ok = false;
+    }
+
+    if ($control_ok == true)
+    {
       global $bdd;
 
       if ($post['speaker'] == "other")
@@ -380,55 +386,37 @@
   // RETOUR : Nom fichier avec extension
   function uploadImage($files, $name)
   {
-    $new_name = "";
+    $new_name   = '';
+    $control_ok = true;
 
     // On contrôle la présence du dossier, sinon on le créé
-    $dossier = "../../includes/images/collector";
+    $dossier = '../../includes/images/collector';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
-    // Si on a bien une image
- 		if ($files['image']['name'] != NULL)
- 		{
- 			// Dossier de destination
- 			$image_dir = $dossier . '/';
+    // Dossier de destination
+    $image_dir = $dossier . '/';
 
- 			// Données du fichier
- 			$file      = $files['image']['name'];
- 			$tmp_file  = $files['image']['tmp_name'];
- 			$size_file = $files['image']['size'];
-      $maxsize   = 8388608; // 8Mo
+    // Contrôles fichier
+    $controlsFile = controlsUploadFile($files['image'], $name, 'all');
 
-      // Si le fichier n'est pas trop grand
- 			if ($size_file < $maxsize)
- 			{
- 				// Contrôle fichier temporaire existant
- 				if (!is_uploaded_file($tmp_file))
- 					exit("Le fichier est introuvable");
+    // Traitements fichier
+    if ($controlsFile['control_ok'] == true)
+    {
+      // Upload fichier
+      $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
 
- 				// Contrôle type de fichier
- 				$type_file = $files['image']['type'];
+      // Rotation de l'image
+      if ($control_ok == true)
+      {
+        $new_name   = $controlsFile['new_name'];
+        $type_image = $controlsFile['type_file'];
 
- 				if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
- 					exit("Le fichier n'est pas une image valide");
- 				else
- 				{
- 					$type_image = pathinfo($file, PATHINFO_EXTENSION);
- 					$new_name   = $name . '.' . $type_image;
- 				}
-
- 				// Contrôle upload (si tout est bon, l'image est envoyée)
- 				if (!move_uploaded_file($tmp_file, $image_dir . $new_name))
- 					exit("Impossible de copier le fichier dans $image_dir");
-
- 				// echo "Le fichier a bien été uploadé";
-
-        // Rotation de l'image
         if ($type_image == 'jpg' OR $type_image == 'jpeg')
           $rotate = rotateImage($image_dir . $new_name, $type_image);
- 			}
- 		}
+      }
+    }
 
     return $new_name;
   }
@@ -449,7 +437,7 @@
     $type_collector = $data1['type_collector'];
 
     if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-      unlink ("../../includes/images/collector/" . $data1['collector']);
+      unlink("../../includes/images/collector/" . $data1['collector']);
 
     $req1->closeCursor();
 
@@ -506,13 +494,16 @@
         if ($files['image']['name'] != NULL)
         {
           if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-            unlink ("../../includes/images/collector/" . $collector);
+            unlink("../../includes/images/collector/" . $collector);
 
-          $collector   = uploadImage($files, rand());
+          $collector = uploadImage($files, rand());
+
+          if (empty($collector))
+            $control_ok = false;
         }
       }
       else
-        $collector     = $post['collector'];
+        $collector = $post['collector'];
     }
 
     // Mise à jour en base
