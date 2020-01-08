@@ -52,22 +52,20 @@
           /***********/
           /* Contenu */
           /***********/
-          echo '<div class="zone_manage_missions">';
-            switch ($_GET['action'])
-            {
-              case "goConsulter":
-                include('vue/vue_table_missions.php');
-                break;
+          switch ($_GET['action'])
+          {
+            case "goConsulter":
+              include('vue/vue_table_missions.php');
+              break;
 
-              case "goAjouter":
-              case "goModifier":
-                include('vue/vue_saisie_mission.php');
-                break;
+            case "goAjouter":
+            case "goModifier":
+              include('vue/vue_saisie_mission.php');
+              break;
 
-              default:
-                break;
-            }
-          echo '</div>';
+            default:
+              break;
+          }
         ?>
 			</article>
 		</section>

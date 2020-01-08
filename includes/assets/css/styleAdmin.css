@@ -1379,26 +1379,6 @@
 }
 
 /*** Missions ***/
-.zone_manage_missions
-{
-	margin-top: -30px;
-}
-
-.titre_accueil_mission
-{
-	width: 100%;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 150%;
-	font-weight: bold;
-	border-bottom: solid 1px #b3b3b3;
-	line-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	color: #262626;
-	text-align: left;
-	margin-top: 20px;
-}
-
 .zone_missions
 {
   display: inline-flex;
@@ -1410,7 +1390,6 @@
 .zone_presentation_mission
 {
   width: 32%;
-  margin-top: 15px;
   text-decoration: none;
 }
 
@@ -1469,7 +1448,7 @@
 {
 	display: inline-block;
 	width: 70%;
-	margin-top: 30px;
+	margin-top: 2px;
 }
 
 .table_mission
@@ -1805,7 +1784,6 @@
 .table_ranking
 {
 	vertical-align: top;
-	margin-top: 28px;
 	float: right;
 	width: calc(30% - 20px);
 	margin-left: 20px;

@@ -48,7 +48,8 @@
       {
         $messageNews->setTitle(htmlspecialchars($messageNews->getTitle()));
 
-        if ($messageNews->getLogo() != 'cooking_box')
+        // Exception pour certains messages
+        if ($messageNews->getLogo() != 'cooking_box' OR $messageNews->getLogo() != 'anniversary')
           $messageNews->setContent(htmlspecialchars($messageNews->getContent()));
 
         $messageNews->setDetails(htmlspecialchars($messageNews->getDetails()));

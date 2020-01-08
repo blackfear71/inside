@@ -13,7 +13,7 @@
         {
           if ($titre_a_venir != true)
           {
-            echo '<div class="titre_accueil_mission">Missions à venir</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" /><div class="texte_titre_section">Missions à venir</div></div>';
             $titre_a_venir = true;
           }
 
@@ -36,7 +36,7 @@
         {
           if ($titre_en_cours != true)
           {
-            echo '<div class="titre_accueil_mission">Missions en cours</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">Missions en cours</div></div>';
             $titre_en_cours = true;
           }
 
@@ -59,7 +59,7 @@
         {
           if ($titre_passees != true)
           {
-            echo '<div class="titre_accueil_mission">Anciennes missions</div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" /><div class="texte_titre_section">Anciennes missions</div></div>';
             $titre_passees = true;
           }
 
@@ -82,6 +82,7 @@
   }
   else
   {
-    echo '<div class="titre_accueil_mission">Pas encore de missions !</div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">Rien à signaler</div></div>';
+    echo '<div class="empty">Pas encore de missions...</div>';
   }
 ?>
