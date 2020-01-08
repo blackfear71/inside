@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Missions : Insider";
+      $title_head      = "Missions";
       $style_head      = "styleAdmin.css";
       $script_head     = "scriptAdmin.js";
       $angular_head    = false;
