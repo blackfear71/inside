@@ -326,7 +326,7 @@ function addIngredient(id)
   var length        = $("#" + id + " .input_ingredient").length;
   var new_length    = length + 1;
   var id_ingredient = 'ingredient_' + new_length;
-  var unites        = ['sans', 'g', 'kg', 'ml', 'cl', 'L'];
+  var unites        = ['sans', 'g', 'kg', 'ml', 'cl', 'L', 'CC', 'CS'];
 
   html = '<div class="zone_ingredient">';
     // Ingrédient
@@ -411,7 +411,12 @@ function showRecipe(link, id)
               html += '<div class="ingredient_details_recette">' + this['ingredient'] + '</div>';
 
               if (this['quantity'] != "")
-                html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
+              {
+                if (this['unity'] == "CC" || this['unity'] == "CS")
+                  html += '<div class="quantite_details_recette">' + this['quantity'] + " " + this['unity'] + '</div>';
+                else
+                  html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
+              }
             });
           html += '</div>';
         }

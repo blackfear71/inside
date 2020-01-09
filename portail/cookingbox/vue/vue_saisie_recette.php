@@ -80,7 +80,7 @@
               echo 'Ajouter un ingrédient';
             echo '</a>';
 
-            $unites = array('sans', 'g', 'kg', 'ml', 'cl', 'L');
+            $unites = array('sans', 'g', 'kg', 'ml', 'cl', 'L', 'CC', 'CS');
 
             // Ingrédients (en cas d'erreur)
             if ((isset($_SESSION['save']['ingredients'])           AND !empty($_SESSION['save']['ingredients']))
