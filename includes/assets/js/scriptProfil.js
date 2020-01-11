@@ -258,6 +258,17 @@ function adaptProfil()
     $('.form_update_infos').css('margin-top', '20px');
 
     $('.form_update_avatar').css('border', '0');
+
+    // Adaptation succès
+    if ($('.zone_succes_profil').length)
+    {
+      $('.zone_profil_left').css('display', 'block');
+      $('.zone_profil_left').css('width', '100%');
+
+      $('.zone_profil_right').css('display', 'block');
+      $('.zone_profil_right').css('width', '100%');
+      $('.zone_profil_right').css('margin-left', '0');
+    }
   }
   else
   {
@@ -267,6 +278,17 @@ function adaptProfil()
     $('.form_update_infos').css('margin-top', '0');
 
     $('.form_update_avatar').css('border-right', 'solid 1px #b3b3b3');
+
+    // Adaptation succès
+    if ($('.zone_succes_profil').length)
+    {
+      $('.zone_profil_left').css('display', 'inline-block');
+      $('.zone_profil_left').css('width', '260px');
+
+      $('.zone_profil_right').css('display', 'inline-block');
+      $('.zone_profil_right').css('width', 'calc(100% - 280px)');
+      $('.zone_profil_right').css('margin-left', '20px');
+    }
   }
 }
 
