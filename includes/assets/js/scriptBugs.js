@@ -131,6 +131,10 @@ function adaptBugs()
     $('.zone_evolutions').css('display', 'block');
     $('.zone_evolutions').css('width', '100%');
     $('.zone_evolutions').css('margin-left', '0');
+
+    $('.view').css('display', 'inline-block');
+    $('.view').css('width', 'calc(50% - 10px)');
+    $('.view').first().css('margin-right', '20px');
   }
   else
   {
@@ -144,5 +148,9 @@ function adaptBugs()
     $('.zone_evolutions').css('display', 'inline-block');
     $('.zone_evolutions').css('width', 'calc(50% - 80px)');
     $('.zone_evolutions').css('margin-left', '20px');
+
+    $('.view').css('display', 'block');
+    $('.view').css('width', '100%');
+    $('.view').first().css('margin-right', '0');
   }
 }
