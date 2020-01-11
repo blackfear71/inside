@@ -55,7 +55,7 @@
 
 .zone_saisie_image
 {
-	margin-bottom: 10px;
+	margin-bottom: 12px;
 }
 
 .zone_parcourir_image
@@ -63,6 +63,8 @@
 	display: block;
 	width: 254px;
 	height: 359px;
+	margin-left: auto;
+	margin-right: auto;
 	border-style: dashed;
 	border-width: 3px;
 	border-radius: 2px;

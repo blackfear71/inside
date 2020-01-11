@@ -64,7 +64,7 @@ $(function()
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
-  // Décalage pour mobile
+  // Adaptation mobile
   adaptEC();
 });
 

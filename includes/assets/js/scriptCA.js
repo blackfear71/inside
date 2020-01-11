@@ -4,6 +4,10 @@
 // Au chargement du document
 $(function()
 {
+  /*** Actions au chargement ***/
+  // Adaptation mobile
+  adaptCalendars();
+
   /*** Actions au changement ***/
   // Charge le calendrier
   $('.loadCalendrier').on('change', function()
@@ -16,6 +20,13 @@ $(function()
   {
     loadFile(event, 'image_annexes');
   });
+});
+
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Adaptation mobile
+  adaptCalendars();
 });
 
 /***************/
@@ -52,3 +63,26 @@ var loadFile = function(event, id)
   var output = document.getElementById(id);
   output.src = URL.createObjectURL(event.target.files[0]);
 };
+
+// Adaptation des calendriers et annexes sur mobile
+function adaptCalendars()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_calendars_left').css('display', 'block');
+    $('.zone_calendars_left').css('width', '100%');
+
+    $('.zone_calendars_right').css('display', 'block');
+    $('.zone_calendars_right').css('width', '100%');
+    $('.zone_calendars_right').css('margin-left', '0');
+  }
+  else
+  {
+    $('.zone_calendars_left').css('display', 'inline-block');
+    $('.zone_calendars_left').css('width', '260px');
+
+    $('.zone_calendars_right').css('display', 'inline-block');
+    $('.zone_calendars_right').css('width', 'calc(100% - 280px)');
+    $('.zone_calendars_right').css('margin-left', '20px');
+  }
+}
