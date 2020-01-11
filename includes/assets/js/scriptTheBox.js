@@ -4,12 +4,23 @@
 // Au chargement du document
 $(function()
 {
+  /*** Actions au chargement ***/
+  // Adaptation mobile
+  adaptTheBox();
+
   /*** Actions au clic ***/
   // Ajouter une idée
   $('#ajouterIdee, #fermerIdee').click(function()
   {
     afficherMasquer('zone_add_idea');
   });
+});
+
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Décalage pour mobile
+  adaptTheBox();
 });
 
 /*****************/
@@ -56,3 +67,36 @@ $(window).on('load', function()
   // Scroll vers l'id
   scrollToId(id, offset, shadow);
 });
+
+// Adaptations de la section sur mobiles
+function adaptTheBox()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_vues').css('display', 'block');
+    $('.zone_vues').css('width', '100%');
+
+    $('.zone_ideas_right').css('display', 'block');
+    $('.zone_ideas_right').css('width', '100%');
+    $('.zone_ideas_right').css('margin-left', '0');
+
+    $('.view').css('display', 'inline-block');
+    $('.view').css('width', 'calc(50% - 10px)');
+    $('.view:eq(0)').css('margin-right', '20px');
+    $('.view:eq(2)').css('margin-right', '20px');
+  }
+  else
+  {
+    $('.zone_vues').css('display', 'inline-block');
+    $('.zone_vues').css('width', '120px');
+
+    $('.zone_ideas_right').css('display', 'inline-block');
+    $('.zone_ideas_right').css('width', 'calc(100% - 140px)');
+    $('.zone_ideas_right').css('margin-left', '20px');
+
+    $('.view').css('display', 'block');
+    $('.view').css('width', '100%');
+    $('.view:eq(0)').css('margin-right', '0');
+    $('.view:eq(2)').css('margin-right', '0');
+  }
+}

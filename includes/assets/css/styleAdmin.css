@@ -2318,9 +2318,9 @@
 	display: inline-block;
 	width: 20px;
 	height: 20px;
-	line-height: 20px;
+	line-height: 18px;
 	border-radius: 50%;
-	background: #ff1937;
+	background-color: #ff1937;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 90%;
