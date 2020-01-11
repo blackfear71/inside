@@ -187,7 +187,8 @@ $(function()
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
-  // Adaptation mobile
+  // Adaptations mobile
+  adaptCron();
   adaptGenerator();
 });
 
@@ -199,6 +200,7 @@ $(window).on('load', function()
 {
   // Adaptation mobile
   adaptGenerator();
+  adaptCron();
 
   // Masonry (Portail)
   if ($('.menu_admin').length)
@@ -324,7 +326,7 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptations du générateur de code sur mobile
+// Adaptation du générateur de code sur mobile
 function adaptGenerator()
 {
   if ($(window).width() < 1080)
@@ -362,6 +364,39 @@ function adaptGenerator()
 
     $('.zone_generated_right').css('display', 'inline-block');
     $('.zone_generated_right').css('width', 'calc(50% - 10px)');
+  }
+}
+
+// Adaptation des logs CRON sur mobile
+function adaptCron()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_cron').css('display', 'block');
+    $('.zone_cron').css('width', '100%');
+    $('.zone_cron').css('margin-bottom', '20px');
+    $('.zone_cron').first().css('margin-right', '0');
+
+    $('.zone_jlog').css('display', 'block');
+    $('.zone_jlog').css('width', '100%');
+    $('.zone_jlog').css('margin-right', '0');
+
+    $('.zone_hlog').css('display', 'block');
+    $('.zone_hlog').css('width', '100%');
+  }
+  else
+  {
+    $('.zone_cron').css('display', 'inline-block');
+    $('.zone_cron').css('width', 'calc(50% - 12px)');
+    $('.zone_cron').css('margin-bottom', '0');
+    $('.zone_cron').first().css('margin-right', '20px');
+
+    $('.zone_jlog').css('display', 'inline-block');
+    $('.zone_jlog').css('width', 'calc(50% - 12px)');
+    $('.zone_jlog').css('margin-right', '20px');
+
+    $('.zone_hlog').css('display', 'inline-block');
+    $('.zone_hlog').css('width', 'calc(50% - 12px)');
   }
 }
 
