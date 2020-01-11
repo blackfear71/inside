@@ -5,7 +5,7 @@
     <?php
       $title_head      = "Bugs";
       $style_head      = "styleBugs.css";
-      $script_head     = "scriptAdmin.js";
+      $script_head     = "scriptBugs.js";
       $angular_head    = false;
       $chat_head       = false;
       $datepicker_head = false;
