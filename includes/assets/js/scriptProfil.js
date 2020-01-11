@@ -250,7 +250,7 @@ function initMasonry()
 // Adaptations de la section sur mobiles
 function adaptProfil()
 {
-  if ($(window).width() < 1200)
+  if ($(window).width() < 1080)
   {
     $('.form_update_infos').css('display', 'block');
     $('.form_update_infos').css('width', '100%');

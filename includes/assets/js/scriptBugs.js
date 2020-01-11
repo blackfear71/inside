@@ -5,6 +5,9 @@
 $(function()
 {
   /*** Actions au chargement ***/
+  // Adaptation mobile
+  adaptBugs();
+
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
   var offset = 70;
@@ -57,6 +60,13 @@ $(function()
   });
 });
 
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Décalage pour mobile
+  adaptBugs();
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
@@ -105,3 +115,34 @@ var loadFile = function(event, id)
     output.setAttribute('style','transform: rotate(' + degrees + 'deg)');
   });
 };
+
+// Adaptations de la section sur mobiles
+function adaptBugs()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_vues').css('display', 'block');
+    $('.zone_vues').css('width', '100%');
+
+    $('.zone_bugs').css('display', 'block');
+    $('.zone_bugs').css('width', '100%');
+    $('.zone_bugs').css('margin-left', '0');
+
+    $('.zone_evolutions').css('display', 'block');
+    $('.zone_evolutions').css('width', '100%');
+    $('.zone_evolutions').css('margin-left', '0');
+  }
+  else
+  {
+    $('.zone_vues').css('display', 'inline-block');
+    $('.zone_vues').css('width', '120px');
+
+    $('.zone_bugs').css('display', 'inline-block');
+    $('.zone_bugs').css('width', 'calc(50% - 80px)');
+    $('.zone_bugs').css('margin-left', '20px');
+
+    $('.zone_evolutions').css('display', 'inline-block');
+    $('.zone_evolutions').css('width', 'calc(50% - 80px)');
+    $('.zone_evolutions').css('margin-left', '20px');
+  }
+}
