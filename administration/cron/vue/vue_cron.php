@@ -39,60 +39,67 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-        ?>
 
-        <div class="zone_cron_asynchrone">
-  				<div class="level_succes" style="margin-top: 0;">Lancement asynchrone des tâches CRON</div>
+          /************************/
+          /* Lancement asynchrone */
+          /************************/
+          echo '<div class="zone_cron_asynchrone">';
+            echo '<div class="titre_section"><img src="../../includes/icons/admin/launch_grey.png" alt="launch_grey" class="logo_titre_section" /><div class="texte_titre_section">Lancement asynchrone des tâches CRON</div></div>';
 
-          <div class="zone_cron margin_right_20">
-            <div class="titre_cron">
-              CRON journalier
-            </div>
-            <div class="contenu_cron">
-              Exécute les tâches suivantes :<br />
-              <ul>
-                <li>Recherche les sorties cinéma du jour et insère une notification</li>
-                <li>Notification début et fin de mission</li>
-                <li>Attribution expérience fin de mission</li>
-                <li>Génération log journalier</li>
-              </ul>
-              <u>Fréquence :</u> tous les jours à 7h.
-            </div>
-            <div class="boutons_cron">
-              <form method="post" action="../../cron/daily_cron.php">
-                <input type="submit" name="daily_cron" value="Lancer" class="bouton_cron" />
-              </form>
-            </div>
-          </div>
+            // CRON journalier
+            echo '<div class="zone_cron margin_right_20">';
+              echo '<div class="titre_cron">CRON journalier</div>';
 
-          <div class="zone_cron">
-            <div class="titre_cron">
-              CRON hebdomadaire
-            </div>
-            <div class="contenu_cron">
-              Exécute les tâches suivantes :<br />
-              <ul>
-                <li>Remise à plat des bilans des dépenses</li>
-                <li>Recherche du plus dépensier et du moins dépensier et insère une notification (à venir)</li>
-                <li>Sauvegarde automatique de la base de données (à venir)</li>
-                <li>Génération log hebdomadaire</li>
-              </ul>
-              <u>Fréquence :</u> tous les lundis à 7h.
-            </div>
-            <div class="boutons_cron">
-              <form method="post" action="../../cron/weekly_cron.php">
-                <input type="submit" name="weekly_cron" value="Lancer" class="bouton_cron" />
-              </form>
-            </div>
-          </div>
-        </div>
+              echo '<div class="contenu_cron">';
+                echo 'Exécute les tâches suivantes :';
+                echo '<ul>';
+                  echo '<li>Recherche les sorties cinéma du jour et insère une notification</li>';
+                  echo '<li>Notification début et fin de mission</li>';
+                  echo '<li>Attribution expérience fin de mission</li>';
+                  echo '<li>Génération log journalier</li>';
+                echo '</ul>';
+                echo '<u>Fréquence :</u> tous les jours à 7h.';
+              echo '</div>';
 
-        <div class="zone_cron_logs">
-          <!-- Logs journaliers -->
-          <div class="zone_jlog">
-            <div class="level_succes">Logs journaliers</div>
-            <div class="zone_logs">
-              <?php
+              echo '<div class="boutons_cron">';
+                echo '<form method="post" action="../../cron/daily_cron.php">';
+                  echo '<input type="submit" name="daily_cron" value="Lancer" class="bouton_cron" />';
+                echo '</form>';
+              echo '</div>';
+            echo '</div>';
+
+            // CRON hebdomadaire
+            echo '<div class="zone_cron">';
+              echo '<div class="titre_cron">CRON hebdomadaire</div>';
+
+              echo '<div class="contenu_cron">';
+                echo 'Exécute les tâches suivantes :';
+                echo '<ul>';
+                  echo '<li>Remise à plat des bilans des dépenses</li>';
+                  echo '<li>Recherche du plus dépensier et du moins dépensier et insère une notification (à venir)</li>';
+                  echo '<li>Sauvegarde automatique de la base de données (à venir)</li>';
+                  echo '<li>Génération log hebdomadaire</li>';
+                echo '</ul>';
+                echo '<u>Fréquence :</u> tous les lundis à 7h.';
+              echo '</div>';
+
+              echo '<div class="boutons_cron">';
+                echo '<form method="post" action="../../cron/weekly_cron.php">';
+                  echo '<input type="submit" name="weekly_cron" value="Lancer" class="bouton_cron" />';
+                echo '</form>';
+              echo '</div>';
+            echo '</div>';
+          echo '</div>';
+
+          /********/
+          /* Logs */
+          /********/
+          echo '<div class="zone_cron_logs">';
+            // Logs journaliers
+            echo '<div class="zone_jlog">';
+              echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Logs journaliers</div></div>';
+
+              echo '<div class="zone_logs">';
                 if (!empty($files['daily']))
                 {
                   $i = 0;
@@ -138,20 +145,20 @@
                     echo '<div class="titre_no_logs">';
                       echo 'Pas encore de logs journaliers';
                     echo '</div>';
+
                     echo '<div class="contenu_no_logs">';
                       echo 'Aucun log journalier n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
                     echo '</div>';
                   echo '</div>';
                 }
-              ?>
-            </div>
-          </div>
+              echo '</div>';
+            echo '</div>';
 
-          <!-- Logs hebdomadaires -->
-          <div class="zone_hlog">
-            <div class="level_succes">Logs hebdomadaires</div>
-            <div class="zone_logs">
-              <?php
+            // Logs hebdomadaires
+            echo '<div class="zone_hlog">';
+              echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Logs hebdomadaires</div></div>';
+
+              echo '<div class="zone_logs">';
                 if (!empty($files['weekly']))
                 {
                   $j = 0;
@@ -202,12 +209,10 @@
                     echo '</div>';
                   echo '</div>';
                 }
-              ?>
-            </div>
-          </div>
-        </div>
-
-        <div class="clear"></div>
+              echo '</div>';
+            echo '</div>';
+          echo '</div>';
+        ?>
 			</article>
 		</section>
 

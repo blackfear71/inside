@@ -387,16 +387,16 @@ function adaptCron()
   else
   {
     $('.zone_cron').css('display', 'inline-block');
-    $('.zone_cron').css('width', 'calc(50% - 12px)');
+    $('.zone_cron').css('width', 'calc(50% - 10px)');
     $('.zone_cron').css('margin-bottom', '0');
     $('.zone_cron').first().css('margin-right', '20px');
 
     $('.zone_jlog').css('display', 'inline-block');
-    $('.zone_jlog').css('width', 'calc(50% - 12px)');
+    $('.zone_jlog').css('width', 'calc(50% - 10px)');
     $('.zone_jlog').css('margin-right', '20px');
 
     $('.zone_hlog').css('display', 'inline-block');
-    $('.zone_hlog').css('width', 'calc(50% - 12px)');
+    $('.zone_hlog').css('width', 'calc(50% - 10px)');
   }
 }
 
