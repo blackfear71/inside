@@ -4,6 +4,10 @@
 // Au chargement du document
 $(function()
 {
+  /*** Actions au chargement ***/
+  // Adaptation mobile
+  adaptMovies();
+
   /*** Actions au clic ***/
   // Affiche la zone de saisie d'un film
   $('#ajouterFilm, #annulerFilm').click(function()
@@ -121,6 +125,13 @@ $(function()
       monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
     });
   }
+});
+
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Adaptation mobile
+  adaptMovies();
 });
 
 /************************/
@@ -454,4 +465,81 @@ function updateFilm(zone)
     $('select[name=minutes_doodle]').val('');
 
   $('.saisie_bouton').val(bouton);
+}
+
+// Adaptation des films sur mobile
+function adaptMovies()
+{
+  if ($(window).width() < 1080)
+  {
+    // Accueil et fiches
+    if ($('.zone_movies_left').length && $('.zone_movies_right').length)
+    {
+      $('.zone_movies_left').css('display', 'block');
+      $('.zone_movies_left').css('width', '100%');
+
+      $('.zone_movies_right').css('display', 'block');
+      $('.zone_movies_right').css('width', '100%');
+      $('.zone_movies_right').css('margin-left', '0');
+    }
+
+    // Détails
+    if ($('.zone_details_left').length && $('.zone_details_right').length)
+    {
+      $('.zone_details_left').css('display', 'block');
+      $('.zone_details_left').css('width', '100%');
+
+      $('.zone_details_right').css('display', 'block');
+      $('.zone_details_right').css('width', '100%');
+      $('.zone_details_right').css('margin-left', '0');
+
+      $('.zone_details_poster').css('width', '100%');
+
+      $('.zone_details_actions').css('float', 'right');
+      $('.zone_details_actions').css('margin-right', '-50px');
+
+      $('.form_vote_right').css('width', '30%');
+      $('.form_vote_right').css('margin-right', '0');
+
+      $('.zone_details_votes').css('width', '100%');
+
+      $('.video_container').css('margin-top', '20px');
+    }
+  }
+  else
+  {
+    // Accueil et fiches
+    if ($('.zone_movies_left').length && $('.zone_movies_right').length)
+    {
+      $('.zone_movies_left').css('display', 'inline-block');
+      $('.zone_movies_left').css('width', '200px');
+
+      $('.zone_movies_right').css('display', 'inline-block');
+      $('.zone_movies_right').css('width', 'calc(100% - 220px)');
+      $('.zone_movies_right').css('margin-left', '20px');
+    }
+
+    // Détails
+    if ($('.zone_details_left').length && $('.zone_details_right').length)
+    {
+      $('.zone_details_left').css('display', 'inline-block');
+      $('.zone_details_left').css('width', '40%');
+
+      $('.zone_details_right').css('display', 'inline-block');
+      $('.zone_details_right').css('width', 'calc(60% - 20px)');
+      $('.zone_details_right').css('margin-left', '20px');
+
+      $('.zone_details_poster').css('width', 'calc(100% - 50px)');
+
+      $('.zone_details_actions').css('display', 'inline-block');
+      $('.zone_details_actions').css('margin-right', '0');
+
+      $('.form_vote_right').css('width', 'calc(30% - 50px)');
+      $('.form_vote_right').css('margin-right', '50px');
+
+      $('.zone_details_votes').css('width', 'calc(100% - 50px)');
+
+      $('.video_container').css('margin-top', '-20px');
+    }
+  }
 }
