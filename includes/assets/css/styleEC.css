@@ -222,7 +222,6 @@
 	width: calc(100% - 300px);
 	padding-top: 10px;
 	text-align: left;
-	margin-bottom: -4px;
 	max-height: calc(100vh - 250px);
 	overflow-y: auto;
 }

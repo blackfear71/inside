@@ -78,21 +78,45 @@ function adaptExpenses()
 
   if ($(window).width() < 1080)
   {
+    // Bilan et dépenses
     $('.zone_expenses_left').css('display', 'block');
     $('.zone_expenses_left').css('width', '100%');
 
     $('.zone_expenses_right').css('display', 'block');
     $('.zone_expenses_right').css('width', '100%');
     $('.zone_expenses_right').css('margin-left', '0');
+
+    // Saisie dépense
+    if ($('.zone_saisie_depense').length)
+    {
+      $('.zone_saisie_left').css('display', 'block');
+      $('.zone_saisie_left').css('width', 'calc(100% - 20px)');
+
+      $('.zone_saisie_right').css('display', 'block');
+      $('.zone_saisie_right').css('width', '100%');
+      $('.zone_saisie_right').css('padding-top', '0');
+    }
   }
   else
   {
+    // Bilan et dépenses
     $('.zone_expenses_left').css('display', 'inline-block');
     $('.zone_expenses_left').css('width', '400px');
 
     $('.zone_expenses_right').css('display', 'inline-block');
     $('.zone_expenses_right').css('width', 'calc(100% - 420px)');
     $('.zone_expenses_right').css('margin-left', '20px');
+
+    // Saisie dépense
+    if ($('.zone_saisie_depense').length)
+    {
+      $('.zone_saisie_left').css('float', 'left');
+      $('.zone_saisie_left').css('width', '280px');
+
+      $('.zone_saisie_right').css('display', 'inline-block');
+      $('.zone_saisie_right').css('width', 'calc(100% - 300px)');
+      $('.zone_saisie_right').css('padding-top', '10px');
+    }
   }
 }
 

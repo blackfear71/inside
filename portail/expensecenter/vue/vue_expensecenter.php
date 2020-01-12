@@ -87,7 +87,7 @@
     <!-- Données JSON -->
     <script>
       // Récupération liste dépenses pour le script
-      var listExpenses = <?php echo $listeDepensesJson; ?>;
+      var listExpenses = <?php if (isset($listeDepensesJson) AND !empty($listeDepensesJson)) echo $listeDepensesJson; else echo '{}'; ?>;
     </script>
   </body>
 </html>
