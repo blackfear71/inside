@@ -4,10 +4,6 @@
 // Au chargement du document
 $(function()
 {
-  /*** Actions au chargement ***/
-  // Adaptation mobile
-  adaptMovies();
-
   /*** Actions au clic ***/
   // Affiche la zone de saisie d'un film
   $('#ajouterFilm, #annulerFilm').click(function()
@@ -140,6 +136,9 @@ $(window).resize(function()
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptMovies();
+
   // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_home').css('display', 'block');
   $('.zone_films').css('display', 'block');
@@ -467,7 +466,7 @@ function updateFilm(zone)
   $('.saisie_bouton').val(bouton);
 }
 
-// Adaptation des films sur mobile
+// Adaptations des films sur mobile
 function adaptMovies()
 {
   if ($(window).width() < 1080)

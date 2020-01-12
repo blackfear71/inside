@@ -4,10 +4,6 @@
 // Au chargement du document
 $(function()
 {
-  /*** Actions au chargement ***/
-  // Adaptation mobile
-  adaptTheBox();
-
   /*** Actions au clic ***/
   // Ajouter une idée
   $('#ajouterIdee, #fermerIdee').click(function()
@@ -41,6 +37,9 @@ function afficherMasquer(id)
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptTheBox();
+
   // Masonry (Idées)
   if ($('.zone_ideas').length)
   {
@@ -68,7 +67,7 @@ $(window).on('load', function()
   scrollToId(id, offset, shadow);
 });
 
-// Adaptations de la section sur mobiles
+// Adaptations des idées sur mobiles
 function adaptTheBox()
 {
   if ($(window).width() < 1080)

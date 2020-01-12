@@ -5,9 +5,6 @@
 $(function()
 {
   /*** Actions au chargement ***/
-  // Adaptation mobile
-  adaptProfil();
-
   $('#progress_circle').circlize(
   {
 		radius: 60,
@@ -134,6 +131,9 @@ $(window).resize(function()
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptProfil();
+
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_profil').css('display', 'block');
 
@@ -247,7 +247,7 @@ function initMasonry()
   });
 }
 
-// Adaptations de la section sur mobiles
+// Adaptations du profil sur mobiles
 function adaptProfil()
 {
   if ($(window).width() < 1080)

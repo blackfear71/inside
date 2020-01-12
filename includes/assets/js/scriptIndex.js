@@ -135,7 +135,7 @@ function switchIndex(id_open, id_close, focus = null)
   });
 }
 
-// Adaptations de la section sur mobiles
+// Adaptations de l'index sur mobiles
 function adaptIndex()
 {
   if ($(window).width() < 1480)
@@ -157,7 +157,7 @@ function adaptIndex()
     $('.zone_logo_categories').css('width', '50px');
     $('.zone_logo_categories').css('height', '50px');
     $('.zone_logo_categories').css('margin-bottom', '10px');
-    
+
     $('.logo_categories').css('width', '30px');
     $('.logo_categories').css('height', '30px');
     $('.logo_categories').css('margin-top', '10px');

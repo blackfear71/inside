@@ -4,10 +4,6 @@
 // Au chargement du document
 $(function()
 {
-  /*** Actions au chargement ***/
-  // Adaptation mobile
-  adaptCalendars();
-
   /*** Actions au changement ***/
   // Charge le calendrier
   $('.loadCalendrier').on('change', function()
@@ -35,6 +31,9 @@ $(window).resize(function()
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptCalendars();
+
   // Masonry (Calendriers & annexes)
   if ($('.zone_calendriers').length)
   {
@@ -64,7 +63,7 @@ var loadFile = function(event, id)
   output.src = URL.createObjectURL(event.target.files[0]);
 };
 
-// Adaptation des calendriers et annexes sur mobile
+// Adaptations des calendriers et annexes sur mobile
 function adaptCalendars()
 {
   if ($(window).width() < 1080)

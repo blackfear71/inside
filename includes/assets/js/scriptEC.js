@@ -6,7 +6,7 @@ $(function()
 {
   /*** Actions au chargement ***/
   // Adaptation mobile
-  adaptEC();
+  adaptExpenses();
 
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
@@ -65,14 +65,14 @@ $(function()
 $(window).resize(function()
 {
   // Adaptation mobile
-  adaptEC();
+  adaptExpenses();
 });
 
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptations de la section sur mobiles
-function adaptEC()
+// Adaptations des dépenses sur mobiles
+function adaptExpenses()
 {
   initMasonry();
 

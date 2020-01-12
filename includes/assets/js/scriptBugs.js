@@ -116,7 +116,7 @@ var loadFile = function(event, id)
   });
 };
 
-// Adaptations de la section sur mobiles
+// Adaptations des bugs/évolutions sur mobiles
 function adaptBugs()
 {
   if ($(window).width() < 1080)

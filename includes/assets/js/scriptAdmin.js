@@ -3,6 +3,11 @@
 /***************/
 $(function()
 {
+  /*** Actions au chargement ***/
+  // Adaptation mobile
+  adaptCron();
+  adaptGenerator();
+
   /*** Actions au clic ***/
   // Affiche les détails d'un log et applique une rotation à la flèche
   $('.detailsLogs').click(function()
@@ -187,7 +192,7 @@ $(function()
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
-  // Adaptations mobile
+  // Adaptation mobile
   adaptCron();
   adaptGenerator();
 });
@@ -198,10 +203,6 @@ $(window).resize(function()
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
-  // Adaptation mobile
-  adaptGenerator();
-  adaptCron();
-
   // Masonry (Portail)
   if ($('.menu_admin').length)
   {
@@ -367,7 +368,7 @@ function adaptGenerator()
   }
 }
 
-// Adaptation des logs CRON sur mobile
+// Adaptations des logs sur mobile
 function adaptCron()
 {
   if ($(window).width() < 1080)
