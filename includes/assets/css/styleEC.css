@@ -79,10 +79,11 @@
 /*** Achat ***/
 .zone_saisie_left
 {
-	float: left;
+	display: inline-block;
 	width: 280px;
 	text-align: center;
 	padding: 10px;
+	vertical-align: top;
 }
 
 .saisie_buyer
@@ -220,10 +221,11 @@
 {
 	display: inline-block;
 	width: calc(100% - 300px);
-	padding-top: 10px;
+	padding: 10px 0 0 0;
 	text-align: left;
 	max-height: calc(100vh - 250px);
 	overflow-y: auto;
+	vertical-align: top;
 }
 
 .zone_saisie_utilisateurs

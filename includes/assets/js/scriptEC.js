@@ -93,8 +93,8 @@ function adaptExpenses()
       $('.zone_saisie_left').css('width', 'calc(100% - 20px)');
 
       $('.zone_saisie_right').css('display', 'block');
-      $('.zone_saisie_right').css('width', '100%');
-      $('.zone_saisie_right').css('padding-top', '0');
+      $('.zone_saisie_right').css('width', 'calc(100% - 20px)');
+      $('.zone_saisie_right').css('padding', '0 10px 0 10px');
     }
   }
   else
@@ -110,12 +110,12 @@ function adaptExpenses()
     // Saisie dépense
     if ($('.zone_saisie_depense').length)
     {
-      $('.zone_saisie_left').css('float', 'left');
+      $('.zone_saisie_left').css('display', 'inline-block');
       $('.zone_saisie_left').css('width', '280px');
 
       $('.zone_saisie_right').css('display', 'inline-block');
       $('.zone_saisie_right').css('width', 'calc(100% - 300px)');
-      $('.zone_saisie_right').css('padding-top', '10px');
+      $('.zone_saisie_right').css('padding', '10px 0 0 0');
     }
   }
 }
