@@ -504,6 +504,17 @@ function adaptMovies()
 
       $('.video_container').css('margin-top', '20px');
     }
+
+    // Saisie film
+    if ($('.zone_saisie_film').length)
+    {
+      $('.zone_saisie_left').css('display', 'block');
+      $('.zone_saisie_left').css('width', 'calc(100% - 20px)');
+
+      $('.zone_saisie_right').css('display', 'block');
+      $('.zone_saisie_right').css('width', 'calc(100% - 20px)');
+      $('.zone_saisie_right').css('margin-top', '-12px');
+    }
   }
   else
   {
@@ -539,6 +550,17 @@ function adaptMovies()
       $('.zone_details_votes').css('width', 'calc(100% - 50px)');
 
       $('.video_container').css('margin-top', '-20px');
+    }
+
+    // Saisie film
+    if ($('.zone_saisie_film').length)
+    {
+      $('.zone_saisie_left').css('display', 'inline-block');
+      $('.zone_saisie_left').css('width', 'calc(50% - 20px)');
+
+      $('.zone_saisie_right').css('display', 'inline-block');
+      $('.zone_saisie_right').css('width', 'calc(50% - 20px)');
+      $('.zone_saisie_right').css('margin-top', '0');
     }
   }
 }
