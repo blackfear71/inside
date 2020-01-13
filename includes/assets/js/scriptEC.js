@@ -95,6 +95,9 @@ function adaptExpenses()
       $('.zone_saisie_right').css('display', 'block');
       $('.zone_saisie_right').css('width', 'calc(100% - 20px)');
       $('.zone_saisie_right').css('padding', '0 10px 0 10px');
+
+      // Calcul automatique des tailles des zones
+      tailleAutoTexte();
     }
   }
   else
@@ -114,8 +117,11 @@ function adaptExpenses()
       $('.zone_saisie_left').css('width', '280px');
 
       $('.zone_saisie_right').css('display', 'inline-block');
-      $('.zone_saisie_right').css('width', 'calc(100% - 300px)');
-      $('.zone_saisie_right').css('padding', '10px 0 0 0');
+      $('.zone_saisie_right').css('width', 'calc(100% - 320px)');
+      $('.zone_saisie_right').css('padding', '10px 10px 0 10px');
+
+      // Calcul automatique des tailles des zones
+      tailleAutoTexte();
     }
   }
 }
