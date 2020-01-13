@@ -47,13 +47,7 @@
       foreach ($news as &$messageNews)
       {
         $messageNews->setTitle(htmlspecialchars($messageNews->getTitle()));
-
-        // Exception pour certains messages
-        if ($messageNews->getLogo() != 'cooking_box'
-        AND $messageNews->getLogo() != 'anniversary'
-        AND $messageNews->getLogo() != 'missions')
-          $messageNews->setContent(htmlspecialchars($messageNews->getContent()));
-
+        //$messageNews->setContent(htmlspecialchars($messageNews->getContent()));
         $messageNews->setDetails(htmlspecialchars($messageNews->getDetails()));
         $messageNews->setLogo(htmlspecialchars($messageNews->getLogo()));
         $messageNews->setLink(htmlspecialchars($messageNews->getLink()));
