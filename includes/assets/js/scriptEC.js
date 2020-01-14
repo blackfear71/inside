@@ -66,6 +66,12 @@ $(window).resize(function()
 {
   // Adaptation mobile
   adaptExpenses();
+
+  // Calcul automatique des tailles des zones après un delai de 150ms
+  setTimeout(function()
+  {
+    tailleAutoTexte();
+  }, 150);
 });
 
 /*****************/
@@ -95,9 +101,6 @@ function adaptExpenses()
       $('.zone_saisie_right').css('display', 'block');
       $('.zone_saisie_right').css('width', 'calc(100% - 20px)');
       $('.zone_saisie_right').css('padding', '0 10px 0 10px');
-
-      // Calcul automatique des tailles des zones
-      tailleAutoTexte();
     }
   }
   else
@@ -119,9 +122,6 @@ function adaptExpenses()
       $('.zone_saisie_right').css('display', 'inline-block');
       $('.zone_saisie_right').css('width', 'calc(100% - 320px)');
       $('.zone_saisie_right').css('padding', '10px 10px 0 10px');
-
-      // Calcul automatique des tailles des zones
-      tailleAutoTexte();
     }
   }
 }
@@ -156,9 +156,6 @@ function initMasonry()
     gutter: 10,
     horizontalOrder: true
   });
-
-  // Calcul automatique des tailles des zones
-  tailleAutoTexte();
 }
 
 // Calcul la taille des explications automatiquement
@@ -174,6 +171,9 @@ function afficherExplications()
 {
   $('.lien_explications').css('display', 'none');
   $('.explications').css('display', 'block');
+
+  // Calcul automatique des tailles des zones
+  tailleAutoTexte();
 }
 
 // Ajoute une part à un utilisateur
