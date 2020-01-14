@@ -1,7 +1,7 @@
 <?php
-  /************************************/
-  /*** Zone de saisie de restaurant ***/
-  /************************************/
+  /******************************/
+  /*** Zone de saisie de film ***/
+  /******************************/
   echo '<div id="zone_saisie_film" style="display: none;" class="fond_saisie_film">';
     echo '<div class="zone_saisie_film">';
       // Titre
@@ -22,6 +22,14 @@
           // Sous-titre
           echo '<div class="sous_titre_saisie_film">';
             echo 'Informations sur le film';
+          echo '</div>';
+
+          // Liens utiles
+          echo '<div class="zone_liens_saisie_film">';
+            echo '<a href="http://www.allocine.fr/" target="_blank" class="link_saisie_film link_allocine">ALLOCINÉ</a>';
+            echo '<a href="https://www.youtube.com/" target="_blank" class="link_saisie_film link_youtube">YouTube</a>';
+            echo '<a href="https://www.dailymotion.com/fr" target="_blank" class="link_saisie_film link_dailymotion">dailymotion</a>';
+            echo '<a href="https://vimeo.com/fr/watch" target="_blank" class="link_saisie_film link_vimeo">viméo</a>';
           echo '</div>';
 
           // Titre du film

@@ -120,6 +120,49 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+.zone_liens_saisie_film
+{
+	display: block;
+}
+
+.link_saisie_film
+{
+	display: inline-block;
+	background-color: #fecc00;
+	padding: 2px 10px 2px 10px;
+	border-radius: 2px;
+	margin: 10px 5px 0 5px;
+	text-decoration: none;
+}
+
+.link_allocine
+{
+	font-family: robotoblack, Verdana, sans-serif;
+	background-color: #fecc00;
+	color: #262626;
+}
+
+.link_youtube
+{
+	font-family: roboto_condensedbold, Verdana, sans-serif;
+	background-color: #ff0000;
+	color: white;
+}
+
+.link_dailymotion
+{
+	font-family: robotobold, Verdana, sans-serif;
+	background-color: #00bff9;
+	color: white;
+}
+
+.link_vimeo
+{
+	font-family: robotoblack_italic, Verdana, sans-serif;
+	background-color: #1a2e3b;
+	color: white;
+}
+
 .zone_saisie_ligne
 {
 	display: block;
