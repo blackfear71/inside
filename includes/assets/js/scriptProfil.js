@@ -247,7 +247,7 @@ function initMasonry()
   });
 }
 
-// Adaptations du profil sur mobiles
+// Adaptations du profil sur mobile
 function adaptProfil()
 {
   if ($(window).width() < 1080)

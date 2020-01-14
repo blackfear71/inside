@@ -39,7 +39,7 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptations du portail sur mobiles
+// Adaptations du portail sur mobile
 function adaptPortail()
 {
   if ($(window).width() < 1080)

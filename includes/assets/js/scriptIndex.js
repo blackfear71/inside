@@ -135,7 +135,7 @@ function switchIndex(id_open, id_close, focus = null)
   });
 }
 
-// Adaptations de l'index sur mobiles
+// Adaptations de l'index sur mobile
 function adaptIndex()
 {
   if ($(window).width() < 1480)

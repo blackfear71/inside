@@ -165,7 +165,7 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptations des recettes sur mobiles
+// Adaptations des recettes sur mobile
 function adaptRecipes()
 {
   if ($(window).width() < 1080)

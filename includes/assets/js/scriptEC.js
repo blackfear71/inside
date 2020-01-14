@@ -77,7 +77,7 @@ $(window).resize(function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptations des dépenses sur mobiles
+// Adaptations des dépenses sur mobile
 function adaptExpenses()
 {
   initMasonry();

@@ -67,7 +67,7 @@ $(window).on('load', function()
   scrollToId(id, offset, shadow);
 });
 
-// Adaptations des idées sur mobiles
+// Adaptations des idées sur mobile
 function adaptTheBox()
 {
   if ($(window).width() < 1080)
