@@ -1362,7 +1362,7 @@ function showDetails(zone, id)
 
   // Pas de menus
   if (menuPresent == false)
-    $('.zone_details_user_bottom').html('<div class="no_menu_details">Pas de menus proposés pour ce choix.</div>');
+    $('.zone_details_user_bottom').html('<div class="empty">Pas de menus proposés pour ce choix.</div>');
 
   // Affichage de la zone
   afficherMasquer(zone);

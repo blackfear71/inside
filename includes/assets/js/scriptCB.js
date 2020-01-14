@@ -58,7 +58,7 @@ $(function()
   });
 
   // Réinitialise la saisie recette à la fermeture
-  $('#fermerRecette').click(function()
+  $('#fermerSaisieRecette').click(function()
   {
     resetSaisie('zone_add_recipe');
   });

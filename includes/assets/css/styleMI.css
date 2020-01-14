@@ -6,6 +6,7 @@
 .zone_missions
 {
 	width: 100%;
+	display: none;
 }
 
 /*** Missions à venir ***/

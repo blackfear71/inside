@@ -4,6 +4,9 @@
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_missions').css('display', 'block');
+
   // Masonry (Calendriers & annexes)
   if ($('.zone_missions_accueil').length)
   {
