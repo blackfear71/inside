@@ -29,7 +29,7 @@
             echo '<a href="http://www.allocine.fr/" target="_blank" class="link_saisie_film link_allocine">ALLOCINÉ</a>';
             echo '<a href="https://www.youtube.com/" target="_blank" class="link_saisie_film link_youtube">YouTube</a>';
             echo '<a href="https://www.dailymotion.com/fr" target="_blank" class="link_saisie_film link_dailymotion">dailymotion</a>';
-            echo '<a href="https://vimeo.com/fr/watch" target="_blank" class="link_saisie_film link_vimeo">viméo</a>';
+            echo '<a href="https://vimeo.com/fr/watch" target="_blank" class="link_saisie_film link_vimeo">vimeo</a>';
           echo '</div>';
 
           // Titre du film
