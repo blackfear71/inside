@@ -11,6 +11,14 @@ $(function()
     afficherMasquer('zone_saisie_film');
   });
 
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme la saisie d'une idée
+    if ($(event.target).attr('class') == 'fond_saisie_film')
+      closeInput('zone_saisie_film');
+  });
+
   // Change la couleur des switch restaurant film
   $('.label_switch').click(function()
   {
@@ -213,6 +221,13 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeIn(0);
   else
     $('#' + id).fadeOut(0);
+}
+
+// Ferme la saisie d'un film
+function closeInput(id)
+{
+  if ($('#' + id).css('display') != "none")
+    afficherMasquer(id);
 }
 
 // Change la couleur des radio boutons (saisie film)

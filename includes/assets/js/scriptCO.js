@@ -32,6 +32,21 @@ $(function()
     afficherMasquer('zone_add_image');
   });
 
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme le zoom d'une image culte
+    if ($(event.target).attr('class') == 'fond_zoom')
+      closePicture();
+
+    // Ferme la saisie d'une phrase/image culte
+    if ($(event.target).attr('class') == 'fond_saisie_collector')
+    {
+      closeInput('zone_add_collector');
+      closeInput('zone_add_image');
+    }
+  });
+
   // Affiche la zone de modification d'une phrase/image culte
   $('.modifierCollector').click(function()
   {
@@ -247,6 +262,22 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeIn(0);
   else
     $('#' + id).fadeOut(0);
+}
+
+// Ferme le zoom d'une image culte
+function closePicture()
+{
+  $('#zoom_image').fadeOut(200, function()
+  {
+    $('#zoom_image').remove();
+  });
+}
+
+// Ferme la saisie d'une phrase/image culte
+function closeInput(id)
+{
+  if ($('#' + id).css('display') != "none")
+    afficherMasquer(id);
 }
 
 // Adapte la zone "Parcourir" en fonction de la taille de l'image à son chargement

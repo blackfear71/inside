@@ -10,6 +10,14 @@ $(function()
   {
     afficherMasquer('zone_add_idea');
   });
+
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme la saisie d'une idée
+    if ($(event.target).attr('class') == 'fond_saisie_idea')
+      closeInput('zone_add_idea');
+  });
 });
 
 // Au redimensionnement de la fenêtre
@@ -18,18 +26,6 @@ $(window).resize(function()
   // Adaptation mobile
   adaptTheBox();
 });
-
-/*****************/
-/*** Fonctions ***/
-/*****************/
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
 
 /************************/
 /*** Masonry & scroll ***/
@@ -66,6 +62,25 @@ $(window).on('load', function()
   // Scroll vers l'id
   scrollToId(id, offset, shadow);
 });
+
+/*****************/
+/*** Fonctions ***/
+/*****************/
+// Affiche ou masque un élément (délai 200ms)
+function afficherMasquer(id)
+{
+  if ($('#' + id).css('display') == "none")
+    $('#' + id).fadeIn(200);
+  else
+    $('#' + id).fadeOut(200);
+}
+
+// Ferme la saisie d'une idée
+function closeInput(id)
+{
+  if ($('#' + id).css('display') != "none")
+    afficherMasquer(id);
+}
 
 // Adaptations des idées sur mobile
 function adaptTheBox()

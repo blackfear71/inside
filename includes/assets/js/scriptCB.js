@@ -85,13 +85,22 @@ $(function()
     showRecipe($(this), id_recette);
   });
 
-  // Ferme le zoom d'une recette
-  $(document).on('click', '#fermerRecette', function()
+  // Ferme le zoom d'une recette (au clic sur la croix)
+  $(document).on('click', '#fermerRecette', function(event)
   {
-    $('#zoom_image').fadeOut(200, function()
-    {
-      $('#zoom_image').remove();
-    });
+    closeRecipe();
+  });
+
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme le zoom d'une recette
+    if ($(event.target).attr('class') == 'fond_zoom')
+      closeRecipe();
+
+    // Ferme la saisie d'une recette
+    if ($(event.target).attr('class') == 'fond_saisie_recette')
+      closeInput();
   });
 
   /*** Actions au changement ***/
@@ -472,6 +481,21 @@ function showRecipe(link, id)
   {
     tailleAutoRecette(500);
   });
+}
+
+// Ferme les détails d'une recette
+function closeRecipe()
+{
+  $('#zoom_image').fadeOut(200, function()
+  {
+    $('#zoom_image').remove();
+  });
+}
+
+// Ferme la saisie d'une recette
+function closeInput()
+{
+  resetSaisie('zone_add_recipe');
 }
 
 // Affiche la zone de mise à jour d'une recette

@@ -171,6 +171,7 @@
   function insertExpense($post)
   {
     $control_ok = true;
+    $id_expense = NULL;
 
     // Récupération des données
     $date    = date("Ymd");
@@ -314,6 +315,8 @@
       // Message insertion effectuée
       $_SESSION['alerts']['depense_added'] = true;
     }
+
+    return $id_expense;
   }
 
   // METIER : Modification d'une dépense

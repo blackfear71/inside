@@ -27,7 +27,15 @@ $(function()
   // Réinitialise la saisie dépense à la fermeture
   $('#resetDepense').click(function()
   {
-    resetSaisie('zone_add_depense', $_GET('year'));
+    closeInput();
+  });
+
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme la saisie d'une dépense
+    if ($(event.target).attr('class') == 'fond_saisie_depense')
+      closeInput();
   });
 
   // Affiche les explications
@@ -142,6 +150,12 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeIn(0);
   else
     $('#' + id).fadeOut(0);
+}
+
+// Ferme la saisie d'une dépense
+function closeInput()
+{
+  resetSaisie('zone_add_depense', $_GET('year'));
 }
 
 // Lance Masonry quand on fait apparaitre la zone

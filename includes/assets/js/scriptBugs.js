@@ -26,30 +26,25 @@ $(function()
   // Affiche une image de bug / évolution en grand
   $('.agrandirImage').click(function()
   {
-    var html;
-    var path   = $(this).children().attr('src');
-    var split  = path.split('/');
-    var report = split[split.length - 1];
-
-    html = '<div id="zoom_image" class="fond_zoom">';
-      html += '<div class="zone_image_zoom">';
-        html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
-        html += '<img src="' + path + '" alt="' + report + '" class="image_zoom" />';
-      html += '</div>';
-    html += '</div>';
-
-    $('body').append(html);
-
-    $('#zoom_image').fadeIn(200);
+    showBug($(this));
   });
 
   // Ferme le zoom d'une image de bug / évolution
   $(document).on('click', '#fermerImage', function()
   {
-    $('#zoom_image').fadeOut(200, function()
-    {
-      $('#zoom_image').remove();
-    });
+    closeBug();
+  });
+
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme le zoom d'une image de bug / évolution
+    if ($(event.target).attr('class') == 'fond_zoom')
+      closeBug();
+
+    // Ferme la saisie d'une image de bug / évolution
+    if ($(event.target).attr('class') == 'fond_saisie_report')
+      closeInput();
   });
 
   /*** Actions au changement ***/
@@ -153,4 +148,39 @@ function adaptBugs()
     $('.view').css('width', '100%');
     $('.view').first().css('margin-right', '0');
   }
+}
+
+// Affiche l'image d'un bug ou d'une évolution
+function showBug(element)
+{
+  var html;
+  var path   = element.children().attr('src');
+  var split  = path.split('/');
+  var report = split[split.length - 1];
+
+  html = '<div id="zoom_image" class="fond_zoom">';
+    html += '<div class="zone_image_zoom">';
+      html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
+      html += '<img src="' + path + '" alt="' + report + '" class="image_zoom" />';
+    html += '</div>';
+  html += '</div>';
+
+  $('body').append(html);
+
+  $('#zoom_image').fadeIn(200);
+}
+
+// Ferme l'image d'un bug ou d'une évolution'
+function closeBug()
+{
+  $('#zoom_image').fadeOut(200, function()
+  {
+    $('#zoom_image').remove();
+  });
+}
+
+// Ferme la saisie d'un bug ou d'une évolution
+function closeInput()
+{
+  afficherMasquer('zone_add_report');
 }

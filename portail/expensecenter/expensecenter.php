@@ -51,7 +51,7 @@
 
     case 'doInserer':
       // Insertion des données par le modèle
-      insertExpense($_POST);
+      $id_expense = insertExpense($_POST);
       break;
 
     case 'doModifier':
@@ -133,6 +133,9 @@
   switch ($_GET['action'])
   {
     case 'doInserer':
+      header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter&anchor=' . $id_expense);
+      break;
+
     case 'doSupprimer':
       header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;

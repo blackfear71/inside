@@ -293,6 +293,18 @@ $(function()
     addOtherType('update_types_restaurants_' + id_restaurant);
   });
 
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme la saisie des choix, la saisie d'un restaurant et les détails d'un choix du jour
+    if ($(event.target).attr('class') == 'fond_saisie_restaurant')
+    {
+      closeInputOrDetails('zone_saisie_choix');
+      closeInputOrDetails('zone_add_restaurant');
+      closeInputOrDetails('zone_details');
+    }
+  });
+
   /*** Actions au changement ***/
   // Change la couleur du type à la saisie
   $(document).on('input', '.saisieType', function()
@@ -467,6 +479,13 @@ function afficherMasquerNoDelay(id)
     $('#' + id).fadeIn(0);
   else
     $('#' + id).fadeOut(0);
+}
+
+// Ferme la saisie des choix
+function closeInputOrDetails(id)
+{
+  if ($('#' + id).css('display') != "none")
+    afficherMasquer(id);
 }
 
 // Affiche la listbox des lieux
