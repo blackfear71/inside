@@ -218,7 +218,9 @@
     }
   }
 
-  class VotesCollector
+  // l'héritage de la classe JsonSerializable est
+  // pour la serialisation de l'objet en json object
+  class VotesCollector implements JsonSerializable
   {
     private $id;
     private $id_collector;
@@ -232,6 +234,12 @@
       $this->id_collector = 0;
       $this->identifiant  = '';
       $this->vote         = 0;
+    }
+
+    // Pour la serialisation de l'objet
+    public function jsonSerialize()
+    {
+      return get_object_vars($this);
     }
 
     // Constructeur de l'objet VotesCollector en fonction des données

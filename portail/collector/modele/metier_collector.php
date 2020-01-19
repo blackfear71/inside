@@ -1,7 +1,8 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
-  include_once('../../includes/classes/collectors.php');
-  include_once('../../includes/classes/profile.php');
+
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions/appel_bdd.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/collectors.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/profile.php');
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
