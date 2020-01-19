@@ -47,7 +47,7 @@
 .zone_saisie_collector
 {
 	width: 85%;
-	margin-top: 200px;
+	margin-top: 100px;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: auto;
@@ -101,6 +101,8 @@
   text-align: center;
 	background-color: white;
 	border-top: solid 1px #d3d3d3;
+	max-height: calc(100vh - 250px);
+	overflow-y: auto;
 }
 
 .saisie_speaker
