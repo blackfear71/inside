@@ -26,6 +26,35 @@
     else
       echo '<div class="empty">Pas de films encore ajoutés pour cette année...</div>';
 
+    /*************************/
+    /* Sorties de la semaine */
+    /*************************/
+    if ($films_semaine == "Y" AND $afficherSemaine == true)
+    {
+      echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Ils sortent cette semaine</div></div>';
+
+      if (!empty($listeSemaine))
+      {
+        echo '<div class="zone_films_accueil">';
+          foreach ($listeSemaine as $filmSemaine)
+          {
+            echo '<a href="details.php?id_film=' . $filmSemaine->getId() . '&action=goConsulter" class="zone_film_accueil">';
+              // Poster
+              if (!empty($filmSemaine->getPoster()))
+                echo '<img src="' . $filmSemaine->getPoster() . '" alt="poster" title="' . $filmSemaine->getFilm() . '" class="image_accueil" />';
+              else
+                echo '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $filmSemaine->getFilm() . '" class="image_accueil" />';
+
+              // Titre du film
+              echo '<div class="titre_film_accueil">' . $filmSemaine->getFilm() . '</div>';
+            echo '</a>';
+          }
+        echo '</div>';
+      }
+      else
+        echo '<div class="empty">Aucun nouveau film cette semaine...</div>';
+    }
+
     /*********************/
     /* Les plus attendus */
     /*********************/

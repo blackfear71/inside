@@ -43,6 +43,7 @@ $(function()
         switchCheckedColor('switch_default_view_movies', id_bouton);
         break;
 
+      case 'bouton_semaine':
       case 'bouton_waited':
       case 'bouton_way_out':
         changeCheckedColor(id_bouton);

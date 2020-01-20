@@ -358,6 +358,11 @@
 		$view_movie_house = $post['movie_house_view'];
 		$categories_movie_house  = "";
 
+    if (isset($post['films_semaine']))
+			$categories_movie_house .= "Y;";
+		else
+			$categories_movie_house .= "N;";
+
 		if (isset($post['films_waited']))
 			$categories_movie_house .= "Y;";
 		else

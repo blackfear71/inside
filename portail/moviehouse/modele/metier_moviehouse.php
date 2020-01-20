@@ -22,7 +22,7 @@
   }
 
   // METIER : Lecture liste des films récents
-  // RETOUR : Tableau des films récents
+  // RETOUR : Liste des films récents
   function getRecents($year)
   {
     $listRecents = array();
@@ -42,8 +42,59 @@
     return $listRecents;
   }
 
+  // METIER : Vérifie si la semaine en cours doit être affichée pour les sorties de la semaine
+  // RETOUR : Booléen
+  function controlWeek($current_year)
+  {
+    $afficher_semaine = true;
+
+    // Calcul des dates de la semaine
+    $nb_jours_lundi    = 1 - date("N");
+    $nb_jours_dimanche = 7 - date("N");
+    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
+    $sunday            = date("Ymd", strtotime('+' . $nb_jours_dimanche . ' days'));
+
+    // Récupération des années
+    $year_of_monday = substr($monday, 0, 4);
+    $year_of_sunday = substr($sunday, 0, 4);
+
+    // Contrôle
+    if ($current_year != $year_of_monday AND $current_year != $year_of_sunday)
+      $afficher_semaine = false;
+
+    return $afficher_semaine;
+  }
+
+  // METIER : Lecture liste des films qui sortent la semaine courante
+  // RETOUR : Listes des films qui sortent la semaine courante
+  function getSemaine()
+  {
+    // Calcul des dates de la semaine
+    $nb_jours_lundi    = 1 - date("N");
+    $nb_jours_dimanche = 7 - date("N");
+    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
+    $sunday            = date("Ymd", strtotime('+' . $nb_jours_dimanche . ' days'));
+
+    $listSemaine = array();
+
+    global $bdd;
+
+    // Récupération des films éligibles
+    $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $monday . '" AND date_theater <= "' . $sunday . '" ORDER BY id DESC');
+    while($donnees = $reponse->fetch())
+    {
+      // Récupération des données
+      $mySemaine = Movie::withData($donnees);
+
+      array_push($listSemaine, $mySemaine);
+    }
+    $reponse->closeCursor();
+
+    return $listSemaine;
+  }
+
   // METIER : Lecture liste des films les plus attendus
-  // RETOUR : Tableau des films attendus
+  // RETOUR : Liste des films attendus
   function getAttendus($year)
   {
     $listAttendus = array();
@@ -121,7 +172,7 @@
   }
 
   // METIER : Lecture des prochaines sorties
-  // RETOUR : Tableau des films avec sortie prévue
+  // RETOUR : Liste des films avec sortie prévue
   function getSorties($year)
   {
     $listSorties = array();

@@ -60,8 +60,18 @@
         switch ($_GET['view'])
         {
           case 'home':
-            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
+            list($films_semaine, $films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
+
             $listeRecents = getRecents($_GET['year']);
+
+            if ($films_semaine == "Y")
+            {
+              $afficherSemaine = controlWeek($_GET['year']);
+
+              // Si semaine comprise dans l'année courante
+              if ($afficherSemaine == true)
+                $listeSemaine = getSemaine();
+            }
 
             if ($films_waited == "Y")
               $listeAttendus = getAttendus($_GET['year']);
@@ -188,6 +198,35 @@
           }
 
           unset($recent);
+
+          if ($films_semaine == "Y" AND $afficherSemaine == true)
+          {
+            foreach ($listeSemaine as $filmSemaine)
+            {
+              $filmSemaine->setFilm(htmlspecialchars($filmSemaine->getFilm()));
+              $filmSemaine->setTo_delete(htmlspecialchars($filmSemaine->getTo_delete()));
+              $filmSemaine->setDate_add(htmlspecialchars($filmSemaine->getDate_add()));
+              $filmSemaine->setIdentifiant_add(htmlspecialchars($filmSemaine->getIdentifiant_add()));
+              $filmSemaine->setPseudo_add(htmlspecialchars($filmSemaine->getPseudo_add()));
+              $filmSemaine->setIdentifiant_del(htmlspecialchars($filmSemaine->getIdentifiant_del()));
+              $filmSemaine->setPseudo_del(htmlspecialchars($filmSemaine->getPseudo_del()));
+              $filmSemaine->setDate_theater(htmlspecialchars($filmSemaine->getDate_theater()));
+              $filmSemaine->setDate_release(htmlspecialchars($filmSemaine->getDate_release()));
+              $filmSemaine->setLink(htmlspecialchars($filmSemaine->getLink()));
+              $filmSemaine->setPoster(htmlspecialchars($filmSemaine->getPoster()));
+              $filmSemaine->setTrailer(htmlspecialchars($filmSemaine->getTrailer()));
+              $filmSemaine->setId_url(htmlspecialchars($filmSemaine->getId_url()));
+              $filmSemaine->setDoodle(htmlspecialchars($filmSemaine->getDoodle()));
+              $filmSemaine->setDate_doodle(htmlspecialchars($filmSemaine->getDate_doodle()));
+              $filmSemaine->setTime_doodle(htmlspecialchars($filmSemaine->getTime_doodle()));
+              $filmSemaine->setRestaurant(htmlspecialchars($filmSemaine->getRestaurant()));
+              $filmSemaine->setPlace(htmlspecialchars($filmSemaine->getPlace()));
+              $filmSemaine->setNb_users(htmlspecialchars($filmSemaine->getNb_users()));
+              $filmSemaine->setAverage(htmlspecialchars($filmSemaine->getAverage()));
+            }
+
+            unset($filmSemaine);
+          }
 
           if ($films_waited == "Y")
           {

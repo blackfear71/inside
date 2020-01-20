@@ -123,7 +123,22 @@
           echo '<div class="sous_titre_contribution">Catégories accueil</div>';
 
           echo '<div class="zone_contribution large">';
-            list($films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
+            list($films_semaine, $films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
+
+            if ($films_semaine == "Y")
+            {
+              echo '<div id="bouton_semaine" class="switch_default_view_categories bouton_checked">';
+                echo '<input id="films_semaine" type="checkbox" name="films_semaine" checked />';
+                echo '<label for="films_semaine" class="label_switch">Les films de la semaine</label>';
+              echo '</div>';
+            }
+            else
+            {
+              echo '<div id="bouton_semaine" class="switch_default_view_categories">';
+                echo '<input id="films_semaine" type="checkbox" name="films_semaine" />';
+                echo '<label for="films_semaine" class="label_switch">Les films de la semaine</label>';
+              echo '</div>';
+            }
 
             if ($films_waited == "Y")
             {
@@ -155,10 +170,6 @@
               echo '</div>';
             }
           echo '</div>';
-
-          // Masquage films (fiches)
-          /* TODO : à faire */
-          /*echo '<div class="sous_titre_contribution">Affichage des films (fiches)</div>';*/
         echo '</div>';
 
         /***************/

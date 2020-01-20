@@ -237,7 +237,7 @@
                 if (!empty($detailsFilm->getId_url()))
                 {
                   echo '<div class="video_container">';
-                    $exp = explode(':_:', $detailsFilm->getId_url());
+                    $exp  = explode(':_:', $detailsFilm->getId_url());
                     $html = "";
 
                     switch ($exp[0])
