@@ -1088,6 +1088,8 @@ function showDetails(zone, id)
 
       if (details['phone'] != "")
         $('#telephone_details_proposition').html(details['phone']);
+      else
+        $('#telephone_details_proposition').empty();
 
       if (details['determined'] == "Y" && details['caller'] != "")
       {
