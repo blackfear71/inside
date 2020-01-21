@@ -43,9 +43,14 @@ $(function()
   {
     var full_date     = new Date();
     var current_month = full_date.getMonth() + 1;
-    var id_month      = 'lien_hide_' + current_month;
     var offset        = 50;
     var shadow        = false;
+    var id_month;
+
+    if (current_month < 10)
+      id_month = 'lien_hide_0' + current_month;
+    else
+      id_month = 'lien_hide_' + current_month;
 
     if ($('#' + id_month).length)
       scrollToId(id_month, offset, shadow);
