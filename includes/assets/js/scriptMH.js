@@ -249,7 +249,7 @@ function afficherMasquerFilms(month)
   switch (month)
   {
     case "fold_all":
-      for (var i = 1; i <= 12; i++)
+      for (var i = 1; i <= 13; i++)
       {
         if (i < 10)
         {
@@ -271,7 +271,7 @@ function afficherMasquerFilms(month)
       break;
 
     case "unfold_all":
-      for (var i = 1; i <= 12; i++)
+      for (var i = 1; i <= 13; i++)
       {
         if (i < 10)
         {
@@ -439,7 +439,16 @@ function updateFilm(zone)
 
   $('input[name=id_film]').val(detailsFilm['id']);
   $('input[name=nom_film]').val(detailsFilm['film']);
-  $('input[name=date_theater]').val(detailsFilm['date_theater']);
+
+  // On vérifie si on est un mercredi 31 (javascript compte les mois de 0 à 11)
+  var jour_a_tester  = parseInt(detailsFilm['date_theater'].substr(0, 2));
+  var mois_a_tester  = parseInt(detailsFilm['date_theater'].substr(3, 2));
+  var annee_a_tester = parseInt(detailsFilm['date_theater'].substr(6, 4));
+  var date_a_tester = new Date(annee_a_tester, mois_a_tester - 1, jour_a_tester);
+
+  if ((jour_a_tester != 31 && mois_a_tester != 12) || (jour_a_tester == 31 && mois_a_tester == 12 && date_a_tester.getDay() == 3))
+    $('input[name=date_theater]').val(detailsFilm['date_theater']);
+
   $('input[name=date_release]').val(detailsFilm['date_release']);
   $('input[name=trailer]').val(detailsFilm['trailer']);
   $('input[name=link]').val(detailsFilm['link']);

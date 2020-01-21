@@ -83,10 +83,13 @@
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $monday . '" AND date_theater <= "' . $sunday . '" ORDER BY id DESC');
     while($donnees = $reponse->fetch())
     {
-      // Récupération des données
-      $mySemaine = Movie::withData($donnees);
+      // Récupération des données si la date le permet
+      if (!isBlankDate($donnees['date_theater'], substr($donnees['date_theater'], 0, 4)))
+      {
+        $mySemaine = Movie::withData($donnees);
 
-      array_push($listSemaine, $mySemaine);
+        array_push($listSemaine, $mySemaine);
+      }
     }
     $reponse->closeCursor();
 

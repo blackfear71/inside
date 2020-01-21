@@ -42,7 +42,12 @@
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date de sortie cinéma" class="icone_saisie" />';
 
-            if (isBlankDate($_SESSION['save']['date_theater_saisie']))
+            if (isset($_SESSION['save']['date_theater_saisie']) AND !empty($_SESSION['save']['date_theater_saisie']))
+              $date_a_tester = substr($_SESSION['save']['date_theater_saisie'], 6, 4) . substr($_SESSION['save']['date_theater_saisie'], 3, 2) . substr($_SESSION['save']['date_theater_saisie'], 0, 2);
+            else
+              $date_a_tester = "";
+
+            if (isBlankDate($date_a_tester, substr($_SESSION['save']['date_theater_saisie'], 6, 4)))
               echo '<input type="text" name="date_theater" value="" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';
             else
               echo '<input type="text" name="date_theater" value="' . formatDateForDisplay($_SESSION['save']['date_theater_saisie']) . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';

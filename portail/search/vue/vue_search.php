@@ -71,8 +71,12 @@
                         echo '<td class="zone_resultat_titre">';
                           echo $resultatsMH->getFilm();
                         echo '</td>';
+
                         echo '<td class="zone_resultat_info">';
-                          echo 'Sortie au cinéma le ' . formatDateForDisplay($resultatsMH->getDate_theater());
+                          if (!isBlankDate($resultatsMH->getDate_theater(), substr($resultatsMH->getDate_theater(), 0, 4)))
+                            echo 'Sortie au cinéma le ' . formatDateForDisplay($resultatsMH->getDate_theater());
+                          else
+                            echo 'Sortie au cinéma non communiquée';
                         echo '</td>';
                       echo '</tr>';
                     echo '</table>';
@@ -94,6 +98,7 @@
                         echo '<td class="zone_resultat_titre">';
                           echo $resultatsFA->getName();
                         echo '</td>';
+
                         echo '<td class="zone_resultat_info">';
                           echo $resultatsFA->getLocation();
                         echo '</td>';
@@ -117,6 +122,7 @@
                         echo '<td class="zone_resultat_titre">';
                           echo $resultatsPP->getNom();
                         echo '</td>';
+
                         echo '<td class="zone_resultat_info">';
                           echo formatDistanceForDisplay($resultatsPP->getDistance());
                         echo '</td>';
@@ -140,6 +146,7 @@
                         echo '<td class="zone_resultat_titre">';
                           echo $resultatsMI->getMission();
                         echo '</td>';
+                        
                         echo '<td class="zone_resultat_info">';
                           if (date('Ymd') > $resultatsMI->getDate_fin())
                             echo 'Terminée le ' . formatDateForDisplay($resultatsMI->getDate_fin());

@@ -100,11 +100,11 @@ function formatDateForInsert($date)
    ou si la date est 30/12 et que le dernier jour de l'année est un mercredi
    Retourne faux sinon
 */
-function isBlankDate($date)
+function isBlankDate($date, $year)
 {
-  $isLastDayWednesday    = isLastDayOfYearWednesday(date('Y'));
-  $thirtiethOfDecember   = date('Y') . '1230';
-  $thirtyFirstOfDecember = date('Y') . '1231';
+  $isLastDayWednesday    = isLastDayOfYearWednesday($year);
+  $thirtiethOfDecember   = $year . '1230';
+  $thirtyFirstOfDecember = $year . '1231';
 
   if (($date == $thirtyFirstOfDecember && !$isLastDayWednesday)
   ||  ($date == $thirtiethOfDecember   && $isLastDayWednesday))

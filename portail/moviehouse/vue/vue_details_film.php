@@ -273,8 +273,8 @@
                 // Date sortie cinéma
                 echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie au cinéma</div></div>';
                 echo '<div class="contenu_detail">';
-                  if (isBlankDate($detailsFilm->getDate_theater()))
-                    echo 'N.C.';
+                  if (isBlankDate($detailsFilm->getDate_theater(), substr($detailsFilm->getDate_theater(), 0, 4)))
+                    echo 'Non communiquée';
                   else
                     echo formatDateForDisplay($detailsFilm->getDate_theater());
                 echo '</div>';

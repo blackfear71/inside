@@ -30,13 +30,17 @@
                         "10" => "Octobre",
                         "11" => "Novembre",
                         "12" => "Décembre",
+                        "13" => "Date non communiquée"
                        );
 
     if (!empty($listeFilms))
     {
       foreach ($listeFilms as $keyFilm => $film)
       {
-        $currentMonth = substr($film->getDate_theater(), 4, 2);
+        if (!isBlankDate($film->getDate_theater(), $_GET['year']))
+          $currentMonth = substr($film->getDate_theater(), 4, 2);
+        else
+          $currentMonth = "13";
 
         if ($currentMonth != $prevMonth)
         {
@@ -75,14 +79,13 @@
                   echo '<div class="titre_fiche">' . $film->getFilm() . '</div>';
 
                   // Date sortie cinéma
-                  echo '<div class="date_fiche">';
-                    echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="icone_fiche" />';
-
-                    if (isBlankDate($film->getDate_theater()))
-                      echo 'N.C.';
-                    else
+                  if (!isBlankDate($film->getDate_theater(), $_GET['year']))
+                  {
+                    echo '<div class="date_fiche">';
+                      echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="icone_fiche" />';
                       echo formatDateForDisplay($film->getDate_theater());
-                  echo '</div>';
+                    echo '</div>';
+                  }
 
                   // Date sortie Doodle
                   if (!empty($film->getDate_doodle()))
@@ -188,7 +191,7 @@
         echo '</div>';
 
         // Termine la zone Masonry du mois
-        if (!isset($listeFilms[$keyFilm + 1]) OR $currentMonth != substr($listeFilms[$keyFilm + 1]->getDate_theater(), 4, 2))
+        if (!isset($listeFilms[$keyFilm + 1]) OR $currentMonth < substr($listeFilms[$keyFilm + 1]->getDate_theater(), 4, 2) OR ($currentMonth == "12" AND isBlankDate($listeFilms[$keyFilm + 1]->getDate_theater(), $_GET['year'])))
           echo '</div>';
       }
     }
