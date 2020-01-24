@@ -10,14 +10,6 @@
         echo 'Les propositions du jour';
 
         echo '<div class="zone_actions">';
-          // Faire bande à part
-          if ($actions["solo"] == true)
-          {
-            echo '<form method="post" action="foodadvisor.php?action=doSolo" class="form_action">';
-              echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_determination" />';
-            echo '</form>';
-          }
-
           // Lancer la détermination
           if ($actions["determiner"] == true)
           {

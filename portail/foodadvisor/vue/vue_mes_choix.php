@@ -34,7 +34,7 @@
 
             // Suppression
             echo '<form method="post" action="foodadvisor.php?action=doSupprimerSolo">';
-              echo '<input type="submit" name="delete_solo" value="Ne plus faire bande à part" class="bouton_solo" />';
+              echo '<input type="submit" name="delete_solo" value="Ne plus faire bande à part" class="bouton_delete_solo" />';
             echo '</form>';
           echo '</div>';
         }

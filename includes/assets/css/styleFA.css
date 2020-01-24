@@ -725,9 +725,30 @@
 	text-align: center;
 }
 
+.bouton_solo
+{
+	display: block;
+	margin-bottom: 20px;
+	width: 100%;
+	border: 0;
+	background-color: #d3d3d3;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	cursor: pointer;
+}
+
+.bouton_solo:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
 .zone_proposition_solo_no_votes
 {
-	width: 180px;
+	width: calc(100% - 20px);
 	vertical-align: top;
 	margin-bottom: 20px;
 	background-color: #e3e3e3;
@@ -783,7 +804,7 @@
 	word-break: break-word;
 }
 
-.bouton_solo
+.bouton_delete_solo
 {
 	width: 100%;
 	margin-bottom: 10px;
@@ -799,7 +820,7 @@
 	cursor: pointer;
 }
 
-.bouton_solo:hover
+.bouton_delete_solo:hover
 {
 	color: white;
 	background-color: #ff1937;

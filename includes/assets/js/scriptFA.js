@@ -343,12 +343,22 @@ $(function()
   });
 });
 
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Adaptation mobile
+  adaptPropositions();
+});
+
 /************************/
 /*** Masonry & scroll ***/
 /************************/
 // Au chargement du document complet
 $(window).on('load', function()
 {
+  // Adaptation mobile
+  adaptPropositions();
+
   // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_propositions_determination').css('display', 'block');
   $('.zone_restaurants').css('display', 'block');
@@ -429,6 +439,29 @@ function initMasonry()
 
   // Découpe le texte si besoin
   $('.description_restaurant').wrapInner();
+}
+
+// Adaptations des propositions sur mobile
+function adaptPropositions()
+{
+  if ($(window).width() < 1080)
+  {
+    $('.zone_propositions_left').css('display', 'block');
+    $('.zone_propositions_left').css('width', '100%');
+
+    $('.zone_propositions_right').css('display', 'block');
+    $('.zone_propositions_right').css('width', '100%');
+    $('.zone_propositions_right').css('margin-left', '0');
+  }
+  else
+  {
+    $('.zone_propositions_left').css('display', 'inline-block');
+    $('.zone_propositions_left').css('width', '200px');
+
+    $('.zone_propositions_right').css('display', 'inline-block');
+    $('.zone_propositions_right').css('width', 'calc(100% - 220px)');
+    $('.zone_propositions_right').css('margin-left', '20px');
+  }
 }
 
 // Calcul les tailles des zones automatiquement
