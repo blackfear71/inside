@@ -14,9 +14,8 @@
       $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
       while ($donnees = $reponse->fetch())
       {
-        $available_day = true;
-
         // Contrôle restaurant disponible ce jour
+        $available_day  = true;
         $explodedOpened = explode(";", $donnees['opened']);
 
         foreach ($explodedOpened as $keyOpened => $opened)
@@ -49,19 +48,30 @@
     return $listRestaurants;
   }
 
+  // METIER : Filtre la liste des lieux disponibles si vide
+  // RETOUR : Liste des lieux filtrés
+  function getLieuxFiltres($listeRestaurants)
+  {
+    $listeLieux = array();
+
+    foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
+    {
+      if (!empty($restaurantsParLieux))
+        array_push($listeLieux, $keyRestaurant);
+    }
+
+    return $listeLieux;
+  }
+
   // METIER : Filtre la liste des restaurants disponibles si aucun ne l'est
   // RETOUR : Liste des restaurants filtrés
   function getListeRestaurantsFiltres($listeRestaurants)
   {
-    //var_dump($listeRestaurants);
-
-    foreach ($listeRestaurants as $restaurantsParLieux)
+    foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
     {
       if (empty($restaurantsParLieux))
-        unset($restaurantsParLieux);
+        unset($listeRestaurants[$keyRestaurant]);
     }
-
-    //var_dump($listeRestaurants);
 
     return $listeRestaurants;
   }

@@ -32,9 +32,10 @@
   {
     case 'goConsulter':
       // Lecture des données par le modèle
-      $listeLieux                  = getLieux();
-      $listeRestaurantsDisponibles = getListeRestaurants($listeLieux);
+      $listeLieuxDisponibles       = getLieux();
+      $listeRestaurantsDisponibles = getListeRestaurants($listeLieuxDisponibles);
       $listeRestaurants            = getListeRestaurantsFiltres($listeRestaurantsDisponibles);
+      $listeLieux                  = getLieuxFiltres($listeRestaurants);
 
       // Propositions, choix et semaine
       $propositions = getPropositions(true);

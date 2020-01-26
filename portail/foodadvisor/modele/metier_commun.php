@@ -71,37 +71,57 @@
 
       $req2->closeCursor();
 
-      // Nombre de participants
-      $req3 = $bdd->query('SELECT COUNT(id_restaurant) AS nb_participants FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myProposition->getId_restaurant());
-      $data3 = $req3->fetch();
+      // Contrôle restaurant disponible ce jour
+      $available_day  = true;
+      $explodedOpened = explode(";", $myProposition->getOpened());
 
-      $myProposition->setNb_participants($data3['nb_participants']);
-
-      $req3->closeCursor();
-
-      // Proposition déterminée
-      $req3 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myProposition->getId_restaurant());
-      $data3 = $req3->fetch();
-
-      if ($req3->rowCount() > 0)
+      foreach ($explodedOpened as $keyOpened => $opened)
       {
-        $myProposition->setDetermined("Y");
-        $myProposition->setCaller($data3['caller']);
-        $myProposition->setReserved($data3['reserved']);
-
-        // Récupération pseudo et avatar
-        $req4 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myProposition->getCaller() . '"');
-        $data4 = $req4->fetch();
-
-        $myProposition->setPseudo($data4['pseudo']);
-        $myProposition->setAvatar($data4['avatar']);
-
-        $req4->closeCursor();
+        if (!empty($opened))
+        {
+          if (date('N') == $keyOpened + 1 AND $opened == "N")
+          {
+            $available_day = false;
+            break;
+          }
+        }
       }
 
-      $req3->closeCursor();
+      // Récupération des données si disponible
+      if ($available_day == true)
+      {
+        // Nombre de participants
+        $req3 = $bdd->query('SELECT COUNT(id_restaurant) AS nb_participants FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myProposition->getId_restaurant());
+        $data3 = $req3->fetch();
 
-      array_push($listPropositions, $myProposition);
+        $myProposition->setNb_participants($data3['nb_participants']);
+
+        $req3->closeCursor();
+
+        // Proposition déterminée
+        $req4 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myProposition->getId_restaurant());
+        $data4 = $req4->fetch();
+
+        if ($req4->rowCount() > 0)
+        {
+          $myProposition->setDetermined("Y");
+          $myProposition->setCaller($data4['caller']);
+          $myProposition->setReserved($data4['reserved']);
+
+          // Récupération pseudo et avatar
+          $req5 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myProposition->getCaller() . '"');
+          $data5 = $req5->fetch();
+
+          $myProposition->setPseudo($data5['pseudo']);
+          $myProposition->setAvatar($data5['avatar']);
+
+          $req5->closeCursor();
+        }
+
+        $req4->closeCursor();
+
+        array_push($listPropositions, $myProposition);
+      }
     }
     $req1->closeCursor();
 

@@ -159,7 +159,7 @@
                   // Bouton réservation
                   echo '<form method="post" action="foodadvisor.php?action=doReserver">';
                     echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
-                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver"/>';
+                    echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver" />';
                   echo '</form>';
 
                   // Bouton complet
@@ -167,7 +167,7 @@
                   {
                     echo '<form id="choice_complete" method="post" action="foodadvisor.php?action=doComplet" class="margin_top_10">';
                       echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
-                      echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver eventConfirm"/>';
+                      echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver eventConfirm" />';
                       echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';
                     echo '</form>';
                   }
@@ -186,7 +186,7 @@
                 {
                   echo '<form method="post" action="foodadvisor.php?action=doAnnulerReserver">';
                     echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
-                    echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;"/>';
+                    echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;" />';
                   echo '</form>';
                 }
               echo '</div>';
