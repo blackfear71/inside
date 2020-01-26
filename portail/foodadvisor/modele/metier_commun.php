@@ -21,35 +21,6 @@
     return $listLocations;
   }
 
-  // METIER : Récupération de la liste des restaurants
-  // RETOUR : Liste des restaurants
-  function getRestaurants($list_locations)
-  {
-    $listRestaurants = array();
-
-    global $bdd;
-
-    foreach ($list_locations as $location)
-    {
-      $restaurants_by_location = array();
-
-      $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
-      while ($donnees = $reponse->fetch())
-      {
-        $myRestaurant = Restaurant::withData($donnees);
-        $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-        $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
-
-        array_push($restaurants_by_location, $myRestaurant);
-      }
-      $reponse->closeCursor();
-
-      $listRestaurants[$location] = $restaurants_by_location;
-    }
-
-    return $listRestaurants;
-  }
-
   // METIER : Détermine si l'utilisateur fait bande à part
   // RETOUR : Booléen
   function getSolo($user)
@@ -505,7 +476,7 @@
     // Contrôle choix déjà existant
     if ($control_ok == true)
     {
-      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = "' . $id_restaurant . '" AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
+      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = ' . $id_restaurant . ' AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
       $data1 = $req1->fetch();
 
       if ($req1->rowCount() > 0)
@@ -515,6 +486,30 @@
       }
 
       $req1->closeCursor();
+    }
+
+    // Contrôle restaurant ouvert
+    if ($control_ok == true)
+    {
+      $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
+      $data2 = $req2->fetch();
+
+      $explodedOpened = explode(";", $data2['opened']);
+
+      foreach ($explodedOpened as $keyOpened => $opened)
+      {
+        if (!empty($opened))
+        {
+          if (date('N') == $keyOpened + 1 AND $opened == "N")
+          {
+            $control_ok                     = false;
+            $_SESSION['alerts']['not_open'] = true;
+            break;
+          }
+        }
+      }
+
+      $req2->closeCursor();
     }
 
     // Récupération des données et insertion en base
@@ -535,7 +530,7 @@
                     );
 
       // On insère dans la table
-      $req2 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
+      $req3 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
                                                             identifiant,
                                                             date,
                                                             time,
@@ -549,8 +544,8 @@
                                                            :transports,
                                                            :menu
                                                           )');
-      $req2->execute($choice);
-      $req2->closeCursor();
+      $req3->execute($choice);
+      $req3->closeCursor();
 
       // Relance de la détermination si besoin
       relanceDetermination();

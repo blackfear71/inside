@@ -54,20 +54,21 @@
                 echo '<div class="zone_icones_fiches">';
                   // Jours d'ouverture
                   $explodedOpened = explode(";", $restaurant->getOpened());
-                  $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
-                  $k              = 0;
+                  $semaine_short  = array(0 => "Lu", 1 => "Ma", 2 => "Me", 3 => "Je", 4 => "Ve");
+                  $available_day  = true;
 
-                  foreach ($explodedOpened as $opened)
+                  foreach ($explodedOpened as $keyOpened => $opened)
                   {
                     if (!empty($opened))
                     {
                       if ($opened == "Y")
-                        echo '<div class="jour_oui">' . $semaine_short[$k] . '</div>';
+                        echo '<div class="jour_oui">' . $semaine_short[$keyOpened] . '</div>';
                       else
-                        echo '<div class="jour_non">' . $semaine_short[$k] . '</div>';
-                    }
+                        echo '<div class="jour_non">' . $semaine_short[$keyOpened] . '</div>';
 
-                    $k++;
+                      if (date('N') == $keyOpened + 1 AND $opened == "N")
+                        $available_day = false;
+                    }
                   }
 
                   // Site web
@@ -119,7 +120,7 @@
                 echo '</form>';
 
                 // Choix rapide
-                if ($choixRapide == true)
+                if ($choixRapide == true AND $available_day == true)
                 {
                   echo '<form method="post" action="restaurants.php?action=doChoixRapide">';
                     echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
@@ -296,7 +297,7 @@
                   echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="update_icone_fiche" />';
                 echo '</a>';
 
-                echo '<input type="text" name="update_plan_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getLafourchette() . '" placeholder="LaFourchette" class="update_lien_restaurant" />';
+                echo '<input type="text" name="update_lafourchette_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getLafourchette() . '" placeholder="LaFourchette" class="update_lien_restaurant" />';
 
                 // Téléphone
                 echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" title="Téléphone" class="update_icone_fiche" />';

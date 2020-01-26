@@ -2399,13 +2399,11 @@
 .saisie_alert_mes
 {
 	resize: vertical;
-	width: 98%;
-	padding-left: 1%;
-	padding-right: 1%;
+	width: calc(100% - 20px);
+	padding: 10px;
 	border: solid 1px #a3a3a3;
-	line-height: 40px;
-	height: 40px;
-	min-height: 40px;
+	height: 22px;
+	min-height: 22px;
 	border-radius: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;

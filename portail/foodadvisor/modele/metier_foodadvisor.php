@@ -1,4 +1,71 @@
 <?php
+  // METIER : Récupération de la liste des restaurants disponibles
+  // RETOUR : Liste des restaurants disponibles
+  function getListeRestaurants($list_locations)
+  {
+    $listRestaurants = array();
+
+    global $bdd;
+
+    foreach ($list_locations as $location)
+    {
+      $restaurants_by_location = array();
+
+      $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
+      while ($donnees = $reponse->fetch())
+      {
+        $available_day = true;
+
+        // Contrôle restaurant disponible ce jour
+        $explodedOpened = explode(";", $donnees['opened']);
+
+        foreach ($explodedOpened as $keyOpened => $opened)
+        {
+          if (!empty($opened))
+          {
+            if (date('N') == $keyOpened + 1 AND $opened == "N")
+            {
+              $available_day = false;
+              break;
+            }
+          }
+        }
+
+        // Récupération des données si disponible
+        if ($available_day == true)
+        {
+          $myRestaurant = Restaurant::withData($donnees);
+          $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
+          $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
+
+          array_push($restaurants_by_location, $myRestaurant);
+        }
+      }
+      $reponse->closeCursor();
+
+      $listRestaurants[$location] = $restaurants_by_location;
+    }
+
+    return $listRestaurants;
+  }
+
+  // METIER : Filtre la liste des restaurants disponibles si aucun ne l'est
+  // RETOUR : Liste des restaurants filtrés
+  function getListeRestaurantsFiltres($listeRestaurants)
+  {
+    //var_dump($listeRestaurants);
+
+    foreach ($listeRestaurants as $restaurantsParLieux)
+    {
+      if (empty($restaurantsParLieux))
+        unset($restaurantsParLieux);
+    }
+
+    //var_dump($listeRestaurants);
+
+    return $listeRestaurants;
+  }
+
   // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
   // RETOUR : Tableau des restaurants par lieu
   function convertForJson($listeRestaurants)
@@ -650,6 +717,36 @@
       }
     }
 
+    // Contrôle restaurant ouvert
+    if ($control_ok == true)
+    {
+      for ($i = 1; $i <= $max_choices; $i++)
+      {
+        if (isset($post['select_lieu'][$i]) AND !empty($post['select_lieu'][$i]) AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
+        {
+          $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $post['select_restaurant'][$i]);
+          $data2 = $req2->fetch();
+
+          $explodedOpened = explode(";", $data2['opened']);
+
+          foreach ($explodedOpened as $keyOpened => $opened)
+          {
+            if (!empty($opened))
+            {
+              if (date('N') == $keyOpened + 1 AND $opened == "N")
+              {
+                $control_ok                     = false;
+                $_SESSION['alerts']['not_open'] = true;
+                break;
+              }
+            }
+          }
+
+          $req2->closeCursor();
+        }
+      }
+    }
+
     // Récupération des données et insertion en base
     if ($control_ok == true)
     {
@@ -709,7 +806,7 @@
                         );
 
           // On insère dans la table
-          $req2 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
+          $req3 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
                                                                 identifiant,
                                                                 date,
                                                                 time,
@@ -723,8 +820,8 @@
                                                                :transports,
                                                                :menu
                                                               )');
-          $req2->execute($choice);
-          $req2->closeCursor();
+          $req3->execute($choice);
+          $req3->closeCursor();
 
           // Relance de la détermination si besoin
           relanceDetermination();

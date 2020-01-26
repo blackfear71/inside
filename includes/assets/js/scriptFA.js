@@ -1046,7 +1046,9 @@ function showDetails(zone, id)
   $('#nom_details_proposition').html(details['name']);
 
   // Jours d'ouverture
-  var opened = details['opened'].split(';');
+  var opened        = details['opened'].split(';');
+  var date_du_jour  = new Date();
+  var available_day = true;
 
   $.each(opened, function(key, value)
   {
@@ -1056,6 +1058,9 @@ function showDetails(zone, id)
         $('#jour_details_proposition_' + key).addClass('jour_oui_fa');
       else
         $('#jour_details_proposition_' + key).addClass('jour_non_fa');
+
+      if (date_du_jour.getDay() == key + 1 && value == "N")
+        available_day = false;
     }
   });
 
@@ -1297,7 +1302,7 @@ function showDetails(zone, id)
   var transports;
 
   // Bouton choix rapide
-  if (participe == true)
+  if (participe == true || available_day == false)
   {
     $('#choix_rapide_details_proposition').css('display', 'none');
     $('#choix_rapide_details_proposition').attr('action', '');
