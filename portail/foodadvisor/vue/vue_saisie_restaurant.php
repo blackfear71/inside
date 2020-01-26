@@ -175,12 +175,24 @@
           echo '<input type="text" name="phone_restaurant" value="' . $_SESSION['save']['phone_restaurant'] . '" maxlength="15" placeholder="Téléphone" class="saisie_telephone_restaurant" />';
 
           // Site web
+          echo '<a href="https://www.google.fr/" target="_blank" class="lien_rapide_saisie">';
+            echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Google" class="image_lien_rapide_saisie" />';
+          echo '</a>';
+
           echo '<input type="text" name="website_restaurant" value="' . $_SESSION['save']['website_restaurant'] . '" placeholder="Site web" class="saisie_lien_restaurant" />';
 
           // Plan
+          echo '<a href="https://www.google.fr/maps" target="_blank" class="lien_rapide_saisie">';
+            echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Google Maps" class="image_lien_rapide_saisie" />';
+          echo '</a>';
+
           echo '<input type="text" name="plan_restaurant" value="' . $_SESSION['save']['plan_restaurant'] . '" placeholder="Plan" class="saisie_lien_restaurant" />';
 
           // Lien LaFourchette
+          echo '<a href="https://www.lafourchette.com/" target="_blank" class="lien_rapide_saisie">';
+            echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="image_lien_rapide_saisie" />';
+          echo '</a>';
+
           echo '<input type="text" name="lafourchette_restaurant" value="' . $_SESSION['save']['lafourchette_restaurant'] . '" placeholder="LaFourchette" class="saisie_lien_restaurant" />';
 
           // Description

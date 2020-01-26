@@ -278,15 +278,24 @@
                 echo '</div>';
 
                 // Site web
-                echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="update_icone_fiche" />';
+                echo '<a href="https://www.google.fr/" target="_blank">';
+                  echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Google" class="update_icone_fiche" />';
+                echo '</a>';
+
                 echo '<input type="text" name="update_website_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getWebsite() . '" placeholder="Site web" class="update_lien_restaurant" />';
 
                 // Plan
-                echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="update_icone_fiche" />';
+                echo '<a href="https://www.google.fr/maps" target="_blank">';
+                  echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Google Maps" class="update_icone_fiche" />';
+                echo '</a>';
+
                 echo '<input type="text" name="update_plan_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPlan() . '" placeholder="Plan" class="update_lien_restaurant" />';
 
                 // LaFourchette
-                echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="update_icone_fiche" />';
+                echo '<a href="https://www.lafourchette.com/" target="_blank">';
+                  echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="update_icone_fiche" />';
+                echo '</a>';
+
                 echo '<input type="text" name="update_plan_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getLafourchette() . '" placeholder="LaFourchette" class="update_lien_restaurant" />';
 
                 // Téléphone
