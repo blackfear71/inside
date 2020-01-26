@@ -75,7 +75,7 @@
                   if (!empty($restaurant->getWebsite()))
                   {
                     echo '<a href="' . $restaurant->getWebsite() . '" target="_blank">';
-                      echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" style="margin-left: 2px;"/>';
+                      echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_fiche" />';
                     echo '</a>';
                   }
 
@@ -83,7 +83,7 @@
                   if (!empty($restaurant->getPlan()))
                   {
                     echo '<a href="' . $restaurant->getPlan() . '" target="_blank">';
-                      echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche" />';
+                      echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche margin_right_moins_5" />';
                     echo '</a>';
                   }
 
