@@ -33,17 +33,18 @@
   {
     unset($_SESSION['save']);
 
-    $_SESSION['save']['name_restaurant']        = "";
-    $_SESSION['save']['prix_min']               = "";
-    $_SESSION['save']['prix_max']               = "";
-    $_SESSION['save']['phone_restaurant']       = "";
-    $_SESSION['save']['types_restaurants']      = "";
-    $_SESSION['save']['description_restaurant'] = "";
-    $_SESSION['save']['location']               = "";
-    $_SESSION['save']['ouverture_restaurant']   = "";
-    $_SESSION['save']['website_restaurant']     = "";
-    $_SESSION['save']['plan_restaurant']        = "";
-    $_SESSION['save']['saisie_other_location']  = "";
+    $_SESSION['save']['name_restaurant']         = "";
+    $_SESSION['save']['prix_min']                = "";
+    $_SESSION['save']['prix_max']                = "";
+    $_SESSION['save']['phone_restaurant']        = "";
+    $_SESSION['save']['types_restaurants']       = "";
+    $_SESSION['save']['description_restaurant']  = "";
+    $_SESSION['save']['location']                = "";
+    $_SESSION['save']['ouverture_restaurant']    = "";
+    $_SESSION['save']['website_restaurant']      = "";
+    $_SESSION['save']['plan_restaurant']         = "";
+    $_SESSION['save']['lafourchette_restaurant'] = "";
+    $_SESSION['save']['saisie_other_location']   = "";
   }
 
   // Appel métier
@@ -112,6 +113,7 @@
           $restaurant->setMax_price(htmlspecialchars($restaurant->getMax_price()));
           $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
           $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
+          $restaurant->setLafourchette(htmlspecialchars($restaurant->getLafourchette()));
           $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
         }
 

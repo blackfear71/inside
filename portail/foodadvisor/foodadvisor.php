@@ -143,6 +143,7 @@
           $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
           $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
           $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
+          $restaurant->setLafourchette(htmlspecialchars($restaurant->getLafourchette()));
           $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
         }
 
@@ -167,6 +168,7 @@
         $proposition->setPhone(htmlspecialchars($proposition->getPhone()));
         $proposition->setWebsite(htmlspecialchars($proposition->getWebsite()));
         $proposition->setPlan(htmlspecialchars($proposition->getPlan()));
+        $proposition->setLafourchette(htmlspecialchars($proposition->getLafourchette()));
         $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
         $proposition->setMin_price(htmlspecialchars($proposition->getMin_price()));
         $proposition->setMax_price(htmlspecialchars($proposition->getMax_price()));

@@ -93,6 +93,7 @@
       $myProposition->setPhone($data2['phone']);
       $myProposition->setWebsite($data2['website']);
       $myProposition->setPlan($data2['plan']);
+      $myProposition->setLafourchette($data2['lafourchette']);
       $myProposition->setOpened($data2['opened']);
       $myProposition->setMin_price(str_replace('.', ',', $data2['min_price']));
       $myProposition->setMax_price(str_replace('.', ',', $data2['max_price']));

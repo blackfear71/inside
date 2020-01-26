@@ -975,17 +975,17 @@ function afficherOther(select, id, name)
   {
     if ($('#' + id).css('display') == 'none')
     {
-      $('#' + select).css('width', '200px');
-      $('#' + name).css('width', 'calc(100% - 670px)');
-      $('#' + id).css('width', '200px');
+      $('#' + select).css('width', '20%');
+      $('#' + name).css('width', 'calc(60% - 270px)');
+      $('#' + id).css('width', '20%');
       $('#' + id).css('display', 'inline-block');
       $('#' + id).prop('required', true);
     }
   }
   else
   {
-    $('#' + select).css('width', '180px');
-    $('#' + name).css('width', 'calc(100% - 420px)');
+    $('#' + select).css('width', '20%');
+    $('#' + name).css('width', 'calc(80% - 240px)');
     $('#' + id).css('display', 'none');
     $('#' + id).prop('required', false);
   }
@@ -1158,7 +1158,7 @@ function showDetails(zone, id)
   }
 
   // Liens
-  if (details['website'] != "" || details['plan'] != "")
+  if (details['website'] != "" || details['plan'] != "" || details['lafourchette'] != "")
   {
     $('.zone_liens_details').css('display', 'block');
 
@@ -1183,12 +1183,24 @@ function showDetails(zone, id)
       $('#plan_details_proposition').css('display', 'inline-block');
       $('#plan_details_proposition').attr('href', details['plan']);
     }
+
+    if (details['lafourchette'] == "")
+    {
+      $('#lafourchette_details_proposition').css('display', 'none');
+      $('#lafourchette_details_proposition').attr('href', '');
+    }
+    else
+    {
+      $('#lafourchette_details_proposition').css('display', 'inline-block');
+      $('#lafourchette_details_proposition').attr('href', details['lafourchette']);
+    }
   }
   else
   {
     $('.zone_liens_details').css('display', 'none');
     $('#website_details_proposition').attr('href', '');
     $('#plan_details_proposition').attr('href', '');
+    $('#lafourchette_details_proposition').attr('href', '');
   }
 
   // Bouton réservation (si on a participé)

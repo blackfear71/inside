@@ -223,7 +223,7 @@
 {
 	display: inline-block;
 	height: 32px;
-	width: calc(33% - 20px);
+	width: calc((100% / 3) - 20px);
 	padding-left: 5px;
 	padding-right: 5px;
 	margin-left: 10px;
@@ -241,7 +241,7 @@
 .bouton_annuler
 {
 	display: inline-block;
-	width: calc(34% - 20px);
+	width: calc((100% / 3) - 20px);
 	margin-left: 10px;
 	background-color: #e3e3e3;
 	padding: 5px 10px 5px 10px;
@@ -1731,7 +1731,7 @@
 .saisie_nom_restaurant
 {
 	display: inline-block;
-	width: calc(100% - 420px);
+	width: calc(80% - 240px);
 	margin-right: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -1748,7 +1748,7 @@
 .saisie_lieu
 {
 	display: inline-block;
-  width: 180px;
+  width: 20%;
 	margin-right: 10px;
 	padding-left: 10px;
   padding-right: 10px;
@@ -1765,7 +1765,7 @@
 .saisie_lieu_autre_restaurant
 {
 	display: inline-block;
-	width: 180px;
+	width: 20%;
 	margin-right: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -1975,7 +1975,7 @@
 .saisie_lien_restaurant
 {
 	display: inline-block;
-	width: calc(50% - 120px);
+	width: calc((100% / 3) - 90px);
 	margin-left: 10px;
 	padding-left: 10px;
 	padding-right: 10px;

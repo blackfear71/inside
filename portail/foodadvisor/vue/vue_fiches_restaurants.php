@@ -85,6 +85,14 @@
                       echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche" />';
                     echo '</a>';
                   }
+
+                  // LaFourchette
+                  if (!empty($restaurant->getLafourchette()))
+                  {
+                    echo '<a href="' . $restaurant->getLafourchette() . '" target="_blank">';
+                      echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="icone_fiche" />';
+                    echo '</a>';
+                  }
                 echo '</div>';
 
                 // Numéro
@@ -276,6 +284,10 @@
                 // Plan
                 echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="update_icone_fiche" />';
                 echo '<input type="text" name="update_plan_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getPlan() . '" placeholder="Plan" class="update_lien_restaurant" />';
+
+                // LaFourchette
+                echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="update_icone_fiche" />';
+                echo '<input type="text" name="update_plan_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getLafourchette() . '" placeholder="LaFourchette" class="update_lien_restaurant" />';
 
                 // Téléphone
                 echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" title="Téléphone" class="update_icone_fiche" />';

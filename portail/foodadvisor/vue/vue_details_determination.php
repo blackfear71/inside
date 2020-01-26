@@ -68,6 +68,10 @@
           echo '<a id="plan_details_proposition" href="" target="_blank">';
             echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_lien_details" />';
           echo '</a>';
+
+          echo '<a id="lafourchette_details_proposition" href="" target="_blank">';
+            echo '<img src="../../includes/icons/foodadvisor/lafourchette.png" alt="lafourchette" title="LaFourchette" class="icone_lien_details" />';
+          echo '</a>';
         echo '</div>';
 
         // Zone boutons

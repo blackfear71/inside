@@ -85,6 +85,7 @@
           $resultatsFA->setMax_price(htmlspecialchars($resultatsFA->getMax_price()));
           $resultatsFA->setWebsite(htmlspecialchars($resultatsFA->getWebsite()));
           $resultatsFA->setPlan(htmlspecialchars($resultatsFA->getPlan()));
+          $resultatsFA->setLafourchette(htmlspecialchars($resultatsFA->getLafourchette()));
           $resultatsFA->setDescription(htmlspecialchars($resultatsFA->getDescription()));
         }
 

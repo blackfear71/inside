@@ -24,13 +24,12 @@
           echo '</div>';
 
           // Jours d'ouverture
+          $i       = 0;
           $semaine = array("Lu" => "lundi",
                            "Ma" => "mardi",
                            "Me" => "mercredi",
                            "Je" => "jeudi",
                            "Ve" => "vendredi");
-
-          $i = 0;
 
           foreach ($semaine as $j => $jour)
           {
@@ -59,13 +58,13 @@
         echo '<div class="zone_saisie_right">';
           // Nom
           if ($_SESSION['save']['location'] == "other_location")
-            echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant" style="width: calc(34% - 77px);" required />';
+            echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant" style="width: calc(60% - 270px);" required />';
           else
             echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant" required />';
 
           // Lieu
           if ($_SESSION['save']['location'] == "other_location")
-            echo '<select name="location" id="saisie_location" class="saisie_lieu" style="width: calc(33% - 100px);" required>';
+            echo '<select name="location" id="saisie_location" class="saisie_lieu" required>';
           else
             echo '<select name="location" id="saisie_location" class="saisie_lieu" required>';
               echo '<option value="" hidden>Choisissez...</option>';
@@ -86,7 +85,7 @@
 
           // Lieu "Autre"
           if ($_SESSION['save']['location'] == "other_location")
-            echo '<input type="text" name="saisie_other_location" value="' . $_SESSION['save']['saisie_other_location'] . '" placeholder="Lieu personnalisé" maxlength="255" id="saisie_other_location" class="saisie_lieu_autre_restaurant" style="width: calc(33% - 100px);" />';
+            echo '<input type="text" name="saisie_other_location" value="' . $_SESSION['save']['saisie_other_location'] . '" placeholder="Lieu personnalisé" maxlength="255" id="saisie_other_location" class="saisie_lieu_autre_restaurant" />';
           else
             echo '<input type="text" name="saisie_other_location" placeholder="Lieu personnalisé" maxlength="255" id="saisie_other_location" class="saisie_lieu_autre_restaurant" style="display: none;" />';
 
@@ -180,6 +179,9 @@
 
           // Plan
           echo '<input type="text" name="plan_restaurant" value="' . $_SESSION['save']['plan_restaurant'] . '" placeholder="Plan" class="saisie_lien_restaurant" />';
+
+          // Lien LaFourchette
+          echo '<input type="text" name="lafourchette_restaurant" value="' . $_SESSION['save']['lafourchette_restaurant'] . '" placeholder="LaFourchette" class="saisie_lien_restaurant" />';
 
           // Description
           echo '<textarea placeholder="Description" name="description_restaurant" class="textarea_saisie_description_restaurant">' . $_SESSION['save']['description_restaurant'] . '</textarea>';

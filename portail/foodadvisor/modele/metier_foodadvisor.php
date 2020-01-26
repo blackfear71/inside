@@ -53,6 +53,7 @@
                                      'phone'           => $phone,
                                      'website'         => $proposition->getWebsite(),
                                      'plan'            => $proposition->getPlan(),
+                                     'lafourchette'    => $proposition->getLafourchette(),
                                      'opened'          => $proposition->getOpened(),
                                      'min_price'       => $proposition->getMin_price(),
                                      'max_price'       => $proposition->getMax_price(),

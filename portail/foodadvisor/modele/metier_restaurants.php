@@ -59,41 +59,42 @@
     $control_ok = true;
 
     // Récupération des données
-    $nom_restaurant         = $post['name_restaurant'];
-    $website_restaurant     = $post['website_restaurant'];
-    $plan_restaurant        = $post['plan_restaurant'];
-    $description_restaurant = $post['description_restaurant'];
-    $ouverture_restaurant   = $post['ouverture_restaurant'];
+    $nom_restaurant          = $post['name_restaurant'];
+    $website_restaurant      = $post['website_restaurant'];
+    $plan_restaurant         = $post['plan_restaurant'];
+    $lafourchette_restaurant = $post['lafourchette_restaurant'];
+    $description_restaurant  = $post['description_restaurant'];
+    $ouverture_restaurant    = $post['ouverture_restaurant'];
 
-    $search                 = array(" ", ".");
-    $replace                = array("", "");
-    $telephone_restaurant   = str_replace($search, $replace, $post['phone_restaurant']);
+    $search                  = array(" ", ".");
+    $replace                 = array("", "");
+    $telephone_restaurant    = str_replace($search, $replace, $post['phone_restaurant']);
 
-    $prix_min_test          = str_replace(',', '.', $post['prix_min_restaurant']);
-    $prix_max_test          = str_replace(',', '.', $post['prix_max_restaurant']);
+    $prix_min_test           = str_replace(',', '.', $post['prix_min_restaurant']);
+    $prix_max_test           = str_replace(',', '.', $post['prix_max_restaurant']);
 
     if (is_numeric($prix_min_test))
-      $prix_min             = number_format($prix_min_test, 2, '.', '');
+      $prix_min              = number_format($prix_min_test, 2, '.', '');
     else
-      $prix_min             = "";
+      $prix_min              = "";
 
     if (is_numeric($prix_max_test))
-      $prix_max             = number_format($prix_max_test, 2, '.', '');
+      $prix_max              = number_format($prix_max_test, 2, '.', '');
     else
-      $prix_max             = "";
+      $prix_max              = "";
 
     if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
     {
-      $search               = array("'", '"');
-      $replace              = array("", "");
-      $lieu_restaurant      = str_replace($search, $replace, $post['saisie_other_location']);
+      $search                = array("'", '"');
+      $replace               = array("", "");
+      $lieu_restaurant       = str_replace($search, $replace, $post['saisie_other_location']);
     }
     else
-      $lieu_restaurant      = $post['location'];
+      $lieu_restaurant       = $post['location'];
 
     if (isset($post['types_restaurants']))
     {
-      $types_restaurant     = array_unique($post['types_restaurants']);
+      $types_restaurant      = array_unique($post['types_restaurants']);
 
       foreach ($types_restaurant as $keyType => $type)
       {
@@ -103,21 +104,22 @@
     }
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['save']['name_restaurant']        = $post['name_restaurant'];
-    $_SESSION['save']['phone_restaurant']       = $post['phone_restaurant'];
-    $_SESSION['save']['website_restaurant']     = $post['website_restaurant'];
-    $_SESSION['save']['plan_restaurant']        = $post['plan_restaurant'];
-    $_SESSION['save']['description_restaurant'] = $post['description_restaurant'];
-    $_SESSION['save']['location']               = $post['location'];
-    $_SESSION['save']['saisie_other_location']  = $post['saisie_other_location'];
-    $_SESSION['save']['prix_min']               = $post['prix_min_restaurant'];
-    $_SESSION['save']['prix_max']               = $post['prix_max_restaurant'];
+    $_SESSION['save']['name_restaurant']         = $post['name_restaurant'];
+    $_SESSION['save']['phone_restaurant']        = $post['phone_restaurant'];
+    $_SESSION['save']['website_restaurant']      = $post['website_restaurant'];
+    $_SESSION['save']['plan_restaurant']         = $post['plan_restaurant'];
+    $_SESSION['save']['lafourchette_restaurant'] = $post['lafourchette_restaurant'];
+    $_SESSION['save']['description_restaurant']  = $post['description_restaurant'];
+    $_SESSION['save']['location']                = $post['location'];
+    $_SESSION['save']['saisie_other_location']   = $post['saisie_other_location'];
+    $_SESSION['save']['prix_min']                = $post['prix_min_restaurant'];
+    $_SESSION['save']['prix_max']                = $post['prix_max_restaurant'];
 
     if (isset($post['ouverture_restaurant']))
-      $_SESSION['save']['ouverture_restaurant'] = $ouverture_restaurant;
+      $_SESSION['save']['ouverture_restaurant']  = $ouverture_restaurant;
 
     if (isset($post['types_restaurants']))
-      $_SESSION['save']['types_restaurants']    = $types_restaurant;
+      $_SESSION['save']['types_restaurants']     = $types_restaurant;
 
     // Contrôle prix min et max renseigné
     if ($control_ok == true)
@@ -256,17 +258,18 @@
     {
       global $bdd;
 
-      $restaurant = array('name'        => $nom_restaurant,
-                          'picture'     => $new_name,
-                          'types'       => $types_formatted,
-                          'location'    => $lieu_restaurant,
-                          'phone'       => $telephone_restaurant,
-                          'opened'      => $ouvertures,
-                          'min_price'   => $prix_min,
-                          'max_price'   => $prix_max,
-                          'website'     => $website_restaurant,
-                          'plan'        => $plan_restaurant,
-                          'description' => $description_restaurant
+      $restaurant = array('name'         => $nom_restaurant,
+                          'picture'      => $new_name,
+                          'types'        => $types_formatted,
+                          'location'     => $lieu_restaurant,
+                          'phone'        => $telephone_restaurant,
+                          'opened'       => $ouvertures,
+                          'min_price'    => $prix_min,
+                          'max_price'    => $prix_max,
+                          'website'      => $website_restaurant,
+                          'plan'         => $plan_restaurant,
+                          'lafourchette' => $lafourchette_restaurant,
+                          'description'  => $description_restaurant
                         );
 
       $req = $bdd->prepare('INSERT INTO food_advisor_restaurants(name,
@@ -279,6 +282,7 @@
                                                                  max_price,
                                                                  website,
                                                                  plan,
+                                                                 lafourchette,
                                                                  description
                                                                 )
                                                           VALUES(:name,
@@ -291,6 +295,7 @@
                                                                  :max_price,
                                                                  :website,
                                                                  :plan,
+                                                                 :lafourchette,
                                                                  :description
                                                                 )');
       $req->execute($restaurant);
@@ -321,42 +326,43 @@
     global $bdd;
 
     // Récupération des données
-    $id_restaurant          = $post['id_restaurant'];
-    $nom_restaurant         = $post['update_name_restaurant_' . $id_restaurant];
-    $website_restaurant     = $post['update_website_restaurant_' . $id_restaurant];
-    $plan_restaurant        = $post['update_plan_restaurant_' . $id_restaurant];
-    $description_restaurant = $post['update_description_restaurant_' . $id_restaurant];
-    $ouverture_restaurant   = $post['update_ouverture_restaurant_' . $id_restaurant];
+    $id_restaurant           = $post['id_restaurant'];
+    $nom_restaurant          = $post['update_name_restaurant_' . $id_restaurant];
+    $website_restaurant      = $post['update_website_restaurant_' . $id_restaurant];
+    $plan_restaurant         = $post['update_plan_restaurant_' . $id_restaurant];
+    $lafourchette_restaurant = $post['update_lafourchette_restaurant_' . $id_restaurant];
+    $description_restaurant  = $post['update_description_restaurant_' . $id_restaurant];
+    $ouverture_restaurant    = $post['update_ouverture_restaurant_' . $id_restaurant];
 
-    $search                 = array(" ", ".");
-    $replace                = array("", "");
-    $telephone_restaurant   = str_replace($search, $replace, $post['update_phone_restaurant_' . $id_restaurant]);
+    $search                  = array(" ", ".");
+    $replace                 = array("", "");
+    $telephone_restaurant    = str_replace($search, $replace, $post['update_phone_restaurant_' . $id_restaurant]);
 
-    $prix_min_test          = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
-    $prix_max_test          = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
+    $prix_min_test           = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
+    $prix_max_test           = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
 
     if (is_numeric($prix_min_test))
-      $prix_min             = number_format($prix_min_test, 2, '.', '');
+      $prix_min              = number_format($prix_min_test, 2, '.', '');
     else
-      $prix_min             = "";
+      $prix_min              = "";
 
     if (is_numeric($prix_max_test))
-      $prix_max             = number_format($prix_max_test, 2, '.', '');
+      $prix_max              = number_format($prix_max_test, 2, '.', '');
     else
-      $prix_max             = "";
+      $prix_max              = "";
 
     if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
     {
-      $search               = array("'", '"');
-      $replace              = array("", "");
-      $lieu_restaurant      = str_replace($search, $replace, $post['update_other_location_' . $id_restaurant]);
+      $search                = array("'", '"');
+      $replace               = array("", "");
+      $lieu_restaurant       = str_replace($search, $replace, $post['update_other_location_' . $id_restaurant]);
     }
     else
-      $lieu_restaurant      = $post['update_location_' . $id_restaurant];
+      $lieu_restaurant       = $post['update_location_' . $id_restaurant];
 
     if (isset($post['update_types_restaurants_' . $id_restaurant]))
     {
-      $types_restaurant     = array_unique($post['update_types_restaurants_' . $id_restaurant]);
+      $types_restaurant      = array_unique($post['update_types_restaurants_' . $id_restaurant]);
 
       foreach ($types_restaurant as $keyType => $type)
       {
@@ -520,30 +526,32 @@
     // Enregistrement BDD
     if ($control_ok == true)
     {
-      $restaurant = array('name'        => $nom_restaurant,
-                          'picture'     => $new_name,
-                          'types'       => $types_formatted,
-                          'location'    => $lieu_restaurant,
-                          'phone'       => $telephone_restaurant,
-                          'opened'      => $ouvertures,
-                          'min_price'   => $prix_min,
-                          'max_price'   => $prix_max,
-                          'website'     => $website_restaurant,
-                          'plan'        => $plan_restaurant,
-                          'description' => $description_restaurant
+      $restaurant = array('name'         => $nom_restaurant,
+                          'picture'      => $new_name,
+                          'types'        => $types_formatted,
+                          'location'     => $lieu_restaurant,
+                          'phone'        => $telephone_restaurant,
+                          'opened'       => $ouvertures,
+                          'min_price'    => $prix_min,
+                          'max_price'    => $prix_max,
+                          'website'      => $website_restaurant,
+                          'plan'         => $plan_restaurant,
+                          'lafourchette' => $lafourchette_restaurant,
+                          'description'  => $description_restaurant
                         );
 
-      $req2 = $bdd->prepare('UPDATE food_advisor_restaurants SET name        = :name,
-                                                                 picture     = :picture,
-                                                                 types       = :types,
-                                                                 location    = :location,
-                                                                 phone       = :phone,
-                                                                 opened      = :opened,
-                                                                 min_price   = :min_price,
-                                                                 max_price   = :max_price,
-                                                                 website     = :website,
-                                                                 plan        = :plan,
-                                                                 description = :description
+      $req2 = $bdd->prepare('UPDATE food_advisor_restaurants SET name         = :name,
+                                                                 picture      = :picture,
+                                                                 types        = :types,
+                                                                 location     = :location,
+                                                                 phone        = :phone,
+                                                                 opened       = :opened,
+                                                                 min_price    = :min_price,
+                                                                 max_price    = :max_price,
+                                                                 website      = :website,
+                                                                 plan         = :plan,
+                                                                 lafourchette = :lafourchette,
+                                                                 description  = :description
                                                            WHERE id = ' . $id_restaurant);
       $req2->execute($restaurant);
       $req2->closeCursor();
