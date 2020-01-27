@@ -76,7 +76,7 @@
     $req0->closeCursor();
 
     // Vote repas
-    if (date("H") < 13 AND date("N") <= 5)
+    //if (date("H") < 13 AND date("N") <= 5)
     {
       $myNews   = new News();
       $reserved = false;
@@ -105,21 +105,21 @@
       $req1->closeCursor();
 
       // Contrôle si vote effectué
-      if ($reserved = false)
+      if ($reserved == false)
       {
-        $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
+        $req2 = $bdd->query('SELECT * FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
 
         $myNews->setTitle("Où aller manger à midi ?");
         $myNews->setDetails("");
         $myNews->setLogo("food_advisor");
         $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
 
-        if ($req1->rowCount() > 0)
+        if ($req2->rowCount() > 0)
           $myNews->setContent("Vous avez déjà voté, allez voir le resultat en cliquant sur ce lien.");
         else
           $myNews->setContent("Vous n'avez pas encore voté aujourd'hui, allez tout de suite le faire !");
 
-        $req1->closeCursor();
+        $req2->closeCursor();
       }
 
       array_push($tabNews, $myNews);

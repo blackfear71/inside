@@ -65,7 +65,7 @@
             echo '<img src="../../includes/icons/foodadvisor/website.png" alt="website" title="Site web" class="icone_lien_details" />';
           echo '</a>';
 
-          echo '<a id="plan_details_proposition" href="" target="_blank">';
+          echo '<a id="plan_details_proposition" href="" target="_blank" class="margin_right_moins_5">';
             echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_lien_details" />';
           echo '</a>';
 
