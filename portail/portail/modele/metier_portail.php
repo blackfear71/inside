@@ -76,7 +76,7 @@
     $req0->closeCursor();
 
     // Vote repas
-    //if (date("H") < 13 AND date("N") <= 5)
+    if (date("H") < 13 AND date("N") <= 5)
     {
       $myNews   = new News();
       $reserved = false;
