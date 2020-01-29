@@ -107,10 +107,10 @@
         .corps_mail_right
         {
           float: right;
-          width: 38%;
+          width: calc(40% - 20px);
           height: 100%;
-          padding-right: 2%;
-          padding-bottom: 1.5%;
+          padding-right: 20px;
+          padding-bottom: 15px;
         }
 
         .poster_mail

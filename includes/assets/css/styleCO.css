@@ -712,7 +712,7 @@
 .modify_speaker
 {
   display: block;
-  width: 52%;
+  width: calc(50% + 10px);
 	height: 30px;
   margin-left: auto;
   margin-right: auto;

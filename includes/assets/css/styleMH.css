@@ -906,7 +906,7 @@
 	height: 100px;
 	width: 70px;
 	margin-top: 100px;
-	margin-left: 9%;
+	margin-left: 10%;
 }
 
 .link_next_movie_empty
@@ -917,7 +917,7 @@
 	height: 100px;
 	width: 70px;
 	margin-top: 100px;
-	margin-right: 9%;
+	margin-right: 10%;
 }
 
 .link_prev_movie
@@ -929,7 +929,7 @@
 	width: 70px;
 	line-height: 97px;
 	margin-top: 100px;
-	margin-left: 9%;
+	margin-left: 10%;
 	cursor: pointer;
 }
 
@@ -942,7 +942,7 @@
 	width: 70px;
 	line-height: 97px;
 	margin-top: 100px;
-	margin-right: 9%;
+	margin-right: 10%;
 	cursor: pointer;
 }
 

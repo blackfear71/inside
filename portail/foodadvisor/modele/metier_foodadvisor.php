@@ -158,7 +158,7 @@
                     );
 
     // Contrôles date et heure
-    if (date("N") > 5 OR date("H") >= 13)
+    /*if (date("N") > 5 OR date("H") >= 13)
     {
       $actions["saisir_choix"]     = false;
       $actions["determiner"]       = false;
@@ -168,7 +168,7 @@
       $actions["annuler_reserver"] = false;
       $actions["supprimer_choix"]  = false;
       $actions["choix_rapide"]     = false;
-    }
+    }*/
 
     // Contrôle propositions présentes (pour bouton détermination)
     if ($actions["determiner"] == true)
