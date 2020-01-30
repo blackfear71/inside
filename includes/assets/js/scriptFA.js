@@ -34,7 +34,7 @@ $(function()
     var id_bouton  = $(this).attr('id');
     var num        = $(this).attr('id').replace('select_lieu_', '');
 
-    afficherListboxRestaurants('select_lieu_' + num, 'zone_listbox_' + num, 'annuler_restaurant_' + num);
+    afficherListboxRestaurants('select_lieu_' + num, 'zone_listbox_' + num);
   });
 
   // Affiche la saisie horaire restaurant
@@ -531,7 +531,7 @@ function afficherListboxLieux(id)
   var html;
 
   html = '<div id="' + id_zone + '" class="zone_listbox_restaurant">';
-    html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_choix afficherRestaurant" required>';
+    html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_lieu afficherRestaurant" required>';
       html += '<option value="" hidden>Choisissez...</option>';
       $.each(listeLieux, function(key, value)
       {
@@ -540,13 +540,13 @@ function afficherListboxLieux(id)
     html += '</select>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerLieu" style="margin-top: 10px;">Annuler</a>';
+  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerLieu">Annuler</a>';
 
   $("#" + id).append(html);
 }
 
 // Affiche la listbox des restaurants associés
-function afficherListboxRestaurants(id, zone, bouton)
+function afficherListboxRestaurants(id, zone)
 {
   var lieu        = $('#' + id).val();
   var num         = id.substr(-1);
@@ -556,7 +556,7 @@ function afficherListboxRestaurants(id, zone, bouton)
   if ($('#' + id_select_2).length)
     $('#' + id_select_2).remove();
 
-  html = '<select id="' + id_select_2 + '" name="select_restaurant[' + num + ']" class="listbox_choix" required>';
+  html = '<select id="' + id_select_2 + '" name="select_restaurant[' + num + ']" class="listbox_restaurant" required>';
     html += '<option value="" hidden>Choisissez...</option>';
     $.each(listeRestaurants[lieu], function(key, value)
     {
@@ -565,7 +565,6 @@ function afficherListboxRestaurants(id, zone, bouton)
   html += '</select>';
 
   $("#" + zone).append(html);
-  $("#" + bouton).css('margin-top', '31px');
 }
 
 // Cache les lisbox des restaurants

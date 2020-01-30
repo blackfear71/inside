@@ -299,14 +299,14 @@
 
                   if ($feet == true)
                   {
-                    echo '<div id="bouton_' . $id_check_f . '" class="switch_transport_2 bouton_checked">';
+                    echo '<div id="bouton_' . $id_check_f . '" class="switch_transport_2 margin_right_10 bouton_checked">';
                       echo '<input id="' . $id_check_f . '" type="checkbox" value="F" name="' . $id_check_f . '" checked />';
                       echo '<label for="' . $id_check_f . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_f . '" class="switch_transport_2">';
+                    echo '<div id="bouton_' . $id_check_f . '" class="switch_transport_2 margin_right_10">';
                       echo '<input id="' . $id_check_f . '" type="checkbox" value="F" name="' . $id_check_f . '" />';
                       echo '<label for="' . $id_check_f . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
                     echo '</div>';
@@ -314,14 +314,14 @@
 
                   if ($bike == true)
                   {
-                    echo '<div id="bouton_' . $id_check_b . '" class="switch_transport_2 margin_right_update bouton_checked">';
+                    echo '<div id="bouton_' . $id_check_b . '" class="switch_transport_2 bouton_checked">';
                       echo '<input id="' . $id_check_b . '" type="checkbox" value="B" name="' . $id_check_b . '" checked />';
                       echo '<label for="' . $id_check_b . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_b . '" class="switch_transport_2 margin_right_update">';
+                    echo '<div id="bouton_' . $id_check_b . '" class="switch_transport_2">';
                       echo '<input id="' . $id_check_b . '" type="checkbox" value="B" name="' . $id_check_b . '" />';
                       echo '<label for="' . $id_check_b . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
                     echo '</div>';
@@ -329,14 +329,14 @@
 
                   if ($tram == true)
                   {
-                    echo '<div id="bouton_' . $id_check_t . '" class="switch_transport_2 bouton_checked">';
+                    echo '<div id="bouton_' . $id_check_t . '" class="switch_transport_2 margin_right_10 bouton_checked">';
                       echo '<input id="' . $id_check_t . '" type="checkbox" value="T" name="' . $id_check_t . '" checked />';
                       echo '<label for="' . $id_check_t . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_t . '" class="switch_transport_2">';
+                    echo '<div id="bouton_' . $id_check_t . '" class="switch_transport_2 margin_right_10">';
                       echo '<input id="' . $id_check_t . '" type="checkbox" value="T" name="' . $id_check_t . '" />';
                       echo '<label for="' . $id_check_t . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
                     echo '</div>';
@@ -344,14 +344,14 @@
 
                   if ($car == true)
                   {
-                    echo '<div id="bouton_' . $id_check_c . '" class="switch_transport_2 margin_right_update bouton_checked">';
+                    echo '<div id="bouton_' . $id_check_c . '" class="switch_transport_2 bouton_checked">';
                       echo '<input id="' . $id_check_c . '" type="checkbox" value="C" name="' . $id_check_c . '" checked />';
                       echo '<label for="' . $id_check_c . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_c . '" class="switch_transport_2 margin_right_update">';
+                    echo '<div id="bouton_' . $id_check_c . '" class="switch_transport_2">';
                       echo '<input id="' . $id_check_c . '" type="checkbox" value="C" name="' . $id_check_c . '" />';
                       echo '<label for="' . $id_check_c . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
                     echo '</div>';
