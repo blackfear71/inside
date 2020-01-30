@@ -2414,13 +2414,13 @@
 
 .td_saisie_alert_env
 {
-	width: 105px;
+	width: 107px;
 }
 
 .send_alert
 {
-	height: 105px;
-	width: 105px;
+	height: 107px;
+	width: 107px;
 	border: 0;
 	background-color: #e3e3e3;
 	background-image: url("/inside/includes/icons/common/send_red.png");
