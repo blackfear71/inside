@@ -79,7 +79,7 @@
 
           // Synopsis
           echo '<div class="zone_saisie_ligne">';
-            echo '<img src="../../includes/icons/moviehouse/synopsis.png" alt="synopsis" title="Synopsis" class="icone_saisie" style="vertical-align: top;" />';
+            echo '<img src="../../includes/icons/moviehouse/synopsis.png" alt="synopsis" title="Synopsis" class="icone_saisie_textarea" />';
             echo '<textarea placeholder="Synopsis" name="synopsis" class="saisie_textarea">' . $_SESSION['save']['synopsis_saisi'] . '</textarea>';
           echo '</div>';
         echo '</div>';

@@ -178,6 +178,16 @@
 	vertical-align: middle;
 }
 
+.icone_saisie_textarea
+{
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	margin-top: 3px;
+	margin-right: 10px;
+	vertical-align: top;
+}
+
 .saisie_ligne
 {
 	display: inline-block;

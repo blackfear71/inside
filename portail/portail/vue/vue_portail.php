@@ -55,11 +55,16 @@
                 echo '<div class="trait_timeline"></div>';
 
                 if (empty($messageNews->getLink()))
-                  echo '<div class="zone_news">';
+                {
+                  if ($messageNews == end($news))
+                    echo '<div class="zone_news_end">';
+                  else
+                    echo '<div class="zone_news">';
+                }
                 else
                 {
                   if ($messageNews == end($news))
-                    echo '<a href="' . $messageNews->getLink() . '" class="zone_news" style="margin-bottom: -2px;">';
+                    echo '<a href="' . $messageNews->getLink() . '" class="zone_news_end">';
                   else
                     echo '<a href="' . $messageNews->getLink() . '" class="zone_news">';
                 }

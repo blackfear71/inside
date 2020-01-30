@@ -28,9 +28,20 @@
 {
 	display: inline-block;
 	width: calc(100% - 21px);
-	margin-top: -25px;
-	margin-left: 20px;
-	margin-bottom: 20px;
+	margin: -25px 0 20px 20px;
+	background-color: #ff1937;
+	min-height: 50px;
+	border-radius: 2px;
+	overflow: hidden;
+	box-shadow: 0 0 3px #7c7c7c;
+	text-decoration: none;
+}
+
+.zone_news_end
+{
+	display: inline-block;
+	width: calc(100% - 21px);
+	margin: -25px 0 0 20px;	
 	background-color: #ff1937;
 	min-height: 50px;
 	border-radius: 2px;
