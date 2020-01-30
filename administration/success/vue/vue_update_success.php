@@ -67,7 +67,7 @@
               if ($success->getDefined() == "Y")
                 echo '<div class="succes_liste_mod">';
               else
-                echo '<div class="succes_liste_mod" style="background-color: #b3b3b3;">';
+                echo '<div class="succes_liste_mod succes_liste_mod_undefined">';
 
                 echo '<div class="succes_mod_left">';
                   // Id succès (caché)

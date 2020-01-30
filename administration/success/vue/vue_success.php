@@ -140,7 +140,7 @@
             echo 'Si c\'est un succès relatif à une mission, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>fonctions_communes.php</strong>
             et la fonction <strong>isMissionEnded()</strong> dans <strong>metier_profil.php</strong>.';
           echo '</div>';
-          
+
           // Gestion des succès
           echo '<div class="entete_admin">';
             echo 'Gérer les succès des utilisateurs';
@@ -197,7 +197,7 @@
                 if ($success->getDefined() == "Y")
                   echo '<div class="succes_liste">';
                 else
-                  echo '<div class="succes_liste" style="background-color: #b3b3b3;">';
+                  echo '<div class="succes_liste_undefined">';
 
                   // Ordonnancement
                   echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
@@ -218,7 +218,7 @@
                   if ($success->getDefined() == "Y")
                     echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
                   else
-                    echo '<div class="explications_succes" style="background-color: #979797;">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
+                    echo '<div class="explications_succes_undefined">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
                 echo '</div>';
               echo '</div>';
 

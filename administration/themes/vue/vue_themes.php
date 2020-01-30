@@ -87,7 +87,7 @@
                   echo '<img id="theme_footer_users" alt="" class="img_footer" />';
                 echo '</div>';
 
-                echo '<div class="zone_theme_titre" style="margin-top: 8px; padding-top: 7px; padding-bottom: 7px;">';
+                echo '<div class="zone_theme_saisie_titre">';
                   // Logo
                   echo '<div class="zone_parcourir_logo">';
                     echo '<div class="titre_saisie_logo">Logo</div>';
@@ -170,7 +170,7 @@
                       echo '<form method="post" action="themes.php?action=doModifier">';
                         echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
 
-                        echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
+                        echo '<div class="zone_theme_modification_titre">';
                           echo '<input type="hidden" name="theme_type" value="U" />';
 
                           // Annulation modification
@@ -241,7 +241,7 @@
                   echo '<img id="theme_footer_mission" alt="" class="img_footer" />';
                 echo '</div>';
 
-                echo '<div class="zone_theme_titre" style="margin-top: 8px; padding-top: 7px; padding-bottom: 7px;">';
+                echo '<div class="zone_theme_saisie_titre">';
                   // Logo
                   echo '<div class="zone_parcourir_logo">';
                     echo '<div class="titre_saisie_logo">Logo</div>';
@@ -329,7 +329,7 @@
                       echo '<form method="post" action="themes.php?action=doModifier">';
                         echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
 
-                        echo '<div class="zone_theme_titre" style="padding-top: 7px; padding-bottom: 7px;">';
+                        echo '<div class="zone_theme_modification_titre">';
                           echo '<input type="hidden" name="theme_type" value="M" />';
 
                           // Annulation modification
