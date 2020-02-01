@@ -104,7 +104,7 @@
   // METIER : Converstion du tableau d'objet des propositions en tableau simple pour JSON
   // RETOUR : Tableau des détails
   function convertForJson2($propositions)
-  {
+  {  
     // On transforme les objets en tableau pour envoyer au Javascript
     $listePopositionsAConvertir = array();
 
@@ -134,6 +134,7 @@
                                      'opened'          => $proposition->getOpened(),
                                      'min_price'       => $proposition->getMin_price(),
                                      'max_price'       => $proposition->getMax_price(),
+                                     'description'     => $proposition->getDescription(),
                                      'details'         => $proposition->getDetails()
                                    );
 

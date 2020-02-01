@@ -68,6 +68,7 @@
       $myProposition->setOpened($data2['opened']);
       $myProposition->setMin_price(str_replace('.', ',', $data2['min_price']));
       $myProposition->setMax_price(str_replace('.', ',', $data2['max_price']));
+      $myProposition->setDescription($data2['description']);
 
       $req2->closeCursor();
 

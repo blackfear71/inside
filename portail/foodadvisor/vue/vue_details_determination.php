@@ -111,7 +111,7 @@
       /****************************/
       echo '<div class="zone_details_proposition_right">';
         // Participants
-        echo '<div class="titre_details" style="margin-top: -10px;">';
+        echo '<div class="titre_details_top">';
           echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
 
           echo '<div class="texte_titre_section">';
@@ -134,12 +134,22 @@
         // Participants, transports et horaires
         echo '<div id="top_details_proposition"></div>';
 
-        // Menus proposés
-        echo '<div class="titre_details" style="margin-top: 40px;"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" /><div class="texte_titre_section">Les menus proposés</div></div>';
+        // Description restaurant
+        echo '<div class="zone_details_description_bottom">';
+          echo '<div class="titre_details_bottom"><img src="../../includes/icons/foodadvisor/description_grey.png" alt="description_grey" class="logo_titre_section" /><div class="texte_titre_section">A propos du restaurant</div></div>';
 
-        // Menus
-        echo '<div class="zone_details_user_bottom"></div>';
-      echo '</div>';
+          // Description
+          echo '<div class="zone_details_description"></div>';
+        echo '</div>';
+
+        // Menus proposés
+        echo '<div class="zone_details_menus_bottom">';
+          echo '<div class="titre_details_bottom"><img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" /><div class="texte_titre_section">Les menus proposés</div></div>';
+
+          // Menus
+          echo '<div class="zone_details_menus"></div>';
+        echo '</div>';
+      echo '</div>';        
     echo '</div>';
   echo '</div>';
 ?>

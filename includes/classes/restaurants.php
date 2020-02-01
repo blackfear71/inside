@@ -252,6 +252,7 @@
     private $opened;
     private $min_price;
     private $max_price;
+    private $description;
     private $details;
 
     // Constructeur par défaut (objet vide)
@@ -277,6 +278,7 @@
       $this->opened          = 'Y;Y;Y;Y;Y;';
       $this->min_price       = '';
       $this->max_price       = '';
+      $this->description     = '';
       $this->details         = array();
     }
 
@@ -524,6 +526,17 @@
     public function getMax_price()
     {
       return $this->max_price;
+    }
+
+    // Description du restaurant
+    public function setDescription($description)
+    {
+      $this->description = $description;
+    }
+
+    public function getDescription()
+    {
+      return $this->description;
     }
 
     // Détails

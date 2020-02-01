@@ -174,6 +174,7 @@
         $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
         $proposition->setMin_price(htmlspecialchars($proposition->getMin_price()));
         $proposition->setMax_price(htmlspecialchars($proposition->getMax_price()));
+        $proposition->setDescription(htmlspecialchars($proposition->getDescription()));
 
         if (!empty($proposition->getDetails()))
         {

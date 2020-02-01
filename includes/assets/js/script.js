@@ -510,3 +510,11 @@ function formatUnknownUser(pseudo, majuscule, italique)
 
   return pseudo;
 }
+
+// Prend en compte les sauts de ligne
+function nl2br(str)
+{
+  var nl2br = str.replace(/(\r\n|\n\r|\r|\n)/g, '<br />');
+
+  return nl2br;
+}

@@ -1375,7 +1375,9 @@ function showDetails(zone, id)
   /*************/
   /*** Menus ***/
   /*************/
-  $('.zone_details_user_bottom').empty();
+  $('.zone_details_menus').empty();
+  $('.zone_details_description').empty();
+
   var menuPresent = false;
   var colonne;
   var menu;
@@ -1426,13 +1428,29 @@ function showDetails(zone, id)
 
       colonne += '</div>';
 
-      $('.zone_details_user_bottom').append(colonne);
+      $('.zone_details_menus').append(colonne);
     }
   });
 
   // Pas de menus
   if (menuPresent == false)
-    $('.zone_details_user_bottom').html('<div class="empty">Pas de menus proposés pour ce choix.</div>');
+    $('.zone_details_menus').html('<div class="empty">Pas de menus proposés pour ce choix.</div>');
+
+  /*******************/
+  /*** Description ***/
+  /*******************/
+  if (details['description'] != '')
+  {
+    $('.zone_details_description').html('<div class="details_description">' + nl2br(details['description']) + '</div>');
+
+    $('.zone_details_description_bottom').css('display', 'inline-block');
+    $('.zone_details_menus_bottom').css('width', 'calc(70% - 10px)');
+  }
+  else
+  {
+    $('.zone_details_description_bottom').css('display', 'none');
+    $('.zone_details_menus_bottom').css('width', '100%');
+  }
 
   // Affichage de la zone
   afficherMasquer(zone);
