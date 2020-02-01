@@ -602,7 +602,7 @@
 	display: inline-block;
 	width: calc(30% - 10px);
 	vertical-align: top;
-	margin-right: 20px;	
+	margin-right: 20px;
 }
 
 .zone_details_menus_bottom
@@ -723,7 +723,7 @@
 
 .zone_details_description
 {
-	margin-bottom: 10px;
+	display: block;
 }
 
 .details_description
@@ -733,6 +733,24 @@
 	text-align: justify;
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.expand_details_description
+{
+	float: right;
+	width: 15px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+	line-height: 10px;
+	text-align: center;
+	padding: 5px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.expand_details_description:hover
+{
+	background-color: #e3e3e3;
 }
 
 /*** Affichage propositions ***/

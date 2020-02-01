@@ -177,6 +177,13 @@ $(function()
     afficherMasquer('zone_details');
   });
 
+  // Affiche la description longue d'un restaurant (détails proposition)
+  $(document).on('click', '#descriptionDetails', function()
+  {
+    afficherMasquerNoDelay('details_description_short');
+    afficherMasquerNoDelay('details_description_long');
+  });
+
   // Affiche la saisie lieu restaurant (résumé)
   $('.afficherResume').click(function()
   {
@@ -1441,7 +1448,21 @@ function showDetails(zone, id)
   /*******************/
   if (details['description'] != '')
   {
-    $('.zone_details_description').html('<div class="details_description">' + nl2br(details['description']) + '</div>');
+    var longueurMax = 300;
+    var description = '';
+
+    description += '<div class="details_description">';
+      if (details['description'].length > longueurMax)
+      {
+        description += '<div id="details_description_long" style="display: none;">' + nl2br(details['description']) + '</div>';
+        description += '<div id="details_description_short">' + nl2br(details['description'].substr(0, 300)) + '...</div>';
+        description += '<a id="descriptionDetails"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_details_description" /></a>';
+      }
+      else
+        description += nl2br(details['description']);
+    description += '</div>';
+
+    $('.zone_details_description').append(description);
 
     $('.zone_details_description_bottom').css('display', 'inline-block');
     $('.zone_details_menus_bottom').css('width', 'calc(70% - 10px)');
@@ -1450,6 +1471,7 @@ function showDetails(zone, id)
   {
     $('.zone_details_description_bottom').css('display', 'none');
     $('.zone_details_menus_bottom').css('width', '100%');
+    $('.zone_details_description').empty();
   }
 
   // Affichage de la zone

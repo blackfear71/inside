@@ -149,7 +149,7 @@
           // Menus
           echo '<div class="zone_details_menus"></div>';
         echo '</div>';
-      echo '</div>';        
+      echo '</div>';
     echo '</div>';
   echo '</div>';
 ?>
