@@ -1,5 +1,5 @@
 <?php
-	echo '<div class="title_gestion">Demandes de suppression de film</div>';
+	echo '<div class="titre_section"><img src="../../includes/icons/admin/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" /><div class="texte_titre_section">Demandes de suppression de films</div></div>';
 
 	echo '<table class="table_manage_users" style="	margin-bottom: 0;">';
 		// Entête du tableau

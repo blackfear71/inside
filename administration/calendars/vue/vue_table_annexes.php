@@ -1,5 +1,5 @@
 <?php
-	echo '<div class="title_gestion">Demandes de suppression des annexes</div>';
+	echo '<div class="titre_section"><img src="../../includes/icons/admin/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Demandes de suppression des annexes</div></div>';
 
 	echo '<table class="table_manage_users" style="margin-bottom: 0;">';
 		// Entête du tableau

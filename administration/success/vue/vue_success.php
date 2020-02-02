@@ -52,9 +52,7 @@
           /****************/
           /* Ajout succès */
           /****************/
-          echo '<div class="entete_admin">';
-            echo 'Ajouter un succès';
-          echo '</div>';
+          echo '<div class="titre_section"><img src="../../includes/icons/admin/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Ajouter un succès</div></div>';
 
           echo '<form method="post" action="success.php?action=doAjouter" class="form_saisie_succes" enctype="multipart/form-data">';
             echo '<table class="table_saisie_succes">';
@@ -142,9 +140,7 @@
           echo '</div>';
 
           // Gestion des succès
-          echo '<div class="entete_admin">';
-            echo 'Gérer les succès des utilisateurs';
-          echo '</div>';
+          echo '<div class="titre_section"><img src="../../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Gérer les succès des utilisateurs</div></div>';
 
           echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurger" class="form_init_succes">';
             echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_init eventConfirm" />';

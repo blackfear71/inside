@@ -1,5 +1,5 @@
 <?php
-	echo '<div class="title_gestion">Gestion des utilisateurs</div>';
+	echo '<div class="titre_section"><img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Gestion des utilisateurs</div></div>';
 
 	echo '<table class="table_manage_users">';
 		// Entête du tableau

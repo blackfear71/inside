@@ -1,5 +1,5 @@
 <?php
-	echo '<div class="title_gestion">Statistiques demandes & publications</div>';
+	echo '<div class="titre_section"><img src="../../includes/icons/admin/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Statistiques demandes & publications</div></div>';
 
 	echo '<table class="table_manage_users" style="	margin-bottom: 0;">';
 		// Entête du tableau

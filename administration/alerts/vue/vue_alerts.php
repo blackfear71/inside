@@ -43,6 +43,8 @@
           /****************/
           /* Ajout alerte */
           /****************/
+          echo '<div class="titre_section"><img src="../../includes/icons/admin/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Ajouter une alerte</div></div>';
+
           echo '<form method="post" action="alerts.php?action=doAjouter" class="form_saisie_alert">';
             echo '<table class="table_saisie_alert">';
               echo '<tr>';
@@ -91,6 +93,8 @@
           /***********************/
           /* Tableau des alertes */
           /***********************/
+          echo '<div class="titre_section"><img src="../../includes/icons/admin/alerts_grey.png" alt="alerts_grey" class="logo_titre_section" /><div class="texte_titre_section">Liste des alertes</div></div>';
+
           echo '<table class="table_alerts">';
             echo '<tr class="title_table_alerts">';
               echo '<td class="title_type_alerts">Type</td>';

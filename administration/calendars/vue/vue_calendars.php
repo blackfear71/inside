@@ -43,7 +43,7 @@
           /**********************************************/
           /* Formulaire autorisation saisie calendriers */
           /**********************************************/
-          echo '<div class="title_gestion">Autorisations de gestion des calendriers</div>';
+          echo '<div class="titre_section"><img src="../../includes/icons/admin/download_grey.png" alt="download_grey" class="logo_titre_section" /><div class="texte_titre_section">Autorisations de gestion des calendriers</div></div>';
 
           echo '<form method="post" action="calendars.php?action=doChangerAutorisations" class="form_autorisations">';
             echo '<div class="zone_autorisations">';
