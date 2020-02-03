@@ -56,6 +56,9 @@
       $listeTypes       = getTypesRestaurants();
       $listeRestaurants = getRestaurants($listeLieux);
       $choixRapide      = getFastActions($_SESSION['user']['identifiant']);
+
+      if ($choixRapide == true)
+        $mesChoix = getMyChoices($_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouter':
@@ -118,6 +121,25 @@
         }
 
         unset($restaurant);
+
+        if ($choixRapide == true)
+        {
+          foreach ($mesChoix as &$monChoix)
+          {
+            $monChoix->setId_restaurant(htmlspecialchars($monChoix->getId_restaurant()));
+            $monChoix->setIdentifiant(htmlspecialchars($monChoix->getIdentifiant()));
+            $monChoix->setDate(htmlspecialchars($monChoix->getDate()));
+            $monChoix->setTime(htmlspecialchars($monChoix->getTime()));
+            $monChoix->setTransports(htmlspecialchars($monChoix->getTransports()));
+            $monChoix->setMenu(htmlspecialchars($monChoix->getMenu()));
+            $monChoix->setName(htmlspecialchars($monChoix->getName()));
+            $monChoix->setPicture(htmlspecialchars($monChoix->getPicture()));
+            $monChoix->setLocation(htmlspecialchars($monChoix->getLocation()));
+            $monChoix->setOpened(htmlspecialchars($monChoix->getOpened()));
+          }
+
+          unset($monChoix);
+        }
       }
       break;
 

@@ -104,7 +104,7 @@
   // METIER : Converstion du tableau d'objet des propositions en tableau simple pour JSON
   // RETOUR : Tableau des détails
   function convertForJson2($propositions)
-  {  
+  {
     // On transforme les objets en tableau pour envoyer au Javascript
     $listePopositionsAConvertir = array();
 
@@ -544,38 +544,6 @@
       // Relance de la détermination si besoin
       relanceDetermination();
     }
-  }
-
-  // METIER : Récupère les choix de l'utilisateur
-  // RETOUR : Liste des choix du jour (utilisateur)
-  function getMyChoices($user)
-  {
-    $listChoices = array();
-
-    global $bdd;
-
-    // Récupération des choix
-    $reponse1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant != 0 AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '" ORDER BY id ASC');
-    while ($donnees1 = $reponse1->fetch())
-    {
-      $myChoice = Choix::withData($donnees1);
-
-      // Données restaurant
-      $reponse2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $myChoice->getId_restaurant());
-      $donnees2 = $reponse2->fetch();
-
-      $myChoice->setName($donnees2['name']);
-      $myChoice->setPicture($donnees2['picture']);
-      $myChoice->setLocation($donnees2['location']);
-      $myChoice->setOpened($donnees2['opened']);
-
-      $reponse2->closeCursor();
-
-      array_push($listChoices, $myChoice);
-    }
-    $reponse1->closeCursor();
-
-    return $listChoices;
   }
 
   // METIER : Récupère les choix de la semaine

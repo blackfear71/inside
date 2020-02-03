@@ -122,10 +122,26 @@
                 // Choix rapide
                 if ($choixRapide == true AND $available_day == true)
                 {
-                  echo '<form method="post" action="restaurants.php?action=doChoixRapide">';
-                    echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
-                    echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_restaurant" />';
-                  echo '</form>';
+                  $already_voted = false;
+
+                  // Contrôle choix déjà effectué
+                  foreach ($mesChoix as $monChoix)
+                  {
+                    if ($restaurant->getId() == $monChoix->getId_restaurant())
+                    {
+                      $already_voted = true;
+                      break;
+                    }
+                  }
+
+                  // Affichage du bouton de choix rapide
+                  if ($already_voted == false)
+                  {
+                    echo '<form method="post" action="restaurants.php?action=doChoixRapide">';
+                      echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
+                      echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_restaurant" />';
+                    echo '</form>';
+                  }
                 }
               echo '</div>';
 
