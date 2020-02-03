@@ -80,7 +80,7 @@
             }
 
             if ($email_present == false)
-              echo '<p class="avertissement_mail" style="margin-top: 0;">Aucune personne ne sera avertie car aucun email n\'a été renseigné.</p>';
+              echo '<p class="avertissement_mail">Aucune personne ne sera avertie car aucun email n\'a été renseigné.</p>';
             else
               echo '<p class="avertissement_mail">N\'oubliez pas d\'avertir les éventuelles personnes n\'ayant pas renseigné d\'adresse mail.</p>';
           echo '</div>';

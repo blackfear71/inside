@@ -1,7 +1,7 @@
 <?php
 	echo '<div class="titre_section"><img src="../../includes/icons/admin/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" /><div class="texte_titre_section">Demandes de suppression de films</div></div>';
 
-	echo '<table class="table_manage_users" style="	margin-bottom: 0;">';
+	echo '<table class="table_manage_users" style="margin-bottom: 0;">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
 			echo '<td rowspan="2" class="init_td_manage_users" style="width: 25%;">';

@@ -91,7 +91,7 @@
                     else
                     {
                       if ($proposition->getClassement() == 1)
-                        echo '<div class="jour_non_fa" style="background-color: white;">' . $semaine_short[$i] . '</div>';
+                        echo '<div class="jour_non_fa_white">' . $semaine_short[$i] . '</div>';
                       else
                         echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
                     }
@@ -184,9 +184,9 @@
 
                 if ($actions["annuler_reserver"] == true)
                 {
-                  echo '<form method="post" action="foodadvisor.php?action=doAnnulerReserver">';
+                  echo '<form method="post" action="foodadvisor.php?action=doAnnulerReserver" class="margin_top_10">';
                     echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
-                    echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" style="margin-top: 10px;" />';
+                    echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" />';
                   echo '</form>';
                 }
               echo '</div>';

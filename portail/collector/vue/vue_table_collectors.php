@@ -60,12 +60,12 @@
                 if (isset($listeVotesUsers[$collector->getId()]) AND !empty($listeVotesUsers[$collector->getId()]))
                   echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0" />';
                 else
-                  echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0" style="background-size: 35px; width: 35px; height: 35px;" />';
+                  echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0 smiley_selected" />';
 
                 for ($j = 1; $j <= 8; $j++)
                 {
                   if (isset($listeVotesUsers[$collector->getId()]) AND !empty($listeVotesUsers[$collector->getId()]) AND $j == $listeVotesUsers[$collector->getId()]->getVote())
-                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . '" style="background-size: 35px; width: 35px; height: 35px;" />';
+                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . ' smiley_selected" />';
                   else
                     echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . '" />';
                 }
@@ -110,9 +110,9 @@
               if (!empty($collector->getContext()))
               {
                 if ($collector->getNb_votes() >= $min_golden)
-                  echo '<div class="text_context_golden">' . nl2br(formatContext($collector->getContext())) . '</div>';
+                  echo '<div class="text_context_golden">' . nl2br(formatCollector($collector->getContext())) . '</div>';
                 else
-                  echo '<div class="text_context">' . nl2br(formatContext($collector->getContext())) . '</div>';
+                  echo '<div class="text_context">' . nl2br(formatCollector($collector->getContext())) . '</div>';
               }
 
               // Votes tous utilisateurs
@@ -244,9 +244,9 @@
 
               // Contexte
               if ($collector->getNb_votes() >= $min_golden)
-                echo '<div class="text_context_golden" style="padding-bottom: 10px;">';
+                echo '<div class="text_context_golden_update">';
               else
-                echo '<div class="text_context" style="padding-bottom: 10px;">';
+                echo '<div class="text_context_update">';
                   echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
                 echo '</div>';
             echo '</div>';

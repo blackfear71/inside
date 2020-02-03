@@ -581,7 +581,7 @@
     $formatted = "";
 
     $search    = array("[", "]");
-    $replace   = array("<strong style='color: #ff1937;'>", "</strong>");
+    $replace   = array('<strong class="strong_red">', '</strong>');
     $formatted = str_replace($search, $replace, $collector);
 
     return $formatted;
@@ -598,19 +598,6 @@
     $unformatted = str_replace($search, $replace, $collector);
 
     return $unformatted;
-  }
-
-  // Formatage contexte phrases cultes
-  // Retour : phrase formatée
-  function formatContext($context)
-  {
-    $formatted = "";
-
-    $search    = array("[", "]");
-    $replace   = array("<strong style='color: #ff1937;'>", "</strong>");
-    $formatted = str_replace($search, $replace, $context);
-
-    return $formatted;
   }
 
   // Suppression des caractères ASCII invisibles (?)

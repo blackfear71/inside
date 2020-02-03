@@ -1286,6 +1286,25 @@
 	text-align: center;
 }
 
+.jour_non_fa_white
+{
+	display: inline-block;
+	border: 0;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	margin-left: 1.5px;
+	margin-right: 1.5px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 80%;
+	color: #262626;
+	line-height: 20px;
+	vertical-align: top;
+	text-align: center;
+}
+
 .horaire_mon_choix
 {
   display: inline-block;
@@ -1443,8 +1462,9 @@
 
 .zone_update_menu
 {
-	padding-top: 5px;
 	border-top: solid 1px #c3c3c3;
+	padding-top: 5px;
+	padding-bottom: 10px;
 }
 
 .update_menu
@@ -1604,6 +1624,7 @@
 	width: 100%;
 	background-color: #e3e3e3;
 	padding: 5px 10px 5px 10px;
+	margin-bottom: 10px;
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -1815,6 +1836,23 @@
 {
 	display: inline-block;
 	width: calc(80% - 240px);
+	margin: 0 10px 10px 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 32px;
+}
+
+.saisie_nom_restaurant_other
+{
+	display: inline-block;
+	width: calc(60% - 270px);
 	margin: 0 10px 10px 0;
 	padding-left: 10px;
 	padding-right: 10px;

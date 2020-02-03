@@ -2303,10 +2303,37 @@
 	vertical-align: middle;
 }
 
+.theme_dates_2
+{
+	display: inline-block;
+	padding: 7px 10px 7px 10px;
+	width: calc((500px / 3) * 2 - 20px);
+	border-top: solid 1px #b3b3b3;
+	background-color: #d3d3d3;
+	border-bottom-right-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+	vertical-align: middle;
+}
+
 .theme_level
 {
 	display: inline-block;
 	padding: 10px;
+	width: calc(30% - 20px);
+	border-top: solid 1px #b3b3b3;
+	background-color: #d3d3d3;
+	border-bottom-right-radius: 2px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.theme_level_2
+{
+	display: inline-block;
+	padding: 7px 10px 7px 10px;
 	width: calc(30% - 20px);
 	border-top: solid 1px #b3b3b3;
 	background-color: #d3d3d3;

@@ -864,7 +864,7 @@ function afficherListboxRestaurantsResume(id, zone)
     html += '</select>';
 
     html += '<input type="hidden" name="num_jour" value="' + num + '" />';
-    html += '<input type="submit" name="submit_resume" value="Valider" class="bouton_valider_resume" style="margin-bottom: 10px;" />';
+    html += '<input type="submit" name="submit_resume" value="Valider" class="bouton_valider_resume" />';
   html += '</form>';
 
   html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';

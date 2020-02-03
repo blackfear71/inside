@@ -98,9 +98,9 @@
           // Bouton annulation réservation
           if ($actions["annuler_reserver"] == true)
           {
-            echo '<form id="annuler_details_proposition" method="post" action="">';
+            echo '<form id="annuler_details_proposition" method="post" action="" class="margin_top_10">';
               echo '<input type="hidden" name="id_restaurant" value="" />';
-              echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver_details" style="margin-top: 10px;" />';
+              echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver_details" />';
             echo '</form>';
           }
         echo '</div>';

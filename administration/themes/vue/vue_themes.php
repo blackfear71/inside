@@ -187,7 +187,7 @@
                         echo '<div class="theme_ref_2">' . $theme_users->getReference() . '</div>';
 
                         // Niveau
-                        echo '<div class="theme_level" style="padding-top: 7px; padding-bottom: 7px;">';
+                        echo '<div class="theme_level_2">';
                           echo '<input type="text" name="theme_level" value="' . $theme_users->getLevel() . '" placeholder="Niveau" maxlength="2" class="saisie_ref_theme" required />';
                         echo '</div>';
                       echo '</form>';
@@ -260,12 +260,12 @@
                 echo '</div>';
 
                 // Référence
-                echo '<div class="theme_ref" style="padding-top: 7px; padding-bottom: 7px;">';
+                echo '<div class="theme_ref">';
                   echo '<input type="text" name="theme_ref" value="' . $_SESSION['save']['theme_ref'] . '" placeholder="Référence" maxlength="255" class="saisie_ref_theme" required />';
                 echo '</div>';
 
                 // Dates de début et de fin
-                echo '<div class="theme_dates" style="padding-top: 7px; padding-bottom: 7px;">';
+                echo '<div class="theme_dates">';
                   echo '<div class="theme_texte_dates">Du&nbsp;</div>';
                   echo '<input type="text" name="theme_date_deb" value="' . $_SESSION['save']['theme_date_deb'] . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_saisie_deb" class="saisie_date_theme" required />';
                   echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';
@@ -346,7 +346,7 @@
                         echo '<div class="theme_ref">' . $theme_mission->getReference() . '</div>';
 
                         // Dates de début et de fin
-                        echo '<div class="theme_dates" style="padding-top: 7px; padding-bottom: 7px;">';
+                        echo '<div class="theme_dates_2">';
                           echo '<div class="theme_texte_dates">Du&nbsp;</div>';
                           echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($theme_mission->getDate_deb()) . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_mod_deb[' . $theme_mission->getId() . ']" class="modify_date_deb_theme" required />';
                           echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';

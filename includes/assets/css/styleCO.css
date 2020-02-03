@@ -331,6 +331,11 @@
 	padding-top: 50px;
 }
 
+.strong_red
+{
+	color: #ff1937;
+}
+
 /*** Actions et utilisateur ***/
 .zone_collector_haut
 {
@@ -624,6 +629,13 @@
 	cursor: pointer;
 }
 
+.smiley_selected
+{
+	background-size: 35px;
+	width: 35px;
+	height: 35px;
+}
+
 .smiley_0
 {
   background-image: url("/inside/includes/icons/common/smileys/0.png");
@@ -784,6 +796,38 @@
   border-radius: 2px;
 	border: 0;
   min-height: 70px;
+}
+
+.text_context_update
+{
+	width: calc(100% - 80px);
+  background-color: #d3d3d3;
+	font-family: robotolight, Verdana, sans-serif;
+  font-style: italic;
+	color: #262626;
+  text-align: justify;
+	padding: 10px 40px 10px 40px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	overflow: hidden;
+	word-wrap: break-word;
+	max-width: calc(525px - 80px);
+}
+
+.text_context_golden_update
+{
+	width: calc(100% - 80px);
+  background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
+	font-family: robotolight, Verdana, sans-serif;
+  font-style: italic;
+	color: #262626;
+  text-align: justify;
+	padding: 10px 40px 10px 40px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	overflow: hidden;
+	word-wrap: break-word;
+	max-width: calc(525px - 80px);
 }
 
 /*** Modification images ***/
