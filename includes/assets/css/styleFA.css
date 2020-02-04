@@ -603,6 +603,7 @@
 	width: calc(30% - 10px);
 	vertical-align: top;
 	margin-right: 20px;
+	margin-top: 40px;
 }
 
 .zone_details_menus_bottom
@@ -610,6 +611,7 @@
 	display: inline-block;
 	width: calc(70% - 10px);
 	vertical-align: top;
+	margin-top: 40px;
 }
 
 .titre_details_bottom
@@ -618,7 +620,6 @@
 	width: 100%;
   margin-left: auto;
   margin-right: auto;
-	margin-top: 40px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 150%;
 	font-weight: bold;

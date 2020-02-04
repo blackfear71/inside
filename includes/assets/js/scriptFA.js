@@ -169,6 +169,9 @@ $(function()
     var id_details = $(this).attr('id').replace('afficher_details_', '');
 
     showDetails('zone_details', id_details);
+
+    // Adaptation mobile
+    adaptDetails();
   });
 
   // Ferme les détails d'une proposition
@@ -355,6 +358,7 @@ $(window).resize(function()
 {
   // Adaptation mobile
   adaptPropositions();
+  adaptDetails();
 });
 
 /************************/
@@ -468,6 +472,37 @@ function adaptPropositions()
     $('.zone_propositions_right').css('display', 'inline-block');
     $('.zone_propositions_right').css('width', 'calc(100% - 220px)');
     $('.zone_propositions_right').css('margin-left', '20px');
+  }
+}
+
+// Adaptation des détails d'une proposition sur mobile
+function adaptDetails()
+{
+  if ($(window).width() < 1080)
+  {
+    if ($('.zone_details_description_bottom').length)
+    {
+      $('.zone_details_description_bottom').css('display', 'block');
+      $('.zone_details_description_bottom').css('width', '100%');
+      $('.zone_details_description_bottom').css('margin-right', '0');
+
+      $('.zone_details_menus_bottom').css('display', 'block');
+      $('.zone_details_menus_bottom').css('width', '100%');
+      $('.zone_details_menus_bottom').css('margin-top', '20px');
+    }
+  }
+  else
+  {
+    if ($('.zone_details_description_bottom').length)
+    {
+      $('.zone_details_description_bottom').css('display', 'inline-block');
+      $('.zone_details_description_bottom').css('width', 'calc(30% - 10px)');
+      $('.zone_details_description_bottom').css('margin-right', '20px');
+
+      $('.zone_details_menus_bottom').css('display', 'inline-block');
+      $('.zone_details_menus_bottom').css('width', 'calc(70% - 10px)');
+      $('.zone_details_menus_bottom').css('margin-top', '40px');
+    }
   }
 }
 
