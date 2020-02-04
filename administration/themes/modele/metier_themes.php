@@ -496,6 +496,8 @@
 
     if (isset($data1['reference']) AND !empty($data1['reference']))
     {
+      $reference = $data1['reference'];
+
       unlink("../../includes/images/themes/headers/" . $data1['reference'] . "_h.png");
       unlink("../../includes/images/themes/backgrounds/" . $data1['reference'] . ".png");
       unlink("../../includes/images/themes/footers/" . $data1['reference'] . "_f.png");
@@ -508,6 +510,18 @@
 
     // Suppression enregistrement base
     $req2 = $bdd->exec('DELETE FROM themes WHERE id = ' . $id_theme);
+
+    // Suppression préférence utilisateurs
+    if (isset($reference) AND !empty($reference))
+    {
+      $new_reference = "";
+
+      $req3 = $bdd->prepare('UPDATE preferences SET ref_theme = :ref_theme WHERE ref_theme = "' . $reference . '"');
+      $req3->execute(array(
+        'ref_theme' => $new_reference
+      ));
+      $req3->closeCursor();
+    }
 
     // Message d'alerte
     $_SESSION['alerts']['theme_deleted'] = true;
