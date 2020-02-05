@@ -59,7 +59,7 @@
             echo '<div class="zone_missions">';
               foreach ($tabMissions as $keyMission => $ligneMission)
               {
-                // Missions future
+                // Missions futures
                 if ($ligneMission->getStatut() == "V")
                 {
                   if ($titre_a_venir != true)

@@ -1361,17 +1361,32 @@
 /*** Missions ***/
 .zone_missions
 {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 	width: 100%;
+	display: none;
 }
 
-.zone_presentation_mission
+/*** Masonry ***/
+.zone_missions_accueil
 {
-  width: 32%;
-  text-decoration: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_missions_accueil.masonry
+{
+	opacity: 1;
+}
+
+/*** Tableau des missions ***/
+.zone_mission_accueil
+{
+	display: block;
+	width: 500px;
 	margin-bottom: 20px;
+	text-decoration: none;
 }
 
 .img_mission
