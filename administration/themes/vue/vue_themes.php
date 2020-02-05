@@ -99,19 +99,19 @@
                   echo '</div>';
 
                   // Titre
-                  echo '<input type="text" name="theme_title" value="' . $_SESSION['save']['theme_title'] . '" placeholder="Titre" maxlength="255" class="saisie_titre_theme" required />';
+                  echo '<input type="text" name="theme_title" value="' . $_SESSION['save']['theme_title'] . '" placeholder="Titre" maxlength="255" class="theme_titre_saisie" required />';
 
                   // Bouton validation
                   echo '<input type="submit" name="insert_theme" value="Ajouter" class="saisie_theme_bouton" />';
                 echo '</div>';
 
                 // Référence
-                echo '<div class="theme_ref_2">';
+                echo '<div class="theme_ref_user_saisie">';
                   echo '<input type="text" name="theme_ref" value="' . $_SESSION['save']['theme_ref'] . '" placeholder="Référence" maxlength="255" class="saisie_ref_theme" required />';
                 echo '</div>';
 
                 // Niveau
-                echo '<div class="theme_level">';
+                echo '<div class="theme_level_user_saisie">';
                   echo '<input type="text" name="theme_level" value="' . $_SESSION['save']['theme_level'] . '" placeholder="Niveau" maxlength="2" class="saisie_ref_theme" required />';
                 echo '</div>';
               echo '</form>';
@@ -157,7 +157,7 @@
                       echo '</div>';
 
                       // Référence
-                      echo '<div class="theme_ref_2">' . $theme_users->getReference() . '</div>';
+                      echo '<div class="theme_ref_user">' . $theme_users->getReference() . '</div>';
 
                       // Niveau
                       echo '<div class="theme_level">Niveau <span class="number_exp">' . $theme_users->getLevel() . '</span></div>';
@@ -180,14 +180,14 @@
                           echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
 
                           // Titre
-                          echo '<input type="text" name="theme_title" value="' . $theme_users->getName() . '" placeholder="Titre" maxlength="255" class="modify_titre_theme" required />';
+                          echo '<input type="text" name="theme_title" value="' . $theme_users->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
                         echo '</div>';
 
                         // Référence
-                        echo '<div class="theme_ref_2">' . $theme_users->getReference() . '</div>';
+                        echo '<div class="theme_ref_user">' . $theme_users->getReference() . '</div>';
 
                         // Niveau
-                        echo '<div class="theme_level_2">';
+                        echo '<div class="theme_level_update">';
                           echo '<input type="text" name="theme_level" value="' . $theme_users->getLevel() . '" placeholder="Niveau" maxlength="2" class="saisie_ref_theme" required />';
                         echo '</div>';
                       echo '</form>';
@@ -253,22 +253,22 @@
                   echo '</div>';
 
                   // Titre
-                  echo '<input type="text" name="theme_title" value="' . $_SESSION['save']['theme_title'] . '" placeholder="Titre" maxlength="255" class="saisie_titre_theme" required />';
+                  echo '<input type="text" name="theme_title" value="' . $_SESSION['save']['theme_title'] . '" placeholder="Titre" maxlength="255" class="theme_titre_saisie" required />';
 
                   // Bouton validation
                   echo '<input type="submit" name="insert_theme" value="Ajouter" class="saisie_theme_bouton" />';
                 echo '</div>';
 
                 // Référence
-                echo '<div class="theme_ref">';
+                echo '<div class="theme_ref_mission_saisie">';
                   echo '<input type="text" name="theme_ref" value="' . $_SESSION['save']['theme_ref'] . '" placeholder="Référence" maxlength="255" class="saisie_ref_theme" required />';
                 echo '</div>';
 
                 // Dates de début et de fin
-                echo '<div class="theme_dates">';
-                  echo '<div class="theme_texte_dates">Du&nbsp;</div>';
+                echo '<div class="theme_dates_mission_saisie">';
+                  echo '<div class="theme_dates_update_texte">Du&nbsp;</div>';
                   echo '<input type="text" name="theme_date_deb" value="' . $_SESSION['save']['theme_date_deb'] . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_saisie_deb" class="saisie_date_theme" required />';
-                  echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';
+                  echo '<div class="theme_dates_update_texte">&nbsp;au&nbsp;</div>';
                   echo '<input type="text" name="theme_date_fin" value="' . $_SESSION['save']['theme_date_fin'] . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_saisie_fin" class="saisie_date_theme" required />';
                 echo '</div>';
               echo '</form>';
@@ -314,7 +314,7 @@
                       echo '</div>';
 
                       // Référence et dates
-                      echo '<div class="theme_ref">' . $theme_mission->getReference() . '</div>';
+                      echo '<div class="theme_ref_mission">' . $theme_mission->getReference() . '</div>';
 
                       if ($theme_mission->getDate_deb() != $theme_mission->getDate_fin())
                         echo '<div class="theme_dates">Du ' . formatDateForDisplay($theme_mission->getDate_deb()) . ' au ' . formatDateForDisplay($theme_mission->getDate_fin()) . '</div>';
@@ -339,17 +339,17 @@
                           echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
 
                           // Titre
-                          echo '<input type="text" name="theme_title" value="' . $theme_mission->getName() . '" placeholder="Titre" maxlength="255" class="modify_titre_theme" required />';
+                          echo '<input type="text" name="theme_title" value="' . $theme_mission->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
                         echo '</div>';
 
                         // Référence
-                        echo '<div class="theme_ref">' . $theme_mission->getReference() . '</div>';
+                        echo '<div class="theme_ref_mission">' . $theme_mission->getReference() . '</div>';
 
                         // Dates de début et de fin
-                        echo '<div class="theme_dates_2">';
-                          echo '<div class="theme_texte_dates">Du&nbsp;</div>';
+                        echo '<div class="theme_dates_update">';
+                          echo '<div class="theme_dates_update_texte">Du&nbsp;</div>';
                           echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($theme_mission->getDate_deb()) . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_mod_deb[' . $theme_mission->getId() . ']" class="modify_date_deb_theme" required />';
-                          echo '<div class="theme_texte_dates">&nbsp;au&nbsp;</div>';
+                          echo '<div class="theme_dates_update_texte">&nbsp;au&nbsp;</div>';
                           echo '<input type="text" name="theme_date_fin" value="' . formatDateForDisplay($theme_mission->getDate_fin()) . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_mod_fin[' . $theme_mission->getId() . ']" class="modify_date_fin_theme" required />';
                         echo '</div>';
                       echo '</form>';
