@@ -480,7 +480,8 @@ function adaptDetails()
 {
   if ($(window).width() < 1080)
   {
-    if ($('.zone_details_description_bottom').length)
+    if ($('.zone_details_description_bottom').length
+    &&  $('.zone_details_description_bottom').css('display') != 'none')
     {
       $('.zone_details_description_bottom').css('display', 'block');
       $('.zone_details_description_bottom').css('width', '100%');
@@ -493,7 +494,8 @@ function adaptDetails()
   }
   else
   {
-    if ($('.zone_details_description_bottom').length)
+    if ($('.zone_details_description_bottom').length
+    &&  $('.zone_details_description_bottom').css('display') != 'none')
     {
       $('.zone_details_description_bottom').css('display', 'inline-block');
       $('.zone_details_description_bottom').css('width', 'calc(30% - 10px)');
