@@ -28,15 +28,6 @@
 
     <!-- Contenu -->
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-          $add_mission = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
@@ -48,6 +39,20 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
+
+          /*********/
+          /* Liens */
+          /*********/
+          if ($_GET['action'] == "goConsulter")
+          {
+            echo '<div class="zone_liens_saisie">';
+              // Saisie mission
+              echo '<a href="missions.php?action=goAjouter" title="Ajouter une mission" class="lien_categorie">';
+                echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/missions.png" alt="missions" class="image_lien" /></div>';
+                echo '<div class="zone_texte_lien">Ajouter une mission</div>';
+              echo '</a>';
+            echo '</div>';
+          }
 
           /***********/
           /* Contenu */

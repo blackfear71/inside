@@ -10,9 +10,6 @@
 	if (!isset($modify_parcours))
 		$modify_parcours = false;
 
-	if (!isset($add_mission))
-		$add_mission = false;
-
 	if (!isset($modify_success))
 		$modify_success = false;
 
@@ -38,14 +35,6 @@
 		{
 			echo '<a href="/inside/administration/success/success.php?action=goModifier" title="Modifier les succès" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';
-			echo '</a>';
-		}
-
-		// Ajouter une mission
-		if ($add_mission == true)
-		{
-			echo '<a href="/inside/administration/missions/missions.php?action=goAjouter" title="Ajouter une mission" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter une mission" class="icon_aside" />';
 			echo '</a>';
 		}
 	echo '</div>';
