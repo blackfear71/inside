@@ -164,9 +164,9 @@ function changeTheme(background, header, footer, logo)
 {
   if (background != null)
   {
-    $('body').css('background-image', 'url(' + background + '), linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px)');
-    $('body').css('background-repeat', 'repeat-y, repeat, repeat');
-    $('body').css('background-size', '100%, 100% 200px, 200px 100%');
+    $('section:not(.section_index)').css('background-image', 'url(' + background + '), linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px)');
+    $('section:not(.section_index)').css('background-repeat', 'repeat-y, repeat, repeat');
+    $('section:not(.section_index)').css('background-size', '100%, 100% 200px, 200px 100%');
   }
 
   if (header != null)
