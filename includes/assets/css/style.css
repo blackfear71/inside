@@ -22,7 +22,7 @@ body
 section:not(.section_index)
 {
 	width: 100%;
-	min-height: 400px;
+	min-height: calc(100vh - 180px);
 	height: 100%;
 	padding-top: 30px;
 	padding-bottom: 110px;
