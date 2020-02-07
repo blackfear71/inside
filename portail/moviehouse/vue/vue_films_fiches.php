@@ -46,7 +46,7 @@
         {
           $prevMonth = $currentMonth;
 
-          if ($currentMonth == date("m"))
+          if ($currentMonth == date("m") AND $_GET['year'] == date("Y"))
             echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
           elseif ($currentMonth == "13")
             echo '<div class="titre_mois_films titre_rouge"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
