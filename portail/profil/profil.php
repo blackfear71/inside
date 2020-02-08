@@ -29,9 +29,8 @@
       {
         case 'success':
         case 'ranking':
-          $listeUsers      = getUsers();
-          $listeSuccess    = getSuccess($_SESSION['user']['identifiant']);
-          $classementUsers = getRankUsers($listeSuccess, $listeUsers);
+          $listeUsers   = getUsers();
+          $listeSuccess = getSuccess($_SESSION['user']['identifiant'], $listeUsers);
 
           if ($_GET['view'] == 'ranking')
             $experienceUsers = getExperienceUsers($listeUsers);
@@ -129,24 +128,22 @@
             $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
             $success->setExplanation(htmlspecialchars($success->getExplanation()));
             $success->setValue_user(htmlspecialchars($success->getValue_user()));
+
+            if (!empty($success->getClassement()))
+            {
+              foreach ($success->getClassement() as &$classement)
+              {
+                $classement['identifiant'] = htmlspecialchars($classement['identifiant']);
+                $classement['pseudo']      = htmlspecialchars($classement['pseudo']);
+                $classement['avatar']      = htmlspecialchars($classement['avatar']);
+                $classement['value']       = htmlspecialchars($classement['value']);
+              }
+
+              unset($classement);
+            }
           }
 
           unset($success);
-
-          foreach ($classementUsers as &$classement)
-          {
-            foreach ($classement['podium'] as &$podium)
-            {
-              $podium['identifiant'] = htmlspecialchars($podium['identifiant']);
-              $podium['pseudo']      = htmlspecialchars($podium['pseudo']);
-              $podium['avatar']      = htmlspecialchars($podium['avatar']);
-              $podium['value']       = htmlspecialchars($podium['value']);
-            }
-
-            unset($podium);
-          }
-
-          unset($classement);
 
           if ($_GET['view'] == 'ranking')
           {

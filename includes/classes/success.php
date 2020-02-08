@@ -11,6 +11,7 @@
     private $explanation;
     private $defined;
     private $value_user;
+    private $classement;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -25,6 +26,7 @@
       $this->explanation   = '';
       $this->defined       = '';
       $this->value_user    = 0;
+      $this->classement    = array();
     }
 
     // Constructeur de l'objet Success en fonction des données
@@ -122,7 +124,7 @@
     {
       return $this->defined;
     }
-    
+
     // Titre succès
     public function setTitle($title)
     {
@@ -181,6 +183,17 @@
     public function getValue_user()
     {
       return $this->value_user;
+    }
+
+    // Classement
+    public function setClassement($classement)
+    {
+      $this->classement = $classement;
+    }
+
+    public function getClassement()
+    {
+      return $this->classement;
     }
   }
 ?>

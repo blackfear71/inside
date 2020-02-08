@@ -37,29 +37,28 @@
           echo '<div class="succes_liste">';
 
           // Médailles (en excluant ceux qui sont uniques)
-          if ($success->getLimit_success() > 1)
+          if (!empty($success->getClassement()) AND $success->getLimit_success() > 1)
           {
-            foreach ($classementUsers as $classement)
+            foreach ($success->getClassement() as $classement)
             {
-              if ($classement['id'] == $success->getId())
+              if ($classement['identifiant'] == $_SESSION['user']['identifiant'])
               {
-                foreach ($classement['podium'] as $podium)
+                switch ($classement['rank'])
                 {
-                  if ($podium['identifiant'] == $_SESSION['user']['identifiant'] AND $podium['rank'] == 1)
-                  {
+                  case 1:
                     echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal" />';
                     break;
-                  }
-                  elseif ($podium['identifiant'] == $_SESSION['user']['identifiant'] AND $podium['rank'] == 2)
-                  {
+
+                  case 2:
                     echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal" />';
                     break;
-                  }
-                  elseif ($podium['identifiant'] == $_SESSION['user']['identifiant'] AND $podium['rank'] == 3)
-                  {
+
+                  case 3:
                     echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal" />';
                     break;
-                  }
+
+                  default:
+                    break;
                 }
 
                 break;

@@ -473,11 +473,21 @@
 
   // METIER : Lecture liste des succès
   // RETOUR : Liste des succès et déblocages
-  function getSuccess($user)
+  function getSuccess($identifiant, $listUsers)
   {
     $listSuccess = array();
 
     global $bdd;
+
+    // Création tableau de correspondance identifiant / pseudo / avatar
+    $tableUsers = array();
+
+    foreach ($listUsers AS $user)
+    {
+      $tableUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
+                                                   'avatar' => $user->getAvatar()
+                                                  );
+    }
 
     // Lecture des données utilisateur
     $reponse = $bdd->query('SELECT * FROM success');
@@ -487,7 +497,7 @@
       $mySuccess = Success::withData($donnees);
 
       // Recherche des données utilisateur
-      $reponse2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $donnees['reference'] . '" AND identifiant = "' . $user . '"');
+      $reponse2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $donnees['reference'] . '" AND identifiant = "' . $identifiant . '"');
       $donnees2 = $reponse2->fetch();
 
       if ($reponse2->rowCount() > 0)
@@ -503,6 +513,10 @@
 
       $reponse2->closeCursor();
 
+      // Récupération du classement des utilisateurs
+      if ($mySuccess->getDefined() == "Y" AND $mySuccess->getLimit_success() > 1)
+        $mySuccess->setClassement(getRankUsers($mySuccess, $tableUsers));
+
       array_push($listSuccess, $mySuccess);
     }
     $reponse->closeCursor();
@@ -513,100 +527,76 @@
       $tri_level[] = $success->getLevel();
       $tri_order[] = $success->getOrder_success();
     }
+
     array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
 
     return $listSuccess;
   }
 
-  // METIER : Classement des succès des utilisateurs
-  // RETOUR : Tableau des classement
-  function getRankUsers($listSuccess, $listUsers)
+  // METIER : Récupération classement des utilisateurs pour un succès
+  // RETOUR : Classement
+  function getRankUsers($success, $tableUsers)
   {
-    // Création tableau de correspondance identifiant / pseudo / avatar
-    $tableUsers = array();
-
-    foreach ($listUsers AS $user)
-    {
-      $tableUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
-                                                   'avatar' => $user->getAvatar()
-                                                  );
-    }
-
-    // Création tableau des classements en fonction du succès
-    $globalRanks = array();
+    // Création tableau des classements
+    $rankSuccess = array();
 
     global $bdd;
 
-    // Boucle pour parcourir tous les succès
-    foreach ($listSuccess as $success)
+    if ($success->getDefined() == "Y" AND $success->getLimit_success() > 1)
     {
-      if ($success->getDefined() == "Y" AND $success->getLimit_success() > 1)
+      // Boucle pour parcourir tous les succès débloqués par les utilisateurs
+      $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" ORDER BY value DESC');
+      while ($donnees = $reponse->fetch())
       {
-        $rankSuccess = array();
+        // Contrôle pour les missions que la date de fin soit passée
+        $ended = isMissionEnded($success->getReference());
 
-        // Boucle pour parcourir tous les succès débloqués par les utilisateurs
-        $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" ORDER BY value DESC');
-        while ($donnees = $reponse->fetch())
+        if ($ended == true)
         {
-          // Contrôle pour les missions que la date de fin soit passée
-          $ended = isMissionEnded($success->getReference());
-
-          if ($ended == true)
+          // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
+          if ($donnees['value'] >= $success->getLimit_success())
           {
-            // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
-            if ($donnees['value'] >= $success->getLimit_success())
-            {
-              $myRankSuccess = array('identifiant' => $donnees['identifiant'],
-                                     'pseudo'      => $tableUsers[$donnees['identifiant']]['pseudo'],
-                                     'avatar'      => $tableUsers[$donnees['identifiant']]['avatar'],
-                                     'value'       => $donnees['value'],
-                                     'rank'        => 0
-                                    );
-              array_push($rankSuccess, $myRankSuccess);
-            }
+            $myRankSuccess = array('identifiant' => $donnees['identifiant'],
+                                   'pseudo'      => $tableUsers[$donnees['identifiant']]['pseudo'],
+                                   'avatar'      => $tableUsers[$donnees['identifiant']]['avatar'],
+                                   'value'       => $donnees['value'],
+                                   'rank'        => 0
+                                  );
+            array_push($rankSuccess, $myRankSuccess);
           }
         }
-        $reponse->closeCursor();
+      }
+      $reponse->closeCursor();
 
-        // On filtre le tableau
-        if (!empty($rankSuccess))
+      // On filtre le tableau
+      if (!empty($rankSuccess))
+      {
+        // Affectation du rang et suppression si rang > 3 (médaille de bronze)
+        $prevRank    = $rankSuccess[0]['value'];
+        $currentRank = 1;
+
+        foreach ($rankSuccess as $key => &$rankSuccessUser)
         {
-          // Affectation du rang et suppression si rang > 3 (médaille de bronze)
-          $prevRank    = $rankSuccess[0]['value'];
-          $currentRank = 1;
+          $currentTotal = $rankSuccessUser['value'];
 
-          foreach ($rankSuccess as $key => &$rankSuccessUser)
+          if ($currentTotal != $prevRank)
           {
-            $currentTotal = $rankSuccessUser['value'];
-
-            if ($currentTotal != $prevRank)
-            {
-              $currentRank += 1;
-              $prevRank = $rankSuccessUser['value'];
-            }
-
-            // Suppression des rangs > 3 sinon on enregistre le rang
-            if ($currentRank > 3)
-              unset($rankSuccess[$key]);
-            else
-             $rankSuccessUser['rank'] = $currentRank;
+            $currentRank += 1;
+            $prevRank = $rankSuccessUser['value'];
           }
 
-          unset($rankSuccessUser);
-
-          // On créé un tableau correspondant au classement sur un succès et on l'ajoute au tableau global
-          $myGlobalRanks = array('id'             => $success->getId(),
-                                 'level'          => $success->getLevel(),
-                                 'order_success'  => $success->getOrder_success(),
-                                 'podium'         => $rankSuccess
-                                );
-
-          array_push($globalRanks, $myGlobalRanks);
+          // Suppression des rangs > 3 sinon on enregistre le rang
+          if ($currentRank > 3)
+            unset($rankSuccess[$key]);
+          else
+            $rankSuccessUser['rank'] = $currentRank;
         }
+
+        unset($rankSuccessUser);
       }
     }
 
-    return $globalRanks;
+    return $rankSuccess;
   }
 
   // METIER : Retourne un tableau trié des utilisateurs par expérience

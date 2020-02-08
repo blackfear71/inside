@@ -30,58 +30,50 @@
           echo '<div class="titre_classement">' . $success->getTitle() . '</div>';
 
           // Médailles
-          if (!empty($classementUsers))
+          if (!empty($success->getClassement()))
           {
             if ($success->getValue_user() >= $success->getLimit_success())
               echo '<div class="yellow_strong">';
             else
               echo '<div class="grey_strong">';
 
-              foreach ($classementUsers as $classement)
+              $previousRank = 0;
+
+              foreach ($success->getClassement() as $keyRank => $classement)
               {
-                if ($classement['id'] == $success->getId())
+                if ($classement['rank'] != $previousRank)
                 {
-                  $rank = 0;
-
-                  foreach ($classement['podium'] as $keyRank => $podium)
+                  // Médailles
+                  switch ($classement['rank'])
                   {
-                    if ($podium['rank'] != $rank)
-                    {
-                      // Médailles
-                      switch ($podium['rank'])
-                      {
-                        case 1:
-                          echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
-                          break;
+                    case 1:
+                      echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
+                      break;
 
-                        case 2:
-                          echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
-                          break;
+                    case 2:
+                      echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
+                      break;
 
-                        case 3:
-                          echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
-                          break;
+                    case 3:
+                      echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
+                      break;
 
-                        default:
-                          break;
-                      }
-
-                      $rank = $podium['rank'];
-
-                      echo '<div class="zone_medals">';
-                    }
-
-                    // Avatar
-                    $avatarFormatted = formatAvatar($podium['avatar'], $podium['pseudo'], 2, "avatar");
-
-                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
-
-                    if (!isset($classement['podium'][$keyRank + 1]) OR $podium['rank'] != $classement['podium'][$keyRank + 1]['rank'])
-                      echo '</div>';
+                    default:
+                      break;
                   }
 
-                  break;
+                  $previousRank = $classement['rank'];
+
+                  echo '<div class="zone_medals">';
                 }
+
+                // Avatar
+                $avatarFormatted = formatAvatar($classement['avatar'], $classement['pseudo'], 2, "avatar");
+
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
+
+                if (!isset($classement['podium'][$keyRank + 1]) OR $classement['rank'] != $classement['podium'][$keyRank + 1]['rank'])
+                  echo '</div>';
               }
             echo '</div>';
           }
