@@ -27,7 +27,7 @@
 		</header>
 
     <!-- Contenu -->
-		<section>
+		<section class="section_no_nav">
 			<article>
         <?php
           /********************/
@@ -146,7 +146,7 @@
                         echo '<td class="zone_resultat_titre">';
                           echo $resultatsMI->getMission();
                         echo '</td>';
-                        
+
                         echo '<td class="zone_resultat_info">';
                           if (date('Ymd') > $resultatsMI->getDate_fin())
                             echo 'Terminée le ' . formatDateForDisplay($resultatsMI->getDate_fin());

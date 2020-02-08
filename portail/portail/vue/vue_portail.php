@@ -27,7 +27,7 @@
 		</header>
 
     <!-- Contenu -->
-		<section>
+		<section class="section_no_nav">
 			<article>
         <?php
           /********************/
