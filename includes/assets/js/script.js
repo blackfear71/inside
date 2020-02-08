@@ -472,6 +472,9 @@ function formatAvatar(avatar, pseudo, niveau, alt)
   else
     path = level + "/includes/icons/common/default.png";
 
+  // Pseudo
+  pseudo = formatUnknownUser(pseudo, true, false);
+
   // Formatage
   var formattedAvatar = {"path" : path, "alt" : alt, "title" : pseudo};
 

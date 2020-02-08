@@ -484,8 +484,8 @@
 
     foreach ($listUsers AS $user)
     {
-      $tableUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
-                                                   'avatar' => $user->getAvatar()
+      $tableUsers[$user->getIdentifiant()] = array('pseudo' => htmlspecialchars($user->getPseudo()),
+                                                   'avatar' => htmlspecialchars($user->getAvatar())
                                                   );
     }
 
