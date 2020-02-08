@@ -30,6 +30,10 @@
     <section>/*alerts*/
       <article>
         <?php/*missions*/
+          /*********/
+          /* Liens */
+          /*********/
+
           /*******************/
           /* Chargement page */
           /*******************/
