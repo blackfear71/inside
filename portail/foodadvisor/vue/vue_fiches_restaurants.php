@@ -83,7 +83,7 @@
                   if (!empty($restaurant->getPlan()))
                   {
                     echo '<a href="' . $restaurant->getPlan() . '" target="_blank">';
-                      echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche margin_right_moins_5" />';
+                      echo '<img src="../../includes/icons/foodadvisor/plan.png" alt="plan" title="Plan" class="icone_fiche" />';
                     echo '</a>';
                   }
 
