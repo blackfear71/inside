@@ -14,6 +14,7 @@
                      array('option' => 'datepicker', 'checked' => 'N', 'titre' => 'Datepicker',         'categorie' => 'Commun'),
                      array('option' => 'masonry',    'checked' => 'N', 'titre' => 'Masonry',            'categorie' => 'Commun'),
                      array('option' => 'exif',       'checked' => 'N', 'titre' => 'Données EXIF',       'categorie' => 'Commun'),
+                     array('option' => 'onglets',    'checked' => 'Y', 'titre' => 'Onglets',            'categorie' => 'Commun'),
                      array('option' => 'alerts',     'checked' => 'Y', 'titre' => 'Alertes',            'categorie' => 'Commun')
                     );
 
@@ -209,12 +210,13 @@
   function getVue($generatorParameters)
   {
     // Initialisations
-    $search  = array(" ", ".css", ".js");
-    $replace = array("_", "", "");
+    $nom_fonctionnel = $generatorParameters->getNom_section();
+    $nom_head        = $generatorParameters->getNom_head();
 
-    $nom_fonctionnel = str_replace($search, $replace, $generatorParameters->getNom_section());
-    $nom_technique   = str_replace($search, $replace, $generatorParameters->getNom_technique());
-    $nom_head        = str_replace($search, $replace, $generatorParameters->getNom_head());
+    $search   = array(" ", ".css", ".js");
+    $replace  = array("_", "", "");
+
+    $nom_technique = str_replace($search, $replace, $generatorParameters->getNom_technique());
 
     if (!empty($generatorParameters->getStyle_specifique()))
       $style_specifique = str_replace($search, $replace, $generatorParameters->getStyle_specifique()) . ".css";
@@ -238,7 +240,7 @@
       $options[$generatorOption->getOption()] = $generatorOption;
     }
 
-    // Titre Head
+    // Titre onglet navigateur
     $vue = str_replace('/*title_head*/', '"' . $nom_head . '"', $vue);
 
     // Style spécifique
@@ -273,15 +275,19 @@
     else
       $vue = str_replace('/*exif_head*/', 'false', $vue);
 
-    // Titre de la page
+    // Titre de la page(header)
     $vue = str_replace('/*title*/', '"' . $nom_fonctionnel . '"', $vue);
 
     // Onglets
-    if ($options['admin']->getChecked() == 'Y')
+    if ($options['admin']->getChecked() == 'Y' OR $options['onglets']->getChecked() == 'N')
       $vue = str_replace('/*onglets*/', '', $vue);
     else
       $vue = str_replace('/*onglets*/', '
         include(\'../../includes/common/onglets.php\');', $vue);
+
+    // Style balise section sans onglets (hors admin)
+    if ($options['admin']->getChecked() != 'Y' AND $options['onglets']->getChecked() == 'N')
+      $vue = str_replace('<section>', '<section class="section_no_nav">', $vue);
 
     // Alertes
     if ($options['alerts']->getChecked() == 'Y')
