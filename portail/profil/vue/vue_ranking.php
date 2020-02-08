@@ -72,7 +72,7 @@
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
-                if (!isset($classement['podium'][$keyRank + 1]) OR $classement['rank'] != $classement['podium'][$keyRank + 1]['rank'])
+                if (!isset($success->getClassement()[$keyRank + 1]) OR $classement['rank'] != $success->getClassement()[$keyRank + 1]['rank'])
                   echo '</div>';
               }
             echo '</div>';
