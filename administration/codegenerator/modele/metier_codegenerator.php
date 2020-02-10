@@ -119,12 +119,13 @@
   function getControler($generatorParameters)
   {
     // Initialisations
-    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-    $file          = 'templates/controler.php';
-    $options       = array();
-    $controler     = array('filename' => $nom_technique . '.php',
-                           'content'  => file_get_contents($file)
-                          );
+    $nom_fonctionnel = trim($generatorParameters->getNom_section());
+    $nom_technique   = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file            = 'templates/controler.php';
+    $options         = array();
+    $controler       = array('filename' => $nom_technique . '.php',
+                             'content'  => file_get_contents($file)
+                            );
 
     // On met les options dans un tableau associatif
     foreach ($generatorParameters->getOptions() as $generatorOption)
@@ -133,12 +134,12 @@
     }
 
     // Nom section
-    $length_name = strlen($generatorParameters->getNom_section());
+    $length_name = strlen($nom_fonctionnel);
 
-    $controler = str_replace('/********************', '/' . str_repeat('*', $length_name + 8), $controler);
-    $controler = str_replace('section_name', $generatorParameters->getNom_section(), $controler);
-    $controler = str_replace('*********************', str_repeat('*', $length_name + 9), $controler);
-    $controler = str_replace('********************/', str_repeat('*', $length_name + 8) . '/', $controler);
+    $controler = str_replace('/*******************', '/' . str_repeat('*', $length_name + 7), $controler);
+    $controler = str_replace('section_name', $nom_fonctionnel, $controler);
+    $controler = str_replace('********************', str_repeat('*', $length_name + 8), $controler);
+    $controler = str_replace('*******************/', str_repeat('*', $length_name + 7) . '/', $controler);
 
     // Titre fonctions communes
     if ($options['common']->getChecked() == 'Y' OR $options['dates']->getChecked() == 'Y' OR $options['regex']->getChecked() == 'Y')
@@ -210,8 +211,8 @@
   function getVue($generatorParameters)
   {
     // Initialisations
-    $nom_fonctionnel = trim($generatorParameters->getNom_section());
-    $nom_head        = trim($generatorParameters->getNom_head());
+    $nom_fonctionnel   = trim($generatorParameters->getNom_section());
+    $nom_head          = trim($generatorParameters->getNom_head());
 
     $search   = array(" ", ".css", ".js");
     $replace  = array("_", "", "");

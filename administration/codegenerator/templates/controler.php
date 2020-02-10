@@ -1,10 +1,10 @@
 <?php
-  /********************
-  *** section_name  ***
-  *********************
+  /*******************
+  *** section_name ***
+  ********************
   Fonctionnalités :
   - A compléter
-  ********************/
+  *******************/
   /*title_common*/
   /*common_functions*/
   /*title_controls*/
