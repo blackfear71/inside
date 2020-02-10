@@ -119,7 +119,7 @@
   function getControler($generatorParameters)
   {
     // Initialisations
-    $nom_technique = str_replace(' ', '_', $generatorParameters->getNom_technique());
+    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
     $file          = 'templates/controler.php';
     $options       = array();
     $controler     = array('filename' => $nom_technique . '.php',
@@ -195,7 +195,7 @@
   function getMetier($generatorParameters)
   {
     // Initialisations
-    $nom_technique = str_replace(' ', '_', $generatorParameters->getNom_technique());
+    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
     $file          = 'templates/metier.php';
     $options       = array();
     $metier        = array('filename' => 'metier_' . $nom_technique . '.php',
