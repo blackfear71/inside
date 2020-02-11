@@ -321,30 +321,32 @@ function updateBugs()
     var html        = "";
 
     // On n'exécute de manière récurrente que si on n'est pas l'admin
-    if (identifiant != 'admin' && nbBugs > 0)
+    if (identifiant != 'admin')
     {
-      // La première fois on génère la zone
-      if (!$('.count_bugs').length)
+      if (nbBugs > 0)
       {
-        html += '<div class="count_bugs">';
-          html += '<div class="number_bugs"></div>';
-        html += '</div>';
+        // La première fois on génère la zone
+        if (!$('.count_bugs').length)
+        {
+          html += '<div class="count_bugs">';
+            html += '<div class="number_bugs"></div>';
+          html += '</div>';
 
-        $('.zone_compteur_footer').html(html);
+          $('.zone_compteur_footer').html(html);
+        }
+
+        // On met à jour le contenu
+        $('.number_bugs').html(nbBugs);
       }
-
-      // On met à jour le contenu
-      $('.number_bugs').html(nbBugs);
+      else
+      {
+        // On efface la zone si présente
+        if ($('.count_bugs').length)
+          $('.count_bugs').remove();
+      }
     }
     else
-    {
-      // On efface la zone
-      if ($('.count_bugs').length)
-        $('.count_bugs').remove();
-
-      // On arrête le minuteur
       clearInterval(majBugs);
-    }
   }, "json");
 }
 
