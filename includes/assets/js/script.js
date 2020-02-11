@@ -34,6 +34,10 @@ $(function()
   updateNotifications();
   majNotifications = setInterval(updateNotifications, 60000);
 
+  // Mise à jour du compteur des bugs/évolutions toutes les 60 secondes
+  updateBugs();
+  majBugs = setInterval(updateBugs, 60000);
+
   // Animation symbole chargement de la page
   if ($('.zone_loading_page').length)
     loadingPage();
@@ -304,6 +308,43 @@ function updateNotifications()
     }
     else
       clearInterval(majNotifications);
+  }, "json");
+}
+
+// Exécute le script php de mise à jour du compteur de bugs/évolutions
+function updateBugs()
+{
+  $.get('/inside/includes/functions/count_bugs.php', function(data)
+  {
+    var identifiant = data.identifiant;
+    var nbBugs      = data.nbBugs;
+    var html        = "";
+
+    // On n'exécute de manière récurrente que si on n'est pas l'admin
+    if (identifiant != 'admin' && nbBugs > 0)
+    {
+      // La première fois on génère la zone
+      if (!$('.count_bugs').length)
+      {
+        html += '<div class="count_bugs">';
+          html += '<div class="number_bugs"></div>';
+        html += '</div>';
+
+        $('.zone_compteur_footer').html(html);
+      }
+
+      // On met à jour le contenu
+      $('.number_bugs').html(nbBugs);
+    }
+    else
+    {
+      // On efface la zone
+      if ($('.count_bugs').length)
+        $('.count_bugs').remove();
+
+      // On arrête le minuteur
+      clearInterval(majBugs);
+    }
   }, "json");
 }
 

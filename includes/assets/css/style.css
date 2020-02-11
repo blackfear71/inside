@@ -1135,6 +1135,27 @@ footer
 	margin-top: 10px;
 }
 
+.count_bugs
+{
+	float: right;
+	position: relative;
+	z-index: 1;
+	margin: -14px 5px 5px -25px;
+	width: 18px;
+	height: px18;
+	border-radius: 50%;
+	background-color: #ff1937;
+}
+
+.number_bugs
+{
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	text-align: center;
+	line-height: 18px;
+	font-size: 65%;
+}
+
 .copyright
 {
 	float: right;

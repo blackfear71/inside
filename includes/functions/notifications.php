@@ -48,7 +48,7 @@
                 'nbNotifications' => $nb_notifs,
                 'view'            => $view_notifications,
                 'page'            => $page
-              );
+               );
 
   $dataJson = json_encode($data);
 
