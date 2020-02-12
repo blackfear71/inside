@@ -851,7 +851,7 @@ function afficherListboxLieuxResume(id)
   html = '<div id="' + id_zone + '" class="zone_listbox_restaurant_resume">';
     html += '<select id="' + id_select + '" name="select_lieu_resume_' + num + '" class="listbox_choix_resume afficherRestaurantResume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
-      $.each(listeLieux, function(key, value)
+      $.each(listeLieuxResume, function(key, value)
       {
         html += '<option value="' + value + '">' + value + '</option>';
       });
@@ -894,7 +894,7 @@ function afficherListboxRestaurantsResume(id, zone)
     html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
 
-      $.each(listeRestaurants[lieu], function(key, value)
+      $.each(listeRestaurantsResume[lieu], function(key, value)
       {
         html += '<option value="' + value.id + '">' + value.name + '</option>';
       });

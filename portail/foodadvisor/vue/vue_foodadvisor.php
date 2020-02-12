@@ -109,10 +109,12 @@
     <!-- Données JSON -->
     <script>
       // Récupération liste lieux et restaurants pour le script
-      var listeLieux          = <?php echo $listeLieuxJson; ?>;
-      var listeRestaurants    = <?php echo $listeRestaurantsJson; ?>;
-      var detailsPropositions = <?php echo $detailsPropositions; ?>;
-      var userSession         = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
+      var listeLieuxResume       = <?php echo $listeLieuxResumeJson; ?>;
+      var listeRestaurantsResume = <?php echo $listeRestaurantsResumeJson; ?>;
+      var listeLieux             = <?php echo $listeLieuxJson; ?>;
+      var listeRestaurants       = <?php echo $listeRestaurantsJson; ?>;
+      var detailsPropositions    = <?php echo $detailsPropositions; ?>;
+      var userSession            = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
     </script>
   </body>
 </html>

@@ -34,6 +34,7 @@
       // Lecture des données par le modèle
       $listeLieuxDisponibles       = getLieux();
       $listeRestaurantsDisponibles = getListeRestaurants($listeLieuxDisponibles);
+      $listeRestaurantsResume      = getListeRestaurantsResume($listeLieuxDisponibles);
       $listeRestaurants            = getListeRestaurantsFiltres($listeRestaurantsDisponibles);
       $listeLieux                  = getLieuxFiltres($listeRestaurants);
 
@@ -127,6 +128,31 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($listeLieuxDisponibles as &$lieu)
+      {
+        $lieu = htmlspecialchars($lieu);
+      }
+
+      unset($lieu);
+
+      foreach ($listeRestaurantsResume as $restaurantsParLieuxResume)
+      {
+        foreach ($restaurantsParLieuxResume as &$restaurant)
+        {
+          $restaurant->setName(htmlspecialchars($restaurant->getName()));
+          $restaurant->setPicture(htmlspecialchars($restaurant->getPicture()));
+          $restaurant->setTypes(htmlspecialchars($restaurant->getTypes()));
+          $restaurant->setLocation(htmlspecialchars($restaurant->getLocation()));
+          $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
+          $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
+          $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
+          $restaurant->setLafourchette(htmlspecialchars($restaurant->getLafourchette()));
+          $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
+        }
+
+        unset($restaurant);
+      }
+
       foreach ($listeLieux as &$lieu)
       {
         $lieu = htmlspecialchars($lieu);
@@ -254,9 +280,11 @@
       }
 
       // Conversion JSON
-      $listeLieuxJson       = json_encode($listeLieux);
-      $listeRestaurantsJson = json_encode(convertForJson($listeRestaurants));
-      $detailsPropositions  = json_encode(convertForJson2($propositions));
+      $listeLieuxResumeJson       = json_encode($listeLieuxDisponibles);
+      $listeRestaurantsResumeJson = json_encode(convertForJson($listeRestaurantsResume));
+      $listeLieuxJson             = json_encode($listeLieux);
+      $listeRestaurantsJson       = json_encode(convertForJson($listeRestaurants));
+      $detailsPropositions        = json_encode(convertForJson2($propositions));
       break;
 
     case 'doDeterminer':

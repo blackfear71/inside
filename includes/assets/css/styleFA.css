@@ -437,7 +437,8 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 100px;
-	padding: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	border-radius: 2px;
 	background-color: white;
 	max-height: calc(100vh - 250px);
@@ -449,6 +450,8 @@
 	display: inline-block;
 	width: 230px;
 	padding-right: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	text-align: center;
 }
 
@@ -549,6 +552,8 @@
 	display: inline-block;
 	vertical-align: top;
 	width: calc(100% - 270px);
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .icon_fast_proposition
