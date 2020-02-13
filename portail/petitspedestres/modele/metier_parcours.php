@@ -69,7 +69,7 @@
     // Nouveau tableau vide de parcours, servira à la vue
     $tableauParcours = array();
 
-    while($donnees = $reponse->fetch()){
+    while ($donnees = $reponse->fetch()){
 			// Ajout d'un objet parcours (instancié à partir des données de la base) au tableau de parcours
       array_push($tableauParcours, Parcours::withData($donnees));
     }

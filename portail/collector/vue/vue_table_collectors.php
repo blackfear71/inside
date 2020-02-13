@@ -46,10 +46,7 @@
 
               // Vote utilisateur
               echo '<a id="link_form_vote_' . $collector->getId() . '" class="link_current_vote modifierVote">';
-                if (isset($listeVotesUsers[$collector->getId()]) AND !empty($listeVotesUsers[$collector->getId()]))
-                  echo '<img src="../../includes/icons/common/smileys/' . $listeVotesUsers[$collector->getId()]->getVote() . '.png" alt="smiley" class="current_vote" />';
-                else
-                  echo '<img src="../../includes/icons/common/smileys/0.png" alt="smiley" class="current_vote" />';
+                echo '<img src="../../includes/icons/common/smileys/' . $collector->getVote_user() . '.png" alt="smiley" class="current_vote" />';
               echo '</a>';
 
               // Formulaire vote
@@ -57,14 +54,9 @@
                 echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
 
                 // Gestion smileys vote
-                if (isset($listeVotesUsers[$collector->getId()]) AND !empty($listeVotesUsers[$collector->getId()]))
-                  echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0" />';
-                else
-                  echo '<input type="submit" name="smiley_0" value="" class="smiley smiley_0 smiley_selected" />';
-
-                for ($j = 1; $j <= 8; $j++)
+                for ($j = 0; $j <= 8; $j++)
                 {
-                  if (isset($listeVotesUsers[$collector->getId()]) AND !empty($listeVotesUsers[$collector->getId()]) AND $j == $listeVotesUsers[$collector->getId()]->getVote())
+                  if ($j == $collector->getVote_user())
                     echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . ' smiley_selected" />';
                   else
                     echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . '" />';
@@ -116,35 +108,26 @@
               }
 
               // Votes tous utilisateurs
-              if ($listeVotes != null)
+              if (!empty($collector->getVotes()))
               {
                 echo '<div class="zone_votes_users">';
-                  if (isset($listeVotes[$collector->getId()]) AND !empty($listeVotes[$collector->getId()]))
+                  // Smileys & pseudos
+                  foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
                   {
                     // Smileys
-                    foreach ($listeVotes[$collector->getId()] as $keySmiley => $votes)
-                    {
-                      if (!empty($votes))
-                        echo '<img src="../../includes/icons/common/smileys/' . $keySmiley . '.png" alt="smiley" class="smiley_votes_' . $keySmiley . '" />';
-                    }
+                    echo '<img src="../../includes/icons/common/smileys/' . $keySmiley . '.png" alt="smiley" class="smiley_votes_' . $keySmiley . '" />';
 
                     // Pseudos
-                    foreach ($listeVotes[$collector->getId()] as $keyVote => $votes)
+                    $listeUsersSmiley = '';
+
+                    foreach ($votesParSmiley as $vote)
                     {
-                      if (!empty($votes))
-                      {
-                        $listeUsersSmiley = '';
-
-                        foreach ($votes as $identifiants)
-                        {
-                          $listeUsersSmiley .= formatUnknownUser($identifiants['pseudo'], true, false) . ', ';
-                        }
-
-                        echo '<span class="noms_votes_' . $keyVote . '">';
-                          echo substr($listeUsersSmiley, 0, -2);
-                        echo '</span>';
-                      }
+                      $listeUsersSmiley .= formatUnknownUser($vote, true, false) . ', ';
                     }
+
+                    echo '<span class="noms_votes_' . $keySmiley . '">';
+                      echo substr($listeUsersSmiley, 0, -2);
+                    echo '</span>';
                   }
                 echo '</div>';
               }
@@ -181,12 +164,12 @@
                 echo '<select name="speaker" id="speaker_' . $collector->getId() . '" class="modify_speaker changeSpeaker" required>';
                   echo '<option value="" hidden>Choisissez...</option>';
 
-                  foreach ($listeUsers as $user)
+                  foreach ($listeUsers as $identifiant => $user)
                   {
-                    if ($user->getIdentifiant() == $collector->getSpeaker())
-                      echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user->getPseudo() . '</option>';
+                    if ($identifiant == $collector->getSpeaker())
+                      echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user['pseudo'] . '</option>';
                     else
-                      echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+                      echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
                   }
 
                   if ($collector->getType_s() == "other")

@@ -31,7 +31,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = "' . $year . '" AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myFilm = Movie::withData($donnees);
 

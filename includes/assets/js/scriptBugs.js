@@ -87,7 +87,7 @@ var loadFile = function(event, id)
     var degrees     = 0;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans fonctions_communes.php
-    switch(orientation)
+    switch (orientation)
     {
       case 3:
         degrees = 180;

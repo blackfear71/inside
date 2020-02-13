@@ -15,7 +15,7 @@
       global $bdd;
 
       $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year ASC');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         if ($year == $donnees['year'])
           $annee_existante = true;
@@ -35,7 +35,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       array_push($onglets, $donnees['year']);
     }
@@ -67,7 +67,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM calendars WHERE year = ' . $year . ' AND to_delete != "Y" ORDER BY month DESC, id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myCalendar = Calendrier::withData($donnees);
 
@@ -93,7 +93,7 @@
     $annexes = array();
 
     $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE to_delete != "Y" ORDER BY id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myAnnexe = Annexe::withData($donnees);
       array_push($annexes, $myAnnexe);

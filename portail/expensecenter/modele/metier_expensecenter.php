@@ -14,7 +14,7 @@
       global $bdd;
 
       $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         if ($year == $donnees['SUBSTR(date, 1, 4)'])
           $annee_existante = true;
@@ -35,7 +35,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
@@ -65,7 +65,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       array_push($onglets, $donnees['SUBSTR(date, 1, 4)']);
     }
@@ -84,7 +84,7 @@
 
     // Récupération d'une liste des dépenses
     $reponse1 = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4) = ' . $year . ' ORDER BY date DESC, id DESC');
-    while($donnees1 = $reponse1->fetch())
+    while ($donnees1 = $reponse1->fetch())
     {
       $listeParts = array();
       $myExpense  = Expenses::withData($donnees1);
@@ -102,7 +102,7 @@
 
       // Recherche des parts associées à la dépense
       $reponse3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myExpense->getId() . ' ORDER BY identifiant ASC');
-      while($donnees3 = $reponse3->fetch())
+      while ($donnees3 = $reponse3->fetch())
       {
         $myParts = Parts::withData($donnees3);
 
@@ -399,7 +399,7 @@
       $nb_parts_total_old = 0;
 
       $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myOldExpense->getId() . ' ORDER BY identifiant ASC');
-      while($data4 = $req4->fetch())
+      while ($data4 = $req4->fetch())
       {
         $old_list_parts[$data4['identifiant']] = $data4['parts'];
       }
@@ -577,7 +577,7 @@
     $list_parts = array();
 
     $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myExpense->getId() . ' ORDER BY identifiant ASC');
-    while($data4 = $req4->fetch())
+    while ($data4 = $req4->fetch())
     {
       $list_parts[$data4['identifiant']] = $data4['parts'];
     }

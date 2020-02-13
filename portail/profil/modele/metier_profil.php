@@ -49,7 +49,7 @@
 
     // Nombre de commentaires Movie House
     $reponse0 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY id ASC');
-    while($donnees0 = $reponse0->fetch())
+    while ($donnees0 = $reponse0->fetch())
     {
       $reponse1 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $donnees0['id'] . ' AND author = "' . $user . '"');
       $donnees1 = $reponse1->fetch();
@@ -491,7 +491,7 @@
 
     // Lecture des données utilisateur
     $reponse = $bdd->query('SELECT * FROM success');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
       $mySuccess = Success::withData($donnees);
@@ -692,7 +692,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, experience FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
@@ -739,7 +739,7 @@
     else
       $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date("Ymd") . ' ORDER BY date_deb DESC');
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myTheme = Theme::withData($donnees);
 

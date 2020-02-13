@@ -10,7 +10,7 @@
     global $bdd;
 
     $req = $bdd->query('SELECT id, identifiant, pseudo, status FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       if ($data['status'] == "Y" OR $data['status'] == "I" OR $data['status'] == "D")
       {
@@ -108,7 +108,7 @@
     $j = 0;
 
     $req1 = $bdd->query('SELECT DISTINCT identifiant FROM expense_center_users ORDER BY identifiant ASC');
-    while($data1 = $req1->fetch())
+    while ($data1 = $req1->fetch())
     {
       $founded = false;
 
@@ -131,7 +131,7 @@
 
     // On cherche les utilisateurs désinscrits qui ont un achat
 		$req2 = $bdd->query('SELECT DISTINCT buyer FROM expense_center ORDER BY buyer ASC');
-		while($data2 = $req2->fetch())
+		while ($data2 = $req2->fetch())
 		{
 			$founded = false;
 
@@ -190,7 +190,7 @@
       $bilan = 0;
 
       $req5 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-      while($data5 = $req5->fetch())
+      while ($data5 = $req5->fetch())
       {
         // Prix d'achat
         $prix_achat = $data5['price'];
@@ -203,7 +203,7 @@
         $nb_parts_user = 0;
 
         $req6 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data5['id']);
-        while($data6 = $req6->fetch())
+        while ($data6 = $req6->fetch())
         {
           // Nombre de parts total
           $nb_parts_total += $data6['parts'];
@@ -300,7 +300,7 @@
 		$depense_0_parts = 0;
 
 		$req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-		while($data2 = $req2->fetch())
+		while ($data2 = $req2->fetch())
 		{
 			$req3 = $bdd->query('SELECT COUNT(id) AS nb_parts_depense FROM expense_center_users WHERE id_expense = ' . $data2['id']);
 			$data3 = $req3->fetch();

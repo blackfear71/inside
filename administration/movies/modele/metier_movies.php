@@ -11,7 +11,7 @@
     global $bdd;
 
     $reponse1 = $bdd->query('SELECT id, film, to_delete, identifiant_add, identifiant_del FROM movie_house WHERE to_delete = "Y" ORDER BY id ASC');
-    while($donnees1 = $reponse1->fetch())
+    while ($donnees1 = $reponse1->fetch())
     {
       $myDelete = Movie::withData($donnees1);
 
@@ -50,7 +50,7 @@
     global $bdd;
 
     $req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       if ($data['to_delete'] == "Y")
       {

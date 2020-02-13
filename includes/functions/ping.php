@@ -28,7 +28,7 @@
       $listUsers = array();
 
       $req = $bdd->query('SELECT id, identifiant, avatar, ping, pseudo FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
-      while($data = $req->fetch())
+      while ($data = $req->fetch())
       {
         // Récupération des données en base
         $currentUser = Profile::withData($data);

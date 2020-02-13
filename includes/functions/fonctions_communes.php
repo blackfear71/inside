@@ -150,7 +150,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin ORDER BY date_deb ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myMission = Mission::withData($donnees);
       array_push($missions, $myMission);
@@ -619,7 +619,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
@@ -667,7 +667,7 @@
 
     if ($degrees != 0)
     {
-      switch($type)
+      switch ($type)
       {
         case 'jpeg':
         case 'jpg':
@@ -872,7 +872,7 @@
 
     $experience = 0;
 
-    switch($action)
+    switch ($action)
     {
       case 'add_expense':
         $experience = 5;

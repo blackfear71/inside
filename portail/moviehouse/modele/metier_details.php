@@ -165,7 +165,7 @@
 
     // Récupération d'une liste des étoiles
     $reponse = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
       $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar, email FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
@@ -414,7 +414,7 @@
 
     // Récupération d'une liste des commentaires
     $reponse = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $id_film . ' ORDER BY id ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
       $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['author'] . '"');

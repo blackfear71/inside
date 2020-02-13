@@ -27,7 +27,7 @@
 
       // Movie House (films non à supprimer)
       $reponse1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND film LIKE "%' . $recherche . '%" ORDER BY date_theater DESC, film ASC');
-      while($donnees1 = $reponse1->fetch())
+      while ($donnees1 = $reponse1->fetch())
       {
         $myMovie = Movie::withData($donnees1);
         $nb_MH = $reponse1->rowCount();
@@ -39,7 +39,7 @@
 
       // Restaurants
       $reponse2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE name LIKE "%' . $recherche . '%" ORDER BY location ASC, name ASC');
-      while($donnees2 = $reponse2->fetch())
+      while ($donnees2 = $reponse2->fetch())
       {
         $myRestaurant = Restaurant::withData($donnees2);
         $nb_FA = $reponse2->rowCount();
@@ -51,7 +51,7 @@
 
       // Parcours
       $reponse3 = $bdd->query('SELECT * FROM petits_pedestres_parcours WHERE nom LIKE "%' . $recherche . '%" ORDER BY nom ASC');
-      while($donnees3 = $reponse3->fetch())
+      while ($donnees3 = $reponse3->fetch())
       {
         $myParcours = Parcours::withData($donnees3);
         $nb_PP = $reponse3->rowCount();
@@ -63,7 +63,7 @@
 
       // Missions (déjà commencées ou terminées)
       $reponse4 = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . date("Ymd") . ' AND mission LIKE "%' . $recherche . '%" ORDER BY date_deb DESC, mission ASC');
-      while($donnees4 = $reponse4->fetch())
+      while ($donnees4 = $reponse4->fetch())
       {
         $myMission = Mission::withData($donnees4);
         $nb_MI = $reponse4->rowCount();

@@ -13,7 +13,7 @@
 
     // Lecture des données utilisateur
     $reponse = $bdd->query('SELECT * FROM success');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
       $mySuccess = Success::withData($donnees);
@@ -60,7 +60,7 @@
 
     // Contrôle référence
     $reponse = $bdd->query('SELECT * FROM success');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($reference == $donnees['reference'])
       {
@@ -87,7 +87,7 @@
       if (is_numeric($order_success))
       {
         $reponse = $bdd->query('SELECT * FROM success WHERE level = ' . $level);
-        while($donnees = $reponse->fetch())
+        while ($donnees = $reponse->fetch())
         {
           if ($order_success == $donnees['order_success'])
           {
@@ -490,7 +490,7 @@
               $nb_parts = 0;
 
               $req = $bdd->query('SELECT * FROM expense_center_users WHERE identifiant = "' . $user->getIdentifiant() . '"');
-              while($data = $req->fetch())
+              while ($data = $req->fetch())
               {
                 $nb_parts += $data['parts'];
               }
@@ -696,7 +696,7 @@
               {
                 // Nombre total d'objectifs sur la mission
                 $req1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' AND identifiant = "' . $user->getIdentifiant() . '"');
-                while($data1 = $req1->fetch())
+                while ($data1 = $req1->fetch())
                 {
                   $mission += $data1['avancement'];
                 }

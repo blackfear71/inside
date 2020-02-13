@@ -613,6 +613,8 @@
 	margin-left: 10px;
 	margin-top: -12.5px;
 	margin-bottom: -12.5px;
+	position: relative;
+	z-index: 3;
 }
 
 .smiley
@@ -703,6 +705,7 @@
 	margin-right: 10px;
 	display: none;
 	word-break: break-word;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .smiley_votes_1:hover ~ .noms_votes_1, .smiley_votes_2:hover ~ .noms_votes_2, .smiley_votes_3:hover ~ .noms_votes_3,

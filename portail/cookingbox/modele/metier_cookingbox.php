@@ -43,7 +43,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant != "admin" AND status != "I" AND status != "D" ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
@@ -70,7 +70,7 @@
                                                         AND picture     = ""
                                                         AND (year < ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week <= ' . date("W") . '))
                                                    ORDER BY year DESC, week DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($donnees['year'] != $previousYear)
       {
@@ -223,7 +223,7 @@
       global $bdd;
 
       $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE name != "" AND picture != "" ORDER BY year DESC');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         if ($year == $donnees['year'])
           $annee_existante = true;
@@ -243,7 +243,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE name != "" AND picture != "" ORDER BY year DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // On ajoute la ligne au tableau
       array_push($listOnglets, $donnees['year']);
@@ -262,7 +262,7 @@
     global $bdd;
 
     $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND picture != "" ORDER BY week DESC');
-    while($data1 = $req1->fetch())
+    while ($data1 = $req1->fetch())
     {
       $myRecipe = WeekCake::withData($data1);
 

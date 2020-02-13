@@ -339,7 +339,7 @@
         break;
     }
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($id == $donnees['id'])
         break;

@@ -20,7 +20,7 @@
         $mysqli->query("SET NAMES 'utf8'");
 
         $queryTables    = $mysqli -> query('SHOW TABLES');
-        while($row = $queryTables -> fetch_row())
+        while ($row = $queryTables -> fetch_row())
         {
             $target_tables[] = $row[0];
         }
@@ -39,7 +39,7 @@
 
             for ($i = 0, $st_counter = 0; $i < $fields_amount; $i++, $st_counter=0)
             {
-                while($row = $result->fetch_row())
+                while ($row = $result->fetch_row())
                 {
 					// When started (and every after 100 command cycle) :
                     if ($st_counter%100 == 0 || $st_counter == 0 )

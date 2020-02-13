@@ -14,7 +14,7 @@
 
     $req = $bdd->query('SELECT id, date_doodle FROM movie_house WHERE date_doodle = ' . date("Ymd") . ' ORDER BY id ASC');
 
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       // Contrôle notification non existante
       $notification_cinema_exist = controlNotification('cinema', $data['id']);
@@ -210,7 +210,7 @@
       // Lecture des missions se terminant la veille
       $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_fin = ' . $date_moins_1);
 
-      while($data = $req->fetch())
+      while ($data = $req->fetch())
       {
         $id_mission = $data['id'];
 
@@ -218,7 +218,7 @@
 
         // Construction tableau des participants
         $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' ORDER BY identifiant ASC');
-        while($data2 = $req2->fetch())
+        while ($data2 = $req2->fetch())
         {
           // Récupération des valeurs d'avancement de chaque mission par utilisateur
           if (!isset($tableau_users[$data2['identifiant']]) OR empty($tableau_users[$data2['identifiant']]))
@@ -307,14 +307,14 @@
     global $bdd;
 
     $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
-    while($data1 = $req1->fetch())
+    while ($data1 = $req1->fetch())
     {
       // On calcule le bilan des dépenses de l'utilisateur courant
       $bilan = 0;
 
       // Calcul des bilans
       $req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-      while($data2 = $req2->fetch())
+      while ($data2 = $req2->fetch())
       {
         // Prix d'achat
         $prix_achat = $data2['price'];
@@ -327,7 +327,7 @@
         $nb_parts_user  = 0;
 
         $req3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data2['id']);
-        while($data3 = $req3->fetch())
+        while ($data3 = $req3->fetch())
         {
           // Nombre de parts total
           $nb_parts_total += $data3['parts'];

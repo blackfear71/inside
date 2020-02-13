@@ -12,7 +12,7 @@
     global $bdd;
 
     $req = $bdd->query('SELECT * FROM preferences ORDER BY identifiant ASC');
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       // Récupération pseudo
       $req2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data['identifiant'] . '"');
@@ -57,7 +57,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM calendars WHERE to_delete = "Y" ORDER BY year DESC, month DESC, id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myDelete = Calendrier::withData($donnees);
       $myDelete->setTitle($listeMois[$myDelete->getMonth()] . " " . $myDelete->getYear());
@@ -79,7 +79,7 @@
     global $bdd;
 
     $req = $bdd->query('SELECT id, to_delete FROM calendars WHERE to_delete = "Y"');
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       if ($data['to_delete'] == "Y")
       {
@@ -101,7 +101,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE to_delete = "Y" ORDER BY id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myDelete = Annexe::withData($donnees);
 
@@ -122,7 +122,7 @@
     global $bdd;
 
     $req = $bdd->query('SELECT id, to_delete FROM calendars_annexes WHERE to_delete = "Y"');
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       if ($data['to_delete'] == "Y")
       {
@@ -142,7 +142,7 @@
     global $bdd;
 
     $req = $bdd->query('SELECT * FROM preferences');
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       // Par défaut, le top autorisation est à Non
       $manage_calendars = "N";

@@ -13,7 +13,7 @@
     // Lecture de la base des thèmes
     $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" ORDER BY date_deb DESC, level ASC');
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myTheme = Theme::withData($donnees);
 
@@ -466,7 +466,7 @@
     else
       $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" ORDER BY date_deb DESC');
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if (($date_deb >= $donnees['date_deb'] AND $date_deb <= $donnees['date_fin'])
       OR  ($date_fin >= $donnees['date_deb'] AND $date_fin <= $donnees['date_fin'])

@@ -34,7 +34,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM missions');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myMission = Mission::withData($donnees);
 
@@ -95,7 +95,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT DISTINCT identifiant FROM missions_users WHERE id_mission = ' . $id . ' ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
       $donnees2 = $reponse2->fetch();
@@ -132,7 +132,7 @@
 
     // Nombre total d'objectifs sur la mission
     $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user . '"');
-    while($donnees2 = $reponse2->fetch())
+    while ($donnees2 = $reponse2->fetch())
     {
       $avancement['event'] += $donnees2['avancement'];
     }
@@ -225,7 +225,7 @@
 
       // Nombre total d'objectifs sur la mission
       $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user->getIdentifiant() . '"');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         $totalMission += $donnees['avancement'];
       }

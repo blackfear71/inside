@@ -61,7 +61,7 @@
 
     // Anniversaires
     $req0 = $bdd->query('SELECT id, identifiant, pseudo, anniversary FROM users WHERE SUBSTR(anniversary, 5, 4) = "' . date("md") . '" ORDER BY identifiant ASC');
-    while($data0 = $req0->fetch())
+    while ($data0 = $req0->fetch())
     {
       $myNews = new News();
 
@@ -264,7 +264,7 @@
 
     // On cherche la position de la phrase culte dans la table
     $reponse = $bdd->query('SELECT id, date_collector FROM collector ORDER BY date_collector DESC, id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($id == $donnees['id'])
         break;
@@ -358,7 +358,7 @@
     $date_jour_moins_3 = date("Ymd", strtotime(date("Ymd") . ' - 3 days'));
 
     $reponse = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . $date_jour . ' AND date_fin >= ' . $date_jour_moins_3 . ' ORDER BY date_deb ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myMission = Mission::withData($donnees);
       array_push($missions, $myMission);
@@ -384,7 +384,7 @@
         global $bdd;
 
         $reponse1 = $bdd->query('SELECT DISTINCT identifiant FROM missions_users WHERE id_mission = ' . $mission->getId() . ' ORDER BY identifiant ASC');
-        while($donnees1 = $reponse1->fetch())
+        while ($donnees1 = $reponse1->fetch())
         {
           $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['identifiant'] . '"');
           $donnees2 = $reponse2->fetch();
@@ -407,7 +407,7 @@
 
           // Nombre total d'objectifs sur la mission
           $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission->getId() . ' AND identifiant = "' . $user->getIdentifiant() . '"');
-          while($donnees = $reponse->fetch())
+          while ($donnees = $reponse->fetch())
           {
             $totalMission += $donnees['avancement'];
           }

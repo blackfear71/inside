@@ -8,29 +8,24 @@
   function getUsers()
   {
     // Initialisation tableau d'utilisateurs
-    $listeUsers = array();
+    $listUsers = array();
 
     global $bdd;
 
     $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
 
-      // On construit un tableau des utilisateurs
-      $myUser = array('id'          => $user->getId(),
-                      'identifiant' => $user->getIdentifiant(),
-                      'pseudo'      => $user->getPseudo(),
-                      'avatar'      => $user->getAvatar()
-                    );
-
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, Profile::withData($myUser));
+      // Création tableau de correspondance identifiant / pseudo / avatar
+      $listUsers[$user->getIdentifiant()] = array('pseudo' => htmlspecialchars($user->getPseudo()),
+                                                  'avatar' => htmlspecialchars($user->getAvatar())
+                                                 );
     }
     $reponse->closeCursor();
 
-    return $listeUsers;
+    return $listUsers;
   }
 
   // METIER : Lecture nombre de pages en fonction du filtre
@@ -230,32 +225,44 @@
         break;
     }
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
+      // Récupération objet collector
       $myCollector = Collector::withData($donnees);
 
       // Nombre de votes
       $myCollector->setNb_votes($donnees['nb_votes']);
 
-      // Recherche pseudo
-      foreach ($listUsers as $user)
-      {
-        if ($myCollector->getAuthor() == $user->getIdentifiant())
-        {
-          $myCollector->setPseudo_a($user->getPseudo());
-        }
+      // Pseudo auteur
+      if (isset($listUsers[$myCollector->getAuthor()]))
+        $myCollector->setPseudo_a($listUsers[$myCollector->getAuthor()]['pseudo']);
 
-        if ($myCollector->getSpeaker() == $user->getIdentifiant())
+      // Pseudo speaker
+      if (isset($listUsers[$myCollector->getSpeaker()]))
+      {
+        // Pseudo auteur "autre" si besoin
+        if (!empty($myCollector->getSpeaker()) AND $myCollector->getType_s() == "other")
+          $myCollector->setPseudo_s($listUsers[$myCollector->getSpeaker()]['pseudo']);
+        else
         {
-          $myCollector->setPseudo_s($user->getPseudo());
-          $myCollector->setAvatar_s($user->getAvatar());
+          $myCollector->setPseudo_s($listUsers[$myCollector->getSpeaker()]['pseudo']);
+          $myCollector->setAvatar_s($listUsers[$myCollector->getSpeaker()]['avatar']);
         }
       }
 
-      // Pseudo auteur "autre"
-      if (!empty($myCollector->getSpeaker()) AND $myCollector->getType_s() == "other")
-        $myCollector->setPseudo_s($myCollector->getSpeaker());
+      // Vote utilisateur connecté
+      $reponse2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $myCollector->getId() . ' AND identifiant = "' . $identifiant . '"');
+      $donnees2 = $reponse2->fetch();
 
+      if ($reponse2->rowCount() > 0)
+        $myCollector->setVote_user($donnees2['vote']);
+
+      $reponse2->closeCursor();
+
+      // Votes tous utilisateurs
+      $myCollector->setVotes(getVotes($myCollector, $listUsers));
+
+      // Ajout à la liste
       array_push($listCollectors, $myCollector);
     }
     $reponse->closeCursor();
@@ -271,8 +278,17 @@
     $control_ok = true;
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['save']['speaker']        = $post['speaker'];
-    $_SESSION['save']['other_speaker']  = $post['other_speaker'];
+    if ($post['speaker'] == 'other')
+    {
+      $_SESSION['save']['speaker']       = $post['speaker'];
+      $_SESSION['save']['other_speaker'] = $post['other_speaker'];
+    }
+    else
+    {
+      $_SESSION['save']['speaker']       = $post['speaker'];
+      $_SESSION['save']['other_speaker'] = "";
+    }
+
     $_SESSION['save']['date_collector'] = $post['date_collector'];
     $_SESSION['save']['type_collector'] = $post['type_collector'];
     $_SESSION['save']['context']        = $post['context'];
@@ -558,75 +574,30 @@
     return $id_col;
   }
 
-  // METIER : Lecture des votes utilisateur
+  // METIER : Liste des votes par phrase culte
   // RETOUR : Liste des votes
-  function getVotesUser($list_collectors, $user)
+  function getVotes($collector, $listUsers)
   {
     $listVotes = array();
 
     global $bdd;
 
-    foreach ($list_collectors as $collector)
+    $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' ORDER BY vote ASC, identifiant ASC');
+    while ($donnees = $reponse->fetch())
     {
-      $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND identifiant = "' . $user . '"');
-      $donnees = $reponse->fetch();
+      // Récupération pseudo
+      if (isset($listUsers[$donnees['identifiant']]))
+        $pseudo = $listUsers[$donnees['identifiant']]['pseudo'];
+      else
+        $pseudo = "";
 
-      if ($reponse->rowCount() > 0)
-      {
-        $myVote = VotesCollector::withData($donnees);
+      // Si le vote n'existe pas dans le tableau, on créé une nouvelle entrée
+      if (!isset($listVotes[$donnees['vote']]))
+        $listVotes[$donnees['vote']] = array();
 
-        $listVotes[$collector->getId()] = $myVote;
-      }
-
-      $reponse->closeCursor();
+      array_push($listVotes[$donnees['vote']], $pseudo);
     }
-
-    return $listVotes;
-  }
-
-  // METIER : Liste des votes par phrase culte
-  // RETOUR : Liste des votes
-  function getVotes($list_collectors)
-  {
-    $listVotes      = array();
-    $listSmileys    = array();
-    $listUsers      = array();
-    $myIdentifiants = array();
-
-    global $bdd;
-
-    foreach ($list_collectors as $collector)
-    {
-      for ($i = 1; $i <= 8; $i++)
-      {
-        // Recherche des pseudos ayant un vote
-        $myArray = array();
-
-        $req2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND vote = ' . $i . ' ORDER BY identifiant ASC');
-        while($data2 = $req2->fetch())
-        {
-          if ($req2->rowCount() > 0)
-          {
-            $req3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data2['identifiant'] . '"');
-            $data3 = $req3->fetch();
-
-            $pseudo = $data3['pseudo'];
-
-            $req3->closeCursor();
-
-            $myIdentifiants = array('identifiant' => $data2['identifiant'],
-                                    'pseudo'      => $pseudo
-                                   );
-            array_push($myArray, $myIdentifiants);
-          }
-        }
-        $req2->closeCursor();
-
-        $listUsers[$i] = $myArray;
-      }
-
-      $listVotes[$collector->getId()] = $listUsers;
-    }
+    $reponse->closeCursor();
 
     return $listVotes;
   }
@@ -742,7 +713,7 @@
 
     // On cherche la position de la phrase culte dans la table
     $reponse = $bdd->query('SELECT id, date_collector FROM collector ORDER BY date_collector DESC, id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($id == $donnees['id'])
         break;

@@ -15,7 +15,7 @@
 
     // Lecture BDD
     $reponse = $bdd->query('SELECT * FROM table WHERE id = ' . $id . ' ORDER BY id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myDatas = Class::withData($donnees);
 

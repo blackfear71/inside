@@ -528,7 +528,7 @@
         var data = {};
         var fieldValue, fieldName, dataSize, segmentType, segmentSize;
         var segmentStartPos = startOffset;
-        while(segmentStartPos < startOffset+sectionLength) {
+        while (segmentStartPos < startOffset+sectionLength) {
             if(dataView.getUint8(segmentStartPos) === 0x1C && dataView.getUint8(segmentStartPos+1) === 0x02){
                 segmentType = dataView.getUint8(segmentStartPos+2);
                 if(segmentType in IptcFieldMap) {

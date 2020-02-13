@@ -11,7 +11,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM alerts ORDER BY category ASC, type DESC, alert ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myAlert = Alerte::withData($donnees);
 

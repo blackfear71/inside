@@ -13,7 +13,9 @@
     private $type_collector;
     private $collector;
     private $context;
-    private $nbVotes;
+    private $nb_votes;
+    private $vote_user;
+    private $votes;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -30,7 +32,9 @@
       $this->type_collector = '';
       $this->collector      = '';
       $this->context        = '';
-      $this->nbVotes        = 0;
+      $this->nb_votes       = 0;
+      $this->vote_user      = 0;
+      $this->votes          = array();
     }
 
     // Constructeur de l'objet Collector en fonction des données
@@ -207,101 +211,36 @@
     }
 
     // Nombre de votes
-    public function setNb_votes($nbVotes)
+    public function setNb_votes($nb_votes)
     {
-      $this->nbVotes = $nbVotes;
+      $this->nb_votes = $nb_votes;
     }
 
     public function getNb_votes()
     {
-      return $this->nbVotes;
-    }
-  }
-
-  class VotesCollector
-  {
-    private $id;
-    private $id_collector;
-    private $identifiant;
-    private $vote;
-
-    // Constructeur par défaut (objet vide)
-    public function __construct()
-    {
-      $this->id           = 0;
-      $this->id_collector = 0;
-      $this->identifiant  = '';
-      $this->vote         = 0;
+      return $this->nb_votes;
     }
 
-    // Constructeur de l'objet VotesCollector en fonction des données
-    // -> il faut passer une variable $data contenant le résultat de la requête fetch
-    public static function withData($data)
+    // Vote de l'utilisateur
+    public function setVote_user($vote_user)
     {
-      $vote = new self();
-      $vote->fill($data);
-
-      return $vote;
+      $this->vote_user = $vote_user;
     }
 
-    protected function fill ($data)
+    public function getVote_user()
     {
-      if (isset($data['id']))
-        $this->id           = $data['id'];
-
-      if (isset($data['id_collector']))
-        $this->id_collector = $data['id_collector'];
-
-      if (isset($data['identifiant']))
-        $this->identifiant  = $data['identifiant'];
-
-      if (isset($data['vote']))
-        $this->vote         = $data['vote'];
+      return $this->vote_user;
     }
 
-    // getters et setters pour l'objet VotesCollector
-    // id
-    public function setId($id)
+    // Votes tous utilisateurs
+    public function setVotes($votes)
     {
-      $this->id = $id;
+      $this->votes = $votes;
     }
 
-    public function getId()
+    public function getVotes()
     {
-      return $this->id;
-    }
-
-    // Id collector
-    public function setId_collector($id_collector)
-    {
-      $this->id_collector = $id_collector;
-    }
-
-    public function getId_collector()
-    {
-      return $this->id_collector;
-    }
-
-    // Identifiant
-    public function setIdentifiant($identifiant)
-    {
-      $this->identifiant = $identifiant;
-    }
-
-    public function getIdentifiant()
-    {
-      return $this->identifiant;
-    }
-
-    // Vote
-    public function setVote($vote)
-    {
-      $this->vote = $vote;
-    }
-
-    public function getVote()
-    {
-      return $this->vote;
+      return $this->votes;
     }
   }
 ?>

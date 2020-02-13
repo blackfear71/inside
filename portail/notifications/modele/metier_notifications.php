@@ -93,7 +93,7 @@
         break;
     }
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Notification à partir des données remontées de la bdd
       $myNotif = Notification::withData($donnees);
@@ -512,7 +512,7 @@
 
     // On cherche la position de la phrase culte dans la table
     $reponse = $bdd->query('SELECT id, date_collector FROM collector ORDER BY date_collector DESC, id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($id == $donnees['id'])
         break;
@@ -572,7 +572,7 @@
         break;
     }
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       if ($id == $donnees['id'])
         break;

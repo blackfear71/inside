@@ -10,7 +10,7 @@
       global $bdd;
 
       $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater, 1, 4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater, 1, 4) ASC');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         if ($year == $donnees['SUBSTR(date_theater, 1, 4)'])
           $annee_existante = true;
@@ -30,7 +30,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $year . '" ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC LIMIT 5');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $myRecent = Movie::withData($donnees);
 
@@ -81,7 +81,7 @@
 
     // Récupération des films éligibles
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $monday . '" AND date_theater <= "' . $sunday . '" ORDER BY id DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // Récupération des données si la date le permet
       if (!isBlankDate($donnees['date_theater'], substr($donnees['date_theater'], 0, 4)))
@@ -109,7 +109,7 @@
 
     // Récupération des films éligibles
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND SUBSTR(date_theater, 1, 4) = "' . $year . '" ORDER BY date_theater ASC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // On récupère les films si ce n'est pas l'année courante ou jusqu'à un mois en arrière si c'est l'année courante
       if ($year != date("Y") OR ($year == date("Y") AND $donnees['date_theater'] > $date_du_jour_moins_1_mois))
@@ -123,7 +123,7 @@
         $average     = 0;
 
         $reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $myAttendu->getId());
-        while($donnees2 = $reponse2->fetch())
+        while ($donnees2 = $reponse2->fetch())
         {
           $nb_users    += 1;
           $total_stars += $donnees2['stars'];
@@ -189,7 +189,7 @@
     elseif ($year < date("Y"))
       $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC');
 
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       $mySortie = Movie::withData($donnees);
 
@@ -210,7 +210,7 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater, 1, 4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater, 1, 4) DESC');
-    while($donnees = $reponse->fetch())
+    while ($donnees = $reponse->fetch())
     {
       // On ajoute la ligne au tableau
       array_push($listOnglets, $donnees['SUBSTR(date_theater, 1, 4)']);
@@ -233,7 +233,7 @@
       $starsFilm = array();
 
       $reponse = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $film->getId() . ' ORDER BY stars DESC, identifiant ASC');
-      while($donnees = $reponse->fetch())
+      while ($donnees = $reponse->fetch())
       {
         $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
         $donnees2 = $reponse2->fetch();
