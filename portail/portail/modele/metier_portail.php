@@ -66,7 +66,7 @@
       $myNews = new News();
 
       $myNews->setTitle("Joyeux anniversaire !");
-      $myNews->setContent("C'est l'anniversaire de <strong>" . $data0['pseudo'] . "</strong> aujourd'hui, souhaitez-lui de passer une excellente journée !");
+      $myNews->setContent("C'est l'anniversaire de <strong>" . htmlspecialchars($data0['pseudo']) . "</strong> aujourd'hui, souhaitez-lui de passer une excellente journée !");
       $myNews->setDetails("Vous n'avez pas oublié les cadeaux au moins ?");
       $myNews->setLogo("anniversary");
       $myNews->setLink("");
@@ -98,7 +98,7 @@
         // Lecture du nom du restaurant
         $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
         $data2 = $req2->fetch();
-        $myNews->setContent("Le restaurant a été reservé ! Rendez-vous à <strong>" . $data2['name'] . "</strong> !");
+        $myNews->setContent("Le restaurant a été reservé ! Rendez-vous à <strong>" . htmlspecialchars($data2['name']) . "</strong> !");
         $req2->closeCursor();
       }
 
@@ -145,12 +145,12 @@
 
       if ($data3['cooked'] == "Y")
       {
-        $myNews->setContent("Le gâteau a été fait par <strong>" . $pseudo . "</strong>, c'était très bon !");
+        $myNews->setContent("Le gâteau a été fait par <strong>" . htmlspecialchars(formatUnknownUser($pseudo, false, false)) . "</strong>, c'était très bon !");
         $myNews->setDetails("A la semaine prochaine pour de nouvelles expériences...");
       }
       else
       {
-        $myNews->setContent("Cette semaine, c'est à <strong>" . $pseudo . "</strong> de faire le gâteau !");
+        $myNews->setContent("Cette semaine, c'est à <strong>" . htmlspecialchars(formatUnknownUser($pseudo, false, false)) . "</strong> de faire le gâteau !");
         $myNews->setDetails("Spécialité culinaire en préparation...");
       }
     }
@@ -177,19 +177,19 @@
     $myNews->setLink("/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $data5['id']);
 
     if ($data5['type_speaker'] == "other")
-      $myNews->setDetails("Par " . $data5['speaker']);
+      $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($data5['speaker'], false, false)));
     else
     {
       $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data5['speaker'] . '"');
       $donnees = $reponse->fetch();
-      $myNews->setDetails("Par " . $donnees['pseudo']);
+      $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($donnees['pseudo'], false, false)));
       $reponse->closeCursor();
     }
 
     if (strlen($data5['collector']) > 90)
-      $myNews->setContent(nl2br(substr(unformatCollector($data5['collector']), 0, 90) . "..."));
+      $myNews->setContent(htmlspecialchars(nl2br(substr(unformatCollector($data5['collector']), 0, 90) . "...")));
     else
-      $myNews->setContent(nl2br(unformatCollector($data5['collector'])));
+      $myNews->setContent(htmlspecialchars(nl2br(unformatCollector($data5['collector']))));
 
     $req5->closeCursor();
 

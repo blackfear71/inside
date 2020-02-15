@@ -493,7 +493,7 @@
     switch (count($listWinners))
     {
       case 1:
-        $phrase = 'Félicitations à <span class="contenu_gras">' . $listWinners[0] . '</span> pour sa victoire écrasante !';
+        $phrase = 'Félicitations à <span class="contenu_gras">' . htmlspecialchars($listWinners[0]) . '</span> pour sa victoire écrasante !';
         break;
 
       case 0:
@@ -508,10 +508,10 @@
           if ($winner == end($listWinners))
           {
             $phrase = substr($phrase, 0, -2);
-            $phrase .= ' et <span class="contenu_gras">' . $winner . '</span>';
+            $phrase .= ' et <span class="contenu_gras">' . htmlspecialchars($winner) . '</span>';
           }
           else
-            $phrase .= '<span class="contenu_gras">' . $winner . '</span>, ';
+            $phrase .= '<span class="contenu_gras">' . htmlspecialchars($winner) . '</span>, ';
         }
 
         $phrase .= ' pour leur magnifique victoire !';
