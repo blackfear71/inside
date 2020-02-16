@@ -47,7 +47,6 @@
 
 						$_SESSION['user']['view_movie_house']   = $donnees2['view_movie_house'];
             $_SESSION['user']['view_the_box']       = $donnees2['view_the_box'];
-						$_SESSION['user']['view_notifications'] = $donnees2['view_notifications'];
 
             if ($donnees2['init_chat'] == "Y")
               $_SESSION['chat']['show_chat'] = true;

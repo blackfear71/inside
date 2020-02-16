@@ -29,8 +29,6 @@
 		// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
 		$path = $_SERVER['PHP_SELF'];
 
-		/*echo 'page courante : ' . $path;*/
-
 		// Movie House
 		if ($path == '/inside/portail/moviehouse/moviehouse.php'
 		OR  $path == '/inside/portail/moviehouse/details.php'
@@ -83,7 +81,8 @@
 			$onglet_8 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_actif"><img src="/inside/includes/icons/common/missions.png" alt="missions" title="Missions : Insider" class="logo_onglet" /></a>';
 		}
 
-		/*if ($path == '/inside/portail/eventmanager/eventmanager.php')
+		/*// Event Manager
+		if ($path == '/inside/portail/eventmanager/eventmanager.php')
 		{
 			$onglet_9 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_actif"><img src="/inside/includes/icons/common/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
 		}*/

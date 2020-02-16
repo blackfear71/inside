@@ -399,9 +399,8 @@
     $reponse->closeCursor();
 
     // Mise à jour des préférences stockées en SESSION
-    $_SESSION['user']['view_movie_house']   = $view_movie_house;
-    $_SESSION['user']['view_the_box']       = $view_the_box;
-    $_SESSION['user']['view_notifications'] = $view_notifications;
+    $_SESSION['user']['view_movie_house'] = $view_movie_house;
+    $_SESSION['user']['view_the_box']     = $view_the_box;
 
     $_SESSION['alerts']['preferences_updated'] = true;
   }
