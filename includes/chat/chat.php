@@ -38,13 +38,18 @@
     array_push($listUsers, $user_chat);
   }
 
-  // On formate le tableau au format JSON
+  // On formate les données au format JSON
   $listUsersJson   = json_encode($listUsers);
   $currentUserJson = json_encode($_SESSION['chat']['current']);
+  $initChat        = json_encode($_SESSION['chat']['show_chat']);
+
+  // Suppression session préférence chat après connexion
+  $_SESSION['chat']['show_chat'] = NULL;
 ?>
 
 <script>
-  // Récupération liste utilisateurs & identifiant pour le script
+  // Récupération liste utilisateurs, identifiant & initialisation chat pour le script
   var listUsers   = <?php echo $listUsersJson; ?>;
   var currentUser = <?php echo $currentUserJson; ?>;
+  var initChat    = <?php echo $initChat; ?>;
 </script>

@@ -224,7 +224,7 @@ function getCookie(cookieName)
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca            = decodedCookie.split(';');
 
-  for(var i = 0; i < ca.length; i++)
+  for (var i = 0; i < ca.length; i++)
   {
     var c = ca[i];
 

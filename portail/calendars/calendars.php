@@ -90,6 +90,7 @@
       unset($calendrier);
 
       $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
+      $preferences->setInit_chat(htmlspecialchars($preferences->getInit_chat()));
       $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
       $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
       $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));

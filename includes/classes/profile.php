@@ -408,6 +408,7 @@
   {
     private $id;
     private $ref_theme;
+    private $init_chat;
     private $view_movie_house;
     private $categories_movie_house;
     private $view_the_box;
@@ -419,6 +420,7 @@
     {
       $this->id                     = 0;
       $this->ref_theme              = '';
+      $this->init_chat              = '';
       $this->view_movie_house       = '';
       $this->categories_movie_house = '';
       $this->view_the_box           = '';
@@ -443,6 +445,9 @@
 
       if (isset($data['ref_theme']))
         $this->ref_theme              = $data['ref_theme'];
+
+      if (isset($data['init_chat']))
+        $this->init_chat              = $data['init_chat'];
 
       if (isset($data['view_movie_house']))
         $this->view_movie_house       = $data['view_movie_house'];
@@ -481,6 +486,17 @@
     public function getRef_theme()
     {
       return $this->ref_theme;
+    }
+
+    // Initialisation chat
+    public function setInit_chat($init_chat)
+    {
+      $this->init_chat = $init_chat;
+    }
+
+    public function getInit_chat()
+    {
+      return $this->init_chat;
     }
 
     // Préférence vue par défaut Movie House

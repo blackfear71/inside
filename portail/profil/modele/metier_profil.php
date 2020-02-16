@@ -354,6 +354,9 @@
   {
     global $bdd;
 
+    // Préférences Notifications
+    $view_notifications = $post['notifications_view'];
+
 		// Préférences MOVIE HOUSE
 		$view_movie_house = $post['movie_house_view'];
 		$categories_movie_house  = "";
@@ -376,16 +379,18 @@
 		// Préférences #THEBOX
 		$view_the_box = $post['the_box_view'];
 
-    // Préférences Notifications
-    $view_notifications = $post['notifications_view'];
+    // Préférences INSIDE Room
+    $init_chat = $post['inside_room_view'];
 
     // Mise à jour de la table des préférences utilisateur
-    $reponse = $bdd->prepare('UPDATE preferences SET view_movie_house       = :view_movie_house,
+    $reponse = $bdd->prepare('UPDATE preferences SET init_chat              = :init_chat,
+                                                     view_movie_house       = :view_movie_house,
                                                      categories_movie_house = :categories_movie_house,
                                                      view_the_box           = :view_the_box,
                                                      view_notifications     = :view_notifications
                                                WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
+      'init_chat'              => $init_chat,
       'view_movie_house'       => $view_movie_house,
       'categories_movie_house' => $categories_movie_house,
       'view_the_box'           => $view_the_box,

@@ -57,6 +57,12 @@ $(function()
         switchCheckedColor('switch_default_view_ideas', id_bouton);
         break;
 
+      // INSIDE Room
+      case 'bouton_chat_yes':
+      case 'bouton_chat_no':
+        switchCheckedColor('switch_default_view_chat', id_bouton);
+        break;
+
       default:
         break;
     }

@@ -379,7 +379,13 @@
 	color: #262626;
 }
 
-.switch_default_view_notifications, .switch_default_view_categories, .switch_default_view_date, .switch_default_view_movies, .switch_show_films, .switch_default_view_ideas
+.switch_default_view_notifications,
+.switch_default_view_categories,
+.switch_default_view_date,
+.switch_default_view_movies,
+.switch_show_films,
+.switch_default_view_ideas,
+.switch_default_view_chat
 {
 	display: inline-block;
 	margin: 10px 5px 0 5px;
@@ -393,12 +399,24 @@
 	cursor: pointer;
 }
 
-.switch_default_view_notifications input, .switch_default_view_categories input, .switch_default_view_date input, .switch_default_view_movies input, .switch_show_films input, .switch_default_view_ideas input
+.switch_default_view_notifications input,
+.switch_default_view_categories input,
+.switch_default_view_date input,
+.switch_default_view_movies input,
+.switch_show_films input,
+.switch_default_view_ideas input,
+.switch_default_view_chat input
 {
 	cursor: pointer;
 }
 
-.switch_default_view_notifications:hover, .switch_default_view_categories:hover, .switch_default_view_date:hover, .switch_default_view_movies:hover, .switch_show_films:hover, .switch_default_view_ideas:hover
+.switch_default_view_notifications:hover,
+.switch_default_view_categories:hover,
+.switch_default_view_date:hover,
+.switch_default_view_movies:hover,
+.switch_show_films:hover,
+.switch_default_view_ideas:hover,
+.switch_default_view_chat:hover
 {
 	background-color: #ff1937;
 	color: white;

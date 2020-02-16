@@ -245,6 +245,43 @@
             }
           echo '</div>';
         echo '</div>';
+
+        /************/
+        /*** Chat ***/
+        /************/
+        echo '<div class="zone_contributions">';
+          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/chat_grey.png" alt="chat_grey" class="logo_titre_contribution" />INSIDE ROOM</div>';
+
+          // Vue par défaut
+          echo '<div class="sous_titre_contribution">Affichage à la connexion</div>';
+
+          echo '<div class="zone_contribution large">';
+            if ($preferences->getInit_chat() == "Y")
+            {
+              echo '<div id="bouton_chat_yes" class="switch_default_view_chat bouton_checked">';
+                echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" checked required />';
+                echo '<label for="chat_yes" class="label_switch">Oui</label>';
+              echo '</div>';
+
+              echo '<div id="bouton_chat_no" class="switch_default_view_chat">';
+                echo '<input id="chat_no" type="radio" name="inside_room_view" value="N" required />';
+                echo '<label for="chat_no" class="label_switch">Non</label>';
+              echo '</div>';
+            }
+            else
+            {
+              echo '<div id="bouton_chat_yes" class="switch_default_view_chat">';
+                echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" required />';
+                echo '<label for="chat_yes" class="label_switch">Oui</label>';
+              echo '</div>';
+
+              echo '<div id="bouton_chat_no" class="switch_default_view_chat bouton_checked">';
+                echo '<input id="chat_no" type="radio" name="inside_room_view" value="N" checked required />';
+                echo '<label for="chat_no" class="label_switch">Non</label>';
+              echo '</div>';
+            }
+          echo '</div>';
+        echo '</div>';
       echo '</div>';
 
       // Bouton validation

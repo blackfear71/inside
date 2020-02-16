@@ -3,24 +3,28 @@ $(window).on('load', function()
   /***************************/
   /***   Initialisations   ***/
   /***************************/
-  initCookies();
-  var showChat   = initCookieChat();
-  var windowChat = initWindowChat();
+  // Variables
   var refresh_chat;
   var refresh_users;
   var intervalRefreshChat  = 4000;
   var intervalRefreshUsers = 30000;
 
+  // Initialisation des cookies
+  initCookies();
+
+  // Initialisation de la position du chat
   initPositionChat();
-  initView(showChat, windowChat);
+
+  // Initialisation de la vue du chat
+  initView(cookieShowChat, cookieWindowChat);
 
   // On lance le rafraichissement des messages toujours après l'affichage des zones
-  if (showChat == "true" && windowChat == "1")
+  if (cookieShowChat == "true" && cookieWindowChat == "1")
   {
     refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
     stopTimerRefresh(refresh_users);
   }
-  else if ((showChat == "true" && windowChat == "2") || showChat == "false")
+  else if ((cookieShowChat == "true" && cookieWindowChat == "2") || cookieShowChat == "false")
   {
     refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
     stopTimerRefresh(refresh_chat);
@@ -43,23 +47,23 @@ $(window).on('load', function()
   $('#zone_hide_chat').click(function()
   {
     // Si le chat est ouvert, on le ferme
-    if (showChat == "true")
+    if (cookieShowChat == "true")
     {
       stopTimerRefresh(refresh_chat);
       setCookie("showChat", false);
       setCookie("windowChat", "3");
-      showChat   = getCookie("showChat");
-      windowChat = getCookie("windowChat");
-      initView(showChat, windowChat);
+      cookieShowChat   = getCookie("showChat");
+      cookieWindowChat = getCookie("windowChat");
+      initView(cookieShowChat, cookieWindowChat);
     }
     // Sinon on l'ouvre sur la fenêtre de chat
     else
     {
       setCookie("showChat", true);
       setCookie("windowChat", "1");
-      showChat   = getCookie("showChat");
-      windowChat = getCookie("windowChat");
-      initView(showChat, windowChat);
+      cookieShowChat   = getCookie("showChat");
+      cookieWindowChat = getCookie("windowChat");
+      initView(cookieShowChat, cookieWindowChat);
       refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
     }
   });
@@ -67,12 +71,12 @@ $(window).on('load', function()
   // Rafraichissement chat (au clic sur le titre)
   $('#onglet_chat').click(function()
   {
-    if (windowChat != "3")
+    if (cookieWindowChat != "3")
     {
       stopTimerRefresh(refresh_users);
       setCookie("windowChat", "1");
-      windowChat = getCookie("windowChat");
-      initView(showChat, windowChat);
+      cookieWindowChat = getCookie("windowChat");
+      initView(cookieShowChat, cookieWindowChat);
       refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
     }
   });
@@ -82,8 +86,8 @@ $(window).on('load', function()
   {
     stopTimerRefresh(refresh_chat);
     setCookie("windowChat", "2");
-    windowChat = getCookie("windowChat");
-    initView(showChat, windowChat);
+    cookieWindowChat = getCookie("windowChat");
+    initView(cookieShowChat, cookieWindowChat);
     refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
   });
 
@@ -110,13 +114,13 @@ $(window).on('load', function()
   // Survol des onglets
   $('#onglet_users').hover(function(e)
   {
-    if (windowChat == "1")
+    if (cookieWindowChat == "1")
       $('#onglet_users').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
   });
 
   $('#onglet_chat').hover(function(e)
   {
-    if (windowChat == "2")
+    if (cookieWindowChat == "2")
       $('#onglet_chat').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
   });
 
@@ -176,54 +180,88 @@ $(window).on('load', function()
   // Fonction d'initialisation des cookies
   function initCookies()
   {
-    cookie = getCookie("identifiant")
+    // Initialisation ou récupération des cookies si existants
+    cookieIdentifiant = getCookie("identifiant");
+    cookieShowChat    = getCookie("showChat");
+    cookieWindowChat  = getCookie("windowChat");
 
     // Initialisation cookie identifiant
-    if (cookie == null)
+    initCookieIdentifiant();
+
+    // Initialisation cookie affichage chat
+    initCookieShowChat();
+
+    // Initialisation cookie fenêtre affichée
+    initCookieWindowChat();
+
+    // On ne tient plus compte de la préférence utilisateur après la connexion
+    if (initChat != null)
+      initChat = null;
+  }
+
+  // Fonction initialisation cookie (identifiant)
+  function initCookieIdentifiant()
+  {
+    // Initialisation cookie identifiant
+    if (cookieIdentifiant == null)
     {
       setCookie("identifiant", currentUser);
-      cookie = getCookie("identifiant");
+      cookieIdentifiant = getCookie("identifiant");
     }
 
     // Si le cookie ne correspond pas à l'utilisateur, on détruit tous les cookies
-    if (cookie != currentUser)
+    if (cookieIdentifiant != currentUser)
     {
       deleteCookie("identifiant");
       deleteCookie("showChat");
       deleteCookie("windowChat");
       setCookie("identifiant", currentUser);
-      cookie = getCookie("identifiant");
+      cookieIdentifiant = getCookie("identifiant");
     }
   }
 
   // Fonction initialisation cookie (affichage chat)
-  function initCookieChat()
+  function initCookieShowChat()
   {
-    cookie = getCookie("showChat");
-
-    // Initialisation cookie état Chat
-    if (cookie == null)
+    if (initChat != null)
     {
-      setCookie("showChat", true);
-      cookie = getCookie("showChat");
+      // Initialisation cookie état Chat en fonction de la préférence utilisateur
+      setCookie("showChat", initChat);
+      cookieShowChat = getCookie("showChat");
     }
-
-    return cookie;
+    else
+    {
+      // Initialisation cookie état Chat par défaut
+      if (cookieShowChat == null)
+      {
+        setCookie("showChat", true);
+        cookieShowChat = getCookie("showChat");
+      }
+    }
   }
 
   // Fonction initialisation cookie (fenêtre chat)
-  function initWindowChat()
+  function initCookieWindowChat()
   {
-    cookie = getCookie("windowChat");
-
-    // Initialisation cookie état Chat
-    if (cookie == null)
+    if (initChat != null)
     {
-      setCookie("windowChat", "1");
-      cookie = getCookie("windowChat");
-    }
+      // Initialisation cookie fenêtre Chat en fonction de la préférence utilisateur
+      if (initChat == true)
+        setCookie("windowChat", "1");
+      else
+        setCookie("windowChat", "3");
 
-    return cookie;
+      cookieWindowChat = getCookie("windowChat");
+    }
+    else
+    {
+      // Initialisation cookie état Chat par défaut
+      if (cookieWindowChat == null)
+      {
+        setCookie("windowChat", "1");
+        cookieWindowChat = getCookie("windowChat");
+      }
+    }
   }
 
   // Fonction initialisation position chat (aussi présente dans scriptMH.js)
@@ -249,10 +287,10 @@ $(window).on('load', function()
   }
 
   // Fonction mise à jour de la vue
-  function initView(showChat, windowChat)
+  function initView(cookieShowChat, cookieWindowChat)
   {
-    //console.log('showChat : ' + showChat);
-    //console.log('windowChat : ' + windowChat);
+    /*console.log('cookieShowChat : ' + cookieShowChat);
+    console.log('cookieWindowChat : ' + cookieWindowChat);*/
 
     var html;
     var hide_chat_css;
@@ -260,7 +298,7 @@ $(window).on('load', function()
     var onglet_users_css;
     var cursor_css;
 
-    if (showChat == "true" && windowChat == "1")
+    if (cookieShowChat == "true" && cookieWindowChat == "1")
     {
       // Initialisation des affichages
       hide_chat_css    = '-';
@@ -301,7 +339,7 @@ $(window).on('load', function()
         html += '<button type="button" id="send_message_chat" title="Envoyer" class="bouton_chat"></button>';
       html += '</form>';
     }
-    else if (showChat == "true" && windowChat == "2")
+    else if (cookieShowChat == "true" && cookieWindowChat == "2")
     {
       // Initialisation des affichages
       hide_chat_css    = '-';
@@ -314,7 +352,7 @@ $(window).on('load', function()
         html += '<div id="utilisateurs_chat" class="contenu_onglet_users"></div>';
       html += '</div>';
     }
-    else if (showChat == "false")
+    else if (cookieShowChat == "false" || cookieWindowChat == "3")
     {
       // Initialisation des affichages
       hide_chat_css    = '+';

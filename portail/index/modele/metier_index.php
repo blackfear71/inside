@@ -49,6 +49,11 @@
             $_SESSION['user']['view_the_box']       = $donnees2['view_the_box'];
 						$_SESSION['user']['view_notifications'] = $donnees2['view_notifications'];
 
+            if ($donnees2['init_chat'] == "Y")
+              $_SESSION['chat']['show_chat'] = true;
+            else
+              $_SESSION['chat']['show_chat'] = false;
+
 						$reponse2->closeCursor();
 					}
 
@@ -99,6 +104,7 @@
 
     // Initialisations préférences
     $ref_theme              = "";
+    $init_chat              = "Y";
     $view_movie_house       = "H";
     $categories_movie_house = "Y;Y;Y;";
     $view_the_box           = "P";
@@ -169,6 +175,7 @@
           // On créé les préférences
           $req = $bdd->prepare('INSERT INTO preferences(identifiant,
                                                         ref_theme,
+                                                        init_chat,
                                                         view_movie_house,
                                                         categories_movie_house,
                                                         view_the_box,
@@ -176,6 +183,7 @@
                                                         manage_calendars)
                                                  VALUES(:identifiant,
                                                         :ref_theme,
+                                                        :init_chat,
                                                         :view_movie_house,
                                                         :categories_movie_house,
                                                         :view_the_box,
@@ -184,6 +192,7 @@
           $req->execute(array(
             'identifiant'            => $trigramme,
             'ref_theme'              => $ref_theme,
+            'init_chat'              => $init_chat,
             'view_movie_house'       => $view_movie_house,
             'categories_movie_house' => $categories_movie_house,
             'view_the_box'           => $view_the_box,
