@@ -1,7 +1,8 @@
 <?php
   include_once('appel_bdd.php');
 
-  session_start();
+  if (empty(session_id()))
+    session_start();
 
   global $bdd;
 

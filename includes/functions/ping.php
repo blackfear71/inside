@@ -3,8 +3,9 @@
   include_once('fonctions_dates.php');
   include_once('../classes/profile.php');
 
-  session_start();
-  
+  if (empty(session_id()))
+    session_start();
+
   global $bdd;
 
   switch ($_POST['function'])

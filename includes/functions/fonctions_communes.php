@@ -9,8 +9,8 @@
   function controlsIndex()
   {
     // Lancement de la session
-  	if (empty(session_id()))
-  	 session_start();
+    if (empty(session_id()))
+      session_start();
 
   	// Si déjà connecté
     if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
