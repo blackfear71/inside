@@ -111,13 +111,15 @@
               if (!empty($collector->getVotes()))
               {
                 echo '<div class="zone_votes_users">';
-                  // Smileys & pseudos
+                  // Smileys
                   foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
                   {
-                    // Smileys
                     echo '<img src="../../includes/icons/common/smileys/' . $keySmiley . '.png" alt="smiley" class="smiley_votes_' . $keySmiley . '" />';
+                  }
 
-                    // Pseudos
+                  // Pseudos
+                  foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
+                  {
                     $listeUsersSmiley = '';
 
                     foreach ($votesParSmiley as $vote)
