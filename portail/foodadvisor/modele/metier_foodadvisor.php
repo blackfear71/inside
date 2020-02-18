@@ -684,17 +684,31 @@
     // Contrôle choix saisi en double
     if ($control_ok == true)
     {
+      // On parcourt tous les choix
       for ($i = 1; $i <= $max_choices; $i++)
       {
         if (isset($post['select_lieu'][$i]) AND !empty($post['select_lieu'][$i]) AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
         {
+          // On parcourt à nouveau les choix pour contrôler
           for ($j = 1; $j <= $max_choices; $j++)
           {
             if (isset($post['select_lieu'][$j]) AND !empty($post['select_lieu'][$j]) AND isset($post['select_restaurant'][$j]) AND !empty($post['select_restaurant'][$j]))
             {
-              if ($i != $j AND $post['select_lieu'][$i] == $post['select_lieu'][$j] AND $post['select_restaurant'][$i] == $post['select_restaurant'][$j])
+              if ($i > $j AND $post['select_lieu'][$i] == $post['select_lieu'][$j] AND $post['select_restaurant'][$i] == $post['select_restaurant'][$j])
               {
-                $control_ok                         = false;
+                // On supprime la ligne du tableau si en double et on le signale
+                unset($post['select_lieu'][$i]);
+                unset($post['select_restaurant'][$i]);
+                unset($post['select_heures'][$i]);
+                unset($post['select_minutes'][$i]);
+                unset($post['checkbox_feet'][$i]);
+                unset($post['checkbox_bike'][$i]);
+                unset($post['checkbox_tram'][$i]);
+                unset($post['checkbox_car'][$i]);
+                unset($post['saisie_entree'][$i]);
+                unset($post['saisie_plat'][$i]);
+                unset($post['saisie_dessert'][$i]);
+
                 $_SESSION['alerts']['wrong_choice'] = true;
                 break;
               }
@@ -707,6 +721,7 @@
     // Contrôle choix déjà existant
     if ($control_ok == true)
     {
+      // On parcourt tous les choix
       for ($i = 1; $i <= $max_choices; $i++)
       {
         if (isset($post['select_lieu'][$i]) AND !empty($post['select_lieu'][$i]) AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
@@ -716,7 +731,19 @@
 
           if ($req1->rowCount() > 0)
           {
-            $control_ok                                 = false;
+            // On supprime la ligne du tableau si en double et on le signale
+            unset($post['select_lieu'][$i]);
+            unset($post['select_restaurant'][$i]);
+            unset($post['select_heures'][$i]);
+            unset($post['select_minutes'][$i]);
+            unset($post['checkbox_feet'][$i]);
+            unset($post['checkbox_bike'][$i]);
+            unset($post['checkbox_tram'][$i]);
+            unset($post['checkbox_car'][$i]);
+            unset($post['saisie_entree'][$i]);
+            unset($post['saisie_plat'][$i]);
+            unset($post['saisie_dessert'][$i]);
+
             $_SESSION['alerts']['wrong_choice_already'] = true;
             break;
           }
