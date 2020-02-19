@@ -237,13 +237,12 @@
       if (isset($listUsers[$myCollector->getAuthor()]))
         $myCollector->setPseudo_a($listUsers[$myCollector->getAuthor()]['pseudo']);
 
-      // Pseudo speaker
-      if (isset($listUsers[$myCollector->getSpeaker()]))
+      // Pseudo speaker (dont "autre" si besoin)
+      if ($myCollector->getType_s() == "other" AND !empty($myCollector->getSpeaker()))
+        $myCollector->setPseudo_s($myCollector->getSpeaker());
+      else
       {
-        // Pseudo auteur "autre" si besoin
-        if (!empty($myCollector->getSpeaker()) AND $myCollector->getType_s() == "other")
-          $myCollector->setPseudo_s($listUsers[$myCollector->getSpeaker()]['pseudo']);
-        else
+        if (isset($listUsers[$myCollector->getSpeaker()]))
         {
           $myCollector->setPseudo_s($listUsers[$myCollector->getSpeaker()]['pseudo']);
           $myCollector->setAvatar_s($listUsers[$myCollector->getSpeaker()]['avatar']);
