@@ -690,27 +690,26 @@
         if (isset($post['select_lieu'][$i]) AND !empty($post['select_lieu'][$i]) AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
         {
           // On parcourt à nouveau les choix pour contrôler
-          for ($j = 1; $j <= $max_choices; $j++)
+          for ($j = $i; $j <= $max_choices; $j++)
           {
             if (isset($post['select_lieu'][$j]) AND !empty($post['select_lieu'][$j]) AND isset($post['select_restaurant'][$j]) AND !empty($post['select_restaurant'][$j]))
             {
-              if ($i > $j AND $post['select_lieu'][$i] == $post['select_lieu'][$j] AND $post['select_restaurant'][$i] == $post['select_restaurant'][$j])
+              if ($j > $i AND $post['select_lieu'][$i] == $post['select_lieu'][$j] AND $post['select_restaurant'][$i] == $post['select_restaurant'][$j])
               {
                 // On supprime la ligne du tableau si en double et on le signale
-                unset($post['select_lieu'][$i]);
-                unset($post['select_restaurant'][$i]);
-                unset($post['select_heures'][$i]);
-                unset($post['select_minutes'][$i]);
-                unset($post['checkbox_feet'][$i]);
-                unset($post['checkbox_bike'][$i]);
-                unset($post['checkbox_tram'][$i]);
-                unset($post['checkbox_car'][$i]);
-                unset($post['saisie_entree'][$i]);
-                unset($post['saisie_plat'][$i]);
-                unset($post['saisie_dessert'][$i]);
+                unset($post['select_lieu'][$j]);
+                unset($post['select_restaurant'][$j]);
+                unset($post['select_heures'][$j]);
+                unset($post['select_minutes'][$j]);
+                unset($post['checkbox_feet'][$j]);
+                unset($post['checkbox_bike'][$j]);
+                unset($post['checkbox_tram'][$j]);
+                unset($post['checkbox_car'][$j]);
+                unset($post['saisie_entree'][$j]);
+                unset($post['saisie_plat'][$j]);
+                unset($post['saisie_dessert'][$j]);
 
                 $_SESSION['alerts']['wrong_choice'] = true;
-                break;
               }
             }
           }
@@ -731,7 +730,7 @@
 
           if ($req1->rowCount() > 0)
           {
-            // On supprime la ligne du tableau si en double et on le signale
+            // On supprime la ligne du tableau si déjà saisi et on le signale
             unset($post['select_lieu'][$i]);
             unset($post['select_restaurant'][$i]);
             unset($post['select_heures'][$i]);
@@ -745,7 +744,6 @@
             unset($post['saisie_dessert'][$i]);
 
             $_SESSION['alerts']['wrong_choice_already'] = true;
-            break;
           }
 
           $req1->closeCursor();
@@ -771,9 +769,20 @@
             {
               if (date('N') == $keyOpened + 1 AND $opened == "N")
               {
-                $control_ok                     = false;
+                // On supprime la ligne du tableau si le restaurant n'est pas ouvert et on le signale
+                unset($post['select_lieu'][$i]);
+                unset($post['select_restaurant'][$i]);
+                unset($post['select_heures'][$i]);
+                unset($post['select_minutes'][$i]);
+                unset($post['checkbox_feet'][$i]);
+                unset($post['checkbox_bike'][$i]);
+                unset($post['checkbox_tram'][$i]);
+                unset($post['checkbox_car'][$i]);
+                unset($post['saisie_entree'][$i]);
+                unset($post['saisie_plat'][$i]);
+                unset($post['saisie_dessert'][$i]);
+
                 $_SESSION['alerts']['not_open'] = true;
-                break;
               }
             }
           }
