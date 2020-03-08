@@ -1347,6 +1347,12 @@ footer
 	cursor: pointer;
 }
 
+/*** Tailles ***/
+.width_100
+{
+	width: 100%;
+}
+
 /*** Marges ***/
 .margin_top_moins_10
 {
