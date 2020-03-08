@@ -24,7 +24,9 @@
         echo '<div class="zone_saisie">';
           echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="255" class="saisie_titre" required />';
 
-          echo '<input type="submit" name="new_idea" value="Soumettre" class="saisie_bouton width_200" />';
+          echo '<div class="zone_bouton_saisie">';
+            echo '<input type="submit" name="new_idea" value="Soumettre" id="bouton_saisie_idea" class="saisie_bouton" />';
+          echo '</div>';
 
           echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu"></textarea>';
         echo '</div>';

@@ -486,6 +486,75 @@ function loadingPage()
   });
 }
 
+// Cache un bouton de soumission si tous les champs obligatoires sont renseignés
+function hideSubmitButton(zone, button, form)
+{
+  var hideButton = true;
+
+  // On vérifie chaque saisie obligatoire
+  form.find('input, textarea').each(function()
+  {
+    if ($(this).prop('required') == true && $(this).val() == "")
+    {
+      hideButton = false;
+      return false;
+    }
+  });
+
+  if (hideButton == true)
+  {
+    // On fait disparaitre le bouton
+    button.css('display', 'none');
+
+    // On bloque les saisies
+    form.find('input, textarea').each(function()
+    {
+      $(this).prop('readonly', true);
+    });
+
+    // On ajoute le symbole de chargement
+    var loading = "";
+
+    loading += '<div class="zone_loading_form">';
+      loading += '<div id="loading_form" class="loading_form"></div>';
+    loading += '</div>';
+
+    zone.append(loading);
+
+    // On lance l'animation
+    loadingForm();
+  }
+}
+
+// Animation chargement soumission formulaire
+function loadingForm()
+{
+  $('#loading_form').css("height", "5px");
+  $('#loading_form').css("margin-left", 0);
+  $('#loading_form').css("opacity", 1);
+
+  $('#loading_form').animate(
+  {
+    width: "+=100%",
+    marginLeft: "0%"
+  }, 800, "easeInOutCubic", function()
+  {
+    $('#loading_form').animate(
+    {
+      width: "-=100%",
+      marginLeft: "100%"
+    }, 800, "easeInOutCubic", function()
+    {
+      $('#loading_form').css("opacity", 0);
+
+      setTimeout(function()
+      {
+        loadingForm()
+      }, 200);
+    });
+  });
+}
+
 // Génère le chemin vers l'avatar
 function formatAvatar(avatar, pseudo, niveau, alt)
 {

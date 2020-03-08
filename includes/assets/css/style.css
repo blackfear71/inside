@@ -933,6 +933,20 @@ aside
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+/*** Symbole chargement formulaire ***/
+.zone_loading_form
+{
+	width: 100%;
+}
+
+.loading_form
+{
+	width: 0px;
+	background-color: #262626;
+	border-radius: 50px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 /*** Zoom images ***/
 .fond_zoom
 {

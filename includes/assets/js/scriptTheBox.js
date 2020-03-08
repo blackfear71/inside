@@ -18,6 +18,16 @@ $(function()
     if ($(event.target).attr('class') == 'fond_saisie_idea')
       closeInput('zone_add_idea');
   });
+
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_idea').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
 });
 
 // Au redimensionnement de la fenêtre
