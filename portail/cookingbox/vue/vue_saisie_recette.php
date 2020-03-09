@@ -28,7 +28,9 @@
           echo '</div>';
 
           // Bouton d'ajout
-          echo '<input type="submit" name="insert_recipe" value="Ajouter" class="saisie_bouton" />';
+          echo '<div class="zone_bouton_saisie">';
+            echo '<input type="submit" name="insert_recipe" value="Ajouter" id="bouton_saisie_recette" class="saisie_bouton" />';
+          echo '</div>';
         echo '</div>';
 
         // Zone saisie infos

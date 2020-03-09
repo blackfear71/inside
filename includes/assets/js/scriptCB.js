@@ -103,6 +103,16 @@ $(function()
       closeInput();
   });
 
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_recette').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   /*** Actions au changement ***/
   // Charge l'image (saisie)
   $('.loadSaisieRecette').on('change', function()

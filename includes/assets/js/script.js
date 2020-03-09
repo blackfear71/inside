@@ -514,6 +514,11 @@ function hideSubmitButton(zone, button, form)
       $(this).css('color', '#a3a3a3');
     });
 
+    // Blocage des saisies spécifiques
+    // Ajout ingrédient recette
+    if ($('#addIngredient').length)
+      $('#addIngredient').css('display', 'none');
+
     // On ajoute le symbole de chargement
     var loading = "";
 

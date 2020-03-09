@@ -501,10 +501,20 @@
 	margin-top: -3px;
 }
 
-.saisie_bouton
+.zone_bouton_saisie
 {
 	display: block;
+	width: 100%;
   margin-top: 13px;
+}
+
+.form_saisie_recette .zone_loading_form
+{
+  margin-top: 26.5px;
+}
+
+.saisie_bouton
+{
 	width: 100%;
   height: 32px;
 	line-height: 32px;
