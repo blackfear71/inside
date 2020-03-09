@@ -511,6 +511,7 @@ function hideSubmitButton(zone, button, form)
     {
       $(this).prop('readonly', true);
       $(this).css('pointer-events', 'none');
+      $(this).css('color', '#a3a3a3');
     });
 
     // On ajoute le symbole de chargement
