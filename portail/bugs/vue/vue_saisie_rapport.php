@@ -62,9 +62,11 @@
               echo '<option value="E">Evolution</option>';
           echo '</select>';
 
-          echo '<input type="submit" name="report" value="Soumettre" class="saisie_bouton" />';
+          echo '<div class="zone_bouton_saisie">';
+            echo '<input type="submit" name="report" value="Soumettre" id="bouton_saisie_bug" class="saisie_bouton" />';
+          echo '</div>';
 
-          echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu">' . $_SESSION['save']['content_bug'] . '</textarea>';
+          echo '<textarea placeholder="Description du problème" name="content_bug" class="saisie_contenu" required>' . $_SESSION['save']['content_bug'] . '</textarea>';
         echo '</div>';
       echo '</form>';
     echo '</div>';

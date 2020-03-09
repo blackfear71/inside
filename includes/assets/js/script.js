@@ -492,7 +492,7 @@ function hideSubmitButton(zone, button, form)
   var hideButton = true;
 
   // On vérifie chaque saisie obligatoire
-  form.find('input, textarea').each(function()
+  form.find('input, textarea, select').each(function()
   {
     if ($(this).prop('required') == true && $(this).val() == "")
     {
@@ -507,9 +507,10 @@ function hideSubmitButton(zone, button, form)
     button.css('display', 'none');
 
     // On bloque les saisies
-    form.find('input, textarea').each(function()
+    form.find('input, textarea, select').each(function()
     {
       $(this).prop('readonly', true);
+      $(this).css('pointer-events', 'none');
     });
 
     // On ajoute le symbole de chargement
