@@ -113,11 +113,25 @@
 	margin-top: -4px;
 }
 
-.bouton_validation
+.zone_bouton_saisie
+{
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.zone_saisie_calendrier .zone_loading_form
+{
+	padding-top: 13.5px;
+  padding-bottom: 13.5px;
+}
+
+.saisie_bouton
 {
 	width: 100%;
 	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
@@ -125,14 +139,13 @@
 	cursor: pointer;
 	text-align: center;
 	border: 0;
-	vertical-align: top;
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.bouton_validation:hover
+.saisie_bouton:hover
 {
-	color: white;
 	background-color: #ff1937;
+	color: white;
 }
 
 /*** Années ***/

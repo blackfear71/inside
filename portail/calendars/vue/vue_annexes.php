@@ -76,7 +76,9 @@
                   echo '<input type="text" name="title" value="" placeholder="Nom" maxlength="255" class="titre_annexe" required />';
 
                   // Bouton validation
-                  echo '<input type="submit" name="send_annexe" value="Valider" class="bouton_validation" />';
+                  echo '<div class="zone_bouton_saisie">';
+                    echo '<input type="submit" name="send_annexe" value="Valider" id="bouton_saisie_annexe" class="saisie_bouton" />';
+                  echo '</div>';
                 echo '</form>';
               echo '</div>';
             }

@@ -108,7 +108,9 @@
                   echo '</div>';
 
                   // Bouton validation
-                  echo '<input type="submit" name="send" value="Valider" class="bouton_validation" />';
+                  echo '<div class="zone_bouton_saisie">';
+                    echo '<input type="submit" name="send" value="Valider" id="bouton_saisie_calendrier" class="saisie_bouton" />';
+                  echo '</div>';
                 echo '</form>';
               echo '</div>';
             }
