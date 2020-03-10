@@ -325,6 +325,16 @@ $(function()
     hideSubmitButton(zoneButton, submitButton, formSaisie);
   });
 
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_choix').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie_choix');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   /*** Actions au changement ***/
   // Change la couleur du type à la saisie
   $(document).on('input', '.saisieType', function()
@@ -815,19 +825,19 @@ function addChoice(id, zone)
   // On ajoute de nouveaux champs de saisie
   html  = '<div class="titre_choix"><img src="/inside/includes/icons/foodadvisor/' + icon + '.png" alt="' + icon + '" class="logo_proposition" />Proposition ' + new_num + '</div>';
 
-  html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_listbox">';
+  html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_element_choix">';
     html += '<a id="choix_restaurant_' + new_num + '" class="bouton_choix afficherLieu"><span class="fond_plus">+</span>Restaurant</a>';
   html += '</div>';
 
-  html += '<div id="zone_listbox_horaire_' + new_num + '" class="zone_listbox">';
+  html += '<div id="zone_listbox_horaire_' + new_num + '" class="zone_element_choix">';
     html += '<a id="choix_horaire_' + new_num + '" class="bouton_choix afficherHoraire"><span class="fond_plus">+</span>Horaire</a>';
   html += '</div>';
 
-  html += '<div id="zone_checkbox_transports_' + new_num + '" class="zone_listbox">';
+  html += '<div id="zone_checkbox_transports_' + new_num + '" class="zone_element_choix">';
     html += '<a id="choix_transports_' + new_num + '" class="bouton_choix afficherTransports"><span class="fond_plus">+</span>Transport</a>';
   html += '</div>';
 
-  html += '<div id="zone_saisie_menu_' + new_num + '" class="zone_listbox">';
+  html += '<div id="zone_saisie_menu_' + new_num + '" class="zone_element_choix">';
     html += '<a id="choix_menu_' + new_num + '" class="bouton_choix afficherMenu"><span class="fond_plus">+</span>Menu</a>';
   html += '</div>';
 

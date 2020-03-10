@@ -59,7 +59,7 @@
 	transition: transform 0.2s ease;
 }
 
-.form_choices
+.form_saisie_choix
 {
 	width: 100%;
 	margin-left: auto;
@@ -91,7 +91,7 @@
 	height: 30px;
 }
 
-.zone_listbox
+.zone_element_choix
 {
 	display: inline-block;
 	width: calc(25% - 50px);
@@ -125,17 +125,17 @@
 .bouton_autre_choix
 {
 	display: inline-block;
-	width: 250px;
-	margin-top: 9px;
+	width: 270px;
+	vertical-align: middle;
 	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
-	vertical-align: top;
 }
 
 .bouton_choix:hover, .bouton_autre_choix:hover
@@ -144,15 +144,26 @@
 	color: white;
 }
 
-.bouton_validation_choix
+.zone_bouton_saisie_choix
 {
 	display: inline-block;
-	width: 250px;
-	margin-top: 9px;
-	margin-bottom: 10px;
-	margin-left: 10px;
+	width: 270px;
+	vertical-align: middle;
+	margin: 10px 0 10px 10px;
+}
+
+.form_saisie_choix .zone_loading_form
+{
+  padding-top: 13.5px;
+  padding-bottom: 13.5px;
+}
+
+.bouton_validation_choix
+{
+	width: 100%;
 	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
@@ -160,7 +171,6 @@
 	cursor: pointer;
 	text-align: center;
 	border: 0;
-	vertical-align: top;
 }
 
 .bouton_validation_choix:hover

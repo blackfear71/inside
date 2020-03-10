@@ -527,6 +527,18 @@ function hideSubmitButton(zone, button, form)
     if ($('#addType').length)
       $('#addType').css('display', 'none');
 
+    // Ajout autre proposition
+    if ($('#saisie_autre_choix').length)
+      $('#saisie_autre_choix').css('display', 'none');
+
+    // Ajout élément choix
+    if ($('.zone_element_choix').length)
+      $('.zone_element_choix').css('pointer-events', 'none');
+
+    // Annuler élément choix
+    if ($('.bouton_annuler').length)
+      $('.bouton_annuler').css('pointer-events', 'none');
+
     // On ajoute le symbole de chargement
     var loading = "";
 
