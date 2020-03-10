@@ -107,6 +107,26 @@ $(function()
     });
   });
 
+  // Bloque le bouton de soumission si besoin (phrase culte)
+  $('#bouton_saisie_collector').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie_collector');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
+  // Bloque le bouton de soumission si besoin (image culte)
+  $('#bouton_saisie_image').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie_image');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   /*** Actions au changement ***/
   // Applique les filtres
   $('#applySort, #applyFilter').on('change', function()

@@ -480,7 +480,7 @@ function loadingPage()
 
       setTimeout(function()
       {
-        loadingPage()
+        loadingPage();
       }, 200);
     });
   });
@@ -529,34 +529,37 @@ function hideSubmitButton(zone, button, form)
     zone.append(loading);
 
     // On lance l'animation
-    loadingForm();
+    loadingForm(zone);
   }
 }
 
 // Animation chargement soumission formulaire
-function loadingForm()
+function loadingForm(zone)
 {
-  $('#loading_form').css("height", "5px");
-  $('#loading_form').css("margin-left", 0);
-  $('#loading_form').css("opacity", 1);
+  // On récupère la classe CSS du parent dans le cas où il y a plusieurs symboles possibles sur la même page
+  var classZone = zone.attr('class');
 
-  $('#loading_form').animate(
+  $('.' + classZone + ' .loading_form').css("height", "5px");
+  $('.' + classZone + ' .loading_form').css("margin-left", 0);
+  $('.' + classZone + ' .loading_form').css("opacity", 1);
+
+  $('.' + classZone + ' .loading_form').animate(
   {
     width: "+=100%",
     marginLeft: "0%"
   }, 800, "easeInOutCubic", function()
   {
-    $('#loading_form').animate(
+    $('.' + classZone + ' .loading_form').animate(
     {
       width: "-=100%",
       marginLeft: "100%"
     }, 800, "easeInOutCubic", function()
     {
-      $('#loading_form').css("opacity", 0);
+      $('.' + classZone + ' .loading_form').css("opacity", 0);
 
       setTimeout(function()
       {
-        loadingForm()
+        loadingForm(zone);
       }, 200);
     });
   });

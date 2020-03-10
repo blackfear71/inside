@@ -234,8 +234,8 @@
 .saisie_objet
 {
 	display: inline-block;
-	vertical-align: middle;
   width: calc(70% - 220px);
+	vertical-align: middle;
 	margin-right: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -252,8 +252,8 @@
 .saisie_type
 {
 	display: inline-block;
-	vertical-align: middle;
 	width: calc(30% - 20px);
+	vertical-align: middle;
 	margin-right: 10px;
 	padding-left: 5px;
 	padding-right: 5px;

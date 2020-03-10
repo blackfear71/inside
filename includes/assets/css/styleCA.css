@@ -115,7 +115,7 @@
 
 .zone_bouton_saisie
 {
-	display: inline-block;
+	display: block;
 	width: 100%;
 	vertical-align: middle;
 }

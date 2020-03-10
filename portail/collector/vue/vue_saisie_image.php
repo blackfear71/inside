@@ -10,7 +10,7 @@
       // Bouton fermeture
       echo '<a id="fermerImage" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
-      echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_collector">';
+      echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_image">';
         // Type de saisie
         echo '<input type="hidden" name="type_collector" value="I" />';
 
@@ -62,7 +62,9 @@
           echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_image" class="saisie_date_collector" required />';
 
           // Bouton
-          echo '<input type="submit" name="insert_collector" value="Ajouter" class="saisie_bouton" />';
+          echo '<div class="zone_bouton_saisie_image">';
+            echo '<input type="submit" name="insert_collector" value="Ajouter" id="bouton_saisie_image" class="saisie_bouton" />';
+          echo '</div>';
 
           // Saisie contexte
           echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte_image">' . $_SESSION['save']['context'] . '</textarea>';
