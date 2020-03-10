@@ -38,6 +38,16 @@ $(function()
       closeInput();
   });
 
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_depense').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   // Affiche les explications
   $('#afficherExplications').click(function()
   {

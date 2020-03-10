@@ -36,9 +36,12 @@
           echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';
 
           // Bouton validation
-          echo '<input type="submit" name="add_depense" value="Valider" class="bouton_validation" />';
+          echo '<div class="zone_bouton_saisie">';
+            //echo '<input type="submit" name="add_depense" value="Valider" id="bouton_saisie_depense" class="saisie_bouton" />';
+            echo '<div id="bouton_saisie_depense" class="saisie_bouton">Valider</div>';
+          echo '</div>';
 
-          // Afficahge explications
+          // Affichage explications
           echo '<a id="afficherExplications" class="lien_explications">';
             echo '<span class="fond_plus">+</span>';
             echo 'Fonctionnement';

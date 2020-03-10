@@ -519,6 +519,10 @@ function hideSubmitButton(zone, button, form)
     if ($('#addIngredient').length)
       $('#addIngredient').css('display', 'none');
 
+    // Bouton modification parts dépense
+    if ($('.bouton_qte').length)
+      $('.bouton_qte').css('pointer-events', 'none');
+
     // On ajoute le symbole de chargement
     var loading = "";
 
