@@ -19,6 +19,16 @@ $(function()
       closeInput('zone_saisie_film');
   });
 
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_film').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   // Change la couleur des switch restaurant film
   $('.label_switch').click(function()
   {

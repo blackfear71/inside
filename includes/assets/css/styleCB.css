@@ -510,7 +510,8 @@
 
 .form_saisie_recette .zone_loading_form
 {
-  margin-top: 26.5px;
+  padding-top: 13.5px;
+  padding-bottom: 13.5px;
 }
 
 .saisie_bouton

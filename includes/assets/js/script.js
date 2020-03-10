@@ -507,7 +507,7 @@ function hideSubmitButton(zone, button, form)
     button.css('display', 'none');
 
     // On bloque les saisies
-    form.find('input, textarea, select').each(function()
+    form.find('input, textarea, select, label').each(function()
     {
       $(this).prop('readonly', true);
       $(this).css('pointer-events', 'none');

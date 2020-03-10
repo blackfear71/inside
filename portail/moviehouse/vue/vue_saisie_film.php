@@ -221,7 +221,9 @@
           echo '</div>';
 
           // Bouton d'ajout
-          echo '<input type="submit" name="saisie_film" value="Ajouter le film" class="saisie_bouton" />';
+          echo '<div class="zone_bouton_saisie">';
+            echo '<input type="submit" name="saisie_film" value="Ajouter le film" id="bouton_saisie_film" class="saisie_bouton" />';
+          echo '</div>';
         echo '</div>';
       echo '</form>';
     echo '</div>';
