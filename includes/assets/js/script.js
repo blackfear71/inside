@@ -523,6 +523,10 @@ function hideSubmitButton(zone, button, form)
     if ($('.bouton_qte').length)
       $('.bouton_qte').css('pointer-events', 'none');
 
+    // Ajout type restaurant
+    if ($('#addType').length)
+      $('#addType').css('display', 'none');
+
     // On ajoute le symbole de chargement
     var loading = "";
 

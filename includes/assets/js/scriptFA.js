@@ -315,6 +315,16 @@ $(function()
     }
   });
 
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_restaurant').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   /*** Actions au changement ***/
   // Change la couleur du type à la saisie
   $(document).on('input', '.saisieType', function()

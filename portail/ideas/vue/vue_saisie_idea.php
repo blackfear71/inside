@@ -24,6 +24,7 @@
         echo '<div class="zone_saisie">';
           echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="255" class="saisie_titre" required />';
 
+          // Bouton d'ajout
           echo '<div class="zone_bouton_saisie">';
             echo '<input type="submit" name="new_idea" value="Soumettre" id="bouton_saisie_idea" class="saisie_bouton width_100" />';
           echo '</div>';

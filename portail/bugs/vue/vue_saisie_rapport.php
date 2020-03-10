@@ -62,6 +62,7 @@
               echo '<option value="E">Evolution</option>';
           echo '</select>';
 
+          // Bouton d'ajout
           echo '<div class="zone_bouton_saisie">';
             echo '<input type="submit" name="report" value="Soumettre" id="bouton_saisie_bug" class="saisie_bouton" />';
           echo '</div>';

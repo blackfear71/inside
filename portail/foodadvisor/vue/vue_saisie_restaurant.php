@@ -90,7 +90,9 @@
             echo '<input type="text" name="saisie_other_location" placeholder="Lieu personnalisé" maxlength="255" id="saisie_other_location" class="saisie_lieu_autre_restaurant" style="display: none;" />';
 
           // Bouton d'ajout
-          echo '<input type="submit" name="insert_restaurant" value="Ajouter" class="saisie_bouton" />';
+          echo '<div class="zone_bouton_saisie">';
+            echo '<input type="submit" name="insert_restaurant" value="Ajouter" id="bouton_saisie_restaurant" class="saisie_bouton" />';
+          echo '</div>';
 
           // Types
           echo '<div id="types_restaurants">';
