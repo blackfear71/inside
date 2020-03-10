@@ -37,8 +37,7 @@
 
           // Bouton validation
           echo '<div class="zone_bouton_saisie">';
-            //echo '<input type="submit" name="add_depense" value="Valider" id="bouton_saisie_depense" class="saisie_bouton" />';
-            echo '<div id="bouton_saisie_depense" class="saisie_bouton">Valider</div>';
+            echo '<input type="submit" name="add_depense" value="Valider" id="bouton_saisie_depense" class="saisie_bouton" />';
           echo '</div>';
 
           // Affichage explications
