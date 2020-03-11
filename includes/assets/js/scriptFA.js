@@ -1271,22 +1271,20 @@ function showDetails(zone, id)
     $('#lafourchette_details_proposition').attr('href', '');
   }
 
-  // Bouton réservation (si on a participé)
+  // Vérification si l'utilisateur participe
   var participe = false;
 
-  if (details['reserved'] != "Y")
+  $.each(details['details'], function()
   {
-    $.each(details['details'], function()
+    if (userSession == this['identifiant'])
     {
-      if (userSession == this['identifiant'])
-      {
-        participe = true;
-        return false;
-      }
-    });
-  }
+      participe = true;
+      return false;
+    }
+  });
 
-  if (participe == true)
+  // Bouton réservation (si on a participé)
+  if (participe == true && details['reserved'] != "Y")
   {
     $('#reserver_details_proposition').css('display', 'block');
     $('#reserver_details_proposition').attr('action', 'foodadvisor.php?action=doReserver');
@@ -1298,7 +1296,7 @@ function showDetails(zone, id)
   }
 
   // Bouton complet (si appelant sur choix déterminé)
-  if (participe == true && details['determined'] == "Y" && userSession == details['caller'])
+  if (participe == true && details['reserved'] != "Y" && details['determined'] == "Y" && userSession == details['caller'])
   {
     $('#choice_complete_details_proposition').css('display', 'block');
     $('#choice_complete_details_proposition').attr('action', 'foodadvisor.php?action=doComplet');
@@ -1315,12 +1313,13 @@ function showDetails(zone, id)
   else
     $('#reserved_details_proposition').css('display', 'none');
 
-  // Bouton annulation réservation (si on a participé)
+  // Vérification si l'utilisateur a réservé
   var reserved = false;
 
   if (details['reserved'] == "Y" && userSession == details['caller'])
     reserved = true;
 
+  // Bouton annulation réservation (si on a participé)
   if (reserved == true)
   {
     $('#annuler_details_proposition').css('display', 'block');
@@ -1333,12 +1332,12 @@ function showDetails(zone, id)
   }
 
   // Id restaurant
-  if (participe == true)
+  if (participe == true && details['reserved'] != "Y")
     $('#reserver_details_proposition > input[name=id_restaurant]').val(id);
   else
     $('#reserver_details_proposition > input[name=id_restaurant]').val('');
 
-  if (participe == true && details['determined'] == "Y" && userSession == details['caller'])
+  if (participe == true && details['reserved'] != "Y" && details['determined'] == "Y" && userSession == details['caller'])
     $('#choice_complete_details_proposition > input[name=id_restaurant]').val(id);
   else
     $('#choice_complete_details_proposition > input[name=id_restaurant]').val('');
@@ -1349,10 +1348,10 @@ function showDetails(zone, id)
     $('#annuler_details_proposition > input[name=id_restaurant]').val('');
 
   // On cache la zone si tout est vide
-  if ((!$('#reserver_details_proposition').length         || $('#reserver_details_proposition').css('display')         == "none")
-  &&  (!$('#choice_complete_details_proposition').length  || $('#choice_complete_details_proposition').css('display')  == "none")
-  &&  (!$('#annuler_details_proposition').length          || $('#annuler_details_proposition').css('display')          == "none")
-  &&  (!$('#reserved_details_proposition').length         || $('#reserved_details_proposition').css('display')         == "none"))
+  if ((!$('#reserver_details_proposition').length        || $('#reserver_details_proposition').css('display')        == "none")
+  &&  (!$('#choice_complete_details_proposition').length || $('#choice_complete_details_proposition').css('display') == "none")
+  &&  (!$('#annuler_details_proposition').length         || $('#annuler_details_proposition').css('display')         == "none")
+  &&  (!$('#reserved_details_proposition').length        || $('#reserved_details_proposition').css('display')        == "none"))
     $('#indicateurs_details_proposition').css('display', 'none');
   else
     $('#indicateurs_details_proposition').css('display', 'block');
