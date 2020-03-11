@@ -2576,11 +2576,24 @@
 	resize: vertical;
 }
 
-.icon_validate_restaurant
+.zone_bouton_validation
 {
 	float: right;
-	margin-right: 8px;
+	margin-right: 7px;
 	margin-top: 10px;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+.zone_bouton_validation .zone_loading_form
+{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.icon_validate_restaurant
+{
   width: 35px;
   height: 35px;
   border: 0;
@@ -2597,7 +2610,7 @@
 .icone_cancel_restaurant
 {
 	float: right;
-	margin-right: -35px;
+	margin-right: -36px;
 	margin-top: 55px;
   width: 35px;
   height: 35px;

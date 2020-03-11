@@ -335,6 +335,16 @@ $(function()
     hideSubmitButton(zoneButton, submitButton, formSaisie);
   });
 
+  // Bloque le bouton de validation si besoin
+  $('.icon_validate_restaurant').click(function()
+  {
+    var submitButton = $('#' + $(this).attr('id'));
+    var zoneButton   = $('#' + submitButton.parent().attr('id'));
+    var formSaisie   = submitButton.closest('form');
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie);
+  });
+
   /*** Actions au changement ***/
   // Change la couleur du type à la saisie
   $(document).on('input', '.saisieType', function()

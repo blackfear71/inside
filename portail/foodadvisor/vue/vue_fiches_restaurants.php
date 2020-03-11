@@ -113,7 +113,7 @@
                 echo '</a>';
 
                 // Suppression
-                echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doSupprimer">';
+                echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doSupprimer" class="lien_supprimer_restaurant">';
                   echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
                   echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer le restaurant" class="icon_delete_restaurant eventConfirm" />';
                   echo '<input type="hidden" value="Supprimer ce restaurant de la liste ?" class="eventMessage" />';
@@ -137,7 +137,7 @@
                   // Affichage du bouton de choix rapide
                   if ($already_voted == false)
                   {
-                    echo '<form method="post" action="restaurants.php?action=doChoixRapide">';
+                    echo '<form method="post" action="restaurants.php?action=doChoixRapide" class="lien_choix_rapide_restaurant">';
                       echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
                       echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_restaurant" />';
                     echo '</form>';
@@ -247,8 +247,9 @@
 
               echo '<div class="zone_fiche_right">';
                 // Validation modification
-                echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" class="icon_validate_restaurant" />';
-
+                echo '<div id="zone_bouton_validation_' . $restaurant->getId() . '" class="zone_bouton_validation">';
+                  echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icon_validate_restaurant" />';
+                echo '</div>';
                 // Annulation modification
                 echo '<a id="annuler_' . $restaurant->getId() . '" title="Annuler" class="icone_cancel_restaurant annulerRestaurant"></a>';
               echo '</div>';

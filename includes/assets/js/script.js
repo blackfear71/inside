@@ -523,9 +523,29 @@ function hideSubmitButton(zone, button, form)
     if ($('.bouton_qte').length)
       $('.bouton_qte').css('pointer-events', 'none');
 
-    // Ajout type restaurant
+    // Ajout type restaurant (ajout restaurant)
     if ($('#addType').length)
       $('#addType').css('display', 'none');
+
+    // Ajout type restaurant (modification restaurant)
+    if ($('#' + form.parent().attr('id') + ' .bouton_type_autre').length)
+      $('#' + form.parent().attr('id') + ' .bouton_type_autre').css('display', 'none');
+
+    // Boutons d'action modification restaurants
+    if ($('.lien_modifier_restaurant').length)
+      $('.lien_modifier_restaurant').css('display', 'none');
+
+    if ($('.lien_supprimer_restaurant').length)
+      $('.lien_supprimer_restaurant').css('display', 'none');
+
+    if ($('.lien_choix_rapide_restaurant').length)
+      $('.lien_choix_rapide_restaurant').css('display', 'none');
+
+    if ($('.icon_validate_restaurant').length)
+      $('.icon_validate_restaurant').css('display', 'none');
+
+    if ($('.icone_cancel_restaurant').length)
+      $('.icone_cancel_restaurant').css('display', 'none');
 
     // Ajout autre proposition
     if ($('#saisie_autre_choix').length)
