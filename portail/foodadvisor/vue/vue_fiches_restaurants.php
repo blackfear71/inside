@@ -250,6 +250,7 @@
                 echo '<div id="zone_bouton_validation_' . $restaurant->getId() . '" class="zone_bouton_validation">';
                   echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icon_validate_restaurant" />';
                 echo '</div>';
+
                 // Annulation modification
                 echo '<a id="annuler_' . $restaurant->getId() . '" title="Annuler" class="icone_cancel_restaurant annulerRestaurant"></a>';
               echo '</div>';

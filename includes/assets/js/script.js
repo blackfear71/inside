@@ -487,7 +487,7 @@ function loadingPage()
 }
 
 // Cache un bouton de soumission si tous les champs obligatoires sont renseignés
-function hideSubmitButton(zone, button, form)
+function hideSubmitButton(zone, button, form, tabBlock)
 {
   var hideButton = true;
 
@@ -514,50 +514,19 @@ function hideSubmitButton(zone, button, form)
       $(this).css('color', '#a3a3a3');
     });
 
-    // Blocage des saisies spécifiques
-    // Ajout ingrédient recette
-    if ($('#addIngredient').length)
-      $('#addIngredient').css('display', 'none');
+    // Blocage des saisies spécifiques à partir d'un tableau
+    if (tabBlock != null)
+    {
+      $.each(tabBlock, function()
+      {
+        var element  = $(this).attr('element');
+        var property = $(this).attr('property');
+        var value    = $(this).attr('value');
 
-    // Bouton modification parts dépense
-    if ($('.bouton_qte').length)
-      $('.bouton_qte').css('pointer-events', 'none');
-
-    // Ajout type restaurant (ajout restaurant)
-    if ($('#addType').length)
-      $('#addType').css('display', 'none');
-
-    // Ajout type restaurant (modification restaurant)
-    if ($('#' + form.parent().attr('id') + ' .bouton_type_autre').length)
-      $('#' + form.parent().attr('id') + ' .bouton_type_autre').css('display', 'none');
-
-    // Boutons d'action modification restaurants
-    if ($('.lien_modifier_restaurant').length)
-      $('.lien_modifier_restaurant').css('display', 'none');
-
-    if ($('.lien_supprimer_restaurant').length)
-      $('.lien_supprimer_restaurant').css('display', 'none');
-
-    if ($('.lien_choix_rapide_restaurant').length)
-      $('.lien_choix_rapide_restaurant').css('display', 'none');
-
-    if ($('.icon_validate_restaurant').length)
-      $('.icon_validate_restaurant').css('display', 'none');
-
-    if ($('.icone_cancel_restaurant').length)
-      $('.icone_cancel_restaurant').css('display', 'none');
-
-    // Ajout autre proposition
-    if ($('#saisie_autre_choix').length)
-      $('#saisie_autre_choix').css('display', 'none');
-
-    // Ajout élément choix
-    if ($('.zone_element_choix').length)
-      $('.zone_element_choix').css('pointer-events', 'none');
-
-    // Annuler élément choix
-    if ($('.bouton_annuler').length)
-      $('.bouton_annuler').css('pointer-events', 'none');
+        if ($(element).length)
+          $(element).css(property, value);
+      });
+    }
 
     // On ajoute le symbole de chargement
     var loading = "";

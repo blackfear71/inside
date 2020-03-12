@@ -113,8 +113,9 @@ $(function()
     var zoneButton   = $('.zone_bouton_saisie_collector');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = null;
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   // Bloque le bouton de soumission si besoin (image culte)
@@ -123,8 +124,9 @@ $(function()
     var zoneButton   = $('.zone_bouton_saisie_image');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = null;
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   /*** Actions au changement ***/

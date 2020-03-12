@@ -44,8 +44,12 @@ $(function()
     var zoneButton   = $('.zone_bouton_saisie');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    // Blocage spécifique (bouton modification parts dépense)
+    tabBlock.push({element: '.bouton_qte', property: 'pointer-events', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   // Affiche les explications

@@ -109,8 +109,12 @@ $(function()
     var zoneButton   = $('.zone_bouton_saisie');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    // Blocage spécifique (ajout ingrédient recette)
+    tabBlock.push({element: '#addIngredient', property: 'display', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   /*** Actions au changement ***/

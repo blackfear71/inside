@@ -25,8 +25,9 @@ $(function()
     var zoneButton   = $('.zone_bouton_saisie');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = null;
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   // Change la couleur des switch restaurant film

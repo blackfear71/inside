@@ -315,24 +315,34 @@ $(function()
     }
   });
 
-  // Bloque le bouton de soumission si besoin
+  // Bloque le bouton de soumission si besoin (ajout)
   $('#bouton_saisie_restaurant').click(function()
   {
     var zoneButton   = $('.zone_bouton_saisie');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    // Blocage spécifique (ajout type restaurant - ajout restaurant)
+    tabBlock.push({element: '#addType', property: 'display', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
-  // Bloque le bouton de soumission si besoin
+  // Bloque le bouton de soumission si besoin (modification)
   $('#bouton_saisie_choix').click(function()
   {
     var zoneButton   = $('.zone_bouton_saisie_choix');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    // Blocage spécifique (boutons actions)
+    tabBlock.push({element: '#saisie_autre_choix', property: 'display', value: 'none'});
+    tabBlock.push({element: '.zone_element_choix', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.bouton_annuler', property: 'pointer-events', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   // Bloque le bouton de validation si besoin
@@ -341,8 +351,19 @@ $(function()
     var submitButton = $('#' + $(this).attr('id'));
     var zoneButton   = $('#' + submitButton.parent().attr('id'));
     var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
 
-    hideSubmitButton(zoneButton, submitButton, formSaisie);
+    // Blocage spécifique (ajout type restaurant - modification restaurant)
+    tabBlock.push({element: '#' + formSaisie.parent().attr('id') + ' .bouton_type_autre', property: 'display', value: 'none'});
+
+    // Blocage spécifique (liens actions)
+    tabBlock.push({element: '.lien_modifier_restaurant', property: 'display', value: 'none'});
+    tabBlock.push({element: '.lien_supprimer_restaurant', property: 'display', value: 'none'});
+    tabBlock.push({element: '.lien_choix_rapide_restaurant', property: 'display', value: 'none'});
+    tabBlock.push({element: '.icon_validate_restaurant', property: 'display', value: 'none'});
+    tabBlock.push({element: '.icone_cancel_restaurant', property: 'display', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   /*** Actions au changement ***/
