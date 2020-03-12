@@ -354,7 +354,7 @@ $(function()
     var tabBlock     = [];
 
     // Blocage spécifique (ajout type restaurant - modification restaurant)
-    tabBlock.push({element: '#' + formSaisie.parent().attr('id') + ' .bouton_type_autre', property: 'display', value: 'none'});
+    tabBlock.push({element: '.bouton_update_type_autre', property: 'display', value: 'none'});
 
     // Blocage spécifique (liens actions)
     tabBlock.push({element: '.lien_modifier_restaurant', property: 'display', value: 'none'});
@@ -362,6 +362,20 @@ $(function()
     tabBlock.push({element: '.lien_choix_rapide_restaurant', property: 'display', value: 'none'});
     tabBlock.push({element: '.icon_validate_restaurant', property: 'display', value: 'none'});
     tabBlock.push({element: '.icone_cancel_restaurant', property: 'display', value: 'none'});
+
+    // Blocage spécifique (toutes zones de saisie autres restaurants)
+    tabBlock.push({element: '.zone_fiches_restaurants input', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_fiches_restaurants input', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_fiches_restaurants input', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.zone_fiches_restaurants textarea', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_fiches_restaurants textarea', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_fiches_restaurants textarea', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.zone_fiches_restaurants select', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_fiches_restaurants select', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_fiches_restaurants select', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.zone_fiches_restaurants label', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_fiches_restaurants label', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_fiches_restaurants label', property: 'color', value: '#a3a3a3'});
 
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });

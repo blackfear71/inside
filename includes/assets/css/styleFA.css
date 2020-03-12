@@ -1956,7 +1956,7 @@
 	width: 100%;
 }
 
-.bouton_type_autre
+.bouton_type_autre, .bouton_update_type_autre
 {
 	display: inline-block;
 	vertical-align: top;
@@ -1977,13 +1977,13 @@
   user-select: none;
 }
 
-.bouton_type_autre:hover
+.bouton_type_autre:hover, .bouton_update_type_autre:hover
 {
 	background-color: #70d55d;
 	color: white;
 }
 
-.bouton_type_autre:hover .fond_plus
+.bouton_type_autre:hover .fond_plus, .bouton_update_type_autre:hover .fond_plus
 {
 	background-color: white;
 	color: #262626;
