@@ -69,7 +69,10 @@
                 echo '<img id="avatar" alt="" class="avatar_update_profil" />';
               echo '</div>';
 
-              echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" class="bouton_validation" />';
+              // Bouton
+              echo '<div class="zone_bouton_saisie">';
+                echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="saisie_bouton" />';
+              echo '</div>';
             echo '</form>';
 
             // Mise à jour informations

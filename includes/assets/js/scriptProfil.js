@@ -100,6 +100,17 @@ $(function()
     changeTheme(background, header, footer, logo);
   });
 
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_avatar').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+    var tabBlock     = null;
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+  });
+
   /*** Actions au changement ***/
   // Charge l'avatar
   $('.loadAvatar').on('change', function()
