@@ -365,9 +365,8 @@
 
 .icone_modify_collector
 {
-	float: left;
-	margin-left: 10px;
-	margin-top: 10px;
+	display: inline-block;
+	vertical-align: middle;
   width: 30px;
   height: 30px;
   background-image: url("/inside/includes/icons/common/edit.png");
@@ -378,11 +377,15 @@
   cursor: pointer;
 }
 
+.form_delete_collector
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
 .icon_delete_collector
 {
-	float: left;
-	margin-left: 10px;
-	margin-top: 10px;
   width: 30px;
   height: 30px;
   border: 0;
@@ -394,11 +397,25 @@
   cursor: pointer;
 }
 
-.icon_validate_collector
+.zone_bouton_validation
 {
 	float: left;
 	margin-left: 10px;
 	margin-top: 10px;
+	width: 70px;
+	height: 30px;
+}
+
+.zone_bouton_validation .zone_loading_form
+{
+  padding-top: 12.5px;
+  padding-bottom: 12.5px;
+}
+
+.icon_validate_collector
+{
+	display: inline-block;
+	vertical-align: middle;
   width: 30px;
   height: 30px;
   border: 0;
@@ -412,9 +429,9 @@
 
 .icone_cancel_collector
 {
-	float: left;
+	display: inline-block;
+	vertical-align: middle;
 	margin-left: 10px;
-	margin-top: 10px;
   width: 30px;
   height: 30px;
   border: 0;

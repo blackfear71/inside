@@ -16,26 +16,29 @@
             else
               echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
 
-              // Modification
-              echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
+              // Boutons d'action
+              echo '<div class="zone_bouton_validation">';
+                // Modification
+                echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
 
-              // Suppression
-              if ($collector->getType_collector() == "T")
-              {
-                echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '">';
-                  echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
-                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector eventConfirm" />';
-                  echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="eventMessage" />';
-                echo '</form>';
-              }
-              elseif ($collector->getType_collector() == "I")
-              {
-                echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '">';
-                  echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
-                  echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector eventConfirm" />';
-                  echo '<input type="hidden" value="Supprimer cette image ?" class="eventMessage" />';
-                echo '</form>';
-              }
+                // Suppression
+                if ($collector->getType_collector() == "T")
+                {
+                  echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                    echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
+                    echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector eventConfirm" />';
+                    echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="eventMessage" />';
+                  echo '</form>';
+                }
+                elseif ($collector->getType_collector() == "I")
+                {
+                  echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                    echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
+                    echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector eventConfirm" />';
+                    echo '<input type="hidden" value="Supprimer cette image ?" class="eventMessage" />';
+                  echo '</form>';
+                }
+              echo '</div>';
 
               // Avatar
               $avatarFormatted = formatAvatar($collector->getAvatar_s(), $collector->getPseudo_s(), 2, "avatar");
@@ -148,11 +151,14 @@
               echo '<div class="zone_collector_haut">';
               echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
 
-              // Validation modification
-              echo '<input type="submit" name="modify_collector" value="" title="Valider" class="icon_validate_collector" />';
+              // Boutons d'action
+              echo '<div id="zone_bouton_validation_' . $collector->getId() . '" class="zone_bouton_validation">';
+                // Validation modification
+                echo '<input type="submit" name="modify_collector" value="" title="Valider" id="bouton_validation_collector_' . $collector->getId() . '" class="icon_validate_collector" />';
 
-              // Annulation modification
-              echo '<a id="annuler_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
+                // Annulation modification
+                echo '<a id="annuler_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
+              echo '</div>';
 
               // Avatar
               $avatarFormatted = formatAvatar($collector->getAvatar_s(), $collector->getPseudo_s(), 2, "avatar");

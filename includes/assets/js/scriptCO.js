@@ -129,6 +129,40 @@ $(function()
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
+  // Bloque le bouton de validation si besoin
+  $('.icon_validate_collector').click(function()
+  {
+    var submitButton = $('#' + $(this).attr('id'));
+    var zoneButton   = $('#' + submitButton.parent().attr('id'));
+    var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
+
+    // Blocage spécifique (smileys vote)
+    tabBlock.push({element: '.link_current_vote', property: 'pointer-events', value: 'none'});
+
+    // Blocage spécifique (liens actions)
+    tabBlock.push({element: '.icone_modify_collector', property: 'display', value: 'none'});
+    tabBlock.push({element: '.icon_delete_collector', property: 'display', value: 'none'});
+    tabBlock.push({element: '.icon_validate_collector', property: 'display', value: 'none'});
+    tabBlock.push({element: '.icone_cancel_collector', property: 'display', value: 'none'});
+
+    // Blocage spécifique (toutes zones de saisie autres restaurants)
+    tabBlock.push({element: '.zone_collectors input', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_collectors input', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_collectors input', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.zone_collectors textarea', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_collectors textarea', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_collectors textarea', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.zone_collectors select', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_collectors select', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_collectors select', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.zone_collectors label', property: 'readonly', value: true});
+    tabBlock.push({element: '.zone_collectors label', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.zone_collectors label', property: 'color', value: '#a3a3a3'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+  });
+
   /*** Actions au changement ***/
   // Applique les filtres
   $('#applySort, #applyFilter').on('change', function()
