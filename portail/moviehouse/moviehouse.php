@@ -48,11 +48,14 @@
   {
     case 'goConsulter':
       // Contrôle si l'année est renseignée et numérique
-      if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
+      if (!isset($_GET['year']) OR (!is_numeric($_GET['year']) AND $_GET['year'] != 'none'))
         header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+      // Contrôle de la vue pour les films à date non communiquée
+      elseif ($_GET['year'] == 'none' AND $_GET['view'] != 'cards')
+        header('location: moviehouse.php?view=cards&year=' . $_GET['year'] . '&action=goConsulter');
+      // Lecture liste des données par le modèle
       else
       {
-        // Lecture liste des données par le modèle
         $anneeExistante = controlYear($_GET['year']);
         $ongletsYears   = getOnglets();
         $preferences    = getPreferences($_SESSION['user']['identifiant']);

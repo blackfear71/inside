@@ -41,22 +41,13 @@
           // Date de sortie cinéma
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date de sortie cinéma" class="icone_saisie" />';
-
-            if (isset($_SESSION['save']['date_theater_saisie']) AND !empty($_SESSION['save']['date_theater_saisie']))
-              $date_a_tester = substr($_SESSION['save']['date_theater_saisie'], 6, 4) . substr($_SESSION['save']['date_theater_saisie'], 3, 2) . substr($_SESSION['save']['date_theater_saisie'], 0, 2);
-            else
-              $date_a_tester = "";
-
-            if (isBlankDate($date_a_tester, substr($_SESSION['save']['date_theater_saisie'], 6, 4)))
-              echo '<input type="text" name="date_theater" value="" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';
-            else
-              echo '<input type="text" name="date_theater" value="' . formatDateForDisplay($_SESSION['save']['date_theater_saisie']) . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';
+            echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';
           echo '</div>';
 
           // Date de sortie DVD
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date de sortie DVD/Bluray" class="icone_saisie" />';
-            echo '<input type="text" name="date_release" value="' . formatDateForDisplay($_SESSION['save']['date_release_saisie']) . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_2" class="saisie_ligne" />';
+            echo '<input type="text" name="date_release" value="' . $_SESSION['save']['date_release_saisie'] . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_2" class="saisie_ligne" />';
           echo '</div>';
 
           // Lien trailer
@@ -100,7 +91,7 @@
           // Date sortie
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date proposée" class="icone_saisie" />';
-            echo '<input type="text" name="date_doodle" value="' . formatDateForDisplay($_SESSION['save']['date_doodle_saisie']) . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_doodle" class="saisie_ligne_short" />';
+            echo '<input type="text" name="date_doodle" value="' . $_SESSION['save']['date_doodle_saisie'] . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_doodle" class="saisie_ligne_short" />';
 
             // Selection de l'heure
             echo '<select name="hours_doodle" class="select_time">';

@@ -273,10 +273,10 @@
                 // Date sortie cinéma
                 echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie au cinéma</div></div>';
                 echo '<div class="contenu_detail">';
-                  if (isBlankDate($detailsFilm->getDate_theater(), substr($detailsFilm->getDate_theater(), 0, 4)))
-                    echo 'Non communiquée';
-                  else
+                  if (!empty($detailsFilm->getDate_theater()))
                     echo formatDateForDisplay($detailsFilm->getDate_theater());
+                  else
+                    echo 'Non communiquée';
                 echo '</div>';
 
                 // Date sortie DVD / Bluray
@@ -313,20 +313,22 @@
                   switch ($detailsFilm->getRestaurant())
                   {
                     case "B":
-                      echo 'Avant';
+                      echo '<span class="before_after_restaurant">Avant</span>';
+
                       if (!empty($detailsFilm->getPlace()))
-                        echo ' : ' . $detailsFilm->getPlace();
+                        echo $detailsFilm->getPlace();
                       break;
 
                     case "A":
-                      echo 'Après';
+                      echo '<span class="before_after_restaurant">Après</span>';
+
                       if (!empty($detailsFilm->getPlace()))
-                        echo ' : ' . $detailsFilm->getPlace();
+                        echo $detailsFilm->getPlace();
                       break;
 
                     case "N":
                     default:
-                      echo 'Aucun';
+                      echo '<span class="no_restaurant">Aucun</span>';
                       break;
                   }
                 echo '</div>';

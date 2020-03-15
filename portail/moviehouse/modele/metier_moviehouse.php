@@ -5,17 +5,28 @@
   {
     $annee_existante = false;
 
-    if (isset($year) AND is_numeric($year))
+    if (isset($year))
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date_theater, 1, 4) FROM movie_house WHERE to_delete != "Y" ORDER BY SUBSTR(date_theater, 1, 4) ASC');
-      while ($donnees = $reponse->fetch())
+      if (is_numeric($year))
       {
-        if ($year == $donnees['SUBSTR(date_theater, 1, 4)'])
+        $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = "' . $year . '" AND to_delete != "Y"');
+
+        if ($reponse->rowCount() > 0)
           $annee_existante = true;
+
+        $reponse->closeCursor();
       }
-      $reponse->closeCursor();
+      elseif ($year == "none")
+      {
+        $reponse = $bdd->query('SELECT * FROM movie_house WHERE date_theater = "" AND to_delete != "Y"');
+
+        if ($reponse->rowCount() > 0)
+          $annee_existante = true;
+
+        $reponse->closeCursor();
+      }
     }
 
     return $annee_existante;
@@ -83,13 +94,8 @@
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $monday . '" AND date_theater <= "' . $sunday . '" ORDER BY id DESC');
     while ($donnees = $reponse->fetch())
     {
-      // Récupération des données si la date le permet
-      if (!isBlankDate($donnees['date_theater'], substr($donnees['date_theater'], 0, 4)))
-      {
-        $mySemaine = Movie::withData($donnees);
-
-        array_push($listSemaine, $mySemaine);
-      }
+      $mySemaine = Movie::withData($donnees);
+      array_push($listSemaine, $mySemaine);
     }
     $reponse->closeCursor();
 
@@ -298,13 +304,13 @@
     $identifiant_add = $user;
     $identifiant_del = "";
     $synopsis        = $post['synopsis'];
-    $date_theater    = "";
-    $date_release    = "";
+    $date_theater    = formatDateForInsert($post['date_theater']);
+    $date_release    = formatDateForInsert($post['date_release']);
     $link            = $post['link'];
     $poster          = $post['poster'];
     $trailer         = $post['trailer'];
     $doodle          = $post['doodle'];
-    $date_doodle     = "";
+    $date_doodle     = formatDateForInsert($post['date_doodle']);
 
     if (!empty($post['date_doodle']) AND isset($post['hours_doodle']) AND isset($post['minutes_doodle']))
       $time_doodle = $post['hours_doodle'] . $post['minutes_doodle'];
@@ -318,29 +324,9 @@
     $id_url = extract_url($trailer);
 
     // Contrôle date sortie cinéma
-    if ($control_ok == true)
+    if (isset($post['date_theater']) AND !empty($post['date_theater']))
     {
-  		$date_a_verifier_1 = $post['date_theater'];
-
-      // Vérification date à vide
-  		if (empty($date_a_verifier_1))
-  		{
-  			if (isLastDayOfYearWednesday(date('Y')))
-  			{
-  				$date_a_verifier_1 = '30/12/' . date('Y');
-  				$date_theater      = date('Y') . '1230';
-  			}
-  			else
-  			{
-  				$date_a_verifier_1 = '31/12/' . date('Y');
-  				$date_theater      = date('Y') . '1231';
-  			}
-  		}
-  		else
-  			$date_theater = formatDateForInsert($date_a_verifier_1);
-
-      // On contrôle la date
-      if (validateDate($date_a_verifier_1, "d/m/Y") != true)
+      if (validateDate($post['date_theater'], "d/m/Y") != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -352,16 +338,11 @@
     {
       if (isset($post['date_release']) AND !empty($post['date_release']))
       {
-        $date_a_verifier_2 = $post['date_release'];
-
-        // On contrôle la date
-        if (validateDate($date_a_verifier_2, "d/m/Y") != true)
+        if (validateDate($post['date_release'], "d/m/Y") != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
         }
-        else
-          $date_release = formatDateForInsert($date_a_verifier_2);
       }
     }
 
@@ -370,23 +351,18 @@
     {
       if (isset($post['date_doodle']) AND !empty($post['date_doodle']))
       {
-        $date_a_verifier_3 = $post['date_doodle'];
-
-        // On contrôle la date
-        if (validateDate($date_a_verifier_3, "d/m/Y") != true)
+        if (validateDate($post['date_doodle'], "d/m/Y") != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
         }
-        else
-          $date_doodle = formatDateForInsert($date_a_verifier_3);
       }
     }
 
     // Contrôle date Doodle >= date sortie film
     if ($control_ok == true)
     {
-      if (isset($post['date_theater']) AND !empty($post['date_theater']) AND isset($post['date_doodle']) AND !empty($post['date_doodle']))
+      if (!empty($date_theater) AND !empty($date_doodle))
       {
         if ($date_doodle < $date_theater)
         {

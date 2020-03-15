@@ -525,11 +525,6 @@
 	background-color: #13a2e9;
 }
 
-.titre_rouge
-{
-	background-color: #ff1937;
-}
-
 .fond_hide
 {
 	float: left;
@@ -1282,6 +1277,29 @@
 	font-size: 120%;
 	margin-top: -10px;
 	margin-bottom: 10px;
+}
+
+.no_restaurant
+{
+	font-family: robotomedium, Verdana, sans-serif;
+	background-color: #ff1937;
+	color: white;
+	border-radius: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.before_after_restaurant
+{
+	font-family: robotomedium, Verdana, sans-serif;
+	background-color: #70d55d;
+	color: white;
+	border-radius: 2px;
+	margin-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 /*** Commentaires ***/

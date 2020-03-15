@@ -46,41 +46,58 @@
 
       foreach ($ongletsYears as $year)
       {
-        // Année inexistante (première ou au milieu)
-        if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $ongletsYears[0]))
+        if (!empty($year))
         {
-          if ($i % 2 == 0)
-            echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
-          else
-            echo '<span class="year active">' . $_GET['year'] . '</span>';
+          // Année inexistante (première ou au milieu)
+          if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $ongletsYears[0]))
+          {
+            if ($i % 2 == 0)
+              echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
+            else
+              echo '<span class="year active">' . $_GET['year'] . '</span>';
 
-          $lastYear = false;
+            $lastYear = false;
+            $i++;
+          }
+
+          // Année existante
+          if ($i % 2 == 0)
+          {
+            if (isset($_GET['year']) AND $year == $_GET['year'])
+              echo '<span class="year active margin_right_20">' . $year . '</span>';
+            else
+              echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
+          }
+          else
+          {
+            if (isset($_GET['year']) AND $year == $_GET['year'])
+              echo '<span class="year active">' . $year . '</span>';
+            else
+              echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
+          }
+
+          $previousYear = $year;
           $i++;
         }
-
-        // Année existante
-        if ($i % 2 == 0)
-        {
-          if (isset($_GET['year']) AND $year == $_GET['year'])
-            echo '<span class="year active margin_right_20">' . $year . '</span>';
-          else
-            echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
-        }
-        else
-        {
-          if (isset($_GET['year']) AND $year == $_GET['year'])
-            echo '<span class="year active">' . $year . '</span>';
-          else
-            echo '<a href="moviehouse.php?view=' . $_GET['view'] . '&year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
-        }
-
-        $previousYear = $year;
-        $i++;
       }
 
       // Année inexistante (dernière)
       if ($lastYear == true AND $anneeExistante == false)
-        echo '<span class="year active">' . $_GET['year'] . '</span>';
+      {
+        if ($i % 2 == 0)
+          echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
+        else
+          echo '<span class="year active">' . $_GET['year'] . '</span>';
+      }
+
+      // Date non communiquée
+      if (end($ongletsYears) == "")
+      {
+        if (isset($_GET['year']) AND $_GET['year'] == "none")
+          echo '<span class="year active">N. C.</span>';
+        else
+          echo '<a href="moviehouse.php?view=cards&year=none&action=goConsulter" class="year inactive">N. C.</a>';
+      }
     }
     else
       echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';

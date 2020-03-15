@@ -5,9 +5,12 @@
     /****************/
     echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section">';
-        echo 'Les films de ' . $_GET['year'];
+        if ($_GET['year'] != "none")
+          echo 'Les films de ' . $_GET['year'];
+        else
+          echo 'Les films (date de sortie non communiquée)';
 
-        if (!empty($listeFilms))
+        if ($_GET['year'] != "none" AND !empty($listeFilms))
         {
           echo '<div class="zone_actions">';
             echo '<a id="fold_all" class="bouton_fold">Tout plier</a>';
@@ -29,33 +32,36 @@
                         "09" => "Septembre",
                         "10" => "Octobre",
                         "11" => "Novembre",
-                        "12" => "Décembre",
-                        "13" => "Date non communiquée"
+                        "12" => "Décembre"
                        );
 
     if (!empty($listeFilms))
     {
+      // Début de la Masonry si liste des films N. C.
+      if ($_GET['year'] == "none")
+        echo '<div class="zone_fiches_films">';
+
       foreach ($listeFilms as $keyFilm => $film)
       {
-        if (!isBlankDate($film->getDate_theater(), $_GET['year']))
-          $currentMonth = substr($film->getDate_theater(), 4, 2);
-        else
-          $currentMonth = "13";
-
-        if ($currentMonth != $prevMonth)
+        // Titre du mois et début de la zone Masonry du mois
+        if (!empty($film->getDate_theater()))
         {
-          $prevMonth = $currentMonth;
+          $currentMonth = substr($film->getDate_theater(), 4, 2);
 
-          if ($currentMonth == date("m") AND $_GET['year'] == date("Y"))
-            echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
-          elseif ($currentMonth == "13")
-            echo '<div class="titre_mois_films titre_rouge"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
-          else
-            echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
+          if ($currentMonth != $prevMonth)
+          {
+            $prevMonth = $currentMonth;
 
-          echo '<div class="zone_fiches_films" id="hide_films_' . $currentMonth . '">';
+            if ($currentMonth == date("m") AND $_GET['year'] == date("Y"))
+              echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
+            else
+              echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
+
+            echo '<div class="zone_fiches_films" id="hide_films_' . $currentMonth . '">';
+          }
         }
 
+        // Fiche
         echo '<div class="zone_fiche_film" id="' . $film->getId() . '">';
 
         if ($film->getParticipation() == "S")
@@ -81,13 +87,14 @@
                   echo '<div class="titre_fiche">' . $film->getFilm() . '</div>';
 
                   // Date sortie cinéma
-                  if (!isBlankDate($film->getDate_theater(), $_GET['year']))
-                  {
-                    echo '<div class="date_fiche">';
-                      echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="icone_fiche" />';
+                  echo '<div class="date_fiche">';
+                    echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="icone_fiche" />';
+
+                    if (!empty($film->getDate_theater()))
                       echo formatDateForDisplay($film->getDate_theater());
-                    echo '</div>';
-                  }
+                    else
+                      echo 'Non communiquée';
+                  echo '</div>';
 
                   // Date sortie Doodle
                   if (!empty($film->getDate_doodle()))
@@ -192,10 +199,14 @@
           echo '</div>';
         echo '</div>';
 
-        // Termine la zone Masonry du mois
-        if (!isset($listeFilms[$keyFilm + 1]) OR $currentMonth < substr($listeFilms[$keyFilm + 1]->getDate_theater(), 4, 2) OR ($currentMonth == "12" AND isBlankDate($listeFilms[$keyFilm + 1]->getDate_theater(), $_GET['year'])))
+        // Fin de la zone Masonry du mois
+        if (!empty($film->getDate_theater()) AND (!isset($listeFilms[$keyFilm + 1]) OR (!empty($film->getDate_theater()) AND $currentMonth < substr($listeFilms[$keyFilm + 1]->getDate_theater(), 4, 2))))
           echo '</div>';
       }
+
+      // Fin de la zone Masonry si liste des films N. C.
+      if ($_GET['year'] == "none")
+        echo '</div>';
     }
     else
       echo '<div class="empty">Pas de films pour cette année...</div>';

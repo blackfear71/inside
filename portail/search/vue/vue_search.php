@@ -73,7 +73,7 @@
                         echo '</td>';
 
                         echo '<td class="zone_resultat_info">';
-                          if (!isBlankDate($resultatsMH->getDate_theater(), substr($resultatsMH->getDate_theater(), 0, 4)))
+                          if (!empty($resultatsMH->getDate_theater()))
                             echo 'Sortie au cinéma le ' . formatDateForDisplay($resultatsMH->getDate_theater());
                           else
                             echo 'Sortie au cinéma non communiquée';
