@@ -153,14 +153,4 @@
 
 		return $dist_format;
 	}
-
-	/////////////////////////////////////
-	// Fonction formatage explications //
-	/////////////////////////////////////
-	function formatExplanation($string, $replace, $search)
-	{
-		$explanations = str_replace($search, $replace, $string);
-
-		return $explanations;
-	}
 ?>

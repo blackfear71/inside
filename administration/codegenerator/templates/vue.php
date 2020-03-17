@@ -27,7 +27,7 @@
     </header>
 
     <!-- Contenu -->
-    <section>/*alerts*/
+    <section>/*alerts*//*success*/
       <article>
         <?php/*missions*/
           /*********/

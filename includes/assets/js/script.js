@@ -108,6 +108,12 @@ $(function()
     deployLeftMenu('left_menu', 'icon_menu_m', 'icon_menu_e', 'icon_menu_n', 'icon_menu_u');
   });
 
+  // Fermeture zoom succès
+  $('#closeZoomSuccess').click(function()
+  {
+    closeSuccess();
+  });
+
   /*** Actions au passage de la souris ***/
   $('#color_search').mouseover(function()
   {
@@ -571,6 +577,15 @@ function loadingForm(zone)
         loadingForm(zone);
       }, 200);
     });
+  });
+}
+
+// Ferme le zoom d'un succès
+function closeSuccess()
+{
+  $('.fond_zoom_succes').fadeOut(200, function()
+  {
+    $('.fond_zoom_succes').remove();
   });
 }
 

@@ -81,25 +81,25 @@
 
                   // Niveau
                   echo '<div class="titre_succes">Niveau :</div>';
-                  echo '<input type="text" value="' . $success->getLevel() . '" name="level[' . $success->getId() . ']" maxlength="4" class="saisie_modification_succes" />';
+                  echo '<input type="text" value="' . $success->getLevel() . '" name="level[' . $success->getId() . ']" maxlength="4" class="saisie_modification_succes" required />';
 
                   // Ordonnancement
                   echo '<div class="titre_succes">Ordre :</div>';
-                  echo '<input type="text" value="' . $success->getOrder_success() . '" name="order_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                  echo '<input type="text" value="' . $success->getOrder_success() . '" name="order_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" required />';
                 echo '</div>';
 
                 echo '<div class="succes_mod_right">';
                   // Titre succès
                   echo '<div class="titre_succes">Titre :</div>';
-                  echo '<input type="text" value="' . $success->getTitle() . '" name="title[' . $success->getId() . ']" class="saisie_modification_succes" />';
+                  echo '<input type="text" value="' . $success->getTitle() . '" name="title[' . $success->getId() . ']" class="saisie_modification_succes" required />';
 
                   // Description succès
                   echo '<div class="titre_succes">Description :</div>';
-                  echo '<textarea name="description[' . $success->getId() . ']" class="textarea_modification_succes">' . $success->getDescription() . '</textarea>';
+                  echo '<textarea name="description[' . $success->getId() . ']" class="textarea_modification_succes" required>' . $success->getDescription() . '</textarea>';
 
                   // Condition succès
                   echo '<div class="titre_succes">Condition :</div>';
-                  echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" />';
+                  echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" required />';
 
                   // Code défini
                   echo '<div class="titre_succes">Code défini :</div>';
@@ -120,7 +120,7 @@
                 echo '<div class="succes_mod_bottom">';
                   // Explications
                   echo '<div class="titre_succes">Explications :</div>';
-                  echo '<textarea name="explanation[' . $success->getId() . ']" class="textarea_modification_succes_2">' . $success->getExplanation() . '</textarea>';
+                  echo '<textarea name="explanation[' . $success->getId() . ']" class="textarea_modification_succes_2" required>' . $success->getExplanation() . '</textarea>';
                 echo '</div>';
               echo '</div>';
 

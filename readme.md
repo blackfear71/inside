@@ -54,6 +54,7 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 | ----------------| :------------------------------------------------------: | -------- | ------------------ | -------------------------------------- |
 | Jaune clair     | ![#fffd4c](https://placehold.it/15/fffd4c/000000?text=+) | #fffd4c  |                    |                                        |
 | Jaune moyen     | ![#ffad01](https://placehold.it/15/ffad01/000000?text=+) | #ffad01  |                    |                                        |
+| Jaune foncé     | ![#c48500](https://placehold.it/15/c48500/000000?text=+) | #c48500  |                    |                                        |
 | Rouge           | ![#ff1937](https://placehold.it/15/ff1937/000000?text=+) | #ff1937  | rgb(255, 25, 55)   | Rouge CGI, couleur principale          |
 | Rouge           | ![#c81932](https://placehold.it/15/c81932/000000?text=+) | #c81932  | rgb(200, 25, 50)   | Pour contraste (rift)                  |
 | Bleu clair      | ![#2eb2f4](https://placehold.it/15/2eb2f4/000000?text=+) | #2eb2f4  |                    |                                        |
@@ -84,6 +85,7 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | generator | Contient les données du générateur de code               |
 | index     | Contient les données de l'écran de connexion             |
 | missions  | Contient les données des missions générées               |
+| success   | Contient les données des succès débloqués                |
 | theme     | Contient les données des thèmes                          |
 | user      | Contient les données utilisateurs et préférences         |
 

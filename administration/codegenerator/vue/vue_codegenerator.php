@@ -70,13 +70,13 @@
               // Paramétrage des données
               echo '<form method="post" action="codegenerator.php?action=generateCode">';
                 // Nom fonctionnel
-                echo '<input type="text" name="nom_fonctionnel" placeholder="Nom de la section" value="' . $generatorParameters->getNom_section() . '" class="saisie_generator margin_right_20" required>';
+                echo '<input type="text" name="nom_fonctionnel" placeholder="Nom de la section (à afficher)" value="' . $generatorParameters->getNom_section() . '" class="saisie_generator margin_right_20" required>';
 
                 // Nom technique
-                echo '<input type="text" name="nom_technique" placeholder="Nom technique" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
+                echo '<input type="text" name="nom_technique" placeholder="Nom technique (dossiers)" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
 
                 // Nom head
-                echo '<input type="text" name="nom_head" placeholder="Nom Head" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator margin_right_20" required>';
+                echo '<input type="text" name="nom_head" placeholder="Nom Head (onglet)" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator margin_right_20" required>';
 
                 // Style spécifique
                 echo '<input type="text" name="style_specifique" placeholder="Style CSS spécifique" value="' . $generatorParameters->getStyle_specifique() . '" class="saisie_generator margin_right_20">';

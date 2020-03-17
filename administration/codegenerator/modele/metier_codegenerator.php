@@ -9,13 +9,14 @@
                      array('option' => 'dates',      'checked' => 'N', 'titre' => 'Fonctions dates',    'categorie' => 'Contrôleur'),
                      array('option' => 'regex',      'checked' => 'N', 'titre' => 'Fonctions regex',    'categorie' => 'Contrôleur'),
                      array('option' => 'admin',      'checked' => 'N', 'titre' => 'Page admin',         'categorie' => 'Contrôleur'),
-                     array('option' => 'angular',    'checked' => 'N', 'titre' => 'Angular',            'categorie' => 'Commun'),
-                     array('option' => 'chat',       'checked' => 'Y', 'titre' => 'Chat',               'categorie' => 'Commun'),
-                     array('option' => 'datepicker', 'checked' => 'N', 'titre' => 'Datepicker',         'categorie' => 'Commun'),
-                     array('option' => 'masonry',    'checked' => 'N', 'titre' => 'Masonry',            'categorie' => 'Commun'),
-                     array('option' => 'exif',       'checked' => 'N', 'titre' => 'Données EXIF',       'categorie' => 'Commun'),
-                     array('option' => 'onglets',    'checked' => 'Y', 'titre' => 'Onglets',            'categorie' => 'Commun'),
-                     array('option' => 'alerts',     'checked' => 'Y', 'titre' => 'Alertes',            'categorie' => 'Commun')
+                     array('option' => 'angular',    'checked' => 'N', 'titre' => 'Angular',            'categorie' => 'Vue'),
+                     array('option' => 'chat',       'checked' => 'Y', 'titre' => 'Chat',               'categorie' => 'Vue'),
+                     array('option' => 'datepicker', 'checked' => 'N', 'titre' => 'Datepicker',         'categorie' => 'Vue'),
+                     array('option' => 'masonry',    'checked' => 'N', 'titre' => 'Masonry',            'categorie' => 'Vue'),
+                     array('option' => 'exif',       'checked' => 'N', 'titre' => 'Données EXIF',       'categorie' => 'Vue'),
+                     array('option' => 'onglets',    'checked' => 'Y', 'titre' => 'Onglets',            'categorie' => 'Vue'),
+                     array('option' => 'alerts',     'checked' => 'Y', 'titre' => 'Alertes',            'categorie' => 'Vue'),
+                     array('option' => 'success',    'checked' => 'Y', 'titre' => 'Déblocage succès',   'categorie' => 'Vue')
                     );
 
     return $options;
@@ -211,8 +212,8 @@
   function getVue($generatorParameters)
   {
     // Initialisations
-    $nom_fonctionnel   = trim($generatorParameters->getNom_section());
-    $nom_head          = trim($generatorParameters->getNom_head());
+    $nom_fonctionnel = trim($generatorParameters->getNom_section());
+    $nom_head        = trim($generatorParameters->getNom_head());
 
     $search   = array(" ", ".css", ".js");
     $replace  = array("_", "", "");
@@ -298,6 +299,15 @@
 ', $vue);
     else
       $vue = str_replace('/*alerts*/', '', $vue);
+
+    // Déblocage succès (hors admin)
+    if ($options['admin']->getChecked() != 'Y' AND $options['success']->getChecked() == 'Y')
+      $vue = str_replace('/*success*/', '
+      <!-- Déblocage succès -->
+      <?php include(\'../../includes/common/success.php\'); ?>
+', $vue);
+    else
+      $vue = str_replace('/*success*/', '', $vue);
 
     // Missions
     if ($options['admin']->getChecked() == 'Y')

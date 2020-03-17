@@ -16,18 +16,18 @@
     {
       if (isset($alert) AND $alert == true)
       {
-        $reponse2 = $bdd->query('SELECT * FROM alerts WHERE alert = "' . $key_alert . '"');
-        $donnees2 = $reponse2->fetch();
+        $reponse = $bdd->query('SELECT * FROM alerts WHERE alert = "' . $key_alert . '"');
+        $donnees = $reponse->fetch();
 
         // On ajoute la ligne au tableau (logo + message)
-        if ($reponse2->rowCount() > 0)
-          $ligneMessage = array('logo' => $donnees2['type'], 'texte' => $donnees2['message']);
+        if ($reponse->rowCount() > 0)
+          $ligneMessage = array('logo' => $donnees['type'], 'texte' => $donnees['message']);
         else
           $ligneMessage = array('logo' => 'question', 'texte' => 'Message d\'alerte non défini pour : ' . $key_alert);
 
         array_push($messages, $ligneMessage);
 
-        $reponse2->closeCursor();
+        $reponse->closeCursor();
 
         // Réinitialisation de l'erreur
         $_SESSION['alerts'][$key_alert] = NULL;

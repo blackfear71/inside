@@ -71,6 +71,12 @@
 
     global $bdd;
 
+    // Récupération des données
+    $req0 = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $id_film);
+    $data0 = $req0->fetch();
+    $user = $data0['identifiant_add'];
+    $req0->closeCursor();
+
     // Suppression des avis movie_house_users
     $req1 = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $id_film);
 
@@ -79,6 +85,9 @@
 
     // Suppression du film
     $req3 = $bdd->exec('DELETE FROM movie_house WHERE id = ' . $id_film );
+
+    // Génération succès
+    insertOrUpdateSuccesValue('publisher', $user, -1);
 
     // Suppression des notifications
     deleteNotification('film', $id_film);

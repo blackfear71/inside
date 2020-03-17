@@ -28,6 +28,12 @@
 
     <!-- Contenu -->
 		<section class="section_no_nav">
+      <!-- Messages d'alerte -->
+      <?php include('../../includes/common/alerts.php'); ?>
+
+      <!-- Déblocage succès -->
+      <?php include('../../includes/common/success.php'); ?>
+      
 			<article>
         <?php
           /********************/

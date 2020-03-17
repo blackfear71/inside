@@ -511,9 +511,7 @@
         $ended = isMissionEnded($donnees['reference']);
 
         if ($ended == true)
-        {
           $mySuccess->setValue_user($donnees2['value']);
-        }
       }
 
       $reponse2->closeCursor();

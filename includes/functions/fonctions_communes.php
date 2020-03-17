@@ -753,7 +753,7 @@
         $value = $incoming;
         break;
 
-      // Incrémentation de la valeur précédente avec "incoming"
+      // Incrémentation de la valeur précédente avec "incoming" (incoming <= 1)
       case "publisher":
       case "viewer":
       case "commentator":
@@ -762,7 +762,6 @@
       case "funny":
       case "self-satisfied":
       case "buyer":
-      case "eater":
       case "generous":
       case "creator":
       case "applier":
@@ -780,6 +779,7 @@
       case "christmas2018":
       case "christmas2018_2":
       case "christmas2019":
+        // Récupération de l'ancienne valeur si besoin
         $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
         $data0 = $req0->fetch();
 
@@ -789,22 +789,106 @@
           $value = $incoming;
 
         $req0->closeCursor();
+
+        // Vérification succès débloqué
+        if ($_SESSION['user']['identifiant'] != "admin")
+        {
+          // Récupération des données du succès
+          $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
+          $data1 = $req1->fetch();
+          $limit = $data1['limit_success'];
+          $req1->closeCursor();
+
+          // Test si succès débloqué
+          if ($value == $limit)
+            $_SESSION['success'][$reference] = true;
+        }
         break;
 
-      // Valeur maximale conservée
-      case "greedy":
+      // Incrémentation de la valeur précédente avec "incoming" (incoming > 1)
+      case "eater":
+        // Récupération de l'ancienne valeur si besoin
         $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
         $data0 = $req0->fetch();
 
         if ($req0->rowCount() > 0)
-        {
-          if ($incoming > $data0['value'])
-            $value = $incoming;
-        }
+          $value = $data0['value'] + $incoming;
         else
           $value = $incoming;
 
         $req0->closeCursor();
+
+        // Vérification succès débloqué
+        if ($_SESSION['user']['identifiant'] != "admin")
+        {
+          $already_unlocked = false;
+
+          // Récupération des données du succès
+          $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
+          $data1 = $req1->fetch();
+          $limit = $data1['limit_success'];
+          $req1->closeCursor();
+
+          // Comparaison avec l'ancienne valeur
+          $req2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+          $data2 = $req2->fetch();
+
+          if ($req2->rowCount() > 0)
+          {
+            if ($data2['value'] >= $limit)
+              $already_unlocked = true;
+          }
+
+          $req2->closeCursor();
+
+          // Test si succès débloqué
+          if ($already_unlocked == false AND $value >= $limit)
+            $_SESSION['success'][$reference] = true;
+        }
+        break;
+
+      // Valeur maximale conservée
+      case "greedy":
+        // Récupération des données du succès
+        if ($_SESSION['user']['identifiant'] != "admin")
+        {
+          $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
+          $data0 = $req0->fetch();
+          $limit = $data0['limit_success'];
+          $req0->closeCursor();
+        }
+
+        // Comparaison avec l'ancienne valeur
+        $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $data1 = $req1->fetch();
+
+        if ($req1->rowCount() > 0)
+        {
+          // Récupération nouvelle valeur
+          if ($incoming > $data1['value'])
+            $value = $incoming;
+
+          // Vérification succès débloqué
+          if ($_SESSION['user']['identifiant'] != "admin")
+          {
+            if ($data1['value'] < $limit AND $value >= $limit)
+              $_SESSION['success'][$reference] = true;
+          }
+        }
+        else
+        {
+          // Récupération nouvelle valeur
+          $value = $incoming;
+
+          // Vérification succès débloqué
+          if ($_SESSION['user']['identifiant'] != "admin")
+          {
+            if ($value >= $limit)
+              $_SESSION['success'][$reference] = true;
+          }
+        }
+
+        $req1->closeCursor();
         break;
 
       default:
@@ -821,15 +905,15 @@
         $action = 'delete';
       else
       {
-        $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $data1 = $req1->fetch();
+        $req3 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $data3 = $req3->fetch();
 
-        if ($req1->rowCount() > 0)
+        if ($req3->rowCount() > 0)
           $action = 'update';
         else
           $action = 'insert';
 
-        $req1->closeCursor();
+        $req3->closeCursor();
       }
     }
 
@@ -839,25 +923,25 @@
     switch ($action)
     {
       case 'insert':
-        $req2 = $bdd->prepare('INSERT INTO success_users(reference, identifiant, value) VALUES(:reference, :identifiant, :value)');
-        $req2->execute(array(
+        $req4 = $bdd->prepare('INSERT INTO success_users(reference, identifiant, value) VALUES(:reference, :identifiant, :value)');
+        $req4->execute(array(
           'reference'   => $reference,
           'identifiant' => $identifiant,
           'value'       => $value
           ));
-        $req2->closeCursor();
+        $req4->closeCursor();
         break;
 
       case 'update':
-        $req2 = $bdd->prepare('UPDATE success_users SET value = :value WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $req2->execute(array(
+        $req4 = $bdd->prepare('UPDATE success_users SET value = :value WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $req4->execute(array(
           'value' => $value
         ));
-        $req2->closeCursor();
+        $req4->closeCursor();
         break;
 
       case 'delete':
-        $req2 = $bdd->exec('DELETE FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $req4 = $bdd->exec('DELETE FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
 
       default:
         break;
@@ -976,6 +1060,15 @@
 
     return $chaine;
   }
+
+	// Formatage explications succès
+  // RETOUR : Explications formatées
+	function formatExplanation($string, $replace, $search)
+	{
+		$explanations = str_replace($search, $replace, $string);
+
+		return $explanations;
+	}
 
   // Génère le chemin vers l'avatar
   // RETOUR : Chemin & titre image
