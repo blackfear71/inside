@@ -786,7 +786,9 @@
 
     // Suppression des succès concernés
     $req1 = $bdd->exec('DELETE FROM success_users WHERE reference != "greedy"
-                                                    AND reference != "restaurant-finder"');
+                                                    AND reference != "restaurant-finder"
+                                                    AND reference != "beginning"
+                                                    AND reference != "developper"');
 
     // Rénumérotation des enregistrements restants
     $req2 = $bdd->exec('SET @new_id = 0;
