@@ -109,7 +109,7 @@ $(function()
   });
 
   // Fermeture zoom succès
-  $('#closeZoomSuccess').click(function()
+  $(document).on('click', '#closeZoomSuccess', function()
   {
     closeSuccess();
   });

@@ -33,7 +33,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/
@@ -125,5 +125,11 @@
 		<footer>
 			<?php include('../../includes/common/footer.php'); ?>
 		</footer>
+
+    <!-- Données JSON -->
+    <script>
+      // Récupération liste succès débloqués
+      var listeSuccess = <?php if (isset($listeSuccessJson) AND !empty($listeSuccessJson)) echo $listeSuccessJson; else echo '{}'; ?>;
+    </script>
   </body>
 </html>

@@ -68,6 +68,14 @@ $(function()
     }
   });
 
+  // Affiche les détails d'un succès
+  $('.agrandirSucces').click(function()
+  {
+    var id_success = $(this).attr('id').replace('agrandir_succes_', '');
+
+    showSuccess(id_success);
+  });
+
   // Plie ou déplie les thèmes
   $('#fold_themes_user, #fold_themes_missions').click(function()
   {
@@ -152,9 +160,6 @@ $(window).on('load', function()
   // Adaptation mobile
   adaptProfil();
 
-  // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
-  $('.zone_succes_profil').css('display', 'block');
-
   // Masonry (Contributions)
   if ($('.zone_profil_contributions').length)
   {
@@ -172,6 +177,9 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_profil_contributions').addClass('masonry');
   }
+
+  // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_succes_profil').css('display', 'block');
 
   // Masonry (Succès)
   if ($('.succes_liste').length)
@@ -337,6 +345,43 @@ function changeCheckedColor(input)
     $('#' + input).removeClass('bouton_checked');
   else
     $('#' + input).addClass('bouton_checked');
+}
+
+// Affiche le détail d'un succès débloqué
+function showSuccess(id)
+{
+  var success = listeSuccess[id];
+  var html;
+
+  html += '<div id="zoom_succes" class="fond_zoom_succes" style="display: none;">';
+    // Affichage du succès
+    html += '<div class="zone_success_zoom">';
+      // Succès
+      html += '<div class="zone_succes_zoom">';
+        // Titre du succès
+        html += '<div class="titre_succes_zoom">' + success['title'] + '</div>';
+
+        // Logo du succès
+        html += '<img src="/inside/includes/images/profil/success/' + success['reference'] + '.png" alt="' + success['reference'] + '" class="logo_succes_zoom" />';
+
+        // Description du succès
+        html += '<div class="description_succes_zoom">' + success['description'] + '</div>';
+
+        // Explications du succès
+        html += '<div class="explications_succes_zoom">' + success['explanation'].replace('%limit%', success['limit_success']) + '</div>';
+      html += '</div>';
+
+      // Bouton
+      html += '<div class="zone_boutons_succes_zoom">';
+        // Bouton fermeture
+        html += '<a id="closeZoomSuccess" class="bouton_succes_zoom">Cool !</a>';
+      html += '</div>';
+    html += '</div>';
+  html += '</div>';
+
+  $('body').append(html);
+
+  $('#zoom_succes').fadeIn(200);
 }
 
 // Affiche ou masque les thèmes

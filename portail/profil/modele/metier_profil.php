@@ -602,6 +602,32 @@
     return $rankSuccess;
   }
 
+  // METIER : Conversion du tableau d'objet des succès en tableau simple pour JSON
+  // RETOUR : Tableau des succès
+  function convertForJson($listeSucces)
+  {
+    // On transforme les objets en tableau pour envoyer au Javascript
+    $listeSuccesAConvertir = array();
+
+    foreach ($listeSucces as $succes)
+    {
+      if ($succes->getDefined() == "Y" AND $succes->getValue_user() >= $succes->getLimit_success())
+      {
+        $succesAConvertir = array('id'            => $succes->getId(),
+                                  'reference'     => $succes->getReference(),
+                                  'title'         => $succes->getTitle(),
+                                  'description'   => $succes->getDescription(),
+                                  'limit_success' => $succes->getLimit_success(),
+                                  'explanation'   => $succes->getExplanation()
+                                 );
+
+        $listeSuccesAConvertir[$succes->getId()] = $succesAConvertir;
+      }
+    }
+
+    return $listeSuccesAConvertir;
+  }
+
   // METIER : Retourne un tableau trié des utilisateurs par expérience
   // RETOUR : Tableau utilisateurs trié
   function getExperienceUsers($listUsers)

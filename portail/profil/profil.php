@@ -158,6 +158,8 @@
 
             unset($expUser);
           }
+
+          $listeSuccessJson = json_encode(convertForJson($listeSuccess));
           break;
 
         case 'settings':

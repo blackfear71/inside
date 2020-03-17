@@ -7,6 +7,7 @@
     {
       if ($success->getLevel() != $lvl)
       {
+        // Titre du niveau
         echo formatTitleLvl($success->getLevel());
         $lvl = $success->getLevel();
 
@@ -17,7 +18,7 @@
       if ($success->getDefined() == "Y")
       {
         if ($success->getValue_user() >= $success->getLimit_success())
-          echo '<div class="classement_liste yellow">';
+          echo '<a id="agrandir_succes_' . $success->getId() . '" class="agrandirSucces classement_liste yellow">';
         else
           echo '<div class="classement_liste">';
           // Logo succès
@@ -77,7 +78,11 @@
               }
             echo '</div>';
           }
-        echo '</div>';
+
+        if ($success->getValue_user() >= $success->getLimit_success())
+          echo '</a>';
+        else
+          echo '</div>';
       }
       else
       {
