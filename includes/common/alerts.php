@@ -8,7 +8,7 @@
     foreach ($_SESSION['alerts'] as $key_alert => $alert)
     {
       if ($alert != true)
-        $_SESSION['alerts'][$key_alert] = NULL;
+        unset($_SESSION['alerts'][$key_alert]);
     }
 
     // Boucle de lecture des messages d'alerte
@@ -30,7 +30,7 @@
         $reponse->closeCursor();
 
         // Réinitialisation de l'erreur
-        $_SESSION['alerts'][$key_alert] = NULL;
+        unset($_SESSION['alerts'][$key_alert]);
       }
     }
   }
