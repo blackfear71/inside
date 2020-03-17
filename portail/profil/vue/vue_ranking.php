@@ -22,10 +22,12 @@
         else
           echo '<div class="classement_liste">';
           // Logo succès
-          if ($success->getValue_user() >= $success->getLimit_success())
-            echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_classement_unlocked" />';
-          else
-            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
+          echo '<div class="zone_logo_classement">';
+            if ($success->getValue_user() >= $success->getLimit_success())
+              echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_classement_unlocked" />';
+            else
+              echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
+          echo '</div>';
 
           // Titre succès
           echo '<div class="titre_classement">' . $success->getTitle() . '</div>';
@@ -88,8 +90,10 @@
       {
         echo '<div class="classement_liste">';
           // Logo succès
-          echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
-
+          echo '<div class="zone_logo_classement">';
+            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
+          echo '</div>';
+          
           // Titre succès
           echo '<div class="titre_classement">Succès non défini</div>';
         echo '</div>';
