@@ -76,6 +76,14 @@ $(function()
     showSuccess(id_success);
   });
 
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme le zoom d'une image culte
+    if ($(event.target).attr('class') == 'fond_zoom_succes')
+      closeSuccess();
+  });
+
   // Plie ou déplie les thèmes
   $('#fold_themes_user, #fold_themes_missions').click(function()
   {
