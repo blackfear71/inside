@@ -602,6 +602,7 @@
 .logo_succes_unlocked
 {
 	width: 140px;
+	border-radius: 2px;
 }
 
 .logo_succes_locked
@@ -664,6 +665,7 @@
 	width: 50px;
 	padding: 5px;
 	vertical-align: middle;
+	border-radius: 2px;
 }
 
 .logo_classement_locked
