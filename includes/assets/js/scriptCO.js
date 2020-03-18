@@ -81,12 +81,12 @@ $(function()
   // Affiche une image culte en grand
   $('.agrandirImage').click(function()
   {
-    var html;
+    var html      = '';
     var path      = $(this).children().attr('src');
     var split     = path.split('/');
     var collector = split[split.length - 1];
 
-    html = '<div id="zoom_image" class="fond_zoom">';
+    html += '<div id="zoom_image" class="fond_zoom">';
       html += '<div class="zone_image_zoom">';
         html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
         html += '<img src="' + path + '" alt="' + collector + '" class="image_zoom" />';

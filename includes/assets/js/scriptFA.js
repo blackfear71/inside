@@ -637,9 +637,9 @@ function afficherListboxLieux(id)
   var id_zone    = 'zone_listbox_' + num;
   var id_select  = 'select_lieu_' + num;
   var id_annuler = 'annuler_restaurant_' + num;
-  var html;
+  var html       = '';
 
-  html = '<div id="' + id_zone + '" class="zone_listbox_restaurant">';
+  html += '<div id="' + id_zone + '" class="zone_listbox_restaurant">';
     html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_lieu afficherRestaurant" required>';
       html += '<option value="" hidden>Choisissez...</option>';
       $.each(listeLieux, function(key, value)
@@ -660,13 +660,14 @@ function afficherListboxRestaurants(id, zone)
   var lieu        = $('#' + id).val();
   var num         = id.substr(-1);
   var id_select_2 = 'select_restaurant_' + num;
-  var html;
+  var html        = '';
 
   if ($('#' + id_select_2).length)
     $('#' + id_select_2).remove();
 
-  html = '<select id="' + id_select_2 + '" name="select_restaurant[' + num + ']" class="listbox_restaurant" required>';
+  html += '<select id="' + id_select_2 + '" name="select_restaurant[' + num + ']" class="listbox_restaurant" required>';
     html += '<option value="" hidden>Choisissez...</option>';
+
     $.each(listeRestaurants[lieu], function(key, value)
     {
       html += '<option value="' + value.id + '">' + value.name + '</option>';
@@ -689,7 +690,7 @@ function cacherListboxRestaurants(zone, bouton)
 // Affiche les listbox des horaires
 function afficherListboxHoraires(id, zone, type, idChoix)
 {
-  var html;
+  var html = '';
   var num;
   var name_select_h;
   var name_select_m;
@@ -718,7 +719,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
   var id_annuler  = 'annuler_horaires_' + num;
   var id_zone     = zone;
 
-  html = '<select id="' + id_select_h + '" name="' + name_select_h + '" class="' + class_listbox + '">';
+  html += '<select id="' + id_select_h + '" name="' + name_select_h + '" class="' + class_listbox + '">';
     for (var i = 11; i < 14; i++)
     {
       if (i == 12)
@@ -757,16 +758,16 @@ function cacherListboxHoraires(zone, bouton, heures, minutes)
 // Affiche les checkbox des transports
 function afficherCheckboxTransports(id)
 {
-  var html;
+  var html       = '';
   var num        = id.substr(-1);
-  var id_zone    = "zone_checkbox_" + num;
+  var id_zone    = 'zone_checkbox_' + num;
   var id_check_f = 'checkbox_feet_' + num;
   var id_check_b = 'checkbox_bike_' + num;
   var id_check_t = 'checkbox_tram_' + num;
   var id_check_c = 'checkbox_car_' + num;
   var id_annuler = 'annuler_transports_' + num;
 
-  html = '<div id="' + id_zone + '" class="zone_checkbox">';
+  html += '<div id="' + id_zone + '" class="zone_checkbox">';
     html += '<div id="bouton_' + id_check_f + '" class="switch_transport">';
       html += '<input id="' + id_check_f + '" type="checkbox" value="F" name="checkbox_feet[' + num + ']" />';
       html += '<label for="' + id_check_f + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
@@ -806,7 +807,7 @@ function cacherCheckboxTransports(zone, bouton)
 // Affiche la saisie du menu
 function afficherSaisieMenu(id)
 {
-  var html;
+  var html       = '';
   var num        = id.substr(-1);
   var id_zone    = "zone_menu_" + num;
   var id_entree  = 'saisie_entree_' + num;
@@ -814,7 +815,7 @@ function afficherSaisieMenu(id)
   var id_dessert = 'saisie_dessert_' + num;
   var id_annuler = 'annuler_menu_' + num;
 
-  html = '<div id="' + id_zone + '" class="zone_saisie_menu">';
+  html += '<div id="' + id_zone + '" class="zone_saisie_menu">';
     html += '<input type="text" placeholder="Entrée" name="saisie_entree[' + num + ']" class="saisie_menu" />';
     html += '<input type="text" placeholder="Plat" name="saisie_plat[' + num + ']" class="saisie_menu" />';
     html += '<input type="text" placeholder="Dessert" name="saisie_dessert[' + num + ']" class="saisie_menu" />';
@@ -838,7 +839,7 @@ function cacherSaisieMenu(zone, bouton)
 // Génère une nouvelle zone pour saisir un choix
 function addChoice(id, zone)
 {
-  var html;
+  var html    = '';
   var num     = $("#" + id + " span").length / 4;
   var new_num = num + 1;
   var icon;
@@ -868,7 +869,7 @@ function addChoice(id, zone)
   }
 
   // On ajoute de nouveaux champs de saisie
-  html  = '<div class="titre_choix"><img src="/inside/includes/icons/foodadvisor/' + icon + '.png" alt="' + icon + '" class="logo_proposition" />Proposition ' + new_num + '</div>';
+  html += '<div class="titre_choix"><img src="/inside/includes/icons/foodadvisor/' + icon + '.png" alt="' + icon + '" class="logo_proposition" />Proposition ' + new_num + '</div>';
 
   html += '<div id="zone_listbox_restaurant_' + new_num + '" class="zone_element_choix">';
     html += '<a id="choix_restaurant_' + new_num + '" class="bouton_choix afficherLieu"><span class="fond_plus">+</span>Restaurant</a>';
@@ -908,12 +909,11 @@ function afficherListboxLieuxResume(id)
   var id_annuler = 'annuler_restaurant_resume_' + num;
   var id_replace = 'no_proposal_' + num;
   var id_bouton  = 'choix_resume_' + num;
-
-  var html;
+  var html       = '';
 
   var previous_height = $('#' + id_replace).outerHeight() + $('#' + id_bouton).height() + 20;
 
-  html = '<div id="' + id_zone + '" class="zone_listbox_restaurant_resume">';
+  html += '<div id="' + id_zone + '" class="zone_listbox_restaurant_resume">';
     html += '<select id="' + id_select + '" name="select_lieu_resume_' + num + '" class="listbox_choix_resume afficherRestaurantResume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
       $.each(listeLieuxResume, function(key, value)
@@ -944,8 +944,7 @@ function afficherListboxRestaurantsResume(id, zone)
   var id_replace  = 'no_proposal_' + num;
   var id_valider  = 'valider_restaurant_resume_' + num;
   var id_annuler  = 'annuler_restaurant_resume_' + num;
-
-  var html;
+  var html        = '';
 
   var previous_height = $('#' + id_replace).outerHeight();
 
@@ -955,7 +954,7 @@ function afficherListboxRestaurantsResume(id, zone)
   if ($('#' + id_annuler).length)
     $('#' + id_annuler).remove();
 
-  html = '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
+  html += '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
     html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
 
@@ -1066,12 +1065,12 @@ function changeTypeColor(id)
 // Génère une nouvelle zone pour saisir un type
 function addOtherType(id)
 {
-  var html;
+  var html       = '';
   var length     = $("#" + id + " input").length;
   var new_length = length + 1;
   var id_type    = id + '_' + new_length;
 
-  html = '<input type="text" placeholder="Type" value="" id="' + id_type + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
+  html += '<input type="text" placeholder="Type" value="" id="' + id_type + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
 
   $("#" + id).append(html);
 }

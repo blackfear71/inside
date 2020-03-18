@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
 				<?php
           /********************/
@@ -241,7 +241,7 @@
                 {
                   echo '<div class="video_container">';
                     $exp  = explode(':_:', $detailsFilm->getId_url());
-                    $html = "";
+                    $html = '';
 
                     switch ($exp[0])
                     {

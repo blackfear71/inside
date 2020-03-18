@@ -292,7 +292,7 @@ $(window).on('load', function()
     /*console.log('cookieShowChat : ' + cookieShowChat);
     console.log('cookieWindowChat : ' + cookieWindowChat);*/
 
-    var html;
+    var html = '';
     var hide_chat_css;
     var onglet_chat_css;
     var onglet_users_css;
@@ -310,7 +310,7 @@ $(window).on('load', function()
 
       // On construit la fenêtre de chat
       // Messages
-      html = '<div id="scroll_conversation" class="zone_onglet_chat">';
+      html += '<div id="scroll_conversation" class="zone_onglet_chat">';
         html += '<div id="conversation_chat" class="contenu_onglet_chat"></div>';
       html += '</div>';
 
@@ -348,7 +348,7 @@ $(window).on('load', function()
       cursor_css       = 'pointer';
 
       // On construit la fenêtre des utilisateurs
-      html = '<div id="scroll_conversation" class="zone_onglet_users">';
+      html += '<div id="scroll_conversation" class="zone_onglet_users">';
         html += '<div id="utilisateurs_chat" class="contenu_onglet_users"></div>';
       html += '</div>';
     }
@@ -359,8 +359,6 @@ $(window).on('load', function()
       onglet_chat_css  = '#ff1937';
       onglet_users_css = '#ff1937';
       cursor_css       = 'default';
-
-      html = '';
 
       $('#onglet_users').hide();
     }
@@ -398,8 +396,8 @@ $(window).on('load', function()
         var date        = $message.find('date').text();
         var time        = $message.find('time').text();
         var pseudo      = formatUnknownUser("", true, false);
+        var html        = '';
         var avatar;
-        var html;
 
         if (identifiant != "" && text != "")
         {
@@ -419,7 +417,7 @@ $(window).on('load', function()
 
           if (currentUser == identifiant)
           {
-            html = '<div class="zone_chat_user">';
+            html += '<div class="zone_chat_user">';
               html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_user" />';
               html += '<div class="triangle_chat_user"></div>';
               html += '<div class="text_chat_user">' + text + '</div>';
@@ -427,7 +425,7 @@ $(window).on('load', function()
           }
           else
           {
-            html = '<div class="zone_chat_other">';
+            html += '<div class="zone_chat_other">';
               html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_other" />';
               html += '<div class="triangle_chat_other"></div>';
               html += '<div class="text_chat_other">' + text + '</div>';
@@ -448,17 +446,15 @@ $(window).on('load', function()
   // Fonction de rafraichissement des utilisateurs
   function rafraichirUtilisateurs()
   {
-    //console.log('refresh_users');
-
     // Lecture des utilisateurs et du statut de connexion
     $.post('/inside/includes/functions/ping.php', {function: 'getPings'}, function(users)
     {
       $('#utilisateurs_chat').html('');
       var offline = false;
-      var html;
+      var html    = '';
 
       // Séparation des utilisateur connectés (toujours au minimum l'utilisateur en cours)
-      html = '<div class="online">En ligne</div>';
+      html += '<div class="online">En ligne</div>';
       $('#utilisateurs_chat').append($(html));
 
       $.each(JSON.parse(users), function(key, value)
@@ -472,13 +468,13 @@ $(window).on('load', function()
         // On va afficher la séparation des utilisateurs hors ligne à partir du premier
         if (offline != true && connected == false)
         {
-          html = '<div class="offline">Hors ligne</div>';
+          html += '<div class="offline">Hors ligne</div>';
           $('#utilisateurs_chat').append($(html));
           offline = true;
         }
 
         // Zone utilisateur
-        html = '<div class="zone_chat_connected">';
+        html += '<div class="zone_chat_connected">';
           // Avatar
           var avatarFormatted = formatAvatar(avatar, escapeHtml(pseudo), 0, "avatar");
 

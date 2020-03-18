@@ -359,7 +359,7 @@ function changeCheckedColor(input)
 function showSuccess(id)
 {
   var success = listeSuccess[id];
-  var html;
+  var html    = '';
 
   html += '<div id="zoom_succes" class="fond_zoom_succes" style="display: none;">';
     // Affichage du succès

@@ -286,9 +286,9 @@ function resetSaisie(zone, year)
     if (call == "doModifier")
     {
       var titre   = 'Saisir une dépense';
-      var buyer   = "";
-      var price   = "";
-      var comment = "";
+      var buyer   = '';
+      var price   = '';
+      var comment = '';
       var action  = 'expensecenter.php?year=' + year + '&action=doInserer';
 
       // Modification des données

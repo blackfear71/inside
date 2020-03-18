@@ -250,12 +250,12 @@ function afficherMasquer(id)
 // Affiche une liste des utilisateurs
 function afficherListboxUtilisateurs(id_zone, week)
 {
-  var html;
+  var html = '';
 
   if (id_zone == 'zone_current_week')
-    html = '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
+    html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
   else
-    html = '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
+    html += '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
 
     html += '<input type="hidden" name="week" value="' + week + '" />';
 
@@ -322,10 +322,10 @@ var loadFile = function(event, id)
 // Affiche ou la zone de saisie semaine correspondant à l'année (insertion)
 function afficherSemaines(select)
 {
-  var html;
+  var html     = '';
   var semaines = listWeeks[$('#' + select).val()];
 
-  html = '<select name="week_recipe" id="saisie_semaine" class="saisie_annee_semaine" required>';
+  html += '<select name="week_recipe" id="saisie_semaine" class="saisie_annee_semaine" required>';
     html += '<option value="" hidden>Semaine</option>';
 
     $.each(semaines, function(key, value)
@@ -345,13 +345,13 @@ function afficherSemaines(select)
 // Affiche un champ de saisie d'ingrédient
 function addIngredient(id)
 {
-  var html;
+  var html          = '';
   var length        = $("#" + id + " .input_ingredient").length;
   var new_length    = length + 1;
   var id_ingredient = 'ingredient_' + new_length;
   var unites        = ['sans', 'g', 'kg', 'ml', 'cl', 'L', 'CC', 'CS'];
 
-  html = '<div class="zone_ingredient">';
+  html += '<div class="zone_ingredient">';
     // Ingrédient
     html += '<input type="text" placeholder="Ingrédient" value="" id="' + id_ingredient + '" name="ingredients[' + new_length + ']" class="input_ingredient saisieIngredient" />';
 
@@ -375,8 +375,7 @@ function addIngredient(id)
 // Affiche les détails de la recette
 function showRecipe(link, id)
 {
-  var html;
-
+  var html             = '';
   var path_mini        = link.children('.image_recette').attr('src');
   var path_full        = path_mini.replace('mini/', '');
   var split            = path_mini.split('/');
@@ -387,7 +386,7 @@ function showRecipe(link, id)
   var ingredients      = new Array();
   var avatarFormatted;
 
-  html = '<div id="zoom_image" class="fond_zoom">';
+  html += '<div id="zoom_image" class="fond_zoom">';
     // Photo
     html += '<div class="zone_image_zoom">';
       html += '<img src="' + path_full + '" alt="' + image + '" class="image_zoom_2" />';
@@ -546,14 +545,14 @@ function resetSaisie(zone)
 
     if (call == "doModifierRecette")
     {
-      var id          = "";
-      var image       = "";
-      var annee       = "";
-      var semaine     = "";
-      var nom         = "";
-      var ingredients = "";
-      var preparation = "";
-      var remarques   = "";
+      var id          = '';
+      var image       = '';
+      var annee       = '';
+      var semaine     = '';
+      var nom         = '';
+      var ingredients = '';
+      var preparation = '';
+      var remarques   = '';
       var titre       = 'Ajouter une recette';
       var action      = 'cookingbox.php?action=doAjouterRecette';
 
@@ -618,7 +617,7 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
 
   $.each(ingredients, function(key, value)
   {
-    ingredient = "";
+    ingredient = '';
 
     if (value != "")
     {

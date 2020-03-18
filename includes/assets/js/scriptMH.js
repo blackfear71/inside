@@ -328,9 +328,9 @@ function afficherMasquerFilms(month)
 // Affiche la saisie préférence d'un film
 function afficherSaisiePreference(titre, stars, view, year, id_film)
 {
-  var html;
+  var html = '';
 
-  html  = '<div class="fond_saisie_preference">';
+  html += '<div class="fond_saisie_preference">';
     html += '<div class="zone_saisie_preference">';
       // Zone titre
       html += '<div class="titre_saisie_preference">';
@@ -375,7 +375,7 @@ function masquerSaisiePreference()
 // Insère un smiley dans la zone de saisie
 function insert_smiley(smiley, id)
 {
-  var chars = "";
+  var chars = '';
 
   switch (smiley)
   {

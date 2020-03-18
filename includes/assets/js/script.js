@@ -266,7 +266,7 @@ function updateNotifications()
     var nbNotifications = data.nbNotifications;
     var view            = data.view;
     var page            = data.page;
-    var html            = "";
+    var html            = '';
 
     // On n'exécute de manière récurrente que si on n'est pas l'admin
     if (identifiant != 'admin')
@@ -324,7 +324,7 @@ function updateBugs()
   {
     var identifiant = data.identifiant;
     var nbBugs      = data.nbBugs;
-    var html        = "";
+    var html        = '';
 
     // On n'exécute de manière récurrente que si on n'est pas l'admin
     if (identifiant != 'admin')
@@ -419,7 +419,7 @@ function confirmAction(form, message)
   if ($('#confirmBox').length)
     $('#confirmBox').remove();
 
-  var html = "";
+  var html = '';
 
   html += '<div class="message_alerte" id="confirmBox">';
     html += '<input type="hidden" id="actionForm" value="' + form + '" />';
@@ -535,7 +535,7 @@ function hideSubmitButton(zone, button, form, tabBlock)
     }
 
     // On ajoute le symbole de chargement
-    var loading = "";
+    var loading = '';
 
     loading += '<div class="zone_loading_form">';
       loading += '<div id="loading_form" class="loading_form"></div>';
