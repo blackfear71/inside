@@ -115,14 +115,28 @@ $(function()
   });
 
   /*** Actions au passage de la souris ***/
+  // Changement couleur barre de recherche (entrée)
   $('#color_search').mouseover(function()
   {
     changeColorToWhite('color_search');
   });
 
+  // Changement couleur barre de recherche (sortie)
   $('#color_search').mouseout(function()
   {
-    changeColorToGrey('color_search', 'resizeBar')
+    changeColorToGrey('color_search', 'resizeBar');
+  });
+
+  // Affichage détail notifications (entrée)
+  $('#afficherDetailNotifications').mouseover(function()
+  {
+    showNotifications();
+  });
+
+  // Affichage détail notifications (sortie)
+  $('#afficherDetailNotifications').mouseout(function()
+  {
+    hideNotifications();
   });
 });
 
@@ -260,13 +274,13 @@ function updatePing()
 // Exécute le script php de mise à jour du compteur de notifications
 function updateNotifications()
 {
-  $.get('/inside/includes/functions/notifications.php', function(data)
+  $.get('/inside/includes/functions/notifications.php', {function: 'count_notifications'}, function(data)
   {
-    var identifiant     = data.identifiant;
-    var nbNotifications = data.nbNotifications;
-    var view            = data.view;
-    var page            = data.page;
-    var html            = '';
+    var identifiant         = data.identifiant;
+    var nbNotificationsJour = data.nbNotificationsJour;
+    var view                = data.view;
+    var page                = data.page;
+    var html                = '';
 
     // On n'exécute de manière récurrente que si on n'est pas l'admin
     if (identifiant != 'admin')
@@ -274,12 +288,12 @@ function updateNotifications()
       // La première fois on génère la zone
       if (!$('.link_notifications').length)
       {
-        html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" title="Notifications" class="link_notifications">';
+        html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" class="link_notifications">';
 
-          if (nbNotifications > 0)
-            html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+          if (nbNotificationsJour > 0)
+            html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" class="icon_notifications" />';
           else
-            html += '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" title="Notifications" class="icon_notifications" />';
+            html += '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" class="icon_notifications" />';
 
           html += '<div class="number_notifications"></div>';
         html += '</a>';
@@ -288,14 +302,14 @@ function updateNotifications()
       }
 
       // On met à jour le contenu
-      if (nbNotifications > 0)
+      if (nbNotificationsJour > 0)
       {
         $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
         $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications_blue.png');
 
-        if (nbNotifications <= 9)
+        if (nbNotificationsJour <= 9)
         {
-          $('.number_notifications').html(nbNotifications);
+          $('.number_notifications').html(nbNotificationsJour);
           $('.number_notifications').css('color', 'white');
         }
         else
@@ -587,6 +601,56 @@ function closeSuccess()
   {
     $('.fond_zoom_succes').remove();
   });
+}
+
+// Affiche le détail des notifications
+function showNotifications()
+{
+  $.get('/inside/includes/functions/notifications.php', {function: 'get_details_notifications'}, function(data)
+  {
+    var identifiant            = data.identifiant;
+    var nbNotificationsJour    = data.nbNotificationsJour;
+    var nbNotificationsSemaine = data.nbNotificationsSemaine;
+    var html                   = '';
+
+    // On n'affiche le détail que si on n'est pas l'admin
+    if (identifiant != 'admin')
+    {
+      var html = '';
+
+      // Nombre de notifications
+      html += '<div class="zone_details_notifications">';
+        // Flèche
+        html += '<div class="triangle_details_notifications"></div>';
+
+        html += '<div class="compteurs_details_notifications">';
+          // Notifications du jour
+          html += '<div class="ligne_details_notifications">';
+            if (nbNotificationsJour == 1)
+              html += '<div class="number_notifications_details">' + nbNotificationsJour + '</div> notification aujourd\'hui';
+            else
+              html += '<div class="number_notifications_details">' + nbNotificationsJour + '</div> notifications aujourd\'hui';
+          html += '</div>';
+
+          // Notifications de la semaine
+          html += '<div class="ligne_details_notifications">';
+            if (nbNotificationsSemaine == 1)
+              html += '<div class="number_notifications_details">' + nbNotificationsSemaine + '</div> notification cette semaine';
+            else
+              html += '<div class="number_notifications_details">' + nbNotificationsSemaine + '</div> notifications cette semaine';
+          html += '</div>';
+        html += '</div>';
+      html += '</div>';
+
+      $('#afficherDetailNotifications').append(html);
+    }
+  }, "json");
+}
+
+// Cache le nombre de notifications
+function hideNotifications()
+{
+  $('.zone_details_notifications').remove();
 }
 
 // Génère le chemin vers l'avatar

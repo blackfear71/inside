@@ -199,10 +199,6 @@
     $_SESSION['save']['new_mission'] = array('post' => $post, 'files' => $files);
     $control_ok                      = true;
 
-    //var_dump($_SESSION['save']);
-    //var_dump($_SESSION['save']['new_mission']['post']);
-    //var_dump($_SESSION['save']['new_mission']['files']);
-
     // Remplacement des caractères spéciaux pour la référence
     $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");
     $replace   = array("_", "e", "e", "e", "e", "a", "a", "c", "o", "u");
@@ -450,10 +446,6 @@
     // Sauvegarde des données
     $_SESSION['save']['old_mission'] = array('post' => $post, 'files' => $files);
     $control_ok                      = true;
-
-    //var_dump($_SESSION['save']);
-    //var_dump($_SESSION['save']['old_mission']['post']);
-    //var_dump($_SESSION['save']['old_mission']['files']);
 
     // Remplacement des caractères spéciaux pour la référence
     $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");

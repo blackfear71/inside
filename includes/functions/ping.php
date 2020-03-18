@@ -83,6 +83,7 @@
 
       // Récupération de la sortie
       $listUsersJson = json_encode($listUsers);
+      
       echo $listUsersJson;
       break;
 

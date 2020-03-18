@@ -14,7 +14,7 @@
       if ($_SESSION['user']['identifiant'] != "admin")
       {
         // Notifications
-        echo '<div class="zone_notifications_bandeau"></div>';
+        echo '<div id="afficherDetailNotifications" class="zone_notifications_bandeau"></div>';
 
         // Recherche
         echo '<div id="resizeBar" class="zone_recherche_bandeau">';

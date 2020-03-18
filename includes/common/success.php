@@ -36,7 +36,10 @@
     echo '<div class="fond_zoom_succes">';
       echo '<div class="zone_success_zoom">';
         // Titre
-        echo '<div class="titre_zone_succes_zoom">Succès débloqué(s) !</div>';
+        if (count($unlocked) > 1)
+          echo '<div class="titre_zone_succes_zoom">Succès débloqués !</div>';
+        else
+          echo '<div class="titre_zone_succes_zoom">Succès débloqué !</div>';
 
         // Affichage des succès
         foreach ($unlocked as $ligneUnlocked)

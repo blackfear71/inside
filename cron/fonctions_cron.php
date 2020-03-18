@@ -363,8 +363,6 @@
     }
     $req1->closeCursor();
 
-    //var_dump($listeUsers);
-
     // Mise à jour des utilisateurs
     foreach ($listeUsers as $user)
     {

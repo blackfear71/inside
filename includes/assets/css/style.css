@@ -310,6 +310,7 @@ header
 	margin-left: -30px;
 }
 
+/*** Notifications ***/
 .zone_notifications_bandeau
 {
 	display: inline-block;
@@ -377,6 +378,50 @@ header
 	font-size: 120%;
 }
 
+.zone_details_notifications
+{
+	position: absolute;
+	filter: drop-shadow(0px 0px 2px #5c5c5c);
+}
+
+.triangle_details_notifications
+{
+	margin-left: 25px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 10px 10px 10px;
+	border-color: transparent transparent #262626 transparent;
+}
+
+.compteurs_details_notifications
+{
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	background-color: #262626;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+}
+
+.ligne_details_notifications
+{
+	display: block;
+	line-height: 40px;
+}
+
+.number_notifications_details
+{
+	display: inline-block;
+	margin-right: 5px;
+	background-color: #ff1937;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 50%;
+}
+
+/*** Barre de recherche ***/
 .zone_recherche_bandeau
 {
 	display: inline-block;
@@ -429,6 +474,7 @@ header
 	margin-top: -4px;
 }
 
+/*** Page & profil ***/
 .zone_titre_page
 {
 	display: inline-block;

@@ -66,8 +66,6 @@
       // Récupération des missions à générer
       $missions = getMissionsToGenerate();
 
-      //var_dump($missions);
-
       // On génère les boutons de mission si besoin pour chaque mission
       foreach ($missions as $key => $mission)
       {
@@ -107,9 +105,9 @@
 
       // Détermination thème
       $_SESSION['theme'] = setTheme();
-    }
 
-    //var_dump($_SESSION);
+      //var_dump($_SESSION['theme']);
+    }
   }
 
   // Récupération expérience utilisateur

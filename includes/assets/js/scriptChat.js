@@ -374,8 +374,6 @@ $(window).on('load', function()
   // Fonction de rafraichissement du contenu & formatage des messages
   function rafraichirConversation(scrollUpdate)
   {
-    //console.log('refresh_chat');
-
     // Si la scrollbar est déjà en bas on va quand même la remettre en bas en cas d'arrivée de nouveau messages
     var scrollDown = isScrollbarDown();
 

@@ -9,6 +9,5 @@ angular.
         controller : function ParcoursListController() {
             this.listeParcours = listeParcoursJson;
             // this.orderProp = 'nom';
-            //console.log(listeParcoursJson);
         }
 });
