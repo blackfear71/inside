@@ -431,7 +431,7 @@ $(window).on('load', function()
           }
 
           // Insertion dans la zone
-          $('#conversation_chat').append($(html));
+          $('#conversation_chat').append(html);
         }
       });
 
@@ -452,8 +452,8 @@ $(window).on('load', function()
       var html    = '';
 
       // Séparation des utilisateur connectés (toujours au minimum l'utilisateur en cours)
-      html += '<div class="online">En ligne</div>';
-      $('#utilisateurs_chat').append($(html));
+      html = '<div class="online">En ligne</div>';
+      $('#utilisateurs_chat').append(html);
 
       $.each(JSON.parse(users), function(key, value)
       {
@@ -466,13 +466,13 @@ $(window).on('load', function()
         // On va afficher la séparation des utilisateurs hors ligne à partir du premier
         if (offline != true && connected == false)
         {
-          html += '<div class="offline">Hors ligne</div>';
-          $('#utilisateurs_chat').append($(html));
+          html = '<div class="offline">Hors ligne</div>';
+          $('#utilisateurs_chat').append(html);
           offline = true;
         }
 
         // Zone utilisateur
-        html += '<div class="zone_chat_connected">';
+        html = '<div class="zone_chat_connected">';
           // Avatar
           var avatarFormatted = formatAvatar(avatar, escapeHtml(pseudo), 0, "avatar");
 
@@ -505,7 +505,7 @@ $(window).on('load', function()
         html += '</div>';
 
         // Insertion dans la zone
-        $('#utilisateurs_chat').append($(html));
+        $('#utilisateurs_chat').append(html);
       });
     });
   }
