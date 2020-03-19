@@ -81,7 +81,7 @@ $(function()
   {
     // Ferme le zoom d'une image culte
     if ($(event.target).attr('class') == 'fond_zoom_succes')
-      closeSuccess();
+      masquerSupprimerIdWithDelay('zoom_succes');
   });
 
   // Plie ou déplie les thèmes

@@ -14,7 +14,7 @@ $(function()
     if (week_number < 10)
       week_number = '0' + week_number;
 
-    afficherMasquerNoDelay(id_boutons);
+    afficherMasquerIdNoDelay(id_boutons);
     afficherListboxUtilisateurs('zone_current_week', week_number);
   });
 
@@ -27,7 +27,7 @@ $(function()
     if (week_number < 10)
       week_number = '0' + week_number;
 
-    afficherMasquerNoDelay(id_boutons);
+    afficherMasquerIdNoDelay(id_boutons);
     afficherListboxUtilisateurs('zone_next_week', week_number);
   });
 
@@ -37,7 +37,7 @@ $(function()
     var id_boutons = 'boutons_current_week';
     var id_form    = 'form_current_week';
 
-    afficherMasquerNoDelay(id_boutons);
+    afficherMasquerIdNoDelay(id_boutons);
     $('#' + id_form).remove();
   });
 
@@ -47,14 +47,14 @@ $(function()
     var id_boutons = 'boutons_next_week';
     var id_form    = 'form_next_week';
 
-    afficherMasquerNoDelay(id_boutons);
+    afficherMasquerIdNoDelay(id_boutons);
     $('#' + id_form).remove();
   });
 
   // Ajouter une recette
   $('#ajouterRecette').click(function()
   {
-    afficherMasquer('zone_add_recipe');
+    afficherMasquerIdWithDelay('zone_add_recipe');
   });
 
   // Réinitialise la saisie recette à la fermeture
@@ -88,7 +88,7 @@ $(function()
   // Ferme le zoom d'une recette (au clic sur la croix)
   $(document).on('click', '#fermerRecette', function(event)
   {
-    closeRecipe();
+    masquerSupprimerIdWithDelay('zoom_image');
   });
 
   // Ferme au clic sur le fond
@@ -96,11 +96,11 @@ $(function()
   {
     // Ferme le zoom d'une recette
     if ($(event.target).attr('class') == 'fond_zoom')
-      closeRecipe();
+      masquerSupprimerIdWithDelay('zoom_image');
 
     // Ferme la saisie d'une recette
     if ($(event.target).attr('class') == 'fond_saisie_recette')
-      closeInput();
+      resetSaisie('zone_add_recipe');
   });
 
   // Bloque le bouton de soumission si besoin
@@ -227,24 +227,6 @@ function adaptRecipes()
     $('.zone_cooking_right').css('margin-left', '20px');
     $('.zone_cooking_right').css('margin-top', '10px');
   }
-}
-
-// Affiche ou masque un élément (délai 0s)
-function afficherMasquerNoDelay(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(0);
-  else
-    $('#' + id).fadeOut(0);
-}
-
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
 }
 
 // Affiche une liste des utilisateurs
@@ -496,26 +478,11 @@ function showRecipe(link, id)
   });
 }
 
-// Ferme les détails d'une recette
-function closeRecipe()
-{
-  $('#zoom_image').fadeOut(200, function()
-  {
-    $('#zoom_image').remove();
-  });
-}
-
-// Ferme la saisie d'une recette
-function closeInput()
-{
-  resetSaisie('zone_add_recipe');
-}
-
 // Affiche la zone de mise à jour d'une recette
 function updateRecipe(id, zone)
 {
   // Affichage zone de saisie
-  afficherMasquer(zone);
+  afficherMasquerIdWithDelay(zone);
 
   var image       = listRecipes[id]['picture'];
   var annee       = listRecipes[id]['year'];
@@ -535,7 +502,7 @@ function updateRecipe(id, zone)
 function resetSaisie(zone)
 {
   // Fermeture zone de saisie
-  afficherMasquer(zone);
+  afficherMasquerIdWithDelay(zone);
 
   setTimeout(function()
   {

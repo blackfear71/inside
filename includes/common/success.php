@@ -33,7 +33,7 @@
   // Affichage des succès débloqués
   if (!empty($unlocked))
   {
-    echo '<div class="fond_zoom_succes">';
+    echo '<div id="zoom_succes" class="fond_zoom_succes">';
       echo '<div class="zone_success_zoom">';
         // Titre
         if (count($unlocked) > 1)

@@ -71,9 +71,9 @@ $(function()
   });
 
   // Bouton fermer alerte
-  $('#boutonFermer').click(function()
+  $('#boutonFermerAlerte').click(function()
   {
-    masquerAlerte('alerte');
+    masquerSupprimerIdWithDelay('alerte');
   });
 
   // Messages de confirmation
@@ -111,7 +111,7 @@ $(function()
   // Fermeture zoom succès
   $(document).on('click', '#closeZoomSuccess', function()
   {
-    closeSuccess();
+    masquerSupprimerIdWithDelay('zoom_succes');
   });
 
   /*** Actions au passage de la souris ***/
@@ -150,10 +150,40 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Masque la fenêtre des alertes
-function masquerAlerte(id)
+// Affiche ou masque un élément (délai 200ms)
+function afficherMasquerIdWithDelay(id)
 {
-  $('#' + id).fadeOut(200);
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).fadeIn(200);
+  else
+    $('#' + id).fadeOut(200);
+}
+
+// Affiche ou masque un élément (délai 0s)
+function afficherMasquerIdNoDelay(id)
+{
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).fadeIn(0);
+  else
+    $('#' + id).fadeOut(0);
+}
+
+// Affiche ou masque les lignes d'un tableau
+function afficherMasquerIdRow(id)
+{
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).css('display', 'table-row');
+  else
+    $('#' + id).css('display', 'none');
+}
+
+// Masque et supprime un élément (délai 200ms)
+function masquerSupprimerIdWithDelay(id)
+{
+  $('#' + id).fadeOut(200, function()
+  {
+    $(this).remove();
+  });
 }
 
 // Affiche ou masque le menu latéral gauche + rotation icône menu
@@ -465,12 +495,7 @@ function confirmAction(form, message)
 function executeAction(form, action)
 {
   if (action == 'cancel')
-  {
-    $('#confirmBox').fadeOut(200, function()
-    {
-      $(this).remove();
-    });
-  }
+    masquerSupprimerIdWithDelay('confirmBox');
   else
     $('#' + form).submit();
 }
@@ -591,15 +616,6 @@ function loadingForm(zone)
         loadingForm(zone);
       }, 200);
     });
-  });
-}
-
-// Ferme le zoom d'un succès
-function closeSuccess()
-{
-  $('.fond_zoom_succes').fadeOut(200, function()
-  {
-    $('.fond_zoom_succes').remove();
   });
 }
 

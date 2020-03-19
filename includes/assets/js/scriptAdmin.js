@@ -23,7 +23,7 @@ $(function()
 
     num = id_image.replace(time + '_arrow_', '');
 
-    afficherMasquer(time + '_log_' + num);
+    afficherMasquerIdNoDelay(time + '_log_' + num);
     rotateIcon(time + '_arrow_' + num);
   });
 
@@ -32,8 +32,8 @@ $(function()
   {
     var id_alerte = $(this).attr('id').replace('alerte_', '');
 
-    afficherMasquerRow('modifier_alerte_' + id_alerte);
-    afficherMasquerRow('modifier_alerte_2_' + id_alerte);
+    afficherMasquerIdRow('modifier_alerte_' + id_alerte);
+    afficherMasquerIdRow('modifier_alerte_2_' + id_alerte);
   });
 
   // Masque la ligne de modification d'une alerte
@@ -41,8 +41,8 @@ $(function()
   {
     var id_alerte = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerRow('modifier_alerte_' + id_alerte);
-    afficherMasquerRow('modifier_alerte_2_' + id_alerte);
+    afficherMasquerIdRow('modifier_alerte_' + id_alerte);
+    afficherMasquerIdRow('modifier_alerte_2_' + id_alerte);
   });
 
   // Affiche la zone de modification d'un thème
@@ -50,8 +50,8 @@ $(function()
   {
     var id_theme = $(this).attr('id').replace('theme_', '');
 
-    afficherMasquer('modifier_theme_' + id_theme);
-    afficherMasquer('modifier_theme_2_' + id_theme);
+    afficherMasquerIdNoDelay('modifier_theme_' + id_theme);
+    afficherMasquerIdNoDelay('modifier_theme_2_' + id_theme);
     initMasonry();
   });
 
@@ -60,8 +60,8 @@ $(function()
   {
     var id_theme = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquer('modifier_theme_' + id_theme);
-    afficherMasquer('modifier_theme_2_' + id_theme);
+    afficherMasquerIdNoDelay('modifier_theme_' + id_theme);
+    afficherMasquerIdNoDelay('modifier_theme_2_' + id_theme);
     initMasonry();
   });
 
@@ -434,24 +434,6 @@ function initMasonry()
     gutter: 20,
     horizontalOrder: true
   });
-}
-
-// Affiche ou masque une zone
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == 'none')
-    $('#' + id).css('display', 'block');
-  else
-    $('#' + id).css('display', 'none');
-}
-
-// Affiche ou masque les lignes de visualisation/modification du tableau
-function afficherMasquerRow(id)
-{
-  if ($('#' + id).css('display') == 'none')
-    $('#' + id).css('display', 'table-row');
-  else
-    $('#' + id).css('display', 'none');
 }
 
 // Rotation icône affichage log

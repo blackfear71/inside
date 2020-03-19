@@ -23,13 +23,13 @@ $(function()
   // Ajouter une phrase culte
   $('#ajouterCollector, #fermerCollector').click(function()
   {
-    afficherMasquer('zone_add_collector');
+    afficherMasquerIdWithDelay('zone_add_collector');
   });
 
   // Ajouter une image culte
   $('#ajouterImage, #fermerImage').click(function()
   {
-    afficherMasquer('zone_add_image');
+    afficherMasquerIdWithDelay('zone_add_image');
   });
 
   // Ferme au clic sur le fond
@@ -37,7 +37,7 @@ $(function()
   {
     // Ferme le zoom d'une image culte
     if ($(event.target).attr('class') == 'fond_zoom')
-      closePicture();
+      masquerSupprimerIdWithDelay('zoom_image');
 
     // Ferme la saisie d'une phrase/image culte
     if ($(event.target).attr('class') == 'fond_saisie_collector')
@@ -52,8 +52,8 @@ $(function()
   {
     var id_collector = $(this).attr('id').replace('modifier_', '');
 
-    afficherMasquerNoDelay('modifier_collector_' + id_collector);
-    afficherMasquerNoDelay('visualiser_collector_' + id_collector);
+    afficherMasquerIdNoDelay('modifier_collector_' + id_collector);
+    afficherMasquerIdNoDelay('visualiser_collector_' + id_collector);
     adaptBrowse(id_collector);
     initMasonry();
   });
@@ -63,8 +63,8 @@ $(function()
   {
     var id_collector = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerNoDelay('modifier_collector_' + id_collector);
-    afficherMasquerNoDelay('visualiser_collector_' + id_collector);
+    afficherMasquerIdNoDelay('modifier_collector_' + id_collector);
+    afficherMasquerIdNoDelay('visualiser_collector_' + id_collector);
     initMasonry();
   });
 
@@ -73,8 +73,8 @@ $(function()
   {
     var id_collector = $(this).attr('id').replace('link_form_vote_', '');
 
-    afficherMasquerNoDelay('modifier_vote_' + id_collector);
-    afficherMasquerNoDelay('link_form_vote_' + id_collector);
+    afficherMasquerIdNoDelay('modifier_vote_' + id_collector);
+    afficherMasquerIdNoDelay('link_form_vote_' + id_collector);
     event.stopPropagation();
   });
 
@@ -101,10 +101,7 @@ $(function()
   // Ferme le zoom d'une image culte
   $(document).on('click', '#fermerImage', function()
   {
-    $('#zoom_image').fadeOut(200, function()
-    {
-      $('#zoom_image').remove();
-    });
+    masquerSupprimerIdWithDelay('zoom_image');
   });
 
   // Bloque le bouton de soumission si besoin (phrase culte)
@@ -302,38 +299,11 @@ function initMasonry()
   $('.text_collector').wrapInner();
 }
 
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
-
-// Affiche ou masque un élément (délai 0s)
-function afficherMasquerNoDelay(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(0);
-  else
-    $('#' + id).fadeOut(0);
-}
-
-// Ferme le zoom d'une image culte
-function closePicture()
-{
-  $('#zoom_image').fadeOut(200, function()
-  {
-    $('#zoom_image').remove();
-  });
-}
-
 // Ferme la saisie d'une phrase/image culte
 function closeInput(id)
 {
   if ($('#' + id).css('display') != "none")
-    afficherMasquer(id);
+    afficherMasquerIdWithDelay(id);
 }
 
 // Adapte la zone "Parcourir" en fonction de la taille de l'image à son chargement

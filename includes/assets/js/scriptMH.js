@@ -8,15 +8,19 @@ $(function()
   // Affiche la zone de saisie d'un film
   $('#ajouterFilm, #annulerFilm').click(function()
   {
-    afficherMasquer('zone_saisie_film');
+    afficherMasquerIdWithDelay('zone_saisie_film');
   });
 
   // Ferme au clic sur le fond
   $(document).on('click', function(event)
   {
-    // Ferme la saisie d'une idée
+    // Ferme la saisie d'un film
     if ($(event.target).attr('class') == 'fond_saisie_film')
       closeInput('zone_saisie_film');
+
+    // Ferme la saisie préférence (vue fiches)
+    if ($(event.target).attr('class') == 'fond_saisie_preference')
+      masquerSupprimerIdWithDelay('fond_preference');
   });
 
   // Bloque le bouton de soumission si besoin
@@ -82,7 +86,7 @@ $(function()
   // Masque la saisie de préférence d'une fiche
   $(document).on('click', '#masquerPreference', function()
   {
-    masquerSaisiePreference();
+    masquerSupprimerIdWithDelay('fond_preference');
   });
 
   // Redirige vers le détail des films au clic Doodle des fiches
@@ -104,9 +108,9 @@ $(function()
   {
     var id_comment = $(this).attr('id').replace('modifier_commentaire_', '');
 
-    afficherMasquerNoDelay('modifier_comment_' + id_comment);
-    afficherMasquerNoDelay('visualiser_comment_' + id_comment);
-    afficherMasquerNoDelay('actions_comment_' + id_comment);
+    afficherMasquerIdNoDelay('modifier_comment_' + id_comment);
+    afficherMasquerIdNoDelay('visualiser_comment_' + id_comment);
+    afficherMasquerIdNoDelay('actions_comment_' + id_comment);
   });
 
   // Masque la zone de modification d'un commentaire
@@ -114,9 +118,9 @@ $(function()
   {
     var id_comment = $(this).attr('id').replace('annuler_commentaire_', '');
 
-    afficherMasquerNoDelay('modifier_comment_' + id_comment);
-    afficherMasquerNoDelay('visualiser_comment_' + id_comment);
-    afficherMasquerNoDelay('actions_comment_' + id_comment);
+    afficherMasquerIdNoDelay('modifier_comment_' + id_comment);
+    afficherMasquerIdNoDelay('visualiser_comment_' + id_comment);
+    afficherMasquerIdNoDelay('actions_comment_' + id_comment);
   });
 
   // Insère un smiley en saisie/modification de commentaire
@@ -221,29 +225,11 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
-
-// Affiche ou masque un élément (délai 0s)
-function afficherMasquerNoDelay(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(0);
-  else
-    $('#' + id).fadeOut(0);
-}
-
 // Ferme la saisie d'un film
 function closeInput(id)
 {
   if ($('#' + id).css('display') != "none")
-    afficherMasquer(id);
+    afficherMasquerIdWithDelay(id);
 }
 
 // Change la couleur des radio boutons (saisie film)
@@ -330,7 +316,7 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
 {
   var html = '';
 
-  html += '<div class="fond_saisie_preference">';
+  html += '<div id="fond_preference" class="fond_saisie_preference">';
     html += '<div class="zone_saisie_preference">';
       // Zone titre
       html += '<div class="titre_saisie_preference">';
@@ -361,15 +347,6 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
   $('body').append(html);
 
   $('.fond_saisie_preference').hide().fadeIn(200);
-}
-
-// Masque la saisie préférence d'un film
-function masquerSaisiePreference()
-{
-  $('.fond_saisie_preference').fadeOut(200, function()
-  {
-    $(this).remove();
-  });
 }
 
 // Insère un smiley dans la zone de saisie
@@ -433,7 +410,7 @@ function updateFilm(zone)
   var action = 'details.php?action=doModifier';
 
   // Affichage zone de saisie
-  afficherMasquer(zone);
+  afficherMasquerIdWithDelay(zone);
 
   // Modification des données
   $('.titre_saisie_film').html(titre);

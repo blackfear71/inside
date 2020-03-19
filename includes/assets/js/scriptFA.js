@@ -8,7 +8,7 @@ $(function()
   // Affiche la saisie de propositions
   $('#saisiePropositions, #fermerPropositions').click(function()
   {
-    afficherMasquer('zone_saisie_choix');
+    afficherMasquerIdWithDelay('zone_saisie_choix');
   });
 
   // Ajoute une nouvelle proposition
@@ -24,7 +24,7 @@ $(function()
     var num        = $(this).attr('id').replace('choix_restaurant_', '');
     var id_listbox = 'zone_listbox_restaurant_' + num;
 
-    afficherMasquerNoDelay(id_bouton);
+    afficherMasquerIdNoDelay(id_bouton);
     afficherListboxLieux(id_listbox);
   });
 
@@ -44,7 +44,7 @@ $(function()
     var num        = $(this).attr('id').replace('choix_horaire_', '');
     var id_listbox = 'zone_listbox_horaire_' + num;
 
-    afficherMasquerNoDelay(id_bouton);
+    afficherMasquerIdNoDelay(id_bouton);
     afficherListboxHoraires(id_listbox, id_bouton, 'create', '');
   });
 
@@ -55,7 +55,7 @@ $(function()
     var num         = $(this).attr('id').replace('choix_transports_', '');
     var id_checkbox = 'zone_checkbox_transports_' + num;
 
-    afficherMasquerNoDelay(id_bouton);
+    afficherMasquerIdNoDelay(id_bouton);
     afficherCheckboxTransports(id_checkbox);
   });
 
@@ -66,7 +66,7 @@ $(function()
     var num        = $(this).attr('id').replace('choix_menu_', '');
     var id_saisie = 'zone_saisie_menu_' + num;
 
-    afficherMasquerNoDelay(id_bouton);
+    afficherMasquerIdNoDelay(id_bouton);
     afficherSaisieMenu(id_saisie);
   });
 
@@ -125,8 +125,8 @@ $(function()
   {
     var id_choix = $(this).attr('id').replace('modifier_', '');
 
-    afficherMasquerNoDelay('modifier_choix_' + id_choix);
-    afficherMasquerNoDelay('visualiser_choix_' + id_choix);
+    afficherMasquerIdNoDelay('modifier_choix_' + id_choix);
+    afficherMasquerIdNoDelay('visualiser_choix_' + id_choix);
     initMasonry();
   });
 
@@ -135,8 +135,8 @@ $(function()
   {
     var id_choix = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerNoDelay('modifier_choix_' + id_choix);
-    afficherMasquerNoDelay('visualiser_choix_' + id_choix);
+    afficherMasquerIdNoDelay('modifier_choix_' + id_choix);
+    afficherMasquerIdNoDelay('visualiser_choix_' + id_choix);
     initMasonry();
   });
 
@@ -147,7 +147,7 @@ $(function()
     var num        = $(this).attr('id').replace('update_horaire_', '');
     var id_listbox = 'zone_update_listbox_horaire_' + num;
 
-    afficherMasquerNoDelay(id_bouton);
+    afficherMasquerIdNoDelay(id_bouton);
     afficherListboxHoraires(id_listbox, id_bouton, 'update', num);
   });
 
@@ -177,14 +177,14 @@ $(function()
   // Ferme les détails d'une proposition
   $('#fermerDetails').click(function()
   {
-    afficherMasquer('zone_details');
+    afficherMasquerIdWithDelay('zone_details');
   });
 
   // Affiche la description longue d'un restaurant (détails proposition)
   $(document).on('click', '#descriptionDetails', function()
   {
-    afficherMasquerNoDelay('details_description_short');
-    afficherMasquerNoDelay('details_description_long');
+    afficherMasquerIdNoDelay('details_description_short');
+    afficherMasquerIdNoDelay('details_description_long');
   });
 
   // Affiche la saisie lieu restaurant (résumé)
@@ -192,7 +192,7 @@ $(function()
   {
     var id_bouton  = $(this).attr('id');
 
-    afficherMasquerNoDelay(id_bouton);
+    afficherMasquerIdNoDelay(id_bouton);
     afficherListboxLieuxResume(id_bouton);
   });
 
@@ -219,7 +219,7 @@ $(function()
   // Affiche la saisie de restaurant
   $('#saisieRestaurant, #fermerRestaurant').click(function()
   {
-    afficherMasquer('zone_add_restaurant');
+    afficherMasquerIdWithDelay('zone_add_restaurant');
   });
 
   // Change le statut d'un jour d'ouverture (saisie)
@@ -260,8 +260,8 @@ $(function()
   {
     var id_restaurant = $(this).attr('id').replace('description_', '');
 
-    afficherMasquerNoDelay('short_description_' + id_restaurant);
-    afficherMasquerNoDelay('long_description_' + id_restaurant);
+    afficherMasquerIdNoDelay('short_description_' + id_restaurant);
+    afficherMasquerIdNoDelay('long_description_' + id_restaurant);
     initMasonry();
   });
 
@@ -270,8 +270,8 @@ $(function()
   {
     var id_restaurant = $(this).attr('id').replace('modifier_', '');
 
-    afficherMasquerNoDelay('modifier_restaurant_' + id_restaurant);
-    afficherMasquerNoDelay('visualiser_restaurant_' + id_restaurant);
+    afficherMasquerIdNoDelay('modifier_restaurant_' + id_restaurant);
+    afficherMasquerIdNoDelay('visualiser_restaurant_' + id_restaurant);
     initMasonry();
   });
 
@@ -280,8 +280,8 @@ $(function()
   {
     var id_restaurant = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerNoDelay('modifier_restaurant_' + id_restaurant);
-    afficherMasquerNoDelay('visualiser_restaurant_' + id_restaurant);
+    afficherMasquerIdNoDelay('modifier_restaurant_' + id_restaurant);
+    afficherMasquerIdNoDelay('visualiser_restaurant_' + id_restaurant);
     initMasonry();
   });
 
@@ -605,29 +605,11 @@ function tailleAutoZones()
   $('.zone_proposition_resume').css('min-height', max_height);
 }
 
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
-
-// Affiche ou masque un élément (délai 0s)
-function afficherMasquerNoDelay(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(0);
-  else
-    $('#' + id).fadeOut(0);
-}
-
 // Ferme la saisie des choix
 function closeInputOrDetails(id)
 {
   if ($('#' + id).css('display') != "none")
-    afficherMasquer(id);
+    afficherMasquerIdWithDelay(id);
 }
 
 // Affiche la listbox des lieux
@@ -1575,7 +1557,7 @@ function showDetails(zone, id)
   }
 
   // Affichage de la zone
-  afficherMasquer(zone);
+  afficherMasquerIdWithDelay(zone);
 }
 
 // Formate l'horaire

@@ -20,7 +20,7 @@ $(function()
   // Ajouter une dépense
   $('#ajouterDepense').click(function()
   {
-    afficherMasquer('zone_add_depense');
+    afficherMasquerIdWithDelay('zone_add_depense');
     initMasonry();
   });
 
@@ -148,24 +148,6 @@ function adaptExpenses()
   }
 }
 
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
-
-// Affiche ou masque un élément (délai 0s)
-function afficherMasquerNoDelay(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(0);
-  else
-    $('#' + id).fadeOut(0);
-}
-
 // Ferme la saisie d'une dépense
 function closeInput()
 {
@@ -240,7 +222,7 @@ function updateExpense(id, year)
   var parts;
 
   // Affichage zone de saisie
-  afficherMasquer('zone_add_depense');
+  afficherMasquerIdWithDelay('zone_add_depense');
   initMasonry();
 
   // Modification des données
@@ -275,7 +257,7 @@ function updateExpense(id, year)
 function resetSaisie(zone, year)
 {
   // Fermeture zone de saisie
-  afficherMasquer(zone);
+  afficherMasquerIdWithDelay(zone);
 
   setTimeout(function()
   {

@@ -20,7 +20,7 @@ $(function()
   // Ajouter un rapport
   $('#ajouterRapport, #fermerRapport').click(function()
   {
-    afficherMasquer('zone_add_report');
+    afficherMasquerIdWithDelay('zone_add_report');
   });
 
   // Affiche une image de bug / évolution en grand
@@ -32,7 +32,7 @@ $(function()
   // Ferme le zoom d'une image de bug / évolution
   $(document).on('click', '#fermerImage', function()
   {
-    closeBug();
+    masquerSupprimerIdWithDelay('zoom_image');
   });
 
   // Ferme au clic sur le fond
@@ -40,11 +40,11 @@ $(function()
   {
     // Ferme le zoom d'une image de bug / évolution
     if ($(event.target).attr('class') == 'fond_zoom')
-      closeBug();
+      masquerSupprimerIdWithDelay('zoom_image');
 
     // Ferme la saisie d'une image de bug / évolution
     if ($(event.target).attr('class') == 'fond_saisie_report')
-      closeInput();
+      afficherMasquerIdWithDelay('zone_add_report');
   });
 
   // Bloque le bouton de soumission si besoin
@@ -76,15 +76,6 @@ $(window).resize(function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
-
 // Insère une prévisualisation de l'image sur la zone
 var loadFile = function(event, id)
 {
@@ -179,19 +170,4 @@ function showBug(element)
   $('body').append(html);
 
   $('#zoom_image').fadeIn(200);
-}
-
-// Ferme l'image d'un bug ou d'une évolution'
-function closeBug()
-{
-  $('#zoom_image').fadeOut(200, function()
-  {
-    $('#zoom_image').remove();
-  });
-}
-
-// Ferme la saisie d'un bug ou d'une évolution
-function closeInput()
-{
-  afficherMasquer('zone_add_report');
 }

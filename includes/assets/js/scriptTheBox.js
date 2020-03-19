@@ -8,7 +8,7 @@ $(function()
   // Ajouter une idée
   $('#ajouterIdee, #fermerIdee').click(function()
   {
-    afficherMasquer('zone_add_idea');
+    afficherMasquerIdWithDelay('zone_add_idea');
   });
 
   // Ferme au clic sur le fond
@@ -77,20 +77,11 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Affiche ou masque un élément (délai 200ms)
-function afficherMasquer(id)
-{
-  if ($('#' + id).css('display') == "none")
-    $('#' + id).fadeIn(200);
-  else
-    $('#' + id).fadeOut(200);
-}
-
 // Ferme la saisie d'une idée
 function closeInput(id)
 {
   if ($('#' + id).css('display') != "none")
-    afficherMasquer(id);
+    afficherMasquerIdWithDelay(id);
 }
 
 // Adaptations des idées sur mobile
