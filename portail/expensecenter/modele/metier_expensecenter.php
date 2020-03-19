@@ -46,7 +46,7 @@
                       'pseudo'      => $user->getPseudo(),
                       'avatar'      => $user->getAvatar(),
                       'expenses'    => $user->getExpenses()
-                    );
+                     );
 
       // On ajoute la ligne au tableau
       array_push($listeUsers, Profile::withData($myUser));

@@ -19,8 +19,8 @@
       $user = Profile::withData($donnees);
 
       // Création tableau de correspondance identifiant / pseudo / avatar
-      $listUsers[$user->getIdentifiant()] = array('pseudo' => htmlspecialchars($user->getPseudo()),
-                                                  'avatar' => htmlspecialchars($user->getAvatar())
+      $listUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
+                                                  'avatar' => $user->getAvatar()
                                                  );
     }
     $reponse->closeCursor();
