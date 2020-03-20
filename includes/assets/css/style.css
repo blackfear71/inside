@@ -856,7 +856,8 @@ aside
 	color: #262626;
 	font-size: 150%;
 	text-align: center;
-	line-height: 100px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 }
 
 /*** Alertes ***/

@@ -28,14 +28,23 @@
     return $listUsers;
   }
 
+  // METIER : Calcule le pourcentage de votes nécessaire pour devenir top culte
+  // RETOUR : Minimum pour être top culte
+  function getMinGolden($listUsers)
+  {
+    $nb_users   = count($listUsers);
+    $min_golden = floor(($nb_users * 75) / 100);
+
+    return $min_golden;
+  }
+
   // METIER : Lecture nombre de pages en fonction du filtre
   // RETOUR : Nombre de pages
-  function getPages($filtre, $identifiant)
+  function getPages($filtre, $identifiant, $min_golden)
   {
     $nb_pages     = 0;
     $nb_col       = 0;
     $nb_par_page  = 18;
-    $min_golden   = 6;
 
     global $bdd;
 
@@ -106,11 +115,10 @@
 
   // METIER : Lecture des phrases cultes
   // RETOUR : Liste phrases cultes
-  function getCollectors($listUsers, $nb_pages, $page, $identifiant, $tri, $filtre)
+  function getCollectors($listUsers, $nb_pages, $min_golden, $page, $identifiant, $tri, $filtre)
   {
     $listCollectors = array();
     $nb_par_page    = 18;
-    $min_golden     = 6;
 
     // Contrôle dernière page
     if ($page > $nb_pages)

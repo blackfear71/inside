@@ -54,7 +54,8 @@
       {
         // Lecture des données par le modèle
         $listeUsers = getUsers();
-        $nbPages    = getPages($_GET['filter'], $_SESSION['user']['identifiant']);
+        $minGolden  = getMinGolden($listeUsers);
+        $nbPages    = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
 
         if ($nbPages > 0)
         {
@@ -63,7 +64,7 @@
           elseif ($_GET['page'] < 1)
             header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
           else
-            $listeCollectors = getCollectors($listeUsers, $nbPages, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
+            $listeCollectors = getCollectors($listeUsers, $nbPages, $minGolden, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
         }
       }
       break;

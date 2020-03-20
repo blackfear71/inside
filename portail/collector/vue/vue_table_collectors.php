@@ -1,6 +1,4 @@
 <?php
-  $min_golden = 6;
-
   echo '<div class="zone_collectors">';
     if ($nbPages > 0)
     {
@@ -11,7 +9,7 @@
         /*********************************************/
         echo '<div class="zone_collector" id="visualiser_collector_' . $collector->getId() . '">';
           echo '<div id="zone_shadow_' . $collector->getId() . '" class="zone_shadow">';
-            if ($collector->getNb_votes() >= $min_golden)
+            if ($collector->getNb_votes() >= $minGolden)
               echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';
             else
               echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
@@ -104,7 +102,7 @@
               // Contexte
               if (!empty($collector->getContext()))
               {
-                if ($collector->getNb_votes() >= $min_golden)
+                if ($collector->getNb_votes() >= $minGolden)
                   echo '<div class="text_context_golden">' . nl2br(formatCollector($collector->getContext())) . '</div>';
                 else
                   echo '<div class="text_context">' . nl2br(formatCollector($collector->getContext())) . '</div>';
@@ -145,7 +143,7 @@
         /***************************/
         echo '<div class="zone_collector" id="modifier_collector_' . $collector->getId() . '" style="display: none; position: relative; z-index: 2;">';
           echo '<form method="post" action="collector.php?action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" enctype="multipart/form-data" class="zone_shadow">';
-            if ($collector->getNb_votes() >= $min_golden)
+            if ($collector->getNb_votes() >= $minGolden)
               echo '<div class="zone_collector_haut_golden">';
             else
               echo '<div class="zone_collector_haut">';
@@ -234,7 +232,7 @@
               }
 
               // Contexte
-              if ($collector->getNb_votes() >= $min_golden)
+              if ($collector->getNb_votes() >= $minGolden)
                 echo '<div class="text_context_golden_update">';
               else
                 echo '<div class="text_context_update">';
@@ -245,5 +243,7 @@
         echo '</div>';
       }
     }
+    else
+      echo '<div class="empty">Aucune phrase ou image culte dans cette catégorie...</div>';
   echo '</div>';
 ?>
