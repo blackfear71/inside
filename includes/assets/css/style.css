@@ -381,6 +381,7 @@ header
 .zone_details_notifications
 {
 	position: absolute;
+	margin-top: 3px;
 	filter: drop-shadow(0px 0px 2px #5c5c5c);
 }
 
