@@ -69,15 +69,15 @@
 
         if ($statsCatIns['bilan'] <= -6)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ee4949">';
-				elseif ($statsCatIns['bilan'] <= -3 AND $statsCatIns['bilan'] > -6)
+				elseif ($statsCatIns['bilan'] > -6 AND $statsCatIns['bilan'] <= -3)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ff9147;">';
-				elseif ($statsCatIns['bilan'] < 0 AND $statsCatIns['bilan'] > -3)
+				elseif ($statsCatIns['bilan'] > -3 AND $statsCatIns['bilan'] < -0.01)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #fffd4c;">';
-				elseif ($statsCatIns['bilan'] > 0 AND $statsCatIns['bilan'] < 5)
+				elseif ($statsCatIns['bilan'] > 0.01 AND $statsCatIns['bilan'] < 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #b6fc78;">';
-				elseif ($statsCatIns['bilan'] > 0 AND $statsCatIns['bilan'] >= 5)
+				elseif ($statsCatIns['bilan'] >= 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #71d058;">';
-				else
+				elseif ($statsCatIns['bilan'] > -0.01 AND $statsCatIns['bilan'] < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
 						echo $statsCatIns['bilan_format'];
 					echo '</td>';
@@ -118,15 +118,15 @@
 
 				if ($statsCatDes['bilan'] <= -6)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ee4949">';
-				elseif ($statsCatDes['bilan'] <= -3 AND $statsCatDes['bilan'] > -6)
+				elseif ($statsCatDes['bilan'] > -6 AND $statsCatDes['bilan'] <= -3)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ff9147;">';
-				elseif ($statsCatDes['bilan'] < 0 AND $statsCatDes['bilan'] > -3)
+				elseif ($statsCatDes['bilan'] > -3 AND $statsCatDes['bilan'] < -0.01)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #fffd4c;">';
-				elseif ($statsCatDes['bilan'] > 0 AND $statsCatDes['bilan'] < 5)
+				elseif ($statsCatDes['bilan'] > 0.01 AND $statsCatDes['bilan'] < 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #b6fc78;">';
-				elseif ($statsCatDes['bilan'] > 0 AND $statsCatDes['bilan'] >= 5)
+				elseif ($statsCatDes['bilan'] >= 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #71d058;">';
-				else
+				elseif ($statsCatDes['bilan'] > -0.01 AND $statsCatDes['bilan'] < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
 						echo $statsCatDes['bilan_format'];
 					echo '</td>';

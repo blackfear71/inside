@@ -1,6 +1,84 @@
 <?php
   include_once('../../includes/functions/appel_bdd.php');
 
+  // METIER : Recherche les utilisateurs désinscrits
+  // RETOUR : Liste des utilisateurs désinscrits
+  function getUsersDes($listUsersIns)
+  {
+    $listUsersDes = array();
+
+    global $bdd;
+
+    // Récupération des identifiants dans les films
+    $req0 = $bdd->query('SELECT DISTINCT identifiant_add FROM movie_house ORDER BY identifiant_add ASC');
+    while ($data0 = $req0->fetch())
+    {
+      array_push($listUsersDes, $data0['identifiant_add']);
+    }
+    $req0->closeCursor();
+
+    // Récupération des identifiants dans les commentaires des films
+    $req1 = $bdd->query('SELECT DISTINCT author FROM movie_house_comments ORDER BY author ASC');
+    while ($data1 = $req1->fetch())
+    {
+      array_push($listUsersDes, $data1['author']);
+    }
+    $req1->closeCursor();
+
+    // Récupération des identifiants dans les dépenses
+    $req2 = $bdd->query('SELECT DISTINCT buyer FROM expense_center ORDER BY buyer ASC');
+    while ($data2 = $req2->fetch())
+    {
+      array_push($listUsersDes, $data2['buyer']);
+    }
+    $req2->closeCursor();
+
+    // Récupération des identifiants dans les parts des dépenses
+    $req3 = $bdd->query('SELECT DISTINCT identifiant FROM expense_center_users ORDER BY identifiant ASC');
+    while ($data3 = $req3->fetch())
+    {
+      array_push($listUsersDes, $data3['identifiant']);
+    }
+    $req3->closeCursor();
+
+    // Récupération des identifiants dans les bugs / évolutions
+    $req4 = $bdd->query('SELECT DISTINCT author FROM bugs ORDER BY author ASC');
+    while ($data4 = $req4->fetch())
+    {
+      array_push($listUsersDes, $data4['author']);
+    }
+    $req4->closeCursor();
+
+    // Récupération des identifiants dans les idées #TheBox
+    $req5 = $bdd->query('SELECT DISTINCT author FROM ideas ORDER BY author ASC');
+    while ($data5 = $req5->fetch())
+    {
+      array_push($listUsersDes, $data5['author']);
+    }
+    $req5->closeCursor();
+
+    // Suppression des doublons
+    $listUsersDes = array_unique($listUsersDes);
+
+    // Tri par ordre alphabétique
+    sort($listUsersDes);
+
+    // Filtrage avec les utilisateurs inscrits
+    foreach ($listUsersDes as $keyDes => $userDes)
+    {
+      foreach ($listUsersIns as $userIns)
+      {
+        if ($userDes == $userIns->getIdentifiant())
+        {
+          unset($listUsersDes[$keyDes]);
+          break;
+        }
+      }
+    }
+
+    return $listUsersDes;
+  }
+
   // METIER : Contrôle alertes utilisateurs
   // RETOUR : Booléen
   function getAlerteUsers()
@@ -92,125 +170,53 @@
 
   // METIER : Lecture statistiques catégories des utilisateurs désinscrits
   // RETOUR : Tableau de nombres de commentaires & bilans des dépenses
-  function getTabCategoriesDes($list_users)
+  function getTabCategoriesDes($list_users_des)
   {
     // Initialisation tableau des statistiques de catégories
     $tabCategories = array();
 
     global $bdd;
 
-    ///////////////////////////////////////////
-    // Statistiques utilisateurs désinscrits //
-    ///////////////////////////////////////////
-
-    // On cherche les utilisateurs désinscrits qui ont une dépense
-    $utilisateurs_desinscrits = array();
-    $j = 0;
-
-    $req1 = $bdd->query('SELECT DISTINCT identifiant FROM expense_center_users ORDER BY identifiant ASC');
-    while ($data1 = $req1->fetch())
-    {
-      $founded = false;
-
-      foreach ($list_users as $user_ins)
-      {
-        if ($data1['identifiant'] == $user_ins->getIdentifiant())
-        {
-          $founded = true;
-          break;
-        }
-      }
-
-      if ($founded == false)
-      {
-        $utilisateurs_desinscrits[$j] = $data1['identifiant'];
-        $j++;
-      }
-    }
-    $req1->closeCursor();
-
-    // On cherche les utilisateurs désinscrits qui ont un achat
-		$req2 = $bdd->query('SELECT DISTINCT buyer FROM expense_center ORDER BY buyer ASC');
-		while ($data2 = $req2->fetch())
-		{
-			$founded = false;
-
-			// On cherche déja s'il y a un acheteur qui n'est pas dans les inscrits
-			foreach ($list_users as $user_ins)
-			{
-				if ($data2['buyer'] == $user_ins->getIdentifiant())
-				{
-					$founded = true;
-					break;
-				}
-			}
-
-      // Si c'est le cas, on cherche s'il n'est pas déjà dans les désinscrits
-			if ($founded == false)
-			{
-				foreach ($utilisateurs_desinscrits as $user_des)
-				{
-					if ($data2['buyer'] == $user_des)
-					{
-						$founded = true;
-						break;
-					}
-				}
-			}
-
-      // Sinon on le rajoute à la liste des désinscrits
-      if ($founded == false)
-      {
-        $utilisateurs_desinscrits[$j] = $data2['buyer'];
-        $j++;
-      }
-    }
-    $req2->closeCursor();
-
-    // Utilisateurs désinscrits
-    foreach ($utilisateurs_desinscrits as $user_des)
+    // Statistiques utilisateurs désinscrits
+    foreach ($list_users_des as $user_des)
     {
       // Nombre films ajoutés Movie House
-      $req3 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house WHERE identifiant_add = "' . $user_des . '"');
-      $data3 = $req3->fetch();
-
-      $nb_ajouts = $data3['nb_ajouts'];
-
-      $req3->closeCursor();
+      $req0 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house WHERE identifiant_add = "' . $user_des . '"');
+      $data0 = $req0->fetch();
+      $nb_ajouts = $data0['nb_ajouts'];
+      $req0->closeCursor();
 
       // Nombre de commentaires Movie House
-      $req4 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user_des . '"');
-      $data4 = $req4->fetch();
-
-      $nb_comments = $data4['nb_comments'];
-
-      $req4->closeCursor();
+      $req1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE author = "' . $user_des . '"');
+      $data1 = $req1->fetch();
+      $nb_comments = $data1['nb_comments'];
+      $req1->closeCursor();
 
       // Calcul des bilans pour les utilisateurs désinscrits uniquement
       $bilan = 0;
 
-      $req5 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-      while ($data5 = $req5->fetch())
+      $req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
+      while ($data2 = $req2->fetch())
       {
         // Prix d'achat
-        $prix_achat = $data5['price'];
+        $prix_achat = $data2['price'];
 
         // Identifiant de l'acheteur
-        $acheteur = $data5['buyer'];
+        $acheteur = $data2['buyer'];
 
         // Nombre de parts total et utilisateur
         $nb_parts_total = 0;
         $nb_parts_user = 0;
 
-        $req6 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data5['id']);
-        while ($data6 = $req6->fetch())
+        $req3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data2['id']);
+        while ($data3 = $req3->fetch())
         {
           // Nombre de parts total
-          $nb_parts_total += $data6['parts'];
+          $nb_parts_total += $data3['parts'];
 
           // Nombre de parts de l'utilisateur
-          if ($user_des == $data6['identifiant'])
-            $nb_parts_user = $data6['parts'];
+          if ($user_des == $data3['identifiant'])
+            $nb_parts_user = $data3['parts'];
         }
 
         // Prix par parts
@@ -220,24 +226,23 @@
           $prix_par_part = 0;
 
         // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-        if ($data5['buyer'] == $user_des AND $nb_parts_user >= 0)
+        if ($data2['buyer'] == $user_des AND $nb_parts_user >= 0)
           $bilan += $prix_achat - ($prix_par_part * $nb_parts_user);
-        elseif ($data5['buyer'] != $user_des AND $nb_parts_user > 0)
+        elseif ($data2['buyer'] != $user_des AND $nb_parts_user > 0)
           $bilan -= $prix_par_part * $nb_parts_user;
 
-        $req6->closeCursor();
+        $req3->closeCursor();
       }
-      $req5->closeCursor();
+      $req2->closeCursor();
 
       $bilan_format = str_replace('.', ',', number_format($bilan, 2, ',', '')) . ' €';
 
       // Nombre phrases cultes Collector Room
-      $req7 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user_des . '"');
-      $data7 = $req7->fetch();
-
-      $nb_collectors = $data7['nb_collectors'];
-
-      $req7->closeCursor();
+      // Nombre phrases cultes Collector Room
+      $req4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user_des . '"');
+      $data4 = $req4->fetch();
+      $nb_collectors = $data4['nb_collectors'];
+      $req4->closeCursor();
 
       $cat = array('identifiant'   => $user_des,
                    'pseudo'        => '',
@@ -271,17 +276,13 @@
     // Nombre films ajoutés Movie House
     $req0 = $bdd->query('SELECT COUNT(id) AS nb_ajouts FROM movie_house');
     $data0 = $req0->fetch();
-
     $nb_tot_ajouts = $data0['nb_ajouts'];
-
     $req0->closeCursor();
 
     // Nombre de commentaires total
     $req1 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments');
     $data1 = $req1->fetch();
-
     $nb_tot_commentaires = $data1['nb_comments'];
-
     $req1->closeCursor();
 
     // Calcul somme bilans utilisateurs inscrits
@@ -325,9 +326,7 @@
     // Nombre de phrase cultes total
     $req4 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector');
     $data4 = $req4->fetch();
-
     $nb_tot_collectors = $data4['nb_collectors'];
-
     $req4->closeCursor();
 
     $tabTotCat = array('nb_tot_ajouts'       => $nb_tot_ajouts,
@@ -336,33 +335,29 @@
                        'somme_bilans_format' => $somme_bilans_format,
                        'alerte_bilan'        => $alerte_bilan,
                        'nb_tot_collectors'   => $nb_tot_collectors
-                        );
+                      );
 
     return $tabTotCat;
   }
 
   // METIER : Lecture statistiques
   // RETOUR : Tableau de nombres de bugs & idées
-  function getTabStats($list_users)
+  function getTabStats($list_users_ins, $list_users_des)
   {
     // Initialisation tableau statistiques utilisateurs
-    $tabStats = array();
-
-    // Initialisations calcul total des inscrits
-    $nb_tot_bugs            = 0;
-    $nb_tot_bugs_resolus    = 0;
-    $nb_tot_idees           = 0;
-    $nb_tot_idees_en_charge = 0;
-    $nb_tot_idees_terminees = 0;
+    $tabStats = array('inscrits' => array(),
+                      'desinscrits' => array()
+                     );
 
     global $bdd;
 
     ////////////////////////////////////////
     // Statistiques utilisateurs inscrits //
     ////////////////////////////////////////
-    foreach ($list_users as $user)
+    $stats_ins = array();
+
+    foreach ($list_users_ins as $user_ins)
     {
-      $stats               = array();
       $nb_bugs             = 0;
       $nb_bugs_resolved    = 0;
       $nb_ideas            = 0;
@@ -370,123 +365,107 @@
       $nb_ideas_finished   = 0;
 
       // Nombre de demandes (bugs/évolutions)
-      $req1 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user->getIdentifiant() . '"');
+      $req1 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user_ins->getIdentifiant() . '"');
       $data1 = $req1->fetch();
-
-      $nb_bugs      = $data1['nb_bugs'];
-      $nb_tot_bugs += $data1['nb_bugs'];
-
+      $nb_bugs = $data1['nb_bugs'];
       $req1->closeCursor();
 
       // Nombre de demandes résolues (bugs/évolutions)
-      $req2 = $bdd->query('SELECT COUNT(id) AS nb_bugs_resolus FROM bugs WHERE author = "' . $user->getIdentifiant() . '" AND resolved = "Y"');
+      $req2 = $bdd->query('SELECT COUNT(id) AS nb_bugs_resolus FROM bugs WHERE author = "' . $user_ins->getIdentifiant() . '" AND resolved = "Y"');
       $data2 = $req2->fetch();
-
-      $nb_bugs_resolved     = $data2['nb_bugs_resolus'];
-      $nb_tot_bugs_resolus += $data2['nb_bugs_resolus'];
-
+      $nb_bugs_resolved = $data2['nb_bugs_resolus'];
       $req2->closeCursor();
 
       // Nombre d'idées publiées
-      $req3 = $bdd->query('SELECT COUNT(id) AS nb_ideas FROM ideas WHERE author = "' . $user->getIdentifiant() . '"');
+      $req3 = $bdd->query('SELECT COUNT(id) AS nb_ideas FROM ideas WHERE author = "' . $user_ins->getIdentifiant() . '"');
       $data3 = $req3->fetch();
-
-      $nb_ideas      = $data3['nb_ideas'];
-      $nb_tot_idees += $data3['nb_ideas'];
-
+      $nb_ideas = $data3['nb_ideas'];
       $req3->closeCursor();
 
       // Nombre d'idées en charge
-      $req4 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper = "' . $user->getIdentifiant() . '" AND status != "D" AND status != "R"');
+      $req4 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper = "' . $user_ins->getIdentifiant() . '" AND status != "D" AND status != "R"');
       $data4 = $req4->fetch();
-
-      $nb_ideas_inprogress     = $data4['nb_ideas_inprogress'];
-      $nb_tot_idees_en_charge += $data4['nb_ideas_inprogress'];
-
+      $nb_ideas_inprogress = $data4['nb_ideas_inprogress'];
       $req4->closeCursor();
 
       // Nombre d'idées terminées ou rejetées
-      $req5 = $bdd->query('SELECT COUNT(id) AS nb_ideas_finished FROM ideas WHERE developper = "' . $user->getIdentifiant() . '" AND (status = "D" OR status = "R")');
+      $req5 = $bdd->query('SELECT COUNT(id) AS nb_ideas_finished FROM ideas WHERE developper = "' . $user_ins->getIdentifiant() . '" AND (status = "D" OR status = "R")');
       $data5 = $req5->fetch();
-
-      $nb_ideas_finished       = $data5['nb_ideas_finished'];
-      $nb_tot_idees_terminees += $data5['nb_ideas_finished'];
-
+      $nb_ideas_finished = $data5['nb_ideas_finished'];
       $req5->closeCursor();
 
       // On génère une ligne du tableau
-      $stats = array('identifiant'         => $user->getIdentifiant(),
-                     'pseudo'              => $user->getPseudo(),
-                     'nb_bugs'             => $nb_bugs,
-                     'nb_bugs_resolved'    => $nb_bugs_resolved,
-                     'nb_ideas'            => $nb_ideas,
-                     'nb_ideas_inprogress' => $nb_ideas_inprogress,
-                     'nb_ideas_finished'   => $nb_ideas_finished
-                    );
+      $myStatsIns = array('identifiant'         => $user_ins->getIdentifiant(),
+                          'pseudo'              => $user_ins->getPseudo(),
+                          'nb_bugs'             => $nb_bugs,
+                          'nb_bugs_resolved'    => $nb_bugs_resolved,
+                          'nb_ideas'            => $nb_ideas,
+                          'nb_ideas_inprogress' => $nb_ideas_inprogress,
+                          'nb_ideas_finished'   => $nb_ideas_finished
+                         );
 
-      array_push($tabStats, $stats);
+      array_push($stats_ins, $myStatsIns);
     }
 
     ///////////////////////////////////////////
     // Statistiques utilisateurs désinscrits //
     ///////////////////////////////////////////
-    $nb_bugs_unsubscribed             = 0;
-    $nb_bugs_resolved_unsubscribed    = 0;
-    $nb_ideas_unsubscribed            = 0;
-    $nb_ideas_inprogress_unsubscribed = 0;
-    $nb_ideas_finished_unsubscribed   = 0;
+    $stats_des = array();
 
-    // Nombre de demandes (bugs/évolutions)
-    $req6 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs');
-    $data6 = $req6->fetch();
+    foreach ($list_users_des as $user_des)
+    {
+      $nb_bugs             = 0;
+      $nb_bugs_resolved    = 0;
+      $nb_ideas            = 0;
+      $nb_ideas_inprogress = 0;
+      $nb_ideas_finished   = 0;
 
-    $nb_bugs_unsubscribed = $data6['nb_bugs'] - $nb_tot_bugs;
+      // Nombre de demandes (bugs/évolutions)
+      $req6 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user_des . '"');
+      $data6 = $req6->fetch();
+      $nb_bugs = $data6['nb_bugs'];
+      $req6->closeCursor();
 
-    $req6->closeCursor();
+      // Nombre de demandes résolues (bugs/évolutions)
+      $req7 = $bdd->query('SELECT COUNT(id) AS nb_bugs_resolus FROM bugs WHERE author = "' . $user_des . '" AND resolved = "Y"');
+      $data7 = $req7->fetch();
+      $nb_bugs_resolved = $data7['nb_bugs_resolus'];
+      $req7->closeCursor();
 
-    // Nombre de demandes résolues (bugs/évolutions)
-    $req7 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE resolved = "Y"');
-    $data7 = $req7->fetch();
+      // Nombre d'idées publiées
+      $req8 = $bdd->query('SELECT COUNT(id) AS nb_ideas FROM ideas WHERE author = "' . $user_des . '"');
+      $data8 = $req8->fetch();
+      $nb_ideas = $data8['nb_ideas'];
+      $req8->closeCursor();
 
-    $nb_bugs_resolved_unsubscribed = $data7['nb_bugs'] - $nb_tot_bugs_resolus;
+      // Nombre d'idées en charge
+      $req9 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper = "' . $user_des . '" AND status != "D" AND status != "R"');
+      $data9 = $req9->fetch();
+      $nb_ideas_inprogress = $data9['nb_ideas_inprogress'];
+      $req9->closeCursor();
 
-    $req7->closeCursor();
+      // Nombre d'idées terminées ou rejetées
+      $req10 = $bdd->query('SELECT COUNT(id) AS nb_ideas_finished FROM ideas WHERE developper = "' . $user_des . '" AND (status = "D" OR status = "R")');
+      $data10 = $req10->fetch();
+      $nb_ideas_finished = $data10['nb_ideas_finished'];
+      $req10->closeCursor();
 
-    // Nombre d'idées publiées
-    $req8 = $bdd->query('SELECT COUNT(id) AS nb_ideas FROM ideas');
-    $data8 = $req8->fetch();
+      // On génère une ligne du tableau
+      $myStatsDes = array('identifiant'         => $user_des,
+                          'pseudo'              => '',
+                          'nb_bugs'             => $nb_bugs,
+                          'nb_bugs_resolved'    => $nb_bugs_resolved,
+                          'nb_ideas'            => $nb_ideas,
+                          'nb_ideas_inprogress' => $nb_ideas_inprogress,
+                          'nb_ideas_finished'   => $nb_ideas_finished
+                         );
 
-    $nb_ideas_unsubscribed = $data8['nb_ideas'] - $nb_tot_idees;
+      array_push($stats_des, $myStatsDes);
+    }
 
-    $req8->closeCursor();
-
-    // Nombre d'idées en charge
-    $req9 = $bdd->query('SELECT COUNT(id) AS nb_ideas_inprogress FROM ideas WHERE developper != "" AND status != "D" AND status != "R"');
-    $data9 = $req9->fetch();
-
-    $nb_ideas_inprogress_unsubscribed = $data9['nb_ideas_inprogress'] - $nb_tot_idees_en_charge;
-
-    $req9->closeCursor();
-
-    // Nombre d'idées terminées ou rejetées
-    $req10 = $bdd->query('SELECT COUNT(id) AS nb_ideas_finished FROM ideas WHERE developper != "" AND (status = "D" OR status = "R")');
-    $data10 = $req10->fetch();
-
-    $nb_ideas_finished_unsubscribed = $data10['nb_ideas_finished'] - $nb_tot_idees_terminees;
-
-    $req10->closeCursor();
-
-    // On génère une ligne unique du tableau
-    $stats_unsubscribed = array('identifiant'         => "Autres",
-                                'pseudo'              => "Anciens utilisateurs",
-                                'nb_bugs'             => $nb_bugs_unsubscribed,
-                                'nb_bugs_resolved'    => $nb_bugs_resolved_unsubscribed,
-                                'nb_ideas'            => $nb_ideas_unsubscribed,
-                                'nb_ideas_inprogress' => $nb_ideas_inprogress_unsubscribed,
-                                'nb_ideas_finished'   => $nb_ideas_finished_unsubscribed
-                  );
-
-    array_push($tabStats, $stats_unsubscribed);
+    // Ajout au tableau global
+    $tabStats['inscrits'] = $stats_ins;
+    $tabStats['desinscrits'] = $stats_des;
 
     return $tabStats;
   }

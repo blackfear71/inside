@@ -36,11 +36,12 @@
     case 'goConsulter':
       // Lecture liste des données par le modèle
 			$listeUsers       = getUsers();
+      $listeUsersDes    = getUsersDes($listeUsers);
 			$alerteUsers      = getAlerteUsers();
       $tabCategoriesIns = getTabCategoriesIns($listeUsers);
-			$tabCategoriesDes = getTabCategoriesDes($listeUsers);
+			$tabCategoriesDes = getTabCategoriesDes($listeUsersDes);
       $totalCategories  = getTotCategories($tabCategoriesIns, $tabCategoriesDes);
-			$tabStats         = getTabStats($listeUsers);
+			$tabStats         = getTabStats($listeUsers, $listeUsersDes);
 			$totalStats       = getTotStats();
       break;
 
@@ -122,13 +123,18 @@
 
 			foreach ($tabStats as &$stats)
 			{
-				$stats['identifiant']         = htmlspecialchars($stats['identifiant']);
-				$stats['pseudo']              = htmlspecialchars($stats['pseudo']);
-				$stats['nb_bugs']             = htmlspecialchars($stats['nb_bugs']);
-				$stats['nb_bugs_resolved']    = htmlspecialchars($stats['nb_bugs_resolved']);
-				$stats['nb_ideas']            = htmlspecialchars($stats['nb_ideas']);
-				$stats['nb_ideas_inprogress'] = htmlspecialchars($stats['nb_ideas_inprogress']);
-				$stats['nb_ideas_finished']   = htmlspecialchars($stats['nb_ideas_finished']);
+        foreach ($stats as &$statUser)
+        {
+          $statUser['identifiant']         = htmlspecialchars($statUser['identifiant']);
+          $statUser['pseudo']              = htmlspecialchars($statUser['pseudo']);
+          $statUser['nb_bugs']             = htmlspecialchars($statUser['nb_bugs']);
+          $statUser['nb_bugs_resolved']    = htmlspecialchars($statUser['nb_bugs_resolved']);
+          $statUser['nb_ideas']            = htmlspecialchars($statUser['nb_ideas']);
+          $statUser['nb_ideas_inprogress'] = htmlspecialchars($statUser['nb_ideas_inprogress']);
+          $statUser['nb_ideas_finished']   = htmlspecialchars($statUser['nb_ideas_finished']);
+        }
+
+        unset($statUser);
 			}
 
       unset($stats);
