@@ -193,6 +193,7 @@ function adaptRecipes()
 {
   if ($(window).width() < 1080)
   {
+    // Affichage de la page
     $('.zone_semaines_left').css('display', 'block');
     $('.zone_semaines_left').css('width', '100%');
 
@@ -208,9 +209,19 @@ function adaptRecipes()
     $('.zone_cooking_right').css('width', '100%');
     $('.zone_cooking_right').css('margin-left', '0');
     $('.zone_cooking_right').css('margin-top', '10px');
+
+    // Affichage de la saisie
+    $('.zone_preparation').css('display', 'block');
+    $('.zone_preparation').css('width', '100%');
+    $('.zone_preparation').css('margin-right', '0px');
+
+    $('.zone_remarques').css('display', 'block');
+    $('.zone_remarques').css('width', '100%');
+    $('.zone_remarques').css('margin-top', '10px');
   }
   else
   {
+    // Affichage de la page
     $('.zone_semaines_left').css('display', 'inline-block');
     $('.zone_semaines_left').css('width', 'calc(50% - 10px)');
 
@@ -226,6 +237,15 @@ function adaptRecipes()
     $('.zone_cooking_right').css('width', 'calc(100% - 220px)');
     $('.zone_cooking_right').css('margin-left', '20px');
     $('.zone_cooking_right').css('margin-top', '10px');
+
+    // Affichage de la saisie
+    $('.zone_preparation').css('display', 'inline-block');
+    $('.zone_preparation').css('width', 'calc(50% - 5px)');
+    $('.zone_preparation').css('margin-right', '10px');
+
+    $('.zone_remarques').css('display', 'inline-block');
+    $('.zone_remarques').css('width', 'calc(50% - 5px)');
+    $('.zone_remarques').css('margin-top', '0px');
   }
 }
 

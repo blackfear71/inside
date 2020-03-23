@@ -723,6 +723,14 @@
 .zone_preparation
 {
   display: inline-block;
+  margin-right: 10px;
+  width: calc(50% - 5px);
+  vertical-align: top;
+}
+
+.zone_remarques
+{
+  display: inline-block;
   width: calc(50% - 5px);
   vertical-align: top;
 }
