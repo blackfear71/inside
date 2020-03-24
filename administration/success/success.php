@@ -34,7 +34,8 @@
 		unset($_SESSION['save']);
 
     $_SESSION['save']['reference_success']   = "";
-    $_SESSION['save']['level']               = "";
+		$_SESSION['save']['level']               = "";
+    $_SESSION['save']['unicity']             = "";
 		$_SESSION['save']['order_success']       = "";
     $_SESSION['save']['title_success']       = "";
     $_SESSION['save']['description_success'] = "";
@@ -100,6 +101,7 @@
         $success->setLevel(htmlspecialchars($success->getLevel()));
         $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
 				$success->setDefined(htmlspecialchars($success->getDefined()));
+				$success->setUnicity(htmlspecialchars($success->getUnicity()));
         $success->setTitle(htmlspecialchars($success->getTitle()));
         $success->setDescription(htmlspecialchars($success->getDescription()));
 				$success->setLimit_success(htmlspecialchars($success->getLimit_success()));

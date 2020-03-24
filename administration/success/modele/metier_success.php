@@ -45,9 +45,15 @@
     $limit_success = $post['limit_success'];
     $explanation   = $post['explanation'];
 
+    if (isset($post['unicity']))
+      $unicity     = "Y";
+    else
+      $unicity     = "N";
+
     // Sauvegarde en cas d'erreur
     $_SESSION['save']['reference_success']   = $reference;
     $_SESSION['save']['level']               = $level;
+    $_SESSION['save']['unicity']             = $unicity;
     $_SESSION['save']['order_success']       = $order_success;
     $_SESSION['save']['title_success']       = $title;
     $_SESSION['save']['description_success'] = $description;
@@ -91,7 +97,7 @@
         {
           if ($order_success == $donnees['order_success'])
           {
-            $control_ok                  = false;
+            $control_ok                            = false;
             $_SESSION['alerts']['already_ordered'] = true;
             break;
           }
@@ -100,7 +106,7 @@
       }
       else
       {
-        $control_ok                    = false;
+        $control_ok                              = false;
         $_SESSION['alerts']['order_not_numeric'] = true;
       }
     }
@@ -154,6 +160,7 @@
                                                         level,
                                                         order_success,
                                                         defined,
+                                                        unicity,
                                                         title,
                                                         description,
                                                         limit_success,
@@ -162,6 +169,7 @@
                                                        :level,
                                                        :order_success,
                                                        :defined,
+                                                       :unicity,
                                                        :title,
                                                        :description,
                                                        :limit_success,
@@ -171,6 +179,7 @@
             'level'         => $level,
             'order_success' => $order_success,
             'defined'       => $defined,
+            'unicity'       => $unicity,
             'title'         => $title,
             'description'   => $description,
             'limit_success' => $limit_success,
@@ -231,6 +240,7 @@
                         'level'         => $post['level'][$id],
                         'order_success' => $post['order_success'][$id],
                         'defined'       => $post['defined'][$id],
+                        'unicity'       => $post['unicity'][$id],
                         'title'         => $post['title'][$id],
                         'description'   => $post['description'][$id],
                         'limit_success' => $post['limit_success'][$id],
@@ -263,7 +273,7 @@
           {
             if ($success['id'] != $test_order['id'] AND $success['order_success'] == $test_order['order_success'] AND $success['level'] == $test_order['level'])
             {
-              $control_ok = false;
+              $control_ok                            = false;
               $_SESSION['alerts']['already_ordered'] = true;
               break;
             }
@@ -271,7 +281,7 @@
         }
         else
         {
-          $control_ok = false;
+          $control_ok                              = false;
           $_SESSION['alerts']['order_not_numeric'] = true;
         }
       }
@@ -292,6 +302,7 @@
         $req = $bdd->prepare('UPDATE success SET level         = :level,
                                                  order_success = :order_success,
                                                  defined       = :defined,
+                                                 unicity       = :unicity,
                                                  title         = :title,
                                                  description   = :description,
                                                  limit_success = :limit_success,
@@ -301,6 +312,7 @@
           'level'         => $success['level'],
           'order_success' => $success['order_success'],
           'defined'       => $success['defined'],
+          'unicity'       => $success['unicity'],
           'title'         => $success['title'],
           'description'   => $success['description'],
           'limit_success' => $success['limit_success'],
@@ -331,6 +343,7 @@
       $success->setLevel($session_succes['level'][$success->getId()]);
       $success->setOrder_success($session_succes['order_success'][$success->getId()]);
       $success->setDefined($session_succes['defined'][$success->getId()]);
+      $success->setUnicity($session_succes['unicity'][$success->getId()]);
       $success->setTitle($session_succes['title'][$success->getId()]);
       $success->setDescription($session_succes['description'][$success->getId()]);
       $success->setLimit_success($session_succes['limit_success'][$success->getId()]);

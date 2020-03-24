@@ -38,7 +38,7 @@
           echo '<div class="succes_liste">';
 
           // Médailles (en excluant ceux qui sont uniques)
-          if (!empty($success->getClassement()) AND $success->getLimit_success() > 1)
+          if (!empty($success->getClassement()) AND $success->getUnicity() != "Y")
           {
             foreach ($success->getClassement() as $classement)
             {

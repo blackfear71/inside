@@ -123,6 +123,7 @@
             $success->setLevel(htmlspecialchars($success->getLevel()));
             $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
             $success->setDefined(htmlspecialchars($success->getDefined()));
+            $success->setUnicity(htmlspecialchars($success->getUnicity()));
             $success->setTitle(htmlspecialchars($success->getTitle()));
             $success->setDescription(htmlspecialchars($success->getDescription()));
             $success->setLimit_success(htmlspecialchars($success->getLimit_success()));

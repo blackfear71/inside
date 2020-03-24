@@ -642,7 +642,7 @@
 
 .td_saisie_succes_par
 {
-	width: 20%;
+	width: calc(15% - 15px);
 	padding-right: 15px;
 }
 
@@ -683,7 +683,7 @@
 
 .td_saisie_succes_env
 {
-	width: 5%;
+	width: 10%;
 }
 
 .send_succes
@@ -693,7 +693,7 @@
 	border: 0;
 	background-color: #e3e3e3;
 	background-image: url("/inside/includes/icons/common/send_red.png");
-	background-size: 50%;
+	background-size: auto 44px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -730,7 +730,8 @@
 
 .td_saisie_succes_cond
 {
-	width: 25%;
+	width: calc(15% - 15px);
+	padding-right: 15px;
 }
 
 .saisie_limit
@@ -746,6 +747,31 @@
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
+}
+
+.td_saisie_succes_unicity
+{
+	width: 10%;
+}
+
+.switch_success
+{
+	display: inline-block;
+	width: 100%;
+	line-height: 42px;
+	height: 42px;
+	border: solid 1px #a3a3a3;
+	border-radius: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	cursor: pointer;
+	background-color: white;
+}
+
+.switch_success:hover
+{
+	background-color: #70d55d;
+	color: white;
 }
 
 .td_saisie_succes_expl
@@ -1013,6 +1039,8 @@
 	width: 140px;
 	float: left;
 	margin-bottom: 10px;
+	border-right: solid 1px white;
+	padding-right: 10px;
 }
 
 .succes_mod_right
@@ -1020,8 +1048,6 @@
 	width: 140px;
 	float: right;
 	margin-bottom: 10px;
-	border-left: solid 1px white;
-	padding-left: 10px;
 }
 
 .succes_mod_bottom

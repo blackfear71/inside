@@ -99,8 +99,26 @@
                 echo '</td>';
 
                 // Condition
-                echo '<td colspan="2" class="td_saisie_succes_cond">';
+                echo '<td class="td_saisie_succes_cond">';
                   echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="3" class="saisie_limit" required />';
+                echo '</td>';
+
+                // Unicité
+                echo '<td class="td_saisie_succes_unicity">';
+                  if ($_SESSION['save']['unicity'] == "Y")
+                  {
+                    echo '<div id="switch_success" class="switch_success switch_checked">';
+                      echo '<input type="checkbox" id="checkbox_unicity" name="unicity" checked/>';
+                      echo '<label for="checkbox_unicity" id="label_checkbox_unicity" class="label_switch">Unique</label>';
+                    echo '</div>';
+                  }
+                  else
+                  {
+                    echo '<div id="switch_success" class="switch_success">';
+                      echo '<input type="checkbox" id="checkbox_unicity" name="unicity" />';
+                      echo '<label for="checkbox_unicity" id="label_checkbox_unicity" class="label_switch">Unique</label>';
+                    echo '</div>';
+                  }
                 echo '</td>';
               echo '</tr>';
 
@@ -201,7 +219,10 @@
                   echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
 
                   // Condition
-                  echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
+                  if ($success->getUnicity() == "Y")
+                    echo '<div class="condition_succes">Unique</div>';
+                  else
+                    echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
 
                   // Logo succès
                   echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';

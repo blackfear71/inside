@@ -86,6 +86,21 @@
                   // Ordonnancement
                   echo '<div class="titre_succes">Ordre :</div>';
                   echo '<input type="text" value="' . $success->getOrder_success() . '" name="order_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" required />';
+
+                  // Unicité
+                  echo '<div class="titre_succes">Unique :</div>';
+                  echo '<div class="defined_succes">';
+                    if ($success->getUnicity() == "Y")
+                    {
+                      echo '<input type="radio" name="unicity[' . $success->getId() . ']" value="Y" checked /><div class="radio_space">Oui</div>';
+                      echo '<input type="radio" name="unicity[' . $success->getId() . ']" value="N" />Non';
+                    }
+                    else
+                    {
+                      echo '<input type="radio" name="unicity[' . $success->getId() . ']" value="Y" /><div class="radio_space">Oui</div>';
+                      echo '<input type="radio" name="unicity[' . $success->getId() . ']" value="N" checked />Non';
+                    }
+                  echo '</div>';
                 echo '</div>';
 
                 echo '<div class="succes_mod_right">';

@@ -517,7 +517,7 @@
       $reponse2->closeCursor();
 
       // Récupération du classement des utilisateurs
-      if ($mySuccess->getDefined() == "Y" AND $mySuccess->getLimit_success() > 1)
+      if ($mySuccess->getDefined() == "Y" AND $mySuccess->getUnicity() != "Y")
         $mySuccess->setClassement(getRankUsers($mySuccess, $tableUsers));
 
       array_push($listSuccess, $mySuccess);
@@ -545,7 +545,7 @@
 
     global $bdd;
 
-    if ($success->getDefined() == "Y" AND $success->getLimit_success() > 1)
+    if ($success->getDefined() == "Y" AND $success->getUnicity() != "Y")
     {
       // Boucle pour parcourir tous les succès débloqués par les utilisateurs
       $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" ORDER BY value DESC');

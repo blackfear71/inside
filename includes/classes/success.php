@@ -5,11 +5,12 @@
     private $reference;
     private $level;
     private $order_success;
+    private $defined;
+    private $unicity;
     private $title;
     private $description;
     private $limit_success;
     private $explanation;
-    private $defined;
     private $value_user;
     private $classement;
 
@@ -20,11 +21,12 @@
       $this->reference     = '';
       $this->level         = '';
       $this->order_success = '';
+      $this->defined       = '';
+      $this->unicity       = '';
       $this->title         = '';
       $this->description   = '';
       $this->limit_success = '';
       $this->explanation   = '';
-      $this->defined       = '';
       $this->value_user    = 0;
       $this->classement    = array();
     }
@@ -55,6 +57,9 @@
 
       if (isset($data['defined']))
         $this->defined       = $data['defined'];
+
+      if (isset($data['unicity']))
+        $this->unicity       = $data['unicity'];
 
       if (isset($data['title']))
         $this->title         = $data['title'];
@@ -123,6 +128,17 @@
     public function getDefined()
     {
       return $this->defined;
+    }
+
+    // Unicité
+    public function setUnicity($unicity)
+    {
+      $this->unicity = $unicity;
+    }
+
+    public function getUnicity()
+    {
+      return $this->unicity;
     }
 
     // Titre succès
