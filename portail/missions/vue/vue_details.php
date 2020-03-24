@@ -116,72 +116,74 @@
                   $rank = 0;
                   $finGagnants = false;
 
-                  foreach ($ranking as $keyRank => $rankUser)
-                  {
-                    if ($rank == 0)
+                  echo '<div class="zone_classement">';
+                    foreach ($ranking as $keyRank => $rankUser)
                     {
-                      echo '<div class="zone_gagnants">';
-                        echo '<div class="zone_titre_gagnants">Les gagnants</div>';
-                    }
-
-                    if ($rankUser['rank'] != $rank)
-                    {
-                      // Médailles
-                      if ($rankUser['rank'] <= 3)
+                      if ($rank == 0)
                       {
-                        switch ($rankUser['rank'])
-                        {
-                          case 1:
-                            echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
-                            break;
-
-                          case 2:
-                            echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
-                            break;
-
-                          case 3:
-                            echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
-                            break;
-
-                          default:
-                            break;
-                        }
-                      }
-                      else
-                      {
-                        // Fin zone gagnants si rang > 3
-                        if ($finGagnants == false)
-                        {
-                          echo '</div>';
-                          $finGagnants = true;
-                        }
+                        echo '<div class="zone_gagnants">';
+                          echo '<div class="zone_titre_gagnants">Les gagnants</div>';
                       }
 
-                      $rank = $rankUser['rank'];
+                      if ($rankUser['rank'] != $rank)
+                      {
+                        // Médailles
+                        if ($rankUser['rank'] <= 3)
+                        {
+                          switch ($rankUser['rank'])
+                          {
+                            case 1:
+                              echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
+                              break;
 
-                      if ($rank > 3)
-                        echo '<div class="score_classement margin_left_50">' . $rankUser['total'] . '</div>';
-                      else
-                        echo '<div class="score_classement">' . $rankUser['total'] . '</div>';
+                            case 2:
+                              echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal_rank" />';
+                              break;
 
-                      echo '<div class="zone_medals">';
+                            case 3:
+                              echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal_rank" />';
+                              break;
+
+                            default:
+                              break;
+                          }
+                        }
+                        else
+                        {
+                          // Fin zone gagnants si rang > 3
+                          if ($finGagnants == false)
+                          {
+                            echo '</div>';
+                            $finGagnants = true;
+                          }
+                        }
+
+                        $rank = $rankUser['rank'];
+
+                        if ($rank > 3)
+                          echo '<div class="score_classement margin_left_50">' . $rankUser['total'] . '</div>';
+                        else
+                          echo '<div class="score_classement">' . $rankUser['total'] . '</div>';
+
+                        echo '<div class="zone_medals">';
+                      }
+
+                      // Avatar
+                      $avatarFormatted = formatAvatar($rankUser['avatar'], $rankUser['pseudo'], 2, "avatar");
+
+                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
+
+                      // Fin zone gagnants si moins de 3 médailles présentes
+                      if ($rank <= 3 AND $finGagnants == false AND !isset($ranking[$keyRank + 1]))
+                      {
+                        echo '</div>';
+                        $finGagnants = true;
+                      }
+
+                      if (!isset($ranking[$keyRank + 1]) OR $rankUser['rank'] != $ranking[$keyRank + 1]['rank'])
+                        echo '</div>';
                     }
-
-                    // Avatar
-                    $avatarFormatted = formatAvatar($rankUser['avatar'], $rankUser['pseudo'], 2, "avatar");
-
-                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
-
-                    // Fin zone gagnants si moins de 3 médailles présentes
-                    if ($rank <= 3 AND $finGagnants == false AND !isset($ranking[$keyRank + 1]))
-                    {
-                      echo '</div>';
-                      $finGagnants = true;
-                    }
-
-                    if (!isset($ranking[$keyRank + 1]) OR $rankUser['rank'] != $ranking[$keyRank + 1]['rank'])
-                      echo '</div>';
-                  }
+                  echo '</div>';
                 }
                 else
                   echo '<div class="empty">Personne n\'a été classé sur cette mission...</div>';

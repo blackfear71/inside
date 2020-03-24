@@ -166,11 +166,17 @@
 	color: white;
 }
 
-.zone_gagnants
+.zone_classement
 {
 	background-color: #e3e3e3;
-	box-shadow: 0 0 3px #7c7c7c;
 	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+	padding-bottom: 10px;
+}
+
+.zone_gagnants
+{
+	background-color: #d3d3d3;
 	padding: 10px;
 	margin-bottom: 10px;
 	background-image: url("/inside/includes/icons/missions/couronne.png");
