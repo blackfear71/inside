@@ -12,7 +12,7 @@
     global $bdd;
 
     // Lecture des données utilisateur
-    $reponse = $bdd->query('SELECT * FROM success');
+    $reponse = $bdd->query('SELECT * FROM success ORDER BY level ASC, order_success ASC');
     while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
@@ -20,14 +20,6 @@
       array_push($listSuccess, $mySuccess);
     }
     $reponse->closeCursor();
-
-    // Tri sur niveau puis ordonnancement
-    foreach ($listSuccess as $success)
-    {
-      $tri_level[] = $success->getLevel();
-      $tri_order[] = $success->getOrder_success();
-    }
-    array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
 
     return $listSuccess;
   }
@@ -348,13 +340,7 @@
       $success->setDescription($session_succes['description'][$success->getId()]);
       $success->setLimit_success($session_succes['limit_success'][$success->getId()]);
       $success->setExplanation($session_succes['explanation'][$success->getId()]);
-
-      // Tri sur niveau puis ordonnancement
-      $tri_level[] = $success->getLevel();
-      $tri_order[] = $success->getOrder_success();
     }
-
-    array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
 
     return $listSuccess;
   }
@@ -667,6 +653,21 @@
               $value = $nb_recettes_saisies;
               break;
 
+            // Niveaux
+            case "level_1":
+            case "level_5":
+            case "level_10":
+              $experience = 0;
+
+              // Récupération de l'expérience
+              $req = $bdd->query('SELECT id, identifiant, experience FROM users WHERE identifiant = "' . $user->getIdentifiant() . '"');
+              $data = $req->fetch();
+              $experience = $data['experience'];
+              $req->closeCursor();
+
+              $value = convertExperience($experience);
+              break;
+
             // Lutin de Noël
             case "christmas2017":
             // Je suis ton Père Noël !
@@ -767,9 +768,7 @@
               break;
 
             case 'update':
-              $req3 = $bdd->prepare('UPDATE success_users
-                                     SET value = :value
-                                     WHERE reference = "' . $success->getReference() . '" AND identifiant = "' . $user->getIdentifiant() . '"');
+              $req3 = $bdd->prepare('UPDATE success_users SET value = :value WHERE reference = "' . $success->getReference() . '" AND identifiant = "' . $user->getIdentifiant() . '"');
               $req3->execute(array(
                 'value' => $value
               ));

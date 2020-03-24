@@ -15,12 +15,14 @@
       // Lecture des succès
       else
       {
-        // On ajoute la ligne au tableau
+        // On ajoute la ligne au tableau (si le succès est défini)
         $reponse = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
         $donnees = $reponse->fetch();
 
         $ligneUnlocked = Success::withData($donnees);
-        array_push($unlocked, $ligneUnlocked);
+
+        if ($ligneUnlocked->getDefined() == "Y")
+          array_push($unlocked, $ligneUnlocked);
 
         $reponse->closeCursor();
 

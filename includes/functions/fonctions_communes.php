@@ -698,6 +698,19 @@
     }
   }
 
+  // Génération valeur succès niveau
+  // RETOUR : Aucun
+  function insertOrUpdateSuccesLevel($experience, $identifiant)
+  {
+    // Récupération du niveau
+    $level = convertExperience($experience);
+
+    // Insertion des valeurs des succès
+    insertOrUpdateSuccesValue('level_1', $identifiant, $level);
+    insertOrUpdateSuccesValue('level_5', $identifiant, $level);
+    insertOrUpdateSuccesValue('level_10', $identifiant, $level);
+  }
+
   // Génération valeur succès mission
   // RETOUR : Aucun
   function insertOrUpdateSuccesMission($reference, $identifiant)
@@ -748,7 +761,38 @@
       case "beginning":
       case "developper":
       case "padawan":
+      case "level_1":
+      case "level_5":
+      case "level_10":
         $value = $incoming;
+
+        // Vérification succès débloqué
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+        {
+          $already_unlocked = false;
+
+          // Récupération des données du succès
+          $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
+          $data0 = $req0->fetch();
+          $limit = $data0['limit_success'];
+          $req0->closeCursor();
+
+          // Comparaison avec l'ancienne valeur
+          $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+          $data1 = $req1->fetch();
+
+          if ($req1->rowCount() > 0)
+          {
+            if ($data1['value'] >= $limit)
+              $already_unlocked = true;
+          }
+
+          $req1->closeCursor();
+
+          // Test si succès débloqué
+          if ($already_unlocked == false AND $value == $limit)
+            $_SESSION['success'][$reference] = true;
+        }
         break;
 
       // Incrémentation de la valeur précédente avec "incoming" (incoming <= 1)
@@ -789,7 +833,7 @@
         $req0->closeCursor();
 
         // Vérification succès débloqué
-        if ($_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
         {
           // Récupération des données du succès
           $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
@@ -817,7 +861,7 @@
         $req0->closeCursor();
 
         // Vérification succès débloqué
-        if ($_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
         {
           $already_unlocked = false;
 
@@ -848,7 +892,7 @@
       // Valeur maximale conservée
       case "greedy":
         // Récupération des données du succès
-        if ($_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
         {
           $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
           $data0 = $req0->fetch();
@@ -867,7 +911,7 @@
             $value = $incoming;
 
           // Vérification succès débloqué
-          if ($_SESSION['user']['identifiant'] != "admin")
+          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
           {
             if ($data1['value'] < $limit AND $value >= $limit)
               $_SESSION['success'][$reference] = true;
@@ -879,7 +923,7 @@
           $value = $incoming;
 
           // Vérification succès débloqué
-          if ($_SESSION['user']['identifiant'] != "admin")
+          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
           {
             if ($value >= $limit)
               $_SESSION['success'][$reference] = true;
@@ -1003,6 +1047,9 @@
       'experience' => $new_experience
     ));
     $req2->closeCursor();
+
+    // Mise à jour des succès des niveaux
+    insertOrUpdateSuccesLevel($new_experience, $identifiant);
   }
 
   // Formatage Id type de restaurant

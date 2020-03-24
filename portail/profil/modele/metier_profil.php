@@ -495,7 +495,7 @@
     }
 
     // Lecture des données utilisateur
-    $reponse = $bdd->query('SELECT * FROM success');
+    $reponse = $bdd->query('SELECT * FROM success ORDER BY level ASC, order_success ASC');
     while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
@@ -523,15 +523,6 @@
       array_push($listSuccess, $mySuccess);
     }
     $reponse->closeCursor();
-
-    // Tri sur niveau puis ordonnancement
-    foreach ($listSuccess as $success)
-    {
-      $tri_level[] = $success->getLevel();
-      $tri_order[] = $success->getOrder_success();
-    }
-
-    array_multisort($tri_level, SORT_ASC, $tri_order, SORT_ASC, $listSuccess);
 
     return $listSuccess;
   }
