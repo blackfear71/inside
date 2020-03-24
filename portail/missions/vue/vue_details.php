@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/
@@ -104,8 +104,13 @@
               // Classement
               if (date('Ymd') > $detailsMission->getDate_fin())
               {
+                // Titre
                 echo '<div class="titre_section"><img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" /><div class="texte_titre_section">Classement</div></div>';
 
+                // Lien vers les succès
+                echo '<a href="../profil/profil.php?view=success&action=goConsulter" class="lien_succes">Voir mes succès</a>';
+
+                // Classement des utilisateurs
                 if (!empty($ranking))
                 {
                   $rank = 0;
