@@ -169,31 +169,37 @@
           // Gestion des succès
           echo '<div class="titre_section"><img src="../../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Gérer les succès des utilisateurs</div></div>';
 
-          echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurger" class="form_init_succes">';
-            echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_init eventConfirm" />';
-            echo '<input type="hidden" value="Voulez-vous vraiment purger les succès ? Ceci est définitif." class="eventMessage" />';
-          echo '</form>';
+          // Purge
+          echo '<div class="zone_init_succes">';
+            echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurger" class="form_init_succes">';
+              echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_init eventConfirm" />';
+              echo '<input type="hidden" value="Voulez-vous vraiment purger les succès ? Ceci est définitif." class="eventMessage" />';
+            echo '</form>';
 
-          echo '<div class="explications_init">';
-            echo 'Ce bouton permet d\'effacer tous les succès des utilisateurs dans la base de données sauf les suivants :';
+            echo '<div class="explications_init">';
+              echo 'Ce bouton permet d\'effacer tous les succès des utilisateurs dans la base de données sauf les suivants :';
 
-            echo '<ul class="margin_top_0 margin_bottom_0">';
-              echo '<li>J\'étais là. (beginning)</li>';
-              echo '<li>Je l\'ai fait ! (developper)</li>';
-              echo '<li>Economie de marché (greedy)</li>';
-              echo '<li>Radar à bouffe (restaurant-finder)</li>';
-            echo '</ul>';
+              echo '<ul class="margin_top_0 margin_bottom_0">';
+                echo '<li>J\'étais là. (beginning)</li>';
+                echo '<li>Je l\'ai fait ! (developper)</li>';
+                echo '<li>Economie de marché (greedy)</li>';
+                echo '<li>Radar à bouffe (restaurant-finder)</li>';
+              echo '</ul>';
+            echo '</div>';
           echo '</div>';
 
-          echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiser" class="form_init_succes">';
-            echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_init eventConfirm" />';
-            echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="eventMessage" />';
-          echo '</form>';
+          // Initialisation
+          echo '<div class="zone_init_succes margin_top_20">';
+            echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiser" class="form_init_succes">';
+              echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_init eventConfirm" />';
+              echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="eventMessage" />';
+            echo '</form>';
 
-          echo '<div class="explications_init">';
-            echo 'Ce bouton permet d\'initialiser les succès pour tous les utilisateurs. Il faut faire attention lors de son utilisation car il va remplacer les valeurs déjà
-            acquises par tous les utilisateurs et potentiellement bloquer des succès déjà débloqués. Le traitement peut prendre du temps en fonction du nombre de succès et d\'utilisateurs. Une
-            purge est effectuée en fin de traitement sur tous les éventuels succès à 0.';
+            echo '<div class="explications_init">';
+              echo 'Ce bouton permet d\'initialiser les succès pour tous les utilisateurs. Il faut faire attention lors de son utilisation car il va remplacer les valeurs déjà
+              acquises par tous les utilisateurs et potentiellement bloquer des succès déjà débloqués. Le traitement peut prendre du temps en fonction du nombre de succès et d\'utilisateurs. Une
+              purge est effectuée en fin de traitement sur tous les éventuels succès à 0.';
+            echo '</div>';
           echo '</div>';
 
           // Affichage des succès
