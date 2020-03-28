@@ -1,7 +1,7 @@
 <?php
   echo '<div class="zone_changelog_left">';
     // Années
-    echo '<div class="titre_section"><img src="../../includes/icons/cookingbox/recent_grey.png" alt="recent_grey" class="logo_titre_section" /><div class="texte_titre_section">Années</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/changelog/recent_grey.png" alt="recent_grey" class="logo_titre_section" /><div class="texte_titre_section">Années</div></div>';
 
     // Onglets
     if (!empty($ongletsYears))
@@ -30,14 +30,14 @@
           if (isset($_GET['year']) AND $year == $_GET['year'])
             echo '<span class="year active margin_right_20">' . $year . '</span>';
           else
-            echo '<a href="cookingbox.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
+            echo '<a href="changelog.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
         }
         else
         {
           if (isset($_GET['year']) AND $year == $_GET['year'])
             echo '<span class="year active">' . $year . '</span>';
           else
-            echo '<a href="cookingbox.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
+            echo '<a href="changelog.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
         }
 
         $previousYear = $year;
