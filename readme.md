@@ -15,6 +15,7 @@ Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
 - CALENDARS : calendriers de l'équipe
 - LES PETITS PÉDESTRES : organisation d'entrainements ou de courses à pied
 - MISSIONS : INSIDER : évènements du site
+- JOURNAL DES MODIFICATIONS : description des nouveautés du site
 - #THEBOX : boîte à idées
 - DEMANDES D'ÉVOLUTION : soumission de bugs et améliorations
 - NOTIFICATIONS : centre de notifications générales
