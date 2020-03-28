@@ -1,10 +1,14 @@
 <?php
-  // Version
-  echo '<div class="version">v2.1</div>';
+  // Numéro de version
+  $version = '2.1';
 
   // Liens
   if ($_SESSION['user']['identifiant'] != "admin")
   {
+    // Version
+    echo '<a href="/inside/portail/changelog/changelog.php?year=' . date("Y") . '&action=goConsulter" title="Journal des modifications" class="version">v' . $version . '</a>';
+
+    // Page courante
     $path = $_SERVER['PHP_SELF'];
 
     // Récupération des préférences
@@ -44,10 +48,15 @@
       echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer">';
       // Logo
       echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
-      
+
       // Compteur
       echo '<div class="zone_compteur_footer"></div>';
     echo '</a>';
+  }
+  else
+  {
+    // Version
+    echo '<div class="version">v' . $version . '</div>';
   }
 
   // Copyright

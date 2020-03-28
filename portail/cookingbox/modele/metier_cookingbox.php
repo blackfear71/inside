@@ -222,12 +222,11 @@
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE name != "" AND picture != "" ORDER BY year DESC');
-      while ($donnees = $reponse->fetch())
-      {
-        if ($year == $donnees['year'])
-          $annee_existante = true;
-      }
+      $reponse = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND name != "" AND picture != "" ORDER BY year DESC');
+
+      if ($reponse->rowCount() > 0)
+        $annee_existante = true;
+
       $reponse->closeCursor();
     }
 

@@ -13,12 +13,11 @@
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4) FROM expense_center ORDER BY SUBSTR(date, 1, 4) ASC');
-      while ($donnees = $reponse->fetch())
-      {
-        if ($year == $donnees['SUBSTR(date, 1, 4)'])
-          $annee_existante = true;
-      }
+      $reponse = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4) = "' . $year . '" ORDER BY SUBSTR(date, 1, 4) ASC');
+
+      if ($reponse->rowCount() > 0)
+        $annee_existante = true;
+
       $reponse->closeCursor();
     }
 

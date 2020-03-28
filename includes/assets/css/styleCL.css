@@ -1,0 +1,119 @@
+/*********************************/
+/*** Journal des modifications ***/
+/*********************************/
+
+/*** Onglets ***/
+.zone_changelog_left
+{
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+}
+
+.view, .year
+{
+	display: inline-block;
+	margin-bottom: 10px;
+	width: calc(50% - 10px);
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	font-family: robotolight, Verdana, sans-serif;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.active
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.inactive
+{
+	background-color: white;
+	color: #262626;
+}
+
+.inactive:hover
+{
+	color: white;
+	background-color: #262626;
+	text-decoration: none;
+}
+
+/*** Journaux ***/
+.zone_changelog_right
+{
+  display: inline-block;
+  width: calc(100% - 220px);
+  margin-left: 20px;
+  vertical-align: top;
+}
+
+.notes_changelog
+{
+  line-height: 30px;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 130%;
+  color: #262626;
+  text-align: justify;
+}
+
+.notes_changelog::first-letter
+{
+  font-size: 250%;
+	font-family: robotoregular, Verdana, sans-serif;
+}
+
+.zone_logs_semaine
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_logs_semaine.masonry
+{
+	opacity: 1;
+}
+
+.zone_logs_categorie
+{
+	background-color: #e3e3e3;
+	width: 430px;
+	margin-top: 15px;
+	padding: 10px;
+	border-radius: 5px;
+	border: solid 1px #d3d3d3;
+	vertical-align: top;
+}
+
+.titre_categorie
+{
+	display: block;
+	text-align: center;
+	width: 100%;
+	font-family: robotothin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 150%;
+	font-weight: bold;
+}
+
+.logo_titre_categorie
+{
+	height: 25px;
+	vertical-align: middle;
+	margin-top: -5px;
+	margin-right: 10px;
+}
+
+.logs_categorie
+{
+	margin: 10px 0 0 0;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+}

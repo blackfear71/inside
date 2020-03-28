@@ -197,6 +197,7 @@
 
     $listPages                 = array('/inside/portail/bugs/bugs.php',
                                        '/inside/portail/calendars/calendars.php',
+                                       '/inside/portail/changelog/changelog.php',
                                        '/inside/portail/collector/collector.php',
                                        '/inside/portail/cookingbox/cookingbox.php',
                                        //'/inside/portail/eventmanager/eventmanager.php',
@@ -307,15 +308,17 @@
       // Classe position
       if (!empty($zone) AND !empty($position))
       {
+        // Cas des pages sans onglets
         if  ($zone == 'article'
         AND ($position == 'top_left'
         OR   $position == 'top_right')
         AND ($page == '/inside/portail/bugs/bugs.php'
+        OR   $page == '/inside/portail/changelog/changelog.php'
         OR   $page == '/inside/portail/ideas/ideas.php'
         OR   $page == '/inside/portail/notifications/notifications.php'
         OR   $page == '/inside/portail/portail/portail.php'
-        OR   $page == '/inside/portail/search/search.php'
-        OR   $page == '/inside/portail/profil/profil.php'))
+        OR   $page == '/inside/portail/profil/profil.php'
+        OR   $page == '/inside/portail/search/search.php'))
           $classe = $zone . '_' . $position . '_mission_no_nav';
         else
           $classe = $zone . '_' . $position . '_mission';

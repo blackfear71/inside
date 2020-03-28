@@ -14,12 +14,11 @@
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT DISTINCT year FROM calendars WHERE to_delete != "Y" ORDER BY year ASC');
-      while ($donnees = $reponse->fetch())
-      {
-        if ($year == $donnees['year'])
-          $annee_existante = true;
-      }
+      $reponse = $bdd->query('SELECT * FROM calendars WHERE year = "' . $year . '" AND to_delete != "Y" ORDER BY year ASC');
+
+      if ($reponse->rowCount() > 0)
+        $annee_existante = true;
+
       $reponse->closeCursor();
     }
 
