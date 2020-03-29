@@ -54,19 +54,24 @@
           /**********/
           include('vue/vue_onglets.php');
 
-          if ($_GET['action'] == "goConsulterHistoire")
+          switch ($_GET['action'])
           {
-            /********************/
-            /* Histoire du site */
-            /********************/
-            include('vue/vue_history.php');
-          }
-          else
-          {
-            /*****************************/
-            /* Journaux de modifications */
-            /*****************************/
-            include('vue/vue_journaux.php');
+            case 'goConsulterHistoire':
+              /********************/
+              /* Histoire du site */
+              /********************/
+              include('vue/vue_history.php');
+              break;
+
+            case 'goConsulter':
+              /*****************************/
+              /* Journaux de modifications */
+              /*****************************/
+              include('vue/vue_journaux.php');
+              break;
+
+            default:
+              break;
           }
         ?>
       </article>

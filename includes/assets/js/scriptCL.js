@@ -85,6 +85,6 @@ function adaptHistory()
     var taille_date  = $(this).children('.date_history').width();
     var taille_trait = taille_totale - taille_date - 15;
 
-    $(this).children('.trait_history').css('width', taille_trait);
+    $(this).children('.trait_history').css('width', taille_trait + 'px');
   });
 }
