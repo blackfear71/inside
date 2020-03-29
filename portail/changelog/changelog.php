@@ -35,6 +35,7 @@
 
     case 'goConsulterHistoire':
       $ongletsYears = getOnglets();
+      $months       = getMonths();
       break;
 
     default:
@@ -90,6 +91,13 @@
       }
 
       unset($onglet);
+
+      foreach ($months as &$month)
+      {
+        $month = htmlspecialchars($month);
+      }
+
+      unset($month);
       break;
 
     default:
