@@ -33,6 +33,10 @@
       }
       break;
 
+    case 'goConsulterHistoire':
+      $ongletsYears = getOnglets();
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: changelog.php?year=' . date("Y") . '&action=goConsulter');
@@ -77,7 +81,15 @@
       }
 
       unset($log);
+      break;
 
+    case 'goConsulterHistoire':
+      foreach ($ongletsYears as &$onglet)
+      {
+        $onglet = htmlspecialchars($onglet);
+      }
+
+      unset($onglet);
       break;
 
     default:
@@ -87,6 +99,7 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'goConsulterHistoire':
     case 'goConsulter':
     default:
       include_once('vue/vue_changelog.php');

@@ -14,6 +14,7 @@ $(window).resize(function()
 {
   // Adaptation mobile
   adaptChangelog();
+  adaptHistory();
 });
 
 /***************/
@@ -24,6 +25,7 @@ $(window).on('load', function()
 {
   // Adaptation mobile
   adaptChangelog();
+  adaptHistory();
 
   // Masonry (Logs par catégories)
   if ($('.zone_logs_semaine').length)
@@ -70,4 +72,19 @@ function adaptChangelog()
     $('.zone_changelog_right').css('width', 'calc(100% - 220px)');
     $('.zone_changelog_right').css('margin-left', '20px');
   }
+}
+
+// Adaptation des traits de l'histoire du site
+function adaptHistory()
+{
+  var taille_totale = $('.zone_changelog_right').width();
+
+  // Calcul de la taille de chaque trait
+  $('.event_history').each(function()
+  {
+    var taille_date  = $(this).children('.date_history').width();
+    var taille_trait = taille_totale - taille_date - 15;
+
+    $(this).children('.trait_history').css('width', taille_trait);
+  });
 }

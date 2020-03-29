@@ -54,10 +54,20 @@
           /**********/
           include('vue/vue_onglets.php');
 
-          /*****************************/
-          /* Journaux de modifications */
-          /*****************************/
-          include('vue/vue_journaux.php');
+          if ($_GET['action'] == "goConsulterHistoire")
+          {
+            /********************/
+            /* Histoire du site */
+            /********************/
+            include('vue/vue_history.php');
+          }
+          else
+          {
+            /*****************************/
+            /* Journaux de modifications */
+            /*****************************/
+            include('vue/vue_journaux.php');
+          }
         ?>
       </article>
 
