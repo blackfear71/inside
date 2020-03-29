@@ -19,8 +19,8 @@
 
       echo '<div class="details_history">';
         echo 'Notre histoire ne commence pas par celle d\'Inside mais par celle d\'un autre, oublié de tous. ReferenceGuide. Vous l\'aviez oublié n\'est-ce pas ? Mais comment pourrais-je vous en
-        vouloir ? Avouons-le, c\'était un échec. Mais je dirais un échec nécessaire. Tout partait d\'une bonne intention, une plateforme de partage des connaissances sur les connaissances utiles
-        pour les jeunes développeurs, un regroupement de documentation.';
+        vouloir ? Avouons-le, c\'était un échec. Mais je dirais un échec nécessaire. Tout partait d\'une bonne intention, une plateforme de partage des connaissances utiles pour les jeunes
+        développeurs, un regroupement de documentations.';
       echo '</div>';
 
       echo '<div class="details_history">';
@@ -76,7 +76,7 @@
         echo 'Et pour cela un des membres souhaite rejoindre l\'équipe de développements, car une équipe de 1 ça commence à sentir le cramé. Ce jour-là, pour partager toujours plus et avancer
         toujours plus loin s\'ouvre un répertoire GitHub de partage du code. Il est récupéré et du nouveau apparait. Une section dédiée à ceux qui souhaitaient organiser des sorties courses à
         pied voit le jour. Mais pas seulement. Après quelques temps ce projet arrive en ligne et là une infinité de possibilités s\'est ouverte. Tous les projets étaient maintenant réalisables
-        beaucoup plus efficacement, proprement et rapidement grâce à un projet. J\'ai nommé Sacha. En plus d\'apporter son aide il a mis en place la nouvelle et toujours actuelle architecture
+        beaucoup plus efficacement, proprement et rapidement grâce à un projet en particulier. J\'ai nommé Sacha. En plus d\'apporter son aide il a mis en place la nouvelle et toujours actuelle architecture
         du site MVC. Plus qu\'une évolution, Inside est totalement refondu pour correspondre à ce standard. La suite, vous la connaissez.';
       echo '</div>';
     echo '</div>';
