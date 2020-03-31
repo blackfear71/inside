@@ -41,7 +41,7 @@
       echo '<div class="details_history">';
         echo 'Un en particulier a rapidement retenu mon attention. Un Excel avait été mis en
         place pour faciliter l\'organisation de sorties cinéma. Inside étant à la base prévu comme une refonte graphique du premier site, il a vu débarquer en une nuit seulement un
-        nouvel outil qui permettait de faire ce que faisait ces macros et même plus ! La révolution était en marche.';
+        nouvel outil qui permettait de faire ce que faisaient ces macros et même plus ! La révolution était en marche.';
       echo '</div>';
     echo '</div>';
 
@@ -50,7 +50,7 @@
       echo '<div class="date_history">3 Avril 2017</div><div class="trait_history"></div>';
 
       echo '<div class="details_history">';
-        echo 'Les idées fusent, l\'excitation est certaine et la créativité s\'en retrouve décuplée. Tout s\'enchaîne très vite, une petite retouche par-ci, une amélioration par là... Le temps
+        echo 'Les idées fusent, l\'excitation est certaine et la créativité s\'en retrouve décuplée. Tout s\'enchaîne très vite, une petite retouche par-ci, une amélioration par-là... Le temps
         passe et son cours change progressivement. Malgré le design douteux de l\'époque, petit site grandit pour devenir une grande plateforme. L\'essence même du site incarnée par son nom
         est au cœur de tous les développements. Rien ne se fait sans penser à la notion de partage, on progresse pour toujours plus attirer le regard et apporter de l\'aide là où le besoin se
         fait ressentir.';
