@@ -3080,9 +3080,16 @@
 
 .logs_categorie
 {
+	padding-left: 15px;
 	margin: 10px 0 0 0;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+	text-align: justify;
+}
+
+.log_categorie
+{
+	margin-top: 5px;
 }
 
 /*** Générateur de code ***/

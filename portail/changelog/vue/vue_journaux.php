@@ -33,7 +33,7 @@
               echo '<ul class="logs_categorie">';
                 foreach ($logsCategorie as $logCategorie)
                 {
-                  echo '<li>' . $logCategorie . '</li>';
+                  echo '<li class="log_categorie">' . $logCategorie . '</li>';
                 }
               echo '</ul>';
             echo '</div>';
