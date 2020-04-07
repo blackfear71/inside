@@ -65,12 +65,66 @@ $(function()
     initMasonry();
   });
 
-  // Change la couleur des switch
+  // Change la couleur des switch (calendriers & générateur de code)
   $('.label_switch').click(function()
   {
     var id_bouton = $(this).closest('div').attr('id');
 
     changeCheckedColor(id_bouton);
+  });
+
+  // Change la couleur des radio boutons (journaux)
+  $('.label_radio').click(function()
+  {
+    var id_bouton = $(this).closest('div').attr('id');
+
+    switchCheckedColor('switch_action_changelog', id_bouton);
+  });
+
+  // Ajoute une nouvelle entrée (journaux)
+  $('#ajouter_entree_changelog').click(function()
+  {
+    var lastNum = parseInt($('.saisie_entree_changelog').last().attr('name').replace('saisie_entree_', ''));
+    var newNum  = lastNum + 1;
+
+    addEntry('zone_saisie_entrees_changelog', newNum);
+  });
+
+  // Bloque le bouton de soumission si besoin (ajout / modification journal)
+  $('#bouton_saisie_journal').click(function()
+  {
+    // Contrôle des champs requis
+    $('.zone_saisie_entree_changelog').each(function()
+    {
+      if ($(this).children('input').val() != "")
+        $(this).children('select').prop('required', true);
+    });
+
+    // Blocage si tous les champs requis sont renseignés
+    var zoneButton   = $('.zone_bouton_valider_journal');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
+
+    // Blocage spécifique (boutons actions)
+    tabBlock.push({element: '#init_changelog', property: 'display', value: 'none'});
+    tabBlock.push({element: '#ajouter_entree_changelog', property: 'display', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+  });
+
+  // Bloque le bouton de soumission si besoin (suppression journal)
+  $('#bouton_suppression_journal').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_valider_journal');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
+
+    // Blocage spécifique (boutons actions)
+    tabBlock.push({element: '#init_changelog', property: 'display', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
   // Copie le code du générateur
@@ -320,6 +374,24 @@ $(window).on('load', function()
     $('.zone_missions_accueil').addClass('masonry');
   }
 
+  // Masonry (Changelog)
+  if ($('.zone_logs_edition').length)
+  {
+    $('.zone_logs_edition').masonry().masonry('destroy');
+
+    $('.zone_logs_edition').masonry({
+      // Options
+      itemSelector: '.zone_logs_categorie',
+      columnWidth: 450,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_logs_edition').addClass('masonry');
+  }
+
   // Déclenchement du scroll pour "anchor" : on récupère l'id de l'ancre dans l'url (fonction JS)
   var id     = $_GET('anchor');
   var offset = 30;
@@ -478,4 +550,40 @@ function changeCheckedColor(input)
     $('#' + input).removeClass('switch_checked');
   else
     $('#' + input).addClass('switch_checked');
+}
+
+// Change la couleur des radio boutons
+function switchCheckedColor(zone, input)
+{
+  $('.' + zone).each(function()
+  {
+    $(this).removeClass('bouton_checked');
+    $(this).children('input').prop('checked', false);
+  })
+
+  $('#' + input).addClass('bouton_checked');
+  $('#' + input).children('input').prop('checked', true);
+}
+
+// Ajoute une entrée à la saisie d'un journal
+function addEntry(zone, num)
+{
+  var html = "";
+
+  html += '<div class="zone_saisie_entree_changelog">';
+    // Saisie entrée
+    html += '<input type="text" name="saisie_entree_' + num + '" placeholder="Entrée n°' + num + '" value="" class="saisie_entree_changelog" />';
+    
+    // Choix catégorie
+    html += '<select name="categorie_entree_' + num + '" class="categorie_entree_changelog">';
+      html += '<option value="" hidden>Choisir une catégorie</option>';
+
+      $.each(categoriesChangeLog, function(key, value)
+      {
+        html += '<option value="' + key + '">' + value + '</option>';
+      });
+    html += '</select>';
+  html += '</div>';
+
+  $('.' + zone).append(html);
 }

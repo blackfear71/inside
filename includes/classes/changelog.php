@@ -98,4 +98,53 @@
       return $this->logs;
     }
   }
+
+  class ChangeLogParameters
+  {
+    private $action;
+    private $year;
+    private $week;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->action = '';
+      $this->year   = '';
+      $this->week   = '';
+    }
+
+    // getters et setters pour l'objet ChangeLogParameters
+    // Action
+    public function setAction($action)
+    {
+      $this->action = $action;
+    }
+
+    public function getAction()
+    {
+      return $this->action;
+    }
+
+    // Année
+    public function setYear($year)
+    {
+      $this->year = $year;
+    }
+
+    public function getYear()
+    {
+      return $this->year;
+    }
+
+    // Semaine
+    public function setWeek($week)
+    {
+      $this->week = $week;
+    }
+
+    public function getWeek()
+    {
+      return $this->week;
+    }
+  }
 ?>

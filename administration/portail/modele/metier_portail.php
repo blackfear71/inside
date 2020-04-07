@@ -112,6 +112,12 @@
                   'ligne_3' => '',
                   'lien'    => '../cron/cron.php?action=goConsulter');
 
+    // Journal des modifications
+    $changelog = array('ligne_1' => 'Journal des',
+                       'ligne_2' => 'MODIFICATIONS',
+                       'ligne_3' => '',
+                       'lien'    => '../changelog/changelog.php?action=goConsulter');
+
     // Générateur de code
     $generator = array('ligne_1' => 'Générateur',
                        'ligne_2' => 'CODE',
@@ -119,7 +125,7 @@
                        'lien'    => '../codegenerator/codegenerator.php?action=goConsulter');
 
     // Assemblage portail
-    $portail = array($infosusers, $manageusers, $themes, $success, $movies, $calendars, $missions, $bugs, $alerts, $cron, $generator);
+    $portail = array($infosusers, $manageusers, $themes, $success, $movies, $calendars, $missions, $bugs, $alerts, $cron, $changelog, $generator);
 
     return $portail;
   }

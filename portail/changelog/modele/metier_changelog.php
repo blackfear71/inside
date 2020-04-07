@@ -68,7 +68,8 @@
   function getCategories()
   {
     // Liste des catégories
-    $listCategories = array('movie_house'      => 'MOVIE HOUSE',
+    $listCategories = array('portail'          => 'PORTAIL',
+                            'movie_house'      => 'MOVIE HOUSE',
                             'food_advisor'     => 'LES ENFANTS ! À TABLE !',
                             'cooking_box'      => 'COOKING BOX',
                             'expense_center'   => 'EXPENSE CENTER',
@@ -85,7 +86,8 @@
                             'ideas'            => '#THEBOX',
                             'admin'            => 'ADMINISTRATION',
                             'cron'             => 'TÂCHES CRON',
-                            'technical'        => 'TECHNIQUE'
+                            'technical'        => 'TECHNIQUE',
+                            'other'            => 'AUTRE'
                            );
 
     return $listCategories;
