@@ -129,6 +129,8 @@
       {
         if (empty($type))
           unset($types_restaurant[$keyType]);
+        else
+          $types_restaurant[$keyType] = trim(str_replace(';', ' ', $types_restaurant[$keyType]));
       }
     }
 
@@ -397,6 +399,8 @@
       {
         if (empty($type))
           unset($types_restaurant[$keyType]);
+        else
+          $types_restaurant[$keyType] = trim(str_replace(';', ' ', $types_restaurant[$keyType]));
       }
     }
 
