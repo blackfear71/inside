@@ -5,8 +5,13 @@
 $(function()
 {
   /*** Actions au clic ***/
+  // Plie ou déplie les thèmes
+  $('.bouton_fold').click(function()
+  {
+    var id_fold = $(this).attr('id').replace('fold_', '');
 
-  /*** Actions au changement ***/
+    afficherMasquerChangeLog(id_fold);
+  });
 });
 
 // Au redimensionnement de la fenêtre
@@ -15,6 +20,9 @@ $(window).resize(function()
   // Adaptation mobile
   adaptChangelog();
   adaptHistory();
+
+  // Relance masonry
+  initMasonry('0.4s');
 });
 
 /***************/
@@ -44,6 +52,14 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_logs_semaine').addClass('masonry');
   }
+
+  // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id     = 'changelog_' + $_GET('anchor');
+  var offset = 70;
+  var shadow = false;
+
+  // Scroll vers l'id
+  scrollToId(id, offset, shadow);
 });
 
 /*****************/
@@ -86,5 +102,36 @@ function adaptHistory()
     var taille_trait = taille_totale - taille_date - 15;
 
     $(this).children('.trait_history').css('width', taille_trait + 'px');
+  });
+}
+
+// Affiche ou masque un journal
+function afficherMasquerChangeLog(id)
+{
+  if ($('#' + id).css('display') == 'block')
+  {
+    $('#' + id).css('display', 'none');
+    $('#fold_' + id).html('Déplier');
+  }
+  else
+  {
+    $('#' + id).css('display', 'block');
+    $('#fold_' + id).html('Plier');
+    initMasonry(0);
+  }
+}
+
+// Initialisation manuelle de "Masonry"
+function initMasonry(duration)
+{
+  // On lance Masonry
+  $('.zone_logs_semaine').masonry({
+    // Options
+    itemSelector: '.zone_logs_categorie',
+    columnWidth: 450,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true,
+    transitionDuration: duration
   });
 }

@@ -487,7 +487,7 @@
 
           $icone  = "inside";
           $phrase = "Un <strong>nouveau journal</strong> vient d'être ajouté pour la <strong>semaine " . $week . "</strong> (" . $year . "), allez vite voir comment le site a évolué !";
-          $lien   = "/inside/portail/changelog/changelog.php?year=" . $year . "&action=goConsulter";
+          $lien   = "/inside/portail/changelog/changelog.php?year=" . $year . "&action=goConsulter&anchor=" . $week;
           break;
 
         default:
