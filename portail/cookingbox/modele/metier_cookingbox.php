@@ -342,8 +342,11 @@
     {
       if (!empty($ingredient))
       {
-        if  (!empty($post['quantites_ingredients'][$key])
-        AND (!is_numeric($post['quantites_ingredients'][$key]) OR $post['quantites_ingredients'][$key] <= 0))
+        $quantite_ingredient          = str_replace(',', '.', $post['quantites_ingredients'][$key]);
+        $quantite_ingredient_formated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
+
+        if  (!empty($quantite_ingredient)
+        AND (!is_numeric($quantite_ingredient) OR $quantite_ingredient <= 0))
         {
           $_SESSION['alerts']['quantity_not_numeric'] = true;
           $control_ok                                 = false;
@@ -351,12 +354,13 @@
         }
         else
         {
-          $ingredient = str_replace(".", ",", $ingredient);
+          // Filtrage
+          $ingredient = str_replace("@", " ", $ingredient);
 
           if ($post['unites_ingredients'][$key] == "sans")
-            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@;";
+            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@;";
           else
-            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@" . $post['unites_ingredients'][$key] . ";";
+            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@" . $post['unites_ingredients'][$key] . ";";
         }
       }
     }
@@ -491,8 +495,11 @@
     {
       if (!empty($ingredient))
       {
-        if  (!empty($post['quantites_ingredients'][$key])
-        AND (!is_numeric($post['quantites_ingredients'][$key]) OR $post['quantites_ingredients'][$key] <= 0))
+        $quantite_ingredient = str_replace(',', '.', $post['quantites_ingredients'][$key]);
+        $quantite_ingredient_formated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
+
+        if  (!empty($quantite_ingredient)
+        AND (!is_numeric($quantite_ingredient) OR $quantite_ingredient <= 0))
         {
           $_SESSION['alerts']['quantity_not_numeric'] = true;
           $control_ok                                 = false;
@@ -500,12 +507,13 @@
         }
         else
         {
-          $ingredient = str_replace(".", ",", $ingredient);
+          // Filtrage
+          $ingredient = str_replace("@", " ", $ingredient);
 
           if ($post['unites_ingredients'][$key] == "sans")
-            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@;";
+            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@;";
           else
-            $ingredients .= $ingredient . "@" . $post['quantites_ingredients'][$key] . "@" . $post['unites_ingredients'][$key] . ";";
+            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@" . $post['unites_ingredients'][$key] . ";";
         }
       }
     }
