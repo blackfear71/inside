@@ -211,7 +211,7 @@
     if ($control_ok == true)
     {
       $search  = array("@", ";");
-      $replace = array("", "");
+      $replace = array(" ", " ");
 
       foreach ($saisies_entrees as $keyEntry => $entry)
       {
@@ -303,7 +303,7 @@
     if ($control_ok == true)
     {
       $search  = array("@", ";");
-      $replace = array("", "");
+      $replace = array(" ", " ");
 
       foreach ($saisies_entrees as $keyEntry => $entry)
       {
