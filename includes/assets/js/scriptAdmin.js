@@ -84,7 +84,7 @@ $(function()
   // Ajoute une nouvelle entrée (journaux)
   $('#ajouter_entree_changelog').click(function()
   {
-    var lastNum = parseInt($('.saisie_entree_changelog').last().attr('name').replace('saisie_entree_', ''));
+    var lastNum = parseInt($('.saisie_entree_changelog').last().attr('name').replace('saisies_entrees[', '').replace(']', ''));
     var newNum  = lastNum + 1;
 
     addEntry('zone_saisie_entrees_changelog', newNum);
@@ -572,10 +572,10 @@ function addEntry(zone, num)
 
   html += '<div class="zone_saisie_entree_changelog">';
     // Saisie entrée
-    html += '<input type="text" name="saisie_entree_' + num + '" placeholder="Entrée n°' + num + '" value="" class="saisie_entree_changelog" />';
-    
+    html += '<input type="text" name="saisies_entrees[' + num + ']" placeholder="Entrée n°' + num + '" value="" class="saisie_entree_changelog" />';
+
     // Choix catégorie
-    html += '<select name="categorie_entree_' + num + '" class="categorie_entree_changelog">';
+    html += '<select name="categories_entrees[' + num + ']" class="categorie_entree_changelog">';
       html += '<option value="" hidden>Choisir une catégorie</option>';
 
       $.each(categoriesChangeLog, function(key, value)

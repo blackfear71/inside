@@ -11,7 +11,7 @@
           echo '<input type="hidden" name="saisie_semaine_changelog" value="' . $changeLog->getWeek() . '" />';
 
           // Notes libres
-          echo '<textarea placeholder="Notes libres" class="saisie_notes_libres_changelog">' . $changeLog->getNotes() . '</textarea>';
+          echo '<textarea name="saisie_notes_changelog" placeholder="Notes libres" class="saisie_notes_libres_changelog">' . $changeLog->getNotes() . '</textarea>';
 
           // Entrées
           echo '<div class="zone_saisie_entrees_changelog">';
@@ -23,10 +23,10 @@
               {
                 echo '<div class="zone_saisie_entree_changelog">';
                   // Saisie entrée
-                  echo '<input type="text" name="saisie_entree_' . $i . '" placeholder="Entrée n°' . $i . '" value="' . $logByCategory . '" class="saisie_entree_changelog" />';
+                  echo '<input type="text" name="saisies_entrees[' . $i . ']" placeholder="Entrée n°' . $i . '" value="' . $logByCategory . '" class="saisie_entree_changelog" />';
 
                   // Choix catégorie
-                  echo '<select name="categorie_entree_' . $i . '" class="categorie_entree_changelog">';
+                  echo '<select name="categories_entrees[' . $i . ']" class="categorie_entree_changelog">';
                     foreach ($categoriesChangeLog as $keyCategorie => $categorie)
                     {
                       if ($keyCategorie == $keyLogsByCategories)
@@ -114,7 +114,7 @@
           echo '<input type="hidden" name="saisie_semaine_changelog" value="' . $changeLogParameters->getWeek() . '" />';
 
           // Notes libres
-          echo '<textarea placeholder="Notes libres" class="saisie_notes_libres_changelog"></textarea>';
+          echo '<textarea name="saisie_notes_changelog" placeholder="Notes libres" class="saisie_notes_libres_changelog"></textarea>';
 
           // Entrées
           echo '<div class="zone_saisie_entrees_changelog">';
@@ -122,10 +122,10 @@
             {
               echo '<div class="zone_saisie_entree_changelog">';
                 // Saisie entrée
-                echo '<input type="text" name="saisie_entree_' . $i . '" placeholder="Entrée n°' . $i . '" value="" class="saisie_entree_changelog" />';
+                echo '<input type="text" name="saisies_entrees[' . $i . ']" placeholder="Entrée n°' . $i . '" value="" class="saisie_entree_changelog" />';
 
                 // Choix catégorie
-                echo '<select name="categorie_entree_' . $i . '" class="categorie_entree_changelog">';
+                echo '<select name="categories_entrees[' . $i . ']" class="categorie_entree_changelog">';
                   echo '<option value="" hidden>Choisir une catégorie</option>';
 
                   foreach ($categoriesChangeLog as $keyCategorie => $categorie)

@@ -110,53 +110,44 @@
       // Extraction des logs
       $extractLogs = explode(';', $donnees['logs']);
 
-      // Extraction des catégories
-      $logsByCategories = array();
-
-      foreach ($extractLogs as $extractedLog)
-      {
-        if (!empty($extractedLog))
-        {
-          list($entry, $cat) = explode('@', $extractedLog);
-          $extractCategorie  = array('categorie' => $cat,
-                                     'entry'     => $entry
-                                    );
-
-          array_push($logsByCategories, $extractCategorie);
-        }
-      }
-
-      // Tri sur catégories
+      // Tri par catégories
       $sortedLogs = array();
 
       foreach ($categories as $categorie => $labelCategorie)
       {
-        if(!empty($logsByCategories))
+        foreach ($extractLogs as $keyExtract => $extractedLog)
         {
-          foreach ($logsByCategories as $keyLog => $logByCategory)
+          if(!empty($extractedLog))
           {
-            if ($logByCategory['categorie'] == $categorie)
+            list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+
+            if ($categoryExtracted == $categorie)
             {
               if (!isset($sortedLogs[$categorie]))
                 $sortedLogs[$categorie] = array();
 
-              array_push($sortedLogs[$categorie], $logByCategory['entry']);
-              unset($logsByCategories[$keyLog]);
+              array_push($sortedLogs[$categorie], $entryExtracted);
+              unset($extractLogs[$keyExtract]);
             }
           }
+          else
+            unset($extractLogs[$keyExtract]);
         }
-        else
-          break;
       }
 
       // Sécurité si besoin (logs restants sans catégorie)
-      if (!empty($logsByCategories))
+      if (!empty($extractLogs))
       {
-        $sortedLogs['other'] = array();
+        if (!isset($sortedLogs['other']))
+          $sortedLogs['other'] = array();
 
-        foreach ($logsByCategories as $keyLog => $logByCategory)
+        foreach ($extractLogs as $keyExtract => $extractedLog)
         {
-          array_push($sortedLogs['other'], $logByCategory['entry']);
+          if(!empty($extractedLog))
+          {
+            list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+            array_push($sortedLogs['other'], $entryExtracted);
+          }
         }
       }
 

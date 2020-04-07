@@ -41,23 +41,17 @@
       break;
 
     case 'doAjouter':
-      //ne pas oublier d'afficher un message d'erreur si tout est vide
-      //trier les logs (filtrer les caractères @ et ; car ils servent de séparateur)
-      //insérer une notification (pas de message dans les news ce n'est pas pertinent) avec logo inside
-      //message de bonne fin
-      //voir si le tri reste nécessaire pour le cas suppression et pour l'affichage utilisateur
-      //pour l'utilisateur, replier tous les logs sauf le dernier et avoir un bouton pour déplier
+      $categoriesChangeLog = getCategories();
+      insertChangeLog($_POST, $categoriesChangeLog);
       break;
 
     case 'doModifier':
-      //ne pas oublier d'afficher un message d'erreur si tout est vide
-      //trier les logs (filtrer les caractères @ et ; car ils servent de séparateur)
-      //message de bonne fin
+      $categoriesChangeLog = getCategories();
+      updateChangeLog($_POST, $categoriesChangeLog);
       break;
 
     case 'doSupprimer':
-      //supprimer la notification
-      //message de bonne fin
+      deleteChangeLog($_POST);
       break;
 
     default:
@@ -115,20 +109,10 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doGenerer':
     case 'doAjouter':
     case 'doModifier':
     case 'doSupprimer':
-      break;
-
-
-
-
-
-
-
-
-
-    case 'doGenerer':
       header('location: changelog.php?action=goConsulter');
       break;
 

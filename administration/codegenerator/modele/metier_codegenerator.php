@@ -215,8 +215,8 @@
     $nom_fonctionnel = trim($generatorParameters->getNom_section());
     $nom_head        = trim($generatorParameters->getNom_head());
 
-    $search   = array(" ", ".css", ".js");
-    $replace  = array("_", "", "");
+    $search  = array(" ", ".css", ".js");
+    $replace = array("_", "", "");
 
     $nom_technique = str_replace($search, $replace, trim($generatorParameters->getNom_technique()));
 

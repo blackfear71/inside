@@ -128,53 +128,44 @@
     // Extraction des logs
     $extractLogs = explode(';', $donnees['logs']);
 
-    // Extraction des catégories
-    $logsByCategories = array();
-
-    foreach ($extractLogs as $extractedLog)
-    {
-      if (!empty($extractedLog))
-      {
-        list($entry, $cat) = explode('@', $extractedLog);
-        $extractCategorie  = array('categorie' => $cat,
-                                   'entry'     => $entry
-                                  );
-
-        array_push($logsByCategories, $extractCategorie);
-      }
-    }
-
-    // Tri sur catégories
+    // Tri par catégories
     $sortedLogs = array();
 
     foreach ($categories as $categorie => $labelCategorie)
     {
-      if(!empty($logsByCategories))
+      foreach ($extractLogs as $keyExtract => $extractedLog)
       {
-        foreach ($logsByCategories as $keyLog => $logByCategory)
+        if(!empty($extractedLog))
         {
-          if ($logByCategory['categorie'] == $categorie)
+          list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+
+          if ($categoryExtracted == $categorie)
           {
             if (!isset($sortedLogs[$categorie]))
               $sortedLogs[$categorie] = array();
 
-            array_push($sortedLogs[$categorie], $logByCategory['entry']);
-            unset($logsByCategories[$keyLog]);
+            array_push($sortedLogs[$categorie], $entryExtracted);
+            unset($extractLogs[$keyExtract]);
           }
         }
+        else
+          unset($extractLogs[$keyExtract]);
       }
-      else
-        break;
     }
 
     // Sécurité si besoin (logs restants sans catégorie)
-    if (!empty($logsByCategories))
+    if (!empty($extractLogs))
     {
-      $sortedLogs['other'] = array();
+      if (!isset($sortedLogs['other']))
+        $sortedLogs['other'] = array();
 
-      foreach ($logsByCategories as $keyLog => $logByCategory)
+      foreach ($extractLogs as $keyExtract => $extractedLog)
       {
-        array_push($sortedLogs['other'], $logByCategory['entry']);
+        if(!empty($extractedLog))
+        {
+          list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+          array_push($sortedLogs['other'], $entryExtracted);
+        }
       }
     }
 
@@ -183,5 +174,197 @@
     $reponse->closeCursor();
 
     return $changelog;
+  }
+
+  // METIER : Insertion d'un journal
+  // RETOUR : Aucun
+  function insertChangeLog($post, $categories)
+  {
+    $control_ok = true;
+
+    // Récupération des données
+    $year               = $post['saisie_annee_changelog'];
+    $week               = $post['saisie_semaine_changelog'];
+    $notes              = $post['saisie_notes_changelog'];
+    $saisies_entrees    = $post['saisies_entrees'];
+    $categories_entrees = $post['categories_entrees'];
+
+    // Initialisations
+    $entries              = '';
+    $content_notification = $week . ';' . $year . ';';
+
+    // Filtrage des entrées vides
+    foreach ($saisies_entrees as $keyEntry => $entry)
+    {
+      if (empty($entry))
+        unset($saisies_entrees[$keyEntry]);
+    }
+
+    // Contrôle si notes et entrées vides
+    if (empty($notes) AND empty($saisies_entrees))
+    {
+      $_SESSION['alerts']['log_empty'] = true;
+      $control_ok                      = false;
+    }
+
+    // Filtrage des symboles interdits
+    if ($control_ok == true)
+    {
+      $search  = array("@", ";");
+      $replace = array("", "");
+
+      foreach ($saisies_entrees as $keyEntry => $entry)
+      {
+        $saisies_entrees[$keyEntry] = str_replace($search, $replace, $entry);
+      }
+    }
+
+    // Tri et récupération des entrées
+    if ($control_ok == true)
+    {
+      foreach ($categories as $categorie => $labelCategorie)
+      {
+        if(!empty($saisies_entrees))
+        {
+          foreach ($saisies_entrees as $keyEntry => $entry)
+          {
+            if ($categories_entrees[$keyEntry] == $categorie)
+            {
+              $entries .= $entry . '@' . $categories_entrees[$keyEntry] . ';';
+              unset($saisies_entrees[$keyEntry]);
+            }
+          }
+        }
+      }
+    }
+
+    // Insertion enregistrement
+    if ($control_ok == true)
+    {
+      global $bdd;
+
+      // Enregistrement en base
+      $reponse = $bdd->prepare('INSERT INTO change_log(week,
+                                                       year,
+                                                       notes,
+                                                       logs)
+                                               VALUES(:week,
+                                                      :year,
+                                                      :notes,
+                                                      :logs)');
+      $reponse->execute(array(
+        'week'  => $week,
+        'year'  => $year,
+        'notes' => $notes,
+        'logs'  => $entries
+      ));
+      $reponse->closeCursor();
+
+      // Insertion notification
+      insertNotification('admin', 'changelog', $content_notification);
+
+      // Message d'alerte
+      $_SESSION['alerts']['log_added'] = true;
+    }
+  }
+
+  // METIER : Mise à jour d'un journal
+  // RETOUR : Aucun
+  function updateChangeLog($post, $categories)
+  {
+    $control_ok = true;
+
+    // Récupération des données
+    $year               = $post['saisie_annee_changelog'];
+    $week               = $post['saisie_semaine_changelog'];
+    $notes              = $post['saisie_notes_changelog'];
+    $saisies_entrees    = $post['saisies_entrees'];
+    $categories_entrees = $post['categories_entrees'];
+
+    // Initialisations
+    $entries              = '';
+    $content_notification = $week . ';' . $year . ';';
+
+    // Filtrage des entrées vides
+    foreach ($saisies_entrees as $keyEntry => $entry)
+    {
+      if (empty($entry))
+        unset($saisies_entrees[$keyEntry]);
+    }
+
+    // Contrôle si notes et entrées vides
+    if (empty($notes) AND empty($saisies_entrees))
+    {
+      $_SESSION['alerts']['log_empty'] = true;
+      $control_ok                      = false;
+    }
+
+    // Filtrage des symboles interdits
+    if ($control_ok == true)
+    {
+      $search  = array("@", ";");
+      $replace = array("", "");
+
+      foreach ($saisies_entrees as $keyEntry => $entry)
+      {
+        $saisies_entrees[$keyEntry] = str_replace($search, $replace, $entry);
+      }
+    }
+
+    // Tri et récupération des entrées
+    if ($control_ok == true)
+    {
+      foreach ($categories as $categorie => $labelCategorie)
+      {
+        if(!empty($saisies_entrees))
+        {
+          foreach ($saisies_entrees as $keyEntry => $entry)
+          {
+            if ($categories_entrees[$keyEntry] == $categorie)
+            {
+              $entries .= $entry . '@' . $categories_entrees[$keyEntry] . ';';
+              unset($saisies_entrees[$keyEntry]);
+            }
+          }
+        }
+      }
+    }
+
+    // Mise à jour enregistrement
+    if ($control_ok == true)
+    {
+      global $bdd;
+
+      // Enregistrement en base
+      $reponse = $bdd->prepare('UPDATE change_log SET notes = :notes, logs = :logs WHERE year = ' . $year . ' AND week = ' . $week);
+      $reponse->execute(array(
+        'notes' => $notes,
+        'logs'  => $entries
+      ));
+      $reponse->closeCursor();
+
+      // Message d'alerte
+      $_SESSION['alerts']['log_updated'] = true;
+    }
+  }
+
+  // METIER : Suppression d'un journal
+  // RETOUR : Aucun
+  function deleteChangeLog($post)
+  {
+    $year                 = $post['saisie_annee_changelog'];
+    $week                 = $post['saisie_semaine_changelog'];
+    $content_notification = $week . ';' . $year . ';';
+
+    global $bdd;
+
+    // Suppression du journal
+    $reponse = $bdd->exec('DELETE FROM change_log WHERE year = ' . $year . ' AND week = ' . $week);
+
+    // Suppression des notifications
+    deleteNotification('changelog', $content_notification);
+
+    // Message d'alerte
+    $_SESSION['alerts']['log_deleted'] = true;
   }
 ?>
