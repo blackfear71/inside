@@ -44,7 +44,8 @@
   function getCategories()
   {
     // Liste des catégories
-    $listCategories = array('portail'          => 'PORTAIL',
+    $listCategories = array('general'          => 'GÉNÉRAL',
+                            'portail'          => 'PORTAIL',
                             'movie_house'      => 'MOVIE HOUSE',
                             'food_advisor'     => 'LES ENFANTS ! À TABLE !',
                             'cooking_box'      => 'COOKING BOX',
