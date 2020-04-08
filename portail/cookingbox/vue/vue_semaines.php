@@ -6,7 +6,7 @@
     // Zone semaine courante
     echo '<div class="zone_semaine">';
       // Numéro semaine
-      echo '<div class="numero_week">' . date("W") . '</div>';
+      echo '<div class="numero_week">' . formatWeekForDisplay(date("W")) . '</div>';
 
       if (!empty($currentWeek->getIdentifiant()))
       {
@@ -74,7 +74,7 @@
     // Zone semaine suivante
     echo '<div class="zone_semaine">';
       // Numéro semaine
-      echo '<div class="numero_week">' . date("W", strtotime('+ 1 week')) . '</div>';
+      echo '<div class="numero_week">' . formatWeekForDisplay(date("W", strtotime('+ 1 week'))) . '</div>';
 
       $week_next = date("W", strtotime('+ 1 week'));
 

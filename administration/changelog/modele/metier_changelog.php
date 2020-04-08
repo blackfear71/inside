@@ -36,7 +36,7 @@
   {
     $_SESSION['changelog']['action'] = $_POST['action_changelog'];
     $_SESSION['changelog']['year']   = $_POST['annee_changelog'];
-    $_SESSION['changelog']['week']   = $_POST['semaine_changelog'];
+    $_SESSION['changelog']['week']   = formatWeekForInsert($_POST['semaine_changelog']);
   }
 
   // METIER : Récupération des catégories pour les logs

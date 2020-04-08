@@ -8,6 +8,7 @@
 
   // Fonctions communes
   include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/fonctions_dates.php');
 
   // Contrôles communs Utilisateur
   controlsUser();

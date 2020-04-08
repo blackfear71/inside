@@ -30,7 +30,7 @@
             echo '<div class="zone_infos_recette">';
               // Semaine
               echo '<div class="semaine_recette">';
-                echo 'Semaine ' . $recette->getWeek();
+                echo 'Semaine ' . formatWeekForDisplay($recette->getWeek());
               echo '</div>';
 
               // Avatar

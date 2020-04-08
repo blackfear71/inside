@@ -68,6 +68,19 @@
     return $formatMonth;
   }
 
+  /* formatWeekForDisplay
+     Formate un numéro de semaine sans le 0 initial
+  */
+  function formatWeekForDisplay($week)
+  {
+    if (intval($week) < 10)
+      $formattedWeek = str_replace('0', '', $week);
+    else
+      $formattedWeek = $week;
+
+    return $formattedWeek;
+  }
+
   /* formatDateForInsert
      Les dates sont stockées au format AAAAMMJJ. Cette fonction renvoie la date au format
      AAAAMMJJ pour l'insertion en base. Si elle ne comporte pas 8 caractères, on renvoie l'argument
@@ -78,6 +91,19 @@
       return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
     else
       return $date;
+  }
+
+  /* formatWeekForInsert
+     Formate un numéro de semaine avec le 0 initial
+  */
+  function formatWeekForInsert($week)
+  {
+    if (intval($week) < 10)
+      $formattedWeek = '0' . $week;
+    else
+      $formattedWeek = $week;
+
+    return $formattedWeek;
   }
 
   /* calcDureeTrt

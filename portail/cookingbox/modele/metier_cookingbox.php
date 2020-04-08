@@ -81,7 +81,7 @@
         $previousYear = $donnees['year'];
       }
 
-      array_push($listWeeks, $donnees['week']);
+      array_push($listWeeks, formatWeekForDisplay($donnees['week']));
     }
     $reponse->closeCursor();
 
@@ -332,7 +332,7 @@
 
     // Récupération des données
     $year_recipe = $post['year_recipe'];
-    $week_recipe = $post['week_recipe'];
+    $week_recipe = formatWeekForInsert($post['week_recipe']);
     $name_recipe = $post['name_recipe'];
     $recipe      = $post['preparation'];
     $tips        = $post['remarks'];
@@ -485,7 +485,7 @@
 
     // Récupération des données
     $year_recipe = $post['hidden_year_recipe'];
-    $week_recipe = $post['hidden_week_recipe'];
+    $week_recipe = formatWeekForInsert($post['hidden_week_recipe']);
     $name_recipe = $post['name_recipe'];
     $recipe      = $post['preparation'];
     $tips        = $post['remarks'];
