@@ -130,7 +130,7 @@
 /*** Journaux ***/
 .zone_changelog_right
 {
-  display: inline-block;
+  display: none;
   width: calc(100% - 220px);
   margin-left: 20px;
   vertical-align: top;

@@ -35,6 +35,9 @@ $(window).on('load', function()
   adaptChangelog();
   adaptHistory();
 
+  // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_changelog_right').css('display', 'inline-block');
+
   // Masonry (Logs par catégories)
   if ($('.zone_logs_semaine').length)
   {
