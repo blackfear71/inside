@@ -11,6 +11,7 @@
     private $email;
     private $anniversary;
     private $experience;
+    private $level;
     private $expenses;
     private $beginner;
     private $developper;
@@ -27,6 +28,7 @@
       $this->avatar      = '';
       $this->email       = '';
       $this->experience  = '';
+      $this->level       = '';
       $this->anniversary = '';
       $this->expenses    = '';
       $this->beginner    = 0;
@@ -185,6 +187,17 @@
     public function getExperience()
     {
       return $this->experience;
+    }
+
+    // Niveau
+    public function setLevel($level)
+    {
+      $this->level = $level;
+    }
+
+    public function getLevel()
+    {
+      return $this->level;
     }
 
     // Dépenses (total)

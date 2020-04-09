@@ -14,21 +14,26 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_portail.php');
+  include_once('modele/physique_portail.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
+      // Récupération des alertes
 			$alerteUsers     = getAlerteUsers();
 			$alerteFilms     = getAlerteFilms();
       $alerteCalendars = getAlerteCalendars();
       $alerteAnnexes   = getAlerteAnnexes();
-			$nbBugs          = getNbBugs();
-			$nbEvols         = getNbEvols();
-      $portail         = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nbBugs, $nbEvols);
+
+      // Récupération du nombre de bugs et évolutions
+			$nombreBugs      = getNombreBugs();
+			$nombreEvols     = getNombreEvols();
+
+      // Création du portail administrateur
+      $portail         = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
       break;
 
     default:

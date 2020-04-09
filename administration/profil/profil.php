@@ -61,6 +61,7 @@
       $profil->setEmail(htmlspecialchars($profil->getEmail()));
       $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
       $profil->setExperience(htmlspecialchars($profil->getExperience()));
+      $profil->setLevel(htmlspecialchars($profil->getLevel()));
       $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
       break;
 

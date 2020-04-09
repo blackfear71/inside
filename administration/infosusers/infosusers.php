@@ -16,14 +16,14 @@
 
   // Modèle de données : "module métier"
   include_once('modele/metier_infosusers.php');
+  include_once('modele/physique_infosusers.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-			$listeUsers   = getUsers();
-      $listeNiveaux = getProgress($listeUsers);
+      // Récupération de la liste des utilisateurs
+			$listeUsers = getUsers();
       break;
 
     case 'changeBeginnerStatus':
@@ -54,16 +54,12 @@
         $user->setEmail(htmlspecialchars($user->getEmail()));
         $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
         $user->setExperience(htmlspecialchars($user->getExperience()));
+        $user->setLevel(htmlspecialchars($user->getLevel()));
         $user->setBeginner(htmlspecialchars($user->getBeginner()));
         $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
 			}
 
       unset($user);
-
-      foreach ($listeNiveaux as &$niveau)
-      {
-        $niveau = htmlspecialchars($niveau);
-      }
 
       unset($niveau);
       break;

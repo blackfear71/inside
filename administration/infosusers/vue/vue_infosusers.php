@@ -62,7 +62,7 @@
                   echo '<div class="infos_identifiant"><img src="../../includes/icons/admin/anniversary_grey.png" alt="anniversary_grey" class="logo_infos" />' . formatDateForDisplay($user->getAnniversary()) . '</div>';
 
                 // Niveau
-                echo '<div class="infos_niveau"><img src="../../includes/icons/admin/inside_red.png" alt="inside_red" class="logo_infos" />Niveau ' . $listeNiveaux[$user->getIdentifiant()] . ' (' . $user->getExperience() . ' XP)</div>';
+                echo '<div class="infos_niveau"><img src="../../includes/icons/admin/inside_red.png" alt="inside_red" class="logo_infos" />Niveau ' . $user->getLevel() . ' (' . $user->getExperience() . ' XP)</div>';
 
                 // Email
                 if (!empty($user->getEmail()))
@@ -77,7 +77,7 @@
                   else
                     echo 'Pas de connexion récente';
                 echo '</div>';
-                
+
                 echo '<div class="zone_form_users">';
                   // Formulaire True Insider
                   echo '<form method="post" action="infosusers.php?action=changeBeginnerStatus" class="form_infos_users">';

@@ -1,9 +1,7 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
-
   // METIER : Génération du portail administration
   // RETOUR : Tableau des liens
-  function getPortail($alertUsers, $alertFilms, $alertCalendars, $alertAnnexes, $nbBugs, $nbEvols)
+  function getPortail($alertUsers, $alertFilms, $alertCalendars, $alertAnnexes, $nombreBugs, $nombreEvols)
   {
     // Informations utilisateurs
     $infosusers = array('ligne_1' => 'Infos',
@@ -64,8 +62,8 @@
 
     // Rapports bugs/évolutions
     $bugs = array('ligne_1' => 'Rapports',
-                  'ligne_2' => 'BUGS (' . $nbBugs . ')',
-                  'ligne_3' => 'ÉVOLUTIONS (' . $nbEvols . ')',
+                  'ligne_2' => 'BUGS (' . $nombreBugs . ')',
+                  'ligne_3' => 'ÉVOLUTIONS (' . $nombreEvols . ')',
                   'lien'    => '../reports/reports.php?view=unresolved&action=goConsulter');
 
     // Gestion alertes
@@ -93,7 +91,19 @@
                        'lien'    => '../codegenerator/codegenerator.php?action=goConsulter');
 
     // Assemblage portail
-    $portail = array($infosusers, $manageusers, $themes, $success, $movies, $calendars, $missions, $bugs, $alerts, $cron, $changelog, $generator);
+    $portail = array($infosusers,
+                     $manageusers,
+                     $themes,
+                     $success,
+                     $movies,
+                     $calendars,
+                     $missions,
+                     $bugs,
+                     $alerts,
+                     $cron,
+                     $changelog,
+                     $generator
+                    );
 
     return $portail;
   }
@@ -102,21 +112,10 @@
   // RETOUR : Booléen
   function getAlerteUsers()
   {
-    $alert = false;
+    // Appel physique
+    $alert = physiqueAlerteUsers();
 
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, pseudo, status FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-    while ($data = $req->fetch())
-    {
-      if ($data['status'] == "Y" OR $data['status'] == "I" OR $data['status'] == "D")
-      {
-        $alert = true;
-        break;
-      }
-    }
-    $req->closeCursor();
-
+    // Retour
     return $alert;
   }
 
@@ -124,21 +123,10 @@
   // RETOUR : Booléen
   function getAlerteFilms()
   {
-    $alert = false;
+    // Appel physique
+    $alert = physiqueAlerteFilms();
 
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
-    while ($data = $req->fetch())
-    {
-      if ($data['to_delete'] == "Y")
-      {
-        $alert = true;
-        break;
-      }
-    }
-    $req->closeCursor();
-
+    // Retour
     return $alert;
   }
 
@@ -146,21 +134,10 @@
   // RETOUR : Booléen
   function getAlerteCalendars()
   {
-    $alert = false;
+    // Appel physique
+    $alert = physiqueAlerteCalendars();
 
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, to_delete FROM calendars WHERE to_delete = "Y"');
-    while ($data = $req->fetch())
-    {
-      if ($data['to_delete'] == "Y")
-      {
-        $alert = true;
-        break;
-      }
-    }
-    $req->closeCursor();
-
+    // Retour
     return $alert;
   }
 
@@ -168,53 +145,32 @@
   // RETOUR : Booléen
   function getAlerteAnnexes()
   {
-    $alert = false;
+    // Appel physique
+    $alert = physiqueAlerteAnnexes();
 
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, to_delete FROM calendars_annexes WHERE to_delete = "Y"');
-    while ($data = $req->fetch())
-    {
-      if ($data['to_delete'] == "Y")
-      {
-        $alert = true;
-        break;
-      }
-    }
-    $req->closeCursor();
-
+    // Retour
     return $alert;
   }
-  
+
   // METIER : Nombre de bugs en attente
   // RETOUR : Nombre de bugs
-  function getNbBugs()
+  function getNombreBugs()
   {
-    $nb_bugs = 0;
+    // Appel physique
+    $nombre_bugs = physiqueNombreBugs();
 
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "B" AND resolved = "N"');
-    $data = $req->fetch();
-    $nb_bugs = $data['nb_bugs'];
-    $req->closeCursor();
-
-    return $nb_bugs;
+    // Retour
+    return $nombre_bugs;
   }
 
   // METIER : Nombre d'évolutions en attente
   // RETOUR : Nombre d'évolutions
-  function getNbEvols()
+  function getNombreEvols()
   {
-    $nb_evols = 0;
+    // Appel physique
+    $nombre_evolutions = physiqueNombreEvolutions();
 
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "E" AND resolved = "N"');
-    $data = $req->fetch();
-    $nb_evols = $data['nb_bugs'];
-    $req->closeCursor();
-
-    return $nb_evols;
+    // Retour
+    return $nombre_evolutions;
   }
 ?>

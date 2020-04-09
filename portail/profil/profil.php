@@ -172,6 +172,7 @@
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
           $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
           $profil->setExperience(htmlspecialchars($profil->getExperience()));
+          $profil->setLevel(htmlspecialchars($profil->getLevel()));
           $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
           $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
@@ -192,6 +193,7 @@
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
           $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
           $profil->setExperience(htmlspecialchars($profil->getExperience()));
+          $profil->setLevel(htmlspecialchars($profil->getLevel()));
           $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
           $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
@@ -245,6 +247,7 @@
           $profil->setEmail(htmlspecialchars($profil->getEmail()));
           $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
           $profil->setExperience(htmlspecialchars($profil->getExperience()));
+          $profil->setLevel(htmlspecialchars($profil->getLevel()));
           $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
 
           $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));
