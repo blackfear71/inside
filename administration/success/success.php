@@ -18,7 +18,6 @@
 
   // Modèle de données : "module métier"
 	include_once('modele/metier_success.php');
-  include_once('../infosusers/modele/metier_infosusers.php');
 
   // Initialisation sauvegarde saisie succès
   if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)

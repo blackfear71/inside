@@ -16,9 +16,6 @@
 
   // Modèle de données : "module métier"
   include_once('modele/metier_portail.php');
-  include_once('../manageusers/modele/metier_manageusers.php');
-  include_once('../calendars/modele/metier_calendars.php');
-  include_once('../movies/modele/metier_movies.php');
 
   // Appel métier
   switch ($_GET['action'])

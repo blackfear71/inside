@@ -1,38 +1,6 @@
 <?php
   include_once('../../includes/functions/appel_bdd.php');
 
-  // METIER : Nombre de bugs en attente
-  // RETOUR : Nombre de bugs
-  function getNbBugs()
-  {
-    $nb_bugs = 0;
-
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "B" AND resolved = "N"');
-    $data = $req->fetch();
-    $nb_bugs = $data['nb_bugs'];
-    $req->closeCursor();
-
-    return $nb_bugs;
-  }
-
-  // METIER : Nombre d'évolutions en attente
-  // RETOUR : Nombre d'évolutions
-  function getNbEvols()
-  {
-    $nb_evols = 0;
-
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "E" AND resolved = "N"');
-    $data = $req->fetch();
-    $nb_evols = $data['nb_bugs'];
-    $req->closeCursor();
-
-    return $nb_evols;
-  }
-
   // METIER : Génération du portail administration
   // RETOUR : Tableau des liens
   function getPortail($alertUsers, $alertFilms, $alertCalendars, $alertAnnexes, $nbBugs, $nbEvols)
@@ -128,5 +96,125 @@
     $portail = array($infosusers, $manageusers, $themes, $success, $movies, $calendars, $missions, $bugs, $alerts, $cron, $changelog, $generator);
 
     return $portail;
+  }
+
+  // METIER : Contrôle alertes utilisateurs
+  // RETOUR : Booléen
+  function getAlerteUsers()
+  {
+    $alert = false;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant, pseudo, status FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    while ($data = $req->fetch())
+    {
+      if ($data['status'] == "Y" OR $data['status'] == "I" OR $data['status'] == "D")
+      {
+        $alert = true;
+        break;
+      }
+    }
+    $req->closeCursor();
+
+    return $alert;
+  }
+
+  // METIER : Contrôle alertes Movie House
+  // RETOUR : Booléen
+  function getAlerteFilms()
+  {
+    $alert = false;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, to_delete FROM movie_house WHERE to_delete = "Y"');
+    while ($data = $req->fetch())
+    {
+      if ($data['to_delete'] == "Y")
+      {
+        $alert = true;
+        break;
+      }
+    }
+    $req->closeCursor();
+
+    return $alert;
+  }
+
+  // METIER : Contrôle alertes Calendars
+  // RETOUR : Booléen
+  function getAlerteCalendars()
+  {
+    $alert = false;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, to_delete FROM calendars WHERE to_delete = "Y"');
+    while ($data = $req->fetch())
+    {
+      if ($data['to_delete'] == "Y")
+      {
+        $alert = true;
+        break;
+      }
+    }
+    $req->closeCursor();
+
+    return $alert;
+  }
+
+  // METIER : Contrôle alertes Annexes
+  // RETOUR : Booléen
+  function getAlerteAnnexes()
+  {
+    $alert = false;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, to_delete FROM calendars_annexes WHERE to_delete = "Y"');
+    while ($data = $req->fetch())
+    {
+      if ($data['to_delete'] == "Y")
+      {
+        $alert = true;
+        break;
+      }
+    }
+    $req->closeCursor();
+
+    return $alert;
+  }
+  
+  // METIER : Nombre de bugs en attente
+  // RETOUR : Nombre de bugs
+  function getNbBugs()
+  {
+    $nb_bugs = 0;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "B" AND resolved = "N"');
+    $data = $req->fetch();
+    $nb_bugs = $data['nb_bugs'];
+    $req->closeCursor();
+
+    return $nb_bugs;
+  }
+
+  // METIER : Nombre d'évolutions en attente
+  // RETOUR : Nombre d'évolutions
+  function getNbEvols()
+  {
+    $nb_evols = 0;
+
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE type = "E" AND resolved = "N"');
+    $data = $req->fetch();
+    $nb_evols = $data['nb_bugs'];
+    $req->closeCursor();
+
+    return $nb_evols;
   }
 ?>

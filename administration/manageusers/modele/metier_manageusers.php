@@ -1,5 +1,29 @@
 <?php
   include_once('../../includes/functions/appel_bdd.php');
+  include_once('../../includes/classes/profile.php');
+
+  // METIER : Lecture liste des utilisateurs
+  // RETOUR : Tableau d'utilisateurs
+  function getUsers()
+  {
+    // Initialisation tableau d'utilisateurs
+    $listeUsers = array();
+
+    global $bdd;
+
+    $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, anniversary, experience FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
+    while ($donnees = $reponse->fetch())
+    {
+      // Instanciation d'un objet User à partir des données remontées de la bdd
+      $user = Profile::withData($donnees);
+
+      // On ajoute la ligne au tableau
+      array_push($listeUsers, $user);
+    }
+    $reponse->closeCursor();
+
+    return $listeUsers;
+  }
 
   // METIER : Recherche les utilisateurs désinscrits
   // RETOUR : Liste des utilisateurs désinscrits

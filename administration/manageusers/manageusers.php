@@ -18,7 +18,6 @@
 
   // Modèle de données : "module métier"
   include_once('modele/metier_manageusers.php');
-  include_once('../infosusers/modele/metier_infosusers.php');
 
 	// Initialisation sauvegarde saisie
 	if (!isset($_SESSION['save']['user_ask_id']) OR !isset($_SESSION['save']['user_ask_name']) OR !isset($_SESSION['save']['new_password']))
