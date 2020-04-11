@@ -1301,4 +1301,21 @@
 
     return $control_ok;
   }
+
+  // Génère une chaîne aléatoire
+  // RETOUR : Chaîne aléatoire
+  function generateRandomString($nombreCarateres)
+  {
+    $string = "";
+    $chaine = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    srand((double)microtime() * 1000000);
+
+    for ($i = 0; $i < $nombreCarateres; $i++)
+    {
+      $string .= $chaine[rand() % strlen($chaine)];
+    }
+
+    return $string;
+  }
 ?>

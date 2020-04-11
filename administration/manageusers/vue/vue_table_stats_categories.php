@@ -35,7 +35,7 @@
 			echo '</td>';
 
 			echo '<td class="init_td_manage_users">';
-				echo 'Nombre de phrases cultes';
+				echo 'Nombre de phrases cultes rapportées';
 			echo '</td>';
 
 			echo '<td colspan="4" class="init_td_manage_users">';
@@ -56,30 +56,30 @@
         echo '</td>';
 
 				echo '<td class="td_manage_users">';
-          echo $statsCatIns['nb_ajouts'];
+          echo $statsCatIns['nombreFilms'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $statsCatIns['nb_comments'];
+          echo $statsCatIns['nombreComments'];
         echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatIns['nb_collectors'];
+					echo $statsCatIns['nombreCollector'];
 				echo '</td>';
 
-        if ($statsCatIns['bilan'] <= -6)
+        if ($statsCatIns['bilanUser'] <= -6)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ee4949">';
-				elseif ($statsCatIns['bilan'] > -6 AND $statsCatIns['bilan'] <= -3)
+				elseif ($statsCatIns['bilanUser'] > -6 AND $statsCatIns['bilanUser'] <= -3)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ff9147;">';
-				elseif ($statsCatIns['bilan'] > -3 AND $statsCatIns['bilan'] < -0.01)
+				elseif ($statsCatIns['bilanUser'] > -3 AND $statsCatIns['bilanUser'] < -0.01)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #fffd4c;">';
-				elseif ($statsCatIns['bilan'] > 0.01 AND $statsCatIns['bilan'] < 5)
+				elseif ($statsCatIns['bilanUser'] > 0.01 AND $statsCatIns['bilanUser'] < 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #b6fc78;">';
-				elseif ($statsCatIns['bilan'] >= 5)
+				elseif ($statsCatIns['bilanUser'] >= 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #71d058;">';
-				elseif ($statsCatIns['bilan'] > -0.01 AND $statsCatIns['bilan'] < 0.01)
+				elseif ($statsCatIns['bilanUser'] > -0.01 AND $statsCatIns['bilanUser'] < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo $statsCatIns['bilan_format'];
+						echo formatBilanForDisplay($statsCatIns['bilanUser']);
 					echo '</td>';
 			echo '</tr>';
     }
@@ -105,30 +105,30 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatDes['nb_ajouts'];
+					echo $statsCatDes['nombreFilms'];
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatDes['nb_comments'];
+					echo $statsCatDes['nombreComments'];
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatDes['nb_collectors'];
+					echo $statsCatDes['nombreCollector'];
 				echo '</td>';
 
-				if ($statsCatDes['bilan'] <= -6)
+				if ($statsCatDes['bilanUser'] <= -6)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ee4949">';
-				elseif ($statsCatDes['bilan'] > -6 AND $statsCatDes['bilan'] <= -3)
+				elseif ($statsCatDes['bilanUser'] > -6 AND $statsCatDes['bilanUser'] <= -3)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #ff9147;">';
-				elseif ($statsCatDes['bilan'] > -3 AND $statsCatDes['bilan'] < -0.01)
+				elseif ($statsCatDes['bilanUser'] > -3 AND $statsCatDes['bilanUser'] < -0.01)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #fffd4c;">';
-				elseif ($statsCatDes['bilan'] > 0.01 AND $statsCatDes['bilan'] < 5)
+				elseif ($statsCatDes['bilanUser'] > 0.01 AND $statsCatDes['bilanUser'] < 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #b6fc78;">';
-				elseif ($statsCatDes['bilan'] >= 5)
+				elseif ($statsCatDes['bilanUser'] >= 5)
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #71d058;">';
-				elseif ($statsCatDes['bilan'] > -0.01 AND $statsCatDes['bilan'] < 0.01)
+				elseif ($statsCatDes['bilanUser'] > -0.01 AND $statsCatDes['bilanUser'] < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo $statsCatDes['bilan_format'];
+						echo formatBilanForDisplay($statsCatDes['bilanUser']);
 					echo '</td>';
 			echo '</tr>';
 		}
@@ -140,26 +140,26 @@
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalCategories['nb_tot_ajouts'];
+				echo $totalCategories['nombreFilms'];
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalCategories['nb_tot_commentaires'];
+				echo $totalCategories['nombreComments'];
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalCategories['nb_tot_collectors'];
+				echo $totalCategories['nombreCollector'];
 			echo '</td>';
 
 			echo '<td class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
 				echo 'Bilan';
 			echo '</td>';
 
-			if ($totalCategories['alerte_bilan'] == true)
+			if ($totalCategories['alerteBilan'] == true)
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif; background-color: #ee4949;">';
 			else
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
-					echo $totalCategories['somme_bilans_format'];
+					echo formatBilanForDisplay($totalCategories['sommeBilans']);
 				echo '</td>';
 
 			echo '<td class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
@@ -168,7 +168,7 @@
 
 			// Alerte si un utilisateur désinscrit n'a pas payé
 			echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
-				if ($totalCategories['alerte_bilan'] == true)
+				if ($totalCategories['alerteBilan'] == true)
 					echo '<span class="reset_warning">!</span>';
 			echo '</td>';
 		echo '</tr>';

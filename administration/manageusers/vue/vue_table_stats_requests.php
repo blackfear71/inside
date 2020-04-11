@@ -56,23 +56,23 @@
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_bugs'];
+          echo $stats['nombreBugsSoumis'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_bugs_resolved'];
+          echo $stats['nombreBugsResolus'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_ideas'];
+          echo $stats['nombreTheBox'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_ideas_inprogress'];
+          echo $stats['nombreTheBoxEnCharge'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_ideas_finished'];
+          echo $stats['nombreTheBoxTerminees'];
         echo '</td>';
       echo '</tr>';
     }
@@ -98,26 +98,26 @@
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_bugs'];
+          echo $stats['nombreBugsSoumis'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_bugs_resolved'];
+          echo $stats['nombreBugsResolus'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_ideas'];
+          echo $stats['nombreTheBox'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-					if ($stats['nb_ideas_inprogress'] == 0)
+					if ($stats['nombreTheBoxEnCharge'] == 0)
 						echo 'N/A';
 					else
-          	echo $stats['nb_ideas_inprogress'];
+          	echo $stats['nombreTheBoxEnCharge'];
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $stats['nb_ideas_finished'];
+          echo $stats['nombreTheBoxTerminees'];
         echo '</td>';
       echo '</tr>';
     }
@@ -129,23 +129,23 @@
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalStats['nb_tot_bugs'];
+				echo $totalStats['nombreBugsSoumis'];
 			echo '</td>';
 
       echo '<td class="td_manage_users">';
-				echo $totalStats['nb_tot_bugs_resolus'];
+				echo $totalStats['nombreBugsResolus'];
 			echo '</td>';
 
       echo '<td class="td_manage_users">';
-				echo $totalStats['nb_tot_idees'];
+				echo $totalStats['nombreTheBox'];
 			echo '</td>';
 
       echo '<td class="td_manage_users">';
-				echo $totalStats['nb_tot_idees_en_charge'];
+				echo $totalStats['nombreTheBoxEnCharge'];
 			echo '</td>';
 
       echo '<td class="td_manage_users">';
-				echo $totalStats['nb_tot_idees_terminees'];
+				echo $totalStats['nombreTheBoxTerminees'];
 			echo '</td>';
 		echo '</tr>';
 	echo '</table>';

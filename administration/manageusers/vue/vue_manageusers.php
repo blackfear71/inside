@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Utilisateurs";
+      $title_head      = "Gestion utilisateurs";
       $style_head      = "styleAdmin.css";
       $script_head     = "";
       $angular_head    = false;
