@@ -250,7 +250,7 @@
     {
       $new_name = '';
 
-      // On contrôle la présence du dossier, sinon on le créé
+      // On vérifie la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/foodadvisor";
 
       if (!is_dir($dossier))
@@ -261,18 +261,18 @@
       $name           = rand();
 
       // Contrôles fichier
-      $controlsFile = controlsUploadFile($files['image_restaurant'], $name, 'all');
+      $fileDatas = controlsUploadFile($files['image_restaurant'], $name, 'all');
 
       // Traitements fichier
-      if ($controlsFile['control_ok'] == true)
+      if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image_restaurant'], $controlsFile, $restaurant_dir);
+        $control_ok = uploadFile($files['image_restaurant'], $fileDatas, $restaurant_dir);
 
         if ($control_ok == true)
         {
-          $new_name   = $controlsFile['new_name'];
-          $type_image = $controlsFile['type_file'];
+          $new_name   = $fileDatas['new_name'];
+          $type_image = $fileDatas['type_file'];
 
           // Rotation de l'image (si JPEG)
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
@@ -502,7 +502,7 @@
     {
       $new_name = '';
 
-      // On contrôle la présence du dossier, sinon on le créé
+      // On vérifie la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/foodadvisor";
 
       if (!is_dir($dossier))
@@ -513,10 +513,10 @@
       $name           = rand();
 
       // Contrôles fichier
-      $controlsFile = controlsUploadFile($files['update_image_restaurant_' . $id_restaurant], $name, 'all');
+      $fileDatas = controlsUploadFile($files['update_image_restaurant_' . $id_restaurant], $name, 'all');
 
       // Traitements fichier
-      if ($controlsFile['control_ok'] == true)
+      if ($fileDatas['control_ok'] == true)
       {
         // Suppression ancienne image
         $req1 = $bdd->query('SELECT id, picture FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
@@ -528,12 +528,12 @@
         $req1->closeCursor();
 
         // Upload fichier
-        $control_ok = uploadFile($files['update_image_restaurant_' . $id_restaurant], $controlsFile, $restaurant_dir);
+        $control_ok = uploadFile($files['update_image_restaurant_' . $id_restaurant], $fileDatas, $restaurant_dir);
 
         if ($control_ok == true)
         {
-          $new_name   = $controlsFile['new_name'];
-          $type_image = $controlsFile['type_file'];
+          $new_name   = $fileDatas['new_name'];
+          $type_image = $fileDatas['type_file'];
 
           // Rotation de l'image
           if ($type_image == 'jpg' OR $type_image == 'jpeg')

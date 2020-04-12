@@ -385,19 +385,19 @@
       // Enregistrement image
       $new_name = '';
 
-      // On contrôle la présence du dossier, sinon on le créé
+      // On vérifie la présence du dossier, sinon on le créé
       $dossier = '../../includes/images/cookingbox';
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // On contrôle la présence du dossier des années, sinon on le créé
+      // On vérifie la présence du dossier des années, sinon on le créé
       $dossier_annee = $dossier . '/' . $year_recipe;
 
       if (!is_dir($dossier_annee))
         mkdir($dossier_annee);
 
-      // On contrôle la présence du dossier des miniatures, sinon on le créé
+      // On vérifie la présence du dossier des miniatures, sinon on le créé
       $dossier_miniatures = $dossier_annee . '/mini';
 
       if (!is_dir($dossier_miniatures))
@@ -409,18 +409,18 @@
       $name      = $year_recipe . '-' . $week_recipe . '-' . rand();
 
       // Contrôles fichier
-      $controlsFile = controlsUploadFile($files['image'], $name, 'all');
+      $fileDatas = controlsUploadFile($files['image'], $name, 'all');
 
       // Traitements fichier
-      if ($controlsFile['control_ok'] == true)
+      if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
+        $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
 
         if ($control_ok == true)
         {
-          $new_name   = $controlsFile['new_name'];
-          $type_image = $controlsFile['type_file'];
+          $new_name   = $fileDatas['new_name'];
+          $type_image = $fileDatas['type_file'];
 
           // Rotation de l'image (si JPEG)
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
@@ -535,18 +535,18 @@
       $name      = $year_recipe . '-' . $week_recipe . '-' . rand();
 
       // Contrôles fichier
-      $controlsFile = controlsUploadFile($files['image'], $name, 'all');
+      $fileDatas = controlsUploadFile($files['image'], $name, 'all');
 
       // Traitements fichier
-      if ($controlsFile['control_ok'] == true)
+      if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
+        $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
 
         if ($control_ok == true)
         {
-          $new_name   = $controlsFile['new_name'];
-          $type_image = $controlsFile['type_file'];
+          $new_name   = $fileDatas['new_name'];
+          $type_image = $fileDatas['type_file'];
 
           // Rotation de l'image (si JPEG)
           if ($type_image == 'jpg' OR $type_image == 'jpeg')

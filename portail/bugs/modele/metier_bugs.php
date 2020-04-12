@@ -65,7 +65,7 @@
     // On insère l'image si présente
     if ($files['image']['name'] != NULL)
     {
-      // On contrôle la présence du dossier, sinon on le créé
+      // On vérifie la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/reports";
 
       if (!is_dir($dossier))
@@ -76,21 +76,21 @@
       $name      = rand();
 
       // Contrôles fichier
-      $controlsFile = controlsUploadFile($files['image'], $name, 'all');
+      $fileDatas = controlsUploadFile($files['image'], $name, 'all');
 
       // Récupération contrôles
-      $control_ok = $controlsFile['control_ok'];
+      $control_ok = $fileDatas['control_ok'];
 
-      if ($controlsFile['control_ok'] == true)
+      if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
+        $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
 
         // Rotation de l'image
         if ($control_ok == true)
         {
-          $picture    = $controlsFile['new_name'];
-          $type_image = $controlsFile['type_file'];
+          $picture    = $fileDatas['new_name'];
+          $type_image = $fileDatas['type_file'];
 
           if ($type_image == 'jpg' OR $type_image == 'jpeg')
             $rotate = rotateImage($image_dir . $picture, $type_image);

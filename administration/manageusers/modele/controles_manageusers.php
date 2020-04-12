@@ -6,6 +6,7 @@
     // Initialisations
     $control_ok = true;
 
+    // Contrôle
     if ($expense < -0.01 OR $expense > 0.01)
     {
       $_SESSION['alerts']['expenses_not_null'] = true;

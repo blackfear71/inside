@@ -16,7 +16,7 @@
     $reponse = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, anniversary, experience FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
     while ($donnees = $reponse->fetch())
     {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
 
       // On ajoute la ligne au tableau
@@ -140,13 +140,13 @@
     // Si contrôles ok, insertion image puis table
     if ($control_ok == true)
     {
-      // On contrôle la présence du dossier, sinon on le créé
+      // On vérifie la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/profil";
 
       if (!is_dir($dossier))
          mkdir($dossier);
 
-      // On contrôle la présence du dossier des succès, sinon on le créé
+      // On vérifie la présence du dossier des succès, sinon on le créé
       $dossier_succes = $dossier . '/success';
 
       if (!is_dir($dossier_succes))
@@ -156,17 +156,17 @@
       $success_dir = $dossier_succes . '/';
 
       // Contrôles fichier
-      $controlsFile = controlsUploadFile($files['success'], $reference, 'png');
+      $fileDatas = controlsUploadFile($files['success'], $reference, 'png');
 
       // Traitements fichier
-      if ($controlsFile['control_ok'] == true)
+      if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['success'], $controlsFile, $success_dir);
+        $control_ok = uploadFile($files['success'], $fileDatas, $success_dir);
 
         if ($control_ok == true)
         {
-          $new_name = $controlsFile['new_name'];
+          $new_name = $fileDatas['new_name'];
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
           imagethumb($success_dir . $new_name, $success_dir . $new_name, 500, FALSE, TRUE);

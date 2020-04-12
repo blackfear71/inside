@@ -1,28 +1,14 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/themes.php');
 
   // METIER : Lecture des thèmes existants par type
   // RETOUR : Tableau des thèmes
-  function getThemes($type)
+  function getThemes($typeTheme)
   {
-    $themes = array();
+    // Récupération des thèmes
+    $themes = physiqueThemes($typeTheme);
 
-    global $bdd;
-
-    // Lecture de la base des thèmes
-    $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" ORDER BY date_deb DESC, level ASC');
-
-    while ($donnees = $reponse->fetch())
-    {
-      $myTheme = Theme::withData($donnees);
-
-      // On ajoute la ligne au tableau
-      array_push($themes, $myTheme);
-    }
-
-    $reponse->closeCursor();
-
+    // Retour
     return $themes;
   }
 
@@ -30,8 +16,6 @@
   // RETOUR : Id enregistrement créé
   function insertTheme($post, $files)
   {
-    global $bdd;
-
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['theme_title']      = $post['theme_title'];
     $_SESSION['save']['theme_ref']        = $post['theme_ref'];
@@ -49,26 +33,27 @@
       $_SESSION['save']['theme_level']    = $post['theme_level'];
     }
 
-    $new_id     = NULL;
+    // Initialisations
+    $newId      = NULL;
     $control_ok = true;
 
     // Récupération des données
-    $theme     = $post['theme_title'];
-    $reference = $post['theme_ref'];
-    $logo      = "N";
-    $type      = $post['theme_type'];
+    $titre        = $post['theme_title'];
+    $reference    = $post['theme_ref'];
+    $presenceLogo = "N";
+    $type         = $post['theme_type'];
 
     if ($type == "M")
     {
-      $date_deb = $post['theme_date_deb'];
-      $date_fin = $post['theme_date_fin'];
-      $level    = '';
+      $dateDeb = $post['theme_date_deb'];
+      $dateFin = $post['theme_date_fin'];
+      $level   = '';
     }
     else
     {
-      $date_deb = '';
-      $date_fin = '';
-      $level    = $post['theme_level'];
+      $dateDeb = '';
+      $dateFin = '';
+      $level   = $post['theme_level'];
     }
 
     // Remplacement des caractères spéciaux pour la référence
@@ -77,135 +62,98 @@
     $reference = str_replace($search, $replace, $reference);
 
     // Contrôle référence unique
-    $req1 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $reference . '"');
-    if ($req1->rowCount() > 0)
+    $control_ok = controleReferenceUnique($reference);
+
+    // Contrôles spécifiques au type de thème
+    if ($control_ok == true)
     {
-      $_SESSION['alerts']['already_ref_theme'] = true;
-      $control_ok                              = false;
-    }
-    $req1->closeCursor();
-
-    if ($type == "M")
-    {
-      // Contrôle format date début
-      if ($control_ok == true)
+      if ($type == "M")
       {
-        if (validateDate($date_deb, "d/m/Y") != true)
-        {
-          $_SESSION['alerts']['wrong_date'] = true;
-          $control_ok                       = false;
-        }
-        else
-          $date_deb = formatDateForInsert($date_deb);
+        // Contrôle format date début
+        $control_ok = controleFormatDate($dateDeb, "d/m/Y");
+
+        // Formatage de la date de début pour insertion
+        if ($control_ok == true)
+          $dateDeb = formatDateForInsert($dateDeb);
+
+        // Contrôle format date fin
+        if ($control_ok == true)
+          $control_ok = controleFormatDate($dateFin, "d/m/Y");
+
+        // Formatage de la date de fin pour insertion
+        if ($control_ok == true)
+          $dateFin = formatDateForInsert($dateFin);
+
+        // Contrôle date début <= date fin
+        if ($control_ok == true)
+          $control_ok = controleOrdreDates($dateDeb, $dateFin);
+
+        // Contrôle chevauchement dates
+        if ($control_ok == true)
+          $control_ok = controleSuperpositionDates($dateDeb, $dateFin, NULL);
       }
-
-      // Contrôle format date fin
-      if ($control_ok == true)
+      else
       {
-        if (validateDate($date_fin, "d/m/Y") != true)
-        {
-          $_SESSION['alerts']['wrong_date'] = true;
-          $control_ok                       = false;
-        }
-        else
-          $date_fin = formatDateForInsert($date_fin);
-      }
-
-      // Contrôle date début <= date fin
-      if ($control_ok == true)
-      {
-        if ($date_fin < $date_deb)
-        {
-          $_SESSION['alerts']['date_less'] = true;
-          $control_ok                      = false;
-        }
-      }
-
-      // Contrôle chevauchement dates
-      if ($control_ok == true)
-      {
-        $conflict = false;
-        $conflict = controlGeneratedTheme($date_deb, $date_fin, NULL);
-
-        if ($conflict == true)
-        {
-          $_SESSION['alerts']['date_conflict'] = true;
-          $control_ok                          = false;
-        }
-      }
-    }
-    else
-    {
-      // Contrôle niveau numérique
-      if ($control_ok == true)
-      {
-        if (!is_numeric($level) OR $level < 0)
-        {
-          $_SESSION['alerts']['level_theme_numeric'] = true;
-          $control_ok                                = false;
-        }
+        // Contrôle niveau numérique
+        $control_ok = controleNiveauNumerique($level);
       }
     }
 
     // Contrôle images présentes et indicateur présence logo
     if ($control_ok == true)
     {
-      foreach ($files as $key_file => $file)
+      foreach ($files as $keyFile => $file)
       {
-        // Contrôle présence logo
-        if ($key_file == "logo" AND !empty($file['name']) AND !empty($file['type']))
-          $logo = "Y";
+        // Indicateur présence logo
+        if ($keyFile == "logo" AND !empty($file['name']) AND !empty($file['type']))
+          $presenceLogo = "Y";
 
         // Contrôle présence autres fichiers
-        if ($key_file != 'logo' AND (empty($file['name']) OR $file['name'] == NULL))
-        {
-          $_SESSION['alerts']['missing_theme_file'] = true;
-          $control_ok                               = false;
-        }
+        $control_ok = controleAutresFichiers($keyFile, $file['name']);
       }
     }
 
-    // Contrôle des fichiers
+    // Vérification des dossiers et contrôle des fichiers
     if ($control_ok == true)
     {
-      // On contrôle la présence du dossier des images, sinon on le créé
+      // On vérifie la présence du dossier des images, sinon on le créé
       $dossier = "../../includes/images/themes";
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // On contrôle la présence du dossier des entête, sinon on le créé
-      $dossier_headers = $dossier . "/headers";
+      // On vérifie la présence du dossier des entête, sinon on le créé
+      $dossierHeaders = $dossier . "/headers";
 
-      if (!is_dir($dossier_headers))
-        mkdir($dossier_headers);
+      if (!is_dir($dossierHeaders))
+        mkdir($dossierHeaders);
 
-      // On contrôle la présence du dossier des fonds, sinon on le créé
-      $dossier_backgrounds = $dossier . "/backgrounds";
+      // On vérifie la présence du dossier des fonds, sinon on le créé
+      $dossierBackgrounds = $dossier . "/backgrounds";
 
-      if (!is_dir($dossier_backgrounds))
-        mkdir($dossier_backgrounds);
+      if (!is_dir($dossierBackgrounds))
+        mkdir($dossierBackgrounds);
 
-      // On contrôle la présence du dossier des bas de page, sinon on le créé
-      $dossier_footers = $dossier . "/footers";
+      // On vérifie la présence du dossier des bas de page, sinon on le créé
+      $dossierFooters = $dossier . "/footers";
 
-      if (!is_dir($dossier_footers))
-        mkdir($dossier_footers);
+      if (!is_dir($dossierFooters))
+        mkdir($dossierFooters);
 
-      // On contrôle la présence du dossier des logos, sinon on le créé
-      $dossier_logos = $dossier . "/logos";
+      // On vérifie la présence du dossier des logos, sinon on le créé
+      $dossierLogos = $dossier . "/logos";
 
-      if (!is_dir($dossier_logos))
-        mkdir($dossier_logos);
+      if (!is_dir($dossierLogos))
+        mkdir($dossierLogos);
 
       // Contrôle des fichiers
-      foreach ($files as $key_file => $file)
+      foreach ($files as $keyFile => $file)
       {
         // Si logo présent ou autre fichier que logo
-        if (($key_file == "logo" AND $logo == "Y") OR $key_file != "logo")
+        if (($keyFile == "logo" AND $presenceLogo == "Y") OR $keyFile != "logo")
         {
           // Nom du fichier
-          switch ($key_file)
+          switch ($keyFile)
           {
             case "header":
               $name = $reference . '_h';
@@ -225,13 +173,12 @@
               break;
           }
 
-          $controlsFile = controlsUploadFile($file, $name, 'png');
+          // Contrôles communs d'un fichier
+          $control_ok = controleFichier($file, $name, 'png');
 
-          if ($controlsFile['control_ok'] == false)
-          {
-            $control_ok = false;
+          // Arrêt de la boucle en cas d'erreur
+          if ($control_ok == false)
             break;
-          }
         }
       }
     }
@@ -239,69 +186,67 @@
     // Insertion des images dans les dossiers
     if ($control_ok == true)
     {
-      // Insertion des fichiers
-      foreach ($files as $key_file => $file)
+      // Insertion de chaque fichier
+      foreach ($files as $keyFile => $file)
       {
         // Insertion logo si présent ou autre que logo
-        if (($key_file == "logo" AND $logo == "Y") OR $key_file != "logo")
+        if (($keyFile == "logo" AND $presenceLogo == "Y") OR $keyFile != "logo")
         {
           // Dossier de destination
-          switch ($key_file)
+          switch ($keyFile)
           {
             case "header":
-              $dest_dir = $dossier_headers . '/';
+              $destDir = $dossierHeaders . '/';
               break;
 
             case "footer":
-              $dest_dir = $dossier_footers . '/';
+              $destDir = $dossierFooters . '/';
               break;
 
             case "logo":
-              $dest_dir = $dossier_logos . '/';
+              $destDir = $dossierLogos . '/';
               break;
 
             case "background":
             default:
-              $dest_dir = $dossier_backgrounds . '/';
+              $destDir = $dossierBackgrounds . '/';
               break;
           }
 
           // Nouveau nom
-          switch ($key_file)
+          switch ($keyFile)
           {
             case "header":
-              $new_name = $reference . '_h.png';
+              $newName = $reference . '_h.png';
               break;
 
             case "footer":
-              $new_name = $reference . '_f.png';
+              $newName = $reference . '_f.png';
               break;
 
             case "logo":
-              $new_name = $reference . '_l.png';
+              $newName = $reference . '_l.png';
               break;
 
             case "background":
             default:
-              $new_name = $reference . '.png';
+              $newName = $reference . '.png';
               break;
           }
 
           // Données à envoyer pour l'upload
-          $controlsFile = array('control_ok' => true,
-                                'new_name'   => $new_name,
-                                'tmp_file'   => $file['tmp_name'],
-                                'type_file'  => $file['type']
-                               );
+          $fileDatas = array('control_ok' => true,
+                             'new_name'   => $newName,
+                             'tmp_file'   => $file['tmp_name'],
+                             'type_file'  => $file['type']
+                            );
 
           // Upload fichier
-          $control_ok = uploadFile($file, $controlsFile, $dest_dir);
+          $control_ok = uploadFile($file, $fileDatas, $destDir);
 
-          if ($controlsFile['control_ok'] == false)
-          {
-            $control_ok = false;
+          // Arrêt de la boucle en cas d'erreur
+          if ($control_ok == false)
             break;
-          }
         }
       }
     }
@@ -309,218 +254,131 @@
     // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      $req2 = $bdd->prepare('INSERT INTO themes(reference,
-                                                name,
-                                                type,
-                                                level,
-                                                logo,
-                                                date_deb,
-                                                date_fin)
-                                        VALUES(:reference,
-                                               :name,
-                                               :type,
-                                               :level,
-                                               :logo,
-                                               :date_deb,
-                                               :date_fin)');
-      $req2->execute(array(
-        'reference' => $reference,
-        'name'      => $theme,
-        'type'      => $type,
-        'level'     => $level,
-        'logo'      => $logo,
-        'date_deb'  => $date_deb,
-        'date_fin'  => $date_fin
-      ));
-      $req2->closeCursor();
+      $theme = array('reference' => $reference,
+                     'name'      => $titre,
+                     'type'      => $type,
+                     'level'     => $level,
+                     'logo'      => $presenceLogo,
+                     'date_deb'  => $dateDeb,
+                     'date_fin'  => $dateFin
+                    );
 
-      $new_id = $bdd->lastInsertId();
+      $newId = physiqueInsertionTheme($theme);
 
+      // Message d'alerte
       $_SESSION['alerts']['theme_added'] = true;
     }
 
-    return $new_id;
+    // Retour
+    return $newId;
   }
 
   // METIER : Modification thème existant
   // RETOUR : Id thème
   function updateTheme($post)
   {
-    global $bdd;
-
+    // Initialisations
     $control_ok = true;
 
-    $id_theme = $post['id_theme'];
-    $theme    = $post['theme_title'];
-    $type     = $post['theme_type'];
+    // Récupération des données
+    $idTheme = $post['id_theme'];
+    $titre   = $post['theme_title'];
+    $type    = $post['theme_type'];
 
     if ($type == "M")
     {
-      $date_deb = $post['theme_date_deb'];
-      $date_fin = $post['theme_date_fin'];
-      $level    = '';
+      $dateDeb = $post['theme_date_deb'];
+      $dateFin = $post['theme_date_fin'];
+      $level   = '';
     }
     else
     {
-      $date_deb = '';
-      $date_fin = '';
-      $level    = $post['theme_level'];
+      $dateDeb = '';
+      $dateFin = '';
+      $level   = $post['theme_level'];
     }
 
     if ($type == "M")
     {
       // Contrôle format date début
+      $control_ok = controleFormatDate($dateDeb, "d/m/Y");
+
+      // Formatage de la date de début pour insertion
       if ($control_ok == true)
-      {
-        if (validateDate($date_deb, "d/m/Y") != true)
-        {
-          $_SESSION['alerts']['wrong_date'] = true;
-          $control_ok                       = false;
-        }
-        else
-          $date_deb = formatDateForInsert($date_deb);
-      }
+        $dateDeb = formatDateForInsert($dateDeb);
 
       // Contrôle format date fin
       if ($control_ok == true)
-      {
-        if (validateDate($date_fin, "d/m/Y") != true)
-        {
-          $_SESSION['alerts']['wrong_date'] = true;
-          $control_ok                       = false;
-        }
-        else
-          $date_fin = formatDateForInsert($date_fin);
-      }
+        $control_ok = controleFormatDate($dateFin, "d/m/Y");
+
+      // Formatage de la date de fin pour insertion
+      if ($control_ok == true)
+        $dateFin = formatDateForInsert($dateFin);
 
       // Contrôle date début <= date fin
       if ($control_ok == true)
-      {
-        if ($date_fin < $date_deb)
-        {
-          $_SESSION['alerts']['date_less'] = true;
-          $control_ok                      = false;
-        }
-      }
+        $control_ok = controleOrdreDates($dateDeb, $dateFin);
 
       // Contrôle chevauchement dates
       if ($control_ok == true)
-      {
-        $conflict = false;
-        $conflict = controlGeneratedTheme($date_deb, $date_fin, $id_theme);
-
-        if ($conflict == true)
-        {
-          $_SESSION['alerts']['date_conflict'] = true;
-          $control_ok                          = false;
-        }
-      }
+        $control_ok = controleSuperpositionDates($dateDeb, $dateFin, $idTheme);
     }
     else
     {
       // Contrôle niveau numérique
-      if ($control_ok == true)
-      {
-        if (!is_numeric($level) OR $level < 0)
-        {
-          $_SESSION['alerts']['level_theme_numeric'] = true;
-          $control_ok                                = false;
-        }
-      }
+      $control_ok = controleNiveauNumerique($level);
     }
 
     // Modification de l'enregistrement en base
     if ($control_ok == true)
     {
-      $req = $bdd->prepare('UPDATE themes SET name     = :name,
-                                              type     = :type,
-                                              level    = :level,
-                                              date_deb = :date_deb,
-                                              date_fin = :date_fin
-                                        WHERE id       = ' . $id_theme);
-      $req->execute(array(
-        'name'     => $theme,
-        'type'     => $type,
-        'level'    => $level,
-        'date_deb' => $date_deb,
-        'date_fin' => $date_fin
-      ));
-      $req->closeCursor();
+      $theme = array('name'      => $titre,
+                     'type'      => $type,
+                     'level'     => $level,
+                     'date_deb'  => $dateDeb,
+                     'date_fin'  => $dateFin
+                    );
 
+      var_dump($theme);
+      
+      physiqueUpdateTheme($idTheme, $theme);
+
+      // Message d'alerte
       $_SESSION['alerts']['theme_updated'] = true;
     }
 
-    return $id_theme;
-  }
-
-  // METIER : Contrôle dates thème non superposées
-  // RETOUR : Booléen
-  function controlGeneratedTheme($date_deb, $date_fin, $id_theme)
-  {
-    global $bdd;
-
-    $conflict = false;
-
-    if (!empty($id_theme))
-      $reponse = $bdd->query('SELECT * FROM themes WHERE id != ' . $id_theme . ' AND type = "M" ORDER BY date_deb DESC ');
-    else
-      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" ORDER BY date_deb DESC');
-
-    while ($donnees = $reponse->fetch())
-    {
-      if (($date_deb >= $donnees['date_deb'] AND $date_deb <= $donnees['date_fin'])
-      OR  ($date_fin >= $donnees['date_deb'] AND $date_fin <= $donnees['date_fin'])
-      OR  ($date_deb <= $donnees['date_deb'] AND $date_fin >= $donnees['date_fin']))
-      {
-        $conflict = true;
-        break;
-      }
-    }
-
-    $reponse->closeCursor();
-
-    return $conflict;
+    // Retour
+    return $idTheme;
   }
 
   // METIER : Suppression thème
   // RETOUR : Aucun
   function deleteTheme($post)
   {
-    $id_theme = $post['id_theme'];
+    // Récupération des données
+    $idTheme = $post['id_theme'];
 
-    global $bdd;
+    // Récupération des données du thème
+    $theme = physiqueTheme($idTheme);
 
-    // Suppression images
-    $req1 = $bdd->query('SELECT id, reference, logo FROM themes WHERE id = ' . $id_theme);
-    $data1 = $req1->fetch();
-
-    if (isset($data1['reference']) AND !empty($data1['reference']))
+    // Suppression des images
+    if (!empty($theme->getReference()))
     {
-      $reference = $data1['reference'];
+      unlink('../../includes/images/themes/headers/' . $theme->getReference() . '_h.png');
+      unlink('../../includes/images/themes/backgrounds/' . $theme->getReference() . '.png');
+      unlink('../../includes/images/themes/footers/' . $theme->getReference() . '_f.png');
 
-      unlink("../../includes/images/themes/headers/" . $data1['reference'] . "_h.png");
-      unlink("../../includes/images/themes/backgrounds/" . $data1['reference'] . ".png");
-      unlink("../../includes/images/themes/footers/" . $data1['reference'] . "_f.png");
-
-      if ($data1['logo'] == "Y")
-        unlink("../../includes/images/themes/logos/" . $data1['reference'] . "_l.png");
+      if ($theme->getLogo() == 'Y')
+        unlink('../../includes/images/themes/logos/' . $theme->getReference() . '_l.png');
     }
 
-    $req1->closeCursor();
-
-    // Suppression enregistrement base
-    $req2 = $bdd->exec('DELETE FROM themes WHERE id = ' . $id_theme);
+    // Suppression de l'enregistrement en base
+    physiqueDeleteTheme($idTheme);
 
     // Suppression préférence utilisateurs
-    if (isset($reference) AND !empty($reference))
+    if (!empty($theme->getReference()))
     {
-      $new_reference = "";
-
-      $req3 = $bdd->prepare('UPDATE preferences SET ref_theme = :ref_theme WHERE ref_theme = "' . $reference . '"');
-      $req3->execute(array(
-        'ref_theme' => $new_reference
-      ));
-      $req3->closeCursor();
+      physiqueUpdateThemeUsers($theme->getReference());
     }
 
     // Message d'alerte

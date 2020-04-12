@@ -153,19 +153,19 @@
 
     $control_ok = true;
 
-    // On contrôle la présence du dossier des calendriers, sinon on le créé
+    // On vérifie la présence du dossier des calendriers, sinon on le créé
     $dossier = "../../includes/images/calendars";
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
-    // On contrôle la présence du dossier des années, sinon on le créé
+    // On vérifie la présence du dossier des années, sinon on le créé
     $dossier_calendriers = $dossier . "/" . $post['years'];
 
     if (!is_dir($dossier_calendriers))
       mkdir($dossier_calendriers);
 
-    // On contrôle la présence du dossier des miniatures, sinon on le créé
+    // On vérifie la présence du dossier des miniatures, sinon on le créé
     $dossier_miniatures = $dossier_calendriers . "/mini";
 
     if (!is_dir($dossier_miniatures))
@@ -179,17 +179,17 @@
     $namefile = $post['months'] . "-" . $post['years'] . "-" . rand();
 
     // Contrôles fichier
-    $controlsFile = controlsUploadFile($files['calendar'], $namefile, 'all');
+    $fileDatas = controlsUploadFile($files['calendar'], $namefile, 'all');
 
     // Traitements fichier
-    if ($controlsFile['control_ok'] == true)
+    if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['calendar'], $controlsFile, $calendars_dir);
+      $control_ok = uploadFile($files['calendar'], $fileDatas, $calendars_dir);
 
       if ($control_ok == true)
       {
-        $new_name = $controlsFile['new_name'];
+        $new_name = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
         imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
@@ -226,19 +226,19 @@
 
     $control_ok = true;
 
-    // On contrôle la présence du dossier des calendriers, sinon on le créé
+    // On vérifie la présence du dossier des calendriers, sinon on le créé
     $dossier = "../../includes/images/calendars";
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
-    // On contrôle la présence du dossier des annexes, sinon on le créé
+    // On vérifie la présence du dossier des annexes, sinon on le créé
     $dossier_annexes = $dossier . "/annexes";
 
     if (!is_dir($dossier_annexes))
       mkdir($dossier_annexes);
 
-    // On contrôle la présence du dossier des miniatures, sinon on le créé
+    // On vérifie la présence du dossier des miniatures, sinon on le créé
     $dossier_miniatures = $dossier_annexes . "/mini";
 
     if (!is_dir($dossier_miniatures))
@@ -252,17 +252,17 @@
     $namefile = rand();
 
     // Contrôles fichier
-    $controlsFile = controlsUploadFile($files['annexe'], $namefile, 'all');
+    $fileDatas = controlsUploadFile($files['annexe'], $namefile, 'all');
 
     // Traitements fichier
-    if ($controlsFile['control_ok'] == true)
+    if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['annexe'], $controlsFile, $annexes_dir);
+      $control_ok = uploadFile($files['annexe'], $fileDatas, $annexes_dir);
 
       if ($control_ok == true)
       {
-        $new_name = $controlsFile['new_name'];
+        $new_name = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
         imagethumb($annexes_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);

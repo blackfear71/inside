@@ -4,7 +4,7 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture alerte utilisateurs
   // RETOUR : Booléen
   function physiqueAlerteUsers()
   {
@@ -29,7 +29,7 @@
     return $alert;
   }
 
-  // PHYSIQUE : Appel base "movie_house"
+  // PHYSIQUE : Lecture alerte films
   // RETOUR : Booléen
   function physiqueAlerteFilms()
   {
@@ -53,7 +53,7 @@
     return $alert;
   }
 
-  // PHYSIQUE : Appel base "calendars"
+  // PHYSIQUE : Lecture alerte calendriers
   // RETOUR : Booléen
   function physiqueAlerteCalendars()
   {
@@ -77,7 +77,7 @@
     return $alert;
   }
 
-  // PHYSIQUE : Appel base "calendars_annexes"
+  // PHYSIQUE : Lecture alerte annexes
   // RETOUR : Booléen
   function physiqueAlerteAnnexes()
   {
@@ -101,7 +101,7 @@
     return $alert;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture du nombre de bugs
   // RETOUR : Nombre de bugs
   function physiqueNombreBugs()
   {
@@ -124,7 +124,7 @@
     return $nombre_bugs;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture du nombre d'évolutions
   // RETOUR : Nombre d'évolutions
   function physiqueNombreEvolutions()
   {

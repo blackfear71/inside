@@ -4,7 +4,7 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture des utilisateurs
   // RETOUR : Liste des utilisateurs
   function physiqueUsers()
   {
@@ -21,7 +21,7 @@
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
       $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
@@ -34,7 +34,7 @@
     return $listeUsers;
   }
 
-  // PHYSIQUE : Appel base "movie_house"
+  // PHYSIQUE : Lecture des identifiants des films
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsFilms()
   {
@@ -59,7 +59,7 @@
     return $listUsersFilms;
   }
 
-  // PHYSIQUE : Appel base "movie_house_comments"
+  // PHYSIQUE : Lecture des identifiants des commentaires de films
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsCommentairesFilms()
   {
@@ -84,7 +84,7 @@
     return $listUsersComments;
   }
 
-  // PHYSIQUE : Appel base "collector"
+  // PHYSIQUE : Lecture des identifiants des phrases cultes
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsCollector()
   {
@@ -109,7 +109,7 @@
     return $listUsersCollector;
   }
 
-  // PHYSIQUE : Appel base "expense_center"
+  // PHYSIQUE : Lecture des identifiants des dépenses
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsDepenses()
   {
@@ -134,7 +134,7 @@
     return $listUsersExpenses;
   }
 
-  // PHYSIQUE : Appel base "expense_center_users"
+  // PHYSIQUE : Lecture des identifiants des parts des dépenses
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsPartsDepenses()
   {
@@ -159,7 +159,7 @@
     return $listUsersParts;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture des identifiants des bugs / évolutions
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsBugs()
   {
@@ -184,7 +184,7 @@
     return $listUsersBugs;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture des identifiants des idées #TheBox
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsTheBox()
   {
@@ -209,7 +209,7 @@
     return $listUsersTheBox;
   }
 
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture alerte utilisateurs
   // RETOUR : Booléen
   function physiqueAlerteUsers()
   {
@@ -234,7 +234,7 @@
     return $alert;
   }
 
-  // PHYSIQUE : Appel base "movie_house"
+  // PHYSIQUE : Lecture du nombre de films ajoutés
   // RETOUR : Nombre de films ajoutés
   function physiqueFilmsAjoutesUser($identifiant)
   {
@@ -258,7 +258,7 @@
     return $nombreAjouts;
   }
 
-  // PHYSIQUE : Appel base "movie_house_comments"
+  // PHYSIQUE : Lecture du nombre de commentaires de films ajoutés
   // RETOUR : Nombre de commentaires ajoutés
   function physiqueCommentairesFilmsUser($identifiant)
   {
@@ -282,7 +282,7 @@
     return $nombreComments;
   }
 
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
   // RETOUR : Bilan des dépenses de l'utilisateur
   function physiqueBilanDepensesUser($identifiant)
   {
@@ -306,7 +306,7 @@
     return $bilanUser;
   }
 
-  // PHYSIQUE : Appel base "collector"
+  // PHYSIQUE : Lecture du nombre de phrases cultes ajoutées
   // RETOUR : Nombre de phrases cultes ajoutés
   function physiqueCollectorAjoutesUser($identifiant)
   {
@@ -330,7 +330,7 @@
     return $nombreCollector;
   }
 
-  // PHYSIQUE : Appel base "expense_center"
+  // PHYSIQUE : Lecture de la liste des dépenses
   // RETOUR : Liste des dépenses
   function physiqueDepenses()
   {
@@ -359,7 +359,7 @@
     return $listExpenses;
   }
 
-  // PHYSIQUE : Appel base "expense_center_users"
+  // PHYSIQUE : Lecture des parts d'une dépense
   // RETOUR : Nombre de parts d'une dépense
   function physiquePartsDepensesUser($idExpense, $identifiant)
   {
@@ -389,7 +389,7 @@
     return $nombreParts;
   }
 
-  // PHYSIQUE : Appel base "movie_house"
+  // PHYSIQUE : Lecture du nombre total de films ajoutés
   // RETOUR : Nombre total de films ajoutés
   function physiqueFilmsAjoutesTotal()
   {
@@ -412,7 +412,7 @@
     return $nombreAjouts;
   }
 
-  // PHYSIQUE : Appel base "movie_house_comments"
+  // PHYSIQUE : Lecture du nombre total de commentaires de films ajoutés
   // RETOUR : Nombre total de commentaires ajoutés
   function physiqueCommentairesFilmsTotal()
   {
@@ -435,7 +435,7 @@
     return $nombreComments;
   }
 
-  // PHYSIQUE : Appel base "collector"
+  // PHYSIQUE : Lecture du nombre total de phrases cultes ajoutées
   // RETOUR : Nombre total de phrases cultes ajoutées
   function physiqueCollectorTotal()
   {
@@ -458,7 +458,7 @@
     return $nombreCollector;
   }
 
-  // PHYSIQUE : Appel base "expense_center_users"
+  // PHYSIQUE : Lecture des dépenses sans parts
   // RETOUR : Booléen
   function physiqueDepenseSansParts($idExpense)
   {
@@ -483,7 +483,7 @@
     return $noParts;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture du nombre de bugs soumis d'un utilisateur
   // RETOUR : Nombre de bugs soumis de l'utilisateur
   function physiqueBugsSoumisUser($identifiant)
   {
@@ -507,7 +507,7 @@
     return $nombreBugsSoumis;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture du nombre de bugs résolus d'un utilisateur
   // RETOUR : Nombre de bugs résolus de l'utilisateur
   function physiqueBugsResolusUser($identifiant)
   {
@@ -531,7 +531,7 @@
     return $nombreBugsResolus;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture du nombre d'idées #TheBox soumises d'un utilisateur
   // RETOUR : Nombre d'idées soumises de l'utilisateur
   function physiqueTheBoxUser($identifiant)
   {
@@ -555,7 +555,7 @@
     return $nombreTheBox;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture du nombre d'idées #TheBox en charge d'un utilisateur
   // RETOUR : Nombre d'idées en charge de l'utilisateur
   function physiqueTheBoxEnChargeUser($identifiant)
   {
@@ -579,7 +579,7 @@
     return $nombreTheBoxEnCharge;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture du nombre d'idées #TheBox terminées d'un utilisateur
   // RETOUR : Nombre d'idées terminées ou rejetées de l'utilisateur
   function physiqueTheBoxTermineesUser($identifiant)
   {
@@ -603,7 +603,7 @@
     return $nombreTheBoxTerminees;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture du nombre total de bugs soumis
   // RETOUR : Nombre total de bugs / évolutions soumis
   function physiqueBugsSoumisTotal()
   {
@@ -626,7 +626,7 @@
     return $nombreBugsSoumis;
   }
 
-  // PHYSIQUE : Appel base "bugs"
+  // PHYSIQUE : Lecture du nombre total de bugs résolus
   // RETOUR : Nombre total de bugs / évolutions résolus
   function physiqueBugsResolusTotal()
   {
@@ -650,7 +650,7 @@
     return $nombreBugsResolus;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture du nombre total d'idées #TheBox soumises
   // RETOUR : Nombre total d'idées soumises
   function physiqueTheBoxTotal()
   {
@@ -673,7 +673,7 @@
     return $nombreTheBox;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture du nombre total d'idées #TheBox en charge
   // RETOUR : Nombre total d'idées en charge
   function physiqueTheBoxEnChargeTotal()
   {
@@ -697,7 +697,7 @@
     return $nombreTheBoxEnCharge;
   }
 
-  // PHYSIQUE : Appel base "ideas"
+  // PHYSIQUE : Lecture du nombre total d'idées #TheBox terminées
   // RETOUR : Nombre total d'idées terminées ou rejetées
   function physiqueTheBoxTermineesTotal()
   {
@@ -721,7 +721,7 @@
     return $nombreTheBoxTerminees;
   }
 
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture du pseudo d'un utilisateur
   // RETOUR : Pseudo utilisateur
   function physiquePseudoUser($identifiant)
   {
@@ -737,7 +737,6 @@
 
     $data = $req->fetch();
 
-    // Instanciation d'un objet User à partir des données remontées de la bdd
     $pseudo = $data['pseudo'];
 
     $req->closeCursor();
@@ -746,7 +745,7 @@
     return $pseudo;
   }
 
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture des données d'un utilisateur
   // RETOUR : Objet utilisateur
   function physiqueDonneesDesinscriptionUser($identifiant)
   {
@@ -768,7 +767,7 @@
   /****************************************************************************/
   /********************************** UPDATE **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Mise à jour base "users"
+  // PHYSIQUE : Mise à jour statut utilisateur
   // RETOUR : Aucun
   function physiqueUpdateStatusUser($identifiant, $status)
   {
@@ -786,7 +785,7 @@
     $req->closeCursor();
   }
 
-  // PHYSIQUE : Mise à jour base "users"
+  // PHYSIQUE : Mise à jour mot de passe utilisateur
   // RETOUR : Aucun
   function physiqueSetNewPassword($identifiant, $salt, $password, $status)
   {
@@ -806,7 +805,7 @@
     $req->closeCursor();
   }
 
-  // PHYSIQUE : Mise à jour base "collector"
+  // PHYSIQUE : Mise à jour Speaker des phrases cultes lors de la désinscription
   // RETOUR : Aucun
   function physiqueUpdateSpeakerCollector($identifiant, $pseudo)
   {
@@ -829,7 +828,7 @@
     $req->closeCursor();
   }
 
-  // PHYSIQUE : Mise à jour base "ideas"
+  // PHYSIQUE : Mise à jour statut des idées #TheBox
   // RETOUR : Aucun
   function physiqueUpdateStatusTheBox($identifiant)
   {
@@ -855,7 +854,7 @@
   /****************************************************************************/
   /********************************** DELETE **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Suppression dans la base "movie_house_users"
+  // PHYSIQUE : Suppression des votes films d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteStarsFilmsUser($identifiant)
   {
@@ -866,7 +865,7 @@
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "collector_users"
+  // PHYSIQUE : Suppression des votes phrases cultes d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteVotesCollectorUser($identifiant)
   {
@@ -877,7 +876,7 @@
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "missions_users"
+  // PHYSIQUE : Suppression des missions d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteMissionsUser($identifiant)
   {
@@ -888,7 +887,7 @@
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "success_users"
+  // PHYSIQUE : Suppression des succès d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteSuccessUser($identifiant)
   {
@@ -899,7 +898,7 @@
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "food_advisor_users"
+  // PHYSIQUE : Suppression des votes restaurant d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteVotesRestaurantsUser($identifiant)
   {
@@ -910,7 +909,7 @@
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "food_advisor_choices"
+  // PHYSIQUE : Suppression des déterminations d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteDeterminationsRestaurantsUser($identifiant)
   {
@@ -921,7 +920,7 @@
                        WHERE caller = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "cooking_box"
+  // PHYSIQUE : Suppression des semaines de gâteau futures d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteSemainesGateauxUser($identifiant)
   {
@@ -932,7 +931,7 @@
                        WHERE (year > ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week > ' . date("W") . ')) AND identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "preferences"
+  // PHYSIQUE : Suppression des préférences d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeletePreferences($identifiant)
   {
@@ -943,7 +942,7 @@
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
-  // PHYSIQUE : Suppression dans la base "users"
+  // PHYSIQUE : Suppression d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteUser($identifiant)
   {

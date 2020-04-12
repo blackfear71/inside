@@ -4,7 +4,7 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Appel base "users"
+  // PHYSIQUE : Lecture des utilisateurs
   // RETOUR : Tableau des utilisateurs
   function physiqueUsers()
   {
@@ -21,7 +21,7 @@
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
       $myUser = Profile::withData($data);
 
       // On ajoute la ligne au tableau
@@ -34,7 +34,7 @@
     return $listUsers;
   }
 
-  // PHYSIQUE : Appel base "success_users"
+  // PHYSIQUE : Lecture des succès administrateur
   // RETOUR : Valeur succès
   function physiqueSuccessAdmin($success, $identifiant)
   {

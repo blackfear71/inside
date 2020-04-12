@@ -384,7 +384,7 @@
   // Fréquence : tous les jours à 7h pour les types 'j' et tous les lundis à 7h pour les types 'h'
   function generateLog($type_log, $etat_trt, $hdeb, $hfin)
   {
-    // On contrôle la présence des dossiers, sinon on les créé
+    // On vérifie la présence des dossiers, sinon on les créé
     $dossier        = "logs";
     $sous_dossier_j = "daily";
     $sous_dossier_h = "weekly";

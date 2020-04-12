@@ -412,7 +412,7 @@
     $new_name   = '';
     $control_ok = true;
 
-    // On contrôle la présence du dossier, sinon on le créé
+    // On vérifie la présence du dossier, sinon on le créé
     $dossier = '../../includes/images/collector';
 
     if (!is_dir($dossier))
@@ -422,19 +422,19 @@
     $image_dir = $dossier . '/';
 
     // Contrôles fichier
-    $controlsFile = controlsUploadFile($files['image'], $name, 'all');
+    $fileDatas = controlsUploadFile($files['image'], $name, 'all');
 
     // Traitements fichier
-    if ($controlsFile['control_ok'] == true)
+    if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['image'], $controlsFile, $image_dir);
+      $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
 
       // Rotation de l'image
       if ($control_ok == true)
       {
-        $new_name   = $controlsFile['new_name'];
-        $type_image = $controlsFile['type_file'];
+        $new_name   = $fileDatas['new_name'];
+        $type_image = $fileDatas['type_file'];
 
         if ($type_image == 'jpg' OR $type_image == 'jpeg')
           $rotate = rotateImage($image_dir . $new_name, $type_image);

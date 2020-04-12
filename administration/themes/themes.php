@@ -17,6 +17,8 @@
 
   // Modèle de données : "module métier"
   include_once('modele/metier_themes.php');
+  include_once('modele/controles_themes.php');
+  include_once('modele/physique_themes.php');
 
   // Initialisation sauvegarde saisie thème
   if ((!isset($_SESSION['alerts']['date_less'])           OR $_SESSION['alerts']['date_less']           != true)

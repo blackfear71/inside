@@ -192,13 +192,13 @@
 
     $control_ok = true;
 
-    // On contrôle la présence du dossier, sinon on le créé
+    // On vérifie la présence du dossier, sinon on le créé
     $dossier = "../../includes/images/profil";
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
-    // On contrôle la présence du dossier d'avatars, sinon on le créé
+    // On vérifie la présence du dossier d'avatars, sinon on le créé
     $dossier_avatars = $dossier . "/avatars";
 
     if (!is_dir($dossier_avatars))
@@ -209,17 +209,17 @@
     $avatar     = rand();
 
     // Contrôles fichier
-    $controlsFile = controlsUploadFile($files['avatar'], $avatar, 'all');
+    $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
 
     // Traitements fichier
-    if ($controlsFile['control_ok'] == true)
+    if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['avatar'], $controlsFile, $avatar_dir);
+      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatar_dir);
 
       if ($control_ok == true)
       {
-        $new_name = $controlsFile['new_name'];
+        $new_name = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
         imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
@@ -754,7 +754,7 @@
     if ($type == "U")
     {
       $niveau  = convertExperience($experience);
-      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND level <= ' . $niveau . ' ORDER BY level ASC');
+      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND level <= ' . $niveau . ' ORDER BY CAST(level AS UNSIGNED) ASC');
     }
     else
       $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date("Ymd") . ' ORDER BY date_deb DESC');

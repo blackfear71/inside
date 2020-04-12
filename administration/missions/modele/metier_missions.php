@@ -276,19 +276,19 @@
     // Insertion des images dans les dossiers
     if ($control_ok == true)
     {
-      // On contrôle la présence du dossier des images, sinon on le créé
+      // On vérifie la présence du dossier des images, sinon on le créé
       $dossier = "../../includes/images/missions";
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
-      // On contrôle la présence du dossier des bannières, sinon on le créé
+      // On vérifie la présence du dossier des bannières, sinon on le créé
       $dossier_images = $dossier . "/banners";
 
       if (!is_dir($dossier_images))
         mkdir($dossier_images);
 
-      // On contrôle la présence du dossier des boutons, sinon on le créé
+      // On vérifie la présence du dossier des boutons, sinon on le créé
       $dossier_icones = $dossier . "/buttons";
 
       if (!is_dir($dossier_icones))
@@ -318,9 +318,9 @@
             break;
         }
 
-        $controlsFile = controlsUploadFile($file, $name, 'png');
+        $fileDatas = controlsUploadFile($file, $name, 'png');
 
-        if ($controlsFile['control_ok'] == false)
+        if ($fileDatas['control_ok'] == false)
         {
           $control_ok = false;
           break;
@@ -362,16 +362,16 @@
         }
 
         // Données à envoyer pour l'upload
-        $controlsFile = array('control_ok' => true,
+        $fileDatas = array('control_ok' => true,
                               'new_name'   => $new_name,
                               'tmp_file'   => $file['tmp_name'],
                               'type_file'  => $file['type']
                              );
 
         // Upload fichier
-        $control_ok = uploadFile($file, $controlsFile, $dest_dir);
+        $control_ok = uploadFile($file, $fileDatas, $dest_dir);
 
-        if ($controlsFile['control_ok'] == false)
+        if ($fileDatas['control_ok'] == false)
         {
           $control_ok = false;
           break;
@@ -532,9 +532,9 @@
               break;
           }
 
-          $controlsFile = controlsUploadFile($file, $name, 'png');
+          $fileDatas = controlsUploadFile($file, $name, 'png');
 
-          if ($controlsFile['control_ok'] == false)
+          if ($fileDatas['control_ok'] == false)
           {
             $control_ok = false;
             break;
@@ -582,16 +582,16 @@
           unlink($dest_dir . $new_name);
 
           // Données à envoyer pour l'upload
-          $controlsFile = array('control_ok' => true,
+          $fileDatas = array('control_ok' => true,
                                 'new_name'   => $new_name,
                                 'tmp_file'   => $file['tmp_name'],
                                 'type_file'  => $file['type']
                                );
 
           // Upload fichier
-          $control_ok = uploadFile($file, $controlsFile, $dest_dir);
+          $control_ok = uploadFile($file, $fileDatas, $dest_dir);
 
-          if ($controlsFile['control_ok'] == false)
+          if ($fileDatas['control_ok'] == false)
           {
             $control_ok = false;
             break;
