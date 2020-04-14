@@ -53,26 +53,32 @@
       break;
 
     case "doAnnulerMdp":
+      // Annulation de la réinitialisation du mot de passe
       resetOldPassword($_POST);
       break;
 
     case "doChangerMdp":
+      // Réinitialisation du mot de passe
       setNewPassword($_POST);
       break;
 
     case "doAccepterInscription":
+      // Validation de l'inscription
       acceptInscription($_POST);
       break;
 
     case "doRefuserInscription":
+      // Refus de l'inscription
       declineInscription($_POST);
       break;
 
     case "doAccepterDesinscription":
+      // Validation de la désinscription
       acceptDesinscription($_POST);
       break;
 
     case "doRefuserDesinscription":
+      // Refus de la désinscription
       resetDesinscription($_POST);
       break;
 

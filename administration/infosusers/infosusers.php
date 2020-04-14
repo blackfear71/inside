@@ -27,10 +27,12 @@
       break;
 
     case 'changeBeginnerStatus':
+      // Mise à jour du succès "beginner"
       changeBeginner($_POST);
       break;
 
     case 'changeDevelopperStatus':
+      // Mise à jour du succès "developper"
       changeDevelopper($_POST);
       break;
 

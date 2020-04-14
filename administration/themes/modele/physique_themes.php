@@ -34,7 +34,7 @@
     return $themes;
   }
 
-  // PHYSIQUE : Lecture du nombre de référence existante
+  // PHYSIQUE : Lecture du nombre de références existantes
   // RETOUR : Booléen
   function physiqueReferenceUnique($reference)
   {
@@ -44,13 +44,13 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreReference
+    $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
                         FROM themes
                         WHERE reference = "' . $reference . '"');
 
     $data = $req->fetch();
 
-    if ($data['nombreReference'] > 0)
+    if ($data['nombreReferences'] > 0)
       $isUnique = false;
 
     $req->closeCursor();

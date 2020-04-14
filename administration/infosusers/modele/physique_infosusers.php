@@ -44,13 +44,13 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *, COUNT(*) AS nombre_ligne
+    $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
                         FROM success_users
                         WHERE reference = "' . $success . '" AND identifiant = "' . $identifiant . '"');
 
     $data = $req->fetch();
 
-    if ($data['nombre_ligne'] > 0)
+    if ($data['nombreLignes'] > 0)
       $value = $data['value'];
 
     $req->closeCursor();

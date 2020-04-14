@@ -75,7 +75,7 @@
     return $control_ok;
   }
 
-  // CONTROLE : Dates thème non superposées
+  // CONTROLE : Niveau numérique et positif
   // RETOUR : Booléen
   function controleNiveauNumerique($niveau)
   {
@@ -83,7 +83,7 @@
     $control_ok = true;
 
     // Contrôle
-    if (!is_numeric($niveau) OR $niveau < 0)
+    if (!is_numeric($niveau) OR $niveau <= 0)
     {
       $_SESSION['alerts']['level_theme_numeric'] = true;
       $control_ok                                = false;
@@ -113,14 +113,12 @@
 
   // CONTROLE : Contrôle d'un fichier après contrôles communs
   // RETOUR : Booléen
-  function controleFichier($file, $name, $type)
+  function controleFichier($fileDatas)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    $fileDatas = controlsUploadFile($file, $name, $type);
-
     if ($fileDatas['control_ok'] == false)
       $control_ok = false;
 

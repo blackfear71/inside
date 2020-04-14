@@ -45,20 +45,25 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
+      // Récupération des thèmes utilisateurs
       $themes_users    = getThemes("U");
+
+      // Récupération des thèmes de missions
       $themes_missions = getThemes("M");
       break;
 
 		case "doAjouter":
+      // Ajout d'un nouveau thème
       $id_theme = insertTheme($_POST, $_FILES);
 			break;
 
     case "doModifier":
+      // Mise à jour d'un thème
       $id_theme = updateTheme($_POST);
 			break;
 
 		case "doSupprimer":
+      // Suppression d'un thème
       deleteTheme($_POST);
 			break;
 

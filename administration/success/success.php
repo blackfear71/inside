@@ -18,6 +18,8 @@
 
   // Modèle de données : "module métier"
 	include_once('modele/metier_success.php');
+	include_once('modele/controles_success.php');
+	include_once('modele/physique_success.php');
 
   // Initialisation sauvegarde saisie succès
   if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)
@@ -46,14 +48,15 @@
   switch ($_GET['action'])
   {
     case "goConsulter":
-      // Lecture liste des données par le modèle
+      // Récupération de la liste des succès
 			$listeSuccess = getSuccess();
       break;
 
     case "goModifier":
-      // Lecture liste des données par le modèle
+      // Récupération de la liste des succès
       $listeSuccess = getSuccess();
 
+			// Sauvegarde des données saisies en cas d'erreur
 			if (!isset($_GET['error']) OR $_GET['error'] != true)
 		    $_SESSION['save']['save_success'] = NULL;
 			else
@@ -61,25 +64,33 @@
       break;
 
     case "doAjouter":
+			// Ajout d'un nouveau succès
       insertSuccess($_POST, $_FILES);
       break;
 
     case "doSupprimer":
+			// Suppression d'un succès
       deleteSuccess($_POST);
       break;
 
     case "doModifier":
-      $erreurUpdateSucces = updateSuccess($_POST);
+			// Mise à jour de tous les succès
+      $erreurUpdateSuccess = updateSuccess($_POST);
       break;
 
 		case "doInitialiser":
-			// Lecture liste des données par le modèle
+			// Récupération de la liste des utilisateurs
 			$listeUsers   = getUsers();
+
+			// Récupération de la liste des succès
 			$listeSuccess = getSuccess();
+
+			// Réinitialisation des succès
 			initializeSuccess($listeSuccess, $listeUsers);
 			break;
 
 		case "doPurger":
+			// Purge des succès
 			purgeSuccess();
 			break;
 
@@ -123,7 +134,7 @@
   switch ($_GET['action'])
   {
     case "doModifier":
-      if ($erreurUpdateSucces == true)
+			if ($erreurUpdateSuccess == true)
         header('location: success.php?error=true&action=goModifier');
       else
         header('location: success.php?action=goConsulter');
@@ -131,9 +142,6 @@
 
     case "doAjouter":
     case "doSupprimer":
-      header('location: success.php?action=goConsulter');
-      break;
-
 		case "doInitialiser":
 		case "doPurger":
 			header('location: success.php?action=goConsulter');

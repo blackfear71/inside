@@ -16,23 +16,6 @@
   // RETOUR : Id enregistrement créé
   function insertTheme($post, $files)
   {
-    // Sauvegarde en session en cas d'erreur
-    $_SESSION['save']['theme_title']      = $post['theme_title'];
-    $_SESSION['save']['theme_ref']        = $post['theme_ref'];
-
-    if ($post['theme_type'] == "M")
-    {
-      $_SESSION['save']['theme_date_deb'] = $post['theme_date_deb'];
-      $_SESSION['save']['theme_date_fin'] = $post['theme_date_fin'];
-      $_SESSION['save']['theme_level']    = '';
-    }
-    else
-    {
-      $_SESSION['save']['theme_date_deb'] = '';
-      $_SESSION['save']['theme_date_fin'] = '';
-      $_SESSION['save']['theme_level']    = $post['theme_level'];
-    }
-
     // Initialisations
     $newId      = NULL;
     $control_ok = true;
@@ -55,6 +38,13 @@
       $dateFin = '';
       $level   = $post['theme_level'];
     }
+
+    // Sauvegarde en session en cas d'erreur
+    $_SESSION['save']['theme_title']    = $titre;
+    $_SESSION['save']['theme_ref']      = $reference;
+    $_SESSION['save']['theme_date_deb'] = $dateDeb;
+    $_SESSION['save']['theme_date_fin'] = $dateFin;
+    $_SESSION['save']['theme_level']    = $level;
 
     // Remplacement des caractères spéciaux pour la référence
     $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");
@@ -174,7 +164,8 @@
           }
 
           // Contrôles communs d'un fichier
-          $control_ok = controleFichier($file, $name, 'png');
+          $fileDatas  = controlsUploadFile($file, $name, $type);
+          $control_ok = controleFichier($fileDatas);
 
           // Arrêt de la boucle en cas d'erreur
           if ($control_ok == false)
@@ -339,8 +330,6 @@
                      'date_fin'  => $dateFin
                     );
 
-      var_dump($theme);
-      
       physiqueUpdateTheme($idTheme, $theme);
 
       // Message d'alerte
