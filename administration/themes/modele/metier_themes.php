@@ -23,10 +23,10 @@
     // Récupération des données
     $titre        = $post['theme_title'];
     $reference    = $post['theme_ref'];
-    $presenceLogo = "N";
+    $presenceLogo = 'N';
     $type         = $post['theme_type'];
 
-    if ($type == "M")
+    if ($type == 'M')
     {
       $dateDeb = $post['theme_date_deb'];
       $dateFin = $post['theme_date_fin'];
@@ -47,8 +47,8 @@
     $_SESSION['save']['theme_level']    = $level;
 
     // Remplacement des caractères spéciaux pour la référence
-    $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");
-    $replace   = array("_", "e", "e", "e", "e", "a", "a", "c", "o", "u");
+    $search    = array(' ', 'é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ô', 'û');
+    $replace   = array('_', 'e', 'e', 'e', 'e', 'a', 'a', 'c', 'o', 'u');
     $reference = str_replace($search, $replace, $reference);
 
     // Contrôle référence unique
@@ -57,10 +57,10 @@
     // Contrôles spécifiques au type de thème
     if ($control_ok == true)
     {
-      if ($type == "M")
+      if ($type == 'M')
       {
         // Contrôle format date début
-        $control_ok = controleFormatDate($dateDeb, "d/m/Y");
+        $control_ok = controleFormatDate($dateDeb, 'd/m/Y');
 
         // Formatage de la date de début pour insertion
         if ($control_ok == true)
@@ -68,7 +68,7 @@
 
         // Contrôle format date fin
         if ($control_ok == true)
-          $control_ok = controleFormatDate($dateFin, "d/m/Y");
+          $control_ok = controleFormatDate($dateFin, 'd/m/Y');
 
         // Formatage de la date de fin pour insertion
         if ($control_ok == true)
@@ -95,8 +95,8 @@
       foreach ($files as $keyFile => $file)
       {
         // Indicateur présence logo
-        if ($keyFile == "logo" AND !empty($file['name']) AND !empty($file['type']))
-          $presenceLogo = "Y";
+        if ($keyFile == 'logo' AND !empty($file['name']) AND !empty($file['type']))
+          $presenceLogo = 'Y';
 
         // Contrôle présence autres fichiers
         $control_ok = controleAutresFichiers($keyFile, $file['name']);
@@ -107,31 +107,31 @@
     if ($control_ok == true)
     {
       // On vérifie la présence du dossier des images, sinon on le créé
-      $dossier = "../../includes/images/themes";
+      $dossier = '../../includes/images/themes';
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
       // On vérifie la présence du dossier des entête, sinon on le créé
-      $dossierHeaders = $dossier . "/headers";
+      $dossierHeaders = $dossier . '/headers';
 
       if (!is_dir($dossierHeaders))
         mkdir($dossierHeaders);
 
       // On vérifie la présence du dossier des fonds, sinon on le créé
-      $dossierBackgrounds = $dossier . "/backgrounds";
+      $dossierBackgrounds = $dossier . '/backgrounds';
 
       if (!is_dir($dossierBackgrounds))
         mkdir($dossierBackgrounds);
 
       // On vérifie la présence du dossier des bas de page, sinon on le créé
-      $dossierFooters = $dossier . "/footers";
+      $dossierFooters = $dossier . '/footers';
 
       if (!is_dir($dossierFooters))
         mkdir($dossierFooters);
 
       // On vérifie la présence du dossier des logos, sinon on le créé
-      $dossierLogos = $dossier . "/logos";
+      $dossierLogos = $dossier . '/logos';
 
       if (!is_dir($dossierLogos))
         mkdir($dossierLogos);
@@ -140,24 +140,24 @@
       foreach ($files as $keyFile => $file)
       {
         // Si logo présent ou autre fichier que logo
-        if (($keyFile == "logo" AND $presenceLogo == "Y") OR $keyFile != "logo")
+        if (($keyFile == 'logo' AND $presenceLogo == 'Y') OR $keyFile != 'logo')
         {
           // Nom du fichier
           switch ($keyFile)
           {
-            case "header":
+            case 'header':
               $name = $reference . '_h';
               break;
 
-            case "footer":
+            case 'footer':
               $name = $reference . '_f';
               break;
 
-            case "logo":
+            case 'logo':
               $name = $reference . '_l';
               break;
 
-            case "background":
+            case 'background':
             default:
               $name = $reference;
               break;
@@ -181,24 +181,24 @@
       foreach ($files as $keyFile => $file)
       {
         // Insertion logo si présent ou autre que logo
-        if (($keyFile == "logo" AND $presenceLogo == "Y") OR $keyFile != "logo")
+        if (($keyFile == 'logo' AND $presenceLogo == 'Y') OR $keyFile != 'logo')
         {
           // Dossier de destination
           switch ($keyFile)
           {
-            case "header":
+            case 'header':
               $destDir = $dossierHeaders . '/';
               break;
 
-            case "footer":
+            case 'footer':
               $destDir = $dossierFooters . '/';
               break;
 
-            case "logo":
+            case 'logo':
               $destDir = $dossierLogos . '/';
               break;
 
-            case "background":
+            case 'background':
             default:
               $destDir = $dossierBackgrounds . '/';
               break;
@@ -207,19 +207,19 @@
           // Nouveau nom
           switch ($keyFile)
           {
-            case "header":
+            case 'header':
               $newName = $reference . '_h.png';
               break;
 
-            case "footer":
+            case 'footer':
               $newName = $reference . '_f.png';
               break;
 
-            case "logo":
+            case 'logo':
               $newName = $reference . '_l.png';
               break;
 
-            case "background":
+            case 'background':
             default:
               $newName = $reference . '.png';
               break;
@@ -276,7 +276,7 @@
     $titre   = $post['theme_title'];
     $type    = $post['theme_type'];
 
-    if ($type == "M")
+    if ($type == 'M')
     {
       $dateDeb = $post['theme_date_deb'];
       $dateFin = $post['theme_date_fin'];
@@ -289,10 +289,10 @@
       $level   = $post['theme_level'];
     }
 
-    if ($type == "M")
+    if ($type == 'M')
     {
       // Contrôle format date début
-      $control_ok = controleFormatDate($dateDeb, "d/m/Y");
+      $control_ok = controleFormatDate($dateDeb, 'd/m/Y');
 
       // Formatage de la date de début pour insertion
       if ($control_ok == true)
@@ -300,7 +300,7 @@
 
       // Contrôle format date fin
       if ($control_ok == true)
-        $control_ok = controleFormatDate($dateFin, "d/m/Y");
+        $control_ok = controleFormatDate($dateFin, 'd/m/Y');
 
       // Formatage de la date de fin pour insertion
       if ($control_ok == true)
