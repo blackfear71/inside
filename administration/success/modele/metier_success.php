@@ -261,19 +261,6 @@
     $_SESSION['alerts']['success_purged'] = true;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   // METIER : Initialisation des succès
   // RETOUR : Aucun
   function initializeSuccess($listSuccess, $listUsers)

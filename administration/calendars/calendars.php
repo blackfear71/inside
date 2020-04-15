@@ -15,36 +15,49 @@
 
   // Modèle de données
   include_once('modele/metier_calendars.php');
+  include_once('modele/physique_calendars.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      $listePreferences        = getListePreferences();
-			$listeSuppression        = getCalendarsToDelete();
+      // Récupération des autorisations de gestion des calendriers
+      $listeAutorisations      = getAutorisationsCalendars();
+
+      // Récupération de la liste des mois
+      $listeMois               = getMonths();
+
+      // Récupération des calendriers à supprimer
+			$listeSuppression        = getCalendarsToDelete($listeMois);
 			$alerteCalendars         = getAlerteCalendars();
+
+      // Récupération des annexes à supprimer
       $listeSuppressionAnnexes = getAnnexesToDelete();
       $alerteAnnexes           = getAlerteAnnexes();
       break;
 
-    case "doChangerAutorisations":
+    case "doUpdateAutorisations":
+      // Mise à jour des autorisations de gestion des calendriers
       updateAutorisations($_POST);
       break;
 
 		case "doDeleteCalendrier":
+      // Suppression d'un calendrier
 			deleteCalendrier($_POST);
 			break;
 
     case "doDeleteAnnexe":
+      // Suppression d'une annexe
       deleteAnnexe($_POST);
       break;
 
 		case "doResetCalendrier":
+      // Annulation de la demande de suppression d'un calendrier
 			resetCalendrier($_POST);
 			break;
 
     case "doResetAnnexe":
+      // Annulation de la demande de suppression d'une annexe
       resetAnnexe($_POST);
       break;
 
@@ -77,17 +90,17 @@
 
       unset($annexe);
 
-      foreach ($listePreferences as &$preference)
+      foreach ($listeAutorisations as &$autorisation)
       {
-        $preference['identifiant']      = htmlspecialchars($preference['identifiant']);
-        $preference['pseudo']           = htmlspecialchars($preference['pseudo']);
-        $preference['manage_calendars'] = htmlspecialchars($preference['manage_calendars']);
+        $autorisation['identifiant']      = htmlspecialchars($autorisation['identifiant']);
+        $autorisation['pseudo']           = htmlspecialchars($autorisation['pseudo']);
+        $autorisation['manage_calendars'] = htmlspecialchars($autorisation['manage_calendars']);
       }
 
       unset($preference);
       break;
 
-    case "doChangerAutorisations":
+    case "doUpdateAutorisations":
     case "doDeleteCalendrier":
 		case "doDeleteAnnexe":
 		case "doResetCalendrier":
@@ -99,12 +112,12 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doChangerAutorisations":
+    case "doUpdateAutorisations":
 		case "doDeleteCalendrier":
     case "doDeleteAnnexe":
 		case "doResetCalendrier":
     case "doResetAnnexe":
-			header ('location: calendars.php?action=goConsulter');
+			//header ('location: calendars.php?action=goConsulter');
 			break;
 
     case 'goConsulter':

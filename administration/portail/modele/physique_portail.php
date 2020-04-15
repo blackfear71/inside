@@ -11,13 +11,14 @@
     // Initialisations
     $alert = false;
 
+    // Requête
     global $bdd;
 
-    // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombreStatusUsers
                         FROM users
                         WHERE identifiant != "admin" AND (status = "Y" OR status = "I" OR status = "D")
                         ORDER BY identifiant ASC');
+
     $data = $req->fetch();
 
     if ($data['nombreStatusUsers'] > 0)
@@ -36,12 +37,13 @@
     // Initialisations
     $alert = false;
 
+    // Requête
     global $bdd;
 
-    // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombreFilmsToDelete
                         FROM movie_house
                         WHERE to_delete = "Y"');
+
     $data = $req->fetch();
 
     if ($data['nombreFilmsToDelete'] > 0)
@@ -60,12 +62,13 @@
     // Initialisations
     $alert = false;
 
+    // Requête
     global $bdd;
 
-    // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombreCalendarsToDelete
                         FROM calendars
                         WHERE to_delete = "Y"');
+
     $data = $req->fetch();
 
     if ($data['nombreCalendarsToDelete'] > 0)
@@ -84,12 +87,13 @@
     // Initialisations
     $alert = false;
 
+    // Requête
     global $bdd;
 
-    // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombreAnnexesToDelete
                         FROM calendars_annexes
                         WHERE to_delete = "Y"');
+
     $data = $req->fetch();
 
     if ($data['nombreAnnexesToDelete'] > 0)
@@ -108,12 +112,13 @@
     // Initialisations
     $nombre_bugs = 0;
 
+    // Requête
     global $bdd;
 
-    // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
                         FROM bugs
                         WHERE type = "B" AND resolved = "N"');
+
     $data = $req->fetch();
 
     $nombre_bugs = $data['nombreBugs'];
@@ -131,12 +136,13 @@
     // Initialisations
     $nombre_evolutions = 0;
 
+    // Requête
     global $bdd;
 
-    // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombreEvolutions
                         FROM bugs
                         WHERE type = "E" AND resolved = "N"');
+                        
     $data = $req->fetch();
 
     $nombre_evolutions = $data['nombreEvolutions'];

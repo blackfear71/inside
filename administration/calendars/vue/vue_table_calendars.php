@@ -37,7 +37,7 @@
             if ($calendrier->getTo_delete() == "Y")
             {
     					echo '<form method="post" action="calendars.php?action=doDeleteCalendrier">';
-								echo '<input type="hidden" name="id_cal" value="' . $calendrier->getId() . '" />';
+								echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';
     						echo '<input type="submit" name="accepter_suppression_calendrier" value="ACCEPTER" class="bouton_admin" />';
     					echo '</form>';
             }
@@ -47,7 +47,7 @@
             if ($calendrier->getTo_delete() == "Y")
             {
     					echo '<form method="post" action="calendars.php?action=doResetCalendrier">';
-								echo '<input type="hidden" name="id_cal" value="' . $calendrier->getId() . '" />';
+								echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';
     						echo '<input type="submit" name="annuler_suppression_calendrier" value="REFUSER" class="bouton_admin" />';
     					echo '</form>';
             }
