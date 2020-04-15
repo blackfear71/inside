@@ -117,7 +117,7 @@
     case "doDeleteAnnexe":
 		case "doResetCalendrier":
     case "doResetAnnexe":
-			//header ('location: calendars.php?action=goConsulter');
+			header ('location: calendars.php?action=goConsulter');
 			break;
 
     case 'goConsulter':
