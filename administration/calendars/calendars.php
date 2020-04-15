@@ -37,8 +37,11 @@
       break;
 
     case "doUpdateAutorisations":
+      // Récupération de la liste des utilisateurs
+      $listeUsers = getUsers();
+
       // Mise à jour des autorisations de gestion des calendriers
-      updateAutorisations($_POST);
+      updateAutorisations($_POST, $listeUsers);
       break;
 
 		case "doDeleteCalendrier":

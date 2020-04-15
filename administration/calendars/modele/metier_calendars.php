@@ -1,5 +1,6 @@
 <?php
   include_once('../../includes/classes/calendars.php');
+  include_once('../../includes/classes/profile.php');
 
   // METIER : Récupération autorisation tous utilisateurs
   // RETOUR : Liste des préférences
@@ -20,19 +21,30 @@
     return $listAutorisations;
   }
 
+  // METIER : Lecture liste des utilisateurs
+  // RETOUR : Tableau d'utilisateurs
+  function getUsers()
+  {
+    // Récupération liste des utilisateurs
+    $listUsers = physiqueUsers();
+
+    // Retour
+    return $listUsers;
+  }
+
   // METIER : Mise à jour des autorisations sur les calendriers
   // RETOUR : Aucun
-  function updateAutorisations($post)
+  function updateAutorisations($post, $listUsers)
   {
-    // Boucle de mise à jour de toutes autorisations activées
-    if (!empty($post['autorization']))
+    // Boucle de mise à jour de toutes les autorisations
+    foreach ($listUsers as $user)
     {
-      foreach ($post['autorization'] as $identifiant => $autorisation)
-      {
+      if (!empty($post['autorization']) AND isset($post['autorization'][$user->getIdentifiant()]))
         $manageCalendars = 'Y';
+      else
+        $manageCalendars = 'N';
 
-        physiqueUpdateAutorisationsCalendars($identifiant, $manageCalendars);
-      }
+      physiqueUpdateAutorisationsCalendars($user->getIdentifiant(), $manageCalendars);
     }
 
     // Message d'alerte

@@ -9,7 +9,7 @@
   function physiqueUsers()
   {
     // Initialisations
-    $listeUsers = array();
+    $listUsers = array();
 
     // Requête
     global $bdd;
@@ -25,13 +25,13 @@
       $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+      array_push($listUsers, $user);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listeUsers;
+    return $listUsers;
   }
 
   // PHYSIQUE : Lecture liste des succès

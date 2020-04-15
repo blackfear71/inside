@@ -56,6 +56,36 @@
     return $pseudo;
   }
 
+  // PHYSIQUE : Lecture des utilisateurs
+  // RETOUR : Liste des utilisateurs
+  function physiqueUsers()
+  {
+    // Initialisations
+    $listUsers = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant
+                        FROM users
+                        WHERE identifiant != "admin"
+                        ORDER BY identifiant ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
+      $user = Profile::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listUsers, $user);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listUsers;
+  }
+
   // PHYSIQUE : Lecture liste des calendriers à supprimer
   // RETOUR : Liste des calendriers
   function physiqueCalendarsToDelete($listMonths)
