@@ -14,7 +14,7 @@
 	// Contrôles communs
 	controlsIndex();
 
-	// Modèle de données : "module métier"
+	// Modèle de données
   include_once('portail/index/modele/metier_index.php');
 
 	// Initialisation sauvegarde saisie inscription

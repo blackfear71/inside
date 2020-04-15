@@ -14,7 +14,7 @@
   // Contrôles communs Utilisateur
   controlsAdmin();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_profil.php');
 
   // Appel métier

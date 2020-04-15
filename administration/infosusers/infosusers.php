@@ -14,7 +14,7 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_infosusers.php');
   include_once('modele/physique_infosusers.php');
 

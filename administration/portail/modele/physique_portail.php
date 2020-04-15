@@ -14,13 +14,13 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_status_users
+    $req = $bdd->query('SELECT COUNT(*) AS nombreStatusUsers
                         FROM users
                         WHERE identifiant != "admin" AND (status = "Y" OR status = "I" OR status = "D")
                         ORDER BY identifiant ASC');
     $data = $req->fetch();
 
-    if ($data['nombre_status_users'] > 0)
+    if ($data['nombreStatusUsers'] > 0)
       $alert = true;
 
     $req->closeCursor();
@@ -39,12 +39,12 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_films_to_delete
+    $req = $bdd->query('SELECT COUNT(*) AS nombreFilmsToDelete
                         FROM movie_house
                         WHERE to_delete = "Y"');
     $data = $req->fetch();
 
-    if ($data['nombre_films_to_delete'] > 0)
+    if ($data['nombreFilmsToDelete'] > 0)
       $alert = true;
 
     $req->closeCursor();
@@ -63,12 +63,12 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_calendars_to_delete
+    $req = $bdd->query('SELECT COUNT(*) AS nombreCalendarsToDelete
                         FROM calendars
                         WHERE to_delete = "Y"');
     $data = $req->fetch();
 
-    if ($data['nombre_calendars_to_delete'] > 0)
+    if ($data['nombreCalendarsToDelete'] > 0)
       $alert = true;
 
     $req->closeCursor();
@@ -87,12 +87,12 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_annexes_to_delete
+    $req = $bdd->query('SELECT COUNT(*) AS nombreAnnexesToDelete
                         FROM calendars_annexes
                         WHERE to_delete = "Y"');
     $data = $req->fetch();
 
-    if ($data['nombre_annexes_to_delete'] > 0)
+    if ($data['nombreAnnexesToDelete'] > 0)
       $alert = true;
 
     $req->closeCursor();
@@ -111,12 +111,12 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_bugs
+    $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
                         FROM bugs
                         WHERE type = "B" AND resolved = "N"');
     $data = $req->fetch();
 
-    $nombre_bugs = $data['nombre_bugs'];
+    $nombre_bugs = $data['nombreBugs'];
 
     $req->closeCursor();
 
@@ -134,12 +134,12 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_evolutions
+    $req = $bdd->query('SELECT COUNT(*) AS nombreEvolutions
                         FROM bugs
                         WHERE type = "E" AND resolved = "N"');
     $data = $req->fetch();
 
-    $nombre_evolutions = $data['nombre_evolutions'];
+    $nombre_evolutions = $data['nombreEvolutions'];
 
     $req->closeCursor();
 

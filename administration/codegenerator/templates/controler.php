@@ -10,7 +10,7 @@
   /*title_controls*/
   /*control_function*/
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   /*functions_calls*/
 
   // Appel métier

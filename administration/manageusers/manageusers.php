@@ -16,7 +16,7 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_manageusers.php');
   include_once('modele/controles_manageusers.php');
   include_once('modele/physique_manageusers.php');

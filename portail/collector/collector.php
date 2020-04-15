@@ -21,7 +21,7 @@
   // Contrôles communs Utilisateur
   controlsUser();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_collector.php');
 
   // Initialisation sauvegarde saisie

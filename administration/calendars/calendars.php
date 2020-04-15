@@ -13,7 +13,7 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_calendars.php');
 
   // Appel métier

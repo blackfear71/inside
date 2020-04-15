@@ -12,23 +12,28 @@
   // Contrôles communs Administrateur
   controlsAdmin();
 
-  // Modèle de données : "module métier"
+  // Modèle de données
   include_once('modele/metier_movies.php');
+  include_once('modele/physique_movies.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
+      // Récupération de liste des films à supprimer
 			$listeSuppression = getFilmsToDelete();
+
+      // Récupération de l'alerte
 			$alerteFilms      = getAlerteFilms();
       break;
 
 		case "doDeleteFilm":
+      // Suppression d'un film
 			deleteFilm($_POST);
 			break;
 
 		case "doResetFilm":
+      // Annulation de la demande de suppression d'un film
 			resetFilm($_POST);
 			break;
 
