@@ -17,12 +17,13 @@
 
   // Modèle de données
   include_once('modele/metier_reports.php');
+  include_once('modele/physique_reports.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
-    // Lecture liste des données par le modèle
     case 'goConsulter':
+      // Récupération de la liste des bugs / évolutions en fonction de la vue
       switch ($_GET['view'])
       {
         case 'all':
@@ -39,12 +40,13 @@
       break;
 
 		case "doChangerStatut":
-			// Mise à jour des données par le modèle
+			// Mise à jour d'un bug ou d'une évolution
 			$resolved  = updateBug($_POST);
-      $id_report = $_POST['id_report'];
+      $idRapport = $_POST['id_report'];
 			break;
 
     case "doSupprimer":
+      // Suppression d'un bug ou d'une évolution
       deleteBug($_POST);
       break;
 
@@ -100,9 +102,9 @@
   {
 		case "doChangerStatut":
       if ($resolved == "Y" OR $resolved == "R")
-        header('location: reports.php?view=resolved&action=goConsulter&anchor=' . $id_report);
+        header('location: reports.php?view=resolved&action=goConsulter&anchor=' . $idRapport);
       else
-        header('location: reports.php?view=unresolved&action=goConsulter&anchor=' . $id_report);
+        header('location: reports.php?view=unresolved&action=goConsulter&anchor=' . $idRapport);
       break;
 
     case "doSupprimer":

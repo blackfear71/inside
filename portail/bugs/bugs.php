@@ -51,7 +51,7 @@
 
     case 'doSignaler':
       // Insertion des données par le modèle
-      $id_report = insertBug($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $idRapport = insertBug($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -104,7 +104,7 @@
   switch ($_GET['action'])
   {
     case 'doSignaler':
-      header('location: bugs.php?view=unresolved&action=goConsulter&anchor=' . $id_report);
+      header('location: bugs.php?view=unresolved&action=goConsulter&anchor=' . $idRapport);
       break;
 
     case 'goConsulter':

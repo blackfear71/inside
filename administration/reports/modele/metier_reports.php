@@ -1,71 +1,38 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/bugs.php');
 
   // METIER : Lecture liste des bugs / évolutions
-  // RETOUR : Tableau des bugs / évolutions
+  // RETOUR : Liste des bugs / évolutions
   function getBugs($view, $type)
   {
-    // Initialisation tableau des bugs
-    $listeBugs = array();
+    // Récupération des rapports en fonction de la vue et du type
+    $rapports = physiqueListeRapports($view, $type);
 
-    global $bdd;
-
-    // Lecture de la base en fonction de la vue
-    if ($view == "resolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R") ORDER BY date DESC, id DESC');
-    elseif ($view == "unresolved")
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND resolved = "N" ORDER BY date DESC, id DESC');
-    else
-      $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" ORDER BY date DESC, id DESC');
-
-    while ($donnees = $reponse->fetch())
+    // Récupération des données complémentaires
+    foreach ($rapports as $rapport)
     {
-      // Instanciation d'un objet Idea à partir des données remontées de la bdd
-      $bug = Bugs::withData($donnees);
-
-      // Recherche du pseudo et de l'avatar de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');
-      $donnees2 = $reponse2->fetch();
-
-      if ($reponse2->rowCount() > 0)
-      {
-        $bug->setPseudo($donnees2['pseudo']);
-        $bug->setAvatar($donnees2['avatar']);
-      }
-
-      $reponse2->closeCursor();
-
-      array_push($listeBugs, $bug);
+      physiqueDonneesUser($rapport);
     }
 
-    $reponse->closeCursor();
-
-    return $listeBugs;
+    // Retour
+    return $rapports;
   }
 
   // METIER : Mise à jour du statut d'un bug
   // RETOUR : Top redirection
   function updateBug($post)
   {
-    $id_report = $post['id_report'];
+    // Récupération des données
+    $idRapport = $post['id_report'];
     $action    = $post;
     $resolved  = "N";
 
     unset($action['id_report']);
 
-    global $bdd;
+    // Lecture des données du rapport
+    $rapport = physiqueRapport($idRapport);
 
-    // Lecture des données
-    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id_report);
-    $data1 = $req1->fetch();
-
-    $author = $data1['author'];
-    $status = $data1['resolved'];
-
-    $req1->closeCursor();
-
-    // Mise à jour du statut
+    // Détermination du statut
     switch (key($action))
     {
       case 'resolve_bug':
@@ -84,21 +51,19 @@
         break;
     }
 
-    $req2 = $bdd->prepare('UPDATE bugs SET resolved = :resolved WHERE id = ' . $id_report);
-    $req2->execute(array(
-      'resolved' => $resolved
-    ));
-    $req2->closeCursor();
+    // Mise à jour du statut
+    physiqueUpdateRapport($idRapport, $resolved);
 
     // Génération succès (sauf si rejeté ou remis en cours après rejet)
-    if ($resolved != "R" AND $status != "R")
+    if ($resolved != "R" AND $rapport->getResolved() != "R")
     {
       if ($resolved == "Y")
-        insertOrUpdateSuccesValue('compiler', $author, 1);
+        insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), 1);
       else
-        insertOrUpdateSuccesValue('compiler', $author, -1);
+        insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
     }
 
+    // Retour
     return $resolved;
   }
 
@@ -106,31 +71,26 @@
   // RETOUR : Aucun
   function deleteBug($post)
   {
-    $id_report = $post['id_report'];
+    // Récupération des données
+    $idRapport = $post['id_report'];
 
-    global $bdd;
+    // Lecture des données du rapport
+    $rapport = physiqueRapport($idRapport);
 
-    // Lecture des données et suppression image si présente
-    $req1 = $bdd->query('SELECT * FROM bugs WHERE id = ' . $id_report);
-    $data1 = $req1->fetch();
+    // Suppression image si présente
+    if (!empty($rapport->getPicture()))
+      unlink('../../includes/images/reports/' . $rapport->getPicture());
 
-    $author   = $data1['author'];
-    $resolved = $data1['resolved'];
-
-    if (isset($data1['picture']) AND !empty($data1['picture']))
-      unlink("../../includes/images/reports/" . $data1['picture']);
-
-    $req1->closeCursor();
-
-    // Suppression de la table
-    $req2 = $bdd->exec('DELETE FROM bugs WHERE id = ' . $id_report);
+    // Suppression de l'enregistrement en base
+    physiqueDeleteRapport($idRapport);
 
     // Génération succès
-    insertOrUpdateSuccesValue('debugger', $author, -1);
+    insertOrUpdateSuccesValue('debugger', $rapport->getAuthor(), -1);
 
     if ($resolved == "Y")
-      insertOrUpdateSuccesValue('compiler', $author, -1);
+      insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
 
+    // Message d'alerte
     $_SESSION['alerts']['bug_deleted'] = true;
   }
 ?>
