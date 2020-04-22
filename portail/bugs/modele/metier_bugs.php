@@ -2,8 +2,8 @@
   include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/bugs.php');
 
-  // METIER : Lecture liste des bugs / évolutions
-  // RETOUR : Tableau des bugs / évolutions
+  // METIER : Lecture liste des bugs/évolutions
+  // RETOUR : Tableau des bugs/évolutions
   function getBugs($view, $type)
   {
     // Initialisation tableau des bugs

@@ -1,8 +1,8 @@
 <?php
   include_once('../../includes/classes/bugs.php');
 
-  // METIER : Lecture liste des bugs / évolutions
-  // RETOUR : Liste des bugs / évolutions
+  // METIER : Lecture liste des bugs/évolutions
+  // RETOUR : Liste des bugs/évolutions
   function getBugs($view, $type)
   {
     // Récupération des rapports en fonction de la vue et du type

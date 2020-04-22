@@ -13,7 +13,7 @@
 			echo '</td>';
 
 			echo '<td colspan="2" class="init_td_manage_users" style="width: 37.5%;">';
-				echo 'Bugs / évolutions';
+				echo 'bugs/évolutions';
 			echo '</td>';
 
 			echo '<td colspan="3" class="init_td_manage_users" style="width: 37.5%;">';

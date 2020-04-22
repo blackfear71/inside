@@ -23,7 +23,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Récupération de la liste des bugs / évolutions en fonction de la vue
+      // Récupération de la liste des bugs/évolutions en fonction de la vue
       switch ($_GET['view'])
       {
         case 'all':

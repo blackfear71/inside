@@ -159,7 +159,7 @@
     return $listUsersParts;
   }
 
-  // PHYSIQUE : Lecture des identifiants des bugs / évolutions
+  // PHYSIQUE : Lecture des identifiants des bugs/évolutions
   // RETOUR : Liste des utilisateurs uniques
   function physiqueIdentifiantsBugs()
   {
@@ -604,7 +604,7 @@
   }
 
   // PHYSIQUE : Lecture du nombre total de bugs soumis
-  // RETOUR : Nombre total de bugs / évolutions soumis
+  // RETOUR : Nombre total de bugs/évolutions soumis
   function physiqueBugsSoumisTotal()
   {
     // Initialisations
@@ -627,7 +627,7 @@
   }
 
   // PHYSIQUE : Lecture du nombre total de bugs résolus
-  // RETOUR : Nombre total de bugs / évolutions résolus
+  // RETOUR : Nombre total de bugs/évolutions résolus
   function physiqueBugsResolusTotal()
   {
     // Initialisations
