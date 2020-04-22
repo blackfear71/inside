@@ -1,98 +1,59 @@
 <?php
-  if (!empty($tabMissions))
+  if (!empty($listeMissions))
   {
-    $titre_en_cours = false;
-    $titre_a_venir  = false;
-    $titre_passees  = false;
+    $titreAVenir  = false;
+    $titreEnCours = false;
+    $titrePassees = false;
 
     echo '<div class="zone_missions">';
-      foreach ($tabMissions as $keyMission => $ligneMission)
+      foreach ($listeMissions as $keyMission => $mission)
       {
         // Missions futures
-        if ($ligneMission->getStatut() == "V")
+        if ($mission->getStatut() == 'V' AND $titreAVenir != true)
         {
-          if ($titre_a_venir != true)
-          {
-            echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" /><div class="texte_titre_section">Missions à venir</div></div>';
-            $titre_a_venir = true;
+          echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" /><div class="texte_titre_section">Missions à venir</div></div>';
+          $titreAVenir = true;
 
-            // Définit une zone pour appliquer la Masonry
-            echo '<div class="zone_missions_accueil">';
-          }
-
-          echo '<div class="zone_mission_accueil">';
-            echo '<a href="missions.php?id_mission=' . $ligneMission->getId() . '&action=goModifier">';
-              echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
-            echo '</a>';
-
-            echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
-
-            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="missions.php?action=doSupprimer" class="form_suppression_mission">';
-              echo '<input type="hidden" name="id_mission" value="' . $ligneMission->getId() . '" />';
-              echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
-              echo '<input type="hidden" value="Supprimer la mission &quot;' . $ligneMission->getMission() . '&quot; ?" class="eventMessage" />';
-            echo '</form>';
-          echo '</div>';
+          // Définit une zone pour appliquer la Masonry
+          echo '<div class="zone_missions_accueil">';
         }
         // Missions en cours
-        elseif ($ligneMission->getStatut() == "C")
+        elseif ($mission->getStatut() == 'C' AND $titreEnCours != true)
         {
-          if ($titre_en_cours != true)
-          {
-            echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">Missions en cours</div></div>';
-            $titre_en_cours = true;
+          echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">Missions en cours</div></div>';
+          $titreEnCours = true;
 
-            // Définit une zone pour appliquer la Masonry
-            echo '<div class="zone_missions_accueil">';
-          }
-
-          echo '<div class="zone_mission_accueil">';
-            echo '<a href="missions.php?id_mission=' . $ligneMission->getId() . '&action=goModifier">';
-              echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
-            echo '</a>';
-
-            echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
-
-            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="missions.php?action=doSupprimer" class="form_suppression_mission">';
-              echo '<input type="hidden" name="id_mission" value="' . $ligneMission->getId() . '" />';
-              echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
-              echo '<input type="hidden" value="Supprimer la mission &quot;' . $ligneMission->getMission() . '&quot; ?" class="eventMessage" />';
-            echo '</form>';
-          echo '</div>';
+          // Définit une zone pour appliquer la Masonry
+          echo '<div class="zone_missions_accueil">';
         }
         // Missions précédentes
-        elseif ($ligneMission->getStatut() == "A")
+        elseif ($mission->getStatut() == 'A' AND $titrePassees != true)
         {
-          if ($titre_passees != true)
-          {
-            echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" /><div class="texte_titre_section">Anciennes missions</div></div>';
-            $titre_passees = true;
+          echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" /><div class="texte_titre_section">Anciennes missions</div></div>';
+          $titrePassees = true;
 
-            // Définit une zone pour appliquer la Masonry
-            echo '<div class="zone_missions_accueil">';
-          }
-
-          echo '<div class="zone_mission_accueil">';
-            echo '<a href="missions.php?id_mission=' . $ligneMission->getId() . '&action=goModifier">';
-              echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="img_mission" />';
-            echo '</a>';
-
-            echo '<div class="titre_mission">' . $ligneMission->getMission() . ' - du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' au ' . formatDateForDisplay($ligneMission->getDate_fin()) . '</div>';
-
-            echo '<form id="delete_mission_' . $ligneMission->getId() . '" method="post" action="missions.php?action=doSupprimer" class="form_suppression_mission">';
-              echo '<input type="hidden" name="id_mission" value="' . $ligneMission->getId() . '" />';
-              echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
-              echo '<input type="hidden" value="Supprimer la mission &quot;' . $ligneMission->getMission() . '&quot; ?" class="eventMessage" />';
-            echo '</form>';
-          echo '</div>';
+          // Définit une zone pour appliquer la Masonry
+          echo '<div class="zone_missions_accueil">';
         }
 
-        if (!isset($tabMissions[$keyMission + 1])
-        OR  $ligneMission->getStatut() != $tabMissions[$keyMission + 1]->getStatut())
-        {
-          // Termine la zone Masonry du niveau
+        // Affichage de la mission
+        echo '<div class="zone_mission_accueil">';
+          echo '<a href="missions.php?id_mission=' . $mission->getId() . '&action=goModifier">';
+            echo '<img src="../../includes/images/missions/banners/' . $mission->getReference() . '.png" alt="' . $mission->getReference() . '" title="' . $mission->getMission() . '" class="img_mission" />';
+          echo '</a>';
+
+          echo '<div class="titre_mission">' . $mission->getMission() . ' - du ' . formatDateForDisplay($mission->getDate_deb()) . ' au ' . formatDateForDisplay($mission->getDate_fin()) . '</div>';
+
+          echo '<form id="delete_mission_' . $mission->getId() . '" method="post" action="missions.php?action=doSupprimer" class="form_suppression_mission">';
+            echo '<input type="hidden" name="id_mission" value="' . $mission->getId() . '" />';
+            echo '<input type="submit" name="delete_mission" value="" title="Supprimer la mission" class="bouton_delete_mission eventConfirm" />';
+            echo '<input type="hidden" value="Supprimer la mission &quot;' . $mission->getMission() . '&quot; ?" class="eventMessage" />';
+          echo '</form>';
+        echo '</div>';
+
+        // Termine la zone Masonry du niveau
+        if (!isset($listeMissions[$keyMission + 1]) OR $mission->getStatut() != $listeMissions[$keyMission + 1]->getStatut())
           echo '</div>';
-        }
       }
     echo '</div>';
   }

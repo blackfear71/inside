@@ -273,18 +273,21 @@
   // Classement (uniquement sur les missions existantes)
   if ($_GET['action'] == "goModifier")
   {
-    echo '<table class="table_ranking">';
-      echo '<tr><td class="titre_classement">Classement</td></tr>';
+    echo '<div class="zone_classement_mission">';
+      echo '<div class="titre_classement">Classement</div>';
 
-      foreach ($ranking as $rankUser)
+      if (!empty($participants))
       {
-        echo '<tr>';
-          echo '<td class="classement">';
-            echo '<div class="pseudo_classement">' . $rankUser['rank'] . '. ' . $rankUser['pseudo'] . '</div>';
-            echo '<div class="total_classement">' . $rankUser['total'] . '</div>';
-          echo '</td>';
-        echo '</tr>';
+        foreach ($participants as $participant)
+        {
+          echo '<div class="classement_user">';
+            echo '<div class="pseudo_classement">' . $participant['rank'] . '. ' . $participant['pseudo'] . '</div>';
+            echo '<div class="total_classement">' . $participant['total'] . '</div>';
+          echo '</div>';
+        }
       }
-    echo '</table>';
+      else
+        echo '<div class="empty">Pas encore de participants</div>';
+    echo '</div>';
   }
 ?>

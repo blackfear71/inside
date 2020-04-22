@@ -19,6 +19,8 @@
 
   // Modèle de données
   include_once('modele/metier_missions.php');
+  include_once('modele/controles_missions.php');
+  include_once('modele/physique_missions.php');
 
   // Initialisation sauvegarde saisie
 	if ((!isset($_SESSION['alerts']['already_ref_mission'])   OR $_SESSION['alerts']['already_ref_mission']   != true)
@@ -44,25 +46,26 @@
   OR  (isset($_SESSION['alerts']['wrong_file_type'])       AND $_SESSION['alerts']['wrong_file_type']       == true)
   OR  (isset($_SESSION['alerts']['wrong_file'])            AND $_SESSION['alerts']['wrong_file']            == true))
   {
-    $erreur_mission = true;
+    $erreurMission = true;
   }
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
-      $tabMissions = getMissions();
+      // Récupération de la liste des missions
+      $listeMissions = getMissions();
       break;
 
     case 'goAjouter':
-      if (isset($erreur_mission) AND $erreur_mission == true)
+      // Initialisation de l'écran d'ajout de mission
+      if (isset($erreurMission) AND $erreurMission == true)
       {
-        $detailsMission = initErrMission($_SESSION['save']['new_mission']['post'], NULL);
-        unset($erreur_mission);
+        $detailsMission = initialisationErreurMission($_SESSION['save']['new_mission']['post'], NULL);
+        unset($erreurMission);
       }
       else
-        $detailsMission = initAddMission();
+        $detailsMission = initialisationAjoutMission();
       break;
 
     case 'goModifier':
@@ -71,28 +74,32 @@
         header('location: missions.php?action=goConsulter');
       else
       {
-        if (isset($erreur_mission) AND $erreur_mission == true)
+        // Initialisation de l'écran de modification de mission
+        if (isset($erreurMission) AND $erreurMission == true)
         {
-          $detailsMission = initErrMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
-          unset($erreur_mission);
+          $detailsMission = initialisationErreurMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
+          unset($erreurMission);
         }
         else
-          $detailsMission = initModMission($_GET['id_mission']);
+          $detailsMission = initialisationModificationMission($_GET['id_mission']);
 
+        // Récupération du classement des participants
         $participants = getParticipants($_GET['id_mission']);
-        $ranking      = getRankingMission($_GET['id_mission'], $participants);
       }
       break;
 
     case 'doAjouter':
-      $erreur_mission = insertMission($_POST, $_FILES);
+      // Ajout d'une mission
+      $erreurMission = insertMission($_POST, $_FILES);
       break;
 
     case 'doModifier':
-      $id_mission = updateMission($_POST, $_FILES);
+      // Modification d'une mission
+      $idMission = updateMission($_POST, $_FILES);
       break;
 
     case 'doSupprimer':
+      // Suppression d'une mission
       deleteMission($_POST);
       break;
 
@@ -106,21 +113,21 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($tabMissions as &$ligneMission)
+      foreach ($listeMissions as &$mission)
       {
-        $ligneMission->setMission(htmlspecialchars($ligneMission->getMission()));
-        $ligneMission->setReference(htmlspecialchars($ligneMission->getReference()));
-        $ligneMission->setDate_deb(htmlspecialchars($ligneMission->getDate_deb()));
-        $ligneMission->setDate_fin(htmlspecialchars($ligneMission->getDate_fin()));
-        $ligneMission->setHeure(htmlspecialchars($ligneMission->getHeure()));
-        $ligneMission->setObjectif(htmlspecialchars($ligneMission->getObjectif()));
-        $ligneMission->setDescription(htmlspecialchars($ligneMission->getDescription()));
-        $ligneMission->setExplications(htmlspecialchars($ligneMission->getExplications()));
-        $ligneMission->setConclusion(htmlspecialchars($ligneMission->getConclusion()));
-        $ligneMission->setStatut(htmlspecialchars($ligneMission->getStatut()));
+        $mission->setMission(htmlspecialchars($mission->getMission()));
+        $mission->setReference(htmlspecialchars($mission->getReference()));
+        $mission->setDate_deb(htmlspecialchars($mission->getDate_deb()));
+        $mission->setDate_fin(htmlspecialchars($mission->getDate_fin()));
+        $mission->setHeure(htmlspecialchars($mission->getHeure()));
+        $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
+        $mission->setDescription(htmlspecialchars($mission->getDescription()));
+        $mission->setExplications(htmlspecialchars($mission->getExplications()));
+        $mission->setConclusion(htmlspecialchars($mission->getConclusion()));
+        $mission->setStatut(htmlspecialchars($mission->getStatut()));
       }
 
-      unset($ligneMission);
+      unset($mission);
       break;
 
     case 'goModifier':
@@ -137,23 +144,13 @@
 
       foreach ($participants as &$participant)
       {
-        $participant->setIdentifiant(htmlspecialchars($participant->getIdentifiant()));
-        $participant->setPseudo(htmlspecialchars($participant->getPseudo()));
-        $participant->setAvatar(htmlspecialchars($participant->getAvatar()));
+        $participant['identifiant'] = htmlspecialchars($participant['identifiant']);
+        $participant['pseudo']      = htmlspecialchars($participant['pseudo']);
+        $participant['total']       = htmlspecialchars($participant['total']);
+        $participant['rank']        = htmlspecialchars($participant['rank']);
       }
 
       unset($participant);
-
-      foreach ($ranking as &$rankUser)
-      {
-        $rankUser['identifiant'] = htmlspecialchars($rankUser['identifiant']);
-        $rankUser['pseudo']      = htmlspecialchars($rankUser['pseudo']);
-        $rankUser['avatar']      = htmlspecialchars($rankUser['avatar']);
-        $rankUser['total']       = htmlspecialchars($rankUser['total']);
-        $rankUser['rank']        = htmlspecialchars($rankUser['rank']);
-      }
-
-      unset($rankUser);
       break;
 
     case 'goAjouter':
@@ -180,14 +177,14 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if ($erreur_mission == true)
+      if ($erreurMission == true)
         header('location: missions.php?action=goAjouter');
       else
         header('location: missions.php?action=goConsulter');
       break;
 
     case 'doModifier':
-      header('location: missions.php?id_mission=' . $id_mission . '&action=goModifier');
+      header('location: missions.php?id_mission=' . $idMission . '&action=goModifier');
       break;
 
     case 'doSupprimer':

@@ -145,15 +145,6 @@
     $_SESSION['alerts']['success_deleted'] = true;
   }
 
-
-
-
-
-
-
-
-
-
   // METIER : Modification succès
   // RETOUR : Aucun
   function updateSuccess($post)

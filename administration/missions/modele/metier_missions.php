@@ -1,5 +1,4 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/missions.php');
   include_once('../../includes/classes/profile.php');
 
@@ -7,186 +6,154 @@
   // RETOUR : Objets mission
   function getMissions()
   {
-    $missions = array();
+    // Récupération de la liste des missions
+    $missions = physiqueListeMissions();
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM missions');
-    while ($donnees = $reponse->fetch())
-    {
-      $myMission = Mission::withData($donnees);
-
-      if (date('Ymd') < $myMission->getDate_deb() OR (date('Ymd') == $myMission->getDate_deb() AND date('His') < $myMission->getHeure()))
-        $myMission->setStatut('V');
-      elseif (((date('Ymd') == $myMission->getDate_deb() AND date('His') >= $myMission->getHeure()) OR date('Ymd') > $myMission->getDate_deb()) AND date('Ymd') <= $myMission->getDate_fin())
-        $myMission->setStatut('C');
-      elseif (date('Ymd') > $myMission->getDate_fin())
-        $myMission->setStatut('A');
-
-      array_push($missions, $myMission);
-    }
-    $reponse->closeCursor();
-
-    // Tri sur statut (V : à venir, C : en cours, A : ancienne)
+    // Traitement des missions
     foreach ($missions as $mission)
     {
-      $tri_statut[]   = $mission->getStatut();
-      $tri_date_deb[] = $mission->getDate_deb();
+      // Affectation du statut
+      if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
+        $mission->setStatut('V');
+      elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
+        $mission->setStatut('C');
+      elseif (date('Ymd') > $mission->getDate_fin())
+        $mission->setStatut('A');
+
+      // Récupération du tri sur statut puis date de début
+      $triStatut[]  = $mission->getStatut();
+      $triDateDeb[] = $mission->getDate_deb();
     }
 
-    array_multisort($tri_statut, SORT_DESC, $tri_date_deb, SORT_DESC, $missions);
+    // Tri (V : à venir, C : en cours, A : ancienne)
+    array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $missions);
 
+    // Retour
     return $missions;
   }
 
   // METIER : Initialisation ajout mission
   // RETOUR : Objets mission
-  function initAddMission()
+  function initialisationAjoutMission()
   {
+    // Instanciation d'un objet Mission vide
     $mission = new Mission();
+
+    // Retour
     return $mission;
   }
 
   // METIER : Récupération mission spécifique pour modification
   // RETOUR : Objet mission
-  function initModMission($id)
+  function initialisationModificationMission($idMission)
   {
-    $mission = new Mission();
+    // Lecture des détails de la mission
+    $mission = physiqueMission($idMission);
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM missions WHERE id = ' . $id);
-    $donnees = $reponse->fetch();
-
-    $mission = Mission::withData($donnees);
-
-    $reponse->closeCursor();
-
+    // Retour
     return $mission;
   }
 
   // METIER : Initialisation mission en cas d'erreur de saisie (ajout et modification)
   // RETOUR : Objet mission
-  function initErrMission($save, $id_mission)
+  function initialisationErreurMission($saveMission, $idMission)
   {
-    $save_mission = new Mission();
+    // Instanciation d'un objet Mission vide
+    $mission = new Mission();
 
-    if (!empty($id_mission))
-      $save_mission->setId($id_mission);
+    // Définition de l'id en cas de modification
+    if (!empty($idMission))
+      $mission->setId($idMission);
 
-    $save_mission->setMission($save['mission']);
-    $save_mission->setDate_deb($save['date_deb']);
-    $save_mission->setDate_fin($save['date_fin']);
-    $save_mission->setHeure($save['heures'] . $save['minutes'] . '00');
-    $save_mission->setDescription($save['description']);
-    $save_mission->setReference($save['reference']);
-    $save_mission->setObjectif($save['objectif']);
-    $save_mission->setExplications($save['explications']);
-    $save_mission->setConclusion($save['conclusion']);
+    // Définition des données à partir de la sauvegarde
+    $mission->setMission($saveMission['mission']);
+    $mission->setDate_deb($saveMission['date_deb']);
+    $mission->setDate_fin($saveMission['date_fin']);
+    $mission->setHeure($saveMission['heures'] . $saveMission['minutes'] . '00');
+    $mission->setDescription($saveMission['description']);
+    $mission->setReference($saveMission['reference']);
+    $mission->setObjectif($saveMission['objectif']);
+    $mission->setExplications($saveMission['explications']);
+    $mission->setConclusion($saveMission['conclusion']);
 
-    return $save_mission;
+    // Retour
+    return $mission;
   }
 
   // METIER : Récupération des participants d'une mission
-  // RETOUR : Objets Profil
-  function getParticipants($id)
+  // RETOUR : Liste des participants
+  function getParticipants($idMission)
   {
-    $participants = array();
+    // Récupération de la liste des participants de la mission
+    $listUsers = physiqueUsersMission($idMission);
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT DISTINCT identifiant FROM missions_users WHERE id_mission = ' . $id . ' ORDER BY identifiant ASC');
-    while ($donnees = $reponse->fetch())
+    // Traitement s'il y a des participants
+    if (!empty($listUsers))
     {
-      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
-      $donnees2 = $reponse2->fetch();
-
-      $myParticipant = Profile::withData($donnees2);
-
-      $reponse2->closeCursor();
-
-      array_push($participants, $myParticipant);
-    }
-    $reponse->closeCursor();
-
-    return $participants;
-  }
-
-  // METIER : Classement des utilisateurs sur la mission
-  // RETOUR : Tableau classement
-  function getRankingMission($id, $users)
-  {
-    $ranking = array();
-
-    global $bdd;
-
-    foreach ($users as $user)
-    {
-      $totalMission = 0;
-      $initRankUser = 0;
-
-      // Nombre total d'objectifs sur la mission
-      $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user->getIdentifiant() . '"');
-      while ($donnees = $reponse->fetch())
+      // Récupération des données complémentaires des participants
+      foreach ($listUsers as &$user)
       {
-        $totalMission += $donnees['avancement'];
-      }
-      $reponse->closeCursor();
+        // Pseudo
+        $user['pseudo'] = physiquePseudoUser($user['identifiant']);
 
-      $myRanking = array('identifiant' => $user->getIdentifiant(),
-                         'pseudo'      => $user->getPseudo(),
-                         'avatar'      => $user->getAvatar(),
-                         'total'       => $totalMission,
-                         'rank'        => $initRankUser
-                       );
+        // Total de la mission
+        $user['total'] = physiqueTotalUser($idMission, $user['identifiant']);
 
-      array_push($ranking, $myRanking);
-    }
-
-    if (!empty($ranking))
-    {
-      // Tri sur avancement puis identifiant
-      foreach ($ranking as $rankUser)
-      {
-        $tri_rank[]  = $rankUser['total'];
-        $tri_alpha[] = $rankUser['identifiant'];
+        // Récupération du tri sur avancement puis identifiant
+        $triRank[]        = $user['total'];
+        $triIdentifiant[] = $user['identifiant'];
       }
 
-      array_multisort($tri_rank, SORT_DESC, $tri_alpha, SORT_ASC, $ranking);
+      unset($user);
+
+      // Tri
+      array_multisort($triRank, SORT_DESC, $triIdentifiant, SORT_ASC, $listUsers);
 
       // Affectation du rang
-      $prevTotal   = $ranking[0]['total'];
+      $prevTotal   = $listUsers[0]['total'];
       $currentRank = 1;
 
-      foreach ($ranking as &$rankUser)
+      foreach ($listUsers as &$user)
       {
-        $currentTotal = $rankUser['total'];
+        $currentTotal = $user['total'];
 
         if ($currentTotal != $prevTotal)
         {
           $currentRank += 1;
-          $prevTotal = $rankUser['total'];
+          $prevTotal    = $user['total'];
         }
 
-        $rankUser['rank'] = $currentRank;
+        $user['rank'] = $currentRank;
       }
 
-      unset($rankUser);
+      unset($user);
     }
 
-    return $ranking;
+    // Retour
+    return $listUsers;
   }
+
+
+
+
+
+
+
+
+
 
   // METIER : Insertion d'une nouvelle mission
   // RETOUR : Erreur éventuelle
   function insertMission($post, $files)
   {
-    global $bdd;
+    // Initialisations
+    $control_ok = true;
+    $erreur     = NULL;
 
     // Récupération des données
     $mission      = $post['mission'];
-    $date_deb     = $post['date_deb'];
-    $date_fin     = $post['date_fin'];
+    $dateDeb      = $post['date_deb'];
+    $dateFin      = $post['date_fin'];
     $heures       = $post['heures'];
     $minutes      = $post['minutes'];
     $description  = $post['description'];
@@ -195,136 +162,104 @@
     $explications = $post['explications'];
     $conclusion   = $post['conclusion'];
 
-    // Sauvegarde des données
+    // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['new_mission'] = array('post' => $post, 'files' => $files);
-    $control_ok                      = true;
 
     // Remplacement des caractères spéciaux pour la référence
-    $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");
-    $replace   = array("_", "e", "e", "e", "e", "a", "a", "c", "o", "u");
+    $search    = array(' ', 'é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ô', 'û');
+    $replace   = array('_', 'e', 'e', 'e', 'e', 'a', 'a', 'c', 'o', 'u');
     $reference = str_replace($search, $replace, $reference);
 
     // Formatage heure
     $heure = $heures . $minutes . '00';
 
     // Contrôle référence unique
-    $req1 = $bdd->query('SELECT * FROM missions WHERE reference = "' . $reference . '"');
-    if ($req1->rowCount() > 0)
-    {
-      $_SESSION['alerts']['already_ref_mission'] = true;
-      $control_ok                                = false;
-    }
-    $req1->closeCursor();
+    $control_ok = controleReferenceUnique($reference);
 
     // Contrôle format date début
     if ($control_ok == true)
-    {
-      if (validateDate($date_deb, "d/m/Y") != true)
-      {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
-      }
-      else
-        $date_deb = formatDateForInsert($date_deb);
-    }
+      $control_ok = controleFormatDate($dateDeb, 'd/m/Y');
+
+    // Formatage de la date de début pour insertion
+    if ($control_ok == true)
+      $dateDeb = formatDateForInsert($dateDeb);
 
     // Contrôle format date fin
     if ($control_ok == true)
-    {
-      if (validateDate($date_fin, "d/m/Y") != true)
-      {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
-      }
-      else
-        $date_fin = formatDateForInsert($date_fin);
-    }
+      $control_ok = controleFormatDate($dateFin, 'd/m/Y');
+
+    // Formatage de la date de fin pour insertion
+    if ($control_ok == true)
+      $dateFin = formatDateForInsert($dateFin);
 
     // Contrôle date début <= date fin
     if ($control_ok == true)
-    {
-      if ($date_fin < $date_deb)
-      {
-        $_SESSION['alerts']['date_less'] = true;
-        $control_ok                      = false;
-      }
-    }
+      $control_ok = controleOrdreDates($dateDeb, $dateFin);
 
-    // Contrôle objectif > 0
+    // Contrôle objectif numérique
     if ($control_ok == true)
-    {
-      if (!is_numeric($objectif) OR $objectif <= 0)
-      {
-        $_SESSION['alerts']['objective_not_numeric'] = true;
-        $control_ok                                  = false;
-      }
-    }
+      $control_ok = controleObjectifNumerique($objectif);
 
     // Contrôle images présentes
     if ($control_ok == true)
     {
       foreach ($files as $file)
       {
-        if (empty($file['name']) OR $file['name'] == NULL)
-        {
-          $_SESSION['alerts']['missing_mission_file'] = true;
-          $control_ok                                 = false;
-        }
+        $control_ok = controlePresenceFichier($file['name']);
       }
     }
 
-    // Insertion des images dans les dossiers
+    // Vérification des dossiers et contrôle des fichiers
     if ($control_ok == true)
     {
       // On vérifie la présence du dossier des images, sinon on le créé
-      $dossier = "../../includes/images/missions";
+      $dossier = '../../includes/images/missions';
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
       // On vérifie la présence du dossier des bannières, sinon on le créé
-      $dossier_images = $dossier . "/banners";
+      $dossierImages = $dossier . '/banners';
 
-      if (!is_dir($dossier_images))
-        mkdir($dossier_images);
+      if (!is_dir($dossierImages))
+        mkdir($dossierImages);
 
       // On vérifie la présence du dossier des boutons, sinon on le créé
-      $dossier_icones = $dossier . "/buttons";
+      $dossierIcones = $dossier . '/buttons';
 
-      if (!is_dir($dossier_icones))
-        mkdir($dossier_icones);
+      if (!is_dir($dossierIcones))
+        mkdir($dossierIcones);
 
       // Contrôle des fichiers
-      foreach ($files as $key_file => $file)
+      foreach ($files as $keyFile => $file)
       {
         // Nom du fichier
-        switch ($key_file)
+        switch ($keyFile)
         {
-          case "mission_icone_g":
+          case 'mission_icone_g':
             $name = $reference . '_g';
             break;
 
-          case "mission_icone_m":
+          case 'mission_icone_m':
             $name = $reference . '_m';
             break;
 
-          case "mission_icone_d":
+          case 'mission_icone_d':
             $name = $reference . '_d';
             break;
 
-          case "mission_image":
+          case 'mission_image':
           default:
             $name = $reference;
             break;
         }
 
-        $fileDatas = controlsUploadFile($file, $name, 'png');
+        $fileDatas  = controlsUploadFile($file, $name, 'png');
+        $control_ok = controleFichier($fileDatas);
 
-        if ($fileDatas['control_ok'] == false)
-        {
-          $control_ok = false;
+        // Arrêt de la boucle en cas d'erreur
+        if ($control_ok == false)
           break;
-        }
       }
     }
 
@@ -332,109 +267,91 @@
     if ($control_ok == true)
     {
       // Insertion des fichiers
-      foreach ($files as $key_file => $file)
+      foreach ($files as $keyFile => $file)
       {
         // Dossier de destination
-        if ($key_file == "mission_image")
-          $dest_dir = $dossier_images . '/';
+        if ($keyFile == 'mission_image')
+          $destDir = $dossierImages . '/';
         else
-          $dest_dir = $dossier_icones . '/';
+          $destDir = $dossierIcones . '/';
 
         // Nouveau nom
-        switch ($key_file)
+        switch ($keyFile)
         {
-          case "mission_icone_g":
-            $new_name = $reference . '_g.png';
+          case 'mission_icone_g':
+            $newName = $reference . '_g.png';
             break;
 
-          case "mission_icone_m":
-            $new_name = $reference . '_m.png';
+          case 'mission_icone_m':
+            $newName = $reference . '_m.png';
             break;
 
-          case "mission_icone_d":
-            $new_name = $reference . '_d.png';
+          case 'mission_icone_d':
+            $newName = $reference . '_d.png';
             break;
 
-          case "mission_image":
+          case 'mission_image':
           default:
-            $new_name = $reference . '.png';
+            $newName = $reference . '.png';
             break;
         }
 
         // Données à envoyer pour l'upload
         $fileDatas = array('control_ok' => true,
-                              'new_name'   => $new_name,
-                              'tmp_file'   => $file['tmp_name'],
-                              'type_file'  => $file['type']
-                             );
+                           'new_name'   => $newName,
+                           'tmp_file'   => $file['tmp_name'],
+                           'type_file'  => $file['type']
+                          );
 
         // Upload fichier
-        $control_ok = uploadFile($file, $fileDatas, $dest_dir);
+        $control_ok = uploadFile($file, $fileDatas, $destDir);
 
-        if ($fileDatas['control_ok'] == false)
-        {
-          $control_ok = false;
+        // Arrêt de la boucle en cas d'erreur
+        if ($control_ok == false)
           break;
-        }
       }
     }
 
     // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      $req2 = $bdd->prepare('INSERT INTO missions(mission,
-                                                  reference,
-                                                  date_deb,
-                                                  date_fin,
-                                                  heure,
-                                                  objectif,
-                                                  description,
-                                                  explications,
-                                                  conclusion)
-                                          VALUES(:mission,
-                                                 :reference,
-                                                 :date_deb,
-                                                 :date_fin,
-                                                 :heure,
-                                                 :objectif,
-                                                 :description,
-                                                 :explications,
-                                                 :conclusion)');
-      $req2->execute(array(
-        'mission'      => $mission,
-        'reference'    => $reference,
-        'date_deb'     => $date_deb,
-        'date_fin'     => $date_fin,
-        'heure'        => $heure,
-        'objectif'     => $objectif,
-        'description'  => $description,
-        'explications' => $explications,
-        'conclusion'   => $conclusion
-      ));
-      $req2->closeCursor();
+      $mission = array('mission'      => $mission,
+                       'reference'    => $reference,
+                       'date_deb'     => $dateDeb,
+                       'date_fin'     => $dateFin,
+                       'heure'        => $heure,
+                       'objectif'     => $objectif,
+                       'description'  => $description,
+                       'explications' => $explications,
+                       'conclusion'   => $conclusion
+                      );
 
+      physiqueInsertionMission($mission);
+
+      // Message d'alerte
       $_SESSION['alerts']['mission_added'] = true;
     }
 
+    // Positionnement erreur
     if ($control_ok != true)
-      $erreur_mission = true;
-    else
-      $erreur_mission = NULL;
+      $erreur = true;
 
-    return $erreur_mission;
+    // Retour
+    return $erreur;
   }
 
   // METIER : Modification d'une mission existante
   // RETOUR : Id mission
   function updateMission($post, $files)
   {
-    global $bdd;
+    // Initialisations
+    $control_ok = true;
 
     // Récupération des données
-    $id_mission   = $post['id_mission'];
+    $idMission    = $post['id_mission'];
     $mission      = $post['mission'];
-    $date_deb     = $post['date_deb'];
-    $date_fin     = $post['date_fin'];
+    $dateDeb      = $post['date_deb'];
+    $dateFin      = $post['date_fin'];
     $heures       = $post['heures'];
     $minutes      = $post['minutes'];
     $description  = $post['description'];
@@ -443,13 +360,12 @@
     $explications = $post['explications'];
     $conclusion   = $post['conclusion'];
 
-    // Sauvegarde des données
+    // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['old_mission'] = array('post' => $post, 'files' => $files);
-    $control_ok                      = true;
 
     // Remplacement des caractères spéciaux pour la référence
-    $search    = array(" ", "é", "è", "ê", "ë", "à", "â", "ç", "ô", "û");
-    $replace   = array("_", "e", "e", "e", "e", "a", "a", "c", "o", "u");
+    $search    = array(' ', 'é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ô', 'û');
+    $replace   = array('_', 'e', 'e', 'e', 'e', 'a', 'a', 'c', 'o', 'u');
     $reference = str_replace($search, $replace, $reference);
 
     // Formatage heure
@@ -457,88 +373,67 @@
 
     // Contrôle format date début
     if ($control_ok == true)
-    {
-      if (validateDate($date_deb, "d/m/Y") != true)
-      {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
-      }
-      else
-        $date_deb = formatDateForInsert($date_deb);
-    }
+      $control_ok = controleFormatDate($dateDeb, 'd/m/Y');
+
+    // Formatage de la date de début pour insertion
+    if ($control_ok == true)
+      $dateDeb = formatDateForInsert($dateDeb);
 
     // Contrôle format date fin
     if ($control_ok == true)
-    {
-      if (validateDate($date_fin, "d/m/Y") != true)
-      {
-        $_SESSION['alerts']['wrong_date'] = true;
-        $control_ok                       = false;
-      }
-      else
-        $date_fin = formatDateForInsert($date_fin);
-    }
+      $control_ok = controleFormatDate($dateFin, 'd/m/Y');
+
+    // Formatage de la date de fin pour insertion
+    if ($control_ok == true)
+      $dateFin = formatDateForInsert($dateFin);
 
     // Contrôle date début <= date fin
     if ($control_ok == true)
-    {
-      if ($date_fin < $date_deb)
-      {
-        $_SESSION['alerts']['date_less'] = true;
-        $control_ok                      = false;
-      }
-    }
+      $control_ok = controleOrdreDates($dateDeb, $dateFin);
 
-    // Contrôle objectif > 0
+    // Contrôle objectif numérique
     if ($control_ok == true)
-    {
-      if (!is_numeric($objectif) OR $objectif <= 0)
-      {
-        $_SESSION['alerts']['objective_not_numeric'] = true;
-        $control_ok                                  = false;
-      }
-    }
+      $control_ok = controleObjectifNumerique($objectif);
 
     // Contrôle images présentes, si présentes alors on modifie l'image
     if ($control_ok == true)
     {
       // Chemins
-      $dossier_images = "../../includes/images/missions/banners";
-      $dossier_icones = "../../includes/images/missions/buttons";
+      $dossierImages = '../../includes/images/missions/banners';
+      $dossierIcones = '../../includes/images/missions/buttons';
 
       // Contrôle des fichiers
-      foreach ($files as $key_file => $file)
+      foreach ($files as $keyFile => $file)
       {
         if (!empty($file['name']))
         {
           // Nom du fichier
-          switch ($key_file)
+          switch ($keyFile)
           {
-            case "mission_icone_g":
+            case 'mission_icone_g':
               $name = $reference . '_g';
               break;
 
-            case "mission_icone_m":
+            case 'mission_icone_m':
               $name = $reference . '_m';
               break;
 
-            case "mission_icone_d":
+            case 'mission_icone_d':
               $name = $reference . '_d';
               break;
 
-            case "mission_image":
+            case 'mission_image':
             default:
               $name = $reference;
               break;
           }
 
-          $fileDatas = controlsUploadFile($file, $name, 'png');
+          $fileDatas  = controlsUploadFile($file, $name, 'png');
+          $control_ok = controleFichier($fileDatas);
 
-          if ($fileDatas['control_ok'] == false)
-          {
-            $control_ok = false;
+          // Arrêt de la boucle en cas d'erreur
+          if ($control_ok == false)
             break;
-          }
         }
       }
     }
@@ -547,55 +442,53 @@
     if ($control_ok == true)
     {
       // Insertion des fichiers
-      foreach ($files as $key_file => $file)
+      foreach ($files as $keyFile => $file)
       {
         if (!empty($file['name']))
         {
           // Dossier de destination
-          if ($key_file == "mission_image")
-            $dest_dir = $dossier_images . '/';
+          if ($keyFile == 'mission_image')
+            $destDir = $dossierImages . '/';
           else
-            $dest_dir = $dossier_icones . '/';
+            $destDir = $dossierIcones . '/';
 
           // Nouveau nom
-          switch ($key_file)
+          switch ($keyFile)
           {
-            case "mission_icone_g":
-              $new_name = $reference . '_g.png';
+            case 'mission_icone_g':
+              $newName = $reference . '_g.png';
               break;
 
-            case "mission_icone_m":
-              $new_name = $reference . '_m.png';
+            case 'mission_icone_m':
+              $newName = $reference . '_m.png';
               break;
 
-            case "mission_icone_d":
-              $new_name = $reference . '_d.png';
+            case 'mission_icone_d':
+              $newName = $reference . '_d.png';
               break;
 
-            case "mission_image":
+            case 'mission_image':
             default:
-              $new_name = $reference . '.png';
+              $newName = $reference . '.png';
               break;
           }
 
-          // Suppression ancienne image
-          unlink($dest_dir . $new_name);
+          // Suppression de l'ancienne image
+          unlink($destDir . $newName);
 
           // Données à envoyer pour l'upload
           $fileDatas = array('control_ok' => true,
-                                'new_name'   => $new_name,
-                                'tmp_file'   => $file['tmp_name'],
-                                'type_file'  => $file['type']
-                               );
+                             'new_name'   => $newName,
+                             'tmp_file'   => $file['tmp_name'],
+                             'type_file'  => $file['type']
+                            );
 
           // Upload fichier
-          $control_ok = uploadFile($file, $fileDatas, $dest_dir);
+          $control_ok = uploadFile($file, $fileDatas, $destDir);
 
-          if ($fileDatas['control_ok'] == false)
-          {
-            $control_ok = false;
+          // Arrêt de la boucle en cas d'erreur
+          if ($control_ok == false)
             break;
-          }
         }
       }
     }
@@ -603,64 +496,56 @@
     // Modification de l'enregistrement en base
     if ($control_ok == true)
     {
-      $req2 = $bdd->prepare('UPDATE missions SET mission      = :mission,
-                                                 date_deb     = :date_deb,
-                                                 date_fin     = :date_fin,
-                                                 heure        = :heure,
-                                                 objectif     = :objectif,
-                                                 description  = :description,
-                                                 explications = :explications,
-                                                 conclusion   = :conclusion
-                                           WHERE id = ' . $id_mission);
-      $req2->execute(array(
-        'mission'      => $mission,
-        'date_deb'     => $date_deb,
-        'date_fin'     => $date_fin,
-        'heure'        => $heure,
-        'objectif'     => $objectif,
-        'description'  => $description,
-        'explications' => $explications,
-        'conclusion'   => $conclusion
-      ));
-      $req2->closeCursor();
+      $mission = array('mission'      => $mission,
+                       'date_deb'     => $dateDeb,
+                       'date_fin'     => $dateFin,
+                       'heure'        => $heure,
+                       'objectif'     => $objectif,
+                       'description'  => $description,
+                       'explications' => $explications,
+                       'conclusion'   => $conclusion
+                      );
 
+      physiqueUpdateMission($idMission, $mission);
+
+      // Message d'alerte
       $_SESSION['alerts']['mission_updated'] = true;
     }
 
-    return $id_mission;
+    return $idMission;
   }
 
   // METIER : Suppression d'une mission existante
   // RETOUR : Aucun
   function deleteMission($post)
   {
-    $id_mission = $post['id_mission'];
+    // Récupération des données
+    $idMission = $post['id_mission'];
 
-    global $bdd;
-
-    // Lecture référence mission
-    $reponse = $bdd->query('SELECT id, reference FROM missions WHERE id = ' . $id_mission);
-    $donnees = $reponse->fetch();
-    $reference = $donnees['reference'];
-    $reponse->closeCursor();
+    // Récupération des données de la mission
+    $mission = physiqueMission($idMission);
 
     // Suppression des images
-    unlink("../../includes/images/missions/banners/" . $reference . ".png");
-    unlink("../../includes/images/missions/buttons/" . $reference . "_g.png");
-    unlink("../../includes/images/missions/buttons/" . $reference . "_m.png");
-    unlink("../../includes/images/missions/buttons/" . $reference . "_d.png");
+    if (!empty($mission->getReference()))
+    {
+      unlink('../../includes/images/missions/banners/' . $mission->getReference() . '.png');
+      unlink('../../includes/images/missions/buttons/' . $mission->getReference() . '_g.png');
+      unlink('../../includes/images/missions/buttons/' . $mission->getReference() . '_m.png');
+      unlink('../../includes/images/missions/buttons/' . $mission->getReference() . '_d.png');
+    }
 
-    // Suppression de la mission en table
-    $reponse2 = $bdd->exec('DELETE FROM missions WHERE id = ' . $id_mission);
+    // Suppression de l'enregistrement en base
+    physiqueDeleteMission($idMission);
 
-    // Suppression des participations en table
-    $reponse3 = $bdd->exec('DELETE FROM missions_users WHERE id_mission = ' . $id_mission);
+    // Suppression des participations
+    physiqueDeleteMissionUsers($idMission);
 
     // Suppression des notifications
-    deleteNotification('start_mission', $id_mission);
-    deleteNotification('end_mission', $id_mission);
-    deleteNotification('one_mission', $id_mission);
+    deleteNotification('start_mission', $idMission);
+    deleteNotification('end_mission', $idMission);
+    deleteNotification('one_mission', $idMission);
 
+    // Message d'alerte
     $_SESSION['alerts']['mission_deleted'] = true;
   }
 ?>

@@ -164,7 +164,7 @@
           }
 
           // Contrôles communs d'un fichier
-          $fileDatas  = controlsUploadFile($file, $name, $type);
+          $fileDatas  = controlsUploadFile($file, $name, 'png');
           $control_ok = controleFichier($fileDatas);
 
           // Arrêt de la boucle en cas d'erreur
@@ -366,9 +366,7 @@
 
     // Suppression préférence utilisateurs
     if (!empty($theme->getReference()))
-    {
       physiqueUpdateThemeUsers($theme->getReference());
-    }
 
     // Message d'alerte
     $_SESSION['alerts']['theme_deleted'] = true;

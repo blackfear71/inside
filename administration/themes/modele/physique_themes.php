@@ -165,7 +165,11 @@
     global $bdd;
 
     $req = $bdd->prepare('UPDATE themes
-                          SET name = :name, type = :type, level = :level, date_deb = :date_deb, date_fin = :date_fin
+                          SET name     = :name,
+                              type     = :type,
+                              level    = :level,
+                              date_deb = :date_deb,
+                              date_fin = :date_fin
                           WHERE id = ' . $idTheme);
 
     $req->execute($theme);

@@ -1807,16 +1807,17 @@
 }
 
 /*** Classement ***/
-.table_ranking
+.zone_classement_mission
 {
-	vertical-align: top;
-	float: right;
+	display: inline-block;
 	width: calc(30% - 20px);
 	margin-left: 20px;
+	vertical-align: top;
 }
 
 .titre_classement
 {
+	display: block;
 	background-color: #ff1937;
 	border-radius: 2px;
 	font-family: robotothin, Verdana, sans-serif;
@@ -1826,19 +1827,17 @@
 	box-shadow: 0 0 5px #7c7c7c;
 }
 
-.classement
+.classement_user
 {
-	margin-left: auto;
-	margin-right: auto;
+	display: block;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 130%;
 	border-bottom: solid 1px #b3b3b3;
 	line-height: 30px;
-  margin-bottom: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	color: #262626;
-	text-align: left;
+	text-align: justify;
 }
 
 .pseudo_classement
@@ -1846,14 +1845,16 @@
 	display: inline-block;
 	width: calc(100% - 40px);
 	word-break: break-word;
+	vertical-align: middle;
 }
 
 .total_classement
 {
-	float: right;
+	display: inline-block;
+	width: 30px;
+	margin-left: 10px;
 	background-color: #c81932;
 	border-radius: 2px;
-	width: 30px;
 	height: 30px;
 	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
@@ -1861,6 +1862,8 @@
 	font-weight: normal;
 	color: white;
 	text-align: center;
+	vertical-align: middle;
+	
 }
 
 /*** Thèmes ***/
