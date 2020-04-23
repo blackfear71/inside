@@ -180,8 +180,8 @@
     // Filtrage des symboles interdits
     if ($control_ok == true)
     {
-      $search  = array("@", ";");
-      $replace = array(" ", " ");
+      $search  = array('@', ';');
+      $replace = array(' ', ' ');
 
       foreach ($saisiesEntrees as $keyEntry => $entry)
       {
@@ -255,8 +255,8 @@
     // Filtrage des symboles interdits
     if ($control_ok == true)
     {
-      $search  = array("@", ";");
-      $replace = array(" ", " ");
+      $search  = array('@', ';');
+      $replace = array(' ', ' ');
 
       foreach ($saisiesEntrees as $keyEntry => $entry)
       {
