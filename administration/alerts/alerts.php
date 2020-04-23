@@ -16,6 +16,8 @@
 
   // Modèle de données
   include_once('modele/metier_alerts.php');
+  include_once('modele/controles_alerts.php');
+  include_once('modele/physique_alerts.php');
 
   // Initialisation sauvegarde saisie alerte
   if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
@@ -32,19 +34,22 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
+      // Récupération de la liste des alertes
       $listeAlertes = getAlerts();
       break;
 
     case "doAjouter":
-      $id_alerte = insertAlert($_POST);
+      // Insertion d'une nouvelle alerte
+      $idAlerte = insertAlert($_POST);
       break;
 
 		case "doModifier":
-			$id_alerte = updateAlert($_POST);
+      // Mise à jour d'une alerte
+			$idAlerte = updateAlert($_POST);
 			break;
 
     case "doSupprimer":
+      // Suppression d'une alerte
       deleteAlert($_POST);
       break;
 
@@ -80,14 +85,14 @@
   switch ($_GET['action'])
   {
     case "doAjouter":
-      if (!empty($id_alerte))
-        header('location: alerts.php?action=goConsulter&anchorAlerts=' . $id_alerte);
+      if (!empty($idAlerte))
+        header('location: alerts.php?action=goConsulter&anchorAlerts=' . $idAlerte);
       else
         header('location: alerts.php?action=goConsulter');
       break;
 
     case "doModifier":
-      header('location: alerts.php?action=goConsulter&anchorAlerts=' . $id_alerte);
+      header('location: alerts.php?action=goConsulter&anchorAlerts=' . $idAlerte);
       break;
 
     case "doSupprimer":

@@ -25,7 +25,7 @@
     // Récupération des données
     $idRapport = $post['id_report'];
     $action    = $post;
-    $resolved  = "N";
+    $resolved  = 'N';
 
     unset($action['id_report']);
 
@@ -36,15 +36,15 @@
     switch (key($action))
     {
       case 'resolve_bug':
-        $resolved = "Y";
+        $resolved = 'Y';
         break;
 
       case 'unresolve_bug':
-        $resolved = "N";
+        $resolved = 'N';
         break;
 
       case 'reject_bug':
-        $resolved = "R";
+        $resolved = 'R';
         break;
 
       default:
@@ -55,9 +55,9 @@
     physiqueUpdateRapport($idRapport, $resolved);
 
     // Génération succès (sauf si rejeté ou remis en cours après rejet)
-    if ($resolved != "R" AND $rapport->getResolved() != "R")
+    if ($resolved != 'R' AND $rapport->getResolved() != 'R')
     {
-      if ($resolved == "Y")
+      if ($resolved == 'Y')
         insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), 1);
       else
         insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
@@ -87,7 +87,7 @@
     // Génération succès
     insertOrUpdateSuccesValue('debugger', $rapport->getAuthor(), -1);
 
-    if ($resolved == "Y")
+    if ($resolved == 'Y')
       insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
 
     // Message d'alerte

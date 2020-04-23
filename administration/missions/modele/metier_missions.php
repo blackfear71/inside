@@ -133,15 +133,6 @@
     return $listUsers;
   }
 
-
-
-
-
-
-
-
-
-
   // METIER : Insertion d'une nouvelle mission
   // RETOUR : Erreur éventuelle
   function insertMission($post, $files)
