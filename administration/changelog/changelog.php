@@ -17,41 +17,56 @@
 
   // Modèle de données
   include_once('modele/metier_changelog.php');
+  include_once('modele/controles_changelog.php');
+  include_once('modele/physique_changelog.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Récupère les catégories
       $categoriesChangeLog = getCategories();
 
-      // Lecture liste des données par le modèle
+      // Initialisation de l'écran
       if (!isset($changeLogParameters) AND !isset($_SESSION['changelog']))
         $changeLogParameters = initializeChangeLog();
       else
       {
+        // Récupération des paramètres saisis
         $changeLogParameters = getChangeLogParameters($_SESSION['changelog']);
-        $error_changelog     = controlChangeLog($changeLogParameters);
 
-        if ($error_changelog == false AND ($changeLogParameters->getAction() == "M" OR $changeLogParameters->getAction() == "S"))
+        // Contrôle de l'existence d'un journal pour les paramètres saisis
+        $errorChangelog = controlChangeLog($changeLogParameters);
+
+        // Récupération des données en cas de modification ou suppression
+        if ($errorChangelog == false AND ($changeLogParameters->getAction() == "M" OR $changeLogParameters->getAction() == "S"))
           $changeLog = getChangeLog($changeLogParameters, $categoriesChangeLog);
       }
       break;
 
     case 'doGenerer':
+      // Sauvegarde des paramètres saisis en session
       saveChangeLogParameters($_POST);
       break;
 
     case 'doAjouter':
+      // Récupère les catégories
       $categoriesChangeLog = getCategories();
+
+      // Insertion d'un journal
       insertChangeLog($_POST, $categoriesChangeLog);
       break;
 
     case 'doModifier':
+      // Récupère les catégories
       $categoriesChangeLog = getCategories();
+
+      // Mise à jour d'un journal
       updateChangeLog($_POST, $categoriesChangeLog);
       break;
 
     case 'doSupprimer':
+      // Suppression d'un journal
       deleteChangeLog($_POST);
       break;
 

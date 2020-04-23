@@ -48,7 +48,7 @@
           /**********/
           /* Saisie */
           /**********/
-          if (!empty($changeLogParameters->getAction()) AND $error_changelog != true)
+          if (!empty($changeLogParameters->getAction()) AND $errorChangelog != true)
             include('vue/vue_saisie_changelog.php');
         ?>
       </article>

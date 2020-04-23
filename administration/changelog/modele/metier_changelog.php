@@ -1,43 +1,5 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/changelog.php');
-
-  // METIER : Initialise les paramètres des changelogs
-  // RETOUR : Paramètres
-  function initializeChangeLog()
-  {
-    // Initialisations
-    $changeLogParameters = new ChangeLogParameters();
-
-    return $changeLogParameters;
-  }
-
-  // METIER : Récupère les paramètres des changelogs
-  // RETOUR : Paramètres
-  function getChangeLogParameters($parametres)
-  {
-    // Suppression de la session
-    unset($_SESSION['changelog']);
-
-    // Initialisations
-    $changeLogParameters = new ChangeLogParameters();
-
-    // Récupération des paramètres
-    $changeLogParameters->setAction($parametres['action']);
-    $changeLogParameters->setYear($parametres['year']);
-    $changeLogParameters->setWeek($parametres['week']);
-
-    return $changeLogParameters;
-  }
-
-  // METIER : Sauvegarde des paramètres en session
-  // Retour : Aucun
-  function saveChangeLogParameters($post)
-  {
-    $_SESSION['changelog']['action'] = $_POST['action_changelog'];
-    $_SESSION['changelog']['year']   = $_POST['annee_changelog'];
-    $_SESSION['changelog']['week']   = formatWeekForInsert($_POST['semaine_changelog']);
-  }
 
   // METIER : Récupération des catégories pour les logs
   // RETOUR : Liste des catégories
@@ -67,67 +29,79 @@
                             'other'            => 'AUTRE'
                            );
 
+    // Retour
     return $listCategories;
+  }
+
+  // METIER : Initialise les paramètres des changelogs
+  // RETOUR : Paramètres
+  function initializeChangeLog()
+  {
+    // Initialisations
+    $changeLogParameters = new ChangeLogParameters();
+
+    // Retour
+    return $changeLogParameters;
+  }
+
+  // METIER : Récupère les paramètres des changelogs
+  // RETOUR : Paramètres
+  function getChangeLogParameters($parametres)
+  {
+    // Suppression de la session
+    unset($_SESSION['changelog']);
+
+    // Initialisations
+    $changeLogParameters = new ChangeLogParameters();
+
+    // Récupération des paramètres
+    $changeLogParameters->setAction($parametres['action']);
+    $changeLogParameters->setYear($parametres['year']);
+    $changeLogParameters->setWeek($parametres['week']);
+
+    // Retour
+    return $changeLogParameters;
+  }
+
+  // METIER : Sauvegarde des paramètres en session
+  // Retour : Aucun
+  function saveChangeLogParameters($post)
+  {
+    // Sauvegarde des paramètres saisis en session
+    $_SESSION['changelog']['action'] = $_POST['action_changelog'];
+    $_SESSION['changelog']['year']   = $_POST['annee_changelog'];
+    $_SESSION['changelog']['week']   = formatWeekForInsert($_POST['semaine_changelog']);
   }
 
   // METIER : Contrôle l'existence d'un journal
   // RETOUR : Booléen
   function controlChangeLog($parametres)
   {
-    $exist  = false;
-    $error  = false;
+    // Récupération des données
     $action = $parametres->getAction();
     $year   = $parametres->getYear();
     $week   = $parametres->getWeek();
 
-    global $bdd;
+    // Contrôle journal existant
+    $errorChangelog = controleChangelogExistant($action, $year, $week);
 
-    // Lecture des données
-    $reponse = $bdd->query('SELECT * FROM change_log WHERE year = "' . $year . '" AND week = "' . $week . '"');
-    $donnees = $reponse->fetch();
-
-    if ($reponse->rowCount() > 0)
-      $exist = true;
-
-    $reponse->closeCursor();
-
-    if ($action == 'M' OR $action == 'S')
-    {
-      if ($exist == false)
-      {
-        $_SESSION['alerts']['log_doesnt_exist'] = true;
-        $error                                  = true;
-      }
-    }
-    else
-    {
-      if ($exist == true)
-      {
-        $_SESSION['alerts']['log_already_exist'] = true;
-        $error                                   = true;
-      }
-    }
-
-    return $error;
+    // Retour
+    return $errorChangelog;
   }
 
   // METIER : Récupération des données existantes
   // RETOUR : Log à modifier ou supprimer
   function getChangeLog($parametres, $categories)
   {
+    // Récupération des données
     $year = $parametres->getYear();
     $week = $parametres->getWeek();
 
-    global $bdd;
-
     // Récupération du log
-    $reponse = $bdd->query('SELECT * FROM change_log WHERE year = "' . $year . '" AND week = "' . $week . '"');
-    $donnees = $reponse->fetch();
-
-    $changelog = ChangeLog::withData($donnees);
+    $changelog = physiqueChangelog($year, $week);
 
     // Extraction des logs
-    $extractLogs = explode(';', $donnees['logs']);
+    $extractLogs = explode(';', $changelog->getLogs());
 
     // Tri par catégories
     $sortedLogs = array();
@@ -170,10 +144,10 @@
       }
     }
 
+    // Redéfinition des lignes du journal
     $changelog->setLogs($sortedLogs);
 
-    $reponse->closeCursor();
-
+    // Retour
     return $changelog;
   }
 
@@ -181,32 +155,27 @@
   // RETOUR : Aucun
   function insertChangeLog($post, $categories)
   {
-    $control_ok = true;
+    // Initialisations
+    $control_ok           = true;
 
     // Récupération des données
-    $year               = $post['saisie_annee_changelog'];
-    $week               = $post['saisie_semaine_changelog'];
-    $notes              = $post['saisie_notes_changelog'];
-    $saisies_entrees    = $post['saisies_entrees'];
-    $categories_entrees = $post['categories_entrees'];
-
-    // Initialisations
-    $entries              = '';
-    $content_notification = $week . ';' . $year . ';';
+    $year                = $post['saisie_annee_changelog'];
+    $week                = $post['saisie_semaine_changelog'];
+    $notes               = $post['saisie_notes_changelog'];
+    $saisiesEntrees      = $post['saisies_entrees'];
+    $categoriesEntrees   = $post['categories_entrees'];
+    $entries             = '';
+    $contentNotification = $week . ';' . $year . ';';
 
     // Filtrage des entrées vides
-    foreach ($saisies_entrees as $keyEntry => $entry)
+    foreach ($saisiesEntrees as $keyEntry => $entry)
     {
       if (empty($entry))
-        unset($saisies_entrees[$keyEntry]);
+        unset($saisiesEntrees[$keyEntry]);
     }
 
     // Contrôle si notes et entrées vides
-    if (empty($notes) AND empty($saisies_entrees))
-    {
-      $_SESSION['alerts']['log_empty'] = true;
-      $control_ok                      = false;
-    }
+    $control_ok = controleNotesEntreesVides($notes, $saisiesEntrees);
 
     // Filtrage des symboles interdits
     if ($control_ok == true)
@@ -214,9 +183,9 @@
       $search  = array("@", ";");
       $replace = array(" ", " ");
 
-      foreach ($saisies_entrees as $keyEntry => $entry)
+      foreach ($saisiesEntrees as $keyEntry => $entry)
       {
-        $saisies_entrees[$keyEntry] = str_replace($search, $replace, $entry);
+        $saisiesEntrees[$keyEntry] = str_replace($search, $replace, $entry);
       }
     }
 
@@ -225,44 +194,33 @@
     {
       foreach ($categories as $categorie => $labelCategorie)
       {
-        if(!empty($saisies_entrees))
+        if(!empty($saisiesEntrees))
         {
-          foreach ($saisies_entrees as $keyEntry => $entry)
+          foreach ($saisiesEntrees as $keyEntry => $entry)
           {
-            if ($categories_entrees[$keyEntry] == $categorie)
+            if ($categoriesEntrees[$keyEntry] == $categorie)
             {
-              $entries .= $entry . '@' . $categories_entrees[$keyEntry] . ';';
-              unset($saisies_entrees[$keyEntry]);
+              $entries .= $entry . '@' . $categoriesEntrees[$keyEntry] . ';';
+              unset($saisiesEntrees[$keyEntry]);
             }
           }
         }
       }
     }
 
-    // Insertion enregistrement
+    // Insertion enregistrement en base
     if ($control_ok == true)
     {
-      global $bdd;
+      $changelog = array('week'  => $week,
+                         'year'  => $year,
+                         'notes' => $notes,
+                         'logs'  => $entries
+                        );
 
-      // Enregistrement en base
-      $reponse = $bdd->prepare('INSERT INTO change_log(week,
-                                                       year,
-                                                       notes,
-                                                       logs)
-                                               VALUES(:week,
-                                                      :year,
-                                                      :notes,
-                                                      :logs)');
-      $reponse->execute(array(
-        'week'  => $week,
-        'year'  => $year,
-        'notes' => $notes,
-        'logs'  => $entries
-      ));
-      $reponse->closeCursor();
+      physiqueInsertionChangelog($changelog);
 
       // Insertion notification
-      insertNotification('admin', 'changelog', $content_notification);
+      insertNotification('admin', 'changelog', $contentNotification);
 
       // Message d'alerte
       $_SESSION['alerts']['log_added'] = true;
@@ -273,32 +231,26 @@
   // RETOUR : Aucun
   function updateChangeLog($post, $categories)
   {
+    // Initialisations
     $control_ok = true;
 
     // Récupération des données
-    $year               = $post['saisie_annee_changelog'];
-    $week               = $post['saisie_semaine_changelog'];
-    $notes              = $post['saisie_notes_changelog'];
-    $saisies_entrees    = $post['saisies_entrees'];
-    $categories_entrees = $post['categories_entrees'];
-
-    // Initialisations
-    $entries              = '';
-    $content_notification = $week . ';' . $year . ';';
+    $year                = $post['saisie_annee_changelog'];
+    $week                = $post['saisie_semaine_changelog'];
+    $notes               = $post['saisie_notes_changelog'];
+    $saisiesEntrees      = $post['saisies_entrees'];
+    $categoriesEntrees   = $post['categories_entrees'];
+    $entries             = '';
 
     // Filtrage des entrées vides
-    foreach ($saisies_entrees as $keyEntry => $entry)
+    foreach ($saisiesEntrees as $keyEntry => $entry)
     {
       if (empty($entry))
-        unset($saisies_entrees[$keyEntry]);
+        unset($saisiesEntrees[$keyEntry]);
     }
 
     // Contrôle si notes et entrées vides
-    if (empty($notes) AND empty($saisies_entrees))
-    {
-      $_SESSION['alerts']['log_empty'] = true;
-      $control_ok                      = false;
-    }
+    $control_ok = controleNotesEntreesVides($notes, $saisiesEntrees);
 
     // Filtrage des symboles interdits
     if ($control_ok == true)
@@ -306,9 +258,9 @@
       $search  = array("@", ";");
       $replace = array(" ", " ");
 
-      foreach ($saisies_entrees as $keyEntry => $entry)
+      foreach ($saisiesEntrees as $keyEntry => $entry)
       {
-        $saisies_entrees[$keyEntry] = str_replace($search, $replace, $entry);
+        $saisiesEntrees[$keyEntry] = str_replace($search, $replace, $entry);
       }
     }
 
@@ -317,32 +269,28 @@
     {
       foreach ($categories as $categorie => $labelCategorie)
       {
-        if(!empty($saisies_entrees))
+        if(!empty($saisiesEntrees))
         {
-          foreach ($saisies_entrees as $keyEntry => $entry)
+          foreach ($saisiesEntrees as $keyEntry => $entry)
           {
-            if ($categories_entrees[$keyEntry] == $categorie)
+            if ($categoriesEntrees[$keyEntry] == $categorie)
             {
-              $entries .= $entry . '@' . $categories_entrees[$keyEntry] . ';';
-              unset($saisies_entrees[$keyEntry]);
+              $entries .= $entry . '@' . $categoriesEntrees[$keyEntry] . ';';
+              unset($saisiesEntrees[$keyEntry]);
             }
           }
         }
       }
     }
 
-    // Mise à jour enregistrement
+    // Modification de l'enregistrement en base
     if ($control_ok == true)
     {
-      global $bdd;
+      $changelog = array('notes' => $notes,
+                         'logs'  => $entries
+                        );
 
-      // Enregistrement en base
-      $reponse = $bdd->prepare('UPDATE change_log SET notes = :notes, logs = :logs WHERE year = ' . $year . ' AND week = ' . $week);
-      $reponse->execute(array(
-        'notes' => $notes,
-        'logs'  => $entries
-      ));
-      $reponse->closeCursor();
+      physiqueUpdateChangelog($changelog, $year, $week);
 
       // Message d'alerte
       $_SESSION['alerts']['log_updated'] = true;
@@ -353,17 +301,16 @@
   // RETOUR : Aucun
   function deleteChangeLog($post)
   {
-    $year                 = $post['saisie_annee_changelog'];
-    $week                 = $post['saisie_semaine_changelog'];
-    $content_notification = $week . ';' . $year . ';';
-
-    global $bdd;
+    // Récupération des données
+    $year                = $post['saisie_annee_changelog'];
+    $week                = $post['saisie_semaine_changelog'];
+    $contentNotification = $week . ';' . $year . ';';
 
     // Suppression du journal
-    $reponse = $bdd->exec('DELETE FROM change_log WHERE year = ' . $year . ' AND week = ' . $week);
+    physiqueDeleteChangelog($year, $week);
 
     // Suppression des notifications
-    deleteNotification('changelog', $content_notification);
+    deleteNotification('changelog', $contentNotification);
 
     // Message d'alerte
     $_SESSION['alerts']['log_deleted'] = true;

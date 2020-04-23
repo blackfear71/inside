@@ -14,7 +14,7 @@
       $this->week  = '';
       $this->year  = '';
       $this->notes = '';
-      $this->logs  = array();
+      $this->logs  = '';
     }
 
     // Constructeur de l'objet ChangeLog en fonction des données
@@ -40,6 +40,9 @@
 
       if (isset($data['notes']))
         $this->notes = $data['notes'];
+
+      if (isset($data['logs']))
+        $this->logs  = $data['logs'];
     }
 
     // getters et setters pour l'objet ChangeLog
