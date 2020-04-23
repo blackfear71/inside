@@ -14,7 +14,7 @@
     $reponse = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $user . '"');
     $donnees = $reponse->fetch();
 
-    // Instanciation d'un objet Profil à partir des données remontées de la bdd
+    // Instanciation d'un objet Profile à partir des données remontées de la bdd
     $preferences = Preferences::withData($donnees);
 
     $reponse->closeCursor();

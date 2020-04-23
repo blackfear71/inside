@@ -5,177 +5,154 @@
 
   // METIER : Lecture des données profil
   // RETOUR : Objet Profile
-  function getProfile($user)
+  function getProfile($identifiant)
   {
-    global $bdd;
+    // Récupération des données du profil
+    $profil = physiqueProfil($identifiant);
 
-    // Lecture des données utilisateur
-    $reponse = $bdd->query('SELECT * FROM users WHERE identifiant = "' . $user . '"');
-    $donnees = $reponse->fetch();
-
-    // Instanciation d'un objet Profil à partir des données remontées de la bdd
-    $profile = Profile::withData($donnees);
-
-    $reponse->closeCursor();
-
-    return $profile;
+    // Retour
+    return $profil;
   }
 
-  // METIER : Mise à jour de l'avatar (base + fichier)
+  // METIER : Mise à jour de l'avatar
   // RETOUR : Aucun
-  function updateAvatar($user, $files)
+  function updateAvatar($identifiant, $files)
   {
-    global $bdd;
-
+    // Initialisations
     $control_ok = true;
+    $avatar     = rand();
 
     // On vérifie la présence du dossier, sinon on le créé
-    $dossier = "../../includes/images/profil";
+    $dossier = '../../includes/images/profil';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
     // On vérifie la présence du dossier d'avatars, sinon on le créé
-    $dossier_avatars = $dossier . "/avatars";
+    $dossierAvatars = $dossier . '/avatars';
 
-    if (!is_dir($dossier_avatars))
-      mkdir($dossier_avatars);
+    if (!is_dir($dossierAvatars))
+      mkdir($dossierAvatars);
 
-    // Dossier de destination et nom du fichier
-    $avatar_dir = $dossier_avatars . '/';
-    $avatar     = rand();
+    // Dossier de destination
+    $avatarDir = $dossierAvatars . '/';
 
-    // Contrôles fichier
+    // Contrôle du fichier
     $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
 
-    // Traitements fichier
-    if ($fileDatas['control_ok'] == true)
+    // Récupération contrôles
+    $control_ok = $fileDatas['control_ok'];
+
+    // Upload fichier
+    if ($control_ok == true)
+      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatarDir);
+
+    if ($control_ok == true)
     {
-      // Upload fichier
-      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatar_dir);
+      $newName = $fileDatas['new_name'];
 
-      if ($control_ok == true)
-      {
-        $new_name = $fileDatas['new_name'];
+      // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
+      imagethumb($avatarDir . $newName, $avatarDir . $newName, 400, FALSE, TRUE);
 
-        // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-        imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
+      // Suppression de l'ancien avatar si présent
+      $oldAvatar = physiqueAvatarUser($identifiant);
 
-        // On efface l'ancien avatar si présent
-        $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
-        $donnees1 = $reponse1->fetch();
+      if (!empty($oldAvatar))
+        unlink($avatarDir . $oldAvatar . '');
 
-        if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink($avatar_dir . $donnees1['avatar'] . "");
+      // Modification de l'enregistrement en base
+      physiqueUpdateAvatarUser($identifiant, $newName);
 
-        $reponse1->closeCursor();
+      // Mise à jour de la session
+      $_SESSION['user']['avatar'] = $newName;
 
-        // On stocke la référence du nouvel avatar dans la base
-        $reponse2 = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE identifiant = "' . $user . '"');
-        $reponse2->execute(array(
-          'avatar' => $new_name
-        ));
-        $reponse2->closeCursor();
-
-        $_SESSION['user']['avatar']           = $new_name;
-        $_SESSION['alerts']['avatar_updated'] = true;
-      }
+      // Message d'alerte
+      $_SESSION['alerts']['avatar_updated'] = true;
     }
   }
 
-  // METIER : Suppression de l'avatar (base + fichier)
+  // METIER : Suppression de l'avatar
   // RETOUR : Aucun
-  function deleteAvatar($user)
+  function deleteAvatar($identifiant)
   {
-    global $bdd;
+    // Dossier de destination
+    $avatarDir = '../../includes/images/profil/avatars/';
 
-    // On efface l'ancien avatar si présent
-    $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
-    $donnees1 = $reponse1->fetch();
+    // Suppression de l'ancien avatar si présent
+    $oldAvatar = physiqueAvatarUser($identifiant);
 
-    if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
+    if (!empty($oldAvatar))
+      unlink($avatarDir . $oldAvatar . '');
 
-    $reponse1->closeCursor();
+    // Modification de l'enregistrement en base
+    physiqueUpdateAvatarUser($identifiant, '');
 
-    // On efface la référence de l'ancien avatar dans la base
-    $new_name = "";
+    // Mise à jour de la session
+    $_SESSION['user']['avatar'] = '';
 
-    $reponse2 = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE identifiant = "' . $user . '"');
-    $reponse2->execute(array(
-      'avatar' => $new_name
-    ));
-    $reponse2->closeCursor();
-
-    $_SESSION['user']['avatar']           = '';
+    // Message d'alerte
     $_SESSION['alerts']['avatar_deleted'] = true;
   }
 
   // METIER : Mise à jour des informations
   // RETOUR : Aucun
-  function updateInfos($user, $post)
+  function updateInfos($identifiant, $post)
   {
-    global $bdd;
-
     // Récupération des données
     $pseudo = trim($post['pseudo']);
 
-    // Mise à jour pseudo seulement si renseigné
+    // Mise à jour pseudo si renseigné
     if (!empty($pseudo))
     {
-      $req1 = $bdd->prepare('UPDATE users SET pseudo = :pseudo WHERE identifiant = "' . $user . '"');
-      $req1->execute(array(
-        'pseudo' => $pseudo
-      ));
-      $req1->closeCursor();
+      physiqueUpdatePseudoUser($identifiant, $pseudo);
 
-      // Mise à jour du pseudo stocké en SESSION
+      // Mise à jour de la session
       $_SESSION['user']['pseudo'] = $pseudo;
 
+      // Message d'alerte
       $_SESSION['alerts']['infos_updated'] = true;
     }
   }
 
   // METIER : Mise à jour du mot de passe
   // RETOUR : Aucun
-  function updatePassword($user, $post)
+  function updatePassword($identifiant, $post)
   {
+    // Initialisations
+    $control_ok = true;
+
+    // Si on a saisi toutes les données
     if (!empty($post['old_password'])
     AND !empty($post['new_password'])
     AND !empty($post['confirm_new_password']))
     {
-      global $bdd;
+      // Récupération des données du mot de passe
+      $crypt = physiqueDonneesPasswordUser($identifiant);
 
-      // Lecture des données actuelles de l'utilisateur
-      $reponse = $bdd->query('SELECT id, identifiant, salt, password FROM users WHERE identifiant = "' . $user . '"');
-      $donnees = $reponse->fetch();
+      // Cryptage ancien mot de passe saisi
+      $oldPassword = htmlspecialchars(hash('sha1', $post['old_password'] . $crypt['salt']));
 
-      $old_password = htmlspecialchars(hash('sha1', $post['old_password'] . $donnees['salt']));
+      // Contrôle correspondance ancien mot de passe
+      $control_ok = controleCorrespondancePassword($oldPassword, $crypt['password']);
 
-      if ($old_password == $donnees['password'])
+      // Contrôle correspondance nouveau mot de passe
+      if ($control_ok == true)
       {
-        $salt                 = rand();
-        $new_password         = htmlspecialchars(hash('sha1', $post['new_password'] . $salt));
-        $confirm_new_password = htmlspecialchars(hash('sha1', $post['confirm_new_password'] . $salt));
+        $salt               = rand();
+        $newPassword        = htmlspecialchars(hash('sha1', $post['new_password'] . $salt));
+        $confirmNewPassword = htmlspecialchars(hash('sha1', $post['confirm_new_password'] . $salt));
 
-        if ($new_password == $confirm_new_password)
-        {
-          $req = $bdd->prepare('UPDATE users SET salt = :salt, password = :password WHERE identifiant = "' . $user . '"');
-          $req->execute(array(
-            'salt'     => $salt,
-            'password' => $new_password
-          ));
-          $req->closeCursor();
-
-          $_SESSION['alerts']['password_updated'] = true;
-        }
-        else
-          $_SESSION['alerts']['wrong_password'] = true;
+        $control_ok = controleCorrespondancePassword($confirmNewPassword, $newPassword);
       }
-      else
-        $_SESSION['alerts']['wrong_password'] = true;
 
-      $reponse->closeCursor();
+      // Modification de l'enregistrement en base
+      if ($control_ok == true)
+      {
+        physiqueUpdatePasswordUser($salt, $newPassword, $identifiant);
+
+        // Message d'alerte
+        $_SESSION['alerts']['password_updated'] = true;
+      }
     }
   }
 ?>

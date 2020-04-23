@@ -16,30 +16,34 @@
 
   // Modèle de données
   include_once('modele/metier_profil.php');
+  include_once('modele/controles_profil.php');
+  include_once('modele/physique_profil.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
+      // Récupération des données du profil
       $profil = getProfile($_SESSION['user']['identifiant']);
       break;
 
     case 'doModifierAvatar':
-      // Mise à jour des données par le modèle & enregistrement fichier
+      // Modification de l'avatar
       updateAvatar($_SESSION['user']['identifiant'], $_FILES);
       break;
 
     case 'doSupprimerAvatar':
-      // Suppression des données par le modèle & suppression fichier
+      // Suppression de l'avatar
       deleteAvatar($_SESSION['user']['identifiant']);
       break;
 
     case 'doUpdateInfos':
+      // Mise à jour des informations
       updateInfos($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'doUpdatePassword':
+      // Mise à jour du mot de passe
       updatePassword($_SESSION['user']['identifiant'], $_POST);
       break;
 

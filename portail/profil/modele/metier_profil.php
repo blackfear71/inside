@@ -14,7 +14,7 @@
     $reponse = $bdd->query('SELECT * FROM users WHERE identifiant = "' . $user . '"');
     $donnees = $reponse->fetch();
 
-    // Instanciation d'un objet Profil à partir des données remontées de la bdd
+    // Instanciation d'un objet Profile à partir des données remontées de la bdd
     $profile = Profile::withData($donnees);
 
     $reponse->closeCursor();
@@ -154,7 +154,7 @@
     $reponse = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $user . '"');
     $donnees = $reponse->fetch();
 
-    // Instanciation d'un objet Profil à partir des données remontées de la bdd
+    // Instanciation d'un objet Profile à partir des données remontées de la bdd
     $preferences = Preferences::withData($donnees);
 
     $reponse->closeCursor();
@@ -320,7 +320,7 @@
       ));
       $req1->closeCursor();
 
-      // Mise à jour du pseudo stocké en SESSION
+      // Mise à jour de la session
       $_SESSION['user']['pseudo'] = $pseudo;
     }
 
