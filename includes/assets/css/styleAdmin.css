@@ -3195,16 +3195,17 @@
 	color: white;
 }
 
-.zone_generated_left, .zone_generated_right
+.zone_generated_left, .zone_generated_middle, .zone_generated_right
 {
 	display: inline-block;
-	width: calc(50% - 10px);
+	width: calc(100% / 3 - 13px);
 	vertical-align: top;
 }
 
 .zone_code_generator
 {
 	display: block;
+	margin-bottom: 20px;
 }
 
 .nom_fichier_generator
@@ -3242,20 +3243,6 @@
 	color: white;
 }
 
-.code_generator_controler
-{
-	width: calc(100% - 20px);
-	height: 400px;
-	min-height: 400px;
-	resize: vertical;
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	background-color: white;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	margin-bottom: 20px;
-}
-
 .code_generator_metier
 {
 	width: calc(100% - 20px);
@@ -3272,8 +3259,21 @@
 .code_generator_vue
 {
 	width: calc(100% - 20px);
-	height: 672px;
-	min-height: 672px;
+	height: 745px;
+	min-height: 745px;
+	resize: vertical;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	background-color: white;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.code_generator_controler
+{
+	width: calc(100% - 20px);
+	height: 745px;
+	min-height: 745px;
 	resize: vertical;
 	padding: 5px 10px 5px 10px;
 	border-radius: 2px;

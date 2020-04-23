@@ -19,19 +19,25 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
+      // Initialisation du générateur
       if (!isset($generatorParameters) AND !isset($_SESSION['generator']))
         $generatorParameters = initializeGenerator();
       else
       {
+        // Récupération des paramètres saisis
         $generatorParameters = getGenerator($_SESSION['generator']);
+
+        // Récupération des fichiers générés
         $controler           = getControler($generatorParameters);
         $metier              = getMetier($generatorParameters);
+        $controles           = getControles($generatorParameters);
+        $physique            = getPhysique($generatorParameters);
         $vue                 = getVue($generatorParameters);
       }
       break;
 
     case 'generateCode':
+      // Sauvegarde des paramètres saisis en session
       saveParameters($_POST);
       break;
 
@@ -66,9 +72,15 @@
       if (isset($metier))
         $metier['content'] = htmlspecialchars($metier['content']);
 
+      if (isset($controles))
+        $controles['content'] = htmlspecialchars($controles['content']);
+
+      if (isset($physique))
+        $physique['content'] = htmlspecialchars($physique['content']);
+
       if (isset($vue))
         $vue['content'] = htmlspecialchars($vue['content']);
-        
+
       break;
 
     case 'generateCode':

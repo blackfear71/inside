@@ -190,7 +190,9 @@
     }
 
     // Appel métier
-    $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nom_technique . '.php\');', $controler);
+    $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nom_technique . '.php\');
+  include_once(\'modele/controles_' . $nom_technique . '.php\');
+  include_once(\'modele/physique_' . $nom_technique . '.php\');', $controler);
 
     // Contrôle action URL renseignée
     $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nom_technique . '.php?action=goConsulter\');', $controler);
@@ -216,6 +218,38 @@
 
     // Retour
     return $metier;
+  }
+
+  // METIER : Formate le fichier Contrôles
+  // RETOUR : Fichier Contrôles
+  function getControles($generatorParameters)
+  {
+    // Initialisations
+    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file          = 'templates/controles.php';
+    $options       = array();
+    $controles     = array('filename' => 'controles_' . $nom_technique . '.php',
+                           'content'  => file_get_contents($file)
+                          );
+
+    // Retour
+    return $controles;
+  }
+
+  // METIER : Formate le fichier Physique
+  // RETOUR : Fichier Physique
+  function getPhysique($generatorParameters)
+  {
+    // Initialisations
+    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file          = 'templates/physique.php';
+    $options       = array();
+    $physique      = array('filename' => 'physique_' . $nom_technique . '.php',
+                           'content'  => file_get_contents($file)
+                          );
+
+    // Retour
+    return $physique;
   }
 
   // METIER : Formate le fichier Vue

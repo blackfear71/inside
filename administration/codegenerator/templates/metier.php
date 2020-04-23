@@ -1,47 +1,42 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/class.php');
 
   // METIER : Description de la fonction
   // RETOUR : Retour de la fonction
   function exempleFonction($parametres)
   {
-    $retour = NULL;
-    $id     = 1;
+    // Initialisations
+    $control_ok = true;
+    $retour     = NULL;
+
+    // Récupération des données
+    $id     = $parametres;
     $champ1 = 'champ1';
     $champ2 = 'champ2';
 
-    global $bdd;
+    // Sauvegarde en session en cas d'erreur
+    $_SESSION['save']['fonction'] = $id;
 
-    // Lecture BDD
-    $reponse = $bdd->query('SELECT * FROM table WHERE id = ' . $id . ' ORDER BY id DESC');
-    while ($donnees = $reponse->fetch())
-    {
-      $myDatas = Class::withData($donnees);
+    // Contrôle
+    $control_ok = controleFonction($champ1, $champ2);
 
-      array_push($retour, $myDatas);
-    }
-    $reponse->closeCursor();
+    // Lecture
+    if ($control_ok == true)
+      $retour = physiqueSelect($id);
 
-    // Insertion BDD
-    $reponse = $bdd->prepare('INSERT INTO table(champ1, champ2) VALUES(:champ1, :champ2)');
-    $reponse->execute(array(
-      'champ1' => $champ1,
-      'champ2' => $champ2
-    ));
-    $reponse->closeCursor();
+    // Insertion de l'enregistrement en base
+    if ($control_ok == true)
+      physiqueInsert($champ1, $champ2);
 
-    // Mise à jour BDD
-    $reponse = $bdd->prepare('UPDATE table SET champ1 = :champ1, champ2 = :champ2 WHERE id = ' . $id);
-    $reponse->execute(array(
-      'champ1' => $champ1,
-      'champ2' => $champ2
-    ));
-    $reponse->closeCursor();
+    // Modification de l'enregistrement en base
+    if ($control_ok == true)
+      physiqueUpdate($champ1, $champ2, $id);
 
-    // Suppression BDD
-    $reponse = $bdd->exec('DELETE FROM table WHERE id = ' . $id);
+    // Suppression de l'enregistrement en base
+    if ($control_ok == true)
+      physiqueDelete($id);
 
+    // Retour
     return $retour;
   }
 ?>
