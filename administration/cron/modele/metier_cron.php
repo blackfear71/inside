@@ -3,71 +3,90 @@
   // RETOUR : Tableau fichiers logs
   function getLastLogs()
   {
-    $logsJ = array();
-    $logsH = array();
+    // Initialisations
+    $logsJournalier   = array();
+    $logsHebdomadaire = array();
 
     // Récupération fichiers journaliers et tri
-    $dirJ   = '../../cron/logs/daily';
+    $dirJournalier= '../../cron/logs/daily';
 
-    if (is_dir($dirJ))
+    if (is_dir($dirJournalier))
     {
-      $filesJ = scandir($dirJ, 1);
+      // Récupération liste des fichiers journaliers par ordre décroissant
+      $filesJournalier = scandir($dirJournalier, 1);
 
-      // Suppression racines de dossier
-      unset($filesJ[array_search('..', $filesJ)]);
-      unset($filesJ[array_search('.', $filesJ)]);
+      // Suppression des racines de dossier
+      unset($filesJournalier[array_search('..', $filesJournalier)]);
+      unset($filesJournalier[array_search('.', $filesJournalier)]);
 
-      if (!empty($filesJ))
+      if (!empty($filesJournalier))
       {
-        // Tri sur date
-        foreach ($filesJ as $fileJ)
+        // Récupération du tri sur date et heure
+        foreach ($filesJournalier as $fileJournalier)
         {
-          $tri_anneeJ[]   = substr($fileJ, 12, 4);
-          $tri_moisJ[]    = substr($fileJ, 9, 2);
-          $tri_jourJ[]    = substr($fileJ, 6, 2);
-          $tri_heureJ[]   = substr($fileJ, 17, 2);
-          $tri_minuteJ[]  = substr($fileJ, 20, 2);
-          $tri_secondeJ[] = substr($fileJ, 23, 2);
+          $triAnneeJournalier[]   = substr($fileJournalier, 12, 4);
+          $triMoisJournalier[]    = substr($fileJournalier, 9, 2);
+          $triJourJournalier[]    = substr($fileJournalier, 6, 2);
+          $triHeureJournalier[]   = substr($fileJournalier, 17, 2);
+          $triMinuteJournalier[]  = substr($fileJournalier, 20, 2);
+          $triSecondeJournalier[] = substr($fileJournalier, 23, 2);
         }
 
-        array_multisort($tri_anneeJ, SORT_DESC, $tri_moisJ, SORT_DESC, $tri_jourJ, SORT_DESC, $tri_heureJ, SORT_DESC, $tri_minuteJ, SORT_DESC, $tri_secondeJ, SORT_DESC, $filesJ);
+        // Tri
+        array_multisort($triAnneeJournalier, SORT_DESC,
+                        $triMoisJournalier, SORT_DESC,
+                        $triJourJournalier, SORT_DESC,
+                        $triHeureJournalier, SORT_DESC,
+                        $triMinuteJournalier, SORT_DESC,
+                        $triSecondeJournalier, SORT_DESC,
+                        $filesJournalier);
       }
 
-      $logsJ = array_slice($filesJ, 0, 10);
+      $logsJournalier = array_slice($filesJournalier, 0, 10);
     }
 
     // Récupération fichiers hebdomadaires et tri
-    $dirH   = '../../cron/logs/weekly';
+    $dirHebdomadaire = '../../cron/logs/weekly';
 
-    if (is_dir($dirH))
+    if (is_dir($dirHebdomadaire))
     {
-      $filesH = scandir($dirH, 1);
+      // Récupération fichiers hebdomadaires et tri
+      $filesHebdomadaire = scandir($dirHebdomadaire, 1);
 
-      // Suppression racines de dossier
-      unset($filesH[array_search('..', $filesH)]);
-      unset($filesH[array_search('.', $filesH)]);
+      // Suppression des racines de dossier
+      unset($filesHebdomadaire[array_search('..', $filesHebdomadaire)]);
+      unset($filesHebdomadaire[array_search('.', $filesHebdomadaire)]);
 
-      if (!empty($filesH))
+      if (!empty($filesHebdomadaire))
       {
-        // Tri sur date
-        foreach ($filesH as $fileH)
+        // Récupération du tri sur date et heure
+        foreach ($filesHebdomadaire as $fileHebdomadaire)
         {
-          $tri_anneeH[]   = substr($fileH, 12, 4);
-          $tri_moisH[]    = substr($fileH, 9, 2);
-          $tri_jourH[]    = substr($fileH, 6, 2);
-          $tri_heureH[]   = substr($fileH, 17, 2);
-          $tri_minuteH[]  = substr($fileH, 20, 2);
-          $tri_secondeH[] = substr($fileH, 23, 2);
+          $triAnneeHebdomadaire[]   = substr($fileHebdomadaire, 12, 4);
+          $triMoisHebdomadaire[]    = substr($fileHebdomadaire, 9, 2);
+          $triJourHebdomadaire[]    = substr($fileHebdomadaire, 6, 2);
+          $triHeureHebdomadaire[]   = substr($fileHebdomadaire, 17, 2);
+          $triMinuteHebdomadaire[]  = substr($fileHebdomadaire, 20, 2);
+          $triSecondeHebdomadaire[] = substr($fileHebdomadaire, 23, 2);
         }
 
-        array_multisort($tri_anneeH, SORT_DESC, $tri_moisH, SORT_DESC, $tri_jourH, SORT_DESC, $tri_heureH, SORT_DESC, $tri_minuteH, SORT_DESC, $tri_secondeH, SORT_DESC, $filesH);
+        // Tri
+        array_multisort($triAnneeHebdomadaire, SORT_DESC,
+                        $triMoisHebdomadaire, SORT_DESC,
+                        $triJourHebdomadaire, SORT_DESC,
+                        $triHeureHebdomadaire, SORT_DESC,
+                        $triMinuteHebdomadaire, SORT_DESC,
+                        $triSecondeHebdomadaire, SORT_DESC,
+                        $filesHebdomadaire);
       }
 
-      $logsH = array_slice($filesH, 0, 10);
+      $logsHebdomadaire = array_slice($filesHebdomadaire, 0, 10);
     }
 
-    $files = array('daily' => $logsJ, 'weekly' => $logsH);
+    // Ajout des logs au tableau
+    $files = array('daily' => $logsJournalier, 'weekly' => $logsHebdomadaire);
 
+    // Retour
     return $files;
   }
 ?>

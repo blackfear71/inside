@@ -20,6 +20,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Récupération des 10 derniers logs journaliers et hebdomadaires
       $files = getLastLogs();
       break;
 
