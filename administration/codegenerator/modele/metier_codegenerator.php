@@ -5,6 +5,7 @@
   // RETOUR : Options
   function initializeOptions()
   {
+    // Liste des options
     $options = array(array('option' => 'common',     'checked' => 'Y', 'titre' => 'Fonctions communes', 'categorie' => 'Contrôleur'),
                      array('option' => 'dates',      'checked' => 'N', 'titre' => 'Fonctions dates',    'categorie' => 'Contrôleur'),
                      array('option' => 'regex',      'checked' => 'N', 'titre' => 'Fonctions regex',    'categorie' => 'Contrôleur'),
@@ -19,6 +20,7 @@
                      array('option' => 'success',    'checked' => 'Y', 'titre' => 'Déblocage succès',   'categorie' => 'Vue')
                     );
 
+    // Retour
     return $options;
   }
 
@@ -30,9 +32,10 @@
     $generatorParameters = new GeneratorParameters();
     $generatorOptions    = array();
 
-    // Options
+    // Récupération des options
     $options = initializeOptions();
 
+    // Génération des options sous forme d'objet
     foreach ($options as $option)
     {
       $generatorOption = new GeneratorOptions();
@@ -42,12 +45,14 @@
       $generatorOption->setTitre($option['titre']);
       $generatorOption->setCategorie($option['categorie']);
 
+      // Ajout à la liste des options
       array_push($generatorOptions, $generatorOption);
     }
 
     // Ajout à l'objet GeneratorParameters
     $generatorParameters->setOptions($generatorOptions);
 
+    // Retour
     return $generatorParameters;
   }
 
@@ -55,8 +60,10 @@
   // Retour : Aucun
   function saveParameters($post)
   {
+    // Récupération des options
     $options = initializeOptions();
 
+    // Sauvegarde en session
     $_SESSION['generator']['nom_fonctionnel']   = $_POST['nom_fonctionnel'];
     $_SESSION['generator']['nom_technique']     = $_POST['nom_technique'];
     $_SESSION['generator']['nom_head']          = $_POST['nom_head'];
@@ -90,9 +97,10 @@
     $generatorParameters->setStyle_specifique($parametres['style_specifique']);
     $generatorParameters->setScript_specifique($parametres['script_specifique']);
 
-    // Options
+    // Récupération des options
     $options = initializeOptions();
 
+    // Génération des options sous forme d'objet
     foreach ($options as $option)
     {
       $generatorOption = new GeneratorOptions();
@@ -106,6 +114,7 @@
       else
         $generatorOption->setChecked('N');
 
+      // Ajout à la liste des options
       array_push($generatorOptions, $generatorOption);
     }
 
@@ -189,6 +198,7 @@
     // Redirection affichage
     $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nom_technique . '.php\');', $controler);
 
+    // Retour
     return $controler;
   }
 
@@ -204,6 +214,7 @@
                            'content'  => file_get_contents($file)
                           );
 
+    // Retour
     return $metier;
   }
 
@@ -330,6 +341,7 @@
     else
       $vue = str_replace('/*chat*/', '', $vue);
 
+    // Retour
     return $vue;
   }
 ?>
