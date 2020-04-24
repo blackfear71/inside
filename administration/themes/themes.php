@@ -34,11 +34,11 @@
   {
     unset($_SESSION['save']);
 
-    $_SESSION['save']['theme_title']    = "";
-    $_SESSION['save']['theme_ref']      = "";
-    $_SESSION['save']['theme_level']    = "";
-    $_SESSION['save']['theme_date_deb'] = "";
-    $_SESSION['save']['theme_date_fin'] = "";
+    $_SESSION['save']['theme_title']    = '';
+    $_SESSION['save']['theme_ref']      = '';
+    $_SESSION['save']['theme_level']    = '';
+    $_SESSION['save']['theme_date_deb'] = '';
+    $_SESSION['save']['theme_date_fin'] = '';
   }
 
   // Appel métier
@@ -46,23 +46,23 @@
   {
     case 'goConsulter':
       // Récupération des thèmes utilisateurs
-      $themes_users    = getThemes("U");
+      $themes_users    = getThemes('U');
 
       // Récupération des thèmes de missions
-      $themes_missions = getThemes("M");
+      $themes_missions = getThemes('M');
       break;
 
-		case "doAjouter":
+		case 'doAjouter':
       // Ajout d'un nouveau thème
       $id_theme = insertTheme($_POST, $_FILES);
 			break;
 
-    case "doModifier":
+    case 'doModifier':
       // Mise à jour d'un thème
       $id_theme = updateTheme($_POST);
 			break;
 
-		case "doSupprimer":
+		case 'doSupprimer':
       // Suppression d'un thème
       deleteTheme($_POST);
 			break;
@@ -110,9 +110,9 @@
       }
       break;
 
-    case "doAjouter":
-		case "doModifier":
-		case "doSupprimer":
+    case 'doAjouter':
+		case 'doModifier':
+		case 'doSupprimer':
     default:
       break;
   }
@@ -120,15 +120,15 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAjouter":
-    case "doModifier":
+    case 'doAjouter':
+    case 'doModifier':
       if (!empty($id_theme))
         header ('location: themes.php?action=goConsulter&anchorTheme=' . $id_theme);
       else
         header ('location: themes.php?action=goConsulter');
       break;
 
-		case "doSupprimer":
+		case 'doSupprimer':
 			header ('location: themes.php?action=goConsulter');
 			break;
 

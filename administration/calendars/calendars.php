@@ -36,7 +36,7 @@
       $alerteAnnexes           = getAlerteAnnexes();
       break;
 
-    case "doUpdateAutorisations":
+    case 'doUpdateAutorisations':
       // Récupération de la liste des utilisateurs
       $listeUsers = getUsers();
 
@@ -44,22 +44,22 @@
       updateAutorisations($_POST, $listeUsers);
       break;
 
-		case "doDeleteCalendrier":
+		case 'doDeleteCalendrier':
       // Suppression d'un calendrier
 			deleteCalendrier($_POST);
 			break;
 
-    case "doDeleteAnnexe":
+    case 'doDeleteAnnexe':
       // Suppression d'une annexe
       deleteAnnexe($_POST);
       break;
 
-		case "doResetCalendrier":
+		case 'doResetCalendrier':
       // Annulation de la demande de suppression d'un calendrier
 			resetCalendrier($_POST);
 			break;
 
-    case "doResetAnnexe":
+    case 'doResetAnnexe':
       // Annulation de la demande de suppression d'une annexe
       resetAnnexe($_POST);
       break;
@@ -103,11 +103,11 @@
       unset($preference);
       break;
 
-    case "doUpdateAutorisations":
-    case "doDeleteCalendrier":
-		case "doDeleteAnnexe":
-		case "doResetCalendrier":
-    case "doResetAnnexe":
+    case 'doUpdateAutorisations':
+    case 'doDeleteCalendrier':
+		case 'doDeleteAnnexe':
+		case 'doResetCalendrier':
+    case 'doResetAnnexe':
     default:
       break;
   }
@@ -115,11 +115,11 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doUpdateAutorisations":
-		case "doDeleteCalendrier":
-    case "doDeleteAnnexe":
-		case "doResetCalendrier":
-    case "doResetAnnexe":
+    case 'doUpdateAutorisations':
+		case 'doDeleteCalendrier':
+    case 'doDeleteAnnexe':
+		case 'doResetCalendrier':
+    case 'doResetAnnexe':
 			header ('location: calendars.php?action=goConsulter');
 			break;
 

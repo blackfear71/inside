@@ -129,8 +129,8 @@
     $calendars = physiqueDonneesCalendars($idCalendars, 'calendars');
 
     // Suppression des images
-    unlink("../../includes/images/calendars/" . $calendars->getYear() . "/" . $calendars->getCalendar());
-    unlink("../../includes/images/calendars/" . $calendars->getYear() . "/mini/" . $calendars->getCalendar());
+    unlink('../../includes/images/calendars/' . $calendars->getYear() . '/' . $calendars->getCalendar());
+    unlink('../../includes/images/calendars/' . $calendars->getYear() . '/mini/' . $calendars->getCalendar());
 
     // Suppression de l'enregistrement en base
     physiqueDeleteCalendrier($idCalendars);
@@ -153,8 +153,8 @@
     $calendars = physiqueDonneesCalendars($idCalendars, 'calendars_annexes');
 
     // Suppression des images
-    unlink("../../includes/images/calendars/annexes/" . $calendars->getAnnexe());
-    unlink("../../includes/images/calendars/annexes/mini/" . $calendars->getAnnexe());
+    unlink('../../includes/images/calendars/annexes/' . $calendars->getAnnexe());
+    unlink('../../includes/images/calendars/annexes/mini/' . $calendars->getAnnexe());
 
     // Suppression de l'enregistrement en base
     physiqueDeleteAnnexe($idCalendars);

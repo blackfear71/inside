@@ -24,10 +24,10 @@
   {
     unset($_SESSION['save']);
 
-    $_SESSION['save']['type_alert']      = "";
-    $_SESSION['save']['category_alert']  = "";
-    $_SESSION['save']['reference_alert'] = "";
-    $_SESSION['save']['message_alert']   = "";
+    $_SESSION['save']['type_alert']      = '';
+    $_SESSION['save']['category_alert']  = '';
+    $_SESSION['save']['reference_alert'] = '';
+    $_SESSION['save']['message_alert']   = '';
   }
 
   // Appel métier
@@ -38,17 +38,17 @@
       $listeAlertes = getAlerts();
       break;
 
-    case "doAjouter":
+    case 'doAjouter':
       // Insertion d'une nouvelle alerte
       $idAlerte = insertAlert($_POST);
       break;
 
-		case "doModifier":
+		case 'doModifier':
       // Mise à jour d'une alerte
 			$idAlerte = updateAlert($_POST);
 			break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
       // Suppression d'une alerte
       deleteAlert($_POST);
       break;
@@ -74,9 +74,9 @@
       unset($alerte);
       break;
 
-    case "doAjouter":
-    case "doModifier":
-		case "doSupprimer":
+    case 'doAjouter':
+    case 'doModifier':
+		case 'doSupprimer':
     default:
       break;
   }
@@ -84,18 +84,18 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAjouter":
+    case 'doAjouter':
       if (!empty($idAlerte))
         header('location: alerts.php?action=goConsulter&anchorAlerts=' . $idAlerte);
       else
         header('location: alerts.php?action=goConsulter');
       break;
 
-    case "doModifier":
+    case 'doModifier':
       header('location: alerts.php?action=goConsulter&anchorAlerts=' . $idAlerte);
       break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
       header('location: alerts.php?action=goConsulter');
       break;
 

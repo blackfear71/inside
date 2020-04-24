@@ -26,9 +26,9 @@
 	{
     unset($_SESSION['save']);
 
-		$_SESSION['save']['user_ask_id']   = "";
-		$_SESSION['save']['user_ask_name'] = "";
-		$_SESSION['save']['new_password']  = "";
+		$_SESSION['save']['user_ask_id']   = '';
+		$_SESSION['save']['user_ask_name'] = '';
+		$_SESSION['save']['new_password']  = '';
 	}
 
   // Appel métier
@@ -52,32 +52,32 @@
 			$totalStats       = getTotalStats();
       break;
 
-    case "doAnnulerMdp":
+    case 'doAnnulerMdp':
       // Annulation de la réinitialisation du mot de passe
       resetOldPassword($_POST);
       break;
 
-    case "doChangerMdp":
+    case 'doChangerMdp':
       // Réinitialisation du mot de passe
       setNewPassword($_POST);
       break;
 
-    case "doAccepterInscription":
+    case 'doAccepterInscription':
       // Validation de l'inscription
       acceptInscription($_POST);
       break;
 
-    case "doRefuserInscription":
+    case 'doRefuserInscription':
       // Refus de l'inscription
       declineInscription($_POST);
       break;
 
-    case "doAccepterDesinscription":
+    case 'doAccepterDesinscription':
       // Validation de la désinscription
       acceptDesinscription($_POST);
       break;
 
-    case "doRefuserDesinscription":
+    case 'doRefuserDesinscription':
       // Refus de la désinscription
       resetDesinscription($_POST);
       break;
@@ -166,12 +166,12 @@
 			$totalStats['nombreTheBoxTerminees'] = htmlspecialchars($totalStats['nombreTheBoxTerminees']);
       break;
 
-    case "doAnnulerMdp":
-    case "doChangerMdp":
-    case "doAccepterInscription":
-    case "doRefuserInscription":
-    case "doAccepterDesinscription":
-    case "doRefuserDesinscription":
+    case 'doAnnulerMdp':
+    case 'doChangerMdp':
+    case 'doAccepterInscription':
+    case 'doRefuserInscription':
+    case 'doAccepterDesinscription':
+    case 'doRefuserDesinscription':
     default:
       break;
   }
@@ -179,12 +179,12 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAnnulerMdp":
-    case "doChangerMdp":
-    case "doAccepterInscription":
-    case "doRefuserInscription":
-    case "doAccepterDesinscription":
-    case "doRefuserDesinscription":
+    case 'doAnnulerMdp':
+    case 'doChangerMdp':
+    case 'doAccepterInscription':
+    case 'doRefuserInscription':
+    case 'doAccepterDesinscription':
+    case 'doRefuserDesinscription':
       header('location: manageusers.php?action=goConsulter');
       break;
 

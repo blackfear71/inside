@@ -260,20 +260,20 @@
     $nom_fonctionnel = trim($generatorParameters->getNom_section());
     $nom_head        = trim($generatorParameters->getNom_head());
 
-    $search  = array(" ", ".css", ".js");
-    $replace = array("_", "", "");
+    $search  = array(' ', '.css', '.js');
+    $replace = array('_', '', '');
 
     $nom_technique = str_replace($search, $replace, trim($generatorParameters->getNom_technique()));
 
     if (!empty($generatorParameters->getStyle_specifique()))
-      $style_specifique = str_replace($search, $replace, trim($generatorParameters->getStyle_specifique())) . ".css";
+      $style_specifique = str_replace($search, $replace, trim($generatorParameters->getStyle_specifique())) . '.css';
     else
-      $style_specifique = "";
+      $style_specifique = '';
 
     if (!empty($generatorParameters->getStyle_specifique()))
-      $script_specifique = str_replace($search, $replace, trim($generatorParameters->getScript_specifique())) . ".js";
+      $script_specifique = str_replace($search, $replace, trim($generatorParameters->getScript_specifique())) . '.js';
     else
-      $script_specifique = "";
+      $script_specifique = '';
 
     $file    = 'templates/vue.php';
     $options = array();

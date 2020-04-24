@@ -27,12 +27,12 @@
 			$alerteFilms      = getAlerteFilms();
       break;
 
-		case "doDeleteFilm":
+		case 'doDeleteFilm':
       // Suppression d'un film
 			deleteFilm($_POST);
 			break;
 
-		case "doResetFilm":
+		case 'doResetFilm':
       // Annulation de la demande de suppression d'un film
 			resetFilm($_POST);
 			break;
@@ -77,8 +77,8 @@
       unset($film);
       break;
 
-		case "doDeleteFilm":
-		case "doResetFilm":
+		case 'doDeleteFilm':
+		case 'doResetFilm':
     default:
       break;
   }
@@ -86,8 +86,8 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-		case "doDeleteFilm":
-		case "doResetFilm":
+		case 'doDeleteFilm':
+		case 'doResetFilm':
 			header ('location: movies.php?action=goConsulter');
 			break;
 

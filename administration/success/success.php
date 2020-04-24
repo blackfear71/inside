@@ -34,25 +34,25 @@
   {
 		unset($_SESSION['save']);
 
-    $_SESSION['save']['reference_success']   = "";
-		$_SESSION['save']['level']               = "";
-    $_SESSION['save']['unicity']             = "";
-		$_SESSION['save']['order_success']       = "";
-    $_SESSION['save']['title_success']       = "";
-    $_SESSION['save']['description_success'] = "";
-    $_SESSION['save']['limit_success']       = "";
-		$_SESSION['save']['explanation_success'] = "";
+    $_SESSION['save']['reference_success']   = '';
+		$_SESSION['save']['level']               = '';
+    $_SESSION['save']['unicity']             = '';
+		$_SESSION['save']['order_success']       = '';
+    $_SESSION['save']['title_success']       = '';
+    $_SESSION['save']['description_success'] = '';
+    $_SESSION['save']['limit_success']       = '';
+		$_SESSION['save']['explanation_success'] = '';
   }
 
   // Appel métier
   switch ($_GET['action'])
   {
-    case "goConsulter":
+    case 'goConsulter':
       // Récupération de la liste des succès
 			$listeSuccess = getSuccess();
       break;
 
-    case "goModifier":
+    case 'goModifier':
       // Récupération de la liste des succès
       $listeSuccess = getSuccess();
 
@@ -63,22 +63,22 @@
         $listeSuccess = initModErrSucces($listeSuccess, $_SESSION['save']['save_success']);
       break;
 
-    case "doAjouter":
+    case 'doAjouter':
 			// Ajout d'un nouveau succès
       insertSuccess($_POST, $_FILES);
       break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
 			// Suppression d'un succès
       deleteSuccess($_POST);
       break;
 
-    case "doModifier":
+    case 'doModifier':
 			// Mise à jour de tous les succès
       $erreurUpdateSuccess = updateSuccess($_POST);
       break;
 
-		case "doInitialiser":
+		case 'doInitialiser':
 			// Récupération de la liste des utilisateurs
 			$listeUsers   = getUsers();
 
@@ -89,7 +89,7 @@
 			initializeSuccess($listeSuccess, $listeUsers);
 			break;
 
-		case "doPurger":
+		case 'doPurger':
 			// Purge des succès
 			purgeSuccess();
 			break;
@@ -121,11 +121,11 @@
 			unset($success);
       break;
 
-    case "doAjouter":
-    case "doSupprimer":
-    case "doModifier":
-		case "doInitialiser":
-		case "doPurger":
+    case 'doAjouter':
+    case 'doSupprimer':
+    case 'doModifier':
+		case 'doInitialiser':
+		case 'doPurger':
     default:
       break;
   }
@@ -133,17 +133,17 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doModifier":
+    case 'doModifier':
 			if ($erreurUpdateSuccess == true)
         header('location: success.php?error=true&action=goModifier');
       else
         header('location: success.php?action=goConsulter');
       break;
 
-    case "doAjouter":
-    case "doSupprimer":
-		case "doInitialiser":
-		case "doPurger":
+    case 'doAjouter':
+    case 'doSupprimer':
+		case 'doInitialiser':
+		case 'doPurger':
 			header('location: success.php?action=goConsulter');
 			break;
 

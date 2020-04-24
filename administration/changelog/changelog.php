@@ -39,7 +39,7 @@
         $errorChangelog = controlChangeLog($changeLogParameters);
 
         // Récupération des données en cas de modification ou suppression
-        if ($errorChangelog == false AND ($changeLogParameters->getAction() == "M" OR $changeLogParameters->getAction() == "S"))
+        if ($errorChangelog == false AND ($changeLogParameters->getAction() == 'M' OR $changeLogParameters->getAction() == 'S'))
           $changeLog = getChangeLog($changeLogParameters, $categoriesChangeLog);
       }
       break;
