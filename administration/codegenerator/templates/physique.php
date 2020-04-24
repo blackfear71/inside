@@ -25,7 +25,8 @@
 
       array_push($retour, $myDatas);
     }
-    $reponse->closeCursor();
+
+    $req->closeCursor();
 
     // Retour
     return $retour;
@@ -62,10 +63,10 @@
     // Requête
     global $bdd;
 
-    $reponse = $bdd->prepare('UPDATE table
-                              SET champ1 = :champ1,
-                                  champ2 = :champ2
-                              WHERE id = ' . $id);
+    $req = $bdd->prepare('UPDATE table
+                          SET champ1 = :champ1,
+                              champ2 = :champ2
+                          WHERE id = ' . $id);
 
     $req->execute(array(
       'champ1' => $champ1,
