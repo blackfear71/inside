@@ -288,3 +288,55 @@ footer
 	right: 0;
 	z-index: 2;
 }
+
+.version
+{
+	display: inline-block;
+	line-height: 7vh;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+}
+
+.zone_footer_right
+{
+	float: right;
+}
+
+.link_footer
+{
+	display: inline-block;
+  vertical-align: top;
+	width: 8vh;
+	height: 7vh;
+	background-color: #262626;
+}
+
+.link_footer:hover
+{
+	background-color: #1b1b1b;
+}
+
+.icone_footer
+{
+	display: block;
+  vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+  margin-top: 1.5vh;
+	width: 4vh;
+	height: 4vh;
+}
+
+.copyright
+{
+	display: inline-block;
+  line-height: 7vh;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 2vh;
+  color: white;
+  text-align: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}

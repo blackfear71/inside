@@ -43,23 +43,7 @@
 
     <!-- Pied de page -->
     <footer>
-      <?php
-        // Zone footer index
-        echo '<div class="zone_footer_index_right">';
-          // Basculement mobile
-          $footerMobile = isMobile();
-
-          if ($footerMobile == true)
-          {
-            echo '<a href="includes/functions/switch_mobile.php" class="link_footer_index" title="Basculer vers la version web">';
-              echo '<img src="includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version web" class="icone_footer_index" />';
-            echo '</a>';
-          }
-
-          // Copyright
-          echo '<div class="copyright_index">© 2017-' . date("Y") . ' Inside</div>';
-        echo '<div>';
-      ?>
-    </footer>
+			<?php include('includes/common/footer.php'); ?>
+		</footer>
   </body>
 </html>

@@ -142,29 +142,8 @@
     </section>
 
     <!-- Pied de page -->
-    <footer class="footer_index">
-      <?php
-        // Zone footer index
-        echo '<div class="zone_footer_index_right">';
-          // Basculement mobile
-          $footerMobile = isMobile();
-
-          if ($footerMobile == true)
-          {
-            echo '<a href="includes/functions/switch_mobile.php" class="link_footer_index" title="Basculer vers la version mobile">';
-              echo '<img src="includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer_index" />';
-            echo '</a>';
-          }
-
-          // Copyright
-          echo '<div class="copyright_index">© 2017-' . date("Y") . ' Inside</div>';
-        echo '<div>';
-      ?>
-    </footer>
-
-    <script>
-      // Initialisation du thème pour le script
-      var themeUser = null;
-    </script>
+		<footer>
+			<?php include('includes/common/footer.php'); ?>
+		</footer>
   </body>
 </html>
