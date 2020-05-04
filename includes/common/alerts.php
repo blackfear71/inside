@@ -1,39 +1,6 @@
 <?php
-  // Initialisation des messages d'alerte
-  $messages = array();
-
-  if (isset($_SESSION['alerts'])AND !empty($_SESSION['alerts']))
-  {
-    // Initialisation variables d'alerte
-    foreach ($_SESSION['alerts'] as $key_alert => $alert)
-    {
-      if ($alert != true)
-        unset($_SESSION['alerts'][$key_alert]);
-    }
-
-    // Boucle de lecture des messages d'alerte
-    foreach ($_SESSION['alerts'] as $key_alert => $alert)
-    {
-      if (isset($alert) AND $alert == true)
-      {
-        $reponse = $bdd->query('SELECT * FROM alerts WHERE alert = "' . $key_alert . '"');
-        $donnees = $reponse->fetch();
-
-        // On ajoute la ligne au tableau (logo + message)
-        if ($reponse->rowCount() > 0)
-          $ligneMessage = array('logo' => $donnees['type'], 'texte' => $donnees['message']);
-        else
-          $ligneMessage = array('logo' => 'question', 'texte' => 'Message d\'alerte non défini pour : ' . $key_alert);
-
-        array_push($messages, $ligneMessage);
-
-        $reponse->closeCursor();
-
-        // Réinitialisation de l'erreur
-        unset($_SESSION['alerts'][$key_alert]);
-      }
-    }
-  }
+  // Récupération des messages d'alerte
+  $messages = getAlertesInside();
 
   // Affichage des messages
   if (!empty($messages))
