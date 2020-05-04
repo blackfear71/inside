@@ -297,6 +297,7 @@ footer
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
+	font-size: 2vh;
 }
 
 .zone_footer_right
@@ -337,6 +338,6 @@ footer
   font-size: 2vh;
   color: white;
   text-align: left;
-	margin-left: 20px;
-	margin-right: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
