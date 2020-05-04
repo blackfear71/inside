@@ -17,10 +17,10 @@
   if (isset($datepicker_head) AND $datepicker_head == true)
     $last_modification_css_datepicker = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/libraries/css/datepicker.css');
 
-  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/script.js');
+  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $platform . '/script.js');
 
   if (!empty($script_head))
-    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $script_head);
+    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $platform . '/' . $script_head);
 
   // Meta-données
   echo '<meta charset="utf-8" />';
@@ -51,7 +51,7 @@
 <!-- Scripts communs -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-<script src="/inside/includes/assets/js/script.js?version=<?php echo $last_modification_js; ?>"></script>
+<script src="/inside/includes/assets/js/<?php echo $platform; ?>/script.js?version=<?php echo $last_modification_js; ?>"></script>
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
@@ -62,11 +62,11 @@
 <?php } ?>
 
 <?php if (!empty($script_head)) { ?>
-  <script src="/inside/includes/assets/js/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $platform; ?>/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
 <?php } ?>
 
 <?php if (isset($chat_head) AND $chat_head == true) { ?>
-  <script src="/inside/includes/assets/js/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $platform; ?>/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
 <?php } ?>
 
 <?php if (isset($masonry_head) AND $masonry_head == true) { ?>

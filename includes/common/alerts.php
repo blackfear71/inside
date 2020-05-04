@@ -38,44 +38,49 @@
   // Affichage des messages
   if (!empty($messages))
   {
-    echo '<div class="message_alerte" id="alerte">';
-      echo '<div class="inside_alerte">';
-        echo 'Inside';
-      echo '</div>';
+    echo '<div class="fond_alerte" id="alerte">';
+      echo '<div class="zone_affichage_alerte">';
+        // Titre
+        echo '<div class="titre_alerte">';
+          echo 'Inside';
+        echo '</div>';
 
-      echo '<div class="zone_alertes">';
-        foreach ($messages as $message)
-        {
-          echo '<div class="zone_alerte">';
-            // Icône
-            switch ($message['logo'])
-            {
-              case "erreur":
-                echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Erreur" class="logo_alerte" />';
-                break;
+        // Affichage des alertes
+        echo '<div class="zone_alertes">';
+          foreach ($messages as $message)
+          {
+            echo '<div class="zone_texte_alerte">';
+              // Icône
+              switch ($message['logo'])
+              {
+                case "erreur":
+                  echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Erreur" class="logo_alerte" />';
+                  break;
 
-              case "info":
-                echo '<img src="/inside/includes/icons/common/info.png" alt="info" title="Information" class="logo_alerte" />';
-                break;
+                case "info":
+                  echo '<img src="/inside/includes/icons/common/info.png" alt="info" title="Information" class="logo_alerte" />';
+                  break;
 
-              case "question":
-                echo '<img src="/inside/includes/icons/common/question.png" alt="question" title="Inconnu" class="logo_alerte" />';
-                break;
+                case "question":
+                  echo '<img src="/inside/includes/icons/common/question.png" alt="question" title="Inconnu" class="logo_alerte" />';
+                  break;
 
-              default:
-                break;
-            }
+                default:
+                  break;
+              }
 
-            // Texte
-            echo '<div class="texte_alerte">';
-              echo $message['texte'];
+              // Texte
+              echo '<div class="texte_alerte">';
+                echo $message['texte'];
+              echo '</div>';
             echo '</div>';
-          echo '</div>';
-        }
-      echo '</div>';
+          }
+        echo '</div>';
 
-      echo '<div class="boutons_alerte">';
-        echo '<a id="boutonFermerAlerte" class="bouton_alerte">Fermer</a>';
+        // Bouton
+        echo '<div class="boutons_alerte">';
+          echo '<a id="boutonFermerAlerte" class="bouton_alerte">Fermer</a>';
+        echo '</div>';
       echo '</div>';
     echo '</div>';
 

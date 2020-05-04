@@ -874,7 +874,19 @@ aside
 	}
 }
 
-.message_alerte
+.fond_alerte
+{
+	background-color: rgb(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.zone_affichage_alerte
 {
 	animation: 0.5s ease 0s normal forwards 1 affichageAlerte;
 	width: 500px;
@@ -887,7 +899,7 @@ aside
 	overflow: hidden;
 }
 
-.inside_alerte
+.titre_alerte
 {
 	width: 460px;
 	height: 50px;
@@ -910,7 +922,7 @@ aside
 	border-top: solid 1px #ff4961;
 }
 
-.zone_alerte
+.zone_texte_alerte
 {
 	display: block;
 	margin-bottom: 5px;
