@@ -27,7 +27,6 @@
           echo '<div class="zone_index">';
             echo '<div class="zone_index_left">';
               // Logo Inside
-
               if ($error_inscription == true OR $error_password == true)
                 echo '<div id="logo" class="zone_logo_index" style="display: none;">';
               else
@@ -145,8 +144,21 @@
     <!-- Pied de page -->
     <footer class="footer_index">
       <?php
-        // Copyright
-        echo '<div class="copyright_index">© 2017-' . date("Y") . ' Inside</div>';
+        // Zone footer index
+        echo '<div class="zone_footer_index_right">';
+          // Basculement mobile
+          $footerMobile = isMobile();
+
+          if ($footerMobile == true)
+          {
+            echo '<a href="includes/functions/switch_mobile.php" class="link_footer_index" title="Basculer vers la version mobile">';
+              echo '<img src="includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer_index" />';
+            echo '</a>';
+          }
+
+          // Copyright
+          echo '<div class="copyright_index">© 2017-' . date("Y") . ' Inside</div>';
+        echo '<div>';
       ?>
     </footer>
 

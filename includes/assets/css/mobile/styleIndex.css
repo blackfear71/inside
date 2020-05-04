@@ -1,0 +1,99 @@
+/*************/
+/*** Index ***/
+/*************/
+
+/*** Connexion ***/
+.zone_form_index
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90vw;
+	height: 83vh;
+	line-height: 83vh;
+}
+
+.form_index
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.monoligne_index
+{
+	display: block;
+	width: calc(100% - 20px);
+	padding: 5px 10px 5px 10px;
+	height: 5vh;
+	margin-bottom: 5vh;
+	border: 0;
+	border-bottom: solid 3px #d3d3d3;
+	background-color: transparent;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+}
+
+.bouton_index
+{
+	display: block;
+	width: 100%;
+	padding: 10px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 3vh;
+	border: 0;
+	background-color: #ff1937;
+	border-radius: 5px;
+	box-shadow: 0 0 3px #7c7c7c;
+	cursor: pointer;
+}
+
+.bouton_index:hover
+{
+	background-color: #c81932;
+}
+
+/*** Footer Index ***/
+.zone_footer_index_right
+{
+	float: right;
+}
+
+.link_footer_index
+{
+	display: inline-block;
+  vertical-align: top;
+	width: 8vh;
+	height: 7vh;
+	background-color: #262626;
+}
+
+.link_footer_index:hover
+{
+	background-color: #1b1b1b;
+}
+
+.icone_footer_index
+{
+	display: block;
+  vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+  margin-top: 1.5vh;
+	width: 4vh;
+	height: 4vh;
+}
+
+.copyright_index
+{
+	display: inline-block;
+  line-height: 7vh;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 2vh;
+  color: white;
+  text-align: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}

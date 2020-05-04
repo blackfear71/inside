@@ -5,7 +5,7 @@
   include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/missions.php');
 
   // Contrôles Index, initialisation session
-  // RETOUR : aucun
+  // RETOUR : Aucun
   function controlsIndex()
   {
     // Lancement de la session
@@ -19,10 +19,14 @@
       header('location: /inside/administration/portail/portail.php?action=goConsulter');
     else
       $_SESSION['index']['connected'] = false;
+
+    // Mobile
+    if (!isset($_SESSION['index']['mobile']))
+      $_SESSION['index']['mobile'] = isMobile();
   }
 
   // Contrôles Administrateur, initialisation session
-  // RETOUR : aucun
+  // RETOUR : Aucun
   function controlsAdmin()
   {
     // Lancement de la session
@@ -36,10 +40,13 @@
     // Contrôle administrateur connecté
     if ($_SESSION['index']['connected'] == false)
       header('location: /inside/index.php');
+
+    // Mobile
+    $_SESSION['index']['mobile'] = false;
   }
 
   // Contrôles Utilisateur, initialisation session, mission et thème
-  // RETOUR : aucun
+  // RETOUR : Aucun
   function controlsUser()
   {
     // Lancement de la session
@@ -53,65 +60,111 @@
     // Contrôle utilisateur connecté
   	if ($_SESSION['index']['connected'] == false)
       header('location: /inside/index.php');
-
-    if ($_SESSION['index']['connected'] == true)
+    else
     {
-      // Récupération expérience
-      getExperience($_SESSION['user']['identifiant']);
+      // Contrôle page accessible mobile
+      $isAccessible = isAccessible($_SERVER['PHP_SELF']);
 
-      // Initialisation génération mission
-      if (!isset($_SESSION['missions']))
-        $_SESSION['missions'] = array();
-
-      // Récupération des missions à générer
-      $missions = getMissionsToGenerate();
-
-      // On génère les boutons de mission si besoin pour chaque mission
-      foreach ($missions as $key => $mission)
+      // Redirection si non accessible
+      if ($isAccessible == false)
+        header('location: /inside/portail/portail/portail.php?action=goConsulter');
+      else
       {
-        if (empty($_SESSION['missions'][$key]))
-        {
-          if (!empty($mission) AND date("His") >= $mission->getHeure())
-          {
-            // Nombre de boutons à générer pour la mission en cours
-            $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+        // Récupération expérience
+        getExperience($_SESSION['user']['identifiant']);
 
-            if ($nbButtonsToGenerate > 0)
+        // Initialisation génération mission
+        if (!isset($_SESSION['missions']))
+          $_SESSION['missions'] = array();
+
+        // Récupération des missions à générer
+        $missions = getMissionsToGenerate();
+
+        // On génère les boutons de mission si besoin pour chaque mission
+        foreach ($missions as $key => $mission)
+        {
+          if (empty($_SESSION['missions'][$key]))
+          {
+            if (!empty($mission) AND date("His") >= $mission->getHeure())
             {
-              $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
-              $_SESSION['missions'][$key] = $missionGenerated;
+              // Nombre de boutons à générer pour la mission en cours
+              $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+
+              if ($nbButtonsToGenerate > 0)
+              {
+                $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
+                $_SESSION['missions'][$key] = $missionGenerated;
+              }
             }
           }
-        }
-        else
-        {
-          if (date('His') < $mission->getHeure())
-            unset($_SESSION['missions'][$key]);
           else
           {
-            // Nombre de boutons à générer pour la mission en cours
-            $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
-
-            if ($nbButtonsToGenerate != count($_SESSION['missions'][$key]))
+            if (date('His') < $mission->getHeure())
+              unset($_SESSION['missions'][$key]);
+            else
             {
-              $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
-              $_SESSION['missions'][$key] = $missionGenerated;
+              // Nombre de boutons à générer pour la mission en cours
+              $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+
+              if ($nbButtonsToGenerate != count($_SESSION['missions'][$key]))
+              {
+                $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
+                $_SESSION['missions'][$key] = $missionGenerated;
+              }
             }
           }
         }
+
+        //var_dump($_SESSION['missions']);
+
+        // Détermination thème
+        $_SESSION['theme'] = setTheme();
+
+        //var_dump($_SESSION['theme']);
       }
-
-      //var_dump($_SESSION['missions']);
-
-      // Détermination thème
-      $_SESSION['theme'] = setTheme();
-
-      //var_dump($_SESSION['theme']);
     }
   }
 
+  // Contrôle si on est sur mobile
+  // RETOUR : Booléen
+  function isMobile()
+  {
+    // Initialisations
+    $isMobile  = false;
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+    // Contrôle
+    if (preg_match('/iphone/i', $userAgent)
+    ||  preg_match('/android/i', $userAgent)
+    ||  preg_match('/blackberry/i', $userAgent)
+    ||  preg_match('/symb/i', $userAgent)
+    ||  preg_match('/ipad/i', $userAgent)
+    ||  preg_match('/ipod/i', $userAgent)
+    ||  preg_match('/phone/i', $userAgent))
+      $isMobile = true;
+
+    // Retour
+    return $isMobile;
+  }
+
+  // Contrôle si la page courante est accessible sur mobile
+  // RETOUR : Booléen
+  function isAccessible($path)
+  {
+    // Initialisations
+    $isAccessible = false;
+
+    // Contrôle
+    if ($path == '/inside/portail/portail/portail.php'
+    OR  $path == '/inside/portail/foodadvisor/foodadvisor.php')
+      $isAccessible = true;
+
+    // Retour
+    return $isAccessible;
+  }
+
   // Récupération expérience utilisateur
-  // RETOUR : tableau d'expérience
+  // RETOUR : Tableau d'expérience
   function getExperience($identifiant)
   {
     global $bdd;

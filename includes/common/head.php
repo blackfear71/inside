@@ -1,12 +1,18 @@
 <?php
+  // Récupération de la plateforme
+  if ($_SESSION['index']['mobile'] == true)
+    $platform = 'mobile';
+  else
+    $platform = 'web';
+
   // Dates de dernière modification (CSS et JS) pour mise à jour automatique du cache du navigateur
-  $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/style.css');
+  $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $platform . '/style.css');
 
   if (!empty($style_head))
-    $last_modification_css2 = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $style_head);
+    $last_modification_css2 = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $platform . '/' . $style_head);
 
   if (isset($chat_head) AND $chat_head == true)
-    $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/styleChat.css');
+    $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $platform . '/styleChat.css');
 
   if (isset($datepicker_head) AND $datepicker_head == true)
     $last_modification_css_datepicker = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/libraries/css/datepicker.css');
@@ -23,14 +29,14 @@
 
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
-  echo '<link rel="stylesheet" href="/inside/includes/assets/css/style.css?version=' . $last_modification_css . '" />';
+  echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/style.css?version=' . $last_modification_css . '" />';
 
   // Styles spécifiques
   if (!empty($style_head))
-    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $style_head . '?version=' . $last_modification_css2 . '" />';
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/' . $style_head . '?version=' . $last_modification_css2 . '" />';
 
   if (isset($chat_head) AND $chat_head == true)
-    echo '<link rel="stylesheet" href="/inside/includes/assets/css/styleChat.css?version=' . $last_modification_css_chat . '" />';
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/styleChat.css?version=' . $last_modification_css_chat . '" />';
 
   if (isset($datepicker_head) AND $datepicker_head == true)
     echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $last_modification_css_datepicker . '">';

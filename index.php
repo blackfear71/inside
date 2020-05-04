@@ -105,10 +105,18 @@
 				break;
 
 	    default:
-	      include_once('portail/index/vue/vue_index.php');
+				if ($_SESSION['index']['mobile'] == true)
+					include_once('portail/index/vue/vue_index_mobile.php');
+				else
+	      	include_once('portail/index/vue/vue_index.php');
 	      break;
 	  }
 	}
 	else
-		include_once('portail/index/vue/vue_index.php');
+	{
+		if ($_SESSION['index']['mobile'] == true)
+			include_once('portail/index/vue/vue_index_mobile.php');
+		else
+			include_once('portail/index/vue/vue_index.php');
+	}
 ?>

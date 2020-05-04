@@ -1,5 +1,5 @@
 <?php
-	// Démarrer la session
+	// Démarrage de la session
 	session_start();
 
 	// Détruire les variables de la session
