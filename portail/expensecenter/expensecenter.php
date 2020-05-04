@@ -11,7 +11,7 @@
   *********************************/
 
   // Fonction communes
-  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/fonctions_dates.php');
   include_once('../../includes/functions/fonctions_regex.php');
 

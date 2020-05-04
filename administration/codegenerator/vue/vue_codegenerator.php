@@ -57,7 +57,7 @@
                 echo '<li>Modifier les commentaires dans le <strong>contrôleur</strong> généré</li>';
                 echo '<li>Si c\'est une page utilisateur, ajouter un <strong>lien sur le portail</strong> principal</li>';
                 echo '<li>Si c\'est une page utilisateur, ajouter un <strong>lien dans les onglets</strong> de navigation</li>';
-                echo '<li>Si c\'est une page utilisateur, rajouter la page dans la <strong>liste des pages éligibles aux missions</strong> (fonction generateMissions() dans fonctions_communes.php)</li>';
+                echo '<li>Si c\'est une page utilisateur, rajouter la page dans la <strong>liste des pages éligibles aux missions</strong> (fonction generateMissions() dans metier_commun.php)</li>';
                 echo '<li>Gérer la nouvelle page dans la <strong>section des logs</strong> (modifier les 2 fonctions getCategories())</li>';
                 echo '<li>Mettre à jour le fichier <strong>readme.md</strong> si besoin (pour GitHub)</li>';
               echo '</ul>';

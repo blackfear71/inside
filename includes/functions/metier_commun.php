@@ -152,12 +152,15 @@
   function isAccessible($path)
   {
     // Initialisations
-    $isAccessible = false;
+    $isAccessible = true;
 
     // Contrôle
-    if ($path == '/inside/portail/portail/portail.php'
-    OR  $path == '/inside/portail/foodadvisor/foodadvisor.php')
-      $isAccessible = true;
+    if ($_SESSION['index']['mobile'] == true)
+    {
+      if ($path != '/inside/portail/portail/portail.php'
+      AND $path != '/inside/portail/foodadvisor/foodadvisor.php')
+        $isAccessible = false;
+    }
 
     // Retour
     return $isAccessible;

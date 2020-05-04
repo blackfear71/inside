@@ -136,16 +136,16 @@
 
           echo '<div class="contenu_explications">';
             echo 'Ne pas oublier d\'ajouter le code de la fonction <strong>initializeSuccess()</strong> dans <strong>metier_administration.php</strong> ainsi que la fonction
-            <strong>insertOrUpdateSuccesValue()</strong> dans <strong>fonctions_communes.php</strong>.';
+            <strong>insertOrUpdateSuccesValue()</strong> dans <strong>metier_commun.php</strong>.';
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à un <u>niveau</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesLevel()</strong> dans <strong>fonctions_communes.php</strong>.
+            echo 'Si c\'est un succès relatif à un <u>niveau</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesLevel()</strong> dans <strong>metier_commun.php</strong>.
             Une fois le code ajouté, vérifier que le succès est à "<strong>Unique</strong>".';
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>fonctions_communes.php</strong>
+            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
             et la fonction <strong>isMissionEnded()</strong> dans <strong>metier_profil.php</strong>. Une fois le code ajouté, modifier le succès pour changer son état à "<strong>Défini</strong>".';
           echo '</div>';
 
@@ -158,11 +158,11 @@
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à un <u>niveau</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesLevel()</strong> dans <strong>fonctions_communes.php</strong>.';
+            echo 'Si c\'est un succès relatif à un <u>niveau</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesLevel()</strong> dans <strong>metier_commun.php</strong>.';
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>fonctions_communes.php</strong>
+            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
             et la fonction <strong>isMissionEnded()</strong> dans <strong>metier_profil.php</strong>.';
           echo '</div>';
 

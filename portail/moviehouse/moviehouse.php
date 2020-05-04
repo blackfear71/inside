@@ -10,7 +10,7 @@
   ************************/
 
   // Fonction communes
-  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/fonctions_dates.php');
   include_once('../../includes/functions/fonctions_regex.php');
 
@@ -18,7 +18,7 @@
   controlsUser();
 
   // Modèle de données
-  include_once('modele/metier_commun.php');
+  include_once('modele/metier_moviehouse_commun.php');
   include_once('modele/metier_moviehouse.php');
 
   // Initialisation sauvegarde saisie

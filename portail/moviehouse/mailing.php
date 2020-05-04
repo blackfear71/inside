@@ -8,14 +8,14 @@
   ******************/
 
   // Fonction communes
-  include_once('../../includes/functions/fonctions_communes.php');
+  include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/fonctions_dates.php');
 
   // Contrôles communs Utilisateur
   controlsUser();
 
   // Modèle de données
-  include_once('modele/metier_commun.php');
+  include_once('modele/metier_moviehouse_commun.php');
   include_once('modele/metier_details.php');
 
   // Appel métier

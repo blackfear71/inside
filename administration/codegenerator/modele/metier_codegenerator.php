@@ -161,7 +161,7 @@
 
     // Fonctions communes
     if ($options['common']->getChecked() == 'Y')
-      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_communes.php\');
+      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/metier_commun.php\');
   /*common_functions*/', $controler);
 
     // Fonctions dates
