@@ -23,8 +23,8 @@
 .monoligne_index
 {
 	display: block;
-	width: calc(100% - 20px);
-	padding: 5px 10px 5px 10px;
+	width: calc(100% - 4vw);
+	padding: 1vh 2vw 1vh 2vw;
 	height: 5vh;
 	margin-bottom: 5vh;
 	border: 0;
@@ -40,14 +40,14 @@
 	display: block;
 	width: 100%;
 	margin-top: 15vh;
-	padding: 20px 10px 20px 10px;
+	padding: 1vh 2vw 1vh 2vw;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 3vh;
 	border: 0;
 	background-color: #ff1937;
-	border-radius: 5px;
-	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 1vw;
+	box-shadow: 0 0 1vw #7c7c7c;
 	cursor: pointer;
 }
 

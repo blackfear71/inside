@@ -103,12 +103,7 @@ $(function()
   // Transforme en majuscule les caractères saisis dans les différents identifiants
   $('#focus_identifiant, #focus_identifiant_2, #focus_identifiant_3').change(function()
   {
-    var value = $(this).val();
-
-    if (value != "admin")
-      value = value.toUpperCase();
-
-    $(this).val(value);
+    identifiantMajuscule($(this));
   });
 });
 
@@ -122,6 +117,17 @@ $(window).resize(function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Transforme le contenu d'un champ en majuscules
+function identifiantMajuscule(champ)
+{
+  var value = champ.val();
+
+  if (value != "admin")
+    value = value.toUpperCase();
+
+  champ.val(value);
+}
+
 // Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)
 function switchIndex(id_open, id_close, focus = null)
 {

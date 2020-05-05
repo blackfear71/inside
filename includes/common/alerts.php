@@ -45,7 +45,7 @@
         echo '</div>';
 
         // Bouton
-        echo '<div class="boutons_alerte">';
+        echo '<div class="zone_boutons_alerte">';
           echo '<a id="boutonFermerAlerte" class="bouton_alerte">Fermer</a>';
         echo '</div>';
       echo '</div>';

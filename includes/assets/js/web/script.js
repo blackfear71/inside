@@ -465,26 +465,28 @@ function confirmAction(form, message)
 
   var html = '';
 
-  html += '<div class="message_alerte" id="confirmBox">';
-    html += '<input type="hidden" id="actionForm" value="' + form + '" />';
+  html += '<div class="fond_alerte" id="confirmBox">';
+    html += '<div class="zone_affichage_alerte">';
+      html += '<input type="hidden" id="actionForm" value="' + form + '" />';
 
-    html += '<div class="inside_alerte">';
-      html += 'Inside';
-    html += '</div>';
+      html += '<div class="titre_alerte">';
+        html += 'Inside';
+      html += '</div>';
 
-    html += '<div class="zone_alertes">';
-      html += '<div class="zone_alerte">';
-        html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
+      html += '<div class="zone_alertes">';
+        html += '<div class="zone_texte_alerte">';
+          html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
 
-        html += '<div class="texte_alerte">';
-          html += message;
+          html += '<div class="texte_alerte">';
+            html += message;
+          html += '</div>';
         html += '</div>';
       html += '</div>';
-    html += '</div>';
 
-    html += '<div class="boutons_alerte">';
-      html += '<a id="boutonAnnuler" class="bouton_alerte">Annuler</a>';
-      html += '<a id="boutonConfirmer" class="bouton_alerte">Oui</a>';
+      html += '<div class="zone_boutons_alerte">';
+        html += '<a id="boutonAnnuler" class="bouton_alerte">Annuler</a>';
+        html += '<a id="boutonConfirmer" class="bouton_alerte">Oui</a>';
+      html += '</div>';
     html += '</div>';
   html += '</div>';
 

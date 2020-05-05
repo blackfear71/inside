@@ -5,21 +5,19 @@
 $(function()
 {
   /** Actions au chargement ***/
-  afficherMasquerIdWithDelay('alerte');
+  // Affichage des alertes
+  if ($('#alerte').length)
+    afficherMasquerIdWithDelay('alerte');
+
+  // Mise à jour du ping à chaque chargement de page et toutes 60 secondes
+  updatePing();
+  setInterval(updatePing, 60000);
 
   /*** Actions au clic ***/
   // Bouton fermer alerte
   $('#boutonFermerAlerte').click(function()
   {
     masquerSupprimerIdWithDelay('alerte');
-  });
-
-  /*** Actions au changement ***/
-  // Transforme en majuscule les caractères saisis dans l'identifiant
-  $('#focus_identifiant').change(function()
-  {
-    identifiantMajuscule($(this));
-
   });
 });
 
@@ -44,13 +42,8 @@ function masquerSupprimerIdWithDelay(id)
   });
 }
 
-// Transforme le contenu d'un champ en majuscules
-function identifiantMajuscule(champ)
+// Exécute le script php de mise à jour du ping
+function updatePing()
 {
-  var value = champ.val();
-
-  if (value != "admin")
-    value = value.toUpperCase();
-
-  champ.val(value);
+  $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
 }
