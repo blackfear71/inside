@@ -17,6 +17,11 @@
   </head>
 
 	<body>
+    <!-- Entête -->
+    <header>
+      <?php include('includes/common/header_mobile.php'); ?>
+    </header>
+
     <!-- Contenu -->
     <section>
       <!-- Messages d'alerte -->
@@ -24,11 +29,6 @@
 
       <article>
         <?php
-          // Bandeau
-          echo '<div class="zone_bandeau">';
-            echo '<img src="/inside_test/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
-          echo '</div>';
-
           // Formulaire de connexion
           echo '<div class="zone_form_index">';
             echo '<form method="post" action="index.php?action=doConnecter" id="formConnexion" class="form_index">';
@@ -43,7 +43,7 @@
 
     <!-- Pied de page -->
     <footer>
-			<?php include('includes/common/footer.php'); ?>
+			<?php include('includes/common/footer_mobile.php'); ?>
 		</footer>
   </body>
 </html>
