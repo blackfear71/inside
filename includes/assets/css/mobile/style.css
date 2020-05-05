@@ -237,12 +237,12 @@ section
 	width: 100vw;
 	min-height: 83vh;
 	height: 100%;
+	padding-bottom: 7vh;
 }
 
 article
 {
 	width: 90%;
-	padding-bottom: 7vh;
 	margin-left: auto;
 	margin-right: auto;
 }
