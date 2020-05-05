@@ -29,6 +29,7 @@
 
       <article>
         <?php
+          // Message vide
           echo '<div class="empty">Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version mobile du site.</div>';
 
           echo '<div class="empty">Celui-ci est en cours de développement et cette section n\'est pas encore disponible. Veuillez utiliser le bouton présent en bas du site
