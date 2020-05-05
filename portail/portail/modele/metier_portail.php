@@ -165,51 +165,57 @@
     array_push($tabNews, $myNews);
 
     // Dernière phrase culte ajoutée
-    $myNews = new News();
-
     $req5 = $bdd->query('SELECT * FROM collector WHERE type_collector = "T" ORDER BY date_add DESC, id DESC LIMIT 1');
     $data5 = $req5->fetch();
 
-    $num_page = numPageCollector($data5['id']);
-
-    $myNews->setTitle("La der des ders");
-    $myNews->setLogo("collector");
-    $myNews->setLink("/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $data5['id']);
-
-    if ($data5['type_speaker'] == "other")
-      $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($data5['speaker'], false, false)));
-    else
+    if ($req5->rowCount() > 0)
     {
-      $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data5['speaker'] . '"');
-      $donnees = $reponse->fetch();
-      $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($donnees['pseudo'], false, false)));
-      $reponse->closeCursor();
-    }
+      $myNews = new News();
 
-    if (strlen($data5['collector']) > 90)
-      $myNews->setContent(nl2br(htmlspecialchars(substr(unformatCollector($data5['collector']), 0, 90) . "...")));
-    else
-      $myNews->setContent(nl2br(htmlspecialchars(unformatCollector($data5['collector']))));
+      $num_page = numPageCollector($data5['id']);
+
+      $myNews->setTitle("La der des ders");
+      $myNews->setLogo("collector");
+      $myNews->setLink("/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $data5['id']);
+
+      if ($data5['type_speaker'] == "other")
+        $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($data5['speaker'], false, false)));
+      else
+      {
+        $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data5['speaker'] . '"');
+        $donnees = $reponse->fetch();
+        $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($donnees['pseudo'], false, false)));
+        $reponse->closeCursor();
+      }
+
+      if (strlen($data5['collector']) > 90)
+        $myNews->setContent(nl2br(htmlspecialchars(substr(unformatCollector($data5['collector']), 0, 90) . "...")));
+      else
+        $myNews->setContent(nl2br(htmlspecialchars(unformatCollector($data5['collector']))));
+
+      array_push($tabNews, $myNews);
+    }
 
     $req5->closeCursor();
 
-    array_push($tabNews, $myNews);
-
     // Dernier film ajouté
-    $myNews = new News();
-
     $req6 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY date_add DESC, id DESC LIMIT 1');
     $data6 = $req6->fetch();
 
-    $myNews->setTitle("Le dernier de la collection");
-    $myNews->setContent($data6['film']);
-    $myNews->setDetails("");
-    $myNews->setLogo("movie_house");
-    $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data6['id'] . "&action=goConsulter");
+    if ($req6->rowCount() > 0)
+    {
+      $myNews = new News();
+
+      $myNews->setTitle("Le dernier de la collection");
+      $myNews->setContent($data6['film']);
+      $myNews->setDetails("");
+      $myNews->setLogo("movie_house");
+      $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data6['id'] . "&action=goConsulter");
+
+      array_push($tabNews, $myNews);
+    }
 
     $req6->closeCursor();
-
-    array_push($tabNews, $myNews);
 
     // Prochaine sortie cinéma
     $req7 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle >= "' . date("Ymd") . '" ORDER BY date_doodle ASC, id ASC LIMIT 1');
