@@ -154,7 +154,7 @@
 
           echo '<div class="contenu_explications">';
             echo 'Ne pas oublier de supprimer le code de la fonction <strong>initializeSuccess()</strong> dans <strong>metier_administration.php</strong> et
-            <strong>insertOrUpdateSuccesValue()</strong> dans <strong>fonction_communes.php</strong>.';
+            <strong>insertOrUpdateSuccesValue()</strong> dans <strong>metier_commun.php</strong>.';
           echo '</div>';
 
           echo '<div class="contenu_explications">';
