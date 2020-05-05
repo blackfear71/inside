@@ -15,7 +15,9 @@
 	controlsIndex();
 
 	// Modèle de données
-  include_once('portail/index/modele/metier_index.php');
+	include_once('portail/index/modele/metier_index.php');
+	include_once('portail/index/modele/controles_index.php');
+  include_once('portail/index/modele/physique_index.php');
 
 	// Initialisation sauvegarde saisie inscription
 	if (((!isset($_SESSION['alerts']['too_short'])      OR  $_SESSION['alerts']['too_short']       != true)
@@ -55,14 +57,17 @@
 		switch ($_GET['action'])
 		{
 			case "doConnecter":
+				// Connexion de l'utilisateur
 				$connected = connectUser($_POST);
 				break;
 
 			case "doDemanderInscription":
+				// Demande d'inscription
 				subscribe($_POST);
 				break;
 
 			case "doDemanderMdp":
+				// Demande de réinitialisation de mot de passe
 				resetPassword($_POST);
 
 			default:

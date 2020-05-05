@@ -1,80 +1,72 @@
 <?php
-  include_once('includes/functions/appel_bdd.php');
   include_once('includes/classes/missions.php');
+  include_once('includes/classes/profile.php');
 
   // METIER : Connexion utilisateur
   // RETOUR : Indicateur connexion
   function connectUser($post)
   {
-    $connected = false;
-
-    if (strtolower($post['login']) == "admin")
-      $login = htmlspecialchars(strtolower($post['login']));
-    else
-      $login = htmlspecialchars(strtoupper($post['login']));
-
-    global $bdd;
-
+    // Initialisations
+    $control_ok                     = true;
+    $connected                      = false;
     $_SESSION['index']['connected'] = NULL;
 
-    // lecture par requête de la BDD
-  	$reponse = $bdd->query('SELECT * FROM users WHERE identifiant = "' . $login . '"');
-  	$donnees = $reponse->fetch();
+    // Récupération des données
+    $password = $post['mdp'];
 
-		if ($reponse->rowCount() > 0 AND isset($login) AND $login == $donnees['identifiant']) // 2 boucles if pour comparer pseudo et MDP
-		{
-			if ($donnees['status'] == "I")
-			{
-        $_SESSION['index']['connected'] = false;
-				$_SESSION['alerts']['not_yet']  = true;
-			}
-			else
-			{
-				$mdp = htmlspecialchars(hash('sha1', $post['mdp'] . $donnees['salt'])); // On crypte de la même façon qu'à l'identification pour comparer, avec un grain de sel
-				if (isset($mdp) AND $mdp == $donnees['password'])
-				{
-					// Sauvegarde des données utilisateur en SESSION
-					$_SESSION['index']['connected']  = true;
-					$_SESSION['user']['identifiant'] = $donnees['identifiant'];
-          $_SESSION['user']['pseudo']      = $donnees['pseudo'];
-					$_SESSION['user']['avatar']      = $donnees['avatar'];
+    if (strtolower($post['login']) == 'admin')
+      $identifiant = htmlspecialchars(strtolower($post['login']));
+    else
+      $identifiant = htmlspecialchars(strtoupper($post['login']));
 
-					// Recherche et sauvegarde des preferences utilisateur en SESSION
-					if ($_SESSION['user']['identifiant'] != "admin")
-					{
-						$reponse2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
-						$donnees2 = $reponse2->fetch();
+    // Lectures des données de l'utilisateur
+    $user = physiqueUser($identifiant);
 
-						$_SESSION['user']['view_movie_house']   = $donnees2['view_movie_house'];
-            $_SESSION['user']['view_the_box']       = $donnees2['view_the_box'];
-            $_SESSION['user']['view_notifications'] = $donnees2['view_notifications'];
+    // Contrôle utilisateur existant
+    $control_ok = controleUserExistConnexion($user);
 
-            if ($donnees2['init_chat'] == "Y")
-              $_SESSION['chat']['show_chat'] = true;
-            else
-              $_SESSION['chat']['show_chat'] = false;
+    // Contrôle inscription en cours
+    if ($control_ok == true)
+      $control_ok = controleStatutConnexion($user->getStatus());
 
-						$reponse2->closeCursor();
-					}
+    // Contrôle mot de passe
+    if ($control_ok == true)
+      $control_ok = controlePassword($user->getIdentifiant(), $password);
 
-          $connected = true;
-				}
-        // Sinon, on affiche un message d'erreur
-				else
-				{
-					$_SESSION['index']['connected']        = false;
-					$_SESSION['alerts']['wrong_connexion'] = true;
-				}
-			}
-		}
-		else
-		{
-			$_SESSION['index']['connected']        = false;
-			$_SESSION['alerts']['wrong_connexion'] = true;
-		}
+    // Initialisation des données
+    if ($control_ok == true)
+    {
+      // Initialisation de la session utilisateur
+      $_SESSION['index']['connected']  = true;
+      $_SESSION['user']['identifiant'] = $user->getIdentifiant();
+      $_SESSION['user']['pseudo']      = $user->getPseudo();
+      $_SESSION['user']['avatar']      = $user->getAvatar();
 
-  	$reponse->closeCursor();
+      // Initialisation des préférences utilisateur et du chat
+      if ($user->getIdentifiant() != 'admin')
+      {
+        // Récupération des préférences
+        $preferences = physiquePreferences($user->getIdentifiant());
 
+        $_SESSION['user']['view_movie_house']   = $preferences->getView_movie_house();
+        $_SESSION['user']['view_the_box']       = $preferences->getView_the_box();
+        $_SESSION['user']['view_notifications'] = $preferences->getView_notifications();
+
+        if ($preferences->getInit_chat() == 'Y')
+          $_SESSION['chat']['show_chat'] = true;
+        else
+          $_SESSION['chat']['show_chat'] = false;
+      }
+
+      // Positionnement indicateur connexion
+      $connected = true;
+    }
+
+    // Vérification connexion en cas d'erreur
+    if ($control_ok == false)
+      $_SESSION['index']['connected'] = false;
+
+    // Retour
     return $connected;
   }
 
@@ -82,175 +74,115 @@
   // RETOUR : Aucun
   function subscribe($post)
   {
+    // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $trigramme   = htmlspecialchars(strtoupper(trim($post['trigramme'])));
+    $pseudo      = htmlspecialchars(trim($post['pseudo']));
+    $salt        = rand();
+    $password    = htmlspecialchars(hash('sha1', $post['password'] . $salt));
+    $confirm     = htmlspecialchars(hash('sha1', $post['confirm_password'] . $salt));
+    $ping        = '';
+    $status      = 'I';
+    $avatar      = '';
+    $email       = '';
+    $anniversary = '';
+    $experience  = 0;
+    $expenses    = 0;
+
+    // Initialisations préférences utilisateur
+    $refTheme             = '';
+    $initChat             = 'Y';
+    $viewMovieHouse       = 'H';
+    $categoriesMovieHouse = 'Y;Y;Y;';
+    $viewTheBox           = 'P';
+    $viewNotifications    = 'T';
+    $manageCalendars      = 'N';
+
     // Sauvegarde en session en cas d'erreur
     $_SESSION['index']['identifiant_saisi']               = $post['trigramme'];
     $_SESSION['index']['pseudo_saisi']                    = $post['pseudo'];
     $_SESSION['index']['mot_de_passe_saisi']              = $post['password'];
     $_SESSION['index']['confirmation_mot_de_passe_saisi'] = $post['confirm_password'];
 
-    // Récupération des champs saisis et initialisations utilisateur
-    $trigramme        = htmlspecialchars(strtoupper($post['trigramme']));
-    $pseudo           = htmlspecialchars($post['pseudo']);
-    $salt             = rand();
-    $password         = htmlspecialchars(hash('sha1', $post['password'] . $salt));
-    $confirm_password = htmlspecialchars(hash('sha1', $post['confirm_password'] . $salt));
-    $ping             = "";
-    $status           = "I";
-    $avatar           = "";
-    $email            = "";
-    $anniversary      = "";
-    $experience       = 0;
-    $expenses         = 0;
-
-    // Initialisations préférences
-    $ref_theme              = "";
-    $init_chat              = "Y";
-    $view_movie_house       = "H";
-    $categories_movie_house = "Y;Y;Y;";
-    $view_the_box           = "P";
-    $view_notifications     = "T";
-    $manage_calendars       = "N";
-
-    global $bdd;
-
     // Contrôle trigramme sur 3 caractères
-    if (strlen($trigramme) == 3)
+    $control_ok = controleLongueurTrigramme($trigramme);
+
+    // Contrôle trigramme existant
+    if ($control_ok == true)
+      $control_ok = controleTrigrammeUnique($trigramme);
+
+    // Contrôle saisies mot de passe
+    if ($control_ok == true)
+      $control_ok = controleConfirmationPassword($password, $confirm);
+
+    // Insertion de l'enregistrement en base
+    if ($control_ok == true)
     {
-      // Contrôle trigramme déjà pris
-      $reponse = $bdd->query('SELECT id, identifiant FROM users');
-      while ($donnees = $reponse->fetch())
-      {
-        if ($donnees['identifiant'] == $trigramme)
-        {
-          $_SESSION['alerts']['already_exist'] = true;
-          break;
-        }
-      }
-      $reponse->closeCursor();
+      $user = array('identifiant' => $trigramme,
+                    'salt'        => $salt,
+                    'password'    => $password,
+                    'ping'        => $ping,
+                    'status'      => $status,
+          					'pseudo'      => $pseudo,
+          					'avatar'      => $avatar,
+                    'email'       => $email,
+                    'anniversary' => $anniversary,
+                    'experience'  => $experience,
+                    'expenses'    => $expenses
+                   );
 
-      // Contrôle confirmation mot de passe
-      if ($_SESSION['alerts']['already_exist'] != true)
-      {
-        if ($password == $confirm_password)
-        {
-          // On créé l'utilisateur
-          $req = $bdd->prepare('INSERT INTO users(identifiant,
-                                                  salt,
-                                                  password,
-                                                  ping,
-                                                  status,
-                                                  pseudo,
-                                                  avatar,
-                                                  email,
-                                                  anniversary,
-                                                  experience,
-                                                  expenses)
-                                           VALUES(:identifiant,
-                                                  :salt,
-                                                  :password,
-                                                  :ping,
-                                                  :status,
-                                                  :pseudo,
-                                                  :avatar,
-                                                  :email,
-                                                  :anniversary,
-                                                  :experience,
-                                                  :expenses
-                                                 )');
-  				$req->execute(array(
-  					'identifiant' => $trigramme,
-            'salt'        => $salt,
-            'password'    => $password,
-            'ping'        => $ping,
-            'status'      => $status,
-  					'pseudo'      => $pseudo,
-  					'avatar'      => $avatar,
-            'email'       => $email,
-            'anniversary' => $anniversary,
-            'experience'  => $experience,
-            'expenses'    => $expenses
-  					));
-  				$req->closeCursor();
+       physiqueInsertionUser($user);
 
-          // On créé les préférences
-          $req = $bdd->prepare('INSERT INTO preferences(identifiant,
-                                                        ref_theme,
-                                                        init_chat,
-                                                        view_movie_house,
-                                                        categories_movie_house,
-                                                        view_the_box,
-                                                        view_notifications,
-                                                        manage_calendars)
-                                                 VALUES(:identifiant,
-                                                        :ref_theme,
-                                                        :init_chat,
-                                                        :view_movie_house,
-                                                        :categories_movie_house,
-                                                        :view_the_box,
-                                                        :view_notifications,
-                                                        :manage_calendars)');
-          $req->execute(array(
-            'identifiant'            => $trigramme,
-            'ref_theme'              => $ref_theme,
-            'init_chat'              => $init_chat,
-            'view_movie_house'       => $view_movie_house,
-            'categories_movie_house' => $categories_movie_house,
-            'view_the_box'           => $view_the_box,
-            'view_notifications'     => $view_notifications,
-            'manage_calendars'       => $manage_calendars
-            ));
-          $req->closeCursor();
+       $preferences = array('identifiant'            => $trigramme,
+                            'ref_theme'              => $refTheme,
+                            'init_chat'              => $initChat,
+                            'view_movie_house'       => $viewMovieHouse,
+                            'categories_movie_house' => $categoriesMovieHouse,
+                            'view_the_box'           => $viewTheBox,
+                            'view_notifications'     => $viewNotifications,
+                            'manage_calendars'       => $manageCalendars
+                           );
 
-          $_SESSION['alerts']['ask_inscription'] = true;
-        }
-        else
-          $_SESSION['alerts']['wrong_confirm']   = true;
-      }
+       physiqueInsertionPreferences($preferences);
+
+       // Message d'alerte
+       $_SESSION['alerts']['ask_inscription'] = true;
     }
-    else
-      $_SESSION['alerts']['too_short'] = true;
   }
 
-  // METIER : Demande récupération mot de passe
+  // METIER : Demande de récupération de mot de passe
   // RETOUR : Aucun
   function resetPassword($post)
   {
+    // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant = htmlspecialchars(strtoupper(trim($post['login'])));
+    $status      = 'Y';
+
     // Sauvegarde en session en cas d'erreur
     $_SESSION['index']['identifiant_saisi_mdp'] = $post['login'];
 
-    // Récupération des champs saisis et initialisations utilisateur
-		$identifiant = htmlspecialchars(strtoupper($post['login']));
-		$status      = "N";
+    // Lectures des données de l'utilisateur
+    $user = physiqueUser($identifiant);
 
-    global $bdd;
+    // Contrôle utilisateur existant
+    $control_ok = controleUserExistReset($user);
 
-		// On vérifie que l'identifiant existe bien
-		$reponse = $bdd->query('SELECT id, identifiant, status FROM users WHERE identifiant = "' . $identifiant . '"');
-		$donnees = $reponse->fetch();
+    // Contrôle statut utilisateur
+    if ($control_ok == true)
+      $control_ok = controleStatutReset($user->getStatus());
 
-    if ($reponse->rowCount() > 0)
-		{
-			if ($donnees['status'] == "Y")
-				$_SESSION['alerts']['already_asked'] = true;
-      elseif ($donnees['status'] == "I")
-        $_SESSION['alerts']['not_yet'] = true;
-			else
-			{
-				// Mise à jour de la table
-				$status = "Y";
+    // Modification de l'enregistrement en base
+    if ($control_ok == true)
+    {
+      physiqueUpdateStatut($status, $user->getIdentifiant());
 
-				$req = $bdd->prepare('UPDATE users SET status = :status WHERE id = ' . $donnees['id']);
-				$req->execute(array(
-					'status' => $status
-				));
-				$req->closeCursor();
-
-				$_SESSION['alerts']['password_asked'] = true;
-			}
-		}
-    else
-      $_SESSION['alerts']['wrong_id'] = true;
-
-		$reponse->closeCursor();
+      // Message d'alerte
+      $_SESSION['alerts']['password_asked'] = true;
+    }
   }
 ?>
