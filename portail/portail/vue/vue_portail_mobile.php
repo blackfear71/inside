@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = '';
+      $title_head      = 'Portail';
       $style_head      = 'stylePortail.css';
       $script_head     = 'scriptPortail.js';
       $angular_head    = false;
@@ -26,6 +26,11 @@
     <section>
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
+
+      <!-- Menus -->
+      <aside>
+				<?php include('../../includes/common/aside_mobile.php'); ?>
+			</aside>
 
       <article>
         <?php

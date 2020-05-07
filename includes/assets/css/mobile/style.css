@@ -271,7 +271,7 @@ header
 {
 	display: inline-block;
 	vertical-align: top;
-	width: 32vw;
+	width: 35vw;
 }
 
 .logo_bandeau
@@ -287,7 +287,7 @@ header
 	vertical-align: top;
 	width: 25vw;
 	height: 10vh;
-	margin-left: 43vw;
+	margin-left: 40vw;
 	background-color: #1b1b1b;
 	text-align: center;
 }
@@ -297,6 +297,61 @@ header
 	height: 8vh;
 	margin-top: 1vh;
 	border-radius: 50%;
+}
+
+/*** Aside ***/
+aside
+{
+	position: absolute;
+	top: 10vh;
+	width: 100vw;
+	height: 83vh;
+	overflow: hidden;
+}
+
+.aside_portail
+{
+	position: absolute;
+	left: -80%;
+	width: 80%;
+	height: 100%;
+	overflow: auto;
+	background-color: #303030;
+}
+
+.aside_user
+{
+	position: absolute;
+	right: -80%;
+	width: 80%;
+	height: 100%;
+	overflow: auto;
+	background-color: #303030;
+}
+
+.lien_aside
+{
+	display: block;
+	width: 100%;
+	border-bottom: solid 0.5vh #262626;
+}
+
+.icone_aside
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 12vw;
+	height: 12vw;
+	padding: 2vw;
+}
+
+.titre_aside
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 3vh;
 }
 
 /*** Texte zone vide ***/
@@ -410,7 +465,6 @@ header
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
-	cursor: pointer;
 	box-shadow: 0 0 1vw #7c7c7c;
 }
 
