@@ -1,3 +1,39 @@
 /***************/
 /*** Portail ***/
 /***************/
+
+/*** Liens portail ***/
+.zone_liens_portail
+{
+  padding-top: 3vh;
+}
+
+.lien_portail
+{
+  display: block;
+  margin-bottom: 3vh;
+	width: 100%;
+  background-color: #374650;
+  border-radius: 1vw;
+  overflow: hidden;
+  box-shadow: 0 0 1vw #7c7c7c;
+}
+
+.icone_lien_portail
+{
+  display: inline-block;
+  vertical-align: middle;
+  width: 12vw;
+  padding: 2vw;
+  margin-right: 2vw;
+  background-color: #2c3840;
+}
+
+.texte_lien_portail
+{
+  display: inline-block;
+  vertical-align: middle;
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+  font-size: 3vh;
+}

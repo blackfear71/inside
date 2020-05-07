@@ -313,7 +313,7 @@
                                     'title'     => 'Les enfants ! À table !',
                                     'image'     => '../../includes/icons/common/food_advisor.png',
                                     'alt'       => 'food_advisor',
-                                    'mobile'    => 'N'),
+                                    'mobile'    => 'Y'),
                               array('categorie' => 'COOKING<br />BOX',
                                     'lien'      => '../cookingbox/cookingbox.php?year=' . date("Y") . '&action=goConsulter',
                                     'title'     => 'Cooking Box',

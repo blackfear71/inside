@@ -34,11 +34,19 @@
 
       <article>
         <?php
-          // Message vide
-          echo '<div class="empty">Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version mobile du site.</div>';
-
-          echo '<div class="empty">Celui-ci est en cours de développement et cette section n\'est pas encore disponible. Veuillez utiliser le bouton présent en bas du site
-          pour revenir à la version classique et utiliser toutes ses fonctionnalités.</div>';
+          // Liens des catégories
+          echo '<div class="zone_liens_portail">';
+            foreach ($portail as $lienPortail)
+            {
+              if ($lienPortail['mobile'] == 'Y')
+              {
+                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+                  echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="icone_lien_portail" />';
+                  echo '<div class="texte_lien_portail">' . str_replace('<br />', ' ', $lienPortail['categorie']) . '</div>';
+                echo '</a>';
+              }
+            }
+          echo '</div>';
         ?>
       </article>
     </section>

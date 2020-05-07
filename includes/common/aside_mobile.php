@@ -6,6 +6,12 @@
       echo '<img src="/inside/includes/icons/common/inside_red.png" alt="inside_red" title="" class="icone_aside" />';
       echo '<div class="titre_aside">PORTAIL</div>';
     echo '</a>';
+
+    // Les enfants ! À table !
+    echo '<a href="/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter" class="lien_aside">';
+      echo '<img src="/inside/includes/icons/common/food_advisor.png" alt="food_advisor" title="" class="icone_aside" />';
+      echo '<div class="titre_aside">LES ENFANTS ! À TABLE !</div>';
+    echo '</a>';
   echo '</div>';
 
   // Menu utilisateur

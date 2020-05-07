@@ -29,8 +29,6 @@ $(function()
   // Ferme un menu au clic sur le fond
   $(document).on('click', function(event)
   {
-    console.log($(event.target));
-
     // Ferme le menu latéral gauche
     if ($(event.target).attr('class') != 'aside_portail'
     &&  $(event.target).attr('class') != 'lien_aside'

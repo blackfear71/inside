@@ -1,6 +1,7 @@
 /**************/
 /*** Commun ***/
 /**************/
+
 /*** Polices ***/
 @font-face
 {
@@ -307,6 +308,7 @@ aside
 	width: 100vw;
 	height: 83vh;
 	overflow: hidden;
+	pointer-events: none;
 }
 
 .aside_portail
@@ -317,6 +319,7 @@ aside
 	height: 100%;
 	overflow: auto;
 	background-color: #303030;
+	pointer-events: auto;
 }
 
 .aside_user
@@ -327,6 +330,7 @@ aside
 	height: 100%;
 	overflow: auto;
 	background-color: #303030;
+	pointer-events: auto;
 }
 
 .lien_aside
@@ -341,7 +345,6 @@ aside
 	display: inline-block;
 	vertical-align: middle;
 	width: 12vw;
-	height: 12vw;
 	padding: 2vw;
 }
 
@@ -349,9 +352,10 @@ aside
 {
 	display: inline-block;
 	vertical-align: middle;
+	width: calc(100% - 16vw);
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
-	font-size: 3vh;
+	font-size: 2.7vh;
 }
 
 /*** Texte zone vide ***/
