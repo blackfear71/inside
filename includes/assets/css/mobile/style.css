@@ -358,6 +358,20 @@ aside
 	font-size: 2.7vh;
 }
 
+/*** Celsius ***/
+.zone_celsius
+{
+	padding-top: 2vh;
+}
+
+.celsius
+{
+	float: left;
+	width: 10vw;
+	padding-right: 5vw;
+	filter: drop-shadow(0 0 0.4vw #7c7c7c);
+}
+
 /*** Texte zone vide ***/
 .empty
 {
@@ -365,7 +379,6 @@ aside
 	color: #262626;
 	font-size: 3vh;
 	text-align: justify;
-	padding-top: 2vh;
 	padding-bottom: 2vh;
 }
 
