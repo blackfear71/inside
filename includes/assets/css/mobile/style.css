@@ -309,6 +309,7 @@ aside
 	height: calc(100% - 17vh);
 	overflow: hidden;
 	pointer-events: none;
+	z-index: 5;
 }
 
 .aside_portail
