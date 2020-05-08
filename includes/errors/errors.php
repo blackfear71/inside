@@ -1,4 +1,8 @@
 <?php
+  // Lancement de la session
+  if (empty(session_id()))
+    session_start();
+
   // Récupération de la plateforme
   if ($_SESSION['index']['mobile'] == true)
     $platform = 'mobile';
@@ -12,8 +16,8 @@
   echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/styleErrors.css?version=' . $last_modification_errors . '" />';
 
   // Erreurs
-  echo '<div class="error_title">';
-    echo '<img src="/inside/includes/icons/common/inside_red.png" alt="inside" title="Inside" class="error_logo" />';
+  echo '<div class="titre_erreur">';
+    echo '<img src="/inside/includes/icons/common/inside_red.png" alt="inside" title="Inside" class="logo_erreur" />';
 
     switch ($_GET['code'])
     {
@@ -40,4 +44,7 @@
         break;
     }
   echo '</div>';
+
+  // Retour au portail
+  echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" class="lien_erreur">Revenir au portail</a>';
 ?>

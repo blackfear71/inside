@@ -3,6 +3,7 @@
   include_once('fonctions_dates.php');
   include_once('../classes/profile.php');
 
+  // Lancement de la session
   if (empty(session_id()))
     session_start();
 
@@ -83,7 +84,7 @@
 
       // Récupération de la sortie
       $listUsersJson = json_encode($listUsers);
-      
+
       echo $listUsersJson;
       break;
 

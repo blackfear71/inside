@@ -1,6 +1,7 @@
 <?php
   include_once('appel_bdd.php');
 
+  // Lancement de la session
   if (empty(session_id()))
     session_start();
 

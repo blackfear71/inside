@@ -1,6 +1,7 @@
 <?php
-  // Démarrage de la session
-  session_start();
+  // Lancement de la session
+  if (empty(session_id()))
+    session_start();
 
   // Modification de la session
   if ($_SESSION['index']['mobile'] == true)
