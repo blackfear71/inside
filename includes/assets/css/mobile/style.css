@@ -306,7 +306,7 @@ aside
 	position: absolute;
 	top: 10vh;
 	width: 100vw;
-	height: 83vh;
+	height: calc(100% - 17vh);
 	overflow: hidden;
 	pointer-events: none;
 }
@@ -337,7 +337,7 @@ aside
 {
 	display: block;
 	width: 100%;
-	border-bottom: solid 0.5vh #262626;
+	border-bottom: solid 0.4vh #262626;
 }
 
 .icone_aside
