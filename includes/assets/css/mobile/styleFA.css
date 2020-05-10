@@ -1,3 +1,48 @@
 /********************/
 /*** Food Advisor ***/
 /********************/
+
+/*** Boutons d'action ***/
+.lien_green
+{
+	display: block;
+	width: calc(100% - 4vw);
+	padding: 1vh 2vw 1vh 2vw;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+  text-align: center;
+	border-radius: 1vw;
+	box-shadow: 0 0 1vw #7c7c7c;
+  text-decoration: none;
+  background-color: #e3e3e3;
+}
+
+.lien_green:hover
+{
+  background-color: #70d55d;
+  color: white;
+}
+
+.lien_red
+{
+  display: block;
+  width: 100%;
+  padding: 1vh 2vw 1vh 2vw;
+  margin-top: 2vh;
+  font-family: robotolight, Verdana, sans-serif;
+  color: #262626;
+  font-size: 3vh;
+  text-align: center;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw #7c7c7c;
+  text-decoration: none;
+  background-color: #e3e3e3;
+	border: 0;
+}
+
+.lien_red:hover
+{
+	background-color: #ff1937;
+	color: white;
+}

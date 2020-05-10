@@ -34,6 +34,32 @@
 
       <article>
         <?php
+          /********************/
+          /* Boutons d'action */
+          /********************/
+          // Actualiser
+          echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page" class="lien_green">Actualiser</a>';
+
+          // Proposer un choix
+          if ($actions["saisir_choix"] == true)
+            echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_green">Proposer où manger</div></a>';
+
+          // Faire bande à part
+          if ($actions["solo"] == true)
+          {
+            echo '<form method="post" action="foodadvisor.php?action=doSolo">';
+              echo '<input type="submit" name="solo" value="Faire bande à part" class="lien_red" />';
+            echo '</form>';
+          }
+
+          // Lancer la détermination
+          if ($actions["determiner"] == true)
+          {
+            echo '<form method="post" action="foodadvisor.php?action=doDeterminer">';
+              echo '<input type="submit" name="determiner" value="Lancer la détermination" class="lien_red" />';
+            echo '</form>';
+          }
+
           // Message vide
           echo '<div class="zone_celsius">';
             echo '<img src="../../includes/icons/common/celsius.png" alt="celsius" title="Celsius" class="celsius" />';

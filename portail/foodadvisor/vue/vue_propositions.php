@@ -18,7 +18,7 @@
             echo '</form>';
           }
 
-          echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="" class="image_refresh" /></a>';
+          echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="refresh" class="image_refresh" /></a>';
         echo '</div>';
       echo '</div>';
     echo '</div>';

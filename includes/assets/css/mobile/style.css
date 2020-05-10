@@ -244,6 +244,7 @@ section
 article
 {
 	width: 90%;
+	padding-top: 2vh;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -345,15 +346,15 @@ aside
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 12vw;
-	padding: 2vw;
+	width: 6vh;
+	padding: 1vh;
 }
 
 .titre_aside
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(100% - 16vw);
+	width: calc(100% - 8vh);
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2.7vh;
@@ -368,8 +369,8 @@ aside
 .celsius
 {
 	float: left;
-	width: 10vw;
-	padding-right: 5vw;
+	width: 5vh;
+	padding-right: 2vh;
 	filter: drop-shadow(0 0 0.4vw #7c7c7c);
 }
 

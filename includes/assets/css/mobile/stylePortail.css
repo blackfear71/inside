@@ -3,11 +3,6 @@
 /***************/
 
 /*** Liens portail ***/
-.zone_liens_portail
-{
-  padding-top: 3vh;
-}
-
 .lien_portail
 {
   display: block;
@@ -23,9 +18,9 @@
 {
   display: inline-block;
   vertical-align: middle;
-  width: 12vw;
-  padding: 2vw;
-  margin-right: 2vw;
+  width: 6vh;
+  padding: 1vh;
+  margin-right: 1vh;
   background-color: #2c3840;
 }
 
