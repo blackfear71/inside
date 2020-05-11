@@ -60,6 +60,67 @@
             echo '</form>';
           }
 
+
+
+
+
+
+
+
+
+          /****************/
+          /* Bande à part */
+          /****************/
+          echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">Ils font bande à part</div>';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+          echo '</div>';
+
+
+
+
+
+
+
+          /************/
+          /* Non voté */
+          /************/
+          echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">Ils n\'ont pas voté</div>';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+          echo '</div>';
+
+
+
+
+
+          /************************/
+          /* Propositions du jour */
+          /************************/
+          echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">Les propositions du jour</div>';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+          echo '</div>';
+
+
+
+
+          /*************/
+          /* Mes choix */
+          /*************/
+          echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">Mes choix</div>';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+          echo '</div>';
+
+
+
+
+
           // Message vide
           echo '<div class="zone_celsius">';
             echo '<img src="../../includes/icons/common/celsius.png" alt="celsius" title="Celsius" class="celsius" />';
@@ -68,6 +129,9 @@
 
             echo '<div class="empty">Celle-ci est en cours de développement et n\'est pas encore disponible. Tu peux utiliser le bouton présent en bas du site pour revenir à la version classique et utiliser toutes ses fonctionnalités comme avant !</div>';
           echo '</div>';
+
+
+
         ?>
       </article>
     </section>

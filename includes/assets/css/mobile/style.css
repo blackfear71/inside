@@ -245,6 +245,7 @@ article
 {
 	width: 90%;
 	padding-top: 2vh;
+	padding-bottom: 2vh;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -382,6 +383,51 @@ aside
 	font-size: 3vh;
 	text-align: justify;
 	padding-bottom: 2vh;
+}
+
+/*** Titres ***/
+.titre_section
+{
+	width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+	border-bottom: solid 0.1vh #b3b3b3;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+}
+
+.logo_titre_section
+{
+	display: inline-block;
+	height: 3vh;
+	width: 3vh;
+	margin-right: 1vh;
+	vertical-align: top;
+}
+
+.texte_titre_section
+{
+	display: inline-block;
+	width: calc(100% - 8vh);
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 3vh;
+	font-weight: bold;
+	line-height: 3vh;
+	color: #262626;
+	text-align: left;
+	word-break: break-word;
+	vertical-align: middle;
+}
+
+.fleche_titre_section
+{
+	display: inline-block;
+	height: 2.5vh;
+	width: 2.5vh;
+	margin-left: 1vh;
+	padding: 0.25vh;
+	vertical-align: top;
+	transform: rotate(-90deg);
 }
 
 /*** Alertes ***/
