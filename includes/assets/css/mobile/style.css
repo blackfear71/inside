@@ -399,8 +399,8 @@ aside
 .logo_titre_section
 {
 	display: inline-block;
-	height: 3vh;
-	width: 3vh;
+	height: 4vh;
+	width: 4vh;
 	margin-right: 1vh;
 	vertical-align: top;
 }
@@ -408,11 +408,11 @@ aside
 .texte_titre_section
 {
 	display: inline-block;
-	width: calc(100% - 8vh);
+	width: calc(100% - 10vh);
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 3vh;
 	font-weight: bold;
-	line-height: 3vh;
+	line-height: 4vh;
 	color: #262626;
 	text-align: left;
 	word-break: break-word;
@@ -425,7 +425,7 @@ aside
 	height: 2.5vh;
 	width: 2.5vh;
 	margin-left: 1vh;
-	padding: 0.25vh;
+	padding: 0.75vh;
 	vertical-align: top;
 	transform: rotate(-90deg);
 }
