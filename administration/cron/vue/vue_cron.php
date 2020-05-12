@@ -122,7 +122,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a class="detailsLogs">';
-                            echo '<img src="../../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="daily_arrow_' . $i . '" />';
+                            echo '<img src="../../includes/icons/common/open.png" alt="open" class="see_log" id="daily_arrow_' . $i . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
@@ -181,7 +181,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a class="detailsLogs">';
-                            echo '<img src="../../includes/icons/admin/see_log.png" alt="see_log" class="see_log" id="weekly_arrow_' . $j . '" />';
+                            echo '<img src="../../includes/icons/admin/open.png" alt="open" class="see_log" id="weekly_arrow_' . $j . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';
