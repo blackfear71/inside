@@ -4,13 +4,6 @@
 // Au chargement du document
 $(function()
 {
-
-    var windowHeight = $(window).innerHeight();
-    $('body').css({'height':windowHeight});
-
-
-
-
   /** Actions au chargement ***/
   // Affichage des alertes
   if ($('#alerte').length)
