@@ -230,7 +230,7 @@ body
 	min-height: 100vh;
 	margin: 0;
 	position: relative;
-  background-color: #fbfbfb;
+	background-color: #fbfbfb;
 }
 
 section
@@ -554,8 +554,8 @@ footer
 {
 	display: inline-block;
 	line-height: 7vh;
-	padding-left: 5vw;
-	padding-right: 5vw;
+	padding-left: 2vh;
+	padding-right: 2vh;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2vh;
@@ -599,6 +599,6 @@ footer
   font-size: 2vh;
   color: white;
   text-align: left;
-	padding-left: 5vw;
-	padding-right: 5vw;
+	padding-left: 2vh;
+	padding-right: 2vh;
 }
