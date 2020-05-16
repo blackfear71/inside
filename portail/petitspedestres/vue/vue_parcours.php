@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "PP";
+      $title_head      = "Les Petits Pédestres";
       $style_head      = "stylePP.css";
       $script_head     = "";
       $angular_head    = false;

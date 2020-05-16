@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "CO";
+      $title_head      = "Collector Room";
       $style_head      = "styleCO.css";
       $script_head     = "scriptCO.js";
       $angular_head    = false;
@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/

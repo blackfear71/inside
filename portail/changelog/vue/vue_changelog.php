@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "CL";
+      $title_head      = "Journal des modifications";
       $style_head      = "styleCL.css";
       $script_head     = "scriptCL.js";
       $angular_head    = false;

@@ -62,11 +62,11 @@ $(function()
 // Fige la taille de l'écran
 function fixViewport()
 {
-  var viewheight = $(window).height();
-  var viewwidth = $(window).width();
-  var viewport = document.querySelector("meta[name=viewport]");
+  var viewHeight = $(window).height();
+  var viewWidth  = $(window).width();
+  var viewport   = document.querySelector("meta[name=viewport]");
 
-  viewport.setAttribute("content", "height=" + viewheight + "px, width=" + viewwidth + "px, initial-scale=1.0");
+  viewport.setAttribute("content", "height=" + viewHeight + "px, width=" + viewWidth + "px, initial-scale=1.0");
 }
 
 // Affiche ou masque un élément (délai 200ms)

@@ -8,7 +8,9 @@ $(function()
   // Déplie une zone en cliquant sur le titre
   $('.titre_section').click(function()
   {
-    openSection($(this));
+    var idZone = $(this).attr('id').replace('titre_', 'afficher_');
+
+    openSection($(this), idZone);
   });
 });
 
@@ -16,7 +18,7 @@ $(function()
 /*** Fonctions ***/
 /*****************/
 // Ouvre une zone sous un titre
-function openSection(titre)
+function openSection(titre, zone)
 {
   // Calcul de l'angle
   var fleche = titre.children('.fleche_titre_section');
@@ -42,4 +44,7 @@ function openSection(titre)
     fleche.css('transform', 'rotate(-90deg)');
   else
     fleche.css('transform', 'rotate(0deg)');
+
+  // Affichage ou masquage de la zone
+  afficherMasquerIdWithDelay(zone);
 }

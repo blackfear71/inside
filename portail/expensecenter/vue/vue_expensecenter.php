@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "EC";
+      $title_head      = "Expense Center";
       $style_head      = "styleEC.css";
       $script_head     = "scriptEC.js";
       $angular_head    = false;

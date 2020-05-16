@@ -39,7 +39,7 @@
       // Initialisation de la session utilisateur
       $_SESSION['index']['connected']  = true;
       $_SESSION['user']['identifiant'] = $user->getIdentifiant();
-      $_SESSION['user']['pseudo']      = $user->getPseudo();
+      $_SESSION['user']['pseudo']      = htmlspecialchars($user->getPseudo());
       $_SESSION['user']['avatar']      = $user->getAvatar();
 
       // Initialisation des préférences utilisateur et du chat

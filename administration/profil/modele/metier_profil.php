@@ -106,7 +106,7 @@
       physiqueUpdatePseudoUser($identifiant, $pseudo);
 
       // Mise à jour de la session
-      $_SESSION['user']['pseudo'] = $pseudo;
+      $_SESSION['user']['pseudo'] = htmlspecialchars($pseudo);
 
       // Message d'alerte
       $_SESSION['alerts']['infos_updated'] = true;

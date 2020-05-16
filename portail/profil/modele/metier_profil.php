@@ -321,7 +321,7 @@
       $req1->closeCursor();
 
       // Mise à jour de la session
-      $_SESSION['user']['pseudo'] = $pseudo;
+      $_SESSION['user']['pseudo'] = htmlspecialchars($pseudo);
     }
 
     // Mise à jour de l'adresse mail

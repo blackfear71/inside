@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "EM";
+      $title_head      = "Event Manager";
       $style_head      = "styleEM.css";
       $script_head     = "";
       $angular_head    = false;

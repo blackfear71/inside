@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "MI";
+      $title_head      = "Missions : Insider";
       $style_head      = "styleMI.css";
       $script_head     = "";
       $angular_head    = false;

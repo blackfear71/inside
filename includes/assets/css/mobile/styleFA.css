@@ -47,3 +47,54 @@
 	background-color: #ff1937;
 	color: white;
 }
+
+/*** Bande à part & sans vote***/
+.zone_propositions_solo_sans_vote
+{
+	width: 100%;
+}
+
+.zone_solo_sans_vote
+{
+	display: block;
+	width: 100%;
+	padding-bottom: 1vh;
+}
+
+.avatar_solo_sans_vote
+{
+	display: inline-block;
+	margin-right: 1vh;
+	vertical-align: middle;
+	height: 5vh;
+	border-radius: 50%;
+	background-color: #262626;
+	box-shadow: 0 0 1vw #7c7c7c;
+}
+
+.pseudo_solo_sans_vote
+{
+	display: inline-block;
+	width: calc(100% - 6vh);
+	vertical-align: middle;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	word-break: break-word;
+}
+
+/*** Propositions ***/
+.zone_propositions_users
+{
+	width: 100%;
+	height: 10vh;
+	background: red;
+}
+
+/*** Mes choix ***/
+.zone_propositions_mes_choix
+{
+	width: 100%;
+	height: 10vh;
+	background: yellow;
+}

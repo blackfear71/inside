@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "MH";
+      $title_head      = "Movie House";
       $style_head      = "styleMH.css";
       $script_head     = "scriptMH.js";
       $angular_head    = false;
@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/

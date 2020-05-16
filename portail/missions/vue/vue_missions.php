@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "MI";
+      $title_head      = "Missions : Insider";
       $style_head      = "styleMI.css";
       $script_head     = "scriptMI.js";
       $angular_head    = false;
@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/

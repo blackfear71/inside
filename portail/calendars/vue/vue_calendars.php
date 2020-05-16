@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "CA";
+      $title_head      = "Calendars";
       $style_head      = "styleCA.css";
       $script_head     = "scriptCA.js";
       $angular_head    = false;
@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/

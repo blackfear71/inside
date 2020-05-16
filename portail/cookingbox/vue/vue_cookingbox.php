@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "CB";
+      $title_head      = "Cooking Box";
       $style_head      = "styleCB.css";
       $script_head     = "scriptCB.js";
       $angular_head    = false;
@@ -34,7 +34,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/

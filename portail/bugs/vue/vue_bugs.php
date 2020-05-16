@@ -3,7 +3,7 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Bugs";
+      $title_head      = "Demandes d'évolution";
       $style_head      = "styleBugs.css";
       $script_head     = "scriptBugs.js";
       $angular_head    = false;
