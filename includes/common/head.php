@@ -26,7 +26,9 @@
   echo '<meta charset="utf-8" />';
   echo '<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />';
   echo '<meta name="keywords" content="Inside, portail, CDS Finance" />';
-  echo '<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">';
+
+  if ($_SESSION['index']['mobile'] == true)
+    echo '<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">';
 
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
