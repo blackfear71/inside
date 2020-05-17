@@ -29,9 +29,15 @@
 
       <!-- Menus -->
       <aside>
-				<?php include('../../includes/common/aside_mobile.php'); ?>
-			</aside>
+        <?php include('../../includes/common/aside_mobile.php'); ?>
+      </aside>
 
+      <!-- Chargement page -->
+      <div class="zone_loading_image">
+        <img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />
+      </div>
+      
+      <!-- Contenu -->
       <article>
         <?php
           /***********/

@@ -8,6 +8,10 @@ $(function()
   // Forçage taille écran (viewport)
   fixViewport();
 
+  // Animation symbole chargement de la page
+  loadingPage();
+  loadPage = setInterval(loadingPage, 100);
+
   // Affichage des alertes
   if ($('#alerte').length)
     afficherMasquerIdWithDelay('alerte');
@@ -56,6 +60,13 @@ $(function()
   });
 });
 
+// Au chargement du document complet
+$(window).on('load', function()
+{
+  // Remplacement du chargement par le contenu
+  endLoading();
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
@@ -67,6 +78,48 @@ function fixViewport()
   var viewport   = document.querySelector("meta[name=viewport]");
 
   viewport.setAttribute("content", "height=" + viewHeight + "px, width=" + viewWidth + "px, initial-scale=1.0");
+}
+
+// Animation chargement de la page en boucle
+function loadingPage()
+{
+  if ($('.zone_loading_image').length)
+  {
+    // Calcul de l'angle courant
+    var matrix = $('#loading_image').css('transform');
+
+    if (matrix !== 'none')
+    {
+      var values = matrix.split('(')[1].split(')')[0].split(',');
+      var a      = values[0];
+      var b      = values[1];
+      var angle  = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+
+      if (angle < 0)
+        angle = angle + 360;
+    }
+    else
+      var angle = 0;
+
+    // On rajoute 45 degrés
+    angle += 45;
+
+    // On applique la transformation
+    $('#loading_image').css('transform', 'rotate(' + angle + 'deg)');
+  }
+}
+
+// Termine le chargement
+function endLoading()
+{
+  // Suppression de la barre de chargement de la page
+  $('.zone_loading_image').remove();
+
+  // Affichage du contenu
+  $('article').css('display', 'block');
+
+  // Arrêt de la répétition
+  clearInterval(loadPage);
 }
 
 // Affiche ou masque un élément (délai 200ms)
