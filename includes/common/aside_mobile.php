@@ -1,25 +1,37 @@
 <?php
+  // Tableaux des menus
+  $listeAsidePortail = array(array('lien'  => '/inside/portail/portail/portail.php?action=goConsulter',
+                                   'image' => 'inside_white',
+                                   'titre' => 'PORTAIL'),
+                             array('lien'  => '/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter',
+                                   'image' => 'food_advisor',
+                                   'titre' => 'LES ENFANTS ! À TABLE !')
+                            );
+
+  $listeAsideUser = array(array('lien'  => '/inside/includes/functions/disconnect.php',
+                                'image' => 'logout',
+                                'titre' => 'DÉCONNEXION')
+                         );
+
   // Menu portail
   echo '<div class="aside_portail">';
-    // Portail
-    echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" class="lien_aside">';
-      echo '<img src="/inside/includes/icons/common/inside_white.png" alt="inside_white" title="Portail" class="icone_aside" />';
-      echo '<div class="titre_aside">PORTAIL</div>';
-    echo '</a>';
-
-    // Les enfants ! À table !
-    echo '<a href="/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter" class="lien_aside">';
-      echo '<img src="/inside/includes/icons/common/food_advisor.png" alt="food_advisor" title="Les enfants ! À table !" class="icone_aside" />';
-      echo '<div class="titre_aside">LES ENFANTS ! À TABLE !</div>';
-    echo '</a>';
+    foreach ($listeAsidePortail as $asidePortail)
+    {
+      echo '<a href="' . $asidePortail['lien'] . '" class="lien_aside">';
+        echo '<img src="/inside/includes/icons/common/' . $asidePortail['image'] . '.png" alt="' . $asidePortail['image'] . '" title="Portail" class="icone_aside" />';
+        echo '<div class="titre_aside">' . $asidePortail['titre'] . '</div>';
+      echo '</a>';
+    }
   echo '</div>';
 
   // Menu utilisateur
   echo '<div class="aside_user">';
-    // Déconnexion
-    echo '<a href="/inside/includes/functions/disconnect.php" class="lien_aside">';
-      echo '<img src="/inside/includes/icons/common/logout.png" alt="logout" title="Déconnexion" class="icone_aside" />';
-      echo '<div class="titre_aside">DÉCONNEXION</div>';
-    echo '</a>';
+    foreach ($listeAsideUser as $asideUser)
+    {
+      echo '<a href="' . $asideUser['lien'] . '" class="lien_aside">';
+        echo '<img src="/inside/includes/icons/common/' . $asideUser['image'] . '.png" alt="' . $asideUser['image'] . '" title="Portail" class="icone_aside" />';
+        echo '<div class="titre_aside">' . $asideUser['titre'] . '</div>';
+      echo '</a>';
+    }
   echo '</div>';
 ?>
