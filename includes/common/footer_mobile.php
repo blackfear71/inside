@@ -19,5 +19,5 @@
 
     // Copyright
     echo '<div class="copyright">© 2017-' . date("Y") . ' Inside</div>';
-  echo '<div>';
+  echo '</div>';
 ?>

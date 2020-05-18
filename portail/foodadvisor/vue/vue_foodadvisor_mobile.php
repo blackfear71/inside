@@ -34,7 +34,7 @@
 
       <!-- Chargement page -->
       <div class="zone_loading_image">
-        <img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />
+        <img src="../../includes/icons/common/loading.png" alt="" id="loading_image" class="loading_image" />
       </div>
 
       <!-- Contenu -->
@@ -128,6 +128,18 @@
             echo '<div class="texte_titre_section">Les propositions du jour</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
+
+
+
+
+
+
+
+
+          if (!empty($propositions))
+            echo '<div class="empty">L\'affichage des propositions n\'est pas encore disponible sur cette version.</div>';
+          else
+            echo '<div class="empty">Pas encore de propositions pour aujourd\'hui</div>';
 
           //echo '<div id="afficher_propositions_users" class="zone_propositions_users">rouge</div>';
 

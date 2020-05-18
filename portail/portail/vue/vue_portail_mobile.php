@@ -34,9 +34,9 @@
 
       <!-- Chargement page -->
       <div class="zone_loading_image">
-        <img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />
+        <img src="../../includes/icons/common/loading.png" alt="" id="loading_image" class="loading_image" />
       </div>
-      
+
       <!-- Contenu -->
       <article>
         <?php

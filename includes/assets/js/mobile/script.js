@@ -119,7 +119,8 @@ function endLoading()
   $('article').css('display', 'block');
 
   // Arrêt de la répétition
-  clearInterval(loadPage);
+  if (typeof loadPage !== 'undefined')
+    clearInterval(loadPage);
 }
 
 // Affiche ou masque un élément (délai 200ms)
