@@ -135,23 +135,34 @@
 
 
 
-
-          if (!empty($propositions))
-            echo '<div class="empty">L\'affichage des propositions n\'est pas encore disponible sur cette version.</div>';
-          else
-            echo '<div class="empty">Pas encore de propositions pour aujourd\'hui</div>';
+          echo '<div id="afficher_propositions_users" class="zone_propositions_users">';
+            if (!empty($propositions))
+              echo '<div class="empty">L\'affichage des propositions n\'est pas encore disponible sur cette version.</div>';
+            else
+              echo '<div class="empty">Pas encore de propositions pour aujourd\'hui</div>';
+          echo '</div>';
 
           //echo '<div id="afficher_propositions_users" class="zone_propositions_users">rouge</div>';
 
           /*************/
           /* Mes choix */
           /*************/
-          if (isset($mesChoix) AND !empty($mesChoix))
+          if (isset($mesChoix) AND !empty($mesChoix) AND $isSolo != true)
           {
             echo '<div id="titre_propositions_mes_choix" class="titre_section">';
               echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
               echo '<div class="texte_titre_section">Mes choix</div>';
               echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+            echo '</div>';
+
+
+
+
+            echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">';
+              if (!empty($propositions))
+                echo '<div class="empty">L\'affichage des choix n\'est pas encore disponible sur cette version.</div>';
+              else
+                echo '<div class="empty">Pas de choix encore saisis pour aujourd\'hui</div>';
             echo '</div>';
 
             //echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">jaune</div>';
