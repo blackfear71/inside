@@ -12,10 +12,6 @@ $(function()
   loadingPage();
   loadPage = setInterval(loadingPage, 100);
 
-  // Affichage des alertes
-  if ($('#alerte').length)
-    afficherMasquerIdWithDelay('alerte');
-
   // Mise à jour du ping à chaque chargement de page et toutes 60 secondes
   updatePing();
   setInterval(updatePing, 60000);
@@ -57,6 +53,32 @@ $(function()
   $('#boutonFermerAlerte').click(function()
   {
     masquerSupprimerIdWithDelay('alerte');
+  });
+
+  // Messages de confirmation
+  $('.eventConfirm').click(function()
+  {
+    var idForm  = $(this).closest('form').attr('id');
+    var message = $(this).closest('form').find('.eventMessage').val();
+
+    if (!confirmAction(idForm, message))
+      return false;
+  });
+
+  // Valider confirmation
+  $(document).on('click', '#boutonAnnuler', function()
+  {
+    var action_form = $('#actionForm').val();
+
+    executeAction(action_form, 'cancel');
+  });
+
+  // Annuler confirmation
+  $(document).on('click', '#boutonConfirmer', function()
+  {
+    var action_form = $('#actionForm').val();
+
+    executeAction(action_form, 'validate');
   });
 });
 
@@ -167,4 +189,52 @@ function deployerMenuUser()
     $('.aside_user').css('right', ('0%'));
 
   $('.aside_user').css('transition', 'right ease 0.3s');
+}
+
+// Ouvre une fenêtre de confirmation
+function confirmAction(form, message)
+{
+  // Suppression fenêtre éventuellement existante
+  if ($('#confirmBox').length)
+    $('#confirmBox').remove();
+
+  // Génération nouvelle fenêtre de confirmation
+  var html = '';
+
+  html += '<div class="fond_alerte" id="confirmBox">';
+    html += '<div class="zone_affichage_alerte">';
+      html += '<input type="hidden" id="actionForm" value="' + form + '" />';
+
+      html += '<div class="titre_alerte">';
+        html += 'Inside';
+      html += '</div>';
+
+      html += '<div class="zone_alertes">';
+        html += '<div class="zone_texte_alerte">';
+          html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
+
+          html += '<div class="texte_alerte">';
+            html += message;
+          html += '</div>';
+        html += '</div>';
+      html += '</div>';
+
+      html += '<div class="zone_boutons_alerte">';
+        html += '<a id="boutonAnnuler" class="bouton_alerte">Annuler</a>';
+        html += '<a id="boutonConfirmer" class="bouton_alerte">Oui</a>';
+      html += '</div>';
+    html += '</div>';
+  html += '</div>';
+
+  // Ajout à la page
+  $('body').append(html);
+}
+
+// Ferme la fenêtre ou execute le formulaire
+function executeAction(form, action)
+{
+  if (action == 'cancel')
+    masquerSupprimerIdWithDelay('confirmBox');
+  else
+    $('#' + form).submit();
 }

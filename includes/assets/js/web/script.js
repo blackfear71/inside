@@ -460,9 +460,11 @@ function scrollToId(id, offset, shadow = false)
 // Ouvre une fenêtre de confirmation
 function confirmAction(form, message)
 {
+  // Suppression fenêtre éventuellement existante
   if ($('#confirmBox').length)
     $('#confirmBox').remove();
 
+  // Génération nouvelle fenêtre de confirmation
   var html = '';
 
   html += '<div class="fond_alerte" id="confirmBox">';
@@ -490,6 +492,7 @@ function confirmAction(form, message)
     html += '</div>';
   html += '</div>';
 
+  // Ajout à la page
   $('body').append(html);
 }
 

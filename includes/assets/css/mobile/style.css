@@ -456,7 +456,6 @@ aside
 /*** Alertes ***/
 .fond_alerte
 {
-	display: none;
 	background-color: rgb(0, 0, 0, 0.5);
 	position: fixed;
 	z-index: 10;
