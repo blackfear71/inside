@@ -25,9 +25,9 @@
 .texte_lien_portail
 {
   display: inline-block;
-  width: calc(100% - 10vh);
-  padding: 1vh;
-  line-height: 6vh;
+  width: calc(100% - 12vh);
+  padding: 2vh;
+  line-height: 4vh;
   vertical-align: middle;
   font-family: robotolight, Verdana, sans-serif;
   color: white;
