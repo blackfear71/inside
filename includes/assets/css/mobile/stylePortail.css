@@ -8,10 +8,10 @@
   display: block;
   margin-bottom: 3vh;
 	width: 100%;
-  background-color: #374650;
   border-radius: 1vw;
   overflow: hidden;
   box-shadow: 0 0 1vw #7c7c7c;
+  background-color: #2c3840;
 }
 
 .icone_lien_portail
@@ -20,15 +20,17 @@
   vertical-align: middle;
   width: 6vh;
   padding: 1vh;
-  margin-right: 1vh;
-  background-color: #2c3840;
 }
 
 .texte_lien_portail
 {
   display: inline-block;
+  width: calc(100% - 10vh);
+  padding: 1vh;
+  line-height: 6vh;
   vertical-align: middle;
   font-family: robotolight, Verdana, sans-serif;
   color: white;
   font-size: 3vh;
+  background-color: #374650;
 }
