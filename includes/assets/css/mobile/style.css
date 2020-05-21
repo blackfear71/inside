@@ -341,9 +341,9 @@ aside
 {
 	display: block;
 	border-bottom: solid 0.4vh #262626;
-	width: calc(100% - 2vh);
-	padding-left: 1vh;
-	padding-right: 1vh;
+	width: calc(100% - 4vh);
+	padding-left: 2vh;
+	padding-right: 2vh;
 	line-height: 8vh;
 }
 
