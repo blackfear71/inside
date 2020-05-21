@@ -8,6 +8,9 @@ $(function()
   // Forçage taille écran (viewport)
   fixViewport();
 
+  // Initialisation de la position Celsius
+  initPositionCelsius();
+
   // Animation symbole chargement de la page
   loadingPage();
   loadPage = setInterval(loadingPage, 100);
@@ -33,10 +36,10 @@ $(function()
   $(document).on('click', function(event)
   {
     // Ferme le menu latéral gauche
-    if ($(event.target).attr('class') != 'aside_portail'
-    &&  $(event.target).attr('class') != 'lien_aside'
-    &&  $(event.target).attr('class') != 'icone_aside'
-    &&  $(event.target).attr('class') != 'titre_aside'
+    if ($(event.target).attr('class')   != 'aside_portail'
+    &&  $(event.target).attr('class')   != 'lien_aside'
+    &&  $(event.target).attr('class')   != 'icone_aside'
+    &&  $(event.target).attr('class')   != 'titre_aside'
     &&  $('.aside_portail').css('left') == '0px')
       deployerMenuPortail();
 
@@ -47,6 +50,17 @@ $(function()
     &&  $(event.target).attr('class') != 'titre_aside'
     &&  $('.aside_user').css('right') == '0px')
       deployerMenuUser();
+
+    // Ferme le contenu Celsius
+    if ($(event.target).attr('class')       != 'zone_contenu_celsius'
+    &&  $(event.target).attr('class')       != 'titre_contenu_celsius'
+    &&  $(event.target).attr('class')       != 'zone_texte_celsius'
+    &&  $(event.target).attr('class')       != 'texte_contenu_celsius'
+    &&  $(event.target).attr('class')       != 'zone_boutons_celsius'
+    &&  $(event.target).attr('class')       != 'bouton_celsius'
+    &&  $(event.target).attr('class')       != 'celsius'
+    &&  $('#contenuCelsius').css('display') != 'none')
+      afficherMasquerIdWithDelay('contenuCelsius');
   });
 
   // Bouton fermer alerte
@@ -80,6 +94,107 @@ $(function()
 
     executeAction(action_form, 'validate');
   });
+
+  // Positionnement top début maintien clic et positions initiales
+  $('.celsius').on('touchstart', function(e)
+  {
+    e.preventDefault();
+
+    // Top début maintien clic
+    $(this).data('touchstart', true);
+
+    // Détermination clic simple
+    setTimeout(function()
+    {
+      // Si clic simple alors on affiche le contenu
+      afficherMasquerContenuCelsius();
+    }, 200);
+
+    // Positions initiales élément et souris
+    celsiusPosX = $(this).offset().left;
+    celsiusPosY = $(this).offset().top;
+    touchPosX   = e.originalEvent.touches[0].pageX;
+    touchPosY   = e.originalEvent.touches[0].pageY;
+
+    $(this).data('initCelsiusPosX', celsiusPosX);
+    $(this).data('initCelsiusPosY', celsiusPosY);
+    $(this).data('initTouchPosX', touchPosX);
+    $(this).data('initTouchPosY', touchPosY);
+
+    // Animation taille élément
+    $(this).css('transform', 'scale(0.8)');
+    $(this).css('transition', 'transform 0.2s ease');
+  });
+
+  // Positionnement top fin maintien clic
+  $('.celsius').on('touchend',function(e)
+  {
+    e.preventDefault();
+
+    // Top fin maintien clic
+    $('.celsius').data('touchstart', false);
+
+    // Animation taille élément
+    $('.celsius').css('transform', 'scale(1)');
+    $('.celsius').css('transition', 'transform 0.2s ease');
+  });
+
+  // Déplacement du bloc
+  $('.celsius').on('touchmove', function(e)
+  {
+    e.preventDefault();
+
+    // Si le clic est maintenu on bouge l'élément
+    if ($('.celsius').data('touchstart') == true)
+    {
+      // Marges minimales à respecter
+      var paddingScreen = $(window).height() * (2 / 100);
+      var minScreenX    = paddingScreen;
+      var minScreenY    = paddingScreen;
+      var maxScreenX    = $(window).width() - (paddingScreen + $('.celsius').width());
+      var maxScreenY    = $(window).height() - (paddingScreen + $('.celsius').height());
+
+      // Récupération de la position courante de la souris
+      var touchPosX = e.originalEvent.touches[0].pageX;
+      var touchPosY = e.originalEvent.touches[0].pageY;
+
+      // Calcul de la différence de position de la souris par rapport à la position initiale
+      var ecartTouchPosX = touchPosX - $('.celsius').data('initTouchPosX');
+      var ecartTouchPosY = touchPosY - $('.celsius').data('initTouchPosY');
+      var scrollPosY     = $(window).scrollTop();
+
+      // Calcul de la nouvelle position
+      var newPosX = $('.celsius').data('initCelsiusPosX') + ecartTouchPosX;
+      var newPosY = $('.celsius').data('initCelsiusPosY') + ecartTouchPosY - scrollPosY;
+
+      // Limites la position sur l'écran
+      if (newPosX < minScreenX)
+        newPosX = minScreenX;
+
+      if (newPosY < minScreenY)
+        newPosY = minScreenY;
+
+      if (newPosX > maxScreenX)
+        newPosX = maxScreenX;
+
+      if (newPosY > maxScreenY)
+        newPosY = maxScreenY;
+
+      // Applique la position
+      $('.celsius').css('left', newPosX);
+      $('.celsius').css('top', newPosY);
+
+      // On cache le contenu
+      if ($('#contenuCelsius').css('display') != 'none')
+        afficherMasquerIdWithDelay('contenuCelsius');
+    }
+  });
+
+  // Ferme le contenu Celsius
+  $('#closeCelsius').click(function()
+  {
+    afficherMasquerIdWithDelay('contenuCelsius');
+  });
 });
 
 // Au chargement du document complet
@@ -100,6 +215,54 @@ function fixViewport()
   var viewport   = document.querySelector("meta[name=viewport]");
 
   viewport.setAttribute("content", "height=" + viewHeight + "px, width=" + viewWidth + "px, initial-scale=1.0");
+}
+
+// Initialisation de la position Celsius
+function initPositionCelsius()
+{
+  $('.celsius').css('top', '84vh');
+  $('.celsius').css('right', '2vh');
+}
+
+// Détermination partie de l'écran
+function isUpScreen()
+{
+  var isUpScreen        = true;
+  var celsiusTopPosY    = $('.celsius').position().top;
+  var halfHeightCelsius = $('.celsius').height() / 2;
+
+  var celsiusCenterPosY = celsiusTopPosY + halfHeightCelsius;
+  var halfHeightScreen  = $(window).height() / 2;
+
+  if (celsiusCenterPosY > halfHeightScreen)
+    isUpScreen = false;
+
+  return isUpScreen;
+}
+
+// Affichage contenu Celsius
+function afficherMasquerContenuCelsius()
+{
+  // Affichage seulement si clic relâché
+  if ($('.celsius').data('touchstart') == false)
+  {
+    // Détermination position écran
+    var isUp = isUpScreen();
+
+    if (isUp == true)
+    {
+      $('.zone_contenu_celsius').css('bottom', '2vh');
+      $('.zone_contenu_celsius').css('top', 'auto');
+    }
+    else
+    {
+      $('.zone_contenu_celsius').css('bottom', 'auto');
+      $('.zone_contenu_celsius').css('top', '2vh');
+    }
+
+    // Affichage contenu
+    afficherMasquerIdWithDelay('contenuCelsius');
+  }
 }
 
 // Animation chargement de la page en boucle

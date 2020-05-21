@@ -37,6 +37,13 @@
         <img src="../../includes/icons/common/loading.png" alt="" id="loading_image" class="loading_image" />
       </div>
 
+      <!-- Celsius -->
+      <?php
+        $celsius = "portail";
+
+        include('../../includes/common/celsius.php');
+      ?>
+
       <!-- Contenu -->
       <article>
         <?php
