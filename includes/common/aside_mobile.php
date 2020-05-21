@@ -26,6 +26,15 @@
 
   // Menu utilisateur
   echo '<div class="aside_user">';
+    echo '<div class="zone_infos_user_aside">';
+      // Niveau
+      echo '<div class="niveau_aside">' . $_SESSION['user']['experience']['niveau'] . '</div>';
+
+      // Pseudo
+      echo '<div class="pseudo_aside">' . formatPseudo($_SESSION['user']['pseudo'], 30) . '</div>';
+    echo '</div>';
+
+    // Liens
     foreach ($listeAsideUser as $asideUser)
     {
       echo '<a href="' . $asideUser['lien'] . '" class="lien_aside">';
