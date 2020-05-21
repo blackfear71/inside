@@ -213,8 +213,8 @@ $(window).on('load', function()
 // Fige la taille de l'écran
 function fixViewport()
 {
-  var viewHeight = screen.availHeight;
-  var viewWidth  = screen.availWidth;
+  var viewHeight = $(window).height();
+  var viewWidth  = $(window).width();
   var viewport   = document.querySelector("meta[name=viewport]");
 
   viewport.setAttribute("content", "height=" + viewHeight + "px, width=" + viewWidth + "px, initial-scale=1.0");
