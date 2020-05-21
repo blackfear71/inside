@@ -4,8 +4,6 @@
 // Au chargement du document
 $(function()
 {
-  window.scrollTo(0,1);
-  
   /** Actions au chargement ***/
   // Forçage taille écran (viewport)
   fixViewport();
