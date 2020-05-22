@@ -223,7 +223,7 @@ function fixViewport()
 // Initialisation de la position Celsius
 function initPositionCelsius()
 {
-  $('.celsius').css('top', '84vh');
+  $('.celsius').css('bottom', '9vh');
   $('.celsius').css('right', '2vh');
 }
 
