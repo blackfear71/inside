@@ -236,7 +236,7 @@ body
 section
 {
 	width: 100vw;
-	min-height: 83%;
+	min-height: calc(100% - 17vh);
 }
 
 article
