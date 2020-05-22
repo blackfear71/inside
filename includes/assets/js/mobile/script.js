@@ -98,6 +98,13 @@ $(function()
     executeAction(action_form, 'validate');
   });
 
+  // Ferme le contenu Celsius
+  $('#closeCelsius').click(function()
+  {
+    afficherMasquerIdWithDelay('contenuCelsius');
+  });
+
+  /*** Actions sur mobile ***/
   // Positionnement top début maintien clic et positions initiales
   $('.celsius').on('touchstart', function(e)
   {
@@ -125,10 +132,11 @@ $(function()
     touchMoveCelsius($(this), e);
   });
 
-  // Ferme le contenu Celsius
-  $('#closeCelsius').click(function()
+  // Remise en place Celsius au changement d'orientation
+  $(window).on('orientationchange', function()
   {
-    afficherMasquerIdWithDelay('contenuCelsius');
+    // Réinitialsiation Celsius
+    initPositionCelsius();
   });
 });
 
@@ -155,8 +163,8 @@ function fixViewport()
 // Initialisation de la position Celsius
 function initPositionCelsius()
 {
-  $('.celsius').css('bottom', '9vh');
-  $('.celsius').css('right', '2vh');
+  $('.celsius').css('top', 'calc(100% - 16vh)');
+  $('.celsius').css('left', 'calc(100% - 9vh)');
 }
 
 // Détermination partie de l'écran
