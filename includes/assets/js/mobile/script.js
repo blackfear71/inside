@@ -103,30 +103,8 @@ $(function()
   {
     e.preventDefault();
 
-    // Top début maintien clic
-    $(this).data('touchstart', true);
-
-    // Détermination clic simple
-    setTimeout(function()
-    {
-      // Si clic simple alors on affiche le contenu
-      afficherMasquerContenuCelsius();
-    }, 200);
-
-    // Positions initiales élément et souris
-    celsiusPosX = $(this).offset().left;
-    celsiusPosY = $(this).offset().top;
-    touchPosX   = e.originalEvent.touches[0].pageX;
-    touchPosY   = e.originalEvent.touches[0].pageY;
-
-    $(this).data('initCelsiusPosX', celsiusPosX);
-    $(this).data('initCelsiusPosY', celsiusPosY);
-    $(this).data('initTouchPosX', touchPosX);
-    $(this).data('initTouchPosY', touchPosY);
-
-    // Animation taille élément
-    $(this).css('transform', 'scale(0.8)');
-    $(this).css('transition', 'transform 0.2s ease');
+    // Initialisation Celsius
+    touchStartCelsius($(this), e);
   });
 
   // Positionnement top fin maintien clic
@@ -134,12 +112,8 @@ $(function()
   {
     e.preventDefault();
 
-    // Top fin maintien clic
-    $('.celsius').data('touchstart', false);
-
-    // Animation taille élément
-    $('.celsius').css('transform', 'scale(1)');
-    $('.celsius').css('transition', 'transform 0.2s ease');
+    // Fin Celsius
+    touchEndCelsius($(this));
   });
 
   // Déplacement du bloc
@@ -147,50 +121,8 @@ $(function()
   {
     e.preventDefault();
 
-    // Si le clic est maintenu on bouge l'élément
-    if ($('.celsius').data('touchstart') == true)
-    {
-      // Marges minimales à respecter
-      var paddingScreen = $(window).height() * (2 / 100);
-      var minScreenX    = paddingScreen;
-      var minScreenY    = paddingScreen;
-      var maxScreenX    = $(window).width() - (paddingScreen + $('.celsius').width());
-      var maxScreenY    = $(window).height() - (paddingScreen + $('.celsius').height());
-
-      // Récupération de la position courante de la souris
-      var touchPosX = e.originalEvent.touches[0].pageX;
-      var touchPosY = e.originalEvent.touches[0].pageY;
-
-      // Calcul de la différence de position de la souris par rapport à la position initiale
-      var ecartTouchPosX = touchPosX - $('.celsius').data('initTouchPosX');
-      var ecartTouchPosY = touchPosY - $('.celsius').data('initTouchPosY');
-      var scrollPosY     = $(window).scrollTop();
-
-      // Calcul de la nouvelle position
-      var newPosX = $('.celsius').data('initCelsiusPosX') + ecartTouchPosX;
-      var newPosY = $('.celsius').data('initCelsiusPosY') + ecartTouchPosY - scrollPosY;
-
-      // Limites la position sur l'écran
-      if (newPosX < minScreenX)
-        newPosX = minScreenX;
-
-      if (newPosY < minScreenY)
-        newPosY = minScreenY;
-
-      if (newPosX > maxScreenX)
-        newPosX = maxScreenX;
-
-      if (newPosY > maxScreenY)
-        newPosY = maxScreenY;
-
-      // Applique la position
-      $('.celsius').css('left', newPosX);
-      $('.celsius').css('top', newPosY);
-
-      // On cache le contenu
-      if ($('#contenuCelsius').css('display') != 'none')
-        afficherMasquerIdWithDelay('contenuCelsius');
-    }
+    // Déplacement Celsius
+    touchMoveCelsius($(this), e);
   });
 
   // Ferme le contenu Celsius
@@ -241,6 +173,95 @@ function isUpScreen()
     isUpScreen = false;
 
   return isUpScreen;
+}
+
+// Initialisations Celsius au clic
+function touchStartCelsius(celsius, e)
+{
+  // Top début maintien clic
+  celsius.data('touchstart', true);
+
+  // Détermination clic simple
+  setTimeout(function()
+  {
+    // Si clic simple alors on affiche le contenu
+    afficherMasquerContenuCelsius();
+  }, 200);
+
+  // Positions initiales élément et souris
+  celsiusPosX = celsius.offset().left;
+  celsiusPosY = celsius.offset().top;
+  touchPosX   = e.originalEvent.touches[0].pageX;
+  touchPosY   = e.originalEvent.touches[0].pageY;
+
+  celsius.data('initCelsiusPosX', celsiusPosX);
+  celsius.data('initCelsiusPosY', celsiusPosY);
+  celsius.data('initTouchPosX', touchPosX);
+  celsius.data('initTouchPosY', touchPosY);
+
+  // Animation taille élément
+  celsius.css('transform', 'scale(0.8)');
+  celsius.css('transition', 'transform 0.2s ease');
+}
+
+// Mouvement Celsius
+function touchMoveCelsius(celsius, e)
+{
+  // Si le clic est maintenu on bouge l'élément
+  if (celsius.data('touchstart') == true)
+  {
+    // Marges minimales à respecter
+    var paddingScreen = $(window).height() * (2 / 100);
+    var minScreenX    = paddingScreen;
+    var minScreenY    = paddingScreen;
+    var maxScreenX    = $(window).width() - (paddingScreen + celsius.width());
+    var maxScreenY    = $(window).height() - (paddingScreen + celsius.height());
+
+    // Récupération de la position courante de la souris
+    var touchPosX = e.originalEvent.touches[0].pageX;
+    var touchPosY = e.originalEvent.touches[0].pageY;
+
+    // Calcul de la différence de position de la souris par rapport à la position initiale
+    var ecartTouchPosX = touchPosX - celsius.data('initTouchPosX');
+    var ecartTouchPosY = touchPosY - celsius.data('initTouchPosY');
+    var scrollPosY     = $(window).scrollTop();
+
+    // Calcul de la nouvelle position
+    var newPosX = celsius.data('initCelsiusPosX') + ecartTouchPosX;
+    var newPosY = celsius.data('initCelsiusPosY') + ecartTouchPosY - scrollPosY;
+
+    // Limites la position sur l'écran
+    if (newPosX < minScreenX)
+      newPosX = minScreenX;
+
+    if (newPosY < minScreenY)
+      newPosY = minScreenY;
+
+    if (newPosX > maxScreenX)
+      newPosX = maxScreenX;
+
+    if (newPosY > maxScreenY)
+      newPosY = maxScreenY;
+
+    // Applique la position
+    celsius.css('left', newPosX);
+    celsius.css('top', newPosY);
+
+    // On cache le contenu
+    if ($('#contenuCelsius').css('display') != 'none')
+      afficherMasquerIdWithDelay('contenuCelsius');
+  }
+}
+
+// Fin Celsius au relâchement
+function touchEndCelsius(celsius)
+{
+  // Top fin maintien clic
+  celsius.data('touchstart', false);
+
+  // Animation taille élément
+  celsius.css('transform', 'scale(1)');
+  celsius.css('transition', 'transform 0.2s ease');
 }
 
 // Affichage contenu Celsius
