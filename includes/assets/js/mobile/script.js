@@ -133,12 +133,13 @@ $(function()
   });
 
   // Remise en place Celsius au changement d'orientation
-  $(window).on('orientationchange', function()
+  $(window).on('orientationchange', function(e)
   {
     // Forçage taille écran (viewport)
-    fixViewport();
-    
-    // Réinitialsiation Celsius
+    if (e.orientation == 'landscape')
+      fixViewport();
+
+    // Réinitialsiation position Celsius
     initPositionCelsius();
   });
 });
