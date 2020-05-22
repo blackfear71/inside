@@ -135,6 +135,9 @@ $(function()
   // Remise en place Celsius au changement d'orientation
   $(window).on('orientationchange', function()
   {
+    // Forçage taille écran (viewport)
+    fixViewport();
+    
     // Réinitialsiation Celsius
     initPositionCelsius();
   });
