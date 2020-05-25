@@ -95,6 +95,14 @@
 
                   // Pseudo
                   echo '<div class="pseudo_solo_sans_vote">' . formatPseudo($solo->getPseudo(), 30) . '</div>';
+
+                  // Annulation bande à part
+                  if ($isSolo == true AND $actions["choix"] == true AND $solo->getIdentifiant() == $_SESSION['user']['identifiant'])
+                  {
+                    echo '<form method="post" action="foodadvisor.php?action=doSupprimerSolo" class="form_delete_solo">';
+                      echo '<input type="submit" name="delete_solo" value="" title="Ne plus faire bande à part" class="bouton_delete_solo" />';
+                    echo '</form>';
+                  }
                 echo '</div>';
               }
             echo '</div>';

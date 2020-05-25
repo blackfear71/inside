@@ -75,12 +75,31 @@
 .pseudo_solo_sans_vote
 {
 	display: inline-block;
-	width: calc(100% - 6vh);
+	width: calc(100% - 12vh);
 	vertical-align: middle;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2.5vh;
 	word-break: break-word;
+}
+
+.form_delete_solo
+{
+	display: inline-block;
+	margin-left: 1vh;
+	vertical-align: middle;
+}
+
+.bouton_delete_solo
+{
+	height: 5vh;
+	width: 5vh;
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
+	background-size: 4vh 4vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	border: 0;
 }
 
 /*** Propositions ***/
