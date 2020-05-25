@@ -713,7 +713,7 @@ function formatAvatar(avatar, pseudo, niveau, alt)
 }
 
 // Formate le pseudo en longueur
-function formatPseudo(pseudo, limit)
+function formatString(pseudo, limit)
 {
   if (pseudo.length > limit)
     pseudo = pseudo.substr(0, limit) + "...";

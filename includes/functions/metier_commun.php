@@ -189,7 +189,7 @@
         if (isset($alert) AND $alert == true)
         {
           global $bdd;
-          
+
           $reponse = $bdd->query('SELECT * FROM alerts WHERE alert = "' . $key_alert . '"');
           $donnees = $reponse->fetch();
 
@@ -1262,12 +1262,12 @@
 
   // Formate le pseudo en longueur
   // RETOUR : Pseudo formaté
-  function formatPseudo($pseudo, $limit)
+  function formatString($string, $limit)
   {
-    if (strlen($pseudo) > $limit)
-      $pseudo = substr($pseudo, 0, $limit) . "...";
+    if (strlen($string) > $limit)
+      $string = substr($string, 0, $limit) . "...";
 
-    return $pseudo;
+    return $string;
   }
 
   // Formate le pseudo utilisateur désinscrit

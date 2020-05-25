@@ -31,7 +31,7 @@
       echo '<div class="niveau_aside">' . $_SESSION['user']['experience']['niveau'] . '</div>';
 
       // Pseudo
-      echo '<div class="pseudo_aside">' . formatPseudo($_SESSION['user']['pseudo'], 30) . '</div>';
+      echo '<div class="pseudo_aside">' . formatString($_SESSION['user']['pseudo'], 30) . '</div>';
     echo '</div>';
 
     // Liens

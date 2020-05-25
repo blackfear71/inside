@@ -21,7 +21,7 @@
       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_niveau" />';
 
       // Pseudo
-      echo '<div class="pseudo_niveau">' . formatPseudo($expUser['pseudo'], 15) . '</div>';
+      echo '<div class="pseudo_niveau">' . formatString($expUser['pseudo'], 15) . '</div>';
     echo '</div>';
 
     if (!isset($experienceUsers[$keyExp + 1]) OR $expUser['niveau'] != $experienceUsers[$keyExp + 1]['niveau'])

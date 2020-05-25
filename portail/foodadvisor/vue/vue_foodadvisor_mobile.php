@@ -94,7 +94,7 @@
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
 
                   // Pseudo
-                  echo '<div class="pseudo_solo_sans_vote">' . formatPseudo($solo->getPseudo(), 30) . '</div>';
+                  echo '<div class="pseudo_solo_sans_vote">' . formatString($solo->getPseudo(), 30) . '</div>';
 
                   // Annulation bande à part
                   if ($isSolo == true AND $actions["choix"] == true AND $solo->getIdentifiant() == $_SESSION['user']['identifiant'])
@@ -129,7 +129,7 @@
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
 
                   // Pseudo
-                  echo '<div class="pseudo_solo_sans_vote">' . formatPseudo($userSansProposition->getPseudo(), 30) . '</div>';
+                  echo '<div class="pseudo_solo_sans_vote">' . formatString($userSansProposition->getPseudo(), 30) . '</div>';
                 echo '</div>';
               }
             echo '</div>';
@@ -152,7 +152,50 @@
 
           echo '<div id="afficher_propositions_users" class="zone_propositions_users">';
             if (!empty($propositions))
-              echo '<div class="empty">L\'affichage des propositions n\'est pas encore disponible sur cette version.</div>';
+            {
+              foreach ($propositions as $proposition)
+              {
+                if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
+                  echo '<div class="zone_proposition_determined">';
+                elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
+                  echo '<div class="zone_proposition_determined">';
+                elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
+                  echo '<div class="zone_proposition_top">';
+                elseif ($proposition->getClassement() == 1 AND $proposition != $propositions[0])
+                  echo '<div class="zone_proposition_top">';
+                elseif ($proposition == $propositions[0])
+                  echo '<div class="zone_proposition">';
+                else
+                  echo '<div class="zone_proposition">';
+
+                // Image
+                if (!empty($proposition->getPicture()))
+                  echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
+                else
+                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+
+                // Nom restaurant
+                echo '<div class="nom_proposition">' . formatString($proposition->getName(), 20) . '</div>';
+
+                // Réserveur
+
+
+
+
+                echo '</div>';
+              }
+            }
+
+
+
+
+
+
+            //  echo '<div class="empty">L\'affichage des propositions n\'est pas encore disponible sur cette version.</div>';
+
+
+
+
             else
               echo '<div class="empty">Pas encore de propositions pour aujourd\'hui</div>';
           echo '</div>';

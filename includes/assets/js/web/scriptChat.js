@@ -501,7 +501,7 @@ $(window).on('load', function()
             }
           }
 
-          html += '<div class="text_chat_connected">' + formatPseudo(pseudo, 30) + '</div>';
+          html += '<div class="text_chat_connected">' + formatString(pseudo, 30) + '</div>';
         html += '</div>';
 
         // Insertion dans la zone

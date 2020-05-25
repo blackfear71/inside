@@ -31,7 +31,7 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo" />';
 
               // Pseudo
-              echo '<div class="pseudo_solo">' . formatPseudo($solo->getPseudo(), 15) . '</div>';
+              echo '<div class="pseudo_solo">' . formatString($solo->getPseudo(), 15) . '</div>';
             echo '</div>';
           }
         echo '</div>';
@@ -55,7 +55,7 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_no_vote" />';
 
               // Pseudo
-              echo '<div class="pseudo_no_vote">' . formatPseudo($userNoChoice->getPseudo(), 15) . '</div>';
+              echo '<div class="pseudo_no_vote">' . formatString($userNoChoice->getPseudo(), 15) . '</div>';
             echo '</div>';
           }
         echo '</div>';

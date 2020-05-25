@@ -264,7 +264,7 @@
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_details_mission" />';
 
                         // Pseudo
-                        echo '<div class="pseudo_details_mission">' . formatPseudo($participant->getPseudo(), 15) . '</div>';
+                        echo '<div class="pseudo_details_mission">' . formatString($participant->getPseudo(), 15) . '</div>';
                       echo '</div>';
                     }
                   echo '</div>';

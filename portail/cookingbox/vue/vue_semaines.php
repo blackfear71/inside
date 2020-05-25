@@ -16,7 +16,7 @@
         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_week" />';
 
         // Pseudo
-        echo '<div class="pseudo_week">' . formatPseudo($currentWeek->getPseudo(), 50) . '</div>';
+        echo '<div class="pseudo_week">' . formatString($currentWeek->getPseudo(), 50) . '</div>';
 
         // Boutons d'action
         echo '<div class="zone_boutons" id="zone_current_week">';
@@ -86,7 +86,7 @@
         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_week" />';
 
         // Pseudo
-        echo '<div class="pseudo_week">' . formatUnknownUser(formatPseudo($nextWeek->getPseudo(), 50), true, true) . '</div>';
+        echo '<div class="pseudo_week">' . formatUnknownUser(formatString($nextWeek->getPseudo(), 50), true, true) . '</div>';
 
         // Bouton d'action
         echo '<div class="zone_boutons" id="zone_next_week">';
