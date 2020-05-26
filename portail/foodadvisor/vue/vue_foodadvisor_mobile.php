@@ -231,7 +231,6 @@
               // Choix
               foreach ($mesChoix as $monChoix)
               {
-                // Choix
                 echo '<div class="zone_proposition proposition_normal">';
                   echo '<div class="image_normal">';
                     // Image
