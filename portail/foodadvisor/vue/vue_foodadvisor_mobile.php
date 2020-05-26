@@ -219,6 +219,16 @@
 
             // Affichage des choix utilisateur
             echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">';
+              // Supprimer tous les choix
+              if ($actions["supprimer_choix"] == true)
+              {
+                echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix">';
+                  echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="lien_red eventConfirm" />';
+                  echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
+                echo '</form>';
+              }
+
+              // Choix
               foreach ($mesChoix as $monChoix)
               {
                 // Choix
