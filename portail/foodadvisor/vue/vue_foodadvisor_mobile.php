@@ -78,12 +78,14 @@
           /****************/
           if (isset($solos) AND !empty($solos))
           {
+            // Titre
             echo '<div id="titre_propositions_solo" class="titre_section">';
               echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
               echo '<div class="texte_titre_section">Ils font bande à part</div>';
               echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
             echo '</div>';
 
+            // Affichage des utilisateurs faisant bande à part
             echo '<div id="afficher_propositions_solo" class="zone_propositions_solo_sans_vote" style="display: none;">';
               foreach ($solos as $solo)
               {
@@ -91,7 +93,9 @@
                   // Avatar
                   $avatarFormatted = formatAvatar($solo->getAvatar(), $solo->getPseudo(), 2, "avatar");
 
-                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
+                  echo '<div class="zone_avatar_solo_sans_vote">';
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
+                  echo '</div>';
 
                   // Pseudo
                   echo '<div class="pseudo_solo_sans_vote">' . formatString($solo->getPseudo(), 30) . '</div>';
@@ -113,12 +117,14 @@
           /************/
           if (isset($sansPropositions) AND !empty($sansPropositions))
           {
+            // Titre
             echo '<div id="titre_propositions_sans_vote" class="titre_section">';
               echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
               echo '<div class="texte_titre_section">Ils n\'ont pas voté</div>';
               echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
             echo '</div>';
 
+            // Affichage des utilisateurs n'ayant pas voté
             echo '<div id="afficher_propositions_sans_vote" class="zone_propositions_solo_sans_vote" style="display: none;">';
               foreach ($sansPropositions as $userSansProposition)
               {
@@ -126,7 +132,9 @@
                   // Avatar
                   $avatarFormatted = formatAvatar($userSansProposition->getAvatar(), $userSansProposition->getPseudo(), 2, "avatar");
 
-                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
+                  echo '<div class="zone_avatar_solo_sans_vote">';
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
+                  echo '</div>';
 
                   // Pseudo
                   echo '<div class="pseudo_solo_sans_vote">' . formatString($userSansProposition->getPseudo(), 30) . '</div>';
@@ -138,99 +146,107 @@
           /************************/
           /* Propositions du jour */
           /************************/
+          // Titre
           echo '<div id="titre_propositions_users" class="titre_section">';
             echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
             echo '<div class="texte_titre_section">Les propositions du jour</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
 
-
-
-
-
-
-
+          // Affichage des propositions
           echo '<div id="afficher_propositions_users" class="zone_propositions_users">';
             if (!empty($propositions))
             {
               foreach ($propositions as $proposition)
               {
+                // Détermination classe à appliquer
                 if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
-                  echo '<div class="zone_proposition_determined">';
+                  $class_proposition = 'determined';
                 elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
-                  echo '<div class="zone_proposition_determined">';
+                  $class_proposition = 'determined';
                 elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
-                  echo '<div class="zone_proposition_top">';
+                  $class_proposition = 'top';
                 elseif ($proposition->getClassement() == 1 AND $proposition != $propositions[0])
-                  echo '<div class="zone_proposition_top">';
+                  $class_proposition = 'top';
                 elseif ($proposition == $propositions[0])
-                  echo '<div class="zone_proposition">';
+                  $class_proposition = 'normal';
                 else
-                  echo '<div class="zone_proposition">';
+                  $class_proposition = 'normal';
 
-                // Image
-                if (!empty($proposition->getPicture()))
-                  echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
-                else
-                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+                // Proposition
+                echo '<div class="zone_proposition proposition_' . $class_proposition . '">';
+                  echo '<div class="image_' . $class_proposition . '">';
+                    // Image
+                    if (!empty($proposition->getPicture()))
+                      echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
+                    else
+                      echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
 
-                // Nom restaurant
-                echo '<div class="nom_proposition">' . formatString($proposition->getName(), 20) . '</div>';
+                    // Nombre de participants
+                    echo '<div class="nombre_participants_proposition">' . $proposition->getNb_participants() . '</div>';
+                  echo '</div>';
 
-                // Réserveur
+                  // Nom restaurant
+                  echo '<div class="nom_proposition nom_' . $class_proposition . '">' . formatString($proposition->getName(), 20) . '</div>';
 
+                  // Réserveur
+                  if ($proposition->getDetermined() == "Y" AND !empty($proposition->getCaller()))
+                  {
+                    $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, "avatar");
 
-
-
+                    echo '<div class="caller_' . $class_proposition . '">';
+                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_proposition" />';
+                    echo '</div>';
+                  }
                 echo '</div>';
               }
             }
-
-
-
-
-
-
-            //  echo '<div class="empty">L\'affichage des propositions n\'est pas encore disponible sur cette version.</div>';
-
-
-
-
             else
               echo '<div class="empty">Pas encore de propositions pour aujourd\'hui</div>';
           echo '</div>';
-
-          //echo '<div id="afficher_propositions_users" class="zone_propositions_users">rouge</div>';
 
           /*************/
           /* Mes choix */
           /*************/
           if (isset($mesChoix) AND !empty($mesChoix) AND $isSolo != true)
           {
+            // Titre
             echo '<div id="titre_propositions_mes_choix" class="titre_section">';
               echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
               echo '<div class="texte_titre_section">Mes choix</div>';
               echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
             echo '</div>';
 
-
-
-
+            // Affichage des choix utilisateur
             echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">';
-              if (!empty($propositions))
-                echo '<div class="empty">L\'affichage des choix n\'est pas encore disponible sur cette version.</div>';
-              else
-                echo '<div class="empty">Pas de choix encore saisis pour aujourd\'hui</div>';
+              foreach ($mesChoix as $monChoix)
+              {
+                // Choix
+                echo '<div class="zone_proposition proposition_normal">';
+                  echo '<div class="image_normal">';
+                    // Image
+                    if (!empty($proposition->getPicture()))
+                      echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
+                    else
+                      echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+                  echo '</div>';
+
+                  // Nom restaurant
+                  echo '<div class="nom_proposition nom_normal">' . formatString($proposition->getName(), 20) . '</div>';
+
+                  // Suppression choix
+                  if ($actions["choix"] == true)
+                  {
+                    echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
+                      echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+                      echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
+                      echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
+                    echo '</form>';
+                  }
+                echo '</div>';
+              }
             echo '</div>';
-
-            //echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">jaune</div>';
           }
-
-
-
-
-
-
         ?>
       </article>
     </section>
