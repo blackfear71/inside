@@ -12,8 +12,8 @@
 
     if ($footerMobile == true)
     {
-      echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version mobile">';
-        echo '<img src="/inside/includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer" />';
+      echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version classique">';
+        echo '<img src="/inside/includes/icons/common/classic.png" alt="classic" title="Basculer vers la version classique" class="icone_footer" />';
       echo '</a>';
     }
 
