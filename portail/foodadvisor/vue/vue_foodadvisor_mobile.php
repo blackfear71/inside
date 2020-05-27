@@ -244,7 +244,7 @@
                   echo '<div class="nom_proposition nom_normal">' . formatString($proposition->getName(), 20) . '</div>';
 
                   // Suppression choix
-                  if ($actions["choix"] == true)
+                  //if ($actions["choix"] == true)
                   {
                     echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
                       echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';

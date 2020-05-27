@@ -141,7 +141,6 @@
 
 .image_proposition
 {
-	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	filter: drop-shadow(0px 0px 2px #7c7c7c);
@@ -151,6 +150,7 @@
 .image_determined
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	padding: 1vh;
@@ -160,6 +160,7 @@
 .image_top
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	padding: 1vh;
@@ -169,6 +170,7 @@
 .image_normal
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	padding: 1vh;
@@ -217,7 +219,6 @@
 
 .avatar_proposition
 {
-	vertical-align: middle;
 	width: 6vh;
 	filter: drop-shadow(0px 0px 2px #7c7c7c);
 	border-radius: 50%;
@@ -226,6 +227,7 @@
 .caller_determined
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	padding: 1vh;
@@ -235,6 +237,7 @@
 .caller_top
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	padding: 1vh;
@@ -244,6 +247,7 @@
 .caller_normal
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
 	padding: 1vh;
