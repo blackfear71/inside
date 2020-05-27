@@ -244,23 +244,12 @@
                   echo '<div class="nom_proposition nom_normal">' . formatString($monChoix->getName(), 20) . '</div>';
 
                   // Suppression choix
-
-
-
-
-
-                  //if ($actions["choix"] == true)
-
-
-
-
-
-
+                  if ($actions["choix"] == true)
                   {
                     echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
-                      //echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+                      echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
                       echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
-                      //echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
+                      echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
                     echo '</form>';
                   }
                 echo '</div>';
