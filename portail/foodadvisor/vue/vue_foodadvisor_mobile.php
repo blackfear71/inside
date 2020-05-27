@@ -234,17 +234,28 @@
                 echo '<div class="zone_proposition proposition_normal">';
                   echo '<div class="image_normal">';
                     // Image
-                    if (!empty($proposition->getPicture()))
-                      echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
+                    if (!empty($monChoix->getPicture()))
+                      echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="restaurant" class="image_proposition" />';
                     else
                       echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
                   echo '</div>';
 
                   // Nom restaurant
-                  echo '<div class="nom_proposition nom_normal">' . formatString($proposition->getName(), 20) . '</div>';
+                  echo '<div class="nom_proposition nom_normal">' . formatString($monChoix->getName(), 20) . '</div>';
 
                   // Suppression choix
+
+
+
+
+
                   //if ($actions["choix"] == true)
+
+
+
+
+
+
                   {
                     echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
                       echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
