@@ -65,7 +65,7 @@
 	display: inline-block;
 	width: 5vh;
 	height: 5vh;
-	padding: 0.5vh 0 0.5vh 0;
+	margin-bottom: 1vh;
 }
 
 .avatar_solo_sans_vote
@@ -98,8 +98,8 @@
 
 .bouton_delete_solo
 {
-	height: 6vh;
-	width: 6vh;
+	height: 5vh;
+	width: 5vh;
 	vertical-align: middle;
 	background-image: url("/inside/includes/icons/common/delete_grey.png");
 	background-size: 4vh 4vh;
@@ -119,7 +119,7 @@
 {
 	width: 100%;
 	height: 8vh;
-	margin-top: 1.5vh;
+	margin-bottom: 1.5vh;
 	border-radius: 1vw;
 	box-shadow: 0 0 1vw #7c7c7c;
 	overflow: hidden;
@@ -259,6 +259,7 @@
 .zone_propositions_mes_choix
 {
 	width: 100%;
+	margin-bottom: -1.5vh;
 }
 
 .form_delete_choix
