@@ -47,6 +47,33 @@
       <!-- Contenu -->
       <article>
         <?php
+          /**********/
+          /* Saisie */
+          /**********/
+          echo '<div id="zoneSaisiePropositions" class="fond_saisie">';
+            echo '<div class="zone_saisie">';
+              echo '<div class="titre_saisie">';
+                echo 'Proposer où manger';
+              echo '</div>';
+
+              echo '<div class="contenu_saisie">';
+                echo 'Bientôt disponible...';
+              echo '</div>';
+
+              echo '<div class="boutons_saisie">';
+                // Valider
+                echo '<div class="bouton_saisie_gauche">';
+                  echo 'Valider';
+                echo '</div>';
+
+                // Annuler
+                echo '<a id="fermerSaisiePropositions" class="bouton_saisie_droite">';
+                  echo 'Annuler';
+                echo '</a>';
+              echo '</div>';
+            echo '</div>';
+          echo '</div>';
+
           /********************/
           /* Boutons d'action */
           /********************/
@@ -55,7 +82,7 @@
 
           // Proposer un choix
           if ($actions["saisir_choix"] == true)
-            echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_green">Proposer où manger</div></a>';
+            echo '<a id="afficherSaisiePropositions" title="Proposer où manger" class="lien_green">Proposer où manger</a>';
 
           // Faire bande à part
           if ($actions["solo"] == true)

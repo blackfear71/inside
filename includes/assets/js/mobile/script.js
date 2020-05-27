@@ -64,6 +64,10 @@ $(function()
     &&  $(event.target).attr('class')       != 'celsius'
     &&  $('#contenuCelsius').css('display') != 'none')
       afficherMasquerIdWithDelay('contenuCelsius');
+
+    // Ferme une zone de saisie
+    if ($(event.target).attr('class') == 'fond_saisie')
+      afficherMasquerIdWithDelay(event.target.id);
   });
 
   // Bouton fermer alerte

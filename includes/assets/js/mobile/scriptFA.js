@@ -12,6 +12,12 @@ $(function()
 
     openSection($(this), idZone);
   });
+
+  // Ouvre ou ferme la zone de saisie de propositions
+  $('#afficherSaisiePropositions, #fermerSaisiePropositions').click(function()
+  {
+    afficherMasquerIdWithDelay('zoneSaisiePropositions');
+  });
 });
 
 /*****************/
