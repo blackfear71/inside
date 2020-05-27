@@ -195,7 +195,7 @@
                     $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, "avatar");
 
                     echo '<div class="caller_' . $class_proposition . '">';
-                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_proposition" />';
+                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';
                     echo '</div>';
                   }
                 echo '</div>';
@@ -258,9 +258,9 @@
 
                   {
                     echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
-                      echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+                      //echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
                       echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
-                      echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
+                      //echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
                     echo '</form>';
                   }
                 echo '</div>';

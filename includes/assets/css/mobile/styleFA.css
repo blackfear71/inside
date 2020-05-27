@@ -182,7 +182,7 @@
 	float: right;
 	position: relative;
 	z-index: 1;
-	margin-top: -2vh;
+	margin-top: -2.5vh;
 	margin-right: -0.5vh;
 	width: 2.5vh;
 	height: 2.5vh;
@@ -217,7 +217,7 @@
 	color: #262626;
 }
 
-.avatar_proposition
+.caller_proposition
 {
 	width: 6vh;
 	filter: drop-shadow(0px 0px 2px #7c7c7c);
