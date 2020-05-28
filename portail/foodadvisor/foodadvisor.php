@@ -93,6 +93,11 @@
       insertChoices($_POST, $isSolo, $_SESSION['user']['identifiant']);
       break;
 
+    case 'doAjouterMobile':
+      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      insertChoicesMobile($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      break;
+
     case "doModifier":
       updateChoice($_POST, $_SESSION['user']['identifiant']);
       break;
@@ -294,6 +299,7 @@
     case 'doAnnulerReserver':
     case 'doComplet':
     case 'doAjouter':
+    case 'doAjouterMobile':
     case 'doModifier':
     case 'doSupprimer':
     case 'doSupprimerChoix':
@@ -314,6 +320,7 @@
     case 'doAnnulerReserver':
     case 'doComplet':
     case 'doAjouter':
+    case 'doAjouterMobile':
     case 'doModifier':
     case 'doSupprimer':
     case 'doSupprimerChoix':

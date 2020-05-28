@@ -875,6 +875,151 @@
     }
   }
 
+  // METIER : Insère un ou plusieurs choix utilisateur
+  // RETOUR : Aucun
+  function insertChoicesMobile($post, $isSolo, $user)
+  {
+    global $bdd;
+
+    $control_ok       = true;
+    $listeRestaurants = array_keys($post['restaurants']);
+
+    // Contrôle saisie possible en fonction des dates
+    if (date("N") > 5)
+    {
+      $control_ok                            = false;
+      $_SESSION['alerts']['week_end_saisie'] = true;
+    }
+
+    // Contrôle saisie possible en fonction de l'heure
+    if ($control_ok == true)
+    {
+      if (date("H") >= 13)
+      {
+        $control_ok                         = false;
+        $_SESSION['alerts']['heure_saisie'] = true;
+      }
+    }
+
+    // Contrôle bande à part
+    if ($control_ok == true)
+    {
+      if ($isSolo == true)
+      {
+        $control_ok                        = false;
+        $_SESSION['alerts']['solo_saisie'] = true;
+      }
+    }
+
+    // Contrôle choix déjà existant
+    if ($control_ok == true)
+    {
+      // On parcourt tous les choix
+      if (!empty($listeRestaurants))
+      {
+        foreach ($listeRestaurants as $keyId => $idRestaurant)
+        {
+          $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = ' . $idRestaurant . ' AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
+          $data1 = $req1->fetch();
+
+          if ($req1->rowCount() > 0)
+          {
+            // On supprime le restaurant si déjà saisi et on le signale
+            unset($listeRestaurants[$keyId]);
+
+            $_SESSION['alerts']['wrong_choice_already'] = true;
+          }
+
+          $req1->closeCursor();
+        }
+      }
+    }
+
+    // Contrôle restaurant ouvert
+    if ($control_ok == true)
+    {
+      if (!empty($listeRestaurants))
+      {
+        foreach ($listeRestaurants as $keyId => $idRestaurant)
+        {
+          $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $idRestaurant);
+          $data2 = $req2->fetch();
+
+          $explodedOpened = explode(";", $data2['opened']);
+
+          foreach ($explodedOpened as $keyOpened => $opened)
+          {
+            if (!empty($opened))
+            {
+              if (date('N') == $keyOpened + 1 AND $opened == "N")
+              {
+                // On supprime le restaurant si déjà saisi et on le signale
+                unset($listeRestaurants[$keyId]);
+
+                $_SESSION['alerts']['not_open'] = true;
+              }
+            }
+          }
+
+          $req2->closeCursor();
+        }
+      }
+    }
+
+    // Récupération des données et insertion en base
+    if ($control_ok == true)
+    {
+      if (!empty($listeRestaurants))
+      {
+        foreach ($listeRestaurants as $idRestaurant)
+        {
+          // Identifiant utilisateur
+          $identifiant = $user;
+
+          // Date de saisie
+          $date        = date("Ymd");
+
+          // Heure
+          $time        = "";
+
+          // Transports choisis
+          $transports  = "";
+
+          // Menu
+          $menu        = ";;;";
+
+          // Tableau d'un choix
+          $choice = array('id_restaurant' => $idRestaurant,
+                          'identifiant'   => $identifiant,
+                          'date'          => $date,
+                          'time'          => $time,
+                          'transports'    => $transports,
+                          'menu'          => $menu
+                         );
+
+          // On insère dans la table
+          $req3 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
+                                                                identifiant,
+                                                                date,
+                                                                time,
+                                                                transports,
+                                                                menu)
+                                                        VALUES(:id_restaurant,
+                                                               :identifiant,
+                                                               :date,
+                                                               :time,
+                                                               :transports,
+                                                               :menu)');
+          $req3->execute($choice);
+          $req3->closeCursor();
+
+          // Relance de la détermination si besoin
+          relanceDetermination();
+        }
+      }
+    }
+  }
+
   // METIER : Met à jour un choix
   // RETOUR : Aucun
   function updateChoice($post, $user)

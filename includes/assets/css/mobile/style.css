@@ -693,10 +693,10 @@ aside
 	height: 100%;
 }
 
-.zone_saisie
+.form_saisie
 {
 	width: 90%;
-	max-height: 70vh;
+	max-height: 80vh;
 	margin-left: 5%;
 	position: absolute;
 	top: 50%;
@@ -705,7 +705,7 @@ aside
 	overflow: hidden;
 }
 
-.titre_saisie
+.zone_titre_saisie
 {
 	display: block;
 	line-height: 6vh;
@@ -719,40 +719,52 @@ aside
 	border-bottom: solid 0.3vh #c81932;
 }
 
+.zone_contenu_saisie
+{
+	width: 100%;
+	max-height: 65.7vh;
+	overflow-y: auto;
+}
+
 .contenu_saisie
 {
 	width: calc(100% - 4vh);
 	padding: 1vh 2vh 1vh 2vh;
-	max-height: 55.6vh;
-	overflow-y: auto;
 	background-color: white;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2.5vh;
 }
 
-.boutons_saisie
+.zone_boutons_saisie
 {
 	display: block;
 	text-align: center;
-	line-height: 6vh;
-	font-family: robotolight, Verdana, sans-serif;
-	color: white;
-	font-size: 3vh;
 }
 
 .bouton_saisie_gauche
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 50%;
+	line-height: 6vh;
 	background-color: #70d55d;
+	border: 0;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 3vh;
 }
 
 .bouton_saisie_droite
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 50%;
+	line-height: 6vh;
 	background-color: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 3vh;
 }
 
 /*** Pied de page ***/

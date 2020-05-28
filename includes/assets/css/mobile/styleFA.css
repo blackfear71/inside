@@ -280,3 +280,22 @@
 	background-color: #d3d3d3;
 	border: 0;
 }
+
+/*** Saisie ***/
+.zone_checkbox_proposition
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 8vh;
+	height: 8vh;
+	background-color: #d3d3d3;
+}
+
+.checkbox_proposition
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50%;
+	transform: translateY(-50%);
+}
