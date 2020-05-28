@@ -60,7 +60,8 @@ Les couleurs RGB sont principalement utilisées pour la transparence. Dans les a
 | Rouge           | ![#c81932](https://placehold.it/15/c81932/000000?text=+) | #c81932  | rgb(200, 25, 50)   | Pour contraste (rift)                  |
 | Bleu clair      | ![#2eb2f4](https://placehold.it/15/2eb2f4/000000?text=+) | #2eb2f4  |                    |                                        |
 | Bleu clair      | ![#13a2e9](https://placehold.it/15/13a2e9/000000?text=+) | #13a2e9  |                    |                                        |
-| Vert clair      | ![#70d55d](https://placehold.it/15/70d55d/000000?text=+) | #70d55d  |                    | Icône utilisateur connecté (chat)      |
+| Vert clair      | ![#96e687](https://placehold.it/15/96e687/000000?text=+) | #96e687  |                    | Label saisie mobile                    |
+| Vert moyen      | ![#70d55d](https://placehold.it/15/70d55d/000000?text=+) | #70d55d  |                    | Icône utilisateur connecté (chat)      |
 | Blanc           | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) | #ffffff  | rgb(255, 255, 255) |                                        |
 | Gris clair      | ![#f3f3f3](https://placehold.it/15/f3f3f3/000000?text=+) | #f3f3f3  |                    |                                        |
 | Gris clair      | ![#e3e3e3](https://placehold.it/15/e3e3e3/000000?text=+) | #e3e3e3  | rgb(227, 227, 227) |                                        |
