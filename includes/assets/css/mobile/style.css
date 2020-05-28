@@ -536,7 +536,7 @@ aside
 	height: 4vh;
 	width: 4vh;
 	margin-right: 1vh;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .texte_titre_section
@@ -560,7 +560,7 @@ aside
 	width: 2.5vh;
 	margin-left: 1vh;
 	padding: 0.75vh;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .angle_fleche_titre_section

@@ -143,7 +143,7 @@
           {
             // Titre
             echo '<div id="titre_propositions_solo" class="titre_section">';
-              echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
+              echo '<img src="../../includes/icons/foodadvisor/solo_grey.png" alt="solo_grey" class="logo_titre_section" />';
               echo '<div class="texte_titre_section">Ils font bande à part</div>';
               echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
             echo '</div>';
