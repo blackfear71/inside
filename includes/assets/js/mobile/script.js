@@ -500,6 +500,10 @@ function searchSaisie(input)
     // Cache une zone qui ne contient pas de restaurant qui corresponde
     $('.zone_search_subcontent').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
 
+    // Filtrage de l'affichage
+    if (!$('.zone_search_item').is(':visible'))
+      $('.zone_search_content').hide();
+
     // Affichage / masquage message vide
     if ($('.zone_search_content').is(':visible'))
       $('.empty_search').hide();
