@@ -10,8 +10,9 @@
         break;
 
       case 'foodadvisor':
-        $contenuCelsius = 'Cette section est en cours de développement et n\'est pas encore totalement disponible. Tu peux utiliser presque toutes les actions sauf la proposition de choix.
-        Sois patient, la suite viendra très bientôt ! Sinon tu peux toujours utiliser le bouton présent en bas du site pour revenir à la version classique et utiliser toutes ses fonctionnalités comme avant !';
+        $contenuCelsius = 'Cette section est encore toute fraiche mais tu peux très bien l\'utiliser ! Tu peux voter dans la liste des restaurants ou bien aller encore plus vite
+        grâce à la toute nouvelle barre de recherche instantanée ! Pour ajouter un nouveau restaurant par contre, tu peux toujours utiliser le bouton présent en bas du site pour
+        revenir à la version classique et utiliser toutes ses fonctionnalités comme avant ! Bientôt on verra le détail d\'un vote et on pourra agir dessus comme avant.';
         break;
 
       default:
