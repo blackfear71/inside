@@ -108,6 +108,21 @@ $(function()
     afficherMasquerIdWithDelay('contenuCelsius');
   });
 
+  // Efface la zone de recherche au clic sur la croix
+  $('#reset_search_saisie').click(function()
+  {
+    resetSearchSaisie();
+  });
+
+  /*** Actions du clavier ***/
+  // Filtre la recherche
+  $('#search_saisie').keyup(function()
+	{
+    var inputContent = $.trim($(this).val());
+
+    searchSaisie(inputContent);
+  });
+
   /*** Actions sur mobile ***/
   // Positionnement top début maintien clic et positions initiales
   $('.celsius').on('touchstart', function(e)
@@ -440,4 +455,56 @@ function executeAction(form, action)
     masquerSupprimerIdWithDelay('confirmBox');
   else
     $('#' + form).submit();
+}
+
+// Réinitialise la zone de recherche saisie
+function resetSearchSaisie()
+{
+  // On vide la saisie
+  $('#search_saisie').val('');
+
+  // On cache le message vide
+  $('.empty_search').hide();
+
+  // Affiche tous les lieux par défaut
+  $('.zone_search_content').show();
+
+  // Affiche tous les restaurants par défaut
+  $('.zone_search_item').show();
+}
+
+// Filtre la zone de recherche en fonction de la saisie
+function searchSaisie(input)
+{
+  // Si zone vide, on fait tout apparaitre
+  if (!input)
+  {
+    // Affiche tous les lieux par défaut
+    $('.zone_search_content').show();
+
+    // Affiche tous les restaurants par défaut
+    $('.zone_search_item').show();
+  }
+  // Sinon on filtre
+  else
+  {
+    // Affiche tous les lieux par défaut
+    $('.zone_search_content').show();
+
+    // Cache les restaurants qui ne correspondent pas
+    $('.zone_search_item').show().not(':containsCaseInsensitive(' + input + ')').hide();
+
+    // Cache une zone qui ne contient pas de restaurant qui corresponde
+    $('.zone_search_subcontent').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
+
+    // Affichage / masquage message vide
+    $('.contenu_saisie').not(':containsCaseInsensitive(' + input + ')').children('.empty_search').show();
+    $('.contenu_saisie:containsCaseInsensitive(' + input + ')').children('.empty_search').hide();
+  }
+}
+
+// Rend la recherche insensible à la casse
+$.expr[':'].containsCaseInsensitive = function(elem, index, match)
+{
+  return (elem.textContent || elem.innerText || $(elem).text() || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
 }

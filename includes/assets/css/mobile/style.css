@@ -719,21 +719,60 @@ aside
 	border-bottom: solid 0.3vh #c81932;
 }
 
+.zone_search_saisie
+{
+	display: block;
+	height: 6vh;
+	background-color: #e3e3e3;
+}
+
+.logo_search_saisie
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 4vh;
+	height: 4vh;
+	padding: 1vh;
+	background-color: #d3d3d3;
+}
+
+.input_search_saisie
+{
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	line-height: 5.5vh;
+	width: calc(100% - 14vh);
+	border: 0;
+	background-color: #e3e3e3;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+}
+
 .zone_contenu_saisie
 {
 	width: 100%;
-	max-height: 65.7vh;
+	max-height: 59.7vh;
 	overflow-y: auto;
 }
 
 .contenu_saisie
 {
 	width: calc(100% - 4vh);
-	padding: 1vh 2vh 1vh 2vh;
+	padding: 1vh 2vh 0.5vh 2vh;
 	background-color: white;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2.5vh;
+}
+
+.empty_search
+{
+	display: none;
+	line-height: 10vh;
+	text-align: center;
 }
 
 .zone_boutons_saisie

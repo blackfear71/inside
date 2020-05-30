@@ -57,43 +57,60 @@
                 echo 'Proposer où manger';
               echo '</div>';
 
+              // Recherche
+              echo '<div class="zone_search_saisie">';
+                // Logo
+                echo '<img src="../../includes/icons/common/search.png" alt="search" title="Rechercher" class="logo_search_saisie" />';
+
+                // Zone de saisie
+                echo '<input class="input_search_saisie" type="text" id="search_saisie" placeholder="Rechercher" />';
+
+                // Effacer
+                echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_search_saisie" class="logo_search_saisie" />';
+              echo '</div>';
+
               // Saisie
               echo '<div class="zone_contenu_saisie">';
                 echo '<div class="contenu_saisie">';
+                  // Message vide
+                  echo '<div class="empty_search">Aucun résultat n\'a été trouvé.</div>';
 
+                  // Restaurants par lieu
                   foreach ($listeRestaurants as $lieuRestaurants => $restaurantsParLieux)
                   {
                     // Lieu
-                    echo '<div id="titre_saisie_' . formatId($lieuRestaurants) . '" class="titre_section">';
-                      echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
-                      echo '<div class="texte_titre_section">' . $lieuRestaurants . '</div>';
-                      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
-                    echo '</div>';
+                    echo '<div class="zone_search_content">';
+                      echo '<div id="titre_saisie_' . formatId($lieuRestaurants) . '" class="titre_section">';
+                        echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
+                        echo '<div class="texte_titre_section">' . $lieuRestaurants . '</div>';
+                        echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                      echo '</div>';
 
-                    // Restaurants
-                    echo '<div id="afficher_saisie_' . formatId($lieuRestaurants) . '">';
-                      foreach ($restaurantsParLieux as $restaurant)
-                      {
-                        echo '<label for="proposition_restaurant_' . $restaurant->getId() . '" id="label_proposition_' . $restaurant->getId() . '">';
-                          echo '<div class="zone_proposition proposition_normal">';
-                            echo '<div class="image_normal">';
-                              // Image
-                              if (!empty($restaurant->getPicture()))
-                                echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="restaurant" class="image_proposition" />';
-                              else
-                                echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+                      // Restaurants
+                      echo '<div id="afficher_saisie_' . formatId($lieuRestaurants) . '" class="zone_search_subcontent">';
+                        foreach ($restaurantsParLieux as $restaurant)
+                        {
+                          echo '<label for="proposition_restaurant_' . $restaurant->getId() . '" id="label_proposition_' . $restaurant->getId() . '" class="zone_search_item">';
+                            echo '<div class="zone_proposition proposition_normal">';
+                              echo '<div class="image_normal">';
+                                // Image
+                                if (!empty($restaurant->getPicture()))
+                                  echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="restaurant" class="image_proposition" />';
+                                else
+                                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+                              echo '</div>';
+
+                              // Nom restaurant
+                              echo '<div class="nom_proposition nom_normal">' . formatString($restaurant->getName(), 20) . '</div>';
+
+                              // Case à cocher
+                              echo '<div class="zone_checkbox_proposition">';
+                                echo '<input type="checkbox" id="proposition_restaurant_' . $restaurant->getId() . '" name="restaurants[' . $restaurant->getId() . ']" class="checkbox_proposition" />';
+                              echo '</div>';
                             echo '</div>';
-
-                            // Nom restaurant
-                            echo '<div class="nom_proposition nom_normal">' . formatString($restaurant->getName(), 20) . '</div>';
-
-                            // Case à cocher
-                            echo '<div class="zone_checkbox_proposition">';
-                              echo '<input type="checkbox" id="proposition_restaurant_' . $restaurant->getId() . '" name="restaurants[' . $restaurant->getId() . ']" class="checkbox_proposition" />';
-                            echo '</div>';
-                          echo '</div>';
-                        echo '</label>';
-                      }
+                          echo '</label>';
+                        }
+                      echo '</div>';
                     echo '</div>';
                   }
                 echo '</div>';
