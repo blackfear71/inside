@@ -484,6 +484,9 @@ function searchSaisie(input)
 
     // Affiche tous les restaurants par défaut
     $('.zone_search_item').show();
+
+    // On cache le message vide
+    $('.empty_search').hide();
   }
   // Sinon on filtre
   else
@@ -498,13 +501,18 @@ function searchSaisie(input)
     $('.zone_search_subcontent').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
 
     // Affichage / masquage message vide
-    $('.contenu_saisie').not(':containsCaseInsensitive(' + input + ')').children('.empty_search').show();
-    $('.contenu_saisie:containsCaseInsensitive(' + input + ')').children('.empty_search').hide();
+    if ($('.zone_search_content').is(':visible'))
+      $('.empty_search').hide();
+    else
+      $('.empty_search').show();
   }
 }
 
 // Rend la recherche insensible à la casse
-$.expr[':'].containsCaseInsensitive = function(elem, index, match)
+$.expr[':'].containsCaseInsensitive = $.expr.createPseudo(function(arg)
 {
-  return (elem.textContent || elem.innerText || $(elem).text() || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
-}
+  return function(elem)
+  {
+    return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+  };
+});
