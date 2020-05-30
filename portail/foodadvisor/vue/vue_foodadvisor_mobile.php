@@ -134,7 +134,7 @@
           echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page" class="lien_green">Actualiser</a>';
 
           // Proposer un choix
-          if ($actions["saisir_choix"] == true)
+          //if ($actions["saisir_choix"] == true)
             echo '<a id="afficherSaisiePropositions" title="Proposer où manger" class="lien_green">Proposer où manger</a>';
 
           // Faire bande à part
