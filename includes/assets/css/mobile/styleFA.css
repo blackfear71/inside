@@ -218,6 +218,11 @@
 	color: #262626;
 }
 
+.nom_proposition_complet
+{
+	display: none;
+}
+
 .caller_proposition
 {
 	width: 6vh;

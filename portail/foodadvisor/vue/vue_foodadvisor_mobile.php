@@ -58,28 +58,28 @@
               echo '</div>';
 
               // Recherche
-              echo '<div class="zone_search_saisie">';
+              echo '<div class="zone_recherche_live">';
                 // Logo
-                echo '<img src="../../includes/icons/common/search.png" alt="search" title="Rechercher" class="logo_search_saisie" />';
+                echo '<img src="../../includes/icons/common/search.png" alt="search" title="Rechercher" class="logo_recherche_live" />';
 
                 // Zone de saisie
-                echo '<input class="input_search_saisie" type="text" id="search_saisie" placeholder="Rechercher" />';
+                echo '<input class="input_recherche_live" type="text" id="recherche_live" placeholder="Rechercher" />';
 
                 // Effacer
-                echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_search_saisie" class="logo_search_saisie" />';
+                echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live" class="logo_recherche_live" />';
               echo '</div>';
 
               // Saisie
               echo '<div class="zone_contenu_saisie">';
                 echo '<div class="contenu_saisie">';
                   // Message vide
-                  echo '<div class="empty_search">Aucun résultat n\'a été trouvé.</div>';
+                  echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé.</div>';
 
                   // Restaurants par lieu
                   foreach ($listeRestaurants as $lieuRestaurants => $restaurantsParLieux)
                   {
                     // Lieu
-                    echo '<div class="zone_search_content">';
+                    echo '<div class="zone_recherche_conteneur">';
                       echo '<div id="titre_saisie_' . formatId($lieuRestaurants) . '" class="titre_section">';
                         echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
                         echo '<div class="texte_titre_section">' . $lieuRestaurants . '</div>';
@@ -87,10 +87,10 @@
                       echo '</div>';
 
                       // Restaurants
-                      echo '<div id="afficher_saisie_' . formatId($lieuRestaurants) . '" class="zone_search_subcontent">';
+                      echo '<div id="afficher_saisie_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
                         foreach ($restaurantsParLieux as $restaurant)
                         {
-                          echo '<label for="proposition_restaurant_' . $restaurant->getId() . '" id="label_proposition_' . $restaurant->getId() . '" class="zone_search_item">';
+                          echo '<label for="proposition_restaurant_' . $restaurant->getId() . '" id="label_proposition_' . $restaurant->getId() . '" class="zone_recherche_item">';
                             echo '<div class="zone_proposition proposition_normal">';
                               echo '<div class="image_normal">';
                                 // Image
@@ -102,6 +102,7 @@
 
                               // Nom restaurant
                               echo '<div class="nom_proposition nom_normal">' . formatString($restaurant->getName(), 20) . '</div>';
+                              echo '<div class="nom_proposition_complet">' . $restaurant->getName() . '</div>';
 
                               // Case à cocher
                               echo '<div class="zone_checkbox_proposition">';

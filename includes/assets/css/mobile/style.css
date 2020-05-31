@@ -719,14 +719,15 @@ aside
 	border-bottom: solid 0.3vh #c81932;
 }
 
-.zone_search_saisie
+/*** Recherche live ***/
+.zone_recherche_live
 {
 	display: block;
 	height: 6vh;
 	background-color: #e3e3e3;
 }
 
-.logo_search_saisie
+.logo_recherche_live
 {
 	display: inline-block;
 	vertical-align: middle;
@@ -736,7 +737,7 @@ aside
 	background-color: #d3d3d3;
 }
 
-.input_search_saisie
+.input_recherche_live
 {
 	display: inline-block;
 	vertical-align: middle;
@@ -768,7 +769,7 @@ aside
 	font-size: 2.5vh;
 }
 
-.empty_search
+.empty_recherche_live
 {
 	display: none;
 	line-height: 10vh;

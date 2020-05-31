@@ -109,18 +109,18 @@ $(function()
   });
 
   // Efface la zone de recherche au clic sur la croix
-  $('#reset_search_saisie').click(function()
+  $('#reset_recherche_live').click(function()
   {
-    resetSearchSaisie();
+    resetLiveSearch();
   });
 
   /*** Actions du clavier ***/
   // Filtre la recherche
-  $('#search_saisie').keyup(function()
+  $('#recherche_live').keyup(function()
 	{
     var inputContent = $.trim($(this).val());
 
-    searchSaisie(inputContent);
+    liveSearch(inputContent);
   });
 
   /*** Actions sur mobile ***/
@@ -458,57 +458,57 @@ function executeAction(form, action)
 }
 
 // Réinitialise la zone de recherche saisie
-function resetSearchSaisie()
+function resetLiveSearch()
 {
   // On vide la saisie
-  $('#search_saisie').val('');
+  $('#recherche_live').val('');
 
   // On cache le message vide
-  $('.empty_search').hide();
+  $('.empty_recherche_live').hide();
 
   // Affiche tous les lieux par défaut
-  $('.zone_search_content').show();
+  $('.zone_recherche_conteneur').show();
 
   // Affiche tous les restaurants par défaut
-  $('.zone_search_item').show();
+  $('.zone_recherche_item').show();
 }
 
 // Filtre la zone de recherche en fonction de la saisie
-function searchSaisie(input)
+function liveSearch(input)
 {
   // Si zone vide, on fait tout apparaitre
   if (!input)
   {
     // Affiche tous les lieux par défaut
-    $('.zone_search_content').show();
+    $('.zone_recherche_conteneur').show();
 
     // Affiche tous les restaurants par défaut
-    $('.zone_search_item').show();
+    $('.zone_recherche_item').show();
 
     // On cache le message vide
-    $('.empty_search').hide();
+    $('.empty_recherche_live').hide();
   }
   // Sinon on filtre
   else
   {
     // Affiche tous les lieux par défaut
-    $('.zone_search_content').show();
+    $('.zone_recherche_conteneur').show();
 
     // Cache les restaurants qui ne correspondent pas
-    $('.zone_search_item').show().not(':containsCaseInsensitive(' + input + ')').hide();
+    $('.zone_recherche_item').show().not(':containsCaseInsensitive(' + input + ')').hide();
 
     // Cache une zone qui ne contient pas de restaurant qui corresponde
-    $('.zone_search_subcontent').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
+    $('.zone_recherche_contenu').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
 
     // Filtrage de l'affichage
-    if (!$('.zone_search_item').is(':visible'))
-      $('.zone_search_content').hide();
+    if (!$('.zone_recherche_item').is(':visible'))
+      $('.zone_recherche_conteneur').hide();
 
     // Affichage / masquage message vide
-    if ($('.zone_search_content').is(':visible'))
-      $('.empty_search').hide();
+    if ($('.zone_recherche_conteneur').is(':visible'))
+      $('.empty_recherche_live').hide();
     else
-      $('.empty_search').show();
+      $('.empty_recherche_live').show();
   }
 }
 
