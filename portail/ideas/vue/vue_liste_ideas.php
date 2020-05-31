@@ -37,12 +37,12 @@
               // Infos
               echo '<div class="zone_idea_middle">';
                 // Avatar
-                $avatarFormatted = formatAvatar($idea->getAvatar_a(), $idea->getPseudo_a(), 2, "avatar");
+                $avatarFormatted = formatAvatar($idea->getAvatar_author(), $idea->getPseudo_author(), 2, "avatar");
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
                 // Pseudo
-                echo '<div class="pseudo_idea">' . formatUnknownUser($idea->getPseudo_a(), true, true) . '</div>';
+                echo '<div class="pseudo_idea">' . formatUnknownUser($idea->getPseudo_author(), true, true) . '</div>';
 
                 // Date
                 echo '<div class="date_idea">';
@@ -113,12 +113,12 @@
                 }
 
                   // Avatar
-                  $avatarFormatted = formatAvatar($idea->getAvatar_d(), $idea->getPseudo_d(), 2, "avatar");
+                  $avatarFormatted = formatAvatar($idea->getAvatar_developper(), $idea->getPseudo_developper(), 2, "avatar");
 
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
                   // Pseudo
-                  echo '<div class="pseudo_idea white">' . formatUnknownUser($idea->getPseudo_d(), true, true) . '</div>';
+                  echo '<div class="pseudo_idea white">' . formatUnknownUser($idea->getPseudo_developper(), true, true) . '</div>';
                 echo '</div>';
               }
 
@@ -129,8 +129,8 @@
 
               // Actions
               if ( empty($idea->getDevelopper())
-              OR (!empty($idea->getDevelopper()) AND $idea->getDevelopper() == $_SESSION['user']['identifiant'])
-              OR (!empty($idea->getDevelopper()) AND $idea->getPseudo_d()   == "")
+              OR (!empty($idea->getDevelopper()) AND $idea->getDevelopper()        == $_SESSION['user']['identifiant'])
+              OR (!empty($idea->getDevelopper()) AND $idea->getPseudo_developper() == "")
               OR  $idea->getStatus() == "D"
               OR  $idea->getStatus() == "R")
               {
@@ -150,7 +150,7 @@
                       case "C":
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
-                        if ($idea->getPseudo_d() != "")
+                        if ($idea->getPseudo_developper() != "")
                         {
                           echo '<input type="submit" name="developp" value="Développer" title="Commencer les développements" class="saisie_bouton margin_button" />';
                           echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="saisie_bouton margin_button" />';
@@ -161,7 +161,7 @@
                       case "P":
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
-                        if ($idea->getPseudo_d() != "")
+                        if ($idea->getPseudo_developper() != "")
                         {
                           echo '<input type="submit" name="take" value="Remise à prise en charge" title="Remettre à prise en charge" class="saisie_bouton margin_button" />';
                           echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="saisie_bouton margin_button" />';

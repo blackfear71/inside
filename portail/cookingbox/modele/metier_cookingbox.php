@@ -6,14 +6,14 @@
 
   // METIER : Récupère les données d'une semaine (N ou N+1)
   // RETOUR : Données semaine
-  function getWeek($week)
+  function getWeek($week, $year)
   {
     $myWeek = new WeekCake();
 
     global $bdd;
 
     // Données semaine
-    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '"');
+    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
     $data1 = $req1->fetch();
 
     if ($req1->rowCount() > 0)

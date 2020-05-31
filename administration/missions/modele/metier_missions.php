@@ -100,14 +100,14 @@
         $user['total'] = physiqueTotalUser($idMission, $user['identifiant']);
 
         // Récupération du tri sur avancement puis identifiant
-        $triRank[]        = $user['total'];
+        $triTotal[]       = $user['total'];
         $triIdentifiant[] = $user['identifiant'];
       }
 
       unset($user);
 
       // Tri
-      array_multisort($triRank, SORT_DESC, $triIdentifiant, SORT_ASC, $listUsers);
+      array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listUsers);
 
       // Affectation du rang
       $prevTotal   = $listUsers[0]['total'];

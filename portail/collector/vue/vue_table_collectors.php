@@ -39,7 +39,7 @@
               echo '</div>';
 
               // Avatar
-              $avatarFormatted = formatAvatar($collector->getAvatar_s(), $collector->getPseudo_s(), 2, "avatar");
+              $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, "avatar");
 
               echo '<div class="zone_avatar_collector">';
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_collector" />';
@@ -66,7 +66,7 @@
 
               // Pseudo
               echo '<div class="pseudo_collector">';
-                echo formatUnknownUser($collector->getPseudo_s(), true, true);
+                echo formatUnknownUser($collector->getPseudo_speaker(), true, true);
               echo '</div>';
 
               // Date
@@ -96,7 +96,7 @@
                 }
 
                 // Rapporteur
-                echo '<div class="author_collector">Par ' . formatUnknownUser($collector->getPseudo_a(), false, false) . '</div>';
+                echo '<div class="author_collector">Par ' . formatUnknownUser($collector->getPseudo_author(), false, false) . '</div>';
               }
 
               // Contexte
@@ -159,7 +159,7 @@
               echo '</div>';
 
               // Avatar
-              $avatarFormatted = formatAvatar($collector->getAvatar_s(), $collector->getPseudo_s(), 2, "avatar");
+              $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, "avatar");
 
               echo '<div class="zone_avatar_collector">';
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_collector" />';
@@ -178,7 +178,7 @@
                       echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
                   }
 
-                  if ($collector->getType_s() == "other")
+                  if ($collector->getType_speaker() == "other")
                     echo '<option value="other" selected>Autre</option>';
                   else
                     echo '<option value="other">Autre</option>';
@@ -186,8 +186,8 @@
               echo '</div>';
 
               // Modification "Autre"
-              if ($collector->getType_s() == "other")
-                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_s() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
+              if ($collector->getType_speaker() == "other")
+                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_speaker() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
               else
                 echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" style="display: none;" />';
 

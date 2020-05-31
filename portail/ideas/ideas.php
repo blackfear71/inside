@@ -54,9 +54,9 @@
 
     case 'doChangerStatut':
       // Mise à jour des données par le modèle
-      $id_idea  = $_POST['id_idea'];
-      $view     = updateIdea($_POST, $_GET['view']);
-      $num_page = numPageIdea($id_idea, $view);
+      $id_idea    = $_POST['id_idea'];
+      $view       = updateIdea($_POST, $_GET['view']);
+      $numeroPage = numPageIdea($id_idea, $view);
       break;
 
     default:
@@ -76,13 +76,13 @@
           $idea->setSubject(htmlspecialchars($idea->getSubject()));
           $idea->setDate(htmlspecialchars($idea->getDate()));
           $idea->setAuthor(htmlspecialchars($idea->getAuthor()));
-          $idea->setPseudo_a(htmlspecialchars($idea->getPseudo_a()));
-          $idea->setAvatar_a(htmlspecialchars($idea->getAvatar_a()));
+          $idea->setPseudo_author(htmlspecialchars($idea->getPseudo_author()));
+          $idea->setAvatar_author(htmlspecialchars($idea->getAvatar_author()));
           $idea->setContent(htmlspecialchars($idea->getContent()));
           $idea->setStatus(htmlspecialchars($idea->getStatus()));
           $idea->setDevelopper(htmlspecialchars($idea->getDevelopper()));
-          $idea->setPseudo_d(htmlspecialchars($idea->getPseudo_d()));
-          $idea->setAvatar_d(htmlspecialchars($idea->getAvatar_d()));
+          $idea->setPseudo_developper(htmlspecialchars($idea->getPseudo_developper()));
+          $idea->setAvatar_developper(htmlspecialchars($idea->getAvatar_developper()));
         }
 
         unset($idea);
@@ -99,7 +99,7 @@
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
-      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $num_page . '&anchor=' . $id_idea);
+      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $id_idea);
       break;
 
     case 'doInserer':

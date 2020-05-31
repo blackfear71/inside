@@ -16,6 +16,7 @@
 
   // Modèle de données
   include_once('modele/metier_portail.php');
+  include_once('modele/physique_portail.php');
 
   // Appel métier
   switch ($_GET['action'])

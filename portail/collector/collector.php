@@ -73,7 +73,7 @@
       $id_col = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
 
       if (!empty($id_col))
-        $num_page = numPageCollector($id_col);
+        $numeroPage = numeroPageCollector($id_col);
       break;
 
     case "doSupprimer":
@@ -113,11 +113,11 @@
         {
           $collector->setDate_add(htmlspecialchars($collector->getDate_add()));
           $collector->setAuthor(htmlspecialchars($collector->getAuthor()));
-          $collector->setPseudo_a(htmlspecialchars($collector->getPseudo_a()));
+          $collector->setPseudo_author(htmlspecialchars($collector->getPseudo_author()));
           $collector->setSpeaker(htmlspecialchars($collector->getSpeaker()));
-          $collector->setPseudo_s(htmlspecialchars($collector->getPseudo_s()));
-          $collector->setAvatar_s(htmlspecialchars($collector->getAvatar_s()));
-          $collector->setType_s(htmlspecialchars($collector->getType_s()));
+          $collector->setPseudo_speaker(htmlspecialchars($collector->getPseudo_speaker()));
+          $collector->setAvatar_speaker(htmlspecialchars($collector->getAvatar_speaker()));
+          $collector->setType_speaker(htmlspecialchars($collector->getType_speaker()));
           $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
           $collector->setType_collector(htmlspecialchars($collector->getType_collector()));
           $collector->setCollector(htmlspecialchars($collector->getCollector()));
@@ -157,8 +157,8 @@
   switch ($_GET['action'])
   {
     case "doAjouter":
-      if (!empty($id_col) AND !empty($num_page))
-        header('location: collector.php?action=goConsulter&page=' . $num_page . '&sort=dateDesc&filter=none&anchor=' . $id_col);
+      if (!empty($id_col) AND !empty($numeroPage))
+        header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $id_col);
       else
         header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;

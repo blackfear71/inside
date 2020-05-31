@@ -117,8 +117,8 @@
 
       if ($reponse2->rowCount() > 0)
       {
-        $idea->setPseudo_a($donnees2['pseudo']);
-        $idea->setAvatar_a($donnees2['avatar']);
+        $idea->setPseudo_author($donnees2['pseudo']);
+        $idea->setAvatar_author($donnees2['avatar']);
       }
 
       $reponse2->closeCursor();
@@ -131,8 +131,8 @@
 
         if ($reponse3->rowCount() > 0)
         {
-          $idea->setPseudo_d($donnees3['pseudo']);
-          $idea->setAvatar_d($donnees3['avatar']);
+          $idea->setPseudo_developper($donnees3['pseudo']);
+          $idea->setAvatar_developper($donnees3['avatar']);
         }
 
         $reponse3->closeCursor();

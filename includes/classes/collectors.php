@@ -4,11 +4,11 @@
     private $id;
     private $date_add;
     private $author;
-    private $pseudo_a;
+    private $pseudo_author;
     private $speaker;
-    private $pseudo_s;
-    private $avatar_s;
-    private $type_s;
+    private $pseudo_speaker;
+    private $avatar_speaker;
+    private $type_speaker;
     private $date_collector;
     private $type_collector;
     private $collector;
@@ -23,11 +23,11 @@
       $this->id             = 0;
       $this->date_add       = '';
       $this->author         = '';
-      $this->pseudo_a       = '';
+      $this->pseudo_author  = '';
       $this->speaker        = '';
-      $this->pseudo_s       = '';
-      $this->avatar_s       = '';
-      $this->type_s         = '';
+      $this->pseudo_speaker = '';
+      $this->avatar_speaker = '';
+      $this->type_speaker   = '';
       $this->date_collector = '';
       $this->type_collector = '';
       $this->collector      = '';
@@ -62,7 +62,7 @@
         $this->speaker        = $data['speaker'];
 
       if (isset($data['type_speaker']))
-        $this->type_s         = $data['type_speaker'];
+        $this->type_speaker   = $data['type_speaker'];
 
       if (isset($data['date_collector']))
         $this->date_collector = $data['date_collector'];
@@ -112,14 +112,14 @@
     }
 
     // Pseudo auteur
-    public function setPseudo_a($pseudo_a)
+    public function setPseudo_author($pseudo_author)
     {
-      $this->pseudo_a = $pseudo_a;
+      $this->pseudo_author = $pseudo_author;
     }
 
-    public function getPseudo_a()
+    public function getPseudo_author()
     {
-      return $this->pseudo_a;
+      return $this->pseudo_author;
     }
 
     // Personne
@@ -134,36 +134,36 @@
     }
 
     // Pseudo personne
-    public function setPseudo_s($pseudo_s)
+    public function setPseudo_speaker($pseudo_speaker)
     {
-      $this->pseudo_s = $pseudo_s;
+      $this->pseudo_speaker = $pseudo_speaker;
     }
 
-    public function getPseudo_s()
+    public function getPseudo_speaker()
     {
-      return $this->pseudo_s;
+      return $this->pseudo_speaker;
     }
 
     // Avatar personne
-    public function setAvatar_s($avatar_s)
+    public function setAvatar_speaker($avatar_speaker)
     {
-      $this->avatar_s = $avatar_s;
+      $this->avatar_speaker = $avatar_speaker;
     }
 
-    public function getAvatar_s()
+    public function getAvatar_speaker()
     {
-      return $this->avatar_s;
+      return $this->avatar_speaker;
     }
 
     // Type personne
-    public function setType_s($type_s)
+    public function setType_speaker($type_speaker)
     {
-      $this->type_s = $type_s;
+      $this->type_speaker = $type_speaker;
     }
 
-    public function getType_s()
+    public function getType_speaker()
     {
-      return $this->type_s;
+      return $this->type_speaker;
     }
 
     // Date Collector

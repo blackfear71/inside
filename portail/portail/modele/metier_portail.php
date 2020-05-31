@@ -1,287 +1,21 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
-  include_once('../../includes/classes/profile.php');
+  include_once('../../includes/classes/collectors.php');
+  include_once('../../includes/classes/gateaux.php');
+  include_once('../../includes/classes/movies.php');
+  include_once('../../includes/classes/missions.php');
   include_once('../../includes/classes/news.php');
   include_once('../../includes/classes/notifications.php');
-  include_once('../../includes/classes/missions.php');
+  include_once('../../includes/classes/profile.php');
 
   // METIER : Lecture des données préférences
   // RETOUR : Objet Preferences
-  function getPreferences($user)
+  function getPreferences($identifiant)
   {
-    global $bdd;
+    // Lescture des préférences utilisateur
+    $preferences = physiquePreferences($identifiant);
 
-    // Lecture des préférences
-    $reponse = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $user . '"');
-    $donnees = $reponse->fetch();
-
-    // Instanciation d'un objet Profile à partir des données remontées de la bdd
-    $preferences = Preferences::withData($donnees);
-
-    $reponse->closeCursor();
-
+    // Retour
     return $preferences;
-  }
-
-  // METIER : Récupérations des news
-  // RETOUR : Objets news
-  function getNews($user)
-  {
-    $tabNews = array();
-
-    global $bdd;
-
-    // Message début semaine
-    if (date("N") == 1 AND date("H") <= 12)
-    {
-      $myNews = new News();
-
-      $myNews->setTitle("Une nouvelle ère commence...");
-      $myNews->setContent("...et toute l'équipe Inside vous souhaite de passer une agréable semaine !");
-      $myNews->setDetails("Maintenant au boulot.");
-      $myNews->setLogo("inside");
-      $myNews->setLink("");
-
-      array_push($tabNews, $myNews);
-    }
-
-    // Message fin de semaine
-    if (date("N") == 5 AND date("H") >= 14)
-    {
-      $myNews = new News();
-
-      $myNews->setTitle("C'est bientôt la fin, courage !");
-      $myNews->setContent("Bon week-end à tous et à la semaine prochaine.");
-      $myNews->setDetails("");
-      $myNews->setLogo("inside");
-      $myNews->setLink("");
-
-      array_push($tabNews, $myNews);
-    }
-
-    // Anniversaires
-    $req0 = $bdd->query('SELECT id, identifiant, pseudo, anniversary FROM users WHERE SUBSTR(anniversary, 5, 4) = "' . date("md") . '" ORDER BY identifiant ASC');
-    while ($data0 = $req0->fetch())
-    {
-      $myNews = new News();
-
-      $myNews->setTitle("Joyeux anniversaire !");
-      $myNews->setContent("C'est l'anniversaire de <strong>" . htmlspecialchars($data0['pseudo']) . "</strong> aujourd'hui, souhaitez-lui de passer une excellente journée !");
-      $myNews->setDetails("Vous n'avez pas oublié les cadeaux au moins ?");
-      $myNews->setLogo("anniversary");
-      $myNews->setLink("");
-
-      array_push($tabNews, $myNews);
-    }
-    $req0->closeCursor();
-
-    // Vote repas
-    if (date("H") < 13 AND date("N") <= 5)
-    {
-      $myNews   = new News();
-      $reserved = false;
-
-      $myNews->setTitle("Où aller manger à midi ?");
-      $myNews->setDetails("");
-      $myNews->setLogo("food_advisor");
-      $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
-
-      // Contrôle si déjà réservé
-      $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND reserved = "Y"');
-      $data1 = $req1->fetch();
-
-      if ($req1->rowCount() > 0)
-      {
-        $id_restaurant = $data1['id_restaurant'];
-        $reserved      = true;
-
-        // Lecture du nom du restaurant
-        $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
-        $data2 = $req2->fetch();
-        $myNews->setContent("Le restaurant a été reservé ! Rendez-vous à <strong>" . htmlspecialchars($data2['name']) . "</strong> !");
-        $req2->closeCursor();
-      }
-
-      $req1->closeCursor();
-
-      // Contrôle si vote effectué
-      if ($reserved == false)
-      {
-        $req2 = $bdd->query('SELECT * FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
-
-        $myNews->setTitle("Où aller manger à midi ?");
-        $myNews->setDetails("");
-        $myNews->setLogo("food_advisor");
-        $myNews->setLink("/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter");
-
-        if ($req2->rowCount() > 0)
-          $myNews->setContent("Vous avez déjà voté, allez voir le resultat en cliquant sur ce lien.");
-        else
-          $myNews->setContent("Vous n'avez pas encore voté aujourd'hui, allez tout de suite le faire !");
-
-        $req2->closeCursor();
-      }
-
-      array_push($tabNews, $myNews);
-    }
-
-    // Gâteau de la semaine
-    $myNews = new News();
-
-    $myNews->setTitle("La douceur de la semaine");
-    $myNews->setLogo("cooking_box");
-    $myNews->setLink("/inside/portail/cookingbox/cookingbox.php?year=" . date('Y') . "&action=goConsulter");
-
-    $req3 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . date('W') . '" AND year = "' . date('Y') . '"');
-    $data3 = $req3->fetch();
-
-    if ($req3->rowCount() > 0)
-    {
-      // Pseudo
-      $req4 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data3['identifiant'] . '"');
-      $data4 = $req4->fetch();
-      $pseudo = $data4['pseudo'];
-      $req4->closeCursor();
-
-      if ($data3['cooked'] == "Y")
-      {
-        $myNews->setContent("Le gâteau a été fait par <strong>" . htmlspecialchars(formatUnknownUser($pseudo, false, false)) . "</strong>, c'était très bon !");
-        $myNews->setDetails("A la semaine prochaine pour de nouvelles expériences...");
-      }
-      else
-      {
-        $myNews->setContent("Cette semaine, c'est à <strong>" . htmlspecialchars(formatUnknownUser($pseudo, false, false)) . "</strong> de faire le gâteau !");
-        $myNews->setDetails("Spécialité culinaire en préparation...");
-      }
-    }
-    else
-    {
-      $myNews->setContent("Personne n'a encore été désigné pour faire le gâteau !");
-      $myNews->setDetails("Dépêchez-vous de le dénoncer...");
-    }
-
-    $req3->closeCursor();
-
-    array_push($tabNews, $myNews);
-
-    // Dernière phrase culte ajoutée
-    $req5 = $bdd->query('SELECT * FROM collector WHERE type_collector = "T" ORDER BY date_add DESC, id DESC LIMIT 1');
-    $data5 = $req5->fetch();
-
-    if ($req5->rowCount() > 0)
-    {
-      $myNews = new News();
-
-      $num_page = numPageCollector($data5['id']);
-
-      $myNews->setTitle("La der des ders");
-      $myNews->setLogo("collector");
-      $myNews->setLink("/inside/portail/collector/collector.php?action=goConsulter&page=" . $num_page . "&sort=dateDesc&filter=none&anchor=" . $data5['id']);
-
-      if ($data5['type_speaker'] == "other")
-        $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($data5['speaker'], false, false)));
-      else
-      {
-        $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $data5['speaker'] . '"');
-        $donnees = $reponse->fetch();
-        $myNews->setDetails("Par " . htmlspecialchars(formatUnknownUser($donnees['pseudo'], false, false)));
-        $reponse->closeCursor();
-      }
-
-      if (strlen($data5['collector']) > 90)
-        $myNews->setContent(nl2br(htmlspecialchars(substr(unformatCollector($data5['collector']), 0, 90) . "...")));
-      else
-        $myNews->setContent(nl2br(htmlspecialchars(unformatCollector($data5['collector']))));
-
-      array_push($tabNews, $myNews);
-    }
-
-    $req5->closeCursor();
-
-    // Dernier film ajouté
-    $req6 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" ORDER BY date_add DESC, id DESC LIMIT 1');
-    $data6 = $req6->fetch();
-
-    if ($req6->rowCount() > 0)
-    {
-      $myNews = new News();
-
-      $myNews->setTitle("Le dernier de la collection");
-      $myNews->setContent($data6['film']);
-      $myNews->setDetails("");
-      $myNews->setLogo("movie_house");
-      $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data6['id'] . "&action=goConsulter");
-
-      array_push($tabNews, $myNews);
-    }
-
-    $req6->closeCursor();
-
-    // Prochaine sortie cinéma
-    $req7 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle >= "' . date("Ymd") . '" ORDER BY date_doodle ASC, id ASC LIMIT 1');
-    $data7 = $req7->fetch();
-
-    if ($req7->rowCount() > 0)
-    {
-      $myNews = new News();
-
-      $myNews->setTitle("On y court !");
-      $myNews->setContent($data7['film']);
-      $myNews->setDetails("Rendez-vous le " . formatDateForDisplay($data7['date_doodle']) . " au cinéma !");
-      $myNews->setLogo("movie_house");
-      $myNews->setLink("/inside/portail/moviehouse/details.php?id_film=" . $data7['id'] . "&action=goConsulter");
-
-      array_push($tabNews, $myNews);
-    }
-
-    $req7->closeCursor();
-
-    // Messages missions
-    $missions = getMissions();
-
-    if (!empty($missions))
-    {
-      $gagnantsMissions = getWinners($missions);
-      $newsMissions     = formatNewsMissions($missions, $gagnantsMissions);
-
-      if (!empty($newsMissions))
-      {
-        foreach ($newsMissions as $newsMission)
-        {
-          $myNews = new News();
-          $myNews = $newsMission;
-          array_push($tabNews, $myNews);
-        }
-      }
-    }
-
-    return $tabNews;
-  }
-
-  // METIER : Récupère le numéro de page pour un lien News
-  // RETOUR : Numéro de page
-  function numPageCollector($id)
-  {
-    $numPage     = 0;
-    $nb_par_page = 18;
-    $position    = 1;
-
-    global $bdd;
-
-    // On cherche la position de la phrase culte dans la table
-    $reponse = $bdd->query('SELECT id, date_collector FROM collector ORDER BY date_collector DESC, id DESC');
-    while ($donnees = $reponse->fetch())
-    {
-      if ($id == $donnees['id'])
-        break;
-      else
-        $position++;
-    }
-    $reponse->closeCursor();
-
-    $numPage = $nb_pages = ceil($position / $nb_par_page);
-
-    return $numPage;
   }
 
   // METIER : Récupération liens portail
@@ -291,19 +25,19 @@
     // Préférence MovieHouse
     switch ($preferences->getView_movie_house())
     {
-      case "C":
-        $view_movie_house = "cards";
+      case 'C':
+        $viewMovieHouse = 'cards';
         break;
 
-      case "H":
+      case 'H':
       default:
-        $view_movie_house = "home";
+        $viewMovieHouse = 'home';
         break;
     }
 
     // Tableau des catégories
     $liste_categories = array(array('categorie' => 'MOVIE<br />HOUSE',
-                                    'lien'      => '../moviehouse/moviehouse.php?view=' . $view_movie_house . '&year=' . date("Y") . '&action=goConsulter',
+                                    'lien'      => '../moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter',
                                     'title'     => 'Movie House',
                                     'image'     => '../../includes/icons/common/movie_house.png',
                                     'alt'       => 'movie_house',
@@ -315,13 +49,13 @@
                                     'alt'       => 'food_advisor',
                                     'mobile'    => 'Y'),
                               array('categorie' => 'COOKING<br />BOX',
-                                    'lien'      => '../cookingbox/cookingbox.php?year=' . date("Y") . '&action=goConsulter',
+                                    'lien'      => '../cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter',
                                     'title'     => 'Cooking Box',
                                     'image'     => '../../includes/icons/common/cooking_box.png',
                                     'alt'       => 'cooking_box',
                                     'mobile'    => 'N'),
                               array('categorie' => 'EXPENSE<br />CENTER',
-                                    'lien'      => '../expensecenter/expensecenter.php?year=' . date("Y") . '&action=goConsulter',
+                                    'lien'      => '../expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter',
                                     'title'     => 'Expense Center',
                                     'image'     => '../../includes/icons/common/expense_center.png',
                                     'alt'       => 'expense_center',
@@ -333,7 +67,7 @@
                                     'alt'       => 'collector',
                                     'mobile'    => 'N'),
                               array('categorie' => 'CALENDARS',
-                                    'lien'      => '../calendars/calendars.php?year=' . date("Y") . '&action=goConsulter',
+                                    'lien'      => '../calendars/calendars.php?year=' . date('Y') . '&action=goConsulter',
                                     'title'     => 'Calendars',
                                     'image'     => '../../includes/icons/common/calendars.png',
                                     'alt'       => 'calendars',
@@ -358,143 +92,344 @@
                                     'mobile'    => 'N')*/
                              );
 
+    // Retour
     return $liste_categories;
   }
 
-  // METIER : Récupération missions actives + 3 jours pour les résultats
-  // RETOUR : Objet mission
-  function getMissions()
+  // METIER : Récupérations des news
+  // RETOUR : Objets news
+  function getNews($identifiant)
   {
-    $missions  = array();
-    $date_jour = date('Ymd');
+    // Initialisations
+    $tableauNews = array();
 
-    global $bdd;
-
-    $date_jour_moins_3 = date("Ymd", strtotime(date("Ymd") . ' - 3 days'));
-
-    $reponse = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . $date_jour . ' AND date_fin >= ' . $date_jour_moins_3 . ' ORDER BY date_deb ASC');
-    while ($donnees = $reponse->fetch())
+    /*************************/
+    /* Message début semaine */
+    /*************************/
+    if (date('N') == 1 AND date('H') <= 12)
     {
-      $myMission = Mission::withData($donnees);
-      array_push($missions, $myMission);
+      $myNews = new News();
+
+      $myNews->setTitle('Une nouvelle ère commence...');
+      $myNews->setContent('...et toute l\'équipe Inside vous souhaite de passer une agréable semaine !');
+      $myNews->setDetails('Maintenant au boulot.');
+      $myNews->setLogo('inside');
+      $myNews->setLink('');
+
+      array_push($tableauNews, $myNews);
     }
-    $reponse->closeCursor();
 
-    return $missions;
-  }
-
-  // METIER : Récupération liste des gagnants
-  // RETOUR : Tableau gagnants
-  function getWinners($missions)
-  {
-    $gagnants = array();
-
-    foreach ($missions as $mission)
+    /**************************/
+    /* Message fin de semaine */
+    /**************************/
+    if (date('N') == 5 AND date('H') >= 14)
     {
-      if (date('Ymd') > $mission->getDate_fin())
+      $myNews = new News();
+
+      $myNews->setTitle('C\'est bientôt la fin, courage !');
+      $myNews->setContent('Bon week-end à tous et à la semaine prochaine.');
+      $myNews->setDetails('');
+      $myNews->setLogo('inside');
+      $myNews->setLink('');
+
+      array_push($tableauNews, $myNews);
+    }
+
+    /*****************/
+    /* Anniversaires */
+    /*****************/
+    $anniversaires = physiqueNewsAnniversaires();
+
+    foreach ($anniversaires as $pseudoAnniversaire)
+    {
+      $myNews = new News();
+
+      $myNews->setTitle('Joyeux anniversaire !');
+      $myNews->setContent('C\'est l\'anniversaire de <strong>' . htmlspecialchars($pseudoAnniversaire) . '</strong> aujourd\'hui, souhaitez-lui de passer une excellente journée !');
+      $myNews->setDetails('Vous n\'avez pas oublié les cadeaux au moins ?');
+      $myNews->setLogo('anniversary');
+      $myNews->setLink('');
+
+      array_push($tableauNews, $myNews);
+    }
+
+    /**************/
+    /* Vote repas */
+    /**************/
+    if (date('H') < 13 AND date('N') <= 5)
+    {
+      $myNews = new News();
+
+      $myNews->setTitle('Où aller manger à midi ?');
+      $myNews->setDetails('');
+      $myNews->setLogo('food_advisor');
+      $myNews->setLink('/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter');
+
+      // Récupération Id restaurant réservé
+      $idRestaurant = physiqueRestaurantReserved();
+
+      if (!empty($idRestaurant))
       {
-        // Récupération des participants
-        $participants = array();
+        // Lecture du nom du restaurant
+        $nomRestaurant = physiqueNomRestaurant($idRestaurant);
 
-        global $bdd;
+        $myNews->setContent('Le restaurant a été reservé ! Rendez-vous à <strong>' . htmlspecialchars($nomRestaurant) . '</strong> !');
+      }
+      else
+      {
+        // Contrôle vote effectué
+        $voted = physiqueVoteUser($identifiant);
 
-        $reponse1 = $bdd->query('SELECT DISTINCT identifiant FROM missions_users WHERE id_mission = ' . $mission->getId() . ' ORDER BY identifiant ASC');
-        while ($donnees1 = $reponse1->fetch())
+        if ($voted == true)
+          $myNews->setContent('Vous avez déjà voté, allez voir le resultat en cliquant sur ce lien.');
+        else
+          $myNews->setContent('Vous n\'avez pas encore voté aujourd\'hui, allez tout de suite le faire !');
+      }
+
+      array_push($tableauNews, $myNews);
+    }
+
+    /************************/
+    /* Gâteau de la semaine */
+    /************************/
+    $myNews = new News();
+
+    $myNews->setTitle('La douceur de la semaine');
+    $myNews->setLogo('cooking_box');
+    $myNews->setLink('/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter');
+
+    // Vérification gâteau de la semaine présent
+    $gateauSemainePresent = physiqueGateauSemainePresent();
+
+    if ($gateauSemainePresent == true)
+    {
+      // Récupération des données du gâteau de la semaine
+      $gateauSemaine = physiqueGateauSemaine();
+
+      // Récupération du pseudo
+      $pseudoGateau = physiquePseudoUser($gateauSemaine->getIdentifiant());
+
+      if ($gateauSemaine->getCooked() == 'Y')
+      {
+        $myNews->setContent('Le gâteau a été fait par <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong>, c\'était très bon !');
+        $myNews->setDetails('A la semaine prochaine pour de nouvelles expériences...');
+      }
+      else
+      {
+        $myNews->setContent('Cette semaine, c\'est à <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong> de faire le gâteau !');
+        $myNews->setDetails('Spécialité culinaire en préparation...');
+      }
+    }
+    else
+    {
+      $myNews->setContent('Personne n\'a encore été désigné pour faire le gâteau !');
+      $myNews->setDetails('Dépêchez-vous de le dénoncer...');
+    }
+
+    array_push($tableauNews, $myNews);
+
+    /*********************************/
+    /* Dernière phrase culte ajoutée */
+    /*********************************/
+    $collector = physiqueDernierCollector();
+
+    // Numéro de page de la phrase culte
+    $numeroPage = numeroPageCollector($collector->getId());
+
+    $myNews = new News();
+
+    $myNews->setTitle('La der des ders');
+    $myNews->setLogo('collector');
+    $myNews->setLink('/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $collector->getId());
+
+    // Recherche pseudo speaker
+    if ($collector->getType_speaker() == 'other')
+      $myNews->setDetails('Par ' . htmlspecialchars(formatUnknownUser($collector->getSpeaker(), false, false)));
+    else
+    {
+      $speaker = physiquePseudoUser($collector->getSpeaker());
+
+      $myNews->setDetails('Par ' . htmlspecialchars(formatUnknownUser($speaker, false, false)));
+    }
+
+    if (strlen($collector->getCollector()) > 90)
+      $myNews->setContent(nl2br(htmlspecialchars(substr(unformatCollector($collector->getCollector()), 0, 90) . '...')));
+    else
+      $myNews->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
+
+    array_push($tableauNews, $myNews);
+
+    /***********************/
+    /* Dernier film ajouté */
+    /***********************/
+    $movie = physiqueDernierFilm();
+
+    $myNews = new News();
+
+    $myNews->setTitle('Le dernier de la collection');
+    $myNews->setContent($movie->getFilm());
+    $myNews->setDetails('');
+    $myNews->setLogo('movie_house');
+    $myNews->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
+
+    array_push($tableauNews, $myNews);
+
+    /***************************/
+    /* Prochaine sortie cinéma */
+    /***************************/
+    $film = physiqueSortieFilm();
+
+    if (!empty($film))
+    {
+      $myNews = new News();
+
+      $myNews->setTitle('On y court !');
+      $myNews->setContent($film->getFilm());
+      $myNews->setDetails('Rendez-vous le ' . formatDateForDisplay($film->getDate_doodle()) . ' au cinéma !');
+      $myNews->setLogo('movie_house');
+      $myNews->setLink('/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter');
+
+      array_push($tableauNews, $myNews);
+    }
+
+    /*********************/
+    /* Messages missions */
+    /*********************/
+    $dateJour       = date('Ymd');
+    $dateJourMoins3 = date('Ymd', strtotime(date('Ymd') . ' - 3 days'));
+
+    // Récupération missions actives + missions terminées depuis moins de 3 jours pour les résultats
+    $missions = physiqueMissions($dateJour, $dateJourMoins3);
+
+    if (!empty($missions))
+    {
+      // Récupération liste des gagnants
+      $gagnantsMissions = getWinners($missions);
+
+      // Formate les missions pour les news
+      $newsMissions = formatNewsMissions($missions, $gagnantsMissions);
+
+      if (!empty($newsMissions))
+      {
+        foreach ($newsMissions as $newsMission)
         {
-          $reponse2 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['identifiant'] . '"');
-          $donnees2 = $reponse2->fetch();
+          $myNews = new News();
+          $myNews = $newsMission;
 
-          $myParticipant = Profile::withData($donnees2);
-
-          $reponse2->closeCursor();
-
-          array_push($participants, $myParticipant);
-        }
-        $reponse1->closeCursor();
-
-        // Récupération du classement
-        $ranking = array();
-
-        foreach ($participants as $user)
-        {
-          $totalMission = 0;
-          $initRankUser = 0;
-
-          // Nombre total d'objectifs sur la mission
-          $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission->getId() . ' AND identifiant = "' . $user->getIdentifiant() . '"');
-          while ($donnees = $reponse->fetch())
-          {
-            $totalMission += $donnees['avancement'];
-          }
-          $reponse->closeCursor();
-
-          $myRanking = array('id_mission'  => $mission->getId(),
-                             'identifiant' => $user->getIdentifiant(),
-                             'pseudo'      => $user->getPseudo(),
-                             'total'       => $totalMission,
-                             'rank'        => $initRankUser
-                           );
-
-          array_push($ranking, $myRanking);
-        }
-
-        // Tri classement et extraction gagnants
-        if (!empty($ranking))
-        {
-          unset($tri_rank);
-          unset($tri_alpha);
-
-          // Tri sur avancement puis identifiant
-          foreach ($ranking as $rankUser)
-          {
-            $tri_rank[]  = $rankUser['total'];
-            $tri_alpha[] = $rankUser['identifiant'];
-          }
-
-          array_multisort($tri_rank, SORT_DESC, $tri_alpha, SORT_ASC, $ranking);
-
-          // Affectation du rang
-          $prevTotal   = $ranking[0]['total'];
-          $currentRank = 1;
-
-          foreach ($ranking as &$rankUser)
-          {
-            $currentTotal = $rankUser['total'];
-
-            if ($currentTotal != $prevTotal)
-            {
-              $currentRank += 1;
-              $prevTotal = $rankUser['total'];
-            }
-
-            $rankUser['rank'] = $currentRank;
-          }
-
-          unset($rankUser);
-
-          // On ne garde que les gagnants
-          foreach ($ranking as &$rankUser)
-          {
-            if ($rankUser['rank'] != 1)
-              unset($rankUser);
-          }
-
-          unset($rankUser);
-
-          array_push($gagnants, $ranking);
+          array_push($tableauNews, $myNews);
         }
       }
     }
 
+    // Retour
+    return $tableauNews;
+  }
+
+  // METIER : Récupère le numéro de page pour un lien News
+  // RETOUR : Numéro de page
+  function numeroPageCollector($idCollector)
+  {
+    // Initialisations
+    $numeroPage    = 0;
+    $nombreParPage = 18;
+
+    // Calcul de la position en base
+    $position = physiquePositionCollector($idCollector);
+
+    // Calcul du numéro de page
+    $numeroPage = ceil($position / $nombreParPage);
+
+    // Retour
+    return $numeroPage;
+  }
+
+  // METIER : Récupération liste des gagnants des missions
+  // RETOUR : Tableau des gagnants
+  function getWinners($missions)
+  {
+    // Initialisations
+    $gagnants = array();
+
+    // On parcourt les missions
+    foreach ($missions as $mission)
+    {
+      // Si la mission est terminée
+      if (date('Ymd') > $mission->getDate_fin())
+      {
+        // Récupération de la liste des participants de la mission
+        $listUsers = physiqueUsersMission($mission->getId());
+
+        // Traitement s'il y a des participants
+        if (!empty($listUsers))
+        {
+          // Récupération des données complémentaires des participants
+          foreach ($listUsers as &$user)
+          {
+            // Pseudo
+            $user['pseudo'] = physiquePseudoUser($user['identifiant']);
+
+            // Total de la mission
+            $user['total'] = physiqueTotalUser($mission->getId(), $user['identifiant']);
+
+            // Récupération du tri sur avancement puis identifiant
+            $triTotal[]       = $user['total'];
+            $triIdentifiant[] = $user['identifiant'];
+          }
+
+          unset($user);
+
+          // Tri
+          array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listUsers);
+
+          unset($triTotal);
+          unset($triIdentifiant);
+
+          // Affectation du rang
+          $prevTotal   = $listUsers[0]['total'];
+          $currentRank = 1;
+
+          foreach ($listUsers as &$user)
+          {
+            $currentTotal = $user['total'];
+
+            if ($currentTotal != $prevTotal)
+            {
+              $currentRank += 1;
+              $prevTotal    = $user['total'];
+            }
+
+            $user['rank'] = $currentRank;
+          }
+
+          unset($user);
+
+          // On ne garde que les gagnants
+          foreach ($listUsers as &$user)
+          {
+            if ($user['rank'] != 1)
+              unset($user);
+          }
+
+          unset($user);
+
+          // On ajoute la ligne au tableau
+          $gagnants[$mission->getId()] = $listUsers;
+        }
+      }
+    }
+
+    // Retour
     return $gagnants;
   }
 
-  // METIER : Récupère un tableau d'objets News des missions
+  // METIER : Formate les news des missions
   // RETOUR : Tableau d'objets News missions
   function formatNewsMissions($missions, $gagnants)
   {
+    // Initialisations
     $messagesMissions = array();
 
+    // Construction des messages pour chaque mission
     if (isset($missions) AND !empty($missions))
     {
       foreach ($missions as $keyMission => $mission)
@@ -502,31 +437,32 @@
         $myMessage = new News();
 
         $myMessage->setTitle($mission->getMission());
-        $myMessage->setLogo("missions");
+        $myMessage->setLogo('missions');
 
-        // Association message mission à sa session
+        // Association message mission à sa session (pour les missions en cours)
         foreach ($_SESSION['missions'] as $key_session => $ligneCurrentMission)
         {
           foreach ($ligneCurrentMission as $ligneMission)
           {
             if ($mission->getId() == $ligneMission['id_mission'])
             {
-              $id_current_mission  = $ligneMission['id_mission'];
+              $idCurrentMission  = $ligneMission['id_mission'];
               $key_current_mission = $key_session;
             }
             break;
           }
 
-          if (isset($id_current_mission) AND isset($key_current_mission))
+          if (isset($idCurrentMission) AND isset($keyCurrentMission))
             break;
         }
 
-        // Génération des messages
         // Mission > 1 jour (heure OK)
-        if (isset($id_current_mission) AND $mission->getId() == $id_current_mission AND isset($_SESSION['missions'][$key_current_mission]) AND !empty($_SESSION['missions'][$key_current_mission]) AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') >= $mission->getHeure())
+        if (isset($idCurrentMission)                           AND $mission->getId() == $idCurrentMission
+        AND isset($_SESSION['missions'][$keyCurrentMission])   AND !empty($_SESSION['missions'][$key_current_mission])
+        AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
-          $nbRestants = count($_SESSION['missions'][$key_current_mission]);
-          $content    = "";
+          $nbRestants = count($_SESSION['missions'][$keyCurrentMission]);
+          $content    = '';
 
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
@@ -544,37 +480,44 @@
           $myMessage->setContent($content);
         }
         // Mission > 1 jour (heure KO), 1er jour
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure())
+        elseif ((!isset($keyCurrentMission)             OR  empty($_SESSION['missions'][$keyCurrentMission]))
+        AND      date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure())
         {
           $myMessage->setLink('/inside/portail/missions/missions.php?action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
         // Mission > 1 jour (heure KO), autre jour
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') < $mission->getDate_fin() AND date('His') < $mission->getHeure())
+        elseif ((!isset($keyCurrentMission)            OR  empty($_SESSION['missions'][$keyCurrentMission]))
+        AND      date('Ymd') < $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
         // Mission > 1 jour (terminée)
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') < $mission->getDate_fin() AND date('His') >= $mission->getHeure())
+        elseif ((!isset($keyCurrentMission)            OR  empty($_SESSION['missions'][$keyCurrentMission]))
+        AND      date('Ymd') < $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée pour aujourd\'hui ! Reviens demain pour continuer...</div>');
         }
         // Mission > 1 jour (terminée, jour de fin)
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
+        elseif ((!isset($keyCurrentMission)             OR  empty($_SESSION['missions'][$keyCurrentMission]))
+        AND      date('Ymd') == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Tu as trouvé tous les objectifs, reviens demain pour voir les scores !</div>');
         }
         // Mission > 1 jour (heure KO, jour de fin)
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND date('Ymd') == $mission->getDate_fin() AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') < $mission->getHeure())
+        elseif ((!isset($keyCurrentMission)             OR  empty($_SESSION['missions'][$keyCurrentMission]))
+        AND      date('Ymd') == $mission->getDate_fin() AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Trouve les derniers objectifs à partir de ' . formatTimeForDisplayLight($mission->getHeure()) . '.</div>');
         }
         // Mission > 1 jour (terminée, de jour de fin + 1 jours à + 3 jours)
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND (date('Ymd') >= date('Ymd', strtotime($mission->getDate_fin() . ' + 1 day'))) AND (date('Ymd') <= date('Ymd', strtotime($mission->getDate_fin() . ' + 3 days'))))
+        elseif ((!isset($keyCurrentMission) OR empty($_SESSION['missions'][$keyCurrentMission]))
+        AND     (date('Ymd') >= date('Ymd', strtotime($mission->getDate_fin() . ' + 1 day')))
+        AND     (date('Ymd') <= date('Ymd', strtotime($mission->getDate_fin() . ' + 3 days'))))
         {
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
@@ -585,13 +528,10 @@
           {
             $liste_gagnants = array();
 
-            foreach ($gagnants as $missionGagnants)
+            foreach ($gagnants[$mission->getId()] as $participant)
             {
-              foreach ($missionGagnants as $gagnant)
-              {
-                if ($gagnant['id_mission'] == $mission->getId() AND $gagnant['rank'] <= 3)
-                  array_push($liste_gagnants, $gagnant['pseudo']);
-              }
+              if ($participant['rank'] <= 3)
+                array_push($liste_gagnants, $participant['pseudo']);
             }
 
             $content .= '<div class="contenu_paragraphe">' . formatGagnants($liste_gagnants) . '</div>';
@@ -600,9 +540,11 @@
           $myMessage->setContent($content);
         }
         // Mission 1 jour (heure OK)
-        elseif (isset($key_current_mission) AND isset($_SESSION['missions'][$key_current_mission]) AND !empty($_SESSION['missions'][$key_current_mission]) AND $mission->getDate_deb() == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
+        elseif (isset($keyCurrentMission)
+        AND     isset($_SESSION['missions'][$keyCurrentMission])   AND !empty($_SESSION['missions'][$keyCurrentMission])
+        AND     $mission->getDate_deb() == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
-          $nbRestants = count($_SESSION['missions'][$key_current_mission]);
+          $nbRestants = count($_SESSION['missions'][$keyCurrentMission]);
 
           $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
@@ -612,19 +554,21 @@
             $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectifs à trouver !</div>');
         }
         // Mission 1 jour (heure KO)
-        elseif ((!isset($key_current_mission) OR empty($_SESSION['missions'][$key_current_mission])) AND $mission->getDate_deb() == $mission->getDate_fin() AND date('His') < $mission->getHeure())
+        elseif ((!isset($keyCurrentMission)                         OR  empty($_SESSION['missions'][$keyCurrentMission]))
+        AND      $mission->getDate_deb() == $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
           $myMessage->setLink('/inside/portail/missions/missions.php?action=goConsulter');
           $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
 
-        unset($id_current_mission);
-        unset($key_current_mission);
+        unset($idCurrentMission);
+        unset($keyCurrentMission);
 
         array_push($messagesMissions, $myMessage);
       }
     }
 
+    // Retour
     return $messagesMissions;
   }
 ?>

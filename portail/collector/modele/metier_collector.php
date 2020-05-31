@@ -243,17 +243,17 @@
 
       // Pseudo auteur
       if (isset($listUsers[$myCollector->getAuthor()]))
-        $myCollector->setPseudo_a($listUsers[$myCollector->getAuthor()]['pseudo']);
+        $myCollector->setPseudo_author($listUsers[$myCollector->getAuthor()]['pseudo']);
 
       // Pseudo speaker (dont "autre" si besoin)
-      if ($myCollector->getType_s() == "other" AND !empty($myCollector->getSpeaker()))
-        $myCollector->setPseudo_s($myCollector->getSpeaker());
+      if ($myCollector->getType_speaker() == "other" AND !empty($myCollector->getSpeaker()))
+        $myCollector->setPseudo_speaker($myCollector->getSpeaker());
       else
       {
         if (isset($listUsers[$myCollector->getSpeaker()]))
         {
-          $myCollector->setPseudo_s($listUsers[$myCollector->getSpeaker()]['pseudo']);
-          $myCollector->setAvatar_s($listUsers[$myCollector->getSpeaker()]['avatar']);
+          $myCollector->setPseudo_speaker($listUsers[$myCollector->getSpeaker()]['pseudo']);
+          $myCollector->setAvatar_speaker($listUsers[$myCollector->getSpeaker()]['avatar']);
         }
       }
 
@@ -710,7 +710,7 @@
 
   // METIER : Récupère le numéro de page pour une notification Collector
   // RETOUR : Numéro de page
-  function numPageCollector($id)
+  function numeroPageCollector($id)
   {
     $numPage     = 0;
     $nb_par_page = 18;

@@ -51,8 +51,8 @@
       else
       {
         // Gâteaux semaines n et n + 1
-        $currentWeek    = getWeek(date('W'));
-        $nextWeek       = getWeek(date('W', strtotime('+ 1 week')));
+        $currentWeek    = getWeek(date('W'), date('Y'));
+        $nextWeek       = getWeek(date('W', strtotime('+ 1 week')), date('Y'));
         $listeUsers     = getUsers();
 
         // Saisie
