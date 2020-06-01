@@ -57,21 +57,6 @@
     return $control_ok;
   }
 
-  // CONTROLE : Contrôle d'un fichier après contrôles communs
-  // RETOUR : Booléen
-  function controleFichier($fileDatas)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if ($fileDatas['control_ok'] == false)
-      $control_ok = false;
-
-    // Retour
-    return $control_ok;
-  }
-
   // CONTROLE : Contrôle doublons mise à jour succès
   // RETOUR : Booléen
   function controleDoublons($listSuccess, $successToCheck)

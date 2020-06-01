@@ -170,23 +170,23 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO missions(mission,
-                                                reference,
-                                                date_deb,
-                                                date_fin,
-                                                heure,
-                                                objectif,
-                                                description,
-                                                explications,
-                                                conclusion)
-                                        VALUES(:mission,
-                                               :reference,
-                                               :date_deb,
-                                               :date_fin,
-                                               :heure,
-                                               :objectif,
-                                               :description,
-                                               :explications,
-                                               :conclusion)');
+                                               reference,
+                                               date_deb,
+                                               date_fin,
+                                               heure,
+                                               objectif,
+                                               description,
+                                               explications,
+                                               conclusion)
+                                       VALUES(:mission,
+                                              :reference,
+                                              :date_deb,
+                                              :date_fin,
+                                              :heure,
+                                              :objectif,
+                                              :description,
+                                              :explications,
+                                              :conclusion)');
 
     $req->execute($mission);
 

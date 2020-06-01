@@ -19,6 +19,8 @@
   // Modèle de données
   include_once('modele/metier_foodadvisor_commun.php');
   include_once('modele/metier_restaurants.php');
+  include_once('modele/controles_restaurants.php');
+  include_once('modele/physique_restaurants.php');
 
   // Initialisation sauvegarde saisie
   if ((!isset($_SESSION['alerts']['wrong_phone_number']) OR $_SESSION['alerts']['wrong_phone_number'] != true)
@@ -51,31 +53,47 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
-      $listeLieux       = getLieux();
-      $listeTypes       = getTypesRestaurants();
-      $listeRestaurants = getRestaurants($listeLieux);
-      $choixRapide      = getFastActions($_SESSION['user']['identifiant']);
+      // Récupération des lieux
+      $listeLieux = getLieux();
 
+      // Récupération des types de restaurants
+      $listeTypes = getTypesRestaurants();
+
+      // Récupération de la liste des restaurants
+      $listeRestaurants = getRestaurants($listeLieux);
+
+      // Détermination si bande à part
+      $isSolo = getSolo($_SESSION['user']['identifiant']);
+
+      // Récupération des tops d'actions rapides
+      $choixRapide = getFastActions($_SESSION['user']['identifiant'], $isSolo);
+
+      // Lecture des choix utilisateurs
       if ($choixRapide == true)
         $mesChoix = getMyChoices($_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouter':
-      $id_restaurant = insertRestaurant($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      // Insertion d'un nouveau restaurant
+      $idRestaurant = insertRestaurant($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doModifier':
-      $id_restaurant = updateRestaurant($_POST, $_FILES);
+      // Modification d'un restaurant
+      $idRestaurant = updateRestaurant($_POST, $_FILES);
       break;
 
     case 'doSupprimer':
+      // Suppression d'un restaurant
       deleteRestaurant($_POST);
       break;
 
     case 'doChoixRapide':
-      $isSolo        = getSolo($_SESSION['user']['identifiant']);
-      $id_restaurant = insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      // Détermination si bande à part
+      $isSolo = getSolo($_SESSION['user']['identifiant']);
+
+      // Insertion d'un choix rapide
+      $idRestaurant = insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -155,14 +173,14 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if (!empty($id_restaurant))
-        header('location: restaurants.php?action=goConsulter&anchor=' . $id_restaurant);
+      if (!empty($idRestaurant))
+        header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
       else
         header('location: restaurants.php?action=goConsulter');
       break;
 
     case 'doModifier':
-      header('location: restaurants.php?action=goConsulter&anchor=' . $id_restaurant);
+      header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
       break;
 
     case 'doSupprimer':
@@ -170,7 +188,7 @@
       break;
 
     case 'doChoixRapide':
-      header('location: restaurants.php?action=goConsulter&anchor=' . $id_restaurant);
+      header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
       break;
 
     case 'goConsulter':

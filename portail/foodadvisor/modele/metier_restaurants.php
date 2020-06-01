@@ -1,82 +1,66 @@
 <?php
   // METIER : Récupération de la liste des restaurants
   // RETOUR : Liste des restaurants
-  function getRestaurants($list_locations)
+  function getRestaurants($listeLieux)
   {
-    $listRestaurants = array();
+    // Initialisations
+    $listeRestaurants = array();
 
-    global $bdd;
-
-    foreach ($list_locations as $location)
+    // Récupération de la liste des restaurants pour chaque lieu
+    foreach ($listeLieux as $lieu)
     {
-      $restaurants_by_location = array();
-
-      $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
-      while ($donnees = $reponse->fetch())
-      {
-        $myRestaurant = Restaurant::withData($donnees);
-        $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-        $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
-
-        array_push($restaurants_by_location, $myRestaurant);
-      }
-      $reponse->closeCursor();
-
-      $listRestaurants[$location] = $restaurants_by_location;
+      $listeRestaurants[$lieu] = physiqueRestaurantsParLieux($lieu);
     }
 
-    return $listRestaurants;
+    // Retour
+    return $listeRestaurants;
   }
 
-  // METIER : Récupération de la liste des types
+  // METIER : Récupération de la liste des types de restaurants
   // RETOUR : Liste des types
   function getTypesRestaurants()
   {
-    $listTypes   = array();
-    $stringTypes = "";
+    // Initialisations
+    $listeTypes = array();
 
-    global $bdd;
+    // Lecture des types de restaurants
+    $stringTypes = physiqueTypesRestaurants();
 
-    // Lecture des types
-    $reponse = $bdd->query('SELECT DISTINCT types FROM food_advisor_restaurants');
-    while ($donnees = $reponse->fetch())
-    {
-      $stringTypes .= $donnees['types'];
-    }
-    $reponse->closeCursor();
-
-    // Extraction et tri
-    $explodedTypes = explode(";", $stringTypes);
+    // Extraction sous forme de tableau
+    $explodedTypes = explode(';', $stringTypes);
 
     foreach ($explodedTypes as $exploded)
     {
       if (!empty($exploded))
-        array_push($listTypes, $exploded);
+        array_push($listeTypes, $exploded);
     }
 
-    $listTypes = array_unique($listTypes);
-    asort($listTypes);
+    // Suppression des doublons
+    $listeTypes = array_unique($listeTypes);
 
-    return $listTypes;
+    // Tri par ordre alphabétique
+    asort($listeTypes);
+
+    // Retour
+    return $listeTypes;
   }
 
   // METIER : Détermine la présence des boutons d'action (choix rapide)
   // RETOUR : Booléen
-  function getFastActions($user)
+  function getFastActions($user, $solo)
   {
+    // Initialisations
     $choixRapide = true;
-    $solo        = false;
 
-    // Contrôle date et heure
-    if (date("N") > 5 OR date("H") >= 13)
+    // Détermination actions en fnction de la date et de l'heure
+    if (date('N') > 5 OR date('H') >= 13)
       $choixRapide = false;
 
-    // Contrôle bande à part
-    $solo = getSolo($user);
-
+    // Vérification bande à part
     if ($solo == true)
       $choixRapide = false;
 
+    // Retour
     return $choixRapide;
   }
 
@@ -84,53 +68,60 @@
   // RETOUR : Id enregistrement créé
   function insertRestaurant($post, $files, $user)
   {
-    $new_id     = NULL;
+    // Initialisations
+    $newId      = NULL;
     $control_ok = true;
 
     // Récupération des données
-    $nom_restaurant          = $post['name_restaurant'];
-    $website_restaurant      = $post['website_restaurant'];
-    $plan_restaurant         = $post['plan_restaurant'];
-    $lafourchette_restaurant = $post['lafourchette_restaurant'];
-    $description_restaurant  = $post['description_restaurant'];
-    $ouverture_restaurant    = $post['ouverture_restaurant'];
+    $nomRestaurant          = $post['name_restaurant'];
+    $websiteRestaurant      = $post['website_restaurant'];
+    $planRestaurant         = $post['plan_restaurant'];
+    $lafourchetteRestaurant = $post['lafourchette_restaurant'];
+    $descriptionRestaurant  = $post['description_restaurant'];
+    $ouvertureRestaurant    = $post['ouverture_restaurant'];
 
-    $search                  = array(" ", ".");
-    $replace                 = array("", "");
-    $telephone_restaurant    = str_replace($search, $replace, $post['phone_restaurant']);
+    // Remplacement des caractères pour le numéro de téléphone
+    $search              = array(' ', '.');
+    $replace             = array('', '');
+    $telephoneRestaurant = str_replace($search, $replace, $post['phone_restaurant']);
 
-    $prix_min_test           = str_replace(',', '.', $post['prix_min_restaurant']);
-    $prix_max_test           = str_replace(',', '.', $post['prix_max_restaurant']);
+    // Remplacement des caractères pour les prix
+    $prixMin = str_replace(',', '.', $post['prix_min_restaurant']);
+    $prixMax = str_replace(',', '.', $post['prix_max_restaurant']);
 
-    if (is_numeric($prix_min_test))
-      $prix_min              = number_format($prix_min_test, 2, '.', '');
+    // Formatage du prix minimum
+    if (is_numeric($prixMin))
+      $prixMin = number_format($prixMin, 2, '.', '');
     else
-      $prix_min              = "";
+      $prixMin = '';
 
-    if (is_numeric($prix_max_test))
-      $prix_max              = number_format($prix_max_test, 2, '.', '');
+    // Formatage du prix maximum
+    if (is_numeric($prixMax))
+      $prixMax = number_format($prixMax, 2, '.', '');
     else
-      $prix_max              = "";
+      $prixMax = '';
 
-    if ($post['location'] == "other_location"  AND !empty($post['saisie_other_location']))
+    // Remplacement des caractères pour le lieu saisi
+    if ($post['location'] == 'other_location'  AND !empty($post['saisie_other_location']))
     {
-      $search                = array("'", '"');
-      $replace               = array("", "");
-      $lieu_restaurant       = str_replace($search, $replace, $post['saisie_other_location']);
+      $search         = array("'", '"');
+      $replace        = array('', '');
+      $lieuRestaurant = str_replace($search, $replace, $post['saisie_other_location']);
     }
     else
-      $lieu_restaurant       = $post['location'];
+      $lieuRestaurant = $post['location'];
 
+    // Filtrage et remplacement des caractères pour les types
     if (isset($post['types_restaurants']))
     {
-      $types_restaurant      = array_unique($post['types_restaurants']);
+      $typesRestaurant = array_unique($post['types_restaurants']);
 
-      foreach ($types_restaurant as $keyType => $type)
+      foreach ($typesRestaurant as $keyType => $type)
       {
         if (empty($type))
-          unset($types_restaurant[$keyType]);
+          unset($typesRestaurant[$keyType]);
         else
-          $types_restaurant[$keyType] = trim(str_replace(';', ' ', $types_restaurant[$keyType]));
+          $typesRestaurant[$keyType] = trim(str_replace(';', ' ', $typesRestaurant[$keyType]));
       }
     }
 
@@ -147,86 +138,47 @@
     $_SESSION['save']['prix_max']                = $post['prix_max_restaurant'];
 
     if (isset($post['ouverture_restaurant']))
-      $_SESSION['save']['ouverture_restaurant']  = $ouverture_restaurant;
+      $_SESSION['save']['ouverture_restaurant']  = $ouvertureRestaurant;
 
     if (isset($post['types_restaurants']))
-      $_SESSION['save']['types_restaurants']     = $types_restaurant;
+      $_SESSION['save']['types_restaurants']     = $typesRestaurant;
 
     // Contrôle prix min et max renseigné
-    if ($control_ok == true)
-    {
-      if ((!empty($prix_min) AND empty($prix_max))
-      OR  (empty($prix_min)  AND !empty($prix_max)))
-      {
-        $_SESSION['alerts']['miss_price'] = true;
-        $control_ok                       = false;
-      }
-    }
+    $control_ok = controlePrixRenseignes($prixMin, $prixMax);
 
     // Contrôle prix min numérique et positif
     if ($control_ok == true)
-    {
-      if (!empty($prix_min))
-      {
-        if (!is_numeric($prix_min) OR $prix_min <= 0)
-        {
-          $_SESSION['alerts']['wrong_price_min'] = true;
-          $control_ok                            = false;
-        }
-      }
-    }
+      $control_ok = controlePrixNumerique($prixMin, 'min');
 
     // Contrôle prix max numérique et positif
     if ($control_ok == true)
-    {
-      if (!empty($prix_max))
-      {
-        if (!is_numeric($prix_max) OR $prix_max <= 0)
-        {
-          $_SESSION['alerts']['wrong_price_max'] = true;
-          $control_ok                            = false;
-        }
-      }
-    }
+      $control_ok = controlePrixNumerique($prixMax, 'max');
 
     // Contrôle prix min <= prix max
     if ($control_ok == true)
-    {
-      if ($prix_min > $prix_max)
-      {
-        $_SESSION['alerts']['price_max_min'] = true;
-        $control_ok                          = false;
-      }
-    }
+      $control_ok = controleOrdrePrix($prixMin, $prixMax);
 
     // Contrôle numéro téléphone numérique
     if ($control_ok == true)
-    {
-      if (!empty($telephone_restaurant))
-      {
-        if (!is_numeric($telephone_restaurant) OR strlen($telephone_restaurant) != 10)
-        {
-          $_SESSION['alerts']['wrong_phone_number'] = true;
-          $control_ok                               = false;
-        }
-      }
-    }
+      $control_ok = controleTelephoneNumerique($telephoneRestaurant);
 
     // Tri et formatage types de restaurants
     if ($control_ok == true)
     {
-      $types_formatted = "";
+      $typesFormatted = '';
 
-      if (!empty($types_restaurant))
+      if (!empty($typesRestaurant))
       {
-        // Majuscules et tri
-        $types_restaurant = array_map('ucfirst', $types_restaurant);
-        asort($types_restaurant);
+        // Majuscule sur la première lettre de chaque type
+        $typesRestaurant = array_map('ucfirst', $typesRestaurant);
+
+        // Tri par ordre alphabétique
+        asort($typesRestaurant);
 
         // Formatage
-        foreach ($types_restaurant as $type)
+        foreach ($typesRestaurant as $type)
         {
-          $types_formatted .= $type . ";";
+          $typesFormatted .= $type . ';';
         }
       }
     }
@@ -234,106 +186,80 @@
     // Récupération des jours d'ouverture
     if ($control_ok == true)
     {
-      $ouvertures = "";
+      $ouvertures = '';
 
       for ($i = 0; $i < 5; $i++)
       {
-        if (isset($ouverture_restaurant[$i]))
-          $ouvertures .= "Y;";
+        if (isset($ouvertureRestaurant[$i]))
+          $ouvertures .= 'Y;';
         else
-          $ouvertures .= "N;";
+          $ouvertures .= 'N;';
       }
     }
 
-    // Enregistrement et contrôles image
     if ($control_ok == true)
     {
-      $new_name = '';
-
-      // On vérifie la présence du dossier, sinon on le créé
-      $dossier = "../../includes/images/foodadvisor";
-
-      if (!is_dir($dossier))
-        mkdir($dossier);
-
-      // Dossier de destination et nom du fichier
-      $restaurant_dir = $dossier . '/';
-      $name           = rand();
-
-      // Contrôles fichier
-      $fileDatas = controlsUploadFile($files['image_restaurant'], $name, 'all');
-
-      // Traitements fichier
-      if ($fileDatas['control_ok'] == true)
+      // Vérification des dossiers et contrôle des fichiers
+      if (!empty($files['image_restaurant']['name']))
       {
-        // Upload fichier
-        $control_ok = uploadFile($files['image_restaurant'], $fileDatas, $restaurant_dir);
+        // Nom du fichier
+        $name = rand();
 
+        // On vérifie la présence du dossier des images, sinon on le créé
+        $dossier = '../../includes/images/foodadvisor';
+
+        if (!is_dir($dossier))
+          mkdir($dossier);
+
+        // Dossier de destination
+        $restaurantDir = $dossier . '/';
+
+        // Contrôle du fichier
+        $fileDatas = controlsUploadFile($files['image_restaurant'], $name, 'all');
+
+        // Récupération contrôles
+        $control_ok = $fileDatas['control_ok'];
+
+        // Upload fichier
+        if ($control_ok == true)
+          $control_ok = uploadFile($files['image_restaurant'], $fileDatas, $restaurantDir);
+
+        // Traitement de l'image
         if ($control_ok == true)
         {
-          $new_name   = $fileDatas['new_name'];
-          $type_image = $fileDatas['type_file'];
+          $newName   = $fileDatas['new_name'];
+          $typeImage = $fileDatas['type_file'];
 
-          // Rotation de l'image (si JPEG)
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
+          // Rotation automatique de l'image (si JPEG)
+          if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+            $rotate = rotateImage($restaurantDir . $newName, $typeImage);
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
+          imagethumb($restaurantDir . $newName, $restaurantDir . $newName, 500, FALSE, TRUE);
         }
       }
+      else
+        $newName = '';
     }
 
-    // Enregistrement BDD
+    // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      global $bdd;
-
-      $restaurant = array('name'         => $nom_restaurant,
-                          'picture'      => $new_name,
-                          'types'        => $types_formatted,
-                          'location'     => $lieu_restaurant,
-                          'phone'        => $telephone_restaurant,
+      $restaurant = array('name'         => $nomRestaurant,
+                          'picture'      => $newName,
+                          'types'        => $typesFormatted,
+                          'location'     => $lieuRestaurant,
+                          'phone'        => $telephoneRestaurant,
                           'opened'       => $ouvertures,
-                          'min_price'    => $prix_min,
-                          'max_price'    => $prix_max,
-                          'website'      => $website_restaurant,
-                          'plan'         => $plan_restaurant,
-                          'lafourchette' => $lafourchette_restaurant,
-                          'description'  => $description_restaurant
-                        );
+                          'min_price'    => $prixMin,
+                          'max_price'    => $prixMax,
+                          'website'      => $websiteRestaurant,
+                          'plan'         => $planRestaurant,
+                          'lafourchette' => $lafourchetteRestaurant,
+                          'description'  => $descriptionRestaurant
+                         );
 
-      $req = $bdd->prepare('INSERT INTO food_advisor_restaurants(name,
-                                                                 picture,
-                                                                 types,
-                                                                 location,
-                                                                 phone,
-                                                                 opened,
-                                                                 min_price,
-                                                                 max_price,
-                                                                 website,
-                                                                 plan,
-                                                                 lafourchette,
-                                                                 description
-                                                                )
-                                                          VALUES(:name,
-                                                                 :picture,
-                                                                 :types,
-                                                                 :location,
-                                                                 :phone,
-                                                                 :opened,
-                                                                 :min_price,
-                                                                 :max_price,
-                                                                 :website,
-                                                                 :plan,
-                                                                 :lafourchette,
-                                                                 :description
-                                                                )');
-      $req->execute($restaurant);
-      $req->closeCursor();
-
-      // Récupération Id créé
-      $new_id = $bdd->lastInsertId();
+      $newId = physiqueInsertionRestaurant($restaurant);
 
       // Génération succès
       insertOrUpdateSuccesValue('restaurant-finder', $user, 1);
@@ -345,140 +271,107 @@
       $_SESSION['alerts']['restaurant_added'] = true;
     }
 
-    return $new_id;
+    // Retour
+    return $newId;
   }
 
   // METIER : Mise à jour d'un restaurant
   // RETOUR : Id restaurant
   function updateRestaurant($post, $files)
   {
+    // Initialisations
     $control_ok = true;
 
-    global $bdd;
-
     // Récupération des données
-    $id_restaurant           = $post['id_restaurant'];
-    $nom_restaurant          = $post['update_name_restaurant_' . $id_restaurant];
-    $website_restaurant      = $post['update_website_restaurant_' . $id_restaurant];
-    $plan_restaurant         = $post['update_plan_restaurant_' . $id_restaurant];
-    $lafourchette_restaurant = $post['update_lafourchette_restaurant_' . $id_restaurant];
-    $description_restaurant  = $post['update_description_restaurant_' . $id_restaurant];
-    $ouverture_restaurant    = $post['update_ouverture_restaurant_' . $id_restaurant];
+    $idRestaurant           = $post['id_restaurant'];
+    $nomRestaurant          = $post['update_name_restaurant_' . $idRestaurant];
+    $websiteRestaurant      = $post['update_website_restaurant_' . $idRestaurant];
+    $planRestaurant         = $post['update_plan_restaurant_' . $idRestaurant];
+    $lafourchetteRestaurant = $post['update_lafourchette_restaurant_' . $idRestaurant];
+    $descriptionRestaurant  = $post['update_description_restaurant_' . $idRestaurant];
+    $ouvertureRestaurant    = $post['update_ouverture_restaurant_' . $idRestaurant];
 
-    $search                  = array(" ", ".");
-    $replace                 = array("", "");
-    $telephone_restaurant    = str_replace($search, $replace, $post['update_phone_restaurant_' . $id_restaurant]);
+    // Remplacement des caractères pour le numéro de téléphone
+    $search              = array(' ', '.');
+    $replace             = array('', '');
+    $telephoneRestaurant = str_replace($search, $replace, $post['update_phone_restaurant_' . $idRestaurant]);
 
-    $prix_min_test           = str_replace(',', '.', $post['update_prix_min_restaurant_' . $id_restaurant]);
-    $prix_max_test           = str_replace(',', '.', $post['update_prix_max_restaurant_' . $id_restaurant]);
+    // Remplacement des caractères pour les prix
+    $prixMin = str_replace(',', '.', $post['update_prix_min_restaurant_' . $idRestaurant]);
+    $prixMax = str_replace(',', '.', $post['update_prix_max_restaurant_' . $idRestaurant]);
 
-    if (is_numeric($prix_min_test))
-      $prix_min              = number_format($prix_min_test, 2, '.', '');
+    // Formatage du prix minimum
+    if (is_numeric($prixMin))
+      $prixMin = number_format($prixMin, 2, '.', '');
     else
-      $prix_min              = "";
+      $prixMin = '';
 
-    if (is_numeric($prix_max_test))
-      $prix_max              = number_format($prix_max_test, 2, '.', '');
+    // Formatage du prix maximum
+    if (is_numeric($prixMax))
+      $prixMax = number_format($prixMax, 2, '.', '');
     else
-      $prix_max              = "";
+      $prixMax = '';
 
-    if ($post['update_location_' . $id_restaurant] == "other_location" AND !empty($post['update_other_location_' . $id_restaurant]))
+    // Remplacement des caractères pour le lieu saisi
+    if ($post['update_location_' . $idRestaurant] == 'other_location' AND !empty($post['update_other_location_' . $idRestaurant]))
     {
-      $search                = array("'", '"');
-      $replace               = array("", "");
-      $lieu_restaurant       = str_replace($search, $replace, $post['update_other_location_' . $id_restaurant]);
+      $search         = array("'", '"');
+      $replace        = array('', '');
+      $lieuRestaurant = str_replace($search, $replace, $post['update_other_location_' . $idRestaurant]);
     }
     else
-      $lieu_restaurant       = $post['update_location_' . $id_restaurant];
+      $lieuRestaurant = $post['update_location_' . $idRestaurant];
 
-    if (isset($post['update_types_restaurants_' . $id_restaurant]))
+    // Filtrage et remplacement des caractères pour les types
+    if (isset($post['update_types_restaurants_' . $idRestaurant]))
     {
-      $types_restaurant      = array_unique($post['update_types_restaurants_' . $id_restaurant]);
+      $typesRestaurant = array_unique($post['update_types_restaurants_' . $idRestaurant]);
 
-      foreach ($types_restaurant as $keyType => $type)
+      foreach ($typesRestaurant as $keyType => $type)
       {
         if (empty($type))
-          unset($types_restaurant[$keyType]);
+          unset($typesRestaurant[$keyType]);
         else
-          $types_restaurant[$keyType] = trim(str_replace(';', ' ', $types_restaurant[$keyType]));
+          $typesRestaurant[$keyType] = trim(str_replace(';', ' ', $typesRestaurant[$keyType]));
       }
     }
 
     // Contrôle prix min et max renseigné
-    if ($control_ok == true)
-    {
-      if ((!empty($prix_min) AND empty($prix_max))
-      OR  (empty($prix_min)  AND !empty($prix_max)))
-      {
-        $_SESSION['alerts']['miss_price'] = true;
-        $control_ok                       = false;
-      }
-    }
+    $control_ok = controlePrixRenseignes($prixMin, $prixMax);
 
     // Contrôle prix min numérique et positif
     if ($control_ok == true)
-    {
-      if (!empty($prix_min))
-      {
-        if (!is_numeric($prix_min) OR $prix_min <= 0)
-        {
-          $_SESSION['alerts']['wrong_price_min'] = true;
-          $control_ok                            = false;
-        }
-      }
-    }
+      $control_ok = controlePrixNumerique($prixMin, 'min');
 
     // Contrôle prix max numérique et positif
     if ($control_ok == true)
-    {
-      if (!empty($prix_max))
-      {
-        if (!is_numeric($prix_max) OR $prix_max <= 0)
-        {
-          $_SESSION['alerts']['wrong_price_max'] = true;
-          $control_ok                            = false;
-        }
-      }
-    }
+      $control_ok = controlePrixNumerique($prixMax, 'max');
 
     // Contrôle prix min <= prix max
     if ($control_ok == true)
-    {
-      if ($prix_min > $prix_max)
-      {
-        $_SESSION['alerts']['price_max_min'] = true;
-        $control_ok                          = false;
-      }
-    }
+      $control_ok = controleOrdrePrix($prixMin, $prixMax);
 
     // Contrôle numéro téléphone numérique
     if ($control_ok == true)
-    {
-      if (!empty($telephone_restaurant))
-      {
-        if (!is_numeric($telephone_restaurant) OR strlen($telephone_restaurant) != 10)
-        {
-          $_SESSION['alerts']['wrong_phone_number'] = true;
-          $control_ok                               = false;
-        }
-      }
-    }
+      $control_ok = controleTelephoneNumerique($telephoneRestaurant);
 
     // Tri et formatage types de restaurants
     if ($control_ok == true)
     {
-      $types_formatted = "";
+      $typesFormatted = '';
 
-      if (!empty($types_restaurant))
+      if (!empty($typesRestaurant))
       {
-        // Majuscules et tri
-        $types_restaurant = array_map('ucfirst', $types_restaurant);
-        asort($types_restaurant);
+        // Majuscule sur la première lettre de chaque type
+        $typesRestaurant = array_map('ucfirst', $typesRestaurant);
+
+        // Tri par ordre alphabétique
+        asort($typesRestaurant);
 
         // Formatage
-        foreach ($types_restaurant as $type)
+        foreach ($typesRestaurant as $type)
         {
-          $types_formatted .= $type . ";";
+          $typesFormatted .= $type . ';';
         }
       }
     }
@@ -486,141 +379,121 @@
     // Récupération des jours d'ouverture
     if ($control_ok == true)
     {
-      $ouvertures = "";
+      $ouvertures = '';
 
       for ($i = 0; $i < 5; $i++)
       {
-        if (isset($ouverture_restaurant[$i]))
-          $ouvertures .= "Y;";
+        if (isset($ouvertureRestaurant[$i]))
+          $ouvertures .= 'Y;';
         else
-          $ouvertures .= "N;";
+          $ouvertures .= 'N;';
       }
     }
 
-    // Enregistrement et contrôles image
     if ($control_ok == true)
     {
-      $new_name = '';
+      // Lecture des données en base
+      $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
-      // On vérifie la présence du dossier, sinon on le créé
-      $dossier = "../../includes/images/foodadvisor";
-
-      if (!is_dir($dossier))
-        mkdir($dossier);
-
-      // Dossier de destination et nom du fichier
-      $restaurant_dir = $dossier . '/';
-      $name           = rand();
-
-      // Contrôles fichier
-      $fileDatas = controlsUploadFile($files['update_image_restaurant_' . $id_restaurant], $name, 'all');
-
-      // Traitements fichier
-      if ($fileDatas['control_ok'] == true)
+      // Vérification des dossiers et contrôle des fichiers
+      if (!empty($files['update_image_restaurant_' . $idRestaurant]['name']))
       {
+        // Nom du fichier
+        $name = rand();
+
+        // On vérifie la présence du dossier des images, sinon on le créé
+        $dossier = '../../includes/images/foodadvisor';
+
+        if (!is_dir($dossier))
+          mkdir($dossier);
+
+        // Dossier de destination
+        $restaurantDir = $dossier . '/';
+
+        // Contrôles communs d'un fichier
+        $fileDatas = controlsUploadFile($files['update_image_restaurant_' . $idRestaurant], $name, 'all');
+
+        // Récupération contrôles
+        $control_ok = controleFichier($fileDatas);
+
         // Suppression ancienne image
-        $req1 = $bdd->query('SELECT id, picture FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
-        $data1 = $req1->fetch();
-
-        if (isset($data1['picture']) AND !empty($data1['picture']))
-          unlink("../../includes/images/foodadvisor/" . $data1['picture']);
-
-        $req1->closeCursor();
-
-        // Upload fichier
-        $control_ok = uploadFile($files['update_image_restaurant_' . $id_restaurant], $fileDatas, $restaurant_dir);
-
         if ($control_ok == true)
         {
-          $new_name   = $fileDatas['new_name'];
-          $type_image = $fileDatas['type_file'];
+          // Suppression de l'image
+          if (!empty($restaurant->getPicture()))
+            unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
 
-          // Rotation de l'image
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($restaurant_dir . $new_name, $type_image);
+          // Upload fichier
+          $control_ok = uploadFile($files['update_image_restaurant_' . $idRestaurant], $fileDatas, $restaurantDir);
 
-          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-          imagethumb($restaurant_dir . $new_name, $restaurant_dir . $new_name, 500, FALSE, TRUE);
+          // Traitement de l'image
+          if ($control_ok == true)
+          {
+            $newName   = $fileDatas['new_name'];
+            $typeImage = $fileDatas['type_file'];
+
+            // Rotation automatique de l'image (si JPEG)
+            if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+              $rotate = rotateImage($restaurantDir . $newName, $typeImage);
+
+            // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+            imagethumb($restaurantDir . $newName, $restaurantDir . $newName, 500, FALSE, TRUE);
+          }
         }
       }
       else
-      {
-        // Récupération nom fichier déjà présent
-        $req1 = $bdd->query('SELECT id, picture FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
-        $data1 = $req1->fetch();
-
-        if (isset($data1['picture']) AND !empty($data1['picture']))
-          $new_name = $data1['picture'];
-
-        $req1->closeCursor();
-      }
+        $newName = $restaurant->getPicture();
     }
 
-    // Enregistrement BDD
+    // Modification de l'enregistrement en base
     if ($control_ok == true)
     {
-      $restaurant = array('name'         => $nom_restaurant,
-                          'picture'      => $new_name,
-                          'types'        => $types_formatted,
-                          'location'     => $lieu_restaurant,
-                          'phone'        => $telephone_restaurant,
+      $restaurant = array('name'         => $nomRestaurant,
+                          'picture'      => $newName,
+                          'types'        => $typesFormatted,
+                          'location'     => $lieuRestaurant,
+                          'phone'        => $telephoneRestaurant,
                           'opened'       => $ouvertures,
-                          'min_price'    => $prix_min,
-                          'max_price'    => $prix_max,
-                          'website'      => $website_restaurant,
-                          'plan'         => $plan_restaurant,
-                          'lafourchette' => $lafourchette_restaurant,
-                          'description'  => $description_restaurant
-                        );
+                          'min_price'    => $prixMin,
+                          'max_price'    => $prixMax,
+                          'website'      => $websiteRestaurant,
+                          'plan'         => $planRestaurant,
+                          'lafourchette' => $lafourchetteRestaurant,
+                          'description'  => $descriptionRestaurant
+                         );
 
-      $req2 = $bdd->prepare('UPDATE food_advisor_restaurants SET name         = :name,
-                                                                 picture      = :picture,
-                                                                 types        = :types,
-                                                                 location     = :location,
-                                                                 phone        = :phone,
-                                                                 opened       = :opened,
-                                                                 min_price    = :min_price,
-                                                                 max_price    = :max_price,
-                                                                 website      = :website,
-                                                                 plan         = :plan,
-                                                                 lafourchette = :lafourchette,
-                                                                 description  = :description
-                                                           WHERE id = ' . $id_restaurant);
-      $req2->execute($restaurant);
-      $req2->closeCursor();
+      physiqueUpdateRestaurant($idRestaurant, $restaurant);
 
       // Message d'alerte
       $_SESSION['alerts']['restaurant_updated'] = true;
     }
 
-    return $id_restaurant;
+    // Retour
+    return $idRestaurant;
   }
 
   // METIER : Supprime un restaurant
   // RETOUR : Aucun
   function deleteRestaurant($post)
   {
-    $id_restaurant = $post['id_restaurant'];
+    // Récupération des données
+    $idRestaurant = $post['id_restaurant'];
 
-    global $bdd;
+    // Récupération des données de la mission
+    $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
-    // Suppression image
-    $req1 = $bdd->query('SELECT id, picture FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
-    $data1 = $req1->fetch();
+    // Suppression des images
+    if (!empty($restaurant->getPicture()))
+      unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
 
-    if (isset($data1['picture']) AND !empty($data1['picture']))
-      unlink("../../includes/images/foodadvisor/" . $data1['picture']);
+    // Suppression des choix utilisateurs
+    physiqueDeleteUsersChoices($idRestaurant);
 
-    $req1->closeCursor();
+    // Suppression des déterminations
+    physiqueDeleteDeterminations($idRestaurant);
 
-    // Suppression choix utilisateurs
-    $req2 = $bdd->exec('DELETE FROM food_advisor_users WHERE id_restaurant = ' . $id_restaurant);
-
-    // Suppression détermination
-    $req3 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_restaurant);
-
-    // Suppression enregistrement en base
-    $req4 = $bdd->exec('DELETE FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
+    // Suppression de l'enregistrement en base
+    physiqueDeleteRestaurant($idRestaurant);
 
     // Message alerte
     $_SESSION['alerts']['restaurant_deleted'] = true;

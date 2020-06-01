@@ -22,10 +22,14 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
+      // Lecture des préférences utilisateur
       $preferences = getPreferences($_SESSION['user']['identifiant']);
-      $news        = getNews($_SESSION['user']['identifiant']);
-      $portail     = getPortail($preferences);
+
+      // Récupération des news
+      $news = getNews($_SESSION['user']['identifiant']);
+
+      // Récupération du portail
+      $portail = getPortail($preferences);
       break;
 
     default:

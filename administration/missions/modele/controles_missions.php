@@ -12,7 +12,7 @@
     if ($isUnique == false)
     {
       $_SESSION['alerts']['already_ref_mission'] = true;
-      $control_ok                               = false;
+      $control_ok                                = false;
     }
 
     // Retour
@@ -86,21 +86,6 @@
       $_SESSION['alerts']['missing_mission_file'] = true;
       $control_ok                                 = false;
     }
-
-    // Retour
-    return $control_ok;
-  }
-
-  // CONTROLE : Contrôle d'un fichier après contrôles communs
-  // RETOUR : Booléen
-  function controleFichier($fileDatas)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if ($fileDatas['control_ok'] == false)
-      $control_ok = false;
 
     // Retour
     return $control_ok;

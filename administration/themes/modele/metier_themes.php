@@ -165,6 +165,8 @@
 
           // Contrôles communs d'un fichier
           $fileDatas  = controlsUploadFile($file, $name, 'png');
+
+          // Récupération contrôles
           $control_ok = controleFichier($fileDatas);
 
           // Arrêt de la boucle en cas d'erreur

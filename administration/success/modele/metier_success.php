@@ -93,6 +93,8 @@
 
       // Contrôles communs d'un fichier
       $fileDatas  = controlsUploadFile($files['success'], $reference, 'png');
+
+      // Récupération contrôles
       $control_ok = controleFichier($fileDatas);
     }
 

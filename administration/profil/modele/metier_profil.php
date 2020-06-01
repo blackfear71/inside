@@ -36,11 +36,11 @@
     // Dossier de destination
     $avatarDir = $dossierAvatars . '/';
 
-    // Contrôle du fichier
+    // Contrôles communs d'un fichier
     $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
 
     // Récupération contrôles
-    $control_ok = $fileDatas['control_ok'];
+    $control_ok = controleFichier($fileDatas);
 
     // Upload fichier
     if ($control_ok == true)
