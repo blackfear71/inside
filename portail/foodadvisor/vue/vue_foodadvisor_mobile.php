@@ -63,7 +63,7 @@
                 echo '<img src="../../includes/icons/common/search.png" alt="search" title="Rechercher" class="logo_recherche_live" />';
 
                 // Zone de saisie
-                echo '<input class="input_recherche_live" type="text" id="recherche_live" placeholder="Rechercher" />';
+                echo '<input class="input_recherche_live" type="text" autocomplete="off" id="recherche_live" placeholder="Rechercher" />';
 
                 // Effacer
                 echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live" class="logo_recherche_live" />';
