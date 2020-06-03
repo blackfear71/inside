@@ -1,5 +1,4 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/restaurants.php');
   include_once('../../includes/libraries/php/imagethumb.php');
 
@@ -7,327 +6,238 @@
   // RETOUR : Liste des lieux
   function getLieux()
   {
-    $listLocations = array();
+    // Récupération de la liste des lieux
+    $listeLieux = physiqueLieux();
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT DISTINCT location FROM food_advisor_restaurants ORDER BY location ASC');
-    while ($donnees = $reponse->fetch())
-    {
-      array_push($listLocations, $donnees['location']);
-    }
-    $reponse->closeCursor();
-
-    return $listLocations;
+    // Retour
+    return $listeLieux;
   }
 
   // METIER : Détermine si l'utilisateur fait bande à part
   // RETOUR : Booléen
   function getSolo($user)
   {
-    global $bdd;
+    // Vérification si bande à part
+    $solo = physiqueSolo($user);
 
-    $solo = false;
-
-    $reponse = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = 0 AND date = "' . date("Ymd") . '" AND identifiant = "' . $user . '"');
-    $donnees = $reponse->fetch();
-
-    if ($reponse->rowCount() > 0)
-      $solo = true;
-
-    $reponse->closeCursor();
-
+    // Retour
     return $solo;
   }
 
   // METIER : Récupère les choix du jour
   // RETOUR : Liste des choix du jour (tous)
-  function getPropositions($details)
+  function getPropositions($recuperationDetails)
   {
-    $listPropositions = array();
+    // Récupération des différents restaurants proposés
+    $listePropositions = physiquePropositions();
 
-    global $bdd;
-
-    $req1 = $bdd->query('SELECT DISTINCT id_restaurant FROM food_advisor_users WHERE id_restaurant != 0 AND date = "' . date("Ymd") . '"');
-    while ($data1 = $req1->fetch())
+    // Récupération des données de chaque restaurant
+    foreach ($listePropositions as $proposition)
     {
-      $myProposition = Proposition::withData($data1);
+      // Lecture des données restaurant
+      $restaurant = physiqueDonneesRestaurant($proposition->getId_restaurant());
 
-      // Données restaurant
-      $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $myProposition->getId_restaurant());
-      $data2 = $req2->fetch();
-
-      $myProposition->setName($data2['name']);
-      $myProposition->setPicture($data2['picture']);
-      $myProposition->setLocation($data2['location']);
-      $myProposition->setTypes($data2['types']);
-      $myProposition->setPhone($data2['phone']);
-      $myProposition->setWebsite($data2['website']);
-      $myProposition->setPlan($data2['plan']);
-      $myProposition->setLafourchette($data2['lafourchette']);
-      $myProposition->setOpened($data2['opened']);
-      $myProposition->setMin_price(str_replace('.', ',', $data2['min_price']));
-      $myProposition->setMax_price(str_replace('.', ',', $data2['max_price']));
-      $myProposition->setDescription($data2['description']);
-
-      $req2->closeCursor();
+      // Ajout des données restaurant à la proposition
+      $proposition->setName($restaurant->getName());
+      $proposition->setPicture($restaurant->getPicture());
+      $proposition->setLocation($restaurant->getLocation());
+      $proposition->setTypes($restaurant->getTypes());
+      $proposition->setPhone($restaurant->getPhone());
+      $proposition->setWebsite($restaurant->getWebsite());
+      $proposition->setPlan($restaurant->getPlan());
+      $proposition->setLafourchette($restaurant->getLafourchette());
+      $proposition->setOpened($restaurant->getOpened());
+      $proposition->setMin_price(str_replace('.', ',', $restaurant->getMin_price()));
+      $proposition->setMax_price(str_replace('.', ',', $restaurant->getMax_price()));
+      $proposition->setDescription($restaurant->getDescription());
 
       // Contrôle restaurant disponible ce jour
-      $available_day  = true;
-      $explodedOpened = explode(";", $myProposition->getOpened());
+      $availableDay   = true;
+      $explodedOpened = explode(';', $proposition->getOpened());
 
       foreach ($explodedOpened as $keyOpened => $opened)
       {
         if (!empty($opened))
         {
-          if (date('N') == $keyOpened + 1 AND $opened == "N")
+          if (date('N') == $keyOpened + 1 AND $opened == 'N')
           {
-            $available_day = false;
+            $availableDay = false;
             break;
           }
         }
       }
 
-      // Récupération des données si disponible
-      if ($available_day == true)
+      // Récupération des données si restaurant ouvert
+      if ($availableDay == true)
       {
         // Nombre de participants
-        $req3 = $bdd->query('SELECT COUNT(id_restaurant) AS nb_participants FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myProposition->getId_restaurant());
-        $data3 = $req3->fetch();
+        $proposition->setNb_participants(physiqueNombreParticipants($proposition->getId_restaurant()));
 
-        $myProposition->setNb_participants($data3['nb_participants']);
+        // Vérification proposition déterminée
+        $propositionDeterminee = physiquePropositionDeterminee($proposition->getId_restaurant());
 
-        $req3->closeCursor();
-
-        // Proposition déterminée
-        $req4 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $myProposition->getId_restaurant());
-        $data4 = $req4->fetch();
-
-        if ($req4->rowCount() > 0)
+        // Récupération des données de la proposition déterminée
+        if (!empty($propositionDeterminee))
         {
-          $myProposition->setDetermined("Y");
-          $myProposition->setCaller($data4['caller']);
-          $myProposition->setReserved($data4['reserved']);
+          // Lecture des données proposition déterminée
+          $proposition->setDetermined('Y');
+          $proposition->setCaller($propositionDeterminee->getCaller());
+          $proposition->setReserved($propositionDeterminee->getReserved());
 
-          // Récupération pseudo et avatar
-          $req5 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myProposition->getCaller() . '"');
-          $data5 = $req5->fetch();
+          // Recherche pseudo et avatar appelant
+          $appelant = physiqueUser($proposition->getCaller());
 
-          $myProposition->setPseudo($data5['pseudo']);
-          $myProposition->setAvatar($data5['avatar']);
-
-          $req5->closeCursor();
+          $proposition->setPseudo($appelant->getPseudo());
+          $proposition->setAvatar($appelant->getAvatar());
         }
 
-        $req4->closeCursor();
+        // Récupération détails proposition
+        if ($recuperationDetails == true)
+        {
+          // Lecture détail de chaque utilisateur
+          $detailsProposition = physiqueDetailsProposition($proposition->getId_restaurant());
 
-        array_push($listPropositions, $myProposition);
+          // Recherche pseudo et avatar utilisateur
+          foreach ($detailsProposition as &$detail)
+          {
+            $user = physiqueUser($detail['identifiant']);
+
+            $detail['pseudo'] = $user->getPseudo();
+            $detail['avatar'] = $user->getAvatar();
+          }
+
+          unset($detail);
+
+          // Récupération des détails
+          $proposition->setDetails($detailsProposition);
+        }
       }
     }
-    $req1->closeCursor();
 
     // Tris
-    if (!empty($listPropositions))
+    if (!empty($listePropositions))
     {
       // Tri par nombre de participants pour affecter le classement
-      foreach ($listPropositions as $proposition)
+      foreach ($listePropositions as $proposition)
       {
-        $tri_nb_participants[] = $proposition->getNb_participants();
+        $triNombreParticipants[] = $proposition->getNb_participants();
       }
 
-      array_multisort($tri_nb_participants, SORT_DESC, $listPropositions);
+      // Tri
+      array_multisort($triNombreParticipants, SORT_DESC, $listePropositions);
+
+      unset($triNombreParticipants);
 
       // Affectation du classement
-      $prevNb_particpants = 0;
-      $currentClassement  = 0;
+      $prevNombreParticpants = 0;
+      $currentClassement     = 0;
 
-      foreach ($listPropositions as $proposition)
+      foreach ($listePropositions as $proposition)
       {
-        $currentNb_participants = $proposition->getNb_participants();
+        $currentNombreParticipants = $proposition->getNb_participants();
 
-        if ($currentNb_participants != $prevNb_particpants)
+        if ($currentNombreParticipants != $prevNombreParticpants)
         {
-          $currentClassement += 1;
-          $prevNb_particpants = $currentNb_participants;
+          $currentClassement    += 1;
+          $prevNombreParticpants = $currentNombreParticipants;
         }
 
         // On enregistre le rang
         $proposition->setClassement($currentClassement);
-
-        // Récupération détails proposition
-        if ($details == true)
-          $proposition->setDetails(getDetailsProposition($proposition));
       }
 
-      // Tri par détermination puis nombre de participants pour affichage
-      $listPropositions = triPropositions($listPropositions);
+      // Tri par détermination puis par nombre de participants pour affichage
+      foreach ($listePropositions as $proposition)
+      {
+        $triDetermined[]         = $proposition->getDetermined();
+        $triNombreParticipants[] = $proposition->getNb_participants();
+      }
+
+      // Tri
+      array_multisort($triDetermined, SORT_DESC, $triNombreParticipants, SORT_DESC, $listePropositions);
     }
 
-    return $listPropositions;
+    // Retour
+    return $listePropositions;
   }
 
-  // METIER : Tri des propositions
-  // RETOUR : Propositions triées
-  function triPropositions($propositions)
-  {
-    // Tri par détermination puis par nombre de participants
-    foreach ($propositions as $proposition)
-    {
-      $tri_determined[]      = $proposition->getDetermined();
-      $tri_nb_participants[] = $proposition->getNb_participants();
-    }
-
-    array_multisort($tri_determined, SORT_DESC, $tri_nb_participants, SORT_DESC, $propositions);
-
-    return $propositions;
-  }
-
-  // METIER : Récupère les détails utilisateurs de la proposition
-  // RETOUR : Tableau des détails
-  function getDetailsProposition($proposition)
-  {
-    $details = array();
-
-    global $bdd;
-
-    $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $proposition->getId_restaurant() . ' ORDER BY identifiant ASC');
-    while ($data1 = $req1->fetch())
-    {
-      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
-      $data2 = $req2->fetch();
-      $pseudo      = $data2['pseudo'];
-      $avatar      = $data2['avatar'];
-      $req2->closeCursor();
-
-      $detailsUser = array("identifiant" => $data1['identifiant'],
-                           "pseudo"      => $pseudo,
-                           "avatar"      => $avatar,
-                           "transports"  => $data1['transports'],
-                           "horaire"     => $data1['time'],
-                           "menu"        => $data1['menu']
-                          );
-
-      array_push($details, $detailsUser);
-    }
-    $req1->closeCursor();
-
-    return $details;
-  }
-
-  // METIER : Contrôle la date et récupère un des restaurants pouvant être déterminé ce jour
+  // METIER : Récupère un des restaurants pouvant être déterminé ce jour
   // RETOUR : Id restaurant déterminé
-  function getRestaurantDetermined($propositions)
+  function getRestaurantDetermined($listePropositions)
   {
-    $control_ok    = true;
-    $id_restaurant = NULL;
+    // Initialisations
+    $idRestaurant = NULL;
+    $control_ok   = true;
 
     // Contrôle date de détermination
-    if (date("N") > 5)
-    {
-      $control_ok                                   = false;
-      $_SESSION['alerts']['week_end_determination'] = true;
-    }
+    $control_ok = controleDateDetermination();
 
     // Contrôle heure de détermination
     if ($control_ok == true)
-    {
-      if (date("H") >= 13)
-      {
-        $control_ok                                = false;
-        $_SESSION['alerts']['heure_determination'] = true;
-      }
-    }
+      $control_ok = controleHeureDetermination();
 
     // Détermination Id restaurant aléatoire
     if ($control_ok == true)
     {
-      $id_restaurants = array();
+      // Extraction des Id en tête
+      $idRestaurants = array();
 
-      foreach ($propositions as $proposition)
+      foreach ($listePropositions as $proposition)
       {
         if ($proposition->getClassement() == 1)
         {
-          array_push($id_restaurants, $proposition->getId_restaurant());
+          array_push($idRestaurants, $proposition->getId_restaurant());
         }
       }
 
-      $id_restaurant = $id_restaurants[array_rand($id_restaurants, 1)];
+      // Détermination Id aléatoire
+      $idRestaurant = $idRestaurants[array_rand($idRestaurants, 1)];
     }
 
-    return $id_restaurant;
+    // Retour
+    return $idRestaurant;
   }
 
   // METIER : Vérification si réservé et retour identifiant
   // RETOUR : Identifiant réservation
-  function getReserved($user)
+  function getReserved()
   {
-    $caller = "";
+    // Récupération de l'identifiant de l'appelant
+    $appelant = physiqueIdentifiantCaller();
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '" AND reserved = "Y"');
-    $donnees = $reponse->fetch();
-
-    if ($reponse->rowCount() > 0)
-      $caller = $donnees['caller'];
-
-    $reponse->closeCursor();
-
-    return $caller;
+    // Retour
+    return $appelant;
   }
 
-  // METIER : Récupère un des participants du jour n'ayant pas appelé dans la semaine
+  // METIER : Détermine un des participants du jour n'ayant pas appelé dans la semaine
   // RETOUR : Participant pouvant appeler
-  function getCallers($id_restaurant)
+  function getCallers($idRestaurant)
   {
-    global $bdd;
-
-    $caller = "";
+    // Initialisations
+    $caller = '';
 
     // Calcul des dates de la semaine
-    $nb_jours_lundi    = 1 - date("N");
-    $nb_jours_vendredi = 5 - date("N");
-    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
-    $friday            = date("Ymd", strtotime('+' . $nb_jours_vendredi . ' days'));
+    $nombreJoursLundi    = 1 - date('N');
+    $nombreJoursVendredi = 5 - date('N');
+    $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
+    $vendredi            = date('Ymd', strtotime('+' . $nombreJoursVendredi . ' days'));
 
-    // Liste des participants du jour
-    $listUsers = array();
+    // Récupération de la liste des participants du jour
+    $listeParticipants = physiqueParticipants($idRestaurant);
 
-    $req1 = $bdd->query('SELECT DISTINCT identifiant FROM food_advisor_users WHERE date = "' . date("Ymd") . '" AND id_restaurant = ' . $id_restaurant . ' ORDER BY identifiant ASC');
-    while ($data1 = $req1->fetch())
+    // Récupération de la liste des appelants de la semaine
+    $listeAppelants = physiqueAppelants($lundi, $vendredi);
+
+    // Filtrage des participants ayant déjà appelé
+    $listeParticipantsFiltres = $listeParticipants;
+
+    foreach ($listeParticipantsFiltres as $keyParticipant => $participant)
     {
-      $req2 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant = "' . $data1['identifiant'] . '"');
-      $data2 = $req2->fetch();
-      $identifiant = $data2['identifiant'];
-      $req2->closeCursor();
-
-      array_push($listUsers, $identifiant);
-    }
-    $req1->closeCursor();
-
-    // Liste des appelants de la semaine
-    $listCallersWeek = array();
-
-    $req3 = $bdd->query('SELECT DISTINCT caller FROM food_advisor_choices WHERE date != "' . date("Ymd") . '"
-                                                                            AND date >= "' . $monday . '"
-                                                                            AND date <= "' . $friday . '"
-                                                                       ORDER BY caller ASC');
-    while ($data3 = $req3->fetch())
-    {
-      array_push($listCallersWeek, $data3['caller']);
-    }
-    $req3->closeCursor();
-
-    // On ne concerve que ceux qui n'ont pas appelé dans la liste des utilisateurs
-    $listCallers = $listUsers;
-
-    foreach ($listCallers as $key => $user)
-    {
-      foreach ($listCallersWeek as $callerWeek)
+      foreach ($listeAppelants as $appelant)
       {
-        if ($user == $callerWeek)
+        if ($participant == $appelant)
         {
-          unset($listCallers[$key]);
+          unset($listeParticipantsFiltres[$keyParticipant]);
           break;
         }
       }
@@ -335,10 +245,11 @@
 
     // Détermination appelant aléatoire parmi ceux restant, ou par défaut une des personnes du jour
     if (!empty($listCallers))
-      $caller = $listCallers[array_rand($listCallers, 1)];
+      $caller = $listeParticipantsFiltres[array_rand($listCallers, 1)];
     else
-      $caller = $listUsers[array_rand($listUsers, 1)];
+      $caller = $listeParticipants[array_rand($listeParticipants, 1)];
 
+    // Retour
     return $caller;
   }
 
@@ -346,97 +257,65 @@
   // RETOUR : Liste des choix du jour (utilisateur)
   function getMyChoices($user)
   {
-    $listChoices = array();
+    // Récupération des choix de l'utilisateur
+    $listeChoix = physiqueChoix($user);
 
-    global $bdd;
-
-    // Récupération des choix
-    $reponse1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant != 0 AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '" ORDER BY id ASC');
-    while ($donnees1 = $reponse1->fetch())
+    // Ajout des informations des restaurants
+    foreach ($listeChoix as $monChoix)
     {
-      $myChoice = Choix::withData($donnees1);
+      $restaurant = physiqueDonneesRestaurant($monChoix->getId_restaurant());
 
-      // Données restaurant
-      $reponse2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $myChoice->getId_restaurant());
-      $donnees2 = $reponse2->fetch();
-
-      $myChoice->setName($donnees2['name']);
-      $myChoice->setPicture($donnees2['picture']);
-      $myChoice->setLocation($donnees2['location']);
-      $myChoice->setOpened($donnees2['opened']);
-
-      $reponse2->closeCursor();
-
-      array_push($listChoices, $myChoice);
+      $monChoix->setName($restaurant->getName());
+      $monChoix->setPicture($restaurant->getPicture());
+      $monChoix->setLocation($restaurant->getLocation());
+      $monChoix->setOpened($restaurant->getOpened());
     }
-    $reponse1->closeCursor();
 
-    return $listChoices;
+    // Retour
+    return $listeChoix;
   }
 
   // METIER : Détermine celui qui réserve
   // RETOUR : Aucun
-  function setDetermination($propositions, $id_restaurant, $caller)
+  function setDetermination($propositions, $idRestaurant, $appelant)
   {
+    // Détermination s'il y a des propositions
     if (!empty($propositions))
     {
-      global $bdd;
+      // Contrôle si détermination déjà existante
+      $determinationExistante = physiqueDeterminationExistante();
 
-      // Contrôle si choix déjà existant
-      $existant = false;
-
-      $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '"');
-      $data1 = $req1->fetch();
-
-      if ($req1->rowCount() > 0)
+      // Si la détermination existe déjà, mise à jour
+      if ($determinationExistante == true)
       {
-        $existant   = true;
-        $old_caller = $data1['caller'];
-        $id         = $data1['id'];
-      }
+        // Récupération des données de la détermination
+        $determination = physiqueDetermination();
 
-      $req1->closeCursor();
+        // Modification de l'enregistrement en base
+        $nouvelleDetermination = array('id_restaurant' => $idRestaurant,
+                                       'caller'        => $appelant
+                                      );
 
-      // Mise à jour ou insertion
-      if ($existant == true)
-      {
-        $choice = array('id_restaurant' => $id_restaurant,
-                        'caller'        => $caller
-                       );
-
-        $req2 = $bdd->prepare('UPDATE food_advisor_choices SET id_restaurant = :id_restaurant,
-                                                               caller        = :caller
-                                                         WHERE id = ' . $id);
-        $req2->execute($choice);
-        $req2->closeCursor();
+        physiqueUpdateDetermination($nouvelleDetermination, $determination['idTable']);
 
         // Génération succès (pour l'appelant si modifié)
-        insertOrUpdateSuccesValue('star-chief', $old_caller, -1);
+        insertOrUpdateSuccesValue('star-chief', $determination['oldCaller'], -1);
       }
+      // Sinon insertion
       else
       {
-        $choice = array('id_restaurant' => $id_restaurant,
-                        'date'          => date("Ymd"),
-                        'caller'        => $caller,
-                        'reserved'      => "N"
-                       );
+        // Insertion de l'enregistrement en base
+        $nouvelleDetermination = array('id_restaurant' => $idRestaurant,
+                                       'date'          => date('Ymd'),
+                                       'caller'        => $appelant,
+                                       'reserved'      => 'N'
+                                      );
 
-        $req2 = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
-                                                                date,
-                                                                caller,
-                                                                reserved
-                                                               )
-                                                        VALUES(:id_restaurant,
-                                                               :date,
-                                                               :caller,
-                                                               :reserved
-                                                              )');
-        $req2->execute($choice);
-        $req2->closeCursor();
+         physiqueInsertionDetermination($nouvelleDetermination);
       }
 
       // Génération succès (pour le nouvel appelant)
-      insertOrUpdateSuccesValue('star-chief', $caller, 1);
+      insertOrUpdateSuccesValue('star-chief', $appelant, 1);
     }
   }
 
@@ -444,49 +323,47 @@
   // RETOUR : Aucun
   function relanceDetermination()
   {
-    global $bdd;
+    // Contrôle si détermination déjà existante
+    $determinationExistante = physiqueDeterminationExistante();
 
     // Si une détermination du jour a déjà été effectuée, on doit relancer la détermination ou éventuellement la supprimer si c'était le dernier choix
-    $existant = false;
-
-    $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date("Ymd") . '"');
-    $data1 = $req1->fetch();
-
-    if ($req1->rowCount() > 0)
+    if ($determinationExistante == true)
     {
-      $existant    = true;
-      $id_existant = $data1['id'];
-    }
+      // Recherche du nombre de choix restants
+      $nombreChoixRestants = physiqueChoixRestants();
 
-    $req1->closeCursor();
-
-    if ($existant == true)
-    {
-      // Nombre de choix restants
-      $req2 = $bdd->query('SELECT COUNT(id) AS nb_choix_restants FROM food_advisor_users WHERE id_restaurant != 0 AND date = "' . date("Ymd") . '"');
-      $data2 = $req2->fetch();
-      $nb_choix_restants = $data2['nb_choix_restants'];
-      $req2->closeCursor();
-
-      // Relance de la détermination si possible
-      if ($nb_choix_restants > 0)
+      // Relance de la détermination si possible, sinon suppression
+      if ($nombreChoixRestants > 0)
       {
+        // Récupération des propositions (sans détails)
         $propositions = getPropositions(false);
-        $idRestaurant = getRestaurantDetermined($propositions);
-        $isSolo       = getSolo($_SESSION['user']['identifiant']);
-        $isReserved   = getReserved($_SESSION['user']['identifiant']);
 
+        // Récupération de l'Id du restaurant déterminé
+        $idRestaurant = getRestaurantDetermined($propositions);
+
+        // Détermination si bande à part
+        $isSolo = getSolo($_SESSION['user']['identifiant']);
+
+        // Détermination si restaurant réservé
+        $isReserved = getReserved();
+
+        // Lancement de la détermination
         if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
         AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
         AND  $isSolo != true AND empty($isReserved))
         {
+          // Récupération des appelants possibles
           $appelant = getCallers($idRestaurant);
+
+          // Lancement de la détermination
           setDetermination($propositions, $idRestaurant, $appelant);
         }
       }
-      // Suppression de la détermination
       else
-        $req3 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id = ' . $id_existant);
+      {
+        // Suppression de la détermination du jour
+        physiqueDeleteDetermination();
+      }
     }
   }
 
@@ -494,116 +371,51 @@
   // RETOUR : Id restaurant
   function insertFastChoice($post, $isSolo, $user)
   {
-    global $bdd;
+    // Initialisations
+    $idRestaurant = $post['id_restaurant'];
+    $control_ok   = true;
 
-    $control_ok    = true;
-    $id_restaurant = $post['id_restaurant'];
+    // Contrôle date de saisie
+    $control_ok = controleDateSaisie();
 
-    // Contrôle saisie possible en fonction des dates
-    if (date("N") > 5)
-    {
-      $control_ok                            = false;
-      $_SESSION['alerts']['week_end_saisie'] = true;
-    }
-
-    // Contrôle saisie possible en fonction de l'heure
+    // Contrôle heure de saisie
     if ($control_ok == true)
-    {
-      if (date("H") >= 13)
-      {
-        $control_ok                         = false;
-        $_SESSION['alerts']['heure_saisie'] = true;
-      }
-    }
+      $control_ok = controleHeureSaisie();
 
     // Contrôle bande à part
     if ($control_ok == true)
-    {
-      if ($isSolo == true)
-      {
-        $control_ok                        = false;
-        $_SESSION['alerts']['solo_saisie'] = true;
-      }
-    }
+      $control_ok = controleSoloSaisie($isSolo);
 
     // Contrôle choix déjà existant
     if ($control_ok == true)
-    {
-      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = ' . $id_restaurant . ' AND identifiant = "' . $user . '" AND date = "' . date("Ymd") . '"');
-      $data1 = $req1->fetch();
+      $control_ok = controleChoixExistant($idRestaurant, $user);
 
-      if ($req1->rowCount() > 0)
-      {
-        $control_ok                                 = false;
-        $_SESSION['alerts']['wrong_fast'] = true;
-      }
-
-      $req1->closeCursor();
-    }
+    // Lecture des données restaurant
+    if ($control_ok == true)
+      $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
     // Contrôle restaurant ouvert
     if ($control_ok == true)
-    {
-      $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $id_restaurant);
-      $data2 = $req2->fetch();
+      $control_ok = controleRestaurantOuvert($restaurant->getOpened());
 
-      $explodedOpened = explode(";", $data2['opened']);
-
-      foreach ($explodedOpened as $keyOpened => $opened)
-      {
-        if (!empty($opened))
-        {
-          if (date('N') == $keyOpened + 1 AND $opened == "N")
-          {
-            $control_ok                     = false;
-            $_SESSION['alerts']['not_open'] = true;
-            break;
-          }
-        }
-      }
-
-      $req2->closeCursor();
-    }
-
-    // Récupération des données et insertion en base
+    // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      $date       = date("Ymd");
-      $time       = "";
-      $transports = "";
-      $menu       = ";;;";
-
-      // Tableau du choix
-      $choice = array('id_restaurant' => $id_restaurant,
-                      'identifiant'   => $user,
-                      'date'          => $date,
-                      'time'          => $time,
-                      'transports'    => $transports,
-                      'menu'          => $menu
+      $choix = array('id_restaurant' => $idRestaurant,
+                     'identifiant'   => $user,
+                     'date'          => $date,
+                     'time'          => $time,
+                     'transports'    => $transports,
+                     'menu'          => $menu
                     );
 
-      // On insère dans la table
-      $req3 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
-                                                            identifiant,
-                                                            date,
-                                                            time,
-                                                            transports,
-                                                            menu
-                                                          )
-                                                    VALUES(:id_restaurant,
-                                                           :identifiant,
-                                                           :date,
-                                                           :time,
-                                                           :transports,
-                                                           :menu
-                                                          )');
-      $req3->execute($choice);
-      $req3->closeCursor();
+      physiqueInsertionChoix($choix);
 
       // Relance de la détermination si besoin
       relanceDetermination();
     }
 
-    return $id_restaurant;
+    // Retour
+    return $idRestaurant;
   }
 ?>

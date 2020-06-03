@@ -19,7 +19,9 @@
   // Modèle de données
   include_once('modele/metier_foodadvisor_commun.php');
   include_once('modele/metier_restaurants.php');
+  include_once('modele/controles_foodadvisor_commun.php');
   include_once('modele/controles_restaurants.php');
+  include_once('modele/physique_foodadvisor_commun.php');
   include_once('modele/physique_restaurants.php');
 
   // Initialisation sauvegarde saisie

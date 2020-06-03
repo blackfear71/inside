@@ -90,7 +90,7 @@
 
       $myExpense->setPrice(str_replace('.', ',', $myExpense->getPrice()));
 
-      // Recherche pseudo et avatar Acheteur
+      // Recherche pseudo et avatar acheteur
       $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myExpense->getBuyer() . '"');
       $donnees2 = $reponse2->fetch();
 

@@ -27,6 +27,7 @@
       $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
       $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
 
+      // On ajoute la ligne au tableau
       array_push($restaurantsParLieux, $myRestaurant);
     }
 
@@ -60,28 +61,6 @@
     return $types;
   }
 
-  // PHYSIQUE : Lecture données élément Restaurant
-  // RETOUR : Objet Restaurant
-  function physiqueDonneesRestaurant($idRestaurant)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM food_advisor_restaurants
-                        WHERE id = ' . $idRestaurant);
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Restaurant à partir des données remontées de la bdd
-    $restaurant = Restaurant::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $restaurant;
-  }
-
   /****************************************************************************/
   /********************************** INSERT **********************************/
   /****************************************************************************/
@@ -104,18 +83,18 @@
                                                                plan,
                                                                lafourchette,
                                                                description)
-                                                        VALUES(:name,
-                                                               :picture,
-                                                               :types,
-                                                               :location,
-                                                               :phone,
-                                                               :opened,
-                                                               :min_price,
-                                                               :max_price,
-                                                               :website,
-                                                               :plan,
-                                                               :lafourchette,
-                                                               :description)');
+                                                       VALUES(:name,
+                                                              :picture,
+                                                              :types,
+                                                              :location,
+                                                              :phone,
+                                                              :opened,
+                                                              :min_price,
+                                                              :max_price,
+                                                              :website,
+                                                              :plan,
+                                                              :lafourchette,
+                                                              :description)');
 
     $req->execute($restaurant);
 
@@ -137,19 +116,20 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('UPDATE food_advisor_restaurants SET name         = :name,
-                                                              picture      = :picture,
-                                                              types        = :types,
-                                                              location     = :location,
-                                                              phone        = :phone,
-                                                              opened       = :opened,
-                                                              min_price    = :min_price,
-                                                              max_price    = :max_price,
-                                                              website      = :website,
-                                                              plan         = :plan,
-                                                              lafourchette = :lafourchette,
-                                                              description  = :description
-                                                        WHERE id = ' . $idRestaurant);
+    $req = $bdd->prepare('UPDATE food_advisor_restaurants
+                          SET name         = :name,
+                              picture      = :picture,
+                              types        = :types,
+                              location     = :location,
+                              phone        = :phone,
+                              opened       = :opened,
+                              min_price    = :min_price,
+                              max_price    = :max_price,
+                              website      = :website,
+                              plan         = :plan,
+                              lafourchette = :lafourchette,
+                              description  = :description
+                          WHERE id = ' . $idRestaurant);
 
     $req->execute($restaurant);
 
@@ -170,7 +150,7 @@
                        WHERE id_restaurant = ' . $idRestaurant);
   }
 
-  // PHYSIQUE : Suppression determinations
+  // PHYSIQUE : Suppression déterminations
   // RETOUR : Aucun
   function physiqueDeleteDeterminations($idRestaurant)
   {
