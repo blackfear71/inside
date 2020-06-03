@@ -32,6 +32,14 @@ $(function()
     deployerMenuUser();
   });
 
+  // Déplie une zone en cliquant sur le titre
+  $('.titre_section').click(function()
+  {
+    var idZone = $(this).attr('id').replace('titre_', 'afficher_');
+
+    openSection($(this), idZone, false);
+  });
+
   // Ferme un menu au clic sur le fond
   $(document).on('click', function(event)
   {
@@ -363,6 +371,15 @@ function endLoading()
     clearInterval(loadPage);
 }
 
+// Affiche ou masque un élément (délai 0s)
+function afficherMasquerIdNoDelay(id)
+{
+  if ($('#' + id).css('display') == 'none')
+    $('#' + id).fadeIn(0);
+  else
+    $('#' + id).fadeOut(0);
+}
+
 // Affiche ou masque un élément (délai 200ms)
 function afficherMasquerIdWithDelay(id)
 {
@@ -379,6 +396,51 @@ function masquerSupprimerIdWithDelay(id)
   {
     $(this).remove();
   });
+}
+
+// Ouvre une zone sous un titre
+function openSection(titre, zone, forcage)
+{
+  // Calcul de l'angle
+  var fleche = titre.children('.fleche_titre_section');
+  var matrix = fleche.css('transform');
+
+  if (matrix !== 'none')
+  {
+    var values = matrix.split('(')[1].split(')')[0].split(',');
+    var a      = values[0];
+    var b      = values[1];
+    var angle  = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+
+    if (angle < 0)
+      angle = angle + 360;
+  }
+  else
+    var angle = 0;
+
+  fleche.css('transition', 'all ease 0.2s');
+
+  // Rotation de la flèche (forçage dans le cas de la recherche live)
+  if (forcage == true)
+  {
+    if (angle != 0)
+    {
+      fleche.css('transform', 'rotate(0deg)');
+
+      // Affichage ou masquage de la zone
+      afficherMasquerIdNoDelay(zone);
+    }
+  }
+  else
+  {
+    if (angle == 0)
+      fleche.css('transform', 'rotate(-90deg)');
+    else
+      fleche.css('transform', 'rotate(0deg)');
+
+    // Affichage ou masquage de la zone
+    afficherMasquerIdWithDelay(zone);
+  }
 }
 
 // Exécute le script php de mise à jour du ping
@@ -476,6 +538,14 @@ function resetLiveSearch()
 // Filtre la zone de recherche en fonction de la saisie
 function liveSearch(input)
 {
+  // Déplie toutes les zones de recherche
+  $('.zone_recherche_conteneur > .titre_section').each(function()
+  {
+    var idZone = $(this).attr('id').replace('titre_', 'afficher_');
+
+    openSection($(this), idZone, true);
+  });
+
   // Si zone vide, on fait tout apparaitre
   if (!input)
   {
