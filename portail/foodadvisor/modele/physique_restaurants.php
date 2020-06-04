@@ -4,39 +4,6 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Lecture restaurants par lieu
-  // RETOUR : Objet Restaurant
-  function physiqueRestaurantsParLieux($lieu)
-  {
-    // Initialisations
-    $restaurantsParLieux = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM food_advisor_restaurants
-                        WHERE location = "' . $lieu . '"
-                        ORDER BY name ASC');
-
-    while ($data = $req->fetch())
-    {
-      // Instanciation d'un objet Restaurant à partir des données remontées de la bdd
-      $myRestaurant = Restaurant::withData($data);
-
-      $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-      $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
-
-      // On ajoute la ligne au tableau
-      array_push($restaurantsParLieux, $myRestaurant);
-    }
-
-    $req->closeCursor();
-
-    // Retour
-    return $restaurantsParLieux;
-  }
-
   // PHYSIQUE : Lecture types de restaurants
   // RETOUR : Types concaténés
   function physiqueTypesRestaurants()

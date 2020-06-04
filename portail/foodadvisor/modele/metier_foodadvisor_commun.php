@@ -14,6 +14,23 @@
     return $listeLieux;
   }
 
+  // METIER : Récupération de la liste des restaurants
+  // RETOUR : Liste des restaurants
+  function getListeRestaurants($listeLieux)
+  {
+    // Initialisations
+    $listeRestaurants = array();
+
+    // Récupération de la liste des restaurants pour chaque lieu
+    foreach ($listeLieux as $lieu)
+    {
+      $listeRestaurants[$lieu] = physiqueRestaurantsParLieux($lieu);
+    }
+
+    // Retour
+    return $listeRestaurants;
+  }
+
   // METIER : Détermine si l'utilisateur fait bande à part
   // RETOUR : Booléen
   function getSolo($user)
@@ -404,10 +421,10 @@
     {
       $choix = array('id_restaurant' => $idRestaurant,
                      'identifiant'   => $user,
-                     'date'          => $date,
-                     'time'          => $time,
-                     'transports'    => $transports,
-                     'menu'          => $menu
+                     'date'          => date('Ymd'),
+                     'time'          => '',
+                     'transports'    => '',
+                     'menu'          => ';;;'
                     );
 
       physiqueInsertionChoix($choix);

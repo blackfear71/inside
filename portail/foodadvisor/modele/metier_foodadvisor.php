@@ -1,118 +1,62 @@
 <?php
-  // METIER : Récupération de la liste des restaurants disponibles
+  // METIER : Récupération de la liste des restaurants ouverts
   // RETOUR : Liste des restaurants disponibles
-  function getListeRestaurants($list_locations)
+  function getListeRestaurantsOuverts($listeLieux)
   {
-    $listRestaurants = array();
+    // Initialisations
+    $listeRestaurants = array();
 
-    global $bdd;
-
-    foreach ($list_locations as $location)
+    // Récupération de la liste des restaurants ouverts pour chaque lieu
+    foreach ($listeLieux as $lieu)
     {
-      $restaurants_by_location = array();
-
-      $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
-      while ($donnees = $reponse->fetch())
-      {
-        // Contrôle restaurant disponible ce jour
-        $available_day  = true;
-        $explodedOpened = explode(";", $donnees['opened']);
-
-        foreach ($explodedOpened as $keyOpened => $opened)
-        {
-          if (!empty($opened))
-          {
-            if (date('N') == $keyOpened + 1 AND $opened == "N")
-            {
-              $available_day = false;
-              break;
-            }
-          }
-        }
-
-        // Récupération des données si disponible
-        if ($available_day == true)
-        {
-          $myRestaurant = Restaurant::withData($donnees);
-          $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-          $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
-
-          array_push($restaurants_by_location, $myRestaurant);
-        }
-      }
-      $reponse->closeCursor();
-
-      $listRestaurants[$location] = $restaurants_by_location;
+      $listeRestaurants[$lieu] = physiqueRestaurantsOuvertsParLieux($lieu);
     }
 
-    return $listRestaurants;
-  }
-
-  // METIER : Récupération de la liste complète des restaurants pour le résumé de la semaine
-  // RETOUR : Liste des restaurants
-  function getListeRestaurantsResume($list_locations)
-  {
-    $listRestaurants = array();
-
-    global $bdd;
-
-    foreach ($list_locations as $location)
-    {
-      $restaurants_by_location = array();
-
-      $reponse = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE location = "' . $location . '" ORDER BY name ASC');
-      while ($donnees = $reponse->fetch())
-      {
-        // Récupération des données
-        $myRestaurant = Restaurant::withData($donnees);
-        $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-        $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
-
-        array_push($restaurants_by_location, $myRestaurant);
-      }
-      $reponse->closeCursor();
-
-      $listRestaurants[$location] = $restaurants_by_location;
-    }
-
-    return $listRestaurants;
-  }
-
-  // METIER : Filtre la liste des lieux disponibles si vide
-  // RETOUR : Liste des lieux filtrés
-  function getLieuxFiltres($listeRestaurants)
-  {
-    $listeLieux = array();
-
-    foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
-    {
-      if (!empty($restaurantsParLieux))
-        array_push($listeLieux, $keyRestaurant);
-    }
-
-    return $listeLieux;
+    // Retour
+    return $listeRestaurants;
   }
 
   // METIER : Filtre la liste des restaurants disponibles si aucun ne l'est
   // RETOUR : Liste des restaurants filtrés
   function getListeRestaurantsFiltres($listeRestaurants)
   {
+    // Filtrage des restaurants
     foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
     {
       if (empty($restaurantsParLieux))
         unset($listeRestaurants[$keyRestaurant]);
     }
 
+    // Retour
     return $listeRestaurants;
+  }
+
+  // METIER : Extrait la liste des lieux avec au moins 1 restaurant ouvert
+  // RETOUR : Liste des lieux filtrés
+  function getLieuxFiltres($listeRestaurants)
+  {
+    // Initialisations
+    $listeLieux = array();
+
+    // Récupération des lieux ayant au moins 1 restaurant ouvert
+    foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
+    {
+      if (!empty($restaurantsParLieux))
+        array_push($listeLieux, $keyRestaurant);
+    }
+
+    // Retour
+    return $listeLieux;
   }
 
   // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
   // RETOUR : Tableau des restaurants par lieu
-  function convertForJson($listeRestaurants)
+  function convertForJsonListeRestaurants($listeRestaurants)
   {
-    // On transforme les objets en tableau pour envoyer au Javascript
+    // Initialisations
     $listeRestaurantsAConvertir = array();
 
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
     foreach ($listeRestaurants as $keyLieu => $restaurantsParLieux)
     {
       $listeParLieu = array();
@@ -122,25 +66,40 @@
         $restaurantAConvertir = array('id'   => $restaurant->getId(),
                                       'name' => $restaurant->getName()
                                      );
+
+        // On ajoute la ligne au tableau
         array_push($listeParLieu, $restaurantAConvertir);
       }
 
       $listeRestaurantsAConvertir[$keyLieu] = $listeParLieu;
     }
 
+    // Retour
     return $listeRestaurantsAConvertir;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   // METIER : Converstion du tableau d'objet des propositions en tableau simple pour JSON
   // RETOUR : Tableau des détails
-  function convertForJson2($propositions)
+  function convertForJsonListePropositions($propositions)
   {
     // On transforme les objets en tableau pour envoyer au Javascript
     $listePopositionsAConvertir = array();
 
     foreach ($propositions as $proposition)
     {
-      $phone = "";
+      $phone = '';
 
       if (!empty($proposition->getPhone()))
         $phone = formatPhoneNumber($proposition->getPhone());
@@ -171,6 +130,7 @@
       $listePopositionsAConvertir[$proposition->getId_restaurant()] = $propositionAConvertir;
     }
 
+    // Retour
     return $listePopositionsAConvertir;
   }
 
@@ -178,75 +138,75 @@
   // RETOUR : Booléen
   function getActions($propositions, $myChoices, $isSolo, $isReserved, $user)
   {
-    $actions = array("saisir_choix"     => true,
-                     "determiner"       => true,
-                     "solo"             => true,
-                     "choix"            => true,
-                     "reserver"         => true,
-                     "annuler_reserver" => false,
-                     "supprimer_choix"  => true,
-                     "choix_rapide"     => true
+    $actions = array('saisir_choix'     => true,
+                     'determiner'       => true,
+                     'solo'             => true,
+                     'choix'            => true,
+                     'reserver'         => true,
+                     'annuler_reserver' => false,
+                     'supprimer_choix'  => true,
+                     'choix_rapide'     => true
                     );
 
     // Contrôles date et heure
-    if (date("N") > 5 OR date("H") >= 13)
+    if (date('N') > 5 OR date('H') >= 13)
     {
-      $actions["saisir_choix"]     = false;
-      $actions["determiner"]       = false;
-      $actions["solo"]             = false;
-      $actions["choix"]            = false;
-      $actions["reserver"]         = false;
-      $actions["annuler_reserver"] = false;
-      $actions["supprimer_choix"]  = false;
-      $actions["choix_rapide"]     = false;
+      $actions['saisir_choix']     = false;
+      $actions['determiner']       = false;
+      $actions['solo']             = false;
+      $actions['choix']            = false;
+      $actions['reserver']         = false;
+      $actions['annuler_reserver'] = false;
+      $actions['supprimer_choix']  = false;
+      $actions['choix_rapide']     = false;
     }
 
     // Contrôle propositions présentes (pour bouton détermination)
-    if ($actions["determiner"] == true)
+    if ($actions['determiner'] == true)
     {
       if (empty($propositions) OR empty($myChoices))
-        $actions["determiner"] = false;
+        $actions['determiner'] = false;
     }
 
     // Contrôle choix présents (pour bouton suppression de tous les choix)
     if (empty($myChoices))
-      $actions["supprimer_choix"] = false;
+      $actions['supprimer_choix'] = false;
 
     // Contrôle choix présents (pour bouton bande à part)
-    if ($actions["solo"] == true)
+    if ($actions['solo'] == true)
     {
       if (!empty($myChoices))
-        $actions["solo"] = false;
+        $actions['solo'] = false;
     }
 
     // Contrôle vote solo présent
-    if ($actions["solo"] == true)
+    if ($actions['solo'] == true)
     {
       if ($isSolo == true)
       {
-        $actions["saisir_choix"]    = false;
-        $actions["solo"]            = false;
-        $actions["supprimer_choix"] = false;
-        $actions["choix_rapide"]    = false;
+        $actions['saisir_choix']    = false;
+        $actions['solo']            = false;
+        $actions['supprimer_choix'] = false;
+        $actions['choix_rapide']    = false;
       }
     }
 
     // Contrôle réservation effectuée
-    if ($actions["reserver"] == true)
+    if ($actions['reserver'] == true)
     {
       if (!empty($isReserved))
       {
-        $actions["saisir_choix"] = false;
-        $actions["reserver"]     = false;
-        $actions["determiner"]   = false;
+        $actions['saisir_choix'] = false;
+        $actions['reserver']     = false;
+        $actions['determiner']   = false;
       }
     }
 
     // Contrôle réserveur pour annulation
-    if ($actions["reserver"] == false)
+    if ($actions['reserver'] == false)
     {
-      if ($isReserved == $user AND date("N") <= 5 AND date("H") < 13)
-        $actions["annuler_reserver"] = true;
+      if ($isReserved == $user AND date('N') <= 5 AND date('H') < 13)
+        $actions['annuler_reserver'] = true;
     }
 
     return $actions;

@@ -1,21 +1,4 @@
 <?php
-  // METIER : Récupération de la liste des restaurants
-  // RETOUR : Liste des restaurants
-  function getRestaurants($listeLieux)
-  {
-    // Initialisations
-    $listeRestaurants = array();
-
-    // Récupération de la liste des restaurants pour chaque lieu
-    foreach ($listeLieux as $lieu)
-    {
-      $listeRestaurants[$lieu] = physiqueRestaurantsParLieux($lieu);
-    }
-
-    // Retour
-    return $listeRestaurants;
-  }
-
   // METIER : Récupération de la liste des types de restaurants
   // RETOUR : Liste des types
   function getTypesRestaurants()

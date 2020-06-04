@@ -62,7 +62,7 @@
       $listeTypes = getTypesRestaurants();
 
       // Récupération de la liste des restaurants
-      $listeRestaurants = getRestaurants($listeLieux);
+      $listeRestaurants = getListeRestaurants($listeLieux);
 
       // Détermination si bande à part
       $isSolo = getSolo($_SESSION['user']['identifiant']);

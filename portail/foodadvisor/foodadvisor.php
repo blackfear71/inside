@@ -27,7 +27,9 @@
   include_once('modele/metier_foodadvisor_commun.php');
   include_once('modele/metier_foodadvisor.php');
   include_once('modele/controles_foodadvisor_commun.php');
+  include_once('modele/controles_foodadvisor.php');
   include_once('modele/physique_foodadvisor_commun.php');
+  include_once('modele/physique_foodadvisor.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -37,13 +39,13 @@
       $listeLieuxDisponibles = getLieux();
 
       // Récupération de tous les restaurants (ouverts)
-      $listeRestaurantsDisponibles = getListeRestaurants($listeLieuxDisponibles);
+      $listeRestaurantsOuverts = getListeRestaurantsOuverts($listeLieuxDisponibles);
 
       // Récupération de tous les restaurants (existants)
-      $listeRestaurantsResume = getListeRestaurantsResume($listeLieuxDisponibles);
+      $listeRestaurantsResume = getListeRestaurants($listeLieuxDisponibles);
 
       // Filtrage de la liste des restaurants (ouverts)
-      $listeRestaurants = getListeRestaurantsFiltres($listeRestaurantsDisponibles);
+      $listeRestaurants = getListeRestaurantsFiltres($listeRestaurantsOuverts);
 
       // Filtrage de la liste des lieux (restaurants ouverts)
       $listeLieux = getLieuxFiltres($listeRestaurants);
@@ -343,10 +345,10 @@
 
       // Conversion JSON
       $listeLieuxResumeJson       = json_encode($listeLieuxDisponibles);
-      $listeRestaurantsResumeJson = json_encode(convertForJson($listeRestaurantsResume));
+      $listeRestaurantsResumeJson = json_encode(convertForJsonListeRestaurants($listeRestaurantsResume));
       $listeLieuxJson             = json_encode($listeLieux);
-      $listeRestaurantsJson       = json_encode(convertForJson($listeRestaurants));
-      $detailsPropositions        = json_encode(convertForJson2($propositions));
+      $listeRestaurantsJson       = json_encode(convertForJsonListeRestaurants($listeRestaurants));
+      $detailsPropositions        = json_encode(convertForJsonListePropositions($propositions));
       break;
 
     case 'doDeterminer':
