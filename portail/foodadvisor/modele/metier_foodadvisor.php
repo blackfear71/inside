@@ -140,7 +140,7 @@
                     );
 
     // Contrôles date et heure - toutes actions
-    /*if (date('N') > 5 OR date('H') >= 13)
+    if (date('N') > 5 OR date('H') >= 13)
     {
       $actions['saisir_choix']     = false;
       $actions['determiner']       = false;
@@ -150,7 +150,7 @@
       $actions['annuler_reserver'] = false;
       $actions['supprimer_choix']  = false;
       $actions['choix_rapide']     = false;
-    }*/
+    }
 
     // Contrôle propositions présentes - bouton détermination
     if ($actions['determiner'] == true)
@@ -490,7 +490,7 @@
     $control_ok = true;
 
     // Contrôle date de saisie
-    //$control_ok = controleDateSaisie('week_end_saisie');
+    $control_ok = controleDateSaisie('week_end_saisie');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
@@ -705,37 +705,28 @@
   // RETOUR : Aucun
   function insertChoicesMobile($post, $isSolo, $user)
   {
-    global $bdd;
-
-    $control_ok       = true;
+    // Initialisations
     $listeRestaurants = array_keys($post['restaurants']);
+    $control_ok       = true;
 
-    // Contrôle saisie possible en fonction des dates
-    if (date('N') > 5)
-    {
-      $control_ok                            = false;
-      $_SESSION['alerts']['week_end_saisie'] = true;
-    }
+    // Contrôle date de saisie
+    $control_ok = controleDateSaisie('week_end_saisie');
 
-    // Contrôle saisie possible en fonction de l'heure
+    // Contrôle heure de saisie
     if ($control_ok == true)
-    {
-      if (date('H') >= 13)
-      {
-        $control_ok                         = false;
-        $_SESSION['alerts']['heure_saisie'] = true;
-      }
-    }
+      $control_ok = controleHeureSaisie('heure_saisie');
 
     // Contrôle bande à part
     if ($control_ok == true)
-    {
-      if ($isSolo == true)
-      {
-        $control_ok                        = false;
-        $_SESSION['alerts']['solo_saisie'] = true;
-      }
-    }
+      $control_ok = controleSoloSaisie($isSolo);
+
+
+
+
+
+
+
+    global $bdd;
 
     // Contrôle choix déjà existant
     if ($control_ok == true)
