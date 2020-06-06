@@ -147,7 +147,7 @@
 
   // PHYSIQUE : Lecture choix utilisateur
   // RETOUR : Liste des choix
-  function physiqueChoix($identifiant)
+  function physiqueListeChoix($identifiant)
   {
     // Initialisations
     $listeChoix = array();

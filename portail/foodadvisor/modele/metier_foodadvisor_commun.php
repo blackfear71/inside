@@ -276,7 +276,7 @@
   function getMyChoices($user)
   {
     // Récupération des choix de l'utilisateur
-    $listeChoix = physiqueChoix($user);
+    $listeChoix = physiqueListeChoix($user);
 
     // Ajout des informations des restaurants
     foreach ($listeChoix as $monChoix)

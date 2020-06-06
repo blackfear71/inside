@@ -447,7 +447,7 @@
         // Lecture des données du choix
         $choixSemaine = physiqueDonneesResume($i);
 
-        if ($choixSemaine != NULL)
+        if (!empty($choixSemaine))
         {
           // Lecture des données du restaurant
           $restaurant = physiqueDonneesRestaurant($choixSemaine->getId_restaurant());
@@ -464,7 +464,7 @@
           $choixSemaine->setLocation($restaurant->getLocation());
           $choixSemaine->setNb_participants($nombreParticipants);
 
-          if ($user != NULL)
+          if (!empty($user))
           {
             $choixSemaine->setPseudo($user->getPseudo());
             $choixSemaine->setAvatar($user->getAvatar());
@@ -675,32 +675,6 @@
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // METIER : Insère un ou plusieurs choix utilisateur
   // RETOUR : Aucun
   function insertChoicesMobile($post, $isSolo, $user)
@@ -720,15 +694,7 @@
     if ($control_ok == true)
       $control_ok = controleSoloSaisie($isSolo);
 
-
-
-
-
-
-
-    global $bdd;
-
-    // Contrôle choix déjà existant
+    // Contrôle choix déjà existant (non bloquant)
     if ($control_ok == true)
     {
       // On parcourt tous les choix
@@ -736,54 +702,37 @@
       {
         foreach ($listeRestaurants as $keyId => $idRestaurant)
         {
-          $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id_restaurant = ' . $idRestaurant . ' AND identifiant = "' . $user . '" AND date = "' . date('Ymd') . '"');
-          $data1 = $req1->fetch();
+          // Contrôle choix existant
+          $choixNonExistant = controleChoixExistant($idRestaurant, $user, 'wrong_choice_already');
 
-          if ($req1->rowCount() > 0)
-          {
-            // On supprime le restaurant si déjà saisi et on le signale
+          // On supprime la ligne du tableau si déjà saisi
+          if ($choixNonExistant == false)
             unset($listeRestaurants[$keyId]);
-
-            $_SESSION['alerts']['wrong_choice_already'] = true;
-          }
-
-          $req1->closeCursor();
         }
       }
     }
 
-    // Contrôle restaurant ouvert
+    // Contrôle restaurant ouvert (non bloquant)
     if ($control_ok == true)
     {
       if (!empty($listeRestaurants))
       {
         foreach ($listeRestaurants as $keyId => $idRestaurant)
         {
-          $req2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE id = ' . $idRestaurant);
-          $data2 = $req2->fetch();
+          // Lecture des données du restaurant
+          $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
-          $explodedOpened = explode(';', $data2['opened']);
+          // Contrôle restaurant ouvert
+          $restaurantOuvert = controleRestaurantOuvert($restaurant->getOpened());
 
-          foreach ($explodedOpened as $keyOpened => $opened)
-          {
-            if (!empty($opened))
-            {
-              if (date('N') == $keyOpened + 1 AND $opened == 'N')
-              {
-                // On supprime le restaurant si déjà saisi et on le signale
-                unset($listeRestaurants[$keyId]);
-
-                $_SESSION['alerts']['not_open'] = true;
-              }
-            }
-          }
-
-          $req2->closeCursor();
+          // On supprime la ligne du tableau si le restaurant n'est pas ouvert
+          if ($restaurantOuvert == false)
+            unset($listeRestaurants[$keyId]);
         }
       }
     }
 
-    // Récupération des données et insertion en base
+    // Récupération des données et insertion des enregistrements en base
     if ($control_ok == true)
     {
       if (!empty($listeRestaurants))
@@ -794,18 +743,18 @@
           $identifiant = $user;
 
           // Date de saisie
-          $date        = date('Ymd');
+          $date = date('Ymd');
 
-          // Heure
-          $time        = '';
+          // Heure choisie
+          $time = '';
 
           // Transports choisis
-          $transports  = '';
+          $transports = '';
 
           // Menu
-          $menu        = ';;;';
+          $menu = ';;;';
 
-          // Tableau d'un choix
+          // Insertion de l'enregistrement en base
           $choix = array('id_restaurant' => $idRestaurant,
                          'identifiant'   => $identifiant,
                          'date'          => $date,
@@ -814,21 +763,7 @@
                          'menu'          => $menu
                         );
 
-          // On insère dans la table
-          $req3 = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
-                                                                identifiant,
-                                                                date,
-                                                                time,
-                                                                transports,
-                                                                menu)
-                                                        VALUES(:id_restaurant,
-                                                               :identifiant,
-                                                               :date,
-                                                               :time,
-                                                               :transports,
-                                                               :menu)');
-          $req3->execute($choix);
-          $req3->closeCursor();
+          physiqueInsertionChoix($choix);
 
           // Relance de la détermination si besoin
           relanceDetermination();
@@ -841,77 +776,61 @@
   // RETOUR : Aucun
   function updateChoice($post, $user)
   {
-    $id_choix   = $post['id_choix'];
+    // Initialisations
+    $idChoix    = $post['id_choix'];
     $control_ok = true;
 
-    global $bdd;
+    // Contrôle date de saisie
+    $control_ok = controleDateSaisie('week_end_saisie');
 
-    // Contrôle saisie possible en fonction des dates
-    if (date('N') > 5)
-    {
-      $control_ok                            = false;
-      $_SESSION['alerts']['week_end_saisie'] = true;
-    }
-
-    // Contrôle saisie possible en fonction de l'heure
+    // Contrôle heure de saisie
     if ($control_ok == true)
-    {
-      if (date('H') >= 13)
-      {
-        $control_ok                         = false;
-        $_SESSION['alerts']['heure_saisie'] = true;
-      }
-    }
+      $control_ok = controleHeureSaisie('heure_saisie');
 
-    // Récupération des données et insertion en base
+    // Récupération des données et modification de l'enregistrements en base
     if ($control_ok == true)
     {
       // Heure choisie
-      if (isset($post['select_heures_' . $id_choix])  AND !empty($post['select_heures_' . $id_choix])
-      AND isset($post['select_minutes_' . $id_choix]) AND !empty($post['select_minutes_' . $id_choix]))
-        $time        = $post['select_heures_' . $id_choix] . $post['select_minutes_' . $id_choix];
+      if (isset($post['select_heures_' . $idChoix])  AND !empty($post['select_heures_' . $idChoix])
+      AND isset($post['select_minutes_' . $idChoix]) AND !empty($post['select_minutes_' . $idChoix]))
+        $time = $post['select_heures_' . $idChoix] . $post['select_minutes_' . $idChoix];
       else
-        $time        = '';
+        $time = '';
 
       // Transports choisis
-      $transports    = '';
+      $transports = '';
 
-      if (isset($post['checkbox_feet_' . $id_choix]) AND $post['checkbox_feet_' . $id_choix] == 'F')
-        $transports .= $post['checkbox_feet_' . $id_choix] . ';';
+      if (isset($post['checkbox_feet_' . $idChoix]) AND $post['checkbox_feet_' . $idChoix] == 'F')
+        $transports .= $post['checkbox_feet_' . $idChoix] . ';';
 
-      if (isset($post['checkbox_bike_' . $id_choix]) AND $post['checkbox_bike_' . $id_choix] == 'B')
-        $transports .= $post['checkbox_bike_' . $id_choix] . ';';
+      if (isset($post['checkbox_bike_' . $idChoix]) AND $post['checkbox_bike_' . $idChoix] == 'B')
+        $transports .= $post['checkbox_bike_' . $idChoix] . ';';
 
-      if (isset($post['checkbox_tram_' . $id_choix]) AND $post['checkbox_tram_' . $id_choix] == 'T')
-        $transports .= $post['checkbox_tram_' . $id_choix] . ';';
+      if (isset($post['checkbox_tram_' . $idChoix]) AND $post['checkbox_tram_' . $idChoix] == 'T')
+        $transports .= $post['checkbox_tram_' . $idChoix] . ';';
 
-      if (isset($post['checkbox_car_' . $id_choix]) AND $post['checkbox_car_' . $id_choix] == 'C')
-        $transports .= $post['checkbox_car_' . $id_choix] . ';';
+      if (isset($post['checkbox_car_' . $idChoix])  AND $post['checkbox_car_' . $idChoix]  == 'C')
+        $transports .= $post['checkbox_car_' . $idChoix] . ';';
 
       // Menu saisi
-      $menu          = '';
+      $menu = '';
 
-      if (!isset($post['update_entree_' . $id_choix]) AND !isset($post['update_plat_' . $id_choix]) AND !isset($post['update_dessert_' . $id_choix]))
-        $menu       .= ';;;';
+      if (!isset($post['update_entree_' . $idChoix]) AND !isset($post['update_plat_' . $idChoix]) AND !isset($post['update_dessert_' . $idChoix]))
+        $menu .= ';;;';
       else
       {
-        $menu       .= str_replace(';', ' ', $post['update_entree_' . $id_choix]) . ';';
-        $menu       .= str_replace(';', ' ', $post['update_plat_' . $id_choix]) . ';';
-        $menu       .= str_replace(';', ' ', $post['update_dessert_' . $id_choix]) . ';';
+        $menu .= str_replace(';', ' ', $post['update_entree_' . $idChoix]) . ';';
+        $menu .= str_replace(';', ' ', $post['update_plat_' . $idChoix]) . ';';
+        $menu .= str_replace(';', ' ', $post['update_dessert_' . $idChoix]) . ';';
       }
 
-      // Tableau de mise à jour d'un choix
+      // Modification de l'enregistrement en base
       $choix = array('time'       => $time,
                      'transports' => $transports,
                      'menu'       => $menu
                     );
 
-      $req = $bdd->prepare('UPDATE food_advisor_users SET time       = :time,
-                                                          transports = :transports,
-                                                          menu       = :menu
-                                                    WHERE id = ' . $id_choix . ' AND identifiant = "' . $user . '" AND date = "' . date('Ymd') . '"');
-      $req->execute($choix);
-      $req->closeCursor();
+      physiqueUpdateChoix($idChoix, $choix, $user);
     }
   }
 
@@ -919,59 +838,56 @@
   // RETOUR : Aucun
   function deleteChoice($post)
   {
-    $id_choix   = $post['id_choix'];
+    // Initialisations
+    $idChoix    = $post['id_choix'];
     $control_ok = true;
 
-    global $bdd;
+    // Contrôle date de saisie
+    $control_ok = controleDateSaisie('week_end_delete');
 
-    // Contrôle suppression possible en fonction des dates
-    if (date('N') > 5)
-    {
-      $control_ok                            = false;
-      $_SESSION['alerts']['week_end_delete'] = true;
-    }
+    // Contrôle heure de saisie
+    if ($control_ok == true)
+      $control_ok = controleHeureSaisie('heure_suppression');
 
-    // Contrôle suppression possible en fonction de l'heure
+    // Vérification appelant à la suppression du choix
     if ($control_ok == true)
     {
-      if (date('H') >= 13)
+      // Récupération des données du choix
+      $choix = physiqueChoix($idChoix);
+
+      // Récupération des données de la détermination si correspondantes
+      $determinationExistante = physiqueDeterminationExistanteUser($choix->getId_restaurant(), $choix->getIdentifiant());
+
+      if ($determinationExistante == true)
       {
-        $control_ok                              = false;
-        $_SESSION['alerts']['heure_suppression'] = true;
+        // Génération succès (pour l'appelant si supprimé)
+        insertOrUpdateSuccesValue('star-chief', $choix->getIdentifiant(), -1);
+
+        // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
+        physiqueDeleteDeterminationUser($choix->getId_restaurant(), $choix->getIdentifiant());
       }
-    }
 
-    // On vérifie que l'on n'était pas l'appelant quand on supprime le choix
-    if ($control_ok == true)
-    {
-      // Recherche Id restaurant correspondant au choix
-      $req1 = $bdd->query('SELECT * FROM food_advisor_users WHERE id = ' . $id_choix);
-      $data1 = $req1->fetch();
-      $idRestaurant = $data1['id_restaurant'];
-      $identifiant   = $data1['identifiant'];
-      $req1->closeCursor();
+      // Suppression de l'enregistrement en base
+      physiqueDeleteChoix($idChoix);
 
-      // Génération succès (pour l'appelant si supprimé)
-      $req2 = $bdd->query('SELECT * FROM food_advisor_choices WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . date('Ymd') . '" AND caller = "' . $identifiant . '"');
-      $data2 = $req2->fetch();
-
-      if ($req2->rowCount() > 0)
-        insertOrUpdateSuccesValue('star-chief', $identifiant, -1);
-
-      $req2->closeCursor();
-
-      // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-      $req3 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . date('Ymd') . '" AND caller = "' . $identifiant . '"');
-    }
-
-    // Suppression choix de la base
-    if ($control_ok == true)
-      $req4 = $bdd->exec('DELETE FROM food_advisor_users WHERE id = ' . $id_choix);
-
-    // Relance de la détermination si besoin
-    if ($control_ok == true)
+      // Relance de la détermination si besoin
       relanceDetermination();
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // METIER : Supprime tous les choix utilisateur
   // RETOUR : Aucun
@@ -1029,6 +945,15 @@
       relanceDetermination();
   }
 
+
+
+
+
+
+
+
+
+
   // METIER : Insère un choix dans le résumé
   // RETOUR : Aucun
   function insertResume($post)
@@ -1080,6 +1005,16 @@
       $req2->closeCursor();
     }
   }
+
+
+
+
+
+
+
+
+
+
 
   // METIER : Supprime un choix dans le résumé
   // RETOUR : Aucun

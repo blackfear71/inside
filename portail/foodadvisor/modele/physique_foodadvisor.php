@@ -192,6 +192,53 @@
     return $resume;
   }
 
+  // PHYSIQUE : Lecture choix utilisateur
+  // RETOUR : Objet Choix
+  function physiqueChoix($idChoix)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM food_advisor_users
+                        WHERE id = ' . $idChoix);
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Choix à partir des données remontées de la bdd
+    $choix = Choix::withData($data);
+
+    $req->closeCursor();
+
+    // Retour
+    return $choix;
+  }
+
+  // PHYSIQUE : Lecture détermination existante liée à l'utilisateur
+  // RETOUR : Booléen
+  function physiqueDeterminationExistanteUser($idRestaurant, $identifiant)
+  {
+    // Initialisations
+    $exist = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                        FROM food_advisor_choices
+                        WHERE date = "' . date('Ymd') . '" AND id_restaurant = ' . $idRestaurant . ' AND caller = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $exist = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $exist;
+  }
+
   /****************************************************************************/
   /********************************** UPDATE **********************************/
   /****************************************************************************/
@@ -209,6 +256,24 @@
     $req->execute(array(
       'reserved' => 'N'
     ));
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour choix existant
+  // RETOUR : Aucun
+  function physiqueUpdateChoix($idChoix, $choix, $identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE food_advisor_users
+                          SET time       = :time,
+                              transports = :transports,
+                              menu       = :menu
+                          WHERE id = ' . $idChoix . ' AND identifiant = "' . $identifiant . '" AND date = "' . date('Ymd') . '"');
+
+    $req->execute($choix);
 
     $req->closeCursor();
   }
@@ -236,5 +301,27 @@
 
     $req = $bdd->exec('DELETE FROM food_advisor_users
                        WHERE date = "' . date('Ymd') . '" AND id_restaurant = "' . $idRestaurant . '"');
+  }
+
+  // PHYSIQUE : Suppression détermination du jour liée à l'utilisateur
+  // RETOUR : Aucun
+  function physiqueDeleteDeterminationUser($idRestaurant, $identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM food_advisor_choices
+                       WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . date('Ymd') . '" AND caller = "' . $identifiant . '"');
+  }
+
+  // PHYSIQUE : Suppression choix d'un utilisateur
+  // RETOUR : Aucun
+  function physiqueDeleteChoix($idChoix)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM food_advisor_users
+                       WHERE id = ' . $idChoix);
   }
 ?>
