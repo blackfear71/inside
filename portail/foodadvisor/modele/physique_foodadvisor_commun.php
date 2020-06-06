@@ -176,7 +176,7 @@
   }
 
   // PHYSIQUE : Lecture détermination du jour
-  // RETOUR :
+  // RETOUR : Objet Proposition
   function physiqueDetermination()
   {
     // Requête
@@ -188,9 +188,8 @@
 
     $data = $req->fetch();
 
-    $determination = array('oldCaller' => $data['caller'],
-                           'idTable'   => $data['id']
-                          );
+    // Instanciation d'un objet Proposition à partir des données remontées de la bdd
+    $determination = Proposition::withData($data);
 
     $req->closeCursor();
 
@@ -494,17 +493,17 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO food_advisor_users(id_restaurant,
-                                                          identifiant,
-                                                          date,
-                                                          time,
-                                                          transports,
-                                                          menu)
-                                                  VALUES(:id_restaurant,
-                                                         :identifiant,
-                                                         :date,
-                                                         :time,
-                                                         :transports,
-                                                         :menu)');
+                                                         identifiant,
+                                                         date,
+                                                         time,
+                                                         transports,
+                                                         menu)
+                                                 VALUES(:id_restaurant,
+                                                        :identifiant,
+                                                        :date,
+                                                        :time,
+                                                        :transports,
+                                                        :menu)');
 
     $req->execute($choix);
 
@@ -516,15 +515,16 @@
   /****************************************************************************/
   // PHYSIQUE : Mise à jour détermination existante
   // RETOUR : Aucun
-  function physiqueUpdateDetermination($determination, $idTable)
+  function physiqueUpdateDetermination($determination, $id)
   {
     // Requête
     global $bdd;
 
     $req = $bdd->prepare('UPDATE food_advisor_choices
                           SET id_restaurant = :id_restaurant,
-                              caller        = :caller
-                          WHERE id = ' . $idTable);
+                              caller        = :caller,
+                              reserved      = :reserved
+                          WHERE id = ' . $id);
 
     $req->execute($determination);
 

@@ -188,11 +188,11 @@
     $control_ok   = true;
 
     // Contrôle date de détermination
-    $control_ok = controleDateDetermination();
+    $control_ok = controleDateSaisie('week_end_determination');
 
     // Contrôle heure de détermination
     if ($control_ok == true)
-      $control_ok = controleHeureDetermination();
+      $control_ok = controleHeureSaisie('heure_determination');
 
     // Détermination Id restaurant aléatoire
     if ($control_ok == true)
@@ -311,13 +311,14 @@
 
         // Modification de l'enregistrement en base
         $nouvelleDetermination = array('id_restaurant' => $idRestaurant,
-                                       'caller'        => $appelant
+                                       'caller'        => $appelant,
+                                       'reserved'      => 'N'
                                       );
 
-        physiqueUpdateDetermination($nouvelleDetermination, $determination['idTable']);
+        physiqueUpdateDetermination($nouvelleDetermination, $determination->getId());
 
         // Génération succès (pour l'appelant si modifié)
-        insertOrUpdateSuccesValue('star-chief', $determination['oldCaller'], -1);
+        insertOrUpdateSuccesValue('star-chief', $determination->getCaller(), -1);
       }
       // Sinon insertion
       else
@@ -329,7 +330,7 @@
                                        'reserved'      => 'N'
                                       );
 
-         physiqueInsertionDetermination($nouvelleDetermination);
+        physiqueInsertionDetermination($nouvelleDetermination);
       }
 
       // Génération succès (pour le nouvel appelant)
@@ -394,11 +395,11 @@
     $control_ok   = true;
 
     // Contrôle date de saisie
-    $control_ok = controleDateSaisie();
+    $control_ok = controleDateSaisie('week_end_saisie');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie();
+      $control_ok = controleHeureSaisie('heure_saisie');
 
     // Contrôle bande à part
     if ($control_ok == true)
@@ -406,7 +407,7 @@
 
     // Contrôle choix déjà existant
     if ($control_ok == true)
-      $control_ok = controleChoixExistant($idRestaurant, $user);
+      $control_ok = controleChoixExistant($idRestaurant, $user, 'wrong_fast');
 
     // Lecture des données restaurant
     if ($control_ok == true)

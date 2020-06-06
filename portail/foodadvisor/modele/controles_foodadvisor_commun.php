@@ -1,7 +1,7 @@
 <?php
   // CONTROLE : Date détermination
   // RETOUR : Booléen
-  function controleDateDetermination()
+  function controleDateSaisie($alerte)
   {
     // Initialisations
     $control_ok = true;
@@ -9,44 +9,8 @@
     // Contrôle
     if (date('N') > 5)
     {
-      $_SESSION['alerts']['week_end_determination'] = true;
-      $control_ok                                   = false;
-    }
-
-    // Retour
-    return $control_ok;
-  }
-
-  // CONTROLE : Heure détermination
-  // RETOUR : Booléen
-  function controleHeureDetermination()
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if (date('H') >= 13)
-    {
-      $_SESSION['alerts']['heure_determination'] = true;
-      $control_ok                                = false;
-    }
-
-    // Retour
-    return $control_ok;
-  }
-
-  // CONTROLE : Date saisie
-  // RETOUR : Booléen
-  function controleDateSaisie()
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if (date('N') > 5)
-    {
-      $_SESSION['alerts']['week_end_saisie'] = true;
-      $control_ok                            = false;
+      $_SESSION['alerts'][$alerte] = true;
+      $control_ok                  = false;
     }
 
     // Retour
@@ -55,7 +19,7 @@
 
   // CONTROLE : Heure saisie
   // RETOUR : Booléen
-  function controleHeureSaisie()
+  function controleHeureSaisie($alerte)
   {
     // Initialisations
     $control_ok = true;
@@ -63,8 +27,8 @@
     // Contrôle
     if (date('H') >= 13)
     {
-      $_SESSION['alerts']['heure_saisie'] = true;
-      $control_ok                         = false;
+      $_SESSION['alerts'][$alerte] = true;
+      $control_ok                  = false;
     }
 
     // Retour
@@ -89,9 +53,9 @@
     return $control_ok;
   }
 
-  // CONTROLE : Choix déjà existant
+  // CONTROLE : Choix existant
   // RETOUR : Booléen
-  function controleChoixExistant($idRestaurant, $identifiant)
+  function controleChoixExistant($idRestaurant, $identifiant, $alerte)
   {
     // Initialisations
     $control_ok = true;
@@ -101,8 +65,8 @@
 
     if ($exist == true)
     {
-      $_SESSION['alerts']['wrong_fast'] = true;
-      $control_ok                       = false;
+      $_SESSION['alerts'][$alerte] = true;
+      $control_ok                  = false;
     }
 
     // Retour

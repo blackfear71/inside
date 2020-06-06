@@ -32,7 +32,7 @@
   /********************************** INSERT **********************************/
   /****************************************************************************/
   // PHYSIQUE : Insertion nouveau restaurant
-  // RETOUR : Id alerte
+  // RETOUR : Id restaurant
   function physiqueInsertionRestaurant($restaurant)
   {
     // Requête

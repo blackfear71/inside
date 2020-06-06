@@ -294,6 +294,9 @@
 
     protected function fill ($data)
     {
+      if (isset($data['id']))
+        $this->id            = $data['id'];
+
       if (isset($data['id_restaurant']))
         $this->id_restaurant = $data['id_restaurant'];
 
