@@ -236,7 +236,7 @@ body
 section
 {
 	position: relative;
-	width: 100vw;
+	width: 100%;
 	min-height: calc(100% - 17vh);
 }
 
@@ -308,7 +308,7 @@ aside
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100%;
 	overflow: hidden;
 	pointer-events: none;
@@ -434,7 +434,7 @@ aside
 	display: none;
 	position: fixed;
 	z-index: 5;
-	width: calc(100vw - 4vh);
+	width: calc(100% - 4vh);
 	max-height: 50vh;
 	margin-left: 2vh;
 	border-radius: 1vw;
@@ -576,7 +576,7 @@ aside
 	z-index: 10;
 	left: 0;
 	top: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100%;
 }
 
@@ -689,7 +689,7 @@ aside
 	z-index: 10;
 	left: 0;
 	top: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100%;
 }
 
