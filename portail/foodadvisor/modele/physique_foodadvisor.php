@@ -139,31 +139,6 @@
     return $nombrePropositions;
   }
 
-  // PHYSIQUE : Lecture choix semaine existants
-  // RETOUR : Booléen
-  function physiqueChoixSemainePresents($date1, $date2)
-  {
-    // Initialisations
-    $exist = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                        FROM food_advisor_choices
-                        WHERE date >= "' . $date1 . '" AND date <= "' . $date2 . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-      $exist = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $exist;
-  }
-
   // PHYSIQUE : Lecture choix à date
   // RETOUR : Objet Proposition
   function physiqueDonneesResume($date)

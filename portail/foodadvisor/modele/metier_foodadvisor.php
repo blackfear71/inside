@@ -436,45 +436,38 @@
     $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
     $vendredi            = date('Ymd', strtotime('+' . $nombreJoursVendredi . ' days'));
 
-    // Vérification présence de choix
-    $choixSemainePresents = physiqueChoixSemainePresents($lundi, $vendredi);
-
-    // On récupère les propositions pour chaque jour de la semaine courante
-    if ($choixSemainePresents == true)
+    for ($i = $lundi; $i <= $vendredi; $i = date('Ymd', strtotime($i . ' + 1 days')))
     {
-      for ($i = $lundi; $i <= $vendredi; $i = date('Ymd', strtotime($i . ' + 1 days')))
+      // Lecture des données du choix
+      $choixSemaine = physiqueDonneesResume($i);
+
+      if (!empty($choixSemaine))
       {
-        // Lecture des données du choix
-        $choixSemaine = physiqueDonneesResume($i);
+        // Lecture des données du restaurant
+        $restaurant = physiqueDonneesRestaurant($choixSemaine->getId_restaurant());
 
-        if (!empty($choixSemaine))
+        // Nombre de participants
+        $nombreParticipants = physiqueNombreParticipants($choixSemaine->getId_restaurant());
+
+        // Récupération pseudo et avatar
+        $user = physiqueUser($choixSemaine->getCaller());
+
+        // Concaténation des données
+        $choixSemaine->setName($restaurant->getName());
+        $choixSemaine->setPicture($restaurant->getPicture());
+        $choixSemaine->setLocation($restaurant->getLocation());
+        $choixSemaine->setNb_participants($nombreParticipants);
+
+        if (!empty($user))
         {
-          // Lecture des données du restaurant
-          $restaurant = physiqueDonneesRestaurant($choixSemaine->getId_restaurant());
-
-          // Nombre de participants
-          $nombreParticipants = physiqueNombreParticipants($choixSemaine->getId_restaurant());
-
-          // Récupération pseudo et avatar
-          $user = physiqueUser($choixSemaine->getCaller());
-
-          // Concaténation des données
-          $choixSemaine->setName($restaurant->getName());
-          $choixSemaine->setPicture($restaurant->getPicture());
-          $choixSemaine->setLocation($restaurant->getLocation());
-          $choixSemaine->setNb_participants($nombreParticipants);
-
-          if (!empty($user))
-          {
-            $choixSemaine->setPseudo($user->getPseudo());
-            $choixSemaine->setAvatar($user->getAvatar());
-          }
+          $choixSemaine->setPseudo($user->getPseudo());
+          $choixSemaine->setAvatar($user->getAvatar());
         }
-
-        // On ajoute la ligne au tableau
-        $jour                               = date('N', strtotime($i));
-        $listeChoixSemaine[$semaine[$jour]] = $choixSemaine;
       }
+
+      // On ajoute la ligne au tableau
+      $jour                               = date('N', strtotime($i));
+      $listeChoixSemaine[$semaine[$jour]] = $choixSemaine;
     }
 
     // Retour
