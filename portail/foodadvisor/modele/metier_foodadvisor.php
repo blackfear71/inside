@@ -864,7 +864,7 @@
         insertOrUpdateSuccesValue('star-chief', $choix->getIdentifiant(), -1);
 
         // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-        physiqueDeleteDeterminationUser($choix->getId_restaurant(), $choix->getIdentifiant());
+        physiqueDeleteDeterminationRestaurantUser($choix->getId_restaurant(), $choix->getIdentifiant());
       }
 
       // Suppression de l'enregistrement en base
@@ -875,157 +875,87 @@
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // METIER : Supprime tous les choix utilisateur
   // RETOUR : Aucun
   function deleteAllChoices($user)
   {
+    // Initialisations
     $control_ok = true;
 
-    global $bdd;
+    // Contrôle date de saisie
+    $control_ok = controleDateSaisie('week_end_delete');
 
-    // Contrôle suppression possible en fonction des dates
-    if (date('N') > 5)
-    {
-      $control_ok                            = false;
-      $_SESSION['alerts']['week_end_delete'] = true;
-    }
+    // Contrôle heure de saisie
+    if ($control_ok == true)
+      $control_ok = controleHeureSaisie('heure_suppression');
 
-    // Contrôle suppression possible en fonction de l'heure
+    // Vérification appelant à la suppression du choix
     if ($control_ok == true)
     {
-      if (date('H') >= 13)
-      {
-        $control_ok                              = false;
-        $_SESSION['alerts']['heure_suppression'] = true;
-      }
-    }
+      // Récupération des données de la détermination si correspondantes
+      $determinationExistante = physiqueDeterminationExistanteUser($user);
 
-    // On vérifie que l'on n'était pas l'appelant quand on supprime le choix
-    if ($control_ok == true)
-    {
-      $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . date('Ymd') . '" AND caller = "' . $user . '"');
-      $data1 = $req1->fetch();
-
-      if ($req1->rowCount() > 0)
+      if ($determinationExistante == true)
       {
-        $idRestaurant = $data1['id_restaurant'];
-        $caller        = $data1['caller'];
+        // Récupération des données de la détermination
+        $determination = physiqueDetermination();
 
         // Génération succès (pour l'appelant si supprimé)
-        if ($user == $caller)
-          insertOrUpdateSuccesValue('star-chief', $user, -1);
+        insertOrUpdateSuccesValue('star-chief', $determination->getCaller(), -1);
 
         // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-        $req2 = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . date('Ymd') . '" AND caller = "' . $user . '"');
+        physiqueDeleteDeterminationUser($determination->getId_restaurant(), $determination->getCaller());
       }
 
-      $req1->closeCursor();
-    }
+      // Suppression des enregistrements en base
+      physiqueDeleteTousChoix($user);
 
-    // Suppression de tous les choix de l'utilisateur'
-    if ($control_ok == true)
-      $req3 = $bdd->exec('DELETE FROM food_advisor_users WHERE date = "' . date('Ymd') . '" AND identifiant = "' . $user . '"');
-
-    // Relance de la détermination si besoin
-    if ($control_ok == true)
+      // Relance de la détermination si besoin
       relanceDetermination();
+    }
   }
-
-
-
-
-
-
-
-
-
 
   // METIER : Insère un choix dans le résumé
   // RETOUR : Aucun
   function insertResume($post)
   {
+    // Initialisations
     $control_ok = true;
 
-    $jour_saisie   = $post['num_jour'];
-    $idRestaurant = $post['select_restaurant_resume_' . $jour_saisie];
+    // Récupération des données
+    $jourSaisie   = $post['num_jour'];
+    $idRestaurant = $post['select_restaurant_resume_' . $jourSaisie];
 
     // Calcul date à insérer
-    $jour_courant  = date('N');
-    $ecart_jours   = $jour_courant - $jour_saisie;
-    $date_saisie   = date('Ymd', strtotime('now - ' . $ecart_jours . ' Days'));
+    $jourCourant = date('N');
+    $ecartJours  = $jourCourant - $jourSaisie;
+    $dateSaisie  = date('Ymd', strtotime('now - ' . $ecartJours . ' Days'));
 
-    global $bdd;
+    // Contrôle choix déjà existant
+    $control_ok = controleChoixExistantDate($dateSaisie);
 
-    // Contrôle choix non existant
-    $req1 = $bdd->query('SELECT * FROM food_advisor_choices WHERE date = "' . $date_saisie . '"');
-    $data1 = $req1->fetch();
-
-    if ($req1->rowCount() > 0)
-    {
-      $control_ok                           = false;
-      $_SESSION['alerts']['already_resume'] = true;
-    }
-
-    $req1->closeCursor();
-
-    // Insertion en base
+    // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      $choix = array('id_restaurant' => $idRestaurant,
-                     'date'          => $date_saisie,
-                     'caller'        => '',
-                     'reserved'      => 'N'
-                    );
+      $resume = array('id_restaurant' => $idRestaurant,
+                      'date'          => $dateSaisie,
+                      'caller'        => '',
+                      'reserved'      => 'N'
+                     );
 
-      $req2 = $bdd->prepare('INSERT INTO food_advisor_choices(id_restaurant,
-                                                             date,
-                                                             caller,
-                                                             reserved
-                                                             )
-                                                     VALUES(:id_restaurant,
-                                                            :date,
-                                                            :caller,
-                                                            :reserved
-                                                           )');
-      $req2->execute($choix);
-      $req2->closeCursor();
+      physiqueInsertionDetermination($resume);
     }
   }
-
-
-
-
-
-
-
-
-
-
 
   // METIER : Supprime un choix dans le résumé
   // RETOUR : Aucun
   function deleteResume($post)
   {
-    $id_resume   = $post['id_resume'];
-    $date_resume = $post['date_resume'];
+    // Récupération des données
+    $idResume   = $post['id_resume'];
+    $dateResume = $post['date_resume'];
 
-    global $bdd;
-
-    // Suppression choix résumé (restaurant = choix, date = jour)
-    $req = $bdd->exec('DELETE FROM food_advisor_choices WHERE id_restaurant = ' . $id_resume . ' AND date = "' . $date_resume . '"');
+    // Suppression de l'enregistrement en base
+    physiqueDeleteResume($idResume, $dateResume);
   }
 ?>

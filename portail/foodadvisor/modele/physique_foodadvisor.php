@@ -214,9 +214,9 @@
     return $choix;
   }
 
-  // PHYSIQUE : Lecture détermination existante liée à l'utilisateur
+  // PHYSIQUE : Lecture détermination existante liée à l'utilisateur pour un restaurant
   // RETOUR : Booléen
-  function physiqueDeterminationExistanteUser($idRestaurant, $identifiant)
+  function physiqueDeterminationExistanteRestaurantUser($idRestaurant, $identifiant)
   {
     // Initialisations
     $exist = false;
@@ -231,6 +231,56 @@
     $data = $req->fetch();
 
     if ($data['nombreLignes'] > 0)
+      $exist = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $exist;
+  }
+
+  // PHYSIQUE : Lecture détermination existante liée à l'utilisateur
+  // RETOUR : Booléen
+  function physiqueDeterminationExistanteUser($identifiant)
+  {
+    // Initialisations
+    $exist = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                        FROM food_advisor_choices
+                        WHERE date = "' . date('Ymd') . '" AND caller = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $exist = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $exist;
+  }
+
+  // PHYSIQUE : Lecture choix existant
+  // RETOUR : Booléen
+  function physiqueChoixExistantDate($date)
+  {
+    // Initialisations
+    $exist = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreChoix
+                        FROM food_advisor_choices
+                        WHERE date = "' . $date . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreChoix'] > 0)
       $exist = true;
 
     $req->closeCursor();
@@ -323,5 +373,27 @@
 
     $req = $bdd->exec('DELETE FROM food_advisor_users
                        WHERE id = ' . $idChoix);
+  }
+
+  // PHYSIQUE : Suppression de tous les choix d'un utilisateur
+  // RETOUR : Aucun
+  function physiqueDeleteTousChoix($identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM food_advisor_users
+                       WHERE date = "' . date('Ymd') . '" AND identifiant = "' . $identifiant . '"');
+  }
+
+  // PHYSIQUE : Suppression résumé
+  // RETOUR : Aucun
+  function physiqueDeleteResume($idRestaurant, $date)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM food_advisor_choices
+                       WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . $date . '"');
   }
 ?>

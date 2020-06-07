@@ -70,4 +70,24 @@
     // Retour
     return $doublon;
   }
+
+  // CONTROLE : Choix existant à date
+  // RETOUR : Booléen
+  function controleChoixExistantDate($date)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Contrôle
+    $exist = physiqueChoixExistantDate($date);
+
+    if ($exist == true)
+    {
+      $_SESSION['alerts']['already_resume'] = true;
+      $control_ok                           = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
 ?>
