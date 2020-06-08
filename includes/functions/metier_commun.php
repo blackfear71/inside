@@ -63,10 +63,10 @@
     else
     {
       // Contrôle page accessible mobile
-      $isAccessible = isAccessible($_SERVER['PHP_SELF']);
+      $isAccessibleMobile = isAccessibleMobile($_SERVER['PHP_SELF']);
 
       // Redirection si non accessible
-      if ($isAccessible == false)
+      if ($isAccessibleMobile == false)
         header('location: /inside/portail/portail/portail.php?action=goConsulter');
       else
       {
@@ -149,21 +149,21 @@
 
   // Contrôle si la page courante est accessible sur mobile
   // RETOUR : Booléen
-  function isAccessible($path)
+  function isAccessibleMobile($path)
   {
     // Initialisations
-    $isAccessible = true;
+    $isAccessibleMobile = true;
 
     // Contrôle
     if ($_SESSION['index']['mobile'] == true)
     {
       if ($path != '/inside/portail/portail/portail.php'
       AND $path != '/inside/portail/foodadvisor/foodadvisor.php')
-        $isAccessible = false;
+        $isAccessibleMobile = false;
     }
 
     // Retour
-    return $isAccessible;
+    return $isAccessibleMobile;
   }
 
   // Récupération des alertes à afficher
