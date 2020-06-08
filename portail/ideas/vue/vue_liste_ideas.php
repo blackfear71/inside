@@ -129,8 +129,8 @@
 
               // Actions
               if ( empty($idea->getDevelopper())
-              OR (!empty($idea->getDevelopper()) AND $idea->getDevelopper()        == $_SESSION['user']['identifiant'])
-              OR (!empty($idea->getDevelopper()) AND $idea->getPseudo_developper() == "")
+              OR (!empty($idea->getDevelopper()) AND $idea->getDevelopper() == $_SESSION['user']['identifiant'])
+              OR (!empty($idea->getDevelopper()) AND empty($idea->getPseudo_developper()))
               OR  $idea->getStatus() == "D"
               OR  $idea->getStatus() == "R")
               {
@@ -150,7 +150,7 @@
                       case "C":
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
-                        if ($idea->getPseudo_developper() != "")
+                        if (!empty($idea->getPseudo_developper()))
                         {
                           echo '<input type="submit" name="developp" value="Développer" title="Commencer les développements" class="saisie_bouton margin_button" />';
                           echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="saisie_bouton margin_button" />';
@@ -161,7 +161,7 @@
                       case "P":
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
-                        if ($idea->getPseudo_developper() != "")
+                        if (!empty($idea->getPseudo_developper()))
                         {
                           echo '<input type="submit" name="take" value="Remise à prise en charge" title="Remettre à prise en charge" class="saisie_bouton margin_button" />';
                           echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="saisie_bouton margin_button" />';

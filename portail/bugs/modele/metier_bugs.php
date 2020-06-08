@@ -63,7 +63,7 @@
     $_SESSION['save']['content_bug'] = $post['content_bug'];
 
     // On insère l'image si présente
-    if ($files['image']['name'] != NULL)
+    if (!empty($files['image']['name']))
     {
       // On vérifie la présence du dossier, sinon on le créé
       $dossier = "../../includes/images/reports";

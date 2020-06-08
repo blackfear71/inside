@@ -1308,7 +1308,7 @@
                    );
 
     // Si on a bien une image
-    if ($file['name'] != NULL)
+    if (!empty($file['name']))
     {
       // Données du fichier
       $name_file  = $file['name'];

@@ -514,7 +514,7 @@
         $reponse->closeCursor();
 
         // Si on modifie l'image, on supprime l'ancienne et on insère la nouvelle
-        if ($files['image']['name'] != NULL)
+        if (!empty($files['image']['name']))
         {
           if (isset($collector) AND !empty($collector) AND $type_collector == "I")
             unlink("../../includes/images/collector/" . $collector);

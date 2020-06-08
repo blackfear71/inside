@@ -91,7 +91,7 @@
       }
 
       // Date non communiquée
-      if (end($ongletsYears) == "")
+      if (empty(end($ongletsYears)))
       {
         if (isset($_GET['year']) AND $_GET['year'] == "none")
           echo '<span class="year active">N. C.</span>';

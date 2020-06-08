@@ -7,7 +7,7 @@
     $control_ok = true;
 
     // Contrôle
-    if ($user == null)
+    if (empty($user))
     {
 			$_SESSION['alerts']['wrong_connexion'] = true;
       $control_ok                            = false;
@@ -25,7 +25,7 @@
     $control_ok = true;
 
     // Contrôle
-    if ($user == null)
+    if (empty($user))
     {
       $_SESSION['alerts']['wrong_id'] = true;
       $control_ok                     = false;
