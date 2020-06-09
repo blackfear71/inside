@@ -9,7 +9,7 @@
   function physiqueUsers()
   {
     // Initialisations
-    $listUsers = array();
+    $listeUsers = array();
 
     // Requête
     global $bdd;
@@ -25,13 +25,13 @@
       $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listUsers, $user);
+      array_push($listeUsers, $user);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // PHYSIQUE : Lecture des identifiants des films
@@ -39,7 +39,7 @@
   function physiqueIdentifiantsFilms()
   {
     // Initialisations
-    $listUsersFilms = array();
+    $listeUsersFilms = array();
 
     // Requête
     global $bdd;
@@ -50,13 +50,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersFilms, $data['identifiant_add']);
+      array_push($listeUsersFilms, $data['identifiant_add']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersFilms;
+    return $listeUsersFilms;
   }
 
   // PHYSIQUE : Lecture des identifiants des commentaires de films
@@ -64,7 +64,7 @@
   function physiqueIdentifiantsCommentairesFilms()
   {
     // Initialisations
-    $listUsersComments = array();
+    $listeUsersComments = array();
 
     // Requête
     global $bdd;
@@ -75,13 +75,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersComments, $data['author']);
+      array_push($listeUsersComments, $data['author']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersComments;
+    return $listeUsersComments;
   }
 
   // PHYSIQUE : Lecture des identifiants des phrases cultes
@@ -89,7 +89,7 @@
   function physiqueIdentifiantsCollector()
   {
     // Initialisations
-    $listUsersCollector = array();
+    $listeUsersCollector = array();
 
     // Requête
     global $bdd;
@@ -100,13 +100,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersCollector, $data['author']);
+      array_push($listeUsersCollector, $data['author']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersCollector;
+    return $listeUsersCollector;
   }
 
   // PHYSIQUE : Lecture des identifiants des dépenses
@@ -114,7 +114,7 @@
   function physiqueIdentifiantsDepenses()
   {
     // Initialisations
-    $listUsersExpenses = array();
+    $listeUsersExpenses = array();
 
     // Requête
     global $bdd;
@@ -125,13 +125,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersExpenses, $data['buyer']);
+      array_push($listeUsersExpenses, $data['buyer']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersExpenses;
+    return $listeUsersExpenses;
   }
 
   // PHYSIQUE : Lecture des identifiants des parts des dépenses
@@ -139,7 +139,7 @@
   function physiqueIdentifiantsPartsDepenses()
   {
     // Initialisations
-    $listUsersParts = array();
+    $listeUsersParts = array();
 
     // Requête
     global $bdd;
@@ -150,13 +150,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersParts, $data['identifiant']);
+      array_push($listeUsersParts, $data['identifiant']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersParts;
+    return $listeUsersParts;
   }
 
   // PHYSIQUE : Lecture des identifiants des bugs/évolutions
@@ -164,7 +164,7 @@
   function physiqueIdentifiantsBugs()
   {
     // Initialisations
-    $listUsersBugs = array();
+    $listeUsersBugs = array();
 
     // Requête
     global $bdd;
@@ -175,13 +175,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersBugs, $data['author']);
+      array_push($listeUsersBugs, $data['author']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersBugs;
+    return $listeUsersBugs;
   }
 
   // PHYSIQUE : Lecture des identifiants des idées #TheBox
@@ -189,7 +189,7 @@
   function physiqueIdentifiantsTheBox()
   {
     // Initialisations
-    $listUsersTheBox = array();
+    $listeUsersTheBox = array();
 
     // Requête
     global $bdd;
@@ -200,13 +200,13 @@
 
     while ($data = $req->fetch())
     {
-      array_push($listUsersTheBox, $data['author']);
+      array_push($listeUsersTheBox, $data['author']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsersTheBox;
+    return $listeUsersTheBox;
   }
 
   // PHYSIQUE : Lecture alerte utilisateurs
@@ -335,7 +335,7 @@
   function physiqueDepenses()
   {
     // Initialisations
-    $listExpenses = array();
+    $listeExpenses = array();
 
     // Requête
     global $bdd;
@@ -350,13 +350,13 @@
       $myExpense = Expenses::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listExpenses, $myExpense);
+      array_push($listeExpenses, $myExpense);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listExpenses;
+    return $listeExpenses;
   }
 
   // PHYSIQUE : Lecture des parts d'une dépense

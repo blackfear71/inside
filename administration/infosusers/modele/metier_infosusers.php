@@ -6,19 +6,19 @@
   function getUsers()
   {
     // Récupération liste des utilisateurs
-    $listUsers = physiqueUsers();
+    $listeUsers = physiqueUsers();
 
     // Récupération des données complémentaires
-    foreach ($listUsers as $user)
+    foreach ($listeUsers as $user)
     {
       // Récupération du niveau
       $level = convertExperience($user->getExperience());
       $user->setLevel($level);
 
       // Récupération succès Beginner / Developper
-      $listSuccess = array('beginning', 'developper');
+      $listeSuccess = array('beginning', 'developper');
 
-      foreach ($listSuccess as $success)
+      foreach ($listeSuccess as $success)
       {
         // Récupération valeur succès
         $valueSuccess = physiqueSuccessAdmin($success, $user->getIdentifiant());
@@ -41,7 +41,7 @@
     }
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // METIER : Modification top Beginner

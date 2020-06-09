@@ -59,13 +59,13 @@
 
   // CONTROLE : Contrôle doublons mise à jour succès
   // RETOUR : Booléen
-  function controleDoublons($listSuccess, $successToCheck)
+  function controleDoublons($listeSuccess, $successToCheck)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    foreach ($listSuccess as $success)
+    foreach ($listeSuccess as $success)
     {
       if ($successToCheck['id']            != $success['id']
       AND $successToCheck['order_success'] == $success['order_success']

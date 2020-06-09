@@ -126,7 +126,7 @@
 
   // METIER : Détermine la présence des différents boutons d'action
   // RETOUR : Tableau des actions
-  function getActions($propositions, $mesChoix, $isSolo, $isReserved, $user)
+  function getActions($propositions, $mesChoix, $isSolo, $isReserved, $identifiant)
   {
     // Initialisations
     $actions = array('saisir_choix'     => true,
@@ -196,7 +196,7 @@
     // Contrôle réserveur pour annulation - bouton annulation réservation
     if ($actions['reserver'] == false)
     {
-      if ($isReserved == $user AND date('N') <= 5 AND date('H') < 13)
+      if ($isReserved == $identifiant AND date('N') <= 5 AND date('H') < 13)
         $actions['annuler_reserver'] = true;
     }
 
@@ -250,7 +250,7 @@
 
   // METIER : Insère un choix "bande à part"
   // RETOUR : Aucun
-  function setSolo($mesChoix, $isSolo, $user)
+  function setSolo($mesChoix, $isSolo, $identifiant)
   {
     // Initialisations
     $control_ok = true;
@@ -274,7 +274,7 @@
     if ($control_ok == true)
     {
       $solo = array('id_restaurant' => 0,
-                    'identifiant'   => $user,
+                    'identifiant'   => $identifiant,
                     'date'          => date('Ymd'),
                     'time'          => '',
                     'transports'    => '',
@@ -287,7 +287,7 @@
 
   // METIER : Supprime un choix "bande à part"
   // RETOUR : Aucun
-  function deleteSolo($user)
+  function deleteSolo($identifiant)
   {
     // Initialisations
     $control_ok = true;
@@ -301,7 +301,7 @@
 
     // Suppression de l'enregistrement en base
     if ($control_ok == true)
-      physiqueDeleteSolo($user);
+      physiqueDeleteSolo($identifiant);
   }
 
   // METIER : Insère ou met à jour une réservation
@@ -373,7 +373,7 @@
 
   // METIER : Supprime une réservation
   // RETOUR : Aucun
-  function deleteReservation($post, $user)
+  function deleteReservation($post, $identifiant)
   {
     // Initialisations
     $idRestaurant = $post['id_restaurant'];
@@ -388,7 +388,7 @@
 
     // Annulation réservation
     if ($control_ok == true)
-      physiqueAnnulationReservation($idRestaurant, $user);
+      physiqueAnnulationReservation($idRestaurant, $identifiant);
   }
 
   // METIER : Supprime les choix de tous les utilisateurs d'un restaurant et relance la détermination
@@ -476,7 +476,7 @@
 
   // METIER : Insère un ou plusieurs choix utilisateur
   // RETOUR : Aucun
-  function insertChoices($post, $isSolo, $user)
+  function insertChoices($post, $isSolo, $identifiant)
   {
     // Initialisations
     $maxChoices = 5;
@@ -545,7 +545,7 @@
         AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
         {
           // Contrôle choix existant
-          $choixNonExistant = controleChoixExistant($post['select_restaurant'][$i], $user, 'wrong_choice_already');
+          $choixNonExistant = controleChoixExistant($post['select_restaurant'][$i], $identifiant, 'wrong_choice_already');
 
           // On supprime la ligne du tableau si déjà saisi
           if ($choixNonExistant == false)
@@ -610,9 +610,6 @@
           // Id restaurant
           $idRestaurant = $post['select_restaurant'][$i];
 
-          // Identifiant utilisateur
-          $identifiant = $user;
-
           // Date de saisie
           $date = date('Ymd');
 
@@ -670,7 +667,7 @@
 
   // METIER : Insère un ou plusieurs choix utilisateur
   // RETOUR : Aucun
-  function insertChoicesMobile($post, $isSolo, $user)
+  function insertChoicesMobile($post, $isSolo, $identifiant)
   {
     // Initialisations
     $listeRestaurants = array_keys($post['restaurants']);
@@ -696,7 +693,7 @@
         foreach ($listeRestaurants as $keyId => $idRestaurant)
         {
           // Contrôle choix existant
-          $choixNonExistant = controleChoixExistant($idRestaurant, $user, 'wrong_choice_already');
+          $choixNonExistant = controleChoixExistant($idRestaurant, $identifiant, 'wrong_choice_already');
 
           // On supprime la ligne du tableau si déjà saisi
           if ($choixNonExistant == false)
@@ -732,9 +729,6 @@
       {
         foreach ($listeRestaurants as $idRestaurant)
         {
-          // Identifiant utilisateur
-          $identifiant = $user;
-
           // Date de saisie
           $date = date('Ymd');
 
@@ -767,7 +761,7 @@
 
   // METIER : Met à jour un choix
   // RETOUR : Aucun
-  function updateChoice($post, $user)
+  function updateChoice($post, $identifiant)
   {
     // Initialisations
     $idChoix    = $post['id_choix'];
@@ -823,7 +817,7 @@
                      'menu'       => $menu
                     );
 
-      physiqueUpdateChoix($idChoix, $choix, $user);
+      physiqueUpdateChoix($idChoix, $choix, $identifiant);
     }
   }
 
@@ -870,7 +864,7 @@
 
   // METIER : Supprime tous les choix utilisateur
   // RETOUR : Aucun
-  function deleteAllChoices($user)
+  function deleteAllChoices($identifiant)
   {
     // Initialisations
     $control_ok = true;
@@ -886,7 +880,7 @@
     if ($control_ok == true)
     {
       // Récupération des données de la détermination si correspondantes
-      $determinationExistante = physiqueDeterminationExistanteUser($user);
+      $determinationExistante = physiqueDeterminationExistanteUser($identifiant);
 
       if ($determinationExistante == true)
       {
@@ -901,7 +895,7 @@
       }
 
       // Suppression des enregistrements en base
-      physiqueDeleteTousChoix($user);
+      physiqueDeleteTousChoix($identifiant);
 
       // Relance de la détermination si besoin
       relanceDetermination();

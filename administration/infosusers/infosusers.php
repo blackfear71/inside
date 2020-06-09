@@ -62,8 +62,6 @@
 			}
 
       unset($user);
-
-      unset($niveau);
       break;
 
     case 'changeBeginnerStatus':

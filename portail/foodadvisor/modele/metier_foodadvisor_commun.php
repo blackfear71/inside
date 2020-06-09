@@ -33,10 +33,10 @@
 
   // METIER : Détermine si l'utilisateur fait bande à part
   // RETOUR : Booléen
-  function getSolo($user)
+  function getSolo($identifiant)
   {
     // Vérification si bande à part
-    $solo = physiqueSolo($user);
+    $solo = physiqueSolo($identifiant);
 
     // Retour
     return $solo;
@@ -262,8 +262,8 @@
     }
 
     // Détermination appelant aléatoire parmi ceux restant, ou par défaut une des personnes du jour
-    if (!empty($listCallers))
-      $caller = $listeParticipantsFiltres[array_rand($listCallers, 1)];
+    if (!empty($listeParticipantsFiltres))
+      $caller = $listeParticipantsFiltres[array_rand($listeParticipantsFiltres, 1)];
     else
       $caller = $listeParticipants[array_rand($listeParticipants, 1)];
 
@@ -273,10 +273,10 @@
 
   // METIER : Récupère les choix de l'utilisateur
   // RETOUR : Liste des choix du jour (utilisateur)
-  function getMyChoices($user)
+  function getMyChoices($identifiant)
   {
     // Récupération des choix de l'utilisateur
-    $listeChoix = physiqueListeChoix($user);
+    $listeChoix = physiqueListeChoix($identifiant);
 
     // Ajout des informations des restaurants
     foreach ($listeChoix as $monChoix)
@@ -388,7 +388,7 @@
 
   // METIER : Insère un choix rapide
   // RETOUR : Id restaurant
-  function insertFastChoice($post, $isSolo, $user)
+  function insertFastChoice($post, $isSolo, $identifiant)
   {
     // Initialisations
     $idRestaurant = $post['id_restaurant'];
@@ -407,7 +407,7 @@
 
     // Contrôle choix déjà existant
     if ($control_ok == true)
-      $control_ok = controleChoixExistant($idRestaurant, $user, 'wrong_fast');
+      $control_ok = controleChoixExistant($idRestaurant, $identifiant, 'wrong_fast');
 
     // Lecture des données restaurant
     if ($control_ok == true)
@@ -421,7 +421,7 @@
     if ($control_ok == true)
     {
       $choix = array('id_restaurant' => $idRestaurant,
-                     'identifiant'   => $user,
+                     'identifiant'   => $identifiant,
                      'date'          => date('Ymd'),
                      'time'          => '',
                      'transports'    => '',

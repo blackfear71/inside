@@ -6,31 +6,31 @@
   function getCategories()
   {
     // Liste des catégories
-    $listCategories = array('general'          => 'GÉNÉRAL',
-                            'portail'          => 'PORTAIL',
-                            'movie_house'      => 'MOVIE HOUSE',
-                            'food_advisor'     => 'LES ENFANTS ! À TABLE !',
-                            'cooking_box'      => 'COOKING BOX',
-                            'expense_center'   => 'EXPENSE CENTER',
-                            'collector'        => 'COLLECTOR ROOM',
-                            'calendars'        => 'CALENDARS',
-                            'petits_pedestres' => 'LES PETITS PÉDESTRES',
-                            'missions'         => 'MISSIONS : INSIDER',
-                            'notifications'    => 'NOTIFICATIONS',
-                            'search'           => 'RECHERCHE',
-                            'profile'          => 'PROFIL',
-                            'chat'             => 'INSIDE ROOM',
-                            'change_log'       => 'JOURNAL DES MODIFICATIONS',
-                            'bugs'             => 'DEMANDES D\'ÉVOLUTION',
-                            'ideas'            => '#THEBOX',
-                            'admin'            => 'ADMINISTRATION',
-                            'cron'             => 'TÂCHES CRON',
-                            'technical'        => 'TECHNIQUE',
-                            'other'            => 'AUTRE'
-                           );
+    $listeCategories = array('general'          => 'GÉNÉRAL',
+                             'portail'          => 'PORTAIL',
+                             'movie_house'      => 'MOVIE HOUSE',
+                             'food_advisor'     => 'LES ENFANTS ! À TABLE !',
+                             'cooking_box'      => 'COOKING BOX',
+                             'expense_center'   => 'EXPENSE CENTER',
+                             'collector'        => 'COLLECTOR ROOM',
+                             'calendars'        => 'CALENDARS',
+                             'petits_pedestres' => 'LES PETITS PÉDESTRES',
+                             'missions'         => 'MISSIONS : INSIDER',
+                             'notifications'    => 'NOTIFICATIONS',
+                             'search'           => 'RECHERCHE',
+                             'profile'          => 'PROFIL',
+                             'chat'             => 'INSIDE ROOM',
+                             'change_log'       => 'JOURNAL DES MODIFICATIONS',
+                             'bugs'             => 'DEMANDES D\'ÉVOLUTION',
+                             'ideas'            => '#THEBOX',
+                             'admin'            => 'ADMINISTRATION',
+                             'cron'             => 'TÂCHES CRON',
+                             'technical'        => 'TECHNIQUE',
+                             'other'            => 'AUTRE'
+                            );
 
     // Retour
-    return $listCategories;
+    return $listeCategories;
   }
 
   // METIER : Initialise les paramètres des changelogs

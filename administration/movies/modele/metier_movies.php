@@ -6,10 +6,10 @@
   function getFilmsToDelete()
   {
     // Récupération de liste des films à supprimer
-    $listFilmsToDelete = physiqueFilmsToDelete();
+    $listeFilmsToDelete = physiqueFilmsToDelete();
 
     // Récupération des données complémentaires
-    foreach ($listFilmsToDelete as $film)
+    foreach ($listeFilmsToDelete as $film)
     {
       // Pseudo du suppresseur
       $film->setPseudo_del(physiquePseudoUser($film->getIdentifiant_del()));
@@ -21,7 +21,7 @@
       $film->setNb_users(physiqueNombreParticipants($film->getId()));
     }
 
-    return $listFilmsToDelete;
+    return $listeFilmsToDelete;
   }
 
   // METIER : Contrôle alertes Movie House
@@ -43,7 +43,7 @@
     $idFilm = $post['id_film'];
 
     // Récupération de l'identifiant de l'ajouteur
-    $userAdd = physiqueIdentifiantAjoutFilm($idFilm);
+    $identifiantAjout = physiqueIdentifiantAjoutFilm($idFilm);
 
     // Suppression des avis du film
     physiqueDeleteAvisFilms($idFilm);
@@ -55,7 +55,7 @@
     physiqueDeleteFilms($idFilm);
 
     // Génération succès
-    insertOrUpdateSuccesValue('publisher', $userAdd, -1);
+    insertOrUpdateSuccesValue('publisher', $identifiantAjout, -1);
 
     // Suppression des notifications
     deleteNotification('film', $idFilm);

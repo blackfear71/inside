@@ -36,20 +36,20 @@
   {
     case 'goConsulter':
       // Récupération des utilisateurs inscrits et désinscrits
-			$listeUsers       = getUsers();
-      $listeUsersDes    = getUsersDes($listeUsers);
+			$listeUsers    = getUsers();
+      $listeUsersDes = getUsersDes($listeUsers);
 
       // Récupération alerte gestion des utilisateurs
-			$alerteUsers      = getAlerteUsers();
+			$alerteUsers = getAlerteUsers();
 
       // Récupération des statistiques par catégories
-      $tabCategoriesIns = getTabCategoriesIns($listeUsers);
-			$tabCategoriesDes = getTabCategoriesDes($listeUsersDes);
-      $totalCategories  = getTotalCategories($tabCategoriesIns, $tabCategoriesDes);
+      $tableauCategoriesIns = getTabCategoriesIns($listeUsers);
+			$tableauCategoriesDes = getTabCategoriesDes($listeUsersDes);
+      $totalCategories      = getTotalCategories($tableauCategoriesIns, $tableauCategoriesDes);
 
       // Récupération des statistiques de demandes et publications
-			$tabStats         = getTabStats($listeUsers, $listeUsersDes);
-			$totalStats       = getTotalStats();
+			$tableauStats   = getTabStats($listeUsers, $listeUsersDes);
+			$totalStats = getTotalStats();
       break;
 
     case 'doAnnulerMdp':
@@ -112,7 +112,7 @@
 
       unset($userDes);
 
-			foreach ($tabCategoriesIns as &$statsCatIns)
+			foreach ($tableauCategoriesIns as &$statsCatIns)
 			{
 				$statsCatIns['identifiant']     = htmlspecialchars($statsCatIns['identifiant']);
 				$statsCatIns['pseudo']          = htmlspecialchars($statsCatIns['pseudo']);
@@ -124,7 +124,7 @@
 
       unset($statsCatIns);
 
-      foreach ($tabCategoriesDes as &$statsCatDes)
+      foreach ($tableauCategoriesDes as &$statsCatDes)
       {
         $statsCatDes['identifiant']     = htmlspecialchars($statsCatDes['identifiant']);
         $statsCatDes['pseudo']          = htmlspecialchars($statsCatDes['pseudo']);
@@ -141,7 +141,7 @@
       $totalCategories['nombreCollector'] = htmlspecialchars($totalCategories['nombreCollector']);
       $totalCategories['sommeBilans']     = htmlspecialchars($totalCategories['sommeBilans']);
 
-			foreach ($tabStats as &$stats)
+			foreach ($tableauStats as &$stats)
 			{
         foreach ($stats as &$statUser)
         {

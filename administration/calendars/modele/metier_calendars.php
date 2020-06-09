@@ -7,10 +7,10 @@
   function getAutorisationsCalendars()
   {
     // Récupération des autorisations de gestion
-    $listAutorisations = physiqueAutorisationsCalendars();
+    $listeAutorisations = physiqueAutorisationsCalendars();
 
     // Récupération du pseudo des utilisateurs
-    foreach ($listAutorisations as &$autorisation)
+    foreach ($listeAutorisations as &$autorisation)
     {
       $autorisation['pseudo'] = physiquePseudoUser($autorisation['identifiant']);
     }
@@ -18,7 +18,7 @@
     unset($autorisation);
 
     // Retour
-    return $listAutorisations;
+    return $listeAutorisations;
   }
 
   // METIER : Lecture liste des utilisateurs
@@ -26,18 +26,18 @@
   function getUsers()
   {
     // Récupération liste des utilisateurs
-    $listUsers = physiqueUsers();
+    $listeUsers = physiqueUsers();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // METIER : Mise à jour des autorisations sur les calendriers
   // RETOUR : Aucun
-  function updateAutorisations($post, $listUsers)
+  function updateAutorisations($post, $listeUsers)
   {
     // Boucle de mise à jour de toutes les autorisations
-    foreach ($listUsers as $user)
+    foreach ($listeUsers as $user)
     {
       if (!empty($post['autorization']) AND isset($post['autorization'][$user->getIdentifiant()]))
         $manageCalendars = 'Y';
@@ -56,33 +56,33 @@
   function getMonths()
   {
     // Création de la liste
-    $listMonths = array('01' => 'Janvier',
-                        '02' => 'Février',
-                        '03' => 'Mars',
-                        '04' => 'Avril',
-                        '05' => 'Mai',
-                        '06' => 'Juin',
-                        '07' => 'Juillet',
-                        '08' => 'Août',
-                        '09' => 'Septembre',
-                        '10' => 'Octobre',
-                        '11' => 'Novembre',
-                        '12' => 'Décembre'
-                       );
+    $listeMois = array('01' => 'Janvier',
+                       '02' => 'Février',
+                       '03' => 'Mars',
+                       '04' => 'Avril',
+                       '05' => 'Mai',
+                       '06' => 'Juin',
+                       '07' => 'Juillet',
+                       '08' => 'Août',
+                       '09' => 'Septembre',
+                       '10' => 'Octobre',
+                       '11' => 'Novembre',
+                       '12' => 'Décembre'
+                      );
 
     // Retour
-    return $listMonths;
+    return $listeMois;
   }
 
   // METIER : Lecture des calendriers à supprimer
   // RETOUR : Liste des calendriers à supprimer
-  function getCalendarsToDelete($listMonths)
+  function getCalendarsToDelete($listeMois)
   {
     // Récupération de la liste des calendriers à supprimer
-    $listCalendarsToDelete = physiqueCalendarsToDelete($listMonths);
+    $listeCalendarsToDelete = physiqueCalendarsToDelete($listeMois);
 
     // Retour
-    return $listCalendarsToDelete;
+    return $listeCalendarsToDelete;
   }
 
   // METIER : Contrôle alertes Calendars
@@ -101,10 +101,10 @@
   function getAnnexesToDelete()
   {
     // Récupération de la liste des annexes à supprimer
-    $listAnnexesToDelete = physiqueAnnexesToDelete();
+    $listeAnnexesToDelete = physiqueAnnexesToDelete();
 
     // Retour
-    return $listAnnexesToDelete;
+    return $listeAnnexesToDelete;
   }
 
   // METIER : Contrôle alertes Annexes

@@ -30,7 +30,7 @@
 
   // METIER : Détermine la présence des boutons d'action (choix rapide)
   // RETOUR : Booléen
-  function getFastActions($user, $solo)
+  function getFastActions($isSolo)
   {
     // Initialisations
     $choixRapide = true;
@@ -40,7 +40,7 @@
       $choixRapide = false;
 
     // Vérification bande à part
-    if ($solo == true)
+    if ($isSolo == true)
       $choixRapide = false;
 
     // Retour
@@ -49,7 +49,7 @@
 
   // METIER : Insère un nouveau restaurant
   // RETOUR : Id enregistrement créé
-  function insertRestaurant($post, $files, $user)
+  function insertRestaurant($post, $files, $identifiant)
   {
     // Initialisations
     $newId      = NULL;
@@ -245,10 +245,10 @@
       $newId = physiqueInsertionRestaurant($restaurant);
 
       // Génération succès
-      insertOrUpdateSuccesValue('restaurant-finder', $user, 1);
+      insertOrUpdateSuccesValue('restaurant-finder', $identifiant, 1);
 
       // Ajout expérience
-      insertExperience($user, 'add_restaurant');
+      insertExperience($identifiant, 'add_restaurant');
 
       // Message d'alerte
       $_SESSION['alerts']['restaurant_added'] = true;

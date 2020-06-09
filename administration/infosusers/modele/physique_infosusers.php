@@ -9,7 +9,7 @@
   function physiqueUsers()
   {
     // Initialisations
-    $listUsers = array();
+    $listeUsers = array();
 
     global $bdd;
 
@@ -25,13 +25,13 @@
       $myUser = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listUsers, $myUser);
+      array_push($listeUsers, $myUser);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // PHYSIQUE : Lecture des succès administrateur

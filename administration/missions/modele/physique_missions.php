@@ -59,7 +59,7 @@
   function physiqueUsersMission($idMission)
   {
     // Initialisations
-    $listUsers = array();
+    $listeUsers = array();
 
     // Requête
     global $bdd;
@@ -79,13 +79,13 @@
                      );
 
       // On ajoute la ligne au tableau
-      array_push($listUsers, $myUser);
+      array_push($listeUsers, $myUser);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // PHYSIQUE : Lecture des informations utilisateur

@@ -44,7 +44,7 @@
 		echo '</tr>';
 
 		// Statistiques des utlisateurs inscrits
-    foreach ($tabStats['inscrits'] as $stats)
+    foreach ($tableauStats['inscrits'] as $stats)
     {
       echo '<tr class="tr_manage_users">';
         echo '<td class="td_manage_users">';
@@ -78,7 +78,7 @@
     }
 
 		// Séparation utilisateurs
-		if (!empty($tabStats['desinscrits']))
+		if (!empty($tableauStats['desinscrits']))
 		{
 			echo '<tr>';
 				echo '<td class="table_old_users" colspan="7">';
@@ -90,7 +90,7 @@
 		}
 
 		// Statistiques des utlisateurs désinscrits
-		foreach ($tabStats['desinscrits'] as $stats)
+		foreach ($tableauStats['desinscrits'] as $stats)
     {
       echo '<tr class="tr_manage_users">';
         echo '<td colspan="2" class="td_manage_users">';

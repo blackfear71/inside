@@ -10,6 +10,7 @@
     // Récupération de la liste des utilisateurs
     $listeUsers = physiqueUsers();
 
+    // Retour
     return $listeUsers;
   }
 
@@ -17,9 +18,10 @@
   // RETOUR : Liste des succès
   function getSuccess()
   {
-    $listSuccess = physiqueListeSuccess();
+    $listeSuccess = physiqueListeSuccess();
 
-    return $listSuccess;
+    // Retour
+    return $listeSuccess;
   }
 
   // METIER : Insertion nouveau succès
@@ -221,10 +223,10 @@
 
   // METIER : Initialisation champs erreur modification succès
   // RETOUR : Tableau sauvegardé et trié
-  function initModErrSucces($listSuccess, $sessionListSuccess)
+  function initModErrSucces($listeSuccess, $sessionListSuccess)
   {
     // Récupération des données modifiées
-    foreach ($listSuccess as $success)
+    foreach ($listeSuccess as $success)
     {
       $success->setLevel($sessionListSuccess['level'][$success->getId()]);
       $success->setOrder_success($sessionListSuccess['order_success'][$success->getId()]);
@@ -237,7 +239,7 @@
     }
 
     // Retour
-    return $listSuccess;
+    return $listeSuccess;
   }
 
   // METIER : Purge tous les succès
@@ -256,20 +258,20 @@
 
   // METIER : Initialisation des succès
   // RETOUR : Aucun
-  function initializeSuccess($listSuccess, $listUsers)
+  function initializeSuccess($listeSuccess, $listeUsers)
   {
     // Détermination de chaque succès pour chaque utilisateur
-    if (!empty($listSuccess) AND !empty($listUsers))
+    if (!empty($listeSuccess) AND !empty($listeUsers))
     {
-      foreach ($listUsers as $user)
+      foreach ($listeUsers as $user)
       {
         // Boucle de traitement sur les succès
-        foreach ($listSuccess as $success)
+        foreach ($listeSuccess as $success)
         {
           // Initialisations
-          $value          = NULL;
-          $action         = NULL;
-          $listConditions = array();
+          $value           = NULL;
+          $action          = NULL;
+          $listeConditions = array();
 
           // Détermination valeur à insérer
           switch ($success->getReference())
@@ -278,84 +280,84 @@
             case 'beginning':
             // Je l'ai fait !
             case 'developper':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'reference',
-                                            'test'     => '=',
-                                            'value'    => $success->getReference()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'reference',
+                                             'test'     => '=',
+                                             'value'    => $success->getReference()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              physiqueValueSuccess('success_users', $listConditions, 'value');
+              physiqueValueSuccess('success_users', $listeConditions, 'value');
               break;
 
             // Cinéphile amateur
             case 'publisher':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant_add',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'to_delete',
-                                            'test'     => '!=',
-                                            'value'    => 'Y'));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'identifiant_add',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'to_delete',
+                                             'test'     => '!=',
+                                             'value'    => 'Y'));
 
-              $value = physiqueCountSuccess('movie_house', $listConditions);
+              $value = physiqueCountSuccess('movie_house', $listeConditions);
               break;
 
             // Cinéphile professionnel
             case 'viewer':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'participation',
-                                            'test'     => '=',
-                                            'value'    => 'S'));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'participation',
+                                             'test'     => '=',
+                                             'value'    => 'S'));
 
-              $value = physiqueCountSuccess('movie_house_users', $listConditions);
+              $value = physiqueCountSuccess('movie_house_users', $listeConditions);
               break;
 
             // Commentateur sportif
             case 'commentator':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'author',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'author',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('movie_house_comments', $listConditions);
+              $value = physiqueCountSuccess('movie_house_comments', $listeConditions);
               break;
 
             // Expert acoustique
             case 'listener':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'author',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'author',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('collector', $listConditions);
+              $value = physiqueCountSuccess('collector', $listeConditions);
               break;
 
             // Dommage collatéral
             case 'speaker':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'speaker',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'speaker',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('collector', $listConditions);
+              $value = physiqueCountSuccess('collector', $listeConditions);
               break;
 
             // Rigolo compulsif
             case 'funny':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('collector_users', $listConditions);
+              $value = physiqueCountSuccess('collector_users', $listeConditions);
               break;
 
             // Auto-satisfait
@@ -370,12 +372,12 @@
 
             // Profiteur occasionnel
             case 'eater':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueSumSuccess('expense_center_users', $listConditions, 'parts');
+              $value = physiqueSumSuccess('expense_center_users', $listeConditions, 'parts');
               break;
 
             // Mer il et fou !
@@ -388,16 +390,16 @@
               // Récupération du bilan de l'utilisateur
               $bilan = physiqueBilanUser($user->getIdentifiant());
 
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'reference',
-                                            'test'     => '=',
-                                            'value'    => $success->getReference()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'reference',
+                                             'test'     => '=',
+                                             'value'    => $success->getReference()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueValueSuccess('success_users', $listConditions, 'value');
+              $value = physiqueValueSuccess('success_users', $listeConditions, 'value');
 
               if (is_null($value) OR $bilan > $value)
                 $value = $bilan;
@@ -405,50 +407,50 @@
 
             // Génie créatif
             case 'creator':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'author',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'author',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('ideas', $listConditions);
+              $value = physiqueCountSuccess('ideas', $listeConditions);
               break;
 
             // Top développeur
             case 'applier':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'developper',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'status',
-                                            'test'     => '=',
-                                            'value'    => 'D'));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'developper',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'status',
+                                             'test'     => '=',
+                                             'value'    => 'D'));
 
-              $value = physiqueCountSuccess('ideas', $listConditions);
+              $value = physiqueCountSuccess('ideas', $listeConditions);
               break;
 
             // Débugger aguerri
             case 'debugger':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'author',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'author',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('bugs', $listConditions);
+              $value = physiqueCountSuccess('bugs', $listeConditions);
               break;
 
             // Compilateur intégré
             case 'compiler':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'author',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'resolved',
-                                            'test'     => '=',
-                                            'value'    => 'Y'));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'author',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'resolved',
+                                             'test'     => '=',
+                                             'value'    => 'Y'));
 
-              $value = physiqueCountSuccess('bugs', $listConditions);
+              $value = physiqueCountSuccess('bugs', $listeConditions);
               break;
 
             // Véritable Jedi
@@ -458,20 +460,20 @@
 
               if (date('Ymd') >= $dateSortieSW8)
               {
-                $listConditions = array(array('operator' => '',
-                                              'column'   => 'id_film',
-                                              'test'     => '=',
-                                              'value'    => 16),
-                                        array('operator' => 'AND',
-                                              'column'   => 'identifiant',
-                                              'test'     => '=',
-                                              'value'    => $user->getIdentifiant()),
-                                        array('operator' => 'AND',
-                                              'column'   => 'participation',
-                                              'test'     => '=',
-                                              'value'    => 'S'));
+                $listeConditions = array(array('operator' => '',
+                                               'column'   => 'id_film',
+                                               'test'     => '=',
+                                               'value'    => 16),
+                                         array('operator' => 'AND',
+                                               'column'   => 'identifiant',
+                                               'test'     => '=',
+                                               'value'    => $user->getIdentifiant()),
+                                         array('operator' => 'AND',
+                                               'column'   => 'participation',
+                                               'test'     => '=',
+                                               'value'    => 'S'));
 
-                $isSeen = physiqueCountSuccess('movie_house_users', $listConditions);
+                $isSeen = physiqueCountSuccess('movie_house_users', $listeConditions);
 
                 if ($isSeen > 0)
                   $value = 1;
@@ -485,56 +487,56 @@
 
             // Chef étoilé
             case 'star-chief':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'caller',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'caller',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
-              $value = physiqueCountSuccess('food_advisor_choices', $listConditions);
+              $value = physiqueCountSuccess('food_advisor_choices', $listeConditions);
               break;
 
             // Cuisto expérimental
             case 'cooker':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'cooked',
-                                            'test'     => '=',
-                                            'value'    => 'Y'));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'cooked',
+                                             'test'     => '=',
+                                             'value'    => 'Y'));
 
-              $value = physiqueCountSuccess('cooking_box', $listConditions);
+              $value = physiqueCountSuccess('cooking_box', $listeConditions);
               break;
 
             // Maître pâtissier
             case 'recipe-master':
-              $listConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()),
-                                      array('operator' => 'AND',
-                                            'column'   => 'name',
-                                            'test'     => '!=',
-                                            'value'    => ''),
-                                      array('operator' => 'AND',
-                                            'column'   => 'picture',
-                                            'test'     => '!=',
-                                            'value'    => ''));
+              $listeConditions = array(array('operator' => '',
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()),
+                                       array('operator' => 'AND',
+                                             'column'   => 'name',
+                                             'test'     => '!=',
+                                             'value'    => ''),
+                                       array('operator' => 'AND',
+                                             'column'   => 'picture',
+                                             'test'     => '!=',
+                                             'value'    => ''));
 
-              $value = physiqueCountSuccess('cooking_box', $listConditions);
+              $value = physiqueCountSuccess('cooking_box', $listeConditions);
               break;
 
             // Niveaux
             case 'level_1':
             case 'level_5':
             case 'level_10':
-              $listConditions = array(array('operator' => '',
+              $listeConditions = array(array('operator' => '',
                                             'column'   => 'identifiant',
                                             'test'     => '=',
                                             'value'    => $user->getIdentifiant()));
 
-              $experience = physiqueValueSuccess('users', $listConditions, 'experience');
+              $experience = physiqueValueSuccess('users', $listeConditions, 'experience');
 
               if ($experience > 0)
                 $value = convertExperience($experience);
@@ -572,16 +574,16 @@
 
               if (date('Ymd') > $mission->getDate_fin())
               {
-                $listConditions = array(array('operator' => '',
-                                              'column'   => 'id_mission',
-                                              'test'     => '=',
-                                              'value'    => $mission->getId()),
-                                        array('operator' => 'AND',
-                                              'column'   => 'identifiant',
-                                              'test'     => '=',
-                                              'value'    => $user->getIdentifiant()));
+                $listeConditions = array(array('operator' => '',
+                                               'column'   => 'id_mission',
+                                               'test'     => '=',
+                                               'value'    => $mission->getId()),
+                                         array('operator' => 'AND',
+                                               'column'   => 'identifiant',
+                                               'test'     => '=',
+                                               'value'    => $user->getIdentifiant()));
 
-                $value = physiqueSumSuccess('missions_users', $listConditions, 'avancement');
+                $value = physiqueSumSuccess('missions_users', $listeConditions, 'avancement');
               }
               break;
 
@@ -592,16 +594,16 @@
           // Détermination action à effectuer
           if (!is_null($value) AND $value != 0)
           {
-            $listConditions = array(array('operator' => '',
-                                          'column'   => 'reference',
-                                          'test'     => '=',
-                                          'value'    => $success->getReference()),
-                                    array('operator' => 'AND',
-                                          'column'   => 'identifiant',
-                                          'test'     => '=',
-                                          'value'    => $user->getIdentifiant()));
+            $listeConditions = array(array('operator' => '',
+                                           'column'   => 'reference',
+                                           'test'     => '=',
+                                           'value'    => $success->getReference()),
+                                     array('operator' => 'AND',
+                                           'column'   => 'identifiant',
+                                           'test'     => '=',
+                                           'value'    => $user->getIdentifiant()));
 
-            $oldValue = physiqueValueSuccess('success_users', $listConditions, 'value');
+            $oldValue = physiqueValueSuccess('success_users', $listeConditions, 'value');
 
             // Mise à jour seulement si la nouvelle valeur est supérieure à l'ancienne
             if (!is_null($oldValue))

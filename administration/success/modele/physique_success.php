@@ -9,7 +9,7 @@
   function physiqueUsers()
   {
     // Initialisations
-    $listUsers = array();
+    $listeUsers = array();
 
     // Requête
     global $bdd;
@@ -25,13 +25,13 @@
       $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listUsers, $user);
+      array_push($listeUsers, $user);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // PHYSIQUE : Lecture liste des succès
@@ -39,7 +39,7 @@
   function physiqueListeSuccess()
   {
     // Initialisations
-    $listSuccess = array();
+    $listeSuccess = array();
 
     // Requête
     global $bdd;
@@ -54,13 +54,13 @@
       $mySuccess = Success::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listSuccess, $mySuccess);
+      array_push($listeSuccess, $mySuccess);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listSuccess;
+    return $listeSuccess;
   }
 
   // PHYSIQUE : Lecture du nombre de références existantes
@@ -137,14 +137,14 @@
 
   // PHYSIQUE : Lecture valeur succès
   // RETOUR : Valeur du succès
-  function physiqueValueSuccess($table, $listConditions, $valueColumn)
+  function physiqueValueSuccess($table, $listeConditions, $valueColumn)
   {
     // Initialisations
     $value = NULL;
     $where = '';
 
     // Construction de la requête
-    foreach ($listConditions as $condition)
+    foreach ($listeConditions as $condition)
     {
       if (!empty($condition['operator']))
         $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
@@ -172,14 +172,14 @@
 
   // PHYSIQUE : Comptage de lignes pour un succès
   // RETOUR : Nombre de lignes
-  function physiqueCountSuccess($table, $listConditions)
+  function physiqueCountSuccess($table, $listeConditions)
   {
     // Initialisations
     $value = 0;
     $where = '';
 
     // Construction de la requête
-    foreach ($listConditions as $condition)
+    foreach ($listeConditions as $condition)
     {
       if (!empty($condition['operator']))
       {
@@ -216,14 +216,14 @@
 
   // PHYSIQUE : Somme de lignes pour un succès
   // RETOUR : Somme des lignes
-  function physiqueSumSuccess($table, $listConditions, $sumColumn)
+  function physiqueSumSuccess($table, $listeConditions, $sumColumn)
   {
     // Initialisations
     $value = 0;
     $where = '';
 
     // Construction de la requête
-    foreach ($listConditions as $condition)
+    foreach ($listeConditions as $condition)
     {
       if (!empty($condition['operator']))
       {

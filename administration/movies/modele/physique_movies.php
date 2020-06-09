@@ -9,7 +9,7 @@
   function physiqueFilmsToDelete()
   {
     // Initialisations
-    $listFilmsToDelete = array();
+    $listeFilmsToDelete = array();
 
     // Requête
     global $bdd;
@@ -25,13 +25,13 @@
       $myFilm = Movie::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listFilmsToDelete, $myFilm);
+      array_push($listeFilmsToDelete, $myFilm);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listFilmsToDelete;
+    return $listeFilmsToDelete;
   }
 
   // PHYSIQUE : Lecture des informations utilisateur

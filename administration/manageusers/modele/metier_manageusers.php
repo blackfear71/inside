@@ -7,70 +7,70 @@
   function getUsers()
   {
     // Récupération liste des utilisateurs
-    $listUsers = physiqueUsers();
+    $listeUsers = physiqueUsers();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // METIER : Recherche les utilisateurs désinscrits
   // RETOUR : Liste des utilisateurs désinscrits
-  function getUsersDes($listUsersIns)
+  function getUsersDes($listeUsersIns)
   {
     // Initialisations
-    $listUsersDes = array();
+    $listeUsersDes = array();
 
     // Récupération des identifiants dans les films
-    $listUsersFilms = physiqueIdentifiantsFilms();
+    $listeUsersFilms = physiqueIdentifiantsFilms();
 
     // Récupération des identifiants dans les commentaires des films
-    $listUsersComments = physiqueIdentifiantsCommentairesFilms();
+    $listeUsersComments = physiqueIdentifiantsCommentairesFilms();
 
     // Récupération des identifiants dans les phrases cultes
-    $listUsersCollector = physiqueIdentifiantsCollector();
+    $listeUsersCollector = physiqueIdentifiantsCollector();
 
     // Récupération des identifiants dans les dépenses
-    $listUsersExpenses = physiqueIdentifiantsDepenses();
+    $listeUsersExpenses = physiqueIdentifiantsDepenses();
 
     // Récupération des identifiants dans les parts des dépenses
-    $listUsersParts = physiqueIdentifiantsPartsDepenses();
+    $listeUsersParts = physiqueIdentifiantsPartsDepenses();
 
     // Récupération des identifiants dans les bugs/évolutions
-    $listUsersBugs = physiqueIdentifiantsBugs();
+    $listeUsersBugs = physiqueIdentifiantsBugs();
 
     // Récupération des identifiants dans les idées #TheBox
-    $listUsersTheBox = physiqueIdentifiantsTheBox();
+    $listeUsersTheBox = physiqueIdentifiantsTheBox();
 
     // Fusion des données dans le tableau complet
-    $listUsersDes = array_merge($listUsersFilms,
-                                $listUsersComments,
-                                $listUsersCollector,
-                                $listUsersExpenses,
-                                $listUsersParts,
-                                $listUsersBugs,
-                                $listUsersTheBox
-                               );
+    $listeUsersDes = array_merge($listeUsersFilms,
+                                 $listeUsersComments,
+                                 $listeUsersCollector,
+                                 $listeUsersExpenses,
+                                 $listeUsersParts,
+                                 $listeUsersBugs,
+                                 $listeUsersTheBox
+                                );
 
     // Suppression des doublons
-    $listUsersDes = array_unique($listUsersDes);
+    $listeUsersDes = array_unique($listeUsersDes);
 
     // Tri par ordre alphabétique
-    sort($listUsersDes);
+    sort($listeUsersDes);
 
     // Filtrage avec les utilisateurs inscrits
-    foreach ($listUsersDes as $keyUserDes => $userDes)
+    foreach ($listeUsersDes as $keyUserDes => $userDes)
     {
-      foreach ($listUsersIns as $userIns)
+      foreach ($listeUsersIns as $userIns)
       {
         if ($userDes == $userIns->getIdentifiant())
         {
-          unset($listUsersDes[$keyUserDes]);
+          unset($listeUsersDes[$keyUserDes]);
           break;
         }
       }
     }
 
-    return $listUsersDes;
+    return $listeUsersDes;
   }
 
   // METIER : Contrôle alertes utilisateurs
@@ -86,13 +86,13 @@
 
   // METIER : Lecture statistiques catégories des utilisateurs inscrits
   // RETOUR : Tableau de nombres de films ajoutés, de commentaires, de phrases cultes rapportées & bilans des dépenses
-  function getTabCategoriesIns($listUsers)
+  function getTabCategoriesIns($listeUsers)
   {
     // Initialisations
-    $tabCategories = array();
+    $tableauCategories = array();
 
     // Récupération des statistiques par catégories
-    foreach ($listUsers as $user)
+    foreach ($listeUsers as $user)
     {
       // Films ajoutés
       $nombreFilms = physiqueFilmsAjoutesUser($user->getIdentifiant());
@@ -116,22 +116,22 @@
                              );
 
       // Ajout au tableau
-      array_push($tabCategories, $categoriesUser);
+      array_push($tableauCategories, $categoriesUser);
     }
 
     // Retour
-    return $tabCategories;
+    return $tableauCategories;
   }
 
   // METIER : Lecture statistiques catégories des utilisateurs désinscrits
   // RETOUR : Tableau de nombres de commentaires & bilans des dépenses
-  function getTabCategoriesDes($listUsersDes)
+  function getTabCategoriesDes($listeUsersDes)
   {
     // Initialisations
-    $tabCategoriesDes = array();
+    $tableauCategoriesDes = array();
 
     // Récupération des statistiques par catégories
-    foreach ($listUsersDes as $userDes)
+    foreach ($listeUsersDes as $userDes)
     {
       // Films ajoutés
       $nombreFilms = physiqueFilmsAjoutesUser($userDes);
@@ -145,9 +145,9 @@
       // Calcul du bilan des dépenses (non stocké)
       $bilanUser = 0;
 
-      $listExpenses = physiqueDepenses();
+      $listeExpenses = physiqueDepenses();
 
-      foreach ($listExpenses as $expense)
+      foreach ($listeExpenses as $expense)
       {
         // Nombre de parts total et de l'utilisateur
         $nombreParts = physiquePartsDepensesUser($expense->getId(), $userDes);
@@ -175,20 +175,20 @@
                                 );
 
       // Ajout au tableau
-      array_push($tabCategoriesDes, $categoriesUserDes);
+      array_push($tableauCategoriesDes, $categoriesUserDes);
     }
 
     // Retour
-    return $tabCategoriesDes;
+    return $tableauCategoriesDes;
   }
 
   // METIER : Lecture total catégories des utilisateurs
   // RETOUR : Tableau des totaux des catégories
-  function getTotalCategories($tabIns, $tabDes)
+  function getTotalCategories($tableauIns, $tableauDes)
   {
     // Initialisations
-    $tabTotalCategories = array();
-    $sommeBilans        = 0;
+    $tableauTotalCategories = array();
+    $sommeBilans            = 0;
 
     // Nombre de films ajoutés
     $nombreFilms = physiqueFilmsAjoutesTotal();
@@ -200,13 +200,13 @@
     $nombreCollector = physiqueCollectorTotal();
 
     // Calcul somme bilans utilisateurs inscrits
-    foreach ($tabIns as $userIns)
+    foreach ($tableauIns as $userIns)
     {
       $sommeBilans += $userIns['bilanUser'];
     }
 
     // Calcul somme bilans utilisateurs désinscrits
-    foreach ($tabDes as $userDes)
+    foreach ($tableauDes as $userDes)
     {
       $sommeBilans += $userDes['bilanUser'];
     }
@@ -214,9 +214,9 @@
     // Récupération des dépenses sans parts
 		$expensesNoParts = 0;
 
-    $listExpenses = physiqueDepenses();
+    $listeExpenses = physiqueDepenses();
 
-    foreach ($listExpenses as $expense)
+    foreach ($listeExpenses as $expense)
     {
       // Vérification s'il n'y a pas de parts
       $sansParts = physiqueDepenseSansParts($expense->getId());
@@ -235,24 +235,24 @@
       $alerteBilan = false;
 
     // Ajout au tableau
-    $tabTotalCategories = array('nombreFilms'     => $nombreFilms,
-                                'nombreComments'  => $nombreComments,
-                                'nombreCollector' => $nombreCollector,
-                                'sommeBilans'     => $sommeBilans,
-                                'alerteBilan'     => $alerteBilan
-                               );
+    $tableauTotalCategories = array('nombreFilms'     => $nombreFilms,
+                                    'nombreComments'  => $nombreComments,
+                                    'nombreCollector' => $nombreCollector,
+                                    'sommeBilans'     => $sommeBilans,
+                                    'alerteBilan'     => $alerteBilan
+                                   );
 
-    return $tabTotalCategories;
+    return $tableauTotalCategories;
   }
 
   // METIER : Lecture statistiques des utilisateurs
   // RETOUR : Tableau de statistiques
-  function getTabStats($listUsersIns, $listUsersDes)
+  function getTabStats($listeUsersIns, $listeUsersDes)
   {
     // Statistiques utilisateurs inscrits
     $statsIns = array();
 
-    foreach ($listUsersIns as $userIns)
+    foreach ($listeUsersIns as $userIns)
     {
       // Nombre de demandes (bugs/évolutions)
       $nombreBugsSoumis = physiqueBugsSoumisUser($userIns->getIdentifiant());
@@ -285,7 +285,7 @@
     // Statistiques utilisateurs désinscrits
     $statsDes = array();
 
-    foreach ($listUsersDes as $userDes)
+    foreach ($listeUsersDes as $userDes)
     {
       // Nombre de demandes (bugs/évolutions)
       $nombreBugsSoumis = physiqueBugsSoumisUser($userDes);
@@ -316,9 +316,9 @@
     }
 
     // Ajout au tableau global
-    $tabStats = array('inscrits' => $statsIns, 'desinscrits' => $statsDes);
+    $tableauStats = array('inscrits' => $statsIns, 'desinscrits' => $statsDes);
 
-    return $tabStats;
+    return $tableauStats;
   }
 
   // METIER : Lecture total statistiques
@@ -326,7 +326,7 @@
   function getTotalStats()
   {
     // Initialisations
-    $tabTotalStats = array();
+    $tableauTotalStats = array();
 
     // Nombre de demandes (bugs/évolutions)
     $nombreBugsSoumis = physiqueBugsSoumisTotal();
@@ -344,14 +344,14 @@
     $nombreTheBoxTerminees = physiqueTheBoxTermineesTotal();
 
     // Ajout au tableau
-    $tabTotalStats = array('nombreBugsSoumis'      => $nombreBugsSoumis,
-                           'nombreBugsResolus'     => $nombreBugsResolus,
-                           'nombreTheBox'          => $nombreTheBox,
-                           'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
-                           'nombreTheBoxTerminees' => $nombreTheBoxTerminees
-                          );
+    $tableauTotalStats = array('nombreBugsSoumis'      => $nombreBugsSoumis,
+                               'nombreBugsResolus'     => $nombreBugsResolus,
+                               'nombreTheBox'          => $nombreTheBox,
+                               'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
+                               'nombreTheBoxTerminees' => $nombreTheBoxTerminees
+                              );
 
-    return $tabTotalStats;
+    return $tableauTotalStats;
   }
 
   // METIER : Refus réinitialisation mot de passe

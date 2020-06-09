@@ -44,7 +44,7 @@
 		echo '</tr>';
 
 		// Utilisateurs inscrits
-    foreach ($tabCategoriesIns as $statsCatIns)
+    foreach ($tableauCategoriesIns as $statsCatIns)
     {
       echo '<tr class="tr_manage_users">';
         echo '<td class="td_manage_users">';
@@ -85,7 +85,7 @@
     }
 
 		// Séparation utilisateurs
-		if (!empty($tabCategoriesDes))
+		if (!empty($tableauCategoriesDes))
 		{
 			echo '<tr>';
 				echo '<td class="table_old_users" colspan="9">';
@@ -97,7 +97,7 @@
 		}
 
 		// Utilisateurs désinscrits
-		foreach ($tabCategoriesDes as $statsCatDes)
+		foreach ($tableauCategoriesDes as $statsCatDes)
 		{
 			echo '<tr class="tr_manage_users">';
 				echo '<td colspan="2" class="td_manage_users">';

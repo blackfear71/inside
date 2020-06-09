@@ -36,64 +36,64 @@
     }
 
     // Tableau des catégories
-    $liste_categories = array(array('categorie' => 'MOVIE<br />HOUSE',
-                                    'lien'      => '../moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter',
-                                    'title'     => 'Movie House',
-                                    'image'     => '../../includes/icons/common/movie_house.png',
-                                    'alt'       => 'movie_house',
-                                    'mobile'    => 'N'),
-                              array('categorie' => 'LES ENFANTS !<br />À TABLE !',
-                                    'lien'      => '../foodadvisor/foodadvisor.php?action=goConsulter',
-                                    'title'     => 'Les enfants ! À table !',
-                                    'image'     => '../../includes/icons/common/food_advisor.png',
-                                    'alt'       => 'food_advisor',
-                                    'mobile'    => 'Y'),
-                              array('categorie' => 'COOKING<br />BOX',
-                                    'lien'      => '../cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter',
-                                    'title'     => 'Cooking Box',
-                                    'image'     => '../../includes/icons/common/cooking_box.png',
-                                    'alt'       => 'cooking_box',
-                                    'mobile'    => 'N'),
-                              array('categorie' => 'EXPENSE<br />CENTER',
-                                    'lien'      => '../expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter',
-                                    'title'     => 'Expense Center',
-                                    'image'     => '../../includes/icons/common/expense_center.png',
-                                    'alt'       => 'expense_center',
-                                    'mobile'    => 'N'),
-                              array('categorie' => 'COLLECTOR<br />ROOM',
-                                    'lien'      => '../collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
-                                    'title'     => 'Collector Room',
-                                    'image'     => '../../includes/icons/common/collector.png',
-                                    'alt'       => 'collector',
-                                    'mobile'    => 'N'),
-                              array('categorie' => 'CALENDARS',
-                                    'lien'      => '../calendars/calendars.php?year=' . date('Y') . '&action=goConsulter',
-                                    'title'     => 'Calendars',
-                                    'image'     => '../../includes/icons/common/calendars.png',
-                                    'alt'       => 'calendars',
-                                    'mobile'    => 'N'),
-                              array('categorie' => 'LES PETITS<br />PÉDESTRES',
-                                    'lien'      => '../petitspedestres/parcours.php?action=liste',
-                                    'title'     => 'Les Petits Pédestres',
-                                    'image'     => '../../includes/icons/common/petits_pedestres.png',
-                                    'alt'       => 'petits_pedestres',
-                                    'mobile'    => 'N'),
-                              array('categorie' => 'MISSIONS :<br />INSIDER',
-                                    'lien'      => '../missions/missions.php?action=goConsulter',
-                                    'title'     => 'Missions : Insider',
-                                    'image'     => '../../includes/icons/common/missions.png',
-                                    'alt'       => 'missions',
-                                    'mobile'    => 'N')/*,
-                              array('categorie' => 'EVENT<br />MANAGER',
-                                    'lien'      => '../eventmanager/eventmanager.php?action=goConsulter',
-                                    'title'     => 'Event Manager',
-                                    'image'     => '../../includes/icons/common/event_manager.png',
-                                    'alt'       => 'event_manager',
-                                    'mobile'    => 'N')*/
-                             );
+    $listeCategories = array(array('categorie' => 'MOVIE<br />HOUSE',
+                                   'lien'      => '../moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter',
+                                   'title'     => 'Movie House',
+                                   'image'     => '../../includes/icons/common/movie_house.png',
+                                   'alt'       => 'movie_house',
+                                   'mobile'    => 'N'),
+                             array('categorie' => 'LES ENFANTS !<br />À TABLE !',
+                                   'lien'      => '../foodadvisor/foodadvisor.php?action=goConsulter',
+                                   'title'     => 'Les enfants ! À table !',
+                                   'image'     => '../../includes/icons/common/food_advisor.png',
+                                   'alt'       => 'food_advisor',
+                                   'mobile'    => 'Y'),
+                             array('categorie' => 'COOKING<br />BOX',
+                                   'lien'      => '../cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter',
+                                   'title'     => 'Cooking Box',
+                                   'image'     => '../../includes/icons/common/cooking_box.png',
+                                   'alt'       => 'cooking_box',
+                                   'mobile'    => 'N'),
+                             array('categorie' => 'EXPENSE<br />CENTER',
+                                   'lien'      => '../expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter',
+                                   'title'     => 'Expense Center',
+                                   'image'     => '../../includes/icons/common/expense_center.png',
+                                   'alt'       => 'expense_center',
+                                   'mobile'    => 'N'),
+                             array('categorie' => 'COLLECTOR<br />ROOM',
+                                   'lien'      => '../collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
+                                   'title'     => 'Collector Room',
+                                   'image'     => '../../includes/icons/common/collector.png',
+                                   'alt'       => 'collector',
+                                   'mobile'    => 'N'),
+                             array('categorie' => 'CALENDARS',
+                                   'lien'      => '../calendars/calendars.php?year=' . date('Y') . '&action=goConsulter',
+                                   'title'     => 'Calendars',
+                                   'image'     => '../../includes/icons/common/calendars.png',
+                                   'alt'       => 'calendars',
+                                   'mobile'    => 'N'),
+                             array('categorie' => 'LES PETITS<br />PÉDESTRES',
+                                   'lien'      => '../petitspedestres/parcours.php?action=liste',
+                                   'title'     => 'Les Petits Pédestres',
+                                   'image'     => '../../includes/icons/common/petits_pedestres.png',
+                                   'alt'       => 'petits_pedestres',
+                                   'mobile'    => 'N'),
+                             array('categorie' => 'MISSIONS :<br />INSIDER',
+                                   'lien'      => '../missions/missions.php?action=goConsulter',
+                                   'title'     => 'Missions : Insider',
+                                   'image'     => '../../includes/icons/common/missions.png',
+                                   'alt'       => 'missions',
+                                   'mobile'    => 'N')/*,
+                             array('categorie' => 'EVENT<br />MANAGER',
+                                   'lien'      => '../eventmanager/eventmanager.php?action=goConsulter',
+                                   'title'     => 'Event Manager',
+                                   'image'     => '../../includes/icons/common/event_manager.png',
+                                   'alt'       => 'event_manager',
+                                   'mobile'    => 'N')*/
+                           );
 
     // Retour
-    return $liste_categories;
+    return $listeCategories;
   }
 
   // METIER : Récupérations des news
@@ -357,13 +357,13 @@
       if (date('Ymd') > $mission->getDate_fin())
       {
         // Récupération de la liste des participants de la mission
-        $listUsers = physiqueUsersMission($mission->getId());
+        $listeUsers = physiqueUsersMission($mission->getId());
 
         // Traitement s'il y a des participants
-        if (!empty($listUsers))
+        if (!empty($listeUsers))
         {
           // Récupération des données complémentaires des participants
-          foreach ($listUsers as &$user)
+          foreach ($listeUsers as &$user)
           {
             // Pseudo
             $user['pseudo'] = physiquePseudoUser($user['identifiant']);
@@ -379,16 +379,16 @@
           unset($user);
 
           // Tri
-          array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listUsers);
+          array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
 
           unset($triTotal);
           unset($triIdentifiant);
 
           // Affectation du rang
-          $prevTotal   = $listUsers[0]['total'];
+          $prevTotal   = $listeUsers[0]['total'];
           $currentRank = 1;
 
-          foreach ($listUsers as &$user)
+          foreach ($listeUsers as &$user)
           {
             $currentTotal = $user['total'];
 
@@ -404,7 +404,7 @@
           unset($user);
 
           // On ne garde que les gagnants
-          foreach ($listUsers as &$user)
+          foreach ($listeUsers as &$user)
           {
             if ($user['rank'] != 1)
               unset($user);
@@ -413,7 +413,7 @@
           unset($user);
 
           // On ajoute la ligne au tableau
-          $gagnants[$mission->getId()] = $listUsers;
+          $gagnants[$mission->getId()] = $listeUsers;
         }
       }
     }
@@ -526,15 +526,15 @@
           // Noms des gagnants
           if (!empty($gagnants))
           {
-            $liste_gagnants = array();
+            $listeGagnants = array();
 
             foreach ($gagnants[$mission->getId()] as $participant)
             {
               if ($participant['rank'] <= 3)
-                array_push($liste_gagnants, $participant['pseudo']);
+                array_push($listeGagnants, $participant['pseudo']);
             }
 
-            $content .= '<div class="contenu_paragraphe">' . formatGagnants($liste_gagnants) . '</div>';
+            $content .= '<div class="contenu_paragraphe">' . formatGagnants($listeGagnants) . '</div>';
           }
 
           $myMessage->setContent($content);

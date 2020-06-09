@@ -68,7 +68,7 @@
       $isSolo = getSolo($_SESSION['user']['identifiant']);
 
       // Récupération des tops d'actions rapides
-      $choixRapide = getFastActions($_SESSION['user']['identifiant'], $isSolo);
+      $choixRapide = getFastActions($isSolo);
 
       // Lecture des choix utilisateurs
       if ($choixRapide == true)

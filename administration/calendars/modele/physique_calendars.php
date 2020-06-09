@@ -9,7 +9,7 @@
   function physiqueAutorisationsCalendars()
   {
     // Initialisations
-    $listAutorisations = array();
+    $listeAutorisations = array();
 
     // Requête
     global $bdd;
@@ -26,13 +26,13 @@
                              );
 
       // On ajoute la ligne au tableau
-      array_push($listAutorisations, $myAutorisation);
+      array_push($listeAutorisations, $myAutorisation);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listAutorisations;
+    return $listeAutorisations;
   }
 
   // PHYSIQUE : Lecture des informations utilisateur
@@ -61,7 +61,7 @@
   function physiqueUsers()
   {
     // Initialisations
-    $listUsers = array();
+    $listeUsers = array();
 
     // Requête
     global $bdd;
@@ -77,21 +77,21 @@
       $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listUsers, $user);
+      array_push($listeUsers, $user);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // PHYSIQUE : Lecture liste des calendriers à supprimer
   // RETOUR : Liste des calendriers
-  function physiqueCalendarsToDelete($listMonths)
+  function physiqueCalendarsToDelete($listeMois)
   {
     // Initialisations
-    $listCalendarsToDelete = array();
+    $listeCalendarsToDelete = array();
 
     // Requête
     global $bdd;
@@ -107,16 +107,16 @@
       $myCalendar = Calendrier::withData($data);
 
       // Titre du calendrier
-      $myCalendar->setTitle($listMonths[$myCalendar->getMonth()] . ' ' . $myCalendar->getYear());
+      $myCalendar->setTitle($listeMois[$myCalendar->getMonth()] . ' ' . $myCalendar->getYear());
 
       // On ajoute la ligne au tableau
-      array_push($listCalendarsToDelete, $myCalendar);
+      array_push($listeCalendarsToDelete, $myCalendar);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listCalendarsToDelete;
+    return $listeCalendarsToDelete;
   }
 
   // PHYSIQUE : Lecture liste des annexes à supprimer
@@ -124,7 +124,7 @@
   function physiqueAnnexesToDelete()
   {
     // Initialisations
-    $listAnnexesToDelete = array();
+    $listeAnnexesToDelete = array();
 
     // Requête
     global $bdd;
@@ -140,13 +140,13 @@
       $myAnnexe = Annexe::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listAnnexesToDelete, $myAnnexe);
+      array_push($listeAnnexesToDelete, $myAnnexe);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listAnnexesToDelete;
+    return $listeAnnexesToDelete;
   }
 
   // PHYSIQUE : Lecture alerte calendriers

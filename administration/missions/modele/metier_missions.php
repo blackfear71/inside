@@ -85,13 +85,13 @@
   function getParticipants($idMission)
   {
     // Récupération de la liste des participants de la mission
-    $listUsers = physiqueUsersMission($idMission);
+    $listeUsers = physiqueUsersMission($idMission);
 
     // Traitement s'il y a des participants
-    if (!empty($listUsers))
+    if (!empty($listeUsers))
     {
       // Récupération des données complémentaires des participants
-      foreach ($listUsers as &$user)
+      foreach ($listeUsers as &$user)
       {
         // Pseudo
         $user['pseudo'] = physiquePseudoUser($user['identifiant']);
@@ -107,13 +107,13 @@
       unset($user);
 
       // Tri
-      array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listUsers);
+      array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
 
       // Affectation du rang
-      $prevTotal   = $listUsers[0]['total'];
+      $prevTotal   = $listeUsers[0]['total'];
       $currentRank = 1;
 
-      foreach ($listUsers as &$user)
+      foreach ($listeUsers as &$user)
       {
         $currentTotal = $user['total'];
 
@@ -130,7 +130,7 @@
     }
 
     // Retour
-    return $listUsers;
+    return $listeUsers;
   }
 
   // METIER : Insertion d'une nouvelle mission
