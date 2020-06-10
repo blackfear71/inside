@@ -21,20 +21,13 @@
   include_once('modele/controles_manageusers.php');
   include_once('modele/physique_manageusers.php');
 
-	// Initialisation sauvegarde saisie
-	if (!isset($_SESSION['save']['user_ask_id']) OR !isset($_SESSION['save']['user_ask_name']) OR !isset($_SESSION['save']['new_password']))
-	{
-    unset($_SESSION['save']);
-
-		$_SESSION['save']['user_ask_id']   = '';
-		$_SESSION['save']['user_ask_name'] = '';
-		$_SESSION['save']['new_password']  = '';
-	}
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Initialisation de la sauvegarde en session
+      initializeSaveSession();
+
       // Récupération des utilisateurs inscrits et désinscrits
 			$listeUsers    = getUsers();
       $listeUsersDes = getUsersDes($listeUsers);

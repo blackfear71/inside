@@ -1,6 +1,22 @@
 <?php
   include_once('../../includes/classes/alerts.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
+    {
+      unset($_SESSION['save']);
+
+      $_SESSION['save']['type_alert']      = '';
+      $_SESSION['save']['category_alert']  = '';
+      $_SESSION['save']['reference_alert'] = '';
+      $_SESSION['save']['message_alert']   = '';
+    }
+  }
+
   // METIER : Liste des messages d'alerte
   // RETOUR : Messages d'alerte
   function getAlerts()

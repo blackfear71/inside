@@ -2,6 +2,31 @@
   include_once('../../includes/classes/missions.php');
   include_once('../../includes/classes/profile.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Erreur
+  function initializeSaveSession()
+  {
+    // Initialisations
+    $erreurMission = false;
+
+    // On supprime la session s'il n'y a pas d'erreur
+  	if ((!isset($_SESSION['alerts']['already_ref_mission'])   OR $_SESSION['alerts']['already_ref_mission']   != true)
+    AND (!isset($_SESSION['alerts']['objective_not_numeric']) OR $_SESSION['alerts']['objective_not_numeric'] != true)
+    AND (!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']            != true)
+    AND (!isset($_SESSION['alerts']['date_less'])             OR $_SESSION['alerts']['date_less']             != true)
+    AND (!isset($_SESSION['alerts']['missing_mission_file'])  OR $_SESSION['alerts']['missing_mission_file']  != true)
+    AND (!isset($_SESSION['alerts']['file_too_big'])          OR $_SESSION['alerts']['file_too_big']          != true)
+    AND (!isset($_SESSION['alerts']['temp_not_found'])        OR $_SESSION['alerts']['temp_not_found']        != true)
+    AND (!isset($_SESSION['alerts']['wrong_file_type'])       OR $_SESSION['alerts']['wrong_file_type']       != true)
+    AND (!isset($_SESSION['alerts']['wrong_file'])            OR $_SESSION['alerts']['wrong_file']            != true))
+      unset($_SESSION['save']);
+    else
+      $erreurMission = true;
+
+    // Retour
+    return $erreurMission;
+  }
+
   // METIER : Récupération des missions
   // RETOUR : Objets mission
   function getMissions()

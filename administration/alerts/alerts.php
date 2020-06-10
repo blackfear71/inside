@@ -19,21 +19,13 @@
   include_once('modele/controles_alerts.php');
   include_once('modele/physique_alerts.php');
 
-  // Initialisation sauvegarde saisie alerte
-  if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
-  {
-    unset($_SESSION['save']);
-
-    $_SESSION['save']['type_alert']      = '';
-    $_SESSION['save']['category_alert']  = '';
-    $_SESSION['save']['reference_alert'] = '';
-    $_SESSION['save']['message_alert']   = '';
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Initialisation de la sauvegarde en session
+      initializeSaveSession();
+
       // Récupération de la liste des alertes
       $listeAlertes = getAlerts();
       break;

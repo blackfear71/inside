@@ -1,6 +1,32 @@
 <?php
   include_once('../../includes/classes/themes.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['date_less'])           OR $_SESSION['alerts']['date_less']           != true)
+    AND (!isset($_SESSION['alerts']['date_conflict'])       OR $_SESSION['alerts']['date_conflict']       != true)
+    AND (!isset($_SESSION['alerts']['wrong_date'])          OR $_SESSION['alerts']['wrong_date']          != true)
+    AND (!isset($_SESSION['alerts']['already_ref_theme'])   OR $_SESSION['alerts']['already_ref_theme']   != true)
+    AND (!isset($_SESSION['alerts']['missing_theme_file'])  OR $_SESSION['alerts']['missing_theme_file']  != true)
+    AND (!isset($_SESSION['alerts']['file_too_big'])        OR $_SESSION['alerts']['file_too_big']        != true)
+    AND (!isset($_SESSION['alerts']['temp_not_found'])      OR $_SESSION['alerts']['temp_not_found']      != true)
+    AND (!isset($_SESSION['alerts']['wrong_file_type'])     OR $_SESSION['alerts']['wrong_file_type']     != true)
+    AND (!isset($_SESSION['alerts']['wrong_file'])          OR $_SESSION['alerts']['wrong_file']          != true)
+    AND (!isset($_SESSION['alerts']['level_theme_numeric']) OR $_SESSION['alerts']['level_theme_numeric'] != true))
+    {
+      unset($_SESSION['save']);
+
+      $_SESSION['save']['theme_title']    = '';
+      $_SESSION['save']['theme_ref']      = '';
+      $_SESSION['save']['theme_level']    = '';
+      $_SESSION['save']['theme_date_deb'] = '';
+      $_SESSION['save']['theme_date_fin'] = '';
+    }
+  }
+
   // METIER : Lecture des thèmes existants par type
   // RETOUR : Tableau des thèmes
   function getThemes($typeTheme)

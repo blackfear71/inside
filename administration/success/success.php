@@ -21,33 +21,13 @@
 	include_once('modele/controles_success.php');
 	include_once('modele/physique_success.php');
 
-  // Initialisation sauvegarde saisie succès
-  if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)
-  AND (!isset($_SESSION['alerts']['level_not_numeric'])  OR $_SESSION['alerts']['level_not_numeric']  != true)
-  AND (!isset($_SESSION['alerts']['order_not_numeric'])  OR $_SESSION['alerts']['order_not_numeric']  != true)
-  AND (!isset($_SESSION['alerts']['already_ordered'])    OR $_SESSION['alerts']['already_ordered']    != true)
-  AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true)
-	AND (!isset($_SESSION['alerts']['file_too_big'])       OR $_SESSION['alerts']['file_too_big']       != true)
-	AND (!isset($_SESSION['alerts']['temp_not_found'])     OR $_SESSION['alerts']['temp_not_found']     != true)
-	AND (!isset($_SESSION['alerts']['wrong_file_type'])    OR $_SESSION['alerts']['wrong_file_type']    != true)
-	AND (!isset($_SESSION['alerts']['wrong_file'])         OR $_SESSION['alerts']['wrong_file']         != true))
-  {
-		unset($_SESSION['save']);
-
-    $_SESSION['save']['reference_success']   = '';
-		$_SESSION['save']['level']               = '';
-    $_SESSION['save']['unicity']             = '';
-		$_SESSION['save']['order_success']       = '';
-    $_SESSION['save']['title_success']       = '';
-    $_SESSION['save']['description_success'] = '';
-    $_SESSION['save']['limit_success']       = '';
-		$_SESSION['save']['explanation_success'] = '';
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+			// Initialisation de la sauvegarde en session
+			initializeSaveSession($_GET['action']);
+
       // Récupération de la liste des succès
 			$listeSuccess = getSuccess();
       break;
@@ -56,11 +36,12 @@
       // Récupération de la liste des succès
       $listeSuccess = getSuccess();
 
+			// Initialisation de la sauvegarde en session et récupération erreur
+			$erreurSuccess = initializeSaveSession($_GET['action']);
+
 			// Sauvegarde des données saisies en cas d'erreur
-			if (!isset($_GET['error']) OR $_GET['error'] != true)
-		    $_SESSION['save']['save_success'] = NULL;
-			else
-        $listeSuccess = initModErrSucces($listeSuccess, $_SESSION['save']['save_success']);
+			if ($erreurSuccess == true)
+        $listeSuccess = initialisationErreurModificationSucces($listeSuccess, $_SESSION['save']['save_success']);
       break;
 
     case 'doAjouter':

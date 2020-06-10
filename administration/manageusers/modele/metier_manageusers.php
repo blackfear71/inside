@@ -2,6 +2,21 @@
   include_once('../../includes/classes/expenses.php');
   include_once('../../includes/classes/profile.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if (!isset($_SESSION['save']['user_ask_id']) OR !isset($_SESSION['save']['user_ask_name']) OR !isset($_SESSION['save']['new_password']))
+  	{
+      unset($_SESSION['save']);
+
+  		$_SESSION['save']['user_ask_id']   = '';
+  		$_SESSION['save']['user_ask_name'] = '';
+  		$_SESSION['save']['new_password']  = '';
+  	}
+  }
+
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
   function getUsers()

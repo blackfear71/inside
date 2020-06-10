@@ -22,14 +22,14 @@
   {
     case 'goConsulter':
       // Récupération des autorisations de gestion des calendriers
-      $listeAutorisations      = getAutorisationsCalendars();
+      $listeAutorisations = getAutorisationsCalendars();
 
       // Récupération de la liste des mois
-      $listeMois               = getMonths();
+      $listeMois = getMonths();
 
       // Récupération des calendriers à supprimer
-			$listeSuppression        = getCalendarsToDelete($listeMois);
-			$alerteCalendars         = getAlerteCalendars();
+			$listeSuppression = getCalendarsToDelete($listeMois);
+			$alerteCalendars  = getAlerteCalendars();
 
       // Récupération des annexes à supprimer
       $listeSuppressionAnnexes = getAnnexesToDelete();

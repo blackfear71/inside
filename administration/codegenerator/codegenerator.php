@@ -28,11 +28,11 @@
         $generatorParameters = getGenerator($_SESSION['generator']);
 
         // Récupération des fichiers générés
-        $controler           = getControler($generatorParameters);
-        $metier              = getMetier($generatorParameters);
-        $controles           = getControles($generatorParameters);
-        $physique            = getPhysique($generatorParameters);
-        $vue                 = getVue($generatorParameters);
+        $controler = getControler($generatorParameters);
+        $metier    = getMetier($generatorParameters);
+        $controles = getControles($generatorParameters);
+        $physique  = getPhysique($generatorParameters);
+        $vue       = getVue($generatorParameters);
       }
       break;
 

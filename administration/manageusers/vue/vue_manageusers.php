@@ -50,9 +50,9 @@
 						echo '<div class="reseted">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['save']['user_ask_id'] . ' / ' . $_SESSION['save']['user_ask_name'] . '</b> : </div>';
 						echo '<p class="reseted_2"><b>' . $_SESSION['save']['new_password'] . '</b></p>';
 
-						$_SESSION['save']['user_ask_id']   = "";
-						$_SESSION['save']['user_ask_name'] = "";
-						$_SESSION['save']['new_password']  = "";
+						$_SESSION['save']['user_ask_id']   = '';
+						$_SESSION['save']['user_ask_name'] = '';
+						$_SESSION['save']['new_password']  = '';
 					}
 
           /****************************/

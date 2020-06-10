@@ -22,42 +22,21 @@
   include_once('modele/controles_missions.php');
   include_once('modele/physique_missions.php');
 
-  // Initialisation sauvegarde saisie
-	if ((!isset($_SESSION['alerts']['already_ref_mission'])   OR $_SESSION['alerts']['already_ref_mission']   != true)
-  AND (!isset($_SESSION['alerts']['objective_not_numeric']) OR $_SESSION['alerts']['objective_not_numeric'] != true)
-  AND (!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']            != true)
-  AND (!isset($_SESSION['alerts']['date_less'])             OR $_SESSION['alerts']['date_less']             != true)
-  AND (!isset($_SESSION['alerts']['missing_mission_file'])  OR $_SESSION['alerts']['missing_mission_file']  != true)
-  AND (!isset($_SESSION['alerts']['file_too_big'])          OR $_SESSION['alerts']['file_too_big']          != true)
-  AND (!isset($_SESSION['alerts']['temp_not_found'])        OR $_SESSION['alerts']['temp_not_found']        != true)
-  AND (!isset($_SESSION['alerts']['wrong_file_type'])       OR $_SESSION['alerts']['wrong_file_type']       != true)
-  AND (!isset($_SESSION['alerts']['wrong_file'])            OR $_SESSION['alerts']['wrong_file']            != true))
-	{
-    unset($_SESSION['save']);
-	}
-
-  if ((isset($_SESSION['alerts']['already_ref_mission'])   AND $_SESSION['alerts']['already_ref_mission']   == true)
-  OR  (isset($_SESSION['alerts']['objective_not_numeric']) AND $_SESSION['alerts']['objective_not_numeric'] == true)
-  OR  (isset($_SESSION['alerts']['wrong_date'])            AND $_SESSION['alerts']['wrong_date']            == true)
-  OR  (isset($_SESSION['alerts']['date_less'])             AND $_SESSION['alerts']['date_less']             == true)
-  OR  (isset($_SESSION['alerts']['missing_mission_file'])  AND $_SESSION['alerts']['missing_mission_file']  == true)
-  OR  (isset($_SESSION['alerts']['file_too_big'])          AND $_SESSION['alerts']['file_too_big']          == true)
-  OR  (isset($_SESSION['alerts']['temp_not_found'])        AND $_SESSION['alerts']['temp_not_found']        == true)
-  OR  (isset($_SESSION['alerts']['wrong_file_type'])       AND $_SESSION['alerts']['wrong_file_type']       == true)
-  OR  (isset($_SESSION['alerts']['wrong_file'])            AND $_SESSION['alerts']['wrong_file']            == true))
-  {
-    $erreurMission = true;
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Initialisation de la sauvegarde en session et récupération erreur
+      $erreurMission = initializeSaveSession();
+
       // Récupération de la liste des missions
       $listeMissions = getMissions();
       break;
 
     case 'goAjouter':
+      // Initialisation de la sauvegarde en session et récupération erreur
+      $erreurMission = initializeSaveSession();
+
       // Initialisation de l'écran d'ajout de mission
       if (isset($erreurMission) AND $erreurMission == true)
       {
@@ -74,6 +53,9 @@
         header('location: missions.php?action=goConsulter');
       else
       {
+        // Initialisation de la sauvegarde en session et récupération erreur
+        $erreurMission = initializeSaveSession();
+
         // Initialisation de l'écran de modification de mission
         if (isset($erreurMission) AND $erreurMission == true)
         {

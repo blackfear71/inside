@@ -3,6 +3,54 @@
   include_once('../../includes/classes/success.php');
   include_once('../../includes/libraries/php/imagethumb.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Erreur
+  function initializeSaveSession($action)
+  {
+    // Initialisations
+    $erreurSuccess = false;
+
+    switch ($action)
+    {
+      case 'goModifier':
+        // On initialise les champs de saisie s'il n'y a pas d'erreur (modification)
+        if (!isset($_GET['error']) OR $_GET['error'] != true)
+          unset($_SESSION['save']);
+        else
+          $erreurSuccess = true;
+        break;
+
+      case 'goConsulter':
+      default:
+        // On initialise les champs de saisie s'il n'y a pas d'erreur (saisie)
+        if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)
+        AND (!isset($_SESSION['alerts']['level_not_numeric'])  OR $_SESSION['alerts']['level_not_numeric']  != true)
+        AND (!isset($_SESSION['alerts']['order_not_numeric'])  OR $_SESSION['alerts']['order_not_numeric']  != true)
+        AND (!isset($_SESSION['alerts']['already_ordered'])    OR $_SESSION['alerts']['already_ordered']    != true)
+        AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true)
+        AND (!isset($_SESSION['alerts']['file_too_big'])       OR $_SESSION['alerts']['file_too_big']       != true)
+        AND (!isset($_SESSION['alerts']['temp_not_found'])     OR $_SESSION['alerts']['temp_not_found']     != true)
+        AND (!isset($_SESSION['alerts']['wrong_file_type'])    OR $_SESSION['alerts']['wrong_file_type']    != true)
+        AND (!isset($_SESSION['alerts']['wrong_file'])         OR $_SESSION['alerts']['wrong_file']         != true))
+        {
+          unset($_SESSION['save']);
+
+          $_SESSION['save']['reference_success']   = '';
+          $_SESSION['save']['level']               = '';
+          $_SESSION['save']['unicity']             = '';
+          $_SESSION['save']['order_success']       = '';
+          $_SESSION['save']['title_success']       = '';
+          $_SESSION['save']['description_success'] = '';
+          $_SESSION['save']['limit_success']       = '';
+          $_SESSION['save']['explanation_success'] = '';
+        }
+        break;
+    }
+
+    // Retour
+    return $erreurSuccess;
+  }
+
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Liste des utilisateurs
   function getUsers()
@@ -223,7 +271,7 @@
 
   // METIER : Initialisation champs erreur modification succès
   // RETOUR : Tableau sauvegardé et trié
-  function initModErrSucces($listeSuccess, $sessionListSuccess)
+  function initialisationErreurModificationSucces($listeSuccess, $sessionListSuccess)
   {
     // Récupération des données modifiées
     foreach ($listeSuccess as $success)
