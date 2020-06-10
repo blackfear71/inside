@@ -4,6 +4,30 @@
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/libraries/php/imagethumb.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['quantity_not_numeric']) OR $_SESSION['alerts']['quantity_not_numeric'] != true)
+    AND (!isset($_SESSION['alerts']['file_too_big'])         OR $_SESSION['alerts']['file_too_big']         != true)
+    AND (!isset($_SESSION['alerts']['temp_not_found'])       OR $_SESSION['alerts']['temp_not_found']       != true)
+    AND (!isset($_SESSION['alerts']['wrong_file_type'])      OR $_SESSION['alerts']['wrong_file_type']      != true)
+    AND (!isset($_SESSION['alerts']['wrong_file'])           OR $_SESSION['alerts']['wrong_file']           != true))
+    {
+      unset($_SESSION['save']);
+
+      $_SESSION['save']['year_recipe']           = '';
+      $_SESSION['save']['week_recipe']           = '';
+      $_SESSION['save']['name_recipe']           = '';
+      $_SESSION['save']['ingredients']           = array();
+      $_SESSION['save']['quantites_ingredients'] = array();
+      $_SESSION['save']['unites_ingredients']    = array();
+      $_SESSION['save']['preparation']           = '';
+      $_SESSION['save']['remarks']               = '';
+    }
+  }
+
   // METIER : Récupère les données d'une semaine (N ou N+1)
   // RETOUR : Données semaine
   function getWeek($week, $year)

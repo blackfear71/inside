@@ -24,23 +24,6 @@
   // Modèle de données
   include_once('modele/metier_collector.php');
 
-  // Initialisation sauvegarde saisie
-  if ((!isset($_SESSION['alerts']['wrong_date'])      OR $_SESSION['alerts']['wrong_date']      != true)
-  AND (!isset($_SESSION['alerts']['file_too_big'])    OR $_SESSION['alerts']['file_too_big']    != true)
-  AND (!isset($_SESSION['alerts']['temp_not_found'])  OR $_SESSION['alerts']['temp_not_found']  != true)
-  AND (!isset($_SESSION['alerts']['wrong_file_type']) OR $_SESSION['alerts']['wrong_file_type'] != true)
-  AND (!isset($_SESSION['alerts']['wrong_file'])      OR $_SESSION['alerts']['wrong_file']      != true))
-  {
-    unset($_SESSION['save']);
-
-    $_SESSION['save']['speaker']        = "";
-    $_SESSION['save']['other_speaker']  = "";
-    $_SESSION['save']['date_collector'] = "";
-    $_SESSION['save']['type_collector'] = "";
-    $_SESSION['save']['collector']      = "";
-    $_SESSION['save']['context']        = "";
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
@@ -52,6 +35,9 @@
         header('location: collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none');
       else
       {
+        // Initialisation de la sauvegarde en session
+        initializeSaveSession();
+
         // Lecture des données par le modèle
         $listeUsers = getUsers();
         $minGolden  = getMinGolden($listeUsers);

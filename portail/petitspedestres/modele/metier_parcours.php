@@ -2,6 +2,26 @@
   include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/parcours.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if (!isset($_SESSION['alerts']['erreur_distance']) OR $_SESSION['alerts']['erreur_distance'] != true)
+    {
+      $_SESSION['save_add'] = array('nom'      => '',
+                                    'distance' => '',
+                                    'lieu'     => '',
+                                    'image'    => ''
+                                   );
+      $_SESSION['save_mod'] = array('nom'      => '',
+                                    'distance' => '',
+                                    'lieu'     => '',
+                                    'image'    => ''
+                                   );
+    }
+  }
+
   // Métier : lecture d'un parcours en fonction de son id
   // Renvoie un objet Parcours
   function getParcours ($id)

@@ -21,28 +21,6 @@
   include_once('modele/metier_moviehouse_commun.php');
   include_once('modele/metier_moviehouse.php');
 
-  // Initialisation sauvegarde saisie
-  if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date'] != true)
-  AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
-  {
-    unset($_SESSION['save']);
-
-    $_SESSION['save']['nom_film_saisi']         = "";
-    $_SESSION['save']['date_theater_saisie']    = "";
-    $_SESSION['save']['date_release_saisie']    = "";
-    $_SESSION['save']['trailer_saisi']          = "";
-    $_SESSION['save']['link_saisi']             = "";
-    $_SESSION['save']['poster_saisi']           = "";
-    $_SESSION['save']['synopsis_saisi']         = "";
-    $_SESSION['save']['doodle_saisi']           = "";
-    $_SESSION['save']['date_doodle_saisie']     = "";
-    $_SESSION['save']['time_doodle_saisi']      = "";
-    $_SESSION['save']['hours_doodle_saisies']   = "";
-    $_SESSION['save']['minutes_doodle_saisies'] = "";
-    $_SESSION['save']['restaurant_saisi']       = "";
-    $_SESSION['save']['place_saisie']           = "";
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
@@ -56,6 +34,9 @@
       // Lecture liste des données par le modèle
       else
       {
+        // Initialisation de la sauvegarde en session
+        initializeSaveSession();
+
         $anneeExistante = controlYear($_GET['year']);
         $ongletsYears   = getOnglets();
         $preferences    = getPreferences($_SESSION['user']['identifiant']);

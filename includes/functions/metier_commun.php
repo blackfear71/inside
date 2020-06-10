@@ -39,7 +39,7 @@
 
     // Contrôle administrateur connecté
     if ($_SESSION['index']['connected'] == false)
-      header('location: /inside/index.php');
+      header('location: /inside/index.php?action=goConsulter');
 
     // Mobile
     $_SESSION['index']['mobile'] = false;
@@ -59,7 +59,7 @@
 
     // Contrôle utilisateur connecté
   	if ($_SESSION['index']['connected'] == false)
-      header('location: /inside/index.php');
+      header('location: /inside/index.php?action=goConsulter');
     else
     {
       // Contrôle page accessible mobile

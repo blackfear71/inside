@@ -2,6 +2,50 @@
   include_once('includes/classes/missions.php');
   include_once('includes/classes/profile.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // Initialisation
+    $erreursIndex = array('erreurInscription' => false,
+                          'erreurPassword'    => false
+                         );
+
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if (((!isset($_SESSION['alerts']['too_short'])       OR  $_SESSION['alerts']['too_short']       != true)
+  	AND  (!isset($_SESSION['alerts']['already_exist'])   OR  $_SESSION['alerts']['already_exist']   != true)
+  	AND  (!isset($_SESSION['alerts']['wrong_confirm'])   OR  $_SESSION['alerts']['wrong_confirm']   != true)
+    AND  (!isset($_SESSION['alerts']['wrong_id'])        OR  $_SESSION['alerts']['wrong_id']        != true)
+  	AND  (!isset($_SESSION['alerts']['already_asked'])   OR  $_SESSION['alerts']['already_asked']   != true))
+  	OR    (isset($_SESSION['alerts']['ask_inscription']) AND $_SESSION['alerts']['ask_inscription'] == true)
+    OR    (isset($_SESSION['alerts']['asked'])           AND $_SESSION['alerts']['asked']           == true))
+  	{
+      unset($_SESSION['save']);
+
+  		$_SESSION['save']['identifiant_saisi']               = '';
+      $_SESSION['save']['pseudo_saisi']                    = '';
+      $_SESSION['save']['mot_de_passe_saisi']              = '';
+      $_SESSION['save']['confirmation_mot_de_passe_saisi'] = '';
+      $_SESSION['save']['identifiant_saisi_mdp']           = '';
+  	}
+    else
+    {
+      // Erreur inscription
+      if ((isset($_SESSION['alerts']['too_short'])     AND $_SESSION['alerts']['too_short']     == true)
+      OR  (isset($_SESSION['alerts']['already_exist']) AND $_SESSION['alerts']['already_exist'] == true)
+      OR  (isset($_SESSION['alerts']['wrong_confirm']) AND $_SESSION['alerts']['wrong_confirm'] == true))
+        $erreursIndex['erreurInscription'] = true;
+
+      // Erreur mot de passe
+      if ((isset($_SESSION['alerts']['already_asked']) AND $_SESSION['alerts']['already_asked'] == true)
+      OR  (isset($_SESSION['alerts']['wrong_id'])      AND $_SESSION['alerts']['wrong_id']      == true))
+        $erreursIndex['erreurPassword'] = true;
+    }
+
+    // Retour
+    return $erreursIndex;
+  }
+
   // METIER : Connexion utilisateur
   // RETOUR : Indicateur connexion
   function connectUser($post)
@@ -101,10 +145,10 @@
     $manageCalendars      = 'N';
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['index']['identifiant_saisi']               = $post['trigramme'];
-    $_SESSION['index']['pseudo_saisi']                    = $post['pseudo'];
-    $_SESSION['index']['mot_de_passe_saisi']              = $post['password'];
-    $_SESSION['index']['confirmation_mot_de_passe_saisi'] = $post['confirm_password'];
+    $_SESSION['save']['identifiant_saisi']               = $post['trigramme'];
+    $_SESSION['save']['pseudo_saisi']                    = $post['pseudo'];
+    $_SESSION['save']['mot_de_passe_saisi']              = $post['password'];
+    $_SESSION['save']['confirmation_mot_de_passe_saisi'] = $post['confirm_password'];
 
     // Contrôle trigramme sur 3 caractères
     $control_ok = controleLongueurTrigramme($trigramme);
@@ -164,7 +208,7 @@
     $status      = 'Y';
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['index']['identifiant_saisi_mdp'] = $post['login'];
+    $_SESSION['save']['identifiant_saisi_mdp'] = $post['login'];
 
     // Lectures des données de l'utilisateur
     $user = physiqueUser($identifiant);

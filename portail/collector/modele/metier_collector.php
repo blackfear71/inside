@@ -3,6 +3,28 @@
   include_once('../../includes/classes/collectors.php');
   include_once('../../includes/classes/profile.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['wrong_date'])      OR $_SESSION['alerts']['wrong_date']      != true)
+    AND (!isset($_SESSION['alerts']['file_too_big'])    OR $_SESSION['alerts']['file_too_big']    != true)
+    AND (!isset($_SESSION['alerts']['temp_not_found'])  OR $_SESSION['alerts']['temp_not_found']  != true)
+    AND (!isset($_SESSION['alerts']['wrong_file_type']) OR $_SESSION['alerts']['wrong_file_type'] != true)
+    AND (!isset($_SESSION['alerts']['wrong_file'])      OR $_SESSION['alerts']['wrong_file']      != true))
+    {
+      unset($_SESSION['save']);
+
+      $_SESSION['save']['speaker']        = '';
+      $_SESSION['save']['other_speaker']  = '';
+      $_SESSION['save']['date_collector'] = '';
+      $_SESSION['save']['type_collector'] = '';
+      $_SESSION['save']['collector']      = '';
+      $_SESSION['save']['context']        = '';
+    }
+  }
+
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
   function getUsers()

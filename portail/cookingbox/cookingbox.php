@@ -22,25 +22,6 @@
   // Modèle de données
   include_once('modele/metier_cookingbox.php');
 
-  // Initialisation sauvegarde saisie
-  if ((!isset($_SESSION['alerts']['quantity_not_numeric']) OR $_SESSION['alerts']['quantity_not_numeric'] != true)
-  AND (!isset($_SESSION['alerts']['file_too_big'])         OR $_SESSION['alerts']['file_too_big']         != true)
-  AND (!isset($_SESSION['alerts']['temp_not_found'])       OR $_SESSION['alerts']['temp_not_found']       != true)
-  AND (!isset($_SESSION['alerts']['wrong_file_type'])      OR $_SESSION['alerts']['wrong_file_type']      != true)
-  AND (!isset($_SESSION['alerts']['wrong_file'])           OR $_SESSION['alerts']['wrong_file']           != true))
-  {
-    unset($_SESSION['save']);
-
-    $_SESSION['save']['year_recipe']           = "";
-    $_SESSION['save']['week_recipe']           = "";
-    $_SESSION['save']['name_recipe']           = "";
-    $_SESSION['save']['ingredients']           = array();
-    $_SESSION['save']['quantites_ingredients'] = array();
-    $_SESSION['save']['unites_ingredients']    = array();
-    $_SESSION['save']['preparation']           = "";
-    $_SESSION['save']['remarks']               = "";
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
@@ -50,13 +31,16 @@
         header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
       else
       {
+        // Initialisation de la sauvegarde en session
+        initializeSaveSession();
+
         // Gâteaux semaines n et n + 1
-        $currentWeek    = getWeek(date('W'), date('Y'));
-        $nextWeek       = getWeek(date('W', strtotime('+ 1 week')), date('Y'));
-        $listeUsers     = getUsers();
+        $currentWeek = getWeek(date('W'), date('Y'));
+        $nextWeek    = getWeek(date('W', strtotime('+ 1 week')), date('Y'));
+        $listeUsers  = getUsers();
 
         // Saisie
-        $listeSemaines  = getWeeks($_SESSION['user']['identifiant']);
+        $listeSemaines = getWeeks($_SESSION['user']['identifiant']);
 
         // Recettes
         $anneeExistante = controlYear($_GET['year']);

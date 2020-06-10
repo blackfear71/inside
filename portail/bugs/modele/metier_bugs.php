@@ -2,6 +2,24 @@
   include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/bugs.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['file_too_big'])    OR $_SESSION['alerts']['file_too_big']    != true)
+    AND (!isset($_SESSION['alerts']['temp_not_found'])  OR $_SESSION['alerts']['temp_not_found']  != true)
+    AND (!isset($_SESSION['alerts']['wrong_file_type']) OR $_SESSION['alerts']['wrong_file_type'] != true)
+    AND (!isset($_SESSION['alerts']['wrong_file'])      OR $_SESSION['alerts']['wrong_file']      != true))
+    {
+      unset($_SESSION['save']);
+
+      $_SESSION['save']['subject_bug'] = '';
+      $_SESSION['save']['type_bug']    = '';
+      $_SESSION['save']['content_bug'] = '';
+    }
+  }
+
   // METIER : Lecture liste des bugs/évolutions
   // RETOUR : Tableau des bugs/évolutions
   function getBugs($view, $type)

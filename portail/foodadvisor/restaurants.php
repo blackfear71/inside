@@ -24,37 +24,13 @@
   include_once('modele/physique_foodadvisor_commun.php');
   include_once('modele/physique_restaurants.php');
 
-  // Initialisation sauvegarde saisie
-  if ((!isset($_SESSION['alerts']['wrong_phone_number']) OR $_SESSION['alerts']['wrong_phone_number'] != true)
-  AND (!isset($_SESSION['alerts']['wrong_price_min'])    OR $_SESSION['alerts']['wrong_price_min']    != true)
-  AND (!isset($_SESSION['alerts']['wrong_price_max'])    OR $_SESSION['alerts']['wrong_price_max']    != true)
-  AND (!isset($_SESSION['alerts']['miss_price'])         OR $_SESSION['alerts']['miss_price']         != true)
-  AND (!isset($_SESSION['alerts']['price_max_min'])      OR $_SESSION['alerts']['price_max_min']      != true)
-  AND (!isset($_SESSION['alerts']['file_too_big'])       OR $_SESSION['alerts']['file_too_big']       != true)
-  AND (!isset($_SESSION['alerts']['temp_not_found'])     OR $_SESSION['alerts']['temp_not_found']     != true)
-  AND (!isset($_SESSION['alerts']['wrong_file_type'])    OR $_SESSION['alerts']['wrong_file_type']    != true)
-  AND (!isset($_SESSION['alerts']['wrong_file'])         OR $_SESSION['alerts']['wrong_file']         != true))
-  {
-    unset($_SESSION['save']);
-
-    $_SESSION['save']['name_restaurant']         = "";
-    $_SESSION['save']['prix_min']                = "";
-    $_SESSION['save']['prix_max']                = "";
-    $_SESSION['save']['phone_restaurant']        = "";
-    $_SESSION['save']['types_restaurants']       = "";
-    $_SESSION['save']['description_restaurant']  = "";
-    $_SESSION['save']['location']                = "";
-    $_SESSION['save']['ouverture_restaurant']    = "";
-    $_SESSION['save']['website_restaurant']      = "";
-    $_SESSION['save']['plan_restaurant']         = "";
-    $_SESSION['save']['lafourchette_restaurant'] = "";
-    $_SESSION['save']['saisie_other_location']   = "";
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Initialisation de la sauvegarde en session
+      initializeSaveSession();
+
       // Récupération des lieux
       $listeLieux = getLieux();
 

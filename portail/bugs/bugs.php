@@ -17,23 +17,13 @@
   // Modèle de données
   include_once('modele/metier_bugs.php');
 
-  // Initialisation sauvegarde saisie
-  if ((!isset($_SESSION['alerts']['file_too_big'])    OR $_SESSION['alerts']['file_too_big']    != true)
-  AND (!isset($_SESSION['alerts']['temp_not_found'])  OR $_SESSION['alerts']['temp_not_found']  != true)
-  AND (!isset($_SESSION['alerts']['wrong_file_type']) OR $_SESSION['alerts']['wrong_file_type'] != true)
-  AND (!isset($_SESSION['alerts']['wrong_file'])      OR $_SESSION['alerts']['wrong_file']      != true))
-  {
-    unset($_SESSION['save']);
-
-    $_SESSION['save']['subject_bug'] = "";
-    $_SESSION['save']['type_bug']    = "";
-    $_SESSION['save']['content_bug'] = "";
-  }
-
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Initialisation de la sauvegarde en session
+      initializeSaveSession();
+
       // Lecture liste des données par le modèle
       switch ($_GET['view'])
       {

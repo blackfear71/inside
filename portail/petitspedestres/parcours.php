@@ -23,24 +23,12 @@
   $lectureListe     = false;
   $controlesDonnees = true;
 
-  // Initialisation sauvegarde saisie
-  if (!isset($_SESSION['alerts']['erreur_distance']) OR $_SESSION['alerts']['erreur_distance'] != true)
-  {
-    $_SESSION['save_add'] = array('nom'      => '',
-                                  'distance' => '',
-                                  'lieu'     => '',
-                                  'image'    => ''
-                                 );
-    $_SESSION['save_mod'] = array('nom'      => '',
-                                  'distance' => '',
-                                  'lieu'     => '',
-                                  'image'    => ''
-                                 );
-  }
-
   // EVALUATE TRUE WHEN COI-FCT = 'L0001' PERFORM...
   switch ($_GET['action']){
     case 'liste':
+      // Initialisation de la sauvegarde en session
+      initializeSaveSession();
+
       // Récupération de tous les parcours. Attention, $parcours est un tableau d'objets Parcours
       $parcours = listParcours();
       $parcoursJson = json_encode(convertForJson($parcours));
@@ -48,6 +36,9 @@
       break;
 
     case 'goajouter':
+      // Initialisation de la sauvegarde en session
+      initializeSaveSession();
+
       // On ne fait rien
       $name     = '';
       $dist     = '';
@@ -68,7 +59,12 @@
       if (!isset($_GET['id']) OR empty($_GET['id']))
         header('location: parcours.php?action=liste');
       else
+      {
+        // Initialisation de la sauvegarde en session
+        initializeSaveSession();
+
         $parcours = getParcours($_GET['id']);
+      }
       break;
 
     case 'domodifier':

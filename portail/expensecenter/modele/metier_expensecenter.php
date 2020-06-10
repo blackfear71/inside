@@ -3,6 +3,22 @@
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/expenses.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
+    AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true))
+  	{
+      unset($_SESSION['save']);
+
+  		$_SESSION['save']['price']   = '';
+  		$_SESSION['save']['buyer']   = '';
+  		$_SESSION['save']['comment'] = '';
+  	}
+  }
+
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
   function controlYear($year)

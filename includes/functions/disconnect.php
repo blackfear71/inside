@@ -13,7 +13,7 @@
 	$_SESSION['index']['connected'] = false;
 
 	// Retour sur index.php
-	header('location: /inside/index.php');
+	header('location: /inside/index.php?action=goConsulter');
 
 	exit;
 ?>

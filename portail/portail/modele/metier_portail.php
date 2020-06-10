@@ -447,7 +447,7 @@
             if ($mission->getId() == $ligneMission['id_mission'])
             {
               $idCurrentMission  = $ligneMission['id_mission'];
-              $key_current_mission = $key_session;
+              $keyCurrentMission = $key_session;
             }
             break;
           }
@@ -458,7 +458,7 @@
 
         // Mission > 1 jour (heure OK)
         if (isset($idCurrentMission)                           AND $mission->getId() == $idCurrentMission
-        AND isset($_SESSION['missions'][$keyCurrentMission])   AND !empty($_SESSION['missions'][$key_current_mission])
+        AND isset($_SESSION['missions'][$keyCurrentMission])   AND !empty($_SESSION['missions'][$keyCurrentMission])
         AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
           $nbRestants = count($_SESSION['missions'][$keyCurrentMission]);

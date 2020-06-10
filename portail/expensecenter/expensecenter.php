@@ -21,17 +21,6 @@
   // Modèle de données
   include_once('modele/metier_expensecenter.php');
 
-  // Initialisation sauvegarde saisie
-	if ((!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
-  AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true))
-	{
-    unset($_SESSION['save']);
-
-		$_SESSION['save']['price']   = "";
-		$_SESSION['save']['buyer']   = "";
-		$_SESSION['save']['comment'] = "";
-	}
-
   // Appel métier
   switch ($_GET['action'])
   {
@@ -41,11 +30,14 @@
         header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter');
       else
       {
+        // Initialisation de la sauvegarde en session
+        initializeSaveSession();
+
         // Lecture des données par le modèle
-        $anneeExistante    = controlYear($_GET['year']);
-        $listeUsers        = getUsers();
-        $onglets           = getOnglets();
-        $listeDepenses     = getExpenses($_GET['year']);
+        $anneeExistante = controlYear($_GET['year']);
+        $listeUsers     = getUsers();
+        $onglets        = getOnglets();
+        $listeDepenses  = getExpenses($_GET['year']);
       }
       break;
 

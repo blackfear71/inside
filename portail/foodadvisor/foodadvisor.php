@@ -118,7 +118,7 @@
       deleteSolo($_SESSION['user']['identifiant']);
       break;
 
-    case "doReserver":
+    case 'doReserver':
       // Insertion réservation
       insertReservation($_POST, $_SESSION['user']['identifiant']);
       break;
@@ -149,7 +149,7 @@
       insertChoicesMobile($_POST, $isSolo, $_SESSION['user']['identifiant']);
       break;
 
-    case "doModifier":
+    case 'doModifier':
       // Modification d'un choix
       updateChoice($_POST, $_SESSION['user']['identifiant']);
       break;
@@ -354,7 +354,7 @@
     case 'doDeterminer':
     case 'doSolo':
     case 'doSupprimerSolo':
-    case "doReserver":
+    case 'doReserver':
     case 'doAnnulerReserver':
     case 'doComplet':
     case 'doAjouter':
@@ -375,7 +375,7 @@
     case 'doDeterminer':
     case 'doSolo':
     case 'doSupprimerSolo':
-    case "doReserver":
+    case 'doReserver':
     case 'doAnnulerReserver':
     case 'doComplet':
     case 'doAjouter':
