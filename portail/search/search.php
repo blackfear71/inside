@@ -24,11 +24,13 @@
   switch ($_GET['action'])
   {
     case 'doSearch':
-      $_SESSION['save']['search'] = $_POST['text_search'];
+      // Initialisation de la sauvegarde en session
+      initializeSaveSearch();
       break;
 
     case 'goSearch':
-      $resultats = getSearch($_SESSION['save']['search']);
+      // Récupération des résultats de recherche
+      $resultats = getSearch();
       break;
 
     default:

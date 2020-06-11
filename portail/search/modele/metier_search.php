@@ -5,10 +5,18 @@
   include_once('../../includes/classes/parcours.php');
   include_once('../../includes/classes/missions.php');
 
+  // METIER : Initialise la sauvegarde en session de la recherche
+  // RETOUR : Aucun
+  function initializeSaveSearch()
+  {
+    $_SESSION['save']['search'] = $_POST['text_search'];
+  }
+
   // METIER : Recherche dans les bases de données
   // RETOUR : Tableau des résultats par catégorie
-  function getSearch($search)
+  function getSearch()
   {
+    // Initialisations
     $results    = array();
     $results_MH = array();
     $results_FA = array();
@@ -19,7 +27,8 @@
     $nb_PP      = 0;
     $nb_MI      = 0;
 
-    $recherche  = htmlspecialchars($search);
+    // Récupération des données
+    $recherche = htmlspecialchars($_SESSION['save']['search']);
 
     if (!empty($recherche))
     {

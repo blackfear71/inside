@@ -271,19 +271,19 @@
 
   // METIER : Initialisation champs erreur modification succès
   // RETOUR : Tableau sauvegardé et trié
-  function initialisationErreurModificationSucces($listeSuccess, $sessionListSuccess)
+  function initialisationErreurModificationSucces($listeSuccess)
   {
     // Récupération des données modifiées
     foreach ($listeSuccess as $success)
     {
-      $success->setLevel($sessionListSuccess['level'][$success->getId()]);
-      $success->setOrder_success($sessionListSuccess['order_success'][$success->getId()]);
-      $success->setDefined($sessionListSuccess['defined'][$success->getId()]);
-      $success->setUnicity($sessionListSuccess['unicity'][$success->getId()]);
-      $success->setTitle($sessionListSuccess['title'][$success->getId()]);
-      $success->setDescription($sessionListSuccess['description'][$success->getId()]);
-      $success->setLimit_success($sessionListSuccess['limit_success'][$success->getId()]);
-      $success->setExplanation($sessionListSuccess['explanation'][$success->getId()]);
+      $success->setLevel($_SESSION['save']['save_success']['level'][$success->getId()]);
+      $success->setOrder_success($_SESSION['save']['save_success']['order_success'][$success->getId()]);
+      $success->setDefined($_SESSION['save']['save_success']['defined'][$success->getId()]);
+      $success->setUnicity($_SESSION['save']['save_success']['unicity'][$success->getId()]);
+      $success->setTitle($_SESSION['save']['save_success']['title'][$success->getId()]);
+      $success->setDescription($_SESSION['save']['save_success']['description'][$success->getId()]);
+      $success->setLimit_success($_SESSION['save']['save_success']['limit_success'][$success->getId()]);
+      $success->setExplanation($_SESSION['save']['save_success']['explanation'][$success->getId()]);
     }
 
     // Retour

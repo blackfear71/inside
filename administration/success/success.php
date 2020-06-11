@@ -41,7 +41,7 @@
 
 			// Sauvegarde des données saisies en cas d'erreur
 			if ($erreurSuccess == true)
-        $listeSuccess = initialisationErreurModificationSucces($listeSuccess, $_SESSION['save']['save_success']);
+        $listeSuccess = initialisationErreurModificationSucces($listeSuccess);
       break;
 
     case 'doAjouter':
