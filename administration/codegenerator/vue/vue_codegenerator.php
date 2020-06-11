@@ -44,7 +44,8 @@
           /* Aide au développement d'une nouvelle page */
           /*********************************************/
           echo '<div class="zone_generator_left margin_right_20">';
-            echo '<div class="titre_section"><img src="../../includes/icons/admin/informations_grey.png" alt="informations_grey" class="logo_titre_section" /><div class="texte_titre_section">Aide au développement d\'une nouvelle page</div></div>';
+            // Web
+            echo '<div class="titre_section"><img src="../../includes/icons/admin/informations_grey.png" alt="informations_grey" class="logo_titre_section" /><div class="texte_titre_section">Aide au développement d\'une nouvelle page (web)</div></div>';
 
             echo '<div class="explications_generator">';
               echo 'Lors du développement d\'une nouvelle section, il est impératif de suivre certains points :';
@@ -60,6 +61,17 @@
                 echo '<li>Si c\'est une page utilisateur, rajouter la page dans la <strong>liste des pages éligibles aux missions</strong> (fonction generateMissions() dans metier_commun.php)</li>';
                 echo '<li>Gérer la nouvelle page dans la <strong>section des logs</strong> (modifier les 2 fonctions getCategories())</li>';
                 echo '<li>Mettre à jour le fichier <strong>readme.md</strong> si besoin (pour GitHub)</li>';
+              echo '</ul>';
+            echo '</div>';
+
+            // Mobile
+            echo '<div class="titre_section"><img src="../../includes/icons/admin/mobile_grey.png" alt="mobile_grey" class="logo_titre_section" /><div class="texte_titre_section">Aide au développement d\'une nouvelle page (mobile)</div></div>';
+
+            echo '<div class="explications_generator">';
+              echo 'Les développement mobiles reprennent les règles du développement web. Les contrôleurs et les métiers sont communs, seule la vue est spécifique pour lui adapter un style particulier. Certains points spécifiques sont à suivre :';
+
+              echo '<ul>';
+                echo '<li>Lors de l\'ajout d\'une nouvelle section, <strong>celle-ci doit être autorisée</strong> dans la fonction isAccessibleMobile() de metier_commun.php.</li>';
               echo '</ul>';
             echo '</div>';
           echo '</div>';
