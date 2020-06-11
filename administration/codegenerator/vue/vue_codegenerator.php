@@ -71,7 +71,10 @@
               echo 'Les développements mobiles reprennent les règles du développement web. Les contrôleurs et les métiers sont communs, seule la vue est spécifique pour lui adapter un style particulier. Certains points particuliers sont à suivre :';
 
               echo '<ul>';
-                echo '<li>Lors de l\'ajout d\'une nouvelle section, <strong>celle-ci doit être autorisée</strong> dans la fonction isAccessibleMobile() de metier_commun.php.</li>';
+                echo '<li>Lors de l\'ajout d\'une nouvelle section, celle-ci <strong>doit être autorisée</strong> dans la fonction isAccessibleMobile() de metier_commun.php</li>';
+                echo '<li>Débloquer la section dans <strong>le portail</strong> dans la fonction getPortail() de metier_portail.php</li>';
+                echo '<li>Ajouter un lien vers la section dans <strong>le menu latéral</strong> de gauche (aside_mobile.php)</li>';
+                echo '<li>Ajouter du contenu pour <strong>Celsius</strong> dans celsius.php</li>';
               echo '</ul>';
             echo '</div>';
           echo '</div>';
