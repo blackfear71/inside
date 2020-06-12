@@ -33,6 +33,7 @@
 
     $req->closeCursor();
 
+    // Retour
     return $log;
   }
 
@@ -49,18 +50,19 @@
     while ($data = $req->fetch())
     {
       if ($data['date_deb'] == $data['date_fin'])
-        $myMission = array('id_mission' => $data['id'], 'one_day' => 'O');
+        $mission = array('id_mission' => $data['id'], 'one_day' => 'O');
       elseif (date("Ymd") != $data['date_fin'] AND date("Ymd") == $data['date_deb'])
-        $myMission = array('id_mission' => $data['id'], 'one_day' => 'F');
+        $mission = array('id_mission' => $data['id'], 'one_day' => 'F');
       elseif (date("Ymd") != $data['date_deb'] AND date("Ymd") == $data['date_fin'])
-        $myMission = array('id_mission' => $data['id'], 'one_day' => 'L');
+        $mission = array('id_mission' => $data['id'], 'one_day' => 'L');
       else
-        $myMission = array('id_mission' => $data['id'], 'one_day' => 'N');
+        $mission = array('id_mission' => $data['id'], 'one_day' => 'N');
 
-      array_push($oneDayMissions, $myMission);
+      array_push($oneDayMissions, $mission);
     }
     $req->closeCursor();
 
+    // Retour
     return $oneDayMissions;
   }
 
@@ -88,6 +90,7 @@
 
     $req->closeCursor();
 
+    // Retour
     return $log;
   }
 
@@ -119,6 +122,7 @@
 
     $req->closeCursor();
 
+    // Retour
     return $log;
   }
 
@@ -146,6 +150,7 @@
 
     $req->closeCursor();
 
+    // Retour
     return $log;
   }
 
@@ -291,6 +296,7 @@
       $req->closeCursor();
     }
 
+    // Retour
     return $log;
   }
 
@@ -353,22 +359,22 @@
       $req2->closeCursor();
 
       // On construit un tableau des utilisateurs
-      $myUser = array('id'          => $data1['id'],
+      $user = array('id'          => $data1['id'],
                       'identifiant' => $data1['identifiant'],
                       'bilan'       => $bilan,
                      );
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, $myUser);
+      array_push($listeUsers, $user);
     }
     $req1->closeCursor();
 
     // Mise à jour des utilisateurs
-    foreach ($listeUsers as $user)
+    foreach ($listeUsers as $userBilan)
     {
-      $req4 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $user['identifiant'] . '"');
+      $req4 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $userBilan['identifiant'] . '"');
       $req4->execute(array(
-        'expenses' => $user['bilan']
+        'expenses' => $userBilan['bilan']
       ));
       $req4->closeCursor();
 
@@ -376,6 +382,7 @@
       $log['status'] = 'OK';
     }
 
+    // Retour
     return $log;
   }
 
@@ -436,39 +443,39 @@
 
     // Ouverture / création fichier
     if ($type_log == 'j')
-      $myLog = fopen('logs/daily/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
+      $log = fopen('logs/daily/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
     elseif ($type_log == 'h')
-      $myLog = fopen('logs/weekly/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
+      $log = fopen('logs/weekly/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
 
     // On repositionne le curseur du fichier au début
-    fseek($myLog, 0);
+    fseek($log, 0);
 
     // On écrit dans le fichier
-    fputs($myLog, $titre_log);
-    fputs($myLog, "\r\n");
-    fputs($myLog, $exe_log);
-    fputs($myLog, "\r\n");
-    fputs($myLog, $date_log);
-    fputs($myLog, "\r\n");
-    fputs($myLog, $etat_log);
-    fputs($myLog, "\r\n");
-    fputs($myLog, $duree_log);
-    fputs($myLog, "\r\n");
+    fputs($log, $titre_log);
+    fputs($log, "\r\n");
+    fputs($log, $exe_log);
+    fputs($log, "\r\n");
+    fputs($log, $date_log);
+    fputs($log, "\r\n");
+    fputs($log, $etat_log);
+    fputs($log, "\r\n");
+    fputs($log, $duree_log);
+    fputs($log, "\r\n");
     if (!empty($etat_trt))
     {
       foreach ($etat_trt as $trt)
       {
-        fputs($myLog, "\r\n");
+        fputs($log, "\r\n");
         $nom_trt    = $trt['trt'];
         $statut_trt = "## Status....................." . $trt['status'];
-        fputs($myLog, $nom_trt);
-        fputs($myLog, "\r\n");
-        fputs($myLog, $statut_trt);
-        fputs($myLog, "\r\n");
+        fputs($log, $nom_trt);
+        fputs($log, "\r\n");
+        fputs($log, $statut_trt);
+        fputs($log, "\r\n");
       }
     }
 
     // Fermeture fichier
-    fclose($myLog);
+    fclose($log);
   }
 ?>

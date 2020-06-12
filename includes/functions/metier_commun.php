@@ -246,20 +246,21 @@
   // RETOUR : Objets mission
   function getMissionsToGenerate()
   {
-    $missions  = array();
-    $date_jour = date('Ymd');
+    $listeMissions = array();
+    $date_jour     = date('Ymd');
 
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin ORDER BY date_deb ASC');
     while ($donnees = $reponse->fetch())
     {
-      $myMission = Mission::withData($donnees);
-      array_push($missions, $myMission);
+      $mission = Mission::withData($donnees);
+      array_push($listeMissions, $mission);
     }
     $reponse->closeCursor();
 
-    return $missions;
+    // Retour
+    return $listeMissions;
   }
 
   // Contrôle mission déjà complétée
@@ -297,52 +298,51 @@
   // RETOUR : Tableau contexte
   function generateMissions($nb, $mission, $key)
   {
-    $missionButtons            = array();
+    $listeBoutonsMission        = array();
 
-    $listPages                 = array('/inside/portail/bugs/bugs.php',
-                                       '/inside/portail/calendars/calendars.php',
-                                       '/inside/portail/changelog/changelog.php',
-                                       '/inside/portail/collector/collector.php',
-                                       '/inside/portail/cookingbox/cookingbox.php',
-                                       //'/inside/portail/eventmanager/eventmanager.php',
-                                       '/inside/portail/expensecenter/expensecenter.php',
-                                       '/inside/portail/foodadvisor/foodadvisor.php',
-                                       '/inside/portail/foodadvisor/restaurants.php',
-                                       '/inside/portail/ideas/ideas.php',
-                                       '/inside/portail/missions/missions.php',
-                                       '/inside/portail/missions/details.php',
-                                       '/inside/portail/moviehouse/details.php',
-                                       '/inside/portail/moviehouse/mailing.php',
-                                       '/inside/portail/moviehouse/moviehouse.php',
-                                       '/inside/portail/notifications/notifications.php',
-                                       '/inside/portail/petitspedestres/parcours.php',
-                                       '/inside/portail/portail/portail.php',
-                                       '/inside/portail/profil/profil.php',
-                                       '/inside/portail/search/search.php'
-                                      );
-    $listZonesCompletes        = array('header',
-                                       'footer',
-                                       'article'
-                                      );
-    $listPositionsHorizontales = array('left',
-                                       'right',
-                                       'middle',
-                                      );
-    $listPositionsVerticales   = array('top',
-                                       'bottom',
-                                       'middle'
-                                      );
-    $listPositionsArticle      = array('top_left',
-                                       'top_right',
-                                       'middle_left',
-                                       'middle_right',
-                                       'bottom_left',
-                                       'bottom_right',
-                                      );
+    $listePages                 = array('/inside/portail/bugs/bugs.php',
+                                        '/inside/portail/calendars/calendars.php',
+                                        '/inside/portail/changelog/changelog.php',
+                                        '/inside/portail/collector/collector.php',
+                                        '/inside/portail/cookingbox/cookingbox.php',
+                                        //'/inside/portail/eventmanager/eventmanager.php',
+                                        '/inside/portail/expensecenter/expensecenter.php',
+                                        '/inside/portail/foodadvisor/foodadvisor.php',
+                                        '/inside/portail/foodadvisor/restaurants.php',
+                                        '/inside/portail/ideas/ideas.php',
+                                        '/inside/portail/missions/missions.php',
+                                        '/inside/portail/missions/details.php',
+                                        '/inside/portail/moviehouse/details.php',
+                                        '/inside/portail/moviehouse/mailing.php',
+                                        '/inside/portail/moviehouse/moviehouse.php',
+                                        '/inside/portail/notifications/notifications.php',
+                                        '/inside/portail/petitspedestres/parcours.php',
+                                        '/inside/portail/portail/portail.php',
+                                        '/inside/portail/profil/profil.php',
+                                        '/inside/portail/search/search.php'
+                                       );
+
+    $listeZonesCompletes        = array('header',
+                                        'footer',
+                                        'article'
+                                       );
+
+    $listePositionsHorizontales = array('left',
+                                        'right',
+                                        'middle',
+                                       );
+
+    $listePositionsArticle      = array('top_left',
+                                        'top_right',
+                                        'middle_left',
+                                        'middle_right',
+                                        'bottom_left',
+                                        'bottom_right',
+                                       );
 
     for ($i = 0; $i < $nb; $i++)
     {
-      $myMissionButtons = array();
+      $boutonsMission = array();
 
       // Id mission
       $id_mission = $mission->getId();
@@ -354,22 +354,22 @@
       $ref_mission = $i;
 
       // Page
-      $page = $listPages[array_rand($listPages)];
+      $page = $listePages[array_rand($listePages)];
 
       // Zone
-      $zone = $listZonesCompletes[array_rand($listZonesCompletes)];
+      $zone = $listeZonesCompletes[array_rand($listeZonesCompletes)];
 
       // Positions
       switch ($zone)
       {
         case 'article':
-          $position = $listPositionsArticle[array_rand($listPositionsArticle)];
+          $position = $listePositionsArticle[array_rand($listePositionsArticle)];
           break;
 
         case 'header':
         case 'nav':
         case 'footer':
-          $position = $listPositionsHorizontales[array_rand($listPositionsHorizontales)];
+          $position = $listePositionsHorizontales[array_rand($listePositionsHorizontales)];
           break;
 
         default:
@@ -430,27 +430,28 @@
       else
         $classe = '';
 
-      $myMissionButtons = array('id_mission'  => $id_mission,
-                                'reference'   => $reference,
-                                'ref_mission' => $ref_mission,
-                                'key_mission' => $key,
-                                'page'        => $page,
-                                'zone'        => $zone,
-                                'position'    => $position,
-                                'icon'        => $icone,
-                                'class'       => $classe
-                               );
+      $boutonsMission = array('id_mission'  => $id_mission,
+                              'reference'   => $reference,
+                              'ref_mission' => $ref_mission,
+                              'key_mission' => $key,
+                              'page'        => $page,
+                              'zone'        => $zone,
+                              'position'    => $position,
+                              'icon'        => $icone,
+                              'class'       => $classe
+                             );
 
-      $duplicate = controlGeneratedMission($missionButtons, $myMissionButtons);
+      $duplicate = controlGeneratedMission($listeBoutonsMission, $boutonsMission);
 
       // Si mission non dupliquée alors on l'insère dans le tableau, sinon on revient une occurence en arrière pour la regénérer
       if ($duplicate == false)
-        array_push($missionButtons, $myMissionButtons);
+        array_push($listeBoutonsMission, $boutonsMission);
       else
         $i--;
     }
 
-    return $missionButtons;
+    // Retour
+    return $listeBoutonsMission;
   }
 
   // Contrôle missions en double
@@ -482,7 +483,7 @@
   // RETOUR : Tableau chemins & types de thème
   function setTheme()
   {
-    $theme = array();
+    $tableauTheme = array();
 
     global $bdd;
 
@@ -495,7 +496,7 @@
     if ($req1->rowCount() > 0)
     {
       $theme_present = true;
-      $myTheme       = Theme::withData($data1);
+      $theme         = Theme::withData($data1);
     }
 
     $req1->closeCursor();
@@ -503,21 +504,21 @@
     // Thème mission si en cours
     if ($theme_present == true)
     {
-      if ($myTheme->getLogo() == "Y")
+      if ($theme->getLogo() == "Y")
       {
-        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                       'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
-                      );
+        $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
+                              'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
+                              'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
+                              'logo'       => '/inside/includes/images/themes/logos/' . $theme->getReference() . '_l.png'
+                             );
       }
       else
       {
-        $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                       'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                       'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                       'logo'       => NULL
-                      );
+        $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
+                              'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
+                              'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
+                              'logo'       => NULL
+                             );
       }
     }
     // Thème personnalisé
@@ -536,23 +537,23 @@
 
         if ($req3->rowCount() > 0)
         {
-          $myTheme = Theme::withData($data3);
+          $theme = Theme::withData($data3);
 
-          if ($myTheme->getLogo() == "Y")
+          if ($theme->getLogo() == "Y")
           {
-            $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                           'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                           'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                           'logo'       => '/inside/includes/images/themes/logos/' . $myTheme->getReference() . '_l.png'
-                          );
+            $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
+                                  'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
+                                  'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
+                                  'logo'       => '/inside/includes/images/themes/logos/' . $theme->getReference() . '_l.png'
+                                 );
           }
           else
           {
-            $theme = array('background' => '/inside/includes/images/themes/backgrounds/' . $myTheme->getReference() . '.png',
-                           'header'     => '/inside/includes/images/themes/headers/' . $myTheme->getReference() . '_h.png',
-                           'footer'     => '/inside/includes/images/themes/footers/' . $myTheme->getReference() . '_f.png',
-                           'logo'       => NULL
-                          );
+            $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
+                                  'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
+                                  'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
+                                  'logo'       => NULL
+                                 );
           }
         }
 
@@ -560,7 +561,7 @@
       }
     }
 
-    return $theme;
+    return $tableauTheme;
   }
 
   // Formatage titres niveaux (succès)

@@ -21,9 +21,9 @@
 
     while ($data = $req->fetch())
     {
-      $myDatas = Class::withData($data);
+      $objet = Class::withData($data);
 
-      array_push($retour, $myDatas);
+      array_push($retour, $objet);
     }
 
     $req->closeCursor();

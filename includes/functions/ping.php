@@ -27,7 +27,7 @@
 
     // Lecture des utilisateurs et statut de connexion
     case 'getPings':
-      $listUsers = array();
+      $listeUsers = array();
 
       $req = $bdd->query('SELECT id, identifiant, avatar, ping, pseudo FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
       while ($data = $req->fetch())
@@ -35,19 +35,19 @@
         // Récupération des données en base
         $currentUser = Profile::withData($data);
 
-        $myUser = array('identifiant'          => $currentUser->getIdentifiant(),
-                        'pseudo'               => $currentUser->getPseudo(),
-                        'avatar'               => $currentUser->getAvatar(),
-                        'ping'                 => $currentUser->getPing(),
-                        'connected'            => $currentUser->getConnected(),
-                        'date_last_connection' => '',
-                        'hour_last_connection' => ''
-                       );
+        $user = array('identifiant'          => $currentUser->getIdentifiant(),
+                      'pseudo'               => $currentUser->getPseudo(),
+                      'avatar'               => $currentUser->getAvatar(),
+                      'ping'                 => $currentUser->getPing(),
+                      'connected'            => $currentUser->getConnected(),
+                      'date_last_connection' => '',
+                      'hour_last_connection' => ''
+                     );
 
         // Extraction date et heure ping
-        if (!empty($myUser['ping']))
+        if (!empty($user['ping']))
         {
-          list($date, $time, $rand)        = explode('_', $myUser['ping']);
+          list($date, $time, $rand)        = explode('_', $user['ping']);
           list($year, $month, $day)        = explode('-', $date);
           list($hour, $minutes, $secondes) = explode('-', $time);
           $last_ping = $year . $month . $day . $hour . $minutes . $secondes;
@@ -57,35 +57,35 @@
 
           // Détermination statut connexion
           if ($last_ping < $limite)
-            $myUser['connected'] = false;
+            $user['connected'] = false;
           else
-            $myUser['connected'] = true;
+            $user['connected'] = true;
 
           // Date et heure de dernière connexion
-          $myUser['date_last_connection'] = formatDateForDisplay($year . $month . $day);
-          $myUser['hour_last_connection'] = formatTimeForDisplayLight($hour . $minutes . $secondes);
+          $user['date_last_connection'] = formatDateForDisplay($year . $month . $day);
+          $user['hour_last_connection'] = formatTimeForDisplayLight($hour . $minutes . $secondes);
         }
         else
-          $myUser['connected'] = false;
+          $user['connected'] = false;
 
         // On ajoute la ligne au tableau
-        array_push($listUsers, $myUser);
+        array_push($listeUsers, $user);
       }
       $req->closeCursor();
 
       // Tri sur statut connexion puis identifiant
-      foreach ($listUsers as $user)
+      foreach ($listeUsers as $userTri)
       {
-        $tri_statut[]      = $user['connected'];
-        $tri_identifiant[] = $user['identifiant'];
+        $tri_statut[]      = $userTri['connected'];
+        $tri_identifiant[] = $userTri['identifiant'];
       }
 
-      array_multisort($tri_statut, SORT_DESC, $tri_identifiant, SORT_ASC, $listUsers);
+      array_multisort($tri_statut, SORT_DESC, $tri_identifiant, SORT_ASC, $listeUsers);
 
       // Récupération de la sortie
-      $listUsersJson = json_encode($listUsers);
+      $listeUsersJson = json_encode($listeUsers);
 
-      echo $listUsersJson;
+      echo $listeUsersJson;
       break;
 
     default:

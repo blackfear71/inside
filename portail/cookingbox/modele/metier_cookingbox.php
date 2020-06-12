@@ -32,7 +32,7 @@
   // RETOUR : Données semaine
   function getWeek($week, $year)
   {
-    $myWeek = new WeekCake();
+    $gateauSemaine = new WeekCake();
 
     global $bdd;
 
@@ -42,19 +42,19 @@
 
     if ($req1->rowCount() > 0)
     {
-      $myWeek = WeekCake::withData($data1);
+      $gateauSemaine = WeekCake::withData($data1);
 
       // Données utilisateur
-      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myWeek->getIdentifiant() . '"');
+      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $gateauSemaine->getIdentifiant() . '"');
       $data2 = $req2->fetch();
-      $myWeek->setPseudo($data2['pseudo']);
-      $myWeek->setAvatar($data2['avatar']);
+      $gateauSemaine->setPseudo($data2['pseudo']);
+      $gateauSemaine->setAvatar($data2['avatar']);
       $req2->closeCursor();
     }
 
     $req1->closeCursor();
 
-    return $myWeek;
+    return $gateauSemaine;
   }
 
   // METIER : Lecture liste des utilisateurs
@@ -280,30 +280,31 @@
   // RETOUR : Liste des recettes
   function getRecipes($year)
   {
-    $listRecipes = array();
+    $listeRecettes = array();
 
     global $bdd;
 
     $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND picture != "" ORDER BY week DESC');
     while ($data1 = $req1->fetch())
     {
-      $myRecipe = WeekCake::withData($data1);
+      $recette = WeekCake::withData($data1);
 
       // Données utilisateur
-      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myRecipe->getIdentifiant() . '"');
+      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $recette->getIdentifiant() . '"');
       $data2 = $req2->fetch();
 
-      $myRecipe->setPseudo($data2['pseudo']);
-      $myRecipe->setAvatar($data2['avatar']);
+      $recette->setPseudo($data2['pseudo']);
+      $recette->setAvatar($data2['avatar']);
 
       $req2->closeCursor();
 
       // On ajoute la ligne au tableau
-      array_push($listRecipes, $myRecipe);
+      array_push($listeRecettes, $recette);
     }
     $req1->closeCursor();
 
-    return $listRecipes;
+    // Retour
+    return $listeRecettes;
   }
 
   // METIER : Converstion du tableau d'objet des recettes en tableau simple pour JSON
@@ -311,7 +312,7 @@
   function convertForJson($recipes)
   {
     // On transforme les objets en tableau pour envoyer au Javascript
-    $listRecipesToConvert = array();
+    $listeRecettesAConvertir = array();
 
     foreach ($recipes as $recipe)
     {
@@ -329,10 +330,11 @@
                                  'tips'        => $recipe->getTips()
                                 );
 
-      $listRecipesToConvert[$recipe->getId()] = $recetteAConvertir;
+      $listeRecettesAConvertir[$recipe->getId()] = $recetteAConvertir;
     }
 
-    return $listRecipesToConvert;
+    // Retour
+    return $listeRecettesAConvertir;
   }
 
   // METIER : Insère une recette (mise à jour)
@@ -457,12 +459,12 @@
           imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
 
           // Mise à jour de l'enregistrement concerné
-          $myRecipe = array('name'        => $name_recipe,
-                            'picture'     => $new_name,
-                            'ingredients' => $ingredients,
-                            'recipe'      => $recipe,
-                            'tips'        => $tips
-                           );
+          $recette = array('name'        => $name_recipe,
+                           'picture'     => $new_name,
+                           'ingredients' => $ingredients,
+                           'recipe'      => $recipe,
+                           'tips'        => $tips
+                          );
 
           $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
                                                         picture     = :picture,
@@ -472,7 +474,7 @@
                                                   WHERE year        = "' . $year_recipe . '"
                                                     AND week        = "' . $week_recipe . '"
                                                     AND identifiant = "' . $user . '"');
-          $req2->execute($myRecipe);
+          $req2->execute($recette);
           $req2->closeCursor();
 
           // Lecture Id recette
@@ -594,12 +596,12 @@
       if ($control_ok == true)
       {
         // Mise à jour de l'enregistrement concerné
-        $myRecipe = array('name'        => $name_recipe,
-                          'picture'     => $new_name,
-                          'ingredients' => $ingredients,
-                          'recipe'      => $recipe,
-                          'tips'        => $tips
-                         );
+        $recette = array('name'        => $name_recipe,
+                         'picture'     => $new_name,
+                         'ingredients' => $ingredients,
+                         'recipe'      => $recipe,
+                         'tips'        => $tips
+                        );
 
         $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
                                                       picture     = :picture,
@@ -609,13 +611,14 @@
                                                 WHERE year        = "' . $year_recipe . '"
                                                   AND week        = "' . $week_recipe . '"
                                                   AND identifiant = "' . $user . '"');
-        $req2->execute($myRecipe);
+        $req2->execute($recette);
         $req2->closeCursor();
 
         $_SESSION['alerts']['recipe_updated'] = true;
       }
     }
 
+    // Retour
     return $idRecipe;
   }
 

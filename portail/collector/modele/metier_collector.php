@@ -30,7 +30,7 @@
   function getUsers()
   {
     // Initialisation tableau d'utilisateurs
-    $listUsers = array();
+    $listeUsers = array();
 
     global $bdd;
 
@@ -41,20 +41,21 @@
       $user = Profile::withData($donnees);
 
       // Création tableau de correspondance identifiant / pseudo / avatar
-      $listUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
-                                                  'avatar' => $user->getAvatar()
-                                                 );
+      $listeUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
+                                                   'avatar' => $user->getAvatar()
+                                                  );
     }
     $reponse->closeCursor();
 
-    return $listUsers;
+    // Retour
+    return $listeUsers;
   }
 
   // METIER : Calcule le pourcentage de votes nécessaire pour devenir top culte
   // RETOUR : Minimum pour être top culte
-  function getMinGolden($listUsers)
+  function getMinGolden($listeUsers)
   {
-    $nb_users   = count($listUsers);
+    $nb_users   = count($listeUsers);
     $min_golden = floor(($nb_users * 75) / 100);
 
     return $min_golden;
@@ -137,10 +138,10 @@
 
   // METIER : Lecture des phrases cultes
   // RETOUR : Liste phrases cultes
-  function getCollectors($listUsers, $nb_pages, $min_golden, $page, $identifiant, $tri, $filtre)
+  function getCollectors($listeUsers, $nb_pages, $min_golden, $page, $identifiant, $tri, $filtre)
   {
-    $listCollectors = array();
-    $nb_par_page    = 18;
+    $listeCollectors = array();
+    $nb_par_page     = 18;
 
     // Contrôle dernière page
     if ($page > $nb_pages)
@@ -258,45 +259,46 @@
     while ($donnees = $reponse->fetch())
     {
       // Récupération objet collector
-      $myCollector = Collector::withData($donnees);
+      $collector = Collector::withData($donnees);
 
       // Nombre de votes
-      $myCollector->setNb_votes($donnees['nb_votes']);
+      $collector->setNb_votes($donnees['nb_votes']);
 
       // Pseudo auteur
-      if (isset($listUsers[$myCollector->getAuthor()]))
-        $myCollector->setPseudo_author($listUsers[$myCollector->getAuthor()]['pseudo']);
+      if (isset($listeUsers[$collector->getAuthor()]))
+        $collector->setPseudo_author($listeUsers[$collector->getAuthor()]['pseudo']);
 
       // Pseudo speaker (dont "autre" si besoin)
-      if ($myCollector->getType_speaker() == "other" AND !empty($myCollector->getSpeaker()))
-        $myCollector->setPseudo_speaker($myCollector->getSpeaker());
+      if ($collector->getType_speaker() == "other" AND !empty($collector->getSpeaker()))
+        $collector->setPseudo_speaker($collector->getSpeaker());
       else
       {
-        if (isset($listUsers[$myCollector->getSpeaker()]))
+        if (isset($listeUsers[$collector->getSpeaker()]))
         {
-          $myCollector->setPseudo_speaker($listUsers[$myCollector->getSpeaker()]['pseudo']);
-          $myCollector->setAvatar_speaker($listUsers[$myCollector->getSpeaker()]['avatar']);
+          $collector->setPseudo_speaker($listeUsers[$collector->getSpeaker()]['pseudo']);
+          $collector->setAvatar_speaker($listeUsers[$collector->getSpeaker()]['avatar']);
         }
       }
 
       // Vote utilisateur connecté
-      $reponse2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $myCollector->getId() . ' AND identifiant = "' . $identifiant . '"');
+      $reponse2 = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $collector->getId() . ' AND identifiant = "' . $identifiant . '"');
       $donnees2 = $reponse2->fetch();
 
       if ($reponse2->rowCount() > 0)
-        $myCollector->setVote_user($donnees2['vote']);
+        $collector->setVote_user($donnees2['vote']);
 
       $reponse2->closeCursor();
 
       // Votes tous utilisateurs
-      $myCollector->setVotes(getVotes($myCollector, $listUsers));
+      $collector->setVotes(getVotes($collector, $listeUsers));
 
       // Ajout à la liste
-      array_push($listCollectors, $myCollector);
+      array_push($listeCollectors, $collector);
     }
     $reponse->closeCursor();
 
-    return $listCollectors;
+    // Retour
+    return $listeCollectors;
   }
 
   // METIER : Insertion phrases cultes
@@ -605,7 +607,7 @@
 
   // METIER : Liste des votes par phrase culte
   // RETOUR : Liste des votes
-  function getVotes($collector, $listUsers)
+  function getVotes($collector, $listeUsers)
   {
     $listVotes = array();
 
@@ -615,8 +617,8 @@
     while ($donnees = $reponse->fetch())
     {
       // Récupération pseudo
-      if (isset($listUsers[$donnees['identifiant']]))
-        $pseudo = $listUsers[$donnees['identifiant']]['pseudo'];
+      if (isset($listeUsers[$donnees['identifiant']]))
+        $pseudo = $listeUsers[$donnees['identifiant']]['pseudo'];
       else
         $pseudo = "";
 

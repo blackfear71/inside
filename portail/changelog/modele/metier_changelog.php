@@ -98,7 +98,7 @@
   // RETOUR : Liste des logs
   function getLogs($year, $categories)
   {
-    $listlogs = array();
+    $listeLogs = array();
 
     global $bdd;
 
@@ -106,7 +106,7 @@
     $reponse = $bdd->query('SELECT * FROM change_log WHERE year = "' . $year . '" ORDER BY week DESC');
     while ($donnees = $reponse->fetch())
     {
-      $myLog = ChangeLog::withData($donnees);
+      $log = ChangeLog::withData($donnees);
 
       // Extraction des logs
       $extractLogs = explode(';', $donnees['logs']);
@@ -152,13 +152,13 @@
         }
       }
 
-      $myLog->setLogs($sortedLogs);
+      $log->setLogs($sortedLogs);
 
       // Ajout à la liste des logs
-      array_push($listlogs, $myLog);
+      array_push($listeLogs, $log);
     }
     $reponse->closeCursor();
 
-    return $listlogs;
+    return $listeLogs;
   }
 ?>

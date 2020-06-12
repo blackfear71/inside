@@ -47,7 +47,7 @@
   // RETOUR : Liste des calendriers
   function getCalendars($year)
   {
-    $calendars = array();
+    $listeCalendriers = array();
 
     $listeMois = array('01' => 'Janvier',
                        '02' => 'Fevrier',
@@ -68,19 +68,20 @@
     $reponse = $bdd->query('SELECT * FROM calendars WHERE year = ' . $year . ' AND to_delete != "Y" ORDER BY month DESC, id DESC');
     while ($donnees = $reponse->fetch())
     {
-      $myCalendar = Calendrier::withData($donnees);
+      $calendrier = Calendrier::withData($donnees);
 
-      $fileinfo  = getimagesize("../../includes/images/calendars/" . $myCalendar->getYear() . "/" . $myCalendar->getCalendar());
+      $fileinfo = getimagesize("../../includes/images/calendars/" . $calendrier->getYear() . "/" . $calendrier->getCalendar());
 
-      $myCalendar->setTitle(strtoupper($listeMois[$myCalendar->getMonth()]));
-      $myCalendar->setWidth($fileinfo[0]);
-      $myCalendar->setHeight($fileinfo[1]);
+      $calendrier->setTitle(strtoupper($listeMois[$calendrier->getMonth()]));
+      $calendrier->setWidth($fileinfo[0]);
+      $calendrier->setHeight($fileinfo[1]);
 
-      array_push($calendars, $myCalendar);
+      array_push($listeCalendriers, $calendrier);
     }
     $reponse->closeCursor();
 
-    return $calendars;
+    // Retour
+    return $listeCalendriers;
   }
 
   // METIER : Lecture annexes Calendars
@@ -89,17 +90,17 @@
   {
     global $bdd;
 
-    $annexes = array();
+    $listeAnnexes = array();
 
     $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE to_delete != "Y" ORDER BY id DESC');
     while ($donnees = $reponse->fetch())
     {
-      $myAnnexe = Annexe::withData($donnees);
-      array_push($annexes, $myAnnexe);
+      $annexe = Annexe::withData($donnees);
+      array_push($listeAnnexes, $annexe);
     }
     $reponse->closeCursor();
 
-    return $annexes;
+    return $listeAnnexes;
   }
 
   // METIER : Demande suppression calendrier
