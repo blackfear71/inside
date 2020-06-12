@@ -149,13 +149,13 @@
           private $lieu;
           (url image mais on n'en a pas besoin là)
       */
-      $myParcours = array('id'      => $parcours->getId(),
-                          'nom'     => $parcours->getNom(),
-                          'distance'=> $parcours->getDistance(),
-                          'lieu'    => $parcours->getLieu()
-                         );
+      $parcours = array('id'      => $parcours->getId(),
+                        'nom'     => $parcours->getNom(),
+                        'distance'=> $parcours->getDistance(),
+                        'lieu'    => $parcours->getLieu()
+                       );
 
-      array_push($listeParcoursAConvertir, $myParcours);
+      array_push($listeParcoursAConvertir, $parcours);
     }
 
     return $listeParcoursAConvertir;

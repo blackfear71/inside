@@ -22,10 +22,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $myUser = Profile::withData($data);
+      $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, $myUser);
+      array_push($listeUsers, $user);
     }
 
     $req->closeCursor();

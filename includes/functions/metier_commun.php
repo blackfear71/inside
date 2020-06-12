@@ -157,8 +157,9 @@
     // Contrôle
     if ($_SESSION['index']['mobile'] == true)
     {
-      if ($path != '/inside/portail/portail/portail.php'
-      AND $path != '/inside/portail/foodadvisor/foodadvisor.php')
+      if ($path != '/inside/portail/expensecenter/expensecenter.php'
+      AND $path != '/inside/portail/foodadvisor/foodadvisor.php'
+      AND $path != '/inside/portail/portail/portail.php')
         $isAccessibleMobile = false;
     }
 

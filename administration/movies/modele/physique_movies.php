@@ -22,10 +22,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Movie à partir des données remontées de la bdd
-      $myFilm = Movie::withData($data);
+      $film = Movie::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeFilmsToDelete, $myFilm);
+      array_push($listeFilmsToDelete, $film);
     }
 
     $req->closeCursor();

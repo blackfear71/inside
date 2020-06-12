@@ -38,11 +38,11 @@
       $reponse1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND film LIKE "%' . $recherche . '%" ORDER BY date_theater DESC, film ASC');
       while ($donnees1 = $reponse1->fetch())
       {
-        $myMovie = Movie::withData($donnees1);
+        $movie = Movie::withData($donnees1);
         $nb_MH = $reponse1->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_MH, $myMovie);
+        array_push($results_MH, $movie);
       }
       $reponse1->closeCursor();
 
@@ -50,11 +50,11 @@
       $reponse2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE name LIKE "%' . $recherche . '%" ORDER BY location ASC, name ASC');
       while ($donnees2 = $reponse2->fetch())
       {
-        $myRestaurant = Restaurant::withData($donnees2);
+        $restaurant = Restaurant::withData($donnees2);
         $nb_FA = $reponse2->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_FA, $myRestaurant);
+        array_push($results_FA, $restaurant);
       }
       $reponse2->closeCursor();
 
@@ -62,11 +62,11 @@
       $reponse3 = $bdd->query('SELECT * FROM petits_pedestres_parcours WHERE nom LIKE "%' . $recherche . '%" ORDER BY nom ASC');
       while ($donnees3 = $reponse3->fetch())
       {
-        $myParcours = Parcours::withData($donnees3);
+        $parcours = Parcours::withData($donnees3);
         $nb_PP = $reponse3->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_PP, $myParcours);
+        array_push($results_PP, $parcours);
       }
       $reponse3->closeCursor();
 
@@ -74,11 +74,11 @@
       $reponse4 = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . date("Ymd") . ' AND mission LIKE "%' . $recherche . '%" ORDER BY date_deb DESC, mission ASC');
       while ($donnees4 = $reponse4->fetch())
       {
-        $myMission = Mission::withData($donnees4);
+        $mission = Mission::withData($donnees4);
         $nb_MI = $reponse4->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_MI, $myMission);
+        array_push($results_MI, $mission);
       }
       $reponse4->closeCursor();
 

@@ -9,7 +9,7 @@
   function physiqueListeMissions()
   {
     // Initialisations
-    $missions = array();
+    $listeMissions = array();
 
     // Requête
     global $bdd;
@@ -20,16 +20,16 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Mission à partir des données remontées de la bdd
-      $myMission = Mission::withData($data);
+      $mission = Mission::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($missions, $myMission);
+      array_push($listeMissions, $mission);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $missions;
+    return $listeMissions;
   }
 
   // PHYSIQUE : Lecture des détails d'une mission
@@ -72,14 +72,14 @@
     while ($data = $req->fetch())
     {
       // Récupération des identifiants
-      $myUser = array('identifiant' => $data['identifiant'],
-                      'pseudo'      => '',
-                      'total'       => 0,
-                      'rank'        => 0
-                     );
+      $user = array('identifiant' => $data['identifiant'],
+                    'pseudo'      => '',
+                    'total'       => 0,
+                    'rank'        => 0
+                   );
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, $myUser);
+      array_push($listeUsers, $user);
     }
 
     $req->closeCursor();

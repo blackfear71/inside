@@ -265,7 +265,7 @@
   function getTabStats($listeUsersIns, $listeUsersDes)
   {
     // Statistiques utilisateurs inscrits
-    $statsIns = array();
+    $listeStatsIns = array();
 
     foreach ($listeUsersIns as $userIns)
     {
@@ -285,20 +285,20 @@
       $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userIns->getIdentifiant());
 
       // On génère une ligne du tableau
-      $myStatsIns = array('identifiant'           => $userIns->getIdentifiant(),
-                          'pseudo'                => $userIns->getPseudo(),
-                          'nombreBugsSoumis'      => $nombreBugsSoumis,
-                          'nombreBugsResolus'     => $nombreBugsResolus,
-                          'nombreTheBox'          => $nombreTheBox,
-                          'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
-                          'nombreTheBoxTerminees' => $nombreTheBoxTerminees
-                         );
+      $statsIns = array('identifiant'           => $userIns->getIdentifiant(),
+                        'pseudo'                => $userIns->getPseudo(),
+                        'nombreBugsSoumis'      => $nombreBugsSoumis,
+                        'nombreBugsResolus'     => $nombreBugsResolus,
+                        'nombreTheBox'          => $nombreTheBox,
+                        'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
+                        'nombreTheBoxTerminees' => $nombreTheBoxTerminees
+                       );
 
-      array_push($statsIns, $myStatsIns);
+      array_push($listeStatsIns, $statsIns);
     }
 
     // Statistiques utilisateurs désinscrits
-    $statsDes = array();
+    $listeStatsDes = array();
 
     foreach ($listeUsersDes as $userDes)
     {
@@ -318,7 +318,7 @@
       $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userDes);
 
       // On génère une ligne du tableau
-      $myStatsDes = array('identifiant'           => $userDes,
+      $statsDes = array('identifiant'           => $userDes,
                           'pseudo'                => '',
                           'nombreBugsSoumis'      => $nombreBugsSoumis,
                           'nombreBugsResolus'     => $nombreBugsResolus,
@@ -327,12 +327,13 @@
                           'nombreTheBoxTerminees' => $nombreTheBoxTerminees
                          );
 
-      array_push($statsDes, $myStatsDes);
+      array_push($listeStatsDes, $statsDes);
     }
 
     // Ajout au tableau global
-    $tableauStats = array('inscrits' => $statsIns, 'desinscrits' => $statsDes);
+    $tableauStats = array('inscrits' => $listeStatsIns, 'desinscrits' => $listeStatsDes);
 
+    // Retour
     return $tableauStats;
   }
 
@@ -366,6 +367,7 @@
                                'nombreTheBoxTerminees' => $nombreTheBoxTerminees
                               );
 
+    // Retour
     return $tableauTotalStats;
   }
 

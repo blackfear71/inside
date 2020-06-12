@@ -20,13 +20,13 @@
 
     while ($data = $req->fetch())
     {
-      $myAutorisation = array('identifiant'      => $data['identifiant'],
-                              'pseudo'           => '',
-                              'manage_calendars' => $data['manage_calendars']
-                             );
+      $autorisation = array('identifiant'      => $data['identifiant'],
+                            'pseudo'           => '',
+                            'manage_calendars' => $data['manage_calendars']
+                           );
 
       // On ajoute la ligne au tableau
-      array_push($listeAutorisations, $myAutorisation);
+      array_push($listeAutorisations, $autorisation);
     }
 
     $req->closeCursor();
@@ -104,13 +104,13 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Calendrier à partir des données remontées de la bdd
-      $myCalendar = Calendrier::withData($data);
+      $calendar = Calendrier::withData($data);
 
       // Titre du calendrier
-      $myCalendar->setTitle($listeMois[$myCalendar->getMonth()] . ' ' . $myCalendar->getYear());
+      $calendar->setTitle($listeMois[$calendar->getMonth()] . ' ' . $calendar->getYear());
 
       // On ajoute la ligne au tableau
-      array_push($listeCalendarsToDelete, $myCalendar);
+      array_push($listeCalendarsToDelete, $calendar);
     }
 
     $req->closeCursor();
@@ -137,10 +137,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Annexe à partir des données remontées de la bdd
-      $myAnnexe = Annexe::withData($data);
+      $annexe = Annexe::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeAnnexesToDelete, $myAnnexe);
+      array_push($listeAnnexesToDelete, $annexe);
     }
 
     $req->closeCursor();

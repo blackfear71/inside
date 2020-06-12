@@ -29,36 +29,37 @@
   // RETOUR : Objets mission
   function getMissions()
   {
-    $missions = array();
+    $listeMissions = array();
 
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM missions');
     while ($donnees = $reponse->fetch())
     {
-      $myMission = Mission::withData($donnees);
+      $mission = Mission::withData($donnees);
 
-      if (date('Ymd') < $myMission->getDate_deb() OR (date('Ymd') == $myMission->getDate_deb() AND date('His') < $myMission->getHeure()))
-        $myMission->setStatut('V');
-      elseif (((date('Ymd') == $myMission->getDate_deb() AND date('His') >= $myMission->getHeure()) OR date('Ymd') > $myMission->getDate_deb()) AND date('Ymd') <= $myMission->getDate_fin())
-        $myMission->setStatut('C');
-      elseif (date('Ymd') > $myMission->getDate_fin())
-        $myMission->setStatut('A');
+      if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
+        $mission->setStatut('V');
+      elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
+        $mission->setStatut('C');
+      elseif (date('Ymd') > $mission->getDate_fin())
+        $mission->setStatut('A');
 
-      array_push($missions, $myMission);
+      array_push($listeMissions, $mission);
     }
     $reponse->closeCursor();
 
     // Tri sur statut (V : à venir, C : en cours, A : ancienne)
-    foreach ($missions as $mission)
+    foreach ($listeMissions as $missionTri)
     {
-      $tri_statut[]   = $mission->getStatut();
-      $tri_date_deb[] = $mission->getDate_deb();
+      $tri_statut[]   = $missionTri->getStatut();
+      $tri_date_deb[] = $missionTri->getDate_deb();
     }
 
-    array_multisort($tri_statut, SORT_DESC, $tri_date_deb, SORT_DESC, $missions);
+    array_multisort($tri_statut, SORT_DESC, $tri_date_deb, SORT_DESC, $listeMissions);
 
-    return $missions;
+    // Retour
+    return $listeMissions;
   }
 
   // METIER : Récupération mission spécifique
@@ -90,7 +91,7 @@
   // RETOUR : Objets Profil
   function getParticipants($id)
   {
-    $participants = array();
+    $listeParticipants = array();
 
     global $bdd;
 
@@ -100,15 +101,15 @@
       $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
       $donnees2 = $reponse2->fetch();
 
-      $myParticipant = Profile::withData($donnees2);
+      $participant = Profile::withData($donnees2);
 
       $reponse2->closeCursor();
 
-      array_push($participants, $myParticipant);
+      array_push($listeParticipants, $participant);
     }
     $reponse->closeCursor();
 
-    return $participants;
+    return $listeParticipants;
   }
 
   // METIER : Récupération tableau de l'avancement (quotidien et évènement)
@@ -214,7 +215,7 @@
   // RETOUR : Tableau classement
   function getRankingMission($id, $users)
   {
-    $ranking = array();
+    $rankingUsers = array();
 
     global $bdd;
 
@@ -231,32 +232,32 @@
       }
       $reponse->closeCursor();
 
-      $myRanking = array('identifiant' => $user->getIdentifiant(),
-                         'pseudo'      => $user->getPseudo(),
-                         'avatar'      => $user->getAvatar(),
-                         'total'       => $totalMission,
-                         'rank'        => $initRankUser
-                       );
+      $ranking = array('identifiant' => $user->getIdentifiant(),
+                       'pseudo'      => $user->getPseudo(),
+                       'avatar'      => $user->getAvatar(),
+                       'total'       => $totalMission,
+                       'rank'        => $initRankUser
+                     );
 
-      array_push($ranking, $myRanking);
+      array_push($rankingUsers, $ranking);
     }
 
-    if (!empty($ranking))
+    if (!empty($rankingUsers))
     {
       // Tri sur avancement puis identifiant
-      foreach ($ranking as $rankUser)
+      foreach ($rankingUsers as $rankUser)
       {
         $tri_rank[]  = $rankUser['total'];
         $tri_alpha[] = $rankUser['identifiant'];
       }
 
-      array_multisort($tri_rank, SORT_DESC, $tri_alpha, SORT_ASC, $ranking);
+      array_multisort($tri_rank, SORT_DESC, $tri_alpha, SORT_ASC, $rankingUsers);
 
       // Affectation du rang
-      $prevTotal   = $ranking[0]['total'];
+      $prevTotal   = $rankingUsers[0]['total'];
       $currentRank = 1;
 
-      foreach ($ranking as &$rankUser)
+      foreach ($rankingUsers as &$rankUser)
       {
         $currentTotal = $rankUser['total'];
 
@@ -272,6 +273,6 @@
       unset($rankUser);
     }
 
-    return $ranking;
+    return $rankingUsers;
   }
 ?>

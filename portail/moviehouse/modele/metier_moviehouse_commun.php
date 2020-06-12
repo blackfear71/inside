@@ -26,7 +26,7 @@
   // RETOUR : Liste des films
   function getFilms($year, $user)
   {
-    $listFilms = array();
+    $listeFilms = array();
 
     global $bdd;
 
@@ -36,42 +36,43 @@
       $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = "' . $year . '" AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
     while ($donnees = $reponse->fetch())
     {
-      $myFilm = Movie::withData($donnees);
+      $film = Movie::withData($donnees);
 
       // Dans le cas de la recherche de films pour les boutons précédent/suivant, on n'a pas besoin de toutes les données
       if (isset($user))
       {
         // On récupère le nombre de commentaires
-        $reponse2 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE id_film = "' . $myFilm->getId() . '"');
+        $reponse2 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE id_film = "' . $film->getId() . '"');
         $donnees2 = $reponse2->fetch();
-        $myFilm->setNb_comments($donnees2['nb_comments']);
+        $film->setNb_comments($donnees2['nb_comments']);
         $reponse2->closeCursor();
 
         // On récupère les étoiles et la participation de l'utilisateur connecté
-        $reponse3 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $myFilm->getId() . ' AND identifiant = "' . $user . '"');
+        $reponse3 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $film->getId() . ' AND identifiant = "' . $user . '"');
         $donnees3 = $reponse3->fetch();
 
         if (isset($donnees3['stars']))
-          $myFilm->setStars_user($donnees3['stars']);
+          $film->setStars_user($donnees3['stars']);
 
         if (isset($donnees3['participation']))
-          $myFilm->setParticipation($donnees3['participation']);
+          $film->setParticipation($donnees3['participation']);
 
         $reponse3->closeCursor();
 
         // On récupère le nombre de participants
-        $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $myFilm->getId());
+        $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $film->getId());
         $donnees4 = $reponse4->fetch();
-        $myFilm->setNb_users($donnees4['nb_users']);
+        $film->setNb_users($donnees4['nb_users']);
         $reponse4->closeCursor();
       }
 
       // On ajoute la ligne au tableau
-      array_push($listFilms, $myFilm);
+      array_push($listeFilms, $film);
     }
     $reponse->closeCursor();
 
-    return $listFilms;
+    // Retour
+    return $listeFilms;
   }
 
   // METIER : Insertion/modification étoiles

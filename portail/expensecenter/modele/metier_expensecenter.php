@@ -56,15 +56,15 @@
       $user = Profile::withData($donnees);
 
       // On construit un tableau des utilisateurs
-      $myUser = array('id'          => $user->getId(),
-                      'identifiant' => $user->getIdentifiant(),
-                      'pseudo'      => $user->getPseudo(),
-                      'avatar'      => $user->getAvatar(),
-                      'expenses'    => $user->getExpenses()
-                     );
+      $user = array('id'          => $user->getId(),
+                    'identifiant' => $user->getIdentifiant(),
+                    'pseudo'      => $user->getPseudo(),
+                    'avatar'      => $user->getAvatar(),
+                    'expenses'    => $user->getExpenses()
+                   );
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, Profile::withData($myUser));
+      array_push($listeUsers, Profile::withData($user));
     }
     $reponse->closeCursor();
 
@@ -102,47 +102,48 @@
     while ($donnees1 = $reponse1->fetch())
     {
       $listeParts = array();
-      $myExpense  = Expenses::withData($donnees1);
+      $expense    = Expenses::withData($donnees1);
 
-      $myExpense->setPrice(str_replace('.', ',', $myExpense->getPrice()));
+      $expense->setPrice(str_replace('.', ',', $expense->getPrice()));
 
       // Recherche pseudo et avatar acheteur
-      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myExpense->getBuyer() . '"');
+      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $expense->getBuyer() . '"');
       $donnees2 = $reponse2->fetch();
 
-      $myExpense->setPseudo($donnees2['pseudo']);
-      $myExpense->setAvatar($donnees2['avatar']);
+      $expense->setPseudo($donnees2['pseudo']);
+      $expense->setAvatar($donnees2['avatar']);
 
       $reponse2->closeCursor();
 
       // Recherche des parts associées à la dépense
-      $reponse3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myExpense->getId() . ' ORDER BY identifiant ASC');
+      $reponse3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $expense->getId() . ' ORDER BY identifiant ASC');
       while ($donnees3 = $reponse3->fetch())
       {
-        $myParts = Parts::withData($donnees3);
+        $partsUser = Parts::withData($donnees3);
 
         // Recherche pseudo et avatar utilisateur
-        $reponse4 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $myParts->getIdentifiant() . '"');
+        $reponse4 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $partsUser->getIdentifiant() . '"');
         $donnees4 = $reponse4->fetch();
 
-        $myParts->setId_identifiant($donnees4['id']);
-        $myParts->setPseudo($donnees4['pseudo']);
-        $myParts->setAvatar($donnees4['avatar']);
+        $partsUser->setId_identifiant($donnees4['id']);
+        $partsUser->setPseudo($donnees4['pseudo']);
+        $partsUser->setAvatar($donnees4['avatar']);
 
         $reponse4->closeCursor();
 
         // Ajout d'un objet Parts (instancié à partir des données de la base) au tableau des parts
-        array_push($listeParts, $myParts);
+        array_push($listeParts, $partsUser);
       }
       $reponse3->closeCursor();
 
-      $myExpense->setParts($listeParts);
+      $expense->setParts($listeParts);
 
       // Ajout d'un objet Expenses (instancié à partir des données de la base) au tableau de dépenses
-      array_push($listeExpenses, $myExpense);
+      array_push($listeExpenses, $expense);
     }
     $reponse1->closeCursor();
 
+    // Retour
     return $listeExpenses;
   }
 
@@ -153,31 +154,32 @@
     // On transforme les objets en tableau pour envoyer au Javascript
     $listeDepensesAConvertir = array();
 
-    foreach ($listeDepenses as $depense)
+    foreach ($listeDepenses as $depenseAConvertir)
     {
-      $myDepense = array('id'      => $depense->getId(),
-                         'date'    => $depense->getDate(),
-                         'price'   => $depense->getPrice(),
-                         'buyer'   => $depense->getBuyer(),
-                         'pseudo'  => $depense->getPseudo(),
-                         'avatar'  => $depense->getAvatar(),
-                         'comment' => $depense->getComment(),
-                         'parts'   => array()
-                        );
+      $depense = array('id'      => $depenseAConvertir->getId(),
+                       'date'    => $depenseAConvertir->getDate(),
+                       'price'   => $depenseAConvertir->getPrice(),
+                       'buyer'   => $depenseAConvertir->getBuyer(),
+                       'pseudo'  => $depenseAConvertir->getPseudo(),
+                       'avatar'  => $depenseAConvertir->getAvatar(),
+                       'comment' => $depenseAConvertir->getComment(),
+                       'parts'   => array()
+                      );
 
-      $myParts = array();
+      $listePartsDepense = array();
 
-      foreach ($depense->getParts() as $parts)
+      foreach ($depenseAConvertir->getParts() as $parts)
       {
-        $myParts[$parts->getIdentifiant()] = array('id_identifiant' => $parts->getId_identifiant(),
-                                                   'parts'          => $parts->getParts()
-                                                  );
+        $listePartsDepense[$parts->getIdentifiant()] = array('id_identifiant' => $parts->getId_identifiant(),
+                                                             'parts'          => $parts->getParts()
+                                                            );
       }
 
-      $myDepense['parts']                         = $myParts;
-      $listeDepensesAConvertir[$depense->getId()] = $myDepense;
+      $depense['parts']                                     = $listePartsDepense;
+      $listeDepensesAConvertir[$depenseAConvertir->getId()] = $depense;
     }
 
+    // Retour
     return $listeDepensesAConvertir;
   }
 
@@ -391,19 +393,19 @@
       // Lecture dépense (avant mise à jour)
       $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_expense);
       $data1 = $req1->fetch();
-      $myOldExpense = Expenses::withData($data1);
+      $ancienneDepense = Expenses::withData($data1);
       $req1->closeCursor();
 
       // Lecture bilan actuel acheteur
-      $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $myOldExpense->getBuyer() . '"');
+      $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $ancienneDepense->getBuyer() . '"');
       $data2 = $req2->fetch();
       $expense_buyer = $data2['expenses'];
       $req2->closeCursor();
 
       // Mise à jour du bilan pour l'acheteur (on retire l'ancienne dépense)
-      $expense_buyer -= $myOldExpense->getPrice();
+      $expense_buyer -= $ancienneDepense->getPrice();
 
-      $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $myOldExpense->getBuyer() . '"');
+      $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $ancienneDepense->getBuyer() . '"');
       $req3->execute(array(
         'expenses' => $expense_buyer
       ));
@@ -413,7 +415,7 @@
       $old_list_parts     = array();
       $nb_parts_total_old = 0;
 
-      $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myOldExpense->getId() . ' ORDER BY identifiant ASC');
+      $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $ancienneDepense->getId() . ' ORDER BY identifiant ASC');
       while ($data4 = $req4->fetch())
       {
         $old_list_parts[$data4['identifiant']] = $data4['parts'];
@@ -432,7 +434,7 @@
       // Vérification si ancienne part acheteur nulle (dépense positive hors régul)
       $old_buyer_no_parts = true;
 
-      if ($old_regul_no_parts == false AND $myOldExpense->getPrice() > 0 AND isset($old_list_parts[$myOldExpense->getBuyer()]) AND $old_list_parts[$myOldExpense->getBuyer()] > 0)
+      if ($old_regul_no_parts == false AND $ancienneDepense->getPrice() > 0 AND isset($old_list_parts[$ancienneDepense->getBuyer()]) AND $old_list_parts[$ancienneDepense->getBuyer()] > 0)
         $old_buyer_no_parts = false;
 
       // Mise à jour du bilan pour chaque utilisateur (retour arrière sur la dépense)
@@ -445,7 +447,7 @@
         $req5->closeCursor();
 
         // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-        $expense_user += ($myOldExpense->getPrice() / $nb_parts_total_old) * $parts;
+        $expense_user += ($ancienneDepense->getPrice() / $nb_parts_total_old) * $parts;
 
         $req6 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $identifiant . '"');
         $req6->execute(array(
@@ -458,12 +460,12 @@
       }
 
       // Génération succès (pour l'acheteur si modifié)
-      if ($old_regul_no_parts == false AND ($buyer_new != $myOldExpense->getBuyer() OR $regul_no_parts == true))
-        insertOrUpdateSuccesValue('buyer', $myOldExpense->getBuyer(), -1);
+      if ($old_regul_no_parts == false AND ($buyer_new != $ancienneDepense->getBuyer() OR $regul_no_parts == true))
+        insertOrUpdateSuccesValue('buyer', $ancienneDepense->getBuyer(), -1);
 
       // Génération succès (dépense sans parts)
       if ($old_regul_no_parts == false AND $old_buyer_no_parts == true)
-        insertOrUpdateSuccesValue('generous', $myOldExpense->getBuyer(), -1);
+        insertOrUpdateSuccesValue('generous', $ancienneDepense->getBuyer(), -1);
 
       /*********************************/
       /*** Mise à jour nouvelle part ***/
@@ -515,7 +517,7 @@
           // Insertion dans la table expense_center_users
           $req11 = $bdd->prepare('INSERT INTO expense_center_users(id_expense, identifiant, parts) VALUES(:id_expense, :identifiant, :parts)');
           $req11->execute(array(
-            'id_expense'  => $myOldExpense->getId(),
+            'id_expense'  => $ancienneDepense->getId(),
             'identifiant' => $identifiant,
             'parts'       => $parts
               ));
@@ -544,7 +546,7 @@
         }
 
         // Génération succès (pour l'acheteur si modifié)
-        if ($buyer_new != $myOldExpense->getBuyer() OR $old_regul_no_parts == true)
+        if ($buyer_new != $ancienneDepense->getBuyer() OR $old_regul_no_parts == true)
           insertOrUpdateSuccesValue('buyer', $buyer_new, 1);
 
         // Génération succès (dépense sans parts)
@@ -570,19 +572,19 @@
     // Lecture dépense
     $req1 = $bdd->query('SELECT * FROM expense_center WHERE id = ' . $id_expense);
     $data1 = $req1->fetch();
-    $myExpense = Expenses::withData($data1);
+    $expense = Expenses::withData($data1);
     $req1->closeCursor();
 
     // Lecture bilan actuel acheteur
-    $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $myExpense->getBuyer() . '"');
+    $req2 = $bdd->query('SELECT id, identifiant, expenses FROM users WHERE identifiant = "' . $expense->getBuyer() . '"');
     $data2 = $req2->fetch();
     $expense_buyer = $data2['expenses'];
     $req2->closeCursor();
 
     // Mise à jour du bilan pour l'acheteur (on retire la dépense)
-    $expense_buyer -= $myExpense->getPrice();
+    $expense_buyer -= $expense->getPrice();
 
-    $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $myExpense->getBuyer() . '"');
+    $req3 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $expense->getBuyer() . '"');
     $req3->execute(array(
       'expenses' => $expense_buyer
     ));
@@ -591,7 +593,7 @@
     // Lecture des utilisateurs ayant une part
     $list_parts = array();
 
-    $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $myExpense->getId() . ' ORDER BY identifiant ASC');
+    $req4 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $expense->getId() . ' ORDER BY identifiant ASC');
     while ($data4 = $req4->fetch())
     {
       $list_parts[$data4['identifiant']] = $data4['parts'];
@@ -610,7 +612,7 @@
     // Vérification si part acheteur nulle (dépense positive hors régul)
     $buyer_no_parts = true;
 
-    if ($regul_no_parts == false AND $myExpense->getPrice() > 0 AND isset($list_parts[$myExpense->getBuyer()]) AND $list_parts[$myExpense->getBuyer()] > 0)
+    if ($regul_no_parts == false AND $expense->getPrice() > 0 AND isset($list_parts[$expense->getBuyer()]) AND $list_parts[$expense->getBuyer()] > 0)
       $buyer_no_parts = false;
 
     // Suppression des parts & mise à jour du bilan pour chaque utilisateur
@@ -623,7 +625,7 @@
       $req5->closeCursor();
 
       // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-      $expense_user += ($myExpense->getPrice() / $nb_parts_total) * $parts;
+      $expense_user += ($expense->getPrice() / $nb_parts_total) * $parts;
 
       $req6 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $identifiant . '"');
       $req6->execute(array(
@@ -642,12 +644,12 @@
     $req8 = $bdd->exec('DELETE FROM expense_center WHERE id = ' . $id_expense);
 
     // Génération succès (pour l'acheteur)
-    if ($myExpense->getPrice() > 0 AND $regul_no_parts == false)
-      insertOrUpdateSuccesValue('buyer', $myExpense->getBuyer(), -1);
+    if ($expense->getPrice() > 0 AND $regul_no_parts == false)
+      insertOrUpdateSuccesValue('buyer', $expense->getBuyer(), -1);
 
     // Génération succès (dépense sans parts)
     if ($regul_no_parts == false AND $buyer_no_parts == true)
-      insertOrUpdateSuccesValue('generous', $myExpense->getBuyer(), -1);
+      insertOrUpdateSuccesValue('generous', $expense->getBuyer(), -1);
 
     // Message suppression effectuée
     $_SESSION['alerts']['depense_deleted'] = true;

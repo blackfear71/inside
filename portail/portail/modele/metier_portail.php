@@ -59,7 +59,7 @@
                                    'title'     => 'Expense Center',
                                    'image'     => '../../includes/icons/common/expense_center.png',
                                    'alt'       => 'expense_center',
-                                   'mobile'    => 'N'),
+                                   'mobile'    => 'Y'),
                              array('categorie' => 'COLLECTOR<br />ROOM',
                                    'lien'      => '../collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
                                    'title'     => 'Collector Room',
@@ -108,15 +108,15 @@
     /*************************/
     if (date('N') == 1 AND date('H') <= 12)
     {
-      $myNews = new News();
+      $news = new News();
 
-      $myNews->setTitle('Une nouvelle ère commence...');
-      $myNews->setContent('...et toute l\'équipe Inside vous souhaite de passer une agréable semaine !');
-      $myNews->setDetails('Maintenant au boulot.');
-      $myNews->setLogo('inside');
-      $myNews->setLink('');
+      $news->setTitle('Une nouvelle ère commence...');
+      $news->setContent('...et toute l\'équipe Inside vous souhaite de passer une agréable semaine !');
+      $news->setDetails('Maintenant au boulot.');
+      $news->setLogo('inside');
+      $news->setLink('');
 
-      array_push($tableauNews, $myNews);
+      array_push($tableauNews, $news);
     }
 
     /**************************/
@@ -124,15 +124,15 @@
     /**************************/
     if (date('N') == 5 AND date('H') >= 14)
     {
-      $myNews = new News();
+      $news = new News();
 
-      $myNews->setTitle('C\'est bientôt la fin, courage !');
-      $myNews->setContent('Bon week-end à tous et à la semaine prochaine.');
-      $myNews->setDetails('');
-      $myNews->setLogo('inside');
-      $myNews->setLink('');
+      $news->setTitle('C\'est bientôt la fin, courage !');
+      $news->setContent('Bon week-end à tous et à la semaine prochaine.');
+      $news->setDetails('');
+      $news->setLogo('inside');
+      $news->setLink('');
 
-      array_push($tableauNews, $myNews);
+      array_push($tableauNews, $news);
     }
 
     /*****************/
@@ -142,15 +142,15 @@
 
     foreach ($anniversaires as $pseudoAnniversaire)
     {
-      $myNews = new News();
+      $news = new News();
 
-      $myNews->setTitle('Joyeux anniversaire !');
-      $myNews->setContent('C\'est l\'anniversaire de <strong>' . htmlspecialchars($pseudoAnniversaire) . '</strong> aujourd\'hui, souhaitez-lui de passer une excellente journée !');
-      $myNews->setDetails('Vous n\'avez pas oublié les cadeaux au moins ?');
-      $myNews->setLogo('anniversary');
-      $myNews->setLink('');
+      $news->setTitle('Joyeux anniversaire !');
+      $news->setContent('C\'est l\'anniversaire de <strong>' . htmlspecialchars($pseudoAnniversaire) . '</strong> aujourd\'hui, souhaitez-lui de passer une excellente journée !');
+      $news->setDetails('Vous n\'avez pas oublié les cadeaux au moins ?');
+      $news->setLogo('anniversary');
+      $news->setLink('');
 
-      array_push($tableauNews, $myNews);
+      array_push($tableauNews, $news);
     }
 
     /**************/
@@ -158,12 +158,12 @@
     /**************/
     if (date('H') < 13 AND date('N') <= 5)
     {
-      $myNews = new News();
+      $news = new News();
 
-      $myNews->setTitle('Où aller manger à midi ?');
-      $myNews->setDetails('');
-      $myNews->setLogo('food_advisor');
-      $myNews->setLink('/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter');
+      $news->setTitle('Où aller manger à midi ?');
+      $news->setDetails('');
+      $news->setLogo('food_advisor');
+      $news->setLink('/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter');
 
       // Récupération Id restaurant réservé
       $idRestaurant = physiqueRestaurantReserved();
@@ -173,7 +173,7 @@
         // Lecture du nom du restaurant
         $nomRestaurant = physiqueNomRestaurant($idRestaurant);
 
-        $myNews->setContent('Le restaurant a été reservé ! Rendez-vous à <strong>' . htmlspecialchars($nomRestaurant) . '</strong> !');
+        $news->setContent('Le restaurant a été reservé ! Rendez-vous à <strong>' . htmlspecialchars($nomRestaurant) . '</strong> !');
       }
       else
       {
@@ -181,22 +181,22 @@
         $voted = physiqueVoteUser($identifiant);
 
         if ($voted == true)
-          $myNews->setContent('Vous avez déjà voté, allez voir le resultat en cliquant sur ce lien.');
+          $news->setContent('Vous avez déjà voté, allez voir le resultat en cliquant sur ce lien.');
         else
-          $myNews->setContent('Vous n\'avez pas encore voté aujourd\'hui, allez tout de suite le faire !');
+          $news->setContent('Vous n\'avez pas encore voté aujourd\'hui, allez tout de suite le faire !');
       }
 
-      array_push($tableauNews, $myNews);
+      array_push($tableauNews, $news);
     }
 
     /************************/
     /* Gâteau de la semaine */
     /************************/
-    $myNews = new News();
+    $news = new News();
 
-    $myNews->setTitle('La douceur de la semaine');
-    $myNews->setLogo('cooking_box');
-    $myNews->setLink('/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter');
+    $news->setTitle('La douceur de la semaine');
+    $news->setLogo('cooking_box');
+    $news->setLink('/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter');
 
     // Vérification gâteau de la semaine présent
     $gateauSemainePresent = physiqueGateauSemainePresent();
@@ -211,22 +211,22 @@
 
       if ($gateauSemaine->getCooked() == 'Y')
       {
-        $myNews->setContent('Le gâteau a été fait par <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong>, c\'était très bon !');
-        $myNews->setDetails('A la semaine prochaine pour de nouvelles expériences...');
+        $news->setContent('Le gâteau a été fait par <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong>, c\'était très bon !');
+        $news->setDetails('A la semaine prochaine pour de nouvelles expériences...');
       }
       else
       {
-        $myNews->setContent('Cette semaine, c\'est à <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong> de faire le gâteau !');
-        $myNews->setDetails('Spécialité culinaire en préparation...');
+        $news->setContent('Cette semaine, c\'est à <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong> de faire le gâteau !');
+        $news->setDetails('Spécialité culinaire en préparation...');
       }
     }
     else
     {
-      $myNews->setContent('Personne n\'a encore été désigné pour faire le gâteau !');
-      $myNews->setDetails('Dépêchez-vous de le dénoncer...');
+      $news->setContent('Personne n\'a encore été désigné pour faire le gâteau !');
+      $news->setDetails('Dépêchez-vous de le dénoncer...');
     }
 
-    array_push($tableauNews, $myNews);
+    array_push($tableauNews, $news);
 
     /*********************************/
     /* Dernière phrase culte ajoutée */
@@ -236,43 +236,43 @@
     // Numéro de page de la phrase culte
     $numeroPage = numeroPageCollector($collector->getId());
 
-    $myNews = new News();
+    $news = new News();
 
-    $myNews->setTitle('La der des ders');
-    $myNews->setLogo('collector');
-    $myNews->setLink('/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $collector->getId());
+    $news->setTitle('La der des ders');
+    $news->setLogo('collector');
+    $news->setLink('/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $collector->getId());
 
     // Recherche pseudo speaker
     if ($collector->getType_speaker() == 'other')
-      $myNews->setDetails('Par ' . htmlspecialchars(formatUnknownUser($collector->getSpeaker(), false, false)));
+      $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($collector->getSpeaker(), false, false)));
     else
     {
       $speaker = physiquePseudoUser($collector->getSpeaker());
 
-      $myNews->setDetails('Par ' . htmlspecialchars(formatUnknownUser($speaker, false, false)));
+      $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($speaker, false, false)));
     }
 
     if (strlen($collector->getCollector()) > 90)
-      $myNews->setContent(nl2br(htmlspecialchars(substr(unformatCollector($collector->getCollector()), 0, 90) . '...')));
+      $news->setContent(nl2br(htmlspecialchars(substr(unformatCollector($collector->getCollector()), 0, 90) . '...')));
     else
-      $myNews->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
+      $news->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
 
-    array_push($tableauNews, $myNews);
+    array_push($tableauNews, $news);
 
     /***********************/
     /* Dernier film ajouté */
     /***********************/
     $movie = physiqueDernierFilm();
 
-    $myNews = new News();
+    $news = new News();
 
-    $myNews->setTitle('Le dernier de la collection');
-    $myNews->setContent($movie->getFilm());
-    $myNews->setDetails('');
-    $myNews->setLogo('movie_house');
-    $myNews->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
+    $news->setTitle('Le dernier de la collection');
+    $news->setContent($movie->getFilm());
+    $news->setDetails('');
+    $news->setLogo('movie_house');
+    $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
 
-    array_push($tableauNews, $myNews);
+    array_push($tableauNews, $news);
 
     /***************************/
     /* Prochaine sortie cinéma */
@@ -281,15 +281,15 @@
 
     if (!empty($film))
     {
-      $myNews = new News();
+      $news = new News();
 
-      $myNews->setTitle('On y court !');
-      $myNews->setContent($film->getFilm());
-      $myNews->setDetails('Rendez-vous le ' . formatDateForDisplay($film->getDate_doodle()) . ' au cinéma !');
-      $myNews->setLogo('movie_house');
-      $myNews->setLink('/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter');
+      $news->setTitle('On y court !');
+      $news->setContent($film->getFilm());
+      $news->setDetails('Rendez-vous le ' . formatDateForDisplay($film->getDate_doodle()) . ' au cinéma !');
+      $news->setLogo('movie_house');
+      $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter');
 
-      array_push($tableauNews, $myNews);
+      array_push($tableauNews, $news);
     }
 
     /*********************/
@@ -313,10 +313,10 @@
       {
         foreach ($newsMissions as $newsMission)
         {
-          $myNews = new News();
-          $myNews = $newsMission;
+          $news = new News();
+          $news = $newsMission;
 
-          array_push($tableauNews, $myNews);
+          array_push($tableauNews, $news);
         }
       }
     }
@@ -434,10 +434,10 @@
     {
       foreach ($missions as $keyMission => $mission)
       {
-        $myMessage = new News();
+        $message = new News();
 
-        $myMessage->setTitle($mission->getMission());
-        $myMessage->setLogo('missions');
+        $message->setTitle($mission->getMission());
+        $message->setLogo('missions');
 
         // Association message mission à sa session (pour les missions en cours)
         foreach ($_SESSION['missions'] as $key_session => $ligneCurrentMission)
@@ -464,7 +464,7 @@
           $nbRestants = count($_SESSION['missions'][$keyCurrentMission]);
           $content    = '';
 
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
           if (date('Ymd') == $mission->getDate_deb())
             $content .= '<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence aujourd\'hui, trouve vite les objectifs avant les autres !</div>';
@@ -477,49 +477,49 @@
           if (date('Ymd') == $mission->getDate_fin())
             $content .= '<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui, trouve vite les derniers objectifs !</div>';
 
-          $myMessage->setContent($content);
+          $message->setContent($content);
         }
         // Mission > 1 jour (heure KO), 1er jour
         elseif ((!isset($keyCurrentMission)             OR  empty($_SESSION['missions'][$keyCurrentMission]))
         AND      date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/missions.php?action=goConsulter');
-          $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
+          $message->setLink('/inside/portail/missions/missions.php?action=goConsulter');
+          $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
         // Mission > 1 jour (heure KO), autre jour
         elseif ((!isset($keyCurrentMission)            OR  empty($_SESSION['missions'][$keyCurrentMission]))
         AND      date('Ymd') < $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
-          $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
         // Mission > 1 jour (terminée)
         elseif ((!isset($keyCurrentMission)            OR  empty($_SESSION['missions'][$keyCurrentMission]))
         AND      date('Ymd') < $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
-          $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée pour aujourd\'hui ! Reviens demain pour continuer...</div>');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée pour aujourd\'hui ! Reviens demain pour continuer...</div>');
         }
         // Mission > 1 jour (terminée, jour de fin)
         elseif ((!isset($keyCurrentMission)             OR  empty($_SESSION['missions'][$keyCurrentMission]))
         AND      date('Ymd') == $mission->getDate_fin() AND date('His') >= $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
-          $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Tu as trouvé tous les objectifs, reviens demain pour voir les scores !</div>');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Tu as trouvé tous les objectifs, reviens demain pour voir les scores !</div>');
         }
         // Mission > 1 jour (heure KO, jour de fin)
         elseif ((!isset($keyCurrentMission)             OR  empty($_SESSION['missions'][$keyCurrentMission]))
         AND      date('Ymd') == $mission->getDate_fin() AND $mission->getDate_deb() != $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
-          $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Trouve les derniers objectifs à partir de ' . formatTimeForDisplayLight($mission->getHeure()) . '.</div>');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> se termine aujourd\'hui. Trouve les derniers objectifs à partir de ' . formatTimeForDisplayLight($mission->getHeure()) . '.</div>');
         }
         // Mission > 1 jour (terminée, de jour de fin + 1 jours à + 3 jours)
         elseif ((!isset($keyCurrentMission) OR empty($_SESSION['missions'][$keyCurrentMission]))
         AND     (date('Ymd') >= date('Ymd', strtotime($mission->getDate_fin() . ' + 1 day')))
         AND     (date('Ymd') <= date('Ymd', strtotime($mission->getDate_fin() . ' + 3 days'))))
         {
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
           $content = '<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée. Va voir les résultats en cliquant sur ce message.</div>';
 
@@ -537,7 +537,7 @@
             $content .= '<div class="contenu_paragraphe">' . formatGagnants($listeGagnants) . '</div>';
           }
 
-          $myMessage->setContent($content);
+          $message->setContent($content);
         }
         // Mission 1 jour (heure OK)
         elseif (isset($keyCurrentMission)
@@ -546,25 +546,25 @@
         {
           $nbRestants = count($_SESSION['missions'][$keyCurrentMission]);
 
-          $myMessage->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
+          $message->setLink('/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter');
 
           if ($nbRestants == 1)
-            $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectif à trouver !</div>');
+            $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectif à trouver !</div>');
           else
-            $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectifs à trouver !</div>');
+            $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> ne dure qu\'une journée et il reste encore ' . $nbRestants . ' objectifs à trouver !</div>');
         }
         // Mission 1 jour (heure KO)
         elseif ((!isset($keyCurrentMission)                         OR  empty($_SESSION['missions'][$keyCurrentMission]))
         AND      $mission->getDate_deb() == $mission->getDate_fin() AND date('His') < $mission->getHeure())
         {
-          $myMessage->setLink('/inside/portail/missions/missions.php?action=goConsulter');
-          $myMessage->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
+          $message->setLink('/inside/portail/missions/missions.php?action=goConsulter');
+          $message->setContent('<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> commence à ' . formatTimeForDisplayLight($mission->getHeure()) . ', reviens un peu plus tard pour continuer...</div>');
         }
 
         unset($idCurrentMission);
         unset($keyCurrentMission);
 
-        array_push($messagesMissions, $myMessage);
+        array_push($messagesMissions, $message);
       }
     }
 

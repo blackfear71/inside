@@ -39,8 +39,8 @@
   function physiqueRestaurantsOuvertsParLieux($lieu)
   {
     // Initialisations
-    $restaurantsParLieux = array();
-    $availableDay        = true;
+    $listeRestaurantsParLieux = array();
+    $availableDay             = true;
 
     // Requête
     global $bdd;
@@ -71,20 +71,20 @@
       if ($availableDay == true)
       {
         // Instanciation d'un objet Restaurant à partir des données remontées de la bdd
-        $myRestaurant = Restaurant::withData($data);
+        $restaurant = Restaurant::withData($data);
 
-        $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-        $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
+        $restaurant->setMin_price(str_replace('.', ',', $restaurant->getMin_price()));
+        $restaurant->setMax_price(str_replace('.', ',', $restaurant->getMax_price()));
 
         // On ajoute la ligne au tableau
-        array_push($restaurantsParLieux, $myRestaurant);
+        array_push($listeRestaurantsParLieux, $restaurant);
       }
     }
 
     $req->closeCursor();
 
     // Retour
-    return $restaurantsParLieux;
+    return $listeRestaurantsParLieux;
   }
 
   // PHYSIQUE : Lecture bande à part

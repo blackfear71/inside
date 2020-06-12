@@ -9,7 +9,7 @@
   function physiqueThemes($typeTheme)
   {
     // Initialisations
-    $themes = array();
+    $listeThemes = array();
 
     // Requête
     global $bdd;
@@ -22,16 +22,16 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Theme à partir des données remontées de la bdd
-      $myTheme = Theme::withData($data);
+      $theme = Theme::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($themes, $myTheme);
+      array_push($listeThemes, $theme);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $themes;
+    return $listeThemes;
   }
 
   // PHYSIQUE : Lecture du nombre de références existantes

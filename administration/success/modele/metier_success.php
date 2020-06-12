@@ -206,29 +206,29 @@
     $erreur     = NULL;
 
     // Récupération des données
-    $updateSuccess = array();
+    $listeUpdateSuccess = array();
 
     foreach ($post['id'] as $id)
     {
-      $myUpdate = array('id'            => $post['id'][$id],
-                        'level'         => $post['level'][$id],
-                        'order_success' => $post['order_success'][$id],
-                        'defined'       => $post['defined'][$id],
-                        'unicity'       => $post['unicity'][$id],
-                        'title'         => $post['title'][$id],
-                        'description'   => $post['description'][$id],
-                        'limit_success' => $post['limit_success'][$id],
-                        'explanation'   => $post['explanation'][$id],
-                       );
+      $update = array('id'            => $post['id'][$id],
+                      'level'         => $post['level'][$id],
+                      'order_success' => $post['order_success'][$id],
+                      'defined'       => $post['defined'][$id],
+                      'unicity'       => $post['unicity'][$id],
+                      'title'         => $post['title'][$id],
+                      'description'   => $post['description'][$id],
+                      'limit_success' => $post['limit_success'][$id],
+                      'explanation'   => $post['explanation'][$id],
+                     );
 
-      array_push($updateSuccess, $myUpdate);
+      array_push($listeUpdateSuccess, $update);
     }
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['save_success'] = $post;
 
     // Boucle de traitement des succès
-    foreach ($updateSuccess as $success)
+    foreach ($listeUpdateSuccess as $success)
     {
       // Contrôle niveau numérique et positif
       if ($control_ok == true)
@@ -240,7 +240,7 @@
 
       // Contrôle doublon saisie
       if ($control_ok == true)
-        $control_ok = controleDoublons($updateSuccess, $success);
+        $control_ok = controleDoublons($listeUpdateSuccess, $success);
 
       // Contrôle condition numérique et positif
       if ($control_ok == true)
@@ -257,7 +257,7 @@
     // Mise à jour des succès
     if ($control_ok == true)
     {
-      foreach ($updateSuccess as $success)
+      foreach ($listeUpdateSuccess as $success)
       {
         physiqueUpdateSuccess($success);
       }

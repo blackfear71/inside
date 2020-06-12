@@ -37,7 +37,7 @@
   // RETOUR : Liste des notifications
   function getNotifications($view, $user, $nb_pages, $page)
   {
-    $notifs = array();
+    $listeNotifications = array();
 
     global $bdd;
 
@@ -96,13 +96,13 @@
     while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Notification à partir des données remontées de la bdd
-      $myNotif = Notification::withData($donnees);
-      array_push($notifs, $myNotif);
+      $notification = Notification::withData($donnees);
+      array_push($listeNotifications, $notification);
     }
 
     $reponse->closeCursor();
 
-    return $notifs;
+    return $listeNotifications;
   }
 
   // METIER : Formatage des notifications (icône, phrase & lien)

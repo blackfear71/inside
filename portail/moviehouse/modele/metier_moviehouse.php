@@ -63,21 +63,21 @@
   // RETOUR : Liste des films récents
   function getRecents($year)
   {
-    $listRecents = array();
+    $listeFilmsRecents = array();
 
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $year . '" ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC LIMIT 5');
     while ($donnees = $reponse->fetch())
     {
-      $myRecent = Movie::withData($donnees);
+      $filmRecent = Movie::withData($donnees);
 
       // On ajoute la ligne au tableau
-      array_push($listRecents, $myRecent);
+      array_push($listeFilmsRecents, $filmRecent);
     }
     $reponse->closeCursor();
 
-    return $listRecents;
+    return $listeFilmsRecents;
   }
 
   // METIER : Vérifie si la semaine en cours doit être affichée pour les sorties de la semaine
@@ -113,7 +113,7 @@
     $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
     $sunday            = date("Ymd", strtotime('+' . $nb_jours_dimanche . ' days'));
 
-    $listSemaine = array();
+    $listeFilmsSemaine = array();
 
     global $bdd;
 
@@ -121,19 +121,19 @@
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $monday . '" AND date_theater <= "' . $sunday . '" ORDER BY id DESC');
     while ($donnees = $reponse->fetch())
     {
-      $mySemaine = Movie::withData($donnees);
-      array_push($listSemaine, $mySemaine);
+      $filmSemaine = Movie::withData($donnees);
+      array_push($listeFilmsSemaine, $filmSemaine);
     }
     $reponse->closeCursor();
 
-    return $listSemaine;
+    return $listeFilmsSemaine;
   }
 
   // METIER : Lecture liste des films les plus attendus
   // RETOUR : Liste des films attendus
   function getAttendus($year)
   {
-    $listAttendus = array();
+    $listeFilmsAttendus = array();
 
     global $bdd;
 
@@ -148,14 +148,14 @@
       if ($year != date("Y") OR ($year == date("Y") AND $donnees['date_theater'] > $date_du_jour_moins_1_mois))
       {
         // Récupération des données
-        $myAttendu = Movie::withData($donnees);
+        $filmAttendu = Movie::withData($donnees);
 
         // Récupération nombre d'utilisateurs et moyenne
         $nb_users    = 0;
         $total_stars = 0;
         $average     = 0;
 
-        $reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $myAttendu->getId());
+        $reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $filmAttendu->getId());
         while ($donnees2 = $reponse2->fetch())
         {
           $nb_users    += 1;
@@ -167,51 +167,52 @@
         {
           $average = str_replace('.', ',', round($total_stars / $nb_users, 1));
 
-          $myAttendu->setNb_users($nb_users);
-          $myAttendu->setAverage($average);
+          $filmAttendu->setNb_users($nb_users);
+          $filmAttendu->setAverage($average);
 
           // On ajoute la ligne au tableau seulement s'il y a des participants ou une moyenne
-          if ($myAttendu->getAverage() != 0)
-            array_push($listAttendus, $myAttendu);
+          if ($filmAttendu->getAverage() != 0)
+            array_push($listeFilmsAttendus, $filmAttendu);
         }
       }
     }
     $reponse->closeCursor();
 
     // Tris
-    if (isset($listAttendus) AND !empty($listAttendus))
+    if (isset($listeFilmsAttendus) AND !empty($listeFilmsAttendus))
     {
       // On trie les films par nombre d'utilisateurs en 1er et par moyenne en 2ème
       $tri_1 = NULL;
       $tri_2 = NULL;
 
-      foreach ($listAttendus as $attendu)
+      foreach ($listeFilmsAttendus as $attendu)
       {
         $tri_1[] = $attendu->getNb_users();
         $tri_2[] = $attendu->getAverage();
       }
 
-      array_multisort($tri_1, SORT_DESC, $tri_2, SORT_DESC, $listAttendus);
+      array_multisort($tri_1, SORT_DESC, $tri_2, SORT_DESC, $listeFilmsAttendus);
 
       // On extrait les 5 premièrs films les plus attentus
-      $listAttendus = array_slice($listAttendus, 0, 5);
+      $listeFilmsAttendus = array_slice($listeFilmsAttendus, 0, 5);
 
       // Tri final sur la moyenne
-      foreach ($listAttendus as $attendu)
+      foreach ($listeFilmsAttendus as $attendu)
       {
         $tri_average[] = $attendu->getAverage();
       }
-      array_multisort($tri_average, SORT_DESC, $listAttendus);
+      array_multisort($tri_average, SORT_DESC, $listeFilmsAttendus);
     }
 
-    return $listAttendus;
+    // Retour
+    return $listeFilmsAttendus;
   }
 
   // METIER : Lecture des prochaines sorties
   // RETOUR : Liste des films avec sortie prévue
   function getSorties($year)
   {
-    $listSorties = array();
+    $listeFilmsSorties = array();
 
     global $bdd;
 
@@ -224,14 +225,14 @@
 
     while ($donnees = $reponse->fetch())
     {
-      $mySortie = Movie::withData($donnees);
+      $filmSortie = Movie::withData($donnees);
 
       // On ajoute la ligne au tableau
-      array_push($listSorties, $mySortie);
+      array_push($listeFilmsSorties, $filmSortie);
     }
     $reponse->closeCursor();
 
-    return $listSorties;
+    return $listeFilmsSorties;
   }
 
   // METIER : Lecture des années distinctes
@@ -259,11 +260,11 @@
   {
     global $bdd;
 
-    $tabStars = array();
+    $tableauStars = array();
 
     foreach ($listFilms as $film)
     {
-      $starsFilm = array();
+      $listeStarsFilm = array();
 
       $reponse = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $film->getId() . ' ORDER BY stars DESC, identifiant ASC');
       while ($donnees = $reponse->fetch())
@@ -276,20 +277,20 @@
 
         $reponse2->closeCursor();
 
-        $myStars = array('identifiant' => $donnees['identifiant'],
-                         'pseudo'      => $pseudo,
-                         'avatar'      => $avatar,
-                         'stars'       => $donnees['stars']
-                        );
+        $starsFilm = array('identifiant' => $donnees['identifiant'],
+                           'pseudo'      => $pseudo,
+                           'avatar'      => $avatar,
+                           'stars'       => $donnees['stars']
+                          );
 
-        array_push($starsFilm, $myStars);
+        array_push($listeStarsFilm, $starsFilm);
       }
       $reponse->closeCursor();
 
-      $tabStars[$film->getId()] = $starsFilm;
+      $tableauStars[$film->getId()] = $listeStarsFilm;
     }
 
-    return $tabStars;
+    return $tableauStars;
   }
 
   // METIER : Insertion film

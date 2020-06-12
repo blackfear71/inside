@@ -347,10 +347,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Expenses à partir des données remontées de la bdd
-      $myExpense = Expenses::withData($data);
+      $expense = Expenses::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeExpenses, $myExpense);
+      array_push($listeExpenses, $expense);
     }
 
     $req->closeCursor();

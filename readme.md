@@ -86,7 +86,7 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | chat      | Contient les données du chat (données utilisateurs)      |
 | changelog | Contient les paramètres d'un journal de modifications    |
 | generator | Contient les données du générateur de code               |
-| index     | Contient les données de l'écran de connexion             |
+| index     | Contient les données connexion                           |
 | missions  | Contient les données des missions générées               |
 | success   | Contient les données des succès débloqués                |
 | theme     | Contient les données des thèmes                          |

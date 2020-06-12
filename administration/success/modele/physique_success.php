@@ -51,10 +51,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
-      $mySuccess = Success::withData($data);
+      $success = Success::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeSuccess, $mySuccess);
+      array_push($listeSuccess, $success);
     }
 
     $req->closeCursor();

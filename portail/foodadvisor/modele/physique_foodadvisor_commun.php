@@ -63,7 +63,7 @@
   function physiqueRestaurantsParLieux($lieu)
   {
     // Initialisations
-    $restaurantsParLieux = array();
+    $listeRestaurantsParLieux = array();
 
     // Requête
     global $bdd;
@@ -76,19 +76,19 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Restaurant à partir des données remontées de la bdd
-      $myRestaurant = Restaurant::withData($data);
+      $restaurant = Restaurant::withData($data);
 
-      $myRestaurant->setMin_price(str_replace('.', ',', $myRestaurant->getMin_price()));
-      $myRestaurant->setMax_price(str_replace('.', ',', $myRestaurant->getMax_price()));
+      $restaurant->setMin_price(str_replace('.', ',', $restaurant->getMin_price()));
+      $restaurant->setMax_price(str_replace('.', ',', $restaurant->getMax_price()));
 
       // On ajoute la ligne au tableau
-      array_push($restaurantsParLieux, $myRestaurant);
+      array_push($listeRestaurantsParLieux, $restaurant);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $restaurantsParLieux;
+    return $listeRestaurantsParLieux;
   }
 
   // PHYSIQUE : Lecture bande à part
@@ -133,10 +133,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Proposition à partir des données remontées de la bdd
-      $myProposition = Proposition::withData($data);
+      $proposition = Proposition::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listePropositions, $myProposition);
+      array_push($listePropositions, $proposition);
     }
 
     $req->closeCursor();
@@ -163,10 +163,10 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Choix à partir des données remontées de la bdd
-      $myChoice = Choix::withData($data);
+      $choix = Choix::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeChoix, $myChoice);
+      array_push($listeChoix, $choix);
     }
 
     $req->closeCursor();

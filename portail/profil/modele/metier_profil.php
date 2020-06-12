@@ -126,22 +126,22 @@
     $reponse9->closeCursor();
 
     // On construit un tableau avec les données statistiques
-    $myStats = array('nb_films_ajoutes' => $nb_films_ajoutes,
-                     'nb_comments'      => $nb_comments,
-                     'nb_reservations'  => $nb_reservations,
-                     'nb_gateaux'       => $nb_gateaux,
-                     'nb_recettes'      => $nb_recettes,
-                     'expenses'         => $expenses,
-                     'nb_collectors'    => $nb_collectors,
-                     'nb_ideas'         => $nb_ideas,
-                     'nb_bugs'          => $nb_bugs,
-                     'nb_evolutions'    => $nb_evolutions
-                    );
+    $statistiques = array('nb_films_ajoutes' => $nb_films_ajoutes,
+                          'nb_comments'      => $nb_comments,
+                          'nb_reservations'  => $nb_reservations,
+                          'nb_gateaux'       => $nb_gateaux,
+                          'nb_recettes'      => $nb_recettes,
+                          'expenses'         => $expenses,
+                          'nb_collectors'    => $nb_collectors,
+                          'nb_ideas'         => $nb_ideas,
+                          'nb_bugs'          => $nb_bugs,
+                          'nb_evolutions'    => $nb_evolutions
+                         );
 
     // Instanciation d'un objet Statistiques à partir des données remontées de la bdd
-    $statistiques = Statistiques::withData($myStats);
+    $tableauStatistiques = Statistiques::withData($statistiques);
 
-    return $statistiques;
+    return $tableauStatistiques;
   }
 
   // METIER : Lecture des données préférences
@@ -480,7 +480,7 @@
   // RETOUR : Liste des succès et déblocages
   function getSuccess($identifiant, $listUsers)
   {
-    $listSuccess = array();
+    $listeSuccess = array();
 
     global $bdd;
 
@@ -499,7 +499,7 @@
     while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Success à partir des données remontées de la bdd
-      $mySuccess = Success::withData($donnees);
+      $success = Success::withData($donnees);
 
       // Recherche des données utilisateur
       $reponse2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $donnees['reference'] . '" AND identifiant = "' . $identifiant . '"');
@@ -511,20 +511,21 @@
         $ended = isMissionEnded($donnees['reference']);
 
         if ($ended == true)
-          $mySuccess->setValue_user($donnees2['value']);
+          $success->setValue_user($donnees2['value']);
       }
 
       $reponse2->closeCursor();
 
       // Récupération du classement des utilisateurs
-      if ($mySuccess->getDefined() == "Y" AND $mySuccess->getUnicity() != "Y")
-        $mySuccess->setClassement(getRankUsers($mySuccess, $tableUsers));
+      if ($success->getDefined() == "Y" AND $success->getUnicity() != "Y")
+        $success->setClassement(getRankUsers($success, $tableUsers));
 
-      array_push($listSuccess, $mySuccess);
+      array_push($listeSuccess, $success);
     }
     $reponse->closeCursor();
 
-    return $listSuccess;
+    // Retour
+    return $listeSuccess;
   }
 
   // METIER : Récupération classement des utilisateurs pour un succès
@@ -532,7 +533,7 @@
   function getRankUsers($success, $tableUsers)
   {
     // Création tableau des classements
-    $rankSuccess = array();
+    $listeRangSuccess = array();
 
     global $bdd;
 
@@ -550,47 +551,47 @@
           // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
           if ($donnees['value'] >= $success->getLimit_success())
           {
-            $myRankSuccess = array('identifiant' => $donnees['identifiant'],
+            $rangSuccess = array('identifiant' => $donnees['identifiant'],
                                    'pseudo'      => $tableUsers[$donnees['identifiant']]['pseudo'],
                                    'avatar'      => $tableUsers[$donnees['identifiant']]['avatar'],
                                    'value'       => $donnees['value'],
                                    'rank'        => 0
                                   );
-            array_push($rankSuccess, $myRankSuccess);
+            array_push($listeRangSuccess, $rangSuccess);
           }
         }
       }
       $reponse->closeCursor();
 
       // On filtre le tableau
-      if (!empty($rankSuccess))
+      if (!empty($listeRangSuccess))
       {
         // Affectation du rang et suppression si rang > 3 (médaille de bronze)
-        $prevRank    = $rankSuccess[0]['value'];
+        $prevRank    = $listeRangSuccess[0]['value'];
         $currentRank = 1;
 
-        foreach ($rankSuccess as $key => &$rankSuccessUser)
+        foreach ($listeRangSuccess as $key => &$rangSuccessUser)
         {
-          $currentTotal = $rankSuccessUser['value'];
+          $currentTotal = $rangSuccessUser['value'];
 
           if ($currentTotal != $prevRank)
           {
             $currentRank += 1;
-            $prevRank = $rankSuccessUser['value'];
+            $prevRank     = $rangSuccessUser['value'];
           }
 
           // Suppression des rangs > 3 sinon on enregistre le rang
           if ($currentRank > 3)
-            unset($rankSuccess[$key]);
+            unset($listeRangSuccess[$key]);
           else
-            $rankSuccessUser['rank'] = $currentRank;
+            $rangSuccessUser['rank'] = $currentRank;
         }
 
-        unset($rankSuccessUser);
+        unset($rangSuccessUser);
       }
     }
 
-    return $rankSuccess;
+    return $listeRangSuccess;
   }
 
   // METIER : Conversion du tableau d'objet des succès en tableau simple pour JSON
@@ -623,29 +624,30 @@
   // RETOUR : Tableau utilisateurs trié
   function getExperienceUsers($listUsers)
   {
-    $experienceUsers = array();
+    $listeExperienceUsers = array();
 
     foreach ($listUsers as $user)
     {
-      $myExperienceUser = array('identifiant' => $user->getIdentifiant(),
-                                'pseudo'      => $user->getPseudo(),
-                                'avatar'      => $user->getAvatar(),
-                                'experience'  => $user->getExperience(),
-                                'niveau'      => convertExperience($user->getExperience())
-                               );
-      array_push($experienceUsers, $myExperienceUser);
+      $experience = array('identifiant' => $user->getIdentifiant(),
+                          'pseudo'      => $user->getPseudo(),
+                          'avatar'      => $user->getAvatar(),
+                          'experience'  => $user->getExperience(),
+                          'niveau'      => convertExperience($user->getExperience())
+                         );
+      array_push($listeExperienceUsers, $experience);
     }
 
     // Tri sur expérience puis identifiant
-    foreach ($experienceUsers as $expUser)
+    foreach ($listeExperienceUsers as $experienceUser)
     {
-      $tri_exp[] = $expUser['experience'];
-      $tri_id[]  = $expUser['identifiant'];
+      $tri_exp[] = $experienceUser['experience'];
+      $tri_id[]  = $experienceUser['identifiant'];
     }
 
-    array_multisort($tri_exp, SORT_DESC, $tri_id, SORT_ASC, $experienceUsers);
+    array_multisort($tri_exp, SORT_DESC, $tri_id, SORT_ASC, $listeExperienceUsers);
 
-    return $experienceUsers;
+    // Retour
+    return $listeExperienceUsers;
   }
 
   // METIER : Contrôle pour les missions que la date de fin soit passée
@@ -746,7 +748,7 @@
   // RETOUR : Tableau des thèmes
   function getThemes($type, $experience)
   {
-    $themes = array();
+    $listeThemes = array();
 
     global $bdd;
 
@@ -761,15 +763,15 @@
 
     while ($donnees = $reponse->fetch())
     {
-      $myTheme = Theme::withData($donnees);
+      $theme = Theme::withData($donnees);
 
       // On ajoute la ligne au tableau
-      array_push($themes, $myTheme);
+      array_push($listeThemes, $theme);
     }
 
     $reponse->closeCursor();
 
-    return $themes;
+    return $listeThemes;
   }
 
   // METIER : Détermine si on a un thème de mission en cours
