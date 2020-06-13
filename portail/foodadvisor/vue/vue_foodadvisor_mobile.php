@@ -70,7 +70,7 @@
               echo '</div>';
 
               // Saisie
-              echo '<div class="zone_contenu_saisie">';
+              echo '<div class="zone_contenu_saisie_live">';
                 echo '<div class="contenu_saisie">';
                   // Message vide
                   echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé.</div>';
@@ -242,21 +242,21 @@
               {
                 // Détermination classe à appliquer
                 if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
-                  $class_proposition = 'determined';
+                  $classProposition = 'determined';
                 elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
-                  $class_proposition = 'determined';
+                  $classProposition = 'determined';
                 elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
-                  $class_proposition = 'top';
+                  $classProposition = 'top';
                 elseif ($proposition->getClassement() == 1 AND $proposition != $propositions[0])
-                  $class_proposition = 'top';
+                  $classProposition = 'top';
                 elseif ($proposition == $propositions[0])
-                  $class_proposition = 'normal';
+                  $classProposition = 'normal';
                 else
-                  $class_proposition = 'normal';
+                  $classProposition = 'normal';
 
                 // Proposition
-                echo '<div class="zone_proposition proposition_' . $class_proposition . '">';
-                  echo '<div class="image_' . $class_proposition . '">';
+                echo '<div class="zone_proposition proposition_' . $classProposition . '">';
+                  echo '<div class="image_' . $classProposition . '">';
                     // Image
                     if (!empty($proposition->getPicture()))
                       echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
@@ -268,14 +268,14 @@
                   echo '</div>';
 
                   // Nom restaurant
-                  echo '<div class="nom_proposition nom_' . $class_proposition . '">' . formatString($proposition->getName(), 20) . '</div>';
+                  echo '<div class="nom_proposition nom_' . $classProposition . '">' . formatString($proposition->getName(), 20) . '</div>';
 
                   // Réserveur
                   if ($proposition->getDetermined() == "Y" AND !empty($proposition->getCaller()))
                   {
                     $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, "avatar");
 
-                    echo '<div class="caller_' . $class_proposition . '">';
+                    echo '<div class="caller_' . $classProposition . '">';
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';
                     echo '</div>';
                   }

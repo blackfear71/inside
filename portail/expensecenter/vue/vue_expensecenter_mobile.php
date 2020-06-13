@@ -48,6 +48,36 @@
       <article>
         <?php
           /**********/
+          /* Années */
+          /**********/
+          echo '<div id="zoneSaisieAnnee" class="fond_saisie">';
+            echo '<div class="div_saisie">';
+              // Titre
+              echo '<div class="zone_titre_saisie">';
+                echo 'Voir une autre année';
+              echo '</div>';
+
+              // Saisie
+              echo '<div class="zone_contenu_saisie">';
+                echo '<div class="contenu_saisie">';
+                  foreach ($onglets as $annee)
+                  {
+                    if ($annee == date('Y'))
+                      echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
+                    else
+                      echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
+                  }
+                echo '</div>';
+              echo '</div>';
+
+              // Bouton fermeture
+              echo '<div class="zone_boutons_saisie">';
+                echo '<a id="fermerSaisieAnnee" class="bouton_saisie_fermer">Fermer</a>';
+              echo '</div>';
+            echo '</div>';
+          echo '</div>';
+
+          /**********/
           /* Saisie */
           /**********/
 
@@ -55,7 +85,7 @@
           /* Boutons d'action */
           /********************/
           // Années
-          echo '<a id="" title="Changer d\'année" class="lien_red">' . $_GET['year'] . '</a>';
+          echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red">' . $_GET['year'] . '</a>';
 
           // Saisie dépense
           echo '<a id="" title="Saisir une dépense" class="lien_green">Saisir une dépense</a>';
@@ -63,14 +93,48 @@
           /**********/
           /* Bilans */
           /**********/
+          // Titre
           echo '<div id="titre_depenses_bilan" class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/total_grey.png" alt="total_grey" class="logo_titre_section" />';
             echo '<div class="texte_titre_section">Bilan</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
 
-          echo '<div id="afficher_depenses_bilan" class="empty">';
-            echo 'Ici apparaîtra bientôt le bilan de tous les utilisateurs du site. Il reste consultable à tout moment sur la version web.';
+          // Bilan
+          echo '<div id="afficher_depenses_bilan" class="zone_bilan_users">';
+            foreach ($listeUsers as $user)
+            {
+              // Détermination classe à appliquer
+              if ($user->getExpenses() <= -6)
+                $classBilan = 'rouge';
+              elseif ($user->getExpenses() <= -3 AND $user->getExpenses() > -6)
+                $classBilan = 'orange';
+              elseif ($user->getExpenses() < -0.01 AND $user->getExpenses() > -3)
+                $classBilan = 'jaune';
+              elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() < 5)
+                $classBilan = 'vert';
+              elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() >= 5)
+                $classBilan = 'vert_fonce';
+              else
+                $classBilan = 'gris';
+
+              // Bilan
+              echo '<div class="zone_bilan_user bilan_' . $classBilan . '">';
+                // Avatar
+                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+
+                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_bilan" />';
+
+                // Pseudo
+                echo '<div class="pseudo_bilan">' . formatString($user->getPseudo(), 15) . "</div>";
+
+                // Total
+                if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)
+                  echo '<div class="total_bilan total_' . $classBilan . '">' . formatBilanForDisplay(abs($user->getExpenses())) . '</div>';
+                else
+                  echo '<div class="total_bilan total_' . $classBilan . '">' . formatBilanForDisplay($user->getExpenses()) . '</div>';
+              echo '</div>';
+            }
           echo '</div>';
 
           /************/
@@ -83,7 +147,7 @@
           echo '</div>';
 
           echo '<div id="afficher_depenses_utilisateurs" class="empty" style="display: none;">';
-            echo 'De même, la liste des dépenses sera prochainement accessible.';
+            echo 'Ici apparaîtra bientôt la liste des dépenses. Quand elle sera disponible, on pourra voir les détails d\'une dépense et la modifier. En attendant, ces fonctionnalités restent disponible sur la version classique du site.';
           echo '</div>';
         ?>
       </article>

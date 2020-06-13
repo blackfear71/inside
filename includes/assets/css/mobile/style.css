@@ -693,7 +693,7 @@ aside
 	height: 100%;
 }
 
-.form_saisie
+.form_saisie, .div_saisie
 {
 	width: 90%;
 	max-height: 80vh;
@@ -717,6 +717,98 @@ aside
 	font-size: 3vh;
 	background-color: #ff1937;
 	border-bottom: solid 0.3vh #c81932;
+}
+
+.zone_contenu_saisie
+{
+	width: 100%;
+	max-height: 65.7vh;
+	overflow-y: auto;
+}
+
+.contenu_saisie
+{
+	width: calc(100% - 4vh);
+	padding: 1vh 2vh 0.5vh 2vh;
+	background-color: white;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+}
+
+.lien_saisie
+{
+	display: block;
+	width: calc(100% - 2vh);
+	padding: 1vh;
+	margin-top: 1.5vh;
+	margin-bottom: 2vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+  text-align: center;
+	border-radius: 1vw;
+	box-shadow: 0 0 1vw #7c7c7c;
+  text-decoration: none;
+  background-color: #e3e3e3;
+}
+
+.lien_courant
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.lien_saisie:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.zone_boutons_saisie
+{
+	display: block;
+	text-align: center;
+}
+
+.bouton_saisie_fermer
+{
+	display: block;
+	width: 100%;
+	height: 6vh;
+	line-height: 6vh;
+	background-color: #e3e3e3;
+	border: 0;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+}
+
+.bouton_saisie_gauche
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 50%;
+	height: 6vh;
+	line-height: 6vh;
+	background-color: #70d55d;
+	border: 0;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 3vh;
+}
+
+.bouton_saisie_droite
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 50%;
+	height: 6vh;
+	line-height: 6vh;
+	background-color: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 3vh;
 }
 
 /*** Recherche live ***/
@@ -752,21 +844,11 @@ aside
 	font-size: 2.5vh;
 }
 
-.zone_contenu_saisie
+.zone_contenu_saisie_live
 {
 	width: 100%;
 	max-height: 59.7vh;
 	overflow-y: auto;
-}
-
-.contenu_saisie
-{
-	width: calc(100% - 4vh);
-	padding: 1vh 2vh 0.5vh 2vh;
-	background-color: white;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
-	font-size: 2.5vh;
 }
 
 .empty_recherche_live
@@ -774,39 +856,6 @@ aside
 	display: none;
 	line-height: 10vh;
 	text-align: center;
-}
-
-.zone_boutons_saisie
-{
-	display: block;
-	text-align: center;
-}
-
-.bouton_saisie_gauche
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 50%;
-	height: 6vh;
-	line-height: 6vh;
-	background-color: #70d55d;
-	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
-	color: white;
-	font-size: 3vh;
-}
-
-.bouton_saisie_droite
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 50%;
-	height: 6vh;
-	line-height: 6vh;
-	background-color: #ff1937;
-	font-family: robotolight, Verdana, sans-serif;
-	color: white;
-	font-size: 3vh;
 }
 
 /*** Pied de page ***/
