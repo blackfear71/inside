@@ -63,6 +63,12 @@ $(function()
         switchCheckedColor('switch_default_view_chat', id_bouton);
         break;
 
+      // Celsius
+      case 'bouton_celsius_yes':
+      case 'bouton_celsius_no':
+        switchCheckedColor('switch_default_view_celsius', id_bouton);
+        break;
+
       default:
         break;
     }

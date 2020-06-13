@@ -4,6 +4,80 @@
 
     echo '<form method="post" action="profil.php?action=doUpdatePreferences">';
       echo '<div class="zone_profil_contributions">';
+        /***************/
+        /*** Celsius ***/
+        /***************/
+        echo '<div class="zone_contributions">';
+          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/celsius_grey.png" alt="celsius_grey" class="logo_titre_contribution" />CELSIUS</div>';
+
+          // Vue par défaut
+          echo '<div class="sous_titre_contribution">Affichage sur mobile</div>';
+
+          echo '<div class="zone_contribution large">';
+            if ($preferences->getCelsius() == "Y")
+            {
+              echo '<div id="bouton_celsius_yes" class="switch_default_view_celsius bouton_checked">';
+                echo '<input id="celsius_yes" type="radio" name="celsius_view" value="Y" checked required />';
+                echo '<label for="celsius_yes" class="label_switch">Oui</label>';
+              echo '</div>';
+
+              echo '<div id="bouton_celsius_no" class="switch_default_view_celsius">';
+                echo '<input id="celsius_no" type="radio" name="celsius_view" value="N" required />';
+                echo '<label for="celsius_no" class="label_switch">Non</label>';
+              echo '</div>';
+            }
+            else
+            {
+              echo '<div id="bouton_celsius_yes" class="switch_default_view_celsius">';
+                echo '<input id="celsius_yes" type="radio" name="celsius_view" value="Y" required />';
+                echo '<label for="celsius_yes" class="label_switch">Oui</label>';
+              echo '</div>';
+
+              echo '<div id="bouton_celsius_no" class="switch_default_view_celsius bouton_checked">';
+                echo '<input id="celsius_no" type="radio" name="celsius_view" value="N" checked required />';
+                echo '<label for="celsius_no" class="label_switch">Non</label>';
+              echo '</div>';
+            }
+          echo '</div>';
+        echo '</div>';
+
+        /************/
+        /*** Chat ***/
+        /************/
+        echo '<div class="zone_contributions">';
+          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/chat_grey.png" alt="chat_grey" class="logo_titre_contribution" />INSIDE ROOM</div>';
+
+          // Vue par défaut
+          echo '<div class="sous_titre_contribution">Affichage à la connexion</div>';
+
+          echo '<div class="zone_contribution large">';
+            if ($preferences->getInit_chat() == "Y")
+            {
+              echo '<div id="bouton_chat_yes" class="switch_default_view_chat bouton_checked">';
+                echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" checked required />';
+                echo '<label for="chat_yes" class="label_switch">Oui</label>';
+              echo '</div>';
+
+              echo '<div id="bouton_chat_no" class="switch_default_view_chat">';
+                echo '<input id="chat_no" type="radio" name="inside_room_view" value="N" required />';
+                echo '<label for="chat_no" class="label_switch">Non</label>';
+              echo '</div>';
+            }
+            else
+            {
+              echo '<div id="bouton_chat_yes" class="switch_default_view_chat">';
+                echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" required />';
+                echo '<label for="chat_yes" class="label_switch">Oui</label>';
+              echo '</div>';
+
+              echo '<div id="bouton_chat_no" class="switch_default_view_chat bouton_checked">';
+                echo '<input id="chat_no" type="radio" name="inside_room_view" value="N" checked required />';
+                echo '<label for="chat_no" class="label_switch">Non</label>';
+              echo '</div>';
+            }
+          echo '</div>';
+        echo '</div>';
+
         /*********************/
         /*** Notifications ***/
         /*********************/
@@ -241,43 +315,6 @@
               echo '<div id="bouton_done" class="switch_default_view_ideas">';
                 echo '<input id="done" type="radio" name="the_box_view" value="D" required />';
                 echo '<label for="done" class="label_switch">Terminées & rejetées</label>';
-              echo '</div>';
-            }
-          echo '</div>';
-        echo '</div>';
-
-        /************/
-        /*** Chat ***/
-        /************/
-        echo '<div class="zone_contributions">';
-          echo '<div class="titre_contribution"><img src="../../includes/icons/profil/chat_grey.png" alt="chat_grey" class="logo_titre_contribution" />INSIDE ROOM</div>';
-
-          // Vue par défaut
-          echo '<div class="sous_titre_contribution">Affichage à la connexion</div>';
-
-          echo '<div class="zone_contribution large">';
-            if ($preferences->getInit_chat() == "Y")
-            {
-              echo '<div id="bouton_chat_yes" class="switch_default_view_chat bouton_checked">';
-                echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" checked required />';
-                echo '<label for="chat_yes" class="label_switch">Oui</label>';
-              echo '</div>';
-
-              echo '<div id="bouton_chat_no" class="switch_default_view_chat">';
-                echo '<input id="chat_no" type="radio" name="inside_room_view" value="N" required />';
-                echo '<label for="chat_no" class="label_switch">Non</label>';
-              echo '</div>';
-            }
-            else
-            {
-              echo '<div id="bouton_chat_yes" class="switch_default_view_chat">';
-                echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" required />';
-                echo '<label for="chat_yes" class="label_switch">Oui</label>';
-              echo '</div>';
-
-              echo '<div id="bouton_chat_no" class="switch_default_view_chat bouton_checked">';
-                echo '<input id="chat_no" type="radio" name="inside_room_view" value="N" checked required />';
-                echo '<label for="chat_no" class="label_switch">Non</label>';
               echo '</div>';
             }
           echo '</div>';

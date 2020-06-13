@@ -418,7 +418,8 @@
 .switch_default_view_movies,
 .switch_show_films,
 .switch_default_view_ideas,
-.switch_default_view_chat
+.switch_default_view_chat,
+.switch_default_view_celsius
 {
 	display: inline-block;
 	margin: 10px 5px 0 5px;
@@ -438,7 +439,8 @@
 .switch_default_view_movies input,
 .switch_show_films input,
 .switch_default_view_ideas input,
-.switch_default_view_chat input
+.switch_default_view_chat input,
+.switch_default_view_celsius input
 {
 	cursor: pointer;
 }
@@ -449,7 +451,8 @@
 .switch_default_view_movies:hover,
 .switch_show_films:hover,
 .switch_default_view_ideas:hover,
-.switch_default_view_chat:hover
+.switch_default_view_chat:hover,
+.switch_default_view_celsius:hover
 {
 	background-color: #ff1937;
 	color: white;

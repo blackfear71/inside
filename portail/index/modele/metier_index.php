@@ -92,6 +92,7 @@
         // Récupération des préférences
         $preferences = physiquePreferences($user->getIdentifiant());
 
+        $_SESSION['user']['celsius']            = $preferences->getCelsius();
         $_SESSION['user']['view_movie_house']   = $preferences->getView_movie_house();
         $_SESSION['user']['view_the_box']       = $preferences->getView_the_box();
         $_SESSION['user']['view_notifications'] = $preferences->getView_notifications();
@@ -138,6 +139,7 @@
     // Initialisations préférences utilisateur
     $refTheme             = '';
     $initChat             = 'Y';
+    $celsius              = 'Y';
     $viewMovieHouse       = 'H';
     $categoriesMovieHouse = 'Y;Y;Y;';
     $viewTheBox           = 'P';
@@ -161,7 +163,7 @@
     if ($control_ok == true)
       $control_ok = controleConfirmationPassword($password, $confirm);
 
-    // Insertion de l'enregistrement en base
+    // Insertion des enregistrements en base
     if ($control_ok == true)
     {
       $user = array('identifiant' => $trigramme,
@@ -182,6 +184,7 @@
        $preferences = array('identifiant'            => $trigramme,
                             'ref_theme'              => $refTheme,
                             'init_chat'              => $initChat,
+                            'celsius'                => $celsius,
                             'view_movie_house'       => $viewMovieHouse,
                             'categories_movie_house' => $categoriesMovieHouse,
                             'view_the_box'           => $viewTheBox,

@@ -382,8 +382,12 @@
     // Préférences INSIDE Room
     $init_chat = $post['inside_room_view'];
 
+    // Préférences Celsius
+    $celsius = $post['celsius_view'];
+
     // Mise à jour de la table des préférences utilisateur
     $reponse = $bdd->prepare('UPDATE preferences SET init_chat              = :init_chat,
+                                                     celsius                = :celsius,
                                                      view_movie_house       = :view_movie_house,
                                                      categories_movie_house = :categories_movie_house,
                                                      view_the_box           = :view_the_box,
@@ -391,6 +395,7 @@
                                                WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
       'init_chat'              => $init_chat,
+      'celsius'                => $celsius,
       'view_movie_house'       => $view_movie_house,
       'categories_movie_house' => $categories_movie_house,
       'view_the_box'           => $view_the_box,
@@ -399,6 +404,7 @@
     $reponse->closeCursor();
 
     // Mise à jour des préférences stockées en SESSION
+    $_SESSION['user']['celsius']            = $celsius;
     $_SESSION['user']['view_movie_house']   = $view_movie_house;
     $_SESSION['user']['view_the_box']       = $view_the_box;
     $_SESSION['user']['view_notifications'] = $view_notifications;

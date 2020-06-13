@@ -1,5 +1,5 @@
 <?php
-  if (!empty($celsius))
+  if ($_SESSION['user']['celsius'] == 'Y' AND !empty($celsius))
   {
     switch($celsius)
     {

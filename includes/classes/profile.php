@@ -422,6 +422,7 @@
     private $id;
     private $ref_theme;
     private $init_chat;
+    private $celsius;
     private $view_movie_house;
     private $categories_movie_house;
     private $view_the_box;
@@ -434,6 +435,7 @@
       $this->id                     = 0;
       $this->ref_theme              = '';
       $this->init_chat              = '';
+      $this->celsius                = '';
       $this->view_movie_house       = '';
       $this->categories_movie_house = '';
       $this->view_the_box           = '';
@@ -461,6 +463,9 @@
 
       if (isset($data['init_chat']))
         $this->init_chat              = $data['init_chat'];
+
+      if (isset($data['celsius']))
+        $this->celsius                = $data['celsius'];
 
       if (isset($data['view_movie_house']))
         $this->view_movie_house       = $data['view_movie_house'];
@@ -510,6 +515,17 @@
     public function getInit_chat()
     {
       return $this->init_chat;
+    }
+
+    // Affichage Celsius
+    public function setCelsius($celsius)
+    {
+      $this->celsius = $celsius;
+    }
+
+    public function getCelsius()
+    {
+      return $this->celsius;
     }
 
     // Préférence vue par défaut Movie House
