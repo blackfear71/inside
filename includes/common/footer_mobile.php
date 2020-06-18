@@ -7,8 +7,11 @@
 
   // Zone footer
   echo '<div class="zone_footer_right">';
+    // Récupération de la plateforme
+    $plateforme = getPlateforme();
+
     // Affichage switch version sur mobile
-    if ($_SESSION['index']['plateforme'] == 'mobile')
+    if ($plateforme == 'mobile')
     {
       echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version classique">';
         echo '<img src="/inside/includes/icons/common/classic.png" alt="classic" title="Basculer vers la version classique" class="icone_footer" />';
