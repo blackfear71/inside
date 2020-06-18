@@ -4,7 +4,17 @@
     session_start();
 
   // Récupération de la plateforme
-  $plateforme = getPlateforme();
+  $plateforme = 'web';
+  $userAgent  = $_SERVER['HTTP_USER_AGENT'];
+
+  if (preg_match('/iphone/i', $userAgent)
+  ||  preg_match('/android/i', $userAgent)
+  ||  preg_match('/blackberry/i', $userAgent)
+  ||  preg_match('/symb/i', $userAgent)
+  ||  preg_match('/ipad/i', $userAgent)
+  ||  preg_match('/ipod/i', $userAgent)
+  ||  preg_match('/phone/i', $userAgent))
+    $plateforme = 'mobile';
 
   // Date de dernière modification pour mise à jour automatique du cache du navigateur
   $last_modification_errors = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleErrors.css');
