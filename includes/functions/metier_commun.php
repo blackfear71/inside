@@ -21,8 +21,8 @@
       $_SESSION['index']['connected'] = false;
 
     // Mobile
-    if (!isset($_SESSION['index']['mobile']))
-      $_SESSION['index']['mobile'] = isMobile();
+    if (!isset($_SESSION['index']['plateforme']))
+      $_SESSION['index']['plateforme'] = getPlateforme();
   }
 
   // Contrôles Administrateur, initialisation session
@@ -41,8 +41,8 @@
     if ($_SESSION['index']['connected'] == false)
       header('location: /inside/index.php?action=goConsulter');
 
-    // Mobile
-    $_SESSION['index']['mobile'] = false;
+    // Plateforme
+    $_SESSION['index']['plateforme'] = 'web';
   }
 
   // Contrôles Utilisateur, initialisation session, mission et thème
@@ -126,12 +126,12 @@
   }
 
   // Contrôle si on est sur mobile
-  // RETOUR : Booléen
-  function isMobile()
+  // RETOUR : Plateforme
+  function getPlateforme()
   {
     // Initialisations
-    $isMobile  = false;
-    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+    $plateforme = 'web';
+    $userAgent  = $_SERVER['HTTP_USER_AGENT'];
 
     // Contrôle
     if (preg_match('/iphone/i', $userAgent)
@@ -141,10 +141,10 @@
     ||  preg_match('/ipad/i', $userAgent)
     ||  preg_match('/ipod/i', $userAgent)
     ||  preg_match('/phone/i', $userAgent))
-      $isMobile = true;
+      $plateforme = 'mobile';
 
     // Retour
-    return $isMobile;
+    return $plateforme;
   }
 
   // Contrôle si la page courante est accessible sur mobile
@@ -155,7 +155,7 @@
     $isAccessibleMobile = true;
 
     // Contrôle
-    if ($_SESSION['index']['mobile'] == true)
+    if ($_SESSION['index']['plateforme'] == 'mobile')
     {
       if ($path != '/inside/portail/expensecenter/expensecenter.php'
       AND $path != '/inside/portail/foodadvisor/foodadvisor.php'

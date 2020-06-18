@@ -4,10 +4,10 @@
     session_start();
 
   // Modification de la session
-  if ($_SESSION['index']['mobile'] == true)
-    $_SESSION['index']['mobile'] = false;
+  if ($_SESSION['index']['plateforme'] == 'mobile')
+    $_SESSION['index']['plateforme'] = 'web';
   else
-    $_SESSION['index']['mobile'] = true;
+    $_SESSION['index']['plateforme'] = 'mobile';
 
   // Rafraichissement de la page courante
   header('location: ' . $_SERVER['HTTP_REFERER']);

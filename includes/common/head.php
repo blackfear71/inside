@@ -1,45 +1,39 @@
 <?php
-  // Récupération de la plateforme
-  if ($_SESSION['index']['mobile'] == true)
-    $platform = 'mobile';
-  else
-    $platform = 'web';
-
   // Dates de dernière modification (CSS et JS) pour mise à jour automatique du cache du navigateur
-  $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $platform . '/style.css');
+  $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css');
 
   if (!empty($style_head))
-    $last_modification_css2 = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $platform . '/' . $style_head);
+    $last_modification_css2 = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $style_head);
 
   if (isset($chat_head) AND $chat_head == true)
-    $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $platform . '/styleChat.css');
+    $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css');
 
   if (isset($datepicker_head) AND $datepicker_head == true)
     $last_modification_css_datepicker = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/libraries/css/datepicker.css');
 
-  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $platform . '/script.js');
+  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
 
   if (!empty($script_head))
-    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $platform . '/' . $script_head);
+    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $script_head);
 
   // Meta-données
   echo '<meta charset="utf-8" />';
   echo '<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />';
   echo '<meta name="keywords" content="Inside, portail, CDS Finance" />';
 
-  if ($_SESSION['index']['mobile'] == true)
+  if ($_SESSION['index']['plateforme'] == 'mobile')
     echo '<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">';
 
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
-  echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/style.css?version=' . $last_modification_css . '" />';
+  echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css?version=' . $last_modification_css . '" />';
 
   // Styles spécifiques
   if (!empty($style_head))
-    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/' . $style_head . '?version=' . $last_modification_css2 . '" />';
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $style_head . '?version=' . $last_modification_css2 . '" />';
 
   if (isset($chat_head) AND $chat_head == true)
-    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $platform . '/styleChat.css?version=' . $last_modification_css_chat . '" />';
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css?version=' . $last_modification_css_chat . '" />';
 
   if (isset($datepicker_head) AND $datepicker_head == true)
     echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $last_modification_css_datepicker . '">';
@@ -54,7 +48,7 @@
 <!-- Scripts communs -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-<script src="/inside/includes/assets/js/<?php echo $platform; ?>/script.js?version=<?php echo $last_modification_js; ?>"></script>
+<script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/script.js?version=<?php echo $last_modification_js; ?>"></script>
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
@@ -65,11 +59,11 @@
 <?php } ?>
 
 <?php if (!empty($script_head)) { ?>
-  <script src="/inside/includes/assets/js/<?php echo $platform; ?>/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/<?php echo $script_head; ?>?version=<?php echo $last_modification_js2; ?>"></script>
 <?php } ?>
 
 <?php if (isset($chat_head) AND $chat_head == true) { ?>
-  <script src="/inside/includes/assets/js/<?php echo $platform; ?>/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/scriptChat.js?version=<?php echo $last_modification_css_chat; ?>"></script>
 <?php } ?>
 
 <?php if (isset($masonry_head) AND $masonry_head == true) { ?>

@@ -57,10 +57,8 @@
 
       // Zone footer
       echo '<div class="zone_footer_right">';
-        // Basculement mobile
-        $footerMobile = isMobile();
-
-        if ($footerMobile == true)
+        // Affichage switch version sur mobile
+        if ($_SESSION['index']['plateforme'] == 'mobile')
         {
           echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version mobile">';
             echo '<img src="/inside/includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer" />';
@@ -100,10 +98,8 @@
 
     // Zone footer
     echo '<div class="zone_footer_right">';
-      // Basculement mobile
-      $footerMobile = isMobile();
-
-      if ($footerMobile == true)
+      // Affichage switch version sur mobile
+      if ($_SESSION['index']['plateforme'] == 'mobile')
       {
         echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version mobile">';
           echo '<img src="/inside/includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer" />';
