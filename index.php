@@ -77,10 +77,7 @@
 
 		case 'goConsulter':
     default:
-			if ($_SESSION['index']['plateforme'] == 'mobile')
-				include_once('portail/index/vue/vue_index_mobile.php');
-			else
-      	include_once('portail/index/vue/vue_index.php');
+			include_once('portail/index/vue/' . $_SESSION['index']['plateforme'] . '/vue_index.php');
       break;
   }
 ?>

@@ -67,7 +67,7 @@
           /* Saisie choix */
           /****************/
           if ($actions["saisir_choix"] == true)
-            include('vue/vue_saisie_choix.php');
+            include('vue/web/vue_saisie_choix.php');
 
           /*******************/
           /* Chargement page */
@@ -79,23 +79,23 @@
           /*************************/
           /* Détails détermination */
           /*************************/
-          include('vue/vue_details_determination.php');
+          include('vue/web/vue_details_determination.php');
 
           /***********************************************/
           /* Propositions, choix et résumé de la semaine */
           /***********************************************/
           echo '<div class="zone_propositions_determination">';
             // Utilisateurs
-            include('vue/vue_utilisateurs.php');
+            include('vue/web/vue_utilisateurs.php');
 
             // Propositions
-            include('vue/vue_propositions.php');
+            include('vue/web/vue_propositions.php');
 
             // Mes choix
-            include('vue/vue_mes_choix.php');
+            include('vue/web/vue_mes_choix.php');
 
             // Résumé de la semaine
-            include('vue/vue_resume_semaine.php');
+            include('vue/web/vue_resume_semaine.php');
           echo '</div>';
         ?>
 			</article>

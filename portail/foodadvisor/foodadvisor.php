@@ -391,10 +391,7 @@
 
     case 'goConsulter':
     default:
-      if ($_SESSION['index']['plateforme'] == 'mobile')
-        include_once('vue/vue_foodadvisor_mobile.php');
-      else
-        include_once('vue/vue_foodadvisor.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_foodadvisor.php');
       break;
   }
 ?>

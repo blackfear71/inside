@@ -171,7 +171,7 @@
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_restaurants.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_restaurants.php');
       break;
   }
 ?>

@@ -138,10 +138,7 @@
 
     case 'goConsulter':
     default:
-      if ($_SESSION['index']['plateforme'] == 'mobile')
-        include_once('vue/vue_expensecenter_mobile.php');
-      else
-        include_once('vue/vue_expensecenter.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_expensecenter.php');
       break;
   }
 ?>
