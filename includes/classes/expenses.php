@@ -8,7 +8,7 @@
     private $pseudo;
     private $avatar;
     private $comment;
-    private $nb_parts;
+    private $nb_users;
     private $parts;
 
     // Constructeur par défaut (objet vide)
@@ -21,7 +21,7 @@
       $this->pseudo   = '';
       $this->avatar   = '';
       $this->comment  = '';
-      $this->nb_parts = 0;
+      $this->nb_users = 0;
       $this->parts    = array();
     }
 
@@ -131,15 +131,15 @@
       return $this->comment;
     }
 
-    // Nombre de parts
-    public function setNb_parts($nb_parts)
+    // Nombre d'utilisateurs
+    public function setNb_users($nb_users)
     {
-      $this->nb_parts = $nb_parts;
+      $this->nb_users = $nb_users;
     }
 
-    public function getNb_parts()
+    public function getNb_users()
     {
-      return $this->nb_parts;
+      return $this->nb_users;
     }
 
     // Tableau des parts

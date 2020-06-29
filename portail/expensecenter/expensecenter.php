@@ -93,7 +93,7 @@
           $depense->setPseudo(htmlspecialchars($depense->getPseudo()));
           $depense->setAvatar(htmlspecialchars($depense->getAvatar()));
           $depense->setComment(htmlspecialchars($depense->getComment()));
-          $depense->setNb_parts(htmlspecialchars($depense->getNb_parts()));
+          $depense->setNb_users(htmlspecialchars($depense->getNb_users()));
 
           foreach ($depense->getParts() as &$parts)
           {
