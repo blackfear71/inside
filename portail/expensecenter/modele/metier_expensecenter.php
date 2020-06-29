@@ -101,8 +101,9 @@
     $reponse1 = $bdd->query('SELECT * FROM expense_center WHERE SUBSTR(date, 1, 4) = ' . $year . ' ORDER BY date DESC, id DESC');
     while ($donnees1 = $reponse1->fetch())
     {
-      $listeParts = array();
-      $expense    = Expenses::withData($donnees1);
+      $listeParts         = array();
+      $nombrePartsDepense = 0;
+      $expense            = Expenses::withData($donnees1);
 
       $expense->setPrice(str_replace('.', ',', $expense->getPrice()));
 
@@ -121,6 +122,9 @@
       {
         $partsUser = Parts::withData($donnees3);
 
+        // Calcul du nombre de part totale de la dépense
+        $nombrePartsDepense += $donnees3['parts'];
+
         // Recherche pseudo et avatar utilisateur
         $reponse4 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $partsUser->getIdentifiant() . '"');
         $donnees4 = $reponse4->fetch();
@@ -136,6 +140,7 @@
       }
       $reponse3->closeCursor();
 
+      $expense->setNb_parts($nombrePartsDepense);
       $expense->setParts($listeParts);
 
       // Ajout d'un objet Expenses (instancié à partir des données de la base) au tableau de dépenses

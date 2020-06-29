@@ -68,6 +68,30 @@
     return $formatMonth;
   }
 
+  /* formatMonthForDisplayLight
+     On stocke le mois sur 2 caractères et le convertit en une chaîne de caractères pour obtenir le mot correspondant
+  */
+  function formatMonthForDisplayLight($month)
+  {
+    $listeMois = array('01' => 'JAN',
+                       '02' => 'FÉV',
+                       '03' => 'MAR',
+                       '04' => 'AVR',
+                       '05' => 'MAI',
+                       '06' => 'JUIN',
+                       '07' => 'JUIL',
+                       '08' => 'AOÛT',
+                       '09' => 'SEP',
+                       '10' => 'OCT',
+                       '11' => 'NOV',
+                       '12' => 'DÉC'
+                      );
+
+    $formatMonth = $listeMois[$month];
+
+    return $formatMonth;
+  }
+
   /* formatWeekForDisplay
      Formate un numéro de semaine sans le 0 initial
   */

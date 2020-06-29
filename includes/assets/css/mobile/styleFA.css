@@ -114,6 +114,7 @@
 .zone_propositions_users
 {
 	width: 100%;
+	margin-bottom: -1.5vh;
 }
 
 .zone_proposition
@@ -263,10 +264,15 @@
 }
 
 /*** Mes choix ***/
+.zone_propositions_choix
+{
+	margin-top: 3vh;
+	margin-bottom: -1.5vh;
+}
+
 .zone_propositions_mes_choix
 {
 	width: 100%;
-	margin-bottom: -1.5vh;
 }
 
 .form_delete_choix

@@ -146,8 +146,51 @@
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
           echo '</div>';
 
-          echo '<div id="afficher_depenses_utilisateurs" class="empty" style="display: none;">';
-            echo 'Ici apparaîtra bientôt la liste des dépenses. Quand elle sera disponible, on pourra voir les détails d\'une dépense et la modifier. En attendant, ces fonctionnalités restent disponible sur la version classique du site.';
+          echo '<div id="afficher_depenses_utilisateurs" class="zone_depenses_users" style="display: none;">';
+            if (!empty($listeDepenses))
+            {
+              foreach ($listeDepenses as $depense)
+              {
+                // Proposition
+                echo '<div class="zone_depense">';
+                  // Date
+                  echo '<div class="zone_depense_date">';
+                    // Jour
+                    echo '<div class="zone_depense_date_jour">';
+                      echo substr($depense->getDate(), 6, 2);
+                    echo '</div>';
+
+                    // Mois
+                    echo '<div class="zone_depense_date_mois">';
+                      echo formatMonthForDisplayLight(substr($depense->getDate(), 4, 2));
+                    echo '</div>';
+                  echo '</div>';
+
+                  // Acheteur
+                  $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+
+                  echo '<div class="zone_depense_avatar">';
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
+                  echo '</div>';
+
+                  // Prix
+                  echo '<div class="zone_depense_prix prix_depense">';
+                    echo formatBilanForDisplay($depense->getPrice());
+                  echo '</div>';
+
+                  // Parts
+                  echo '<div class="zone_depense_parts">';
+                    // Image
+                    echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Parts utilisateurs" class="icone_depense" />';
+
+                    // Nombre de parts
+                    echo '<div class="nombre_parts_depense">' . $depense->getNb_parts() . '</div>';
+                  echo '</div>';
+                echo '</div>';
+              }
+            }
+            else
+              echo '<div class="empty">Aucune dépense pour cette année</div>';
           echo '</div>';
         ?>
       </article>

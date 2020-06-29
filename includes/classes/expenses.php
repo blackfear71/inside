@@ -8,19 +8,21 @@
     private $pseudo;
     private $avatar;
     private $comment;
+    private $nb_parts;
     private $parts;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id      = 0;
-      $this->date    = '';
-      $this->price   = '';
-      $this->buyer   = '';
-      $this->pseudo  = '';
-      $this->avatar  = '';
-      $this->comment = '';
-      $this->parts   = array();
+      $this->id       = 0;
+      $this->date     = '';
+      $this->price    = '';
+      $this->buyer    = '';
+      $this->pseudo   = '';
+      $this->avatar   = '';
+      $this->comment  = '';
+      $this->nb_parts = 0;
+      $this->parts    = array();
     }
 
     // Constructeur de l'objet Expenses en fonction des données
@@ -127,6 +129,17 @@
     public function getComment()
     {
       return $this->comment;
+    }
+
+    // Nombre de parts
+    public function setNb_parts($nb_parts)
+    {
+      $this->nb_parts = $nb_parts;
+    }
+
+    public function getNb_parts()
+    {
+      return $this->nb_parts;
     }
 
     // Tableau des parts
