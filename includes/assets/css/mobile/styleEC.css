@@ -245,7 +245,7 @@
 	color: #262626;
 }
 
-.zone_depense_parts
+.zone_depense_users
 {
 	display: inline-block;
 	vertical-align: middle;
@@ -266,13 +266,13 @@
 	filter: drop-shadow(0px 0px 2px #7c7c7c);
 }
 
-.nombre_parts_depense
+.nombre_users_depense
 {
 	float: right;
 	position: absolute;
 	z-index: 1;
 	margin-left: calc(12.5% + 1vh);
-	margin-top: 6vh;
+	margin-top: -3.5vh;
 	width: 2.5vh;
 	height: 2.5vh;
 	line-height: 2.5vh;

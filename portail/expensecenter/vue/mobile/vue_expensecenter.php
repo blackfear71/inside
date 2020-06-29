@@ -179,12 +179,12 @@
                   echo '</div>';
 
                   // Parts
-                  echo '<div class="zone_depense_parts">';
+                  echo '<div class="zone_depense_users">';
                     // Image
-                    echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Parts utilisateurs" class="icone_depense" />';
+                    echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Nombre d\'utilisateurs" class="icone_depense" />';
 
                     // Nombre de parts
-                    echo '<div class="nombre_parts_depense">' . $depense->getNb_users() . '</div>';
+                    echo '<div class="nombre_users_depense">' . $depense->getNb_users() . '</div>';
                   echo '</div>';
                 echo '</div>';
               }
