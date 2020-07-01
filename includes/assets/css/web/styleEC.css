@@ -295,7 +295,7 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.bouton_qte
+.bouton_quantite
 {
 	display: inline-block;
 	margin-left: 10px;
@@ -313,13 +313,13 @@
   user-select: none;
 }
 
-.bouton_qte:hover
+.bouton_quantite:hover
 {
 	background-color: #c81932;
 	color: white;
 }
 
-.qte
+.quantite
 {
 	display: inline-block;
 	width: 20px;

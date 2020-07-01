@@ -47,7 +47,7 @@ $(function()
     var tabBlock     = [];
 
     // Blocage spécifique (bouton modification parts dépense)
-    tabBlock.push({element: '.bouton_qte', property: 'pointer-events', value: 'none'});
+    tabBlock.push({element: '.bouton_quantite', property: 'pointer-events', value: 'none'});
 
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
@@ -203,7 +203,6 @@ function saisirPart(zone, quantite, value)
     $('#' + zone).css('color', '#262626');
   }
 
-
   if (newValue >= 0 && newValue <= 5)
     $('#' + quantite).val(newValue);
 }
@@ -235,7 +234,7 @@ function updateExpense(id, year)
 
   $('.zone_saisie_utilisateur').each(function()
   {
-    $(this).children('.qte').val('0');
+    $(this).children('.quantite').val('0');
     $(this).css('background-color', '#e3e3e3');
     $(this).css('color', '#262626');
 
@@ -283,7 +282,7 @@ function resetSaisie(zone, year)
 
       $('.zone_saisie_utilisateur').each(function()
       {
-        $(this).children('.qte').val('0');
+        $(this).children('.quantite').val('0');
         $(this).css('background-color', '#e3e3e3');
         $(this).css('color', '#262626');
       });

@@ -206,7 +206,7 @@
 
     $list_parts = array();
 
-    foreach ($post['identifiant_qte'] as $id => $identifiant)
+    foreach ($post['identifiant_quantite'] as $id => $identifiant)
     {
       if ($post['quantite_user'][$id] != 0)
         $list_parts[$identifiant] = $post['quantite_user'][$id];
@@ -358,7 +358,7 @@
 
     $list_parts_new = array();
 
-    foreach ($post['identifiant_qte'] as $id => $identifiant)
+    foreach ($post['identifiant_quantite'] as $id => $identifiant)
     {
       if ($post['quantite_user'][$id] != 0)
         $list_parts_new[$identifiant] = $post['quantite_user'][$id];

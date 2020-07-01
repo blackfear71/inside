@@ -88,20 +88,19 @@
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 
                 // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_qte[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
+                echo '<input type="hidden" name="identifiant_quantite[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
 
                 // Bouton -
-                echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_qte retirerPart">-</div>';
+                echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
 
                 // Quantité
                 if ($saved_parts == true)
-                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="qte" readonly />';
+                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
                 else
-                  // Quantité
-                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="qte" readonly />';
+                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
 
                 // Bouton +
-                echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_qte ajouterPart">+</div>';
+                echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
               echo '</div>';
             }
           echo '</div>';
