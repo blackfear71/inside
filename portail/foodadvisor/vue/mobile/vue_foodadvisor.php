@@ -50,83 +50,7 @@
           /**********/
           /* Saisie */
           /**********/
-          echo '<div id="zoneSaisiePropositions" class="fond_saisie">';
-            echo '<form method="post" action="foodadvisor.php?action=doAjouterMobile" class="form_saisie">';
-              // Titre
-              echo '<div class="zone_titre_saisie">';
-                echo 'Proposer où manger';
-              echo '</div>';
-
-              // Recherche
-              echo '<div class="zone_recherche_live">';
-                // Logo
-                echo '<img src="../../includes/icons/common/search.png" alt="search" title="Rechercher" class="logo_recherche_live" />';
-
-                // Zone de saisie
-                echo '<input class="input_recherche_live" type="text" autocomplete="off" id="recherche_live" placeholder="Rechercher" />';
-
-                // Effacer
-                echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live" class="logo_recherche_live" />';
-              echo '</div>';
-
-              // Saisie
-              echo '<div class="zone_contenu_saisie_live">';
-                echo '<div class="contenu_saisie">';
-                  // Message vide
-                  echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé.</div>';
-
-                  // Restaurants par lieu
-                  foreach ($listeRestaurants as $lieuRestaurants => $restaurantsParLieux)
-                  {
-                    // Lieu
-                    echo '<div class="zone_recherche_conteneur">';
-                      echo '<div id="titre_saisie_' . formatId($lieuRestaurants) . '" class="titre_section">';
-                        echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
-                        echo '<div class="texte_titre_section">' . $lieuRestaurants . '</div>';
-                        echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
-                      echo '</div>';
-
-                      // Restaurants
-                      echo '<div id="afficher_saisie_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
-                        foreach ($restaurantsParLieux as $restaurant)
-                        {
-                          echo '<label for="proposition_restaurant_' . $restaurant->getId() . '" id="label_proposition_' . $restaurant->getId() . '" class="zone_recherche_item">';
-                            echo '<div class="zone_proposition proposition_normal">';
-                              echo '<div class="image_normal">';
-                                // Image
-                                if (!empty($restaurant->getPicture()))
-                                  echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="restaurant" class="image_proposition" />';
-                                else
-                                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
-                              echo '</div>';
-
-                              // Nom restaurant
-                              echo '<div class="nom_proposition nom_normal">' . formatString($restaurant->getName(), 20) . '</div>';
-                              echo '<div class="nom_proposition_complet">' . $restaurant->getName() . '</div>';
-
-                              // Case à cocher
-                              echo '<div class="zone_checkbox_proposition">';
-                                echo '<input type="checkbox" id="proposition_restaurant_' . $restaurant->getId() . '" name="restaurants[' . $restaurant->getId() . ']" class="checkbox_proposition" />';
-                              echo '</div>';
-                            echo '</div>';
-                          echo '</label>';
-                        }
-                      echo '</div>';
-                    echo '</div>';
-                  }
-                echo '</div>';
-              echo '</div>';
-
-              // Boutons
-              echo '<div class="zone_boutons_saisie">';
-                // Valider
-                echo '<input type="submit" name="submit_choices" value="Valider" class="bouton_saisie_gauche" />';
-
-                // Annuler
-                echo '<a id="fermerSaisiePropositions" class="bouton_saisie_droite">Annuler</a>';
-              echo '</div>';
-            echo '</form>';
-          echo '</div>';
+          include('vue/mobile/vue_saisie_propositions.php');
 
           /********************/
           /* Boutons d'action */
@@ -157,198 +81,22 @@
           /****************/
           /* Bande à part */
           /****************/
-          if (isset($solos) AND !empty($solos))
-          {
-            // Titre
-            echo '<div id="titre_propositions_solo" class="titre_section">';
-              echo '<img src="../../includes/icons/foodadvisor/solo_grey.png" alt="solo_grey" class="logo_titre_section" />';
-              echo '<div class="texte_titre_section">Ils font bande à part</div>';
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
-            echo '</div>';
-
-            // Affichage des utilisateurs faisant bande à part
-            echo '<div id="afficher_propositions_solo" class="zone_propositions_solo_sans_vote" style="display: none;">';
-              foreach ($solos as $solo)
-              {
-                echo '<div class="zone_solo_sans_vote">';
-                  // Avatar
-                  $avatarFormatted = formatAvatar($solo->getAvatar(), $solo->getPseudo(), 2, "avatar");
-
-                  echo '<div class="zone_avatar_solo_sans_vote">';
-                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
-                  echo '</div>';
-
-                  // Pseudo
-                  echo '<div class="pseudo_solo_sans_vote">' . formatString($solo->getPseudo(), 30) . '</div>';
-
-                  // Annulation bande à part
-                  if ($isSolo == true AND $actions["choix"] == true AND $solo->getIdentifiant() == $_SESSION['user']['identifiant'])
-                  {
-                    echo '<form method="post" action="foodadvisor.php?action=doSupprimerSolo" class="form_delete_solo">';
-                      echo '<input type="submit" name="delete_solo" value="" title="Ne plus faire bande à part" class="bouton_delete_solo" />';
-                    echo '</form>';
-                  }
-                echo '</div>';
-              }
-            echo '</div>';
-          }
+          include('vue/mobile/vue_bande_a_part.php');
 
           /************/
           /* Non voté */
           /************/
-          if (isset($sansPropositions) AND !empty($sansPropositions))
-          {
-            // Titre
-            echo '<div id="titre_propositions_sans_vote" class="titre_section">';
-              echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-              echo '<div class="texte_titre_section">Ils n\'ont pas voté</div>';
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
-            echo '</div>';
-
-            // Affichage des utilisateurs n'ayant pas voté
-            echo '<div id="afficher_propositions_sans_vote" class="zone_propositions_solo_sans_vote" style="display: none;">';
-              foreach ($sansPropositions as $userSansProposition)
-              {
-                echo '<div class="zone_solo_sans_vote">';
-                  // Avatar
-                  $avatarFormatted = formatAvatar($userSansProposition->getAvatar(), $userSansProposition->getPseudo(), 2, "avatar");
-
-                  echo '<div class="zone_avatar_solo_sans_vote">';
-                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';
-                  echo '</div>';
-
-                  // Pseudo
-                  echo '<div class="pseudo_solo_sans_vote">' . formatString($userSansProposition->getPseudo(), 30) . '</div>';
-                echo '</div>';
-              }
-            echo '</div>';
-          }
+          include('vue/mobile/vue_sans_votes.php');
 
           /************************/
           /* Propositions du jour */
           /************************/
-          // Titre
-          echo '<div id="titre_propositions_users" class="titre_section">';
-            echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Les propositions du jour</div>';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
-          echo '</div>';
-
-          // Affichage des propositions
-          echo '<div id="afficher_propositions_users" class="zone_propositions_users">';
-            if (!empty($propositions))
-            {
-              foreach ($propositions as $proposition)
-              {
-                // Détermination classe à appliquer
-                if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
-                  $classProposition = 'determined';
-                elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
-                  $classProposition = 'determined';
-                elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
-                  $classProposition = 'top';
-                elseif ($proposition->getClassement() == 1 AND $proposition != $propositions[0])
-                  $classProposition = 'top';
-                elseif ($proposition == $propositions[0])
-                  $classProposition = 'normal';
-                else
-                  $classProposition = 'normal';
-
-                // Proposition
-                echo '<div class="zone_proposition proposition_' . $classProposition . '">';
-                  echo '<div class="image_' . $classProposition . '">';
-                    // Image
-                    if (!empty($proposition->getPicture()))
-                      echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
-                    else
-                      echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
-
-                    // Nombre de participants
-                    echo '<div class="nombre_participants_proposition">' . $proposition->getNb_participants() . '</div>';
-                  echo '</div>';
-
-                  // Nom restaurant
-                  echo '<div class="nom_proposition nom_' . $classProposition . '">' . formatString($proposition->getName(), 20) . '</div>';
-
-                  // Réserveur
-                  if ($proposition->getDetermined() == "Y" AND !empty($proposition->getCaller()))
-                  {
-                    $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, "avatar");
-
-                    echo '<div class="caller_' . $classProposition . '">';
-                      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';
-                    echo '</div>';
-                  }
-                echo '</div>';
-              }
-            }
-            else
-            {
-              if (date('N') > 5)
-                echo '<div class="empty">Il est impossible de voter pour aujourd\'hui</div>';
-              else
-              {
-                if (date('H') >= 13)
-                  echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui</div>';
-                else
-                  echo '<div class="empty">Il n\'y a pas encore de propositions pour aujourd\'hui</div>';
-              }
-            }
-          echo '</div>';
+          include('vue/mobile/vue_propositions.php');
 
           /*************/
           /* Mes choix */
           /*************/
-          if (isset($mesChoix) AND !empty($mesChoix) AND $isSolo != true)
-          {
-            echo '<div class="zone_propositions_choix">';
-              // Titre
-              echo '<div id="titre_propositions_mes_choix" class="titre_section">';
-                echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
-                echo '<div class="texte_titre_section">Mes choix</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
-              echo '</div>';
-
-              // Affichage des choix utilisateur
-              echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">';
-                // Supprimer tous les choix
-                if ($actions["supprimer_choix"] == true)
-                {
-                  echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix">';
-                    echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="lien_red eventConfirm" />';
-                    echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
-                  echo '</form>';
-                }
-
-                // Choix
-                foreach ($mesChoix as $monChoix)
-                {
-                  echo '<div class="zone_proposition proposition_normal">';
-                    echo '<div class="image_normal">';
-                      // Image
-                      if (!empty($monChoix->getPicture()))
-                        echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="restaurant" class="image_proposition" />';
-                      else
-                        echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
-                    echo '</div>';
-
-                    // Nom restaurant
-                    echo '<div class="nom_proposition nom_normal">' . formatString($monChoix->getName(), 20) . '</div>';
-
-                    // Suppression choix
-                    if ($actions["choix"] == true)
-                    {
-                      echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
-                        echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
-                        echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
-                        echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
-                      echo '</form>';
-                    }
-                  echo '</div>';
-                }
-              echo '</div>';
-            echo '</div>';
-          }
+          include('vue/mobile/vue_mes_choix.php');
         ?>
       </article>
     </section>

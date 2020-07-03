@@ -437,10 +437,14 @@
 }
 
 /*** Dépenses ***/
+.zone_depenses
+{
+	margin-bottom: -1.5vh;
+}
+
 .zone_depenses_users
 {
 	width: 100%;
-	margin-bottom: -1.5vh;
 }
 
 .zone_depense
