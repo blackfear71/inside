@@ -150,7 +150,7 @@ function showDetails(id)
 
     openSection($(this), idZone, true);
   });
-  
+
   // Affichage des détails
   afficherMasquerIdWithDelay('zoneDetailsDepense');
 }

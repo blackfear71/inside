@@ -608,8 +608,7 @@ function formatDateForDisplay(date)
 // Formate un montant pour affichage
 function formatAmountForDisplay(amount)
 {
-  var amountRounded   = Number.parseFloat(amount).toFixed(2);
-  var amountFormatted = amountRounded.replace('.', ',') + ' €';
+  var amountFormatted = amount.replace('.', ',') + ' €';
 
   return amountFormatted;
 }
