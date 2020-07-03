@@ -85,7 +85,7 @@ function showDetails(id)
   var date           = formatDateForDisplay(listExpenses[id]['date']);
   var prix           = formatAmountForDisplay(listExpenses[id]['price']);
   var avatarAcheteur = formatAvatar(listExpenses[id]['avatar'], listExpenses[id]['pseudo'], 2, 'avatar');
-  var pseudoAcheteur = formatString(listExpenses[id]['pseudo'], 10);
+  var pseudoAcheteur = formatString(formatUnknownUser(listExpenses[id]['pseudo'], true, false), 10);
   var commentaires   = listExpenses[id]['comment'];
   var parts          = listExpenses[id]['parts'];
 
@@ -130,7 +130,7 @@ function showDetails(id)
       // Génération de l'élément
       var partUtilisateur   = '';
       var avatarUtilisateur = formatAvatar(this.avatar, this.pseudo, 2, 'avatar');
-      var pseudoUtilisateur = formatString(this.pseudo, 10);
+      var pseudoUtilisateur = formatString(formatUnknownUser(this.pseudo, true, false), 10);
 
       partUtilisateur += '<div class="zone_details_utilisateur">';
         partUtilisateur += '<img src="' + avatarUtilisateur.path + '" alt="' + avatarUtilisateur.alt + '" title="' + avatarUtilisateur.title + '" class="details_avatar_utilisateur" />';
