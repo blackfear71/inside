@@ -176,6 +176,8 @@
       foreach ($depenseAConvertir->getParts() as $parts)
       {
         $listePartsDepense[$parts->getIdentifiant()] = array('id_identifiant' => $parts->getId_identifiant(),
+                                                             'pseudo'         => $parts->getPseudo(),
+                                                             'avatar'         => $parts->getAvatar(),
                                                              'parts'          => $parts->getParts()
                                                             );
       }

@@ -74,7 +74,8 @@ $(function()
       afficherMasquerIdWithDelay('contenuCelsius');
 
     // Ferme une zone de saisie
-    if ($(event.target).attr('class') == 'fond_saisie')
+    if ($(event.target).attr('class') == 'fond_saisie'
+    ||  $(event.target).attr('class') == 'fond_details')
       afficherMasquerIdWithDelay(event.target.id);
   });
 
@@ -590,3 +591,96 @@ $.expr[':'].containsCaseInsensitive = $.expr.createPseudo(function(arg)
     return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
   };
 });
+
+// Formate une date pour affichage
+function formatDateForDisplay(date)
+{
+  var dateFormatted;
+
+  if (date.length == 8)
+    return date.substr(6, 2) + '/' + date.substr(4, 2) + '/' + date.substr(0, 4);
+  else
+    return dateFormatted = date;
+
+  return dateFormatted;
+}
+
+// Formate un montant pour affichage
+function formatAmountForDisplay(amount)
+{
+  var amountRounded   = Number.parseFloat(amount).toFixed(2);
+  var amountFormatted = amountRounded.replace('.', ',') + ' €';
+
+  return amountFormatted;
+}
+
+// Génère le chemin vers l'avatar
+function formatAvatar(avatar, pseudo, niveau, alt)
+{
+  var level;
+  var path;
+
+  // Niveau chemin
+  switch (niveau)
+  {
+    case 1:
+      level = "..";
+      break;
+
+    case 2:
+      level = "../..";
+      break;
+
+    case 0:
+    default:
+      level = "/inside";
+      break;
+  }
+
+  // Chemin
+  if (avatar != "" && avatar != undefined)
+    path = level + "/includes/images/profil/avatars/" + avatar;
+  else
+    path = level + "/includes/icons/common/default.png";
+
+  // Pseudo
+  pseudo = formatUnknownUser(pseudo, true, false);
+
+  // Formatage
+  var formattedAvatar = {"path" : path, "alt" : alt, "title" : pseudo};
+
+  return formattedAvatar;
+}
+
+// Formate le pseudo utilisateur désinscrit
+function formatUnknownUser(pseudo, majuscule, italique)
+{
+  if (pseudo == "")
+  {
+    if (majuscule == true)
+    {
+      if (italique == true)
+        pseudo = "<i>Un ancien utilisateur</i>";
+      else
+        pseudo = "Un ancien utilisateur";
+    }
+    else
+    {
+      if (italique == true)
+        pseudo = "<i>un ancien utilisateur</i>";
+      else
+        pseudo = "un ancien utilisateur";
+    }
+  }
+
+  return pseudo;
+}
+
+// Formate une chaîne de caractères en longueur
+function formatString(string, limit)
+{
+  if (string.length > limit)
+    string = string.substr(0, limit) + "...";
+
+  return string;
+}

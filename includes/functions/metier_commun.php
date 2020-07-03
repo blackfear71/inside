@@ -1262,7 +1262,7 @@
     return $formattedAvatar;
   }
 
-  // Formate le pseudo en longueur
+  // Formate une chaîne de caractères en longueur
   // RETOUR : Pseudo formaté
   function formatString($string, $limit)
   {

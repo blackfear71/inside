@@ -712,13 +712,13 @@ function formatAvatar(avatar, pseudo, niveau, alt)
   return formattedAvatar;
 }
 
-// Formate le pseudo en longueur
-function formatString(pseudo, limit)
+// Formate une chaîne de caractères en longueur
+function formatString(string, limit)
 {
-  if (pseudo.length > limit)
-    pseudo = pseudo.substr(0, limit) + "...";
+  if (string.length > limit)
+    string = string.substr(0, limit) + "...";
 
-  return pseudo;
+  return string;
 }
 
 // Formate le pseudo utilisateur désinscrit

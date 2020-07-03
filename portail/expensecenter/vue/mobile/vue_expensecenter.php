@@ -50,131 +50,12 @@
           /**********/
           /* Années */
           /**********/
-          echo '<div id="zoneSaisieAnnee" class="fond_saisie">';
-            echo '<div class="div_saisie">';
-              // Titre
-              echo '<div class="zone_titre_saisie">';
-                echo 'Voir une autre année';
-              echo '</div>';
-
-              // Saisie
-              echo '<div class="zone_contenu_saisie">';
-                echo '<div class="contenu_saisie">';
-                  foreach ($onglets as $annee)
-                  {
-                    if ($annee == date('Y'))
-                      echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
-                    else
-                      echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
-                  }
-                echo '</div>';
-              echo '</div>';
-
-              // Bouton fermeture
-              echo '<div class="zone_boutons_saisie">';
-                echo '<a id="fermerSaisieAnnee" class="bouton_saisie_fermer">Fermer</a>';
-              echo '</div>';
-            echo '</div>';
-          echo '</div>';
+          include('vue/mobile/vue_annees.php');
 
           /**********/
           /* Saisie */
           /**********/
-          echo '<div id="zoneSaisieDepense" class="fond_saisie" style="display: none;">';
-            echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie">';
-              // Titre
-              echo '<div class="zone_titre_saisie">';
-                echo 'Saisir une dépense';
-              echo '</div>';
-
-              // Saisie
-              echo '<div class="zone_contenu_saisie">';
-                echo '<div class="contenu_saisie">';
-                  // Titre
-                  echo '<div class="titre_section">';
-                    echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="logo_titre_section" />';
-                    echo '<div class="texte_titre_section">La dépense</div>';
-                  echo '</div>';
-
-                  // Acheteur
-                  echo '<select name="buyer_user" class="saisie_acheteur" required>';
-                    echo '<option value="" hidden>Choisissez un acheteur...</option>';
-
-                    foreach ($listeUsers as $user)
-                    {
-                      if ($user->getIdentifiant() == $_SESSION['save']['buyer'])
-                        echo '<option value="' . $_SESSION['save']['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
-                      else
-                        echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
-                    }
-                  echo '</select>';
-
-                  // Prix
-                  echo '<div class="zone_saisie_prix">';
-                    echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Prix" maxlength="6" class="saisie_prix" required />';
-                    echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
-                  echo '</div>';
-
-                  // Commentaire
-                  echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';
-
-                  // Titre
-                  echo '<div class="titre_section">';
-                    echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-                    echo '<div class="texte_titre_section">Les parts utilisateurs</div>';
-                  echo '</div>';
-
-                  // Parts utilisateurs
-                  foreach ($listeUsers as $user)
-                  {
-                    $savedParts = false;
-
-                    if (isset($_SESSION['save']['tableau_parts']) AND !empty($_SESSION['save']['tableau_parts']))
-                    {
-                      if (isset($_SESSION['save']['tableau_parts'][$user->getIdentifiant()]) AND $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] > 0)
-                        $savedParts = true;
-                    }
-
-                    if ($savedParts == true)
-                      echo '<div class="zone_saisie_part part_selected" id="zone_user_' . $user->getId() . '">';
-                    else
-                      echo '<div class="zone_saisie_part" id="zone_user_' . $user->getId() . '">';
-                      // Avatar
-                      echo '<div class="zone_saisie_part_avatar">';
-                        $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
-
-                        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
-                      echo '</div>';
-
-                      // Identifiant (caché)
-                      echo '<input type="hidden" name="identifiant_quantite[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
-
-                      // Bouton -
-                      echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
-
-                      // Quantité
-                      if ($savedParts == true)
-                        echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
-                      else
-                        echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
-
-                      // Bouton +
-                      echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
-                    echo '</div>';
-                  }
-                echo '</div>';
-              echo '</div>';
-
-              // Boutons
-              echo '<div class="zone_boutons_saisie">';
-                // Valider
-                echo '<input type="submit" name="submit_choices" value="Valider" class="bouton_saisie_gauche" />';
-
-                // Annuler
-                echo '<a id="fermerSaisieDepense" class="bouton_saisie_droite">Annuler</a>';
-              echo '</div>';
-            echo '</form>';
-          echo '</div>';
+          include('vue/mobile/vue_saisie_depense.php');
 
           /********************/
           /* Boutons d'action */
@@ -188,107 +69,17 @@
           /**********/
           /* Bilans */
           /**********/
-          // Titre
-          echo '<div id="titre_depenses_bilan" class="titre_section">';
-            echo '<img src="../../includes/icons/expensecenter/total_grey.png" alt="total_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Bilan</div>';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
-          echo '</div>';
+          include('vue/mobile/vue_bilans.php');
 
-          // Bilan
-          echo '<div id="afficher_depenses_bilan" class="zone_bilan_users">';
-            foreach ($listeUsers as $user)
-            {
-              // Détermination classe à appliquer
-              if ($user->getExpenses() <= -6)
-                $classBilan = 'rouge';
-              elseif ($user->getExpenses() <= -3 AND $user->getExpenses() > -6)
-                $classBilan = 'orange';
-              elseif ($user->getExpenses() < -0.01 AND $user->getExpenses() > -3)
-                $classBilan = 'jaune';
-              elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() < 5)
-                $classBilan = 'vert';
-              elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() >= 5)
-                $classBilan = 'vert_fonce';
-              else
-                $classBilan = 'gris';
-
-              // Bilan
-              echo '<div class="zone_bilan_user bilan_' . $classBilan . '">';
-                // Avatar
-                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
-
-                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_bilan" />';
-
-                // Pseudo
-                echo '<div class="pseudo_bilan">' . formatString($user->getPseudo(), 15) . "</div>";
-
-                // Total
-                if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)
-                  echo '<div class="total_bilan total_' . $classBilan . '">' . formatBilanForDisplay(abs($user->getExpenses())) . '</div>';
-                else
-                  echo '<div class="total_bilan total_' . $classBilan . '">' . formatBilanForDisplay($user->getExpenses()) . '</div>';
-              echo '</div>';
-            }
-          echo '</div>';
+          /***********/
+          /* Détails */
+          /***********/
+          include('vue/mobile/vue_details_depense.php');
 
           /************/
           /* Dépenses */
           /************/
-          echo '<div id="titre_depenses_utilisateurs" class="titre_section">';
-            echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Les dépenses</div>';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
-          echo '</div>';
-
-          echo '<div id="afficher_depenses_utilisateurs" class="zone_depenses_users" style="display: none;">';
-            if (!empty($listeDepenses))
-            {
-              foreach ($listeDepenses as $depense)
-              {
-                // Dépense
-                echo '<div class="zone_depense">';
-                  // Date
-                  echo '<div class="zone_depense_date">';
-                    // Jour
-                    echo '<div class="zone_depense_date_jour">';
-                      echo substr($depense->getDate(), 6, 2);
-                    echo '</div>';
-
-                    // Mois
-                    echo '<div class="zone_depense_date_mois">';
-                      echo formatMonthForDisplayLight(substr($depense->getDate(), 4, 2));
-                    echo '</div>';
-                  echo '</div>';
-
-                  // Acheteur
-                  $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
-
-                  echo '<div class="zone_depense_avatar">';
-                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
-                  echo '</div>';
-
-                  // Prix
-                  echo '<div class="zone_depense_prix prix_depense">';
-                    echo formatBilanForDisplay($depense->getPrice());
-                  echo '</div>';
-
-                  // Parts
-                  echo '<div class="zone_depense_users">';
-                    echo '<div class="zone_depense_icone_nombre">';
-                      // Image
-                      echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Nombre d\'utilisateurs" class="icone_depense" />';
-
-                      // Nombre de parts
-                      echo '<div class="nombre_users_depense">' . $depense->getNb_users() . '</div>';
-                    echo '</div>';
-                  echo '</div>';
-                echo '</div>';
-              }
-            }
-            else
-              echo '<div class="empty">Aucune dépense pour cette année</div>';
-          echo '</div>';
+          include('vue/mobile/vue_depenses.php');
         ?>
       </article>
     </section>
@@ -297,5 +88,11 @@
     <footer>
 			<?php include('../../includes/common/footer_mobile.php'); ?>
 		</footer>
+
+    <!-- Données JSON -->
+    <script>
+      // Récupération liste dépenses pour le script
+      var listExpenses = <?php if (isset($listeDepensesJson) AND !empty($listeDepensesJson)) echo $listeDepensesJson; else echo '{}'; ?>;
+    </script>
   </body>
 </html>
