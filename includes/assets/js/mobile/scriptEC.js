@@ -143,6 +143,9 @@ function showDetails(id)
     });
   }
 
+  // Affichage des détails
+  afficherMasquerIdWithDelay('zoneDetailsDepense');
+
   // Déplie tous les titres
   $('.div_details').find('.titre_section').each(function()
   {
@@ -150,7 +153,4 @@ function showDetails(id)
 
     openSection($(this), idZone, true);
   });
-
-  // Affichage des détails
-  afficherMasquerIdWithDelay('zoneDetailsDepense');
 }
