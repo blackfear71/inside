@@ -143,6 +143,14 @@ function showDetails(id)
     });
   }
 
+  // Déplie tous les titres
+  $('.div_details').find('.titre_section').each(function()
+  {
+    var idZone = $(this).attr('id').replace('titre_', 'afficher_');
+
+    openSection($(this), idZone, true);
+  });
+  
   // Affichage des détails
   afficherMasquerIdWithDelay('zoneDetailsDepense');
 }
