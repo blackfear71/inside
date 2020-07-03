@@ -404,6 +404,11 @@
 	margin-bottom: 1vh;
 }
 
+.zone_details_repartition
+{
+	text-align: center;
+}
+
 .zone_details_utilisateur
 {
 	display: inline-block;
