@@ -44,7 +44,7 @@
               // Image
               echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Nombre d\'utilisateurs" class="icone_depense" />';
 
-              // Nombre de parts
+              // Nombre de bénéficiaires
               echo '<div class="nombre_users_depense">' . $depense->getNb_users() . '</div>';
             echo '</div>';
           echo '</div>';

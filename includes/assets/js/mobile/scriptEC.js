@@ -134,6 +134,7 @@ function showDetails(id)
 
       partUtilisateur += '<div class="zone_details_utilisateur">';
         partUtilisateur += '<img src="' + avatarUtilisateur.path + '" alt="' + avatarUtilisateur.alt + '" title="' + avatarUtilisateur.title + '" class="details_avatar_utilisateur" />';
+        partUtilisateur += '<div class="nombre_parts_user">' + this.parts + '</div>';
         partUtilisateur += '<div class="details_pseudo_utilisateur">' + pseudoUtilisateur + '</div>';
       partUtilisateur += '</div>';
 
