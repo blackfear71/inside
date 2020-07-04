@@ -602,14 +602,23 @@ function formatDateForDisplay(date)
   else
     return dateFormatted = date;
 
+  // Retour
   return dateFormatted;
 }
 
 // Formate un montant pour affichage
 function formatAmountForDisplay(amount)
 {
-  var amountFormatted = amount.replace('.', ',') + ' €';
+  // Conversion en numérique
+  var amountNumeric   = parseFloat(amount.replace(',', '.'));
 
+  // Formatage avec 2 chiffres après la virgule
+  var amountRounded   = amountNumeric.toFixed(2);
+
+  // Formatage en chaîne
+  var amountFormatted = amountRounded.replace('.', ',') + ' €';
+
+  // Retour
   return amountFormatted;
 }
 
@@ -648,6 +657,7 @@ function formatAvatar(avatar, pseudo, niveau, alt)
   // Formatage
   var formattedAvatar = {"path" : path, "alt" : alt, "title" : pseudo};
 
+  // Retour
   return formattedAvatar;
 }
 
@@ -672,6 +682,7 @@ function formatUnknownUser(pseudo, majuscule, italique)
     }
   }
 
+  // Retour
   return pseudo;
 }
 
@@ -681,5 +692,6 @@ function formatString(string, limit)
   if (string.length > limit)
     string = string.substr(0, limit) + "...";
 
+  // Retour
   return string;
 }

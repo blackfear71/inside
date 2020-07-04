@@ -242,7 +242,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(100% - 21vh);
+	width: calc(100% - 23vh);
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2.5vh;
@@ -255,7 +255,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 10vh;
+	width: 12vh;
 	height: 8vh;
 	line-height: 8vh;
 	font-family: robotomedium, Verdana, sans-serif;
