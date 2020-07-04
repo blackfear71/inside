@@ -565,3 +565,16 @@
 	border-radius: 50%;
 	text-align: center;
 }
+
+.zone_depense_regularisation
+{
+	display: inline-block;
+	width: 90%;
+	margin-left: 10%;
+	background-color: #ff1937;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 2vh;
+	color: white;
+	line-height: 8vh;
+	text-align: center;
+}

@@ -41,13 +41,19 @@
 
             // Parts
             echo '<div class="zone_depense_users">';
-              echo '<div class="zone_depense_icone_nombre">';
-                // Image
-                echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Nombre d\'utilisateurs" class="icone_depense" />';
+              // Nombre d'utilisateurs ou régularisation
+              if (!empty($depense->getParts()))
+              {
+                echo '<div class="zone_depense_icone_nombre">';
+                  // Image
+                  echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" title="Nombre d\'utilisateurs" class="icone_depense" />';
 
-                // Nombre de bénéficiaires
-                echo '<div class="nombre_users_depense">' . $depense->getNb_users() . '</div>';
-              echo '</div>';
+                  // Nombre de bénéficiaires
+                  echo '<div class="nombre_users_depense">' . $depense->getNb_users() . '</div>';
+                echo '</div>';
+              }
+              else
+                echo '<div class="zone_depense_regularisation">REGUL</div>';
             echo '</div>';
           echo '</a>';
         }
