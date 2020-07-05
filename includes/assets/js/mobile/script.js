@@ -88,9 +88,12 @@ $(function()
   // Messages de confirmation
   $('.eventConfirm').click(function()
   {
-    // Fermeture des détails
-    idDetails = $('.fond_details').attr('id');
-    afficherMasquerIdWithDelay(idDetails);
+    // Fermeture des détails si besoin
+    if ($('.fond_details').css('display') != 'none')
+    {
+      idDetails = $('.fond_details').attr('id');
+      afficherMasquerIdWithDelay(idDetails);
+    }
 
     // Affichage du message de confirmation
     var idForm  = $(this).closest('form').attr('id');

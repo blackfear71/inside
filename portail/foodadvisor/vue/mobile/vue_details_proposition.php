@@ -61,7 +61,7 @@
         // Description du restaurant
 
         // Actions
-        
+
       echo '</div>';
 
       // Bouton fermeture

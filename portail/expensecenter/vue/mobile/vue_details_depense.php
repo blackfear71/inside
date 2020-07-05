@@ -1,5 +1,5 @@
 <?php
-  echo '<div id="zone_details_depense" class="fond_details" style="display: none;">';
+  echo '<div id="zone_details_depense" class="fond_details">';
     echo '<div class="div_details">';
       echo '<div class="zone_contenu_details">';
         // Titre
