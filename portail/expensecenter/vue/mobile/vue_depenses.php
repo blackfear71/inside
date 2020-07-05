@@ -36,7 +36,7 @@
 
             // Prix
             echo '<div class="zone_depense_prix prix_depense">';
-              echo formatBilanForDisplay($depense->getPrice());
+              echo formatAmountForDisplay($depense->getPrice());
             echo '</div>';
 
             // Parts

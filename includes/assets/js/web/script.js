@@ -753,3 +753,25 @@ function nl2br(str)
 
   return nl2br;
 }
+
+// Formate un montant pour affichage
+function formatAmountForDisplay(amount, withCurrency)
+{
+  // Initialisation de la devise
+  if (withCurrency == true)
+    currency = ' €';
+  else
+    currency = '';
+
+  // Conversion en numérique
+  var amountNumeric = parseFloat(amount.replace(',', '.'));
+
+  // Formatage avec 2 chiffres après la virgule
+  var amountRounded = amountNumeric.toFixed(2);
+
+  // Formatage en chaîne
+  var amountFormatted = amountRounded.replace('.', ',') + currency;
+
+  // Retour
+  return amountFormatted;
+}

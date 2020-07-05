@@ -27,7 +27,7 @@
                 echo '<div class="date_achat">' . formatDateForDisplay($depense->getDate()) . '</div>';
 
                 // Prix
-                echo '<div class="valeur_achat">' . formatBilanForDisplay($depense->getPrice()) . '</div>';
+                echo '<div class="valeur_achat">' . formatAmountForDisplay($depense->getPrice()) . '</div>';
               echo '</div>';
 
               // Liste des parts utilisateurs

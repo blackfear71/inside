@@ -10,7 +10,7 @@
     if ($isSolo == true)
     {
       $_SESSION['alerts']['already_solo'] = true;
-      $control_ok                       = false;
+      $control_ok                         = false;
     }
 
     // Retour

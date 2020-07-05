@@ -36,9 +36,9 @@
 
         // Total
         if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)
-          echo '<div class="total_bilan total_' . $classBilan . '">' . formatBilanForDisplay(abs($user->getExpenses())) . '</div>';
+          echo '<div class="total_bilan total_' . $classBilan . '">' . formatAmountForDisplay(abs($user->getExpenses())) . '</div>';
         else
-          echo '<div class="total_bilan total_' . $classBilan . '">' . formatBilanForDisplay($user->getExpenses()) . '</div>';
+          echo '<div class="total_bilan total_' . $classBilan . '">' . formatAmountForDisplay($user->getExpenses()) . '</div>';
       echo '</div>';
     }
   echo '</div>';

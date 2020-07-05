@@ -20,6 +20,8 @@
 
   // Modèle de données
   include_once('modele/metier_expensecenter.php');
+  include_once('modele/controles_expensecenter.php');
+  include_once('modele/physique_expensecenter.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -33,26 +35,32 @@
         // Initialisation de la sauvegarde en session
         initializeSaveSession();
 
-        // Lecture des données par le modèle
+        // Vérification année existante
         $anneeExistante = controlYear($_GET['year']);
-        $listeUsers     = getUsers();
-        $onglets        = getOnglets();
-        $listeDepenses  = getExpenses($_GET['year']);
+
+        // Récupération de la liste des utilisateurs
+        $listeUsers = getUsers();
+
+        // Récupération des onglets (années)
+        $onglets = getOnglets();
+
+        // Récupération de la liste des dépenses
+        $listeDepenses = getExpenses($_GET['year']);
       }
       break;
 
     case 'doInserer':
-      // Insertion des données par le modèle
+      // Insertion d'une dépense
       $id_expense = insertExpense($_POST);
       break;
 
     case 'doModifier':
-      // Mise à jour des données par le modèle
+      // Modification d'une dépense
       $id_expense = updateExpense($_POST);
       break;
 
     case 'doSupprimer':
-      // Suppression des données par le modèle
+      // Suppression d'une dépense
       deleteExpense($_POST);
       break;
 
@@ -71,9 +79,17 @@
         foreach ($listeUsers as &$user)
         {
           $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
+          $user->setPing(htmlspecialchars($user->getPing()));
+          $user->setStatus(htmlspecialchars($user->getStatus()));
           $user->setPseudo(htmlspecialchars($user->getPseudo()));
           $user->setAvatar(htmlspecialchars($user->getAvatar()));
+          $user->setEmail(htmlspecialchars($user->getEmail()));
+          $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
+          $user->setExperience(htmlspecialchars($user->getExperience()));
+          $user->setLevel(htmlspecialchars($user->getLevel()));
           $user->setExpenses(htmlspecialchars($user->getExpenses()));
+          $user->setBeginner(htmlspecialchars($user->getBeginner()));
+          $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
         }
 
         unset($user);
@@ -111,7 +127,7 @@
         unset($depense);
 
         // Conversion JSON
-        $listeDepensesJson = json_encode(convertForJson($listeDepenses));
+        $listeDepensesJson = json_encode(convertForJsonListeDepenses($listeDepenses));
       }
       break;
 

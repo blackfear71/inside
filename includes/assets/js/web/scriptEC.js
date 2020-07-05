@@ -77,7 +77,7 @@ $(function()
   // Modifier une dépense
   $('.modifierDepense').click(function()
   {
-    var id_depense = $(this).attr('id').replace('modifier_', '');
+    var id_depense = $(this).attr('id').replace('modifier_depense_', '');
 
     updateExpense(id_depense, $_GET('year'));
   });
@@ -213,7 +213,7 @@ function updateExpense(id, year)
   var date    = listExpenses[id]['date'].substring(6, 8) + '/' + listExpenses[id]['date'].substring(4, 6) + '/' + listExpenses[id]['date'].substring(0, 4);
   var titre   = 'Modifier la dépense du ' + date;
   var buyer   = listExpenses[id]['buyer'];
-  var price   = listExpenses[id]['price'];
+  var price   = formatAmountForDisplay(listExpenses[id]['price'], false);
   var comment = listExpenses[id]['comment'];
   var action  = 'expensecenter.php?year=' + year + '&action=doModifier';
   var identifiant;

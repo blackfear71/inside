@@ -103,17 +103,17 @@ $(function()
   // Valider confirmation
   $(document).on('click', '#boutonAnnuler', function()
   {
-    var action_form = $('#actionForm').val();
+    var actionForm = $('#actionForm').val();
 
-    executeAction(action_form, 'cancel');
+    executeAction(actionForm, 'cancel');
   });
 
   // Annuler confirmation
   $(document).on('click', '#boutonConfirmer', function()
   {
-    var action_form = $('#actionForm').val();
+    var actionForm = $('#actionForm').val();
 
-    executeAction(action_form, 'validate');
+    executeAction(actionForm, 'validate');
   });
 
   // Ferme le contenu Celsius
@@ -638,16 +638,22 @@ function formatDateForDisplay(date)
 }
 
 // Formate un montant pour affichage
-function formatAmountForDisplay(amount)
+function formatAmountForDisplay(amount, withCurrency)
 {
+  // Initialisation de la devise
+  if (withCurrency == true)
+    currency = ' €';
+  else
+    currency = '';
+
   // Conversion en numérique
-  var amountNumeric   = parseFloat(amount.replace(',', '.'));
+  var amountNumeric = parseFloat(amount.replace(',', '.'));
 
   // Formatage avec 2 chiffres après la virgule
-  var amountRounded   = amountNumeric.toFixed(2);
+  var amountRounded = amountNumeric.toFixed(2);
 
   // Formatage en chaîne
-  var amountFormatted = amountRounded.replace('.', ',') + ' €';
+  var amountFormatted = amountRounded.replace('.', ',') + currency;
 
   // Retour
   return amountFormatted;

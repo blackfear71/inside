@@ -57,6 +57,7 @@
         $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
         $user->setExperience(htmlspecialchars($user->getExperience()));
         $user->setLevel(htmlspecialchars($user->getLevel()));
+        $user->setExpenses(htmlspecialchars($user->getExpenses()));
         $user->setBeginner(htmlspecialchars($user->getBeginner()));
         $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
 			}

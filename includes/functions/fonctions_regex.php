@@ -132,16 +132,35 @@
 	/////////////////////////////////////////////
 	// Fonction formatage bilan pour affichage //
 	/////////////////////////////////////////////
-	function formatBilanForDisplay($bilan)
+	function formatAmountForDisplay($montant)
 	{
-		$bilan = str_replace(',', '.', $bilan);
+		// Remplacement des caractères spéciaux
+		$montantFormat = str_replace(',', '.', htmlspecialchars($montant));
 
-		if (!empty($bilan) AND is_numeric($bilan))
-			$bilan_format = str_replace('.', ',', number_format($bilan, 2, ',', '')) . ' €';
+		if (!empty($montantFormat) AND is_numeric($montantFormat))
+			$montantFormat = str_replace('.', ',', number_format($montantFormat, 2, ',', '')) . ' €';
 		else
-			$bilan_format = '0,00 €';
+			$montantFormat = '0,00 €';
 
-		return $bilan_format;
+		return $montantFormat;
+	}
+
+	///////////////////////////////////////////////
+	// Fonction formatage montant pour insertion //
+	///////////////////////////////////////////////
+	function formatAmountForInsert($montant)
+	{
+		// Remplacement des caractères spéciaux
+		$montantFormat = str_replace(',', '.', htmlspecialchars($montant));
+
+		// Formatage
+		if (is_numeric($montantFormat))
+      $montantFormat = number_format($montantFormat, 2, '.', '');
+		else
+      $montantFormat = '';
+
+		// Retour
+		return $montantFormat;
 	}
 
 	////////////////////////////////////////////////

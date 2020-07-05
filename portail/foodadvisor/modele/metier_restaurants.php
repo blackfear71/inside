@@ -100,21 +100,9 @@
     $replace             = array('', '');
     $telephoneRestaurant = str_replace($search, $replace, $post['phone_restaurant']);
 
-    // Remplacement des caractères pour les prix
-    $prixMin = str_replace(',', '.', $post['prix_min_restaurant']);
-    $prixMax = str_replace(',', '.', $post['prix_max_restaurant']);
-
-    // Formatage du prix minimum
-    if (is_numeric($prixMin))
-      $prixMin = number_format($prixMin, 2, '.', '');
-    else
-      $prixMin = '';
-
-    // Formatage du prix maximum
-    if (is_numeric($prixMax))
-      $prixMax = number_format($prixMax, 2, '.', '');
-    else
-      $prixMax = '';
+    // Formatage des prix
+    $prixMin = formatAmountForInsert($post['prix_min_restaurant']);
+    $prixMax = formatAmountForInsert($post['prix_max_restaurant']);
 
     // Remplacement des caractères pour le lieu saisi
     if ($post['location'] == 'other_location'  AND !empty($post['saisie_other_location']))
@@ -311,21 +299,9 @@
     $replace             = array('', '');
     $telephoneRestaurant = str_replace($search, $replace, $post['update_phone_restaurant_' . $idRestaurant]);
 
-    // Remplacement des caractères pour les prix
-    $prixMin = str_replace(',', '.', $post['update_prix_min_restaurant_' . $idRestaurant]);
-    $prixMax = str_replace(',', '.', $post['update_prix_max_restaurant_' . $idRestaurant]);
-
-    // Formatage du prix minimum
-    if (is_numeric($prixMin))
-      $prixMin = number_format($prixMin, 2, '.', '');
-    else
-      $prixMin = '';
-
-    // Formatage du prix maximum
-    if (is_numeric($prixMax))
-      $prixMax = number_format($prixMax, 2, '.', '');
-    else
-      $prixMax = '';
+    // Formatage des prix
+    $prixMin = formatAmountForInsert($post['update_prix_min_restaurant_' . $idRestaurant]);
+    $prixMax = formatAmountForInsert($post['update_prix_max_restaurant_' . $idRestaurant]);
 
     // Remplacement des caractères pour le lieu saisi
     if ($post['update_location_' . $idRestaurant] == 'other_location' AND !empty($post['update_other_location_' . $idRestaurant]))

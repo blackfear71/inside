@@ -109,7 +109,7 @@ function showDetails(id)
 {
   // Récupération des données
   var date           = formatDateForDisplay(listExpenses[id]['date']);
-  var prix           = formatAmountForDisplay(listExpenses[id]['price']);
+  var prix           = formatAmountForDisplay(listExpenses[id]['price'], true);
   var avatarAcheteur = formatAvatar(listExpenses[id]['avatar'], listExpenses[id]['pseudo'], 2, 'avatar');
   var pseudoAcheteur = formatString(formatUnknownUser(listExpenses[id]['pseudo'], true, false), 10);
   var commentaires   = listExpenses[id]['comment'];
@@ -175,7 +175,7 @@ function showDetails(id)
   // Formulaire suppression
   $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + listExpenses[id]['id']);
   $('.form_supprimer_depense > input[name=id_expense]').val(listExpenses[id]['id']);
-  $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + listExpenses[id]['pseudo'] + ' du ' + formatDateForDisplay(listExpenses[id]['date']) + ' et d\'un montant de ' + formatAmountForDisplay(listExpenses[id]['price']) + ' ?');
+  $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + listExpenses[id]['pseudo'] + ' du ' + formatDateForDisplay(listExpenses[id]['date']) + ' et d\'un montant de ' + formatAmountForDisplay(listExpenses[id]['price'], true) + ' ?');
 
   // Affichage des détails
   afficherMasquerIdWithDelay('zone_details_depense');
@@ -208,7 +208,7 @@ function initialisationModification(idDepense, year)
   var buyer = listExpenses[idDepense]['buyer'];
 
   // Prix
-  var price = listExpenses[idDepense]['price'];
+  var price = formatAmountForDisplay(listExpenses[idDepense]['price'], false);
 
   // Commentaire
   var comment = listExpenses[idDepense]['comment'];

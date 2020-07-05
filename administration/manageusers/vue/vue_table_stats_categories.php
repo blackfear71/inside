@@ -79,7 +79,7 @@
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #71d058;">';
 				elseif ($statsCatIns['bilanUser'] > -0.01 AND $statsCatIns['bilanUser'] < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo formatBilanForDisplay($statsCatIns['bilanUser']);
+						echo formatAmountForDisplay($statsCatIns['bilanUser']);
 					echo '</td>';
 			echo '</tr>';
     }
@@ -128,7 +128,7 @@
 					echo '<td colspan="4" class="td_stats_admin" style="background-color: #71d058;">';
 				elseif ($statsCatDes['bilanUser'] > -0.01 AND $statsCatDes['bilanUser'] < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo formatBilanForDisplay($statsCatDes['bilanUser']);
+						echo formatAmountForDisplay($statsCatDes['bilanUser']);
 					echo '</td>';
 			echo '</tr>';
 		}
@@ -159,7 +159,7 @@
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif; background-color: #ee4949;">';
 			else
 				echo '<td class="td_manage_users" style="font-family: robotolight, Verdana, sans-serif;">';
-					echo formatBilanForDisplay($totalCategories['sommeBilans']);
+					echo formatAmountForDisplay($totalCategories['sommeBilans']);
 				echo '</td>';
 
 			echo '<td class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
