@@ -466,7 +466,7 @@
     // Lecture des utilisateurs ayant une part
     $listeParts = physiquePartsDepenseUsers($depense->getId());
 
-    // Vérification si régul négative sans parts
+    // Vérification si régularisation négative sans parts
     $regularisationSansParts = true;
 
     if (!empty($listeParts))
