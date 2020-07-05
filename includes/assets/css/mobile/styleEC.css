@@ -234,7 +234,7 @@
 	height: 6vh;
 	background-color: #262626;
 	margin: 1vh 0 1vh 1vh;
-	filter: drop-shadow(0px 0px 2px #7c7c7c);
+	filter: drop-shadow(0 0 0.5vw #7c7c7c);
 	border-radius: 50%;
 }
 
@@ -297,13 +297,6 @@
 }
 
 /*** Détails ***/
-.zone_contenu_details
-{
-	display: block;
-	max-height: 74vh;
-	overflow-y: auto;
-}
-
 .zone_details_prix
 {
 	display: block;
@@ -350,7 +343,7 @@
 	width: 6vh;
 	height: 6vh;
 	background-color: #262626;
-	filter: drop-shadow(0px 0px 2px #7c7c7c);
+	filter: drop-shadow(0 0 0.5vw #7c7c7c);
 	border-radius: 50%;
 }
 
@@ -559,7 +552,7 @@
 	background-color: #262626;
 	margin-top: 1vh;
 	margin-bottom: 1vh;
-	filter: drop-shadow(0px 0px 2px #7c7c7c);
+	filter: drop-shadow(0 0 0.5vw #7c7c7c);
 	border-radius: 50%;
 }
 
@@ -594,7 +587,7 @@
 	height: 5vh;
 	margin-top: 1.5vh;
 	margin-bottom: 1.5vh;
-	filter: drop-shadow(0px 0px 2px #7c7c7c);
+	filter: drop-shadow(0 0 0.5vw #7c7c7c);
 }
 
 .nombre_users_depense

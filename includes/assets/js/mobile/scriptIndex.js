@@ -20,7 +20,7 @@ function identifiantMajuscule(champ)
 {
   var value = champ.val();
 
-  if (value != "admin")
+  if (value != 'admin')
     value = value.toUpperCase();
 
   champ.val(value);

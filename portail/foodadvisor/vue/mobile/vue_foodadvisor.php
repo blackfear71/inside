@@ -88,6 +88,11 @@
           /************/
           include('vue/mobile/vue_sans_votes.php');
 
+          /***********/
+          /* Détails */
+          /***********/
+          include('vue/mobile/vue_details_proposition.php');
+
           /************************/
           /* Propositions du jour */
           /************************/
@@ -105,5 +110,11 @@
     <footer>
 			<?php include('../../includes/common/footer_mobile.php'); ?>
 		</footer>
+
+    <!-- Données JSON -->
+    <script>
+      // Récupération liste propositions pour le script
+      var detailsPropositions = <?php echo $detailsPropositions; ?>;
+    </script>
   </body>
 </html>

@@ -27,7 +27,7 @@
           $classProposition = 'normal';
 
         // Proposition
-        echo '<div class="zone_proposition proposition_' . $classProposition . '">';
+        echo '<a id="details_proposition_' . $proposition->getId_restaurant() . '" class="zone_proposition proposition_' . $classProposition . ' afficherDetailsProposition">';
           echo '<div class="image_' . $classProposition . '">';
             // Image
             if (!empty($proposition->getPicture()))
@@ -51,7 +51,7 @@
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';
             echo '</div>';
           }
-        echo '</div>';
+        echo '</a>';
       }
     }
     else

@@ -192,9 +192,9 @@ function fixViewport()
 {
   var viewHeight = $(window).height();
   var viewWidth  = $(window).width();
-  var viewport   = document.querySelector("meta[name=viewport]");
+  var viewport   = document.querySelector('meta[name=viewport]');
 
-  viewport.setAttribute("content", "height=" + viewHeight + "px, width=" + viewWidth + "px, initial-scale=1.0");
+  viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0');
 }
 
 // Fonction équivalente au $_GET en php
@@ -669,30 +669,30 @@ function formatAvatar(avatar, pseudo, niveau, alt)
   switch (niveau)
   {
     case 1:
-      level = "..";
+      level = '..';
       break;
 
     case 2:
-      level = "../..";
+      level = '../..';
       break;
 
     case 0:
     default:
-      level = "/inside";
+      level = '/inside';
       break;
   }
 
   // Chemin
-  if (avatar != "" && avatar != undefined)
-    path = level + "/includes/images/profil/avatars/" + avatar;
+  if (avatar != '' && avatar != undefined)
+    path = level + '/includes/images/profil/avatars/' + avatar;
   else
-    path = level + "/includes/icons/common/default.png";
+    path = level + '/includes/icons/common/default.png';
 
   // Pseudo
   pseudo = formatUnknownUser(pseudo, true, false);
 
   // Formatage
-  var formattedAvatar = {"path" : path, "alt" : alt, "title" : pseudo};
+  var formattedAvatar = {'path' : path, 'alt' : alt, 'title' : pseudo};
 
   // Retour
   return formattedAvatar;
@@ -701,21 +701,21 @@ function formatAvatar(avatar, pseudo, niveau, alt)
 // Formate le pseudo utilisateur désinscrit
 function formatUnknownUser(pseudo, majuscule, italique)
 {
-  if (pseudo == "")
+  if (pseudo == '')
   {
     if (majuscule == true)
     {
       if (italique == true)
-        pseudo = "<i>Un ancien utilisateur</i>";
+        pseudo = '<i>Un ancien utilisateur</i';
       else
-        pseudo = "Un ancien utilisateur";
+        pseudo = 'Un ancien utilisateur';
     }
     else
     {
       if (italique == true)
-        pseudo = "<i>un ancien utilisateur</i>";
+        pseudo = '<i>un ancien utilisateur</i>';
       else
-        pseudo = "un ancien utilisateur";
+        pseudo = 'un ancien utilisateur';
     }
   }
 
@@ -727,7 +727,7 @@ function formatUnknownUser(pseudo, majuscule, italique)
 function formatString(string, limit)
 {
   if (string.length > limit)
-    string = string.substr(0, limit) + "...";
+    string = string.substr(0, limit) + '...';
 
   // Retour
   return string;

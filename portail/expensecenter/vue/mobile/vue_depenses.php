@@ -17,14 +17,10 @@
             // Date
             echo '<div class="zone_depense_date">';
               // Jour
-              echo '<div class="zone_depense_date_jour">';
-                echo substr($depense->getDate(), 6, 2);
-              echo '</div>';
+              echo '<div class="zone_depense_date_jour">' . substr($depense->getDate(), 6, 2) . '</div>';
 
               // Mois
-              echo '<div class="zone_depense_date_mois">';
-                echo formatMonthForDisplayLight(substr($depense->getDate(), 4, 2));
-              echo '</div>';
+              echo '<div class="zone_depense_date_mois">' . formatMonthForDisplayLight(substr($depense->getDate(), 4, 2)) . '</div>';
             echo '</div>';
 
             // Acheteur

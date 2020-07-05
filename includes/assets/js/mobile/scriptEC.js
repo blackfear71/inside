@@ -104,16 +104,17 @@ function ajouterPart(zone, quantite, value)
     $('#' + quantite).val(newValue);
 }
 
-// Affiche la zone de mise à jour d'une dépense
-function showDetails(id)
+// Affiche la zone de détails d'une dépense
+function showDetails(idDepense)
 {
   // Récupération des données
-  var date           = formatDateForDisplay(listExpenses[id]['date']);
-  var prix           = formatAmountForDisplay(listExpenses[id]['price'], true);
-  var avatarAcheteur = formatAvatar(listExpenses[id]['avatar'], listExpenses[id]['pseudo'], 2, 'avatar');
-  var pseudoAcheteur = formatString(formatUnknownUser(listExpenses[id]['pseudo'], true, false), 10);
-  var commentaires   = listExpenses[id]['comment'];
-  var parts          = listExpenses[id]['parts'];
+  var depense        = listExpenses[idDepense];
+  var date           = formatDateForDisplay(depense['date']);
+  var prix           = formatAmountForDisplay(depense['price'], true);
+  var avatarAcheteur = formatAvatar(depense['avatar'], depense['pseudo'], 2, 'avatar');
+  var pseudoAcheteur = formatString(formatUnknownUser(depense['pseudo'], true, false), 10);
+  var commentaires   = depense['comment'];
+  var parts          = depense['parts'];
 
   // Date
   $('.titre_details > .texte_titre_section').html('Dépense du ' + date);
@@ -170,12 +171,12 @@ function showDetails(id)
   }
 
   // Lien modification
-  $('.zone_details_actions > .lien_modifier_depense').attr('id', 'modifier_depense_' + listExpenses[id]['id'])
+  $('.zone_details_actions > .lien_modifier_depense').attr('id', 'modifier_depense_' + depense['id'])
 
   // Formulaire suppression
-  $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + listExpenses[id]['id']);
-  $('.form_supprimer_depense > input[name=id_expense]').val(listExpenses[id]['id']);
-  $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + listExpenses[id]['pseudo'] + ' du ' + formatDateForDisplay(listExpenses[id]['date']) + ' et d\'un montant de ' + formatAmountForDisplay(listExpenses[id]['price'], true) + ' ?');
+  $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + depense['id']);
+  $('.form_supprimer_depense > input[name=id_expense]').val(depense['id']);
+  $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + depense['pseudo'] + ' du ' + formatDateForDisplay(depense['date']) + ' et d\'un montant de ' + formatAmountForDisplay(depense['price'], true) + ' ?');
 
   // Affichage des détails
   afficherMasquerIdWithDelay('zone_details_depense');
@@ -192,11 +193,14 @@ function showDetails(id)
 // Affiche la zone de mise à jour d'une dépense
 function initialisationModification(idDepense, year)
 {
+  // Récupération des données
+  var depense = listExpenses[idDepense];
+
   // Action du formulaire
   var action = 'expensecenter.php?year=' + year + '&action=doModifier';
 
   // Date du jour
-  var date = formatDateForDisplay(listExpenses[idDepense]['date']);
+  var date = formatDateForDisplay(depense['date']);
 
   // Titre
   var titre = 'Modifier la dépense';
@@ -205,13 +209,13 @@ function initialisationModification(idDepense, year)
   var sousTitre = 'Dépense du ' + date;
 
   // Acheteur
-  var buyer = listExpenses[idDepense]['buyer'];
+  var buyer = depense['buyer'];
 
   // Prix
-  var price = formatAmountForDisplay(listExpenses[idDepense]['price'], false);
+  var price = formatAmountForDisplay(depense['price'], false);
 
   // Commentaire
-  var comment = listExpenses[idDepense]['comment'];
+  var comment = depense['comment'];
 
   // Modification des données
   $('.form_saisie').attr('action', action);
@@ -231,7 +235,7 @@ function initialisationModification(idDepense, year)
     var idZone           = $(this).attr('id');
     var idQuantite       = $(this).children('.quantite').attr('id');
     var identifiantLigne = $(this).find('input[type=hidden]').val();
-    var partUtilisateur  = listExpenses[idDepense]['parts'][identifiantLigne];
+    var partUtilisateur  = depense['parts'][identifiantLigne];
     var nombrePartsUtilisateur;
 
     // Récupération du nombre de parts
@@ -261,7 +265,7 @@ function resetSaisie(zone, year)
     var currentAction = $('.form_saisie').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
-    if (call == "doModifier")
+    if (call == 'doModifier')
     {
       // Action du formulaire
       var action = 'expensecenter.php?year=' + year + '&action=doInserer';
