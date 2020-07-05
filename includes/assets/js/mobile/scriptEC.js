@@ -134,7 +134,7 @@ function showDetails(idDepense)
   if (commentaires.length != 0)
     $('.details_commentaires').html(commentaires);
   else
-    $('.details_commentaires').html('Pas de commentaire.');
+    $('.details_commentaires').html('Pas de commentaire');
 
   // Répartition
   if (parts.length == 0)
