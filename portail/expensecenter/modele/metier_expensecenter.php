@@ -293,7 +293,7 @@
     // Contrôle si aucune part pour une régularisation
     $control_ok = controlRegularisation($newPrice, $newRegularisationSansParts);
 
-    // Contrôle si prix numérique et non nul (négatif = régul, positif = régularisation ou dépense, nul = aucun sens)
+    // Contrôle si prix numérique et non nul (négatif = régularisation, positif = régularisation ou dépense, nul = aucun sens)
     if ($control_ok == true)
       $control_ok = controlePrixNumerique($newPrice);
 
@@ -322,7 +322,7 @@
       // Récupération du nombre total de parts existantes
       $oldNombreTotalParts = array_sum($oldListeParts);
 
-      // Vérification si régul négative sans parts
+      // Vérification si régularisation négative sans parts
       $oldRegularisationSansParts = true;
 
       if (!empty($oldNombreTotalParts))

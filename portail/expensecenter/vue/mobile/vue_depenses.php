@@ -49,7 +49,7 @@
                 echo '</div>';
               }
               else
-                echo '<div class="zone_depense_regularisation">REGUL</div>';
+                echo '<div class="zone_depense_regularisation">RÉGUL</div>';
             echo '</div>';
           echo '</a>';
         }
