@@ -401,7 +401,6 @@
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 1vh;
 }
 
 .zone_details_repartition
@@ -434,6 +433,56 @@
 	color: white;
 	border-radius: 50%;
 	text-align: center;
+}
+
+.zone_details_actions
+{
+	text-align: center;
+	margin-bottom: 1vh;
+}
+
+.lien_modifier_depense
+{
+	display: inline-block;
+	height: 6vh;
+	width: calc(50% - 1.5vh);
+	margin-left: 1vh;
+	margin-right: 0.5vh;
+	vertical-align: middle;
+	background-color: #e3e3e3;
+	border-radius: 1vw;
+}
+
+.icone_modifier_depense
+{
+	width: 4vh;
+	height: 4vh;
+	padding: 1vh;
+	vertical-align: middle;
+}
+
+.form_supprimer_depense
+{
+	display: inline-block;
+	width: calc(50% - 1.5vh);
+	margin-left: 0.5vh;
+	margin-right: 1vh;
+	vertical-align: middle;
+	background-color: #e3e3e3;
+	border-radius: 1vw;
+}
+
+.icone_supprimer_depense
+{
+	height: 6vh;
+	width: 100%;
+	vertical-align: middle;
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
+	background-size: 4vh 4vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	border: 0;
 }
 
 /*** Dépenses ***/

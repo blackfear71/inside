@@ -255,7 +255,7 @@
         'price'   => $price,
         'buyer'   => $buyer,
         'comment' => $comment
-          ));
+      ));
       $req0->closeCursor();
 
       // On récupère l'id permettant d'identifier la dépense

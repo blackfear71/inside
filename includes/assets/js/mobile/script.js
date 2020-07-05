@@ -73,7 +73,7 @@ $(function()
     &&  $('#contenuCelsius').css('display') != 'none')
       afficherMasquerIdWithDelay('contenuCelsius');
 
-    // Ferme une zone de saisie
+    // Ferme une zone de saisie ou de détails
     if ($(event.target).attr('class') == 'fond_saisie'
     ||  $(event.target).attr('class') == 'fond_details')
       afficherMasquerIdWithDelay(event.target.id);
@@ -88,6 +88,11 @@ $(function()
   // Messages de confirmation
   $('.eventConfirm').click(function()
   {
+    // Fermeture des détails
+    idDetails = $('.fond_details').attr('id');
+    afficherMasquerIdWithDelay(idDetails);
+
+    // Affichage du message de confirmation
     var idForm  = $(this).closest('form').attr('id');
     var message = $(this).closest('form').find('.eventMessage').val();
 
@@ -190,6 +195,29 @@ function fixViewport()
   var viewport   = document.querySelector("meta[name=viewport]");
 
   viewport.setAttribute("content", "height=" + viewHeight + "px, width=" + viewWidth + "px, initial-scale=1.0");
+}
+
+// Fonction équivalente au $_GET en php
+function $_GET(param)
+{
+	var vars = {};
+
+	window.location.href.replace(location.hash, '').replace(
+    // Expression régulière
+		/[?&]+([^=&]+)=?([^&]*)?/gi,
+
+    // Fonction retour
+		function(m, key, value)
+    {
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
+
+	if (param)
+		return vars[param] ? vars[param] : null;
+
+  // Retour
+	return vars;
 }
 
 // Initialisation de la position Celsius
@@ -482,7 +510,7 @@ function confirmAction(form, message)
   // Génération nouvelle fenêtre de confirmation
   var html = '';
 
-  html += '<div class="fond_alerte" id="confirmBox">';
+  html += '<div class="fond_alerte" id="confirmBox" style="display: none;">';
     html += '<div class="zone_affichage_alerte">';
       html += '<input type="hidden" id="actionForm" value="' + form + '" />';
 
@@ -509,6 +537,9 @@ function confirmAction(form, message)
 
   // Ajout à la page
   $('body').append(html);
+
+  // Affichage de la fenêtre de confirmation
+  afficherMasquerIdWithDelay('confirmBox');
 }
 
 // Ferme la fenêtre ou execute le formulaire

@@ -1,5 +1,5 @@
 <?php
-  echo '<div id="zoneSaisieAnnee" class="fond_saisie">';
+  echo '<div id="zone_saisie_annee" class="fond_saisie">';
     echo '<div class="div_saisie">';
       // Titre
       echo '<div class="zone_titre_saisie">';

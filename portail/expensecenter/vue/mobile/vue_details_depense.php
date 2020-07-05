@@ -1,5 +1,5 @@
 <?php
-  echo '<div id="zoneDetailsDepense" class="fond_details" style="display: none;">';
+  echo '<div id="zone_details_depense" class="fond_details" style="display: none;">';
     echo '<div class="div_details">';
       echo '<div class="zone_contenu_details">';
         // Titre
@@ -53,11 +53,19 @@
         echo '</div>';
 
         // Actions
-        /*echo '<div class="zone_details_actions">';
+        echo '<div class="zone_details_actions">';
           // Modifier
+          echo '<a title="Modifier" class="lien_modifier_depense modifierDepense">';
+            echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_modifier_depense" />';
+          echo '</a>';
 
           // Supprimer
-        echo '</div>';*/
+          echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimer" class="form_supprimer_depense">';
+            echo '<input type="hidden" name="id_expense" value="" />';
+            echo '<input type="submit" name="delete_depense" value="" title="Supprimer" class="icone_supprimer_depense eventConfirm" />';
+            echo '<input type="hidden" value="" class="eventMessage" />';
+          echo '</form>';
+        echo '</div>';
       echo '</div>';
 
       // Bouton fermeture

@@ -419,6 +419,7 @@ function $_GET(param)
 	if (param)
 		return vars[param] ? vars[param] : null;
 
+  // Retour
 	return vars;
 }
 
