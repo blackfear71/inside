@@ -40,7 +40,6 @@
   {
     // Initialisations
     $listeRestaurantsParLieux = array();
-    $availableDay             = true;
 
     // Requête
     global $bdd;
@@ -52,6 +51,9 @@
 
     while ($data = $req->fetch())
     {
+      // Initialisation ouverture
+      $availableDay = true;
+
       // Vérification restaurant ouvert ce jour
       $explodedOpened = explode(";", $data['opened']);
 

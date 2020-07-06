@@ -50,7 +50,8 @@
           /**********/
           /* Saisie */
           /**********/
-          include('vue/mobile/vue_saisie_propositions.php');
+          if ($actions["saisir_choix"] == true)
+            include('vue/mobile/vue_saisie_propositions.php');
 
           /********************/
           /* Boutons d'action */
