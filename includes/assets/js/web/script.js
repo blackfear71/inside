@@ -747,10 +747,12 @@ function formatUnknownUser(pseudo, majuscule, italique)
 }
 
 // Prend en compte les sauts de ligne
-function nl2br(str)
+function nl2br(chaine)
 {
-  var nl2br = str.replace(/(\r\n|\n\r|\r|\n)/g, '<br />');
+  // Remplacement des sauts de ligne
+  var nl2br = chaine.replace(/(\r\n|\n\r|\r|\n)/g, '<br />');
 
+  // Retour
   return nl2br;
 }
 

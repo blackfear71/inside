@@ -735,3 +735,13 @@ function formatString(string, limit)
   // Retour
   return string;
 }
+
+// Prend en compte les sauts de ligne
+function nl2br(chaine)
+{
+  // Remplacement des sauts de ligne
+  var nl2br = chaine.replace(/(\r\n|\n\r|\r|\n)/g, '<br />');
+
+  // Retour
+  return nl2br;
+}

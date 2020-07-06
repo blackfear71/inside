@@ -50,7 +50,7 @@
           /**********/
           /* Saisie */
           /**********/
-          if ($actions["saisir_choix"] == true)
+          if ($actions['saisir_choix'] == true)
             include('vue/mobile/vue_saisie_propositions.php');
 
           /********************/
@@ -60,11 +60,11 @@
           echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page" class="lien_green">Actualiser</a>';
 
           // Proposer un choix
-          if ($actions["saisir_choix"] == true)
+          if ($actions['saisir_choix'] == true)
             echo '<a id="afficherSaisiePropositions" title="Proposer où manger" class="lien_green">Proposer où manger</a>';
 
           // Faire bande à part
-          if ($actions["solo"] == true)
+          if ($actions['solo'] == true)
           {
             echo '<form method="post" action="foodadvisor.php?action=doSolo">';
               echo '<input type="submit" name="solo" value="Faire bande à part" class="lien_red" />';
@@ -72,7 +72,7 @@
           }
 
           // Lancer la détermination
-          if ($actions["determiner"] == true)
+          if ($actions['determiner'] == true)
           {
             echo '<form method="post" action="foodadvisor.php?action=doDeterminer">';
               echo '<input type="submit" name="determiner" value="Lancer la détermination" class="lien_red" />';
@@ -116,6 +116,7 @@
     <script>
       // Récupération liste propositions pour le script
       var detailsPropositions = <?php echo $detailsPropositions; ?>;
+      var userSession         = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
     </script>
   </body>
 </html>

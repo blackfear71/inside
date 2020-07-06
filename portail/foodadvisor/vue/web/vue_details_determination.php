@@ -48,7 +48,8 @@
 
         // Appelant
         echo '<div class="zone_caller_details">';
-          echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone_details" />';
+          // Logo
+          echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" title="Numéro de téléphone" class="icone_telephone_details" />';
 
           // Numéro de téléphone
           echo '<div id="telephone_details_proposition" class="telephone_details"></div>';
@@ -136,7 +137,8 @@
 
         // Description restaurant
         echo '<div class="zone_details_description_bottom">';
-          echo '<div class="titre_details_bottom"><img src="../../includes/icons/foodadvisor/description_grey.png" alt="description_grey" class="logo_titre_section" /><div class="texte_titre_section">A propos du restaurant</div></div>';
+          // Titre
+          echo '<div class="titre_details_bottom"><img src="../../includes/icons/foodadvisor/description_grey.png" alt="description_grey" class="logo_titre_section" /><div class="texte_titre_section">À propos du restaurant</div></div>';
 
           // Description
           echo '<div class="zone_details_description"></div>';

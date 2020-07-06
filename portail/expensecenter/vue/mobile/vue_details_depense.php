@@ -25,7 +25,7 @@
             // Informations acheteur
             echo '<div class="zone_details_acheteur">';
               // Avatar
-              echo '<img src="" alt="" title="" class="details_avatar_acheteur" />';
+              echo '<img src="../../includes/icons/common/default.png" alt="avatar" title="" class="details_avatar_acheteur" />';
 
               // Pseudo
               echo '<div class="details_pseudo_acheteur"></div>';

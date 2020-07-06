@@ -111,7 +111,52 @@
 }
 
 /*** Détails ***/
-.zone_details_informations
+.image_details
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1vh;
+	width: 50%;
+	filter: drop-shadow(0 0 0.5vw #7c7c7c);
+	border-radius: 50%;
+}
+
+.reserved_details
+{
+	text-align: center;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+}
+
+.bouton_action_details
+{
+  display: block;
+  width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+  padding: 1vh 2vw 1vh 2vw;
+	margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-family: robotolight, Verdana, sans-serif;
+  color: #262626;
+  font-size: 2.5vh;
+  text-align: center;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw #7c7c7c;
+  text-decoration: none;
+  background-color: #e3e3e3;
+	border: 0;
+}
+
+.bouton_action_details:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.zone_details_informations, .zone_details_users
 {
 	display: block;
 	width: 90%;
@@ -119,20 +164,53 @@
 	margin-right: auto;
 }
 
-.image_details
+.icone_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1vh;
+	width: 3vh;
+	height: 3vh;
+}
+
+.lieu_details_proposition
 {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 50%;
-	filter: drop-shadow(0 0 0.5vw #7c7c7c);
-	border-radius: 50%;
+	margin-bottom: 1vh;
+  background-color: #2eb2f4;
+	padding-top: 0.8vh;
+	padding-bottom: 0.8vh;
+	border-radius: 1vw;
+	text-align: center;
+}
+
+.nombre_participants_details_proposition
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1vh;
+  background-color: #70d55d;
+	padding-top: 0.8vh;
+	padding-bottom: 0.8vh;
+	border-radius: 1vw;
+	text-align: center;
+}
+
+.lieu_details, .nombre_participants_details
+{
+	display: inline-block;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
 }
 
 .zone_details_ouverture
 {
 	display: block;
 	text-align: center;
+	margin-bottom: 1vh;
 }
 
 .jour_details
@@ -165,53 +243,148 @@
 .prix_details
 {
 	display: block;
-	padding-top: 1vh;
-	padding-bottom: 1vh;
+	margin-bottom: 1vh;
 	text-align: center;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 2vh;
 	color: #262626;
 }
 
-.icone_details
+.zone_types_details
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 1vh;
-	width: 3vh;
-	height: 3vh;
-}
-
-.lieu_details_proposition
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 1vh;
-  background-color: #2eb2f4;
-	padding: 0.8vh 1vh 0.8vh 1vh;
-	border-radius: 1vw;
 	text-align: center;
 }
 
-.nombre_participants_details_proposition
+.type_details
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 1vh;
+	display: inline-block;
+	margin: 0 0.5vh 1vh 0.5vh;
   background-color: #70d55d;
 	padding: 0.8vh 1vh 0.8vh 1vh;
 	border-radius: 1vw;
 	text-align: center;
-}
-
-.lieu_details, .nombre_participants_details
-{
-	display: inline-block;
 	font-family: robotolight, Verdana, sans-serif;
+	font-size: 2vh;
 	color: white;
 }
+
+.zone_appelant_details, .zone_liens_details
+{
+	display: block;
+	margin-bottom: 1vh;
+	text-align: center;
+}
+
+.icone_telephone_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 4vh;
+	height: 4vh;
+	padding: 1vh;
+}
+
+.telephone_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 2vh;
+	line-height: 6vh;
+	color: #262626;
+}
+
+.avatar_appelant_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	margin-left: 2vh;
+	border-radius: 50%;
+	background-color: #262626;
+	box-shadow: 0 0 1vw #7c7c7c;
+}
+
+.icone_lien_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 4vh;
+	margin-left: 1vh;
+	margin-right: 1vh;
+}
+
+.zone_details_participants
+{
+	display: block;
+	margin-bottom: 1vh;
+}
+
+.zone_user_details
+{
+	display: block;
+	width: 100%;
+}
+
+.zone_avatar_user_details
+{
+	display: inline-block;
+	width: 5vh;
+	height: 5vh;
+	margin-bottom: 1vh;
+}
+
+.avatar_user_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	height: 5vh;
+	border-radius: 50%;
+	background-color: #262626;
+	box-shadow: 0 0 1vw #7c7c7c;
+}
+
+.pseudo_user_details
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 13vh);
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	word-break: break-word;
+}
+
+.zone_details_description
+{
+	display: block;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2vh;
+}
+
+.zone_details_texte
+{
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+	text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*** Propositions ***/
 .zone_propositions_users

@@ -232,6 +232,7 @@
 
   class Proposition
   {
+    private $id;
     private $id_restaurant;
     private $name;
     private $picture;
@@ -258,6 +259,7 @@
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
+      $this->id              = 0;
       $this->id_restaurant   = '';
       $this->name            = '';
       $this->picture         = '';
@@ -310,7 +312,18 @@
         $this->reserved      = $data['reserved'];
     }
 
-    // getters et setters pour l'objet Proposition
+    // getters et setters pour l'objet Restaurant
+    // id
+    public function setId($id)
+    {
+      $this->id = $id;
+    }
+
+    public function getId()
+    {
+      return $this->id;
+    }
+    
     // id restaurant
     public function setId_restaurant($id_restaurant)
     {

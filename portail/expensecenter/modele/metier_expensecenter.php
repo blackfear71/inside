@@ -143,7 +143,7 @@
     $control_ok = true;
 
     // Récupération des données
-    $date    = date("Ymd");
+    $date    = date('Ymd');
     $price   = formatAmountForInsert($post['depense']);
     $buyer   = $post['buyer_user'];
     $comment = $post['comment'];

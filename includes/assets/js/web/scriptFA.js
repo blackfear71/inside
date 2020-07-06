@@ -1357,7 +1357,7 @@ function showDetails(zone, id)
     $('#annuler_details_proposition').attr('action', '');
   }
 
-  // Id restaurant
+  // Id restaurant des boutons
   if (participe == true && details['reserved'] != "Y")
     $('#reserver_details_proposition > input[name=id_restaurant]').val(id);
   else
@@ -1465,7 +1465,6 @@ function showDetails(zone, id)
   /*** Menus ***/
   /*************/
   $('.zone_details_menus').empty();
-  $('.zone_details_description').empty();
 
   var menuPresent = false;
   var colonne;
@@ -1528,6 +1527,8 @@ function showDetails(zone, id)
   /*******************/
   /*** Description ***/
   /*******************/
+  $('.zone_details_description').empty();
+
   if (details['description'] != '')
   {
     var longueurMax = 300;
