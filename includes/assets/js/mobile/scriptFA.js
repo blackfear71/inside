@@ -86,9 +86,9 @@ function showDetails(idProposition)
 
   // Indicateur réservation
   if (proposition['reserved'] == 'Y')
-    $('#reserved_details_proposition').css('display', 'block');
+    $('#reserved_details').css('display', 'block');
   else
-    $('#reserved_details_proposition').css('display', 'none');
+    $('#reserved_details').css('display', 'none');
 
   // Nombre de participants
   var nombreParticipants;
@@ -109,9 +109,9 @@ function showDetails(idProposition)
     if (value != '')
     {
       if (value == 'Y')
-        $('#jour_details_proposition_' + key).addClass('jour_oui_details');
+        $('#jour_details_' + key).addClass('jour_oui_details');
       else
-        $('#jour_details_proposition_' + key).addClass('jour_non_details');
+        $('#jour_details_' + key).addClass('jour_non_details');
 
       if (dateDuJour.getDay() == key + 1 && value == 'N')
         availableDay = false;
@@ -201,43 +201,43 @@ function showDetails(idProposition)
 
     if (proposition['website'] == '')
     {
-      $('#website_details_proposition').css('display', 'none');
-      $('#website_details_proposition').attr('href', '');
+      $('#website_details').css('display', 'none');
+      $('#website_details').attr('href', '');
     }
     else
     {
-      $('#website_details_proposition').css('display', 'inline-block');
-      $('#website_details_proposition').attr('href', proposition['website']);
+      $('#website_details').css('display', 'inline-block');
+      $('#website_details').attr('href', proposition['website']);
     }
 
     if (proposition['plan'] == '')
     {
-      $('#plan_details_proposition').css('display', 'none');
-      $('#plan_details_proposition').attr('href', '');
+      $('#plan_details').css('display', 'none');
+      $('#plan_details').attr('href', '');
     }
     else
     {
-      $('#plan_details_proposition').css('display', 'inline-block');
-      $('#plan_details_proposition').attr('href', proposition['plan']);
+      $('#plan_details').css('display', 'inline-block');
+      $('#plan_details').attr('href', proposition['plan']);
     }
 
     if (proposition['lafourchette'] == '')
     {
-      $('#lafourchette_details_proposition').css('display', 'none');
-      $('#lafourchette_details_proposition').attr('href', '');
+      $('#lafourchette_details').css('display', 'none');
+      $('#lafourchette_details').attr('href', '');
     }
     else
     {
-      $('#lafourchette_details_proposition').css('display', 'inline-block');
-      $('#lafourchette_details_proposition').attr('href', proposition['lafourchette']);
+      $('#lafourchette_details').css('display', 'inline-block');
+      $('#lafourchette_details').attr('href', proposition['lafourchette']);
     }
   }
   else
   {
     $('.zone_liens_details').css('display', 'none');
-    $('#website_details_proposition').attr('href', '');
-    $('#plan_details_proposition').attr('href', '');
-    $('#lafourchette_details_proposition').attr('href', '');
+    $('#website_details').attr('href', '');
+    $('#plan_details').attr('href', '');
+    $('#lafourchette_details').attr('href', '');
   }
 
   // Participants
@@ -306,76 +306,76 @@ function showDetails(idProposition)
   // Bouton réservation (si on a participé)
   if (participe == true && proposition['reserved'] != 'Y')
   {
-    $('#reserver_details_proposition').css('display', 'block');
-    $('#reserver_details_proposition').attr('action', 'foodadvisor.php?action=doReserver');
+    $('#reserver_details').css('display', 'block');
+    $('#reserver_details').attr('action', 'foodadvisor.php?action=doReserver');
   }
   else
   {
-    $('#reserver_details_proposition').css('display', 'none');
-    $('#reserver_details_proposition').attr('action', '');
+    $('#reserver_details').css('display', 'none');
+    $('#reserver_details').attr('action', '');
   }
 
   // Bouton complet (si appelant sur choix déterminé)
   if (participe == true && proposition['reserved'] != 'Y' && proposition['determined'] == 'Y' && userSession == proposition['caller'])
   {
-    $('#choice_complete_details_proposition').css('display', 'block');
-    $('#choice_complete_details_proposition').attr('action', 'foodadvisor.php?action=doComplet');
+    $('#choice_complete_details').css('display', 'block');
+    $('#choice_complete_details').attr('action', 'foodadvisor.php?action=doComplet');
   }
   else
   {
-    $('#choice_complete_details_proposition').css('display', 'none');
-    $('#choice_complete_details_proposition').attr('action', '');
+    $('#choice_complete_details').css('display', 'none');
+    $('#choice_complete_details').attr('action', '');
   }
 
   // Bouton annulation réservation (si on a participé)
   if (reserved == true)
   {
-    $('#annuler_details_proposition').css('display', 'block');
-    $('#annuler_details_proposition').attr('action', 'foodadvisor.php?action=doAnnulerReserver');
+    $('#annuler_details').css('display', 'block');
+    $('#annuler_details').attr('action', 'foodadvisor.php?action=doAnnulerReserver');
   }
   else
   {
-    $('#annuler_details_proposition').css('display', 'none');
-    $('#annuler_details_proposition').attr('action', '');
+    $('#annuler_details').css('display', 'none');
+    $('#annuler_details').attr('action', '');
   }
 
   // Id restaurant des boutons
   if (participe == true && proposition['reserved'] != 'Y')
-    $('#reserver_details_proposition > input[name=id_restaurant]').val(idProposition);
+    $('#reserver_details > input[name=id_restaurant]').val(idProposition);
   else
-    $('#reserver_details_proposition > input[name=id_restaurant]').val('');
+    $('#reserver_details > input[name=id_restaurant]').val('');
 
   if (participe == true && proposition['reserved'] != 'Y' && proposition['determined'] == 'Y' && userSession == proposition['caller'])
-    $('#choice_complete_details_proposition > input[name=id_restaurant]').val(idProposition);
+    $('#choice_complete_details > input[name=id_restaurant]').val(idProposition);
   else
-    $('#choice_complete_details_proposition > input[name=id_restaurant]').val('');
+    $('#choice_complete_details > input[name=id_restaurant]').val('');
 
   if (reserved == true)
-    $('#annuler_details_proposition > input[name=id_restaurant]').val(idProposition);
+    $('#annuler_details > input[name=id_restaurant]').val(idProposition);
   else
-    $('#annuler_details_proposition > input[name=id_restaurant]').val('');
+    $('#annuler_details > input[name=id_restaurant]').val('');
 
   // On cache la zone si tout est vide
-  if ((!$('#reserver_details_proposition').length        || $('#reserver_details_proposition').css('display')        == 'none')
-  &&  (!$('#choice_complete_details_proposition').length || $('#choice_complete_details_proposition').css('display') == 'none')
-  &&  (!$('#annuler_details_proposition').length         || $('#annuler_details_proposition').css('display')         == 'none')
-  &&  (!$('#reserved_details_proposition').length        || $('#reserved_details_proposition').css('display')        == 'none'))
-    $('#indicateurs_details_proposition').css('display', 'none');
+  if ((!$('#reserver_details').length        || $('#reserver_details').css('display')        == 'none')
+  &&  (!$('#choice_complete_details').length || $('#choice_complete_details').css('display') == 'none')
+  &&  (!$('#annuler_details').length         || $('#annuler_details').css('display')         == 'none')
+  &&  (!$('#reserved_details').length        || $('#reserved_details').css('display')        == 'none'))
+    $('#indicateurs_details').css('display', 'none');
   else
-    $('#indicateurs_details_proposition').css('display', 'block');
+    $('#indicateurs_details').css('display', 'block');
 
   // Bouton choix rapide
   if (participe == true || availableDay == false)
   {
-    $('#choix_rapide_details_proposition').css('display', 'none');
-    $('#choix_rapide_details_proposition').attr('action', '');
-    $('#choix_rapide_details_proposition > input[name=id_restaurant]').val('');
+    $('#choix_rapide_details').css('display', 'none');
+    $('#choix_rapide_details').attr('action', '');
+    $('#choix_rapide_details > input[name=id_restaurant]').val('');
   }
   else
   {
-    $('#choix_rapide_details_proposition').css('display', 'block');
-    $('#choix_rapide_details_proposition').attr('action', 'foodadvisor.php?action=doChoixRapide');
-    $('#choix_rapide_details_proposition > input[name=id_restaurant]').val(idProposition);
+    $('#choix_rapide_details').css('display', 'block');
+    $('#choix_rapide_details').attr('action', 'foodadvisor.php?action=doChoixRapide');
+    $('#choix_rapide_details > input[name=id_restaurant]').val(idProposition);
   }
 
   /*************/
