@@ -29,6 +29,10 @@
         // Proposition
         echo '<a id="details_proposition_' . $proposition->getId_restaurant() . '" class="zone_proposition proposition_' . $classProposition . ' afficherDetailsProposition">';
           echo '<div class="image_' . $classProposition . '">';
+            // Indicateur réservation
+            if ($proposition->getReserved() == "Y")
+              echo '<div class="reserved_proposition">R</div>';
+
             // Image
             if (!empty($proposition->getPicture()))
               echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
