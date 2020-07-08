@@ -74,10 +74,12 @@
                 echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
 
                 // Quantité
-                if ($savedParts == true)
-                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
-                else
-                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                echo '<div class="zone_quantite">';
+                  if ($savedParts == true)
+                    echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
+                  else
+                    echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                echo '</div>';
 
                 // Bouton +
                 echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
