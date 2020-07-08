@@ -1,5 +1,5 @@
 <?php
-  echo '<div id="zone_saisie_depense" class="fond_saisie" style="display: none;">';
+  echo '<div id="zone_saisie_depense" class="fond_saisie">';
     echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie">';
       // Id dépense (modification)
       echo '<input type="hidden" name="id_expense" value="" />';

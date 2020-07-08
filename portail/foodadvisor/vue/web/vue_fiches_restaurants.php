@@ -31,11 +31,11 @@
                 if (!empty($restaurant->getMin_price()) AND !empty($restaurant->getMax_price()))
                 {
                   if ($restaurant->getMin_price() == $restaurant->getMax_price())
-                    echo '<div class="price">Prix moy. ' . $restaurant->getMin_price() . '€</div>';
+                    echo '<div class="price">Prix moy. ' . formatAmountForDisplay($restaurant->getMin_price()) . '</div>';
                   else
                   {
-                    echo '<div class="price">Prix min. ' . $restaurant->getMin_price() . '€</div>';
-                    echo '<div class="price">Prix max. ' . $restaurant->getMax_price() . '€</div>';
+                    echo '<div class="price">Prix min. ' . formatAmountForDisplay($restaurant->getMin_price()) . '</div>';
+                    echo '<div class="price">Prix max. ' . formatAmountForDisplay($restaurant->getMax_price()) . '</div>';
                   }
                 }
 
@@ -240,8 +240,12 @@
 
                 // Prix
                 echo '<div class="zone_update_prix">';
-                  echo '<input type="text" name="update_prix_min_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMin_price() . '" maxlength="5" placeholder="Prix min." class="update_prix_min_restaurant" /> €';
-                  echo '<input type="text" name="update_prix_max_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMax_price() . '" maxlength="5" placeholder="Prix max." class="update_prix_max_restaurant" /> €';
+                  // Prix min
+                  echo '<input type="text" name="update_prix_min_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMin_price() . '" maxlength="5" placeholder="Prix min." class="update_prix_min_restaurant" />';
+                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
+                  // Prix max
+                  echo '<input type="text" name="update_prix_max_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMax_price() . '" maxlength="5" placeholder="Prix max." class="update_prix_max_restaurant" />';
+                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
                 echo '</div>';
               echo '</div>';
 

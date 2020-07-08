@@ -30,7 +30,10 @@
           echo '</select>';
 
           // Prix
-          echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" placeholder="Prix" maxlength="6" class="saisie_prix" required /><div class="euro">€</div>';
+          echo '<div class="zone_saisie_prix">';
+            echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Prix" maxlength="6" class="saisie_prix" required />';
+            echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
+          echo '</div>';
 
           // Commentaire
           echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';

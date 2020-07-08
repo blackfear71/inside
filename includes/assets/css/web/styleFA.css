@@ -2525,6 +2525,7 @@
 
 .zone_update_prix
 {
+	display: block;
 	margin-bottom: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
@@ -2533,6 +2534,7 @@
 .update_prix_min_restaurant
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 25%;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -2548,6 +2550,7 @@
 .update_prix_max_restaurant
 {
 	display: inline-block;
+	vertical-align: middle;
 	width: 25%;
 	margin-left: 10px;
 	padding-left: 10px;
@@ -2559,6 +2562,14 @@
 	font-size: 100%;
 	color: #262626;
 	line-height: 30px;
+}
+
+.euro
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
 }
 
 .zone_update_types

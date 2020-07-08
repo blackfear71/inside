@@ -1159,9 +1159,9 @@ function showDetails(zone, id)
     var price;
 
     if (details['min_price'] == details['max_price'])
-      price = "Prix ~ " + details['min_price'] + "€";
+      price = "Prix ~ " + formatAmountForDisplay(details['min_price'], true);
     else
-      price = "Prix " + details['min_price'] + " - " + details['max_price'] + "€";
+      price = "Prix " + formatAmountForDisplay(details['min_price'], false) + " - " + formatAmountForDisplay(details['max_price'], true);
 
     $('.zone_price_details').css('display', 'block');
     $('#prix_details_proposition').html(price);

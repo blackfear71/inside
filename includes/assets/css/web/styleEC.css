@@ -104,12 +104,17 @@
   background-color: white;
 }
 
+.zone_saisie_prix
+{
+	display: block;
+}
+
 .saisie_prix
 {
 	display: inline-block;
 	margin-top: 10px;
-	margin-right: 10px;
-	width: calc(100% - 40px);
+	margin-right: 5px;
+	width: calc(100% - 45px);
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 0;
@@ -125,10 +130,9 @@
 .euro
 {
 	display: inline-block;
-	width: 10px;
-	line-height: 32px;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
 }
 
 .saisie_commentaire
