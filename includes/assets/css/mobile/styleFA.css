@@ -14,7 +14,7 @@
 	font-size: 3vh;
   text-align: center;
 	border-radius: 0.5vh;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
   text-decoration: none;
   background-color: #e3e3e3;
 }
@@ -36,7 +36,7 @@
   font-size: 3vh;
   text-align: center;
   border-radius: 0.5vh;
-  box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
   text-decoration: none;
   background-color: #e3e3e3;
 	border: 0;
@@ -75,7 +75,7 @@
 	height: 5vh;
 	border-radius: 50%;
 	background-color: #262626;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .pseudo_solo_sans_vote
@@ -144,7 +144,7 @@
   font-size: 2.5vh;
   text-align: center;
   border-radius: 0.5vh;
-  box-shadow: 0 0 1vw #7c7c7c;
+  box-shadow: 0 0 0.5vh #7c7c7c;
   text-decoration: none;
   background-color: #e3e3e3;
 	border: 0;
@@ -302,7 +302,7 @@
 	margin-left: 2vh;
 	border-radius: 50%;
 	background-color: #262626;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .icone_lien_details
@@ -341,7 +341,7 @@
 	height: 5vh;
 	border-radius: 50%;
 	background-color: #262626;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .pseudo_user_details
@@ -387,7 +387,7 @@
 	height: 8vh;
 	margin-bottom: 1.5vh;
 	border-radius: 0.5vh;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 	overflow: hidden;
 }
 

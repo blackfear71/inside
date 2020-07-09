@@ -10,7 +10,7 @@
 	width: 100%;
   border-radius: 0.5vh;
   overflow: hidden;
-  box-shadow: 0 0 1vw #7c7c7c;
+  box-shadow: 0 0 0.5vh #7c7c7c;
   background-color: #2c3840;
 }
 

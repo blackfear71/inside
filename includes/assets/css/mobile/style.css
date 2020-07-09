@@ -438,7 +438,7 @@ aside
 	max-height: 50vh;
 	margin-left: 2vh;
 	border-radius: 0.5vh;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 	overflow: hidden;
 }
 
@@ -511,7 +511,7 @@ aside
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .bouton_celsius:hover
@@ -683,7 +683,7 @@ aside
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .bouton_alerte:hover
@@ -790,7 +790,7 @@ aside
 	font-size: 3vh;
   text-align: center;
 	border-radius: 0.5vh;
-	box-shadow: 0 0 1vw #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
   text-decoration: none;
   background-color: #e3e3e3;
 }
