@@ -10,7 +10,7 @@
       echo '<div class="zone_details_proposition_left">';
         // Image + lien
         echo '<a id="lien_details_proposition" href="" class="lien_proposition_top">';
-          echo '<img id="image_details_proposition" src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition_top" />';
+          echo '<img id="image_details_proposition" src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" class="image_proposition_top" />';
         echo '</a>';
 
         // Nom du restaurant

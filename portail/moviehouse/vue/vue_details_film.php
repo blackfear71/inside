@@ -311,7 +311,7 @@
                 echo '</div>';
 
                 // Restaurant
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/restaurant.png" alt="restaurant" class="logo_titre_section" /><div class="texte_titre_section">Restaurant</div></div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/restaurants.png" alt="restaurants" class="logo_titre_section" /><div class="texte_titre_section">Restaurant</div></div>';
                 echo '<div class="contenu_detail">';
                   switch ($detailsFilm->getRestaurant())
                   {

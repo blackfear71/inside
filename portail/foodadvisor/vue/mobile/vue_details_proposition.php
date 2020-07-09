@@ -9,7 +9,10 @@
         echo '</div>';
 
         // Image
-        echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" title="" class="image_details" />';
+        echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="" class="image_details" />';
+
+        // Indicateur réservation
+        echo '<div id="reserved_details" class="reserved_details">Réservé !</div>';
 
         // Choix rapide
         if ($actions['choix_rapide'] == true)
@@ -19,9 +22,6 @@
             echo '<input type="submit" name="fast_restaurant" value="Voter pour ce restaurant" class="bouton_action_details" />';
           echo '</form>';
         }
-
-        // Indicateur réservation
-        echo '<div id="reserved_details" class="reserved_details">Réservé !</div>';
 
         // Actions
         echo '<div id="indicateurs_details">';

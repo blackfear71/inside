@@ -207,7 +207,7 @@
 
           // Lieu restaurant
           echo '<div class="zone_saisie_ligne">';
-            echo '<img src="../../includes/icons/moviehouse/restaurant.png" alt="restaurant" title="Restaurant" class="icone_saisie" />';
+            echo '<img src="../../includes/icons/moviehouse/restaurants.png" alt="restaurants" title="Restaurant" class="icone_saisie" />';
             echo '<input type="text" name="place" value="' . $_SESSION['save']['place_saisie'] . '" placeholder="Lieu proposé" class="saisie_ligne" />';
           echo '</div>';
 

@@ -18,9 +18,9 @@
               echo '<div class="zone_fiche_left">';
                 // Image
                 if (!empty($restaurant->getPicture()))
-                  echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="restaurant" title="' . $restaurant->getName() . '" class="image_restaurant" />';
+                  echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="' . $restaurant->getPicture() . '" title="' . $restaurant->getName() . '" class="image_restaurant" />';
                 else
-                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" title="' . $restaurant->getName() . '" class="image_restaurant" />';
+                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $restaurant->getName() . '" class="image_restaurant" />';
               echo '</div>';
 
               echo '<div class="zone_fiche_middle">';

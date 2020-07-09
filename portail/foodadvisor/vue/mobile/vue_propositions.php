@@ -35,9 +35,9 @@
 
             // Image
             if (!empty($proposition->getPicture()))
-              echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition" />';
+              echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="' . $proposition->getPicture() . '" title="' . $proposition->getName() . '" class="image_proposition" />';
             else
-              echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+              echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $proposition->getName() . '" class="image_proposition" />';
 
             // Nombre de participants
             echo '<div class="nombre_participants_proposition">' . $proposition->getNb_participants() . '</div>';

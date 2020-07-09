@@ -53,18 +53,18 @@
             {
               echo '<a href="restaurants.php?action=goConsulter&anchor=' . $proposition->getId_restaurant() . '" class="lien_proposition_top">';
                 if (!empty($proposition->getPicture()))
-                  echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_proposition_top" />';
+                  echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="' . $proposition->getPicture() . '" title="' . $proposition->getName() . '" class="image_proposition_top" />';
                 else
-                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition_top" />';
+                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $proposition->getName() . '" class="image_proposition_top" />';
               echo '</a>';
             }
             else
             {
               echo '<a href="restaurants.php?action=goConsulter&anchor=' . $proposition->getId_restaurant() . '" class="lien_mon_choix">';
                 if (!empty($proposition->getPicture()))
-                  echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="restaurant" class="image_mon_choix" />';
+                  echo '<img src="../../includes/images/foodadvisor/' . $proposition->getPicture() . '" alt="' . $proposition->getPicture() . '" title="' . $proposition->getName() . '" class="image_mon_choix" />';
                 else
-                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_mon_choix" />';
+                  echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $proposition->getName() . '" class="image_mon_choix" />';
               echo '</a>';
             }
 

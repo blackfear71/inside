@@ -44,9 +44,9 @@
                       echo '<div class="image_normal">';
                         // Image
                         if (!empty($restaurant->getPicture()))
-                          echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="restaurant" class="image_proposition" />';
+                          echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="' . $restaurant->getPicture() . '" title="' . $restaurant->getName() . '" class="image_proposition" />';
                         else
-                          echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurant" class="image_proposition" />';
+                          echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $restaurant->getName() . '" class="image_proposition" />';
                       echo '</div>';
 
                       // Nom restaurant
