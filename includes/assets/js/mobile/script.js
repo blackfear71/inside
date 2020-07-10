@@ -172,8 +172,7 @@ $(function()
   $(window).on('orientationchange', function(e)
   {
     // Forçage taille écran (viewport)
-    if (e.orientation == 'landscape')
-      fixViewport();
+    fixViewport();
 
     // Réinitialsiation position Celsius
     initPositionCelsius();
@@ -193,9 +192,19 @@ $(window).on('load', function()
 // Fige la taille de l'écran
 function fixViewport()
 {
-  var viewHeight = $(window).height();
-  var viewWidth  = $(window).width();
-  var viewport   = document.querySelector('meta[name=viewport]');
+  // On inverse hauteur et largeur si on change l'orientation de l'écran pour conserver des proportions identiques
+  if ($(window).height() < $(window).width())
+  {
+    var viewHeight = $(window).width();
+    var viewWidth  = $(window).height();
+  }
+  else
+  {
+    var viewHeight = $(window).height();
+    var viewWidth  = $(window).width();
+  }
+
+  var viewport = document.querySelector('meta[name=viewport]');
 
   viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0');
 }
