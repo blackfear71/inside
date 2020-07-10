@@ -172,7 +172,8 @@ $(function()
   $(window).on('orientationchange', function(e)
   {
     // Forçage taille écran (viewport)
-    fixViewport();
+    if (e.orientation == 'landscape')
+      fixViewport();
 
     // Réinitialsiation position Celsius
     initPositionCelsius();
