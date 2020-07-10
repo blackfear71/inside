@@ -229,11 +229,11 @@ function initialisationModification(idDepense, year)
   $('.zone_saisie_part').each(function()
   {
     // Initialisation de la quantité
-    $(this).children('.quantite').val('0');
+    $(this).find('.quantite').val('0');
 
     // Vérification présence identifiant dans les parts
     var idZone           = $(this).attr('id');
-    var idQuantite       = $(this).children('.quantite').attr('id');
+    var idQuantite       = $(this).find('.quantite').attr('id');
     var identifiantLigne = $(this).find('input[type=hidden]').val();
     var partUtilisateur  = depense['parts'][identifiantLigne];
     var nombrePartsUtilisateur;
