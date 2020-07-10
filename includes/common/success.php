@@ -1,5 +1,5 @@
 <?php
-  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/success.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
 
   // Initialisation des succès à afficher
   $unlocked = array();
@@ -21,7 +21,7 @@
 
         $ligneUnlocked = Success::withData($donnees);
 
-        if ($ligneUnlocked->getDefined() == "Y")
+        if ($ligneUnlocked->getDefined() == 'Y')
           array_push($unlocked, $ligneUnlocked);
 
         $reponse->closeCursor();

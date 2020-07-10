@@ -17,7 +17,7 @@
     $plateforme = 'mobile';
 
   // Date de dernière modification pour mise à jour automatique du cache du navigateur
-  $last_modification_errors = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleErrors.css');
+  $last_modification_errors = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleErrors.css');
 
   // Feuille de style
   echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $plateforme . '/styleErrors.css?version=' . $last_modification_errors . '" />';

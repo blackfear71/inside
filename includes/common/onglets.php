@@ -2,13 +2,13 @@
 	// Récupération des préférences
 	switch ($_SESSION['user']['view_movie_house'])
 	{
-		case "C":
-			$view_movie_house = "cards";
+		case 'C':
+			$view_movie_house = 'cards';
 			break;
 
-		case "H":
+		case 'H':
 		default:
-			$view_movie_house = "home";
+			$view_movie_house = 'home';
 			break;
 	}
 

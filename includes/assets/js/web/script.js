@@ -50,9 +50,9 @@ $(function()
     if ($('#resizeBar') != null && $('#color_search') != null)
     {
       $('#resizeBar').css('width', '300px');
-      $("#resizeBar").css('transition', 'width ease 0.4s');
-      $("#color_search").css('background-color', '#e3e3e3');
-      $("#color_search").css('transition', 'background-color ease 0.4s');
+      $('#resizeBar').css('transition', 'width ease 0.4s');
+      $('#color_search').css('background-color', '#e3e3e3');
+      $('#color_search').css('transition', 'background-color ease 0.4s');
     }
   });
 
@@ -61,10 +61,10 @@ $(function()
   {
     if ($('#resizeBar') != null && $('#color_search') != null)
     {
-      $("#resizeBar").css('width', '100%');
-      $("#resizeBar").css('transition', 'width ease 0.4s');
-      $("#color_search").css('background-color', 'white');
-      $("#color_search").css('transition', 'background-color ease 0.4s');
+      $('#resizeBar').css('width', '100%');
+      $('#resizeBar').css('transition', 'width ease 0.4s');
+      $('#color_search').css('background-color', 'white');
+      $('#color_search').css('transition', 'background-color ease 0.4s');
 
       event.stopPropagation();
     }
@@ -79,10 +79,10 @@ $(function()
   // Messages de confirmation
   $('.eventConfirm').click(function()
   {
-    var id_form = $(this).closest('form').attr('id');
+    var idForm  = $(this).closest('form').attr('id');
     var message = $(this).closest('form').find('.eventMessage').val();
 
-    if (!confirmAction(id_form, message))
+    if (!confirmAction(idForm, message))
       return false;
   });
 
@@ -265,12 +265,12 @@ function setCookie(cookieName, cookieValue)
   expires.setTime(today.getTime() + (1*24*60*60*1000));
 
   // Cookie global (path=/)
-  document.cookie = cookieName + "=" + encodeURIComponent(cookieValue) + ";expires=" + expires.toGMTString() + ";path=/";
+  document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/';
 }
 
 function getCookie(cookieName)
 {
-  var name          = cookieName + "=";
+  var name          = cookieName + '=';
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca            = decodedCookie.split(';');
 
@@ -358,7 +358,7 @@ function updateNotifications()
     }
     else
       clearInterval(majNotifications);
-  }, "json");
+  }, 'json');
 }
 
 // Exécute le script php de mise à jour du compteur de bugs/évolutions
@@ -397,7 +397,7 @@ function updateBugs()
     }
     else
       clearInterval(majBugs);
-  }, "json");
+  }, 'json');
 }
 
 // Fonction équivalente au $_GET en php
@@ -452,7 +452,7 @@ function scrollToId(id, offset, shadow = false)
       setTimeout(function()
       {
         $('#zone_shadow_' + id).css('box-shadow', '0 0 3px #7c7c7c');
-        $('#zone_shadow_' + id).css({transition : "box-shadow ease 0.2s"});
+        $('#zone_shadow_' + id).css({transition : 'box-shadow ease 0.2s'});
       }, 5000);
     }
   }
@@ -509,25 +509,25 @@ function executeAction(form, action)
 // Animation chargement de la page en boucle
 function loadingPage()
 {
-  $('.zone_loading_page').css("padding-top", "40px");
-  $('.zone_loading_page').css("padding-bottom", "40px");
-  $('#loading_page').css("height", "5px");
-  $('#loading_page').css("margin-left", 0);
-  $('#loading_page').css("opacity", 1);
+  $('.zone_loading_page').css('padding-top', '40px');
+  $('.zone_loading_page').css('padding-bottom', '40px');
+  $('#loading_page').css('height', '5px');
+  $('#loading_page').css('margin-left', 0);
+  $('#loading_page').css('opacity', 1);
 
   $('#loading_page').animate(
   {
-    width: "+=100%",
-    marginLeft: "0%"
-  }, 800, "easeInOutCubic", function()
+    width: '+=100%',
+    marginLeft: '0%'
+  }, 800, 'easeInOutCubic', function()
   {
     $('#loading_page').animate(
     {
-      width: "-=100%",
-      marginLeft: "100%"
-    }, 800, "easeInOutCubic", function()
+      width: '-=100%',
+      marginLeft: '100%'
+    }, 800, 'easeInOutCubic', function()
     {
-      $('#loading_page').css("opacity", 0);
+      $('#loading_page').css('opacity', 0);
 
       setTimeout(function()
       {
@@ -545,7 +545,7 @@ function hideSubmitButton(zone, button, form, tabBlock)
   // On vérifie chaque saisie obligatoire
   form.find('input, textarea, select').each(function()
   {
-    if ($(this).prop('required') == true && $(this).val() == "")
+    if ($(this).prop('required') == true && $(this).val() == '')
     {
       hideButton = false;
       return false;
@@ -599,23 +599,23 @@ function loadingForm(zone)
   // On récupère la classe CSS du parent dans le cas où il y a plusieurs symboles possibles sur la même page
   var classZone = zone.attr('class');
 
-  $('.' + classZone + ' .loading_form').css("height", "5px");
-  $('.' + classZone + ' .loading_form').css("margin-left", 0);
-  $('.' + classZone + ' .loading_form').css("opacity", 1);
+  $('.' + classZone + ' .loading_form').css('height', '5px');
+  $('.' + classZone + ' .loading_form').css('margin-left', 0);
+  $('.' + classZone + ' .loading_form').css('opacity', 1);
 
   $('.' + classZone + ' .loading_form').animate(
   {
-    width: "+=100%",
-    marginLeft: "0%"
-  }, 800, "easeInOutCubic", function()
+    width: '+=100%',
+    marginLeft: '0%'
+  }, 800, 'easeInOutCubic', function()
   {
     $('.' + classZone + ' .loading_form').animate(
     {
-      width: "-=100%",
-      marginLeft: "100%"
-    }, 800, "easeInOutCubic", function()
+      width: '-=100%',
+      marginLeft: '100%'
+    }, 800, 'easeInOutCubic', function()
     {
-      $('.' + classZone + ' .loading_form').css("opacity", 0);
+      $('.' + classZone + ' .loading_form').css('opacity', 0);
 
       setTimeout(function()
       {
@@ -666,7 +666,7 @@ function showNotifications()
 
       $('#afficherDetailNotifications').append(html);
     }
-  }, "json");
+  }, 'json');
 }
 
 // Cache le nombre de notifications
@@ -685,30 +685,30 @@ function formatAvatar(avatar, pseudo, niveau, alt)
   switch (niveau)
   {
     case 1:
-      level = "..";
+      level = '..';
       break;
 
     case 2:
-      level = "../..";
+      level = '../..';
       break;
 
     case 0:
     default:
-      level = "/inside";
+      level = '/inside';
       break;
   }
 
   // Chemin
-  if (avatar != "" && avatar != undefined)
-    path = level + "/includes/images/profil/avatars/" + avatar;
+  if (avatar != '' && avatar != undefined)
+    path = level + '/includes/images/profil/avatars/' + avatar;
   else
-    path = level + "/includes/icons/common/default.png";
+    path = level + '/includes/icons/common/default.png';
 
   // Pseudo
   pseudo = formatUnknownUser(pseudo, true, false);
 
   // Formatage
-  var formattedAvatar = {"path" : path, "alt" : alt, "title" : pseudo};
+  var formattedAvatar = {'path' : path, 'alt' : alt, 'title' : pseudo};
 
   return formattedAvatar;
 }
@@ -717,7 +717,7 @@ function formatAvatar(avatar, pseudo, niveau, alt)
 function formatString(string, limit)
 {
   if (string.length > limit)
-    string = string.substr(0, limit) + "...";
+    string = string.substr(0, limit) + '...';
 
   return string;
 }
@@ -725,21 +725,21 @@ function formatString(string, limit)
 // Formate le pseudo utilisateur désinscrit
 function formatUnknownUser(pseudo, majuscule, italique)
 {
-  if (pseudo == "")
+  if (pseudo == '')
   {
     if (majuscule == true)
     {
       if (italique == true)
-        pseudo = "<i>Un ancien utilisateur</i>";
+        pseudo = '<i>Un ancien utilisateur</i>';
       else
-        pseudo = "Un ancien utilisateur";
+        pseudo = 'Un ancien utilisateur';
     }
     else
     {
       if (italique == true)
-        pseudo = "<i>un ancien utilisateur</i>";
+        pseudo = '<i>un ancien utilisateur</i>';
       else
-        pseudo = "un ancien utilisateur";
+        pseudo = 'un ancien utilisateur';
     }
   }
 

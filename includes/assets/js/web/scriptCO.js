@@ -50,31 +50,31 @@ $(function()
   // Affiche la zone de modification d'une phrase/image culte
   $('.modifierCollector').click(function()
   {
-    var id_collector = $(this).attr('id').replace('modifier_', '');
+    var idCollector = $(this).attr('id').replace('modifier_', '');
 
-    afficherMasquerIdNoDelay('modifier_collector_' + id_collector);
-    afficherMasquerIdNoDelay('visualiser_collector_' + id_collector);
-    adaptBrowse(id_collector);
+    afficherMasquerIdNoDelay('modifier_collector_' + idCollector);
+    afficherMasquerIdNoDelay('visualiser_collector_' + idCollector);
+    adaptBrowse(idCollector);
     initMasonry();
   });
 
   // Ferme la zone de modification d'une phrase/image culte
   $('.annulerCollector').click(function()
   {
-    var id_collector = $(this).attr('id').replace('annuler_', '');
+    var idCollector = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerIdNoDelay('modifier_collector_' + id_collector);
-    afficherMasquerIdNoDelay('visualiser_collector_' + id_collector);
+    afficherMasquerIdNoDelay('modifier_collector_' + idCollector);
+    afficherMasquerIdNoDelay('visualiser_collector_' + idCollector);
     initMasonry();
   });
 
   // Affiche la zone de modification d'un vote d'une phrase/image culte
   $('.modifierVote').click(function(event)
   {
-    var id_collector = $(this).attr('id').replace('link_form_vote_', '');
+    var idCollector = $(this).attr('id').replace('link_form_vote_', '');
 
-    afficherMasquerIdNoDelay('modifier_vote_' + id_collector);
-    afficherMasquerIdNoDelay('link_form_vote_' + id_collector);
+    afficherMasquerIdNoDelay('modifier_vote_' + idCollector);
+    afficherMasquerIdNoDelay('link_form_vote_' + idCollector);
     event.stopPropagation();
   });
 
@@ -191,30 +191,30 @@ $(function()
   // Affiche la saisie "Autre" (modification)
   $('.changeSpeaker').on('change', function()
   {
-    id_collector = $(this).attr('id').replace('speaker_', '');
+    idCollector = $(this).attr('id').replace('speaker_', '');
 
-    afficherModifierOther('speaker_' + id_collector, 'other_speaker_' + id_collector);
+    afficherModifierOther('speaker_' + idCollector, 'other_speaker_' + idCollector);
   });
 
   // Charge l'image (modification)
   $('.loadModifierCollector').on('change', function()
   {
-    var id_image = $(this).attr('id').replace('fichier_', '');
-    loadFile(event, 'image_collector_' + id_image);
+    var idImage = $(this).attr('id').replace('fichier_', '');
+    loadFile(event, 'image_collector_' + idImage);
   });
 
   $('.loadImage').on('load', function()
   {
-    var id_image = $(this).attr('id').replace('image_collector_', '');
+    var idImage = $(this).attr('id').replace('image_collector_', '');
 
-    adaptBrowse(id_image);
+    adaptBrowse(idImage);
     initMasonry();
   });
 
   /*** Calendriers ***/
-  if ($("#datepicker_collector").length || $("#datepicker_image").length)
+  if ($('#datepicker_collector').length || $('#datepicker_image').length)
   {
-    $("#datepicker_collector, #datepicker_image").datepicker(
+    $('#datepicker_collector, #datepicker_image').datepicker(
     {
       autoHide: true,
       language: 'fr-FR',
@@ -302,7 +302,7 @@ function initMasonry()
 // Ferme la saisie d'une phrase/image culte
 function closeInput(id)
 {
-  if ($('#' + id).css('display') != "none")
+  if ($('#' + id).css('display') != 'none')
     afficherMasquerIdWithDelay(id);
 }
 
@@ -325,7 +325,7 @@ var loadFile = function(event, id)
   // Rotation automatique
   EXIF.getData(event.target.files[0], function()
   {
-    var orientation = EXIF.getTag(this, "Orientation");
+    var orientation = EXIF.getTag(this, 'Orientation');
     var degrees     = 0;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
@@ -356,7 +356,7 @@ var loadFile = function(event, id)
 // Affiche ou masque la zone de saisie "Autre" (insertion)
 function afficherOther(select, required)
 {
-  if ($('#' + select).val() == "other")
+  if ($('#' + select).val() == 'other')
   {
     $('#' + required).css('display', 'inline-block');
     $('#' + required).prop('required', true);
@@ -373,7 +373,7 @@ function afficherOther(select, required)
 // Affiche ou masque la zone de saisie "Autre" (modification)
 function afficherModifierOther(select, id)
 {
-  if ($('#' + select).val() == "other")
+  if ($('#' + select).val() == 'other')
   {
     $('#' + id).css('display', 'block');
     $('#' + id).prop('required', true);
@@ -388,5 +388,5 @@ function afficherModifierOther(select, id)
 // Redirige pour appliquer le tri ou le filtre
 function applySortOrFilter(sort, filter)
 {
-  document.location.href = "collector.php?action=goConsulter&page=1&sort=" + sort + "&filter=" + filter;
+  document.location.href = 'collector.php?action=goConsulter&page=1&sort=' + sort + '&filter=' + filter;
 }

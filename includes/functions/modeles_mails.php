@@ -159,7 +159,7 @@
                 foreach ($participants as $participant)
                 {
                   $modele .= '<div class="destinataires_mail">';
-                    $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
+                    $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, 'avatar');
 
                     $modele .= '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_dest_mail" />';
                     $modele .= '<div class="pseudo_dest_mail">' . $participant->getPseudo() . '</div>';

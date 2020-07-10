@@ -8,9 +8,9 @@ $(function()
   // Plie ou déplie les thèmes
   $('.bouton_fold').click(function()
   {
-    var id_fold = $(this).attr('id').replace('fold_', '');
+    var idFold = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerChangeLog(id_fold);
+    afficherMasquerChangeLog(idFold);
   });
 });
 
@@ -57,12 +57,21 @@ $(window).on('load', function()
   }
 
   // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
-  var id     = 'changelog_' + $_GET('anchor');
-  var offset = 70;
-  var shadow = false;
+  if ($_GET('anchor') != null)
+  {
+    var id;
 
-  // Scroll vers l'id
-  scrollToId(id, offset, shadow);
+    if ($_GET('anchor') < 10)
+      id = 'changelog_0' + $_GET('anchor');
+    else
+      id = 'changelog_' + $_GET('anchor');
+
+    var offset = 70;
+    var shadow = false;
+
+    // Scroll vers l'id
+    scrollToId(id, offset, shadow);
+  }
 });
 
 /*****************/

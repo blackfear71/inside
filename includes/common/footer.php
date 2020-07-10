@@ -5,10 +5,10 @@
   // Liens
   if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
   {
-    if ($_SESSION['user']['identifiant'] != "admin")
+    if ($_SESSION['user']['identifiant'] != 'admin')
     {
       // Version
-      echo '<a href="/inside/portail/changelog/changelog.php?year=' . date("Y") . '&action=goConsulter" title="Journal des modifications" class="version">v' . $version . '</a>';
+      echo '<a href="/inside/portail/changelog/changelog.php?year=' . date('Y') . '&action=goConsulter" title="Journal des modifications" class="version">v' . $version . '</a>';
 
       // Page courante
       $path = $_SERVER['PHP_SELF'];
@@ -16,21 +16,21 @@
       // Récupération des préférences
       switch ($_SESSION['user']['view_the_box'])
       {
-        case "P":
-          $view_the_box = "inprogress";
+        case 'P':
+          $view_the_box = 'inprogress';
           break;
 
-        case "M":
-          $view_the_box = "mine";
+        case 'M':
+          $view_the_box = 'mine';
           break;
 
-        case "D":
-          $view_the_box = "done";
+        case 'D':
+          $view_the_box = 'done';
           break;
 
-        case "A":
+        case 'A':
         default:
-          $view_the_box = "all";
+          $view_the_box = 'all';
           break;
       }
 
@@ -85,11 +85,11 @@
     }
 
     // Boutons missions
-    $zone_inside = "footer";
-    include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+    $zone_inside = 'footer';
+    include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
 
     // Chargement des données du thème pour le script
-    if ($_SESSION['user']['identifiant'] != "admin" AND !empty($_SESSION['theme']))
+    if ($_SESSION['user']['identifiant'] != 'admin' AND !empty($_SESSION['theme']))
       $themeUser = json_encode($_SESSION['theme']);
     else
       $themeUser = json_encode('');

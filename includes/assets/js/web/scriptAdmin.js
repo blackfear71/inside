@@ -14,14 +14,14 @@ $(function()
   {
     var time;
     var num;
-    var id_image = $(this).children('img').attr('id');
+    var idImage = $(this).children('img').attr('id');
 
-    if (id_image.search('daily') != -1)
+    if (idImage.search('daily') != -1)
       time = 'daily';
     else
       time = 'weekly';
 
-    num = id_image.replace(time + '_arrow_', '');
+    num = idImage.replace(time + '_arrow_', '');
 
     afficherMasquerIdNoDelay(time + '_log_' + num);
     rotateIcon(time + '_arrow_' + num);
@@ -30,55 +30,55 @@ $(function()
   // Affiche la ligne de modification d'une alerte
   $('.modifierAlerte').click(function()
   {
-    var id_alerte = $(this).attr('id').replace('alerte_', '');
+    var idAlerte = $(this).attr('id').replace('alerte_', '');
 
-    afficherMasquerIdRow('modifier_alerte_' + id_alerte);
-    afficherMasquerIdRow('modifier_alerte_2_' + id_alerte);
+    afficherMasquerIdRow('modifier_alerte_' + idAlerte);
+    afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
   });
 
   // Masque la ligne de modification d'une alerte
   $('.annulerAlerte').click(function()
   {
-    var id_alerte = $(this).attr('id').replace('annuler_', '');
+    var idAlerte = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerIdRow('modifier_alerte_' + id_alerte);
-    afficherMasquerIdRow('modifier_alerte_2_' + id_alerte);
+    afficherMasquerIdRow('modifier_alerte_' + idAlerte);
+    afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
   });
 
   // Affiche la zone de modification d'un thème
   $('.modifierTheme').click(function()
   {
-    var id_theme = $(this).attr('id').replace('theme_', '');
+    var idTheme = $(this).attr('id').replace('theme_', '');
 
-    afficherMasquerIdNoDelay('modifier_theme_' + id_theme);
-    afficherMasquerIdNoDelay('modifier_theme_2_' + id_theme);
+    afficherMasquerIdNoDelay('modifier_theme_' + idTheme);
+    afficherMasquerIdNoDelay('modifier_theme_2_' + idTheme);
     initMasonry();
   });
 
   // Masque la zone de modification d'un thème
   $('.annulerTheme').click(function()
   {
-    var id_theme = $(this).attr('id').replace('annuler_', '');
+    var idTheme = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerIdNoDelay('modifier_theme_' + id_theme);
-    afficherMasquerIdNoDelay('modifier_theme_2_' + id_theme);
+    afficherMasquerIdNoDelay('modifier_theme_' + idTheme);
+    afficherMasquerIdNoDelay('modifier_theme_2_' + idTheme);
     initMasonry();
   });
 
   // Change la couleur des switch (calendriers & générateur de code)
   $('.label_switch').click(function()
   {
-    var id_bouton = $(this).closest('div').attr('id');
+    var idBouton = $(this).closest('div').attr('id');
 
-    changeCheckedColor(id_bouton);
+    changeCheckedColor(idBouton);
   });
 
   // Change la couleur des radio boutons (journaux)
   $('.label_radio').click(function()
   {
-    var id_bouton = $(this).closest('div').attr('id');
+    var idBouton = $(this).closest('div').attr('id');
 
-    switchCheckedColor('switch_action_changelog', id_bouton);
+    switchCheckedColor('switch_action_changelog', idBouton);
   });
 
   // Ajoute une nouvelle entrée (journaux)
@@ -96,7 +96,7 @@ $(function()
     // Contrôle des champs requis
     $('.zone_saisie_entree_changelog').each(function()
     {
-      if ($(this).children('input').val() != "")
+      if ($(this).children('input').val() != '')
         $(this).children('select').prop('required', true);
     });
 
@@ -210,9 +210,9 @@ $(function()
   });
 
   /*** Calendriers ***/
-  if ($("#datepicker_saisie_deb").length || $("#datepicker_saisie_fin").length)
+  if ($('#datepicker_saisie_deb').length || $('#datepicker_saisie_fin').length)
   {
-    $("#datepicker_saisie_deb, #datepicker_saisie_fin").datepicker(
+    $('#datepicker_saisie_deb, #datepicker_saisie_fin').datepicker(
     {
       autoHide: true,
       language: 'fr-FR',
@@ -401,20 +401,20 @@ $(window).on('load', function()
   scrollToId(id, offset, shadow);
 
   // Déclenchement du scroll pour "anchorAlerts" : on récupère l'id de l'ancre dans l'url (fonction JS)
-  var id_alerts     = $_GET('anchorAlerts');
-  var offset_alerts = 30;
-  var shadow_alerts = false;
+  var idAlerts     = $_GET('anchorAlerts');
+  var offsetAlerts = 30;
+  var shadowAlerts = false;
 
   // Scroll vers l'id
-  scrollToId(id_alerts, offset_alerts, shadow_alerts);
+  scrollToId(idAlerts, offsetAlerts, shadowAlerts);
 
   // Déclenchement du scroll pour "anchorTheme" : on récupère l'id de l'ancre dans l'url (fonction JS)
-  var id_theme     = $_GET('anchorTheme');
-  var offset_theme = 30;
-  var shadow_theme = false;
+  var idTheme     = $_GET('anchorTheme');
+  var offsetTheme = 30;
+  var shadowTheme = false;
 
   // Scroll vers l'id
-  scrollToId(id_theme, offset_theme, shadow_theme);
+  scrollToId(idTheme, offsetTheme, shadowTheme);
 });
 
 /*****************/
@@ -576,7 +576,7 @@ function switchCheckedColor(zone, input)
 // Ajoute une entrée à la saisie d'un journal
 function addEntry(zone, num)
 {
-  var html = "";
+  var html = '';
 
   html += '<div class="zone_saisie_entree_changelog">';
     // Saisie entrée

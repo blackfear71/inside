@@ -1,8 +1,8 @@
 <?php
   include_once('appel_bdd.php');
-  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/profile.php');
-  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/themes.php');
-  include_once($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/classes/missions.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/profile.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
 
   // Contrôles Index, initialisation session
   // RETOUR : Aucun
@@ -13,9 +13,9 @@
       session_start();
 
   	// Si déjà connecté
-    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
+    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != 'admin')
       header('location: /inside/portail/portail/portail.php?action=goConsulter');
-    elseif (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == "admin")
+    elseif (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
       header('location: /inside/administration/portail/portail.php?action=goConsulter');
     else
       $_SESSION['index']['connected'] = false;
@@ -34,7 +34,7 @@
       session_start();
 
     // Contrôle non utilisateur normal
-    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != "admin")
+    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != 'admin')
       header('location: /inside/portail/portail/portail.php?action=goConsulter');
 
     // Contrôle administrateur connecté
@@ -54,7 +54,7 @@
       session_start();
 
     // Contrôle non administrateur
-  	if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == "admin")
+  	if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
       header('location: /inside/administration/portail/portail.php?action=goConsulter');
 
     // Contrôle utilisateur connecté
@@ -85,7 +85,7 @@
         {
           if (empty($_SESSION['missions'][$key]))
           {
-            if (!empty($mission) AND date("His") >= $mission->getHeure())
+            if (!empty($mission) AND date('His') >= $mission->getHeure())
             {
               // Nombre de boutons à générer pour la mission en cours
               $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
@@ -490,7 +490,7 @@
     // Contrôle thème mission en cours
     $theme_present = false;
 
-    $req1 = $bdd->query('SELECT * FROM themes WHERE type = "M" AND ' . date("Ymd") . ' >= date_deb AND ' . date("Ymd") . ' <= date_fin');
+    $req1 = $bdd->query('SELECT * FROM themes WHERE type = "M" AND ' . date('Ymd') . ' >= date_deb AND ' . date('Ymd') . ' <= date_fin');
     $data1 = $req1->fetch();
 
     if ($req1->rowCount() > 0)
@@ -504,7 +504,7 @@
     // Thème mission si en cours
     if ($theme_present == true)
     {
-      if ($theme->getLogo() == "Y")
+      if ($theme->getLogo() == 'Y')
       {
         $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
                               'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
@@ -539,7 +539,7 @@
         {
           $theme = Theme::withData($data3);
 
-          if ($theme->getLogo() == "Y")
+          if ($theme->getLogo() == 'Y')
           {
             $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
                                   'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
@@ -568,19 +568,19 @@
   // RETOUR : titre niveau formaté
   function formatTitleLvl($lvl)
   {
-    $name_lvl = "";
+    $name_lvl = '';
 
     switch ($lvl)
     {
-      case "1";
+      case '1';
         $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Seuls les plus forts y parviendront.</div></div></div>';
         break;
 
-      case "2";
+      case '2';
         $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Vous êtes encore là ?</div></div>';
         break;
 
-      case "3";
+      case '3';
         $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Votre charisme doit être impressionnant.</div></div>';
         break;
 
@@ -631,8 +631,8 @@
   // RETOUR : Aucun
   function insertNotification($author, $category, $content)
   {
-    $date = date("Ymd");
-    $time = date("His");
+    $date = date('Ymd');
+    $time = date('His');
 
     global $bdd;
 
@@ -684,9 +684,9 @@
   // Retour : phrase formatée
   function formatCollector($collector)
   {
-    $formatted = "";
+    $formatted = '';
 
-    $search    = array("[", "]");
+    $search    = array('[', ']');
     $replace   = array('<strong class="strong_red">', '</strong>');
     $formatted = str_replace($search, $replace, $collector);
 
@@ -697,10 +697,10 @@
   // Retour : phrase dé-formatée
   function unformatCollector($collector)
   {
-    $unformatted = "";
+    $unformatted = '';
 
-    $search      = array("[", "]");
-    $replace     = array("", "");
+    $search      = array('[', ']');
+    $replace     = array('', '');
     $unformatted = str_replace($search, $replace, $collector);
 
     return $unformatted;
@@ -866,16 +866,16 @@
     switch ($reference)
     {
       // Valeur saisie conservée
-      case "beginning":
-      case "developper":
-      case "padawan":
-      case "level_1":
-      case "level_5":
-      case "level_10":
+      case 'beginning':
+      case 'developper':
+      case 'padawan':
+      case 'level_1':
+      case 'level_5':
+      case 'level_10':
         $value = $incoming;
 
         // Vérification succès débloqué
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
         {
           $already_unlocked = false;
 
@@ -904,31 +904,31 @@
         break;
 
       // Incrémentation de la valeur précédente avec "incoming" (incoming <= 1)
-      case "publisher":
-      case "viewer":
-      case "commentator":
-      case "listener":
-      case "speaker":
-      case "funny":
-      case "self-satisfied":
-      case "buyer":
-      case "generous":
-      case "creator":
-      case "applier":
-      case "debugger":
-      case "compiler":
-      case "restaurant-finder":
-      case "star-chief":
-      case "cooker":
-      case "recipe-master":
-      case "christmas2017":
-      case "christmas2017_2":
-      case "golden-egg":
-      case "rainbow-egg":
-      case "wizard":
-      case "christmas2018":
-      case "christmas2018_2":
-      case "christmas2019":
+      case 'publisher':
+      case 'viewer':
+      case 'commentator':
+      case 'listener':
+      case 'speaker':
+      case 'funny':
+      case 'self-satisfied':
+      case 'buyer':
+      case 'generous':
+      case 'creator':
+      case 'applier':
+      case 'debugger':
+      case 'compiler':
+      case 'restaurant-finder':
+      case 'star-chief':
+      case 'cooker':
+      case 'recipe-master':
+      case 'christmas2017':
+      case 'christmas2017_2':
+      case 'golden-egg':
+      case 'rainbow-egg':
+      case 'wizard':
+      case 'christmas2018':
+      case 'christmas2018_2':
+      case 'christmas2019':
         // Récupération de l'ancienne valeur si besoin
         $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
         $data0 = $req0->fetch();
@@ -941,7 +941,7 @@
         $req0->closeCursor();
 
         // Vérification succès débloqué
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
         {
           // Récupération des données du succès
           $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
@@ -956,7 +956,7 @@
         break;
 
       // Incrémentation de la valeur précédente avec "incoming" (incoming > 1)
-      case "eater":
+      case 'eater':
         // Récupération de l'ancienne valeur si besoin
         $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
         $data0 = $req0->fetch();
@@ -969,7 +969,7 @@
         $req0->closeCursor();
 
         // Vérification succès débloqué
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
         {
           $already_unlocked = false;
 
@@ -998,9 +998,9 @@
         break;
 
       // Valeur maximale conservée
-      case "greedy":
+      case 'greedy':
         // Récupération des données du succès
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
         {
           $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
           $data0 = $req0->fetch();
@@ -1019,7 +1019,7 @@
             $value = $incoming;
 
           // Vérification succès débloqué
-          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
           {
             if ($data1['value'] < $limit AND $value >= $limit)
               $_SESSION['success'][$reference] = true;
@@ -1031,7 +1031,7 @@
           $value = $incoming;
 
           // Vérification succès débloqué
-          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != "admin")
+          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
           {
             if ($value >= $limit)
               $_SESSION['success'][$reference] = true;
@@ -1165,7 +1165,7 @@
   function formatId($id)
   {
     // Transforme les caractères accentués en entités HTML
-    $formatted = htmlentities($id, ENT_NOQUOTES, "utf-8");
+    $formatted = htmlentities($id, ENT_NOQUOTES, 'utf-8');
 
     // Remplace les entités HTML pour avoir juste le premier caractères non accentué
     $formatted = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $formatted);
@@ -1177,7 +1177,7 @@
     $formatted = preg_replace('#&[^;]+;#', '', $formatted);
 
     // Remplace les espaces
-    $formatted = str_replace(" ", "_", $formatted);
+    $formatted = str_replace(' ', '_', $formatted);
 
     // Passe en minuscule
     $formatted = strtolower($formatted);
@@ -1189,7 +1189,7 @@
   // RETOUR : Numéro formaté
   function formatPhoneNumber($phone)
   {
-    $formattedPhone = substr($phone, 0, 2) . "." . substr($phone, 2, 2) . "." . substr($phone, 4, 2) . "." . substr($phone, 6, 2) . "." . substr($phone, 8, 2);
+    $formattedPhone = substr($phone, 0, 2) . '.' . substr($phone, 2, 2) . '.' . substr($phone, 4, 2) . '.' . substr($phone, 6, 2) . '.' . substr($phone, 8, 2);
 
     return $formattedPhone;
   }
@@ -1207,8 +1207,8 @@
   // RETOUR : Chaîne décodée
   function decodeString($chaine)
   {
-    $search  = array("&amp;", "&quot;", "&#039;", "&lt;", "&gt;");
-    $replace = array("et", "", "", "", "");
+    $search  = array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;');
+    $replace = array('et', '', '', '', '');
     $chaine  = str_replace($search, $replace, $chaine);
 
     return $chaine;
@@ -1231,32 +1231,32 @@
     switch ($niveau)
     {
       case 1:
-        $level = "..";
+        $level = '..';
         break;
 
       case 2:
-        $level = "../..";
+        $level = '../..';
         break;
 
       case 0:
       default:
-        $level = "/inside";
+        $level = '/inside';
         break;
     }
 
     // Chemin
     if (isset($avatar) AND !empty($avatar))
-      $path = $level . "/includes/images/profil/avatars/" . $avatar;
+      $path = $level . '/includes/images/profil/avatars/' . $avatar;
     else
-      $path = $level . "/includes/icons/common/default.png";
+      $path = $level . '/includes/icons/common/default.png';
 
     // Pseudo
     $pseudo = formatUnknownUser($pseudo, true, false);
 
     // Formatage
-    $formattedAvatar = array("path"  => $path,
-                             "alt"   => $alt,
-                             "title" => $pseudo
+    $formattedAvatar = array('path'  => $path,
+                             'alt'   => $alt,
+                             'title' => $pseudo
                             );
 
     return $formattedAvatar;
@@ -1267,7 +1267,7 @@
   function formatString($string, $limit)
   {
     if (strlen($string) > $limit)
-      $string = substr($string, 0, $limit) . "...";
+      $string = substr($string, 0, $limit) . '...';
 
     return $string;
   }
@@ -1281,16 +1281,16 @@
       if ($majuscule == true)
       {
         if ($italique == true)
-          $pseudo = "<i>Un ancien utilisateur</i>";
+          $pseudo = '<i>Un ancien utilisateur</i>';
         else
-          $pseudo = "Un ancien utilisateur";
+          $pseudo = 'Un ancien utilisateur';
       }
       else
       {
         if ($italique == true)
-          $pseudo = "<i>un ancien utilisateur</i>";
+          $pseudo = '<i>un ancien utilisateur</i>';
         else
-          $pseudo = "un ancien utilisateur";
+          $pseudo = 'un ancien utilisateur';
       }
     }
 
@@ -1426,8 +1426,8 @@
   // RETOUR : Chaîne aléatoire
   function generateRandomString($nombreCarateres)
   {
-    $string = "";
-    $chaine = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $string = '';
+    $chaine = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     srand((double)microtime() * 1000000);
 

@@ -80,7 +80,7 @@ $(window).on('load', function()
 // Ferme la saisie d'une idée
 function closeInput(id)
 {
-  if ($('#' + id).css('display') != "none")
+  if ($('#' + id).css('display') != 'none')
     afficherMasquerIdWithDelay(id);
 }
 

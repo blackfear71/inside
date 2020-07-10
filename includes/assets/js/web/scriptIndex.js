@@ -122,18 +122,18 @@ function identifiantMajuscule(champ)
 {
   var value = champ.val();
 
-  if (value != "admin")
+  if (value != 'admin')
     value = value.toUpperCase();
 
   champ.val(value);
 }
 
 // Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)
-function switchIndex(id_open, id_close, focus = null)
+function switchIndex(idOpen, idClose, focus = null)
 {
-  $('#' + id_close).fadeOut(200, function()
+  $('#' + idClose).fadeOut(200, function()
   {
-    $('#' + id_open).fadeIn(200, function()
+    $('#' + idOpen).fadeIn(200, function()
     {
       if (focus != null)
         $('#' + focus).focus();

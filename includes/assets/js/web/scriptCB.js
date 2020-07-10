@@ -8,47 +8,47 @@ $(function()
   // Affiche la liste des utilisateurs (semaine courante)
   $('.afficherUtilisateursCurrent').click(function()
   {
-    var id_boutons  = 'boutons_current_week';
-    var week_number = parseInt($(this).attr('id').replace('choix_semaine_courante_', ''));
+    var idBoutons  = 'boutons_current_week';
+    var weekNumber = parseInt($(this).attr('id').replace('choix_semaine_courante_', ''));
 
-    if (week_number < 10)
-      week_number = '0' + week_number;
+    if (weekNumber < 10)
+      weekNumber = '0' + weekNumber;
 
-    afficherMasquerIdNoDelay(id_boutons);
-    afficherListboxUtilisateurs('zone_current_week', week_number);
+    afficherMasquerIdNoDelay(idBoutons);
+    afficherListboxUtilisateurs('zone_current_week', weekNumber);
   });
 
   // Affiche la liste des utilisateurs (semaine suivante)
   $('.afficherUtilisateursNext').click(function()
   {
-    var id_boutons  = 'boutons_next_week';
-    var week_number = parseInt($(this).attr('id').replace('choix_semaine_suivante_', ''));
+    var idBoutons  = 'boutons_next_week';
+    var weekNumber = parseInt($(this).attr('id').replace('choix_semaine_suivante_', ''));
 
-    if (week_number < 10)
-      week_number = '0' + week_number;
+    if (weekNumber < 10)
+      weekNumber = '0' + weekNumber;
 
-    afficherMasquerIdNoDelay(id_boutons);
-    afficherListboxUtilisateurs('zone_next_week', week_number);
+    afficherMasquerIdNoDelay(idBoutons);
+    afficherListboxUtilisateurs('zone_next_week', weekNumber);
   });
 
   // Masque la liste des utilisateurs (semaine courante)
   $(document).on('click', '.cacherUtilisateursCurrent', function()
   {
-    var id_boutons = 'boutons_current_week';
-    var id_form    = 'form_current_week';
+    var idBoutons = 'boutons_current_week';
+    var idForm    = 'form_current_week';
 
-    afficherMasquerIdNoDelay(id_boutons);
-    $('#' + id_form).remove();
+    afficherMasquerIdNoDelay(idBoutons);
+    $('#' + idForm).remove();
   });
 
   // Masque la liste des utilisateurs (semaine suivante)
   $(document).on('click', '.cacherUtilisateursNext', function()
   {
-    var id_boutons = 'boutons_next_week';
-    var id_form    = 'form_next_week';
+    var idBoutons = 'boutons_next_week';
+    var idForm    = 'form_next_week';
 
-    afficherMasquerIdNoDelay(id_boutons);
-    $('#' + id_form).remove();
+    afficherMasquerIdNoDelay(idBoutons);
+    $('#' + idForm).remove();
   });
 
   // Ajouter une recette
@@ -66,9 +66,9 @@ $(function()
   // Modifier une recette
   $('.modifierRecette').click(function()
   {
-    var id_recette = $(this).attr('id').replace('modifier_', '');
+    var idRecette = $(this).attr('id').replace('modifier_', '');
 
-    updateRecipe(id_recette, 'zone_add_recipe');
+    updateRecipe(idRecette, 'zone_add_recipe');
   });
 
   // Ajoute un champ de saisie ingrédient (saisie)
@@ -80,9 +80,9 @@ $(function()
   // Affiche une recette en grand
   $('.afficherRecette').click(function()
   {
-    var id_recette = $(this).attr('id').replace('afficher_recette_', '');
+    var idRecette = $(this).attr('id').replace('afficher_recette_', '');
 
-    showRecipe($(this), id_recette);
+    showRecipe($(this), idRecette);
   });
 
   // Ferme le zoom d'une recette (au clic sur la croix)
@@ -133,9 +133,9 @@ $(function()
   // Change la couleur de l'ingrédient à la saisie
   $(document).on('input', '.saisieIngredient', function()
   {
-    id_ingredient = $(this).attr('id');
+    idIngredient = $(this).attr('id');
 
-    changeIngredientColor(id_ingredient);
+    changeIngredientColor(idIngredient);
   });
 });
 
@@ -250,11 +250,11 @@ function adaptRecipes()
 }
 
 // Affiche une liste des utilisateurs
-function afficherListboxUtilisateurs(id_zone, week)
+function afficherListboxUtilisateurs(idZone, week)
 {
   var html = '';
 
-  if (id_zone == 'zone_current_week')
+  if (idZone == 'zone_current_week')
     html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
   else
     html += '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
@@ -275,13 +275,13 @@ function afficherListboxUtilisateurs(id_zone, week)
     html += '<input type="submit" name="submit_week" value="Valider" class="bouton_valider_week" />';
 
     // Bouton annulation
-    if (id_zone == 'zone_current_week')
+    if (idZone == 'zone_current_week')
       html += '<a class="bouton_annuler_week cacherUtilisateursCurrent">Annuler</a>';
     else
       html += '<a class="bouton_annuler_week cacherUtilisateursNext">Annuler</a>';
   html += '</form>';
 
-  $("#" + id_zone).append(html);
+  $('#' + idZone).append(html);
 }
 
 // Insère une prévisualisation de l'image sur la zone
@@ -293,7 +293,7 @@ var loadFile = function(event, id)
   // Rotation automatique
   EXIF.getData(event.target.files[0], function()
   {
-    var orientation = EXIF.getTag(this, "Orientation");
+    var orientation = EXIF.getTag(this, 'Orientation');
     var degrees     = 0;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
@@ -347,21 +347,21 @@ function afficherSemaines(select)
 // Affiche un champ de saisie d'ingrédient
 function addIngredient(id)
 {
-  var html          = '';
-  var length        = $("#" + id + " .input_ingredient").length;
-  var new_length    = length + 1;
-  var id_ingredient = 'ingredient_' + new_length;
-  var unites        = ['sans', 'g', 'kg', 'ml', 'cl', 'L', 'CC', 'CS'];
+  var html         = '';
+  var length       = $('#' + id + ' .input_ingredient').length;
+  var newLength    = length + 1;
+  var idIngredient = 'ingredient_' + newLength;
+  var unites       = ['sans', 'g', 'kg', 'ml', 'cl', 'L', 'CC', 'CS'];
 
   html += '<div class="zone_ingredient">';
     // Ingrédient
-    html += '<input type="text" placeholder="Ingrédient" value="" id="' + id_ingredient + '" name="ingredients[' + new_length + ']" class="input_ingredient saisieIngredient" />';
+    html += '<input type="text" placeholder="Ingrédient" value="" id="' + idIngredient + '" name="ingredients[' + newLength + ']" class="input_ingredient saisieIngredient" />';
 
     // Quantité
-    html += '<input type="text" placeholder="Quantité" value="" id="quantite_' + id_ingredient + '" name="quantites_ingredients[' + new_length + ']" class="input_quantite" />';
+    html += '<input type="text" placeholder="Quantité" value="" id="quantite_' + idIngredient + '" name="quantites_ingredients[' + newLength + ']" class="input_quantite" />';
 
     // Unité
-    html += '<select id="unite_' + id_ingredient + '" name="unites_ingredients[' + new_length + ']" class="select_unite">';
+    html += '<select id="unite_' + idIngredient + '" name="unites_ingredients[' + newLength + ']" class="select_unite">';
       html += '<option value="" hidden>Unité</option>';
 
       $.each(unites, function(key, value)
@@ -371,7 +371,7 @@ function addIngredient(id)
     html += '</select>';
   html += '</div>';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 }
 
 // Affiche les détails de la recette
@@ -405,7 +405,7 @@ function showRecipe(link, id)
         html += '<div class="titre_section"><img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" /><div class="texte_titre_section">' + recipe['name'] + '</div></div>';
 
         // Avatar
-        avatarFormatted = formatAvatar(recipe['avatar'], recipe['pseudo'], 2, "avatar");
+        avatarFormatted = formatAvatar(recipe['avatar'], recipe['pseudo'], 2, 'avatar');
 
         html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_details_recette" />';
 
@@ -415,7 +415,7 @@ function showRecipe(link, id)
         html += '</div>';
 
         // Ingrédients
-        if (recipe['ingredients'] != "")
+        if (recipe['ingredients'] != '')
         {
           ingredientsSplit = recipe['ingredients'].split(';');
 
@@ -423,7 +423,7 @@ function showRecipe(link, id)
           {
             ingredientSplit = value.split('@');
 
-            if (ingredientSplit[0] != "")
+            if (ingredientSplit[0] != '')
               ingredients.push({ingredient: ingredientSplit[0], quantity: ingredientSplit[1], unity: ingredientSplit[2]});
           });
 
@@ -434,10 +434,10 @@ function showRecipe(link, id)
             {
               html += '<div class="ingredient_details_recette">' + this['ingredient'] + '</div>';
 
-              if (this['quantity'] != "")
+              if (this['quantity'] != '')
               {
-                if (this['unity'] == "CC" || this['unity'] == "CS")
-                  html += '<div class="quantite_details_recette">' + this['quantity'] + " " + this['unity'] + '</div>';
+                if (this['unity'] == 'CC' || this['unity'] == 'CS')
+                  html += '<div class="quantite_details_recette">' + this['quantity'] + ' ' + this['unity'] + '</div>';
                 else
                   html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
               }
@@ -446,7 +446,7 @@ function showRecipe(link, id)
         }
 
         // Préparation
-        if (recipe['recipe'] != "")
+        if (recipe['recipe'] != '')
         {
           html += '<div class="zone_recette_details">';
             html += '<div class="titre_details_recette">Préparation</div>';
@@ -455,7 +455,7 @@ function showRecipe(link, id)
         }
 
         // Remarques & astuces
-        if (recipe['tips'] != "")
+        if (recipe['tips'] != '')
         {
           html += '<div class="zone_ingredients_details">';
             html += '<div class="titre_details_recette">Remarques & astuces</div>';
@@ -464,13 +464,13 @@ function showRecipe(link, id)
         }
 
         // Cas vide
-        if (recipe['ingredients'] == "" && recipe['recipe'] == "" && recipe['tips'] == "")
+        if (recipe['ingredients'] == '' && recipe['recipe'] == '' && recipe['tips'] == '')
           html += '<div class="empty">Pas de recette disponible</div>';
 
         // Bouton "Je l'ai fait"
         if (recipe['identifiant'] == userSession)
         {
-          if (recipe['cooked'] == "Y")
+          if (recipe['cooked'] == 'Y')
           {
             html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnuler">';
               html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
@@ -515,7 +515,7 @@ function updateRecipe(id, zone)
   var action      = 'cookingbox.php?year=' + annee + '&action=doModifierRecette';
 
   // Modification des données
-  generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, "mod");
+  generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, 'mod');
 }
 
 // Réinitialise la zone de saisie d'une recette si fermeture modification
@@ -530,7 +530,7 @@ function resetSaisie(zone)
     var currentAction = $('.form_saisie_recette').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
-    if (call == "doModifierRecette")
+    if (call == 'doModifierRecette')
     {
       var id          = '';
       var image       = '';
@@ -543,7 +543,7 @@ function resetSaisie(zone)
       var titre       = 'Ajouter une recette';
       var action      = 'cookingbox.php?action=doAjouterRecette';
 
-      generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, "reset");
+      generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, 'reset');
     }
   }, 200);
 }
@@ -563,7 +563,7 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
   $('#saisie_remarques').val(remarques);
 
   // Modification des données spécifiques
-  if (mode == "mod")
+  if (mode == 'mod')
   {
     $('#saisie_annee').css('display', 'none');
     $('#saisie_annee').prop('required', false);
@@ -578,7 +578,7 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
 
     $('#image_recette').attr('src', '../../includes/images/cookingbox/' + annee + '/mini/' + image);
     $('input[name=image]').prop('required', false);
-    $('input[name=insert_recipe]').val("Modifier");
+    $('input[name=insert_recipe]').val('Modifier');
   }
   else
   {
@@ -592,7 +592,7 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
 
     $('#image_recette').removeAttr('src');
     $('input[name=image]').prop('required', true);
-    $('input[name=insert_recipe]').val("Ajouter");
+    $('input[name=insert_recipe]').val('Ajouter');
   }
 
   // Modification des données ingrédients
@@ -606,7 +606,7 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
   {
     ingredient = '';
 
-    if (value != "")
+    if (value != '')
     {
       ingredient    = value.split('@');
       numIngredient = key + 1;
@@ -619,8 +619,8 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
 
       $('#ingredient_' + numIngredient).addClass('filled');
 
-      if (ingredient[2] == "")
-        $('#unite_ingredient_' + numIngredient).val("sans");
+      if (ingredient[2] == '')
+        $('#unite_ingredient_' + numIngredient).val('sans');
       else
         $('#unite_ingredient_' + numIngredient).val(ingredient[2]);
     }
@@ -649,7 +649,7 @@ function tailleAutoRecette(speed)
 // Change la couleur de fond lors de la saisie de texte
 function changeIngredientColor(id)
 {
-  if ($('#' + id).val() != "")
+  if ($('#' + id).val() != '')
   {
     $('#' + id).css('background-color', '#70d55d');
     $('#' + id).css('color', 'white');

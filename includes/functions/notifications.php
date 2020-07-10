@@ -13,32 +13,32 @@
       // Récupération préférence
       switch ($_SESSION['user']['view_notifications'])
       {
-        case "M":
-          $view_notifications = "me";
-          $page               = "&page=1";
+        case 'M':
+          $view_notifications = 'me';
+          $page               = '&page=1';
           break;
 
-        case "T":
-          $view_notifications = "today";
-          $page               = "";
+        case 'T':
+          $view_notifications = 'today';
+          $page               = '';
           break;
 
-        case "W":
-          $view_notifications = "week";
-          $page               = "&page=1";
+        case 'W':
+          $view_notifications = 'week';
+          $page               = '&page=1';
           break;
 
-        case "A":
+        case 'A':
         default:
-          $view_notifications = "all";
-          $page               = "&page=1";
+          $view_notifications = 'all';
+          $page               = '&page=1';
           break;
       }
 
       // Récupération compteur de notifications du jour
       $nb_notifs_jour = 0;
 
-      $reponse = $bdd->query('SELECT COUNT(id) AS nb_notifs_jour FROM notifications WHERE date = ' . date("Ymd"));
+      $reponse = $bdd->query('SELECT COUNT(id) AS nb_notifs_jour FROM notifications WHERE date = ' . date('Ymd'));
       $donnees = $reponse->fetch();
       $nb_notifs_jour = $donnees['nb_notifs_jour'];
       $reponse->closeCursor();
@@ -59,16 +59,16 @@
       // Récupération compteur de notifications du jour
       $nb_notifs_jour = 0;
 
-      $req1 = $bdd->query('SELECT COUNT(id) AS nb_notifs_jour FROM notifications WHERE date = ' . date("Ymd"));
+      $req1 = $bdd->query('SELECT COUNT(id) AS nb_notifs_jour FROM notifications WHERE date = ' . date('Ymd'));
       $data1 = $req1->fetch();
       $nb_notifs_jour = $data1['nb_notifs_jour'];
       $req1->closeCursor();
 
       // Calcul des dates de la semaine
-      $nb_jours_lundi    = 1 - date("N");
-      $nb_jours_dimanche = 7 - date("N");
-      $lundi             = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
-      $aujourdhui        = date("Ymd", strtotime('+' . $nb_jours_dimanche . ' days'));
+      $nb_jours_lundi    = 1 - date('N');
+      $nb_jours_dimanche = 7 - date('N');
+      $lundi             = date('Ymd', strtotime('+' . $nb_jours_lundi . ' days'));
+      $aujourdhui        = date('Ymd', strtotime('+' . $nb_jours_dimanche . ' days'));
 
       // Récupération compteur de notifications de la semaine
       $nb_notifs_semaine = 0;

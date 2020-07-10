@@ -61,25 +61,25 @@ $(function()
   // Ajoute une part
   $('.ajouterPart').click(function()
   {
-    var id_user = $(this).attr('id').replace('ajouter_part_', '');
+    var idUser = $(this).attr('id').replace('ajouter_part_', '');
 
-    saisirPart('zone_user_' + id_user, 'quantite_user_' + id_user, 1);
+    saisirPart('zone_user_' + idUser, 'quantite_user_' + idUser, 1);
   });
 
   // Retire une part
   $('.retirerPart').click(function()
   {
-    var id_user = $(this).attr('id').replace('retirer_part_', '');
+    var idUser = $(this).attr('id').replace('retirer_part_', '');
 
-    saisirPart('zone_user_' + id_user, 'quantite_user_' + id_user, -1);
+    saisirPart('zone_user_' + idUser, 'quantite_user_' + idUser, -1);
   });
 
   // Modifier une dépense
   $('.modifierDepense').click(function()
   {
-    var id_depense = $(this).attr('id').replace('modifier_depense_', '');
+    var idDepense = $(this).attr('id').replace('modifier_depense_', '');
 
-    updateExpense(id_depense, $_GET('year'));
+    updateExpense(idDepense, $_GET('year'));
   });
 });
 
@@ -217,7 +217,7 @@ function updateExpense(id, year)
   var comment = listExpenses[id]['comment'];
   var action  = 'expensecenter.php?year=' + year + '&action=doModifier';
   var identifiant;
-  var id_identifiant;
+  var idIdentifiant;
   var parts;
 
   // Affichage zone de saisie
@@ -242,10 +242,10 @@ function updateExpense(id, year)
 
     if (identifiant != null)
     {
-      id_identifiant = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()]['id_identifiant'];
-      parts          = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()]['parts'];
+      idIdentifiant = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()]['id_identifiant'];
+      parts         = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()]['parts'];
 
-      $('#quantite_user_' + id_identifiant).val(parts);
+      $('#quantite_user_' + idIdentifiant).val(parts);
       $(this).css('background-color', '#ff1937');
       $(this).css('color', 'white');
     }
@@ -264,7 +264,7 @@ function resetSaisie(zone, year)
     var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
-    if (call == "doModifier")
+    if (call == 'doModifier')
     {
       var titre   = 'Saisir une dépense';
       var buyer   = '';

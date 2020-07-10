@@ -1,20 +1,20 @@
 <?php
   // Dates de dernière modification (CSS et JS) pour mise à jour automatique du cache du navigateur
-  $last_modification_css = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css');
+  $last_modification_css = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css');
 
   if (!empty($style_head))
-    $last_modification_css2 = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $style_head);
+    $last_modification_css2 = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $style_head);
 
   if (isset($chat_head) AND $chat_head == true)
-    $last_modification_css_chat = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css');
+    $last_modification_css_chat = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css');
 
   if (isset($datepicker_head) AND $datepicker_head == true)
-    $last_modification_css_datepicker = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/libraries/css/datepicker.css');
+    $last_modification_css_datepicker = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/css/datepicker.css');
 
-  $last_modification_js  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
+  $last_modification_js  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
 
   if (!empty($script_head))
-    $last_modification_js2  = filemtime($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $script_head);
+    $last_modification_js2  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $script_head);
 
   // Meta-données
   echo '<meta charset="utf-8" />';

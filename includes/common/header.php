@@ -3,7 +3,7 @@
     // Partie gauche header
     echo '<div class="zone_bandeau_left">';
       // Logo
-      if ($_SESSION['user']['identifiant'] == "admin")
+      if ($_SESSION['user']['identifiant'] == 'admin')
         echo '<a href="/inside/administration/portail/portail.php?action=goConsulter">';
       else
         echo '<a href="/inside/portail/portail/portail.php?action=goConsulter">';
@@ -11,7 +11,7 @@
         echo '</a>';
 
       // Notifications & Recherche (utilisateur)
-      if ($_SESSION['user']['identifiant'] != "admin")
+      if ($_SESSION['user']['identifiant'] != 'admin')
       {
         // Notifications
         echo '<div id="afficherDetailNotifications" class="zone_notifications_bandeau"></div>';
@@ -36,13 +36,13 @@
       echo '</div>';
 
       // Profil
-      if ($_SESSION['user']['identifiant'] == "admin")
+      if ($_SESSION['user']['identifiant'] == 'admin')
         echo '<a href="/inside/administration/profil/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
       else
         echo '<a href="/inside/portail/profil/profil.php?view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
 
         // Expérience utilisateur
-        if ($_SESSION['user']['identifiant'] != "admin")
+        if ($_SESSION['user']['identifiant'] != 'admin')
         {
           echo '<div class="level_header">' . $_SESSION['user']['experience']['niveau'] . '</div>';
           echo '<div class="circular_bar_header" id="progress_circle_header" data-perc="' . $_SESSION['user']['experience']['percent'] . '" data-text=""></div>';
@@ -52,7 +52,7 @@
         echo '<div class="pseudo_bandeau">' . $_SESSION['user']['pseudo'] . '</div>';
 
         // Avatar
-        $avatarFormatted = formatAvatar($_SESSION['user']['avatar'], $_SESSION['user']['pseudo'], 0, "avatar");
+        $avatarFormatted = formatAvatar($_SESSION['user']['avatar'], $_SESSION['user']['pseudo'], 0, 'avatar');
 
         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_bandeau" />';
       echo '</a>';
@@ -65,13 +65,13 @@
         echo '</form>';
 
         // Succès
-        if ($_SESSION['user']['identifiant'] != "admin")
+        if ($_SESSION['user']['identifiant'] != 'admin')
           echo '<a href="/inside/portail/profil/profil.php?view=success&action=goConsulter" title="Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
       echo '</div>';
     echo '</div>';
 
     // Boutons missions
-    $zone_inside = "header";
-    include($_SERVER["DOCUMENT_ROOT"] . '/inside/includes/common/missions.php');
+    $zone_inside = 'header';
+    include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
   echo '</div>';
 ?>

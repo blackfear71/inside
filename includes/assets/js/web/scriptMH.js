@@ -37,50 +37,50 @@ $(function()
   // Change la couleur des switch restaurant film
   $('.label_switch').click(function()
   {
-    var id_bouton = $(this).closest('div').attr('id');
+    var idBouton = $(this).closest('div').attr('id');
 
-    switchCheckedColor('switch_restaurant', id_bouton);
+    switchCheckedColor('switch_restaurant', idBouton);
   });
 
   // Plie ou déplie les fiches des films
   $('#fold_all, #unfold_all, .cacherFilms').click(function()
   {
-    var id_fold = $(this).attr('id');
+    var idFold = $(this).attr('id');
 
-    if (id_fold != 'fold_all' && id_fold != 'unfold_all')
-      id_fold = $(this).attr('id').replace('lien_hide_', '');
+    if (idFold != 'fold_all' && idFold != 'unfold_all')
+      idFold = $(this).attr('id').replace('lien_hide_', '');
 
-    afficherMasquerFilms(id_fold);
+    afficherMasquerFilms(idFold);
   });
 
   // Scroll vers le mois en cours
   $('.naviguerMois').click(function()
   {
-    var full_date     = new Date();
-    var current_month = full_date.getMonth() + 1;
-    var offset        = 50;
-    var shadow        = false;
-    var id_month;
+    var fullDate     = new Date();
+    var currentMonth = fullDate.getMonth() + 1;
+    var offset       = 50;
+    var shadow       = false;
+    var idMonth;
 
-    if (current_month < 10)
-      id_month = 'lien_hide_0' + current_month;
+    if (currentMonth < 10)
+      idMonth = 'lien_hide_0' + currentMonth;
     else
-      id_month = 'lien_hide_' + current_month;
+      idMonth = 'lien_hide_' + currentMonth;
 
-    if ($('#' + id_month).length)
-      scrollToId(id_month, offset, shadow);
+    if ($('#' + idMonth).length)
+      scrollToId(idMonth, offset, shadow);
   });
 
   // Affiche la saisie de préférence d'une fiche
   $('.afficherPreference').click(function()
   {
-    var id_film    = $(this).attr('id').replace('fiche_', '');
-    var titre_film = $('#titre_film_' + id_film).val();
-    var vote_film  = $('#vote_film_' + id_film).val();
+    var idFilm    = $(this).attr('id').replace('fiche_', '');
+    var titre_film = $('#titre_film_' + idFilm).val();
+    var vote_film  = $('#vote_film_' + idFilm).val();
     var view       = $_GET('view');
     var year       = $_GET('year');
 
-    afficherSaisiePreference(titre_film, vote_film, view, year, id_film);
+    afficherSaisiePreference(titre_film, vote_film, view, year, idFilm);
   });
 
   // Masque la saisie de préférence d'une fiche
@@ -92,9 +92,9 @@ $(function()
   // Redirige vers le détail des films au clic Doodle des fiches
   $('.lienDetails').click(function()
   {
-    var id_film = $(this).attr('id').replace('lien_details_', '');
+    var idFilm = $(this).attr('id').replace('lien_details_', '');
 
-    document.location.href = 'details.php?id_film=' + id_film + '&doodle=true&action=goConsulter';
+    document.location.href = 'details.php?id_film=' + idFilm + '&doodle=true&action=goConsulter';
   });
 
   // Affiche la zone de modification d'un film
@@ -106,37 +106,37 @@ $(function()
   // Affiche la zone de modification d'un commentaire
   $('.modifierCommentaire').click(function()
   {
-    var id_comment = $(this).attr('id').replace('modifier_commentaire_', '');
+    var idComment = $(this).attr('id').replace('modifier_commentaire_', '');
 
-    afficherMasquerIdNoDelay('modifier_comment_' + id_comment);
-    afficherMasquerIdNoDelay('visualiser_comment_' + id_comment);
-    afficherMasquerIdNoDelay('actions_comment_' + id_comment);
+    afficherMasquerIdNoDelay('modifier_comment_' + idComment);
+    afficherMasquerIdNoDelay('visualiser_comment_' + idComment);
+    afficherMasquerIdNoDelay('actions_comment_' + idComment);
   });
 
   // Masque la zone de modification d'un commentaire
   $('.annulerCommentaire').click(function()
   {
-    var id_comment = $(this).attr('id').replace('annuler_commentaire_', '');
+    var idComment = $(this).attr('id').replace('annuler_commentaire_', '');
 
-    afficherMasquerIdNoDelay('modifier_comment_' + id_comment);
-    afficherMasquerIdNoDelay('visualiser_comment_' + id_comment);
-    afficherMasquerIdNoDelay('actions_comment_' + id_comment);
+    afficherMasquerIdNoDelay('modifier_comment_' + idComment);
+    afficherMasquerIdNoDelay('visualiser_comment_' + idComment);
+    afficherMasquerIdNoDelay('actions_comment_' + idComment);
   });
 
   // Insère un smiley en saisie/modification de commentaire
   $('.ajouterSmiley, .modifierSmiley').click(function()
   {
-    var id_smiley  = $(this).attr('id').split('_');
-    var id_comment = id_smiley[id_smiley.length - 1];
-    var smiley     = id_smiley[id_smiley.length - 2];
+    var idSmiley  = $(this).attr('id').split('_');
+    var idComment = idSmiley[idSmiley.length - 1];
+    var smiley    = idSmiley[idSmiley.length - 2];
 
-    insert_smiley(smiley, 'textarea_comment_' + id_comment);
+    insert_smiley(smiley, 'textarea_comment_' + idComment);
   });
 
   /*** Calendriers ***/
-  if ($("#datepicker_sortie_1").length || $("#datepicker_sortie_2").length || $("#datepicker_doodle").length)
+  if ($('#datepicker_sortie_1').length || $('#datepicker_sortie_2').length || $('#datepicker_doodle').length)
   {
-    $("#datepicker_sortie_1, #datepicker_sortie_2, #datepicker_doodle").datepicker(
+    $('#datepicker_sortie_1, #datepicker_sortie_2, #datepicker_doodle').datepicker(
     {
       autoHide: true,
       language: 'fr-FR',
@@ -218,7 +218,7 @@ $(window).on('load', function()
   // Ouverture modification si création Doodle
   var doodle = $_GET('doodle');
 
-  if (doodle == "true")
+  if (doodle == 'true')
     updateFilm('zone_saisie_film');
 });
 
@@ -228,7 +228,7 @@ $(window).on('load', function()
 // Ferme la saisie d'un film
 function closeInput(id)
 {
-  if ($('#' + id).css('display') != "none")
+  if ($('#' + id).css('display') != 'none')
     afficherMasquerIdWithDelay(id);
 }
 
@@ -250,7 +250,7 @@ function afficherMasquerFilms(month)
 {
   switch (month)
   {
-    case "fold_all":
+    case 'fold_all':
       for (var i = 1; i <= 12; i++)
       {
         if (i < 10)
@@ -272,7 +272,7 @@ function afficherMasquerFilms(month)
       }
       break;
 
-    case "unfold_all":
+    case 'unfold_all':
       for (var i = 1; i <= 12; i++)
       {
         if (i < 10)
@@ -295,7 +295,7 @@ function afficherMasquerFilms(month)
       break;
 
     default:
-      if ($('#hide_films_' + month).css('display') == "none")
+      if ($('#hide_films_' + month).css('display') == 'none')
       {
         $('#hide_films_' + month).css('display', 'block');
         $('#lien_hide_' + month).html('-');
@@ -312,7 +312,7 @@ function afficherMasquerFilms(month)
 }
 
 // Affiche la saisie préférence d'un film
-function afficherSaisiePreference(titre, stars, view, year, id_film)
+function afficherSaisiePreference(titre, stars, view, year, idFilm)
 {
   var html = '';
 
@@ -329,7 +329,7 @@ function afficherSaisiePreference(titre, stars, view, year, id_film)
 
       // Etoiles
       html += '<form method="post" action="moviehouse.php?view=' + view + '&year=' + year + '&action=doVoterFilm" class="form_saisie_preference">';
-        html += '<input type="hidden" name="id_film" value="' + id_film + '" />';
+        html += '<input type="hidden" name="id_film" value="' + idFilm + '" />';
 
         for (var i = 0; i <= 5; i++)
         {
@@ -393,7 +393,7 @@ function insert_smiley(smiley, id)
   }
 
   // Texte à insérer
-  var texte = chars + " ";
+  var texte = chars + ' ';
 
   // Ajout du texte au contenu déjà présent
   $('#' + id).append(texte);
@@ -405,8 +405,8 @@ function insert_smiley(smiley, id)
 // Modification d'un film
 function updateFilm(zone)
 {
-  var titre  = "Modifier un film";
-  var bouton = "Modifier le film";
+  var titre  = 'Modifier un film';
+  var bouton = 'Modifier le film';
   var action = 'details.php?action=doModifier';
 
   // Affichage zone de saisie
@@ -431,15 +431,15 @@ function updateFilm(zone)
 
   switch (detailsFilm['restaurant'])
   {
-    case "N":
+    case 'N':
       switchCheckedColor('switch_restaurant', 'bouton_none');
       break;
 
-    case "B":
+    case 'B':
       switchCheckedColor('switch_restaurant', 'bouton_before');
       break;
 
-    case "A":
+    case 'A':
       switchCheckedColor('switch_restaurant', 'bouton_after');
       break;
 

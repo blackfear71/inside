@@ -20,19 +20,19 @@ $(function()
   // Affiche la saisie lieu restaurant
   $(document).on('click', '.afficherLieu', function()
   {
-    var id_bouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('choix_restaurant_', '');
-    var id_listbox = 'zone_listbox_restaurant_' + num;
+    var idBouton  = $(this).attr('id');
+    var num       = $(this).attr('id').replace('choix_restaurant_', '');
+    var idListbox = 'zone_listbox_restaurant_' + num;
 
-    afficherMasquerIdNoDelay(id_bouton);
-    afficherListboxLieux(id_listbox);
+    afficherMasquerIdNoDelay(idBouton);
+    afficherListboxLieux(idListbox);
   });
 
   // Affiche la saisie restaurant liée au lieu
   $(document).on('change', '.afficherRestaurant', function()
   {
-    var id_bouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('select_lieu_', '');
+    var idBouton  = $(this).attr('id');
+    var num       = $(this).attr('id').replace('select_lieu_', '');
 
     afficherListboxRestaurants('select_lieu_' + num, 'zone_listbox_' + num);
   });
@@ -40,135 +40,135 @@ $(function()
   // Affiche la saisie horaire restaurant
   $(document).on('click', '.afficherHoraire', function()
   {
-    var id_bouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('choix_horaire_', '');
-    var id_listbox = 'zone_listbox_horaire_' + num;
+    var idBouton  = $(this).attr('id');
+    var num       = $(this).attr('id').replace('choix_horaire_', '');
+    var idListbox = 'zone_listbox_horaire_' + num;
 
-    afficherMasquerIdNoDelay(id_bouton);
-    afficherListboxHoraires(id_listbox, id_bouton, 'create', '');
+    afficherMasquerIdNoDelay(idBouton);
+    afficherListboxHoraires(idListbox, idBouton, 'create', '');
   });
 
   // Affiche la saisie transports restaurant
   $(document).on('click', '.afficherTransports', function()
   {
-    var id_bouton   = $(this).attr('id');
-    var num         = $(this).attr('id').replace('choix_transports_', '');
-    var id_checkbox = 'zone_checkbox_transports_' + num;
+    var idBouton   = $(this).attr('id');
+    var num        = $(this).attr('id').replace('choix_transports_', '');
+    var idCheckbox = 'zone_checkbox_transports_' + num;
 
-    afficherMasquerIdNoDelay(id_bouton);
-    afficherCheckboxTransports(id_checkbox);
+    afficherMasquerIdNoDelay(idBouton);
+    afficherCheckboxTransports(idCheckbox);
   });
 
   // Affiche la saisie menu restaurant
   $(document).on('click', '.afficherMenu', function()
   {
-    var id_bouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('choix_menu_', '');
-    var id_saisie = 'zone_saisie_menu_' + num;
+    var idBouton = $(this).attr('id');
+    var num      = $(this).attr('id').replace('choix_menu_', '');
+    var idSaisie = 'zone_saisie_menu_' + num;
 
-    afficherMasquerIdNoDelay(id_bouton);
-    afficherSaisieMenu(id_saisie);
+    afficherMasquerIdNoDelay(idBouton);
+    afficherSaisieMenu(idSaisie);
   });
 
   // Masque la saisie lieu restaurant
   $(document).on('click', '.annulerLieu', function()
   {
-    var id_annuler = $(this).attr('id');
-    var num        = $(this).attr('id').replace('annuler_restaurant_', '');
-    var id_zone    = 'zone_listbox_' + num;
+    var idAnnuler = $(this).attr('id');
+    var num       = $(this).attr('id').replace('annuler_restaurant_', '');
+    var idZone    = 'zone_listbox_' + num;
 
-    cacherListboxRestaurants(id_zone, id_annuler);
+    cacherListboxRestaurants(idZone, idAnnuler);
   });
 
   // Masque la saisie horaire restaurant
   $(document).on('click', '.annulerHoraire', function()
   {
-    var id_annuler  = $(this).attr('id');
-    var num         = $(this).attr('id').replace('annuler_horaires_', '');
-    var id_zone     = 'choix_horaire_' + num;
-    var id_select_h = 'select_heures_' + num;
-    var id_select_m = 'select_minutes_' + num;
+    var idAnnuler = $(this).attr('id');
+    var num       = $(this).attr('id').replace('annuler_horaires_', '');
+    var idZone    = 'choix_horaire_' + num;
+    var idSelectH = 'select_heures_' + num;
+    var idSelectM = 'select_minutes_' + num;
 
-    cacherListboxHoraires(id_zone, id_annuler, id_select_h, id_select_m);
+    cacherListboxHoraires(idZone, idAnnuler, idSelectH, idSelectM);
   });
 
   // Masque la saisie transports restaurant
   $(document).on('click', '.annulerTransports', function()
   {
-    var id_annuler = $(this).attr('id');
-    var num        = $(this).attr('id').replace('annuler_transports_', '');
-    var id_zone    = 'zone_checkbox_' + num;
+    var idAnnuler = $(this).attr('id');
+    var num       = $(this).attr('id').replace('annuler_transports_', '');
+    var idZone    = 'zone_checkbox_' + num;
 
-    cacherCheckboxTransports(id_zone, id_annuler);
+    cacherCheckboxTransports(idZone, idAnnuler);
   });
 
   // Masque la saisie menu restaurant
   $(document).on('click', '.annulerMenu', function()
   {
-    var id_annuler = $(this).attr('id');
-    var num        = $(this).attr('id').replace('annuler_menu_', '');
-    var id_zone    = 'zone_menu_' + num;
+    var idAnnuler = $(this).attr('id');
+    var num       = $(this).attr('id').replace('annuler_menu_', '');
+    var idZone    = 'zone_menu_' + num;
 
-    cacherSaisieMenu(id_zone, id_annuler);
+    cacherSaisieMenu(idZone, idAnnuler);
   });
 
   // Coche / décoche le mode de transport
   $(document).on('click', '.cocherTransport', function()
   {
-    var id_check = $(this).closest('div').attr('id');
+    var idCheck = $(this).closest('div').attr('id');
 
-    changeCheckedColor(id_check);
+    changeCheckedColor(idCheck);
   });
 
   // Affiche la modification d'un choix
   $('.modifierChoix').click(function()
   {
-    var id_choix = $(this).attr('id').replace('modifier_', '');
+    var idChoix = $(this).attr('id').replace('modifier_', '');
 
-    afficherMasquerIdNoDelay('modifier_choix_' + id_choix);
-    afficherMasquerIdNoDelay('visualiser_choix_' + id_choix);
+    afficherMasquerIdNoDelay('modifier_choix_' + idChoix);
+    afficherMasquerIdNoDelay('visualiser_choix_' + idChoix);
     initMasonry();
   });
 
   // Ferme la modification d'un choix
   $('.annulerChoix').click(function()
   {
-    var id_choix = $(this).attr('id').replace('annuler_', '');
+    var idChoix = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerIdNoDelay('modifier_choix_' + id_choix);
-    afficherMasquerIdNoDelay('visualiser_choix_' + id_choix);
+    afficherMasquerIdNoDelay('modifier_choix_' + idChoix);
+    afficherMasquerIdNoDelay('visualiser_choix_' + idChoix);
     initMasonry();
   });
 
   // Affiche la modification de l'horaire d'un choix
   $(document).on('click', '.afficherHoraireUpdate', function()
   {
-    var id_bouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('update_horaire_', '');
-    var id_listbox = 'zone_update_listbox_horaire_' + num;
+    var idBouton  = $(this).attr('id');
+    var num       = $(this).attr('id').replace('update_horaire_', '');
+    var idListbox = 'zone_update_listbox_horaire_' + num;
 
-    afficherMasquerIdNoDelay(id_bouton);
-    afficherListboxHoraires(id_listbox, id_bouton, 'update', num);
+    afficherMasquerIdNoDelay(idBouton);
+    afficherListboxHoraires(idListbox, idBouton, 'update', num);
   });
 
   // Masque la modification de l'horaire d'un choix
   $(document).on('click', '.annulerHoraireUpdate', function()
   {
-    var id_annuler  = $(this).attr('id');
-    var num         = $(this).attr('id').replace('annuler_horaires_', '');
-    var id_zone     = 'update_horaire_' + num;
-    var id_select_h = 'select_heures_' + num;
-    var id_select_m = 'select_minutes_' + num;
+    var idAnnuler = $(this).attr('id');
+    var num       = $(this).attr('id').replace('annuler_horaires_', '');
+    var idZone    = 'update_horaire_' + num;
+    var idSelectH = 'select_heures_' + num;
+    var idSelectM = 'select_minutes_' + num;
 
-    cacherListboxHoraires(id_zone, id_annuler, id_select_h, id_select_m);
+    cacherListboxHoraires(idZone, idAnnuler, idSelectH, idSelectM);
   });
 
   // Affiche les détails d'une proposition
   $('.afficherDetails').click(function()
   {
-    var id_details = $(this).attr('id').replace('afficher_details_', '');
+    var idDetails = $(this).attr('id').replace('afficher_details_', '');
 
-    showDetails('zone_details', id_details);
+    showDetails('zone_details', idDetails);
 
     // Adaptation mobile
     adaptDetails();
@@ -190,16 +190,16 @@ $(function()
   // Affiche la saisie lieu restaurant (résumé)
   $('.afficherResume').click(function()
   {
-    var id_bouton  = $(this).attr('id');
+    var idBouton  = $(this).attr('id');
 
-    afficherMasquerIdNoDelay(id_bouton);
-    afficherListboxLieuxResume(id_bouton);
+    afficherMasquerIdNoDelay(idBouton);
+    afficherListboxLieuxResume(idBouton);
   });
 
   // Affiche la saisie restaurant liée au lieu (résumé)
   $(document).on('change', '.afficherRestaurantResume', function()
   {
-    var id_bouton  = $(this).attr('id');
+    var idBouton  = $(this).attr('id');
     var num        = $(this).attr('id').replace('select_lieu_resume_', '');
 
     afficherListboxRestaurantsResume('select_lieu_resume_' + num, 'zone_listbox_resume_' + num);
@@ -208,12 +208,12 @@ $(function()
   // Masque la saisie lieu restaurant
   $(document).on('click', '.annulerLieuResume', function()
   {
-    var id_annuler = $(this).attr('id');
-    var id_valider = 'valider_restaurant_resume_' + num;
-    var num        = $(this).attr('id').replace('annuler_restaurant_resume_', '');
-    var id_zone    = 'zone_listbox_resume_' + num;
+    var idAnnuler = $(this).attr('id');
+    var idValider = 'valider_restaurant_resume_' + num;
+    var num       = $(this).attr('id').replace('annuler_restaurant_resume_', '');
+    var idZone    = 'zone_listbox_resume_' + num;
 
-    cacherListboxRestaurantsResume(id_zone, id_valider, id_annuler);
+    cacherListboxRestaurantsResume(idZone, idValider, idAnnuler);
   });
 
   // Affiche la saisie de restaurant
@@ -225,8 +225,8 @@ $(function()
   // Change le statut d'un jour d'ouverture (saisie)
   $('.checkDay').click(function()
   {
-    var id_jour = $(this).attr('id').split('_');
-    var day     = id_jour[id_jour.length - 1];
+    var idJour = $(this).attr('id').split('_');
+    var day    = idJour[idJour.length - 1];
 
     changeCheckedDay('saisie_checkbox_ouverture_' + day, 'saisie_label_ouverture_' + day, 'label_jour_checked', 'label_jour');
   });
@@ -240,57 +240,57 @@ $(function()
   // Change la couleur des checkbox types de restaurant (saisie & modification)
   $('.checkType, .checkTypeUpdate').click(function()
   {
-    var id_type = $(this).closest('div').attr('id');
+    var idType = $(this).closest('div').attr('id');
 
-    changeCheckedColor(id_type);
+    changeCheckedColor(idType);
   });
 
   // Scroll vers un lieu
   $('.lienLieu').click(function()
   {
-    var id_lieu = $(this).attr('id').replace('link_', '');
-    var offset  = 20;
-    var shadow  = false;
+    var idLieu = $(this).attr('id').replace('link_', '');
+    var offset = 20;
+    var shadow = false;
 
-    scrollToId(id_lieu, offset, shadow);
+    scrollToId(idLieu, offset, shadow);
   });
 
   // Affiche la description longue d'un restaurant
   $('.descriptionRestaurant').click(function()
   {
-    var id_restaurant = $(this).attr('id').replace('description_', '');
+    var idRestaurant = $(this).attr('id').replace('description_', '');
 
-    afficherMasquerIdNoDelay('short_description_' + id_restaurant);
-    afficherMasquerIdNoDelay('long_description_' + id_restaurant);
+    afficherMasquerIdNoDelay('short_description_' + idRestaurant);
+    afficherMasquerIdNoDelay('long_description_' + idRestaurant);
     initMasonry();
   });
 
   // Affiche la zone de modification d'un restaurant
   $('.modifierRestaurant').click(function()
   {
-    var id_restaurant = $(this).attr('id').replace('modifier_', '');
+    var idRestaurant = $(this).attr('id').replace('modifier_', '');
 
-    afficherMasquerIdNoDelay('modifier_restaurant_' + id_restaurant);
-    afficherMasquerIdNoDelay('visualiser_restaurant_' + id_restaurant);
+    afficherMasquerIdNoDelay('modifier_restaurant_' + idRestaurant);
+    afficherMasquerIdNoDelay('visualiser_restaurant_' + idRestaurant);
     initMasonry();
   });
 
   // Ferme la zone de modification d'un restaurant
   $('.annulerRestaurant').click(function()
   {
-    var id_restaurant = $(this).attr('id').replace('annuler_', '');
+    var idRestaurant = $(this).attr('id').replace('annuler_', '');
 
-    afficherMasquerIdNoDelay('modifier_restaurant_' + id_restaurant);
-    afficherMasquerIdNoDelay('visualiser_restaurant_' + id_restaurant);
+    afficherMasquerIdNoDelay('modifier_restaurant_' + idRestaurant);
+    afficherMasquerIdNoDelay('visualiser_restaurant_' + idRestaurant);
     initMasonry();
   });
 
   // Change le statut d'un jour d'ouverture (modification)
   $('.checkDayUpdate').click(function()
   {
-    var id_jour = $(this).attr('id').split('_');
-    var num     = id_jour[id_jour.length - 1];
-    var day     = id_jour[id_jour.length - 2];
+    var idJour = $(this).attr('id').split('_');
+    var num    = idJour[idJour.length - 1];
+    var day    = idJour[idJour.length - 2];
 
     changeCheckedDay('checkbox_update_ouverture_' + day + '_' + num, 'label_update_ouverture_' + day + '_' + num, 'update_label_jour_checked', 'update_label_jour');
   });
@@ -298,9 +298,9 @@ $(function()
   // Ajoute un champ de saisie libre type de restaurant (modification)
   $('.addTypeUpdate').click(function()
   {
-    var id_restaurant = $(this).attr('id').replace('type_update_', '');
+    var idRestaurant = $(this).attr('id').replace('type_update_', '');
 
-    addOtherType('update_types_restaurants_' + id_restaurant);
+    addOtherType('update_types_restaurants_' + idRestaurant);
   });
 
   // Ferme au clic sur le fond
@@ -384,9 +384,9 @@ $(function()
   // Change la couleur du type à la saisie
   $(document).on('input', '.saisieType', function()
   {
-    id_type = $(this).attr('id');
+    idType = $(this).attr('id');
 
-    changeTypeColor(id_type);
+    changeTypeColor(idType);
   });
 
   // Affiche la saisie "Autre" (saisie)
@@ -404,17 +404,17 @@ $(function()
   // Affiche la saisie "Autre" (modification)
   $('.changeLieu').on('change', function()
   {
-    id_restaurant = $(this).attr('id').replace('update_location_', '');
+    idRestaurant = $(this).attr('id').replace('update_location_', '');
 
-    afficherModifierOther('update_location_' + id_restaurant, 'other_location_' + id_restaurant, 'saisie_nom');
+    afficherModifierOther('update_location_' + idRestaurant, 'other_location_' + idRestaurant, 'saisie_nom');
   });
 
   // Charge l'image (modification)
   $('.loadModifierRestaurant').on('change', function()
   {
-    id_restaurant = $(this).attr('id').replace('modifier_image_', '');
+    idRestaurant = $(this).attr('id').replace('modifier_image_', '');
 
-    loadFile(event, 'img_restaurant_' + id_restaurant);
+    loadFile(event, 'img_restaurant_' + idRestaurant);
   });
 });
 
@@ -608,21 +608,21 @@ function tailleAutoZones()
 // Ferme la saisie des choix
 function closeInputOrDetails(id)
 {
-  if ($('#' + id).css('display') != "none")
+  if ($('#' + id).css('display') != 'none')
     afficherMasquerIdWithDelay(id);
 }
 
 // Affiche la listbox des lieux
 function afficherListboxLieux(id)
 {
-  var num        = id.substr(-1);
-  var id_zone    = 'zone_listbox_' + num;
-  var id_select  = 'select_lieu_' + num;
-  var id_annuler = 'annuler_restaurant_' + num;
-  var html       = '';
+  var num       = id.substr(-1);
+  var idZone    = 'zone_listbox_' + num;
+  var idSelect  = 'select_lieu_' + num;
+  var idAnnuler = 'annuler_restaurant_' + num;
+  var html      = '';
 
-  html += '<div id="' + id_zone + '" class="zone_listbox_restaurant">';
-    html += '<select id="' + id_select + '" name="select_lieu[' + num + ']" class="listbox_lieu afficherRestaurant" required>';
+  html += '<div id="' + idZone + '" class="zone_listbox_restaurant">';
+    html += '<select id="' + idSelect + '" name="select_lieu[' + num + ']" class="listbox_lieu afficherRestaurant" required>';
       html += '<option value="" hidden>Choisissez...</option>';
       $.each(listeLieux, function(key, value)
       {
@@ -631,23 +631,23 @@ function afficherListboxLieux(id)
     html += '</select>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerLieu">Annuler</a>';
+  html += '<a id="' + idAnnuler + '" class="bouton_annuler annulerLieu">Annuler</a>';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 }
 
 // Affiche la listbox des restaurants associés
 function afficherListboxRestaurants(id, zone)
 {
-  var lieu        = $('#' + id).val();
-  var num         = id.substr(-1);
-  var id_select_2 = 'select_restaurant_' + num;
-  var html        = '';
+  var lieu      = $('#' + id).val();
+  var num       = id.substr(-1);
+  var idSelect2 = 'select_restaurant_' + num;
+  var html      = '';
 
-  if ($('#' + id_select_2).length)
-    $('#' + id_select_2).remove();
+  if ($('#' + idSelect2).length)
+    $('#' + idSelect2).remove();
 
-  html += '<select id="' + id_select_2 + '" name="select_restaurant[' + num + ']" class="listbox_restaurant" required>';
+  html += '<select id="' + idSelect2 + '" name="select_restaurant[' + num + ']" class="listbox_restaurant" required>';
     html += '<option value="" hidden>Choisissez...</option>';
 
     $.each(listeRestaurants[lieu], function(key, value)
@@ -656,7 +656,7 @@ function afficherListboxRestaurants(id, zone)
     });
   html += '</select>';
 
-  $("#" + zone).append(html);
+  $('#' + zone).append(html);
 }
 
 // Cache les lisbox des restaurants
@@ -674,34 +674,34 @@ function afficherListboxHoraires(id, zone, type, idChoix)
 {
   var html = '';
   var num;
-  var name_select_h;
-  var name_select_m;
-  var class_listbox;
-  var class_bouton;
+  var nameSelectH;
+  var nameSelectM;
+  var classListbox;
+  var classBouton;
 
-  if (type == "create")
+  if (type == 'create')
   {
-    num           = id.substr(-1);
-    name_select_h = 'select_heures[' + num + ']';
-    name_select_m = 'select_minutes[' + num + ']';
-    class_listbox = "listbox_horaires";
-    class_bouton  = "bouton_annuler annulerHoraire";
+    num          = id.substr(-1);
+    nameSelectH  = 'select_heures[' + num + ']';
+    nameSelectM  = 'select_minutes[' + num + ']';
+    classListbox = 'listbox_horaires';
+    classBouton  = 'bouton_annuler annulerHoraire';
   }
-  else if (type == "update")
+  else if (type == 'update')
   {
-    num           = idChoix;
-    name_select_h = 'select_heures_' + num;
-    name_select_m = 'select_minutes_' + num;
-    class_listbox = "listbox_horaires_update";
-    class_bouton  = "bouton_annuler_update annulerHoraireUpdate";
+    num          = idChoix;
+    nameSelectH  = 'select_heures_' + num;
+    nameSelectM  = 'select_minutes_' + num;
+    classListbox = 'listbox_horaires_update';
+    classBouton  = 'bouton_annuler_update annulerHoraireUpdate';
   }
 
-  var id_select_h = 'select_heures_' + num;
-  var id_select_m = 'select_minutes_' + num;
-  var id_annuler  = 'annuler_horaires_' + num;
-  var id_zone     = zone;
+  var idSelectH = 'select_heures_' + num;
+  var idSelectM = 'select_minutes_' + num;
+  var idAnnuler = 'annuler_horaires_' + num;
+  var idZone    = zone;
 
-  html += '<select id="' + id_select_h + '" name="' + name_select_h + '" class="' + class_listbox + '">';
+  html += '<select id="' + idSelectH + '" name="' + nameSelectH + '" class="' + classListbox + '">';
     for (var i = 11; i < 14; i++)
     {
       if (i == 12)
@@ -711,7 +711,7 @@ function afficherListboxHoraires(id, zone, type, idChoix)
     }
   html += '</select>';
 
-  html += '<select id="' + id_select_m + '" name="' + name_select_m + '" class="' + class_listbox + '">';
+  html += '<select id="' + idSelectM + '" name="' + nameSelectM + '" class="' + classListbox + '">';
     for (var j = 0; j < 4; j++)
     {
       if (j == 0)
@@ -721,9 +721,9 @@ function afficherListboxHoraires(id, zone, type, idChoix)
     }
   html += '</select>';
 
-  html += '<a id="' + id_annuler + '" class="' + class_bouton + '">Annuler</a>';
+  html += '<a id="' + idAnnuler + '" class="' + classBouton + '">Annuler</a>';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 }
 
 // Cache les lisbox des horaires
@@ -740,40 +740,40 @@ function cacherListboxHoraires(zone, bouton, heures, minutes)
 // Affiche les checkbox des transports
 function afficherCheckboxTransports(id)
 {
-  var html       = '';
-  var num        = id.substr(-1);
-  var id_zone    = 'zone_checkbox_' + num;
-  var id_check_f = 'checkbox_feet_' + num;
-  var id_check_b = 'checkbox_bike_' + num;
-  var id_check_t = 'checkbox_tram_' + num;
-  var id_check_c = 'checkbox_car_' + num;
-  var id_annuler = 'annuler_transports_' + num;
+  var html      = '';
+  var num       = id.substr(-1);
+  var idZone    = 'zone_checkbox_' + num;
+  var idCheckF  = 'checkbox_feet_' + num;
+  var idCheckB  = 'checkbox_bike_' + num;
+  var idCheckT  = 'checkbox_tram_' + num;
+  var idCheckC  = 'checkbox_car_' + num;
+  var idAnnuler = 'annuler_transports_' + num;
 
-  html += '<div id="' + id_zone + '" class="zone_checkbox">';
-    html += '<div id="bouton_' + id_check_f + '" class="switch_transport">';
-      html += '<input id="' + id_check_f + '" type="checkbox" value="F" name="checkbox_feet[' + num + ']" />';
-      html += '<label for="' + id_check_f + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
+  html += '<div id="' + idZone + '" class="zone_checkbox">';
+    html += '<div id="bouton_' + idCheckF + '" class="switch_transport">';
+      html += '<input id="' + idCheckF + '" type="checkbox" value="F" name="checkbox_feet[' + num + ']" />';
+      html += '<label for="' + idCheckF + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
     html += '</div>';
 
-    html += '<div id="bouton_' + id_check_b + '" class="switch_transport">';
-      html += '<input id="' + id_check_b + '" type="checkbox" value="B" name="checkbox_bike[' + num + ']" />';
-      html += '<label for="' + id_check_b + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + idCheckB + '" class="switch_transport">';
+      html += '<input id="' + idCheckB + '" type="checkbox" value="B" name="checkbox_bike[' + num + ']" />';
+      html += '<label for="' + idCheckB + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
     html += '</div>';
 
-    html += '<div id="bouton_' + id_check_t + '" class="switch_transport">';
-      html += '<input id="' + id_check_t + '" type="checkbox" value="T" name="checkbox_tram[' + num + ']" />';
-      html += '<label for="' + id_check_t + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + idCheckT + '" class="switch_transport">';
+      html += '<input id="' + idCheckT + '" type="checkbox" value="T" name="checkbox_tram[' + num + ']" />';
+      html += '<label for="' + idCheckT + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
     html += '</div>';
 
-    html += '<div id="bouton_' + id_check_c + '" class="switch_transport">';
-      html += '<input id="' + id_check_c + '" type="checkbox" value="C" name="checkbox_car[' + num + ']" />';
-      html += '<label for="' + id_check_c + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
+    html += '<div id="bouton_' + idCheckC + '" class="switch_transport">';
+      html += '<input id="' + idCheckC + '" type="checkbox" value="C" name="checkbox_car[' + num + ']" />';
+      html += '<label for="' + idCheckC + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
     html += '</div>';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerTransports">Annuler</a>';
+  html += '<a id="' + idAnnuler + '" class="bouton_annuler annulerTransports">Annuler</a>';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 }
 
 // Cache les checkbox des transports
@@ -789,23 +789,20 @@ function cacherCheckboxTransports(zone, bouton)
 // Affiche la saisie du menu
 function afficherSaisieMenu(id)
 {
-  var html       = '';
-  var num        = id.substr(-1);
-  var id_zone    = "zone_menu_" + num;
-  var id_entree  = 'saisie_entree_' + num;
-  var id_plat    = 'saisie_plat_' + num;
-  var id_dessert = 'saisie_dessert_' + num;
-  var id_annuler = 'annuler_menu_' + num;
+  var html      = '';
+  var num       = id.substr(-1);
+  var idZone    = 'zone_menu_' + num;
+  var idAnnuler = 'annuler_menu_' + num;
 
-  html += '<div id="' + id_zone + '" class="zone_saisie_menu">';
+  html += '<div id="' + idZone + '" class="zone_saisie_menu">';
     html += '<input type="text" placeholder="Entrée" name="saisie_entree[' + num + ']" class="saisie_menu" />';
     html += '<input type="text" placeholder="Plat" name="saisie_plat[' + num + ']" class="saisie_menu" />';
     html += '<input type="text" placeholder="Dessert" name="saisie_dessert[' + num + ']" class="saisie_menu" />';
   html += '</div>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler annulerMenu">Annuler</a>';
+  html += '<a id="' + idAnnuler + '" class="bouton_annuler annulerMenu">Annuler</a>';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 }
 
 // Cache la saisie du menu
@@ -822,7 +819,7 @@ function cacherSaisieMenu(zone, bouton)
 function addChoice(id, zone)
 {
   var html    = '';
-  var num     = $("#" + id + " span").length / 4;
+  var num     = $('#' + id + ' span').length / 4;
   var new_num = num + 1;
   var icon;
 
@@ -830,23 +827,23 @@ function addChoice(id, zone)
   switch (new_num)
   {
     case 2:
-      icon = "location_grey";
+      icon = 'location_grey';
       break;
 
     case 3:
-      icon = "menu_grey";
+      icon = 'menu_grey';
       break;
 
     case 4:
-      icon = "feet";
+      icon = 'feet';
       break;
 
     case 5:
-      icon = "restaurants_grey";
+      icon = 'restaurants_grey';
       break;
 
     default:
-      icon = "propositions_grey";
+      icon = 'propositions_grey';
       break;
   }
 
@@ -871,7 +868,7 @@ function addChoice(id, zone)
 
   html += '<div class="separation_choix"></div>';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 
   // On remonte la zone de saisie sur l'écran
   var marge = 200 - num * 25 + 'px';
@@ -885,18 +882,18 @@ function addChoice(id, zone)
 // Affiche la listbox des lieux (résumé)
 function afficherListboxLieuxResume(id)
 {
-  var num        = id.substr(-1);
-  var id_zone    = 'zone_listbox_resume_' + num;
-  var id_select  = 'select_lieu_resume_' + num;
-  var id_annuler = 'annuler_restaurant_resume_' + num;
-  var id_replace = 'no_proposal_' + num;
-  var id_bouton  = 'choix_resume_' + num;
-  var html       = '';
+  var num       = id.substr(-1);
+  var idZone    = 'zone_listbox_resume_' + num;
+  var idSelect  = 'select_lieu_resume_' + num;
+  var idAnnuler = 'annuler_restaurant_resume_' + num;
+  var idReplace = 'no_proposal_' + num;
+  var idBouton  = 'choix_resume_' + num;
+  var html      = '';
 
-  var previous_height = $('#' + id_replace).outerHeight() + $('#' + id_bouton).height() + 20;
+  var previous_height = $('#' + idReplace).outerHeight() + $('#' + idBouton).height() + 20;
 
-  html += '<div id="' + id_zone + '" class="zone_listbox_restaurant_resume">';
-    html += '<select id="' + id_select + '" name="select_lieu_resume_' + num + '" class="listbox_choix_resume afficherRestaurantResume" required>';
+  html += '<div id="' + idZone + '" class="zone_listbox_restaurant_resume">';
+    html += '<select id="' + idSelect + '" name="select_lieu_resume_' + num + '" class="listbox_choix_resume afficherRestaurantResume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
       $.each(listeLieuxResume, function(key, value)
       {
@@ -904,40 +901,40 @@ function afficherListboxLieuxResume(id)
       });
     html += '</select>';
 
-    html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
+    html += '<a id="' + idAnnuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
   html += '</div>';
 
-  $("#" + id_replace).html(html);
+  $('#' + idReplace).html(html);
 
   // Calcul marges en fonction des éléments
-  var actions_height = $('#' + id_zone).height();
+  var actions_height = $('#' + idZone).height();
   var new_padding    = (previous_height - actions_height) / 2;
 
-  $('#' + id_replace).css('padding-top', new_padding);
-  $('#' + id_replace).css('padding-bottom', new_padding);
+  $('#' + idReplace).css('padding-top', new_padding);
+  $('#' + idReplace).css('padding-bottom', new_padding);
 }
 
 // Affiche la listbox des restaurants associés (résumé)
 function afficherListboxRestaurantsResume(id, zone)
 {
-  var lieu        = $('#' + id).val();
-  var num         = id.substr(-1);
-  var id_select_2 = 'select_restaurant_resume_' + num;
-  var id_replace  = 'no_proposal_' + num;
-  var id_valider  = 'valider_restaurant_resume_' + num;
-  var id_annuler  = 'annuler_restaurant_resume_' + num;
-  var html        = '';
+  var lieu      = $('#' + id).val();
+  var num       = id.substr(-1);
+  var idSelect2 = 'select_restaurant_resume_' + num;
+  var idReplace = 'no_proposal_' + num;
+  var idValider = 'valider_restaurant_resume_' + num;
+  var idAnnuler = 'annuler_restaurant_resume_' + num;
+  var html      = '';
 
-  var previous_height = $('#' + id_replace).outerHeight();
+  var previous_height = $('#' + idReplace).outerHeight();
 
-  if ($('#' + id_valider).length)
-    $('#' + id_valider).remove();
+  if ($('#' + idValider).length)
+    $('#' + idValider).remove();
 
-  if ($('#' + id_annuler).length)
-    $('#' + id_annuler).remove();
+  if ($('#' + idAnnuler).length)
+    $('#' + idAnnuler).remove();
 
-  html += '<form id="' + id_valider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
-    html += '<select id="' + id_select_2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
+  html += '<form id="' + idValider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
+    html += '<select id="' + idSelect2 + '" name="select_restaurant_resume_' + num + '" class="listbox_choix_resume" required>';
       html += '<option value="" hidden>Choisissez...</option>';
 
       $.each(listeRestaurantsResume[lieu], function(key, value)
@@ -950,16 +947,16 @@ function afficherListboxRestaurantsResume(id, zone)
     html += '<input type="submit" name="submit_resume" value="Valider" class="bouton_valider_resume" />';
   html += '</form>';
 
-  html += '<a id="' + id_annuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
+  html += '<a id="' + idAnnuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';
 
-  $("#" + zone).append(html);
+  $('#' + zone).append(html);
 
   // Calcul marges en fonction des éléments
   var actions_height = $('#' + zone).height();
   var new_padding    = (previous_height - actions_height) / 2;
 
-  $('#' + id_replace).css('padding-top', new_padding);
-  $('#' + id_replace).css('padding-bottom', new_padding);
+  $('#' + idReplace).css('padding-top', new_padding);
+  $('#' + idReplace).css('padding-bottom', new_padding);
 }
 
 // Cache les lisbox des restaurants (résumé)
@@ -971,7 +968,7 @@ function cacherListboxRestaurantsResume(zone, bouton_valider, bouton_annuler)
   $('#' + zone).remove();
   $('#' + bouton_valider).remove();
   $('#' + bouton_annuler).remove();
-  $('#no_proposal_' + num).html("Pas de proposition pour ce jour");
+  $('#no_proposal_' + num).html('Pas de proposition pour ce jour');
 
   $('#choix_resume_' + num).css('display', 'block');
 
@@ -992,7 +989,7 @@ var loadFile = function(event, id)
   // Rotation automatique
   EXIF.getData(event.target.files[0], function()
   {
-    var orientation = EXIF.getTag(this, "Orientation");
+    var orientation = EXIF.getTag(this, 'Orientation');
     var degrees     = 0;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
@@ -1032,7 +1029,7 @@ function changeCheckedColor(input)
 // Change la couleur de fond lors de la saisie de texte
 function changeTypeColor(id)
 {
-  if ($('#' + id).val() != "")
+  if ($('#' + id).val() != '')
   {
     $('#' + id).css('background-color', '#70d55d');
     $('#' + id).css('color', 'white');
@@ -1048,13 +1045,13 @@ function changeTypeColor(id)
 function addOtherType(id)
 {
   var html       = '';
-  var length     = $("#" + id + " input").length;
+  var length     = $('#' + id + ' input').length;
   var new_length = length + 1;
-  var id_type    = id + '_' + new_length;
+  var idType    = id + '_' + new_length;
 
-  html += '<input type="text" placeholder="Type" value="" id="' + id_type + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
+  html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
 
-  $("#" + id).append(html);
+  $('#' + id).append(html);
 }
 
 // Affiche ou masque la zone de saisie lieu "Autre" (insertion)
@@ -1099,17 +1096,17 @@ function afficherModifierOther(select, id)
 }
 
 // Fixe la couleur de fond lors du changement de statut
-function changeCheckedDay(id_checkbox, id_label, class_checked, class_no_check)
+function changeCheckedDay(idCheckbox, idLabel, classChecked, classNoCheck)
 {
-  if ($('#' + id_checkbox).prop('checked') == true)
+  if ($('#' + idCheckbox).prop('checked') == true)
   {
-    $('#' + id_label).removeClass(class_checked);
-    $('#' + id_label).addClass(class_no_check);
+    $('#' + idLabel).removeClass(classChecked);
+    $('#' + idLabel).addClass(classNoCheck);
   }
   else
   {
-    $('#' + id_label).addClass(class_checked);
-    $('#' + id_label).removeClass(class_no_check);
+    $('#' + idLabel).addClass(classChecked);
+    $('#' + idLabel).removeClass(classNoCheck);
   }
 }
 
@@ -1126,7 +1123,7 @@ function showDetails(zone, id)
   $('#lien_details_proposition').attr('href', 'restaurants.php?action=goConsulter&anchor=' + details['id_restaurant']);
 
   // Image restaurant
-  if (details['picture'] != "")
+  if (details['picture'] != '')
     $('#image_details_proposition').attr('src', '../../includes/images/foodadvisor/' + details['picture']);
   else
     $('#image_details_proposition').attr('src', '../../includes/icons/foodadvisor/restaurants.png');
@@ -1135,33 +1132,33 @@ function showDetails(zone, id)
   $('#nom_details_proposition').html(details['name']);
 
   // Jours d'ouverture
-  var opened        = details['opened'].split(';');
-  var date_du_jour  = new Date();
-  var available_day = true;
+  var opened       = details['opened'].split(';');
+  var dateDuJour   = new Date();
+  var availableDay = true;
 
   $.each(opened, function(key, value)
   {
-    if (value != "")
+    if (value != '')
     {
-      if (value == "Y")
+      if (value == 'Y')
         $('#jour_details_proposition_' + key).addClass('jour_oui_fa');
       else
         $('#jour_details_proposition_' + key).addClass('jour_non_fa');
 
-      if (date_du_jour.getDay() == key + 1 && value == "N")
-        available_day = false;
+      if (dateDuJour.getDay() == key + 1 && value == 'N')
+        availableDay = false;
     }
   });
 
   // Prix
-  if (details['min_price'] != "" && details['max_price'] != "")
+  if (details['min_price'] != '' && details['max_price'] != '')
   {
     var price;
 
     if (details['min_price'] == details['max_price'])
-      price = "Prix ~ " + formatAmountForDisplay(details['min_price'], true);
+      price = 'Prix ~ ' + formatAmountForDisplay(details['min_price'], true);
     else
-      price = "Prix " + formatAmountForDisplay(details['min_price'], false) + " - " + formatAmountForDisplay(details['max_price'], true);
+      price = 'Prix ' + formatAmountForDisplay(details['min_price'], false) + ' - ' + formatAmountForDisplay(details['max_price'], true);
 
     $('.zone_price_details').css('display', 'block');
     $('#prix_details_proposition').html(price);
@@ -1179,16 +1176,16 @@ function showDetails(zone, id)
   var nbParticipants;
 
   if (details['nb_participants'] == 1)
-    nbParticipants = details['nb_participants'] + " participant";
+    nbParticipants = details['nb_participants'] + ' participant';
   else
-    nbParticipants = details['nb_participants'] + " participants";
+    nbParticipants = details['nb_participants'] + ' participants';
 
   $('#participants_details_proposition').html(nbParticipants);
 
   // Type de restaurant
   $('#types_details_proposition').empty();
 
-  if (details['types'] != "")
+  if (details['types'] != '')
   {
     $('#types_details_proposition').css('display', 'block');
 
@@ -1196,7 +1193,7 @@ function showDetails(zone, id)
 
     $.each(types, function()
     {
-      if (this != "")
+      if (this != '')
         $('#types_details_proposition').append('<span class="horaire_proposition">' + this + '</span>');
     });
   }
@@ -1207,22 +1204,22 @@ function showDetails(zone, id)
   }
 
   // Appelant
-  if (details['caller'] != "" || details['phone'] != "" || details['determined'] == "Y")
+  if (details['caller'] != '' || details['phone'] != '' || details['determined'] == 'Y')
   {
-    if (details['caller'] != "" || details['phone'] != "")
+    if (details['caller'] != '' || details['phone'] != '')
     {
       $('.zone_caller_details').css('display', 'block');
 
-      if (details['phone'] != "")
+      if (details['phone'] != '')
         $('#telephone_details_proposition').html(details['phone']);
       else
         $('#telephone_details_proposition').empty();
 
-      if (details['determined'] == "Y" && details['caller'] != "")
+      if (details['determined'] == 'Y' && details['caller'] != '')
       {
         $('#caller_details_propositions').parent().css('display', 'inline-block');
 
-        if (details['avatar'] != "")
+        if (details['avatar'] != '')
         {
           $('#caller_details_propositions').attr('src', '../../includes/images/profil/avatars/' + details['avatar']);
           $('#caller_details_propositions').attr('title', details['pseudo']);
@@ -1252,11 +1249,11 @@ function showDetails(zone, id)
   }
 
   // Liens
-  if (details['website'] != "" || details['plan'] != "" || details['lafourchette'] != "")
+  if (details['website'] != '' || details['plan'] != '' || details['lafourchette'] != '')
   {
     $('.zone_liens_details').css('display', 'block');
 
-    if (details['website'] == "")
+    if (details['website'] == '')
     {
       $('#website_details_proposition').css('display', 'none');
       $('#website_details_proposition').attr('href', '');
@@ -1267,7 +1264,7 @@ function showDetails(zone, id)
       $('#website_details_proposition').attr('href', details['website']);
     }
 
-    if (details['plan'] == "")
+    if (details['plan'] == '')
     {
       $('#plan_details_proposition').css('display', 'none');
       $('#plan_details_proposition').attr('href', '');
@@ -1278,7 +1275,7 @@ function showDetails(zone, id)
       $('#plan_details_proposition').attr('href', details['plan']);
     }
 
-    if (details['lafourchette'] == "")
+    if (details['lafourchette'] == '')
     {
       $('#lafourchette_details_proposition').css('display', 'none');
       $('#lafourchette_details_proposition').attr('href', '');
@@ -1310,7 +1307,7 @@ function showDetails(zone, id)
   });
 
   // Bouton réservation (si on a participé)
-  if (participe == true && details['reserved'] != "Y")
+  if (participe == true && details['reserved'] != 'Y')
   {
     $('#reserver_details_proposition').css('display', 'block');
     $('#reserver_details_proposition').attr('action', 'foodadvisor.php?action=doReserver');
@@ -1322,7 +1319,7 @@ function showDetails(zone, id)
   }
 
   // Bouton complet (si appelant sur choix déterminé)
-  if (participe == true && details['reserved'] != "Y" && details['determined'] == "Y" && userSession == details['caller'])
+  if (participe == true && details['reserved'] != 'Y' && details['determined'] == 'Y' && userSession == details['caller'])
   {
     $('#choice_complete_details_proposition').css('display', 'block');
     $('#choice_complete_details_proposition').attr('action', 'foodadvisor.php?action=doComplet');
@@ -1334,7 +1331,7 @@ function showDetails(zone, id)
   }
 
   // Indicateur réservation
-  if (details['reserved'] == "Y")
+  if (details['reserved'] == 'Y')
     $('#reserved_details_proposition').css('display', 'block');
   else
     $('#reserved_details_proposition').css('display', 'none');
@@ -1342,7 +1339,7 @@ function showDetails(zone, id)
   // Vérification si l'utilisateur a réservé
   var reserved = false;
 
-  if (details['reserved'] == "Y" && userSession == details['caller'])
+  if (details['reserved'] == 'Y' && userSession == details['caller'])
     reserved = true;
 
   // Bouton annulation réservation (si on a participé)
@@ -1358,12 +1355,12 @@ function showDetails(zone, id)
   }
 
   // Id restaurant des boutons
-  if (participe == true && details['reserved'] != "Y")
+  if (participe == true && details['reserved'] != 'Y')
     $('#reserver_details_proposition > input[name=id_restaurant]').val(id);
   else
     $('#reserver_details_proposition > input[name=id_restaurant]').val('');
 
-  if (participe == true && details['reserved'] != "Y" && details['determined'] == "Y" && userSession == details['caller'])
+  if (participe == true && details['reserved'] != 'Y' && details['determined'] == 'Y' && userSession == details['caller'])
     $('#choice_complete_details_proposition > input[name=id_restaurant]').val(id);
   else
     $('#choice_complete_details_proposition > input[name=id_restaurant]').val('');
@@ -1374,10 +1371,10 @@ function showDetails(zone, id)
     $('#annuler_details_proposition > input[name=id_restaurant]').val('');
 
   // On cache la zone si tout est vide
-  if ((!$('#reserver_details_proposition').length        || $('#reserver_details_proposition').css('display')        == "none")
-  &&  (!$('#choice_complete_details_proposition').length || $('#choice_complete_details_proposition').css('display') == "none")
-  &&  (!$('#annuler_details_proposition').length         || $('#annuler_details_proposition').css('display')         == "none")
-  &&  (!$('#reserved_details_proposition').length        || $('#reserved_details_proposition').css('display')        == "none"))
+  if ((!$('#reserver_details_proposition').length        || $('#reserver_details_proposition').css('display')        == 'none')
+  &&  (!$('#choice_complete_details_proposition').length || $('#choice_complete_details_proposition').css('display') == 'none')
+  &&  (!$('#annuler_details_proposition').length         || $('#annuler_details_proposition').css('display')         == 'none')
+  &&  (!$('#reserved_details_proposition').length        || $('#reserved_details_proposition').css('display')        == 'none'))
     $('#indicateurs_details_proposition').css('display', 'none');
   else
     $('#indicateurs_details_proposition').css('display', 'block');
@@ -1390,7 +1387,7 @@ function showDetails(zone, id)
   var transports;
 
   // Bouton choix rapide
-  if (participe == true || available_day == false)
+  if (participe == true || availableDay == false)
   {
     $('#choix_rapide_details_proposition').css('display', 'none');
     $('#choix_rapide_details_proposition').attr('action', '');
@@ -1412,7 +1409,7 @@ function showDetails(zone, id)
     ligne += '<div class="zone_details_user_top">';
 
     // Avatar
-    avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, "avatar");
+    avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, 'avatar');
 
     ligne += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_details" />';
 
@@ -1421,7 +1418,7 @@ function showDetails(zone, id)
 
     // Transports
     ligne += '<div class="zone_details_transports">';
-      if (this['transports'] != "")
+      if (this['transports'] != '')
       {
         transports = this['transports'].split(';');
 
@@ -1453,7 +1450,7 @@ function showDetails(zone, id)
     ligne += '</div>';
 
     // Horaires
-    if (this['horaire'] != "")
+    if (this['horaire'] != '')
       ligne += '<div class="horaire_details">' + formatTimeForDisplayLight(this['horaire']) + '</div>';
 
     ligne += '</div>';
@@ -1483,12 +1480,12 @@ function showDetails(zone, id)
       colonne += '<div class="zone_details_user_menu">';
 
       // Avatar
-      avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, "avatar");
+      avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, 'avatar');
 
       colonne += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_menus" />';
 
       // Entrée
-      if (menu[0] != "")
+      if (menu[0] != '')
       {
         colonne += '<div class="zone_menu_mes_choix">';
           colonne += '<span class="titre_texte_mon_choix">Entrée</span>';
@@ -1497,7 +1494,7 @@ function showDetails(zone, id)
       }
 
       // Plat
-      if (menu[1] != "")
+      if (menu[1] != '')
       {
         colonne += '<div class="zone_menu_mes_choix">';
           colonne += '<span class="titre_texte_mon_choix">Plat</span>';
@@ -1506,7 +1503,7 @@ function showDetails(zone, id)
       }
 
       // Dessert
-      if (menu[2] != "")
+      if (menu[2] != '')
       {
         colonne += '<div class="zone_menu_mes_choix">';
           colonne += '<span class="titre_texte_mon_choix">Dessert</span>';

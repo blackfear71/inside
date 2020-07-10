@@ -4,8 +4,8 @@ $(window).on('load', function()
   /***   Initialisations   ***/
   /***************************/
   // Variables
-  var refresh_chat;
-  var refresh_users;
+  var refreshChat;
+  var refreshUsers;
   var intervalRefreshChat  = 4000;
   var intervalRefreshUsers = 30000;
 
@@ -19,15 +19,15 @@ $(window).on('load', function()
   initView(cookieShowChat, cookieWindowChat);
 
   // On lance le rafraichissement des messages toujours après l'affichage des zones
-  if (cookieShowChat == "true" && cookieWindowChat == "1")
+  if (cookieShowChat == 'true' && cookieWindowChat == '1')
   {
-    refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
-    stopTimerRefresh(refresh_users);
+    refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
+    stopTimerRefresh(refreshUsers);
   }
-  else if ((cookieShowChat == "true" && cookieWindowChat == "2") || cookieShowChat == "false")
+  else if ((cookieShowChat == 'true' && cookieWindowChat == '2') || cookieShowChat == 'false')
   {
-    refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
-    stopTimerRefresh(refresh_chat);
+    refreshUsers = startTimerRefresh(rafraichirUtilisateurs, refreshUsers, intervalRefreshUsers);
+    stopTimerRefresh(refreshChat);
   }
 
   /*******************/
@@ -47,48 +47,48 @@ $(window).on('load', function()
   $('#zone_hide_chat').click(function()
   {
     // Si le chat est ouvert, on le ferme
-    if (cookieShowChat == "true")
+    if (cookieShowChat == 'true')
     {
-      stopTimerRefresh(refresh_chat);
-      setCookie("showChat", false);
-      setCookie("windowChat", "3");
-      cookieShowChat   = getCookie("showChat");
-      cookieWindowChat = getCookie("windowChat");
+      stopTimerRefresh(refreshChat);
+      setCookie('showChat', false);
+      setCookie('windowChat', '3');
+      cookieShowChat   = getCookie('showChat');
+      cookieWindowChat = getCookie('windowChat');
       initView(cookieShowChat, cookieWindowChat);
     }
     // Sinon on l'ouvre sur la fenêtre de chat
     else
     {
-      setCookie("showChat", true);
-      setCookie("windowChat", "1");
-      cookieShowChat   = getCookie("showChat");
-      cookieWindowChat = getCookie("windowChat");
+      setCookie('showChat', true);
+      setCookie('windowChat', '1');
+      cookieShowChat   = getCookie('showChat');
+      cookieWindowChat = getCookie('windowChat');
       initView(cookieShowChat, cookieWindowChat);
-      refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
+      refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
     }
   });
 
   // Rafraichissement chat (au clic sur le titre)
   $('#onglet_chat').click(function()
   {
-    if (cookieWindowChat != "3")
+    if (cookieWindowChat != '3')
     {
-      stopTimerRefresh(refresh_users);
-      setCookie("windowChat", "1");
-      cookieWindowChat = getCookie("windowChat");
+      stopTimerRefresh(refreshUsers);
+      setCookie('windowChat', '1');
+      cookieWindowChat = getCookie('windowChat');
       initView(cookieShowChat, cookieWindowChat);
-      refresh_chat = startTimerRefresh(rafraichirConversation, refresh_chat, intervalRefreshChat, true, false);
+      refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
     }
   });
 
   // Rafraichissement utilisateurs (au clic sur le titre)
   $('#onglet_users').click(function()
   {
-    stopTimerRefresh(refresh_chat);
-    setCookie("windowChat", "2");
-    cookieWindowChat = getCookie("windowChat");
+    stopTimerRefresh(refreshChat);
+    setCookie('windowChat', '2');
+    cookieWindowChat = getCookie('windowChat');
     initView(cookieShowChat, cookieWindowChat);
-    refresh_users = startTimerRefresh(rafraichirUtilisateurs, refresh_users, intervalRefreshUsers);
+    refreshUsers = startTimerRefresh(rafraichirUtilisateurs, refreshUsers, intervalRefreshUsers);
   });
 
   // Envoi de message au clic sur le bouton
@@ -102,7 +102,7 @@ $(window).on('load', function()
       envoyerMessage();
 
       // Eventuel repli de la zone d'insertion de smileys
-      if ($('.zone_insert_smiley').css('display') == "block")
+      if ($('.zone_insert_smiley').css('display') == 'block')
       {
         $('.zone_insert_smiley').css('display', 'none');
         $('.triangle_chat_smileys').css('display', 'none');
@@ -114,20 +114,20 @@ $(window).on('load', function()
   // Survol des onglets
   $('#onglet_users').hover(function(e)
   {
-    if (cookieWindowChat == "1")
+    if (cookieWindowChat == '1')
       $('#onglet_users').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
   });
 
   $('#onglet_chat').hover(function(e)
   {
-    if (cookieWindowChat == "2")
+    if (cookieWindowChat == '2')
       $('#onglet_chat').css('background-color', e.type === 'mouseenter' ? '#c81932' : '#ff1937');
   });
 
   // Afficher/masquer la fenêtre d'insertion de smileys au clic
   $('#fenetres_chat').on('click', '#insert_smiley', function()
   {
-    if ($('.zone_insert_smiley').css('display') == "none")
+    if ($('.zone_insert_smiley').css('display') == 'none')
     {
       $('.zone_insert_smiley').css('display', 'block');
       $('.triangle_chat_smileys').css('display', 'block');
@@ -142,7 +142,7 @@ $(window).on('load', function()
   // Repli de la zone d'insertion de smileys au clic en dehors
   $('#fenetres_chat').on('click', '#scroll_conversation, #message_chat, #send_message_chat', function()
   {
-    if ($('.zone_insert_smiley').css('display') == "block")
+    if ($('.zone_insert_smiley').css('display') == 'block')
     {
       $('.zone_insert_smiley').css('display', 'none');
       $('.triangle_chat_smileys').css('display', 'none');
@@ -159,14 +159,14 @@ $(window).on('load', function()
   /***   Fonctions   ***/
   /*********************/
   // Fonction mise en place intervalle rafraichissement chat
-  function startTimerRefresh(func, interval, time, param_func, param_interval)
+  function startTimerRefresh(func, interval, time, paramFunc, paramInterval)
   {
     // On stoppe toujours un éventuel interval déjà en route
     stopTimerRefresh(interval);
 
     // Après avoir passé une fois TRUE en paramètre, on passe toujours FALSE ensuite à rafraichirConversation()
-    func(param_func);
-    var newInterval = setInterval(func, time, param_interval);
+    func(paramFunc);
+    var newInterval = setInterval(func, time, paramInterval);
 
     return newInterval;
   }
@@ -181,9 +181,9 @@ $(window).on('load', function()
   function initCookies()
   {
     // Initialisation ou récupération des cookies si existants
-    cookieIdentifiant = getCookie("identifiant");
-    cookieShowChat    = getCookie("showChat");
-    cookieWindowChat  = getCookie("windowChat");
+    cookieIdentifiant = getCookie('identifiant');
+    cookieShowChat    = getCookie('showChat');
+    cookieWindowChat  = getCookie('windowChat');
 
     // Initialisation cookie identifiant
     initCookieIdentifiant();
@@ -205,18 +205,18 @@ $(window).on('load', function()
     // Initialisation cookie identifiant
     if (cookieIdentifiant == null)
     {
-      setCookie("identifiant", currentUser);
-      cookieIdentifiant = getCookie("identifiant");
+      setCookie('identifiant', currentUser);
+      cookieIdentifiant = getCookie('identifiant');
     }
 
     // Si le cookie ne correspond pas à l'utilisateur, on détruit tous les cookies
     if (cookieIdentifiant != currentUser)
     {
-      deleteCookie("identifiant");
-      deleteCookie("showChat");
-      deleteCookie("windowChat");
-      setCookie("identifiant", currentUser);
-      cookieIdentifiant = getCookie("identifiant");
+      deleteCookie('identifiant');
+      deleteCookie('showChat');
+      deleteCookie('windowChat');
+      setCookie('identifiant', currentUser);
+      cookieIdentifiant = getCookie('identifiant');
     }
   }
 
@@ -226,16 +226,16 @@ $(window).on('load', function()
     if (initChat != null)
     {
       // Initialisation cookie état Chat en fonction de la préférence utilisateur
-      setCookie("showChat", initChat);
-      cookieShowChat = getCookie("showChat");
+      setCookie('showChat', initChat);
+      cookieShowChat = getCookie('showChat');
     }
     else
     {
       // Initialisation cookie état Chat par défaut
       if (cookieShowChat == null)
       {
-        setCookie("showChat", true);
-        cookieShowChat = getCookie("showChat");
+        setCookie('showChat', true);
+        cookieShowChat = getCookie('showChat');
       }
     }
   }
@@ -247,19 +247,19 @@ $(window).on('load', function()
     {
       // Initialisation cookie fenêtre Chat en fonction de la préférence utilisateur
       if (initChat == true)
-        setCookie("windowChat", "1");
+        setCookie('windowChat', '1');
       else
-        setCookie("windowChat", "3");
+        setCookie('windowChat', '3');
 
-      cookieWindowChat = getCookie("windowChat");
+      cookieWindowChat = getCookie('windowChat');
     }
     else
     {
       // Initialisation cookie état Chat par défaut
       if (cookieWindowChat == null)
       {
-        setCookie("windowChat", "1");
-        cookieWindowChat = getCookie("windowChat");
+        setCookie('windowChat', '1');
+        cookieWindowChat = getCookie('windowChat');
       }
     }
   }
@@ -267,18 +267,18 @@ $(window).on('load', function()
   // Fonction initialisation position chat (aussi présente dans scriptMH.js)
   function initPositionChat()
   {
-    var total_height = $('body')[0].scrollHeight - $(window).height();
-    var difference   = $('footer').height() - (total_height - $(window).scrollTop());
+    var totalHeight = $('body')[0].scrollHeight - $(window).height();
+    var difference  = $('footer').height() - (totalHeight - $(window).scrollTop());
 
-    /*console.log("$('body')[0].scrollHeight = " + $('body')[0].scrollHeight);
-    console.log("$(window).height() = " + $(window).height());
-    console.log("total_height = " + total_height);
-    console.log("$('footer').height() = " + $('footer').height());
-    console.log("$(window).scrollTop() = " + $(window).scrollTop());
-    console.log("difference = " + difference);
-    console.log("----------------------");*/
+    /*console.log('$('body')[0].scrollHeight = ' + $('body')[0].scrollHeight);
+    console.log('$(window).height() = ' + $(window).height());
+    console.log('totalHeight = ' + totalHeight);
+    console.log('$('footer').height() = ' + $('footer').height());
+    console.log('$(window).scrollTop() = ' + $(window).scrollTop());
+    console.log('difference = ' + difference);
+    console.log('----------------------');*/
 
-    $("#zone_chat_position").css('display', 'block');
+    $('#zone_chat_position').css('display', 'block');
 
     if (difference > 0)
       $('#zone_chat_position').css('bottom', difference + 'px');
@@ -293,18 +293,18 @@ $(window).on('load', function()
     console.log('cookieWindowChat : ' + cookieWindowChat);*/
 
     var html = '';
-    var hide_chat_css;
-    var onglet_chat_css;
-    var onglet_users_css;
-    var cursor_css;
+    var hideChatCss;
+    var ongletChatCss;
+    var ongletUsersCss;
+    var cursorCss;
 
-    if (cookieShowChat == "true" && cookieWindowChat == "1")
+    if (cookieShowChat == 'true' && cookieWindowChat == '1')
     {
       // Initialisation des affichages
-      hide_chat_css    = '-';
-      onglet_chat_css  = '#c81932';
-      onglet_users_css = '#ff1937';
-      cursor_css       = 'pointer';
+      hideChatCss    = '-';
+      ongletChatCss  = '#c81932';
+      ongletUsersCss = '#ff1937';
+      cursorCss      = 'pointer';
 
       $('#onglet_users').show();
 
@@ -339,35 +339,35 @@ $(window).on('load', function()
         html += '<button type="button" id="send_message_chat" title="Envoyer" class="bouton_chat"></button>';
       html += '</form>';
     }
-    else if (cookieShowChat == "true" && cookieWindowChat == "2")
+    else if (cookieShowChat == 'true' && cookieWindowChat == '2')
     {
       // Initialisation des affichages
-      hide_chat_css    = '-';
-      onglet_chat_css  = '#ff1937';
-      onglet_users_css = '#c81932';
-      cursor_css       = 'pointer';
+      hideChatCss    = '-';
+      ongletChatCss  = '#ff1937';
+      ongletUsersCss = '#c81932';
+      cursorCss       = 'pointer';
 
       // On construit la fenêtre des utilisateurs
       html += '<div id="scroll_conversation" class="zone_onglet_users">';
         html += '<div id="utilisateurs_chat" class="contenu_onglet_users"></div>';
       html += '</div>';
     }
-    else if (cookieShowChat == "false" || cookieWindowChat == "3")
+    else if (cookieShowChat == 'false' || cookieWindowChat == '3')
     {
       // Initialisation des affichages
-      hide_chat_css    = '+';
-      onglet_chat_css  = '#ff1937';
-      onglet_users_css = '#ff1937';
-      cursor_css       = 'default';
+      hideChatCss    = '+';
+      ongletChatCss  = '#ff1937';
+      ongletUsersCss = '#ff1937';
+      cursorCss       = 'default';
 
       $('#onglet_users').hide();
     }
 
-    $('#hide_chat').html(hide_chat_css);
-    $('#onglet_chat').css('background-color', onglet_chat_css);
-    $('#onglet_users').css('background-color', onglet_users_css);
+    $('#hide_chat').html(hideChatCss);
+    $('#onglet_chat').css('background-color', ongletChatCss);
+    $('#onglet_users').css('background-color', ongletUsersCss);
     $('#onglet_chat').css('border-top-left-radius', '2px');
-    $('.titre_onglet').css('cursor', cursor_css);
+    $('.titre_onglet').css('cursor', cursorCss);
     $('#fenetres_chat').html(html);
   }
 
@@ -388,16 +388,16 @@ $(window).on('load', function()
       // Affichage et formatage de tous les messages
       $(display).find('message').each(function()
       {
-        var $message    = $(this);
-        var identifiant = $message.find('identifiant').text();
-        var text        = changeSmileys(decodeHtml($message.find('text').text()));
-        var date        = $message.find('date').text();
-        var time        = $message.find('time').text();
-        var pseudo      = formatUnknownUser("", true, false);
+        var message     = $(this);
+        var identifiant = message.find('identifiant').text();
+        var text        = changeSmileys(decodeHtml(message.find('text').text()));
+        var date        = message.find('date').text();
+        var time        = message.find('time').text();
+        var pseudo      = formatUnknownUser('', true, false);
         var html        = '';
         var avatar;
 
-        if (identifiant != "" && text != "")
+        if (identifiant != '' && text != '')
         {
           // Formatage pseudo à partir du tableau php récupéré
           $.each(listUsers, function(key, value)
@@ -406,12 +406,13 @@ $(window).on('load', function()
             {
               pseudo = value.pseudo;
               avatar = value.avatar;
+
               return false;
             }
           });
 
           // Formatage du message complet
-          var avatarFormatted = formatAvatar(avatar, pseudo, 0, "avatar");
+          var avatarFormatted = formatAvatar(avatar, pseudo, 0, 'avatar');
 
           if (currentUser == identifiant)
           {
@@ -457,11 +458,11 @@ $(window).on('load', function()
 
       $.each(JSON.parse(users), function(key, value)
       {
-        var pseudo               = value.pseudo;
-        var avatar               = value.avatar;
-        var connected            = value.connected;
-        var date_last_connection = value.date_last_connection;
-        var hour_last_connection = value.hour_last_connection;
+        var pseudo             = value.pseudo;
+        var avatar             = value.avatar;
+        var connected          = value.connected;
+        var dateLastConnection = value.date_last_connection;
+        var hourLastConnection = value.hour_last_connection;
 
         // On va afficher la séparation des utilisateurs hors ligne à partir du premier
         if (offline != true && connected == false)
@@ -474,7 +475,7 @@ $(window).on('load', function()
         // Zone utilisateur
         html = '<div class="zone_chat_connected">';
           // Avatar
-          var avatarFormatted = formatAvatar(avatar, escapeHtml(pseudo), 0, "avatar");
+          var avatarFormatted = formatAvatar(avatar, escapeHtml(pseudo), 0, 'avatar');
 
           html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_connected" />';
 
@@ -487,9 +488,9 @@ $(window).on('load', function()
           }
           else
           {
-            if (date_last_connection != "" && hour_last_connection != "")
+            if (dateLastConnection != '' && hourLastConnection != '')
             {
-              html += '<div class="zone_indicateur" title="Dernière connexion le ' + date_last_connection + ' à ' + hour_last_connection + '">';
+              html += '<div class="zone_indicateur" title="Dernière connexion le ' + dateLastConnection + ' à ' + hourLastConnection + '">';
                 html += '<div class="user_chat_offline"></div>';
               html += '</div>';
             }
@@ -614,7 +615,7 @@ $(window).on('load', function()
       ':facepalm:' : '<img src="/inside/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley_chat" />'
     };
 
-    var patterns = [];
+    var patterns  = [];
     var metachars = /[[\]{}()*+?.\\|^$\-,&#\s]/g;
 
     // On définit un modèle pattern pour chaque propriété
@@ -647,11 +648,11 @@ $(window).on('load', function()
       'smiley_8' : ' :facepalm: '
     };
 
-    $('#message_chat').val($('#message_chat').val() + transco[object.attr("id")]);
+    $('#message_chat').val($('#message_chat').val() + transco[object.attr('id')]);
     $('#message_chat').focus();
 
     // Repli de la zone d'insertion de smiley
-    if ($('.zone_insert_smiley').css('display') == "block")
+    if ($('.zone_insert_smiley').css('display') == 'block')
     {
       $('.zone_insert_smiley').css('display', 'none');
       $('.triangle_chat_smileys').css('display', 'none');
@@ -661,6 +662,6 @@ $(window).on('load', function()
   /******************/
   /***   Debugg   ***/
   /******************/
-  //deleteCookie("showChat");
+  //deleteCookie('showChat');
   //console.log('cookies : ' + document.cookie);
 });

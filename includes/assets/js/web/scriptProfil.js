@@ -25,28 +25,28 @@ $(function()
   // Change la couleur des boutons préférences
   $('.label_switch').click(function()
   {
-    var id_bouton = $(this).closest('div').attr('id');
+    var idBouton = $(this).closest('div').attr('id');
 
-    switch (id_bouton)
+    switch (idBouton)
     {
       // Notifications
       case 'bouton_me':
       case 'bouton_today':
       case 'bouton_week':
       case 'bouton_all_n':
-        switchCheckedColor('switch_default_view_notifications', id_bouton);
+        switchCheckedColor('switch_default_view_notifications', idBouton);
         break;
 
       // Films
       case 'bouton_accueil':
       case 'bouton_cards':
-        switchCheckedColor('switch_default_view_movies', id_bouton);
+        switchCheckedColor('switch_default_view_movies', idBouton);
         break;
 
       case 'bouton_semaine':
       case 'bouton_waited':
       case 'bouton_way_out':
-        changeCheckedColor(id_bouton);
+        changeCheckedColor(idBouton);
         break;
 
       // #TheBox
@@ -54,19 +54,19 @@ $(function()
       case 'bouton_inprogress':
       case 'bouton_mine':
       case 'bouton_done':
-        switchCheckedColor('switch_default_view_ideas', id_bouton);
+        switchCheckedColor('switch_default_view_ideas', idBouton);
         break;
 
       // INSIDE Room
       case 'bouton_chat_yes':
       case 'bouton_chat_no':
-        switchCheckedColor('switch_default_view_chat', id_bouton);
+        switchCheckedColor('switch_default_view_chat', idBouton);
         break;
 
       // Celsius
       case 'bouton_celsius_yes':
       case 'bouton_celsius_no':
-        switchCheckedColor('switch_default_view_celsius', id_bouton);
+        switchCheckedColor('switch_default_view_celsius', idBouton);
         break;
 
       default:
@@ -77,9 +77,9 @@ $(function()
   // Affiche les détails d'un succès
   $('.agrandirSucces').click(function()
   {
-    var id_success = $(this).attr('id').replace('agrandir_succes_', '');
+    var idSuccess = $(this).attr('id').replace('agrandir_succes_', '');
 
-    showSuccess(id_success);
+    showSuccess(idSuccess);
   });
 
   // Ferme au clic sur le fond
@@ -93,9 +93,9 @@ $(function()
   // Plie ou déplie les thèmes
   $('#fold_themes_user, #fold_themes_missions').click(function()
   {
-    var id_fold = $(this).attr('id').replace('fold_', '');
+    var idFold = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerThemes(id_fold);
+    afficherMasquerThemes(idFold);
   });
 
   // Affiche un aperçu d'un thème
@@ -141,9 +141,9 @@ $(function()
   });
 
   /*** Calendriers ***/
-  if ($("#datepicker_anniversary").length)
+  if ($('#datepicker_anniversary').length)
   {
-    $("#datepicker_anniversary").datepicker(
+    $('#datepicker_anniversary').datepicker(
     {
       autoHide: true,
       language: 'fr-FR',

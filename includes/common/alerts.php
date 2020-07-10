@@ -20,15 +20,15 @@
               // Icône
               switch ($message['logo'])
               {
-                case "erreur":
+                case 'erreur':
                   echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Erreur" class="logo_alerte" />';
                   break;
 
-                case "info":
+                case 'info':
                   echo '<img src="/inside/includes/icons/common/info.png" alt="info" title="Information" class="logo_alerte" />';
                   break;
 
-                case "question":
+                case 'question':
                   echo '<img src="/inside/includes/icons/common/question.png" alt="question" title="Inconnu" class="logo_alerte" />';
                   break;
 
