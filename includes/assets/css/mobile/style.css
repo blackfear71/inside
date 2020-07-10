@@ -426,7 +426,7 @@ aside
   transform: scale(1);
   transform-origin: center center;
   z-index: 6;
-	filter: drop-shadow(0 0 0.5vw #7c7c7c);
+	filter: drop-shadow(0 0 0.3vh #7c7c7c);
 }
 
 .zone_contenu_celsius
