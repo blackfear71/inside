@@ -409,6 +409,8 @@ $(window).on('load', function()
               html += '<div class="date_chat_user">' + formatDateForDisplayLong(date) + '</div>';
               html += '<div class="trait_chat_droit"></div>';
             html += '</div>';
+
+            previousDate = date;
           }
 
           // Formatage pseudo à partir du tableau php récupéré
