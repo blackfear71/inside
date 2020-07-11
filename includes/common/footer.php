@@ -63,7 +63,7 @@
         // Affichage switch version sur mobile
         if ($plateforme == 'mobile')
         {
-          echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version mobile">';
+          echo '<a href="/inside/includes/functions/script_commun.php?function=switchMobile" class="link_footer" title="Basculer vers la version mobile">';
             echo '<img src="/inside/includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer" />';
           echo '</a>';
         }
@@ -107,7 +107,7 @@
       // Affichage switch version sur mobile
       if ($plateforme == 'mobile')
       {
-        echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version mobile">';
+        echo '<a href="/inside/includes/functions/script_commun.php?function=switchMobile" class="link_footer" title="Basculer vers la version mobile">';
           echo '<img src="/inside/includes/icons/common/mobile.png" alt="mobile" title="Basculer vers la version mobile" class="icone_footer" />';
         echo '</a>';
       }

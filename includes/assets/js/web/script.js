@@ -298,19 +298,19 @@ function deleteCookie(cookieName)
 // Exécute le script php de mise à jour du ping
 function updatePing()
 {
-  $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
+  $.post('/inside/includes/functions/script_commun.php', {function: 'updatePing'});
 }
 
 // Exécute le script php de mise à jour du compteur de notifications
 function updateNotifications()
 {
-  $.get('/inside/includes/functions/notifications.php', {function: 'count_notifications'}, function(data)
+  $.get('/inside/includes/functions/script_commun.php', {function: 'countNotifications'}, function(data)
   {
-    var identifiant         = data.identifiant;
-    var nbNotificationsJour = data.nbNotificationsJour;
-    var view                = data.view;
-    var page                = data.page;
-    var html                = '';
+    var identifiant             = data.identifiant;
+    var nombreNotificationsJour = data.nombreNotificationsJour;
+    var view                    = data.view;
+    var page                    = data.page;
+    var html                    = '';
 
     // On n'exécute de manière récurrente que si on n'est pas l'admin
     if (identifiant != 'admin')
@@ -320,7 +320,7 @@ function updateNotifications()
       {
         html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" class="link_notifications">';
 
-          if (nbNotificationsJour > 0)
+          if (nombreNotificationsJour > 0)
             html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" class="icon_notifications" />';
           else
             html += '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" class="icon_notifications" />';
@@ -332,14 +332,14 @@ function updateNotifications()
       }
 
       // On met à jour le contenu
-      if (nbNotificationsJour > 0)
+      if (nombreNotificationsJour > 0)
       {
         $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
         $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications_blue.png');
 
-        if (nbNotificationsJour <= 9)
+        if (nombreNotificationsJour <= 9)
         {
-          $('.number_notifications').html(nbNotificationsJour);
+          $('.number_notifications').html(nombreNotificationsJour);
           $('.number_notifications').css('color', 'white');
         }
         else
@@ -364,16 +364,16 @@ function updateNotifications()
 // Exécute le script php de mise à jour du compteur de bugs/évolutions
 function updateBugs()
 {
-  $.get('/inside/includes/functions/count_bugs.php', function(data)
+  $.get('/inside/includes/functions/script_commun.php', {function: 'countBugs'}, function(data)
   {
     var identifiant = data.identifiant;
-    var nbBugs      = data.nbBugs;
+    var nombreBugs  = data.nombreBugs;
     var html        = '';
 
     // On n'exécute de manière récurrente que si on n'est pas l'admin
     if (identifiant != 'admin')
     {
-      if (nbBugs > 0)
+      if (nombreBugs > 0)
       {
         // La première fois on génère la zone
         if (!$('.count_bugs').length)
@@ -386,7 +386,7 @@ function updateBugs()
         }
 
         // On met à jour le contenu
-        $('.number_bugs').html(nbBugs);
+        $('.number_bugs').html(nombreBugs);
       }
       else
       {
@@ -628,11 +628,11 @@ function loadingForm(zone)
 // Affiche le détail des notifications
 function showNotifications()
 {
-  $.get('/inside/includes/functions/notifications.php', {function: 'get_details_notifications'}, function(data)
+  $.get('/inside/includes/functions/script_commun.php', {function: 'getDetailsNotifications'}, function(data)
   {
     var identifiant            = data.identifiant;
-    var nbNotificationsJour    = data.nbNotificationsJour;
-    var nbNotificationsSemaine = data.nbNotificationsSemaine;
+    var nombreNotificationsJour    = data.nombreNotificationsJour;
+    var nombreNotificationsSemaine = data.nombreNotificationsSemaine;
     var html                   = '';
 
     // On n'affiche le détail que si on n'est pas l'admin
@@ -648,18 +648,18 @@ function showNotifications()
         html += '<div class="compteurs_details_notifications">';
           // Notifications du jour
           html += '<div class="ligne_details_notifications">';
-            if (nbNotificationsJour == 1)
-              html += '<div class="number_notifications_details">' + nbNotificationsJour + '</div> notification aujourd\'hui';
+            if (nombreNotificationsJour == 1)
+              html += '<div class="number_notifications_details">' + nombreNotificationsJour + '</div> notification aujourd\'hui';
             else
-              html += '<div class="number_notifications_details">' + nbNotificationsJour + '</div> notifications aujourd\'hui';
+              html += '<div class="number_notifications_details">' + nombreNotificationsJour + '</div> notifications aujourd\'hui';
           html += '</div>';
 
           // Notifications de la semaine
           html += '<div class="ligne_details_notifications">';
-            if (nbNotificationsSemaine == 1)
-              html += '<div class="number_notifications_details">' + nbNotificationsSemaine + '</div> notification cette semaine';
+            if (nombreNotificationsSemaine == 1)
+              html += '<div class="number_notifications_details">' + nombreNotificationsSemaine + '</div> notification cette semaine';
             else
-              html += '<div class="number_notifications_details">' + nbNotificationsSemaine + '</div> notifications cette semaine';
+              html += '<div class="number_notifications_details">' + nombreNotificationsSemaine + '</div> notifications cette semaine';
           html += '</div>';
         html += '</div>';
       html += '</div>';

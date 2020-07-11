@@ -11,7 +11,7 @@
                                    'titre' => 'EXPENSE CENTER')
                             );
 
-  $listeAsideUser = array(array('lien'  => '/inside/includes/functions/disconnect.php',
+  $listeAsideUser = array(array('lien'  => '/inside/includes/functions/script_commun.php?function=disconnectUser',
                                 'image' => 'logout',
                                 'titre' => 'DÉCONNEXION')
                          );

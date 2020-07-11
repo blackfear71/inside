@@ -488,7 +488,7 @@ function openSection(titre, zone, forcage)
 // Exécute le script php de mise à jour du ping
 function updatePing()
 {
-  $.post('/inside/includes/functions/ping.php', {function: 'updatePing'});
+  $.post('/inside/includes/functions/script_commun.php', {function: 'updatePing'});
 }
 
 // Déploie le menu latéral gauche

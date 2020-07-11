@@ -13,7 +13,7 @@
     // Affichage switch version sur mobile
     if ($plateforme == 'mobile')
     {
-      echo '<a href="/inside/includes/functions/switch_mobile.php" class="link_footer" title="Basculer vers la version classique">';
+      echo '<a href="/inside/includes/functions/script_commun.php?function=switchMobile" class="link_footer" title="Basculer vers la version classique">';
         echo '<img src="/inside/includes/icons/common/classic.png" alt="classic" title="Basculer vers la version classique" class="icone_footer" />';
       echo '</a>';
     }

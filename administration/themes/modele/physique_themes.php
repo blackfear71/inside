@@ -192,7 +192,7 @@
                           WHERE ref_theme = "' . $reference . '"');
 
     $req->execute(array(
-      'ref_theme' => $new_reference
+      'ref_theme' => $newReference
     ));
 
     $req->closeCursor();
