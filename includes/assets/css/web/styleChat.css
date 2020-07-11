@@ -229,6 +229,40 @@
 }
 
 /*** Contenu chat ***/
+.zone_date_chat_user
+{
+	display: block;
+	clear: both;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.date_chat_user
+{
+	display: inline-block;
+	color: #b3b3b3;
+}
+
+.trait_chat_gauche
+{
+	display: inline-block;
+	height: 1px;
+	width: 10px;
+	background-color: #b3b3b3;
+	margin-right: 15px;
+	vertical-align: middle;
+}
+
+.trait_chat_droit
+{
+	display: inline-block;
+	height: 1px;
+	width: 10px;
+	background-color: #b3b3b3;
+	margin-left: 15px;
+	vertical-align: middle;
+}
+
 .zone_chat_user
 {
 	clear: both;
@@ -427,39 +461,16 @@
 	box-shadow: 0 0 5px #ff1937;
 }
 
-.online, .offline
+.zone_statut_chat_users
 {
-	color: #b3b3b3;
+	display: block;
+	clear: both;
 	text-align: center;
 	margin-bottom: 10px;
 }
 
-.online:before, .online:after
+.online, .offline
 {
-	content: '';
-	width: 60px;
-	border-bottom: solid 1px #b3b3b3;
 	display: inline-block;
-	vertical-align: middle;
-}
-
-.offline:before, .offline:after
-{
-	content: '';
-	width: 52px;
-	border-bottom: solid 1px #b3b3b3;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.online:before, .offline:before
-{
-	margin-left: -100%;
-	margin-right: 5%;
-}
-
-.online:after, .offline:after
-{
-	margin-right: -100%;
-	margin-left: 5%;
+	color: #b3b3b3;
 }

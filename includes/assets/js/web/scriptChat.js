@@ -385,6 +385,8 @@ $(window).on('load', function()
     {
       $('#conversation_chat').html('');
 
+      var previousDate = '';
+
       // Affichage et formatage de tous les messages
       $(display).find('message').each(function()
       {
@@ -399,6 +401,16 @@ $(window).on('load', function()
 
         if (identifiant != '' && text != '')
         {
+          // Affichage de la date si différente de la précédente
+          if (date != previousDate)
+          {
+            html += '<div class="zone_date_chat_user">';
+              html += '<div class="trait_chat_gauche"></div>';
+              html += '<div class="date_chat_user">' + formatDateForDisplayLong(date) + '</div>';
+              html += '<div class="trait_chat_droit"></div>';
+            html += '</div>';
+          }
+
           // Formatage pseudo à partir du tableau php récupéré
           $.each(listUsers, function(key, value)
           {
@@ -436,6 +448,9 @@ $(window).on('load', function()
         }
       });
 
+      // Adaptation des séparations (dates)
+      adaptSeparationDate();
+
       // On repositionne le scroll en bas si on a saisi un message ou que la page s'initialise
       if (scrollUpdate == true)
         setScrollbarDown();
@@ -453,7 +468,12 @@ $(window).on('load', function()
       var html    = '';
 
       // Séparation des utilisateur connectés (toujours au minimum l'utilisateur en cours)
-      html = '<div class="online">En ligne</div>';
+      html = '<div class="zone_statut_chat_users">';
+        html += '<div class="trait_chat_gauche trait_online"></div>';
+        html += '<div class="online">En ligne</div>';
+        html += '<div class="trait_chat_droit trait_online"></div>';
+      html += '</div>';
+
       $('#utilisateurs_chat').append(html);
 
       $.each(JSON.parse(users), function(key, value)
@@ -467,7 +487,12 @@ $(window).on('load', function()
         // On va afficher la séparation des utilisateurs hors ligne à partir du premier
         if (offline != true && connected == false)
         {
-          html = '<div class="offline">Hors ligne</div>';
+          html = '<div class="zone_statut_chat_users">';
+            html += '<div class="trait_chat_gauche trait_offline"></div>';
+            html += '<div class="offline">Hors ligne</div>';
+            html += '<div class="trait_chat_droit trait_offline"></div>';
+          html += '</div>';
+
           $('#utilisateurs_chat').append(html);
           offline = true;
         }
@@ -507,6 +532,9 @@ $(window).on('load', function()
 
         // Insertion dans la zone
         $('#utilisateurs_chat').append(html);
+
+        // Adaptation des séparations (statut)
+        adaptSeparationStatut();
       });
     });
   }
@@ -657,6 +685,39 @@ $(window).on('load', function()
       $('.zone_insert_smiley').css('display', 'none');
       $('.triangle_chat_smileys').css('display', 'none');
     }
+  }
+
+  // Adaptation des traits du chat (dates)
+  function adaptSeparationDate()
+  {
+    var tailleTotale = $('.contenu_onglet_chat').width() - 90;
+
+    // Calcul de la taille de chaque trait
+    $('.zone_date_chat_user').each(function()
+    {
+      var tailleTexte = $(this).children('.date_chat_user').width();
+      var tailleTrait = (tailleTotale - tailleTexte - 30) / 2;
+
+      $(this).children('.trait_chat_gauche').css('width', tailleTrait + 'px');
+      $(this).children('.trait_chat_droit').css('width', tailleTrait + 'px');
+    });
+  }
+
+  // Adaptation des traits du chat (statut)
+  function adaptSeparationStatut()
+  {
+    var tailleTotale = $('.contenu_onglet_users').width() - 90;
+
+    // Calcul de la taille de chaque trait
+    var tailleTexteOnline  = $('.zone_statut_chat_users').children('.online').width();
+    var tailleTexteOffline = $('.zone_statut_chat_users').children('.offline').width();
+    var tailleTraitOnline  = (tailleTotale - tailleTexteOnline - 30) / 2;
+    var tailleTraitOffline = (tailleTotale - tailleTexteOffline - 30) / 2;
+
+    $('.zone_statut_chat_users').children('.trait_online').css('width', tailleTraitOnline + 'px');
+    $('.zone_statut_chat_users').children('.trait_online').css('width', tailleTraitOnline + 'px');
+    $('.zone_statut_chat_users').children('.trait_offline').css('width', tailleTraitOffline + 'px');
+    $('.zone_statut_chat_users').children('.trait_offline').css('width', tailleTraitOffline + 'px');
   }
 
   /******************/

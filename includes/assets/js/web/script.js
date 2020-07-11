@@ -756,6 +756,35 @@ function nl2br(chaine)
   return nl2br;
 }
 
+// Formate une date pour affichage (version texte)
+function formatDateForDisplayLong(date)
+{
+  var dateFormatted;
+
+  if (date.length == 8)
+  {
+    // Liste des jours et mois
+    var days   = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+    var months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+    // Récupération de la date
+    var jour  = date.substr(6, 2) - 1;
+    var mois  = date.substr(4, 2) - 1;
+    var annee = date.substr(0, 4);
+
+    // Conversion au format JS
+    var jsDate = new Date(annee, mois, jour);
+
+    // Formatage
+    dateFormatted = days[jsDate.getDay()] + ' ' + jour + ' ' + months[jsDate.getMonth()] + ' ' + annee;
+  }
+  else
+    dateFormatted = date;
+
+  // Retour
+  return dateFormatted;
+}
+
 // Formate un montant pour affichage
 function formatAmountForDisplay(amount, withCurrency)
 {
