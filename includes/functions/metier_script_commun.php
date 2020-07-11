@@ -149,9 +149,11 @@
   }
 
   // METIER : Mise à jour du ping d'un utilisateur
-  // RETOUR : Aucun
+  // RETOUR : Indicateur de connexion
   function updatePing()
   {
+    $userConnected = true;
+
     // Mise à jour si on est un utilisateur connecté
     if ($_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != 'admin')
     {
@@ -160,5 +162,13 @@
 
       physiqueUpdatePing($ping, $_SESSION['user']['identifiant']);
     }
+    else
+      $userConnected = false;
+
+    // Concaténation des données pour JS
+    $userConnectedJson = json_encode($userConnected);
+
+    // Retour
+    echo $userConnectedJson;
   }
 ?>

@@ -28,7 +28,7 @@ $(function()
 
   // Mise à jour du ping à chaque chargement de page et toutes 60 secondes
   updatePing();
-  setInterval(updatePing, 60000);
+  majPing = setInterval(updatePing, 60000);
 
   // Mise à jour du compteur des notifications toutes les 60 secondes
   updateNotifications();
@@ -298,7 +298,16 @@ function deleteCookie(cookieName)
 // Exécute le script php de mise à jour du ping
 function updatePing()
 {
-  $.post('/inside/includes/functions/script_commun.php', {function: 'updatePing'});
+  $.post('/inside/includes/functions/script_commun.php', {function: 'updatePing'}, function(data)
+  {
+    // Récupération des données
+    var userConnected = JSON.parse(data);
+
+    // Arrêt du script si pas d'utilisateur connecté
+    if (userConnected == false)
+      clearInterval(majPing);
+  });
+
 }
 
 // Exécute le script php de mise à jour du compteur de notifications
