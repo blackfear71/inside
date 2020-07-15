@@ -388,7 +388,7 @@ $(window).on('load', function()
       hideChatCss    = '-';
       ongletChatCss  = '#ff1937';
       ongletUsersCss = '#c81932';
-      cursorCss       = 'pointer';
+      cursorCss      = 'pointer';
 
       // On construit la fenêtre des utilisateurs
       html += '<div id="scroll_conversation" class="zone_onglet_users">';
@@ -401,7 +401,7 @@ $(window).on('load', function()
       hideChatCss    = '+';
       ongletChatCss  = '#ff1937';
       ongletUsersCss = '#ff1937';
-      cursorCss       = 'default';
+      cursorCss      = 'default';
 
       $('#onglet_users').hide();
     }
