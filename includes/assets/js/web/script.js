@@ -265,7 +265,7 @@ function setCookie(cookieName, cookieValue)
   expires.setTime(today.getTime() + (1*24*60*60*1000));
 
   // Cookie global (path=/)
-  document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/';
+  document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;SameSite=Lax';
 }
 
 function getCookie(cookieName)
