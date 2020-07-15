@@ -307,7 +307,6 @@ function updatePing()
     if (userConnected == false)
       clearInterval(majPing);
   });
-
 }
 
 // Exécute le script php de mise à jour du compteur de notifications

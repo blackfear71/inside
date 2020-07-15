@@ -21,20 +21,28 @@ $(window).on('load', function()
   // On lance le rafraichissement des messages toujours après l'affichage des zones
   if (cookieShowChat == 'true' && cookieWindowChat == '1')
   {
+    // Rafraichissement du chat
     refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
+
+    // Arrêt du rafraichissement des utilisateurs
     stopTimerRefresh(refreshUsers);
   }
   else if ((cookieShowChat == 'true' && cookieWindowChat == '2') || cookieShowChat == 'false')
   {
+    // Rafraichissement des utilisateurs
     refreshUsers = startTimerRefresh(rafraichirUtilisateurs, refreshUsers, intervalRefreshUsers);
+
+    // Arrêt du rafraichissement du chat
     stopTimerRefresh(refreshChat);
   }
 
   /*******************/
   /***   Actions   ***/
   /*******************/
-  // Positionnement de la fenêtre de chat en fonction du scroll ou du redimensionnement de la fenêtre
+  // Positionnement de la fenêtre de chat en fonction du scroll
   $(window).scroll(initPositionChat);
+
+  // Positionnement de la fenêtre de chat en fonction du redimensionnement de la fenêtre
   $(window).resize(function()
   {
     setTimeout(function()
@@ -49,21 +57,35 @@ $(window).on('load', function()
     // Si le chat est ouvert, on le ferme
     if (cookieShowChat == 'true')
     {
+      // Arrêt du rafraichissement du chat
       stopTimerRefresh(refreshChat);
+
+      // Redéfinition des cookies
       setCookie('showChat', false);
       setCookie('windowChat', '3');
+
+      // Récupération des cookies
       cookieShowChat   = getCookie('showChat');
       cookieWindowChat = getCookie('windowChat');
+
+      // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
     }
     // Sinon on l'ouvre sur la fenêtre de chat
     else
     {
+      // Redéfinition des cookies
       setCookie('showChat', true);
       setCookie('windowChat', '1');
+
+      // Récupération des cookies
       cookieShowChat   = getCookie('showChat');
       cookieWindowChat = getCookie('windowChat');
+
+      // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
+
+      // Relance de la mise à jour du chat
       refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
     }
   });
@@ -73,10 +95,19 @@ $(window).on('load', function()
   {
     if (cookieWindowChat != '3')
     {
+      // Arrêt du rafraichissement des utilisateurs
       stopTimerRefresh(refreshUsers);
+
+      // Redéfinition des cookies
       setCookie('windowChat', '1');
+
+      // Récupération des cookies
       cookieWindowChat = getCookie('windowChat');
+
+      // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
+
+      // Relance de la mise à jour du chat
       refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
     }
   });
@@ -84,10 +115,19 @@ $(window).on('load', function()
   // Rafraichissement utilisateurs (au clic sur le titre)
   $('#onglet_users').click(function()
   {
+    // Arrêt du rafraichissement du chat
     stopTimerRefresh(refreshChat);
+
+    // Redéfinition des cookies
     setCookie('windowChat', '2');
+
+    // Récupération des cookies
     cookieWindowChat = getCookie('windowChat');
+
+    // Initialisation de la vue
     initView(cookieShowChat, cookieWindowChat);
+
+    // Relance de la mise à jour des utilisateurs
     refreshUsers = startTimerRefresh(rafraichirUtilisateurs, refreshUsers, intervalRefreshUsers);
   });
 
@@ -158,23 +198,26 @@ $(window).on('load', function()
   /*********************/
   /***   Fonctions   ***/
   /*********************/
-  // Fonction mise en place intervalle rafraichissement chat
-  function startTimerRefresh(func, interval, time, paramFunc, paramInterval)
+  // Fonction mise en place interval rafraichissement chat
+  function startTimerRefresh(nomFonction, nomVariableInterval, dureeInterval, parametreFonctionAppelee, parametreInterval)
   {
     // On stoppe toujours un éventuel interval déjà en route
-    stopTimerRefresh(interval);
+    stopTimerRefresh(nomVariableInterval);
 
-    // Après avoir passé une fois TRUE en paramètre, on passe toujours FALSE ensuite à rafraichirConversation()
-    func(paramFunc);
-    var newInterval = setInterval(func, time, paramInterval);
+    // Appel de la fonction avec son éventuel paramètre
+    nomFonction(parametreFonctionAppelee);
 
-    return newInterval;
+    // Dans le cas de l'appel à rafraichirConversation(), après avoir passé une fois TRUE en paramètre, on passe toujours FALSE grâce au 3ème paramètre du setInterval(), ce qui permet d'éviter de redescendre le scroll
+    var nouvelInterval = setInterval(nomFonction, dureeInterval, parametreInterval);
+
+    // Retour
+    return nouvelInterval;
   }
 
-  // Fonction arrêt intervalle rafraichissement chat
-  function stopTimerRefresh(interval)
+  // Fonction arrêt interval rafraichissement chat
+  function stopTimerRefresh(nomVariableInterval)
   {
-    clearInterval(interval);
+    clearInterval(nomVariableInterval);
   }
 
   // Fonction d'initialisation des cookies
