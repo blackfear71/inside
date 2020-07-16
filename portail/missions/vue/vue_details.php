@@ -150,11 +150,13 @@
                         }
                         else
                         {
-                          // Fin zone gagnants si rang > 3
+                          // Fin zone gagnants si rang > 3 et début zone participants restants
                           if ($finGagnants == false)
                           {
                             echo '</div>';
                             $finGagnants = true;
+
+                            echo '<div class="zone_participants">';
                           }
                         }
 
@@ -180,7 +182,12 @@
                         $finGagnants = true;
                       }
 
+                      // Fin zone gagnants si exactement 3 médailles présentes ou si il reste des participants
                       if (!isset($ranking[$keyRank + 1]) OR $rankUser['rank'] != $ranking[$keyRank + 1]['rank'])
+                        echo '</div>';
+
+                      // Fin zone participants si rang > 3
+                      if (!isset($ranking[$keyRank + 1]) AND $rank > 3)
                         echo '</div>';
                     }
                   echo '</div>';
