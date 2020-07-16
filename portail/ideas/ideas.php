@@ -49,14 +49,14 @@
 
     case 'doInserer':
       // Insertion des données par le modèle
-      $id_idea = insertIdea($_POST, $_SESSION['user']['identifiant']);
+      $idIdea = insertIdea($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doChangerStatut':
       // Mise à jour des données par le modèle
-      $id_idea    = $_POST['id_idea'];
+      $idIdea     = $_POST['id_idea'];
       $view       = updateIdea($_POST, $_GET['view']);
-      $numeroPage = numPageIdea($id_idea, $view);
+      $numeroPage = numPageIdea($idIdea, $view);
       break;
 
     default:
@@ -99,11 +99,11 @@
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
-      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $id_idea);
+      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idIdea);
       break;
 
     case 'doInserer':
-      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $id_idea);
+      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $idIdea);
       break;
 
     case 'goConsulter':

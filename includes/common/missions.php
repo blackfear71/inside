@@ -5,30 +5,30 @@
   if (isset($_SESSION['missions']) AND !empty($_SESSION['missions']))
   {
     // Page courante
-    $page_courante = $_SERVER['PHP_SELF'];
+    $pageCourante = $_SERVER['PHP_SELF'];
 
     foreach ($_SESSION['missions'] as $missionUnique)
     {
       foreach ($missionUnique as $ligneMission)
       {
         // Récupération des données
-        $ref_mission        = $ligneMission['ref_mission'];
-        $key_mission        = $ligneMission['key_mission'];
-        $zone_mission       = $ligneMission['zone'];
-        $nom_page_mission   = $ligneMission['page'];
-        $position_mission   = $ligneMission['position'];
-        $icon_mission       = $ligneMission['icon'];
-        $class_icon_mission = $ligneMission['class'];
+        $refMission        = $ligneMission['ref_mission'];
+        $keyMission        = $ligneMission['key_mission'];
+        $zoneMission       = $ligneMission['zone'];
+        $nomPageMission    = $ligneMission['page'];
+        $positionMission   = $ligneMission['position'];
+        $iconeMission      = $ligneMission['icon'];
+        $classIconeMission = $ligneMission['class'];
 
         // Affichage bouton mission
-        if ($nom_page_mission == $page_courante)
+        if ($nomPageMission == $pageCourante)
         {
-          if ($zone_mission == $zone_inside)
+          if ($zoneMission == $zoneInside)
           {
-            echo '<form method="post" action="/inside/portail/missions/missions.php?action=doMission" class="' . $class_icon_mission . '">';
-              echo '<input type="hidden" name="ref_mission" value="' . $ref_mission . '" />';
-              echo '<input type="hidden" name="key_mission" value="' . $key_mission . '" />';
-              echo '<input type="submit" name="' . $ref_mission . '" value="" style="background-image: url(/inside/includes/images/missions/buttons/' . $icon_mission . '.png);" />';
+            echo '<form method="post" action="/inside/portail/missions/missions.php?action=doMission" class="' . $classIconeMission . '">';
+              echo '<input type="hidden" name="ref_mission" value="' . $refMission . '" />';
+              echo '<input type="hidden" name="key_mission" value="' . $keyMission . '" />';
+              echo '<input type="submit" name="' . $refMission . '" value="" style="background-image: url(/inside/includes/images/missions/buttons/' . $iconeMission . '.png);" />';
             echo '</form>';
           }
         }

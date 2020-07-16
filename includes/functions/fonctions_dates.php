@@ -65,6 +65,7 @@
 
     $formatMonth = $listeMois[$month];
 
+    // Retour
     return $formatMonth;
   }
 
@@ -89,6 +90,7 @@
 
     $formatMonth = $listeMois[$month];
 
+    // Retour
     return $formatMonth;
   }
 
@@ -102,6 +104,7 @@
     else
       $formattedWeek = $week;
 
+    // Retour
     return $formattedWeek;
   }
 
@@ -127,6 +130,7 @@
     else
       $formattedWeek = $week;
 
+    // Retour
     return $formattedWeek;
   }
 
@@ -134,48 +138,50 @@
     <=> calcule la durée en heures/minutes/secondes pour un traitement
     Retourne le temps sous forme d'un tableau
   */
-  function calcDureeTrt($hdeb, $hfin)
+  function calcDureeTrt($heureDeb, $heureFin)
   {
-    if (strlen($hdeb) == 6 AND strlen($hfin) == 6)
+    if (strlen($heureDeb) == 6 AND strlen($heureFin) == 6)
     {
       // Calcul (en secondes)
-      $hfin_sec  = substr($hfin, 0, 2)*60*60 + substr($hfin, 2, 2)*60 + substr($hfin, 4, 2);
-      $hdeb_sec  = substr($hdeb, 0, 2)*60*60 + substr($hdeb, 2, 2)*60 + substr($hdeb, 4, 2);
-      $duree_sec = $hfin - $hdeb;
+      $heureFinSecondes = substr($heureFin, 0, 2) * 60 * 60 + substr($heureFin, 2, 2) * 60 + substr($heureFin, 4, 2);
+      $heureDebSecondes = substr($heureDeb, 0, 2) * 60 * 60 + substr($heureDeb, 2, 2) * 60 + substr($heureDeb, 4, 2);
+      $dureeSecondes    = $heureFinSecondes - $heureDebSecondes;
 
       // Conversion
-      $total      = $duree_sec;
+      $total      = $dureeSecondes;
       $heures     = intval(abs($total / 3600));
       $total      = $total - ($heures * 3600);
       $minutes    = intval(abs($total / 60));
       $total      = $total - ($minutes * 60);
       $secondes   = $total;
 
-      $duree_format = array('heures'   => $heures,
-                            'minutes'  => $minutes,
-                            'secondes' => $secondes
+      $dureeFormat = array('heures'   => $heures,
+                           'minutes'  => $minutes,
+                           'secondes' => $secondes
                           );
 
-      return $duree_format;
+      // Retour
+      return $dureeFormat;
     }
   }
 
   /* ecartDatesEvent
     <=> calcule la durée en jours entre 2 dates pour une mission
   */
-  function ecartDatesEvent($date_deb, $date_fin)
+  function ecartDatesEvent($dateDeb, $dateFin)
   {
     $ecart = 0;
 
     // Calcul
-    $date1 = strtotime($date_deb);
-    $date2 = strtotime($date_fin);
+    $date1 = strtotime($dateDeb);
+    $date2 = strtotime($dateFin);
 
     $calcul = abs($date2 - $date1);
 
     // Formatage
-    $ecart = ($calcul / (60*60*24)) + 1;
+    $ecart = ($calcul / (60 * 60 * 24)) + 1;
 
+    // Retour
     return $ecart;
   }
 ?>

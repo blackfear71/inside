@@ -29,7 +29,7 @@
     /*************************/
     /* Sorties de la semaine */
     /*************************/
-    if ($films_semaine == "Y" AND $afficherSemaine == true)
+    if ($filmsSemaine == 'Y' AND $afficherSemaine == true)
     {
       echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Ils sortent cette semaine</div></div>';
 
@@ -58,7 +58,7 @@
     /*********************/
     /* Les plus attendus */
     /*********************/
-    if ($films_waited == "Y")
+    if ($filmsWaited == 'Y')
     {
       echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/waited_grey.png" alt="waited_grey" class="logo_titre_section" /><div class="texte_titre_section">Les films les plus attendus en ' . $_GET['year'] . '</div></div>';
 
@@ -93,9 +93,9 @@
     /**************************/
     /* Les prochaines sorties */
     /**************************/
-    if ($films_way_out == "Y")
+    if ($filmsWayOut == 'Y')
     {
-      if ($_GET['year'] >= date("Y"))
+      if ($_GET['year'] >= date('Y'))
         echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" /><div class="texte_titre_section">Les prochaines sorties organisées en ' . $_GET['year'] . '</div></div>';
       else
         echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/way_out_grey.png" alt="way_out_grey" class="logo_titre_section" /><div class="texte_titre_section">Les anciennes sorties organisées en ' . $_GET['year'] . '</div></div>';

@@ -43,25 +43,25 @@
 				echo '<td class="td_manage_users">';
 					switch ($user->getStatus())
 					{
-						case "Y":
+						case 'Y':
 							echo 'Mot de passe';
 							break;
 
-						case "I":
+						case 'I':
 							echo 'Inscription';
 							break;
-						case "D":
+						case 'D':
 							echo 'Désinscription';
 							break;
 
-						case "N":
+						case 'N':
 						default:
 							break;
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getStatus() == "Y")
+					if ($user->getStatus() == 'Y')
 					{
 						echo '<form method="post" action="manageusers.php?action=doAnnulerMdp" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
@@ -76,7 +76,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getStatus() == "I")
+					if ($user->getStatus() == 'I')
 					{
 						echo '<form method="post" action="manageusers.php?action=doRefuserInscription" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
@@ -91,7 +91,7 @@
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getStatus() == "D")
+					if ($user->getStatus() == 'D')
 					{
 						echo '<form method="post" action="manageusers.php?action=doRefuserDesinscription" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';

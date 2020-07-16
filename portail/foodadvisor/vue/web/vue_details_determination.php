@@ -20,11 +20,11 @@
         echo '<div class="zone_icones_mon_choix">';
           // Jours d'ouverture
           echo '<div class="zone_ouverture_mes_choix">';
-            $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+            $semaineShort  = array('Lu', 'Ma', 'Me', 'Je', 'Ve');
 
-            foreach ($semaine_short as $keyDay => $day_short)
+            foreach ($semaineShort as $keyDay => $dayShort)
             {
-              echo '<div id="jour_details_proposition_' . $keyDay . '">' . $day_short . '</div>';
+              echo '<div id="jour_details_proposition_' . $keyDay . '">' . $dayShort . '</div>';
             }
           echo '</div>';
 
@@ -77,7 +77,7 @@
 
         // Zone boutons
         echo '<div id="indicateurs_details_proposition" class="zone_reservation">';
-          if ($actions["reserver"] == true)
+          if ($actions['reserver'] == true)
           {
             // Bouton réservation
             echo '<form id="reserver_details_proposition" method="post" action="">';
@@ -97,7 +97,7 @@
           echo '<div id="reserved_details_proposition" class="reserved_details">Réservé !</div>';
 
           // Bouton annulation réservation
-          if ($actions["annuler_reserver"] == true)
+          if ($actions['annuler_reserver'] == true)
           {
             echo '<form id="annuler_details_proposition" method="post" action="" class="margin_top_10">';
               echo '<input type="hidden" name="id_restaurant" value="" />';
@@ -119,7 +119,7 @@
             echo 'Les participants';
 
             // Choix rapide
-            if ($actions["choix_rapide"] == true)
+            if ($actions['choix_rapide'] == true)
             {
               echo '<form id="choix_rapide_details_proposition" method="post" action="">';
                 echo '<input type="hidden" name="id_restaurant" value="" />';

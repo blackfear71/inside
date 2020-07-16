@@ -225,16 +225,16 @@
 
     $experience = $donnees['experience'];
     $niveau     = convertExperience($experience);
-    $exp_min    = 10 * $niveau ** 2;
-    $exp_max    = 10 * ($niveau + 1) ** 2;
-    $exp_lvl    = $exp_max - $exp_min;
-    $progress   = $experience - $exp_min;
-    $percent    = floor($progress * 100 / $exp_lvl);
+    $expMin     = 10 * $niveau ** 2;
+    $expMax     = 10 * ($niveau + 1) ** 2;
+    $expLvl     = $expMax - $expMin;
+    $progress   = $experience - $expMin;
+    $percent    = floor($progress * 100 / $expLvl);
 
     $_SESSION['user']['experience'] = array('niveau'   => $niveau,
-                                            'exp_min'  => $exp_min,
-                                            'exp_max'  => $exp_max,
-                                            'exp_lvl'  => $exp_lvl,
+                                            'exp_min'  => $expMin,
+                                            'exp_max'  => $expMax,
+                                            'exp_lvl'  => $expLvl,
                                             'progress' => $progress,
                                             'percent'  => $percent
                                            );
@@ -247,11 +247,11 @@
   function getMissionsToGenerate()
   {
     $listeMissions = array();
-    $date_jour     = date('Ymd');
+    $dateJour      = date('Ymd');
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $date_jour . ' >= date_deb AND ' . $date_jour . ' <= date_fin ORDER BY date_deb ASC');
+    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $dateJour . ' >= date_deb AND ' . $dateJour . ' <= date_fin ORDER BY date_deb ASC');
     while ($donnees = $reponse->fetch())
     {
       $mission = Mission::withData($donnees);
@@ -268,7 +268,7 @@
   function controlMissionComplete($user, $mission)
   {
     $missionToGenerate = 0;
-    $date_jour         = date('Ymd');
+    $dateJour         = date('Ymd');
 
     global $bdd;
 
@@ -281,7 +281,7 @@
     $reponse1->closeCursor();
 
     // Objectif atteint par l'utilisateur dans la journée
-    $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission->getId() . ' AND identifiant = "' . $user . '" AND date_mission = ' . $date_jour);
+    $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission->getId() . ' AND identifiant = "' . $user . '" AND date_mission = ' . $dateJour);
     $donnees2 = $reponse2->fetch();
 
     $avancementUser = $donnees2['avancement'];
@@ -345,13 +345,13 @@
       $boutonsMission = array();
 
       // Id mission
-      $id_mission = $mission->getId();
+      $idMission = $mission->getId();
 
       // Référence mission
       $reference = $mission->getReference();
 
       // Référence mission remplie
-      $ref_mission = $i;
+      $refMission = $i;
 
       // Page
       $page = $listePages[array_rand($listePages)];
@@ -430,9 +430,9 @@
       else
         $classe = '';
 
-      $boutonsMission = array('id_mission'  => $id_mission,
+      $boutonsMission = array('id_mission'  => $idMission,
                               'reference'   => $reference,
-                              'ref_mission' => $ref_mission,
+                              'ref_mission' => $refMission,
                               'key_mission' => $key,
                               'page'        => $page,
                               'zone'        => $zone,
@@ -488,21 +488,21 @@
     global $bdd;
 
     // Contrôle thème mission en cours
-    $theme_present = false;
+    $themePresent = false;
 
     $req1 = $bdd->query('SELECT * FROM themes WHERE type = "M" AND ' . date('Ymd') . ' >= date_deb AND ' . date('Ymd') . ' <= date_fin');
     $data1 = $req1->fetch();
 
     if ($req1->rowCount() > 0)
     {
-      $theme_present = true;
+      $themePresent = true;
       $theme         = Theme::withData($data1);
     }
 
     $req1->closeCursor();
 
     // Thème mission si en cours
-    if ($theme_present == true)
+    if ($themePresent == true)
     {
       if ($theme->getLogo() == 'Y')
       {
@@ -568,28 +568,28 @@
   // RETOUR : titre niveau formaté
   function formatTitleLvl($lvl)
   {
-    $name_lvl = '';
+    $nameLvl = '';
 
     switch ($lvl)
     {
       case '1';
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Seuls les plus forts y parviendront.</div></div></div>';
+        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Seuls les plus forts y parviendront.</div></div></div>';
         break;
 
       case '2';
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Vous êtes encore là ?</div></div>';
+        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Vous êtes encore là ?</div></div>';
         break;
 
       case '3';
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Votre charisme doit être impressionnant.</div></div>';
+        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Votre charisme doit être impressionnant.</div></div>';
         break;
 
       default:
-        $name_lvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div></div>';
+        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div></div>';
         break;
     }
 
-    return $name_lvl;
+    return $nameLvl;
   }
 
   // Formatage gagnants mission
@@ -877,7 +877,7 @@
         // Vérification succès débloqué
         if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
         {
-          $already_unlocked = false;
+          $alreadyUnlocked = false;
 
           // Récupération des données du succès
           $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
@@ -892,13 +892,13 @@
           if ($req1->rowCount() > 0)
           {
             if ($data1['value'] >= $limit)
-              $already_unlocked = true;
+              $alreadyUnlocked = true;
           }
 
           $req1->closeCursor();
 
           // Test si succès débloqué
-          if ($already_unlocked == false AND $value == $limit)
+          if ($alreadyUnlocked == false AND $value == $limit)
             $_SESSION['success'][$reference] = true;
         }
         break;
@@ -971,7 +971,7 @@
         // Vérification succès débloqué
         if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
         {
-          $already_unlocked = false;
+          $alreadyUnlocked = false;
 
           // Récupération des données du succès
           $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
@@ -986,13 +986,13 @@
           if ($req2->rowCount() > 0)
           {
             if ($data2['value'] >= $limit)
-              $already_unlocked = true;
+              $alreadyUnlocked = true;
           }
 
           $req2->closeCursor();
 
           // Test si succès débloqué
-          if ($already_unlocked == false AND $value >= $limit)
+          if ($alreadyUnlocked == false AND $value >= $limit)
             $_SESSION['success'][$reference] = true;
         }
         break;
@@ -1144,20 +1144,20 @@
     // Lecture expérience actuelle de l'utilisateur
     $req = $bdd->query('SELECT id, identifiant, experience FROM users WHERE identifiant = "' . $identifiant . '"');
     $data = $req->fetch();
-    $current_experience = $data['experience'];
+    $currentExperience = $data['experience'];
     $req->closeCursor();
 
-    $new_experience = $current_experience + $experience;
+    $newExperience = $currentExperience + $experience;
 
     // Mise à jour de l'utilisateur
     $req2 = $bdd->prepare('UPDATE users SET experience = :experience WHERE identifiant = "' . $identifiant . '"');
     $req2->execute(array(
-      'experience' => $new_experience
+      'experience' => $newExperience
     ));
     $req2->closeCursor();
 
     // Mise à jour des succès des niveaux
-    insertOrUpdateSuccesLevel($new_experience, $identifiant);
+    insertOrUpdateSuccesLevel($newExperience, $identifiant);
   }
 
   // Formatage Id type de restaurant
@@ -1313,17 +1313,17 @@
     if (!empty($file['name']))
     {
       // Données du fichier
-      $name_file  = $file['name'];
-      $type_file  = $file['type'];
-      $tmp_file   = $file['tmp_name'];
-      $error_file = $file['error'];
-      $size_file  = $file['size'];
+      $nameFile  = $file['name'];
+      $typeFile  = $file['type'];
+      $tmpFile   = $file['tmp_name'];
+      $errorFile = $file['error'];
+      $sizeFile  = $file['size'];
 
       // Limite taille maximale fichier (15 Mo)
-      $maxsize = 15728640;
+      $maxSize = 15728640;
 
       // Contrôle taille fichier
-      if ($error_file == 2 OR $size_file > $maxsize)
+      if ($errorFile == 2 OR $sizeFile > $maxSize)
       {
         $_SESSION['alerts']['file_too_big'] = true;
         $control_ok                         = false;
@@ -1332,7 +1332,7 @@
       // Contrôle fichier temporaire existant
       if ($control_ok == true)
       {
-        if (!is_uploaded_file($tmp_file))
+        if (!is_uploaded_file($tmpFile))
         {
           $_SESSION['alerts']['temp_not_found'] = true;
           $control_ok                           = false;
@@ -1346,7 +1346,7 @@
         {
           case 'jpg':
           case 'jpeg':
-            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg'))
+            if (!strstr($typeFile, 'jpg') && !strstr($typeFile, 'jpeg'))
             {
               $_SESSION['alerts']['wrong_file_type'] = true;
               $control_ok                            = false;
@@ -1354,7 +1354,7 @@
             break;
 
           case 'png':
-            if (!strstr($type_file, 'png'))
+            if (!strstr($typeFile, 'png'))
             {
               $_SESSION['alerts']['wrong_file_type'] = true;
               $control_ok                            = false;
@@ -1363,7 +1363,7 @@
 
           case 'all':
           default:
-            if (!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
+            if (!strstr($typeFile, 'jpg') && !strstr($typeFile, 'jpeg') && !strstr($typeFile, 'bmp') && !strstr($typeFile, 'gif') && !strstr($typeFile, 'png'))
             {
               $_SESSION['alerts']['wrong_file_type'] = true;
               $control_ok                            = false;
@@ -1375,13 +1375,13 @@
       // Récupération infos
       if ($control_ok == true)
       {
-        $type_image = pathinfo($name_file, PATHINFO_EXTENSION);
-        $new_name   = $name . '.' . $type_image;
+        $typeImage = pathinfo($nameFile, PATHINFO_EXTENSION);
+        $newName   = $name . '.' . $typeImage;
 
         $output = array('control_ok' => true,
-                        'new_name'   => $new_name,
-                        'tmp_file'   => $tmp_file,
-                        'type_file'  => $type_image
+                        'new_name'   => $newName,
+                        'tmp_file'   => $tmpFile,
+                        'type_file'  => $typeImage
                        );
       }
     }
@@ -1410,10 +1410,10 @@
   {
     $control_ok = true;
 
-    $tmp_file = $controls['tmp_file'];
+    $tmpFile = $controls['tmp_file'];
     $name     = $controls['new_name'];
 
-    if (!move_uploaded_file($tmp_file, $folder . $name))
+    if (!move_uploaded_file($tmpFile, $folder . $name))
     {
       $_SESSION['alerts']['wrong_file'] = true;
       $control_ok                       = false;

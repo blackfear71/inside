@@ -55,13 +55,13 @@
       $availableDay = true;
 
       // Vérification restaurant ouvert ce jour
-      $explodedOpened = explode(";", $data['opened']);
+      $explodedOpened = explode(';', $data['opened']);
 
       foreach ($explodedOpened as $keyOpened => $opened)
       {
         if (!empty($opened))
         {
-          if (date('N') == $keyOpened + 1 AND $opened == "N")
+          if (date('N') == $keyOpened + 1 AND $opened == 'N')
           {
             $availableDay = false;
             break;

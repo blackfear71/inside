@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Les Petits Pédestres";
-      $style_head      = "stylePP.css";
-      $script_head     = "scriptPP.js";
-      $angular_head    = true;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Les Petits Pédestres';
+      $styleHead      = 'stylePP.css';
+      $scriptHead     = 'scriptPP.js';
+      $angularHead    = true;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
     <header>
       <?php
-        $title = "Les Petits Pédestres";
+        $title = 'Les Petits Pédestres';
 
         include('../../includes/common/header.php');
         include('../../includes/common/onglets.php');
@@ -32,7 +32,7 @@
       <!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu" class="aside_nav">
 				<?php
-					$ajouter_parcours = true;
+					$ajouterParcours = true;
 
 					include('../../includes/common/aside.php');
 				?>
@@ -49,7 +49,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

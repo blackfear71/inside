@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Calendars";
-      $style_head      = "styleCA.css";
-      $script_head     = "scriptCA.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Calendars';
+      $styleHead      = 'styleCA.css';
+      $scriptHead     = 'scriptCA.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Calendars";
+        $title = 'Calendars';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -55,7 +55,7 @@
           /*******************/
           echo '<div class="zone_calendars_left">';
             // Saisie
-            if ($preferences->getManage_calendars() == "Y")
+            if ($preferences->getManage_calendars() == 'Y')
             {
               $listeMois = array('01' => 'Janvier',
                                  '02' => 'Février',
@@ -71,8 +71,8 @@
                                  '12' => 'Décembre'
                                 );
 
-              $annee_debut = date('Y') - 2;
-              $annee_fin   = date('Y') + 2;
+              $anneeDebut = date('Y') - 2;
+              $anneeFin   = date('Y') + 2;
 
               echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir un calendrier</div></div>';
 
@@ -90,7 +90,7 @@
                   // Listbox année
                   echo '<select name="years" class="listbox" required>';
                     echo '<option value="" disabled selected hidden>Année</option>';
-                    for ($i = $annee_debut; $i <= $annee_fin; $i++)
+                    for ($i = $anneeDebut; $i <= $anneeFin; $i++)
                     {
                       echo '<option value="' . $i . '">' . $i . '</option>';
                     }
@@ -144,7 +144,7 @@
                     echo '<div class="zone_boutons">';
                       echo '<a href="../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar() . '" class="download_calendar" download><img src="../../includes/icons/calendars/download_grey.png" alt="download_grey" title="Télécharger" class="download_icon" /></a>';
 
-                      if ($preferences->getManage_calendars() == "Y")
+                      if ($preferences->getManage_calendars() == 'Y')
                       {
                         echo '<form id="delete_calendar_' . $calendrier->getId() . '" method="post" action="calendars.php?year=' . $_GET['year'] . '&action=doSupprimer" class="download_calendar" >';
                           echo '<input type="hidden" name="id_cal" value="' . $calendrier->getId() . '" />';

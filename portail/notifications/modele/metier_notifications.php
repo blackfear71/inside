@@ -6,36 +6,36 @@
   // RETOUR : Nombre de pages
   function getPages($view, $user)
   {
-    $nb_pages    = 0;
-    $nb_notif    = 0;
-    $nb_par_page = 20;
+    $nombrePages         = 0;
+    $nombreNotifications = 0;
+    $nombreParPage       = 20;
 
     global $bdd;
 
-    if ($view == "me")
+    if ($view == 'me')
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE author = "' . $user . '" OR category = "' . $user . '"');
-    elseif ($view == "week")
+    elseif ($view == 'week')
     {
-      $date_moins_7 = date("Ymd", strtotime(date("Ymd") . ' - 7 days'));
-      $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7);
+      $dateMoins7 = date('Ymd', strtotime(date('Ymd') . ' - 7 days'));
+      $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications WHERE date <= ' . date('Ymd') . ' AND date > ' . $dateMoins7);
     }
     else
       $req = $bdd->query('SELECT COUNT(id) AS nb_notif FROM notifications');
 
     $data = $req->fetch();
 
-    $nb_notif = $data['nb_notif'];
+    $nombreNotifications = $data['nb_notif'];
 
     $req->closeCursor();
 
-    $nb_pages = ceil($nb_notif / $nb_par_page);
+    $nombrePages = ceil($nombreNotifications / $nombreParPage);
 
-    return $nb_pages;
+    return $nombrePages;
   }
 
   // METIER : Lecture des notifications en fonction de la vue
   // RETOUR : Liste des notifications
-  function getNotifications($view, $user, $nb_pages, $page)
+  function getNotifications($view, $user, $nombrePages, $page)
   {
     $listeNotifications = array();
 
@@ -44,52 +44,52 @@
     // Récupération des notifications en fonction de la vue
     switch ($view)
     {
-      case "me":
+      case 'me':
         // Pagination
-        $nb_par_page = 20;
+        $nombreParPage = 20;
 
         // Contrôle dernière page
-        if ($page > $nb_pages)
-          $page = $nb_pages;
+        if ($page > $nombrePages)
+          $page = $nombrePages;
 
         // Calcul première entrée
-        $premiere_entree = ($page - 1) * $nb_par_page;
+        $premiereEntree = ($page - 1) * $nombreParPage;
 
-        $reponse = $bdd->query('SELECT * FROM notifications WHERE author = "' . $user . '" OR category = "' . $user . '" ORDER BY date DESC, time DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT * FROM notifications WHERE author = "' . $user . '" OR category = "' . $user . '" ORDER BY date DESC, time DESC, id DESC LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "today":
-        $reponse = $bdd->query('SELECT * FROM notifications WHERE date = ' . date("Ymd") . ' ORDER BY time DESC, id DESC');
+      case 'today':
+        $reponse = $bdd->query('SELECT * FROM notifications WHERE date = ' . date('Ymd') . ' ORDER BY time DESC, id DESC');
         break;
 
-      case "week":
+      case 'week':
         // Pagination
-        $nb_par_page = 20;
+        $nombreParPage = 20;
 
         // Contrôle dernière page
-        if ($page > $nb_pages)
-          $page = $nb_pages;
+        if ($page > $nombrePages)
+          $page = $nombrePages;
 
         // Calcul première entrée
-        $premiere_entree = ($page - 1) * $nb_par_page;
+        $premiereEntree = ($page - 1) * $nombreParPage;
 
-        $date_moins_7 = date("Ymd", strtotime(date("Ymd") . ' - 7 days'));
-        $reponse = $bdd->query('SELECT * FROM notifications WHERE date <= ' . date("Ymd") . ' AND date > ' . $date_moins_7 . ' ORDER BY date DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $dateMoins7 = date('Ymd', strtotime(date('Ymd') . ' - 7 days'));
+        $reponse = $bdd->query('SELECT * FROM notifications WHERE date <= ' . date('Ymd') . ' AND date > ' . $dateMoins7 . ' ORDER BY date DESC, id DESC LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "all":
+      case 'all':
       default:
         // Pagination
-        $nb_par_page = 20;
+        $nombreParPage = 20;
 
         // Contrôle dernière page
-        if ($page > $nb_pages)
-          $page = $nb_pages;
+        if ($page > $nombrePages)
+          $page = $nombrePages;
 
         // Calcul première entrée
-        $premiere_entree = ($page - 1) * $nb_par_page;
+        $premiereEntree = ($page - 1) * $nombreParPage;
 
-        $reponse = $bdd->query('SELECT * FROM notifications ORDER BY date DESC, time DESC, id DESC LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+        $reponse = $bdd->query('SELECT * FROM notifications ORDER BY date DESC, time DESC, id DESC LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
     }
 
@@ -113,59 +113,59 @@
 
     foreach ($notifications as $key => $notification)
     {
-      $icone  = "";
-      $phrase = "";
-      $lien   = "";
+      $icone  = '';
+      $phrase = '';
+      $lien   = '';
 
       // Paramétrage des icônes, phrases et liens en fonction de la catégorie
       switch ($notification->getCategory())
       {
-        case "film":
+        case 'film':
           // Recherche du titre du film
           $reponse = $bdd->query('SELECT id, film, to_delete FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $titre_film = $donnees['film'];
-          $to_delete  = $donnees['to_delete'];
+          $titreFilm = $donnees['film'];
+          $toDelete  = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          if ($to_delete != "Y")
+          if ($toDelete != 'Y')
           {
-            $icone  = "movie_house";
-            $phrase = "Le film <strong>" . $titre_film . "</strong> vient d'être ajouté ! Allez vite le voir &nbsp;<img src='../../includes/icons/common/smileys/1.png' alt='smiley_1' class='smiley' />";
-            $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
+            $icone  = 'movie_house';
+            $phrase = 'Le film <strong>' . $titreFilm . '</strong> vient d\'être ajouté ! Allez vite le voir &nbsp;<img src="../../includes/icons/common/smileys/1.png" alt="smiley_1" class="smiley" />';
+            $lien   = '/inside/portail/moviehouse/details.php?id_film=' . $notification->getContent() . '&action=goConsulter';
           }
           break;
 
-        case "doodle":
+        case 'doodle':
           // Recherche du titre du film et du Doodle
           $reponse = $bdd->query('SELECT id, film, doodle, to_delete FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $titre_film = $donnees['film'];
-          $doodle     = $donnees['doodle'];
-          $to_delete  = $donnees['to_delete'];
+          $titreFilm = $donnees['film'];
+          $doodle    = $donnees['doodle'];
+          $toDelete  = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          if ($to_delete != "Y")
+          if ($toDelete != 'Y')
           {
-            $icone  = "doodle";
-            $phrase = "Un Doodle vient d'être mis en place pour le film <strong>" . $titre_film . "</strong>. N'oubliez pas d'y répondre si vous êtes intéressé(e) !";
+            $icone  = 'doodle';
+            $phrase = 'Un Doodle vient d\'être mis en place pour le film <strong>' . $titreFilm . '</strong>. N\'oubliez pas d\'y répondre si vous êtes intéressé(e) !';
             $lien   = $doodle;
           }
           break;
 
-        case "cinema":
+        case 'cinema':
           // Recherche du titre du film
           $reponse = $bdd->query('SELECT id, film, to_delete FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $titre_film = $donnees['film'];
-          $to_delete  = $donnees['to_delete'];
+          $titreFilm = $donnees['film'];
+          $toDelete  = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          if ($to_delete != "Y")
+          if ($toDelete != 'Y')
           {
-            $icone  = "way_out";
-            $phrase = "Une sortie cinéma a été programmée <u>aujourd'hui</u> pour le film <strong>" . $titre_film . "</strong>.";
-            $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter";
+            $icone  = 'way_out';
+            $phrase = 'Une sortie cinéma a été programmée <u>aujourd\'hui</u> pour le film <strong>' . $titreFilm . '</strong>.';
+            $lien   = '/inside/portail/moviehouse/details.php?id_film=' . $notification->getContent() . '&action=goConsulter';
           }
           break;
 
@@ -173,53 +173,53 @@
           // Recherche du titre du film
           $reponse = $bdd->query('SELECT id, film FROM movie_house WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $titre_film = $donnees['film'];
+          $titreFilm = $donnees['film'];
           $reponse->closeCursor();
 
-          $icone  = "comments";
-          $phrase = "Des commentaires ont été publiés pour le film <strong>" . $titre_film . "</strong>, n'oubliez pas de les suivre dans la journée !";
-          $lien   = "/inside/portail/moviehouse/details.php?id_film=" . $notification->getContent() . "&action=goConsulter&anchor=comments";
+          $icone  = 'comments';
+          $phrase = 'Des commentaires ont été publiés pour le film <strong>' . $titreFilm . '</strong>, n\'oubliez pas de les suivre dans la journée !';
+          $lien   = '/inside/portail/moviehouse/details.php?id_film=' . $notification->getContent() . '&action=goConsulter&anchor=comments';
           break;
 
-        case "calendrier":
+        case 'calendrier':
           // Recherche mois et année
           $reponse = $bdd->query('SELECT * FROM calendars WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $mois      = formatMonthForDisplay($donnees['month']);
-          $annee     = $donnees['year'];
-          $to_delete = $donnees['to_delete'];
+          $mois     = formatMonthForDisplay($donnees['month']);
+          $annee    = $donnees['year'];
+          $toDelete = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          if ($to_delete != "Y")
+          if ($toDelete != 'Y')
           {
-            $icone  = "calendars";
+            $icone = 'calendars';
 
-            if (strtolower(substr($mois, 0, 1)) == "a" OR strtolower(substr($mois, 0, 1)) == "o")
-              $phrase = "Un calendrier vient d'être mis en ligne pour le mois d'<strong>" . $mois . " " . $annee . "</strong>.";
+            if (strtolower(substr($mois, 0, 1)) == 'a' OR strtolower(substr($mois, 0, 1)) == 'o')
+              $phrase = 'Un calendrier vient d\'être mis en ligne pour le mois d\'<strong>' . $mois . ' ' . $annee . '</strong>.';
             else
-              $phrase = "Un calendrier vient d'être mis en ligne pour le mois de <strong>" . $mois . " " . $annee . "</strong>.";
+              $phrase = 'Un calendrier vient d\'être mis en ligne pour le mois de <strong>' . $mois . ' ' . $annee . '</strong>.';
 
-            $lien   = "/inside/portail/calendars/calendars.php?year=" . $annee . "&action=goConsulter";
+            $lien = '/inside/portail/calendars/calendars.php?year=' . $annee . '&action=goConsulter';
           }
           break;
 
-        case "annexe":
+        case 'annexe':
           // Recherche titre
           $reponse = $bdd->query('SELECT * FROM calendars_annexes WHERE id = ' . $notification->getContent());
           $donnees = $reponse->fetch();
-          $titre     = $donnees['title'];
-          $to_delete = $donnees['to_delete'];
+          $titre    = $donnees['title'];
+          $toDelete = $donnees['to_delete'];
           $reponse->closeCursor();
 
-          if ($to_delete != "Y")
+          if ($toDelete != 'Y')
           {
-            $icone  = "calendars";
-            $phrase = "Une annexe vient d'être mise en ligne (<strong>" . $titre . "</strong>).";
-            $lien   = "/inside/portail/calendars/calendars.php?action=goConsulterAnnexes";
+            $icone  = 'calendars';
+            $phrase = 'Une annexe vient d\'être mise en ligne (<strong>' . $titre . '</strong>).';
+            $lien   = '/inside/portail/calendars/calendars.php?action=goConsulterAnnexes';
           }
           break;
 
-        case "culte":
+        case 'culte':
           // Recherche auteur et coupable ;)
           $reponse1 = $bdd->query('SELECT * FROM collector WHERE id = ' . $notification->getContent());
           $donnees1 = $reponse1->fetch();
@@ -230,12 +230,12 @@
             if ($reponse2->rowCount() > 0)
               $author = $donnees2['pseudo'];
             else
-              $author = formatUnknownUser("", false, true);
+              $author = formatUnknownUser('', false, true);
 
             $reponse2->closeCursor();
 
             // Si speaker autre que "Autre"
-            if ($donnees1['type_speaker'] != "other")
+            if ($donnees1['type_speaker'] != 'other')
             {
               $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
               $donnees3 = $reponse3->fetch();
@@ -243,7 +243,7 @@
               if ($reponse3->rowCount() > 0)
                 $speaker = $donnees3['pseudo'];
               else
-                $speaker = formatUnknownUser("", false, true);
+                $speaker = formatUnknownUser('', false, true);
 
               $reponse3->closeCursor();
             }
@@ -255,12 +255,12 @@
           // Recherche du numéro de page
           $numeroPage = numeroPageCollector($notification->getContent());
 
-          $icone  = "collector";
-          $phrase = "<strong>" . $speaker . "</strong> en a encore dit une belle ! Merci <strong>" . $author . "</strong> &nbsp;<img src='../../includes/icons/common/smileys/2.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $numeroPage . "&sort=dateDesc&filter=none&anchor=" . $notification->getContent();
+          $icone  = 'collector';
+          $phrase = '<strong>' . $speaker . '</strong> en a encore dit une belle ! Merci <strong>' . $author . '</strong> &nbsp;<img src="../../includes/icons/common/smileys/2.png" alt="smiley_2" class="smiley" />';
+          $lien   = '/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $notification->getContent();
           break;
 
-        case "culte_image":
+        case 'culte_image':
           // Recherche auteur et coupable ;)
           $reponse1 = $bdd->query('SELECT * FROM collector WHERE id = ' . $notification->getContent());
           $donnees1 = $reponse1->fetch();
@@ -271,12 +271,12 @@
             if ($reponse2->rowCount() > 0)
               $author = $donnees2['pseudo'];
             else
-              $author = formatUnknownUser("", false, true);
+              $author = formatUnknownUser('', false, true);
 
             $reponse2->closeCursor();
 
             // Si speaker autre que "Autre"
-            if ($donnees1['type_speaker'] != "other")
+            if ($donnees1['type_speaker'] != 'other')
             {
               $reponse3 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $donnees1['speaker'] . '"');
               $donnees3 = $reponse3->fetch();
@@ -284,7 +284,7 @@
               if ($reponse3->rowCount() > 0)
                 $speaker = $donnees3['pseudo'];
               else
-                $speaker = formatUnknownUser("", false, true);
+                $speaker = formatUnknownUser('', false, true);
 
               $reponse3->closeCursor();
             }
@@ -296,13 +296,13 @@
           // Recherche du numéro de page
           $numeroPage = numeroPageCollector($notification->getContent());
 
-          $icone  = "collector";
-          $phrase = "Regarde ce qu'a fait <strong>" . $speaker . "</strong> ! Merci <strong>" . $author . "</strong> pour ce moment &nbsp;<img src='../../includes/icons/common/smileys/1.png' alt='smiley_2' class='smiley' />";
-          $lien   = "/inside/portail/collector/collector.php?action=goConsulter&page=" . $numeroPage . "&sort=dateDesc&filter=none&anchor=" . $notification->getContent();
+          $icone  = 'collector';
+          $phrase = 'Regarde ce qu\'a fait <strong>' . $speaker . '</strong> ! Merci <strong>' . $author . '</strong> pour ce moment &nbsp;<img src="../../includes/icons/common/smileys/1.png" alt="smiley_2" class="smiley" />';
+          $lien   = '/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $notification->getContent();
           break;
 
-        case "depense":
-          list($user1, $user2) = explode(";", $notification->getContent());
+        case 'depense':
+          list($user1, $user2) = explode(';', $notification->getContent());
 
           // Recherche pseudo + généreux
           $reponse1 = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $user1 . '"');
@@ -311,7 +311,7 @@
           if ($reponse1->rowCount() > 0)
             $genereux = $donnees1['pseudo'];
           else
-            $genereux = formatUnknownUser("", false, true);
+            $genereux = formatUnknownUser('', false, true);
 
           $reponse1->closeCursor();
 
@@ -322,16 +322,16 @@
           if ($reponse2->rowCount() > 0)
             $radin = $donnees2['pseudo'];
           else
-            $radin = formatUnknownUser("", false, true);
+            $radin = formatUnknownUser('', false, true);
 
           $reponse2->closeCursor();
 
-          $icone  = "expense_center";
-          $phrase = "La semaine dernière, <strong>" . $genereux . "</strong> a été le plus généreux, tandis que <strong>" . $radin . "</strong> a carrément été le plus radin...";
-          $lien   = "";
+          $icone  = 'expense_center';
+          $phrase = 'La semaine dernière, <strong>' . $genereux . '</strong> a été le plus généreux, tandis que <strong>' . $radin . '</strong> a carrément été le plus radin...';
+          $lien   = '';
           break;
 
-        case "inscrit":
+        case 'inscrit':
           // Recherche pseudo
           $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
@@ -339,16 +339,16 @@
           if ($reponse->rowCount() > 0)
             $inscrit = $donnees['pseudo'];
           else
-            $inscrit = formatUnknownUser("", false, true);
+            $inscrit = formatUnknownUser('', false, true);
 
           $reponse->closeCursor();
 
-          $icone  = "inside";
-          $phrase = "<strong>" . $inscrit . "</strong> vient de s'inscrire, souhaitez-lui la bienvenue sur Inside !";
-          $lien   = "";
+          $icone  = 'inside';
+          $phrase = '<strong>' . $inscrit . '</strong> vient de s\'inscrire, souhaitez-lui la bienvenue sur Inside !';
+          $lien   = '';
           break;
 
-        case "idee":
+        case 'idee':
           // Recherche idée
           $reponse1 = $bdd->query('SELECT id, subject, author, status FROM ideas WHERE id = "' . $notification->getContent() . '"');
           $donnees1 = $reponse1->fetch();
@@ -358,18 +358,18 @@
           switch ($donnees1['status'])
           {
             // Ouverte
-            case "O":
+            case 'O':
             // Prise en charge
-            case "C":
+            case 'C':
             // En progrès
-            case "P":
+            case 'P':
               $view = 'inprogress';
               break;
 
             // Terminée
-            case "D":
+            case 'D':
             // Rejetée
-            case "R":
+            case 'R':
               $view = 'done';
               break;
 
@@ -385,7 +385,7 @@
           if ($reponse2->rowCount() > 0)
             $auteur = $donnees2['pseudo'];
           else
-            $auteur = formatUnknownUser("", false, true);
+            $auteur = formatUnknownUser('', false, true);
 
           $reponse2->closeCursor();
 
@@ -394,106 +394,106 @@
           // Recherche du numéro de page
           $numeroPage = numPageIdea($notification->getContent(), $view);
 
-          $icone  = "ideas";
-          $phrase = "Une nouvelle idée <strong>" . $sujet . "</strong> vient tout juste d'être publiée par <strong>" . $auteur . "</strong> !";
-          $lien   = "/inside/portail/ideas/ideas.php?view=" . $view . "&page=" . $numeroPage . "&action=goConsulter&anchor=" . $notification->getContent();
+          $icone  = 'ideas';
+          $phrase = 'Une nouvelle idée <strong>' . $sujet . '</strong> vient tout juste d\'être publiée par <strong>' . $auteur . '</strong> !';
+          $lien   = '/inside/portail/ideas/ideas.php?view=' . $view . '&page=' . $numeroPage . '&action=goConsulter&anchor=' . $notification->getContent();
           break;
 
-        case "start_mission":
+        case 'start_mission':
           // Recherche données mission
           $reponse = $bdd->query('SELECT id, mission, date_deb, date_fin, heure FROM missions WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
-          $id_mission = $donnees['id'];
-          $mission    = $donnees['mission'];
-          $date_deb   = $donnees['date_deb'];
-          $date_fin   = $donnees['date_fin'];
-          $heure_deb  = $donnees['heure'];
+          $idMission = $donnees['id'];
+          $mission   = $donnees['mission'];
+          $dateDeb   = $donnees['date_deb'];
+          $dateFin   = $donnees['date_fin'];
+          $heureDeb  = $donnees['heure'];
 
           $reponse->closeCursor();
 
-          $icone  = "missions";
-          $phrase = "La mission <strong>" . $mission . "</strong> se lance à " . formatTimeForDisplayLight($heure_deb) . ", n'oubliez pas de participer tous les jours jusqu'au <strong>" . formatDateForDisplay($date_fin) . "</strong>.";
+          $icone  = 'missions';
+          $phrase = 'La mission <strong>' . $mission . '</strong> se lance à ' . formatTimeForDisplayLight($heureDeb) . ', n\'oubliez pas de participer tous les jours jusqu\'au <strong>' . formatDateForDisplay($dateFin) . '</strong>.';
 
           // Premier jour, avant l'heure
-          if (date("Ymd") == $date_deb AND date("His") < $heure_deb)
-            $lien = "/inside/portail/missions/missions.php?action=goConsulter";
+          if (date('Ymd') == $dateDeb AND date('His') < $heureDeb)
+            $lien = '/inside/portail/missions/missions.php?action=goConsulter';
           // Premier jour, après l'heure
-          elseif (date("Ymd") == $date_deb AND date("His") >= $heure_deb)
-            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          elseif (date('Ymd') == $dateDeb AND date('His') >= $heureDeb)
+            $lien = '/inside/portail/missions/details.php?id_mission=' . $idMission . '&action=goConsulter';
           // Autre jour
           else
-            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+            $lien = '/inside/portail/missions/details.php?id_mission=' . $idMission . '&action=goConsulter';
 
           break;
 
-        case "end_mission":
+        case 'end_mission':
           // Recherche données mission
           $reponse = $bdd->query('SELECT id, mission FROM missions WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
-          $id_mission = $donnees['id'];
-          $mission    = $donnees['mission'];
+          $idMission = $donnees['id'];
+          $mission   = $donnees['mission'];
 
           $reponse->closeCursor();
 
-          $icone  = "missions";
-          $phrase = "La mission <strong>" . $mission . "</strong> se termine aujourd'hui ! Trouvez vite les derniers objectifs !";
-          $lien   = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+          $icone  = 'missions';
+          $phrase = 'La mission <strong>' . $mission . '</strong> se termine aujourd\'hui ! Trouvez vite les derniers objectifs !';
+          $lien   = '/inside/portail/missions/details.php?id_mission=' . $idMission . '&action=goConsulter';
           break;
 
-        case "one_mission":
+        case 'one_mission':
           // Recherche données mission
           $reponse = $bdd->query('SELECT id, mission, date_deb, heure FROM missions WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
-          $id_mission = $donnees['id'];
-          $mission    = $donnees['mission'];
-          $date_deb   = $donnees['date_deb'];
-          $heure_deb  = $donnees['heure'];
+          $idMission = $donnees['id'];
+          $mission   = $donnees['mission'];
+          $dateDeb   = $donnees['date_deb'];
+          $heureDeb  = $donnees['heure'];
 
           $reponse->closeCursor();
 
-          $icone  = "missions";
-          $phrase = "La mission <strong>" . $mission . "</strong> se déroule aujourd'hui uniquement à partir de " . formatTimeForDisplayLight($heure_deb) . " ! Trouvez vite les objectifs !";
+          $icone  = 'missions';
+          $phrase = 'La mission <strong>' . $mission . '</strong> se déroule aujourd\'hui uniquement à partir de ' . formatTimeForDisplayLight($heureDeb) . ' ! Trouvez vite les objectifs !';
 
           // Mission de 1 jour (avant l'heure)
-          if (date("Ymd") <= $date_deb AND date("His") < $heure_deb)
-            $lien = "/inside/portail/missions/missions.php?action=goConsulter";
+          if (date('Ymd') <= $dateDeb AND date('His') < $heureDeb)
+            $lien = '/inside/portail/missions/missions.php?action=goConsulter';
           // Mission de 1 jour (après l'heure)
           else
-            $lien = "/inside/portail/missions/details.php?id_mission=" . $id_mission . "&action=goConsulter";
+            $lien = '/inside/portail/missions/details.php?id_mission=' . $idMission . '&action=goConsulter';
 
           break;
 
-        case "recipe":
+        case 'recipe':
           // Recherche données recette
           $reponse = $bdd->query('SELECT id, year FROM cooking_box WHERE id = "' . $notification->getContent() . '"');
           $donnees = $reponse->fetch();
 
-          $id_recette = $donnees['id'];
-          $year       = $donnees['year'];
+          $idRecette = $donnees['id'];
+          $year      = $donnees['year'];
 
           $reponse->closeCursor();
 
-          $icone  = "cooking_box";
-          $phrase = "Une <strong>nouvelle recette</strong> vient d'être ajoutée, allez vite la consulter !";
-          $lien   = "/inside/portail/cookingbox/cookingbox.php?year=" . $year . "&action=goConsulter&anchor=" . $id_recette;
+          $icone  = 'cooking_box';
+          $phrase = 'Une <strong>nouvelle recette</strong> vient d\'être ajoutée, allez vite la consulter !';
+          $lien   = '/inside/portail/cookingbox/cookingbox.php?year=' . $year . '&action=goConsulter&anchor=' . $idRecette;
           break;
 
-        case "changelog":
+        case 'changelog':
           // Récupération données journal
           list($week, $year) = explode(';', $notification->getContent());
 
-          $icone  = "inside";
-          $phrase = "Un <strong>nouveau journal</strong> vient d'être ajouté pour la <strong>semaine " . formatWeekForDisplay($week) . "</strong> (" . $year . "), allez vite voir comment le site a évolué !";
-          $lien   = "/inside/portail/changelog/changelog.php?year=" . $year . "&action=goConsulter&anchor=" . $week;
+          $icone  = 'inside';
+          $phrase = 'Un <strong>nouveau journal</strong> vient d\'être ajouté pour la <strong>semaine ' . formatWeekForDisplay($week) . '</strong> (' . $year . '), allez vite voir comment le site a évolué !';
+          $lien   = '/inside/portail/changelog/changelog.php?year=' . $year . '&action=goConsulter&anchor=' . $week;
           break;
 
         default:
-          $icone  = "inside";
+          $icone  = 'inside';
           $phrase = $notification->getContent();
-          $lien   = "";
+          $lien   = '';
           break;
       }
 
@@ -513,9 +513,9 @@
   // RETOUR : Numéro de page
   function numeroPageCollector($id)
   {
-    $numPage     = 0;
-    $nb_par_page = 18;
-    $position    = 1;
+    $numPage       = 0;
+    $nombreParPage = 18;
+    $position      = 1;
 
     global $bdd;
 
@@ -530,7 +530,7 @@
     }
     $reponse->closeCursor();
 
-    $numPage = ceil($position / $nb_par_page);
+    $numPage = ceil($position / $nombreParPage);
 
     return $numPage;
   }
@@ -539,9 +539,9 @@
   // RETOUR : Numéro de page
   function numPageIdea($id, $view)
   {
-    $numPage     = 0;
-    $nb_par_page = 18;
-    $position    = 1;
+    $numPage       = 0;
+    $nombreParPage = 18;
+    $position      = 1;
 
     global $bdd;
 
@@ -590,7 +590,7 @@
     }
     $reponse->closeCursor();
 
-    $numPage = ceil($position / $nb_par_page);
+    $numPage = ceil($position / $nombreParPage);
 
     return $numPage;
   }

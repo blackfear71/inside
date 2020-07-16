@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = 'Portail';
-      $style_head      = 'stylePortail.css';
-      $script_head     = 'scriptPortail.js';
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Portail';
+      $styleHead      = 'stylePortail.css';
+      $scriptHead     = 'scriptPortail.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -39,7 +39,7 @@
 
       <!-- Celsius -->
       <?php
-        $celsius = "portail";
+        $celsius = 'portail';
 
         include('../../includes/common/celsius.php');
       ?>

@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Succès";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Succès';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Gestion succès";
+        $title = 'Gestion succès';
 
         include('../../includes/common/header.php');
       ?>
@@ -64,7 +64,7 @@
                 echo '<div class="zone_niveau_mod_succes_admin">';
               }
 
-              if ($success->getDefined() == "Y")
+              if ($success->getDefined() == 'Y')
                 echo '<div class="succes_liste_mod">';
               else
                 echo '<div class="succes_liste_mod succes_liste_mod_undefined">';
@@ -90,7 +90,7 @@
                   // Unicité
                   echo '<div class="titre_succes">Unique :</div>';
                   echo '<div class="defined_succes">';
-                    if ($success->getUnicity() == "Y")
+                    if ($success->getUnicity() == 'Y')
                     {
                       echo '<input type="radio" name="unicity[' . $success->getId() . ']" value="Y" checked /><div class="radio_space">Oui</div>';
                       echo '<input type="radio" name="unicity[' . $success->getId() . ']" value="N" />Non';
@@ -119,7 +119,7 @@
                   // Code défini
                   echo '<div class="titre_succes">Code défini :</div>';
                   echo '<div class="defined_succes">';
-                    if ($success->getDefined() == "Y")
+                    if ($success->getDefined() == 'Y')
                     {
                       echo '<input type="radio" name="defined[' . $success->getId() . ']" value="Y" checked /><div class="radio_space">Oui</div>';
                       echo '<input type="radio" name="defined[' . $success->getId() . ']" value="N" />Non';

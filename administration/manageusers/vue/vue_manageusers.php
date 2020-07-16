@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Gestion utilisateurs";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Gestion utilisateurs';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = '';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Gestion utilisateurs";
+        $title = 'Gestion utilisateurs';
 
         include('../../includes/common/header.php');
       ?>

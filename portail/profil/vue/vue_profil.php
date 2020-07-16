@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Profil";
-      $style_head      = "styleProfil.css";
-      $script_head     = "scriptProfil.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = true;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Profil';
+      $styleHead      = 'styleProfil.css';
+      $scriptHead     = 'scriptProfil.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = true;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Profil";
+        $title = 'Profil';
 
         include('../../includes/common/header.php');
       ?>
@@ -39,7 +39,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

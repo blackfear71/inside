@@ -255,9 +255,9 @@ function afficherListboxUtilisateurs(idZone, week)
   var html = '';
 
   if (idZone == 'zone_current_week')
-    html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
+    html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifier">';
   else
-    html += '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET("year") + '&action=doModifier">';
+    html += '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifier">';
 
     html += '<input type="hidden" name="week" value="' + week + '" />';
 

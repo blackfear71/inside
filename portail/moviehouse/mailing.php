@@ -24,7 +24,7 @@
     case 'goConsulter':
       // Contrôle si l'id est renseignée et numérique
       if (!isset($_GET['id_film']) OR !is_numeric($_GET['id_film']))
-        header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+        header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
       else
       {
         // Lecture liste des données par le modèle
@@ -33,11 +33,11 @@
       }
       break;
 
-    case "sendMail":
+    case 'sendMail':
       // Lecture liste des données par le modèle
-      $id_film      = $_POST['id_film'];
-      $detailsFilm  = getDetails($id_film, $_SESSION['user']['identifiant']);
-      $listeEtoiles = getDetailsStars($id_film);
+      $idFilm       = $_POST['id_film'];
+      $detailsFilm  = getDetails($idFilm, $_SESSION['user']['identifiant']);
+      $listeEtoiles = getDetailsStars($idFilm);
       sendMail($detailsFilm, $listeEtoiles);
       break;
 
@@ -90,7 +90,7 @@
       unset($etoiles);
       break;
 
-    case "sendMail":
+    case 'sendMail':
     default:
       break;
   }
@@ -98,8 +98,8 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "sendMail":
-      header('location: details.php?id_film=' . $id_film . '&action=goConsulter');
+    case 'sendMail':
+      header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
       break;
 
     case 'goConsulter':

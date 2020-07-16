@@ -55,26 +55,26 @@
   // RETOUR : Minimum pour être top culte
   function getMinGolden($listeUsers)
   {
-    $nb_users   = count($listeUsers);
-    $min_golden = floor(($nb_users * 75) / 100);
+    $nombreUsers = count($listeUsers);
+    $minGolden   = floor(($nombreUsers * 75) / 100);
 
-    return $min_golden;
+    return $minGolden;
   }
 
   // METIER : Lecture nombre de pages en fonction du filtre
   // RETOUR : Nombre de pages
-  function getPages($filtre, $identifiant, $min_golden)
+  function getPages($filtre, $identifiant, $minGolden)
   {
-    $nb_pages     = 0;
-    $nb_col       = 0;
-    $nb_par_page  = 18;
+    $nombrePages      = 0;
+    $nombreCollectors = 0;
+    $nombreParPage    = 18;
 
     global $bdd;
 
     // Calcul du nombre total d'enregistrements pour chaque filtre
     switch ($filtre)
     {
-      case "noVote":
+      case 'noVote':
         $req = $bdd->query('SELECT COUNT(collector.id)
                             AS nb_col
                             FROM collector
@@ -85,40 +85,40 @@
 
         break;
 
-      case "meOnly":
+      case 'meOnly':
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE speaker = "' . $identifiant . '"');
         break;
 
-      case "byMe":
+      case 'byMe':
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE author = "' . $identifiant . '"');
         break;
 
-      case "usersOnly":
+      case 'usersOnly':
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '")');
         break;
 
-      case "othersOnly":
+      case 'othersOnly':
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE type_speaker = "other"');
         break;
 
-      case "textOnly":
+      case 'textOnly':
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE type_collector = "T"');
         break;
 
-      case "picturesOnly":
+      case 'picturesOnly':
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector WHERE type_collector = "I"');
         break;
 
-      case "topCulte":
+      case 'topCulte':
         $req = $bdd->query('SELECT COUNT(collector.id)
                             AS nb_col
                             FROM collector
                             WHERE (SELECT COUNT(collector_users.id)
                                    FROM collector_users
-                                   WHERE collector_users.id_collector = collector.id) >= ' . $min_golden);
+                                   WHERE collector_users.id_collector = collector.id) >= ' . $minGolden);
         break;
 
-      case "none":
+      case 'none':
       default:
         $req = $bdd->query('SELECT COUNT(id) AS nb_col FROM collector');
         break;
@@ -127,39 +127,39 @@
     $data = $req->fetch();
 
     if (isset($data['nb_col']))
-      $nb_col = $data['nb_col'];
+      $nombreCollectors = $data['nb_col'];
 
     $req->closeCursor();
 
-    $nb_pages = ceil($nb_col / $nb_par_page);
+    $nombrePages = ceil($nombreCollectors / $nombreParPage);
 
-    return $nb_pages;
+    return $nombrePages;
   }
 
   // METIER : Lecture des phrases cultes
   // RETOUR : Liste phrases cultes
-  function getCollectors($listeUsers, $nb_pages, $min_golden, $page, $identifiant, $tri, $filtre)
+  function getCollectors($listeUsers, $nombrePages, $minGolden, $page, $identifiant, $tri, $filtre)
   {
     $listeCollectors = array();
-    $nb_par_page     = 18;
+    $nombreParPage   = 18;
 
     // Contrôle dernière page
-    if ($page > $nb_pages)
-      $page = $nb_pages;
+    if ($page > $nombrePages)
+      $page = $nombrePages;
 
     // Calcul première entrée
-    $premiere_entree = ($page - 1) * $nb_par_page;
+    $premiereEntree = ($page - 1) * $nombreParPage;
 
     // Détermination sens tri
     switch ($tri)
     {
-      case "dateAsc":
-        $order = "collector.date_collector ASC, collector.id ASC";
+      case 'dateAsc':
+        $order = 'collector.date_collector ASC, collector.id ASC';
         break;
 
-      case "dateDesc":
+      case 'dateDesc':
       default:
-        $order = "collector.date_collector DESC, collector.id DESC";
+        $order = 'collector.date_collector DESC, collector.id DESC';
         break;
     }
 
@@ -168,7 +168,7 @@
 
     switch ($filtre)
     {
-      case "noVote":
+      case 'noVote':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
@@ -177,82 +177,82 @@
                                                   WHERE (collector.id = collector_users.id_collector
                                                   AND    collector_users.identifiant = "' . $identifiant . '"))
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
 
         break;
 
-      case "meOnly":
+      case 'meOnly':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (collector.speaker = "' . $identifiant . '")
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "byMe":
+      case 'byMe':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (collector.author = "' . $identifiant . '")
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "usersOnly":
+      case 'usersOnly':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (collector.type_speaker = "user" AND collector.speaker != "' . $identifiant . '")
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "othersOnly":
+      case 'othersOnly':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (collector.type_speaker = "other")
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "textOnly":
+      case 'textOnly':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (collector.type_collector = "T")
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "picturesOnly":
+      case 'picturesOnly':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (collector.type_collector = "I")
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "topCulte":
+      case 'topCulte':
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 WHERE (SELECT COUNT(collector_users.id)
                                        FROM collector_users
-                                       WHERE collector_users.id_collector = collector.id) >= ' . $min_golden . '
+                                       WHERE collector_users.id_collector = collector.id) >= ' . $minGolden . '
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
-      case "none":
+      case 'none':
       default:
         $reponse = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nb_votes
                                 FROM collector
                                 LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                 GROUP BY collector.id
-                                ORDER BY ' . $order . ' LIMIT ' . $premiere_entree . ', ' . $nb_par_page);
+                                ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
     }
 
@@ -269,7 +269,7 @@
         $collector->setPseudo_author($listeUsers[$collector->getAuthor()]['pseudo']);
 
       // Pseudo speaker (dont "autre" si besoin)
-      if ($collector->getType_speaker() == "other" AND !empty($collector->getSpeaker()))
+      if ($collector->getType_speaker() == 'other' AND !empty($collector->getSpeaker()))
         $collector->setPseudo_speaker($collector->getSpeaker());
       else
       {
@@ -305,7 +305,7 @@
   // RETOUR : Id enregistrement créé
   function insertCollector($post, $files, $user)
   {
-    $new_id     = NULL;
+    $newId      = NULL;
     $control_ok = true;
 
     // Sauvegarde en session en cas d'erreur
@@ -317,22 +317,20 @@
     else
     {
       $_SESSION['save']['speaker']       = $post['speaker'];
-      $_SESSION['save']['other_speaker'] = "";
+      $_SESSION['save']['other_speaker'] = '';
     }
 
     $_SESSION['save']['date_collector'] = $post['date_collector'];
     $_SESSION['save']['type_collector'] = $post['type_collector'];
     $_SESSION['save']['context']        = $post['context'];
 
-    if ($post['type_collector'] == "T")
+    if ($post['type_collector'] == 'T')
       $_SESSION['save']['collector']    = $post['collector'];
 
     // On contrôle la date
     if ($control_ok == true)
     {
-      $date_a_verifier = $post['date_collector'];
-
-      if (validateDate($date_a_verifier, "d/m/Y") != true)
+      if (validateDate($post['date_collector'], 'd/m/Y') != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -342,9 +340,9 @@
     // Formatage du texte ou insertion image
     if ($control_ok == true)
     {
-      if ($post['type_collector'] == "T")
+      if ($post['type_collector'] == 'T')
         $collector = deleteInvisible($post['collector']);
-      elseif ($post['type_collector'] == "I")
+      elseif ($post['type_collector'] == 'I')
         $collector = uploadImage($files, rand());
 
       if (empty($collector))
@@ -355,13 +353,13 @@
     {
       global $bdd;
 
-      if ($post['speaker'] == "other")
+      if ($post['speaker'] == 'other')
       {
-        $collector = array('date_add'       => date("Ymd"),
+        $collector = array('date_add'       => date('Ymd'),
                            'author'         => $user,
                            'speaker'        => $post['other_speaker'],
                            'type_speaker'   => $post['speaker'],
-                           'date_collector' => formatDateForInsert($date_a_verifier),
+                           'date_collector' => formatDateForInsert($post['date_collector']),
                            'type_collector' => $post['type_collector'],
                            'collector'      => $collector,
                            'context'        => deleteInvisible($post['context'])
@@ -369,11 +367,11 @@
       }
       else
       {
-        $collector = array('date_add'       => date("Ymd"),
+        $collector = array('date_add'       => date('Ymd'),
                            'author'         => $user,
                            'speaker'        => $post['speaker'],
-                           'type_speaker'   => "user",
-                           'date_collector' => formatDateForInsert($date_a_verifier),
+                           'type_speaker'   => 'user',
+                           'date_collector' => formatDateForInsert($post['date_collector']),
                            'type_collector' => $post['type_collector'],
                            'collector'      => $collector,
                            'context'        => deleteInvisible($post['context'])
@@ -403,37 +401,37 @@
 		  $req->closeCursor();
 
       // Génération notification phrase culte ajoutée
-      $new_id = $bdd->lastInsertId();
+      $newId = $bdd->lastInsertId();
 
-      if ($post['type_collector'] == "T")
-        insertNotification($user, 'culte', $new_id);
-      elseif ($post['type_collector'] == "I")
-        insertNotification($user, 'culte_image', $new_id);
+      if ($post['type_collector'] == 'T')
+        insertNotification($user, 'culte', $newId);
+      elseif ($post['type_collector'] == 'I')
+        insertNotification($user, 'culte_image', $newId);
 
       // Génération succès
       insertOrUpdateSuccesValue('listener', $user, 1);
 
-      if ($post['speaker'] != "other")
+      if ($post['speaker'] != 'other')
         insertOrUpdateSuccesValue('speaker', $post['speaker'], 1);
 
       // Ajout expérience
       insertExperience($user, 'add_collector');
 
       // Message d'alerte
-      if ($post['type_collector'] == "T")
+      if ($post['type_collector'] == 'T')
         $_SESSION['alerts']['collector_added'] = true;
-      elseif ($post['type_collector'] == "I")
+      elseif ($post['type_collector'] == 'I')
         $_SESSION['alerts']['image_collector_added'] = true;
     }
 
-    return $new_id;
+    return $newId;
   }
 
   // METIER : Formatage et insertion image Collector
   // RETOUR : Nom fichier avec extension
   function uploadImage($files, $name)
   {
-    $new_name   = '';
+    $newName   = '';
     $control_ok = true;
 
     // On vérifie la présence du dossier, sinon on le créé
@@ -443,7 +441,7 @@
       mkdir($dossier);
 
     // Dossier de destination
-    $image_dir = $dossier . '/';
+    $imageDir = $dossier . '/';
 
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -452,55 +450,55 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
+      $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
 
       // Rotation de l'image
       if ($control_ok == true)
       {
-        $new_name   = $fileDatas['new_name'];
-        $type_image = $fileDatas['type_file'];
+        $newName   = $fileDatas['new_name'];
+        $typeImage = $fileDatas['type_file'];
 
-        if ($type_image == 'jpg' OR $type_image == 'jpeg')
-          $rotate = rotateImage($image_dir . $new_name, $type_image);
+        if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+          $rotate = rotateImage($imageDir . $newName, $typeImage);
       }
     }
 
-    return $new_name;
+    return $newName;
   }
 
   // METIER : Suppression phrases cultes
   // RETOUR : Aucun
   function deleteCollector($post)
   {
-    $id_col = $post['id_col'];
+    $idCollector = $post['id_col'];
 
     global $bdd;
 
     // Suppression image
-    $req1 = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
+    $req1 = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $idCollector);
     $data1 = $req1->fetch();
 
-    $collector      = $data1['collector'];
-    $type_collector = $data1['type_collector'];
+    $collector     = $data1['collector'];
+    $typeCollector = $data1['type_collector'];
 
-    if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-      unlink("../../includes/images/collector/" . $data1['collector']);
+    if (isset($collector) AND !empty($collector) AND $typeCollector == 'I')
+      unlink('../../includes/images/collector/' . $data1['collector']);
 
     $req1->closeCursor();
 
     // Suppression enregistrement base
-    $req2 = $bdd->exec('DELETE FROM collector WHERE id = ' . $id_col);
+    $req2 = $bdd->exec('DELETE FROM collector WHERE id = ' . $idCollector);
 
     // Suppression des notifications
-    if ($type_collector == "T")
-      deleteNotification('culte', $id_col);
-    elseif ($type_collector == "I")
-      deleteNotification('culte_image', $id_col);
+    if ($typeCollector == 'T')
+      deleteNotification('culte', $idCollector);
+    elseif ($typeCollector == 'I')
+      deleteNotification('culte_image', $idCollector);
 
     // Message d'alerte
-    if ($type_collector == "T")
+    if ($typeCollector == 'T')
       $_SESSION['alerts']['collector_deleted'] = true;
-    elseif ($type_collector == "I")
+    elseif ($typeCollector == 'I')
       $_SESSION['alerts']['image_collector_deleted'] = true;
   }
 
@@ -508,17 +506,15 @@
   // RETOUR : Id collector
   function updateCollector($post, $files)
   {
-    $control_ok = true;
-    $id_col     = $post['id_col'];
+    $control_ok  = true;
+    $idCollector = $post['id_col'];
 
     global $bdd;
 
     // On contrôle la date
     if ($control_ok == true)
     {
-      $date_a_verifier = $post['date_collector'];
-
-      if (validateDate($date_a_verifier, "d/m/Y") != true)
+      if (validateDate($post['date_collector'], 'd/m/Y') != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -528,20 +524,20 @@
     // Suppression ancienne image ou récupération collector
     if ($control_ok == true)
     {
-      if ($post['type_collector'] == "I")
+      if ($post['type_collector'] == 'I')
       {
         // On récupère le nom de l'image existante
-        $reponse = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $id_col);
+        $reponse = $bdd->query('SELECT id, type_collector, collector FROM collector WHERE id = ' . $idCollector);
         $donnees = $reponse->fetch();
-        $collector      = $donnees['collector'];
-        $type_collector = $donnees['type_collector'];
+        $collector     = $donnees['collector'];
+        $typeCollector = $donnees['type_collector'];
         $reponse->closeCursor();
 
         // Si on modifie l'image, on supprime l'ancienne et on insère la nouvelle
         if (!empty($files['image']['name']))
         {
-          if (isset($collector) AND !empty($collector) AND $type_collector == "I")
-            unlink("../../includes/images/collector/" . $collector);
+          if (isset($collector) AND !empty($collector) AND $typeCollector == 'I')
+            unlink('../../includes/images/collector/' . $collector);
 
           $collector = uploadImage($files, rand());
 
@@ -557,17 +553,17 @@
     if ($control_ok == true)
     {
       // Speaker
-      if ($post['speaker'] == "other")
+      if ($post['speaker'] == 'other')
       {
-        $speaker      = $post['other_speaker'];
-        $type_speaker = "other";
+        $speaker     = $post['other_speaker'];
+        $typeSpeaker = 'other';
       }
       else
       {
         // On récupère éventuellement l'identifiant si l'utilisateur est désinscrit
         if (!isset($post['speaker']))
         {
-          $reponse = $bdd->query('SELECT id, speaker FROM collector WHERE id = ' . $id_col);
+          $reponse = $bdd->query('SELECT id, speaker FROM collector WHERE id = ' . $idCollector);
           $donnees = $reponse->fetch();
           $speaker = $donnees['speaker'];
           $reponse->closeCursor();
@@ -576,7 +572,7 @@
           $speaker = $post['speaker'];
 
         // Type speaker
-        $type_speaker = "user";
+        $typeSpeaker = 'user';
       }
 
       // Modification de l'enregistrement en base
@@ -585,10 +581,10 @@
                                                  date_collector = :date_collector,
                                                  collector      = :collector,
                                                  context        = :context
-                                           WHERE id             = ' . $id_col);
+                                           WHERE id             = ' . $idCollector);
       $req->execute(array(
         'speaker'        => $speaker,
-        'type_speaker'   => $type_speaker,
+        'type_speaker'   => $typeSpeaker,
         'date_collector' => formatDateForInsert($post['date_collector']),
         'collector'      => deleteInvisible($collector),
         'context'        => deleteInvisible($post['context'])
@@ -596,13 +592,13 @@
       $req->closeCursor();
 
       // Message d'alerte
-      if ($post['type_collector'] == "T")
+      if ($post['type_collector'] == 'T')
         $_SESSION['alerts']['collector_updated'] = true;
-      elseif ($post['type_collector'] == "I")
+      elseif ($post['type_collector'] == 'I')
         $_SESSION['alerts']['image_collector_updated'] = true;
     }
 
-    return $id_col;
+    return $idCollector;
   }
 
   // METIER : Liste des votes par phrase culte
@@ -620,7 +616,7 @@
       if (isset($listeUsers[$donnees['identifiant']]))
         $pseudo = $listeUsers[$donnees['identifiant']]['pseudo'];
       else
-        $pseudo = "";
+        $pseudo = '';
 
       // Si le vote n'existe pas dans le tableau, on créé une nouvelle entrée
       if (!isset($listVotes[$donnees['vote']]))
@@ -637,7 +633,7 @@
   // RETOUR : Id collector
   function voteCollector($post, $user)
   {
-    $id_col        = $post['id_col'];
+    $idCollector   = $post['id_col'];
     $selfSatisfied = false;
 
     if (isset($post['smiley_1']))
@@ -662,7 +658,7 @@
     global $bdd;
 
     // On cherche s'il existe déjà un vote
-    $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $id_col . ' AND identifiant = "' . $user . '"');
+    $reponse = $bdd->query('SELECT * FROM collector_users WHERE id_collector = ' . $idCollector . ' AND identifiant = "' . $user . '"');
     $donnees = $reponse->fetch();
 
     // Si on a un vote mais on supprime l'avis
@@ -684,7 +680,7 @@
     {
       $reponse2 = $bdd->prepare('INSERT INTO collector_users(id_collector, identifiant, vote) VALUES(:id_collector, :identifiant, :vote)');
       $reponse2->execute(array(
-        'id_collector' => $id_col,
+        'id_collector' => $idCollector,
         'identifiant'  => $user,
         'vote'         => $vote
         ));
@@ -692,7 +688,7 @@
     }
 
     // Génération succès (quand on vote, une seule prise en compte, et quand on retire son vote)
-    $reponse3 = $bdd->query('SELECT * FROM collector WHERE id = ' . $id_col . ' AND speaker = "' . $user . '"');
+    $reponse3 = $bdd->query('SELECT * FROM collector WHERE id = ' . $idCollector . ' AND speaker = "' . $user . '"');
     $donnees3 = $reponse3->fetch();
 
     if ($reponse3->rowCount() > 0)
@@ -718,27 +714,27 @@
 
     $reponse->closeCursor();
 
-    return $id_col;
+    return $idCollector;
   }
 
   // METIER : Suppression des votes si phrase culte supprimée
   // RETOUR : Aucun
   function deleteVotes($post)
   {
-    $id_col = $post['id_col'];
+    $idCollector = $post['id_col'];
 
     global $bdd;
 
-    $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $id_col);
+    $req = $bdd->exec('DELETE FROM collector_users WHERE id_collector = ' . $idCollector);
   }
 
   // METIER : Récupère le numéro de page pour une notification Collector
   // RETOUR : Numéro de page
   function numeroPageCollector($id)
   {
-    $numPage     = 0;
-    $nb_par_page = 18;
-    $position    = 1;
+    $numPage       = 0;
+    $nombreParPage = 18;
+    $position      = 1;
 
     global $bdd;
 
@@ -753,7 +749,7 @@
     }
     $reponse->closeCursor();
 
-    $numPage = $nb_pages = ceil($position / $nb_par_page);
+    $numPage = $nombrePages = ceil($position / $nombreParPage);
 
     return $numPage;
   }

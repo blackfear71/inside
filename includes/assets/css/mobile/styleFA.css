@@ -512,6 +512,7 @@
 	width: 6vh;
 	box-shadow: 0 0 0.5vh #7c7c7c;
 	border-radius: 50%;
+	background-color: #262626;	
 }
 
 .caller_determined

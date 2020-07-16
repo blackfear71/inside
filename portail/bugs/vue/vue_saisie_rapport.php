@@ -51,12 +51,12 @@
           echo '<select name="type_bug" class="saisie_type" required>';
             echo '<option value="" hidden>Type de demande</option>';
 
-            if (isset($_SESSION['save']['type_bug']) AND $_SESSION['save']['type_bug'] == "B")
+            if (isset($_SESSION['save']['type_bug']) AND $_SESSION['save']['type_bug'] == 'B')
               echo '<option value="B" selected>Bug</option>';
             else
               echo '<option value="B">Bug</option>';
 
-            if (isset($_SESSION['save']['type_bug']) AND $_SESSION['save']['type_bug'] == "E")
+            if (isset($_SESSION['save']['type_bug']) AND $_SESSION['save']['type_bug'] == 'E')
               echo '<option value="E" selected>Evolution</option>';
             else
               echo '<option value="E">Evolution</option>';

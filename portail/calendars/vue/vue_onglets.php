@@ -2,7 +2,7 @@
   echo '<div class="titre_section"><img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="logo_titre_section" /><div class="texte_titre_section">Années & annexes</div></div>';
 
   echo '<div class="zone_annees_calendrier">';
-    if ($_GET['action'] == "goConsulterAnnexes")
+    if ($_GET['action'] == 'goConsulterAnnexes')
       echo '<span class="annexes active">Annexes</span>';
     else
       echo '<a href="calendars.php?action=goConsulterAnnexes" class="annexes inactive">Annexes</a>';
@@ -16,7 +16,7 @@
       foreach ($onglets as $year)
       {
         // Année inexistante (première ou au milieu)
-        if ($_GET['action'] != "goConsulterAnnexes")
+        if ($_GET['action'] != 'goConsulterAnnexes')
         {
           if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
           {
@@ -51,7 +51,7 @@
       }
 
       // Année inexistante (dernière)
-      if ($_GET['action'] != "goConsulterAnnexes")
+      if ($_GET['action'] != 'goConsulterAnnexes')
       {
         if ($lastYear == true AND $anneeExistante == false)
           echo '<span class="year active">' . $_GET['year'] . '</span>';
@@ -59,7 +59,7 @@
     }
     else
     {
-      if ($_GET['action'] != "goConsulterAnnexes")
+      if ($_GET['action'] != 'goConsulterAnnexes')
         echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
     }
   echo '</div>';

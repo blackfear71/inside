@@ -30,7 +30,7 @@
     global $bdd;
 
     // Lecture de la base en fonction de la vue
-    if ($view == "resolved")
+    if ($view == 'resolved')
       $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R") ORDER BY date DESC, id DESC');
     else
       $reponse = $bdd->query('SELECT * FROM bugs WHERE type = "' . $type . '" AND resolved = "N" ORDER BY date DESC, id DESC');
@@ -64,16 +64,16 @@
   // RETOUR : Id enregistrement créé
   function insertBug($post, $files, $author)
   {
-    $new_id     = NULL;
+    $newId      = NULL;
     $control_ok = true;
 
     // Récupération des données
     $subject  = $post['subject_bug'];
     $type     = $post['type_bug'];
     $content  = $post['content_bug'];
-    $date     = date("Ymd");
-    $resolved = "N";
-    $picture  = "";
+    $date     = date('Ymd');
+    $resolved = 'N';
+    $picture  = '';
 
     // Sauvegarde des données
     $_SESSION['save']['subject_bug'] = $post['subject_bug'];
@@ -84,14 +84,14 @@
     if (!empty($files['image']['name']))
     {
       // On vérifie la présence du dossier, sinon on le créé
-      $dossier = "../../includes/images/reports";
+      $dossier = '../../includes/images/reports';
 
       if (!is_dir($dossier))
         mkdir($dossier);
 
       // Dossier de destination et nom du fichier
-      $image_dir = $dossier . '/';
-      $name      = rand();
+      $imageDir = $dossier . '/';
+      $name     = rand();
 
       // Contrôles fichier
       $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -102,16 +102,16 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
+        $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
 
         // Rotation de l'image
         if ($control_ok == true)
         {
           $picture    = $fileDatas['new_name'];
-          $type_image = $fileDatas['type_file'];
+          $typeImage = $fileDatas['type_file'];
 
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($image_dir . $picture, $type_image);
+          if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+            $rotate = rotateImage($imageDir . $picture, $typeImage);
         }
       }
     }
@@ -149,7 +149,7 @@
       $req->execute($bugs);
       $req->closeCursor();
 
-      $new_id = $bdd->lastInsertId();
+      $newId = $bdd->lastInsertId();
 
       // Génération succès
       insertOrUpdateSuccesValue('debugger', $author, 1);
@@ -160,6 +160,6 @@
       $_SESSION['alerts']['bug_submitted'] = true;
     }
 
-    return $new_id;
+    return $newId;
   }
 ?>

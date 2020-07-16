@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Bugs";
-      $style_head      = "styleBugs.css";
-      $script_head     = "scriptBugs.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = true;
+      $titleHead      = 'Bugs';
+      $styleHead      = 'styleBugs.css';
+      $scriptHead     = 'scriptBugs.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Rapports de bugs";
+        $title = 'Rapports de bugs';
 
         include('../../includes/common/header.php');
       ?>

@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Notifications";
-      $style_head      = "styleNO.css";
-      $script_head     = "scriptNO.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Notifications';
+      $styleHead      = 'styleNO.css';
+      $scriptHead     = 'scriptNO.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Notifications";
+        $title = 'Notifications';
 
 			  include('../../includes/common/header.php');
       ?>
@@ -33,13 +33,13 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -60,22 +60,22 @@
           echo '<div class="zone_notifications_right">';
             if (!empty($notifications))
             {
-              $date_notif = "";
+              $dateNotification = '';
 
               foreach ($notifications as $notification)
               {
                 if (!empty($notification->getIcon()) AND !empty($notification->getSentence()))
                 {
                   // Date
-                  if ($notification->getDate() != $date_notif)
+                  if ($notification->getDate() != $dateNotification)
                   {
                     echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">' . formatDateForDisplay($notification->getDate()) . '</div></div>';
-                    $date_notif = $notification->getDate();
+                    $dateNotification = $notification->getDate();
                   }
 
                   // Lien si présent
                   if (!empty($notification->getLink()))
-                    if ($notification->getCategory() == "doodle")
+                    if ($notification->getCategory() == 'doodle')
                       echo '<a href="' . $notification->getLink() . '" id="lien_details_' . $notification->getContent() . '" target="_blank" class="lien_notification lienDetails">';
                     else
                       echo '<a href="' . $notification->getLink() . '" class="lien_notification">';
@@ -106,7 +106,7 @@
             }
             else
             {
-              echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">' . formatDateForDisplay(date("Ymd")) . '</div></div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">' . formatDateForDisplay(date('Ymd')) . '</div></div>';
 
               echo '<div class="empty">Pas encore de notifications...</div>';
             }

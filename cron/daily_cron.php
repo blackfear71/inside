@@ -10,54 +10,54 @@
   include_once('fonctions_cron.php');
 
   /*** Traitements journaliers (tous les jours à 7h)***/
-  $type_log    = 'j';
-  $heure_debut = date('His');
-  $daily_trt   = array();
+  $typeLog    = 'j';
+  $heureDebut = date('His');
+  $dailyTrt   = array();
 
   // Sortie cinéma du jour
-  $films_trt = isCinemaToday();
-  array_push($daily_trt, $films_trt);
+  $filmsTrt = isCinemaToday();
+  array_push($dailyTrt, $filmsTrt);
 
   // Durée mission
-  $duration_missions = durationMissions();
+  $durationMissions = durationMissions();
 
-  foreach ($duration_missions as $mission)
+  foreach ($durationMissions as $mission)
   {
     switch ($mission['one_day'])
     {
-      case "O":
+      case 'O':
         // Notification mission unique
-        $one_mission = isOneDayMission($mission['id_mission']);
-        array_push($daily_trt, $one_mission);
+        $oneMission = isOneDayMission($mission['id_mission']);
+        array_push($dailyTrt, $oneMission);
         break;
 
-      case "F":
+      case 'F':
         // Notification début de mission
-        $begin_mission = isFirstDayMission($mission['id_mission']);
-        array_push($daily_trt, $begin_mission);
+        $beginMission = isFirstDayMission($mission['id_mission']);
+        array_push($dailyTrt, $beginMission);
         break;
 
-      case "L":
+      case 'L':
         // Notification fin de mission
-        $end_mission = isLastDayMission($mission['id_mission']);
-        array_push($daily_trt, $end_mission);
+        $endMission = isLastDayMission($mission['id_mission']);
+        array_push($dailyTrt, $endMission);
         break;
 
-      case "N":
+      case 'N':
       default:
         break;
     }
   }
 
   // Ajout expérience pour les gagnants
-  $experience_missions = insertExperienceWinners();
+  $experienceMissions = insertExperienceWinners();
 
-  if (!empty($experience_missions))
-    array_push($daily_trt, $experience_missions);
+  if (!empty($experienceMissions))
+    array_push($dailyTrt, $experienceMissions);
 
   // Génération log
-  $heure_fin = date('His');
-  generateLog($type_log, $daily_trt, $heure_debut, $heure_fin);
+  $heureFin = date('His');
+  generateLog($typeLog, $dailyTrt, $heureDebut, $heureFin);
 
   // Redirection si asynchrone
   if (isset($_POST['daily_cron']))

@@ -37,16 +37,16 @@
           break;
 
         case 'settings':
-          $profil       = getProfile($_SESSION['user']['identifiant']);
-          $preferences  = getPreferences($_SESSION['user']['identifiant']);
+          $profil      = getProfile($_SESSION['user']['identifiant']);
+          $preferences = getPreferences($_SESSION['user']['identifiant']);
           break;
 
         case 'themes':
-          $profil          = getProfile($_SESSION['user']['identifiant']);
-          $preferences     = getPreferences($_SESSION['user']['identifiant']);
-          $themes_users    = getThemes("U", $profil->getExperience());
-          $themes_missions = getThemes("M", NULL);
-          $isThemeMission  = getThemeMission();
+          $profil         = getProfile($_SESSION['user']['identifiant']);
+          $preferences    = getPreferences($_SESSION['user']['identifiant']);
+          $themesUsers    = getThemes('U', $profil->getExperience());
+          $themesMissions = getThemes('M', NULL);
+          $isThemeMission = getThemeMission();
           break;
 
         case 'profile':
@@ -84,15 +84,15 @@
       break;
 
     case 'askDesinscription':
-      updateStatus($_SESSION['user']['identifiant'], "D");
+      updateStatus($_SESSION['user']['identifiant'], 'D');
       break;
 
     case 'cancelDesinscription':
-      updateStatus($_SESSION['user']['identifiant'], "N");
+      updateStatus($_SESSION['user']['identifiant'], 'N');
       break;
 
     case 'cancelResetPassword':
-      updateStatus($_SESSION['user']['identifiant'], "N");
+      updateStatus($_SESSION['user']['identifiant'], 'N');
       break;
 
     case 'doSupprimerTheme':
@@ -206,36 +206,36 @@
           $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
           $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
 
-          if (!empty($themes_users))
+          if (!empty($themesUsers))
           {
-            foreach ($themes_users as &$theme_users)
+            foreach ($themesUsers as &$themeUsers)
             {
-              $theme_users->setReference(htmlspecialchars($theme_users->getReference()));
-              $theme_users->setName(htmlspecialchars($theme_users->getName()));
-              $theme_users->setType(htmlspecialchars($theme_users->getType()));
-              $theme_users->setLevel(htmlspecialchars($theme_users->getLevel()));
-              $theme_users->setLogo(htmlspecialchars($theme_users->getLogo()));
-              $theme_users->setDate_deb(htmlspecialchars($theme_users->getDate_deb()));
-              $theme_users->setDate_fin(htmlspecialchars($theme_users->getDate_fin()));
+              $themeUsers->setReference(htmlspecialchars($themeUsers->getReference()));
+              $themeUsers->setName(htmlspecialchars($themeUsers->getName()));
+              $themeUsers->setType(htmlspecialchars($themeUsers->getType()));
+              $themeUsers->setLevel(htmlspecialchars($themeUsers->getLevel()));
+              $themeUsers->setLogo(htmlspecialchars($themeUsers->getLogo()));
+              $themeUsers->setDate_deb(htmlspecialchars($themeUsers->getDate_deb()));
+              $themeUsers->setDate_fin(htmlspecialchars($themeUsers->getDate_fin()));
             }
 
-            unset($theme_users);
+            unset($themeUsers);
           }
 
-          if (!empty($themes_missions))
+          if (!empty($themesMissions))
           {
-            foreach ($themes_missions as &$theme_mission)
+            foreach ($themesMissions as &$themeMission)
             {
-              $theme_mission->setReference(htmlspecialchars($theme_mission->getReference()));
-              $theme_mission->setName(htmlspecialchars($theme_mission->getName()));
-              $theme_mission->setType(htmlspecialchars($theme_mission->getType()));
-              $theme_mission->setLevel(htmlspecialchars($theme_mission->getLevel()));
-              $theme_mission->setLogo(htmlspecialchars($theme_mission->getLogo()));
-              $theme_mission->setDate_deb(htmlspecialchars($theme_mission->getDate_deb()));
-              $theme_mission->setDate_fin(htmlspecialchars($theme_mission->getDate_fin()));
+              $themeMission->setReference(htmlspecialchars($themeMission->getReference()));
+              $themeMission->setName(htmlspecialchars($themeMission->getName()));
+              $themeMission->setType(htmlspecialchars($themeMission->getType()));
+              $themeMission->setLevel(htmlspecialchars($themeMission->getLevel()));
+              $themeMission->setLogo(htmlspecialchars($themeMission->getLogo()));
+              $themeMission->setDate_deb(htmlspecialchars($themeMission->getDate_deb()));
+              $themeMission->setDate_fin(htmlspecialchars($themeMission->getDate_fin()));
             }
 
-            unset($theme_mission);
+            unset($themeMission);
           }
           break;
 

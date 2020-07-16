@@ -6,7 +6,7 @@
   // RETOUR : Booléen
   function controlYear($year)
   {
-    $annee_existante = false;
+    $anneeExistante = false;
 
     if (isset($year) AND is_numeric($year))
     {
@@ -15,12 +15,12 @@
       $reponse = $bdd->query('SELECT * FROM change_log WHERE year = "' . $year . '" ORDER BY year DESC');
 
       if ($reponse->rowCount() > 0)
-        $annee_existante = true;
+        $anneeExistante = true;
 
       $reponse->closeCursor();
     }
 
-    return $annee_existante;
+    return $anneeExistante;
   }
 
   // METIER : Lecture des années distinctes

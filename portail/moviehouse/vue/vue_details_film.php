@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Movie House";
-      $style_head      = "styleMH.css";
-      $script_head     = "scriptMH.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = true;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Movie House';
+      $styleHead      = 'styleMH.css';
+      $scriptHead     = 'scriptMH.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = true;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
 			<?php
-        $title= "Movie House";
+        $title = 'Movie House';
 
         include('../../includes/common/header.php');
         include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*********************/
@@ -170,7 +170,7 @@
                       echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
 
                       // Participation
-                      if ($detailsFilm->getParticipation() == "P")
+                      if ($detailsFilm->getParticipation() == 'P')
                       {
                         echo '<img src="../../includes/icons/moviehouse/participate.png" alt="participate" class="star_vote rounded" />';
                         echo '<input type="submit" name="participate" class="input_vote" />';
@@ -182,7 +182,7 @@
                       }
 
                       // Vue
-                      if ($detailsFilm->getParticipation() == "S")
+                      if ($detailsFilm->getParticipation() == 'S')
                       {
                         echo '<img src="../../includes/icons/moviehouse/seen.png" alt="seen" class="star_vote rounded" />';
                         echo '<input type="submit" name="seen" class="input_vote" />';
@@ -207,9 +207,9 @@
                   {
                     foreach ($listeEtoiles as $etoiles)
                     {
-                      if ($etoiles->getParticipation() == "S")
+                      if ($etoiles->getParticipation() == 'S')
                         echo '<div class="zone_etoiles_user seen_interested">';
-                      elseif ($etoiles->getParticipation() == "P")
+                      elseif ($etoiles->getParticipation() == 'P')
                         echo '<div class="zone_etoiles_user participate_interested">';
                       elseif ($etoiles->getIdentifiant() == $_SESSION['user']['identifiant'])
                         echo '<div class="zone_etoiles_user current_user_interested">';
@@ -217,7 +217,7 @@
                         echo '<div class="zone_etoiles_user">';
 
                         // Avatar
-                        $avatarFormatted = formatAvatar($etoiles->getAvatar(), $etoiles->getPseudo(), 2, "avatar");
+                        $avatarFormatted = formatAvatar($etoiles->getAvatar(), $etoiles->getPseudo(), 2, 'avatar');
 
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_interested" />';
 
@@ -300,10 +300,10 @@
 
                     if (!empty($detailsFilm->getTime_doodle()))
                     {
-                      $heure_doodle   = substr($detailsFilm->getTime_doodle(), 0, 2);
-                      $minutes_doodle = substr($detailsFilm->getTime_doodle(), 2, 2);
+                      $heureDoodle   = substr($detailsFilm->getTime_doodle(), 0, 2);
+                      $minutesDoodle = substr($detailsFilm->getTime_doodle(), 2, 2);
 
-                      echo ' à ' . $heure_doodle . ':' . $minutes_doodle;
+                      echo ' à ' . $heureDoodle . ':' . $minutesDoodle;
                     }
                   }
                   else
@@ -315,21 +315,21 @@
                 echo '<div class="contenu_detail">';
                   switch ($detailsFilm->getRestaurant())
                   {
-                    case "B":
+                    case 'B':
                       echo '<span class="before_after_restaurant">Avant</span>';
 
                       if (!empty($detailsFilm->getPlace()))
                         echo $detailsFilm->getPlace();
                       break;
 
-                    case "A":
+                    case 'A':
                       echo '<span class="before_after_restaurant">Après</span>';
 
                       if (!empty($detailsFilm->getPlace()))
                         echo $detailsFilm->getPlace();
                       break;
 
-                    case "N":
+                    case 'N':
                     default:
                       echo '<span class="no_restaurant">Aucun</span>';
                       break;
@@ -352,7 +352,7 @@
                     echo '<div class="zone_commentaire_user" id="' . $comment->getId() . '">';
                       // Avatar
                       echo '<div class="zone_avatar_commentaire">';
-                        $avatarFormatted = formatAvatar($comment->getAvatar(), $comment->getPseudo(), 2, "avatar");
+                        $avatarFormatted = formatAvatar($comment->getAvatar(), $comment->getPseudo(), 2, 'avatar');
 
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_comments" />';
                       echo '</div>';

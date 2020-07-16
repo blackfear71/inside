@@ -3,7 +3,7 @@
 
   // Avatar actuel & suppression
   echo '<div class="zone_profil_avatar_parametres">';
-    $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 2, "avatar");
+    $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 2, 'avatar');
 
     echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_profil" />';
 

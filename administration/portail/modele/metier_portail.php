@@ -157,10 +157,10 @@
   function getNombreBugs()
   {
     // Appel physique
-    $nombre_bugs = physiqueNombreBugs();
+    $nombreBugs = physiqueNombreBugs();
 
     // Retour
-    return $nombre_bugs;
+    return $nombreBugs;
   }
 
   // METIER : Nombre d'évolutions en attente
@@ -168,9 +168,9 @@
   function getNombreEvols()
   {
     // Appel physique
-    $nombre_evolutions = physiqueNombreEvolutions();
+    $nombreEvolutions = physiqueNombreEvolutions();
 
     // Retour
-    return $nombre_evolutions;
+    return $nombreEvolutions;
   }
 ?>

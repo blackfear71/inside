@@ -18,7 +18,7 @@
             // Infos
             echo '<div class="zone_report_middle">';
               // Avatar
-              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 2, 'avatar');
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
@@ -66,7 +66,7 @@
     					echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_bug">';
     						echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
 
-                if ($bug->getResolved() == "N")
+                if ($bug->getResolved() == 'N')
                 {
     							echo '<input type="submit" name="resolve_bug" value="Résoudre" class="saisie_bouton margin_button" />';
                   echo '<input type="submit" name="reject_bug" value="Rejeter" class="saisie_bouton margin_button" />';
@@ -109,7 +109,7 @@
             // Infos
             echo '<div class="zone_report_middle">';
               // Avatar
-              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 2, 'avatar');
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
@@ -157,7 +157,7 @@
               echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_bug">';
                 echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
 
-                if ($evolution->getResolved() == "N")
+                if ($evolution->getResolved() == 'N')
                 {
                   echo '<input type="submit" name="resolve_bug" value="Résoudre" class="saisie_bouton margin_button" />';
                   echo '<input type="submit" name="reject_bug" value="Rejeter" class="saisie_bouton margin_button" />';

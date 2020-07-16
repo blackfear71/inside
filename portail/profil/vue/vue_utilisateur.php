@@ -16,7 +16,7 @@
       echo '</form>';
 
       // Annulation demande
-      if ($profil->getStatus() == "Y")
+      if ($profil->getStatus() == 'Y')
       {
         echo '<div class="message_profil margin_top_20">Si vous avez fait la demande de changement de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
 
@@ -34,7 +34,7 @@
 
       echo '<div class="message_profil">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l\'administrateur à l\'aide de ce bouton. Il validera votre choix après vérification.</div>';
 
-      if ($profil->getStatus() == "D")
+      if ($profil->getStatus() == 'D')
       {
         // Annulation
         echo '<form method="post" action="profil.php?action=cancelDesinscription" class="margin_top_20">';

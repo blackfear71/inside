@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Expense Center";
-      $style_head      = "styleEC.css";
-      $script_head     = "scriptEC.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Expense Center';
+      $styleHead      = 'styleEC.css';
+      $scriptHead     = 'scriptEC.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Expense Center";
+        $title = 'Expense Center';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

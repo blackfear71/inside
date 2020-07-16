@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Les enfants ! À table !";
-      $style_head      = "styleFA.css";
-      $script_head     = "scriptFA.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Les enfants ! À table !';
+      $styleHead      = 'styleFA.css';
+      $scriptHead     = 'scriptFA.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>

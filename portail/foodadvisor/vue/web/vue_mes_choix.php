@@ -10,7 +10,7 @@
 
       echo '<div class="zone_actions">';
         // Supprimer tous les choix
-        if ($actions["supprimer_choix"] == true)
+        if ($actions['supprimer_choix'] == true)
         {
           echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix" class="form_action">';
             echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="bouton_determination eventConfirm" />';
@@ -27,7 +27,7 @@
       // Si choix bande à part
       if ($isSolo == true)
       {
-        if ($actions["choix"] == true)
+        if ($actions['choix'] == true)
         {
           echo '<div class="zone_proposition">';
             echo '<div class="titre_solo_choix">Vous avez choisi de faire bande à part. Vous pouvez annuler ce choix en cliquant sur ce bouton :</div>';
@@ -54,7 +54,7 @@
           /* Visualisation normale (sans modification) */
           /*********************************************/
           echo '<div class="zone_proposition" id="visualiser_choix_' . $monChoix->getId() . '">';
-            if ($actions["choix"] == true)
+            if ($actions['choix'] == true)
             {
               // Modification
               echo '<a id="modifier_' . $monChoix->getId() . '" title="Modifier le choix" class="icone_modify_choix modifierChoix"></a>';
@@ -82,18 +82,18 @@
             echo '<div class="zone_icones_mon_choix">';
               // Jours d'ouverture
               echo '<div class="zone_ouverture_mes_choix">';
-                $explodedOpened = explode(";", $monChoix->getOpened());
-                $semaine_short  = array("Lu", "Ma", "Me", "Je", "Ve");
+                $explodedOpened = explode(';', $monChoix->getOpened());
+                $semaineShort   = array('Lu', 'Ma', 'Me', 'Je', 'Ve');
                 $i              = 0;
 
                 foreach ($explodedOpened as $opened)
                 {
                   if (!empty($opened))
                   {
-                    if ($opened == "Y")
-                      echo '<div class="jour_oui_fa">' . $semaine_short[$i] . '</div>';
+                    if ($opened == 'Y')
+                      echo '<div class="jour_oui_fa">' . $semaineShort[$i] . '</div>';
                     else
-                      echo '<div class="jour_non_fa">' . $semaine_short[$i] . '</div>';
+                      echo '<div class="jour_non_fa">' . $semaineShort[$i] . '</div>';
                   }
 
                   $i++;
@@ -110,26 +110,26 @@
               // Moyens de transport
               if (!empty($monChoix->getTransports()))
               {
-                $explodedTransports = explode(";", $monChoix->getTransports());
+                $explodedTransports = explode(';', $monChoix->getTransports());
 
                 echo '<div class="zone_transports_mes_choix">';
                   foreach ($explodedTransports as $transport)
                   {
                     switch ($transport)
                     {
-                      case "F":
+                      case 'F':
                         echo '<img src="../../includes/icons/foodadvisor/feet.png" alt="feet" class="icone_mon_choix" />';
                         break;
 
-                      case "B":
+                      case 'B':
                         echo '<img src="../../includes/icons/foodadvisor/bike.png" alt="bike" class="icone_mon_choix" />';
                         break;
 
-                      case "T":
+                      case 'T':
                         echo '<img src="../../includes/icons/foodadvisor/tram.png" alt="tram" class="icone_mon_choix" />';
                         break;
 
-                      case "C":
+                      case 'C':
                         echo '<img src="../../includes/icons/foodadvisor/car.png" alt="car" class="icone_mon_choix" />';
                         break;
 
@@ -142,7 +142,7 @@
             echo '</div>';
 
             // Menu
-            list($entree, $plat, $dessert) = explode(";", decodeString($monChoix->getMenu()));
+            list($entree, $plat, $dessert) = explode(';', decodeString($monChoix->getMenu()));
 
             if (empty($entree) AND empty($plat) AND empty($dessert))
               echo '<div class="no_menu_mes_choix">Pas de menu saisi</div>';
@@ -179,7 +179,7 @@
           /***************************/
           /* Caché pour modification */
           /***************************/
-          if ($actions["choix"] == true)
+          if ($actions['choix'] == true)
           {
             echo '<div class="zone_proposition" id="modifier_choix_' . $monChoix->getId() . '" style="display: none;">';
               echo '<form method="post" action="foodadvisor.php?action=doModifier">';
@@ -213,11 +213,11 @@
                         echo 'Horaire';
                       echo '</a>';
 
-                      $id_select_h = 'select_heures_' . $monChoix->getId();
-                      $id_select_m = 'select_minutes_' . $monChoix->getId();
-                      $id_annuler  = 'annuler_horaires_' . $monChoix->getId();
+                      $idSelectH = 'select_heures_' . $monChoix->getId();
+                      $idSelectM = 'select_minutes_' . $monChoix->getId();
+                      $idAnnuler = 'annuler_horaires_' . $monChoix->getId();
 
-                      echo '<select id="' . $id_select_h . '" name="' . $id_select_h . '" class="listbox_horaires_update">';
+                      echo '<select id="' . $idSelectH . '" name="' . $idSelectH . '" class="listbox_horaires_update">';
                         for ($i = 11; $i < 14; $i++)
                         {
                           if ($i == substr($monChoix->getTime(), 0, 2))
@@ -227,7 +227,7 @@
                         }
                       echo '</select>';
 
-                      echo '<select id="' . $id_select_m . '" name="' . $id_select_m . '" class="listbox_horaires_update">';
+                      echo '<select id="' . $idSelectM . '" name="' . $idSelectM . '" class="listbox_horaires_update">';
                         for ($j = 0; $j < 4; $j++)
                         {
                           if ($j * 15 == substr($monChoix->getTime(), 2, 2))
@@ -247,7 +247,7 @@
                         }
                       echo '</select>';
 
-                      echo '<a id="' . $id_annuler . '" class="bouton_annuler_update annulerHoraireUpdate">Annuler</a>';
+                      echo '<a id="' . $idAnnuler . '" class="bouton_annuler_update annulerHoraireUpdate">Annuler</a>';
                     echo '</div>';
                   }
                   else
@@ -261,7 +261,7 @@
                   }
 
                   // Moyens de transport
-                  $explodedTransports = explode(";", $monChoix->getTransports());
+                  $explodedTransports = explode(';', $monChoix->getTransports());
                   $feet = false;
                   $bike = false;
                   $tram = false;
@@ -271,19 +271,19 @@
                   {
                     switch ($transport)
                     {
-                      case "F":
+                      case 'F':
                         $feet = true;
                         break;
 
-                      case "B":
+                      case 'B':
                         $bike = true;
                         break;
 
-                      case "T":
+                      case 'T':
                         $tram = true;
                         break;
 
-                      case "C":
+                      case 'C':
                         $car  = true;
                         break;
 
@@ -292,74 +292,74 @@
                     }
                   }
 
-                  $id_check_f = 'checkbox_feet_' . $monChoix->getId();
-                  $id_check_b = 'checkbox_bike_' . $monChoix->getId();
-                  $id_check_t = 'checkbox_tram_' . $monChoix->getId();
-                  $id_check_c = 'checkbox_car_' . $monChoix->getId();
+                  $idCheckF = 'checkbox_feet_' . $monChoix->getId();
+                  $idCheckB = 'checkbox_bike_' . $monChoix->getId();
+                  $idCheckT = 'checkbox_tram_' . $monChoix->getId();
+                  $idCheckC = 'checkbox_car_' . $monChoix->getId();
 
                   if ($feet == true)
                   {
-                    echo '<div id="bouton_' . $id_check_f . '" class="switch_transport_2 margin_right_10 bouton_checked">';
-                      echo '<input id="' . $id_check_f . '" type="checkbox" value="F" name="' . $id_check_f . '" checked />';
-                      echo '<label for="' . $id_check_f . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckF . '" class="switch_transport_2 margin_right_10 bouton_checked">';
+                      echo '<input id="' . $idCheckF . '" type="checkbox" value="F" name="' . $idCheckF . '" checked />';
+                      echo '<label for="' . $idCheckF . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_f . '" class="switch_transport_2 margin_right_10">';
-                      echo '<input id="' . $id_check_f . '" type="checkbox" value="F" name="' . $id_check_f . '" />';
-                      echo '<label for="' . $id_check_f . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckF . '" class="switch_transport_2 margin_right_10">';
+                      echo '<input id="' . $idCheckF . '" type="checkbox" value="F" name="' . $idCheckF . '" />';
+                      echo '<label for="' . $idCheckF . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
 
                   if ($bike == true)
                   {
-                    echo '<div id="bouton_' . $id_check_b . '" class="switch_transport_2 bouton_checked">';
-                      echo '<input id="' . $id_check_b . '" type="checkbox" value="B" name="' . $id_check_b . '" checked />';
-                      echo '<label for="' . $id_check_b . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckB . '" class="switch_transport_2 bouton_checked">';
+                      echo '<input id="' . $idCheckB . '" type="checkbox" value="B" name="' . $idCheckB . '" checked />';
+                      echo '<label for="' . $idCheckB . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_b . '" class="switch_transport_2">';
-                      echo '<input id="' . $id_check_b . '" type="checkbox" value="B" name="' . $id_check_b . '" />';
-                      echo '<label for="' . $id_check_b . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckB . '" class="switch_transport_2">';
+                      echo '<input id="' . $idCheckB . '" type="checkbox" value="B" name="' . $idCheckB . '" />';
+                      echo '<label for="' . $idCheckB . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
 
                   if ($tram == true)
                   {
-                    echo '<div id="bouton_' . $id_check_t . '" class="switch_transport_2 margin_right_10 bouton_checked">';
-                      echo '<input id="' . $id_check_t . '" type="checkbox" value="T" name="' . $id_check_t . '" checked />';
-                      echo '<label for="' . $id_check_t . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckT . '" class="switch_transport_2 margin_right_10 bouton_checked">';
+                      echo '<input id="' . $idCheckT . '" type="checkbox" value="T" name="' . $idCheckT . '" checked />';
+                      echo '<label for="' . $idCheckT . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_t . '" class="switch_transport_2 margin_right_10">';
-                      echo '<input id="' . $id_check_t . '" type="checkbox" value="T" name="' . $id_check_t . '" />';
-                      echo '<label for="' . $id_check_t . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckT . '" class="switch_transport_2 margin_right_10">';
+                      echo '<input id="' . $idCheckT . '" type="checkbox" value="T" name="' . $idCheckT . '" />';
+                      echo '<label for="' . $idCheckT . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
 
                   if ($car == true)
                   {
-                    echo '<div id="bouton_' . $id_check_c . '" class="switch_transport_2 bouton_checked">';
-                      echo '<input id="' . $id_check_c . '" type="checkbox" value="C" name="' . $id_check_c . '" checked />';
-                      echo '<label for="' . $id_check_c . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckC . '" class="switch_transport_2 bouton_checked">';
+                      echo '<input id="' . $idCheckC . '" type="checkbox" value="C" name="' . $idCheckC . '" checked />';
+                      echo '<label for="' . $idCheckC . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                   else
                   {
-                    echo '<div id="bouton_' . $id_check_c . '" class="switch_transport_2">';
-                      echo '<input id="' . $id_check_c . '" type="checkbox" value="C" name="' . $id_check_c . '" />';
-                      echo '<label for="' . $id_check_c . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
+                    echo '<div id="bouton_' . $idCheckC . '" class="switch_transport_2">';
+                      echo '<input id="' . $idCheckC . '" type="checkbox" value="C" name="' . $idCheckC . '" />';
+                      echo '<label for="' . $idCheckC . '" class="label_switch_transport cocherTransport"><img src="../../includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox" /></label>';
                     echo '</div>';
                   }
                 echo '</div>';
 
                 // Menu
-                list($entree, $plat, $dessert) = explode(";", decodeString($monChoix->getMenu()));
+                list($entree, $plat, $dessert) = explode(';', decodeString($monChoix->getMenu()));
 
                 echo '<div class="zone_update_menu">';
                   echo '<input type="text" value="' . $entree . '" placeholder="Entrée" name="update_entree_' . $monChoix->getId() . '" class="update_menu" />';

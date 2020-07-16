@@ -1,5 +1,5 @@
 <?php
-  if ($_GET['action'] == "goAjouter")
+  if ($_GET['action'] == 'goAjouter')
     echo '<form method="post" action="missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission" style="width: 100%;">';
   else
   {
@@ -14,13 +14,13 @@
       echo '<tr>';
         echo '<td colspan="3" style="padding: 0;">';
           // Titre
-          if ($_GET['action'] == "goAjouter")
+          if ($_GET['action'] == 'goAjouter')
             echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" style="width: calc(100% - 60px);" required />';
           else
             echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" required />';
 
           // Image
-          if ($_GET['action'] == "goAjouter")
+          if ($_GET['action'] == 'goAjouter')
           {
             echo '<div class="zone_image_mission">';
               echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -55,7 +55,7 @@
         echo '<td class="icons_mission">';
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône gauche (500 x 500 px)</div>';
-            if ($_GET['action'] == "goAjouter")
+            if ($_GET['action'] == 'goAjouter')
               echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones loadLeft" required />';
             else
               echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_mission_icones loadLeft" />';
@@ -71,7 +71,7 @@
         echo '<td class="icons_mission">';
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône milieu (500 x 500 px)</div>';
-            if ($_GET['action'] == "goAjouter")
+            if ($_GET['action'] == 'goAjouter')
               echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones loadMiddle" required />';
             else
               echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_mission_icones loadMiddle" />';
@@ -87,7 +87,7 @@
         echo '<td class="icons_mission">';
           echo '<div class="zone_parcourir_mission_icones">';
             echo '<div class="info_icon">Icône droite (500 x 500 px)</div>';
-            if ($_GET['action'] == "goAjouter")
+            if ($_GET['action'] == 'goAjouter')
               echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones loadRight" required />';
             else
               echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_mission_icones loadRight" />';
@@ -141,7 +141,7 @@
               }
               else
               {
-                if (substr($detailsMission->getHeure(), 0, 2) == "  ")
+                if (substr($detailsMission->getHeure(), 0, 2) == '  ')
                   echo '<option value="" disabled selected hidden>hh</option>';
 
                 if ($i < 10)
@@ -170,7 +170,7 @@
               }
               else
               {
-                if (substr($detailsMission->getHeure(), 2, 2) == "  ")
+                if (substr($detailsMission->getHeure(), 2, 2) == '  ')
                   echo '<option value="" disabled selected hidden>mm</option>';
 
                 if ($i < 2)
@@ -197,7 +197,7 @@
         echo '</td>';
 
         echo '<td colspan="2" class="td_saisie_mission_right">';
-          if ($_GET['action'] == "goAjouter")
+          if ($_GET['action'] == 'goAjouter')
             echo '<input type="text" placeholder="Référence" name="reference" value="' . $detailsMission->getReference() . '" maxlength="255" class="input_mission_reference" required />';
           else
           {
@@ -220,7 +220,7 @@
         echo '</td>';
 
         echo '<td colspan="2" class="td_saisie_mission_right">';
-          if ($_GET['action'] == "goAjouter")
+          if ($_GET['action'] == 'goAjouter')
             echo '<input type="text" placeholder="Objectif" name="objectif" value="' . $detailsMission->getObjectif() . '" class="input_mission_objectif" required />';
           else
             echo '<input type="text" placeholder="Objectif" name="objectif" value="' . $detailsMission->getObjectif() . '" class="input_mission_objectif" required />';
@@ -263,7 +263,7 @@
     echo '</table>';
 
     // Bouton ajout ou modification
-    if ($_GET['action'] == "goAjouter")
+    if ($_GET['action'] == 'goAjouter')
       echo '<input type="submit" name="create_mission" value="Créer la mission" class="submit_mission" />';
     else
       echo '<input type="submit" name="update_mission" value="Modifier la mission" class="submit_mission" />';
@@ -271,7 +271,7 @@
   echo '</form>';
 
   // Classement (uniquement sur les missions existantes)
-  if ($_GET['action'] == "goModifier")
+  if ($_GET['action'] == 'goModifier')
   {
     echo '<div class="zone_classement_mission">';
       echo '<div class="titre_classement">Classement</div>';

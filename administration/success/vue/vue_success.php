@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Succès";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Succès';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Gestion succès";
+        $title = 'Gestion succès';
 
         include('../../includes/common/header.php');
       ?>
@@ -31,7 +31,7 @@
 			<!-- Paramétrage des boutons de navigation -->
 			<aside id="left_menu" class="aside_no_nav">
 				<?php
-          $modify_success = true;
+          $modifierSucces = true;
 
 					include('../../includes/common/aside.php');
 				?>
@@ -105,7 +105,7 @@
 
                 // Unicité
                 echo '<td class="td_saisie_succes_unicity">';
-                  if ($_SESSION['save']['unicity'] == "Y")
+                  if ($_SESSION['save']['unicity'] == 'Y')
                   {
                     echo '<div id="switch_success" class="switch_success switch_checked">';
                       echo '<input type="checkbox" id="checkbox_unicity" name="unicity" checked/>';
@@ -225,7 +225,7 @@
                   echo '<input type="hidden" value="Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?" class="eventMessage" />';
                 echo '</form>';
 
-                if ($success->getDefined() == "Y")
+                if ($success->getDefined() == 'Y')
                   echo '<div class="succes_liste">';
                 else
                   echo '<div class="succes_liste_undefined">';
@@ -234,7 +234,7 @@
                   echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
 
                   // Condition
-                  if ($success->getUnicity() == "Y")
+                  if ($success->getUnicity() == 'Y')
                     echo '<div class="condition_succes">Unique</div>';
                   else
                     echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
@@ -249,7 +249,7 @@
                   echo '<div class="description_succes">' . $success->getDescription() . '</div>';
 
                   // Explications succès
-                  if ($success->getDefined() == "Y")
+                  if ($success->getDefined() == 'Y')
                     echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
                   else
                     echo '<div class="explications_succes_undefined">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';

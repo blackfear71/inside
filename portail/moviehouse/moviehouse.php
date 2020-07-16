@@ -27,7 +27,7 @@
     case 'goConsulter':
       // Contrôle si l'année est renseignée et numérique
       if (!isset($_GET['year']) OR (!is_numeric($_GET['year']) AND $_GET['year'] != 'none'))
-        header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+        header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
       // Contrôle de la vue pour les films à date non communiquée
       elseif ($_GET['year'] == 'none' AND $_GET['view'] != 'cards')
         header('location: moviehouse.php?view=cards&year=' . $_GET['year'] . '&action=goConsulter');
@@ -44,11 +44,11 @@
         switch ($_GET['view'])
         {
           case 'home':
-            list($films_semaine, $films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
+            list($filmsSemaine, $filmsWaited, $filmsWayOut) = explode(';', $preferences->getCategories_movie_house());
 
             $listeRecents = getRecents($_GET['year']);
 
-            if ($films_semaine == "Y")
+            if ($filmsSemaine == 'Y')
             {
               $afficherSemaine = controlWeek($_GET['year']);
 
@@ -57,10 +57,10 @@
                 $listeSemaine = getSemaine();
             }
 
-            if ($films_waited == "Y")
+            if ($filmsWaited == 'Y')
               $listeAttendus = getAttendus($_GET['year']);
 
-            if ($films_way_out == "Y")
+            if ($filmsWayOut == 'Y')
               $listeSorties = getSorties($_GET['year']);
             break;
 
@@ -72,27 +72,27 @@
             break;
 
           default:
-            header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+            header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
             break;
         }
       }
       break;
 
-    case "doAjouter":
-      $id_film = insertFilm($_POST, $_SESSION['user']['identifiant']);
+    case 'doAjouter':
+      $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
-    case "doVoterFilm":
-      $id_film = insertStars($_POST, $_SESSION['user']['identifiant']);
+    case 'doVoterFilm':
+      $idFilm = insertStars($_POST, $_SESSION['user']['identifiant']);
       break;
 
-    case "doParticiperFilm":
-      $id_film = insertParticipation($_POST, $_SESSION['user']['identifiant']);
+    case 'doParticiperFilm':
+      $idFilm = insertParticipation($_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: moviehouse.php?view=home&year=' . date("Y") . '&action=goConsulter');
+      header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
       break;
   }
 
@@ -183,7 +183,7 @@
 
           unset($recent);
 
-          if ($films_semaine == "Y" AND $afficherSemaine == true)
+          if ($filmsSemaine == 'Y' AND $afficherSemaine == true)
           {
             foreach ($listeSemaine as $filmSemaine)
             {
@@ -212,7 +212,7 @@
             unset($filmSemaine);
           }
 
-          if ($films_waited == "Y")
+          if ($filmsWaited == 'Y')
           {
             foreach ($listeAttendus as &$attendu)
             {
@@ -241,7 +241,7 @@
             unset($attendu);
           }
 
-          if ($films_way_out == "Y")
+          if ($filmsWayOut == 'Y')
           {
             foreach ($listeSorties as &$sortie)
             {
@@ -280,9 +280,9 @@
       $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
       break;
 
-    case "doAjouter":
-    case "doVoterFilm":
-    case "doParticiperFilm":
+    case 'doAjouter':
+    case 'doVoterFilm':
+    case 'doParticiperFilm':
     default:
       break;
   }
@@ -290,20 +290,20 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAjouter":
+    case 'doAjouter':
       if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true)
       OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter');
       else
-        header('location: details.php?id_film=' . $id_film . '&action=goConsulter');
+        header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
       break;
 
-    case "doVoterFilm":
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $id_film);
+    case 'doVoterFilm':
+      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idFilm);
       break;
 
-    case "doParticiperFilm":
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $id_film);
+    case 'doParticiperFilm':
+      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idFilm);
       break;
 
     case 'goConsulter':

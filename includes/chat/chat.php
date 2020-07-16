@@ -31,11 +31,12 @@
 
   foreach ($_SESSION['chat']['users'] as $user)
   {
-    $user_chat = array('identifiant' => htmlspecialchars($user->getIdentifiant()),
-                       'pseudo'      => htmlspecialchars($user->getPseudo()),
-                       'avatar'      => htmlspecialchars($user->getAvatar())
-                      );
-    array_push($listUsers, $user_chat);
+    $userChat = array('identifiant' => htmlspecialchars($user->getIdentifiant()),
+                      'pseudo'      => htmlspecialchars($user->getPseudo()),
+                      'avatar'      => htmlspecialchars($user->getAvatar())
+                     );
+                     
+    array_push($listUsers, $userChat);
   }
 
   // On formate les données au format JSON

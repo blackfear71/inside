@@ -16,7 +16,7 @@
             echo '<div class="zone_depense_top">';
               echo '<div class="zone_achat">';
                 // Avatar acheteur
-                $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
+                $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, 'avatar');
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
 
@@ -38,7 +38,7 @@
                   {
                     echo '<div class="zone_parts_utilisateur">';
                       // Avatar utilisateur
-                      $avatarFormatted = formatAvatar($parts->getAvatar(), $parts->getPseudo(), 2, "avatar");
+                      $avatarFormatted = formatAvatar($parts->getAvatar(), $parts->getPseudo(), 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 

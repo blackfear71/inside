@@ -27,7 +27,7 @@
   // Appel métier
   switch ($_GET['action'])
   {
-    case "goConsulter":
+    case 'goConsulter':
       // Contrôle si la page renseignée et numérique, si le tri et le filtre sont présents
       if (!isset($_GET['page'])   OR empty($_GET['page'])   OR !is_numeric($_GET['page'])
       OR  !isset($_GET['sort'])   OR empty($_GET['sort'])
@@ -55,24 +55,24 @@
       }
       break;
 
-    case "doAjouter":
-      $id_col = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
+    case 'doAjouter':
+      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
 
-      if (!empty($id_col))
-        $numeroPage = numeroPageCollector($id_col);
+      if (!empty($idCollector))
+        $numeroPage = numeroPageCollector($idCollector);
       break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
       deleteVotes($_POST);
       deleteCollector($_POST);
       break;
 
-    case "doModifier":
-      $id_col = updateCollector($_POST, $_FILES);
+    case 'doModifier':
+      $idCollector = updateCollector($_POST, $_FILES);
       break;
 
-    case "doVoter":
-      $id_col = voteCollector($_POST, $_SESSION['user']['identifiant']);
+    case 'doVoter':
+      $idCollector = voteCollector($_POST, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -84,7 +84,7 @@
   // Traitements de sécurité avant la vue
   switch ($_GET['action'])
   {
-    case "goConsulter":
+    case 'goConsulter':
       foreach ($listeUsers as &$user)
       {
         $user['pseudo'] = htmlspecialchars($user['pseudo']);
@@ -131,10 +131,10 @@
       }
       break;
 
-    case "doAjouter":
-    case "doSupprimer":
-    case "doModifier":
-    case "doVoter":
+    case 'doAjouter':
+    case 'doSupprimer':
+    case 'doModifier':
+    case 'doVoter':
     default:
       break;
   }
@@ -142,26 +142,26 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAjouter":
-      if (!empty($id_col) AND !empty($numeroPage))
-        header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $id_col);
+    case 'doAjouter':
+      if (!empty($idCollector) AND !empty($numeroPage))
+        header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $idCollector);
       else
         header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
       header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;
 
-    case "doModifier":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $id_col);
+    case 'doModifier':
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
       break;
 
-    case "doVoter":
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $id_col);
+    case 'doVoter':
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
       break;
 
-    case "goConsulter":
+    case 'goConsulter':
     default:
       include_once('vue/vue_collector.php');
       break;

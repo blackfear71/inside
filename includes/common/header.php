@@ -71,7 +71,7 @@
     echo '</div>';
 
     // Boutons missions
-    $zone_inside = 'header';
+    $zoneInside = 'header';
     include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
   echo '</div>';
 ?>

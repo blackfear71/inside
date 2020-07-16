@@ -12,7 +12,7 @@
       // Affichage des choix utilisateur
       echo '<div id="afficher_propositions_mes_choix" class="zone_propositions_mes_choix">';
         // Supprimer tous les choix
-        if ($actions["supprimer_choix"] == true)
+        if ($actions['supprimer_choix'] == true)
         {
           echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix">';
             echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="lien_red eventConfirm" />';
@@ -36,7 +36,7 @@
             echo '<div class="nom_proposition nom_normal">' . formatString($monChoix->getName(), 20) . '</div>';
 
             // Suppression choix
-            if ($actions["choix"] == true)
+            if ($actions['choix'] == true)
             {
               echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';

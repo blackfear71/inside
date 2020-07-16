@@ -12,7 +12,7 @@
     $missionExistante = false;
 
     // Contrôle mission existante
-    $reponse = $bdd->query('SELECT * FROM missions WHERE (id = ' . $id . ' AND (date_deb < ' . date("Ymd") . ' OR (date_deb = ' . date("Ymd") . ' AND heure <= ' . date("His") . ')))');
+    $reponse = $bdd->query('SELECT * FROM missions WHERE (id = ' . $id . ' AND (date_deb < ' . date('Ymd') . ' OR (date_deb = ' . date('Ymd') . ' AND heure <= ' . date('His') . ')))');
 
     if ($reponse->rowCount() > 0)
       $missionExistante = true;
@@ -52,11 +52,11 @@
     // Tri sur statut (V : à venir, C : en cours, A : ancienne)
     foreach ($listeMissions as $missionTri)
     {
-      $tri_statut[]   = $missionTri->getStatut();
-      $tri_date_deb[] = $missionTri->getDate_deb();
+      $triStatut[]  = $missionTri->getStatut();
+      $triDateDeb[] = $missionTri->getDate_deb();
     }
 
-    array_multisort($tri_statut, SORT_DESC, $tri_date_deb, SORT_DESC, $listeMissions);
+    array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $listeMissions);
 
     // Retour
     return $listeMissions;
@@ -151,22 +151,24 @@
 
     if (!empty($mission))
     {
-      $control_maj = false;
+      $missionCommencee = false;
 
       global $bdd;
 
       if (isset($_SERVER['HTTP_REFERER']) AND strpos($_SERVER['HTTP_REFERER'], $mission[$ref]['page']) !== false)
       {
         // Contrôle mission commencée utilisateur
-        $reponse1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
+        $reponse1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date('Ymd'));
+
         if ($reponse1->rowCount() > 0)
-          $control_maj = true;
+          $missionCommencee = true;
+
         $reponse1->closeCursor();
 
-        if ($control_maj == true)
+        if ($missionCommencee == true)
         {
           // Lecture avancement mission
-          $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
+          $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date('Ymd'));
           $donnees2 = $reponse2->fetch();
           $avancement = $donnees2['avancement'];
           $reponse2->closeCursor();
@@ -174,7 +176,7 @@
           // Mise à jour avancement mission
           $avancement += 1;
 
-          $reponse3 = $bdd->prepare('UPDATE missions_users SET avancement = :avancement WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date("Ymd"));
+          $reponse3 = $bdd->prepare('UPDATE missions_users SET avancement = :avancement WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date('Ymd'));
           $reponse3->execute(array(
             'avancement' => $avancement
           ));
@@ -188,7 +190,7 @@
             'id_mission'   => $mission[$ref]['id_mission'],
             'identifiant'  => $user,
             'avancement'   => 1,
-            'date_mission' => date("Ymd")
+            'date_mission' => date('Ymd')
               ));
           $reponse2->closeCursor();
         }
@@ -247,11 +249,11 @@
       // Tri sur avancement puis identifiant
       foreach ($rankingUsers as $rankUser)
       {
-        $tri_rank[]  = $rankUser['total'];
-        $tri_alpha[] = $rankUser['identifiant'];
+        $triRank[]  = $rankUser['total'];
+        $triAlpha[] = $rankUser['identifiant'];
       }
 
-      array_multisort($tri_rank, SORT_DESC, $tri_alpha, SORT_ASC, $rankingUsers);
+      array_multisort($triRank, SORT_DESC, $triAlpha, SORT_ASC, $rankingUsers);
 
       // Affectation du rang
       $prevTotal   = $rankingUsers[0]['total'];

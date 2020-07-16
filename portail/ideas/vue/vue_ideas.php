@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "&#35;TheBox";
-      $style_head      = "styleTheBox.css";
-      $script_head     = "scriptTheBox.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = '&#35;TheBox';
+      $styleHead      = 'styleTheBox.css';
+      $scriptHead     = 'scriptTheBox.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "#TheBox";
+        $title = '#TheBox';
 
         include('../../includes/common/header.php');
       ?>
@@ -33,13 +33,13 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

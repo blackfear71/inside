@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Portail";
-      $style_head      = "stylePortail.css";
-      $script_head     = "scriptPortail.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Portail';
+      $styleHead      = 'stylePortail.css';
+      $scriptHead     = 'scriptPortail.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Portail";
+        $title = 'Portail';
 
         include('../../includes/common/header.php');
       ?>
@@ -33,13 +33,13 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
 			<article>
         <?php
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

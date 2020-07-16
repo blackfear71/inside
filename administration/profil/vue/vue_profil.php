@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Administrateur";
-      $style_head      = "styleProfil.css";
-      $script_head     = "scriptProfil.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = true;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Administrateur';
+      $styleHead      = 'styleProfil.css';
+      $scriptHead     = 'scriptProfil.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = true;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Administrateur";
+        $title = 'Administrateur';
 
         include('../../includes/common/header.php');
       ?>
@@ -48,7 +48,7 @@
 
             // Avatar actuel & suppression
             echo '<div class="zone_profil_avatar_parametres">';
-              $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 2, 'avatar');
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_profil" />';
 

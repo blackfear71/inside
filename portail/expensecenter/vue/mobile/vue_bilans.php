@@ -27,12 +27,12 @@
       // Bilan
       echo '<div class="zone_bilan_user bilan_' . $classBilan . '">';
         // Avatar
-        $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+        $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_bilan" />';
 
         // Pseudo
-        echo '<div class="pseudo_bilan">' . formatString($user->getPseudo(), 15) . "</div>";
+        echo '<div class="pseudo_bilan">' . formatString($user->getPseudo(), 15) . '</div>';
 
         // Total
         if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)

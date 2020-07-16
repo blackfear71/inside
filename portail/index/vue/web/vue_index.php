@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = '';
-      $style_head      = 'styleIndex.css';
-      $script_head     = 'scriptIndex.js';
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = '';
+      $styleHead      = 'styleIndex.css';
+      $scriptHead     = 'scriptIndex.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('includes/common/head.php');
     ?>
@@ -59,15 +59,15 @@
               echo '</div>';
 
               // Logos catégories
-              $icons = array("movie_house",
-                             "food_advisor",
-                             "cooking_box",
-                             "expense_center",
-                             "collector",
-                             "calendars",
-                             //event_manager,
-                             "petits_pedestres",
-                             "missions"
+              $icons = array('movie_house',
+                             'food_advisor',
+                             'cooking_box',
+                             'expense_center',
+                             'collector',
+                             'calendars',
+                             //'event_manager',
+                             'petits_pedestres',
+                             'missions'
                             );
 
               echo '<div class="zone_logos">';

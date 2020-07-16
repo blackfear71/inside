@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Thèmes";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = true;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Thèmes';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = true;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Gestion thèmes";
+        $title = 'Gestion thèmes';
 
         include('../../includes/common/header.php');
       ?>
@@ -119,76 +119,76 @@
               /********************************************/
               /* Affichage thèmes existants (utilisateurs)*/
               /********************************************/
-              if (!empty($themes_users))
+              if (!empty($themesUsers))
               {
-                foreach ($themes_users as $theme_users)
+                foreach ($themesUsers as $themeUsers)
                 {
-                  echo '<div class="zone_theme" id="' . $theme_users->getId() . '">';
+                  echo '<div class="zone_theme" id="' . $themeUsers->getId() . '">';
                     // Images
                     echo '<div class="zone_header_theme">';
-                      if ($theme_users->getLogo() == "Y")
-                        echo '<img src="../../includes/images/themes/logos/' . $theme_users->getReference() . '_l.png" alt="' . $theme_users->getReference() . '_l" title="Logo" class="theme_logo" />';
+                      if ($themeUsers->getLogo() == 'Y')
+                        echo '<img src="../../includes/images/themes/logos/' . $themeUsers->getReference() . '_l.png" alt="' . $themeUsers->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                      echo '<img src="../../includes/images/themes/headers/' . $theme_users->getReference() . '_h.png" alt="' . $theme_users->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                      echo '<img src="../../includes/images/themes/headers/' . $themeUsers->getReference() . '_h.png" alt="' . $themeUsers->getReference() . '_h" title="Header" class="theme_header_footer" />';
                     echo '</div>';
 
-                    echo '<img src="../../includes/images/themes/backgrounds/' . $theme_users->getReference() . '.png" alt="' . $theme_users->getReference() . '" title="Background" class="theme_background" />';
-                    echo '<img src="../../includes/images/themes/footers/' . $theme_users->getReference() . '_f.png" alt="' . $theme_users->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+                    echo '<img src="../../includes/images/themes/backgrounds/' . $themeUsers->getReference() . '.png" alt="' . $themeUsers->getReference() . '" title="Background" class="theme_background" />';
+                    echo '<img src="../../includes/images/themes/footers/' . $themeUsers->getReference() . '_f.png" alt="' . $themeUsers->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
                     /*********************************************/
                     /* Visualisation normale (sans modification) */
                     /*********************************************/
-                    echo '<div id="modifier_theme_2_' . $theme_users->getId() . '">';
+                    echo '<div id="modifier_theme_2_' . $themeUsers->getId() . '">';
                       echo '<div class="zone_theme_titre">';
                         // Bouton suppression
-                        echo '<form id="delete_theme_' . $theme_users->getId() . '" method="post" action="themes.php?action=doSupprimer">';
-                          echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
+                        echo '<form id="delete_theme_' . $themeUsers->getId() . '" method="post" action="themes.php?action=doSupprimer">';
+                          echo '<input type="hidden" name="id_theme" value="' . $themeUsers->getId() . '" />';
                           echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                           echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
                         echo '</form>';
 
                         // Bouton modification
-                        echo '<a id="theme_' . $theme_users->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
+                        echo '<a id="theme_' . $themeUsers->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
 
                         // Titre
                         echo '<div class="theme_titre">';
-                          echo $theme_users->getName();
+                          echo $themeUsers->getName();
                         echo '</div>';
                       echo '</div>';
 
                       // Référence
-                      echo '<div class="theme_ref_user">' . $theme_users->getReference() . '</div>';
+                      echo '<div class="theme_ref_user">' . $themeUsers->getReference() . '</div>';
 
                       // Niveau
-                      echo '<div class="theme_level">Niveau <span class="number_exp">' . $theme_users->getLevel() . '</span></div>';
+                      echo '<div class="theme_level">Niveau <span class="number_exp">' . $themeUsers->getLevel() . '</span></div>';
                     echo '</div>';
 
                     /***************************/
                     /* Caché pour modification */
                     /***************************/
-                    echo '<div id="modifier_theme_' . $theme_users->getId() . '" style="display: none;">';
+                    echo '<div id="modifier_theme_' . $themeUsers->getId() . '" style="display: none;">';
                       echo '<form method="post" action="themes.php?action=doModifier">';
-                        echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
+                        echo '<input type="hidden" name="id_theme" value="' . $themeUsers->getId() . '" />';
 
                         echo '<div class="zone_theme_modification_titre">';
                           echo '<input type="hidden" name="theme_type" value="U" />';
 
                           // Annulation modification
-                          echo '<a id="annuler_' . $theme_users->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
+                          echo '<a id="annuler_' . $themeUsers->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
 
                           // Validation modification
                           echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
 
                           // Titre
-                          echo '<input type="text" name="theme_title" value="' . $theme_users->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
+                          echo '<input type="text" name="theme_title" value="' . $themeUsers->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
                         echo '</div>';
 
                         // Référence
-                        echo '<div class="theme_ref_user">' . $theme_users->getReference() . '</div>';
+                        echo '<div class="theme_ref_user">' . $themeUsers->getReference() . '</div>';
 
                         // Niveau
                         echo '<div class="theme_level_update">';
-                          echo '<input type="text" name="theme_level" value="' . $theme_users->getLevel() . '" placeholder="Niveau" maxlength="2" class="saisie_ref_theme" required />';
+                          echo '<input type="text" name="theme_level" value="' . $themeUsers->getLevel() . '" placeholder="Niveau" maxlength="2" class="saisie_ref_theme" required />';
                         echo '</div>';
                       echo '</form>';
                     echo '</div>';
@@ -276,81 +276,81 @@
               /****************************************/
               /* Affichage thèmes existants (missions)*/
               /****************************************/
-              if (!empty($themes_missions))
+              if (!empty($themesMissions))
               {
-                foreach ($themes_missions as $theme_mission)
+                foreach ($themesMissions as $themeMission)
                 {
-                  echo '<div class="zone_theme" id="' . $theme_mission->getId() . '">';
+                  echo '<div class="zone_theme" id="' . $themeMission->getId() . '">';
                     // Images
                     echo '<div class="zone_header_theme">';
-                      if ($theme_mission->getLogo() == "Y")
-                        echo '<img src="../../includes/images/themes/logos/' . $theme_mission->getReference() . '_l.png" alt="' . $theme_mission->getReference() . '_l" title="Logo" class="theme_logo" />';
+                      if ($themeMission->getLogo() == 'Y')
+                        echo '<img src="../../includes/images/themes/logos/' . $themeMission->getReference() . '_l.png" alt="' . $themeMission->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                      echo '<img src="../../includes/images/themes/headers/' . $theme_mission->getReference() . '_h.png" alt="' . $theme_mission->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                      echo '<img src="../../includes/images/themes/headers/' . $themeMission->getReference() . '_h.png" alt="' . $themeMission->getReference() . '_h" title="Header" class="theme_header_footer" />';
                     echo '</div>';
 
-                    echo '<img src="../../includes/images/themes/backgrounds/' . $theme_mission->getReference() . '.png" alt="' . $theme_mission->getReference() . '" title="Background" class="theme_background" />';
-                    echo '<img src="../../includes/images/themes/footers/' . $theme_mission->getReference() . '_f.png" alt="' . $theme_mission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+                    echo '<img src="../../includes/images/themes/backgrounds/' . $themeMission->getReference() . '.png" alt="' . $themeMission->getReference() . '" title="Background" class="theme_background" />';
+                    echo '<img src="../../includes/images/themes/footers/' . $themeMission->getReference() . '_f.png" alt="' . $themeMission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
                     /*********************************************/
                     /* Visualisation normale (sans modification) */
                     /*********************************************/
-                    echo '<div id="modifier_theme_2_' . $theme_mission->getId() . '">';
+                    echo '<div id="modifier_theme_2_' . $themeMission->getId() . '">';
                       echo '<div class="zone_theme_titre">';
                         // Bouton suppression
-                        echo '<form id="delete_theme_' . $theme_mission->getId() . '" method="post" action="themes.php?action=doSupprimer">';
-                          echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
+                        echo '<form id="delete_theme_' . $themeMission->getId() . '" method="post" action="themes.php?action=doSupprimer">';
+                          echo '<input type="hidden" name="id_theme" value="' . $themeMission->getId() . '" />';
                           echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                           echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
                         echo '</form>';
 
                         // Bouton modification
-                        echo '<a id="theme_' . $theme_mission->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
+                        echo '<a id="theme_' . $themeMission->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
 
                         // Titre
                         echo '<div class="theme_titre">';
-                          echo $theme_mission->getName();
+                          echo $themeMission->getName();
                         echo '</div>';
                       echo '</div>';
 
                       // Référence et dates
-                      echo '<div class="theme_ref_mission">' . $theme_mission->getReference() . '</div>';
+                      echo '<div class="theme_ref_mission">' . $themeMission->getReference() . '</div>';
 
-                      if ($theme_mission->getDate_deb() != $theme_mission->getDate_fin())
-                        echo '<div class="theme_dates">Du ' . formatDateForDisplay($theme_mission->getDate_deb()) . ' au ' . formatDateForDisplay($theme_mission->getDate_fin()) . '</div>';
+                      if ($themeMission->getDate_deb() != $themeMission->getDate_fin())
+                        echo '<div class="theme_dates">Du ' . formatDateForDisplay($themeMission->getDate_deb()) . ' au ' . formatDateForDisplay($themeMission->getDate_fin()) . '</div>';
                       else
-                        echo '<div class="theme_dates">Le ' . formatDateForDisplay($theme_mission->getDate_deb()) . ' seulement</div>';
+                        echo '<div class="theme_dates">Le ' . formatDateForDisplay($themeMission->getDate_deb()) . ' seulement</div>';
                     echo '</div>';
 
                     /***************************/
                     /* Caché pour modification */
                     /***************************/
-                    echo '<div id="modifier_theme_' . $theme_mission->getId() . '" style="display: none;">';
+                    echo '<div id="modifier_theme_' . $themeMission->getId() . '" style="display: none;">';
                       echo '<form method="post" action="themes.php?action=doModifier">';
-                        echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
+                        echo '<input type="hidden" name="id_theme" value="' . $themeMission->getId() . '" />';
 
                         echo '<div class="zone_theme_modification_titre">';
                           echo '<input type="hidden" name="theme_type" value="M" />';
 
                           // Annulation modification
-                          echo '<a id="annuler_' . $theme_mission->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
+                          echo '<a id="annuler_' . $themeMission->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
 
                           // Validation modification
                           echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
 
                           // Titre
-                          echo '<input type="text" name="theme_title" value="' . $theme_mission->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
+                          echo '<input type="text" name="theme_title" value="' . $themeMission->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
                         echo '</div>';
 
                         // Référence
-                        echo '<div class="theme_ref_mission">' . $theme_mission->getReference() . '</div>';
+                        echo '<div class="theme_ref_mission">' . $themeMission->getReference() . '</div>';
 
                         // Dates de début et de fin
                         echo '<div class="theme_dates_update">';
                           echo '<div class="theme_dates_update_texte">Du&nbsp;</div>';
-                          echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($theme_mission->getDate_deb()) . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_mod_deb[' . $theme_mission->getId() . ']" class="modify_date_deb_theme" required />';
+                          echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($themeMission->getDate_deb()) . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_mod_deb[' . $themeMission->getId() . ']" class="modify_date_deb_theme" required />';
                           echo '<div class="theme_dates_update_texte">&nbsp;au&nbsp;</div>';
-                          echo '<input type="text" name="theme_date_fin" value="' . formatDateForDisplay($theme_mission->getDate_fin()) . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_mod_fin[' . $theme_mission->getId() . ']" class="modify_date_fin_theme" required />';
+                          echo '<input type="text" name="theme_date_fin" value="' . formatDateForDisplay($themeMission->getDate_fin()) . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_mod_fin[' . $themeMission->getId() . ']" class="modify_date_fin_theme" required />';
                         echo '</div>';
                       echo '</form>';
                     echo '</div>';

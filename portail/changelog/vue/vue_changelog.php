@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Journal des modifications";
-      $style_head      = "styleCL.css";
-      $script_head     = "scriptCL.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Journal des modifications';
+      $styleHead      = 'styleCL.css';
+      $scriptHead     = 'scriptCL.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
     <header>
       <?php
-        $title = "Journal des modifications";
+        $title = 'Journal des modifications';
 
         include('../../includes/common/header.php');
       ?>
@@ -39,7 +39,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

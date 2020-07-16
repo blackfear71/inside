@@ -30,7 +30,7 @@
         echo '<div class="zone_niveau_succes">';
       }
 
-      if ($success->getDefined() == "Y")
+      if ($success->getDefined() == 'Y')
       {
         if ($success->getValue_user() >= $success->getLimit_success())
           echo '<a id="agrandir_succes_' . $success->getId() . '" class="agrandirSucces succes_liste yellow">';
@@ -38,7 +38,7 @@
           echo '<div class="succes_liste">';
 
           // Médailles (en excluant ceux qui sont uniques)
-          if (!empty($success->getClassement()) AND $success->getUnicity() != "Y")
+          if (!empty($success->getClassement()) AND $success->getUnicity() != 'Y')
           {
             foreach ($success->getClassement() as $classement)
             {

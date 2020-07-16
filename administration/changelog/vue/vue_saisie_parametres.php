@@ -8,7 +8,7 @@
         echo '<div class="titre_parameter_changelog">Action</div>';
 
         // Ajouter
-        if ($changeLogParameters->getAction() == "A")
+        if ($changeLogParameters->getAction() == 'A')
         {
           echo '<div id="bouton_ajouter" class="switch_action_changelog bouton_checked">';
             echo '<input id="ajouter" type="radio" name="action_changelog" value="A" checked required />';
@@ -24,7 +24,7 @@
         }
 
         // Modifier
-        if ($changeLogParameters->getAction() == "M")
+        if ($changeLogParameters->getAction() == 'M')
         {
           echo '<div id="bouton_modifier" class="switch_action_changelog bouton_checked">';
             echo '<input id="modifier" type="radio" name="action_changelog" value="M" checked required />';
@@ -40,7 +40,7 @@
         }
 
         // Supprimer
-        if ($changeLogParameters->getAction() == "S")
+        if ($changeLogParameters->getAction() == 'S')
         {
           echo '<div id="bouton_supprimer" class="switch_action_changelog bouton_checked">';
             echo '<input id="supprimer" type="radio" name="action_changelog" value="S" checked required />';
@@ -65,12 +65,12 @@
           echo '<div class="titre_listbox_changelox">Année : </div>';
 
           echo '<select name="annee_changelog" class="listbox_periode" required>';
-            $annee_initiale = intval(date('Y'));
-            $annee_fin      = 2017;
+            $anneeInitiale = intval(date('Y'));
+            $anneeFin      = 2017;
 
             if (!empty($changeLogParameters->getYear()))
             {
-              for ($i = $annee_initiale; $i >= $annee_fin; $i--)
+              for ($i = $anneeInitiale; $i >= $anneeFin; $i--)
               {
                 if ($i == $changeLogParameters->getYear())
                   echo '<option value="' . $i . '" selected>' . $i . '</option>';
@@ -80,9 +80,9 @@
             }
             else
             {
-              for ($i = $annee_initiale; $i >= $annee_fin; $i--)
+              for ($i = $anneeInitiale; $i >= $anneeFin; $i--)
               {
-                if ($i == $annee_initiale)
+                if ($i == $anneeInitiale)
                   echo '<option value="' . $i . '" selected>' . $i . '</option>';
                 else
                   echo '<option value="' . $i . '">' . $i . '</option>';
@@ -96,7 +96,7 @@
           echo '<div class="titre_listbox_changelox">Semaine : </div>';
 
           echo '<select name="semaine_changelog" class="listbox_periode" required>';
-            $semaine_initiale = intval(date('W'));
+            $semaineInitiale = intval(date('W'));
 
             if (!empty($changeLogParameters->getWeek()))
             {
@@ -112,7 +112,7 @@
             {
               for ($j = 1; $j <= 53; $j++)
               {
-                if ($j == $semaine_initiale)
+                if ($j == $semaineInitiale)
                   echo '<option value="' . $j . '" selected>' . $j . '</option>';
                 else
                   echo '<option value="' . $j . '">' . $j . '</option>';

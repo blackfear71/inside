@@ -45,7 +45,7 @@
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
-            if ($film->getTo_delete() == "Y")
+            if ($film->getTo_delete() == 'Y')
             {
     					echo '<form method="post" action="movies.php?action=doDeleteFilm">';
     						echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
@@ -55,7 +55,7 @@
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
-            if ($film->getTo_delete() == "Y")
+            if ($film->getTo_delete() == 'Y')
             {
     					echo '<form method="post" action="movies.php?action=doResetFilm">';
     						echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';

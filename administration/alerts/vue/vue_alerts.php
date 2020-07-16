@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Alertes";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Alertes';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Gestion alertes";
+        $title = 'Gestion alertes';
 
         include('../../includes/common/header.php');
       ?>
@@ -53,12 +53,12 @@
                   echo '<select name="type_alert" class="saisie_alert_typ" required>';
                     echo '<option value="" hidden>Type d\'alerte</option>';
 
-                    if ($_SESSION['save']['type_alert'] == "info")
+                    if ($_SESSION['save']['type_alert'] == 'info')
                       echo '<option value="info" selected>Info</option>';
                     else
                       echo '<option value="info">Info</option>';
 
-                    if ($_SESSION['save']['type_alert'] == "erreur")
+                    if ($_SESSION['save']['type_alert'] == 'erreur')
                       echo '<option value="erreur" selected>Erreur</option>';
                     else
                       echo '<option value="erreur">Erreur</option>';
@@ -166,12 +166,12 @@
                       echo '<select name="type_alert" class="saisie_alert_typ" required>';
                         echo '<option value="" hidden>Type d\'alerte</option>';
 
-                        if ($alerte->getType() == "info")
+                        if ($alerte->getType() == 'info')
                           echo '<option value="info" selected>Info</option>';
                         else
                           echo '<option value="info">Info</option>';
 
-                        if ($alerte->getType() == "erreur")
+                        if ($alerte->getType() == 'erreur')
                           echo '<option value="erreur" selected>Erreur</option>';
                         else
                           echo '<option value="erreur">Erreur</option>';

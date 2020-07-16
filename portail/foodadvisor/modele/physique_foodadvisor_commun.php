@@ -103,7 +103,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM food_advisor_users
-                        WHERE id_restaurant = 0 AND date = "' . date("Ymd") . '" AND identifiant = "' . $identifiant . '"');
+                        WHERE id_restaurant = 0 AND date = "' . date('Ymd') . '" AND identifiant = "' . $identifiant . '"');
 
     $data = $req->fetch();
 

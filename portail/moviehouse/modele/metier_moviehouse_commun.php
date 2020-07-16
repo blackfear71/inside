@@ -30,7 +30,7 @@
 
     global $bdd;
 
-    if ($year == "none")
+    if ($year == 'none')
       $reponse = $bdd->query('SELECT * FROM movie_house WHERE date_theater = "" AND to_delete != "Y" ORDER BY date_add DESC, film ASC');
     else
       $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = "' . $year . '" AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
@@ -98,7 +98,7 @@
     global $bdd;
 
     // On récupère le numéro du film
-    $id_film = $post['id_film'];
+    $idFilm = $post['id_film'];
 
     // On récupère l'identifiant de l'utilisateur
     $identifiant = $user;
@@ -106,14 +106,14 @@
     if ($preference == 0)
 		{
 			// Suppression de la table
-			$req = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $identifiant . '"');
+			$req = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $identifiant . '"');
 		}
 		else
 		{
 			// On verifie qu'il n'existe pas déjà un choix pour ce film
 			$existe = false;
 
-			$req1 = $bdd->query('SELECT COUNT(id) AS existe_deja FROM movie_house_users WHERE id_film = ' . $id_film . '
+			$req1 = $bdd->query('SELECT COUNT(id) AS existe_deja FROM movie_house_users WHERE id_film = ' . $idFilm . '
 																						                                      AND   identifiant = "' . $identifiant . '"
 																						                                      ORDER BY id ASC');
 			$data1 = $req1->fetch();
@@ -126,7 +126,7 @@
 			// Si trouvé alors on fait une MAJ
 			if ($existe == true)
 			{
-				$req2 = $bdd->prepare('UPDATE movie_house_users SET stars = :stars WHERE id_film = ' . $id_film . ' AND identifiant = "' . $identifiant . '"');
+				$req2 = $bdd->prepare('UPDATE movie_house_users SET stars = :stars WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $identifiant . '"');
 				$req2->execute(array(
 					'stars' => $preference
 				));
@@ -135,7 +135,7 @@
 			// Sinon on insère une nouvelle ligne
 			else
 			{
-        $vote = array('id_film'       => $id_film,
+        $vote = array('id_film'       => $idFilm,
         					    'identifiant'   => $identifiant,
         					    'stars'         => $preference,
         					    'participation' => "N");
@@ -146,7 +146,7 @@
 			}
 		}
 
-    return $id_film;
+    return $idFilm;
   }
 
   // METIER : Insertion/modification participation
@@ -155,12 +155,12 @@
   {
     global $bdd;
 
-    $id_film = $post['id_film'];
+    $idFilm = $post['id_film'];
 
     if (isset($post['participate']))
     {
       // Lecture de l'état de la participation
-      $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
+      $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
       $data = $req->fetch();
 
       $participation = $data['participation'];
@@ -168,30 +168,30 @@
       $req->closeCursor();
 
       // Génération succès
-      if ($participation == "S")
+      if ($participation == 'S')
         insertOrUpdateSuccesValue('viewer', $user, -1);
 
       // Inversion de la participation
-      if ($participation == "P")
-        $participation = "N";
+      if ($participation == 'P')
+        $participation = 'N';
       else
-        $participation = "P";
+        $participation = 'P';
 
       // Mise à jour
-      $req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
+      $req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
       $req2->execute(array(
         'participation' => $participation
       ));
       $req2->closeCursor();
 
       // Génération succès
-      if ($id_film == 16)
+      if ($idFilm == 16)
         insertOrUpdateSuccesValue('padawan', $user, 0);
     }
     elseif (isset($post['seen']))
     {
       // Lecture de l'état de la vue
-      $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
+      $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
       $data = $req->fetch();
 
       $participation = $data['participation'];
@@ -199,33 +199,33 @@
       $req->closeCursor();
 
       // Inversion de la vue
-      if ($participation == "S")
-        $participation = "N";
+      if ($participation == 'S')
+        $participation = 'N';
       else
-        $participation = "S";
+        $participation = 'S';
 
       // Mise à jour
-      $req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
+      $req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
       $req2->execute(array(
         'participation' => $participation
       ));
       $req2->closeCursor();
 
       // Génération succès
-      if ($participation == "S")
+      if ($participation == 'S')
         insertOrUpdateSuccesValue('viewer', $user, 1);
       else
         insertOrUpdateSuccesValue('viewer', $user, -1);
 
-      if ($id_film == 16)
+      if ($idFilm == 16)
       {
-        if ($participation == "S")
+        if ($participation == 'S')
           insertOrUpdateSuccesValue('padawan', $user, 1);
         else
           insertOrUpdateSuccesValue('padawan', $user, 0);
       }
     }
 
-    return $id_film;
+    return $idFilm;
   }
 ?>

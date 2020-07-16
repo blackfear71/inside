@@ -41,7 +41,7 @@
 
                 // Types
                 echo '<div class="zone_types_fiche">';
-                  $explodedTypes = explode(";", $restaurant->getTypes());
+                  $explodedTypes = explode(';', $restaurant->getTypes());
 
                   foreach ($explodedTypes as $exploded)
                   {
@@ -53,21 +53,21 @@
                 // Jours d'ouverture, site web et plan
                 echo '<div class="zone_icones_fiches">';
                   // Jours d'ouverture
-                  $explodedOpened = explode(";", $restaurant->getOpened());
-                  $semaine_short  = array(0 => "Lu", 1 => "Ma", 2 => "Me", 3 => "Je", 4 => "Ve");
-                  $available_day  = true;
+                  $explodedOpened = explode(';', $restaurant->getOpened());
+                  $semaineShort   = array(0 => 'Lu', 1 => 'Ma', 2 => 'Me', 3 => 'Je', 4 => 'Ve');
+                  $availableDay   = true;
 
                   foreach ($explodedOpened as $keyOpened => $opened)
                   {
                     if (!empty($opened))
                     {
-                      if ($opened == "Y")
-                        echo '<div class="jour_oui">' . $semaine_short[$keyOpened] . '</div>';
+                      if ($opened == 'Y')
+                        echo '<div class="jour_oui">' . $semaineShort[$keyOpened] . '</div>';
                       else
-                        echo '<div class="jour_non">' . $semaine_short[$keyOpened] . '</div>';
+                        echo '<div class="jour_non">' . $semaineShort[$keyOpened] . '</div>';
 
-                      if (date('N') == $keyOpened + 1 AND $opened == "N")
-                        $available_day = false;
+                      if (date('N') == $keyOpened + 1 AND $opened == 'N')
+                        $availableDay = false;
                     }
                   }
 
@@ -120,22 +120,22 @@
                 echo '</form>';
 
                 // Choix rapide
-                if ($choixRapide == true AND $available_day == true)
+                if ($choixRapide == true AND $availableDay == true)
                 {
-                  $already_voted = false;
+                  $alreadyVoted = false;
 
                   // Contrôle choix déjà effectué
                   foreach ($mesChoix as $monChoix)
                   {
                     if ($restaurant->getId() == $monChoix->getId_restaurant())
                     {
-                      $already_voted = true;
+                      $alreadyVoted = true;
                       break;
                     }
                   }
 
                   // Affichage du bouton de choix rapide
-                  if ($already_voted == false)
+                  if ($alreadyVoted == false)
                   {
                     echo '<form method="post" action="restaurants.php?action=doChoixRapide" class="lien_choix_rapide_restaurant">';
                       echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
@@ -148,13 +148,13 @@
               // Description
               if (!empty($restaurant->getDescription()))
               {
-                $longueur_max = 300;
+                $longueurMax = 300;
 
                 echo '<div class="description_restaurant">';
-                  if (strlen($restaurant->getDescription()) > $longueur_max)
+                  if (strlen($restaurant->getDescription()) > $longueurMax)
                   {
                     echo '<div id="long_description_' . $restaurant->getId() . '" style="display: none;">' . nl2br($restaurant->getDescription()) . '</div>';
-                    echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . substr(nl2br($restaurant->getDescription()), 0, $longueur_max) . '...</div>';
+                    echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . substr(nl2br($restaurant->getDescription()), 0, $longueurMax) . '...</div>';
                     echo '<a id="description_' . $restaurant->getId() . '" class="descriptionRestaurant"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
                   }
                   else
@@ -209,29 +209,29 @@
 
                 // Jours d'ouverture
                 echo '<div class="opened_restaurant_update">';
-                  $explodedOpened = explode(";", $restaurant->getOpened());
-                  $semaine        = array("Lu" => "lundi",
-                                          "Ma" => "mardi",
-                                          "Me" => "mercredi",
-                                          "Je" => "jeudi",
-                                          "Ve" => "vendredi");
+                  $explodedOpened = explode(';', $restaurant->getOpened());
+                  $semaine        = array('Lu' => 'lundi',
+                                          'Ma' => 'mardi',
+                                          'Me' => 'mercredi',
+                                          'Je' => 'jeudi',
+                                          'Ve' => 'vendredi');
 
                   $l = 0;
 
                   foreach ($semaine as $j => $jour)
                   {
-                    $id_opened    = "checkbox_update_ouverture_" . $jour . "_" . $restaurant->getId();
-                    $label_opened = "label_update_ouverture_" . $jour . "_" . $restaurant->getId();
+                    $idOpened    = 'checkbox_update_ouverture_' . $jour . '_' . $restaurant->getId();
+                    $labelOpened = 'label_update_ouverture_' . $jour . '_' . $restaurant->getId();
 
-                    if ($explodedOpened[$l] == "Y")
+                    if ($explodedOpened[$l] == 'Y')
                     {
-                      echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
-                      echo '<label for="' . $id_opened . '" id="' . $label_opened . '" class="update_label_jour_checked checkDayUpdate">' . $j . '</label>';
+                      echo '<input type="checkbox" id="' . $idOpened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
+                      echo '<label for="' . $idOpened . '" id="' . $labelOpened . '" class="update_label_jour_checked checkDayUpdate">' . $j . '</label>';
                     }
                     else
                     {
-                      echo '<input type="checkbox" id="' . $id_opened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
-                      echo '<label for="' . $id_opened . '" id="' . $label_opened . '" class="update_label_jour checkDayUpdate">' . $j . '</label>';
+                      echo '<input type="checkbox" id="' . $idOpened . '" name="update_ouverture_restaurant_' . $restaurant->getId() . '[' . $l . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
+                      echo '<label for="' . $idOpened . '" id="' . $labelOpened . '" class="update_label_jour checkDayUpdate">' . $j . '</label>';
                     }
 
                     $l++;
@@ -264,12 +264,12 @@
                 echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
                   echo '<a id="type_update_' . $restaurant->getId() . '" class="bouton_update_type_autre addTypeUpdate"><span class="fond_plus">+</span>Autre</a>';
 
-                  $explodedTypes = explode(";", $restaurant->getTypes());
+                  $explodedTypes = explode(';', $restaurant->getTypes());
                   $k             = 0;
 
                   foreach ($listeTypes as $type)
                   {
-                    $id_type  = "type_" . formatId($type) . "_" . $restaurant->getId();
+                    $idType   = 'type_' . formatId($type) . '_' . $restaurant->getId();
                     $matching = false;
 
                     foreach ($explodedTypes as $exploded)
@@ -283,16 +283,16 @@
 
                     if ($matching == true)
                     {
-                      echo '<div id="bouton_' . $id_type . '" class="switch_types bouton_checked">';
-                        echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" checked />';
-                        echo '<label for="' . $id_type . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
+                      echo '<div id="bouton_' . $idType . '" class="switch_types bouton_checked">';
+                        echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" checked />';
+                        echo '<label for="' . $idType . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
                       echo '</div>';
                     }
                     else
                     {
-                      echo '<div id="bouton_' . $id_type . '" class="switch_types">';
-                        echo '<input id="' . $id_type . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" />';
-                        echo '<label for="' . $id_type . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
+                      echo '<div id="bouton_' . $idType . '" class="switch_types">';
+                        echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" />';
+                        echo '<label for="' . $idType . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
                       echo '</div>';
                     }
 

@@ -34,7 +34,7 @@
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
-            if ($annexes->getTo_delete() == "Y")
+            if ($annexes->getTo_delete() == 'Y')
             {
     					echo '<form method="post" action="calendars.php?action=doDeleteAnnexe">';
 								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
@@ -44,7 +44,7 @@
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
-            if ($annexes->getTo_delete() == "Y")
+            if ($annexes->getTo_delete() == 'Y')
             {
     					echo '<form method="post" action="calendars.php?action=doResetAnnexe">';
 								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';

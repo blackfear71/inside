@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Demandes d'évolution";
-      $style_head      = "styleBugs.css";
-      $script_head     = "scriptBugs.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = true;
+      $titleHead      = 'Demandes d\'évolution';
+      $styleHead      = 'styleBugs.css';
+      $scriptHead     = 'scriptBugs.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = true;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Demandes d'évolution";
+        $title = 'Demandes d\'évolution';
 
         include('../../includes/common/header.php');
       ?>
@@ -39,7 +39,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/

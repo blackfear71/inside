@@ -110,7 +110,7 @@
   function physiqueNombreBugs()
   {
     // Initialisations
-    $nombre_bugs = 0;
+    $nombreBugs = 0;
 
     // Requête
     global $bdd;
@@ -121,12 +121,12 @@
 
     $data = $req->fetch();
 
-    $nombre_bugs = $data['nombreBugs'];
+    $nombreBugs = $data['nombreBugs'];
 
     $req->closeCursor();
 
     // Retour
-    return $nombre_bugs;
+    return $nombreBugs;
   }
 
   // PHYSIQUE : Lecture du nombre d'évolutions
@@ -134,7 +134,7 @@
   function physiqueNombreEvolutions()
   {
     // Initialisations
-    $nombre_evolutions = 0;
+    $nombreEvolutions = 0;
 
     // Requête
     global $bdd;
@@ -142,14 +142,14 @@
     $req = $bdd->query('SELECT COUNT(*) AS nombreEvolutions
                         FROM bugs
                         WHERE type = "E" AND resolved = "N"');
-                        
+
     $data = $req->fetch();
 
-    $nombre_evolutions = $data['nombreEvolutions'];
+    $nombreEvolutions = $data['nombreEvolutions'];
 
     $req->closeCursor();
 
     // Retour
-    return $nombre_evolutions;
+    return $nombreEvolutions;
   }
 ?>

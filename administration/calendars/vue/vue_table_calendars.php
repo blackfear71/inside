@@ -34,7 +34,7 @@
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
-            if ($calendrier->getTo_delete() == "Y")
+            if ($calendrier->getTo_delete() == 'Y')
             {
     					echo '<form method="post" action="calendars.php?action=doDeleteCalendrier">';
 								echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';
@@ -44,7 +44,7 @@
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
-            if ($calendrier->getTo_delete() == "Y")
+            if ($calendrier->getTo_delete() == 'Y')
             {
     					echo '<form method="post" action="calendars.php?action=doResetCalendrier">';
 								echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';

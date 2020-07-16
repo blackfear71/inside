@@ -928,7 +928,7 @@
     global $bdd;
 
     $req = $bdd->exec('DELETE FROM cooking_box
-                       WHERE (year > ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week > ' . date("W") . ')) AND identifiant = "' . $identifiant . '"');
+                       WHERE (year > ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week > ' . date('W') . ')) AND identifiant = "' . $identifiant . '"');
   }
 
   // PHYSIQUE : Suppression des préférences d'un utilisateur

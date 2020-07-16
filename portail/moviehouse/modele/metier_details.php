@@ -1,14 +1,14 @@
 <?php
   // METIER : Contrôle film existant et non à supprimer
   // RETOUR : Booléen
-  function controlFilm($id_film)
+  function controlFilm($idFilm)
   {
     global $bdd;
 
     $filmExistant = false;
 
     // Contrôle film existant
-    $reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $id_film);
+    $reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $idFilm);
     $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() > 0)
@@ -19,10 +19,10 @@
     if ($filmExistant == true)
     {
       // Contrôle film non à supprimer
-      $reponse2 = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $id_film);
+      $reponse2 = $bdd->query('SELECT id, to_delete FROM movie_house WHERE id = ' . $idFilm);
       $donnees2 = $reponse2->fetch();
 
-      if ($donnees2['to_delete'] == "Y")
+      if ($donnees2['to_delete'] == 'Y')
         $filmExistant = false;
 
       $reponse2->closeCursor();
@@ -36,16 +36,16 @@
 
   // METIER : Récupération film précédent et suivant pour navigation
   // RETOUR : Liste de films précédent et suivant
-  function getNavigation($id_film)
+  function getNavigation($idFilm)
   {
-    $listNavigation   = array();
-    $bouton_precedent = array();
-    $bouton_suivant   = array();
+    $listNavigation  = array();
+    $boutonPrecedent = array();
+    $boutonSuivant   = array();
 
     global $bdd;
 
     // On récupère l'année du film
-    $reponse = $bdd->query('SELECT id, date_theater FROM movie_house WHERE id = ' . $id_film);
+    $reponse = $bdd->query('SELECT id, date_theater FROM movie_house WHERE id = ' . $idFilm);
     $donnees = $reponse->fetch();
 
     $anneeCourante = substr($donnees['date_theater'], 0, 4);
@@ -58,28 +58,28 @@
     // On cherche le film précédent et suivant dans la liste
     for ($i = 0; $i < count($listFilms); $i++)
     {
-      if ($listFilms[$i]->getId() == $id_film)
+      if ($listFilms[$i]->getId() == $idFilm)
       {
         // Bouton précédent
         if (isset($listFilms[$i - 1]) AND !empty($listFilms[$i - 1]->getId()) AND !empty($listFilms[$i - 1]->getFilm()))
         {
           // On raccourci le texte s'il est trop long
-          $max_caracteres = 15;
-          $titre          = $listFilms[$i - 1]->getFilm();
+          $maxCaracteres = 15;
+          $titre         = $listFilms[$i - 1]->getFilm();
 
           // Test si la longueur du texte dépasse la limite
-          if (strlen($titre) > $max_caracteres)
+          if (strlen($titre) > $maxCaracteres)
           {
             // Sélection du maximum de caractères
-            $titre = substr($titre, 0, $max_caracteres);
+            $titre = substr($titre, 0, $maxCaracteres);
 
             // Ajout des "..."
             $titre = $titre . '...';
           }
 
           // Stockage
-          $bouton_precedent = array('id'   => $listFilms[$i - 1]->getId(),
-                                    'film' => $titre
+          $boutonPrecedent = array('id'   => $listFilms[$i - 1]->getId(),
+                                   'film' => $titre
                                   );
         }
 
@@ -87,27 +87,27 @@
         if (isset($listFilms[$i + 1]) AND !empty($listFilms[$i + 1]->getId()) AND !empty($listFilms[$i + 1]->getFilm()))
         {
           // On raccourci le texte s'il est trop long
-          $max_caracteres = 15;
-          $titre          = $listFilms[$i + 1]->getFilm();
+          $maxCaracteres = 15;
+          $titre         = $listFilms[$i + 1]->getFilm();
 
           // Test si la longueur du texte dépasse la limite
-          if (strlen($titre) > $max_caracteres)
+          if (strlen($titre) > $maxCaracteres)
           {
             // Sélection du maximum de caractères
-            $titre = substr($titre, 0, $max_caracteres);
+            $titre = substr($titre, 0, $maxCaracteres);
 
             // Ajout des "..."
             $titre = $titre . '...';
           }
 
           // Stockage
-          $bouton_suivant = array('id'   => $listFilms[$i + 1]->getId(),
-                                  'film' => $titre
-                                 );
+          $boutonSuivant = array('id'   => $listFilms[$i + 1]->getId(),
+                                 'film' => $titre
+                                );
         }
 
-        $listNavigation = array('previous' => $bouton_precedent,
-                                'next'     => $bouton_suivant
+        $listNavigation = array('previous' => $boutonPrecedent,
+                                'next'     => $boutonSuivant
                                );
       }
     }
@@ -117,12 +117,12 @@
 
   // METIER : Récupération détails film
   // RETOUR : Objet film
-  function getDetails($id_film, $user)
+  function getDetails($idFilm, $user)
   {
     global $bdd;
 
     // On récupère les données du film
-    $reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $id_film);
+    $reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $idFilm);
     $donnees = $reponse->fetch();
 
     $film = Movie::withData($donnees);
@@ -132,7 +132,7 @@
     // On récupère les étoiles et la participation de l'utilisateur connecté
     if (isset($user))
     {
-      $reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' AND identifiant = "' . $user . '"');
+      $reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
       $donnees2 = $reponse2->fetch();
 
       if (isset($donnees2['stars']))
@@ -145,7 +145,7 @@
     }
 
     // On récupère le nombre de participants
-    $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $id_film);
+    $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $idFilm);
     $donnees3 = $reponse3->fetch();
 
     $film->setNb_users($donnees3['nb_users']);
@@ -157,14 +157,14 @@
 
   // METIER : Récupération étoiles utilisateur sur détails film
   // RETOUR : Liste des étoiles utilisateurs
-  function getDetailsStars($id_film)
+  function getDetailsStars($idFilm)
   {
     $listStars = array();
 
     global $bdd;
 
     // Récupération d'une liste des étoiles
-    $reponse = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $id_film . ' ORDER BY identifiant ASC');
+    $reponse = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $idFilm . ' ORDER BY identifiant ASC');
     while ($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
@@ -221,33 +221,33 @@
     $control_ok = true;
 
     // Récupération des variables
-    $id_film      = $post['id_film'];
-    $nom_film     = $post['nom_film'];
-    $to_delete    = "N";
-    $date_theater = formatDateForInsert($post['date_theater']);
-    $date_release = formatDateForInsert($post['date_release']);
-    $link         = $post['link'];
-    $poster       = $post['poster'];
-    $synopsis     = $post['synopsis'];
-    $trailer      = $post['trailer'];
-    $doodle       = $post['doodle'];
-    $date_doodle  = formatDateForInsert($post['date_doodle']);
+    $idFilm      = $post['id_film'];
+    $nomFilm     = $post['nom_film'];
+    $toDelete    = 'N';
+    $dateTheater = formatDateForInsert($post['date_theater']);
+    $dateRelease = formatDateForInsert($post['date_release']);
+    $link        = $post['link'];
+    $poster      = $post['poster'];
+    $synopsis    = $post['synopsis'];
+    $trailer     = $post['trailer'];
+    $doodle      = $post['doodle'];
+    $dateDoodle  = formatDateForInsert($post['date_doodle']);
 
     if (!empty($post['date_doodle']) AND isset($post['hours_doodle']) AND isset($post['minutes_doodle']))
-      $time_doodle = $post['hours_doodle'] . $post['minutes_doodle'];
+      $timeDoodle = $post['hours_doodle'] . $post['minutes_doodle'];
     else
-      $time_doodle = "";
+      $timeDoodle = '';
 
-    $restaurant   = $post['restaurant'];
-    $place        = $post['place'];
+    $restaurant = $post['restaurant'];
+    $place      = $post['place'];
 
     // Récupération ID vidéo
-    $id_url = extract_url($trailer);
+    $idUrl = extract_url($trailer);
 
     // Contrôle date sortie cinéma
     if (isset($post['date_theater']) AND !empty($post['date_theater']))
     {
-      if (validateDate($post['date_theater'], "d/m/Y") != true)
+      if (validateDate($post['date_theater'], 'd/m/Y') != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -259,7 +259,7 @@
     {
       if (isset($post['date_release']) AND !empty($post['date_release']))
       {
-        if (validateDate($post['date_release'], "d/m/Y") != true)
+        if (validateDate($post['date_release'], 'd/m/Y') != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
@@ -272,7 +272,7 @@
     {
       if (isset($post['date_doodle']) AND !empty($post['date_doodle']))
       {
-        if (validateDate($post['date_doodle'], "d/m/Y") != true)
+        if (validateDate($post['date_doodle'], 'd/m/Y') != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
@@ -283,9 +283,9 @@
     // Contrôle date Doodle >= date sortie film
     if ($control_ok == true)
     {
-      if (!empty($date_theater) AND !empty($date_doodle))
+      if (!empty($dateTheater) AND !empty($dateDoodle))
       {
-        if ($date_doodle < $date_theater)
+        if ($dateDoodle < $dateTheater)
         {
           $_SESSION['alerts']['wrong_date_doodle'] = true;
           $control_ok                              = false;
@@ -296,17 +296,17 @@
     // Modification en base
     if ($control_ok == true)
     {
-      $film = array('film'         => $nom_film,
+      $film = array('film'         => $nomFilm,
                     'synopsis'     => $synopsis,
-                    'date_theater' => $date_theater,
-                    'date_release' => $date_release,
+                    'date_theater' => $dateTheater,
+                    'date_release' => $dateRelease,
                     'link'         => $link,
                     'poster'       => $poster,
                     'trailer'      => $trailer,
-                    'id_url'       => $id_url,
+                    'id_url'       => $idUrl,
                     'doodle'       => $doodle,
-                    'date_doodle'  => $date_doodle,
-                    'time_doodle'  => $time_doodle,
+                    'date_doodle'  => $dateDoodle,
+                    'time_doodle'  => $timeDoodle,
                     'restaurant'   => $restaurant,
                     'place'        => $place
                    );
@@ -327,28 +327,28 @@
                                                    time_doodle  = :time_doodle,
                                                    restaurant   = :restaurant,
                                                    place        = :place
-                                             WHERE id = ' . $id_film);
+                                             WHERE id = ' . $idFilm);
       $req->execute($film);
       $req->closeCursor();
 
       // Génération notification si Doodle renseigné et notification inexistante
-      $notification_doodle_exist = controlNotification('doodle', $id_film);
+      $notification_doodle_exist = controlNotification('doodle', $idFilm);
 
       if ($notification_doodle_exist != true AND !empty($doodle))
-        insertNotification($user, 'doodle', $id_film);
+        insertNotification($user, 'doodle', $idFilm);
 
       // Suppression notification si Doodle supprimé
       if (empty($doodle))
-        deleteNotification('doodle', $id_film);
+        deleteNotification('doodle', $idFilm);
 
       // Suppression notification si Date sortie supprimée (cas notification générée par batch puis date supprimée le jour même)
-      if (empty($date_doodle))
-        deleteNotification('cinema', $id_film);
+      if (empty($dateDoodle))
+        deleteNotification('cinema', $idFilm);
 
       $_SESSION['alerts']['film_updated'] = true;
     }
 
-    return $id_film;
+    return $idFilm;
   }
 
   // METIER : Demande de suppression d'un film
@@ -357,13 +357,13 @@
   {
     global $bdd;
 
-    $id_film   = $post['id_film'];
-    $to_delete = "Y";
+    $idFilm   = $post['id_film'];
+    $toDelete = 'Y';
 
     // Modification de l'enregistrement en table
-    $req = $bdd->prepare('UPDATE movie_house SET to_delete = :to_delete, identifiant_del = :identifiant_del WHERE id = ' . $id_film);
+    $req = $bdd->prepare('UPDATE movie_house SET to_delete = :to_delete, identifiant_del = :identifiant_del WHERE id = ' . $idFilm);
     $req->execute(array(
-      'to_delete'       => $to_delete,
+      'to_delete'       => $toDelete,
       'identifiant_del' => $user
     ));
     $req->closeCursor();
@@ -373,14 +373,14 @@
 
   // METIER : Récupération des commentaires sur détails film
   // RETOUR : Liste des commentaires
-  function getComments($id_film)
+  function getComments($idFilm)
   {
     $listComments = array();
 
     global $bdd;
 
     // Récupération d'une liste des commentaires
-    $reponse = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $id_film . ' ORDER BY id ASC');
+    $reponse = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $idFilm . ' ORDER BY id ASC');
     while ($donnees = $reponse->fetch())
     {
       // On récupère le pseudo des utilisateurs
@@ -411,16 +411,16 @@
     global $bdd;
 
     // On récupère les données
-    $id_film = $post['id_film'];
+    $idFilm  = $post['id_film'];
     $author  = $user;
-    $date    = date("Ymd");
-    $time    = date("His");
+    $date    = date('Ymd');
+    $time    = date('His');
     $comment = $post['comment'];
 
     // Stockage de l'enregistrement en table
     $req = $bdd->prepare('INSERT INTO movie_house_comments(id_film, author, date, time, comment) VALUES(:id_film, :author, :date, :time, :comment)');
     $req->execute(array(
-      'id_film' => $id_film,
+      'id_film' => $idFilm,
       'author'  => $author,
       'date'    => $date,
       'time'    => $time,
@@ -429,15 +429,15 @@
     $req->closeCursor();
 
     // Génération notification commentaires une fois par jour et par film
-    $notification_comments_exist = controlNotification('comments', $id_film);
+    $notificationCommentsExist = controlNotification('comments', $idFilm);
 
-    if ($notification_comments_exist != true)
-      insertNotification($user, 'comments', $id_film);
+    if ($notificationCommentsExist != true)
+      insertNotification($user, 'comments', $idFilm);
 
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $user, 1);
 
-    return $id_film;
+    return $idFilm;
   }
 
   // METIER : Modification commentaire sur un détail film
@@ -462,27 +462,27 @@
   // RETOUR : Id film
   function deleteComment($post, $user)
   {
-    $id_film    = $post['id_film'];
-    $id_comment = $post['id_comment'];
+    $idFilm        = $post['id_film'];
+    $idCommentaire = $post['id_comment'];
 
     global $bdd;
 
     // Suppression commentaire
-    $reponse1 = $bdd->exec('DELETE FROM movie_house_comments WHERE id = ' . $id_comment);
+    $reponse1 = $bdd->exec('DELETE FROM movie_house_comments WHERE id = ' . $idCommentaire);
 
     // Vérification dernier commentaire de la journée et sinon suppression notification
-    $reponse2 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $id_film . ' AND date = ' . date('Ymd'));
+    $reponse2 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $idFilm . ' AND date = ' . date('Ymd'));
     $donnees2 = $reponse2->fetch();
 
     if ($reponse2->rowCount() == 0)
-      deleteNotification('comments', $id_film);
+      deleteNotification('comments', $idFilm);
 
     $reponse2->closeCursor();
 
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $user, -1);
 
-    return $id_film;
+    return $idFilm;
   }
 
   // METIER : Envoi mail sortie film

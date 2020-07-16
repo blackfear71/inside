@@ -62,7 +62,7 @@
                 echo '<div class="zone_saisie_part" id="zone_user_' . $user->getId() . '">';
                 // Avatar
                 echo '<div class="zone_saisie_part_avatar">';
-                  $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+                  $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
                 echo '</div>';

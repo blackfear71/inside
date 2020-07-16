@@ -28,20 +28,20 @@
       initializeSaveSession();
 
       // Récupération des thèmes utilisateurs
-      $themes_users = getThemes('U');
+      $themesUsers = getThemes('U');
 
       // Récupération des thèmes de missions
-      $themes_missions = getThemes('M');
+      $themesMissions = getThemes('M');
       break;
 
 		case 'doAjouter':
       // Ajout d'un nouveau thème
-      $id_theme = insertTheme($_POST, $_FILES);
+      $idTheme = insertTheme($_POST, $_FILES);
 			break;
 
     case 'doModifier':
       // Mise à jour d'un thème
-      $id_theme = updateTheme($_POST);
+      $idTheme = updateTheme($_POST);
 			break;
 
 		case 'doSupprimer':
@@ -59,36 +59,36 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      if (!empty($themes_users))
+      if (!empty($themesUsers))
       {
-        foreach ($themes_users as &$theme_users)
+        foreach ($themesUsers as &$themeUsers)
         {
-          $theme_users->setReference(htmlspecialchars($theme_users->getReference()));
-          $theme_users->setName(htmlspecialchars($theme_users->getName()));
-          $theme_users->setType(htmlspecialchars($theme_users->getType()));
-          $theme_users->setLevel(htmlspecialchars($theme_users->getLevel()));
-          $theme_users->setLogo(htmlspecialchars($theme_users->getLogo()));
-          $theme_users->setDate_deb(htmlspecialchars($theme_users->getDate_deb()));
-          $theme_users->setDate_fin(htmlspecialchars($theme_users->getDate_fin()));
+          $themeUsers->setReference(htmlspecialchars($themeUsers->getReference()));
+          $themeUsers->setName(htmlspecialchars($themeUsers->getName()));
+          $themeUsers->setType(htmlspecialchars($themeUsers->getType()));
+          $themeUsers->setLevel(htmlspecialchars($themeUsers->getLevel()));
+          $themeUsers->setLogo(htmlspecialchars($themeUsers->getLogo()));
+          $themeUsers->setDate_deb(htmlspecialchars($themeUsers->getDate_deb()));
+          $themeUsers->setDate_fin(htmlspecialchars($themeUsers->getDate_fin()));
         }
 
-        unset($theme_users);
+        unset($themeUsers);
       }
 
-      if (!empty($themes_missions))
+      if (!empty($themesMissions))
       {
-        foreach ($themes_missions as &$theme_mission)
+        foreach ($themesMissions as &$themeMission)
         {
-          $theme_mission->setReference(htmlspecialchars($theme_mission->getReference()));
-          $theme_mission->setName(htmlspecialchars($theme_mission->getName()));
-          $theme_mission->setType(htmlspecialchars($theme_mission->getType()));
-          $theme_mission->setLevel(htmlspecialchars($theme_mission->getLevel()));
-          $theme_mission->setLogo(htmlspecialchars($theme_mission->getLogo()));
-          $theme_mission->setDate_deb(htmlspecialchars($theme_mission->getDate_deb()));
-          $theme_mission->setDate_fin(htmlspecialchars($theme_mission->getDate_fin()));
+          $themeMission->setReference(htmlspecialchars($themeMission->getReference()));
+          $themeMission->setName(htmlspecialchars($themeMission->getName()));
+          $themeMission->setType(htmlspecialchars($themeMission->getType()));
+          $themeMission->setLevel(htmlspecialchars($themeMission->getLevel()));
+          $themeMission->setLogo(htmlspecialchars($themeMission->getLogo()));
+          $themeMission->setDate_deb(htmlspecialchars($themeMission->getDate_deb()));
+          $themeMission->setDate_fin(htmlspecialchars($themeMission->getDate_fin()));
         }
 
-        unset($theme_mission);
+        unset($themeMission);
       }
       break;
 
@@ -104,8 +104,8 @@
   {
     case 'doAjouter':
     case 'doModifier':
-      if (!empty($id_theme))
-        header ('location: themes.php?action=goConsulter&anchorTheme=' . $id_theme);
+      if (!empty($idTheme))
+        header ('location: themes.php?action=goConsulter&anchorTheme=' . $idTheme);
       else
         header ('location: themes.php?action=goConsulter');
       break;

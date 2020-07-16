@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Movie House";
-      $style_head      = "styleMH.css";
-      $script_head     = "scriptMH.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = true;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Movie House';
+      $styleHead      = 'styleMH.css';
+      $scriptHead     = 'scriptMH.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = true;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Movie House";
+        $title = 'Movie House';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -77,13 +77,13 @@
           echo '<div class="zone_movies_right">';
             switch ($_GET['view'])
             {
-              case "cards":
-                include("vue/vue_films_fiches.php");
+              case 'cards':
+                include('vue/vue_films_fiches.php');
                break;
 
-              case "home":
+              case 'home':
               default:
-                include("vue/vue_films_accueil.php");
+                include('vue/vue_films_accueil.php');
                 break;
             }
           echo '</div>';

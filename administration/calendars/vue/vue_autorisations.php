@@ -5,7 +5,7 @@
     echo '<div class="zone_autorisations">';
       foreach ($listeAutorisations as $autorisation)
       {
-        if ($autorisation['manage_calendars'] == "Y")
+        if ($autorisation['manage_calendars'] == 'Y')
         {
           echo '<div id="bouton_autorisation_' . $autorisation['identifiant'] . '" class="switch_autorisation switch_checked">';
             echo '<input id="autorisation_' . $autorisation['identifiant'] . '" type="checkbox" name="autorization[' . $autorisation['identifiant'] . ']" checked />';

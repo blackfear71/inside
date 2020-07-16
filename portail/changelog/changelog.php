@@ -22,7 +22,7 @@
     case 'goConsulter':
       // Contrôle si la page et année renseignées et numériques
       if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-        header('location: changelog.php?year=' . date("Y") . '&action=goConsulter');
+        header('location: changelog.php?year=' . date('Y') . '&action=goConsulter');
       else
       {
         // Journaux
@@ -40,7 +40,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: changelog.php?year=' . date("Y") . '&action=goConsulter');
+      header('location: changelog.php?year=' . date('Y') . '&action=goConsulter');
       break;
   }
 

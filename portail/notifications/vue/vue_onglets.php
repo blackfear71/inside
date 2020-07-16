@@ -11,7 +11,7 @@
 
     foreach ($listeVues as $view => $vue)
     {
-      if ($view == "all" OR $view == "week" OR $view == "me")
+      if ($view == 'all' OR $view == 'week' OR $view == 'me')
         $page = '&page=1';
       else
         $page = '';

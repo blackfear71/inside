@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Calendars";
-      $style_head      = "styleCA.css";
-      $script_head     = "scriptCA.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Calendars';
+      $styleHead      = 'styleCA.css';
+      $scriptHead     = 'scriptCA.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Calendars";
+        $title = 'Calendars';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -55,7 +55,7 @@
           /*******************/
           echo '<div class="zone_calendars_left">';
             // Saisie
-            if ($preferences->getManage_calendars() == "Y")
+            if ($preferences->getManage_calendars() == 'Y')
             {
               echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir une annexe</div></div>';
 
@@ -114,7 +114,7 @@
                       echo '<a href="../../includes/images/calendars/annexes/' . $annexe->getAnnexe() . '" class="download_calendar" download><img src="../../includes/icons/calendars/download_grey.png" alt="download_grey" title="Télécharger" class="download_icon" /></a>';
 
                       // Supprimer
-                      if ($preferences->getManage_calendars() == "Y")
+                      if ($preferences->getManage_calendars() == 'Y')
                       {
                         echo '<form id="delete_annexe_' . $annexe->getId() . '" method="post" action="calendars.php?action=doSupprimerAnnexe" class="download_calendar" >';
                           echo '<input type="hidden" name="id_annexe" value="' . $annexe->getId() . '" />';

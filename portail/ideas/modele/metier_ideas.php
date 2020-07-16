@@ -6,9 +6,9 @@
   // RETOUR : Nombre de pages
   function getPages($vue, $user)
   {
-    $nb_pages     = 0;
-    $nb_idees     = 0;
-    $nb_par_page  = 18;
+    $nombrePages   = 0;
+    $nombreIdees   = 0;
+    $nombreParPage = 18;
 
     global $bdd;
 
@@ -36,29 +36,29 @@
     $data = $req->fetch();
 
     if (isset($data['nb_idees']))
-      $nb_idees = $data['nb_idees'];
+      $nombreIdees = $data['nb_idees'];
 
     $req->closeCursor();
 
-    $nb_pages = ceil($nb_idees / $nb_par_page);
+    $nombrePages = ceil($nombreIdees / $nombreParPage);
 
-    return $nb_pages;
+    return $nombrePages;
   }
 
   // METIER : Lecture liste des idées
   // RETOUR : Tableau d'idées
-  function getIdeas($view, $page, $nb_pages)
+  function getIdeas($view, $page, $nombrePages)
   {
     // Initialisation tableau d'idées
-    $listeIdeas  = array();
-    $nb_par_page = 18;
+    $listeIdeas    = array();
+    $nombreParPage = 18;
 
     // Contrôle dernière page
-    if ($page > $nb_pages)
-      $page = $nb_pages;
+    if ($page > $nombrePages)
+      $page = $nombrePages;
 
     // Calcul première entrée
-    $premiere_entree = ($page - 1) * $nb_par_page;
+    $premiereEntree = ($page - 1) * $nombreParPage;
 
     global $bdd;
 
@@ -70,7 +70,7 @@
                                 FROM ideas
                                 WHERE status = "D" OR status = "R"
                                 ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                               );
         break;
 
@@ -79,7 +79,7 @@
                                 FROM ideas
                                 WHERE status = "O" OR status = "C" OR status = "P"
                                 ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                               );
         break;
 
@@ -88,7 +88,7 @@
                                 FROM ideas
                                 WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '"
                                 ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                               );
         break;
 
@@ -97,17 +97,13 @@
         $reponse = $bdd->query('SELECT *
                                 FROM ideas
                                 ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiere_entree . ', ' . $nb_par_page
+                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                               );
         break;
     }
 
     while ($donnees = $reponse->fetch())
     {
-      // Initilialisation variables
-      $auteur_idee      = "";
-      $developpeur_idee = "";
-
       // Instanciation d'un objet Idea à partir des données remontées de la bdd
       $idea = Ideas::withData($donnees);
 
@@ -150,14 +146,14 @@
   // RETOUR : Id enregistrement créé
   function insertIdea($post, $author)
   {
-    $new_id     = NULL;
+    $newId = NULL;
 
     // Récupération des données
     $subject    = $post['subject_idea'];
     $content    = $post['content_idea'];
-    $date       = date("Ymd");
-    $status     = "O";
-    $developper = "";
+    $date       = date('Ymd');
+    $status     = 'O';
+    $developper = '';
 
     // On construit un tableau avec les données
     $idea = array('subject'    => $subject,
@@ -189,9 +185,9 @@
     $req->closeCursor();
 
     // Génération notification idée ajoutée
-    $new_id = $bdd->lastInsertId();
+    $newId = $bdd->lastInsertId();
 
-    insertNotification($author, 'idee', $new_id);
+    insertNotification($author, 'idee', $newId);
 
     // Génération succès
     insertOrUpdateSuccesValue('creator', $author, 1);
@@ -201,15 +197,15 @@
 
     $_SESSION['alerts']['idea_submitted'] = true;
 
-    return $new_id;
+    return $newId;
   }
 
   // METIER : Mise à jour du statut d'une idée
   // RETOUR : Vue à afficher
   function updateIdea($post, $view)
   {
-    $id_idea = $post['id_idea'];
-    $action  = $post;
+    $idIdea = $post['id_idea'];
+    $action = $post;
 
     unset($action['id_idea']);
 
@@ -218,32 +214,32 @@
     switch (key($action))
     {
       case 'take':
-        $status     = "C";
+        $status     = 'C';
         $developper = $_SESSION['user']['identifiant'];
         break;
 
       case 'developp':
-        $status     = "P";
+        $status     = 'P';
         $developper = $_SESSION['user']['identifiant'];
         break;
 
       case 'end':
-        $status     = "D";
+        $status     = 'D';
         $developper = $_SESSION['user']['identifiant'];
-        $view       = "done";
+        $view       = 'done';
         break;
 
       case 'reject':
-        $status     = "R";
+        $status     = 'R';
         $developper = $_SESSION['user']['identifiant'];
-        $view       = "done";
+        $view       = 'done';
         break;
 
       case 'reset':
       default:
-        $status     = "O";
-        $developper = "";
-        $view       = "inprogress";
+        $status     = 'O';
+        $developper = '';
+        $view       = 'inprogress';
         break;
     }
 
@@ -253,36 +249,36 @@
                   );
 
     // Lecture des données
-    $req1 = $bdd->query('SELECT * FROM ideas WHERE id = ' . $id_idea);
+    $req1 = $bdd->query('SELECT * FROM ideas WHERE id = ' . $idIdea);
     $data1 = $req1->fetch();
     $author     = $data1['author'];
     $developper = $data1['developper'];
-    $old_status = $data1['status'];
+    $oldStatus  = $data1['status'];
     $req1->closeCursor();
 
     // On met à jour la table
     $req2 = $bdd->prepare('UPDATE ideas SET status     = :status,
                                            developper = :developper
-                                     WHERE id         = ' . $id_idea);
+                                     WHERE id         = ' . $idIdea);
     $req2->execute($datas);
     $req2->closeCursor();
 
     // Génération succès
     switch ($status)
     {
-      case "D":
+      case 'D':
         insertOrUpdateSuccesValue('applier', $developper, 1);
         break;
 
-      case "R":
+      case 'R':
         insertOrUpdateSuccesValue('creator', $author, -1);
         break;
 
-      case "O":
-        if ($old_status == "D")
+      case 'O':
+        if ($oldStatus == 'D')
           insertOrUpdateSuccesValue('applier', $developper, -1);
 
-        if ($old_status == "R")
+        if ($oldStatus == 'R')
           insertOrUpdateSuccesValue('creator', $author, 1);
         break;
 
@@ -297,9 +293,9 @@
   // RETOUR : Numéro de page
   function numPageIdea($id, $view)
   {
-    $numPage     = 0;
-    $nb_par_page = 18;
-    $position    = 1;
+    $numPage       = 0;
+    $nombreParPage = 18;
+    $position      = 1;
 
     global $bdd;
 
@@ -348,7 +344,7 @@
     }
     $reponse->closeCursor();
 
-    $numPage = ceil($position / $nb_par_page);
+    $numPage = ceil($position / $nombreParPage);
 
     return $numPage;
   }

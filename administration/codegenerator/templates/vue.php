@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = /*title_head*/;
-      $style_head      = /*style_specifique*/;
-      $script_head     = /*script_specifique*/;
-      $angular_head    = /*angular_head*/;
-      $chat_head       = /*chat_head*/;
-      $datepicker_head = /*datepicker_head*/;
-      $masonry_head    = /*masonry_head*/;
-      $exif_head       = /*exif_head*/;
+      $titleHead      = /*title_head*/;
+      $styleHead      = /*style_specifique*/;
+      $scriptHead     = /*script_specifique*/;
+      $angularHead    = /*angular_head*/;
+      $chatHead       = /*chat_head*/;
+      $datepickerHead = /*datepicker_head*/;
+      $masonryHead    = /*masonry_head*/;
+      $exifHead       = /*exif_head*/;
 
       include('../../includes/common/head.php');
     ?>

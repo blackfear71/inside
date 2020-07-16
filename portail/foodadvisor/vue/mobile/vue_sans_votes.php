@@ -14,7 +14,7 @@
       {
         echo '<div class="zone_solo_sans_vote">';
           // Avatar
-          $avatarFormatted = formatAvatar($userSansProposition->getAvatar(), $userSansProposition->getPseudo(), 2, "avatar");
+          $avatarFormatted = formatAvatar($userSansProposition->getAvatar(), $userSansProposition->getPseudo(), 2, 'avatar');
 
           echo '<div class="zone_avatar_solo_sans_vote">';
             echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_solo_sans_vote" />';

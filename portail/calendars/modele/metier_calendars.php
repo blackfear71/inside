@@ -8,7 +8,7 @@
   // RETOUR : Booléen
   function controlYear($year)
   {
-    $annee_existante = false;
+    $anneeExistante = false;
 
     if (isset($year) AND is_numeric($year))
     {
@@ -17,12 +17,12 @@
       $reponse = $bdd->query('SELECT * FROM calendars WHERE year = "' . $year . '" AND to_delete != "Y" ORDER BY year ASC');
 
       if ($reponse->rowCount() > 0)
-        $annee_existante = true;
+        $anneeExistante = true;
 
       $reponse->closeCursor();
     }
 
-    return $annee_existante;
+    return $anneeExistante;
   }
 
   // METIER : Lecture années distinctes
@@ -70,7 +70,7 @@
     {
       $calendrier = Calendrier::withData($donnees);
 
-      $fileinfo = getimagesize("../../includes/images/calendars/" . $calendrier->getYear() . "/" . $calendrier->getCalendar());
+      $fileinfo = getimagesize('../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar());
 
       $calendrier->setTitle(strtoupper($listeMois[$calendrier->getMonth()]));
       $calendrier->setWidth($fileinfo[0]);
@@ -107,15 +107,15 @@
   // RETOUR : Aucun
   function deleteCalendrier($post)
   {
-    $id_cal    = $post['id_cal'];
-    $to_delete = "Y";
+    $idCalendrier = $post['id_cal'];
+    $toDelete     = 'Y';
 
     global $bdd;
 
     // On fait simplement une mise à jour du top en attendant validation de l'admin
-    $reponse = $bdd->prepare('UPDATE calendars SET to_delete = :to_delete WHERE id = ' . $id_cal);
+    $reponse = $bdd->prepare('UPDATE calendars SET to_delete = :to_delete WHERE id = ' . $idCalendrier);
     $reponse->execute(array(
-      'to_delete' => $to_delete
+      'to_delete' => $toDelete
     ));
     $reponse->closeCursor();
 
@@ -126,15 +126,15 @@
   // RETOUR : Aucun
   function deleteAnnexe($post)
   {
-    $id_annexe = $post['id_annexe'];
-    $to_delete = "Y";
+    $idAnnexe = $post['id_annexe'];
+    $toDelete = 'Y';
 
     global $bdd;
 
     // On fait simplement une mise à jour du top en attendant validation de l'admin
-    $reponse = $bdd->prepare('UPDATE calendars_annexes SET to_delete = :to_delete WHERE id = ' . $id_annexe);
+    $reponse = $bdd->prepare('UPDATE calendars_annexes SET to_delete = :to_delete WHERE id = ' . $idAnnexe);
     $reponse->execute(array(
-      'to_delete' => $to_delete
+      'to_delete' => $toDelete
     ));
     $reponse->closeCursor();
 
@@ -146,69 +146,69 @@
   function insertCalendrier($post, $files, $user)
   {
     // On récupère les données
-    $month     = $post['months'];
-    $year      = $post['years'];
-    $to_delete = "N";
+    $month    = $post['months'];
+    $year     = $post['years'];
+    $toDelete = 'N';
 
     global $bdd;
 
     $control_ok = true;
 
     // On vérifie la présence du dossier des calendriers, sinon on le créé
-    $dossier = "../../includes/images/calendars";
+    $dossier = '../../includes/images/calendars';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
     // On vérifie la présence du dossier des années, sinon on le créé
-    $dossier_calendriers = $dossier . "/" . $post['years'];
+    $dossierCalendriers = $dossier . '/' . $post['years'];
 
-    if (!is_dir($dossier_calendriers))
-      mkdir($dossier_calendriers);
+    if (!is_dir($dossierCalendriers))
+      mkdir($dossierCalendriers);
 
     // On vérifie la présence du dossier des miniatures, sinon on le créé
-    $dossier_miniatures = $dossier_calendriers . "/mini";
+    $dossierMiniatures = $dossierCalendriers . '/mini';
 
-    if (!is_dir($dossier_miniatures))
-      mkdir($dossier_miniatures);
+    if (!is_dir($dossierMiniatures))
+      mkdir($dossierMiniatures);
 
     // Dossiers de destination
-    $calendars_dir = $dossier_calendriers . '/';
-    $minis_dir     = $dossier_miniatures . '/';
+    $calendarsDir = $dossierCalendriers . '/';
+    $minisDir     = $dossierMiniatures . '/';
 
     // On définit le nom du fichier
-    $namefile = $post['months'] . "-" . $post['years'] . "-" . rand();
+    $nameFile = $post['months'] . '-' . $post['years'] . '-' . rand();
 
     // Contrôles fichier
-    $fileDatas = controlsUploadFile($files['calendar'], $namefile, 'all');
+    $fileDatas = controlsUploadFile($files['calendar'], $nameFile, 'all');
 
     // Traitements fichier
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['calendar'], $fileDatas, $calendars_dir);
+      $control_ok = uploadFile($files['calendar'], $fileDatas, $calendarsDir);
 
       if ($control_ok == true)
       {
-        $new_name = $fileDatas['new_name'];
+        $newName = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-        imagethumb($calendars_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
+        imagethumb($calendarsDir . $newName, $minisDir . $newName, 500, FALSE, FALSE);
 
         // On stocke la référence du nouveau calendrier dans la base
         $reponse = $bdd->prepare('INSERT INTO calendars(to_delete, month, year, calendar) VALUES(:to_delete, :month, :year, :calendar)');
         $reponse->execute(array(
-          'to_delete' => $to_delete,
+          'to_delete' => $toDelete,
           'month'     => $month,
           'year'      => $year,
-          'calendar'  => $new_name
+          'calendar'  => $newName
         ));
         $reponse->closeCursor();
 
         // Génération notification calendrier ajouté
-        $new_id = $bdd->lastInsertId();
+        $newId = $bdd->lastInsertId();
 
-        insertNotification($user, 'calendrier', $new_id);
+        insertNotification($user, 'calendrier', $newId);
 
         $_SESSION['alerts']['calendar_added'] = true;
       }
@@ -220,67 +220,67 @@
   function insertAnnexe($post, $files, $user)
   {
     // On récupère les données
-    $title     = $post['title'];
-    $to_delete = "N";
+    $title    = $post['title'];
+    $toDelete = 'N';
 
     global $bdd;
 
     $control_ok = true;
 
     // On vérifie la présence du dossier des calendriers, sinon on le créé
-    $dossier = "../../includes/images/calendars";
+    $dossier = '../../includes/images/calendars';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
     // On vérifie la présence du dossier des annexes, sinon on le créé
-    $dossier_annexes = $dossier . "/annexes";
+    $dossierAnnexes = $dossier . '/annexes';
 
-    if (!is_dir($dossier_annexes))
-      mkdir($dossier_annexes);
+    if (!is_dir($dossierAnnexes))
+      mkdir($dossierAnnexes);
 
     // On vérifie la présence du dossier des miniatures, sinon on le créé
-    $dossier_miniatures = $dossier_annexes . "/mini";
+    $dossierMiniatures = $dossierAnnexes . '/mini';
 
-    if (!is_dir($dossier_miniatures))
-      mkdir($dossier_miniatures);
+    if (!is_dir($dossierMiniatures))
+      mkdir($dossierMiniatures);
 
     // Dossiers de destination
-    $annexes_dir = $dossier_annexes . '/';
-    $minis_dir   = $dossier_miniatures . '/';
+    $annexesDir = $dossierAnnexes . '/';
+    $minisDir   = $dossierMiniatures . '/';
 
     // On définit le nom du fichier
-    $namefile = rand();
+    $nameFile = rand();
 
     // Contrôles fichier
-    $fileDatas = controlsUploadFile($files['annexe'], $namefile, 'all');
+    $fileDatas = controlsUploadFile($files['annexe'], $nameFile, 'all');
 
     // Traitements fichier
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['annexe'], $fileDatas, $annexes_dir);
+      $control_ok = uploadFile($files['annexe'], $fileDatas, $annexesDir);
 
       if ($control_ok == true)
       {
-        $new_name = $fileDatas['new_name'];
+        $newName = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-        imagethumb($annexes_dir . $new_name, $minis_dir . $new_name, 500, FALSE, FALSE);
+        imagethumb($annexesDir . $newName, $minisDir . $newName, 500, FALSE, FALSE);
 
         // On stocke la référence du nouveau fichier dans la base
         $reponse = $bdd->prepare('INSERT INTO calendars_annexes(to_delete, annexe, title) VALUES(:to_delete, :annexe, :title)');
         $reponse->execute(array(
-          'to_delete' => $to_delete,
-          'annexe'    => $new_name,
+          'to_delete' => $toDelete,
+          'annexe'    => $newName,
           'title'     => $title
         ));
         $reponse->closeCursor();
 
         // Génération notification calendrier ajouté
-        $new_id = $bdd->lastInsertId();
+        $newId = $bdd->lastInsertId();
 
-        insertNotification($user, 'annexe', $new_id);
+        insertNotification($user, 'annexe', $newId);
 
         $_SESSION['alerts']['annexe_added'] = true;
       }

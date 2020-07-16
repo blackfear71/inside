@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Les enfants ! À table !";
-      $style_head      = "styleFA.css";
-      $script_head     = "scriptFA.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Les enfants ! À table !';
+      $styleHead      = 'styleFA.css';
+      $scriptHead     = 'scriptFA.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Les enfants ! À table !";
+        $title = 'Les enfants ! À table !';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*********/
@@ -48,7 +48,7 @@
           /*********/
           echo '<div class="zone_liens_saisie">';
             // Saisie utilisateur
-            if ($actions["saisir_choix"] == true)
+            if ($actions['saisir_choix'] == true)
             {
               echo '<a id="saisiePropositions" title="Proposer où manger" class="lien_categorie">';
                 echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" /></div>';
@@ -66,7 +66,7 @@
           /****************/
           /* Saisie choix */
           /****************/
-          if ($actions["saisir_choix"] == true)
+          if ($actions['saisir_choix'] == true)
             include('vue/web/vue_saisie_choix.php');
 
           /*******************/

@@ -122,8 +122,8 @@
 	/////////////////////////////////////
 	function formatOnclick($text)
 	{
-		$in   = array("'", '"', "é", "è", "ê", "ë", "à", "ç", "ô", "û");
-		$out  = array("&rsquo;", "&quot;", "&eacute;", "&egrave;", "&ecirc;", "&euml;", "&agrave;", "&ccedil;", "&ocirc;", "&ucirc;");
+		$in   = array("'", '"', 'é', 'è', 'ê', 'ë', 'à', 'ç', 'ô', 'û');
+		$out  = array('&rsquo;', '&quot;', '&eacute;', '&egrave;', '&ecirc;', '&euml;', '&agrave;', '&ccedil;', '&ocirc;', '&ucirc;');
 		$text = str_replace($in, $out, $text);
 
 		return $text;
@@ -168,8 +168,8 @@
 	////////////////////////////////////////////////
 	function formatDistanceForDisplay($dist)
 	{
-		$dist_format = str_replace('.', ',', $dist) . ' km';
+		$distanceFormat = str_replace('.', ',', $dist) . ' km';
 
-		return $dist_format;
+		return $distanceFormat;
 	}
 ?>

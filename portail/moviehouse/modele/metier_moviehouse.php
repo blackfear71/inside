@@ -30,7 +30,7 @@
   // RETOUR : Booléen
   function controlYear($year)
   {
-    $annee_existante = false;
+    $anneeExistante = false;
 
     if (isset($year))
     {
@@ -41,22 +41,22 @@
         $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = "' . $year . '" AND to_delete != "Y"');
 
         if ($reponse->rowCount() > 0)
-          $annee_existante = true;
+          $anneeExistante = true;
 
         $reponse->closeCursor();
       }
-      elseif ($year == "none")
+      elseif ($year == 'none')
       {
         $reponse = $bdd->query('SELECT * FROM movie_house WHERE date_theater = "" AND to_delete != "Y"');
 
         if ($reponse->rowCount() > 0)
-          $annee_existante = true;
+          $anneeExistante = true;
 
         $reponse->closeCursor();
       }
     }
 
-    return $annee_existante;
+    return $anneeExistante;
   }
 
   // METIER : Lecture liste des films récents
@@ -82,25 +82,25 @@
 
   // METIER : Vérifie si la semaine en cours doit être affichée pour les sorties de la semaine
   // RETOUR : Booléen
-  function controlWeek($current_year)
+  function controlWeek($currentYear)
   {
-    $afficher_semaine = true;
+    $afficherSemaine = true;
 
     // Calcul des dates de la semaine
-    $nb_jours_lundi    = 1 - date("N");
-    $nb_jours_dimanche = 7 - date("N");
-    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
-    $sunday            = date("Ymd", strtotime('+' . $nb_jours_dimanche . ' days'));
+    $nombreJoursLundi    = 1 - date('N');
+    $nombreJoursDimanche = 7 - date('N');
+    $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
+    $dimanche            = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
 
     // Récupération des années
-    $year_of_monday = substr($monday, 0, 4);
-    $year_of_sunday = substr($sunday, 0, 4);
+    $yearOfMonday = substr($lundi, 0, 4);
+    $yearOfSunday = substr($dimanche, 0, 4);
 
     // Contrôle
-    if ($current_year != $year_of_monday AND $current_year != $year_of_sunday)
-      $afficher_semaine = false;
+    if ($currentYear != $yearOfMonday AND $currentYear != $yearOfSunday)
+      $afficherSemaine = false;
 
-    return $afficher_semaine;
+    return $afficherSemaine;
   }
 
   // METIER : Lecture liste des films qui sortent la semaine courante
@@ -108,17 +108,17 @@
   function getSemaine()
   {
     // Calcul des dates de la semaine
-    $nb_jours_lundi    = 1 - date("N");
-    $nb_jours_dimanche = 7 - date("N");
-    $monday            = date("Ymd", strtotime('+' . $nb_jours_lundi . ' days'));
-    $sunday            = date("Ymd", strtotime('+' . $nb_jours_dimanche . ' days'));
+    $nombreJoursLundi    = 1 - date('N');
+    $nombreJoursDimanche = 7 - date('N');
+    $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
+    $dimanche            = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
 
     $listeFilmsSemaine = array();
 
     global $bdd;
 
     // Récupération des films éligibles
-    $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $monday . '" AND date_theater <= "' . $sunday . '" ORDER BY id DESC');
+    $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_theater >= "' . $lundi . '" AND date_theater <= "' . $dimanche . '" ORDER BY id DESC');
     while ($donnees = $reponse->fetch())
     {
       $filmSemaine = Movie::withData($donnees);
@@ -138,36 +138,36 @@
     global $bdd;
 
     // Calcul date du jour - 1 mois
-    $date_du_jour_moins_1_mois = date("Ymd", strtotime('now -1 Month'));
+    $dateJourMoins1Mois = date('Ymd', strtotime('now -1 Month'));
 
     // Récupération des films éligibles
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND SUBSTR(date_theater, 1, 4) = "' . $year . '" ORDER BY date_theater ASC');
     while ($donnees = $reponse->fetch())
     {
       // On récupère les films si ce n'est pas l'année courante ou jusqu'à un mois en arrière si c'est l'année courante
-      if ($year != date("Y") OR ($year == date("Y") AND $donnees['date_theater'] > $date_du_jour_moins_1_mois))
+      if ($year != date('Y') OR ($year == date('Y') AND $donnees['date_theater'] > $dateJourMoins1Mois))
       {
         // Récupération des données
         $filmAttendu = Movie::withData($donnees);
 
         // Récupération nombre d'utilisateurs et moyenne
-        $nb_users    = 0;
-        $total_stars = 0;
+        $nombreUsers = 0;
+        $totalStars  = 0;
         $average     = 0;
 
         $reponse2 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $filmAttendu->getId());
         while ($donnees2 = $reponse2->fetch())
         {
-          $nb_users    += 1;
-          $total_stars += $donnees2['stars'];
+          $nombreUsers += 1;
+          $totalStars  += $donnees2['stars'];
         }
         $reponse2->closeCursor();
 
-        if ($nb_users > 0)
+        if ($nombreUsers > 0)
         {
-          $average = str_replace('.', ',', round($total_stars / $nb_users, 1));
+          $average = str_replace('.', ',', round($totalStars / $nombreUsers, 1));
 
-          $filmAttendu->setNb_users($nb_users);
+          $filmAttendu->setNb_users($nombreUsers);
           $filmAttendu->setAverage($average);
 
           // On ajoute la ligne au tableau seulement s'il y a des participants ou une moyenne
@@ -182,16 +182,16 @@
     if (isset($listeFilmsAttendus) AND !empty($listeFilmsAttendus))
     {
       // On trie les films par nombre d'utilisateurs en 1er et par moyenne en 2ème
-      $tri_1 = NULL;
-      $tri_2 = NULL;
+      $triNombreUsers = NULL;
+      $triMoyenne     = NULL;
 
       foreach ($listeFilmsAttendus as $attendu)
       {
-        $tri_1[] = $attendu->getNb_users();
-        $tri_2[] = $attendu->getAverage();
+        $triNombreUsers[] = $attendu->getNb_users();
+        $triMoyenne[]     = $attendu->getAverage();
       }
 
-      array_multisort($tri_1, SORT_DESC, $tri_2, SORT_DESC, $listeFilmsAttendus);
+      array_multisort($triNombreUsers, SORT_DESC, $triMoyenne, SORT_DESC, $listeFilmsAttendus);
 
       // On extrait les 5 premièrs films les plus attentus
       $listeFilmsAttendus = array_slice($listeFilmsAttendus, 0, 5);
@@ -199,9 +199,9 @@
       // Tri final sur la moyenne
       foreach ($listeFilmsAttendus as $attendu)
       {
-        $tri_average[] = $attendu->getAverage();
+        $triAverage[] = $attendu->getAverage();
       }
-      array_multisort($tri_average, SORT_DESC, $listeFilmsAttendus);
+      array_multisort($triAverage, SORT_DESC, $listeFilmsAttendus);
     }
 
     // Retour
@@ -216,11 +216,11 @@
 
     global $bdd;
 
-    if ($year == date("Y"))
-      $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND date_doodle >= ' . date("Ymd") . ' AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC LIMIT 5');
-    elseif ($year > date("Y"))
+    if ($year == date('Y'))
+      $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND date_doodle >= ' . date('Ymd') . ' AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC LIMIT 5');
+    elseif ($year > date('Y'))
       $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC LIMIT 5');
-    elseif ($year < date("Y"))
+    elseif ($year < date('Y'))
       $reponse = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $year . ' ORDER BY date_doodle ASC, id DESC');
 
     while ($donnees = $reponse->fetch())
@@ -297,7 +297,7 @@
   // RETOUR : Id film créé
   function insertFilm($post, $user)
   {
-    $new_id     = NULL;
+    $newId      = NULL;
     $control_ok = true;
 
     // Sauvegarde en session en cas d'erreur
@@ -314,47 +314,47 @@
     if (isset($post['hours_doodle']))
       $_SESSION['save']['hours_doodle_saisies'] = $post['hours_doodle'];
     else
-      $_SESSION['save']['hours_doodle_saisies'] = "  ";
+      $_SESSION['save']['hours_doodle_saisies'] = '  ';
 
     if (isset($post['minutes_doodle']))
       $_SESSION['save']['minutes_doodle_saisies'] = $post['minutes_doodle'];
     else
-      $_SESSION['save']['minutes_doodle_saisies'] = "  ";
+      $_SESSION['save']['minutes_doodle_saisies'] = '  ';
 
     $_SESSION['save']['time_doodle_saisi'] = $_SESSION['save']['hours_doodle_saisies'] . $_SESSION['save']['minutes_doodle_saisies'];
     $_SESSION['save']['restaurant_saisi']  = $post['restaurant'];
     $_SESSION['save']['place_saisie']      = $post['place'];
 
     // Récupération des variables
-    $nom_film        = $post['nom_film'];
-    $to_delete       = "N";
-    $date_add        = date("Ymd");
-    $identifiant_add = $user;
-    $identifiant_del = "";
-    $synopsis        = $post['synopsis'];
-    $date_theater    = formatDateForInsert($post['date_theater']);
-    $date_release    = formatDateForInsert($post['date_release']);
-    $link            = $post['link'];
-    $poster          = $post['poster'];
-    $trailer         = $post['trailer'];
-    $doodle          = $post['doodle'];
-    $date_doodle     = formatDateForInsert($post['date_doodle']);
+    $nomFilm        = $post['nom_film'];
+    $toDelete       = 'N';
+    $dateAdd        = date('Ymd');
+    $identifiantAdd = $user;
+    $identifiantDel = '';
+    $synopsis       = $post['synopsis'];
+    $dateTheater    = formatDateForInsert($post['date_theater']);
+    $dateRelease    = formatDateForInsert($post['date_release']);
+    $link           = $post['link'];
+    $poster         = $post['poster'];
+    $trailer        = $post['trailer'];
+    $doodle         = $post['doodle'];
+    $dateDoodle     = formatDateForInsert($post['date_doodle']);
 
     if (!empty($post['date_doodle']) AND isset($post['hours_doodle']) AND isset($post['minutes_doodle']))
-      $time_doodle = $post['hours_doodle'] . $post['minutes_doodle'];
+      $timeDoodle = $post['hours_doodle'] . $post['minutes_doodle'];
     else
-      $time_doodle = "";
+      $timeDoodle = '';
 
-    $restaurant   = $post['restaurant'];
-    $place        = $post['place'];
+    $restaurant = $post['restaurant'];
+    $place      = $post['place'];
 
     // Récupération ID vidéo
-    $id_url = extract_url($trailer);
+    $idUrl = extract_url($trailer);
 
     // Contrôle date sortie cinéma
     if (isset($post['date_theater']) AND !empty($post['date_theater']))
     {
-      if (validateDate($post['date_theater'], "d/m/Y") != true)
+      if (validateDate($post['date_theater'], 'd/m/Y') != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -366,7 +366,7 @@
     {
       if (isset($post['date_release']) AND !empty($post['date_release']))
       {
-        if (validateDate($post['date_release'], "d/m/Y") != true)
+        if (validateDate($post['date_release'], 'd/m/Y') != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
@@ -379,7 +379,7 @@
     {
       if (isset($post['date_doodle']) AND !empty($post['date_doodle']))
       {
-        if (validateDate($post['date_doodle'], "d/m/Y") != true)
+        if (validateDate($post['date_doodle'], 'd/m/Y') != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
@@ -390,9 +390,9 @@
     // Contrôle date Doodle >= date sortie film
     if ($control_ok == true)
     {
-      if (!empty($date_theater) AND !empty($date_doodle))
+      if (!empty($dateTheater) AND !empty($dateDoodle))
       {
-        if ($date_doodle < $date_theater)
+        if ($dateDoodle < $dateTheater)
         {
           $_SESSION['alerts']['wrong_date_doodle'] = true;
           $control_ok                              = false;
@@ -403,21 +403,21 @@
     // Insertion en base
     if ($control_ok == true)
     {
-      $film = array('film'            => $nom_film,
-                    'to_delete'       => $to_delete,
-                    'date_add'        => $date_add,
-                    'identifiant_add' => $identifiant_add,
-                    'identifiant_del' => $identifiant_del,
+      $film = array('film'            => $nomFilm,
+                    'to_delete'       => $toDelete,
+                    'date_add'        => $dateAdd,
+                    'identifiant_add' => $identifiantAdd,
+                    'identifiant_del' => $identifiantDel,
                     'synopsis'        => $synopsis,
-                    'date_theater'    => $date_theater,
-                    'date_release'    => $date_release,
+                    'date_theater'    => $dateTheater,
+                    'date_release'    => $dateRelease,
                     'link'            => $link,
                     'poster'          => $poster,
                     'trailer'         => $trailer,
-                    'id_url'          => $id_url,
+                    'id_url'          => $idUrl,
                     'doodle'          => $doodle,
-                    'date_doodle'     => $date_doodle,
-                    'time_doodle'     => $time_doodle,
+                    'date_doodle'     => $dateDoodle,
+                    'time_doodle'     => $timeDoodle,
                     'restaurant'      => $restaurant,
                     'place'           => $place
                    );
@@ -463,14 +463,14 @@
       $req->closeCursor();
 
       // Id pour redirection sur détails
-      $new_id = $bdd->lastInsertId();
+      $newId = $bdd->lastInsertId();
 
       // Génération notification film ajouté
-      insertNotification($user, 'film', $new_id);
+      insertNotification($user, 'film', $newId);
 
       // Génération notification Doodle renseigné
       if (!empty($doodle))
-        insertNotification($user, 'doodle', $new_id);
+        insertNotification($user, 'doodle', $newId);
 
       // Génération succès
       insertOrUpdateSuccesValue('publisher', $user, 1);
@@ -481,6 +481,6 @@
       $_SESSION['alerts']['film_added'] = true;
     }
 
-    return $new_id;
+    return $newId;
   }
 ?>

@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Movie House";
-      $style_head      = "styleMH.css";
-      $script_head     = "";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Movie House';
+      $styleHead      = 'styleMH.css';
+      $scriptHead     = '';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
 			<?php
-        $title= "Movie House";
+        $title = 'Movie House';
 
         include('../../includes/common/header.php');
         include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -53,27 +53,27 @@
           /***************/
           /* Modèle mail */
           /***************/
-          $modele_mail = getModeleFilm($detailsFilm, $listeEtoiles);
-          echo $modele_mail;
+          $modeleMail = getModeleFilm($detailsFilm, $listeEtoiles);
+          echo $modeleMail;
 
           /*************************/
           /* Encadré destinataires */
           /*************************/
           echo '<div class="zone_destinataires_mail">';
-            $email_present = false;
+            $emailPresent = false;
 
             foreach ($listeEtoiles as $participant)
             {
               if (!empty($participant->getEmail()))
               {
-                if ($email_present == false)
+                if ($emailPresent == false)
                 {
                   echo 'L\'email sera envoyé aux personnes suivantes :<br />';
-                  $email_present = true;
+                  $emailPresent = true;
                 }
                 echo '<div class="destinataires">';
                   // Avatar
-                  $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
+                  $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, 'avatar');
 
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_dest" />';
 
@@ -82,7 +82,7 @@
               }
             }
 
-            if ($email_present == false)
+            if ($emailPresent == false)
               echo '<p class="avertissement_mail">Aucune personne ne sera avertie car aucun email n\'a été renseigné.</p>';
             else
               echo '<p class="avertissement_mail">N\'oubliez pas d\'avertir les éventuelles personnes n\'ayant pas renseigné d\'adresse mail.</p>';
@@ -91,7 +91,7 @@
           /*********************/
           /* Bouton envoi mail */
           /*********************/
-          if ($email_present == true)
+          if ($emailPresent == true)
           {
             echo '<form method="post" action="mailing.php?action=sendMail">';
               echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';

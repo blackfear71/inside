@@ -12,15 +12,15 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_doodle FROM movie_house WHERE date_doodle = ' . date("Ymd") . ' ORDER BY id ASC');
+    $req = $bdd->query('SELECT id, date_doodle FROM movie_house WHERE date_doodle = ' . date('Ymd') . ' ORDER BY id ASC');
 
     while ($data = $req->fetch())
     {
       // Contrôle notification non existante
-      $notification_cinema_exist = controlNotification('cinema', $data['id']);
+      $notificationCinemaExist = controlNotification('cinema', $data['id']);
 
       // Génération notification sortie cinéma
-      if ($notification_cinema_exist != true)
+      if ($notificationCinemaExist != true)
         insertNotification('admin', 'cinema', $data['id']);
 
       // Traitement effectué
@@ -46,14 +46,14 @@
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE date_deb = ' . date("Ymd") . ' OR date_fin = ' . date("Ymd"));
+    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE date_deb = ' . date('Ymd') . ' OR date_fin = ' . date('Ymd'));
     while ($data = $req->fetch())
     {
       if ($data['date_deb'] == $data['date_fin'])
         $mission = array('id_mission' => $data['id'], 'one_day' => 'O');
-      elseif (date("Ymd") != $data['date_fin'] AND date("Ymd") == $data['date_deb'])
+      elseif (date('Ymd') != $data['date_fin'] AND date('Ymd') == $data['date_deb'])
         $mission = array('id_mission' => $data['id'], 'one_day' => 'F');
-      elseif (date("Ymd") != $data['date_deb'] AND date("Ymd") == $data['date_fin'])
+      elseif (date('Ymd') != $data['date_deb'] AND date('Ymd') == $data['date_fin'])
         $mission = array('id_mission' => $data['id'], 'one_day' => 'L');
       else
         $mission = array('id_mission' => $data['id'], 'one_day' => 'N');
@@ -69,20 +69,20 @@
   // FONCTION : Insertion notification début de mission
   // RETOUR : Tableau log traitement
   // FREQUENCE : tous les jours à 7h
-  function isFirstDayMission($id_mission)
+  function isFirstDayMission($idMission)
   {
     $log = array('trt' => '/* Début de mission */', 'status' => 'KO');
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_deb FROM missions WHERE id = ' . $id_mission);
+    $req = $bdd->query('SELECT id, date_deb FROM missions WHERE id = ' . $idMission);
     $data = $req->fetch();
 
     // Contrôle notification non existante
-    $notification_mission_exist = controlNotification('start_mission', $id_mission);
+    $notificationMissionExist = controlNotification('start_mission', $idMission);
 
     // Génération notification début mission
-    if ($notification_mission_exist != true)
+    if ($notificationMissionExist != true)
       insertNotification('admin', 'start_mission', $data['id']);
 
     // Traitement effectué
@@ -97,20 +97,20 @@
   // FONCTION : Insertion notification fin de mission
   // RETOUR : Tableau log traitement
   // FREQUENCE : tous les jours à 7h
-  function isLastDayMission($id_mission)
+  function isLastDayMission($idMission)
   {
     $log = array('trt' => '/* Fin de mission */', 'status' => 'KO');
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE id = ' . $id_mission);
+    $req = $bdd->query('SELECT id, date_fin FROM missions WHERE id = ' . $idMission);
     $data = $req->fetch();
 
     // Contrôle notification non existante
-    $notification_mission_exist = controlNotification('end_mission', $id_mission);
+    $notificationMissionExist = controlNotification('end_mission', $idMission);
 
     // Génération notification fin mission
-    if ($notification_mission_exist != true)
+    if ($notificationMissionExist != true)
       insertNotification('admin', 'end_mission', $data['id']);
 
     // Traitement effectué
@@ -129,20 +129,20 @@
   // FONCTION : Insertion notification mission unique
   // RETOUR : Tableau log traitement
   // FREQUENCE : tous les jours à 7h
-  function isOneDayMission($id_mission)
+  function isOneDayMission($idMission)
   {
     $log = array('trt' => '/* Mission unique */', 'status' => 'KO');
 
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE id = ' . $id_mission);
+    $req = $bdd->query('SELECT id, date_deb, date_fin FROM missions WHERE id = ' . $idMission);
     $data = $req->fetch();
 
     // Contrôle notification non existante
-    $notification_mission_exist = controlNotification('one_mission', $data['id']);
+    $notificationMissionExist = controlNotification('one_mission', $data['id']);
 
     // Génération notification mission unique
-    if ($notification_mission_exist != true)
+    if ($notificationMissionExist != true)
       insertNotification('admin', 'one_mission', $data['id']);
 
     // Traitement effectué
@@ -159,8 +159,8 @@
   // Fréquence : tous les jours à 7h
   function insertExperienceWinners()
   {
-    $log      = NULL;
-    $done_yet = false;
+    $log     = NULL;
+    $doneYet = false;
 
     // Détermination si chaîne déjà passée
     $dirJ = '../cron/logs/daily';
@@ -176,78 +176,77 @@
       // Tri sur date
       foreach ($filesJ as $fileJ)
       {
-        $tri_anneeJ[]   = substr($fileJ, 12, 4);
-        $tri_moisJ[]    = substr($fileJ, 9, 2);
-        $tri_jourJ[]    = substr($fileJ, 6, 2);
-        $tri_heureJ[]   = substr($fileJ, 17, 2);
-        $tri_minuteJ[]  = substr($fileJ, 20, 2);
-        $tri_secondeJ[] = substr($fileJ, 23, 2);
+        $triAnneeJ[]   = substr($fileJ, 12, 4);
+        $triMoisJ[]    = substr($fileJ, 9, 2);
+        $triJourJ[]    = substr($fileJ, 6, 2);
+        $triHeureJ[]   = substr($fileJ, 17, 2);
+        $triMinuteJ[]  = substr($fileJ, 20, 2);
+        $triSecondeJ[] = substr($fileJ, 23, 2);
       }
 
-      array_multisort($tri_anneeJ, SORT_DESC, $tri_moisJ, SORT_DESC, $tri_jourJ, SORT_DESC, $tri_heureJ, SORT_DESC, $tri_minuteJ, SORT_DESC, $tri_secondeJ, SORT_DESC, $filesJ);
+      array_multisort($triAnneeJ, SORT_DESC, $triMoisJ, SORT_DESC, $triJourJ, SORT_DESC, $triHeureJ, SORT_DESC, $triMinuteJ, SORT_DESC, $triSecondeJ, SORT_DESC, $filesJ);
 
       // Test si CRON déjà passé
       foreach ($filesJ as $fileJ)
       {
-        $date_fichier = substr($fileJ, 12, 4) . substr($fileJ, 9, 2) . substr($fileJ, 6, 2);
+        $dateFichier = substr($fileJ, 12, 4) . substr($fileJ, 9, 2) . substr($fileJ, 6, 2);
 
         // Si fichier ancien, on arrête la boucle
-        if ($date_fichier < date('Ymd'))
+        if ($dateFichier < date('Ymd'))
           break;
 
         // Si fichier du jour alors on sait qu'on a déjà attribué l'expérience
-        if ($date_fichier == date('Ymd'))
+        if ($dateFichier == date('Ymd'))
         {
-          $done_yet = true;
+          $doneYet = true;
           break;
         }
       }
     }
 
-    if ($done_yet == false)
+    if ($doneYet == false)
     {
       $log = array('trt' => '/* Expérience missions */', 'status' => 'KO');
 
       global $bdd;
 
-      $date_moins_1 = date('Ymd', strtotime('now - 1 Days'));
+      $dateMoins1 = date('Ymd', strtotime('now - 1 Days'));
 
       // Lecture des missions se terminant la veille
-      $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_fin = ' . $date_moins_1);
+      $req = $bdd->query('SELECT id, date_fin FROM missions WHERE date_fin = ' . $dateMoins1);
 
       while ($data = $req->fetch())
       {
-        $id_mission = $data['id'];
-
-        $tableau_users = array();
+        $idMission = $data['id'];
+        $tableauUsers = array();
 
         // Construction tableau des participants
-        $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id_mission . ' ORDER BY identifiant ASC');
+        $req2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $idMission . ' ORDER BY identifiant ASC');
         while ($data2 = $req2->fetch())
         {
           // Récupération des valeurs d'avancement de chaque mission par utilisateur
-          if (!isset($tableau_users[$data2['identifiant']]) OR empty($tableau_users[$data2['identifiant']]))
-            $tableau_users[$data2['identifiant']] = array('avancement' => intval($data2['avancement']), 'rank' => 0);
+          if (!isset($tableauUsers[$data2['identifiant']]) OR empty($tableauUsers[$data2['identifiant']]))
+            $tableauUsers[$data2['identifiant']] = array('avancement' => intval($data2['avancement']), 'rank' => 0);
           else
-            $tableau_users[$data2['identifiant']] = array('avancement' => $tableau_users[$data2['identifiant']]['avancement'] + intval($data2['avancement']), 'rank' => 0);
+            $tableauUsers[$data2['identifiant']] = array('avancement' => $tableauUsers[$data2['identifiant']]['avancement'] + intval($data2['avancement']), 'rank' => 0);
         }
         $req2->closeCursor();
 
-        if (!empty($tableau_users))
+        if (!empty($tableauUsers))
         {
           // Tri sur avancement
-          foreach ($tableau_users as $user)
+          foreach ($tableauUsers as $user)
           {
-            $tri_rank[] = $user['avancement'];
+            $triRank[] = $user['avancement'];
           }
 
-          array_multisort($tri_rank, SORT_DESC, $tableau_users);
+          array_multisort($triRank, SORT_DESC, $tableauUsers);
 
           // Affectation du rang
           $prevTotal   = 0;
           $currentRank = 0;
 
-          foreach ($tableau_users as $key => &$user)
+          foreach ($tableauUsers as $key => &$user)
           {
             $currentTotal = $user['avancement'];
 
@@ -259,7 +258,7 @@
 
             // Suppression des rangs > 3 sinon on enregistre le rang
             if ($currentRank > 3)
-              unset($tableau_users[$key]);
+              unset($tableauUsers[$key]);
             else
              $user['rank'] = $currentRank;
           }
@@ -267,7 +266,7 @@
           unset($user);
 
           // Ajout expérience pour chaque gagnant
-          foreach ($tableau_users as $key => $user)
+          foreach ($tableauUsers as $key => $user)
           {
             switch ($user['rank'])
             {
@@ -323,36 +322,36 @@
       while ($data2 = $req2->fetch())
       {
         // Prix d'achat
-        $prix_achat = $data2['price'];
+        $prixAchat = $data2['price'];
 
         // Identifiant de l'acheteur
-        $acheteur   = $data2['buyer'];
+        $acheteur = $data2['buyer'];
 
         // Nombre de parts et prix par parts
-        $nb_parts_total = 0;
-        $nb_parts_user  = 0;
+        $nombrePartsTotal = 0;
+        $nombrePartsUser  = 0;
 
         $req3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data2['id']);
         while ($data3 = $req3->fetch())
         {
           // Nombre de parts total
-          $nb_parts_total += $data3['parts'];
+          $nombrePartsTotal += $data3['parts'];
 
           // Nombre de parts de l'utilisateur
           if ($data1['identifiant'] == $data3['identifiant'])
-            $nb_parts_user = $data3['parts'];
+            $nombrePartsUser = $data3['parts'];
         }
 
-        if ($nb_parts_total != 0)
-          $prix_par_part = $prix_achat / $nb_parts_total;
+        if ($nombrePartsTotal != 0)
+          $prixParPart = $prixAchat / $nombrePartsTotal;
         else
-          $prix_par_part = 0;
+          $prixParPart = 0;
 
         // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
         if ($data2['buyer'] == $data1['identifiant'])
-          $bilan = $bilan + $prix_achat - ($prix_par_part * $nb_parts_user);
+          $bilan = $bilan + $prixAchat - ($prixParPart * $nombrePartsUser);
         else
-          $bilan = $bilan - ($prix_par_part * $nb_parts_user);
+          $bilan = $bilan - ($prixParPart * $nombrePartsUser);
 
         $req3->closeCursor();
       }
@@ -360,9 +359,9 @@
 
       // On construit un tableau des utilisateurs
       $user = array('id'          => $data1['id'],
-                      'identifiant' => $data1['identifiant'],
-                      'bilan'       => $bilan,
-                     );
+                    'identifiant' => $data1['identifiant'],
+                    'bilan'       => $bilan,
+                   );
 
       // On ajoute la ligne au tableau
       array_push($listeUsers, $user);
@@ -389,43 +388,43 @@
   // FONCTION : Création fichier log
   // RETOUR : Aucun
   // Fréquence : tous les jours à 7h pour les types 'j' et tous les lundis à 7h pour les types 'h'
-  function generateLog($type_log, $etat_trt, $hdeb, $hfin)
+  function generateLog($typeLog, $etatTrt, $heureDeb, $heureFin)
   {
     // On vérifie la présence des dossiers, sinon on les créé
-    $dossier        = "logs";
-    $sous_dossier_j = "daily";
-    $sous_dossier_h = "weekly";
+    $dossier      = 'logs';
+    $sousDossierJ = 'daily';
+    $sousDossierH = 'weekly';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
-    if (!is_dir($dossier . '/' . $sous_dossier_j))
-      mkdir($dossier . '/' . $sous_dossier_j);
+    if (!is_dir($dossier . '/' . $sousDossierJ))
+      mkdir($dossier . '/' . $sousDossierJ);
 
-    if (!is_dir($dossier . '/' . $sous_dossier_h))
-      mkdir($dossier . '/' . $sous_dossier_h);
+    if (!is_dir($dossier . '/' . $sousDossierH))
+      mkdir($dossier . '/' . $sousDossierH);
 
     // Titre
-    if ($type_log == 'j')
-      $titre_log = "/******************************/\r\n/* Traitement CRON journalier */\r\n/******************************/\r\n";
-    elseif ($type_log == 'h')
-      $titre_log = "/********************************/\r\n/* Traitement CRON hebdomadaire */\r\n/********************************/\r\n";
+    if ($typeLog == 'j')
+      $titreLog = "/******************************/\r\n/* Traitement CRON journalier */\r\n/******************************/\r\n";
+    elseif ($typeLog == 'h')
+      $titreLog = "/********************************/\r\n/* Traitement CRON hebdomadaire */\r\n/********************************/\r\n";
 
     // Type de traitement
     if (isset($_POST['daily_cron']) OR isset($_POST['weekly_cron']))
-      $exe_log = "## Traitement asynchrone";
+      $exeLog = '## Traitement asynchrone';
     else
-      $exe_log = "## Traitement automatique";
+      $exeLog = '## Traitement automatique';
 
     // Date du traitement
-    $date_log = "## Date......................." . date("d/m/Y");
+    $dateLog = '## Date.......................' . date('d/m/Y');
 
     // Traitement global OK ou KO
     $control_ok = true;
 
-    foreach ($etat_trt as $trt)
+    foreach ($etatTrt as $trt)
     {
-      if ($trt['status'] == "KO")
+      if ($trt['status'] == 'KO')
       {
         $control_ok = false;
         break;
@@ -433,44 +432,45 @@
     }
 
     if ($control_ok == true)
-      $etat_log = "## Etat traitements...........OK";
+      $etatLog = '## Etat traitements...........OK';
     else
-      $etat_log = "## Etat traitements...........KO";
+      $etatLog = '## Etat traitements...........KO';
 
     // Durée totale des traitements
-    $duree_tot = calcDureeTrt($hdeb, $hfin);
-    $duree_log = "## Durée traitements.........." . $duree_tot['heures'] . " heures, " . $duree_tot['minutes'] . " minutes et " . $duree_tot['secondes'] . " secondes";
+    $dureeTot = calcDureeTrt($heureDeb, $heureFin);
+    $dureeLog = '## Durée traitements..........' . $dureeTot['heures'] . ' heures, ' . $dureeTot['minutes'] . ' minutes et ' . $dureeTot['secondes'] . ' secondes';
 
     // Ouverture / création fichier
-    if ($type_log == 'j')
-      $log = fopen('logs/daily/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
-    elseif ($type_log == 'h')
-      $log = fopen('logs/weekly/' . $type_log . 'log_(' . date("d-m-Y") . '_' . date("H-i-s") . ')_' . rand(1,11111111) . '.txt', 'a+');
+    if ($typeLog == 'j')
+      $log = fopen('logs/daily/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.txt', 'a+');
+    elseif ($typeLog == 'h')
+      $log = fopen('logs/weekly/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.txt', 'a+');
 
     // On repositionne le curseur du fichier au début
     fseek($log, 0);
 
     // On écrit dans le fichier
-    fputs($log, $titre_log);
+    fputs($log, $titreLog);
     fputs($log, "\r\n");
-    fputs($log, $exe_log);
+    fputs($log, $exeLog);
     fputs($log, "\r\n");
-    fputs($log, $date_log);
+    fputs($log, $dateLog);
     fputs($log, "\r\n");
-    fputs($log, $etat_log);
+    fputs($log, $etatLog);
     fputs($log, "\r\n");
-    fputs($log, $duree_log);
+    fputs($log, $dureeLog);
     fputs($log, "\r\n");
-    if (!empty($etat_trt))
+
+    if (!empty($etatTrt))
     {
-      foreach ($etat_trt as $trt)
+      foreach ($etatTrt as $trt)
       {
         fputs($log, "\r\n");
-        $nom_trt    = $trt['trt'];
-        $statut_trt = "## Status....................." . $trt['status'];
-        fputs($log, $nom_trt);
+        $nomTrt    = $trt['trt'];
+        $statutTrt = '## Status.....................' . $trt['status'];
+        fputs($log, $nomTrt);
         fputs($log, "\r\n");
-        fputs($log, $statut_trt);
+        fputs($log, $statutTrt);
         fputs($log, "\r\n");
       }
     }

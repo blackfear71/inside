@@ -17,28 +17,28 @@
       switch ($_SESSION['user']['view_the_box'])
       {
         case 'P':
-          $view_the_box = 'inprogress';
+          $viewTheBox = 'inprogress';
           break;
 
         case 'M':
-          $view_the_box = 'mine';
+          $viewTheBox = 'mine';
           break;
 
         case 'D':
-          $view_the_box = 'done';
+          $viewTheBox = 'done';
           break;
 
         case 'A':
         default:
-          $view_the_box = 'all';
+          $viewTheBox = 'all';
           break;
       }
 
       // Lien #TheBox
       if ($path == '/inside/portail/ideas/ideas.php')
-        echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer_active">';
+        echo '<a href="/inside/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer_active">';
       else
-        echo '<a href="/inside/portail/ideas/ideas.php?view=' . $view_the_box . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer">';
+        echo '<a href="/inside/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer">';
         // Logo
         echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
       echo '</a>';
@@ -69,7 +69,7 @@
         }
 
         // Copyright
-        echo '<div class="copyright">© 2017-' . date("Y") . ' Inside</div>';
+        echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
       echo '<div>';
     }
     else
@@ -80,12 +80,12 @@
       // Zone footer
       echo '<div class="zone_footer_right">';
         // Copyright
-        echo '<div class="copyright">© 2017-' . date("Y") . ' Inside</div>';
+        echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
       echo '<div>';
     }
 
     // Boutons missions
-    $zone_inside = 'footer';
+    $zoneInside = 'footer';
     include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
 
     // Chargement des données du thème pour le script
@@ -113,7 +113,7 @@
       }
 
       // Copyright
-      echo '<div class="copyright">© 2017-' . date("Y") . ' Inside</div>';
+      echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
     echo '<div>';
 
     // Initialisation du thème

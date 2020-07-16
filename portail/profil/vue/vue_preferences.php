@@ -14,7 +14,7 @@
           echo '<div class="sous_titre_contribution">Affichage sur mobile</div>';
 
           echo '<div class="zone_contribution large">';
-            if ($preferences->getCelsius() == "Y")
+            if ($preferences->getCelsius() == 'Y')
             {
               echo '<div id="bouton_celsius_yes" class="switch_default_view_celsius bouton_checked">';
                 echo '<input id="celsius_yes" type="radio" name="celsius_view" value="Y" checked required />';
@@ -51,7 +51,7 @@
           echo '<div class="sous_titre_contribution">Affichage à la connexion</div>';
 
           echo '<div class="zone_contribution large">';
-            if ($preferences->getInit_chat() == "Y")
+            if ($preferences->getInit_chat() == 'Y')
             {
               echo '<div id="bouton_chat_yes" class="switch_default_view_chat bouton_checked">';
                 echo '<input id="chat_yes" type="radio" name="inside_room_view" value="Y" checked required />';
@@ -88,7 +88,7 @@
           echo '<div class="sous_titre_contribution">Vue par défaut</div>';
 
           echo '<div class="zone_contribution large">';
-            if ($preferences->getView_notifications() == "M")
+            if ($preferences->getView_notifications() == 'M')
             {
               echo '<div id="bouton_me" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="me" type="radio" name="notifications_view" value="M" checked required />';
@@ -103,7 +103,7 @@
               echo '</div>';
             }
 
-            if ($preferences->getView_notifications() == "T")
+            if ($preferences->getView_notifications() == 'T')
             {
               echo '<div id="bouton_today" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="today" type="radio" name="notifications_view" value="T" checked required />';
@@ -120,7 +120,7 @@
 
             echo '<div></div>';
 
-            if ($preferences->getView_notifications() == "W")
+            if ($preferences->getView_notifications() == 'W')
             {
               echo '<div id="bouton_week" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="week" type="radio" name="notifications_view" value="W" checked required />';
@@ -135,7 +135,7 @@
               echo '</div>';
             }
 
-            if ($preferences->getView_notifications() == "A")
+            if ($preferences->getView_notifications() == 'A')
             {
               echo '<div id="bouton_all_n" class="switch_default_view_notifications bouton_checked">';
                 echo '<input id="all_n" type="radio" name="notifications_view" value="A" checked required />';
@@ -162,7 +162,7 @@
           echo '<div class="sous_titre_contribution">Vue par défaut</div>';
 
           echo '<div class="zone_contribution large">';
-            if ($preferences->getView_movie_house() == "H")
+            if ($preferences->getView_movie_house() == 'H')
             {
               echo '<div id="bouton_accueil" class="switch_default_view_movies bouton_checked">';
                 echo '<input id="home" type="radio" name="movie_house_view" value="H" checked required />';
@@ -177,7 +177,7 @@
               echo '</div>';
             }
 
-            if ($preferences->getView_movie_house() == "C")
+            if ($preferences->getView_movie_house() == 'C')
             {
               echo '<div id="bouton_cards" class="switch_default_view_movies bouton_checked">';
                 echo '<input id="cards" type="radio" name="movie_house_view" value="C" checked required />';
@@ -197,9 +197,9 @@
           echo '<div class="sous_titre_contribution">Catégories accueil</div>';
 
           echo '<div class="zone_contribution large">';
-            list($films_semaine, $films_waited, $films_way_out) = explode(';', $preferences->getCategories_movie_house());
+            list($filmsSemaine, $filmsWaited, $filmsWayOut) = explode(';', $preferences->getCategories_movie_house());
 
-            if ($films_semaine == "Y")
+            if ($filmsSemaine == 'Y')
             {
               echo '<div id="bouton_semaine" class="switch_default_view_categories bouton_checked">';
                 echo '<input id="films_semaine" type="checkbox" name="films_semaine" checked />';
@@ -214,7 +214,7 @@
               echo '</div>';
             }
 
-            if ($films_waited == "Y")
+            if ($filmsWaited == 'Y')
             {
               echo '<div id="bouton_waited" class="switch_default_view_categories bouton_checked">';
                 echo '<input id="films_waited" type="checkbox" name="films_waited" checked />';
@@ -229,7 +229,7 @@
               echo '</div>';
             }
 
-            if ($films_way_out == "Y")
+            if ($filmsWayOut == 'Y')
             {
               echo '<div id="bouton_way_out" class="switch_default_view_categories bouton_checked">';
                 echo '<input id="films_way_out" type="checkbox" name="films_way_out" checked />';
@@ -256,7 +256,7 @@
           echo '<div class="sous_titre_contribution">Vue par défaut</div>';
 
           echo '<div class="zone_contribution large">';
-            if ($preferences->getView_the_box() == "A")
+            if ($preferences->getView_the_box() == 'A')
             {
               echo '<div id="bouton_all" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="all" type="radio" name="the_box_view" value="A" checked required />';
@@ -271,7 +271,7 @@
               echo '</div>';
             }
 
-            if ($preferences->getView_the_box() == "P")
+            if ($preferences->getView_the_box() == 'P')
             {
               echo '<div id="bouton_inprogress" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="inprogress" type="radio" name="the_box_view" value="P" checked required />';
@@ -288,7 +288,7 @@
 
             echo '<div></div>';
 
-            if ($preferences->getView_the_box() == "M")
+            if ($preferences->getView_the_box() == 'M')
             {
               echo '<div id="bouton_mine" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="mine" type="radio" name="the_box_view" value="M" checked required />';
@@ -303,7 +303,7 @@
               echo '</div>';
             }
 
-            if ($preferences->getView_the_box() == "D")
+            if ($preferences->getView_the_box() == 'D')
             {
               echo '<div id="bouton_done" class="switch_default_view_ideas bouton_checked">';
                 echo '<input id="done" type="radio" name="the_box_view" value="D" checked required />';

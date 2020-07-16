@@ -32,10 +32,10 @@
     echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="logo_titre_section" /><div class="texte_titre_section">Années</div></div>';
 
     // Date du jour
-    if ($_GET['view'] == "cards" AND $_GET['year'] == date('Y'))
-      echo '<a class="date_jour pointer naviguerMois">Aujourd\'hui le ' . date("d/m/Y") . '</a>';
+    if ($_GET['view'] == 'cards' AND $_GET['year'] == date('Y'))
+      echo '<a class="date_jour pointer naviguerMois">Aujourd\'hui le ' . date('d/m/Y') . '</a>';
     else
-      echo '<div class="date_jour">Aujourd\'hui le ' . date("d/m/Y") . '</div>';
+      echo '<div class="date_jour">Aujourd\'hui le ' . date('d/m/Y') . '</div>';
 
     // Onglets
     if (!empty($ongletsYears))
@@ -93,7 +93,7 @@
       // Date non communiquée
       if (empty(end($ongletsYears)))
       {
-        if (isset($_GET['year']) AND $_GET['year'] == "none")
+        if (isset($_GET['year']) AND $_GET['year'] == 'none')
           echo '<span class="year active">N. C.</span>';
         else
           echo '<a href="moviehouse.php?view=cards&year=none&action=goConsulter" class="year inactive">N. C.</a>';

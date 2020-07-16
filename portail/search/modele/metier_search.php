@@ -17,15 +17,15 @@
   function getSearch()
   {
     // Initialisations
-    $results    = array();
-    $results_MH = array();
-    $results_FA = array();
-    $results_PP = array();
-    $results_MI = array();
-    $nb_MH      = 0;
-    $nb_FA      = 0;
-    $nb_PP      = 0;
-    $nb_MI      = 0;
+    $results   = array();
+    $resultsMH = array();
+    $resultsFA = array();
+    $resultsPP = array();
+    $resultsMI = array();
+    $nombreMH  = 0;
+    $nombreFA  = 0;
+    $nombrePP  = 0;
+    $nombreMI  = 0;
 
     // Récupération des données
     $recherche = htmlspecialchars($_SESSION['save']['search']);
@@ -39,10 +39,10 @@
       while ($donnees1 = $reponse1->fetch())
       {
         $movie = Movie::withData($donnees1);
-        $nb_MH = $reponse1->rowCount();
+        $nombreMH = $reponse1->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_MH, $movie);
+        array_push($resultsMH, $movie);
       }
       $reponse1->closeCursor();
 
@@ -51,10 +51,10 @@
       while ($donnees2 = $reponse2->fetch())
       {
         $restaurant = Restaurant::withData($donnees2);
-        $nb_FA = $reponse2->rowCount();
+        $nombreFA = $reponse2->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_FA, $restaurant);
+        array_push($resultsFA, $restaurant);
       }
       $reponse2->closeCursor();
 
@@ -63,34 +63,34 @@
       while ($donnees3 = $reponse3->fetch())
       {
         $parcours = Parcours::withData($donnees3);
-        $nb_PP = $reponse3->rowCount();
+        $nombrePP = $reponse3->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_PP, $parcours);
+        array_push($resultsPP, $parcours);
       }
       $reponse3->closeCursor();
 
       // Missions (déjà commencées ou terminées)
-      $reponse4 = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . date("Ymd") . ' AND mission LIKE "%' . $recherche . '%" ORDER BY date_deb DESC, mission ASC');
+      $reponse4 = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . date('Ymd') . ' AND mission LIKE "%' . $recherche . '%" ORDER BY date_deb DESC, mission ASC');
       while ($donnees4 = $reponse4->fetch())
       {
         $mission = Mission::withData($donnees4);
-        $nb_MI = $reponse4->rowCount();
+        $nombreMI = $reponse4->rowCount();
 
         // On ajoute la ligne au tableau
-        array_push($results_MI, $mission);
+        array_push($resultsMI, $mission);
       }
       $reponse4->closeCursor();
 
       // On ajoute les résultats au tableau final
-      $results = array('movie_house'         => $results_MH,
-                       'food_advisor'        => $results_FA,
-                       'petits_pedestres'    => $results_PP,
-                       'missions'            => $results_MI,
-                       'nb_movie_house'      => $nb_MH,
-                       'nb_food_advisor'     => $nb_FA,
-                       'nb_petits_pedestres' => $nb_PP,
-                       'nb_missions'         => $nb_MI
+      $results = array('movie_house'         => $resultsMH,
+                       'food_advisor'        => $resultsFA,
+                       'petits_pedestres'    => $resultsPP,
+                       'missions'            => $resultsMI,
+                       'nb_movie_house'      => $nombreMH,
+                       'nb_food_advisor'     => $nombreFA,
+                       'nb_petits_pedestres' => $nombrePP,
+                       'nb_missions'         => $nombreMI
                       );
     }
 

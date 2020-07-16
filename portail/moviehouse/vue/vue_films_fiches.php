@@ -5,12 +5,12 @@
     /****************/
     echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section">';
-        if ($_GET['year'] != "none")
+        if ($_GET['year'] != 'none')
           echo 'Les films de ' . $_GET['year'];
         else
           echo 'Les films (date de sortie non communiquée)';
 
-        if ($_GET['year'] != "none" AND !empty($listeFilms))
+        if ($_GET['year'] != 'none' AND !empty($listeFilms))
         {
           echo '<div class="zone_actions">';
             echo '<a id="fold_all" class="bouton_fold">Tout plier</a>';
@@ -20,25 +20,25 @@
       echo '</div>';
     echo '</div>';
 
-    $prevMonth  = "";
-    $listMonths = array("01" => "Janvier",
-                        "02" => "Février",
-                        "03" => "Mars",
-                        "04" => "Avril",
-                        "05" => "Mai",
-                        "06" => "Juin",
-                        "07" => "Juillet",
-                        "08" => "Août",
-                        "09" => "Septembre",
-                        "10" => "Octobre",
-                        "11" => "Novembre",
-                        "12" => "Décembre"
+    $prevMonth  = '';
+    $listMonths = array('01' => 'Janvier',
+                        '02' => 'Février',
+                        '03' => 'Mars',
+                        '04' => 'Avril',
+                        '05' => 'Mai',
+                        '06' => 'Juin',
+                        '07' => 'Juillet',
+                        '08' => 'Août',
+                        '09' => 'Septembre',
+                        '10' => 'Octobre',
+                        '11' => 'Novembre',
+                        '12' => 'Décembre'
                        );
 
     if (!empty($listeFilms))
     {
       // Début de la Masonry si liste des films N. C.
-      if ($_GET['year'] == "none")
+      if ($_GET['year'] == 'none')
         echo '<div class="zone_fiches_films">';
 
       foreach ($listeFilms as $keyFilm => $film)
@@ -52,7 +52,7 @@
           {
             $prevMonth = $currentMonth;
 
-            if ($currentMonth == date("m") AND $_GET['year'] == date("Y"))
+            if ($currentMonth == date('m') AND $_GET['year'] == date('Y'))
               echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
             else
               echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
@@ -64,9 +64,9 @@
         // Fiche
         echo '<div class="zone_fiche_film" id="' . $film->getId() . '">';
 
-        if ($film->getParticipation() == "S")
+        if ($film->getParticipation() == 'S')
           echo '<div id="zone_shadow_' . $film->getId() . '" class="zone_shadow border_radius border_blue">';
-        elseif ($film->getParticipation() == "P")
+        elseif ($film->getParticipation() == 'P')
           echo '<div id="zone_shadow_' . $film->getId() . '" class="zone_shadow border_radius border_green">';
         else
           echo '<div id="zone_shadow_' . $film->getId() . '" class="zone_shadow border_radius">';
@@ -171,7 +171,7 @@
                     if ($etoilesFilm['stars'] == $previousStars)
                     {
                       // Avatar
-                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, "avatar");
+                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_fiche" />';
                     }
@@ -185,7 +185,7 @@
                       echo '<img src="../../includes/icons/moviehouse/stars/star' . $etoilesFilm['stars'] . '.png" alt="star' . $etoilesFilm['stars'] . '" class="icone_fiche_4" />';
 
                       // Avatar
-                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, "avatar");
+                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_fiche" />';
 
@@ -205,7 +205,7 @@
       }
 
       // Fin de la zone Masonry si liste des films N. C.
-      if ($_GET['year'] == "none")
+      if ($_GET['year'] == 'none')
         echo '</div>';
     }
     else

@@ -20,7 +20,7 @@
                 echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
 
                 // Suppression
-                if ($collector->getType_collector() == "T")
+                if ($collector->getType_collector() == 'T')
                 {
                   echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
                     echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
@@ -28,7 +28,7 @@
                     echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="eventMessage" />';
                   echo '</form>';
                 }
-                elseif ($collector->getType_collector() == "I")
+                elseif ($collector->getType_collector() == 'I')
                 {
                   echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
                     echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
@@ -39,7 +39,7 @@
               echo '</div>';
 
               // Avatar
-              $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, "avatar");
+              $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, 'avatar');
 
               echo '<div class="zone_avatar_collector">';
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_collector" />';
@@ -78,7 +78,7 @@
             echo '<div class="zone_collector_bas">';
               if (!empty($collector->getCollector()))
               {
-                if ($collector->getType_collector() == "T")
+                if ($collector->getType_collector() == 'T')
                 {
                   // Apostrophe gauche
                   echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
@@ -89,7 +89,7 @@
                   // Apostrophe droite
                   echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
                 }
-                elseif ($collector->getType_collector() == "I")
+                elseif ($collector->getType_collector() == 'I')
                 {
                   // Image
                   echo '<a class="agrandirImage"><img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" /></a>';
@@ -159,7 +159,7 @@
               echo '</div>';
 
               // Avatar
-              $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, "avatar");
+              $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, 'avatar');
 
               echo '<div class="zone_avatar_collector">';
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_collector" />';
@@ -178,7 +178,7 @@
                       echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
                   }
 
-                  if ($collector->getType_speaker() == "other")
+                  if ($collector->getType_speaker() == 'other')
                     echo '<option value="other" selected>Autre</option>';
                   else
                     echo '<option value="other">Autre</option>';
@@ -186,7 +186,7 @@
               echo '</div>';
 
               // Modification "Autre"
-              if ($collector->getType_speaker() == "other")
+              if ($collector->getType_speaker() == 'other')
                 echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_speaker() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
               else
                 echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" style="display: none;" />';
@@ -198,7 +198,7 @@
             echo '</div>';
 
             echo '<div class="zone_collector_bas">';
-              if ($collector->getType_collector() == "T")
+              if ($collector->getType_collector() == 'T')
               {
                 // Type de saisie
                 echo '<input type="hidden" name="type_collector" value="T" />';
@@ -212,7 +212,7 @@
                 // Apostrophe droite
                 echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
               }
-              elseif ($collector->getType_collector() == "I")
+              elseif ($collector->getType_collector() == 'I')
               {
                 // Type de saisie
                 echo '<input type="hidden" name="type_collector" value="I" />';

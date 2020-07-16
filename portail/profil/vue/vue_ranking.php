@@ -15,7 +15,7 @@
         echo '<div class="zone_niveau_succes">';
       }
 
-      if ($success->getDefined() == "Y")
+      if ($success->getDefined() == 'Y')
       {
         if ($success->getValue_user() >= $success->getLimit_success())
           echo '<a id="agrandir_succes_' . $success->getId() . '" class="agrandirSucces classement_liste yellow">';
@@ -71,7 +71,7 @@
                 }
 
                 // Avatar
-                $avatarFormatted = formatAvatar($classement['avatar'], $classement['pseudo'], 2, "avatar");
+                $avatarFormatted = formatAvatar($classement['avatar'], $classement['pseudo'], 2, 'avatar');
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
@@ -93,7 +93,7 @@
           echo '<div class="zone_logo_classement">';
             echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_classement_locked" />';
           echo '</div>';
-          
+
           // Titre succès
           echo '<div class="titre_classement">Succès non défini</div>';
         echo '</div>';

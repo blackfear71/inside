@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Missions";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = true;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Missions';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = true;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Gestion missions";
+        $title = 'Gestion missions';
 
         include('../../includes/common/header.php');
       ?>
@@ -36,7 +36,7 @@
           /*********/
           /* Liens */
           /*********/
-          if ($_GET['action'] == "goConsulter")
+          if ($_GET['action'] == 'goConsulter')
           {
             echo '<div class="zone_liens_saisie">';
               // Saisie mission
@@ -59,12 +59,12 @@
           /***********/
           switch ($_GET['action'])
           {
-            case "goConsulter":
+            case 'goConsulter':
               include('vue/vue_table_missions.php');
               break;
 
-            case "goAjouter":
-            case "goModifier":
+            case 'goAjouter':
+            case 'goModifier':
               include('vue/vue_saisie_mission.php');
               break;
 

@@ -59,7 +59,7 @@
 
     $req = $bdd->query('SELECT id, identifiant, pseudo, anniversary
                         FROM users
-                        WHERE SUBSTR(anniversary, 5, 4) = "' . date("md") . '"
+                        WHERE SUBSTR(anniversary, 5, 4) = "' . date('md') . '"
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
@@ -86,7 +86,7 @@
 
     $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
                         FROM food_advisor_choices
-                        WHERE date = "' . date("Ymd") . '" AND reserved = "Y"');
+                        WHERE date = "' . date('Ymd') . '" AND reserved = "Y"');
 
     $data = $req->fetch();
 
@@ -132,7 +132,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM food_advisor_users
-                        WHERE date = "' . date("Ymd") . '" AND identifiant = "' . $identifiant . '"');
+                        WHERE date = "' . date('Ymd') . '" AND identifiant = "' . $identifiant . '"');
 
     $data = $req->fetch();
 
@@ -280,7 +280,7 @@
 
     $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
                         FROM movie_house
-                        WHERE to_delete != "Y" AND date_doodle >= "' . date("Ymd") . '"
+                        WHERE to_delete != "Y" AND date_doodle >= "' . date('Ymd') . '"
                         ORDER BY date_doodle ASC, id ASC
                         LIMIT 1');
 

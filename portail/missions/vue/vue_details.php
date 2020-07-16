@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Missions : Insider";
-      $style_head      = "styleMI.css";
-      $script_head     = "";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Missions : Insider';
+      $styleHead      = 'styleMI.css';
+      $scriptHead     = '';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Missions : Insider";
+        $title = 'Missions : Insider';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -169,7 +169,7 @@
                       }
 
                       // Avatar
-                      $avatarFormatted = formatAvatar($rankUser['avatar'], $rankUser['pseudo'], 2, "avatar");
+                      $avatarFormatted = formatAvatar($rankUser['avatar'], $rankUser['pseudo'], 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
@@ -239,10 +239,10 @@
                 echo '</div>';
 
                 echo '<div class="barre_info_details_mission">';
-                  $nb_jours_event = ecartDatesEvent($detailsMission->getDate_deb(), $detailsMission->getDate_fin());
-                  $objectif_total = $detailsMission->getObjectif() * $nb_jours_event;
+                  $nombreJoursEvent = ecartDatesEvent($detailsMission->getDate_deb(), $detailsMission->getDate_fin());
+                  $objectifTotal    = $detailsMission->getObjectif() * $nombreJoursEvent;
 
-                  echo '<meter min="0" max="' . $objectif_total . '" value="' . $missionUser['event'] . '" class="progression_details_mission"></meter>';
+                  echo '<meter min="0" max="' . $objectifTotal . '" value="' . $missionUser['event'] . '" class="progression_details_mission"></meter>';
                   echo '<div class="score_details_mission">' . $missionUser['event'] . '</div>';
                 echo '</div>';
               echo '</div>';
@@ -259,7 +259,7 @@
                     {
                       echo '<div class="zone_avatar_details_mission">';
                         // Avatar
-                        $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, "avatar");
+                        $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, 'avatar');
 
                         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_details_mission" />';
 

@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "CRON";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'CRON';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Tâches CRON";
+        $title = 'Tâches CRON';
 
         include('../../includes/common/header.php');
       ?>
@@ -111,7 +111,7 @@
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
                       echo '<tr>';
-                        if (substr($lines[6], 30, 2) == "OK")
+                        if (substr($lines[6], 30, 2) == 'OK')
                           echo '<td class="log_ok">OK</td>';
                         else
                           echo '<td class="log_ko">KO</td>';
@@ -170,7 +170,7 @@
                     // Tableau statut / titre / flèche
                     echo '<table class="zone_log">';
                       echo '<tr>';
-                        if (substr($lines[6], 30, 2) == "OK")
+                        if (substr($lines[6], 30, 2) == 'OK')
                           echo '<td class="log_ok">OK</td>';
                         else
                           echo '<td class="log_ko">KO</td>';
@@ -181,7 +181,7 @@
 
                         echo '<td class="voir_log">';
                           echo '<a class="detailsLogs">';
-                            echo '<img src="../../includes/icons/admin/open.png" alt="open" class="see_log" id="weekly_arrow_' . $j . '" />';
+                            echo '<img src="../../includes/icons/common/open.png" alt="open" class="see_log" id="weekly_arrow_' . $j . '" />';
                           echo '</a>';
                         echo '</td>';
                       echo '</tr>';

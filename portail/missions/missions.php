@@ -25,7 +25,7 @@
       break;
 
     case 'doMission':
-      if (isset($_SERVER["HTTP_REFERER"]))
+      if (isset($_SERVER['HTTP_REFERER']))
         validateMission($_POST, $_SESSION['user']['identifiant'], $_SESSION['missions'][$_POST['key_mission']]);
       break;
 
@@ -65,8 +65,8 @@
   switch ($_GET['action'])
   {
     case 'doMission':
-      if (isset($_SERVER["HTTP_REFERER"]))
-        header('location: ' . $_SERVER["HTTP_REFERER"]);
+      if (isset($_SERVER['HTTP_REFERER']))
+        header('location: ' . $_SERVER['HTTP_REFERER']);
       break;
 
     case 'goConsulter':

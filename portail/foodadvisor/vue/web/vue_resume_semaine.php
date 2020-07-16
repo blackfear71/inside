@@ -5,11 +5,11 @@
   echo '<div class="titre_section"><img src="../../includes/icons/foodadvisor/week_grey.png" alt="week_grey" class="logo_titre_section" /><div class="texte_titre_section">Le résumé de la semaine</div></div>';
 
   echo '<div class="zone_propositions">';
-    $numero_jour = 0;
+    $numeroJour = 0;
 
     foreach ($choixSemaine as $jour => $choixJour)
     {
-      $numero_jour++;
+      $numeroJour++;
 
       if (!empty($choixJour))
       {
@@ -18,9 +18,9 @@
           echo '<div class="jour_semaine">' . $jour . '</div>';
 
           // Suppression si disponible
-          if (empty($choixJour->getCaller()) AND (($numero_jour < date("N")) OR ($numero_jour == date("N") AND date("H") >= 13)))
+          if (empty($choixJour->getCaller()) AND (($numeroJour < date('N')) OR ($numeroJour == date('N') AND date('H') >= 13)))
           {
-            echo '<form id="delete_resume_' . $numero_jour . '" method="post" action="foodadvisor.php?action=doSupprimerResume">';
+            echo '<form id="delete_resume_' . $numeroJour . '" method="post" action="foodadvisor.php?action=doSupprimerResume">';
               echo '<input type="hidden" name="id_resume" value="' . $choixJour->getId_restaurant() . '" />';
               echo '<input type="hidden" name="date_resume" value="' . $choixJour->getDate() . '" />';
               echo '<input type="submit" name="delete_resume" value="" title="Supprimer le choix" class="icon_delete_resume eventConfirm" />';
@@ -61,7 +61,7 @@
               echo '<img src="../../includes/icons/foodadvisor/phone.png" alt="phone" class="icone_telephone" />';
 
               // Avatar
-              $avatarFormatted = formatAvatar($choixJour->getAvatar(), $choixJour->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($choixJour->getAvatar(), $choixJour->getPseudo(), 2, 'avatar');
 
               echo '<div class="zone_avatar_caller">';
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_caller" />';
@@ -77,12 +77,12 @@
           echo '<div class="jour_semaine">' . $jour . '</div>';
 
           // Pas de proposition
-          echo '<div id="no_proposal_' . $numero_jour . '" class="no_proposal">Pas de proposition pour ce jour</div>';
+          echo '<div id="no_proposal_' . $numeroJour . '" class="no_proposal">Pas de proposition pour ce jour</div>';
 
           // Bouton ajout choix (si pas de choix fait dans la matinée)
-          if (($numero_jour < date("N")) OR ($numero_jour == date("N") AND date("H") >= 13))
+          if (($numeroJour < date('N')) OR ($numeroJour == date('N') AND date('H') >= 13))
           {
-            echo '<a id="choix_resume_' . $numero_jour . '" class="bouton_resume afficherResume">';
+            echo '<a id="choix_resume_' . $numeroJour . '" class="bouton_resume afficherResume">';
               echo '<span class="fond_plus">+</span>';
               echo 'Ajouter un choix';
             echo '</a>';

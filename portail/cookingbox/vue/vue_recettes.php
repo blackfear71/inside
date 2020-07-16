@@ -34,7 +34,7 @@
               echo '</div>';
 
               // Avatar
-              $avatarFormatted = formatAvatar($recette->getAvatar(), $recette->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($recette->getAvatar(), $recette->getPseudo(), 2, 'avatar');
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_recette" />';
 

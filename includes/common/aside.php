@@ -4,18 +4,18 @@
 	//////////////////////////////////////
 
 	// Initialisations
-	if (!isset($ajouter_parcours))
-		$ajouter_parcours = false;
+	if (!isset($ajouterParcours))
+		$ajouterParcours = false;
 
-	if (!isset($modify_parcours))
-		$modify_parcours = false;
+	if (!isset($modifierParcours))
+		$modifierParcours = false;
 
-	if (!isset($modify_success))
-		$modify_success = false;
+	if (!isset($modifierSucces))
+		$modifierSucces = false;
 
 	echo '<div class="menu_aside_hidden">';
 		// Ajouter parcours
-		if ($ajouter_parcours == true)
+		if ($ajouterParcours == true)
 		{
 			echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goajouter" title="Ajouter parcours" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter parcours" class="icon_aside" />';
@@ -23,7 +23,7 @@
 		}
 
 		// Modifier parcours
-		if ($modify_parcours == true)
+		if ($modifierParcours == true)
 		{
 			echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
@@ -31,7 +31,7 @@
 		}
 
 		// Modifier les succès
-		if ($modify_success == true)
+		if ($modifierSucces == true)
 		{
 			echo '<a href="/inside/administration/success/success.php?action=goModifier" title="Modifier les succès" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/edit.png" alt="edit" title="Modifier les succès" class="icon_aside" />';

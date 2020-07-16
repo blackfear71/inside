@@ -5,7 +5,7 @@
       echo '<div class="texte_titre_section">';
         echo 'Mes récompenses';
 
-        if (!empty($themes_users))
+        if (!empty($themesUsers))
         {
           echo '<div class="zone_actions">';
             echo '<a id="fold_themes_user" class="bouton_fold">Plier</a>';
@@ -14,41 +14,41 @@
       echo '</div>';
     echo '</div>';
 
-    if (!empty($themes_users))
+    if (!empty($themesUsers))
     {
       echo '<div id="themes_user">';
-        foreach ($themes_users as $theme_users)
+        foreach ($themesUsers as $themeUsers)
         {
           echo '<div class="zone_theme">';
             echo '<div class="zone_theme_infos">';
               // Indicateur sélection
-              if ($isThemeMission != true AND $preferences->getRef_theme() == $theme_users->getReference())
+              if ($isThemeMission != true AND $preferences->getRef_theme() == $themeUsers->getReference())
                 echo '<div class="selection_theme">Sélectionné</div>';
 
               // Header (Logo + header)
               echo '<div class="zone_header_theme">';
-                if ($theme_users->getLogo() == "Y")
-                  echo '<img src="../../includes/images/themes/logos/' . $theme_users->getReference() . '_l.png" alt="' . $theme_users->getReference() . '_l" title="Logo" class="theme_logo" />';
+                if ($themeUsers->getLogo() == 'Y')
+                  echo '<img src="../../includes/images/themes/logos/' . $themeUsers->getReference() . '_l.png" alt="' . $themeUsers->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                echo '<img src="../../includes/images/themes/headers/' . $theme_users->getReference() . '_h.png" alt="' . $theme_users->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                echo '<img src="../../includes/images/themes/headers/' . $themeUsers->getReference() . '_h.png" alt="' . $themeUsers->getReference() . '_h" title="Header" class="theme_header_footer" />';
               echo '</div>';
 
               // Background
-              echo '<img src="../../includes/images/themes/backgrounds/' . $theme_users->getReference() . '.png" alt="' . $theme_users->getReference() . '" title="Background" class="theme_background" />';
+              echo '<img src="../../includes/images/themes/backgrounds/' . $themeUsers->getReference() . '.png" alt="' . $themeUsers->getReference() . '" title="Background" class="theme_background" />';
 
               // Footer
-              echo '<img src="../../includes/images/themes/footers/' . $theme_users->getReference() . '_f.png" alt="' . $theme_users->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+              echo '<img src="../../includes/images/themes/footers/' . $themeUsers->getReference() . '_f.png" alt="' . $themeUsers->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
               echo '<table class="theme_infos">';
                 echo '<tr>';
                   // Nom
                   echo '<td class="theme_name">';
-                    echo $theme_users->getName();
+                    echo $themeUsers->getName();
                   echo '</td>';
 
                   // Niveau
                   echo '<td class="theme_level">';
-                    echo 'Niveau <span class="number_exp">' . $theme_users->getLevel() . '</span>';
+                    echo 'Niveau <span class="number_exp">' . $themeUsers->getLevel() . '</span>';
                   echo '</td>';
                 echo '</tr>';
               echo '</table>';
@@ -57,15 +57,15 @@
             echo '<div class="zone_theme_actions">';
               // Bouton
               echo '<form method="post" action="profil.php?action=doModifierTheme" class="form_theme">';
-                echo '<input type="hidden" name="id_theme" value="' . $theme_users->getId() . '" />';
+                echo '<input type="hidden" name="id_theme" value="' . $themeUsers->getId() . '" />';
                 echo '<input type="submit" name="update_theme" value="Utiliser ce thème" class="bouton_theme" />';
               echo '</form>';
 
               // Aperçu
-              if ($theme_users->getLogo() == "Y")
-                echo '<a id="' . $theme_users->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
+              if ($themeUsers->getLogo() == 'Y')
+                echo '<a id="' . $themeUsers->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
               else
-                echo '<a id="nologo_' . $theme_users->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
+                echo '<a id="nologo_' . $themeUsers->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
             echo '</div>';
           echo '</div>';
         }
@@ -79,7 +79,7 @@
       echo '<div class="texte_titre_section">';
         echo 'Les thèmes de missions';
 
-        if (!empty($themes_missions))
+        if (!empty($themesMissions))
         {
           echo '<div class="zone_actions">';
             echo '<a id="fold_themes_missions" class="bouton_fold">Plier</a>';
@@ -88,51 +88,51 @@
       echo '</div>';
     echo '</div>';
 
-    if (!empty($themes_missions))
+    if (!empty($themesMissions))
     {
       echo '<div id="themes_missions">';
-        foreach ($themes_missions as $theme_mission)
+        foreach ($themesMissions as $themeMission)
         {
           echo '<div class="zone_theme">';
             echo '<div class="zone_theme_infos">';
               // Indicateur sélection
-              if ($isThemeMission != true AND $preferences->getRef_theme() == $theme_mission->getReference())
+              if ($isThemeMission != true AND $preferences->getRef_theme() == $themeMission->getReference())
                 echo '<div class="selection_theme">Sélectionné</div>';
 
               // Indicateur sélection (mission)
-              if ($isThemeMission == true AND date("Ymd") >= $theme_mission->getDate_deb() AND date("Ymd") <= $theme_mission->getDate_fin())
+              if ($isThemeMission == true AND date('Ymd') >= $themeMission->getDate_deb() AND date('Ymd') <= $themeMission->getDate_fin())
                 echo '<div class="selection_theme">Mission en cours</div>';
 
               // Header (Logo + header)
               echo '<div class="zone_header_theme">';
-                if ($theme_mission->getLogo() == "Y")
-                  echo '<img src="../../includes/images/themes/logos/' . $theme_mission->getReference() . '_l.png" alt="' . $theme_mission->getReference() . '_l" title="Logo" class="theme_logo" />';
+                if ($themeMission->getLogo() == 'Y')
+                  echo '<img src="../../includes/images/themes/logos/' . $themeMission->getReference() . '_l.png" alt="' . $themeMission->getReference() . '_l" title="Logo" class="theme_logo" />';
 
-                echo '<img src="../../includes/images/themes/headers/' . $theme_mission->getReference() . '_h.png" alt="' . $theme_mission->getReference() . '_h" title="Header" class="theme_header_footer" />';
+                echo '<img src="../../includes/images/themes/headers/' . $themeMission->getReference() . '_h.png" alt="' . $themeMission->getReference() . '_h" title="Header" class="theme_header_footer" />';
               echo '</div>';
 
               // Background
-              echo '<img src="../../includes/images/themes/backgrounds/' . $theme_mission->getReference() . '.png" alt="' . $theme_mission->getReference() . '" title="Background" class="theme_background" />';
+              echo '<img src="../../includes/images/themes/backgrounds/' . $themeMission->getReference() . '.png" alt="' . $themeMission->getReference() . '" title="Background" class="theme_background" />';
 
               // Footer
-              echo '<img src="../../includes/images/themes/footers/' . $theme_mission->getReference() . '_f.png" alt="' . $theme_mission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
+              echo '<img src="../../includes/images/themes/footers/' . $themeMission->getReference() . '_f.png" alt="' . $themeMission->getReference() . '_f" title="Footer" class="theme_header_footer" />';
 
               // Nom mission
-              echo '<div class="theme_name_mission">' . $theme_mission->getName() . '</div>';
+              echo '<div class="theme_name_mission">' . $themeMission->getName() . '</div>';
             echo '</div>';
 
             echo '<div class="zone_theme_actions">';
               // Bouton
               echo '<form method="post" action="profil.php?action=doModifierTheme" class="form_theme">';
-                echo '<input type="hidden" name="id_theme" value="' . $theme_mission->getId() . '" />';
+                echo '<input type="hidden" name="id_theme" value="' . $themeMission->getId() . '" />';
                 echo '<input type="submit" name="update_theme" value="Utiliser ce thème" class="bouton_theme" />';
               echo '</form>';
 
               // Aperçu
-              if ($theme_mission->getLogo() == "Y")
-                echo '<a id="' . $theme_mission->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
+              if ($themeMission->getLogo() == 'Y')
+                echo '<a id="' . $themeMission->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
               else
-                echo '<a id="nologo_' . $theme_mission->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
+                echo '<a id="nologo_' . $themeMission->getReference() . '" class="bouton_apercu apercuTheme">Aperçu</a>';
             echo '</div>';
           echo '</div>';
         }

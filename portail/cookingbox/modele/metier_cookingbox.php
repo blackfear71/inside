@@ -85,14 +85,14 @@
   function getWeeks($user)
   {
     $listYears    = array();
-    $previousYear = "";
+    $previousYear = '';
 
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM cooking_box WHERE identifiant = "' . $user . '"
                                                         AND name        = ""
                                                         AND picture     = ""
-                                                        AND (year < ' . date("Y") . ' OR (year = ' . date("Y") . ' AND week <= ' . date("W") . '))
+                                                        AND (year < ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week <= ' . date('W') . '))
                                                    ORDER BY year DESC, week DESC');
     while ($donnees = $reponse->fetch())
     {
@@ -182,7 +182,7 @@
     // Sinon : mise à jour
     else
     {
-      if ($already_cooked != "Y")
+      if ($already_cooked != 'Y')
       {
         $req2 = $bdd->prepare('UPDATE cooking_box SET identifiant = :identifiant WHERE week = "' . $week . '" AND year = "' . $year . '"');
         $req2->execute(array(
@@ -201,18 +201,18 @@
   {
     global $bdd;
 
-    $other_cooker = false;
+    $otherCooker = false;
 
     // Lecture des anciennes données
     $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
     $data1 = $req1->fetch();
 
     if ($data1['identifiant'] != $user)
-      $other_cooker = true;
+      $otherCooker = true;
 
     $req1->closeCursor();
 
-    if ($other_cooker == false)
+    if ($otherCooker == false)
     {
       // Mise à jour du statut
       $req2 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . $week . '" AND year = "' . $year . '"');
@@ -227,7 +227,7 @@
       $identifiant = $data3['identifiant'];
       $req3->closeCursor();
 
-      if ($cooked == "Y")
+      if ($cooked == 'Y')
         insertOrUpdateSuccesValue('cooker', $identifiant, 1);
       else
         insertOrUpdateSuccesValue('cooker', $identifiant, -1);
@@ -240,7 +240,7 @@
   // RETOUR : Booléen
   function controlYear($year)
   {
-    $annee_existante = false;
+    $anneeExistante = false;
 
     if (isset($year) AND is_numeric($year))
     {
@@ -249,12 +249,12 @@
       $reponse = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND name != "" AND picture != "" ORDER BY year DESC');
 
       if ($reponse->rowCount() > 0)
-        $annee_existante = true;
+        $anneeExistante = true;
 
       $reponse->closeCursor();
     }
 
-    return $annee_existante;
+    return $anneeExistante;
   }
 
   // METIER : Lecture des années distinctes
@@ -341,7 +341,7 @@
   // RETOUR : Id recette
   function insertRecipe($post, $files, $user)
   {
-    $new_id     = NULL;
+    $newId      = NULL;
     $control_ok = true;
 
     global $bdd;
@@ -357,22 +357,22 @@
     $_SESSION['save']['remarks']               = $post['remarks'];
 
     // Récupération des données
-    $year_recipe = $post['year_recipe'];
-    $week_recipe = formatWeekForInsert($post['week_recipe']);
-    $name_recipe = $post['name_recipe'];
+    $yearRecipe = $post['year_recipe'];
+    $weekRecipe = formatWeekForInsert($post['week_recipe']);
+    $nameRecipe = $post['name_recipe'];
     $recipe      = $post['preparation'];
     $tips        = $post['remarks'];
-    $ingredients = "";
+    $ingredients = '';
 
     foreach ($post['ingredients'] as $key => $ingredient)
     {
       if (!empty($ingredient))
       {
-        $quantite_ingredient          = str_replace(',', '.', $post['quantites_ingredients'][$key]);
-        $quantite_ingredient_formated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
+        $quantiteIngredient          = str_replace(',', '.', $post['quantites_ingredients'][$key]);
+        $quantiteIngredientFormated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
 
-        if  (!empty($quantite_ingredient)
-        AND (!is_numeric($quantite_ingredient) OR $quantite_ingredient <= 0))
+        if  (!empty($quantiteIngredient)
+        AND (!is_numeric($quantiteIngredient) OR $quantiteIngredient <= 0))
         {
           $_SESSION['alerts']['quantity_not_numeric'] = true;
           $control_ok                                 = false;
@@ -381,12 +381,12 @@
         else
         {
           // Filtrage
-          $ingredient = str_replace("@", " ", $ingredient);
+          $ingredient = str_replace('@', ' ', $ingredient);
 
-          if ($post['unites_ingredients'][$key] == "sans")
-            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@;";
+          if ($post['unites_ingredients'][$key] == 'sans')
+            $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@;';
           else
-            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@" . $post['unites_ingredients'][$key] . ";";
+            $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@' . $post['unites_ingredients'][$key] . ';';
         }
       }
     }
@@ -394,7 +394,7 @@
     // Contrôle doublon si on double-clique sur Ajouter (on ne met pas à jour mais on récupère l'id pour rediriger vers la recette déjà existante)
     if ($control_ok == true)
     {
-      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $yearRecipe . '" AND week = "' . $weekRecipe . '"');
       $data1 = $req1->fetch();
       $datasRecipe = WeekCake::withData($data1);
       $req1->closeCursor();
@@ -402,14 +402,14 @@
       if (!empty($datasRecipe->getName()) OR !empty($datasRecipe->getPicture()) OR !empty($datasRecipe->getIngredients()) OR !empty($datasRecipe->getRecipe()) OR !empty($datasRecipe->getTips()))
       {
         $control_ok = false;
-        $new_id     = $data1['id'];
+        $newId      = $data1['id'];
       }
     }
 
     if ($control_ok == true)
     {
       // Enregistrement image
-      $new_name = '';
+      $newName = '';
 
       // On vérifie la présence du dossier, sinon on le créé
       $dossier = '../../includes/images/cookingbox';
@@ -418,21 +418,21 @@
         mkdir($dossier);
 
       // On vérifie la présence du dossier des années, sinon on le créé
-      $dossier_annee = $dossier . '/' . $year_recipe;
+      $dossierAnnee = $dossier . '/' . $yearRecipe;
 
-      if (!is_dir($dossier_annee))
-        mkdir($dossier_annee);
+      if (!is_dir($dossierAnnee))
+        mkdir($dossierAnnee);
 
       // On vérifie la présence du dossier des miniatures, sinon on le créé
-      $dossier_miniatures = $dossier_annee . '/mini';
+      $dossierMiniatures = $dossierAnnee . '/mini';
 
-      if (!is_dir($dossier_miniatures))
-        mkdir($dossier_miniatures);
+      if (!is_dir($dossierMiniatures))
+        mkdir($dossierMiniatures);
 
       // Dossier de destination et nom du fichier
-      $image_dir = $dossier_annee . '/';
-      $mini_dir  = $dossier_miniatures . '/';
-      $name      = $year_recipe . '-' . $week_recipe . '-' . rand();
+      $imageDir = $dossierAnnee . '/';
+      $miniDir  = $dossierMiniatures . '/';
+      $name     = $yearRecipe . '-' . $weekRecipe . '-' . rand();
 
       // Contrôles fichier
       $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -441,26 +441,26 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
+        $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
 
         if ($control_ok == true)
         {
-          $new_name   = $fileDatas['new_name'];
-          $type_image = $fileDatas['type_file'];
+          $newName   = $fileDatas['new_name'];
+          $typeImage = $fileDatas['type_file'];
 
           // Rotation de l'image (si JPEG)
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($image_dir . $new_name, $type_image);
+          if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+            $rotate = rotateImage($imageDir . $newName, $typeImage);
 
           // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
+          imagethumb($imageDir . $newName, $imageDir . $newName, 2000, FALSE, FALSE);
 
           // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
+          imagethumb($imageDir . $newName, $miniDir . $newName, 500, FALSE, FALSE);
 
           // Mise à jour de l'enregistrement concerné
-          $recette = array('name'        => $name_recipe,
-                           'picture'     => $new_name,
+          $recette = array('name'        => $nameRecipe,
+                           'picture'     => $newName,
                            'ingredients' => $ingredients,
                            'recipe'      => $recipe,
                            'tips'        => $tips
@@ -471,20 +471,20 @@
                                                         ingredients = :ingredients,
                                                         recipe      = :recipe,
                                                         tips        = :tips
-                                                  WHERE year        = "' . $year_recipe . '"
-                                                    AND week        = "' . $week_recipe . '"
+                                                  WHERE year        = "' . $yearRecipe . '"
+                                                    AND week        = "' . $weekRecipe . '"
                                                     AND identifiant = "' . $user . '"');
           $req2->execute($recette);
           $req2->closeCursor();
 
           // Lecture Id recette
-          $req3 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+          $req3 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $yearRecipe . '" AND week = "' . $weekRecipe . '"');
           $data3 = $req3->fetch();
-          $new_id = $data3['id'];
+          $newId = $data3['id'];
           $req3->closeCursor();
 
           // Génération notification nouvelle recette
-          insertNotification($user, 'recipe', $new_id);
+          insertNotification($user, 'recipe', $newId);
 
           // Génération succès
           insertOrUpdateSuccesValue('recipe-master', $user, 1);
@@ -497,35 +497,34 @@
       }
     }
 
-    return $new_id;
+    return $newId;
   }
 
   // METIER : Met à jour une recette
   // RETOUR : Id recette
   function updateRecipe($post, $files, $user)
   {
-    $new_id     = NULL;
     $control_ok = true;
 
     global $bdd;
 
     // Récupération des données
-    $year_recipe = $post['hidden_year_recipe'];
-    $week_recipe = formatWeekForInsert($post['hidden_week_recipe']);
-    $name_recipe = $post['name_recipe'];
+    $yearRecipe  = $post['hidden_year_recipe'];
+    $weekRecipe  = formatWeekForInsert($post['hidden_week_recipe']);
+    $nameRecipe  = $post['name_recipe'];
     $recipe      = $post['preparation'];
     $tips        = $post['remarks'];
-    $ingredients = "";
+    $ingredients = '';
 
     foreach ($post['ingredients'] as $key => $ingredient)
     {
       if (!empty($ingredient))
       {
-        $quantite_ingredient = str_replace(',', '.', $post['quantites_ingredients'][$key]);
-        $quantite_ingredient_formated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
+        $quantiteIngredient         = str_replace(',', '.', $post['quantites_ingredients'][$key]);
+        $quantiteIngredientFormated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
 
-        if  (!empty($quantite_ingredient)
-        AND (!is_numeric($quantite_ingredient) OR $quantite_ingredient <= 0))
+        if  (!empty($quantiteIngredient)
+        AND (!is_numeric($quantiteIngredient) OR $quantiteIngredient <= 0))
         {
           $_SESSION['alerts']['quantity_not_numeric'] = true;
           $control_ok                                 = false;
@@ -534,12 +533,12 @@
         else
         {
           // Filtrage
-          $ingredient = str_replace("@", " ", $ingredient);
+          $ingredient = str_replace('@', ' ', $ingredient);
 
-          if ($post['unites_ingredients'][$key] == "sans")
-            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@;";
+          if ($post['unites_ingredients'][$key] == 'sans')
+            $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@;';
           else
-            $ingredients .= $ingredient . "@" . $quantite_ingredient_formated . "@" . $post['unites_ingredients'][$key] . ";";
+            $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@' . $post['unites_ingredients'][$key] . ';';
         }
       }
     }
@@ -547,18 +546,18 @@
     if ($control_ok == true)
     {
       // Récupération des données
-      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year_recipe . '" AND week = "' . $week_recipe . '"');
+      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $yearRecipe . '" AND week = "' . $weekRecipe . '"');
       $data1 = $req1->fetch();
       $datasRecipe = WeekCake::withData($data1);
       $req1->closeCursor();
 
       $idRecipe = $datasRecipe->getId();
-      $new_name = $datasRecipe->getPicture();
+      $newName  = $datasRecipe->getPicture();
 
       // Dossier de destination et nom du fichier
-      $image_dir = '../../includes/images/cookingbox/' . $year_recipe . '/';
-      $mini_dir  = $image_dir . '/mini/';
-      $name      = $year_recipe . '-' . $week_recipe . '-' . rand();
+      $imageDir = '../../includes/images/cookingbox/' . $yearRecipe . '/';
+      $miniDir  = $imageDir . '/mini/';
+      $name     = $yearRecipe . '-' . $weekRecipe . '-' . rand();
 
       // Contrôles fichier
       $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -567,28 +566,28 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $fileDatas, $image_dir);
+        $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
 
         if ($control_ok == true)
         {
-          $new_name   = $fileDatas['new_name'];
-          $type_image = $fileDatas['type_file'];
+          $newName   = $fileDatas['new_name'];
+          $typeImage = $fileDatas['type_file'];
 
           // Rotation de l'image (si JPEG)
-          if ($type_image == 'jpg' OR $type_image == 'jpeg')
-            $rotate = rotateImage($image_dir . $new_name, $type_image);
+          if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+            $rotate = rotateImage($imageDir . $newName, $typeImage);
 
           // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $image_dir . $new_name, 2000, FALSE, FALSE);
+          imagethumb($imageDir . $newName, $imageDir . $newName, 2000, FALSE, FALSE);
 
           // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($image_dir . $new_name, $mini_dir . $new_name, 500, FALSE, FALSE);
+          imagethumb($imageDir . $newName, $miniDir . $newName, 500, FALSE, FALSE);
 
           // Suppression des anciennes images
           if (!empty($datasRecipe->getPicture()))
           {
-            unlink($image_dir . $datasRecipe->getPicture());
-            unlink($mini_dir . $datasRecipe->getPicture());
+            unlink($imageDir . $datasRecipe->getPicture());
+            unlink($miniDir . $datasRecipe->getPicture());
           }
         }
       }
@@ -596,8 +595,8 @@
       if ($control_ok == true)
       {
         // Mise à jour de l'enregistrement concerné
-        $recette = array('name'        => $name_recipe,
-                         'picture'     => $new_name,
+        $recette = array('name'        => $nameRecipe,
+                         'picture'     => $newName,
                          'ingredients' => $ingredients,
                          'recipe'      => $recipe,
                          'tips'        => $tips
@@ -608,8 +607,8 @@
                                                       ingredients = :ingredients,
                                                       recipe      = :recipe,
                                                       tips        = :tips
-                                                WHERE year        = "' . $year_recipe . '"
-                                                  AND week        = "' . $week_recipe . '"
+                                                WHERE year        = "' . $yearRecipe . '"
+                                                  AND week        = "' . $weekRecipe . '"
                                                   AND identifiant = "' . $user . '"');
         $req2->execute($recette);
         $req2->closeCursor();
@@ -639,16 +638,16 @@
     // Suppression des images
     if (!empty($recipe->getPicture()))
     {
-      unlink("../../includes/images/cookingbox/" . $year . "/" . $recipe->getPicture());
-      unlink("../../includes/images/cookingbox/" . $year . "/mini/" . $recipe->getPicture());
+      unlink('../../includes/images/cookingbox/' . $year . '/' . $recipe->getPicture());
+      unlink('../../includes/images/cookingbox/' . $year . '/mini/' . $recipe->getPicture());
     }
 
     // Mise à jour des données
-    $update = array('name'        => "",
-                    'picture'     => "",
-                    'ingredients' => "",
-                    'recipe'      => "",
-                    'tips'        => ""
+    $update = array('name'        => '',
+                    'picture'     => '',
+                    'ingredients' => '',
+                    'recipe'      => '',
+                    'tips'        => ''
                    );
     $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
                                                   picture     = :picture,

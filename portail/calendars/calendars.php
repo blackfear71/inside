@@ -26,7 +26,7 @@
     case 'goConsulter':
       // Contrôle si l'année est renseignée et numérique
       if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-        header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
+        header('location: calendars.php?year=' . date('Y') . '&action=goConsulter');
       else
       {
         // Lecture des données par le modèle
@@ -43,25 +43,25 @@
       $preferences = getPreferences($_SESSION['user']['identifiant']);
       break;
 
-    case "doAjouter":
+    case 'doAjouter':
       insertCalendrier($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
-    case "doAjouterAnnexe":
+    case 'doAjouterAnnexe':
       insertAnnexe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
       deleteCalendrier($_POST);
       break;
 
-    case "doSupprimerAnnexe":
+    case 'doSupprimerAnnexe':
       deleteAnnexe($_POST);
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: calendars.php?year=' . date("Y") . '&action=goConsulter');
+      header('location: calendars.php?year=' . date('Y') . '&action=goConsulter');
       break;
   }
 
@@ -110,10 +110,10 @@
       unset($annexe);
       break;
 
-    case "doAjouter":
-    case "doAjouterAnnexe":
-    case "doSupprimer":
-    case "doSupprimerAnnexe":
+    case 'doAjouter':
+    case 'doAjouterAnnexe':
+    case 'doSupprimer':
+    case 'doSupprimerAnnexe':
     default:
       break;
   }
@@ -121,19 +121,19 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doAjouter":
+    case 'doAjouter':
       header('location: calendars.php?year=' . $_POST['years'] . '&action=goConsulter');
       break;
 
-    case "doAjouterAnnexe":
+    case 'doAjouterAnnexe':
       header('location: calendars.php?action=goConsulterAnnexes');
       break;
 
-    case "doSupprimer":
+    case 'doSupprimer':
       header('location: calendars.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;
 
-    case "doSupprimerAnnexe":
+    case 'doSupprimerAnnexe':
       header('location: calendars.php?action=goConsulterAnnexes');
       break;
 

@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Missions : Insider";
-      $style_head      = "styleMI.css";
-      $script_head     = "scriptMI.js";
-      $angular_head    = false;
-      $chat_head       = true;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Missions : Insider';
+      $styleHead      = 'styleMI.css';
+      $scriptHead     = 'scriptMI.js';
+      $angularHead    = false;
+      $chatHead       = true;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
 		<!-- Entête -->
 		<header>
       <?php
-        $title = "Missions : Insider";
+        $title = 'Missions : Insider';
 
         include('../../includes/common/header.php');
 			  include('../../includes/common/onglets.php');
@@ -40,7 +40,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
           /*******************/
@@ -55,20 +55,20 @@
           /**********************/
           if (!empty($tabMissions))
           {
-            $titre_en_cours = false;
-            $titre_a_venir  = false;
-            $titre_passees  = false;
+            $titreEnCours = false;
+            $titreAVenir  = false;
+            $titrePassees = false;
 
             echo '<div class="zone_missions">';
               foreach ($tabMissions as $keyMission => $ligneMission)
               {
                 // Missions futures
-                if ($ligneMission->getStatut() == "V")
+                if ($ligneMission->getStatut() == 'V')
                 {
-                  if ($titre_a_venir != true)
+                  if ($titreAVenir != true)
                   {
                     echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" /><div class="texte_titre_section">Missions à venir</div></div>';
-                    $titre_a_venir = true;
+                    $titreAVenir = true;
                   }
 
                   echo '<div class="zone_mission_default">';
@@ -77,12 +77,12 @@
                   echo '</div>';
                 }
                 // Missions en cours
-                elseif ($ligneMission->getStatut() == "C")
+                elseif ($ligneMission->getStatut() == 'C')
                 {
-                  if ($titre_en_cours != true)
+                  if ($titreEnCours != true)
                   {
                     echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">Missions en cours</div></div>';
-                    $titre_en_cours = true;
+                    $titreEnCours = true;
 
                     // Définit une zone pour appliquer la Masonry
                     echo '<div class="zone_missions_accueil">';
@@ -94,12 +94,12 @@
                   echo '</a>';
                 }
                 // Missions précédentes
-                elseif ($ligneMission->getStatut() == "A")
+                elseif ($ligneMission->getStatut() == 'A')
                 {
-                  if ($titre_passees != true)
+                  if ($titrePassees != true)
                   {
                     echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" /><div class="texte_titre_section">Anciennes missions</div></div>';
-                    $titre_passees = true;
+                    $titrePassees = true;
 
                     // Définit une zone pour appliquer la Masonry
                     echo '<div class="zone_missions_accueil">';
@@ -111,7 +111,7 @@
                   echo '</a>';
                 }
 
-                if  ($ligneMission->getStatut() != "V"
+                if  ($ligneMission->getStatut() != 'V'
                 AND (!isset($tabMissions[$keyMission + 1])
                 OR   $ligneMission->getStatut() != $tabMissions[$keyMission + 1]->getStatut()))
                 {

@@ -16,7 +16,7 @@
 
     echo '<div class="zone_user_niveaux">';
       // Avatar
-      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 2, "avatar");
+      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 2, 'avatar');
 
       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_niveau" />';
 

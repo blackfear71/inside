@@ -22,12 +22,12 @@
         else
           echo '<div class="zone_bilan_user">';
           // Avatar
-          $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+          $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
           echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
 
           // Pseudo
-          echo '<div class="pseudo_bilan">' . $user->getPseudo() . "</div>";
+          echo '<div class="pseudo_bilan">' . $user->getPseudo() . '</div>';
 
           // Total
           if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)

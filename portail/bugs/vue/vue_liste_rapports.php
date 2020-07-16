@@ -18,7 +18,7 @@
             // Infos
             echo '<div class="zone_report_middle">';
               // Avatar
-              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($bug->getAvatar(), $bug->getPseudo(), 2, 'avatar');
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 
@@ -86,7 +86,7 @@
             // Infos
             echo '<div class="zone_report_middle">';
               // Avatar
-              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 2, "avatar");
+              $avatarFormatted = formatAvatar($evolution->getAvatar(), $evolution->getPseudo(), 2, 'avatar');
 
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_report" />';
 

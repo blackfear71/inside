@@ -129,13 +129,13 @@
   function getControler($generatorParameters)
   {
     // Initialisations
-    $nom_fonctionnel = trim($generatorParameters->getNom_section());
-    $nom_technique   = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-    $file            = 'templates/controler.php';
-    $options         = array();
-    $controler       = array('filename' => $nom_technique . '.php',
-                             'content'  => file_get_contents($file)
-                            );
+    $nomFonctionnel = trim($generatorParameters->getNom_section());
+    $nomTechnique   = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file           = 'templates/controler.php';
+    $options        = array();
+    $controler      = array('filename' => $nomTechnique . '.php',
+                            'content'  => file_get_contents($file)
+                           );
 
     // On met les options dans un tableau associatif
     foreach ($generatorParameters->getOptions() as $generatorOption)
@@ -144,12 +144,12 @@
     }
 
     // Nom section
-    $length_name = strlen($nom_fonctionnel);
+    $lengthName = strlen($nomFonctionnel);
 
-    $controler = str_replace('/*******************', '/' . str_repeat('*', $length_name + 7), $controler);
-    $controler = str_replace('section_name', $nom_fonctionnel, $controler);
-    $controler = str_replace('********************', str_repeat('*', $length_name + 8), $controler);
-    $controler = str_replace('*******************/', str_repeat('*', $length_name + 7) . '/', $controler);
+    $controler = str_replace('/*******************', '/' . str_repeat('*', $lengthName + 7), $controler);
+    $controler = str_replace('section_name', $nomFonctionnel, $controler);
+    $controler = str_replace('********************', str_repeat('*', $lengthName + 8), $controler);
+    $controler = str_replace('*******************/', str_repeat('*', $lengthName + 7) . '/', $controler);
 
     // Titre fonctions communes
     if ($options['common']->getChecked() == 'Y' OR $options['dates']->getChecked() == 'Y' OR $options['regex']->getChecked() == 'Y')
@@ -190,15 +190,15 @@
     }
 
     // Appel métier
-    $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nom_technique . '.php\');
-  include_once(\'modele/controles_' . $nom_technique . '.php\');
-  include_once(\'modele/physique_' . $nom_technique . '.php\');', $controler);
+    $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nomTechnique . '.php\');
+  include_once(\'modele/controles_' . $nomTechnique . '.php\');
+  include_once(\'modele/physique_' . $nomTechnique . '.php\');', $controler);
 
     // Contrôle action URL renseignée
-    $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nom_technique . '.php?action=goConsulter\');', $controler);
+    $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nomTechnique . '.php?action=goConsulter\');', $controler);
 
     // Redirection affichage
-    $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nom_technique . '.php\');', $controler);
+    $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nomTechnique . '.php\');', $controler);
 
     // Retour
     return $controler;
@@ -209,12 +209,12 @@
   function getMetier($generatorParameters)
   {
     // Initialisations
-    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-    $file          = 'templates/metier.php';
-    $options       = array();
-    $metier        = array('filename' => 'metier_' . $nom_technique . '.php',
-                           'content'  => file_get_contents($file)
-                          );
+    $nomTechnique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file         = 'templates/metier.php';
+    $options      = array();
+    $metier       = array('filename' => 'metier_' . $nomTechnique . '.php',
+                          'content'  => file_get_contents($file)
+                         );
 
     // Retour
     return $metier;
@@ -225,12 +225,12 @@
   function getControles($generatorParameters)
   {
     // Initialisations
-    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-    $file          = 'templates/controles.php';
-    $options       = array();
-    $controles     = array('filename' => 'controles_' . $nom_technique . '.php',
-                           'content'  => file_get_contents($file)
-                          );
+    $nomTechnique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file         = 'templates/controles.php';
+    $options      = array();
+    $controles    = array('filename' => 'controles_' . $nomTechnique . '.php',
+                          'content'  => file_get_contents($file)
+                         );
 
     // Retour
     return $controles;
@@ -241,12 +241,12 @@
   function getPhysique($generatorParameters)
   {
     // Initialisations
-    $nom_technique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-    $file          = 'templates/physique.php';
-    $options       = array();
-    $physique      = array('filename' => 'physique_' . $nom_technique . '.php',
-                           'content'  => file_get_contents($file)
-                          );
+    $nomTechnique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+    $file         = 'templates/physique.php';
+    $options      = array();
+    $physique     = array('filename' => 'physique_' . $nomTechnique . '.php',
+                          'content'  => file_get_contents($file)
+                         );
 
     // Retour
     return $physique;
@@ -257,27 +257,27 @@
   function getVue($generatorParameters)
   {
     // Initialisations
-    $nom_fonctionnel = trim($generatorParameters->getNom_section());
-    $nom_head        = trim($generatorParameters->getNom_head());
+    $nomFonctionnel = trim($generatorParameters->getNom_section());
+    $nomHead        = trim($generatorParameters->getNom_head());
 
     $search  = array(' ', '.css', '.js');
     $replace = array('_', '', '');
 
-    $nom_technique = str_replace($search, $replace, trim($generatorParameters->getNom_technique()));
+    $nomTechnique = str_replace($search, $replace, trim($generatorParameters->getNom_technique()));
 
     if (!empty($generatorParameters->getStyle_specifique()))
-      $style_specifique = str_replace($search, $replace, trim($generatorParameters->getStyle_specifique())) . '.css';
+      $styleSpecifique = str_replace($search, $replace, trim($generatorParameters->getStyle_specifique())) . '.css';
     else
-      $style_specifique = '';
+      $styleSpecifique = '';
 
     if (!empty($generatorParameters->getStyle_specifique()))
-      $script_specifique = str_replace($search, $replace, trim($generatorParameters->getScript_specifique())) . '.js';
+      $scriptSpecifique = str_replace($search, $replace, trim($generatorParameters->getScript_specifique())) . '.js';
     else
-      $script_specifique = '';
+      $scriptSpecifique = '';
 
     $file    = 'templates/vue.php';
     $options = array();
-    $vue     = array('filename' => 'vue_' . $nom_technique . '.php',
+    $vue     = array('filename' => 'vue_' . $nomTechnique . '.php',
                      'content'  => file_get_contents($file)
                     );
 
@@ -288,13 +288,13 @@
     }
 
     // Titre onglet navigateur
-    $vue = str_replace('/*title_head*/', '"' . $nom_head . '"', $vue);
+    $vue = str_replace('/*title_head*/', "'" . $nomHead . "'", $vue);
 
     // Style spécifique
-    $vue = str_replace('/*style_specifique*/', '"' . $style_specifique . '"', $vue);
+    $vue = str_replace('/*style_specifique*/', "'" . $styleSpecifique . "'", $vue);
 
     // Script spécifique
-    $vue = str_replace('/*script_specifique*/', '"' . $script_specifique . '"', $vue);
+    $vue = str_replace('/*script_specifique*/', "'" . $scriptSpecifique . "'", $vue);
 
     // Appels communs
     if ($options['angular']->getChecked() == 'Y')
@@ -323,7 +323,7 @@
       $vue = str_replace('/*exif_head*/', 'false', $vue);
 
     // Titre de la page(header)
-    $vue = str_replace('/*title*/', '"' . $nom_fonctionnel . '"', $vue);
+    $vue = str_replace('/*title*/', "'" . $nomFonctionnel . "'", $vue);
 
     // Onglets
     if ($options['admin']->getChecked() == 'Y' OR $options['onglets']->getChecked() == 'N')
@@ -362,7 +362,7 @@
           /********************/
           /* Boutons missions */
           /********************/
-          $zone_inside = "article";
+          $zoneInside = \'article\';
           include(\'../../includes/common/missions.php\');
 ', $vue);
 

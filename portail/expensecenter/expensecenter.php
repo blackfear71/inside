@@ -29,7 +29,7 @@
     case 'goConsulter':
       // Contrôle si l'année est renseignée et numérique
       if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-        header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter');
+        header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter');
       else
       {
         // Initialisation de la sauvegarde en session
@@ -51,12 +51,12 @@
 
     case 'doInserer':
       // Insertion d'une dépense
-      $id_expense = insertExpense($_POST);
+      $idExpense = insertExpense($_POST);
       break;
 
     case 'doModifier':
       // Modification d'une dépense
-      $id_expense = updateExpense($_POST);
+      $idExpense = updateExpense($_POST);
       break;
 
     case 'doSupprimer':
@@ -66,7 +66,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter');
+      header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter');
       break;
   }
 
@@ -142,7 +142,7 @@
   switch ($_GET['action'])
   {
     case 'doInserer':
-      header('location: expensecenter.php?year=' . date("Y") . '&action=goConsulter&anchor=' . $id_expense);
+      header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter&anchor=' . $idExpense);
       break;
 
     case 'doSupprimer':
@@ -150,7 +150,7 @@
       break;
 
     case 'doModifier':
-      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $id_expense);
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idExpense);
       break;
 
     case 'goConsulter':

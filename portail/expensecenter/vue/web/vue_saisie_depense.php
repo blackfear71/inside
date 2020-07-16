@@ -70,15 +70,15 @@
           echo '<div class="zone_saisie_utilisateurs">';
             foreach ($listeUsers as $user)
             {
-              $saved_parts = false;
+              $savedParts = false;
 
               if (isset($_SESSION['save']['tableau_parts']) AND !empty($_SESSION['save']['tableau_parts']))
               {
                 if (isset($_SESSION['save']['tableau_parts'][$user->getIdentifiant()]) AND $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] > 0)
-                  $saved_parts = true;
+                  $savedParts = true;
               }
 
-              if ($saved_parts == true)
+              if ($savedParts == true)
                 echo '<div class="zone_saisie_utilisateur_parts" id="zone_user_' . $user->getId() . '">';
               else
                 echo '<div class="zone_saisie_utilisateur" id="zone_user_' . $user->getId() . '">';
@@ -86,7 +86,7 @@
                 echo '<div class="pseudo_depense">' . $user->getPseudo() . '</div>';
 
                 // Avatar
-                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 
@@ -97,7 +97,7 @@
                 echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
 
                 // Quantité
-                if ($saved_parts == true)
+                if ($savedParts == true)
                   echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
                 else
                   echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';

@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Code Generator";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = false;
-      $exif_head       = false;
+      $titleHead      = 'Code Generator';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = false;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Générateur de code";
+        $title = 'Générateur de code';
 
         include('../../includes/common/header.php');
       ?>
@@ -102,7 +102,7 @@
                 echo '<input type="text" name="script_specifique" placeholder="Script JS spécifique" value="' . $generatorParameters->getScript_specifique() . '" class="saisie_generator">';
 
                 // Options
-                $old_category = "";
+                $old_category = '';
 
                 foreach ($generatorParameters->getOptions() as $generatorOption)
                 {
@@ -114,7 +114,7 @@
                     echo '<div class="categorie_generator">' . $current_category . '</div>';
                   }
 
-                  if ($generatorOption->getChecked() == "Y")
+                  if ($generatorOption->getChecked() == 'Y')
                   {
                     echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator switch_checked">';
                       echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" checked />';

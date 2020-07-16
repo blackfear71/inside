@@ -37,7 +37,7 @@
               // Infos
               echo '<div class="zone_idea_middle">';
                 // Avatar
-                $avatarFormatted = formatAvatar($idea->getAvatar_author(), $idea->getPseudo_author(), 2, "avatar");
+                $avatarFormatted = formatAvatar($idea->getAvatar_author(), $idea->getPseudo_author(), 2, 'avatar');
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
@@ -113,7 +113,7 @@
                 }
 
                   // Avatar
-                  $avatarFormatted = formatAvatar($idea->getAvatar_developper(), $idea->getPseudo_developper(), 2, "avatar");
+                  $avatarFormatted = formatAvatar($idea->getAvatar_developper(), $idea->getPseudo_developper(), 2, 'avatar');
 
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_idea" />';
 
@@ -131,8 +131,8 @@
               if ( empty($idea->getDevelopper())
               OR (!empty($idea->getDevelopper()) AND $idea->getDevelopper() == $_SESSION['user']['identifiant'])
               OR (!empty($idea->getDevelopper()) AND empty($idea->getPseudo_developper()))
-              OR  $idea->getStatus() == "D"
-              OR  $idea->getStatus() == "R")
+              OR  $idea->getStatus() == 'D'
+              OR  $idea->getStatus() == 'R')
               {
                 echo '<div class="zone_idea_actions">';
                 // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
@@ -142,12 +142,12 @@
                     switch ($idea->getStatus())
                     {
                       // Ouverte
-                      case "O":
+                      case 'O':
                         echo '<input type="submit" name="take" value="Prendre en charge" title="Prendre en charge" class="saisie_bouton margin_button" />';
                         break;
 
                       // Prise en charge
-                      case "C":
+                      case 'C':
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
                         if (!empty($idea->getPseudo_developper()))
@@ -158,7 +158,7 @@
                         break;
 
                       // En progrès
-                      case "P":
+                      case 'P':
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
 
                         if (!empty($idea->getPseudo_developper()))
@@ -169,12 +169,12 @@
                         break;
 
                       // Terminée
-                      case "D":
+                      case 'D':
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
                         break;
 
                       // Rejetée
-                      case "R":
+                      case 'R':
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
                         break;
 

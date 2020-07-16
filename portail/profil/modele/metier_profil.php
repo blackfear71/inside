@@ -26,16 +26,16 @@
   // RETOUR : Objet Statistiques
   function getStatistiques($user)
   {
-    $nb_films_ajoutes = 0;
-    $nb_comments      = 0;
-    $nb_reservations  = 0;
-    $nb_gateaux       = 0;
-    $nb_recettes      = 0;
-    $expenses         = 0;
-    $nb_collectors    = 0;
-    $nb_ideas         = 0;
-    $nb_bugs          = 0;
-    $nb_evolutions    = 0;
+    $nombreFilmsAjoutes = 0;
+    $nombreCommentaires = 0;
+    $nombreReservations = 0;
+    $nombreGateaux      = 0;
+    $nombreRecettes     = 0;
+    $expenses           = 0;
+    $nombreCollectors   = 0;
+    $nombreIdees        = 0;
+    $nombreBugs         = 0;
+    $nombreEvolutions   = 0;
 
     global $bdd;
 
@@ -43,7 +43,7 @@
     $reponse = $bdd->query('SELECT COUNT(id) AS nb_films_ajoutes FROM movie_house WHERE identifiant_add = "' . $user . '" AND to_delete != "Y"');
     $donnees = $reponse->fetch();
 
-    $nb_films_ajoutes = $donnees['nb_films_ajoutes'];
+    $nombreFilmsAjoutes = $donnees['nb_films_ajoutes'];
 
     $reponse->closeCursor();
 
@@ -55,7 +55,7 @@
       $donnees1 = $reponse1->fetch();
 
       if ($reponse1->rowCount() > 0)
-        $nb_comments++;
+        $nombreCommentaires++;
 
       $reponse1->closeCursor();
     }
@@ -65,7 +65,7 @@
     $reponse2 = $bdd->query('SELECT COUNT(id) AS nb_reservations FROM food_advisor_choices WHERE caller = "' . $user . '"');
     $donnees2 = $reponse2->fetch();
 
-    $nb_reservations = $donnees2['nb_reservations'];
+    $nombreReservations = $donnees2['nb_reservations'];
 
     $reponse2->closeCursor();
 
@@ -73,7 +73,7 @@
     $reponse3 = $bdd->query('SELECT COUNT(id) AS nb_gateaux FROM cooking_box WHERE identifiant = "' . $user . '" AND cooked = "Y"');
     $donnees3 = $reponse3->fetch();
 
-    $nb_gateaux = $donnees3['nb_gateaux'];
+    $nombreGateaux = $donnees3['nb_gateaux'];
 
     $reponse3->closeCursor();
 
@@ -81,7 +81,7 @@
     $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_recettes FROM cooking_box WHERE identifiant = "' . $user . '" AND name != "" AND picture != ""');
     $donnees4 = $reponse4->fetch();
 
-    $nb_recettes = $donnees4['nb_recettes'];
+    $nombreRecettes = $donnees4['nb_recettes'];
 
     $reponse4->closeCursor();
 
@@ -97,7 +97,7 @@
     $reponse6 = $bdd->query('SELECT COUNT(id) AS nb_collectors FROM collector WHERE author = "' . $user . '"');
     $donnees6 = $reponse6->fetch();
 
-    $nb_collectors = $donnees6['nb_collectors'];
+    $nombreCollectors = $donnees6['nb_collectors'];
 
     $reponse6->closeCursor();
 
@@ -105,7 +105,7 @@
     $reponse7 = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE author = "' . $user . '"');
     $donnees7 = $reponse7->fetch();
 
-    $nb_ideas = $donnees7['nb_idees'];
+    $nombreIdees = $donnees7['nb_idees'];
 
     $reponse7->closeCursor();
 
@@ -113,7 +113,7 @@
     $reponse8 = $bdd->query('SELECT COUNT(id) AS nb_bugs FROM bugs WHERE author = "' . $user . '" AND type = "B"');
     $donnees8 = $reponse8->fetch();
 
-    $nb_bugs = $donnees8['nb_bugs'];
+    $nombreBugs = $donnees8['nb_bugs'];
 
     $reponse8->closeCursor();
 
@@ -121,21 +121,21 @@
     $reponse9 = $bdd->query('SELECT COUNT(id) AS nb_evolutions FROM bugs WHERE author = "' . $user . '" AND type = "E"');
     $donnees9 = $reponse9->fetch();
 
-    $nb_evolutions = $donnees9['nb_evolutions'];
+    $nombreEvolutions = $donnees9['nb_evolutions'];
 
     $reponse9->closeCursor();
 
     // On construit un tableau avec les données statistiques
-    $statistiques = array('nb_films_ajoutes' => $nb_films_ajoutes,
-                          'nb_comments'      => $nb_comments,
-                          'nb_reservations'  => $nb_reservations,
-                          'nb_gateaux'       => $nb_gateaux,
-                          'nb_recettes'      => $nb_recettes,
+    $statistiques = array('nb_films_ajoutes' => $nombreFilmsAjoutes,
+                          'nb_comments'      => $nombreCommentaires,
+                          'nb_reservations'  => $nombreReservations,
+                          'nb_gateaux'       => $nombreGateaux,
+                          'nb_recettes'      => $nombreRecettes,
                           'expenses'         => $expenses,
-                          'nb_collectors'    => $nb_collectors,
-                          'nb_ideas'         => $nb_ideas,
-                          'nb_bugs'          => $nb_bugs,
-                          'nb_evolutions'    => $nb_evolutions
+                          'nb_collectors'    => $nombreCollectors,
+                          'nb_ideas'         => $nombreIdees,
+                          'nb_bugs'          => $nombreBugs,
+                          'nb_evolutions'    => $nombreEvolutions
                          );
 
     // Instanciation d'un objet Statistiques à partir des données remontées de la bdd
@@ -167,16 +167,16 @@
   function getProgress($experience)
   {
     $niveau   = convertExperience($experience);
-    $exp_min  = 10 * $niveau ** 2;
-    $exp_max  = 10 * ($niveau + 1) ** 2;
-    $exp_lvl  = $exp_max - $exp_min;
-    $progress = $experience - $exp_min;
-    $percent  = floor($progress * 100 / $exp_lvl);
+    $expMin   = 10 * $niveau ** 2;
+    $expMax   = 10 * ($niveau + 1) ** 2;
+    $expLvl   = $expMax - $expMin;
+    $progress = $experience - $expMin;
+    $percent  = floor($progress * 100 / $expLvl);
 
     $progression = array('niveau'   => $niveau,
-                         'exp_min'  => $exp_min,
-                         'exp_max'  => $exp_max,
-                         'exp_lvl'  => $exp_lvl,
+                         'exp_min'  => $expMin,
+                         'exp_max'  => $expMax,
+                         'exp_lvl'  => $expLvl,
                          'progress' => $progress,
                          'percent'  => $percent
                         );
@@ -193,20 +193,20 @@
     $control_ok = true;
 
     // On vérifie la présence du dossier, sinon on le créé
-    $dossier = "../../includes/images/profil";
+    $dossier = '../../includes/images/profil';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
     // On vérifie la présence du dossier d'avatars, sinon on le créé
-    $dossier_avatars = $dossier . "/avatars";
+    $dossierAvatars = $dossier . '/avatars';
 
-    if (!is_dir($dossier_avatars))
-      mkdir($dossier_avatars);
+    if (!is_dir($dossierAvatars))
+      mkdir($dossierAvatars);
 
     // Dossier de destination et nom du fichier
-    $avatar_dir = $dossier_avatars . '/';
-    $avatar     = rand();
+    $avatarDir = $dossierAvatars . '/';
+    $avatar    = rand();
 
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
@@ -215,32 +215,32 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatar_dir);
+      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatarDir);
 
       if ($control_ok == true)
       {
-        $new_name = $fileDatas['new_name'];
+        $newName = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-        imagethumb($avatar_dir . $new_name, $avatar_dir . $new_name, 400, FALSE, TRUE);
+        imagethumb($avatarDir . $newName, $avatarDir . $newName, 400, FALSE, TRUE);
 
         // On efface l'ancien avatar si présent
         $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
         $donnees1 = $reponse1->fetch();
 
         if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink($dossier_avatars . "/" . $donnees1['avatar'] . "");
+          unlink($dossierAvatars . '/' . $donnees1['avatar'] . '');
 
         $reponse1->closeCursor();
 
         // On stocke la référence du nouvel avatar dans la base
         $reponse2 = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE identifiant = "' . $user . '"');
         $reponse2->execute(array(
-          'avatar' => $new_name
+          'avatar' => $newName
         ));
         $reponse2->closeCursor();
 
-        $_SESSION['user']['avatar']           = $new_name;
+        $_SESSION['user']['avatar']           = $newName;
         $_SESSION['alerts']['avatar_updated'] = true;
       }
     }
@@ -257,16 +257,16 @@
     $donnees1 = $reponse1->fetch();
 
     if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-      unlink("../../includes/images/profil/avatars/" . $donnees1['avatar'] . "");
+      unlink('../../includes/images/profil/avatars/' . $donnees1['avatar'] . '');
 
     $reponse1->closeCursor();
 
     // On efface la référence de l'ancien avatar dans la base
-    $new_name = "";
+    $newName = '';
 
     $reponse2 = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE identifiant = "' . $user . '"');
     $reponse2->execute(array(
-      'avatar' => $new_name
+      'avatar' => $newName
     ));
     $reponse2->closeCursor();
 
@@ -292,7 +292,7 @@
       if (isset($anniversary) AND !empty($anniversary))
       {
         // On contrôle la date
-        if (validateDate($anniversary, "d/m/Y") != true)
+        if (validateDate($anniversary, 'd/m/Y') != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
@@ -302,7 +302,7 @@
           $anniversary = formatDateForInsert($anniversary);
 
           // Contrôle date dans le futur
-          if ($anniversary >= date("Ymd"))
+          if ($anniversary >= date('Ymd'))
           {
             $_SESSION['alerts']['date_future'] = true;
             $control_ok                        = false;
@@ -355,29 +355,29 @@
     global $bdd;
 
     // Préférences Notifications
-    $view_notifications = $post['notifications_view'];
+    $viewNotifications = $post['notifications_view'];
 
 		// Préférences MOVIE HOUSE
-		$view_movie_house = $post['movie_house_view'];
-		$categories_movie_house  = "";
+		$viewMovieHouse        = $post['movie_house_view'];
+		$categoriesMovieHouse  = '';
 
     if (isset($post['films_semaine']))
-			$categories_movie_house .= "Y;";
+			$categoriesMovieHouse .= 'Y;';
 		else
-			$categories_movie_house .= "N;";
+			$categoriesMovieHouse .= 'N;';
 
 		if (isset($post['films_waited']))
-			$categories_movie_house .= "Y;";
+			$categoriesMovieHouse .= 'Y;';
 		else
-			$categories_movie_house .= "N;";
+			$categoriesMovieHouse .= 'N;';
 
 		if (isset($post['films_way_out']))
-			$categories_movie_house .= "Y;";
+			$categoriesMovieHouse .= 'Y;';
 		else
-			$categories_movie_house .= "N;";
+			$categoriesMovieHouse .= 'N;';
 
 		// Préférences #THEBOX
-		$view_the_box = $post['the_box_view'];
+		$viewTheBox = $post['the_box_view'];
 
     // Préférences INSIDE Room
     $init_chat = $post['inside_room_view'];
@@ -396,18 +396,18 @@
     $reponse->execute(array(
       'init_chat'              => $init_chat,
       'celsius'                => $celsius,
-      'view_movie_house'       => $view_movie_house,
-      'categories_movie_house' => $categories_movie_house,
-      'view_the_box'           => $view_the_box,
-      'view_notifications'     => $view_notifications
+      'view_movie_house'       => $viewMovieHouse,
+      'categories_movie_house' => $categoriesMovieHouse,
+      'view_the_box'           => $viewTheBox,
+      'view_notifications'     => $viewNotifications
     ));
     $reponse->closeCursor();
 
     // Mise à jour des préférences stockées en SESSION
     $_SESSION['user']['celsius']            = $celsius;
-    $_SESSION['user']['view_movie_house']   = $view_movie_house;
-    $_SESSION['user']['view_the_box']       = $view_the_box;
-    $_SESSION['user']['view_notifications'] = $view_notifications;
+    $_SESSION['user']['view_movie_house']   = $viewMovieHouse;
+    $_SESSION['user']['view_the_box']       = $viewTheBox;
+    $_SESSION['user']['view_notifications'] = $viewNotifications;
 
     $_SESSION['alerts']['preferences_updated'] = true;
   }
@@ -469,11 +469,11 @@
 
     switch ($status)
     {
-      case "D":
+      case 'D':
         $_SESSION['alerts']['ask_desinscription'] = true;
         break;
 
-      case "N":
+      case 'N':
         $_SESSION['alerts']['cancel_status'] = true;
         break;
 
@@ -523,7 +523,7 @@
       $reponse2->closeCursor();
 
       // Récupération du classement des utilisateurs
-      if ($success->getDefined() == "Y" AND $success->getUnicity() != "Y")
+      if ($success->getDefined() == 'Y' AND $success->getUnicity() != 'Y')
         $success->setClassement(getRankUsers($success, $tableUsers));
 
       array_push($listeSuccess, $success);
@@ -543,7 +543,7 @@
 
     global $bdd;
 
-    if ($success->getDefined() == "Y" AND $success->getUnicity() != "Y")
+    if ($success->getDefined() == 'Y' AND $success->getUnicity() != 'Y')
     {
       // Boucle pour parcourir tous les succès débloqués par les utilisateurs
       $reponse = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $success->getReference() . '" ORDER BY value DESC');
@@ -609,7 +609,7 @@
 
     foreach ($listeSucces as $succes)
     {
-      if ($succes->getDefined() == "Y" AND $succes->getValue_user() >= $succes->getLimit_success())
+      if ($succes->getDefined() == 'Y' AND $succes->getValue_user() >= $succes->getLimit_success())
       {
         $succesAConvertir = array('id'            => $succes->getId(),
                                   'reference'     => $succes->getReference(),
@@ -646,11 +646,11 @@
     // Tri sur expérience puis identifiant
     foreach ($listeExperienceUsers as $experienceUser)
     {
-      $tri_exp[] = $experienceUser['experience'];
-      $tri_id[]  = $experienceUser['identifiant'];
+      $triExp[] = $experienceUser['experience'];
+      $triId[]  = $experienceUser['identifiant'];
     }
 
-    array_multisort($tri_exp, SORT_DESC, $tri_id, SORT_ASC, $listeExperienceUsers);
+    array_multisort($triExp, SORT_DESC, $triId, SORT_ASC, $listeExperienceUsers);
 
     // Retour
     return $listeExperienceUsers;
@@ -660,51 +660,51 @@
   // RETOUR : Booléen
   function isMissionEnded($reference)
   {
-    $ended            = false;
-    $ref_mission      = "";
-    $date_fin_mission = "";
+    $ended          = false;
+    $refMission     = '';
+    $dateFinMission = '';
 
     // Contrôle pour les missions que la date de fin soit passée
     switch ($reference)
     {
-      case "christmas2017":
-      case "christmas2017_2":
-        $ref_mission = "noel_2017";
+      case 'christmas2017':
+      case 'christmas2017_2':
+        $refMission = 'noel_2017';
         break;
 
-      case "golden-egg":
-      case "rainbow-egg":
-        $ref_mission = "paques_2018";
+      case 'golden-egg':
+      case 'rainbow-egg':
+        $refMission = 'paques_2018';
         break;
 
-      case "wizard":
-        $ref_mission = "halloween_2018";
+      case 'wizard':
+        $refMission = 'halloween_2018';
         break;
 
-      case "christmas2018":
-      case "christmas2018_2":
-        $ref_mission = "noel_2018";
+      case 'christmas2018':
+      case 'christmas2018_2':
+        $refMission = 'noel_2018';
         break;
 
-      case "christmas2019":
-        $ref_mission = "noel_2019";
+      case 'christmas2019':
+        $refMission = 'noel_2019';
         break;
 
       default:
         break;
     }
 
-    if (!empty($ref_mission))
+    if (!empty($refMission))
     {
       global $bdd;
 
-      $reponse = $bdd->query('SELECT * FROM missions WHERE reference = "' . $ref_mission . '"');
+      $reponse = $bdd->query('SELECT * FROM missions WHERE reference = "' . $refMission . '"');
       $donnees = $reponse->fetch();
-      $date_fin_mission = $donnees['date_fin'];
+      $dateFinMission = $donnees['date_fin'];
       $reponse->closeCursor();
     }
 
-    if (empty($ref_mission) OR (!empty($ref_mission) AND date('Ymd') > $date_fin_mission))
+    if (empty($refMission) OR (!empty($refMission) AND date('Ymd') > $dateFinMission))
       $ended = true;
 
     return $ended;
@@ -739,11 +739,11 @@
   {
     global $bdd;
 
-    $ref_theme = "";
+    $refTheme = '';
 
     $reponse = $bdd->prepare('UPDATE preferences SET ref_theme = :ref_theme WHERE identifiant = "' . $user . '"');
     $reponse->execute(array(
-      'ref_theme' => $ref_theme
+      'ref_theme' => $refTheme
     ));
     $reponse->closeCursor();
 
@@ -759,13 +759,13 @@
     global $bdd;
 
     // Lecture de la base des thèmes
-    if ($type == "U")
+    if ($type == 'U')
     {
       $niveau  = convertExperience($experience);
       $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND level <= ' . $niveau . ' ORDER BY CAST(level AS UNSIGNED) ASC');
     }
     else
-      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date("Ymd") . ' ORDER BY date_deb DESC');
+      $reponse = $bdd->query('SELECT * FROM themes WHERE type = "' . $type . '" AND date_deb <= ' . date('Ymd') . ' ORDER BY date_deb DESC');
 
     while ($donnees = $reponse->fetch())
     {
@@ -788,7 +788,7 @@
 
     global $bdd;
 
-    $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" AND date_deb <= ' . date("Ymd") . ' AND date_fin >= ' . date("Ymd") . ' ORDER BY id ASC');
+    $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" AND date_deb <= ' . date('Ymd') . ' AND date_fin >= ' . date('Ymd') . ' ORDER BY id ASC');
     $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() > 0)
@@ -804,20 +804,20 @@
   function updateTheme($user, $post)
   {
     // Récupération des données
-    $id_theme = $post['id_theme'];
+    $idTheme = $post['id_theme'];
 
     global $bdd;
 
     // Lecture de la référence du thème
-    $reponse = $bdd->query('SELECT * FROM themes WHERE id = ' . $id_theme);
+    $reponse = $bdd->query('SELECT * FROM themes WHERE id = ' . $idTheme);
     $donnees = $reponse->fetch();
-    $ref_theme = $donnees['reference'];
+    $refTheme = $donnees['reference'];
     $reponse->closeCursor();
 
     // Mise à jour de la préférence utilisateur
     $reponse2 = $bdd->prepare('UPDATE preferences SET ref_theme = :ref_theme WHERE identifiant = "' . $user . '"');
     $reponse2->execute(array(
-      'ref_theme' => $ref_theme
+      'ref_theme' => $refTheme
     ));
     $reponse2->closeCursor();
 

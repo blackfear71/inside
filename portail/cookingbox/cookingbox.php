@@ -25,10 +25,10 @@
   // Appel métier
   switch ($_GET['action'])
   {
-    case "goConsulter":
+    case 'goConsulter':
       // Contrôle si l'année est renseignée et numérique
       if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-        header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
+        header('location: cookingbox.php?year=' . date('Y') . '&action=goConsulter');
       else
       {
         // Initialisation de la sauvegarde en session
@@ -49,42 +49,42 @@
       }
       break;
 
-    case "doModifier":
+    case 'doModifier':
       updateCake($_POST);
       break;
 
-    case "doValider":
-      validateCake("Y", $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
+    case 'doValider':
+      validateCake('Y', $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
       break;
 
-    case "doAnnuler":
-      validateCake("N", $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
+    case 'doAnnuler':
+      validateCake('N', $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
       break;
 
-    case "doAjouterRecette":
-      $year       = $_POST['year_recipe'];
-      $id_recette = insertRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
+    case 'doAjouterRecette':
+      $year      = $_POST['year_recipe'];
+      $idRecette = insertRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
-    case "doModifierRecette":
-      $year       = $_POST['hidden_year_recipe'];
-      $id_recette = updateRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
+    case 'doModifierRecette':
+      $year      = $_POST['hidden_year_recipe'];
+      $idRecette = updateRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
-    case "doSupprimerRecette":
+    case 'doSupprimerRecette':
       deleteRecipe($_POST, $_GET['year'], $_SESSION['user']['identifiant']);
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: cookingbox.php?year=' . date("Y") . '&action=goConsulter');
+      header('location: cookingbox.php?year=' . date('Y') . '&action=goConsulter');
       break;
   }
 
   // Traitements de sécurité avant la vue
   switch ($_GET['action'])
   {
-    case "goConsulter":
+    case 'goConsulter':
       $currentWeek->setIdentifiant(htmlspecialchars($currentWeek->getIdentifiant()));
       $currentWeek->setPseudo(htmlspecialchars($currentWeek->getPseudo()));
       $currentWeek->setAvatar(htmlspecialchars($currentWeek->getAvatar()));
@@ -157,12 +157,12 @@
       $recettesJson      = json_encode(convertForJson($recettes));
       break;
 
-    case "doModifier":
-    case "doValider":
-    case "doAnnuler":
-    case "doAjouterRecette":
-    case "doModifierRecette":
-    case "doSupprimerRecette":
+    case 'doModifier':
+    case 'doValider':
+    case 'doAnnuler':
+    case 'doAjouterRecette':
+    case 'doModifierRecette':
+    case 'doSupprimerRecette':
     default:
       break;
   }
@@ -170,19 +170,19 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case "doModifier":
-    case "doValider":
-    case "doAnnuler":
-    case "doSupprimerRecette":
+    case 'doModifier':
+    case 'doValider':
+    case 'doAnnuler':
+    case 'doSupprimerRecette':
       header('location: cookingbox.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;
 
-    case "doAjouterRecette":
-    case "doModifierRecette":
-      header('location: cookingbox.php?year=' . $year . '&action=goConsulter&anchor=' . $id_recette);
+    case 'doAjouterRecette':
+    case 'doModifierRecette':
+      header('location: cookingbox.php?year=' . $year . '&action=goConsulter&anchor=' . $idRecette);
       break;
 
-    case "goConsulter":
+    case 'goConsulter':
     default:
       include_once('vue/vue_cookingbox.php');
       break;

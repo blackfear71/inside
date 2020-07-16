@@ -24,7 +24,7 @@
             echo '</div>';
 
             // Acheteur
-            $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, "avatar");
+            $avatarFormatted = formatAvatar($depense->getAvatar(), $depense->getPseudo(), 2, 'avatar');
 
             echo '<div class="zone_depense_avatar">';
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';

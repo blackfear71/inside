@@ -13,9 +13,9 @@
       foreach ($propositions as $proposition)
       {
         // Détermination classe à appliquer
-        if ($proposition->getDetermined() == "Y" AND $proposition == $propositions[0])
+        if ($proposition->getDetermined() == 'Y' AND $proposition == $propositions[0])
           $classProposition = 'determined';
-        elseif ($proposition->getDetermined() == "Y" AND $proposition != $propositions[0])
+        elseif ($proposition->getDetermined() == 'Y' AND $proposition != $propositions[0])
           $classProposition = 'determined';
         elseif ($proposition->getClassement() == 1 AND $proposition == $propositions[0])
           $classProposition = 'top';
@@ -30,7 +30,7 @@
         echo '<a id="details_proposition_' . $proposition->getId_restaurant() . '" class="zone_proposition proposition_' . $classProposition . ' afficherDetailsProposition">';
           echo '<div class="image_' . $classProposition . '">';
             // Indicateur réservation
-            if ($proposition->getReserved() == "Y")
+            if ($proposition->getReserved() == 'Y')
               echo '<div class="reserved_proposition">R</div>';
 
             // Image
@@ -47,9 +47,9 @@
           echo '<div class="nom_proposition nom_' . $classProposition . '">' . formatString($proposition->getName(), 20) . '</div>';
 
           // Réserveur
-          if ($proposition->getDetermined() == "Y" AND !empty($proposition->getCaller()))
+          if ($proposition->getDetermined() == 'Y' AND !empty($proposition->getCaller()))
           {
-            $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, "avatar");
+            $avatarFormatted = formatAvatar($proposition->getAvatar(), $proposition->getPseudo(), 2, 'avatar');
 
             echo '<div class="caller_' . $classProposition . '">';
               echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';

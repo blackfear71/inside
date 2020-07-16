@@ -111,7 +111,7 @@
                 }
                 else
                 {
-                  if (substr($_SESSION['save']['time_doodle_saisi'], 0, 2) == "  ")
+                  if (substr($_SESSION['save']['time_doodle_saisi'], 0, 2) == '  ')
                     echo '<option value="" disabled selected hidden>hh</option>';
 
                   if ($i < 10)
@@ -140,7 +140,7 @@
                 }
                 else
                 {
-                  if (substr($_SESSION['save']['time_doodle_saisi'], 2, 2) == "  ")
+                  if (substr($_SESSION['save']['time_doodle_saisi'], 2, 2) == '  ')
                     echo '<option value="" disabled selected hidden>mm</option>';
 
                   if ($i < 2)
@@ -159,7 +159,7 @@
 
           // Choix restaurant
           echo '<div class="zone_saisie_ligne">';
-            if ($_SESSION['save']['restaurant_saisi'] == "N" OR empty($_SESSION['save']['restaurant_saisi']))
+            if ($_SESSION['save']['restaurant_saisi'] == 'N' OR empty($_SESSION['save']['restaurant_saisi']))
             {
               echo '<div id="bouton_none" class="switch_restaurant bouton_checked">';
                 echo '<input id="none" type="radio" name="restaurant" value="N" checked />';
@@ -174,7 +174,7 @@
               echo '</div>';
             }
 
-            if ($_SESSION['save']['restaurant_saisi'] == "B")
+            if ($_SESSION['save']['restaurant_saisi'] == 'B')
             {
               echo '<div id="bouton_before" class="switch_restaurant bouton_checked">';
                 echo '<input id="before" type="radio" name="restaurant" value="B" checked />';
@@ -189,7 +189,7 @@
               echo '</div>';
             }
 
-            if ($_SESSION['save']['restaurant_saisi'] == "A")
+            if ($_SESSION['save']['restaurant_saisi'] == 'A')
             {
               echo '<div id="bouton_after" class="switch_restaurant bouton_checked">';
                 echo '<input id="after" type="radio" name="restaurant" value="A" checked />';

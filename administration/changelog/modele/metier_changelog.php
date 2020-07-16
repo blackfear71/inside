@@ -156,7 +156,7 @@
   function insertChangeLog($post, $categories)
   {
     // Initialisations
-    $control_ok           = true;
+    $control_ok = true;
 
     // Récupération des données
     $year                = $post['saisie_annee_changelog'];

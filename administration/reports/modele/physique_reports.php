@@ -14,12 +14,12 @@
     // Requête
     global $bdd;
 
-    if ($view == "resolved")
+    if ($view == 'resolved')
       $req = $bdd->query('SELECT *
                           FROM bugs
                           WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R")
                           ORDER BY date DESC, id DESC');
-    elseif ($view == "unresolved")
+    elseif ($view == 'unresolved')
       $req = $bdd->query('SELECT *
                           FROM bugs
                           WHERE type = "' . $type . '" AND resolved = "N"

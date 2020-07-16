@@ -3,14 +3,14 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $title_head      = "Infos utilisateurs";
-      $style_head      = "styleAdmin.css";
-      $script_head     = "scriptAdmin.js";
-      $angular_head    = false;
-      $chat_head       = false;
-      $datepicker_head = false;
-      $masonry_head    = true;
-      $exif_head       = false;
+      $titleHead      = 'Infos utilisateurs';
+      $styleHead      = 'styleAdmin.css';
+      $scriptHead     = 'scriptAdmin.js';
+      $angularHead    = false;
+      $chatHead       = false;
+      $datepickerHead = false;
+      $masonryHead    = true;
+      $exifHead       = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -20,7 +20,7 @@
     <!-- Entête -->
 		<header>
       <?php
-        $title = "Informations utilisateurs";
+        $title = 'Informations utilisateurs';
 
         include('../../includes/common/header.php');
       ?>
@@ -45,7 +45,7 @@
             {
               echo '<div class="zone_infos_user">';
                 // Avatar
-                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, "avatar");
+                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
                 echo '<div class="circle_avatar">';
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="infos_avatar" />';
@@ -84,7 +84,7 @@
                     echo '<input type="hidden" name="user_infos" value="' . $user->getIdentifiant() . '" />';
                     echo '<input type="hidden" name="top_infos" value="' . $user->getBeginner() . '" />';
 
-                    if ($user->getBeginner() == "1")
+                    if ($user->getBeginner() == '1')
                       echo '<input type="submit" value="True Insider" class="beginner" />';
                     else
                       echo '<input type="submit" value="True Insider" class="not_beginner" />';
@@ -95,7 +95,7 @@
                     echo '<input type="hidden" name="user_infos" value="' . $user->getIdentifiant() . '" />';
                     echo '<input type="hidden" name="top_infos" value="' . $user->getDevelopper() . '" />';
 
-                    if ($user->getDevelopper() == "1")
+                    if ($user->getDevelopper() == '1')
                       echo '<input type="submit" value="Développeur" class="developper" />';
                     else
                       echo '<input type="submit" value="Développeur" class="not_developper" />';
