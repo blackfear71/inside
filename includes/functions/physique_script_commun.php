@@ -91,7 +91,7 @@
                         WHERE identifiant != "admin" AND status != "I"
                         ORDER BY identifiant ASC');
 
-    while($data = $req->fetch())
+    while ($data = $req->fetch())
     {
       // Instanciation d'un objet Profile à partir des données remontées de la bdd
       $currentUser = Profile::withData($data);

@@ -110,7 +110,7 @@
     {
       foreach ($extractLogs as $keyExtract => $extractedLog)
       {
-        if(!empty($extractedLog))
+        if (!empty($extractedLog))
         {
           list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
 
@@ -136,7 +136,7 @@
 
       foreach ($extractLogs as $keyExtract => $extractedLog)
       {
-        if(!empty($extractedLog))
+        if (!empty($extractedLog))
         {
           list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
           array_push($sortedLogs['other'], $entryExtracted);
@@ -194,7 +194,7 @@
     {
       foreach ($categories as $categorie => $labelCategorie)
       {
-        if(!empty($saisiesEntrees))
+        if (!empty($saisiesEntrees))
         {
           foreach ($saisiesEntrees as $keyEntry => $entry)
           {
@@ -269,7 +269,7 @@
     {
       foreach ($categories as $categorie => $labelCategorie)
       {
-        if(!empty($saisiesEntrees))
+        if (!empty($saisiesEntrees))
         {
           foreach ($saisiesEntrees as $keyEntry => $entry)
           {

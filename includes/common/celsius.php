@@ -1,7 +1,7 @@
 <?php
   if ($_SESSION['user']['celsius'] == 'Y' AND !empty($celsius))
   {
-    switch($celsius)
+    switch ($celsius)
     {
       case 'expensecenter':
         $contenuCelsius  = 'Tu peux saisir ici une dépense dont le coût sera ensuite réparti équitablement sur chaque participant en fonction du nombre de parts. <strong>Les parts sont limitées à 5 maximum par personne</strong>.<br /><br />';
