@@ -70,7 +70,7 @@
 
         // Copyright
         echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
-      echo '<div>';
+      echo '</div>';
     }
     else
     {
@@ -81,7 +81,7 @@
       echo '<div class="zone_footer_right">';
         // Copyright
         echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
-      echo '<div>';
+      echo '</div>';
     }
 
     // Boutons missions
@@ -114,7 +114,7 @@
 
       // Copyright
       echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
-    echo '<div>';
+    echo '</div>';
 
     // Initialisation du thème
     $themeUser = json_encode('');

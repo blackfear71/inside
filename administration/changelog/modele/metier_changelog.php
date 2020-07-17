@@ -64,7 +64,7 @@
   }
 
   // METIER : Sauvegarde des paramètres en session
-  // Retour : Aucun
+  // RETOUR : Aucun
   function saveChangeLogParameters($post)
   {
     // Sauvegarde des paramètres saisis en session

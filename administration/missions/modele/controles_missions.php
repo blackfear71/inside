@@ -21,13 +21,13 @@
 
   // CONTROLE : Format de date
   // RETOUR : Booléen
-  function controleFormatDate($date, $format)
+  function controleFormatDate($date)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    if (validateDate($date, $format) != true)
+    if (validateDate($date) != true)
     {
       $_SESSION['alerts']['wrong_date'] = true;
       $control_ok                       = false;

@@ -194,7 +194,7 @@
 
     // Contrôle format date début
     if ($control_ok == true)
-      $control_ok = controleFormatDate($dateDeb, 'd/m/Y');
+      $control_ok = controleFormatDate($dateDeb);
 
     // Formatage de la date de début pour insertion
     if ($control_ok == true)
@@ -202,7 +202,7 @@
 
     // Contrôle format date fin
     if ($control_ok == true)
-      $control_ok = controleFormatDate($dateFin, 'd/m/Y');
+      $control_ok = controleFormatDate($dateFin);
 
     // Formatage de la date de fin pour insertion
     if ($control_ok == true)
@@ -392,7 +392,7 @@
 
     // Contrôle format date début
     if ($control_ok == true)
-      $control_ok = controleFormatDate($dateDeb, 'd/m/Y');
+      $control_ok = controleFormatDate($dateDeb);
 
     // Formatage de la date de début pour insertion
     if ($control_ok == true)
@@ -400,7 +400,7 @@
 
     // Contrôle format date fin
     if ($control_ok == true)
-      $control_ok = controleFormatDate($dateFin, 'd/m/Y');
+      $control_ok = controleFormatDate($dateFin);
 
     // Formatage de la date de fin pour insertion
     if ($control_ok == true)

@@ -390,10 +390,10 @@
                         // Commentaire
                         echo '<div id="visualiser_comment_' . $comment->getId() . '">';
                           // On cherche les smileys dans les commentaires
-                          $commentaire = extract_smiley($comment->getComment());
+                          $commentaire = extractSmiley($comment->getComment());
 
                           // On cherche les liens dans les commentaires
-                          $commentaire = extract_link(nl2br($commentaire));
+                          $commentaire = extractLink(nl2br($commentaire));
 
                           // Commentaire
                           echo '<div class="texte_commentaire">' . $commentaire . '</div>';
@@ -438,10 +438,10 @@
                       else
                       {
                         // On cherche les smileys dans les commentaires
-                        $commentaire = extract_smiley($comment->getComment());
+                        $commentaire = extractSmiley($comment->getComment());
 
                         // On cherche les liens dans les commentaires
-                        $commentaire = extract_link(nl2br($commentaire));
+                        $commentaire = extractLink(nl2br($commentaire));
 
                         // Commentaire
                         echo '<div class="texte_commentaire">' . $commentaire . '</div>';

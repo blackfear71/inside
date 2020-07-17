@@ -130,7 +130,7 @@ $(function()
     var idComment = idSmiley[idSmiley.length - 1];
     var smiley    = idSmiley[idSmiley.length - 2];
 
-    insert_smiley(smiley, 'textarea_comment_' + idComment);
+    insertSmiley(smiley, 'textarea_comment_' + idComment);
   });
 
   /*** Calendriers ***/
@@ -350,7 +350,7 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
 }
 
 // Insère un smiley dans la zone de saisie
-function insert_smiley(smiley, id)
+function insertSmiley(smiley, id)
 {
   var chars = '';
 
@@ -396,7 +396,7 @@ function insert_smiley(smiley, id)
   var texte = chars + ' ';
 
   // Ajout du texte au contenu déjà présent
-  $('#' + id).append(texte);
+  $('#' + id).val($('#' + id).val() + texte);
 
   // Positionnement du curseur
   $('#' + id).focus();

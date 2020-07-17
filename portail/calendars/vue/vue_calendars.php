@@ -81,6 +81,7 @@
                   // Listbox mois
                   echo '<select name="months" class="listbox" required>';
                     echo '<option value="" disabled selected hidden>Mois</option>';
+                    
                     foreach ($listeMois as $number => $month)
                     {
                       echo '<option value="' . $number . '">' . $month . '</option>';

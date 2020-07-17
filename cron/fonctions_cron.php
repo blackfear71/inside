@@ -437,7 +437,7 @@
       $etatLog = '## Etat traitements...........KO';
 
     // Durée totale des traitements
-    $dureeTot = calcDureeTrt($heureDeb, $heureFin);
+    $dureeTot = calculDureeTraitement($heureDeb, $heureFin);
     $dureeLog = '## Durée traitements..........' . $dureeTot['heures'] . ' heures, ' . $dureeTot['minutes'] . ' minutes et ' . $dureeTot['secondes'] . ' secondes';
 
     // Ouverture / création fichier

@@ -57,7 +57,7 @@
   }
 
   // METIER : Sauvegarde des paramètres en session
-  // Retour : Aucun
+  // RETOUR : Aucun
   function saveParameters($post)
   {
     // Récupération des options

@@ -1,10 +1,9 @@
 <?php
-	/////////////////////////////////////////////////////////////////
-	// Fonction d'extraction de l'id d'une vidéo à partir de l'url //
-	/////////////////////////////////////////////////////////////////
-	function extract_url ($adress)
+	// REGEX : Extraction de l'id d'une vidéo à partir de l'url
+	// RETOUR : Url
+	function extractUrl($adress)
 	{
-		// Initialisation
+		// Initialisations
 		$url = '';
 
 		// DAILYMOTION
@@ -56,30 +55,31 @@
 			}
 		}
 
+		// Retour
 		return $url;
 	}
 
-	////////////////////////////////////
-	// Fonction d'extraction de liens //
-	////////////////////////////////////
-	function extract_link ($text)
+	// REGEX : Extraction de liens
+	// RETOUR : Lien
+	function extractLink($texte)
 	{
 		// On cherche les liens
-		$text = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="link_comment"></a>', $text);
+		$lien = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="link_comment"></a>', $texte);
 
 		// Remplacement des débuts d'url
 		$search  = array('www.', 'https://https://', 'http://https://');
 		$replace = array('https://www.', 'https://', 'http://');
-		$text    = str_replace($search, $replace, $text);
+		$lien    = str_replace($search, $replace, $lien);
 
-		return $text;
+		// Retour
+		return $lien;
 	}
 
-	//////////////////////////////////////
-	// Fonction d'extraction de smileys //
-	//////////////////////////////////////
-	function extract_smiley($text)
+	// REGEX : Extraction de smileys
+	// RETOUR : Smiley
+	function extractSmiley($texte)
 	{
+		// Tableaux de conversion
 		$in = array(htmlspecialchars(":)"),
 								htmlspecialchars(":-)"),
 								htmlspecialchars(";)"),
@@ -96,6 +96,7 @@
 								htmlspecialchars(":-P"),
 								htmlspecialchars(":facepalm:")
 							 );
+
 		$out = array('<img src="/inside/includes/icons/common/smileys/1.png" alt=":)" class="smiley" />',
 							 	 '<img src="/inside/includes/icons/common/smileys/1.png" alt=":-)" class="smiley" />',
 							 	 '<img src="/inside/includes/icons/common/smileys/2.png" alt=";)" class="smiley" />',
@@ -112,42 +113,48 @@
 								 '<img src="/inside/includes/icons/common/smileys/7.png" alt=":-P" class="smiley" />',
 								 '<img src="/inside/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley" />'
 								);
-		$text = str_replace($in, $out, $text);
 
-		return $text;
+		// Récupération de l'image
+		$smiley = str_replace($in, $out, $texte);
+
+		// Retour
+		return $smiley;
 	}
 
-	/////////////////////////////////////
-	// Fonction formatage pour Onclick //
-	/////////////////////////////////////
-	function formatOnclick($text)
+	// REGEX : Formatage pour Onclick
+	// RETOUR : Texte formaté
+	function formatOnclick($texte)
 	{
-		$in   = array("'", '"', 'é', 'è', 'ê', 'ë', 'à', 'ç', 'ô', 'û');
-		$out  = array('&rsquo;', '&quot;', '&eacute;', '&egrave;', '&ecirc;', '&euml;', '&agrave;', '&ccedil;', '&ocirc;', '&ucirc;');
-		$text = str_replace($in, $out, $text);
+		// Tableaux de conversion
+		$in  = array("'", '"', 'é', 'è', 'ê', 'ë', 'à', 'ç', 'ô', 'û');
+		$out = array('&rsquo;', '&quot;', '&eacute;', '&egrave;', '&ecirc;', '&euml;', '&agrave;', '&ccedil;', '&ocirc;', '&ucirc;');
 
-		return $text;
+		// Remplacement des caractères
+		$texteFormat = str_replace($in, $out, $texte);
+
+		// Retour
+		return $texteFormat;
 	}
 
-	/////////////////////////////////////////////
-	// Fonction formatage bilan pour affichage //
-	/////////////////////////////////////////////
+	// REGEX : Formatage montant pour affichage
+	// RETOUR : Montant formaté
 	function formatAmountForDisplay($montant)
 	{
 		// Remplacement des caractères spéciaux
 		$montantFormat = str_replace(',', '.', htmlspecialchars($montant));
 
+		// Formatage
 		if (!empty($montantFormat) AND is_numeric($montantFormat))
 			$montantFormat = str_replace('.', ',', number_format($montantFormat, 2, ',', '')) . ' €';
 		else
 			$montantFormat = '0,00 €';
 
+		// Retour
 		return $montantFormat;
 	}
 
-	///////////////////////////////////////////////
-	// Fonction formatage montant pour insertion //
-	///////////////////////////////////////////////
+	// REGEX : Formatage montant pour insertion
+	// RETOUR : Montant formaté
 	function formatAmountForInsert($montant)
 	{
 		// Remplacement des caractères spéciaux
@@ -163,13 +170,14 @@
 		return $montantFormat;
 	}
 
-	////////////////////////////////////////////////
-	// Fonction formatage distance pour affichage //
-	////////////////////////////////////////////////
-	function formatDistanceForDisplay($dist)
+	// REGEX : Formatage distance pour affichage
+	// RETOUR : Distance formatée
+	function formatDistanceForDisplay($distance)
 	{
-		$distanceFormat = str_replace('.', ',', $dist) . ' km';
+		// Formatage
+		$distanceFormat = str_replace('.', ',', $distance) . ' km';
 
+		// Retour
 		return $distanceFormat;
 	}
 ?>

@@ -20,20 +20,7 @@
       echo '</div>';
     echo '</div>';
 
-    $prevMonth  = '';
-    $listMonths = array('01' => 'Janvier',
-                        '02' => 'Février',
-                        '03' => 'Mars',
-                        '04' => 'Avril',
-                        '05' => 'Mai',
-                        '06' => 'Juin',
-                        '07' => 'Juillet',
-                        '08' => 'Août',
-                        '09' => 'Septembre',
-                        '10' => 'Octobre',
-                        '11' => 'Novembre',
-                        '12' => 'Décembre'
-                       );
+    $prevMonth = '';
 
     if (!empty($listeFilms))
     {
@@ -53,9 +40,9 @@
             $prevMonth = $currentMonth;
 
             if ($currentMonth == date('m') AND $_GET['year'] == date('Y'))
-              echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
+              echo '<div class="titre_mois_films titre_bleu"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . formatMonthForDisplay($currentMonth) . '</div>';
             else
-              echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . $listMonths[$currentMonth] . '</div>';
+              echo '<div class="titre_mois_films"><a id="lien_hide_' . $currentMonth . '" class="fond_hide cacherFilms">-</a>' . formatMonthForDisplay($currentMonth) . '</div>';
 
             echo '<div class="zone_fiches_films" id="hide_films_' . $currentMonth . '">';
           }

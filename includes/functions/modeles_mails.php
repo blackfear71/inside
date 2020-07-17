@@ -1,11 +1,12 @@
 <?php
-  ////////////////////////////////////////////////////////
-  // Fonction d'édition de modèle mail pour sortie film //
-  ////////////////////////////////////////////////////////
-  function getModeleFilm($details, $participants)
+  // MODELE : Edition modèle de mail pour sortie film
+  // RETOUR : Modèle de mail
+  function getModeleMailFilm($details, $participants)
   {
+    // Initialisations
     $modele = '';
 
+    // Contenu
     $modele = '<html lang="fr">';
       $modele .= '<head>';
         // CSS
@@ -187,6 +188,7 @@
       $modele .= '</body>';
     $modele .= '</html>';
 
+    // Retour
     return $modele;
   }
 ?>

@@ -292,7 +292,7 @@
       if (isset($anniversary) AND !empty($anniversary))
       {
         // On contrôle la date
-        if (validateDate($anniversary, 'd/m/Y') != true)
+        if (validateDate($anniversary) != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;

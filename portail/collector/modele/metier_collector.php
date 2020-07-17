@@ -330,7 +330,7 @@
     // On contrôle la date
     if ($control_ok == true)
     {
-      if (validateDate($post['date_collector'], 'd/m/Y') != true)
+      if (validateDate($post['date_collector']) != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -514,7 +514,7 @@
     // On contrôle la date
     if ($control_ok == true)
     {
-      if (validateDate($post['date_collector'], 'd/m/Y') != true)
+      if (validateDate($post['date_collector']) != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;

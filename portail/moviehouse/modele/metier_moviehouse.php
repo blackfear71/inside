@@ -349,12 +349,12 @@
     $place      = $post['place'];
 
     // Récupération ID vidéo
-    $idUrl = extract_url($trailer);
+    $idUrl = extractUrl($trailer);
 
     // Contrôle date sortie cinéma
     if (isset($post['date_theater']) AND !empty($post['date_theater']))
     {
-      if (validateDate($post['date_theater'], 'd/m/Y') != true)
+      if (validateDate($post['date_theater']) != true)
       {
         $_SESSION['alerts']['wrong_date'] = true;
         $control_ok                       = false;
@@ -366,7 +366,7 @@
     {
       if (isset($post['date_release']) AND !empty($post['date_release']))
       {
-        if (validateDate($post['date_release'], 'd/m/Y') != true)
+        if (validateDate($post['date_release']) != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;
@@ -379,7 +379,7 @@
     {
       if (isset($post['date_doodle']) AND !empty($post['date_doodle']))
       {
-        if (validateDate($post['date_doodle'], 'd/m/Y') != true)
+        if (validateDate($post['date_doodle']) != true)
         {
           $_SESSION['alerts']['wrong_date'] = true;
           $control_ok                       = false;

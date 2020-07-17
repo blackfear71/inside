@@ -1,54 +1,90 @@
 <?php
-  /* validateDate
-     Fonction qui contrôle qu'une date est valide
-  */
-  function validateDate($date, $format = 'Y-m-d H:i:s')
+  // DATE : Contrôle date valide
+  // RETOUR : Booléen
+  function validateDate($date)
   {
-    $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) == $date;
+    // Initialisations
+    $dateValide = false;
+
+    // Vérification de la date
+    if (strlen($date) == 10)
+    {
+      $jour  = substr($date, 0, 2);
+      $mois  = substr($date, 3, 2);
+      $annee = substr($date, 6, 4);
+
+      if (is_numeric($jour) AND is_numeric($mois) AND is_numeric($annee))
+      {
+        if (checkdate($mois, $jour, $annee) == true)
+          $dateValide = true;
+      }
+    }
+
+    // Retour
+    return $dateValide;
   }
 
-  /* formatDateForDisplay
-     Les dates sont stockées au format AAAAMMJJ. Cette fonction renvoie la date au format
-     JJ/MM/AAAA pour l'affichage. Si elle ne comporte pas 8 caractères, on renvoie l'argument
-  */
+  // DATE : Formate une date pour affichage (AAAAMMJJ -> JJ/MM/AAAA)
+  // RETOUR : Date formatée
   function formatDateForDisplay($date)
   {
+    // Formatage de la date
     if (strlen($date) == 8)
-      return substr($date, 6, 2) . '/' . substr($date, 4, 2) . '/' . substr($date, 0, 4);
+      $dateFormat = substr($date, 6, 2) . '/' . substr($date, 4, 2) . '/' . substr($date, 0, 4);
     else
-      return $date;
+      $dateFormat = $date;
+
+    // Retour
+    return $dateFormat;
   }
 
-  /* formatTimeForDisplay
-     Les heures sont stockées au format HHMMSS. Cette fonction renvoie l'heure au format
-     HH:MM:SS pour l'affichage. Si elle ne comporte pas 6 caractères, on renvoie l'argument
-  */
+  // DATE : Formate une heure pour affichage (HHMMSS -> HH:MM:SS)
+  // RETOUR : Heure formatée
   function formatTimeForDisplay($time)
   {
+    // Formatage de l'heure
     if (strlen($time) == 6)
-      return substr($time, 0, 2) . ':' . substr($time, 2, 2) . ':' . substr($time, 4, 2);
+      $timeFormat = substr($time, 0, 2) . ':' . substr($time, 2, 2) . ':' . substr($time, 4, 2);
     else
-      return $time;
+      $timeFormat = $time;
+
+    // Retour
+    return $timeFormat;
   }
 
-  /* formatTimeForDisplayLight
-     Les heures sont stockées au format HHMMSS. Cette fonction renvoie l'heure au format
-     HH:MM pour l'affichage. Si elle ne comporte pas 6 caractères, on renvoie l'argument
-  */
+  // DATE : Formate une heure pour affichage (HHMMSS -> HH:MM)
+  // RETOUR : Heure formatée
   function formatTimeForDisplayLight($time)
   {
+    // Formatage de l'heure
     if (strlen($time) == 6 OR strlen($time) == 4)
-      return substr($time, 0, 2) . ':' . substr($time, 2, 2);
+      $timeFormat = substr($time, 0, 2) . ':' . substr($time, 2, 2);
     else
-      return $time;
+      $timeFormat = $time;
+
+    // Retour
+    return $timeFormat;
   }
 
-  /* formatMonthForDisplay
-     On stocke le mois sur 2 caractères et le convertit en une chaîne de caractères pour obtenir le mot correspondant
-  */
+  // DATE : Formate une semaine pour affichage (suppression zéro initial)
+  // RETOUR : Semaine formatée
+  function formatWeekForDisplay($week)
+  {
+    // Formatage du numéro de semaine
+    if (intval($week) < 10)
+      $weekFormat = str_replace('0', '', $week);
+    else
+      $weekFormat = $week;
+
+    // Retour
+    return $weekFormat;
+  }
+
+  // DATE : Formate un mois pour affichage
+  // RETOUR : Mois formaté
   function formatMonthForDisplay($month)
   {
+    // Liste des mois
     $listeMois = array('01' => 'Janvier',
                        '02' => 'Février',
                        '03' => 'Mars',
@@ -63,17 +99,18 @@
                        '12' => 'Décembre'
                       );
 
-    $formatMonth = $listeMois[$month];
+    // Récupération du mois
+    $monthFormat = $listeMois[$month];
 
     // Retour
-    return $formatMonth;
+    return $monthFormat;
   }
 
-  /* formatMonthForDisplayLight
-     On stocke le mois sur 2 caractères et le convertit en une chaîne de caractères pour obtenir le mot correspondant
-  */
+  // DATE : Formate un mois pour affichage (light)
+  // RETOUR : Mois formaté
   function formatMonthForDisplayLight($month)
   {
+    // Liste des mois
     $listeMois = array('01' => 'JAN',
                        '02' => 'FÉV',
                        '03' => 'MAR',
@@ -88,58 +125,51 @@
                        '12' => 'DÉC'
                       );
 
-    $formatMonth = $listeMois[$month];
+    // Récupération du mois
+    $monthFormat = $listeMois[$month];
 
     // Retour
-    return $formatMonth;
+    return $monthFormat;
   }
 
-  /* formatWeekForDisplay
-     Formate un numéro de semaine sans le 0 initial
-  */
-  function formatWeekForDisplay($week)
-  {
-    if (intval($week) < 10)
-      $formattedWeek = str_replace('0', '', $week);
-    else
-      $formattedWeek = $week;
-
-    // Retour
-    return $formattedWeek;
-  }
-
-  /* formatDateForInsert
-     Les dates sont stockées au format AAAAMMJJ. Cette fonction renvoie la date au format
-     AAAAMMJJ pour l'insertion en base. Si elle ne comporte pas 8 caractères, on renvoie l'argument
-  */
+  // DATE : Formate une date pour insertion en base (JJ/MM/AAAA -> AAAAMMJJ)
+  // RETOUR : Date formaté
   function formatDateForInsert($date)
   {
+    // Formatage de la date
     if (strlen($date) == 10)
-      return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
+      $dateFormat = substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
     else
-      return $date;
-  }
-
-  /* formatWeekForInsert
-     Formate un numéro de semaine avec le 0 initial
-  */
-  function formatWeekForInsert($week)
-  {
-    if (intval($week) < 10)
-      $formattedWeek = '0' . $week;
-    else
-      $formattedWeek = $week;
+      $dateFormat = $date;
 
     // Retour
-    return $formattedWeek;
+    return $dateFormat;
   }
 
-  /* calcDureeTrt
-    <=> calcule la durée en heures/minutes/secondes pour un traitement
-    Retourne le temps sous forme d'un tableau
-  */
-  function calcDureeTrt($heureDeb, $heureFin)
+  // DATE : Formate une semaine pour insertion en base (ajout zéro initial)
+  // RETOUR : Semaine formatée
+  function formatWeekForInsert($week)
   {
+    // Formatage du numéro de semaine
+    if (intval($week) < 10)
+      $weekFormat = '0' . $week;
+    else
+      $weekFormat = $week;
+
+    // Retour
+    return $weekFormat;
+  }
+
+  // DATE : Calcule la durée en heures/minutes/secondes pour un traitement
+  // RETOUR : Tableau de durée
+  function calculDureeTraitement($heureDeb, $heureFin)
+  {
+    // Initialisations
+    $dureeFormat = array('heures'   => 0,
+                         'minutes'  => 0,
+                         'secondes' => 0
+                        );
+
     if (strlen($heureDeb) == 6 AND strlen($heureFin) == 6)
     {
       // Calcul (en secondes)
@@ -155,21 +185,22 @@
       $total      = $total - ($minutes * 60);
       $secondes   = $total;
 
+      // Construction du tableau
       $dureeFormat = array('heures'   => $heures,
                            'minutes'  => $minutes,
                            'secondes' => $secondes
                           );
-
-      // Retour
-      return $dureeFormat;
     }
+
+    // Retour
+    return $dureeFormat;
   }
 
-  /* ecartDatesEvent
-    <=> calcule la durée en jours entre 2 dates pour une mission
-  */
+  // DATE : Calcule la durée en jours entre 2 dates pour une mission
+  // RETOUR : Ecart
   function ecartDatesEvent($dateDeb, $dateFin)
   {
+    // Initialisations
     $ecart = 0;
 
     // Calcul

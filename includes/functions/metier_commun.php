@@ -4,7 +4,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
 
-  // Contrôles Index, initialisation session
+  // METIER : Contrôles Index, initialisation session
   // RETOUR : Aucun
   function controlsIndex()
   {
@@ -25,7 +25,7 @@
       $_SESSION['index']['plateforme'] = getPlateforme();
   }
 
-  // Contrôles Administrateur, initialisation session
+  // METIER : Contrôles Administrateur, initialisation session
   // RETOUR : Aucun
   function controlsAdmin()
   {
@@ -45,7 +45,7 @@
     $_SESSION['index']['plateforme'] = 'web';
   }
 
-  // Contrôles Utilisateur, initialisation session, mission et thème
+  // METIER : Contrôles Utilisateur, initialisation session, mission et thème
   // RETOUR : Aucun
   function controlsUser()
   {
@@ -125,7 +125,7 @@
     }
   }
 
-  // Contrôle si on est sur mobile
+  // METIER : Contrôle si on est sur mobile
   // RETOUR : Plateforme
   function getPlateforme()
   {
@@ -147,7 +147,7 @@
     return $plateforme;
   }
 
-  // Contrôle si la page courante est accessible sur mobile
+  // METIER : Contrôle si la page courante est accessible sur mobile
   // RETOUR : Booléen
   function isAccessibleMobile($path)
   {
@@ -167,7 +167,7 @@
     return $isAccessibleMobile;
   }
 
-  // Récupération des alertes à afficher
+  // METIER : Récupération des alertes à afficher
   // RETOUR : Liste des alertes
   function getAlertesInside()
   {
@@ -214,7 +214,7 @@
     return $messages;
   }
 
-  // Récupération expérience utilisateur
+  // METIER : Récupération expérience utilisateur
   // RETOUR : Tableau d'expérience
   function getExperience($identifiant)
   {
@@ -242,7 +242,7 @@
     $reponse->closeCursor();
   }
 
-  // Récupération des missions actives
+  // METIER : Récupération des missions actives
   // RETOUR : Objets mission
   function getMissionsToGenerate()
   {
@@ -263,7 +263,7 @@
     return $listeMissions;
   }
 
-  // Contrôle mission déjà complétée
+  // METIER : Contrôle mission déjà complétée
   // RETOUR : Nombre de missions à générer
   function controlMissionComplete($user, $mission)
   {
@@ -294,7 +294,7 @@
     return $missionToGenerate;
   }
 
-  // Génération contexte mission (boutons)
+  // METIER : Génération contexte mission (boutons)
   // RETOUR : Tableau contexte
   function generateMissions($nb, $mission, $key)
   {
@@ -454,7 +454,7 @@
     return $listeBoutonsMission;
   }
 
-  // Contrôle missions en double
+  // METIER : Contrôle missions en double
   // RETOUR : booléen
   function controlGeneratedMission($tableauMissions, $mission)
   {
@@ -479,7 +479,7 @@
     return $duplicated;
   }
 
-  // Détermination du thème
+  // METIER : Détermination du thème
   // RETOUR : Tableau chemins & types de thème
   function setTheme()
   {
@@ -564,7 +564,7 @@
     return $tableauTheme;
   }
 
-  // Formatage titres niveaux (succès)
+  // METIER : Formatage titres niveaux (succès)
   // RETOUR : titre niveau formaté
   function formatTitleLvl($lvl)
   {
@@ -592,8 +592,8 @@
     return $nameLvl;
   }
 
-  // Formatage gagnants mission
-  // Retour : phrase formatée
+  // METIER : Formatage gagnants mission
+  // RETOUR : phrase formatée
   function formatGagnants($listWinners)
   {
     switch (count($listWinners))
@@ -627,7 +627,7 @@
     return $phrase;
   }
 
-  // Génération notification
+  // METIER : Génération notification
   // RETOUR : Aucun
   function insertNotification($author, $category, $content)
   {
@@ -648,7 +648,7 @@
     $req->closeCursor();
   }
 
-  // Suppression notification
+  // METIER : Suppression notification
   // RETOUR : Aucun
   function deleteNotification($category, $content)
   {
@@ -658,7 +658,7 @@
     $req = $bdd->exec('DELETE FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
   }
 
-  // Contrôle notification existante
+  // METIER : Contrôle notification existante
   // RETOUR : Booléen
   function controlNotification($category, $content)
   {
@@ -680,8 +680,8 @@
     return $exist;
   }
 
-  // Formatage phrases cultes
-  // Retour : phrase formatée
+  // METIER : Formatage phrases cultes
+  // RETOUR : phrase formatée
   function formatCollector($collector)
   {
     $formatted = '';
@@ -693,8 +693,8 @@
     return $formatted;
   }
 
-  // Dé-formatage phrases cultes
-  // Retour : phrase dé-formatée
+  // METIER : Dé-formatage phrases cultes
+  // RETOUR : phrase dé-formatée
   function unformatCollector($collector)
   {
     $unformatted = '';
@@ -706,8 +706,8 @@
     return $unformatted;
   }
 
-  // Suppression des caractères ASCII invisibles (?)
-  // Retour : phrase nettoyée
+  // METIER : Suppression des caractères ASCII invisibles (?)
+  // RETOUR : phrase nettoyée
   function deleteInvisible($phrase)
   {
     $cleaned = preg_replace('[\xE2\x80\x8E]', '', $phrase);
@@ -715,8 +715,8 @@
     return $cleaned;
   }
 
-  // Lecture liste des utilisateurs (chat)
-  // Retour : Tableau d'utilisateurs
+  // METIER : Lecture liste des utilisateurs (chat)
+  // RETOUR : Tableau d'utilisateurs
   function getUsersChat()
   {
     // Initialisation tableau d'utilisateurs
@@ -738,7 +738,7 @@
     return $listeUsers;
   }
 
-  // Rotation automatique des images en mode Portrait
+  // METIER : Rotation automatique des images en mode Portrait
   // RETOUR : Aucun
   function rotateImage($image, $type)
   {
@@ -806,7 +806,7 @@
     }
   }
 
-  // Génération valeur succès niveau
+  // METIER : Génération valeur succès niveau
   // RETOUR : Aucun
   function insertOrUpdateSuccesLevel($experience, $identifiant)
   {
@@ -819,7 +819,7 @@
     insertOrUpdateSuccesValue('level_10', $identifiant, $level);
   }
 
-  // Génération valeur succès mission
+  // METIER : Génération valeur succès mission
   // RETOUR : Aucun
   function insertOrUpdateSuccesMission($reference, $identifiant)
   {
@@ -853,7 +853,7 @@
     }
   }
 
-  // Génération valeur succès
+  // METIER : Génération valeur succès
   // RETOUR : Aucun
   function insertOrUpdateSuccesValue($reference, $identifiant, $incoming)
   {
@@ -1098,7 +1098,7 @@
     }
   }
 
-  // Mise à jour expérience
+  // METIER : Mise à jour expérience
   // RETOUR : Aucun
   function insertExperience($identifiant, $action)
   {
@@ -1160,7 +1160,7 @@
     insertOrUpdateSuccesLevel($newExperience, $identifiant);
   }
 
-  // Formatage Id type de restaurant
+  // METIER : Formatage Id type de restaurant
   // RETOUR : Id formaté
   function formatId($id)
   {
@@ -1185,7 +1185,7 @@
     return $formatted;
   }
 
-  // Formatage du numéro de téléphone
+  // METIER : Formatage du numéro de téléphone
   // RETOUR : Numéro formaté
   function formatPhoneNumber($phone)
   {
@@ -1194,7 +1194,7 @@
     return $formattedPhone;
   }
 
-  // Conversion de l'expérience en niveau
+  // METIER : Conversion de l'expérience en niveau
   // RETOUR : Niveau
   function convertExperience($exp)
   {
@@ -1203,7 +1203,7 @@
     return $level;
   }
 
-  // Décode certains caractères
+  // METIER : Décode certains caractères
   // RETOUR : Chaîne décodée
   function decodeString($chaine)
   {
@@ -1214,7 +1214,7 @@
     return $chaine;
   }
 
-	// Formatage explications succès
+	// METIER : Formatage explications succès
   // RETOUR : Explications formatées
 	function formatExplanation($string, $replace, $search)
 	{
@@ -1223,7 +1223,7 @@
 		return $explanations;
 	}
 
-  // Génère le chemin vers l'avatar
+  // METIER : Génère le chemin vers l'avatar
   // RETOUR : Chemin & titre image
   function formatAvatar($avatar, $pseudo, $niveau, $alt)
   {
@@ -1262,7 +1262,7 @@
     return $formattedAvatar;
   }
 
-  // Formate une chaîne de caractères en longueur
+  // METIER : Formate une chaîne de caractères en longueur
   // RETOUR : Pseudo formaté
   function formatString($string, $limit)
   {
@@ -1272,7 +1272,7 @@
     return $string;
   }
 
-  // Formate le pseudo utilisateur désinscrit
+  // METIER : Formate le pseudo utilisateur désinscrit
   // RETOUR : Pseudo ancien utilisateur
   function formatUnknownUser($pseudo, $majuscule, $italique)
   {
@@ -1297,7 +1297,7 @@
     return $pseudo;
   }
 
-  // Contrôle une image avant de la télécharger
+  // METIER : Contrôle une image avant de la télécharger
   // RETOUR : Booléen
   function controlsUploadFile($file, $name, $types)
   {
@@ -1389,7 +1389,7 @@
     return $output;
   }
 
-  // Contrôle d'un fichier après contrôles communs
+  // METIER : Contrôle d'un fichier après contrôles communs
   // RETOUR : Booléen
   function controleFichier($fileDatas)
   {
@@ -1404,7 +1404,7 @@
     return $control_ok;
   }
 
-  // Télécharge une image sur le serveur
+  // METIER : Télécharge une image sur le serveur
   // RETOUR : Booléen
   function uploadFile($file, $controls, $folder)
   {
@@ -1422,7 +1422,7 @@
     return $control_ok;
   }
 
-  // Génère une chaîne aléatoire
+  // METIER : Génère une chaîne aléatoire
   // RETOUR : Chaîne aléatoire
   function generateRandomString($nombreCarateres)
   {
