@@ -28,7 +28,7 @@
             echo '<form method="post" action="/inside/portail/missions/missions.php?action=doMission" class="' . $classIconeMission . '">';
               echo '<input type="hidden" name="ref_mission" value="' . $refMission . '" />';
               echo '<input type="hidden" name="key_mission" value="' . $keyMission . '" />';
-              echo '<input type="submit" name="' . $refMission . '" value="" style="background-image: url(/inside/includes/images/missions/buttons/' . $iconeMission . '.png);" />';
+              echo '<input type="image" name="' . $refMission . '" src="/inside/includes/images/missions/buttons/' . $iconeMission . '.png" alt="' . $iconeMission . '" />';
             echo '</form>';
           }
         }

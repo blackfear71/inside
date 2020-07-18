@@ -141,7 +141,7 @@
         /***************************/
         /* Caché pour modification */
         /***************************/
-        echo '<div class="zone_collector" id="modifier_collector_' . $collector->getId() . '" style="display: none; position: relative; z-index: 2;">';
+        echo '<div class="zone_collector zone_collector_update" id="modifier_collector_' . $collector->getId() . '" style="display: none;">';
           echo '<form method="post" action="collector.php?action=doModifier&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" enctype="multipart/form-data" class="zone_shadow">';
             if ($collector->getNb_votes() >= $minGolden)
               echo '<div class="zone_collector_haut_golden">';

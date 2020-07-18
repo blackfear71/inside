@@ -279,6 +279,41 @@
 	border: solid 1px #b3b3b3;
 }
 
+.init_td_manage_users_10
+{
+	width: 10%;
+}
+
+.init_td_manage_users_15
+{
+	width: 15%;
+}
+
+.init_td_manage_users_20
+{
+	width: 20%;
+}
+
+.init_td_manage_users_25
+{
+	width: 25%;
+}
+
+.init_td_manage_users_30
+{
+	width: 30%;
+}
+
+.init_td_manage_users_45
+{
+	width: 45%;
+}
+
+.init_td_manage_users_50
+{
+	width: 50%;
+}
+
 .tr_manage_users
 {
 	text-align: center;
@@ -295,10 +330,42 @@
 	line-height: 30px;
 	padding-left: 20px;
 	padding-right: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	border: solid 1px #b3b3b3;
+	word-break: break-word;
+}
+
+.td_manage_users_important
+{
+	text-align: center;
+	line-height: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
 	word-break: break-word;
+	background-color: #e3e3e3;
+	font-weight: bold;
+}
+
+.td_manage_users_red
+{
+	text-align: center;
+	line-height: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	border: solid 1px #b3b3b3;
+	word-break: break-word;
+	background-color: #ee4949;
+}
+
+.td_manage_users_7
+{
+	width: 7.5%;
 }
 
 .reseted
@@ -341,6 +408,31 @@
 	border: solid 1px #b3b3b3;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+}
+
+.bilan_red
+{
+	background-color: #ee4949;
+}
+
+.bilan_orange
+{
+	background-color: #ff9147;
+}
+
+.bilan_jaune
+{
+	background-color: #fffd4c;
+}
+
+.bilan_vert
+{
+	background-color: #b6fc78;
+}
+
+.bilan_vert_fonce
+{
+	background-color: #71d058;
 }
 
 .table_old_users
@@ -533,9 +625,11 @@
 .title_calendar_to_delete
 {
 	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
 	background-color: #ffad01;
 	border-radius: 5px;
-	padding: 5px 10px 5px 10px;
+	width: 200px;
 }
 
 /*** Saisie succès ***/
@@ -1473,8 +1567,12 @@
 .form_saisie_mission
 {
 	display: inline-block;
+	width: 100%;
+}
+
+.form_saisie_mission_70
+{
 	width: 70%;
-	margin-top: 2px;
 }
 
 .table_mission
@@ -1501,6 +1599,11 @@
 	border-radius: 2px;
 	width: calc(100% - 60px);
 	z-index: 1;
+}
+
+.zone_saisie_image_mission
+{
+	padding: 0;
 }
 
 .zone_parcourir_missions
@@ -1748,6 +1851,11 @@
 	font-size: 120%;
 	color: #262626;
 	text-align: justify;
+}
+
+.no_border
+{
+	border: 0;
 }
 
 .rift_saisie_mission_left

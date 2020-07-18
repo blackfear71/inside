@@ -1,23 +1,21 @@
 <?php
   if ($_GET['action'] == 'goAjouter')
-    echo '<form method="post" action="missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission" style="width: 100%;">';
+    echo '<form method="post" action="missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission">';
   else
   {
-    echo '<form method="post" action="missions.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_mission">';
+    echo '<form method="post" action="missions.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_mission form_saisie_mission_70">';
       echo '<input type="hidden" name="id_mission" value="' . $detailsMission->getId() . '" />';
   }
 
+    // Taille maximale images
     echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
     echo '<table class="table_mission">';
       // Image & titre
       echo '<tr>';
-        echo '<td colspan="3" style="padding: 0;">';
+        echo '<td colspan="3" class="zone_saisie_image_mission">';
           // Titre
-          if ($_GET['action'] == 'goAjouter')
-            echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" style="width: calc(100% - 60px);" required />';
-          else
-            echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" required />';
+          echo '<input type="text" value="' . $detailsMission->getMission() . '" name="mission" placeholder="Titre de la mission" maxlength="255" class="input_mission_title" required />';
 
           // Image
           if ($_GET['action'] == 'goAjouter')
@@ -109,7 +107,7 @@
       echo '<tr>';
         echo '<td colspan="3" class="dates_saisie_mission">';
           echo 'Du <input type="text" name="date_deb" value="' . formatDateForDisplay($detailsMission->getDate_deb()) . '" placeholder="Date de début" maxlength="10" autocomplete="off" id="datepicker_saisie_deb" class="input_mission_date" required />';
-          echo ' au <input type="text" name="date_fin" value="' . formatDateForDisplay($detailsMission->getDate_fin()) . '" placeholder="Date de fin" maxlength="10" autocomplete="off" id="datepicker_saisie_fin" class="input_mission_date" style="margin-left: 2px;" required />';
+          echo ' au <input type="text" name="date_fin" value="' . formatDateForDisplay($detailsMission->getDate_fin()) . '" placeholder="Date de fin" maxlength="10" autocomplete="off" id="datepicker_saisie_fin" class="input_mission_date" required />';
         echo '</td>';
       echo '</tr>';
 
@@ -252,11 +250,11 @@
 
       // Conclusion
       echo '<tr>';
-        echo '<td class="td_saisie_mission_left" style="border: 0;">';
+        echo '<td class="td_saisie_mission_left no_border">';
           echo 'Conclusion';
         echo '</td>';
 
-        echo '<td colspan="2" class="td_saisie_mission_right" style="border: 0;">';
+        echo '<td colspan="2" class="td_saisie_mission_right no_border">';
           echo '<textarea name="conclusion" placeholder="Conclusion (fin de mission)" class="textarea_right_mission" required>' . $detailsMission->getConclusion() . '</textarea>';
         echo '</td>';
       echo '</tr>';

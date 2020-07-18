@@ -4,27 +4,27 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users" style="width: 10%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Demande';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 20%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_20">';
 				echo 'Réinitialisation mot de passe';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 20%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_20">';
 				echo 'Inscription';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 20%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_20">';
 				echo 'Désinscription';
 			echo '</td>';
 		echo '</tr>';
@@ -109,7 +109,7 @@
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td colspan="3" class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
+			echo '<td colspan="3" class="td_manage_users_important">';
 				echo 'Alertes';
 			echo '</td>';
 

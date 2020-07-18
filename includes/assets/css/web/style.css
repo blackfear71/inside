@@ -683,6 +683,11 @@ aside
 	margin-left: 5px;
 }
 
+.icon_menu_aside_hidden
+{
+	opacity: 0;
+}
+
 .link_aside
 {
 	display: block;

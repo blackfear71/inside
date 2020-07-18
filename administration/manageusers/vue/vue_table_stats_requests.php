@@ -1,44 +1,44 @@
 <?php
 	echo '<div class="titre_section"><img src="../../includes/icons/admin/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Statistiques demandes & publications</div></div>';
 
-	echo '<table class="table_manage_users" style="margin-bottom: 0;">';
+	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 10%;">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users" style="width: 37.5%;">';
-				echo 'bugs/évolutions';
+			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_30">';
+				echo 'Bugs / évolutions';
 			echo '</td>';
 
-			echo '<td colspan="3" class="init_td_manage_users" style="width: 37.5%;">';
+			echo '<td colspan="3" class="init_td_manage_users init_td_manage_users_45">';
 				echo '#TheBox';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users">';
-				echo 'Nombre de demandes (bugs/évolutions)';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+				echo 'Nombre de demandes (bugs / évolutions)';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users">';
-				echo 'Nombre de demandes résolues (bugs/évolutions)';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+				echo 'Nombre de demandes résolues (bugs / évolutions)';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Nombre d\'idées publiées';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Nombre d\'idées en charge';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Nombre d\'idées terminées ou rejetées';
 			echo '</td>';
 		echo '</tr>';
@@ -124,7 +124,7 @@
 
 		// Total
 		echo '<tr>';
-			echo '<td colspan="2" class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
+			echo '<td colspan="2" class="td_manage_users_important">';
 				echo 'Total';
 			echo '</td>';
 

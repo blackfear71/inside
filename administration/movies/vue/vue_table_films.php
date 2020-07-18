@@ -1,36 +1,36 @@
 <?php
 	echo '<div class="titre_section"><img src="../../includes/icons/admin/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" /><div class="texte_titre_section">Demandes de suppression de films</div></div>';
 
-	echo '<table class="table_manage_users" style="margin-bottom: 0;">';
+	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 25%;">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
 				echo 'Film';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users" style="width: 30%;">';
+			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_30">';
 				echo 'Suppression du film';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Demande suppression par';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Ajouté par';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users" style="width: 15%;">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Personnes intéressées';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Accepter';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users" style="width: 15%;">';
+			echo '<td class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Refuser';
 			echo '</td>';
 		echo '</tr>';
@@ -81,13 +81,13 @@
     else
 		{
 			echo '<tr>';
-				echo '<td colspan="6" class="td_manage_users" style="line-height: 100px;">Pas de films à supprimer !</td>';
+				echo '<td colspan="6" class="empty">Pas de films à supprimer !</td>';
 			echo '</tr>';
 		}
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td class="td_manage_users" style="background-color: #e3e3e3; font-weight: bold;">';
+			echo '<td class="td_manage_users_important">';
 				echo 'Alertes';
 			echo '</td>';
 

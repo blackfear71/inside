@@ -42,9 +42,9 @@
 	echo '<div id="menuLateral" class="menu_aside_visible" title="Menu">';
 		echo '<div class="logos_menu">';
 			echo '<img src="/inside/includes/icons/common/menu_m.png" alt="menu" id="icon_menu_m" class="icon_menu_aside" />';
-			echo '<img src="/inside/includes/icons/common/menu_e.png" alt="menu" id="icon_menu_e" class="icon_menu_aside" style="opacity: 0;" />';
-			echo '<img src="/inside/includes/icons/common/menu_n.png" alt="menu" id="icon_menu_n" class="icon_menu_aside" style="opacity: 0;" />';
-			echo '<img src="/inside/includes/icons/common/menu_u.png" alt="menu" id="icon_menu_u" class="icon_menu_aside" style="opacity: 0;" />';
+			echo '<img src="/inside/includes/icons/common/menu_e.png" alt="menu" id="icon_menu_e" class="icon_menu_aside icon_menu_aside_hidden" />';
+			echo '<img src="/inside/includes/icons/common/menu_n.png" alt="menu" id="icon_menu_n" class="icon_menu_aside icon_menu_aside_hidden" />';
+			echo '<img src="/inside/includes/icons/common/menu_u.png" alt="menu" id="icon_menu_u" class="icon_menu_aside icon_menu_aside_hidden" />';
 		echo '</div>';
 	echo '</div>';
 ?>

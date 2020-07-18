@@ -341,6 +341,12 @@
 	padding-top: 50px;
 }
 
+.zone_collector_update
+{
+	position: relative;
+	z-index: 2;
+}
+
 .strong_red
 {
 	color: #ff1937;
