@@ -20,10 +20,8 @@
 
     while ($data = $req->fetch())
     {
-      $autorisation = array('identifiant'      => $data['identifiant'],
-                            'pseudo'           => '',
-                            'manage_calendars' => $data['manage_calendars']
-                           );
+      // Instanciation d'un objet AutorisationCalendriers à partir des données remontées de la bdd
+      $autorisation = AutorisationCalendriers::withData($data);
 
       // On ajoute la ligne au tableau
       array_push($listeAutorisations, $autorisation);

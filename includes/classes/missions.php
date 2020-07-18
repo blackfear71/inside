@@ -72,6 +72,21 @@
         $this->conclusion   = $data['conclusion'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setMission(htmlspecialchars($data->getMission()));
+      $data->setReference(htmlspecialchars($data->getReference()));
+      $data->setDate_deb(htmlspecialchars($data->getDate_deb()));
+      $data->setDate_fin(htmlspecialchars($data->getDate_fin()));
+      $data->setHeure(htmlspecialchars($data->getHeure()));
+      $data->setObjectif(htmlspecialchars($data->getObjectif()));
+      $data->setDescription(htmlspecialchars($data->getDescription()));
+      $data->setExplications(htmlspecialchars($data->getExplications()));
+      $data->setConclusion(htmlspecialchars($data->getConclusion()));
+      $data->setStatut(htmlspecialchars($data->getStatut()));
+    }
+
     // getters et setters pour l'objet Mission
     // id
     public function setId($id)
@@ -192,6 +207,77 @@
     public function getStatut()
     {
       return $this->statut;
+    }
+  }
+
+  class ParticipantMission
+  {
+    private $identifiant;
+    private $pseudo;
+    private $total;
+    private $rank;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->identifiant = '';
+      $this->pseudo      = '';
+      $this->total       = 0;
+      $this->rank        = '';
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setTotal(htmlspecialchars($data->getTotal()));
+      $data->setRank(htmlspecialchars($data->getRank()));
+    }
+
+    // getters et setters pour l'objet ParticipantMission
+    // Identifiant
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Pseudo
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Total des objets trouvés
+    public function setTotal($total)
+    {
+      $this->total = $total;
+    }
+
+    public function getTotal()
+    {
+      return $this->total;
+    }
+
+    // Rang
+    public function setRank($rank)
+    {
+      $this->rank = $rank;
+    }
+
+    public function getRank()
+    {
+      return $this->rank;
     }
   }
 ?>

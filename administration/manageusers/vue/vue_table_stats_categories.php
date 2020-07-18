@@ -44,48 +44,48 @@
 		echo '</tr>';
 
 		// Utilisateurs inscrits
-    foreach ($tableauCategoriesIns as $statsCatIns)
+    foreach ($tableauStatistiquesIns as $statistiquesIns)
     {
       echo '<tr class="tr_manage_users">';
         echo '<td class="td_manage_users">';
-          echo $statsCatIns['identifiant'];
+          echo $statistiquesIns->getIdentifiant();
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $statsCatIns['pseudo'];
+          echo $statistiquesIns->getPseudo();
         echo '</td>';
 
 				echo '<td class="td_manage_users">';
-          echo $statsCatIns['nombreFilms'];
+					echo $statistiquesIns->getNb_films_ajoutes();
         echo '</td>';
 
         echo '<td class="td_manage_users">';
-          echo $statsCatIns['nombreComments'];
+					echo $statistiquesIns->getNb_films_comments();
         echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatIns['nombreCollector'];
+					echo $statistiquesIns->getNb_collectors();
 				echo '</td>';
 
-        if ($statsCatIns['bilanUser'] <= -6)
+        if ($statistiquesIns->getExpenses() <= -6)
 					echo '<td colspan="4" class="td_stats_admin bilan_red">';
-				elseif ($statsCatIns['bilanUser'] > -6 AND $statsCatIns['bilanUser'] <= -3)
+				elseif ($statistiquesIns->getExpenses() > -6 AND $statistiquesIns->getExpenses() <= -3)
 					echo '<td colspan="4" class="td_stats_admin bilan_orange">';
-				elseif ($statsCatIns['bilanUser'] > -3 AND $statsCatIns['bilanUser'] < -0.01)
+				elseif ($statistiquesIns->getExpenses() > -3 AND $statistiquesIns->getExpenses() < -0.01)
 					echo '<td colspan="4" class="td_stats_admin bilan_jaune">';
-				elseif ($statsCatIns['bilanUser'] > 0.01 AND $statsCatIns['bilanUser'] < 5)
+				elseif ($statistiquesIns->getExpenses() > 0.01 AND $statistiquesIns->getExpenses() < 5)
 					echo '<td colspan="4" class="td_stats_admin bilan_vert">';
-				elseif ($statsCatIns['bilanUser'] >= 5)
+				elseif ($statistiquesIns->getExpenses() >= 5)
 					echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
-				elseif ($statsCatIns['bilanUser'] > -0.01 AND $statsCatIns['bilanUser'] < 0.01)
+				elseif ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo formatAmountForDisplay($statsCatIns['bilanUser']);
+						echo formatAmountForDisplay($statistiquesIns->getExpenses());
 					echo '</td>';
 			echo '</tr>';
     }
 
 		// Séparation utilisateurs
-		if (!empty($tableauCategoriesDes))
+		if (!empty($tableauStatistiquesDes))
 		{
 			echo '<tr>';
 				echo '<td class="table_old_users" colspan="9">';
@@ -97,38 +97,38 @@
 		}
 
 		// Utilisateurs désinscrits
-		foreach ($tableauCategoriesDes as $statsCatDes)
+		foreach ($tableauStatistiquesDes as $statistiquesDes)
 		{
 			echo '<tr class="tr_manage_users">';
 				echo '<td colspan="2" class="td_manage_users">';
-					echo $statsCatDes['identifiant'];
+					echo $statistiquesDes->getIdentifiant();
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatDes['nombreFilms'];
+					echo $statistiquesDes->getNb_films_ajoutes();
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatDes['nombreComments'];
+					echo $statistiquesDes->getNb_films_comments();
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					echo $statsCatDes['nombreCollector'];
+					echo $statistiquesDes->getNb_collectors();
 				echo '</td>';
 
-				if ($statsCatDes['bilanUser'] <= -6)
+				if ($statistiquesDes->getExpenses() <= -6)
 					echo '<td colspan="4" class="td_stats_admin bilan_red">';
-				elseif ($statsCatDes['bilanUser'] > -6 AND $statsCatDes['bilanUser'] <= -3)
+				elseif ($statistiquesDes->getExpenses() > -6 AND $statistiquesDes->getExpenses() <= -3)
 					echo '<td colspan="4" class="td_stats_admin bilan_orange">';
-				elseif ($statsCatDes['bilanUser'] > -3 AND $statsCatDes['bilanUser'] < -0.01)
+				elseif ($statistiquesDes->getExpenses() > -3 AND $statistiquesDes->getExpenses() < -0.01)
 					echo '<td colspan="4" class="td_stats_admin bilan_jaune">';
-				elseif ($statsCatDes['bilanUser'] > 0.01 AND $statsCatDes['bilanUser'] < 5)
+				elseif ($statistiquesDes->getExpenses() > 0.01 AND $statistiquesDes->getExpenses() < 5)
 					echo '<td colspan="4" class="td_stats_admin bilan_vert">';
-				elseif ($statsCatDes['bilanUser'] >= 5)
+				elseif ($statistiquesDes->getExpenses() >= 5)
 					echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
-				elseif ($statsCatDes['bilanUser'] > -0.01 AND $statsCatDes['bilanUser'] < 0.01)
+				elseif ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo formatAmountForDisplay($statsCatDes['bilanUser']);
+						echo formatAmountForDisplay($statistiquesDes->getExpenses());
 					echo '</td>';
 			echo '</tr>';
 		}
@@ -140,26 +140,26 @@
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalCategories['nombreFilms'];
+				echo $totalStatistiques->getNb_films_ajoutes_total();
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalCategories['nombreComments'];
+				echo $totalStatistiques->getNb_films_comments_total();
 			echo '</td>';
 
 			echo '<td class="td_manage_users">';
-				echo $totalCategories['nombreCollector'];
+				echo $totalStatistiques->getNb_collectors_total();
 			echo '</td>';
 
 			echo '<td class="td_manage_users_important td_manage_users_7">';
 				echo 'Bilan';
 			echo '</td>';
 
-			if ($totalCategories['alerteBilan'] == true)
+			if ($totalStatistiques->getAlerte_expenses() == true)
 				echo '<td class="td_manage_users_red td_manage_users_7">';
 			else
 				echo '<td class="td_manage_users td_manage_users_7">';
-					echo formatAmountForDisplay($totalCategories['sommeBilans']);
+					echo formatAmountForDisplay($totalStatistiques->getExpenses_total());
 				echo '</td>';
 
 			echo '<td class="td_manage_users_important td_manage_users_7">';
@@ -168,7 +168,7 @@
 
 			// Alerte si un utilisateur désinscrit n'a pas payé
 			echo '<td class="td_manage_users td_manage_users_7">';
-				if ($totalCategories['alerteBilan'] == true)
+				if ($totalStatistiques->getAlerte_expenses() == true)
 					echo '<span class="reset_warning">!</span>';
 			echo '</td>';
 		echo '</tr>';

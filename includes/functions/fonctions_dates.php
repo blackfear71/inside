@@ -132,6 +132,32 @@
     return $monthFormat;
   }
 
+  // DATE : Formate un mois pour affichage (strong)
+  // RETOUR : Mois formaté
+  function formatMonthForDisplayStrong($month)
+  {
+    // Liste des mois
+    $listeMois = array('01' => 'JANVIER',
+                       '02' => 'FÉVRIER',
+                       '03' => 'MARS',
+                       '04' => 'AVRIL',
+                       '05' => 'MAI',
+                       '06' => 'JUIN',
+                       '07' => 'JUILLET',
+                       '08' => 'AOÛT',
+                       '09' => 'SEPTEMBRE',
+                       '10' => 'OCTOBRE',
+                       '11' => 'NOVEMBRE',
+                       '12' => 'DÉCEMBRE'
+                      );
+
+    // Récupération du mois
+    $monthFormat = $listeMois[$month];
+
+    // Retour
+    return $monthFormat;
+  }
+
   // DATE : Formate une date pour insertion en base (JJ/MM/AAAA -> AAAAMMJJ)
   // RETOUR : Date formaté
   function formatDateForInsert($date)

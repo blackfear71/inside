@@ -38,7 +38,7 @@
     while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Idea à partir des données remontées de la bdd
-      $bug = Bugs::withData($donnees);
+      $bug = BugEvolution::withData($donnees);
 
       // Recherche du pseudo et de l'avatar de l'auteur
       $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $bug->getAuthor() . '"');

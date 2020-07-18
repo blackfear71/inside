@@ -5,18 +5,18 @@
     echo '<div class="zone_autorisations">';
       foreach ($listeAutorisations as $autorisation)
       {
-        if ($autorisation['manage_calendars'] == 'Y')
+        if ($autorisation->getManage_calendars() == 'Y')
         {
-          echo '<div id="bouton_autorisation_' . $autorisation['identifiant'] . '" class="switch_autorisation switch_checked">';
-            echo '<input id="autorisation_' . $autorisation['identifiant'] . '" type="checkbox" name="autorization[' . $autorisation['identifiant'] . ']" checked />';
-            echo '<label for="autorisation_' . $autorisation['identifiant'] . '" class="label_switch">' . $autorisation['pseudo'] . '</label>';
+          echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_autorisation switch_checked">';
+            echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" checked />';
+            echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . $autorisation->getPseudo() . '</label>';
           echo '</div>';
         }
         else
         {
-          echo '<div id="bouton_autorisation_' . $autorisation['identifiant'] . '" class="switch_autorisation">';
-            echo '<input id="autorisation_' . $autorisation['identifiant'] . '" type="checkbox" name="autorization[' . $autorisation['identifiant'] . ']" />';
-            echo '<label for="autorisation_' . $autorisation['identifiant'] . '" class="label_switch">' . $autorisation['pseudo'] . '</label>';
+          echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_autorisation">';
+            echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" />';
+            echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . $autorisation->getPseudo() . '</label>';
           echo '</div>';
         }
       }

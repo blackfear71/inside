@@ -51,20 +51,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      $generatorParameters->setNom_section(htmlspecialchars($generatorParameters->getNom_section()));
-      $generatorParameters->setNom_technique(htmlspecialchars($generatorParameters->getNom_technique()));
-      $generatorParameters->setStyle_specifique(htmlspecialchars($generatorParameters->getStyle_specifique()));
-      $generatorParameters->setScript_specifique(htmlspecialchars($generatorParameters->getScript_specifique()));
-
-      foreach ($generatorParameters->getOptions() as &$generatorOption)
-      {
-        $generatorOption->setOption(htmlspecialchars($generatorOption->getOption()));
-        $generatorOption->setChecked(htmlspecialchars($generatorOption->getChecked()));
-        $generatorOption->setTitre(htmlspecialchars($generatorOption->getTitre()));
-        $generatorOption->setCategorie(htmlspecialchars($generatorOption->getCategorie()));
-      }
-
-      unset($generatorOption);
+      GeneratorParameters::secureData($generatorParameters);
 
       if (isset($controler))
         $controler['content'] = htmlspecialchars($controler['content']);

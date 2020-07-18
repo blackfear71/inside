@@ -29,11 +29,11 @@
       $alerteAnnexes   = getAlerteAnnexes();
 
       // Récupération du nombre de bugs et évolutions
-			$nombreBugs      = getNombreBugs();
-			$nombreEvols     = getNombreEvols();
+			$nombreBugs  = getNombreBugs();
+			$nombreEvols = getNombreEvols();
 
       // Création du portail administrateur
-      $portail         = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
+      $portail = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
       break;
 
     default:

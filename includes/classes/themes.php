@@ -60,6 +60,18 @@
         $this->date_fin  = $data['date_fin'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setReference(htmlspecialchars($data->getReference()));
+      $data->setName(htmlspecialchars($data->getName()));
+      $data->setType(htmlspecialchars($data->getType()));
+      $data->setLevel(htmlspecialchars($data->getLevel()));
+      $data->setLogo(htmlspecialchars($data->getLogo()));
+      $data->setDate_deb(htmlspecialchars($data->getDate_deb()));
+      $data->setDate_fin(htmlspecialchars($data->getDate_fin()));
+    }
+
     // getters et setters pour l'objet Theme
     // id
     public function setId($id)

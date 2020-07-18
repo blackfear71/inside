@@ -46,23 +46,10 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeUsers as &$user)
+			foreach ($listeUsers as $user)
 			{
-        $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
-				$user->setPing(htmlspecialchars($user->getPing()));
-				$user->setStatus(htmlspecialchars($user->getStatus()));
-				$user->setPseudo(htmlspecialchars($user->getPseudo()));
-				$user->setAvatar(htmlspecialchars($user->getAvatar()));
-        $user->setEmail(htmlspecialchars($user->getEmail()));
-        $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
-        $user->setExperience(htmlspecialchars($user->getExperience()));
-        $user->setLevel(htmlspecialchars($user->getLevel()));
-        $user->setExpenses(htmlspecialchars($user->getExpenses()));
-        $user->setBeginner(htmlspecialchars($user->getBeginner()));
-        $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
+        Profile::secureData($user);
 			}
-
-      unset($user);
       break;
 
     case 'changeBeginnerStatus':

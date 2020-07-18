@@ -45,6 +45,30 @@
         $this->logs  = $data['logs'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setWeek(htmlspecialchars($data->getWeek()));
+      $data->setYear(htmlspecialchars($data->getYear()));
+      $data->setNotes(htmlspecialchars($data->getNotes()));
+
+      $listeLogs = $data->getLogs();
+
+      foreach ($listeLogs as &$logsCategorie)
+      {
+        foreach ($logsCategorie as &$logCategorie)
+        {
+          $logCategorie = htmlspecialchars($logCategorie);
+        }
+
+        unset($logCategorie);
+      }
+
+      unset($logsCategorie);
+
+      $data->setLogs($listeLogs);
+    }
+
     // getters et setters pour l'objet ChangeLog
     // id
     public function setId($id)
@@ -114,6 +138,14 @@
       $this->action = '';
       $this->year   = '';
       $this->week   = '';
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setAction(htmlspecialchars($data->getAction()));
+      $data->setYear(htmlspecialchars($data->getYear()));
+      $data->setWeek(htmlspecialchars($data->getWeek()));
     }
 
     // getters et setters pour l'objet ChangeLogParameters

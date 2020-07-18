@@ -51,6 +51,16 @@
         $this->calendar  = $data['calendar'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
+      $data->setMonth(htmlspecialchars($data->getMonth()));
+      $data->setYear(htmlspecialchars($data->getYear()));
+      $data->setCalendar(htmlspecialchars($data->getCalendar()));
+      $data->setTitle(htmlspecialchars($data->getTitle()));
+    }
+
     // getters et setters pour l'objet Calendrier
     // id
     public function setId($id)
@@ -96,17 +106,6 @@
       return $this->year;
     }
 
-    // Titre
-    public function setTitle($title)
-    {
-      $this->title = $title;
-    }
-
-    public function getTitle()
-    {
-      return $this->title;
-    }
-
     // Calendrier
     public function setCalendar($calendar)
     {
@@ -118,26 +117,15 @@
       return $this->calendar;
     }
 
-    // Largeur calendrier
-    public function setWidth($width)
+    // Titre
+    public function setTitle($title)
     {
-      $this->width = $width;
+      $this->title = $title;
     }
 
-    public function getWidth()
+    public function getTitle()
     {
-      return $this->width;
-    }
-
-    // Hauteur calendrier
-    public function setHeight($height)
-    {
-      $this->height = $height;
-    }
-
-    public function getHeight()
-    {
-      return $this->height;
+      return $this->title;
     }
   }
 
@@ -180,6 +168,14 @@
 
       if (isset($data['title']))
         $this->title     = $data['title'];
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
+      $data->setAnnexe(htmlspecialchars($data->getAnnexe()));
+      $data->setTitle(htmlspecialchars($data->getTitle()));
     }
 
     // getters et setters pour l'objet Annexe
@@ -225,6 +221,82 @@
     public function getTitle()
     {
       return $this->title;
+    }
+  }
+
+  class AutorisationCalendriers
+  {
+    private $identifiant;
+    private $pseudo;
+    private $manage_calendars;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->identifiant      = '';
+      $this->pseudo           = '';
+      $this->manage_calendars = '';
+    }
+
+    // Constructeur de l'objet AutorisationCalendriers en fonction des données
+    // -> il faut passer une variable $data contenant le résultat de la requête fetch
+    public static function withData($data)
+    {
+      $autorisation = new self();
+      $autorisation->fill($data);
+
+      return $autorisation;
+    }
+
+    protected function fill ($data)
+    {
+      if (isset($data['identifiant']))
+        $this->identifiant      = $data['identifiant'];
+
+      if (isset($data['manage_calendars']))
+        $this->manage_calendars = $data['manage_calendars'];
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setManage_calendars(htmlspecialchars($data->getManage_calendars()));
+    }
+
+    // getters et setters pour l'objet AutorisationCalendriers
+    // Identifiant
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Pseudo
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Autorisation gestion calendriers
+    public function setManage_calendars($manage_calendars)
+    {
+      $this->manage_calendars = $manage_calendars;
+    }
+
+    public function getManage_calendars()
+    {
+      return $this->manage_calendars;
     }
   }
 ?>

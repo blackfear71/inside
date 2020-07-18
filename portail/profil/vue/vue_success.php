@@ -42,9 +42,9 @@
           {
             foreach ($success->getClassement() as $classement)
             {
-              if ($classement['identifiant'] == $_SESSION['user']['identifiant'])
+              if ($classement->getIdentifiant() == $_SESSION['user']['identifiant'])
               {
-                switch ($classement['rank'])
+                switch ($classement->getRank())
                 {
                   case 1:
                     echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal" />';

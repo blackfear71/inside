@@ -95,57 +95,23 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeMissions as &$mission)
+      foreach ($listeMissions as $mission)
       {
-        $mission->setMission(htmlspecialchars($mission->getMission()));
-        $mission->setReference(htmlspecialchars($mission->getReference()));
-        $mission->setDate_deb(htmlspecialchars($mission->getDate_deb()));
-        $mission->setDate_fin(htmlspecialchars($mission->getDate_fin()));
-        $mission->setHeure(htmlspecialchars($mission->getHeure()));
-        $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
-        $mission->setDescription(htmlspecialchars($mission->getDescription()));
-        $mission->setExplications(htmlspecialchars($mission->getExplications()));
-        $mission->setConclusion(htmlspecialchars($mission->getConclusion()));
-        $mission->setStatut(htmlspecialchars($mission->getStatut()));
+        Mission::secureData($mission);
       }
-
-      unset($mission);
       break;
 
     case 'goModifier':
-      $detailsMission->setMission(htmlspecialchars($detailsMission->getMission()));
-      $detailsMission->setReference(htmlspecialchars($detailsMission->getReference()));
-      $detailsMission->setDate_deb(htmlspecialchars($detailsMission->getDate_deb()));
-      $detailsMission->setDate_fin(htmlspecialchars($detailsMission->getDate_fin()));
-      $detailsMission->setHeure(htmlspecialchars($detailsMission->getHeure()));
-      $detailsMission->setObjectif(htmlspecialchars($detailsMission->getObjectif()));
-      $detailsMission->setDescription(htmlspecialchars($detailsMission->getDescription()));
-      $detailsMission->setExplications(htmlspecialchars($detailsMission->getExplications()));
-      $detailsMission->setConclusion(htmlspecialchars($detailsMission->getConclusion()));
-      $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
+      Mission::secureData($detailsMission);
 
-      foreach ($participants as &$participant)
+      foreach ($participants as $participant)
       {
-        $participant['identifiant'] = htmlspecialchars($participant['identifiant']);
-        $participant['pseudo']      = htmlspecialchars($participant['pseudo']);
-        $participant['total']       = htmlspecialchars($participant['total']);
-        $participant['rank']        = htmlspecialchars($participant['rank']);
+        ParticipantMission::secureData($participant);
       }
-
-      unset($participant);
       break;
 
     case 'goAjouter':
-      $detailsMission->setMission(htmlspecialchars($detailsMission->getMission()));
-      $detailsMission->setReference(htmlspecialchars($detailsMission->getReference()));
-      $detailsMission->setDate_deb(htmlspecialchars($detailsMission->getDate_deb()));
-      $detailsMission->setDate_fin(htmlspecialchars($detailsMission->getDate_fin()));
-      $detailsMission->setHeure(htmlspecialchars($detailsMission->getHeure()));
-      $detailsMission->setObjectif(htmlspecialchars($detailsMission->getObjectif()));
-      $detailsMission->setDescription(htmlspecialchars($detailsMission->getDescription()));
-      $detailsMission->setExplications(htmlspecialchars($detailsMission->getExplications()));
-      $detailsMission->setConclusion(htmlspecialchars($detailsMission->getConclusion()));
-      $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
+      Mission::secureData($detailsMission);
       break;
 
     case 'doAjouter':

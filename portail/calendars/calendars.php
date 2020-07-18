@@ -13,6 +13,7 @@
 
   // Fonction communes
   include_once('../../includes/functions/metier_commun.php');
+  include_once('../../includes/functions/fonctions_dates.php');
 
   // Contrôles communs Utilisateur
   controlsUser();
@@ -83,8 +84,6 @@
         $calendrier->setYear(htmlspecialchars($calendrier->getYear()));
         $calendrier->setTitle(htmlspecialchars($calendrier->getTitle()));
         $calendrier->setCalendar(htmlspecialchars($calendrier->getCalendar()));
-        $calendrier->setWidth(htmlspecialchars($calendrier->getWidth()));
-        $calendrier->setHeight(htmlspecialchars($calendrier->getHeight()));
       }
 
       unset($calendrier);

@@ -45,6 +45,15 @@
         $this->message  = $data['message'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setCategory(htmlspecialchars($data->getCategory()));
+      $data->setType(htmlspecialchars($data->getType()));
+      $data->setAlert(htmlspecialchars($data->getAlert()));
+      $data->setMessage(htmlspecialchars($data->getMessage()));
+    }
+
     // getters et setters pour l'objet ALerte
     // id
     public function setId($id)

@@ -116,42 +116,38 @@
     if (!empty($listeUsers))
     {
       // Récupération des données complémentaires des participants
-      foreach ($listeUsers as &$user)
+      foreach ($listeUsers as $user)
       {
         // Pseudo
-        $user['pseudo'] = physiquePseudoUser($user['identifiant']);
+        $user->setPseudo(physiquePseudoUser($user->getIdentifiant()));
 
         // Total de la mission
-        $user['total'] = physiqueTotalUser($idMission, $user['identifiant']);
+        $user->setTotal(physiqueTotalUser($idMission, $user->getIdentifiant()));
 
         // Récupération du tri sur avancement puis identifiant
-        $triTotal[]       = $user['total'];
-        $triIdentifiant[] = $user['identifiant'];
+        $triTotal[]       = $user->getTotal();
+        $triIdentifiant[] = $user->getIdentifiant();
       }
-
-      unset($user);
 
       // Tri
       array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
 
       // Affectation du rang
-      $prevTotal   = $listeUsers[0]['total'];
+      $prevTotal   = $listeUsers[0]->getTotal();
       $currentRank = 1;
 
-      foreach ($listeUsers as &$user)
+      foreach ($listeUsers as $user)
       {
-        $currentTotal = $user['total'];
+        $currentTotal = $user->getTotal();
 
         if ($currentTotal != $prevTotal)
         {
           $currentRank += 1;
-          $prevTotal    = $user['total'];
+          $prevTotal    = $user->getTotal();
         }
 
-        $user['rank'] = $currentRank;
+        $user->setRank($currentRank);
       }
-
-      unset($user);
     }
 
     // Retour

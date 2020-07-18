@@ -78,6 +78,24 @@
         $this->expenses    = $data['expenses'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPing(htmlspecialchars($data->getPing()));
+      $data->setConnected(htmlspecialchars($data->getConnected()));
+      $data->setStatus(htmlspecialchars($data->getStatus()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setEmail(htmlspecialchars($data->getEmail()));
+      $data->setAnniversary(htmlspecialchars($data->getAnniversary()));
+      $data->setExperience(htmlspecialchars($data->getExperience()));
+      $data->setLevel(htmlspecialchars($data->getLevel()));
+      $data->setExpenses(htmlspecialchars($data->getExpenses()));
+      $data->setBeginner(htmlspecialchars($data->getBeginner()));
+      $data->setDevelopper(htmlspecialchars($data->getDevelopper()));
+    }
+
     // getters et setters pour l'objet Profile
     // id
     public function setId($id)
@@ -234,7 +252,7 @@
     }
   }
 
-  class Statistiques
+  class StatistiquesProfil
   {
     private $nb_films_ajoutes;
     private $nb_comments;
@@ -262,7 +280,7 @@
       $this->nb_evolutions    = 0;
     }
 
-    // Constructeur de l'objet Statistiques en fonction des données
+    // Constructeur de l'objet StatistiquesProfil en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -305,7 +323,7 @@
         $this->nb_evolutions    = $data['nb_evolutions'];
     }
 
-    // getters et setters pour l'objet Statistiques
+    // getters et setters pour l'objet StatistiquesProfil
     // Nombre de films ajoutés Movie House
     public function setNb_films_ajoutes($nb_films_ajoutes)
     {
@@ -581,6 +599,329 @@
     public function getManage_calendars()
     {
       return $this->manage_calendars;
+    }
+  }
+
+  class StatistiquesAdmin
+  {
+    private $identifiant;
+    private $pseudo;
+    private $nb_films_ajoutes;
+    private $nb_films_comments;
+    private $nb_collectors;
+    private $expenses;
+    private $nb_bugs_soumis;
+    private $nb_bugs_resolus;
+    private $nb_idees_soumises;
+    private $nb_idees_en_charge;
+    private $nb_idees_terminees;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->identifiant        = '';
+      $this->pseudo             = '';
+      $this->nb_films_ajoutes   = 0;
+      $this->nb_films_comments  = 0;
+      $this->nb_collectors      = 0;
+      $this->expenses           = 0;
+      $this->nb_bugs_soumis     = 0;
+      $this->nb_bugs_resolus    = 0;
+      $this->nb_idees_soumises  = 0;
+      $this->nb_idees_en_charge = 0;
+      $this->nb_idees_terminees = 0;
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setNb_films_ajoutes(htmlspecialchars($data->getNb_films_ajoutes()));
+      $data->setNb_films_comments(htmlspecialchars($data->getNb_films_comments()));
+      $data->setNb_collectors(htmlspecialchars($data->getNb_collectors()));
+      $data->setExpenses(htmlspecialchars($data->getExpenses()));
+      $data->setNb_bugs_soumis(htmlspecialchars($data->getNb_bugs_soumis()));
+      $data->setNb_bugs_resolus(htmlspecialchars($data->getNb_bugs_resolus()));
+      $data->setNb_idees_soumises(htmlspecialchars($data->getNb_idees_soumises()));
+      $data->setNb_idees_en_charge(htmlspecialchars($data->getNb_idees_en_charge()));
+      $data->setNb_idees_terminees(htmlspecialchars($data->getNb_idees_terminees()));
+    }
+
+    // getters et setters pour l'objet StatistiquesAdmin
+    // Identifiant
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Pseudo
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Nombre de films ajoutés Movie House
+    public function setNb_films_ajoutes($nb_films_ajoutes)
+    {
+      $this->nb_films_ajoutes = $nb_films_ajoutes;
+    }
+
+    public function getNb_films_ajoutes()
+    {
+      return $this->nb_films_ajoutes;
+    }
+
+    // Nombre de commentaires Movie House
+    public function setNb_films_comments($nb_films_comments)
+    {
+      $this->nb_films_comments = $nb_films_comments;
+    }
+
+    public function getNb_films_comments()
+    {
+      return $this->nb_films_comments;
+    }
+
+    // Nombre de phrases cultes ajoutées
+    public function setNb_collectors($nb_collectors)
+    {
+      $this->nb_collectors = $nb_collectors;
+    }
+
+    public function getNb_collectors()
+    {
+      return $this->nb_collectors;
+    }
+
+    // Bilan des dépenses
+    public function setExpenses($expenses)
+    {
+      $this->expenses = $expenses;
+    }
+
+    public function getExpenses()
+    {
+      return $this->expenses;
+    }
+
+    // Nombre de bugs soumis
+    public function setNb_bugs_soumis($nb_bugs_soumis)
+    {
+      $this->nb_bugs_soumis = $nb_bugs_soumis;
+    }
+
+    public function getNb_bugs_soumis()
+    {
+      return $this->nb_bugs_soumis;
+    }
+
+    // Nombre de bugs résolus
+    public function setNb_bugs_resolus($nb_bugs_resolus)
+    {
+      $this->nb_bugs_resolus = $nb_bugs_resolus;
+    }
+
+    public function getNb_bugs_resolus()
+    {
+      return $this->nb_bugs_resolus;
+    }
+
+    // Nombre d'idées soumises
+    public function setNb_idees_soumises($nb_idees_soumises)
+    {
+      $this->nb_idees_soumises = $nb_idees_soumises;
+    }
+
+    public function getNb_idees_soumises()
+    {
+      return $this->nb_idees_soumises;
+    }
+
+    // Nombre d'idées en charge
+    public function setNb_idees_en_charge($nb_idees_en_charge)
+    {
+      $this->nb_idees_en_charge = $nb_idees_en_charge;
+    }
+
+    public function getNb_idees_en_charge()
+    {
+      return $this->nb_idees_en_charge;
+    }
+
+    // Nombre d'idées en charge
+    public function setNb_idees_terminees($nb_idees_terminees)
+    {
+      $this->nb_idees_terminees = $nb_idees_terminees;
+    }
+
+    public function getNb_idees_terminees()
+    {
+      return $this->nb_idees_terminees;
+    }
+  }
+
+  class TotalStatistiquesAdmin
+  {
+    private $nb_films_ajoutes_total;
+    private $nb_films_comments_total;
+    private $nb_collectors_total;
+    private $expenses_total;
+    private $alerte_expenses;
+    private $nb_bugs_soumis_total;
+    private $nb_bugs_resolus_total;
+    private $nb_idees_soumises_total;
+    private $nb_idees_en_charge_total;
+    private $nb_idees_terminees_total;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->nb_films_ajoutes_total   = 0;
+      $this->nb_films_comments_total  = 0;
+      $this->nb_collectors_total      = 0;
+      $this->expenses_total           = 0;
+      $this->alerte_expenses          = false;
+      $this->nb_bugs_soumis_total     = 0;
+      $this->nb_bugs_resolus_total    = 0;
+      $this->nb_idees_soumises_total  = 0;
+      $this->nb_idees_en_charge_total = 0;
+      $this->nb_idees_terminees_total = 0;
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setNb_films_ajoutes_total(htmlspecialchars($data->getNb_films_ajoutes_total()));
+      $data->setNb_films_comments_total(htmlspecialchars($data->getNb_films_comments_total()));
+      $data->setNb_collectors_total(htmlspecialchars($data->getNb_collectors_total()));
+      $data->setExpenses_total(htmlspecialchars($data->getExpenses_total()));
+      $data->setNb_bugs_soumis_total(htmlspecialchars($data->getNb_bugs_soumis_total()));
+      $data->setNb_bugs_resolus_total(htmlspecialchars($data->getNb_bugs_resolus_total()));
+      $data->setNb_idees_soumises_total(htmlspecialchars($data->getNb_idees_soumises_total()));
+      $data->setNb_idees_en_charge_total(htmlspecialchars($data->getNb_idees_en_charge_total()));
+      $data->setNb_idees_terminees_total(htmlspecialchars($data->getNb_idees_terminees_total()));
+    }
+
+    // getters et setters pour l'objet StatistiquesAdmin
+    // Nombre de films ajoutés Movie House
+    public function setNb_films_ajoutes_total($nb_films_ajoutes_total)
+    {
+      $this->nb_films_ajoutes_total = $nb_films_ajoutes_total;
+    }
+
+    public function getNb_films_ajoutes_total()
+    {
+      return $this->nb_films_ajoutes_total;
+    }
+
+    // Nombre de commentaires Movie House
+    public function setNb_films_comments_total($nb_films_comments_total)
+    {
+      $this->nb_films_comments_total = $nb_films_comments_total;
+    }
+
+    public function getNb_films_comments_total()
+    {
+      return $this->nb_films_comments_total;
+    }
+
+    // Nombre de phrases cultes ajoutées
+    public function setNb_collectors_total($nb_collectors_total)
+    {
+      $this->nb_collectors_total = $nb_collectors_total;
+    }
+
+    public function getNb_collectors_total()
+    {
+      return $this->nb_collectors_total;
+    }
+
+    // Bilan des dépenses
+    public function setExpenses_total($expenses_total)
+    {
+      $this->expenses_total = $expenses_total;
+    }
+
+    public function getExpenses_total()
+    {
+      return $this->expenses_total;
+    }
+
+    // Alerte bilan
+    public function setAlerte_expenses($alerte_expenses)
+    {
+      $this->alerte_expenses = $alerte_expenses;
+    }
+
+    public function getAlerte_expenses()
+    {
+      return $this->alerte_expenses;
+    }
+
+    // Nombre de bugs soumis
+    public function setNb_bugs_soumis_total($nb_bugs_soumis_total)
+    {
+      $this->nb_bugs_soumis_total = $nb_bugs_soumis_total;
+    }
+
+    public function getNb_bugs_soumis_total()
+    {
+      return $this->nb_bugs_soumis_total;
+    }
+
+    // Nombre de bugs résolus
+    public function setNb_bugs_resolus_total($nb_bugs_resolus_total)
+    {
+      $this->nb_bugs_resolus_total = $nb_bugs_resolus_total;
+    }
+
+    public function getNb_bugs_resolus_total()
+    {
+      return $this->nb_bugs_resolus_total;
+    }
+
+    // Nombre d'idées soumises
+    public function setNb_idees_soumises_total($nb_idees_soumises_total)
+    {
+      $this->nb_idees_soumises_total = $nb_idees_soumises_total;
+    }
+
+    public function getNb_idees_soumises_total()
+    {
+      return $this->nb_idees_soumises_total;
+    }
+
+    // Nombre d'idées en charge
+    public function setNb_idees_en_charge_total($nb_idees_en_charge_total)
+    {
+      $this->nb_idees_en_charge_total = $nb_idees_en_charge_total;
+    }
+
+    public function getNb_idees_en_charge_total()
+    {
+      return $this->nb_idees_en_charge_total;
+    }
+
+    // Nombre d'idées en charge
+    public function setNb_idees_terminees_total($nb_idees_terminees_total)
+    {
+      $this->nb_idees_terminees_total = $nb_idees_terminees_total;
+    }
+
+    public function getNb_idees_terminees_total()
+    {
+      return $this->nb_idees_terminees_total;
     }
   }
 ?>

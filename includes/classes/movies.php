@@ -145,6 +145,35 @@
         $this->average         = $data['average'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setFilm(htmlspecialchars($data->getFilm()));
+      $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
+      $data->setDate_add(htmlspecialchars($data->getDate_add()));
+      $data->setIdentifiant_add(htmlspecialchars($data->getIdentifiant_add()));
+      $data->setPseudo_add(htmlspecialchars($data->getPseudo_add()));
+      $data->setIdentifiant_del(htmlspecialchars($data->getIdentifiant_del()));
+      $data->setPseudo_del(htmlspecialchars($data->getPseudo_del()));
+      $data->setSynopsis(htmlspecialchars($data->getSynopsis()));
+      $data->setDate_theater(htmlspecialchars($data->getDate_theater()));
+      $data->setDate_release(htmlspecialchars($data->getDate_release()));
+      $data->setLink(htmlspecialchars($data->getLink()));
+      $data->setPoster(htmlspecialchars($data->getPoster()));
+      $data->setTrailer(htmlspecialchars($data->getTrailer()));
+      $data->setId_url(htmlspecialchars($data->getId_url()));
+      $data->setDoodle(htmlspecialchars($data->getDoodle()));
+      $data->setDate_doodle(htmlspecialchars($data->getDate_doodle()));
+      $data->setTime_doodle(htmlspecialchars($data->getTime_doodle()));
+      $data->setRestaurant(htmlspecialchars($data->getRestaurant()));
+      $data->setPlace(htmlspecialchars($data->getPlace()));
+      $data->setNb_comments(htmlspecialchars($data->getNb_comments()));
+      $data->setStars_user(htmlspecialchars($data->getStars_user()));
+      $data->setParticipation(htmlspecialchars($data->getParticipation()));
+      $data->setNb_users(htmlspecialchars($data->getNb_users()));
+      $data->setAverage(htmlspecialchars($data->getAverage()));
+    }
+
     // getters et setters pour l'objet Movie
     // id
     public function setId($id)

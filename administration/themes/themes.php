@@ -59,36 +59,14 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      if (!empty($themesUsers))
+      foreach ($themesUsers as $themeUsers)
       {
-        foreach ($themesUsers as &$themeUsers)
-        {
-          $themeUsers->setReference(htmlspecialchars($themeUsers->getReference()));
-          $themeUsers->setName(htmlspecialchars($themeUsers->getName()));
-          $themeUsers->setType(htmlspecialchars($themeUsers->getType()));
-          $themeUsers->setLevel(htmlspecialchars($themeUsers->getLevel()));
-          $themeUsers->setLogo(htmlspecialchars($themeUsers->getLogo()));
-          $themeUsers->setDate_deb(htmlspecialchars($themeUsers->getDate_deb()));
-          $themeUsers->setDate_fin(htmlspecialchars($themeUsers->getDate_fin()));
-        }
-
-        unset($themeUsers);
+        Theme::secureData($themeUsers);
       }
 
-      if (!empty($themesMissions))
+      foreach ($themesMissions as $themeMission)
       {
-        foreach ($themesMissions as &$themeMission)
-        {
-          $themeMission->setReference(htmlspecialchars($themeMission->getReference()));
-          $themeMission->setName(htmlspecialchars($themeMission->getName()));
-          $themeMission->setType(htmlspecialchars($themeMission->getType()));
-          $themeMission->setLevel(htmlspecialchars($themeMission->getLevel()));
-          $themeMission->setLogo(htmlspecialchars($themeMission->getLogo()));
-          $themeMission->setDate_deb(htmlspecialchars($themeMission->getDate_deb()));
-          $themeMission->setDate_fin(htmlspecialchars($themeMission->getDate_fin()));
-        }
-
-        unset($themeMission);
+        Theme::secureData($themeMission);
       }
       break;
 

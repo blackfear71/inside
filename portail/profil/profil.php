@@ -117,34 +117,10 @@
       {
         case 'success':
         case 'ranking':
-          foreach ($listeSuccess as &$success)
+          foreach ($listeSuccess as $success)
           {
-            $success->setReference(htmlspecialchars($success->getReference()));
-            $success->setLevel(htmlspecialchars($success->getLevel()));
-            $success->setOrder_success(htmlspecialchars($success->getOrder_success()));
-            $success->setDefined(htmlspecialchars($success->getDefined()));
-            $success->setUnicity(htmlspecialchars($success->getUnicity()));
-            $success->setTitle(htmlspecialchars($success->getTitle()));
-            $success->setDescription(htmlspecialchars($success->getDescription()));
-            $success->setLimit_success(htmlspecialchars($success->getLimit_success()));
-            $success->setExplanation(htmlspecialchars($success->getExplanation()));
-            $success->setValue_user(htmlspecialchars($success->getValue_user()));
-
-            if (!empty($success->getClassement()))
-            {
-              foreach ($success->getClassement() as &$classement)
-              {
-                $classement['identifiant'] = htmlspecialchars($classement['identifiant']);
-                $classement['pseudo']      = htmlspecialchars($classement['pseudo']);
-                $classement['avatar']      = htmlspecialchars($classement['avatar']);
-                $classement['value']       = htmlspecialchars($classement['value']);
-              }
-
-              unset($classement);
-            }
+            Success::secureData($success);
           }
-
-          unset($success);
 
           if ($_GET['view'] == 'ranking')
           {

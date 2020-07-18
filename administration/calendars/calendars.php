@@ -74,33 +74,20 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeSuppression as &$calendar)
-			{
-        $calendar->setTo_delete(htmlspecialchars($calendar->getTo_delete()));
-        $calendar->setMonth(htmlspecialchars($calendar->getMonth()));
-        $calendar->setYear(htmlspecialchars($calendar->getYear()));
-				$calendar->setCalendar(htmlspecialchars($calendar->getCalendar()));
-			}
-
-      unset($calendar);
-
-      foreach ($listeSuppressionAnnexes as &$annexe)
-			{
-				$annexe->setTo_delete(htmlspecialchars($annexe->getTo_delete()));
-        $annexe->setAnnexe(htmlspecialchars($annexe->getAnnexe()));
-        $annexe->setTitle(htmlspecialchars($annexe->getTitle()));
-			}
-
-      unset($annexe);
-
-      foreach ($listeAutorisations as &$autorisation)
+      foreach ($listeAutorisations as $autorisation)
       {
-        $autorisation['identifiant']      = htmlspecialchars($autorisation['identifiant']);
-        $autorisation['pseudo']           = htmlspecialchars($autorisation['pseudo']);
-        $autorisation['manage_calendars'] = htmlspecialchars($autorisation['manage_calendars']);
+        AutorisationCalendriers::secureData($autorisation);
       }
 
-      unset($preference);
+			foreach ($listeSuppression as $calendar)
+			{
+        Calendrier::secureData($calendar);
+			}
+
+      foreach ($listeSuppressionAnnexes as $annexe)
+			{
+        Annexe::secureData($annexe);
+			}
       break;
 
     case 'doUpdateAutorisations':

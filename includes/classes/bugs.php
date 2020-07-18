@@ -1,5 +1,5 @@
 <?php
-  class Bugs
+  class BugEvolution
   {
     private $id;
     private $subject;
@@ -27,7 +27,7 @@
       $this->resolved = '';
     }
 
-    // Constructeur de l'objet Bugs en fonction des données
+    // Constructeur de l'objet BugEvolution en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -70,7 +70,21 @@
         $this->resolved = $data['resolved'];
     }
 
-    // getters et setters pour l'objet Bugs
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setSubject(htmlspecialchars($data->getSubject()));
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setAuthor(htmlspecialchars($data->getAuthor()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setContent(htmlspecialchars($data->getContent()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+      $data->getType(htmlspecialchars($data->getType()));
+      $data->getResolved(htmlspecialchars($data->getResolved()));
+    }
+
+    // getters et setters pour l'objet BugEvolution
     // id
     public function setId($id)
     {

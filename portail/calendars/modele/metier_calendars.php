@@ -49,32 +49,13 @@
   {
     $listeCalendriers = array();
 
-    $listeMois = array('01' => 'Janvier',
-                       '02' => 'Fevrier',
-                       '03' => 'Mars',
-                       '04' => 'Avril',
-                       '05' => 'Mai',
-                       '06' => 'Juin',
-                       '07' => 'Juillet',
-                       '08' => 'Aout',
-                       '09' => 'Septembre',
-                       '10' => 'Octobre',
-                       '11' => 'Novembre',
-                       '12' => 'Decembre'
-                      );
-
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM calendars WHERE year = ' . $year . ' AND to_delete != "Y" ORDER BY month DESC, id DESC');
     while ($donnees = $reponse->fetch())
     {
       $calendrier = Calendrier::withData($donnees);
-
-      $fileinfo = getimagesize('../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar());
-
-      $calendrier->setTitle(strtoupper($listeMois[$calendrier->getMonth()]));
-      $calendrier->setWidth($fileinfo[0]);
-      $calendrier->setHeight($fileinfo[1]);
+      $calendrier->setTitle(formatMonthForDisplayStrong($calendrier->getMonth())) ;
 
       array_push($listeCalendriers, $calendrier);
     }

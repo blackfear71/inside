@@ -279,8 +279,8 @@
         foreach ($participants as $participant)
         {
           echo '<div class="classement_user">';
-            echo '<div class="pseudo_classement">' . $participant['rank'] . '. ' . $participant['pseudo'] . '</div>';
-            echo '<div class="total_classement">' . $participant['total'] . '</div>';
+            echo '<div class="pseudo_classement">' . $participant->getRank() . '. ' . formatUnknownUser($participant->getPseudo(), true, false) . '</div>';
+            echo '<div class="total_classement">' . $participant->getTotal() . '</div>';
           echo '</div>';
         }
       }

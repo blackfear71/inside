@@ -87,28 +87,10 @@
 
       unset($categorie);
 
-      $changeLogParameters->setAction(htmlspecialchars($changeLogParameters->getAction()));
-      $changeLogParameters->setYear(htmlspecialchars($changeLogParameters->getYear()));
-      $changeLogParameters->setWeek(htmlspecialchars($changeLogParameters->getWeek()));
+      ChangeLogParameters::secureData($changeLogParameters);
 
       if (isset($changeLog))
-      {
-        $changeLog->setWeek(htmlspecialchars($changeLog->getWeek()));
-        $changeLog->setYear(htmlspecialchars($changeLog->getYear()));
-        $changeLog->setNotes(htmlspecialchars($changeLog->getNotes()));
-
-        foreach ($changeLog->getLogs() as &$logsCategorie)
-        {
-          foreach ($logsCategorie as &$logCategorie)
-          {
-            $logCategorie = htmlspecialchars($logCategorie);
-          }
-
-          unset($logCategorie);
-        }
-
-        unset($logCategorie);
-      }
+        ChangeLog::secureData($changeLog);
 
       // Conversion JSON
       $categoriesChangeLogJson = json_encode($categoriesChangeLog);

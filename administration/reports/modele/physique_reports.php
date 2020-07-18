@@ -33,7 +33,7 @@
     while ($data = $req->fetch())
     {
       // Instanciation d'un objet Bugs à partir des données remontées de la bdd
-      $rapport = Bugs::withData($data);
+      $rapport = BugEvolution::withData($data);
 
       // On ajoute la ligne au tableau
       array_push($rapports, $rapport);
@@ -81,7 +81,7 @@
     $data = $req->fetch();
 
     // Instanciation d'un objet Bugs à partir des données remontées de la bdd
-    $rapport = Bugs::withData($data);
+    $rapport = BugEvolution::withData($data);
 
     $req->closeCursor();
 

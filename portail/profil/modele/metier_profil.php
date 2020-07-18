@@ -138,8 +138,8 @@
                           'nb_evolutions'    => $nombreEvolutions
                          );
 
-    // Instanciation d'un objet Statistiques à partir des données remontées de la bdd
-    $tableauStatistiques = Statistiques::withData($statistiques);
+    // Instanciation d'un objet StatistiquesProfil à partir des données remontées de la bdd
+    $tableauStatistiques = StatistiquesProfil::withData($statistiques);
 
     return $tableauStatistiques;
   }
@@ -557,12 +557,13 @@
           // On vérifie que l'utilisateur a débloqué le succès pour l'ajouter
           if ($donnees['value'] >= $success->getLimit_success())
           {
-            $rangSuccess = array('identifiant' => $donnees['identifiant'],
-                                   'pseudo'      => $tableUsers[$donnees['identifiant']]['pseudo'],
-                                   'avatar'      => $tableUsers[$donnees['identifiant']]['avatar'],
-                                   'value'       => $donnees['value'],
-                                   'rank'        => 0
-                                  );
+            $rangSuccess = new Classement();
+
+            $rangSuccess->setIdentifiant($donnees['identifiant']);
+            $rangSuccess->setPseudo($tableUsers[$donnees['identifiant']]['pseudo']);
+            $rangSuccess->setAvatar($tableUsers[$donnees['identifiant']]['avatar']);
+            $rangSuccess->setValue($donnees['value']);
+
             array_push($listeRangSuccess, $rangSuccess);
           }
         }
@@ -573,24 +574,24 @@
       if (!empty($listeRangSuccess))
       {
         // Affectation du rang et suppression si rang > 3 (médaille de bronze)
-        $prevRank    = $listeRangSuccess[0]['value'];
+        $prevRank    = $listeRangSuccess[0]->getValue();
         $currentRank = 1;
 
         foreach ($listeRangSuccess as $key => &$rangSuccessUser)
         {
-          $currentTotal = $rangSuccessUser['value'];
+          $currentTotal = $rangSuccessUser->getValue();
 
           if ($currentTotal != $prevRank)
           {
             $currentRank += 1;
-            $prevRank     = $rangSuccessUser['value'];
+            $prevRank     = $rangSuccessUser->getValue();
           }
 
           // Suppression des rangs > 3 sinon on enregistre le rang
           if ($currentRank > 3)
             unset($listeRangSuccess[$key]);
           else
-            $rangSuccessUser['rank'] = $currentRank;
+            $rangSuccessUser->setRank($currentRank);
         }
 
         unset($rangSuccessUser);

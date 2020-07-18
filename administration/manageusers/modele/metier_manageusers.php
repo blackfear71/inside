@@ -100,11 +100,11 @@
   }
 
   // METIER : Lecture statistiques catégories des utilisateurs inscrits
-  // RETOUR : Tableau de nombres de films ajoutés, de commentaires, de phrases cultes rapportées & bilans des dépenses
-  function getTabCategoriesIns($listeUsers)
+  // RETOUR : Tableau des statistiques
+  function getStatistiquesInscrits($listeUsers)
   {
     // Initialisations
-    $tableauCategories = array();
+    $tableauStatistiques = array();
 
     // Récupération des statistiques par catégories
     foreach ($listeUsers as $user)
@@ -121,29 +121,50 @@
       // Bilan des dépenses
       $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
 
-      // Génération de la ligne du tableau
-      $categoriesUser = array('identifiant'     => $user->getIdentifiant(),
-                              'pseudo'          => $user->getPseudo(),
-                              'nombreFilms'     => $nombreFilms,
-                              'nombreComments'  => $nombreComments,
-                              'nombreCollector' => $nombreCollector,
-                              'bilanUser'       => $bilanUser
-                             );
+      // Nombre de demandes (bugs/évolutions)
+      $nombreBugsSoumis = physiqueBugsSoumisUser($user->getIdentifiant());
+
+      // Nombre de demandes résolues (bugs/évolutions)
+      $nombreBugsResolus = physiqueBugsResolusUser($user->getIdentifiant());
+
+      // Nombre d'idées publiées
+      $nombreTheBox = physiqueTheBoxUser($user->getIdentifiant());
+
+      // Nombre d'idées en charge
+      $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($user->getIdentifiant());
+
+      // Nombre d'idées terminées ou rejetées
+      $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($user->getIdentifiant());
+
+      // Génération d'un objet StatistiquesAdmin
+      $statistiquesUser = new StatistiquesAdmin();
+
+      $statistiquesUser->setIdentifiant($user->getIdentifiant());
+      $statistiquesUser->setPseudo($user->getPseudo());
+      $statistiquesUser->setNb_films_ajoutes($nombreFilms);
+      $statistiquesUser->setNb_films_comments($nombreComments);
+      $statistiquesUser->setNb_collectors($nombreCollector);
+      $statistiquesUser->setExpenses($bilanUser);
+      $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
+      $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
+      $statistiquesUser->setNb_idees_soumises($nombreTheBox);
+      $statistiquesUser->setNb_idees_en_charge($nombreTheBoxEnCharge);
+      $statistiquesUser->setNb_idees_terminees($nombreTheBoxTerminees);
 
       // Ajout au tableau
-      array_push($tableauCategories, $categoriesUser);
+      array_push($tableauStatistiques, $statistiquesUser);
     }
 
     // Retour
-    return $tableauCategories;
+    return $tableauStatistiques;
   }
 
   // METIER : Lecture statistiques catégories des utilisateurs désinscrits
   // RETOUR : Tableau de nombres de commentaires & bilans des dépenses
-  function getTabCategoriesDes($listeUsersDes)
+  function getStatistiquesDesinscrits($listeUsersDes)
   {
     // Initialisations
-    $tableauCategoriesDes = array();
+    $tableauStatistiquesDes = array();
 
     // Récupération des statistiques par catégories
     foreach ($listeUsersDes as $userDes)
@@ -180,30 +201,50 @@
           $bilanUser -= $prixParPart * $nombreParts['utilisateur'];
       }
 
-      // Génération de la ligne du tableau
-      $categoriesUserDes = array('identifiant'     => $userDes,
-                                 'pseudo'          => '',
-                                 'nombreFilms'     => $nombreFilms,
-                                 'nombreComments'  => $nombreComments,
-                                 'nombreCollector' => $nombreCollector,
-                                 'bilanUser'       => $bilanUser
-                                );
+      // Nombre de demandes (bugs/évolutions)
+      $nombreBugsSoumis = physiqueBugsSoumisUser($userDes);
+
+      // Nombre de demandes résolues (bugs/évolutions)
+      $nombreBugsResolus = physiqueBugsResolusUser($userDes);
+
+      // Nombre d'idées publiées
+      $nombreTheBox = physiqueTheBoxUser($userDes);
+
+      // Nombre d'idées en charge
+      $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($userDes);
+
+      // Nombre d'idées terminées ou rejetées
+      $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userDes);
+
+      // Génération d'un objet StatistiquesAdmin
+      $statistiquesUser = new StatistiquesAdmin();
+
+      $statistiquesUser->setIdentifiant($userDes);
+      $statistiquesUser->setPseudo('');
+      $statistiquesUser->setNb_films_ajoutes($nombreFilms);
+      $statistiquesUser->setNb_films_comments($nombreComments);
+      $statistiquesUser->setNb_collectors($nombreCollector);
+      $statistiquesUser->setExpenses($bilanUser);
+      $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
+      $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
+      $statistiquesUser->setNb_idees_soumises($nombreTheBox);
+      $statistiquesUser->setNb_idees_en_charge($nombreTheBoxEnCharge);
+      $statistiquesUser->setNb_idees_terminees($nombreTheBoxTerminees);
 
       // Ajout au tableau
-      array_push($tableauCategoriesDes, $categoriesUserDes);
+      array_push($tableauStatistiquesDes, $statistiquesUser);
     }
 
     // Retour
-    return $tableauCategoriesDes;
+    return $tableauStatistiquesDes;
   }
 
   // METIER : Lecture total catégories des utilisateurs
   // RETOUR : Tableau des totaux des catégories
-  function getTotalCategories($tableauIns, $tableauDes)
+  function getTotalStatistiques($tableauIns, $tableauDes)
   {
     // Initialisations
-    $tableauTotalCategories = array();
-    $sommeBilans            = 0;
+    $sommeBilans = 0;
 
     // Nombre de films ajoutés
     $nombreFilms = physiqueFilmsAjoutesTotal();
@@ -217,13 +258,13 @@
     // Calcul somme bilans utilisateurs inscrits
     foreach ($tableauIns as $userIns)
     {
-      $sommeBilans += $userIns['bilanUser'];
+      $sommeBilans += $userIns->getExpenses();
     }
 
     // Calcul somme bilans utilisateurs désinscrits
     foreach ($tableauDes as $userDes)
     {
-      $sommeBilans += $userDes['bilanUser'];
+      $sommeBilans += $userDes->getExpenses();
     }
 
     // Récupération des dépenses sans parts
@@ -249,101 +290,6 @@
     else
       $alerteBilan = false;
 
-    // Ajout au tableau
-    $tableauTotalCategories = array('nombreFilms'     => $nombreFilms,
-                                    'nombreComments'  => $nombreComments,
-                                    'nombreCollector' => $nombreCollector,
-                                    'sommeBilans'     => $sommeBilans,
-                                    'alerteBilan'     => $alerteBilan
-                                   );
-
-    return $tableauTotalCategories;
-  }
-
-  // METIER : Lecture statistiques des utilisateurs
-  // RETOUR : Tableau de statistiques
-  function getTabStats($listeUsersIns, $listeUsersDes)
-  {
-    // Statistiques utilisateurs inscrits
-    $listeStatsIns = array();
-
-    foreach ($listeUsersIns as $userIns)
-    {
-      // Nombre de demandes (bugs/évolutions)
-      $nombreBugsSoumis = physiqueBugsSoumisUser($userIns->getIdentifiant());
-
-      // Nombre de demandes résolues (bugs/évolutions)
-      $nombreBugsResolus = physiqueBugsResolusUser($userIns->getIdentifiant());
-
-      // Nombre d'idées publiées
-      $nombreTheBox = physiqueTheBoxUser($userIns->getIdentifiant());
-
-      // Nombre d'idées en charge
-      $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($userIns->getIdentifiant());
-
-      // Nombre d'idées terminées ou rejetées
-      $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userIns->getIdentifiant());
-
-      // On génère une ligne du tableau
-      $statsIns = array('identifiant'           => $userIns->getIdentifiant(),
-                        'pseudo'                => $userIns->getPseudo(),
-                        'nombreBugsSoumis'      => $nombreBugsSoumis,
-                        'nombreBugsResolus'     => $nombreBugsResolus,
-                        'nombreTheBox'          => $nombreTheBox,
-                        'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
-                        'nombreTheBoxTerminees' => $nombreTheBoxTerminees
-                       );
-
-      array_push($listeStatsIns, $statsIns);
-    }
-
-    // Statistiques utilisateurs désinscrits
-    $listeStatsDes = array();
-
-    foreach ($listeUsersDes as $userDes)
-    {
-      // Nombre de demandes (bugs/évolutions)
-      $nombreBugsSoumis = physiqueBugsSoumisUser($userDes);
-
-      // Nombre de demandes résolues (bugs/évolutions)
-      $nombreBugsResolus = physiqueBugsResolusUser($userDes);
-
-      // Nombre d'idées publiées
-      $nombreTheBox = physiqueTheBoxUser($userDes);
-
-      // Nombre d'idées en charge
-      $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($userDes);
-
-      // Nombre d'idées terminées ou rejetées
-      $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userDes);
-
-      // On génère une ligne du tableau
-      $statsDes = array('identifiant'           => $userDes,
-                          'pseudo'                => '',
-                          'nombreBugsSoumis'      => $nombreBugsSoumis,
-                          'nombreBugsResolus'     => $nombreBugsResolus,
-                          'nombreTheBox'          => $nombreTheBox,
-                          'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
-                          'nombreTheBoxTerminees' => $nombreTheBoxTerminees
-                         );
-
-      array_push($listeStatsDes, $statsDes);
-    }
-
-    // Ajout au tableau global
-    $tableauStats = array('inscrits' => $listeStatsIns, 'desinscrits' => $listeStatsDes);
-
-    // Retour
-    return $tableauStats;
-  }
-
-  // METIER : Lecture total statistiques
-  // RETOUR : Tableau des totaux des statistiques
-  function getTotalStats()
-  {
-    // Initialisations
-    $tableauTotalStats = array();
-
     // Nombre de demandes (bugs/évolutions)
     $nombreBugsSoumis = physiqueBugsSoumisTotal();
 
@@ -359,16 +305,22 @@
     // Nombre d'idées terminées ou rejetées
     $nombreTheBoxTerminees = physiqueTheBoxTermineesTotal();
 
-    // Ajout au tableau
-    $tableauTotalStats = array('nombreBugsSoumis'      => $nombreBugsSoumis,
-                               'nombreBugsResolus'     => $nombreBugsResolus,
-                               'nombreTheBox'          => $nombreTheBox,
-                               'nombreTheBoxEnCharge'  => $nombreTheBoxEnCharge,
-                               'nombreTheBoxTerminees' => $nombreTheBoxTerminees
-                              );
+    // Génération d'un objet TotalStatistiquesAdmin
+    $totalStatistiques = new TotalStatistiquesAdmin();
+
+    $totalStatistiques->setNb_films_ajoutes_total($nombreFilms);
+    $totalStatistiques->setNb_films_comments_total($nombreComments);
+    $totalStatistiques->setNb_collectors_total($nombreCollector);
+    $totalStatistiques->setExpenses_total($sommeBilans);
+    $totalStatistiques->setAlerte_expenses($alerteBilan);
+    $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);
+    $totalStatistiques->setNb_bugs_resolus_total($nombreBugsResolus);
+    $totalStatistiques->setNb_idees_soumises_total($nombreTheBox);
+    $totalStatistiques->setNb_idees_en_charge_total($nombreTheBoxEnCharge);
+    $totalStatistiques->setNb_idees_terminees_total($nombreTheBoxTerminees);
 
     // Retour
-    return $tableauTotalStats;
+    return $totalStatistiques;
   }
 
   // METIER : Refus réinitialisation mot de passe

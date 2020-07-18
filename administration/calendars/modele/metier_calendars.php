@@ -10,12 +10,10 @@
     $listeAutorisations = physiqueAutorisationsCalendars();
 
     // Récupération du pseudo des utilisateurs
-    foreach ($listeAutorisations as &$autorisation)
+    foreach ($listeAutorisations as $autorisation)
     {
-      $autorisation['pseudo'] = physiquePseudoUser($autorisation['identifiant']);
+      $autorisation->setPseudo(physiquePseudoUser($autorisation->getIdentifiant()));
     }
-
-    unset($autorisation);
 
     // Retour
     return $listeAutorisations;

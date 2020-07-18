@@ -60,35 +60,15 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeBugs as &$bug)
+      foreach ($listeBugs as $bug)
       {
-        $bug->setSubject(htmlspecialchars($bug->getSubject()));
-        $bug->setDate(htmlspecialchars($bug->getDate()));
-        $bug->setAuthor(htmlspecialchars($bug->getAuthor()));
-        $bug->setPseudo(htmlspecialchars($bug->getPseudo()));
-        $bug->setAvatar(htmlspecialchars($bug->getAvatar()));
-        $bug->setContent(htmlspecialchars($bug->getContent()));
-        $bug->setPicture(htmlspecialchars($bug->getPicture()));
-        $bug->getType(htmlspecialchars($bug->getType()));
-        $bug->getResolved(htmlspecialchars($bug->getResolved()));
+        BugEvolution::secureData($bug);
       }
 
-      unset($bug);
-
-      foreach ($listeEvolutions as &$evolution)
+      foreach ($listeEvolutions as $evolution)
       {
-        $evolution->setSubject(htmlspecialchars($evolution->getSubject()));
-        $evolution->setDate(htmlspecialchars($evolution->getDate()));
-        $evolution->setAuthor(htmlspecialchars($evolution->getAuthor()));
-        $evolution->setPseudo(htmlspecialchars($evolution->getPseudo()));
-        $evolution->setAvatar(htmlspecialchars($evolution->getAvatar()));
-        $evolution->setContent(htmlspecialchars($evolution->getContent()));
-        $evolution->setPicture(htmlspecialchars($evolution->getPicture()));
-        $evolution->getType(htmlspecialchars($evolution->getType()));
-        $evolution->getResolved(htmlspecialchars($evolution->getResolved()));
+        BugEvolution::secureData($evolution);
       }
-
-      unset($evolution);
       break;
 
 		case 'doChangerStatut':

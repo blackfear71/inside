@@ -74,6 +74,26 @@
         $this->explanation   = $data['explanation'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setReference(htmlspecialchars($data->getReference()));
+      $data->setLevel(htmlspecialchars($data->getLevel()));
+      $data->setOrder_success(htmlspecialchars($data->getOrder_success()));
+      $data->setDefined(htmlspecialchars($data->getDefined()));
+      $data->setUnicity(htmlspecialchars($data->getUnicity()));
+      $data->setTitle(htmlspecialchars($data->getTitle()));
+      $data->setDescription(htmlspecialchars($data->getDescription()));
+      $data->setLimit_success(htmlspecialchars($data->getLimit_success()));
+      $data->setExplanation(htmlspecialchars($data->getExplanation()));
+      $data->setValue_user(htmlspecialchars($data->getValue_user()));
+
+      foreach ($data->getClassement() as $rank)
+      {
+        Classement::secureData($rank);
+      }
+    }
+
     // getters et setters pour l'objet Success
     // id
     public function setId($id)
@@ -210,6 +230,91 @@
     public function getClassement()
     {
       return $this->classement;
+    }
+  }
+
+  class Classement
+  {
+    private $identifiant;
+    private $pseudo;
+    private $avatar;
+    private $value;
+    private $rank;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->identifiant = '';
+      $this->pseudo      = '';
+      $this->avatar      = '';
+      $this->value       = '';
+      $this->rank        = 0;
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setValue(htmlspecialchars($data->getValue()));
+      $data->setRank(htmlspecialchars($data->getRank()));
+    }
+
+    // getters et setters pour l'objet Classement
+    // id
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Pseudo
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Avatar
+    public function setAvatar($avatar)
+    {
+      $this->avatar = $avatar;
+    }
+
+    public function getAvatar()
+    {
+      return $this->avatar;
+    }
+
+    // Valeur du succès
+    public function setValue($value)
+    {
+      $this->value = $value;
+    }
+
+    public function getValue()
+    {
+      return $this->value;
+    }
+
+    // Rang
+    public function setRank($rank)
+    {
+      $this->rank = $rank;
+    }
+
+    public function getRank()
+    {
+      return $this->rank;
     }
   }
 ?>

@@ -55,15 +55,10 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeAlertes as &$alerte)
+			foreach ($listeAlertes as $alerte)
 			{
-        $alerte->setCategory(htmlspecialchars($alerte->getCategory()));
-        $alerte->setType(htmlspecialchars($alerte->getType()));
-        $alerte->setAlert(htmlspecialchars($alerte->getAlert()));
-				$alerte->setMessage(htmlspecialchars($alerte->getMessage()));
+        Alerte::secureData($alerte);
 			}
-
-      unset($alerte);
       break;
 
     case 'doAjouter':

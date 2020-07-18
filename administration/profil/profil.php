@@ -57,16 +57,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
-      $profil->setPing(htmlspecialchars($profil->getPing()));
-      $profil->setStatus(htmlspecialchars($profil->getStatus()));
-      $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
-      $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
-      $profil->setEmail(htmlspecialchars($profil->getEmail()));
-      $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
-      $profil->setExperience(htmlspecialchars($profil->getExperience()));
-      $profil->setLevel(htmlspecialchars($profil->getLevel()));
-      $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
+      Profile::secureData($profil);
       break;
 
     case 'doModifierAvatar':

@@ -72,11 +72,9 @@
     while ($data = $req->fetch())
     {
       // Récupération des identifiants
-      $user = array('identifiant' => $data['identifiant'],
-                    'pseudo'      => '',
-                    'total'       => 0,
-                    'rank'        => 0
-                   );
+      $user = new ParticipantMission();
+
+      $user->setIdentifiant($data['identifiant']);
 
       // On ajoute la ligne au tableau
       array_push($listeUsers, $user);

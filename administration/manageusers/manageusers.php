@@ -35,14 +35,12 @@
       // Récupération alerte gestion des utilisateurs
 			$alerteUsers = getAlerteUsers();
 
-      // Récupération des statistiques par catégories
-      $tableauCategoriesIns = getTabCategoriesIns($listeUsers);
-			$tableauCategoriesDes = getTabCategoriesDes($listeUsersDes);
-      $totalCategories      = getTotalCategories($tableauCategoriesIns, $tableauCategoriesDes);
+      // Récupération des statistiques par catégories et des statistiques de demandes et publications
+      $tableauStatistiquesIns = getStatistiquesInscrits($listeUsers);
+			$tableauStatistiquesDes = getStatistiquesDesinscrits($listeUsersDes);
 
-      // Récupération des statistiques de demandes et publications
-			$tableauStats   = getTabStats($listeUsers, $listeUsersDes);
-			$totalStats = getTotalStats();
+      // Récupération des totaux
+      $totalStatistiques = getTotalStatistiques($tableauStatistiquesIns, $tableauStatistiquesDes);
       break;
 
     case 'doAnnulerMdp':
@@ -85,18 +83,11 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeUsers as &$user)
-			{
-				$user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
-        $user->setPing(htmlspecialchars($user->getPing()));
-				$user->setStatus(htmlspecialchars($user->getStatus()));
-				$user->setPseudo(htmlspecialchars($user->getPseudo()));
-        $user->setAvatar(htmlspecialchars($user->getAvatar()));
-				$user->setEmail(htmlspecialchars($user->getEmail()));
-        $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
-			}
 
-      unset($user);
+			foreach ($listeUsers as $user)
+			{
+        Profile::secureData($user);
+			}
 
       foreach ($listeUsersDes as &$userDes)
       {
@@ -105,58 +96,17 @@
 
       unset($userDes);
 
-			foreach ($tableauCategoriesIns as &$statsCatIns)
+			foreach ($tableauStatistiquesIns as $statistiquesIns)
 			{
-				$statsCatIns['identifiant']     = htmlspecialchars($statsCatIns['identifiant']);
-				$statsCatIns['pseudo']          = htmlspecialchars($statsCatIns['pseudo']);
-        $statsCatIns['nombreFilms']     = htmlspecialchars($statsCatIns['nombreFilms']);
-				$statsCatIns['nombreComments']  = htmlspecialchars($statsCatIns['nombreComments']);
-        $statsCatIns['nombreCollector'] = htmlspecialchars($statsCatIns['nombreCollector']);
-        $statsCatIns['bilanUser']       = htmlspecialchars($statsCatIns['bilanUser']);
+        StatistiquesAdmin::secureData($statistiquesIns);
 			}
 
-      unset($statsCatIns);
-
-      foreach ($tableauCategoriesDes as &$statsCatDes)
-      {
-        $statsCatDes['identifiant']     = htmlspecialchars($statsCatDes['identifiant']);
-        $statsCatDes['pseudo']          = htmlspecialchars($statsCatDes['pseudo']);
-        $statsCatDes['nombreFilms']     = htmlspecialchars($statsCatDes['nombreFilms']);
-        $statsCatDes['nombreComments']  = htmlspecialchars($statsCatDes['nombreComments']);
-        $statsCatDes['nombreCollector'] = htmlspecialchars($statsCatDes['nombreCollector']);
-        $statsCatDes['bilanUser']       = htmlspecialchars($statsCatDes['bilanUser']);
-      }
-
-      unset($statsCatDes);
-
-      $totalCategories['nombreFilms']     = htmlspecialchars($totalCategories['nombreFilms']);
-      $totalCategories['nombreComments']  = htmlspecialchars($totalCategories['nombreComments']);
-      $totalCategories['nombreCollector'] = htmlspecialchars($totalCategories['nombreCollector']);
-      $totalCategories['sommeBilans']     = htmlspecialchars($totalCategories['sommeBilans']);
-
-			foreach ($tableauStats as &$stats)
+      foreach ($tableauStatistiquesDes as $statistiquesDes)
 			{
-        foreach ($stats as &$statUser)
-        {
-          $statUser['identifiant']           = htmlspecialchars($statUser['identifiant']);
-          $statUser['pseudo']                = htmlspecialchars($statUser['pseudo']);
-          $statUser['nombreBugsSoumis']      = htmlspecialchars($statUser['nombreBugsSoumis']);
-          $statUser['nombreBugsResolus']     = htmlspecialchars($statUser['nombreBugsResolus']);
-          $statUser['nombreTheBox']          = htmlspecialchars($statUser['nombreTheBox']);
-          $statUser['nombreTheBoxEnCharge']  = htmlspecialchars($statUser['nombreTheBoxEnCharge']);
-          $statUser['nombreTheBoxTerminees'] = htmlspecialchars($statUser['nombreTheBoxTerminees']);
-        }
-
-        unset($statUser);
+        StatistiquesAdmin::secureData($statistiquesDes);
 			}
 
-      unset($stats);
-
-			$totalStats['nombreBugsSoumis']      = htmlspecialchars($totalStats['nombreBugsSoumis']);
-			$totalStats['nombreBugsResolus']     = htmlspecialchars($totalStats['nombreBugsResolus']);
-			$totalStats['nombreTheBox']          = htmlspecialchars($totalStats['nombreTheBox']);
-			$totalStats['nombreTheBoxEnCharge']  = htmlspecialchars($totalStats['nombreTheBoxEnCharge']);
-			$totalStats['nombreTheBoxTerminees'] = htmlspecialchars($totalStats['nombreTheBoxTerminees']);
+      TotalStatistiquesAdmin::secureData($totalStatistiques);
       break;
 
     case 'doAnnulerMdp':

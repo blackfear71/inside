@@ -49,6 +49,21 @@
         $this->options           = $data['options'];
     }
 
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setNom_section(htmlspecialchars($data->getNom_section()));
+      $data->setNom_technique(htmlspecialchars($data->getNom_technique()));
+      $data->setNom_head(htmlspecialchars($data->getNom_head()));
+      $data->setStyle_specifique(htmlspecialchars($data->getStyle_specifique()));
+      $data->setScript_specifique(htmlspecialchars($data->getScript_specifique()));
+
+      foreach ($data->getOptions() as $generatorOption)
+      {
+        GeneratorOptions::secureData($generatorOption);
+      }
+    }
+
     // getters et setters pour l'objet GeneratorParameters
     // Nom fonctionnel
     public function setNom_section($nom_section)
@@ -156,6 +171,15 @@
 
       if (isset($data['categorie']))
         $this->categorie = $data['categorie'];
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setOption(htmlspecialchars($data->getOption()));
+      $data->setChecked(htmlspecialchars($data->getChecked()));
+      $data->setTitre(htmlspecialchars($data->getTitre()));
+      $data->setCategorie(htmlspecialchars($data->getCategorie()));
     }
 
     // getters et setters pour l'objet GeneratorOptions

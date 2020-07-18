@@ -44,10 +44,10 @@
 
               foreach ($success->getClassement() as $keyRank => $classement)
               {
-                if ($classement['rank'] != $previousRank)
+                if ($classement->getRank() != $previousRank)
                 {
                   // Médailles
-                  switch ($classement['rank'])
+                  switch ($classement->getRank())
                   {
                     case 1:
                       echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
@@ -65,17 +65,17 @@
                       break;
                   }
 
-                  $previousRank = $classement['rank'];
+                  $previousRank = $classement->getRank();
 
                   echo '<div class="zone_medals">';
                 }
 
                 // Avatar
-                $avatarFormatted = formatAvatar($classement['avatar'], $classement['pseudo'], 2, 'avatar');
+                $avatarFormatted = formatAvatar($classement->getAvatar(), $classement->getPseudo(), 2, 'avatar');
 
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
-                if (!isset($success->getClassement()[$keyRank + 1]) OR $classement['rank'] != $success->getClassement()[$keyRank + 1]['rank'])
+                if (!isset($success->getClassement()[$keyRank + 1]) OR $classement->getRank() != $success->getClassement()[$keyRank + 1]->getRank())
                   echo '</div>';
               }
             echo '</div>';
