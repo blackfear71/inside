@@ -550,7 +550,7 @@
           // Envoi du mail avec gestion des erreurs
           if (!$mail->Send())
           {
-            echo 'Erreur : ' . $mail->ErrorInfo;
+            //echo 'Erreur : ' . $mail->ErrorInfo;
             $_SESSION['alerts']['mail_film_error'] = true;
           }
           else
