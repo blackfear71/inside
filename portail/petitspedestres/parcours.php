@@ -24,7 +24,7 @@
   {
     case 'goConsulterListe':
       // Initialisation de la sauvegarde en session
-      initializeSaveSession();
+      $erreurParcours = initializeSaveSession();
 
       // Récupération de tous les parcours. Attention, $parcours est un tableau d'objets Parcours
       $listeParcours = listParcours();
@@ -32,7 +32,7 @@
 
     case 'goAjouter':
       // Initialisation de la sauvegarde en session
-      initializeSaveSession();
+      $erreurParcours = initializeSaveSession();
       break;
 
     case 'goConsulter':
@@ -43,19 +43,18 @@
       else
       {
         // Initialisation de la sauvegarde en session
-        initializeSaveSession();
+        $erreurParcours = initializeSaveSession();
 
         $parcours = getParcours($_GET['id']);
       }
       break;
 
     case 'doAjouter':
-      $parcours = addParcours($_POST);
+      $erreurParcours = insertParcours($_POST);
       break;
 
     case 'doModifier':
-      // Mise à jour des données par le modèle
-      $parcours = updateParcours($_GET['id'], $_POST);
+      $erreurParcours = updateParcours($_GET['id'], $_POST);
       break;
 
     default:
@@ -93,14 +92,14 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
+      if (isset($erreurParcours) AND $erreurParcours == true)
         header('location: parcours.php?action=goAjouter');
       else
         header('location: parcours.php?id=' . $parcours->getId() . '&action=goConsulter');
       break;
 
     case 'doModifier':
-      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
+      if (isset($erreurParcours) AND $erreurParcours == true)
         header('location: parcours.php?id=' . $_GET['id'] . '&action=goModifier');
       else
         header('location: parcours.php?id=' . $_GET['id'] . '&action=goConsulter');

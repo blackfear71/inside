@@ -490,41 +490,11 @@
   function sendMail($details, $participants)
   {
     // Traitement de sécurité
-    $details->setId(htmlspecialchars($details->getId()));
-    $details->setFilm(htmlspecialchars($details->getFilm()));
-    $details->setTo_delete(htmlspecialchars($details->getTo_delete()));
-    $details->setDate_add(htmlspecialchars($details->getDate_add()));
-    $details->setIdentifiant_add(htmlspecialchars($details->getIdentifiant_add()));
-    $details->setPseudo_add(htmlspecialchars($details->getPseudo_add()));
-    $details->setIdentifiant_del(htmlspecialchars($details->getIdentifiant_del()));
-    $details->setPseudo_del(htmlspecialchars($details->getPseudo_del()));
-    $details->setSynopsis(htmlspecialchars($details->getSynopsis()));
-    $details->setDate_theater(htmlspecialchars($details->getDate_theater()));
-    $details->setDate_release(htmlspecialchars($details->getDate_release()));
-    $details->setLink(htmlspecialchars($details->getLink()));
-    $details->setPoster(htmlspecialchars($details->getPoster()));
-    $details->setTrailer(htmlspecialchars($details->getTrailer()));
-    $details->setId_url(htmlspecialchars($details->getId_url()));
-    $details->setDoodle(htmlspecialchars($details->getDoodle()));
-    $details->setDate_doodle(htmlspecialchars($details->getDate_doodle()));
-    $details->setTime_doodle(htmlspecialchars($details->getTime_doodle()));
-    $details->setRestaurant(htmlspecialchars($details->getRestaurant()));
-    $details->setNb_comments(htmlspecialchars($details->getNb_comments()));
-    $details->setStars_user(htmlspecialchars($details->getStars_user()));
-    $details->setParticipation(htmlspecialchars($details->getParticipation()));
-    $details->setNb_users(htmlspecialchars($details->getNb_users()));
-    $details->setAverage(htmlspecialchars($details->getAverage()));
+    Movie::secureData($details);
 
     foreach ($participants as $participant)
     {
-      $participant->setId(htmlspecialchars($participant->getId()));
-      $participant->setId_film(htmlspecialchars($participant->getId_film()));
-      $participant->setIdentifiant(htmlspecialchars($participant->getIdentifiant()));
-      $participant->setPseudo(htmlspecialchars($participant->getPseudo()));
-      $participant->setAvatar(htmlspecialchars($participant->getAvatar()));
-      $participant->setEmail(htmlspecialchars($participant->getEmail()));
-      $participant->setStars(htmlspecialchars($participant->getStars()));
-      $participant->setParticipation(htmlspecialchars($participant->getParticipation()));
+      Stars::secureData($participant);
     }
 
     // On envoie un mail par personne et non un mail groupé

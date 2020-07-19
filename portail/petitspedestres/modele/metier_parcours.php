@@ -3,10 +3,13 @@
   include_once('../../includes/classes/parcours.php');
 
   // METIER : Initialise les données de sauvegarde en session
-  // RETOUR : Aucun
+  // RETOUR : Erreur
   function initializeSaveSession()
   {
-    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    // Initialisations
+    $erreurParcours = false;
+
+    // On supprime la session s'il n'y a pas d'erreur
     if (!isset($_SESSION['alerts']['erreur_distance']) OR $_SESSION['alerts']['erreur_distance'] != true)
     {
       unset($_SESSION['save']);
@@ -17,10 +20,15 @@
                                 'image_parcours'    => ''
                                );
     }
+    else
+      $erreurParcours = true;
+
+    // Retour
+    return $erreurParcours;
   }
 
-  // Métier : lecture d'un parcours en fonction de son id
-  // Renvoie un objet Parcours
+  // METIER : lecture d'un parcours en fonction de son id
+  // RETOUR : Objet Parcours
   function getParcours($id)
   {
     // Pas de paramètre offset/limit, à ajouter le jour où on a 12 millions de parcours
@@ -31,20 +39,24 @@
     if ($donnees = $reponse->fetch())
     {
       $reponse->closeCursor();
-      return Parcours::withData($donnees);
+      $parcours = Parcours::withData($donnees);
     }
     else
     {
       // Si la requête ne renvoie rien (ce qui n'est pas censé arriver), on renvoie un objet vide
-      return new Parcours();
+      $parcours = new Parcours();
     }
+
+    // Retour
+    return $parcours;
   }
 
-  // Métier : liste des parcours, par ordre alphabétique
-  // Renvoie une liste d'objets Parcours
+  // METIER : liste des parcours triés par ordre alphabétique
+  // RETOUR : Liste d'objets Parcours
   function listParcours()
   {
     global $bdd;
+
     $reponse = $bdd->query('SELECT * FROM petits_pedestres_parcours ORDER BY nom ASC');
 
     // Nouveau tableau vide de parcours, servira à la vue
@@ -58,6 +70,7 @@
 
     $reponse->closeCursor();
 
+    // Retour
     return $tableauParcours;
   }
 
@@ -65,8 +78,6 @@
   // RETOUR : Tableau des parcours
   function convertForJson($listeParcours)
   {
-    var_dump($listeParcours);
-
     // On transforme les objets en tableau pour y envoyer au Javascript
     $listeParcoursAConvertir = array();
 
@@ -87,16 +98,18 @@
 
       array_push($listeParcoursAConvertir, $parcours);
     }
-    var_dump($listeParcoursAConvertir);
 
-
+    // Retour
     return $listeParcoursAConvertir;
   }
 
-  // Métier : insertion d'un nouveau parcours dans la base de données
-  // Ne renvoie rien pour le moment
-  function addParcours($post)
+  // METIER : Insertion d'un nouveau parcours dans la base de données
+  // RETOUR : Erreur
+  function insertParcours($post)
   {
+    // Initialisations
+    $erreurParcours = false;
+
     $data = array('nom'      => $post['name'],
                   'distance' => $post['dist'],
                   'lieu'     => $post['location'],
@@ -121,25 +134,35 @@
       $parcours->setId($bdd->lastInsertId());
 
       $_SESSION['alerts']['parcours_added'] = true;
-
-      return $parcours;
     }
     else
     {
       $_SESSION['alerts']['erreur_distance'] = true;
-      return new Parcours();
+      $erreurParcours                        = true;
     }
+
+    // Retour
+    return $erreurParcours;
   }
 
-  // Métier : met un parcours à jour en fonction de son id et de données passées par formulaire
-  // Renvoie un objet Parcours
+  // METIER : Met un parcours à jour
+  // RETOUR : Erreur
   function updateParcours($id, $post)
   {
+    // Initialisations
+    $erreurParcours = false;
+
     $data = array ('nom'      => $post['name'],
                    'distance' => $post['dist'],
                    'lieu'     => $post['location'],
                    'image'    => $post['picurl']
                   );
+
+    // Sauvegarde en session en cas d'erreur
+    $_SESSION['save']['nom_parcours']      = $post['name'];
+    $_SESSION['save']['distance_parcours'] = $post['dist'];
+    $_SESSION['save']['lieu_parcours']     = $post['location'];
+    $_SESSION['save']['image_parcours']    = $post['picurl'];
 
     $parcours = Parcours::withData($data);
 
@@ -157,8 +180,12 @@
       $_SESSION['alerts']['parcours_updated'] = true;
     }
     else
+    {
       $_SESSION['alerts']['erreur_distance'] = true;
+      $erreurParcours                        = true;
+    }
 
-    return $parcours;
+    // Retour
+    return $erreurParcours;
   }
 ?>
