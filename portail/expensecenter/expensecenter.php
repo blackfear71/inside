@@ -74,61 +74,25 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      if ($anneeExistante == true)
+      foreach ($listeUsers as $user)
       {
-        foreach ($listeUsers as &$user)
-        {
-          $user->setIdentifiant(htmlspecialchars($user->getIdentifiant()));
-          $user->setPing(htmlspecialchars($user->getPing()));
-          $user->setStatus(htmlspecialchars($user->getStatus()));
-          $user->setPseudo(htmlspecialchars($user->getPseudo()));
-          $user->setAvatar(htmlspecialchars($user->getAvatar()));
-          $user->setEmail(htmlspecialchars($user->getEmail()));
-          $user->setAnniversary(htmlspecialchars($user->getAnniversary()));
-          $user->setExperience(htmlspecialchars($user->getExperience()));
-          $user->setLevel(htmlspecialchars($user->getLevel()));
-          $user->setExpenses(htmlspecialchars($user->getExpenses()));
-          $user->setBeginner(htmlspecialchars($user->getBeginner()));
-          $user->setDevelopper(htmlspecialchars($user->getDevelopper()));
-        }
-
-        unset($user);
-
-        foreach ($onglets as &$year)
-        {
-          $year = htmlspecialchars($year);
-        }
-
-        unset($year);
-
-        foreach ($listeDepenses as &$depense)
-        {
-          $depense->setDate(htmlspecialchars($depense->getDate()));
-          $depense->setPrice(htmlspecialchars($depense->getPrice()));
-          $depense->setBuyer(htmlspecialchars($depense->getBuyer()));
-          $depense->setPseudo(htmlspecialchars($depense->getPseudo()));
-          $depense->setAvatar(htmlspecialchars($depense->getAvatar()));
-          $depense->setComment(htmlspecialchars($depense->getComment()));
-          $depense->setNb_users(htmlspecialchars($depense->getNb_users()));
-
-          foreach ($depense->getParts() as &$parts)
-          {
-            $parts->setId_expense(htmlspecialchars($parts->getId_expense()));
-            $parts->setId_identifiant(htmlspecialchars($parts->getId_identifiant()));
-            $parts->setIdentifiant(htmlspecialchars($parts->getIdentifiant()));
-            $parts->setPseudo(htmlspecialchars($parts->getPseudo()));
-            $parts->setAvatar(htmlspecialchars($parts->getAvatar()));
-            $parts->setParts(htmlspecialchars($parts->getParts()));
-          }
-
-          unset($part);
-        }
-
-        unset($depense);
-
-        // Conversion JSON
-        $listeDepensesJson = json_encode(convertForJsonListeDepenses($listeDepenses));
+        Profile::secureData($user);
       }
+
+      foreach ($onglets as &$year)
+      {
+        $year = htmlspecialchars($year);
+      }
+
+      unset($year);
+      
+      foreach ($listeDepenses as $depense)
+      {
+        Expenses::secureData($depense);
+      }
+
+      // Conversion JSON
+      $listeDepensesJson = json_encode(convertForJsonListeDepenses($listeDepenses));
       break;
 
     case 'doInserer':

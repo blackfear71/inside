@@ -178,7 +178,7 @@
   {
     // Formatage du numéro de semaine
     if (intval($week) < 10)
-      $weekFormat = '0' . $week;
+      $weekFormat = '0' . intval($week);
     else
       $weekFormat = $week;
 

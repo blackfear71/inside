@@ -392,7 +392,7 @@
 
       $reponse2->closeCursor();
 
-      $comment = Comments::withData($donnees);
+      $comment = Commentaire::withData($donnees);
       $comment->setPseudo($pseudo);
       $comment->setAvatar($avatar);
 

@@ -53,41 +53,22 @@
     case 'goConsulter':
       if ($missionExistante == true)
       {
-        $detailsMission->setMission(htmlspecialchars($detailsMission->getMission()));
-        $detailsMission->setReference(htmlspecialchars($detailsMission->getReference()));
-        $detailsMission->setDate_deb(htmlspecialchars($detailsMission->getDate_deb()));
-        $detailsMission->setDate_fin(htmlspecialchars($detailsMission->getDate_fin()));
-        $detailsMission->setHeure(htmlspecialchars($detailsMission->getHeure()));
-        $detailsMission->setObjectif(htmlspecialchars($detailsMission->getObjectif()));
-        $detailsMission->setDescription(htmlspecialchars($detailsMission->getDescription()));
-        $detailsMission->setExplications(htmlspecialchars($detailsMission->getExplications()));
-        $detailsMission->setConclusion(htmlspecialchars($detailsMission->getConclusion()));
-        $detailsMission->setStatut(htmlspecialchars($detailsMission->getStatut()));
+        Mission::secureData($detailsMission);
 
-        foreach ($participants as &$participant)
+        foreach ($participants as $participant)
         {
-          $participant->setIdentifiant(htmlspecialchars($participant->getIdentifiant()));
-          $participant->setPseudo(htmlspecialchars($participant->getPseudo()));
-          $participant->setAvatar(htmlspecialchars($participant->getAvatar()));
+          Profile::secureData($participant);
         }
-
-        unset($participant);
 
         $missionUser['daily'] = htmlspecialchars($missionUser['daily']);
         $missionUser['event'] = htmlspecialchars($missionUser['event']);
 
         if (date('Ymd') > $detailsMission->getDate_fin())
         {
-          foreach ($ranking as &$rankUser)
+          foreach ($ranking as $rankUser)
           {
-            $rankUser['identifiant'] = htmlspecialchars($rankUser['identifiant']);
-            $rankUser['pseudo']      = htmlspecialchars($rankUser['pseudo']);
-            $rankUser['avatar']      = htmlspecialchars($rankUser['avatar']);
-            $rankUser['total']       = htmlspecialchars($rankUser['total']);
-            $rankUser['rank']        = htmlspecialchars($rankUser['rank']);
+            ParticipantMission::secureData($rankUser);
           }
-
-          unset($rankUser);
         }
       }
       break;

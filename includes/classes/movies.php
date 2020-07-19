@@ -174,7 +174,7 @@
       $data->setAverage(htmlspecialchars($data->getAverage()));
     }
 
-    // getters et setters pour l'objet Movie
+    // Getters et Setters pour l'objet Movie
     // id
     public function setId($id)
     {
@@ -503,7 +503,18 @@
         $this->participation  = $data['participation'];
     }
 
-    // getters et setters pour l'objet Stars
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setEmail(htmlspecialchars($data->getEmail()));
+      $data->setStars(htmlspecialchars($data->getStars()));
+      $data->setParticipation(htmlspecialchars($data->getParticipation()));
+    }
+
+    // Getters et Setters pour l'objet Stars
     // id
     public function setId($id)
     {
@@ -593,7 +604,7 @@
     }
   }
 
-  class Comments
+  class Commentaire
   {
     private $id;
     private $id_film;
@@ -648,7 +659,18 @@
         $this->comment = $data['comment'];
     }
 
-    // getters et setters pour l'objet Comments
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setAuthor(htmlspecialchars($data->getAuthor()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setTime(htmlspecialchars($data->getTime()));
+      $data->setComment(htmlspecialchars($data->getComment()));
+    }
+
+    // Getters et Setters pour l'objet Comments
     // id
     public function setId($id)
     {

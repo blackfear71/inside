@@ -228,7 +228,7 @@
             $donnees2 = $reponse2->fetch();
 
             if ($reponse2->rowCount() > 0)
-              $author = $donnees2['pseudo'];
+              $author = htmlspecialchars($donnees2['pseudo']);
             else
               $author = formatUnknownUser('', false, true);
 
@@ -241,7 +241,7 @@
               $donnees3 = $reponse3->fetch();
 
               if ($reponse3->rowCount() > 0)
-                $speaker = $donnees3['pseudo'];
+                $speaker = htmlspecialchars($donnees3['pseudo']);
               else
                 $speaker = formatUnknownUser('', false, true);
 
@@ -269,7 +269,7 @@
             $donnees2 = $reponse2->fetch();
 
             if ($reponse2->rowCount() > 0)
-              $author = $donnees2['pseudo'];
+              $author = htmlspecialchars($donnees2['pseudo']);
             else
               $author = formatUnknownUser('', false, true);
 
@@ -282,7 +282,7 @@
               $donnees3 = $reponse3->fetch();
 
               if ($reponse3->rowCount() > 0)
-                $speaker = $donnees3['pseudo'];
+                $speaker = htmlspecialchars($donnees3['pseudo']);
               else
                 $speaker = formatUnknownUser('', false, true);
 
@@ -309,7 +309,7 @@
           $donnees1 = $reponse1->fetch();
 
           if ($reponse1->rowCount() > 0)
-            $genereux = $donnees1['pseudo'];
+            $genereux = htmlspecialchars($donnees1['pseudo']);
           else
             $genereux = formatUnknownUser('', false, true);
 
@@ -320,7 +320,7 @@
           $donnees2 = $reponse2->fetch();
 
           if ($reponse2->rowCount() > 0)
-            $radin = $donnees2['pseudo'];
+            $radin = htmlspecialchars($donnees2['pseudo']);
           else
             $radin = formatUnknownUser('', false, true);
 
@@ -337,7 +337,7 @@
           $donnees = $reponse->fetch();
 
           if ($reponse->rowCount() > 0)
-            $inscrit = $donnees['pseudo'];
+            $inscrit = htmlspecialchars($donnees['pseudo']);
           else
             $inscrit = formatUnknownUser('', false, true);
 
@@ -383,7 +383,7 @@
           $donnees2 = $reponse2->fetch();
 
           if ($reponse2->rowCount() > 0)
-            $auteur = $donnees2['pseudo'];
+            $auteur = htmlspecialchars($donnees2['pseudo']);
           else
             $auteur = formatUnknownUser('', false, true);
 

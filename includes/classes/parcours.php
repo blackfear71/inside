@@ -1,93 +1,113 @@
 <?php
-class Parcours{
+  class Parcours
+  {
     private $id;
     private $nom;
     private $distance;
     private $lieu;
-    private $url_image;
+    private $image;
 
     // Constructeur par défaut (objet vide)
-    public function __construct(){
-        $this->id = 0;
-        $this->nom = '';
-        $this->distance = 0;
-        $this->lieu = '';
-        $this->url_image = '';
+    public function __construct()
+    {
+      $this->id       = 0;
+      $this->nom      = '';
+      $this->distance = 0;
+      $this->lieu     = '';
+      $this->image    = '';
     }
 
     // Constructeur de l'objet Parcours en fonction de données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
-    public static function withData($data){
+    public static function withData($data)
+    {
         $parcours = new self();
         $parcours->fill($data);
+
         return $parcours;
     }
 
-    protected function fill ($data){
-        if (isset($data['id'])){
-          $this->id = $data['id'];
-        }
+    protected function fill ($data)
+    {
+      if (isset($data['id']))
+        $this->id = $data['id'];
 
+      if (isset($data['id']))
         $this->nom = $data['nom'];
+
+      if (isset($data['id']))
         $this->distance = $data['distance'];
+
+      if (isset($data['id']))
         $this->lieu = $data['lieu'];
-        $this->url_image = $data['image'];
+
+      if (isset($data['id']))
+        $this->image = $data['image'];
     }
 
-    // getters et setters pour l'objet Parcours
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setNom(htmlspecialchars($data->getNom()));
+      $data->setDistance(htmlspecialchars($data->getDistance()));
+      $data->setLieu(htmlspecialchars($data->getLieu()));
+      $data->setImage(htmlspecialchars($data->getImage()));
+    }
+
+    // Getters et Setters pour l'objet Parcours
     // id
-    public function setId($id){
-        $this->id = $id;
+    public function setId($id)
+    {
+      $this->id = $id;
     }
 
-    public function getId(){
-        return $this->id;
+    public function getId()
+    {
+      return $this->id;
     }
 
     // nom
-    public function setNom($name){
-        $this->nom = $name;
+    public function setNom($name)
+    {
+      $this->nom = $name;
     }
 
-    public function getNom(){
-        return $this->nom;
+    public function getNom()
+    {
+      return $this->nom;
     }
 
     // distance
-    public function setDistance($dist){
-        $this->distance = $dist;
+    public function setDistance($dist)
+    {
+      $this->distance = $dist;
     }
 
-    public function getDistance(){
-        return $this->distance;
+    public function getDistance()
+    {
+      return $this->distance;
     }
 
     // lieu
-    public function setLieu($place){
-        $this->lieu = $place;
+    public function setLieu($place)
+    {
+      $this->lieu = $place;
     }
 
-    public function getLieu(){
-        return $this->lieu;
+    public function getLieu()
+    {
+      return $this->lieu;
     }
 
     // url image
-    public function setImage($imageUrl){
-        $this->url_image = $imageUrl;
+    public function setImage($image)
+    {
+      $this->image = $image;
     }
 
-    public function getImage(){
-        return $this->url_image;
+    public function getImage()
+    {
+      return $this->image;
     }
-
-    // Méthode pour savoir si url image présente ou non
-    public function isImageSet(){
-        if (empty($this->url_image)){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-}
+  }
 ?>

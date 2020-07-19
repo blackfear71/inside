@@ -45,79 +45,25 @@
     case 'goSearch':
       if (!empty($resultats))
       {
-        foreach ($resultats['movie_house'] as &$resultatsMH)
+        foreach ($resultats['movie_house'] as $resultatsMH)
         {
-          $resultatsMH->setId(htmlspecialchars($resultatsMH->getId()));
-          $resultatsMH->setFilm(htmlspecialchars($resultatsMH->getFilm()));
-          $resultatsMH->setTo_delete(htmlspecialchars($resultatsMH->getTo_delete()));
-          $resultatsMH->setDate_add(htmlspecialchars($resultatsMH->getDate_add()));
-          $resultatsMH->setIdentifiant_add(htmlspecialchars($resultatsMH->getIdentifiant_add()));
-          $resultatsMH->setPseudo_add(htmlspecialchars($resultatsMH->getPseudo_add()));
-          $resultatsMH->setIdentifiant_del(htmlspecialchars($resultatsMH->getIdentifiant_del()));
-          $resultatsMH->setPseudo_del(htmlspecialchars($resultatsMH->getPseudo_del()));
-          $resultatsMH->setDate_theater(htmlspecialchars($resultatsMH->getDate_theater()));
-          $resultatsMH->setDate_release(htmlspecialchars($resultatsMH->getDate_release()));
-          $resultatsMH->setLink(htmlspecialchars($resultatsMH->getLink()));
-          $resultatsMH->setPoster(htmlspecialchars($resultatsMH->getPoster()));
-          $resultatsMH->setTrailer(htmlspecialchars($resultatsMH->getTrailer()));
-          $resultatsMH->setId_url(htmlspecialchars($resultatsMH->getId_url()));
-          $resultatsMH->setDoodle(htmlspecialchars($resultatsMH->getDoodle()));
-          $resultatsMH->setDate_doodle(htmlspecialchars($resultatsMH->getDate_doodle()));
-          $resultatsMH->setTime_doodle(htmlspecialchars($resultatsMH->getTime_doodle()));
-          $resultatsMH->setRestaurant(htmlspecialchars($resultatsMH->getRestaurant()));
-          $resultatsMH->setNb_comments(htmlspecialchars($resultatsMH->getNb_comments()));
-          $resultatsMH->setStars_user(htmlspecialchars($resultatsMH->getStars_user()));
-          $resultatsMH->setParticipation(htmlspecialchars($resultatsMH->getParticipation()));
-          $resultatsMH->setNb_users(htmlspecialchars($resultatsMH->getNb_users()));
-          $resultatsMH->setAverage(htmlspecialchars($resultatsMH->getAverage()));
+          Movie::secureData($resultatsMH);
         }
 
-        unset($resultatsMH);
-
-        foreach ($resultats['food_advisor'] as &$resultatsFA)
+        foreach ($resultats['food_advisor'] as $resultatsFA)
         {
-          $resultatsFA->setId(htmlspecialchars($resultatsFA->getId()));
-          $resultatsFA->setName(htmlspecialchars($resultatsFA->getName()));
-          $resultatsFA->setPicture(htmlspecialchars($resultatsFA->getPicture()));
-          $resultatsFA->setTypes(htmlspecialchars($resultatsFA->getTypes()));
-          $resultatsFA->setLocation(htmlspecialchars($resultatsFA->getLocation()));
-          $resultatsFA->setPhone(htmlspecialchars($resultatsFA->getPhone()));
-          $resultatsFA->setOpened(htmlspecialchars($resultatsFA->getOpened()));
-          $resultatsFA->setMin_price(htmlspecialchars($resultatsFA->getMin_price()));
-          $resultatsFA->setMax_price(htmlspecialchars($resultatsFA->getMax_price()));
-          $resultatsFA->setWebsite(htmlspecialchars($resultatsFA->getWebsite()));
-          $resultatsFA->setPlan(htmlspecialchars($resultatsFA->getPlan()));
-          $resultatsFA->setLafourchette(htmlspecialchars($resultatsFA->getLafourchette()));
-          $resultatsFA->setDescription(htmlspecialchars($resultatsFA->getDescription()));
+          Restaurant::secureData($resultatsFA);
         }
 
-        unset($resultatsFA);
-
-        foreach ($resultats['petits_pedestres'] as &$resultatsPP)
+        foreach ($resultats['petits_pedestres'] as $resultatsPP)
         {
-          $resultatsPP->setNom(htmlspecialchars($resultatsPP->getNom()));
-          $resultatsPP->setDistance(htmlspecialchars($resultatsPP->getDistance()));
-          $resultatsPP->setLieu(htmlspecialchars($resultatsPP->getLieu()));
-          $resultatsPP->setImage(htmlspecialchars($resultatsPP->getImage()));
+          Parcours::secureData($resultatsPP);
         }
 
-        unset($resultatsPP);
-
-        foreach ($resultats['missions'] as &$resultatsMI)
+        foreach ($resultats['missions'] as $resultatsMI)
         {
-          $resultatsMI->setMission(htmlspecialchars($resultatsMI->getMission()));
-          $resultatsMI->setReference(htmlspecialchars($resultatsMI->getReference()));
-          $resultatsMI->setDate_deb(htmlspecialchars($resultatsMI->getDate_deb()));
-          $resultatsMI->setDate_fin(htmlspecialchars($resultatsMI->getDate_fin()));
-          $resultatsMI->setHeure(htmlspecialchars($resultatsMI->getHeure()));
-          $resultatsMI->setObjectif(htmlspecialchars($resultatsMI->getObjectif()));
-          $resultatsMI->setDescription(htmlspecialchars($resultatsMI->getDescription()));
-          $resultatsMI->setExplications(htmlspecialchars($resultatsMI->getExplications()));
-          $resultatsMI->setConclusion(htmlspecialchars($resultatsMI->getConclusion()));
-          $resultatsMI->setStatut(htmlspecialchars($resultatsMI->getStatut()));
+          Mission::secureData($resultatsMI);
         }
-
-        unset($resultatsMI);
       }
       break;
 

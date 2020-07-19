@@ -58,9 +58,12 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-        ?>
 
-        <parcours-list></parcours-list>
+          /************/
+          /* Parcours */
+          /************/
+          echo '<parcours-list></parcours-list>';
+        ?>
 
   			<!-- Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
   				   Réponse : Parcours.
@@ -77,7 +80,7 @@
 		</footer>
 
     <script>
-      var listeParcoursJson = <?php echo $parcoursJson; ?>;
+      var listeParcoursJson = <?php echo $listeParcoursJson; ?>;
     </script>
   </body>
 </html>

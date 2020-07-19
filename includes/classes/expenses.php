@@ -53,7 +53,24 @@
         $this->comment = $data['comment'];
     }
 
-    // getters et setters pour l'objet Expenses
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setPrice(htmlspecialchars($data->getPrice()));
+      $data->setBuyer(htmlspecialchars($data->getBuyer()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setComment(htmlspecialchars($data->getComment()));
+      $data->setNb_users(htmlspecialchars($data->getNb_users()));
+
+      foreach ($data->getParts() as $parts)
+      {
+        Parts::secureData($parts);
+      }
+    }
+
+    // Getters et Setters pour l'objet Expenses
     // id
     public function setId($id)
     {
@@ -201,7 +218,16 @@
         $this->parts       = $data['parts'];
     }
 
-    // getters et setters pour l'objet Parts
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setParts(htmlspecialchars($data->getParts()));
+    }
+
+    // Getters et Setters pour l'objet Parts
     // id
     public function setId($id)
     {

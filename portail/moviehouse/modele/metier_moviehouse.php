@@ -277,11 +277,12 @@
 
         $reponse2->closeCursor();
 
-        $starsFilm = array('identifiant' => $donnees['identifiant'],
-                           'pseudo'      => $pseudo,
-                           'avatar'      => $avatar,
-                           'stars'       => $donnees['stars']
-                          );
+        $starsFilm = new Stars();
+
+        $starsFilm->setIdentifiant($donnees['identifiant']);
+        $starsFilm->setPseudo($pseudo);
+        $starsFilm->setAvatar($avatar);
+        $starsFilm->setStars($donnees['stars']);
 
         array_push($listeStarsFilm, $starsFilm);
       }

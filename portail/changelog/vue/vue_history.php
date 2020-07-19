@@ -94,7 +94,7 @@
 
     // A vous de jouer
     echo '<div class="event_history">';
-      echo '<div class="date_history">' . date('j') . ' ' . $months[date('n')] . ' ' . date('Y') . '</div><div class="trait_history"></div>';
+      echo '<div class="date_history">' . date('j') . ' ' . formatMonthForDisplay(date('m')) . ' ' . date('Y') . '</div><div class="trait_history"></div>';
 
       echo '<div class="details_history">';
         echo 'Ce site est le vôtre, vous êtes le bienvenue pour le faire perdurer dans le temps. Soyez acteur d\'Inside et vous remporterez plus qu\'un succès !';

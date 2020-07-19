@@ -289,13 +289,14 @@
 
     while ($data = $req->fetch())
     {
-      $detailsUser = array('identifiant' => $data['identifiant'],
-                           'pseudo'      => '',
-                           'avatar'      => '',
-                           'transports'  => $data['transports'],
-                           'horaire'     => $data['time'],
-                           'menu'        => $data['menu']
-                          );
+      $detailsUser = new DetailsProposition();
+
+      $detailsUser->setIdentifiant($data['identifiant']);
+      $detailsUser->setPseudo('');
+      $detailsUser->setAvatar('');
+      $detailsUser->setTransports($data['transports']);
+      $detailsUser->setHoraire($data['time']);
+      $detailsUser->setMenu($data['menu']);
 
       // On ajoute la ligne au tableau
       array_push($details, $detailsUser);

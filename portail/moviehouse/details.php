@@ -96,59 +96,17 @@
 
         unset($navigation);
 
-        $detailsFilm->setId(htmlspecialchars($detailsFilm->getId()));
-        $detailsFilm->setFilm(htmlspecialchars($detailsFilm->getFilm()));
-        $detailsFilm->setTo_delete(htmlspecialchars($detailsFilm->getTo_delete()));
-        $detailsFilm->setDate_add(htmlspecialchars($detailsFilm->getDate_add()));
-        $detailsFilm->setIdentifiant_add(htmlspecialchars($detailsFilm->getIdentifiant_add()));
-        $detailsFilm->setPseudo_add(htmlspecialchars($detailsFilm->getPseudo_add()));
-        $detailsFilm->setIdentifiant_del(htmlspecialchars($detailsFilm->getIdentifiant_del()));
-        $detailsFilm->setPseudo_del(htmlspecialchars($detailsFilm->getPseudo_del()));
-        $detailsFilm->setSynopsis(htmlspecialchars($detailsFilm->getSynopsis()));
-        $detailsFilm->setDate_theater(htmlspecialchars($detailsFilm->getDate_theater()));
-        $detailsFilm->setDate_release(htmlspecialchars($detailsFilm->getDate_release()));
-        $detailsFilm->setLink(htmlspecialchars($detailsFilm->getLink()));
-        $detailsFilm->setPoster(htmlspecialchars($detailsFilm->getPoster()));
-        $detailsFilm->setTrailer(htmlspecialchars($detailsFilm->getTrailer()));
-        $detailsFilm->setId_url(htmlspecialchars($detailsFilm->getId_url()));
-        $detailsFilm->setDoodle(htmlspecialchars($detailsFilm->getDoodle()));
-        $detailsFilm->setDate_doodle(htmlspecialchars($detailsFilm->getDate_doodle()));
-        $detailsFilm->setTime_doodle(htmlspecialchars($detailsFilm->getTime_doodle()));
-        $detailsFilm->setRestaurant(htmlspecialchars($detailsFilm->getRestaurant()));
-        $detailsFilm->setPlace(htmlspecialchars($detailsFilm->getPlace()));
-        $detailsFilm->setNb_comments(htmlspecialchars($detailsFilm->getNb_comments()));
-        $detailsFilm->setStars_user(htmlspecialchars($detailsFilm->getStars_user()));
-        $detailsFilm->setParticipation(htmlspecialchars($detailsFilm->getParticipation()));
-        $detailsFilm->setNb_users(htmlspecialchars($detailsFilm->getNb_users()));
-        $detailsFilm->setAverage(htmlspecialchars($detailsFilm->getAverage()));
+        Movie::secureData($detailsFilm);
 
-        foreach ($listeEtoiles as &$etoiles)
+        foreach ($listeEtoiles as $etoiles)
         {
-          $etoiles->setId(htmlspecialchars($etoiles->getId()));
-          $etoiles->setId_film(htmlspecialchars($etoiles->getId_film()));
-          $etoiles->setIdentifiant(htmlspecialchars($etoiles->getIdentifiant()));
-          $etoiles->setPseudo(htmlspecialchars($etoiles->getPseudo()));
-          $etoiles->setAvatar(htmlspecialchars($etoiles->getAvatar()));
-          $etoiles->setEmail(htmlspecialchars($etoiles->getEmail()));
-          $etoiles->setStars(htmlspecialchars($etoiles->getStars()));
-          $etoiles->setParticipation(htmlspecialchars($etoiles->getParticipation()));
+          Stars::secureData($etoiles);
         }
-
-        unset($etoiles);
 
         foreach ($listeCommentaires as &$comment)
         {
-          $comment->setId(htmlspecialchars($comment->getId()));
-          $comment->setId_film(htmlspecialchars($comment->getId_film()));
-          $comment->setAuthor(htmlspecialchars($comment->getAuthor()));
-          $comment->setPseudo(htmlspecialchars($comment->getPseudo()));
-          $comment->setAvatar(htmlspecialchars($comment->getAvatar()));
-          $comment->setDate(htmlspecialchars($comment->getDate()));
-          $comment->setTime(htmlspecialchars($comment->getTime()));
-          $comment->setComment(htmlspecialchars($comment->getComment()));
+          Commentaire::secureData($comment);
         }
-
-        unset($comment);
 
         // Conversion JSON
         $detailsFilmJson = json_encode(convertForJson($detailsFilm));

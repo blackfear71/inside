@@ -49,26 +49,32 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
+
+          /**********/
+          /* Saisie */
+          /**********/
+  				echo '<div class="PP-contenu-saisie">';
+  					echo '<form method="post" action="parcours.php?id=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
+  						echo '<div class="PP-zone-saisie-avancee-infos">';
+  							echo '<label class="label_parcours">Nom : </label>';
+  							echo '<input type="text" value="' . $parcours->getNom() . '" name="name" class="PP-monoligne" /><br />';
+
+  							echo '<label class="label_parcours">Distance : </label>';
+  							echo '<input type="text" value="' . $parcours->getDistance() . '" name="dist" class="PP-monoligne" /><br />';
+
+  							echo '<label class="label_parcours">Lieu : </label>';
+  							echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" /><br />';
+
+  							echo '<label class="label_parcours">Url image : </label>';
+  							echo '<input type="text" value="' . $parcours->getImage() . '" name="picurl" class="PP-monoligne" /><br />';
+  						echo '</div>';
+
+              echo '<br /><br />';
+
+  						echo '<input type="submit" name="modification" value="Valider" />';
+  					echo '</form>';
+          echo '</div>';
         ?>
-
-				<div class="PP-contenu-saisie">
-					<form method="post" action="parcours.php?id=<?php echo $parcours->getId(); ?>&action=domodifier" class="PP-form-saisie">
-						<div class="PP-zone-saisie-avancee-infos">
-							<label class="label_parcours">Nom : </label>
-							<input type="text" value="<?php echo $name; ?>" name="name" class="PP-monoligne" /><br />
-							<label class="label_parcours">Distance : </label>
-							<input type="text" value="<?php echo $dist; ?>" name="dist" class="PP-monoligne" /><br />
-							<label class="label_parcours">Lieu : </label>
-							<input type="text" value="<?php echo $location; ?>" name="location" class="PP-monoligne" /><br />
-							<label class="label_parcours">Url image : </label>
-							<input type="text" value="<?php echo $picture; ?>" name="picurl" class="PP-monoligne" /><br />
-						</div>
-
-            <br /><br />
-
-						<input type="submit" name="modification" value="Valider" />
-					</form>
-        </div>
       </article>
 
       <!-- Chat -->

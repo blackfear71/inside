@@ -42,7 +42,17 @@
         $this->link    = $data['link'];
     }
 
-    // getters et setters pour l'objet News
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setTitle(htmlspecialchars($data->getTitle()));
+      //$data->setContent(htmlspecialchars($data->getContent()));
+      //$data->setDetails(htmlspecialchars($data->getDetails()));
+      $data->setLogo(htmlspecialchars($data->getLogo()));
+      $data->setLink(htmlspecialchars($data->getLink()));
+    }
+
+    // Getters et Setters pour l'objet News
     // Titre
     public function setTitle($title)
     {

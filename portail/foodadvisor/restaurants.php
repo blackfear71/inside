@@ -101,41 +101,17 @@
 
       foreach ($listeRestaurants as $restaurantsParLieux)
       {
-        foreach ($restaurantsParLieux as &$restaurant)
+        foreach ($restaurantsParLieux as $restaurant)
         {
-          $restaurant->setName(htmlspecialchars($restaurant->getName()));
-          $restaurant->setPicture(htmlspecialchars($restaurant->getPicture()));
-          $restaurant->setTypes(htmlspecialchars($restaurant->getTypes()));
-          $restaurant->setLocation(htmlspecialchars($restaurant->getLocation()));
-          $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
-          $restaurant->setOpened(htmlspecialchars($restaurant->getOpened()));
-          $restaurant->setMin_price(htmlspecialchars($restaurant->getMin_price()));
-          $restaurant->setMax_price(htmlspecialchars($restaurant->getMax_price()));
-          $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
-          $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
-          $restaurant->setLafourchette(htmlspecialchars($restaurant->getLafourchette()));
-          $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
+          Restaurant::secureData($restaurant);
         }
+      }
 
-        unset($restaurant);
-
-        if ($choixRapide == true)
+      if ($choixRapide == true)
+      {
+        foreach ($mesChoix as $monChoix)
         {
-          foreach ($mesChoix as &$monChoix)
-          {
-            $monChoix->setId_restaurant(htmlspecialchars($monChoix->getId_restaurant()));
-            $monChoix->setIdentifiant(htmlspecialchars($monChoix->getIdentifiant()));
-            $monChoix->setDate(htmlspecialchars($monChoix->getDate()));
-            $monChoix->setTime(htmlspecialchars($monChoix->getTime()));
-            $monChoix->setTransports(htmlspecialchars($monChoix->getTransports()));
-            $monChoix->setMenu(htmlspecialchars($monChoix->getMenu()));
-            $monChoix->setName(htmlspecialchars($monChoix->getName()));
-            $monChoix->setPicture(htmlspecialchars($monChoix->getPicture()));
-            $monChoix->setLocation(htmlspecialchars($monChoix->getLocation()));
-            $monChoix->setOpened(htmlspecialchars($monChoix->getOpened()));
-          }
-
-          unset($monChoix);
+          Choix::secureData($monChoix);
         }
       }
       break;

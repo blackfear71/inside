@@ -1,5 +1,5 @@
 <?php
-  class Ideas
+  class Idea
   {
     private $id;
     private $subject;
@@ -75,7 +75,22 @@
         $this->avatar_developper = $data['avatar_developper'];
     }
 
-    // getters et setters pour l'objet Ideas
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setSubject(htmlspecialchars($data->getSubject()));
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setAuthor(htmlspecialchars($data->getAuthor()));
+      $data->setPseudo_author(htmlspecialchars($data->getPseudo_author()));
+      $data->setAvatar_author(htmlspecialchars($data->getAvatar_author()));
+      $data->setContent(htmlspecialchars($data->getContent()));
+      $data->setStatus(htmlspecialchars($data->getStatus()));
+      $data->setDevelopper(htmlspecialchars($data->getDevelopper()));
+      $data->setPseudo_developper(htmlspecialchars($data->getPseudo_developper()));
+      $data->setAvatar_developper(htmlspecialchars($data->getAvatar_developper()));
+    }
+
+    // Getters et Setters pour l'objet Ideas
     // id
     public function setId($id)
     {

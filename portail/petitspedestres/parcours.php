@@ -8,7 +8,7 @@
   - Modification de course
   ***************************/
 
-  @ini_set('display_errors', 'on');
+  //@ini_set('display_errors', 'on');
 
   // Fonction communes
   include_once('../../includes/functions/metier_commun.php');
@@ -19,45 +19,27 @@
   // Modèle de données
   include_once('modele/metier_parcours.php');
 
-  // Initialisations booléens
-  $lectureListe     = false;
-  $controlesDonnees = true;
-
   // EVALUATE TRUE WHEN COI-FCT = 'L0001' PERFORM...
-  switch ($_GET['action']){
-    case 'liste':
+  switch ($_GET['action'])
+  {
+    case 'goConsulterListe':
       // Initialisation de la sauvegarde en session
       initializeSaveSession();
 
       // Récupération de tous les parcours. Attention, $parcours est un tableau d'objets Parcours
-      $parcours = listParcours();
-      $parcoursJson = json_encode(convertForJson($parcours));
-      $lectureListe = true;
+      $listeParcours = listParcours();
       break;
 
-    case 'goajouter':
+    case 'goAjouter':
       // Initialisation de la sauvegarde en session
       initializeSaveSession();
-
-      // On ne fait rien
-      $name     = '';
-      $dist     = '';
-      $location = '';
-      $picture  = '';
-      $controlesDonnees = false;
       break;
 
-    case 'doajouter':
-      $parcours = addParcours($_POST);
-      // Ceci est un peu chimique mais sinon ça marche pas...
-      $_GET['id'] = $parcours->getId();
-      break;
-
-    case 'consulter':
-    case 'gomodifier':
+    case 'goConsulter':
+    case 'goModifier':
       // Récupération des données par le modèle
       if (!isset($_GET['id']) OR empty($_GET['id']))
-        header('location: parcours.php?action=liste');
+        header('location: parcours.php?action=goConsulterListe');
       else
       {
         // Initialisation de la sauvegarde en session
@@ -67,76 +49,76 @@
       }
       break;
 
-    case 'domodifier':
+    case 'doAjouter':
+      $parcours = addParcours($_POST);
+      break;
+
+    case 'doModifier':
       // Mise à jour des données par le modèle
       $parcours = updateParcours($_GET['id'], $_POST);
       break;
 
     default:
       // Contrôle action renseignée URL
-      header('location: parcours.php?action=liste');
+      header('location: parcours.php?action=goConsulterListe');
       break;
   }
 
   // Traitements de sécurité avant la vue
-  if ($controlesDonnees){
-    // Si on a fait une lecture de liste on traite chaque objet dans un foreach
-    if ($lectureListe){
-      foreach ($parcours as &$prcr){
-        $prcr->setNom(htmlspecialchars($prcr->getNom()));
-        $prcr->setDistance(htmlspecialchars($prcr->getDistance()));
-        $prcr->setLieu(htmlspecialchars($prcr->getLieu()));
-        $prcr->setImage(htmlspecialchars($prcr->getImage()));
+  switch ($_GET['action'])
+  {
+    case 'goConsulterListe':
+      foreach ($listeParcours as $parcours)
+      {
+        Parcours::secureData($parcours);
       }
 
-      unset($prcr);
-    }
-    else{
-      $parcours->setNom(htmlspecialchars($parcours->getNom()));
-      $parcours->setDistance(htmlspecialchars($parcours->getDistance()));
-      $parcours->setLieu(htmlspecialchars($parcours->getLieu()));
-      $parcours->setImage(htmlspecialchars($parcours->getImage()));
+      // Conversion JSON
+      $listeParcoursJson = json_encode(convertForJson($listeParcours));
+      break;
 
-      $name     = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['nom'] : $parcours->getNom();
-      $dist     = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['distance'] : $parcours->getDistance();
-      $location = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['lieu'] : $parcours->getLieu();
-      $picture  = (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true) ? $_SESSION['save_mod']['image'] : $parcours->getImage();
-    }
+    case 'goConsulter':
+    case 'goModifier':
+      Parcours::secureData($parcours);
+      break;
+
+    case 'goAjouter':
+    case 'doAjouter':
+    case 'doModifier':
+    default:
+      break;
   }
 
-
   // Affichage vue
-  switch ($_GET['action']){
-    case 'liste':
+  switch ($_GET['action'])
+  {
+    case 'doAjouter':
+      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
+        header('location: parcours.php?action=goAjouter');
+      else
+        header('location: parcours.php?id=' . $parcours->getId() . '&action=goConsulter');
+      break;
+
+    case 'doModifier':
+      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
+        header('location: parcours.php?id=' . $_GET['id'] . '&action=goModifier');
+      else
+        header('location: parcours.php?id=' . $_GET['id'] . '&action=goConsulter');
+      break;
+
+    case 'goConsulterListe':
       include_once('vue/liste_parcours.php');
       break;
 
-    case 'goajouter':
+    case 'goAjouter':
       include_once('vue/ajout_parcours.php');
       break;
 
-    case 'doajouter':
-      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
-        include_once('vue/ajout_parcours.php');
-      else
-        include_once('vue/vue_parcours.php');
-      break;
-
-    case 'domodifier':
-      if (isset($_SESSION['alerts']['erreur_distance']) AND $_SESSION['alerts']['erreur_distance'] == true)
-        include_once('vue/mod_parcours.php');
-      else
-        include_once('vue/vue_parcours.php');
-      break;
-
-    case 'consulter':
-      include_once('vue/vue_parcours.php');
-      break;
-
-    case 'gomodifier':
+    case 'goModifier':
       include_once('vue/mod_parcours.php');
       break;
 
+    case 'goConsulter':
     default:
       include_once('vue/vue_parcours.php');
       break;

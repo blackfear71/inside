@@ -67,19 +67,10 @@
     case 'goConsulter':
       if (!empty($notifications))
       {
-        foreach ($notifications as &$notification)
+        foreach ($notifications as $notification)
         {
-          $notification->setAuthor(htmlspecialchars($notification->getAuthor()));
-          $notification->setDate(htmlspecialchars($notification->getDate()));
-          $notification->setTime(htmlspecialchars($notification->getTime()));
-          $notification->setCategory(htmlspecialchars($notification->getCategory()));
-          $notification->setContent(htmlspecialchars($notification->getContent()));
-          $notification->setIcon(htmlspecialchars($notification->getIcon()));
-          $notification->setSentence(htmlspecialchars($notification->getSentence()));
-          $notification->setLink(htmlspecialchars($notification->getLink()));
+          Notification::secureData($notification);
         }
-
-        unset($notification);
 
         $notifications = formatNotifications($notifications);
       }

@@ -31,9 +31,6 @@
         case 'ranking':
           $listeUsers   = getUsers();
           $listeSuccess = getSuccess($_SESSION['user']['identifiant'], $listeUsers);
-
-          if ($_GET['view'] == 'ranking')
-            $experienceUsers = getExperienceUsers($listeUsers);
           break;
 
         case 'settings':
@@ -117,134 +114,51 @@
       {
         case 'success':
         case 'ranking':
+          foreach ($listeUsers as $user)
+          {
+            Profile::secureData($user);
+          }
+
           foreach ($listeSuccess as $success)
           {
             Success::secureData($success);
           }
 
-          if ($_GET['view'] == 'ranking')
-          {
-            foreach ($experienceUsers as &$expUser)
-            {
-              $expUser['identifiant'] = htmlspecialchars($expUser['identifiant']);
-              $expUser['pseudo']      = htmlspecialchars($expUser['pseudo']);
-              $expUser['avatar']      = htmlspecialchars($expUser['avatar']);
-              $expUser['experience']  = htmlspecialchars($expUser['experience']);
-              $expUser['niveau']      = htmlspecialchars($expUser['niveau']);
-            }
-
-            unset($expUser);
-          }
-
+          // Conversion JSON
           $listeSuccessJson = json_encode(convertForJson($listeSuccess));
           break;
 
         case 'settings':
-          $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
-          $profil->setPing(htmlspecialchars($profil->getPing()));
-          $profil->setStatus(htmlspecialchars($profil->getStatus()));
-          $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
-          $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
-          $profil->setEmail(htmlspecialchars($profil->getEmail()));
-          $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
-          $profil->setExperience(htmlspecialchars($profil->getExperience()));
-          $profil->setLevel(htmlspecialchars($profil->getLevel()));
-          $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
-
-          $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-          $preferences->setInit_chat(htmlspecialchars($preferences->getInit_chat()));
-          $preferences->setCelsius(htmlspecialchars($preferences->getCelsius()));
-          $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-          $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
-          $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-          $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-          $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+          Profile::secureData($profil);
+          Preferences::secureData($preferences);
           break;
 
         case 'themes':
-          $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
-          $profil->setPing(htmlspecialchars($profil->getPing()));
-          $profil->setStatus(htmlspecialchars($profil->getStatus()));
-          $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
-          $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
-          $profil->setEmail(htmlspecialchars($profil->getEmail()));
-          $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
-          $profil->setExperience(htmlspecialchars($profil->getExperience()));
-          $profil->setLevel(htmlspecialchars($profil->getLevel()));
-          $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
-
-          $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-          $preferences->setInit_chat(htmlspecialchars($preferences->getInit_chat()));
-          $preferences->setCelsius(htmlspecialchars($preferences->getCelsius()));
-          $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-          $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
-          $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-          $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-          $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+          Profile::secureData($profil);
+          Preferences::secureData($preferences);
 
           if (!empty($themesUsers))
           {
-            foreach ($themesUsers as &$themeUsers)
+            foreach ($themesUsers as $themeUsers)
             {
-              $themeUsers->setReference(htmlspecialchars($themeUsers->getReference()));
-              $themeUsers->setName(htmlspecialchars($themeUsers->getName()));
-              $themeUsers->setType(htmlspecialchars($themeUsers->getType()));
-              $themeUsers->setLevel(htmlspecialchars($themeUsers->getLevel()));
-              $themeUsers->setLogo(htmlspecialchars($themeUsers->getLogo()));
-              $themeUsers->setDate_deb(htmlspecialchars($themeUsers->getDate_deb()));
-              $themeUsers->setDate_fin(htmlspecialchars($themeUsers->getDate_fin()));
+              Theme::secureData($themeUsers);
             }
-
-            unset($themeUsers);
           }
 
           if (!empty($themesMissions))
           {
-            foreach ($themesMissions as &$themeMission)
+            foreach ($themesMissions as $themeMission)
             {
-              $themeMission->setReference(htmlspecialchars($themeMission->getReference()));
-              $themeMission->setName(htmlspecialchars($themeMission->getName()));
-              $themeMission->setType(htmlspecialchars($themeMission->getType()));
-              $themeMission->setLevel(htmlspecialchars($themeMission->getLevel()));
-              $themeMission->setLogo(htmlspecialchars($themeMission->getLogo()));
-              $themeMission->setDate_deb(htmlspecialchars($themeMission->getDate_deb()));
-              $themeMission->setDate_fin(htmlspecialchars($themeMission->getDate_fin()));
+              Theme::secureData($themeMission);
             }
-
-            unset($themeMission);
           }
           break;
 
         case 'profile':
         default:
-          $profil->setIdentifiant(htmlspecialchars($profil->getIdentifiant()));
-          $profil->setPing(htmlspecialchars($profil->getPing()));
-          $profil->setStatus(htmlspecialchars($profil->getStatus()));
-          $profil->setPseudo(htmlspecialchars($profil->getPseudo()));
-          $profil->setAvatar(htmlspecialchars($profil->getAvatar()));
-          $profil->setEmail(htmlspecialchars($profil->getEmail()));
-          $profil->setAnniversary(htmlspecialchars($profil->getAnniversary()));
-          $profil->setExperience(htmlspecialchars($profil->getExperience()));
-          $profil->setLevel(htmlspecialchars($profil->getLevel()));
-          $profil->setExpenses(htmlspecialchars($profil->getExpenses()));
-
-          $statistiques->setNb_films_ajoutes(htmlspecialchars($statistiques->getNb_films_ajoutes()));
-          $statistiques->setNb_comments(htmlspecialchars($statistiques->getNb_comments()));
-          $statistiques->setNb_reservations(htmlspecialchars($statistiques->getNb_reservations()));
-          $statistiques->setNb_gateaux(htmlspecialchars($statistiques->getNb_gateaux()));
-          $statistiques->setNb_recettes(htmlspecialchars($statistiques->getNb_recettes()));
-          $statistiques->setExpenses(htmlspecialchars($statistiques->getExpenses()));
-          $statistiques->setNb_collectors(htmlspecialchars($statistiques->getNb_collectors()));
-          $statistiques->setNb_ideas(htmlspecialchars($statistiques->getNb_ideas()));
-          $statistiques->setNb_bugs(htmlspecialchars($statistiques->getNb_bugs()));
-          $statistiques->setNb_evolutions(htmlspecialchars($statistiques->getNb_evolutions()));
-
-          $progression['niveau']   = htmlspecialchars($progression['niveau']);
-          $progression['exp_min']  = htmlspecialchars($progression['exp_min']);
-          $progression['exp_max']  = htmlspecialchars($progression['exp_max']);
-          $progression['exp_lvl']  = htmlspecialchars($progression['exp_lvl']);
-          $progression['progress'] = htmlspecialchars($progression['progress']);
-          $progression['percent']  = htmlspecialchars($progression['percent']);
+          Profile::secureData($profil);
+          StatistiquesProfil::secureData($statistiques);
+          Progression::secureData($progression);
           break;
       }
       break;

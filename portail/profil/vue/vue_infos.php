@@ -11,14 +11,14 @@
 
     // Expérience
     echo '<div class="zone_profil_experience">';
-      echo '<div class="circular_bar" id="progress_circle" data-perc="' . $progression['percent'] . '" data-text="' . $profil->getExperience() . ' XP"></div>';
+      echo '<div class="circular_bar" id="progress_circle" data-perc="' . $progression->getPourcentage() . '" data-text="' . $profil->getExperience() . ' XP"></div>';
     echo '</div>';
 
     // Infos
     echo '<div class="zone_profil_infos">';
       echo '<div class="zone_info">';
         echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_profil" />';
-        echo '<div class="texte_profil">Insider de <strong>niveau ' . $progression['niveau'] . '</strong></div>';
+        echo '<div class="texte_profil">Insider de <strong>niveau ' . $progression->getNiveau() . '</strong></div>';
       echo '</div>';
 
       if (!empty($profil->getEmail()))

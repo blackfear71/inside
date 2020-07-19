@@ -132,12 +132,22 @@
     // Récupération de la liste des utilisateurs
     $listeUsers = physiquePingsUsers();
 
-    // Tri sur statut connexion puis identifiant
-    foreach ($listeUsers as $userTri)
+    // Traitement de sécurité et tri sur statut connexion puis identifiant
+    foreach ($listeUsers as &$user)
     {
-      $triStatut[]      = $userTri['connected'];
-      $triIdentifiant[] = $userTri['identifiant'];
+      $user['identifiant']          = htmlspecialchars($user['identifiant']);
+      $user['pseudo']               = htmlspecialchars($user['pseudo']);
+      $user['avatar']               = htmlspecialchars($user['avatar']);
+      $user['ping']                 = htmlspecialchars($user['ping']);
+      $user['connected']            = htmlspecialchars($user['connected']);
+      $user['date_last_connection'] = htmlspecialchars($user['date_last_connection']);
+      $user['hour_last_connection'] = htmlspecialchars($user['hour_last_connection']);
+
+      $triStatut[]      = $user['connected'];
+      $triIdentifiant[] = $user['identifiant'];
     }
+
+    unset($user);
 
     array_multisort($triStatut, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
 

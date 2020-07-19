@@ -735,6 +735,13 @@
     }
     $reponse->closeCursor();
 
+    // Traitement de sécurité
+    foreach ($listeUsers as $user)
+    {
+      Profile::secureData($user);
+    }
+
+    // Retour
     return $listeUsers;
   }
 

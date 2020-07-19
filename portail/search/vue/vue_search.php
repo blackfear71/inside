@@ -60,7 +60,7 @@
               AND empty($resultats['food_advisor'])
               AND empty($resultats['petits_pedestres'])
               AND empty($resultats['missions']))
-                echo '<div class="titre_section"><img src="../../includes/icons/search/search.png" alt="search" class="logo_titre_section" /><div class="texte_titre_section">Pas de résultats trouvés pour "' . $_SESSION['save']['search'] . '" !</div></div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/search/search.png" alt="search" class="logo_titre_section" /><div class="texte_titre_section">Pas de résultats trouvés pour "' . $_SESSION['search']['text_search'] . '" !</div></div>';
 
               // Résultats par section
               if (!empty($resultats['movie_house']))
@@ -122,7 +122,7 @@
                 // Résultats
                 foreach ($resultats['petits_pedestres'] as $resultatsPP)
                 {
-                  echo '<a href="../petitspedestres/parcours.php?id=' . $resultatsPP->getId() . '&action=consulter" class="lien_resultat">';
+                  echo '<a href="../petitspedestres/parcours.php?id=' . $resultatsPP->getId() . '&action=goConsulter" class="lien_resultat">';
                     echo '<table class="zone_resultat">';
                       echo '<tr>';
                         echo '<td class="zone_resultat_titre">';

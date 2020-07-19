@@ -59,25 +59,24 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
-        ?>
 
-				<div class="PP-parcours">
-          <div class="PP-titre">
-            <?php echo $parcours->getNom(); ?>
-          </div>
+          /***********/
+          /* Contenu */
+          /***********/
+  				echo '<div class="PP-parcours">';
+            echo '<div class="PP-titre">';
+              echo $parcours->getNom();
+            echo '</div>';
 
-          <p>
-            Distance : <?php echo $parcours->getDistance() . ' km'; ?><br/>
-            Lieu : <?php echo $parcours->getLieu(); ?>
+            echo '<p>';
+              echo 'Distance : ' . $parcours->getDistance() . ' km<br/>';
+              echo 'Lieu : ' . $parcours->getLieu();
 
-            <?php
-              if ($parcours->isImageSet())
-              {
+              if (!empty($parcours->getImage()))
                 echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . '" class="PP-image" /><br/>';
-              }
-            ?>
-          </p>
-        </div>
+            echo '</p>';
+          echo '</div>';
+        ?>
       </article>
 
       <!-- Chat -->

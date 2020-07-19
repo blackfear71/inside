@@ -74,7 +74,23 @@
         $this->tips        = $data['tips'];
     }
 
-    // getters et setters pour l'objet WeekCake
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setWeek(htmlspecialchars($data->getWeek()));
+      $data->setYear(htmlspecialchars($data->getYear()));
+      $data->setCooked(htmlspecialchars($data->getCooked()));
+      $data->setName(htmlspecialchars($data->getName()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+      $data->setIngredients(htmlspecialchars($data->getIngredients()));
+      $data->setRecipe(htmlspecialchars($data->getRecipe()));
+      $data->setTips(htmlspecialchars($data->getTips()));
+    }
+
+    // Getters et Setters pour l'objet WeekCake
     // id
     public function setId($id)
     {

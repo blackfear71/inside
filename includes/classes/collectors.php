@@ -77,7 +77,41 @@
         $this->context        = $data['context'];
     }
 
-    // getters et setters pour l'objet Collector
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setDate_add(htmlspecialchars($data->getDate_add()));
+      $data->setAuthor(htmlspecialchars($data->getAuthor()));
+      $data->setPseudo_author(htmlspecialchars($data->getPseudo_author()));
+      $data->setSpeaker(htmlspecialchars($data->getSpeaker()));
+      $data->setPseudo_speaker(htmlspecialchars($data->getPseudo_speaker()));
+      $data->setAvatar_speaker(htmlspecialchars($data->getAvatar_speaker()));
+      $data->setType_speaker(htmlspecialchars($data->getType_speaker()));
+      $data->setDate_collector(htmlspecialchars($data->getDate_collector()));
+      $data->setType_collector(htmlspecialchars($data->getType_collector()));
+      $data->setCollector(htmlspecialchars($data->getCollector()));
+      $data->setContext(htmlspecialchars($data->getContext()));
+      $data->setNb_votes(htmlspecialchars($data->getNb_votes()));
+      $data->setVote_user(htmlspecialchars($data->getVote_user()));
+
+      $listeVotes = $data->getVotes();
+
+      foreach ($listeVotes as &$votesParSmiley)
+      {
+        foreach ($votesParSmiley as &$vote)
+        {
+          $vote = htmlspecialchars($vote);
+        }
+
+        unset($vote);
+      }
+
+      unset($votesParSmiley);
+
+      $data->setVotes($listeVotes);
+    }
+
+    // Getters et Setters pour l'objet Collector
     // id
     public function setId($id)
     {

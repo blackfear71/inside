@@ -199,22 +199,28 @@
 
       unset($lieu);
 
+      foreach ($listeRestaurantsOuverts as $lieuRestaurantOuvert)
+      {
+        foreach ($lieuRestaurantOuvert as $restaurantOuvert)
+        {
+          Restaurant::secureData($restaurantOuvert);
+        }
+      }
+
       foreach ($listeRestaurantsResume as $restaurantsParLieuxResume)
       {
-        foreach ($restaurantsParLieuxResume as &$restaurant)
+        foreach ($restaurantsParLieuxResume as $restaurant)
         {
-          $restaurant->setName(htmlspecialchars($restaurant->getName()));
-          $restaurant->setPicture(htmlspecialchars($restaurant->getPicture()));
-          $restaurant->setTypes(htmlspecialchars($restaurant->getTypes()));
-          $restaurant->setLocation(htmlspecialchars($restaurant->getLocation()));
-          $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
-          $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
-          $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
-          $restaurant->setLafourchette(htmlspecialchars($restaurant->getLafourchette()));
-          $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
+          Restaurant::secureData($restaurant);
         }
+      }
 
-        unset($restaurant);
+      foreach ($listeRestaurants as $restaurantsParLieux)
+      {
+        foreach ($restaurantsParLieux as $restaurant)
+        {
+          Restaurant::secureData($restaurant);
+        }
       }
 
       foreach ($listeLieux as &$lieu)
@@ -224,123 +230,35 @@
 
       unset($lieu);
 
-      foreach ($listeRestaurants as $restaurantsParLieux)
+      foreach ($propositions as $proposition)
       {
-        foreach ($restaurantsParLieux as &$restaurant)
-        {
-          $restaurant->setName(htmlspecialchars($restaurant->getName()));
-          $restaurant->setPicture(htmlspecialchars($restaurant->getPicture()));
-          $restaurant->setTypes(htmlspecialchars($restaurant->getTypes()));
-          $restaurant->setLocation(htmlspecialchars($restaurant->getLocation()));
-          $restaurant->setPhone(htmlspecialchars($restaurant->getPhone()));
-          $restaurant->setWebsite(htmlspecialchars($restaurant->getWebsite()));
-          $restaurant->setPlan(htmlspecialchars($restaurant->getPlan()));
-          $restaurant->setLafourchette(htmlspecialchars($restaurant->getLafourchette()));
-          $restaurant->setDescription(htmlspecialchars($restaurant->getDescription()));
-        }
-
-        unset($restaurant);
+        Proposition::secureData($proposition);
       }
 
-      foreach ($propositions as &$proposition)
+      foreach ($solos as $solo)
       {
-        $proposition->setId_restaurant(htmlspecialchars($proposition->getId_restaurant()));
-        $proposition->setName(htmlspecialchars($proposition->getName()));
-        $proposition->setPicture(htmlspecialchars($proposition->getPicture()));
-        $proposition->setLocation(htmlspecialchars($proposition->getLocation()));
-        $proposition->setNb_participants(htmlspecialchars($proposition->getNb_participants()));
-        $proposition->setClassement(htmlspecialchars($proposition->getClassement()));
-        $proposition->setDetermined(htmlspecialchars($proposition->getDetermined()));
-        $proposition->setDate(htmlspecialchars($proposition->getDate()));
-        $proposition->setCaller(htmlspecialchars($proposition->getCaller()));
-        $proposition->setPseudo(htmlspecialchars($proposition->getPseudo()));
-        $proposition->setAvatar(htmlspecialchars($proposition->getAvatar()));
-        $proposition->setReserved(htmlspecialchars($proposition->getReserved()));
-        $proposition->setTypes(htmlspecialchars($proposition->getTypes()));
-        $proposition->setPhone(htmlspecialchars($proposition->getPhone()));
-        $proposition->setWebsite(htmlspecialchars($proposition->getWebsite()));
-        $proposition->setPlan(htmlspecialchars($proposition->getPlan()));
-        $proposition->setLafourchette(htmlspecialchars($proposition->getLafourchette()));
-        $proposition->setOpened(htmlspecialchars($proposition->getOpened()));
-        $proposition->setMin_price(htmlspecialchars($proposition->getMin_price()));
-        $proposition->setMax_price(htmlspecialchars($proposition->getMax_price()));
-        $proposition->setDescription(htmlspecialchars($proposition->getDescription()));
-
-        if (!empty($proposition->getDetails()))
-        {
-          foreach ($proposition->getDetails() as &$detailsUser)
-          {
-            $detailsUser['identifiant'] = htmlspecialchars($detailsUser['identifiant']);
-            $detailsUser['pseudo']      = htmlspecialchars($detailsUser['pseudo']);
-            $detailsUser['avatar']      = htmlspecialchars($detailsUser['avatar']);
-            $detailsUser['transports']  = htmlspecialchars($detailsUser['transports']);
-            $detailsUser['horaire']     = htmlspecialchars($detailsUser['horaire']);
-            $detailsUser['menu']        = htmlspecialchars($detailsUser['menu']);
-          }
-
-          unset($detailsUser);
-        }
+        Profile::secureData($solo);
       }
 
-      unset($proposition);
-
-      foreach ($solos as &$solo)
+      foreach ($mesChoix as $monChoix)
       {
-        $solo->setIdentifiant(htmlspecialchars($solo->getIdentifiant()));
-        $solo->setPseudo(htmlspecialchars($solo->getPseudo()));
-        $solo->setAvatar(htmlspecialchars($solo->getAvatar()));
+        Choix::secureData($monChoix);
       }
 
-      unset($solo);
-
-      foreach ($mesChoix as &$monChoix)
-      {
-        $monChoix->setId_restaurant(htmlspecialchars($monChoix->getId_restaurant()));
-        $monChoix->setIdentifiant(htmlspecialchars($monChoix->getIdentifiant()));
-        $monChoix->setDate(htmlspecialchars($monChoix->getDate()));
-        $monChoix->setTime(htmlspecialchars($monChoix->getTime()));
-        $monChoix->setTransports(htmlspecialchars($monChoix->getTransports()));
-        $monChoix->setMenu(htmlspecialchars($monChoix->getMenu()));
-        $monChoix->setName(htmlspecialchars($monChoix->getName()));
-        $monChoix->setPicture(htmlspecialchars($monChoix->getPicture()));
-        $monChoix->setLocation(htmlspecialchars($monChoix->getLocation()));
-        $monChoix->setOpened(htmlspecialchars($monChoix->getOpened()));
-      }
-
-      unset($monChoix);
-
-      foreach ($choixSemaine as $key => &$choixJour)
+      foreach ($choixSemaine as $choixJour)
       {
         if (!empty($choixJour))
         {
-          $choixJour->setId_restaurant(htmlspecialchars($choixJour->getId_restaurant()));
-          $choixJour->setName(htmlspecialchars($choixJour->getName()));
-          $choixJour->setPicture(htmlspecialchars($choixJour->getPicture()));
-          $choixJour->setLocation(htmlspecialchars($choixJour->getLocation()));
-          $choixJour->setNb_participants(htmlspecialchars($choixJour->getNb_participants()));
-          $choixJour->setClassement(htmlspecialchars($choixJour->getClassement()));
-          $choixJour->setDetermined(htmlspecialchars($choixJour->getDetermined()));
-          $choixJour->setDate(htmlspecialchars($choixJour->getDate()));
-          $choixJour->setCaller(htmlspecialchars($choixJour->getCaller()));
-          $choixJour->setPseudo(htmlspecialchars($choixJour->getPseudo()));
-          $choixJour->setAvatar(htmlspecialchars($choixJour->getAvatar()));
-          $choixJour->setReserved(htmlspecialchars($choixJour->getReserved()));
-          $choixJour->setPhone(htmlspecialchars($choixJour->getPhone()));
+          Proposition::secureData($choixJour);
         }
       }
 
-      unset($choixJour);
-
       if (!empty($sansPropositions))
       {
-        foreach ($sansPropositions as &$userNoChoice)
+        foreach ($sansPropositions as $userNoChoice)
         {
-          $userNoChoice->setIdentifiant(htmlspecialchars($userNoChoice->getIdentifiant()));
-          $userNoChoice->setPseudo(htmlspecialchars($userNoChoice->getPseudo()));
-          $userNoChoice->setAvatar(htmlspecialchars($userNoChoice->getAvatar()));
+          Profile::secureData($userNoChoice);
         }
-
-        unset($userNoChoice);
       }
 
       // Conversion JSON

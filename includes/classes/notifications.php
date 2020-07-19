@@ -56,7 +56,20 @@
         $this->content  = $data['content'];
     }
 
-    // getters et setters pour l'objet Notification
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setAuthor(htmlspecialchars($data->getAuthor()));
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setTime(htmlspecialchars($data->getTime()));
+      $data->setCategory(htmlspecialchars($data->getCategory()));
+      $data->setContent(htmlspecialchars($data->getContent()));
+      $data->setIcon(htmlspecialchars($data->getIcon()));
+      $data->setSentence(htmlspecialchars($data->getSentence()));
+      $data->setLink(htmlspecialchars($data->getLink()));
+    }
+
+    // Getters et Setters pour l'objet Notification
     // id
     public function setId($id)
     {

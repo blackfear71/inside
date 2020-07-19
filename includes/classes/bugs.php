@@ -84,7 +84,7 @@
       $data->getResolved(htmlspecialchars($data->getResolved()));
     }
 
-    // getters et setters pour l'objet BugEvolution
+    // Getters et Setters pour l'objet BugEvolution
     // id
     public function setId($id)
     {

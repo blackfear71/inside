@@ -155,10 +155,10 @@
 
                   foreach ($listeEtoiles[$film->getId()] as $etoilesFilm)
                   {
-                    if ($etoilesFilm['stars'] == $previousStars)
+                    if ($etoilesFilm->getStars() == $previousStars)
                     {
                       // Avatar
-                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, 'avatar');
+                      $avatarFormatted = formatAvatar($etoilesFilm->getAvatar(), $etoilesFilm->getPseudo(), 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_fiche" />';
                     }
@@ -169,14 +169,14 @@
                       else
                         echo '<div class="ligne_stars">';
 
-                      echo '<img src="../../includes/icons/moviehouse/stars/star' . $etoilesFilm['stars'] . '.png" alt="star' . $etoilesFilm['stars'] . '" class="icone_fiche_4" />';
+                      echo '<img src="../../includes/icons/moviehouse/stars/star' . $etoilesFilm->getStars() . '.png" alt="star' . $etoilesFilm->getStars() . '" class="icone_fiche_4" />';
 
                       // Avatar
-                      $avatarFormatted = formatAvatar($etoilesFilm['avatar'], $etoilesFilm['pseudo'], 2, 'avatar');
+                      $avatarFormatted = formatAvatar($etoilesFilm->getAvatar(), $etoilesFilm->getPseudo(), 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_fiche" />';
 
-                      $previousStars = $etoilesFilm['stars'];
+                      $previousStars = $etoilesFilm->getStars();
                     }
                   }
                   echo '</div>';

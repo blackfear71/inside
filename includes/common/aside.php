@@ -17,7 +17,7 @@
 		// Ajouter parcours
 		if ($ajouterParcours == true)
 		{
-			echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goajouter" title="Ajouter parcours" class="link_aside">';
+			echo '<a href="/inside/portail/petitspedestres/parcours.php?action=goAjouter" title="Ajouter parcours" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/add.png" alt="add" title="Ajouter parcours" class="icon_aside" />';
 			echo '</a>';
 		}
@@ -25,7 +25,7 @@
 		// Modifier parcours
 		if ($modifierParcours == true)
 		{
-			echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=gomodifier" title="Modifier les détails" class="link_aside">';
+			echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
 				echo '<img src="/inside/includes/icons/common/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
 			echo '</a>';
 		}

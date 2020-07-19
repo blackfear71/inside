@@ -125,12 +125,12 @@
                           echo '<div class="zone_titre_gagnants">Les gagnants</div>';
                       }
 
-                      if ($rankUser['rank'] != $rank)
+                      if ($rankUser->getRank() != $rank)
                       {
                         // Médailles
-                        if ($rankUser['rank'] <= 3)
+                        if ($rankUser->getRank() <= 3)
                         {
-                          switch ($rankUser['rank'])
+                          switch ($rankUser->getRank())
                           {
                             case 1:
                               echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal_rank" />';
@@ -160,18 +160,18 @@
                           }
                         }
 
-                        $rank = $rankUser['rank'];
+                        $rank = $rankUser->getRank();
 
                         if ($rank > 3)
-                          echo '<div class="score_classement margin_left_50">' . $rankUser['total'] . '</div>';
+                          echo '<div class="score_classement margin_left_50">' . $rankUser->getTotal() . '</div>';
                         else
-                          echo '<div class="score_classement">' . $rankUser['total'] . '</div>';
+                          echo '<div class="score_classement">' . $rankUser->getTotal() . '</div>';
 
                         echo '<div class="zone_medals">';
                       }
 
                       // Avatar
-                      $avatarFormatted = formatAvatar($rankUser['avatar'], $rankUser['pseudo'], 2, 'avatar');
+                      $avatarFormatted = formatAvatar($rankUser->getAvatar(), $rankUser->getPseudo(), 2, 'avatar');
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
 
@@ -183,7 +183,7 @@
                       }
 
                       // Fin zone gagnants si exactement 3 médailles présentes ou si il reste des participants
-                      if (!isset($ranking[$keyRank + 1]) OR $rankUser['rank'] != $ranking[$keyRank + 1]['rank'])
+                      if (!isset($ranking[$keyRank + 1]) OR $rankUser->getRank() != $ranking[$keyRank + 1]->getRank())
                         echo '</div>';
 
                       // Fin zone participants si rang > 3

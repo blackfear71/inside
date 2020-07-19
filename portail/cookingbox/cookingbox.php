@@ -85,29 +85,8 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      $currentWeek->setIdentifiant(htmlspecialchars($currentWeek->getIdentifiant()));
-      $currentWeek->setPseudo(htmlspecialchars($currentWeek->getPseudo()));
-      $currentWeek->setAvatar(htmlspecialchars($currentWeek->getAvatar()));
-      $currentWeek->setWeek(htmlspecialchars($currentWeek->getWeek()));
-      $currentWeek->setYear(htmlspecialchars($currentWeek->getYear()));
-      $currentWeek->setCooked(htmlspecialchars($currentWeek->getCooked()));
-      $currentWeek->setName(htmlspecialchars($currentWeek->getName()));
-      $currentWeek->setPicture(htmlspecialchars($currentWeek->getPicture()));
-      $currentWeek->setIngredients(htmlspecialchars($currentWeek->getIngredients()));
-      $currentWeek->setRecipe(htmlspecialchars($currentWeek->getRecipe()));
-      $currentWeek->setTips(htmlspecialchars($currentWeek->getTips()));
-
-      $nextWeek->setIdentifiant(htmlspecialchars($nextWeek->getIdentifiant()));
-      $nextWeek->setPseudo(htmlspecialchars($nextWeek->getPseudo()));
-      $nextWeek->setAvatar(htmlspecialchars($nextWeek->getAvatar()));
-      $nextWeek->setWeek(htmlspecialchars($nextWeek->getWeek()));
-      $nextWeek->setYear(htmlspecialchars($nextWeek->getYear()));
-      $nextWeek->setCooked(htmlspecialchars($nextWeek->getCooked()));
-      $nextWeek->setName(htmlspecialchars($nextWeek->getName()));
-      $nextWeek->setPicture(htmlspecialchars($nextWeek->getPicture()));
-      $nextWeek->setIngredients(htmlspecialchars($nextWeek->getIngredients()));
-      $nextWeek->setRecipe(htmlspecialchars($nextWeek->getRecipe()));
-      $nextWeek->setTips(htmlspecialchars($nextWeek->getTips()));
+      WeekCake::secureData($currentWeek);
+      WeekCake::secureData($nextWeek);
 
       foreach ($listeUsers as &$user)
       {
@@ -122,10 +101,11 @@
         {
           $week = htmlspecialchars($week);
         }
+
+        unset($week);
       }
 
       unset($year);
-      unset($week);
 
       foreach ($ongletsYears as &$onglet)
       {
@@ -134,22 +114,10 @@
 
       unset($onglet);
 
-      foreach ($recettes as &$recette)
+      foreach ($recettes as $recette)
       {
-        $recette->setIdentifiant(htmlspecialchars($recette->getIdentifiant()));
-        $recette->setPseudo(htmlspecialchars($recette->getPseudo()));
-        $recette->setAvatar(htmlspecialchars($recette->getAvatar()));
-        $recette->setWeek(htmlspecialchars($recette->getWeek()));
-        $recette->setYear(htmlspecialchars($recette->getYear()));
-        $recette->setCooked(htmlspecialchars($recette->getCooked()));
-        $recette->setName(htmlspecialchars($recette->getName()));
-        $recette->setPicture(htmlspecialchars($recette->getPicture()));
-        $recette->setIngredients(htmlspecialchars($recette->getIngredients()));
-        $recette->setRecipe(htmlspecialchars($recette->getRecipe()));
-        $recette->setTips(htmlspecialchars($recette->getTips()));
+        WeekCake::secureData($recette);
       }
-
-      unset($recette);
 
       // Conversion JSON
       $listeSemainesJson = json_encode($listeSemaines);

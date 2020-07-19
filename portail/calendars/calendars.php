@@ -77,36 +77,19 @@
 
       unset($year);
 
-      foreach ($calendriers as &$calendrier)
+      foreach ($calendriers as $calendrier)
       {
-        $calendrier->setTo_delete(htmlspecialchars($calendrier->getTo_delete()));
-        $calendrier->setMonth(htmlspecialchars($calendrier->getMonth()));
-        $calendrier->setYear(htmlspecialchars($calendrier->getYear()));
-        $calendrier->setTitle(htmlspecialchars($calendrier->getTitle()));
-        $calendrier->setCalendar(htmlspecialchars($calendrier->getCalendar()));
+        Calendrier::secureData($calendrier);
       }
 
-      unset($calendrier);
-
-      $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-      $preferences->setInit_chat(htmlspecialchars($preferences->getInit_chat()));
-      $preferences->setCelsius(htmlspecialchars($preferences->getCelsius()));
-      $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-      $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
-      $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-      $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-      $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+      Preferences::secureData($preferences);
       break;
 
     case 'goConsulterAnnexes':
-      foreach ($annexes as &$annexe)
+      foreach ($annexes as $annexe)
       {
-        $annexe->setTo_delete(htmlspecialchars($annexe->getTo_delete()));
-        $annexe->setAnnexe(htmlspecialchars($annexe->getAnnexe()));
-        $annexe->setTitle(htmlspecialchars($annexe->getTitle()));
+        Annexe::secureData($annexe);
       }
-
-      unset($annexe);
       break;
 
     case 'doAjouter':

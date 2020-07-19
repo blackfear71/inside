@@ -42,59 +42,23 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-      $preferences->setInit_chat(htmlspecialchars($preferences->getInit_chat()));
-      $preferences->setCelsius(htmlspecialchars($preferences->getCelsius()));
-      $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-      $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
-      $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-      $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-      $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
+      Preferences::secureData($preferences);
 
-      foreach ($news as &$messageNews)
+      foreach ($news as $messageNews)
       {
-        $messageNews->setTitle(htmlspecialchars($messageNews->getTitle()));
-        //$messageNews->setContent(htmlspecialchars($messageNews->getContent()));
-        //$messageNews->setDetails(htmlspecialchars($messageNews->getDetails()));
-        $messageNews->setLogo(htmlspecialchars($messageNews->getLogo()));
-        $messageNews->setLink(htmlspecialchars($messageNews->getLink()));
+        News::secureData($messageNews);
       }
 
-      unset($messageNews);
-
-      if (isset($messagesMissions) AND !empty($messagesMissions))
+      foreach ($portail as &$lienPortail)
       {
-        foreach ($messagesMissions as $mission)
-        {
-          $mission->setMission(htmlspecialchars($mission->getMission()));
-          $mission->setReference(htmlspecialchars($mission->getReference()));
-          $mission->setDate_deb(htmlspecialchars($mission->getDate_deb()));
-          $mission->setDate_fin(htmlspecialchars($mission->getDate_fin()));
-          $mission->setHeure(htmlspecialchars($mission->getHeure()));
-          $mission->setObjectif(htmlspecialchars($mission->getObjectif()));
-          $mission->setDescription(htmlspecialchars($mission->getDescription()));
-          $mission->setExplications(htmlspecialchars($mission->getExplications()));
-          $mission->setConclusion(htmlspecialchars($mission->getConclusion()));
-          $mission->setStatut(htmlspecialchars($mission->getStatut()));
-        }
+        $lienPortail['lien']   = htmlspecialchars($lienPortail['lien']);
+        $lienPortail['title']  = htmlspecialchars($lienPortail['title']);
+        $lienPortail['image']  = htmlspecialchars($lienPortail['image']);
+        $lienPortail['alt']    = htmlspecialchars($lienPortail['alt']);
+        $lienPortail['mobile'] = htmlspecialchars($lienPortail['mobile']);
       }
 
-      if (isset($gagnantsMissions) AND !empty($gagnantsMissions))
-      {
-        foreach ($gagnantsMissions as $gagnants)
-        {
-          foreach ($gagnants as &$gagnant)
-          {
-            $gagnant['id_mission']  = htmlspecialchars($gagnant['id_mission']);
-            $gagnant['identifiant'] = htmlspecialchars($gagnant['identifiant']);
-            $gagnant['pseudo']      = htmlspecialchars($gagnant['pseudo']);
-            $gagnant['total']       = htmlspecialchars($gagnant['total']);
-            $gagnant['rank']        = htmlspecialchars($gagnant['rank']);
-          }
-
-          unset($gagnant);
-        }
-      }
+      unset($lienPortail);
       break;
 
     default:

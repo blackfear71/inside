@@ -69,7 +69,7 @@
       $data->setLogs($listeLogs);
     }
 
-    // getters et setters pour l'objet ChangeLog
+    // Getters et Setters pour l'objet ChangeLog
     // id
     public function setId($id)
     {
@@ -148,7 +148,7 @@
       $data->setWeek(htmlspecialchars($data->getWeek()));
     }
 
-    // getters et setters pour l'objet ChangeLogParameters
+    // Getters et Setters pour l'objet ChangeLogParameters
     // Action
     public function setAction($action)
     {

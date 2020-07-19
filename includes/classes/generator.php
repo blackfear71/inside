@@ -64,7 +64,7 @@
       }
     }
 
-    // getters et setters pour l'objet GeneratorParameters
+    // Getters et Setters pour l'objet GeneratorParameters
     // Nom fonctionnel
     public function setNom_section($nom_section)
     {
@@ -182,7 +182,7 @@
       $data->setCategorie(htmlspecialchars($data->getCategorie()));
     }
 
-    // getters et setters pour l'objet GeneratorOptions
+    // Getters et Setters pour l'objet GeneratorOptions
     // Nom option
     public function setOption($option)
     {

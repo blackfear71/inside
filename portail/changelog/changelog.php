@@ -35,7 +35,6 @@
 
     case 'goConsulterHistoire':
       $ongletsYears = getOnglets();
-      $months       = getMonths();
       break;
 
     default:
@@ -62,26 +61,10 @@
 
       unset($categorie);
 
-      foreach ($listeLogs as &$log)
+      foreach ($listeLogs as $log)
       {
-        $log->setWeek(htmlspecialchars($log->getWeek()));
-        $log->setYear(htmlspecialchars($log->getYear()));
-        $log->setNotes(htmlspecialchars($log->getNotes()));
-
-        foreach ($log->getLogs() as &$logsCategorie)
-        {
-          foreach ($logsCategorie as &$logCategorie)
-          {
-            $logCategorie = htmlspecialchars($logCategorie);
-          }
-
-          unset($logCategorie);
-        }
-
-        unset($logCategorie);
+        ChangeLog::secureData($log);
       }
-
-      unset($log);
       break;
 
     case 'goConsulterHistoire':
@@ -91,13 +74,6 @@
       }
 
       unset($onglet);
-
-      foreach ($months as &$month)
-      {
-        $month = htmlspecialchars($month);
-      }
-
-      unset($month);
       break;
 
     default:

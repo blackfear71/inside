@@ -4,27 +4,27 @@
 
   $lvl = null;
 
-  foreach ($experienceUsers as $keyExp => $expUser)
+  foreach ($listeUsers as $keyUser => $user)
   {
-    if ($expUser['niveau'] != $lvl)
+    if ($user->getLevel() != $lvl)
     {
       echo '<div class="zone_avatars_niveaux">';
-        echo '<div class="titre_classement_niveaux">Niveau <span class="number_exp">' . $expUser['niveau'] . '</span></div>';
+        echo '<div class="titre_classement_niveaux">Niveau <span class="number_exp">' . $user->getLevel() . '</span></div>';
 
-      $lvl = $expUser['niveau'];
+      $lvl = $user->getLevel();
     }
 
     echo '<div class="zone_user_niveaux">';
       // Avatar
-      $avatarFormatted = formatAvatar($expUser['avatar'], $expUser['pseudo'], 2, 'avatar');
+      $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_niveau" />';
 
       // Pseudo
-      echo '<div class="pseudo_niveau">' . formatString($expUser['pseudo'], 15) . '</div>';
+      echo '<div class="pseudo_niveau">' . formatString($user->getPseudo(), 15) . '</div>';
     echo '</div>';
 
-    if (!isset($experienceUsers[$keyExp + 1]) OR $expUser['niveau'] != $experienceUsers[$keyExp + 1]['niveau'])
+    if (!isset($listeUsers[$keyUser + 1]) OR $user->getLevel() != $listeUsers[$keyUser + 1]->getLevel())
       echo '</div>';
   }
 ?>

@@ -49,26 +49,32 @@
           echo '<div class="zone_loading_page">';
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
+
+          /**********/
+          /* Saisie */
+          /**********/
+  				echo '<div class="PP-contenu-saisie">';
+  					echo '<form method="post" action="parcours.php?action=doAjouter" class="PP-form-saisie">';
+  						echo '<div class="PP-zone-saisie-avancee-infos">';
+  							echo '<label class="label_parcours">Nom : </label>';
+  							echo '<input type="text" placeholder="Nom parcours" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" /><br />';
+
+                echo '<label class="label_parcours">Distance : </label>';
+  							echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" /><br />';
+
+                echo '<label class="label_parcours">Lieu : </label>';
+  							echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" /><br />';
+
+                echo '<label class="label_parcours">Url image : </label>';
+  							echo '<input type="text" placeholder="Url de l\'image" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" /><br />';
+  						echo '</div>';
+
+              echo '<br /><br />';
+
+  						echo '<input type="submit" name="modification" value="Valider" />';
+  					echo '</form>';
+          echo '</div>';
         ?>
-
-				<div class="PP-contenu-saisie">
-					<form method="post" action="parcours.php?action=doajouter" class="PP-form-saisie">
-						<div class="PP-zone-saisie-avancee-infos">
-							<label class="label_parcours">Nom : </label>
-							<input type="text" placeholder="Nom parcours" value="<?php echo $_SESSION['save_add']['nom']; ?>" name="name" class="PP-monoligne" /><br />
-							<label class="label_parcours">Distance : </label>
-							<input type="text" placeholder="Distance (km)" value="<?php echo $_SESSION['save_add']['distance']; ?>" name="dist" class="PP-monoligne" /><br />
-							<label class="label_parcours">Lieu : </label>
-							<input type="text" placeholder="Lieu" value="<?php echo $_SESSION['save_add']['lieu']; ?>" name="location" class="PP-monoligne" /><br />
-							<label class="label_parcours">Url image : </label>
-							<input type="text" placeholder="Url de l'image" value="<?php echo $_SESSION['save_add']['image']; ?>" name="picurl" class="PP-monoligne" /><br />
-						</div>
-
-            <br /><br />
-
-						<input type="submit" name="modification" value="Valider" />
-					</form>
-        </div>
       </article>
 
       <!-- Chat -->

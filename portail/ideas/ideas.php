@@ -69,23 +69,9 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      if (!empty($listeIdeas))
+      foreach ($listeIdeas as $idea)
       {
-        foreach ($listeIdeas as &$idea)
-        {
-          $idea->setSubject(htmlspecialchars($idea->getSubject()));
-          $idea->setDate(htmlspecialchars($idea->getDate()));
-          $idea->setAuthor(htmlspecialchars($idea->getAuthor()));
-          $idea->setPseudo_author(htmlspecialchars($idea->getPseudo_author()));
-          $idea->setAvatar_author(htmlspecialchars($idea->getAvatar_author()));
-          $idea->setContent(htmlspecialchars($idea->getContent()));
-          $idea->setStatus(htmlspecialchars($idea->getStatus()));
-          $idea->setDevelopper(htmlspecialchars($idea->getDevelopper()));
-          $idea->setPseudo_developper(htmlspecialchars($idea->getPseudo_developper()));
-          $idea->setAvatar_developper(htmlspecialchars($idea->getAvatar_developper()));
-        }
-
-        unset($idea);
+        Idea::secureData($idea);
       }
       break;
 

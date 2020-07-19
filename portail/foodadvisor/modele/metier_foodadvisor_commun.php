@@ -24,7 +24,7 @@
     // Récupération de la liste des restaurants pour chaque lieu
     foreach ($listeLieux as $lieu)
     {
-      $listeRestaurants[$lieu] = physiqueRestaurantsParLieux($lieu);
+      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsParLieux($lieu);
     }
 
     // Retour
@@ -118,10 +118,10 @@
           // Recherche pseudo et avatar utilisateur
           foreach ($detailsProposition as &$detail)
           {
-            $user = physiqueUser($detail['identifiant']);
+            $user = physiqueUser($detail->getIdentifiant());
 
-            $detail['pseudo'] = $user->getPseudo();
-            $detail['avatar'] = $user->getAvatar();
+            $detail->setPseudo($user->getPseudo());
+            $detail->setAvatar($user->getAvatar());
           }
 
           unset($detail);

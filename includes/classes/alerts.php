@@ -54,7 +54,7 @@
       $data->setMessage(htmlspecialchars($data->getMessage()));
     }
 
-    // getters et setters pour l'objet ALerte
+    // Getters et Setters pour l'objet ALerte
     // id
     public function setId($id)
     {

@@ -166,6 +166,8 @@
   // RETOUR : Tableau des données de progression
   function getProgress($experience)
   {
+    $progression = new Progression();
+
     $niveau   = convertExperience($experience);
     $expMin   = 10 * $niveau ** 2;
     $expMax   = 10 * ($niveau + 1) ** 2;
@@ -173,13 +175,12 @@
     $progress = $experience - $expMin;
     $percent  = floor($progress * 100 / $expLvl);
 
-    $progression = array('niveau'   => $niveau,
-                         'exp_min'  => $expMin,
-                         'exp_max'  => $expMax,
-                         'exp_lvl'  => $expLvl,
-                         'progress' => $progress,
-                         'percent'  => $percent
-                        );
+    $progression->setNiveau($niveau);
+    $progression->setExperience_min($expMin);
+    $progression->setExperience_max($expMax);
+    $progression->setExperience_niveau($expLvl);
+    $progression->setProgression($progress);
+    $progression->setPourcentage($percent);
 
     return $progression;
   }
@@ -627,36 +628,6 @@
     return $listeSuccesAConvertir;
   }
 
-  // METIER : Retourne un tableau trié des utilisateurs par expérience
-  // RETOUR : Tableau utilisateurs trié
-  function getExperienceUsers($listUsers)
-  {
-    $listeExperienceUsers = array();
-
-    foreach ($listUsers as $user)
-    {
-      $experience = array('identifiant' => $user->getIdentifiant(),
-                          'pseudo'      => $user->getPseudo(),
-                          'avatar'      => $user->getAvatar(),
-                          'experience'  => $user->getExperience(),
-                          'niveau'      => convertExperience($user->getExperience())
-                         );
-      array_push($listeExperienceUsers, $experience);
-    }
-
-    // Tri sur expérience puis identifiant
-    foreach ($listeExperienceUsers as $experienceUser)
-    {
-      $triExp[] = $experienceUser['experience'];
-      $triId[]  = $experienceUser['identifiant'];
-    }
-
-    array_multisort($triExp, SORT_DESC, $triId, SORT_ASC, $listeExperienceUsers);
-
-    // Retour
-    return $listeExperienceUsers;
-  }
-
   // METIER : Contrôle pour les missions que la date de fin soit passée
   // RETOUR : Booléen
   function isMissionEnded($reference)
@@ -726,11 +697,26 @@
       // Instanciation d'un objet User à partir des données remontées de la bdd
       $user = Profile::withData($donnees);
 
+      $user->setLevel(convertExperience($user->getExperience()));
+
       // On ajoute la ligne au tableau
       array_push($listeUsers, $user);
     }
     $reponse->closeCursor();
 
+    // Tri sur expérience puis identifiant
+    if (!empty($listeUsers))
+    {
+      foreach ($listeUsers as $user)
+      {
+        $triExp[] = $user->getExperience();
+        $triId[]  = $user->getIdentifiant();
+      }
+
+      array_multisort($triExp, SORT_DESC, $triId, SORT_ASC, $listeUsers);
+    }
+
+    // Retour
     return $listeUsers;
   }
 

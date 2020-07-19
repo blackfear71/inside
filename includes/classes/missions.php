@@ -87,7 +87,7 @@
       $data->setStatut(htmlspecialchars($data->getStatut()));
     }
 
-    // getters et setters pour l'objet Mission
+    // Getters et Setters pour l'objet Mission
     // id
     public function setId($id)
     {
@@ -214,6 +214,7 @@
   {
     private $identifiant;
     private $pseudo;
+    private $avatar;
     private $total;
     private $rank;
 
@@ -222,6 +223,7 @@
     {
       $this->identifiant = '';
       $this->pseudo      = '';
+      $this->avatar      = '';
       $this->total       = 0;
       $this->rank        = '';
     }
@@ -231,11 +233,12 @@
     {
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
       $data->setTotal(htmlspecialchars($data->getTotal()));
       $data->setRank(htmlspecialchars($data->getRank()));
     }
 
-    // getters et setters pour l'objet ParticipantMission
+    // Getters et Setters pour l'objet ParticipantMission
     // Identifiant
     public function setIdentifiant($identifiant)
     {
@@ -256,6 +259,17 @@
     public function getPseudo()
     {
       return $this->pseudo;
+    }
+
+    // Avatar
+    public function setAvatar($avatar)
+    {
+      $this->avatar = $avatar;
+    }
+
+    public function getAvatar()
+    {
+      return $this->avatar;
     }
 
     // Total des objets trouvés

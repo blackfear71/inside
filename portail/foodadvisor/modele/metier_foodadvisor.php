@@ -9,7 +9,7 @@
     // Récupération de la liste des restaurants ouverts pour chaque lieu
     foreach ($listeLieux as $lieu)
     {
-      $listeRestaurants[$lieu] = physiqueRestaurantsOuvertsParLieux($lieu);
+      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsOuvertsParLieux($lieu);
     }
 
     // Retour
@@ -94,6 +94,23 @@
       else
         $phone = '';
 
+      // Conversion des détails d'une proposition
+      $detailsPropositionAConvertir = array();
+
+      foreach ($proposition->getDetails() as $detailsProposition)
+      {
+        $ligneDetails = array('identifiant' => $detailsProposition->getIdentifiant(),
+                              'pseudo'      => $detailsProposition->getPseudo(),
+                              'avatar'      => $detailsProposition->getAvatar(),
+                              'transports'  => $detailsProposition->getTransports(),
+                              'horaire'     => $detailsProposition->getHoraire(),
+                              'menu'        => $detailsProposition->getMenu()
+                             );
+
+        array_push($detailsPropositionAConvertir, $ligneDetails);
+      }
+
+      // Conversion d'une proposition
       $propositionAConvertir = array('id_restaurant'   => $proposition->getId_restaurant(),
                                      'name'            => $proposition->getName(),
                                      'picture'         => $proposition->getPicture(),
@@ -114,9 +131,10 @@
                                      'min_price'       => $proposition->getMin_price(),
                                      'max_price'       => $proposition->getMax_price(),
                                      'description'     => $proposition->getDescription(),
-                                     'details'         => $proposition->getDetails()
+                                     'details'         => $detailsPropositionAConvertir
                                     );
 
+      // Ajout au tableau
       $listePopositionsAConvertir[$proposition->getId_restaurant()] = $propositionAConvertir;
     }
 

@@ -85,7 +85,24 @@
         $this->description  = $data['description'];
     }
 
-    // getters et setters pour l'objet Restaurant
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setName(htmlspecialchars($data->getName()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+      $data->setTypes(htmlspecialchars($data->getTypes()));
+      $data->setLocation(htmlspecialchars($data->getLocation()));
+      $data->setPhone(htmlspecialchars($data->getPhone()));
+      $data->setOpened(htmlspecialchars($data->getOpened()));
+      $data->setMin_price(htmlspecialchars($data->getMin_price()));
+      $data->setMax_price(htmlspecialchars($data->getMax_price()));
+      $data->setWebsite(htmlspecialchars($data->getWebsite()));
+      $data->setPlan(htmlspecialchars($data->getPlan()));
+      $data->setLafourchette(htmlspecialchars($data->getLafourchette()));
+      $data->setDescription(htmlspecialchars($data->getDescription()));
+    }
+
+    // Getters et Setters pour l'objet Restaurant
     // id
     public function setId($id)
     {
@@ -312,7 +329,37 @@
         $this->reserved      = $data['reserved'];
     }
 
-    // getters et setters pour l'objet Restaurant
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setName(htmlspecialchars($data->getName()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+      $data->setLocation(htmlspecialchars($data->getLocation()));
+      $data->setNb_participants(htmlspecialchars($data->getNb_participants()));
+      $data->setClassement(htmlspecialchars($data->getClassement()));
+      $data->setDetermined(htmlspecialchars($data->getDetermined()));
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setCaller(htmlspecialchars($data->getCaller()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setReserved(htmlspecialchars($data->getReserved()));
+      $data->setTypes(htmlspecialchars($data->getTypes()));
+      $data->setPhone(htmlspecialchars($data->getPhone()));
+      $data->setWebsite(htmlspecialchars($data->getWebsite()));
+      $data->setPlan(htmlspecialchars($data->getPlan()));
+      $data->setLafourchette(htmlspecialchars($data->getLafourchette()));
+      $data->setOpened(htmlspecialchars($data->getOpened()));
+      $data->setMin_price(htmlspecialchars($data->getMin_price()));
+      $data->setMax_price(htmlspecialchars($data->getMax_price()));
+      $data->setDescription(htmlspecialchars($data->getDescription()));
+
+      foreach ($data->getDetails() as $detailsUser)
+      {
+        DetailsProposition::secureData($detailsUser);
+      }
+    }
+
+    // Getters et Setters pour l'objet Proposition
     // id
     public function setId($id)
     {
@@ -323,7 +370,7 @@
     {
       return $this->id;
     }
-    
+
     // id restaurant
     public function setId_restaurant($id_restaurant)
     {
@@ -567,6 +614,105 @@
     }
   }
 
+  class DetailsProposition
+  {
+    private $identifiant;
+    private $pseudo;
+    private $avatar;
+    private $transports;
+    private $horaire;
+    private $menu;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->identifiant = '';
+      $this->pseudo      = '';
+      $this->avatar      = '';
+      $this->transports  = '';
+      $this->horaire     = '';
+      $this->menu        = '';
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      $data->setTransports(htmlspecialchars($data->getTransports()));
+      $data->setHoraire(htmlspecialchars($data->getHoraire()));
+      $data->setMenu(htmlspecialchars($data->getMenu()));
+    }
+
+    // Getters et Setters pour l'objet Proposition
+    // Identifiant
+    public function setIdentifiant($identifiant)
+    {
+      $this->identifiant = $identifiant;
+    }
+
+    public function getIdentifiant()
+    {
+      return $this->identifiant;
+    }
+
+    // Pseudo
+    public function setPseudo($pseudo)
+    {
+      $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+      return $this->pseudo;
+    }
+
+    // Avatar
+    public function setAvatar($avatar)
+    {
+      $this->avatar = $avatar;
+    }
+
+    public function getAvatar()
+    {
+      return $this->avatar;
+    }
+
+    // Tranports
+    public function setTransports($transports)
+    {
+      $this->transports = $transports;
+    }
+
+    public function getTransports()
+    {
+      return $this->transports;
+    }
+
+    // Horaire
+    public function setHoraire($horaire)
+    {
+      $this->horaire = $horaire;
+    }
+
+    public function getHoraire()
+    {
+      return $this->horaire;
+    }
+
+    // Menu
+    public function setMenu($menu)
+    {
+      $this->menu = $menu;
+    }
+
+    public function getMenu()
+    {
+      return $this->menu;
+    }
+  }
+
   class Choix
   {
     private $id;
@@ -631,7 +777,21 @@
         $this->menu          = $data['menu'];
     }
 
-    // getters et setters pour l'objet Choix
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      $data->setDate(htmlspecialchars($data->getDate()));
+      $data->setTime(htmlspecialchars($data->getTime()));
+      $data->setTransports(htmlspecialchars($data->getTransports()));
+      $data->setMenu(htmlspecialchars($data->getMenu()));
+      $data->setName(htmlspecialchars($data->getName()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+      $data->setLocation(htmlspecialchars($data->getLocation()));
+      $data->setOpened(htmlspecialchars($data->getOpened()));
+    }
+
+    // Getters et Setters pour l'objet Choix
     // id
     public function setId($id)
     {

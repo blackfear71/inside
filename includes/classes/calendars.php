@@ -61,7 +61,7 @@
       $data->setTitle(htmlspecialchars($data->getTitle()));
     }
 
-    // getters et setters pour l'objet Calendrier
+    // Getters et Setters pour l'objet Calendrier
     // id
     public function setId($id)
     {
@@ -178,7 +178,7 @@
       $data->setTitle(htmlspecialchars($data->getTitle()));
     }
 
-    // getters et setters pour l'objet Annexe
+    // Getters et Setters pour l'objet Annexe
     // id
     public function setId($id)
     {
@@ -265,7 +265,7 @@
       $data->setManage_calendars(htmlspecialchars($data->getManage_calendars()));
     }
 
-    // getters et setters pour l'objet AutorisationCalendriers
+    // Getters et Setters pour l'objet AutorisationCalendriers
     // Identifiant
     public function setIdentifiant($identifiant)
     {

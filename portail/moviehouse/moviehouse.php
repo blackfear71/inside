@@ -107,177 +107,60 @@
 
       unset($onglet);
 
+      Preferences::secureData($preferences);
+
       switch ($_GET['view'])
       {
         case 'cards':
-          foreach ($listeFilms as &$film)
+          foreach ($listeFilms as $film)
           {
-            $film->setFilm(htmlspecialchars($film->getFilm()));
-            $film->setTo_delete(htmlspecialchars($film->getTo_delete()));
-            $film->setDate_add(htmlspecialchars($film->getDate_add()));
-            $film->setIdentifiant_add(htmlspecialchars($film->getIdentifiant_add()));
-            $film->setPseudo_add(htmlspecialchars($film->getPseudo_add()));
-            $film->setIdentifiant_del(htmlspecialchars($film->getIdentifiant_del()));
-            $film->setPseudo_del(htmlspecialchars($film->getPseudo_del()));
-            $film->setDate_theater(htmlspecialchars($film->getDate_theater()));
-            $film->setDate_release(htmlspecialchars($film->getDate_release()));
-            $film->setLink(htmlspecialchars($film->getLink()));
-            $film->setPoster(htmlspecialchars($film->getPoster()));
-            $film->setTrailer(htmlspecialchars($film->getTrailer()));
-            $film->setId_url(htmlspecialchars($film->getId_url()));
-            $film->setDoodle(htmlspecialchars($film->getDoodle()));
-            $film->setDate_doodle(htmlspecialchars($film->getDate_doodle()));
-            $film->setTime_doodle(htmlspecialchars($film->getTime_doodle()));
-            $film->setRestaurant(htmlspecialchars($film->getRestaurant()));
-            $film->setPlace(htmlspecialchars($film->getPlace()));
-            $film->setNb_comments(htmlspecialchars($film->getNb_comments()));
-            $film->setStars_user(htmlspecialchars($film->getStars_user()));
-            $film->setParticipation(htmlspecialchars($film->getParticipation()));
-            $film->setNb_users(htmlspecialchars($film->getNb_users()));
+            Movie::secureData($film);
           }
-
-          unset($film);
 
           if (isset($listeEtoiles) AND !empty($listeEtoiles))
           {
-            foreach ($listeEtoiles as &$etoilesFilm)
+            foreach ($listeEtoiles as $etoilesFilm)
             {
-              foreach ($etoilesFilm as &$ligneEtoilesFilm)
+              foreach ($etoilesFilm as $ligneEtoilesFilm)
               {
-                $ligneEtoilesFilm['identifiant'] = htmlspecialchars($ligneEtoilesFilm['identifiant']);
-                $ligneEtoilesFilm['pseudo']      = htmlspecialchars($ligneEtoilesFilm['pseudo']);
-                $ligneEtoilesFilm['avatar']      = htmlspecialchars($ligneEtoilesFilm['avatar']);
-                $ligneEtoilesFilm['stars']       = htmlspecialchars($ligneEtoilesFilm['stars']);
+                Stars::secureData($ligneEtoilesFilm);
               }
-
-              unset($ligneEtoilesFilm);
             }
-
-            unset($etoilesFilm);
           }
           break;
 
         case 'home':
         default:
-          foreach ($listeRecents as &$recent)
+          foreach ($listeRecents as $recent)
           {
-            $recent->setFilm(htmlspecialchars($recent->getFilm()));
-            $recent->setTo_delete(htmlspecialchars($recent->getTo_delete()));
-            $recent->setDate_add(htmlspecialchars($recent->getDate_add()));
-            $recent->setIdentifiant_add(htmlspecialchars($recent->getIdentifiant_add()));
-            $recent->setPseudo_add(htmlspecialchars($recent->getPseudo_add()));
-            $recent->setIdentifiant_del(htmlspecialchars($recent->getIdentifiant_del()));
-            $recent->setPseudo_del(htmlspecialchars($recent->getPseudo_del()));
-            $recent->setDate_theater(htmlspecialchars($recent->getDate_theater()));
-            $recent->setDate_release(htmlspecialchars($recent->getDate_release()));
-            $recent->setLink(htmlspecialchars($recent->getLink()));
-            $recent->setPoster(htmlspecialchars($recent->getPoster()));
-            $recent->setTrailer(htmlspecialchars($recent->getTrailer()));
-            $recent->setId_url(htmlspecialchars($recent->getId_url()));
-            $recent->setDoodle(htmlspecialchars($recent->getDoodle()));
-            $recent->setDate_doodle(htmlspecialchars($recent->getDate_doodle()));
-            $recent->setTime_doodle(htmlspecialchars($recent->getTime_doodle()));
-            $recent->setRestaurant(htmlspecialchars($recent->getRestaurant()));
-            $recent->setPlace(htmlspecialchars($recent->getPlace()));
+            Movie::secureData($recent);
           }
-
-          unset($recent);
 
           if ($filmsSemaine == 'Y' AND $afficherSemaine == true)
           {
             foreach ($listeSemaine as $filmSemaine)
             {
-              $filmSemaine->setFilm(htmlspecialchars($filmSemaine->getFilm()));
-              $filmSemaine->setTo_delete(htmlspecialchars($filmSemaine->getTo_delete()));
-              $filmSemaine->setDate_add(htmlspecialchars($filmSemaine->getDate_add()));
-              $filmSemaine->setIdentifiant_add(htmlspecialchars($filmSemaine->getIdentifiant_add()));
-              $filmSemaine->setPseudo_add(htmlspecialchars($filmSemaine->getPseudo_add()));
-              $filmSemaine->setIdentifiant_del(htmlspecialchars($filmSemaine->getIdentifiant_del()));
-              $filmSemaine->setPseudo_del(htmlspecialchars($filmSemaine->getPseudo_del()));
-              $filmSemaine->setDate_theater(htmlspecialchars($filmSemaine->getDate_theater()));
-              $filmSemaine->setDate_release(htmlspecialchars($filmSemaine->getDate_release()));
-              $filmSemaine->setLink(htmlspecialchars($filmSemaine->getLink()));
-              $filmSemaine->setPoster(htmlspecialchars($filmSemaine->getPoster()));
-              $filmSemaine->setTrailer(htmlspecialchars($filmSemaine->getTrailer()));
-              $filmSemaine->setId_url(htmlspecialchars($filmSemaine->getId_url()));
-              $filmSemaine->setDoodle(htmlspecialchars($filmSemaine->getDoodle()));
-              $filmSemaine->setDate_doodle(htmlspecialchars($filmSemaine->getDate_doodle()));
-              $filmSemaine->setTime_doodle(htmlspecialchars($filmSemaine->getTime_doodle()));
-              $filmSemaine->setRestaurant(htmlspecialchars($filmSemaine->getRestaurant()));
-              $filmSemaine->setPlace(htmlspecialchars($filmSemaine->getPlace()));
-              $filmSemaine->setNb_users(htmlspecialchars($filmSemaine->getNb_users()));
-              $filmSemaine->setAverage(htmlspecialchars($filmSemaine->getAverage()));
+              Movie::secureData($filmSemaine);
             }
-
-            unset($filmSemaine);
           }
 
           if ($filmsWaited == 'Y')
           {
-            foreach ($listeAttendus as &$attendu)
+            foreach ($listeAttendus as $attendu)
             {
-              $attendu->setFilm(htmlspecialchars($attendu->getFilm()));
-              $attendu->setTo_delete(htmlspecialchars($attendu->getTo_delete()));
-              $attendu->setDate_add(htmlspecialchars($attendu->getDate_add()));
-              $attendu->setIdentifiant_add(htmlspecialchars($attendu->getIdentifiant_add()));
-              $attendu->setPseudo_add(htmlspecialchars($attendu->getPseudo_add()));
-              $attendu->setIdentifiant_del(htmlspecialchars($attendu->getIdentifiant_del()));
-              $attendu->setPseudo_del(htmlspecialchars($attendu->getPseudo_del()));
-              $attendu->setDate_theater(htmlspecialchars($attendu->getDate_theater()));
-              $attendu->setDate_release(htmlspecialchars($attendu->getDate_release()));
-              $attendu->setLink(htmlspecialchars($attendu->getLink()));
-              $attendu->setPoster(htmlspecialchars($attendu->getPoster()));
-              $attendu->setTrailer(htmlspecialchars($attendu->getTrailer()));
-              $attendu->setId_url(htmlspecialchars($attendu->getId_url()));
-              $attendu->setDoodle(htmlspecialchars($attendu->getDoodle()));
-              $attendu->setDate_doodle(htmlspecialchars($attendu->getDate_doodle()));
-              $attendu->setTime_doodle(htmlspecialchars($attendu->getTime_doodle()));
-              $attendu->setRestaurant(htmlspecialchars($attendu->getRestaurant()));
-              $attendu->setPlace(htmlspecialchars($attendu->getPlace()));
-              $attendu->setNb_users(htmlspecialchars($attendu->getNb_users()));
-              $attendu->setAverage(htmlspecialchars($attendu->getAverage()));
+              Movie::secureData($attendu);
             }
-
-            unset($attendu);
           }
 
           if ($filmsWayOut == 'Y')
           {
-            foreach ($listeSorties as &$sortie)
+            foreach ($listeSorties as $sortie)
             {
-              $sortie->setFilm(htmlspecialchars($sortie->getFilm()));
-              $sortie->setTo_delete(htmlspecialchars($sortie->getTo_delete()));
-              $sortie->setDate_add(htmlspecialchars($sortie->getDate_add()));
-              $sortie->setIdentifiant_add(htmlspecialchars($sortie->getIdentifiant_add()));
-              $sortie->setPseudo_add(htmlspecialchars($sortie->getPseudo_add()));
-              $sortie->setIdentifiant_del(htmlspecialchars($sortie->getIdentifiant_del()));
-              $sortie->setPseudo_del(htmlspecialchars($sortie->getPseudo_del()));
-              $sortie->setDate_theater(htmlspecialchars($sortie->getDate_theater()));
-              $sortie->setDate_release(htmlspecialchars($sortie->getDate_release()));
-              $sortie->setLink(htmlspecialchars($sortie->getLink()));
-              $sortie->setPoster(htmlspecialchars($sortie->getPoster()));
-              $sortie->setTrailer(htmlspecialchars($sortie->getTrailer()));
-              $sortie->setId_url(htmlspecialchars($sortie->getId_url()));
-              $sortie->setDoodle(htmlspecialchars($sortie->getDoodle()));
-              $sortie->setDate_doodle(htmlspecialchars($sortie->getDate_doodle()));
-              $sortie->setTime_doodle(htmlspecialchars($sortie->getTime_doodle()));
-              $sortie->setRestaurant(htmlspecialchars($sortie->getRestaurant()));
-              $sortie->setPlace(htmlspecialchars($sortie->getPlace()));
+              Movie::secureData($sortie);
             }
-
-            unset($sortie);
           }
           break;
       }
-
-      $preferences->setRef_theme(htmlspecialchars($preferences->getRef_theme()));
-      $preferences->setInit_chat(htmlspecialchars($preferences->getInit_chat()));
-      $preferences->setCelsius(htmlspecialchars($preferences->getCelsius()));
-      $preferences->setView_movie_house(htmlspecialchars($preferences->getView_movie_house()));
-      $preferences->setCategories_movie_house(htmlspecialchars($preferences->getCategories_movie_house()));
-      $preferences->setView_the_box(htmlspecialchars($preferences->getView_the_box()));
-      $preferences->setView_notifications(htmlspecialchars($preferences->getView_notifications()));
-      $preferences->setManage_calendars(htmlspecialchars($preferences->getManage_calendars()));
       break;
 
     case 'doAjouter':

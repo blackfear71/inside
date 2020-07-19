@@ -9,7 +9,7 @@
   // RETOUR : Aucun
   function initializeSaveSearch()
   {
-    $_SESSION['save']['search'] = $_POST['text_search'];
+    $_SESSION['search']['text_search'] = $_POST['text_search'];
   }
 
   // METIER : Recherche dans les bases de données
@@ -28,7 +28,7 @@
     $nombreMI  = 0;
 
     // Récupération des données
-    $recherche = htmlspecialchars($_SESSION['save']['search']);
+    $recherche = htmlspecialchars($_SESSION['search']['text_search']);
 
     if (!empty($recherche))
     {

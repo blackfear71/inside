@@ -94,7 +94,7 @@
       }
     }
 
-    // getters et setters pour l'objet Success
+    // Getters et Setters pour l'objet Success
     // id
     public function setId($id)
     {
@@ -261,7 +261,7 @@
       $data->setRank(htmlspecialchars($data->getRank()));
     }
 
-    // getters et setters pour l'objet Classement
+    // Getters et Setters pour l'objet Classement
     // id
     public function setIdentifiant($identifiant)
     {

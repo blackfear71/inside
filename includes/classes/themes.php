@@ -72,7 +72,7 @@
       $data->setDate_fin(htmlspecialchars($data->getDate_fin()));
     }
 
-    // getters et setters pour l'objet Theme
+    // Getters et Setters pour l'objet Theme
     // id
     public function setId($id)
     {

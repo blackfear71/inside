@@ -53,17 +53,17 @@
           /**********************/
           /* Liste des missions */
           /**********************/
-          if (!empty($tabMissions))
+          if (!empty($listeMissions))
           {
             $titreEnCours = false;
             $titreAVenir  = false;
             $titrePassees = false;
 
             echo '<div class="zone_missions">';
-              foreach ($tabMissions as $keyMission => $ligneMission)
+              foreach ($listeMissions as $keyMission => $mission)
               {
                 // Missions futures
-                if ($ligneMission->getStatut() == 'V')
+                if ($mission->getStatut() == 'V')
                 {
                   if ($titreAVenir != true)
                   {
@@ -73,11 +73,11 @@
 
                   echo '<div class="zone_mission_default">';
                     echo '<img src="../../includes/icons/missions/default_mission.png" alt="default_mission" title="A venir" class="image_mission_default" />';
-                    echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($ligneMission->getDate_deb()) . ' à ' . formatTimeForDisplayLight($ligneMission->getHeure()) . ' !</div>';
+                    echo '<div class="titre_mission_default">Revenez pour une nouvelle mission à partir du ' . formatDateForDisplay($mission->getDate_deb()) . ' à ' . formatTimeForDisplayLight($mission->getHeure()) . ' !</div>';
                   echo '</div>';
                 }
                 // Missions en cours
-                elseif ($ligneMission->getStatut() == 'C')
+                elseif ($mission->getStatut() == 'C')
                 {
                   if ($titreEnCours != true)
                   {
@@ -88,13 +88,13 @@
                     echo '<div class="zone_missions_accueil">';
                   }
 
-                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&action=goConsulter" class="zone_mission_accueil">';
-                    echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="image_mission_accueil" />';
-                    echo '<div class="titre_mission_accueil">' . $ligneMission->getMission() . '</div>';
+                  echo '<a href="details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="zone_mission_accueil">';
+                    echo '<img src="../../includes/images/missions/banners/' . $mission->getReference() . '.png" alt="' . $mission->getReference() . '" title="' . $mission->getMission() . '" class="image_mission_accueil" />';
+                    echo '<div class="titre_mission_accueil">' . $mission->getMission() . '</div>';
                   echo '</a>';
                 }
                 // Missions précédentes
-                elseif ($ligneMission->getStatut() == 'A')
+                elseif ($mission->getStatut() == 'A')
                 {
                   if ($titrePassees != true)
                   {
@@ -105,15 +105,15 @@
                     echo '<div class="zone_missions_accueil">';
                   }
 
-                  echo '<a href="details.php?id_mission=' . $ligneMission->getId() . '&action=goConsulter" class="zone_mission_accueil">';
-                    echo '<img src="../../includes/images/missions/banners/' . $ligneMission->getReference() . '.png" alt="' . $ligneMission->getReference() . '" title="' . $ligneMission->getMission() . '" class="image_mission_accueil" />';
-                    echo '<div class="titre_mission_accueil">' . $ligneMission->getMission() . '</div>';
+                  echo '<a href="details.php?id_mission=' . $mission->getId() . '&action=goConsulter" class="zone_mission_accueil">';
+                    echo '<img src="../../includes/images/missions/banners/' . $mission->getReference() . '.png" alt="' . $mission->getReference() . '" title="' . $mission->getMission() . '" class="image_mission_accueil" />';
+                    echo '<div class="titre_mission_accueil">' . $mission->getMission() . '</div>';
                   echo '</a>';
                 }
 
-                if  ($ligneMission->getStatut() != 'V'
-                AND (!isset($tabMissions[$keyMission + 1])
-                OR   $ligneMission->getStatut() != $tabMissions[$keyMission + 1]->getStatut()))
+                if  ($mission->getStatut() != 'V'
+                AND (!isset($listeMissions[$keyMission + 1])
+                OR   $mission->getStatut() != $listeMissions[$keyMission + 1]->getStatut()))
                 {
                   // Termine la zone Masonry du niveau
                   echo '</div>';

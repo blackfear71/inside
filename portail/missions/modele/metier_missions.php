@@ -215,16 +215,15 @@
 
   // METIER : Classement des utilisateurs sur la mission
   // RETOUR : Tableau classement
-  function getRankingMission($id, $users)
+  function getRankingMission($id, $listeUsers)
   {
     $rankingUsers = array();
 
     global $bdd;
 
-    foreach ($users as $user)
+    foreach ($listeUsers as $user)
     {
       $totalMission = 0;
-      $initRankUser = 0;
 
       // Nombre total d'objectifs sur la mission
       $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user->getIdentifiant() . '"');
@@ -234,14 +233,17 @@
       }
       $reponse->closeCursor();
 
-      $ranking = array('identifiant' => $user->getIdentifiant(),
-                       'pseudo'      => $user->getPseudo(),
-                       'avatar'      => $user->getAvatar(),
-                       'total'       => $totalMission,
-                       'rank'        => $initRankUser
-                     );
+      // Récupération des données
+      $rankUser = new ParticipantMission();
 
-      array_push($rankingUsers, $ranking);
+      $rankUser->setIdentifiant($user->getIdentifiant());
+      $rankUser->setPseudo($user->getPseudo());
+      $rankUser->setAvatar($user->getAvatar());
+      $rankUser->setTotal($totalMission);
+      $rankUser->setRank(0);
+
+      // Ajout au tableau
+      array_push($rankingUsers, $rankUser);
     }
 
     if (!empty($rankingUsers))
@@ -249,27 +251,27 @@
       // Tri sur avancement puis identifiant
       foreach ($rankingUsers as $rankUser)
       {
-        $triRank[]  = $rankUser['total'];
-        $triAlpha[] = $rankUser['identifiant'];
+        $triRank[]  = $rankUser->getTotal();
+        $triAlpha[] = $rankUser->getIdentifiant();
       }
 
       array_multisort($triRank, SORT_DESC, $triAlpha, SORT_ASC, $rankingUsers);
 
       // Affectation du rang
-      $prevTotal   = $rankingUsers[0]['total'];
+      $prevTotal   = $rankingUsers[0]->getTotal();
       $currentRank = 1;
 
       foreach ($rankingUsers as &$rankUser)
       {
-        $currentTotal = $rankUser['total'];
+        $currentTotal = $rankUser->getTotal();
 
         if ($currentTotal != $prevTotal)
         {
           $currentRank += 1;
-          $prevTotal = $rankUser['total'];
+          $prevTotal = $rankUser->getTotal();
         }
 
-        $rankUser['rank'] = $currentRank;
+        $rankUser->setRank($currentRank);
       }
 
       unset($rankUser);

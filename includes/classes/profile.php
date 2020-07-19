@@ -96,7 +96,7 @@
       $data->setDevelopper(htmlspecialchars($data->getDevelopper()));
     }
 
-    // getters et setters pour l'objet Profile
+    // Getters et Setters pour l'objet Profile
     // id
     public function setId($id)
     {
@@ -252,6 +252,105 @@
     }
   }
 
+  class Progression
+  {
+    private $niveau;
+    private $experience_min;
+    private $experience_max;
+    private $experience_niveau;
+    private $progression;
+    private $pourcentage;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->niveau            = 0;
+      $this->experience_min    = 0;
+      $this->experience_max    = 0;
+      $this->experience_niveau = 0;
+      $this->progression       = 0;
+      $this->pourcentage       = 0;
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setNiveau(htmlspecialchars($data->getNiveau()));
+      $data->setExperience_min(htmlspecialchars($data->getExperience_min()));
+      $data->setExperience_max(htmlspecialchars($data->getExperience_max()));
+      $data->setExperience_niveau(htmlspecialchars($data->getExperience_niveau()));
+      $data->setProgression(htmlspecialchars($data->getProgression()));
+      $data->setPourcentage(htmlspecialchars($data->getPourcentage()));
+    }
+
+    // Getters et Setters pour l'objet StatistiquesAdmin
+    // Identifiant
+    public function setNiveau($niveau)
+    {
+      $this->niveau = $niveau;
+    }
+
+    public function getNiveau()
+    {
+      return $this->niveau;
+    }
+
+    // Pseudo
+    public function setExperience_min($experience_min)
+    {
+      $this->experience_min = $experience_min;
+    }
+
+    public function getExperience_min()
+    {
+      return $this->experience_min;
+    }
+
+    // Nombre de films ajoutés Movie House
+    public function setExperience_max($experience_max)
+    {
+      $this->experience_max = $experience_max;
+    }
+
+    public function getExperience_max()
+    {
+      return $this->experience_max;
+    }
+
+    // Nombre de commentaires Movie House
+    public function setExperience_niveau($experience_niveau)
+    {
+      $this->experience_niveau = $experience_niveau;
+    }
+
+    public function getExperience_niveau()
+    {
+      return $this->experience_niveau;
+    }
+
+    // Nombre de phrases cultes ajoutées
+    public function setProgression($progression)
+    {
+      $this->progression = $progression;
+    }
+
+    public function getProgression()
+    {
+      return $this->progression;
+    }
+
+    // Bilan des dépenses
+    public function setPourcentage($pourcentage)
+    {
+      $this->pourcentage = $pourcentage;
+    }
+
+    public function getPourcentage()
+    {
+      return $this->pourcentage;
+    }
+  }
+
   class StatistiquesProfil
   {
     private $nb_films_ajoutes;
@@ -323,7 +422,22 @@
         $this->nb_evolutions    = $data['nb_evolutions'];
     }
 
-    // getters et setters pour l'objet StatistiquesProfil
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setNb_films_ajoutes(htmlspecialchars($data->getNb_films_ajoutes()));
+      $data->setNb_comments(htmlspecialchars($data->getNb_comments()));
+      $data->setNb_reservations(htmlspecialchars($data->getNb_reservations()));
+      $data->setNb_gateaux(htmlspecialchars($data->getNb_gateaux()));
+      $data->setNb_recettes(htmlspecialchars($data->getNb_recettes()));
+      $data->setExpenses(htmlspecialchars($data->getExpenses()));
+      $data->setNb_collectors(htmlspecialchars($data->getNb_collectors()));
+      $data->setNb_ideas(htmlspecialchars($data->getNb_ideas()));
+      $data->setNb_bugs(htmlspecialchars($data->getNb_bugs()));
+      $data->setNb_evolutions(htmlspecialchars($data->getNb_evolutions()));
+    }
+
+    // Getters et Setters pour l'objet StatistiquesProfil
     // Nombre de films ajoutés Movie House
     public function setNb_films_ajoutes($nb_films_ajoutes)
     {
@@ -501,7 +615,20 @@
         $this->manage_calendars       = $data['manage_calendars'];
     }
 
-    // getters et setters pour l'objet Preferences
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setRef_theme(htmlspecialchars($data->getRef_theme()));
+      $data->setInit_chat(htmlspecialchars($data->getInit_chat()));
+      $data->setCelsius(htmlspecialchars($data->getCelsius()));
+      $data->setView_movie_house(htmlspecialchars($data->getView_movie_house()));
+      $data->setCategories_movie_house(htmlspecialchars($data->getCategories_movie_house()));
+      $data->setView_the_box(htmlspecialchars($data->getView_the_box()));
+      $data->setView_notifications(htmlspecialchars($data->getView_notifications()));
+      $data->setManage_calendars(htmlspecialchars($data->getManage_calendars()));
+    }
+
+    // Getters et Setters pour l'objet Preferences
     // id
     public function setId($id)
     {
@@ -648,7 +775,7 @@
       $data->setNb_idees_terminees(htmlspecialchars($data->getNb_idees_terminees()));
     }
 
-    // getters et setters pour l'objet StatistiquesAdmin
+    // Getters et Setters pour l'objet StatistiquesAdmin
     // Identifiant
     public function setIdentifiant($identifiant)
     {
@@ -813,7 +940,7 @@
       $data->setNb_idees_terminees_total(htmlspecialchars($data->getNb_idees_terminees_total()));
     }
 
-    // getters et setters pour l'objet StatistiquesAdmin
+    // Getters et Setters pour l'objet TotalStatistiquesAdmin
     // Nombre de films ajoutés Movie House
     public function setNb_films_ajoutes_total($nb_films_ajoutes_total)
     {

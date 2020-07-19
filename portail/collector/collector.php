@@ -95,39 +95,10 @@
 
       if ($nbPages > 0)
       {
-        foreach ($listeCollectors as &$collector)
+        foreach ($listeCollectors as $collector)
         {
-          $collector->setDate_add(htmlspecialchars($collector->getDate_add()));
-          $collector->setAuthor(htmlspecialchars($collector->getAuthor()));
-          $collector->setPseudo_author(htmlspecialchars($collector->getPseudo_author()));
-          $collector->setSpeaker(htmlspecialchars($collector->getSpeaker()));
-          $collector->setPseudo_speaker(htmlspecialchars($collector->getPseudo_speaker()));
-          $collector->setAvatar_speaker(htmlspecialchars($collector->getAvatar_speaker()));
-          $collector->setType_speaker(htmlspecialchars($collector->getType_speaker()));
-          $collector->setDate_collector(htmlspecialchars($collector->getDate_collector()));
-          $collector->setType_collector(htmlspecialchars($collector->getType_collector()));
-          $collector->setCollector(htmlspecialchars($collector->getCollector()));
-          $collector->setContext(htmlspecialchars($collector->getContext()));
-          $collector->setNb_votes(htmlspecialchars($collector->getNb_votes()));
-          $collector->setVote_user(htmlspecialchars($collector->getVote_user()));
-
-          if (!empty($collector->getVotes()))
-          {
-            foreach ($collector->getVotes() as &$votesParSmiley)
-            {
-              foreach ($votesParSmiley as &$vote)
-              {
-                $vote = htmlspecialchars($vote);
-              }
-
-              unset($vote);
-            }
-
-            unset($votesParSmiley);
-          }
+          Collector::secureData($collector);
         }
-
-        unset($collector);
       }
       break;
 

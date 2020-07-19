@@ -105,7 +105,7 @@
     while ($donnees = $reponse->fetch())
     {
       // Instanciation d'un objet Idea à partir des données remontées de la bdd
-      $idea = Ideas::withData($donnees);
+      $idea = Idea::withData($donnees);
 
       // Recherche du pseudo et de l'avatar de l'auteur
       $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getAuthor() . '"');

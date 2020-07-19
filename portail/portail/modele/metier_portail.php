@@ -73,7 +73,7 @@
                                    'alt'       => 'calendars',
                                    'mobile'    => 'N'),
                              array('categorie' => 'LES PETITS<br />PÉDESTRES',
-                                   'lien'      => '../petitspedestres/parcours.php?action=liste',
+                                   'lien'      => '../petitspedestres/parcours.php?action=goConsulterListe',
                                    'title'     => 'Les Petits Pédestres',
                                    'image'     => '../../includes/icons/common/petits_pedestres.png',
                                    'alt'       => 'petits_pedestres',
