@@ -1,13 +1,11 @@
 'use strict';
 
-angular.module('parcoursApp', []);
+var parcoursApp = angular.module('parcoursApp', []);
 
-angular.
-    module('parcoursApp').
-    component('parcoursList', {
-        templateUrl: 'vue/template/parcourslisttemplate.html',
-        controller : function ParcoursListController() {
-            this.listeParcours = listeParcoursJson;
-            // this.orderProp = 'nom';
-        }
+parcoursApp.component('parcoursList', {
+  templateUrl: 'vue/template/parcourslisttemplate.html',
+  controller : function ParcoursListController() {
+      this.listeParcours = listeParcoursJson;
+      // this.orderProp = 'nom';
+  }
 });

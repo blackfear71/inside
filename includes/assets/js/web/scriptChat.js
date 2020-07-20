@@ -461,7 +461,7 @@ $(window).on('load', function()
           {
             if (identifiant == value.identifiant)
             {
-              pseudo = value.pseudo;
+              pseudo = decodeHtml(value.pseudo);
               avatar = value.avatar;
 
               return false;
@@ -545,7 +545,7 @@ $(window).on('load', function()
         // Zone utilisateur
         html = '<div class="zone_chat_connected">';
           // Avatar
-          var avatarFormatted = formatAvatar(avatar, escapeHtml(pseudo), 0, 'avatar');
+          var avatarFormatted = formatAvatar(avatar, pseudo, 0, 'avatar');
 
           html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_connected" />';
 
