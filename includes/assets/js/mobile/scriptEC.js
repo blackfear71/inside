@@ -297,11 +297,11 @@ function resetSaisie(zone, year)
       $('.zone_saisie_part').each(function()
       {
         // Initialisation de la quantité
-        $(this).children('.quantite').val('0');
+        $(this).find('.quantite').val('0');
 
         // Ajout de la part à la zone
         var idZone                 = $(this).attr('id');
-        var idQuantite             = $(this).children('.quantite').attr('id');
+        var idQuantite             = $(this).find('.quantite').attr('id');
         var nombrePartsUtilisateur = 0;
 
         ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
