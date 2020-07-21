@@ -67,10 +67,11 @@
   switch ($_GET['action'])
   {
     case 'goConsulterListe':
-      foreach ($listeParcours as $parcours)
+      // On n'applique pas d'échappement car AngularJS le fait automatiquement dans {{ }}
+      /*foreach ($listeParcours as $parcours)
       {
         Parcours::secureData($parcours);
-      }
+      }*/
 
       // Conversion JSON
       $listeParcoursJson = json_encode(convertForJson($listeParcours));

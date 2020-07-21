@@ -83,13 +83,6 @@
 
     foreach ($listeParcours as $parcours)
     {
-      /* Structure de l'objet parcours
-          private $id;
-          private $nom;
-          private $distance;
-          private $lieu;
-          (url image mais on n'en a pas besoin là)
-      */
       $parcours = array('id'      => $parcours->getId(),
                         'nom'     => $parcours->getNom(),
                         'distance'=> $parcours->getDistance(),
