@@ -17,7 +17,8 @@
                      array('option' => 'exif',       'checked' => 'N', 'titre' => 'Données EXIF',       'categorie' => 'Vue'),
                      array('option' => 'onglets',    'checked' => 'Y', 'titre' => 'Onglets',            'categorie' => 'Vue'),
                      array('option' => 'alerts',     'checked' => 'Y', 'titre' => 'Alertes',            'categorie' => 'Vue'),
-                     array('option' => 'success',    'checked' => 'Y', 'titre' => 'Déblocage succès',   'categorie' => 'Vue')
+                     array('option' => 'success',    'checked' => 'Y', 'titre' => 'Déblocage succès',   'categorie' => 'Vue'),
+                     array('option' => 'mobile',     'checked' => 'N', 'titre' => 'Avec version mobile',     'categorie' => 'Vue')
                     );
 
     // Retour
@@ -131,17 +132,20 @@
     // Initialisations
     $nomFonctionnel = trim($generatorParameters->getNom_section());
     $nomTechnique   = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-    $file           = 'templates/controler.php';
-    $options        = array();
-    $controler      = array('filename' => $nomTechnique . '.php',
-                            'content'  => file_get_contents($file)
-                           );
 
     // On met les options dans un tableau associatif
+    $options = array();
+
     foreach ($generatorParameters->getOptions() as $generatorOption)
     {
       $options[$generatorOption->getOption()] = $generatorOption;
     }
+
+    // Données du fichier
+    $file           = 'templates/controler.php';
+    $controler      = array('filename' => $nomTechnique . '.php',
+                            'content'  => file_get_contents($file)
+                           );
 
     // Nom section
     $lengthName = strlen($nomFonctionnel);
@@ -198,7 +202,10 @@
     $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nomTechnique . '.php?action=goConsulter\');', $controler);
 
     // Redirection affichage
-    $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nomTechnique . '.php\');', $controler);
+    if ($options['mobile']->getChecked() == 'Y')
+      $controler = str_replace('/*include_view*/', 'include_once(\'vue/\' . $_SESSION[\'index\'][\'plateforme\'] . \'/vue_' . $nomTechnique . '.php\');', $controler);
+    else
+      $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nomTechnique . '.php\');', $controler);
 
     // Retour
     return $controler;
@@ -252,9 +259,45 @@
     return $physique;
   }
 
+  // METIER : Récupère les vues en fonction des options saisies
+  // RETOUR : Liste des vues
+  function getVues($generatorParameters)
+  {
+    // Initialisations
+    $listeVues = array('vue_web'    => '',
+                       'vue_mobile' => ''
+                      );
+
+    // On met les options dans un tableau associatif
+    $options = array();
+
+    foreach ($generatorParameters->getOptions() as $generatorOption)
+    {
+      $options[$generatorOption->getOption()] = $generatorOption;
+    }
+
+    // Récupération vue web
+    $vueWeb = getVue($generatorParameters, false);
+
+    // On ajoute la vue au tableau
+    $listeVues['vue_web'] = $vueWeb;
+
+    // Récupération vue mobile
+    if ($options['mobile']->getChecked() == 'Y')
+    {
+      $vueMobile = getVue($generatorParameters, true);
+
+      // On ajoute la vue au tableau
+      $listeVues['vue_mobile'] = $vueMobile;
+    }
+
+    // Retour
+    return $listeVues;
+  }
+
   // METIER : Formate le fichier Vue
   // RETOUR : Fichier Vue
-  function getVue($generatorParameters)
+  function getVue($generatorParameters, $isMobile)
   {
     // Initialisations
     $nomFonctionnel = trim($generatorParameters->getNom_section());
@@ -275,17 +318,23 @@
     else
       $scriptSpecifique = '';
 
-    $file    = 'templates/vue.php';
-    $options = array();
-    $vue     = array('filename' => 'vue_' . $nomTechnique . '.php',
-                     'content'  => file_get_contents($file)
-                    );
-
     // On met les options dans un tableau associatif
+    $options = array();
+
     foreach ($generatorParameters->getOptions() as $generatorOption)
     {
       $options[$generatorOption->getOption()] = $generatorOption;
     }
+
+    // Données du fichier
+    if ($isMobile == true)
+      $file = 'templates/vue_mobile.php';
+    else
+      $file = 'templates/vue_web.php';
+
+    $vue = array('filename' => 'vue_' . $nomTechnique . '.php',
+                 'content'  => file_get_contents($file)
+                );
 
     // Titre onglet navigateur
     $vue = str_replace('/*title_head*/', "'" . $nomHead . "'", $vue);
@@ -322,7 +371,7 @@
     else
       $vue = str_replace('/*exif_head*/', 'false', $vue);
 
-    // Titre de la page(header)
+    // Titre de la page (header)
     $vue = str_replace('/*title*/', "'" . $nomFonctionnel . "'", $vue);
 
     // Onglets
@@ -353,6 +402,10 @@
 ', $vue);
     else
       $vue = str_replace('/*success*/', '', $vue);
+
+    // Celsius
+    if ($isMobile == true)
+      $vue = str_replace('/*celsius*/', '\'' . $nomTechnique . '\'', $vue);
 
     // Missions
     if ($options['admin']->getChecked() == 'Y')

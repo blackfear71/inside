@@ -32,7 +32,7 @@
         $metier    = getMetier($generatorParameters);
         $controles = getControles($generatorParameters);
         $physique  = getPhysique($generatorParameters);
-        $vue       = getVue($generatorParameters);
+        $listeVues = getVues($generatorParameters);
       }
       break;
 

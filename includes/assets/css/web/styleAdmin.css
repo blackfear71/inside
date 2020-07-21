@@ -3372,6 +3372,19 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+.code_generator_vue_mobile
+{
+	width: calc(100% - 20px);
+	height: calc(673px / 2);
+	min-height: calc(673px / 2);
+	resize: vertical;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	background-color: white;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 .code_generator_controler
 {
 	width: calc(100% - 20px);

@@ -152,7 +152,7 @@
                   echo '<div class="nom_fichier_generator">';
                     echo 'Métier : ' . $metier['filename'];
 
-                    echo '<a id="metier" class="copie_generator copyCode">Copier le code</a>';
+                    echo '<a id="metier" class="copie_generator copyCode">Copier</a>';
                   echo '</div>';
 
                   // Contenu du fichier
@@ -167,7 +167,7 @@
                   echo '<div class="nom_fichier_generator">';
                     echo 'Contrôles : ' . $controles['filename'];
 
-                    echo '<a id="controles" class="copie_generator copyCode">Copier le code</a>';
+                    echo '<a id="controles" class="copie_generator copyCode">Copier</a>';
                   echo '</div>';
 
                   // Contenu du fichier
@@ -182,7 +182,7 @@
                   echo '<div class="nom_fichier_generator">';
                     echo 'Physique : ' . $physique['filename'];
 
-                    echo '<a id="physique" class="copie_generator copyCode">Copier le code</a>';
+                    echo '<a id="physique" class="copie_generator copyCode">Copier</a>';
                   echo '</div>';
 
                   // Contenu du fichier
@@ -194,20 +194,41 @@
 
               // Partie Vue
               echo '<div class="zone_generated_middle margin_right_20">';
-                // Zone Vue
+                // Zone Vue (web)
                 echo '<div class="zone_code_generator">';
                   // Nom du fichier
                   echo '<div class="nom_fichier_generator">';
-                    echo 'Vue : ' . $vue['filename'];
+                    echo 'Vue (web) : ' . $listeVues['vue_web']['filename'];
 
-                    echo '<a id="vue" class="copie_generator copyCode">Copier le code</a>';
+                    echo '<a id="vue_web" class="copie_generator copyCode">Copier</a>';
                   echo '</div>';
 
                   // Contenu du fichier
-                  echo '<textarea id="code_vue" class="code_generator_vue">';
-                    echo $vue['content'];
+                  if (!empty($listeVues['vue_mobile']))
+                    echo '<textarea id="code_vue_web" class="code_generator_vue_mobile">';
+                  else
+                    echo '<textarea id="code_vue_web" class="code_generator_vue">';
+                    echo $listeVues['vue_web']['content'];
                   echo '</textarea>';
                 echo '</div>';
+
+                // Zone Vue (mobile)
+                if (!empty($listeVues['vue_mobile']))
+                {
+                  echo '<div class="zone_code_generator">';
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Vue (mobile) : ' . $listeVues['vue_mobile']['filename'];
+
+                      echo '<a id="vue_mobile" class="copie_generator copyCode">Copier</a>';
+                    echo '</div>';
+
+                    // Contenu du fichier
+                    echo '<textarea id="code_vue_mobile" class="code_generator_vue_mobile">';
+                      echo $listeVues['vue_mobile']['content'];
+                    echo '</textarea>';
+                  echo '</div>';
+                }
               echo '</div>';
 
               // Partie Contrôleur
@@ -218,7 +239,7 @@
                   echo '<div class="nom_fichier_generator">';
                     echo 'Contrôleur : ' . $controler['filename'];
 
-                    echo '<a id="controler" class="copie_generator copyCode">Copier le code</a>';
+                    echo '<a id="controler" class="copie_generator copyCode">Copier</a>';
                   echo '</div>';
 
                   // Contenu du fichier
