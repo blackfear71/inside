@@ -12,33 +12,53 @@
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_30">';
+			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_20">';
 				echo 'Movie House';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Collector Room';
 			echo '</td>';
 
-			echo '<td colspan="4" class="init_td_manage_users init_td_manage_users_30">';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+				echo 'Les enfants ! À table !';
+			echo '</td>';
+
+			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_20">';
+				echo 'Cooking Box';
+			echo '</td>';
+
+			echo '<td colspan="4" class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Expense Center';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Films ajoutés';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Commentaires';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
-				echo 'Nombre de phrases cultes rapportées';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+				echo 'Phrases cultes rapportées';
 			echo '</td>';
 
-			echo '<td colspan="4" class="init_td_manage_users init_td_manage_users_30">';
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+				echo 'Réservations';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+				echo 'Gâteaux de la semaine';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+				echo 'Recettes partagées';
+			echo '</td>';
+
+			echo '<td colspan="4" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Bilan des dépenses';
 			echo '</td>';
 		echo '</tr>';
@@ -67,6 +87,18 @@
 					echo $statistiquesIns->getNb_collectors();
 				echo '</td>';
 
+				echo '<td class="td_manage_users">';
+					echo $statistiquesIns->getNb_reservations();
+				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statistiquesIns->getNb_gateaux_semaine();
+				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statistiquesIns->getNb_recettes();
+				echo '</td>';
+
         if ($statistiquesIns->getExpenses() <= -6)
 					echo '<td colspan="4" class="td_stats_admin bilan_red">';
 				elseif ($statistiquesIns->getExpenses() > -6 AND $statistiquesIns->getExpenses() <= -3)
@@ -88,7 +120,7 @@
 		if (!empty($tableauStatistiquesDes))
 		{
 			echo '<tr>';
-				echo '<td class="table_old_users" colspan="9">';
+				echo '<td class="table_old_users" colspan="12">';
 					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
 					echo 'Anciens utilisateurs';
 					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
@@ -116,6 +148,21 @@
 					echo $statistiquesDes->getNb_collectors();
 				echo '</td>';
 
+				echo '<td class="td_manage_users">';
+					if ($statistiquesDes->getNb_reservations() == 0)
+						echo 'N/A';
+					else
+						echo $statistiquesDes->getNb_reservations();
+				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statistiquesDes->getNb_gateaux_semaine();
+				echo '</td>';
+
+				echo '<td class="td_manage_users">';
+					echo $statistiquesDes->getNb_recettes();
+				echo '</td>';
+
 				if ($statistiquesDes->getExpenses() <= -6)
 					echo '<td colspan="4" class="td_stats_admin bilan_red">';
 				elseif ($statistiquesDes->getExpenses() > -6 AND $statistiquesDes->getExpenses() <= -3)
@@ -135,41 +182,68 @@
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td colspan="2" class="td_manage_users_important">';
+			echo '<td rowspan="4" colspan="2" class="td_manage_users_important">';
 				echo 'Total';
 			echo '</td>';
 
-			echo '<td class="td_manage_users">';
+			echo '<td rowspan="4" class="td_manage_users">';
 				echo $totalStatistiques->getNb_films_ajoutes_total();
 			echo '</td>';
 
-			echo '<td class="td_manage_users">';
+			echo '<td rowspan="4" class="td_manage_users">';
 				echo $totalStatistiques->getNb_films_comments_total();
 			echo '</td>';
 
-			echo '<td class="td_manage_users">';
+			echo '<td rowspan="4" class="td_manage_users">';
 				echo $totalStatistiques->getNb_collectors_total();
 			echo '</td>';
 
-			echo '<td class="td_manage_users_important td_manage_users_7">';
+			echo '<td rowspan="4" class="td_manage_users">';
+				echo $totalStatistiques->getNb_reservations_total();
+			echo '</td>';
+
+			echo '<td rowspan="4" class="td_manage_users">';
+				echo $totalStatistiques->getNb_gateaux_semaine_total();
+			echo '</td>';
+
+			echo '<td rowspan="4" class="td_manage_users">';
+				echo $totalStatistiques->getNb_recettes_total();
+			echo '</td>';
+
+			echo '<td class="td_manage_users_important">';
 				echo 'Bilan';
 			echo '</td>';
+		echo '</tr>';
 
+		// Valeur bilan
+		echo '<tr>';
 			if ($totalStatistiques->getAlerte_expenses() == true)
-				echo '<td class="td_manage_users_red td_manage_users_7">';
+				echo '<td class="td_manage_users_red">';
 			else
-				echo '<td class="td_manage_users td_manage_users_7">';
-					echo formatAmountForDisplay($totalStatistiques->getExpenses_total());
-				echo '</td>';
+				echo '<td class="td_manage_users" id="test">';
 
-			echo '<td class="td_manage_users_important td_manage_users_7">';
+				if ($totalStatistiques->getExpenses_total() > -0.01 AND $totalStatistiques->getExpenses_total() < 0.01)
+					echo formatAmountForDisplay(abs($totalStatistiques->getExpenses_total()));
+				else
+					echo formatAmountForDisplay($totalStatistiques->getExpenses_total());
+			echo '</td>';
+		echo '</tr>';
+
+		// Libellé alerte
+		echo '<tr>';
+			echo '<td class="td_manage_users_important">';
 				echo 'Alertes';
 			echo '</td>';
+		echo '</tr>';
 
+		// Valeur alerte
+		echo '<tr>';
 			// Alerte si un utilisateur désinscrit n'a pas payé
-			echo '<td class="td_manage_users td_manage_users_7">';
+			echo '<td class="td_manage_users">';
 				if ($totalStatistiques->getAlerte_expenses() == true)
 					echo '<span class="reset_warning">!</span>';
+				else
+					echo '&nbsp;';
 			echo '</td>';
 		echo '</tr>';
 	echo '</table>';

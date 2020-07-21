@@ -330,6 +330,78 @@
     return $nombreCollector;
   }
 
+  // PHYSIQUE : Lecture du nombre de réservations de restaurants
+  // RETOUR : Nombre de réservations
+  function physiqueReservationsUser($identifiant)
+  {
+    // Initialisations
+    $nombreReservations = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreReservations
+                        FROM food_advisor_choices
+                        WHERE caller = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    $nombreReservations = $data['nombreReservations'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreReservations;
+  }
+
+  // PHYSIQUE : Lecture du nombre de gâteaux de la semaine
+  // RETOUR : Nombre de gâteaux de la semaine
+  function physiqueGateauxSemaineUser($identifiant)
+  {
+    // Initialisations
+    $nombreGateauxSemaine = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreGateauxSemaine
+                        FROM cooking_box
+                        WHERE identifiant = "' . $identifiant . '" AND cooked = "Y"');
+
+    $data = $req->fetch();
+
+    $nombreGateauxSemaine = $data['nombreGateauxSemaine'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreGateauxSemaine;
+  }
+
+  // PHYSIQUE : Lecture du nombre de recettes partagées
+  // RETOUR : Nombre de recettes partagées
+  function physiqueRecettesUser($identifiant)
+  {
+    // Initialisations
+    $nombreRecettes = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreRecettes
+                        FROM cooking_box
+                        WHERE identifiant = "' . $identifiant . '" AND name != "" AND picture != ""');
+
+    $data = $req->fetch();
+
+    $nombreRecettes = $data['nombreRecettes'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreRecettes;
+  }
+
   // PHYSIQUE : Lecture de la liste des dépenses
   // RETOUR : Liste des dépenses
   function physiqueDepenses()
@@ -456,6 +528,78 @@
 
     // Retour
     return $nombreCollector;
+  }
+
+  // PHYSIQUE : Lecture du nombre total de réservations de restaurants
+  // RETOUR : Nombre total de réservations de restaurants
+  function physiqueReservationsTotal()
+  {
+    // Initialisations
+    $nombreReservations = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreReservations
+                        FROM food_advisor_choices
+                        WHERE caller != ""');
+
+    $data = $req->fetch();
+
+    $nombreReservations = $data['nombreReservations'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreReservations;
+  }
+
+  // PHYSIQUE : Lecture du nombre total de gâteaux de la semaine
+  // RETOUR : Nombre total de gâteaux de la semaine
+  function physiqueGateauxSemaineTotal()
+  {
+    // Initialisations
+    $nombreGateauxSemaine = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreGateauxSemaine
+                        FROM cooking_box
+                        WHERE cooked = "Y"');
+
+    $data = $req->fetch();
+
+    $nombreGateauxSemaine = $data['nombreGateauxSemaine'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreGateauxSemaine;
+  }
+
+  // PHYSIQUE : Lecture du nombre total de recettes partagées
+  // RETOUR : Nombre total de recettes partagées
+  function physiqueRecettesTotal()
+  {
+    // Initialisations
+    $nombreRecettes = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreRecettes
+                        FROM cooking_box
+                        WHERE name != "" AND picture != ""');
+
+    $data = $req->fetch();
+
+    $nombreRecettes = $data['nombreRecettes'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreRecettes;
   }
 
   // PHYSIQUE : Lecture des dépenses sans parts

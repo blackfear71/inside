@@ -1,6 +1,6 @@
 <?php
   /******************************
-  *** Les enfants ! A table ! ***
+  *** Les enfants ! À table ! ***
   *******************************
   Fonctionnalités :
   - Consultation restaurants

@@ -118,6 +118,15 @@
       // Phrases cultes ajoutées
       $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
 
+      // Réservations de restaurants
+      $nombreReservations = physiqueReservationsUser($user->getIdentifiant());
+
+      // Gâteaux de la semaine
+      $nombreGateauxSemaine = physiqueGateauxSemaineUser($user->getIdentifiant());
+
+      // Recettes partagées
+      $nombreRecettes = physiqueRecettesUser($user->getIdentifiant());
+
       // Bilan des dépenses
       $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
 
@@ -144,6 +153,9 @@
       $statistiquesUser->setNb_films_ajoutes($nombreFilms);
       $statistiquesUser->setNb_films_comments($nombreComments);
       $statistiquesUser->setNb_collectors($nombreCollector);
+      $statistiquesUser->setNb_reservations($nombreReservations);
+      $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
+      $statistiquesUser->setNb_recettes($nombreRecettes);
       $statistiquesUser->setExpenses($bilanUser);
       $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
       $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
@@ -177,6 +189,15 @@
 
       // Phrases cultes ajoutées
       $nombreCollector = physiqueCollectorAjoutesUser($userDes);
+
+      // Réservations de restaurants
+      $nombreReservations = physiqueReservationsUser($userDes);
+
+      // Gâteaux de la semaine
+      $nombreGateauxSemaine = physiqueGateauxSemaineUser($userDes);
+
+      // Recettes partagées
+      $nombreRecettes = physiqueRecettesUser($userDes);
 
       // Calcul du bilan des dépenses (non stocké)
       $bilanUser = 0;
@@ -224,6 +245,9 @@
       $statistiquesUser->setNb_films_ajoutes($nombreFilms);
       $statistiquesUser->setNb_films_comments($nombreComments);
       $statistiquesUser->setNb_collectors($nombreCollector);
+      $statistiquesUser->setNb_reservations($nombreReservations);
+      $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
+      $statistiquesUser->setNb_recettes($nombreRecettes);
       $statistiquesUser->setExpenses($bilanUser);
       $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
       $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
@@ -254,6 +278,15 @@
 
     // Nombre de phrase cultes
     $nombreCollector = physiqueCollectorTotal();
+
+    // Nombre de réservations de restaurants
+    $nombreReservations = physiqueReservationsTotal();
+
+    // Nombre de gâteaux de la semaine
+    $nombreGateauxSemaine = physiqueGateauxSemaineTotal();
+
+    // Nombre de recettes partagées
+    $nombreRecettes = physiqueRecettesTotal();
 
     // Calcul somme bilans utilisateurs inscrits
     foreach ($tableauIns as $userIns)
@@ -311,6 +344,9 @@
     $totalStatistiques->setNb_films_ajoutes_total($nombreFilms);
     $totalStatistiques->setNb_films_comments_total($nombreComments);
     $totalStatistiques->setNb_collectors_total($nombreCollector);
+    $totalStatistiques->setNb_reservations_total($nombreReservations);
+    $totalStatistiques->setNb_gateaux_semaine_total($nombreGateauxSemaine);
+    $totalStatistiques->setNb_recettes_total($nombreRecettes);
     $totalStatistiques->setExpenses_total($sommeBilans);
     $totalStatistiques->setAlerte_expenses($alerteBilan);
     $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);

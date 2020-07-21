@@ -283,7 +283,7 @@
       $data->setPourcentage(htmlspecialchars($data->getPourcentage()));
     }
 
-    // Getters et Setters pour l'objet StatistiquesAdmin
+    // Getters et Setters pour l'objet Progression
     // Identifiant
     public function setNiveau($niveau)
     {
@@ -736,6 +736,9 @@
     private $nb_films_ajoutes;
     private $nb_films_comments;
     private $nb_collectors;
+    private $nb_reservations;
+    private $nb_gateaux_semaine;
+    private $nb_recettes;
     private $expenses;
     private $nb_bugs_soumis;
     private $nb_bugs_resolus;
@@ -751,6 +754,9 @@
       $this->nb_films_ajoutes   = 0;
       $this->nb_films_comments  = 0;
       $this->nb_collectors      = 0;
+      $this->nb_reservations    = 0;
+      $this->nb_gateaux_semaine = 0;
+      $this->nb_recettes        = 0;
       $this->expenses           = 0;
       $this->nb_bugs_soumis     = 0;
       $this->nb_bugs_resolus    = 0;
@@ -767,6 +773,9 @@
       $data->setNb_films_ajoutes(htmlspecialchars($data->getNb_films_ajoutes()));
       $data->setNb_films_comments(htmlspecialchars($data->getNb_films_comments()));
       $data->setNb_collectors(htmlspecialchars($data->getNb_collectors()));
+      $data->setNb_reservations(htmlspecialchars($data->getNb_reservations()));
+      $data->setNb_gateaux_semaine(htmlspecialchars($data->getNb_gateaux_semaine()));
+      $data->setNb_recettes(htmlspecialchars($data->getNb_recettes()));
       $data->setExpenses(htmlspecialchars($data->getExpenses()));
       $data->setNb_bugs_soumis(htmlspecialchars($data->getNb_bugs_soumis()));
       $data->setNb_bugs_resolus(htmlspecialchars($data->getNb_bugs_resolus()));
@@ -829,6 +838,39 @@
     public function getNb_collectors()
     {
       return $this->nb_collectors;
+    }
+
+    // Nombre de réservations de restaurants
+    public function setNb_reservations($nb_reservations)
+    {
+      $this->nb_reservations = $nb_reservations;
+    }
+
+    public function getNb_reservations()
+    {
+      return $this->nb_reservations;
+    }
+
+    // Nombre de gâteaux de la semaine
+    public function setNb_gateaux_semaine($nb_gateaux_semaine)
+    {
+      $this->nb_gateaux_semaine = $nb_gateaux_semaine;
+    }
+
+    public function getNb_gateaux_semaine()
+    {
+      return $this->nb_gateaux_semaine;
+    }
+
+    // Nombre de recettes partagées
+    public function setNb_recettes($nb_recettes)
+    {
+      $this->nb_recettes = $nb_recettes;
+    }
+
+    public function getNb_recettes()
+    {
+      return $this->nb_recettes;
     }
 
     // Bilan des dépenses
@@ -903,6 +945,9 @@
     private $nb_films_ajoutes_total;
     private $nb_films_comments_total;
     private $nb_collectors_total;
+    private $nb_reservations_total;
+    private $nb_gateaux_semaine_total;
+    private $nb_recettes_total;
     private $expenses_total;
     private $alerte_expenses;
     private $nb_bugs_soumis_total;
@@ -918,6 +963,9 @@
       $this->nb_films_comments_total  = 0;
       $this->nb_collectors_total      = 0;
       $this->expenses_total           = 0;
+      $this->nb_reservations_total    = 0;
+      $this->nb_gateaux_semaine_total = 0;
+      $this->nb_recettes_total        = 0;
       $this->alerte_expenses          = false;
       $this->nb_bugs_soumis_total     = 0;
       $this->nb_bugs_resolus_total    = 0;
@@ -932,6 +980,9 @@
       $data->setNb_films_ajoutes_total(htmlspecialchars($data->getNb_films_ajoutes_total()));
       $data->setNb_films_comments_total(htmlspecialchars($data->getNb_films_comments_total()));
       $data->setNb_collectors_total(htmlspecialchars($data->getNb_collectors_total()));
+      $data->setNb_reservations_total(htmlspecialchars($data->getNb_reservations_total()));
+      $data->setNb_gateaux_semaine_total(htmlspecialchars($data->getNb_gateaux_semaine_total()));
+      $data->setNb_recettes_total(htmlspecialchars($data->getNb_recettes_total()));
       $data->setExpenses_total(htmlspecialchars($data->getExpenses_total()));
       $data->setNb_bugs_soumis_total(htmlspecialchars($data->getNb_bugs_soumis_total()));
       $data->setNb_bugs_resolus_total(htmlspecialchars($data->getNb_bugs_resolus_total()));
@@ -972,6 +1023,39 @@
     public function getNb_collectors_total()
     {
       return $this->nb_collectors_total;
+    }
+
+    // Nombre de réservations de restaurants
+    public function setNb_reservations_total($nb_reservations_total)
+    {
+      $this->nb_reservations_total = $nb_reservations_total;
+    }
+
+    public function getNb_reservations_total()
+    {
+      return $this->nb_reservations_total;
+    }
+
+    // Nombre de gâteaux de la semaine
+    public function setNb_gateaux_semaine_total($nb_gateaux_semaine_total)
+    {
+      $this->nb_gateaux_semaine_total = $nb_gateaux_semaine_total;
+    }
+
+    public function getNb_gateaux_semaine_total()
+    {
+      return $this->nb_gateaux_semaine_total;
+    }
+
+    // Nombre de recettes partagées
+    public function setNb_recettes_total($nb_recettes_total)
+    {
+      $this->nb_recettes_total = $nb_recettes_total;
+    }
+
+    public function getNb_recettes_total()
+    {
+      return $this->nb_recettes_total;
     }
 
     // Bilan des dépenses
