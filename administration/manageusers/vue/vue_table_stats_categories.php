@@ -111,7 +111,12 @@
 					echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
 				elseif ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo formatAmountForDisplay($statistiquesIns->getExpenses());
+
+						if ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
+							echo formatAmountForDisplay(abs($statistiquesIns->getExpenses()));
+						else
+							echo formatAmountForDisplay($statistiquesIns->getExpenses());
+							
 					echo '</td>';
 			echo '</tr>';
     }
@@ -175,7 +180,12 @@
 					echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
 				elseif ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
 					echo '<td colspan="4" class="td_stats_admin">';
-						echo formatAmountForDisplay($statistiquesDes->getExpenses());
+
+						if ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
+							echo formatAmountForDisplay(abs($statistiquesDes->getExpenses()));
+						else
+							echo formatAmountForDisplay($statistiquesDes->getExpenses());
+
 					echo '</td>';
 			echo '</tr>';
 		}
