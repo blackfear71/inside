@@ -145,7 +145,7 @@
 
               foreach ($proposition->getDetails() as $detailsUser)
               {
-                if ($_SESSION['user']['identifiant'] == $detailsUser['identifiant'])
+                if ($_SESSION['user']['identifiant'] == $detailsUser->getIdentifiant())
                 {
                   $participe = true;
                   break;
