@@ -439,16 +439,15 @@
 .zone_details_actions
 {
 	text-align: center;
-	margin-bottom: 1vh;
+	margin-bottom: 2vh;
 }
 
 .lien_modifier_depense
 {
 	display: inline-block;
 	height: 6vh;
-	width: calc(50% - 1.5vh);
-	margin-left: 1vh;
-	margin-right: 0.5vh;
+	width: calc(45% - 1vh);
+	margin-right: 1vh;
 	vertical-align: middle;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
@@ -465,9 +464,8 @@
 .form_supprimer_depense
 {
 	display: inline-block;
-	width: calc(50% - 1.5vh);
-	margin-left: 0.5vh;
-	margin-right: 1vh;
+	width: calc(45% - 1vh);
+	margin-left: 1vh;
 	vertical-align: middle;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
