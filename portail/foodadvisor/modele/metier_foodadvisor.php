@@ -1,6 +1,6 @@
 <?php
-  // METIER : Récupération de la liste des restaurants ouverts
-  // RETOUR : Liste des restaurants disponibles
+  // METIER : Récupération et filtrage la liste des restaurants ouverts
+  // RETOUR : Liste des restaurants filtrés
   function getListeRestaurantsOuverts($listeLieux)
   {
     // Initialisations
@@ -12,14 +12,6 @@
       $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsOuvertsParLieux($lieu);
     }
 
-    // Retour
-    return $listeRestaurants;
-  }
-
-  // METIER : Filtre la liste des restaurants disponibles si aucun ne l'est
-  // RETOUR : Liste des restaurants filtrés
-  function getListeRestaurantsFiltres($listeRestaurants)
-  {
     // Filtrage des restaurants
     foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
     {
