@@ -117,7 +117,10 @@ function showDetails(idDepense)
   var parts          = depense['parts'];
 
   // Date
-  $('.titre_details > .texte_titre_section').html('Dépense du ' + date);
+  if (parts.length == 0)
+    $('.titre_details > .texte_titre_section').html('Régularisation du ' + date);
+  else
+    $('.titre_details > .texte_titre_section').html('Dépense du ' + date);
 
   // Prix
   $('.zone_details_prix').html(prix);
@@ -195,6 +198,7 @@ function initialisationModification(idDepense, year)
 {
   // Récupération des données
   var depense = listExpenses[idDepense];
+  var parts   = depense['parts'];
 
   // Action du formulaire
   var action = 'expensecenter.php?year=' + year + '&action=doModifier';
@@ -206,7 +210,12 @@ function initialisationModification(idDepense, year)
   var titre = 'Modifier la dépense';
 
   // Sous-titre
-  var sousTitre = 'Dépense du ' + date;
+  var sousTitre;
+
+  if (parts.length == 0)
+    sousTitre = 'Régularisation du ' + date;
+  else
+    sousTitre = 'Dépense du ' + date;
 
   // Acheteur
   var buyer = depense['buyer'];
@@ -235,7 +244,7 @@ function initialisationModification(idDepense, year)
     var idZone           = $(this).attr('id');
     var idQuantite       = $(this).find('.quantite').attr('id');
     var identifiantLigne = $(this).find('input[type=hidden]').val();
-    var partUtilisateur  = depense['parts'][identifiantLigne];
+    var partUtilisateur  = parts[identifiantLigne];
     var nombrePartsUtilisateur;
 
     // Récupération du nombre de parts

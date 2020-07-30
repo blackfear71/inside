@@ -210,15 +210,24 @@ function saisirPart(zone, quantite, value)
 // Affiche la zone de mise à jour d'une dépense
 function updateExpense(id, year)
 {
-  var date    = listExpenses[id]['date'].substring(6, 8) + '/' + listExpenses[id]['date'].substring(4, 6) + '/' + listExpenses[id]['date'].substring(0, 4);
-  var titre   = 'Modifier la dépense du ' + date;
-  var buyer   = listExpenses[id]['buyer'];
-  var price   = formatAmountForDisplay(listExpenses[id]['price'], false);
-  var comment = listExpenses[id]['comment'];
+  // Récupération des données
+  var depense = listExpenses[id];
+  var buyer   = depense['buyer'];
+  var comment = depense['comment'];
+  var parts   = depense['parts'];
+  var date    = depense['date'].substring(6, 8) + '/' + depense['date'].substring(4, 6) + '/' + depense['date'].substring(0, 4);
+  var price   = formatAmountForDisplay(depense['price'], false);
   var action  = 'expensecenter.php?year=' + year + '&action=doModifier';
+  var titre;
   var identifiant;
   var idIdentifiant;
-  var parts;
+  var partUser;
+
+  // Titre
+  if (parts.length == 0)
+    titre = 'Modifier la régularisation du ' + date;
+  else
+    titre = 'Modifier la dépense du ' + date;
 
   // Affichage zone de saisie
   afficherMasquerIdWithDelay('zone_add_depense');
@@ -238,14 +247,14 @@ function updateExpense(id, year)
     $(this).css('background-color', '#e3e3e3');
     $(this).css('color', '#262626');
 
-    identifiant = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()];
+    identifiant = parts[$(this).find('input[type=hidden]').val()];
 
     if (identifiant != null)
     {
-      idIdentifiant = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()]['id_identifiant'];
-      parts         = listExpenses[id]['parts'][$(this).find('input[type=hidden]').val()]['parts'];
+      idIdentifiant = parts[$(this).find('input[type=hidden]').val()]['id_identifiant'];
+      partUser      = parts[$(this).find('input[type=hidden]').val()]['parts'];
 
-      $('#quantite_user_' + idIdentifiant).val(parts);
+      $('#quantite_user_' + idIdentifiant).val(partUser);
       $(this).css('background-color', '#ff1937');
       $(this).css('color', 'white');
     }
