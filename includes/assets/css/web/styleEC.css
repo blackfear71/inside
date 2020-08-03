@@ -154,7 +154,7 @@
 	resize: vertical;
 }
 
-.zone_bouton_saisie
+.zone_bouton_saisie, .zone_bouton_saisie_montants
 {
 	display: block;
 	width: 100%;

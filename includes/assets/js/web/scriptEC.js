@@ -82,10 +82,10 @@ $(function()
   // Bloque le bouton de soumission si besoin
   $('#bouton_saisie_montants').click(function()
   {
-    var zoneButton   = $('.zone_bouton_saisie');
+    var zoneButton   = $('.zone_bouton_saisie_montants');
     var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
-    var tabBlock     = [];
+    var tabBlock     = null;
 
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });

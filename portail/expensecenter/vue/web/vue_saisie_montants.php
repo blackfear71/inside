@@ -39,7 +39,7 @@
           echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';
 
           // Bouton validation
-          echo '<div class="zone_bouton_saisie">';
+          echo '<div class="zone_bouton_saisie_montants">';
             echo '<input type="submit" name="add_depense" value="Valider" id="bouton_saisie_montants" class="saisie_bouton" />';
           echo '</div>';
         echo '</div>';
