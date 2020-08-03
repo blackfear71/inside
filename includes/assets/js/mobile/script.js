@@ -187,6 +187,16 @@ $(window).on('load', function()
   endLoading();
 });
 
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Forçage taille écran (viewport)
+  fixViewport();
+
+  // Réinitialsiation position Celsius
+  initPositionCelsius();
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
