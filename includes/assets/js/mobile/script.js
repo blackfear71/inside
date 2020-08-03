@@ -167,17 +167,6 @@ $(function()
     // Déplacement Celsius
     touchMoveCelsius($(this), e);
   });
-
-  // Remise en place Celsius au changement d'orientation
-  $(window).on('orientationchange', function(e)
-  {
-    // Forçage taille écran (viewport)
-    if (e.orientation == 'landscape')
-      fixViewport();
-
-    // Réinitialsiation position Celsius
-    initPositionCelsius();
-  });
 });
 
 // Au chargement du document complet
@@ -187,11 +176,12 @@ $(window).on('load', function()
   endLoading();
 });
 
-// Au redimensionnement de la fenêtre
-$(window).resize(function()
+// Remise en place Celsius au changement d'orientation
+$(window).on('orientationchange', function(e)
 {
   // Forçage taille écran (viewport)
-  fixViewport();
+  if (e.orientation == 'landscape')
+    fixViewport();
 
   // Réinitialsiation position Celsius
   initPositionCelsius();
