@@ -27,7 +27,20 @@ $(function()
   // Réinitialise la saisie dépense à la fermeture
   $('#resetDepense').click(function()
   {
-    closeInput();
+    resetSaisie('zone_add_depense', $_GET('year'), 'P');
+  });
+
+  // Ajouter des montants
+  $('#ajouterMontants').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_add_montants');
+    initMasonry();
+  });
+
+  // Réinitialise la saisie montants à la fermeture
+  $('#resetMontants').click(function()
+  {
+    resetSaisie('zone_add_montants', $_GET('year'), 'M');
   });
 
   // Ferme au clic sur le fond
@@ -35,7 +48,21 @@ $(function()
   {
     // Ferme la saisie d'une dépense
     if ($(event.target).attr('class') == 'fond_saisie_depense')
-      closeInput();
+    {
+      switch (event.target.id)
+      {
+        case 'zone_add_depense':
+          resetSaisie('zone_add_depense', $_GET('year'), 'P');
+          break;
+
+        case 'zone_add_montants':
+          resetSaisie('zone_add_montants', $_GET('year'), 'M');
+          break;
+
+        default:
+          break;
+      }
+    }
   });
 
   // Bloque le bouton de soumission si besoin
@@ -48,6 +75,17 @@ $(function()
 
     // Blocage spécifique (bouton modification parts dépense)
     tabBlock.push({element: '.bouton_quantite', property: 'pointer-events', value: 'none'});
+
+    hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+  });
+
+  // Bloque le bouton de soumission si besoin
+  $('#bouton_saisie_montants').click(function()
+  {
+    var zoneButton   = $('.zone_bouton_saisie');
+    var submitButton = $(this);
+    var formSaisie   = submitButton.closest('form');
+    var tabBlock     = [];
 
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
@@ -148,12 +186,6 @@ function adaptExpenses()
   }
 }
 
-// Ferme la saisie d'une dépense
-function closeInput()
-{
-  resetSaisie('zone_add_depense', $_GET('year'));
-}
-
 // Lance Masonry quand on fait apparaitre la zone
 function initMasonry()
 {
@@ -208,61 +240,109 @@ function saisirPart(zone, quantite, value)
 }
 
 // Affiche la zone de mise à jour d'une dépense
-function updateExpense(id, year)
+function updateExpense(idDepense, year)
 {
   // Récupération des données
-  var depense = listExpenses[id];
-  var buyer   = depense['buyer'];
-  var comment = depense['comment'];
+  var depense = listExpenses[idDepense];
   var parts   = depense['parts'];
-  var date    = depense['date'].substring(6, 8) + '/' + depense['date'].substring(4, 6) + '/' + depense['date'].substring(0, 4);
-  var price   = formatAmountForDisplay(depense['price'], false);
-  var action  = 'expensecenter.php?year=' + year + '&action=doModifier';
+  var type    = depense['type'];
+  var price;
+  var action;
   var titre;
-  var identifiant;
-  var idIdentifiant;
-  var partUser;
+
+  // Action du formulaire
+  if (type == 'M')
+    action = 'expensecenter.php?year=' + year + '&action=doModifierMontants';
+  else
+    action = 'expensecenter.php?year=' + year + '&action=doModifier';
+
+  // Date du jour
+  var date = formatDateForDisplay(depense['date']);
 
   // Titre
   if (parts.length == 0)
     titre = 'Modifier la régularisation du ' + date;
   else
-    titre = 'Modifier la dépense du ' + date;
+  {
+    if (type == 'M')
+      titre = 'Modifier les montants du ' + date;
+    else
+      titre = 'Modifier la dépense du ' + date;
+  }
 
-  // Affichage zone de saisie
-  afficherMasquerIdWithDelay('zone_add_depense');
-  initMasonry();
+  // Acheteur
+  var buyer   = depense['buyer'];
+
+  // Prix ou frais
+  if (type == 'M')
+    price = formatAmountForDisplay(depense['frais'], false);
+  else
+    price = formatAmountForDisplay(depense['price'], false);
+
+  // Commentaire
+  var comment = depense['comment'];
 
   // Modification des données
-  $('input[name=id_expense]').val(id);
-  $('.titre_saisie_depense').html(titre);
   $('.form_saisie_depense').attr('action', action);
-  $('#select_user').val(buyer);
+  $('.titre_saisie_depense').html(titre);
+  $('input[name=id_expense]').val(idDepense);
+  $('.saisie_buyer').val(buyer);
   $('.saisie_prix').val(price);
   $('.saisie_commentaire').html(comment);
 
-  $('.zone_saisie_utilisateur').each(function()
+  if (type == 'M')
   {
-    $(this).children('.quantite').val('0');
-    $(this).css('background-color', '#e3e3e3');
-    $(this).css('color', '#262626');
-
-    identifiant = parts[$(this).find('input[type=hidden]').val()];
-
-    if (identifiant != null)
+    $('.zone_saisie_utilisateur').each(function()
     {
-      idIdentifiant = parts[$(this).find('input[type=hidden]').val()]['id_identifiant'];
-      partUser      = parts[$(this).find('input[type=hidden]').val()]['parts'];
+      // Initialisation du montant
+      $(this).find('.montant').val('');
 
-      $('#quantite_user_' + idIdentifiant).val(partUser);
-      $(this).css('background-color', '#ff1937');
-      $(this).css('color', 'white');
-    }
-  });
+      // Vérification présence identifiant dans les parts
+      var idZone                 = $(this).attr('id');
+      var idQuantite             = $(this).find('.montant').attr('id');
+      var identifiantLigne       = $(this).find('input[type=hidden]').val();
+      var partUtilisateur        = parts[identifiantLigne];
+
+      // Récupération du nombre de parts
+      if (partUtilisateur != null)
+        $(this).find('.montant').val(formatAmountForDisplay(partUtilisateur['parts']));
+    });
+  }
+  else
+  {
+    $('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
+    {
+      $(this).children('.quantite').val('0');
+
+      // Vérification présence identifiant dans les parts
+      var idZone           = $(this).attr('id');
+      var idQuantite       = $(this).find('.quantite').attr('id');
+      var identifiantLigne = $(this).find('input[type=hidden]').val();
+      var partUtilisateur  = parts[identifiantLigne];
+      var nombrePartsUtilisateur;
+
+      // Récupération du nombre de parts
+      if (partUtilisateur != null)
+        nombrePartsUtilisateur = parseInt(partUtilisateur['parts']);
+      else
+        nombrePartsUtilisateur = 0;
+
+      // Ajout de la part à la zone
+      saisirPart(idZone, idQuantite, nombrePartsUtilisateur);
+    });
+  }
+
+  // Affiche la zone de saisie
+  if (type == 'M')
+    afficherMasquerIdWithDelay('zone_add_montants');
+  else
+    afficherMasquerIdWithDelay('zone_add_depense');
+
+  initMasonry();
 }
 
 // Réinitialise la zone de saisie d'une dépense si fermeture modification
-function resetSaisie(zone, year)
+function resetSaisie(zone, year, type)
 {
   // Fermeture zone de saisie
   afficherMasquerIdWithDelay(zone);
@@ -273,28 +353,64 @@ function resetSaisie(zone, year)
     var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
-    if (call == 'doModifier')
+    if (call == 'doModifier' || call == 'doModifierMontants')
     {
-      var titre   = 'Saisir une dépense';
+      if (type == 'M')
+      {
+        // Action du formulaire
+        var action = 'expensecenter.php?year=' + year + '&action=doInsererMontants';
+
+        // Titre
+        var titre = 'Saisir des montants';
+      }
+      else
+      {
+        // Action du formulaire
+        var action = 'expensecenter.php?year=' + year + '&action=doInserer';
+
+        // Titre
+        var titre = 'Saisir une dépense';
+      }
+
+      // Acheteur
       var buyer   = '';
+
+      // Prix ou frais
       var price   = '';
+
+      // Commentaire
       var comment = '';
-      var action  = 'expensecenter.php?year=' + year + '&action=doInserer';
 
       // Modification des données
-      $('input[name=id_expense]').val('');
-      $('.titre_saisie_depense').html(titre);
       $('.form_saisie_depense').attr('action', action);
-      $('#select_user').val(buyer);
+      $('.titre_saisie_depense').html(titre);
+      $('input[name=id_expense]').val('');
+      $('.saisie_buyer').val(buyer);
       $('.saisie_prix').val(price);
       $('.saisie_commentaire').html(comment);
 
-      $('.zone_saisie_utilisateur').each(function()
+      if (type == 'M')
       {
-        $(this).children('.quantite').val('0');
-        $(this).css('background-color', '#e3e3e3');
-        $(this).css('color', '#262626');
-      });
+        $('.zone_saisie_utilisateur').each(function()
+        {
+          // Initialisation du montant
+          $(this).find('.montant').val('');
+        });
+      }
+      else
+      {
+        $('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
+        {
+          $(this).find('.quantite').val('0');
+
+          // Ajout de la part à la zone
+          var idZone                 = $(this).attr('id');
+          var idQuantite             = $(this).find('.quantite').attr('id');
+          var nombrePartsUtilisateur = 0;
+
+          saisirPart(idZone, idQuantite, nombrePartsUtilisateur);
+        });
+      }
     }
 
     // On réinitialise l'affichage des explications

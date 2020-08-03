@@ -42,8 +42,11 @@
 
                       echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 
-                      // Nombre de parts
-                      echo '<div class="parts_depense">' . $parts->getParts() . '</div>';
+                      // Nombre de parts ou montant
+                      if ($depense->getType() == 'M')
+                        echo '<div class="montant_depense">' . formatAmountForDisplay($parts->getParts()) . '</div>';
+                      else
+                        echo '<div class="parts_depense">' . $parts->getParts() . '</div>';
                     echo '</div>';
                   }
                 }
@@ -63,7 +66,10 @@
               echo '</a>';
 
               // Supprimer
-              echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimer" class="form_supprimer_depense">';
+              if ($depense->getType() == 'M')
+                echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimerMontants" class="form_supprimer_depense">';
+              else
+                echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimer" class="form_supprimer_depense">';
                 echo '<input type="hidden" name="id_expense" value="' . $depense->getId() . '" />';
                 echo '<input type="submit" name="delete_depense" value="" title="Supprimer" class="icone_supprimer_depense eventConfirm" />';
                 echo '<input type="hidden" value="Supprimer la dépense de ' . formatOnclick($depense->getPseudo()) . ' du ' . formatDateForDisplay($depense->getDate()) . ' et d\'un montant de ' . formatAmountForDisplay($depense->getPrice()) . ' ?" class="eventMessage" />';

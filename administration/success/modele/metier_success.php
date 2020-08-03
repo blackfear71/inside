@@ -420,12 +420,7 @@
 
             // Profiteur occasionnel
             case 'eater':
-              $listeConditions = array(array('operator' => '',
-                                             'column'   => 'identifiant',
-                                             'test'     => '=',
-                                             'value'    => $user->getIdentifiant()));
-
-              $value = physiqueSumSuccess('expense_center_users', $listeConditions, 'parts');
+              $value = physiqueEaterSuccess($user->getIdentifiant());
               break;
 
             // Mer il et fou !

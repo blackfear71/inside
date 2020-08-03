@@ -52,12 +52,19 @@
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/expense_center.png" alt="expense_center" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Saisir une dépense</div>';
             echo '</a>';
+
+            // Saisie nouveaux montant
+            echo '<a id="ajouterMontants" title="Saisir des montants" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/expensecenter/expenses.png" alt="expenses" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Saisir des montants</div>';
+            echo '</a>';
           echo '</div>';
 
-          /*************************/
-          /* Saisie nouvelle ligne */
-          /*************************/
+          /***********/
+          /* Saisies */
+          /***********/
           include('vue/web/vue_saisie_depense.php');
+          include('vue/web/vue_saisie_montants.php');
 
           /*******************/
           /* Chargement page */

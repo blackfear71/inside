@@ -259,6 +259,35 @@
     return $value;
   }
 
+  // PHYSIQUE : Récupération du succès "eater"
+  // RETOUR : Valeur du succès
+  function physiqueEaterSuccess($identifiant)
+  {
+    // Initialisations
+    $value = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT expense_center.type, expense_center_users.*
+                        FROM expense_center_users
+                        INNER JOIN expense_center
+                        ON (expense_center.id = expense_center_users.id_expense AND expense_center_users.identifiant = "' . $identifiant . '")');
+
+    while ($data = $req->fetch())
+    {
+      if ($data['type'] == 'M')
+        $value += 1;
+      else
+        $value += $data['parts'];
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $value;
+  }
+
   // PHYSIQUE : Récupération du succès "self-satisfied"
   // RETOUR : Valeur du succès
   function physiqueSelfSatisfiedSuccess($identifiant)

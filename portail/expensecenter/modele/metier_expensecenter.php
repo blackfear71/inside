@@ -8,7 +8,11 @@
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
     if ((!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
-    AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true))
+    AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true)
+    AND (!isset($_SESSION['alerts']['parts_not_integer'])   OR $_SESSION['alerts']['parts_not_integer']   != true)
+    AND (!isset($_SESSION['alerts']['empty_amount'])        OR $_SESSION['alerts']['empty_amount']        != true)
+    AND (!isset($_SESSION['alerts']['amount_not_positive']) OR $_SESSION['alerts']['amount_not_positive'] != true)
+    AND (!isset($_SESSION['alerts']['amounts_not_numeric']) OR $_SESSION['alerts']['amounts_not_numeric'] != true))
   	{
       unset($_SESSION['save']);
 
@@ -65,6 +69,9 @@
     // Récupération des données complémentaires
     foreach ($listeDepenses as $depense)
     {
+      // Initialisation
+      $prixMontants = $depense->getPrice();
+
       // Récupération des données acheteur
       $acheteur = physiqueUser($depense->getBuyer());
 
@@ -79,6 +86,9 @@
         $partDepense->setId_identifiant($user->getId());
         $partDepense->setPseudo($user->getPseudo());
         $partDepense->setAvatar($user->getAvatar());
+
+        if ($depense->getType() == 'M')
+          $prixMontants += $partDepense->getParts();
       }
 
       // Récupération du nombre de participants
@@ -89,6 +99,12 @@
       $depense->setAvatar($acheteur->getAvatar());
       $depense->setNb_users($nombreUsers);
       $depense->setParts($listePartsDepense);
+
+      if ($depense->getType() == 'M')
+      {
+        $depense->setFrais($depense->getPrice());
+        $depense->setPrice($prixMontants);
+      }
     }
 
     // Retour
@@ -112,6 +128,8 @@
                        'pseudo'  => $depenseAConvertir->getPseudo(),
                        'avatar'  => $depenseAConvertir->getAvatar(),
                        'comment' => $depenseAConvertir->getComment(),
+                       'frais'   => $depenseAConvertir->getFrais(),
+                       'type'    => $depenseAConvertir->getType(),
                        'parts'   => array()
                       );
 
@@ -134,8 +152,8 @@
     return $listeDepensesAConvertir;
   }
 
-  // METIER : Insertion d'une dépense & mise à jour des dépenses utilisateur
-  // RETOUR : Aucun
+  // METIER : Insertion d'une dépense & mise à jour des dépenses utilisateurs
+  // RETOUR : Id dépense
   function insertExpense($post)
   {
     // Initialisations
@@ -147,6 +165,7 @@
     $price   = formatAmountForInsert($post['depense']);
     $buyer   = $post['buyer_user'];
     $comment = $post['comment'];
+    $type    = 'P';
 
     $listeParts = array();
 
@@ -169,27 +188,28 @@
       $regularisationSansParts = false;
 
     // Contrôle si aucune part pour une régularisation
-    $control_ok = controlRegularisation($price, $regularisationSansParts);
+    $control_ok = controleRegularisation($price, $regularisationSansParts);
 
     // Contrôle si prix numérique et non nul (négatif = régularisation, positif = régularisation ou dépense, nul = aucun sens)
     if ($control_ok == true)
       $control_ok = controlePrixNumerique($price);
 
-    // Insertion de l'enregistrement en base
+    // Contrôle parts entières
+    if ($control_ok == true)
+      $control_ok = controlePartsEntieres($listeParts, $regularisationSansParts);
+
+    // Insertion de l'enregistrement en base et traitement des utilisateurs
     if ($control_ok == true)
     {
       $depense = array('date'    => $date,
                        'price'   => $price,
                        'buyer'   => $buyer,
-                       'comment' => $comment
+                       'comment' => $comment,
+                       'type'    => $type
                       );
 
       $idDepense = physiqueInsertionDepense($depense);
-    }
 
-    // Traitement des utilisateurs
-    if ($control_ok == true)
-    {
       // Récupération des données acheteur
       $acheteur      = physiqueUser($buyer);
       $bilanAcheteur = $acheteur->getExpenses();
@@ -263,6 +283,137 @@
     return $idDepense;
   }
 
+  // METIER : Insertion de montants & mise à jour des dépenses utilisateurs
+  // RETOUR : Id dépense
+  function insertMontants($post)
+  {
+    // Initialisations
+    $idDepense  = NULL;
+    $control_ok = true;
+
+    // Récupération des données
+    $date    = date('Ymd');
+    $buyer   = $post['buyer_user'];
+    $comment = $post['comment'];
+    $frais   = formatAmountForInsert($post['depense']);
+    $type    = 'M';
+
+    $listeMontants = array();
+
+    foreach ($post['identifiant_montant'] as $id => $identifiant)
+    {
+      if ($post['montant_user'][$id] != '')
+        $listeMontants[$identifiant] = $post['montant_user'][$id];
+    }
+
+    // Sauvegarde en session en cas d'erreur
+    $_SESSION['save']['price']            = $post['depense'];
+    $_SESSION['save']['buyer']            = $buyer;
+    $_SESSION['save']['comment']          = $comment;
+    $_SESSION['save']['tableau_montants'] = $listeMontants;
+
+    // Contrôle si frais numérique et positif (seulement si renseignés)
+    if (!empty($post['depense']))
+      $control_ok = controleFraisPositifs($frais);
+
+    // Contrôle si au moins 1 montant saisi
+    if ($control_ok == true)
+      $control_ok = controleMontantsSaisis($listeMontants);
+
+    // Contrôle montants numériques
+    if ($control_ok == true)
+      $control_ok = controleMontantsPositifs($listeMontants);
+
+    // Insertion de l'enregistrement en base et traitement des utilisateurs
+    if ($control_ok == true)
+    {
+      // Insertion de l'enregistrement en base
+      $depense = array('date'    => $date,
+                       'price'   => $frais,
+                       'buyer'   => $buyer,
+                       'comment' => $comment,
+                       'type'    => $type
+                      );
+
+      $idDepense = physiqueInsertionDepense($depense);
+
+      // Calcul du montant total
+      $montantTotal = $frais;
+
+      foreach ($listeMontants as $montant)
+      {
+        $montantTotal += formatAmountForInsert($montant);
+      }
+
+      // Récupération des données acheteur
+      $acheteur      = physiqueUser($buyer);
+      $bilanAcheteur = $acheteur->getExpenses();
+
+      // Mise à jour du bilan de l'acheteur (on ajoute le montant total)
+      $bilanAcheteur += $montantTotal;
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilan($buyer, $bilanAcheteur);
+
+      // Vérification si montant acheteur nul
+      $acheteurSansMontant = true;
+
+      if (isset($listeMontants[$buyer]) AND $listeMontants[$buyer] > 0)
+        $acheteurSansMontant = false;
+
+      // Génération succès (total max pour l'acheteur s'il n'a pas de montant saisi)
+      if ($acheteurSansMontant == true)
+        insertOrUpdateSuccesValue('greedy', $buyer, $bilanAcheteur);
+
+      // Récupération du nombre total d'utilisateurs pour répartir les frais additionnels
+      $nombreTotalUsers = count($listeMontants);
+
+      // Insertion des montants & mise à jour du bilan pour chaque utilisateur
+      foreach ($listeMontants as $identifiant => $montant)
+      {
+        // Insertion de l'enregistrement en base
+        $partUser = array('id_expense'  => $idDepense,
+                          'identifiant' => $identifiant,
+                          'parts'       => formatAmountForInsert($montant)
+                         );
+
+        physiqueInsertionPart($partUser);
+
+        // Récupération des données utilisateur
+        $user      = physiqueUser($identifiant);
+        $bilanUser = $user->getExpenses();
+
+        // Mise à jour du bilan pour chaque utilisateur (on retire au total)
+        $bilanUser -= $montant + ($frais / $nombreTotalUsers);
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateBilan($identifiant, $bilanUser);
+
+        // Génération succès (ajout des parts)
+        insertOrUpdateSuccesValue('eater', $identifiant, 1);
+
+        // Génération succès (total max)
+        insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+      }
+
+      // Génération succès (pour l'acheteur)
+      insertOrUpdateSuccesValue('buyer', $buyer, 1);
+
+      // Génération succès (dépense sans parts)
+      if ($acheteurSansMontant == true)
+        insertOrUpdateSuccesValue('generous', $buyer, 1);
+
+      // Ajout expérience
+      insertExperience($_SESSION['user']['identifiant'], 'add_expense');
+
+      // Message d'alerte
+      $_SESSION['alerts']['depense_added'] = true;
+    }
+
+    // Retour
+    return $idDepense;
+  }
+
   // METIER : Modification d'une dépense
   // RETOUR : Id dépense
   function updateExpense($post)
@@ -291,7 +442,7 @@
       $newRegularisationSansParts = false;
 
     // Contrôle si aucune part pour une régularisation
-    $control_ok = controlRegularisation($newPrice, $newRegularisationSansParts);
+    $control_ok = controleRegularisation($newPrice, $newRegularisationSansParts);
 
     // Contrôle si prix numérique et non nul (négatif = régularisation, positif = régularisation ou dépense, nul = aucun sens)
     if ($control_ok == true)
@@ -300,21 +451,21 @@
     // Modification de la dépense
     if ($control_ok == true)
     {
-      /*******************************************/
-      /*** Retrait anciennes dépenses et parts ***/
-      /*******************************************/
+      /*****************************************/
+      /*** Retrait ancienne dépense et parts ***/
+      /*****************************************/
       // Lecture dépense (avant mise à jour)
-      $ancienneDepense = physiqueDepense($idDepense);
+      $oldDepense = physiqueDepense($idDepense);
 
       // Récupération des données acheteur
-      $acheteur      = physiqueUser($ancienneDepense->getBuyer());
+      $acheteur      = physiqueUser($oldDepense->getBuyer());
       $bilanAcheteur = $acheteur->getExpenses();
 
       // Mise à jour du bilan pour l'acheteur (on retire l'ancienne dépense)
-      $bilanAcheteur -= $ancienneDepense->getPrice();
+      $bilanAcheteur -= $oldDepense->getPrice();
 
       // Modification de l'enregistrement en base
-      physiqueUpdateBilan($ancienneDepense->getBuyer(), $bilanAcheteur);
+      physiqueUpdateBilan($oldDepense->getBuyer(), $bilanAcheteur);
 
       // Lecture des utilisateurs ayant déjà une part
       $oldListeParts = physiquePartsDepenseUsers($idDepense);
@@ -331,7 +482,7 @@
       // Vérification si ancienne part acheteur nulle (pour une dépense positive hors régularisation)
       $oldAcheteurSansParts = true;
 
-      if ($oldRegularisationSansParts == false AND $ancienneDepense->getPrice() > 0 AND isset($oldListeParts[$ancienneDepense->getBuyer()]) AND $oldListeParts[$ancienneDepense->getBuyer()] > 0)
+      if ($oldRegularisationSansParts == false AND $oldDepense->getPrice() > 0 AND isset($oldListeParts[$oldDepense->getBuyer()]) AND $oldListeParts[$oldDepense->getBuyer()] > 0)
         $oldAcheteurSansParts = false;
 
       // Mise à jour du bilan pour chaque utilisateur (retour arrière sur la dépense)
@@ -342,7 +493,7 @@
         $bilanUser = $user->getExpenses();
 
         // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-        $bilanUser += ($ancienneDepense->getPrice() / $oldNombreTotalParts) * $parts;
+        $bilanUser += ($oldDepense->getPrice() / $oldNombreTotalParts) * $parts;
 
         // Modification de l'enregistrement en base
         physiqueUpdateBilan($identifiant, $bilanUser);
@@ -351,17 +502,20 @@
         insertOrUpdateSuccesValue('eater', $identifiant, -$parts);
       }
 
+      // Suppression de toutes les anciennes parts
+      physiqueDeleteParts($idDepense);
+
       // Génération succès (pour l'acheteur si modifié)
-      if ($oldRegularisationSansParts == false AND ($newBuyer != $ancienneDepense->getBuyer() OR $newRegularisationSansParts == true))
-        insertOrUpdateSuccesValue('buyer', $ancienneDepense->getBuyer(), -1);
+      if ($oldRegularisationSansParts == false AND ($newBuyer != $oldDepense->getBuyer() OR $newRegularisationSansParts == true))
+        insertOrUpdateSuccesValue('buyer', $oldDepense->getBuyer(), -1);
 
       // Génération succès (dépense sans parts)
       if ($oldRegularisationSansParts == false AND $oldAcheteurSansParts == true)
-        insertOrUpdateSuccesValue('generous', $ancienneDepense->getBuyer(), -1);
+        insertOrUpdateSuccesValue('generous', $oldDepense->getBuyer(), -1);
 
-      /***********************************************/
-      /*** Mise à jour nouvelles dépenses et parts ***/
-      /***********************************************/
+      /*********************************************/
+      /*** Mise à jour nouvelle dépense et parts ***/
+      /*********************************************/
       // Modification de l'enregistrement en base
       $depense = array('price'   => $newPrice,
                        'buyer'   => $newBuyer,
@@ -389,9 +543,6 @@
       // Génération succès (total max pour l'acheteur s'il n'a pas de parts)
       if ($newAcheteurSansParts == true)
         insertOrUpdateSuccesValue('greedy', $newBuyer, $bilanNewAcheteur);
-
-      // Suppression de toutes les anciennes parts
-      physiqueDeleteParts($idDepense);
 
       // Insertions des nouvelles parts & mise à jour du bilan pour chaque utilisateur seulement pour une dépense positive avec parts
       if ($newPrice > 0 AND $newRegularisationSansParts == false)
@@ -427,13 +578,196 @@
         }
 
         // Génération succès (pour l'acheteur si modifié)
-        if ($newBuyer != $ancienneDepense->getBuyer() OR $oldRegularisationSansParts == true)
+        if ($newBuyer != $oldDepense->getBuyer() OR $oldRegularisationSansParts == true)
           insertOrUpdateSuccesValue('buyer', $newBuyer, 1);
 
         // Génération succès (dépense sans parts)
         if ($newAcheteurSansParts == true)
           insertOrUpdateSuccesValue('generous', $newBuyer, 1);
       }
+
+      // Message d'alerte
+      $_SESSION['alerts']['depense_modified'] = true;
+    }
+
+    // Retour
+    return $idDepense;
+  }
+
+  // METIER : Modification de montants
+  // RETOUR : Id dépense
+  function updateMontants($post)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $idDepense  = $post['id_expense'];
+    $newFrais   = formatAmountForInsert($post['depense']);
+    $newBuyer   = $post['buyer_user'];
+    $newComment = $post['comment'];
+
+    $newListeMontants = array();
+
+    foreach ($post['identifiant_montant'] as $id => $identifiant)
+    {
+      if ($post['montant_user'][$id] != 0)
+        $newListeMontants[$identifiant] = $post['montant_user'][$id];
+    }
+
+    // Contrôle si frais numérique et positif (seulement si renseignés)
+    if (!empty($post['depense']))
+      $control_ok = controleFraisPositifs($newFrais);
+
+    // Contrôle montants numériques
+    if ($control_ok == true)
+      $control_ok = controleMontantsPositifs($newListeMontants);
+
+    // Modification de la dépense
+    if ($control_ok == true)
+    {
+      /********************************************/
+      /*** Retrait ancienne dépense et montants ***/
+      /********************************************/
+      // Lecture dépense (avant mise à jour)
+      $oldDepense = physiqueDepense($idDepense);
+      $oldFrais   = $oldDepense->getPrice();
+
+      // Lecture des montants déjà existants des utilisateurs
+      $oldListeMontants = physiquePartsDepenseUsers($idDepense);
+
+      // Calcul du montant total
+      $oldMontantTotal = $oldFrais;
+
+      foreach ($oldListeMontants as $montant)
+      {
+        $oldMontantTotal += formatAmountForInsert($montant);
+      }
+
+      // Récupération des données acheteur
+      $oldAcheteur      = physiqueUser($oldDepense->getBuyer());
+      $bilanOldAcheteur = $oldAcheteur->getExpenses();
+
+      // Mise à jour du bilan pour l'acheteur (on retire l'ancienne dépense)
+      $bilanOldAcheteur -= $oldMontantTotal;
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilan($oldDepense->getBuyer(), $bilanOldAcheteur);
+
+      // Vérification si montant acheteur nul
+      $oldAcheteurSansMontant = true;
+
+      if (isset($oldListeMontants[$oldDepense->getBuyer()]) AND $oldListeMontants[$oldDepense->getBuyer()] > 0)
+        $oldAcheteurSansMontant = false;
+
+      // Récupération du nombre total d'utilisateurs pour répartir les frais additionnels
+      $oldNombreTotalUsers = count($oldListeMontants);
+
+      // Mise à jour du bilan pour chaque utilisateur (retour arrière sur la dépense)
+      foreach ($oldListeMontants as $identifiant => $montant)
+      {
+        // Récupération des données utilisateur
+        $user      = physiqueUser($identifiant);
+        $bilanUser = $user->getExpenses();
+
+        // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+        $bilanUser += $montant + ($oldFrais / $oldNombreTotalUsers);
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateBilan($identifiant, $bilanUser);
+
+        // Génération succès (suppression des parts)
+        insertOrUpdateSuccesValue('eater', $identifiant, -1);
+      }
+
+      // Suppression de tous les anciens montants
+      physiqueDeleteParts($idDepense);
+
+      // Génération succès (pour l'acheteur si modifié)
+      if ($newBuyer != $oldDepense->getBuyer())
+        insertOrUpdateSuccesValue('buyer', $oldDepense->getBuyer(), -1);
+
+      // Génération succès (dépense sans parts)
+      if ($oldAcheteurSansMontant == true)
+        insertOrUpdateSuccesValue('generous', $oldDepense->getBuyer(), -1);
+
+      /************************************************/
+      /*** Mise à jour nouvelle dépense et montants ***/
+      /************************************************/
+      // Modification de l'enregistrement en base
+      $depense = array('price'   => $newFrais,
+                       'buyer'   => $newBuyer,
+                       'comment' => $newComment
+                      );
+
+      physiqueUpdateDepense($idDepense, $depense);
+
+      // Calcul du montant total
+      $newMontantTotal = $newFrais;
+
+      foreach ($newListeMontants as $montant)
+      {
+        $newMontantTotal += formatAmountForInsert($montant);
+      }
+
+      // Récupération des données nouvel acheteur
+      $newAcheteur      = physiqueUser($newBuyer);
+      $bilanNewAcheteur = $newAcheteur->getExpenses();
+
+      // Mise à jour du bilan du nouvel acheteur (on ajoute le montant total)
+      $bilanNewAcheteur += $newMontantTotal;
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilan($newBuyer, $bilanNewAcheteur);
+
+      // Vérification si montant acheteur nul
+      $newAcheteurSansMontant = true;
+
+      if (isset($newListeMontants[$newBuyer]) AND $newListeMontants[$newBuyer] > 0)
+        $newAcheteurSansMontant = false;
+
+      // Génération succès (total max pour l'acheteur s'il n'a pas de montant saisi)
+      if ($newAcheteurSansMontant == true)
+        insertOrUpdateSuccesValue('greedy', $newBuyer, $bilanNewAcheteur);
+
+      // Récupération du nombre total d'utilisateurs pour répartir les frais additionnels
+      $newNombreTotalUsers = count($newListeMontants);
+
+      // Insertions des nouveaux montants & mise à jour du bilan pour chaque utilisateur
+      foreach ($newListeMontants as $identifiant => $montant)
+      {
+        // Insertion de l'enregistrement en base
+        $partUser = array('id_expense'  => $idDepense,
+                          'identifiant' => $identifiant,
+                          'parts'       => formatAmountForInsert($montant)
+                         );
+
+        physiqueInsertionPart($partUser);
+
+        // Récupération des données utilisateur
+        $user      = physiqueUser($identifiant);
+        $bilanUser = $user->getExpenses();
+
+        // Mise à jour du bilan pour chaque utilisateur (on retire au total)
+        $bilanUser -= $montant + ($newFrais / $newNombreTotalUsers);
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateBilan($identifiant, $bilanUser);
+
+        // Génération succès (ajout des parts)
+        insertOrUpdateSuccesValue('eater', $identifiant, 1);
+
+        // Génération succès (total max)
+        insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+      }
+
+      // Génération succès (pour l'acheteur si modifié)
+      if ($newBuyer != $oldDepense->getBuyer())
+        insertOrUpdateSuccesValue('buyer', $newBuyer, 1);
+
+      // Génération succès (dépense sans parts)
+      if ($newAcheteurSansMontant == true)
+        insertOrUpdateSuccesValue('generous', $newBuyer, 1);
 
       // Message d'alerte
       $_SESSION['alerts']['depense_modified'] = true;
@@ -494,12 +828,12 @@
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($identifiant, $bilanUser);
 
-      // Suppression de toutes les parts
-      physiqueDeleteParts($idDepense);
-
       // Génération succès (suppression des parts)
       insertOrUpdateSuccesValue('eater', $identifiant, -$parts);
     }
+
+    // Suppression de toutes les parts
+    physiqueDeleteParts($idDepense);
 
     // Suppression de la dépense
     physiqueDeleteDepense($idDepense);
@@ -510,6 +844,81 @@
 
     // Génération succès (dépense sans parts)
     if ($regularisationSansParts == false AND $acheteurSansParts == true)
+      insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
+
+    // Message suppression effectuée
+    $_SESSION['alerts']['depense_deleted'] = true;
+  }
+
+  // METIER : Suppression d'une dépense en montants
+  // RETOUR : Aucun
+  function deleteMontants($post)
+  {
+    // Récupération des données
+    $idDepense = $post['id_expense'];
+
+    // Lecture des données de la dépense
+    $depense = physiqueDepense($idDepense);
+    $frais   = $depense->getPrice();
+
+    // Lecture des montants des utilisateurs
+    $listeMontants = physiquePartsDepenseUsers($depense->getId());
+
+    // Calcul du montant total
+    $montantTotal = $frais;
+
+    foreach ($listeMontants as $montant)
+    {
+      $montantTotal += formatAmountForInsert($montant);
+    }
+
+    // Récupération des données acheteur
+    $acheteur      = physiqueUser($depense->getBuyer());
+    $bilanAcheteur = $acheteur->getExpenses();
+
+    // Mise à jour du bilan pour l'acheteur (on retire le montant total)
+    $bilanAcheteur -= $montantTotal;
+
+    // Modification de l'enregistrement en base
+    physiqueUpdateBilan($depense->getBuyer(), $bilanAcheteur);
+
+    // Vérification si montant acheteur nul
+    $acheteurSansMontant = true;
+
+    if (isset($listeMontants[$depense->getBuyer()]) AND $listeMontants[$depense->getBuyer()] > 0)
+      $acheteurSansMontant = false;
+
+    // Récupération du nombre total d'utilisateurs pour répartir les frais additionnels
+    $nombreTotalUsers = count($listeMontants);
+
+    // Suppression des montants & mise à jour du bilan pour chaque utilisateur
+    foreach ($listeMontants as $identifiant => $montant)
+    {
+      // Récupération des données utilisateur
+      $user      = physiqueUser($identifiant);
+      $bilanUser = $user->getExpenses();
+
+      // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+      $bilanUser += $montant + ($frais / $nombreTotalUsers);
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilan($identifiant, $bilanUser);
+
+      // Génération succès (suppression des parts)
+      insertOrUpdateSuccesValue('eater', $identifiant, -1);
+    }
+
+    // Suppression de tous les montants
+    physiqueDeleteParts($idDepense);
+
+    // Suppression de la dépense
+    physiqueDeleteDepense($idDepense);
+
+    // Génération succès (pour l'acheteur)
+    insertOrUpdateSuccesValue('buyer', $depense->getBuyer(), -1);
+
+    // Génération succès (dépense sans parts)
+    if ($acheteurSansMontant == true)
       insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
 
     // Message suppression effectuée

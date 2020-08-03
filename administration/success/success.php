@@ -61,7 +61,7 @@
 
 		case 'doInitialiser':
 			// Récupération de la liste des utilisateurs
-			$listeUsers   = getUsers();
+			$listeUsers = getUsers();
 
 			// Récupération de la liste des succès
 			$listeSuccess = getSuccess();

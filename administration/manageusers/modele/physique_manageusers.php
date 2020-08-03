@@ -436,7 +436,10 @@
   function physiquePartsDepensesUser($idExpense, $identifiant)
   {
     // Initialisations
-    $nombreParts = array('total' => 0, 'utilisateur' => 0);
+    $nombreParts = array('total'              => 0,
+                         'utilisateur'        => 0,
+                         'nombreUtilisateurs' => 0
+                        );
 
     // Requête
     global $bdd;
@@ -453,6 +456,9 @@
       // Nombre de parts de l'utilisateur
       if ($identifiant == $data['identifiant'])
         $nombreParts['utilisateur'] = $data['parts'];
+
+      // Nombre de participants
+      $nombreParts['nombreUtilisateurs'] += 1;
     }
 
     $req->closeCursor();

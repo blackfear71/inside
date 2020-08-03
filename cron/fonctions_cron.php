@@ -315,21 +315,22 @@
     while ($data1 = $req1->fetch())
     {
       // On calcule le bilan des dépenses de l'utilisateur courant
-      $bilan = 0;
+      $bilanUser = 0;
 
       // Calcul des bilans
       $req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
       while ($data2 = $req2->fetch())
       {
-        // Prix d'achat
+        // Initialisation prix d'achat ou frais
         $prixAchat = $data2['price'];
 
         // Identifiant de l'acheteur
         $acheteur = $data2['buyer'];
 
         // Nombre de parts et prix par parts
-        $nombrePartsTotal = 0;
-        $nombrePartsUser  = 0;
+        $nombrePartsTotal   = 0;
+        $nombrePartsUser    = 0;
+        $nombreUtilisateurs = 0;
 
         $req3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data2['id']);
         while ($data3 = $req3->fetch())
@@ -340,18 +341,45 @@
           // Nombre de parts de l'utilisateur
           if ($data1['identifiant'] == $data3['identifiant'])
             $nombrePartsUser = $data3['parts'];
+
+          // Nombre de participants
+          $nombreUtilisateurs += 1;
         }
 
-        if ($nombrePartsTotal != 0)
-          $prixParPart = $prixAchat / $nombrePartsTotal;
-        else
-          $prixParPart = 0;
+        if ($data2['type'] == 'M')
+        {
+          // Montant de la part
+          $montantUserDes = $nombrePartsUser;
 
-        // On fait la somme des dépenses moins les parts consommées pour trouver le bilan
-        if ($data2['buyer'] == $data1['identifiant'])
-          $bilan = $bilan + $prixAchat - ($prixParPart * $nombrePartsUser);
+          // Calcul de la répartition des frais
+          if ($montantUserDes != 0)
+            $fraisUserDes = $prixAchat / $nombreUtilisateurs;
+          else
+            $fraisUserDes = 0;
+
+          // Calcul du bilan de l'utilisateur (s'il participe ou qu'il est l'acheteur)
+          if ($data2['buyer'] == $data1['identifiant'] OR $montantUserDes != 0)
+          {
+            if ($data2['buyer'] == $data1['identifiant'])
+              $bilanUser += $prixAchat + $nombrePartsTotal - ($montantUserDes + $fraisUserDes);
+            else
+              $bilanUser -= $montantUserDes + $fraisUserDes;
+          }
+        }
         else
-          $bilan = $bilan - ($prixParPart * $nombrePartsUser);
+        {
+          // Prix par parts
+          if ($nombrePartsTotal != 0)
+            $prixParPart = $prixAchat / $nombrePartsTotal;
+          else
+            $prixParPart = 0;
+
+          // Somme des dépenses moins les parts consommées pour calculer le bilan
+          if ($data2['buyer'] == $data1['identifiant'])
+            $bilanUser += $prixAchat - ($prixParPart * $nombrePartsUser);
+          else
+            $bilanUser -= $prixParPart * $nombrePartsUser;
+        }
 
         $req3->closeCursor();
       }
@@ -360,7 +388,7 @@
       // On construit un tableau des utilisateurs
       $user = array('id'          => $data1['id'],
                     'identifiant' => $data1['identifiant'],
-                    'bilan'       => $bilan,
+                    'bilan'       => $bilanUser,
                    );
 
       // On ajoute la ligne au tableau

@@ -209,17 +209,40 @@
         // Nombre de parts total et de l'utilisateur
         $nombreParts = physiquePartsDepensesUser($expense->getId(), $userDes);
 
-        // Prix par parts
-        if ($nombreParts['total'] != 0)
-          $prixParPart = $expense->getPrice() / $nombreParts['total'];
-        else
-          $prixParPart = 0;
+        if ($expense->getType() == 'M')
+        {
+          // Montant de la part
+          $montantUserDes = $nombreParts['utilisateur'];
 
-        // Somme des dépenses moins les parts consommées pour calculer le bilan
-        if ($expense->getBuyer() == $userDes)
-          $bilanUser += $expense->getPrice() - ($prixParPart * $nombreParts['utilisateur']);
+          // Calcul de la répartition des frais
+          if ($montantUserDes != 0)
+            $fraisUserDes = $expense->getPrice() / $nombreParts['nombreUtilisateurs'];
+          else
+            $fraisUserDes = 0;
+
+          // Calcul du bilan de l'utilisateur (s'il participe ou qu'il est l'acheteur)
+          if ($expense->getBuyer() == $userDes OR $montantUserDes != 0)
+          {
+            if ($expense->getBuyer() == $userDes)
+              $bilanUser += $expense->getPrice() + $nombreParts['total'] - ($montantUserDes + $fraisUserDes);
+            else
+              $bilanUser -= $montantUserDes + $fraisUserDes;
+          }
+        }
         else
-          $bilanUser -= $prixParPart * $nombreParts['utilisateur'];
+        {
+          // Prix par parts
+          if ($nombreParts['total'] != 0)
+            $prixParPart = $expense->getPrice() / $nombreParts['total'];
+          else
+            $prixParPart = 0;
+
+          // Somme des dépenses moins les parts consommées pour calculer le bilan
+          if ($expense->getBuyer() == $userDes)
+            $bilanUser += $expense->getPrice() - ($prixParPart * $nombreParts['utilisateur']);
+          else
+            $bilanUser -= $prixParPart * $nombreParts['utilisateur'];
+        }
       }
 
       // Nombre de demandes (bugs/évolutions)

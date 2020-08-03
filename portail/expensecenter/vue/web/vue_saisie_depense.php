@@ -18,7 +18,7 @@
         echo '<div class="zone_saisie_left">';
           // Acheteur
           echo '<select id="select_user" name="buyer_user" class="saisie_buyer" required>';
-            echo '<option value="" hidden>Choisissez...</option>';
+            echo '<option value="" hidden>Choisissez un acheteur...</option>';
 
             foreach ($listeUsers as $user)
             {

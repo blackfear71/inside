@@ -661,20 +661,26 @@ function formatDateForDisplay(date)
 // Formate un montant pour affichage
 function formatAmountForDisplay(amount, withCurrency)
 {
-  // Initialisation de la devise
-  if (withCurrency == true)
-    currency = ' €';
-  else
-    currency = '';
+  // Initialisations
+  amountFormatted = '';
 
-  // Conversion en numérique
-  var amountNumeric = parseFloat(amount.replace(',', '.'));
+  if (amount != '')
+  {
+    // Initialisation de la devise
+    if (withCurrency == true)
+      currency = ' €';
+    else
+      currency = '';
 
-  // Formatage avec 2 chiffres après la virgule
-  var amountRounded = amountNumeric.toFixed(2);
+    // Conversion en numérique
+    var amountNumeric = parseFloat(amount.replace(',', '.'));
 
-  // Formatage en chaîne
-  var amountFormatted = amountRounded.replace('.', ',') + currency;
+    // Formatage avec 2 chiffres après la virgule
+    var amountRounded = amountNumeric.toFixed(2);
+
+    // Formatage en chaîne
+    var amountFormatted = amountRounded.replace('.', ',') + currency;
+  }
 
   // Retour
   return amountFormatted;

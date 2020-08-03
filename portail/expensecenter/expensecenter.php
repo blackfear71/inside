@@ -54,14 +54,29 @@
       $idExpense = insertExpense($_POST);
       break;
 
+    case 'doInsererMontants':
+      // Insertion d'une dépense en montants
+      $idExpense = insertMontants($_POST);
+      break;
+
     case 'doModifier':
       // Modification d'une dépense
       $idExpense = updateExpense($_POST);
       break;
 
+    case 'doModifierMontants':
+      // Modification d'une dépense en montants
+      $idExpense = updateMontants($_POST);
+      break;
+
     case 'doSupprimer':
       // Suppression d'une dépense
       deleteExpense($_POST);
+      break;
+
+    case 'doSupprimerMontants':
+      // Suppression d'une dépense en montants
+      deleteMontants($_POST);
       break;
 
     default:
@@ -85,7 +100,7 @@
       }
 
       unset($year);
-      
+
       foreach ($listeDepenses as $depense)
       {
         Expenses::secureData($depense);
@@ -96,8 +111,11 @@
       break;
 
     case 'doInserer':
+    case 'doInsererMontants':
     case 'doModifier':
+    case 'doModifierMontants':
     case 'doSupprimer':
+    case 'doSupprimerMontants':
     default:
       break;
   }
@@ -106,15 +124,18 @@
   switch ($_GET['action'])
   {
     case 'doInserer':
+    case 'doInsererMontants':
       header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter&anchor=' . $idExpense);
       break;
 
-    case 'doSupprimer':
-      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter');
+    case 'doModifier':
+    case 'doModifierMontants':
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idExpense);
       break;
 
-    case 'doModifier':
-      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idExpense);
+    case 'doSupprimer':
+    case 'doSupprimerMontants':
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter');
       break;
 
     case 'goConsulter':

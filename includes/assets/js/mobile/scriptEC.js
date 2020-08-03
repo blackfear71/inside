@@ -21,10 +21,26 @@ $(function()
   $('#fermerSaisieDepense').click(function()
   {
     // Réinitialisation de la saisie
-    resetSaisie('zone_saisie_depense', $_GET('year'));
+    resetSaisie('zone_saisie_depense', $_GET('year'), 'P');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_depense');
+  });
+
+  // Ouvre la zone de saisie de montants
+  $('#afficherSaisieMontants').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_saisie_montants');
+  });
+
+  // Ferme la zone de saisie de montants
+  $('#fermerSaisieMontants').click(function()
+  {
+    // Réinitialisation de la saisie
+    resetSaisie('zone_saisie_montants', $_GET('year'), 'M');
+
+    // Fermeture de l'affichage
+    afficherMasquerIdWithDelay('zone_saisie_montants');
   });
 
   // Affiche la zone de détails d'une dépense
@@ -70,7 +86,21 @@ $(function()
   {
     // Ferme la saisie d'une dépense
     if ($(event.target).attr('class') == 'fond_saisie')
-      resetSaisie('zone_saisie_depense', $_GET('year'));
+    {
+      switch (event.target.id)
+      {
+        case 'zone_saisie_depense':
+          resetSaisie('zone_saisie_depense', $_GET('year'), 'P');
+          break;
+
+        case 'zone_saisie_montants':
+          resetSaisie('zone_saisie_montants', $_GET('year'), 'M');
+          break;
+
+        default:
+          break;
+      }
+    }
   });
 });
 
@@ -114,6 +144,8 @@ function showDetails(idDepense)
   var avatarAcheteur = formatAvatar(depense['avatar'], depense['pseudo'], 2, 'avatar');
   var pseudoAcheteur = formatString(formatUnknownUser(depense['pseudo'], true, false), 10);
   var commentaires   = depense['comment'];
+  var frais          = formatAmountForDisplay(depense['frais'], true);
+  var type           = depense['type'];
   var parts          = depense['parts'];
 
   // Date
@@ -132,6 +164,18 @@ function showDetails(idDepense)
 
   // Pseudo acheteur
   $('.details_pseudo_acheteur').html(pseudoAcheteur);
+
+  // Frais additionnels
+  if (type == 'M' && frais != '')
+  {
+    $('.details_frais').css('display', 'block');
+    $('.details_frais').html(frais + ' de frais');
+  }
+  else
+  {
+    $('.details_frais').css('display', 'none');
+    $('.details_frais').html('');
+  }
 
   // Commentaires
   if (commentaires.length != 0)
@@ -162,11 +206,22 @@ function showDetails(idDepense)
       var avatarUtilisateur = formatAvatar(this.avatar, this.pseudo, 2, 'avatar');
       var pseudoUtilisateur = formatString(formatUnknownUser(this.pseudo, true, false), 10);
 
-      partUtilisateur += '<div class="zone_details_utilisateur">';
-        partUtilisateur += '<img src="' + avatarUtilisateur.path + '" alt="' + avatarUtilisateur.alt + '" title="' + avatarUtilisateur.title + '" class="details_avatar_utilisateur" />';
-        partUtilisateur += '<div class="nombre_parts_user">' + this.parts + '</div>';
-        partUtilisateur += '<div class="details_pseudo_utilisateur">' + pseudoUtilisateur + '</div>';
-      partUtilisateur += '</div>';
+      if (type == 'M')
+      {
+        partUtilisateur += '<div class="zone_details_utilisateur">';
+          partUtilisateur += '<img src="' + avatarUtilisateur.path + '" alt="' + avatarUtilisateur.alt + '" title="' + avatarUtilisateur.title + '" class="details_avatar_utilisateur" />';
+          partUtilisateur += '<div class="montant_user">' + formatAmountForDisplay(this.parts, true) + '</div>';
+          partUtilisateur += '<div class="details_pseudo_utilisateur">' + pseudoUtilisateur + '</div>';
+        partUtilisateur += '</div>';
+      }
+      else
+      {
+        partUtilisateur += '<div class="zone_details_utilisateur">';
+          partUtilisateur += '<img src="' + avatarUtilisateur.path + '" alt="' + avatarUtilisateur.alt + '" title="' + avatarUtilisateur.title + '" class="details_avatar_utilisateur" />';
+          partUtilisateur += '<div class="nombre_parts_user">' + this.parts + '</div>';
+          partUtilisateur += '<div class="details_pseudo_utilisateur">' + pseudoUtilisateur + '</div>';
+        partUtilisateur += '</div>';
+      }
 
       // Ajout à la zone
       $('.zone_details_repartition').append(partUtilisateur);
@@ -180,6 +235,11 @@ function showDetails(idDepense)
   $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + depense['id']);
   $('.form_supprimer_depense > input[name=id_expense]').val(depense['id']);
   $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + depense['pseudo'] + ' du ' + formatDateForDisplay(depense['date']) + ' et d\'un montant de ' + formatAmountForDisplay(depense['price'], true) + ' ?');
+
+  if (type == 'M')
+    $('.form_supprimer_depense').attr('action', 'expensecenter.php?year=' + $_GET('year') + '&action=doSupprimerMontants');
+  else
+    $('.form_supprimer_depense').attr('action', 'expensecenter.php?year=' + $_GET('year') + '&action=doSupprimer');
 
   // Affichage des détails
   afficherMasquerIdWithDelay('zone_details_depense');
@@ -199,15 +259,25 @@ function initialisationModification(idDepense, year)
   // Récupération des données
   var depense = listExpenses[idDepense];
   var parts   = depense['parts'];
+  var type    = depense['type'];
+  var price;
+  var action;
+  var titre;
 
   // Action du formulaire
-  var action = 'expensecenter.php?year=' + year + '&action=doModifier';
+  if (type == 'M')
+    action = 'expensecenter.php?year=' + year + '&action=doModifierMontants';
+  else
+    action = 'expensecenter.php?year=' + year + '&action=doModifier';
 
   // Date du jour
   var date = formatDateForDisplay(depense['date']);
 
   // Titre
-  var titre = 'Modifier la dépense';
+  if (type == 'M')
+    titre = 'Modifier des montants';
+  else
+    titre = 'Modifier la dépense';
 
   // Sous-titre
   var sousTitre;
@@ -220,8 +290,11 @@ function initialisationModification(idDepense, year)
   // Acheteur
   var buyer = depense['buyer'];
 
-  // Prix
-  var price = formatAmountForDisplay(depense['price'], false);
+  // Prix ou frais
+  if (type == 'M')
+    price = formatAmountForDisplay(depense['frais'], false);
+  else
+    price = formatAmountForDisplay(depense['price'], false);
 
   // Commentaire
   var comment = depense['comment'];
@@ -235,37 +308,61 @@ function initialisationModification(idDepense, year)
   $('.saisie_prix').val(price);
   $('.saisie_commentaire').html(comment);
 
-  $('.zone_saisie_part').each(function()
+  if (type == 'M')
   {
-    // Initialisation de la quantité
-    $(this).find('.quantite').val('0');
+    $('.zone_saisie_part').each(function()
+    {
+      // Initialisation du montant
+      $(this).find('.montant').val('');
 
-    // Vérification présence identifiant dans les parts
-    var idZone           = $(this).attr('id');
-    var idQuantite       = $(this).find('.quantite').attr('id');
-    var identifiantLigne = $(this).find('input[type=hidden]').val();
-    var partUtilisateur  = parts[identifiantLigne];
-    var nombrePartsUtilisateur;
+      // Vérification présence identifiant dans les parts
+      var idZone           = $(this).attr('id');
+      var idQuantite       = $(this).find('.montant').attr('id');
+      var identifiantLigne = $(this).find('input[type=hidden]').val();
+      var partUtilisateur  = parts[identifiantLigne];
 
-    // Récupération du nombre de parts
-    if (partUtilisateur != null)
-      nombrePartsUtilisateur = parseInt(partUtilisateur['parts']);
-    else
-      nombrePartsUtilisateur = 0;
+      // Récupération du nombre de parts
+      if (partUtilisateur != null)
+        $(this).find('.montant').val(formatAmountForDisplay(partUtilisateur['parts']));
+    });
+  }
+  else
+  {
+    $('.zone_saisie_part').each(function()
+    {
+      // Initialisation de la quantité
+      $(this).find('.quantite').val('0');
 
-    // Ajout de la part à la zone
-    ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
-  });
+      // Vérification présence identifiant dans les parts
+      var idZone           = $(this).attr('id');
+      var idQuantite       = $(this).find('.quantite').attr('id');
+      var identifiantLigne = $(this).find('input[type=hidden]').val();
+      var partUtilisateur  = parts[identifiantLigne];
+      var nombrePartsUtilisateur;
+
+      // Récupération du nombre de parts
+      if (partUtilisateur != null)
+        nombrePartsUtilisateur = parseInt(partUtilisateur['parts']);
+      else
+        nombrePartsUtilisateur = 0;
+
+      // Ajout de la part à la zone
+      ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
+    });
+  }
 
   // Masque la zone de détails
   afficherMasquerIdWithDelay('zone_details_depense');
 
   // Affiche la zone de saisie
-  afficherMasquerIdWithDelay('zone_saisie_depense');
+  if (type == 'M')
+    afficherMasquerIdWithDelay('zone_saisie_montants');
+  else
+    afficherMasquerIdWithDelay('zone_saisie_depense');
 }
 
 // Réinitialise la zone de saisie d'une dépense si fermeture modification
-function resetSaisie(zone, year)
+function resetSaisie(zone, year, type)
 {
   // Déclenchement après la fermeture
   setTimeout(function()
@@ -274,13 +371,24 @@ function resetSaisie(zone, year)
     var currentAction = $('.form_saisie').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
-    if (call == 'doModifier')
+    if (call == 'doModifier' || call == 'doModifierMontants')
     {
-      // Action du formulaire
-      var action = 'expensecenter.php?year=' + year + '&action=doInserer';
+      if (type == 'M')
+      {
+        // Action du formulaire
+        var action = 'expensecenter.php?year=' + year + '&action=doInsererMontants';
 
-      // Titre
-      var titre = 'Saisir une dépense';
+        // Titre
+        var titre = 'Saisir des montants';
+      }
+      else
+      {
+        // Action du formulaire
+        var action = 'expensecenter.php?year=' + year + '&action=doInserer';
+
+        // Titre
+        var titre = 'Saisir une dépense';
+      }
 
       // Sous-titre
       var sousTitre = 'La dépense';
@@ -288,7 +396,7 @@ function resetSaisie(zone, year)
       // Acheteur
       var buyer = '';
 
-      // Prix
+      // Prix ou frais
       var price = '';
 
       // Commentaire
@@ -303,18 +411,29 @@ function resetSaisie(zone, year)
       $('.saisie_prix').val(price);
       $('.saisie_commentaire').html(comment);
 
-      $('.zone_saisie_part').each(function()
+      if (type == 'M')
       {
-        // Initialisation de la quantité
-        $(this).find('.quantite').val('0');
+        $('.zone_saisie_part').each(function()
+        {
+          // Initialisation du montant
+          $(this).find('.montant').val('');
+        });
+      }
+      else
+      {
+        $('.zone_saisie_part').each(function()
+        {
+          // Initialisation de la quantité
+          $(this).find('.quantite').val('0');
 
-        // Ajout de la part à la zone
-        var idZone                 = $(this).attr('id');
-        var idQuantite             = $(this).find('.quantite').attr('id');
-        var nombrePartsUtilisateur = 0;
+          // Ajout de la part à la zone
+          var idZone                 = $(this).attr('id');
+          var idQuantite             = $(this).find('.quantite').attr('id');
+          var nombrePartsUtilisateur = 0;
 
-        ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
-      });
+          ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
+        });
+      }
     }
   }, 200);
 }

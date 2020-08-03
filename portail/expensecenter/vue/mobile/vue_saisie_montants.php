@@ -1,11 +1,11 @@
 <?php
-  echo '<div id="zone_saisie_depense" class="fond_saisie">';
-    echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie">';
+  echo '<div id="zone_saisie_montants" class="fond_saisie">';
+    echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInsererMontants" class="form_saisie">';
       // Id dépense (modification)
       echo '<input type="hidden" name="id_expense" value="" />';
 
       // Titre
-      echo '<div class="zone_titre_saisie">Saisir une dépense</div>';
+      echo '<div class="zone_titre_saisie">Saisir des montants</div>';
 
       // Saisie
       echo '<div class="zone_contenu_saisie">';
@@ -29,9 +29,9 @@
             }
           echo '</select>';
 
-          // Prix
+          // Frais additionnels
           echo '<div class="zone_saisie_prix">';
-            echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Prix" maxlength="6" class="saisie_prix" required />';
+            echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Frais additionnels" maxlength="6" class="saisie_prix" />';
             echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
           echo '</div>';
 
@@ -41,25 +41,22 @@
           // Titre
           echo '<div class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Les parts utilisateurs</div>';
+            echo '<div class="texte_titre_section">Répartition utilisateurs</div>';
           echo '</div>';
 
-          // Parts utilisateurs
+          // Montants utilisateurs
           echo '<div class="zone_saisie_utilisateurs">';
             foreach ($listeUsers as $user)
             {
-              $savedParts = false;
+              $savedAmounts = false;
 
-              if (isset($_SESSION['save']['tableau_parts']) AND !empty($_SESSION['save']['tableau_parts']))
+              if (isset($_SESSION['save']['tableau_montants']) AND !empty($_SESSION['save']['tableau_montants']))
               {
-                if (isset($_SESSION['save']['tableau_parts'][$user->getIdentifiant()]) AND $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] > 0)
-                  $savedParts = true;
+                if (isset($_SESSION['save']['tableau_montants'][$user->getIdentifiant()]))
+                  $savedAmounts = true;
               }
 
-              if ($savedParts == true)
-                echo '<div class="zone_saisie_part part_selected" id="zone_user_' . $user->getId() . '">';
-              else
-                echo '<div class="zone_saisie_part" id="zone_user_' . $user->getId() . '">';
+              echo '<div class="zone_saisie_part">';
                 // Avatar
                 echo '<div class="zone_saisie_part_avatar">';
                   $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
@@ -68,21 +65,19 @@
                 echo '</div>';
 
                 // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_quantite[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
+                echo '<input type="hidden" name="identifiant_montant[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
 
-                // Bouton -
-                echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
-
-                // Quantité
-                echo '<div class="zone_quantite">';
-                  if ($savedParts == true)
-                    echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
+                // Montant
+                echo '<div class="zone_montant">';
+                  // Saisie
+                  if ($savedAmounts == true)
+                    echo '<input type="text" name="montant_user[' . $user->getId() . ']" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" class="montant" />';
                   else
-                    echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
-                echo '</div>';
+                    echo '<input type="text" name="montant_user[' . $user->getId() . ']" maxlength="6" value="" class="montant" />';
 
-                // Bouton +
-                echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
+                  // Symbole
+                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
+                echo '</div>';
               echo '</div>';
             }
           echo '</div>';
@@ -95,7 +90,7 @@
         echo '<input type="submit" name="submit_expense" value="Valider" class="bouton_saisie_gauche" />';
 
         // Annuler
-        echo '<a id="fermerSaisieDepense" class="bouton_saisie_droite">Annuler</a>';
+        echo '<a id="fermerSaisieMontants" class="bouton_saisie_droite">Annuler</a>';
       echo '</div>';
     echo '</form>';
   echo '</div>';

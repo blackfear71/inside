@@ -228,11 +228,13 @@
     $req = $bdd->prepare('INSERT INTO expense_center(date,
                                                      price,
                                                      buyer,
-                                                     comment)
+                                                     comment,
+                                                     type)
                                              VALUES(:date,
                                                     :price,
                                                     :buyer,
-                                                    :comment)');
+                                                    :comment,
+                                                    :type)');
 
     $req->execute($depense);
 

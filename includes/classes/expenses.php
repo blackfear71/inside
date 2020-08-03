@@ -8,6 +8,8 @@
     private $pseudo;
     private $avatar;
     private $comment;
+    private $frais;
+    private $type;
     private $nb_users;
     private $parts;
 
@@ -21,6 +23,8 @@
       $this->pseudo   = '';
       $this->avatar   = '';
       $this->comment  = '';
+      $this->frais    = '';
+      $this->type     = '';
       $this->nb_users = 0;
       $this->parts    = array();
     }
@@ -51,6 +55,9 @@
 
       if (isset($data['comment']))
         $this->comment = $data['comment'];
+
+      if (isset($data['type']))
+        $this->type    = $data['type'];
     }
 
     // Sécurisation des données
@@ -62,6 +69,8 @@
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
       $data->setAvatar(htmlspecialchars($data->getAvatar()));
       $data->setComment(htmlspecialchars($data->getComment()));
+      $data->setFrais(htmlspecialchars($data->getFrais()));
+      $data->setType(htmlspecialchars($data->getType()));
       $data->setNb_users(htmlspecialchars($data->getNb_users()));
 
       foreach ($data->getParts() as $parts)
@@ -146,6 +155,28 @@
     public function getComment()
     {
       return $this->comment;
+    }
+
+    // Frais additionnels
+    public function setFrais($frais)
+    {
+      $this->frais = $frais;
+    }
+
+    public function getFrais()
+    {
+      return $this->frais;
+    }
+
+    // Type de dépense
+    public function setType($type)
+    {
+      $this->type = $type;
+    }
+
+    public function getType()
+    {
+      return $this->type;
     }
 
     // Nombre d'utilisateurs

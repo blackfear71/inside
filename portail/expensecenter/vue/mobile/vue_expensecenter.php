@@ -52,10 +52,11 @@
           /**********/
           include('vue/mobile/vue_annees.php');
 
-          /**********/
-          /* Saisie */
-          /**********/
+          /***********/
+          /* Saisies */
+          /***********/
           include('vue/mobile/vue_saisie_depense.php');
+          include('vue/mobile/vue_saisie_montants.php');
 
           /********************/
           /* Boutons d'action */
@@ -65,6 +66,9 @@
 
           // Saisie dépense
           echo '<a id="afficherSaisieDepense" title="Saisir une dépense" class="lien_green">Saisir une dépense</a>';
+
+          // Saisie montants
+          echo '<a id="afficherSaisieMontants" title="Saisir des montants" class="lien_green">Saisir des montants</a>';
 
           /**********/
           /* Bilans */
