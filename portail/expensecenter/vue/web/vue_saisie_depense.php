@@ -44,7 +44,7 @@
           echo '</div>';
 
           // Affichage explications
-          echo '<a id="afficherExplications" class="lien_explications">';
+          echo '<a id="afficherExplicationsDepense" class="lien_explications">';
             echo '<span class="fond_plus">+</span>';
             echo 'Fonctionnement';
           echo '</a>';
@@ -53,7 +53,7 @@
         // Parts utilisateurs
         echo '<div class="zone_saisie_right">';
           // Explications
-          echo '<div class="explications" style="display: none;">';
+          echo '<div id="explications_depense" class="explications" style="display: none;">';
             echo 'Vous pouvez saisir ici une dépense dont le coût sera ensuite réparti équitablement sur chaque participant en fonction du nombre de parts. <strong>Les parts sont limitées à 5 maximum par personne</strong>.';
 
             echo '<br /><br />';

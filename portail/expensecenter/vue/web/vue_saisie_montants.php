@@ -42,11 +42,24 @@
           echo '<div class="zone_bouton_saisie_montants">';
             echo '<input type="submit" name="add_depense" value="Valider" id="bouton_saisie_montants" class="saisie_bouton" />';
           echo '</div>';
+
+          // Affichage explications
+          echo '<a id="afficherExplicationsMontants" class="lien_explications">';
+            echo '<span class="fond_plus">+</span>';
+            echo 'Fonctionnement';
+          echo '</a>';
         echo '</div>';
 
         // Montants utilisateurs
         echo '<div class="zone_saisie_right">';
-          // Parts
+          // Explications
+          echo '<div id="explications_montants" class="explications" style="display: none;">';
+            echo 'Vous pouvez saisir ici une dépense en montants ainsi que les éventuels frais additonnels associés (frais de livraison...).
+            <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.
+            Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants. Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';
+          echo '</div>';
+
+          // Montants
           echo '<div class="zone_saisie_utilisateurs">';
             foreach ($listeUsers as $user)
             {

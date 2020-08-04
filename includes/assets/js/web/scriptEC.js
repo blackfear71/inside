@@ -90,10 +90,16 @@ $(function()
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });
 
-  // Affiche les explications
-  $('#afficherExplications').click(function()
+  // Affiche les explications de saisie de dépense
+  $('#afficherExplicationsDepense').click(function()
   {
-    afficherExplications();
+    afficherExplications($(this).attr('id'), 'explications_depense');
+  });
+
+  // Affiche les explications de saisie de montants
+  $('#afficherExplicationsMontants').click(function()
+  {
+    afficherExplications($(this).attr('id'), 'explications_montants');
   });
 
   // Ajoute une part
@@ -130,7 +136,12 @@ $(window).resize(function()
   // Calcul automatique des tailles des zones après un delai de 150ms
   setTimeout(function()
   {
-    tailleAutoTexte();
+    if ($('#explications_depense').css('display') == 'block')
+      tailleAutoTexte('explications_depense');
+
+    if ($('#explications_montants').css('display') == 'block')
+      tailleAutoTexte('explications_montants');
+
   }, 150);
 });
 
@@ -201,21 +212,21 @@ function initMasonry()
 }
 
 // Calcul la taille des explications automatiquement
-function tailleAutoTexte()
+function tailleAutoTexte(idExplications)
 {
-  var width = $('.zone_saisie_utilisateurs').width() - 20;
+  var width = $('#' + idExplications).next('.zone_saisie_utilisateurs').width() - 20;
 
-  $('.explications').width(width);
+  $('#' + idExplications).width(width);
 }
 
 // Affiche les explications
-function afficherExplications()
+function afficherExplications(lienExplications, idExplications)
 {
-  $('.lien_explications').css('display', 'none');
-  $('.explications').css('display', 'block');
+  $('#' + lienExplications).css('display', 'none');
+  $('#' + idExplications).css('display', 'block');
 
   // Calcul automatique des tailles des zones
-  tailleAutoTexte();
+  tailleAutoTexte(idExplications);
 }
 
 // Ajoute une part à un utilisateur
