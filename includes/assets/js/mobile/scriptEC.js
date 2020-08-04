@@ -249,7 +249,7 @@ function showDetails(idDepense)
   {
     var idZone = $(this).attr('id').replace('titre_', 'afficher_');
 
-    openSection($(this), idZone, true);
+    openSection($(this), idZone, 'open');
   });
 }
 
@@ -435,5 +435,12 @@ function resetSaisie(zone, year, type)
         });
       }
     }
+
+    // On replie les explications
+    var explicationsDepense  = $('#titre_explications_depense');
+    var explicationsMontants = $('#titre_explications_montants');
+
+    openSection(explicationsDepense, 'afficher_explications_depense', 'close');
+    openSection(explicationsMontants, 'afficher_explications_montants', 'close');
   }, 200);
 }

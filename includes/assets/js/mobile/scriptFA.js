@@ -389,6 +389,6 @@ function showDetails(idProposition)
   {
     var idZone = $(this).attr('id').replace('titre_', 'afficher_');
 
-    openSection($(this), idZone, true);
+    openSection($(this), idZone, 'open');
   });
 }

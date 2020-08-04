@@ -37,7 +37,7 @@ $(function()
   {
     var idZone = $(this).attr('id').replace('titre_', 'afficher_');
 
-    openSection($(this), idZone, false);
+    openSection($(this), idZone, '');
   });
 
   // Ferme un menu au clic sur le fond
@@ -462,26 +462,38 @@ function openSection(titre, zone, forcage)
 
   fleche.css('transition', 'all ease 0.2s');
 
-  // Rotation de la flèche (forçage dans le cas de la recherche live)
-  if (forcage == true)
+  // Gestion de l'affichage en fonction du forçage
+  switch (forcage)
   {
-    if (angle != 0)
-    {
-      fleche.css('transform', 'rotate(0deg)');
+    case 'open':
+      if (angle != 0)
+      {
+        fleche.css('transform', 'rotate(0deg)');
+
+        // Affichage ou masquage de la zone
+        afficherMasquerIdNoDelay(zone);
+      }
+      break;
+
+    case 'close':
+      if (angle == 0)
+      {
+        fleche.css('transform', 'rotate(-90deg)');
+
+        // Affichage ou masquage de la zone
+        afficherMasquerIdNoDelay(zone);
+      }
+      break;
+
+    default:
+      if (angle == 0)
+        fleche.css('transform', 'rotate(-90deg)');
+      else
+        fleche.css('transform', 'rotate(0deg)');
 
       // Affichage ou masquage de la zone
-      afficherMasquerIdNoDelay(zone);
-    }
-  }
-  else
-  {
-    if (angle == 0)
-      fleche.css('transform', 'rotate(-90deg)');
-    else
-      fleche.css('transform', 'rotate(0deg)');
-
-    // Affichage ou masquage de la zone
-    afficherMasquerIdWithDelay(zone);
+      afficherMasquerIdWithDelay(zone);
+      break;
   }
 }
 
@@ -596,7 +608,7 @@ function liveSearch(input)
   {
     var idZone = $(this).attr('id').replace('titre_', 'afficher_');
 
-    openSection($(this), idZone, true);
+    openSection($(this), idZone, 'open');
   });
 
   // Si zone vide, on fait tout apparaitre
