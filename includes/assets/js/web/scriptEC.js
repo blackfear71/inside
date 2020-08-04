@@ -474,17 +474,24 @@ function resetSaisie(zone, year, type)
 
       if (type == 'M')
       {
-        $('.zone_saisie_utilisateur').each(function()
+        $('#zone_add_montants').find('.zone_saisie_utilisateur').each(function()
         {
-          // Initialisation du montant
-          $(this).find('.montant').val('');
+          // Initialisation du montant ou suppression zone utilisateur désinscrit
+          if ($(this).attr('id') == undefined)
+            $(this).remove();
+          else
+            $(this).find('.montant').val('');
         });
       }
       else
       {
-        $('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
+        $('#zone_add_depense').find('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
         {
-          $(this).find('.quantite').val('0');
+          // Initialisation de la quantité ou suppression zone utilisateur désinscrit
+          if ($(this).attr('id') == undefined)
+            $(this).remove();
+          else
+            $(this).find('.quantite').val('0');
 
           // Ajout de la part à la zone
           var idZone                 = $(this).attr('id');

@@ -72,7 +72,7 @@
                   $savedAmounts = true;
               }
 
-              echo '<div class="zone_saisie_utilisateur">';
+              echo '<div class="zone_saisie_utilisateur" id="zone_user_montant_' . $user->getId() . '">';
                 // Pseudo
                 echo '<div class="pseudo_depense">' . $user->getPseudo() . '</div>';
 

@@ -421,7 +421,7 @@ function initialisationModification(idDepense, year)
           partsDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
 
           // Parts
-          partsDes += '<div class="quantite_des part_selected">' + user.parts + '</div>';
+          partsDes += '<input type="text" name="quantite_user[' + identifiant + ']" value="' + user.parts + '" class="quantite_des part_selected" readonly />';
         partsDes += '</div>';
 
         listePartsDes += partsDes;
@@ -493,16 +493,25 @@ function resetSaisie(zone, year, type)
 
       if (type == 'M')
       {
-        $('.zone_saisie_part').each(function()
+        $('#zone_saisie_montants').find('.zone_saisie_part').each(function()
         {
-          // Initialisation du montant
-          $(this).find('.montant').val('');
+          // Initialisation du montant ou suppression zone utilisateur désinscrit
+          if ($(this).attr('id') == undefined)
+            $(this).remove();
+          else
+            $(this).find('.montant').val('');
         });
       }
       else
       {
-        $('.zone_saisie_part').each(function()
+        $('#zone_saisie_depense').find('.zone_saisie_part').each(function()
         {
+          // Initialisation de la quantité ou suppression zone utilisateur désinscrit
+          if ($(this).attr('id') == undefined)
+            $(this).remove();
+          else
+            $(this).find('.quantite').val('0');
+
           // Initialisation de la quantité
           $(this).find('.quantite').val('0');
 

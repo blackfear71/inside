@@ -71,7 +71,7 @@
                   $savedAmounts = true;
               }
 
-              echo '<div class="zone_saisie_part">';
+              echo '<div class="zone_saisie_part" id="zone_user_montant_' . $user->getId() . '">';
                 // Avatar
                 echo '<div class="zone_saisie_part_avatar">';
                   $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
