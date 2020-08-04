@@ -39,6 +39,21 @@
           echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';
 
           // Titre
+          echo '<div id="titre_explications_montants" class="titre_section">';
+            echo '<img src="../../includes/icons/expensecenter/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">Informations</div>';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+          echo '</div>';
+
+          // Explications
+          echo '<div id="afficher_explications_montants" class="texte_explications_montants" style="display: none;">';
+            echo 'Vous pouvez saisir ici une dépense en montants ainsi que les éventuels frais additonnels associés (frais de livraison...).
+            <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.
+            Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants.
+            Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';
+          echo '</div>';
+
+          // Titre
           echo '<div class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" class="logo_titre_section" />';
             echo '<div class="texte_titre_section">Répartition utilisateurs</div>';

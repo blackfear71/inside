@@ -112,6 +112,19 @@
 	resize: none;
 }
 
+.texte_explications_montants
+{
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	text-align: justify;
+}
+
+.texte_explications_montants ul
+{
+	padding-left: 3vh;
+}
+
 .zone_saisie_part
 {
 	width: 100%;

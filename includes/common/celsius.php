@@ -4,12 +4,8 @@
     switch ($celsius)
     {
       case 'expensecenter':
-        $contenuCelsius  = 'Tu peux saisir ici une dépense dont le coût sera ensuite réparti équitablement sur chaque participant en fonction du nombre de parts. <strong>Les parts sont limitées à 5 maximum par personne</strong>.<br /><br />';
-        $contenuCelsius .= '2 types de saisies peuvent être effectuées :<br />';
-        $contenuCelsius .= '<ul>';
-          $contenuCelsius .= '<li>Une dépense : <strong>le prix doit être positif et des parts doivent être présentes sur au moins un utilisateur</strong>. Le coût est réparti proportionnellement entre chaque participant.</li>';
-          $contenuCelsius .= '<li>Une régularisation : <strong>le prix est soit positif soit négatif, mais le nombre de parts doit être nul pour tous</strong>. Le coût est simplement ajouté au bilan de l\'acheteur.</li>';
-        $contenuCelsius .= '</ul>';
+        $contenuCelsius  = 'Tu peux saisir ici une dépense en commun ou bien une dépense en montants pour répartir par exemple une commande sur chacun en fonction de ce qu\'il a pris.
+        Ça peut même tenir compte des frais de livraison ! Trop bien !';
         break;
 
       case 'foodadvisor':

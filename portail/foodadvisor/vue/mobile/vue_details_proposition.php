@@ -61,7 +61,7 @@
           echo '</div>';
 
           // Informations du restautant
-          echo '<div id="afficher_proposition_infos" class="zone_details_restaurant">';
+          echo '<div id="afficher_proposition_infos">';
             // Lieu
             echo '<div class="zone_lieu_details">';
               echo '<img src="../../includes/icons/foodadvisor/location.png" alt="location" class="icone_details" />';
