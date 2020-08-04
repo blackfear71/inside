@@ -229,7 +229,20 @@ function showDetails(idDepense)
   }
 
   // Lien modification
-  $('.zone_details_actions > .lien_modifier_depense').attr('id', 'modifier_depense_' + depense['id'])
+  if (depense['pseudo'] != '')
+  {
+    $('.lien_modifier_depense').css('display', 'inline-block');
+    $('.form_supprimer_depense').css('margin-left', '1vh');
+    $('.form_supprimer_depense').css('width', 'calc(45% - 1vh)');
+    $('.zone_details_actions > .lien_modifier_depense').attr('id', 'modifier_depense_' + depense['id']);
+  }
+  else
+  {
+    $('.lien_modifier_depense').css('display', 'none');
+    $('.form_supprimer_depense').css('margin-left', '0');
+    $('.form_supprimer_depense').css('width', '90%');
+    $('.zone_details_actions > .lien_modifier_depense').attr('id', '');
+  }
 
   // Formulaire suppression
   $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + depense['id']);

@@ -60,20 +60,26 @@
               // Commentaire
               echo '<div class="commentaire_depense">' . nl2br($depense->getComment()) . '</div>';
 
-              // Modifier
-              echo '<a id="modifier_depense_' . $depense->getId() . '" title="Modifier" class="lien_depense modifierDepense">';
-                echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_depense" />';
-              echo '</a>';
+              // Actions
+              echo '<div class="zone_actions_depense">';
+                // Modifier
+                if (!empty($depense->getPseudo()))
+                {
+                  echo '<a id="modifier_depense_' . $depense->getId() . '" title="Modifier" class="lien_depense modifierDepense">';
+                    echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_depense" />';
+                  echo '</a>';
+                }
 
-              // Supprimer
-              if ($depense->getType() == 'M')
-                echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimerMontants" class="form_supprimer_depense">';
-              else
-                echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimer" class="form_supprimer_depense">';
-                echo '<input type="hidden" name="id_expense" value="' . $depense->getId() . '" />';
-                echo '<input type="submit" name="delete_depense" value="" title="Supprimer" class="icone_supprimer_depense eventConfirm" />';
-                echo '<input type="hidden" value="Supprimer la dépense de ' . formatOnclick($depense->getPseudo()) . ' du ' . formatDateForDisplay($depense->getDate()) . ' et d\'un montant de ' . formatAmountForDisplay($depense->getPrice()) . ' ?" class="eventMessage" />';
-              echo '</form>';
+                // Supprimer
+                if ($depense->getType() == 'M')
+                  echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimerMontants" class="form_supprimer_depense">';
+                else
+                  echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimer" class="form_supprimer_depense">';
+                  echo '<input type="hidden" name="id_expense" value="' . $depense->getId() . '" />';
+                  echo '<input type="submit" name="delete_depense" value="" title="Supprimer" class="icone_supprimer_depense eventConfirm" />';
+                  echo '<input type="hidden" value="Supprimer la dépense de ' . formatOnclick(formatUnknownUser($depense->getPseudo(), false, false)) . ' du ' . formatDateForDisplay($depense->getDate()) . ' et d\'un montant de ' . formatAmountForDisplay($depense->getPrice()) . ' ?" class="eventMessage" />';
+                echo '</form>';
+              echo '</div>';
             echo '</div>';
           echo '</div>';
         echo '</div>';
