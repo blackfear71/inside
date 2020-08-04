@@ -204,7 +204,8 @@
 	line-height: 8vh;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 3vh;
-	color: #262626;
+	color: white;
+	border: 0;
 	background-color: #e3e3e3;
 	text-align: center;
 	pointer-events: none;
