@@ -195,6 +195,26 @@
 	box-sizing : border-box;
 }
 
+.quantite_des
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 75%;
+	height: 8vh;
+	line-height: 8vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	background-color: #e3e3e3;
+	text-align: center;
+	pointer-events: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	box-sizing : border-box;
+}
+
 .part_selected
 {
 	background-color: #ff1937;
@@ -221,6 +241,18 @@
 	font-size: 3vh;
 	color: #262626;
 	background-color: white;
+}
+
+.montant_des
+{
+	display: inline-block;
+	width: calc(100% - 5.5vh);
+	height: 8vh;
+	line-height: 8vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	text-align: center;
 }
 
 .euro_saisie

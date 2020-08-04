@@ -303,6 +303,7 @@ function updateExpense(idDepense, year)
 
   if (type == 'M')
   {
+    // Alimentation des zones utilisateurs inscrits
     $('.zone_saisie_utilisateur').each(function()
     {
       // Initialisation du montant
@@ -318,9 +319,45 @@ function updateExpense(idDepense, year)
       if (partUtilisateur != null)
         $(this).find('.montant').val(formatAmountForDisplay(partUtilisateur['parts']));
     });
+
+    // Affichage des utilisateurs désinscrits
+    var listeMontantsDes = '';
+
+    $.each(parts, function(identifiant, user)
+    {
+      if (user.pseudo == '')
+      {
+        var montantDes = '';
+
+        // Zone utilisateur
+        montantDes += '<div class="zone_saisie_utilisateur">';
+          // Pseudo
+          montantDes += '<div class="pseudo_depense">' + formatUnknownUser(user.pseudo, true, true) + '</div>';
+
+          // Avatar
+          $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
+
+          montantDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
+
+          // Identifiant (caché)
+          montantDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+
+          // Montant
+          montantDes += '<div class="zone_montant">';
+            montantDes += '<div class="montant_des">' + formatAmountForDisplay(user.parts) + '</div>';
+            montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie_des" />';
+          montantDes += '</div>';
+        montantDes += '</div>';
+
+        listeMontantsDes += montantDes;
+      }
+    });
+
+    $('#zone_add_montants').find('.zone_saisie_utilisateurs').append(listeMontantsDes).masonry('reloadItems');
   }
   else
   {
+    // Alimentation des zones utilisateurs inscrits
     $('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
     {
       $(this).children('.quantite').val('0');
@@ -341,6 +378,41 @@ function updateExpense(idDepense, year)
       // Ajout de la part à la zone
       saisirPart(idZone, idQuantite, nombrePartsUtilisateur);
     });
+
+    // Affichage des utilisateurs désinscrits
+    var listePartsDes = '';
+
+    $.each(parts, function(identifiant, user)
+    {
+      if (user.pseudo == '')
+      {
+        var partsDes = '';
+
+        // Zone utilisateur
+        partsDes += '<div class="zone_saisie_utilisateur_parts">';
+          // Pseudo
+          partsDes += '<div class="pseudo_depense">' + formatUnknownUser(user.pseudo, true, true) + '</div>';
+
+          // Avatar
+          $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
+
+          partsDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
+
+          // Identifiant (caché)
+          partsDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+
+          // Parts
+          partsDes += '<input type="text" name="quantite_user[' + identifiant + ']" value="' + user.parts + '" class="quantite_des" readonly />';
+
+          // Espace vide
+          partsDes += '<div class="empty_space_des"></div>';
+        partsDes += '</div>';
+
+        listePartsDes += partsDes;
+      }
+    });
+
+    $('#zone_add_depense').find('.zone_saisie_utilisateurs').append(listePartsDes).masonry('reloadItems');
   }
 
   // Affiche la zone de saisie

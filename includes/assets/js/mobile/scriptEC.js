@@ -323,6 +323,7 @@ function initialisationModification(idDepense, year)
 
   if (type == 'M')
   {
+    // Alimentation des zones utilisateurs inscrits
     $('.zone_saisie_part').each(function()
     {
       // Initialisation du montant
@@ -338,9 +339,44 @@ function initialisationModification(idDepense, year)
       if (partUtilisateur != null)
         $(this).find('.montant').val(formatAmountForDisplay(partUtilisateur['parts']));
     });
+
+    // Affichage des utilisateurs désinscrits
+    var listeMontantsDes = '';
+
+    $.each(parts, function(identifiant, user)
+    {
+      if (user.pseudo == '')
+      {
+        var montantDes = '';
+
+        // Zone utilisateur
+        montantDes += '<div class="zone_saisie_part">';
+          // Avatar
+          $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
+
+          montantDes += '<div class="zone_saisie_part_avatar">';
+            montantDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
+          montantDes += '</div>';
+
+          // Identifiant (caché)
+          montantDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+
+          // Montant
+          montantDes += '<div class="zone_montant">';
+            montantDes += '<div class="montant_des">' + formatAmountForDisplay(user.parts) + '</div>';
+            montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
+          montantDes += '</div>';
+        montantDes += '</div>';
+
+        listeMontantsDes += montantDes;
+      }
+    });
+
+    $('#zone_saisie_montants').find('.zone_saisie_utilisateurs').append(listeMontantsDes);
   }
   else
   {
+    // Alimentation des zones utilisateurs inscrits
     $('.zone_saisie_part').each(function()
     {
       // Initialisation de la quantité
@@ -362,6 +398,37 @@ function initialisationModification(idDepense, year)
       // Ajout de la part à la zone
       ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
     });
+
+    // Affichage des utilisateurs désinscrits
+    var listePartsDes = '';
+
+    $.each(parts, function(identifiant, user)
+    {
+      if (user.pseudo == '')
+      {
+        var partsDes = '';
+
+        // Zone utilisateur
+        partsDes += '<div class="zone_saisie_part part_selected">';
+          // Avatar
+          $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
+
+          partsDes += '<div class="zone_saisie_part_avatar">';
+            partsDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
+          partsDes += '</div>';
+
+          // Identifiant (caché)
+          partsDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+
+          // Parts
+          partsDes += '<div class="quantite_des part_selected">' + user.parts + '</div>';
+        partsDes += '</div>';
+
+        listePartsDes += partsDes;
+      }
+    });
+
+    $('#zone_saisie_depense').find('.zone_saisie_utilisateurs').append(listePartsDes);
   }
 
   // Masque la zone de détails
