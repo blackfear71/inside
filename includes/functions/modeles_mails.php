@@ -19,7 +19,7 @@
           width: 800px;
           min-height: 500px;
           text-align: center;
-          border-radius: 5px;
+          border-radius: 2px;
           overflow: hidden;
           background-color: #e3e3e3;
         }
@@ -117,7 +117,7 @@
         .poster_mail
         {
           max-width: 100%;
-          border-radius: 5px;
+          border-radius: 2px;
         }
 
         .footer_mail

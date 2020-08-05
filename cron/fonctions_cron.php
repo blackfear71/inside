@@ -358,9 +358,9 @@
             $fraisUser = 0;
 
           // Calcul du bilan de l'utilisateur (s'il participe ou qu'il est l'acheteur)
-          if ($data2['buyer'] == $data1['identifiant'] OR $montantUser != 0)
+          if ($acheteur == $data1['identifiant'] OR $montantUser != 0)
           {
-            if ($data2['buyer'] == $data1['identifiant'])
+            if ($acheteur == $data1['identifiant'])
               $bilanUser += $prixAchat + $nombrePartsTotal - ($montantUser + $fraisUser);
             else
               $bilanUser -= $montantUser + $fraisUser;
@@ -375,7 +375,7 @@
             $prixParPart = 0;
 
           // Somme des dépenses moins les parts consommées pour calculer le bilan
-          if ($data2['buyer'] == $data1['identifiant'])
+          if ($acheteur == $data1['identifiant'])
             $bilanUser += $prixAchat - ($prixParPart * $nombrePartsUser);
           else
             $bilanUser -= $prixParPart * $nombrePartsUser;

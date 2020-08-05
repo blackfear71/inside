@@ -25,7 +25,8 @@
 	display: inline-block;
 	margin-right: -4px;
 	background-color: #374650;
-	border-radius: 5px;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .mask_admin
@@ -87,7 +88,7 @@
 	line-height: 35px;
 	text-align: justify;
 	cursor: pointer;
-	border-radius: 5px;
+	border-radius: 2px;
 }
 
 /*** Infos utilisateurs ***/
@@ -113,9 +114,9 @@
 	width: 280px;
 	margin-bottom: 15px;
 	padding: 10px;
-	border-radius: 5px;
-	border: solid 1px #d3d3d3;
+	border-radius: 2px;
 	vertical-align: top;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .circle_avatar
@@ -386,7 +387,7 @@
 	color: #262626;
 	background-color: #e3e3e3;
 	padding: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 	margin-bottom: 50px;
 }
 
