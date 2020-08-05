@@ -102,7 +102,9 @@
 
       if ($depense->getType() == 'M')
       {
-        $depense->setFrais($depense->getPrice());
+        if (!empty($depense->getPrice()))
+          $depense->setFrais($depense->getPrice());
+
         $depense->setPrice($prixMontants);
       }
     }
@@ -313,7 +315,7 @@
     $_SESSION['save']['tableau_montants'] = $listeMontants;
 
     // Contrôle si frais numérique et positif (seulement si renseignés)
-    if (!empty($post['depense']))
+    if ($post['depense'] != '')
       $control_ok = controleFraisPositifs($frais);
 
     // Contrôle si au moins 1 montant saisi
@@ -371,10 +373,12 @@
       // Insertion des montants & mise à jour du bilan pour chaque utilisateur
       foreach ($listeMontants as $identifiant => $montant)
       {
+        $montantUser = formatAmountForInsert($montant);
+
         // Insertion de l'enregistrement en base
         $partUser = array('id_expense'  => $idDepense,
                           'identifiant' => $identifiant,
-                          'parts'       => formatAmountForInsert($montant)
+                          'parts'       => $montantUser
                          );
 
         physiqueInsertionPart($partUser);
@@ -384,7 +388,7 @@
         $bilanUser = $user->getExpenses();
 
         // Mise à jour du bilan pour chaque utilisateur (on retire au total)
-        $bilanUser -= $montant + ($frais / $nombreTotalUsers);
+        $bilanUser -= $montantUser + ($frais / $nombreTotalUsers);
 
         // Modification de l'enregistrement en base
         physiqueUpdateBilan($identifiant, $bilanUser);
@@ -616,7 +620,7 @@
     }
 
     // Contrôle si frais numérique et positif (seulement si renseignés)
-    if (!empty($post['depense']))
+    if ($post['depense'] != '')
       $control_ok = controleFraisPositifs($newFrais);
 
     // Contrôle montants numériques
@@ -631,7 +635,7 @@
       /********************************************/
       // Lecture dépense (avant mise à jour)
       $oldDepense = physiqueDepense($idDepense);
-      $oldFrais   = $oldDepense->getPrice();
+      $oldFrais   = formatAmountForInsert($oldDepense->getPrice());
 
       // Lecture des montants déjà existants des utilisateurs
       $oldListeMontants = physiquePartsDepenseUsers($idDepense);
@@ -666,12 +670,14 @@
       // Mise à jour du bilan pour chaque utilisateur (retour arrière sur la dépense)
       foreach ($oldListeMontants as $identifiant => $montant)
       {
+        $montantUser = formatAmountForInsert($montant);
+
         // Récupération des données utilisateur
         $user      = physiqueUser($identifiant);
         $bilanUser = $user->getExpenses();
 
         // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-        $bilanUser += $montant + ($oldFrais / $oldNombreTotalUsers);
+        $bilanUser += $montantUser + ($oldFrais / $oldNombreTotalUsers);
 
         // Modification de l'enregistrement en base
         physiqueUpdateBilan($identifiant, $bilanUser);
@@ -736,10 +742,12 @@
       // Insertions des nouveaux montants & mise à jour du bilan pour chaque utilisateur
       foreach ($newListeMontants as $identifiant => $montant)
       {
+        $montantUser = formatAmountForInsert($montant);
+
         // Insertion de l'enregistrement en base
         $partUser = array('id_expense'  => $idDepense,
                           'identifiant' => $identifiant,
-                          'parts'       => formatAmountForInsert($montant)
+                          'parts'       => $montantUser
                          );
 
         physiqueInsertionPart($partUser);
@@ -749,7 +757,7 @@
         $bilanUser = $user->getExpenses();
 
         // Mise à jour du bilan pour chaque utilisateur (on retire au total)
-        $bilanUser -= $montant + ($newFrais / $newNombreTotalUsers);
+        $bilanUser -= $montantUser + ($newFrais / $newNombreTotalUsers);
 
         // Modification de l'enregistrement en base
         physiqueUpdateBilan($identifiant, $bilanUser);
@@ -859,7 +867,7 @@
 
     // Lecture des données de la dépense
     $depense = physiqueDepense($idDepense);
-    $frais   = $depense->getPrice();
+    $frais   = formatAmountForInsert($depense->getPrice());
 
     // Lecture des montants des utilisateurs
     $listeMontants = physiquePartsDepenseUsers($depense->getId());
@@ -894,12 +902,14 @@
     // Suppression des montants & mise à jour du bilan pour chaque utilisateur
     foreach ($listeMontants as $identifiant => $montant)
     {
+      $montantUser = formatAmountForInsert($montant);
+
       // Récupération des données utilisateur
       $user      = physiqueUser($identifiant);
       $bilanUser = $user->getExpenses();
 
       // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-      $bilanUser += $montant + ($frais / $nombreTotalUsers);
+      $bilanUser += $montantUser + ($frais / $nombreTotalUsers);
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($identifiant, $bilanUser);

@@ -589,7 +589,7 @@
 
 .zone_achat
 {
-	width: calc(50% + 105px);
+	width: calc(50% + 150px);
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -599,7 +599,7 @@
 	display: inline-block;
 	padding-left: 10px;
 	padding-right: 10px;
-	width: calc(100% - 270px);
+	width: calc(100% - 360px);
 	vertical-align: middle;
 	font-family: robotoregular, Verdana, sans-serif;
 	text-align: justify;
@@ -641,10 +641,26 @@
 	padding-bottom: 5px;
 }
 
+.frais_achat
+{
+	display: inline-block;
+	width: 80px;
+	margin-right: 10px;
+	text-align: center;
+	vertical-align: middle;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: white;
+	line-height: 20px;
+	background-color: #ff1937;
+	border-radius: 2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
 .zone_parts
 {
 	display: inline-block;
-	width: calc(50% - 105px);
+	width: calc(50% - 150px);
 	text-align: right;
 	vertical-align: middle;
 }

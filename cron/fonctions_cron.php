@@ -322,7 +322,7 @@
       while ($data2 = $req2->fetch())
       {
         // Initialisation prix d'achat ou frais
-        $prixAchat = $data2['price'];
+        $prixAchat = formatAmountForInsert($data2['price']);
 
         // Identifiant de l'acheteur
         $acheteur = $data2['buyer'];
@@ -349,21 +349,21 @@
         if ($data2['type'] == 'M')
         {
           // Montant de la part
-          $montantUserDes = $nombrePartsUser;
+          $montantUser = formatAmountForInsert($nombrePartsUser);
 
           // Calcul de la répartition des frais
-          if ($montantUserDes != 0)
-            $fraisUserDes = $prixAchat / $nombreUtilisateurs;
+          if ($montantUser != 0)
+            $fraisUser = $prixAchat / $nombreUtilisateurs;
           else
-            $fraisUserDes = 0;
+            $fraisUser = 0;
 
           // Calcul du bilan de l'utilisateur (s'il participe ou qu'il est l'acheteur)
-          if ($data2['buyer'] == $data1['identifiant'] OR $montantUserDes != 0)
+          if ($data2['buyer'] == $data1['identifiant'] OR $montantUser != 0)
           {
             if ($data2['buyer'] == $data1['identifiant'])
-              $bilanUser += $prixAchat + $nombrePartsTotal - ($montantUserDes + $fraisUserDes);
+              $bilanUser += $prixAchat + $nombrePartsTotal - ($montantUser + $fraisUser);
             else
-              $bilanUser -= $montantUserDes + $fraisUserDes;
+              $bilanUser -= $montantUser + $fraisUser;
           }
         }
         else

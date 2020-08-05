@@ -28,6 +28,10 @@
 
                 // Prix
                 echo '<div class="valeur_achat">' . formatAmountForDisplay($depense->getPrice()) . '</div>';
+
+                // Frais
+                if ($depense->getType() == 'M' AND !empty($depense->getFrais()))
+                  echo '<div class="frais_achat">' . formatAmountForDisplay($depense->getFrais()) . '</div>';
               echo '</div>';
 
               // Liste des parts utilisateurs
