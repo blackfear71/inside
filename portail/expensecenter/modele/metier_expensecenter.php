@@ -85,7 +85,6 @@
 
         if (!empty($user))
         {
-          $partDepense->setId_identifiant($user->getId());
           $partDepense->setPseudo($user->getPseudo());
           $partDepense->setAvatar($user->getAvatar());
         }
@@ -148,11 +147,10 @@
 
       foreach ($depenseAConvertir->getParts() as $parts)
       {
-        $listePartsDepense[$parts->getIdentifiant()] = array('id_identifiant' => $parts->getId_identifiant(),
-                                                             'pseudo'         => $parts->getPseudo(),
-                                                             'avatar'         => $parts->getAvatar(),
-                                                             'parts'          => $parts->getParts(),
-                                                             'inscrit'        => $parts->getInscrit()
+        $listePartsDepense[$parts->getIdentifiant()] = array('pseudo'  => $parts->getPseudo(),
+                                                             'avatar'  => $parts->getAvatar(),
+                                                             'parts'   => $parts->getParts(),
+                                                             'inscrit' => $parts->getInscrit()
                                                             );
       }
 

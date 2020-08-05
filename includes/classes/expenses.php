@@ -206,7 +206,6 @@
   {
     private $id;
     private $id_expense;
-    private $id_identifiant;
     private $identifiant;
     private $pseudo;
     private $avatar;
@@ -218,7 +217,6 @@
     {
       $this->id             = 0;
       $this->id_expense     = 0;
-      $this->id_identifiant = 0;
       $this->identifiant    = '';
       $this->pseudo         = '';
       $this->avatar         = '';
@@ -281,17 +279,6 @@
     public function getId_expense()
     {
       return $this->id_expense;
-    }
-
-    // Id identifiant
-    public function setId_identifiant($id_identifiant)
-    {
-      $this->id_identifiant = $id_identifiant;
-    }
-
-    public function getId_identifiant()
-    {
-      return $this->id_identifiant;
     }
 
     // Identifiant
