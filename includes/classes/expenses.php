@@ -211,6 +211,7 @@
     private $pseudo;
     private $avatar;
     private $parts;
+    private $inscrit;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -222,6 +223,7 @@
       $this->pseudo         = '';
       $this->avatar         = '';
       $this->parts          = 0;
+      $this->inscrit        = true;
     }
 
     // Constructeur de l'objet Parts en fonction des données
@@ -325,7 +327,7 @@
       return $this->avatar;
     }
 
-    // Parts
+    // Parts ou montant
     public function setParts($parts)
     {
       $this->parts = $parts;
@@ -334,6 +336,17 @@
     public function getParts()
     {
       return $this->parts;
+    }
+
+    // Utilisateur inscrit
+    public function setInscrit($inscrit)
+    {
+      $this->inscrit = $inscrit;
+    }
+
+    public function getInscrit()
+    {
+      return $this->inscrit;
     }
   }
 ?>

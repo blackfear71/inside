@@ -27,11 +27,11 @@
                 echo '<div class="date_achat">' . formatDateForDisplay($depense->getDate()) . '</div>';
 
                 // Prix
-                echo '<div class="valeur_achat">' . formatAmountForDisplay($depense->getPrice()) . '</div>';
+                echo '<div class="valeur_achat" title="total frais inclus">' . formatAmountForDisplay($depense->getPrice()) . '</div>';
 
                 // Frais
                 if ($depense->getType() == 'M' AND !empty($depense->getFrais()))
-                  echo '<div class="frais_achat">' . formatAmountForDisplay($depense->getFrais()) . '</div>';
+                  echo '<div class="frais_achat" title="frais">' . formatAmountForDisplay($depense->getFrais()) . '</div>';
               echo '</div>';
 
               // Liste des parts utilisateurs

@@ -38,17 +38,21 @@
   // RETOUR : Objet Profile
   function physiqueUser($identifiant)
   {
+    // Initialisations
+    $user = NULL;
+
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses
+    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses, COUNT(*) AS nombreUser
                         FROM users
                         WHERE identifiant = "' . $identifiant . '"');
 
     $data = $req->fetch();
 
     // Instanciation d'un objet Profile à partir des données remontées de la bdd
-    $user = Profile::withData($data);
+    if ($data['nombreUser'] > 0)
+      $user = Profile::withData($data);
 
     $req->closeCursor();
 

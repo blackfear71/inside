@@ -83,9 +83,14 @@
       {
         $user = physiqueUser($partDepense->getIdentifiant());
 
-        $partDepense->setId_identifiant($user->getId());
-        $partDepense->setPseudo($user->getPseudo());
-        $partDepense->setAvatar($user->getAvatar());
+        if (!empty($user))
+        {
+          $partDepense->setId_identifiant($user->getId());
+          $partDepense->setPseudo($user->getPseudo());
+          $partDepense->setAvatar($user->getAvatar());
+        }
+        else
+          $partDepense->setInscrit(false);
 
         if ($depense->getType() == 'M')
           $prixMontants += $partDepense->getParts();
@@ -95,8 +100,12 @@
       $nombreUsers = count($listePartsDepense);
 
       // Ajout des données complémentaires à la dépense
-      $depense->setPseudo($acheteur->getPseudo());
-      $depense->setAvatar($acheteur->getAvatar());
+      if (!empty($acheteur))
+      {
+        $depense->setPseudo($acheteur->getPseudo());
+        $depense->setAvatar($acheteur->getAvatar());
+      }
+
       $depense->setNb_users($nombreUsers);
       $depense->setParts($listePartsDepense);
 
@@ -142,7 +151,8 @@
         $listePartsDepense[$parts->getIdentifiant()] = array('id_identifiant' => $parts->getId_identifiant(),
                                                              'pseudo'         => $parts->getPseudo(),
                                                              'avatar'         => $parts->getAvatar(),
-                                                             'parts'          => $parts->getParts()
+                                                             'parts'          => $parts->getParts(),
+                                                             'inscrit'        => $parts->getInscrit()
                                                             );
       }
 
@@ -493,17 +503,22 @@
       foreach ($oldListeParts as $identifiant => $parts)
       {
         // Récupération des données utilisateur
-        $user      = physiqueUser($identifiant);
-        $bilanUser = $user->getExpenses();
+        $user = physiqueUser($identifiant);
 
-        // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-        $bilanUser += ($oldDepense->getPrice() / $oldNombreTotalParts) * $parts;
+        // Traitement de l'utilisateur
+        if (!empty($user))
+        {
+          $bilanUser = $user->getExpenses();
 
-        // Modification de l'enregistrement en base
-        physiqueUpdateBilan($identifiant, $bilanUser);
+          // Mise à jour du bilan pour chaque utilisateur inscrit (on ajoute au bilan)
+          $bilanUser += ($oldDepense->getPrice() / $oldNombreTotalParts) * $parts;
 
-        // Génération succès (suppression des parts)
-        insertOrUpdateSuccesValue('eater', $identifiant, -$parts);
+          // Modification de l'enregistrement en base
+          physiqueUpdateBilan($identifiant, $bilanUser);
+
+          // Génération succès (suppression des parts)
+          insertOrUpdateSuccesValue('eater', $identifiant, -$parts);
+        }
       }
 
       // Suppression de toutes les anciennes parts
@@ -565,20 +580,25 @@
           physiqueInsertionPart($partUser);
 
           // Récupération des données utilisateur
-          $user      = physiqueUser($identifiant);
-          $bilanUser = $user->getExpenses();
+          $user = physiqueUser($identifiant);
 
-          // Mise à jour du bilan pour chaque utilisateur (on retire au total)
-          $bilanUser -= ($newPrice / $nombreTotalPartsNew) * $parts;
+          // Traitement de l'utilisateur
+          if (!empty($user))
+          {
+            $bilanUser = $user->getExpenses();
 
-          // Modification de l'enregistrement en base
-          physiqueUpdateBilan($identifiant, $bilanUser);
+            // Mise à jour du bilan pour chaque utilisateur inscrit (on retire au total)
+            $bilanUser -= ($newPrice / $nombreTotalPartsNew) * $parts;
 
-          // Génération succès (ajout des parts)
-          insertOrUpdateSuccesValue('eater', $identifiant, $parts);
+            // Modification de l'enregistrement en base
+            physiqueUpdateBilan($identifiant, $bilanUser);
 
-          // Génération succès (total max)
-          insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+            // Génération succès (ajout des parts)
+            insertOrUpdateSuccesValue('eater', $identifiant, $parts);
+
+            // Génération succès (total max)
+            insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+          }
         }
 
         // Génération succès (pour l'acheteur si modifié)
@@ -673,17 +693,22 @@
         $montantUser = formatAmountForInsert($montant);
 
         // Récupération des données utilisateur
-        $user      = physiqueUser($identifiant);
-        $bilanUser = $user->getExpenses();
+        $user = physiqueUser($identifiant);
 
-        // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-        $bilanUser += $montantUser + ($oldFrais / $oldNombreTotalUsers);
+        // Traitement de l'utilisateur
+        if (!empty($user))
+        {
+          $bilanUser = $user->getExpenses();
 
-        // Modification de l'enregistrement en base
-        physiqueUpdateBilan($identifiant, $bilanUser);
+          // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+          $bilanUser += $montantUser + ($oldFrais / $oldNombreTotalUsers);
 
-        // Génération succès (suppression des parts)
-        insertOrUpdateSuccesValue('eater', $identifiant, -1);
+          // Modification de l'enregistrement en base
+          physiqueUpdateBilan($identifiant, $bilanUser);
+
+          // Génération succès (suppression des parts)
+          insertOrUpdateSuccesValue('eater', $identifiant, -1);
+        }
       }
 
       // Suppression de tous les anciens montants
@@ -753,20 +778,25 @@
         physiqueInsertionPart($partUser);
 
         // Récupération des données utilisateur
-        $user      = physiqueUser($identifiant);
-        $bilanUser = $user->getExpenses();
+        $user = physiqueUser($identifiant);
 
-        // Mise à jour du bilan pour chaque utilisateur (on retire au total)
-        $bilanUser -= $montantUser + ($newFrais / $newNombreTotalUsers);
+        // Traitement de l'utilisateur
+        if (!empty($user))
+        {
+          $bilanUser = $user->getExpenses();
 
-        // Modification de l'enregistrement en base
-        physiqueUpdateBilan($identifiant, $bilanUser);
+          // Mise à jour du bilan pour chaque utilisateur (on retire au total)
+          $bilanUser -= $montantUser + ($newFrais / $newNombreTotalUsers);
 
-        // Génération succès (ajout des parts)
-        insertOrUpdateSuccesValue('eater', $identifiant, 1);
+          // Modification de l'enregistrement en base
+          physiqueUpdateBilan($identifiant, $bilanUser);
 
-        // Génération succès (total max)
-        insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+          // Génération succès (ajout des parts)
+          insertOrUpdateSuccesValue('eater', $identifiant, 1);
+
+          // Génération succès (total max)
+          insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+        }
       }
 
       // Génération succès (pour l'acheteur si modifié)
@@ -796,14 +826,19 @@
     $depense = physiqueDepense($idDepense);
 
     // Récupération des données acheteur
-    $acheteur      = physiqueUser($depense->getBuyer());
-    $bilanAcheteur = $acheteur->getExpenses();
+    $acheteur = physiqueUser($depense->getBuyer());
 
-    // Mise à jour du bilan pour l'acheteur (on retire la dépense)
-    $bilanAcheteur -= $depense->getPrice();
+    // Traitement de l'utilisateur
+    if (!empty($acheteur))
+    {
+      $bilanAcheteur = $acheteur->getExpenses();
 
-    // Modification de l'enregistrement en base
-    physiqueUpdateBilan($depense->getBuyer(), $bilanAcheteur);
+      // Mise à jour du bilan pour l'acheteur inscrit (on retire la dépense)
+      $bilanAcheteur -= $depense->getPrice();
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilan($depense->getBuyer(), $bilanAcheteur);
+    }
 
     // Lecture des utilisateurs ayant une part
     $listeParts = physiquePartsDepenseUsers($depense->getId());
@@ -827,17 +862,22 @@
     foreach ($listeParts as $identifiant => $parts)
     {
       // Récupération des données utilisateur
-      $user      = physiqueUser($identifiant);
-      $bilanUser = $user->getExpenses();
+      $user = physiqueUser($identifiant);
 
-      // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-      $bilanUser += ($depense->getPrice() / $nombreTotalParts) * $parts;
+      // Traitement de l'utilisateur
+      if (!empty($user))
+      {
+        $bilanUser = $user->getExpenses();
 
-      // Modification de l'enregistrement en base
-      physiqueUpdateBilan($identifiant, $bilanUser);
+        // Mise à jour du bilan pour chaque utilisateur inscrit (on ajoute au bilan)
+        $bilanUser += ($depense->getPrice() / $nombreTotalParts) * $parts;
 
-      // Génération succès (suppression des parts)
-      insertOrUpdateSuccesValue('eater', $identifiant, -$parts);
+        // Modification de l'enregistrement en base
+        physiqueUpdateBilan($identifiant, $bilanUser);
+
+        // Génération succès (suppression des parts)
+        insertOrUpdateSuccesValue('eater', $identifiant, -$parts);
+      }
     }
 
     // Suppression de toutes les parts
@@ -846,13 +886,17 @@
     // Suppression de la dépense
     physiqueDeleteDepense($idDepense);
 
-    // Génération succès (pour l'acheteur)
-    if ($depense->getPrice() > 0 AND $regularisationSansParts == false)
-      insertOrUpdateSuccesValue('buyer', $depense->getBuyer(), -1);
+    // Générations succès
+    if (!empty($acheteur))
+    {
+      // Génération succès (pour l'acheteur)
+      if ($depense->getPrice() > 0 AND $regularisationSansParts == false)
+        insertOrUpdateSuccesValue('buyer', $depense->getBuyer(), -1);
 
-    // Génération succès (dépense sans parts)
-    if ($regularisationSansParts == false AND $acheteurSansParts == true)
-      insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
+      // Génération succès (dépense sans parts)
+      if ($regularisationSansParts == false AND $acheteurSansParts == true)
+        insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
+    }
 
     // Message suppression effectuée
     $_SESSION['alerts']['depense_deleted'] = true;
@@ -881,14 +925,19 @@
     }
 
     // Récupération des données acheteur
-    $acheteur      = physiqueUser($depense->getBuyer());
-    $bilanAcheteur = $acheteur->getExpenses();
+    $acheteur = physiqueUser($depense->getBuyer());
 
-    // Mise à jour du bilan pour l'acheteur (on retire le montant total)
-    $bilanAcheteur -= $montantTotal;
+    // Traitement de l'utilisateur
+    if (!empty($acheteur))
+    {
+      $bilanAcheteur = $acheteur->getExpenses();
 
-    // Modification de l'enregistrement en base
-    physiqueUpdateBilan($depense->getBuyer(), $bilanAcheteur);
+      // Mise à jour du bilan pour l'acheteur inscrit (on retire le montant total)
+      $bilanAcheteur -= $montantTotal;
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilan($depense->getBuyer(), $bilanAcheteur);
+    }
 
     // Vérification si montant acheteur nul
     $acheteurSansMontant = true;
@@ -905,17 +954,22 @@
       $montantUser = formatAmountForInsert($montant);
 
       // Récupération des données utilisateur
-      $user      = physiqueUser($identifiant);
-      $bilanUser = $user->getExpenses();
+      $user = physiqueUser($identifiant);
 
-      // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-      $bilanUser += $montantUser + ($frais / $nombreTotalUsers);
+      // Traitement de l'utilisateur
+      if (!empty($user))
+      {
+        $bilanUser = $user->getExpenses();
 
-      // Modification de l'enregistrement en base
-      physiqueUpdateBilan($identifiant, $bilanUser);
+        // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+        $bilanUser += $montantUser + ($frais / $nombreTotalUsers);
 
-      // Génération succès (suppression des parts)
-      insertOrUpdateSuccesValue('eater', $identifiant, -1);
+        // Modification de l'enregistrement en base
+        physiqueUpdateBilan($identifiant, $bilanUser);
+
+        // Génération succès (suppression des parts)
+        insertOrUpdateSuccesValue('eater', $identifiant, -1);
+      }
     }
 
     // Suppression de tous les montants
@@ -924,12 +978,16 @@
     // Suppression de la dépense
     physiqueDeleteDepense($idDepense);
 
-    // Génération succès (pour l'acheteur)
-    insertOrUpdateSuccesValue('buyer', $depense->getBuyer(), -1);
+    // Générations succès
+    if (!empty($acheteur))
+    {
+      // Génération succès (pour l'acheteur)
+      insertOrUpdateSuccesValue('buyer', $depense->getBuyer(), -1);
 
-    // Génération succès (dépense sans parts)
-    if ($acheteurSansMontant == true)
-      insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
+      // Génération succès (dépense sans parts)
+      if ($acheteurSansMontant == true)
+        insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
+    }
 
     // Message suppression effectuée
     $_SESSION['alerts']['depense_deleted'] = true;

@@ -345,7 +345,7 @@ function initialisationModification(idDepense, year)
 
     $.each(parts, function(identifiant, user)
     {
-      if (user.pseudo == '')
+      if (user.inscrit == false)
       {
         var montantDes = '';
 
@@ -404,7 +404,7 @@ function initialisationModification(idDepense, year)
 
     $.each(parts, function(identifiant, user)
     {
-      if (user.pseudo == '')
+      if (user.inscrit == false)
       {
         var partsDes = '';
 

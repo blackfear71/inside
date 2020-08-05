@@ -325,7 +325,7 @@ function updateExpense(idDepense, year)
 
     $.each(parts, function(identifiant, user)
     {
-      if (user.pseudo == '')
+      if (user.inscrit == false)
       {
         var montantDes = '';
 
@@ -384,7 +384,7 @@ function updateExpense(idDepense, year)
 
     $.each(parts, function(identifiant, user)
     {
-      if (user.pseudo == '')
+      if (user.inscrit == false)
       {
         var partsDes = '';
 
