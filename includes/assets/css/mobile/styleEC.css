@@ -250,10 +250,12 @@
 	width: calc(100% - 5.5vh);
 	height: 8vh;
 	line-height: 8vh;
+	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 3vh;
 	color: #262626;
 	text-align: center;
+	background-color: transparent;
 }
 
 .euro_saisie

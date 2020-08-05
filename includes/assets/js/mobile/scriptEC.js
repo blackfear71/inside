@@ -246,7 +246,7 @@ function showDetails(idDepense)
 
   // Formulaire suppression
   $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + depense['id']);
-  $('.form_supprimer_depense > input[name=id_expense]').val(depense['id']);
+  $('.form_supprimer_depense > input[name=id_expense_saisie]').val(depense['id']);
   $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + depense['pseudo'] + ' du ' + formatDateForDisplay(depense['date']) + ' et d\'un montant de ' + formatAmountForDisplay(depense['price'], true) + ' ?');
 
   if (type == 'M')
@@ -316,7 +316,7 @@ function initialisationModification(idDepense, year)
   $('.form_saisie').attr('action', action);
   $('.zone_titre_saisie').html(titre);
   $('.titre_section > .texte_titre_section:first').html(sousTitre);
-  $('input[name=id_expense]').val(idDepense);
+  $('input[name=id_expense_saisie]').val(idDepense);
   $('.saisie_acheteur').val(buyer);
   $('.saisie_prix').val(price);
   $('.saisie_commentaire').html(comment);
@@ -359,11 +359,11 @@ function initialisationModification(idDepense, year)
           montantDes += '</div>';
 
           // Identifiant (caché)
-          montantDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+          montantDes += '<input type="hidden" name="identifiant_montant[]" value="' + identifiant + '" />';
 
           // Montant
           montantDes += '<div class="zone_montant">';
-            montantDes += '<div class="montant_des">' + formatAmountForDisplay(user.parts) + '</div>';
+            montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
             montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
           montantDes += '</div>';
         montantDes += '</div>';
@@ -418,10 +418,10 @@ function initialisationModification(idDepense, year)
           partsDes += '</div>';
 
           // Identifiant (caché)
-          partsDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+          partsDes += '<input type="hidden" name="identifiant_quantite[]" value="' + identifiant + '" />';
 
           // Parts
-          partsDes += '<input type="text" name="quantite_user[' + identifiant + ']" value="' + user.parts + '" class="quantite_des part_selected" readonly />';
+          partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_des part_selected" readonly />';
         partsDes += '</div>';
 
         listePartsDes += partsDes;
@@ -486,7 +486,7 @@ function resetSaisie(zone, year, type)
       $('.form_saisie').attr('action', action);
       $('.zone_titre_saisie').html(titre);
       $('.titre_section > .texte_titre_section:first').html(sousTitre);
-      $('input[name=id_expense]').val('');
+      $('input[name=id_expense_saisie]').val('');
       $('.saisie_acheteur').val(buyer);
       $('.saisie_prix').val(price);
       $('.saisie_commentaire').html(comment);

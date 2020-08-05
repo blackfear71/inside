@@ -12,7 +12,7 @@
 
       // Saisie dépense
       echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie_depense">';
-        echo '<input type="hidden" name="id_expense" value="" />';
+        echo '<input type="hidden" name="id_expense_saisie" value="" />';
 
         // Achat
         echo '<div class="zone_saisie_left">';
@@ -91,16 +91,16 @@
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 
                 // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_quantite[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
+                echo '<input type="hidden" name="identifiant_quantite[]" value="' . $user->getIdentifiant() . '" />';
 
                 // Bouton -
                 echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
 
                 // Quantité
                 if ($savedParts == true)
-                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                  echo '<input type="text" name="quantite_user[]" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
                 else
-                  echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                  echo '<input type="text" name="quantite_user[]" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
 
                 // Bouton +
                 echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';

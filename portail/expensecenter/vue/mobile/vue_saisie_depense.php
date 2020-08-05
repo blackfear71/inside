@@ -2,7 +2,7 @@
   echo '<div id="zone_saisie_depense" class="fond_saisie">';
     echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInserer" class="form_saisie">';
       // Id dépense (modification)
-      echo '<input type="hidden" name="id_expense" value="" />';
+      echo '<input type="hidden" name="id_expense_saisie" value="" />';
 
       // Titre
       echo '<div class="zone_titre_saisie">Saisir une dépense</div>';
@@ -89,7 +89,7 @@
                 echo '</div>';
 
                 // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_quantite[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
+                echo '<input type="hidden" name="identifiant_quantite[]" value="' . $user->getIdentifiant() . '" />';
 
                 // Bouton -
                 echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
@@ -97,9 +97,9 @@
                 // Quantité
                 echo '<div class="zone_quantite">';
                   if ($savedParts == true)
-                    echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
+                    echo '<input type="text" name="quantite_user[]" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
                   else
-                    echo '<input type="text" name="quantite_user[' . $user->getId() . ']" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                    echo '<input type="text" name="quantite_user[]" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
                 echo '</div>';
 
                 // Bouton +

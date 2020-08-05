@@ -181,7 +181,7 @@
 
     foreach ($post['identifiant_quantite'] as $id => $identifiant)
     {
-      if ($post['quantite_user'][$id] != 0)
+      if (isset($post['quantite_user'][$id]) AND !empty($post['quantite_user'][$id]))
         $listeParts[$identifiant] = $post['quantite_user'][$id];
     }
 
@@ -312,7 +312,7 @@
 
     foreach ($post['identifiant_montant'] as $id => $identifiant)
     {
-      if ($post['montant_user'][$id] != '')
+      if (isset($post['montant_user'][$id]) AND !empty($post['montant_user'][$id]))
         $listeMontants[$identifiant] = $post['montant_user'][$id];
     }
 
@@ -434,7 +434,7 @@
     $control_ok = true;
 
     // Récupération des données
-    $idDepense  = $post['id_expense'];
+    $idDepense  = $post['id_expense_saisie'];
     $newPrice   = formatAmountForInsert($post['depense']);
     $newBuyer   = $post['buyer_user'];
     $newComment = $post['comment'];
@@ -443,7 +443,7 @@
 
     foreach ($post['identifiant_quantite'] as $id => $identifiant)
     {
-      if ($post['quantite_user'][$id] != 0)
+      if (isset($post['quantite_user'][$id]) AND !empty($post['quantite_user'][$id]))
         $newListeParts[$identifiant] = $post['quantite_user'][$id];
     }
 
@@ -624,7 +624,7 @@
     $control_ok = true;
 
     // Récupération des données
-    $idDepense  = $post['id_expense'];
+    $idDepense  = $post['id_expense_saisie'];
     $newFrais   = formatAmountForInsert($post['depense']);
     $newBuyer   = $post['buyer_user'];
     $newComment = $post['comment'];
@@ -633,7 +633,7 @@
 
     foreach ($post['identifiant_montant'] as $id => $identifiant)
     {
-      if ($post['montant_user'][$id] != 0)
+      if (isset($post['montant_user'][$id]) AND !empty($post['montant_user'][$id]))
         $newListeMontants[$identifiant] = $post['montant_user'][$id];
     }
 
@@ -818,7 +818,7 @@
   function deleteExpense($post)
   {
     // Récupération des données
-    $idDepense = $post['id_expense'];
+    $idDepense = $post['id_expense_delete'];
 
     // Lecture des données de la dépense
     $depense = physiqueDepense($idDepense);
@@ -905,7 +905,7 @@
   function deleteMontants($post)
   {
     // Récupération des données
-    $idDepense = $post['id_expense'];
+    $idDepense = $post['id_expense_delete'];
 
     // Lecture des données de la dépense
     $depense = physiqueDepense($idDepense);

@@ -64,7 +64,7 @@
 
           // Supprimer
           echo '<form method="post" action="" class="form_supprimer_depense">';
-            echo '<input type="hidden" name="id_expense" value="" />';
+            echo '<input type="hidden" name="id_expense_delete" value="" />';
             echo '<input type="submit" name="delete_depense" value="" title="Supprimer" class="icone_supprimer_depense eventConfirm" />';
             echo '<input type="hidden" value="" class="eventMessage" />';
           echo '</form>';

@@ -393,12 +393,14 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(100% - 40px);
+	width: calc(100% - 42px);
 	line-height: 32px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	text-align: center;
+	border: 0;
+	background-color: transparent;
 }
 
 .euro_saisie

@@ -296,7 +296,7 @@ function updateExpense(idDepense, year)
   // Modification des données
   $('.form_saisie_depense').attr('action', action);
   $('.titre_saisie_depense').html(titre);
-  $('input[name=id_expense]').val(idDepense);
+  $('input[name=id_expense_saisie]').val(idDepense);
   $('.saisie_buyer').val(buyer);
   $('.saisie_prix').val(price);
   $('.saisie_commentaire').html(comment);
@@ -340,11 +340,11 @@ function updateExpense(idDepense, year)
           montantDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
 
           // Identifiant (caché)
-          montantDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+          montantDes += '<input type="hidden" name="identifiant_montant[]" value="' + identifiant + '" />';
 
           // Montant
           montantDes += '<div class="zone_montant">';
-            montantDes += '<div class="montant_des">' + formatAmountForDisplay(user.parts) + '</div>';
+            montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
             montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie_des" />';
           montantDes += '</div>';
         montantDes += '</div>';
@@ -399,10 +399,10 @@ function updateExpense(idDepense, year)
           partsDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
 
           // Identifiant (caché)
-          partsDes += '<input type="hidden" name="identifiant_montant[' + identifiant + ']" value="' + identifiant + '" />';
+          partsDes += '<input type="hidden" name="identifiant_quantite[]" value="' + identifiant + '" />';
 
           // Parts
-          partsDes += '<input type="text" name="quantite_user[' + identifiant + ']" value="' + user.parts + '" class="quantite_des" readonly />';
+          partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_des" readonly />';
 
           // Espace vide
           partsDes += '<div class="empty_space_des"></div>';
@@ -467,7 +467,7 @@ function resetSaisie(zone, year, type)
       // Modification des données
       $('.form_saisie_depense').attr('action', action);
       $('.titre_saisie_depense').html(titre);
-      $('input[name=id_expense]').val('');
+      $('input[name=id_expense_saisie]').val('');
       $('.saisie_buyer').val(buyer);
       $('.saisie_prix').val(price);
       $('.saisie_commentaire').html(comment);

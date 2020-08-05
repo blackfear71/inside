@@ -79,7 +79,7 @@
                   echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimerMontants" class="form_supprimer_depense">';
                 else
                   echo '<form id="delete_depense_' . $depense->getId() . '" method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doSupprimer" class="form_supprimer_depense">';
-                  echo '<input type="hidden" name="id_expense" value="' . $depense->getId() . '" />';
+                  echo '<input type="hidden" name="id_expense_delete" value="' . $depense->getId() . '" />';
                   echo '<input type="submit" name="delete_depense" value="" title="Supprimer" class="icone_supprimer_depense eventConfirm" />';
                   echo '<input type="hidden" value="Supprimer la dépense de ' . formatOnclick(formatUnknownUser($depense->getPseudo(), false, false)) . ' du ' . formatDateForDisplay($depense->getDate()) . ' et d\'un montant de ' . formatAmountForDisplay($depense->getPrice()) . ' ?" class="eventMessage" />';
                 echo '</form>';

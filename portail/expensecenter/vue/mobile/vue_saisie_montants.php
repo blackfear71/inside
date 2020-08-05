@@ -2,7 +2,7 @@
   echo '<div id="zone_saisie_montants" class="fond_saisie">';
     echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInsererMontants" class="form_saisie">';
       // Id dépense (modification)
-      echo '<input type="hidden" name="id_expense" value="" />';
+      echo '<input type="hidden" name="id_expense_saisie" value="" />';
 
       // Titre
       echo '<div class="zone_titre_saisie">Saisir des montants</div>';
@@ -80,15 +80,15 @@
                 echo '</div>';
 
                 // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_montant[' . $user->getId() . ']" value="' . $user->getIdentifiant() . '" />';
+                echo '<input type="hidden" name="identifiant_montant[]" value="' . $user->getIdentifiant() . '" />';
 
                 // Montant
                 echo '<div class="zone_montant">';
                   // Saisie
                   if ($savedAmounts == true)
-                    echo '<input type="text" name="montant_user[' . $user->getId() . ']" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" class="montant" />';
+                    echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" class="montant" />';
                   else
-                    echo '<input type="text" name="montant_user[' . $user->getId() . ']" maxlength="6" value="" class="montant" />';
+                    echo '<input type="text" name="montant_user[]" maxlength="6" value="" class="montant" />';
 
                   // Symbole
                   echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
