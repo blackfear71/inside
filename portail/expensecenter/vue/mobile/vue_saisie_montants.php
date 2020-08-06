@@ -71,9 +71,12 @@
                   $savedAmounts = true;
               }
 
-              echo '<div class="zone_saisie_part" id="zone_user_montant_' . $user->getId() . '">';
+              if ($savedAmounts == true)
+                echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_montant_' . $user->getId() . '">';
+              else
+                echo '<div class="zone_saisie_utilisateur" id="zone_user_montant_' . $user->getId() . '">';
                 // Avatar
-                echo '<div class="zone_saisie_part_avatar">';
+                echo '<div class="zone_saisie_utilisateur_avatar">';
                   $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
@@ -86,9 +89,9 @@
                 echo '<div class="zone_saisie_montant">';
                   // Saisie
                   if ($savedAmounts == true)
-                    echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" class="montant" />';
+                    echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" id="montant_user_' . $user->getId() . '" class="montant" />';
                   else
-                    echo '<input type="text" name="montant_user[]" maxlength="6" value="" class="montant" />';
+                    echo '<input type="text" name="montant_user[]" maxlength="6" value="" id="montant_user_' . $user->getId() . '" class="montant" />';
 
                   // Symbole
                   echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';

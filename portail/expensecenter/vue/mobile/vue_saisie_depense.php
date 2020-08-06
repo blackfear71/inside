@@ -78,11 +78,11 @@
               }
 
               if ($savedParts == true)
-                echo '<div class="zone_saisie_part part_selected" id="zone_user_' . $user->getId() . '">';
+                echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_' . $user->getId() . '">';
               else
-                echo '<div class="zone_saisie_part" id="zone_user_' . $user->getId() . '">';
+                echo '<div class="zone_saisie_utilisateur" id="zone_user_' . $user->getId() . '">';
                 // Avatar
-                echo '<div class="zone_saisie_part_avatar">';
+                echo '<div class="zone_saisie_utilisateur_avatar">';
                   $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';

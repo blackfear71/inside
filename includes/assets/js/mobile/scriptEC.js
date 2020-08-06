@@ -102,6 +102,15 @@ $(function()
       }
     }
   });
+
+  /*** Actions à la saisie ***/
+  // Colorise un montant
+  $('.montant').keyup(function(e)
+  {
+    var idUser = $(this).attr('id').replace('montant_user_', '');
+
+    ajouterMontant('zone_user_montant_' + idUser, 'montant_user_' + idUser, $(this).val());
+  });
 });
 
 /*****************/
@@ -132,6 +141,28 @@ function ajouterPart(zone, quantite, value)
   // Incrit la valeur dans la zone
   if (newValue >= 0 && newValue <= 5)
     $('#' + quantite).val(newValue);
+}
+
+// Ajoute un montant à un utilisateur
+function ajouterMontant(zone, montant, value)
+{
+  var currentValue = $('#' + montant).val();
+  var newValue     = value;
+
+  if (newValue != '')
+  {
+    $('#' + zone).css('background-color', '#ff1937');
+    $('#' + zone).css('color', 'white');
+
+    $('#' + montant).val(newValue);
+  }
+  else
+  {
+    $('#' + zone).css('background-color', '#e3e3e3');
+    $('#' + zone).css('color', '#262626');
+
+    $('#' + montant).val('');
+  }
 }
 
 // Affiche la zone de détails d'une dépense
@@ -324,20 +355,26 @@ function initialisationModification(idDepense, year)
   if (type == 'M')
   {
     // Alimentation des zones utilisateurs inscrits
-    $('.zone_saisie_part').each(function()
+    $('#zone_saisie_montants').find('.zone_saisie_utilisateur').each(function()
     {
       // Initialisation du montant
       $(this).find('.montant').val('');
 
       // Vérification présence identifiant dans les parts
       var idZone           = $(this).attr('id');
-      var idQuantite       = $(this).find('.montant').attr('id');
+      var idMontant       = $(this).find('.montant').attr('id');
       var identifiantLigne = $(this).find('input[type=hidden]').val();
       var partUtilisateur  = parts[identifiantLigne];
+      var montantUtilisateur;
 
       // Récupération du nombre de parts
       if (partUtilisateur != null)
-        $(this).find('.montant').val(formatAmountForDisplay(partUtilisateur['parts']));
+        montantUtilisateur = formatAmountForDisplay(partUtilisateur['parts']);
+      else
+        montantUtilisateur = '';
+
+      // Ajout du montant à la zone
+      ajouterMontant(idZone, idMontant, montantUtilisateur);
     });
 
     // Affichage des utilisateurs désinscrits
@@ -350,11 +387,11 @@ function initialisationModification(idDepense, year)
         var montantDes = '';
 
         // Zone utilisateur
-        montantDes += '<div class="zone_saisie_part">';
+        montantDes += '<div class="zone_saisie_utilisateur part_selected">';
           // Avatar
           $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
 
-          montantDes += '<div class="zone_saisie_part_avatar">';
+          montantDes += '<div class="zone_saisie_utilisateur_avatar">';
             montantDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
           montantDes += '</div>';
 
@@ -377,7 +414,7 @@ function initialisationModification(idDepense, year)
   else
   {
     // Alimentation des zones utilisateurs inscrits
-    $('.zone_saisie_part').each(function()
+    $('#zone_saisie_depense').find('.zone_saisie_utilisateur').each(function()
     {
       // Initialisation de la quantité
       $(this).find('.quantite').val('0');
@@ -409,11 +446,11 @@ function initialisationModification(idDepense, year)
         var partsDes = '';
 
         // Zone utilisateur
-        partsDes += '<div class="zone_saisie_part part_selected">';
+        partsDes += '<div class="zone_saisie_utilisateur part_selected">';
           // Avatar
           $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
 
-          partsDes += '<div class="zone_saisie_part_avatar">';
+          partsDes += '<div class="zone_saisie_utilisateur_avatar">';
             partsDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
           partsDes += '</div>';
 
@@ -493,18 +530,25 @@ function resetSaisie(zone, year, type)
 
       if (type == 'M')
       {
-        $('#zone_saisie_montants').find('.zone_saisie_part').each(function()
+        $('#zone_saisie_montants').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation du montant ou suppression zone utilisateur désinscrit
           if ($(this).attr('id') == undefined)
             $(this).remove();
           else
             $(this).find('.montant').val('');
+
+          // Ajout du montant à la zone
+          var idZone             = $(this).attr('id');
+          var idMontant          = $(this).find('.montant').attr('id');
+          var montantUtilisateur = '';
+
+          ajouterMontant(idZone, idMontant, montantUtilisateur);
         });
       }
       else
       {
-        $('#zone_saisie_depense').find('.zone_saisie_part').each(function()
+        $('#zone_saisie_depense').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation de la quantité ou suppression zone utilisateur désinscrit
           if ($(this).attr('id') == undefined)

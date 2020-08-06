@@ -125,6 +125,15 @@ $(function()
 
     updateExpense(idDepense, $_GET('year'));
   });
+
+  /*** Actions à la saisie ***/
+  // Colorise un montant
+  $('.montant').keyup(function(e)
+  {
+    var idUser = $(this).attr('id').replace('montant_user_', '');
+
+    saisirMontant('zone_user_montant_' + idUser, 'montant_user_' + idUser, $(this).val());
+  });
 });
 
 // Au redimensionnement de la fenêtre
@@ -250,6 +259,28 @@ function saisirPart(zone, quantite, value)
     $('#' + quantite).val(newValue);
 }
 
+// Ajoute un montant à un utilisateur
+function saisirMontant(zone, montant, value)
+{
+  var currentValue = $('#' + montant).val();
+  var newValue     = value;
+
+  if (newValue != '')
+  {
+    $('#' + zone).css('background-color', '#ff1937');
+    $('#' + zone).css('color', 'white');
+
+    $('#' + montant).val(newValue);
+  }
+  else
+  {
+    $('#' + zone).css('background-color', '#e3e3e3');
+    $('#' + zone).css('color', '#262626');
+
+    $('#' + montant).val('');
+  }
+}
+
 // Affiche la zone de mise à jour d'une dépense
 function updateExpense(idDepense, year)
 {
@@ -304,20 +335,26 @@ function updateExpense(idDepense, year)
   if (type == 'M')
   {
     // Alimentation des zones utilisateurs inscrits
-    $('.zone_saisie_utilisateur').each(function()
+    $('#zone_add_montants').find('.zone_saisie_utilisateur').each(function()
     {
       // Initialisation du montant
       $(this).find('.montant').val('');
 
       // Vérification présence identifiant dans les parts
-      var idZone                 = $(this).attr('id');
-      var idQuantite             = $(this).find('.montant').attr('id');
-      var identifiantLigne       = $(this).find('input[type=hidden]').val();
-      var partUtilisateur        = parts[identifiantLigne];
+      var idZone           = $(this).attr('id');
+      var idMontant        = $(this).find('.montant').attr('id');
+      var identifiantLigne = $(this).find('input[type=hidden]').val();
+      var partUtilisateur  = parts[identifiantLigne];
+      var montantUtilisateur;
 
-      // Récupération du nombre de parts
+      // Récupération du montant
       if (partUtilisateur != null)
-        $(this).find('.montant').val(formatAmountForDisplay(partUtilisateur['parts']));
+        montantUtilisateur = formatAmountForDisplay(partUtilisateur['parts']);
+      else
+        montantUtilisateur = '';
+
+      // Ajout du montant à la zone
+      saisirMontant(idZone, idMontant, montantUtilisateur);
     });
 
     // Affichage des utilisateurs désinscrits
@@ -330,7 +367,7 @@ function updateExpense(idDepense, year)
         var montantDes = '';
 
         // Zone utilisateur
-        montantDes += '<div class="zone_saisie_utilisateur">';
+        montantDes += '<div class="zone_saisie_utilisateur part_selected">';
           // Pseudo
           montantDes += '<div class="pseudo_depense">' + formatUnknownUser(user.pseudo, true, true) + '</div>';
 
@@ -354,12 +391,12 @@ function updateExpense(idDepense, year)
       }
     });
 
-    $('#zone_add_montants').find('.zone_saisie_utilisateurs').append(listeMontantsDes).masonry('reloadItems');
+    $('#zone_add_montants').find('.zone_saisie_utilisateurs').append(listeMontantsDes).masonry().masonry('reloadItems');
   }
   else
   {
     // Alimentation des zones utilisateurs inscrits
-    $('.zone_saisie_utilisateur').each(function()
+    $('#zone_add_depense').find('.zone_saisie_utilisateur').each(function()
     {
       $(this).children('.quantite').val('0');
 
@@ -415,7 +452,7 @@ function updateExpense(idDepense, year)
       }
     });
 
-    $('#zone_add_depense').find('.zone_saisie_utilisateurs').append(listePartsDes).masonry('reloadItems');
+    $('#zone_add_depense').find('.zone_saisie_utilisateurs').append(listePartsDes).masonry().masonry('reloadItems');
   }
 
   // Affiche la zone de saisie
@@ -485,6 +522,13 @@ function resetSaisie(zone, year, type)
             $(this).remove();
           else
             $(this).find('.montant').val('');
+
+          // Ajout du montant à la zone
+          var idZone             = $(this).attr('id');
+          var idMontant          = $(this).find('.montant').attr('id');
+          var montantUtilisateur = '';
+
+          saisirMontant(idZone, idMontant, montantUtilisateur);
         });
       }
       else

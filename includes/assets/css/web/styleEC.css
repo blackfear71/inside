@@ -16,7 +16,7 @@
 	overflow: auto;
 }
 
-.zone_saisie_depense, .zone_saisie_montants
+.zone_saisie_depense
 {
 	width: 85%;
 	margin-top: 100px;
@@ -387,7 +387,7 @@
 	line-height: 32px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
-	color: #262626;
+	color: white;
 	text-align: center;
 	border: 0;
 	background-color: transparent;
