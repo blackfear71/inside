@@ -83,7 +83,7 @@
                 echo '<input type="hidden" name="identifiant_montant[]" value="' . $user->getIdentifiant() . '" />';
 
                 // Montant
-                echo '<div class="zone_montant">';
+                echo '<div class="zone_saisie_montant">';
                   // Saisie
                   if ($savedAmounts == true)
                     echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" class="montant" />';

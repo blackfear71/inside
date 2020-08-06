@@ -203,7 +203,7 @@ function initMasonry()
   // Masonry (Saisie)
   $('.zone_saisie_utilisateurs').masonry({
     // Options
-    itemSelector: '.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts',
+    itemSelector: '.zone_saisie_utilisateur',
     columnWidth: 200,
     fitWidth: true,
     gutter: 10,
@@ -343,10 +343,11 @@ function updateExpense(idDepense, year)
           montantDes += '<input type="hidden" name="identifiant_montant[]" value="' + identifiant + '" />';
 
           // Montant
-          montantDes += '<div class="zone_montant">';
+          montantDes += '<div class="zone_saisie_montant">';
             montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
-            montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie_des" />';
           montantDes += '</div>';
+
+          montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
         montantDes += '</div>';
 
         listeMontantsDes += montantDes;
@@ -358,7 +359,7 @@ function updateExpense(idDepense, year)
   else
   {
     // Alimentation des zones utilisateurs inscrits
-    $('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
+    $('.zone_saisie_utilisateur').each(function()
     {
       $(this).children('.quantite').val('0');
 
@@ -389,7 +390,7 @@ function updateExpense(idDepense, year)
         var partsDes = '';
 
         // Zone utilisateur
-        partsDes += '<div class="zone_saisie_utilisateur_parts">';
+        partsDes += '<div class="zone_saisie_utilisateur part_selected">';
           // Pseudo
           partsDes += '<div class="pseudo_depense">' + formatUnknownUser(user.pseudo, true, true) + '</div>';
 
@@ -402,10 +403,12 @@ function updateExpense(idDepense, year)
           partsDes += '<input type="hidden" name="identifiant_quantite[]" value="' + identifiant + '" />';
 
           // Parts
-          partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_des" readonly />';
+          partsDes += '<div class="zone_saisie_quantite">';
+            partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_des" readonly />';
+          partsDes += '</div>';
 
-          // Espace vide
-          partsDes += '<div class="empty_space_des"></div>';
+          // Symbole
+          partsDes += '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="parts" class="parts_saisie" />';
         partsDes += '</div>';
 
         listePartsDes += partsDes;
@@ -485,7 +488,7 @@ function resetSaisie(zone, year, type)
       }
       else
       {
-        $('#zone_add_depense').find('.zone_saisie_utilisateur, .zone_saisie_utilisateur_parts').each(function()
+        $('#zone_add_depense').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation de la quantité ou suppression zone utilisateur désinscrit
           if ($(this).attr('id') == undefined)

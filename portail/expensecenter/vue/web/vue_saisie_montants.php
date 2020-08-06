@@ -85,15 +85,15 @@
                 echo '<input type="hidden" name="identifiant_montant[]" value="' . $user->getIdentifiant() . '" />';
 
                 // Montant
-                echo '<div class="zone_montant">';
+                echo '<div class="zone_saisie_montant">';
                   if ($savedAmounts == true)
                     echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" class="montant" />';
                   else
                     echo '<input type="text" name="montant_user[]" maxlength="6" value="" class="montant" />';
-
-                  // Symbole
-                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
                 echo '</div>';
+
+                // Symbole
+                echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
               echo '</div>';
             }
           echo '</div>';

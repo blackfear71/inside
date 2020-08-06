@@ -79,7 +79,7 @@
               }
 
               if ($savedParts == true)
-                echo '<div class="zone_saisie_utilisateur_parts" id="zone_user_' . $user->getId() . '">';
+                echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_' . $user->getId() . '">';
               else
                 echo '<div class="zone_saisie_utilisateur" id="zone_user_' . $user->getId() . '">';
                 // Pseudo
@@ -93,17 +93,23 @@
                 // Identifiant (caché)
                 echo '<input type="hidden" name="identifiant_quantite[]" value="' . $user->getIdentifiant() . '" />';
 
-                // Bouton -
-                echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
+                // Zone saisie quantité
+                echo '<div class="zone_saisie_quantite">';
+                  // Bouton -
+                  echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
 
-                // Quantité
-                if ($savedParts == true)
-                  echo '<input type="text" name="quantite_user[]" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
-                else
-                  echo '<input type="text" name="quantite_user[]" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                  // Quantité
+                  if ($savedParts == true)
+                    echo '<input type="text" name="quantite_user[]" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                  else
+                    echo '<input type="text" name="quantite_user[]" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
 
-                // Bouton +
-                echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
+                  // Bouton +
+                  echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
+                echo '</div>';
+
+                // Symbole
+                echo '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="parts" class="parts_saisie" />';
               echo '</div>';
             }
           echo '</div>';

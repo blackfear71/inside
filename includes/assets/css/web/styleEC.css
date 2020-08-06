@@ -266,17 +266,9 @@
 	margin-bottom: 10px;
 }
 
-.zone_saisie_utilisateur_parts
+.part_selected
 {
-	display: inline-block;
-	padding: 5px;
-	border-radius: 2px;
-	vertical-align: top;
 	background-color: #ff1937;
-	box-shadow: 0 0 3px #7c7c7c;
-	text-align: center;
-	width: 190px;
-	margin-bottom: 10px;
 	color: white;
 }
 
@@ -301,10 +293,16 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
+.zone_saisie_quantite
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 90px);
+}
+
 .bouton_quantite
 {
 	display: inline-block;
-	margin-left: 10px;
 	width: 20px;
 	line-height: 20px;
 	vertical-align: middle;
@@ -330,6 +328,7 @@
 	display: inline-block;
 	width: 20px;
 	margin-left: 10px;
+	margin-right: 10px;
 	line-height: 20px;
 	vertical-align: middle;
 	border-radius: 2px;
@@ -357,27 +356,18 @@
 	border: 0;
 }
 
-.empty_space_des
+.zone_saisie_montant
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 38px;
-	height: 32px;
-}
-
-.zone_montant
-{
-	display: inline-block;
-	margin-left: 5px;
-	vertical-align: middle;
-	width: calc(100% - 50px);
+	width: calc(100% - 90px);
 }
 
 .montant
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(100% - 45px);
+	width: calc(100% - 40px);
 	padding-left: 10px;
 	padding-right: 10px;
 	height: 30px;
@@ -403,22 +393,21 @@
 	background-color: transparent;
 }
 
+.parts_saisie
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 30px;
+	height: 30px;
+}
+
 .euro_saisie
 {
 	display: inline-block;
-	margin-left: 5px;
 	vertical-align: middle;
 	width: 20px;
 	height: 20px;
-}
-
-.euro_saisie_des
-{
-	display: inline-block;
-	margin-left: 20px;
-	vertical-align: middle;
-	width: 20px;
-	height: 20px;
+	padding: 5px;
 }
 
 .explications
