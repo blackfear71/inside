@@ -424,6 +424,7 @@ function updateExpense(idDepense, year)
   else
     afficherMasquerIdWithDelay('zone_add_depense');
 
+  // Initialisation de la masonry
   initMasonry();
 }
 
@@ -509,5 +510,8 @@ function resetSaisie(zone, year, type)
     // On réinitialise l'affichage des explications
     $('.lien_explications').css('display', 'block');
     $('.explications').css('display', 'none');
+
+    // Réinitialisation de la masonry
+    $('.zone_saisie_utilisateurs').masonry().masonry('destroy');
   }, 200);
 }
