@@ -6,3 +6,4 @@ includes/chat/content_chat.xml
 includes/images/
 server/
 test/
+.idea/

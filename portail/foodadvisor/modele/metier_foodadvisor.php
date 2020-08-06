@@ -853,7 +853,7 @@
       $choix = physiqueChoix($idChoix);
 
       // Récupération des données de la détermination si correspondantes
-      $determinationExistante = physiqueDeterminationExistanteUser($choix->getId_restaurant(), $choix->getIdentifiant());
+      $determinationExistante = physiqueDeterminationExistanteUser($choix->getIdentifiant());
 
       if ($determinationExistante == true)
       {
