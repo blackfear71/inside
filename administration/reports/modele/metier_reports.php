@@ -87,7 +87,7 @@
     // Génération succès
     insertOrUpdateSuccesValue('debugger', $rapport->getAuthor(), -1);
 
-    if ($resolved == 'Y')
+    if ($rapport->getResolved() == 'Y')
       insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
 
     // Message d'alerte

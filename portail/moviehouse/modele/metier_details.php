@@ -502,6 +502,10 @@
       {
         if (!empty($participant->getEmail()))
         {
+          // Initialisations
+          $mail = new PHPMailer();
+
+          // Connexion au serveur de mails
           include_once('../../includes/functions/appel_mail.php');
 
           // Destinataire

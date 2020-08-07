@@ -40,6 +40,7 @@
 		case 'doDemanderMdp':
 			// Demande de réinitialisation de mot de passe
 			resetPassword($_POST);
+			break;
 
 		default:
 			// Contrôle action renseignée URL

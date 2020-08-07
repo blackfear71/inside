@@ -135,15 +135,12 @@
       break;
 
     case 'doModifier':
+    case 'doChoixRapide':
       header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
       break;
 
     case 'doSupprimer':
       header('location: restaurants.php?action=goConsulter');
-      break;
-
-    case 'doChoixRapide':
-      header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
       break;
 
     case 'goConsulter':

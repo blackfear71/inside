@@ -182,9 +182,6 @@
       break;
 
     case 'doVoterFilm':
-      header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idFilm);
-      break;
-
     case 'doParticiperFilm':
       header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idFilm);
       break;

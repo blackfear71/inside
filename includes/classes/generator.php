@@ -3,6 +3,7 @@
   {
     private $nom_section;
     private $nom_technique;
+    private $nom_head;
     private $style_specifique;
     private $script_specifique;
     private $options;
@@ -155,7 +156,7 @@
       $generatorOptions = new self();
       $generatorOptions->fill($data);
 
-      return $generatorParameters;
+      return $generatorOptions;
     }
 
     protected function fill ($data)

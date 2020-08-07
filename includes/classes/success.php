@@ -183,11 +183,6 @@
       return $this->description;
     }
 
-    public function getLogo()
-    {
-      return $this->logo;
-    }
-
     // Limite succès
     public function setLimit_success($limit_success)
     {

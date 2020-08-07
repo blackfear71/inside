@@ -128,6 +128,8 @@
   switch ($_GET['action'])
   {
     case 'doModifier':
+    case 'doVoterFilm':
+    case 'doParticiperFilm':
       header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
       break;
 
@@ -147,15 +149,7 @@
       header('location: moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter');
       break;
 
-    case 'doVoterFilm':
-    case 'doParticiperFilm':
-      header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
-      break;
-
     case 'doCommenter':
-      header('location: details.php?id_film=' . $idFilm . '&action=goConsulter&anchor=comments');
-      break;
-
     case 'doSupprimerCommentaire':
       header('location: details.php?id_film=' . $idFilm . '&action=goConsulter&anchor=comments');
       break;

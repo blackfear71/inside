@@ -170,9 +170,6 @@
 
                       // Terminée
                       case 'D':
-                        echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
-                        break;
-
                       // Rejetée
                       case 'R':
                         echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton margin_button" />';
@@ -193,10 +190,6 @@
     {
       switch ($_GET['view'])
       {
-        case 'inprogress':
-          echo '<div class="empty">Pas d\'idées proposées</div>';
-          break;
-
         case 'mine':
           echo '<div class="empty">Pas d\'idées en charge</div>';
           break;
@@ -206,6 +199,7 @@
           break;
 
         case 'all':
+        case 'inprogress':
         default:
           echo '<div class="empty">Pas d\'idées proposées</div>';
           break;

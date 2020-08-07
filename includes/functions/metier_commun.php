@@ -381,6 +381,9 @@
       switch ($position)
       {
         case 'left':
+        case 'top_left':
+        case 'middle_left':
+        case 'bottom_left':
           $icone = $mission->getReference() . '_g';
           break;
 
@@ -389,15 +392,6 @@
           break;
 
         case 'right':
-          $icone = $mission->getReference() . '_d';
-          break;
-
-        case 'top_left':
-        case 'middle_left':
-        case 'bottom_left':
-          $icone = $mission->getReference() . '_g';
-          break;
-
         case 'top_right':
         case 'middle_right':
         case 'bottom_right':
@@ -667,7 +661,7 @@
     global $bdd;
 
     if ($category == 'comments')
-      $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '" AND date = ' . date(Ymd));
+      $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '" AND date = ' . date('Ymd'));
     else
       $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
 
@@ -1097,6 +1091,7 @@
 
       case 'delete':
         $req4 = $bdd->exec('DELETE FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        break;
 
       default:
         break;

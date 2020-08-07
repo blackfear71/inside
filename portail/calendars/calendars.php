@@ -108,15 +108,12 @@
       break;
 
     case 'doAjouterAnnexe':
+    case 'doSupprimerAnnexe':
       header('location: calendars.php?action=goConsulterAnnexes');
       break;
 
     case 'doSupprimer':
       header('location: calendars.php?year=' . $_GET['year'] . '&action=goConsulter');
-      break;
-
-    case 'doSupprimerAnnexe':
-      header('location: calendars.php?action=goConsulterAnnexes');
       break;
 
     case 'goConsulterAnnexes':

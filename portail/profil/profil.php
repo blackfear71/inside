@@ -85,9 +85,6 @@
       break;
 
     case 'cancelDesinscription':
-      updateStatus($_SESSION['user']['identifiant'], 'N');
-      break;
-
     case 'cancelResetPassword':
       updateStatus($_SESSION['user']['identifiant'], 'N');
       break;
