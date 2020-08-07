@@ -384,7 +384,7 @@ function updateExpense(idDepense, year)
             montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
           montantDes += '</div>';
 
-          montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
+          montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
         montantDes += '</div>';
 
         listeMontantsDes += montantDes;
@@ -445,7 +445,7 @@ function updateExpense(idDepense, year)
           partsDes += '</div>';
 
           // Symbole
-          partsDes += '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="parts" class="parts_saisie" />';
+          partsDes += '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="Parts" class="parts_saisie" />';
         partsDes += '</div>';
 
         listePartsDes += partsDes;

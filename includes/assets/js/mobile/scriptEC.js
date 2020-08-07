@@ -401,7 +401,7 @@ function initialisationModification(idDepense, year)
           // Montant
           montantDes += '<div class="zone_saisie_montant">';
             montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
-            montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
+            montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
           montantDes += '</div>';
         montantDes += '</div>';
 

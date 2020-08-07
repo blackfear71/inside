@@ -32,7 +32,7 @@
           // Prix
           echo '<div class="zone_saisie_prix">';
             echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Prix" maxlength="6" class="saisie_prix" required />';
-            echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
+            echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
           echo '</div>';
 
           // Commentaire
@@ -109,7 +109,7 @@
                 echo '</div>';
 
                 // Symbole
-                echo '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="parts" class="parts_saisie" />';
+                echo '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="Parts" class="parts_saisie" />';
               echo '</div>';
             }
           echo '</div>';

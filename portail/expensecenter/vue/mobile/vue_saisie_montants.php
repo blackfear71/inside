@@ -32,7 +32,7 @@
           // Frais additionnels
           echo '<div class="zone_saisie_prix">';
             echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Frais additionnels" maxlength="6" class="saisie_prix" />';
-            echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro" />';
+            echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
           echo '</div>';
 
           // Commentaire
@@ -94,7 +94,7 @@
                     echo '<input type="text" name="montant_user[]" maxlength="6" value="" id="montant_user_' . $user->getId() . '" class="montant" />';
 
                   // Symbole
-                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="euros" class="euro_saisie" />';
+                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
                 echo '</div>';
               echo '</div>';
             }
