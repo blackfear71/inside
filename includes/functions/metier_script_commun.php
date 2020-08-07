@@ -64,11 +64,11 @@
     }
 
     // Récupération du noùbre de notifications du jour
-    $nombrebNotificationsJour = physiqueNombreNotificationsJour();
+    $nombreNotificationsJour = physiqueNombreNotificationsJour();
 
     // Concaténation des données pour JS
     $data = array('identifiant'             => $_SESSION['user']['identifiant'],
-                  'nombreNotificationsJour' => $nombrebNotificationsJour,
+                  'nombreNotificationsJour' => $nombreNotificationsJour,
                   'view'                    => $viewNotifications,
                   'page'                    => $page
                  );
@@ -84,7 +84,7 @@
   function getDetailsNotifications()
   {
     // Récupération compteur de notifications du jour
-    $nombrebNotificationsJour = physiqueNombreNotificationsJour();
+    $nombreNotificationsJour = physiqueNombreNotificationsJour();
 
     // Calcul des dates de la semaine
     $nombreJoursLundi    = 1 - date('N');
@@ -93,12 +93,12 @@
     $aujourdhui          = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
 
     // Récupération compteur de notifications de la semaine
-    $nombrebNotificationsSemaine = physiqueNombreNotificationsSemaine($lundi, $aujourdhui);
+    $nombreNotificationsSemaine = physiqueNombreNotificationsSemaine($lundi, $aujourdhui);
 
     // Concaténation des données pour JS
     $data = array('identifiant'                => $_SESSION['user']['identifiant'],
-                  'nombreNotificationsJour'    => $nombrebNotificationsJour,
-                  'nombreNotificationsSemaine' => $nombrebNotificationsSemaine
+                  'nombreNotificationsJour'    => $nombreNotificationsJour,
+                  'nombreNotificationsSemaine' => $nombreNotificationsSemaine
                  );
 
     $dataJson = json_encode($data);

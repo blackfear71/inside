@@ -218,7 +218,6 @@
     // Initialisations
     $nomTechnique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
     $file         = 'templates/metier.php';
-    $options      = array();
     $metier       = array('filename' => 'metier_' . $nomTechnique . '.php',
                           'content'  => file_get_contents($file)
                          );
@@ -234,7 +233,6 @@
     // Initialisations
     $nomTechnique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
     $file         = 'templates/controles.php';
-    $options      = array();
     $controles    = array('filename' => 'controles_' . $nomTechnique . '.php',
                           'content'  => file_get_contents($file)
                          );
@@ -250,7 +248,6 @@
     // Initialisations
     $nomTechnique = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
     $file         = 'templates/physique.php';
-    $options      = array();
     $physique     = array('filename' => 'physique_' . $nomTechnique . '.php',
                           'content'  => file_get_contents($file)
                          );

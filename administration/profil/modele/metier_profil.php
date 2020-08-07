@@ -44,7 +44,7 @@
 
     // Upload fichier
     if ($control_ok == true)
-      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatarDir);
+      $control_ok = uploadFile($fileDatas, $avatarDir);
 
     if ($control_ok == true)
     {

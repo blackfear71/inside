@@ -167,7 +167,7 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['calendar'], $fileDatas, $calendarsDir);
+      $control_ok = uploadFile($fileDatas, $calendarsDir);
 
       if ($control_ok == true)
       {
@@ -240,7 +240,7 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['annexe'], $fileDatas, $annexesDir);
+      $control_ok = uploadFile($fileDatas, $annexesDir);
 
       if ($control_ok == true)
       {

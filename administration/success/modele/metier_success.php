@@ -150,7 +150,7 @@
 
     // Upload fichier
     if ($control_ok == true)
-      $control_ok = uploadFile($files['success'], $fileDatas, $successDir);
+      $control_ok = uploadFile($fileDatas, $successDir);
 
     // Création miniature et insertion en base
     if ($control_ok == true)

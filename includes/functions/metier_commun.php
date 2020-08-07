@@ -670,7 +670,6 @@
       $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '" AND date = ' . date(Ymd));
     else
       $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
-    $data = $req->fetch();
 
     if ($req->rowCount() > 0)
       $exist = true;
@@ -1063,7 +1062,6 @@
       else
       {
         $req3 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $data3 = $req3->fetch();
 
         if ($req3->rowCount() > 0)
           $action = 'update';
@@ -1413,12 +1411,12 @@
 
   // METIER : Télécharge une image sur le serveur
   // RETOUR : Booléen
-  function uploadFile($file, $controls, $folder)
+  function uploadFile($fileDatas, $folder)
   {
     $control_ok = true;
 
-    $tmpFile = $controls['tmp_file'];
-    $name     = $controls['new_name'];
+    $tmpFile = $fileDatas['tmp_file'];
+    $name    = $fileDatas['new_name'];
 
     if (!move_uploaded_file($tmpFile, $folder . $name))
     {

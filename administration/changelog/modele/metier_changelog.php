@@ -68,9 +68,9 @@
   function saveChangeLogParameters($post)
   {
     // Sauvegarde des paramètres saisis en session
-    $_SESSION['changelog']['action'] = $_POST['action_changelog'];
-    $_SESSION['changelog']['year']   = $_POST['annee_changelog'];
-    $_SESSION['changelog']['week']   = formatWeekForInsert($_POST['semaine_changelog']);
+    $_SESSION['changelog']['action'] = $post['action_changelog'];
+    $_SESSION['changelog']['year']   = $post['annee_changelog'];
+    $_SESSION['changelog']['week']   = formatWeekForInsert($post['semaine_changelog']);
   }
 
   // METIER : Contrôle l'existence d'un journal

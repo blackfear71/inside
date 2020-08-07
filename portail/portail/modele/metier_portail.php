@@ -313,10 +313,7 @@
       {
         foreach ($newsMissions as $newsMission)
         {
-          $news = new News();
-          $news = $newsMission;
-
-          array_push($tableauNews, $news);
+          array_push($tableauNews, $newsMission);
         }
       }
     }

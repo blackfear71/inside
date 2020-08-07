@@ -52,7 +52,6 @@
     while ($donnees0 = $reponse0->fetch())
     {
       $reponse1 = $bdd->query('SELECT * FROM movie_house_comments WHERE id_film = ' . $donnees0['id'] . ' AND author = "' . $user . '"');
-      $donnees1 = $reponse1->fetch();
 
       if ($reponse1->rowCount() > 0)
         $nombreCommentaires++;
@@ -216,7 +215,7 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['avatar'], $fileDatas, $avatarDir);
+      $control_ok = uploadFile($fileDatas, $avatarDir);
 
       if ($control_ok == true)
       {
@@ -776,7 +775,6 @@
     global $bdd;
 
     $reponse = $bdd->query('SELECT * FROM themes WHERE type = "M" AND date_deb <= ' . date('Ymd') . ' AND date_fin >= ' . date('Ymd') . ' ORDER BY id ASC');
-    $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() > 0)
       $isThemeMission = true;

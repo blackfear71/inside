@@ -225,7 +225,7 @@
 
         // Upload fichier
         if ($control_ok == true)
-          $control_ok = uploadFile($files['image_restaurant'], $fileDatas, $restaurantDir);
+          $control_ok = uploadFile($fileDatas, $restaurantDir);
 
         // Traitement de l'image
         if ($control_ok == true)
@@ -235,7 +235,7 @@
 
           // Rotation automatique de l'image (si JPEG)
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            $rotate = rotateImage($restaurantDir . $newName, $typeImage);
+            rotateImage($restaurantDir . $newName, $typeImage);
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
           imagethumb($restaurantDir . $newName, $restaurantDir . $newName, 500, FALSE, TRUE);
@@ -415,7 +415,7 @@
             unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
 
           // Upload fichier
-          $control_ok = uploadFile($files['update_image_restaurant_' . $idRestaurant], $fileDatas, $restaurantDir);
+          $control_ok = uploadFile($fileDatas, $restaurantDir);
 
           // Traitement de l'image
           if ($control_ok == true)
@@ -425,7 +425,7 @@
 
             // Rotation automatique de l'image (si JPEG)
             if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-              $rotate = rotateImage($restaurantDir . $newName, $typeImage);
+              rotateImage($restaurantDir . $newName, $typeImage);
 
             // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
             imagethumb($restaurantDir . $newName, $restaurantDir . $newName, 500, FALSE, TRUE);

@@ -102,7 +102,7 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
+        $control_ok = uploadFile($fileDatas, $imageDir);
 
         // Rotation de l'image
         if ($control_ok == true)
@@ -111,7 +111,7 @@
           $typeImage = $fileDatas['type_file'];
 
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            $rotate = rotateImage($imageDir . $picture, $typeImage);
+            rotateImage($imageDir . $picture, $typeImage);
         }
       }
     }

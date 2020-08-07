@@ -261,7 +261,7 @@
                             );
 
           // Upload fichier
-          $control_ok = uploadFile($file, $fileDatas, $destDir);
+          $control_ok = uploadFile($fileDatas, $destDir);
 
           // Arrêt de la boucle en cas d'erreur
           if ($control_ok == false)

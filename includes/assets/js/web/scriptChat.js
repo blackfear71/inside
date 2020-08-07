@@ -700,7 +700,7 @@ $(window).on('load', function()
     }
 
     // On construit l'expression régulière et on remplace
-    return text.replace(new RegExp(patterns.join('|'),'g'), function (match)
+    return text.replace(new RegExp(patterns.join('|'), 'g'), function (match)
     {
       return typeof emoticons[match] != 'undefined' ? emoticons[match] : match;
     });

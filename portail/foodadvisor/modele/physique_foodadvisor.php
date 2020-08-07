@@ -191,31 +191,6 @@
     return $choix;
   }
 
-  // PHYSIQUE : Lecture détermination existante liée à l'utilisateur pour un restaurant
-  // RETOUR : Booléen
-  function physiqueDeterminationExistanteRestaurantUser($idRestaurant, $identifiant)
-  {
-    // Initialisations
-    $exist = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                        FROM food_advisor_choices
-                        WHERE date = "' . date('Ymd') . '" AND id_restaurant = ' . $idRestaurant . ' AND caller = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-      $exist = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $exist;
-  }
-
   // PHYSIQUE : Lecture détermination existante liée à l'utilisateur
   // RETOUR : Booléen
   function physiqueDeterminationExistanteUser($identifiant)
@@ -352,7 +327,7 @@
                        WHERE id = ' . $idChoix);
   }
 
-  // PHYSIQUE : Suppression détermination existante
+  // PHYSIQUE : Suppression détermination existante pour un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteDeterminationRestaurantUser($idRestaurant, $identifiant)
   {
@@ -362,7 +337,7 @@
     $req = $bdd->exec('DELETE FROM food_advisor_choices
                        WHERE date = "' . date('Ymd') . '" AND id_restaurant = ' . $idRestaurant . ' AND caller = "' . $identifiant . '"');
   }
-  
+
   // PHYSIQUE : Suppression de tous les choix d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteTousChoix($identifiant)

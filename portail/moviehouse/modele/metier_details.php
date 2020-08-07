@@ -9,7 +9,6 @@
 
     // Contrôle film existant
     $reponse = $bdd->query('SELECT * FROM movie_house WHERE id = ' . $idFilm);
-    $donnees = $reponse->fetch();
 
     if ($reponse->rowCount() > 0)
       $filmExistant = true;
@@ -223,7 +222,6 @@
     // Récupération des variables
     $idFilm      = $post['id_film'];
     $nomFilm     = $post['nom_film'];
-    $toDelete    = 'N';
     $dateTheater = formatDateForInsert($post['date_theater']);
     $dateRelease = formatDateForInsert($post['date_release']);
     $link        = $post['link'];

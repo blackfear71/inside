@@ -9,7 +9,7 @@
   function physiqueNombreNotificationsJour()
   {
     // Initialisations
-    $nombrebNotifications = 0;
+    $nombreNotifications = 0;
 
     // Requête
     global $bdd;
@@ -20,12 +20,12 @@
 
     $data = $req->fetch();
 
-    $nombrebNotifications = $data['nombreNotifications'];
+    $nombreNotifications = $data['nombreNotifications'];
 
     $req->closeCursor();
 
     // Retour
-    return $nombrebNotifications;
+    return $nombreNotifications;
   }
 
   // PHYSIQUE : Lecture nombre de notifications de la semaine
@@ -33,7 +33,7 @@
   function physiqueNombreNotificationsSemaine($lundi, $aujourdhui)
   {
     // Initialisations
-    $nombrebNotifications = 0;
+    $nombreNotifications = 0;
 
     // Requête
     global $bdd;
@@ -44,12 +44,12 @@
 
     $data = $req->fetch();
 
-    $nombrebNotifications = $data['nombreNotifications'];
+    $nombreNotifications = $data['nombreNotifications'];
 
     $req->closeCursor();
 
     // Retour
-    return $nombrebNotifications;
+    return $nombreNotifications;
   }
 
   // PHYSIQUE : Lecture nombre de bugs

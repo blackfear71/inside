@@ -7,7 +7,7 @@
     $modele = '';
 
     // Contenu
-    $modele = '<html lang="fr">';
+    $modele .= '<html lang="fr">';
       $modele .= '<head>';
         // CSS
         $modele .= '<style type="text/css">';

@@ -1013,7 +1013,7 @@ var loadFile = function(event, id)
         break;
     }
 
-    output.setAttribute('style','transform: rotate(' + degrees + 'deg)');
+    output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
   });
 };
 

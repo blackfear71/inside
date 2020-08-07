@@ -441,7 +441,7 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
+        $control_ok = uploadFile($fileDatas, $imageDir);
 
         if ($control_ok == true)
         {
@@ -450,7 +450,7 @@
 
           // Rotation de l'image (si JPEG)
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            $rotate = rotateImage($imageDir . $newName, $typeImage);
+            rotateImage($imageDir . $newName, $typeImage);
 
           // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
           imagethumb($imageDir . $newName, $imageDir . $newName, 2000, FALSE, FALSE);
@@ -566,7 +566,7 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
+        $control_ok = uploadFile($fileDatas, $imageDir);
 
         if ($control_ok == true)
         {
@@ -575,7 +575,7 @@
 
           // Rotation de l'image (si JPEG)
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            $rotate = rotateImage($imageDir . $newName, $typeImage);
+            rotateImage($imageDir . $newName, $typeImage);
 
           // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
           imagethumb($imageDir . $newName, $imageDir . $newName, 2000, FALSE, FALSE);

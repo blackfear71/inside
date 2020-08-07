@@ -450,7 +450,7 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($files['image'], $fileDatas, $imageDir);
+      $control_ok = uploadFile($fileDatas, $imageDir);
 
       // Rotation de l'image
       if ($control_ok == true)
@@ -459,7 +459,7 @@
         $typeImage = $fileDatas['type_file'];
 
         if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-          $rotate = rotateImage($imageDir . $newName, $typeImage);
+          rotateImage($imageDir . $newName, $typeImage);
       }
     }
 
@@ -689,7 +689,6 @@
 
     // Génération succès (quand on vote, une seule prise en compte, et quand on retire son vote)
     $reponse3 = $bdd->query('SELECT * FROM collector WHERE id = ' . $idCollector . ' AND speaker = "' . $user . '"');
-    $donnees3 = $reponse3->fetch();
 
     if ($reponse3->rowCount() > 0)
       $selfSatisfied = true;
