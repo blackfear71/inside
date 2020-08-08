@@ -91,7 +91,7 @@ $(function()
     // Fermeture des détails si besoin
     if ($('.fond_details').css('display') != 'none')
     {
-      idDetails = $('.fond_details').attr('id');
+      var idDetails = $('.fond_details').attr('id');
       afficherMasquerIdWithDelay(idDetails);
     }
 
@@ -193,16 +193,19 @@ $(window).on('orientationchange', function(e)
 // Fige la taille de l'écran
 function fixViewport()
 {
+  var viewHeight;
+  var viewWidth;
+
   // On inverse hauteur et largeur si on change l'orientation de l'écran pour conserver des proportions identiques
   if ($(window).height() < $(window).width())
   {
-    var viewHeight = $(window).width();
-    var viewWidth  = $(window).height();
+    viewHeight = $(window).width();
+    viewWidth  = $(window).height();
   }
   else
   {
-    var viewHeight = $(window).height();
-    var viewWidth  = $(window).width();
+    viewHeight = $(window).height();
+    viewWidth  = $(window).width();
   }
 
   var viewport = document.querySelector('meta[name=viewport]');
@@ -270,10 +273,10 @@ function touchStartCelsius(celsius, e)
   }, 200);
 
   // Positions initiales élément et souris
-  celsiusPosX = celsius.offset().left;
-  celsiusPosY = celsius.offset().top;
-  touchPosX   = e.originalEvent.touches[0].pageX;
-  touchPosY   = e.originalEvent.touches[0].pageY;
+  var celsiusPosX = celsius.offset().left;
+  var celsiusPosY = celsius.offset().top;
+  var touchPosX   = e.originalEvent.touches[0].pageX;
+  var touchPosY   = e.originalEvent.touches[0].pageY;
 
   celsius.data('initCelsiusPosX', celsiusPosX);
   celsius.data('initCelsiusPosY', celsiusPosY);
@@ -375,6 +378,8 @@ function loadingPage()
 {
   if ($('.zone_loading_image').length)
   {
+    var angle;
+
     // Calcul de l'angle courant
     var matrix = $('#loading_image').css('transform');
 
@@ -383,13 +388,13 @@ function loadingPage()
       var values = matrix.split('(')[1].split(')')[0].split(',');
       var a      = values[0];
       var b      = values[1];
-      var angle  = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+      angle      = Math.round(Math.atan2(b, a) * (180 / Math.PI));
 
       if (angle < 0)
         angle = angle + 360;
     }
     else
-      var angle = 0;
+      angle = 0;
 
     // On rajoute 45 degrés
     angle += 45;
@@ -443,6 +448,8 @@ function masquerSupprimerIdWithDelay(id)
 // Ouvre une zone sous un titre
 function openSection(titre, zone, forcage)
 {
+  var angle;
+
   // Calcul de l'angle
   var fleche = titre.children('.fleche_titre_section');
   var matrix = fleche.css('transform');
@@ -452,13 +459,13 @@ function openSection(titre, zone, forcage)
     var values = matrix.split('(')[1].split(')')[0].split(',');
     var a      = values[0];
     var b      = values[1];
-    var angle  = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+    angle      = Math.round(Math.atan2(b, a) * (180 / Math.PI));
 
     if (angle < 0)
       angle = angle + 360;
   }
   else
-    var angle = 0;
+    angle = 0;
 
   fleche.css('transition', 'all ease 0.2s');
 
@@ -678,6 +685,8 @@ function formatAmountForDisplay(amount, withCurrency)
 
   if (amount != '')
   {
+    var currency;
+
     // Initialisation de la devise
     if (withCurrency == true)
       currency = ' €';
@@ -745,7 +754,7 @@ function formatUnknownUser(pseudo, majuscule, italique)
     if (majuscule == true)
     {
       if (italique == true)
-        pseudo = '<i>Un ancien utilisateur</i';
+        pseudo = '<i>Un ancien utilisateur</i>';
       else
         pseudo = 'Un ancien utilisateur';
     }

@@ -191,7 +191,7 @@ $(function()
   // Affiche la saisie "Autre" (modification)
   $('.changeSpeaker').on('change', function()
   {
-    idCollector = $(this).attr('id').replace('speaker_', '');
+    var idCollector = $(this).attr('id').replace('speaker_', '');
 
     afficherModifierOther('speaker_' + idCollector, 'other_speaker_' + idCollector);
   });

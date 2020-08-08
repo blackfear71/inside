@@ -133,7 +133,7 @@ $(function()
   // Change la couleur de l'ingrédient à la saisie
   $(document).on('input', '.saisieIngredient', function()
   {
-    idIngredient = $(this).attr('id');
+    var idIngredient = $(this).attr('id');
 
     changeIngredientColor(idIngredient);
   });

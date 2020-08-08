@@ -519,6 +519,8 @@ function initMasonry()
 // Rotation icône affichage log
 function rotateIcon(id)
 {
+  var angle;
+
   // Calcul de l'angle
   var matrix = $('#' + id).css('transform');
 
@@ -527,13 +529,13 @@ function rotateIcon(id)
     var values = matrix.split('(')[1].split(')')[0].split(',');
     var a      = values[0];
     var b      = values[1];
-    var angle  = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+    angle      = Math.round(Math.atan2(b, a) * (180 / Math.PI));
 
     if (angle < 0)
       angle = angle + 360;
   }
   else
-    var angle = 0;
+    angle = 0;
 
   // Application style
   $('#' + id).css('transition', 'all ease 0.4s');

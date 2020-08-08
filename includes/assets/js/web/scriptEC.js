@@ -372,9 +372,9 @@ function updateExpense(idDepense, year)
           montantDes += '<div class="pseudo_depense">' + formatUnknownUser(user.pseudo, true, true) + '</div>';
 
           // Avatar
-          $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
+          var avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
 
-          montantDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
+          montantDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_depense" />';
 
           // Identifiant (caché)
           montantDes += '<input type="hidden" name="identifiant_montant[]" value="' + identifiant + '" />';
@@ -432,9 +432,9 @@ function updateExpense(idDepense, year)
           partsDes += '<div class="pseudo_depense">' + formatUnknownUser(user.pseudo, true, true) + '</div>';
 
           // Avatar
-          $avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
+          var avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
 
-          partsDes += '<img src="' + $avatarFormatted['path'] + '" alt="' + $avatarFormatted['alt'] + '" title="' + $avatarFormatted['title'] + '" class="avatar_depense" />';
+          partsDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_depense" />';
 
           // Identifiant (caché)
           partsDes += '<input type="hidden" name="identifiant_quantite[]" value="' + identifiant + '" />';
@@ -479,21 +479,24 @@ function resetSaisie(zone, year, type)
 
     if (call == 'doModifier' || call == 'doModifierMontants')
     {
+      var action;
+      var titre;
+
       if (type == 'M')
       {
         // Action du formulaire
-        var action = 'expensecenter.php?year=' + year + '&action=doInsererMontants';
+        action = 'expensecenter.php?year=' + year + '&action=doInsererMontants';
 
         // Titre
-        var titre = 'Saisir des montants';
+        titre = 'Saisir des montants';
       }
       else
       {
         // Action du formulaire
-        var action = 'expensecenter.php?year=' + year + '&action=doInserer';
+        action = 'expensecenter.php?year=' + year + '&action=doInserer';
 
         // Titre
-        var titre = 'Saisir une dépense';
+        titre = 'Saisir une dépense';
       }
 
       // Acheteur

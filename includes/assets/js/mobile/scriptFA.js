@@ -245,11 +245,11 @@ function showDetails(idProposition)
 
   $.each(proposition['details'], function()
   {
-    ligne  = '';
+    var ligne  = '';
 
     ligne += '<div class="zone_user_details">';
       // Avatar
-      avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, 'avatar');
+      var avatarFormatted = formatAvatar(this['avatar'], this['pseudo'], 2, 'avatar');
 
       ligne += '<div class="zone_avatar_user_details">';
         ligne += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_user_details" />';

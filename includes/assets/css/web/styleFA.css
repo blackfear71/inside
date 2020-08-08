@@ -104,7 +104,7 @@
 	width: calc(100% - 40px);
 	background-color: #e3e3e3;
 	padding: 5px 10px 5px 10px;
-	margin: 0px 10px 0px 10px;
+	margin: 0 10px 0 10px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
@@ -216,8 +216,6 @@
 	padding-right: 5px;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -238,8 +236,6 @@
 	margin-right: auto;
 	margin-top: 10px;
 	margin-bottom: 5px;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -258,8 +254,6 @@
 	padding-left: 5px;
 	padding-right: 5px;
 	margin-left: 10px;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -287,7 +281,6 @@
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
-	border: 0;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -430,7 +423,6 @@
 	width: 180px;
 	vertical-align: top;
 	margin-bottom: 20px;
-	background-color: #ff1937;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
 	overflow: hidden;
@@ -1436,8 +1428,6 @@
 	padding-left: 2.5px;
 	padding-right: 2.5px;
 	margin-right: 5px;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -1462,7 +1452,6 @@
 	font-size: 100%;
 	color: #262626;
 	cursor: pointer;
-	border: 0;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -1601,8 +1590,6 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 10px;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -1625,7 +1612,6 @@
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
-	border: 0;
 	vertical-align: top;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -1648,7 +1634,6 @@
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
-	border: 0;
 	vertical-align: top;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -2271,7 +2256,7 @@
 
 .nom_restaurant
 {
-	padding: 10px 10px 5px 0px;
+	padding: 10px 10px 5px 0;
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;

@@ -13,11 +13,11 @@ $(function()
   $('#progress_circle_header').circlize(
   {
 		radius: 32,
-    percentage: $('#progress_circle_header').attr('data-perc'),
-		text: $('#progress_circle_header').attr('data-text'),
-    min: $('#progress_circle_header').attr('data-perc'),
-    max: 100,
-    typeUse: "useText",
+        percentage: $('#progress_circle_header').attr('data-perc'),
+        text: $('#progress_circle_header').attr('data-text'),
+        min: $('#progress_circle_header').attr('data-perc'),
+        max: 100,
+        typeUse: "useText",
 		useAnimations: false,
 		useGradient: false,
 		background: "white",
@@ -638,10 +638,9 @@ function showNotifications()
 {
   $.get('/inside/includes/functions/script_commun.php', {function: 'getDetailsNotifications'}, function(data)
   {
-    var identifiant            = data.identifiant;
+    var identifiant                = data.identifiant;
     var nombreNotificationsJour    = data.nombreNotificationsJour;
     var nombreNotificationsSemaine = data.nombreNotificationsSemaine;
-    var html                   = '';
 
     // On n'affiche le détail que si on n'est pas l'admin
     if (identifiant != 'admin')
@@ -734,6 +733,8 @@ function formatAmountForDisplay(amount, withCurrency)
 
   if (amount != '')
   {
+    var currency;
+
     // Initialisation de la devise
     if (withCurrency == true)
       currency = ' €';

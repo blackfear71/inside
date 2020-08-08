@@ -384,7 +384,7 @@ $(function()
   // Change la couleur du type à la saisie
   $(document).on('input', '.saisieType', function()
   {
-    idType = $(this).attr('id');
+    var idType = $(this).attr('id');
 
     changeTypeColor(idType);
   });
@@ -404,7 +404,7 @@ $(function()
   // Affiche la saisie "Autre" (modification)
   $('.changeLieu').on('change', function()
   {
-    idRestaurant = $(this).attr('id').replace('update_location_', '');
+    var idRestaurant = $(this).attr('id').replace('update_location_', '');
 
     afficherModifierOther('update_location_' + idRestaurant, 'other_location_' + idRestaurant, 'saisie_nom');
   });
@@ -412,7 +412,7 @@ $(function()
   // Charge l'image (modification)
   $('.loadModifierRestaurant').on('change', function()
   {
-    idRestaurant = $(this).attr('id').replace('modifier_image_', '');
+    var idRestaurant = $(this).attr('id').replace('modifier_image_', '');
 
     loadFile(event, 'img_restaurant_' + idRestaurant);
   });
