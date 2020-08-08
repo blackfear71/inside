@@ -31,8 +31,7 @@ $(function()
   // Affiche la saisie restaurant liée au lieu
   $(document).on('change', '.afficherRestaurant', function()
   {
-    var idBouton  = $(this).attr('id');
-    var num       = $(this).attr('id').replace('select_lieu_', '');
+    var num = $(this).attr('id').replace('select_lieu_', '');
 
     afficherListboxRestaurants('select_lieu_' + num, 'zone_listbox_' + num);
   });
@@ -199,8 +198,7 @@ $(function()
   // Affiche la saisie restaurant liée au lieu (résumé)
   $(document).on('change', '.afficherRestaurantResume', function()
   {
-    var idBouton  = $(this).attr('id');
-    var num        = $(this).attr('id').replace('select_lieu_resume_', '');
+    var num = $(this).attr('id').replace('select_lieu_resume_', '');
 
     afficherListboxRestaurantsResume('select_lieu_resume_' + num, 'zone_listbox_resume_' + num);
   });
@@ -209,8 +207,8 @@ $(function()
   $(document).on('click', '.annulerLieuResume', function()
   {
     var idAnnuler = $(this).attr('id');
-    var idValider = 'valider_restaurant_resume_' + num;
     var num       = $(this).attr('id').replace('annuler_restaurant_resume_', '');
+    var idValider = 'valider_restaurant_resume_' + num;
     var idZone    = 'zone_listbox_resume_' + num;
 
     cacherListboxRestaurantsResume(idZone, idValider, idAnnuler);
@@ -729,8 +727,6 @@ function afficherListboxHoraires(id, zone, type, idChoix)
 // Cache les lisbox des horaires
 function cacherListboxHoraires(zone, bouton, heures, minutes)
 {
-  var num = heures.substr(-1);
-
   $('#' + heures).remove();
   $('#' + minutes).remove();
   $('#' + bouton).remove();
@@ -990,7 +986,7 @@ var loadFile = function(event, id)
   EXIF.getData(event.target.files[0], function()
   {
     var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees     = 0;
+    var degrees;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
     switch (orientation)

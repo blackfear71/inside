@@ -101,9 +101,9 @@ $(function()
   // Affiche un aperçu d'un thème
   $('.apercuTheme').click(function()
   {
-    var reference = '';
+    var reference;
     var withLogo  = $(this).attr('id').split('_')[0];
-    var logo      = '';
+    var logo;
 
     if (withLogo == 'nologo')
       reference = $(this).attr('id').replace('nologo_', '');

@@ -391,7 +391,7 @@ function loadingPage()
       angle      = Math.round(Math.atan2(b, a) * (180 / Math.PI));
 
       if (angle < 0)
-        angle = angle + 360;
+        angle += 360;
     }
     else
       angle = 0;
@@ -462,7 +462,7 @@ function openSection(titre, zone, forcage)
     angle      = Math.round(Math.atan2(b, a) * (180 / Math.PI));
 
     if (angle < 0)
-      angle = angle + 360;
+      angle += 360;
   }
   else
     angle = 0;

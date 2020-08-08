@@ -86,7 +86,7 @@ $(function()
   });
 
   // Ferme le zoom d'une recette (au clic sur la croix)
-  $(document).on('click', '#fermerRecette', function(event)
+  $(document).on('click', '#fermerRecette', function()
   {
     masquerSupprimerIdWithDelay('zoom_image');
   });
@@ -294,7 +294,7 @@ var loadFile = function(event, id)
   EXIF.getData(event.target.files[0], function()
   {
     var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees     = 0;
+    var degrees;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
     switch (orientation)
@@ -383,9 +383,9 @@ function showRecipe(link, id)
   var split            = path_mini.split('/');
   var image            = split[split.length - 1];
   var recipe           = listRecipes[id];
-  var ingredientsSplit = new Array();
-  var ingredientSplit  = new Array();
-  var ingredients      = new Array();
+  var ingredientsSplit = [];
+  var ingredientSplit  = [];
+  var ingredients      = [];
   var avatarFormatted;
 
   html += '<div id="zoom_image" class="fond_zoom">';

@@ -105,7 +105,7 @@ $(function()
 
   /*** Actions à la saisie ***/
   // Colorise un montant
-  $('.montant').keyup(function(e)
+  $('.montant').keyup(function()
   {
     var idUser = $(this).attr('id').replace('montant_user_', '');
 
@@ -146,15 +146,12 @@ function ajouterPart(zone, quantite, value)
 // Ajoute un montant à un utilisateur
 function ajouterMontant(zone, montant, value)
 {
-  var currentValue = $('#' + montant).val();
-  var newValue     = value;
-
-  if (newValue != '')
+  if (value != '')
   {
     $('#' + zone).css('background-color', '#ff1937');
     $('#' + zone).css('color', 'white');
 
-    $('#' + montant).val(newValue);
+    $('#' + montant).val(value);
   }
   else
   {

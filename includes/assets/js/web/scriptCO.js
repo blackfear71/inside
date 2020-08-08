@@ -326,7 +326,7 @@ var loadFile = function(event, id)
   EXIF.getData(event.target.files[0], function()
   {
     var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees     = 0;
+    var degrees;
 
     // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
     switch (orientation)
