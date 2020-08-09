@@ -11,7 +11,7 @@
         echo '<div class="contenu_saisie">';
           foreach ($onglets as $annee)
           {
-            if ($annee == date('Y'))
+            if ($annee == $_GET['year'])
               echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
             else
               echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';

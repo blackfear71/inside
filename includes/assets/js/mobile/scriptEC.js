@@ -570,10 +570,17 @@ function resetSaisie(zone, year, type)
     }
 
     // On replie les explications
-    var explicationsDepense  = $('#titre_explications_depense');
-    var explicationsMontants = $('#titre_explications_montants');
+    if (type == 'M')
+    {
+      var explicationsMontants = $('#titre_explications_montants');
 
-    openSection(explicationsDepense, 'afficher_explications_depense', 'close');
-    openSection(explicationsMontants, 'afficher_explications_montants', 'close');
+      openSection(explicationsMontants, 'afficher_explications_montants', 'close');
+    }
+    else
+    {
+      var explicationsDepense  = $('#titre_explications_depense');
+
+      openSection(explicationsDepense, 'afficher_explications_depense', 'close');
+    }
   }, 200);
 }
