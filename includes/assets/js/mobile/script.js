@@ -167,26 +167,6 @@ $(function()
     // Déplacement Celsius
     touchMoveCelsius($(this), e);
   });
-
-  // Ouverture menu latéral gauche
-  $(document).on('swiperight', function()
-  {
-    if ($('.aside_portail').css('left') != '0px')
-      deployerMenuPortail();
-
-    if ($('.aside_user').css('right') == '0px')
-      deployerMenuUser();
-  });
-
-  // Ouverture menu latéral droit
-  $(document).on('swipeleft', function()
-  {
-    if ($('.aside_portail').css('left') == '0px')
-      deployerMenuPortail();
-
-    if ($('.aside_user').css('right') != '0px')
-      deployerMenuUser();
-  });
 });
 
 // Au chargement du document complet
