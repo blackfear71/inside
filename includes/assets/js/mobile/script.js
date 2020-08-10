@@ -169,21 +169,23 @@ $(function()
   });
 
   // Ouverture menu latéral gauche
-  $(document).on('swipeleft', function()
+  $(document).on('swiperight', function()
   {
-    deployerMenuPortail();
+    if ($('.aside_portail').css('left') != '0px')
+      deployerMenuPortail();
 
     if ($('.aside_user').css('right') == '0px')
       deployerMenuUser();
   });
 
   // Ouverture menu latéral droit
-  $(document).on('swiperight', function()
+  $(document).on('swipeleft', function()
   {
     if ($('.aside_portail').css('left') == '0px')
       deployerMenuPortail();
 
-    deployerMenuUser();
+    if ($('.aside_user').css('right') != '0px')
+      deployerMenuUser();
   });
 });
 
