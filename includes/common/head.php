@@ -56,9 +56,13 @@
 <!-- Scripts spécifiques -->
 <?php if (isset($angularHead) AND $angularHead == true) { ?>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="/inside/includes/libraries/js/angular.min.js"><\/script>')</script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-animate.min.js"></script>
+  <script>window.angular || document.write('<script src="/inside/includes/libraries/js/angular-animate.min.js"><\/script>')</script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-resource.min.js"></script>
+  <script>window.angular || document.write('<script src="/inside/includes/libraries/js/angular-resource.min.js"><\/script>')</script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-sanitize.min.js"></script>
+  <script>window.angular || document.write('<script src="/inside/includes/libraries/js/angular-sanitize.min.js"><\/script>')</script>
 <?php } ?>
 
 <?php if (!empty($scriptHead)) { ?>
