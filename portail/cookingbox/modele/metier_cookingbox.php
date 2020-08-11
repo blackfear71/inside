@@ -93,7 +93,7 @@
                                                         AND name        = ""
                                                         AND picture     = ""
                                                         AND (year < ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week <= ' . date('W') . '))
-                                                   ORDER BY year DESC, week DESC');
+                                                      ORDER BY year DESC, week DESC');
     while ($donnees = $reponse->fetch())
     {
       if ($donnees['year'] != $previousYear)
@@ -504,6 +504,7 @@
   // RETOUR : Id recette
   function updateRecipe($post, $files, $user)
   {
+    $idRecipe   = NULL;
     $control_ok = true;
 
     global $bdd;

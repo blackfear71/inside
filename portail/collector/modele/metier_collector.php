@@ -355,30 +355,30 @@
 
       if ($post['speaker'] == 'other')
       {
-        $collector = array('date_add'       => date('Ymd'),
-                           'author'         => $user,
-                           'speaker'        => $post['other_speaker'],
-                           'type_speaker'   => $post['speaker'],
-                           'date_collector' => formatDateForInsert($post['date_collector']),
-                           'type_collector' => $post['type_collector'],
-                           'collector'      => $collector,
-                           'context'        => deleteInvisible($post['context'])
-                          );
+        $culte = array('date_add'       => date('Ymd'),
+                       'author'         => $user,
+                       'speaker'        => $post['other_speaker'],
+                       'type_speaker'   => $post['speaker'],
+                       'date_collector' => formatDateForInsert($post['date_collector']),
+                       'type_collector' => $post['type_collector'],
+                       'collector'      => $collector,
+                       'context'        => deleteInvisible($post['context'])
+                      );
       }
       else
       {
-        $collector = array('date_add'       => date('Ymd'),
-                           'author'         => $user,
-                           'speaker'        => $post['speaker'],
-                           'type_speaker'   => 'user',
-                           'date_collector' => formatDateForInsert($post['date_collector']),
-                           'type_collector' => $post['type_collector'],
-                           'collector'      => $collector,
-                           'context'        => deleteInvisible($post['context'])
-                          );
+        $culte = array('date_add'       => date('Ymd'),
+                       'author'         => $user,
+                       'speaker'        => $post['speaker'],
+                       'type_speaker'   => 'user',
+                       'date_collector' => formatDateForInsert($post['date_collector']),
+                       'type_collector' => $post['type_collector'],
+                       'collector'      => $collector,
+                       'context'        => deleteInvisible($post['context'])
+                      );
       }
 
-			// Stockage de l'enregistrement en table
+      // Stockage de l'enregistrement en table
       $req = $bdd->prepare('INSERT INTO collector(date_add,
                                                   author,
 																									speaker,
@@ -397,7 +397,7 @@
 																								  :collector,
                                                   :context
                                                  )');
-      $req->execute($collector);
+      $req->execute($culte);
 		  $req->closeCursor();
 
       // Génération notification phrase culte ajoutée

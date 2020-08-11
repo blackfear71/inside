@@ -261,7 +261,7 @@
       $prevTotal   = $rankingUsers[0]->getTotal();
       $currentRank = 1;
 
-      foreach ($rankingUsers as &$rankUser)
+      foreach ($rankingUsers as $rankUser)
       {
         $currentTotal = $rankUser->getTotal();
 
@@ -273,8 +273,6 @@
 
         $rankUser->setRank($currentRank);
       }
-
-      unset($rankUser);
     }
 
     return $rankingUsers;

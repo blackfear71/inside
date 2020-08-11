@@ -116,15 +116,13 @@
           $detailsProposition = physiqueDetailsProposition($proposition->getId_restaurant());
 
           // Recherche pseudo et avatar utilisateur
-          foreach ($detailsProposition as &$detail)
+          foreach ($detailsProposition as $detail)
           {
             $user = physiqueUser($detail->getIdentifiant());
 
             $detail->setPseudo($user->getPseudo());
             $detail->setAvatar($user->getAvatar());
           }
-
-          unset($detail);
 
           // Récupération des détails
           $proposition->setDetails($detailsProposition);

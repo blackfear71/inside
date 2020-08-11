@@ -103,7 +103,7 @@
           Stars::secureData($etoiles);
         }
 
-        foreach ($listeCommentaires as &$comment)
+        foreach ($listeCommentaires as $comment)
         {
           Commentaire::secureData($comment);
         }

@@ -577,7 +577,7 @@
         $prevRank    = $listeRangSuccess[0]->getValue();
         $currentRank = 1;
 
-        foreach ($listeRangSuccess as $key => &$rangSuccessUser)
+        foreach ($listeRangSuccess as $key => $rangSuccessUser)
         {
           $currentTotal = $rangSuccessUser->getValue();
 
@@ -593,8 +593,6 @@
           else
             $rangSuccessUser->setRank($currentRank);
         }
-
-        unset($rangSuccessUser);
       }
     }
 
