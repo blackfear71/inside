@@ -316,8 +316,8 @@
 
 .form_update_avatar .zone_loading_form
 {
-  padding-top: 13.5px;
-  padding-bottom: 13.5px;
+	padding-top: 13.5px;
+	padding-bottom: 13.5px;
 }
 
 .saisie_bouton
@@ -325,10 +325,10 @@
 	width: 100%;
 	padding-top: 5px;
 	padding-bottom: 5px;
-  border-radius: 2px;
+	border-radius: 2px;
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 100%;
+	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
 	cursor: pointer;
@@ -641,7 +641,7 @@
 
 .progression_succes::-moz-meter-bar
 {
-  background: #ff1937;
+	background: #ff1937;
 	border-radius: 5px;
 }
 
@@ -876,7 +876,7 @@
 
 .selection_theme
 {
-  float: right;
+	float: right;
 	position: relative;
 	z-index: 2;
 	margin-left: -150px;
@@ -885,10 +885,10 @@
 	width: 140px;
 	line-height: 30px;
 	text-align: center;
-  background-color: #70d55d;
-  border-radius: 2px;
-  font-family: robotolight, Verdana, sans-serif;
-  color: white;
+	background-color: #70d55d;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
 	box-shadow: 0 0 3px #7c7c7c;
 }
 

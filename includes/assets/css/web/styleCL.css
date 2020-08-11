@@ -130,10 +130,10 @@
 /*** Journaux ***/
 .zone_changelog_right
 {
-  display: none;
-  width: calc(100% - 220px);
-  margin-left: 20px;
-  vertical-align: top;
+	display: none;
+	width: calc(100% - 220px);
+	margin-left: 20px;
+	vertical-align: top;
 }
 
 .zone_actions
@@ -167,16 +167,16 @@
 
 .notes_changelog
 {
-  line-height: 30px;
+	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 130%;
-  color: #262626;
-  text-align: justify;
+	font-size: 130%;
+	color: #262626;
+	text-align: justify;
 }
 
 .notes_changelog::first-letter
 {
-  font-size: 250%;
+	font-size: 250%;
 	font-family: robotoregular, Verdana, sans-serif;
 }
 

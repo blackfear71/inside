@@ -63,7 +63,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 120%;
+	font-size: 120%;
 	color: white;
 	border-bottom: solid 2px #c81932;
 }
@@ -96,9 +96,9 @@
 .form_saisie_collector, .form_saisie_image
 {
 	width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 	background-color: white;
 	border-top: solid 1px #d3d3d3;
 	max-height: calc(100vh - 250px);
@@ -154,19 +154,19 @@
 .saisie_date_collector
 {
 	display: inline-block;
-  width: calc(50% - 220px);
+	width: calc(50% - 220px);
 	vertical-align: middle;
 	margin-right: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
-  line-height: 32px;
+	line-height: 32px;
 	border: 0;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 100%;
+	font-size: 100%;
 	color: #262626;
-  background-color: white;
+	background-color: white;
 }
 
 .zone_bouton_saisie_collector, .zone_bouton_saisie_image
@@ -179,12 +179,12 @@
 .saisie_bouton
 {
 	width: 100%;
-  height: 34px;
+	height: 34px;
 	line-height: 34px;
-  border-radius: 2px;
+	border-radius: 2px;
 	border: 0;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 100%;
+	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
 	cursor: pointer;
@@ -199,16 +199,16 @@
 
 .saisie_collector
 {
-  width: calc(100% - 20px);
+	width: calc(100% - 20px);
 	margin-top: 10px;
 	height: 70px;
-  min-height: 70px;
+	min-height: 70px;
 	padding: 5px 10px 5px 10px;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-  resize: vertical;
-  border-radius: 2px;
+	resize: vertical;
+	border-radius: 2px;
 	background-color: white;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -373,14 +373,14 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-  width: 30px;
-  height: 30px;
-  background-image: url("/inside/includes/icons/common/edit.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: center;
+	width: 30px;
+	height: 30px;
+	background-image: url("/inside/includes/icons/common/edit.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
 	background-color: transparent;
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .form_delete_collector
@@ -392,15 +392,15 @@
 
 .icon_delete_collector
 {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  background-image: url("/inside/includes/icons/common/delete.png");
-  background-size: 25px 25px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/delete.png");
+	background-size: 25px 25px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 .zone_bouton_validation
@@ -414,23 +414,23 @@
 
 .zone_bouton_validation .zone_loading_form
 {
-  padding-top: 12.5px;
-  padding-bottom: 12.5px;
+	padding-top: 12.5px;
+	padding-bottom: 12.5px;
 }
 
 .icon_validate_collector
 {
 	display: inline-block;
 	vertical-align: middle;
-  width: 30px;
-  height: 30px;
-  border: 0;
-  background-image: url("/inside/includes/icons/common/validate.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/validate.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 .icone_cancel_collector
@@ -438,15 +438,15 @@
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 10px;
-  width: 30px;
-  height: 30px;
-  border: 0;
-  background-image: url("/inside/includes/icons/common/cancel.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/cancel.png");
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 .zone_avatar_collector
@@ -485,12 +485,12 @@
 .zone_date_collector
 {
 	text-align: center;
-  background-color: #2eb2f4;
+	background-color: #2eb2f4;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
-  color: white;
+	color: white;
 }
 
 .icone_collector
@@ -530,21 +530,21 @@
 
 .current_vote
 {
-  width: 30px;
-  filter: drop-shadow(0px 0px 1px #5c5c5c);
+	width: 30px;
+	filter: drop-shadow(0px 0px 1px #5c5c5c);
 }
 
 .zone_smileys
 {
-  background-color: white;
+	background-color: white;
 	box-shadow: 0 0 3px #7c7c7c;
-  float: right;
+	float: right;
 	padding: 5px;
 	margin-top: -57px;
 	margin-right: 3px;
 	border-radius: 40px;
 	position: relative;
-  z-index: 1;
+	z-index: 1;
 }
 
 /*** Texte & contexte ***/
@@ -560,20 +560,20 @@
 
 .quote_1
 {
-  float: left;
+	float: left;
 	margin-left: 10px;
 	margin-top: 10px;
-  width: 20px;
-  filter: drop-shadow(0px 0px 1px #7c7c7c);
+	width: 20px;
+	filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .quote_2
 {
-  float: right;
+	float: right;
 	margin-right: 10px;
 	margin-top: -30px;
-  width: 20px;
-  filter: drop-shadow(0px 0px 1px #7c7c7c);
+	width: 20px;
+	filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .image_collector
@@ -611,11 +611,11 @@
 .text_context
 {
 	width: calc(100% - 80px);
-  background-color: #d3d3d3;
+	background-color: #d3d3d3;
 	font-family: robotolight, Verdana, sans-serif;
-  font-style: italic;
+	font-style: italic;
 	color: #262626;
-  text-align: justify;
+	text-align: justify;
 	padding: 10px 40px 20px 40px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -627,11 +627,11 @@
 .text_context_golden
 {
 	width: calc(100% - 80px);
-  background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
+	background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
 	font-family: robotolight, Verdana, sans-serif;
-  font-style: italic;
+	font-style: italic;
 	color: #262626;
-  text-align: justify;
+	text-align: justify;
 	padding: 10px 40px 20px 40px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -673,55 +673,55 @@
 
 .smiley_0
 {
-  background-image: url("/inside/includes/icons/common/smileys/0.png");
+	background-image: url("/inside/includes/icons/common/smileys/0.png");
 }
 
 .smiley_1
 {
-  background-image: url("/inside/includes/icons/common/smileys/1.png");
+	background-image: url("/inside/includes/icons/common/smileys/1.png");
 }
 
 .smiley_2
 {
-  background-image: url("/inside/includes/icons/common/smileys/2.png");
+	background-image: url("/inside/includes/icons/common/smileys/2.png");
 }
 
 .smiley_3
 {
-  background-image: url("/inside/includes/icons/common/smileys/3.png");
+	background-image: url("/inside/includes/icons/common/smileys/3.png");
 }
 
 .smiley_4
 {
-  background-image: url("/inside/includes/icons/common/smileys/4.png");
+	background-image: url("/inside/includes/icons/common/smileys/4.png");
 }
 
 .smiley_5
 {
-  background-image: url("/inside/includes/icons/common/smileys/5.png");
+	background-image: url("/inside/includes/icons/common/smileys/5.png");
 }
 
 .smiley_6
 {
-  background-image: url("/inside/includes/icons/common/smileys/6.png");
+	background-image: url("/inside/includes/icons/common/smileys/6.png");
 }
 
 .smiley_7
 {
-  background-image: url("/inside/includes/icons/common/smileys/7.png");
+	background-image: url("/inside/includes/icons/common/smileys/7.png");
 }
 
 .smiley_8
 {
-  background-image: url("/inside/includes/icons/common/smileys/8.png");
+	background-image: url("/inside/includes/icons/common/smileys/8.png");
 }
 
 .smiley_votes_1, .smiley_votes_2, .smiley_votes_3, .smiley_votes_4, .smiley_votes_5, .smiley_votes_6, .smiley_votes_7, .smiley_votes_8
 {
-  float: left;
-  width: 25px;
-  margin-right: -7px;
-  border-radius: 50%;
+	float: left;
+	width: 25px;
+	margin-right: -7px;
+	border-radius: 50%;
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
@@ -745,9 +745,9 @@
 .smiley_votes_4:hover ~ .noms_votes_4, .smiley_votes_5:hover ~ .noms_votes_5, .smiley_votes_6:hover ~ .noms_votes_6,
 .smiley_votes_7:hover ~ .noms_votes_7, .smiley_votes_8:hover ~ .noms_votes_8
 {
-  display: block;
-  position: relative;
-  z-index: 1;
+	display: block;
+	position: relative;
+	z-index: 1;
 }
 
 /*** Modification phrases cultes ***/
@@ -759,33 +759,33 @@
 
 .modify_speaker
 {
-  display: block;
-  width: calc(50% + 10px);
+	display: block;
+	width: calc(50% + 10px);
 	height: 30px;
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 	margin-bottom: 5px;
-  border-radius: 2px;
-  border: 0;
+	border-radius: 2px;
+	border: 0;
 	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 80%;
+	font-size: 80%;
 	color: #262626;
 }
 
 .modify_other
 {
-  display: block;
-  width: 50%;
+	display: block;
+	width: 50%;
 	height: 20px;
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 	margin-bottom: 5px;
-  border-radius: 2px;
-  border: 0;
+	border-radius: 2px;
+	border: 0;
 	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 80%;
+	font-size: 80%;
 	color: #262626;
 }
 
@@ -796,52 +796,52 @@
 
 .modify_date_collector
 {
-  display: block;
-  width: 50%;
+	display: block;
+	width: 50%;
 	height: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 2px;
-  border: 0;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 2px;
+	border: 0;
 	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 80%;
+	font-size: 80%;
 	color: #262626;
 }
 
 .modify_text_collector
 {
-  resize: vertical;
-  width: calc(100% - 100px);
+	resize: vertical;
+	width: calc(100% - 100px);
 	padding: 10px;
 	margin: -20px 40px 10px 40px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
-  border-radius: 2px;
+	border-radius: 2px;
 	border: 0;
-  min-height: 120px;
+	min-height: 120px;
 }
 
 .modify_context_collector
 {
-  resize: vertical;
+	resize: vertical;
 	width: calc(100% - 20px);
 	padding: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
-  border-radius: 2px;
+	border-radius: 2px;
 	border: 0;
-  min-height: 70px;
+	min-height: 70px;
 }
 
 .text_context_update
 {
 	width: calc(100% - 80px);
-  background-color: #d3d3d3;
+	background-color: #d3d3d3;
 	font-family: robotolight, Verdana, sans-serif;
-  font-style: italic;
+	font-style: italic;
 	color: #262626;
-  text-align: justify;
+	text-align: justify;
 	padding: 10px 40px 10px 40px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -853,11 +853,11 @@
 .text_context_golden_update
 {
 	width: calc(100% - 80px);
-  background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
+	background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
 	font-family: robotolight, Verdana, sans-serif;
-  font-style: italic;
+	font-style: italic;
 	color: #262626;
-  text-align: justify;
+	text-align: justify;
 	padding: 10px 40px 10px 40px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;

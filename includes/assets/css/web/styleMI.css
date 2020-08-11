@@ -99,17 +99,17 @@
 
 .texte_details_mission
 {
-  line-height: 30px;
+	line-height: 30px;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 130%;
-  color: #262626;
-  text-align: justify;
+	font-size: 130%;
+	color: #262626;
+	text-align: justify;
 	margin-bottom: 20px;
 }
 
 .texte_details_mission::first-letter
 {
-  font-size: 250%;
+	font-size: 250%;
 	font-family: robotoregular, Verdana, sans-serif;
 }
 
@@ -341,7 +341,7 @@
 {
 	max-width: 50px;
 	max-height: 50px;
-  border-radius: 50%;
+	border-radius: 50%;
 	box-shadow: 0 0 3px #7c7c7c;
 	background-color: #262626;
 }
@@ -351,6 +351,6 @@
 	font-size: 70%;
 	font-family: robotoregular, Verdana, sans-serif;
 	line-height: 15px;
-  color: #262626;
+	color: #262626;
 	word-wrap: break-word;
 }

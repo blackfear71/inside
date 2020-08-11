@@ -24,21 +24,21 @@
 
 .lien_resultat
 {
-  display: block;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  margin-bottom: 10px;
+	display: block;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration: none;
+	margin-bottom: 10px;
 }
 
 .zone_resultat
 {
-  border-radius: 2px;
-  overflow: hidden;
+	border-radius: 2px;
+	overflow: hidden;
 	box-shadow: 0 0 3px #7c7c7c;
 	font-family: robotolight, Verdana, sans-serif;
-  font-size: 120%;
+	font-size: 120%;
 	background-color: #e3e3e3;
 	border-collapse: collapse;
 	width: 100%;
@@ -46,13 +46,13 @@
 
 .zone_resultat_titre
 {
-  background-color: #e3e3e3;
+	background-color: #e3e3e3;
 	width: 80%;
-  line-height: 30px;
-  text-align: justify;
-  vertical-align: middle;
+	line-height: 30px;
+	text-align: justify;
+	vertical-align: middle;
 	padding: 5px 20px 5px 20px;
-  color: #262626;
+	color: #262626;
 }
 
 .lien_resultat:hover .zone_resultat_titre
