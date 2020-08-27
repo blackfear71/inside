@@ -73,7 +73,7 @@
       // Suppression des votes d'une phrase culte
       deleteVotes($_POST);
 
-      // SUppression d'une phrase culte
+      // Suppression d'une phrase culte
       deleteCollector($_POST);
       break;
 
