@@ -7,6 +7,7 @@
   - Bande à part
   - Utilisateurs en attente
   - Ajout de propositions
+  - Ajout de propositions sur mobile
   - Modification de propositions
   - Suppression de propositions
   - Consultation détails propositions

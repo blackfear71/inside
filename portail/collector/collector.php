@@ -38,11 +38,16 @@
         // Initialisation de la sauvegarde en session
         initializeSaveSession();
 
-        // Lecture des données par le modèle
+        // Récupération de la liste des utilisateurs
         $listeUsers = getUsers();
-        $minGolden  = getMinGolden($listeUsers);
-        $nbPages    = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
 
+        // Calcul du minimum de smileys pour être culte (75%)
+        $minGolden = getMinGolden($listeUsers);
+
+        // Récupération de la pagination
+        $nbPages = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
+
+        // Récupération de la liste des phrases cultes ou redirection
         if ($nbPages > 0)
         {
           if ($_GET['page'] > $nbPages)
@@ -56,22 +61,29 @@
       break;
 
     case 'doAjouter':
+      // Insertion d'une phrase culte
       $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
 
+      // Récupération du numéro de page
       if (!empty($idCollector))
         $numeroPage = numeroPageCollector($idCollector);
       break;
 
     case 'doSupprimer':
+      // Suppression des votes d'une phrase culte
       deleteVotes($_POST);
+
+      // SUppression d'une phrase culte
       deleteCollector($_POST);
       break;
 
     case 'doModifier':
+      // Modification d'une phrase culte
       $idCollector = updateCollector($_POST, $_FILES);
       break;
 
     case 'doVoter':
+      // Vote d'un utilisateur
       $idCollector = voteCollector($_POST, $_SESSION['user']['identifiant']);
       break;
 
