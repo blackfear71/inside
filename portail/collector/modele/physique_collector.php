@@ -383,6 +383,56 @@
     return $position;
   }
 
+  // PHYSIQUE : Lecture du vote d'un utilisateur ayant un vote sur une phrase / image culte
+  // RETOUR : Booléen
+  function physiqueVoteCollectorUser($idCollector, $identifiant)
+  {
+    // Initialisations
+    $selfSatisfied = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreVote
+                        FROM collector_users
+                        WHERE id_collector = ' . $idCollector . ' AND identifiant = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreVote'] > 0)
+      $selfSatisfied = true;
+
+    // Retour
+    return $selfSatisfied;
+  }
+
+  // PHYSIQUE : Lecture des utilisateurs ayant un vote sur une phrase / image culte
+  // RETOUR : Liste des utilisateurs
+  function physiqueVotesCollector($idCollector)
+  {
+    // Initialisations
+    $listeUsersVotes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM collector_users
+                        WHERE id_collector = ' . $idCollector . '
+                        ORDER BY identifiant ASC');
+
+    while ($data = $req->fetch())
+    {
+      // On ajoute la ligne au tableau
+      array_push($listeUsersVotes, $data['identifiant']);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeUsersVotes;
+  }
+
   /****************************************************************************/
   /********************************** INSERT **********************************/
   /****************************************************************************/

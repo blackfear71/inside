@@ -20,20 +20,20 @@
                 echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
 
                 // Suppression
-                if ($collector->getType_collector() == 'T')
-                {
-                  echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
-                    echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
-                    echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector eventConfirm" />';
-                    echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="eventMessage" />';
-                  echo '</form>';
-                }
-                elseif ($collector->getType_collector() == 'I')
+                if ($collector->getType_collector() == 'I')
                 {
                   echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
                     echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
                     echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector eventConfirm" />';
                     echo '<input type="hidden" value="Supprimer cette image ?" class="eventMessage" />';
+                  echo '</form>';
+                }
+                else
+                {
+                  echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                    echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
+                    echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector eventConfirm" />';
+                    echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="eventMessage" />';
                   echo '</form>';
                 }
               echo '</div>';
@@ -78,7 +78,12 @@
             echo '<div class="zone_collector_bas">';
               if (!empty($collector->getCollector()))
               {
-                if ($collector->getType_collector() == 'T')
+                if ($collector->getType_collector() == 'I')
+                {
+                  // Image
+                  echo '<a class="agrandirImage"><img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" /></a>';
+                }
+                else
                 {
                   // Apostrophe gauche
                   echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
@@ -88,11 +93,6 @@
 
                   // Apostrophe droite
                   echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
-                }
-                elseif ($collector->getType_collector() == 'I')
-                {
-                  // Image
-                  echo '<a class="agrandirImage"><img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" /></a>';
                 }
 
                 // Rapporteur
@@ -198,21 +198,7 @@
             echo '</div>';
 
             echo '<div class="zone_collector_bas">';
-              if ($collector->getType_collector() == 'T')
-              {
-                // Type de saisie
-                echo '<input type="hidden" name="type_collector" value="T" />';
-
-                // Apostrophe gauche
-                echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
-
-                // Modification citation
-                echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
-
-                // Apostrophe droite
-                echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
-              }
-              elseif ($collector->getType_collector() == 'I')
+              if ($collector->getType_collector() == 'I')
               {
                 // Type de saisie
                 echo '<input type="hidden" name="type_collector" value="I" />';
@@ -229,6 +215,20 @@
                     echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" id="image_collector_' . $collector->getId() . '" alt="' . $collector->getCollector() . '" class="image_update loadImage" />';
                   echo '</div>';
                 echo '</div>';
+              }
+              else
+              {
+                // Type de saisie
+                echo '<input type="hidden" name="type_collector" value="T" />';
+
+                // Apostrophe gauche
+                echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
+
+                // Modification citation
+                echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
+
+                // Apostrophe droite
+                echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
               }
 
               // Contexte

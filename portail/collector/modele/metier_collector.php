@@ -290,6 +290,30 @@
 
       physiqueUpdateCollector($oldCollector->getId(), $collector);
 
+      // Génération succès
+      if ($speaker != $oldCollector->getSpeaker())
+      {
+        if ($oldCollector->getType_speaker() != 'other')
+        {
+          insertOrUpdateSuccesValue('speaker', $oldCollector->getSpeaker(), -1);
+
+          $oldSelfSatified = physiqueVoteCollectorUser($idCollector, $oldCollector->getSpeaker());
+
+          if ($oldSelfSatified == true)
+            insertOrUpdateSuccesValue('self-satisfied', $oldCollector->getSpeaker(), -1);
+        }
+
+        if ($typeSpeaker != 'other')
+        {
+          insertOrUpdateSuccesValue('speaker', $speaker, 1);
+
+          $selfSatisfied = physiqueVoteCollectorUser($idCollector, $speaker);
+
+          if ($selfSatisfied == true)
+            insertOrUpdateSuccesValue('self-satisfied', $speaker, 1);
+        }
+      }
+
       // Message d'alerte
       if ($post['type_collector'] == 'I')
         $_SESSION['alerts']['image_collector_updated'] = true;
@@ -369,9 +393,15 @@
     // Lecture des données de la phrase / image culte
     $collector = physiqueCollector($idCollector);
 
+    // Lecture des votes associés
+    $listeUsersVotes = physiqueVotesCollector($idCollector);
+
     // Suppression image
     if (!empty($collector->getCollector()) AND $collector->getType_collector() == 'I')
       unlink('../../includes/images/collector/' . $collector->getCollector());
+
+    // Suppression des votes associés
+    physiqueDeleteVotes($idCollector);
 
     // Suppression de l'enregistrement en base
     physiqueDeleteCollector($idCollector);
@@ -382,6 +412,20 @@
     else
       deleteNotification('culte', $idCollector);
 
+    // Génération succès
+    insertOrUpdateSuccesValue('listener', $collector->getAuthor(), -1);
+
+    if ($collector->getType_speaker() != 'other')
+      insertOrUpdateSuccesValue('speaker', $collector->getSpeaker(), -1);
+
+    foreach ($listeUsersVotes as $user)
+    {
+      insertOrUpdateSuccesValue('funny', $user, -1);
+
+      if ($collector->getSpeaker() == $user)
+        insertOrUpdateSuccesValue('self-satisfied', $user, -1);
+    }
+
     // Message d'alerte
     if ($collector->getType_collector() == 'I')
       $_SESSION['alerts']['image_collector_deleted'] = true;
@@ -389,17 +433,6 @@
       $_SESSION['alerts']['collector_deleted'] = true;
   }
 
-  // METIER : Suppression des votes si phrase culte supprimée
-  // RETOUR : Aucun
-  function deleteVotes($post)
-  {
-    // Récupération des données
-    $idCollector = $post['id_col'];
-
-    // Suppression des votes
-    physiqueDeleteVotes($idCollector);
-  }
-  
   // METIER : Insertion ou mise à jour vote
   // RETOUR : Id collector
   function voteCollector($post, $identifiant)

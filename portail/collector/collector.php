@@ -72,9 +72,6 @@
       break;
 
     case 'doSupprimer':
-      // Suppression des votes d'une phrase culte
-      deleteVotes($_POST);
-
       // Suppression d'une phrase culte
       deleteCollector($_POST);
       break;
@@ -137,12 +134,12 @@
         header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;
 
-    case 'doSupprimer':
-      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
-      break;
-
     case 'doModifier':
       header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
+      break;
+
+    case 'doSupprimer':
+      header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;
 
     case 'doVoter':
