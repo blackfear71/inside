@@ -47,17 +47,17 @@
         $minGolden = getMinGolden($listeUsers);
 
         // Récupération de la pagination
-        $nbPages = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
+        $nombrePages = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
 
         // Récupération de la liste des phrases cultes ou redirection
-        if ($nbPages > 0)
+        if ($nombrePages > 0)
         {
-          if ($_GET['page'] > $nbPages)
-            header('location: collector.php?action=goConsulter&page=' . $nbPages . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
+          if ($_GET['page'] > $nombrePages)
+            header('location: collector.php?action=goConsulter&page=' . $nombrePages . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
           elseif ($_GET['page'] < 1)
             header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
           else
-            $listeCollectors = getCollectors($listeUsers, $nbPages, $minGolden, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
+            $listeCollectors = getCollectors($listeUsers, $nombrePages, $minGolden, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
         }
       }
       break;
@@ -107,7 +107,7 @@
 
       unset($user);
 
-      if ($nbPages > 0)
+      if ($nombrePages > 0)
       {
         foreach ($listeCollectors as $collector)
         {

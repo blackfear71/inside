@@ -1,6 +1,6 @@
 <?php
   echo '<div class="zone_collectors">';
-    if ($nbPages > 0)
+    if ($nombrePages > 0)
     {
       foreach ($listeCollectors as $collector)
       {
