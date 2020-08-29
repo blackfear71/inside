@@ -139,9 +139,6 @@
     $typeCollector     = $post['type_collector'];
     $contexteCollector = deleteInvisible($post['context']);
 
-    if ($typeCollector == 'T')
-      $collector = $post['collector'];
-
     // Sauvegarde en session en cas d'erreur
     if ($typeSpeaker == 'other')
     {
