@@ -164,7 +164,7 @@
 
   // METIER : Insertion d'une dépense & mise à jour des dépenses utilisateurs
   // RETOUR : Id dépense
-  function insertExpense($post)
+  function insertExpense($post, $userConnected)
   {
     // Initialisations
     $idDepense  = NULL;
@@ -283,7 +283,7 @@
       }
 
       // Ajout expérience
-      insertExperience($_SESSION['user']['identifiant'], 'add_expense');
+      insertExperience($userConnected, 'add_expense');
 
       // Message d'alerte
       $_SESSION['alerts']['depense_added'] = true;
@@ -295,7 +295,7 @@
 
   // METIER : Insertion de montants & mise à jour des dépenses utilisateurs
   // RETOUR : Id dépense
-  function insertMontants($post)
+  function insertMontants($post, $userConnected)
   {
     // Initialisations
     $idDepense  = NULL;
@@ -416,7 +416,7 @@
         insertOrUpdateSuccesValue('generous', $buyer, 1);
 
       // Ajout expérience
-      insertExperience($_SESSION['user']['identifiant'], 'add_expense');
+      insertExperience($userConnected, 'add_expense');
 
       // Message d'alerte
       $_SESSION['alerts']['depense_added'] = true;

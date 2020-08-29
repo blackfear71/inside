@@ -51,12 +51,12 @@
 
     case 'doInserer':
       // Insertion d'une dépense
-      $idExpense = insertExpense($_POST);
+      $idExpense = insertExpense($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doInsererMontants':
       // Insertion d'une dépense en montants
-      $idExpense = insertMontants($_POST);
+      $idExpense = insertMontants($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doModifier':
