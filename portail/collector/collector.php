@@ -23,6 +23,8 @@
 
   // Modèle de données
   include_once('modele/metier_collector.php');
+  include_once('modele/controles_collector.php');
+  include_once('modele/physique_collector.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -80,6 +82,9 @@
     case 'doModifier':
       // Modification d'une phrase culte
       $idCollector = updateCollector($_POST, $_FILES);
+
+      // Récupération du numéro de page
+      $numeroPage = numeroPageCollector($idCollector);
       break;
 
     case 'doVoter':
@@ -137,6 +142,9 @@
       break;
 
     case 'doModifier':
+      header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
+      break;
+
     case 'doVoter':
       header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
       break;
