@@ -277,7 +277,7 @@
                   echo '</div>';
                 }
                 else
-                  echo '<div class="empty">Personne n\'a encore participé à cette mission</div>';
+                  echo '<div class="empty">Personne n\'a encore participé à cette mission...</div>';
               }
             echo '</div>';
           }

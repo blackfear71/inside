@@ -285,7 +285,7 @@
         }
       }
       else
-        echo '<div class="empty">Pas encore de participants</div>';
+        echo '<div class="empty">Pas encore de participants...</div>';
     echo '</div>';
   }
 ?>

@@ -191,17 +191,17 @@
       switch ($_GET['view'])
       {
         case 'mine':
-          echo '<div class="empty">Pas d\'idées en charge</div>';
+          echo '<div class="empty">Pas d\'idées en charge...</div>';
           break;
 
         case 'done':
-          echo '<div class="empty">Pas d\'idées terminées ou rejetées</div>';
+          echo '<div class="empty">Pas d\'idées terminées ou rejetées...</div>';
           break;
 
         case 'all':
         case 'inprogress':
         default:
-          echo '<div class="empty">Pas d\'idées proposées</div>';
+          echo '<div class="empty">Pas d\'idées proposées...</div>';
           break;
       }
     }

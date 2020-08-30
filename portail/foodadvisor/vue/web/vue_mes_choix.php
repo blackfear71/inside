@@ -374,5 +374,5 @@
     echo '</div>';
   }
   else
-    echo '<div class="empty">Pas de choix encore saisis pour aujourd\'hui !</div>';
+    echo '<div class="empty">Pas de choix encore saisis pour aujourd\'hui...</div>';
 ?>

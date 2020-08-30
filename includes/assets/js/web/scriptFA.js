@@ -1515,7 +1515,7 @@ function showDetails(zone, id)
 
   // Pas de menus
   if (menuPresent == false)
-    $('.zone_details_menus').html('<div class="empty">Pas de menus proposés pour ce choix</div>');
+    $('.zone_details_menus').html('<div class="empty">Pas de menus proposés pour ce choix...</div>');
 
   /*******************/
   /*** Description ***/

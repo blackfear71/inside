@@ -58,7 +58,7 @@
     else
 		{
 			echo '<tr>';
-				echo '<td colspan="3" class="empty">Pas de calendriers à supprimer !</td>';
+				echo '<td colspan="3" class="empty">Pas de calendriers à supprimer...</td>';
 			echo '</tr>';
 		}
 

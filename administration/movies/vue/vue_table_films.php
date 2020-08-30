@@ -81,7 +81,7 @@
     else
 		{
 			echo '<tr>';
-				echo '<td colspan="6" class="empty">Pas de films à supprimer !</td>';
+				echo '<td colspan="6" class="empty">Pas de films à supprimer...</td>';
 			echo '</tr>';
 		}
 

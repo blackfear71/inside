@@ -47,6 +47,11 @@
       <!-- Contenu -->
       <article>
         <?php
+          /*********/
+          /* Titre */
+          /*********/
+          echo '<div class="titre_section_mobile">' . strtoupper($titleHead) . '</div>';
+
           /**********/
           /* Années */
           /**********/

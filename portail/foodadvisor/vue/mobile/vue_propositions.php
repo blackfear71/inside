@@ -61,13 +61,13 @@
     else
     {
       if (date('N') > 5)
-        echo '<div class="empty">Il est impossible de voter pour aujourd\'hui</div>';
+        echo '<div class="empty">Il est impossible de voter pour aujourd\'hui...</div>';
       else
       {
         if (date('H') >= 13)
-          echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui</div>';
+          echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui...</div>';
         else
-          echo '<div class="empty">Il n\'y a pas encore de propositions pour aujourd\'hui</div>';
+          echo '<div class="empty">Il n\'y a pas encore de propositions pour aujourd\'hui...</div>';
       }
     }
   echo '</div>';

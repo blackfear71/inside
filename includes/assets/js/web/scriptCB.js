@@ -465,7 +465,7 @@ function showRecipe(link, id)
 
         // Cas vide
         if (recipe['ingredients'] == '' && recipe['recipe'] == '' && recipe['tips'] == '')
-          html += '<div class="empty">Pas de recette disponible</div>';
+          html += '<div class="empty">Pas de recette disponible...</div>';
 
         // Bouton "Je l'ai fait"
         if (recipe['identifiant'] == userSession)

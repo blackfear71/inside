@@ -64,7 +64,7 @@
       }
     }
     else
-      echo '<div class="empty">Pas de bugs, tout va bien</div>';
+      echo '<div class="empty">Pas de bugs, tout va bien...</div>';
   echo '</div>';
 
   echo '<div class="zone_evolutions">';
@@ -132,6 +132,6 @@
       }
     }
     else
-      echo '<div class="empty">Pas d\'évolutions proposées</div>';
+      echo '<div class="empty">Pas d\'évolutions proposées...</div>';
   echo '</div>';
 ?>

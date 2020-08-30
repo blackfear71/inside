@@ -72,7 +72,7 @@
       echo '</div>';
     }
     else
-      echo '<div class="empty">Pas de thèmes disponibles. Gagnez un peu d\'expérience !</div>';
+      echo '<div class="empty">Pas de thèmes disponibles, gagnez un peu d\'expérience...</div>';
 
     // Thèmes de missions
     echo '<div class="titre_section"><img src="../../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
@@ -139,6 +139,6 @@
       echo '</div>';
     }
     else
-      echo '<div class="empty">Des thèmes seront bientôt disponibles !</div>';
+      echo '<div class="empty">Des thèmes seront bientôt disponibles...</div>';
   echo '</div>';
 ?>

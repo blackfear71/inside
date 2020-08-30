@@ -530,6 +530,15 @@ aside
 }
 
 /*** Titres ***/
+.titre_section_mobile
+{
+	font-family: robotoblack, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	text-align: center;
+	margin-bottom: 2vh;
+}
+
 .titre_section
 {
 	width: 100%;
