@@ -221,7 +221,7 @@
 
   // PHYSIQUE : Lecture nombre participants
   // RETOUR : Nombre de participants
-  function physiqueNombreParticipants($idRestaurant)
+  function physiqueNombreParticipants($idRestaurant, $date)
   {
     // Initialisations
     $nombreParticipants = 0;
@@ -231,7 +231,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreParticipants
                         FROM food_advisor_users
-                        WHERE date = "' . date('Ymd') . '" AND id_restaurant = ' . $idRestaurant);
+                        WHERE date = "' . $date . '" AND id_restaurant = ' . $idRestaurant);
 
     $data = $req->fetch();
 

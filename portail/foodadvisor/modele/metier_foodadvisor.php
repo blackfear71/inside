@@ -457,7 +457,7 @@
         $restaurant = physiqueDonneesRestaurant($choixSemaine->getId_restaurant());
 
         // Nombre de participants
-        $nombreParticipants = physiqueNombreParticipants($choixSemaine->getId_restaurant());
+        $nombreParticipants = physiqueNombreParticipants($choixSemaine->getId_restaurant(), $i);
 
         // Récupération pseudo et avatar
         $user = physiqueUser($choixSemaine->getCaller());

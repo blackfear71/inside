@@ -89,7 +89,7 @@
       if ($availableDay == true)
       {
         // Nombre de participants
-        $proposition->setNb_participants(physiqueNombreParticipants($proposition->getId_restaurant()));
+        $proposition->setNb_participants(physiqueNombreParticipants($proposition->getId_restaurant(), date('Ymd')));
 
         // Vérification proposition déterminée
         $propositionDeterminee = physiquePropositionDeterminee($proposition->getId_restaurant());
