@@ -274,7 +274,7 @@ function showDetails(idDepense)
 
   // Formulaire suppression
   $('.zone_details_actions > .form_supprimer_depense').attr('id', 'delete_depense_' + depense['id']);
-  $('.form_supprimer_depense > input[name=id_expense_saisie]').val(depense['id']);
+  $('.form_supprimer_depense > input[name=id_expense_delete]').val(depense['id']);
   $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + depense['pseudo'] + ' du ' + formatDateForDisplay(depense['date']) + ' et d\'un montant de ' + formatAmountForDisplay(depense['price'], true) + ' ?');
 
   if (type == 'M')
