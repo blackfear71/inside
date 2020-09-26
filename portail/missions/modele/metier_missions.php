@@ -56,7 +56,8 @@
       $triDateDeb[] = $missionTri->getDate_deb();
     }
 
-    array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $listeMissions);
+    if (!empty($listeMissions))
+      array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $listeMissions);
 
     // Retour
     return $listeMissions;
@@ -255,7 +256,8 @@
         $triAlpha[] = $rankUser->getIdentifiant();
       }
 
-      array_multisort($triRank, SORT_DESC, $triAlpha, SORT_ASC, $rankingUsers);
+      if (!empty($rankingUsers))
+        array_multisort($triRank, SORT_DESC, $triAlpha, SORT_ASC, $rankingUsers);
 
       // Affectation du rang
       $prevTotal   = $rankingUsers[0]->getTotal();

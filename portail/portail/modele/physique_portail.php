@@ -196,10 +196,13 @@
   // RETOUR : Objet Collector
   function physiqueDernierCollector()
   {
+    // Initialisations
+    $collector = NULL;
+
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *
+    $req = $bdd->query('SELECT *, COUNT(*) AS nombreCollector
                         FROM collector
                         WHERE type_collector = "T"
                         ORDER BY date_add DESC, id DESC
@@ -207,8 +210,11 @@
 
     $data = $req->fetch();
 
-    // Instanciation d'un objet Preferences à partir des données remontées de la bdd
-    $collector = Collector::withData($data);
+    if ($data['nombreCollector'] > 0)
+    {
+      // Instanciation d'un objet Preferences à partir des données remontées de la bdd
+      $collector = Collector::withData($data);
+    }
 
     $req->closeCursor();
 
@@ -248,10 +254,13 @@
   // RETOUR : Objet Movie
   function physiqueDernierFilm()
   {
+    // Initialisations
+    $film = NULL;
+
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *
+    $req = $bdd->query('SELECT *, COUNT(*) AS nombreFilms
                         FROM movie_house
                         WHERE to_delete != "Y"
                         ORDER BY date_add DESC, id DESC
@@ -259,8 +268,11 @@
 
     $data = $req->fetch();
 
-    // Instanciation d'un objet Preferences à partir des données remontées de la bdd
-    $film = Movie::withData($data);
+    if ($data['nombreFilms'] > 0)
+    {
+      // Instanciation d'un objet Preferences à partir des données remontées de la bdd
+      $film = Movie::withData($data);
+    }
 
     $req->closeCursor();
 

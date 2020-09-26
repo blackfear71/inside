@@ -69,9 +69,12 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeIdeas as $idea)
+      if (!empty($listeIdeas))
       {
-        Idea::secureData($idea);
+        foreach ($listeIdeas as $idea)
+        {
+          Idea::secureData($idea);
+        }  
       }
       break;
 

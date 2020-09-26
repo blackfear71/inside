@@ -233,46 +233,52 @@
     /*********************************/
     $collector = physiqueDernierCollector();
 
-    // Numéro de page de la phrase culte
-    $numeroPage = numeroPageCollector($collector->getId());
-
-    $news = new News();
-
-    $news->setTitle('La der des ders');
-    $news->setLogo('collector');
-    $news->setLink('/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $collector->getId());
-
-    // Recherche pseudo speaker
-    if ($collector->getType_speaker() == 'other')
-      $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($collector->getSpeaker(), false, false)));
-    else
+    if (!empty($collector))
     {
-      $speaker = physiquePseudoUser($collector->getSpeaker());
+      // Numéro de page de la phrase culte
+      $numeroPage = numeroPageCollector($collector->getId());
 
-      $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($speaker, false, false)));
+      $news = new News();
+
+      $news->setTitle('La der des ders');
+      $news->setLogo('collector');
+      $news->setLink('/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $collector->getId());
+
+      // Recherche pseudo speaker
+      if ($collector->getType_speaker() == 'other')
+        $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($collector->getSpeaker(), false, false)));
+      else
+      {
+        $speaker = physiquePseudoUser($collector->getSpeaker());
+
+        $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($speaker, false, false)));
+      }
+
+      if (strlen($collector->getCollector()) > 90)
+        $news->setContent(nl2br(htmlspecialchars(substr(unformatCollector($collector->getCollector()), 0, 90) . '...')));
+      else
+        $news->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
+
+      array_push($tableauNews, $news);
     }
-
-    if (strlen($collector->getCollector()) > 90)
-      $news->setContent(nl2br(htmlspecialchars(substr(unformatCollector($collector->getCollector()), 0, 90) . '...')));
-    else
-      $news->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
-
-    array_push($tableauNews, $news);
 
     /***********************/
     /* Dernier film ajouté */
     /***********************/
     $movie = physiqueDernierFilm();
 
-    $news = new News();
+    if (!empty($movie))
+    {
+      $news = new News();
 
-    $news->setTitle('Le dernier de la collection');
-    $news->setContent($movie->getFilm());
-    $news->setDetails('');
-    $news->setLogo('movie_house');
-    $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
+      $news->setTitle('Le dernier de la collection');
+      $news->setContent($movie->getFilm());
+      $news->setDetails('');
+      $news->setLogo('movie_house');
+      $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
 
-    array_push($tableauNews, $news);
+      array_push($tableauNews, $news);  
+    }
 
     /***************************/
     /* Prochaine sortie cinéma */

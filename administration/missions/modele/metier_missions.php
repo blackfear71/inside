@@ -51,7 +51,8 @@
     }
 
     // Tri (V : à venir, C : en cours, A : ancienne)
-    array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $missions);
+    if (!empty($missions))
+      array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $missions);
 
     // Retour
     return $missions;
@@ -130,7 +131,8 @@
       }
 
       // Tri
-      array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
+      if (!empty($listeUsers))
+        array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
 
       // Affectation du rang
       $prevTotal   = $listeUsers[0]->getTotal();
