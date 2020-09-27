@@ -21,20 +21,8 @@
     $control_ok = true;
     $avatar     = rand();
 
-    // On vérifie la présence du dossier, sinon on le créé
-    $dossier = '../../includes/images/profil';
-
-    if (!is_dir($dossier))
-      mkdir($dossier);
-
-    // On vérifie la présence du dossier d'avatars, sinon on le créé
-    $dossierAvatars = $dossier . '/avatars';
-
-    if (!is_dir($dossierAvatars))
-      mkdir($dossierAvatars);
-
     // Dossier de destination
-    $avatarDir = $dossierAvatars . '/';
+    $dossier = '../../includes/images/profil/avatars';
 
     // Contrôles communs d'un fichier
     $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
@@ -44,20 +32,20 @@
 
     // Upload fichier
     if ($control_ok == true)
-      $control_ok = uploadFile($fileDatas, $avatarDir);
+      $control_ok = uploadFile($fileDatas, $dossier);
 
     if ($control_ok == true)
     {
       $newName = $fileDatas['new_name'];
 
       // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-      imagethumb($avatarDir . $newName, $avatarDir . $newName, 400, FALSE, TRUE);
+      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, FALSE, TRUE);
 
       // Suppression de l'ancien avatar si présent
       $oldAvatar = physiqueAvatarUser($identifiant);
 
       if (!empty($oldAvatar))
-        unlink($avatarDir . $oldAvatar . '');
+        unlink($dossier . '/' . $oldAvatar . '');
 
       // Modification de l'enregistrement en base
       physiqueUpdateAvatarUser($identifiant, $newName);
@@ -75,13 +63,13 @@
   function deleteAvatar($identifiant)
   {
     // Dossier de destination
-    $avatarDir = '../../includes/images/profil/avatars/';
+    $dossier = '../../includes/images/profil/avatars/';
 
     // Suppression de l'ancien avatar si présent
     $oldAvatar = physiqueAvatarUser($identifiant);
 
     if (!empty($oldAvatar))
-      unlink($avatarDir . $oldAvatar . '');
+      unlink($dossier . $oldAvatar . '');
 
     // Modification de l'enregistrement en base
     physiqueUpdateAvatarUser($identifiant, '');

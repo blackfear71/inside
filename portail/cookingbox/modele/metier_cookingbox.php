@@ -411,28 +411,16 @@
       // Enregistrement image
       $newName = '';
 
-      // On vérifie la présence du dossier, sinon on le créé
-      $dossier = '../../includes/images/cookingbox';
-
-      if (!is_dir($dossier))
-        mkdir($dossier);
-
-      // On vérifie la présence du dossier des années, sinon on le créé
-      $dossierAnnee = $dossier . '/' . $yearRecipe;
-
-      if (!is_dir($dossierAnnee))
-        mkdir($dossierAnnee);
-
-      // On vérifie la présence du dossier des miniatures, sinon on le créé
+      // Dossiers de destination
+      $dossierAnnee      = '../../includes/images/cookingbox/' . $yearRecipe;
       $dossierMiniatures = $dossierAnnee . '/mini';
 
+      // On vérifie la présence du dossier des miniatures, sinon on le créé
       if (!is_dir($dossierMiniatures))
-        mkdir($dossierMiniatures);
+        mkdir($dossierMiniatures, 0777, true);
 
-      // Dossier de destination et nom du fichier
-      $imageDir = $dossierAnnee . '/';
-      $miniDir  = $dossierMiniatures . '/';
-      $name     = $yearRecipe . '-' . $weekRecipe . '-' . rand();
+      // Nom du fichier
+      $name = $yearRecipe . '-' . $weekRecipe . '-' . rand();
 
       // Contrôles fichier
       $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -441,7 +429,7 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($fileDatas, $imageDir);
+        $control_ok = uploadFile($fileDatas, $dossierAnnee);
 
         if ($control_ok == true)
         {
@@ -450,13 +438,13 @@
 
           // Rotation de l'image (si JPEG)
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            rotateImage($imageDir . $newName, $typeImage);
+            rotateImage($dossierAnnee . '/' . $newName, $typeImage);
 
           // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($imageDir . $newName, $imageDir . $newName, 2000, FALSE, FALSE);
+          imagethumb($dossierAnnee . '/' . $newName, $dossierAnnee . '/' . $newName, 2000, FALSE, FALSE);
 
           // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($imageDir . $newName, $miniDir . $newName, 500, FALSE, FALSE);
+          imagethumb($dossierAnnee . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
 
           // Mise à jour de l'enregistrement concerné
           $recette = array('name'        => $nameRecipe,
@@ -555,10 +543,12 @@
       $idRecipe = $datasRecipe->getId();
       $newName  = $datasRecipe->getPicture();
 
-      // Dossier de destination et nom du fichier
-      $imageDir = '../../includes/images/cookingbox/' . $yearRecipe . '/';
-      $miniDir  = $imageDir . '/mini/';
-      $name     = $yearRecipe . '-' . $weekRecipe . '-' . rand();
+      // Dossiers de destination
+      $dossierAnnee      = '../../includes/images/cookingbox/' . $yearRecipe;
+      $dossierMiniatures = $dossierAnnee . '/mini';
+
+      // Nom du fichier
+      $name = $yearRecipe . '-' . $weekRecipe . '-' . rand();
 
       // Contrôles fichier
       $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -567,7 +557,7 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($fileDatas, $imageDir);
+        $control_ok = uploadFile($fileDatas, $dossierAnnee);
 
         if ($control_ok == true)
         {
@@ -576,19 +566,19 @@
 
           // Rotation de l'image (si JPEG)
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            rotateImage($imageDir . $newName, $typeImage);
+            rotateImage($dossierAnnee . '/' . $newName, $typeImage);
 
           // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($imageDir . $newName, $imageDir . $newName, 2000, FALSE, FALSE);
+          imagethumb($dossierAnnee . '/' . $newName, $dossierAnnee . '/' . $newName, 2000, FALSE, FALSE);
 
           // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($imageDir . $newName, $miniDir . $newName, 500, FALSE, FALSE);
+          imagethumb($dossierAnnee . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
 
           // Suppression des anciennes images
           if (!empty($datasRecipe->getPicture()))
           {
-            unlink($imageDir . $datasRecipe->getPicture());
-            unlink($miniDir . $datasRecipe->getPicture());
+            unlink($dossierAnnee . '/' . $datasRecipe->getPicture());
+            unlink($dossierMiniatures . '/' . $datasRecipe->getPicture());
           }
         }
       }

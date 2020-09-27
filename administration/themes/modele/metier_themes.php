@@ -132,35 +132,12 @@
     // Vérification des dossiers et contrôle des fichiers
     if ($control_ok == true)
     {
-      // On vérifie la présence du dossier des images, sinon on le créé
-      $dossier = '../../includes/images/themes';
-
-      if (!is_dir($dossier))
-        mkdir($dossier);
-
-      // On vérifie la présence du dossier des entête, sinon on le créé
-      $dossierHeaders = $dossier . '/headers';
-
-      if (!is_dir($dossierHeaders))
-        mkdir($dossierHeaders);
-
-      // On vérifie la présence du dossier des fonds, sinon on le créé
+      // Dossiers de destination
+      $dossier            = '../../includes/images/themes';
+      $dossierHeaders     = $dossier . '/headers';
       $dossierBackgrounds = $dossier . '/backgrounds';
-
-      if (!is_dir($dossierBackgrounds))
-        mkdir($dossierBackgrounds);
-
-      // On vérifie la présence du dossier des bas de page, sinon on le créé
-      $dossierFooters = $dossier . '/footers';
-
-      if (!is_dir($dossierFooters))
-        mkdir($dossierFooters);
-
-      // On vérifie la présence du dossier des logos, sinon on le créé
-      $dossierLogos = $dossier . '/logos';
-
-      if (!is_dir($dossierLogos))
-        mkdir($dossierLogos);
+      $dossierFooters     = $dossier . '/footers';
+      $dossierLogos       = $dossier . '/logos';
 
       // Contrôle des fichiers
       foreach ($files as $keyFile => $file)
@@ -190,7 +167,7 @@
           }
 
           // Contrôles communs d'un fichier
-          $fileDatas  = controlsUploadFile($file, $name, 'png');
+          $fileDatas = controlsUploadFile($file, $name, 'png');
 
           // Récupération contrôles
           $control_ok = controleFichier($fileDatas);
@@ -215,20 +192,20 @@
           switch ($keyFile)
           {
             case 'header':
-              $destDir = $dossierHeaders . '/';
+              $dossierImage = $dossierHeaders . '/';
               break;
 
             case 'footer':
-              $destDir = $dossierFooters . '/';
+              $dossierImage = $dossierFooters . '/';
               break;
 
             case 'logo':
-              $destDir = $dossierLogos . '/';
+              $dossierImage = $dossierLogos . '/';
               break;
 
             case 'background':
             default:
-              $destDir = $dossierBackgrounds . '/';
+              $dossierImage = $dossierBackgrounds . '/';
               break;
           }
 
@@ -261,7 +238,7 @@
                             );
 
           // Upload fichier
-          $control_ok = uploadFile($fileDatas, $destDir);
+          $control_ok = uploadFile($fileDatas, $dossierImage);
 
           // Arrêt de la boucle en cas d'erreur
           if ($control_ok == false)

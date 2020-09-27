@@ -64,6 +64,7 @@
   // RETOUR : Id enregistrement créé
   function insertBug($post, $files, $author)
   {
+    // Initialisations
     $newId      = NULL;
     $control_ok = true;
 
@@ -83,15 +84,11 @@
     // On insère l'image si présente
     if (!empty($files['image']['name']))
     {
-      // On vérifie la présence du dossier, sinon on le créé
+      // Dossier de destination
       $dossier = '../../includes/images/reports';
 
-      if (!is_dir($dossier))
-        mkdir($dossier);
-
-      // Dossier de destination et nom du fichier
-      $imageDir = $dossier . '/';
-      $name     = rand();
+      // Nom du fichier
+      $name = rand();
 
       // Contrôles fichier
       $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -102,7 +99,7 @@
       if ($fileDatas['control_ok'] == true)
       {
         // Upload fichier
-        $control_ok = uploadFile($fileDatas, $imageDir);
+        $control_ok = uploadFile($fileDatas, $dossier);
 
         // Rotation de l'image
         if ($control_ok == true)
@@ -111,7 +108,7 @@
           $typeImage = $fileDatas['type_file'];
 
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            rotateImage($imageDir . $picture, $typeImage);
+            rotateImage($dossier . '/' . $picture, $typeImage);
         }
       }
     }

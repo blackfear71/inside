@@ -192,21 +192,11 @@
 
     $control_ok = true;
 
-    // On vérifie la présence du dossier, sinon on le créé
-    $dossier = '../../includes/images/profil';
+    // Dossier de destination
+    $dossier = '../../includes/images/profil/avatars';
 
-    if (!is_dir($dossier))
-      mkdir($dossier);
-
-    // On vérifie la présence du dossier d'avatars, sinon on le créé
-    $dossierAvatars = $dossier . '/avatars';
-
-    if (!is_dir($dossierAvatars))
-      mkdir($dossierAvatars);
-
-    // Dossier de destination et nom du fichier
-    $avatarDir = $dossierAvatars . '/';
-    $avatar    = rand();
+    // Nom du fichier
+    $avatar = rand();
 
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
@@ -215,21 +205,21 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($fileDatas, $avatarDir);
+      $control_ok = uploadFile($fileDatas, $dossier);
 
       if ($control_ok == true)
       {
         $newName = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-        imagethumb($avatarDir . $newName, $avatarDir . $newName, 400, FALSE, TRUE);
+        imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, FALSE, TRUE);
 
         // On efface l'ancien avatar si présent
         $reponse1 = $bdd->query('SELECT identifiant, avatar FROM users WHERE identifiant = "' . $user . '"');
         $donnees1 = $reponse1->fetch();
 
         if (isset($donnees1['avatar']) AND !empty($donnees1['avatar']))
-          unlink($dossierAvatars . '/' . $donnees1['avatar'] . '');
+          unlink($dossier . '/' . $donnees1['avatar'] . '');
 
         $reponse1->closeCursor();
 

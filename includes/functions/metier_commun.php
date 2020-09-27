@@ -1408,17 +1408,27 @@
   // RETOUR : Booléen
   function uploadFile($fileDatas, $folder)
   {
+    // Initialisations
     $control_ok = true;
 
+    // On vérifie la présence du dossier, sinon on le créé de manière récursive
+    if (!is_dir($folder))
+      mkdir($folder, 0777, true);
+
+    // Dossier de destination
+    $dir = $folder . '/';
+
+    // Récupération des données et téléchargement
     $tmpFile = $fileDatas['tmp_file'];
     $name    = $fileDatas['new_name'];
 
-    if (!move_uploaded_file($tmpFile, $folder . $name))
+    if (!move_uploaded_file($tmpFile, $dir . $name))
     {
       $_SESSION['alerts']['wrong_file'] = true;
       $control_ok                       = false;
     }
 
+    // Retour
     return $control_ok;
   }
 

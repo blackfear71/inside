@@ -90,9 +90,9 @@
     $explanation  = $post['explanation'];
 
     if (isset($post['unicity']))
-      $unicity     = 'Y';
+      $unicity = 'Y';
     else
-      $unicity     = 'N';
+      $unicity = 'N';
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['reference_success']   = $reference;
@@ -126,23 +126,11 @@
     // Vérification des dossiers et contrôle des fichiers
     if ($control_ok == true)
     {
-      // On vérifie la présence du dossier, sinon on le créé
-      $dossier = '../../includes/images/profil';
-
-      if (!is_dir($dossier))
-         mkdir($dossier);
-
-      // On vérifie la présence du dossier des succès, sinon on le créé
-      $dossierSuccess = $dossier . '/success';
-
-      if (!is_dir($dossierSuccess))
-         mkdir($dossierSuccess);
-
       // Dossier de destination
-      $successDir = $dossierSuccess . '/';
+      $dossier = '../../includes/images/profil/success';
 
       // Contrôles communs d'un fichier
-      $fileDatas  = controlsUploadFile($files['success'], $reference, 'png');
+      $fileDatas = controlsUploadFile($files['success'], $reference, 'png');
 
       // Récupération contrôles
       $control_ok = controleFichier($fileDatas);
@@ -150,13 +138,13 @@
 
     // Upload fichier
     if ($control_ok == true)
-      $control_ok = uploadFile($fileDatas, $successDir);
+      $control_ok = uploadFile($fileDatas, $dossier);
 
     // Création miniature et insertion en base
     if ($control_ok == true)
     {
       // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-      imagethumb($successDir . $fileDatas['new_name'], $successDir . $fileDatas['new_name'], 500, FALSE, TRUE);
+      imagethumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, FALSE, TRUE);
 
       // Insertion de l'enregistrement en base
       $success = array('reference'     => $reference,

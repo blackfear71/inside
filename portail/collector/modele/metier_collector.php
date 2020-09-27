@@ -330,14 +330,8 @@
     $newName    = '';
     $control_ok = true;
 
-    // On vérifie la présence du dossier, sinon on le créé
-    $dossier = '../../includes/images/collector';
-
-    if (!is_dir($dossier))
-      mkdir($dossier);
-
     // Dossier de destination
-    $imageDir = $dossier . '/';
+    $dossier = '../../includes/images/collector';
 
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['image'], $name, 'all');
@@ -347,7 +341,7 @@
 
     // Upload fichier
     if ($control_ok == true)
-      $control_ok = uploadFile($fileDatas, $imageDir);
+      $control_ok = uploadFile($fileDatas, $dossier);
 
     // Rotation de l'image
     if ($control_ok == true)
@@ -356,7 +350,7 @@
       $typeImage = $fileDatas['type_file'];
 
       if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-        rotateImage($imageDir . $newName, $typeImage);
+        rotateImage($dossier . '/' . $newName, $typeImage);
     }
 
     // Retour

@@ -226,23 +226,10 @@
     // Vérification des dossiers et contrôle des fichiers
     if ($control_ok == true)
     {
-      // On vérifie la présence du dossier des images, sinon on le créé
-      $dossier = '../../includes/images/missions';
-
-      if (!is_dir($dossier))
-        mkdir($dossier);
-
-      // On vérifie la présence du dossier des bannières, sinon on le créé
+      // Dossier de destination
+      $dossier       = '../../includes/images/missions';
       $dossierImages = $dossier . '/banners';
-
-      if (!is_dir($dossierImages))
-        mkdir($dossierImages);
-
-      // On vérifie la présence du dossier des boutons, sinon on le créé
       $dossierIcones = $dossier . '/buttons';
-
-      if (!is_dir($dossierIcones))
-        mkdir($dossierIcones);
 
       // Contrôle des fichiers
       foreach ($files as $keyFile => $file)
@@ -269,7 +256,7 @@
         }
 
         // Contrôles communs d'un fichier
-        $fileDatas  = controlsUploadFile($file, $name, 'png');
+        $fileDatas = controlsUploadFile($file, $name, 'png');
 
         // Récupération contrôles
         $control_ok = controleFichier($fileDatas);
@@ -286,12 +273,6 @@
       // Insertion des fichiers
       foreach ($files as $keyFile => $file)
       {
-        // Dossier de destination
-        if ($keyFile == 'mission_image')
-          $destDir = $dossierImages . '/';
-        else
-          $destDir = $dossierIcones . '/';
-
         // Nouveau nom
         switch ($keyFile)
         {
@@ -321,7 +302,10 @@
                           );
 
         // Upload fichier
-        $control_ok = uploadFile($fileDatas, $destDir);
+        if ($keyFile == 'mission_image')
+          $control_ok = uploadFile($fileDatas, $dossierImages);
+        else
+          $control_ok = uploadFile($fileDatas, $dossierIcones);
 
         // Arrêt de la boucle en cas d'erreur
         if ($control_ok == false)
@@ -415,9 +399,10 @@
     // Contrôle images présentes, si présentes alors on modifie l'image
     if ($control_ok == true)
     {
-      // Chemins
-      $dossierImages = '../../includes/images/missions/banners';
-      $dossierIcones = '../../includes/images/missions/buttons';
+      // Dossier de destination
+      $dossier       = '../../includes/images/missions';
+      $dossierImages = $dossier . '/banners';
+      $dossierIcones = $dossier . '/buttons';
 
       // Contrôle des fichiers
       foreach ($files as $keyFile => $file)
@@ -446,7 +431,7 @@
           }
 
           // Contrôles communs d'un fichier
-          $fileDatas  = controlsUploadFile($file, $name, 'png');
+          $fileDatas = controlsUploadFile($file, $name, 'png');
 
           // Récupération contrôles
           $control_ok = controleFichier($fileDatas);
@@ -466,12 +451,6 @@
       {
         if (!empty($file['name']))
         {
-          // Dossier de destination
-          if ($keyFile == 'mission_image')
-            $destDir = $dossierImages . '/';
-          else
-            $destDir = $dossierIcones . '/';
-
           // Nouveau nom
           switch ($keyFile)
           {
@@ -494,7 +473,10 @@
           }
 
           // Suppression de l'ancienne image
-          unlink($destDir . $newName);
+          if ($keyFile == 'mission_image')
+            unlink($dossierImages . '/' . $newName);
+          else
+            unlink($dossierIcones . '/' . $newName);
 
           // Données à envoyer pour l'upload
           $fileDatas = array('control_ok' => true,
@@ -504,7 +486,10 @@
                             );
 
           // Upload fichier
-          $control_ok = uploadFile($fileDatas, $destDir);
+          if ($keyFile == 'mission_image')
+            $control_ok = uploadFile($fileDatas, $dossierImages);
+          else
+            $control_ok = uploadFile($fileDatas, $dossierIcones);
 
           // Arrêt de la boucle en cas d'erreur
           if ($control_ok == false)

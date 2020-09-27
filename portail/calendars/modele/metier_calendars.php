@@ -135,29 +135,15 @@
 
     $control_ok = true;
 
-    // On vérifie la présence du dossier des calendriers, sinon on le créé
-    $dossier = '../../includes/images/calendars';
-
-    if (!is_dir($dossier))
-      mkdir($dossier);
-
-    // On vérifie la présence du dossier des années, sinon on le créé
-    $dossierCalendriers = $dossier . '/' . $post['years'];
-
-    if (!is_dir($dossierCalendriers))
-      mkdir($dossierCalendriers);
+    // Dossiers de destination
+    $dossierCalendriers = '../../includes/images/calendars/' . $post['years'];
+    $dossierMiniatures  = $dossierCalendriers . '/mini';
 
     // On vérifie la présence du dossier des miniatures, sinon on le créé
-    $dossierMiniatures = $dossierCalendriers . '/mini';
-
     if (!is_dir($dossierMiniatures))
-      mkdir($dossierMiniatures);
+      mkdir($dossierMiniatures, 0777, true);
 
-    // Dossiers de destination
-    $calendarsDir = $dossierCalendriers . '/';
-    $minisDir     = $dossierMiniatures . '/';
-
-    // On définit le nom du fichier
+    // Nom du fichier
     $nameFile = $post['months'] . '-' . $post['years'] . '-' . rand();
 
     // Contrôles fichier
@@ -167,14 +153,14 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($fileDatas, $calendarsDir);
+      $control_ok = uploadFile($fileDatas, $dossierCalendriers);
 
       if ($control_ok == true)
       {
         $newName = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-        imagethumb($calendarsDir . $newName, $minisDir . $newName, 500, FALSE, FALSE);
+        imagethumb($dossierCalendriers . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
 
         // On stocke la référence du nouveau calendrier dans la base
         $reponse = $bdd->prepare('INSERT INTO calendars(to_delete, month, year, calendar) VALUES(:to_delete, :month, :year, :calendar)');
@@ -208,29 +194,15 @@
 
     $control_ok = true;
 
-    // On vérifie la présence du dossier des calendriers, sinon on le créé
-    $dossier = '../../includes/images/calendars';
-
-    if (!is_dir($dossier))
-      mkdir($dossier);
-
-    // On vérifie la présence du dossier des annexes, sinon on le créé
-    $dossierAnnexes = $dossier . '/annexes';
-
-    if (!is_dir($dossierAnnexes))
-      mkdir($dossierAnnexes);
-
-    // On vérifie la présence du dossier des miniatures, sinon on le créé
+    // Dossiers de destination
+    $dossierAnnexes    = '../../includes/images/calendars/annexes';
     $dossierMiniatures = $dossierAnnexes . '/mini';
 
+    // On vérifie la présence du dossier des miniatures, sinon on le créé
     if (!is_dir($dossierMiniatures))
-      mkdir($dossierMiniatures);
+      mkdir($dossierMiniatures, 0777, true);
 
-    // Dossiers de destination
-    $annexesDir = $dossierAnnexes . '/';
-    $minisDir   = $dossierMiniatures . '/';
-
-    // On définit le nom du fichier
+    // Nom du fichier
     $nameFile = rand();
 
     // Contrôles fichier
@@ -240,14 +212,14 @@
     if ($fileDatas['control_ok'] == true)
     {
       // Upload fichier
-      $control_ok = uploadFile($fileDatas, $annexesDir);
+      $control_ok = uploadFile($fileDatas, $dossierAnnexes);
 
       if ($control_ok == true)
       {
         $newName = $fileDatas['new_name'];
 
         // Créé une miniature de la source vers la destination largeur max de 500px (cf fonction imagethumb.php)
-        imagethumb($annexesDir . $newName, $minisDir . $newName, 500, FALSE, FALSE);
+        imagethumb($dossierAnnexes . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
 
         // On stocke la référence du nouveau fichier dans la base
         $reponse = $bdd->prepare('INSERT INTO calendars_annexes(to_delete, annexe, title) VALUES(:to_delete, :annexe, :title)');

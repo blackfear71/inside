@@ -208,14 +208,8 @@
         // Nom du fichier
         $name = rand();
 
-        // On vérifie la présence du dossier des images, sinon on le créé
-        $dossier = '../../includes/images/foodadvisor';
-
-        if (!is_dir($dossier))
-          mkdir($dossier);
-
         // Dossier de destination
-        $restaurantDir = $dossier . '/';
+        $dossier = '../../includes/images/foodadvisor';
 
         // Contrôle du fichier
         $fileDatas = controlsUploadFile($files['image_restaurant'], $name, 'all');
@@ -225,7 +219,7 @@
 
         // Upload fichier
         if ($control_ok == true)
-          $control_ok = uploadFile($fileDatas, $restaurantDir);
+          $control_ok = uploadFile($fileDatas, $dossier);
 
         // Traitement de l'image
         if ($control_ok == true)
@@ -235,10 +229,10 @@
 
           // Rotation automatique de l'image (si JPEG)
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            rotateImage($restaurantDir . $newName, $typeImage);
+            rotateImage($dossier . '/' . $newName, $typeImage);
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($restaurantDir . $newName, $restaurantDir . $newName, 500, FALSE, TRUE);
+          imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, FALSE, TRUE);
         }
       }
       else
@@ -392,14 +386,8 @@
         // Nom du fichier
         $name = rand();
 
-        // On vérifie la présence du dossier des images, sinon on le créé
-        $dossier = '../../includes/images/foodadvisor';
-
-        if (!is_dir($dossier))
-          mkdir($dossier);
-
         // Dossier de destination
-        $restaurantDir = $dossier . '/';
+        $dossier = '../../includes/images/foodadvisor';
 
         // Contrôles communs d'un fichier
         $fileDatas = controlsUploadFile($files['update_image_restaurant_' . $idRestaurant], $name, 'all');
@@ -415,7 +403,7 @@
             unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
 
           // Upload fichier
-          $control_ok = uploadFile($fileDatas, $restaurantDir);
+          $control_ok = uploadFile($fileDatas, $dossier);
 
           // Traitement de l'image
           if ($control_ok == true)
@@ -425,10 +413,10 @@
 
             // Rotation automatique de l'image (si JPEG)
             if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-              rotateImage($restaurantDir . $newName, $typeImage);
+              rotateImage($dossier . '/' . $newName, $typeImage);
 
             // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-            imagethumb($restaurantDir . $newName, $restaurantDir . $newName, 500, FALSE, TRUE);
+            imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, FALSE, TRUE);
           }
         }
       }
