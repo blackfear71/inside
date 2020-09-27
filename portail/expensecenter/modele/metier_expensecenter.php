@@ -92,7 +92,12 @@
           $partDepense->setInscrit(false);
 
         if ($depense->getType() == 'M')
-          $prixMontants += $partDepense->getParts();
+        {
+          if (!empty($prixMontants))
+            $prixMontants += $partDepense->getParts();
+          else
+            $prixMontants = $partDepense->getParts();
+        }
       }
 
       // Récupération du nombre de participants
