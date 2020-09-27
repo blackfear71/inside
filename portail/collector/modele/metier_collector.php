@@ -43,8 +43,11 @@
     // Récupération du nombre d'utilisateurs inscrits
     $nombreUsers = count($listeUsers);
 
-    // Calcul du minimum pour être culte
-    $minGolden = floor(($nombreUsers * 75) / 100);
+    // Calcul du minimum pour être culte (vérification minimum > 1)
+    if ($nombreUsers == 1)
+      $minGolden = $nombreUsers;
+    else
+      $minGolden = floor(($nombreUsers * 75) / 100);
 
     // Retour
     return $minGolden;
