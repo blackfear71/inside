@@ -22,7 +22,7 @@
       echo '<div class="zone_contenu_saisie_live">';
         echo '<div class="contenu_saisie">';
           // Message vide
-          echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé.</div>';
+          echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé...</div>';
 
           // Restaurants par lieu
           foreach ($listeRestaurants as $lieuRestaurants => $restaurantsParLieux)
