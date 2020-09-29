@@ -6,14 +6,13 @@
 .zone_collectors
 {
   width: 100%;
-  margin-top: 8vh;
 }
 
 .zone_collector_haut
 {
 	background-color: #d3d3d3;
 	width: 100%;
-  margin-top: 8vh;
+  margin-top: 10vh;
 	border-top-left-radius: 0.5vh;
 	border-top-right-radius: 0.5vh;
 }
@@ -22,7 +21,7 @@
 {
 	background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
 	width: 100%;
-  margin-top: 8vh;
+  margin-top: 10vh;
 	border-top-left-radius: 0.5vh;
 	border-top-right-radius: 0.5vh;
 }
