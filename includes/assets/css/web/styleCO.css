@@ -578,8 +578,8 @@
 
 .image_collector
 {
+	display: block;
 	width: 100%;
-	margin-bottom: -4px;
 	cursor: pointer;
 }
 
