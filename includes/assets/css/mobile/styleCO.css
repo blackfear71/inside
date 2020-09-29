@@ -9,6 +9,11 @@
   margin-top: -2vh;
 }
 
+.zone_collector
+{
+  display: block;
+}
+
 .zone_collector_haut
 {
 	background-color: #d3d3d3;
