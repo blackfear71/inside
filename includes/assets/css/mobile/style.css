@@ -917,6 +917,7 @@ aside
 	margin-right: auto;
 	text-align: center;
 	margin-top: 2vh;
+	margin-bottom: -1vh;
 }
 
 .numero_page_active
@@ -926,11 +927,12 @@ aside
 	font-size: 3vh;
 	color: white;
 	display: inline-block;
-	width: 7vh;
-	height: 7vh;
-	margin-left: 1vh;
-	margin-right: 1vh;
-	line-height: 7vh;
+	width: 6vh;
+	height: 6vh;
+	margin-left: 0.5vh;
+	margin-right: 0.5vh;
+	margin-bottom: 1vh;
+	line-height: 6vh;
 	border-radius: 50%;
 }
 
@@ -941,11 +943,12 @@ aside
 	font-size: 3vh;
 	color: white;
 	display: inline-block;
-	width: 7vh;
-	height: 7vh;
-	margin-left: 1vh;
-	margin-right: 1vh;
-	line-height: 7vh;
+	width: 6vh;
+	height: 6vh;
+	margin-left: 0.5vh;
+	margin-right: 0.5vh;
+	margin-bottom: 1vh;
+	line-height: 6vh;
 	border-radius: 50%;
 }
 
@@ -968,9 +971,9 @@ aside
 {
 	display: inline-block;
 	font-family: robotolight, Verdana, sans-serif;
-	width: 7vh;
-	height: 7vh;
-	line-height: 7vh;
+	width: 4vh;
+	height: 6vh;
+	line-height: 6vh;
 	color: #262626;
 }
 
