@@ -6,6 +6,7 @@
 .zone_collectors
 {
   width: 100%;
+  margin-top: -2vh;
 }
 
 .zone_collector_haut
