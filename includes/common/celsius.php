@@ -3,15 +3,19 @@
   {
     switch ($celsius)
     {
+      case 'collector':
+        $contenuCelsius = 'Magie ! On peut me consulter ! Oui, bon c\'est juste limité à la consultation mais mon créateur fait tout ce qu\'il peut pour que ça avance. Je l\'espère...';
+        break;
+
       case 'expensecenter':
-        $contenuCelsius  = 'Tu peux saisir ici une dépense en commun ou bien une dépense en montants pour répartir par exemple une commande sur chacun en fonction de ce qu\'il a pris.
+        $contenuCelsius = 'Tu peux saisir ici une dépense en commun ou bien une dépense en montants pour répartir par exemple une commande sur chacun en fonction de ce qu\'il a pris.
         Ça peut même tenir compte des frais de livraison ! Trop bien !';
         break;
 
       case 'foodadvisor':
-        $contenuCelsius = 'Cette section est encore toute fraiche mais tu peux très bien l\'utiliser ! Tu peux voter dans la liste des restaurants ou bien aller encore plus vite
-        grâce à la toute nouvelle barre de recherche instantanée ! Pour ajouter un nouveau restaurant par contre, tu peux toujours utiliser le bouton présent en bas du site pour
-        revenir à la version classique et utiliser toutes ses fonctionnalités comme avant ! On peut même voir le détail d\'un vote et agir dessus comme avant.';
+        $contenuCelsius = 'Dans cette section, tu peux voter dans la liste des restaurants ou bien aller encore plus vite grâce à la toute nouvelle barre de recherche instantanée !
+        Pour ajouter un nouveau restaurant par contre, tu peux toujours utiliser le bouton présent en bas du site pour revenir à la version classique et utiliser toutes ses
+        fonctionnalités comme avant ! On peut même voir le détail d\'un vote et agir dessus comme avant.';
         break;
 
       case 'portail':

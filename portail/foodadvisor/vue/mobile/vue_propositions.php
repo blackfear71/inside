@@ -7,7 +7,10 @@
   echo '</div>';
 
   // Affichage des propositions
-  echo '<div id="afficher_propositions_users" class="zone_propositions_users">';
+  if (isset($mesChoix) AND !empty($mesChoix) AND $isSolo != true)
+    echo '<div id="afficher_propositions_users" class="zone_propositions_users_with_choices">';
+  else
+    echo '<div id="afficher_propositions_users" class="zone_propositions_users">';
     if (!empty($propositions))
     {
       foreach ($propositions as $proposition)

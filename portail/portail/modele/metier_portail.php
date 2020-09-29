@@ -65,7 +65,7 @@
                                    'title'     => 'Collector Room',
                                    'image'     => '../../includes/icons/common/collector.png',
                                    'alt'       => 'collector',
-                                   'mobile'    => 'N'),
+                                   'mobile'    => 'Y'),
                              array('categorie' => 'CALENDARS',
                                    'lien'      => '../calendars/calendars.php?year=' . date('Y') . '&action=goConsulter',
                                    'title'     => 'Calendars',
@@ -277,7 +277,7 @@
       $news->setLogo('movie_house');
       $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
 
-      array_push($tableauNews, $news);  
+      array_push($tableauNews, $news);
     }
 
     /***************************/

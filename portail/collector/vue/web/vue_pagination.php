@@ -1,0 +1,55 @@
+<?php
+  /**************/
+  /* Pagination */
+  /**************/
+  if ($nombrePages > 1)
+  {
+    $previousPoints = false;
+    $nextPoints     = false;
+    $limitInf       = $_GET['page'] - 1;
+    $limitSup       = $_GET['page'] + 1;
+
+    echo '<div class="zone_pagination">';
+      for ($i = 1; $i <= $nombrePages; $i++)
+      {
+        if ($i == 1 OR $i == $nombrePages)
+        {
+          if ($i == $_GET['page'])
+            echo '<div class="numero_page_active">' . $i . '</div>';
+          else
+          {
+            echo '<div class="numero_page_inactive">';
+              echo '<a href="collector.php?action=goConsulter&page=' . $i . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="lien_pagination">' . $i . '</a>';
+            echo '</div>';
+          }
+        }
+        else
+        {
+          if ($i < $limitInf AND $i > 1 AND $previousPoints != true)
+          {
+            echo '<div class="points">...</div>';
+            $previousPoints = true;
+          }
+
+          if ($i >= $limitInf AND $i <= $limitSup)
+          {
+            if ($i == $_GET['page'])
+              echo '<div class="numero_page_active">' . $i . '</div>';
+            else
+            {
+              echo '<div class="numero_page_inactive">';
+                echo '<a href="collector.php?action=goConsulter&page=' . $i . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="lien_pagination">' . $i . '</a>';
+              echo '</div>';
+            }
+          }
+
+          if ($i > $limitSup AND $i < $nombrePages AND $nextPoints != true)
+          {
+            echo '<div class="points">...</div>';
+            $nextPoints = true;
+          }
+        }
+      }
+    echo '</div>';
+  }
+?>

@@ -9,13 +9,18 @@
       // Saisie
       echo '<div class="zone_contenu_saisie">';
         echo '<div class="contenu_saisie">';
-          foreach ($onglets as $annee)
+          if (!empty($onglets))
           {
-            if ($annee == $_GET['year'])
-              echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
-            else
-              echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
+            foreach ($onglets as $annee)
+            {
+              if ($annee == $_GET['year'])
+                echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
+              else
+                echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
+            }
           }
+          else
+            echo '<a href="expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter" class="lien_saisie lien_courant">' . $_GET['year'] . '</a>';
         echo '</div>';
       echo '</div>';
 

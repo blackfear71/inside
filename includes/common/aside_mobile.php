@@ -8,7 +8,10 @@
                                    'titre' => 'LES ENFANTS ! À TABLE !'),
                              array('lien'  => '/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter',
                                    'image' => 'expense_center',
-                                   'titre' => 'EXPENSE CENTER')
+                                   'titre' => 'EXPENSE CENTER'),
+                             array('lien'  => '/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
+                                   'image' => 'collector',
+                                   'titre' => 'COLLECTOR ROOM')
                             );
 
   $listeAsideUser = array(array('lien'  => '/inside/includes/functions/script_commun.php?function=disconnectUser',

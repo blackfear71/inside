@@ -124,12 +124,12 @@
           /**********************************/
           /* Zone de saisie de phrase culte */
           /**********************************/
-          include('vue/vue_saisie_collector.php');
+          include('vue/web/vue_saisie_collector.php');
 
           /**************************/
           /* Zone de saisie d'image */
           /**************************/
-          include('vue/vue_saisie_image.php');
+          include('vue/web/vue_saisie_image.php');
 
           /*******************/
           /* Chargement page */
@@ -141,12 +141,12 @@
           /********************************/
           /* Affichage des phrases cultes */
           /********************************/
-          include('vue/vue_table_collectors.php');
+          include('vue/web/vue_table_collectors.php');
 
           /**************/
           /* Pagination */
           /**************/
-          include('vue/vue_pagination.php');
+          include('vue/web/vue_pagination.php');
         ?>
       </article>
 

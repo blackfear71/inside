@@ -375,6 +375,11 @@
 }
 
 /*** Propositions ***/
+.zone_propositions_users_with_choices
+{
+	width: 100%;
+}
+
 .zone_propositions_users
 {
 	width: 100%;
