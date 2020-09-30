@@ -681,7 +681,7 @@
     $formatted = '';
 
     $search    = array('[', ']');
-    $replace   = array('<strong class="strong_red">', '</strong>');
+    $replace   = array('<strong>', '</strong>');
     $formatted = str_replace($search, $replace, $collector);
 
     return $formatted;

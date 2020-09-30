@@ -205,6 +205,7 @@
     $req = $bdd->query('SELECT *, COUNT(*) AS nombreCollector
                         FROM collector
                         WHERE type_collector = "T"
+                        GROUP BY id
                         ORDER BY date_add DESC, id DESC
                         LIMIT 1');
 
@@ -263,6 +264,7 @@
     $req = $bdd->query('SELECT *, COUNT(*) AS nombreFilms
                         FROM movie_house
                         WHERE to_delete != "Y"
+                        GROUP BY id
                         ORDER BY date_add DESC, id DESC
                         LIMIT 1');
 
