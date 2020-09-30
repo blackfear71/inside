@@ -78,7 +78,7 @@
                 if ($collector->getType_collector() == 'I')
                 {
                   // Image
-                  echo '<a class="agrandirImage"><img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" /></a>';
+                  echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" alt="' . $collector->getCollector() . '" class="image_collector" />';
                 }
                 else
                 {
