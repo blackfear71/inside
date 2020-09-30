@@ -105,6 +105,26 @@
                   echo '<div class="text_context">' . nl2br(formatCollector($collector->getContext())) . '</div>';
               }
 
+              // Votes tous utilisateurs
+              if (!empty($collector->getVotes()))
+              {
+                echo '<div class="zone_votes_users">';
+                  // Smileys
+                  foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
+                  {
+                    echo '<img src="../../includes/icons/common/smileys/' . $keySmiley . '.png" alt="smiley" class="smiley_votes" />';
+                  }
+                echo '</div>';
+              }
+
+
+
+
+
+
+
+
+
               /*// Votes tous utilisateurs
               if (!empty($collector->getVotes()))
               {

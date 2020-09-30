@@ -12,6 +12,7 @@
 .zone_collector
 {
   display: block;
+  clear: both;
 }
 
 .zone_collector_haut
@@ -192,4 +193,24 @@
 	border-bottom-right-radius: 0.5vh;
 	overflow: hidden;
 	word-wrap: break-word;
+}
+
+/*** Vote ***/
+.zone_votes_users
+{
+  float: left;
+	margin-left: 2vh;
+	margin-top: -2vh;
+	position: relative;
+	z-index: 4;
+  height: 5vh;
+}
+
+.smiley_votes
+{
+  width: 5vh;
+	height: 5vh;
+	margin-right: -1.5vh;
+	border-radius: 50%;
+  box-shadow: 0 0 0.5vh #7c7c7c;
 }
