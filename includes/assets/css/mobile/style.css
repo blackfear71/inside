@@ -255,6 +255,13 @@ a:link, a:visited, a:hover, a:active
 	outline: none;
 }
 
+input
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
 /*** Entête ***/
 header
 {
