@@ -255,7 +255,7 @@ a:link, a:visited, a:hover, a:active
 	outline: none;
 }
 
-input
+input[type="submit"]
 {
 	-webkit-appearance: none;
 	-moz-appearance: none;
