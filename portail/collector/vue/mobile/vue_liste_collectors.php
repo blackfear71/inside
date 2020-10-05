@@ -11,6 +11,12 @@
             else
               echo '<div class="zone_collector_haut" id="' . $collector->getId() . '">';
 
+
+
+
+
+
+
               /*// Boutons d'action
               echo '<div class="zone_bouton_validation">';
                 // Modification
@@ -35,6 +41,12 @@
                 }
               echo '</div>';*/
 
+
+
+
+
+
+
               // Avatar
               $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, 'avatar');
 
@@ -43,23 +55,9 @@
               echo '</div>';
 
               // Vote utilisateur
-              echo '<a id="link_form_vote_' . $collector->getId() . '" class="link_current_vote modifierVote">';
+              echo '<a id="link_form_vote_' . $collector->getId() . '" class="link_current_vote afficherSaisieVote">';
                 echo '<img src="../../includes/icons/common/smileys/' . $collector->getVote_user() . '.png" alt="smiley" class="current_vote" />';
               echo '</a>';
-
-              /*// Formulaire vote
-              echo '<form method="post" action="collector.php?action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote_' . $collector->getId() . '" class="zone_smileys" style="display: none;">';
-                echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
-
-                // Gestion smileys vote
-                for ($j = 0; $j <= 8; $j++)
-                {
-                  if ($j == $collector->getVote_user())
-                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . ' smiley_selected" />';
-                  else
-                    echo '<input type="submit" name="smiley_' . $j . '" value="" class="smiley smiley_' . $j . '" />';
-                }
-              echo '</form>';*/
 
               // Pseudo
               echo '<div class="pseudo_collector">';
@@ -116,41 +114,6 @@
                   }
                 echo '</div>';
               }
-
-
-
-
-
-
-
-
-
-              /*// Votes tous utilisateurs
-              if (!empty($collector->getVotes()))
-              {
-                echo '<div class="zone_votes_users">';
-                  // Smileys
-                  foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
-                  {
-                    echo '<img src="../../includes/icons/common/smileys/' . $keySmiley . '.png" alt="smiley" class="smiley_votes_' . $keySmiley . '" />';
-                  }
-
-                  // Pseudos
-                  foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
-                  {
-                    $listeUsersSmiley = '';
-
-                    foreach ($votesParSmiley as $vote)
-                    {
-                      $listeUsersSmiley .= formatUnknownUser($vote, true, false) . ', ';
-                    }
-
-                    echo '<span class="noms_votes_' . $keySmiley . '">';
-                      echo substr($listeUsersSmiley, 0, -2);
-                    echo '</span>';
-                  }
-                echo '</div>';
-              }*/
             echo '</div>';
           echo '</div>';
         echo '</div>';

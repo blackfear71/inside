@@ -140,6 +140,54 @@
     return $listeCollectors;
   }
 
+  // METIER : Conversion du tableau d'objets des phrases / images cultes en tableau simple pour JSON
+  // RETOUR : Tableau des phrases / images cultes
+  function convertForJsonListeCollectors($listeCollectors)
+  {
+    // Initialisations
+    $listeCollectorsAConvertir = array();
+
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($listeCollectors as $collectorAConvertir)
+    {
+      $collector = array('id'             => $collectorAConvertir->getId(),
+                         'date_add'       => $collectorAConvertir->getDate_add(),
+                         'author'         => $collectorAConvertir->getAuthor(),
+                         'pseudo_author'  => $collectorAConvertir->getPseudo_author(),
+                         'speaker'        => $collectorAConvertir->getSpeaker(),
+                         'pseudo_speaker' => $collectorAConvertir->getPseudo_speaker(),
+                         'avatar_speaker' => $collectorAConvertir->getAvatar_speaker(),
+                         'type_speaker'   => $collectorAConvertir->getType_speaker(),
+                         'date_collector' => $collectorAConvertir->getDate_collector(),
+                         'type_collector' => $collectorAConvertir->getType_collector(),
+                         'collector'      => $collectorAConvertir->getCollector(),
+                         'context'        => $collectorAConvertir->getContext(),
+                         'nb_votes'       => $collectorAConvertir->getNb_votes(),
+                         'vote_user'      => $collectorAConvertir->getVote_user(),
+                         'votes'          => array()
+                        );
+
+      $listeVotesCollector = array();
+
+      foreach ($collectorAConvertir->getVotes() as $smiley => $votesBySmiley)
+      {
+        if (!isset($listeVotesCollector[$smiley]))
+          $listeVotesCollector[$smiley] = array();
+
+        foreach ($votesBySmiley as $pseudo)
+        {
+          array_push($listeVotesCollector[$smiley], $pseudo);
+        }
+      }
+
+      $collector['votes']                                       = $listeVotesCollector;
+      $listeCollectorsAConvertir[$collectorAConvertir->getId()] = $collector;
+    }
+
+    // Retour
+    return $listeCollectorsAConvertir;
+  }
+
   // METIER : Insertion phrases / images cultes
   // RETOUR : Id collector
   function insertCollector($post, $files, $identifiant)

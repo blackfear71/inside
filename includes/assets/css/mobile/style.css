@@ -527,6 +527,13 @@ aside
 	background-color: #c81932;
 }
 
+/*** Ombre ancres ***/
+.zone_shadow
+{
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
 /*** Texte zone vide ***/
 .empty
 {

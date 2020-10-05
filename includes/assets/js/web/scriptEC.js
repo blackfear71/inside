@@ -282,7 +282,7 @@ function saisirMontant(zone, montant, value)
 function updateExpense(idDepense, year)
 {
   // Récupération des données
-  var depense = listExpenses[idDepense];
+  var depense = listeDepenses[idDepense];
   var parts   = depense['parts'];
   var type    = depense['type'];
   var price;

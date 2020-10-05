@@ -236,6 +236,41 @@ function $_GET(param)
 	return vars;
 }
 
+// Positionnement du scroll vertical en fonction de l'id et de l'offset (en % de la hauteur <=> vh)
+function scrollToId(id, offset, shadow = false)
+{
+  if (offset == null)
+    offset = 0;
+
+  if (id != null && id.length > 0)
+  {
+    var anchor = $('#' + id);
+
+    // On récupère la position en Y de l'ancre
+    var posY = anchor.offset().top;
+
+    // On défini la vitesse d'animation et la position finale
+    var speed     = 750;
+    var posScroll = posY - $(window).height() * offset;
+
+    // On lance l'animation
+    $('html, body').animate({scrollTop: posScroll}, speed);
+
+    // Affichage d'une ombre pour un id "#zone_shadow_id"
+    if (shadow == true)
+    {
+      // On applique un style pour mettre en valeur l'élément puis on le fait disparaitre au bout de 5 secondes
+      $('#zone_shadow_' + id).css('box-shadow', '0 0 1vh #262626');
+
+      setTimeout(function()
+      {
+        $('#zone_shadow_' + id).css('box-shadow', '0 0 0.5vh #7c7c7c');
+        $('#zone_shadow_' + id).css({transition : 'box-shadow ease 0.2s'});
+      }, 5000);
+    }
+  }
+}
+
 // Initialisation de la position Celsius
 function initPositionCelsius()
 {

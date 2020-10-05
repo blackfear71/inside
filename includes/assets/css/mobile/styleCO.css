@@ -18,6 +18,78 @@
 	background-color: white;
 }
 
+/*** Saisie vote ***/
+.zone_smileys
+{
+  text-align: center;
+}
+
+.smiley
+{
+	width: 6vh;
+	height: 6vh;
+	border: 0;
+	border-radius: 50%;
+	margin: 1vh 1vh 2vh 1vh;
+	background-size: 6vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+
+.smiley_selected
+{
+  width: calc(6vh - 0.1vh);
+	height: calc(6vh - 0.1vh);
+  box-shadow: 0 0 0.5vh #7c7c7c;
+  border: solid 0.1vh #262626;
+}
+
+.smiley_0
+{
+	background-image: url("/inside/includes/icons/common/smileys/0.png");
+}
+
+.smiley_1
+{
+	background-image: url("/inside/includes/icons/common/smileys/1.png");
+}
+
+.smiley_2
+{
+	background-image: url("/inside/includes/icons/common/smileys/2.png");
+}
+
+.smiley_3
+{
+	background-image: url("/inside/includes/icons/common/smileys/3.png");
+}
+
+.smiley_4
+{
+	background-image: url("/inside/includes/icons/common/smileys/4.png");
+}
+
+.smiley_5
+{
+	background-image: url("/inside/includes/icons/common/smileys/5.png");
+}
+
+.smiley_6
+{
+	background-image: url("/inside/includes/icons/common/smileys/6.png");
+}
+
+.smiley_7
+{
+	background-image: url("/inside/includes/icons/common/smileys/7.png");
+}
+
+.smiley_8
+{
+	background-image: url("/inside/includes/icons/common/smileys/8.png");
+}
+
 /*** Phrases / images cultes***/
 .zone_collectors
 {
@@ -29,6 +101,7 @@
   display: block;
   clear: both;
   margin-bottom: 2vh;
+  border-radius: 0.5vh;
 }
 
 .zone_collector_haut

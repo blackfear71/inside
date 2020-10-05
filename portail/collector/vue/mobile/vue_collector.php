@@ -56,9 +56,15 @@
           /* Saisies */
           /***********/
 
-          /********/
-          /* Vote */
-          /********/
+          /********************/
+          /* Vote utilisateur */
+          /********************/
+          include('vue/mobile/vue_vote_user.php');
+
+          /***************************/
+          /* Votes tous utilisateurs */
+          /***************************/
+          include('vue/mobile/vue_votes_collector.php');
 
           /********************/
           /* Boutons d'action */
@@ -86,5 +92,11 @@
     <footer>
       <?php include('../../includes/common/footer_mobile.php'); ?>
     </footer>
+
+    <!-- Données JSON -->
+    <script>
+      // Récupération de la liste des phrases / images cultes pour le script
+      var listeCollectors = <?php if (isset($listeCollectorsJson) AND !empty($listeCollectorsJson)) echo $listeCollectorsJson; else echo '{}'; ?>;
+    </script>
   </body>
 </html>

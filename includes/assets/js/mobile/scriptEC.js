@@ -73,7 +73,7 @@ $(function()
     ajouterPart('zone_user_' + idUser, 'quantite_user_' + idUser, -1);
   });
 
-  // Ouvre la fenêtre de saisie d'une dépenseen modification
+  // Ouvre la fenêtre de saisie d'une dépense en modification
   $('.modifierDepense').click(function()
   {
     var idDepense = $(this).attr('id').replace('modifier_depense_', '');
@@ -166,7 +166,7 @@ function ajouterMontant(zone, montant, value)
 function showDetails(idDepense)
 {
   // Récupération des données
-  var depense        = listExpenses[idDepense];
+  var depense        = listeDepenses[idDepense];
   var date           = formatDateForDisplay(depense['date']);
   var prix           = formatAmountForDisplay(depense['price'], true);
   var avatarAcheteur = formatAvatar(depense['avatar'], depense['pseudo'], 2, 'avatar');
@@ -298,7 +298,7 @@ function showDetails(idDepense)
 function initialisationModification(idDepense, year)
 {
   // Récupération des données
-  var depense = listExpenses[idDepense];
+  var depense = listeDepenses[idDepense];
   var parts   = depense['parts'];
   var type    = depense['type'];
   var price;

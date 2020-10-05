@@ -129,6 +129,9 @@
         {
           Collector::secureData($collector);
         }
+
+        // Conversion JSON
+        $listeCollectorsJson = json_encode(convertForJsonListeCollectors($listeCollectors));
       }
       break;
 
