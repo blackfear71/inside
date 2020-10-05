@@ -46,6 +46,9 @@
         // Calcul du minimum de smileys pour être culte (75%)
         $minGolden = getMinGolden($listeUsers);
 
+        // Récupération des tris et des filtres
+        $ordersAndFilters = getOrdersAndFilters();
+
         // Récupération de la pagination
         $nombrePages = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
 
@@ -106,6 +109,19 @@
       }
 
       unset($user);
+
+      foreach ($ordersAndFilters as &$orderAndFilter)
+      {
+        foreach ($orderAndFilter as &$orderAndFilterValue)
+        {
+          $orderAndFilterValue['label'] = htmlspecialchars($orderAndFilterValue['label']);
+          $orderAndFilterValue['value'] = htmlspecialchars($orderAndFilterValue['value']);
+        }
+
+        unset($orderAndFilterValue);
+      }
+
+      unset($orderAndFilter);
 
       if ($nombrePages > 0)
       {

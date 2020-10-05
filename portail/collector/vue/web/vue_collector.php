@@ -60,63 +60,24 @@
             echo '<div class="zone_filtres">';
               // Tris
               echo '<select id="applySort" class="listbox_filtre">';
-                if ($_GET['sort'] == 'dateDesc')
-                  echo '<option value="dateDesc" selected>Du plus récent au plus vieux</option>';
-                else
-                  echo '<option value="dateDesc">Du plus récent au plus vieux</option>';
-
-                if ($_GET['sort'] == 'dateAsc')
-                  echo '<option value="dateAsc" selected>Du plus vieux au plus récent</option>';
-                else
-                  echo '<option value="dateAsc">Du plus vieux au plus récent</option>';
+                foreach ($ordersAndFilters['tris'] as $tri)
+                {
+                  if ($_GET['sort'] == $tri['value'])
+                    echo '<option value="' . $tri['value'] . '" selected>' . $tri['label'] . '</option>';
+                  else
+                    echo '<option value="' . $tri['value'] . '">' . $tri['label'] . '</option>';
+                }
               echo '</select>';
 
               // Filtres
               echo '<select id="applyFilter" class="listbox_filtre">';
-                if ($_GET['filter'] == 'none')
-                  echo '<option value="none" selected>Aucun filtre</option>';
-                else
-                  echo '<option value="none">Aucun filtre</option>';
-
-                if ($_GET['filter'] == 'noVote')
-                  echo '<option value="noVote" selected>Non votés</option>';
-                else
-                  echo '<option value="noVote">Non votés</option>';
-
-                if ($_GET['filter'] == 'meOnly')
-                  echo '<option value="meOnly" selected>Mes phrases cultes</option>';
-                else
-                  echo '<option value="meOnly">Mes phrases cultes</option>';
-
-                if ($_GET['filter'] == 'byMe')
-                  echo '<option value="byMe" selected>Mes phrases rapportées</option>';
-                else
-                  echo '<option value="byMe">Mes phrases rapportées</option>';
-
-                if ($_GET['filter'] == 'usersOnly')
-                  echo '<option value="usersOnly" selected>Les phrases cultes des autres utilisateurs</option>';
-                else
-                  echo '<option value="usersOnly">Les phrases cultes des autres utilisateurs</option>';
-
-                if ($_GET['filter'] == 'othersOnly')
-                  echo '<option value="othersOnly" selected>Les phrases cultes hors utilisateurs</option>';
-                else
-                  echo '<option value="othersOnly">Les phrases cultes hors utilisateurs</option>';
-
-                if ($_GET['filter'] == 'textOnly')
-                  echo '<option value="textOnly" selected>Seulement les phrases cultes</option>';
-                else
-                  echo '<option value="textOnly">Seulement les phrases cultes</option>';
-
-                if ($_GET['filter'] == 'picturesOnly')
-                  echo '<option value="picturesOnly" selected>Seulement les images</option>';
-                else
-                  echo '<option value="picturesOnly">Seulement les images</option>';
-
-                if ($_GET['filter'] == 'topCulte')
-                  echo '<option value="topCulte" selected>Les tops cultes</option>';
-                else
-                  echo '<option value="topCulte">Les tops cultes</option>';
+                foreach ($ordersAndFilters['filtres'] as $filtre)
+                {
+                  if ($_GET['filter'] == $filtre['value'])
+                    echo '<option value="' . $filtre['value'] . '" selected>' . $filtre['label'] . '</option>';
+                  else
+                    echo '<option value="' . $filtre['value'] . '">' . $filtre['label'] . '</option>';
+                }
               echo '</select>';
             echo '</div>';
           echo '</div>';

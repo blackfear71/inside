@@ -53,6 +53,28 @@
     return $minGolden;
   }
 
+  // METIER : Génération de la liste des tris et filtres
+  // RETOUR : Tableau des tris et des filtres
+  function getOrdersAndFilters()
+  {
+    // Génération du tableau
+    $tableauTrisFiltres = array('tris'    => array(array('label' => 'Du plus récent au plus vieux',               'value' => 'dateDesc'),
+                                                   array('label' => 'Du plus vieux au plus récent',               'value' => 'dateAsc')),
+                                'filtres' => array(array('label' => 'Aucun filtre',                               'value' => 'none'),
+                                                   array('label' => 'Non votés',                                  'value' => 'noVote'),
+                                                   array('label' => 'Mes phrases cultes',                         'value' => 'meOnly'),
+                                                   array('label' => 'Mes phrases rapportées',                     'value' => 'byMe'),
+                                                   array('label' => 'Les phrases cultes des autres utilisateurs', 'value' => 'usersOnly'),
+                                                   array('label' => 'Les phrases cultes hors utilisateurs',       'value' => 'othersOnly'),
+                                                   array('label' => 'Seulement les phrases cultes',               'value' => 'textOnly'),
+                                                   array('label' => 'Seulement les images',                       'value' => 'picturesOnly'),
+                                                   array('label' => 'Les tops cultes',                            'value' => 'topCulte'))
+                               );
+
+    // Retour
+    return $tableauTrisFiltres;
+  }
+
   // METIER : Lecture nombre de pages en fonction du filtre
   // RETOUR : Nombre de pages
   function getPages($filtre, $identifiant, $minGolden)

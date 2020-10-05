@@ -52,14 +52,6 @@
           /*********/
           echo '<div class="titre_section_mobile">' . strtoupper($titleHead) . '</div>';
 
-          /********************/
-          /* Boutons d'action */
-          /********************/
-
-          /***********/
-          /* Filtres */
-          /***********/
-
           /***********/
           /* Saisies */
           /***********/
@@ -67,6 +59,15 @@
           /********/
           /* Vote */
           /********/
+
+          /********************/
+          /* Boutons d'action */
+          /********************/
+
+          /*******************/
+          /* Tris et filtres */
+          /*******************/
+          include('vue/mobile/vue_tris_filtres.php');
 
           /***********/
           /* Contenu */
