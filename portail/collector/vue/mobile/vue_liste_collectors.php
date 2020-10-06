@@ -106,13 +106,13 @@
               // Votes tous utilisateurs
               if (!empty($collector->getVotes()))
               {
-                echo '<div class="zone_votes_users">';
+                echo '<a id="link_details_votes_' . $collector->getId() . '" class="zone_votes_users afficherDetailsVotes">';
                   // Smileys
                   foreach ($collector->getVotes() as $keySmiley => $votesParSmiley)
                   {
                     echo '<img src="../../includes/icons/common/smileys/' . $keySmiley . '.png" alt="smiley" class="smiley_votes" />';
                   }
-                echo '</div>';
+                echo '</a>';
               }
             echo '</div>';
           echo '</div>';
