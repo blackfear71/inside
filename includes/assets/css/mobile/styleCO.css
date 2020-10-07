@@ -40,10 +40,10 @@
 
 .smiley_selected
 {
-  width: calc(6vh - 0.1vh);
-	height: calc(6vh - 0.1vh);
+  width: calc(6vh - 0.3vh);
+	height: calc(6vh - 0.3vh);
   box-shadow: 0 0 0.5vh #7c7c7c;
-  border: solid 0.1vh #262626;
+  border: solid 0.3vh #262626;
 }
 
 .smiley_0
