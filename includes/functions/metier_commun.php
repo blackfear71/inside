@@ -754,15 +754,9 @@
       switch ($exif['Orientation'])
       {
         case 3:
-          $degrees = 180;
-          break;
-
         case 6:
-          $degrees = -90;
-          break;
-
         case 8:
-          $degrees = 90;
+          $degrees = 360;
           break;
 
         case 1:
