@@ -190,7 +190,7 @@
 
   // METIER : Insertion phrases / images cultes
   // RETOUR : Id collector
-  function insertCollector($post, $files, $identifiant)
+  function insertCollector($post, $files, $identifiant, $isMobile)
   {
     // Initialisations
     $idCollector = NULL;
@@ -208,7 +208,11 @@
       $typeSpeaker = 'user';
     }
 
-    $dateCollector     = formatDateForInsert($post['date_collector']);
+    if ($isMobile == true)
+      $dateCollector = formatDateForInsertMobile($post['date_collector']);
+    else
+      $dateCollector = formatDateForInsert($post['date_collector']);
+
     $typeCollector     = $post['type_collector'];
     $contexteCollector = deleteInvisible($post['context']);
 
@@ -232,7 +236,7 @@
       $_SESSION['save']['collector'] = $post['collector'];
 
     // Contrôle date de saisie
-    $control_ok = controleFormatDate($post['date_collector']);
+    $control_ok = controleFormatDate($post['date_collector'], $isMobile);
 
     // Formatage du texte ou insertion image
     if ($control_ok == true)
@@ -290,19 +294,23 @@
 
   // METIER : Modification phrases / images cultes
   // RETOUR : Id collector
-  function updateCollector($post, $files)
+  function updateCollector($post, $files, $isMobile)
   {
     // Initialisations
     $control_ok = true;
 
     // Récupération des données
     $idCollector       = $post['id_col'];
-    $dateCollector     = formatDateForInsert($post['date_collector']);
     $typeCollector     = $post['type_collector'];
     $contexteCollector = deleteInvisible($post['context']);
 
+    if ($isMobile == true)
+      $dateCollector = formatDateForInsertMobile($post['date_collector']);
+    else
+      $dateCollector = formatDateForInsert($post['date_collector']);
+
     // Contrôle date de saisie
-    $control_ok = controleFormatDate($post['date_collector']);
+    $control_ok = controleFormatDate($post['date_collector'], $isMobile);
 
     // Récupération des données complémentaires
     if ($control_ok == true)

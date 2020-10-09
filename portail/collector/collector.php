@@ -67,7 +67,16 @@
 
     case 'doAjouter':
       // Insertion d'une phrase culte
-      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant'], false);
+
+      // Récupération du numéro de page
+      if (!empty($idCollector))
+        $numeroPage = numeroPageCollector($idCollector);
+      break;
+
+    case 'doAjouterMobile':
+      // Insertion d'une phrase culte
+      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant'], true);
 
       // Récupération du numéro de page
       if (!empty($idCollector))
@@ -81,7 +90,15 @@
 
     case 'doModifier':
       // Modification d'une phrase culte
-      $idCollector = updateCollector($_POST, $_FILES);
+      $idCollector = updateCollector($_POST, $_FILES, false);
+
+      // Récupération du numéro de page
+      $numeroPage = numeroPageCollector($idCollector);
+      break;
+
+    case 'doModifierMobile':
+      // Modification d'une phrase culte
+      $idCollector = updateCollector($_POST, $_FILES, true);
 
       // Récupération du numéro de page
       $numeroPage = numeroPageCollector($idCollector);
@@ -136,8 +153,10 @@
       break;
 
     case 'doAjouter':
+    case 'doAjouterMobile':
     case 'doSupprimer':
     case 'doModifier':
+    case 'doModifierMobile':
     case 'doVoter':
     default:
       break;
@@ -147,6 +166,7 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
+    case 'doAjouterMobile':
       if (!empty($idCollector) AND !empty($numeroPage))
         header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $idCollector);
       else
@@ -154,6 +174,7 @@
       break;
 
     case 'doModifier':
+    case 'doModifierMobile':
       header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
       break;
 

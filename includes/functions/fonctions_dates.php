@@ -1,5 +1,5 @@
 <?php
-  // DATE : Contrôle date valide
+  // DATE : Contrôle date valide (format JJ/MM/AAAA)
   // RETOUR : Booléen
   function validateDate($date)
   {
@@ -12,6 +12,31 @@
       $jour  = substr($date, 0, 2);
       $mois  = substr($date, 3, 2);
       $annee = substr($date, 6, 4);
+
+      if (is_numeric($jour) AND is_numeric($mois) AND is_numeric($annee))
+      {
+        if (checkdate($mois, $jour, $annee) == true)
+          $dateValide = true;
+      }
+    }
+
+    // Retour
+    return $dateValide;
+  }
+
+  // DATE : Contrôle date valide (format AAAA-MM-JJ)
+  // RETOUR : Booléen
+  function validateDateMobile($date)
+  {
+    // Initialisations
+    $dateValide = false;
+
+    // Vérification de la date
+    if (strlen($date) == 10)
+    {
+      $jour  = substr($date, 8, 2);
+      $mois  = substr($date, 5, 2);
+      $annee = substr($date, 0, 4);
 
       if (is_numeric($jour) AND is_numeric($mois) AND is_numeric($annee))
       {
@@ -165,6 +190,20 @@
     // Formatage de la date
     if (strlen($date) == 10)
       $dateFormat = substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
+    else
+      $dateFormat = $date;
+
+    // Retour
+    return $dateFormat;
+  }
+
+  // DATE : Formate une date pour insertion en base (AAAA-MM-JJ -> AAAAMMJJ)
+  // RETOUR : Date formaté
+  function formatDateForInsertMobile($date)
+  {
+    // Formatage de la date
+    if (strlen($date) == 10)
+      $dateFormat = substr($date, 0, 4) . substr($date, 5, 2) . substr($date, 8, 2);
     else
       $dateFormat = $date;
 

@@ -1,13 +1,25 @@
 <?php
   // CONTROLE : Format de date
   // RETOUR : Booléen
-  function controleFormatDate($date)
+  function controleFormatDate($date, $isMobile)
   {
     // Initialisations
     $control_ok = true;
+    $alerteDate = false;
 
     // Contrôle
-    if (validateDate($date) != true)
+    if ($isMobile == true)
+    {
+      if (validateDateMobile($date) != true)
+        $alerteDate = true;
+    }
+    else
+    {
+      if (validateDate($date) != true)
+        $alerteDate = true;
+    }
+
+    if ($alerteDate == true)
     {
       $_SESSION['alerts']['wrong_date'] = true;
       $control_ok                       = false;

@@ -55,6 +55,8 @@
           /***********/
           /* Saisies */
           /***********/
+          include('vue/mobile/vue_saisie_phrase_culte.php');
+          include('vue/mobile/vue_saisie_image_culte.php');
 
           /********************/
           /* Vote utilisateur */
@@ -69,6 +71,11 @@
           /********************/
           /* Boutons d'action */
           /********************/
+          // Saisie phrase culte
+          echo '<a id="afficherSaisiePhraseCulte" title="Saisir une phrase culte" class="lien_green">Saisir une phrase culte</a>';
+
+          // Saisie image culte
+          echo '<a id="afficherSaisieImageCulte" title="Saisir une image culte" class="lien_green">Saisir une image culte</a>';
 
           /*******************/
           /* Tris et filtres */

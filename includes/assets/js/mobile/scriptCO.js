@@ -5,6 +5,64 @@
 $(function()
 {
   /*** Actions au clic ***/
+  // Ouvre la zone de saisie d'une phrase culte
+  $('#afficherSaisiePhraseCulte').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_saisie_collector');
+  });
+
+  // Ferme la zone de saisie d'une phrase culte
+  $('#fermerSaisiePhraseCulte').click(function()
+  {
+
+
+
+
+    // Réinitialisation de la saisie
+    //resetSaisie('zone_saisie_collector', $_GET('year'), 'P');
+
+
+
+
+
+
+
+    // Fermeture de l'affichage
+    afficherMasquerIdWithDelay('zone_saisie_collector');
+  });
+
+  // Ouvre la zone de saisie d'une image culte
+  $('#afficherSaisieImageCulte').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_saisie_image');
+  });
+
+  // Ferme la zone de saisie d'une image culte
+  $('#fermerSaisieImageCulte').click(function()
+  {
+
+
+
+
+    // Réinitialisation de la saisie
+    //resetSaisie('zone_saisie_image', $_GET('year'), 'P');
+
+
+
+
+
+
+
+    // Fermeture de l'affichage
+    afficherMasquerIdWithDelay('zone_saisie_image');
+  });
+
+  // Charge l'image dans la zone de saisie
+  $('.loadSaisieCollector').on('change', function(event)
+  {
+    loadFile(event, 'image_collector');
+  });
+
   // Ouvre la zone de saisie de vote
   $('.afficherSaisieVote').click(function()
   {
@@ -44,6 +102,12 @@ $(function()
     else
       applySortOrFilter($_GET('sort'), $(this).val());
   });
+
+  // Affiche la saisie "Autre" (phrase culte)
+  $('#speaker').on('change', function()
+  {
+    afficherOther('speaker', 'other_name');
+  });
 });
 
 /**************/
@@ -64,6 +128,23 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Affiche ou masque la zone de saisie "Autre"
+function afficherOther(select, required)
+{
+  if ($('#' + select).val() == 'other')
+  {
+    $('#' + required).css('display', 'inline-block');
+    $('#' + required).prop('required', true);
+    $('#' + select).addClass('saisie_speaker speaker_autre');
+  }
+  else
+  {
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
+    $('#' + select).removeClass('speaker_autre');
+  }
+}
+
 // Redirige pour appliquer le tri ou le filtre
 function applySortOrFilter(sort, filter)
 {
