@@ -185,7 +185,7 @@ $(function()
   // Charge l'image (saisie)
   $('.loadSaisieCollector').on('change', function()
   {
-    loadFile(event, 'image_collector');
+    loadFile(event, 'image_collector', true);
   });
 
   // Affiche la saisie "Autre" (modification)
@@ -200,7 +200,8 @@ $(function()
   $('.loadModifierCollector').on('change', function()
   {
     var idImage = $(this).attr('id').replace('fichier_', '');
-    loadFile(event, 'image_collector_' + idImage);
+    
+    loadFile(event, 'image_collector_' + idImage, true);
   });
 
   $('.loadImage').on('load', function()
@@ -315,43 +316,6 @@ function adaptBrowse(id)
   $('#zone_parcourir_' + id).height(image_height);
   $('#mask_collector_' + id).css('margin-top', marge);
 }
-
-// Insère une prévisualisation de l'image sur la zone
-var loadFile = function(event, id)
-{
-  var output   = document.getElementById(id);
-  output.src   = URL.createObjectURL(event.target.files[0]);
-
-  // Rotation automatique
-  EXIF.getData(event.target.files[0], function()
-  {
-    var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees;
-
-    // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
-    switch (orientation)
-    {
-      case 3:
-        degrees = 180;
-        break;
-
-      case 6:
-        degrees = 90;
-        break;
-
-      case 8:
-        degrees = -90;
-        break;
-
-      case 1:
-      default:
-        degrees = 0;
-        break;
-    }
-
-    output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
-  });
-};
 
 // Affiche ou masque la zone de saisie "Autre" (insertion)
 function afficherOther(select, required)

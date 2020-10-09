@@ -20,13 +20,13 @@ $(function()
   // Charge le calendrier
   $('.loadCalendrier').on('change', function()
   {
-    loadFile(event, 'image_calendars');
+    loadFile(event, 'image_calendars', false);
   });
 
   // Charge l'annexe
   $('.loadAnnexe').on('change', function()
   {
-    loadFile(event, 'image_annexes');
+    loadFile(event, 'image_annexes', false);
   });
 });
 
@@ -68,13 +68,6 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Insère une prévisualisation de l'image sur la zone
-var loadFile = function(event, id)
-{
-  var output = document.getElementById(id);
-  output.src = URL.createObjectURL(event.target.files[0]);
-};
-
 // Adaptations des calendriers et annexes sur mobile
 function adaptCalendars()
 {

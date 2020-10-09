@@ -137,7 +137,7 @@ $(function()
   // Charge l'avatar
   $('.loadAvatar').on('change', function()
   {
-    loadFile(event, 'avatar');
+    loadFile(event, 'avatar', false);
   });
 
   /*** Calendriers ***/
@@ -331,13 +331,6 @@ function adaptProfil()
     }
   }
 }
-
-// Insère une prévisualisation de l'image sur la page
-var loadFile = function(event, id)
-{
-  var output = document.getElementById(id);
-  output.src = URL.createObjectURL(event.target.files[0]);
-};
 
 // Change la couleur des radio boutons (préférences)
 function switchCheckedColor(zone, input)

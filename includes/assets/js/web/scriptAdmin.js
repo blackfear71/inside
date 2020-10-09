@@ -140,73 +140,73 @@ $(function()
   // Charge le thème (header utilisateurs)
   $('.loadHeaderUsers').on('change', function()
   {
-    loadFile(event, 'theme_header_users');
+    loadFile(event, 'theme_header_users', false);
   });
 
   // Charge le thème (background utilisateurs)
   $('.loadBackgroundUsers').on('change', function()
   {
-    loadFile(event, 'theme_background_users');
+    loadFile(event, 'theme_background_users', false);
   });
 
   // Charge le thème (footer utilisateurs)
   $('.loadFooterUsers').on('change', function()
   {
-    loadFile(event, 'theme_footer_users');
+    loadFile(event, 'theme_footer_users', false);
   });
 
   // Charge le thème (logo utilisateurs)
   $('.loadLogoUsers').on('change', function()
   {
-    loadFile(event, 'theme_logo_users');
+    loadFile(event, 'theme_logo_users', false);
   });
 
   // Charge le thème (header mission)
   $('.loadHeaderMission').on('change', function()
   {
-    loadFile(event, 'theme_header_mission');
+    loadFile(event, 'theme_header_mission', false);
   });
 
   // Charge le thème (background mission)
   $('.loadBackgroundMission').on('change', function()
   {
-    loadFile(event, 'theme_background_mission');
+    loadFile(event, 'theme_background_mission', false);
   });
 
   // Charge le thème (footer mission)
   $('.loadFooterMission').on('change', function()
   {
-    loadFile(event, 'theme_footer_mission');
+    loadFile(event, 'theme_footer_mission', false);
   });
 
   // Charge le thème (logo mission)
   $('.loadLogoMission').on('change', function()
   {
-    loadFile(event, 'theme_logo_mission');
+    loadFile(event, 'theme_logo_mission', false);
   });
 
   // Charge la bannière (mission)
   $('.loadBanner').on('change', function()
   {
-    loadFile(event, 'banner');
+    loadFile(event, 'banner', false);
   });
 
   // Charge le bouton gauche (mission)
   $('.loadLeft').on('change', function()
   {
-    loadFile(event, 'button_g');
+    loadFile(event, 'button_g', false);
   });
 
   // Charge le bouton milieu (mission)
   $('.loadMiddle').on('change', function()
   {
-    loadFile(event, 'button_m');
+    loadFile(event, 'button_m', false);
   });
 
   // Charge le bouton droite (mission)
   $('.loadRight').on('change', function()
   {
-    loadFile(event, 'button_d');
+    loadFile(event, 'button_d', false);
   });
 
   /*** Calendriers ***/
@@ -545,13 +545,6 @@ function rotateIcon(id)
   else
     $('#' + id).css('transform', 'rotate(0deg)');
 }
-
-// Insère une prévisualisation de l'image sur la page
-var loadFile = function(event, id)
-{
-  var output = document.getElementById(id);
-  output.src = URL.createObjectURL(event.target.files[0]);
-};
 
 // Change la couleur des checkbox
 function changeCheckedColor(input)

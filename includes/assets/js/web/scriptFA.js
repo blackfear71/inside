@@ -396,7 +396,7 @@ $(function()
   // Charge l'image (saisie)
   $('.loadSaisieRestaurant').on('change', function()
   {
-    loadFile(event, 'img_restaurant_saisie');
+    loadFile(event, 'img_restaurant_saisie', true);
   });
 
   // Affiche la saisie "Autre" (modification)
@@ -412,7 +412,7 @@ $(function()
   {
     var idRestaurant = $(this).attr('id').replace('modifier_image_', '');
 
-    loadFile(event, 'img_restaurant_' + idRestaurant);
+    loadFile(event, 'img_restaurant_' + idRestaurant, true);
   });
 });
 
@@ -975,43 +975,6 @@ function cacherListboxRestaurantsResume(zone, bouton_valider, bouton_annuler)
   $('#no_proposal_' + num).css('padding-top', new_padding);
   $('#no_proposal_' + num).css('padding-bottom', new_padding);
 }
-
-// Insère une prévisualisation de l'image sur la page
-var loadFile = function(event, id)
-{
-  var output = document.getElementById(id);
-  output.src = URL.createObjectURL(event.target.files[0]);
-
-  // Rotation automatique
-  EXIF.getData(event.target.files[0], function()
-  {
-    var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees;
-
-    // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
-    switch (orientation)
-    {
-      case 3:
-        degrees = 180;
-        break;
-
-      case 6:
-        degrees = 90;
-        break;
-
-      case 8:
-        degrees = -90;
-        break;
-
-      case 1:
-      default:
-        degrees = 0;
-        break;
-    }
-
-    output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
-  });
-};
 
 // Change la couleur des checkbox (saisie restaurant)
 function changeCheckedColor(input)

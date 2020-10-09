@@ -60,7 +60,7 @@ $(function()
   // Charge l'image dans la zone de saisie
   $('.loadSaisieCollector').on('change', function(event)
   {
-    loadFile(event, 'image_collector');
+    loadFile(event, 'image_collector', true);
   });
 
   // Ouvre la zone de saisie de vote

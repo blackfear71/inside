@@ -466,6 +466,45 @@ function scrollToId(id, offset, shadow = false)
   }
 }
 
+// Insère une prévisualisation de l'image sur la zone correspondante
+function loadFile(event, id, rotation)
+{
+  var output = $('#' + id)[0];
+  output.src = URL.createObjectURL(event.target.files[0]);
+
+  // Rotation automatique
+  if (rotation == true)
+  {
+    EXIF.getData(event.target.files[0], function()
+    {
+      var orientation = EXIF.getTag(this, 'Orientation');
+      var degrees;
+
+      switch (orientation)
+      {
+        case 3:
+          degrees = 180;
+          break;
+
+        case 6:
+          degrees = -90;
+          break;
+
+        case 8:
+          degrees = 90;
+          break;
+
+        case 1:
+        default:
+          degrees = 0;
+          break;
+      }
+
+      output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
+    });
+  }
+};
+
 // Ouvre une fenêtre de confirmation
 function confirmAction(form, message)
 {

@@ -121,7 +121,7 @@ $(function()
   // Charge l'image (saisie)
   $('.loadSaisieRecette').on('change', function()
   {
-    loadFile(event, 'image_recette');
+    loadFile(event, 'image_recette', true);
   });
 
   // Affiche la saisie semaine (saisie)
@@ -283,43 +283,6 @@ function afficherListboxUtilisateurs(idZone, week)
 
   $('#' + idZone).append(html);
 }
-
-// Insère une prévisualisation de l'image sur la zone
-var loadFile = function(event, id)
-{
-  var output   = document.getElementById(id);
-  output.src   = URL.createObjectURL(event.target.files[0]);
-
-  // Rotation automatique
-  EXIF.getData(event.target.files[0], function()
-  {
-    var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees;
-
-    // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
-    switch (orientation)
-    {
-      case 3:
-        degrees = 180;
-        break;
-
-      case 6:
-        degrees = 90;
-        break;
-
-      case 8:
-        degrees = -90;
-        break;
-
-      case 1:
-      default:
-        degrees = 0;
-        break;
-    }
-
-    output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
-  });
-};
 
 // Affiche ou la zone de saisie semaine correspondant à l'année (insertion)
 function afficherSemaines(select)

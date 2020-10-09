@@ -271,50 +271,43 @@ function scrollToId(id, offset, shadow = false)
   }
 }
 
-/*// Insère une prévisualisation de l'image sur la page
-function loadFile(event, id)
-{
-  console.log(event);
-  console.log(id);
-
-  $('#' + id).src = URL.createObjectURL(event.target.files[0]);
-};*/
-
-// Insère une prévisualisation de l'image sur la zone
-function loadFile(event, id)
+// Insère une prévisualisation de l'image sur la zone correspondante
+function loadFile(event, id, rotation)
 {
   var output = $('#' + id)[0];
   output.src = URL.createObjectURL(event.target.files[0]);
 
   // Rotation automatique
-  EXIF.getData(event.target.files[0], function()
+  if (rotation == true)
   {
-    var orientation = EXIF.getTag(this, 'Orientation');
-    var degrees;
-
-    // Les valeurs sont inversées par rapport à la fonction rotateImage() dans metier_commun.php
-    switch (orientation)
+    EXIF.getData(event.target.files[0], function()
     {
-      case 3:
-        degrees = 180;
-        break;
+      var orientation = EXIF.getTag(this, 'Orientation');
+      var degrees;
 
-      case 6:
-        degrees = -90;
-        break;
+      switch (orientation)
+      {
+        case 3:
+          degrees = 180;
+          break;
 
-      case 8:
-        degrees = 90;
-        break;
+        case 6:
+          degrees = -90;
+          break;
 
-      case 1:
-      default:
-        degrees = 0;
-        break;
-    }
+        case 8:
+          degrees = 90;
+          break;
 
-    output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
-  });
+        case 1:
+        default:
+          degrees = 0;
+          break;
+      }
+
+      output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
+    });
+  }
 };
 
 // Initialisation de la position Celsius
