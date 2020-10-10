@@ -79,8 +79,8 @@
 .zone_image_saisie
 {
 	display: block;
-	width: 83.5vw;
-	height: 83.5vw;
+	width: 100%;
+	height: 40vh;
 	margin-top: 2vh;
 	margin-bottom: 2vh;
 }
@@ -90,7 +90,7 @@
 	width: 100%;
 	height: 100%;
 	border-style: dashed;
-	border-width: 1vw;
+	border-width: 0.5vh;
 	border-radius: 0.5vh;
 	border-color: #a3a3a3;
 	text-align: center;
@@ -100,7 +100,7 @@
 
 .symbole_saisie_image
 {
-	line-height: 81.5vw;
+	line-height: 40vh;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 10vh;
 	color: #a3a3a3;
@@ -112,20 +112,20 @@
 	opacity: 0;
 	width: 100%;
 	height: 100%;
-	margin-top: -81.5vw;
+	margin-top: -40vh;
 	position: relative;
 	z-index: 1;
 }
 
 .mask_image
 {
-	width: 81.5vw;
-	height: 81.5vw;
-	line-height: 81.5vw;
+	width: calc(100% - 1vh);
+	height: calc(100% - 1vh);
+	line-height: 39vh;
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -82.5vw;
+	margin-top: -39.5vh;
 	text-align: center;
 }
 
@@ -134,7 +134,7 @@
 	max-width: 100%;
 	max-height: 100%;
 	vertical-align: middle;
-	margin-top: -1vw;
+	margin-top: -0.5vh;
 }
 
 .saisie_contexte
