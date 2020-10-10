@@ -8,7 +8,8 @@ $(function()
   // Ouvre la zone de saisie d'une phrase culte
   $('#afficherSaisiePhraseCulte').click(function()
   {
-    afficherMasquerIdWithDelay('zone_saisie_collector');
+    // Initialisation de la saisie
+    initialisationSaisie('zone_saisie_collector', 'T');
   });
 
   // Ferme la zone de saisie d'une phrase culte
@@ -34,7 +35,8 @@ $(function()
   // Ouvre la zone de saisie d'une image culte
   $('#afficherSaisieImageCulte').click(function()
   {
-    afficherMasquerIdWithDelay('zone_saisie_image');
+    // Initialisation de la saisie
+    initialisationSaisie('zone_saisie_image', 'I');
   });
 
   // Ferme la zone de saisie d'une image culte
@@ -149,6 +151,33 @@ function afficherOther(select, required)
 function applySortOrFilter(sort, filter)
 {
   document.location.href = 'collector.php?action=goConsulter&page=1&sort=' + sort + '&filter=' + filter;
+}
+
+// Initialisation de la saisie d'une phrase / image culte
+function initialisationSaisie(idZone, typeCollector)
+{
+  // Initialisations
+  var titre;
+  var sousTitre;
+
+  // Titre et sous-titre
+  if (typeCollector == 'I')
+  {
+    titre = 'Saisir une image culte';
+    sousTitre = 'L\'image culte';
+  }
+  else
+  {
+    titre = 'Saisir une phrase culte';
+    sousTitre = 'La phrase culte';
+  }
+
+  // Modification des données
+  $('.zone_titre_saisie').html(titre);
+  $('.texte_titre_section').html(sousTitre);
+
+  // Affiche la zone de saisie
+  afficherMasquerIdWithDelay(idZone);
 }
 
 // Initialisation du vote d'une phrase / image culte

@@ -482,9 +482,10 @@
 {
 	display: inline-block;
 	width: calc(100% - 9vh);
+	margin-top: 1vh;
 	margin-left: 2vh;
 	vertical-align: top;
-	line-height: 7vh;
+	line-height: 5vh;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 3vh;
 	color: #262626;
