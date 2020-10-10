@@ -159,6 +159,7 @@ function initialisationSaisie(idZone, typeCollector)
   // Initialisations
   var titre;
   var sousTitre;
+  var placeholder = 'Date';
 
   // Titre et sous-titre
   if (typeCollector == 'I')
@@ -175,6 +176,7 @@ function initialisationSaisie(idZone, typeCollector)
   // Modification des données
   $('.zone_titre_saisie').html(titre);
   $('.texte_titre_section').html(sousTitre);
+  $('.saisie_date_collector').attr('placeholder', placeholder);
 
   // Affiche la zone de saisie
   afficherMasquerIdWithDelay(idZone);
