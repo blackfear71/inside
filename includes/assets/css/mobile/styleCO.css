@@ -278,7 +278,7 @@
 .zone_avatar_collector
 {
   float: left;
-  margin-left: calc(50% - 8vh);
+  margin-left: calc(50% - 24vh);
   margin-top: -7.5vh;
 	border: solid 1vh #fbfbfb;
 	border-radius: 50%;
@@ -433,6 +433,35 @@
 	border-bottom-right-radius: 0.5vh;
 	overflow: hidden;
 	word-wrap: break-word;
+}
+
+/*** Actions ***/
+.zone_boutons_actions
+{
+	float: left;
+	margin-left: 2vh;
+	margin-top: 2vh;
+	width: 14vh;
+	height: 6vh;
+}
+
+.form_delete_collector
+{
+	display: inline-block;
+	vertical-align: middle;
+	/*margin-left: 2vh;*/
+}
+
+.icon_delete_collector
+{
+	width: 6vh;
+	height: 6vh;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/delete.png");
+	background-size: 5vh 5vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
 }
 
 /*** Vote ***/
