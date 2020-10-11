@@ -278,7 +278,7 @@
 .zone_avatar_collector
 {
   float: left;
-  margin-left: calc(50% - 24vh);
+  margin-left: calc(50% - 23vh);
   margin-top: -7.5vh;
 	border: solid 1vh #fbfbfb;
 	border-radius: 50%;
@@ -441,7 +441,7 @@
 	float: left;
 	margin-left: 2vh;
 	margin-top: 2vh;
-	width: 14vh;
+	width: 13vh;
 	height: 6vh;
 }
 
@@ -449,7 +449,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	/*margin-left: 2vh;*/
+	margin-left: 1vh;
 }
 
 .icon_delete_collector
@@ -458,6 +458,19 @@
 	height: 6vh;
 	border: 0;
 	background-image: url("/inside/includes/icons/common/delete.png");
+	background-size: 5vh 5vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+}
+
+.icone_update_collector
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	background-image: url("/inside/includes/icons/common/edit.png");
 	background-size: 5vh 5vh;
 	background-repeat: no-repeat;
 	background-position: center;

@@ -4,8 +4,8 @@
       // Type de saisie
       echo '<input type="hidden" name="type_collector" value="I" />';
 
-      // Id dépense (modification)
-      echo '<input type="hidden" name="id_saisie_image" value="" />';
+      // Id image culte (modification)
+      echo '<input type="hidden" name="id_col" id="id_saisie_image" value="" />';
 
       // Titre
       echo '<div class="zone_titre_saisie">Saisir une image culte</div>';

@@ -8,25 +8,18 @@ $(function()
   // Ouvre la zone de saisie d'une phrase culte
   $('#afficherSaisiePhraseCulte').click(function()
   {
-    // Initialisation de la saisie
+    // Initialisation des titres de la saisie
     initialisationSaisie('zone_saisie_collector', 'T');
+
+    // Affichage de la zone de saisie
+    afficherMasquerIdWithDelay('zone_saisie_collector');
   });
 
   // Ferme la zone de saisie d'une phrase culte
   $('#fermerSaisiePhraseCulte').click(function()
   {
-
-
-
-
     // Réinitialisation de la saisie
-    //resetSaisie('zone_saisie_collector', $_GET('year'), 'P');
-
-
-
-
-
-
+    resetSaisie('zone_saisie_collector', 'T');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_collector');
@@ -35,28 +28,51 @@ $(function()
   // Ouvre la zone de saisie d'une image culte
   $('#afficherSaisieImageCulte').click(function()
   {
-    // Initialisation de la saisie
+    // Initialisation des titres de la saisie
     initialisationSaisie('zone_saisie_image', 'I');
+
+    // Affichage de la zone de saisie
+    afficherMasquerIdWithDelay('zone_saisie_image');
   });
 
   // Ferme la zone de saisie d'une image culte
   $('#fermerSaisieImageCulte').click(function()
   {
-
-
-
-
     // Réinitialisation de la saisie
-    //resetSaisie('zone_saisie_image', $_GET('year'), 'P');
-
-
-
-
-
-
+    resetSaisie('zone_saisie_image', 'I');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_image');
+  });
+
+  // Ouvre la fenêtre de saisie d'une phrase / image culte en modification
+  $('.modifierCollector').click(function()
+  {
+    var idCollector = $(this).attr('id').replace('modifier_collector_', '');
+
+    initialisationModification(idCollector);
+  });
+
+  // Réinitialise la saisie à la fermeture au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme la saisie d'une dépense
+    if ($(event.target).attr('class') == 'fond_saisie')
+    {
+      switch (event.target.id)
+      {
+        case 'zone_saisie_collector':
+          resetSaisie('zone_saisie_collector', 'T');
+          break;
+
+        case 'zone_saisie_image':
+          resetSaisie('zone_saisie_image', 'I');
+          break;
+
+        default:
+          break;
+      }
+    }
   });
 
   // Charge l'image dans la zone de saisie
@@ -110,6 +126,12 @@ $(function()
   {
     afficherOther('speaker', 'other_name');
   });
+
+  // Affiche la saisie "Autre" (image culte)
+  $('#speaker_2').on('change', function()
+  {
+    afficherOther('speaker_2', 'other_name_2');
+  });
 });
 
 /**************/
@@ -153,13 +175,12 @@ function applySortOrFilter(sort, filter)
   document.location.href = 'collector.php?action=goConsulter&page=1&sort=' + sort + '&filter=' + filter;
 }
 
-// Initialisation de la saisie d'une phrase / image culte
+// Initialisation des titres de la saisie d'une phrase / image culte
 function initialisationSaisie(idZone, typeCollector)
 {
   // Initialisations
   var titre;
   var sousTitre;
-  var placeholder = 'Date';
 
   // Titre et sous-titre
   if (typeCollector == 'I')
@@ -174,12 +195,8 @@ function initialisationSaisie(idZone, typeCollector)
   }
 
   // Modification des données
-  $('.zone_titre_saisie').html(titre);
-  $('.texte_titre_section').html(sousTitre);
-  $('.saisie_date_collector').attr('placeholder', placeholder);
-
-  // Affiche la zone de saisie
-  afficherMasquerIdWithDelay(idZone);
+  $('#' + idZone).find('.zone_titre_saisie').html(titre);
+  $('#' + idZone).find('.texte_titre_section').html(sousTitre);
 }
 
 // Initialisation du vote d'une phrase / image culte
@@ -214,6 +231,162 @@ function initialisationVote(idCollector)
 
   // Affiche la zone de saisie
   afficherMasquerIdWithDelay('zone_saisie_vote');
+}
+
+// Affiche la zone de mise à jour d'une phrase / image culte
+function initialisationModification(idCollector)
+{
+  // Récupération des données
+  var collector     = listeCollectors[idCollector];
+  var typeCollector = collector['type_collector'];
+  var dateCollector = formatDateForMobile(collector['date_collector']);
+  var speaker       = collector['speaker'];
+  var typeSpeaker   = collector['type_speaker'];
+  var contenu       = collector['collector'];
+  var contexte      = collector['context'];
+  var action;
+  var titre;
+  var sousTitre;
+
+  // Action du formulaire
+  action = 'collector.php?sort=' + $_GET('sort') + '&filter=' + $_GET('filter') + '&action=doModifierMobile';
+
+  // Titre et sous-titre
+  if (typeCollector == 'I')
+  {
+    titre = 'Modifier une image culte';
+    sousTitre = 'L\'image culte';
+  }
+  else
+  {
+    titre = 'Modifier une phrase culte';
+    sousTitre = 'La phrase culte';
+  }
+
+  // Modification des données
+  if (typeCollector == 'I')
+  {
+    // Action du formulaire
+    $('#zone_saisie_image').find('.form_saisie').attr('action', action);
+
+    // Titre et sous-titre
+    $('#zone_saisie_image').find('.zone_titre_saisie').html(titre);
+    $('#zone_saisie_image').find('.texte_titre_section').html(sousTitre);
+
+    // Identifiant image culte
+    $('#zone_saisie_image').find('#id_saisie_image').val(idCollector);
+
+    // Speaker et champ "Autre"
+    if (typeSpeaker == 'other')
+    {
+      $('#zone_saisie_image').find('.saisie_speaker').val(typeSpeaker);
+      $('#zone_saisie_image').find('.saisie_other_collector').val(speaker);
+
+      afficherOther('speaker_2', 'other_name_2');
+    }
+    else
+      $('#zone_saisie_image').find('.saisie_speaker').val(speaker);
+
+    // Date
+    $('#zone_saisie_image').find('.saisie_date_collector').val(dateCollector);
+
+    // Contenu
+    $('#zone_saisie_image').find('#image_collector').attr('src', '../../includes/images/collector/' + contenu);
+    $('#zone_saisie_image').find('.bouton_parcourir_image').prop('required', false);
+
+    // Contexte
+    $('#zone_saisie_image').find('.saisie_contexte').html(contexte);
+  }
+  else
+  {
+    // Action du formulaire
+    $('#zone_saisie_collector').find('.form_saisie').attr('action', action);
+
+    // Titre et sous-titre
+    $('#zone_saisie_collector').find('.zone_titre_saisie').html(titre);
+    $('#zone_saisie_collector').find('.texte_titre_section').html(sousTitre);
+
+    // Identifiant phrase culte
+    $('#zone_saisie_collector').find('#id_saisie_collector').val(idCollector);
+
+    // Speaker et champ "Autre"
+    if (typeSpeaker == 'other')
+    {
+      $('#zone_saisie_collector').find('.saisie_speaker').val(typeSpeaker);
+      $('#zone_saisie_collector').find('.saisie_other_collector').val(speaker);
+
+      afficherOther('speaker', 'other_name');
+    }
+    else
+      $('#zone_saisie_collector').find('.saisie_speaker').val(speaker);
+
+    // Date
+    $('#zone_saisie_collector').find('.saisie_date_collector').val(dateCollector);
+
+    // Contenu
+    $('#zone_saisie_collector').find('.saisie_collector').html(contenu);
+
+    // Contexte
+    $('#zone_saisie_collector').find('.saisie_contexte').html(contexte);
+  }
+
+  // Affiche la zone de saisie
+  if (typeCollector == 'I')
+    afficherMasquerIdWithDelay('zone_saisie_image');
+  else
+    afficherMasquerIdWithDelay('zone_saisie_collector');
+}
+
+// Réinitialise la zone de saisie d'une phrase / image culte si fermeture modification
+function resetSaisie(zone, type)
+{
+  // Déclenchement après la fermeture
+  setTimeout(function()
+  {
+    // Test si action = modification
+    var currentAction = $('.form_saisie').attr('action').split('&action=');
+    var call          = currentAction[currentAction.length - 1]
+
+    if (call == 'doModifierMobile')
+    {
+      // Action du formulaire
+      var action = 'collector.php?action=doAjouterMobile&page=' + $_GET['page'];
+
+      $('#zone_saisie_collector').find('.form_saisie').attr('action', action);
+      $('#zone_saisie_image').find('.form_saisie').attr('action', action);
+
+      // Initialisation des titres des saisies
+      initialisationSaisie('zone_saisie_collector', 'T');
+      initialisationSaisie('zone_saisie_image', 'I');
+
+      // Identifiants phrase / image culte
+      $('#zone_saisie_collector').find('#id_saisie_collector').val('');
+      $('#zone_saisie_image').find('#id_saisie_image').val('');
+
+      // Champs "Autre"
+      $('#zone_saisie_collector').find('.saisie_speaker').val('');
+      $('#zone_saisie_collector').find('.saisie_other_collector').val('');
+      $('#zone_saisie_collector').find('.saisie_other_collector').css('display', 'none');
+
+      $('#zone_saisie_image').find('.saisie_speaker').val('');
+      $('#zone_saisie_image').find('.saisie_other_collector').val('');
+      $('#zone_saisie_image').find('.saisie_other_collector').css('display', 'none');
+
+      // Date
+      $('#zone_saisie_collector').find('.saisie_date_collector').val('');
+      $('#zone_saisie_image').find('.saisie_date_collector').val('');
+
+      // Contenu
+      $('#zone_saisie_collector').find('.saisie_collector').html('');
+
+      $('#zone_saisie_image').find('#image_collector').attr('src', '');
+      $('#zone_saisie_image').find('.bouton_parcourir_image').prop('required', true);
+
+      // Contexte
+      $('#zone_saisie_collector').find('.saisie_contexte').html('');
+      $('#zone_saisie_image').find('.saisie_contexte').html('');
+    }
+  }, 200);
 }
 
 // Affichage du détail des votes d'une phrase / image culte

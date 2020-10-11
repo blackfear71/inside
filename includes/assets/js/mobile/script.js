@@ -751,6 +751,20 @@ function formatDateForDisplay(date)
   return dateFormatted;
 }
 
+// Formate une date pour affichage saisie sur mobile
+function formatDateForMobile(date)
+{
+  var dateFormatted;
+
+  if (date.length == 8)
+    dateFormatted = date.substr(0, 4) + '-' + date.substr(4, 2) + '-' + date.substr(6, 2);
+  else
+    dateFormatted = date;
+
+  // Retour
+  return dateFormatted;
+}
+
 // Formate un montant pour affichage
 function formatAmountForDisplay(amount, withCurrency)
 {

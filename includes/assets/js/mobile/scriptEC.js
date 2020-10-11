@@ -304,6 +304,7 @@ function initialisationModification(idDepense, year)
   var price;
   var action;
   var titre;
+  var sousTitre;
 
   // Action du formulaire
   if (type == 'M')
@@ -321,8 +322,6 @@ function initialisationModification(idDepense, year)
     titre = 'Modifier la dépense';
 
   // Sous-titre
-  var sousTitre;
-
   if (parts.length == 0)
     sousTitre = 'Régularisation du ' + date;
   else
@@ -359,7 +358,7 @@ function initialisationModification(idDepense, year)
 
       // Vérification présence identifiant dans les parts
       var idZone           = $(this).attr('id');
-      var idMontant       = $(this).find('.montant').attr('id');
+      var idMontant        = $(this).find('.montant').attr('id');
       var identifiantLigne = $(this).find('input[type=hidden]').val();
       var partUtilisateur  = parts[identifiantLigne];
       var montantUtilisateur;

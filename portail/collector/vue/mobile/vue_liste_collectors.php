@@ -14,6 +14,7 @@
               // Boutons d'action
               echo '<div class="zone_boutons_actions">';
                 // Modification
+                echo '<a id="modifier_collector_' . $collector->getId() . '" title="Modifier" class="icone_update_collector modifierCollector"></a>';
 
                 // Suppression
                 if ($collector->getType_collector() == 'I')
@@ -33,39 +34,6 @@
                   echo '</form>';
                 }
               echo '</div>';
-
-
-
-
-              /*// Boutons d'action
-              echo '<div class="zone_bouton_validation">';
-                // Modification
-                echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
-
-                // Suppression
-                if ($collector->getType_collector() == 'I')
-                {
-                  echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
-                    echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
-                    echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icon_delete_collector eventConfirm" />';
-                    echo '<input type="hidden" value="Supprimer cette image ?" class="eventMessage" />';
-                  echo '</form>';
-                }
-                else
-                {
-                  echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
-                    echo '<input type="hidden" name="id_col" value="' . $collector->getId() . '" />';
-                    echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icon_delete_collector eventConfirm" />';
-                    echo '<input type="hidden" value="Supprimer cette phrase culte ?" class="eventMessage" />';
-                  echo '</form>';
-                }
-              echo '</div>';*/
-
-
-
-
-
-
 
               // Avatar
               $avatarFormatted = formatAvatar($collector->getAvatar_speaker(), $collector->getPseudo_speaker(), 2, 'avatar');
