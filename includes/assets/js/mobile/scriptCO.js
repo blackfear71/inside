@@ -19,7 +19,7 @@ $(function()
   $('#fermerSaisiePhraseCulte').click(function()
   {
     // Réinitialisation de la saisie
-    resetSaisie('zone_saisie_collector', 'T');
+    resetSaisie('T');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_collector');
@@ -39,7 +39,7 @@ $(function()
   $('#fermerSaisieImageCulte').click(function()
   {
     // Réinitialisation de la saisie
-    resetSaisie('zone_saisie_image', 'I');
+    resetSaisie('I');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_image');
@@ -62,11 +62,11 @@ $(function()
       switch (event.target.id)
       {
         case 'zone_saisie_collector':
-          resetSaisie('zone_saisie_collector', 'T');
+          resetSaisie('T');
           break;
 
         case 'zone_saisie_image':
-          resetSaisie('zone_saisie_image', 'I');
+          resetSaisie('I');
           break;
 
         default:
@@ -207,7 +207,6 @@ function initialisationVote(idCollector)
   var voteUser      = collector['vote_user'];
   var typeCollector = collector['type_collector'];
   var titre;
-  var idCol;
 
   // Titre
   if (typeCollector == 'I')
@@ -338,19 +337,25 @@ function initialisationModification(idCollector)
 }
 
 // Réinitialise la zone de saisie d'une phrase / image culte si fermeture modification
-function resetSaisie(zone, type)
+function resetSaisie(typeCollector)
 {
   // Déclenchement après la fermeture
   setTimeout(function()
   {
     // Test si action = modification
-    var currentAction = $('.form_saisie').attr('action').split('&action=');
-    var call          = currentAction[currentAction.length - 1]
+    var currentAction;
+
+    if (typeCollector == 'I')
+      currentAction = $('#zone_saisie_image').find('.form_saisie').attr('action').split('&action=');
+    else
+      currentAction = $('#zone_saisie_collector').find('.form_saisie').attr('action').split('&action=');
+
+    var call = currentAction[currentAction.length - 1]
 
     if (call == 'doModifierMobile')
     {
       // Action du formulaire
-      var action = 'collector.php?action=doAjouterMobile&page=' + $_GET['page'];
+      var action = 'collector.php?action=doAjouterMobile&page=' + $_GET('page');
 
       $('#zone_saisie_collector').find('.form_saisie').attr('action', action);
       $('#zone_saisie_image').find('.form_saisie').attr('action', action);
@@ -401,7 +406,6 @@ function showVotes(idCollector)
   var html = '';
   var pseudos;
   var titre;
-  var idCol;
 
   // Titre
   if (typeCollector == 'I')
