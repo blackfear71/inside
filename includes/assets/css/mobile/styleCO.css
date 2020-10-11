@@ -439,8 +439,8 @@
 .zone_boutons_actions
 {
 	float: left;
-	margin-left: 2vh;
-	margin-top: 2vh;
+	margin-left: 1.5vh;
+	margin-top: 1.5vh;
 	width: 13vh;
 	height: 6vh;
 }
@@ -458,7 +458,7 @@
 	height: 6vh;
 	border: 0;
 	background-image: url("/inside/includes/icons/common/delete.png");
-	background-size: 5vh 5vh;
+	background-size: 4.5vh 4.5vh;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-color: transparent;
