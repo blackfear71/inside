@@ -4,7 +4,8 @@
     switch ($celsius)
     {
       case 'collector':
-        $contenuCelsius = 'Magie ! On peut me consulter ! Oui, bon c\'est juste limité à la consultation mais mon créateur fait tout ce qu\'il peut pour que ça avance. Je l\'espère...';
+        $contenuCelsius = 'Magie ! Je sais que tu m\'adores ! Je sais que tu m\'attendais avec impatience, hé bien tu peux te sentir rassuré. Oui je suis bien là à tes côtés, que tu sois le chasseur
+        ou la proie, on se retrouve toujours tous ici...';
         break;
 
       case 'expensecenter':
