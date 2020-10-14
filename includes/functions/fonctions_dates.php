@@ -105,6 +105,17 @@
     return $weekFormat;
   }
 
+  // DATE : Formate un jour pour affichage (light)
+  // RETOUR : Jour formaté
+  function formatDayForDisplayLight($day)
+  {
+    // Formatage du jour
+    $dayFormat = strtoupper(substr($day, 0, 3) . '.');
+
+    // Retour
+    return $dayFormat;
+  }
+
   // DATE : Formate un mois pour affichage
   // RETOUR : Mois formaté
   function formatMonthForDisplay($month)

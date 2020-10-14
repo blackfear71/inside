@@ -51,6 +51,7 @@
 /*** Bande à part & sans vote***/
 .zone_propositions_solo_sans_vote
 {
+	display: block;
 	width: 100%;
 }
 
@@ -108,6 +109,285 @@
 	background-position: center;
 	background-color: transparent;
 	border: 0;
+}
+
+/*** Propositions ***/
+.zone_propositions_users_with_choices
+{
+	display: block;
+	width: 100%;
+}
+
+.zone_propositions_users
+{
+	display: block;
+	width: 100%;
+}
+
+.zone_proposition
+{
+	display: block;
+	width: 100%;
+	height: 8vh;
+	margin-bottom: 1.5vh;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	overflow: hidden;
+}
+
+.proposition_determined
+{
+	background-color: #ff1937;
+}
+
+.proposition_top
+{
+	background-color: #d3d3d3;
+}
+
+.proposition_normal
+{
+	background-color: #e3e3e3;
+}
+
+.image_proposition
+{
+	width: 6vh;
+	height: 6vh;
+	filter: drop-shadow(0 0 0.3vh #7c7c7c);
+	border-radius: 50%;
+}
+
+.image_determined
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #c81932;
+}
+
+.image_top
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #c3c3c3;
+}
+
+.image_normal
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #d3d3d3;
+}
+
+.reserved_proposition
+{
+	float: left;
+	position: relative;
+	z-index: 1;
+	margin: -0.5vh -0.5vh -2.5vh -0.5vh;
+	width: 2.5vh;
+	height: 2.5vh;
+	line-height: 2.5vh;
+	background-color: #262626;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 2vh;
+	color: white;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.nombre_participants_proposition
+{
+	float: right;
+	position: relative;
+	z-index: 1;
+	margin-top: -2.5vh;
+	margin-right: -0.5vh;
+	width: 2.5vh;
+	height: 2.5vh;
+	line-height: 2.5vh;
+	background-color: #70d55d;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 2vh;
+	color: white;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.nom_proposition
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 18vh);
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	word-break: break-word;
+}
+
+.nom_determined
+{
+	color: white;
+}
+
+.nom_top, .nom_normal
+{
+	color: #262626;
+}
+
+.nom_proposition_complet
+{
+	display: none;
+}
+
+.caller_proposition
+{
+	width: 6vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	border-radius: 50%;
+	background-color: #262626;
+}
+
+.caller_determined
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #c81932;
+}
+
+.caller_top
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #c3c3c3;
+}
+
+.caller_normal
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #d3d3d3;
+}
+
+/*** Mes choix ***/
+.zone_propositions_choix
+{
+	display: block;
+}
+
+.zone_propositions_mes_choix
+{
+	width: 100%;
+}
+
+.form_delete_choix
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.bouton_delete_choix
+{
+	height: 8vh;
+	width: 8vh;
+	vertical-align: middle;
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
+	background-size: 4vh 4vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #d3d3d3;
+	border: 0;
+}
+
+/*** Saisie ***/
+.zone_checkbox_proposition
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 8vh;
+	height: 8vh;
+	background-color: #d3d3d3;
+}
+
+.checkbox_proposition
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50%;
+	transform: translateY(-50%);
+}
+
+/*** Résumé semaine ***/
+.zone_propositions_resume
+{
+	display: block;
+	margin-bottom: -1.5vh;
+}
+
+.zone_propositions_resume_semaine
+{
+	width: 100%;
+}
+
+.zone_resume_jour
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 8vh;
+	height: 8vh;
+	background-color: #d3d3d3;
+	line-height: 8vh;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	text-align: center;
+}
+
+.nom_resume
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 18vh);
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	word-break: break-word;
+}
+
+.no_proposal
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 10vh);
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	word-break: break-word;
 }
 
 /*** Détails ***/
@@ -372,231 +652,4 @@
 	color: #262626;
 	font-size: 2.5vh;
 	text-align: justify;
-}
-
-/*** Propositions ***/
-.zone_propositions_users_with_choices
-{
-	width: 100%;
-}
-
-.zone_propositions_users
-{
-	width: 100%;
-	margin-bottom: -1.5vh;
-}
-
-.zone_proposition
-{
-	display: block;
-	width: 100%;
-	height: 8vh;
-	margin-bottom: 1.5vh;
-	border-radius: 0.5vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
-	overflow: hidden;
-}
-
-.proposition_determined
-{
-	background-color: #ff1937;
-}
-
-.proposition_top
-{
-	background-color: #d3d3d3;
-}
-
-.proposition_normal
-{
-	background-color: #e3e3e3;
-}
-
-.image_proposition
-{
-	width: 6vh;
-	height: 6vh;
-	filter: drop-shadow(0 0 0.3vh #7c7c7c);
-	border-radius: 50%;
-}
-
-.image_determined
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 6vh;
-	height: 6vh;
-	padding: 1vh;
-	background-color: #c81932;
-}
-
-.image_top
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 6vh;
-	height: 6vh;
-	padding: 1vh;
-	background-color: #c3c3c3;
-}
-
-.image_normal
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 6vh;
-	height: 6vh;
-	padding: 1vh;
-	background-color: #d3d3d3;
-}
-
-.reserved_proposition
-{
-	float: left;
-	position: relative;
-	z-index: 1;
-	margin: -0.5vh -0.5vh -2.5vh -0.5vh;
-	width: 2.5vh;
-	height: 2.5vh;
-	line-height: 2.5vh;
-	background-color: #262626;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 2vh;
-	color: white;
-	border-radius: 50%;
-	text-align: center;
-}
-
-.nombre_participants_proposition
-{
-	float: right;
-	position: relative;
-	z-index: 1;
-	margin-top: -2.5vh;
-	margin-right: -0.5vh;
-	width: 2.5vh;
-	height: 2.5vh;
-	line-height: 2.5vh;
-	background-color: #70d55d;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 2vh;
-	color: white;
-	border-radius: 50%;
-	text-align: center;
-}
-
-.nom_proposition
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 18vh);
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
-	font-size: 2.5vh;
-	padding-left: 1vh;
-	padding-right: 1vh;
-	word-break: break-word;
-}
-
-.nom_determined
-{
-	color: white;
-}
-
-.nom_top, .nom_normal
-{
-	color: #262626;
-}
-
-.nom_proposition_complet
-{
-	display: none;
-}
-
-.caller_proposition
-{
-	width: 6vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
-	border-radius: 50%;
-	background-color: #262626;
-}
-
-.caller_determined
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 6vh;
-	height: 6vh;
-	padding: 1vh;
-	background-color: #c81932;
-}
-
-.caller_top
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 6vh;
-	height: 6vh;
-	padding: 1vh;
-	background-color: #c3c3c3;
-}
-
-.caller_normal
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 6vh;
-	height: 6vh;
-	padding: 1vh;
-	background-color: #d3d3d3;
-}
-
-/*** Mes choix ***/
-.zone_propositions_choix
-{
-	margin-top: 2vh;
-	margin-bottom: -1.5vh;
-}
-
-.zone_propositions_mes_choix
-{
-	width: 100%;
-}
-
-.form_delete_choix
-{
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.bouton_delete_choix
-{
-	height: 8vh;
-	width: 8vh;
-	vertical-align: middle;
-	background-image: url("/inside/includes/icons/common/delete_grey.png");
-	background-size: 4vh 4vh;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #d3d3d3;
-	border: 0;
-}
-
-/*** Saisie ***/
-.zone_checkbox_proposition
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 8vh;
-	height: 8vh;
-	background-color: #d3d3d3;
-}
-
-.checkbox_proposition
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50%;
-	transform: translateY(-50%);
 }

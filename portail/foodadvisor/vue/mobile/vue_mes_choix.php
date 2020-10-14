@@ -24,8 +24,8 @@
         foreach ($mesChoix as $monChoix)
         {
           echo '<div class="zone_proposition proposition_normal">';
+            // Image
             echo '<div class="image_normal">';
-              // Image
               if (!empty($monChoix->getPicture()))
                 echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_proposition" />';
               else

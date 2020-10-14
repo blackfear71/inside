@@ -77,7 +77,7 @@
           echo '<div class="jour_semaine">' . $jour . '</div>';
 
           // Pas de proposition
-          echo '<div id="no_proposal_' . $numeroJour . '" class="no_proposal">Pas de proposition pour ce jour</div>';
+          echo '<div id="no_proposal_' . $numeroJour . '" class="no_proposal">Pas de proposition pour ce jour...</div>';
 
           // Bouton ajout choix (si pas de choix fait dans la matinée)
           if (($numeroJour < date('N')) OR ($numeroJour == date('N') AND date('H') >= 13))

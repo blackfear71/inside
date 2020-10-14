@@ -108,6 +108,11 @@
           /* Mes choix */
           /*************/
           include('vue/mobile/vue_mes_choix.php');
+
+          /************************/
+          /* Résumé de la semaine */
+          /************************/
+          include('vue/mobile/vue_resume_semaine.php')
         ?>
       </article>
     </section>
