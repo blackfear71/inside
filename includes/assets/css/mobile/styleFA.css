@@ -653,3 +653,103 @@
 	font-size: 2.5vh;
 	text-align: justify;
 }
+
+/*** Lieux ***/
+.zone_liens_lieux
+{
+	text-align: center;
+}
+
+.lien_lieu
+{
+	display: inline-block;
+	background-color: #262626;
+	padding: 1vh;
+	border-radius: 0.5vh;
+	margin: 0 1vh 2vh 1vh;
+}
+
+.lien_lieu:hover
+{
+	background-color: #d3d3d3;
+	color: #262626;
+}
+
+.image_lieu
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1vh;
+	width: 3vh;
+	height: 3vh;
+	background-image: url("/inside/includes/icons/foodadvisor/location.png");
+	background-size: 3vh 3vh;
+	background-repeat: no-repeat;
+	border: 0;
+}
+
+.lien_lieu:hover .image_lieu
+{
+	background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
+}
+
+.nom_lieu
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: white;
+}
+
+/*** Restaurants ***/
+.zone_restaurant
+{
+	display: block;
+	width: 100%;
+	height: 8vh;
+	margin-bottom: 1.5vh;
+	border-radius: 0.5vh;
+	overflow: hidden;
+	background-color: #e3e3e3;
+}
+
+.nom_restaurant
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 18vh);
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	word-break: break-word;
+	color: #262626;
+}
+
+.image_restaurant
+{
+	width: 6vh;
+	height: 6vh;
+	filter: drop-shadow(0 0 0.3vh #7c7c7c);
+	border-radius: 50%;
+}
+
+.form_saisie_rapide
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.bouton_saisie_rapide
+{
+	height: 8vh;
+	width: 8vh;
+	vertical-align: middle;
+	background-image: url("/inside/includes/icons/foodadvisor/propositions_grey.png");
+	background-size: 4vh 4vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #d3d3d3;
+	border: 0;
+}

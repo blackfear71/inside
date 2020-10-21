@@ -72,8 +72,11 @@
             foreach ($listeLieux as $lieu)
             {
               echo '<a id="link_' . formatId($lieu) . '" class="lien_lieu lienLieu">';
+                // Icône
                 echo '<div class="image_lieu"></div>';
-                echo $lieu;
+
+                // Nom du lieu
+                echo '<div class="nom_lieu">' . $lieu . '</div>';
               echo '</a>';
             }
           echo '</div>';

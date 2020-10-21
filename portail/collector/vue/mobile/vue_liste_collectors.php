@@ -4,7 +4,7 @@
     {
       foreach ($listeCollectors as $collector)
       {
-        echo '<div class="zone_collector" id="visualiser_collector_' . $collector->getId() . '">';
+        echo '<div class="zone_collector">';
           echo '<div id="zone_shadow_' . $collector->getId() . '" class="zone_shadow">';
             if ($collector->getNb_votes() >= $minGolden)
               echo '<div class="zone_collector_haut_golden" id="' . $collector->getId() . '">';

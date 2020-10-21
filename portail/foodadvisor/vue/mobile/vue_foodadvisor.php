@@ -84,6 +84,9 @@
             echo '</form>';
           }
 
+          // Liste des restaurants
+          echo '<a href="restaurants.php?action=goConsulter" title="Les restaurants" class="lien_green">Les restaurants</a>';
+
           /****************/
           /* Bande à part */
           /****************/

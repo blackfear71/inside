@@ -30,6 +30,33 @@ $(function()
   {
     afficherMasquerIdWithDelay('zone_details_proposition');
   });
+
+  // Scroll vers un lieu
+  $('.lienLieu').click(function()
+  {
+    // Déclenchement du scroll
+    var idLieu = $(this).attr('id').replace('link_lieu_', '');
+    var offset = 0.1;
+    var shadow = false;
+
+    // Scroll vers l'id
+    scrollToId(idLieu, offset, shadow);
+  });
+});
+
+/**************/
+/*** Scroll ***/
+/**************/
+// Au chargement du document complet
+$(window).on('load', function()
+{
+  // Déclenchement du scroll
+  var id     = $_GET('anchor');
+  var offset = 0.1;
+  var shadow = true;
+
+  // Scroll vers l'id
+  scrollToId(id, offset, shadow);
 });
 
 /*****************/

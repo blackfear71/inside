@@ -2184,7 +2184,6 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: -4px;
 	margin-right: 5px;
 	width: 20px;
 	height: 20px;
@@ -2196,6 +2195,14 @@
 .lien_lieu:hover .image_lieu
 {
 	background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
+}
+
+.nom_lieu
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: white;
 }
 
 .zone_restaurants
