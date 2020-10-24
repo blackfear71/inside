@@ -667,6 +667,10 @@
 	padding: 1vh;
 	border-radius: 0.5vh;
 	margin: 0 1vh 2vh 1vh;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .lien_lieu:hover
