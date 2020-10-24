@@ -9,7 +9,7 @@
     echo '</div>';
 
     // Affichage des lieux
-    echo '<div id="afficher_lieux_restaurants" class="zone_lieux restaurants" style="display: none;">';
+    echo '<div id="afficher_lieux_restaurants" class="zone_liens_lieux" style="display: none;">';
       foreach ($listeLieux as $lieu)
       {
         echo '<a id="link_lieu_' . formatId($lieu) . '" class="lien_lieu lienLieu">';
