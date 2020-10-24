@@ -111,13 +111,23 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste lieux et restaurants pour le script
-      var listeLieuxResume       = <?php echo $listeLieuxResumeJson; ?>;
-      var listeRestaurantsResume = <?php echo $listeRestaurantsResumeJson; ?>;
-      var listeLieux             = <?php echo $listeLieuxJson; ?>;
-      var listeRestaurants       = <?php echo $listeRestaurantsJson; ?>;
-      var detailsPropositions    = <?php echo $detailsPropositions; ?>;
-      var userSession            = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
+      // Récupération de la liste des lieux du résumé pour le script
+      var listeLieuxResume = <?php if (isset($listeLieuxResumeJson) AND !empty($listeLieuxResumeJson)) echo $listeLieuxResumeJson; else echo '{}'; ?>;
+
+      // Récupération de la liste des restaurants du résumé pour le script
+      var listeRestaurantsResume = <?php if (isset($listeRestaurantsResumeJson) AND !empty($listeRestaurantsResumeJson)) echo $listeRestaurantsResumeJson; else echo '{}'; ?>;
+
+      // Récupération de la liste des lieux pour le script
+      var listeLieux = <?php if (isset($listeLieuxJson) AND !empty($listeLieuxJson)) echo $listeLieuxJson; else echo '{}'; ?>;
+
+      // Récupération de la liste des restaurants pour le script
+      var listeRestaurants = <?php if (isset($listeRestaurantsJson) AND !empty($listeRestaurantsJson)) echo $listeRestaurantsJson; else echo '{}'; ?>;
+
+      // Récupération des détails des propositions pour le script
+      var detailsPropositions = <?php if (isset($detailsPropositions) AND !empty($detailsPropositions)) echo $detailsPropositions; else echo '{}'; ?>;
+
+      // Récupération utilisateur connecté
+      var userSession = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
     </script>
   </body>
 </html>

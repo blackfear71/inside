@@ -114,6 +114,12 @@
           Choix::secureData($monChoix);
         }
       }
+
+      // Conversion JSON
+      $listeRestaurantsJson = json_encode(convertForJsonListeRestaurants($listeRestaurants));
+
+      if ($choixRapide == true)
+        $mesChoixJson = json_encode(convertForJsonMesChoix($mesChoix));
       break;
 
     case 'doAjouter':

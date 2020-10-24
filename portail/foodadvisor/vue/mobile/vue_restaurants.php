@@ -77,25 +77,10 @@
           // Propositions
           echo '<a href="foodadvisor.php?action=goConsulter" title="Les propositions" class="lien_green">Les propositions</a>';
 
-
-
-
-
-
-
-
-
           /***********/
           /* Détails */
           /***********/
-
-
-
-
-
-
-
-
+          include('vue/mobile/vue_details_restaurant.php');
 
           /*********/
           /* Lieux */
@@ -117,19 +102,11 @@
 
     <!-- Données JSON -->
     <script>
-
-
-
-
-
       // Récupération de la liste des restaurants pour le script
-      //var detailsRestaurants = <?php //echo $detailsRestaurants; ?>;
+      var listeRestaurantsJson = <?php if (isset($listeRestaurantsJson) AND !empty($listeRestaurantsJson)) echo $listeRestaurantsJson; else echo '{}'; ?>;
 
-
-
-
-
-
+      // Récupération de la liste des choix pour le script
+      var mesChoixJson = <?php if (isset($mesChoixJson) AND !empty($mesChoixJson)) echo $mesChoixJson; else echo '{}'; ?>;
     </script>
   </body>
 </html>

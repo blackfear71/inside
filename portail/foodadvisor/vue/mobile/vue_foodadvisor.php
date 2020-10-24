@@ -127,9 +127,11 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste propositions pour le script
-      var detailsPropositions = <?php echo $detailsPropositions; ?>;
-      var userSession         = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
+      // Récupération de la liste des propositions pour le script
+      var detailsPropositions = <?php if (isset($detailsPropositions) AND !empty($detailsPropositions)) echo $detailsPropositions; else echo '{}'; ?>;
+
+      // Récupération utilisateur connecté
+      var userSession = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;
     </script>
   </body>
 </html>

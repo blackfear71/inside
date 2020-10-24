@@ -1178,6 +1178,7 @@
     // Passe en minuscule
     $formatted = strtolower($formatted);
 
+    // Retour
     return $formatted;
   }
 
@@ -1185,8 +1186,13 @@
   // RETOUR : Numéro formaté
   function formatPhoneNumber($phone)
   {
-    $formattedPhone = substr($phone, 0, 2) . '.' . substr($phone, 2, 2) . '.' . substr($phone, 4, 2) . '.' . substr($phone, 6, 2) . '.' . substr($phone, 8, 2);
+    // Formatage du numéro de téléphone
+    if (!empty($phone))
+      $formattedPhone = substr($phone, 0, 2) . '.' . substr($phone, 2, 2) . '.' . substr($phone, 4, 2) . '.' . substr($phone, 6, 2) . '.' . substr($phone, 8, 2);
+    else
+      $formattedPhone = '';
 
+    // Retour
     return $formattedPhone;
   }
 
@@ -1194,8 +1200,10 @@
   // RETOUR : Niveau
   function convertExperience($exp)
   {
+    // Formatage du niveau
     $level = floor(sqrt($exp / 10));
 
+    // Retour
     return $level;
   }
 
@@ -1203,10 +1211,12 @@
   // RETOUR : Chaîne décodée
   function decodeString($chaine)
   {
+    // Remplacement des caractères
     $search  = array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;');
     $replace = array('et', '', '', '', '');
     $chaine  = str_replace($search, $replace, $chaine);
 
+    // Retour
     return $chaine;
   }
 
@@ -1432,6 +1442,7 @@
   // RETOUR : Chaîne aléatoire
   function generateRandomString($nombreCarateres)
   {
+    // Génration d'une chaîne de caractères aléatoires
     $string = '';
     $chaine = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -1442,6 +1453,7 @@
       $string .= $chaine[rand() % strlen($chaine)];
     }
 
+    // Retour
     return $string;
   }
 ?>

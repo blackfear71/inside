@@ -61,8 +61,8 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste semaines par années pour le script
-      var categoriesChangeLog = <?php echo $categoriesChangeLogJson; ?>;
+      // Récupération de la liste des semaines par années pour le script
+      var categoriesChangeLog = <?php if (isset($categoriesChangeLogJson) AND !empty($categoriesChangeLogJson)) echo $categoriesChangeLogJson; else echo '{}'; ?>;
     </script>
   </body>
 </html>

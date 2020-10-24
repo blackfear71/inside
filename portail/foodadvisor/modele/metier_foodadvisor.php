@@ -43,7 +43,7 @@
 
   // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
   // RETOUR : Tableau des restaurants par lieu
-  function convertForJsonListeRestaurants($listeRestaurants)
+  function convertForJsonListeRestaurantsParLieu($listeRestaurants)
   {
     // Initialisations
     $listeRestaurantsAConvertir = array();
@@ -80,12 +80,6 @@
     // Conversion de la liste d'objets en tableau pour envoyer au Javascript
     foreach ($propositions as $proposition)
     {
-      // Formatage du numéro de téléphone
-      if (!empty($proposition->getPhone()))
-        $phone = formatPhoneNumber($proposition->getPhone());
-      else
-        $phone = '';
-
       // Conversion des détails d'une proposition
       $detailsPropositionAConvertir = array();
 
@@ -115,7 +109,7 @@
                                      'avatar'          => $proposition->getAvatar(),
                                      'reserved'        => $proposition->getReserved(),
                                      'types'           => $proposition->getTypes(),
-                                     'phone'           => $phone,
+                                     'phone'           => formatPhoneNumber($proposition->getPhone()),
                                      'website'         => $proposition->getWebsite(),
                                      'plan'            => $proposition->getPlan(),
                                      'lafourchette'    => $proposition->getLafourchette(),

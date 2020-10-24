@@ -477,4 +477,74 @@
     // Message alerte
     $_SESSION['alerts']['restaurant_deleted'] = true;
   }
+
+  // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
+  // RETOUR : Tableau des restaurants
+  function convertForJsonListeRestaurants($listeRestaurants)
+  {
+    // Initialisations
+    $listeRestaurantsAConvertir = array();
+
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($listeRestaurants as $restaurantsParLieux)
+    {
+      foreach ($restaurantsParLieux as $restaurant)
+      {
+        $restaurantAConvertir = array('id'           => $restaurant->getId(),
+                                      'name'         => $restaurant->getName(),
+                                      'picture'      => $restaurant->getPicture(),
+                                      'types'        => $restaurant->getTypes(),
+                                      'location'     => $restaurant->getLocation(),
+                                      'phone'        => formatPhoneNumber($restaurant->getPhone()),
+                                      'opened'       => $restaurant->getOpened(),
+                                      'min_price'    => $restaurant->getMin_price(),
+                                      'max_price'    => $restaurant->getMax_price(),
+                                      'website'      => $restaurant->getWebsite(),
+                                      'plan'         => $restaurant->getPlan(),
+                                      'lafourchette' => $restaurant->getLafourchette(),
+                                      'description'  => $restaurant->getDescription()
+                                     );
+
+        // Ajout au tableau
+        $listeRestaurantsAConvertir[$restaurant->getId()] = $restaurantAConvertir;
+      }
+    }
+
+    // Tri par Id
+    ksort($listeRestaurantsAConvertir);
+
+    // Retour
+    return $listeRestaurantsAConvertir;
+  }
+
+  // METIER : Conversion du tableau d'objet des choix en tableau simple pour JSON
+  // RETOUR : Tableau des choix
+  function convertForJsonMesChoix($mesChoix)
+  {
+    // Initialisations
+    $mesChoixAConvertir = array();
+
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($mesChoix as $monChoix)
+    {
+      $choixAConvertir = array('id'            => $monChoix->getId(),
+                               'id_restaurant' => $monChoix->getId_restaurant(),
+                               'identifiant'   => $monChoix->getIdentifiant(),
+                               'date'          => $monChoix->getDate(),
+                               'time'          => $monChoix->getTime(),
+                               'transports'    => $monChoix->getTransports(),
+                               'menu'          => $monChoix->getMenu(),
+                               'name'          => $monChoix->getName(),
+                               'picture'       => $monChoix->getPicture(),
+                               'location'      => $monChoix->getLocation(),
+                               'opened'        => $monChoix->getOpened()
+                              );
+
+      // On ajoute la ligne au tableau
+      array_push($mesChoixAConvertir, $choixAConvertir);
+    }
+
+    // Retour
+    return $mesChoixAConvertir;
+  }
 ?>

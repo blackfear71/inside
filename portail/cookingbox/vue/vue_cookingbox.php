@@ -97,14 +97,14 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste semaines par années pour le script
-      var listWeeks = <?php echo $listeSemainesJson; ?>;
+      // Récupération de la liste des semaines par années pour le script
+      var listWeeks = <?php if (isset($listeSemainesJson) AND !empty($listeSemainesJson)) echo $listeSemainesJson; else echo '{}'; ?>;
 
-      // Récupération liste utilisateurs pour le script
-      var listUsers = <?php echo $listeUsersJson; ?>;
+      // Récupération de la liste des utilisateurs pour le script
+      var listUsers = <?php if (isset($listeUsersJson) AND !empty($listeUsersJson)) echo $listeUsersJson; else echo '{}'; ?>;
 
-      // Récupération liste recettes pour le script
-      var listRecipes = <?php echo $recettesJson; ?>;
+      // Récupération de la liste des recettes pour le script
+      var listRecipes = <?php if (isset($recettesJson) AND !empty($recettesJson)) echo $recettesJson; else echo '{}'; ?>;
 
       // Récupération utilisateur connecté
       var userSession = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;

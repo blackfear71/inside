@@ -22,7 +22,7 @@
           foreach ($restaurantsParLieux as $restaurant)
           {
             echo '<div id="zone_shadow_' . $restaurant->getId() . '" class="zone_shadow">';
-              echo '<div id="' . $restaurant->getId() . '" class="zone_restaurant">';
+              echo '<div id="' . $restaurant->getId() . '" class="zone_restaurant afficherDetailsRestaurant">';
                 // Image
                 echo '<div class="image_normal">';
                   if (!empty($restaurant->getPicture()))

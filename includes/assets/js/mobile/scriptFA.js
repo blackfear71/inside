@@ -22,7 +22,7 @@ $(function()
   {
     var idProposition = $(this).attr('id').replace('details_proposition_', '');
 
-    showDetails(idProposition);
+    showDetailsProposition(idProposition);
   });
 
   // Ferme la zone de détails d'une proposition
@@ -41,6 +41,20 @@ $(function()
 
     // Scroll vers l'id
     scrollToId(idLieu, offset, shadow);
+  });
+
+  // Affiche la zone de détails d'un restaurant
+  $('.afficherDetailsRestaurant').click(function()
+  {
+    var idProposition = $(this).attr('id');
+
+    showDetailsRestaurant(idProposition);
+  });
+
+  // Ferme la zone de détails d'un restaurant
+  $('#fermerDetailsRestaurant').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_details_restaurant');
   });
 });
 
@@ -82,7 +96,7 @@ function changeCheckedColor(label)
 }
 
 // Affiche la zone de détails d'une proposition
-function showDetails(idProposition)
+function showDetailsProposition(idProposition)
 {
   /***********/
   /* Données */
@@ -410,6 +424,213 @@ function showDetails(idProposition)
   /*************/
   // Affichage des détails
   afficherMasquerIdWithDelay('zone_details_proposition');
+
+  // Déplie tous les titres
+  $('.div_details').find('.titre_section').each(function()
+  {
+    var idZone = $(this).attr('id').replace('titre_', 'afficher_');
+
+    openSection($(this), idZone, 'open');
+  });
+}
+
+// Affiche la zone de détails d'un restaurant
+function showDetailsRestaurant(idRestaurant)
+{
+  /***********/
+  /* Données */
+  /***********/
+  // Récupération des données
+  var restaurant = listeRestaurantsJson[idRestaurant];
+  var opened     = restaurant['opened'].split(';');
+
+  // Nom du restaurant
+  $('.titre_details > .texte_titre_section').html(restaurant['name']);
+
+  // Lieu
+  $('.lieu_details').html(restaurant['location']);
+
+  // Image restaurant
+  if (restaurant['picture'] != '')
+  {
+    $('.image_details').attr('src', '../../includes/images/foodadvisor/' + restaurant['picture']);
+    $('.image_details').attr('alt', restaurant['picture']);
+    $('.image_details').attr('title', restaurant['name']);
+  }
+  else
+  {
+    $('.image_details').attr('src', '../../includes/icons/foodadvisor/restaurants.png');
+    $('.image_details').attr('alt', 'restaurants');
+    $('.image_details').attr('title', restaurant['name']);
+  }
+
+  // Jours d'ouverture
+  var dateDuJour   = new Date();
+  var availableDay = true;
+
+  $.each(opened, function(key, value)
+  {
+    if (value != '')
+    {
+      if (value == 'Y')
+        $('#jour_details_' + key).addClass('jour_oui_details');
+      else
+        $('#jour_details_' + key).addClass('jour_non_details');
+
+      if (dateDuJour.getDay() == key + 1 && value == 'N')
+        availableDay = false;
+    }
+  });
+
+  // Prix
+  if (restaurant['min_price'] != '' && restaurant['max_price'] != '')
+  {
+    var prix;
+
+    if (restaurant['min_price'] == restaurant['max_price'])
+      prix = 'Prix ~ ' + formatAmountForDisplay(restaurant['min_price'], true);
+    else
+      prix = 'Prix ' + formatAmountForDisplay(restaurant['min_price'], false) + ' - ' + formatAmountForDisplay(restaurant['max_price'], true);
+
+    $('.prix_details').css('display', 'block');
+    $('.prix_details').html(prix);
+  }
+  else
+  {
+    $('.prix_details').css('display', 'none');
+    $('.prix_details').html('');
+  }
+
+  // Types du restaurant
+  $('.zone_types_details').empty();
+
+  if (restaurant['types'] != '')
+  {
+    var types = restaurant['types'].split(';');
+
+    $.each(types, function()
+    {
+      if (this != '')
+      {
+        var type = '<div class="type_details">' + this + '</div>';
+        $('.zone_types_details').append(type);
+      }
+    });
+  }
+
+  // Numéro de téléphone
+  if (restaurant['phone'] != '')
+  {
+    $('.zone_appelant_details').css('display', 'block');
+
+    if (restaurant['phone'] != '')
+      $('.telephone_details').html(restaurant['phone']);
+    else
+      $('.telephone_details').empty();
+  }
+  else
+    $('.zone_appelant_details').css('display', 'none');
+
+  // Liens
+  if (restaurant['website'] != '' || restaurant['plan'] != '' || restaurant['lafourchette'] != '')
+  {
+    $('.zone_liens_details').css('display', 'block');
+
+    if (restaurant['website'] == '')
+    {
+      $('#website_details').css('display', 'none');
+      $('#website_details').attr('href', '');
+    }
+    else
+    {
+      $('#website_details').css('display', 'inline-block');
+      $('#website_details').attr('href', restaurant['website']);
+    }
+
+    if (restaurant['plan'] == '')
+    {
+      $('#plan_details').css('display', 'none');
+      $('#plan_details').attr('href', '');
+    }
+    else
+    {
+      $('#plan_details').css('display', 'inline-block');
+      $('#plan_details').attr('href', restaurant['plan']);
+    }
+
+    if (restaurant['lafourchette'] == '')
+    {
+      $('#lafourchette_details').css('display', 'none');
+      $('#lafourchette_details').attr('href', '');
+    }
+    else
+    {
+      $('#lafourchette_details').css('display', 'inline-block');
+      $('#lafourchette_details').attr('href', restaurant['lafourchette']);
+    }
+  }
+  else
+  {
+    $('.zone_liens_details').css('display', 'none');
+    $('#website_details').attr('href', '');
+    $('#plan_details').attr('href', '');
+    $('#lafourchette_details').attr('href', '');
+  }
+
+  // Description
+  $('.zone_details_texte').empty();
+
+  if (restaurant['description'] != '')
+  {
+    var description = '';
+
+    description += '<div class="description_details">';
+      description += nl2br(restaurant['description']);
+    description += '</div>';
+
+    $('.zone_details_description').css('display', 'block');
+    $('.zone_details_texte').append(description);
+  }
+  else
+  {
+    $('.zone_details_description').css('display', 'none');
+    $('.zone_details_texte').empty();
+  }
+
+  /***********/
+  /* Actions */
+  /***********/
+  // Vérification si l'utilisateur participe
+  var participe = false;
+
+  $.each(mesChoixJson, function()
+  {
+    if (idRestaurant == this['id_restaurant'])
+    {
+      participe = true;
+      return false;
+    }
+  });
+
+  // Bouton choix rapide
+  if (participe == true || availableDay == false)
+  {
+    $('#choix_rapide_details').css('display', 'none');
+    $('#choix_rapide_details').attr('action', '');
+    $('#choix_rapide_details > input[name=id_restaurant]').val('');
+  }
+  else
+  {
+    $('#choix_rapide_details').css('display', 'block');
+    $('#choix_rapide_details').attr('action', 'restaurants.php?action=doChoixRapide');
+    $('#choix_rapide_details > input[name=id_restaurant]').val(idRestaurant);
+  }
+
+  /*************/
+  /* Affichage */
+  /*************/
+  // Affichage des détails
+  afficherMasquerIdWithDelay('zone_details_restaurant');
 
   // Déplie tous les titres
   $('.div_details').find('.titre_section').each(function()

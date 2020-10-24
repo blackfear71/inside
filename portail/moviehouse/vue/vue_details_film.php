@@ -484,8 +484,8 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste dépenses pour le script
-      var detailsFilm = <?php echo $detailsFilmJson; ?>;
+      // Récupération des détails du film pour le script
+      var detailsFilm = <?php if (isset($detailsFilmJson) AND !empty($detailsFilmJson)) echo $detailsFilmJson; else echo '{}'; ?>;
     </script>
   </body>
 </html>

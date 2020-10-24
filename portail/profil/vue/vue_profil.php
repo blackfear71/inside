@@ -128,7 +128,7 @@
 
     <!-- Données JSON -->
     <script>
-      // Récupération liste succès débloqués
+      // Récupération de la liste des succès débloqués
       var listeSuccess = <?php if (isset($listeSuccessJson) AND !empty($listeSuccessJson)) echo $listeSuccessJson; else echo '{}'; ?>;
     </script>
   </body>

@@ -253,9 +253,9 @@
 
       // Conversion JSON
       $listeLieuxResumeJson       = json_encode($listeLieuxDisponibles);
-      $listeRestaurantsResumeJson = json_encode(convertForJsonListeRestaurants($listeRestaurantsResume));
+      $listeRestaurantsResumeJson = json_encode(convertForJsonListeRestaurantsParLieu($listeRestaurantsResume));
       $listeLieuxJson             = json_encode($listeLieux);
-      $listeRestaurantsJson       = json_encode(convertForJsonListeRestaurants($listeRestaurants));
+      $listeRestaurantsJson       = json_encode(convertForJsonListeRestaurantsParLieu($listeRestaurants));
       $detailsPropositions        = json_encode(convertForJsonListePropositions($propositions));
       break;
 
