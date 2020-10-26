@@ -44,11 +44,14 @@ $(function()
   });
 
   // Affiche la zone de détails d'un restaurant
-  $('.afficherDetailsRestaurant').click(function()
+  $('.afficherDetailsRestaurant').click(function(event)
   {
-    var idProposition = $(this).attr('id');
+    if ($(event.target).attr('class') != 'form_saisie_rapide' && $(event.target).attr('class') != 'bouton_saisie_rapide')
+    {
+      var idProposition = $(this).attr('id');
 
-    showDetailsRestaurant(idProposition);
+      showDetailsRestaurant(idProposition);
+    }
   });
 
   // Ferme la zone de détails d'un restaurant
@@ -150,9 +153,15 @@ function showDetailsProposition(idProposition)
     if (value != '')
     {
       if (value == 'Y')
+      {
         $('#jour_details_' + key).addClass('jour_oui_details');
+        $('#jour_details_' + key).removeClass('jour_non_details');
+      }
       else
+      {
         $('#jour_details_' + key).addClass('jour_non_details');
+        $('#jour_details_' + key).removeClass('jour_oui_details');
+      }
 
       if (dateDuJour.getDay() == key + 1 && value == 'N')
         availableDay = false;
@@ -473,9 +482,15 @@ function showDetailsRestaurant(idRestaurant)
     if (value != '')
     {
       if (value == 'Y')
+      {
         $('#jour_details_' + key).addClass('jour_oui_details');
+        $('#jour_details_' + key).removeClass('jour_non_details');
+      }
       else
+      {
         $('#jour_details_' + key).addClass('jour_non_details');
+        $('#jour_details_' + key).removeClass('jour_oui_details');
+      }
 
       if (dateDuJour.getDay() == key + 1 && value == 'N')
         availableDay = false;
