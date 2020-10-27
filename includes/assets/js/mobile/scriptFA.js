@@ -41,7 +41,7 @@ $(function()
   $('#fermerSaisieRestaurant').click(function()
   {
     // Réinitialisation de la saisie
-    resetSaisie('zone_saisie_restaurant');
+    resetSaisie();
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_restaurant');
@@ -89,7 +89,7 @@ $(function()
   {
     // Ferme la saisie d'une dépense
     if ($(event.target).attr('class') == 'fond_saisie')
-      resetSaisie('zone_saisie_restaurant');
+      resetSaisie();
   });
 
   // Charge l'image dans la zone de saisie
@@ -890,7 +890,7 @@ function initialisationModification(idRestaurant)
     {
       if (this != '')
       {
-        typeRestaurant = 'type_' + this + '_' + idRestaurant;
+        var typeRestaurant = 'type_' + this + '_' + idRestaurant;
 
         if (typeRestaurant == idType)
         {
@@ -949,7 +949,7 @@ function initialisationModification(idRestaurant)
 }
 
 // Réinitialise la zone de saisie d'une dépense si fermeture modification
-function resetSaisie(zone)
+function resetSaisie()
 {
   // Déclenchement après la fermeture
   setTimeout(function()
@@ -1021,7 +1021,7 @@ function resetSaisie(zone)
 
       // Types libres
       $('#zone_saisie_restaurant').find('.type_other').remove();
-      
+
       // Téléphone
       $('#zone_saisie_restaurant').find('#saisie_telephone').val('');
       $('#zone_saisie_restaurant').find('#saisie_telephone').attr('name', 'phone_restaurant');
