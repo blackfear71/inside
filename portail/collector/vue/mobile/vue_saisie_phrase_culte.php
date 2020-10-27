@@ -5,7 +5,7 @@
       echo '<input type="hidden" name="type_collector" value="T" />';
 
       // Id phrase culte (modification)
-      echo '<input type="hidden" name="id_col" id="id_saisie_collector" value="" />';
+      echo '<input type="hidden" name="id_collector" id="id_saisie_collector" value="" />';
 
       // Titre
       echo '<div class="zone_titre_saisie">Saisir une phrase culte</div>';

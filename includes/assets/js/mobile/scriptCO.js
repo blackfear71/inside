@@ -214,7 +214,7 @@ function initialisationVote(idCollector)
 
   // Modification des données
   $('.zone_titre_saisie').html(titre);
-  $('input[name=id_col]').val(idCollector);
+  $('input[name=id_collector]').val(idCollector);
 
   $('.smiley').each(function()
   {

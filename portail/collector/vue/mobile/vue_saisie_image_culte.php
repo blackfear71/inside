@@ -5,7 +5,7 @@
       echo '<input type="hidden" name="type_collector" value="I" />';
 
       // Id image culte (modification)
-      echo '<input type="hidden" name="id_col" id="id_saisie_image" value="" />';
+      echo '<input type="hidden" name="id_collector" id="id_saisie_image" value="" />';
 
       // Titre
       echo '<div class="zone_titre_saisie">Saisir une image culte</div>';

@@ -300,7 +300,7 @@
     $control_ok = true;
 
     // Récupération des données
-    $idCollector       = $post['id_col'];
+    $idCollector       = $post['id_collector'];
     $typeCollector     = $post['type_collector'];
     $contexteCollector = deleteInvisible($post['context']);
 
@@ -460,7 +460,7 @@
   function deleteCollector($post)
   {
     // Récupération des données
-    $idCollector = $post['id_col'];
+    $idCollector = $post['id_collector'];
 
     // Lecture des données de la phrase / image culte
     $collector = physiqueCollector($idCollector);
@@ -510,7 +510,7 @@
   function voteCollector($post, $identifiant)
   {
     // Récupération des données
-    $idCollector = $post['id_col'];
+    $idCollector = $post['id_collector'];
 
     if (isset($post['smiley_1']))
       $vote = 1;

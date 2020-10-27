@@ -10,7 +10,7 @@
           // Formulaire de vote (smileys)
           echo '<form method="post" action="collector.php?action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="zone_smileys">';
             // Identifiant collector
-            echo '<input type="hidden" name="id_col" value="" />';
+            echo '<input type="hidden" name="id_collector" value="" />';
 
             // Smileys
             for ($i = 0; $i <= 8; $i++)
