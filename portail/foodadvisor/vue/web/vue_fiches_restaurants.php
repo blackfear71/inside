@@ -245,6 +245,7 @@
                     // Prix min
                     echo '<input type="text" name="update_prix_min_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMin_price() . '" maxlength="5" placeholder="Prix min." class="update_prix_min_restaurant" />';
                     echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
+
                     // Prix max
                     echo '<input type="text" name="update_prix_max_restaurant_' . $restaurant->getId() . '" value="' . $restaurant->getMax_price() . '" maxlength="5" placeholder="Prix max." class="update_prix_max_restaurant" />';
                     echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
@@ -254,7 +255,7 @@
                 echo '<div class="zone_fiche_right">';
                   // Validation modification
                   echo '<div id="zone_bouton_validation_' . $restaurant->getId() . '" class="zone_bouton_validation">';
-                    echo '<input type="submit" name="modify_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icon_validate_restaurant" />';
+                    echo '<input type="submit" name="update_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icon_validate_restaurant" />';
                   echo '</div>';
 
                   // Annulation modification

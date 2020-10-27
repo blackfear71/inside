@@ -91,6 +91,21 @@
           // Description
           echo '<div id="afficher_details_description" class="zone_details_texte"></div>';
         echo '</div>';
+
+        // Actions
+        echo '<div class="zone_details_actions">';
+          // Modifier
+          echo '<a title="Modifier" class="lien_modifier_restaurant modifierRestaurant">';
+            echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_modifier_restaurant" />';
+          echo '</a>';
+
+          // Supprimer
+          echo '<form method="post" action="restaurants.php?action=doSupprimer" class="form_supprimer_restaurant">';
+            echo '<input type="hidden" name="id_restaurant" value="" />';
+            echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer" class="icone_supprimer_restaurant eventConfirm" />';
+            echo '<input type="hidden" value="Supprimer ce restaurant de la liste ?" class="eventMessage" />';
+          echo '</form>';
+        echo '</div>';
       echo '</div>';
 
       // Bouton fermeture

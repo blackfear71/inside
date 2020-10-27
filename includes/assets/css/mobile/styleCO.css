@@ -43,7 +43,7 @@
 
 .saisie_other_collector, .saisie_date_collector
 {
-	display: inline-block;
+	display: block;
 	vertical-align: middle;
 	width: calc(100% - 3vh);
 	margin-right: 1vh;

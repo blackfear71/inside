@@ -116,7 +116,7 @@
 							echo formatAmountForDisplay(abs($statistiquesIns->getExpenses()));
 						else
 							echo formatAmountForDisplay($statistiquesIns->getExpenses());
-							
+
 					echo '</td>';
 			echo '</tr>';
     }
@@ -230,7 +230,7 @@
 			if ($totalStatistiques->getAlerte_expenses() == true)
 				echo '<td class="td_manage_users_red">';
 			else
-				echo '<td class="td_manage_users" id="test">';
+				echo '<td class="td_manage_users">';
 
 				if ($totalStatistiques->getExpenses_total() > -0.01 AND $totalStatistiques->getExpenses_total() < 0.01)
 					echo formatAmountForDisplay(abs($totalStatistiques->getExpenses_total()));

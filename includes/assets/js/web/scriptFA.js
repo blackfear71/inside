@@ -396,7 +396,7 @@ $(function()
   // Charge l'image (saisie)
   $('.loadSaisieRestaurant').on('change', function()
   {
-    loadFile(event, 'img_restaurant_saisie', true);
+    loadFile(event, 'image_restaurant_saisie', true);
   });
 
   // Affiche la saisie "Autre" (modification)
@@ -1006,7 +1006,7 @@ function addOtherType(id)
   var html       = '';
   var length     = $('#' + id + ' input').length;
   var new_length = length + 1;
-  var idType    = id + '_' + new_length;
+  var idType     = id + '_' + new_length;
 
   html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
 

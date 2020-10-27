@@ -319,7 +319,7 @@
 	border: 0;
 }
 
-/*** Saisie ***/
+/*** Saisie propositions ***/
 .zone_checkbox_proposition
 {
 	display: inline-block;
@@ -390,7 +390,7 @@
 	word-break: break-word;
 }
 
-/*** Détails ***/
+/*** Détails (propositions & restaurants)***/
 .image_details
 {
 	display: block;
@@ -654,6 +654,54 @@
 	text-align: justify;
 }
 
+.zone_details_actions
+{
+	text-align: center;
+	margin-bottom: 2vh;
+}
+
+.lien_modifier_restaurant
+{
+	display: inline-block;
+	height: 6vh;
+	width: calc(45% - 1vh);
+	margin-right: 1vh;
+	vertical-align: middle;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+}
+
+.icone_modifier_restaurant
+{
+	width: 4vh;
+	height: 4vh;
+	padding: 1vh;
+	vertical-align: middle;
+}
+
+.form_supprimer_restaurant
+{
+	display: inline-block;
+	width: calc(45% - 1vh);
+	margin-left: 1vh;
+	vertical-align: middle;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+}
+
+.icone_supprimer_restaurant
+{
+	height: 6vh;
+	width: 100%;
+	vertical-align: middle;
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
+	background-size: 4vh 4vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	border: 0;
+}
+
 /*** Lieux ***/
 .zone_liens_lieux
 {
@@ -706,6 +754,11 @@
 }
 
 /*** Restaurants ***/
+.zone_restaurants
+{
+	margin-bottom: -1vh;
+}
+
 .zone_restaurant
 {
 	display: block;
@@ -756,4 +809,371 @@
 	background-position: center;
 	background-color: #d3d3d3;
 	border: 0;
+}
+
+/*** Saisie restaurant ***/
+.zone_image_saisie
+{
+	display: block;
+	width: 30vh;
+	height: 30vh;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.zone_parcourir_image
+{
+	width: 100%;
+	height: 100%;
+	border-style: dashed;
+	border-width: 0.5vh;
+	border-radius: 50%;
+	border-color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.symbole_saisie_image
+{
+	line-height: 30vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 10vh;
+	color: #a3a3a3;
+}
+
+.bouton_parcourir_image
+{
+	display: block;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	margin-top: -30vh;
+	position: relative;
+	z-index: 1;
+}
+
+.mask_image
+{
+	width: calc(100% - 1vh);
+	height: calc(100% - 1vh);
+	line-height: 29vh;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -29.5vh;
+	text-align: center;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.image
+{
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+	margin-top: -0.5vh;
+}
+
+.saisie_nom_restaurant, .saisie_lieu_autre_restaurant
+{
+	display: block;
+	vertical-align: middle;
+	width: calc(100% - 3vh);
+	margin-top: 2vh;
+	margin-right: 1vh;
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	border: 0;
+	outline: none;
+	background-color: white;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+}
+
+.saisie_lieu
+{
+	display: block;
+	width: 100%;
+	margin-top: 2vh;
+	padding: 1vh;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	background-color: white;
+}
+
+.zone_checkbox_jour
+{
+	display: block;
+	width: 100%;
+	margin-top: 2vh;
+	text-align: center;
+}
+
+.checkbox_jour
+{
+	display: none;
+}
+
+.label_jour
+{
+	display: inline-block;
+	border: 0;
+	width: 5vh;
+	height: 5vh;
+	background-color: #e3e3e3;
+	margin-left: 0.5vh;
+	margin-right: 0.5vh;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	line-height: 5vh;
+	text-align: center;
+}
+
+.label_jour_checked
+{
+	display: inline-block;
+	border: 0;
+	width: 5vh;
+	height: 5vh;
+	background-color: #ff1937;
+	margin-left: 0.5vh;
+	margin-right: 0.5vh;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	line-height: 5vh;
+	text-align: center;
+}
+
+.zone_saisie_prix
+{
+	display: block;
+	margin-top: 2vh;
+}
+
+.saisie_prix_min_restaurant
+{
+	display: inline-block;
+	width: calc(50% - 4vh);
+	margin-right: 2vh;
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+}
+
+.saisie_prix_max_restaurant
+{
+	display: inline-block;
+	width: calc(50% - 4vh);
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+}
+
+.zone_saisie_types
+{
+	display: inline-block;
+	text-align: left;
+	width: 100%;
+	margin-top: 2vh;
+}
+
+.bouton_type_autre
+{
+	display: inline-block;
+	vertical-align: top;
+	width: calc(50% - 1vh);
+	background-color: #e3e3e3;
+	height: 6vh;
+	line-height: 6vh;
+	margin: 0 2vh 1vh 0;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bouton_type_autre:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.bouton_type_autre:hover .fond_plus
+{
+	background-color: white;
+	color: #262626;
+}
+
+.fond_plus
+{
+	display: inline-block;
+	margin-left: 1.5vh;
+	margin-right: 1.5vh;
+	width: 3vh;
+	height: 3vh;
+	background-color: #70d55d;
+	border-radius: 50%;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	text-align: center;
+	line-height: 3vh;
+}
+
+.switch_types
+{
+	display: inline-block;
+	width: calc(50% - 1vh);
+	margin-bottom: 1vh;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	background-color: #e3e3e3;
+}
+
+.switch_types_margin
+{
+	margin-right: 2vh;
+}
+
+.switch_types:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.bouton_checked
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.zone_checkbox_type
+{
+	display: inline-block;
+	vertical-align: middle;
+	height: 6vh;
+	width: 6vh;
+	text-align: center;
+	line-height: 6vh;
+}
+
+.label_switch
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 7vh);
+	padding: 1.5vh 1vh 1.5vh 6vh;
+	margin-left: -6vh;
+}
+
+.type_other
+{
+	display: inline-block;
+	border: 0;
+	width: calc(50% - 4vh);
+	background-color: #e3e3e3;
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	margin-bottom: 1vh;
+	vertical-align: top;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+}
+
+.type_other_margin
+{
+	margin-right: 2vh;
+}
+
+.filled
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.zone_liens_rapides
+{
+	display: block;
+	margin-bottom: 1vh;
+}
+
+.zone_lien_rapide
+{
+	display: block;
+	margin-top: 2vh;
+}
+
+.lien_rapide_saisie
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 2vh;
+	width: 5vh;
+	height: 5vh;
+}
+
+.image_lien_rapide_saisie
+{
+	width: 100%;
+	height: 100%;
+}
+
+.saisie_lien_restaurant
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 10vh);
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+}
+
+.saisie_description
+{
+	display: block;
+	margin-top: 2vh;
+	margin-bottom: 1.5vh;
+	height: 10vh;
+	width: calc(100% - 3vh);
+	padding: 1vh 1.5vh 1vh 1.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: white;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	resize: none;
 }

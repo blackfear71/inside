@@ -20,7 +20,7 @@
           echo '<span class="zone_parcourir_restaurant_saisie">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie loadSaisieRestaurant" /></span>';
 
           echo '<div class="mask_saisie_restaurant">';
-            echo '<img id="img_restaurant_saisie" alt="" class="image_saisie_restaurant" />';
+            echo '<img id="image_restaurant_saisie" alt="" class="image_saisie_restaurant" />';
           echo '</div>';
 
           // Jours d'ouverture
@@ -35,12 +35,12 @@
           {
             if (empty($_SESSION['save']['ouverture_restaurant']) OR isset($_SESSION['save']['ouverture_restaurant'][$i]))
             {
-              echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" checked />';
+              echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']" value="' . $j . '" class="checkbox_jour" checked />';
               echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" class="label_jour_checked checkDay">' . $j . '</label>';
             }
             else
             {
-              echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']' . $jour . '" value="' . $j . '" class="checkbox_jour" />';
+              echo '<input type="checkbox" id="saisie_checkbox_ouverture_' . $jour . '" name="ouverture_restaurant[' . $i . ']" value="' . $j . '" class="checkbox_jour" />';
               echo '<label for="saisie_checkbox_ouverture_' . $jour . '" id="saisie_label_ouverture_' . $jour . '" class="label_jour checkDay">' . $j . '</label>';
             }
 
@@ -63,25 +63,22 @@
             echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant" required />';
 
           // Lieu
-          if ($_SESSION['save']['location'] == 'other_location')
-            echo '<select name="location" id="saisie_location" class="saisie_lieu" required>';
-          else
-            echo '<select name="location" id="saisie_location" class="saisie_lieu" required>';
-              echo '<option value="" hidden>Choisissez...</option>';
+          echo '<select name="location" id="saisie_location" class="saisie_lieu" required>';
+            echo '<option value="" hidden>Choisissez...</option>';
 
-              foreach ($listeLieux as $lieu)
-              {
-                if ($lieu == $_SESSION['save']['location'])
-                  echo '<option value="' . $lieu . '" selected>' . $lieu . '</option>';
-                else
-                  echo '<option value="' . $lieu . '">' . $lieu . '</option>';
-              }
-
-              if ($_SESSION['save']['location'] == 'other_location')
-                echo '<option value="other_location" selected>Autre</option>';
+            foreach ($listeLieux as $lieu)
+            {
+              if ($lieu == $_SESSION['save']['location'])
+                echo '<option value="' . $lieu . '" selected>' . $lieu . '</option>';
               else
-                echo '<option value="other_location">Autre</option>';
-            echo '</select>';
+                echo '<option value="' . $lieu . '">' . $lieu . '</option>';
+            }
+
+            if ($_SESSION['save']['location'] == 'other_location')
+              echo '<option value="other_location" selected>Autre</option>';
+            else
+              echo '<option value="other_location">Autre</option>';
+          echo '</select>';
 
           // Lieu "Autre"
           if ($_SESSION['save']['location'] == 'other_location')
@@ -96,6 +93,7 @@
 
           // Types
           echo '<div id="types_restaurants">';
+            // Bouton "Autre"
             echo '<a id="addType" class="bouton_type_autre">';
               echo '<span class="fond_plus">+</span>';
               echo 'Autre';

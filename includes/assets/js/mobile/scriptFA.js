@@ -31,6 +31,22 @@ $(function()
     afficherMasquerIdWithDelay('zone_details_proposition');
   });
 
+  // Ouvre la zone de saisie d'un restaurant
+  $('#afficherSaisieRestaurant').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_saisie_restaurant');
+  });
+
+  // Ferme la zone de saisie d'un restaurant
+  $('#fermerSaisieRestaurant').click(function()
+  {
+    // Réinitialisation de la saisie
+    resetSaisie('zone_saisie_restaurant');
+
+    // Fermeture de l'affichage
+    afficherMasquerIdWithDelay('zone_saisie_restaurant');
+  });
+
   // Scroll vers un lieu
   $('.lienLieu').click(function()
   {
@@ -58,6 +74,66 @@ $(function()
   $('#fermerDetailsRestaurant').click(function()
   {
     afficherMasquerIdWithDelay('zone_details_restaurant');
+  });
+
+  // Ouvre la fenêtre de saisie d'une dépense en modification
+  $('.modifierRestaurant').click(function()
+  {
+    var idRestaurant = $(this).attr('id').replace('modifier_restaurant_', '');
+
+    initialisationModification(idRestaurant);
+  });
+
+  // Réinitialise la saisie à la fermeture au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme la saisie d'une dépense
+    if ($(event.target).attr('class') == 'fond_saisie')
+      resetSaisie('zone_saisie_restaurant');
+  });
+
+  // Charge l'image dans la zone de saisie
+  $('.loadSaisieRestaurant').on('change', function(event)
+  {
+    loadFile(event, 'image_restaurant_saisie', true);
+  });
+
+  // Change le statut d'un jour d'ouverture
+  $('.checkDay').click(function()
+  {
+    var idJour = $(this).attr('id').split('_');
+    var day    = idJour[idJour.length - 1];
+
+    changeCheckedDay('saisie_checkbox_ouverture_' + day, 'saisie_label_ouverture_' + day, 'label_jour_checked', 'label_jour');
+  });
+
+  // Ajoute un champ de saisie libre type de restaurant (saisie)
+  $('#addType').click(function()
+  {
+    addOtherType('types_restaurants');
+  });
+
+  // Change la couleur des checkbox types de restaurant (saisie & modification)
+  $('.checkType').click(function()
+  {
+    var idType = $(this).closest('div').attr('id');
+
+    changeCheckedColorTypes(idType);
+  });
+
+  /*** Actions au changement ***/
+  // Affiche la saisie "Autre" (lieu)
+  $('#saisie_location').on('change', function()
+  {
+    afficherOther('saisie_location', 'saisie_other_location');
+  });
+
+  // Change la couleur du type à la saisie
+  $(document).on('input', '.saisieType', function()
+  {
+    var idType = $(this).attr('id');
+
+    changeTypeColor(idType);
   });
 });
 
@@ -641,6 +717,13 @@ function showDetailsRestaurant(idRestaurant)
     $('#choix_rapide_details > input[name=id_restaurant]').val(idRestaurant);
   }
 
+  // Lien modification
+  $('.zone_details_actions > .lien_modifier_restaurant').attr('id', 'modifier_restaurant_' + restaurant['id']);
+
+  // Formulaire suppression
+  $('.zone_details_actions > .form_supprimer_restaurant').attr('id', 'delete_restaurant_' + restaurant['id']);
+  $('.form_supprimer_restaurant > input[name=id_restaurant]').val(restaurant['id']);
+
   /*************/
   /* Affichage */
   /*************/
@@ -654,4 +737,313 @@ function showDetailsRestaurant(idRestaurant)
 
     openSection($(this), idZone, 'open');
   });
+}
+
+// Affiche ou masque la zone de saisie "Autre"
+function afficherOther(select, required)
+{
+  if ($('#' + select).val() == 'other_location')
+  {
+    $('#' + required).css('display', 'block');
+    $('#' + required).prop('required', true);
+  }
+  else
+  {
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
+  }
+}
+
+// Fixe la couleur de fond lors du changement de statut
+function changeCheckedDay(idCheckbox, idLabel, classChecked, classNoCheck)
+{
+  if ($('#' + idCheckbox).prop('checked') == true)
+  {
+    $('#' + idLabel).removeClass(classChecked);
+    $('#' + idLabel).addClass(classNoCheck);
+  }
+  else
+  {
+    $('#' + idLabel).addClass(classChecked);
+    $('#' + idLabel).removeClass(classNoCheck);
+  }
+}
+
+// Génère une nouvelle zone pour saisir un type
+function addOtherType(id)
+{
+  var html       = '';
+  var length     = $('#' + id + ' input').length;
+  var new_length = length + 1;
+  var idType     = id + '_' + new_length;
+
+  if (new_length % 2 == 0)
+    html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + new_length + ']" class="type_other type_other_margin saisieType" />';
+  else
+    html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
+
+  $('#' + id).append(html);
+}
+
+// Change la couleur des checkbox (saisie restaurant)
+function changeCheckedColorTypes(input)
+{
+  if ($('#' + input).find('input').prop('checked'))
+    $('#' + input).removeClass('bouton_checked');
+  else
+    $('#' + input).addClass('bouton_checked');
+}
+
+// Change la couleur de fond lors de la saisie de texte
+function changeTypeColor(id)
+{
+  if ($('#' + id).val() != '')
+  {
+    $('#' + id).css('background-color', '#70d55d');
+    $('#' + id).css('color', 'white');
+  }
+  else
+  {
+    $('#' + id).css('background-color', '#e3e3e3');
+    $('#' + id).css('color', '#262626');
+  }
+}
+
+// Affiche la zone de mise à jour d'un restaurant
+function initialisationModification(idRestaurant)
+{
+  // Récupération des données
+  var restaurant = listeRestaurantsJson[idRestaurant];
+  var opened     = restaurant['opened'].split(';');
+  var days       = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+  var image      = restaurant['picture'];
+
+  // Titre
+  var titre = 'Modifier un restaurant';
+  $('#zone_saisie_restaurant').find('.zone_titre_saisie').html(titre);
+
+  // Action du formulaire
+  var action = 'restaurants.php?action=doModifier';
+  $('#zone_saisie_restaurant').find('.form_saisie').attr('action', action);
+
+  // Identifiant restaurant
+  $('#zone_saisie_restaurant').find('#id_saisie_restaurant').val(idRestaurant);
+
+  // Image restaurant
+  $('#zone_saisie_restaurant').find('#image_restaurant_saisie').attr('src', '../../includes/images/foodadvisor/' + image);
+  $('#zone_saisie_restaurant').find('#saisie_image').attr('name', 'update_image_restaurant_' + idRestaurant);
+
+  // Nom restaurant
+  $('#zone_saisie_restaurant').find('#saisie_nom').val(restaurant['name']);
+  $('#zone_saisie_restaurant').find('#saisie_nom').attr('name', 'update_name_restaurant_' + idRestaurant);
+
+  // Lieu restaurant
+  $('#zone_saisie_restaurant').find('#saisie_location').val(restaurant['location']);
+  $('#zone_saisie_restaurant').find('#saisie_location').attr('name', 'update_location_' + idRestaurant);
+
+  // Lieu "Autre"
+  $('#zone_saisie_restaurant').find('#saisie_other_location').css('display', 'none');
+  $('#zone_saisie_restaurant').find('#saisie_other_location').val('');
+  $('#zone_saisie_restaurant').find('#saisie_other_location').attr('name', 'update_other_location_' + idRestaurant);
+
+  // Jours d'ouverture
+  $.each(opened, function(key, value)
+  {
+    if (value != '')
+    {
+      if (value == 'Y')
+      {
+        $('#zone_saisie_restaurant').find('#saisie_label_ouverture_' + days[key]).addClass('label_jour_checked');
+        $('#zone_saisie_restaurant').find('#saisie_label_ouverture_' + days[key]).removeClass('label_jour');
+        $('#zone_saisie_restaurant').find('#saisie_checkbox_ouverture_' + days[key]).prop('checked', true);
+      }
+      else
+      {
+        $('#zone_saisie_restaurant').find('#saisie_label_ouverture_' + days[key]).addClass('label_jour');
+        $('#zone_saisie_restaurant').find('#saisie_label_ouverture_' + days[key]).removeClass('label_jour_checked');
+        $('#zone_saisie_restaurant').find('#saisie_checkbox_ouverture_' + days[key]).prop('checked', false);
+      }
+
+      $('#zone_saisie_restaurant').find('#saisie_checkbox_ouverture_' + days[key]).attr('name', 'update_ouverture_restaurant_' + idRestaurant + '[' + key + ']');
+    }
+  });
+
+  // Prix min
+  $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').val(restaurant['min_price']);
+  $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').attr('name', 'update_prix_min_restaurant_' + idRestaurant);
+
+  // Prix max
+  $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').val(restaurant['max_price']);
+  $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').attr('name', 'update_prix_max_restaurant_' + idRestaurant);
+
+  // Types
+  var i = 0;
+
+  $('#zone_saisie_restaurant').find('.switch_types').each(function()
+  {
+    var input    = $(this).find('input');
+    var inputId  = $(this).find('input').attr('id');
+    var idType   = inputId + '_' + idRestaurant;
+    var matching = false;
+
+    $.each(restaurant['formatted_types'], function()
+    {
+      if (this != '')
+      {
+        typeRestaurant = 'type_' + this + '_' + idRestaurant;
+
+        if (typeRestaurant == idType)
+        {
+          matching = true;
+          return false;
+        }
+      }
+    });
+
+    if (matching == true)
+    {
+      input.prop('checked', true);
+      $(this).addClass('bouton_checked');
+    }
+    else
+    {
+      input.prop('checked', false);
+      $(this).removeClass('bouton_checked');
+    }
+
+    input.attr('name', 'update_types_restaurants_' + idRestaurant + '[' + i + ']');
+    i++;
+  });
+
+  // Types libres
+  $('#zone_saisie_restaurant').find('.type_other').remove();
+
+  // Téléphone
+  $('#zone_saisie_restaurant').find('#saisie_telephone').val(restaurant['phone']);
+  $('#zone_saisie_restaurant').find('#saisie_telephone').attr('name', 'update_phone_restaurant_' + idRestaurant);
+
+  // Site web
+  $('#zone_saisie_restaurant').find('#saisie_website').val(restaurant['website']);
+  $('#zone_saisie_restaurant').find('#saisie_website').attr('name', 'update_website_restaurant_' + idRestaurant);
+
+  // Plan
+  $('#zone_saisie_restaurant').find('#saisie_plan').val(restaurant['plan']);
+  $('#zone_saisie_restaurant').find('#saisie_plan').attr('name', 'update_plan_restaurant_' + idRestaurant);
+
+  // LaFourchette
+  $('#zone_saisie_restaurant').find('#saisie_lafourchette').val(restaurant['lafourchette']);
+  $('#zone_saisie_restaurant').find('#saisie_lafourchette').attr('name', 'update_lafourchette_restaurant_' + idRestaurant);
+
+  // Description
+  $('#zone_saisie_restaurant').find('#saisie_description').val(restaurant['description']);
+  $('#zone_saisie_restaurant').find('#saisie_description').attr('name', 'update_description_restaurant_' + idRestaurant);
+
+  // Bouton validation
+  $('#zone_saisie_restaurant').find('.bouton_saisie_gauche').attr('name', 'update_restaurant_' + idRestaurant);
+
+  // Masque la zone de détails
+  afficherMasquerIdWithDelay('zone_details_restaurant');
+
+  // Affiche la zone de saisie
+  afficherMasquerIdWithDelay('zone_saisie_restaurant');
+}
+
+// Réinitialise la zone de saisie d'une dépense si fermeture modification
+function resetSaisie(zone)
+{
+  // Déclenchement après la fermeture
+  setTimeout(function()
+  {
+    // Test si action = modification
+    var currentAction = $('.form_saisie').attr('action').split('action=');
+    var call          = currentAction[currentAction.length - 1]
+
+    if (call == 'doModifier')
+    {
+      // Titre
+      var titre = 'Saisir un restaurant';
+      $('#zone_saisie_restaurant').find('.zone_titre_saisie').html(titre);
+
+      // Action du formulaire
+      var action = 'restaurants.php?action=doAjouter';
+      $('#zone_saisie_restaurant').find('.form_saisie').attr('action', action);
+
+      // Identifiant restaurant
+      $('#zone_saisie_restaurant').find('#id_saisie_restaurant').val('');
+
+      // Image restaurant
+      $('#zone_saisie_restaurant').find('#image_restaurant_saisie').attr('src', '');
+      $('#zone_saisie_restaurant').find('#saisie_image').attr('name', 'image_restaurant');
+
+      // Nom restaurant
+      $('#zone_saisie_restaurant').find('#saisie_nom').val('');
+      $('#zone_saisie_restaurant').find('#saisie_nom').attr('name', 'name_restaurant');
+
+      // Lieu restaurant
+      $('#zone_saisie_restaurant').find('#saisie_location').val('');
+      $('#zone_saisie_restaurant').find('#saisie_location').attr('name', 'location');
+
+      // Lieu "Autre"
+      $('#zone_saisie_restaurant').find('#saisie_other_location').css('display', 'none');
+      $('#zone_saisie_restaurant').find('#saisie_other_location').val('');
+      $('#zone_saisie_restaurant').find('#saisie_other_location').attr('name', 'saisie_other_location');
+
+      // Jours d'ouverture
+      var days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+
+      $.each(days, function(key, value)
+      {
+        $('#zone_saisie_restaurant').find('#saisie_label_ouverture_' + value).addClass('label_jour_checked');
+        $('#zone_saisie_restaurant').find('#saisie_label_ouverture_' + value).removeClass('label_jour');
+        $('#zone_saisie_restaurant').find('#saisie_checkbox_ouverture_' + value).prop('checked', true);
+        $('#zone_saisie_restaurant').find('#saisie_checkbox_ouverture_' + this).attr('name', 'ouverture_restaurant[' + key + ']');
+      });
+
+      // Prix min
+      $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').val('');
+      $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').attr('name', 'prix_min_restaurant');
+
+      // Prix max
+      $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').val('');
+      $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').attr('name', 'prix_max_restaurant');
+
+      // Types
+      var i = 0;
+
+      $('#zone_saisie_restaurant').find('.switch_types').each(function()
+      {
+        $(this).find('input').prop('checked', false);
+        $(this).removeClass('bouton_checked');
+        $(this).find('input').attr('name', 'types_restaurants[' + i + ']');
+
+        i++;
+      });
+
+      // Types libres
+      $('#zone_saisie_restaurant').find('.type_other').remove();
+      
+      // Téléphone
+      $('#zone_saisie_restaurant').find('#saisie_telephone').val('');
+      $('#zone_saisie_restaurant').find('#saisie_telephone').attr('name', 'phone_restaurant');
+
+      // Site web
+      $('#zone_saisie_restaurant').find('#saisie_website').val('');
+      $('#zone_saisie_restaurant').find('#saisie_website').attr('name', 'website_restaurant');
+
+      // Plan
+      $('#zone_saisie_restaurant').find('#saisie_plan').val('');
+      $('#zone_saisie_restaurant').find('#saisie_plan').attr('name', 'plan_restaurant');
+
+      // LaFourchette
+      $('#zone_saisie_restaurant').find('#saisie_lafourchette').val('');
+      $('#zone_saisie_restaurant').find('#saisie_lafourchette').attr('name', 'lafourchette_restaurant');
+
+      // Description
+      $('#zone_saisie_restaurant').find('#saisie_description').val('');
+      $('#zone_saisie_restaurant').find('#saisie_description').attr('name', 'description_restaurant');
+
+      // Bouton validation
+      $('#zone_saisie_restaurant').find('.bouton_saisie_gauche').attr('name', 'insert_restaurant');
+    }
+  }, 200);
 }

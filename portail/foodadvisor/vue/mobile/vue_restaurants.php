@@ -55,24 +55,13 @@
           /**********/
           /* Saisie */
           /**********/
-
-
-
-
-
-
-
+          include('vue/mobile/vue_saisie_restaurant.php');
 
           /********************/
           /* Boutons d'action */
           /********************/
           // Ajouter un restaurant
-
-
-
-
-
-
+          echo '<a id="afficherSaisieRestaurant" title="Saisir un restaurant" class="lien_green">Saisir un restaurant</a>';
 
           // Propositions
           echo '<a href="foodadvisor.php?action=goConsulter" title="Les propositions" class="lien_green">Les propositions</a>';

@@ -490,19 +490,28 @@
     {
       foreach ($restaurantsParLieux as $restaurant)
       {
-        $restaurantAConvertir = array('id'           => $restaurant->getId(),
-                                      'name'         => $restaurant->getName(),
-                                      'picture'      => $restaurant->getPicture(),
-                                      'types'        => $restaurant->getTypes(),
-                                      'location'     => $restaurant->getLocation(),
-                                      'phone'        => formatPhoneNumber($restaurant->getPhone()),
-                                      'opened'       => $restaurant->getOpened(),
-                                      'min_price'    => $restaurant->getMin_price(),
-                                      'max_price'    => $restaurant->getMax_price(),
-                                      'website'      => $restaurant->getWebsite(),
-                                      'plan'         => $restaurant->getPlan(),
-                                      'lafourchette' => $restaurant->getLafourchette(),
-                                      'description'  => $restaurant->getDescription()
+        // Formatage des types
+        $explodedTypes = explode(';', $restaurant->getTypes());
+
+        foreach ($explodedTypes as $keyType => $type)
+        {
+          $explodedTypes[$keyType] = formatId($type);
+        }
+
+        $restaurantAConvertir = array('id'              => $restaurant->getId(),
+                                      'name'            => $restaurant->getName(),
+                                      'picture'         => $restaurant->getPicture(),
+                                      'types'           => $restaurant->getTypes(),
+                                      'formatted_types' => $explodedTypes,
+                                      'location'        => $restaurant->getLocation(),
+                                      'phone'           => formatPhoneNumber($restaurant->getPhone()),
+                                      'opened'          => $restaurant->getOpened(),
+                                      'min_price'       => $restaurant->getMin_price(),
+                                      'max_price'       => $restaurant->getMax_price(),
+                                      'website'         => $restaurant->getWebsite(),
+                                      'plan'            => $restaurant->getPlan(),
+                                      'lafourchette'    => $restaurant->getLafourchette(),
+                                      'description'     => $restaurant->getDescription()
                                      );
 
         // Ajout au tableau

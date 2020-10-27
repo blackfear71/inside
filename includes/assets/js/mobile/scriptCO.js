@@ -157,15 +157,13 @@ function afficherOther(select, required)
 {
   if ($('#' + select).val() == 'other')
   {
-    $('#' + required).css('display', 'inline-block');
+    $('#' + required).css('display', 'block');
     $('#' + required).prop('required', true);
-    $('#' + select).addClass('saisie_speaker speaker_autre');
   }
   else
   {
     $('#' + required).css('display', 'none');
     $('#' + required).prop('required', false);
-    $('#' + select).removeClass('speaker_autre');
   }
 }
 
