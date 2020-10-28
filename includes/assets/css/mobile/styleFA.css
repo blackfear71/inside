@@ -1077,10 +1077,17 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	height: 6vh;
 	width: 6vh;
-	text-align: center;
-	line-height: 6vh;
+	height: 6vh;
+}
+
+.checkbox_type
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50%;
+	transform: translateY(-50%);
 }
 
 .label_switch

@@ -125,7 +125,7 @@
                 else
                   echo '<div id="bouton_' . $idType . '" class="switch_types switch_types_margin bouton_checked">';
                   echo '<div class="zone_checkbox_type">';
-                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" checked />';
+                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" class="checkbox_type" checked />';
                   echo '</div>';
 
                   echo '<label for="' . $idType . '" class="label_switch checkType">' . $type . '</label>';
@@ -138,7 +138,7 @@
                 else
                   echo '<div id="bouton_' . $idType . '" class="switch_types switch_types_margin">';
                   echo '<div class="zone_checkbox_type">';
-                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" />';
+                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" class="checkbox_type" />';
                   echo '</div>';
 
                   echo '<label for="' . $idType . '" class="label_switch checkType">' . $type . '</label>';
