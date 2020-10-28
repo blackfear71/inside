@@ -2,29 +2,6 @@
 /*** Collector Room ***/
 /**********************/
 
-/*** Boutons d'action ***/
-.lien_green
-{
-	display: block;
-	width: calc(100% - 2vh);
-	padding: 1vh;
-	margin-bottom: 2vh;
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
-	font-size: 3vh;
-	text-align: center;
-	border-radius: 0.5vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
-	text-decoration: none;
-	background-color: #e3e3e3;
-}
-
-.lien_green:hover
-{
-  background-color: #70d55d;
-  color: white;
-}
-
 /*** Saisie ***/
 .saisie_speaker
 {

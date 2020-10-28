@@ -61,10 +61,16 @@
           /* Boutons d'action */
           /********************/
           // Ajouter un restaurant
-          echo '<a id="afficherSaisieRestaurant" title="Saisir un restaurant" class="lien_green">Saisir un restaurant</a>';
+          echo '<a id="afficherSaisieRestaurant" title="Saisir un restaurant" class="lien_green lien_demi margin_lien">';
+            echo '<img src="../../includes/icons/foodadvisor/restaurants_grey.png" alt="restaurants_grey" class="image_lien" />';
+            echo '<div class="titre_lien">AJOUTER</div>';
+          echo '</a>';
 
           // Propositions
-          echo '<a href="foodadvisor.php?action=goConsulter" title="Les propositions" class="lien_green">Les propositions</a>';
+          echo '<a href="foodadvisor.php?action=goConsulter" title="Les propositions" class="lien_green lien_demi">';
+            echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="image_lien" />';
+            echo '<div class="titre_lien">PROPOSITIONS</div>';
+          echo '</a>';
 
           /***********/
           /* Détails */

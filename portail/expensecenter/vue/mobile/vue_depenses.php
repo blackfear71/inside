@@ -3,7 +3,7 @@
     // Titre
     echo '<div id="titre_depenses_utilisateurs" class="titre_section">';
       echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="logo_titre_section" />';
-      echo '<div class="texte_titre_section">Les dépenses</div>';
+      echo '<div class="texte_titre_section">Les dépenses de ' . $_GET['year'] . '</div>';
       echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
     echo '</div>';
 

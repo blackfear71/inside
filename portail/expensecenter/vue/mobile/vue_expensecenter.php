@@ -66,14 +66,23 @@
           /********************/
           /* Boutons d'action */
           /********************/
-          // Années
-          echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red">' . $_GET['year'] . '</a>';
-
           // Saisie dépense
-          echo '<a id="afficherSaisieDepense" title="Saisir une dépense" class="lien_green">Saisir une dépense</a>';
+          echo '<a id="afficherSaisieDepense" title="Saisir une dépense" class="lien_green lien_demi margin_lien">';
+            echo '<img src="../../includes/icons/expensecenter/expense_center_grey.png" alt="expense_center_grey" class="image_lien" />';
+            echo '<div class="titre_lien">DÉPENSE</div>';
+          echo '</a>';
 
           // Saisie montants
-          echo '<a id="afficherSaisieMontants" title="Saisir des montants" class="lien_green">Saisir des montants</a>';
+          echo '<a id="afficherSaisieMontants" title="Saisir des montants" class="lien_green lien_demi">';
+            echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="image_lien" />';
+            echo '<div class="titre_lien">MONTANTS</div>';
+          echo '</a>';
+
+          // Années
+          echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red">';
+            echo '<img src="../../includes/icons/expensecenter/year_grey.png" alt="year_grey" class="image_lien" />';
+            echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+          echo '</a>';
 
           /**********/
           /* Bilans */

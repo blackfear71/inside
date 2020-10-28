@@ -72,10 +72,16 @@
           /* Boutons d'action */
           /********************/
           // Saisie phrase culte
-          echo '<a id="afficherSaisiePhraseCulte" title="Saisir une phrase culte" class="lien_green">Saisir une phrase culte</a>';
+          echo '<a id="afficherSaisiePhraseCulte" title="Saisir une phrase culte" class="lien_green lien_demi margin_lien">';
+            echo '<img src="../../includes/icons/collector/collector_grey.png" alt="collector_grey" class="image_lien" />';
+            echo '<div class="titre_lien">PHRASE CULTE</div>';
+          echo '</a>';
 
           // Saisie image culte
-          echo '<a id="afficherSaisieImageCulte" title="Saisir une image culte" class="lien_green">Saisir une image culte</a>';
+          echo '<a id="afficherSaisieImageCulte" title="Saisir une image culte" class="lien_green lien_demi">';
+            echo '<img src="../../includes/icons/collector/images_grey.png" alt="images_grey" class="image_lien" />';
+            echo '<div class="titre_lien">IMAGE CULTE</div>';
+          echo '</a>';
 
           /*******************/
           /* Tris et filtres */
