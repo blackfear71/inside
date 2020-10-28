@@ -108,9 +108,11 @@ $(function()
   });
 
   // Ajoute un champ de saisie libre type de restaurant (saisie)
-  $('#addType').click(function()
+  $('.addType').click(function()
   {
-    addOtherType('types_restaurants');
+    var idParent = $(this).parent().attr('id');
+
+    addOtherType(idParent);
   });
 
   // Change la couleur des checkbox types de restaurant (saisie & modification)
@@ -830,7 +832,9 @@ function initialisationModification(idRestaurant)
   $('#zone_saisie_restaurant').find('#id_saisie_restaurant').val(idRestaurant);
 
   // Image restaurant
-  $('#zone_saisie_restaurant').find('#image_restaurant_saisie').attr('src', '../../includes/images/foodadvisor/' + image);
+  if (image != '')
+    $('#zone_saisie_restaurant').find('#image_restaurant_saisie').attr('src', '../../includes/images/foodadvisor/' + image);
+
   $('#zone_saisie_restaurant').find('#saisie_image').attr('name', 'update_image_restaurant_' + idRestaurant);
 
   // Nom restaurant
@@ -916,6 +920,7 @@ function initialisationModification(idRestaurant)
   });
 
   // Types libres
+  $('#zone_saisie_restaurant').find('.zone_saisie_types').attr('id', 'update_types_restaurants_' + idRestaurant);
   $('#zone_saisie_restaurant').find('.type_other').remove();
 
   // Téléphone
@@ -1020,6 +1025,7 @@ function resetSaisie()
       });
 
       // Types libres
+      $('#zone_saisie_restaurant').find('.zone_saisie_types').attr('id', 'types_restaurants');
       $('#zone_saisie_restaurant').find('.type_other').remove();
 
       // Téléphone

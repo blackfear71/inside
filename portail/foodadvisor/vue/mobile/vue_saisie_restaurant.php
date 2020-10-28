@@ -93,7 +93,7 @@
           // Types
           echo '<div id="types_restaurants" class="zone_saisie_types">';
             // Bouton "Autre"
-            echo '<a id="addType" class="bouton_type_autre">';
+            echo '<a class="bouton_type_autre addType">';
               echo '<span class="fond_plus">+</span>';
               echo 'Autre';
             echo '</a>';
