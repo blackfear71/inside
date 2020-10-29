@@ -34,6 +34,19 @@
                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';
               echo '</div>';
             }
+            else
+            {
+              // Suppression si disponible
+              if ($numeroJour < date('N') OR ($numeroJour == date('N') AND date('H') >= 13))
+              {
+                echo '<form id="delete_resume_' . $numeroJour . '" method="post" action="foodadvisor.php?action=doSupprimerResume" class="form_delete_choix">';
+                  echo '<input type="hidden" name="id_resume" value="' . $choixJour->getId_restaurant() . '" />';
+                  echo '<input type="hidden" name="date_resume" value="' . $choixJour->getDate() . '" />';
+                  echo '<input type="submit" name="delete_resume" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
+                  echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
+                echo '</form>';
+              }
+            }
           echo '</div>';
         }
         else
