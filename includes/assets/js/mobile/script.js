@@ -126,18 +126,55 @@ $(function()
   });
 
   // Efface la zone de recherche au clic sur la croix
-  $('#reset_recherche_live').click(function()
+  $('.logo_recherche_live').click(function()
   {
-    resetLiveSearch();
+    var idSearch = $(this).attr('id');
+    var idForm;
+
+    switch (idSearch)
+    {
+      case 'reset_recherche_live_propositions':
+        idForm = 'zoneSaisiePropositions';
+        break;
+
+      case 'reset_recherche_live_resume':
+        idForm = 'zoneSaisieResume';
+        break;
+
+      default:
+        idForm = '';
+        break;
+    }
+
+    if (idForm != '')
+      resetLiveSearch(idForm);
   });
 
   /*** Actions du clavier ***/
   // Filtre la recherche
-  $('#recherche_live').keyup(function()
+  $('.input_recherche_live').keyup(function()
 	{
+    var idInput      = $(this).attr('id');
     var inputContent = $.trim($(this).val());
+    var idForm;
 
-    liveSearch(inputContent);
+    switch (idInput)
+    {
+      case 'recherche_live_propositions':
+        idForm = 'zoneSaisiePropositions';
+        break;
+
+      case 'recherche_live_resume':
+        idForm = 'zoneSaisieResume';
+        break;
+
+      default:
+        idForm = '';
+        break;
+    }
+
+    if (idForm != '')
+      liveSearch(idForm, inputContent);
   });
 
   /*** Actions sur mobile ***/
@@ -666,26 +703,26 @@ function executeAction(form, action)
 }
 
 // Réinitialise la zone de recherche saisie
-function resetLiveSearch()
+function resetLiveSearch(idForm)
 {
   // On vide la saisie
-  $('#recherche_live').val('');
+  $('#' + idForm).find('.input_recherche_live').val('');
 
   // On cache le message vide
-  $('.empty_recherche_live').hide();
+  $('#' + idForm).find('.empty_recherche_live').hide();
 
   // Affiche tous les lieux par défaut
-  $('.zone_recherche_conteneur').show();
+  $('#' + idForm).find('.zone_recherche_conteneur').show();
 
   // Affiche tous les restaurants par défaut
-  $('.zone_recherche_item').show();
+  $('#' + idForm).find('.zone_recherche_item').show();
 }
 
 // Filtre la zone de recherche en fonction de la saisie
-function liveSearch(input)
+function liveSearch(idForm, input)
 {
   // Déplie toutes les zones de recherche
-  $('.zone_recherche_conteneur > .titre_section').each(function()
+  $('#' + idForm).find('.zone_recherche_conteneur > .titre_section').each(function()
   {
     var idZone = $(this).attr('id').replace('titre_', 'afficher_');
 
@@ -696,35 +733,35 @@ function liveSearch(input)
   if (!input)
   {
     // Affiche tous les lieux par défaut
-    $('.zone_recherche_conteneur').show();
+    $('#' + idForm).find('.zone_recherche_conteneur').show();
 
     // Affiche tous les restaurants par défaut
-    $('.zone_recherche_item').show();
+    $('#' + idForm).find('.zone_recherche_item').show();
 
     // On cache le message vide
-    $('.empty_recherche_live').hide();
+    $('#' + idForm).find('.empty_recherche_live').hide();
   }
   // Sinon on filtre
   else
   {
     // Affiche tous les lieux par défaut
-    $('.zone_recherche_conteneur').show();
+    $('#' + idForm).find('.zone_recherche_conteneur').show();
 
     // Cache les restaurants qui ne correspondent pas
-    $('.zone_recherche_item').show().not(':containsCaseInsensitive(' + input + ')').hide();
+    $('#' + idForm).find('.zone_recherche_item').show().not(':containsCaseInsensitive(' + input + ')').hide();
 
     // Cache une zone qui ne contient pas de restaurant qui corresponde
-    $('.zone_recherche_contenu').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
+    $('#' + idForm).find('.zone_recherche_contenu').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
 
     // Filtrage de l'affichage
     if (!$('.zone_recherche_item').is(':visible'))
-      $('.zone_recherche_conteneur').hide();
+      $('#' + idForm).find('.zone_recherche_conteneur').hide();
 
     // Affichage / masquage message vide
     if ($('.zone_recherche_conteneur').is(':visible'))
-      $('.empty_recherche_live').hide();
+      $('#' + idForm).find('.empty_recherche_live').hide();
     else
-      $('.empty_recherche_live').show();
+      $('#' + idForm).find('.empty_recherche_live').show();
   }
 }
 

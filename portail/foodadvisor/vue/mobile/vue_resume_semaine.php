@@ -51,13 +51,26 @@
         }
         else
         {
-          echo '<div class="zone_proposition proposition_normal">';
-            // Jour
-            echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
+          if ($numeroJour < date('N') OR ($numeroJour == date('N') AND date('H') >= 13))
+          {
+            echo '<a id="jour_saisie_resume_' . $numeroJour . '" class="zone_proposition proposition_normal afficherSaisieResume">';
+              // Jour
+              echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
 
-            // Choix absent
-            echo '<div class="no_proposal">Pas de proposition pour ce jour...</div>';
-          echo '</div>';
+              // Choix absent
+              echo '<div class="no_proposal">Pas de proposition pour ce jour...</div>';
+            echo '</a>';
+          }
+          else
+          {
+            echo '<div class="zone_proposition proposition_normal">';
+              // Jour
+              echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
+
+              // Choix absent
+              echo '<div class="no_proposal">Pas de proposition pour ce jour...</div>';
+            echo '</div>';
+          }
         }
       }
     echo '</div>';

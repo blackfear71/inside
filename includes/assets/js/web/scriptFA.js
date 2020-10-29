@@ -189,7 +189,7 @@ $(function()
   // Affiche la saisie lieu restaurant (résumé)
   $('.afficherResume').click(function()
   {
-    var idBouton  = $(this).attr('id');
+    var idBouton = $(this).attr('id');
 
     afficherMasquerIdNoDelay(idBouton);
     afficherListboxLieuxResume(idBouton);

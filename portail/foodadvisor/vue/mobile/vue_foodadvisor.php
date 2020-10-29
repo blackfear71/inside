@@ -52,11 +52,15 @@
           /*********/
           echo '<div class="titre_section_mobile">' . strtoupper($titleHead) . '</div>';
 
-          /**********/
-          /* Saisie */
-          /**********/
+          /***********/
+          /* Saisies */
+          /***********/
+          // Propositions
           if ($actions['saisir_choix'] == true)
             include('vue/mobile/vue_saisie_propositions.php');
+
+          // Résumé
+          include('vue/mobile/vue_saisie_resume.php');
 
           /********************/
           /* Boutons d'action */

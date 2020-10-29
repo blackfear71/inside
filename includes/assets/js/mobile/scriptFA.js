@@ -12,7 +12,7 @@ $(function()
   });
 
   // Change la couleur d'une case à cocher à la sélection
-  $('label').click(function()
+  $('#zoneSaisiePropositions').find('label').click(function()
   {
     changeCheckedColor($(this));
   });
@@ -29,6 +29,26 @@ $(function()
   $('#fermerDetailsProposition').click(function()
   {
     afficherMasquerIdWithDelay('zone_details_proposition');
+  });
+
+  // Ouvre la zone de saisie de résumé
+  $('.afficherSaisieResume').click(function()
+  {
+    var numJour = $(this).attr('id').replace('jour_saisie_resume_', '');
+
+    initialisationResume('zoneSaisieResume', numJour);
+  });
+
+  // Ferme la zone de saisie de résumé
+  $('#fermerSaisieResume').click(function()
+  {
+    afficherMasquerIdWithDelay('zoneSaisieResume');
+  });
+
+  // Change la couleur d'un radio bouton à la sélection
+  $('#zoneSaisieResume').find('label').click(function()
+  {
+    changeRadioColor('zoneSaisieResume', $(this));
   });
 
   // Ouvre la zone de saisie d'un restaurant
@@ -157,7 +177,7 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Change la couleur d'un proposition
+// Change la couleur d'un proposition (checkbox)
 function changeCheckedColor(label)
 {
   if (label.find('input').prop('checked'))
@@ -174,6 +194,29 @@ function changeCheckedColor(label)
     label.find('.nom_normal').css('color', '#262626');
     label.find('.zone_checkbox_proposition').css('background-color', '#d3d3d3');
   }
+}
+
+// Change la couleur d'un proposition (radio boutons)
+function changeRadioColor(idForm, label)
+{
+  // On supprime le style de tous les boutons
+  $('#' + idForm).find('label').each(function()
+  {
+    $(this).find('input[type=radio]').prop('checked', false);
+
+    $(this).find('.image_normal').css('background-color', '#d3d3d3');
+    $(this).find('.proposition_normal').css('background-color', '#e3e3e3');
+    $(this).find('.nom_normal').css('color', '#262626');
+    $(this).find('.zone_checkbox_proposition').css('background-color', '#d3d3d3');
+  });
+
+  // On applique le style sur le bouton concerné
+  $('#' + idForm).find(label).find('input[type=radio]').prop('checked', true);
+
+  $('#' + idForm).find(label).find('.image_normal').css('background-color', '#70d55d');
+  $('#' + idForm).find(label).find('.proposition_normal').css('background-color', '#96e687');
+  $('#' + idForm).find(label).find('.nom_normal').css('color', 'white');
+  $('#' + idForm).find(label).find('.zone_checkbox_proposition').css('background-color', '#70d55d');
 }
 
 // Affiche la zone de détails d'une proposition
@@ -519,6 +562,24 @@ function showDetailsProposition(idProposition)
 
     openSection($(this), idZone, 'open');
   });
+}
+
+function initialisationResume(idForm, numJour)
+{
+  // Initialisations
+  var days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+
+  // Modification du formulaire
+  $('#' + idForm).find('.zone_titre_saisie').html('Choix du ' + days[numJour - 1]);
+  $('#' + idForm).find('input[name=num_jour]').val(numJour);
+
+  $('#' + idForm).find('.zone_checkbox_proposition > input[type=radio]').each(function()
+  {
+    $(this).attr('name', 'select_restaurant_resume_' + numJour);
+  });
+
+  // Affichage de la zone de saisie
+  afficherMasquerIdWithDelay(idForm);
 }
 
 // Affiche la zone de détails d'un restaurant

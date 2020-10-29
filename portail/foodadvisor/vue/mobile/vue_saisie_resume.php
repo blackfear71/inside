@@ -1,10 +1,8 @@
 <?php
-  echo '<div id="zoneSaisiePropositions" class="fond_saisie">';
-    echo '<form method="post" action="foodadvisor.php?action=doAjouterMobile" class="form_saisie">';
+  echo '<div id="zoneSaisieResume" class="fond_saisie">';
+    echo '<form method="post" action="foodadvisor.php?action=doAjouterResume" class="form_saisie">';
       // Titre
-      echo '<div class="zone_titre_saisie">';
-        echo 'Proposer où manger';
-      echo '</div>';
+      echo '<div class="zone_titre_saisie"></div>';
 
       // Recherche
       echo '<div class="zone_recherche_live">';
@@ -12,10 +10,10 @@
         echo '<img src="../../includes/icons/common/search.png" alt="search" title="Rechercher" class="logo_recherche_live" />';
 
         // Zone de saisie
-        echo '<input type="text" autocomplete="off" id="recherche_live_propositions" placeholder="Rechercher" class="input_recherche_live" />';
+        echo '<input type="text" autocomplete="off" id="recherche_live_resume" placeholder="Rechercher" class="input_recherche_live" />';
 
         // Effacer
-        echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live_propositions" class="logo_recherche_live" />';
+        echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live_resume" class="logo_recherche_live" />';
       echo '</div>';
 
       // Saisie
@@ -29,17 +27,19 @@
           {
             // Lieu
             echo '<div class="zone_recherche_conteneur">';
-              echo '<div id="titre_saisie_' . formatId($lieuRestaurants) . '" class="titre_section">';
+              echo '<div id="titre_resume_' . formatId($lieuRestaurants) . '" class="titre_section">';
                 echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section">' . $lieuRestaurants . '</div>';
                 echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
               echo '</div>';
 
               // Restaurants
-              echo '<div id="afficher_saisie_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
+              echo '<div id="afficher_resume_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
+                echo '<input type="hidden" name="num_jour" value="" />';
+
                 foreach ($restaurantsParLieux as $restaurant)
                 {
-                  echo '<label for="proposition_restaurant_' . $restaurant->getId() . '" id="label_proposition_' . $restaurant->getId() . '" class="zone_recherche_item">';
+                  echo '<label for="resume_restaurant_' . $restaurant->getId() . '" id="label_resume_' . $restaurant->getId() . '" class="zone_recherche_item">';
                     echo '<div class="zone_proposition proposition_normal">';
                       echo '<div class="image_normal">';
                         // Image
@@ -53,9 +53,9 @@
                       echo '<div class="nom_proposition nom_normal">' . formatString($restaurant->getName(), 20) . '</div>';
                       echo '<div class="nom_proposition_complet">' . $restaurant->getName() . '</div>';
 
-                      // Case à cocher
+                      // Radio bouton
                       echo '<div class="zone_checkbox_proposition">';
-                        echo '<input type="checkbox" id="proposition_restaurant_' . $restaurant->getId() . '" name="restaurants[' . $restaurant->getId() . ']" class="checkbox_proposition" />';
+                        echo '<input type="radio" id="resume_restaurant_' . $restaurant->getId() . '" name="" value="' . $restaurant->getId() . '" class="checkbox_proposition" />';
                       echo '</div>';
                     echo '</div>';
                   echo '</label>';
@@ -69,10 +69,10 @@
       // Boutons
       echo '<div class="zone_boutons_saisie">';
         // Valider
-        echo '<input type="submit" name="submit_choices" value="Valider" class="bouton_saisie_gauche" />';
+        echo '<input type="submit" name="submit_resume" value="Valider" class="bouton_saisie_gauche" />';
 
         // Annuler
-        echo '<a id="fermerSaisiePropositions" class="bouton_saisie_droite">Annuler</a>';
+        echo '<a id="fermerSaisieResume" class="bouton_saisie_droite">Annuler</a>';
       echo '</div>';
     echo '</form>';
   echo '</div>';
