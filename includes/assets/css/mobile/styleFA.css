@@ -1015,10 +1015,15 @@
 	margin-right: 2vh;
 }
 
-.switch_types:hover
+.label_switch
 {
-	background-color: #70d55d;
-	color: white;
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 7vh);
+	padding: 1.5vh 1vh 1.5vh 6vh;
+	margin-left: -6vh;
+	word-break: break-word;
+	hyphens: auto;
 }
 
 .bouton_checked
@@ -1042,15 +1047,6 @@
 	margin-right: auto;
 	margin-top: 50%;
 	transform: translateY(-50%);
-}
-
-.label_switch
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 7vh);
-	padding: 1.5vh 1vh 1.5vh 6vh;
-	margin-left: -6vh;
 }
 
 .type_other
