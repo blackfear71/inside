@@ -103,10 +103,13 @@
           $proposition->setReserved($propositionDeterminee->getReserved());
 
           // Recherche pseudo et avatar appelant
-          $appelant = physiqueUser($proposition->getCaller());
+          if (!empty($proposition->getCaller()))
+          {
+            $appelant = physiqueUser($proposition->getCaller());
 
-          $proposition->setPseudo($appelant->getPseudo());
-          $proposition->setAvatar($appelant->getAvatar());
+            $proposition->setPseudo($appelant->getPseudo());
+            $proposition->setAvatar($appelant->getAvatar());
+          }
         }
 
         // Récupération détails proposition
