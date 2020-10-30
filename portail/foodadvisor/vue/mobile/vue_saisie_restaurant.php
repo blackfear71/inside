@@ -92,12 +92,6 @@
 
           // Types
           echo '<div id="types_restaurants" class="zone_saisie_types">';
-            // Bouton "Autre"
-            echo '<a class="bouton_type_autre addType">';
-              echo '<span class="fond_plus">+</span>';
-              echo 'Autre';
-            echo '</a>';
-
             $i = 0;
 
             // Types existants
@@ -121,9 +115,9 @@
               if ($checked == true)
               {
                 if ($i % 2 == 0)
-                  echo '<div id="bouton_' . $idType . '" class="switch_types bouton_checked">';
-                else
                   echo '<div id="bouton_' . $idType . '" class="switch_types switch_types_margin bouton_checked">';
+                else
+                  echo '<div id="bouton_' . $idType . '" class="switch_types bouton_checked">';
                   echo '<div class="zone_checkbox_type">';
                     echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" class="checkbox_type" checked />';
                   echo '</div>';
@@ -134,9 +128,9 @@
               else
               {
                 if ($i % 2 == 0)
-                  echo '<div id="bouton_' . $idType . '" class="switch_types">';
-                else
                   echo '<div id="bouton_' . $idType . '" class="switch_types switch_types_margin">';
+                else
+                  echo '<div id="bouton_' . $idType . '" class="switch_types">';
                   echo '<div class="zone_checkbox_type">';
                     echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" class="checkbox_type" />';
                   echo '</div>';
@@ -147,6 +141,15 @@
 
               $i++;
             }
+
+            // Bouton "Autre"
+            if ($i % 2 == 0)
+              echo '<a class="bouton_type_autre switch_types_margin addType">';
+            else
+              echo '<a class="bouton_type_autre addType">';
+              echo '<span class="fond_plus">+</span>';
+              echo 'Autre';
+            echo '</a>';
 
             // Types personnalisés (sauvegardés en cas d'erreur)
             if (!empty($_SESSION['save']['types_restaurants']))

@@ -962,7 +962,7 @@
 	background-color: #e3e3e3;
 	height: 6.5vh;
 	line-height: 6.5vh;
-	margin: 0 2vh 1vh 0;
+	margin-bottom: 1vh;
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
@@ -1056,8 +1056,10 @@
 	display: inline-block;
 	border: 0;
 	width: calc(50% - 4vh);
+	height: 6.5vh;
+	line-height: 6.5vh;
 	background-color: #e3e3e3;
-	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	padding: 0 1.5vh 0 1.5vh;
 	margin-bottom: 1vh;
 	vertical-align: top;
 	border-radius: 0.5vh;
