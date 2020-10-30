@@ -384,7 +384,7 @@
 	border: 0;
 }
 
-.bouton_action_details:hover
+.bouton_action_details:active
 {
 	background-color: #ff1937;
 	color: white;
@@ -675,7 +675,7 @@
 	user-select: none;
 }
 
-.lien_lieu:hover
+.lien_lieu:active
 {
 	background-color: #d3d3d3;
 	color: #262626;
@@ -694,7 +694,7 @@
 	border: 0;
 }
 
-.lien_lieu:hover .image_lieu
+.lien_lieu:active .image_lieu
 {
 	background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
 }
@@ -960,8 +960,8 @@
 	vertical-align: top;
 	width: calc(50% - 1vh);
 	background-color: #e3e3e3;
-	height: 6vh;
-	line-height: 6vh;
+	height: 6.5vh;
+	line-height: 6.5vh;
 	margin: 0 2vh 1vh 0;
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
@@ -972,13 +972,13 @@
 	user-select: none;
 }
 
-.bouton_type_autre:hover
+.bouton_type_autre:active
 {
 	background-color: #70d55d;
 	color: white;
 }
 
-.bouton_type_autre:hover .fond_plus
+.bouton_type_autre:active .fond_plus
 {
 	background-color: white;
 	color: #262626;
@@ -1002,6 +1002,7 @@
 .switch_types
 {
 	display: inline-block;
+	vertical-align: top;
 	width: calc(50% - 1vh);
 	margin-bottom: 1vh;
 	border-radius: 0.5vh;
@@ -1021,6 +1022,7 @@
 	vertical-align: middle;
 	width: calc(100% - 7vh);
 	padding: 1.5vh 1vh 1.5vh 6vh;
+	min-height: 3.5vh;
 	margin-left: -6vh;
 	word-break: break-word;
 	hyphens: auto;

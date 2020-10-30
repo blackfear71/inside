@@ -116,7 +116,7 @@
 	user-select: none;
 }
 
-.bouton_quantite:hover
+.bouton_quantite:active
 {
 	background-color: #c81932;
 	color: white;
