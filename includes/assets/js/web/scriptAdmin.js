@@ -39,7 +39,7 @@ $(function()
   // Masque la ligne de modification d'une alerte
   $('.annulerAlerte').click(function()
   {
-    var idAlerte = $(this).attr('id').replace('annuler_', '');
+    var idAlerte = $(this).attr('id').replace('annuler_alerte_', '');
 
     afficherMasquerIdRow('modifier_alerte_' + idAlerte);
     afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
@@ -58,7 +58,7 @@ $(function()
   // Masque la zone de modification d'un thème
   $('.annulerTheme').click(function()
   {
-    var idTheme = $(this).attr('id').replace('annuler_', '');
+    var idTheme = $(this).attr('id').replace('annuler_theme_', '');
 
     afficherMasquerIdNoDelay('modifier_theme_' + idTheme);
     afficherMasquerIdNoDelay('modifier_theme_2_' + idTheme);
@@ -226,7 +226,7 @@ $(function()
     });
   }
 
-  $('.modify_date_deb_theme, .modify_date_fin_theme').each(function()
+  $('.update_date_deb_theme, .update_date_fin_theme').each(function()
   {
     $(this).datepicker(
     {

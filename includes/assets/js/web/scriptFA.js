@@ -132,7 +132,7 @@ $(function()
   // Ferme la modification d'un choix
   $('.annulerChoix').click(function()
   {
-    var idChoix = $(this).attr('id').replace('annuler_', '');
+    var idChoix = $(this).attr('id').replace('annuler_update_choix_', '');
 
     afficherMasquerIdNoDelay('modifier_choix_' + idChoix);
     afficherMasquerIdNoDelay('visualiser_choix_' + idChoix);
@@ -276,7 +276,7 @@ $(function()
   // Ferme la zone de modification d'un restaurant
   $('.annulerRestaurant').click(function()
   {
-    var idRestaurant = $(this).attr('id').replace('annuler_', '');
+    var idRestaurant = $(this).attr('id').replace('annuler_update_restaurant_', '');
 
     afficherMasquerIdNoDelay('modifier_restaurant_' + idRestaurant);
     afficherMasquerIdNoDelay('visualiser_restaurant_' + idRestaurant);

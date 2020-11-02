@@ -2310,7 +2310,7 @@
 	vertical-align: middle;
 }
 
-.saisie_date_theme, .modify_date_deb_theme, .modify_date_fin_theme
+.saisie_date_theme, .update_date_deb_theme, .update_date_fin_theme
 {
 	display: inline-block;
 	width: 120px;
@@ -2451,7 +2451,7 @@
   cursor: pointer;
 }
 
-.icone_modify_theme
+.icone_update_theme
 {
 	float: right;
 	margin-right: 10px;

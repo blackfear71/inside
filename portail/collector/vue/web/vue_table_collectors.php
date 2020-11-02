@@ -17,7 +17,7 @@
               // Boutons d'action
               echo '<div class="zone_bouton_validation">';
                 // Modification
-                echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_modify_collector modifierCollector"></a>';
+                echo '<a id="modifier_' . $collector->getId() . '" title="Modifier" class="icone_update_collector modifierCollector"></a>';
 
                 // Suppression
                 if ($collector->getType_collector() == 'I')
@@ -152,10 +152,10 @@
               // Boutons d'action
               echo '<div id="zone_bouton_validation_' . $collector->getId() . '" class="zone_bouton_validation">';
                 // Validation modification
-                echo '<input type="submit" name="modify_collector" value="" title="Valider" id="bouton_validation_collector_' . $collector->getId() . '" class="icon_validate_collector" />';
+                echo '<input type="submit" name="update_collector" value="" title="Valider" id="bouton_validation_collector_' . $collector->getId() . '" class="icon_validate_collector" />';
 
                 // Annulation modification
-                echo '<a id="annuler_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
+                echo '<a id="annuler_update_collector_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
               echo '</div>';
 
               // Avatar
@@ -166,8 +166,8 @@
               echo '</div>';
 
               // Modification speaker
-              echo '<div class="zone_modify_speaker">';
-                echo '<select name="speaker" id="speaker_' . $collector->getId() . '" class="modify_speaker changeSpeaker" required>';
+              echo '<div class="zone_update_speaker">';
+                echo '<select name="speaker" id="speaker_' . $collector->getId() . '" class="update_speaker changeSpeaker" required>';
                   echo '<option value="" hidden>Choisissez...</option>';
 
                   foreach ($listeUsers as $identifiant => $user)
@@ -187,13 +187,13 @@
 
               // Modification "Autre"
               if ($collector->getType_speaker() == 'other')
-                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_speaker() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" />';
+                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_speaker() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="update_other_speaker" />';
               else
-                echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="modify_other" style="display: none;" />';
+                echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="update_other_speaker" style="display: none;" />';
 
               // Modification date
-              echo '<div class="zone_modify_date">';
-                echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker[' . $collector->getId() . ']" class="modify_date_collector" required />';
+              echo '<div class="zone_update_date">';
+                echo '<input type="text" name="date_collector" value="' . formatDateForDisplay($collector->getDate_collector()) . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker[' . $collector->getId() . ']" class="update_date_collector" required />';
               echo '</div>';
             echo '</div>';
 
@@ -225,7 +225,7 @@
                 echo '<img src="../../includes/icons/collector/quote_1.png" alt="quote_1" class="quote_1" />';
 
                 // Modification citation
-                echo '<textarea name="collector" placeholder="Phrase culte" class="modify_text_collector">' . $collector->getCollector() . '</textarea>';
+                echo '<textarea name="collector" placeholder="Phrase culte" class="update_text_collector">' . $collector->getCollector() . '</textarea>';
 
                 // Apostrophe droite
                 echo '<img src="../../includes/icons/collector/quote_2.png" alt="quote_2" class="quote_2" />';
@@ -236,7 +236,7 @@
                 echo '<div class="text_context_golden_update">';
               else
                 echo '<div class="text_context_update">';
-                  echo '<textarea name="context" placeholder="Contexte (facultatif)" class="modify_context_collector">' . $collector->getContext() . '</textarea>';
+                  echo '<textarea name="context" placeholder="Contexte (facultatif)" class="update_context_collector">' . $collector->getContext() . '</textarea>';
                 echo '</div>';
             echo '</div>';
           echo '</form>';

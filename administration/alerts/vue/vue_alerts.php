@@ -197,12 +197,12 @@
                     echo '<td class="actions_alerte">';
                       // Validation modification
                       echo '<span class="link_action_alerte">';
-                        echo '<input type="submit" name="modify_alert" value="" title="Valider la modification" class="icone_valider_alerte" />';
+                        echo '<input type="submit" name="update_alert" value="" title="Valider la modification" class="icone_valider_alerte" />';
                       echo '</span>';
 
                       // Annulation modification ligne
                       echo '<span class="link_action_alerte">';
-                        echo '<a id="annuler_' . $alerte->getId() . '" title="Annuler la modification" class="icone_annuler_alerte annulerAlerte"></a>';
+                        echo '<a id="annuler_alerte_' . $alerte->getId() . '" title="Annuler la modification" class="icone_annuler_alerte annulerAlerte"></a>';
                       echo '</span>';
                     echo '</td>';
                   echo '</form>';
@@ -213,7 +213,7 @@
             {
               echo '<tr>';
                 echo '<td colspan="5" class="empty">Pas d\'alertes paramétrées...</td>';
-              echo '</tr>';  
+              echo '</tr>';
             }
           echo '</table>';
         ?>

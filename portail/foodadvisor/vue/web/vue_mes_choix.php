@@ -57,7 +57,7 @@
             if ($actions['choix'] == true)
             {
               // Modification
-              echo '<a id="modifier_' . $monChoix->getId() . '" title="Modifier le choix" class="icone_modify_choix modifierChoix"></a>';
+              echo '<a id="modifier_' . $monChoix->getId() . '" title="Modifier le choix" class="icone_update_choix modifierChoix"></a>';
 
               // Suppression
               echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer">';
@@ -186,10 +186,10 @@
                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
 
                 // Validation modification
-                echo '<input type="submit" name="modify_choix_' . $monChoix->getId() . '" value="" title="Valider" class="icon_validate_choix" />';
+                echo '<input type="submit" name="update_choix_' . $monChoix->getId() . '" value="" title="Valider" class="icon_validate_choix" />';
 
                 // Annulation modification
-                echo '<a id="annuler_' . $monChoix->getId() . '" title="Annuler" class="icone_cancel_choix annulerChoix"></a>';
+                echo '<a id="annuler_update_choix_' . $monChoix->getId() . '" title="Annuler" class="icone_cancel_choix annulerChoix"></a>';
 
                 // Image + lien
                 echo '<div class="lien_mon_choix">';

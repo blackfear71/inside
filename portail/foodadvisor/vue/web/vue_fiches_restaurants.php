@@ -111,7 +111,7 @@
                 echo '<div class="zone_fiche_right">';
                   // Modification
                   echo '<a id="modifier_' . $restaurant->getId() . '" title="Modifier le restaurant" class="lien_modifier_restaurant modifierRestaurant">';
-                    echo '<img src="../../includes/icons/common/edit.png" alt="edit" class="icone_modify_restaurant" />';
+                    echo '<img src="../../includes/icons/common/edit.png" alt="edit" class="icone_update_restaurant" />';
                   echo '</a>';
 
                   // Suppression
@@ -259,7 +259,7 @@
                   echo '</div>';
 
                   // Annulation modification
-                  echo '<a id="annuler_' . $restaurant->getId() . '" title="Annuler" class="icone_cancel_restaurant annulerRestaurant"></a>';
+                  echo '<a id="annuler_update_restaurant_' . $restaurant->getId() . '" title="Annuler" class="icone_cancel_restaurant annulerRestaurant"></a>';
                 echo '</div>';
 
                 echo '<div class="zone_fiche_bottom">';

@@ -148,7 +148,7 @@
                         echo '</form>';
 
                         // Bouton modification
-                        echo '<a id="theme_' . $themeUsers->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
+                        echo '<a id="theme_' . $themeUsers->getId() . '" title="Modifier" class="icone_update_theme modifierTheme"></a>';
 
                         // Titre
                         echo '<div class="theme_titre">';
@@ -174,10 +174,10 @@
                           echo '<input type="hidden" name="theme_type" value="U" />';
 
                           // Annulation modification
-                          echo '<a id="annuler_' . $themeUsers->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
+                          echo '<a id="annuler_theme_' . $themeUsers->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
 
                           // Validation modification
-                          echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
+                          echo '<input type="submit" name="update_theme" value="" title="Valider" class="icon_validate_theme" />';
 
                           // Titre
                           echo '<input type="text" name="theme_title" value="' . $themeUsers->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
@@ -305,7 +305,7 @@
                         echo '</form>';
 
                         // Bouton modification
-                        echo '<a id="theme_' . $themeMission->getId() . '" title="Modifier" class="icone_modify_theme modifierTheme"></a>';
+                        echo '<a id="theme_' . $themeMission->getId() . '" title="Modifier" class="icone_update_theme modifierTheme"></a>';
 
                         // Titre
                         echo '<div class="theme_titre">';
@@ -333,10 +333,10 @@
                           echo '<input type="hidden" name="theme_type" value="M" />';
 
                           // Annulation modification
-                          echo '<a id="annuler_' . $themeMission->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
+                          echo '<a id="annuler_theme_' . $themeMission->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
 
                           // Validation modification
-                          echo '<input type="submit" name="modify_theme" value="" title="Valider" class="icon_validate_theme" />';
+                          echo '<input type="submit" name="update_theme" value="" title="Valider" class="icon_validate_theme" />';
 
                           // Titre
                           echo '<input type="text" name="theme_title" value="' . $themeMission->getName() . '" placeholder="Titre" maxlength="255" class="titre_theme_update" required />';
@@ -348,9 +348,9 @@
                         // Dates de début et de fin
                         echo '<div class="theme_dates_update">';
                           echo '<div class="theme_dates_update_texte">Du&nbsp;</div>';
-                          echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($themeMission->getDate_deb()) . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_mod_deb[' . $themeMission->getId() . ']" class="modify_date_deb_theme" required />';
+                          echo '<input type="text" name="theme_date_deb" value="' . formatDateForDisplay($themeMission->getDate_deb()) . '" placeholder="Date début" maxlength="10" autocomplete="off" id="datepicker_mod_deb[' . $themeMission->getId() . ']" class="update_date_deb_theme" required />';
                           echo '<div class="theme_dates_update_texte">&nbsp;au&nbsp;</div>';
-                          echo '<input type="text" name="theme_date_fin" value="' . formatDateForDisplay($themeMission->getDate_fin()) . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_mod_fin[' . $themeMission->getId() . ']" class="modify_date_fin_theme" required />';
+                          echo '<input type="text" name="theme_date_fin" value="' . formatDateForDisplay($themeMission->getDate_fin()) . '" placeholder="Date fin" maxlength="10" autocomplete="off" id="datepicker_mod_fin[' . $themeMission->getId() . ']" class="update_date_fin_theme" required />';
                         echo '</div>';
                       echo '</form>';
                     echo '</div>';

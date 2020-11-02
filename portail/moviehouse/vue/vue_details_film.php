@@ -407,7 +407,7 @@
                           echo '<div class="actions_commentaires">';
                             // Validation modification
                             echo '<span class="link_actions_commentaires">';
-                              echo '<input type="submit" name="modify_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
+                              echo '<input type="submit" name="update_comment" value="" title="Valider la modification" class="icone_valider_comment" />';
                             echo '</span>';
 
                             // Annulation modification

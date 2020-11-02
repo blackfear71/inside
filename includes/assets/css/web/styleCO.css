@@ -364,7 +364,7 @@
 	border-top-right-radius: 2px;
 }
 
-.icone_modify_collector
+.icone_update_collector
 {
 	display: inline-block;
 	vertical-align: middle;
@@ -746,13 +746,13 @@
 }
 
 /*** Modification phrases cultes ***/
-.zone_modify_speaker
+.zone_update_speaker
 {
 	clear: both;
 	padding-top: 5px;
 }
 
-.modify_speaker
+.update_speaker
 {
 	display: block;
 	width: calc(50% + 10px);
@@ -768,7 +768,7 @@
 	color: #262626;
 }
 
-.modify_other
+.update_other_speaker
 {
 	display: block;
 	width: 50%;
@@ -784,12 +784,12 @@
 	color: #262626;
 }
 
-.zone_modify_date
+.zone_update_date
 {
 	padding-bottom: 5px;
 }
 
-.modify_date_collector
+.update_date_collector
 {
 	display: block;
 	width: 50%;
@@ -804,7 +804,7 @@
 	color: #262626;
 }
 
-.modify_text_collector
+.update_text_collector
 {
 	resize: vertical;
 	width: calc(100% - 100px);
@@ -817,7 +817,7 @@
 	min-height: 120px;
 }
 
-.modify_context_collector
+.update_context_collector
 {
 	resize: vertical;
 	width: calc(100% - 20px);

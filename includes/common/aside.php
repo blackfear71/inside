@@ -26,7 +26,7 @@
 		if ($modifierParcours == true)
 		{
 			echo '<a href="/inside/portail/petitspedestres/parcours.php?id=' . $_GET['id'] . '&action=goModifier" title="Modifier les détails" class="link_aside">';
-				echo '<img src="/inside/includes/icons/common/edit.png" alt="modify" title="Modifier les détails" class="icon_aside" />';
+				echo '<img src="/inside/includes/icons/common/edit.png" alt="edit" title="Modifier les détails" class="icon_aside" />';
 			echo '</a>';
 		}
 

@@ -61,7 +61,7 @@ $(function()
   // Ferme la zone de modification d'une phrase/image culte
   $('.annulerCollector').click(function()
   {
-    var idCollector = $(this).attr('id').replace('annuler_', '');
+    var idCollector = $(this).attr('id').replace('annuler_update_collector_', '');
 
     afficherMasquerIdNoDelay('modifier_collector_' + idCollector);
     afficherMasquerIdNoDelay('visualiser_collector_' + idCollector);
@@ -138,7 +138,7 @@ $(function()
     tabBlock.push({element: '.link_current_vote', property: 'pointer-events', value: 'none'});
 
     // Blocage spécifique (liens actions)
-    tabBlock.push({element: '.icone_modify_collector', property: 'display', value: 'none'});
+    tabBlock.push({element: '.icone_update_collector', property: 'display', value: 'none'});
     tabBlock.push({element: '.icon_delete_collector', property: 'display', value: 'none'});
     tabBlock.push({element: '.icon_validate_collector', property: 'display', value: 'none'});
     tabBlock.push({element: '.icone_cancel_collector', property: 'display', value: 'none'});
@@ -200,7 +200,7 @@ $(function()
   $('.loadModifierCollector').on('change', function()
   {
     var idImage = $(this).attr('id').replace('fichier_', '');
-    
+
     loadFile(event, 'image_collector_' + idImage, true);
   });
 
@@ -229,7 +229,7 @@ $(function()
     });
   }
 
-  $('.modify_date_collector').each(function()
+  $('.update_date_collector').each(function()
   {
     $(this).datepicker(
     {

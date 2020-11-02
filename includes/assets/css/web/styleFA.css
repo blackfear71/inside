@@ -1155,7 +1155,7 @@
 	cursor: pointer;
 }
 
-.icone_modify_choix
+.icone_update_choix
 {
 	float: right;
 	margin-right: 3px;
@@ -2383,7 +2383,7 @@
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
-.icone_modify_restaurant
+.icone_update_restaurant
 {
 	width: 28px;
 	margin-top: 3.5px;
