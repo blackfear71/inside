@@ -56,9 +56,9 @@ $(function()
     &&  $(event.target).attr('class') != 'lien_aside'
     &&  $(event.target).attr('class') != 'icone_aside'
     &&  $(event.target).attr('class') != 'titre_aside'
-    &&  $(event.target).attr('class') != 'zone_infos_user_aside'
+    &&  $(event.target).attr('class') != 'fond_experience_aside'
+    &&  $(event.target).attr('class') != 'experience_aside'
     &&  $(event.target).attr('class') != 'niveau_aside'
-    &&  $(event.target).attr('class') != 'pseudo_aside'
     &&  $('.aside_user').css('right') == '0px')
       deployerMenuUser();
 

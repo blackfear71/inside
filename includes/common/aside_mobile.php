@@ -32,12 +32,22 @@
 
   // Menu utilisateur
   echo '<div class="aside_user">';
-    echo '<div class="zone_infos_user_aside">';
+    // Pseudo
+    echo '<div class="lien_aside">';
+      echo '<img src="/inside/includes/icons/common/profile.png" alt="profile" title="Profil" class="icone_aside" />';
+      echo '<div class="titre_aside">' . formatString($_SESSION['user']['pseudo'], 30) . '</div>';
+    echo '</div>';
+
+    // Expérience utilisateur
+    echo '<div class="lien_aside">';
+      // Logo
+      echo '<img src="/inside/includes/icons/common/experience.png" alt="experience" title="Expérience" class="icone_aside" />';
+
+      // Expérience
+      echo '<div class="fond_experience_aside"><div class="experience_aside" style="width: ' . $_SESSION['user']['experience']['percent'] . '%;"></div></div>';
+
       // Niveau
       echo '<div class="niveau_aside">' . $_SESSION['user']['experience']['niveau'] . '</div>';
-
-      // Pseudo
-      echo '<div class="pseudo_aside">' . formatString($_SESSION['user']['pseudo'], 30) . '</div>';
     echo '</div>';
 
     // Liens

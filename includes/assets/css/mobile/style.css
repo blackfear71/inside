@@ -344,43 +344,6 @@ aside
 	pointer-events: auto;
 }
 
-.zone_infos_user_aside
-{
-	display: block;
-	border-bottom: solid 0.4vh #262626;
-	width: calc(100% - 4vh);
-	padding-left: 2vh;
-	padding-right: 2vh;
-	line-height: 8vh;
-}
-
-.niveau_aside
-{
-	display: inline-block;
-	vertical-align: middle;
-	border-radius: 50%;
-	background-color: #ff1937;
-	width: 4vh;
-	height: 4vh;
-	margin-right: 1vh;
-	line-height: 4vh;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 2.2vh;
-	color: white;
-	text-align: center;
-}
-
-.pseudo_aside
-{
-	display: inline-block;
-	width: calc(100% - 5vh);
-	vertical-align: middle;
-	font-family: robotolight, Verdana, sans-serif;
-	color: white;
-	font-size: 2.7vh;
-	line-height: 4vh;
-}
-
 .lien_aside
 {
 	display: block;
@@ -404,6 +367,40 @@ aside
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2.7vh;
+}
+
+.fond_experience_aside
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 2vh;
+	background-color: white;
+	height: 1vh;
+	width: calc(100% - 16vh);
+	border-radius: 2vh;
+}
+
+.experience_aside
+{
+	display: block;
+	height: 100%;
+	background-color: #ff1937;
+	border-radius: 2vh;
+}
+
+.niveau_aside
+{
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 50%;
+	background-color: #ff1937;
+	width: 4vh;
+	height: 4vh;
+	line-height: 4vh;
+	font-family: robotoregular, Verdana, sans-serif;
+	font-size: 2.2vh;
+	color: white;
+	text-align: center;
 }
 
 /*** Chargement ***/
