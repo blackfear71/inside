@@ -298,7 +298,8 @@
     global $bdd;
 
     $req = $bdd->prepare('UPDATE expense_center
-                          SET price   = :price,
+                          SET date    = :date,
+                              price   = :price,
                               buyer   = :buyer,
                               comment = :comment
                           WHERE id = ' . $idDepense);

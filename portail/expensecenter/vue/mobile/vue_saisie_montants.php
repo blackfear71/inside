@@ -1,6 +1,6 @@
 <?php
   echo '<div id="zone_saisie_montants" class="fond_saisie">';
-    echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInsererMontants" class="form_saisie">';
+    echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&action=doInsererMontantsMobile" class="form_saisie">';
       // Id dépense (modification)
       echo '<input type="hidden" name="id_expense_saisie" value="" />';
 
@@ -34,6 +34,9 @@
             echo '<input type="text" name="depense" value="' . $_SESSION['save']['price'] . '" autocomplete="off" placeholder="Frais additionnels" maxlength="6" class="saisie_prix" />';
             echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
           echo '</div>';
+
+          // Date de saisie
+          echo '<input type="date" name="date_expense" value="' . $_SESSION['save']['date_expense'] . '" placeholder="Date" maxlength="10" autocomplete="off" class="saisie_date_depense" required />';
 
           // Commentaire
           echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';

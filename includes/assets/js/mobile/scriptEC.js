@@ -308,9 +308,9 @@ function initialisationModification(idDepense, year)
 
   // Action du formulaire
   if (type == 'M')
-    action = 'expensecenter.php?year=' + year + '&action=doModifierMontants';
+    action = 'expensecenter.php?year=' + year + '&action=doModifierMontantsMobile';
   else
-    action = 'expensecenter.php?year=' + year + '&action=doModifier';
+    action = 'expensecenter.php?year=' + year + '&action=doModifierMobile';
 
   // Date du jour
   var date = formatDateForDisplay(depense['date']);
@@ -336,6 +336,9 @@ function initialisationModification(idDepense, year)
   else
     price = formatAmountForDisplay(depense['price'], false);
 
+  // Date
+  var date = depense['date'].substr(0, 4) + '-' + depense['date'].substr(4, 2) + '-' + depense['date'].substr(6, 2);
+
   // Commentaire
   var comment = depense['comment'];
 
@@ -346,6 +349,7 @@ function initialisationModification(idDepense, year)
   $('input[name=id_expense_saisie]').val(idDepense);
   $('.saisie_acheteur').val(buyer);
   $('.saisie_prix').val(price);
+  $('.saisie_date_depense').val(date);
   $('.saisie_commentaire').html(comment);
 
   if (type == 'M')
@@ -484,7 +488,7 @@ function resetSaisie(zone, year, type)
     var currentAction = $('.form_saisie').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
-    if (call == 'doModifier' || call == 'doModifierMontants')
+    if (call == 'doModifierMobile' || call == 'doModifierMontantsMobile')
     {
       var action;
       var titre;
@@ -492,7 +496,7 @@ function resetSaisie(zone, year, type)
       if (type == 'M')
       {
         // Action du formulaire
-        action = 'expensecenter.php?year=' + year + '&action=doInsererMontants';
+        action = 'expensecenter.php?year=' + year + '&action=doInsererMontantsMobile';
 
         // Titre
         titre = 'Saisir des montants';
@@ -500,7 +504,7 @@ function resetSaisie(zone, year, type)
       else
       {
         // Action du formulaire
-        action = 'expensecenter.php?year=' + year + '&action=doInserer';
+        action = 'expensecenter.php?year=' + year + '&action=doInsererMobile';
 
         // Titre
         titre = 'Saisir une dépense';
@@ -515,6 +519,23 @@ function resetSaisie(zone, year, type)
       // Prix ou frais
       var price = '';
 
+      // Date
+      var dateDuJour = new Date();
+      var moisFull;
+      var jourFull;
+
+      if ((dateDuJour.getMonth() + 1) < 10)
+        moisFull = '0' + dateDuJour.getMonth() + 1;
+      else
+        moisFull = dateDuJour.getMonth() + 1;
+
+      if (dateDuJour.getDate() < 10)
+        jourFull = '0' + dateDuJour.getDate();
+      else
+        jourFull = dateDuJour.getDate();
+
+      var date = dateDuJour.getFullYear() + '-' + moisFull + '-' + jourFull;
+
       // Commentaire
       var comment = '';
 
@@ -525,6 +546,7 @@ function resetSaisie(zone, year, type)
       $('input[name=id_expense_saisie]').val('');
       $('.saisie_acheteur').val(buyer);
       $('.saisie_prix').val(price);
+      $('.saisie_date_depense').val(date);
       $('.saisie_commentaire').html(comment);
 
       if (type == 'M')

@@ -35,6 +35,9 @@
             echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
           echo '</div>';
 
+          // Date
+          echo '<input type="text" name="date_expense" value="' . $_SESSION['save']['date_expense'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_depense" class="saisie_date_depense" required />';
+
           // Commentaire
           echo '<textarea name="comment" placeholder="Commentaire" maxlength="200" class="saisie_commentaire">' . $_SESSION['save']['comment'] . '</textarea>';
 

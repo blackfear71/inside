@@ -8,7 +8,7 @@
       $scriptHead     = 'scriptEC.js';
       $angularHead    = false;
       $chatHead       = true;
-      $datepickerHead = false;
+      $datepickerHead = true;
       $masonryHead    = true;
       $exifHead       = false;
 

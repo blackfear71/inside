@@ -7,7 +7,9 @@
   function initializeSaveSession()
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if ((!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
+    if ((!isset($_SESSION['alerts']['wrong_date'])          OR $_SESSION['alerts']['wrong_date']          != true)
+    AND (!isset($_SESSION['alerts']['date_expense'])        OR $_SESSION['alerts']['date_expense']        != true)
+    AND (!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
     AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true)
     AND (!isset($_SESSION['alerts']['parts_not_integer'])   OR $_SESSION['alerts']['parts_not_integer']   != true)
     AND (!isset($_SESSION['alerts']['empty_amount'])        OR $_SESSION['alerts']['empty_amount']        != true)
@@ -17,8 +19,13 @@
       unset($_SESSION['save']);
 
   		$_SESSION['save']['price']   = '';
-  		$_SESSION['save']['buyer']   = '';
+      $_SESSION['save']['buyer']   = '';
   		$_SESSION['save']['comment'] = '';
+
+      if ($_SESSION['index']['plateforme'] == 'mobile')
+        $_SESSION['save']['date_expense'] = date('Y-m-d');
+      else
+        $_SESSION['save']['date_expense'] = date('d/m/Y');
   	}
   }
 
@@ -169,18 +176,22 @@
 
   // METIER : Insertion d'une dépense & mise à jour des dépenses utilisateurs
   // RETOUR : Id dépense
-  function insertExpense($post, $userConnected)
+  function insertExpense($post, $userConnected, $isMobile)
   {
     // Initialisations
     $idDepense  = NULL;
     $control_ok = true;
 
     // Récupération des données
-    $date    = date('Ymd');
     $price   = formatAmountForInsert($post['depense']);
     $buyer   = $post['buyer_user'];
     $comment = $post['comment'];
     $type    = 'P';
+
+    if ($isMobile == true)
+      $date = formatDateForInsertMobile($post['date_expense']);
+    else
+      $date = formatDateForInsert($post['date_expense']);
 
     $listeParts = array();
 
@@ -193,6 +204,7 @@
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['price']         = $post['depense'];
     $_SESSION['save']['buyer']         = $buyer;
+    $_SESSION['save']['date_expense']  = $post['date_expense'];
     $_SESSION['save']['comment']       = $comment;
     $_SESSION['save']['tableau_parts'] = $listeParts;
 
@@ -208,6 +220,14 @@
     // Contrôle si prix numérique et non nul (négatif = régularisation, positif = régularisation ou dépense, nul = aucun sens)
     if ($control_ok == true)
       $control_ok = controlePrixNumerique($price);
+
+    // Contrôle date de saisie
+    if ($control_ok == true)
+      $control_ok = controleFormatDate($post['date_expense'], $isMobile);
+
+    // Contrôle date cohérente
+    if ($control_ok == true)
+      $control_ok = controleDateSaisie($post['date_expense'], $isMobile);
 
     // Contrôle parts entières
     if ($control_ok == true)
@@ -300,18 +320,22 @@
 
   // METIER : Insertion de montants & mise à jour des dépenses utilisateurs
   // RETOUR : Id dépense
-  function insertMontants($post, $userConnected)
+  function insertMontants($post, $userConnected, $isMobile)
   {
     // Initialisations
     $idDepense  = NULL;
     $control_ok = true;
 
     // Récupération des données
-    $date    = date('Ymd');
     $buyer   = $post['buyer_user'];
     $comment = $post['comment'];
     $frais   = formatAmountForInsert($post['depense']);
     $type    = 'M';
+
+    if ($isMobile == true)
+      $date = formatDateForInsertMobile($post['date_expense']);
+    else
+      $date = formatDateForInsert($post['date_expense']);
 
     $listeMontants = array();
 
@@ -324,12 +348,21 @@
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['price']            = $post['depense'];
     $_SESSION['save']['buyer']            = $buyer;
+    $_SESSION['save']['date_expense']     = $post['date_expense'];
     $_SESSION['save']['comment']          = $comment;
     $_SESSION['save']['tableau_montants'] = $listeMontants;
 
     // Contrôle si frais numérique et positif (seulement si renseignés)
     if ($post['depense'] != '')
       $control_ok = controleFraisPositifs($frais);
+
+    // Contrôle date de saisie
+    if ($control_ok == true)
+      $control_ok = controleFormatDate($post['date_expense'], $isMobile);
+
+    // Contrôle date cohérente
+    if ($control_ok == true)
+      $control_ok = controleDateSaisie($post['date_expense'], $isMobile);
 
     // Contrôle si au moins 1 montant saisi
     if ($control_ok == true)
@@ -433,7 +466,7 @@
 
   // METIER : Modification d'une dépense
   // RETOUR : Id dépense
-  function updateExpense($post)
+  function updateExpense($post, $isMobile)
   {
     // Initialisations
     $control_ok = true;
@@ -443,6 +476,11 @@
     $newPrice   = formatAmountForInsert($post['depense']);
     $newBuyer   = $post['buyer_user'];
     $newComment = $post['comment'];
+
+    if ($isMobile == true)
+      $newDate = formatDateForInsertMobile($post['date_expense']);
+    else
+      $newDate = formatDateForInsert($post['date_expense']);
 
     $newListeParts = array();
 
@@ -464,6 +502,14 @@
     // Contrôle si prix numérique et non nul (négatif = régularisation, positif = régularisation ou dépense, nul = aucun sens)
     if ($control_ok == true)
       $control_ok = controlePrixNumerique($newPrice);
+
+    // Contrôle date de saisie
+    if ($control_ok == true)
+      $control_ok = controleFormatDate($post['date_expense'], $isMobile);
+
+    // Contrôle date cohérente
+    if ($control_ok == true)
+      $control_ok = controleDateSaisie($post['date_expense'], $isMobile);
 
     // Modification de la dépense
     if ($control_ok == true)
@@ -539,7 +585,8 @@
       /*** Mise à jour nouvelle dépense et parts ***/
       /*********************************************/
       // Modification de l'enregistrement en base
-      $depense = array('price'   => $newPrice,
+      $depense = array('date'    => $newDate,
+                       'price'   => $newPrice,
                        'buyer'   => $newBuyer,
                        'comment' => $newComment
                       );
@@ -623,7 +670,7 @@
 
   // METIER : Modification de montants
   // RETOUR : Id dépense
-  function updateMontants($post)
+  function updateMontants($post, $isMobile)
   {
     // Initialisations
     $control_ok = true;
@@ -633,6 +680,11 @@
     $newFrais   = formatAmountForInsert($post['depense']);
     $newBuyer   = $post['buyer_user'];
     $newComment = $post['comment'];
+
+    if ($isMobile == true)
+      $newDate = formatDateForInsertMobile($post['date_expense']);
+    else
+      $newDate = formatDateForInsert($post['date_expense']);
 
     $newListeMontants = array();
 
@@ -645,6 +697,14 @@
     // Contrôle si frais numérique et positif (seulement si renseignés)
     if ($post['depense'] != '')
       $control_ok = controleFraisPositifs($newFrais);
+
+    // Contrôle date de saisie
+    if ($control_ok == true)
+      $control_ok = controleFormatDate($post['date_expense'], $isMobile);
+
+    // Contrôle date cohérente
+    if ($control_ok == true)
+      $control_ok = controleDateSaisie($post['date_expense'], $isMobile);
 
     // Contrôle montants numériques
     if ($control_ok == true)
@@ -729,7 +789,8 @@
       /*** Mise à jour nouvelle dépense et montants ***/
       /************************************************/
       // Modification de l'enregistrement en base
-      $depense = array('price'   => $newFrais,
+      $depense = array('date'    => $newDate,
+                       'price'   => $newFrais,
                        'buyer'   => $newBuyer,
                        'comment' => $newComment
                       );

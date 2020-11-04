@@ -51,22 +51,42 @@
 
     case 'doInserer':
       // Insertion d'une dépense
-      $idExpense = insertExpense($_POST, $_SESSION['user']['identifiant']);
+      $idExpense = insertExpense($_POST, $_SESSION['user']['identifiant'], false);
+      break;
+
+    case 'doInsererMobile':
+      // Insertion d'une dépense
+      $idExpense = insertExpense($_POST, $_SESSION['user']['identifiant'], true);
       break;
 
     case 'doInsererMontants':
       // Insertion d'une dépense en montants
-      $idExpense = insertMontants($_POST, $_SESSION['user']['identifiant']);
+      $idExpense = insertMontants($_POST, $_SESSION['user']['identifiant'], false);
+      break;
+
+    case 'doInsererMontantsMobile':
+      // Insertion d'une dépense en montants
+      $idExpense = insertMontants($_POST, $_SESSION['user']['identifiant'], true);
       break;
 
     case 'doModifier':
       // Modification d'une dépense
-      $idExpense = updateExpense($_POST);
+      $idExpense = updateExpense($_POST, false);
+      break;
+
+    case 'doModifierMobile':
+      // Modification d'une dépense
+      $idExpense = updateExpense($_POST, true);
       break;
 
     case 'doModifierMontants':
       // Modification d'une dépense en montants
-      $idExpense = updateMontants($_POST);
+      $idExpense = updateMontants($_POST, false);
+      break;
+
+    case 'doModifierMontantsMobile':
+      // Modification d'une dépense en montants
+      $idExpense = updateMontants($_POST, true);
       break;
 
     case 'doSupprimer':
@@ -111,9 +131,13 @@
       break;
 
     case 'doInserer':
+    case 'doInsererMobile':
     case 'doInsererMontants':
+    case 'doInsererMontantsMobile':
     case 'doModifier':
+    case 'doModifierMobile':
     case 'doModifierMontants':
+    case 'doModifierMontantsMobile':
     case 'doSupprimer':
     case 'doSupprimerMontants':
     default:
@@ -124,12 +148,16 @@
   switch ($_GET['action'])
   {
     case 'doInserer':
+    case 'doInsererMobile':
     case 'doInsererMontants':
+    case 'doInsererMontantsMobile':
       header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter&anchor=' . $idExpense);
       break;
 
     case 'doModifier':
+    case 'doModifierMobile':
     case 'doModifierMontants':
+    case 'doModifierMontantsMobile':
       header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idExpense);
       break;
 

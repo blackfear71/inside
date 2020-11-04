@@ -1,4 +1,58 @@
 <?php
+  // CONTROLE : Format de date
+  // RETOUR : Booléen
+  function controleFormatDate($date, $isMobile)
+  {
+    // Initialisations
+    $control_ok = true;
+    $alerteDate = false;
+
+    // Contrôle
+    if ($isMobile == true)
+    {
+      if (validateDateMobile($date) != true)
+        $alerteDate = true;
+    }
+    else
+    {
+      if (validateDate($date) != true)
+        $alerteDate = true;
+    }
+
+    if ($alerteDate == true)
+    {
+      $_SESSION['alerts']['wrong_date'] = true;
+      $control_ok                       = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
+
+  // CONTROLE : Date dépense < date du jour
+  // RETOUR : Booléen
+  function controleDateSaisie($date, $isMobile)
+  {
+    // Initialisations
+    $control_ok     = true;
+    $dateAControler = '';
+
+    // Contrôle
+    if ($isMobile == true)
+      $dateAControler = substr($date, 0, 4) . substr($date, 5, 2) . substr($date, 8, 2);
+    else
+      $dateAControler = substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
+
+    if ($dateAControler > date('Ymd'))
+    {
+      $_SESSION['alerts']['date_expense'] = true;
+      $control_ok                         = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
+
   // CONTROLE : Aucune part pour une régularisation
   // RETOUR : Booléen
   function controleRegularisation($prix, $regularisationSansParts)

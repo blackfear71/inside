@@ -134,6 +134,23 @@ $(function()
 
     saisirMontant('zone_user_montant_' + idUser, 'montant_user_' + idUser, $(this).val());
   });
+
+  /*** Calendriers ***/
+  if ($('#datepicker_depense').length || $('#datepicker_montants').length)
+  {
+    $('#datepicker_depense, #datepicker_montants').datepicker(
+    {
+      autoHide: true,
+      language: 'fr-FR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+    });
+  }
 });
 
 // Au redimensionnement de la fenêtre
@@ -318,6 +335,9 @@ function updateExpense(idDepense, year)
   else
     price = formatAmountForDisplay(depense['price'], false);
 
+  // Date
+  var date = depense['date'].substr(6, 2) + '/' + depense['date'].substr(4, 2) + '/' + depense['date'].substr(0, 4);
+
   // Commentaire
   var comment = depense['comment'];
 
@@ -327,6 +347,7 @@ function updateExpense(idDepense, year)
   $('input[name=id_expense_saisie]').val(idDepense);
   $('.saisie_buyer').val(buyer);
   $('.saisie_prix').val(price);
+  $('.saisie_date_depense').val(date);
   $('.saisie_commentaire').html(comment);
 
   if (type == 'M')
@@ -502,6 +523,23 @@ function resetSaisie(zone, year, type)
       // Prix ou frais
       var price   = '';
 
+      // Date
+      var dateDuJour = new Date();
+      var moisFull;
+      var jourFull;
+
+      if ((dateDuJour.getMonth() + 1) < 10)
+        moisFull = '0' + dateDuJour.getMonth() + 1;
+      else
+        moisFull = dateDuJour.getMonth() + 1;
+
+      if (dateDuJour.getDate() < 10)
+        jourFull = '0' + dateDuJour.getDate();
+      else
+        jourFull = dateDuJour.getDate();
+
+      var date = jourFull + '/' + moisFull + '/' + dateDuJour.getFullYear();
+
       // Commentaire
       var comment = '';
 
@@ -511,6 +549,7 @@ function resetSaisie(zone, year, type)
       $('input[name=id_expense_saisie]').val('');
       $('.saisie_buyer').val(buyer);
       $('.saisie_prix').val(price);
+      $('.saisie_date_depense').val(date);
       $('.saisie_commentaire').html(comment);
 
       if (type == 'M')
