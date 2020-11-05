@@ -69,7 +69,7 @@
       // Boutons
       echo '<div class="zone_boutons_saisie">';
         // Valider
-        echo '<input type="submit" name="submit_collector" value="Valider" class="bouton_saisie_gauche" />';
+        echo '<input type="submit" name="submit_collector" value="Valider" id="validerSaisieImageCulte" class="bouton_saisie_gauche" />';
 
         // Annuler
         echo '<a id="fermerSaisieImageCulte" class="bouton_saisie_droite">Annuler</a>';

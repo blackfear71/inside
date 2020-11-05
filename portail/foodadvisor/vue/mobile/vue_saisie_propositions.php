@@ -1,5 +1,5 @@
 <?php
-  echo '<div id="zoneSaisiePropositions" class="fond_saisie">';
+  echo '<div id="zone_saisie_propositions" class="fond_saisie">';
     echo '<form method="post" action="foodadvisor.php?action=doAjouterMobile" class="form_saisie">';
       // Titre
       echo '<div class="zone_titre_saisie">';
@@ -69,7 +69,7 @@
       // Boutons
       echo '<div class="zone_boutons_saisie">';
         // Valider
-        echo '<input type="submit" name="submit_choices" value="Valider" class="bouton_saisie_gauche" />';
+        echo '<input type="submit" name="submit_choices" value="Valider" id="validerSaisiePropositions" class="bouton_saisie_gauche" />';
 
         // Annuler
         echo '<a id="fermerSaisiePropositions" class="bouton_saisie_droite">Annuler</a>';

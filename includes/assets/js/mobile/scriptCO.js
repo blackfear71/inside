@@ -111,6 +111,36 @@ $(function()
     afficherMasquerIdWithDelay('zone_details_votes');
   });
 
+  // Bloque la saisie en cas de soumission (phrase culte)
+  $('#validerSaisiePhraseCulte').click(function()
+  {
+    var idForm          = $('#zone_saisie_collector');
+    var zoneForm        = 'zone_contenu_saisie';
+    var zoneContenuForm = 'contenu_saisie';
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm);
+  });
+
+  // Bloque la saisie en cas de soumission (image culte)
+  $('#validerSaisieImageCulte').click(function()
+  {
+    var idForm          = $('#zone_saisie_image');
+    var zoneForm        = 'zone_contenu_saisie';
+    var zoneContenuForm = 'contenu_saisie';
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm);
+  });
+
+  // Bloque la saisie en cas de soumission (vote utilisateur)
+  $('.validerSaisieVoteCollector').click(function()
+  {
+    var idForm          = $('#zone_saisie_vote');
+    var zoneForm        = 'zone_contenu_saisie';
+    var zoneContenuForm = 'contenu_saisie';
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm);
+  });
+
   /*** Actions au changement ***/
   // Applique les filtres
   $('#applySort, #applyFilter').on('change', function()

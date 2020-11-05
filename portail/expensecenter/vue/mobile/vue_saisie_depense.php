@@ -116,7 +116,7 @@
       // Boutons
       echo '<div class="zone_boutons_saisie">';
         // Valider
-        echo '<input type="submit" name="submit_expense" value="Valider" class="bouton_saisie_gauche" />';
+        echo '<input type="submit" name="submit_expense" value="Valider" id="validerSaisieDepense" class="bouton_saisie_gauche" />';
 
         // Annuler
         echo '<a id="fermerSaisieDepense" class="bouton_saisie_droite">Annuler</a>';

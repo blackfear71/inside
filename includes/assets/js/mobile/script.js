@@ -12,8 +12,11 @@ $(function()
   initPositionCelsius();
 
   // Animation symbole chargement de la page
-  loadingPage();
-  loadPage = setInterval(loadingPage, 100);
+  loadingPage('zone_loading_image', 'loading_image');
+  loadPage = setInterval(function()
+  {
+    loadingPage('zone_loading_image', 'loading_image');
+  }, 100);
 
   // Mise à jour du ping à chaque chargement de page et toutes 60 secondes
   updatePing();
@@ -134,11 +137,11 @@ $(function()
     switch (idSearch)
     {
       case 'reset_recherche_live_propositions':
-        idForm = 'zoneSaisiePropositions';
+        idForm = 'zone_saisie_propositions';
         break;
 
       case 'reset_recherche_live_resume':
-        idForm = 'zoneSaisieResume';
+        idForm = 'zone_saisie_resume';
         break;
 
       default:
@@ -161,11 +164,11 @@ $(function()
     switch (idInput)
     {
       case 'recherche_live_propositions':
-        idForm = 'zoneSaisiePropositions';
+        idForm = 'zone_saisie_propositions';
         break;
 
       case 'recherche_live_resume':
-        idForm = 'zoneSaisieResume';
+        idForm = 'zone_saisie_resume';
         break;
 
       default:
@@ -485,14 +488,14 @@ function afficherMasquerContenuCelsius()
 }
 
 // Animation chargement de la page en boucle
-function loadingPage()
+function loadingPage(zone, image)
 {
-  if ($('.zone_loading_image').length)
+  if ($('.' + zone).length)
   {
     var angle;
 
     // Calcul de l'angle courant
-    var matrix = $('#loading_image').css('transform');
+    var matrix = $('#' + image).css('transform');
 
     if (matrix !== 'none')
     {
@@ -511,7 +514,7 @@ function loadingPage()
     angle += 45;
 
     // On applique la transformation
-    $('#loading_image').css('transform', 'rotate(' + angle + 'deg)');
+    $('#' + image).css('transform', 'rotate(' + angle + 'deg)');
   }
 }
 
@@ -527,6 +530,49 @@ function endLoading()
   // Arrêt de la répétition
   if (typeof loadPage !== 'undefined')
     clearInterval(loadPage);
+}
+
+// Bloque une saisie en cas de soumission de formulaire
+function blockValidationSubmission(form, zoneForm, zoneContenuForm, rechercheLive = false)
+{
+  // On vérifie chaque saisie obligatoire
+  var hideForm = true;
+
+  form.find('input, textarea, select').each(function()
+  {
+    if ($(this).prop('required') == true && $(this).val() == '')
+    {
+      hideForm = false;
+      return false;
+    }
+  });
+
+  if (hideForm == true)
+  {
+    // Masquage du formulaire
+    form.find('.' + zoneContenuForm).css('display', 'none');
+    form.find('.zone_boutons_saisie').css('display', 'none');
+
+    // Masquage de la barre de recherche live
+    if (rechercheLive == true)
+      form.find('.zone_recherche_live').css('display', 'none');
+
+    // Génération du symbole de chargement
+    var loading = '';
+
+    loading += '<div class="zone_loading_image_form">';
+      loading += '<img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image_form" class="loading_image_form" />';
+    loading += '</div>';
+
+    form.find('.' + zoneForm).append(loading);
+
+    // Animation du symbole de chargement
+    loadingPage('zone_loading_image_form', 'loading_image_form');
+    setInterval(function()
+    {
+      loadingPage('zone_loading_image_form', 'loading_image_form');
+    }, 100);
+  }
 }
 
 // Affiche ou masque un élément (délai 0s)

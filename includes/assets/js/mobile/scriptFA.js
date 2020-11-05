@@ -8,11 +8,11 @@ $(function()
   // Ouvre ou ferme la zone de saisie de propositions
   $('#afficherSaisiePropositions, #fermerSaisiePropositions').click(function()
   {
-    afficherMasquerIdWithDelay('zoneSaisiePropositions');
+    afficherMasquerIdWithDelay('zone_saisie_propositions');
   });
 
   // Change la couleur d'une case à cocher à la sélection
-  $('#zoneSaisiePropositions').find('label').click(function()
+  $('#zone_saisie_propositions').find('label').click(function()
   {
     changeCheckedColor($(this));
   });
@@ -36,19 +36,19 @@ $(function()
   {
     var numJour = $(this).attr('id').replace('jour_saisie_resume_', '');
 
-    initialisationResume('zoneSaisieResume', numJour);
+    initialisationResume('zone_saisie_resume', numJour);
   });
 
   // Ferme la zone de saisie de résumé
   $('#fermerSaisieResume').click(function()
   {
-    afficherMasquerIdWithDelay('zoneSaisieResume');
+    afficherMasquerIdWithDelay('zone_saisie_resume');
   });
 
   // Change la couleur d'un radio bouton à la sélection
-  $('#zoneSaisieResume').find('label').click(function()
+  $('#zone_saisie_resume').find('label').click(function()
   {
-    changeRadioColor('zoneSaisieResume', $(this));
+    changeRadioColor('zone_saisie_resume', $(this));
   });
 
   // Ouvre la zone de saisie d'un restaurant
@@ -141,6 +141,38 @@ $(function()
     var idType = $(this).closest('div').attr('id');
 
     changeCheckedColorTypes(idType);
+  });
+
+  // Bloque la saisie en cas de soumission (propositions)
+  $('#validerSaisiePropositions').click(function()
+  {
+    var idForm          = $('#zone_saisie_propositions');
+    var zoneForm        = 'zone_contenu_saisie_live';
+    var zoneContenuForm = 'contenu_saisie';
+    var rechercheLive   = true;
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm, rechercheLive);
+  });
+
+  // Bloque la saisie en cas de soumission (résumé)
+  $('#validerSaisieResume').click(function()
+  {
+    var idForm          = $('#zone_saisie_resume');
+    var zoneForm        = 'zone_contenu_saisie_live';
+    var zoneContenuForm = 'contenu_saisie';
+    var rechercheLive   = true;
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm, rechercheLive);
+  });
+
+  // Bloque la saisie en cas de soumission (restaurant)
+  $('#validerSaisieRestaurant').click(function()
+  {
+    var idForm          = $('#zone_saisie_restaurant');
+    var zoneForm        = 'zone_contenu_saisie';
+    var zoneContenuForm = 'contenu_saisie';
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm);
   });
 
   /*** Actions au changement ***/

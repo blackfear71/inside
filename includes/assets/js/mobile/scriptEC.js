@@ -103,6 +103,26 @@ $(function()
     }
   });
 
+  // Bloque la saisie en cas de soumission (dépense)
+  $('#validerSaisieDepense').click(function()
+  {
+    var idForm          = $('#zone_saisie_depense');
+    var zoneForm        = 'zone_contenu_saisie';
+    var zoneContenuForm = 'contenu_saisie';
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm);
+  });
+
+  // Bloque la saisie en cas de soumission (montants)
+  $('#validerSaisieMontants').click(function()
+  {
+    var idForm          = $('#zone_saisie_montants');
+    var zoneForm        = 'zone_contenu_saisie';
+    var zoneContenuForm = 'contenu_saisie';
+
+    blockValidationSubmission(idForm, zoneForm, zoneContenuForm);
+  });
+
   /*** Actions à la saisie ***/
   // Colorise un montant
   $('.montant').keyup(function()

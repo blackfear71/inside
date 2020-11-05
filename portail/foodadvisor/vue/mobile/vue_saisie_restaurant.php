@@ -238,7 +238,7 @@
       // Boutons
       echo '<div class="zone_boutons_saisie">';
         // Valider
-        echo '<input type="submit" name="insert_restaurant" value="Valider" class="bouton_saisie_gauche" />';
+        echo '<input type="submit" name="insert_restaurant" value="Valider" id="validerSaisieRestaurant" class="bouton_saisie_gauche" />';
 
         // Annuler
         echo '<a id="fermerSaisieRestaurant" class="bouton_saisie_droite">Annuler</a>';

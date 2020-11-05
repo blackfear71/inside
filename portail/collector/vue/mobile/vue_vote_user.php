@@ -15,7 +15,7 @@
             // Smileys
             for ($i = 0; $i <= 8; $i++)
             {
-              echo '<input type="submit" name="smiley_' . $i . '" value="" class="smiley smiley_' . $i . '" />';
+              echo '<input type="submit" name="smiley_' . $i . '" value="" class="smiley smiley_' . $i . ' validerSaisieVoteCollector" />';
             }
           echo '</form>';
         echo '</div>';
