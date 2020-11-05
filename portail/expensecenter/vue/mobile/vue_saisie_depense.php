@@ -12,7 +12,7 @@
         echo '<div class="contenu_saisie">';
           // Titre
           echo '<div class="titre_section">';
-            echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="logo_titre_section" />';
+            echo '<img src="../../includes/icons/expensecenter/expense_center_grey.png" alt="expense_center_grey" class="logo_titre_section" />';
             echo '<div class="texte_titre_section">La dépense</div>';
           echo '</div>';
 

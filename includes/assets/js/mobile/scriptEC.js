@@ -176,6 +176,18 @@ function showDetails(idDepense)
   var type           = depense['type'];
   var parts          = depense['parts'];
 
+  // Icône
+  if (type == 'M')
+  {
+    $('.titre_details > .logo_titre_section').attr('src', '../../includes/icons/expensecenter/expenses_grey.png');
+    $('.titre_details > .logo_titre_section').attr('alt', 'expenses_grey');
+  }
+  else
+  {
+    $('.titre_details > .logo_titre_section').attr('src', '../../includes/icons/expensecenter/expense_center_grey.png');
+    $('.titre_details > .logo_titre_section').attr('alt', 'expense_center_grey');
+  }
+
   // Date
   if (parts.length == 0)
     $('.titre_details > .texte_titre_section').html('Régularisation du ' + date);
