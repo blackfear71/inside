@@ -931,11 +931,11 @@ function initialisationModification(idRestaurant)
   $('#zone_saisie_restaurant').find('#saisie_image').attr('name', 'update_image_restaurant_' + idRestaurant);
 
   // Nom restaurant
-  $('#zone_saisie_restaurant').find('#saisie_nom').val(restaurant['name']);
+  $('#zone_saisie_restaurant').find('#saisie_nom').val(decodeText(restaurant['name']));
   $('#zone_saisie_restaurant').find('#saisie_nom').attr('name', 'update_name_restaurant_' + idRestaurant);
 
   // Lieu restaurant
-  $('#zone_saisie_restaurant').find('#saisie_location').val(restaurant['location']);
+  $('#zone_saisie_restaurant').find('#saisie_location').val(decodeText(restaurant['location']));
   $('#zone_saisie_restaurant').find('#saisie_location').attr('name', 'update_location_' + idRestaurant);
 
   // Lieu "Autre"
@@ -966,11 +966,11 @@ function initialisationModification(idRestaurant)
   });
 
   // Prix min
-  $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').val(restaurant['min_price']);
+  $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').val(decodeText(restaurant['min_price']));
   $('#zone_saisie_restaurant').find('.saisie_prix_min_restaurant').attr('name', 'update_prix_min_restaurant_' + idRestaurant);
 
   // Prix max
-  $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').val(restaurant['max_price']);
+  $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').val(decodeText(restaurant['max_price']));
   $('#zone_saisie_restaurant').find('.saisie_prix_max_restaurant').attr('name', 'update_prix_max_restaurant_' + idRestaurant);
 
   // Types
@@ -1017,23 +1017,23 @@ function initialisationModification(idRestaurant)
   $('#zone_saisie_restaurant').find('.type_other').remove();
 
   // Téléphone
-  $('#zone_saisie_restaurant').find('#saisie_telephone').val(restaurant['phone']);
+  $('#zone_saisie_restaurant').find('#saisie_telephone').val(decodeText(restaurant['phone']));
   $('#zone_saisie_restaurant').find('#saisie_telephone').attr('name', 'update_phone_restaurant_' + idRestaurant);
 
   // Site web
-  $('#zone_saisie_restaurant').find('#saisie_website').val(restaurant['website']);
+  $('#zone_saisie_restaurant').find('#saisie_website').val(decodeText(restaurant['website']));
   $('#zone_saisie_restaurant').find('#saisie_website').attr('name', 'update_website_restaurant_' + idRestaurant);
 
   // Plan
-  $('#zone_saisie_restaurant').find('#saisie_plan').val(restaurant['plan']);
+  $('#zone_saisie_restaurant').find('#saisie_plan').val(decodeText(restaurant['plan']));
   $('#zone_saisie_restaurant').find('#saisie_plan').attr('name', 'update_plan_restaurant_' + idRestaurant);
 
   // LaFourchette
-  $('#zone_saisie_restaurant').find('#saisie_lafourchette').val(restaurant['lafourchette']);
+  $('#zone_saisie_restaurant').find('#saisie_lafourchette').val(decodeText(restaurant['lafourchette']));
   $('#zone_saisie_restaurant').find('#saisie_lafourchette').attr('name', 'update_lafourchette_restaurant_' + idRestaurant);
 
   // Description
-  $('#zone_saisie_restaurant').find('#saisie_description').val(restaurant['description']);
+  $('#zone_saisie_restaurant').find('#saisie_description').val(decodeText(restaurant['description']));
   $('#zone_saisie_restaurant').find('#saisie_description').attr('name', 'update_description_restaurant_' + idRestaurant);
 
   // Bouton validation

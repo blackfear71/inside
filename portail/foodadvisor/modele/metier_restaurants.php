@@ -124,7 +124,7 @@
         if (empty($type))
           unset($typesRestaurant[$keyType]);
         else
-          $typesRestaurant[$keyType] = trim(str_replace(';', ' ', $typesRestaurant[$keyType]));
+          $typesRestaurant[$keyType] = encodeStringForInsert($typesRestaurant[$keyType]);
       }
     }
 
@@ -317,7 +317,7 @@
         if (empty($type))
           unset($typesRestaurant[$keyType]);
         else
-          $typesRestaurant[$keyType] = trim(str_replace(';', ' ', $typesRestaurant[$keyType]));
+          $typesRestaurant[$keyType] = encodeStringForInsert($typesRestaurant[$keyType]);
       }
     }
 

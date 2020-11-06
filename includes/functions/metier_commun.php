@@ -1210,9 +1210,22 @@
     return $level;
   }
 
+  // METIER : Encode certains caractères
+  // RETOUR : Chaîne encodée
+  function encodeStringForInsert($chaine)
+  {
+    // Remplacement des caractères
+    $search  = array('&', ';', '"', "'", '<', '>');
+    $replace = array('et', '', '', '', '', '');
+    $chaine  = trim(str_replace($search, $replace, $chaine));
+
+    // Retour
+    return $chaine;
+  }
+
   // METIER : Décode certains caractères
   // RETOUR : Chaîne décodée
-  function decodeString($chaine)
+  function decodeStringForDisplay($chaine)
   {
     // Remplacement des caractères
     $search  = array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;');

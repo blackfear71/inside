@@ -142,7 +142,7 @@
             echo '</div>';
 
             // Menu
-            list($entree, $plat, $dessert) = explode(';', decodeString($monChoix->getMenu()));
+            list($entree, $plat, $dessert) = explode(';', decodeStringForDisplay($monChoix->getMenu()));
 
             if (empty($entree) AND empty($plat) AND empty($dessert))
               echo '<div class="no_menu_mes_choix">Pas de menu saisi</div>';
@@ -359,7 +359,7 @@
                 echo '</div>';
 
                 // Menu
-                list($entree, $plat, $dessert) = explode(';', decodeString($monChoix->getMenu()));
+                list($entree, $plat, $dessert) = explode(';', decodeStringForDisplay($monChoix->getMenu()));
 
                 echo '<div class="zone_update_menu">';
                   echo '<input type="text" value="' . $entree . '" placeholder="Entrée" name="update_entree_' . $monChoix->getId() . '" class="update_menu" />';

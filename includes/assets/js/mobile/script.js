@@ -961,3 +961,11 @@ function nl2br(chaine)
   // Retour
   return nl2br;
 }
+
+// Converti une chaîne en texte
+function decodeText(chaine)
+{
+  var decoded = $('<div />').html(chaine).text();
+
+  return decoded;
+}
