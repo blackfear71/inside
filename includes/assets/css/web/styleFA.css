@@ -2174,12 +2174,6 @@
 	cursor: pointer;
 }
 
-.lien_lieu:hover
-{
-	background-color: #d3d3d3;
-	color: #262626;
-}
-
 .image_lieu
 {
 	display: inline-block;
@@ -2192,17 +2186,27 @@
 	background-repeat: no-repeat;
 }
 
-.lien_lieu:hover .image_lieu
-{
-	background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
-}
-
 .nom_lieu
 {
 	display: inline-block;
 	vertical-align: middle;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: white;
+}
+
+.lien_lieu:hover
+{
+	background-color: #d3d3d3;
+}
+
+.lien_lieu:hover .image_lieu
+{
+	background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
+}
+
+.lien_lieu:hover .nom_lieu
+{
+	color: #262626;
 }
 
 .zone_restaurants
