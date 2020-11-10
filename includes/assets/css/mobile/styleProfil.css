@@ -50,6 +50,7 @@
   font-family: robotolight, Verdana, sans-serif;
   color: #262626;
   font-size: 3vh;
+  word-wrap: break-word;
 }
 
 .fond_experience_profil
