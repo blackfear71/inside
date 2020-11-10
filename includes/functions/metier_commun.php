@@ -161,7 +161,8 @@
       AND $path != '/inside/portail/expensecenter/expensecenter.php'
       AND $path != '/inside/portail/foodadvisor/foodadvisor.php'
       AND $path != '/inside/portail/foodadvisor/restaurants.php'
-      AND $path != '/inside/portail/portail/portail.php')
+      AND $path != '/inside/portail/portail/portail.php'
+      AND $path != '/inside/portail/profil/profil.php')
         $isAccessibleMobile = false;
     }
 

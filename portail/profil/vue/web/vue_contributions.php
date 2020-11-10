@@ -34,13 +34,13 @@
     echo '<div class="zone_contributions">';
       echo '<div class="titre_contribution"><img src="../../includes/icons/profil/cooking_box_grey.png" alt="cooking_box_grey" class="logo_titre_contribution" />COOKING BOX</div>';
 
-      // Films ajoutés
+      // Gâteaux faits
       echo '<div class="zone_contribution">';
         echo '<div class="stat_contribution">' . $statistiques->getNb_gateaux() . '</div>';
         echo '<div class="texte_contribution">gâteaux faits</div>';
       echo '</div>';
 
-      // Commentaires
+      // Recettes saisies
       echo '<div class="zone_contribution border_left">';
         echo '<div class="stat_contribution">' . $statistiques->getNb_recettes() . '</div>';
         echo '<div class="texte_contribution">recettes saisies</div>';

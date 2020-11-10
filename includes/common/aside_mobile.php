@@ -33,10 +33,10 @@
   // Menu utilisateur
   echo '<div class="aside_user">';
     // Pseudo
-    echo '<div class="lien_aside">';
+    echo '<a href="/inside/portail/profil/profil.php?view=profile&action=goConsulter" class="lien_aside">';
       echo '<img src="/inside/includes/icons/common/profile.png" alt="profile" title="Profil" class="icone_aside" />';
       echo '<div class="titre_aside">' . formatString($_SESSION['user']['pseudo'], 30) . '</div>';
-    echo '</div>';
+    echo '</a>';
 
     // Expérience utilisateur
     echo '<div class="lien_aside">';

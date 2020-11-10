@@ -1,0 +1,142 @@
+/**************/
+/*** Profil ***/
+/**************/
+
+/*** Informations ***/
+.zone_infos_profil
+{
+  display: block;
+  margin-bottom: 2vh;
+}
+
+.avatar_profil
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2vh;
+	width: 25vh;
+	filter: drop-shadow(0 0 0.3vh #7c7c7c);
+	border-radius: 50%;
+}
+
+.zone_info
+{
+  display: block;
+  margin-bottom: 2vh;
+}
+
+.logo_profil
+{
+  display: inline-block;
+  width: 5vh;
+  vertical-align: middle;
+  margin-right: 1vh;
+}
+
+.texte_profil
+{
+  display: inline-block;
+  width: calc(100% - 6vh);
+  vertical-align: middle;
+  font-family: robotolight, Verdana, sans-serif;
+  color: #262626;
+  font-size: 3vh;
+}
+
+.fond_experience_profil
+{
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #d3d3d3;
+	height: 1vh;
+	width: calc(100% - 6vh);
+	border-radius: 2vh;
+}
+
+.experience_profil
+{
+	display: block;
+	height: 100%;
+	background-color: #ff1937;
+	border-radius: 2vh;
+}
+
+/*** Contributions ***/
+.zone_contributions_profil
+{
+  display: block;
+  margin-bottom: -2vh;
+}
+
+.zone_contributions
+{
+	width: 100%;
+	text-align: center;
+	background-color: white;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+  margin-bottom: 2vh;
+	padding-bottom: 1vh;
+	border-radius: 0.5vh;
+}
+
+.titre_contribution
+{
+	width: 100%;
+	padding-top: 1.5vh;
+	padding-bottom: 1.5vh;
+}
+
+.logo_titre_contribution
+{
+  display: inline-block;
+	height: 4vh;
+	vertical-align: middle;
+	margin-right: 1vh;
+}
+
+.texte_titre_contribution
+{
+  display: inline-block;
+  vertical-align: middle;
+  font-family: robotothin, Verdana, sans-serif;
+  color: #262626;
+  font-size: 3.5vh;
+  font-weight: bold;
+  line-height: 4vh;
+}
+
+.zone_contribution
+{
+	display: inline-block;
+  width: calc(50% - 0.15vh);
+	text-align: center;
+	vertical-align: top;
+}
+
+.border_left
+{
+  border-left: solid 0.3vh #b3b3b3;
+}
+
+.large
+{
+	width: 100%;
+}
+
+.stat_contribution
+{
+	display: block;
+	font-family: robotothin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 12vh;
+	line-height: 12vh;
+}
+
+.texte_contribution
+{
+	display: block;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 100%;
+}

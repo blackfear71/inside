@@ -53,10 +53,10 @@
           /* Onglets */
           /***********/
           echo '<div class="zone_profil_left">';
-            include('vue/vue_onglets.php');
+            include('vue/web/vue_onglets.php');
 
             if ($_GET['view'] == 'ranking')
-              include('vue/vue_experience.php');
+              include('vue/web/vue_experience.php');
           echo '</div>';
 
           /********************/
@@ -67,24 +67,24 @@
             switch ($_GET['view'])
             {
               case 'settings':
-                include('vue/vue_settings.php');
+                include('vue/web/vue_settings.php');
                 break;
 
               case 'success':
-                include('vue/vue_success.php');
+                include('vue/web/vue_success.php');
                 break;
 
               case 'ranking':
-                include('vue/vue_ranking.php');
+                include('vue/web/vue_ranking.php');
                 break;
 
               case 'themes':
-                include('vue/vue_infos_themes.php');
+                include('vue/web/vue_infos_themes.php');
                 break;
 
               case 'profile':
               default:
-                include('vue/vue_infos.php');
+                include('vue/web/vue_infos.php');
                 break;
             }
           echo '</div>';
@@ -100,17 +100,17 @@
                 break;
 
               case 'settings':
-                include('vue/vue_utilisateur.php');
-                include('vue/vue_preferences.php');
+                include('vue/web/vue_utilisateur.php');
+                include('vue/web/vue_preferences.php');
                 break;
 
               case 'themes':
-                include('vue/vue_themes.php');
+                include('vue/web/vue_themes.php');
                 break;
 
               case 'profile':
               default:
-                include('vue/vue_contributions.php');
+                include('vue/web/vue_contributions.php');
                 break;
             }
           echo '</div>';

@@ -25,6 +25,10 @@
         N\'oublie pas les menus sur les côtés pour naviguer à travers le site !';
         break;
 
+      case 'profil':
+        $contenuCelsius = 'Voilà tes petites fiertés, tes contributions à toute l\'équipe de joyeux Insiders ! Allez, profite...';
+        break;
+
       case 'restaurants':
         $contenuCelsius = 'Ajoute tes restaurants favoris ici, allez ne sois pas timide on veut tous en profiter ! Il faut en rajouter un maximum pour que le choix soit le plus grand possible !';
         break;
