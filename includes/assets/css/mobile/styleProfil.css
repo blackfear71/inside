@@ -20,10 +20,18 @@
 	border-radius: 50%;
 }
 
+.zone_texte_infos
+{
+  display: block;
+  background-color: #e3e3e3;
+  border-radius: 0.5vh;
+  padding: 2vh 2vh 0 2vh;
+}
+
 .zone_info
 {
   display: block;
-  margin-bottom: 2vh;
+  padding-bottom: 2vh;
 }
 
 .logo_profil
@@ -48,7 +56,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	background-color: #d3d3d3;
+	background-color: white;
 	height: 1vh;
 	width: calc(100% - 6vh);
 	border-radius: 2vh;
