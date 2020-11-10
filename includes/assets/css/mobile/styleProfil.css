@@ -109,14 +109,14 @@
 .zone_contribution
 {
 	display: inline-block;
-  width: calc(50% - 0.15vh);
+  width: calc(50% - 0.1vh);
 	text-align: center;
 	vertical-align: top;
 }
 
 .border_left
 {
-  border-left: solid 0.3vh #b3b3b3;
+  border-left: solid 0.2vh #b3b3b3;
 }
 
 .large
@@ -129,8 +129,8 @@
 	display: block;
 	font-family: robotothin, Verdana, sans-serif;
 	color: #262626;
-	font-size: 12vh;
-	line-height: 12vh;
+	font-size: 10vh;
+	line-height: 10vh;
 }
 
 .texte_contribution
