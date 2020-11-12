@@ -57,8 +57,7 @@
           switch ($_GET['view'])
           {
             case 'settings':
-              //include('vue/mobile/vue_settings.php');
-              echo '<div class="empty">En cours de construction...</div>';
+              include('vue/mobile/vue_settings.php');
               break;
 
             case 'success':
@@ -78,8 +77,7 @@
 
             case 'profile':
             default:
-              include('vue/mobile/vue_infos.php');
-              include('vue/mobile/vue_contributions.php');
+              include('vue/mobile/vue_informations.php');
               break;
           }
         ?>

@@ -19,81 +19,122 @@
 
   // Modèle de données
   include_once('modele/metier_profil.php');
+  include_once('modele/controles_profil.php');
+  include_once('modele/physique_profil.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture des données par le modèle
-      switch ($_GET['view'])
+      // Contrôle si la vue est renseignée
+      if (!isset($_GET['view']) OR empty($_GET['view']))
+        header('location: profil.php?view=profile&action=goConsulter');
+      else
       {
-        case 'success':
-        case 'ranking':
-          $listeUsers   = getUsers();
-          $listeSuccess = getSuccess($_SESSION['user']['identifiant'], $listeUsers);
-          break;
+        // Récupération des données en fonction de la vue
+        switch ($_GET['view'])
+        {
+          case 'success':
+          case 'ranking':
+            // Récupération de la liste des utilisateurs
+            $listeUsers = getUsers();
 
-        case 'settings':
-          $profil      = getProfile($_SESSION['user']['identifiant']);
-          $preferences = getPreferences($_SESSION['user']['identifiant']);
-          break;
+            // Récupération de la liste des succès des utilisateurs
+            $listeSuccess = getSuccess($_SESSION['user']['identifiant'], $listeUsers);
+            break;
 
-        case 'themes':
-          $profil         = getProfile($_SESSION['user']['identifiant']);
-          $preferences    = getPreferences($_SESSION['user']['identifiant']);
-          $themesUsers    = getThemes('U', $profil->getExperience());
-          $themesMissions = getThemes('M', NULL);
-          $isThemeMission = getThemeMission();
-          break;
+          case 'settings':
+            // Récupération des informations de l'utilisateur
+            $profil = getProfile($_SESSION['user']['identifiant']);
 
-        case 'profile':
-          $profil       = getProfile($_SESSION['user']['identifiant']);
-          $statistiques = getStatistiques($_SESSION['user']['identifiant']);
-          $progression  = getProgress($profil->getExperience());
-          break;
+            // Récupération des préférences de l'utilisateur
+            $preferences = getPreferences($_SESSION['user']['identifiant']);
+            break;
 
-        default:
-          header('location: profil.php?view=profile&action=goConsulter');
-          break;
+          case 'themes':
+            // Récupération des informations de l'utilisateur
+            $profil = getProfile($_SESSION['user']['identifiant']);
+
+            // Récupération des préférences de l'utilisateur
+            $preferences = getPreferences($_SESSION['user']['identifiant']);
+
+            // Récupération des thèmes utilisateurs
+            $themesUsers = getThemes('U', $profil->getExperience());
+
+            // Récupération des thèmes missions
+            $themesMissions = getThemes('M', NULL);
+
+            // Récupération thème mission en cours
+            $isThemeMission = getThemeMission();
+            break;
+
+          case 'profile':
+            // Récupération des informations de l'utilisateur
+            $profil = getProfile($_SESSION['user']['identifiant']);
+
+            // Récupération des préférences de l'utilisateur
+            $statistiques = getStatistiques($_SESSION['user']['identifiant']);
+
+            // Récupération de la progression de l'utilisateur
+            $progression = getProgress($profil->getExperience());
+            break;
+
+          default:
+            // Contrôle action renseignée URL
+            header('location: profil.php?view=profile&action=goConsulter');
+            break;
+        }
       }
       break;
 
     case 'doModifierAvatar':
-      // Mise à jour des données par le modèle & enregistrement fichier
+      // Modification de l'avatar
       updateAvatar($_SESSION['user']['identifiant'], $_FILES);
       break;
 
     case 'doSupprimerAvatar':
-      // Suppression des données par le modèle & suppression fichier
+      // Suppression de l'avatar
       deleteAvatar($_SESSION['user']['identifiant']);
       break;
 
     case 'doUpdateInfos':
-      updateInfos($_SESSION['user']['identifiant'], $_POST);
+      // Modification des informations de l'utilisateur
+      updateInfos($_SESSION['user']['identifiant'], $_POST, false);
+      break;
+
+    case 'doUpdateInfosMobile':
+      // Modification des informations de l'utilisateur
+      updateInfos($_SESSION['user']['identifiant'], $_POST, true);
       break;
 
     case 'doUpdatePreferences':
+      // Modification des préférences de l'utilisateur
       updatePreferences($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'doUpdatePassword':
+      // Modification du mot de passe de l'utilisateur
       updatePassword($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'askDesinscription':
+      // Demande de désinscription
       updateStatus($_SESSION['user']['identifiant'], 'D');
       break;
 
     case 'cancelDesinscription':
     case 'cancelResetPassword':
+      // Annulation changement statut
       updateStatus($_SESSION['user']['identifiant'], 'N');
       break;
 
     case 'doSupprimerTheme':
+      // Suppression du thème
       deleteTheme($_SESSION['user']['identifiant']);
       break;
 
     case 'doModifierTheme':
+      // Modification du thème
       updateTheme($_SESSION['user']['identifiant'], $_POST);
       break;
 
@@ -122,7 +163,7 @@
           }
 
           // Conversion JSON
-          $listeSuccessJson = json_encode(convertForJson($listeSuccess));
+          $listeSuccessJson = json_encode(convertForJsonListeSucces($listeSuccess));
           break;
 
         case 'settings':
@@ -163,6 +204,7 @@
     case 'doModifierAvatar':
     case 'doSupprimerAvatar':
     case 'doUpdateInfos':
+    case 'doUpdateInfosMobile':
     case 'doUpdatePreferences':
     case 'doUpdatePassword':
     case 'askDesinscription':
@@ -180,6 +222,7 @@
     case 'doModifierAvatar':
     case 'doSupprimerAvatar':
     case 'doUpdateInfos':
+    case 'doUpdateInfosMobile':
     case 'doUpdatePreferences':
     case 'doUpdatePassword':
     case 'askDesinscription':

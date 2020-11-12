@@ -63,6 +63,47 @@
     return $dateFormat;
   }
 
+  // DATE : Formate une date pour affichage sur mobile (AAAAMMJJ -> AAAA-MM-JJ)
+  // RETOUR : Date formatée
+  function formatDateForDisplayMobile($date)
+  {
+    if (strlen($date) == 8)
+      $dateFormat = substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-' . substr($date, 6, 2);
+    else
+      $dateFormat = $date;
+
+    // Retour
+    return $dateFormat;
+  }
+
+  // DATE : Formate une date pour insertion en base (JJ/MM/AAAA -> AAAAMMJJ)
+  // RETOUR : Date formaté
+  function formatDateForInsert($date)
+  {
+    // Formatage de la date
+    if (strlen($date) == 10)
+      $dateFormat = substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
+    else
+      $dateFormat = $date;
+
+    // Retour
+    return $dateFormat;
+  }
+
+  // DATE : Formate une date pour insertion en base (AAAA-MM-JJ -> AAAAMMJJ)
+  // RETOUR : Date formaté
+  function formatDateForInsertMobile($date)
+  {
+    // Formatage de la date
+    if (strlen($date) == 10)
+      $dateFormat = substr($date, 0, 4) . substr($date, 5, 2) . substr($date, 8, 2);
+    else
+      $dateFormat = $date;
+
+    // Retour
+    return $dateFormat;
+  }
+  
   // DATE : Formate une heure pour affichage (HHMMSS -> HH:MM:SS)
   // RETOUR : Heure formatée
   function formatTimeForDisplay($time)
@@ -114,6 +155,20 @@
 
     // Retour
     return $dayFormat;
+  }
+
+  // DATE : Formate une semaine pour insertion en base (ajout zéro initial)
+  // RETOUR : Semaine formatée
+  function formatWeekForInsert($week)
+  {
+    // Formatage du numéro de semaine
+    if (intval($week) < 10)
+      $weekFormat = '0' . intval($week);
+    else
+      $weekFormat = $week;
+
+    // Retour
+    return $weekFormat;
   }
 
   // DATE : Formate un mois pour affichage
@@ -192,48 +247,6 @@
 
     // Retour
     return $monthFormat;
-  }
-
-  // DATE : Formate une date pour insertion en base (JJ/MM/AAAA -> AAAAMMJJ)
-  // RETOUR : Date formaté
-  function formatDateForInsert($date)
-  {
-    // Formatage de la date
-    if (strlen($date) == 10)
-      $dateFormat = substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
-    else
-      $dateFormat = $date;
-
-    // Retour
-    return $dateFormat;
-  }
-
-  // DATE : Formate une date pour insertion en base (AAAA-MM-JJ -> AAAAMMJJ)
-  // RETOUR : Date formaté
-  function formatDateForInsertMobile($date)
-  {
-    // Formatage de la date
-    if (strlen($date) == 10)
-      $dateFormat = substr($date, 0, 4) . substr($date, 5, 2) . substr($date, 8, 2);
-    else
-      $dateFormat = $date;
-
-    // Retour
-    return $dateFormat;
-  }
-
-  // DATE : Formate une semaine pour insertion en base (ajout zéro initial)
-  // RETOUR : Semaine formatée
-  function formatWeekForInsert($week)
-  {
-    // Formatage du numéro de semaine
-    if (intval($week) < 10)
-      $weekFormat = '0' . intval($week);
-    else
-      $weekFormat = $week;
-
-    // Retour
-    return $weekFormat;
   }
 
   // DATE : Calcule la durée en heures/minutes/secondes pour un traitement

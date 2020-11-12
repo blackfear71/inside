@@ -112,12 +112,6 @@ $(function()
       resetSaisie();
   });
 
-  // Charge l'image dans la zone de saisie
-  $('.loadSaisieRestaurant').on('change', function(event)
-  {
-    loadFile(event, 'image_restaurant_saisie', true);
-  });
-
   // Change le statut d'un jour d'ouverture
   $('.checkDay').click(function()
   {
@@ -176,6 +170,12 @@ $(function()
   });
 
   /*** Actions au changement ***/
+  // Charge l'image dans la zone de saisie
+  $('.loadSaisieRestaurant').on('change', function(event)
+  {
+    loadFile(event, 'image_restaurant_saisie', true);
+  });
+  
   // Affiche la saisie "Autre" (lieu)
   $('#saisie_location').on('change', function()
   {

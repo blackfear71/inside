@@ -74,7 +74,7 @@
     return $tableauParcours;
   }
 
-  // METIER : Conversion du tableau d'objets des parcours en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des parcours en tableau simple pour JSON
   // RETOUR : Tableau des parcours
   function convertForJson($listeParcours)
   {

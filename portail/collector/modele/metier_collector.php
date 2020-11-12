@@ -140,7 +140,7 @@
     return $listeCollectors;
   }
 
-  // METIER : Conversion du tableau d'objets des phrases / images cultes en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des phrases / images cultes en tableau simple pour JSON
   // RETOUR : Tableau des phrases / images cultes
   function convertForJsonListeCollectors($listeCollectors)
   {

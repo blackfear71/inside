@@ -478,7 +478,7 @@
     $_SESSION['alerts']['restaurant_deleted'] = true;
   }
 
-  // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des restaurants en tableau simple pour JSON
   // RETOUR : Tableau des restaurants
   function convertForJsonListeRestaurants($listeRestaurants)
   {
@@ -526,7 +526,7 @@
     return $listeRestaurantsAConvertir;
   }
 
-  // METIER : Conversion du tableau d'objet des choix en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des choix en tableau simple pour JSON
   // RETOUR : Tableau des choix
   function convertForJsonMesChoix($mesChoix)
   {

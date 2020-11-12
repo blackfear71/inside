@@ -115,7 +115,7 @@
       // Commentaires films
       $nombreComments = physiqueCommentairesFilmsUser($user->getIdentifiant());
 
-      // Phrases cultes ajoutées
+      // Phrases et images cultes ajoutées
       $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
 
       // Réservations de restaurants

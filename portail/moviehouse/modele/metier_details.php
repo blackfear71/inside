@@ -189,7 +189,7 @@
     return $listStars;
   }
 
-  // METIER : Conversion du tableau d'objets des détails d'un film en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des détails d'un film en tableau simple pour JSON
   // RETOUR : Tableau des détails
   function convertForJson($detailsFilm)
   {

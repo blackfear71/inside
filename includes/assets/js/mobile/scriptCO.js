@@ -75,12 +75,6 @@ $(function()
     }
   });
 
-  // Charge l'image dans la zone de saisie
-  $('.loadSaisieCollector').on('change', function(event)
-  {
-    loadFile(event, 'image_collector', true);
-  });
-
   // Ouvre la zone de saisie de vote
   $('.afficherSaisieVote').click(function()
   {
@@ -151,6 +145,12 @@ $(function()
       applySortOrFilter($_GET('sort'), $(this).val());
   });
 
+  // Charge l'image dans la zone de saisie
+  $('.loadSaisieCollector').on('change', function(event)
+  {
+    loadFile(event, 'image_collector', true);
+  });
+  
   // Affiche la saisie "Autre" (phrase culte)
   $('#speaker').on('change', function()
   {
@@ -266,7 +266,7 @@ function initialisationModification(idCollector)
   // Récupération des données
   var collector     = listeCollectors[idCollector];
   var typeCollector = collector['type_collector'];
-  var dateCollector = formatDateForMobile(collector['date_collector']);
+  var dateCollector = formatDateForDisplayMobile(collector['date_collector']);
   var speaker       = collector['speaker'];
   var typeSpeaker   = collector['type_speaker'];
   var contenu       = collector['collector'];

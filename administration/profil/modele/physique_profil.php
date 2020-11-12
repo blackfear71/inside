@@ -115,7 +115,8 @@
     global $bdd;
 
     $req = $bdd->prepare('UPDATE users
-                          SET salt = :salt, password = :password
+                          SET salt     = :salt,
+                              password = :password
                           WHERE identifiant = "' . $identifiant . '"');
 
     $req->execute(array(

@@ -41,7 +41,7 @@
     return $listeLieux;
   }
 
-  // METIER : Conversion du tableau d'objet des restaurants en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des restaurants en tableau simple pour JSON
   // RETOUR : Tableau des restaurants par lieu
   function convertForJsonListeRestaurantsParLieu($listeRestaurants)
   {

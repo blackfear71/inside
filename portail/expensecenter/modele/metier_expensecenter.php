@@ -133,7 +133,7 @@
     return $listeDepenses;
   }
 
-  // METIER : Conversion du tableau d'objets des dépenses et des parts en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des dépenses et des parts en tableau simple pour JSON
   // RETOUR : Tableau des dépenses
   function convertForJsonListeDepenses($listeDepenses)
   {

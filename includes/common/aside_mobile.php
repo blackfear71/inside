@@ -14,7 +14,10 @@
                                    'titre' => 'COLLECTOR ROOM')
                             );
 
-  $listeAsideUser = array(array('lien'  => '/inside/includes/functions/script_commun.php?function=disconnectUser',
+  $listeAsideUser = array(array('lien'  => '/inside/portail/profil/profil.php?view=settings&action=goConsulter',
+                                'image' => 'settings',
+                                'titre' => 'PARAMÈTRES'),
+                          array('lien'  => '/inside/includes/functions/script_commun.php?function=disconnectUser',
                                 'image' => 'logout',
                                 'titre' => 'DÉCONNEXION')
                          );

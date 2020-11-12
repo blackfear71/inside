@@ -835,7 +835,7 @@ function formatDateForDisplay(date)
 }
 
 // Formate une date pour affichage saisie sur mobile
-function formatDateForMobile(date)
+function formatDateForDisplayMobile(date)
 {
   var dateFormatted;
 
