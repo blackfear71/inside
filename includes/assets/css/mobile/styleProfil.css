@@ -262,13 +262,14 @@
 {
 	display: block;
 	width: calc(100% - 4vh);
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   margin-left: auto;
   margin-right: auto;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 3vh;
-  line-height: 5vh;
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
@@ -322,13 +323,14 @@
 {
 	display: block;
 	width: 100%;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 3vh;
-  line-height: 5vh;
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
