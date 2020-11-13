@@ -37,7 +37,7 @@
     echo '</div>';
 
     // Bouton d'action
-    echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="bouton_validation_image bouton_validation_image_margin" />';
+    echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="bouton_validation_image" />';
   echo '</form>';
 
   // Mise à jour informations
