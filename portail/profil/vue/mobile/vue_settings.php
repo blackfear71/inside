@@ -10,10 +10,10 @@
 
   // Avatar actuel & suppression
   echo '<div class="zone_avatar_parametres">';
-    echo '<div class="zone_profil_avatar">';
+    echo '<div class="zone_parametres_avatar">';
       $avatarFormatted = formatAvatar($profil->getAvatar(), $profil->getPseudo(), 2, 'avatar');
 
-      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_profil" />';
+      echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_parametres" />';
     echo '</div>';
 
     echo '<form method="post" action="profil.php?action=doSupprimerAvatar" enctype="multipart/form-data">';
@@ -37,7 +37,7 @@
     echo '</div>';
 
     // Bouton d'action
-    echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="bouton_validation_image" />';
+    echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="bouton_validation_image bouton_validation_image_margin" />';
   echo '</form>';
 
   // Mise à jour informations

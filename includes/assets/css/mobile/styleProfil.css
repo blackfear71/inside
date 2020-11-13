@@ -168,6 +168,26 @@
   width: calc(50% - 0.1vh);
 }
 
+.zone_parametres_avatar
+{
+	display: block;
+	vertical-align: middle;
+  width: 20vh;
+  height: 20vh;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+  border-radius: 50%;
+  background-color: #262626;
+  margin-bottom: 2vh;
+  overflow: hidden;
+}
+
+.avatar_parametres
+{
+  width: 100%;
+}
+
 .form_update_avatar
 {
   display: inline-block;
@@ -177,9 +197,9 @@
 
 .zone_saisie_image
 {
-	width: 24.5vh;
-	height: 24.5vh;
-	margin-bottom: 2.5vh;
+	width: 20vh;
+	height: 20vh;
+	margin-bottom: 2vh;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -199,7 +219,7 @@
 
 .symbole_saisie_image
 {
-	line-height: 23.5vh;
+	line-height: 19vh;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 10vh;
 	color: #a3a3a3;
@@ -211,7 +231,7 @@
 	opacity: 0;
 	width: 100%;
 	height: 100%;
-	margin-top: -24.5vh;
+	margin-top: -20vh;
 	position: relative;
 	z-index: 1;
 }
@@ -220,11 +240,11 @@
 {
 	width: calc(100% - 1vh);
 	height: calc(100% - 1vh);
-	line-height: 23.5vh;
+	line-height: 19vh;
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -24vh;
+	margin-top: -19.5vh;
 	text-align: center;
 	border-radius: 50%;
 	overflow: hidden;
@@ -241,9 +261,7 @@
 .bouton_validation_image
 {
 	display: block;
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
+	width: calc(100% - 2vh);
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
@@ -254,6 +272,11 @@
 	text-align: center;
 	border: 0;
   box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.bouton_validation_image_margin
+{
+  margin-left: 2vh;
 }
 
 .bouton_validation_image:active
@@ -288,6 +311,8 @@
   display: inline-block;
   vertical-align: middle;
   width: calc(100% - 10vh);
+  height: 5vh;
+  line-height: 5vh;
   padding-left: 1.5vh;
   padding-right: 1.5vh;
   background-color: white;
@@ -297,7 +322,6 @@
   font-family: robotolight, Verdana, sans-serif;
   font-size: 100%;
   color: #262626;
-  line-height: 5vh;
 }
 
 .bouton_validation_form
