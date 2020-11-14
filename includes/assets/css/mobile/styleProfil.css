@@ -241,7 +241,6 @@
 	width: calc(100% - 1vh);
 	height: calc(100% - 1vh);
 	line-height: 19vh;
-	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: -19.5vh;
