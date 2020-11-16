@@ -18,7 +18,7 @@
       // Annulation demande
       if ($profil->getStatus() == 'Y')
       {
-        echo '<div class="message_profil margin_top_20">Si vous avez fait la demande de changement de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
+        echo '<div class="message_profil margin_top_20">Si vous avez fait la demande de réinitialisation de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
 
         echo '<form method="post" action="profil.php?action=cancelResetPassword" class="margin_top_20">';
           echo '<input type="submit" name="cancel_reset" value="Annuler la demande" class="bouton_validation" />';

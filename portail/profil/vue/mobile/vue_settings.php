@@ -2,7 +2,7 @@
   /*********************/
   /* Paramètres profil */
   /*********************/
-  echo '<div class="zone_preferences_profil preference_margin">';
+  echo '<div class="zone_preferences_profil">';
     // Titre
     echo '<div class="titre_section">';
       echo '<img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />';
@@ -515,5 +515,79 @@
       // Bouton validation
       echo '<input type="submit" name="saisie_preferences" value="Mettre à jour les préférences" class="bouton_validation_form" />';
     echo '</form>';
+  echo '</div>';
+
+  /***************/
+  /* Utilisateur */
+  /***************/
+  echo '<div class="zone_preferences_profil preference_margin">';
+    // Titre
+    echo '<div class="titre_section">';
+      echo '<img src="../../includes/icons/profil/connexion_grey.png" alt="connexion_grey" class="logo_titre_section" />';
+      echo '<div class="texte_titre_section">Utilisateur</div>';
+    echo '</div>';
+
+    /********************/
+    /*** Mot de passe ***/
+    /********************/
+    echo '<div class="zone_preferences">';
+      // Titre
+      echo '<div class="titre_preference">';
+        echo '<div class="texte_titre_preference">CHANGER MOT DE PASSE</div>';
+      echo '</div>';
+
+      // Modification mot de passe
+      echo '<form method="post" action="profil.php?action=doUpdatePassword" class="form_update_user">';
+        echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="saisie_information_2" required />';
+        echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="saisie_information_2" required />';
+        echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="saisie_information_2" required />';
+
+        echo '<input type="submit" name="saisie_mdp" value="Valider" class="bouton_validation_form_2" />';
+      echo '</form>';
+
+      // Annulation demande
+      if ($profil->getStatus() == 'Y')
+      {
+        echo '<div class="message_form_preferences">Si vous avez fait la demande de réinitialisation de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
+
+        echo '<form method="post" action="profil.php?action=cancelResetPassword" class="form_update_user">';
+          echo '<input type="submit" name="cancel_reset" value="Annuler la demande" class="bouton_validation_form_2" />';
+        echo '</form>';
+
+        echo '<div class="message_form_preferences message_bold">Une demande est en cours.</div>';
+      }
+    echo '</div>';
+
+    /**********************/
+    /*** Désinscription ***/
+    /**********************/
+    echo '<div class="zone_preferences">';
+      // Titre
+      echo '<div class="titre_preference">';
+        echo '<div class="texte_titre_preference">DÉSINSCRIPTION</div>';
+      echo '</div>';
+
+      echo '<div class="message_form_preferences">Si vous souhaitez vous désinscrire, vous pouvez en faire la demande à l\'administrateur à l\'aide de ce bouton. Il validera votre choix après vérification.</div>';
+
+      // Gestion désinscription
+      if ($profil->getStatus() == 'D')
+      {
+        // Annulation
+        echo '<form method="post" action="profil.php?action=cancelDesinscription" class="form_update_user">';
+          echo '<input type="submit" name="cancel_desinscription" value="Annuler la demande" class="bouton_validation_form_2" />';
+        echo '</form>';
+
+        echo '<div class="message_form_preferences message_bold">Une demande est déjà en cours.</div>';
+      }
+      else
+      {
+        // Désinscription
+        echo '<form method="post" action="profil.php?action=askDesinscription" class="form_update_user">';
+          echo '<input type="submit" name="ask_desinscription" value="Désinscription" class="bouton_validation_form_2" />';
+        echo '</form>';
+
+        echo '<div class="message_form_preferences message_bold">Aucune demande en cours.</div>';
+      }
+    echo '</div>';
   echo '</div>';
 ?>
