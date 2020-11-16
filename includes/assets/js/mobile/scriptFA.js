@@ -175,7 +175,7 @@ $(function()
   {
     loadFile(event, 'image_restaurant_saisie', true);
   });
-  
+
   // Affiche la saisie "Autre" (lieu)
   $('#saisie_location').on('change', function()
   {
@@ -209,7 +209,7 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Change la couleur d'un proposition (checkbox)
+// Change la couleur d'une proposition (checkbox)
 function changeCheckedColor(label)
 {
   if (label.find('input').prop('checked'))
@@ -228,7 +228,7 @@ function changeCheckedColor(label)
   }
 }
 
-// Change la couleur d'un proposition (radio boutons)
+// Change la couleur d'une proposition (radio boutons)
 function changeRadioColor(idForm, label)
 {
   // On supprime le style de tous les boutons

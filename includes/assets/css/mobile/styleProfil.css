@@ -80,32 +80,25 @@
 	border-radius: 2vh;
 }
 
-/*** Contributions ***/
-.zone_contributions_profil
-{
-  display: block;
-  margin-bottom: -2vh;
-}
-
-.zone_contributions
+/*** Commun ***/
+.zone_contributions, .zone_preferences
 {
 	width: 100%;
 	text-align: center;
 	background-color: white;
   box-shadow: 0 0 0.5vh #7c7c7c;
   margin-bottom: 2vh;
-	padding-bottom: 1vh;
 	border-radius: 0.5vh;
 }
 
-.titre_contribution
+.titre_contribution, .titre_preference
 {
 	width: 100%;
 	padding-top: 1.5vh;
 	padding-bottom: 1.5vh;
 }
 
-.logo_titre_contribution
+.logo_titre_contribution, .logo_titre_preference
 {
   display: inline-block;
 	height: 4vh;
@@ -113,7 +106,7 @@
 	margin-right: 1vh;
 }
 
-.texte_titre_contribution
+.texte_titre_contribution, .texte_titre_preference
 {
   display: inline-block;
   vertical-align: middle;
@@ -124,12 +117,24 @@
   line-height: 4vh;
 }
 
+/*** Contributions ***/
+.zone_contributions_profil
+{
+  display: block;
+  margin-bottom: -2vh;
+}
+
 .zone_contribution
 {
 	display: inline-block;
   width: calc(50% - 0.1vh);
 	text-align: center;
 	vertical-align: top;
+}
+
+.preference_margin
+{
+  margin-bottom: 2vh;
 }
 
 .border_left
@@ -160,6 +165,12 @@
 }
 
 /*** Paramètres ***/
+.zone_settings_profil
+{
+  display: block;
+  margin-bottom: 2vh;
+}
+
 .zone_avatar_parametres
 {
   display: inline-block;
@@ -285,7 +296,7 @@
 .form_update_infos
 {
   display: block;
-  margin-top: 3vh;
+  margin-top: 2vh;
 }
 
 .zone_saisie_information
@@ -341,4 +352,88 @@
 {
 	color: white;
 	background-color: #ff1937;
+}
+
+/*** Préférences ***/
+.zone_preferences_profil
+{
+  display: block;
+}
+
+.sous_titre_preference
+{
+  background-color: #e3e3e3;
+	width: 100%;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+}
+
+.zone_preference
+{
+	display: block;
+	text-align: center;
+	vertical-align: top;
+  padding-bottom: 2vh;
+}
+
+.switch_preference
+{
+	display: inline-block;
+	vertical-align: top;
+	width: calc(50% - 3vh);
+	margin: 2vh 1vh 0 1vh;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	background-color: #e3e3e3;
+}
+
+.switch_preference_2
+{
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 4vh);
+	margin: 2vh 1vh 0 1vh;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	background-color: #e3e3e3;
+}
+
+.label_switch
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 7vh);
+	padding: 1.5vh 1vh 1.5vh 6vh;
+	min-height: 3.5vh;
+	margin-left: -6vh;
+	word-break: break-word;
+	hyphens: auto;
+  text-align: left;
+}
+
+.bouton_checked
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.zone_radio_preference
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+}
+
+.radio_preference, .check_preference
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50%;
+	transform: translateY(-50%);
 }

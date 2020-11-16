@@ -10,7 +10,7 @@
         echo '<div class="zone_contributions">';
           echo '<div class="titre_contribution"><img src="../../includes/icons/profil/celsius_grey.png" alt="celsius_grey" class="logo_titre_contribution" />CELSIUS</div>';
 
-          // Vue par défaut
+          // Affichage sur mobile
           echo '<div class="sous_titre_contribution">Affichage sur mobile</div>';
 
           echo '<div class="zone_contribution large">';
@@ -47,7 +47,7 @@
         echo '<div class="zone_contributions">';
           echo '<div class="titre_contribution"><img src="../../includes/icons/profil/chat_grey.png" alt="chat_grey" class="logo_titre_contribution" />INSIDE ROOM</div>';
 
-          // Vue par défaut
+          // Affichage à la connexion
           echo '<div class="sous_titre_contribution">Affichage à la connexion</div>';
 
           echo '<div class="zone_contribution large">';
