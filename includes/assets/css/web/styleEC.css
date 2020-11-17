@@ -105,13 +105,13 @@
 	background-color: white;
 }
 
-.zone_saisie_prix
+.zone_saisie_prix, .zone_saisie_reduction
 {
 	display: block;
-	vertical-align: middle;
+	margin-bottom: 10px;
 }
 
-.saisie_prix
+.saisie_prix, .saisie_reduction
 {
 	display: inline-block;
 	vertical-align: middle;
@@ -142,7 +142,6 @@
 	display: inline-block;
 	width: calc(100% - 20px);
 	vertical-align: middle;
-	margin-top: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 	line-height: 32px;

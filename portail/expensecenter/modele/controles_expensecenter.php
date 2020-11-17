@@ -132,6 +132,24 @@
     return $control_ok;
   }
 
+  // CONTROLE : Pourcentage numérique et comprise entre minimum et maximum
+  // RETOUR : Booléen
+  function controlePourcentageIntervalle($pourcentage, $minimum, $maximum)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Contrôle
+    if (!is_numeric($pourcentage) OR $pourcentage < $minimum OR $pourcentage > $maximum)
+    {
+      $_SESSION['alerts']['reduction_not_correct'] = true;
+      $control_ok                                  = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
+
   // CONTROLE : Montant saisi
   // RETOUR : Booléen
   function controleMontantsSaisis($listeMontants)

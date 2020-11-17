@@ -335,6 +335,9 @@ function updateExpense(idDepense, year)
   else
     price = formatAmountForDisplay(depense['price'], false);
 
+  // Réduction
+  var reduction = '';
+
   // Date
   var date = depense['date'].substr(6, 2) + '/' + depense['date'].substr(4, 2) + '/' + depense['date'].substr(0, 4);
 
@@ -352,6 +355,9 @@ function updateExpense(idDepense, year)
 
   if (type == 'M')
   {
+    // Réduction
+    $('.saisie_reduction').val(reduction);
+
     // Alimentation des zones utilisateurs inscrits
     $('#zone_add_montants').find('.zone_saisie_utilisateur').each(function()
     {
@@ -507,6 +513,9 @@ function resetSaisie(zone, year, type)
 
         // Titre
         titre = 'Saisir des montants';
+
+        // Réduction
+        var reduction = '';
       }
       else
       {
@@ -554,6 +563,10 @@ function resetSaisie(zone, year, type)
 
       if (type == 'M')
       {
+        // Réduction
+        $('.saisie_reduction').val(reduction);
+
+        // Alimentation des zones utilisateurs
         $('#zone_add_montants').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation du montant ou suppression zone utilisateur désinscrit
@@ -572,6 +585,7 @@ function resetSaisie(zone, year, type)
       }
       else
       {
+        // Alimentation des zones utilisateurs
         $('#zone_add_depense').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation de la quantité ou suppression zone utilisateur désinscrit

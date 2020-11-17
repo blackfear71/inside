@@ -540,10 +540,23 @@ function blockValidationSubmission(form, zoneForm, zoneContenuForm, rechercheLiv
 
   form.find('input, textarea, select').each(function()
   {
+    // Contrôle champ requis
     if ($(this).prop('required') == true && $(this).val() == '')
     {
       hideForm = false;
       return false;
+    }
+
+    // Contrôle format numérique
+    if ($(this).attr('type') == 'number')
+    {
+      if (!$.isNumeric($(this).val())
+      || ($(this).val().attr('min') != '' && $(this).val() < $(this).val().attr('min'))
+      || ($(this).val().attr('max') != '' && $(this).val() > $(this).val().attr('max')))
+      {
+        hideForm = false;
+        return false;
+      }
     }
   });
 
@@ -867,11 +880,11 @@ function formatAmountForDisplay(amount, withCurrency)
     // Conversion en numérique
     var amountNumeric = parseFloat(amount.replace(',', '.'));
 
-    // Formatage avec 2 chiffres après la virgule
-    var amountRounded = amountNumeric.toFixed(2);
+    // Calcul arrondi inférieur
+    var amountRounded = Math.floor(amountNumeric * 100) / 100;
 
-    // Formatage en chaîne
-    var amountFormatted = amountRounded.replace('.', ',') + currency;
+    // Formatage en chaîne avec 2 chiffres après la virgule
+    var amountFormatted = amountRounded.toFixed(2).toString().replace('.', ',') + currency;
   }
 
   // Retour

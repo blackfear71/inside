@@ -7,20 +7,22 @@
   function initializeSaveSession()
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if ((!isset($_SESSION['alerts']['wrong_date'])          OR $_SESSION['alerts']['wrong_date']          != true)
-    AND (!isset($_SESSION['alerts']['date_expense'])        OR $_SESSION['alerts']['date_expense']        != true)
-    AND (!isset($_SESSION['alerts']['depense_not_numeric']) OR $_SESSION['alerts']['depense_not_numeric'] != true)
-    AND (!isset($_SESSION['alerts']['regul_no_parts'])      OR $_SESSION['alerts']['regul_no_parts']      != true)
-    AND (!isset($_SESSION['alerts']['parts_not_integer'])   OR $_SESSION['alerts']['parts_not_integer']   != true)
-    AND (!isset($_SESSION['alerts']['empty_amount'])        OR $_SESSION['alerts']['empty_amount']        != true)
-    AND (!isset($_SESSION['alerts']['amount_not_positive']) OR $_SESSION['alerts']['amount_not_positive'] != true)
-    AND (!isset($_SESSION['alerts']['amounts_not_numeric']) OR $_SESSION['alerts']['amounts_not_numeric'] != true))
+    if ((!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']          != true)
+    AND (!isset($_SESSION['alerts']['date_expense'])          OR $_SESSION['alerts']['date_expense']        != true)
+    AND (!isset($_SESSION['alerts']['depense_not_numeric'])   OR $_SESSION['alerts']['depense_not_numeric'] != true)
+    AND (!isset($_SESSION['alerts']['regul_no_parts'])        OR $_SESSION['alerts']['regul_no_parts']      != true)
+    AND (!isset($_SESSION['alerts']['parts_not_integer'])     OR $_SESSION['alerts']['parts_not_integer']   != true)
+    AND (!isset($_SESSION['alerts']['empty_amount'])          OR $_SESSION['alerts']['empty_amount']        != true)
+    AND (!isset($_SESSION['alerts']['amount_not_positive'])   OR $_SESSION['alerts']['amount_not_positive'] != true)
+    AND (!isset($_SESSION['alerts']['reduction_not_correct']) OR $_SESSION['alerts']['reduction_not_correct'] != true)
+    AND (!isset($_SESSION['alerts']['amounts_not_numeric'])   OR $_SESSION['alerts']['amounts_not_numeric'] != true))
   	{
       unset($_SESSION['save']);
 
-  		$_SESSION['save']['price']   = '';
-      $_SESSION['save']['buyer']   = '';
-  		$_SESSION['save']['comment'] = '';
+      $_SESSION['save']['buyer']     = '';
+      $_SESSION['save']['price']     = '';
+  		$_SESSION['save']['reduction'] = '';
+  		$_SESSION['save']['comment']   = '';
 
       if ($_SESSION['index']['plateforme'] == 'mobile')
         $_SESSION['save']['date_expense'] = date('Y-m-d');
@@ -202,9 +204,10 @@
     }
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['save']['price']         = $post['depense'];
     $_SESSION['save']['buyer']         = $buyer;
     $_SESSION['save']['date_expense']  = $post['date_expense'];
+    $_SESSION['save']['price']         = $post['depense'];
+    $_SESSION['save']['reduction']     = $post['reduction'];
     $_SESSION['save']['comment']       = $comment;
     $_SESSION['save']['tableau_parts'] = $listeParts;
 
@@ -337,6 +340,11 @@
     else
       $date = formatDateForInsert($post['date_expense']);
 
+    if (!empty($post['reduction']))
+      $reduction = $post['reduction'];
+    else
+      $reduction = 0;
+
     $listeMontants = array();
 
     foreach ($post['identifiant_montant'] as $id => $identifiant)
@@ -346,15 +354,23 @@
     }
 
     // Sauvegarde en session en cas d'erreur
-    $_SESSION['save']['price']            = $post['depense'];
     $_SESSION['save']['buyer']            = $buyer;
     $_SESSION['save']['date_expense']     = $post['date_expense'];
+    $_SESSION['save']['price']            = $post['depense'];
+    $_SESSION['save']['reduction']        = $post['reduction'];
     $_SESSION['save']['comment']          = $comment;
     $_SESSION['save']['tableau_montants'] = $listeMontants;
 
     // Contrôle si frais numérique et positif (seulement si renseignés)
     if ($post['depense'] != '')
       $control_ok = controleFraisPositifs($frais);
+
+    // Contrôle si réduction numérique et comprise entre 1 et 100 (seulement si renseignée)
+    if ($control_ok == true)
+    {
+      if (!empty($reduction))
+        $control_ok = controlePourcentageIntervalle($reduction, 1, 100);
+    }
 
     // Contrôle date de saisie
     if ($control_ok == true)
@@ -386,7 +402,7 @@
       $idDepense = physiqueInsertionDepense($depense);
 
       // Calcul du montant total
-      $montantTotal = $frais;
+      $montantTotal = 0;
 
       foreach ($listeMontants as $montant)
       {
@@ -397,8 +413,11 @@
       $acheteur      = physiqueUser($buyer);
       $bilanAcheteur = $acheteur->getExpenses();
 
-      // Mise à jour du bilan de l'acheteur (on ajoute le montant total)
-      $bilanAcheteur += $montantTotal;
+      // Mise à jour du bilan de l'acheteur (on ajoute le montant total, les frais et on déduit l'éventuelle réduction)
+      if (empty($frais))
+        $frais = 0;
+
+      $bilanAcheteur += formatAmountForInsert($montantTotal + $frais - (($montantTotal * $reduction) / 100));
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($buyer, $bilanAcheteur);
@@ -419,7 +438,8 @@
       // Insertion des montants & mise à jour du bilan pour chaque utilisateur
       foreach ($listeMontants as $identifiant => $montant)
       {
-        $montantUser = formatAmountForInsert($montant);
+        // Calcul du montant de l'utilisateur avec la réduction (tronqué à 2 chiffres après la virgule)
+        $montantUser = formatAmountForInsert(formatAmountForInsert($montant) * ((100 - $reduction) / 100));
 
         // Insertion de l'enregistrement en base
         $partUser = array('id_expense'  => $idDepense,
@@ -686,6 +706,11 @@
     else
       $newDate = formatDateForInsert($post['date_expense']);
 
+    if (!empty($post['reduction']))
+      $newReduction = $post['reduction'];
+    else
+      $newReduction = 0;
+
     $newListeMontants = array();
 
     foreach ($post['identifiant_montant'] as $id => $identifiant)
@@ -697,6 +722,13 @@
     // Contrôle si frais numérique et positif (seulement si renseignés)
     if ($post['depense'] != '')
       $control_ok = controleFraisPositifs($newFrais);
+
+    // Contrôle si réduction numérique et comprise entre 1 et 100 (seulement si renseignée)
+    if ($control_ok == true)
+    {
+      if (!empty($reduction))
+        $control_ok = controlePourcentageIntervalle($reduction, 1, 100);
+    }
 
     // Contrôle date de saisie
     if ($control_ok == true)
@@ -724,7 +756,7 @@
       $oldListeMontants = physiquePartsDepenseUsers($idDepense);
 
       // Calcul du montant total
-      $oldMontantTotal = $oldFrais;
+      $oldMontantTotal = 0;
 
       foreach ($oldListeMontants as $montant)
       {
@@ -736,7 +768,10 @@
       $bilanOldAcheteur = $oldAcheteur->getExpenses();
 
       // Mise à jour du bilan pour l'acheteur (on retire l'ancienne dépense)
-      $bilanOldAcheteur -= $oldMontantTotal;
+      if (empty($oldFrais))
+        $oldFrais = 0;
+
+      $bilanOldAcheteur -= $oldMontantTotal + $oldFrais;
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($oldDepense->getBuyer(), $bilanOldAcheteur);
@@ -798,7 +833,7 @@
       physiqueUpdateDepense($idDepense, $depense);
 
       // Calcul du montant total
-      $newMontantTotal = $newFrais;
+      $newMontantTotal = 0;
 
       foreach ($newListeMontants as $montant)
       {
@@ -809,8 +844,11 @@
       $newAcheteur      = physiqueUser($newBuyer);
       $bilanNewAcheteur = $newAcheteur->getExpenses();
 
-      // Mise à jour du bilan du nouvel acheteur (on ajoute le montant total)
-      $bilanNewAcheteur += $newMontantTotal;
+      // Mise à jour du bilan du nouvel acheteur (on ajoute le montant total, les frais et on déduit l'éventuelle réduction)
+      if (empty($newFrais))
+        $newFrais = 0;
+
+      $bilanNewAcheteur += formatAmountForInsert($newMontantTotal + $newFrais - (($newMontantTotal * $newReduction) / 100));
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($newBuyer, $bilanNewAcheteur);
@@ -831,7 +869,8 @@
       // Insertions des nouveaux montants & mise à jour du bilan pour chaque utilisateur
       foreach ($newListeMontants as $identifiant => $montant)
       {
-        $montantUser = formatAmountForInsert($montant);
+        // Calcul du montant de l'utilisateur avec la réduction
+        $montantUser = formatAmountForInsert(formatAmountForInsert($montant) * ((100 - $newReduction) / 100));
 
         // Insertion de l'enregistrement en base
         $partUser = array('id_expense'  => $idDepense,
@@ -1026,6 +1065,9 @@
         $bilanUser = $user->getExpenses();
 
         // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
+        if (empty($frais))
+          $frais = 0;
+
         $bilanUser += $montantUser + ($frais / $nombreTotalUsers);
 
         // Modification de l'enregistrement en base

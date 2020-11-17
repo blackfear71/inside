@@ -321,9 +321,6 @@
       $req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
       while ($data2 = $req2->fetch())
       {
-        // Initialisation prix d'achat ou frais
-        $prixAchat = formatAmountForInsert($data2['price']);
-
         // Identifiant de l'acheteur
         $acheteur = $data2['buyer'];
 
@@ -348,12 +345,18 @@
 
         if ($data2['type'] == 'M')
         {
+          // Frais d'achat
+          $fraisAchat = formatAmountForInsert($data2['price']);
+
           // Montant de la part
           $montantUser = formatAmountForInsert($nombrePartsUser);
 
           // Calcul de la répartition des frais
+          if (empty($fraisAchat))
+            $fraisAchat = 0;
+
           if ($montantUser != 0)
-            $fraisUser = $prixAchat / $nombreUtilisateurs;
+            $fraisUser = $fraisAchat / $nombreUtilisateurs;
           else
             $fraisUser = 0;
 
@@ -361,13 +364,16 @@
           if ($acheteur == $data1['identifiant'] OR $montantUser != 0)
           {
             if ($acheteur == $data1['identifiant'])
-              $bilanUser += $prixAchat + $nombrePartsTotal - ($montantUser + $fraisUser);
+              $bilanUser += $fraisAchat + $nombrePartsTotal - ($montantUser + $fraisUser);
             else
               $bilanUser -= $montantUser + $fraisUser;
           }
         }
         else
         {
+          // Prix d'achat
+          $prixAchat = formatAmountForInsert($data2['price']);
+
           // Prix par parts
           if ($nombrePartsTotal != 0)
             $prixParPart = $prixAchat / $nombrePartsTotal;

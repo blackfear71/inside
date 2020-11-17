@@ -338,20 +338,28 @@ function initialisationModification(idDepense, year)
   var titre;
   var sousTitre;
 
-  // Action du formulaire
   if (type == 'M')
+  {
+    // Action du formulaire
     action = 'expensecenter.php?year=' + year + '&action=doModifierMontantsMobile';
+
+    // Titre
+    titre = 'Modifier des montants';
+
+    // Réduction
+    var reduction = '';
+  }
   else
+  {
+    // Action du formulaire
     action = 'expensecenter.php?year=' + year + '&action=doModifierMobile';
+
+    // Titre
+    titre = 'Modifier la dépense';
+  }
 
   // Date du jour
   var date = formatDateForDisplay(depense['date']);
-
-  // Titre
-  if (type == 'M')
-    titre = 'Modifier des montants';
-  else
-    titre = 'Modifier la dépense';
 
   // Sous-titre
   if (parts.length == 0)
@@ -386,6 +394,9 @@ function initialisationModification(idDepense, year)
 
   if (type == 'M')
   {
+    // Réduction
+    $('.saisie_reduction').val(reduction);
+
     // Alimentation des zones utilisateurs inscrits
     $('#zone_saisie_montants').find('.zone_saisie_utilisateur').each(function()
     {
@@ -532,6 +543,9 @@ function resetSaisie(zone, year, type)
 
         // Titre
         titre = 'Saisir des montants';
+
+        // Réduction
+        var reduction = '';
       }
       else
       {
@@ -583,6 +597,10 @@ function resetSaisie(zone, year, type)
 
       if (type == 'M')
       {
+        // Réduction
+        $('.saisie_reduction').val(reduction);
+
+        // Alimentation des zones utilisateurs
         $('#zone_saisie_montants').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation du montant ou suppression zone utilisateur désinscrit
@@ -601,6 +619,7 @@ function resetSaisie(zone, year, type)
       }
       else
       {
+        // Alimentation des zones utilisateurs
         $('#zone_saisie_depense').find('.zone_saisie_utilisateur').each(function()
         {
           // Initialisation de la quantité ou suppression zone utilisateur désinscrit

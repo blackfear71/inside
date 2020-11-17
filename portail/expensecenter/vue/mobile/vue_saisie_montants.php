@@ -35,6 +35,12 @@
             echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro" />';
           echo '</div>';
 
+          // Réduction
+          echo '<div class="zone_saisie_reduction">';
+            echo '<input type="number" name="reduction" value="' . $_SESSION['save']['reduction'] . '" autocomplete="off" placeholder="Réduction" min="1" max="100" class="saisie_reduction" />';
+            echo '<img src="../../includes/icons/expensecenter/percent_grey.png" alt="percent_grey" title="Pourcentage" class="euro" />';
+          echo '</div>';
+
           // Date de saisie
           echo '<input type="date" name="date_expense" value="' . $_SESSION['save']['date_expense'] . '" placeholder="Date" maxlength="10" autocomplete="off" class="saisie_date_depense" required />';
 
@@ -50,7 +56,7 @@
 
           // Explications
           echo '<div id="afficher_explications_montants" class="texte_explications_montants" style="display: none;">';
-            echo 'Vous pouvez saisir ici une dépense en montants ainsi que les éventuels frais additonnels associés (frais de livraison...).
+            echo 'Vous pouvez saisir ici une dépense en montants ainsi que les éventuels frais additonnels associés (frais de livraison, réduction).
             <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.
             Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants.
             Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';

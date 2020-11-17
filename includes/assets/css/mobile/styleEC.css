@@ -18,13 +18,13 @@
 	background-color: white;
 }
 
-.zone_saisie_prix
+.zone_saisie_prix, .zone_saisie_reduction
 {
 	display: block;
 	margin-top: 2vh;
 }
 
-.saisie_prix
+.saisie_prix, .saisie_reduction
 {
 	display: inline-block;
 	vertical-align: middle;
