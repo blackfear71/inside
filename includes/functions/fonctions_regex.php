@@ -145,12 +145,7 @@
 
 		// Formatage
 		if (!empty($montantFormat) AND is_numeric($montantFormat))
-		{
-			if ($montantFormat >= 0)
-				$montantFormat = str_replace('.', ',', number_format(floor($montantFormat * 100) / 100, 2, ',', '')) . ' €';
-			else
-				$montantFormat = str_replace('.', ',', number_format(ceil($montantFormat * 100) / 100, 2, ',', '')) . ' €';
-		}
+			$montantFormat = str_replace('.', ',', number_format(floor($montantFormat * 100) / 100, 2, ',', '')) . ' €';
 		else
 			$montantFormat = '0,00 €';
 
@@ -167,12 +162,7 @@
 
 		// Formatage
 		if (is_numeric($montantFormat))
-		{
-			if ($montantFormat >= 0)
-				$montantFormat = floor($montantFormat * 100) / 100;
-			else
-				$montantFormat = ceil($montantFormat * 100) / 100;
-		}
+			$montantFormat = floor($montantFormat * 100) / 100;
 		else
       $montantFormat = '';
 

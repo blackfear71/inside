@@ -1020,7 +1020,7 @@
     $listeMontants = physiquePartsDepenseUsers($depense->getId());
 
     // Calcul du montant total
-    $montantTotal = $frais;
+    $montantTotal = 0;
 
     foreach ($listeMontants as $montant)
     {
@@ -1036,7 +1036,10 @@
       $bilanAcheteur = $acheteur->getExpenses();
 
       // Mise à jour du bilan pour l'acheteur inscrit (on retire le montant total)
-      $bilanAcheteur -= $montantTotal;
+      if (empty($frais))
+        $frais = 0;
+
+      $bilanAcheteur -= $montantTotal + $frais;
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($depense->getBuyer(), $bilanAcheteur);
@@ -1065,9 +1068,6 @@
         $bilanUser = $user->getExpenses();
 
         // Mise à jour du bilan pour chaque utilisateur (on ajoute au bilan)
-        if (empty($frais))
-          $frais = 0;
-
         $bilanUser += $montantUser + ($frais / $nombreTotalUsers);
 
         // Modification de l'enregistrement en base
