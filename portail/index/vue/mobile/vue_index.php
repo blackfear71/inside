@@ -86,7 +86,7 @@
 
               // Lien mot de passe perdu
               if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
-                echo '<a id="afficherPassword" class="lien_index" style="display: none;">Mot de passe oublié ?</a>';
+                echo '<a id="afficherPassword" class="lien_index" style="display: none;">Mot de passe oublié</a>';
               else
                 echo '<a id="afficherPassword" class="lien_index">Mot de passe oublié ?</a>';
             echo '</div>';
