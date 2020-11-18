@@ -81,13 +81,14 @@
 }
 
 /*** Commun ***/
-.zone_contributions, .zone_preferences
+.zone_contributions
 {
 	width: 100%;
 	text-align: center;
 	background-color: white;
   box-shadow: 0 0 0.5vh #7c7c7c;
   margin-bottom: 2vh;
+  padding-bottom: 2vh;
 	border-radius: 0.5vh;
 }
 
@@ -357,6 +358,16 @@
 .preference_margin
 {
   margin-bottom: -2vh;
+}
+
+.zone_preferences
+{
+	width: 100%;
+	text-align: center;
+	background-color: white;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+  margin-bottom: 2vh;
+	border-radius: 0.5vh;
 }
 
 .sous_titre_preference
