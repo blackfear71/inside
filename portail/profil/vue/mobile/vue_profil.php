@@ -39,7 +39,29 @@
 
       <!-- Celsius -->
       <?php
-        $celsius = 'profil';
+        switch ($_GET['view'])
+        {
+          case 'settings':
+            $celsius = 'settings';
+            break;
+
+          case 'success':
+            $celsius = 'success';
+            break;
+
+          case 'ranking':
+            $celsius = 'ranking';
+            break;
+
+          case 'themes':
+            $celsius = 'themes';
+            break;
+
+          case 'profile':
+          default:
+            $celsius = 'profil';
+            break;
+        }
 
         include('../../includes/common/celsius.php');
       ?>
