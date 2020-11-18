@@ -77,10 +77,12 @@
                 echo '<a id="afficherConnexion" class="lien_index lien_index_margin_right" style="display: none;">Se connecter</a>';
 
               // Lien inscription
-              if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
-                echo '<a id="afficherInscription" class="lien_index lien_index_margin_right" style="display: none;">S\'inscrire</a>';
-              else
+              if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == false)
                 echo '<a id="afficherInscription" class="lien_index lien_index_margin_right">S\'inscrire</a>';
+              else if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
+                echo '<a id="afficherInscription" class="lien_index" style="display: none;">S\'inscrire</a>';
+              else
+                echo '<a id="afficherInscription" class="lien_index">S\'inscrire</a>';
 
               // Lien mot de passe perdu
               if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
