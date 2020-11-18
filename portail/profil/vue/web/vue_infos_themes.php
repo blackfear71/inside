@@ -17,11 +17,14 @@
     echo 'Par défaut, si un thème a été défini sur une période donnée par l\'administrateur, <strong>celui-ci prévaudra</strong> sur votre préférence.';
   echo '</div>';
 
-  echo '<div class="texte_themes">';
-    echo 'Vous pouvez également désactiver le thème courant (<strong>hors mission en cours</strong>) en cliquant sur ce bouton :';
+  if (!empty($preferences->getRef_theme()))
+  {
+    echo '<div class="texte_themes">';
+      echo 'Vous pouvez également désactiver le thème courant (<strong>hors mission en cours</strong>) en cliquant sur ce bouton :';
 
-    echo '<form method="post" action="profil.php?action=doSupprimerTheme">';
-      echo '<input type="submit" name="delete_theme" value="Désactiver le thème" class="bouton_validation margin_top_20" />';
-    echo '</form>';
-  echo '</div>';
+      echo '<form method="post" action="profil.php?action=doSupprimerTheme">';
+        echo '<input type="submit" name="delete_theme" value="Désactiver le thème" class="bouton_validation margin_top_20" />';
+      echo '</form>';
+    echo '</div>';
+  }
 ?>
