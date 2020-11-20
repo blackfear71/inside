@@ -23,13 +23,18 @@
 	switch ($_GET['action'])
 	{
 		case 'goConsulter':
+			// Si on n'est pas connecté et que les cookies de connexion sont présent, on lance la connexion automatique, sinon on affiche la page de connexion
+			if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] != true
+			AND isset($_COOKIE['index'])               AND !empty($_COOKIE['index']))
+				$connected = connectUser($_COOKIE['index'], true);
+
 			// Initialisation de la sauvegarde en session
 			$erreursIndex = initializeSaveSession();
 			break;
 
 		case 'doConnecter':
 			// Connexion de l'utilisateur
-			$connected = connectUser($_POST);
+			$connected = connectUser($_POST, false);
 			break;
 
 		case 'doDemanderInscription':
@@ -78,7 +83,10 @@
 
 		case 'goConsulter':
     default:
-			include_once('portail/index/vue/' . $_SESSION['index']['plateforme'] . '/vue_index.php');
+			if (isset($connected) AND $connected == true AND $_SESSION['user']['identifiant'] != 'admin')
+				header('location: portail/portail/portail.php?action=goConsulter');
+			else
+				include_once('portail/index/vue/' . $_SESSION['index']['plateforme'] . '/vue_index.php');
       break;
   }
 ?>

@@ -418,7 +418,6 @@
 	vertical-align: middle;
 	width: calc(100% - 7vh);
 	padding: 1.5vh 1vh 1.5vh 6vh;
-	min-height: 3.5vh;
 	margin-left: -6vh;
 	word-break: break-word;
 	hyphens: auto;

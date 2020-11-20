@@ -258,11 +258,11 @@ function changeColorToGrey(id, active)
 // Gestion des cookies
 function setCookie(cookieName, cookieValue)
 {
-  // Date expiration cookie (1 jour)
+  // Date expiration cookie (1 an)
   var today   = new Date();
   var expires = new Date();
 
-  expires.setTime(today.getTime() + (24*60*60*1000));
+  expires.setTime(today.getTime() + (60 * 60 * 24 * 365));
 
   // Cookie global (path=/)
   document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;SameSite=Lax';

@@ -48,20 +48,32 @@
 
   // METIER : Connexion utilisateur
   // RETOUR : Indicateur connexion
-  function connectUser($post)
+  function connectUser($dataConnect, $autoConnect)
   {
     // Initialisations
     $control_ok                     = true;
     $connected                      = false;
     $_SESSION['index']['connected'] = NULL;
 
-    // Récupération des données
-    $password = $post['mdp'];
+    // Réinitialisation des cookies
+    setcookie('index[identifiant]', null, -1, '/');
+    setcookie('index[password]', null, -1, '/');
 
-    if (strtolower($post['login']) == 'admin')
-      $identifiant = htmlspecialchars(strtolower($post['login']));
+    // Récupération des données
+    if ($autoConnect == true)
+    {
+      $identifiant = $dataConnect['identifiant'];
+      $password    = $dataConnect['password'];
+    }
     else
-      $identifiant = htmlspecialchars(strtoupper($post['login']));
+    {
+      $password = $dataConnect['mdp'];
+
+      if (strtolower($dataConnect['login']) == 'admin')
+        $identifiant = htmlspecialchars(strtolower($dataConnect['login']));
+      else
+        $identifiant = htmlspecialchars(strtoupper($dataConnect['login']));
+    }
 
     // Lectures des données de l'utilisateur
     $user = physiqueUser($identifiant);
@@ -75,7 +87,19 @@
 
     // Contrôle mot de passe
     if ($control_ok == true)
-      $control_ok = controlePassword($user->getIdentifiant(), $password);
+    {
+      // Lecture du mot de passe crypté de l'utilisateur
+      $dataPassword = physiquePassword($user->getIdentifiant());
+
+      // Cryptage du mot de passe saisi si besoin
+      if ($autoConnect == true)
+        $crypted = $password;
+      else
+        $crypted = htmlspecialchars(hash('sha1', $password . $dataPassword['salt']));
+
+      // Contrôle
+      $control_ok = controlePassword($crypted, $dataPassword['password']);
+    }
 
     // Initialisation des données
     if ($control_ok == true)
@@ -101,6 +125,10 @@
           $_SESSION['chat']['show_chat'] = true;
         else
           $_SESSION['chat']['show_chat'] = false;
+
+        // Définition des cookies de connexion
+        setCookie('index[identifiant]', $user->getIdentifiant(), time() + 60 * 60 * 24 * 365, '/');
+        setCookie('index[password]', $crypted, time() + 60 * 60 * 24 * 365, '/');
       }
 
       // Positionnement indicateur connexion

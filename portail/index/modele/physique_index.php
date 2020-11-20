@@ -45,7 +45,8 @@
 
     $data = $req->fetch();
 
-    $dataUser = array('password' => $data['password'], 'salt' => $data['salt']);
+    $dataUser = array('password' => $data['password'],
+                      'salt'     => $data['salt']);
 
     $req->closeCursor();
 

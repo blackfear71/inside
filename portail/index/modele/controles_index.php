@@ -83,16 +83,13 @@
 
   // CONTROLE : Mot de passe saisi
   // RETOUR : Booléen
-  function controlePassword($identifiant, $password)
+  function controlePassword($passwordSaisi, $passwordBase)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    $dataUser = physiquePassword($identifiant);
-    $crypted  = htmlspecialchars(hash('sha1', $password . $dataUser['salt']));
-
-    if ($crypted != $dataUser['password'])
+    if ($passwordSaisi != $passwordBase)
     {
       $_SESSION['alerts']['wrong_connexion'] = true;
       $control_ok                            = false;

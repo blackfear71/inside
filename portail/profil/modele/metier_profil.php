@@ -312,6 +312,14 @@
       {
         physiqueUpdatePasswordUser($salt, $newPassword, $identifiant);
 
+        // Réinitialisation des cookies de connexion
+        setcookie('index[identifiant]', null, -1, '/');
+        setcookie('index[password]', null, -1, '/');
+
+        // Définition des nouveaux cookies de connexion
+        setCookie('index[identifiant]', $identifiant, time() + 60 * 60 * 24 * 365, '/');
+        setCookie('index[password]', $newPassword, time() + 60 * 60 * 24 * 365, '/');
+
         // Message d'alerte
         $_SESSION['alerts']['password_updated'] = true;
       }

@@ -8,8 +8,12 @@
   	// Destruction des variables de la session
   	session_unset();
 
-  	// Détruit toute la session (pas bon dans ce cas sinon la page index ne trouve plus les variables dont elle a besoin et affiche très rapidement un message d'erreur)
+  	// Destruction de la session (pas bon dans ce cas sinon la page index ne trouve plus les variables dont elle a besoin et affiche un message d'erreur)
   	//session_destroy();
+
+    // Réinitialisation des cookies de connexion
+    setcookie('index[identifiant]', null, -1, '/');
+    setcookie('index[password]', null, -1, '/');
 
   	// Après avoir détruit la variable de connexion, on la réinitialise pour éviter les erreurs au retour sur index.php
   	$_SESSION['index']['connected'] = false;
