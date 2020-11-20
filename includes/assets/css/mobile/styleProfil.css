@@ -378,6 +378,7 @@
 	padding-bottom: 1vh;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+  font-size: 2.5vh;
 }
 
 .zone_preference
@@ -397,6 +398,7 @@
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+  font-size: 2.5vh;
 	background-color: #e3e3e3;
 }
 
@@ -409,6 +411,7 @@
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
+  font-size: 2.5vh;
 	background-color: #e3e3e3;
 }
 
