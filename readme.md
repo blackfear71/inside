@@ -23,12 +23,14 @@ Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
 - INSIDE ROOM : chat général
 
 ## Notes aux développeurs
+```
 Ne pas toucher aux fichiers suivants lors de vos développements :
 - appel_bdd.php
 - appel_mail.php
 - export_bdd.php
 
 Si des différences sont constatées, veuillez les annuler.
+```
 
 ## Les langages utilisés
 Au travers de l'architecture MVC (Modèle-Vue-Contrôleur) utilisée, plusieurs langages sont appliqués afin de correspondre aux différents besoins du site.
@@ -95,13 +97,10 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 
 | COOKIE      | Description                           |
 | --------------------------------------------------- |
-|                        Index                        |
-| --------------------------------------------------- |
+| Index       |                                       |
 | identifiant | Identifiant de l'utilisateur connecté |
 | password    | Mot de passse crypté                  |
-| --------------------------------------------------- |
-|                         Chat                        |
-| --------------------------------------------------- |
+| Chat        |                                       |
 | identifiant | Identifiant de l'utilisateur connecté |
 | showChat    | Etat de repli de la fenêtre de chat   |
 | windowChat  | Choix de la fenêtre de chat           |
