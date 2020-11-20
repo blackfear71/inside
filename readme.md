@@ -94,7 +94,14 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | user      | Contient les données utilisateurs et préférences         |
 
 | COOKIE      | Description                           |
-| ----------  | ------------------------------------- |
+| --------------------------------------------------- |
+|                        Index                        |
+| --------------------------------------------------- |
+| identifiant | Identifiant de l'utilisateur connecté |
+| password    | Mot de passse crypté                  |
+| --------------------------------------------------- |
+|                         Chat                        |
+| --------------------------------------------------- |
 | identifiant | Identifiant de l'utilisateur connecté |
 | showChat    | Etat de repli de la fenêtre de chat   |
 | windowChat  | Choix de la fenêtre de chat           |

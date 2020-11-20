@@ -61,12 +61,12 @@ $(window).on('load', function()
       stopTimerRefresh(refreshChat);
 
       // Redéfinition des cookies
-      setCookie('showChat', false);
-      setCookie('windowChat', '3');
+      setCookie('chat[showChat]', false);
+      setCookie('chat[windowChat]', '3');
 
       // Récupération des cookies
-      cookieShowChat   = getCookie('showChat');
-      cookieWindowChat = getCookie('windowChat');
+      cookieShowChat   = getCookie('chat[showChat]');
+      cookieWindowChat = getCookie('chat[windowChat]');
 
       // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
@@ -75,12 +75,12 @@ $(window).on('load', function()
     else
     {
       // Redéfinition des cookies
-      setCookie('showChat', true);
-      setCookie('windowChat', '1');
+      setCookie('chat[showChat]', true);
+      setCookie('chat[windowChat]', '1');
 
       // Récupération des cookies
-      cookieShowChat   = getCookie('showChat');
-      cookieWindowChat = getCookie('windowChat');
+      cookieShowChat   = getCookie('chat[showChat]');
+      cookieWindowChat = getCookie('chat[windowChat]');
 
       // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
@@ -99,10 +99,10 @@ $(window).on('load', function()
       stopTimerRefresh(refreshUsers);
 
       // Redéfinition des cookies
-      setCookie('windowChat', '1');
+      setCookie('chat[windowChat]', '1');
 
       // Récupération des cookies
-      cookieWindowChat = getCookie('windowChat');
+      cookieWindowChat = getCookie('chat[windowChat]');
 
       // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
@@ -119,10 +119,10 @@ $(window).on('load', function()
     stopTimerRefresh(refreshChat);
 
     // Redéfinition des cookies
-    setCookie('windowChat', '2');
+    setCookie('chat[windowChat]', '2');
 
     // Récupération des cookies
-    cookieWindowChat = getCookie('windowChat');
+    cookieWindowChat = getCookie('chat[windowChat]');
 
     // Initialisation de la vue
     initView(cookieShowChat, cookieWindowChat);
@@ -224,9 +224,9 @@ $(window).on('load', function()
   function initCookies()
   {
     // Initialisation ou récupération des cookies si existants
-    cookieIdentifiant = getCookie('identifiant');
-    cookieShowChat    = getCookie('showChat');
-    cookieWindowChat  = getCookie('windowChat');
+    cookieIdentifiant = getCookie('chat[identifiant]');
+    cookieShowChat    = getCookie('chat[showChat]');
+    cookieWindowChat  = getCookie('chat[windowChat]');
 
     // Initialisation cookie identifiant
     initCookieIdentifiant();
@@ -248,18 +248,18 @@ $(window).on('load', function()
     // Initialisation cookie identifiant
     if (cookieIdentifiant == null)
     {
-      setCookie('identifiant', currentUser);
-      cookieIdentifiant = getCookie('identifiant');
+      setCookie('chat[identifiant]', currentUser);
+      cookieIdentifiant = getCookie('chat[identifiant]');
     }
 
     // Si le cookie ne correspond pas à l'utilisateur, on détruit tous les cookies
     if (cookieIdentifiant != currentUser)
     {
-      deleteCookie('identifiant');
-      deleteCookie('showChat');
-      deleteCookie('windowChat');
-      setCookie('identifiant', currentUser);
-      cookieIdentifiant = getCookie('identifiant');
+      deleteCookie('chat[identifiant]');
+      deleteCookie('chat[showChat]');
+      deleteCookie('chat[windowChat]');
+      setCookie('chat[identifiant]', currentUser);
+      cookieIdentifiant = getCookie('chat[identifiant]');
     }
   }
 
@@ -269,16 +269,16 @@ $(window).on('load', function()
     if (initChat != null)
     {
       // Initialisation cookie état Chat en fonction de la préférence utilisateur
-      setCookie('showChat', initChat);
-      cookieShowChat = getCookie('showChat');
+      setCookie('chat[showChat]', initChat);
+      cookieShowChat = getCookie('chat[showChat]');
     }
     else
     {
       // Initialisation cookie état Chat par défaut
       if (cookieShowChat == null)
       {
-        setCookie('showChat', true);
-        cookieShowChat = getCookie('showChat');
+        setCookie('chat[showChat]', true);
+        cookieShowChat = getCookie('chat[showChat]');
       }
     }
   }
@@ -290,19 +290,19 @@ $(window).on('load', function()
     {
       // Initialisation cookie fenêtre Chat en fonction de la préférence utilisateur
       if (initChat == true)
-        setCookie('windowChat', '1');
+        setCookie('chat[windowChat]', '1');
       else
-        setCookie('windowChat', '3');
+        setCookie('chat[windowChat]', '3');
 
-      cookieWindowChat = getCookie('windowChat');
+      cookieWindowChat = getCookie('chat[windowChat]');
     }
     else
     {
       // Initialisation cookie état Chat par défaut
       if (cookieWindowChat == null)
       {
-        setCookie('windowChat', '1');
-        cookieWindowChat = getCookie('windowChat');
+        setCookie('chat[windowChat]', '1');
+        cookieWindowChat = getCookie('chat[windowChat]');
       }
     }
   }
@@ -764,10 +764,4 @@ $(window).on('load', function()
     $('.zone_statut_chat_users').children('.trait_offline').css('width', tailleTraitOffline + 'px');
     $('.zone_statut_chat_users').children('.trait_offline').css('width', tailleTraitOffline + 'px');
   }
-
-  /******************/
-  /***   Debugg   ***/
-  /******************/
-  //deleteCookie('showChat');
-  //console.log('cookies : ' + document.cookie);
 });
