@@ -11,7 +11,7 @@
 	width: 90%;
 	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(calc(-50% - 2vh));
 }
 
 .zone_form_index
