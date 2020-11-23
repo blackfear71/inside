@@ -516,7 +516,25 @@ aside
 	background-color: white;
 }
 
-.bouton_celsius
+.bouton_celsius_left
+{
+	float: left;
+	width: 35vw;
+	height: 4vh;
+	margin-top: 0.5vh;
+	line-height: 4vh;
+	margin-left: 3vw;
+	background-color: #ff1937;
+	text-decoration: none;
+	text-align: center;
+	border-radius: 0.5vh;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 2.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.bouton_celsius_right
 {
 	float: right;
 	width: 25vw;
@@ -534,7 +552,7 @@ aside
 	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
-.bouton_celsius:active
+.bouton_celsius_left:active, .bouton_celsius_right:active
 {
 	background-color: #c81932;
 }

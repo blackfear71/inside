@@ -255,6 +255,13 @@
 		else
 			$categoriesMovieHouse .= 'N;';
 
+    // Réinitialisation des cookies de position Celsius
+    if ($celsius == 'N')
+    {
+      setcookie('celsius[positionX]', null, -1, '/');
+      setcookie('celsius[positionY]', null, -1, '/');
+    }
+
     // Modification de l'enregistrement en base
     $preferences = array('init_chat'              => $initChat,
                          'celsius'                => $celsius,

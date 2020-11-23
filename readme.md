@@ -93,12 +93,15 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | theme     | Contient les données des thèmes                          |
 | user      | Contient les données utilisateurs et préférences         |
 
-| COOKIE      | Description                           |
-| ------------|-------------------------------------- |
-| ***Index*** |                                       |
-| identifiant | Identifiant de l'utilisateur connecté |
-| password    | Mot de passse crypté                  |
-| ***Chat***  |                                       |
-| identifiant | Identifiant de l'utilisateur connecté |
-| showChat    | Etat de repli de la fenêtre de chat   |
-| windowChat  | Choix de la fenêtre de chat           |
+| COOKIE        | Description                                         |
+| --------------|---------------------------------------------------- |
+| ***Celsius*** |                                                     |
+| positionX     | Position de Celsius sur l'axe des abscisses (en px) |
+| positionY     | Position de Celsius sur l'axe des ordonnées (en px) |
+| ***Chat***    |                                                     |
+| identifiant   | Identifiant de l'utilisateur connecté               |
+| showChat      | Etat de repli de la fenêtre de chat                 |
+| windowChat    | Choix de la fenêtre de chat                         |
+| ***Index***   |                                                     |
+| identifiant   | Identifiant de l'utilisateur connecté               |
+| password      | Mot de passse crypté                                |

@@ -8,8 +8,9 @@ $(function()
   // Forçage taille écran (viewport)
   fixViewport();
 
-  // Initialisation de la position Celsius
-  initPositionCelsius();
+  // Initialisation de la position Celsius si présente
+  if ($('.celsius').length)
+    initPositionCelsius();
 
   // Animation symbole chargement de la page
   loadingPage('zone_loading_image', 'loading_image');
@@ -71,7 +72,8 @@ $(function()
     &&  $(event.target).attr('class')       != 'zone_texte_celsius'
     &&  $(event.target).attr('class')       != 'texte_contenu_celsius'
     &&  $(event.target).attr('class')       != 'zone_boutons_celsius'
-    &&  $(event.target).attr('class')       != 'bouton_celsius'
+    &&  $(event.target).attr('class')       != 'bouton_celsius_left'
+    &&  $(event.target).attr('class')       != 'bouton_celsius_right'
     &&  $(event.target).attr('class')       != 'celsius'
     &&  $('#contenuCelsius').css('display') != 'none')
       afficherMasquerIdWithDelay('contenuCelsius');
@@ -120,6 +122,20 @@ $(function()
     var actionForm = $('#actionForm').val();
 
     executeAction(actionForm, 'validate');
+  });
+
+  // Réinitialise la position de Celsius
+  $('#resetCelsius').click(function()
+  {
+    // Réinitialisation des cookies de position Celsius
+    deleteCookie('celsius[positionX]', '');
+    deleteCookie('celsius[positionY]', '');
+
+    // Fermeture du contenu
+    afficherMasquerIdWithDelay('contenuCelsius');
+
+    // Réinitialsiation position Celsius
+    initPositionCelsius();
   });
 
   // Ferme le contenu Celsius
@@ -353,8 +369,26 @@ function loadFile(event, id, rotation)
 // Initialisation de la position Celsius
 function initPositionCelsius()
 {
-  $('.celsius').css('top', 'calc(100% - 16vh)');
-  $('.celsius').css('left', 'calc(100% - 9vh)');
+  var cookieCelsiusPositionX = getCookie('celsius[positionX]');
+  var cookieCelsiusPositionY = getCookie('celsius[positionY]');
+
+  if (cookieCelsiusPositionX == null || cookieCelsiusPositionX == 'undefined' || cookieCelsiusPositionX == ''
+  ||  cookieCelsiusPositionY == null || cookieCelsiusPositionY == 'undefined' || cookieCelsiusPositionY == '')
+  {
+    // Positionnement
+    $('.celsius').css('top', 'calc(100% - 16vh)');
+    $('.celsius').css('left', 'calc(100% - 9vh)');
+
+    // Définition des cookies
+    setCookie('celsius[positionX]', $('.celsius').offset().left);
+    setCookie('celsius[positionY]', $('.celsius').offset().top);
+  }
+  else
+  {
+    // Positionnement
+    $('.celsius').css('top', cookieCelsiusPositionY + 'px');
+    $('.celsius').css('left', cookieCelsiusPositionX + 'px');
+  }
 }
 
 // Détermination partie de l'écran
@@ -460,6 +494,16 @@ function touchEndCelsius(celsius)
   // Animation taille élément
   celsius.css('transform', 'scale(1)');
   celsius.css('transition', 'transform 0.2s ease');
+
+  // Définition des cookies (en laissant le temps à l'icône de reprendre sa taille)
+  setTimeout(function()
+  {
+    var celsiusPosX = celsius.offset().left;
+    var celsiusPosY = celsius.offset().top;
+
+    setCookie('celsius[positionX]', celsiusPosX);
+    setCookie('celsius[positionY]', celsiusPosY);
+  }, 200);
 }
 
 // Affichage contenu Celsius
@@ -981,4 +1025,46 @@ function decodeText(chaine)
   var decoded = $('<div />').html(chaine).text();
 
   return decoded;
+}
+
+// Définition d'un cookie
+function setCookie(cookieName, cookieValue)
+{
+  // Date expiration cookie (1 an)
+  var today   = new Date();
+  var expires = new Date();
+
+  expires.setTime(today.getTime() + (60 * 60 * 24 * 365));
+
+  // Cookie global (path=/)
+  document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;SameSite=Lax';
+}
+
+// Lecture d'un cookie
+function getCookie(cookieName)
+{
+  var name          = cookieName + '=';
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca            = decodedCookie.split(';');
+
+  for (var i = 0; i < ca.length; i++)
+  {
+    var c = ca[i];
+
+    while (c.charAt(0) == ' ')
+    {
+      c = c.substring(1);
+    }
+
+    if (c.indexOf(name) == 0)
+      return c.substring(name.length, c.length);
+  }
+
+  return null;
+}
+
+// Suppression d'un cookie
+function deleteCookie(cookieName)
+{
+  document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=' + location.host;
 }

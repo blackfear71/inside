@@ -73,9 +73,13 @@
           echo '</div>';
         echo '</div>';
 
-        // Bouton
+        // Boutons
         echo '<div class="zone_boutons_celsius">';
-          echo '<a id="closeCelsius" class="bouton_celsius">Fermer</a>';
+          // Réinitialisation position
+          echo '<a id="resetCelsius" class="bouton_celsius_left">Réinitialiser</a>';
+
+          // Fermeture
+          echo '<a id="closeCelsius" class="bouton_celsius_right">Fermer</a>';
         echo '</div>';
       echo '</div>';
     }
