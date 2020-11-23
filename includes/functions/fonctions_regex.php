@@ -162,12 +162,7 @@
 
 		// Formatage
 		if (is_numeric($montantFormat))
-		{
-			if ($montantFormat >= 0)
-				$montantFormat = floor($montantFormat * 100) / 100;
-			else
-				$montantFormat = ceil($montantFormat * 100) / 100;
-		}
+			$montantFormat = round($montantFormat, 2, PHP_ROUND_HALF_DOWN);
 		else
       $montantFormat = '';
 
