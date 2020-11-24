@@ -14,9 +14,8 @@
         break;
 
       case 'foodadvisor':
-        $contenuCelsius = 'Dans cette section, tu peux voter dans la liste des restaurants ou bien aller encore plus vite grâce à la toute nouvelle barre de recherche instantanée !
-        Pour ajouter un nouveau restaurant par contre, tu peux toujours utiliser le bouton présent en bas du site pour revenir à la version classique et utiliser toutes ses
-        fonctionnalités comme avant ! On peut même voir le détail d\'un vote et agir dessus comme avant.';
+        $contenuCelsius = 'Dans cette section, tu peux voter dans la liste des restaurants ou bien aller encore plus vite grâce à la toute nouvelle barre de recherche instantanée ! Ajoute tes choix
+        et n\'oublie pas non plus le résumé de la semaine !';
         break;
 
       case 'portail':
