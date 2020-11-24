@@ -128,8 +128,8 @@ $(function()
   $('#resetCelsius').click(function()
   {
     // Réinitialisation des cookies de position Celsius
-    deleteCookie('celsius[positionX]', '');
-    deleteCookie('celsius[positionY]', '');
+    deleteCookie('celsius[positionX]');
+    deleteCookie('celsius[positionY]');
 
     // Fermeture du contenu
     afficherMasquerIdWithDelay('contenuCelsius');
@@ -239,8 +239,23 @@ $(window).on('orientationchange', function(e)
   if (e.orientation == 'landscape')
     fixViewport();
 
-  // Réinitialsiation position Celsius
-  initPositionCelsius();
+  // Positionnement de Celsius (avec un délai pour éviter les erreurs)
+  setTimeout(function()
+  {
+    if ($('.celsius').length)
+    {
+      // Réinitialisation des cookies de position Celsius
+      deleteCookie('celsius[positionX]');
+      deleteCookie('celsius[positionY]');
+
+      // Fermeture du contenu
+      if ($('#contenuCelsius').css('display') != 'none')
+        afficherMasquerIdWithDelay('contenuCelsius');
+
+      // Réinitialsiation position Celsius
+      initPositionCelsius();
+    }
+  }, 200);
 });
 
 /*****************/
@@ -253,15 +268,15 @@ function fixViewport()
   var viewWidth;
 
   // On inverse hauteur et largeur si on change l'orientation de l'écran pour conserver des proportions identiques
-  if ($(window).height() < $(window).width())
+  if (screen.height < screen.width)
   {
-    viewHeight = $(window).width();
-    viewWidth  = $(window).height();
+    viewHeight = window.innerWidth;
+    viewWidth  = window.innerHeight;
   }
   else
   {
-    viewHeight = $(window).height();
-    viewWidth  = $(window).width();
+    viewHeight = window.innerHeight;
+    viewWidth  = window.innerWidth;
   }
 
   var viewport = document.querySelector('meta[name=viewport]');
@@ -375,8 +390,12 @@ function initPositionCelsius()
   if (cookieCelsiusPositionX == null || cookieCelsiusPositionX == 'undefined' || cookieCelsiusPositionX == ''
   ||  cookieCelsiusPositionY == null || cookieCelsiusPositionY == 'undefined' || cookieCelsiusPositionY == '')
   {
-    // Positionnement
-    $('.celsius').css('top', 'calc(100% - 16vh)');
+    // Positionnement en fonction de l'orientation
+    if (screen.height > screen.width)
+      $('.celsius').css('top', 'calc(100% - 16vh)');
+    else
+      $('.celsius').css('top', 'calc(100% - 9vh)');
+
     $('.celsius').css('left', 'calc(100% - 9vh)');
 
     // Définition des cookies
