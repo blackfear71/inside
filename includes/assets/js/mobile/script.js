@@ -127,15 +127,7 @@ $(function()
   // Réinitialise la position de Celsius
   $('#resetCelsius').click(function()
   {
-    // Réinitialisation des cookies de position Celsius
-    deleteCookie('celsius[positionX]');
-    deleteCookie('celsius[positionY]');
-
-    // Fermeture du contenu
-    afficherMasquerIdWithDelay('contenuCelsius');
-
-    // Réinitialsiation position Celsius
-    initPositionCelsius();
+    resetCelsius();
   });
 
   // Ferme le contenu Celsius
@@ -424,6 +416,56 @@ function isUpScreen()
     isUpScreen = false;
 
   return isUpScreen;
+}
+
+// Réinitialisation de la position de Celsius
+function resetCelsius()
+{
+  // Réinitialisation des cookies de position Celsius
+  deleteCookie('celsius[positionX]');
+  deleteCookie('celsius[positionY]');
+
+  // Fermeture du contenu
+  afficherMasquerIdWithDelay('contenuCelsius');
+
+  // Animation de la réinitialisation (délai de 0.2s entre chaque animation + prise en compte de la variation d'échelle dans le positionnement de Celsius)
+  $('.celsius').css('transform', 'scale(1.2)');
+  $('.celsius').css('transition', 'transform 0.2s ease');
+
+  setTimeout(function()
+  {
+    $('.celsius').css('transform', 'scale(0)');
+    $('.celsius').css('transition', 'transform 0.2s ease');
+
+    setTimeout(function()
+    {
+      // Prise en compte de la vraiation d'échelle : on remet Celsius à la bonne taille de manière cachée pour calculer ensuite les coordonnées correctes pour les cookies
+      $('.celsius').css('visibility', 'hidden');
+      $('.celsius').css('transform', 'scale(1)');
+
+      setTimeout(function()
+      {
+        // Réinitialsiation position Celsius
+        initPositionCelsius();
+
+        $('.celsius').css('transform', 'scale(0)');
+
+        setTimeout(function()
+        {
+          $('.celsius').css('visibility', 'visible');
+          $('.celsius').css('transform', 'scale(1.2)');
+          $('.celsius').css('transition', 'visibility 0, transform 0.2s ease');
+
+          setTimeout(function()
+          {
+            $('.celsius').css('visibility', 'visible');
+            $('.celsius').css('transform', 'scale(1)');
+            $('.celsius').css('transition', 'transform 0.2s ease');
+          }, 100);
+        }, 100);
+      }, 100);
+    }, 10);
+  }, 100);
 }
 
 // Initialisations Celsius au clic
