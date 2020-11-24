@@ -236,16 +236,8 @@ $(window).on('orientationchange', function(e)
   {
     if ($('.celsius').length)
     {
-      // Réinitialisation des cookies de position Celsius
-      deleteCookie('celsius[positionX]');
-      deleteCookie('celsius[positionY]');
-
-      // Fermeture du contenu
-      if ($('#contenuCelsius').css('display') != 'none')
-        afficherMasquerIdWithDelay('contenuCelsius');
-
-      // Réinitialsiation position Celsius
-      initPositionCelsius();
+      // Réinitialisation de la position de Celsius
+      resetCelsius();
     }
   }, 200);
 });
@@ -426,7 +418,8 @@ function resetCelsius()
   deleteCookie('celsius[positionY]');
 
   // Fermeture du contenu
-  afficherMasquerIdWithDelay('contenuCelsius');
+  if ($('#contenuCelsius').css('display') != 'none')
+    afficherMasquerIdWithDelay('contenuCelsius');
 
   // Animation de la réinitialisation (délai de 0.2s entre chaque animation + prise en compte de la variation d'échelle dans le positionnement de Celsius)
   $('.celsius').css('transform', 'scale(1.2)');
