@@ -454,7 +454,7 @@ function resetCelsius()
             $('.celsius').css('visibility', 'visible');
             $('.celsius').css('transform', 'scale(1)');
             $('.celsius').css('transition', 'transform 0.2s ease');
-          }, 100);
+          }, 200);
         }, 100);
       }, 100);
     }, 10);
