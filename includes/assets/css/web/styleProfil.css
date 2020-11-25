@@ -539,19 +539,6 @@
 }
 
 /*** Succès ***/
-.number_level
-{
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	font-family: robotomedium, Verdana, sans-serif;
-	color: #262626;
-	font-size: 60%;
-	text-align: center;
-	margin-left: -25px;
-	vertical-align: top;
-}
-
 .zone_succes_profil
 {
 	width: 100%;
@@ -572,6 +559,19 @@
 .zone_niveau_succes.masonry
 {
 	opacity: 1;
+}
+
+.number_level
+{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+	font-size: 60%;
+	text-align: center;
+	margin-left: -25px;
+	vertical-align: top;
 }
 
 .succes_liste

@@ -92,6 +92,23 @@
       echo '</div>';
     echo '</div>';
 
+    // Développement sur mobile
+    echo '<div class="event_history">';
+      echo '<div class="date_history">4 Mai 2020</div><div class="trait_history"></div>';
+
+      echo '<div class="details_history">';
+        echo 'Le temps passe, les nouveautés s\'accumulent et Inside devient de plus en plus complet. Certes il n\'a pas vocation à s\'arrêter mais malheureusement une contrainte de sécurité
+        impose son arrêt immédiat en tant que tel. La version web n\'étant plus tolérée dans son usage classique, il faut se démener pour trouver une solution. Enfin un vrai nom de
+        domaine ? Détourner l\'attention l\'aurait quand même finalement attirée. Utiliser le site tel quel sur mobile ? Pas pratique, moche et lent... Baisser les bras ? Vous connaissez
+        ma détermination, la défaite n\'est pas une option envisageable.';
+      echo '</div>';
+
+      echo '<div class="details_history">';
+        echo 'Alors on expérimente, on prend son temps pour poser les bases d\'un futur sans contraintes, un avenir radieux et toujours bienveillant. Bienvenue sur la version mobile ! Ce jour
+        marque une nouvelle révolution sur Inside et cela ne fait que commencer...';
+      echo '</div>';
+    echo '</div>';
+
     // A vous de jouer
     echo '<div class="event_history">';
       echo '<div class="date_history">' . date('j') . ' ' . formatMonthForDisplay(date('m')) . ' ' . date('Y') . '</div><div class="trait_history"></div>';

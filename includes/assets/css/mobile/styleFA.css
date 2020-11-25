@@ -2,7 +2,7 @@
 /*** Food Advisor ***/
 /********************/
 
-/*** Bande à part & sans vote***/
+/*** Bande à part & sans vote ***/
 .zone_propositions_solo_sans_vote
 {
 	display: block;
@@ -344,7 +344,7 @@
 	word-break: break-word;
 }
 
-/*** Détails (propositions & restaurants)***/
+/*** Détails (propositions & restaurants) ***/
 .image_details
 {
 	display: block;
