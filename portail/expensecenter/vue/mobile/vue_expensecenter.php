@@ -27,6 +27,9 @@
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
+      <!-- Déblocage succès -->
+      <?php include('../../includes/common/success.php'); ?>
+      
       <!-- Menus -->
       <aside>
   			<?php include('../../includes/common/aside_mobile.php'); ?>

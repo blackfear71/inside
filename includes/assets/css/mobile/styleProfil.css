@@ -508,3 +508,174 @@
   font-weight: bold;
   text-align: center;
 }
+
+/*** Niveaux ***/
+.zone_niveaux_users
+{
+	display: block;
+	width: 100%;
+}
+
+.zone_avatars_niveaux
+{
+	text-align: center;
+	background-color: #e3e3e3;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+	margin-bottom: 2vh;
+}
+
+.titre_classement_niveaux
+{
+	display: block;
+	width: 100%;
+	border-radius: 0.5vh;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+  font-size: 3vh;
+	text-align: center;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+}
+
+.number_exp
+{
+	display: inline-block;
+	width: 4.5vh;
+	height: 4.5vh;
+	line-height: 4.5vh;
+	border-radius: 50%;
+	background-color: #ff1937;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+  font-size: 3vh;
+	text-align: center;
+}
+
+.zone_user_niveaux
+{
+	display: inline-block;
+	text-align: center;
+	width: 15vh;
+	vertical-align: top;
+  margin: 0 1vh 1vh 1vh;
+}
+
+.avatar_niveau
+{
+	width: 8vh;
+	border-radius: 50%;
+	background-color: #262626;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.pseudo_niveau
+{
+	display: block;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+  font-size: 2vh;
+	word-break: break-word;
+}
+
+/*** Succès ***/
+.zone_succes_profil
+{
+	width: 100%;
+  margin-bottom: -2vh;
+}
+
+.zone_niveau_succes
+{
+	width: 100%;
+}
+
+.number_level
+{
+	display: inline-block;
+  height: 4vh;
+	width: 4vh;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2vh;
+	text-align: center;
+	margin-left: -5vh;
+  margin-right: 1vh;
+  vertical-align: middle;
+}
+
+.succes_liste
+{
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin-bottom: 2vh;
+	width: calc(50% - 5vh);
+	background-color: #e3e3e3;
+	padding: 2vh;
+	border-radius: 0.5vh;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.succes_liste_margin
+{
+  margin-right: 2vh;
+}
+
+.succes_liste_yellow
+{
+	background-color: #ffad01;
+}
+
+.medal
+{
+	float: left;
+	clear: both;
+  margin: -0.5vh 0 -4vh -1vh;
+	width: 5vh;
+  filter: drop-shadow(0 0 0.3vh #5c5c5c);
+}
+
+.logo_succes_unlocked
+{
+	width: 100%;
+	border-radius: 0.5vh;
+}
+
+.logo_succes_locked
+{
+	width: 100%;
+}
+
+.titre_succes
+{
+	margin-top: 1vh;
+	font-family: robotomedium, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+}
+
+.description_succes
+{
+	margin-top: 1vh;
+	font-family: robotolight_italic, Verdana, sans-serif;
+	color: #262626;
+  font-size: 2.5vh;
+}
+
+.fond_progression_succes
+{
+	display: block;
+	background-color: white;
+	height: 1vh;
+	width: 100%;
+	border-radius: 2vh;
+  margin-top: 2vh;
+}
+
+.progression_succes
+{
+	display: block;
+	height: 100%;
+	background-color: #ff1937;
+	border-radius: 2vh;
+}

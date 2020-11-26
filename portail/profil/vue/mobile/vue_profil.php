@@ -3,7 +3,27 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Profil';
+      switch ($_GET['view'])
+      {
+        case 'settings':
+          $titleHead = 'Paramètres';
+          break;
+
+        case 'success':
+        case 'ranking':
+          $titleHead = 'Succès';
+          break;
+
+        case 'themes':
+          $titleHead = 'Thèmes';
+          break;
+
+        case 'profile':
+        default:
+          $titleHead = 'Profil';
+          break;
+      }
+
       $styleHead      = 'styleProfil.css';
       $scriptHead     = 'scriptProfil.js';
       $angularHead    = false;
@@ -27,6 +47,9 @@
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
+      <!-- Déblocage succès -->
+      <?php include('../../includes/common/success.php'); ?>
+      
       <!-- Menus -->
       <aside>
         <?php include('../../includes/common/aside_mobile.php'); ?>
@@ -46,11 +69,8 @@
             break;
 
           case 'success':
-            $celsius = 'success';
-            break;
-
           case 'ranking':
-            $celsius = 'ranking';
+            $celsius = 'success';
             break;
 
           case 'themes':
@@ -71,7 +91,7 @@
           /*********/
           /* Titre */
           /*********/
-          echo '<div class="titre_section_mobile">' . strtoupper($titleHead) . '</div>';
+          echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
 
           /*************/
           /* Affichage */
@@ -83,13 +103,8 @@
               break;
 
             case 'success':
-              //include('vue/mobile/vue_success.php');
-              echo '<div class="empty">En cours de construction...</div>';
-              break;
-
             case 'ranking':
-              //include('vue/mobile/vue_ranking.php');
-              echo '<div class="empty">En cours de construction...</div>';
+              include('vue/mobile/vue_success.php');
               break;
 
             case 'themes':

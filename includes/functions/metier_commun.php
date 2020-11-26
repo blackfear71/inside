@@ -563,30 +563,46 @@
 
   // METIER : Formatage titres niveaux (succès)
   // RETOUR : titre niveau formaté
-  function formatTitleLvl($lvl)
+  function formatTitleLvl($level)
   {
-    $nameLvl = '';
+    $nameLevel = '';
 
-    switch ($lvl)
+    switch ($level)
     {
       case '1';
-        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Seuls les plus forts y parviendront.</div></div></div>';
+        $nameLevel = '<div class="titre_section">';
+          $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+          $nameLevel .= '<div class="number_level">' . $level . '</div>';
+          $nameLevel .= '<div class="texte_titre_section">Seuls les plus forts y parviendront.</div>';
+        $nameLevel .= '</div>';
         break;
 
       case '2';
-        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Vous êtes encore là ?</div></div>';
+        $nameLevel = '<div class="titre_section">';
+          $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+          $nameLevel .= '<div class="number_level">' . $level . '</div>';
+          $nameLevel .= '<div class="texte_titre_section">Vous êtes encore là ?</div>';
+        $nameLevel .= '</div>';
         break;
 
       case '3';
-        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div><div class="texte_titre_section">Votre charisme doit être impressionnant.</div></div>';
+        $nameLevel = '<div class="titre_section">';
+          $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+          $nameLevel .= '<div class="number_level">' . $level . '</div>';
+          $nameLevel .= '<div class="texte_titre_section">Votre charisme doit être impressionnant.</div>';
+        $nameLevel .= '</div>';
         break;
 
       default:
-        $nameLvl = '<div class="titre_section"><img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" /><div class="number_level">' . $lvl . '</div></div>';
+        $nameLevel = '<div class="titre_section">';
+          $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+          $nameLevel .= '<div class="number_level">' . $level . '</div>';
+          $nameLevel .= '<div class="texte_titre_section">Niveau ' . $level . '</div>';
+        $nameLevel .= '</div>';
         break;
     }
 
-    return $nameLvl;
+    return $nameLevel;
   }
 
   // METIER : Formatage gagnants mission

@@ -85,7 +85,7 @@ $(function()
   // Ferme au clic sur le fond
   $(document).on('click', function(event)
   {
-    // Ferme le zoom d'une image culte
+    // Ferme le zoom d'un succès
     if ($(event.target).attr('class') == 'fond_zoom_succes')
       masquerSupprimerIdWithDelay('zoom_succes');
   });

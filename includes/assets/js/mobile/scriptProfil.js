@@ -27,6 +27,14 @@ $(function()
 
     changeCheckedColor(zoneParent);
   });
+
+  // Affiche les détails d'un succès
+  $('.agrandirSucces').click(function()
+  {
+    var idSuccess = $(this).attr('id').replace('agrandir_succes_', '');
+
+    showSuccess(idSuccess);
+  });
 });
 
 /*****************/
@@ -54,4 +62,41 @@ function changeCheckedColor(zoneParent)
     zoneParent.removeClass('bouton_checked');
   else
     zoneParent.addClass('bouton_checked');
+}
+
+// Affiche le détail d'un succès débloqué
+function showSuccess(id)
+{
+  var success = listeSuccess[id];
+  var html    = '';
+
+  html += '<div id="zoom_succes" class="fond_zoom_succes" style="display: none;">';
+    // Affichage du succès
+    html += '<div class="zone_success_zoom">';
+      // Succès
+      html += '<div class="zone_succes_zoom">';
+        // Titre du succès
+        html += '<div class="titre_succes_zoom">' + success['title'] + '</div>';
+
+        // Logo du succès
+        html += '<img src="/inside/includes/images/profil/success/' + success['reference'] + '.png" alt="' + success['reference'] + '" class="logo_succes_zoom" />';
+
+        // Description du succès
+        html += '<div class="description_succes_zoom">' + success['description'] + '</div>';
+
+        // Explications du succès
+        html += '<div class="explications_succes_zoom">' + success['explanation'].replace('%limit%', success['limit_success']) + '</div>';
+      html += '</div>';
+
+      // Bouton
+      html += '<div class="zone_boutons_succes_zoom">';
+        // Bouton fermeture
+        html += '<a id="closeZoomSuccess" class="bouton_succes_zoom">Cool !</a>';
+      html += '</div>';
+    html += '</div>';
+  html += '</div>';
+
+  $('body').append(html);
+
+  $('#zoom_succes').fadeIn(200);
 }

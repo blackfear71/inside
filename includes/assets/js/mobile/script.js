@@ -82,6 +82,10 @@ $(function()
     if ($(event.target).attr('class') == 'fond_saisie'
     ||  $(event.target).attr('class') == 'fond_details')
       afficherMasquerIdWithDelay(event.target.id);
+
+    // Ferme une zone de succès
+    if ($(event.target).attr('class') == 'fond_zoom_succes')
+      masquerSupprimerIdWithDelay('zoom_succes');
   });
 
   // Bouton fermer alerte
@@ -159,6 +163,12 @@ $(function()
 
     if (idForm != '')
       resetLiveSearch(idForm);
+  });
+
+  // Fermeture zoom succès
+  $(document).on('click', '#closeZoomSuccess', function()
+  {
+    masquerSupprimerIdWithDelay('zoom_succes');
   });
 
   /*** Actions du clavier ***/

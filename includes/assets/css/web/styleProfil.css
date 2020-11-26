@@ -610,9 +610,7 @@
 
 .logo_succes_locked
 {
-	filter: grayscale(1);
 	width: 140px;
-	opacity: 0.5;
 }
 
 .titre_succes
@@ -682,8 +680,6 @@
 	vertical-align: middle;
 	width: 50px;
 	border-radius: 2px;
-	filter: grayscale(1);
-	opacity: 0.5;
 }
 
 .titre_classement

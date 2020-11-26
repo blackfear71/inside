@@ -65,7 +65,7 @@
         // Boutons
         echo '<div class="zone_boutons_succes_zoom">';
           // Bouton fermeture
-          echo '<a id="closeZoomSuccess" class="bouton_succes_zoom">Trop bien !</a>';
+          echo '<a id="closeZoomSuccess" class="bouton_succes_zoom bouton_succes_zoom_margin">Trop bien !</a>';
 
           // Bouton redirection
           echo '<a href="/inside/portail/profil/profil.php?view=success&action=goConsulter" class="bouton_succes_zoom">Voir mes succès</a>';

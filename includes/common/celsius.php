@@ -28,10 +28,6 @@
         $contenuCelsius = 'Voilà tes petites fiertés, tes contributions à toute l\'équipe de joyeux Insiders ! Allez, profite...';
         break;
 
-      case 'ranking':
-        $contenuCelsius = 'En cours de construction...';
-        break;
-
       case 'restaurants':
         $contenuCelsius = 'Ajoute tes restaurants favoris ici, allez ne sois pas timide on veut tous en profiter ! Il faut en rajouter un maximum pour que le choix soit le plus grand possible !';
         break;
@@ -41,7 +37,8 @@
         break;
 
       case 'success':
-        $contenuCelsius = 'En cours de construction...';
+      case 'ranking':
+        $contenuCelsius = 'Alors on veut faire le malin ? Bon ok, y\'a moyen... Mais fais attention ! On ne sais jamais qui peut te dépasser à ce petit jeu-là. Regarde bien où en est ton voisin. Et nargue-le pour voir.';
         break;
 
       case 'themes':

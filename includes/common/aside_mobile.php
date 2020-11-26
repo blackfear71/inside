@@ -17,6 +17,9 @@
   $listeAsideUser = array(array('lien'  => '/inside/portail/profil/profil.php?view=settings&action=goConsulter',
                                 'image' => 'settings',
                                 'titre' => 'PARAMÈTRES'),
+                          array('lien'  => '/inside/portail/profil/profil.php?view=success&action=goConsulter',
+                                'image' => 'cup',
+                                'titre' => 'SUCCÈS'),
                           array('lien'  => '/inside/includes/functions/script_commun.php?function=disconnectUser',
                                 'image' => 'logout',
                                 'titre' => 'DÉCONNEXION')
