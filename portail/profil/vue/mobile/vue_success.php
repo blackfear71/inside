@@ -44,15 +44,12 @@
   /* Succès */
   /**********/
   $levelSuccess = 0;
-  $i            = 0;
 
   echo '<div class="zone_succes_profil">';
     foreach ($listeSuccess as $keySuccess => $success)
     {
       if ($success->getLevel() != $levelSuccess)
       {
-        $i = 0;
-
         // Titre du niveau
         echo formatTitleLvl($success->getLevel());
         $levelSuccess = $success->getLevel();
@@ -63,19 +60,59 @@
 
       if ($success->getDefined() == 'Y')
       {
-        if ($i % 2 == 0)
+        if ($success->getValue_user() >= $success->getLimit_success())
+          echo '<a id="agrandir_succes_' . $success->getId() . '" class="agrandirSucces succes_liste succes_liste_yellow">';
+        else
+          echo '<div class="succes_liste">';
+
+        // Logo succès
+        if ($success->getValue_user() >= $success->getLimit_success())
         {
-          if ($success->getValue_user() >= $success->getLimit_success())
-            echo '<a id="agrandir_succes_' . $success->getId() . '" class="agrandirSucces succes_liste succes_liste_margin succes_liste_yellow">';
-          else
-            echo '<div class="succes_liste succes_liste_margin">';
+          echo '<div class="succes_unlocked">';
+            echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
+          echo '</div>';
         }
         else
         {
-          if ($success->getValue_user() >= $success->getLimit_success())
-            echo '<a id="agrandir_succes_' . $success->getId() . '" class="agrandirSucces succes_liste succes_liste_yellow">';
+          echo '<div class="succes_locked">';
+            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+          echo '</div>';
+        }
+
+        // Zone titre succès
+        if ($success->getValue_user() <= 0 OR $success->getValue_user() < $success->getLimit_success())
+        {
+          if ($success->getUnicity() != 'Y')
+          {
+            echo '<div class="zone_titre_succes zone_titre_full">';
+              // Titre succès
+              echo '<div class="titre_succes">' . formatString($success->getTitle(), 40) . '</div>';
+
+              // Barre de progression succès
+              if ($success->getValue_user() <= 0)
+                $percentSuccess = 0;
+              else
+                $percentSuccess = ($success->getValue_user() * 100) / $success->getLimit_success();
+
+              echo '<div class="fond_progression_succes">';
+                echo '<div class="progression_succes" style="width: ' . $percentSuccess . '%;"></div>';
+              echo '</div>';
+            echo '</div>';
+          }
           else
-            echo '<div class="succes_liste">';
+          {
+            echo '<div class="zone_titre_succes zone_titre_full">';
+              // Titre succès
+              echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 40) . '</div>';
+            echo '</div>';
+          }
+        }
+        else
+        {
+          echo '<div class="zone_titre_succes">';
+            // Titre succès
+            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 25) . '</div>';
+          echo '</div>';
         }
 
         // Médailles (en excluant ceux qui sont uniques)
@@ -88,15 +125,21 @@
               switch ($classement->getRank())
               {
                 case 1:
-                  echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medal" />';
+                  echo '<div class="succes_unlocked">';
+                    echo '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medaille_succes" />';
+                  echo '</div>';
                   break;
 
                 case 2:
-                  echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medal" />';
+                  echo '<div class="succes_unlocked">';
+                    echo '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medaille_succes" />';
+                  echo '</div>';
                   break;
 
                 case 3:
-                  echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medal" />';
+                  echo '<div class="succes_unlocked">';
+                    echo '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medaille_succes" />';
+                  echo '</div>';
                   break;
 
                 default:
@@ -108,32 +151,6 @@
           }
         }
 
-        // Logo succès
-        if ($success->getValue_user() >= $success->getLimit_success())
-          echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes_unlocked" />';
-        else
-          echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
-
-        // Titre succès
-        echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
-
-        // Description succès
-        if ($success->getValue_user() >= $success->getLimit_success())
-          echo '<div class="description_succes">' . $success->getDescription() . '</div>';
-
-        // Barre de progression succès
-        if ($success->getValue_user() <= 0 OR $success->getValue_user() < $success->getLimit_success())
-        {
-          if ($success->getValue_user() <= 0)
-            $percentSuccess = 0;
-          else
-            $percentSuccess = ($success->getValue_user() * 100) / $success->getLimit_success();
-
-          echo '<div class="fond_progression_succes">';
-            echo '<div class="progression_succes" style="width: ' . $percentSuccess . '%;"></div>';
-          echo '</div>';
-        }
-
         if ($success->getValue_user() >= $success->getLimit_success())
           echo '</a>';
         else
@@ -141,10 +158,7 @@
       }
       else
       {
-        if ($i % 2 == 0)
-          echo '<div class="succes_liste succes_liste_margin">';
-        else
-          echo '<div class="succes_liste">';
+        echo '<div class="succes_liste">';
           // Logo succès
           echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
 
@@ -156,8 +170,6 @@
       // Termine la zone du niveau des succès
       if (!isset($listeSuccess[$keySuccess + 1]) OR $success->getLevel() != $listeSuccess[$keySuccess + 1]->getLevel())
         echo '</div>';
-
-      $i++;
     }
   echo '</div>';
 ?>
