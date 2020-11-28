@@ -1,6 +1,6 @@
 <?php
   echo '<div class="zone_bugs">';
-    echo '<div class="titre_section"><img src="../../includes/icons/reports/alert.png" alt="alert" class="logo_titre_section" /><div class="texte_titre_section">Bugs</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" /><div class="texte_titre_section">Bugs</div></div>';
 
     if (!empty($listeBugs))
     {
