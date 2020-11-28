@@ -49,7 +49,7 @@
       else
         echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer">';
         // Logo
-        echo '<img src="/inside/includes/icons/common/bug.png" alt="bug" title="Signaler un bug" class="icone_footer" />';
+        echo '<img src="/inside/includes/icons/common/alert.png" alt="alert" title="Signaler un bug" class="icone_footer" />';
 
         // Compteur
         echo '<div class="zone_compteur_footer"></div>';

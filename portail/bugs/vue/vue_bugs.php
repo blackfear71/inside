@@ -47,7 +47,7 @@
           /*******************/
           echo '<div class="zone_liens_saisie">';
             echo '<a id="ajouterRapport" title="Rapporter un bug ou une évolution" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/bug.png" alt="bug" class="image_lien" /></div>';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/alert.png" alt="alert" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Rapporter un bug ou une évolution</div>';
             echo '</a>';
           echo '</div>';

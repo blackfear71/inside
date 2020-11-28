@@ -117,11 +117,11 @@
                     switch ($alerte->getType())
                     {
                       case 'info':
-                        echo '<img src="../../includes/icons/common/info.png" alt="info" title="Info" class="img_alert" />';
+                        echo '<img src="../../includes/icons/common/information.png" alt="information" title="Information" class="img_alert" />';
                         break;
 
                       case 'erreur':
-                        echo '<img src="../../includes/icons/common/bug.png" alt="erreur" title="Erreur" class="img_alert" />';
+                        echo '<img src="../../includes/icons/common/alert.png" alt="alert" title="Alerte" class="img_alert" />';
                         break;
 
                       default:
