@@ -74,14 +74,14 @@
               $anneeDebut = date('Y') - 2;
               $anneeFin   = date('Y') + 2;
 
-              echo '<div class="titre_section"><img src="../../includes/icons/common/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir un calendrier</div></div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir un calendrier</div></div>';
 
               echo '<div class="zone_saisie_calendrier">';
                 echo '<form method="post" action="calendars.php?action=doAjouter" enctype="multipart/form-data">';
                   // Listbox mois
                   echo '<select name="months" class="listbox" required>';
                     echo '<option value="" disabled selected hidden>Mois</option>';
-                    
+
                     foreach ($listeMois as $number => $month)
                     {
                       echo '<option value="' . $number . '">' . $month . '</option>';
