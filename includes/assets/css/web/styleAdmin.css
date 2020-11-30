@@ -492,7 +492,7 @@
 	border-radius: 5px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/cancel.png");
-	background-size: 30px 30px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -2545,7 +2545,7 @@
 	height: 30px;
 	border: 0;
 	background-image: url("/inside/includes/icons/common/cancel.png");
-	background-size: 30px 30px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-color: transparent;
@@ -2841,7 +2841,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/cancel.png");
-	background-size: 30px 30px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;

@@ -56,7 +56,7 @@
 
           // Avatar
           echo '<div class="zone_avatar_details">';
-              echo '<img src="../../includes/icons/common/default.png" alt="avatar" id="caller_details_propositions" class="avatar_caller_details" />';
+            echo '<img src="../../includes/icons/common/default.png" alt="avatar" id="caller_details_propositions" class="avatar_caller_details" />';
           echo '</div>';
         echo '</div>';
 
