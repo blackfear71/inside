@@ -138,10 +138,18 @@
                     // Participation / vue
                     echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doParticiperFilm" class="form_participation">';
                       echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
+
                       // Je participe
-                      echo '<input type="submit" name="participate" value="" title="Je participe !" class="input_participate" />';
+                      if ($film->getParticipation() == 'P')
+                        echo '<input type="submit" name="participate" value="" title="Je participe !" class="input_participate_yes" />';
+                      else
+                        echo '<input type="submit" name="participate" value="" title="Je participe !" class="input_participate_no" />';
+
                       // J'ai vu
-                      echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="input_seen" />';
+                      if ($film->getParticipation() == 'S')
+                        echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="input_seen_yes" />';
+                      else
+                        echo '<input type="submit" name="seen" value="" title="J\'ai vu !" class="input_seen_no" />';
                     echo '</form>';
                   }
                 echo '</div>';

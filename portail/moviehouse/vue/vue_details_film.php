@@ -177,7 +177,7 @@
                       }
                       else
                       {
-                        echo '<img src="../../includes/icons/moviehouse/participate.png" alt="participate" class="star_vote" />';
+                        echo '<img src="../../includes/icons/moviehouse/participate_grey.png" alt="participate" class="star_vote" />';
                         echo '<input type="submit" name="participate" class="input_vote" />';
                       }
 
@@ -189,7 +189,7 @@
                       }
                       else
                       {
-                        echo '<img src="../../includes/icons/moviehouse/seen.png" alt="seen" class="star_vote" />';
+                        echo '<img src="../../includes/icons/moviehouse/view_grey.png" alt="seen" class="star_vote" />';
                         echo '<input type="submit" name="seen" class="input_vote" />';
                       }
 
