@@ -354,10 +354,10 @@
 
 .icone_checkbox
 {
-	max-height: 20px;
-	max-width: 100%;
-	margin-top: -4px;
 	vertical-align: middle;
+	max-height: 30px;
+	max-width: 100%;
+	margin-bottom: 2.5px;
 }
 
 .zone_saisie_menu
@@ -1004,8 +1004,7 @@
 .image_proposition_top
 {
 	width: 150px;
-	filter: drop-shadow(0px 0px 2px #7c7c7c);
-	border-radius: 50%;
+	filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .image_lieu_proposition
@@ -1218,8 +1217,7 @@
 .image_mon_choix
 {
 	width: 100px;
-	filter: drop-shadow(0px 0px 3px #7c7c7c);
-	border-radius: 50%;
+	filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .nom_mon_choix
@@ -1253,6 +1251,7 @@
 .zone_ouverture_mes_choix
 {
 	display: block;
+	margin-bottom: 10px;
 }
 
 .jour_oui_fa
@@ -1264,7 +1263,6 @@
 	background-color: #262626;
 	margin-left: 1.5px;
 	margin-right: 1.5px;
-	margin-bottom: 10px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 80%;
@@ -1283,7 +1281,6 @@
 	background-color: #e3e3e3;
 	margin-left: 1.5px;
 	margin-right: 1.5px;
-	margin-bottom: 10px;
 	border-radius: 2px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 80%;
@@ -1333,7 +1330,7 @@
 .icone_mon_choix
 {
 	display: inline-block;
-	height: 20px;
+	height: 25px;
 	vertical-align: middle;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -2261,8 +2258,12 @@
 	width: 80px;
 	height: 80px;
 	padding: 10px;
+	filter: drop-shadow(0px 0px 1px #7c7c7c);
+}
+
+.image_rounded
+{
 	border-radius: 50%;
-	filter: drop-shadow(0px 0px 2px #7c7c7c);
 }
 
 .zone_fiche_middle

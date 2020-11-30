@@ -108,8 +108,7 @@
 {
 	width: 6vh;
 	height: 6vh;
-	filter: drop-shadow(0 0 0.3vh #7c7c7c);
-	border-radius: 50%;
+	filter: drop-shadow(0 0 0.1vh #7c7c7c);
 }
 
 .image_determined
@@ -140,6 +139,11 @@
 	height: 6vh;
 	padding: 1vh;
 	background-color: #d3d3d3;
+}
+
+.image_rounded
+{
+	border-radius: 50%;
 }
 
 .reserved_proposition
@@ -352,8 +356,7 @@
 	margin-right: auto;
 	margin-bottom: 1vh;
 	width: 25vh;
-	filter: drop-shadow(0 0 0.3vh #7c7c7c);
-	border-radius: 50%;
+	filter: drop-shadow(0 0 0.1vh #7c7c7c);
 }
 
 .reserved_details
@@ -745,8 +748,7 @@
 {
 	width: 6vh;
 	height: 6vh;
-	filter: drop-shadow(0 0 0.3vh #7c7c7c);
-	border-radius: 50%;
+	filter: drop-shadow(0 0 0.1vh #7c7c7c);
 }
 
 .form_saisie_rapide

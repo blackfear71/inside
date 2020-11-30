@@ -31,7 +31,7 @@
           // Image + lien
           echo '<a href="restaurants.php?action=goConsulter&anchor=' . $choixJour->getId_restaurant() . '" class="lien_mon_choix">';
             if (!empty($choixJour->getPicture()))
-              echo '<img src="../../includes/images/foodadvisor/' . $choixJour->getPicture() . '" alt="' . $choixJour->getPicture() . '" title="' . $choixJour->getName() . '" class="image_mon_choix" />';
+              echo '<img src="../../includes/images/foodadvisor/' . $choixJour->getPicture() . '" alt="' . $choixJour->getPicture() . '" title="' . $choixJour->getName() . '" class="image_mon_choix image_rounded" />';
             else
               echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $choixJour->getName() . '" class="image_mon_choix" />';
           echo '</a>';

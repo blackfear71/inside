@@ -27,7 +27,7 @@
             // Image
             echo '<div class="image_normal">';
               if (!empty($monChoix->getPicture()))
-                echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_proposition" />';
+                echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_proposition image_rounded" />';
               else
                 echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $monChoix->getName() . '" class="image_proposition" />';
             echo '</div>';

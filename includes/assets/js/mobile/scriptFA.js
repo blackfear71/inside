@@ -273,12 +273,14 @@ function showDetailsProposition(idProposition)
     $('.image_details').attr('src', '../../includes/images/foodadvisor/' + proposition['picture']);
     $('.image_details').attr('alt', proposition['picture']);
     $('.image_details').attr('title', proposition['name']);
+    $('.image_details').addClass('image_rounded');
   }
   else
   {
     $('.image_details').attr('src', '../../includes/icons/foodadvisor/restaurants.png');
     $('.image_details').attr('alt', 'restaurants');
     $('.image_details').attr('title', proposition['name']);
+    $('.image_details').removeClass('image_rounded');
   }
 
   // Indicateur réservation
@@ -636,12 +638,14 @@ function showDetailsRestaurant(idRestaurant)
     $('.image_details').attr('src', '../../includes/images/foodadvisor/' + restaurant['picture']);
     $('.image_details').attr('alt', restaurant['picture']);
     $('.image_details').attr('title', restaurant['name']);
+    $('.image_details').addClass('image_rounded');
   }
   else
   {
     $('.image_details').attr('src', '../../includes/icons/foodadvisor/restaurants.png');
     $('.image_details').attr('alt', 'restaurants');
     $('.image_details').attr('title', restaurant['name']);
+    $('.image_details').removeClass('image_rounded');
   }
 
   // Jours d'ouverture

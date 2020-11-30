@@ -831,7 +831,7 @@ function addChoice(id, zone)
       break;
 
     case 4:
-      icon = 'feet';
+      icon = 'phone';
       break;
 
     case 5:
@@ -1083,9 +1083,15 @@ function showDetails(zone, id)
 
   // Image restaurant
   if (details['picture'] != '')
+  {
     $('#image_details_proposition').attr('src', '../../includes/images/foodadvisor/' + details['picture']);
+    $('#image_details_proposition').addClass('image_rounded');
+  }
   else
+  {
     $('#image_details_proposition').attr('src', '../../includes/icons/foodadvisor/restaurants.png');
+    $('#image_details_proposition').removeClass('image_rounded');
+  }
 
   // Nom du restaurant
   $('#nom_details_proposition').html(details['name']);

@@ -70,7 +70,7 @@
             // Image + lien
             echo '<a href="restaurants.php?action=goConsulter&anchor=' . $monChoix->getId_restaurant() . '" class="lien_mon_choix">';
               if (!empty($monChoix->getPicture()))
-                echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_mon_choix" />';
+                echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_mon_choix image_rounded" />';
               else
                 echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $monChoix->getName() . '" class="image_mon_choix" />';
             echo '</a>';
@@ -194,7 +194,7 @@
                 // Image + lien
                 echo '<div class="lien_mon_choix">';
                   if (!empty($monChoix->getPicture()))
-                    echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_mon_choix" />';
+                    echo '<img src="../../includes/images/foodadvisor/' . $monChoix->getPicture() . '" alt="' . $monChoix->getPicture() . '" title="' . $monChoix->getName() . '" class="image_mon_choix image_rounded" />';
                   else
                     echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $monChoix->getName() . '" class="image_mon_choix" />';
                 echo '</div>';
