@@ -31,7 +31,7 @@
                 echo '<div id="logo" class="zone_logo_index" style="display: none;">';
               else
                 echo '<div id="logo" class="zone_logo_index">';
-                echo '<img src="includes/icons/common/inside_index.png" alt="inside_index" class="logo_index" />';
+                echo '<img src="includes/images/index/inside_index.png" alt="inside_index" class="logo_index" />';
               echo '</div>';
 
               // Texte inscription
