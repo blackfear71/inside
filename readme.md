@@ -1,9 +1,9 @@
-![INSIDE](http://77.153.236.140/inside/includes/icons/common/inside_readme.png)
+![INSIDE](http://77.150.63.94/inside/includes/icons/common/inside_readme.png)
 
 # INSIDE - Plateforme de partage créée par les membres pour les membres.
 
 ## Lien
-Site accessible depuis le lien suivant : [INSIDE](http://77.153.236.140/inside/)
+Site accessible depuis le lien suivant : [INSIDE](http://77.150.63.94/inside/)
 
 ## Fonctionnalités
 - PORTAIL : liens vers les sections et news
