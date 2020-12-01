@@ -88,6 +88,67 @@ function showSuccess(id)
         html += '<div class="explications_succes_zoom">' + success['explanation'].replace('%limit%', success['limit_success']) + '</div>';
       html += '</div>';
 
+      // Classement
+      if (success.classement.length)
+      {
+        var previousRank = 0;
+        // Zone classement
+        html += '<div class="zone_classement_zoom">';
+          // Titre
+          html += '<div class="titre_classement_zoom">Classement</div>';
+
+          // Classement
+          html += '<div class="zone_classement_users_zoom">';
+            $.each(success.classement, function(key, ranking)
+            {
+              // Zone médaille
+              if (ranking.rank != previousRank)
+              {
+                previousRank = ranking.rank;
+
+                // Médaille
+                switch (ranking.rank)
+                {
+                  case '1':
+                    html += '<img src="../../includes/icons/common/medals/or.png" alt="or" class="medaille_classement_zoom" />';
+                    break;
+
+                  case '2':
+                    html += '<img src="../../includes/icons/common/medals/argent.png" alt="argent" class="medaille_classement_zoom" />';
+                    break;
+
+                  case '3':
+                    html += '<img src="../../includes/icons/common/medals/bronze.png" alt="bronze" class="medaille_classement_zoom" />';
+                    break;
+
+                  default:
+                    break;
+                }
+
+                // Zone
+                html += '<div class="zone_classement_medaille_zoom">';
+              }
+
+              // Avatar
+              var avatarFormatted = formatAvatar(ranking.avatar, ranking.pseudo, 2, 'avatar');
+
+              html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_classement_zoom" />';
+
+              // Séparation et fin de la zone
+              if (success.classement[key + 1] == undefined || ranking.rank != success.classement[key + 1].rank)
+              {
+                // Fin de la zone
+                html += '</div>';
+
+                // Séparation
+                if (success.classement[key + 1] != undefined)
+                  html += '<div class="separation_classement_zoom"></div>';
+              }
+            });
+          html += '</div>';
+        html += '</div>';
+      }
+
       // Bouton
       html += '<div class="zone_boutons_succes_zoom">';
         // Bouton fermeture

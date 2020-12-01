@@ -619,8 +619,6 @@
 	background-color: #ffad01;
 }
 
-
-
 .succes_unlocked
 {
   display: inline-block;
@@ -699,4 +697,72 @@
 	height: 100%;
 	background-color: #ff1937;
 	border-radius: 2vh;
+}
+
+/*** Classement ***/
+.zone_classement_zoom
+{
+  display: block;
+  width: 100%;
+  border-radius: 0.5vh;
+  overflow: hidden;
+  margin-bottom: 2vh;
+}
+
+.titre_classement_zoom
+{
+  display: block;
+  width: 100%;
+  background-color: #d3d3d3;
+  font-family: robotolight, Verdana, sans-serif;
+  color: #262626;
+  font-size: 3vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.zone_classement_users_zoom
+{
+  display: block;
+  width: calc(100% - 4vh);
+  background-color: white;
+  padding: 2vh 2vh 0 2vh;
+}
+
+.medaille_classement_zoom
+{
+	display: inline-block;
+	width: 5vh;
+	height: 5vh;
+	vertical-align: top;
+  filter: drop-shadow(0 0 0.2vh #5c5c5c);
+}
+
+.zone_classement_medaille_zoom
+{
+	display: inline-block;
+	width: calc(100% - 5vh);
+}
+
+.avatar_classement_zoom
+{
+	display: inline-block;
+  width: 5vh;
+	height: 5vh;
+	vertical-align: middle;
+  margin-left: 1vh;
+	margin-right: 1vh;
+	margin-bottom: 2vh;
+	border-radius: 50%;
+	background-color: #262626;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.separation_classement_zoom
+{
+  display: block;
+  margin-bottom: 2vh;
+  width: 100%;
+  height: 0.2vh;
+  background-color: #d3d3d3;
 }

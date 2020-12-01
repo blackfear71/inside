@@ -482,9 +482,25 @@
                                   'title'         => $succes->getTitle(),
                                   'description'   => $succes->getDescription(),
                                   'limit_success' => $succes->getLimit_success(),
-                                  'explanation'   => $succes->getExplanation()
+                                  'explanation'   => $succes->getExplanation(),
+                                  'classement'    => array()
                                  );
 
+        $classementSucces = array();
+
+        foreach ($succes->getClassement() as $classement)
+        {
+          $classementUser = array('identifiant' => $classement->getIdentifiant(),
+                                  'pseudo'      => $classement->getPseudo(),
+                                  'avatar'      => $classement->getAvatar(),
+                                  'value'       => $classement->getValue(),
+                                  'rank'        => $classement->getRank()
+                                 );
+
+          array_push($classementSucces, $classementUser);
+        }
+
+        $succesAConvertir['classement'] = $classementSucces;
         $listeSuccesAConvertir[$succes->getId()] = $succesAConvertir;
       }
     }
