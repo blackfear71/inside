@@ -766,7 +766,9 @@
 
 .icone_depense
 {
-	width: 30px;
+	width: 25px;
+	height: 25px;
+	margin-top: 2.5px;
 	vertical-align: middle;
 }
 

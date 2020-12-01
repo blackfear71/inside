@@ -1124,7 +1124,8 @@
 .icon_details
 {
 	vertical-align: bottom;
-	width: 30px;
+	width: 25px;
+	height: 25px;
 }
 
 .icon_details_delete
@@ -1519,7 +1520,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/edit.png");
-	background-size: 30px 30px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -1538,7 +1539,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/delete.png");
-	background-size: 25px 25px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -1556,7 +1557,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/validate.png");
-	background-size: 30px 30px;
+	background-size: 25px 25px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;

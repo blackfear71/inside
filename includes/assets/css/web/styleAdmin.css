@@ -511,7 +511,7 @@
 	border-radius: 5px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/validate.png");
-	background-size: 30px 30px;
+	background-size: 25px 25px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -1544,7 +1544,7 @@
 	height: 30px;
 	background-color: #d3d3d3;
 	background-image: url("/inside/includes/icons/common/delete_grey.png");
-	background-size: 25px 25px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -2459,7 +2459,7 @@
 	width: 30px;
 	height: 30px;
 	background-image: url("/inside/includes/icons/common/edit.png");
-	background-size: 30px 30px;
+	background-size: 25px 25px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-color: transparent;
@@ -2530,7 +2530,7 @@
 	height: 30px;
 	border: 0;
 	background-image: url("/inside/includes/icons/common/validate.png");
-	background-size: 30px 30px;
+	background-size: 25px 25px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-color: transparent;
@@ -2787,7 +2787,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/edit.png");
-	background-size: 30px 30px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -2805,7 +2805,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/delete.png");
-	background-size: 25px 25px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -2823,7 +2823,7 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/validate.png");
-	background-size: 30px 30px;
+	background-size: 25px 25px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
