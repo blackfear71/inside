@@ -327,7 +327,7 @@ function updateExpense(idDepense, year)
   }
 
   // Acheteur
-  var buyer   = depense['buyer'];
+  var buyer = depense['buyer'];
 
   // Prix ou frais
   if (type == 'M')

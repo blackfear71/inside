@@ -797,7 +797,7 @@ function formatAmountForDisplay(amount, withCurrency)
     var amountNumeric = parseFloat(amount.replace(',', '.'));
 
     // Calcul arrondi inférieur
-    var amountRounded = Math.floor(amountNumeric * 100) / 100;
+    var amountRounded = Math.round(amountNumeric * 100) / 100;
 
     // Formatage en chaîne avec 2 chiffres après la virgule
     var amountFormatted = amountRounded.toFixed(2).toString().replace('.', ',') + currency;
