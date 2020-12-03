@@ -417,7 +417,8 @@
       if (empty($frais))
         $frais = 0;
 
-      $bilanAcheteur += formatAmountForInsert($montantTotal + $frais - (($montantTotal * $reduction) / 100));
+      $montantTotalBase = formatAmountForInsert($montantTotal + $frais - (($montantTotal * $reduction) / 100));
+      $bilanAcheteur   += $montantTotalBase;
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($buyer, $bilanAcheteur);
@@ -436,6 +437,8 @@
       $nombreTotalUsers = count($listeMontants);
 
       // Insertion des montants & mise à jour du bilan pour chaque utilisateur
+      $montantTotalInsert = 0;
+
       foreach ($listeMontants as $identifiant => $montant)
       {
         // Calcul du montant de l'utilisateur avec la réduction (tronqué à 2 chiffres après la virgule)
@@ -464,6 +467,61 @@
 
         // Génération succès (total max)
         insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
+
+        // Ajout au total des montants insérés pour vérification
+        $montantTotalInsert += $montantUser + ($frais / $nombreTotalUsers);
+      }
+
+      // Calcul de l'écart entre le montant réel et la somme des montants inséré
+      $ecartMontantTotal = abs($montantTotalBase - $montantTotalInsert);
+
+      // Vérification écart entre dépense totale et dépenses stockées (les nombres flotants impliquent une perte de précision lors des calculs)
+      if ($ecartMontantTotal >= 0.01)
+      {
+        $userFounded = false;
+
+        if (isset($listeMontants[$buyer]))
+        {
+          // Récupération des informations de l'acheteur
+          $user = physiqueUser($buyer);
+
+          // L'acheteur prend en charge l'éventuel écart (centimes arrondis)
+          $userEcart   = $buyer;
+          $newBilan    = $user->getExpenses() - $ecartMontantTotal;
+          $userFounded = true;
+        }
+        else
+        {
+          // Par défault le premier utilisateur inscrit ayant une part prend en charge l'éventuel écart (centimes arrondis)
+          foreach ($listeMontants as $identifiant => $montant)
+          {
+            // Récupération des informations de l'utilisateur courant
+            $user = physiqueUser($identifiant);
+
+            // On arrête la boucle pour sélectionner le premier utilisateur inscrit
+            if (!empty($user))
+            {
+              $userEcart   = $identifiant;
+              $newBilan    = $user->getExpenses() - $ecartMontantTotal;
+              $userFounded = true;
+              break;
+            }
+          }
+
+          // Si les parts ne concernent que des utilisateurs désinscrits, on sélectionne le premier
+          if (empty($userEcart) AND $userFounded != true)
+            $userEcart = array_key_first($listeMontants);
+        }
+
+        // Formatage de l'écart
+        $montantEcart = formatAmountForInsert(formatAmountForInsert($listeMontants[$userEcart]) * ((100 - $reduction) / 100) + $ecartMontantTotal);
+
+        // Mise à jour de la part de l'utilisateur
+        physiqueUpdatePart($idDepense, $userEcart, $montantEcart);
+
+        // Mise à jour du bilan de l'utilisateur (si trouvé)
+        if ($userFounded == true)
+          physiqueUpdateBilan($userEcart, $newBilan);
       }
 
       // Génération succès (pour l'acheteur)
@@ -848,7 +906,8 @@
       if (empty($newFrais))
         $newFrais = 0;
 
-      $bilanNewAcheteur += formatAmountForInsert($newMontantTotal + $newFrais - (($newMontantTotal * $newReduction) / 100));
+      $newMontantTotalBase = formatAmountForInsert($newMontantTotal + $newFrais - (($newMontantTotal * $newReduction) / 100));
+      $bilanNewAcheteur   += $newMontantTotalBase;
 
       // Modification de l'enregistrement en base
       physiqueUpdateBilan($newBuyer, $bilanNewAcheteur);
@@ -867,6 +926,8 @@
       $newNombreTotalUsers = count($newListeMontants);
 
       // Insertions des nouveaux montants & mise à jour du bilan pour chaque utilisateur
+      $newMontantTotalInsert = 0;
+
       foreach ($newListeMontants as $identifiant => $montant)
       {
         // Calcul du montant de l'utilisateur avec la réduction
@@ -883,7 +944,7 @@
         // Récupération des données utilisateur
         $user = physiqueUser($identifiant);
 
-        // Traitement de l'utilisateur
+        // Traitement de l'utilisateur (si toujours inscrit)
         if (!empty($user))
         {
           $bilanUser = $user->getExpenses();
@@ -900,6 +961,61 @@
           // Génération succès (total max)
           insertOrUpdateSuccesValue('greedy', $identifiant, $bilanUser);
         }
+
+        // Ajout au total des montants insérés pour vérification
+        $newMontantTotalInsert += $montantUser + ($newFrais / $newNombreTotalUsers);
+      }
+
+      // Calcul de l'écart entre le montant réel et la somme des montants inséré
+      $newEcartMontantTotal = abs($newMontantTotalBase - $newMontantTotalInsert);
+
+      // Vérification écart entre dépense totale et dépenses stockées (les nombres flotants impliquent une perte de précision lors des calculs)
+      if ($newEcartMontantTotal >= 0.01)
+      {
+        $userFounded = false;
+
+        if (isset($newListeMontants[$newBuyer]))
+        {
+          // Récupération des informations de l'acheteur
+          $user = physiqueUser($newBuyer);
+
+          // L'acheteur prend en charge l'éventuel écart (centimes arrondis)
+          $userEcart   = $newBuyer;
+          $newBilan    = $user->getExpenses() - $newEcartMontantTotal;
+          $userFounded = true;
+        }
+        else
+        {
+          // Par défault le premier utilisateur inscrit ayant une part prend en charge l'éventuel écart (centimes arrondis)
+          foreach ($newListeMontants as $identifiant => $montant)
+          {
+            // Récupération des informations de l'utilisateur courant
+            $user = physiqueUser($identifiant);
+
+            // On arrête la boucle pour sélectionner le premier utilisateur inscrit
+            if (!empty($user))
+            {
+              $userEcart   = $identifiant;
+              $newBilan    = $user->getExpenses() - $newEcartMontantTotal;
+              $userFounded = true;
+              break;
+            }
+          }
+
+          // Si les parts ne concernent que des utilisateurs désinscrits, on sélectionne le premier
+          if (empty($userEcart) AND $userFounded != true)
+            $userEcart = array_key_first($newListeMontants);
+        }
+
+        // Formatage de l'écart
+        $newMontantEcart = formatAmountForInsert(formatAmountForInsert($newListeMontants[$userEcart]) * ((100 - $newReduction) / 100) + $newEcartMontantTotal);
+
+        // Mise à jour de la part de l'utilisateur
+        physiqueUpdatePart($idDepense, $userEcart, $newMontantEcart);
+
+        // Mise à jour du bilan de l'utilisateur (si trouvé)
+        if ($userFounded == true)
+          physiqueUpdateBilan($userEcart, $newBilan);
       }
 
       // Génération succès (pour l'acheteur si modifié)

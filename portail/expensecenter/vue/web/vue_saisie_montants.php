@@ -40,7 +40,7 @@
             echo '<input type="number" name="reduction" value="' . $_SESSION['save']['reduction'] . '" autocomplete="off" placeholder="Réduction" min="1" max="100" class="saisie_reduction" />';
             echo '<img src="../../includes/icons/expensecenter/percent_grey.png" alt="percent_grey" title="Pourcentage" class="euro" />';
           echo '</div>';
-          
+
           // Date
           echo '<input type="text" name="date_expense" value="' . $_SESSION['save']['date_expense'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_montants" class="saisie_date_depense" required />';
 
@@ -64,9 +64,17 @@
           // Explications
           echo '<div id="explications_montants" class="explications" style="display: none;">';
             echo 'Vous pouvez saisir ici une dépense en montants ainsi que les éventuels frais additonnels associés (frais de livraison, réduction).
-            <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.
-            Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants.
-            Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';
+            <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.';
+
+            echo '<br /><br />';
+
+            echo 'Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants. En cas de réduction du prix, lors du calcul de chaque part
+            un arrondi est appliqué. Si une différence est constatée entre le montant réellement payé et le montant total calculé, la différence est ajoutée au montant de l\'acheteur ou s\'il
+            ne participe pas au premier utilisateur ayant une part.';
+
+            echo '<br /><br />';
+
+            echo 'Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';
           echo '</div>';
 
           // Montants

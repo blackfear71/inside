@@ -57,9 +57,17 @@
           // Explications
           echo '<div id="afficher_explications_montants" class="texte_explications_montants" style="display: none;">';
             echo 'Vous pouvez saisir ici une dépense en montants ainsi que les éventuels frais additonnels associés (frais de livraison, réduction).
-            <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.
-            Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants.
-            Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';
+            <strong>Seules des montants positifs peuvent être saisis et au moins 1 montant doit être saisi</strong>.';
+
+            echo '<br /><br />';
+
+            echo 'Les frais ne peuvent être également que positifs et seront répartis équitablement entre tous les participants. En cas de réduction du prix, lors du calcul de chaque part
+            un arrondi est appliqué. Si une différence est constatée entre le montant réellement payé et le montant total calculé, la différence est ajoutée au montant de l\'acheteur ou s\'il
+            ne participe pas au premier utilisateur ayant une part.';
+
+            echo '<br /><br />';
+
+            echo 'Il n\'est pas possible de faire de régularisation avec cette saisie, veuillez utiliser la saisie en parts pour cela.';
           echo '</div>';
 
           // Titre

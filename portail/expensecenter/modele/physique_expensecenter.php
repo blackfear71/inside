@@ -309,6 +309,24 @@
     $req->closeCursor();
   }
 
+  // PHYSIQUE : Mise à jour part
+  // RETOUR : Aucun
+  function physiqueUpdatePart($idDepense, $identifiant, $depense)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE expense_center_users
+                          SET parts = :parts
+                          WHERE id_expense = ' . $idDepense . ' AND identifiant = "' . $identifiant . '"');
+
+    $req->execute(array(
+      'parts' => $depense
+    ));
+
+    $req->closeCursor();
+  }
+
   /****************************************************************************/
   /********************************** DELETE **********************************/
   /****************************************************************************/
