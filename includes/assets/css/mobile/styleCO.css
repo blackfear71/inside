@@ -295,9 +295,8 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 3vh;
 	color: #262626;
-	width: 100%;
-  padding-top: 1vh;
-	padding-bottom: 1vh;
+	width: calc(100% - 4vh);
+  padding: 1vh 2vh 1vh 2vh;
 	word-wrap: break-word;
 }
 
