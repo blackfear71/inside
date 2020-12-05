@@ -473,10 +473,10 @@
       }
 
       // Calcul de l'écart entre le montant réel et la somme des montants inséré
-      $ecartMontantTotal = abs($montantTotalBase - $montantTotalInsert);
+      $ecartMontantTotal = $montantTotalBase - $montantTotalInsert;
 
       // Vérification écart entre dépense totale et dépenses stockées (les nombres flotants impliquent une perte de précision lors des calculs)
-      if ($ecartMontantTotal >= 0.01)
+      if (abs($ecartMontantTotal) >= 0.01)
       {
         $userFounded = false;
 
@@ -967,10 +967,10 @@
       }
 
       // Calcul de l'écart entre le montant réel et la somme des montants inséré
-      $newEcartMontantTotal = abs($newMontantTotalBase - $newMontantTotalInsert);
+      $newEcartMontantTotal = $newMontantTotalBase - $newMontantTotalInsert;
 
       // Vérification écart entre dépense totale et dépenses stockées (les nombres flotants impliquent une perte de précision lors des calculs)
-      if ($newEcartMontantTotal >= 0.01)
+      if (abs($newEcartMontantTotal) >= 0.01)
       {
         $userFounded = false;
 
