@@ -27,7 +27,7 @@ $(function()
   // Réinitialise la saisie dépense à la fermeture
   $('#resetDepense').click(function()
   {
-    resetSaisie('zone_add_depense', $_GET('year'), 'P');
+    resetSaisie('zone_add_depense', $_GET('year'), $_GET('filter'), 'P');
   });
 
   // Ajouter des montants
@@ -40,7 +40,7 @@ $(function()
   // Réinitialise la saisie montants à la fermeture
   $('#resetMontants').click(function()
   {
-    resetSaisie('zone_add_montants', $_GET('year'), 'M');
+    resetSaisie('zone_add_montants', $_GET('year'), $_GET('filter'), 'M');
   });
 
   // Ferme au clic sur le fond
@@ -52,11 +52,11 @@ $(function()
       switch (event.target.id)
       {
         case 'zone_add_depense':
-          resetSaisie('zone_add_depense', $_GET('year'), 'P');
+          resetSaisie('zone_add_depense', $_GET('year'), $_GET('filter'), 'P');
           break;
 
         case 'zone_add_montants':
-          resetSaisie('zone_add_montants', $_GET('year'), 'M');
+          resetSaisie('zone_add_montants', $_GET('year'), $_GET('filter'), 'M');
           break;
 
         default:
@@ -123,7 +123,7 @@ $(function()
   {
     var idDepense = $(this).attr('id').replace('modifier_depense_', '');
 
-    updateExpense(idDepense, $_GET('year'));
+    updateExpense(idDepense, $_GET('year'), $_GET('filter'));
   });
 
   /*** Actions à la saisie ***/
@@ -133,6 +133,13 @@ $(function()
     var idUser = $(this).attr('id').replace('montant_user_', '');
 
     saisirMontant('zone_user_montant_' + idUser, 'montant_user_' + idUser, $(this).val());
+  });
+
+  /*** Actions au changement ***/
+  // Applique les filtres
+  $('#applyFilter').on('change', function()
+  {
+    applyFilter($_GET('year'), $(this).val());
   });
 
   /*** Calendriers ***/
@@ -296,7 +303,7 @@ function saisirMontant(zone, montant, value)
 }
 
 // Affiche la zone de mise à jour d'une dépense
-function updateExpense(idDepense, year)
+function updateExpense(idDepense, year, filter)
 {
   // Récupération des données
   var depense = listeDepenses[idDepense];
@@ -308,9 +315,9 @@ function updateExpense(idDepense, year)
 
   // Action du formulaire
   if (type == 'M')
-    action = 'expensecenter.php?year=' + year + '&action=doModifierMontants';
+    action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doModifierMontants';
   else
-    action = 'expensecenter.php?year=' + year + '&action=doModifier';
+    action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doModifier';
 
   // Date du jour
   var date = formatDateForDisplay(depense['date']);
@@ -490,7 +497,7 @@ function updateExpense(idDepense, year)
 }
 
 // Réinitialise la zone de saisie d'une dépense si fermeture modification
-function resetSaisie(zone, year, type)
+function resetSaisie(zone, year, filter, type)
 {
   // Fermeture zone de saisie
   afficherMasquerIdWithDelay(zone);
@@ -509,7 +516,7 @@ function resetSaisie(zone, year, type)
       if (type == 'M')
       {
         // Action du formulaire
-        action = 'expensecenter.php?year=' + year + '&action=doInsererMontants';
+        action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doInsererMontants';
 
         // Titre
         titre = 'Saisir des montants';
@@ -520,7 +527,7 @@ function resetSaisie(zone, year, type)
       else
       {
         // Action du formulaire
-        action = 'expensecenter.php?year=' + year + '&action=doInserer';
+        action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doInserer';
 
         // Titre
         titre = 'Saisir une dépense';
@@ -611,4 +618,10 @@ function resetSaisie(zone, year, type)
     // Réinitialisation de la masonry
     $('.zone_saisie_utilisateurs').masonry().masonry('destroy');
   }, 200);
+}
+
+// Redirige pour appliquer le filtre
+function applyFilter(year, filter)
+{
+  document.location.href = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=goConsulter';
 }

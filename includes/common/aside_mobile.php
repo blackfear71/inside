@@ -6,7 +6,7 @@
                              array('lien'  => '/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter',
                                    'image' => 'food_advisor',
                                    'titre' => 'LES ENFANTS ! À TABLE !'),
-                             array('lien'  => '/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter',
+                             array('lien'  => '/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '$filter=all&action=goConsulter',
                                    'image' => 'expense_center',
                                    'titre' => 'EXPENSE CENTER'),
                              array('lien'  => '/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',

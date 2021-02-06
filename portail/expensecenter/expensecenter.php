@@ -27,9 +27,10 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Contrôle si l'année est renseignée et numérique
-      if (!isset($_GET['year']) OR !is_numeric($_GET['year']))
-        header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter');
+      // Contrôle si l'année est renseignée et numérique et si le filtre est présent
+      if (!isset($_GET['year'])   OR !is_numeric($_GET['year'])
+      OR  !isset($_GET['filter']) OR empty($_GET['filter']))
+        header('location: expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter');
       else
       {
         // Initialisation de la sauvegarde en session
@@ -41,11 +42,14 @@
         // Récupération de la liste des utilisateurs
         $listeUsers = getUsers();
 
+        // Récupération des filtres
+        $filters = getFilters();
+
         // Récupération des onglets (années)
         $onglets = getOnglets();
 
         // Récupération de la liste des dépenses
-        $listeDepenses = getExpenses($_GET['year']);
+        $listeDepenses = getExpenses($_GET['year'], $_GET['filter'], $_SESSION['user']['identifiant']);
       }
       break;
 
@@ -101,7 +105,7 @@
 
     default:
       // Contrôle action renseignée URL
-      header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter');
+      header('location: expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter');
       break;
   }
 
@@ -113,6 +117,14 @@
       {
         Profile::secureData($user);
       }
+
+      foreach ($filters as &$filter)
+      {
+          $filter['label'] = htmlspecialchars($filter['label']);
+          $filter['value'] = htmlspecialchars($filter['value']);
+      }
+
+      unset($filter);
 
       foreach ($onglets as &$year)
       {
@@ -151,19 +163,19 @@
     case 'doInsererMobile':
     case 'doInsererMontants':
     case 'doInsererMontantsMobile':
-      header('location: expensecenter.php?year=' . date('Y') . '&action=goConsulter&anchor=' . $idExpense);
+      header('location: expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter&anchor=' . $idExpense);
       break;
 
     case 'doModifier':
     case 'doModifierMobile':
     case 'doModifierMontants':
     case 'doModifierMontantsMobile':
-      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter&anchor=' . $idExpense);
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&anchor=' . $idExpense);
       break;
 
     case 'doSupprimer':
     case 'doSupprimerMontants':
-      header('location: expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter');
+      header('location: expensecenter.php?year=' . $_GET['year'] . '&filter=all&action=goConsulter');
       break;
 
     case 'goConsulter':

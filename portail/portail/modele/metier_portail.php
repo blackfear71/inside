@@ -55,7 +55,7 @@
                                    'alt'       => 'cooking_box',
                                    'mobile'    => 'N'),
                              array('categorie' => 'EXPENSE<br />CENTER',
-                                   'lien'      => '../expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter',
+                                   'lien'      => '../expensecenter/expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter',
                                    'title'     => 'Expense Center',
                                    'image'     => '../../includes/icons/common/expense_center.png',
                                    'alt'       => 'expense_center',

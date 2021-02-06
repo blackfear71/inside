@@ -19,7 +19,7 @@
 		$onglet1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/common/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 		$onglet2 = '<a href="/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter" title="Les enfants ! À table !" class="onglet_inactif"><img src="/inside/includes/icons/common/food_advisor.png" alt="food_advisor" title="Les enfants ! À table !" class="logo_onglet" /></a>';
 		$onglet3 = '<a href="/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter" title="Cooking Box" class="onglet_inactif"><img src="/inside/includes/icons/common/cooking_box.png" alt="cooking_box" title="Cooking Box" class="logo_onglet" /></a>';
-		$onglet4 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter" title="Expense Center" class="onglet_inactif"><img src="/inside/includes/icons/common/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+		$onglet4 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter" title="Expense Center" class="onglet_inactif"><img src="/inside/includes/icons/common/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 		$onglet5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none" title="Collector Room" class="onglet_inactif"><img src="/inside/includes/icons/common/collector.png" alt="collector" title="Collector Room" class="logo_onglet" /></a>';
 		$onglet6 = '<a href="/inside/portail/calendars/calendars.php?year=' . date('Y') . '&action=goConsulter" title="Calendars" class="onglet_inactif"><img src="/inside/includes/icons/common/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
 		$onglet7 = '<a href="/inside/portail/petitspedestres/parcours.php?action=goConsulterListe" title="Les Petits Pédestres" class="onglet_inactif"><img src="/inside/includes/icons/common/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
@@ -53,7 +53,7 @@
 		// Expense center
 		if ($path == '/inside/portail/expensecenter/expensecenter.php')
 		{
-			$onglet4 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&action=goConsulter" title="Expense Center" class="onglet_actif"><img src="/inside/includes/icons/common/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
+			$onglet4 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter" title="Expense Center" class="onglet_actif"><img src="/inside/includes/icons/common/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
 		}
 
 		// Collector Room

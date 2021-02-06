@@ -55,7 +55,7 @@
         }
       }
       else
-        echo '<div class="empty">Aucune dépense pour cette année...</div>';
+        echo '<div class="empty">Aucune dépense pour cette année ou ce filtre...</div>';
     echo '</div>';
   echo '</div>';
 ?>

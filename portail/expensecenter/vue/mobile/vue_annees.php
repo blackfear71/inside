@@ -14,13 +14,13 @@
             foreach ($onglets as $annee)
             {
               if ($annee == $_GET['year'])
-                echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
+                echo '<a href="expensecenter.php?year=' . $annee . '&filter=' . $_GET['filter'] . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
               else
-                echo '<a href="expensecenter.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
+                echo '<a href="expensecenter.php?year=' . $annee . '&filter=' . $_GET['filter'] . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
             }
           }
           else
-            echo '<a href="expensecenter.php?year=' . $_GET['year'] . '&action=goConsulter" class="lien_saisie lien_courant">' . $_GET['year'] . '</a>';
+            echo '<a href="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=goConsulter" class="lien_saisie lien_courant">' . $_GET['year'] . '</a>';
         echo '</div>';
       echo '</div>';
 

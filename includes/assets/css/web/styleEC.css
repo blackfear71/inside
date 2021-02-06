@@ -2,6 +2,34 @@
 /*** Expense Center ***/
 /**********************/
 
+/*** Filtres ***/
+.zone_filtres
+{
+	display: block;
+	margin-bottom: 10px;
+}
+
+.zone_filtres option
+{
+	background-color: white;
+}
+
+.listbox_filtre
+{
+	display: inline-block;
+	height: 30px;
+	margin: 0 10px 0 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	border: 0;
+	border-radius: 2px;
+	background-color: #e3e3e3;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 /*** Saisie dépense ***/
 .fond_saisie_depense
 {

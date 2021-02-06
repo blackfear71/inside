@@ -58,6 +58,19 @@
               echo '<div class="zone_logo_lien"><img src="../../includes/icons/expensecenter/expenses.png" alt="expenses" class="image_lien" /></div>';
               echo '<div class="zone_texte_lien">Saisir des montants</div>';
             echo '</a>';
+
+            echo '<div class="zone_filtres">';
+              // Tris
+              echo '<select id="applyFilter" class="listbox_filtre">';
+                foreach ($filters as $filter)
+                {
+                  if ($filter['value'] == $_GET['filter'])
+                    echo '<option value="' . $filter['value'] . '" selected>' . $filter['label'] . '</option>';
+                  else
+                    echo '<option value="' . $filter['value'] . '">' . $filter['label'] . '</option>';
+                }
+              echo '</select>';
+            echo '</div>';
           echo '</div>';
 
           /***********/

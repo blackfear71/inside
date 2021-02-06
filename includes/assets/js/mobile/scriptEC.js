@@ -11,6 +11,12 @@ $(function()
     afficherMasquerIdWithDelay('zone_saisie_annee');
   });
 
+  // Ouvre ou ferme la zone de saisie de filtre
+  $('#afficherSaisieFiltre, #fermerSaisieFiltre').click(function()
+  {
+    afficherMasquerIdWithDelay('zone_saisie_filtre');
+  });
+
   // Ouvre la zone de saisie d'une dépense
   $('#afficherSaisieDepense').click(function()
   {
@@ -21,7 +27,7 @@ $(function()
   $('#fermerSaisieDepense').click(function()
   {
     // Réinitialisation de la saisie
-    resetSaisie('zone_saisie_depense', $_GET('year'), 'P');
+    resetSaisie('zone_saisie_depense', $_GET('year'), $_GET('filter'), 'P');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_depense');
@@ -37,7 +43,7 @@ $(function()
   $('#fermerSaisieMontants').click(function()
   {
     // Réinitialisation de la saisie
-    resetSaisie('zone_saisie_montants', $_GET('year'), 'M');
+    resetSaisie('zone_saisie_montants', $_GET('year'), $_GET('filter'), 'M');
 
     // Fermeture de l'affichage
     afficherMasquerIdWithDelay('zone_saisie_montants');
@@ -78,7 +84,7 @@ $(function()
   {
     var idDepense = $(this).attr('id').replace('modifier_depense_', '');
 
-    initialisationModification(idDepense, $_GET('year'));
+    initialisationModification(idDepense, $_GET('year'), $_GET('filter'));
   });
 
   // Réinitialise la saisie à la fermeture au clic sur le fond
@@ -90,11 +96,11 @@ $(function()
       switch (event.target.id)
       {
         case 'zone_saisie_depense':
-          resetSaisie('zone_saisie_depense', $_GET('year'), 'P');
+          resetSaisie('zone_saisie_depense', $_GET('year'), $_GET('filter'), 'P');
           break;
 
         case 'zone_saisie_montants':
-          resetSaisie('zone_saisie_montants', $_GET('year'), 'M');
+          resetSaisie('zone_saisie_montants', $_GET('year'), $_GET('filter'), 'M');
           break;
 
         default:
@@ -310,9 +316,9 @@ function showDetails(idDepense)
   $('.form_supprimer_depense > .eventMessage').val('Supprimer la dépense de ' + depense['pseudo'] + ' du ' + formatDateForDisplay(depense['date']) + ' et d\'un montant de ' + formatAmountForDisplay(depense['price'], true) + ' ?');
 
   if (type == 'M')
-    $('.form_supprimer_depense').attr('action', 'expensecenter.php?year=' + $_GET('year') + '&action=doSupprimerMontants');
+    $('.form_supprimer_depense').attr('action', 'expensecenter.php?year=' + $_GET('year') + '&filter=' + $_GET('filter') + '&action=doSupprimerMontants');
   else
-    $('.form_supprimer_depense').attr('action', 'expensecenter.php?year=' + $_GET('year') + '&action=doSupprimer');
+    $('.form_supprimer_depense').attr('action', 'expensecenter.php?year=' + $_GET('year') + '&filter=' + $_GET('filter') + '&action=doSupprimer');
 
   // Affichage des détails
   afficherMasquerIdWithDelay('zone_details_depense');
@@ -327,7 +333,7 @@ function showDetails(idDepense)
 }
 
 // Affiche la zone de mise à jour d'une dépense
-function initialisationModification(idDepense, year)
+function initialisationModification(idDepense, year, filter)
 {
   // Récupération des données
   var depense = listeDepenses[idDepense];
@@ -341,7 +347,7 @@ function initialisationModification(idDepense, year)
   if (type == 'M')
   {
     // Action du formulaire
-    action = 'expensecenter.php?year=' + year + '&action=doModifierMontantsMobile';
+    action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doModifierMontantsMobile';
 
     // Titre
     titre = 'Modifier des montants';
@@ -352,7 +358,7 @@ function initialisationModification(idDepense, year)
   else
   {
     // Action du formulaire
-    action = 'expensecenter.php?year=' + year + '&action=doModifierMobile';
+    action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doModifierMobile';
 
     // Titre
     titre = 'Modifier la dépense';
@@ -522,7 +528,7 @@ function initialisationModification(idDepense, year)
 }
 
 // Réinitialise la zone de saisie d'une dépense si fermeture modification
-function resetSaisie(zone, year, type)
+function resetSaisie(zone, year, filter, type)
 {
   // Déclenchement après la fermeture
   setTimeout(function()
@@ -539,7 +545,7 @@ function resetSaisie(zone, year, type)
       if (type == 'M')
       {
         // Action du formulaire
-        action = 'expensecenter.php?year=' + year + '&action=doInsererMontantsMobile';
+        action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doInsererMontantsMobile';
 
         // Titre
         titre = 'Saisir des montants';
@@ -550,7 +556,7 @@ function resetSaisie(zone, year, type)
       else
       {
         // Action du formulaire
-        action = 'expensecenter.php?year=' + year + '&action=doInsererMobile';
+        action = 'expensecenter.php?year=' + year + '&filter=' + filter + '&action=doInsererMobile';
 
         // Titre
         titre = 'Saisir une dépense';

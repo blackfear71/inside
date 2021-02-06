@@ -113,7 +113,7 @@
 
   // PHYSIQUE : Lecture des dépenses
   // RETOUR : Liste des dépenses
-  function physiqueDepenses($annee)
+  function physiqueDepenses($annee, $filtre, $identifiant)
   {
     // Initialisations
     $listeDepenses = array();
@@ -121,10 +121,31 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *
-                        FROM expense_center
-                        WHERE SUBSTR(date, 1, 4) = ' . $annee . '
-                        ORDER BY date DESC, id DESC');
+    switch ($filtre)
+    {
+      case 'myExpenses':
+        $req = $bdd->query('SELECT *
+                            FROM expense_center
+                            WHERE SUBSTR(date, 1, 4) = ' . $annee . ' AND buyer = "' . $identifiant . '"
+                            ORDER BY date DESC, id DESC');
+        break;
+
+      case 'myParts':
+      $req = $bdd->query('SELECT expense_center.*
+                          FROM expense_center
+                          LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
+                          WHERE SUBSTR(expense_center.date, 1, 4) = ' . $annee . ' AND expense_center_users.identifiant = "' . $identifiant . '"
+                          ORDER BY expense_center.date DESC, expense_center.id DESC');
+        break;
+
+      case 'all':
+      default:
+        $req = $bdd->query('SELECT *
+                            FROM expense_center
+                            WHERE SUBSTR(date, 1, 4) = ' . $annee . '
+                            ORDER BY date DESC, id DESC');
+        break;
+    }
 
     while ($data = $req->fetch())
     {

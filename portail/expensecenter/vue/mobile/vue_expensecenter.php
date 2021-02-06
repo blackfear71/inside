@@ -29,7 +29,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
       <!-- Menus -->
       <aside>
   			<?php include('../../includes/common/aside_mobile.php'); ?>
@@ -61,6 +61,11 @@
           include('vue/mobile/vue_annees.php');
 
           /***********/
+          /* Filtres */
+          /***********/
+          include('vue/mobile/vue_filtres.php');
+
+          /***********/
           /* Saisies */
           /***********/
           include('vue/mobile/vue_saisie_depense.php');
@@ -82,9 +87,31 @@
           echo '</a>';
 
           // Années
-          echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red">';
+          echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red lien_demi margin_lien">';
             echo '<img src="../../includes/icons/expensecenter/year_grey.png" alt="year_grey" class="image_lien" />';
             echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+          echo '</a>';
+
+          // Filtres
+          echo '<a id="afficherSaisieFiltre" title="Changer de filtre" class="lien_red lien_demi">';
+            echo '<img src="../../includes/icons/expensecenter/filter_grey.png" alt="filter_grey" class="image_lien" />';
+            echo '<div class="titre_lien">';
+              switch ($_GET['filter'])
+              {
+                case 'myExpenses':
+                  echo 'MES DÉPENSES';
+                  break;
+
+                case 'myParts':
+                  echo 'MES PARTS';
+                  break;
+
+                case 'all':
+                default:
+                  echo 'TOUTES';
+                  break;
+              }
+            echo '</div>';
           echo '</a>';
 
           /**********/

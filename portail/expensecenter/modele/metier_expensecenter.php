@@ -57,6 +57,20 @@
     return $listeUsers;
   }
 
+  // METIER : Génération de la liste des filtres
+  // RETOUR : Tableau des filtres
+  function getFilters()
+  {
+    // Génération du tableau
+    $tableauFiltres = array(array('label' => 'Toutes les dépenses', 'value' => 'all'),
+                            array('label' => 'Mes dépenses',        'value' => 'myExpenses'),
+                            array('label' => 'Mes parts',           'value' => 'myParts')
+                           );
+
+    // Retour
+    return $tableauFiltres;
+  }
+
   // METIER : Lecture années distinctes pour les onglets
   // RETOUR : Liste des années existantes
   function getOnglets()
@@ -70,10 +84,10 @@
 
   // METIER : Lecture liste des dépenses
   // RETOUR : Liste des dépenses
-  function getExpenses($year)
+  function getExpenses($year, $filtre, $identifiant)
   {
     // Récupération de la liste des dépenses
-    $listeDepenses = physiqueDepenses($year);
+    $listeDepenses = physiqueDepenses($year, $filtre, $identifiant);
 
     // Récupération des données complémentaires
     foreach ($listeDepenses as $depense)

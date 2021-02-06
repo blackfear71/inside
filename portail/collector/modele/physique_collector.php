@@ -144,7 +144,6 @@
                                               AND    collector_users.identifiant = "' . $identifiant . '"))
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
-
         break;
 
       case 'meOnly':

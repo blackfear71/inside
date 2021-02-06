@@ -68,14 +68,14 @@
             if (isset($_GET['year']) AND $year == $_GET['year'])
               echo '<span class="year active margin_right_20">' . $year . '</span>';
             else
-              echo '<a href="expensecenter.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
+              echo '<a href="expensecenter.php?year=' . $year . '&filter=' . $_GET['filter'] . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
           }
           else
           {
             if (isset($_GET['year']) AND $year == $_GET['year'])
               echo '<span class="year active">' . $year . '</span>';
             else
-              echo '<a href="expensecenter.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
+              echo '<a href="expensecenter.php?year=' . $year . '&filter=' . $_GET['filter'] . '&action=goConsulter" class="year inactive">' . $year . '</a>';
           }
 
           $previousYear = $year;
