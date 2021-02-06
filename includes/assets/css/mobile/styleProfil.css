@@ -68,8 +68,9 @@
 	vertical-align: middle;
 	background-color: white;
 	height: 1vh;
-	width: calc(100% - 6vh);
+	width: calc(100% - 19vh);
 	border-radius: 2vh;
+  margin-right: 1vh;
 }
 
 .experience_profil
@@ -78,6 +79,21 @@
 	height: 100%;
 	background-color: #ff1937;
 	border-radius: 2vh;
+}
+
+.valeur_experience_profil
+{
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #ff1937;
+  font-family: robotolight, Verdana, sans-serif;
+  color: white;
+  font-size: 2.5vh;
+  width: 12vh;
+  height: 5vh;
+  line-height: 5vh;
+  text-align: center;
+  border-radius: 0.5vh;
 }
 
 /*** Commun ***/

@@ -28,6 +28,7 @@
       echo '<div class="zone_info">';
         echo '<img src="../../includes/icons/profil/experience_grey.png" alt="experience_grey" class="logo_profil" />';
         echo '<div class="fond_experience_profil"><div class="experience_profil" style="width: ' . $progression->getPourcentage() . '%;"></div></div>';
+        echo '<div class="valeur_experience_profil">' . $profil->getExperience() . ' XP</div>';
       echo '</div>';
 
       // Adresse mail
