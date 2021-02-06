@@ -15,7 +15,7 @@
         echo '<input type="text" autocomplete="off" id="recherche_live_propositions" placeholder="Rechercher" class="input_recherche_live" />';
 
         // Effacer
-        echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live_propositions" class="logo_recherche_live" />';
+        echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live_propositions" class="logo_recherche_live size_logo_recherche_live" />';
       echo '</div>';
 
       // Saisie

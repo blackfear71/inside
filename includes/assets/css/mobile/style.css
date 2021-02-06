@@ -1140,6 +1140,13 @@ aside
 	background-color: #d3d3d3;
 }
 
+.size_logo_recherche_live
+{
+	width: 3vh;
+	height: 3vh;
+	padding: 1.5vh;
+}
+
 .input_recherche_live
 {
 	display: inline-block;
