@@ -378,6 +378,7 @@ aside
 	height: 1vh;
 	width: calc(100% - 16vh);
 	border-radius: 2vh;
+	overflow: hidden;
 }
 
 .experience_aside

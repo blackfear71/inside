@@ -71,6 +71,7 @@
 	width: calc(100% - 19vh);
 	border-radius: 2vh;
   margin-right: 1vh;
+  overflow: hidden;
 }
 
 .experience_profil
