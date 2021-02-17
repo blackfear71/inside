@@ -245,7 +245,7 @@ function showDetails(idDepense)
 
   // Commentaires
   if (commentaires.length != 0)
-    $('.details_commentaires').html(commentaires);
+    $('.details_commentaires').html(nl2br(commentaires));
   else
     $('.details_commentaires').html('Pas de commentaire');
 
