@@ -22,7 +22,7 @@
   echo '<meta name="keywords" content="Inside, portail, CDS Finance" />';
 
   if ($_SESSION['index']['plateforme'] == 'mobile')
-    echo '<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">';
+    echo '<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no">';
 
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';

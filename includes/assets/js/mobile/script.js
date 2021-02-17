@@ -275,7 +275,7 @@ function fixViewport()
 
   var viewport = document.querySelector('meta[name=viewport]');
 
-  viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0');
+  viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no');
 }
 
 // Fonction équivalente au $_GET en php
