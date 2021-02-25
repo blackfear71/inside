@@ -232,7 +232,7 @@ body
 	background-color: #fbfbfb;
 	background-image:	linear-gradient(transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px), linear-gradient(90deg, transparent 199px, rgba(220, 220, 200, 0.6) 200px, transparent 200px);
 	background-size: 100% 200px, 200px 100%;
-	background-repeat: repeat;
+	background-repeat: repeat, repeat;
 }
 
 section:not(.section_index):not(.section_no_nav)
