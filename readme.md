@@ -3,7 +3,7 @@
 # INSIDE - Plateforme de partage créée par les membres pour les membres.
 
 ## Lien
-Site accessible depuis le lien suivant : [INSIDE](http://77.150.63.94/inside/)
+Site accessible depuis le lien suivant : [INSIDE](http://77.150.63.94/inside/index.php?action=goConsulter)
 
 ## Fonctionnalités
 - PORTAIL : liens vers les sections et news
