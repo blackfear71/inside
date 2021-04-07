@@ -20,6 +20,8 @@
 
   // Modèle de données
   include_once('modele/metier_calendars.php');
+  include_once('modele/controles_calendars.php');
+  include_once('modele/physique_calendars.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -30,33 +32,48 @@
         header('location: calendars.php?year=' . date('Y') . '&action=goConsulter');
       else
       {
-        // Lecture des données par le modèle
+        // Vérification année existante
         $anneeExistante = controlYear($_GET['year']);
-        $onglets        = getOnglets();
-        $calendriers    = getCalendars($_GET['year']);
-        $preferences    = getPreferences($_SESSION['user']['identifiant']);
+
+        // Récupération des onglets (années)
+        $onglets = getOnglets();
+
+        // Récupération de la liste des calendriers
+        $calendriers = getCalendars($_GET['year']);
+
+        // Récupération des préférences de l'utilisateur
+        $preferences = getPreferences($_SESSION['user']['identifiant']);
       }
       break;
 
     case 'goConsulterAnnexes':
-      $onglets     = getOnglets();
-      $annexes     = getAnnexes();
+      // Récupération des onglets (années)
+      $onglets = getOnglets();
+
+      // Récupération de la liste des annexes
+      $annexes = getAnnexes();
+
+      // Récupération des préférences de l'utilisateur
       $preferences = getPreferences($_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouter':
+      // Insertion d'un calendrier
       insertCalendrier($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouterAnnexe':
+      // Insertion d'une annexe
       insertAnnexe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doSupprimer':
+      // Suppression d'un calendrier
       deleteCalendrier($_POST);
       break;
 
     case 'doSupprimerAnnexe':
+      // Suppression d'une annexe
       deleteAnnexe($_POST);
       break;
 
@@ -86,10 +103,19 @@
       break;
 
     case 'goConsulterAnnexes':
+      foreach ($onglets as &$year)
+      {
+        $year = htmlspecialchars($year);
+      }
+
+      unset($year);
+
       foreach ($annexes as $annexe)
       {
         Annexe::secureData($annexe);
       }
+
+      Preferences::secureData($preferences);
       break;
 
     case 'doAjouter':

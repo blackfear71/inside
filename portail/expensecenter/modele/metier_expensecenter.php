@@ -1131,7 +1131,7 @@
         insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
     }
 
-    // Message suppression effectuée
+    // Message d'alerte
     $_SESSION['alerts']['depense_deleted'] = true;
   }
 
@@ -1225,7 +1225,7 @@
         insertOrUpdateSuccesValue('generous', $depense->getBuyer(), -1);
     }
 
-    // Message suppression effectuée
+    // Message d'alerte
     $_SESSION['alerts']['depense_deleted'] = true;
   }
 ?>

@@ -40,7 +40,7 @@
     if (empty($collector))
     {
       $_SESSION['alerts']['empty_collector'] = true;
-      $control_ok                       = false;
+      $control_ok                            = false;
     }
 
     // Retour
