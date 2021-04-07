@@ -40,9 +40,9 @@
     global $bdd;
 
     $req = $bdd->query('SELECT DISTINCT year
-                            FROM calendars
-                            WHERE to_delete != "Y"
-                            ORDER BY year DESC');
+                        FROM calendars
+                        WHERE to_delete != "Y"
+                        ORDER BY year DESC');
 
     while ($data = $req->fetch())
     {
@@ -140,7 +140,7 @@
     // Retour
     return $preference;
   }
-  
+
   /****************************************************************************/
   /********************************** INSERT **********************************/
   /****************************************************************************/

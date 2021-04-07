@@ -38,18 +38,18 @@
       echo '<div class="date_jour">Aujourd\'hui le ' . date('d/m/Y') . '</div>';
 
     // Onglets
-    if (!empty($ongletsYears))
+    if (!empty($onglets))
     {
       $i            = 0;
-      $previousYear = $ongletsYears[0];
+      $previousYear = $onglets[0];
       $lastYear     = true;
 
-      foreach ($ongletsYears as $year)
+      foreach ($onglets as $year)
       {
         if (!empty($year))
         {
           // Année inexistante (première ou au milieu)
-          if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $ongletsYears[0]))
+          if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
           {
             if ($i % 2 == 0)
               echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
@@ -91,7 +91,7 @@
       }
 
       // Date non communiquée
-      if (empty(end($ongletsYears)))
+      if (empty(end($onglets)))
       {
         if (isset($_GET['year']) AND $_GET['year'] == 'none')
           echo '<span class="year active">N. C.</span>';

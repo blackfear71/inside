@@ -15,6 +15,7 @@
 
   // Modèle de données
   include_once('modele/metier_changelog.php');
+  include_once('modele/physique_changelog.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -25,16 +26,23 @@
         header('location: changelog.php?year=' . date('Y') . '&action=goConsulter');
       else
       {
-        // Journaux
+        // Vérification année existante
         $anneeExistante = controlYear($_GET['year']);
-        $ongletsYears   = getOnglets();
-        $categories     = getCategories();
-        $listeLogs      = getLogs($_GET['year'], $categories);
+
+        // Récupération des onglets (années)
+        $onglets = getOnglets();
+
+        // Récupération des catégories
+        $categories = getCategories();
+
+        // Récupération des journaux
+        $listeLogs = getLogs($_GET['year'], $categories);
       }
       break;
 
     case 'goConsulterHistoire':
-      $ongletsYears = getOnglets();
+      // Récupération des onglets (années)
+      $onglets = getOnglets();
       break;
 
     default:
@@ -47,12 +55,12 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($ongletsYears as &$onglet)
+      foreach ($onglets as &$year)
       {
-        $onglet = htmlspecialchars($onglet);
+        $year = htmlspecialchars($year);
       }
 
-      unset($onglet);
+      unset($year);
 
       foreach ($categories as &$categorie)
       {
@@ -68,12 +76,12 @@
       break;
 
     case 'goConsulterHistoire':
-      foreach ($ongletsYears as &$onglet)
+      foreach ($onglets as &$year)
       {
-        $onglet = htmlspecialchars($onglet);
+        $year = htmlspecialchars($year);
       }
 
-      unset($onglet);
+      unset($year);
       break;
 
     default:

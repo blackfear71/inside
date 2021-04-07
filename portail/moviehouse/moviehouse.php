@@ -38,7 +38,7 @@
         initializeSaveSession();
 
         $anneeExistante = controlYear($_GET['year']);
-        $ongletsYears   = getOnglets();
+        $onglets        = getOnglets();
         $preferences    = getPreferences($_SESSION['user']['identifiant']);
 
         switch ($_GET['view'])
@@ -100,12 +100,12 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($ongletsYears as &$onglet)
+      foreach ($onglets as &$year)
       {
-        $onglet = htmlspecialchars($onglet);
+        $year = htmlspecialchars($year);
       }
 
-      unset($onglet);
+      unset($year);
 
       Preferences::secureData($preferences);
 

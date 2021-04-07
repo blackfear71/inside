@@ -44,7 +44,7 @@
 
         // Recettes
         $anneeExistante = controlYear($_GET['year']);
-        $ongletsYears   = getOnglets();
+        $onglets        = getOnglets();
         $recettes       = getRecipes($_GET['year']);
       }
       break;
@@ -107,12 +107,12 @@
 
       unset($year);
 
-      foreach ($ongletsYears as &$onglet)
+      foreach ($onglets as &$year)
       {
-        $onglet = htmlspecialchars($onglet);
+        $year = htmlspecialchars($year);
       }
 
-      unset($onglet);
+      unset($year);
 
       foreach ($recettes as $recette)
       {

@@ -10,18 +10,18 @@
       echo '<a href="changelog.php?action=goConsulterHistoire" class="history inactive">Histoire du site</a>';
 
     // Onglets
-    if (!empty($ongletsYears))
+    if (!empty($onglets))
     {
       $i            = 0;
-      $previousYear = $ongletsYears[0];
+      $previousYear = $onglets[0];
       $lastYear     = true;
 
-      foreach ($ongletsYears as $year)
+      foreach ($onglets as $year)
       {
         // Année inexistante (première ou au milieu)
         if ($_GET['action'] != 'goConsulterHistoire')
         {
-          if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $ongletsYears[0]))
+          if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
           {
             if ($i % 2 == 0)
               echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
