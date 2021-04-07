@@ -20,7 +20,7 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Récupération de liste des films à supprimer
+      // Récupération de la liste des films à supprimer
 			$listeSuppression = getFilmsToDelete();
 
       // Récupération de l'alerte

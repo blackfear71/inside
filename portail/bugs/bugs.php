@@ -30,18 +30,22 @@
       {
         case 'resolved':
         case 'unresolved':
-          $listeBugs       = getBugs($_GET['view'], 'B');
+          // Récupération de la liste des bugs
+          $listeBugs = getBugs($_GET['view'], 'B');
+
+          // Récupération de la liste des évolutions
           $listeEvolutions = getBugs($_GET['view'], 'E');
           break;
 
         default:
+          // Contrôle vue renseignée URL
           header('location: bugs.php?view=unresolved&action=goConsulter');
           break;
       }
       break;
 
     case 'doSignaler':
-      // Insertion des données par le modèle
+      // Insertion d'un bug / d'une évolution
       $idRapport = insertBug($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 

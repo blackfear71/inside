@@ -29,11 +29,15 @@
         case 'all':
         case 'resolved':
         case 'unresolved':
-          $listeBugs       = getBugs($_GET['view'], 'B');
+          // Récupération de la liste des bugs
+          $listeBugs = getBugs($_GET['view'], 'B');
+
+          // Récupération de la liste des évolutions
           $listeEvolutions = getBugs($_GET['view'], 'E');
           break;
 
         default:
+          // Contrôle vue renseignée URL
           header('location: reports.php?view=all&action=goConsulter');
           break;
       }

@@ -5,7 +5,7 @@
   // RETOUR : Liste des films à supprimer
   function getFilmsToDelete()
   {
-    // Récupération de liste des films à supprimer
+    // Récupération de la liste des films à supprimer
     $listeFilmsToDelete = physiqueFilmsToDelete();
 
     // Récupération des données complémentaires
