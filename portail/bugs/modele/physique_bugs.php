@@ -23,17 +23,10 @@
                             ORDER BY date DESC, id DESC');
         break;
 
-      case 'unresolved':
-        $req = $bdd->query('SELECT *
-                            FROM bugs
-                            WHERE type = "' . $type . '" AND resolved = "N"
-                            ORDER BY date DESC, id DESC');
-        break;
-
       default:
         $req = $bdd->query('SELECT *
                             FROM bugs
-                            WHERE type = "' . $type . '"
+                            WHERE type = "' . $type . '" AND resolved = "N"
                             ORDER BY date DESC, id DESC');
     }
 
@@ -74,60 +67,40 @@
     $req->closeCursor();
   }
 
-  // PHYSIQUE : Lecture données rapport
-  // RETOUR : Objet bugs
-  function physiqueRapport($idRapport)
+  /****************************************************************************/
+  /********************************** INSERT **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Insertion nouveau bug / nouvelle évolution
+  // RETOUR : Id bug / évolution culte
+  function physiqueInsertionBug($bug)
   {
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *
-                        FROM bugs
-                        WHERE id = ' . $idRapport);
+    $req = $bdd->prepare('INSERT INTO bugs(subject,
+                                           date,
+                                           author,
+                                           content,
+                                           picture,
+                                           type,
+                                           resolved
+                                          )
+                                    VALUES(:subject,
+                                           :date,
+                                           :author,
+                                           :content,
+                                           :picture,
+                                           :type,
+                                           :resolved
+                                          )');
 
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Bugs à partir des données remontées de la bdd
-    $rapport = BugEvolution::withData($data);
+    $req->execute($bug);
 
     $req->closeCursor();
+
+    $newId = $bdd->lastInsertId();
 
     // Retour
-    return $rapport;
-  }
-
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour statut rapport
-  // RETOUR : Aucun
-  function physiqueUpdateRapport($idRapport, $resolved)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->prepare('UPDATE bugs
-                          SET resolved = :resolved
-                          WHERE id = ' . $idRapport);
-
-    $req->execute(array(
-      'resolved' => $resolved
-    ));
-
-    $req->closeCursor();
-  }
-
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression rapport
-  // RETOUR : Aucun
-  function physiqueDeleteRapport($idRapport)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->exec('DELETE FROM bugs
-                       WHERE id = ' . $idRapport);
+    return $newId;
   }
 ?>
