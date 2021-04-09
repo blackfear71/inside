@@ -378,7 +378,7 @@
       }
     }
 
-    // Lecture des données existantes et insertion de l'image
+    // Lecture des données existantes et insertion de l'image (seulement si nouvelle image saisie)
     if ($control_ok == true)
     {
       // Récupération des données de la semaine en cours d'insertion
@@ -393,7 +393,7 @@
         // Insertion image
         $imageRecipe = uploadImage($files, $nameFile, $yearRecipe);
 
-        // Contrôle image insérée
+        // Contrôle saisie non vide
         $control_ok = controleImageInseree($imageRecipe);
 
         // Suppression des anciennes images

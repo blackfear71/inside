@@ -335,19 +335,23 @@
         $typeSpeaker = 'user';
       }
 
-      // Suppression ancienne image / insertion de la nouvelle ou récupération phrase culte
+      // Insertion nouvelle image et suppression ancienne ou récupération phrase culte
       if ($typeCollector == 'I')
       {
         if (!empty($files['image']['name']))
         {
-          if (!empty($oldCollector->getCollector()))
-            unlink('../../includes/images/collector/' . $oldCollector->getCollector());
-
+          // Insertion image
           $contenuCollector = uploadImage($files, rand());
 
           // Contrôle saisie non vide
+          $control_ok = controleCollector($contenuCollector);
+
+          // Suppression des anciennes images
           if ($control_ok == true)
-            $control_ok = controleCollector($contenuCollector);
+          {
+            if (!empty($oldCollector->getCollector()))
+              unlink('../../includes/images/collector/' . $oldCollector->getCollector());
+          }
         }
         else
           $contenuCollector = $oldCollector->getCollector();
