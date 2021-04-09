@@ -21,6 +21,8 @@
 
   // Modèle de données
   include_once('modele/metier_cookingbox.php');
+  include_once('modele/controles_cookingbox.php');
+  include_once('modele/physique_cookingbox.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -34,44 +36,62 @@
         // Initialisation de la sauvegarde en session
         initializeSaveSession();
 
-        // Gâteaux semaines n et n + 1
+        // Récupération des informations de la semaine en cours
         $currentWeek = getWeek(date('W'), date('Y'));
-        $nextWeek    = getWeek(date('W', strtotime('+ 1 week')), date('Y'));
-        $listeUsers  = getUsers();
 
-        // Saisie
+        // Récupération des informations de la semaine suivante
+        $nextWeek = getWeek(date('W', strtotime('+ 1 week')), date('Y'));
+
+        // Récupération de la liste des utilisateurs
+        $listeCookers = getUsers();
+
+        // Détermination des semaines de saisie possible pour l'utilisateur
         $listeSemaines = getWeeks($_SESSION['user']['identifiant']);
 
-        // Recettes
+        // Vérification année existante
         $anneeExistante = controlYear($_GET['year']);
-        $onglets        = getOnglets();
-        $recettes       = getRecipes($_GET['year']);
+
+        // Récupération des onglets (années)
+        $onglets = getOnglets();
+
+        // Récupération des recettes
+        $recettes = getRecipes($_GET['year'], $listeCookers);
       }
       break;
 
     case 'doModifier':
+      // Modification d'une semaine (utilisateur choisi)
       updateCake($_POST);
       break;
 
     case 'doValider':
+      // Validation d'une semaine (par l'utilisateur choisi)
       validateCake('Y', $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
       break;
 
     case 'doAnnuler':
+      // Annulation de la validation d'une semaine (par l'utilisateur choisi)
       validateCake('N', $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
       break;
 
     case 'doAjouterRecette':
-      $year      = $_POST['year_recipe'];
+      // Récupération de l'année pour redirection
+      $year = $_POST['year_recipe'];
+
+      // Insertion d'une recette
       $idRecette = insertRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doModifierRecette':
-      $year      = $_POST['hidden_year_recipe'];
+      // Récupération de l'année pour redirection
+      $year = $_POST['hidden_year_recipe'];
+
+      // Modification d'une recette
       $idRecette = updateRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doSupprimerRecette':
+      // Suppression d'une recette
       deleteRecipe($_POST, $_GET['year'], $_SESSION['user']['identifiant']);
       break;
 
@@ -88,9 +108,10 @@
       WeekCake::secureData($currentWeek);
       WeekCake::secureData($nextWeek);
 
-      foreach ($listeUsers as &$user)
+      foreach ($listeCookers as &$user)
       {
-        $user = htmlspecialchars($user);
+        $user['pseudo'] = htmlspecialchars($user['pseudo']);
+        $user['avatar'] = htmlspecialchars($user['avatar']);
       }
 
       unset($user);
@@ -121,8 +142,8 @@
 
       // Conversion JSON
       $listeSemainesJson = json_encode($listeSemaines);
-      $listeUsersJson    = json_encode($listeUsers);
-      $recettesJson      = json_encode(convertForJson($recettes));
+      $listeCookersJson  = json_encode($listeCookers);
+      $recettesJson      = json_encode(convertForJsonListeRecettes($recettes));
       break;
 
     case 'doModifier':

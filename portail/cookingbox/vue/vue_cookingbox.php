@@ -101,7 +101,7 @@
       var listWeeks = <?php if (isset($listeSemainesJson) AND !empty($listeSemainesJson)) echo $listeSemainesJson; else echo '{}'; ?>;
 
       // Récupération de la liste des utilisateurs pour le script
-      var listUsers = <?php if (isset($listeUsersJson) AND !empty($listeUsersJson)) echo $listeUsersJson; else echo '{}'; ?>;
+      var listCookers = <?php if (isset($listeCookersJson) AND !empty($listeCookersJson)) echo $listeCookersJson; else echo '{}'; ?>;
 
       // Récupération de la liste des recettes pour le script
       var listRecipes = <?php if (isset($recettesJson) AND !empty($recettesJson)) echo $recettesJson; else echo '{}'; ?>;

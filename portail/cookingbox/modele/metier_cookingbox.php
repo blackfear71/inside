@@ -1,5 +1,4 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/gateaux.php');
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/libraries/php/imagethumb.php');
@@ -29,322 +28,211 @@
   }
 
   // METIER : Récupère les données d'une semaine (N ou N+1)
-  // RETOUR : Données semaine
+  // RETOUR : Données de la semaine
   function getWeek($week, $year)
   {
-    $gateauSemaine = new WeekCake();
+    // Récupération des données de la semaine concernée
+    $semaineGateau = physiqueSemaineGateau($week, $year);
 
-    global $bdd;
+    // Récupération des données utilisateur
+    $user = physiqueUser($semaineGateau->getIdentifiant());
 
-    // Données semaine
-    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
-    $data1 = $req1->fetch();
-
-    if ($req1->rowCount() > 0)
+    // Ajout des données complémentaires à la semaine
+    if (!empty($user))
     {
-      $gateauSemaine = WeekCake::withData($data1);
-
-      // Données utilisateur
-      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $gateauSemaine->getIdentifiant() . '"');
-      $data2 = $req2->fetch();
-      $gateauSemaine->setPseudo($data2['pseudo']);
-      $gateauSemaine->setAvatar($data2['avatar']);
-      $req2->closeCursor();
+      $semaineGateau->setPseudo($user->getPseudo());
+      $semaineGateau->setAvatar($user->getAvatar());
     }
 
-    $req1->closeCursor();
-
-    return $gateauSemaine;
+    // Retour
+    return $semaineGateau;
   }
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
   function getUsers()
   {
-    // Initialisation tableau d'utilisateurs
-    $listUsers = array();
+    // Récupération de la liste des utilisateurs
+    $listeUsers = physiqueUsers();
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT id, identifiant, pseudo FROM users WHERE identifiant != "admin" AND status != "I" AND status != "D" ORDER BY identifiant ASC');
-    while ($donnees = $reponse->fetch())
-    {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
-      $user = Profile::withData($donnees);
-
-      // On construit un tableau des utilisateurs
-      $listUsers[$user->getIdentifiant()] = $user->getPseudo();
-    }
-    $reponse->closeCursor();
-
-    return $listUsers;
+    // Retour
+    return $listeUsers;
   }
 
-  // METIER : Récupères les semaines par années pour la saisie de recette
+  // METIER : Récupère les semaines par années pour la saisie de recette
   // RETOUR : Liste des semaines par années
-  function getWeeks($user)
+  function getWeeks($identifiant)
   {
-    $listYears    = array();
-    $previousYear = '';
+    // Récupération des semaines avec recette saisissable pour l'utilisateur
+    $listeSemainesParAnnees = physiqueSemainesGateauUser($identifiant);
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM cooking_box WHERE identifiant = "' . $user . '"
-                                                        AND name        = ""
-                                                        AND picture     = ""
-                                                        AND (year < ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week <= ' . date('W') . '))
-                                                      ORDER BY year DESC, week DESC');
-    while ($donnees = $reponse->fetch())
-    {
-      if ($donnees['year'] != $previousYear)
-      {
-        if (!empty($previousYear))
-          $listYears[$previousYear] = $listWeeks;
-
-        $listWeeks    = array();
-        $previousYear = $donnees['year'];
-      }
-
-      array_push($listWeeks, formatWeekForDisplay($donnees['week']));
-    }
-    $reponse->closeCursor();
-
-    // Dernière occurence
-    end($listYears);
-    $lastKey = key($listYears);
-
-    if ($lastKey != $previousYear)
-      $listYears[$previousYear] = $listWeeks;
-
-    return $listYears;
+    // Retour
+    return $listeSemainesParAnnees;
   }
 
-  // METIER : Insère ou met à jour l'utilisateur
+  // METIER : Insère ou met à jour l'utilisateur d'une semaine
   // RETOUR : Aucun
   function updateCake($post)
   {
+    // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $post['select_user'];
     $week        = $post['week'];
     $year        = date('Y');
-    $identifiant = $post['select_user'];
-    $exist       = false;
 
-    global $bdd;
+    // Vérification si enregistrement existant
+    $semaineExistante = physiqueSemaineExistante($week, $year);
 
-    // Contrôle si enregistrement existant
-    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
-    $data1 = $req1->fetch();
+    // Contrôle recette semaine déjà validée
+    $control_ok = controleSemaineValidee($semaineExistante);
 
-    if ($req1->rowCount() > 0)
+    if ($control_ok == true)
     {
-      $already_cooked = $data1['cooked'];
-      $exist          = true;
-    }
-
-    $req1->closeCursor();
-
-    // Si non existant : insertion
-    if ($exist == false)
-    {
-      $cooking = array('identifiant' => $identifiant,
-                       'week'        => $week,
-                       'year'        => $year,
-                       'cooked'      => "N",
-                       'name'        => "",
-                       'picture'     => "",
-                       'ingredients' => "",
-                       'recipe'      => "",
-                       'tips'        => ""
-                      );
-
-      $req2 = $bdd->prepare('INSERT INTO cooking_box(identifiant,
-                                                     week,
-                                                     year,
-                                                     cooked,
-                                                     name,
-                                                     picture,
-                                                     ingredients,
-                                                     recipe,
-                                                     tips
-                                                    )
-                                             VALUES(:identifiant,
-                                                    :week,
-                                                    :year,
-                                                    :cooked,
-                                                    :name,
-                                                    :picture,
-                                                    :ingredients,
-                                                    :recipe,
-                                                    :tips
-                                                   )');
-      $req2->execute($cooking);
-      $req2->closeCursor();
-    }
-    // Sinon : mise à jour
-    else
-    {
-      if ($already_cooked != 'Y')
+      // Insertion de l'enregistrement en base (si semaine non existante)
+      if ($semaineExistante['exist'] == false)
       {
-        $req2 = $bdd->prepare('UPDATE cooking_box SET identifiant = :identifiant WHERE week = "' . $week . '" AND year = "' . $year . '"');
-        $req2->execute(array(
-          'identifiant' => $identifiant
-        ));
-        $req2->closeCursor();
+        $cooking = array('identifiant' => $identifiant,
+                         'week'        => $week,
+                         'year'        => $year,
+                         'cooked'      => 'N',
+                         'name'        => '',
+                         'picture'     => '',
+                         'ingredients' => '',
+                         'recipe'      => '',
+                         'tips'        => ''
+                        );
+
+        physiqueInsertionSemaineGateau($cooking);
       }
+      // Modification de l'enregistrement en base
       else
-        $_SESSION['alerts']['already_cooked'] = true;
+        physiqueUpdateSemaineGateau($week, $year, $identifiant);
     }
   }
 
-  // METIER : Valide le gâteau de la semaine
+  // METIER : Valide le gâteau de la semaine d'un utilisateur
   // RETOUR : Aucun
-  function validateCake($cooked, $week, $year, $user)
+  function validateCake($cooked, $week, $year, $identifiant)
   {
-    global $bdd;
+    // Initialisations
+    $control_ok = true;
 
-    $otherCooker = false;
+    // Vérification si enregistrement existant
+    $semaineExistante = physiqueSemaineExistante($week, $year);
 
-    // Lecture des anciennes données
-    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
-    $data1 = $req1->fetch();
+    // Contrôle recette déjà validée par un autre utilisateur
+    $control_ok = controleSemaineValideeAutre($semaineExistante['identifiant'], $identifiant);
 
-    if ($data1['identifiant'] != $user)
-      $otherCooker = true;
-
-    $req1->closeCursor();
-
-    if ($otherCooker == false)
+    // Mise à jour du statut de la recette de la semaine
+    if ($control_ok == true)
     {
-      // Mise à jour du statut
-      $req2 = $bdd->prepare('UPDATE cooking_box SET cooked = :cooked WHERE week = "' . $week . '" AND year = "' . $year . '"');
-      $req2->execute(array(
-        'cooked' => $cooked
-      ));
-      $req2->closeCursor();
+      // Modification de l'enregistrement en base
+      physiqueUpdateStatusSemaineGateau($cooked, $week, $year);
 
-      // Lecture des nouvelles données
-      $req3 = $bdd->query('SELECT * FROM cooking_box WHERE week = "' . $week . '" AND year = "' . $year . '"');
-      $data3 = $req3->fetch();
-      $identifiant = $data3['identifiant'];
-      $req3->closeCursor();
-
+      // Génération succès
       if ($cooked == 'Y')
-        insertOrUpdateSuccesValue('cooker', $identifiant, 1);
+        insertOrUpdateSuccesValue('cooker', $semaineExistante['identifiant'], 1);
       else
-        insertOrUpdateSuccesValue('cooker', $identifiant, -1);
+        insertOrUpdateSuccesValue('cooker', $semaineExistante['identifiant'], -1);
     }
-    else
-      $_SESSION['alerts']['other_cooker'] = true;
   }
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
   function controlYear($year)
   {
+    // Initialisations
     $anneeExistante = false;
 
+    // Vérification année présente en base
     if (isset($year) AND is_numeric($year))
-    {
-      global $bdd;
+      $anneeExistante = physiqueAnneeExistante($year);
 
-      $reponse = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND name != "" AND picture != "" ORDER BY year DESC');
-
-      if ($reponse->rowCount() > 0)
-        $anneeExistante = true;
-
-      $reponse->closeCursor();
-    }
-
+    // Retour
     return $anneeExistante;
   }
 
-  // METIER : Lecture des années distinctes
-  // RETOUR : Liste des années
+  // METIER : Lecture années distinctes pour les onglets
+  // RETOUR : Liste des années existantes
   function getOnglets()
   {
-    $listOnglets = array();
+    // Récupération de la liste des années existantes
+    $onglets = physiqueOnglets();
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT DISTINCT year FROM cooking_box WHERE name != "" AND picture != "" ORDER BY year DESC');
-    while ($donnees = $reponse->fetch())
-    {
-      // On ajoute la ligne au tableau
-      array_push($listOnglets, $donnees['year']);
-    }
-    $reponse->closeCursor();
-
-    return $listOnglets;
+    // Retour
+    return $onglets;
   }
 
-  // METIER : Lecture des recettes
+  // METIER : Lecture des recettes saisies
   // RETOUR : Liste des recettes
-  function getRecipes($year)
+  function getRecipes($year, $listeCookers)
   {
-    $listeRecettes = array();
+    // Récupération de la liste des recettes
+    $listeRecettes = physiqueRecettes($year);
 
-    global $bdd;
-
-    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND picture != "" ORDER BY week DESC');
-    while ($data1 = $req1->fetch())
+    // Recherche pseudo et avatar recettes
+    foreach ($listeRecettes as $recette)
     {
-      $recette = WeekCake::withData($data1);
-
-      // Données utilisateur
-      $req2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $recette->getIdentifiant() . '"');
-      $data2 = $req2->fetch();
-
-      $recette->setPseudo($data2['pseudo']);
-      $recette->setAvatar($data2['avatar']);
-
-      $req2->closeCursor();
-
-      // On ajoute la ligne au tableau
-      array_push($listeRecettes, $recette);
+      if (isset($listeCookers[$recette->getIdentifiant()]))
+      {
+        $recette->setPseudo($listeCookers[$recette->getIdentifiant()]['pseudo']);
+        $recette->setAvatar($listeCookers[$recette->getIdentifiant()]['avatar']);
+      }
     }
-    $req1->closeCursor();
 
     // Retour
     return $listeRecettes;
   }
 
-  // METIER : Converstion du tableau d'objet des recettes en tableau simple pour JSON
+  // METIER : Conversion de la liste d'objets des recettes en tableau simple pour JSON
   // RETOUR : Tableau des recettes
-  function convertForJson($recipes)
+  function convertForJsonListeRecettes($listeRecettes)
   {
-    // On transforme les objets en tableau pour envoyer au Javascript
+    // Initialisations
     $listeRecettesAConvertir = array();
 
-    foreach ($recipes as $recipe)
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($listeRecettes as $recette)
     {
-      $recetteAConvertir = array('id'          => $recipe->getId(),
-                                 'identifiant' => $recipe->getIdentifiant(),
-                                 'pseudo'      => $recipe->getPseudo(),
-                                 'avatar'      => $recipe->getAvatar(),
-                                 'week'        => $recipe->getWeek(),
-                                 'year'        => $recipe->getYear(),
-                                 'cooked'      => $recipe->getCooked(),
-                                 'name'        => $recipe->getName(),
-                                 'picture'     => $recipe->getPicture(),
-                                 'ingredients' => $recipe->getIngredients(),
-                                 'recipe'      => $recipe->getRecipe(),
-                                 'tips'        => $recipe->getTips()
+      $recetteAConvertir = array('id'          => $recette->getId(),
+                                 'identifiant' => $recette->getIdentifiant(),
+                                 'pseudo'      => $recette->getPseudo(),
+                                 'avatar'      => $recette->getAvatar(),
+                                 'week'        => $recette->getWeek(),
+                                 'year'        => $recette->getYear(),
+                                 'cooked'      => $recette->getCooked(),
+                                 'name'        => $recette->getName(),
+                                 'picture'     => $recette->getPicture(),
+                                 'ingredients' => $recette->getIngredients(),
+                                 'recipe'      => $recette->getRecipe(),
+                                 'tips'        => $recette->getTips()
                                 );
 
-      $listeRecettesAConvertir[$recipe->getId()] = $recetteAConvertir;
+      $listeRecettesAConvertir[$recette->getId()] = $recetteAConvertir;
     }
 
     // Retour
     return $listeRecettesAConvertir;
   }
 
-  // METIER : Insère une recette (mise à jour)
+  // METIER : Insère une recette (mise à jour d'une semaine en base)
   // RETOUR : Id recette
-  function insertRecipe($post, $files, $user)
+  function insertRecipe($post, $files, $identifiant)
   {
-    $newId      = NULL;
+    // Initialisations
+    $idRecette  = NULL;
     $control_ok = true;
 
-    global $bdd;
+    // Récupération des données
+    $yearRecipe  = $post['year_recipe'];
+    $weekRecipe  = formatWeekForInsert($post['week_recipe']);
+    $nameRecipe  = $post['name_recipe'];
+    $recipe      = $post['preparation'];
+    $tips        = $post['remarks'];
+    $ingredients = '';
+    $nameFile    = $yearRecipe . '-' . $weekRecipe . '-' . rand();
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['year_recipe']           = $post['year_recipe'];
@@ -356,146 +244,97 @@
     $_SESSION['save']['preparation']           = $post['preparation'];
     $_SESSION['save']['remarks']               = $post['remarks'];
 
-    // Récupération des données
-    $yearRecipe = $post['year_recipe'];
-    $weekRecipe = formatWeekForInsert($post['week_recipe']);
-    $nameRecipe = $post['name_recipe'];
-    $recipe      = $post['preparation'];
-    $tips        = $post['remarks'];
-    $ingredients = '';
-
+    // Contrôle et formatage de la liste des ingrédients à insérer en base
     foreach ($post['ingredients'] as $key => $ingredient)
     {
       if (!empty($ingredient))
       {
-        $quantiteIngredient          = str_replace(',', '.', $post['quantites_ingredients'][$key]);
+        // Formatage des quantités associées
+        $quantiteIngredient         = str_replace(',', '.', $post['quantites_ingredients'][$key]);
         $quantiteIngredientFormated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
 
-        if  (!empty($quantiteIngredient)
-        AND (!is_numeric($quantiteIngredient) OR $quantiteIngredient <= 0))
-        {
-          $_SESSION['alerts']['quantity_not_numeric'] = true;
-          $control_ok                                 = false;
-          break;
-        }
-        else
-        {
-          // Filtrage
-          $ingredient = str_replace('@', ' ', $ingredient);
+        // Contrôle quantité numérique et positif
+        $control_ok = controleNumerique($quantiteIngredient, 'quantity_not_numeric');
 
+        // Filtrage des ingrédients
+        if ($control_ok == true)
+        {
+          // Suppression des caractères réservés
+          $search     = array('@', ';');
+          $replace    = array(' ', ' ');
+          $ingredient = str_replace($search, $replace, $ingredient);
+
+          // Formatage de l'ingrédient en fonction de l'unité utilisée
           if ($post['unites_ingredients'][$key] == 'sans')
             $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@;';
           else
             $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@' . $post['unites_ingredients'][$key] . ';';
         }
+
+        // Arrêt de la boucle en cas d'erreur
+        if ($control_ok == false)
+          break;
       }
     }
 
-    // Contrôle doublon si on double-clique sur Ajouter (on ne met pas à jour mais on récupère l'id pour rediriger vers la recette déjà existante)
+    // Lecture et contrôle des données existantes
     if ($control_ok == true)
     {
-      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $yearRecipe . '" AND week = "' . $weekRecipe . '"');
-      $data1 = $req1->fetch();
-      $datasRecipe = WeekCake::withData($data1);
-      $req1->closeCursor();
+      // Récupération des données de la semaine en cours d'insertion
+      $semaineGateau = physiqueSemaineGateau($weekRecipe, $yearRecipe);
 
-      if (!empty($datasRecipe->getName()) OR !empty($datasRecipe->getPicture()) OR !empty($datasRecipe->getIngredients()) OR !empty($datasRecipe->getRecipe()) OR !empty($datasRecipe->getTips()))
-      {
-        $control_ok = false;
-        $newId      = $data1['id'];
-      }
+      // Récupération de l'id pour rediriger vers la recette déjà existante après mise à jour ou en cas de saisie en doublon
+      $idRecette = $semaineGateau->getId();
+
+      // Contrôle doublon si on double-clique sur "Ajouter"
+      $control_ok = controleInsertionDoublon($semaineGateau);
     }
 
+    // Insertion image
     if ($control_ok == true)
     {
-      // Enregistrement image
-      $newName = '';
+      $imageRecipe = uploadImage($files, $nameFile, $yearRecipe);
 
-      // Dossiers de destination
-      $dossierAnnee      = '../../includes/images/cookingbox/' . $yearRecipe;
-      $dossierMiniatures = $dossierAnnee . '/mini';
-
-      // On vérifie la présence du dossier des miniatures, sinon on le créé
-      if (!is_dir($dossierMiniatures))
-        mkdir($dossierMiniatures, 0777, true);
-
-      // Nom du fichier
-      $name = $yearRecipe . '-' . $weekRecipe . '-' . rand();
-
-      // Contrôles fichier
-      $fileDatas = controlsUploadFile($files['image'], $name, 'all');
-
-      // Traitements fichier
-      if ($fileDatas['control_ok'] == true)
-      {
-        // Upload fichier
-        $control_ok = uploadFile($fileDatas, $dossierAnnee);
-
-        if ($control_ok == true)
-        {
-          $newName   = $fileDatas['new_name'];
-          $typeImage = $fileDatas['type_file'];
-
-          // Rotation de l'image (si JPEG)
-          if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            rotateImage($dossierAnnee . '/' . $newName, $typeImage);
-
-          // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($dossierAnnee . '/' . $newName, $dossierAnnee . '/' . $newName, 2000, FALSE, FALSE);
-
-          // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($dossierAnnee . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
-
-          // Mise à jour de l'enregistrement concerné
-          $recette = array('name'        => $nameRecipe,
-                           'picture'     => $newName,
-                           'ingredients' => $ingredients,
-                           'recipe'      => $recipe,
-                           'tips'        => $tips
-                          );
-
-          $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
-                                                        picture     = :picture,
-                                                        ingredients = :ingredients,
-                                                        recipe      = :recipe,
-                                                        tips        = :tips
-                                                  WHERE year        = "' . $yearRecipe . '"
-                                                    AND week        = "' . $weekRecipe . '"
-                                                    AND identifiant = "' . $user . '"');
-          $req2->execute($recette);
-          $req2->closeCursor();
-
-          // Lecture Id recette
-          $req3 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $yearRecipe . '" AND week = "' . $weekRecipe . '"');
-          $data3 = $req3->fetch();
-          $newId = $data3['id'];
-          $req3->closeCursor();
-
-          // Génération notification nouvelle recette
-          insertNotification($user, 'recipe', $newId);
-
-          // Génération succès
-          insertOrUpdateSuccesValue('recipe-master', $user, 1);
-
-          // Ajout expérience
-          insertExperience($user, 'add_recipe');
-
-          $_SESSION['alerts']['recipe_added'] = true;
-        }
-      }
+      // Contrôle image insérée (obligatoire)
+      $control_ok = controleImageInseree($imageRecipe);
     }
 
-    return $newId;
+    // Modification de l'enregistrement en base
+    if ($control_ok == true)
+    {
+      $recette = array('name'        => $nameRecipe,
+                       'picture'     => $imageRecipe,
+                       'ingredients' => $ingredients,
+                       'recipe'      => $recipe,
+                       'tips'        => $tips
+                      );
+
+      physiqueUpdateRecette($weekRecipe, $yearRecipe, $identifiant, $recette);
+
+      // Insertion notification
+      insertNotification($identifiant, 'recipe', $idRecette);
+
+      // Génération succès
+      insertOrUpdateSuccesValue('recipe-master', $identifiant, 1);
+
+      // Ajout expérience
+      insertExperience($identifiant, 'add_recipe');
+
+      // Message d'alerte
+      $_SESSION['alerts']['recipe_added'] = true;
+    }
+
+    // Retour
+    return $idRecette;
   }
 
   // METIER : Met à jour une recette
   // RETOUR : Id recette
-  function updateRecipe($post, $files, $user)
+  function updateRecipe($post, $files, $identifiant)
   {
-    $idRecipe   = NULL;
+    // Initialisations
+    $idRecette  = NULL;
     $control_ok = true;
-
-    global $bdd;
 
     // Récupération des données
     $yearRecipe  = $post['hidden_year_recipe'];
@@ -504,156 +343,171 @@
     $recipe      = $post['preparation'];
     $tips        = $post['remarks'];
     $ingredients = '';
+    $nameFile    = $yearRecipe . '-' . $weekRecipe . '-' . rand();
 
+    // Contrôle et formatage de la liste des ingrédients à modifier en base
     foreach ($post['ingredients'] as $key => $ingredient)
     {
       if (!empty($ingredient))
       {
+        // Formatage des quantités associées
         $quantiteIngredient         = str_replace(',', '.', $post['quantites_ingredients'][$key]);
         $quantiteIngredientFormated = str_replace('.', ',', $post['quantites_ingredients'][$key]);
 
-        if  (!empty($quantiteIngredient)
-        AND (!is_numeric($quantiteIngredient) OR $quantiteIngredient <= 0))
-        {
-          $_SESSION['alerts']['quantity_not_numeric'] = true;
-          $control_ok                                 = false;
-          break;
-        }
-        else
-        {
-          // Filtrage
-          $ingredient = str_replace('@', ' ', $ingredient);
+        // Contrôle quantité numérique et positif
+        $control_ok = controleNumerique($quantiteIngredient, 'quantity_not_numeric');
 
+        // Filtrage des ingrédients
+        if ($control_ok == true)
+        {
+          // Suppression des caractères réservés
+          $search     = array('@', ';');
+          $replace    = array(' ', ' ');
+          $ingredient = str_replace($search, $replace, $ingredient);
+
+          // Formatage de l'ingrédient en fonction de l'unité utilisée
           if ($post['unites_ingredients'][$key] == 'sans')
             $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@;';
           else
             $ingredients .= $ingredient . '@' . $quantiteIngredientFormated . '@' . $post['unites_ingredients'][$key] . ';';
         }
+
+        // Arrêt de la boucle en cas d'erreur
+        if ($control_ok == false)
+          break;
       }
     }
 
+    // Lecture des données existantes et insertion de l'image
     if ($control_ok == true)
     {
-      // Récupération des données
-      $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $yearRecipe . '" AND week = "' . $weekRecipe . '"');
-      $data1 = $req1->fetch();
-      $datasRecipe = WeekCake::withData($data1);
-      $req1->closeCursor();
+      // Récupération des données de la semaine en cours d'insertion
+      $semaineGateau = physiqueSemaineGateau($weekRecipe, $yearRecipe);
 
-      $idRecipe = $datasRecipe->getId();
-      $newName  = $datasRecipe->getPicture();
+      // Récupération de l'id pour rediriger vers la recette déjà existante après mise à jour ou en cas de saisie en doublon
+      $idRecette = $semaineGateau->getId();
 
-      // Dossiers de destination
-      $dossierAnnee      = '../../includes/images/cookingbox/' . $yearRecipe;
-      $dossierMiniatures = $dossierAnnee . '/mini';
-
-      // Nom du fichier
-      $name = $yearRecipe . '-' . $weekRecipe . '-' . rand();
-
-      // Contrôles fichier
-      $fileDatas = controlsUploadFile($files['image'], $name, 'all');
-
-      // Traitements fichier
-      if ($fileDatas['control_ok'] == true)
+      // Si une nouvelle image est saisie
+      if (!empty($files['image']['name']))
       {
-        // Upload fichier
-        $control_ok = uploadFile($fileDatas, $dossierAnnee);
+        // Insertion image
+        $imageRecipe = uploadImage($files, $nameFile, $yearRecipe);
 
+        // Contrôle image insérée
+        $control_ok = controleImageInseree($imageRecipe);
+
+        // Suppression des anciennes images
         if ($control_ok == true)
         {
-          $newName   = $fileDatas['new_name'];
-          $typeImage = $fileDatas['type_file'];
-
-          // Rotation de l'image (si JPEG)
-          if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-            rotateImage($dossierAnnee . '/' . $newName, $typeImage);
-
-          // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-          imagethumb($dossierAnnee . '/' . $newName, $dossierAnnee . '/' . $newName, 2000, FALSE, FALSE);
-
-          // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($dossierAnnee . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
-
-          // Suppression des anciennes images
-          if (!empty($datasRecipe->getPicture()))
+          if (!empty($semaineGateau->getPicture()))
           {
-            unlink($dossierAnnee . '/' . $datasRecipe->getPicture());
-            unlink($dossierMiniatures . '/' . $datasRecipe->getPicture());
+            unlink('../../includes/images/cookingbox/' . $yearRecipe . '/' . $semaineGateau->getPicture());
+            unlink('../../includes/images/cookingbox/' . $yearRecipe . '/' . $semaineGateau->getPicture());
           }
         }
       }
+      else
+        $imageRecipe = $semaineGateau->getPicture();
+    }
 
-      if ($control_ok == true)
-      {
-        // Mise à jour de l'enregistrement concerné
-        $recette = array('name'        => $nameRecipe,
-                         'picture'     => $newName,
-                         'ingredients' => $ingredients,
-                         'recipe'      => $recipe,
-                         'tips'        => $tips
-                        );
+    // Modification de l'enregistrement en base
+    if ($control_ok == true)
+    {
+      $recette = array('name'        => $nameRecipe,
+                       'picture'     => $imageRecipe,
+                       'ingredients' => $ingredients,
+                       'recipe'      => $recipe,
+                       'tips'        => $tips
+                      );
 
-        $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
-                                                      picture     = :picture,
-                                                      ingredients = :ingredients,
-                                                      recipe      = :recipe,
-                                                      tips        = :tips
-                                                WHERE year        = "' . $yearRecipe . '"
-                                                  AND week        = "' . $weekRecipe . '"
-                                                  AND identifiant = "' . $user . '"');
-        $req2->execute($recette);
-        $req2->closeCursor();
+      physiqueUpdateRecette($weekRecipe, $yearRecipe, $identifiant, $recette);
 
-        $_SESSION['alerts']['recipe_updated'] = true;
-      }
+      // Message d'alerte
+      $_SESSION['alerts']['recipe_updated'] = true;
     }
 
     // Retour
-    return $idRecipe;
+    return $idRecette;
   }
 
-  // METIER : Supprime une recette
+  // METIER : Suppression recette
   // RETOUR : Aucun
-  function deleteRecipe($post, $year, $user)
+  function deleteRecipe($post, $year, $identifiant)
   {
+    // Récupération des données
     $week = $post['week_cake'];
 
-    global $bdd;
-
-    // Lecture des données recette
-    $req1 = $bdd->query('SELECT * FROM cooking_box WHERE year = "' . $year . '" AND week = "' . $week . '"');
-    $data1 = $req1->fetch();
-    $recipe = WeekCake::withData($data1);
-    $req1->closeCursor();
+    // Lecture des données de la recette
+    $recette = physiqueRecette($week, $year);
 
     // Suppression des images
-    if (!empty($recipe->getPicture()))
+    if (!empty($recette->getPicture()))
     {
-      unlink('../../includes/images/cookingbox/' . $year . '/' . $recipe->getPicture());
-      unlink('../../includes/images/cookingbox/' . $year . '/mini/' . $recipe->getPicture());
+      unlink('../../includes/images/cookingbox/' . $year . '/' . $recette->getPicture());
+      unlink('../../includes/images/cookingbox/' . $year . '/mini/' . $recette->getPicture());
     }
 
-    // Mise à jour des données
-    $update = array('name'        => '',
-                    'picture'     => '',
-                    'ingredients' => '',
-                    'recipe'      => '',
-                    'tips'        => ''
-                   );
-    $req2 = $bdd->prepare('UPDATE cooking_box SET name        = :name,
-                                                  picture     = :picture,
-                                                  ingredients = :ingredients,
-                                                  recipe      = :recipe,
-                                                  tips        = :tips
-                                            WHERE year = "' . $year . '"
-                                            AND   week = "' . $week . '"');
-    $req2->execute($update);
-    $req2->closeCursor();
+    // Modification de l'enregistrement en base
+    $reinitialisationRecette = array('name'        => '',
+                                     'picture'     => '',
+                                     'ingredients' => '',
+                                     'recipe'      => '',
+                                     'tips'        => ''
+                                    );
+
+    physiqueResetRecette($week, $year, $reinitialisationRecette);
 
     // Suppression des notifications
-    deleteNotification('recipe', $recipe->getId());
+    deleteNotification('recipe', $recette->getId());
 
     // Génération succès
-    insertOrUpdateSuccesValue('recipe-master', $user, -1);
+    insertOrUpdateSuccesValue('recipe-master', $identifiant, -1);
+  }
+
+  // METIER : Formatage et insertion image Cooking Box
+  // RETOUR : Nom fichier avec extension
+  function uploadImage($files, $name, $year)
+  {
+    // Initialisations
+    $newName    = '';
+    $control_ok = true;
+
+    // Dossier de destination des miniatures
+    $dossier           = '../../includes/images/cookingbox/' . $year;
+    $dossierMiniatures = $dossier . '/mini';
+
+    // On vérifie la présence du dossier des miniatures, sinon on le créé
+    if (!is_dir($dossierMiniatures))
+      mkdir($dossierMiniatures, 0777, true);
+
+    // Contrôles fichier
+    $fileDatas = controlsUploadFile($files['image'], $name, 'all');
+
+    // Récupération contrôles
+    $control_ok = controleFichier($fileDatas);
+
+    // Upload fichier
+    if ($control_ok == true)
+      $control_ok = uploadFile($fileDatas, $dossier);
+
+    // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+    if ($control_ok == true)
+    {
+      $newName   = $fileDatas['new_name'];
+      $typeImage = $fileDatas['type_file'];
+
+      // Rotation de l'image (si JPEG)
+      if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+        rotateImage($dossier . '/' . $newName, $typeImage);
+
+      // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
+      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 2000, FALSE, FALSE);
+
+      // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+      imagethumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
+    }
+
+    // Retour
+    return $newName;
   }
 ?>

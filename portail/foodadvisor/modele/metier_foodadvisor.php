@@ -70,7 +70,7 @@
     return $listeRestaurantsAConvertir;
   }
 
-  // METIER : Converstion du tableau d'objet des propositions en tableau simple pour JSON
+  // METIER : Conversion du tableau d'objet des propositions en tableau simple pour JSON
   // RETOUR : Tableau des détails
   function convertForJsonListePropositions($propositions)
   {

@@ -265,9 +265,9 @@ function afficherListboxUtilisateurs(idZone, week)
     html += '<select name="select_user" class="listbox_users" required>';
       html += '<option value="" hidden>Choisissez...</option>';
 
-      $.each(listUsers, function(key, value)
+      $.each(listCookers, function(key, value)
       {
-        html += '<option value="' + key + '">' + value + '</option>';
+        html += '<option value="' + key + '">' + value['pseudo'] + '</option>';
       });
     html += '</select>';
 

@@ -1,13 +1,13 @@
 <?php
   // CONTROLE : Saisie non vide
   // RETOUR : Booléen
-  function controleCalendar($nameFile, $type)
+  function controleCalendar($nomFichier, $type)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    if (empty($nameFile))
+    if (empty($nomFichier))
     {
       if ($type == 'annexe')
         $_SESSION['alerts']['empty_annexe']   = true;
