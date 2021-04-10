@@ -35,6 +35,9 @@
   // RETOUR : Id restaurant
   function physiqueInsertionRestaurant($restaurant)
   {
+    // Initialisations
+    $newId = NULL;
+    
     // Requête
     global $bdd;
 

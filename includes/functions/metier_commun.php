@@ -88,11 +88,11 @@
             if (!empty($mission) AND date('His') >= $mission->getHeure())
             {
               // Nombre de boutons à générer pour la mission en cours
-              $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+              $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
 
-              if ($nbButtonsToGenerate > 0)
+              if ($numberButtonsToGenerate > 0)
               {
-                $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
+                $missionGenerated = generateMissions($numberButtonsToGenerate, $mission, $key);
                 $_SESSION['missions'][$key] = $missionGenerated;
               }
             }
@@ -104,11 +104,11 @@
             else
             {
               // Nombre de boutons à générer pour la mission en cours
-              $nbButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+              $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
 
-              if ($nbButtonsToGenerate != count($_SESSION['missions'][$key]))
+              if ($numberButtonsToGenerate != count($_SESSION['missions'][$key]))
               {
-                $missionGenerated = generateMissions($nbButtonsToGenerate, $mission, $key);
+                $missionGenerated = generateMissions($numberButtonsToGenerate, $mission, $key);
                 $_SESSION['missions'][$key] = $missionGenerated;
               }
             }
@@ -299,7 +299,7 @@
 
   // METIER : Génération contexte mission (boutons)
   // RETOUR : Tableau contexte
-  function generateMissions($nb, $mission, $key)
+  function generateMissions($nombre, $mission, $key)
   {
     $listeBoutonsMission        = array();
 
@@ -343,7 +343,7 @@
                                         'bottom_right',
                                        );
 
-    for ($i = 0; $i < $nb; $i++)
+    for ($i = 0; $i < $nombre; $i++)
     {
       $boutonsMission = array();
 

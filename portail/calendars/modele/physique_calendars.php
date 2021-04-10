@@ -148,6 +148,9 @@
   // RETOUR : Id calendrier
   function physiqueInsertionCalendrier($calendar)
   {
+    // Initialisations
+    $newId = NULL;
+
     // Requête
     global $bdd;
 
@@ -174,6 +177,9 @@
   // RETOUR : Id annexe
   function physiqueInsertionAnnexe($annexe)
   {
+    // Initialisations
+    $newId = NULL;
+    
     // Requête
     global $bdd;
 

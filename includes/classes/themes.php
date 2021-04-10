@@ -27,10 +27,10 @@
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
-      $ideas = new self();
-      $ideas->fill($data);
+      $theme = new self();
+      $theme->fill($data);
 
-      return $ideas;
+      return $theme;
     }
 
     protected function fill ($data)

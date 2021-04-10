@@ -126,6 +126,9 @@
   // RETOUR : Id thème
   function physiqueInsertionTheme($theme)
   {
+    // Initialisations
+    $newId = NULL;
+
     // Requête
     global $bdd;
 

@@ -2,7 +2,7 @@
   /**************/
   /* Pagination */
   /**************/
-  if ($nbPages > 1)
+  if ($nombrePages > 1)
   {
     $previousPoints = false;
     $nextPoints     = false;
@@ -10,9 +10,9 @@
     $limitSup       = $_GET['page'] + 1;
 
     echo '<div class="zone_pagination">';
-      for ($i = 1; $i <= $nbPages; $i++)
+      for ($i = 1; $i <= $nombrePages; $i++)
       {
-        if ($i == 1 OR $i == $nbPages)
+        if ($i == 1 OR $i == $nombrePages)
         {
           if ($i == $_GET['page'])
             echo '<div class="numero_page_active">' . $i . '</div>';
@@ -43,7 +43,7 @@
             }
           }
 
-          if ($i > $limitSup AND $i < $nbPages AND $nextPoints != true)
+          if ($i > $limitSup AND $i < $nombrePages AND $nextPoints != true)
           {
             echo '<div class="points">...</div>';
             $nextPoints = true;

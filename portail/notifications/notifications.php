@@ -31,16 +31,16 @@
             header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
           else
           {
-            $nbPages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
+            $nombrePages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
 
-            if ($nbPages > 0)
+            if ($nombrePages > 0)
             {
-              if ($_GET['page'] > $nbPages)
-                header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=' . $nbPages);
+              if ($_GET['page'] > $nombrePages)
+                header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=' . $nombrePages);
               elseif ($_GET['page'] < 1)
                 header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
               else
-                $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nbPages, $_GET['page']);
+                $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nombrePages, $_GET['page']);
             }
           }
           break;

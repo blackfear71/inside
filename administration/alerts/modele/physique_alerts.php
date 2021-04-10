@@ -90,6 +90,9 @@
   // RETOUR : Id alerte
   function physiqueInsertionAlerte($alerte)
   {
+    // Initialisations
+    $newId = NULL;
+
     // Requête
     global $bdd;
 

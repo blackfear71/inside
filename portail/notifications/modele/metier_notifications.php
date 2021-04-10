@@ -392,7 +392,7 @@
           $reponse1->closeCursor();
 
           // Recherche du numéro de page
-          $numeroPage = numPageIdea($notification->getContent(), $view);
+          $numeroPage = getNumeroPageIdea($notification->getContent(), $view);
 
           $icone  = 'ideas';
           $phrase = 'Une nouvelle idée <strong>' . $sujet . '</strong> vient tout juste d\'être publiée par <strong>' . $auteur . '</strong> !';
@@ -513,7 +513,7 @@
   // RETOUR : Numéro de page
   function numeroPageCollector($id)
   {
-    $numPage       = 0;
+    $numeroPage    = 0;
     $nombreParPage = 18;
     $position      = 1;
 
@@ -530,16 +530,16 @@
     }
     $reponse->closeCursor();
 
-    $numPage = ceil($position / $nombreParPage);
+    $numeroPage = ceil($position / $nombreParPage);
 
-    return $numPage;
+    return $numeroPage;
   }
 
   // METIER : Récupère le numéro de page pour une notification #TheBox
   // RETOUR : Numéro de page
-  function numPageIdea($id, $view)
+  function getNumeroPageIdea($id, $view)
   {
-    $numPage       = 0;
+    $numeroPage    = 0;
     $nombreParPage = 18;
     $position      = 1;
 
@@ -590,8 +590,8 @@
     }
     $reponse->closeCursor();
 
-    $numPage = ceil($position / $nombreParPage);
+    $numeroPage = ceil($position / $nombreParPage);
 
-    return $numPage;
+    return $numeroPage;
   }
 ?>

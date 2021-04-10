@@ -69,7 +69,7 @@
     // Traitement des logs
     if (!empty($listeLogs))
     {
-      foreach($listeLogs as $log)
+      foreach ($listeLogs as $log)
       {
         // Extraction des logs
         $extractLogs = explode(';', $log->getLogs());

@@ -1,153 +1,73 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/ideas.php');
 
   // METIER : Lecture nombre de pages en fonction de la vue
   // RETOUR : Nombre de pages
-  function getPages($vue, $user)
+  function getPages($view, $identifiant)
   {
+    // Initialisations
     $nombrePages   = 0;
-    $nombreIdees   = 0;
     $nombreParPage = 18;
 
-    global $bdd;
+    // Récupération du nombre d'idées en fonction de la vue
+    $nombreIdees = physiqueNombreIdees($view, $identifiant);
 
     // Calcul du nombre total d'enregistrements pour chaque vue
-    switch ($vue)
-    {
-      case 'inprogress':
-        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE status = "O" OR status = "C" OR status = "P"');
-        break;
-
-      case 'mine':
-        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $user . '"');
-        break;
-
-      case 'done':
-        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas WHERE status = "D" OR status = "R"');
-        break;
-
-      case 'all':
-      default:
-        $req = $bdd->query('SELECT COUNT(id) AS nb_idees FROM ideas');
-        break;
-    }
-
-    $data = $req->fetch();
-
-    if (isset($data['nb_idees']))
-      $nombreIdees = $data['nb_idees'];
-
-    $req->closeCursor();
-
     $nombrePages = ceil($nombreIdees / $nombreParPage);
 
+    // Retour
     return $nombrePages;
   }
 
   // METIER : Lecture liste des idées
   // RETOUR : Tableau d'idées
-  function getIdeas($view, $page, $nombrePages)
+  function getIdeas($view, $page, $nombrePages, $identifiant)
   {
-    // Initialisation tableau d'idées
-    $listeIdeas    = array();
+    // Initialisations
     $nombreParPage = 18;
 
-    // Contrôle dernière page
+    // Vérification que l'on ne dépasse pas la dernière page
     if ($page > $nombrePages)
       $page = $nombrePages;
 
-    // Calcul première entrée
+    // Calcul de la première occurence à récupérer en fonction de la page demandée
     $premiereEntree = ($page - 1) * $nombreParPage;
 
-    global $bdd;
+    // Lecture des idées
+    $listeIdees = physiqueIdees($view, $premiereEntree, $nombreParPage, $identifiant);
 
-    // Lecture de la base en fonction de la vue
-    switch ($view)
+    // Recherche des pseudos et des avatars
+    foreach ($listeIdees as $idee)
     {
-      case 'done':
-        $reponse = $bdd->query('SELECT *
-                                FROM ideas
-                                WHERE status = "D" OR status = "R"
-                                ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
-                              );
-        break;
-
-      case 'inprogress':
-        $reponse = $bdd->query('SELECT *
-                                FROM ideas
-                                WHERE status = "O" OR status = "C" OR status = "P"
-                                ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
-                              );
-        break;
-
-      case 'mine':
-        $reponse = $bdd->query('SELECT *
-                                FROM ideas
-                                WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '"
-                                ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
-                              );
-        break;
-
-      case 'all':
-      default:
-        $reponse = $bdd->query('SELECT *
-                                FROM ideas
-                                ORDER BY date DESC, id DESC
-                                LIMIT ' . $premiereEntree . ', ' . $nombreParPage
-                              );
-        break;
-    }
-
-    while ($donnees = $reponse->fetch())
-    {
-      // Instanciation d'un objet Idea à partir des données remontées de la bdd
-      $idea = Idea::withData($donnees);
-
       // Recherche du pseudo et de l'avatar de l'auteur
-      $reponse2 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getAuthor() . '"');
-      $donnees2 = $reponse2->fetch();
+      $auteur = physiqueUser($idee->getAuthor());
 
-      if ($reponse2->rowCount() > 0)
+      // Recherche du pseudo et de l'avatar du developpeur (si renseigné)
+      if (!empty($idee->getDevelopper()))
+        $developpeur = physiqueUser($idee->getDevelopper());
+
+      // Ajout des données complémentaires à l'idée
+      if (isset($auteur) AND !empty($auteur))
       {
-        $idea->setPseudo_author($donnees2['pseudo']);
-        $idea->setAvatar_author($donnees2['avatar']);
+        $idee->setPseudo_author($auteur->getPseudo());
+        $idee->setAvatar_author($auteur->getAvatar());
       }
 
-      $reponse2->closeCursor();
-
-      // Recherche du pseudo et de l'avatar du developpeur si renseigné
-      if (!empty($idea->getDevelopper()))
+      if (isset($developpeur) AND !empty($developpeur))
       {
-        $reponse3 = $bdd->query('SELECT identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $idea->getDevelopper() . '"');
-        $donnees3 = $reponse3->fetch();
-
-        if ($reponse3->rowCount() > 0)
-        {
-          $idea->setPseudo_developper($donnees3['pseudo']);
-          $idea->setAvatar_developper($donnees3['avatar']);
-        }
-
-        $reponse3->closeCursor();
+        $idee->setPseudo_developper($developpeur->getPseudo());
+        $idee->setAvatar_developper($developpeur->getAvatar());
       }
-
-      array_push($listeIdeas, $idea);
     }
 
-    $reponse->closeCursor();
-
-    return $listeIdeas;
+    // Retour
+    return $listeIdees;
   }
 
   // METIER : Insertion d'une idée
   // RETOUR : Id enregistrement créé
   function insertIdea($post, $author)
   {
-    $newId = NULL;
-
     // Récupération des données
     $subject    = $post['subject_idea'];
     $content    = $post['content_idea'];
@@ -155,8 +75,8 @@
     $status     = 'O';
     $developper = '';
 
-    // On construit un tableau avec les données
-    $idea = array('subject'    => $subject,
+    // Insertion de l'enregistrement en base
+    $idee = array('subject'    => $subject,
                   'date'       => $date,
                   'author'     => $author,
                   'content'    => $content,
@@ -164,30 +84,10 @@
                   'developper' => $developper
                  );
 
-    // On insère dans la table
-    global $bdd;
+    $idIdee = physiqueInsertionIdee($idee);
 
-    $req = $bdd->prepare('INSERT INTO ideas(subject,
-                                            date,
-                                            author,
-                                            content,
-                                            status,
-                                            developper
-                                           )
-                                     VALUES(:subject,
-                                            :date,
-                                            :author,
-                                            :content,
-                                            :status,
-                                            :developper
-                                           )');
-    $req->execute($idea);
-    $req->closeCursor();
-
-    // Génération notification idée ajoutée
-    $newId = $bdd->lastInsertId();
-
-    insertNotification($author, 'idee', $newId);
+    // Insertion notification
+    insertNotification($author, 'idee', $idIdee);
 
     // Génération succès
     insertOrUpdateSuccesValue('creator', $author, 1);
@@ -195,43 +95,48 @@
     // Ajout expérience
     insertExperience($author, 'add_idea');
 
+    // Message d'alerte
     $_SESSION['alerts']['idea_submitted'] = true;
 
-    return $newId;
+    // Retour
+    return $idIdee;
   }
 
   // METIER : Mise à jour du statut d'une idée
   // RETOUR : Vue à afficher
-  function updateIdea($post, $view)
+  function updateIdea($post, $view, $identifiant)
   {
-    $idIdea = $post['id_idea'];
+    // Récupération des données
+    $idIdee = $post['id_idea'];
     $action = $post;
 
     unset($action['id_idea']);
 
-    global $bdd;
+    // Récupération des données existantes de l'idée
+    $ideeExistante = physiqueIdee($idIdee);
 
+    // Détermination des données à insérer et de la vue en fonction de l'action effectuée
     switch (key($action))
     {
       case 'take':
         $status     = 'C';
-        $developper = $_SESSION['user']['identifiant'];
+        $developper = $identifiant;
         break;
 
       case 'developp':
         $status     = 'P';
-        $developper = $_SESSION['user']['identifiant'];
+        $developper = $identifiant;
         break;
 
       case 'end':
         $status     = 'D';
-        $developper = $_SESSION['user']['identifiant'];
+        $developper = $identifiant;
         $view       = 'done';
         break;
 
       case 'reject':
         $status     = 'R';
-        $developper = $_SESSION['user']['identifiant'];
+        $developper = $identifiant;
         $view       = 'done';
         break;
 
@@ -243,109 +148,55 @@
         break;
     }
 
-    // On construit un tableau avec les données à modifier
-    $datas = array('status'     => $status,
-                   'developper' => $developper
-                  );
+    // Insertion de l'enregistrement en base
+    $idee = array('status'     => $status,
+                  'developper' => $developper
+                 );
 
-    // Lecture des données
-    $req1 = $bdd->query('SELECT * FROM ideas WHERE id = ' . $idIdea);
-    $data1 = $req1->fetch();
-    $author     = $data1['author'];
-    $developper = $data1['developper'];
-    $oldStatus  = $data1['status'];
-    $req1->closeCursor();
-
-    // On met à jour la table
-    $req2 = $bdd->prepare('UPDATE ideas SET status     = :status,
-                                           developper = :developper
-                                     WHERE id         = ' . $idIdea);
-    $req2->execute($datas);
-    $req2->closeCursor();
+    physiqueUpdateIdee($idIdee, $idee);
 
     // Génération succès
     switch ($status)
     {
       case 'D':
-        insertOrUpdateSuccesValue('applier', $developper, 1);
+        insertOrUpdateSuccesValue('applier', $ideeExistante->getDevelopper(), 1);
         break;
 
       case 'R':
-        insertOrUpdateSuccesValue('creator', $author, -1);
+        insertOrUpdateSuccesValue('creator', $ideeExistante->getAuthor(), -1);
         break;
 
       case 'O':
-        if ($oldStatus == 'D')
-          insertOrUpdateSuccesValue('applier', $developper, -1);
+        if ($ideeExistante->getStatus() == 'D')
+          insertOrUpdateSuccesValue('applier', $ideeExistante->getDevelopper(), -1);
 
-        if ($oldStatus == 'R')
-          insertOrUpdateSuccesValue('creator', $author, 1);
+        if ($ideeExistante->getStatus() == 'R')
+          insertOrUpdateSuccesValue('creator', $ideeExistante->getAuthor(), 1);
         break;
 
       default:
         break;
     }
 
+    // Retour
     return $view;
   }
 
-  // METIER : Récupère le numéro de page pour une notification #TheBox
+  // METIER : Récupère le numéro de page pour la redirection après changement de statut
   // RETOUR : Numéro de page
-  function numPageIdea($id, $view)
+  function getNumeroPageIdea($idIdee, $view, $identifiant)
   {
-    $numPage       = 0;
+    // Initialisations
+    $numeroPage    = 0;
     $nombreParPage = 18;
-    $position      = 1;
 
-    global $bdd;
+    // Recherche de la position de l'idée dans la table en fonction de la vue
+    $positionIdee = physiquePositionIdee($view, $idIdee, $identifiant);
 
-    // On cherche la position de l'idée dans la table en fonction de la vue
-    switch ($view)
-    {
-      case 'done':
-        $reponse = $bdd->query('SELECT id, date
-                                FROM ideas
-                                WHERE status = "D" OR status = "R"
-                                ORDER BY date DESC, id DESC'
-                              );
-        break;
+    // Calcul du numéro de page de l'idée
+    $numeroPage = ceil($positionIdee / $nombreParPage);
 
-      case 'inprogress':
-        $reponse = $bdd->query('SELECT id, date
-                                FROM ideas
-                                WHERE status = "O" OR status = "C" OR status = "P"
-                                ORDER BY date DESC, id DESC'
-                              );
-        break;
-
-      case 'mine':
-        $reponse = $bdd->query('SELECT id, date
-                                FROM ideas
-                                WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $_SESSION['user']['identifiant'] . '"
-                                ORDER BY date DESC, id DESC'
-                              );
-        break;
-
-      case 'all':
-      default:
-        $reponse = $bdd->query('SELECT id, date
-                                FROM ideas
-                                ORDER BY date DESC, id DESC'
-                              );
-        break;
-    }
-
-    while ($donnees = $reponse->fetch())
-    {
-      if ($id == $donnees['id'])
-        break;
-      else
-        $position++;
-    }
-    $reponse->closeCursor();
-
-    $numPage = ceil($position / $nombreParPage);
-
-    return $numPage;
+    // Retour
+    return $numeroPage;
   }
 ?>

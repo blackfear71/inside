@@ -74,6 +74,9 @@
   // RETOUR : Id bug / évolution culte
   function physiqueInsertionBug($bug)
   {
+    // Initialisations
+    $newId = NULL;
+    
     // Requête
     global $bdd;
 

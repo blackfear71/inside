@@ -84,7 +84,6 @@
   function insertRestaurant($post, $files, $identifiant)
   {
     // Initialisations
-    $newId      = NULL;
     $control_ok = true;
 
     // Récupération des données
@@ -256,7 +255,7 @@
                           'description'  => $descriptionRestaurant
                          );
 
-      $newId = physiqueInsertionRestaurant($restaurant);
+      $idRestaurant = physiqueInsertionRestaurant($restaurant);
 
       // Génération succès
       insertOrUpdateSuccesValue('restaurant-finder', $identifiant, 1);
@@ -269,7 +268,7 @@
     }
 
     // Retour
-    return $newId;
+    return $idRestaurant;
   }
 
   // METIER : Mise à jour d'un restaurant

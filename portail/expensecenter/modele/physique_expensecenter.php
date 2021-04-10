@@ -247,6 +247,9 @@
   // RETOUR : Id dépense
   function physiqueInsertionDepense($depense)
   {
+    // Initialisations
+    $newId = NULL;
+    
     // Requête
     global $bdd;
 

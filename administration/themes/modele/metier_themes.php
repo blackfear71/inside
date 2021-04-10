@@ -43,7 +43,6 @@
   function insertTheme($post, $files)
   {
     // Initialisations
-    $newId      = NULL;
     $control_ok = true;
 
     // Récupération des données
@@ -259,14 +258,14 @@
                      'date_fin'  => $dateFin
                     );
 
-      $newId = physiqueInsertionTheme($theme);
+      $idTheme = physiqueInsertionTheme($theme);
 
       // Message d'alerte
       $_SESSION['alerts']['theme_added'] = true;
     }
 
     // Retour
-    return $newId;
+    return $idTheme;
   }
 
   // METIER : Modification thème existant

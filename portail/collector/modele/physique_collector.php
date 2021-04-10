@@ -439,6 +439,9 @@
   // RETOUR : Id phrase / image culte
   function physiqueInsertionCollector($collector)
   {
+    // Initialisations
+    $newId = NULL;
+    
     // Requête
     global $bdd;
 

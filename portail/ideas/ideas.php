@@ -17,6 +17,7 @@
 
   // Modèle de données
   include_once('modele/metier_ideas.php');
+  include_once('modele/physique_ideas.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -27,20 +28,23 @@
         header('location: ideas.php?view=all&action=goConsulter&page=1');
       else
       {
-        // Lecture liste des données par le modèle
+        // Lecture des idées en fonction de la vue
         switch ($_GET['view'])
         {
           case 'all':
           case 'done':
           case 'mine':
           case 'inprogress':
-            $nbPages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
+            // Récupération du nombre de pages
+            $nombrePages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
 
-            if ($nbPages > 0)
-              $listeIdeas = getIdeas($_GET['view'], $_GET['page'], $nbPages);
+            // Récupération des idées
+            if ($nombrePages > 0)
+              $listeIdees = getIdeas($_GET['view'], $_GET['page'], $nombrePages, $_SESSION['user']['identifiant']);
             break;
 
           default:
+            // Contrôle vue renseignée URL
             header('location: ideas.php?view=all&action=goConsulter&page=1');
             break;
         }
@@ -48,15 +52,19 @@
       break;
 
     case 'doInserer':
-      // Insertion des données par le modèle
-      $idIdea = insertIdea($_POST, $_SESSION['user']['identifiant']);
+      // Insertion d'une idée
+      $idIdee = insertIdea($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doChangerStatut':
-      // Mise à jour des données par le modèle
-      $idIdea     = $_POST['id_idea'];
-      $view       = updateIdea($_POST, $_GET['view']);
-      $numeroPage = numPageIdea($idIdea, $view);
+      // Récupération de l'id de l'idée
+      $idIdee = $_POST['id_idea'];
+
+      // Modification du statut d'une idée
+      $view = updateIdea($_POST, $_GET['view'], $_SESSION['user']['identifiant']);
+
+      // Récupération du numéro de page pour la redirection
+      $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']['identifiant']);
       break;
 
     default:
@@ -69,11 +77,11 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      if ($nbPages > 0)
+      if ($nombrePages > 0)
       {
-        foreach ($listeIdeas as $idea)
+        foreach ($listeIdees as $idee)
         {
-          Idea::secureData($idea);
+          Idea::secureData($idee);
         }
       }
       break;
@@ -88,11 +96,11 @@
   switch ($_GET['action'])
   {
     case 'doChangerStatut':
-      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idIdea);
+      header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idIdee);
       break;
 
     case 'doInserer':
-      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $idIdea);
+      header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $idIdee);
       break;
 
     case 'goConsulter':

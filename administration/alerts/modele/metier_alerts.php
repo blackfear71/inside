@@ -33,7 +33,6 @@
   function insertAlert($post)
   {
     // Initialisations
-    $newId      = NULL;
     $control_ok = true;
 
     // Récupération des données
@@ -60,13 +59,14 @@
                       'message'  => $message
                      );
 
-      $newId = physiqueInsertionAlerte($alerte);
+      $idAlerte = physiqueInsertionAlerte($alerte);
 
       // Message d'alerte
       $_SESSION['alerts']['alert_added'] = true;
     }
 
-    return $newId;
+    // Retour
+    return $idAlerte;
   }
 
   // METIER : Modification d'une alerte
