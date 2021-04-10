@@ -16,6 +16,8 @@
 
   // Modèle de données
   include_once('modele/metier_missions.php');
+  include_once('modele/controles_missions.php');
+  include_once('modele/physique_missions.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -26,15 +28,21 @@
         header('location: missions.php?action=goConsulter');
       else
       {
-        // Lecture liste des données par le modèle
-        $missionExistante = controlMission($_GET['id_mission']);
+        // Vérification que la mission existe et est disponible
+        $missionExistante = isMissionDisponible($_GET['id_mission']);
 
         if ($missionExistante == true)
         {
+          // Récupération des détails de la mission
           $detailsMission = getMission($_GET['id_mission']);
-          $participants   = getParticipants($_GET['id_mission']);
-          $missionUser    = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
 
+          // Récupération des participants
+          $participants = getParticipants($_GET['id_mission']);
+
+          // Récupération du tableau d'avancement de l'utilisateur (quotidien et évènement)
+          $missionUser = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
+
+          // Récupération des résultats
           if (date('Ymd') > $detailsMission->getDate_fin())
             $ranking = getRankingMission($_GET['id_mission'], $participants);
         }

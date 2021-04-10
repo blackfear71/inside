@@ -249,7 +249,7 @@
   {
     // Initialisations
     $newId = NULL;
-    
+
     // Requête
     global $bdd;
 

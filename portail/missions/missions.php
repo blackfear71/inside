@@ -15,16 +15,18 @@
 
   // Modèle de données
   include_once('modele/metier_missions.php');
+  include_once('modele/physique_missions.php');
 
   // Appel métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Lecture liste des données par le modèle
+      // Récupération de la liste des missions
       $listeMissions = getMissions();
       break;
 
     case 'doMission':
+      // Validation d'un bouton de mission
       if (isset($_SERVER['HTTP_REFERER']))
         validateMission($_POST, $_SESSION['user']['identifiant'], $_SESSION['missions'][$_POST['key_mission']]);
       break;

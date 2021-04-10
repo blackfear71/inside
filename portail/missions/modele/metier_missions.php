@@ -1,252 +1,174 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/classes/missions.php');
   include_once('../../includes/classes/profile.php');
 
-  // METIER : Contrôle mission existante
-  // RETOUR : Booléen
-  function controlMission($id)
-  {
-    global $bdd;
-
-    $missionExistante = false;
-
-    // Contrôle mission existante
-    $reponse = $bdd->query('SELECT * FROM missions WHERE (id = ' . $id . ' AND (date_deb < ' . date('Ymd') . ' OR (date_deb = ' . date('Ymd') . ' AND heure <= ' . date('His') . ')))');
-
-    if ($reponse->rowCount() > 0)
-      $missionExistante = true;
-
-    $reponse->closeCursor();
-
-    if ($missionExistante == false)
-      $_SESSION['alerts']['mission_doesnt_exist'] = true;
-
-    return $missionExistante;
-  }
-
-  // METIER : Récupération des missions
-  // RETOUR : Objets mission
+  // METIER : Lecture des missions
+  // RETOUR : Liste des missions
   function getMissions()
   {
-    $listeMissions = array();
+    // Récupération de la liste des missions
+    $listeMissions = physiqueMissions();
 
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM missions');
-    while ($donnees = $reponse->fetch())
-    {
-      $mission = Mission::withData($donnees);
-
-      if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
-        $mission->setStatut('V');
-      elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
-        $mission->setStatut('C');
-      elseif (date('Ymd') > $mission->getDate_fin())
-        $mission->setStatut('A');
-
-      array_push($listeMissions, $mission);
-    }
-    $reponse->closeCursor();
-
-    // Tri sur statut (V : à venir, C : en cours, A : ancienne)
-    foreach ($listeMissions as $missionTri)
-    {
-      $triStatut[]  = $missionTri->getStatut();
-      $triDateDeb[] = $missionTri->getDate_deb();
-    }
-
+    // Tri des missions sur statut (V : à venir, C : en cours, A : ancienne) puis date
     if (!empty($listeMissions))
-      array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $listeMissions);
+    {
+      foreach ($listeMissions as $triMissions)
+      {
+        $triStatut[]    = $triMissions->getStatut();
+        $triDateDebut[] = $triMissions->getDate_deb();
+      }
+
+      array_multisort($triStatut, SORT_DESC, $triDateDebut, SORT_DESC, $listeMissions);
+    }
 
     // Retour
     return $listeMissions;
   }
 
-  // METIER : Récupération mission spécifique
-  // RETOUR : Objet mission
-  function getMission($id)
-  {
-    $mission = new Mission();
-
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM missions WHERE id = ' . $id);
-    $donnees = $reponse->fetch();
-
-    $mission = Mission::withData($donnees);
-
-    if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
-      $mission->setStatut('V');
-    elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
-      $mission->setStatut('C');
-    elseif (date('Ymd') > $mission->getDate_fin())
-      $mission->setStatut('A');
-
-    $reponse->closeCursor();
-
-    return $mission;
-  }
-
-  // METIER : Récupération des participants d'une mission
-  // RETOUR : Objets Profil
-  function getParticipants($id)
-  {
-    $listeParticipants = array();
-
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT DISTINCT identifiant FROM missions_users WHERE id_mission = ' . $id . ' ORDER BY identifiant ASC');
-    while ($donnees = $reponse->fetch())
-    {
-      $reponse2 = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant = "' . $donnees['identifiant'] . '"');
-      $donnees2 = $reponse2->fetch();
-
-      $participant = Profile::withData($donnees2);
-
-      $reponse2->closeCursor();
-
-      array_push($listeParticipants, $participant);
-    }
-    $reponse->closeCursor();
-
-    return $listeParticipants;
-  }
-
-  // METIER : Récupération tableau de l'avancement (quotidien et évènement)
-  // RETOUR : Tableau de l'avancement
-  function getMissionUser($id, $user)
-  {
-    $avancement = array('daily' => 0,
-                        'event' => 0
-                       );
-
-    global $bdd;
-
-    // Nombre atteint aujourd'hui
-    $reponse1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user . '" AND date_mission = "' . date('Ymd') . '"');
-    $donnees1 = $reponse1->fetch();
-
-    if ($reponse1->rowCount() > 0)
-      $avancement['daily'] = $donnees1['avancement'];
-
-    $reponse1->closeCursor();
-
-    // Nombre total d'objectifs sur la mission
-    $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user . '"');
-    while ($donnees2 = $reponse2->fetch())
-    {
-      $avancement['event'] += $donnees2['avancement'];
-    }
-    $reponse2->closeCursor();
-
-    return $avancement;
-  }
-
-  // METIER : Validation mission en cours
+  // METIER : Validation d'un bouton de mission en cours
   // RETOUR : Aucun
-  function validateMission($post, $user, $mission)
+  function validateMission($post, $identifiant, $mission)
   {
-    $ref = $post['ref_mission'];
-    $key = $post['key_mission'];
+    // Récupération des données
+    $referenceMission = $post['ref_mission'];
+    $cleMission       = $post['key_mission'];
 
+    // Traitement de validation du bouton de mission
     if (!empty($mission))
     {
-      $missionCommencee = false;
-
-      global $bdd;
-
-      if (isset($_SERVER['HTTP_REFERER']) AND strpos($_SERVER['HTTP_REFERER'], $mission[$ref]['page']) !== false)
+      if (isset($_SERVER['HTTP_REFERER']) AND strpos($_SERVER['HTTP_REFERER'], $mission[$referenceMission]['page']) !== false)
       {
-        // Contrôle mission commencée utilisateur
-        $reponse1 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date('Ymd'));
+        // Vérification mission du jour commencée par l'utilisateur
+        $missionCommencee = physiqueMissionCommencee($mission[$referenceMission]['id_mission'], $identifiant);
 
-        if ($reponse1->rowCount() > 0)
-          $missionCommencee = true;
-
-        $reponse1->closeCursor();
-
+        // Mise à jour ou insertion de la mission pour l'utilisateur
         if ($missionCommencee == true)
         {
-          // Lecture avancement mission
-          $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date('Ymd'));
-          $donnees2 = $reponse2->fetch();
-          $avancement = $donnees2['avancement'];
-          $reponse2->closeCursor();
+          // Récupération de l'avancement d'une mission
+          $avancement = physiqueAvancementMission($mission[$referenceMission]['id_mission'], $identifiant);
 
-          // Mise à jour avancement mission
-          $avancement += 1;
+          // Modification de l'enregistrement en base
+          $avancementUser = $avancement['daily'] + 1;
 
-          $reponse3 = $bdd->prepare('UPDATE missions_users SET avancement = :avancement WHERE id_mission = ' . $mission[$ref]['id_mission'] . ' AND identifiant = "' . $user . '" AND date_mission = ' . date('Ymd'));
-          $reponse3->execute(array(
-            'avancement' => $avancement
-          ));
-          $reponse3->closeCursor();
+          physiqueUpdateMissionUser($mission[$referenceMission]['id_mission'], $identifiant, $avancementUser);
         }
         else
         {
-          // Création mission du jour pour l'utilisateur et initialisation avancement à 1
-          $reponse2 = $bdd->prepare('INSERT INTO missions_users(id_mission, identifiant, avancement, date_mission) VALUES(:id_mission, :identifiant, :avancement, :date_mission)');
-          $reponse2->execute(array(
-            'id_mission'   => $mission[$ref]['id_mission'],
-            'identifiant'  => $user,
-            'avancement'   => 1,
-            'date_mission' => date('Ymd')
-              ));
-          $reponse2->closeCursor();
+          // Insertion de l'enregistrement en base
+          $missionUser = array('id_mission'   => $mission[$referenceMission]['id_mission'],
+                               'identifiant'  => $identifiant,
+                               'avancement'   => 1,
+                               'date_mission' => date('Ymd')
+                              );
+
+          physiqueInsertionMissionUser($missionUser);
         }
 
         // Génération succès mission
-        insertOrUpdateSuccesMission($mission[$ref]['reference'], $user);
+        insertOrUpdateSuccesMission($mission[$referenceMission]['reference'], $identifiant);
 
-        // On supprime le bouton correspondant pour ne pas cliquer dessus à nouveau
-        unset($mission[$ref]);
-        $_SESSION['missions'][$key] = $mission;
+        // Suppression du bouton correspondant pour ne pas cliquer à nouveau dessus
+        unset($mission[$referenceMission]);
+
+        // Mise à jour de la session
+        $_SESSION['missions'][$cleMission] = $mission;
       }
 
+      // Si la mission est terminée
       if (empty($mission))
       {
         // Ajout expérience
-        insertExperience($user, 'all_missions');
+        insertExperience($identifiant, 'all_missions');
 
+        // Message d'alerte
         $_SESSION['alerts']['mission_achieved'] = true;
       }
     }
   }
 
-  // METIER : Classement des utilisateurs sur la mission
-  // RETOUR : Tableau classement
-  function getRankingMission($id, $listeUsers)
+  // METIER : Vérification mission existante
+  // RETOUR : Booléen
+  function isMissionDisponible($idMission)
   {
+    // Contrôle mission disponible
+    $missionDisponible = controlMissionDisponible($idMission);
+
+    // Retour
+    return $missionDisponible;
+  }
+
+  // METIER : Lecture des détails d'une mission
+  // RETOUR : Objet mission
+  function getMission($idMission)
+  {
+    // Récupération de la mission
+    $mission = physiqueMission($idMission);
+
+    // Retour
+    return $mission;
+  }
+
+  // METIER : Lecture de l'avancement de l'utilisateur (quotidien et évènement)
+  // RETOUR : Tableau d'avancement
+  function getMissionUser($idMission, $identifiant)
+  {
+    // Récupération de l'avancement d'une mission
+    $avancement = physiqueAvancementMission($idMission, $identifiant);
+
+    // Retour
+    return $avancement;
+  }
+
+  // METIER : Récupération des participants d'une mission
+  // RETOUR : Liste des participants
+  function getParticipants($idMission)
+  {
+    // Initialisations
+    $listeParticipants = array();
+
+    // Récupération des identifiants des participants d'une mission
+    $listeIdentifiantsParticipants = physiqueParticipantsMission($idMission);
+
+    // Récupération de la liste des participants d'une mission
+    foreach ($listeIdentifiantsParticipants as $identifiant)
+    {
+      $participant = physiqueUser($identifiant);
+
+      // On ajoute la ligne au tableau
+      if (!empty($participant))
+        array_push($listeParticipants, $participant);
+    }
+
+    // Retour
+    return $listeParticipants;
+  }
+
+  // METIER : Lecture du classement des utilisateurs d'une mission
+  // RETOUR : Tableau de classement d'une mission
+  function getRankingMission($idMission, $participants)
+  {
+    // Initialisations
     $rankingUsers = array();
 
-    global $bdd;
-
-    foreach ($listeUsers as $user)
+    // Récupération de l'avancement de chaque participant
+    foreach ($participants as $user)
     {
-      $totalMission = 0;
+      $avancementUser = physiqueAvancementMission($idMission, $user->getIdentifiant());
 
-      // Nombre total d'objectifs sur la mission
-      $reponse = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $id . ' AND identifiant = "' . $user->getIdentifiant() . '"');
-      while ($donnees = $reponse->fetch())
-      {
-        $totalMission += $donnees['avancement'];
-      }
-      $reponse->closeCursor();
-
-      // Récupération des données
+      // Génération d'un objet ParticipantMission
       $rankUser = new ParticipantMission();
 
       $rankUser->setIdentifiant($user->getIdentifiant());
       $rankUser->setPseudo($user->getPseudo());
       $rankUser->setAvatar($user->getAvatar());
-      $rankUser->setTotal($totalMission);
+      $rankUser->setTotal($avancementUser['event']);
       $rankUser->setRank(0);
 
-      // Ajout au tableau
+      // On ajoute la ligne au tableau
       array_push($rankingUsers, $rankUser);
     }
 
+    // Tri et affectation du rang
     if (!empty($rankingUsers))
     {
       // Tri sur avancement puis identifiant
@@ -277,6 +199,7 @@
       }
     }
 
+    // Retour
     return $rankingUsers;
   }
 ?>
