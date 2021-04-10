@@ -9,6 +9,7 @@
   // RETOUR : Aucun
   function initializeSaveSearch()
   {
+    // Sauvegarde en session de la dernière recherche
     $_SESSION['search']['text_search'] = $_POST['text_search'];
   }
 
@@ -17,82 +18,42 @@
   function getSearch()
   {
     // Initialisations
-    $results   = array();
-    $resultsMH = array();
-    $resultsFA = array();
-    $resultsPP = array();
-    $resultsMI = array();
-    $nombreMH  = 0;
-    $nombreFA  = 0;
-    $nombrePP  = 0;
-    $nombreMI  = 0;
+    $resultatsRecherche = array();
 
     // Récupération des données
     $recherche = htmlspecialchars($_SESSION['search']['text_search']);
 
+    // Lancement de la recherche
     if (!empty($recherche))
     {
-      global $bdd;
-
       // Movie House (films non à supprimer)
-      $reponse1 = $bdd->query('SELECT * FROM movie_house WHERE to_delete != "Y" AND film LIKE "%' . $recherche . '%" ORDER BY date_theater DESC, film ASC');
-      while ($donnees1 = $reponse1->fetch())
-      {
-        $movie = Movie::withData($donnees1);
-        $nombreMH = $reponse1->rowCount();
-
-        // On ajoute la ligne au tableau
-        array_push($resultsMH, $movie);
-      }
-      $reponse1->closeCursor();
+      $resultatsMovieHouse       = physiqueRechercheFilms($recherche);
+      $nombreResultatsMovieHouse = count($resultatsMovieHouse);
 
       // Restaurants
-      $reponse2 = $bdd->query('SELECT * FROM food_advisor_restaurants WHERE name LIKE "%' . $recherche . '%" ORDER BY location ASC, name ASC');
-      while ($donnees2 = $reponse2->fetch())
-      {
-        $restaurant = Restaurant::withData($donnees2);
-        $nombreFA = $reponse2->rowCount();
-
-        // On ajoute la ligne au tableau
-        array_push($resultsFA, $restaurant);
-      }
-      $reponse2->closeCursor();
+      $resultatsFoodAdvisor       = physiqueRechercheRestaurants($recherche);
+      $nombreResultatsFoodAdvisor = count($resultatsFoodAdvisor);
 
       // Parcours
-      $reponse3 = $bdd->query('SELECT * FROM petits_pedestres_parcours WHERE nom LIKE "%' . $recherche . '%" ORDER BY nom ASC');
-      while ($donnees3 = $reponse3->fetch())
-      {
-        $parcours = Parcours::withData($donnees3);
-        $nombrePP = $reponse3->rowCount();
-
-        // On ajoute la ligne au tableau
-        array_push($resultsPP, $parcours);
-      }
-      $reponse3->closeCursor();
+      $resultatsPetitsPedestres       = physiqueRechercheParcours($recherche);
+      $nombreResultatsPetitsPedestres = count($resultatsPetitsPedestres);
 
       // Missions (déjà commencées ou terminées)
-      $reponse4 = $bdd->query('SELECT * FROM missions WHERE date_deb <= ' . date('Ymd') . ' AND mission LIKE "%' . $recherche . '%" ORDER BY date_deb DESC, mission ASC');
-      while ($donnees4 = $reponse4->fetch())
-      {
-        $mission = Mission::withData($donnees4);
-        $nombreMI = $reponse4->rowCount();
+      $resultatsMissions       = physiqueRechercheMissions($recherche);
+      $nombreResultatsMissions = count($resultatsMissions);
 
-        // On ajoute la ligne au tableau
-        array_push($resultsMI, $mission);
-      }
-      $reponse4->closeCursor();
-
-      // On ajoute les résultats au tableau final
-      $results = array('movie_house'         => $resultsMH,
-                       'food_advisor'        => $resultsFA,
-                       'petits_pedestres'    => $resultsPP,
-                       'missions'            => $resultsMI,
-                       'nb_movie_house'      => $nombreMH,
-                       'nb_food_advisor'     => $nombreFA,
-                       'nb_petits_pedestres' => $nombrePP,
-                       'nb_missions'         => $nombreMI
-                      );
+      // Ajout des résultats au tableau
+      $resultatsRecherche = array('movie_house'         => $resultatsMovieHouse,
+                                  'food_advisor'        => $resultatsFoodAdvisor,
+                                  'petits_pedestres'    => $resultatsPetitsPedestres,
+                                  'missions'            => $resultatsMissions,
+                                  'nb_movie_house'      => $nombreResultatsMovieHouse,
+                                  'nb_food_advisor'     => $nombreResultatsFoodAdvisor,
+                                  'nb_petits_pedestres' => $nombreResultatsPetitsPedestres,
+                                  'nb_missions'         => $nombreResultatsMissions
+                                 );
     }
 
-    return $results;
+    // Retour
+    return $resultatsRecherche;
   }
