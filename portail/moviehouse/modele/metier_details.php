@@ -296,8 +296,6 @@
         break;
     }
 
-    var_dump($viewMovieHouse);
-
     // Retour
     return $viewMovieHouse;
   }
