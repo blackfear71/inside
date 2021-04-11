@@ -9,7 +9,7 @@
     // Contrôle
     $missionDisponible = physiqueMissionDisponible($idMission);
 
-    if ($missionDisponible == false)
+    if ($missionDisponible != true)
     {
       $_SESSION['alerts']['mission_doesnt_exist'] = true;
       $control_ok                                 = false;

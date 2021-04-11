@@ -157,7 +157,7 @@
 
     $data = $req->fetch();
 
-    if ($data['nombreLignes'])
+    if ($data['nombreLignes'] > 0)
     {
       // Instanciation d'un objet Proposition à partir des données remontées de la bdd
       $resume = Proposition::withData($data);

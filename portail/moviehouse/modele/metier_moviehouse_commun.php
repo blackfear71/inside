@@ -1,85 +1,26 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
   include_once('../../includes/functions/modeles_mails.php');
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
 
   // METIER : Lecture des données préférences
   // RETOUR : Objet Preferences
-  function getPreferences($user)
+  function getPreferences($identifiant)
   {
-    global $bdd;
+    // Lecture des préférences utilisateur
+    $preferences = physiquePreferences($identifiant);
 
-    // Lecture des préférences
-    $reponse = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $user . '"');
-    $donnees = $reponse->fetch();
-
-    // Instanciation d'un objet Profile à partir des données remontées de la bdd
-    $preferences = Preferences::withData($donnees);
-
-    $reponse->closeCursor();
-
+    // Retour
     return $preferences;
   }
 
-  // METIER : Lecture des films par année
-  // RETOUR : Liste des films
-  function getFilms($year, $user)
-  {
-    $listeFilms = array();
-
-    global $bdd;
-
-    if ($year == 'none')
-      $reponse = $bdd->query('SELECT * FROM movie_house WHERE date_theater = "" AND to_delete != "Y" ORDER BY date_add DESC, film ASC');
-    else
-      $reponse = $bdd->query('SELECT * FROM movie_house WHERE SUBSTR(date_theater, 1, 4) = "' . $year . '" AND to_delete != "Y" ORDER BY date_theater ASC, film ASC');
-    while ($donnees = $reponse->fetch())
-    {
-      $film = Movie::withData($donnees);
-
-      // Dans le cas de la recherche de films pour les boutons précédent/suivant, on n'a pas besoin de toutes les données
-      if (isset($user))
-      {
-        // On récupère le nombre de commentaires
-        $reponse2 = $bdd->query('SELECT COUNT(id) AS nb_comments FROM movie_house_comments WHERE id_film = "' . $film->getId() . '"');
-        $donnees2 = $reponse2->fetch();
-        $film->setNb_comments($donnees2['nb_comments']);
-        $reponse2->closeCursor();
-
-        // On récupère les étoiles et la participation de l'utilisateur connecté
-        $reponse3 = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $film->getId() . ' AND identifiant = "' . $user . '"');
-        $donnees3 = $reponse3->fetch();
-
-        if (isset($donnees3['stars']))
-          $film->setStars_user($donnees3['stars']);
-
-        if (isset($donnees3['participation']))
-          $film->setParticipation($donnees3['participation']);
-
-        $reponse3->closeCursor();
-
-        // On récupère le nombre de participants
-        $reponse4 = $bdd->query('SELECT COUNT(id) AS nb_users FROM movie_house_users WHERE id_film = ' . $film->getId());
-        $donnees4 = $reponse4->fetch();
-        $film->setNb_users($donnees4['nb_users']);
-        $reponse4->closeCursor();
-      }
-
-      // On ajoute la ligne au tableau
-      array_push($listeFilms, $film);
-    }
-    $reponse->closeCursor();
-
-    // Retour
-    return $listeFilms;
-  }
-
-  // METIER : Insertion/modification étoiles
+  // METIER : Insertion / modification étoiles utilisateur
   // RETOUR : Id film
-  function insertStars($post, $user)
+  function insertStar($post, $identifiant)
   {
-    // On récupère le choix utilisateur
+    // Récupération des données
+    $idFilm = $post['id_film'];
+
     if (isset($post['preference_0']))
       $preference = 0;
     elseif (isset($post['preference_1']))
@@ -95,137 +36,106 @@
     else
       $preference = 0;
 
-    global $bdd;
-
-    // On récupère le numéro du film
-    $idFilm = $post['id_film'];
-
-    // On récupère l'identifiant de l'utilisateur
-    $identifiant = $user;
-
+    // Traitement du choix utilisateur
     if ($preference == 0)
-		{
-			// Suppression de la table
-			$req = $bdd->exec('DELETE FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $identifiant . '"');
-		}
-		else
-		{
-			// On verifie qu'il n'existe pas déjà un choix pour ce film
-			$existe = false;
-
-			$req1 = $bdd->query('SELECT COUNT(id) AS existe_deja FROM movie_house_users WHERE id_film = ' . $idFilm . '
-																						                                      AND   identifiant = "' . $identifiant . '"
-																						                                      ORDER BY id ASC');
-			$data1 = $req1->fetch();
-
-			if (is_numeric($data1['existe_deja']) AND $data1['existe_deja'] > 0)
-				$existe = true;
-
-			$req1->closeCursor();
-
-			// Si trouvé alors on fait une MAJ
-			if ($existe == true)
-			{
-				$req2 = $bdd->prepare('UPDATE movie_house_users SET stars = :stars WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $identifiant . '"');
-				$req2->execute(array(
-					'stars' => $preference
-				));
-				$req2->closeCursor();
-			}
-			// Sinon on insère une nouvelle ligne
-			else
-			{
-        $vote = array('id_film'       => $idFilm,
-        					    'identifiant'   => $identifiant,
-        					    'stars'         => $preference,
-        					    'participation' => "N");
-
-				$req3 = $bdd->prepare('INSERT INTO movie_house_users(id_film, identifiant, stars, participation) VALUES(:id_film, :identifiant, :stars, :participation)');
-				$req3->execute($vote);
-				$req3->closeCursor();
-			}
-		}
-
-    return $idFilm;
-  }
-
-  // METIER : Insertion/modification participation
-  // RETOUR : Id film
-  function insertParticipation($post, $user)
-  {
-    global $bdd;
-
-    $idFilm = $post['id_film'];
-
-    if (isset($post['participate']))
     {
-      // Lecture de l'état de la participation
-      $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
-      $data = $req->fetch();
-
-      $participation = $data['participation'];
-
-      $req->closeCursor();
-
-      // Génération succès
-      if ($participation == 'S')
-        insertOrUpdateSuccesValue('viewer', $user, -1);
-
-      // Inversion de la participation
-      if ($participation == 'P')
-        $participation = 'N';
-      else
-        $participation = 'P';
-
-      // Mise à jour
-      $req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
-      $req2->execute(array(
-        'participation' => $participation
-      ));
-      $req2->closeCursor();
-
-      // Génération succès
-      if ($idFilm == 16)
-        insertOrUpdateSuccesValue('padawan', $user, 0);
+      // Suppression de l'enregistrement en base
+      physiqueDeleteEtoile($idFilm, $identifiant);
     }
-    elseif (isset($post['seen']))
+    else
     {
-      // Lecture de l'état de la vue
-      $req = $bdd->query('SELECT * FROM movie_house_users WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
-      $data = $req->fetch();
+      // Vérification existence d'une étoile pour le film
+      $etoileExistante = physiqueEtoileExistante($idFilm, $identifiant);
 
-      $participation = $data['participation'];
-
-      $req->closeCursor();
-
-      // Inversion de la vue
-      if ($participation == 'S')
-        $participation = 'N';
-      else
-        $participation = 'S';
-
-      // Mise à jour
-      $req2 = $bdd->prepare('UPDATE movie_house_users SET participation = :participation WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $user . '"');
-      $req2->execute(array(
-        'participation' => $participation
-      ));
-      $req2->closeCursor();
-
-      // Génération succès
-      if ($participation == 'S')
-        insertOrUpdateSuccesValue('viewer', $user, 1);
-      else
-        insertOrUpdateSuccesValue('viewer', $user, -1);
-
-      if ($idFilm == 16)
+      // Insertion ou mise à jour étoile utilisateur
+      if ($etoileExistante == true)
       {
-        if ($participation == 'S')
-          insertOrUpdateSuccesValue('padawan', $user, 1);
-        else
-          insertOrUpdateSuccesValue('padawan', $user, 0);
+        // Modification de l'enregistrement en base
+        physiqueUpdateEtoile($idFilm, $identifiant, $preference);
+      }
+      else
+      {
+        // Insertion de l'enregistrement en base
+        $etoile = array('id_film'       => $idFilm,
+          					    'identifiant'   => $identifiant,
+          					    'stars'         => $preference,
+          					    'participation' => 'N'
+                       );
+
+        physiqueInsertionEtoile($etoile);
       }
     }
 
+    // Retour
+    return $idFilm;
+  }
+
+  // METIER : Insertion / modification participation
+  // RETOUR : Id film
+  function insertParticipation($post, $identifiant)
+  {
+    // Récupération des données
+    $idFilm = $post['id_film'];
+
+    // Traitement de l'action
+    if (isset($post['participate']) OR isset($post['seen']))
+    {
+      // Lecture de l'état de la participation
+      $participationActuelle = physiqueParticipation($idFilm, $identifiant);
+
+      // Gestion de la participation
+      if (isset($post['participate']))
+      {
+        // Inversion de la participation
+        if ($participationActuelle == 'P')
+          $participationNouvelle = 'N';
+        else
+          $participationNouvelle = 'P';
+      }
+
+      // Gestion de la vue
+      if (isset($post['seen']))
+      {
+        // Inversion de la vue
+        if ($participationActuelle == 'S')
+          $participationNouvelle = 'N';
+        else
+          $participationNouvelle = 'S';
+      }
+
+      // Modification de l'enregistrement en base
+      physiqueUpdateParticipation($idFilm, $identifiant, $participationNouvelle);
+
+      // Génération succès (participation)
+      if (isset($post['participate']))
+      {
+        if ($participationActuelle == 'S')
+          insertOrUpdateSuccesValue('viewer', $identifiant, -1);
+
+        if ($idFilm == 16)
+          insertOrUpdateSuccesValue('padawan', $identifiant, 0);
+      }
+
+      // Génération succès (vue)
+      if (isset($post['seen']))
+      {
+        // Génération succès
+        if ($participationNouvelle == 'S')
+          insertOrUpdateSuccesValue('viewer', $identifiant, 1);
+        else
+          insertOrUpdateSuccesValue('viewer', $identifiant, -1);
+
+        if ($idFilm == 16)
+        {
+          if ($participationNouvelle == 'S')
+            insertOrUpdateSuccesValue('padawan', $identifiant, 1);
+          else
+            insertOrUpdateSuccesValue('padawan', $identifiant, 0);
+        }
+      }
+    }
+
+    // Retour
     return $idFilm;
   }
 ?>

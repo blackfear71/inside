@@ -430,7 +430,7 @@
     // Mise à jour à "N" du statut
     physiqueUpdateStatusUser($identifiant, $status);
 
-    // Génération notification nouvel inscrit
+    // Insertion notification
     insertNotification('admin', 'inscrit', $identifiant);
   }
 

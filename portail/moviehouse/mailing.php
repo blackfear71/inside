@@ -17,6 +17,8 @@
   // Modèle de données
   include_once('modele/metier_moviehouse_commun.php');
   include_once('modele/metier_details.php');
+  include_once('modele/physique_moviehouse_commun.php');
+  include_once('modele/physique_details.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -27,17 +29,31 @@
         header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
       else
       {
-        // Lecture liste des données par le modèle
-        $detailsFilm  = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
-        $listeEtoiles = getDetailsStars($_GET['id_film']);
+        // Récupération des détails du film
+        $detailsFilm = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
+
+        // Récupération de la liste des utilisateurs
+        $listeUsers = physiqueUsers();
+
+        // Récupération des votes associés au film
+        $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsers);
       }
       break;
 
     case 'sendMail':
-      // Lecture liste des données par le modèle
-      $idFilm       = $_POST['id_film'];
-      $detailsFilm  = getDetails($idFilm, $_SESSION['user']['identifiant']);
-      $listeEtoiles = getDetailsStars($idFilm);
+      // Récupération de l'id du film
+      $idFilm = $_POST['id_film'];
+
+      // Récupération des détails du film
+      $detailsFilm = getDetails($idFilm, $_SESSION['user']['identifiant']);
+
+      // Récupération de la liste des utilisateurs
+      $listeUsers = physiqueUsers();
+
+      // Récupération des votes associés au film
+      $listeEtoiles = getEtoilesDetailsFilm($idFilm, $listeUsers);
+
+      // Envoi du mail
       sendMail($detailsFilm, $listeEtoiles);
       break;
 
@@ -51,7 +67,17 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+    case 'sendMail':
       Movie::secureData($detailsFilm);
+
+      foreach ($listeUsers as &$user)
+      {
+        $user['pseudo'] = htmlspecialchars($user['pseudo']);
+        $user['avatar'] = htmlspecialchars($user['avatar']);
+        $user['email']  = htmlspecialchars($user['email']);
+      }
+
+      unset($user);
 
       foreach ($listeEtoiles as $etoiles)
       {
@@ -59,7 +85,6 @@
       }
       break;
 
-    case 'sendMail':
     default:
       break;
   }

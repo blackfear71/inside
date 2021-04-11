@@ -14,7 +14,7 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses
+    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar
                         FROM users
                         WHERE identifiant != "admin" AND status != "I"
                         ORDER BY identifiant ASC');
@@ -441,7 +441,7 @@
   {
     // Initialisations
     $newId = NULL;
-    
+
     // Requête
     global $bdd;
 

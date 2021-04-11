@@ -11,7 +11,7 @@
   // RETOUR : Objet Preferences
   function getPreferences($identifiant)
   {
-    // Lescture des préférences utilisateur
+    // Lecture des préférences utilisateur
     $preferences = physiquePreferences($identifiant);
 
     // Retour

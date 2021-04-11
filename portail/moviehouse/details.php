@@ -21,6 +21,10 @@
   // Modèle de données
   include_once('modele/metier_moviehouse_commun.php');
   include_once('modele/metier_details.php');
+  include_once('modele/controles_moviehouse_commun.php');
+  include_once('modele/controles_details.php');
+  include_once('modele/physique_moviehouse_commun.php');
+  include_once('modele/physique_details.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -31,46 +35,65 @@
         header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
       else
       {
-        // Lecture liste des données par le modèle
-        $filmExistant = controlFilm($_GET['id_film']);
+        // Vérification film disponible
+        $filmExistant = isFilmDisponible($_GET['id_film']);
 
         if ($filmExistant == true)
         {
-          $listeNavigation   = getNavigation($_GET['id_film']);
-          $detailsFilm       = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
-          $listeEtoiles      = getDetailsStars($_GET['id_film']);
-          $listeCommentaires = getComments($_GET['id_film']);
+          // Récupération des détails du film
+          $detailsFilm = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
+
+          // Récupération des films précédent et suivant
+          $listeNavigation = getNavigation($detailsFilm);
+
+          // Récupération de la liste des utilisateurs
+          $listeUsers = physiqueUsers();
+
+          // Récupération des votes associés au film
+          $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsers);
+
+          // Récupération des commentaires associés aux films
+          $listeCommentaires = getCommentaires($_GET['id_film'], $listeUsers);
         }
       }
       break;
 
     case 'doModifier':
+      // Modification d'un film
       $idFilm = updateFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doSupprimer':
-      $preferences = getPreferences($_SESSION['user']['identifiant']);
+      // Récupération de la vue pour redirection
+      $viewMovieHouse = getVueSuppression($_SESSION['user']['identifiant']);
+
+      // Suppression d'un film
       deleteFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doVoterFilm':
-      $idFilm = insertStars($_POST, $_SESSION['user']['identifiant']);
+      // Vote de l'utilisateur sur un film
+      $idFilm = insertStar($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doParticiperFilm':
+      // Action de l'utilisateur sur un film
       $idFilm = insertParticipation($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doCommenter':
-      $idFilm = insertComment($_POST, $_SESSION['user']['identifiant']);
+      // Insertion commentaire de l'utilisateur sur un film
+      $idFilm = insertCommentaire($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doSupprimerCommentaire':
-      $idFilm = deleteComment($_POST, $_SESSION['user']['identifiant']);
+      // Suppression commentaire de l'utilisateur sur un film
+      $idFilm = deleteCommentaire($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doModifierCommentaire':
-      $ids = updateComment($_POST);
+      // Modification commentaire de l'utilisateur sur un film
+      $ids = updateCommentaire($_POST);
       break;
 
     default:
@@ -85,6 +108,8 @@
     case 'goConsulter':
       if ($filmExistant == true)
       {
+        Movie::secureData($detailsFilm);
+
         foreach ($listeNavigation as &$navigation)
         {
           if (!empty($navigation))
@@ -96,7 +121,14 @@
 
         unset($navigation);
 
-        Movie::secureData($detailsFilm);
+        foreach ($listeUsers as &$user)
+        {
+          $user['pseudo'] = htmlspecialchars($user['pseudo']);
+          $user['avatar'] = htmlspecialchars($user['avatar']);
+          $user['email']  = htmlspecialchars($user['email']);
+        }
+
+        unset($user);
 
         foreach ($listeEtoiles as $etoiles)
         {
@@ -109,7 +141,7 @@
         }
 
         // Conversion JSON
-        $detailsFilmJson = json_encode(convertForJson($detailsFilm));
+        $detailsFilmJson = json_encode(convertForJsonDetailsFilm($detailsFilm));
       }
       break;
 
@@ -134,18 +166,6 @@
       break;
 
     case 'doSupprimer':
-      switch ($preferences->getView_movie_house())
-      {
-        case 'C':
-          $viewMovieHouse = 'cards';
-          break;
-
-        case 'H':
-        default:
-          $viewMovieHouse = 'home';
-          break;
-      }
-
       header('location: moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter');
       break;
 

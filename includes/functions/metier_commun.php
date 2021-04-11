@@ -1302,7 +1302,7 @@
   }
 
   // METIER : Formate une chaîne de caractères en longueur
-  // RETOUR : Pseudo formaté
+  // RETOUR : Chaîne formatée
   function formatString($string, $limit)
   {
     if (strlen($string) > $limit)

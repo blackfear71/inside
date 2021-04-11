@@ -20,6 +20,9 @@
   // Modèle de données
   include_once('modele/metier_moviehouse_commun.php');
   include_once('modele/metier_moviehouse.php');
+  include_once('modele/controles_moviehouse_commun.php');
+  include_once('modele/physique_moviehouse_commun.php');
+  include_once('modele/physique_moviehouse.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -37,56 +40,86 @@
         // Initialisation de la sauvegarde en session
         initializeSaveSession();
 
+        // Vérification année existante
         $anneeExistante = controlYear($_GET['year']);
-        $onglets        = getOnglets();
-        $preferences    = getPreferences($_SESSION['user']['identifiant']);
 
-        switch ($_GET['view'])
+        // Redirection si l'année n'existe pas et que l'on est sur les films sanas dates
+        if ($_GET['year'] == 'none' AND $anneeExistante == false)
+          header('location: moviehouse.php?view=cards&year=' . date('Y') . '&action=goConsulter');
+        else
         {
-          case 'home':
-            list($filmsSemaine, $filmsWaited, $filmsWayOut) = explode(';', $preferences->getCategories_movie_house());
+          // Récupération des onglets (années)
+          $onglets = getOnglets();
 
-            $listeRecents = getRecents($_GET['year']);
+          // Récupération des préférences de l'utilisateur
+          $preferences = getPreferences($_SESSION['user']['identifiant']);
 
-            if ($filmsSemaine == 'Y')
-            {
-              $afficherSemaine = controlWeek($_GET['year']);
+          // Lecture des films en fonction de la vue
+          switch ($_GET['view'])
+          {
+            case 'home':
+              // Lecture des préférences
+              list($filmsSemaine, $filmsWaited, $filmsWayOut) = explode(';', $preferences->getCategories_movie_house());
 
-              // Si semaine comprise dans l'année courante
-              if ($afficherSemaine == true)
-                $listeSemaine = getSemaine();
-            }
+              // Récupération de la liste des films récemments ajoutés
+              $listeRecents = getFilmsRecents($_GET['year']);
 
-            if ($filmsWaited == 'Y')
-              $listeAttendus = getAttendus($_GET['year']);
+              // Récupération de la liste des sorties films de la semaine
+              if ($filmsSemaine == 'Y')
+              {
+                // Vérification si la semaine fait partie de l'année courante
+                $afficherSemaine = isWeekYear($_GET['year']);
 
-            if ($filmsWayOut == 'Y')
-              $listeSorties = getSorties($_GET['year']);
-            break;
+                // Récupération de la liste des sorties films de la semaine
+                if ($afficherSemaine == true)
+                  $listeSemaine = getSortiesSemaine();
+              }
 
-          case 'cards':
-            $listeFilms = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+              // Récupération de la liste des films les plus attendus
+              if ($filmsWaited == 'Y')
+                $listeAttendus = getFilmsAttendus($_GET['year']);
 
-            if (!empty($listeFilms))
-              $listeEtoiles = getStarsFiches($listeFilms);
-            break;
+              // Récupération de la liste des prochaines sorties cinéma organisées
+              if ($filmsWayOut == 'Y')
+                $listeSorties = getSortiesOrganisees($_GET['year']);
+              break;
 
-          default:
-            header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
-            break;
+            case 'cards':
+              // Récupération de la liste des films de l'année
+              $listeFilms = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+
+              // Récupération des votes associés aux films
+              if (!empty($listeFilms))
+              {
+                // Récupération de la liste des utilisateurs
+                $listeUsers = physiqueUsers();
+
+                // Récupération des étoiles
+                $listeEtoiles = getEtoilesFichesFilms($listeFilms, $listeUsers);
+              }
+              break;
+
+            default:
+              // Contrôle vue renseignée URL
+              header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
+              break;
+          }
         }
       }
       break;
 
     case 'doAjouter':
+      // Insertion d'un film
       $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doVoterFilm':
-      $idFilm = insertStars($_POST, $_SESSION['user']['identifiant']);
+      // Vote de l'utilisateur sur un film
+      $idFilm = insertStar($_POST, $_SESSION['user']['identifiant']);
       break;
 
     case 'doParticiperFilm':
+      // Action de l'utilisateur sur un film
       $idFilm = insertParticipation($_POST, $_SESSION['user']['identifiant']);
       break;
 
@@ -115,6 +148,18 @@
           foreach ($listeFilms as $film)
           {
             Movie::secureData($film);
+          }
+
+          if (isset($listeUsers) AND !empty($listeUsers))
+          {
+            foreach ($listeUsers as &$user)
+            {
+              $user['pseudo'] = htmlspecialchars($user['pseudo']);
+              $user['avatar'] = htmlspecialchars($user['avatar']);
+              $user['email']  = htmlspecialchars($user['email']);
+            }
+
+            unset($user);
           }
 
           if (isset($listeEtoiles) AND !empty($listeEtoiles))

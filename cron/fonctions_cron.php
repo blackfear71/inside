@@ -19,7 +19,7 @@
       // Contrôle notification non existante
       $notificationCinemaExist = controlNotification('cinema', $data['id']);
 
-      // Génération notification sortie cinéma
+      // Insertion notification
       if ($notificationCinemaExist != true)
         insertNotification('admin', 'cinema', $data['id']);
 
@@ -81,7 +81,7 @@
     // Contrôle notification non existante
     $notificationMissionExist = controlNotification('start_mission', $idMission);
 
-    // Génération notification début mission
+    // Insertion notification
     if ($notificationMissionExist != true)
       insertNotification('admin', 'start_mission', $data['id']);
 
@@ -109,7 +109,7 @@
     // Contrôle notification non existante
     $notificationMissionExist = controlNotification('end_mission', $idMission);
 
-    // Génération notification fin mission
+    // Insertion notification
     if ($notificationMissionExist != true)
       insertNotification('admin', 'end_mission', $data['id']);
 
@@ -141,7 +141,7 @@
     // Contrôle notification non existante
     $notificationMissionExist = controlNotification('one_mission', $data['id']);
 
-    // Génération notification mission unique
+    // Insertion notification
     if ($notificationMissionExist != true)
       insertNotification('admin', 'one_mission', $data['id']);
 
