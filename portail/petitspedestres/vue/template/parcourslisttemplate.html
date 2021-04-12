@@ -18,7 +18,7 @@
     <tr class="PP-tr" ng-repeat="parcours in $ctrl.listeParcours | filter:$ctrl.query | orderBy:$ctrl.orderProp"> <!--    -->
       <td class="PP-table-ligne">
         <div>
-          <a href="parcours.php?id={{parcours.id}}&action=goConsulter">{{ parcours.nom }}</a>
+          <a href="parcours.php?id_parcours={{parcours.id}}&action=goConsulter">{{ parcours.nom }}</a>
         </div>
       </td>
 

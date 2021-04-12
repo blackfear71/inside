@@ -54,7 +54,7 @@
           /* Saisie */
           /**********/
   				echo '<div class="PP-contenu-saisie">';
-  					echo '<form method="post" action="parcours.php?id=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
+  					echo '<form method="post" action="parcours.php?id_parcours=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
   						echo '<div class="PP-zone-saisie-avancee-infos">';
                 if (isset($erreurParcours) AND $erreurParcours == true)
                 {

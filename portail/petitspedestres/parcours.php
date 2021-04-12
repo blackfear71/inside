@@ -18,43 +18,48 @@
 
   // Modèle de données
   include_once('modele/metier_parcours.php');
+  include_once('modele/controles_parcours.php');
+  include_once('modele/physique_parcours.php');
 
   // EVALUATE TRUE WHEN COI-FCT = 'L0001' PERFORM...
   switch ($_GET['action'])
   {
     case 'goConsulterListe':
       // Initialisation de la sauvegarde en session
-      $erreurParcours = initializeSaveSession();
+      initializeSaveSession();
 
-      // Récupération de tous les parcours. Attention, $parcours est un tableau d'objets Parcours
-      $listeParcours = listParcours();
+      // Récupération de la liste des parcours
+      $listeParcours = getListeParcours();
       break;
 
     case 'goAjouter':
       // Initialisation de la sauvegarde en session
-      $erreurParcours = initializeSaveSession();
+      initializeSaveSession();
       break;
 
     case 'goConsulter':
     case 'goModifier':
-      // Récupération des données par le modèle
-      if (!isset($_GET['id']) OR empty($_GET['id']))
+      // Contrôle si l'id est renseigné
+      if (!isset($_GET['id_parcours']) OR empty($_GET['id_parcours']))
         header('location: parcours.php?action=goConsulterListe');
       else
       {
         // Initialisation de la sauvegarde en session
-        $erreurParcours = initializeSaveSession();
+        initializeSaveSession();
 
-        $parcours = getParcours($_GET['id']);
+        // Récupération des détails du parcours
+        $parcours = getParcours($_GET['id_parcours']);
       }
       break;
 
     case 'doAjouter':
+      // Insertion d'un parcours
       $erreurParcours = insertParcours($_POST);
       break;
 
     case 'doModifier':
-      $erreurParcours = updateParcours($_GET['id'], $_POST);
+      // Modification d'un parcours
+      $erreurParcours = updateParcours($_GET['id_parcours'], $_POST);
       break;
 
     default:
@@ -74,7 +79,7 @@
       }*/
 
       // Conversion JSON
-      $listeParcoursJson = json_encode(convertForJson($listeParcours));
+      $listeParcoursJson = json_encode(convertForJsonListeParcours($listeParcours));
       break;
 
     case 'goConsulter':
@@ -93,17 +98,17 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if (isset($erreurParcours) AND $erreurParcours == true)
+      if ($erreurParcours == true)
         header('location: parcours.php?action=goAjouter');
       else
-        header('location: parcours.php?id=' . $parcours->getId() . '&action=goConsulter');
+        header('location: parcours.php?action=goConsulterListe');
       break;
 
     case 'doModifier':
-      if (isset($erreurParcours) AND $erreurParcours == true)
-        header('location: parcours.php?id=' . $_GET['id'] . '&action=goModifier');
+      if ($erreurParcours == true)
+        header('location: parcours.php?id_parcours=' . $_GET['id_parcours'] . '&action=goModifier');
       else
-        header('location: parcours.php?id=' . $_GET['id'] . '&action=goConsulter');
+        header('location: parcours.php?id_parcours=' . $_GET['id_parcours'] . '&action=goConsulter');
       break;
 
     case 'goConsulterListe':
