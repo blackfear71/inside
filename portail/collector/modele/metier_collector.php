@@ -82,8 +82,8 @@
     // Initialisations
     $nombreParPage = 18;
 
-    // Calcul du nombre total de phrases cultes pour chaque filtre
-    $nombreCollectors = physiqueCalculNombreCollector($filtre, $identifiant, $minGolden);
+    // Lecture du nombre total de phrases cultes pour chaque filtre
+    $nombreCollectors = physiqueNombreCollector($filtre, $identifiant, $minGolden);
 
     // Calcul du nombre de pages
     $nombrePages = ceil($nombreCollectors / $nombreParPage);

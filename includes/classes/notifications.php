@@ -65,7 +65,7 @@
       $data->setCategory(htmlspecialchars($data->getCategory()));
       $data->setContent(htmlspecialchars($data->getContent()));
       $data->setIcon(htmlspecialchars($data->getIcon()));
-      $data->setSentence(htmlspecialchars($data->getSentence()));
+      // $data->setSentence(htmlspecialchars($data->getSentence()));
       $data->setLink(htmlspecialchars($data->getLink()));
     }
 

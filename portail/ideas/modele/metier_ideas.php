@@ -187,7 +187,6 @@
   function getNumeroPageIdea($idIdee, $view, $identifiant)
   {
     // Initialisations
-    $numeroPage    = 0;
     $nombreParPage = 18;
 
     // Recherche de la position de l'idée dans la table en fonction de la vue

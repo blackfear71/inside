@@ -15,6 +15,7 @@
 
   // Modèle de données
   include_once('modele/metier_notifications.php');
+  include_once('modele/physique_notifications.php');
 
   // Appel métier
   switch ($_GET['action'])
@@ -31,8 +32,10 @@
             header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
           else
           {
+            // Calcul du nombre de pages
             $nombrePages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
 
+            // Récupération des notifications en fonction de la page
             if ($nombrePages > 0)
             {
               if ($_GET['page'] > $nombrePages)
@@ -42,14 +45,36 @@
               else
                 $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nombrePages, $_GET['page']);
             }
+
+            // Formatage des notifications
+            if (!empty($notifications))
+            {
+              // Récupération de la liste des utilisateurs
+              $listeUsers = physiqueUsers();
+
+              // Formatage des notifications
+              $notifications = formatNotifications($notifications, $listeUsers, $_SESSION['user']['identifiant']);
+            }
           }
           break;
 
         case 'today':
+          // Récupération des notifications du jour
           $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], NULL, NULL);
+
+          // Formatage des notifications
+          if (!empty($notifications))
+          {
+            // Récupération de la liste des utilisateurs
+            $listeUsers = physiqueUsers();
+
+            // Formatage des notifications
+            $notifications = formatNotifications($notifications, $listeUsers, $_SESSION['user']['identifiant']);
+          }
           break;
 
         default:
+          // Contrôle vue renseignée URL
           header('location: notifications.php?view=today&action=goConsulter');
           break;
       }
@@ -67,12 +92,17 @@
     case 'goConsulter':
       if (!empty($notifications))
       {
+        foreach ($listeUsers as &$user)
+        {
+          $user = htmlspecialchars($user);
+        }
+
+        unset($user);
+
         foreach ($notifications as $notification)
         {
           Notification::secureData($notification);
         }
-
-        $notifications = formatNotifications($notifications);
       }
       break;
 

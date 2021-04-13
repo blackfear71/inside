@@ -38,7 +38,7 @@
 
   // PHYSIQUE : Lecture du nombre de phrases cultes en fonction du filtre
   // RETOUR : Nombre de phrases cultes
-  function physiqueCalculNombreCollector($filtre, $identifiant, $minGolden)
+  function physiqueNombreCollector($filtre, $identifiant, $minGolden)
   {
     // Initialisations
     $nombreCollectors = 0;
