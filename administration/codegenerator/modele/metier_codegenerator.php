@@ -193,7 +193,7 @@
       $controler = str_replace('/*control_function*/', 'controlsUser();', $controler);
     }
 
-    // Appel métier
+    // Appels métier
     $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nomTechnique . '.php\');
   include_once(\'modele/controles_' . $nomTechnique . '.php\');
   include_once(\'modele/physique_' . $nomTechnique . '.php\');', $controler);

@@ -13,7 +13,7 @@
   // Modèle de données
   /*functions_calls*/
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

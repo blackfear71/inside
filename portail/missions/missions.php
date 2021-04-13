@@ -17,7 +17,7 @@
   include_once('modele/metier_missions.php');
   include_once('modele/physique_missions.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

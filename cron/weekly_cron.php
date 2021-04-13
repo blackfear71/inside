@@ -1,23 +1,36 @@
 <?php
-  // Lancement de la session
-  if (empty(session_id()))
-    session_start();
+  /***************************
+  **** CRON Hebdomadaire *****
+  ****************************
+  Fonctionnalités :
+  - Réinitialisation dépenses
+  - Génération de log
+  ***************************/
+  /** TOUS LES LUNDIS A 7H **/
+  /**************************/
 
   // Fonctions communes
-  include_once('../includes/functions/appel_bdd.php');
   include_once('../includes/functions/metier_commun.php');
   include_once('../includes/functions/fonctions_dates.php');
   include_once('../includes/functions/fonctions_regex.php');
-  include_once('fonctions_cron.php');
 
-  /*** Traitements hebdomadaires (tous les lundi à 7h)***/
-  $typeLog    = 'h';
-  $heureDebut = date('His');
-  $weeklyTrt  = array();
+  // Contrôles communs CRON
+  controlsCron();
+
+  // Modèle de données
+  include_once('modele/metier_cron.php');
+  include_once('modele/physique_cron.php');
+
+  // Initialisations
+  $typeLog                   = 'h';
+  $heureDebut                = date('His');
+  $traitementsHebdomadaires  = array();
 
   // Remise à plat des bilans des dépenses
-  $bilansTrt = reinitializeExpenses();
-  array_push($weeklyTrt, $bilansTrt);
+  $traitementBilans = reinitializeExpenses();
+
+  // Ajout du compte-rendu au log
+  array_push($traitementsHebdomadaires, $traitementBilans);
 
   // Détermination + généreux et + radin
   // à développer (après la refonte des dépenses), à conditionner sur "lundi" ?
@@ -25,14 +38,19 @@
   // Sauvegarde BDD
   // à développer (stocker dans un dossier), à conditionner sur "lundi" ?
 
-  // Génération log
+  // Récupération heure de fin de traitement
   $heureFin = date('His');
-  generateLog($typeLog, $weeklyTrt, $heureDebut, $heureFin);
 
-  // Redirection si asynchrone
+  // Génération du log de traitement
+  generateLog($typeLog, $traitementsHebdomadaires, $heureDebut, $heureFin);
+
+  // Redirection si exécution asynchrone
   if (isset($_POST['weekly_cron']))
   {
+    // Message d'alerte
     $_SESSION['alerts']['weekly_cron'] = true;
+
+    // Redirection
     header('location: /inside/administration/cron/cron.php?action=goConsulter');
   }
 ?>

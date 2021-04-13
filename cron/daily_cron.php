@@ -1,68 +1,71 @@
 <?php
-  // Lancement de la session
-  if (empty(session_id()))
-    session_start();
+  /************************************
+  ********** CRON Quotidien ***********
+  *************************************
+  Fonctionnalités :
+  - Notification sortie cinéma
+  - Notification mission unique
+  - Notification début mission
+  - Notification fin mission
+  - Ajout expérience gagnants mission
+  - Génération de log
+  ************************************/
+  /******* TOUS LES JOURS A 7H *******/
+  /***********************************/
 
   // Fonctions communes
-  include_once('../includes/functions/appel_bdd.php');
   include_once('../includes/functions/metier_commun.php');
   include_once('../includes/functions/fonctions_dates.php');
-  include_once('fonctions_cron.php');
 
-  /*** Traitements journaliers (tous les jours à 7h)***/
-  $typeLog    = 'j';
-  $heureDebut = date('His');
-  $dailyTrt   = array();
+  // Contrôles communs CRON
+  controlsCron();
 
-  // Sortie cinéma du jour
-  $filmsTrt = isCinemaToday();
-  array_push($dailyTrt, $filmsTrt);
+  // Modèle de données
+  include_once('modele/metier_cron.php');
+  include_once('modele/physique_cron.php');
 
-  // Durée mission
-  $durationMissions = durationMissions();
+  // Initialisations
+  $typeLog                = 'j';
+  $heureDebut             = date('His');
+  $traitementsQuotidiens  = array();
 
-  foreach ($durationMissions as $mission)
+  // Génération notification sortie cinéma du jour
+  $traitementSortieCinema = generateNotificationsSortieCinema();
+
+  // Ajout du compte-rendu au log
+  array_push($traitementsQuotidiens, $traitementSortieCinema);
+
+  // Génération notifications missions
+  $traitementMissions = generateNotificationsMissions();
+
+  // Ajout des compte-rendus au log
+  foreach ($traitementMissions as $traitementMission)
   {
-    switch ($mission['one_day'])
-    {
-      case 'O':
-        // Notification mission unique
-        $oneMission = isOneDayMission($mission['id_mission']);
-        array_push($dailyTrt, $oneMission);
-        break;
-
-      case 'F':
-        // Notification début de mission
-        $beginMission = isFirstDayMission($mission['id_mission']);
-        array_push($dailyTrt, $beginMission);
-        break;
-
-      case 'L':
-        // Notification fin de mission
-        $endMission = isLastDayMission($mission['id_mission']);
-        array_push($dailyTrt, $endMission);
-        break;
-
-      case 'N':
-      default:
-        break;
-    }
+    array_push($traitementsQuotidiens, $traitementMission);
   }
 
-  // Ajout expérience pour les gagnants
-  $experienceMissions = insertExperienceWinners();
+  // Ajout expérience pour les gagnants des missions
+  $traitementExperienceMissions = insertExperienceGagnants();
 
-  if (!empty($experienceMissions))
-    array_push($dailyTrt, $experienceMissions);
+  // Ajout des compte-rendus au log
+  foreach ($traitementExperienceMissions as $traitementExperienceMission)
+  {
+    array_push($traitementsQuotidiens, $traitementExperienceMission);
+  }
 
-  // Génération log
+  // Récupération heure de fin de traitement
   $heureFin = date('His');
-  generateLog($typeLog, $dailyTrt, $heureDebut, $heureFin);
 
-  // Redirection si asynchrone
+  // Génération du log de traitement
+  generateLog($typeLog, $traitementsQuotidiens, $heureDebut, $heureFin);
+
+  // Redirection si exécution asynchrone
   if (isset($_POST['daily_cron']))
   {
+    // Message d'alerte
     $_SESSION['alerts']['daily_cron'] = true;
+
+    // Redirection
     header('location: /inside/administration/cron/cron.php?action=goConsulter');
   }
 ?>

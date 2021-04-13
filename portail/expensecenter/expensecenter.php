@@ -23,7 +23,7 @@
   include_once('modele/controles_expensecenter.php');
   include_once('modele/physique_expensecenter.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

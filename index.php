@@ -19,7 +19,7 @@
 	include_once('portail/index/modele/controles_index.php');
   include_once('portail/index/modele/physique_index.php');
 
-  // Appel métier
+  // Appels métier
 	switch ($_GET['action'])
 	{
 		case 'goConsulter':

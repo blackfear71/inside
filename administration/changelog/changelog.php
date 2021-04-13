@@ -20,7 +20,7 @@
   include_once('modele/controles_changelog.php');
   include_once('modele/physique_changelog.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

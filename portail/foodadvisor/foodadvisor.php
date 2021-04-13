@@ -32,7 +32,7 @@
   include_once('modele/physique_foodadvisor_commun.php');
   include_once('modele/physique_foodadvisor.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

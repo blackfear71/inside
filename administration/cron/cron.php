@@ -16,7 +16,7 @@
   // Modèle de données
   include_once('modele/metier_cron.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

@@ -21,7 +21,7 @@
 	include_once('modele/controles_success.php');
 	include_once('modele/physique_success.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

@@ -125,6 +125,15 @@
     }
   }
 
+  // METIER : Contrôles CRON, initialisation session
+  // RETOUR : Aucun
+  function controlsCron()
+  {
+    // Lancement de la session
+    if (empty(session_id()))
+      session_start();
+  }
+
   // METIER : Contrôle si on est sur mobile
   // RETOUR : Plateforme
   function getPlateforme()

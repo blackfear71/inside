@@ -20,7 +20,7 @@
   include_once('modele/controles_themes.php');
   include_once('modele/physique_themes.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

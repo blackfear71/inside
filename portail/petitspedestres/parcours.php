@@ -21,7 +21,7 @@
   include_once('modele/controles_parcours.php');
   include_once('modele/physique_parcours.php');
 
-  // EVALUATE TRUE WHEN COI-FCT = 'L0001' PERFORM...
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulterListe':

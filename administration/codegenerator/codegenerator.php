@@ -15,7 +15,7 @@
   // Modèle de données
   include_once('modele/metier_codegenerator.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

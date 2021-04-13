@@ -24,7 +24,7 @@
   include_once('modele/controles_cookingbox.php');
   include_once('modele/physique_cookingbox.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

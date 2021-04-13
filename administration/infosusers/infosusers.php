@@ -18,7 +18,7 @@
   include_once('modele/metier_infosusers.php');
   include_once('modele/physique_infosusers.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

@@ -26,7 +26,7 @@
   include_once('modele/controles_collector.php');
   include_once('modele/physique_collector.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':

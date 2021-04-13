@@ -20,7 +20,7 @@
   include_once('modele/physique_moviehouse_commun.php');
   include_once('modele/physique_details.php');
 
-  // Appel métier
+  // Appels métier
   switch ($_GET['action'])
   {
     case 'goConsulter':
