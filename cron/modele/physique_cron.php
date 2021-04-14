@@ -160,4 +160,120 @@
     // Retour
     return $listeParticipants;
   }
+
+  // PHYSIQUE : Lecture des utilisateurs inscrits
+  // RETOUR : Liste des utilisateurs
+  function physiqueUsers()
+  {
+    // Initialisations
+    $listeUsers = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant
+                        FROM users
+                        WHERE identifiant != "admin" AND status != "I"
+                        ORDER BY identifiant ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
+      $user = Profile::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeUsers, $user);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeUsers;
+  }
+
+  // PHYSIQUE : Lecture des dépenses
+  // RETOUR : Liste des dépenses
+  function physiqueDepenses()
+  {
+    // Initialisations
+    $listeDepenses = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM expense_center
+                        ORDER BY id ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Expenses à partir des données remontées de la bdd
+      $depense = Expenses::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeDepenses, $depense);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeDepenses;
+  }
+
+  // PHYSIQUE : Lecture des ^parts d'une dépense
+  // RETOUR : Nombre de parts et de participants
+  function physiqueNombresParts($idDepense, $identifiant)
+  {
+    // Initialisations
+    $nombresParts = array('nombre_parts_total' => 0,
+                          'nombre_parts_user'  => 0,
+                          'nombre_users'       => 0
+                         );
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM expense_center_users
+                        WHERE id_expense = ' . $idDepense);
+
+    while ($data = $req->fetch())
+    {
+      // Nombre de parts total
+      $nombresParts['nombre_parts_total'] += $data['parts'];
+
+      // Nombre de parts de l'utilisateur
+      if ($data['identifiant'] == $identifiant)
+        $nombresParts['nombre_parts_user'] = $data['parts'];
+
+      // Nombre de participants
+      $nombresParts['nombre_users'] += 1;
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombresParts;
+  }
+
+  /****************************************************************************/
+  /********************************** UPDATE **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Mise à jour bilan d'un utilisateur
+  // RETOUR : Aucun
+  function physiqueUpdateBilanDepensesUser($identifiant, $bilan)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE users
+                          SET expenses = :expenses
+                          WHERE identifiant = "' . $identifiant . '"');
+
+    $req->execute(array(
+      'expenses' => $bilan
+    ));
+
+    $req->closeCursor();
+  }
 ?>

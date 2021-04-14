@@ -1,6 +1,8 @@
 <?php
+  include_once('../includes/classes/expenses.php');
   include_once('../includes/classes/missions.php');
   include_once('../includes/classes/movies.php');
+  include_once('../includes/classes/profile.php');
 
   // METIER : Insertion notification sortie cinéma du jour
   // RETOUR : Compte-rendu traitement
@@ -8,7 +10,7 @@
   {
     // Initialisations
     $nombreNotifications = 0;
-    $log                 = array('trt'    => '/* Sortie cinéma du jour */',
+    $log                 = array('titre'  => 'Sortie cinéma du jour',
                                  'status' => 'KO',
                                  'infos'  => ''
                                 );
@@ -71,7 +73,7 @@
           {
             case 'O':
               $notification = 'one_mission';
-              $log          = array('trt'    => '/* Mission unique (' . htmlspecialchars($mission['mission']) . ') */',
+              $log          = array('titre'  => 'Mission unique (' . htmlspecialchars($mission['mission']) . ')',
                                     'status' => 'KO',
                                     'infos'  => ''
                                    );
@@ -79,7 +81,7 @@
 
             case 'F':
               $notification = 'start_mission';
-              $log          = array('trt'    => '/* Début de mission (' . htmlspecialchars($mission['mission']) . ') */',
+              $log          = array('titre'  => 'Début de mission (' . htmlspecialchars($mission['mission']) . ')',
                                     'status' => 'KO',
                                     'infos'  => ''
                                    );
@@ -87,7 +89,7 @@
 
             case 'L':
               $notification = 'end_mission';
-              $log          = array('trt'    => '/* Fin de mission (' . htmlspecialchars($mission['mission']) . ') */',
+              $log          = array('titre'  => 'Fin de mission (' . htmlspecialchars($mission['mission']) . ')',
                                     'status' => 'KO',
                                     'infos'  => ''
                                    );
@@ -198,7 +200,7 @@
         foreach ($listeMissions as $mission)
         {
           // Initialisation du log de mission
-          $log = array('trt'    => '/* Expérience mission (' . htmlspecialchars($mission->getMission()) . ') */',
+          $log = array('titre'  => 'Expérience mission (' . htmlspecialchars($mission->getMission()) . ')',
                        'status' => 'KO',
                        'infos'  => ''
                       );
@@ -282,7 +284,7 @@
       else
       {
         // Ajout des données au log
-        $log = array('trt'    => '/* Expérience missions */',
+        $log = array('titre'  => 'Expérience missions',
                      'status' => 'OK',
                      'infos'  => 'Pas de missions'
                     );
@@ -294,7 +296,7 @@
     else
     {
       // Ajout des données au log
-      $log = array('trt'    => '/* Expérience missions */',
+      $log = array('titre'  => 'Expérience missions',
                    'status' => 'OK',
                    'infos'  => 'Chaîne déjà exécutée'
                   );
@@ -307,93 +309,57 @@
     return $listeLogsMissions;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // METIER : Recalcul des dépenses pour tous les utilisateurs
   // RETOUR : Compte-rendu traitement
   function reinitializeExpenses()
   {
-    $log = array('trt' => '/* Remise à plat des bilans des dépenses */', 'status' => 'KO');
+    // Initialisations
+    $log = array('titre'  => 'Remise à plat des bilans des dépenses',
+                 'status' => 'KO',
+                 'infos'  => ''
+                );
 
-    // Initialisation tableau des utilisateurs
-    $listeUsers = array();
+    // Récupération de la liste des utilisateurs
+    $listeUsers = physiqueUsers();
 
-    global $bdd;
-
-    $req1 = $bdd->query('SELECT id, identifiant FROM users WHERE identifiant != "admin" AND status != "I" ORDER BY identifiant ASC');
-    while ($data1 = $req1->fetch())
+    // Traitement du bilan de chaque utilisateur
+    foreach ($listeUsers as $user)
     {
-      // On calcule le bilan des dépenses de l'utilisateur courant
+      // Initialisations
       $bilanUser = 0;
 
-      // Calcul des bilans
-      $req2 = $bdd->query('SELECT * FROM expense_center ORDER BY id ASC');
-      while ($data2 = $req2->fetch())
+      // Récupération des dépenses
+      $listeDepenses = physiqueDepenses();
+
+      // Récupération des parts des dépense
+      foreach ($listeDepenses as $depense)
       {
-        // Identifiant de l'acheteur
-        $acheteur = $data2['buyer'];
+        // Récupération du nombre de parts total, du nombre de parts de l'utilisateur et du nombre de participants
+        $nombresParts = physiqueNombresParts($depense->getId(), $user->getIdentifiant());
 
-        // Nombre de parts et prix par parts
-        $nombrePartsTotal   = 0;
-        $nombrePartsUser    = 0;
-        $nombreUtilisateurs = 0;
-
-        $req3 = $bdd->query('SELECT * FROM expense_center_users WHERE id_expense = ' . $data2['id']);
-        while ($data3 = $req3->fetch())
-        {
-          // Nombre de parts total
-          $nombrePartsTotal += $data3['parts'];
-
-          // Nombre de parts de l'utilisateur
-          if ($data1['identifiant'] == $data3['identifiant'])
-            $nombrePartsUser = $data3['parts'];
-
-          // Nombre de participants
-          $nombreUtilisateurs += 1;
-        }
-
-        if ($data2['type'] == 'M')
+        // Calcul du bilan par type de dépense
+        if ($depense->getType() == 'M')
         {
           // Frais d'achat
-          $fraisAchat = formatAmountForInsert($data2['price']);
+          $fraisAchat = formatAmountForInsert($depense->getPrice());
 
           // Montant de la part
-          $montantUser = formatAmountForInsert($nombrePartsUser);
+          $montantUser = formatAmountForInsert($nombresParts['nombre_parts_user']);
 
           // Calcul de la répartition des frais
           if (empty($fraisAchat))
             $fraisAchat = 0;
 
           if ($montantUser != 0)
-            $fraisUser = $fraisAchat / $nombreUtilisateurs;
+            $fraisUser = $fraisAchat / $nombresParts['nombre_users'];
           else
             $fraisUser = 0;
 
           // Calcul du bilan de l'utilisateur (s'il participe ou qu'il est l'acheteur)
-          if ($acheteur == $data1['identifiant'] OR $montantUser != 0)
+          if ($user->getIdentifiant() == $depense->getBuyer() OR $montantUser != 0)
           {
-            if ($acheteur == $data1['identifiant'])
-              $bilanUser += $fraisAchat + $nombrePartsTotal - ($montantUser + $fraisUser);
+            if ($user->getIdentifiant() == $depense->getBuyer())
+              $bilanUser += $fraisAchat + $nombresParts['nombre_parts_total'] - ($montantUser + $fraisUser);
             else
               $bilanUser -= $montantUser + $fraisUser;
           }
@@ -401,120 +367,101 @@
         else
         {
           // Prix d'achat
-          $prixAchat = formatAmountForInsert($data2['price']);
+          $prixAchat = formatAmountForInsert($depense->getPrice());
 
           // Prix par parts
-          if ($nombrePartsTotal != 0)
-            $prixParPart = $prixAchat / $nombrePartsTotal;
+          if ($nombresParts['nombre_parts_total'] != 0)
+            $prixParPart = $prixAchat / $nombresParts['nombre_parts_total'];
           else
             $prixParPart = 0;
 
           // Somme des dépenses moins les parts consommées pour calculer le bilan
-          if ($acheteur == $data1['identifiant'])
-            $bilanUser += $prixAchat - ($prixParPart * $nombrePartsUser);
+          if ($user->getIdentifiant() == $depense->getBuyer())
+            $bilanUser += $prixAchat - ($prixParPart * $nombresParts['nombre_parts_user']);
           else
-            $bilanUser -= $prixParPart * $nombrePartsUser;
+            $bilanUser -= $prixParPart * $nombresParts['nombre_parts_user'];
         }
-
-        $req3->closeCursor();
       }
-      $req2->closeCursor();
 
-      // On construit un tableau des utilisateurs
-      $user = array('id'          => $data1['id'],
-                    'identifiant' => $data1['identifiant'],
-                    'bilan'       => $bilanUser,
-                   );
-
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+      // Modification de l'enregistrement en base
+      physiqueUpdateBilanDepensesUser($user->getIdentifiant(), $bilanUser);
     }
-    $req1->closeCursor();
 
-    // Mise à jour des utilisateurs
-    foreach ($listeUsers as $userBilan)
-    {
-      $req4 = $bdd->prepare('UPDATE users SET expenses = :expenses WHERE identifiant = "' . $userBilan['identifiant'] . '"');
-      $req4->execute(array(
-        'expenses' => $userBilan['bilan']
-      ));
-      $req4->closeCursor();
-
-      // Traitement effectué
-      $log['status'] = 'OK';
-    }
+    // Ajout des données au log
+    $log['status'] = 'OK';
+    $log['infos']  = 'Bilans recalculés';
 
     // Retour
     return $log;
   }
 
-  // METIER : Création fichier log
+  // METIER : Création du fichier de log
   // RETOUR : Aucun
-  function generateLog($typeLog, $etatTrt, $heureDeb, $heureFin)
+  function generateLog($typeLog, $traitements, $heureDebut, $heureFin)
   {
     // On vérifie la présence des dossiers, sinon on les créé
-    $dossier      = 'logs';
-    $sousDossierJ = 'daily';
-    $sousDossierH = 'weekly';
+    $dossier                 = 'logs';
+    $sousDossierQuotidien    = 'daily';
+    $sousDossierHebdomadaire = 'weekly';
 
     if (!is_dir($dossier))
       mkdir($dossier);
 
-    if (!is_dir($dossier . '/' . $sousDossierJ))
-      mkdir($dossier . '/' . $sousDossierJ);
+    if (!is_dir($dossier . '/' . $sousDossierQuotidien))
+      mkdir($dossier . '/' . $sousDossierQuotidien);
 
-    if (!is_dir($dossier . '/' . $sousDossierH))
-      mkdir($dossier . '/' . $sousDossierH);
+    if (!is_dir($dossier . '/' . $sousDossierHebdomadaire))
+      mkdir($dossier . '/' . $sousDossierHebdomadaire);
 
-    // Titre
+    // Création de la ligne de titre
     if ($typeLog == 'j')
       $titreLog = "/******************************/\r\n/* Traitement CRON journalier */\r\n/******************************/\r\n";
     elseif ($typeLog == 'h')
       $titreLog = "/********************************/\r\n/* Traitement CRON hebdomadaire */\r\n/********************************/\r\n";
 
-    // Type de traitement
+    // Création de la ligne de type de traitement
     if (isset($_POST['daily_cron']) OR isset($_POST['weekly_cron']))
-      $exeLog = '## Traitement asynchrone';
+      $executionLog = '## Traitement asynchrone';
     else
-      $exeLog = '## Traitement automatique';
+      $executionLog = '## Traitement automatique';
 
-    // Date du traitement
+    // Création de la ligne de date du traitement
     $dateLog = '## Date.......................' . date('d/m/Y');
 
-    // Traitement global OK ou KO
-    $control_ok = true;
+    // Création de la ligne d'état du traitement global
+    $etatTraitementsKO = false;
 
-    foreach ($etatTrt as $trt)
+    foreach ($traitements as $traitement)
     {
-      if ($trt['status'] == 'KO')
+      if ($traitement['status'] == 'KO')
       {
-        $control_ok = false;
+        $etatTraitementsKO = true;
         break;
       }
     }
 
-    if ($control_ok == true)
+    if ($etatTraitementsKO == false)
       $etatLog = '## Etat traitements...........OK';
     else
       $etatLog = '## Etat traitements...........KO';
 
-    // Durée totale des traitements
-    $dureeTot = calculDureeTraitement($heureDeb, $heureFin);
-    $dureeLog = '## Durée traitements..........' . $dureeTot['heures'] . ' heures, ' . $dureeTot['minutes'] . ' minutes et ' . $dureeTot['secondes'] . ' secondes';
+    // Création de la ligne de durée totale des traitements
+    $dureeTotale = calculDureeTraitement($heureDebut, $heureFin);
+    $dureeLog    = '## Durée traitements..........' . $dureeTotale['heures'] . ' heures, ' . $dureeTotale['minutes'] . ' minutes et ' . $dureeTotale['secondes'] . ' secondes';
 
-    // Ouverture / création fichier
+    // Création et ouverture du fichier
     if ($typeLog == 'j')
       $log = fopen('logs/daily/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.txt', 'a+');
     elseif ($typeLog == 'h')
       $log = fopen('logs/weekly/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.txt', 'a+');
 
-    // On repositionne le curseur du fichier au début
+    // Repositionnement du curseur au début du fichier
     fseek($log, 0);
 
-    // On écrit dans le fichier
+    // Ecriture du fichier
     fputs($log, $titreLog);
     fputs($log, "\r\n");
-    fputs($log, $exeLog);
+    fputs($log, $executionLog);
     fputs($log, "\r\n");
     fputs($log, $dateLog);
     fputs($log, "\r\n");
@@ -523,24 +470,25 @@
     fputs($log, $dureeLog);
     fputs($log, "\r\n");
 
-    if (!empty($etatTrt))
+    if (!empty($traitements))
     {
-      foreach ($etatTrt as $trt)
+      foreach ($traitements as $traitement)
       {
-        $nomTrt    = $trt['trt'];
-        $statutTrt = '## Status.....................' . $trt['status'];
-        $infoTrt   = '## Informations...............' . $trt['infos'];
+        $titreTraitement  = '/* ' . $traitement['titre'] . ' */';
+        $statutTraitement = '## Status.....................' . $traitement['status'];
+        $infosTraitement  = '## Informations...............' . $traitement['infos'];
+
         fputs($log, "\r\n");
-        fputs($log, $nomTrt);
+        fputs($log, $titreTraitement);
         fputs($log, "\r\n");
-        fputs($log, $statutTrt);
+        fputs($log, $statutTraitement);
         fputs($log, "\r\n");
-        fputs($log, $infoTrt);
+        fputs($log, $infosTraitement);
         fputs($log, "\r\n");
       }
     }
 
-    // Fermeture fichier
+    // Fermeture du fichier
     fclose($log);
   }
 ?>
