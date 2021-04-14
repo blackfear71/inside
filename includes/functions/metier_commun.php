@@ -145,12 +145,12 @@
 
     // Contrôle
     if (preg_match('/iphone/i', $userAgent)
-    ||  preg_match('/android/i', $userAgent)
-    ||  preg_match('/blackberry/i', $userAgent)
-    ||  preg_match('/symb/i', $userAgent)
-    ||  preg_match('/ipad/i', $userAgent)
-    ||  preg_match('/ipod/i', $userAgent)
-    ||  preg_match('/phone/i', $userAgent))
+    OR  preg_match('/android/i', $userAgent)
+    OR  preg_match('/blackberry/i', $userAgent)
+    OR  preg_match('/symb/i', $userAgent)
+    OR  preg_match('/ipad/i', $userAgent)
+    OR  preg_match('/ipod/i', $userAgent)
+    OR  preg_match('/phone/i', $userAgent))
       $plateforme = 'mobile';
 
     // Retour
