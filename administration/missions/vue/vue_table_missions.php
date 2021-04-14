@@ -42,7 +42,10 @@
             echo '<img src="../../includes/images/missions/banners/' . $mission->getReference() . '.png" alt="' . $mission->getReference() . '" title="' . $mission->getMission() . '" class="img_mission" />';
           echo '</a>';
 
-          echo '<div class="titre_mission">' . $mission->getMission() . ' - du ' . formatDateForDisplay($mission->getDate_deb()) . ' au ' . formatDateForDisplay($mission->getDate_fin()) . '</div>';
+          if ($mission->getDate_deb() == $mission->getDate_fin())
+            echo '<div class="titre_mission">' . $mission->getMission() . ' - le ' . formatDateForDisplay($mission->getDate_deb()) . '</div>';
+          else
+            echo '<div class="titre_mission">' . $mission->getMission() . ' - du ' . formatDateForDisplay($mission->getDate_deb()) . ' au ' . formatDateForDisplay($mission->getDate_fin()) . '</div>';
 
           echo '<form id="delete_mission_' . $mission->getId() . '" method="post" action="missions.php?action=doSupprimer" class="form_suppression_mission">';
             echo '<input type="hidden" name="id_mission" value="' . $mission->getId() . '" />';
