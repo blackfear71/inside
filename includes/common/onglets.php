@@ -12,10 +12,12 @@
 			break;
 	}
 
+	// Bande de séparation
 	echo '<div class="separation_nav"></div>';
 
+	// Affichage du menu de navigation
   echo '<nav class="menu_nav">';
-		// Par défaut, tous les onglets sont off
+		// Initialisation des onglets (désélectionnés par défaut)
 		$onglet1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter" title="Movie House" class="onglet_inactif"><img src="/inside/includes/icons/common/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
 		$onglet2 = '<a href="/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter" title="Les enfants ! À table !" class="onglet_inactif"><img src="/inside/includes/icons/common/food_advisor.png" alt="food_advisor" title="Les enfants ! À table !" class="logo_onglet" /></a>';
 		$onglet3 = '<a href="/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter" title="Cooking Box" class="onglet_inactif"><img src="/inside/includes/icons/common/cooking_box.png" alt="cooking_box" title="Cooking Box" class="logo_onglet" /></a>';
@@ -26,7 +28,7 @@
 		$onglet8 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_inactif"><img src="/inside/includes/icons/common/missions.png" alt="missions" title="Missions : Insider" class="logo_onglet" /></a>';
 		//$onglet9 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_inactif"><img src="/inside/includes/icons/common/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
 
-		// Activation des onglets en vérifiant la page courante et en remplaçant les valeurs par défaut au-dessus
+		// Activation de l'onglets de la page courante en remplaçant les valeurs par défaut
 		$path = $_SERVER['PHP_SELF'];
 
 		// Movie House
@@ -87,6 +89,7 @@
 			$onglet9 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_actif"><img src="/inside/includes/icons/common/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
 		}*/
 
+		// Affichage des onglets
 		echo $onglet1, $onglet2, $onglet3, $onglet4, $onglet5, $onglet6, $onglet7, $onglet8/*, $onglet9*/;
 	echo '</nav>';
 ?>

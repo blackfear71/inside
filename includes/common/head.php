@@ -1,20 +1,20 @@
 <?php
   // Dates de dernière modification (CSS et JS) pour mise à jour automatique du cache du navigateur
-  $lastModificationCss = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css');
+  $dateModificationCss = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css');
 
   if (!empty($styleHead))
-    $lastModificationCss2 = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $styleHead);
+    $dateModificationCssSection = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $styleHead);
 
   if (isset($chatHead) AND $chatHead == true)
-    $lastModificationCssChat = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css');
+    $dateModificationCssChat = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css');
 
   if (isset($datepickerHead) AND $datepickerHead == true)
-    $lastModificationCss_datepicker = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/css/datepicker.css');
+    $dateModificationCssDatepicker = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/css/datepicker.css');
 
-  $lastModificationJs  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
+  $dateModificationJs  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
 
   if (!empty($scriptHead))
-    $lastModificationJs2  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $scriptHead);
+    $dateModificationJsSection  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $scriptHead);
 
   // Meta-données
   echo '<meta charset="utf-8" />';
@@ -26,17 +26,17 @@
 
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
-  echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css?version=' . $lastModificationCss . '" />';
+  echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css?version=' . $dateModificationCss . '" />';
 
   // Styles spécifiques
   if (!empty($styleHead))
-    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $styleHead . '?version=' . $lastModificationCss2 . '" />';
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $styleHead . '?version=' . $dateModificationCssSection . '" />';
 
   if (isset($chatHead) AND $chatHead == true)
-    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css?version=' . $lastModificationCssChat . '" />';
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css?version=' . $dateModificationCssChat . '" />';
 
   if (isset($datepickerHead) AND $datepickerHead == true)
-    echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $lastModificationCss_datepicker . '">';
+    echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $dateModificationCssDatepicker . '">';
 
   // Title
   if (!empty($titleHead))
@@ -50,7 +50,7 @@
 <script>window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-3.5.1.min.js"><\/script>')</script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-ui-1.12.1.min.js"><\/script>')</script>
-<script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/script.js?version=<?php echo $lastModificationJs; ?>"></script>
+<script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/script.js?version=<?php echo $dateModificationJs; ?>"></script>
 <script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
@@ -66,11 +66,11 @@
 <?php } ?>
 
 <?php if (!empty($scriptHead)) { ?>
-  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/<?php echo $scriptHead; ?>?version=<?php echo $lastModificationJs2; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/<?php echo $scriptHead; ?>?version=<?php echo $dateModificationJsSection; ?>"></script>
 <?php } ?>
 
 <?php if (isset($chatHead) AND $chatHead == true) { ?>
-  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/scriptChat.js?version=<?php echo $lastModificationCssChat; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/scriptChat.js?version=<?php echo $dateModificationCssChat; ?>"></script>
 <?php } ?>
 
 <?php if (isset($masonryHead) AND $masonryHead == true) { ?>

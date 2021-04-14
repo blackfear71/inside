@@ -1,6 +1,7 @@
 <?php
   if ($_SESSION['user']['celsius'] == 'Y' AND !empty($celsius))
   {
+    // Sélection du contenu Celsius à afficher
     switch ($celsius)
     {
       case 'collector':

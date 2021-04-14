@@ -1,64 +1,60 @@
 <?php
-  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
-
   // Initialisation des succès à afficher
-  $unlocked = array();
+  $succesDebloques = array();
 
   if (isset($_SESSION['success'])AND !empty($_SESSION['success']))
   {
     // Récupération des succès
     foreach ($_SESSION['success'] as $reference => $success)
     {
-      // Nettoyage session
-      if (empty($success))
+      // Récupération des succès
+      if (!empty($success))
+      {
+        // Récupération du succès
+        $donneesSucces = getSuccesDebloques($reference);
+
+        // On ajoute la ligne au tableau
+        if ($donneesSucces->getDefined() == 'Y')
+          array_push($succesDebloques, $donneesSucces);
+
+        // Suppression du succès de la session
         unset($_SESSION['success'][$reference]);
-      // Lecture des succès
+      }
       else
       {
-        // On ajoute la ligne au tableau (si le succès est défini)
-        $reponse = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
-        $donnees = $reponse->fetch();
-
-        $ligneUnlocked = Success::withData($donnees);
-
-        if ($ligneUnlocked->getDefined() == 'Y')
-          array_push($unlocked, $ligneUnlocked);
-
-        $reponse->closeCursor();
-
-        // Nettoyage session
+        // Nettoyage de la session
         unset($_SESSION['success'][$reference]);
       }
     }
   }
 
   // Affichage des succès débloqués
-  if (!empty($unlocked))
+  if (!empty($succesDebloques))
   {
     echo '<div id="zoom_succes" class="fond_zoom_succes">';
       echo '<div class="zone_success_zoom">';
         // Titre
-        if (count($unlocked) > 1)
+        if (count($succesDebloques) > 1)
           echo '<div class="titre_zone_succes_zoom">Succès débloqués !</div>';
         else
           echo '<div class="titre_zone_succes_zoom">Succès débloqué !</div>';
 
         // Affichage des succès
-        foreach ($unlocked as $ligneUnlocked)
+        foreach ($succesDebloques as $ligneSuccesDebloque)
         {
           // Succès
           echo '<div class="zone_succes_zoom">';
             // Titre du succès
-            echo '<div class="titre_succes_zoom">' . $ligneUnlocked->getTitle() . '</div>';
+            echo '<div class="titre_succes_zoom">' . $ligneSuccesDebloque->getTitle() . '</div>';
 
             // Logo du succès
-            echo '<img src="/inside/includes/images/profil/success/' . $ligneUnlocked->getReference() . '.png" alt="' . $ligneUnlocked->getReference() . '" class="logo_succes_zoom" />';
+            echo '<img src="/inside/includes/images/profil/success/' . $ligneSuccesDebloque->getReference() . '.png" alt="' . $ligneSuccesDebloque->getReference() . '" class="logo_succes_zoom" />';
 
             // Description du succès
-            echo '<div class="description_succes_zoom">' . $ligneUnlocked->getDescription() . '</div>';
+            echo '<div class="description_succes_zoom">' . $ligneSuccesDebloque->getDescription() . '</div>';
 
             // Explications du succès
-            echo '<div class="explications_succes_zoom">' . formatExplanation($ligneUnlocked->getExplanation(), $ligneUnlocked->getLimit_success(), '%limit%') . '</div>';
+            echo '<div class="explications_succes_zoom">' . formatExplanation($ligneSuccesDebloque->getExplanation(), $ligneSuccesDebloque->getLimit_success(), '%limit%') . '</div>';
           echo '</div>';
         }
 
@@ -73,7 +69,7 @@
       echo '</div>';
     echo '</div>';
 
-    // Nettoyage des succès
-    $unlocked = array();
+    // Suppression des succès une fois affichés
+    $succesDebloques = array();
   }
 ?>

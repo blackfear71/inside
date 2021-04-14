@@ -3,6 +3,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/profile.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
 
   // METIER : Contrôles Index, initialisation session
   // RETOUR : Aucun
@@ -224,6 +225,28 @@
 
     // Retour
     return $messages;
+  }
+
+  // METIER : Récupération des données des succès débloqués
+  // RETOUR : Liste des alertes
+  function getSuccesDebloques($referenceSucces)
+  {
+    // Requête
+    global $bdd;
+
+    $req  = $bdd->query('SELECT *
+                         FROM success
+                         WHERE reference = "' . $referenceSucces . '"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Success à partir des données remontées de la bdd
+    $donneesSucces = Success::withData($data);
+
+    $req->closeCursor();
+
+    // Retour
+    return $donneesSucces;
   }
 
   // METIER : Récupération expérience utilisateur
