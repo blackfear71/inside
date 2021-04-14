@@ -53,7 +53,7 @@
 	// RETOUR : Lien
 	function extractLink($texte)
 	{
-		// On cherche les liens
+		// Recherche des liens
 		$lien = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="link_comment"></a>', $texte);
 
 		// Remplacement des débuts d'url
@@ -104,14 +104,14 @@
 								 '<img src="/inside/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley" />'
 								);
 
-		// Récupération de l'image
+		// Récupération de l'image à partir du texte
 		$smiley = str_replace($in, $out, $texte);
 
 		// Retour
 		return $smiley;
 	}
 
-	// REGEX : Formatage pour Onclick
+	// REGEX : Formatage pour messages d'alertes avec caractères spéciaux
 	// RETOUR : Texte formaté
 	function formatOnclick($texte)
 	{

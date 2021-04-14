@@ -1,9 +1,10 @@
 <?php
   include_once('appel_bdd.php');
-  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/profile.php');
-  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/alerts.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/profile.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
 
   // METIER : Contrôles Index, initialisation session
   // RETOUR : Aucun
@@ -13,7 +14,7 @@
     if (empty(session_id()))
       session_start();
 
-  	// Si déjà connecté
+  	// Redirection si déjà connecté
     if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != 'admin')
       header('location: /inside/portail/portail/portail.php?action=goConsulter');
     elseif (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
@@ -21,7 +22,7 @@
     else
       $_SESSION['index']['connected'] = false;
 
-    // Mobile
+    // Récupération de la plateforme en session
     if (!isset($_SESSION['index']['plateforme']))
       $_SESSION['index']['plateforme'] = getPlateforme();
   }
@@ -42,8 +43,17 @@
     if ($_SESSION['index']['connected'] == false)
       header('location: /inside/index.php?action=goConsulter');
 
-    // Plateforme
+    // Récupération de la plateforme en session
     $_SESSION['index']['plateforme'] = 'web';
+  }
+
+  // METIER : Contrôles CRON, initialisation session
+  // RETOUR : Aucun
+  function controlsCron()
+  {
+    // Lancement de la session
+    if (empty(session_id()))
+      session_start();
   }
 
   // METIER : Contrôles Utilisateur, initialisation session, mission et thème
@@ -91,11 +101,9 @@
               // Nombre de boutons à générer pour la mission en cours
               $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
 
+              // Génération des boutons de mission en session
               if ($numberButtonsToGenerate > 0)
-              {
-                $missionGenerated = generateMissions($numberButtonsToGenerate, $mission, $key);
-                $_SESSION['missions'][$key] = $missionGenerated;
-              }
+                $_SESSION['missions'][$key] = generateMission($numberButtonsToGenerate, $mission, $key);
             }
           }
           else
@@ -107,43 +115,30 @@
               // Nombre de boutons à générer pour la mission en cours
               $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
 
+              // Génération des boutons de mission en session (si le compte n'est pas bon)
               if ($numberButtonsToGenerate != count($_SESSION['missions'][$key]))
-              {
-                $missionGenerated = generateMissions($numberButtonsToGenerate, $mission, $key);
-                $_SESSION['missions'][$key] = $missionGenerated;
-              }
+                $_SESSION['missions'][$key] = generateMission($numberButtonsToGenerate, $mission, $key);
             }
           }
         }
 
-        //var_dump($_SESSION['missions']);
-
-        // Détermination thème
-        $_SESSION['theme'] = setTheme();
-
-        //var_dump($_SESSION['theme']);
+        // Détermination du thème
+        $_SESSION['theme'] = getTheme($_SESSION['user']['identifiant']);
       }
     }
   }
 
-  // METIER : Contrôles CRON, initialisation session
-  // RETOUR : Aucun
-  function controlsCron()
-  {
-    // Lancement de la session
-    if (empty(session_id()))
-      session_start();
-  }
-
-  // METIER : Contrôle si on est sur mobile
+  // METIER : Récupération de la plateforme
   // RETOUR : Plateforme
   function getPlateforme()
   {
     // Initialisations
     $plateforme = 'web';
+
+    // Récupération des données
     $userAgent  = $_SERVER['HTTP_USER_AGENT'];
 
-    // Contrôle
+    // Recherche si plateforme mobile
     if (preg_match('/iphone/i', $userAgent)
     OR  preg_match('/android/i', $userAgent)
     OR  preg_match('/blackberry/i', $userAgent)
@@ -164,7 +159,7 @@
     // Initialisations
     $isAccessibleMobile = true;
 
-    // Contrôle
+    // Contrôle section accessible sur mobile
     if ($_SESSION['index']['plateforme'] == 'mobile')
     {
       if ($path != '/inside/portail/collector/collector.php'
@@ -190,35 +185,38 @@
     // Récupération à partir de la session
     if (isset($_SESSION['alerts'])AND !empty($_SESSION['alerts']))
     {
-      // Initialisation variables d'alerte
-      foreach ($_SESSION['alerts'] as $key_alert => $alert)
-      {
-        if ($alert != true)
-          unset($_SESSION['alerts'][$key_alert]);
-      }
-
       // Boucle de lecture des messages d'alerte
-      foreach ($_SESSION['alerts'] as $key_alert => $alert)
+      foreach ($_SESSION['alerts'] as $keyAlerte => $alerte)
       {
-        if (isset($alert) AND $alert == true)
+        if ($alerte == true)
         {
-          global $bdd;
+          // Récupération de l'alerte
+          $messageAlerte = physiqueAlerte($keyAlerte);
 
-          $reponse = $bdd->query('SELECT * FROM alerts WHERE alert = "' . $key_alert . '"');
-          $donnees = $reponse->fetch();
-
-          // On ajoute la ligne au tableau (logo + message)
-          if ($reponse->rowCount() > 0)
-            $ligneMessage = array('logo' => $donnees['type'], 'texte' => $donnees['message']);
+          // Création du message
+          if (!empty($messageAlerte))
+          {
+            $ligneMessage = array('logo'  => $messageAlerte->getType(),
+                                  'texte' => $messageAlerte->getMessage()
+                                 );
+          }
           else
-            $ligneMessage = array('logo' => 'question', 'texte' => 'Message d\'alerte non défini pour : ' . $key_alert);
+          {
+            $ligneMessage = array('logo'  => 'question',
+                                  'texte' => 'Message d\'alerte non défini pour : ' . $keyAlerte
+                                 );
+          }
 
+          // On ajoute la ligne au tableau
           array_push($messages, $ligneMessage);
 
-          $reponse->closeCursor();
-
-          // Réinitialisation de l'erreur
-          unset($_SESSION['alerts'][$key_alert]);
+          // Réinitialisation de l'alerte
+          unset($_SESSION['alerts'][$keyAlerte]);
+        }
+        else
+        {
+          // Suppression des alertes non à TRUE
+          unset($_SESSION['alerts'][$keyAlerte]);
         }
       }
     }
@@ -231,41 +229,29 @@
   // RETOUR : Liste des alertes
   function getSuccesDebloques($referenceSucces)
   {
-    // Requête
-    global $bdd;
-
-    $req  = $bdd->query('SELECT *
-                         FROM success
-                         WHERE reference = "' . $referenceSucces . '"');
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Success à partir des données remontées de la bdd
-    $donneesSucces = Success::withData($data);
-
-    $req->closeCursor();
+    // Récupération des données du succès
+    $succes = physiqueSucces($referenceSucces);
 
     // Retour
-    return $donneesSucces;
+    return $succes;
   }
 
-  // METIER : Récupération expérience utilisateur
-  // RETOUR : Tableau d'expérience
+  // METIER : Récupération de l'expérience d'un utilisateur
+  // RETOUR : Aucun
   function getExperience($identifiant)
   {
-    global $bdd;
+    // Récupération de l'expérience de l'utilisateur
+    $experience = physiqueExperienceUser($identifiant);
 
-    $reponse = $bdd->query('SELECT id, identifiant, experience FROM users WHERE identifiant = "' . $identifiant . '"');
-    $donnees = $reponse->fetch();
+    // Conversion de l'expérience
+    $niveau   = convertExperience($experience);
+    $expMin   = 10 * $niveau ** 2;
+    $expMax   = 10 * ($niveau + 1) ** 2;
+    $expLvl   = $expMax - $expMin;
+    $progress = $experience - $expMin;
+    $percent  = floor($progress * 100 / $expLvl);
 
-    $experience = $donnees['experience'];
-    $niveau     = convertExperience($experience);
-    $expMin     = 10 * $niveau ** 2;
-    $expMax     = 10 * ($niveau + 1) ** 2;
-    $expLvl     = $expMax - $expMin;
-    $progress   = $experience - $expMin;
-    $percent    = floor($progress * 100 / $expLvl);
-
+    // Mise en session des données
     $_SESSION['user']['experience'] = array('niveau'   => $niveau,
                                             'exp_min'  => $expMin,
                                             'exp_max'  => $expMax,
@@ -273,128 +259,108 @@
                                             'progress' => $progress,
                                             'percent'  => $percent
                                            );
-
-    $reponse->closeCursor();
   }
 
-  // METIER : Récupération des missions actives
-  // RETOUR : Objets mission
+  // METIER : Récupération des missions actives à générer
+  // RETOUR : Liste des missions
   function getMissionsToGenerate()
   {
-    $listeMissions = array();
-    $dateJour      = date('Ymd');
-
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT * FROM missions WHERE ' . $dateJour . ' >= date_deb AND ' . $dateJour . ' <= date_fin ORDER BY date_deb ASC');
-    while ($donnees = $reponse->fetch())
-    {
-      $mission = Mission::withData($donnees);
-      array_push($listeMissions, $mission);
-    }
-    $reponse->closeCursor();
+    // Récupération des missions actives
+    $listeMissions = physiqueMissionsActives();
 
     // Retour
     return $listeMissions;
   }
 
   // METIER : Contrôle mission déjà complétée
-  // RETOUR : Nombre de missions à générer
-  function controlMissionComplete($user, $mission)
+  // RETOUR : Nombre de boutons d'une mission à générer
+  function controlMissionComplete($identifiant, $mission)
   {
+    // Initialisations
     $missionToGenerate = 0;
-    $dateJour         = date('Ymd');
 
-    global $bdd;
+    // Récupération des données
+    $idMission       = $mission->getId();
+    $objectifMission = $mission->getObjectif();
 
-    // Objectif mission
-    $reponse1 = $bdd->query('SELECT * FROM missions WHERE id = ' . $mission->getId());
-    $donnees1 = $reponse1->fetch();
+    // Récupération de l'avancement du jour de l'utilisateur
+    $avancementUser = physiqueAvancementMissionUser($idMission, $identifiant);
 
-    $objectifMission = $donnees1['objectif'];
-
-    $reponse1->closeCursor();
-
-    // Objectif atteint par l'utilisateur dans la journée
-    $reponse2 = $bdd->query('SELECT * FROM missions_users WHERE id_mission = ' . $mission->getId() . ' AND identifiant = "' . $user . '" AND date_mission = ' . $dateJour);
-    $donnees2 = $reponse2->fetch();
-
-    $avancementUser = $donnees2['avancement'];
-
-    $reponse2->closeCursor();
-
+    // Calcul du nombre de boutons à générer
     if ($avancementUser < $objectifMission)
       $missionToGenerate = $objectifMission - $avancementUser;
 
+    // Retour
     return $missionToGenerate;
   }
 
-  // METIER : Génération contexte mission (boutons)
-  // RETOUR : Tableau contexte
-  function generateMissions($nombre, $mission, $key)
+  // METIER : Génération des boutons d'une mission
+  // RETOUR : Liste des boutons
+  function generateMission($nombreBoutons, $mission, $keyMission)
   {
-    $listeBoutonsMission        = array();
+    // Initialisations
+    $listeBoutonsMission = array();
 
-    $listePages                 = array('/inside/portail/bugs/bugs.php',
-                                        '/inside/portail/calendars/calendars.php',
-                                        '/inside/portail/changelog/changelog.php',
-                                        '/inside/portail/collector/collector.php',
-                                        '/inside/portail/cookingbox/cookingbox.php',
-                                        //'/inside/portail/eventmanager/eventmanager.php',
-                                        '/inside/portail/expensecenter/expensecenter.php',
-                                        '/inside/portail/foodadvisor/foodadvisor.php',
-                                        '/inside/portail/foodadvisor/restaurants.php',
-                                        '/inside/portail/ideas/ideas.php',
-                                        '/inside/portail/missions/missions.php',
-                                        '/inside/portail/missions/details.php',
-                                        '/inside/portail/moviehouse/details.php',
-                                        '/inside/portail/moviehouse/mailing.php',
-                                        '/inside/portail/moviehouse/moviehouse.php',
-                                        '/inside/portail/notifications/notifications.php',
-                                        '/inside/portail/petitspedestres/parcours.php',
-                                        '/inside/portail/portail/portail.php',
-                                        '/inside/portail/profil/profil.php',
-                                        '/inside/portail/search/search.php'
-                                       );
+    // Récupération des données
+    $idMission        = $mission->getId();
+    $referenceMission = $mission->getReference();
 
-    $listeZonesCompletes        = array('header',
-                                        'footer',
-                                        'article'
-                                       );
+    // Définition des pages disponibles
+    $listePages = array('/inside/portail/bugs/bugs.php',
+                        '/inside/portail/calendars/calendars.php',
+                        '/inside/portail/changelog/changelog.php',
+                        '/inside/portail/collector/collector.php',
+                        '/inside/portail/cookingbox/cookingbox.php',
+                        //'/inside/portail/eventmanager/eventmanager.php',
+                        '/inside/portail/expensecenter/expensecenter.php',
+                        '/inside/portail/foodadvisor/foodadvisor.php',
+                        '/inside/portail/foodadvisor/restaurants.php',
+                        '/inside/portail/ideas/ideas.php',
+                        '/inside/portail/missions/missions.php',
+                        '/inside/portail/missions/details.php',
+                        '/inside/portail/moviehouse/details.php',
+                        '/inside/portail/moviehouse/mailing.php',
+                        '/inside/portail/moviehouse/moviehouse.php',
+                        '/inside/portail/notifications/notifications.php',
+                        '/inside/portail/petitspedestres/parcours.php',
+                        '/inside/portail/portail/portail.php',
+                        '/inside/portail/profil/profil.php',
+                        '/inside/portail/search/search.php'
+                       );
 
+    // Définition des zones disponibles
+    $listeZonesCompletes = array('header',
+                                 'footer',
+                                 'article'
+                                );
+
+    // Définition des positions horizontales disponibles (zones header et footer)
     $listePositionsHorizontales = array('left',
                                         'right',
                                         'middle',
                                        );
 
-    $listePositionsArticle      = array('top_left',
-                                        'top_right',
-                                        'middle_left',
-                                        'middle_right',
-                                        'bottom_left',
-                                        'bottom_right',
-                                       );
+    // Définition des positions verticales disponibles (zone article)
+    $listePositionsArticle = array('top_left',
+                                   'top_right',
+                                   'middle_left',
+                                   'middle_right',
+                                   'bottom_left',
+                                   'bottom_right',
+                                  );
 
-    for ($i = 0; $i < $nombre; $i++)
+    // Calcul du nombre d'emplacements maximum possibles (nombre de pages x (3 emplacements du header + 3 emplacements du footer + 6 emplacements de l'article)
+    $nombreEmplacementsMaximum = count($listePages) * (2 * count($listePositionsHorizontales) + 1 * count($listePositionsArticle));
+
+    // Génération des boutons autant que nécessaires à la mission
+    for ($i = 0; $i < $nombreBoutons; $i++)
     {
-      $boutonsMission = array();
+      // Détermination des données à générer
+      $referenceBouton = $i;
+      $page            = $listePages[array_rand($listePages)];
+      $zone            = $listeZonesCompletes[array_rand($listeZonesCompletes)];
 
-      // Id mission
-      $idMission = $mission->getId();
-
-      // Référence mission
-      $reference = $mission->getReference();
-
-      // Référence mission remplie
-      $refMission = $i;
-
-      // Page
-      $page = $listePages[array_rand($listePages)];
-
-      // Zone
-      $zone = $listeZonesCompletes[array_rand($listeZonesCompletes)];
-
-      // Positions
+      // Détermination de la position en fonction de la zone
       switch ($zone)
       {
         case 'article':
@@ -412,25 +378,25 @@
           break;
       }
 
-      // Icônes
+      // Détermination de l'icône en fonction de la position
       switch ($position)
       {
         case 'left':
         case 'top_left':
         case 'middle_left':
         case 'bottom_left':
-          $icone = $mission->getReference() . '_g';
+          $icone = $referenceMission . '_g';
           break;
 
         case 'middle':
-          $icone = $mission->getReference() . '_m';
+          $icone = $referenceMission . '_m';
           break;
 
         case 'right':
         case 'top_right':
         case 'middle_right':
         case 'bottom_right':
-          $icone = $mission->getReference() . '_d';
+          $icone = $referenceMission . '_d';
           break;
 
         default:
@@ -438,13 +404,11 @@
           break;
       }
 
-      // Classe position
+      // Détermination de la classe CSS en fonction de la zone et de la position
       if (!empty($zone) AND !empty($position))
       {
         // Cas des pages sans onglets
-        if  ($zone == 'article'
-        AND ($position == 'top_left'
-        OR   $position == 'top_right')
+        if  ($zone == 'article' AND ($position == 'top_left' OR $position == 'top_right')
         AND ($page == '/inside/portail/bugs/bugs.php'
         OR   $page == '/inside/portail/changelog/changelog.php'
         OR   $page == '/inside/portail/ideas/ideas.php'
@@ -459,22 +423,24 @@
       else
         $classe = '';
 
-      $boutonsMission = array('id_mission'  => $idMission,
-                              'reference'   => $reference,
-                              'ref_mission' => $refMission,
-                              'key_mission' => $key,
-                              'page'        => $page,
-                              'zone'        => $zone,
-                              'position'    => $position,
-                              'icon'        => $icone,
-                              'class'       => $classe
+      // Création du bouton à partir des données
+      $boutonMission = array('id_mission'  => $idMission,
+                             'reference'   => $referenceMission,
+                             'ref_mission' => $referenceBouton,
+                             'key_mission' => $keyMission,
+                             'page'        => $page,
+                             'zone'        => $zone,
+                             'position'    => $position,
+                             'icon'        => $icone,
+                             'class'       => $classe
                              );
 
-      $duplicate = controlGeneratedMission($listeBoutonsMission, $boutonsMission);
+      // Vérification boutons dupliqués dans la liste
+      $doublons = controlGeneratedMission($listeBoutonsMission, $boutonMission, $nombreEmplacementsMaximum);
 
-      // Si mission non dupliquée alors on l'insère dans le tableau, sinon on revient une occurence en arrière pour la regénérer
-      if ($duplicate == false)
-        array_push($listeBoutonsMission, $boutonsMission);
+      // Si boutons non dupliqués alors insertion dans le tableau, sinon retour en arrière d'une occurence pour la regénérer et la contrôler
+      if ($doublons == false)
+        array_push($listeBoutonsMission, $boutonMission);
       else
         $i--;
     }
@@ -483,115 +449,124 @@
     return $listeBoutonsMission;
   }
 
-  // METIER : Contrôle missions en double
-  // RETOUR : booléen
-  function controlGeneratedMission($tableauMissions, $mission)
+  // METIER : Contrôle boutons en double
+  // RETOUR : Booléen
+  function controlGeneratedMission($listeBoutonsMission, $boutonMission, $nombreEmplacementsMaximum)
   {
-    $duplicated = false;
+    // Initialisations
+    $doublons = false;
 
-    // Modifier le compteur si de nouvelles pages sont rajoutées (actuellement 17*(3+3+6) = 204 emplacements possibles)
-    if (!empty($tableauMissions) AND count($tableauMissions) <= 204)
+    // On ne fait cette vérification que tant que le nombre de boutons générés ne dépasse pas le nombre maximal d'emplacements possibles
+    if (!empty($listeBoutonsMission) AND count($listeBoutonsMission) <= $nombreEmplacementsMaximum)
     {
-      foreach ($tableauMissions as $missionExistante)
+      // Comparaison entre les boutons existants et le bouton en cours de création
+      foreach ($listeBoutonsMission as $missionExistante)
       {
-        if ($mission['id_mission'] == $missionExistante['id_mission']
-        AND $mission['page']       == $missionExistante['page']
-        AND $mission['zone']       == $missionExistante['zone']
-        AND $mission['position']   == $missionExistante['position'])
+        if ($boutonMission['id_mission'] == $missionExistante['id_mission']
+        AND $boutonMission['page']       == $missionExistante['page']
+        AND $boutonMission['zone']       == $missionExistante['zone']
+        AND $boutonMission['position']   == $missionExistante['position'])
         {
-          $duplicated = true;
+          $doublons = true;
           break;
         }
       }
     }
 
-    return $duplicated;
+    // Retour
+    return $doublons;
   }
 
-  // METIER : Détermination du thème
-  // RETOUR : Tableau chemins & types de thème
-  function setTheme()
+  // METIER : Détermination du thème en fonction du type
+  // RETOUR : Tableau du thème
+  function getTheme($identifiant)
   {
+    // Initialisations
     $tableauTheme = array();
 
-    global $bdd;
+    // Vérification si thème de mission activé
+    $themeMissionActive = physiqueThemeMissionActive();
 
-    // Contrôle thème mission en cours
-    $themePresent = false;
-
-    $req1 = $bdd->query('SELECT * FROM themes WHERE type = "M" AND ' . date('Ymd') . ' >= date_deb AND ' . date('Ymd') . ' <= date_fin');
-    $data1 = $req1->fetch();
-
-    if ($req1->rowCount() > 0)
+    // Récupération du thème en fonction du type
+    if (!empty($themeMissionActive))
     {
-      $themePresent = true;
-      $theme         = Theme::withData($data1);
-    }
-
-    $req1->closeCursor();
-
-    // Thème mission si en cours
-    if ($themePresent == true)
-    {
-      if ($theme->getLogo() == 'Y')
+      // Thème de mission en cours
+      if ($themeMissionActive->getLogo() == 'Y')
       {
-        $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
-                              'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
-                              'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
-                              'logo'       => '/inside/includes/images/themes/logos/' . $theme->getReference() . '_l.png'
+        $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $themeMissionActive->getReference() . '.png',
+                              'header'     => '/inside/includes/images/themes/headers/' . $themeMissionActive->getReference() . '_h.png',
+                              'footer'     => '/inside/includes/images/themes/footers/' . $themeMissionActive->getReference() . '_f.png',
+                              'logo'       => '/inside/includes/images/themes/logos/' . $themeMissionActive->getReference() . '_l.png'
                              );
       }
       else
       {
-        $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
-                              'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
-                              'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
+        $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $themeMissionActive->getReference() . '.png',
+                              'header'     => '/inside/includes/images/themes/headers/' . $themeMissionActive->getReference() . '_h.png',
+                              'footer'     => '/inside/includes/images/themes/footers/' . $themeMissionActive->getReference() . '_f.png',
                               'logo'       => NULL
                              );
       }
     }
-    // Thème personnalisé
     else
     {
       // Lecture préférence thème utilisateur
-      $req2 = $bdd->query('SELECT * FROM preferences WHERE identifiant = "' . $_SESSION['user']['identifiant'] . '"');
-      $data2 = $req2->fetch();
-      $preferences = Preferences::withData($data2);
-      $req2->closeCursor();
+      $referenceTheme = physiquePreferenceTheme($identifiant);
 
-      if (!empty($preferences->getRef_theme()))
+      // Thème personnalisé
+      if (!empty($referenceTheme))
       {
-        $req3 = $bdd->query('SELECT * FROM themes WHERE reference = "' . $preferences->getRef_theme() . '"');
-        $data3 = $req3->fetch();
+        // Récupération des données du thème
+        $themePersonnalise = physiqueThemePersonnalise($referenceTheme);
 
-        if ($req3->rowCount() > 0)
+        // Thème personnalisé
+        if (!empty($themePersonnalise))
         {
-          $theme = Theme::withData($data3);
-
-          if ($theme->getLogo() == 'Y')
+          if ($themePersonnalise->getLogo() == 'Y')
           {
-            $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
-                                  'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
-                                  'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
-                                  'logo'       => '/inside/includes/images/themes/logos/' . $theme->getReference() . '_l.png'
+            $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $themePersonnalise->getReference() . '.png',
+                                  'header'     => '/inside/includes/images/themes/headers/' . $themePersonnalise->getReference() . '_h.png',
+                                  'footer'     => '/inside/includes/images/themes/footers/' . $themePersonnalise->getReference() . '_f.png',
+                                  'logo'       => '/inside/includes/images/themes/logos/' . $themePersonnalise->getReference() . '_l.png'
                                  );
           }
           else
           {
-            $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $theme->getReference() . '.png',
-                                  'header'     => '/inside/includes/images/themes/headers/' . $theme->getReference() . '_h.png',
-                                  'footer'     => '/inside/includes/images/themes/footers/' . $theme->getReference() . '_f.png',
+            $tableauTheme = array('background' => '/inside/includes/images/themes/backgrounds/' . $themePersonnalise->getReference() . '.png',
+                                  'header'     => '/inside/includes/images/themes/headers/' . $themePersonnalise->getReference() . '_h.png',
+                                  'footer'     => '/inside/includes/images/themes/footers/' . $themePersonnalise->getReference() . '_f.png',
                                   'logo'       => NULL
                                  );
           }
         }
-
-        $req3->closeCursor();
       }
     }
 
+    // Retour
     return $tableauTheme;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // METIER : Formatage titres niveaux (succès)
   // RETOUR : titre niveau formaté

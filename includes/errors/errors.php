@@ -49,5 +49,5 @@
   echo '</div>';
 
   // Lien retour au portail
-  echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" class="lien_erreur">Revenir au portail</a>';
+  echo '<a href="/inside/portail/portail/portail.php?action=goConsulter" class="lien_erreur">Revenir sur Inside</a>';
 ?>

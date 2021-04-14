@@ -24,7 +24,7 @@
     return $dateValide;
   }
 
-  // DATE : Contrôle date valide (format AAAA-MM-JJ)
+  // DATE : Contrôle date valide (format AAAA-MM-JJ) sur mobile
   // RETOUR : Booléen
   function validateDateMobile($date)
   {
@@ -63,10 +63,11 @@
     return $dateFormat;
   }
 
-  // DATE : Formate une date pour affichage sur mobile (AAAAMMJJ -> AAAA-MM-JJ)
+  // DATE : Formate une date pour affichage (AAAAMMJJ -> AAAA-MM-JJ) sur mobile
   // RETOUR : Date formatée
   function formatDateForDisplayMobile($date)
   {
+    // Formatage de la date
     if (strlen($date) == 8)
       $dateFormat = substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-' . substr($date, 6, 2);
     else
@@ -90,7 +91,7 @@
     return $dateFormat;
   }
 
-  // DATE : Formate une date pour insertion en base (AAAA-MM-JJ -> AAAAMMJJ)
+  // DATE : Formate une date pour insertion en base (AAAA-MM-JJ -> AAAAMMJJ) sur mobile
   // RETOUR : Date formaté
   function formatDateForInsertMobile($date)
   {
@@ -103,7 +104,7 @@
     // Retour
     return $dateFormat;
   }
-  
+
   // DATE : Formate une heure pour affichage (HHMMSS -> HH:MM:SS)
   // RETOUR : Heure formatée
   function formatTimeForDisplay($time)
@@ -146,17 +147,6 @@
     return $weekFormat;
   }
 
-  // DATE : Formate un jour pour affichage (light)
-  // RETOUR : Jour formaté
-  function formatDayForDisplayLight($day)
-  {
-    // Formatage du jour
-    $dayFormat = strtoupper(substr($day, 0, 3) . '.');
-
-    // Retour
-    return $dayFormat;
-  }
-
   // DATE : Formate une semaine pour insertion en base (ajout zéro initial)
   // RETOUR : Semaine formatée
   function formatWeekForInsert($week)
@@ -169,6 +159,17 @@
 
     // Retour
     return $weekFormat;
+  }
+
+  // DATE : Formate un jour pour affichage (light)
+  // RETOUR : Jour formaté
+  function formatDayForDisplayLight($day)
+  {
+    // Formatage du jour
+    $dayFormat = strtoupper(substr($day, 0, 3) . '.');
+
+    // Retour
+    return $dayFormat;
   }
 
   // DATE : Formate un mois pour affichage
@@ -261,18 +262,18 @@
 
     if (strlen($heureDeb) == 6 AND strlen($heureFin) == 6)
     {
-      // Calcul (en secondes)
+      // Calcul des durées (en secondes)
       $heureFinSecondes = substr($heureFin, 0, 2) * 60 * 60 + substr($heureFin, 2, 2) * 60 + substr($heureFin, 4, 2);
       $heureDebSecondes = substr($heureDeb, 0, 2) * 60 * 60 + substr($heureDeb, 2, 2) * 60 + substr($heureDeb, 4, 2);
       $dureeSecondes    = $heureFinSecondes - $heureDebSecondes;
 
       // Conversion
-      $total      = $dureeSecondes;
-      $heures     = intval(abs($total / 3600));
-      $total      = $total - ($heures * 3600);
-      $minutes    = intval(abs($total / 60));
-      $total      = $total - ($minutes * 60);
-      $secondes   = $total;
+      $total    = $dureeSecondes;
+      $heures   = intval(abs($total / 3600));
+      $total    = $total - ($heures * 3600);
+      $minutes  = intval(abs($total / 60));
+      $total    = $total - ($minutes * 60);
+      $secondes = $total;
 
       // Construction du tableau
       $dureeFormat = array('heures'   => $heures,
@@ -292,7 +293,7 @@
     // Initialisations
     $ecart = 0;
 
-    // Calcul
+    // Calcul de l'écart
     $date1 = strtotime($dateDeb);
     $date2 = strtotime($dateFin);
 
