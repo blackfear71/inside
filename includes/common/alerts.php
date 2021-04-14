@@ -51,6 +51,7 @@
       echo '</div>';
     echo '</div>';
 
+    // Suppression des messages une fois affichés
     $messages = array();
   }
 ?>

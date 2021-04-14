@@ -29,16 +29,6 @@
 
     <!-- Contenu -->
 		<section>
-      <!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_nav">
-				<?php
-					$ajouterParcours  = true;
-					$modifierParcours = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
@@ -52,6 +42,23 @@
           /********************/
           $zoneInside = 'article';
           include('../../includes/common/missions.php');
+
+          /*********/
+          /* Liens */
+          /*********/
+          echo '<div class="zone_liens_saisie">';
+            // Saisie parcours
+            echo '<a href="parcours.php?action=goAjouter" title="Ajouter un parcours" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/parcours.png" alt="parcours" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Ajouter un parcours</div>';
+            echo '</a>';
+
+            // Modifier le parcours
+            echo '<a href="parcours.php?id_parcours=' . $_GET['id_parcours'] . '&action=goModifier" title="Modifier le parcours" class="lien_categorie">';
+              echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/edit.png" alt="edit" class="image_lien" /></div>';
+              echo '<div class="zone_texte_lien">Modifier le parcours</div>';
+            echo '</a>';
+          echo '</div>';
 
           /*******************/
           /* Chargement page */

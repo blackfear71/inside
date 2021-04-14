@@ -902,9 +902,32 @@
 }
 
 /*** Initialisation succès ***/
-.zone_init_succes
+.zone_gestion_succes
 {
 	display: block;
+}
+
+.bouton_modifier_succes
+{
+	display: inline-block;
+	vertical-align: top;
+	height: 40px;
+	line-height: 40px;
+	width: 180px;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	background-color: #d3d3d3;
+	border: 0;
+	border-radius: 5px;
+	text-decoration: none;
+	text-align: center;
+}
+
+.bouton_modifier_succes:hover
+{
+	background-color: #ff1937;
+	color: white;
 }
 
 .form_init_succes

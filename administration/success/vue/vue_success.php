@@ -28,15 +28,6 @@
 
     <!-- Contenu -->
 		<section>
-			<!-- Paramétrage des boutons de navigation -->
-			<aside id="left_menu" class="aside_no_nav">
-				<?php
-          $modifierSucces = true;
-
-					include('../../includes/common/aside.php');
-				?>
-			</aside>
-
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
@@ -169,8 +160,21 @@
           // Gestion des succès
           echo '<div class="titre_section"><img src="../../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Gérer les succès des utilisateurs</div></div>';
 
+          // Modification
+          echo '<div class="zone_gestion_succes">';
+            echo '<a href="/inside/administration/success/success.php?action=goModifier" class="bouton_modifier_succes">';
+              echo 'Modifier les succès';
+            echo '</a>';
+
+            echo '<div class="explications_init">';
+              echo 'Il est possible de modifier le niveau, l\'ordonnancement, le titre, la description, la condition et les explications des succès. Bien contrôler l\'ordonnancement par rapport au
+              niveau pour éviter les doublons. Il n\'est pas possible de modifier la référence ni l\'image, il faut donc supprimer le succès via cet écran. Pour les explications, insérer les caractères
+              %limit% permet de les remplacer par la valeur de la conditon d\'obtention du succès.';
+            echo '</div>';
+          echo '</div>';
+
           // Purge
-          echo '<div class="zone_init_succes">';
+          echo '<div class="zone_gestion_succes margin_top_20">';
             echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurger" class="form_init_succes">';
               echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_init eventConfirm" />';
               echo '<input type="hidden" value="Voulez-vous vraiment purger les succès ? Ceci est définitif." class="eventMessage" />';
@@ -189,7 +193,7 @@
           echo '</div>';
 
           // Initialisation
-          echo '<div class="zone_init_succes margin_top_20">';
+          echo '<div class="zone_gestion_succes margin_top_20">';
             echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiser" class="form_init_succes">';
               echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_init eventConfirm" />';
               echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="eventMessage" />';

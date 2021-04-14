@@ -1,5 +1,5 @@
 <?php
-  // Tableaux des menus
+  // Menu latéral gauche
   $listeAsidePortail = array(array('lien'  => '/inside/portail/portail/portail.php?action=goConsulter',
                                    'image' => 'inside_white',
                                    'titre' => 'PORTAIL'),
@@ -14,6 +14,7 @@
                                    'titre' => 'COLLECTOR ROOM')
                             );
 
+  // Menu latéral droit
   $listeAsideUser = array(array('lien'  => '/inside/portail/profil/profil.php?view=settings&action=goConsulter',
                                 'image' => 'settings',
                                 'titre' => 'PARAMÈTRES'),
