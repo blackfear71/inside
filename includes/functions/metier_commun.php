@@ -546,34 +546,11 @@
     return $tableauTheme;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // METIER : Formatage titres niveaux (succès)
-  // RETOUR : titre niveau formaté
-  function formatTitleLvl($level)
+  // METIER : Formatage titres niveaux pour les succès
+  // RETOUR : Titre du niveau formaté
+  function formatLevelTitle($level)
   {
-    $nameLevel = '';
-
+    // Formatage du titre en fonction du niveau
     switch ($level)
     {
       case '1';
@@ -609,150 +586,50 @@
         break;
     }
 
+    // Retour
     return $nameLevel;
   }
 
-  // METIER : Formatage gagnants mission
-  // RETOUR : phrase formatée
-  function formatGagnants($listWinners)
-  {
-    switch (count($listWinners))
-    {
-      case 1:
-        $phrase = 'Félicitations à <span class="contenu_gras">' . htmlspecialchars($listWinners[0]) . '</span> pour sa victoire écrasante !';
-        break;
-
-      case 0:
-        $phrase = '';
-        break;
-
-      default:
-        $phrase = 'Félicitations à ';
-
-        foreach ($listWinners as $winner)
-        {
-          if ($winner == end($listWinners))
-          {
-            $phrase = substr($phrase, 0, -2);
-            $phrase .= ' et <span class="contenu_gras">' . htmlspecialchars($winner) . '</span>';
-          }
-          else
-            $phrase .= '<span class="contenu_gras">' . htmlspecialchars($winner) . '</span>, ';
-        }
-
-        $phrase .= ' pour leur magnifique victoire !';
-        break;
-    }
-
-    return $phrase;
-  }
-
-  // METIER : Génération notification
+  // METIER : Génération d'une notification
   // RETOUR : Aucun
   function insertNotification($author, $category, $content)
   {
-    $date = date('Ymd');
-    $time = date('His');
+    // Insertion de l'enregistrement en base
+    $notification = array('author'   => $author,
+                          'date'     => date('Ymd'),
+                          'time'     => date('His'),
+                          'category' => $category,
+                          'content'  => $content
+                         );
 
-    global $bdd;
-
-    // Stockage de l'enregistrement en table
-    $req = $bdd->prepare('INSERT INTO notifications(author, date, time, category, content) VALUES(:author, :date, :time, :category, :content)');
-    $req->execute(array(
-      'author'   => $author,
-      'date'     => $date,
-      'time'     => $time,
-      'category' => $category,
-      'content'  => $content
-        ));
-    $req->closeCursor();
+    physiqueInsertionNotification($notification);
   }
 
-  // METIER : Suppression notification
+  // METIER : Suppression d'une notification
   // RETOUR : Aucun
   function deleteNotification($category, $content)
   {
-    global $bdd;
-
-    // Suppression de la table
-    $req = $bdd->exec('DELETE FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
+    // Suppression de l'enregistrement en base
+    physiqueDeleteNotification($category, $content);
   }
 
   // METIER : Contrôle notification existante
   // RETOUR : Booléen
   function controlNotification($category, $content)
   {
-    $exist = false;
+    // Vérificartion notification existante
+    $notificationExistante = physiqueNotificationExistante($category, $content);
 
-    global $bdd;
-
-    if ($category == 'comments')
-      $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '" AND date = ' . date('Ymd'));
-    else
-      $req = $bdd->query('SELECT * FROM notifications WHERE category = "' . $category . '" AND content = "' . $content . '"');
-
-    if ($req->rowCount() > 0)
-      $exist = true;
-
-    $req->closeCursor();
-
-    return $exist;
+    // Retour
+    return $notificationExistante;
   }
 
-  // METIER : Formatage phrases cultes
-  // RETOUR : phrase formatée
-  function formatCollector($collector)
-  {
-    $formatted = '';
-
-    $search    = array('[', ']');
-    $replace   = array('<strong>', '</strong>');
-    $formatted = str_replace($search, $replace, $collector);
-
-    return $formatted;
-  }
-
-  // METIER : Dé-formatage phrases cultes
-  // RETOUR : phrase dé-formatée
-  function unformatCollector($collector)
-  {
-    $unformatted = '';
-
-    $search      = array('[', ']');
-    $replace     = array('', '');
-    $unformatted = str_replace($search, $replace, $collector);
-
-    return $unformatted;
-  }
-
-  // METIER : Suppression des caractères ASCII invisibles (?)
-  // RETOUR : phrase nettoyée
-  function deleteInvisible($phrase)
-  {
-    $cleaned = preg_replace('[\xE2\x80\x8E]', '', $phrase);
-
-    return $cleaned;
-  }
-
-  // METIER : Lecture liste des utilisateurs (chat)
-  // RETOUR : Tableau d'utilisateurs
+  // METIER : Lecture liste des utilisateurs pour le chat
+  // RETOUR : Liste des utilisateurs
   function getUsersChat()
   {
-    // Initialisation tableau d'utilisateurs
-    $listeUsers = array();
-
-    global $bdd;
-
-    $reponse = $bdd->query('SELECT id, identifiant, pseudo, avatar FROM users WHERE identifiant != "admin" ORDER BY identifiant ASC');
-    while ($donnees = $reponse->fetch())
-    {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
-      $user = Profile::withData($donnees);
-
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
-    }
-    $reponse->closeCursor();
+    // Récupération de la liste des utilisateurs
+    $listeUsers = physiqueUsersChat();
 
     // Traitement de sécurité
     foreach ($listeUsers as $user)
@@ -764,16 +641,17 @@
     return $listeUsers;
   }
 
-  // METIER : Rotation automatique des images en mode Portrait
+  // METIER : Rotation automatique des images en mode portrait
   // RETOUR : Aucun
   function rotateImage($image, $type)
   {
+    // Initialisations
     $degrees = 0;
 
     // Récupération des données EXIF
     $exif = exif_read_data($image);
 
-    // Rotation
+    // Détermination de l'angle
     if (!empty($exif['Orientation']))
     {
       switch ($exif['Orientation'])
@@ -791,6 +669,7 @@
       }
     }
 
+    // Rotation
     if ($degrees != 0)
     {
       switch ($type)
@@ -826,23 +705,226 @@
     }
   }
 
-  // METIER : Génération valeur succès niveau
+  // METIER : Génération de la valeur d'un succès
   // RETOUR : Aucun
-  function insertOrUpdateSuccesLevel($experience, $identifiant)
+  function insertOrUpdateSuccesValue($reference, $identifiant, $incoming)
+  {
+    // Initialisations
+    $value  = NULL;
+    $action = NULL;
+
+    // Détermination de la valeur à insérer en fonction de la référence
+    switch ($reference)
+    {
+      // Valeur en entrée conservée
+      case 'beginning':
+      case 'developper':
+      case 'padawan':
+      case 'level_1':
+      case 'level_5':
+      case 'level_10':
+        // Récupération de l'ancienne valeur du succès de l'utilisateur
+        $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+        // Récupération de la nouvelle valeur
+        $value = $incoming;
+
+        // Vérification si succès débloqué (sauf pour l'admin)
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+        {
+          $alreadyUnlocked = false;
+
+          // Récupération de la valeur limite à atteindre pour le succès
+          $limite = physiqueLimiteSucces($reference);
+
+          // Comparaison entre les 2 valeurs
+          if (!empty($ancienneValeur) AND $ancienneValeur >= $limite)
+            $alreadyUnlocked = true;
+
+          // Ajout à la session d'affichage des succès si limite atteinte
+          if ($alreadyUnlocked == false AND $value == $limite)
+            $_SESSION['success'][$reference] = true;
+        }
+        break;
+
+      // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming <= 1)
+      case 'publisher':
+      case 'viewer':
+      case 'commentator':
+      case 'listener':
+      case 'speaker':
+      case 'funny':
+      case 'self-satisfied':
+      case 'buyer':
+      case 'generous':
+      case 'creator':
+      case 'applier':
+      case 'debugger':
+      case 'compiler':
+      case 'restaurant-finder':
+      case 'star-chief':
+      case 'cooker':
+      case 'recipe-master':
+      case 'christmas2017':
+      case 'christmas2017_2':
+      case 'golden-egg':
+      case 'rainbow-egg':
+      case 'wizard':
+      case 'christmas2018':
+      case 'christmas2018_2':
+      case 'christmas2019':
+        // Récupération de l'ancienne valeur du succès de l'utilisateur
+        $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+        // Récupération de la nouvelle valeur
+        if (!empty($ancienneValeur))
+          $value = $ancienneValeur + $incoming;
+        else
+          $value = $incoming;
+
+        // Vérification si succès débloqué (sauf pour l'admin)
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+        {
+          // Récupération de la valeur limite à atteindre pour le succès
+          $limite = physiqueLimiteSucces($reference);
+
+          // Ajout à la session d'affichage des succès si limite atteinte
+          if ($value == $limite)
+            $_SESSION['success'][$reference] = true;
+        }
+        break;
+
+      // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming > 1)
+      case 'eater':
+        // Récupération de l'ancienne valeur du succès de l'utilisateur
+        $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+        // Récupération de la nouvelle valeur
+        if (!empty($ancienneValeur))
+          $value = $ancienneValeur + $incoming;
+        else
+          $value = $incoming;
+
+        // Vérification si succès débloqué (sauf pour l'admin)
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+        {
+          $alreadyUnlocked = false;
+
+          // Récupération de la valeur limite à atteindre pour le succès
+          $limite = physiqueLimiteSucces($reference);
+
+          // Comparaison entre les 2 valeurs
+          if (!empty($ancienneValeur) AND $ancienneValeur >= $limite)
+            $alreadyUnlocked = true;
+
+          // Ajout à la session d'affichage des succès si limite atteinte
+          if ($alreadyUnlocked == false AND $value >= $limite)
+            $_SESSION['success'][$reference] = true;
+        }
+        break;
+
+      // Valeur maximale conservée
+      case 'greedy':
+        // Récupération de l'ancienne valeur du succès de l'utilisateur
+        $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+        // Récupération de la nouvelle valeur
+        if (!empty($ancienneValeur))
+        {
+          if ($incoming > $ancienneValeur)
+            $value = $incoming;
+        }
+        else
+          $value = $incoming;
+
+        // Vérification si succès débloqué (sauf pour l'admin)
+        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+        {
+          // Récupération de la valeur limite à atteindre pour le succès
+          $limite = physiqueLimiteSucces($reference);
+
+          if (!empty($ancienneValeur))
+          {
+            // Ajout à la session d'affichage des succès si limite atteinte
+            if ($ancienneValeur < $limite AND !empty($value) AND $value >= $limite)
+              $_SESSION['success'][$reference] = true;
+          }
+          else
+          {
+            // Ajout à la session d'affichage des succès si limite atteinte
+            if ($value >= $limite)
+              $_SESSION['success'][$reference] = true;
+          }
+        }
+        break;
+
+      default:
+        // Valeur par défaut
+        $value = NULL;
+        break;
+    }
+
+    // Détermination de l'action à effectuer en fonction de la valeur
+    if (!is_null($value))
+    {
+      if ($value == 0)
+        $action = 'delete';
+      else
+      {
+        // Vérification de l'exitence d'une valeur du succès pour l'utilisateur
+        if (!empty($ancienneValeur))
+          $action = 'update';
+        else
+          $action = 'insert';
+      }
+    }
+
+    // Traitement de l'enregistrement
+    switch ($action)
+    {
+      case 'insert':
+        // Insertion de l'enregistrement en base
+        $succesUser = array('reference'   => $reference,
+                            'identifiant' => $identifiant,
+                            'value'       => $value
+                           );
+
+        physiqueInsertionSuccesUser($succesUser);
+        break;
+
+      case 'update':
+        // Modification de l'enregistrement en base
+        physiqueUpdateSuccesUser($reference, $identifiant, $value);
+        break;
+
+      case 'delete':
+        // Suppression de l'enregistrement en base
+        physiqueDeleteSuccesUser($reference, $identifiant);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  // METIER : Génération des succès pour le niveau de l'utilisateur
+  // RETOUR : Aucun
+  function insertOrUpdateSuccesLevel($identifiant, $experience)
   {
     // Récupération du niveau
     $level = convertExperience($experience);
 
-    // Insertion des valeurs des succès
+    // Insertion des succès pour chaque niveau
     insertOrUpdateSuccesValue('level_1', $identifiant, $level);
     insertOrUpdateSuccesValue('level_5', $identifiant, $level);
     insertOrUpdateSuccesValue('level_10', $identifiant, $level);
   }
 
-  // METIER : Génération valeur succès mission
+  // METIER : Génération des succès pour une mission
   // RETOUR : Aucun
   function insertOrUpdateSuccesMission($reference, $identifiant)
   {
+    // Insertion des succès pour chaque mission concernée
     switch ($reference)
     {
       case 'noel_2017':
@@ -873,259 +955,11 @@
     }
   }
 
-  // METIER : Génération valeur succès
-  // RETOUR : Aucun
-  function insertOrUpdateSuccesValue($reference, $identifiant, $incoming)
-  {
-    $value  = NULL;
-    $action = NULL;
-
-    global $bdd;
-
-    // Détermination valeur à insérer
-    switch ($reference)
-    {
-      // Valeur saisie conservée
-      case 'beginning':
-      case 'developper':
-      case 'padawan':
-      case 'level_1':
-      case 'level_5':
-      case 'level_10':
-        $value = $incoming;
-
-        // Vérification succès débloqué
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-        {
-          $alreadyUnlocked = false;
-
-          // Récupération des données du succès
-          $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
-          $data0 = $req0->fetch();
-          $limit = $data0['limit_success'];
-          $req0->closeCursor();
-
-          // Comparaison avec l'ancienne valeur
-          $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-          $data1 = $req1->fetch();
-
-          if ($req1->rowCount() > 0)
-          {
-            if ($data1['value'] >= $limit)
-              $alreadyUnlocked = true;
-          }
-
-          $req1->closeCursor();
-
-          // Test si succès débloqué
-          if ($alreadyUnlocked == false AND $value == $limit)
-            $_SESSION['success'][$reference] = true;
-        }
-        break;
-
-      // Incrémentation de la valeur précédente avec "incoming" (incoming <= 1)
-      case 'publisher':
-      case 'viewer':
-      case 'commentator':
-      case 'listener':
-      case 'speaker':
-      case 'funny':
-      case 'self-satisfied':
-      case 'buyer':
-      case 'generous':
-      case 'creator':
-      case 'applier':
-      case 'debugger':
-      case 'compiler':
-      case 'restaurant-finder':
-      case 'star-chief':
-      case 'cooker':
-      case 'recipe-master':
-      case 'christmas2017':
-      case 'christmas2017_2':
-      case 'golden-egg':
-      case 'rainbow-egg':
-      case 'wizard':
-      case 'christmas2018':
-      case 'christmas2018_2':
-      case 'christmas2019':
-        // Récupération de l'ancienne valeur si besoin
-        $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $data0 = $req0->fetch();
-
-        if ($req0->rowCount() > 0)
-          $value = $data0['value'] + $incoming;
-        else
-          $value = $incoming;
-
-        $req0->closeCursor();
-
-        // Vérification succès débloqué
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-        {
-          // Récupération des données du succès
-          $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
-          $data1 = $req1->fetch();
-          $limit = $data1['limit_success'];
-          $req1->closeCursor();
-
-          // Test si succès débloqué
-          if ($value == $limit)
-            $_SESSION['success'][$reference] = true;
-        }
-        break;
-
-      // Incrémentation de la valeur précédente avec "incoming" (incoming > 1)
-      case 'eater':
-        // Récupération de l'ancienne valeur si besoin
-        $req0 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $data0 = $req0->fetch();
-
-        if ($req0->rowCount() > 0)
-          $value = $data0['value'] + $incoming;
-        else
-          $value = $incoming;
-
-        $req0->closeCursor();
-
-        // Vérification succès débloqué
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-        {
-          $alreadyUnlocked = false;
-
-          // Récupération des données du succès
-          $req1 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
-          $data1 = $req1->fetch();
-          $limit = $data1['limit_success'];
-          $req1->closeCursor();
-
-          // Comparaison avec l'ancienne valeur
-          $req2 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-          $data2 = $req2->fetch();
-
-          if ($req2->rowCount() > 0)
-          {
-            if ($data2['value'] >= $limit)
-              $alreadyUnlocked = true;
-          }
-
-          $req2->closeCursor();
-
-          // Test si succès débloqué
-          if ($alreadyUnlocked == false AND $value >= $limit)
-            $_SESSION['success'][$reference] = true;
-        }
-        break;
-
-      // Valeur maximale conservée
-      case 'greedy':
-        // Récupération des données du succès
-        if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-        {
-          $req0 = $bdd->query('SELECT * FROM success WHERE reference = "' . $reference . '"');
-          $data0 = $req0->fetch();
-          $limit = $data0['limit_success'];
-          $req0->closeCursor();
-        }
-
-        // Comparaison avec l'ancienne valeur
-        $req1 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $data1 = $req1->fetch();
-
-        if ($req1->rowCount() > 0)
-        {
-          // Récupération nouvelle valeur
-          if ($incoming > $data1['value'])
-            $value = $incoming;
-
-          // Vérification succès débloqué
-          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-          {
-            if ($data1['value'] < $limit AND $value >= $limit)
-              $_SESSION['success'][$reference] = true;
-          }
-        }
-        else
-        {
-          // Récupération nouvelle valeur
-          $value = $incoming;
-
-          // Vérification succès débloqué
-          if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-          {
-            if ($value >= $limit)
-              $_SESSION['success'][$reference] = true;
-          }
-        }
-
-        $req1->closeCursor();
-        break;
-
-      default:
-        $value = NULL;
-        break;
-    }
-
-    /****************************************/
-    /*** Détermination action à effectuer ***/
-    /****************************************/
-    if (!is_null($value))
-    {
-      if ($value == 0)
-        $action = 'delete';
-      else
-      {
-        $req3 = $bdd->query('SELECT * FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-
-        if ($req3->rowCount() > 0)
-          $action = 'update';
-        else
-          $action = 'insert';
-
-        $req3->closeCursor();
-      }
-    }
-
-    /***************************************************************/
-    /*** Insertion / modification / suppression de chaque succès ***/
-    /***************************************************************/
-    switch ($action)
-    {
-      case 'insert':
-        $req4 = $bdd->prepare('INSERT INTO success_users(reference, identifiant, value) VALUES(:reference, :identifiant, :value)');
-        $req4->execute(array(
-          'reference'   => $reference,
-          'identifiant' => $identifiant,
-          'value'       => $value
-          ));
-        $req4->closeCursor();
-        break;
-
-      case 'update':
-        $req4 = $bdd->prepare('UPDATE success_users SET value = :value WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        $req4->execute(array(
-          'value' => $value
-        ));
-        $req4->closeCursor();
-        break;
-
-      case 'delete':
-        $req4 = $bdd->exec('DELETE FROM success_users WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-        break;
-
-      default:
-        break;
-    }
-  }
-
   // METIER : Mise à jour expérience
   // RETOUR : Aucun
   function insertExperience($identifiant, $action)
   {
-    global $bdd;
-
-    $experience = 0;
-
+    // Détermination de la quantité d'expérience à attribuer
     switch ($action)
     {
       case 'add_expense':
@@ -1158,114 +992,46 @@
         break;
 
       default:
+        $experience = 0;
         break;
     }
 
-    // Lecture expérience actuelle de l'utilisateur
-    $req = $bdd->query('SELECT id, identifiant, experience FROM users WHERE identifiant = "' . $identifiant . '"');
-    $data = $req->fetch();
-    $currentExperience = $data['experience'];
-    $req->closeCursor();
+    // Ajout de l'expérience
+    if ($experience > 0)
+    {
+      // Récupération de l'expérience actuelle de l'utilisateur
+      $ancienneExperience = physiqueExperienceUser($identifiant);
 
-    $newExperience = $currentExperience + $experience;
+      // Calcul de la nouvelle expérience
+      $nouvelleExperience = $ancienneExperience + $experience;
 
-    // Mise à jour de l'utilisateur
-    $req2 = $bdd->prepare('UPDATE users SET experience = :experience WHERE identifiant = "' . $identifiant . '"');
-    $req2->execute(array(
-      'experience' => $newExperience
-    ));
-    $req2->closeCursor();
+      // Modification de l'enregistrement en base
+      physiqueUpdateExperienceUser($identifiant, $nouvelleExperience);
 
-    // Mise à jour des succès des niveaux
-    insertOrUpdateSuccesLevel($newExperience, $identifiant);
-  }
-
-  // METIER : Formatage Id type de restaurant
-  // RETOUR : Id formaté
-  function formatId($id)
-  {
-    // Transforme les caractères accentués en entités HTML
-    $formatted = htmlentities($id, ENT_NOQUOTES, 'utf-8');
-
-    // Remplace les entités HTML pour avoir juste le premier caractères non accentué
-    $formatted = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $formatted);
-
-    // Remplace les ligatures tel que : œ, Æ ...
-    $formatted = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $formatted);
-
-    // Supprime tout le reste
-    $formatted = preg_replace('#&[^;]+;#', '', $formatted);
-
-    // Remplace les espaces
-    $formatted = str_replace(' ', '_', $formatted);
-
-    // Remplace les points virgules
-    $formatted = str_replace(';', '_', $formatted);
-
-    // Passe en minuscule
-    $formatted = strtolower($formatted);
-
-    // Retour
-    return $formatted;
-  }
-
-  // METIER : Formatage du numéro de téléphone
-  // RETOUR : Numéro formaté
-  function formatPhoneNumber($phone)
-  {
-    // Formatage du numéro de téléphone
-    if (!empty($phone))
-      $formattedPhone = substr($phone, 0, 2) . '.' . substr($phone, 2, 2) . '.' . substr($phone, 4, 2) . '.' . substr($phone, 6, 2) . '.' . substr($phone, 8, 2);
-    else
-      $formattedPhone = '';
-
-    // Retour
-    return $formattedPhone;
+      // Insertion des succès des niveaux
+      insertOrUpdateSuccesLevel($identifiant, $nouvelleExperience);
+    }
   }
 
   // METIER : Conversion de l'expérience en niveau
   // RETOUR : Niveau
-  function convertExperience($exp)
+  function convertExperience($experience)
   {
     // Formatage du niveau
-    $level = floor(sqrt($exp / 10));
+    $niveau = floor(sqrt($experience / 10));
 
     // Retour
-    return $level;
+    return $niveau;
   }
 
-  // METIER : Encode certains caractères
-  // RETOUR : Chaîne encodée
-  function encodeStringForInsert($chaine)
-  {
-    // Remplacement des caractères
-    $search  = array('&', ';', '"', "'", '<', '>');
-    $replace = array('et', '', '', '', '', '');
-    $chaine  = trim(str_replace($search, $replace, $chaine));
-
-    // Retour
-    return $chaine;
-  }
-
-  // METIER : Décode certains caractères
-  // RETOUR : Chaîne décodée
-  function decodeStringForDisplay($chaine)
-  {
-    // Remplacement des caractères
-    $search  = array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;');
-    $replace = array('et', '', '', '', '');
-    $chaine  = str_replace($search, $replace, $chaine);
-
-    // Retour
-    return $chaine;
-  }
-
-	// METIER : Formatage explications succès
-  // RETOUR : Explications formatées
+  // METIER : Remplacement chaîne de caractères
+  // RETOUR : Chaîne formatée
 	function formatExplanation($string, $replace, $search)
 	{
+    // Remplacement d'une chaîne de caractères par une autre
 		$explanations = str_replace($search, $replace, $string);
 
+    // Retour
 		return $explanations;
 	}
 
@@ -1273,7 +1039,7 @@
   // RETOUR : Chemin & titre image
   function formatAvatar($avatar, $pseudo, $niveau, $alt)
   {
-    // Niveau chemin
+    // Niveau du chemin à parcourir
     switch ($niveau)
     {
       case 1:
@@ -1290,42 +1056,47 @@
         break;
     }
 
-    // Chemin
+    // Création du chemin
     if (isset($avatar) AND !empty($avatar))
       $path = $level . '/includes/images/profil/avatars/' . $avatar;
     else
       $path = $level . '/includes/icons/common/default.png';
 
-    // Pseudo
+    // Formatage du pseudo
     $pseudo = formatUnknownUser($pseudo, true, false);
 
-    // Formatage
+    // Création du tableau des données
     $formattedAvatar = array('path'  => $path,
                              'alt'   => $alt,
                              'title' => $pseudo
                             );
 
+    // Retour
     return $formattedAvatar;
   }
 
   // METIER : Formate une chaîne de caractères en longueur
   // RETOUR : Chaîne formatée
-  function formatString($string, $limit)
+  function formatString($chaine, $limite)
   {
-    if (strlen($string) > $limit)
-      $string = substr($string, 0, $limit) . '...';
+    // Formatage si dépassement du nombre de caractères voulu
+    if (strlen($chaine) > $limite)
+      $chaine = substr($chaine, 0, $limite) . '...';
 
-    return $string;
+    // Retour
+    return $chaine;
   }
 
-  // METIER : Formate le pseudo utilisateur désinscrit
+  // METIER : Formate le pseudo d'un utilisateur désinscrit
   // RETOUR : Pseudo ancien utilisateur
   function formatUnknownUser($pseudo, $majuscule, $italique)
   {
     if (!isset($pseudo) OR empty($pseudo))
     {
+      // Passage en majuscule si demandé
       if ($majuscule == true)
       {
+        // Passage en italique si demandé
         if ($italique == true)
           $pseudo = '<i>Un ancien utilisateur</i>';
         else
@@ -1333,6 +1104,7 @@
       }
       else
       {
+        // Passage en italique si demandé
         if ($italique == true)
           $pseudo = '<i>un ancien utilisateur</i>';
         else
@@ -1340,8 +1112,21 @@
       }
     }
 
+    // Retour
     return $pseudo;
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
   // METIER : Contrôle une image avant de la télécharger
   // RETOUR : Booléen
@@ -1476,24 +1261,5 @@
 
     // Retour
     return $control_ok;
-  }
-
-  // METIER : Génère une chaîne aléatoire
-  // RETOUR : Chaîne aléatoire
-  function generateRandomString($nombreCarateres)
-  {
-    // Génration d'une chaîne de caractères aléatoires
-    $string = '';
-    $chaine = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-
-    srand((double)microtime() * 1000000);
-
-    for ($i = 0; $i < $nombreCarateres; $i++)
-    {
-      $string .= $chaine[rand() % strlen($chaine)];
-    }
-
-    // Retour
-    return $string;
   }
 ?>

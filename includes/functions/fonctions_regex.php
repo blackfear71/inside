@@ -170,4 +170,114 @@
 		// Retour
 		return $distanceFormat;
 	}
+
+	// METIER : Suppression des caractères ASCII invisibles
+  // RETOUR : Chaîne nettoyée
+  function deleteInvisible($phrase)
+  {
+		// Filtrage des caractères invisibles
+    $cleaned = preg_replace('[\xE2\x80\x8E]', '', $phrase);
+
+		// Retour
+    return $cleaned;
+  }
+
+	// METIER : Formatage phrases cultes
+	// RETOUR : Chaîne formatée
+	function formatCollector($collector)
+	{
+		// Filtrage des caractères
+		$formatted = '';
+
+		$search    = array('[', ']');
+		$replace   = array('<strong>', '</strong>');
+		$formatted = str_replace($search, $replace, $collector);
+
+		// Retour
+		return $formatted;
+	}
+
+	// METIER : Dé-formatage phrases cultes
+	// RETOUR : Chaîne dé-formatée
+	function unformatCollector($collector)
+	{
+		// Filtrage des caractères
+		$unformatted = '';
+
+		$search      = array('[', ']');
+		$replace     = array('', '');
+		$unformatted = str_replace($search, $replace, $collector);
+
+		// Retour
+		return $unformatted;
+	}
+
+	// METIER : Formatage Id
+	// RETOUR : Id formaté
+	function formatId($id)
+	{
+		// Transforme les caractères accentués en entités HTML
+		$formatted = htmlentities($id, ENT_NOQUOTES, 'utf-8');
+
+		// Remplace les entités HTML pour avoir juste le premier caractères non accentué
+		$formatted = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $formatted);
+
+		// Remplace les ligatures tel que : œ, Æ ...
+		$formatted = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $formatted);
+
+		// Supprime tout le reste
+		$formatted = preg_replace('#&[^;]+;#', '', $formatted);
+
+		// Remplace les espaces
+		$formatted = str_replace(' ', '_', $formatted);
+
+		// Remplace les points virgules
+		$formatted = str_replace(';', '_', $formatted);
+
+		// Passe en minuscule
+		$formatted = strtolower($formatted);
+
+		// Retour
+		return $formatted;
+	}
+
+	// METIER : Formatage du numéro de téléphone
+	// RETOUR : Numéro formaté
+	function formatPhoneNumber($phone)
+	{
+		// Formatage du numéro de téléphone
+		if (!empty($phone))
+			$formattedPhone = substr($phone, 0, 2) . '.' . substr($phone, 2, 2) . '.' . substr($phone, 4, 2) . '.' . substr($phone, 6, 2) . '.' . substr($phone, 8, 2);
+		else
+			$formattedPhone = '';
+
+		// Retour
+		return $formattedPhone;
+	}
+
+	// METIER : Encode certains caractères
+	// RETOUR : Chaîne encodée
+	function encodeStringForInsert($chaine)
+	{
+		// Remplacement des caractères
+		$search  = array('&', ';', '"', "'", '<', '>');
+		$replace = array('et', '', '', '', '', '');
+		$chaine  = trim(str_replace($search, $replace, $chaine));
+
+		// Retour
+		return $chaine;
+	}
+
+	// METIER : Décode certains caractères
+	// RETOUR : Chaîne décodée
+	function decodeStringForDisplay($chaine)
+	{
+		// Remplacement des caractères
+		$search  = array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;');
+		$replace = array('et', '', '', '', '');
+		$chaine  = str_replace($search, $replace, $chaine);
+
+		// Retour
+		return $chaine;
+	}
 ?>

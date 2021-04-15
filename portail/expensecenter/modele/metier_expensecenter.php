@@ -221,7 +221,6 @@
     $_SESSION['save']['buyer']         = $buyer;
     $_SESSION['save']['date_expense']  = $post['date_expense'];
     $_SESSION['save']['price']         = $post['depense'];
-    $_SESSION['save']['reduction']     = $post['reduction'];
     $_SESSION['save']['comment']       = $comment;
     $_SESSION['save']['tableau_parts'] = $listeParts;
 

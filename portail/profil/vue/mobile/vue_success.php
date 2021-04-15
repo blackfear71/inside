@@ -50,8 +50,8 @@
     {
       if ($success->getLevel() != $levelSuccess)
       {
-        // Titre du niveau
-        echo formatTitleLvl($success->getLevel());
+        // Formatage du titre du niveau
+        echo formatLevelTitle($success->getLevel());
         $levelSuccess = $success->getLevel();
 
         // Zone du niveau des succès

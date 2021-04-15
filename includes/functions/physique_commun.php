@@ -199,4 +199,223 @@
     // Retour
     return $theme;
   }
+
+  // PHYSIQUE : Lecture nombre de notifications
+  // RETOUR : Booléen
+  function physiqueNotificationExistante($categorie, $contenu)
+  {
+    // Initialisations
+    $notificationExistante = false;
+
+    // Requête
+    global $bdd;
+
+    if ($categorie == 'comments')
+    {
+      $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
+                          FROM notifications
+                          WHERE category = "' . $categorie . '" AND content = "' . $contenu . '" AND date = ' . date('Ymd'));
+    }
+    else
+    {
+      $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
+                          FROM notifications
+                          WHERE category = "' . $categorie . '" AND content = "' . $contenu . '"');
+    }
+
+    $data = $req->fetch();
+
+    if ($data['nombreNotifications'] > 0)
+      $notificationExistante = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $notificationExistante;
+  }
+
+  // PHYSIQUE : Lecture des utilisateurs pour le chat
+  // RETOUR : Liste des utilisateurs
+  function physiqueUsersChat()
+  {
+    // Initialisations
+    $listeUsers = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar
+                        FROM users
+                        WHERE identifiant != "admin"
+                        ORDER BY identifiant ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
+      $user = Profile::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeUsers, $user);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeUsers;
+  }
+
+  // PHYSIQUE : Lecture de la limite d'un succès
+  // RETOUR : Limite du succès
+  function physiqueLimiteSucces($reference)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM success
+                        WHERE reference = "' . $reference . '"');
+
+    $data = $req->fetch();
+
+    $limite = $data['limit_success'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $limite;
+  }
+
+  // PHYSIQUE : Lecture ancienne valeur d'un succès utilisateur
+  // RETOUR : Ancienne valeur du succès
+  function physiqueAncienneValeurSucces($reference, $identifiant)
+  {
+    // Initialisations
+    $ancienneValeur = NULL;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
+                        FROM success_users
+                        WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $ancienneValeur = $data['value'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $ancienneValeur;
+  }
+
+  /****************************************************************************/
+  /********************************** INSERT **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Insertion nouvelle notification
+  // RETOUR : Aucun
+  function physiqueInsertionNotification($notification)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('INSERT INTO notifications(author,
+                                                    date,
+                                                    time,
+                                                    category,
+                                                    content)
+                                            VALUES(:author,
+                                                   :date,
+                                                   :time,
+                                                   :category,
+                                                   :content)');
+
+    $req->execute($notification);
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Insertion valeur succès utilisateur
+  // RETOUR : Aucun
+  function physiqueInsertionSuccesUser($succesUser)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('INSERT INTO success_users(reference,
+                                                    identifiant,
+                                                    value)
+                                            VALUES(:reference,
+                                                   :identifiant,
+                                                   :value)');
+
+    $req->execute($succesUser);
+
+    $req->closeCursor();
+  }
+
+  /****************************************************************************/
+  /********************************** UPDATE **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Mise à jour valeur succès utilisateur
+  // RETOUR : Aucun
+  function physiqueUpdateSuccesUser($reference, $identifiant, $value)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE success_users
+                          SET value = :value
+                          WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+
+    $req->execute(array(
+      'value' => $value
+    ));
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour expérience utilisateur
+  // RETOUR : Aucun
+  function physiqueUpdateExperienceUser($identifiant, $experience)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE users
+                          SET experience = :experience
+                          WHERE identifiant = "' . $identifiant . '"');
+
+    $req->execute(array(
+      'experience' => $experience
+    ));
+
+    $req->closeCursor();
+  }
+
+  /****************************************************************************/
+  /********************************** DELETE **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Suppression d'une notification
+  // RETOUR : Aucun
+  function physiqueDeleteNotification($categorie, $contenu)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM notifications
+                       WHERE category = "' . $categorie . '" AND content = "' . $contenu . '"');
+  }
+
+  // PHYSIQUE : Suppression d'une valeur succès utilisateur
+  // RETOUR : Aucun
+  function physiqueDeleteSuccesUser($reference, $identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM success_users
+                       WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+  }
 ?>

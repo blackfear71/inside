@@ -537,7 +537,7 @@
                 array_push($listeGagnants, $participant['pseudo']);
             }
 
-            $content .= '<div class="contenu_paragraphe">' . formatGagnants($listeGagnants) . '</div>';
+            $content .= '<div class="contenu_paragraphe">' . formatGagnantsMission($listeGagnants) . '</div>';
           }
 
           $message->setContent($content);
@@ -573,5 +573,42 @@
 
     // Retour
     return $messagesMissions;
+  }
+
+  // METIER : Formatage des gagnants d'une mission pour les news
+  // RETOUR : Phrase formatée
+  function formatGagnantsMission($listeGagnants)
+  {
+    // Formatage en fonction du nombre de gagnants
+    switch (count($listeGagnants))
+    {
+      case 1:
+        $phrase = 'Félicitations à <span class="contenu_gras">' . htmlspecialchars($listeGagnants[0]) . '</span> pour sa victoire écrasante !';
+        break;
+
+      case 0:
+        $phrase = '';
+        break;
+
+      default:
+        $phrase = 'Félicitations à ';
+
+        foreach ($listeGagnants as $gagnant)
+        {
+          if ($gagnant == end($listeGagnants))
+          {
+            $phrase = substr($phrase, 0, -2);
+            $phrase .= ' et <span class="contenu_gras">' . htmlspecialchars($gagnant) . '</span>';
+          }
+          else
+            $phrase .= '<span class="contenu_gras">' . htmlspecialchars($gagnant) . '</span>, ';
+        }
+
+        $phrase .= ' pour leur magnifique victoire !';
+        break;
+    }
+
+    // Retour
+    return $phrase;
   }
 ?>

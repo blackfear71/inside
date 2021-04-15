@@ -419,6 +419,25 @@
     $_SESSION['save']['new_password']  = $chaine;
   }
 
+  // METIER : Génère une chaîne aléatoire
+  // RETOUR : Chaîne aléatoire
+  function generateRandomString($nombreCarateres)
+  {
+    // Génération d'une chaîne de caractères aléatoires
+    $chaine     = '';
+    $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+    srand((double)microtime() * 1000000);
+
+    for ($i = 0; $i < $nombreCarateres; $i++)
+    {
+      $chaine .= $caracteres[rand() % strlen($caracteres)];
+    }
+
+    // Retour
+    return $chaine;
+  }
+
   // METIER : Validation inscription (mise à jour du status utilisateur)
   // RETOUR : Aucun
   function acceptInscription($post)

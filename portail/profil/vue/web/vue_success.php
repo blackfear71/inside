@@ -22,8 +22,8 @@
     {
       if ($success->getLevel() != $lvl)
       {
-        // Titre du niveau
-        echo formatTitleLvl($success->getLevel());
+        // Formatage du titre du niveau
+        echo formatLevelTitle($success->getLevel());
         $lvl = $success->getLevel();
 
         // Définit une zone pour appliquer la Masonry
