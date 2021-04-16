@@ -20,8 +20,6 @@
 
   	// Retour sur index.php
   	header('location: /inside/index.php?action=goConsulter');
-
-  	exit;
   }
 
   // METIER : Bascule entre la version web et la version mobile

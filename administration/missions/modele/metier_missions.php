@@ -231,7 +231,7 @@
       $dossierImages = $dossier . '/banners';
       $dossierIcones = $dossier . '/buttons';
 
-      // Contrôle des fichiers
+      // Contrôle en boucle des fichiers avant insertion
       foreach ($files as $keyFile => $file)
       {
         // Nom du fichier

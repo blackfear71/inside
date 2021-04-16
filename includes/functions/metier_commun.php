@@ -1116,41 +1116,29 @@
     return $pseudo;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
   // METIER : Contrôle une image avant de la télécharger
   // RETOUR : Booléen
-  function controlsUploadFile($file, $name, $types)
+  function controlsUploadFile($file, $name, $type)
   {
+    // Initialisations
+    $output     = array('control_ok' => false,
+                        'new_name'   => '',
+                        'tmp_file'   => '',
+                        'type_file'  => ''
+                       );
     $control_ok = true;
 
-    $output = array('control_ok' => false,
-                    'new_name'   => '',
-                    'tmp_file'   => '',
-                    'type_file'  => ''
-                   );
-
-    // Si on a bien une image
+    // Contrôles de l'image si elle est bien renseignée
     if (!empty($file['name']))
     {
-      // Données du fichier
+      // Récupération des données
       $nameFile  = $file['name'];
       $typeFile  = $file['type'];
       $tmpFile   = $file['tmp_name'];
       $errorFile = $file['error'];
       $sizeFile  = $file['size'];
 
-      // Limite taille maximale fichier (15 Mo)
+      // Définition de la limite de taille maximale fichier (15 Mo)
       $maxSize = 15728640;
 
       // Contrôle taille fichier
@@ -1173,7 +1161,7 @@
       // Contrôle type de fichier
       if ($control_ok == true)
       {
-        switch ($types)
+        switch ($type)
         {
           case 'jpg':
           case 'jpeg':
@@ -1203,20 +1191,20 @@
         }
       }
 
-      // Récupération infos
+      // Récupération des informations du fichier
       if ($control_ok == true)
       {
         $typeImage = pathinfo($nameFile, PATHINFO_EXTENSION);
         $newName   = $name . '.' . $typeImage;
-
-        $output = array('control_ok' => true,
-                        'new_name'   => $newName,
-                        'tmp_file'   => $tmpFile,
-                        'type_file'  => $typeImage
-                       );
+        $output    = array('control_ok' => true,
+                           'new_name'   => $newName,
+                           'tmp_file'   => $tmpFile,
+                           'type_file'  => $typeImage
+                          );
       }
     }
 
+    // Retour
     return $output;
   }
 
