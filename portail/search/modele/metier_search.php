@@ -15,13 +15,13 @@
 
   // METIER : Recherche dans les bases de données
   // RETOUR : Tableau des résultats par catégorie
-  function getSearch()
+  function getSearch($search)
   {
     // Initialisations
     $resultatsRecherche = array();
 
     // Récupération des données
-    $recherche = htmlspecialchars($_SESSION['search']['text_search']);
+    $recherche = htmlspecialchars($search);
 
     // Lancement de la recherche
     if (!empty($recherche))

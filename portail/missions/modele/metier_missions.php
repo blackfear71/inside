@@ -27,7 +27,7 @@
 
   // METIER : Validation d'un bouton de mission en cours
   // RETOUR : Aucun
-  function validateMission($post, $identifiant, $mission)
+  function validateMission($post, $identifiant, $mission, $pageCourante)
   {
     // Récupération des données
     $referenceMission = $post['ref_mission'];
@@ -36,7 +36,7 @@
     // Traitement de validation du bouton de mission
     if (!empty($mission))
     {
-      if (isset($_SERVER['HTTP_REFERER']) AND strpos($_SERVER['HTTP_REFERER'], $mission[$referenceMission]['page']) !== false)
+      if (isset($pageCourante) AND strpos($pageCourante, $mission[$referenceMission]['page']) !== false)
       {
         // Vérification mission du jour commencée par l'utilisateur
         $missionCommencee = physiqueMissionCommencee($mission[$referenceMission]['id_mission'], $identifiant);
