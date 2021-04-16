@@ -5,7 +5,7 @@
   // Affichage des messages
   if (!empty($messages))
   {
-    echo '<div class="fond_alerte" id="alerte">';
+    echo '<div id="alerte" class="fond_alerte">';
       echo '<div class="zone_affichage_alerte">';
         // Titre
         echo '<div class="titre_alerte">';

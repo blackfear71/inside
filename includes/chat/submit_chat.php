@@ -13,8 +13,8 @@
   }
 
   // Récupération des données
-  $nom      = $_POST['identifiant'];
-  $message  = $_POST['message'];
+  $nom     = $_POST['identifiant'];
+  $message = $_POST['message'];
 
   if (!empty($nom) AND !empty($message))
   {

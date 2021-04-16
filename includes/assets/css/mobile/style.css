@@ -732,7 +732,7 @@ aside
 {
 	background-color: rgb(0, 0, 0, 0.5);
 	position: fixed;
-	z-index: 10;
+	z-index: 15;
 	left: 0;
 	top: 0;
 	width: 100%;
