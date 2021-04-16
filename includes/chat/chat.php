@@ -13,6 +13,11 @@
   // Appels métier
   switch ($_GET['action'])
   {
+    case 'doSubmit':
+      // Insertion du message dans le fichier XML
+      submitChat($_POST);
+      break;
+
     default:
       // Récupération des utilisateurs en session
       if (!isset($_SESSION['chat']['users']) OR empty($_SESSION['chat']['users']))
@@ -26,6 +31,9 @@
   // Traitements de sécurité avant la vue
   switch ($_GET['action'])
   {
+    case 'doSubmit':
+      break;
+
     default:
       foreach ($_SESSION['chat']['users'] as &$user)
       {
@@ -49,6 +57,9 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doSubmit':
+      break;
+
     default:
       include_once('vue/vue_chat.php');
       break;

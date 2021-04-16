@@ -592,7 +592,7 @@ $(window).on('load', function()
 
     // Envoi du message si renseignée et non vide
     if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-      $.post('/inside/includes/chat/submit_chat.php', {'identifiant': identifiant, 'message': message}, afficheConversation);
+      $.post('/inside/includes/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'message': message}, afficheConversation);
     else
     {
       $('#message_chat').val('');
