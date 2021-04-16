@@ -1,5 +1,6 @@
 <?php
   include_once('../../includes/classes/ideas.php');
+  include_once('../../includes/classes/profile.php');
 
   // METIER : Lecture nombre de pages en fonction de la vue
   // RETOUR : Nombre de pages
