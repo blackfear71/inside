@@ -457,7 +457,7 @@ $(window).on('load', function()
           }
 
           // Formatage pseudo à partir du tableau php récupéré
-          $.each(listUsers, function(key, value)
+          $.each(listeUsersChat, function(key, value)
           {
             if (identifiant == value.identifiant)
             {

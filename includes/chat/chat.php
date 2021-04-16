@@ -1,56 +1,56 @@
 <?php
-  // Zone de chat à intégrer
-  echo '<div id="zone_chat_position" class="zone_chat" style="display: none;">';
-    // Titre et repli
-    echo '<div class="zone_titre_chat">';
-      echo '<a id="onglet_chat" class="titre_onglet">';
-        echo '<img src="/inside/includes/icons/common/comments.png" alt="comments" title="Inside Room" class="logo_inside_room" />';
-        echo 'INSIDE Room';
-      echo '</a>';
+  /******************
+  ****** Chat *******
+  *******************
+  Fonctionnalités :
+  - Affichage du chat
+  ******************/
 
-      echo '<a id="onglet_users" class="titre_onglet">Connectés</a>';
+  // Modèle de données
+  include_once('modele/metier_chat.php');
+  include_once('modele/physique_chat.php');
 
-      echo '<a id="zone_hide_chat" class="lien_reduire_chat">';
-        echo '<div class="triangle_reduire_chat"></div>';
-        echo '<div id="hide_chat" class="reduire_chat"></div>';
-      echo '</a>';
-    echo '</div>';
-
-    // Fenêtres paramétrées (JS)
-    echo '<div id="fenetres_chat"></div>';
-  echo '</div>';
-
-  // Recherche des utilisateurs si pas déjà faite
-  if (!isset($_SESSION['chat']['users']) OR empty($_SESSION['chat']['users']))
-    $_SESSION['chat']['users'] = getUsersChat();
-
-  $_SESSION['chat']['current'] = $_SESSION['user']['identifiant'];
-
-  // On transforme les objets en tableau pour envoyer au Javascript
-  $listUsers = array();
-
-  foreach ($_SESSION['chat']['users'] as $user)
+  // Appels métier
+  switch ($_GET['action'])
   {
-    $userChat = array('identifiant' => htmlspecialchars($user->getIdentifiant()),
-                      'pseudo'      => htmlspecialchars($user->getPseudo()),
-                      'avatar'      => htmlspecialchars($user->getAvatar())
-                     );
-                     
-    array_push($listUsers, $userChat);
+    default:
+      // Récupération des utilisateurs en session
+      if (!isset($_SESSION['chat']['users']) OR empty($_SESSION['chat']['users']))
+        $_SESSION['chat']['users'] = getUsersChat();
+
+      // Récupération de l'utilisateur courant pour le chat
+      $_SESSION['chat']['current'] = $_SESSION['user']['identifiant'];
+      break;
   }
 
-  // On formate les données au format JSON
-  $listUsersJson   = json_encode($listUsers);
-  $currentUserJson = json_encode($_SESSION['chat']['current']);
-  $initChat        = json_encode($_SESSION['chat']['show_chat']);
+  // Traitements de sécurité avant la vue
+  switch ($_GET['action'])
+  {
+    default:
+      foreach ($_SESSION['chat']['users'] as &$user)
+      {
+        $user['identifiant'] = htmlspecialchars($user['identifiant']);
+        $user['pseudo']      = htmlspecialchars($user['pseudo']);
+        $user['avatar']      = htmlspecialchars($user['avatar']);
+      }
 
-  // Suppression session préférence chat après connexion
-  $_SESSION['chat']['show_chat'] = NULL;
+      unset($user);
+
+      // Conversion JSON
+      $listeUsersChatJson = json_encode($_SESSION['chat']['users']);
+      $currentUserJson    = json_encode($_SESSION['chat']['current']);
+      $initChat           = json_encode($_SESSION['chat']['show_chat']);
+
+      // Suppression session préférence chat après connexion
+      $_SESSION['chat']['show_chat'] = NULL;
+      break;
+  }
+
+  // Redirection affichage
+  switch ($_GET['action'])
+  {
+    default:
+      include_once('vue/vue_chat.php');
+      break;
+  }
 ?>
-
-<script>
-  // Récupération liste utilisateurs, identifiant & initialisation chat pour le script
-  var listUsers   = <?php echo $listUsersJson; ?>;
-  var currentUser = <?php echo $currentUserJson; ?>;
-  var initChat    = <?php echo $initChat; ?>;
-</script>

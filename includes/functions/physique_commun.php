@@ -234,36 +234,6 @@
     return $notificationExistante;
   }
 
-  // PHYSIQUE : Lecture des utilisateurs pour le chat
-  // RETOUR : Liste des utilisateurs
-  function physiqueUsersChat()
-  {
-    // Initialisations
-    $listeUsers = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar
-                        FROM users
-                        WHERE identifiant != "admin"
-                        ORDER BY identifiant ASC');
-
-    while ($data = $req->fetch())
-    {
-      // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $user = Profile::withData($data);
-
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
-    }
-
-    $req->closeCursor();
-
-    // Retour
-    return $listeUsers;
-  }
-
   // PHYSIQUE : Lecture de la limite d'un succès
   // RETOUR : Limite du succès
   function physiqueLimiteSucces($reference)

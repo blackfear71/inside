@@ -1,8 +1,6 @@
 <?php
-  include_once('appel_bdd.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/alerts.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
-  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/profile.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
 
@@ -622,23 +620,6 @@
 
     // Retour
     return $notificationExistante;
-  }
-
-  // METIER : Lecture liste des utilisateurs pour le chat
-  // RETOUR : Liste des utilisateurs
-  function getUsersChat()
-  {
-    // Récupération de la liste des utilisateurs
-    $listeUsers = physiqueUsersChat();
-
-    // Traitement de sécurité
-    foreach ($listeUsers as $user)
-    {
-      Profile::secureData($user);
-    }
-
-    // Retour
-    return $listeUsers;
   }
 
   // METIER : Rotation automatique des images en mode portrait
