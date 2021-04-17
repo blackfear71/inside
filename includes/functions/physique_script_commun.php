@@ -4,52 +4,61 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
-  // PHYSIQUE : Lecture nombre de notifications du jour
-  // RETOUR : Nombre de notifications
-  function physiqueNombreNotificationsJour()
+
+  // PHYSIQUE : Lecture notifications entre 2 dates
+  // RETOUR : Liste des notifications
+  function physiqueNotificationsDates($date1, $date2)
   {
     // Initialisations
-    $nombreNotifications = 0;
+    $listeNotifications = array();
 
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
+    $req = $bdd->query('SELECT *
                         FROM notifications
-                        WHERE date = ' . date('Ymd'));
+                        WHERE date >= "' . $date1 . '" AND date <= "' . $date2 . '"
+                        ORDER BY date DESC, time DESC, id DESC');
 
-    $data = $req->fetch();
+    while($data = $req->fetch())
+    {
+      // Instanciation d'un objet Notification à partir des données remontées de la bdd
+      $notification = Notification::withData($data);
 
-    $nombreNotifications = $data['nombreNotifications'];
+      // On ajoute la ligne au tableau
+      array_push($listeNotifications, $notification);
+    }
+
 
     $req->closeCursor();
 
     // Retour
-    return $nombreNotifications;
+    return $listeNotifications;
   }
 
-  // PHYSIQUE : Lecture nombre de notifications de la semaine
-  // RETOUR : Nombre de notifications
-  function physiqueNombreNotificationsSemaine($lundi, $aujourdhui)
+  // PHYSIQUE : Lecture si élément à supprimer
+  // RETOUR : Booléen
+  function physiqueToDelete($table, $id)
   {
     // Initialisations
-    $nombreNotifications = 0;
+    $toDelete = false;
 
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
-                        FROM notifications
-                        WHERE date >= "' . $lundi . '" AND date <= "' . $aujourdhui . '"');
+    $req = $bdd->query('SELECT *
+                        FROM ' . $table . '
+                        WHERE id = ' . $id);
 
     $data = $req->fetch();
 
-    $nombreNotifications = $data['nombreNotifications'];
+    if ($data['to_delete'] == 'Y')
+      $toDelete = true;
 
     $req->closeCursor();
 
     // Retour
-    return $nombreNotifications;
+    return $toDelete;
   }
 
   // PHYSIQUE : Lecture nombre de bugs

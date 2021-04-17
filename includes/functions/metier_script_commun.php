@@ -1,4 +1,5 @@
 <?php
+  include_once('../classes/notifications.php');
   include_once('../classes/profile.php');
 
   // METIER : Déconnecte un utilisateur
@@ -40,6 +41,9 @@
   // RETOUR : Tableau notifications
   function countNotifications()
   {
+    // Initialisations
+    $nombreNotificationsJour = 0;
+
     // Récupération préférence
     switch ($_SESSION['user']['view_notifications'])
     {
@@ -65,8 +69,39 @@
         break;
     }
 
-    // Récupération du noùbre de notifications du jour
-    $nombreNotificationsJour = physiqueNombreNotificationsJour();
+    // Récupération des notifications du jour
+    $notificationsJour = physiqueNotificationsDates(date('Ymd'), date('Ymd'));
+
+    // Vérification des notifications à conserver
+    foreach ($notificationsJour as $notification)
+    {
+      // Incrémentation du compteur si l'objet en lien n'est pas à supprimer
+      switch ($notification->getCategory())
+      {
+        case 'film':
+        case 'doodle':
+        case 'cinema':
+        case 'comments':
+          $toDelete = physiqueToDelete('movie_house', $notification->getContent());
+          break;
+
+        case 'calendrier':
+        case 'annexe':
+          $toDelete = physiqueToDelete('calendars', $notification->getContent());
+          break;
+
+        case 'annexe':
+          $toDelete = physiqueToDelete('calendars_annexes', $notification->getContent());
+          break;
+
+        default:
+          $toDelete = false;
+          break;
+      }
+
+      if ($toDelete == false)
+        $nombreNotificationsJour++;
+    }
 
     // Concaténation des données pour JS
     $data = array('identifiant'             => $_SESSION['user']['identifiant'],
@@ -85,8 +120,43 @@
   // RETOUR : Tableau détails notifications
   function getDetailsNotifications()
   {
-    // Récupération compteur de notifications du jour
-    $nombreNotificationsJour = physiqueNombreNotificationsJour();
+    // Initialisations
+    $nombreNotificationsJour    = 0;
+    $nombreNotificationsSemaine = 0;
+
+    // Récupération des notifications du jour
+    $notificationsJour = physiqueNotificationsDates(date('Ymd'), date('Ymd'));
+
+    // Vérification des notifications à conserver
+    foreach ($notificationsJour as $notification)
+    {
+      // Incrémentation du compteur si l'objet en lien n'est pas à supprimer
+      switch ($notification->getCategory())
+      {
+        case 'film':
+        case 'doodle':
+        case 'cinema':
+        case 'comments':
+          $toDelete = physiqueToDelete('movie_house', $notification->getContent());
+          break;
+
+        case 'calendrier':
+        case 'annexe':
+          $toDelete = physiqueToDelete('calendars', $notification->getContent());
+          break;
+
+        case 'annexe':
+          $toDelete = physiqueToDelete('calendars_annexes', $notification->getContent());
+          break;
+
+        default:
+          $toDelete = false;
+          break;
+      }
+
+      if ($toDelete == false)
+        $nombreNotificationsJour++;
+    }
 
     // Calcul des dates de la semaine
     $nombreJoursLundi    = 1 - date('N');
@@ -94,8 +164,38 @@
     $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
     $aujourdhui          = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
 
-    // Récupération compteur de notifications de la semaine
-    $nombreNotificationsSemaine = physiqueNombreNotificationsSemaine($lundi, $aujourdhui);
+    // Récupération des notifications du jour
+    $notificationsSemaine = physiqueNotificationsDates($lundi, $aujourdhui);
+
+    // Vérification des notifications à conserver
+    foreach ($notificationsSemaine as $notification)
+    {
+      // Incrémentation du compteur si l'objet en lien n'est pas à supprimer
+      switch ($notification->getCategory())
+      {
+        case 'film':
+        case 'doodle':
+        case 'cinema':
+        case 'comments':
+          $toDelete = physiqueToDelete('movie_house', $notification->getContent());
+          break;
+
+        case 'calendrier':
+          $toDelete = physiqueToDelete('calendars', $notification->getContent());
+          break;
+
+        case 'annexe':
+          $toDelete = physiqueToDelete('calendars_annexes', $notification->getContent());
+          break;
+
+        default:
+          $toDelete = false;
+          break;
+      }
+
+      if ($toDelete == false)
+        $nombreNotificationsSemaine++;
+    }
 
     // Concaténation des données pour JS
     $data = array('identifiant'                => $_SESSION['user']['identifiant'],

@@ -76,8 +76,8 @@
       case 'week':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE date <= ' . date('Ymd') . ' AND date > ' . $date . '
-                            ORDER BY date DESC, id DESC
+                            WHERE date <= ' . date('Ymd') . ' AND date >= ' . $date . '
+                            ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
 
