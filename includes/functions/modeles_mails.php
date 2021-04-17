@@ -217,7 +217,7 @@
         {
           display: inline-block;
           vertical-align: top;
-          width: 120px;
+          width: 80px;
           height: 80px;
         }
 
@@ -304,7 +304,7 @@
           display: block;
           width: 100%;
           text-align: center;
-          margin: 0 20px 20px 20px;
+          margin-bottop: -20px;
         }
 
         .zone_nombre_demandes_mail
@@ -314,6 +314,7 @@
           height: 200px;
           border-radius: 2px;
           overflow: hidden;
+          margin: 0 20px 20px 20px;
         }
 
         .titre_demandes_mail
