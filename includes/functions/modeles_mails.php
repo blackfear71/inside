@@ -69,8 +69,7 @@
 
         .article
         {
-          padding-left: 20px;
-          padding-right: 20px;
+          padding: 20px;
           width: calc(100% - 40px);
           background-color: #fbfbfb;
         }
@@ -352,7 +351,8 @@
 
         article
         {
-          padding: 20px;
+          padding-left: 20px;
+          padding-right: 20px;
           width: calc(100% - 40px);
           background-color: #fbfbfb;
         }
