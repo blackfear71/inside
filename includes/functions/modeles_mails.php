@@ -500,7 +500,7 @@
               $modele .= '<div class="zone_nombre_demandes_mail">';
                 // Titre
                 $modele .= '<div class="titre_demandes_mail">';
-                  $modele .= 'Suppressions de calendriers';
+                  $modele .= 'Evolutions en cours';
                 $modele .= '</div>';
 
                 // Valeur

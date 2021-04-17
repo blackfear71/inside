@@ -85,7 +85,7 @@
                        'lien'    => '../changelog/changelog.php?action=goConsulter');
 
     // Générateur de code
-    $generator = array('ligne_1' => 'Générateur',
+    $generator = array('ligne_1' => 'Générateur de',
                        'ligne_2' => 'CODE',
                        'ligne_3' => '',
                        'lien'    => '../codegenerator/codegenerator.php?action=goConsulter');
