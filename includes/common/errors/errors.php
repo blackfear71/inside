@@ -7,8 +7,8 @@
   ******************************/
 
   // Fonction communes
-  include_once('../../includes/functions/metier_commun.php');
-  include_once('../../includes/functions/physique_commun.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/metier_commun.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/physique_commun.php');
 
   // Modèle de données
   include_once('modele/metier_errors.php');

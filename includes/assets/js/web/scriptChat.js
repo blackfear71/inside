@@ -424,7 +424,7 @@ $(window).on('load', function()
       scrollUpdate = true;
 
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/chat/content_chat.xml', function(display)
+    $.post('/inside/includes/common/chat/conversations/content_chat.xml', function(display)
     {
       $('#conversation_chat').html('');
 
@@ -592,7 +592,7 @@ $(window).on('load', function()
 
     // Envoi du message si renseignée et non vide
     if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-      $.post('/inside/includes/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'message': message}, afficheConversation);
+      $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'message': message}, afficheConversation);
     else
     {
       $('#message_chat').val('');

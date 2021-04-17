@@ -2,7 +2,7 @@
 ### Dossiers et fichiers exclus ###
 ###################################
 cron/logs/
-includes/chat/content_chat.xml
+includes/common/chat/conversations/
 includes/images/
 server/
 test/

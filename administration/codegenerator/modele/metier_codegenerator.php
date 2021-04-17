@@ -422,7 +422,7 @@
       $vue = str_replace('/*chat*/', '
 
       <!-- Chat -->
-      <?php include(\'../../includes/chat/chat.php\'); ?>', $vue);
+      <?php include(\'../../includes/common/chat/chat.php\'); ?>', $vue);
     else
       $vue = str_replace('/*chat*/', '', $vue);
 

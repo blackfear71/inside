@@ -102,7 +102,7 @@
 			</article>
 
       <!-- Chat -->
-      <?php include('../../includes/chat/chat.php'); ?>
+      <?php include('../../includes/common/chat/chat.php'); ?>
 		</section>
 
 		<!-- Pied de page -->

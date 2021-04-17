@@ -15,10 +15,10 @@
   function submitChat($post)
   {
     // Contrôle existence fichier chat
-    if (!file_exists('content_chat.xml'))
+    if (!file_exists('conversations/content_chat.xml'))
     {
       // Création du fichier s'il n'existe pas
-      $file    = fopen('content_chat.xml', 'a+');
+      $file    = fopen('conversations/content_chat.xml', 'a+');
       $balises =
 '<?xml version="1.0" encoding="UTF-8"?>
 <INSIDERoom>
@@ -37,7 +37,7 @@
     {
       // Création des éléments
       $dom = new DOMDocument();
-      $dom->load('content_chat.xml');
+      $dom->load('conversations/content_chat.xml');
       $fragment = $dom->createDocumentFragment();
 
       // Formatage du message
@@ -53,7 +53,7 @@
       // Insersion dans le noeud puis le fichier
       $fragment->appendXML($ligne);
       $dom->documentElement->appendChild($fragment);
-      $dom->save('content_chat.xml');
+      $dom->save('conversations/content_chat.xml');
     }
   }
 ?>

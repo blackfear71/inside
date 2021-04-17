@@ -6,8 +6,8 @@
 Options -Indexes
 
 # Pages d'erreur personnalisées
-ErrorDocument 403 /inside/includes/errors/errors.php?code=403
-ErrorDocument 404 /inside/includes/errors/errors.php?code=404
-ErrorDocument 408 /inside/includes/errors/errors.php?code=408
-ErrorDocument 500 /inside/includes/errors/errors.php?code=500
-ErrorDocument 503 /inside/includes/errors/errors.php?code=503
+ErrorDocument 403 /inside/includes/common/errors/errors.php?code=403
+ErrorDocument 404 /inside/includes/common/errors/errors.php?code=404
+ErrorDocument 408 /inside/includes/common/errors/errors.php?code=408
+ErrorDocument 500 /inside/includes/common/errors/errors.php?code=500
+ErrorDocument 503 /inside/includes/common/errors/errors.php?code=503
