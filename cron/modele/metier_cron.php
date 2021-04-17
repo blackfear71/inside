@@ -457,14 +457,14 @@
       if (!$mail->Send())
       {
         // Ajout des données au log
-        $log['status'] = 'OK';
-        $log['infos']  = 'Mail envoyé';
+        $log['status'] = 'KO';
+        $log['infos']  = 'Erreur lors de l\'envoi du mail';
       }
       else
       {
         // Ajout des données au log
-        $log['status'] = 'KO';
-        $log['infos']  = 'Erreur lors de l\'envoi du mail';
+        $log['status'] = 'OK';
+        $log['infos']  = 'Mail envoyé';
       }
     }
     else

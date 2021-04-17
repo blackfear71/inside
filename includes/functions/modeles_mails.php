@@ -205,11 +205,6 @@
         // CSS
         $modele .= '<style type="text/css">';
         $modele .= '
-        body
-        {
-          background-color: #fbfbfb;
-        }
-
         .zone_bandeau_mail
         {
           background-color: #262626;
@@ -261,7 +256,7 @@
           height: 30px;
           line-height: 30px;
           font-family: Calibri Light, Verdana, sans-serif;
-          font-size: 100%;
+          font-size: 110%;
           color: white;
           text-align: right;
         }
@@ -318,8 +313,8 @@
           width: 200px;
           height: 200px;
           border-radius: 2px;
-          box-shadow: 0 0 3px #7c7c7c;
           overflow: hidden;
+          background-color: #fbfbfb;
         }
 
         .titre_demandes_mail
@@ -327,9 +322,11 @@
           display: block;
           width: calc(100% - 20px);
           height: 50px;
+          line-height: 50px;
           font-family: Calibri, Verdana, sans-serif;
           font-size: 120%;
-          padding: 5px 10px 5px 10px;
+          padding-left: 10px;
+          padding-right: 10px;
           color: white;
           text-align: center;
           word-break: break-word;
@@ -360,7 +357,7 @@
           padding-left: 10px;
           padding-right: 10px;
           font-family: Calibri Light, Verdana, sans-serif;
-          font-size: 100%;
+          font-size: 110%;
           color: white;
           text-align: right;
         }
