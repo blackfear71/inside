@@ -137,7 +137,7 @@
       $modele .= '<body>';
         $modele .= '<div class="zone_mail">';
           $modele .= '<div class="entete_mail">';
-            $modele .= '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_inside_mail" />';
+            $modele .= '<img src="' . $_SERVER['DOCUMENT_ROOT'] . '/inside/includes/icons/common/inside.png" alt="inside" class="logo_inside_mail" />';
           $modele .= '</div>';
 
           $modele .= '<div class="mask_mail">';
@@ -177,12 +177,12 @@
               if (!empty($details->getPoster()))
                 $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
               else
-                $modele .= '<img src="/inside/includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                $modele .= '<img src="' . $_SERVER['DOCUMENT_ROOT'] . '/inside/includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
             $modele .= '</div>';
           $modele .= '</div>';
 
           $modele .= '<div class="footer_mail">';
-            $modele .= '<img src="/inside/includes/icons/common/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
+            $modele .= '<img src="' . $_SERVER['DOCUMENT_ROOT'] . '/inside/includes/icons/common/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
           $modele .= '</div>';
         $modele .= '</div>';
       $modele .= '</body>';
@@ -376,7 +376,7 @@
             // Logo et lien
             $modele .= '<div class="zone_bandeau_mail_left">';
               $modele .= '<a href="http://77.150.63.94/inside/index.php?action=goConsulter">';
-                $modele .= '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
+                $modele .= '<img src="' . $_SERVER['DOCUMENT_ROOT'] . '/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
               $modele .= '</a>';
             $modele .= '</div>';
 
@@ -399,7 +399,7 @@
         $modele .= '<section>';
           $modele .= '<article>';
             // Gestion des utilisateurs
-            $modele .= '<div class="titre_section_mail"><img src="/inside/includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion des utilisateurs</div></div>';
+            $modele .= '<div class="titre_section_mail"><img src="' . $_SERVER['DOCUMENT_ROOT'] . '/inside/includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion des utilisateurs</div></div>';
 
             $modele .= '<div class="zone_contenu_mail">';
               // Demandes de changemement de mot de passe
@@ -443,7 +443,7 @@
             $modele .= '</div>';
 
             // Gestion du contenu
-            $modele .= '<div class="titre_section_mail"><img src="/inside/includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion du contenu</div></div>';
+            $modele .= '<div class="titre_section_mail"><img src="' . $_SERVER['DOCUMENT_ROOT'] . '/inside/includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion du contenu</div></div>';
 
             $modele .= '<div class="zone_contenu_mail">';
               // Suppressions de films
