@@ -223,10 +223,10 @@
 
         .logo_bandeau_mail
         {
-          float: left;
+          position: absolute;
         	height: 150px;
-        	margin-top: -35px;
-        	margin-left: -30px;
+        	top: -35px;
+        	left: -30px;
         }
 
         .zone_bandeau_mail_right
@@ -259,6 +259,11 @@
           font-size: 110%;
           color: white;
           text-align: right;
+        }
+
+        article
+        {
+          background-color: #fbfbfb;
         }
 
         .titre_section_mail
@@ -314,7 +319,6 @@
           height: 200px;
           border-radius: 2px;
           overflow: hidden;
-          background-color: #fbfbfb;
         }
 
         .titre_demandes_mail
