@@ -478,6 +478,37 @@
                 $modele .= '</div>';
               $modele .= '</div>';
             $modele .= '</div>';
+
+            // Maintenance du site
+            $modele .= '<div class="titre_section_mail"><img src="../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Maintenance du site</div></div>';
+
+            $modele .= '<div class="zone_contenu_mail">';
+              // Bugs en cours
+              $modele .= '<div class="zone_nombre_demandes_mail">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Bugs en cours';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_bugs_en_cours'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+
+              // Evolutions en cours
+              $modele .= '<div class="zone_nombre_demandes_mail">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Suppressions de calendriers';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_evolutions_en_cours'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+            $modele .= '</div>';
           $modele .= '</article>';
         $modele .= '</section>';
 

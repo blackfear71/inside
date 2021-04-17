@@ -430,13 +430,21 @@
       // Récupération du nombre d'annexes à supprimer
       $nombreDemandesSuppressionsAnnexes = physiqueDemandesSuppressions('calendars_annexes');
 
+      // Nombre de bugs en cours
+      $nombreBugsEnCours = physiqueNombreBugsEvolutions('B');
+
+      // Nombre d'évolutions en cours
+      $nombreEvolutionsEnCours = physiqueNombreBugsEvolutions('E');
+
       // Création d'un tableau des demandes
       $tableauDemandes = array('nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
                                'nombre_requetes_inscription'              => $nombreRequetesInscription,
                                'nombre_requetes_desinscription'           => $nombreRequetesDesinscription,
                                'nombre_demandes_suppressions_films'       => $nombreDemandesSuppressionsFilms,
                                'nombre_demandes_suppressions_calendriers' => $nombreDemandesSuppressionsCalendriers,
-                               'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes
+                               'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes,
+                               'nombre_bugs_en_cours'                     => $nombreBugsEnCours,
+                               'nombre_evolutions_en_cours'               => $nombreEvolutionsEnCours
                               );
 
       // Connexion au serveur de mails et initialisations

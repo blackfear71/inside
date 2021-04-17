@@ -327,6 +327,31 @@
     return $nombreDemandes;
   }
 
+  // PHYSIQUE : Lecture du nombre de bugs ou évolutions en cours
+  // RETOUR : Nombre de demandes
+  function physiqueNombreBugsEvolutions($type)
+  {
+    // Initialisations
+    $nombreBugsEvolutions = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                        FROM bugs
+                        WHERE type = "' . $type . '" AND resolved = "N"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $nombreBugsEvolutions = $data['nombreLignes'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreBugsEvolutions;
+  }
+
   /****************************************************************************/
   /********************************** UPDATE **********************************/
   /****************************************************************************/
