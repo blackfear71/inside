@@ -23,15 +23,24 @@
   include_once('modele/physique_cron.php');
 
   // Initialisations
-  $typeLog                   = 'h';
-  $heureDebut                = date('His');
-  $traitementsHebdomadaires  = array();
+  $typeLog                  = 'h';
+  $heureDebut               = date('His');
+  $traitementsHebdomadaires = array();
 
   // Remise à plat des bilans des dépenses
   $traitementBilans = reinitializeExpenses();
 
   // Ajout du compte-rendu au log
   array_push($traitementsHebdomadaires, $traitementBilans);
+
+  // if (!isset($_POST['weekly_cron']))
+  // {
+    // Envoi d'un mail de gestion à l'administrateur
+    $traitementAdmin = sendMailAdmin();
+
+    // Ajout du compte-rendu au log
+    array_push($traitementsHebdomadaires, $traitementAdmin);
+  // }
 
   // Détermination + généreux et + radin
   // à développer (après la refonte des dépenses), à conditionner sur "lundi" ?

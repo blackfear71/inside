@@ -434,7 +434,7 @@
           $mail->AddAddress($participant->getEmail(), $participant->getPseudo());
 
           // Objet du mail
-          $mail->Subject = 'Votre participation à "' . $details->getFilm() . '"';
+          $mail->Subject = 'Inside - Votre participation à "' . $details->getFilm() . '"';
 
           // Contenu du mail
           $message = getModeleMailFilm($details, $participants);

@@ -76,8 +76,9 @@
                 echo 'Exécute les tâches suivantes :';
                 echo '<ul>';
                   echo '<li>Remise à plat des bilans des dépenses</li>';
-                  echo '<li>Recherche du plus dépensier et du moins dépensier et insère une notification (à venir)</li>';
-                  echo '<li>Sauvegarde automatique de la base de données (à venir)</li>';
+                  echo '<li>Envoi d\'un mail de gestion à l\'administrateur</li>';
+                  // echo '<li>Recherche du plus dépensier et du moins dépensier et insère une notification (à venir)</li>';
+                  // echo '<li>Sauvegarde automatique de la base de données (à venir)</li>';
                   echo '<li>Génération log hebdomadaire</li>';
                 echo '</ul>';
                 echo '<u>Fréquence :</u> tous les lundis à 7h.';

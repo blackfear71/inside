@@ -220,7 +220,7 @@
     return $listeDepenses;
   }
 
-  // PHYSIQUE : Lecture des ^parts d'une dépense
+  // PHYSIQUE : Lecture des parts d'une dépense
   // RETOUR : Nombre de parts et de participants
   function physiqueNombresParts($idDepense, $identifiant)
   {
@@ -254,6 +254,77 @@
 
     // Retour
     return $nombresParts;
+  }
+
+  // PHYSIQUE : Lecture de l'adresse mail de l'administrateur
+  // RETOUR : Email administrateur
+  function physiqueMailAdmin()
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant, email
+                        FROM users
+                        WHERE identifiant = "admin"');
+
+    $data = $req->fetch();
+
+    $emailAdministrateur = $data['email'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $emailAdministrateur;
+  }
+
+  // PHYSIQUE : Lecture du nombre de requêtes des utilisateurs
+  // RETOUR : Nombre de requêtes
+  function physiqueRequetesUsers($statut)
+  {
+    // Initialisations
+    $nombreRequetes = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreUsers
+                        FROM users
+                        WHERE identifiant != "admin" AND status = "' . $statut . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreUsers'] > 0)
+      $nombreRequetes = $data['nombreUsers'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreRequetes;
+  }
+
+  // PHYSIQUE : Lecture du nombre de demandes de suppression d'une catégorie
+  // RETOUR : Nombre de demandes
+  function physiqueDemandesSuppressions($table)
+  {
+    // Initialisations
+    $nombreDemandes = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                        FROM ' . $table . '
+                        WHERE to_delete = "Y"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $nombreDemandes = $data['nombreLignes'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreDemandes;
   }
 
   /****************************************************************************/

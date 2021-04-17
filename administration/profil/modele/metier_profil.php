@@ -86,19 +86,25 @@
   function updateInfos($identifiant, $post)
   {
     // Récupération des données
-    $pseudo = trim($post['pseudo']);
+    $email = $post['email'];
 
-    // Mise à jour pseudo si renseigné
-    if (!empty($pseudo))
-    {
-      physiqueUpdatePseudoUser($identifiant, $pseudo);
+    if (isset($post['pseudo']) AND !empty($post['pseudo']))
+      $pseudo = trim($post['pseudo']);
+    else
+      $pseudo = $_SESSION['user']['pseudo'];
 
-      // Mise à jour de la session
-      $_SESSION['user']['pseudo'] = htmlspecialchars($pseudo);
+    // Modification de l'enregistrement en base
+    $user = array('pseudo'      => $pseudo,
+                  'email'       => $email
+                 );
 
-      // Message d'alerte
-      $_SESSION['alerts']['infos_updated'] = true;
-    }
+    physiqueUpdateUser($user, $identifiant);
+
+    // Mise à jour de la session
+    $_SESSION['user']['pseudo'] = htmlspecialchars($pseudo);
+
+    // Message d'alerte
+    $_SESSION['alerts']['infos_updated'] = true;
   }
 
   // METIER : Mise à jour du mot de passe

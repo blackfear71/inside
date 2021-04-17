@@ -81,6 +81,10 @@
               echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_parametres" />';
               echo '<input type="text" name="pseudo" placeholder="Pseudo" value="' . $profil->getPseudo() . '" maxlength="255" class="monoligne_saisie" />';
 
+              // Email
+              echo '<img src="../../includes/icons/profil/mailing_red.png" alt="mailing_red" class="logo_parametres" />';
+              echo '<input type="email" name="email" placeholder="Adresse mail" value="' . $profil->getEmail() . '" maxlength="255" class="monoligne_saisie" />';
+
               echo '<input type="submit" name="saisie_pseudo" value="Mettre à jour" class="bouton_validation" />';
             echo '</form>';
           echo '</div>';

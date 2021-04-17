@@ -26,9 +26,9 @@
   include_once('modele/physique_cron.php');
 
   // Initialisations
-  $typeLog                = 'j';
-  $heureDebut             = date('His');
-  $traitementsQuotidiens  = array();
+  $typeLog               = 'j';
+  $heureDebut            = date('His');
+  $traitementsQuotidiens = array();
 
   // Génération notification sortie cinéma du jour
   $traitementSortieCinema = generateNotificationsSortieCinema();

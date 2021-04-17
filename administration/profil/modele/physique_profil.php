@@ -89,20 +89,19 @@
     $req->closeCursor();
   }
 
-  // PHYSIQUE : Mise à jour pseudo
+  // PHYSIQUE : Mise à jour utilisateur
   // RETOUR : Aucun
-  function physiqueUpdatePseudoUser($identifiant, $pseudo)
+  function physiqueUpdateUser($user, $identifiant)
   {
     // Requête
     global $bdd;
 
     $req = $bdd->prepare('UPDATE users
-                          SET pseudo = :pseudo
+                          SET pseudo = :pseudo,
+                              email  = :email
                           WHERE identifiant = "' . $identifiant . '"');
 
-    $req->execute(array(
-      'pseudo' => $pseudo
-    ));
+    $req->execute($user);
 
     $req->closeCursor();
   }

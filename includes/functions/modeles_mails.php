@@ -137,7 +137,7 @@
       $modele .= '<body>';
         $modele .= '<div class="zone_mail">';
           $modele .= '<div class="entete_mail">';
-            $modele .= '<img src="../../includes/icons/common/inside.png" alt="inside" class="logo_inside_mail" />';
+            $modele .= '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_inside_mail" />';
           $modele .= '</div>';
 
           $modele .= '<div class="mask_mail">';
@@ -177,14 +177,321 @@
               if (!empty($details->getPoster()))
                 $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
               else
-                $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                $modele .= '<img src="/inside/includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
             $modele .= '</div>';
           $modele .= '</div>';
 
           $modele .= '<div class="footer_mail">';
-            $modele .= '<img src="../../includes/icons/common/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
+            $modele .= '<img src="/inside/includes/icons/common/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
           $modele .= '</div>';
         $modele .= '</div>';
+      $modele .= '</body>';
+    $modele .= '</html>';
+
+    // Retour
+    return $modele;
+  }
+
+  // MODELE : Edition modèle de mail pour gestion du site
+  // RETOUR : Modèle de mail
+  function getModeleMailAdministration($demandes)
+  {
+    // Initialisations
+    $modele = '';
+
+    // Contenu
+    $modele .= '<html lang="fr">';
+      $modele .= '<head>';
+        // CSS
+        $modele .= '<style type="text/css">';
+        $modele .= '
+        body
+        {
+          background-color: #fbfbfb;
+        }
+
+        .zone_bandeau_mail
+        {
+          background-color: #262626;
+        	width: 100%;
+        	height: 80px;
+        	overflow: hidden;
+        }
+
+        .zone_bandeau_mail_left
+        {
+          display: inline-block;
+          vertical-align: top;
+          width: 120px;
+          height: 80px;
+        }
+
+        .logo_bandeau_mail
+        {
+          float: left;
+        	height: 150px;
+        	margin-top: -35px;
+        	margin-left: -30px;
+        }
+
+        .zone_bandeau_mail_right
+        {
+          display: inline-block;
+          vertical-align: top;
+          width: calc(100% - 140px);
+          height: 80px;
+          padding-right: 20px;
+        }
+
+        .zone_bandeau_mail_right_top
+        {
+          display: block;
+          margin-top: 10px;
+          height: 30px;
+          line-height: 30px;
+          font-family: Calibri, Verdana, sans-serif;
+          font-size: 150%;
+          color: white;
+          text-align: right;
+        }
+
+        .zone_bandeau_mail_right_bottom
+        {
+          display: block;
+          height: 30px;
+          line-height: 30px;
+          font-family: Calibri Light, Verdana, sans-serif;
+          font-size: 100%;
+          color: white;
+          text-align: right;
+        }
+
+        .titre_section_mail
+        {
+          display: block;
+          width: 100%;
+          font-family: Calibri, Verdana, sans-serif;
+          font-size: 150%;
+          font-weight: bold;
+          border-bottom: solid 1px #b3b3b3;
+          line-height: 30px;
+          margin-bottom: 20px;
+          padding-top: 10px;
+        	padding-bottom: 10px;
+        	color: #262626;
+        	text-align: left;
+          word-break: break-word;
+        }
+
+        .logo_titre_section_mail
+        {
+          display: inline-block;
+        	height: 25px;
+        	width: 25px;
+        	vertical-align: top;
+        	margin-top: 5px;
+        }
+
+        .texte_titre_section_mail
+        {
+          display: inline-block;
+        	width: calc(100% - 35px);
+        	margin-left: 10px;
+        	vertical-align: middle;
+        }
+
+        .zone_contenu_mail
+        {
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+
+        .margin_right_50
+        {
+          margin-right: 50px;
+        }
+
+        .zone_nombre_demandes_mail
+        {
+          display: inline-block;
+          width: 200px;
+          height: 200px;
+          border-radius: 2px;
+          box-shadow: 0 0 3px #7c7c7c;
+          overflow: hidden;
+        }
+
+        .titre_demandes_mail
+        {
+          display: block;
+          width: calc(100% - 20px);
+          height: 50px;
+          font-family: Calibri, Verdana, sans-serif;
+          font-size: 120%;
+          padding: 5px 10px 5px 10px;
+          color: white;
+          text-align: center;
+          word-break: break-word;
+          background-color: #ff1937;
+        }
+
+        .valeur_demandes_mail
+        {
+          display: block;
+          width: 100%;
+          height: 140px;
+          line-height: 140px;
+          font-family: Calibri Light, Verdana, sans-serif;
+          font-size: 600%;
+          color: #262626;
+          text-align: center;
+          background-color: white;
+        }
+
+        footer
+        {
+          display: block;
+          margin-top: 20px;
+          width: calc(100% - 20px);
+          background-color: #262626;
+          height: 50px;
+          line-height: 50px;
+          padding-left: 10px;
+          padding-right: 10px;
+          font-family: Calibri Light, Verdana, sans-serif;
+          font-size: 100%;
+          color: white;
+          text-align: right;
+        }
+        ';
+        $modele .= '</style>';
+      $modele .= '</head>';
+
+      // Affichage du contenu
+      $modele .= '<body>';
+        // Entête
+        $modele .= '<header>';
+          $modele .= '<div class="zone_bandeau_mail">';
+            // Logo et lien
+            $modele .= '<div class="zone_bandeau_mail_left">';
+              $modele .= '<a href="http://77.150.63.94/inside/index.php?action=goConsulter">';
+                $modele .= '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
+              $modele .= '</a>';
+            $modele .= '</div>';
+
+            // Titre et semaine
+            $modele .= '<div class="zone_bandeau_mail_right">';
+              // Titre
+              $modele .= '<div class="zone_bandeau_mail_right_top">';
+                $modele .= 'GESTION DU SITE';
+              $modele .= '</div>';
+
+              // Semaine
+              $modele .= '<div class="zone_bandeau_mail_right_bottom">';
+                $modele .= date('Y') . ' - Semaine ' . date('W');
+              $modele .= '</div>';
+            $modele .= '</div>';
+          $modele .= '</div>';
+        $modele .= '</header>';
+
+        // Contenu
+        $modele .= '<section>';
+          $modele .= '<article>';
+            // Gestion des utilisateurs
+            $modele .= '<div class="titre_section_mail"><img src="/inside/includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion des utilisateurs</div></div>';
+
+            $modele .= '<div class="zone_contenu_mail">';
+              // Demandes de changemement de mot de passe
+              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Demandes de mot de passe';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_requetes_mot_de_passe'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+
+              // Demandes d'inscription
+              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Demandes d\'inscription';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_requetes_inscription'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+
+              // Demandes de désinscription
+              $modele .= '<div class="zone_nombre_demandes_mail">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Demandes de désinscription';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_requetes_desinscription'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+            $modele .= '</div>';
+
+            // Gestion du contenu
+            $modele .= '<div class="titre_section_mail"><img src="/inside/includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion du contenu</div></div>';
+
+            $modele .= '<div class="zone_contenu_mail">';
+              // Suppressions de films
+              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Suppressions de films';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_demandes_suppressions_films'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+
+              // Suppressions de calendriers
+              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Suppressions de calendriers';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_demandes_suppressions_calendriers'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+
+              // Suppressions d'annexes
+              $modele .= '<div class="zone_nombre_demandes_mail">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Suppressions d\'annexes';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_demandes_suppressions_annexes'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+            $modele .= '</div>';
+          $modele .= '</article>';
+        $modele .= '</section>';
+
+        // Pied de page
+        $modele .= '<footer>';
+          $modele .= '© 2017-' . date('Y') . ' Inside';
+        $modele .= '</footer>';
       $modele .= '</body>';
     $modele .= '</html>';
 
