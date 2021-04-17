@@ -321,8 +321,7 @@
         {
           display: block;
           width: calc(100% - 20px);
-          height: 50px;
-          line-height: 50px;
+          min-height: 50px;
           font-family: Calibri, Verdana, sans-serif;
           font-size: 120%;
           padding-left: 10px;
@@ -349,7 +348,6 @@
         footer
         {
           display: block;
-          margin-top: 20px;
           width: calc(100% - 20px);
           background-color: #262626;
           height: 50px;
