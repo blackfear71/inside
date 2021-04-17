@@ -223,17 +223,16 @@
 
         .logo_bandeau_mail
         {
-          position: absolute;
-        	height: 150px;
-        	top: -35px;
-        	left: -30px;
+          display: block;
+        	height: 70px;
+          margin: 5px;
         }
 
         .zone_bandeau_mail_right
         {
           display: inline-block;
           vertical-align: top;
-          width: calc(100% - 140px);
+          width: calc(100% - 100px);
           height: 80px;
           padding-right: 20px;
         }
@@ -305,11 +304,7 @@
           display: block;
           width: 100%;
           text-align: center;
-        }
-
-        .margin_right_50
-        {
-          margin-right: 50px;
+          margin: 0 20px 20px 20px;
         }
 
         .zone_nombre_demandes_mail
@@ -404,7 +399,7 @@
 
             $modele .= '<div class="zone_contenu_mail">';
               // Demandes de changemement de mot de passe
-              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+              $modele .= '<div class="zone_nombre_demandes_mail">';
                 // Titre
                 $modele .= '<div class="titre_demandes_mail">';
                   $modele .= 'Demandes de mot de passe';
@@ -417,7 +412,7 @@
               $modele .= '</div>';
 
               // Demandes d'inscription
-              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+              $modele .= '<div class="zone_nombre_demandes_mail">';
                 // Titre
                 $modele .= '<div class="titre_demandes_mail">';
                   $modele .= 'Demandes d\'inscription';
@@ -448,7 +443,7 @@
 
             $modele .= '<div class="zone_contenu_mail">';
               // Suppressions de films
-              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+              $modele .= '<div class="zone_nombre_demandes_mail">';
                 // Titre
                 $modele .= '<div class="titre_demandes_mail">';
                   $modele .= 'Suppressions de films';
@@ -461,7 +456,7 @@
               $modele .= '</div>';
 
               // Suppressions de calendriers
-              $modele .= '<div class="zone_nombre_demandes_mail margin_right_50">';
+              $modele .= '<div class="zone_nombre_demandes_mail">';
                 // Titre
                 $modele .= '<div class="titre_demandes_mail">';
                   $modele .= 'Suppressions de calendriers';
