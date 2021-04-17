@@ -396,7 +396,7 @@
           display: block;
           width: 100%;
           text-align: center;
-          margin-bottom: -20px;
+          margin-bottom: -40px;
         }
 
         .zone_nombre_demandes_mail
