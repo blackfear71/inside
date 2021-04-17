@@ -14,6 +14,12 @@
   // RETOUR : Aucun
   function submitChat($post)
   {
+    // On vérifie la présence du dossier, sinon on le créé de manière récursive
+    $folder = 'conversations';
+
+    if (!is_dir($folder))
+      mkdir($folder, 0777, true);
+
     // Contrôle existence fichier chat
     if (!file_exists('conversations/content_chat.xml'))
     {
