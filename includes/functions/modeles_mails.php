@@ -321,11 +321,9 @@
         {
           display: block;
           width: calc(100% - 20px);
-          min-height: 50px;
           font-family: Calibri, Verdana, sans-serif;
           font-size: 120%;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding: 10px;
           color: white;
           text-align: center;
           word-break: break-word;
