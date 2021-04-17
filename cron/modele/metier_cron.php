@@ -453,6 +453,9 @@
       $message = getModeleMailAdministration($tableauDemandes);
       $mail->MsgHTML($message);
 
+      var_dump($emailAdministrateur);
+      var_dump($message);
+
       // Ajout des données au log
       $log['status'] = 'OK';
       $log['infos']  = 'Mail envoyé';
