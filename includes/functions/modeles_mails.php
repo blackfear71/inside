@@ -12,178 +12,268 @@
         // CSS
         $modele .= '<style type="text/css">';
         $modele .= '
-        .zone_mail
+        .zone_bandeau_mail
         {
-          margin-left: auto;
-          margin-right: auto;
-          width: 800px;
-          min-height: 500px;
-          text-align: center;
-          border-radius: 2px;
+          background-color: #262626;
+          width: 100%;
+          height: 80px;
           overflow: hidden;
-          background-color: #e3e3e3;
         }
 
-        .entete_mail
-        {
-          background-color: #ff1937;
-          height: 100px;
-        }
-
-        .logo_inside_mail
-        {
-          height: 100%;
-          margin-top: 3px;
-        }
-
-        .mask_mail
-        {
-          height: 15px;
-          width: 100%;
-        }
-
-        .triangle_mail
-        {
-          width: 100%;
-          height: 100%;
-          left: 0px;
-          top: 0px;
-          background: linear-gradient(to right bottom, #ff1937 50%, transparent 50%);
-        }
-
-        .corps_mail
-        {
-          width: 100%;
-          margin-top: 20px;
-        }
-
-        .corps_mail_left
-        {
-          float: left;
-          width: 60%;
-          height: 100%;
-        }
-
-        .text_mail
-        {
-          text-align: justify;
-          padding: 20px;
-          font-family: robotolight, Calibri, Verdana, sans-serif;
-          color: #262626;
-        }
-
-        .destinataires_mail
-        {
-        	margin: 10px 0 10px 30px;
-        }
-
-        .avatar_dest_mail
+        .zone_bandeau_mail_left
         {
           display: inline-block;
-        	border-radius: 50%;
-        	width: 40px;
-        	background-color: #262626;
-        	box-shadow: 0 0 3px #7c7c7c;
-        	vertical-align: middle;
-        	margin-right: 10px;
-        	vertical-align: middle;
+          vertical-align: top;
+          width: 80px;
+          height: 80px;
         }
 
-        .pseudo_dest_mail
+        .logo_bandeau_mail
         {
-        	width: calc(100% - 50px);
-        	display: inline-block;
-        	word-break: break-word;
-        	font-size: 80%;
-        	vertical-align: middle;
+          display: block;
+          height: 70px;
+          margin: 5px;
         }
 
-        .participants_mail
+        .zone_bandeau_mail_right
         {
-          line-height: 25px;
-          margin: 0;
-          margin-left: 30px;
-        }
-
-        .corps_mail_right
-        {
-          float: right;
-          width: calc(40% - 20px);
-          height: 100%;
+          display: inline-block;
+          vertical-align: top;
+          width: calc(100% - 100px);
+          height: 80px;
           padding-right: 20px;
-          padding-bottom: 15px;
+        }
+
+        .zone_bandeau_mail_right_top
+        {
+          display: block;
+          margin-top: 10px;
+          height: 30px;
+          line-height: 30px;
+          font-family: Calibri, Verdana, sans-serif;
+          font-size: 150%;
+          color: white;
+          text-align: right;
+        }
+
+        .zone_bandeau_mail_right_bottom
+        {
+          display: block;
+          height: 30px;
+          line-height: 30px;
+          font-family: Calibri Light, Verdana, sans-serif;
+          font-size: 110%;
+          color: white;
+          text-align: right;
+        }
+
+        .article
+        {
+          padding-left: 20px;
+          padding-right: 20px;
+          width: calc(100% - 40px);
+          background-color: #fbfbfb;
+        }
+
+        .titre_section_mail
+        {
+          display: block;
+          width: 100%;
+          font-family: Calibri, Verdana, sans-serif;
+          font-size: 150%;
+          font-weight: bold;
+          border-bottom: solid 1px #b3b3b3;
+          line-height: 30px;
+          margin-bottom: 20px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          color: #262626;
+          text-align: left;
+          word-break: break-word;
+        }
+
+        .logo_titre_section_mail
+        {
+          display: inline-block;
+          height: 25px;
+          width: 25px;
+          vertical-align: top;
+          margin-top: 5px;
+        }
+
+        .texte_titre_section_mail
+        {
+          display: inline-block;
+          width: calc(100% - 35px);
+          margin-left: 10px;
+          vertical-align: middle;
+        }
+
+        .zone_contenu_mail
+        {
+          display: block;
+          width: 100%;
+          text-align: justify;
+        }
+
+        .zone_contenu_mail_left
+        {
+          display: inline-block;
+          vertical-align: top;
+          width: calc(60% - 20px);
+          margin-right: 20px;
+          font-family: Calibri Light, Verdana, sans-serif;
+          font-size: 120%;
+        }
+
+        .participant_mail
+        {
+          display: block;
+        }
+
+        .avatar_mail
+        {
+          display: inline-block;
+          border-radius: 50%;
+          width: 40px;
+          background-color: #262626;
+          vertical-align: middle;
+          margin-right: 10px;
+        }
+
+        .pseudo_mail
+        {
+          width: calc(100% - 50px);
+          display: inline-block;
+          word-break: break-word;
+          font-size: 80%;
+          vertical-align: middle;
+        }
+
+        .zone_contenu_mail_right
+        {
+          display: inline-block;
+          vertical-align: top;
+          width: 40%;
+        }
+
+        .zone_poster_mail
+        {
+          display: block;
+          border-radius: 2px;
+          overflow: hidden;
         }
 
         .poster_mail
         {
+          display: block;
           max-width: 100%;
-          border-radius: 2px;
         }
 
-        .footer_mail
+        .footer
         {
-          clear: both;
-        }
-
-        .logo_inside_mini_mail
-        {
-          width: 50px;
+          display: block;
+          width: calc(100% - 20px);
+          background-color: #262626;
+          height: 50px;
+          line-height: 50px;
+          padding-left: 10px;
+          padding-right: 10px;
+          font-family: Calibri Light, Verdana, sans-serif;
+          font-size: 110%;
+          color: white;
+          text-align: right;
         }
         ';
         $modele .= '</style>';
       $modele .= '</head>';
 
-      // HTML + données
+      // Affichage du contenu
       $modele .= '<body>';
-        $modele .= '<div class="zone_mail">';
-          $modele .= '<div class="entete_mail">';
-            $modele .= '<img src="../../includes/icons/common/inside.png" alt="inside" class="logo_inside_mail" />';
-          $modele .= '</div>';
+        // Entête
+        $modele .= '<div>';
+          $modele .= '<div class="zone_bandeau_mail">';
+            // Logo et lien
+            $modele .= '<div class="zone_bandeau_mail_left">';
+              $modele .= '<a href="http://77.150.63.94/inside/index.php?action=goConsulter">';
+                $modele .= '<img src="../../includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
+              $modele .= '</a>';
+            $modele .= '</div>';
 
-          $modele .= '<div class="mask_mail">';
-            $modele .= '<div class="triangle_mail"></div>';
-          $modele .= '</div>';
+            // Titre et semaine
+            $modele .= '<div class="zone_bandeau_mail_right">';
+              // Titre
+              $modele .= '<div class="zone_bandeau_mail_right_top">';
+                $modele .= $details->getFilm();
+              $modele .= '</div>';
 
-          $modele .= '<div class="corps_mail">';
-            $modele .= '<div class="corps_mail_left">';
-              $modele .= '<div class="text_mail">';
+              // Semaine
+              $modele .= '<div class="zone_bandeau_mail_right_bottom">';
+                if (!empty($details->getDoodle()))
+                  $modele .= 'Sortie organisée le ' . formatDateForDisplay($details->getDate_doodle());
+                else
+                  $modele .= 'Sortie à organiser';
+              $modele .= '</div>';
+            $modele .= '</div>';
+          $modele .= '</div>';
+        $modele .= '</div>';
+
+        // Contenu
+        $modele .= '<div>';
+          $modele .= '<div class="article">';
+            $modele .= '<div class="zone_contenu_mail">';
+              // Corps du mail
+              $modele .= '<div class="zone_contenu_mail_left">';
                 $modele .= 'Bonjour,';
+
                 $modele .= '<br /><br /><br /><br />';
+
                 $modele .= 'Vous avez stipulé être intéréssé(e) par le film : <strong>' . $details->getFilm() . '</strong>';
+
                 $modele .= '<br /><br />';
+
                 if (!empty($details->getDoodle()))
                   $modele .= 'Vous recevez ce mail contenant le lien doodle à renseigner pour donner votre disponibilité : <a href="' . $details->getDoodle() . '" target="_blank">Doodle</a>';
                 else
                   $modele .= 'Aucun Doodle n\'a encore été créé pour ce film. Si vous êtes intéressé(e), veuillez le mettre en place.';
+
                 $modele .= '<br /><br />';
-                $modele .= 'Les personnes intéressées sont :<br />';
+
+                $modele .= 'Les personnes intéressées sont :';
+
+                $modele .= '<br /><br />';
+
                 foreach ($participants as $participant)
                 {
-                  $modele .= '<div class="destinataires_mail">';
+                  $modele .= '<div class="participant_mail">';
                     $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, 'avatar');
 
-                    $modele .= '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_dest_mail" />';
-                    $modele .= '<div class="pseudo_dest_mail">' . $participant->getPseudo() . '</div>';
+                    $modele .= '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_mail" />';
+                    $modele .= '<div class="pseudo_mail">' . $participant->getPseudo() . '</div>';
                   $modele .= '</div>';
                 }
+
                 $modele .= '<br /><br /><br />';
+
                 $modele .= 'Cordialement,';
-                $modele .= '<br /><br /><br /><br />';
-                $modele .= 'Mail envoyé depuis INSIDE.';
+              $modele .= '</div>';
+
+              // Poster du film
+              $modele .= '<div class="zone_contenu_mail_right">';
+                $modele .= '<div class="zone_poster_mail">';
+                  if (!empty($details->getPoster()))
+                    $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                  else
+                    $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                $modele .= '</div>';
               $modele .= '</div>';
             $modele .= '</div>';
-
-            $modele .= '<div class="corps_mail_right">';
-              if (!empty($details->getPoster()))
-                $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
-              else
-                $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
-            $modele .= '</div>';
           $modele .= '</div>';
+        $modele .= '</div>';
 
-          $modele .= '<div class="footer_mail">';
-            $modele .= '<img src="../../includes/icons/common/inside_mini.png" alt="inside" class="logo_inside_mini_mail" />';
-          $modele .= '</div>';
+        // Pied de page
+        $modele .= '<div class="footer">';
+          $modele .= '© 2017-' . date('Y') . ' Inside';
         $modele .= '</div>';
       $modele .= '</body>';
     $modele .= '</html>';
@@ -262,6 +352,8 @@
 
         article
         {
+          padding: 20px;
+          width: calc(100% - 40px);
           background-color: #fbfbfb;
         }
 
