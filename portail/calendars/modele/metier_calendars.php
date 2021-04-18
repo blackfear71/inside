@@ -62,6 +62,9 @@
     // Modification de l'enregistrement en base (en attendant validation de l'admin)
     physiqueUpdateStatusCalendars('calendars', $idCalendrier, $toDelete);
 
+    // Mise à jour du statut de la notification
+    updateNotification('calendrier', $idCalendrier, $toDelete);
+
     // Message d'alerte
     $_SESSION['alerts']['calendar_removed'] = true;
   }
@@ -76,6 +79,9 @@
 
     // Modification de l'enregistrement en base (en attendant validation de l'admin)
     physiqueUpdateStatusCalendars('calendars_annexes', $idAnnexe, $toDelete);
+
+    // Mise à jour du statut de la notification
+    updateNotification('annexe', $idAnnexe, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_removed'] = true;

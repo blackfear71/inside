@@ -5,60 +5,29 @@
   /********************************** SELECT **********************************/
   /****************************************************************************/
 
-  // PHYSIQUE : Lecture notifications entre 2 dates
-  // RETOUR : Liste des notifications
-  function physiqueNotificationsDates($date1, $date2)
+  // PHYSIQUE : Lecture du nombre de notifications entre 2 dates
+  // RETOUR : Nombre de notifications
+  function physiqueNombreNotificationsDates($date1, $date2)
   {
     // Initialisations
-    $listeNotifications = array();
+    $nombreNotifications = 0;
 
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *
+    $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                         FROM notifications
-                        WHERE date >= "' . $date1 . '" AND date <= "' . $date2 . '"
-                        ORDER BY date DESC, time DESC, id DESC');
-
-    while($data = $req->fetch())
-    {
-      // Instanciation d'un objet Notification à partir des données remontées de la bdd
-      $notification = Notification::withData($data);
-
-      // On ajoute la ligne au tableau
-      array_push($listeNotifications, $notification);
-    }
-
-
-    $req->closeCursor();
-
-    // Retour
-    return $listeNotifications;
-  }
-
-  // PHYSIQUE : Lecture si élément à supprimer
-  // RETOUR : Booléen
-  function physiqueToDelete($table, $id)
-  {
-    // Initialisations
-    $toDelete = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM ' . $table . '
-                        WHERE id = ' . $id);
+                        WHERE date >= "' . $date1 . '" AND date <= "' . $date2 . '" AND to_delete = "N"');
 
     $data = $req->fetch();
 
-    if ($data['to_delete'] == 'Y')
-      $toDelete = true;
+    if ($data['nombreNotifications'] > 0)
+      $nombreNotifications = $data['nombreNotifications'];
 
     $req->closeCursor();
 
     // Retour
-    return $toDelete;
+    return $nombreNotifications;
   }
 
   // PHYSIQUE : Lecture nombre de bugs

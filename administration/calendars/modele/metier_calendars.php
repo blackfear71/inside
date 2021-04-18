@@ -175,6 +175,9 @@
     // Remise à "N" de l'indicateur de demande de suppression
     physiqueUpdateStatusCalendars('calendars', $idCalendars, $toDelete);
 
+    // Mise à jour du statut de la notification
+    updateNotification('calendrier', $idCalendars, $toDelete);
+
     // Message d'alerte
     $_SESSION['alerts']['calendar_reseted'] = true;
   }
@@ -184,11 +187,14 @@
   function resetAnnexe($post)
   {
     // Récupération des données
-    $idCalendars = $post['id_annexe'];
-    $toDelete    = 'N';
+    $idAnnexe = $post['id_annexe'];
+    $toDelete = 'N';
 
     // Remise à "N" de l'indicateur de demande de suppression
-    physiqueUpdateStatusCalendars('calendars_annexes', $idCalendars, $toDelete);
+    physiqueUpdateStatusCalendars('calendars_annexes', $idAnnexe, $toDelete);
+
+    // Mise à jour du statut de la notification
+    updateNotification('annexe', $idAnnexe, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_reseted'] = true;

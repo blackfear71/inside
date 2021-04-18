@@ -61,7 +61,7 @@
       case 'me':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE author = "' . $identifiant . '" OR category = "' . $identifiant . '"
+                            WHERE to_delete = "N" AND (author = "' . $identifiant . '" OR category = "' . $identifiant . '")
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -69,14 +69,14 @@
       case 'today':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE date = ' . date('Ymd') . '
+                            WHERE to_delete = "N" AND date = ' . date('Ymd') . '
                             ORDER BY time DESC, id DESC');
         break;
 
       case 'week':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE date <= ' . date('Ymd') . ' AND date >= ' . $date . '
+                            WHERE to_delete = "N" AND date <= ' . date('Ymd') . ' AND date >= ' . $date . '
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -85,6 +85,7 @@
       default:
         $req = $bdd->query('SELECT *
                             FROM notifications
+                            WHERE to_delete = "N"
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;

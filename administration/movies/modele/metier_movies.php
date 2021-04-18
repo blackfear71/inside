@@ -79,6 +79,12 @@
     // Remise à "N" de l'indicateur de demande et effacement identifiant suppression
     physiqueResetFilm($idFilm, $toDelete, $identifiantDel);
 
+    // Mise à jour du statut des notifications
+    updateNotification('film', $idFilm, $toDelete);
+    updateNotification('doodle', $idFilm, $toDelete);
+    updateNotification('cinema', $idFilm, $toDelete);
+    updateNotification('comments', $idFilm, $toDelete);
+
     // Message d'alerte
     $_SESSION['alerts']['film_reseted'] = true;
   }

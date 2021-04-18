@@ -294,12 +294,14 @@
                                                     date,
                                                     time,
                                                     category,
-                                                    content)
+                                                    content,
+                                                    to_delete)
                                             VALUES(:author,
                                                    :date,
                                                    :time,
                                                    :category,
-                                                   :content)');
+                                                   :content,
+                                                   :to_delete)');
 
     $req->execute($notification);
 
@@ -359,6 +361,24 @@
 
     $req->execute(array(
       'experience' => $experience
+    ));
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour statut notification
+  // RETOUR : Aucun
+  function physiqueUpdateNotification($categorie, $contenu, $toDelete)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE notifications
+                          SET to_delete = :to_delete
+                          WHERE category = "' . $categorie . '" AND content = "' . $contenu . '"');
+
+    $req->execute(array(
+      'to_delete' => $toDelete
     ));
 
     $req->closeCursor();

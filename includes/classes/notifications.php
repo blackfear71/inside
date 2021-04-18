@@ -7,6 +7,7 @@
     private $time;
     private $category;
     private $content;
+    private $to_delete;
     private $icon;
     private $sentence;
     private $link;
@@ -14,15 +15,16 @@
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id       = 0;
-      $this->author   = '';
-      $this->date     = '';
-      $this->time     = '';
-      $this->category = '';
-      $this->content  = '';
-      $this->icon     = '';
-      $this->sentence = '';
-      $this->link     = '';
+      $this->id        = 0;
+      $this->author    = '';
+      $this->date      = '';
+      $this->time      = '';
+      $this->category  = '';
+      $this->content   = '';
+      $this->to_delete = '';
+      $this->icon      = '';
+      $this->sentence  = '';
+      $this->link      = '';
     }
 
     // Constructeur de l'objet Notification en fonction des données
@@ -38,22 +40,25 @@
     protected function fill ($data)
     {
       if (isset($data['id']))
-        $this->id       = $data['id'];
+        $this->id        = $data['id'];
 
       if (isset($data['author']))
-        $this->author   = $data['author'];
+        $this->author    = $data['author'];
 
       if (isset($data['date']))
-        $this->date     = $data['date'];
+        $this->date      = $data['date'];
 
       if (isset($data['time']))
-        $this->time     = $data['time'];
+        $this->time      = $data['time'];
 
       if (isset($data['category']))
-        $this->category = $data['category'];
+        $this->category  = $data['category'];
 
       if (isset($data['content']))
-        $this->content  = $data['content'];
+        $this->content   = $data['content'];
+
+      if (isset($data['to_delete']))
+        $this->to_delete = $data['to_delete'];
     }
 
     // Sécurisation des données
@@ -64,6 +69,7 @@
       $data->setTime(htmlspecialchars($data->getTime()));
       $data->setCategory(htmlspecialchars($data->getCategory()));
       $data->setContent(htmlspecialchars($data->getContent()));
+      $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
       $data->setIcon(htmlspecialchars($data->getIcon()));
       // $data->setSentence(htmlspecialchars($data->getSentence()));
       $data->setLink(htmlspecialchars($data->getLink()));
@@ -134,6 +140,17 @@
     public function getContent()
     {
       return $this->content;
+    }
+
+    // Indicateur suppression
+    public function setTo_delete($to_delete)
+    {
+      $this->to_delete = $to_delete;
+    }
+
+    public function getTo_delete()
+    {
+      return $this->to_delete;
     }
 
     // Icône

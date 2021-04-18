@@ -311,6 +311,12 @@
     // Modification de l'enregistrement en base
     physiqueUpdateStatusFilm($idFilm, $toDelete, $identifiant);
 
+    // Mise à jour du statut des notifications
+    updateNotification('film', $idFilm, $toDelete);
+    updateNotification('doodle', $idFilm, $toDelete);
+    updateNotification('cinema', $idFilm, $toDelete);
+    updateNotification('comments', $idFilm, $toDelete);
+
     // Message d'alerte
     $_SESSION['alerts']['film_removed'] = true;
   }

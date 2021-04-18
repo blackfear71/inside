@@ -197,7 +197,7 @@
       return $this->film;
     }
 
-    // Top suppression
+    // Indicateur suppression
     public function setTo_delete($to_delete)
     {
       $this->to_delete = $to_delete;

@@ -593,14 +593,23 @@
   function insertNotification($author, $category, $content)
   {
     // Insertion de l'enregistrement en base
-    $notification = array('author'   => $author,
-                          'date'     => date('Ymd'),
-                          'time'     => date('His'),
-                          'category' => $category,
-                          'content'  => $content
+    $notification = array('author'    => $author,
+                          'date'      => date('Ymd'),
+                          'time'      => date('His'),
+                          'category'  => $category,
+                          'content'   => $content,
+                          'to_delete' => 'N'
                          );
 
     physiqueInsertionNotification($notification);
+  }
+
+  // METIER : Mise à jour d'une notification
+  // RETOUR : Aucun
+  function updateNotification($category, $content, $status)
+  {
+    // Suppression de l'enregistrement en base
+    physiqueUpdateNotification($category, $content, $status);
   }
 
   // METIER : Suppression d'une notification
