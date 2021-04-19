@@ -412,35 +412,35 @@
     // Récupération des informations et envoi du mail
     if (!empty($emailAdministrateur))
     {
+      // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
+      $nombreRequetesMotDePasse = physiqueRequetesUsers('Y');
+
+      // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
+      $nombreRequetesInscription = physiqueRequetesUsers('I');
+
+      // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
+      $nombreRequetesDesinscription = physiqueRequetesUsers('D');
+
+      // Récupération du nombre de films à supprimer
+      $nombreDemandesSuppressionsFilms = physiqueDemandesSuppressions('movie_house');
+
+      // Récupération du nombre de calendriers à supprimer
+      $nombreDemandesSuppressionsCalendriers = physiqueDemandesSuppressions('calendars');
+
+      // Récupération du nombre d'annexes à supprimer
+      $nombreDemandesSuppressionsAnnexes = physiqueDemandesSuppressions('calendars_annexes');
+
+      // Nombre de bugs en cours
+      $nombreBugsEnCours = physiqueNombreBugsEvolutions('B');
+
+      // Nombre d'évolutions en cours
+      $nombreEvolutionsEnCours = physiqueNombreBugsEvolutions('E');
+
       $log = array('titre'  => 'Envoi du mail d\'administration',
                    'status' => 'KO',
-                   'infos'  => $emailAdministrateur
+                   'infos'  => $nombreRequetesMotDePasse . '/' . $nombreRequetesInscription . '/' . $nombreRequetesDesinscription . '/' . $nombreDemandesSuppressionsFilms . '/' . $nombreDemandesSuppressionsCalendriers . '/' . $nombreDemandesSuppressionsAnnexes . '/' . $nombreBugsEnCours . '/' . $nombreEvolutionsEnCours
                   );
 
-      // // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      // $nombreRequetesMotDePasse = physiqueRequetesUsers('Y');
-      //
-      // // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      // $nombreRequetesInscription = physiqueRequetesUsers('I');
-      //
-      // // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      // $nombreRequetesDesinscription = physiqueRequetesUsers('D');
-      //
-      // // Récupération du nombre de films à supprimer
-      // $nombreDemandesSuppressionsFilms = physiqueDemandesSuppressions('movie_house');
-      //
-      // // Récupération du nombre de calendriers à supprimer
-      // $nombreDemandesSuppressionsCalendriers = physiqueDemandesSuppressions('calendars');
-      //
-      // // Récupération du nombre d'annexes à supprimer
-      // $nombreDemandesSuppressionsAnnexes = physiqueDemandesSuppressions('calendars_annexes');
-      //
-      // // Nombre de bugs en cours
-      // $nombreBugsEnCours = physiqueNombreBugsEvolutions('B');
-      //
-      // // Nombre d'évolutions en cours
-      // $nombreEvolutionsEnCours = physiqueNombreBugsEvolutions('E');
-      //
       // // Création d'un tableau des demandes
       // $tableauDemandes = array('nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
       //                          'nombre_requetes_inscription'              => $nombreRequetesInscription,
