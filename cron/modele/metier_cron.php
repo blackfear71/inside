@@ -448,7 +448,7 @@
                               );
 
       // Connexion au serveur de mails et initialisations
-      include_once('../includes/functions/appel_mail.php');
+      include_once('/inside/includes/functions/appel_mail.php');
 
       // Destinataire du mail
       $mail->clearAddresses();
