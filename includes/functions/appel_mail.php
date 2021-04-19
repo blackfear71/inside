@@ -1,8 +1,18 @@
 <?php
   // Appel au serveur de mails
-  require($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/php/phpmailer/class.phpmailer.php');
-  require($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/php/phpmailer/class.smtp.php');
-
+  if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
+  {
+    // Inclusions web
+    require($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/php/phpmailer/class.phpmailer.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/php/phpmailer/class.smtp.php');
+  }
+  else
+  {
+    // Inclusions CRON
+    require('/var/www/html/inside/includes/libraries/php/phpmailer/class.phpmailer.php');
+    require('/var/www/html/inside/includes/libraries/php/phpmailer/class.smtp.php');
+  }
+  
   // Données du serveur
   $mail             = new PHPMailer();
   $mail->isSMTP();
