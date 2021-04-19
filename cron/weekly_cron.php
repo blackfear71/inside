@@ -33,18 +33,14 @@
   // Ajout du compte-rendu au log
   array_push($traitementsHebdomadaires, $traitementBilans);
 
-  var_dump($_POST);
-
   // if (!isset($_POST['weekly_cron']))
   // {
-    // Envoi d'un mail de gestion à l'administrateur
-    $traitementAdmin = sendMailAdmin();
-
-    // Ajout du compte-rendu au log
-    array_push($traitementsHebdomadaires, $traitementAdmin);
+  //   // Envoi d'un mail de gestion à l'administrateur
+  //   $traitementAdmin = sendMailAdmin();
+  //
+  //   // Ajout du compte-rendu au log
+  //   array_push($traitementsHebdomadaires, $traitementAdmin);
   // }
-
-  var_dump($traitementAdmin);
 
   // Détermination + généreux et + radin
   // à développer (après la refonte des dépenses), à conditionner sur "lundi" ?
@@ -58,11 +54,6 @@
   // Génération du log de traitement
   generateLog($typeLog, $traitementsHebdomadaires, $heureDebut, $heureFin);
 
-  var_dump($typeLog);
-  var_dump($traitementsHebdomadaires);
-  var_dump($heureDebut);
-  var_dump($heureFin);
-
   // Redirection si exécution asynchrone
   if (isset($_POST['weekly_cron']))
   {
@@ -70,6 +61,6 @@
     $_SESSION['alerts']['weekly_cron'] = true;
 
     // Redirection
-    // header('location: /inside/administration/cron/cron.php?action=goConsulter');
+    header('location: /inside/administration/cron/cron.php?action=goConsulter');
   }
 ?>
