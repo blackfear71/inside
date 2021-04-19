@@ -412,68 +412,73 @@
     // Récupération des informations et envoi du mail
     if (!empty($emailAdministrateur))
     {
-      // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      $nombreRequetesMotDePasse = physiqueRequetesUsers('Y');
+      $log = array('titre'  => 'Envoi du mail d\'administration',
+                   'status' => 'KO',
+                   'infos'  => $emailAdministrateur
+                  );
 
-      // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      $nombreRequetesInscription = physiqueRequetesUsers('I');
-
-      // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      $nombreRequetesDesinscription = physiqueRequetesUsers('D');
-
-      // Récupération du nombre de films à supprimer
-      $nombreDemandesSuppressionsFilms = physiqueDemandesSuppressions('movie_house');
-
-      // Récupération du nombre de calendriers à supprimer
-      $nombreDemandesSuppressionsCalendriers = physiqueDemandesSuppressions('calendars');
-
-      // Récupération du nombre d'annexes à supprimer
-      $nombreDemandesSuppressionsAnnexes = physiqueDemandesSuppressions('calendars_annexes');
-
-      // Nombre de bugs en cours
-      $nombreBugsEnCours = physiqueNombreBugsEvolutions('B');
-
-      // Nombre d'évolutions en cours
-      $nombreEvolutionsEnCours = physiqueNombreBugsEvolutions('E');
-
-      // Création d'un tableau des demandes
-      $tableauDemandes = array('nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
-                               'nombre_requetes_inscription'              => $nombreRequetesInscription,
-                               'nombre_requetes_desinscription'           => $nombreRequetesDesinscription,
-                               'nombre_demandes_suppressions_films'       => $nombreDemandesSuppressionsFilms,
-                               'nombre_demandes_suppressions_calendriers' => $nombreDemandesSuppressionsCalendriers,
-                               'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes,
-                               'nombre_bugs_en_cours'                     => $nombreBugsEnCours,
-                               'nombre_evolutions_en_cours'               => $nombreEvolutionsEnCours
-                              );
-
-      // Connexion au serveur de mails et initialisations
-      include_once('../includes/functions/appel_mail.php');
-
-      // Destinataire du mail
-      $mail->clearAddresses();
-      $mail->AddAddress($emailAdministrateur, 'Administrateur Inside');
-
-      // Objet du mail
-      $mail->Subject = 'Inside - Gestion du site';
-
-      // Contenu du mail
-      $message = getModeleMailAdministration($tableauDemandes);
-      $mail->MsgHTML($message);
-
-      // Envoi du mail
-      if (!$mail->Send())
-      {
-        // Ajout des données au log
-        $log['status'] = 'KO';
-        $log['infos']  = 'Erreur lors de l\'envoi du mail';
-      }
-      else
-      {
-        // Ajout des données au log
-        $log['status'] = 'OK';
-        $log['infos']  = 'Mail envoyé';
-      }
+      // // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
+      // $nombreRequetesMotDePasse = physiqueRequetesUsers('Y');
+      //
+      // // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
+      // $nombreRequetesInscription = physiqueRequetesUsers('I');
+      //
+      // // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
+      // $nombreRequetesDesinscription = physiqueRequetesUsers('D');
+      //
+      // // Récupération du nombre de films à supprimer
+      // $nombreDemandesSuppressionsFilms = physiqueDemandesSuppressions('movie_house');
+      //
+      // // Récupération du nombre de calendriers à supprimer
+      // $nombreDemandesSuppressionsCalendriers = physiqueDemandesSuppressions('calendars');
+      //
+      // // Récupération du nombre d'annexes à supprimer
+      // $nombreDemandesSuppressionsAnnexes = physiqueDemandesSuppressions('calendars_annexes');
+      //
+      // // Nombre de bugs en cours
+      // $nombreBugsEnCours = physiqueNombreBugsEvolutions('B');
+      //
+      // // Nombre d'évolutions en cours
+      // $nombreEvolutionsEnCours = physiqueNombreBugsEvolutions('E');
+      //
+      // // Création d'un tableau des demandes
+      // $tableauDemandes = array('nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
+      //                          'nombre_requetes_inscription'              => $nombreRequetesInscription,
+      //                          'nombre_requetes_desinscription'           => $nombreRequetesDesinscription,
+      //                          'nombre_demandes_suppressions_films'       => $nombreDemandesSuppressionsFilms,
+      //                          'nombre_demandes_suppressions_calendriers' => $nombreDemandesSuppressionsCalendriers,
+      //                          'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes,
+      //                          'nombre_bugs_en_cours'                     => $nombreBugsEnCours,
+      //                          'nombre_evolutions_en_cours'               => $nombreEvolutionsEnCours
+      //                         );
+      //
+      // // Connexion au serveur de mails et initialisations
+      // include_once('../includes/functions/appel_mail.php');
+      //
+      // // Destinataire du mail
+      // $mail->clearAddresses();
+      // $mail->AddAddress($emailAdministrateur, 'Administrateur Inside');
+      //
+      // // Objet du mail
+      // $mail->Subject = 'Inside - Gestion du site';
+      //
+      // // Contenu du mail
+      // $message = getModeleMailAdministration($tableauDemandes);
+      // $mail->MsgHTML($message);
+      //
+      // // Envoi du mail
+      // if (!$mail->Send())
+      // {
+      //   // Ajout des données au log
+      //   $log['status'] = 'KO';
+      //   $log['infos']  = 'Erreur lors de l\'envoi du mail';
+      // }
+      // else
+      // {
+      //   // Ajout des données au log
+      //   $log['status'] = 'OK';
+      //   $log['infos']  = 'Mail envoyé';
+      // }
     }
     else
     {
