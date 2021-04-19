@@ -436,25 +436,20 @@
       // Nombre d'évolutions en cours
       $nombreEvolutionsEnCours = physiqueNombreBugsEvolutions('E');
 
-      $log = array('titre'  => 'Envoi du mail d\'administration',
-                   'status' => 'KO',
-                   'infos'  => $nombreRequetesMotDePasse . '/' . $nombreRequetesInscription . '/' . $nombreRequetesDesinscription . '/' . $nombreDemandesSuppressionsFilms . '/' . $nombreDemandesSuppressionsCalendriers . '/' . $nombreDemandesSuppressionsAnnexes . '/' . $nombreBugsEnCours . '/' . $nombreEvolutionsEnCours
-                  );
+      // Création d'un tableau des demandes
+      $tableauDemandes = array('nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
+                               'nombre_requetes_inscription'              => $nombreRequetesInscription,
+                               'nombre_requetes_desinscription'           => $nombreRequetesDesinscription,
+                               'nombre_demandes_suppressions_films'       => $nombreDemandesSuppressionsFilms,
+                               'nombre_demandes_suppressions_calendriers' => $nombreDemandesSuppressionsCalendriers,
+                               'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes,
+                               'nombre_bugs_en_cours'                     => $nombreBugsEnCours,
+                               'nombre_evolutions_en_cours'               => $nombreEvolutionsEnCours
+                              );
 
-      // // Création d'un tableau des demandes
-      // $tableauDemandes = array('nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
-      //                          'nombre_requetes_inscription'              => $nombreRequetesInscription,
-      //                          'nombre_requetes_desinscription'           => $nombreRequetesDesinscription,
-      //                          'nombre_demandes_suppressions_films'       => $nombreDemandesSuppressionsFilms,
-      //                          'nombre_demandes_suppressions_calendriers' => $nombreDemandesSuppressionsCalendriers,
-      //                          'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes,
-      //                          'nombre_bugs_en_cours'                     => $nombreBugsEnCours,
-      //                          'nombre_evolutions_en_cours'               => $nombreEvolutionsEnCours
-      //                         );
-      //
-      // // Connexion au serveur de mails et initialisations
-      // include_once('../includes/functions/appel_mail.php');
-      //
+      // Connexion au serveur de mails et initialisations
+      include_once('../includes/functions/appel_mail.php');
+
       // // Destinataire du mail
       // $mail->clearAddresses();
       // $mail->AddAddress($emailAdministrateur, 'Administrateur Inside');
