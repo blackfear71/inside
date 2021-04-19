@@ -447,7 +447,7 @@ function initialisationModification(idDepense, year, filter)
             montantDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_saisie_depense" />';
 
             // Pseudo
-            montantDes += '<div class="pseudo_saisie_depense">' + formatString(formatUnknownUser(user.pseudo, true, false), 10) + '</div>';
+            montantDes += '<div class="pseudo_saisie_depense">' + formatString(formatUnknownUser(user.pseudo, true, false), 8) + '</div>';
           montantDes += '</div>';
 
           // Identifiant (caché)
@@ -510,7 +510,7 @@ function initialisationModification(idDepense, year, filter)
             partsDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_saisie_depense" />';
 
             // Pseudo
-            partsDes += '<div class="pseudo_saisie_depense">' + formatString(formatUnknownUser(user.pseudo, true, false), 10) + '</div>';
+            partsDes += '<div class="pseudo_saisie_depense">' + formatString(formatUnknownUser(user.pseudo, true, false), 8) + '</div>';
           partsDes += '</div>';
 
           // Identifiant (caché)

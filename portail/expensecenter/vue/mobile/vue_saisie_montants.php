@@ -100,7 +100,7 @@
                   echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_saisie_depense" />';
 
                   // Pseudo
-                  echo '<div class="pseudo_saisie_depense">' . formatString($user->getPseudo(), 10) . '</div>';
+                  echo '<div class="pseudo_saisie_depense">' . formatString($user->getPseudo(), 8) . '</div>';
                 echo '</div>';
 
                 // Identifiant (caché)
