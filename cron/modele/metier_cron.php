@@ -449,8 +449,8 @@
 
       // Connexion au serveur de mails et initialisations
       include_once('../includes/functions/appel_mail.php');
-      require('../includes/libraries/php/phpmailer/class.phpmailer.php');
-      require('../includes/libraries/php/phpmailer/class.smtp.php');
+      include_once('../includes/libraries/php/phpmailer/class.phpmailer.php');
+      include_once('../includes/libraries/php/phpmailer/class.smtp.php');
 
       // Destinataire du mail
       $mail->clearAddresses();
