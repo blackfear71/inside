@@ -4,7 +4,6 @@
   include_once('../includes/classes/missions.php');
   include_once('../includes/classes/movies.php');
   include_once('../includes/classes/profile.php');
-  include_once('../includes/functions/appel_mail.php');
 
   // METIER : Insertion notification sortie cinéma du jour
   // RETOUR : Compte-rendu traitement
@@ -449,6 +448,7 @@
                               );
 
       // Connexion au serveur de mails et initialisations
+      include_once('../includes/functions/appel_mail.php');
 
       // Destinataire du mail
       $mail->clearAddresses();
