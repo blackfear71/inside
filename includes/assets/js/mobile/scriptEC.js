@@ -152,6 +152,7 @@ function ajouterPart(zone, quantite, value)
   if (newValue > 0)
   {
     $('#' + zone).css('background-color', '#ff1937');
+    $('#' + zone).find('.pseudo_saisie_depense').css('color', 'white');
 
     $('#' + quantite).css('background-color', '#ff1937');
     $('#' + quantite).css('color', 'white');
@@ -159,6 +160,7 @@ function ajouterPart(zone, quantite, value)
   else
   {
     $('#' + zone).css('background-color', '#e3e3e3');
+    $('#' + zone).find('.pseudo_saisie_depense').css('color', '#262626');
 
     $('#' + quantite).css('background-color', '#e3e3e3');
     $('#' + quantite).css('color', '#262626');
@@ -437,11 +439,15 @@ function initialisationModification(idDepense, year, filter)
 
         // Zone utilisateur
         montantDes += '<div class="zone_saisie_utilisateur part_selected">';
-          // Avatar
+          // Utilisateur
           var avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
 
           montantDes += '<div class="zone_saisie_utilisateur_avatar">';
-            montantDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_depense" />';
+            // Avatar
+            montantDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_saisie_depense" />';
+
+            // Pseudo
+            montantDes += '<div class="pseudo_saisie_depense">' + formatString(formatUnknownUser(user.pseudo, true, false), 10) + '</div>';
           montantDes += '</div>';
 
           // Identifiant (caché)
@@ -496,11 +502,15 @@ function initialisationModification(idDepense, year, filter)
 
         // Zone utilisateur
         partsDes += '<div class="zone_saisie_utilisateur part_selected">';
-          // Avatar
+          // Utilisateur
           var avatarFormatted = formatAvatar(user.avatar, user.pseudo, 2, 'avatar');
 
           partsDes += '<div class="zone_saisie_utilisateur_avatar">';
-            partsDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_depense" />';
+            // Avatar
+            partsDes += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_saisie_depense" />';
+
+            // Pseudo
+            partsDes += '<div class="pseudo_saisie_depense">' + formatString(formatUnknownUser(user.pseudo, true, false), 10) + '</div>';
           partsDes += '</div>';
 
           // Identifiant (caché)

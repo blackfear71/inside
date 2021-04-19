@@ -84,11 +84,15 @@
                 echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_' . $user->getId() . '">';
               else
                 echo '<div class="zone_saisie_utilisateur" id="zone_user_' . $user->getId() . '">';
-                // Avatar
+                // Utilisateur
                 echo '<div class="zone_saisie_utilisateur_avatar">';
+                  // Avatar
                   $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
-                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
+                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_saisie_depense" />';
+
+                  // Pseudo
+                  echo '<div class="pseudo_saisie_depense">' . formatString($user->getPseudo(), 10) . '</div>';
                 echo '</div>';
 
                 // Identifiant (caché)
