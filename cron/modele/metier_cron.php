@@ -450,30 +450,30 @@
       // Connexion au serveur de mails et initialisations
       include_once('../includes/functions/appel_mail.php');
 
-      // // Destinataire du mail
-      // $mail->clearAddresses();
-      // $mail->AddAddress($emailAdministrateur, 'Administrateur Inside');
-      //
-      // // Objet du mail
-      // $mail->Subject = 'Inside - Gestion du site';
-      //
-      // // Contenu du mail
-      // $message = getModeleMailAdministration($tableauDemandes);
-      // $mail->MsgHTML($message);
-      //
-      // // Envoi du mail
-      // if (!$mail->Send())
-      // {
-      //   // Ajout des données au log
-      //   $log['status'] = 'KO';
-      //   $log['infos']  = 'Erreur lors de l\'envoi du mail';
-      // }
-      // else
-      // {
-      //   // Ajout des données au log
-      //   $log['status'] = 'OK';
-      //   $log['infos']  = 'Mail envoyé';
-      // }
+      // Destinataire du mail
+      $mail->clearAddresses();
+      $mail->AddAddress($emailAdministrateur, 'Administrateur Inside');
+
+      // Objet du mail
+      $mail->Subject = 'Inside - Gestion du site';
+
+      // Contenu du mail
+      $message = getModeleMailAdministration($tableauDemandes);
+      $mail->MsgHTML($message);
+
+      // Envoi du mail
+      if (!$mail->Send())
+      {
+        // Ajout des données au log
+        $log['status'] = 'KO';
+        $log['infos']  = 'Erreur lors de l\'envoi du mail';
+      }
+      else
+      {
+        // Ajout des données au log
+        $log['status'] = 'OK';
+        $log['infos']  = 'Mail envoyé';
+      }
     }
     else
     {
