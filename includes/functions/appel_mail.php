@@ -9,10 +9,10 @@
   else
   {
     // Inclusions CRON
-    require('/var/www/html/inside/includes/libraries/php/phpmailer/class.phpmailer.php');
-    require('/var/www/html/inside/includes/libraries/php/phpmailer/class.smtp.php');
+    require('../includes/libraries/php/phpmailer/class.phpmailer.php');
+    require('../includes/libraries/php/phpmailer/class.smtp.php');
   }
-  
+
   // Données du serveur
   $mail             = new PHPMailer();
   $mail->isSMTP();

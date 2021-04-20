@@ -21,7 +21,7 @@
 
     $queryTables = $mysqli->query('SHOW TABLES');
 
-    while($row = $queryTables->fetch_row())
+    while ($row = $queryTables->fetch_row())
     {
       $targetTables[] = $row[0];
     }
@@ -40,7 +40,7 @@
 
       for ($i = 0, $stCounter = 0; $i < $fieldsAmount; $i++, $stCounter = 0)
       {
-        while($row = $result->fetch_row())
+        while ($row = $result->fetch_row())
         {
 					// Quand débuté (et après chaque 100 cycles de commande)
           if ($stCounter % 100 == 0 || $stCounter == 0)
