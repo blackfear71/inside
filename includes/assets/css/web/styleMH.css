@@ -975,7 +975,7 @@
 	position: relative;
 	z-index: 2;
 	height: 100px;
-	width: 70px;
+	padding-right: 52px;
 	line-height: 97px;
 	margin-top: 100px;
 	margin-left: 10%;
@@ -988,7 +988,7 @@
 	position: relative;
 	z-index: 2;
 	height: 100px;
-	width: 70px;
+	padding-left: 52px;
 	line-height: 97px;
 	margin-top: 100px;
 	margin-right: 10%;
@@ -1004,21 +1004,11 @@
 	transition: height 0.2s;
 }
 
-.fleche_detail:hover
+.link_prev_movie:hover .fleche_detail, .link_next_movie:hover .fleche_detail
 {
 	height: 80%;
 	width: 18px;
 	transition: height 0.2s;
-}
-
-.padding_left
-{
-	padding-left: 50px;
-}
-
-.padding_right
-{
-	padding-right: 50px;
 }
 
 .titre_prev_movie
@@ -1029,7 +1019,7 @@
 	line-height: 300px;
 	opacity: 0;
 	margin-left: 20px;
-	transition: opacity 0.5s, margin-left 0.5s;
+	transition: opacity 0.5s, left 0.5s;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
@@ -1039,8 +1029,8 @@
 .link_prev_movie:hover ~ .titre_prev_movie
 {
 	opacity: 1;
-	margin-left: -30px;
-	transition: opacity 0.5s, margin-left 0.5s;
+	left: 10%;
+	transition: opacity 0.5s, left 0.5s;
 }
 
 .titre_next_movie
@@ -1051,7 +1041,7 @@
 	line-height: 300px;
 	margin-right: 20px;
 	opacity: 0;
-	transition: opacity 0.5s, margin-right 0.5s;
+	transition: opacity 0.5s, right 0.5s;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
@@ -1061,8 +1051,8 @@
 .link_next_movie:hover ~ .titre_next_movie
 {
 	opacity: 1;
-	margin-right: -30px;
-	transition: opacity 0.5s, margin-right 0.5s;
+	right: 10%;
+	transition: opacity 0.5s, right 0.5s;
 }
 
 /*** Détails (gauche) ***/
