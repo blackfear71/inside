@@ -58,14 +58,26 @@
           /***********/
           /* Portail */
           /***********/
+          $i = 0;
+
           foreach ($portail as $lienPortail)
           {
             if ($lienPortail['mobile'] == 'Y')
             {
-              echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+              if ($i % 2 == 0)
+                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_2">';
+              else
+                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+                // Logo
                 echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="icone_lien_portail" />';
-                echo '<div class="texte_lien_portail">' . str_replace('<br />', ' ', $lienPortail['categorie']) . '</div>';
+
+                // Texte
+                echo '<div class="zone_texte_lien_portail">';
+                  echo '<div class="texte_lien_portail">' . $lienPortail['categorie'] . '</div>';
+                echo '</div>';
               echo '</a>';
+
+              $i++;
             }
           }
         ?>
