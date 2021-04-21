@@ -148,6 +148,7 @@
   function subscribe($post)
   {
     // Initialisations
+    $listeUsers = array();
     $control_ok = true;
 
     // Récupération des données
@@ -185,7 +186,48 @@
 
     // Contrôle trigramme existant
     if ($control_ok == true)
-      $control_ok = controleTrigrammeUnique($trigramme);
+    {
+      // Récupération des identifiants inscrits
+      $listeUsersInscrits = physiqueIdentifiantsInscrits();
+
+      // Récupération des identifiants dans les films
+      $listeUsersFilms = physiqueIdentifiantsFilms();
+
+      // Récupération des identifiants dans les commentaires des films
+      $listeUsersComments = physiqueIdentifiantsCommentairesFilms();
+
+      // Récupération des identifiants dans les phrases cultes
+      $listeUsersCollector = physiqueIdentifiantsCollector();
+
+      // Récupération des identifiants dans les dépenses
+      $listeUsersExpenses = physiqueIdentifiantsDepenses();
+
+      // Récupération des identifiants dans les parts des dépenses
+      $listeUsersParts = physiqueIdentifiantsPartsDepenses();
+
+      // Récupération des identifiants dans les bugs/évolutions
+      $listeUsersBugs = physiqueIdentifiantsBugs();
+
+      // Récupération des identifiants dans les idées #TheBox
+      $listeUsersTheBox = physiqueIdentifiantsTheBox();
+
+      // Fusion des données dans le tableau complet
+      $listeUsers = array_merge($listeUsersInscrits,
+                                $listeUsersFilms,
+                                $listeUsersComments,
+                                $listeUsersCollector,
+                                $listeUsersExpenses,
+                                $listeUsersParts,
+                                $listeUsersBugs,
+                                $listeUsersTheBox
+                               );
+
+      // Suppression des doublons
+      $listeUsers = array_unique($listeUsers);
+
+      // Contrôle trigramme existant
+      $control_ok = controleTrigrammeUnique($listeUsers, $trigramme);
+    }
 
     // Contrôle saisies mot de passe
     if ($control_ok == true)

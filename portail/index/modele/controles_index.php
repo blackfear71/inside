@@ -119,18 +119,20 @@
 
   // CONTROLE : Trigramme existant
   // RETOUR : Booléen
-  function controleTrigrammeUnique($trigramme)
+  function controleTrigrammeUnique($listeUsers, $trigramme)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    $isUnique = physiqueTrigrammeUnique($trigramme);
-
-    if ($isUnique == false)
+    foreach ($listeUsers as $user)
     {
-      $_SESSION['alerts']['already_exist'] = true;
-      $control_ok                          = false;
+      if ($user == $trigramme)
+      {
+        $_SESSION['alerts']['already_exist'] = true;
+        $control_ok                          = false;
+        break;
+      }
     }
 
     // Retour
