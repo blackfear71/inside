@@ -25,9 +25,9 @@ $(window).on('load', function()
     $('.menu_portail').masonry({
       // Options
       itemSelector: '.lien_portail',
-      columnWidth: 500,
+      columnWidth: 250,
       fitWidth: true,
-      gutter: 20,
+      gutter: 10,
       horizontalOrder: true
     });
 

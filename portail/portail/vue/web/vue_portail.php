@@ -108,9 +108,14 @@
               foreach ($portail as $lienPortail)
               {
                 echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
-                  echo '<div class="text_portail">' . $lienPortail['categorie'] . '</div>';
-                  echo '<div class="fond_lien_portail">';
-                    echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="img_lien_portail" />';
+                  // Logo
+                  echo '<div class="zone_image_portail">';
+                    echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="image_lien_portail" />';
+                  echo '</div>';
+
+                  // Titre
+                  echo '<div class="zone_texte_portail">';
+                    echo '<div class="texte_portail">' . $lienPortail['categorie'] . '</div>';
                   echo '</div>';
                 echo '</a>';
               }
