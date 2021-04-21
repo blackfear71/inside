@@ -351,7 +351,7 @@
           if (empty($fraisAchat))
             $fraisAchat = 0;
 
-          if ($montantUser != 0)
+          if (!empty($fraisAchat) AND $montantUser != 0)
             $fraisUser = $fraisAchat / $nombresParts['nombre_users'];
           else
             $fraisUser = 0;

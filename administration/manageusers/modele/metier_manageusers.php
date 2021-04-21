@@ -215,7 +215,7 @@
           $montantUserDes = $nombreParts['utilisateur'];
 
           // Calcul de la répartition des frais
-          if ($montantUserDes != 0)
+          if (!empty($expense->getPrice()) AND $montantUserDes != 0)
             $fraisUserDes = $expense->getPrice() / $nombreParts['nombreUtilisateurs'];
           else
             $fraisUserDes = 0;
