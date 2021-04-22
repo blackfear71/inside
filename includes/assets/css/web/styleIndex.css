@@ -1,115 +1,82 @@
 /*************/
 /*** Index ***/
 /*************/
-/*** Zones ***/
-.article_index
-{
-	overflow: hidden;
-}
 
-.zone_index
-{
-	width: 60%;
-	height: 600px;
-	box-shadow: 0 0 3px #7c7c7c;
-	border-radius: 2px;
-	overflow: hidden;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: calc(50vh - 320px);
-}
-
-.zone_index_left
-{
-	display: inline-block;
-	width: calc(100% - 400px);
-	height: 700px;
-	background-color: #ff1937;
-	vertical-align: top;
-}
-
-.zone_index_right
-{
-	display: inline-block;
-	width: 400px;
-	background-color: white;
-	vertical-align: top;
-}
-
-/*** Partie gauche ***/
-.zone_logo_index
-{
-	height: 540px;
-}
-
-.logo_index
-{
-	display: block;
-	max-height: 520px;
-	max-width: calc(100% - 20px);
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.zone_logos
-{
-	display: block;
-	text-align: center;
-	vertical-align: bottom;
-	margin-top: -10px;
-}
-
-.zone_logo_categories
-{
-	display: inline-block;
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-	margin: 0 5px 10px 5px;
-	text-align: center;
-}
-
+/*** Logos ***/
 .logo_categories
 {
-	height: 30px;
-	width: 30px;
-	margin-top: 10px;
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	margin-top: 20px;
+	margin-right: 20px;
 }
 
-/*** Texte ***/
-.zone_texte_index
+/*** Boutons ***/
+.zone_liens_index
 {
-	height: 540px;
-	line-height: 540px;
-	overflow-y: auto;
+	display: block;
+	margin-left: 140px;
 }
 
-.texte_index
+.lien_index
 {
 	display: inline-block;
-	vertical-align: middle;
-	padding: 20px;
-	line-height: 1.5;
+	vertical-align: top;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 80px;
+	line-height: 80px;
+	background-color: #262626;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
-	font-size: 150%;
-	text-align: justify;
+	text-align: center;
+	cursor: pointer;
+	word-wrap: break-word;
 }
 
-/*** Connexion ***/
-.zone_form_index
+.lien_index:hover
 {
-	height: 520px;
-	line-height: 520px;
+	background-color: #1b1b1b;
+}
+
+.lien_index_selected
+{
+	background-color: #1b1b1b;
+}
+
+/*** Formulaires ***/
+.zone_index
+{
+	position: absolute;
+	top: calc(50% + 15px);
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 30px;
+	text-align: center;
+	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #e3e3e3;
+	border-radius: 2px;
+}
+
+.avatar_index
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 120px;
+	padding: 20px;
+	background-color: #262626;
+	border-radius: 50%;
+	margin-bottom: 30px;
 }
 
 .form_index
 {
-	display: inline-block;
-	width: 80%;
-	margin-left: 10%;
-	vertical-align: middle;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
 }
 
 .monoligne_index
@@ -119,19 +86,25 @@
 	padding: 5px 10px 5px 10px;
 	margin-bottom: 30px;
 	border: 0;
-	border-bottom: solid 2px #d3d3d3;
+	border-bottom: solid 2px #c3c3c3;
 	background-color: transparent;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	font-size: 100%;
+	background-color: white;
+}
+
+.zone_boutons_index
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .bouton_index
 {
-	display: block;
+	display: inline-block;
 	padding: 5px 20px 5px 20px;
-	margin-left: auto;
-	margin-right: auto;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 100%;
@@ -139,6 +112,7 @@
 	background-color: #ff1937;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
+	vertical-align: middle;
 	cursor: pointer;
 }
 
@@ -147,25 +121,84 @@
 	background-color: #c81932;
 }
 
-/*** Boutons ***/
-.zone_boutons_index
-{
-	display: block;
-}
-
-.lien_index
+.lien_bouton_index
 {
 	display: inline-block;
-	width: 50%;
-	line-height: 80px;
-	background-color: #e3e3e3;
+	vertical-align: middle;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+.image_bouton_index
+{
+	display: block;
+	height: 30px;
+}
+
+/*** Aide ***/
+.zone_aide_index
+{
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	text-align: left;
+	padding: 10px;
+	border-radius: 2px;
+	background-color: white;
+	box-shadow: 0 0 3px #7c7c7c;
+	z-index: 10;
+}
+
+.zone_titre_aide_index
+{
+	display: block;
+	margin-bottom: 10px;
+}
+
+.image_aide_index
+{
+	display: inline-block;
+	vertical-align: middle;
+	height: 30px;
+	margin-right: 10px;
+}
+
+.titre_aide_index
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
+	font-size: 120%;
+}
+
+.texte_aide_index
+{
+	display: block;
+	width: 100%;
+	text-align: justify;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
-	text-align: center;
+	font-size: 100%;
+}
+
+.bouton_aide_index
+{
+	float: right;
+	margin-top: 10px;
+	background-color: #ff1937;
+	padding: 5px 10px 5px 10px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	font-size: 100%;
+	border-radius: 2px;
 	cursor: pointer;
 }
 
-.lien_index:hover
+.bouton_aide_index:hover
 {
-	background-color: #d3d3d3;
+	background-color: #c81932;
 }

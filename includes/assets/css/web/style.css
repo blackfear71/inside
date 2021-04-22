@@ -258,7 +258,7 @@ section:not(.section_index):not(.section_no_nav)
 	padding-bottom: 110px;
 }
 
-article:not(.article_index)
+article
 {
 	width: calc(100% - 15%);
 	margin-left: auto;

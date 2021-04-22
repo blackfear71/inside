@@ -442,7 +442,7 @@ function resetCelsius()
 
     setTimeout(function()
     {
-      // Prise en compte de la vraiation d'échelle : on remet Celsius à la bonne taille de manière cachée pour calculer ensuite les coordonnées correctes pour les cookies
+      // Prise en compte de la variation d'échelle : on remet Celsius à la bonne taille de manière cachée pour calculer ensuite les coordonnées correctes pour les cookies
       $('.celsius').css('visibility', 'hidden');
       $('.celsius').css('transform', 'scale(1)');
 

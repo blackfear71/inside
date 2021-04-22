@@ -12,91 +12,127 @@ $(function()
   adaptIndex();
 
   /*** Actions au clic ***/
-  // Affiche la zone d'inscription + focus
-  $('#afficherInscription').click(function()
-  {
-    var showButton;
-    var hideButton = 'afficherInscription';
-    var showForm   = 'formInscription';
-    var hideForm;
-    var showText   = 'texteInscription';
-    var hideText;
-    var focus      = 'focus_identifiant_2';
-
-    if ($('#afficherConnexion').css('display') == 'none')
-    {
-      showButton = 'afficherConnexion';
-      hideForm   = 'formConnexion';
-      hideText   = 'logo';
-    }
-    else
-    {
-      showButton = 'afficherPassword';
-      hideForm   = 'formPassword';
-      hideText   = 'textePassword';
-    }
-
-    switchIndex(showButton, hideButton);
-    switchIndex(showForm, hideForm, focus);
-    switchIndex(showText, hideText);
-  });
-
   // Affiche la zone de connexion + focus
   $('#afficherConnexion').click(function()
   {
-    var showButton;
+    var linkSelected = 'afficherConnexion';
+    var showForm     = 'formConnexion';
     var hideForm;
-    var hideButton = 'afficherConnexion';
-    var showForm   = 'formConnexion';
-    var showText   = 'logo';
+    var showText     = '';
     var hideText;
-    var focus      = 'focus_identifiant';
+    var focus        = 'focus_identifiant';
 
-    if ($('#afficherInscription').css('display') == 'none')
+    if ($('#formPassword').css('display') == 'none')
     {
-      showButton = 'afficherInscription';
-      hideForm   = 'formInscription';
-      hideText   = 'texteInscription';
+      hideForm = 'formInscription';
+      hideText = 'texteInscription';
     }
     else
     {
-      showButton = 'afficherPassword';
-      hideForm   = 'formPassword';
-      hideText   = 'textePassword';
+      hideForm = 'formPassword';
+      hideText = 'textePassword';
     }
 
-    switchIndex(showButton, hideButton);
+    // Changement d'onglet
     switchIndex(showForm, hideForm, focus);
     switchIndex(showText, hideText);
+
+    // Sélection du lien
+    selectionLien(linkSelected);
+
+    // Fermeture des aides
+    afficherMasquerPopUp('aideInscription', true);
+    afficherMasquerPopUp('aidePassword', true);
+  });
+
+  // Affiche la zone d'inscription + focus
+  $('#afficherInscription').click(function()
+  {
+    var linkSelected = 'afficherInscription';
+    var showForm     = 'formInscription';
+    var hideForm;
+    var showText     = 'texteInscription';
+    var hideText;
+    var focus        = 'focus_identifiant_2';
+
+    if ($('#formPassword').css('display') == 'none')
+    {
+      hideForm = 'formConnexion';
+      hideText = '';
+    }
+    else
+    {
+      hideForm = 'formPassword';
+      hideText = 'textePassword';
+    }
+
+    // Changement d'onglet
+    switchIndex(showForm, hideForm, focus);
+    switchIndex(showText, hideText);
+
+    // Sélection du lien
+    selectionLien(linkSelected);
+
+    // Fermeture des aides
+    afficherMasquerPopUp('aideInscription', true);
+    afficherMasquerPopUp('aidePassword', true);
   });
 
   // Affiche la zone de réinitialisation mot de passe + focus
   $('#afficherPassword').click(function()
   {
-    var showButton;
+    var linkSelected = 'afficherPassword';
+    var showForm     = 'formPassword';
     var hideForm;
-    var hideButton = 'afficherPassword';
-    var showForm   = 'formPassword';
-    var showText   = 'textePassword';
+    var showText     = 'textePassword';
     var hideText;
-    var focus      = 'focus_identifiant_3';
+    var focus        = 'focus_identifiant_3';
 
-    if ($('#afficherInscription').css('display') == 'none')
+    if ($('#formConnexion').css('display') == 'none')
     {
-      showButton = 'afficherInscription';
-      hideForm   = 'formInscription';
-      hideText   = 'texteInscription';
+      hideForm = 'formInscription';
+      hideText = 'texteInscription';
     }
     else
     {
-      showButton = 'afficherConnexion';
-      hideForm   = 'formConnexion';
-      hideText   = 'logo';
+      hideForm = 'formConnexion';
+      hideText = '';
     }
 
-    switchIndex(showButton, hideButton);
+    // Changement d'onglet
     switchIndex(showForm, hideForm, focus);
     switchIndex(showText, hideText);
+
+    // Sélection du lien
+    selectionLien(linkSelected);
+
+    // Fermeture des aides
+    afficherMasquerPopUp('aideInscription', true);
+    afficherMasquerPopUp('aidePassword', true);
+  });
+
+  // Affiche l'aide d'inscription
+  $('#afficherAideInscription').click(function()
+  {
+    afficherMasquerPopUp('aideInscription', false);
+  });
+
+  // Masque l'aide d'inscription
+  $('#fermerAideInscription').click(function()
+  {
+    afficherMasquerPopUp('aideInscription', false);
+  });
+
+  // Affiche l'aide de changement de mot de passe
+  $('#afficherAidePassword').click(function()
+  {
+    afficherMasquerPopUp('aidePassword', false);
+  });
+
+  // Masque l'aide de changement de mot de passe
+  $('#fermerAidePassword').click(function()
+  {
+    afficherMasquerPopUp('aidePassword', false);
   });
 
   /*** Actions au changement ***/
@@ -117,6 +153,33 @@ $(window).resize(function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Adaptations de l'index sur mobile
+function adaptIndex()
+{
+  if ($(window).width() < 1480)
+  {
+    $('.lien_index').css('display', 'block');
+    $('.lien_index').css('width', '150px');
+    $('.lien_index').css('height', 'calc(80px / 3)');
+    $('.lien_index').css('line-height', 'calc(80px / 3)');
+
+    $('.logo_categories').css('width', '30px');
+    $('.logo_categories').css('height', '30px');
+    $('.logo_categories').css('margin-top', '25px');
+  }
+  else
+  {
+    $('.lien_index').css('display', 'inline-block');
+    $('.lien_index').css('width', 'unset');
+    $('.lien_index').css('height', '80px');
+    $('.lien_index').css('line-height', '80px');
+
+    $('.logo_categories').css('width', '40px');
+    $('.logo_categories').css('height', '40px');
+    $('.logo_categories').css('margin-top', '20px');
+  }
+}
+
 // Transforme le contenu d'un champ en majuscules
 function identifiantMajuscule(champ)
 {
@@ -131,41 +194,134 @@ function identifiantMajuscule(champ)
 // Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)
 function switchIndex(idOpen, idClose, focus = null)
 {
-  $('#' + idClose).fadeOut(200, function()
+  if (idOpen == '')
   {
-    $('#' + idOpen).fadeIn(200, function()
+    $('#' + idClose).fadeOut(200, function()
     {
       if (focus != null)
         $('#' + focus).focus();
     });
-  });
-}
-
-// Adaptations de l'index sur mobile
-function adaptIndex()
-{
-  if ($(window).width() < 1480)
+  }
+  else if (idClose == '')
   {
-    $('.texte_index').css('font-size', '100%');
-
-    $('.zone_logo_categories').css('width', '25px');
-    $('.zone_logo_categories').css('height', '25px');
-    $('.zone_logo_categories').css('margin-bottom', '5px');
-
-    $('.logo_categories').css('width', '20px');
-    $('.logo_categories').css('height', '20px');
-    $('.logo_categories').css('margin-top', '2.5px');
+    $('#' + idOpen).delay(200).fadeIn(200, function()
+    {
+      if (focus != null)
+        $('#' + focus).focus();
+    });
   }
   else
   {
-    $('.texte_index').css('font-size', '150%');
+    $('#' + idClose).fadeOut(200, function()
+    {
+      $('#' + idOpen).fadeIn(200, function()
+      {
+        if (focus != null)
+          $('#' + focus).focus();
+      });
+    });
+  }
+}
 
-    $('.zone_logo_categories').css('width', '50px');
-    $('.zone_logo_categories').css('height', '50px');
-    $('.zone_logo_categories').css('margin-bottom', '10px');
+// Affiche ou masque la pop-up d'aide
+function afficherMasquerPopUp(id, forceClose)
+{
+  // Affichage en tenant compte du forçage
+  if ($('#' + id).css('display') == 'none' && forceClose != true)
+  {
+    // Intialisation de l'animation
+    $('#' + id).css('transform', 'scale(0) translate(-50%, -50%)');
+    $('#' + id).css('transform-origin', 'left top');
+    $('#' + id).css('top', '50%');
+    $('#' + id).css('left', '50%');
+    $('#' + id).css('transition', 'transform 0.2s ease');
 
-    $('.logo_categories').css('width', '30px');
-    $('.logo_categories').css('height', '30px');
-    $('.logo_categories').css('margin-top', '10px');
+    // Animation de l'échelle
+    setTimeout(function()
+    {
+      $('#' + id).css('transform', 'scale(1.2) translate(-50%, -50%)');
+      $('#' + id).css('transform-origin', 'left top');
+      $('#' + id).css('top', '50%');
+      $('#' + id).css('left', '50%');
+      $('#' + id).css('transition', 'transform 0.2s ease');
+
+      // Apparition progressive de la zone
+      $('#' + id).fadeIn({queue: false, duration: 300});
+
+      setTimeout(function()
+      {
+        $('#' + id).css('transform', 'scale(1) translate(-50%, -50%)');
+        $('#' + id).css('transform-origin', 'left top');
+        $('#' + id).css('top', '50%');
+        $('#' + id).css('left', '50%');
+        $('#' + id).css('transition', 'transform 0.2s ease');
+      }, 200);
+    }, 100);
+  }
+  else
+  {
+    // Masquage en tenant compte du forçage
+    if ($('#' + id).css('display') != 'none')
+    {
+      // Intialisation de l'animation
+      $('#' + id).css('transform', 'scale(1) translate(-50%, -50%)');
+      $('#' + id).css('transform-origin', 'left top');
+      $('#' + id).css('top', '50%');
+      $('#' + id).css('left', '50%');
+      $('#' + id).css('transition', 'transform 0.2s ease');
+
+      // Animation de l'échelle
+      setTimeout(function()
+      {
+        $('#' + id).css('transform', 'scale(1.2) translate(-50%, -50%)');
+        $('#' + id).css('transform-origin', 'left top');
+        $('#' + id).css('top', '50%');
+        $('#' + id).css('left', '50%');
+        $('#' + id).css('transition', 'transform 0.2s ease');
+
+        // Disparition progressive de la zone
+        $('#' + id).fadeOut({queue: false, duration: 400});
+
+        setTimeout(function()
+        {
+          $('#' + id).css('transform', 'scale(0) translate(-50%, -50%)');
+          $('#' + id).css('transform-origin', 'left top');
+          $('#' + id).css('top', '50%');
+          $('#' + id).css('left', '50%');
+          $('#' + id).css('transition', 'transform 0.2s ease');
+        }, 200);
+      }, 100);
+    }
+  }
+}
+
+// Sélectionne un lien dans les onglets
+function selectionLien(lien)
+{
+  switch (lien)
+  {
+    case 'afficherConnexion':
+      $('#afficherConnexion').addClass('lien_index_selected');
+      $('#afficherInscription').removeClass('lien_index_selected');
+      $('#afficherPassword').removeClass('lien_index_selected');
+      break;
+
+    case 'afficherInscription':
+      $('#afficherConnexion').removeClass('lien_index_selected');
+      $('#afficherInscription').addClass('lien_index_selected');
+      $('#afficherPassword').removeClass('lien_index_selected');
+      break;
+
+    case 'afficherPassword':
+      $('#afficherConnexion').removeClass('lien_index_selected');
+      $('#afficherInscription').removeClass('lien_index_selected');
+      $('#afficherPassword').addClass('lien_index_selected');
+      break;
+
+    default:
+      $('#afficherConnexion').removeClass('lien_index_selected');
+      $('#afficherInscription').removeClass('lien_index_selected');
+      $('#afficherPassword').removeClass('lien_index_selected');
+      break;
   }
 }
