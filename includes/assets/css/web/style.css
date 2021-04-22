@@ -235,18 +235,13 @@ body
 	background-repeat: repeat, repeat;
 }
 
-section:not(.section_index):not(.section_no_nav)
+section:not(.section_no_nav)
 {
 	width: 100%;
 	min-height: calc(100vh - 320px); /*marges = header + onglets + footer + padding*/
 	height: 100%;
 	padding-top: 30px;
 	padding-bottom: 110px;
-}
-
-.section_index
-{
-	min-height: calc(100vh - 40px); /*marges = footer*/
 }
 
 .section_no_nav

@@ -218,9 +218,9 @@ function changeTheme(background, header, footer, logo)
 {
   if (background != null)
   {
-    $('section:not(.section_index)').css('background-image', 'url(' + background + ')');
-    $('section:not(.section_index)').css('background-repeat', 'repeat-y');
-    $('section:not(.section_index)').css('background-size', '100%');
+    $('section').css('background-image', 'url(' + background + ')');
+    $('section').css('background-repeat', 'repeat-y');
+    $('section').css('background-size', '100%');
   }
 
   if (header != null)
