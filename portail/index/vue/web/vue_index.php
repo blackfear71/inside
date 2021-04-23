@@ -71,54 +71,78 @@
 
           // Formulaires
           echo '<div class="zone_index">';
-            // Avatar
-            echo '<img src="includes/icons/common/profile.png" alt="profile" class="avatar_index" />';
-
             // Connexion
             if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
-              echo '<form method="post" action="index.php?action=doConnecter" id="formConnexion" class="form_index" style="display: none;">';
+              echo '<div id="formConnexion" class="zone_form_index" style="display: none;"';
             else
-              echo '<form method="post" action="index.php?action=doConnecter" id="formConnexion" class="form_index">';
-              echo '<input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne_index" id="focus_identifiant" required />';
-              echo '<input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
-
-              echo '<div class="zone_boutons_index">';
-                echo '<input type="submit" name="connect" value="CONNEXION" class="bouton_index" />';
+              echo '<div id="formConnexion" class="zone_form_index">';
+              // Logo
+              echo '<div class="zone_logo_index">';
+                echo '<img src="includes/icons/common/profile.png" alt="profile" class="logo_index" />';
               echo '</div>';
-            echo '</form>';
+
+              // Formulaire
+              echo '<form method="post" action="index.php?action=doConnecter" class="form_index">';
+                echo '<input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne_index" id="focus_identifiant" required />';
+                echo '<input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
+
+                // Boutons
+                echo '<div class="zone_boutons_index">';
+                  echo '<input type="submit" name="connect" value="CONNEXION" class="bouton_index" />';
+                echo '</div>';
+              echo '</form>';
+            echo '</div>';
 
             // Inscription
             if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
-              echo '<form method="post" action="index.php?action=doDemanderInscription" id="formInscription" class="form_index">';
+              echo '<div id="formInscription" class="zone_form_index">';
             else
-              echo '<form method="post" action="index.php?action=doDemanderInscription" id="formInscription" class="form_index" style="display: none;">';
-              echo '<input type="text" name="trigramme" value="' . $_SESSION['save']['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_2" required />';
-              echo '<input type="text" name="pseudo" value="' . $_SESSION['save']['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
-              echo '<input type="password" name="password" value="' . $_SESSION['save']['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
-              echo '<input type="password" name="confirm_password" value="' . $_SESSION['save']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
-
-              echo '<div class="zone_boutons_index">';
-                echo '<input type="submit" name="ask_inscription" value="INSCRIPTION" class="bouton_index" />';
-                echo '<a id="afficherAideInscription" class="lien_bouton_index">';
-                  echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';
-                echo '</a>';
+              echo '<div id="formInscription" class="zone_form_index" style="display: none;">';
+              // Logo
+              echo '<div class="zone_logo_index">';
+                echo '<img src="includes/icons/index/users.png" alt="users" class="logo_index" />';
               echo '</div>';
-            echo '</form>';
+
+              // Formulaire
+              echo '<form method="post" action="index.php?action=doDemanderInscription" class="form_index">';
+                echo '<input type="text" name="trigramme" value="' . $_SESSION['save']['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_2" required />';
+                echo '<input type="text" name="pseudo" value="' . $_SESSION['save']['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
+                echo '<input type="password" name="password" value="' . $_SESSION['save']['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
+                echo '<input type="password" name="confirm_password" value="' . $_SESSION['save']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
+
+                // Boutons
+                echo '<div class="zone_boutons_index">';
+                  echo '<input type="submit" name="ask_inscription" value="INSCRIPTION" class="bouton_index" />';
+                  echo '<a id="afficherAideInscription" class="lien_bouton_index">';
+                    echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';
+                  echo '</a>';
+                echo '</div>';
+              echo '</form>';
+            echo '</div>';
 
             // Réinitialisation mot de passe
             if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
-              echo '<form method="post" action="index.php?action=doDemanderMdp" id="formPassword" class="form_index">';
+              echo '<div id="formPassword" class="zone_form_index">';
             else
-              echo '<form method="post" action="index.php?action=doDemanderMdp" id="formPassword" class="form_index" style="display: none;">';
-              echo '<input type="text" name="login" value="' . $_SESSION['save']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_3" required />';
-
-              echo '<div class="zone_boutons_index">';
-                echo '<input type="submit" name="ask_password" value="MOT DE PASSE" class="bouton_index" />';
-                echo '<a id="afficherAidePassword" class="lien_bouton_index">';
-                  echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';
-                echo '</a>';
+              echo '<div id="formPassword" class="zone_form_index" style="display: none;">';
+              // Logo
+              echo '<div class="zone_logo_index">';
+                echo '<img src="includes/icons/index/lock.png" alt="lock" class="logo_index margin_top_moins_20" />';
               echo '</div>';
-            echo '</form>';
+
+              // Formulaire
+              echo '<form method="post" action="index.php?action=doDemanderMdp" class="form_index">';
+                echo '<input type="text" name="login" value="' . $_SESSION['save']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_3" required />';
+
+                // Boutons
+                echo '<div class="zone_boutons_index">';
+                  echo '<input type="submit" name="ask_password" value="MOT DE PASSE" class="bouton_index" />';
+                  echo '<a id="afficherAidePassword" class="lien_bouton_index">';
+                    echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';
+                  echo '</a>';
+                echo '</div>';
+              echo '</form>';
+            echo '</div>';
           echo '</div>';
         ?>
 			</article>
