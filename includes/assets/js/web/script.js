@@ -102,12 +102,6 @@ $(function()
     executeAction(action_form, 'validate');
   });
 
-  // Déployer menu latéral
-  $('#menuLateral').click(function()
-  {
-    deployLeftMenu('left_menu', 'icon_menu_m', 'icon_menu_e', 'icon_menu_n', 'icon_menu_u');
-  });
-
   // Fermeture zoom succès
   $(document).on('click', '#closeZoomSuccess', function()
   {
@@ -186,30 +180,81 @@ function masquerSupprimerIdWithDelay(id)
   });
 }
 
-// Affiche ou masque le menu latéral gauche + rotation icône menu
-function deployLeftMenu(id, icon1, icon2, icon3, icon4)
+// Affiche ou masque une pop-up
+function afficherMasquerPopUp(id, forceClose)
 {
-  $('#' + id).css('transition', 'all ease 0.4s');
-  $('#' + icon1).css('transition', 'all ease 0.2s');
-  $('#' + icon2).css('transition', 'all ease 0.2s');
-  $('#' + icon3).css('transition', 'all ease 0.2s');
-  $('#' + icon4).css('transition', 'all ease 0.2s');
-
-  if ($('#' + id).css('margin-left') != '0px')
+  // Affichage en tenant compte du forçage
+  if ($('#' + id).css('display') == 'none' && forceClose != true)
   {
-    $('#' + id).css('margin-left', '0px');
-    $('#' + icon1).css('transform', 'rotateZ(90deg)');
-    $('#' + icon2).css('opacity', '1');
-    $('#' + icon3).css('opacity', '1');
-    $('#' + icon4).css('opacity', '1');
+    // Intialisation de l'animation
+    $('#' + id).css('transform', 'scale(0) translate(-50%, -50%)');
+    $('#' + id).css('transform-origin', 'left top');
+    $('#' + id).css('top', '50%');
+    $('#' + id).css('left', '50%');
+    $('#' + id).css('transition', 'transform 0.2s ease');
+
+    // Affichage du fond
+    $('#' + id).parent().fadeIn({queue: false, duration: 300});
+
+    // Animation de l'échelle
+    setTimeout(function()
+    {
+      $('#' + id).css('transform', 'scale(1.2) translate(-50%, -50%)');
+      $('#' + id).css('transform-origin', 'left top');
+      $('#' + id).css('top', '50%');
+      $('#' + id).css('left', '50%');
+      $('#' + id).css('transition', 'transform 0.2s ease');
+
+      // Apparition progressive de la zone
+      $('#' + id).fadeIn({queue: false, duration: 300});
+
+      setTimeout(function()
+      {
+        $('#' + id).css('transform', 'scale(1) translate(-50%, -50%)');
+        $('#' + id).css('transform-origin', 'left top');
+        $('#' + id).css('top', '50%');
+        $('#' + id).css('left', '50%');
+        $('#' + id).css('transition', 'transform 0.2s ease');
+      }, 200);
+    }, 100);
   }
   else
   {
-    $('#' + id).css('margin-left', '-83px');
-    $('#' + icon1).css('transform', 'rotateZ(0deg)');
-    $('#' + icon2).css('opacity', '0');
-    $('#' + icon3).css('opacity', '0');
-    $('#' + icon4).css('opacity', '0');
+    // Masquage en tenant compte du forçage
+    if ($('#' + id).css('display') != 'none')
+    {
+      // Intialisation de l'animation
+      $('#' + id).css('transform', 'scale(1) translate(-50%, -50%)');
+      $('#' + id).css('transform-origin', 'left top');
+      $('#' + id).css('top', '50%');
+      $('#' + id).css('left', '50%');
+      $('#' + id).css('transition', 'transform 0.2s ease');
+
+      // Masquage du fond
+      $('#' + id).parent().fadeOut({queue: false, duration: 300});
+
+      // Animation de l'échelle
+      setTimeout(function()
+      {
+        $('#' + id).css('transform', 'scale(1.2) translate(-50%, -50%)');
+        $('#' + id).css('transform-origin', 'left top');
+        $('#' + id).css('top', '50%');
+        $('#' + id).css('left', '50%');
+        $('#' + id).css('transition', 'transform 0.2s ease');
+
+        // Disparition progressive de la zone
+        $('#' + id).fadeOut({queue: false, duration: 400});
+
+        setTimeout(function()
+        {
+          $('#' + id).css('transform', 'scale(0) translate(-50%, -50%)');
+          $('#' + id).css('transform-origin', 'left top');
+          $('#' + id).css('top', '50%');
+          $('#' + id).css('left', '50%');
+          $('#' + id).css('transition', 'transform 0.2s ease');
+        }, 200);
+      }, 100);
+    }
   }
 }
 
