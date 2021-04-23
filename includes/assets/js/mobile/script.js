@@ -89,7 +89,7 @@ $(function()
   });
 
   // Bouton fermer alerte
-  $('#boutonFermerAlerte').click(function()
+  $('#fermerAlerte').click(function()
   {
     masquerSupprimerIdWithDelay('alerte');
   });

@@ -33,15 +33,15 @@
         <?php
 
           // Message d'aide inscription
-          echo '<div id="alerte" class="fond_alerte" style="display: none;">';
-            echo '<div id="aideInscription" class="zone_aide_index">';
+          echo '<div class="fond_alerte">';
+            echo '<div id="aideInscription" class="zone_affichage_alerte">';
               // Titre
-              echo '<div class="zone_titre_aide_index">';
-                echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" class="image_aide_index" />';
-                echo '<div class="titre_aide_index">Pour votre inscription</div>';
+              echo '<div class="zone_titre_alerte">';
+                echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" class="image_alerte" />';
+                echo '<div class="titre_alerte">Pour votre inscription</div>';
               echo '</div>';
 
-              // Contenu
+              // Affichage du message
               echo '<div class="texte_aide_index">';
                 echo 'Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu\'un mot de passe.
                 Celui-ci sera directement crypté afin de garantir la sécurité de l\'accès. Une demande sera envoyée à l\'administrateur qui validera
@@ -49,20 +49,20 @@
               echo '</div>';
 
               // Bouton
-              echo '<a id="fermerAideInscription" class="bouton_aide_index">Fermer</a>';
+              echo '<a id="fermerAideInscription" class="bouton_alerte">Fermer</a>';
             echo '</div>';
           echo '</div>';
 
           // Message d'aide changement de mot de passe
-          echo '<div id="alerte" class="fond_alerte" style="display: none;">';
-            echo '<div id="aidePassword" class="zone_aide_index">';
+          echo '<div class="fond_alerte">';
+            echo '<div id="aidePassword" class="zone_affichage_alerte">';
               // Titre
-              echo '<div class="zone_titre_aide_index">';
-                echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" class="image_aide_index" />';
-                echo '<div class="titre_aide_index">Réinitialiser un mot de passe</div>';
+              echo '<div class="zone_titre_alerte">';
+                echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" class="image_alerte" />';
+                echo '<div class="titre_alerte">Réinitialiser un mot de passe</div>';
               echo '</div>';
 
-              // Contenu
+              // Affichage du message
               echo '<div class="texte_aide_index">';
                 echo 'Si vous avez perdu votre mot de passe, vous pouvez effectuer une demande de réinitialisation du mot de passe à l\'administrateur via le formulaire ci-dessous.
                 L\'administrateur est suceptible de vous contacter directement afin de vérifier votre demande. Il vous suffit de renseigner votre identifiant afin que celui-ci
@@ -70,7 +70,7 @@
               echo '</div>';
 
               // Bouton
-              echo '<a id="fermerAidePassword" class="bouton_aide_index">Fermer</a>';
+              echo '<a id="fermerAidePassword" class="bouton_alerte">Fermer</a>';
             echo '</div>';
           echo '</div>';
 

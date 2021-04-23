@@ -111,26 +111,14 @@ $(function()
     afficherMasquerPopUp('aidePassword', true);
   });
 
-  // Affiche l'aide d'inscription
-  $('#afficherAideInscription').click(function()
+  // Affiche ou masque l'aide d'inscription
+  $('#afficherAideInscription, #fermerAideInscription').click(function()
   {
     afficherMasquerPopUp('aideInscription', false);
   });
 
-  // Masque l'aide d'inscription
-  $('#fermerAideInscription').click(function()
-  {
-    afficherMasquerPopUp('aideInscription', false);
-  });
-
-  // Affiche l'aide de changement de mot de passe
-  $('#afficherAidePassword').click(function()
-  {
-    afficherMasquerPopUp('aidePassword', false);
-  });
-
-  // Masque l'aide de changement de mot de passe
-  $('#fermerAidePassword').click(function()
+  // Affiche ou masque l'aide de changement de mot de passe
+  $('#afficherAidePassword, #fermerAidePassword').click(function()
   {
     afficherMasquerPopUp('aidePassword', false);
   });
