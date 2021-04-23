@@ -730,6 +730,7 @@ aside
 /*** Alertes ***/
 .fond_alerte
 {
+	display: none;
 	background-color: rgb(0, 0, 0, 0.5);
 	position: fixed;
 	z-index: 15;
@@ -737,52 +738,63 @@ aside
 	top: 0;
 	width: 100%;
 	height: 100%;
+	overflow: auto;
 }
 
 .zone_affichage_alerte
 {
-	display: inline-block;
-	line-height: 100%;
-	margin-left: 5%;
-	vertical-align: middle;
-	width: 90%;
-	overflow: hidden;
-	border-radius: 0.5vh;
+	display: none;
 	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(90% - 4vh);
+	text-align: left;
+	padding: 2vh;
+	border-radius: 0.5vh;
+	background-color: white;
+	z-index: 10;
+}
+
+.zone_titre_alerte
+{
+	display: block;
+	padding-bottom: 2vh;
+	margin-bottom: 1vh;
+	border-bottom: solid 0.3vh #d3d3d3;
+}
+
+.image_alerte
+{
+	display: inline-block;
+	vertical-align: middle;
+	height: 5vh;
+	margin-right: 1vh;
 }
 
 .titre_alerte
 {
-	display: block;
-	line-height: 7vh;
-	background-color: #ff1937;
-	width: calc(100% - 5vh);
-	padding-left: 2.5vh;
-	padding-right: 2.5vh;
+	display: inline-block;
+	vertical-align: middle;
 	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
 	font-size: 3vh;
-	color: white;
-	border-bottom: solid 0.3vh #c81932;
 }
 
 .zone_alertes
 {
-	width: calc(100% - 3vh);
+	display: block;
+	width: 100%;
 	max-height: 70vh;
 	overflow: hidden;
 	overflow-y: auto;
-	background-color: #ff1937;
-	border-top: solid 0.1vh #ff4961;
-	padding: 1.6vh 2vh 0 1vh;
 }
 
 .zone_texte_alerte
 {
 	display: block;
 	width: 100%;
-	line-height: 3vh;
+	margin-top: 1vh;
 }
 
 .logo_alerte
@@ -791,47 +803,35 @@ aside
 	vertical-align: top;
 	height: 4vh;
 	width: 4vh;
-	margin-right: 1vh;
+	margin-right: 2vh;
 }
 
 .texte_alerte
 {
 	display: inline-block;
-	padding-top: 0.4vh;
-	padding-bottom: 2vh;
-	width: calc(100% - 5vh);
+	width: calc(100% - 6vh);
 	vertical-align: top;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 2.5vh;
 	text-align: justify;
-	color: white;
-}
-
-.zone_boutons_alerte
-{
-	width: 100%;
-	height: 5vh;
-	padding-top: 1vh;
-	padding-bottom: 1vh;
-	background-color: white;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 100%;
 }
 
 .bouton_alerte
 {
 	float: right;
+	margin-top: 2vh;
+	margin-left: 2vh;
 	width: 25vw;
-	height: 4vh;
-	margin-top: 0.5vh;
-	line-height: 4vh;
-	margin-right: 3vw;
 	background-color: #ff1937;
-	text-decoration: none;
-	text-align: center;
-	border-radius: 0.5vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 	font-family: robotolight, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
+	text-align: center;
+	border-radius: 0.5vh;
+	cursor: pointer;
 }
 
 .bouton_alerte:active

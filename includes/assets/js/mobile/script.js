@@ -23,6 +23,10 @@ $(function()
   updatePing();
   majPing = setInterval(updatePing, 60000);
 
+  // Affichage des alertes
+  if ($('#alerte').length)
+    afficherMasquerPopUp('alerte', false);
+
   /*** Actions au clic ***/
   // Ouverture menu latéral gauche
   $('#deployAsidePortail').click(function()
@@ -91,7 +95,7 @@ $(function()
   // Bouton fermer alerte
   $('#fermerAlerte').click(function()
   {
-    masquerSupprimerIdWithDelay('alerte');
+    afficherMasquerPopUp('alerte', false);
   });
 
   // Messages de confirmation
@@ -723,6 +727,84 @@ function masquerSupprimerIdWithDelay(id)
   });
 }
 
+// Affiche ou masque une pop-up
+function afficherMasquerPopUp(id, forceClose)
+{
+  // Affichage en tenant compte du forçage
+  if ($('#' + id).css('display') == 'none' && forceClose != true)
+  {
+    // Intialisation de l'animation
+    $('#' + id).css('transform', 'scale(0) translate(-50%, -50%)');
+    $('#' + id).css('transform-origin', 'left top');
+    $('#' + id).css('top', '50%');
+    $('#' + id).css('left', '50%');
+    $('#' + id).css('transition', 'transform 0.2s ease');
+
+    // Affichage du fond
+    $('#' + id).parent().fadeIn({queue: false, duration: 300});
+
+    // Animation de l'échelle
+    setTimeout(function()
+    {
+      $('#' + id).css('transform', 'scale(1.2) translate(-50%, -50%)');
+      $('#' + id).css('transform-origin', 'left top');
+      $('#' + id).css('top', '50%');
+      $('#' + id).css('left', '50%');
+      $('#' + id).css('transition', 'transform 0.2s ease');
+
+      // Apparition progressive de la zone
+      $('#' + id).fadeIn({queue: false, duration: 300});
+
+      setTimeout(function()
+      {
+        $('#' + id).css('transform', 'scale(1) translate(-50%, -50%)');
+        $('#' + id).css('transform-origin', 'left top');
+        $('#' + id).css('top', '50%');
+        $('#' + id).css('left', '50%');
+        $('#' + id).css('transition', 'transform 0.2s ease');
+      }, 200);
+    }, 100);
+  }
+  else
+  {
+    // Masquage en tenant compte du forçage
+    if ($('#' + id).css('display') != 'none')
+    {
+      // Intialisation de l'animation
+      $('#' + id).css('transform', 'scale(1) translate(-50%, -50%)');
+      $('#' + id).css('transform-origin', 'left top');
+      $('#' + id).css('top', '50%');
+      $('#' + id).css('left', '50%');
+      $('#' + id).css('transition', 'transform 0.2s ease');
+
+      // Masquage du fond
+      $('#' + id).parent().fadeOut({queue: false, duration: 300});
+
+      // Animation de l'échelle
+      setTimeout(function()
+      {
+        $('#' + id).css('transform', 'scale(1.2) translate(-50%, -50%)');
+        $('#' + id).css('transform-origin', 'left top');
+        $('#' + id).css('top', '50%');
+        $('#' + id).css('left', '50%');
+        $('#' + id).css('transition', 'transform 0.2s ease');
+
+        // Disparition progressive de la zone
+        $('#' + id).fadeOut({queue: false, duration: 400});
+
+        setTimeout(function()
+        {
+          $('#' + id).css('transform', 'scale(0) translate(-50%, -50%)');
+          $('#' + id).css('transform-origin', 'left top');
+          $('#' + id).css('top', '50%');
+          $('#' + id).css('left', '50%');
+          $('#' + id).css('transition', 'transform 0.2s ease');
+        }, 200);
+      }, 100);
+    }
+  }
+}
+
 // Ouvre une zone sous un titre
 function openSection(titre, zone, forcage)
 {
@@ -822,23 +904,26 @@ function deployerMenuUser()
 function confirmAction(form, message)
 {
   // Suppression fenêtre éventuellement existante
-  if ($('#confirmBox').length)
-    $('#confirmBox').remove();
+  if ($('.fond_alerte').length)
+    $('.fond_alerte').remove();
 
   // Génération nouvelle fenêtre de confirmation
   var html = '';
 
-  html += '<div class="fond_alerte" id="confirmBox" style="display: none;">';
-    html += '<div class="zone_affichage_alerte">';
+  html += '<div class="fond_alerte">';
+    html += '<div class="zone_affichage_alerte" id="confirmBox">';
       html += '<input type="hidden" id="actionForm" value="' + form + '" />';
 
-      html += '<div class="titre_alerte">';
-        html += 'Inside';
-      html += '</div>';
+      // Titre
+      html +=  '<div class="zone_titre_alerte">';
+        html +=  '<img src="/inside/includes/icons/common/inside_grey.png" alt="inside_grey" class="image_alerte" />';
+        html +=  '<div class="titre_alerte">Inside - Confirmation</div>';
+      html +=  '</div>';
 
+      // Affichage du message
       html += '<div class="zone_alertes">';
         html += '<div class="zone_texte_alerte">';
-          html += '<img src="/inside/includes/icons/common/question.png" alt="question" title="Confirmer ?" class="logo_alerte" />';
+          html += '<img src="/inside/includes/icons/common/question_grey.png" alt="question_grey" title="Confirmer ?" class="logo_alerte" />';
 
           html += '<div class="texte_alerte">';
             html += message;
@@ -846,10 +931,9 @@ function confirmAction(form, message)
         html += '</div>';
       html += '</div>';
 
-      html += '<div class="zone_boutons_alerte">';
-        html += '<a id="boutonAnnuler" class="bouton_alerte">Annuler</a>';
-        html += '<a id="boutonConfirmer" class="bouton_alerte">Oui</a>';
-      html += '</div>';
+      // Boutons
+      html += '<a id="boutonAnnuler" class="bouton_alerte">Annuler</a>';
+      html += '<a id="boutonConfirmer" class="bouton_alerte">Oui</a>';
     html += '</div>';
   html += '</div>';
 
@@ -857,14 +941,14 @@ function confirmAction(form, message)
   $('body').append(html);
 
   // Affichage de la fenêtre de confirmation
-  afficherMasquerIdWithDelay('confirmBox');
+  afficherMasquerPopUp('confirmBox');
 }
 
 // Ferme la fenêtre ou execute le formulaire
 function executeAction(form, action)
 {
   if (action == 'cancel')
-    masquerSupprimerIdWithDelay('confirmBox');
+    afficherMasquerPopUp('confirmBox');
   else
     $('#' + form).submit();
 }
