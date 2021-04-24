@@ -288,7 +288,7 @@
 
   // DATE : Calcule la durée en jours entre 2 dates pour une mission
   // RETOUR : Ecart
-  function ecartDatesEvent($dateDeb, $dateFin)
+  function ecartDatesMission($dateDeb, $dateFin)
   {
     // Calcul de l'écart
     $date1 = strtotime($dateDeb);

@@ -84,9 +84,12 @@
           if ($success->getUnicity() != 'Y')
           {
             if ($success->getValue_user() <= 0)
-              echo '<meter min="0" max="' . $success->getLimit_success() . '" value="0" class="progression_succes"></meter>';
+              echo '<div class="fond_progression_succes"><div class="progression_succes" style="width: 0%;"></div></div>';
             elseif ($success->getValue_user() < $success->getLimit_success())
-              echo '<meter min="0" max="' . $success->getLimit_success() . '" value="' . $success->getValue_user() . '" class="progression_succes"></meter>';
+            {
+              $poucentageSucces = ($success->getValue_user() * 100) / $success->getLimit_success();
+              echo '<div class="fond_progression_succes"><div class="progression_succes" style="width: ' . $poucentageSucces . '%;"></div></div>';
+            }
           }
 
         if ($success->getValue_user() >= $success->getLimit_success())

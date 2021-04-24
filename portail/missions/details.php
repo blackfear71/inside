@@ -40,8 +40,8 @@
           // Récupération des participants
           $participants = getParticipants($_GET['id_mission']);
 
-          // Récupération du tableau d'avancement de l'utilisateur (quotidien et évènement)
-          $missionUser = getMissionUser($_GET['id_mission'], $_SESSION['user']['identifiant']);
+          // Récupération des pourcentages d'avancement de l'utilisateur (quotidien et évènement)
+          $missionUser = getMissionUser($detailsMission, $_GET['id_mission'], $_SESSION['user']['identifiant']);
 
           // Récupération des résultats
           if (date('Ymd') > $detailsMission->getDate_fin())
@@ -69,8 +69,10 @@
           Profile::secureData($participant);
         }
 
-        $missionUser['daily'] = htmlspecialchars($missionUser['daily']);
-        $missionUser['event'] = htmlspecialchars($missionUser['event']);
+        $missionUser['daily']         = htmlspecialchars($missionUser['daily']);
+        $missionUser['event']         = htmlspecialchars($missionUser['event']);
+        $missionUser['daily_percent'] = htmlspecialchars($missionUser['daily_percent']);
+        $missionUser['event_percent'] = htmlspecialchars($missionUser['event_percent']);
 
         if (date('Ymd') > $detailsMission->getDate_fin())
         {

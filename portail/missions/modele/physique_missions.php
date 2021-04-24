@@ -125,8 +125,10 @@
   function physiqueAvancementMission($idMission, $identifiant)
   {
     // Initialisations
-    $avancement = array('daily' => 0,
-                        'event' => 0
+    $avancement = array('daily'         => 0,
+                        'event'         => 0,
+                        'daily_percent' => 0,
+                        'event_percent' => 0
                        );
 
     // Requête

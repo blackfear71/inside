@@ -109,11 +109,19 @@
   }
 
   // METIER : Lecture de l'avancement de l'utilisateur (quotidien et évènement)
-  // RETOUR : Tableau d'avancement
-  function getMissionUser($idMission, $identifiant)
+  // RETOUR : Tableau des pourcentages d'avancement
+  function getMissionUser($detailsMission, $idMission, $identifiant)
   {
     // Récupération de l'avancement d'une mission
     $avancement = physiqueAvancementMission($idMission, $identifiant);
+
+    // Calcul de l'objectif total en fonction du nombre de jours de la mission
+    $nombreJoursMission = ecartDatesMission($detailsMission->getDate_deb(), $detailsMission->getDate_fin());
+    $objectifTotal      = $detailsMission->getObjectif() * $nombreJoursMission;
+
+    // Calcul de l'avancement en pourcentages
+    $avancement['daily_percent'] = ($avancement['daily'] * 100) / $detailsMission->getObjectif();
+    $avancement['event_percent'] = ($avancement['event'] * 100) / $objectifTotal;
 
     // Retour
     return $avancement;

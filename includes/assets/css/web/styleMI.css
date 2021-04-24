@@ -287,25 +287,27 @@
 	margin-bottom: -10px;
 }
 
-.progression_details_mission
+.fond_avancement_mission
 {
 	display: inline-block;
-	height: 20px;
 	vertical-align: middle;
+	background-color: white;
+	height: 20px;
 	width: calc(100% - 50px);
 	border-radius: 20px;
-	background: white;
 	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
+  overflow: hidden;
 }
 
-.progression_details_mission::-moz-meter-bar
+.avancement_mission
 {
-  background: #ff1937;
+	display: block;
+	height: 100%;
+	background-color: #ff1937;
 	border-radius: 20px;
 }
 
-.score_details_mission
+.score_avancement_mission
 {
 	display: inline-block;
 	margin-left: 20px;

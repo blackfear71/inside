@@ -231,8 +231,8 @@
                   echo '</div>';
 
                   echo '<div class="barre_info_details_mission">';
-                    echo '<meter min="0" max="' . $detailsMission->getObjectif() . '" value="' . $missionUser['daily'] . '" class="progression_details_mission"></meter>';
-                    echo '<div class="score_details_mission">' . $missionUser['daily'] . '</div>';
+                    echo '<div class="fond_avancement_mission"><div class="avancement_mission" style="width: ' . $missionUser['daily_percent'] . '%;"></div></div>';
+                    echo '<div class="score_avancement_mission">' . $missionUser['daily'] . '</div>';
                   echo '</div>';
                 echo '</div>';
               }
@@ -246,11 +246,8 @@
                 echo '</div>';
 
                 echo '<div class="barre_info_details_mission">';
-                  $nombreJoursEvent = ecartDatesEvent($detailsMission->getDate_deb(), $detailsMission->getDate_fin());
-                  $objectifTotal    = $detailsMission->getObjectif() * $nombreJoursEvent;
-
-                  echo '<meter min="0" max="' . $objectifTotal . '" value="' . $missionUser['event'] . '" class="progression_details_mission"></meter>';
-                  echo '<div class="score_details_mission">' . $missionUser['event'] . '</div>';
+                  echo '<div class="fond_avancement_mission"><div class="avancement_mission" style="width: ' . $missionUser['event_percent'] . '%;"></div></div>';
+                  echo '<div class="score_avancement_mission">' . $missionUser['event'] . '</div>';
                 echo '</div>';
               echo '</div>';
 

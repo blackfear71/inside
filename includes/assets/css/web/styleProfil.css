@@ -628,18 +628,22 @@
 	color: #262626;
 }
 
-.progression_succes
+.fond_progression_succes
 {
+	display: block;
+	margin-top: 10px;
+	background-color: white;
 	height: 5px;
 	width: 100%;
-	margin-top: 10px;
 	border-radius: 5px;
-	background: white;
+  overflow: hidden;
 }
 
-.progression_succes::-moz-meter-bar
+.progression_succes
 {
-	background: #ff1937;
+	display: block;
+	height: 100%;
+	background-color: #ff1937;
 	border-radius: 5px;
 }
 
