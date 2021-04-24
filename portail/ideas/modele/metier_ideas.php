@@ -7,7 +7,6 @@
   function getPages($view, $identifiant)
   {
     // Initialisations
-    $nombrePages   = 0;
     $nombreParPage = 18;
 
     // Récupération du nombre d'idées en fonction de la vue

@@ -179,14 +179,7 @@ $(window).on('load', function()
   {
     $('.zone_profil_contributions').masonry().masonry('destroy');
 
-    $('.zone_profil_contributions').masonry({
-      // Options
-      itemSelector: '.zone_contributions',
-      columnWidth: 360,
-      fitWidth: true,
-      gutter: 40,
-      horizontalOrder: true
-    });
+    initMasonry();
 
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_profil_contributions').addClass('masonry');

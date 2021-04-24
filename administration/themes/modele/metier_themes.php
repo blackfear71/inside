@@ -43,6 +43,7 @@
   function insertTheme($post, $files)
   {
     // Initialisations
+    $idTheme    = NULL;
     $control_ok = true;
 
     // Récupération des données

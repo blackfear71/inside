@@ -242,6 +242,7 @@
   function insertFilm($post, $identifiant)
   {
     // Initialisations
+    $idFilm     = NULL;
     $control_ok = true;
 
     // Récupération des données

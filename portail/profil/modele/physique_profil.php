@@ -436,9 +436,6 @@
   // RETOUR : Date
   function physiqueDateFinMission($reference)
   {
-    // Initialisation
-    $dateFinMission = '';
-
     // Requête
     global $bdd;
 

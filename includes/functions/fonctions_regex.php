@@ -187,8 +187,6 @@
 	function formatCollector($collector)
 	{
 		// Filtrage des caractères
-		$formatted = '';
-
 		$search    = array('[', ']');
 		$replace   = array('<strong>', '</strong>');
 		$formatted = str_replace($search, $replace, $collector);
@@ -202,8 +200,6 @@
 	function unformatCollector($collector)
 	{
 		// Filtrage des caractères
-		$unformatted = '';
-
 		$search      = array('[', ']');
 		$replace     = array('', '');
 		$unformatted = str_replace($search, $replace, $collector);

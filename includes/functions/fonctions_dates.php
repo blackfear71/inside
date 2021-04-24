@@ -290,9 +290,6 @@
   // RETOUR : Ecart
   function ecartDatesEvent($dateDeb, $dateFin)
   {
-    // Initialisations
-    $ecart = 0;
-
     // Calcul de l'écart
     $date1 = strtotime($dateDeb);
     $date2 = strtotime($dateFin);

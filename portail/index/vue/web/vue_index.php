@@ -31,7 +31,6 @@
 
 			<article>
         <?php
-
           // Message d'aide inscription
           echo '<div class="fond_alerte">';
             echo '<div id="aideInscription" class="zone_affichage_alerte">';

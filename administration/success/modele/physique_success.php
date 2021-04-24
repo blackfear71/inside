@@ -396,9 +396,6 @@
   // RETOUR : Date de sortie film
   function physiqueDateSortieFilm($idFilm)
   {
-    // Initialisations
-    $dateSortie = '';
-
     // Requête
     global $bdd;
 

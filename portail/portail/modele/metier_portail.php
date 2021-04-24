@@ -333,7 +333,6 @@
   function numeroPageCollector($idCollector)
   {
     // Initialisations
-    $numeroPage    = 0;
     $nombreParPage = 18;
 
     // Calcul de la position en base

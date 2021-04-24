@@ -366,14 +366,11 @@ function initialisationModification(idDepense, year, filter)
     titre = 'Modifier la dépense';
   }
 
-  // Date du jour
-  var date = formatDateForDisplay(depense['date']);
-
   // Sous-titre
   if (parts.length == 0)
-    sousTitre = 'Régularisation du ' + date;
+    sousTitre = 'Régularisation du ' + formatDateForDisplay(depense['date']);
   else
-    sousTitre = 'Dépense du ' + date;
+    sousTitre = 'Dépense du ' + formatDateForDisplay(depense['date']);
 
   // Acheteur
   var buyer = depense['buyer'];
@@ -385,7 +382,7 @@ function initialisationModification(idDepense, year, filter)
     price = formatAmountForDisplay(depense['price'], false);
 
   // Date
-  var date = depense['date'].substr(0, 4) + '-' + depense['date'].substr(4, 2) + '-' + depense['date'].substr(6, 2);
+  var date = formatDateForDisplayMobile(depense['date']);
 
   // Commentaire
   var comment = depense['comment'];

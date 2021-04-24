@@ -84,7 +84,8 @@
   function insertRestaurant($post, $files, $identifiant)
   {
     // Initialisations
-    $control_ok = true;
+    $idRestaurant = NULL;
+    $control_ok   = true;
 
     // Récupération des données
     $nomRestaurant          = $post['name_restaurant'];

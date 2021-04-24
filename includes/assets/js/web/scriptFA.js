@@ -44,7 +44,7 @@ $(function()
     var idListbox = 'zone_listbox_horaire_' + num;
 
     afficherMasquerIdNoDelay(idBouton);
-    afficherListboxHoraires(idListbox, idBouton, 'create', '');
+    afficherListboxHoraires(idListbox, 'create', '');
   });
 
   // Affiche la saisie transports restaurant
@@ -147,7 +147,7 @@ $(function()
     var idListbox = 'zone_update_listbox_horaire_' + num;
 
     afficherMasquerIdNoDelay(idBouton);
-    afficherListboxHoraires(idListbox, idBouton, 'update', num);
+    afficherListboxHoraires(idListbox, 'update', num);
   });
 
   // Masque la modification de l'horaire d'un choix
@@ -668,7 +668,7 @@ function cacherListboxRestaurants(zone, bouton)
 }
 
 // Affiche les listbox des horaires
-function afficherListboxHoraires(id, zone, type, idChoix)
+function afficherListboxHoraires(id, type, idChoix)
 {
   var html = '';
   var num;
@@ -697,7 +697,6 @@ function afficherListboxHoraires(id, zone, type, idChoix)
   var idSelectH = 'select_heures_' + num;
   var idSelectM = 'select_minutes_' + num;
   var idAnnuler = 'annuler_horaires_' + num;
-  var idZone    = zone;
 
   html += '<select id="' + idSelectH + '" name="' + nameSelectH + '" class="' + classListbox + '">';
     for (var i = 11; i < 14; i++)

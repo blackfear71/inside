@@ -552,7 +552,7 @@ function loadFile(event, id, rotation)
       output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
     });
   }
-};
+}
 
 // Ouvre une fenêtre de confirmation
 function confirmAction(form, message)

@@ -377,7 +377,7 @@ function loadFile(event, id, rotation)
       output.setAttribute('style', 'transform: rotate(' + degrees + 'deg)');
     });
   }
-};
+}
 
 // Initialisation de la position Celsius
 function initPositionCelsius()

@@ -33,6 +33,7 @@
   function insertAlert($post)
   {
     // Initialisations
+    $idAlerte   = NULL;
     $control_ok = true;
 
     // Récupération des données

@@ -107,9 +107,6 @@
   // RETOUR : Avancement mission
   function physiqueAvancementMissionUser($idMission, $identifiant)
   {
-    // Initialisations
-    $listeMissions = array();
-
     // Requête
     global $bdd;
 

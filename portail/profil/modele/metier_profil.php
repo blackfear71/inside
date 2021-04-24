@@ -391,9 +391,6 @@
   // RETOUR : Liste des succès et déblocages
   function getSuccess($identifiant, $listeUsers)
   {
-    // Initialisations
-    $listeSuccess = array();
-
     // Création tableau de correspondance identifiant / pseudo / avatar
     $tableauUsers = array();
 

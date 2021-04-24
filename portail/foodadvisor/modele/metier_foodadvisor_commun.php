@@ -232,9 +232,6 @@
   // RETOUR : Participant pouvant appeler
   function getCallers($idRestaurant)
   {
-    // Initialisations
-    $caller = '';
-
     // Calcul des dates de la semaine
     $nombreJoursLundi    = 1 - date('N');
     $nombreJoursVendredi = 5 - date('N');

@@ -35,7 +35,6 @@
   function getNavigation($film)
   {
     // Initialisations
-    $listeNavigation = array();
     $boutonPrecedent = array('id' => '',
                              'film' => ''
                             );

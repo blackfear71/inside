@@ -875,9 +875,6 @@
   // RETOUR : Pseudo utilisateur
   function physiquePseudoUser($identifiant)
   {
-    // Initialisations
-    $pseudo = '';
-
     // Requête
     global $bdd;
 

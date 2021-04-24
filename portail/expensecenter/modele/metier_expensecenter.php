@@ -523,7 +523,10 @@
 
           // Si les parts ne concernent que des utilisateurs désinscrits, on sélectionne le premier
           if (empty($userEcart) AND $userFounded != true)
-            $userEcart = array_key_first($listeMontants);
+          {
+            reset($listeMontants);
+            $userEcart = key($listeMontants);
+          }
         }
 
         // Formatage de l'écart
@@ -1017,7 +1020,10 @@
 
           // Si les parts ne concernent que des utilisateurs désinscrits, on sélectionne le premier
           if (empty($userEcart) AND $userFounded != true)
-            $userEcart = array_key_first($newListeMontants);
+          {
+            reset($newListeMontants);
+            $userEcart = key($newListeMontants);
+          }
         }
 
         // Formatage de l'écart

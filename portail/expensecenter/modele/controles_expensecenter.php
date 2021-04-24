@@ -35,7 +35,6 @@
   {
     // Initialisations
     $control_ok     = true;
-    $dateAControler = '';
 
     // Contrôle
     if ($isMobile == true)

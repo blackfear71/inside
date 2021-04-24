@@ -148,7 +148,6 @@
   function subscribe($post)
   {
     // Initialisations
-    $listeUsers = array();
     $control_ok = true;
 
     // Récupération des données

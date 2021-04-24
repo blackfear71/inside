@@ -345,9 +345,6 @@ function updateExpense(idDepense, year, filter)
   // Réduction
   var reduction = '';
 
-  // Date
-  var date = depense['date'].substr(6, 2) + '/' + depense['date'].substr(4, 2) + '/' + depense['date'].substr(0, 4);
-
   // Commentaire
   var comment = depense['comment'];
 

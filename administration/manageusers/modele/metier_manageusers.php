@@ -32,9 +32,6 @@
   // RETOUR : Liste des utilisateurs désinscrits
   function getUsersDes($listeUsersIns)
   {
-    // Initialisations
-    $listeUsersDes = array();
-
     // Récupération des identifiants dans les films
     $listeUsersFilms = physiqueIdentifiantsFilms();
 
