@@ -125,93 +125,6 @@
     return $generatorParameters;
   }
 
-  // METIER : Formate le fichier Contrôleur
-  // RETOUR : Fichier Contrôleur
-  function getControler($generatorParameters)
-  {
-    // Initialisations
-    $nomFonctionnel = trim($generatorParameters->getNom_section());
-    $nomTechnique   = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
-
-    // On met les options dans un tableau associatif
-    $options = array();
-
-    foreach ($generatorParameters->getOptions() as $generatorOption)
-    {
-      $options[$generatorOption->getOption()] = $generatorOption;
-    }
-
-    // Données du fichier
-    $file           = 'templates/controler.php';
-    $controler      = array('filename' => $nomTechnique . '.php',
-                            'content'  => file_get_contents($file)
-                           );
-
-    // Nom section
-    $lengthName = strlen($nomFonctionnel);
-
-    $controler = str_replace('/*******************', '/' . str_repeat('*', $lengthName + 7), $controler);
-    $controler = str_replace('section_name', $nomFonctionnel, $controler);
-    $controler = str_replace('********************', str_repeat('*', $lengthName + 8), $controler);
-    $controler = str_replace('*******************/', str_repeat('*', $lengthName + 7) . '/', $controler);
-
-    // Titre fonctions communes
-    if ($options['common']->getChecked() == 'Y' OR $options['dates']->getChecked() == 'Y' OR $options['regex']->getChecked() == 'Y')
-      $controler = str_replace('/*title_common*/', '
-  // Fonctions communes', $controler);
-    else
-      $controler = str_replace('/*title_common*/
-  /*common_functions*/', '', $controler);
-
-    // Fonctions communes
-    if ($options['common']->getChecked() == 'Y')
-      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/metier_commun.php\');
-  include_once(\'../../includes/functions/physique_commun.php\');
-  /*common_functions*/', $controler);
-
-    // Fonctions dates
-    if ($options['dates']->getChecked() == 'Y')
-      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_dates.php\');
-  /*common_functions*/', $controler);
-
-    // Fonctions regex
-    if ($options['regex']->getChecked() == 'Y')
-      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_regex.php\');
-', $controler);
-
-    // Suppression balise
-    $controler = str_replace('/*common_functions*/', '', $controler);
-
-    // Contrôles
-    if ($options['admin']->getChecked() == 'Y')
-    {
-      $controler = str_replace('/*title_controls*/', '// Contrôles communs Administrateur', $controler);
-      $controler = str_replace('/*control_function*/', 'controlsAdmin();', $controler);
-    }
-    else
-    {
-      $controler = str_replace('/*title_controls*/', '// Contrôles communs Utilisateur', $controler);
-      $controler = str_replace('/*control_function*/', 'controlsUser();', $controler);
-    }
-
-    // Appels métier
-    $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nomTechnique . '.php\');
-  include_once(\'modele/controles_' . $nomTechnique . '.php\');
-  include_once(\'modele/physique_' . $nomTechnique . '.php\');', $controler);
-
-    // Contrôle action URL renseignée
-    $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nomTechnique . '.php?action=goConsulter\');', $controler);
-
-    // Redirection affichage
-    if ($options['mobile']->getChecked() == 'Y')
-      $controler = str_replace('/*include_view*/', 'include_once(\'vue/\' . $_SESSION[\'index\'][\'plateforme\'] . \'/vue_' . $nomTechnique . '.php\');', $controler);
-    else
-      $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nomTechnique . '.php\');', $controler);
-
-    // Retour
-    return $controler;
-  }
-
   // METIER : Formate le fichier Métier
   // RETOUR : Fichier Métier
   function getMetier($generatorParameters)
@@ -428,5 +341,107 @@
 
     // Retour
     return $vue;
+  }
+
+  // METIER : Formate le fichier Contrôleur
+  // RETOUR : Fichier Contrôleur
+  function getControler($generatorParameters)
+  {
+    // Initialisations
+    $nomFonctionnel = trim($generatorParameters->getNom_section());
+    $nomTechnique   = str_replace(' ', '_', trim($generatorParameters->getNom_technique()));
+
+    // On met les options dans un tableau associatif
+    $options = array();
+
+    foreach ($generatorParameters->getOptions() as $generatorOption)
+    {
+      $options[$generatorOption->getOption()] = $generatorOption;
+    }
+
+    // Données du fichier
+    $file           = 'templates/controler.php';
+    $controler      = array('filename' => $nomTechnique . '.php',
+                            'content'  => file_get_contents($file)
+                           );
+
+    // Nom section
+    $lengthName = strlen($nomFonctionnel);
+
+    $controler = str_replace('/*******************', '/' . str_repeat('*', $lengthName + 7), $controler);
+    $controler = str_replace('section_name', $nomFonctionnel, $controler);
+    $controler = str_replace('********************', str_repeat('*', $lengthName + 8), $controler);
+    $controler = str_replace('*******************/', str_repeat('*', $lengthName + 7) . '/', $controler);
+
+    // Titre fonctions communes
+    if ($options['common']->getChecked() == 'Y' OR $options['dates']->getChecked() == 'Y' OR $options['regex']->getChecked() == 'Y')
+      $controler = str_replace('/*title_common*/', '
+  // Fonctions communes', $controler);
+    else
+      $controler = str_replace('/*title_common*/
+  /*common_functions*/', '', $controler);
+
+    // Fonctions communes
+    if ($options['common']->getChecked() == 'Y')
+      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/metier_commun.php\');
+  include_once(\'../../includes/functions/physique_commun.php\');
+  /*common_functions*/', $controler);
+
+    // Fonctions dates
+    if ($options['dates']->getChecked() == 'Y')
+      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_dates.php\');
+  /*common_functions*/', $controler);
+
+    // Fonctions regex
+    if ($options['regex']->getChecked() == 'Y')
+      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_regex.php\');
+', $controler);
+
+    // Suppression balise
+    $controler = str_replace('/*common_functions*/', '', $controler);
+
+    // Contrôles
+    if ($options['admin']->getChecked() == 'Y')
+    {
+      $controler = str_replace('/*title_controls*/', '// Contrôles communs Administrateur', $controler);
+      $controler = str_replace('/*control_function*/', 'controlsAdmin();', $controler);
+    }
+    else
+    {
+      $controler = str_replace('/*title_controls*/', '// Contrôles communs Utilisateur', $controler);
+      $controler = str_replace('/*control_function*/', 'controlsUser();', $controler);
+    }
+
+    // Appels métier
+    $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nomTechnique . '.php\');
+  include_once(\'modele/controles_' . $nomTechnique . '.php\');
+  include_once(\'modele/physique_' . $nomTechnique . '.php\');', $controler);
+
+    // Contrôle action URL renseignée
+    $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nomTechnique . '.php?action=goConsulter\');', $controler);
+
+    // Redirection affichage
+    if ($options['mobile']->getChecked() == 'Y')
+      $controler = str_replace('/*include_view*/', 'include_once(\'vue/\' . $_SESSION[\'index\'][\'plateforme\'] . \'/vue_' . $nomTechnique . '.php\');', $controler);
+    else
+      $controler = str_replace('/*include_view*/', 'include_once(\'vue/vue_' . $nomTechnique . '.php\');', $controler);
+
+    // Retour
+    return $controler;
+  }
+
+  // METIER : Formate le fichier Javascript
+  // RETOUR : Fichier Javascript
+  function getJavascript($generatorParameters)
+  {
+    // Initialisations
+    $nomScriptSpecifique = str_replace(' ', '_', trim($generatorParameters->getScript_specifique()));
+    $file                = 'templates/script.js';
+    $javascript          = array('filename' => $nomScriptSpecifique . '.js',
+                                 'content'  => file_get_contents($file)
+                                );
+
+    // Retour
+    return $javascript;
   }
 ?>

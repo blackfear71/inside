@@ -150,7 +150,7 @@ $(function()
   {
     loadFile(event, 'image_collector', true);
   });
-  
+
   // Affiche la saisie "Autre" (phrase culte)
   $('#speaker').on('change', function()
   {
@@ -164,9 +164,6 @@ $(function()
   });
 });
 
-/**************/
-/*** Scroll ***/
-/**************/
 // Au chargement du document complet
 $(window).on('load', function()
 {

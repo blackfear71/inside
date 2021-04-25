@@ -175,7 +175,7 @@ $(function()
     masquerSupprimerIdWithDelay('zoom_succes');
   });
 
-  /*** Actions du clavier ***/
+  /*** Actions à la saisie ***/
   // Filtre la recherche
   $('.input_recherche_live').keyup(function()
 	{

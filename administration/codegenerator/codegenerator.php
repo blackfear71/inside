@@ -29,11 +29,14 @@
         $generatorParameters = getGenerator($_SESSION['generator']);
 
         // Récupération des fichiers générés
-        $controler = getControler($generatorParameters);
         $metier    = getMetier($generatorParameters);
         $controles = getControles($generatorParameters);
         $physique  = getPhysique($generatorParameters);
         $listeVues = getVues($generatorParameters);
+        $controler = getControler($generatorParameters);
+
+        if (!empty($generatorParameters->getScript_specifique()))
+          $javascript = getJavascript($generatorParameters);
       }
       break;
 
@@ -54,9 +57,6 @@
     case 'goConsulter':
       GeneratorParameters::secureData($generatorParameters);
 
-      if (isset($controler))
-        $controler['content'] = htmlspecialchars($controler['content']);
-
       if (isset($metier))
         $metier['content'] = htmlspecialchars($metier['content']);
 
@@ -66,9 +66,17 @@
       if (isset($physique))
         $physique['content'] = htmlspecialchars($physique['content']);
 
-      if (isset($vue))
-        $vue['content'] = htmlspecialchars($vue['content']);
+      if (isset($controler))
+        $controler['content'] = htmlspecialchars($controler['content']);
 
+      if (isset($listeVues))
+      {
+        $listeVues['vue_web']['content']    = htmlspecialchars($listeVues['vue_web']['content']);
+        $listeVues['vue_mobile']['content'] = htmlspecialchars($listeVues['vue_mobile']['content']);
+      }
+
+      if (isset($javascript))
+        $javascript['content'] = htmlspecialchars($javascript['content']);
       break;
 
     case 'generateCode':

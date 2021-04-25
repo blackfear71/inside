@@ -191,9 +191,6 @@ $(function()
   });
 });
 
-/**************/
-/*** Scroll ***/
-/**************/
 // Au chargement du document complet
 $(window).on('load', function()
 {

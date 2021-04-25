@@ -243,10 +243,31 @@
                   echo '</div>';
 
                   // Contenu du fichier
-                  echo '<textarea id="code_controler" class="code_generator_controler">';
+                  if (!empty($generatorParameters->getScript_specifique()))
+                    echo '<textarea id="code_controler" class="code_generator_controler_js">';
+                  else
+                    echo '<textarea id="code_controler" class="code_generator_controler">';
                     echo $controler['content'];
                   echo '</textarea>';
                 echo '</div>';
+
+                // Zone Javascript
+                if (!empty($generatorParameters->getScript_specifique()))
+                {
+                  echo '<div class="zone_code_generator">';
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Javascript : ' . $javascript['filename'];
+
+                      echo '<a id="javascript" class="copie_generator copyCode">Copier</a>';
+                    echo '</div>';
+
+                    // Contenu du fichier
+                    echo '<textarea id="code_javascript" class="code_generator_controler_js">';
+                      echo $javascript['content'];
+                    echo '</textarea>';
+                  echo '</div>';
+                }
               echo '</div>';
             echo '</div>';
           }
