@@ -144,7 +144,7 @@ $(window).resize(function()
 // Adaptations de l'index sur mobile
 function adaptIndex()
 {
-  if ($(window).width() < 1480)
+  if ($(window).width() < 1100)
   {
     $('.lien_index').css('display', 'block');
     $('.lien_index').css('width', '150px');
