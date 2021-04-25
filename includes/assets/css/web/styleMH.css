@@ -913,7 +913,7 @@
 	position: absolute;
 	top: 110px;
 	left: 0;
-	background-color: black;
+	background-color: #262626;
 }
 
 .bandeau_poster
@@ -937,14 +937,14 @@
 	position: relative;
 	z-index: 1;
 	text-align: center;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: robotomedium, Verdana, sans-serif;
 	font-size: 300%;
 	color: white;
 	height: 300px;
 	line-height: 50px;
 	margin-left: 10%;
 	margin-right: 10%;
-	text-shadow: 0 0 2px black;
+	text-shadow: 0 0 3px #262626;
 }
 
 .link_prev_movie_empty
@@ -1023,7 +1023,7 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
-	text-shadow: 0 0 1px black;
+	text-shadow: 0 0 3px #262626;
 }
 
 .link_prev_movie:hover ~ .titre_prev_movie
@@ -1045,7 +1045,7 @@
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
-	text-shadow: 0 0 1px black;
+	text-shadow: 0 0 3px #262626;
 }
 
 .link_next_movie:hover ~ .titre_next_movie
