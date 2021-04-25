@@ -512,11 +512,11 @@ header
 	display: inline-block;
 	vertical-align: middle;
 	margin-top: -4px;
-	max-width: calc(100% - 120px);
+	max-width: calc(100% - 110px);
 	max-height: 80px;
 	line-height: 20px;
 	padding-left: 20px;
-	padding-right: 20px;
+	padding-right: 10px;
 	font-family: robotolight, Verdana, sans-serif;
 	font-size: 100%;
 	color: #7c7c7c;
