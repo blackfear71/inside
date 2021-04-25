@@ -770,6 +770,11 @@
 	border: 0;
 }
 
+.bouton_saisie_rapide:active
+{
+	background-color: #b3b3b3;
+}
+
 /*** Saisie restaurant ***/
 .zone_image_saisie
 {
