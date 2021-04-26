@@ -183,7 +183,8 @@
   {
     // Initialisations
     $dimensionsTable = array('nombre_colonnes' => 0,
-                             'nombre_lignes'   => 0
+                             'nombre_lignes'   => 0,
+                             'colonnes'        => ''
                             );
 
     // Requête
@@ -194,6 +195,15 @@
 
     $dimensionsTable['nombre_colonnes'] = $req->columnCount();
     $dimensionsTable['nombre_lignes']   = $req->rowCount();
+
+    // Récupération des colonnes
+    for ($i = 0; $i < $dimensionsTable['nombre_colonnes']; $i++)
+    {
+      $dimensionsTable['colonnes'] .= '`' . $req->getColumnMeta($i)['name'] . '`';
+
+      if ($i < ($dimensionsTable['nombre_colonnes'] - 1))
+        $dimensionsTable['colonnes'] .= ', ';
+    }
 
     $req->closeCursor();
 
@@ -237,9 +247,9 @@
     {
       while ($data = $req->fetch())
       {
-        // On traite l'extraction par lots de 100 lignes
-        if ($lignesInserees == 0 || $lignesInserees % 100 == 0)
-          $contenu .= "\nINSERT INTO " . $table . ' VALUES';
+        // Si c'est la première ligne, on insère une instruction INSERT INTO)
+        if ($lignesInserees == 0)
+          $contenu .= "\nINSERT INTO `" . $table . '` (' . $dimensionsTable['colonnes'] . ') VALUES';
 
         // Parcours de chaque colonne d'une ligne
         $contenu .= "\n(";
@@ -265,8 +275,8 @@
 
         $contenu .= ')';
 
-        // Avant la 100ème ligne parcourue ou à la dernière ligne, on termine l'instruction INSERT INTO
-        if (($lignesInserees != 0 && ($lignesInserees + 1) % 100 == 0) || $lignesInserees + 1 == $dimensionsTable['nombre_lignes'])
+        // Si c'est la dernière ligne, on termine l'instruction INSERT INTO
+        if ($lignesInserees + 1 == $dimensionsTable['nombre_lignes'])
           $contenu .= ';';
         else
           $contenu .= ',';
