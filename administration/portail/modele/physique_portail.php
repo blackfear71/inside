@@ -254,10 +254,10 @@
             if ($j == 0)
               $contenu .= $data[$j];
             else
-              $contenu .= '"' . $data[$j] . '"';
+              $contenu .= '\'' . $data[$j] . '\'';
           }
           else
-            $contenu .= '""';
+            $contenu .= '\'\'';
 
           if ($j < ($dimensionsTable['nombre_colonnes'] - 1))
             $contenu .= ',';
