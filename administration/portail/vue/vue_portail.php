@@ -67,7 +67,7 @@
   					echo '</a>';
 
             // Sauvegarde BDD
-            echo '<form method="post" action="../../includes/functions/export_bdd.php" class="menu_link_admin">';
+            echo '<form method="post" action="portail.php?action=doExtract" class="menu_link_admin">';
               echo '<div class="menu_admin_box">';
                 echo '<div class="mask_admin"></div>';
                 echo '<div class="mask_admin_triangle"></div>';
@@ -77,6 +77,29 @@
                 echo '</div>';
               echo '</div>';
             echo '</form>';
+
+
+
+
+
+
+
+            // Sauvegarde BDD
+            echo '<form method="post" action="../../includes/functions/export_bdd.php" class="menu_link_admin">';
+              echo '<div class="menu_admin_box">';
+                echo '<div class="mask_admin"></div>';
+                echo '<div class="mask_admin_triangle"></div>';
+                echo '<input type="submit" name="export" value="Sauvegarde" class="export_bdd" />';
+                echo '<div class="title_admin">';
+                  echo '<div class="margin_top_60">BDD (OLD)</div>';
+                echo '</div>';
+              echo '</div>';
+            echo '</form>';
+
+
+
+
+
           echo '</div>';
         ?>
 			</article>

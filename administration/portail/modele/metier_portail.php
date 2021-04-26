@@ -173,4 +173,43 @@
     // Retour
     return $nombreEvolutions;
   }
+
+  // METIER : Extraction de la base de données
+  // RETOUR : Aucun
+  function extractBdd()
+  {
+    // Initialisations
+    $contenu = '';
+
+    // Récupération de la liste des tables à extraire
+    $tables = physiqueTablesBdd();
+
+    // Traitement d'extraction de chaque table
+    foreach ($tables as $table)
+    {
+      // Comptage du nomnbre de colonnes et de lignes
+      $dimensionsTable = physiqueDimensionsTable($table);
+
+      // Initialisation du contenu de la table (CREATE TABLE)
+      $contenu .= physiqueCreateTable($table);
+
+      // Récupération du contenu de chaque table
+      $contenu .= physiqueContenuTable($table, $dimensionsTable);
+
+      // Fin de la table
+      $contenu .= "\n\n\n";
+    }
+
+    // Génération nom du fichier
+    $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
+
+    // Génération du fichier
+    header('Content-Type: application/octet-stream');
+    header('Content-Transfer-Encoding: Binary');
+    header('Content-disposition: attachment; filename="' . $fileName . '"');
+
+    // Retour
+    echo $contenu;
+    exit;
+  }
 ?>

@@ -37,6 +37,10 @@
       $portail = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
       break;
 
+    case 'doExtract':
+      extractBdd();
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: portail.php?action=goConsulter');
@@ -58,6 +62,7 @@
       unset($lienPortail);
       break;
 
+    case 'doExtract':
     default:
       break;
   }
@@ -65,6 +70,9 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doExtract':
+      break;
+
     case 'goConsulter':
     default:
       include_once('vue/vue_portail.php');
