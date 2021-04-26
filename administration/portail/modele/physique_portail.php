@@ -256,7 +256,7 @@
 
         for ($j = 0; $j < $dimensionsTable['nombre_colonnes']; $j++)
         {
-          $data[$j] = str_replace("\n","\\n", addslashes($data[$j]));
+          $data[$j] = str_replace("\r\n","\\r\\n", addslashes($data[$j]));
 
           if (isset($data[$j]))
           {
