@@ -77,7 +77,7 @@
       $calendrier = Calendrier::withData($data);
 
       // Titre du calendrier
-      $calendrier->setTitle(formatMonthForDisplayStrong($calendrier->getMonth())) ;
+      $calendrier->setTitle(formatMonthForDisplayStrong($calendrier->getMonth()));
 
       // On ajoute la ligne au tableau
       array_push($listeCalendriers, $calendrier);
@@ -179,7 +179,7 @@
   {
     // Initialisations
     $newId = NULL;
-    
+
     // Requête
     global $bdd;
 

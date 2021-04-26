@@ -237,7 +237,7 @@
     {
       while ($data = $req->fetch())
       {
-        // Toutes les 100 lignes insérées
+        // On traite l'extraction par lots de 100 lignes
         if ($lignesInserees == 0 || $lignesInserees % 100 == 0)
           $contenu .= "\nINSERT INTO " . $table . ' VALUES';
 
@@ -249,7 +249,13 @@
           $data[$j] = str_replace("\n","\\n", addslashes($data[$j]));
 
           if (isset($data[$j]))
-            $contenu .= '"' . $data[$j] . '"' ;
+          {
+            // L'id reste au format numérique
+            if ($j == 0)
+              $contenu .= $data[$j];
+            else
+              $contenu .= '"' . $data[$j] . '"';
+          }
           else
             $contenu .= '""';
 
@@ -259,7 +265,7 @@
 
         $contenu .= ')';
 
-        // Avant la 100ème ligne parcourue ou à la dernière ligne
+        // Avant la 100ème ligne parcourue ou à la dernière ligne, on termine l'instruction INSERT INTO
         if (($lignesInserees != 0 && ($lignesInserees + 1) % 100 == 0) || $lignesInserees + 1 == $dimensionsTable['nombre_lignes'])
           $contenu .= ';';
         else
