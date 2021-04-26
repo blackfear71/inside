@@ -180,6 +180,28 @@
   {
     // Initialisations
     $contenu = '';
+    $semaine = array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim');
+    $mois    = array('Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre');
+
+    // Entête du fichier
+    $contenu .= '-- Inside SQL Dump
+--
+-- Généré le :  ' . $semaine[date('w')] . ' ' . date('d') . ' ' . $mois[date('n')] . ' ' . date('Y') . ' à '. date('H:i') . '
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `inside`
+--
+
+';
 
     // Récupération de la liste des tables à extraire
     $tables = physiqueTablesBdd();
@@ -190,14 +212,27 @@
       // Comptage du nomnbre de colonnes et de lignes
       $dimensionsTable = physiqueDimensionsTable($table);
 
+      // Entête de la table
+      $contenu .= '-- --------------------------------------------------------
+
+--
+-- Structure de la table `' . $table . '`
+--';
+
       // Initialisation du contenu de la table (CREATE TABLE)
       $contenu .= physiqueCreateTable($table);
+
+      // Description de la table
+      $contenu .= '--
+-- Contenu de la table `' . $table . '`
+--
+';
 
       // Récupération du contenu de chaque table
       $contenu .= physiqueContenuTable($table, $dimensionsTable);
 
       // Fin de la table
-      $contenu .= "\n\n\n";
+      $contenu .= "\n\n";
     }
 
     // Génération nom du fichier
