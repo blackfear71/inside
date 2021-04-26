@@ -184,7 +184,8 @@
     // Initialisations
     $dimensionsTable = array('nombre_colonnes' => 0,
                              'nombre_lignes'   => 0,
-                             'colonnes'        => ''
+                             'colonnes'        => '',
+                             'types'           => array()
                             );
 
     // Requête
@@ -196,13 +197,15 @@
     $dimensionsTable['nombre_colonnes'] = $req->columnCount();
     $dimensionsTable['nombre_lignes']   = $req->rowCount();
 
-    // Récupération des colonnes
+    // Récupération des colonnes et de leurs types
     for ($i = 0; $i < $dimensionsTable['nombre_colonnes']; $i++)
     {
       $dimensionsTable['colonnes'] .= '`' . $req->getColumnMeta($i)['name'] . '`';
 
       if ($i < ($dimensionsTable['nombre_colonnes'] - 1))
         $dimensionsTable['colonnes'] .= ', ';
+
+      array_push($dimensionsTable['types'], $req->getColumnMeta($i)['native_type']);
     }
 
     $req->closeCursor();
@@ -260,8 +263,8 @@
 
           if (isset($data[$j]))
           {
-            // L'id reste au format numérique
-            if ($j == 0)
+            // Les INT et FLOAT restent au format numérique
+            if ($dimensionsTable['types'][$j] == 'LONG' OR $dimensionsTable['types'][$j] == 'FLOAT')
               $contenu .= $data[$j];
             else
               $contenu .= '\'' . $data[$j] . '\'';
