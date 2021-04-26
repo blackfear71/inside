@@ -260,7 +260,7 @@
             $contenu .= '\'\'';
 
           if ($j < ($dimensionsTable['nombre_colonnes'] - 1))
-            $contenu .= ',';
+            $contenu .= ', ';
         }
 
         $contenu .= ')';
