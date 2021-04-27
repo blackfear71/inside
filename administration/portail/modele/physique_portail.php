@@ -280,7 +280,7 @@
 
         // Si c'est la dernière ligne, on termine l'instruction INSERT INTO
         if ($lignesInserees + 1 == $dimensionsTable['nombre_lignes'])
-          $contenu .= ';';
+          $contenu .= ";\n\n";
         else
           $contenu .= ',';
 

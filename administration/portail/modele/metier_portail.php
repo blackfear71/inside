@@ -230,13 +230,14 @@ SET time_zone = "+00:00";
 
       // Récupération du contenu de chaque table
       $contenu .= physiqueContenuTable($table, $dimensionsTable);
+    }
 
-      // Fin de la table
-      $contenu .= "
+    // Fin de la table
+    $contenu .= "
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;";
-    }
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+";
 
     // Génération nom du fichier
     $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
