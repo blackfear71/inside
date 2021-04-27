@@ -83,56 +83,58 @@
           /* Données de la page à générer */
           /********************************/
           echo '<div class="zone_generator_right">';
+            // Titre
             echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Données de la page à générer</div></div>';
-              // Paramétrage des données
-              echo '<form method="post" action="codegenerator.php?action=generateCode">';
-                // Nom fonctionnel
-                echo '<input type="text" name="nom_fonctionnel" placeholder="Nom de la section (à afficher)" value="' . $generatorParameters->getNom_section() . '" class="saisie_generator margin_right_20" required>';
 
-                // Nom technique
-                echo '<input type="text" name="nom_technique" placeholder="Nom technique (dossiers)" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
+            // Paramétrage des données
+            echo '<form method="post" action="codegenerator.php?action=generateCode">';
+              // Nom fonctionnel
+              echo '<input type="text" name="nom_fonctionnel" placeholder="Nom de la section (à afficher)" value="' . $generatorParameters->getNom_section() . '" class="saisie_generator margin_right_20" required>';
 
-                // Nom head
-                echo '<input type="text" name="nom_head" placeholder="Nom Head (onglet)" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator margin_right_20" required>';
+              // Nom technique
+              echo '<input type="text" name="nom_technique" placeholder="Nom technique (dossiers)" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
 
-                // Style spécifique
-                echo '<input type="text" name="style_specifique" placeholder="Style CSS spécifique" value="' . $generatorParameters->getStyle_specifique() . '" class="saisie_generator margin_right_20">';
+              // Nom head
+              echo '<input type="text" name="nom_head" placeholder="Nom Head (onglet)" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator margin_right_20" required>';
 
-                // Script spécifique
-                echo '<input type="text" name="script_specifique" placeholder="Script JS spécifique" value="' . $generatorParameters->getScript_specifique() . '" class="saisie_generator">';
+              // Style spécifique
+              echo '<input type="text" name="style_specifique" placeholder="Style CSS spécifique" value="' . $generatorParameters->getStyle_specifique() . '" class="saisie_generator margin_right_20">';
 
-                // Options
-                $old_category = '';
+              // Script spécifique
+              echo '<input type="text" name="script_specifique" placeholder="Script JS spécifique" value="' . $generatorParameters->getScript_specifique() . '" class="saisie_generator">';
 
-                foreach ($generatorParameters->getOptions() as $generatorOption)
+              // Options
+              $old_category = '';
+
+              foreach ($generatorParameters->getOptions() as $generatorOption)
+              {
+                $current_category = $generatorOption->getCategorie();
+
+                if ($current_category != $old_category)
                 {
-                  $current_category = $generatorOption->getCategorie();
-
-                  if ($current_category != $old_category)
-                  {
-                    $old_category = $current_category;
-                    echo '<div class="categorie_generator">' . $current_category . '</div>';
-                  }
-
-                  if ($generatorOption->getChecked() == 'Y')
-                  {
-                    echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator switch_checked">';
-                      echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" checked />';
-                      echo '<label for="checkbox_' . $generatorOption->getOption() . '" id="label_' . $generatorOption->getOption() . '" class="label_switch">' . $generatorOption->getTitre() . '</label>';
-                    echo '</div>';
-                  }
-                  else
-                  {
-                    echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator">';
-                      echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" />';
-                      echo '<label for="checkbox_' . $generatorOption->getOption() . '" id="label_' . $generatorOption->getOption() . '" class="label_switch">' . $generatorOption->getTitre() . '</label>';
-                    echo '</div>';
-                  }
+                  $old_category = $current_category;
+                  echo '<div class="categorie_generator">' . $current_category . '</div>';
                 }
 
-                // Bouton
-                echo '<input type="submit" name="generate_code" value="Générer le code" class="bouton_generator" />';
-              echo '</form>';
+                if ($generatorOption->getChecked() == 'Y')
+                {
+                  echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator switch_checked">';
+                    echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" checked />';
+                    echo '<label for="checkbox_' . $generatorOption->getOption() . '" id="label_' . $generatorOption->getOption() . '" class="label_switch">' . $generatorOption->getTitre() . '</label>';
+                  echo '</div>';
+                }
+                else
+                {
+                  echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator">';
+                    echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" />';
+                    echo '<label for="checkbox_' . $generatorOption->getOption() . '" id="label_' . $generatorOption->getOption() . '" class="label_switch">' . $generatorOption->getTitre() . '</label>';
+                  echo '</div>';
+                }
+              }
+
+              // Bouton
+              echo '<input type="submit" name="generate_code" value="Générer le code" class="bouton_generator" />';
+            echo '</form>';
           echo '</div>';
 
           /***************/
@@ -147,126 +149,228 @@
               // Partie Métier
               echo '<div class="zone_generated_left margin_right_20">';
                 // Zone Métier
-                echo '<div class="zone_code_generator">';
-                  // Nom du fichier
-                  echo '<div class="nom_fichier_generator">';
-                    echo 'Métier : ' . $metier['filename'];
+                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                  // Entête du fichier
+                  echo '<div class="zone_entete_fichier_generator">';
+                    // Type et actions
+                    echo '<div class="entete_fichier_generator">';
+                      echo 'Fichier : métier';
+                      echo '<input type="hidden" name="file_name" value="' . $metier['filename'] . '" />';
 
-                    echo '<a id="metier" class="copie_generator copyCode">Copier</a>';
+                      // Boutons
+                      echo '<div class="zone_boutons_generator">';
+                        // Bouton Télécharger
+                        echo '<input type="submit" name="download_php" value="Télécharger" class="bouton_action_generator" />';
+
+                        // Bouton Copier
+                        echo '<a id="metier" class="bouton_action_generator copyCode">Copier</a>';
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Nom : ' . $metier['filename'];
+                    echo '</div>';
                   echo '</div>';
 
                   // Contenu du fichier
-                  echo '<textarea id="code_metier" class="code_generator_metier">';
-                    echo $metier['content'];
-                  echo '</textarea>';
-                echo '</div>';
+                  echo '<textarea name="download_zone" id="code_metier" class="code_generator_metier">' . $metier['content'] . '</textarea>';
+                echo '</form>';
 
                 // Zone Contrôles
-                echo '<div class="zone_code_generator">';
-                  // Nom du fichier
-                  echo '<div class="nom_fichier_generator">';
-                    echo 'Contrôles : ' . $controles['filename'];
+                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                  // Entête du fichier
+                  echo '<div class="zone_entete_fichier_generator">';
+                    // Type et actions
+                    echo '<div class="entete_fichier_generator">';
+                      echo 'Fichier : contrôles';
+                      echo '<input type="hidden" name="file_name" value="' . $controles['filename'] . '" />';
 
-                    echo '<a id="controles" class="copie_generator copyCode">Copier</a>';
+                      // Boutons
+                      echo '<div class="zone_boutons_generator">';
+                        // Bouton Télécharger
+                        echo '<input type="submit" name="download_php" value="Télécharger" class="bouton_action_generator" />';
+
+                        // Bouton Copier
+                        echo '<a id="controles" class="bouton_action_generator copyCode">Copier</a>';
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Nom : ' . $controles['filename'];
+                    echo '</div>';
                   echo '</div>';
 
                   // Contenu du fichier
-                  echo '<textarea id="code_controles" class="code_generator_metier">';
-                    echo $controles['content'];
-                  echo '</textarea>';
-                echo '</div>';
+                  echo '<textarea name="download_zone" id="code_controles" class="code_generator_metier">' . $controles['content'] . '</textarea>';
+                echo '</form>';
 
                 // Zone Physique
-                echo '<div class="zone_code_generator">';
-                  // Nom du fichier
-                  echo '<div class="nom_fichier_generator">';
-                    echo 'Physique : ' . $physique['filename'];
+                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                  // Entête du fichier
+                  echo '<div class="zone_entete_fichier_generator">';
+                    // Type et actions
+                    echo '<div class="entete_fichier_generator">';
+                      echo 'Fichier : physique';
+                      echo '<input type="hidden" name="file_name" value="' . $physique['filename'] . '" />';
 
-                    echo '<a id="physique" class="copie_generator copyCode">Copier</a>';
+                      // Boutons
+                      echo '<div class="zone_boutons_generator">';
+                        // Bouton Télécharger
+                        echo '<input type="submit" name="download_php" value="Télécharger" class="bouton_action_generator" />';
+
+                        // Bouton Copier
+                        echo '<a id="physique" class="bouton_action_generator copyCode">Copier</a>';
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Nom : ' . $physique['filename'];
+                    echo '</div>';
                   echo '</div>';
 
                   // Contenu du fichier
-                  echo '<textarea id="code_physique" class="code_generator_metier">';
-                    echo $physique['content'];
-                  echo '</textarea>';
-                echo '</div>';
+                  echo '<textarea name="download_zone" id="code_physique" class="code_generator_metier">' . $physique['content'] . '</textarea>';
+                echo '</form>';
               echo '</div>';
 
               // Partie Vue
               echo '<div class="zone_generated_middle margin_right_20">';
                 // Zone Vue (web)
-                echo '<div class="zone_code_generator">';
-                  // Nom du fichier
-                  echo '<div class="nom_fichier_generator">';
-                    echo 'Vue (web) : ' . $listeVues['vue_web']['filename'];
+                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                  // Entête du fichier
+                  echo '<div class="zone_entete_fichier_generator">';
+                    // Type et actions
+                    echo '<div class="entete_fichier_generator">';
+                      echo 'Fichier : vue (web)';
+                      echo '<input type="hidden" name="file_name" value="' . $listeVues['vue_web']['filename'] . '" />';
 
-                    echo '<a id="vue_web" class="copie_generator copyCode">Copier</a>';
+                      // Boutons
+                      echo '<div class="zone_boutons_generator">';
+                        // Bouton Télécharger
+                        echo '<input type="submit" name="download_php" value="Télécharger" class="bouton_action_generator" />';
+
+                        // Bouton Copier
+                        echo '<a id="vue_web" class="bouton_action_generator copyCode">Copier</a>';
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Nom : ' . $listeVues['vue_web']['filename'];
+                    echo '</div>';
                   echo '</div>';
 
                   // Contenu du fichier
                   if (!empty($listeVues['vue_mobile']))
-                    echo '<textarea id="code_vue_web" class="code_generator_vue_mobile">';
+                    echo '<textarea name="download_zone" id="code_vue_web" class="code_generator_vue_mobile">';
                   else
-                    echo '<textarea id="code_vue_web" class="code_generator_vue">';
+                    echo '<textarea name="download_zone" id="code_vue_web" class="code_generator_vue">';
                     echo $listeVues['vue_web']['content'];
                   echo '</textarea>';
-                echo '</div>';
+                echo '</form>';
 
                 // Zone Vue (mobile)
                 if (!empty($listeVues['vue_mobile']))
                 {
-                  echo '<div class="zone_code_generator">';
-                    // Nom du fichier
-                    echo '<div class="nom_fichier_generator">';
-                      echo 'Vue (mobile) : ' . $listeVues['vue_mobile']['filename'];
+                  echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                    // Entête du fichier
+                    echo '<div class="zone_entete_fichier_generator">';
+                      // Type et actions
+                      echo '<div class="entete_fichier_generator">';
+                        echo 'Fichier : vue (mobile)';
+                        echo '<input type="hidden" name="file_name" value="' . $listeVues['vue_mobile']['filename'] . '" />';
 
-                      echo '<a id="vue_mobile" class="copie_generator copyCode">Copier</a>';
+                        // Boutons
+                        echo '<div class="zone_boutons_generator">';
+                          // Bouton Télécharger
+                          echo '<input type="submit" name="download_php" value="Télécharger" class="bouton_action_generator" />';
+
+                          // Bouton Copier
+                          echo '<a id="vue_mobile" class="bouton_action_generator copyCode">Copier</a>';
+                        echo '</div>';
+                      echo '</div>';
+
+                      // Nom du fichier
+                      echo '<div class="nom_fichier_generator">';
+                        echo 'Nom : ' . $listeVues['vue_mobile']['filename'];
+                      echo '</div>';
                     echo '</div>';
 
                     // Contenu du fichier
-                    echo '<textarea id="code_vue_mobile" class="code_generator_vue_mobile">';
-                      echo $listeVues['vue_mobile']['content'];
-                    echo '</textarea>';
-                  echo '</div>';
+                    echo '<textarea name="download_zone" id="code_vue_mobile" class="code_generator_vue_mobile">' . $listeVues['vue_mobile']['content'] . '</textarea>';
+                  echo '</form>';
                 }
               echo '</div>';
 
               // Partie Contrôleur
               echo '<div class="zone_generated_right">';
                 // Zone contrôleur
-                echo '<div class="zone_code_generator">';
-                  // Nom du fichier
-                  echo '<div class="nom_fichier_generator">';
-                    echo 'Contrôleur : ' . $controler['filename'];
+                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                  // Entête du fichier
+                  echo '<div class="zone_entete_fichier_generator">';
+                    // Type et actions
+                    echo '<div class="entete_fichier_generator">';
+                      echo 'Fichier : contrôleur';
+                      echo '<input type="hidden" name="file_name" value="' . $controler['filename'] . '" />';
 
-                    echo '<a id="controler" class="copie_generator copyCode">Copier</a>';
+                      // Boutons
+                      echo '<div class="zone_boutons_generator">';
+                        // Bouton Télécharger
+                        echo '<input type="submit" name="download_php" value="Télécharger" class="bouton_action_generator" />';
+
+                        // Bouton Copier
+                        echo '<a id="controler" class="bouton_action_generator copyCode">Copier</a>';
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Nom du fichier
+                    echo '<div class="nom_fichier_generator">';
+                      echo 'Nom : ' . $controler['filename'];
+                    echo '</div>';
                   echo '</div>';
 
                   // Contenu du fichier
                   if (!empty($generatorParameters->getScript_specifique()))
-                    echo '<textarea id="code_controler" class="code_generator_controler_js">';
+                    echo '<textarea name="download_zone" id="code_controler" class="code_generator_controler_js">';
                   else
-                    echo '<textarea id="code_controler" class="code_generator_controler">';
+                    echo '<textarea name="download_zone" id="code_controler" class="code_generator_controler">';
                     echo $controler['content'];
                   echo '</textarea>';
-                echo '</div>';
+                echo '</form>';
 
                 // Zone Javascript
                 if (!empty($generatorParameters->getScript_specifique()))
                 {
-                  echo '<div class="zone_code_generator">';
-                    // Nom du fichier
-                    echo '<div class="nom_fichier_generator">';
-                      echo 'Javascript : ' . $javascript['filename'];
+                  echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                    // Entête du fichier
+                    echo '<div class="zone_entete_fichier_generator">';
+                      // Type et actions
+                      echo '<div class="entete_fichier_generator">';
+                        echo 'Fichier : javascript';
+                        echo '<input type="hidden" name="file_name" value="' . $javascript['filename'] . '" />';
 
-                      echo '<a id="javascript" class="copie_generator copyCode">Copier</a>';
+                        // Boutons
+                        echo '<div class="zone_boutons_generator">';
+                          // Bouton Télécharger
+                          echo '<input type="submit" name="download_js" value="Télécharger" class="bouton_action_generator" />';
+
+                          // Bouton Copier
+                          echo '<a id="javascript" class="bouton_action_generator copyCode">Copier</a>';
+                        echo '</div>';
+                      echo '</div>';
+
+                      // Nom du fichier
+                      echo '<div class="nom_fichier_generator">';
+                        echo 'Nom : ' . $javascript['filename'];
+                      echo '</div>';
                     echo '</div>';
 
                     // Contenu du fichier
-                    echo '<textarea id="code_javascript" class="code_generator_controler_js">';
-                      echo $javascript['content'];
-                    echo '</textarea>';
-                  echo '</div>';
+                    echo '<textarea name="download_zone" id="code_javascript" class="code_generator_controler_js">' . $javascript['content'] . '</textarea>';
+                  echo '</form>';
                 }
               echo '</div>';
             echo '</div>';

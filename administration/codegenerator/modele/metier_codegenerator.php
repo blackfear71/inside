@@ -444,4 +444,21 @@
     // Retour
     return $javascript;
   }
+
+  // METIER : Télécharge un fichier
+  // RETOUR : Fichier
+  function downloadCode($post)
+  {
+    // Récupération des données
+    $contenu  = $post['download_zone'];
+    $fileName = $post['file_name'] ;
+
+    // Génération du fichier
+    header('Content-Type: application/force-download');
+    header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+    // Retour
+    echo $contenu;
+    exit;
+  }
 ?>

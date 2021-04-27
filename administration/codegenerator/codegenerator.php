@@ -45,6 +45,10 @@
       saveParameters($_POST);
       break;
 
+    case 'doDownload':
+      downloadCode($_POST);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: codegenerator.php?action=goConsulter');
@@ -69,17 +73,18 @@
       if (isset($controler))
         $controler['content'] = htmlspecialchars($controler['content']);
 
-      if (isset($listeVues))
-      {
+      if (isset($listeVues['vue_web']) AND !empty($listeVues['vue_web']))
         $listeVues['vue_web']['content']    = htmlspecialchars($listeVues['vue_web']['content']);
+
+      if (isset($listeVues['vue_mobile']) AND !empty($listeVues['vue_mobile']))
         $listeVues['vue_mobile']['content'] = htmlspecialchars($listeVues['vue_mobile']['content']);
-      }
 
       if (isset($javascript))
         $javascript['content'] = htmlspecialchars($javascript['content']);
       break;
 
     case 'generateCode':
+    case 'doDownload':
     default:
       break;
   }
@@ -87,6 +92,9 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doDownload':
+      break;
+      
     case 'generateCode':
       header('location: codegenerator.php?action=goConsulter');
       break;
