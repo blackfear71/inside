@@ -44,15 +44,25 @@
             // Liens des catégories
             foreach ($portail as $lienPortail)
             {
-              echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+              if ($lienPortail['alert'] == true)
+                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail lien_portail_alerte">';
+              else
+                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+                // Alerte
+                if ($lienPortail['alert'] == true)
+                  echo '<img src="../../includes/icons/admin/alerts.png" alt="alerts" title="Alerte" class="icone_alerte_lien_portail" />';
+
                 // Logo
                 echo '<div class="zone_image_portail">';
                   echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="image_lien_portail" />';
                 echo '</div>';
 
                 // Titre
-                echo '<div class="zone_texte_portail">';
-                  echo '<div class="texte_portail">' . $lienPortail['categorie'] . '</div>';
+                if ($lienPortail['alert'] == true)
+                  echo '<div class="zone_texte_portail zone_texte_portail_alerte">';
+                else
+                  echo '<div class="zone_texte_portail">';
+                    echo '<div class="texte_portail">' . $lienPortail['categorie'] . '</div>';
                 echo '</div>';
               echo '</a>';
             }

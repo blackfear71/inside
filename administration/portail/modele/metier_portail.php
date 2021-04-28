@@ -5,81 +5,98 @@
   {
     // Vérification des alertes
     if ($alertUsers == true)
-      $avertissementUsers = ' ( ! )';
+      $avertissementUsers = true;
     else
-      $avertissementUsers = '';
+      $avertissementUsers = false;
 
     if ($alertFilms == true)
-      $avertissementFilms = ' ( ! )';
+      $avertissementFilms = true;
     else
-      $avertissementFilms = '';
+      $avertissementFilms = false;
 
     if ($alertCalendars == true OR $alertAnnexes == true)
-      $avertissementCalendars = ' ( ! )';
+      $avertissementCalendars = true;
     else
-      $avertissementCalendars = '';
+      $avertissementCalendars = false;
+
+    if ($nombreBugs != 0 OR $nombreEvols != 0)
+      $avertissementBugs = true;
+    else
+      $avertissementBugs = false;
 
     // Tableau des catégories
     $listeCategories = array(array('categorie' => 'INFORMATIONS<br />UTILISATEURS',
                                    'lien'      => '../infosusers/infosusers.php?action=goConsulter',
                                    'title'     => 'Infos utilisateurs',
                                    'image'     => '../../includes/icons/common/inside.png',
-                                   'alt'       => 'inside'),
-                             array('categorie' => 'GESTION DES<br />UTILISATEURS' . $avertissementUsers,
+                                   'alt'       => 'inside',
+                                   'alert'     => false),
+                             array('categorie' => 'GESTION DES<br />UTILISATEURS',
                                    'lien'      => '../manageusers/manageusers.php?action=goConsulter',
                                    'title'     => 'Gestion des utilisateurs',
                                    'image'     => '../../includes/icons/admin/users.png',
-                                   'alt'       => 'users'),
+                                   'alt'       => 'users',
+                                   'alert'     => $avertissementUsers),
                              array('categorie' => 'GESTION DES<br />THÈMES',
                                    'lien'      => '../themes/themes.php?action=goConsulter',
                                    'title'     => 'Gestion des thèmes',
                                    'image'     => '../../includes/icons/admin/themes.png',
-                                   'alt'       => 'themes'),
+                                   'alt'       => 'themes',
+                                   'alert'     => false),
                              array('categorie' => 'GESTION DES<br />SUCCÈS',
                                    'lien'      => '../success/success.php?action=goConsulter',
                                    'title'     => 'Gestion des succès',
                                    'image'     => '../../includes/icons/admin/success.png',
-                                   'alt'       => 'success'),
-                             array('categorie' => 'GESTION DES<br />FILMS' . $avertissementFilms,
+                                   'alt'       => 'success',
+                                   'alert'     => false),
+                             array('categorie' => 'GESTION DES<br />FILMS',
                                    'lien'      => '../movies/movies.php?action=goConsulter',
                                    'title'     => 'Gestion des films',
                                    'image'     => '../../includes/icons/common/movie_house.png',
-                                   'alt'       => 'movie_house'),
-                             array('categorie' => 'GESTION DES<br />CALENDRIERS' . $avertissementCalendars,
+                                   'alt'       => 'movie_house',
+                                   'alert'     => $avertissementFilms),
+                             array('categorie' => 'GESTION DES<br />CALENDRIERS',
                                    'lien'      => '../calendars/calendars.php?action=goConsulter',
                                    'title'     => 'Gestion des calendriers',
                                    'image'     => '../../includes/icons/common/calendars.png',
-                                   'alt'       => 'calendars'),
+                                   'alt'       => 'calendars',
+                                   'alert'     => $avertissementCalendars),
                              array('categorie' => 'GESTION DES<br />MISSIONS',
                                    'lien'      => '../missions/missions.php?action=goConsulter',
                                    'title'     => 'Gestion des missions',
                                    'image'     => '../../includes/icons/common/missions.png',
-                                   'alt'       => 'missions'),
-                             array('categorie' => 'BUGS (' . $nombreBugs . ') ET<br />ÉVOLUTIONS (' . $nombreEvols . ')',
+                                   'alt'       => 'missions',
+                                   'alert'     => false),
+                             array('categorie' => 'BUGS <div class="nombre_lien_portail">' . $nombreBugs . '</div> ET<br />ÉVOLUTIONS <div class="nombre_lien_portail">' . $nombreEvols . '</div>',
                                    'lien'      => '../reports/reports.php?view=unresolved&action=goConsulter',
                                    'title'     => 'Bugs et évolutions',
                                    'image'     => '../../includes/icons/admin/bugs_evolutions.png',
-                                   'alt'       => 'bugs_evolutions'),
+                                   'alt'       => 'bugs_evolutions',
+                                   'alert'     => $avertissementBugs),
                              array('categorie' => 'GESTION DES<br />ALERTES',
                                    'lien'      => '../alerts/alerts.php?action=goConsulter',
                                    'title'     => 'Gestion des alertes',
                                    'image'     => '../../includes/icons/common/alert.png',
-                                   'alt'       => 'alert'),
+                                   'alt'       => 'alert',
+                                   'alert'     => false),
                              array('categorie' => 'GESTION<br />CRON',
                                    'lien'      => '../cron/cron.php?action=goConsulter',
                                    'title'     => 'Gestion CRON',
                                    'image'     => '../../includes/icons/admin/cron.png',
-                                   'alt'       => 'cron'),
+                                   'alt'       => 'cron',
+                                   'alert'     => false),
                              array('categorie' => 'JOURNAL DES<br />MODIFICATIONS',
                                    'lien'      => '../changelog/changelog.php?action=goConsulter',
                                    'title'     => 'Journal des modifications',
                                    'image'     => '../../includes/icons/admin/datas.png',
-                                   'alt'       => 'datas'),
+                                   'alt'       => 'datas',
+                                   'alert'     => false),
                              array('categorie' => 'GÉNÉRATEUR DE<br />CODE',
                                    'lien'      => '../codegenerator/codegenerator.php?action=goConsulter',
                                    'title'     => 'Générateur de code',
                                    'image'     => '../../includes/icons/admin/code.png',
-                                   'alt'       => 'code')
+                                   'alt'       => 'code',
+                                   'alert'     => false)
                            );
 
      // Retour
