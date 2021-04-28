@@ -81,6 +81,7 @@
 	border: 0;
 	background-color: transparent;
 	border-radius: 2px;
+	cursor: pointer;
 }
 
 /*** Infos utilisateurs ***/

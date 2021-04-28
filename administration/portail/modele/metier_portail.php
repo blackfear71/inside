@@ -57,7 +57,7 @@
                                    'alt'       => 'missions'),
                              array('categorie' => 'BUGS (' . $nombreBugs . ') ET<br />ÉVOLUTIONS (' . $nombreEvols . ')',
                                    'lien'      => '../reports/reports.php?view=unresolved&action=goConsulter',
-                                   'title'     => 'Rapports de bugs et évolutions',
+                                   'title'     => 'Bugs et évolutions',
                                    'image'     => '../../includes/icons/admin/bugs_evolutions.png',
                                    'alt'       => 'bugs_evolutions'),
                              array('categorie' => 'GESTION DES<br />ALERTES',
