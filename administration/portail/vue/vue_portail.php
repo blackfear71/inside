@@ -40,42 +40,50 @@
           /***********/
           /* Portail */
           /***********/
-          echo '<div class="menu_admin">';
-            // Lien générés
+          echo '<div class="menu_portail">';
+            // Liens des catégories
             foreach ($portail as $lienPortail)
             {
-              echo '<a href="' . $lienPortail['lien'] . '" class="menu_link_admin">';
-                echo '<div class="menu_admin_box">';
-                  echo '<div class="mask_admin"></div>';
-                  echo '<div class="mask_admin_triangle"></div>';
-                  echo '<div class="title_admin">';
-                    echo '<div>' . $lienPortail['ligne_1'] . '</div>';
-                    echo '<div class="margin_top_20">' . $lienPortail['ligne_2'] . '</div>';
-                    echo '<div>' . $lienPortail['ligne_3'] . '</div>';
-                  echo '</div>';
+              echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+                // Logo
+                echo '<div class="zone_image_portail">';
+                  echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="image_lien_portail" />';
+                echo '</div>';
+
+                // Titre
+                echo '<div class="zone_texte_portail">';
+                  echo '<div class="texte_portail">' . $lienPortail['categorie'] . '</div>';
                 echo '</div>';
               echo '</a>';
             }
 
             // Accès phpMyAdmin
-            echo '<a href="/phpmyadmin/" target="_blank" class="menu_link_admin">';
-  						echo '<div class="menu_admin_box">';
-  							echo '<div class="mask_admin"></div>';
-  							echo '<div class="mask_admin_triangle"></div>';
-  							echo '<div class="title_admin">phpMyAdmin</div>';
-  						echo '</div>';
-  					echo '</a>';
+            echo '<a href="/phpmyadmin/" title="phpMyAdmin" target="_blank" class="lien_portail">';
+              // Logo
+              echo '<div class="zone_image_portail">';
+                echo '<img src="../../includes/icons/admin/php.png" alt="php" class="image_lien_portail" />';
+              echo '</div>';
+
+              // Titre
+              echo '<div class="zone_texte_portail">';
+                echo '<div class="texte_portail">PHPMYADMIN</div>';
+              echo '</div>';
+            echo '</a>';
 
             // Sauvegarde BDD
-            echo '<form method="post" action="portail.php?action=doExtract" class="menu_link_admin">';
-              echo '<div class="menu_admin_box">';
-                echo '<div class="mask_admin"></div>';
-                echo '<div class="mask_admin_triangle"></div>';
-                echo '<input type="submit" name="export" value="Sauvegarde" class="export_bdd" />';
-                echo '<div class="title_admin">';
-                  echo '<div class="margin_top_60">BDD</div>';
-                echo '</div>';
+            echo '<form method="post" action="portail.php?action=doExtract" class="lien_portail">';
+              // Logo
+              echo '<div class="zone_image_portail">';
+                echo '<img src="../../includes/icons/admin/download.png" alt="download" class="image_lien_portail" />';
               echo '</div>';
+
+              // Titre
+              echo '<div class="zone_texte_portail">';
+                echo '<div class="texte_portail">SAUVEGARDE<br />BDD</div>';
+              echo '</div>';
+
+              // Action
+              echo '<input type="submit" name="export" value="" class="export_bdd" />';
             echo '</form>';
           echo '</div>';
         ?>

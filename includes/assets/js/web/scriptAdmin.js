@@ -258,21 +258,21 @@ $(window).resize(function()
 $(window).on('load', function()
 {
   // Masonry (Portail)
-  if ($('.menu_admin').length)
+  if ($('.menu_portail').length)
   {
-    $('.menu_admin').masonry().masonry('destroy');
+    $('.menu_portail').masonry().masonry('destroy');
 
-    $('.menu_admin').masonry({
+    $('.menu_portail').masonry({
       // Options
-      itemSelector: '.menu_link_admin',
-      columnWidth: 300,
+      itemSelector: '.lien_portail',
+      columnWidth: 250,
       fitWidth: true,
-      gutter: 15,
+      gutter: 10,
       horizontalOrder: true
     });
 
     // On associe une classe pour y ajouter une transition dans le css
-    $('.menu_admin').addClass('masonry');
+    $('.menu_portail').addClass('masonry');
   }
 
   // Masonry (Infos utilisateurs)

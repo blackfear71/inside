@@ -53,10 +53,10 @@
     case 'goConsulter':
       foreach ($portail as &$lienPortail)
       {
-        $lienPortail['ligne_1'] = htmlspecialchars($lienPortail['ligne_1']);
-        $lienPortail['ligne_2'] = htmlspecialchars($lienPortail['ligne_2']);
-        $lienPortail['ligne_3'] = htmlspecialchars($lienPortail['ligne_3']);
-        $lienPortail['lien']    = htmlspecialchars($lienPortail['lien']);
+        $lienPortail['lien']  = htmlspecialchars($lienPortail['lien']);
+        $lienPortail['title'] = htmlspecialchars($lienPortail['title']);
+        $lienPortail['image'] = htmlspecialchars($lienPortail['image']);
+        $lienPortail['alt']   = htmlspecialchars($lienPortail['alt']);
       }
 
       unset($lienPortail);

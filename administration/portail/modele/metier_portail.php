@@ -3,109 +3,87 @@
   // RETOUR : Tableau des liens
   function getPortail($alertUsers, $alertFilms, $alertCalendars, $alertAnnexes, $nombreBugs, $nombreEvols)
   {
-    // Informations utilisateurs
-    $infosusers = array('ligne_1' => 'Infos',
-                        'ligne_2' => 'UTILISATEURS',
-                        'ligne_3' => '',
-                        'lien'    => '../infosusers/infosusers.php?action=goConsulter');
-
-    // Gestion utilisateurs
+    // Vérification des alertes
     if ($alertUsers == true)
-      $alert = ' ( ! )';
+      $avertissementUsers = ' ( ! )';
     else
-      $alert = '';
+      $avertissementUsers = '';
 
-    $manageusers = array('ligne_1' => 'Gestion',
-                         'ligne_2' => 'UTILISATEURS' . $alert,
-                         'ligne_3' => '',
-                         'lien'    => '../manageusers/manageusers.php?action=goConsulter');
-
-    // Gestion thèmes
-    $themes = array('ligne_1' => 'Gestion',
-                    'ligne_2' => 'THÈMES',
-                    'ligne_3' => '',
-                    'lien'    => '../themes/themes.php?action=goConsulter');
-
-    // Gestion succès
-    $success = array('ligne_1' => 'Gestion',
-                     'ligne_2' => 'SUCCÈS',
-                     'ligne_3' => '',
-                     'lien'    => '../success/success.php?action=goConsulter');
-
-    // Gestion films
     if ($alertFilms == true)
-      $alert = ' ( ! )';
+      $avertissementFilms = ' ( ! )';
     else
-      $alert = '';
+      $avertissementFilms = '';
 
-    $movies = array('ligne_1' => 'Gestion',
-                    'ligne_2' => 'MOVIE',
-                    'ligne_3' => 'HOUSE' . $alert,
-                    'lien'    => '../movies/movies.php?action=goConsulter');
-
-    // Gestion calendriers
     if ($alertCalendars == true OR $alertAnnexes == true)
-      $alert = ' ( ! )';
+      $avertissementCalendars = ' ( ! )';
     else
-      $alert = '';
+      $avertissementCalendars = '';
 
-    $calendars = array('ligne_1' => 'Gestion',
-                       'ligne_2' => 'CALENDARS' . $alert,
-                       'ligne_3' => '',
-                       'lien'    => '../calendars/calendars.php?action=goConsulter');
+    // Tableau des catégories
+    $listeCategories = array(array('categorie' => 'INFORMATIONS<br />UTILISATEURS',
+                                   'lien'      => '../infosusers/infosusers.php?action=goConsulter',
+                                   'title'     => 'Infos utilisateurs',
+                                   'image'     => '../../includes/icons/common/inside.png',
+                                   'alt'       => 'inside'),
+                             array('categorie' => 'GESTION DES<br />UTILISATEURS' . $avertissementUsers,
+                                   'lien'      => '../manageusers/manageusers.php?action=goConsulter',
+                                   'title'     => 'Gestion des utilisateurs',
+                                   'image'     => '../../includes/icons/admin/users.png',
+                                   'alt'       => 'users'),
+                             array('categorie' => 'GESTION DES<br />THÈMES',
+                                   'lien'      => '../themes/themes.php?action=goConsulter',
+                                   'title'     => 'Gestion des thèmes',
+                                   'image'     => '../../includes/icons/admin/themes.png',
+                                   'alt'       => 'themes'),
+                             array('categorie' => 'GESTION DES<br />SUCCÈS',
+                                   'lien'      => '../success/success.php?action=goConsulter',
+                                   'title'     => 'Gestion des succès',
+                                   'image'     => '../../includes/icons/admin/success.png',
+                                   'alt'       => 'success'),
+                             array('categorie' => 'GESTION DES<br />FILMS' . $avertissementFilms,
+                                   'lien'      => '../movies/movies.php?action=goConsulter',
+                                   'title'     => 'Gestion des films',
+                                   'image'     => '../../includes/icons/common/movie_house.png',
+                                   'alt'       => 'movie_house'),
+                             array('categorie' => 'GESTION DES<br />CALENDRIERS' . $avertissementCalendars,
+                                   'lien'      => '../calendars/calendars.php?action=goConsulter',
+                                   'title'     => 'Gestion des calendriers',
+                                   'image'     => '../../includes/icons/common/calendars.png',
+                                   'alt'       => 'calendars'),
+                             array('categorie' => 'GESTION DES<br />MISSIONS',
+                                   'lien'      => '../missions/missions.php?action=goConsulter',
+                                   'title'     => 'Gestion des missions',
+                                   'image'     => '../../includes/icons/common/missions.png',
+                                   'alt'       => 'missions'),
+                             array('categorie' => 'BUGS (' . $nombreBugs . ') ET<br />ÉVOLUTIONS (' . $nombreEvols . ')',
+                                   'lien'      => '../reports/reports.php?view=unresolved&action=goConsulter',
+                                   'title'     => 'Rapports de bugs et évolutions',
+                                   'image'     => '../../includes/icons/admin/bugs_evolutions.png',
+                                   'alt'       => 'bugs_evolutions'),
+                             array('categorie' => 'GESTION DES<br />ALERTES',
+                                   'lien'      => '../alerts/alerts.php?action=goConsulter',
+                                   'title'     => 'Gestion des alertes',
+                                   'image'     => '../../includes/icons/common/alert.png',
+                                   'alt'       => 'alert'),
+                             array('categorie' => 'GESTION<br />CRON',
+                                   'lien'      => '../cron/cron.php?action=goConsulter',
+                                   'title'     => 'Gestion CRON',
+                                   'image'     => '../../includes/icons/admin/cron.png',
+                                   'alt'       => 'cron'),
+                             array('categorie' => 'JOURNAL DES<br />MODIFICATIONS',
+                                   'lien'      => '../changelog/changelog.php?action=goConsulter',
+                                   'title'     => 'Journal des modifications',
+                                   'image'     => '../../includes/icons/admin/datas.png',
+                                   'alt'       => 'datas'),
+                             array('categorie' => 'GÉNÉRATEUR DE<br />CODE',
+                                   'lien'      => '../codegenerator/codegenerator.php?action=goConsulter',
+                                   'title'     => 'Générateur de code',
+                                   'image'     => '../../includes/icons/admin/code.png',
+                                   'alt'       => 'code')
+                           );
 
-    // Gestion missions
-    $missions = array('ligne_1' => 'Gestion',
-                      'ligne_2' => 'MISSIONS',
-                      'ligne_3' => '',
-                      'lien'    => '../missions/missions.php?action=goConsulter');
-
-    // Rapports bugs/évolutions
-    $bugs = array('ligne_1' => 'Rapports',
-                  'ligne_2' => 'BUGS (' . $nombreBugs . ')',
-                  'ligne_3' => 'ÉVOLUTIONS (' . $nombreEvols . ')',
-                  'lien'    => '../reports/reports.php?view=unresolved&action=goConsulter');
-
-    // Gestion alertes
-    $alerts = array('ligne_1' => 'Gestion',
-                    'ligne_2' => 'ALERTES',
-                    'ligne_3' => '',
-                    'lien'    => '../alerts/alerts.php?action=goConsulter');
-
-    // Gestion CRON
-    $cron = array('ligne_1' => 'Gestion',
-                  'ligne_2' => 'CRON',
-                  'ligne_3' => '',
-                  'lien'    => '../cron/cron.php?action=goConsulter');
-
-    // Journal des modifications
-    $changelog = array('ligne_1' => 'Journal des',
-                       'ligne_2' => 'MODIFICATIONS',
-                       'ligne_3' => '',
-                       'lien'    => '../changelog/changelog.php?action=goConsulter');
-
-    // Générateur de code
-    $generator = array('ligne_1' => 'Générateur de',
-                       'ligne_2' => 'CODE',
-                       'ligne_3' => '',
-                       'lien'    => '../codegenerator/codegenerator.php?action=goConsulter');
-
-    // Assemblage portail
-    $portail = array($infosusers,
-                     $manageusers,
-                     $themes,
-                     $success,
-                     $movies,
-                     $calendars,
-                     $missions,
-                     $bugs,
-                     $alerts,
-                     $cron,
-                     $changelog,
-                     $generator
-                    );
-
-    return $portail;
+     // Retour
+     return $listeCategories;
   }
 
   // METIER : Contrôle alertes utilisateurs
