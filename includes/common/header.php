@@ -45,6 +45,10 @@
           // Expérience utilisateur
           if ($_SESSION['user']['identifiant'] != 'admin')
           {
+            // Niveau
+            echo '<div class="level_header">' . $_SESSION['user']['experience']['niveau'] . '</div>';
+
+            // Expérience
             echo '<canvas class="experience_header" id="canvas_header_100" width="70" height="70">Ce navigateur ne prend pas en charge &lt;canvas&gt;</canvas>';
             echo '<canvas class="experience_header" id="canvas_header_' . $_SESSION['user']['experience']['percent'] . '" width="70" height="70">Ce navigateur ne prend pas en charge &lt;canvas&gt;</canvas>';
           }
