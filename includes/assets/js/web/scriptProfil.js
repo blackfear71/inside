@@ -5,21 +5,16 @@
 $(function()
 {
   /*** Actions au chargement ***/
-  $('#progress_circle').circlize(
+  // Affichage de l'expérience
+  if ($('.experience_profil').length)
   {
-		radius: 60,
-    percentage: $('#progress_circle').attr('data-perc'),
-		text: $('#progress_circle').attr('data-text'),
-    min: $('#progress_circle').attr('data-perc'),
-    max: 100,
-    typeUse: "useText",
-		useAnimations: true,
-		useGradient: false,
-		background: "#d3d3d3",
-		foreground: "#a3a3a3",
-		stroke: 5,
-		duration: 1000
-	});
+    var experience = $('#valeur_experience_profil').val();
+
+    $('.experience_profil').each(function()
+    {
+      afficherExperienceProfil($(this).attr('id'), experience);
+    });
+  }
 
   /*** Actions au clic ***/
   // Change la couleur des boutons préférences
@@ -322,6 +317,59 @@ function adaptProfil()
       $('.zone_profil_right').css('width', 'calc(100% - 280px)');
       $('.zone_profil_right').css('margin-left', '20px');
     }
+  }
+}
+
+// Affichage de l'expérience du profil
+function afficherExperienceProfil(id, experience)
+{
+  // Initialisations
+  var rayonArc       = 55;
+  var epaisseurLigne = 10;
+  var abcisseCentre  = rayonArc + epaisseurLigne;
+  var ordonneeCentre = rayonArc + epaisseurLigne;
+
+  // Récupération des données
+  var pourcentage = id.replace('canvas_profil_', '');
+  var canvas      = $('#' + id)[0];
+  var context     = canvas.getContext("2d");
+
+  // Calcul du début et de la fin de l'arc
+  var debutArc = Math.PI / 2;
+  var finArc   = -1 * pourcentage * Math.PI / 50 + debutArc;
+
+  // Suppression du dessin précédent
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Début de la ligne
+  context.beginPath();
+
+  // Epaisseur de la ligne
+  context.lineWidth = epaisseurLigne;
+
+  // Couleur de la ligne
+  if (pourcentage == 100)
+    context.strokeStyle = '#d3d3d3';
+  else
+    context.strokeStyle = '#ff1937';
+
+  // Lissage du contour
+  context.imageSmoothingEnabled = true;
+
+  // Définition de l'arc de cercle (dans le sens inverse des aiguilles d'une montre avec true)
+  context.arc(abcisseCentre, ordonneeCentre, rayonArc, debutArc, finArc, true);
+
+  // Création de la ligne
+  context.stroke();
+
+  // Texte
+  if (pourcentage == 100)
+  {
+    context.font      = '100% robotolight, Verdana, sans-serif';
+    context.textAlign = 'center';
+    context.fillStyle = '#262626';
+
+    context.fillText(experience + ' XP', 65, 72);
   }
 }
 

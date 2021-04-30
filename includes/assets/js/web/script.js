@@ -9,23 +9,6 @@ $(function()
   if (themeUser != null)
     changeTheme(themeUser.background, themeUser.header, themeUser.footer, themeUser.logo);
 
-  // Affiche la barre d'expérience autour de l'avatar
-  $('#progress_circle_header').circlize(
-  {
-		radius: 32,
-        percentage: $('#progress_circle_header').attr('data-perc'),
-        text: $('#progress_circle_header').attr('data-text'),
-        min: $('#progress_circle_header').attr('data-perc'),
-        max: 100,
-        typeUse: "useText",
-		useAnimations: false,
-		useGradient: false,
-		background: "white",
-		foreground: "#ff1937",
-		stroke: 3,
-		duration: 1000
-	});
-
   // Mise à jour du ping à chaque chargement de page et toutes 60 secondes
   updatePing();
   majPing = setInterval(updatePing, 60000);
@@ -45,6 +28,15 @@ $(function()
   // Affichage des alertes
   if ($('#alerte').length)
     afficherMasquerPopUp('alerte', false);
+
+  // Affichage de l'expérience
+  if ($('.experience_header').length)
+  {
+    $('.experience_header').each(function()
+    {
+      afficherExperienceHeader($(this).attr('id'));
+    });
+  }
 
   /*** Actions au clic ***/
   // Referme la barre de recherche quand on clique n'importe où sur le body
@@ -260,6 +252,49 @@ function afficherMasquerPopUp(id, forceClose)
       }, 100);
     }
   }
+}
+
+// Affichage de l'expérience dans l'entête
+function afficherExperienceHeader(id)
+{
+  // Initialisations
+  var rayonArc       = 32;
+  var epaisseurLigne = 4;
+  var abcisseCentre  = rayonArc + epaisseurLigne;
+  var ordonneeCentre = rayonArc + epaisseurLigne;
+
+  // Récupération des données
+  var pourcentage = id.replace('canvas_header_', '');
+  var canvas      = $('#' + id)[0];
+  var context     = canvas.getContext("2d");
+
+  // Calcul du début et de la fin de l'arc
+  var debutArc = Math.PI / 2;
+  var finArc   = -1 * pourcentage * Math.PI / 50 + debutArc;
+
+  // Suppression du dessin précédent
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Début de la ligne
+  context.beginPath();
+
+  // Epaisseur de la ligne
+  context.lineWidth = epaisseurLigne;
+
+  // Couleur de la ligne
+  if (pourcentage == 100)
+    context.strokeStyle = 'white';
+  else
+    context.strokeStyle = '#ff1937';
+
+  // Lissage du contour
+  context.imageSmoothingEnabled = true;
+
+  // Définition de l'arc de cercle (dans le sens inverse des aiguilles d'une montre avec true)
+  context.arc(abcisseCentre, ordonneeCentre, rayonArc, debutArc, finArc, true);
+
+  // Création de la ligne
+  context.stroke();
 }
 
 // Changement thème

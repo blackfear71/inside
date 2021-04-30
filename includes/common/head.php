@@ -51,7 +51,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-ui-1.12.1.min.js"><\/script>')</script>
 <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/script.js?version=<?php echo $dateModificationJs; ?>"></script>
-<script src="/inside/includes/libraries/js/jCirclize.js"></script>
 
 <!-- Scripts spécifiques -->
 <?php if (isset($angularHead) AND $angularHead == true) { ?>

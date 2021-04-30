@@ -88,7 +88,6 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	padding-left: 50px;
 }
 
 .avatar_profil
@@ -104,14 +103,19 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: -20px;
-	margin-bottom: -20px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
-.circular_bar
+.experience_profil
 {
-	font-family: robotolight, Verdana, sans-serif;
-	color: #262626;
+	display: inline-block;
+}
+
+.experience_profil_2
+{
+	display: inline-block;
+	margin-left: -131px;
 }
 
 .zone_profil_infos

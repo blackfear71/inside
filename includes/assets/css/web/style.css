@@ -543,6 +543,13 @@ header
 	transition: transform 0.6s ease;
 }
 
+.experience_header
+{
+	position: absolute;
+	top: 4px;
+	right: 46px;
+}
+
 .zone_actions_header
 {
 	display: inline-block;
@@ -572,60 +579,6 @@ header
 	background-position: center;
 	background-color: transparent;
 	cursor: pointer;
-}
-
-/*** Barre de progression niveau ***/
-.canvasized
-{
-	display: inline-grid;
-	grid-template-columns: 100%;
-	grid-template-rows: 100%;
-	width: auto;
-}
-
-.circle
-{
-	grid-row: 1;
-	grid-column: 1;
-}
-
-.circle:first-child
-{
-	z-index: 2;
-}
-
-.percentage
-{
-	grid-row: 1;
-	grid-column: 1;
-	align-self: center;
-	justify-self: center;
-}
-
-.level_header
-{
-	position: absolute;
-	top: 5px;
-	right: 95px;
-	border-radius: 50%;
-	background-color: #ff1937;
-	width: 22px;
-	height: 22px;
-	line-height: 20px;
-	z-index: 3;
-	font-family: robotoregular, Verdana, sans-serif;
-	font-size: 80%;
-	color: white;
-	text-align: center;
-}
-
-.circular_bar_header
-{
-	position: absolute;
-	top: -10px;
-	right: 30px;
-	height: 90px;
-	overflow: hidden;
 }
 
 /*** Nav (menu catégories) ***/
@@ -1446,11 +1399,6 @@ footer
 }
 
 /*** Marges ***/
-.margin_top_moins_10
-{
-	margin-top: -10px;
-}
-
 .margin_top_moins_20
 {
 	margin-top: -20px;
