@@ -128,6 +128,7 @@
         .participant_mail
         {
           display: block;
+          margin-bottom: 10px;
         }
 
         .avatar_mail
@@ -146,6 +147,7 @@
           display: inline-block;
           word-break: break-word;
           font-size: 80%;
+          font-weight: bold;
           vertical-align: middle;
         }
 

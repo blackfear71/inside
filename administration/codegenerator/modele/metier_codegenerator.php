@@ -459,6 +459,5 @@
 
     // Retour
     echo $contenu;
-    exit;
   }
 ?>

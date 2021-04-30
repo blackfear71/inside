@@ -1612,6 +1612,7 @@
 	display: inline-block;
 	word-break: break-word;
 	font-size: 80%;
+	font-weight: bold;
 	vertical-align: middle;
 }
 

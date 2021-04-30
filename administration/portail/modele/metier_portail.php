@@ -244,6 +244,5 @@ SET time_zone = "+00:00";
 
     // Retour
     echo $contenu;
-    exit;
   }
 ?>

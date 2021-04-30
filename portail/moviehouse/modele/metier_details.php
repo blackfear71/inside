@@ -424,6 +424,9 @@
       Stars::secureData($participant);
     }
 
+    // Récupération du contenu du mail
+    $message = getModeleMailFilm($details, $participants);
+
     // Envoi d'un mail par personne
     foreach ($participants as $participant)
     {
@@ -442,7 +445,6 @@
           $mail->Subject = 'Inside - Votre participation à "' . $details->getFilm() . '"';
 
           // Contenu du mail
-          $message = getModeleMailFilm($details, $participants);
           $mail->MsgHTML($message);
 
           // Envoi du mail avec message d'alerte
