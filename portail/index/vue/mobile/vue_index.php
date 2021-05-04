@@ -87,7 +87,11 @@
                 echo '<form method="post" action="index.php?action=doConnecter" id="formConnexion" class="form_index">';
                 echo '<input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne_index" id="focus_identifiant" required />';
                 echo '<input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
-                echo '<input type="submit" name="connect" value="CONNEXION" class="bouton_index" />';
+
+                // Boutons
+                echo '<div class="zone_boutons_validation_index">';
+                  echo '<input type="submit" name="connect" value="CONNEXION" class="bouton_index" />';
+                echo '</div>';
               echo '</form>';
 
               // Inscription
