@@ -25,8 +25,13 @@ $(function()
       hideForm   = 'formPassword';
     }
 
+    // Changement d'onglet
     switchIndex(showButton, hideButton, marginButton);
     switchIndex(showForm, hideForm);
+
+    // Fermeture des aides
+    afficherMasquerPopUp('aideInscription', true);
+    afficherMasquerPopUp('aidePassword', true);
   });
 
   // Affiche la zone de connexion + focus
@@ -49,8 +54,13 @@ $(function()
       hideForm   = 'formPassword';
     }
 
+    // Changement d'onglet
     switchIndex(showButton, hideButton, marginButton);
     switchIndex(showForm, hideForm);
+
+    // Fermeture des aides
+    afficherMasquerPopUp('aideInscription', true);
+    afficherMasquerPopUp('aidePassword', true);
   });
 
   // Affiche la zone de réinitialisation mot de passe + focus
@@ -73,8 +83,25 @@ $(function()
       hideForm   = 'formConnexion';
     }
 
+    // Changement d'onglet
     switchIndex(showButton, hideButton, marginButton);
     switchIndex(showForm, hideForm);
+
+    // Fermeture des aides
+    afficherMasquerPopUp('aideInscription', true);
+    afficherMasquerPopUp('aidePassword', true);
+  });
+
+  // Affiche ou masque l'aide d'inscription
+  $('#afficherAideInscription, #fermerAideInscription').click(function()
+  {
+    afficherMasquerPopUp('aideInscription', false);
+  });
+
+  // Affiche ou masque l'aide de changement de mot de passe
+  $('#afficherAidePassword, #fermerAidePassword').click(function()
+  {
+    afficherMasquerPopUp('aidePassword', false);
   });
 
   /*** Actions au changement ***/

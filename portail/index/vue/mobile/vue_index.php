@@ -35,6 +35,48 @@
       <!-- Contenu -->
       <article>
         <?php
+          // Message d'aide inscription
+          echo '<div class="fond_alerte">';
+            echo '<div id="aideInscription" class="zone_affichage_alerte">';
+              // Titre
+              echo '<div class="zone_titre_alerte">';
+                echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" class="image_alerte" />';
+                echo '<div class="titre_alerte">Pour votre inscription</div>';
+              echo '</div>';
+
+              // Affichage du message
+              echo '<div class="texte_aide_index">';
+                echo 'Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu\'un mot de passe.
+                Celui-ci sera directement crypté afin de garantir la sécurité de l\'accès. Une demande sera envoyée à l\'administrateur qui validera
+                votre inscription dans les plus brefs délais.';
+              echo '</div>';
+
+              // Bouton
+              echo '<a id="fermerAideInscription" class="bouton_alerte">Fermer</a>';
+            echo '</div>';
+          echo '</div>';
+
+          // Message d'aide changement de mot de passe
+          echo '<div class="fond_alerte">';
+            echo '<div id="aidePassword" class="zone_affichage_alerte">';
+              // Titre
+              echo '<div class="zone_titre_alerte">';
+                echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" class="image_alerte" />';
+                echo '<div class="titre_alerte">Réinitialiser un mot de passe</div>';
+              echo '</div>';
+
+              // Affichage du message
+              echo '<div class="texte_aide_index">';
+                echo 'Si vous avez perdu votre mot de passe, vous pouvez effectuer une demande de réinitialisation du mot de passe à l\'administrateur via le formulaire ci-dessous.
+                L\'administrateur est suceptible de vous contacter directement afin de vérifier votre demande. Il vous suffit de renseigner votre identifiant afin que celui-ci
+                puisse procéder à la création d\'un nouveau mot de passe qu\'il vous communiquera par la suite.';
+              echo '</div>';
+
+              // Bouton
+              echo '<a id="fermerAidePassword" class="bouton_alerte">Fermer</a>';
+            echo '</div>';
+          echo '</div>';
+
           // Formulaires
           echo '<div class="zone_forms_index">';
             echo '<div class="zone_form_index">';
@@ -57,7 +99,14 @@
                 echo '<input type="text" name="pseudo" value="' . $_SESSION['save']['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
                 echo '<input type="password" name="password" value="' . $_SESSION['save']['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
                 echo '<input type="password" name="confirm_password" value="' . $_SESSION['save']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
-                echo '<input type="submit" name="ask_inscription" value="INSCRIPTION" class="bouton_index" />';
+
+                // Boutons
+                echo '<div class="zone_boutons_validation_index">';
+                  echo '<input type="submit" name="ask_inscription" value="INSCRIPTION" class="bouton_index bouton_index_short" />';
+                  echo '<a id="afficherAideInscription" class="lien_bouton_index">';
+                    echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';
+                  echo '</a>';
+                echo '</div>';
               echo '</form>';
 
               // Réinitialisation mot de passe
@@ -66,7 +115,14 @@
               else
                 echo '<form method="post" action="index.php?action=doDemanderMdp" id="formPassword" class="form_index" style="display: none;">';
                 echo '<input type="text" name="login" value="' . $_SESSION['save']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_3" required />';
-                echo '<input type="submit" name="ask_password" value="MOT DE PASSE" class="bouton_index" />';
+
+                // Boutons
+                echo '<div class="zone_boutons_validation_index">';
+                  echo '<input type="submit" name="ask_password" value="MOT DE PASSE" class="bouton_index bouton_index_short" />';
+                  echo '<a id="afficherAidePassword" class="lien_bouton_index">';
+                    echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';
+                  echo '</a>';
+                echo '</div>';
               echo '</form>';
             echo '</div>';
           echo '</div>';
