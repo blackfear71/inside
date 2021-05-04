@@ -79,6 +79,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
+	border: 0;
 	cursor: pointer;
 	margin-left: 2vh;
 }
@@ -86,7 +87,6 @@
 .image_bouton_index
 {
 	display: block;
-	border: 0;
 	height: 6vh;
 }
 
