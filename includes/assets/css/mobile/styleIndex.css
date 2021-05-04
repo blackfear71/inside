@@ -81,12 +81,12 @@
 	vertical-align: middle;
 	cursor: pointer;
 	margin-left: 2vh;
-	outline: none;
 }
 
 .image_bouton_index
 {
 	display: block;
+	border: 0;
 	height: 6vh;
 }
 
