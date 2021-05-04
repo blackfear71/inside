@@ -81,13 +81,13 @@
 	vertical-align: middle;
 	cursor: pointer;
 	margin-left: 2vh;
-	text-decoration: none;
 }
 
 .image_bouton_index
 {
 	display: block;
 	height: 6vh;
+	border: none;
 }
 
 /*** Boutons ***/
