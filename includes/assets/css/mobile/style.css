@@ -253,6 +253,9 @@ article
 a:link, a:visited, a:hover, a:active
 {
 	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 input[type="submit"]
