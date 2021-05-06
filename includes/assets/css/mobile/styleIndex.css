@@ -131,8 +131,9 @@
 {
 	display: block;
 	width: 100%;
-	margin-top: 10px;
-	min-height: 80px;
+	max-height: 67vh;
+	overflow: hidden;
+	overflow-y: auto;
 	text-align: justify;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
