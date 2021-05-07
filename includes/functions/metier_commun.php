@@ -82,46 +82,11 @@
         // Récupération expérience
         getExperience($_SESSION['user']['identifiant']);
 
-        // Initialisation génération mission
-        if (!isset($_SESSION['missions']))
-          $_SESSION['missions'] = array();
-
-        // Récupération des missions à générer
-        $missions = getMissionsToGenerate();
-
-        // On génère les boutons de mission si besoin pour chaque mission
-        foreach ($missions as $key => $mission)
-        {
-          if (empty($_SESSION['missions'][$key]))
-          {
-            if (!empty($mission) AND date('His') >= $mission->getHeure())
-            {
-              // Nombre de boutons à générer pour la mission en cours
-              $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
-
-              // Génération des boutons de mission en session
-              if ($numberButtonsToGenerate > 0)
-                $_SESSION['missions'][$key] = generateMission($numberButtonsToGenerate, $mission, $key);
-            }
-          }
-          else
-          {
-            if (date('His') < $mission->getHeure())
-              unset($_SESSION['missions'][$key]);
-            else
-            {
-              // Nombre de boutons à générer pour la mission en cours
-              $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
-
-              // Génération des boutons de mission en session (si le compte n'est pas bon)
-              if ($numberButtonsToGenerate != count($_SESSION['missions'][$key]))
-                $_SESSION['missions'][$key] = generateMission($numberButtonsToGenerate, $mission, $key);
-            }
-          }
-        }
+        // Récupération des missions
+        generateMissions();
 
         // Détermination du thème
-        $_SESSION['theme'] = getTheme($_SESSION['user']['identifiant']);
+        getTheme($_SESSION['user']['identifiant']);
       }
     }
   }
@@ -257,6 +222,49 @@
                                             'progress' => $progress,
                                             'percent'  => $percent
                                            );
+  }
+
+  // METIER : Génération des missions
+  // RETOUR : Aucun
+  function generateMissions()
+  {
+    // Initialisation génération mission
+    if (!isset($_SESSION['missions']))
+      $_SESSION['missions'] = array();
+
+    // Récupération des missions à générer
+    $missions = getMissionsToGenerate();
+
+    // On génère les boutons de mission si besoin pour chaque mission
+    foreach ($missions as $key => $mission)
+    {
+      if (empty($_SESSION['missions'][$key]))
+      {
+        if (!empty($mission) AND date('His') >= $mission->getHeure())
+        {
+          // Nombre de boutons à générer pour la mission en cours
+          $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+
+          // Génération des boutons de mission en session
+          if ($numberButtonsToGenerate > 0)
+            $_SESSION['missions'][$key] = generateMission($numberButtonsToGenerate, $mission, $key);
+        }
+      }
+      else
+      {
+        if (date('His') < $mission->getHeure())
+          unset($_SESSION['missions'][$key]);
+        else
+        {
+          // Nombre de boutons à générer pour la mission en cours
+          $numberButtonsToGenerate = controlMissionComplete($_SESSION['user']['identifiant'], $mission);
+
+          // Génération des boutons de mission en session (si le compte n'est pas bon)
+          if ($numberButtonsToGenerate != count($_SESSION['missions'][$key]))
+            $_SESSION['missions'][$key] = generateMission($numberButtonsToGenerate, $mission, $key);
+        }
+      }
+    }
   }
 
   // METIER : Récupération des missions actives à générer
@@ -476,7 +484,7 @@
   }
 
   // METIER : Détermination du thème en fonction du type
-  // RETOUR : Tableau du thème
+  // RETOUR : Aucun
   function getTheme($identifiant)
   {
     // Initialisations
@@ -540,8 +548,8 @@
       }
     }
 
-    // Retour
-    return $tableauTheme;
+    // Mise en session des données
+    $_SESSION['theme'] = $tableauTheme;
   }
 
   // METIER : Formatage titres niveaux pour les succès
