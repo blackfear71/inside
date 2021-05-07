@@ -26,7 +26,6 @@ Site accessible depuis le lien suivant : [INSIDE](http://77.150.63.94/inside/ind
 Ne pas toucher aux fichiers suivants lors de vos développements :
 - appel_bdd.php
 - appel_mail.php
-- export_bdd.php
 
 Si des différences sont constatées, veuillez les annuler.
 

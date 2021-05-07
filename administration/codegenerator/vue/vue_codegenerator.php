@@ -88,20 +88,23 @@
 
             // Paramétrage des données
             echo '<form method="post" action="codegenerator.php?action=generateCode">';
+              // Titre
+              echo '<div class="categorie_generator">Données générales</div>';
+
               // Nom fonctionnel
-              echo '<input type="text" name="nom_fonctionnel" placeholder="Nom de la section (à afficher)" value="' . $generatorParameters->getNom_section() . '" class="saisie_generator margin_right_20" required>';
+              echo '<input type="text" name="nom_fonctionnel" placeholder="Nom de la section (ex : Portail)" value="' . $generatorParameters->getNom_section() . '" class="saisie_generator margin_right_20" required>';
 
               // Nom technique
-              echo '<input type="text" name="nom_technique" placeholder="Nom technique (dossiers)" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
+              echo '<input type="text" name="nom_technique" placeholder="Nom technique (ex : portail)" value="' . $generatorParameters->getNom_technique() . '" class="saisie_generator" required>';
 
               // Nom head
-              echo '<input type="text" name="nom_head" placeholder="Nom Head (onglet)" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator margin_right_20" required>';
+              echo '<input type="text" name="nom_head" placeholder="Nom de l\'onglet du navigateur (ex : Portail)" value="' . $generatorParameters->getNom_head() . '" class="saisie_generator_full" required>';
 
               // Style spécifique
-              echo '<input type="text" name="style_specifique" placeholder="Style CSS spécifique" value="' . $generatorParameters->getStyle_specifique() . '" class="saisie_generator margin_right_20">';
+              echo '<input type="text" name="style_specifique" placeholder="Style CSS spécifique (ex : stylePortail)" value="' . $generatorParameters->getStyle_specifique() . '" class="saisie_generator margin_right_20">';
 
               // Script spécifique
-              echo '<input type="text" name="script_specifique" placeholder="Script JS spécifique" value="' . $generatorParameters->getScript_specifique() . '" class="saisie_generator">';
+              echo '<input type="text" name="script_specifique" placeholder="Script JS spécifique (ex : scriptPortail)" value="' . $generatorParameters->getScript_specifique() . '" class="saisie_generator">';
 
               // Options
               $old_category = '';
