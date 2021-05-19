@@ -46,7 +46,7 @@
           /*********************/
           /* Modification film */
           /*********************/
-          include('vue/vue_saisie_film.php');
+          include('vue/web/vue_saisie_film.php');
 
           /*********************/
           /* Affichage détails */
@@ -311,7 +311,7 @@
                 echo '</div>';
 
                 // Restaurant
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/restaurants.png" alt="restaurants" class="logo_titre_section" /><div class="texte_titre_section">Restaurant</div></div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/restaurants_grey.png" alt="restaurants_grey" class="logo_titre_section" /><div class="texte_titre_section">Restaurant</div></div>';
                 echo '<div class="contenu_detail">';
                   switch ($detailsFilm->getRestaurant())
                   {
@@ -423,14 +423,14 @@
                           echo '<textarea placeholder="Votre commentaire ici..." name="comment" id="textarea_comment_' . $comment->getId() . '" class="zone_modification_commentaire" required>' . $comment->getComment() . '</textarea>';
 
                           echo '<div class="zone_saisie_smileys">';
-                            echo '<a id="modifier_smiley_1_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_2_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_3_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_4_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_5_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_6_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_7_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                            echo '<a id="modifier_smiley_8_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_1_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smiley" title=":)" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_2_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smiley" title=";)" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_3_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smiley" title=":(" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_4_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/4.png" alt="smiley" title=":|" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_5_' . $comment->getId() . '" class="modifierSmiley""><img src="../../includes/icons/common/smileys/5.png" alt="smiley" title=":D" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_6_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smiley" title=":O" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_7_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smiley" title=":P" class="smiley_2" /></a>';
+                            echo '<a id="modifier_smiley_8_' . $comment->getId() . '" class="modifierSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smiley" title=":facepalm:" class="smiley_2" /></a>';
                           echo '</div>';
                         echo '</form>';
                       }
@@ -450,7 +450,9 @@
                   }
                 echo '</div>';
               }
-
+              else
+                echo '<div class="empty">Pas encore de commentaires...</div>';
+                
               // Saisie commentaire
   						echo '<form method="post" action="details.php?action=doCommenter" id="comments" class="saisie_commentaires_films">';
   							echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
@@ -459,14 +461,14 @@
   							echo '<input type="submit" name="submit_comment" value="Envoyer" class="bouton_commentaires" />';
 
                 echo '<div class="zone_saisie_smileys">';
-                	echo '<a id="modifier_smiley_1_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smile" title=":)" class="smiley_2" /></a>';
-                	echo '<a id="modifier_smiley_2_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smile" title=";)" class="smiley_2" /></a>';
-                	echo '<a id="modifier_smiley_3_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smile" title=":(" class="smiley_2" /></a>';
-                	echo '<a id="modifier_smiley_4_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/4.png" alt="smile" title=":|" class="smiley_2" /></a>';
-                	echo '<a id="modifier_smiley_5_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/5.png" alt="smile" title=":D" class="smiley_2" /></a>';
-                  echo '<a id="modifier_smiley_6_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smile" title=":O" class="smiley_2" /></a>';
-                  echo '<a id="modifier_smiley_7_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smile" title=":P" class="smiley_2" /></a>';
-                	echo '<a id="modifier_smiley_8_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smile" title=":facepalm:" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_1_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/1.png" alt="smiley" title=":)" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_2_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/2.png" alt="smiley" title=";)" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_3_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/3.png" alt="smiley" title=":(" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_4_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/4.png" alt="smiley" title=":|" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_5_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/5.png" alt="smiley" title=":D" class="smiley_2" /></a>';
+                  echo '<a id="modifier_smiley_6_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/6.png" alt="smiley" title=":O" class="smiley_2" /></a>';
+                  echo '<a id="modifier_smiley_7_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/7.png" alt="smiley" title=":P" class="smiley_2" /></a>';
+                	echo '<a id="modifier_smiley_8_0" class="ajouterSmiley"><img src="../../includes/icons/common/smileys/8.png" alt="smiley" title=":facepalm:" class="smiley_2" /></a>';
                 echo '</div>';
   						echo '</form>';
             echo '</div>';
@@ -478,6 +480,7 @@
       <?php include('../../includes/common/chat/chat.php'); ?>
 		</section>
 
+    <!-- Pied de page -->
 		<footer>
 			<?php include('../../includes/common/footer.php'); ?>
 		</footer>

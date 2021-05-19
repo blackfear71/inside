@@ -22,11 +22,15 @@
       case 'portail':
         $contenuCelsius = 'Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version mobile du site.
         Je suis <strong>Celsius</strong> et je vais te guider à travers les différentes sections du site. Ici tu peux accéder à la section pour voter pour le repas du midi et celle pour répartir les dépenses.
-        N\'oublie pas les menus sur les côtés pour naviguer à travers le site !';
+        Viens aussi choisir ton prochain film ou bien te moquer des bétises que disent les autres. Et n\'oublie pas les menus sur les côtés pour naviguer à travers le site !';
         break;
 
       case 'profil':
         $contenuCelsius = 'Voilà tes petites fiertés, tes contributions à toute l\'équipe de joyeux Insiders ! Allez, profite...';
+        break;
+
+      case 'moviehouse':
+        $contenuCelsius = 'Parce que la culture n\'a pas de prix, parce que ce lieu est l\'origine de ma maison, viens voir quel sera le prochain film que vous allez partager !';
         break;
 
       case 'restaurants':

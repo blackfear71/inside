@@ -61,7 +61,12 @@
 
     case 'doModifier':
       // Modification d'un film
-      $idFilm = updateFilm($_POST, $_SESSION['user']['identifiant']);
+      $idFilm = updateFilm($_POST, $_SESSION['user']['identifiant'], false);
+      break;
+
+    case 'doModifierMobile':
+      // Modification d'un film
+      $idFilm = updateFilm($_POST, $_SESSION['user']['identifiant'], true);
       break;
 
     case 'doSupprimer':
@@ -147,6 +152,7 @@
       break;
 
     case 'doModifier':
+    case 'doModifierMobile':
     case 'doSupprimer':
     case 'doVoterFilm':
     case 'doParticiperFilm':
@@ -161,6 +167,7 @@
   switch ($_GET['action'])
   {
     case 'doModifier':
+    case 'doModifierMobile':
     case 'doVoterFilm':
     case 'doParticiperFilm':
       header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
@@ -181,7 +188,7 @@
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_details_film.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_details_film.php');
       break;
   }
 ?>

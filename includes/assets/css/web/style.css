@@ -266,7 +266,7 @@ a:link, a:visited, a:hover, a:active
 	outline: none;
 }
 
-input:focus
+input:focus, textarea:focus
 {
 	outline: none;
 }

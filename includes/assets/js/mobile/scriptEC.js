@@ -541,7 +541,7 @@ function resetSaisie(zone, year, filter, type)
   setTimeout(function()
   {
     // Test si action = modification
-    var currentAction = $('.form_saisie').attr('action').split('&action=');
+    var currentAction = $('#' + zone).find('.form_saisie').attr('action').split('&action=');
     var call          = currentAction[currentAction.length - 1]
 
     if (call == 'doModifierMobile' || call == 'doModifierMontantsMobile')

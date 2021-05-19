@@ -14,7 +14,7 @@
       if ($_SERVER['PHP_SELF'] == '/inside/portail/moviehouse/moviehouse.php')
         echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouter" class="form_saisie_film">';
       else
-        echo '<form method="post" action="moviehouse.php?action=doAjouter" class="form_saisie_film">';
+        echo '<form method="post" action="details.php?action=doModifier" class="form_saisie_film">';
         echo '<input type="hidden" name="id_film" value="" />';
 
         // Informations film
@@ -41,13 +41,13 @@
           // Date de sortie cinéma
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date de sortie cinéma" class="icone_saisie" />';
-            echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';
+            echo '<input type="text" name="date_theater" value="' . $_SESSION['save']['date_theater_saisie'] . '" placeholder="Date de sortie cinéma (jj/mm/aaaa)" maxlength="10" autocomplete="off" id="datepicker_sortie_1" class="saisie_ligne" />';
           echo '</div>';
 
           // Date de sortie DVD
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date de sortie DVD/Bluray" class="icone_saisie" />';
-            echo '<input type="text" name="date_release" value="' . $_SESSION['save']['date_release_saisie'] . '" placeholder="Date de sortie DVD/Bluray (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_sortie_2" class="saisie_ligne" />';
+            echo '<input type="text" name="date_release" value="' . $_SESSION['save']['date_release_saisie'] . '" placeholder="Date de sortie DVD/Bluray (jj/mm/aaaa)" maxlength="10" autocomplete="off" id="datepicker_sortie_2" class="saisie_ligne" />';
           echo '</div>';
 
           // Lien trailer
@@ -91,7 +91,7 @@
           // Date sortie
           echo '<div class="zone_saisie_ligne">';
             echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date proposée" class="icone_saisie" />';
-            echo '<input type="text" name="date_doodle" value="' . $_SESSION['save']['date_doodle_saisie'] . '" placeholder="Date proposée (jj/mm/yyyy)" maxlength="10" autocomplete="off" id="datepicker_doodle" class="saisie_ligne_short" />';
+            echo '<input type="text" name="date_doodle" value="' . $_SESSION['save']['date_doodle_saisie'] . '" placeholder="Date proposée (jj/mm/aaaa)" maxlength="10" autocomplete="off" id="datepicker_doodle" class="saisie_ligne_short" />';
 
             // Selection de l'heure
             echo '<select name="hours_doodle" class="select_time">';
@@ -207,7 +207,7 @@
 
           // Lieu restaurant
           echo '<div class="zone_saisie_ligne">';
-            echo '<img src="../../includes/icons/moviehouse/restaurants.png" alt="restaurants" title="Restaurant" class="icone_saisie" />';
+            echo '<img src="../../includes/icons/moviehouse/restaurants_grey.png" alt="restaurants_grey" title="Restaurant" class="icone_saisie" />';
             echo '<input type="text" name="place" value="' . $_SESSION['save']['place_saisie'] . '" placeholder="Lieu proposé" class="saisie_ligne" />';
           echo '</div>';
 

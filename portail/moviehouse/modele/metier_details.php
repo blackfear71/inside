@@ -113,14 +113,14 @@
     // Conversion de l'objet en tableau pour envoyer au Javascript
     $detailsAConvertir = array('id'             => $detailsFilm->getId(),
                                'film'           => $detailsFilm->getFilm(),
-                               'date_theater'   => formatDateForDisplay($detailsFilm->getDate_theater()),
-                               'date_release'   => formatDateForDisplay($detailsFilm->getDate_release()),
+                               'date_theater'   => $detailsFilm->getDate_theater(),
+                               'date_release'   => $detailsFilm->getDate_release(),
                                'trailer'        => $detailsFilm->getTrailer(),
                                'link'           => $detailsFilm->getLink(),
                                'poster'         => $detailsFilm->getPoster(),
                                'synopsis'       => $detailsFilm->getSynopsis(),
                                'doodle'         => $detailsFilm->getDoodle(),
-                               'date_doodle'    => formatDateForDisplay($detailsFilm->getDate_doodle()),
+                               'date_doodle'    => $detailsFilm->getDate_doodle(),
                                'hours_doodle'   => substr($detailsFilm->getTime_doodle(), 0, 2),
                                'minutes_doodle' => substr($detailsFilm->getTime_doodle(), 2, 2),
                                'restaurant'     => $detailsFilm->getRestaurant(),
@@ -133,7 +133,7 @@
 
   // METIER : Modification d'un film
   // RETOUR : Id film
-  function updateFilm($post, $identifiant)
+  function updateFilm($post, $identifiant, $isMobile)
   {
     // Initialisations
     $control_ok = true;
@@ -163,11 +163,16 @@
     {
       // Contrôle format date sortie cinéma
       if ($control_ok == true)
-        $control_ok = controleFormatDate($dateTheater);
+        $control_ok = controleFormatDate($dateTheater, $isMobile);
 
       // Formatage de la date de sortie cinéma pour insertion
       if ($control_ok == true)
-        $dateTheater = formatDateForInsert($dateTheater);
+      {
+        if ($isMobile == true)
+          $dateTheater = formatDateForInsertMobile($dateTheater);
+        else
+          $dateTheater = formatDateForInsert($dateTheater);
+      }
     }
 
     // Contrôle date sortie DVD / Bluray
@@ -177,11 +182,16 @@
       {
         // Contrôle format date sortie DVD / Bluray
         if ($control_ok == true)
-          $control_ok = controleFormatDate($dateRelease);
+          $control_ok = controleFormatDate($dateRelease, $isMobile);
 
         // Formatage de la date de sortie DVD / Bluray pour insertion
         if ($control_ok == true)
-          $dateRelease = formatDateForInsert($dateRelease);
+        {
+          if ($isMobile == true)
+            $dateRelease = formatDateForInsertMobile($dateRelease);
+          else
+            $dateRelease = formatDateForInsert($dateRelease);
+        }
       }
     }
 
@@ -192,11 +202,16 @@
       {
         // Contrôle format date Doodle
         if ($control_ok == true)
-          $control_ok = controleFormatDate($dateDoodle);
+          $control_ok = controleFormatDate($dateDoodle, $isMobile);
 
         // Formatage de la date Doodle pour insertion
         if ($control_ok == true)
-          $dateDoodle = formatDateForInsert($dateDoodle);
+        {
+          if ($isMobile == true)
+            $dateDoodle = formatDateForInsertMobile($dateDoodle);
+          else
+            $dateDoodle = formatDateForInsert($dateDoodle);
+        }
       }
     }
 
@@ -207,6 +222,10 @@
         $control_ok = controleOrdreDates($dateTheater, $dateDoodle);
     }
 
+    // Contrôle moment restaurant renseigné
+    if ($control_ok == true)
+      $control_ok = controleMomentRestaurantSaisi($restaurant, $place);
+      
     // Extraction de l'ID vidéo et modification de l'enregistrement en base
     if ($control_ok == true)
     {

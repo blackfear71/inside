@@ -62,8 +62,14 @@
               // Lecture des préférences
               list($filmsSemaine, $filmsWaited, $filmsWayOut) = explode(';', $preferences->getCategories_movie_house());
 
+              // Détermination si mobile
+              if ($_SESSION['index']['plateforme'] == 'mobile')
+                $isMobile = true;
+              else
+                $isMobile = false;
+
               // Récupération de la liste des films récemments ajoutés
-              $listeRecents = getFilmsRecents($_GET['year']);
+              $listeRecents = getFilmsRecents($_GET['year'], $isMobile);
 
               // Récupération de la liste des sorties films de la semaine
               if ($filmsSemaine == 'Y')
@@ -78,11 +84,11 @@
 
               // Récupération de la liste des films les plus attendus
               if ($filmsWaited == 'Y')
-                $listeAttendus = getFilmsAttendus($_GET['year']);
+                $listeAttendus = getFilmsAttendus($_GET['year'], $isMobile);
 
               // Récupération de la liste des prochaines sorties cinéma organisées
               if ($filmsWayOut == 'Y')
-                $listeSorties = getSortiesOrganisees($_GET['year']);
+                $listeSorties = getSortiesOrganisees($_GET['year'], $isMobile);
               break;
 
             case 'cards':
@@ -111,7 +117,12 @@
 
     case 'doAjouter':
       // Insertion d'un film
-      $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant']);
+      $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant'], false);
+      break;
+
+    case 'doAjouterMobile':
+      // Insertion d'un film
+      $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant'], true);
       break;
 
     case 'doVoterFilm':
@@ -210,6 +221,7 @@
       break;
 
     case 'doAjouter':
+    case 'doAjouterMobile':
     case 'doVoterFilm':
     case 'doParticiperFilm':
     default:
@@ -220,8 +232,10 @@
   switch ($_GET['action'])
   {
     case 'doAjouter':
-      if ((isset($_SESSION['alerts']['wrong_date'])        AND $_SESSION['alerts']['wrong_date']        == true)
-      OR  (isset($_SESSION['alerts']['wrong_date_doodle']) AND $_SESSION['alerts']['wrong_date_doodle'] == true))
+    case 'doAjouterMobile':
+      if ((isset($_SESSION['alerts']['wrong_date'])            AND $_SESSION['alerts']['wrong_date']            == true)
+      OR  (isset($_SESSION['alerts']['wrong_date_doodle'])     AND $_SESSION['alerts']['wrong_date_doodle']     == true)
+      OR  (isset($_SESSION['alerts']['restaurant_incomplete']) AND $_SESSION['alerts']['restaurant_incomplete'] == true))
         header('location: moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=goConsulter');
       else
         header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
@@ -234,7 +248,7 @@
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_moviehouse.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_moviehouse.php');
       break;
   }
 ?>

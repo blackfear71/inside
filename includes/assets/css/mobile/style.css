@@ -255,6 +255,11 @@ a:link, a:visited, a:hover, a:active
 	outline: none;
 }
 
+input:focus, textarea:focus
+{
+	outline: none;
+}
+
 input[type="submit"]
 {
 	-webkit-appearance: none;

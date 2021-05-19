@@ -42,7 +42,7 @@
 
     // Anniversaire
     echo '<img src="../../includes/icons/profil/anniversary_grey.png" alt="anniversary_grey" class="logo_parametres" />';
-    echo '<input type="text" name="anniversaire" placeholder="Anniversaire (jj/mm/yyyy)" value="' . formatDateForDisplay($profil->getAnniversary()) . '" maxlength="10" id="datepicker_anniversary" class="monoligne_saisie" />';
+    echo '<input type="text" name="anniversaire" placeholder="Anniversaire (jj/mm/aaaa)" value="' . formatDateForDisplay($profil->getAnniversary()) . '" maxlength="10" id="datepicker_anniversary" class="monoligne_saisie" />';
 
     echo '<input type="submit" name="saisie_pseudo" value="Mettre à jour" class="bouton_validation" />';
   echo '</form>';

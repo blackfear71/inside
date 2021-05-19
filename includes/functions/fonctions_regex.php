@@ -54,7 +54,7 @@
 	function extractLink($texte)
 	{
 		// Recherche des liens
-		$lien = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="link_comment"></a>', $texte);
+		$lien = preg_replace('#(?:https?://|ftp://|www.)(?:[\w%?=,:;+\#@./-]|&amp;)+#u', '<a href="$0" target="_blank" title="Lien" class="lien_commentaire"></a>', $texte);
 
 		// Remplacement des débuts d'url
 		$search  = array('www.', 'https://https://', 'http://https://');

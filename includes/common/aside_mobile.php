@@ -1,8 +1,24 @@
 <?php
+  // Récupération des préférences
+  switch ($_SESSION['user']['view_movie_house'])
+  {
+    case 'C':
+      $viewMovieHouse = 'cards';
+      break;
+
+    case 'H':
+    default:
+      $viewMovieHouse = 'home';
+      break;
+  }
+
   // Menu latéral gauche
   $listeAsidePortail = array(array('lien'  => '/inside/portail/portail/portail.php?action=goConsulter',
                                    'image' => 'inside_white',
                                    'titre' => 'PORTAIL'),
+                             array('lien'  => '../moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter',
+                                   'image' => 'movie_house',
+                                   'titre' => 'MOVIE HOUSE'),
                              array('lien'  => '/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter',
                                    'image' => 'food_advisor',
                                    'titre' => 'LES ENFANTS ! À TABLE !'),

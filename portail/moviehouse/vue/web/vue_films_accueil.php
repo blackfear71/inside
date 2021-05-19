@@ -24,7 +24,7 @@
       echo '</div>';
     }
     else
-      echo '<div class="empty">Pas de films encore ajoutés pour cette année...</div>';
+      echo '<div class="empty">Pas de films ajoutés pour cette année...</div>';
 
     /*************************/
     /* Sorties de la semaine */

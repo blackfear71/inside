@@ -57,7 +57,7 @@
           /***************/
           /* Saisie film */
           /***************/
-          include('vue/vue_saisie_film.php');
+          include('vue/web/vue_saisie_film.php');
 
           /*******************/
           /* Chargement page */
@@ -69,7 +69,7 @@
           /*****************/
           /* Vues & Années */
           /*****************/
-          include('vue/vue_onglets.php');
+          include('vue/web/vue_onglets.php');
 
           /*********************/
           /* Accueil ou fiches */
@@ -78,12 +78,12 @@
             switch ($_GET['view'])
             {
               case 'cards':
-                include('vue/vue_films_fiches.php');
+                include('vue/web/vue_films_fiches.php');
                break;
 
               case 'home':
               default:
-                include('vue/vue_films_accueil.php');
+                include('vue/web/vue_films_accueil.php');
                 break;
             }
           echo '</div>';

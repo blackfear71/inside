@@ -41,7 +41,7 @@
                                    'title'     => 'Movie House',
                                    'image'     => '../../includes/icons/common/movie_house.png',
                                    'alt'       => 'movie_house',
-                                   'mobile'    => 'N'),
+                                   'mobile'    => 'Y'),
                              array('categorie' => 'LES ENFANTS !<br />À TABLE !',
                                    'lien'      => '../foodadvisor/foodadvisor.php?action=goConsulter',
                                    'title'     => 'Les enfants ! À table !',

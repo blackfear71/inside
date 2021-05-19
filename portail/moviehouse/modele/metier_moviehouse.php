@@ -4,8 +4,9 @@
   function initializeSaveSession()
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if ((!isset($_SESSION['alerts']['wrong_date'])        OR $_SESSION['alerts']['wrong_date']        != true)
-    AND (!isset($_SESSION['alerts']['wrong_date_doodle']) OR $_SESSION['alerts']['wrong_date_doodle'] != true))
+    if ((!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']        != true)
+    AND (!isset($_SESSION['alerts']['wrong_date_doodle'])     OR $_SESSION['alerts']['wrong_date_doodle'] != true)
+    AND (!isset($_SESSION['alerts']['restaurant_incomplete']) OR $_SESSION['alerts']['restaurant_incomplete'] != true))
     {
       unset($_SESSION['save']);
 
@@ -59,10 +60,16 @@
 
   // METIER : Lecture liste des films récents
   // RETOUR : Liste des films récents
-  function getFilmsRecents($year)
+  function getFilmsRecents($year, $isMobile)
   {
+    // Initialisations
+    if ($isMobile == true)
+      $limite = 4;
+    else
+      $limite = 5;
+
     // Récupération de la liste des films récents
-    $listeFilmsRecents = physiqueFilmsRecents($year);
+    $listeFilmsRecents = physiqueFilmsRecents($year, $limite);
 
     // Retour
     return $listeFilmsRecents;
@@ -112,10 +119,15 @@
 
   // METIER : Lecture liste des films les plus attendus
   // RETOUR : Liste des films attendus
-  function getFilmsAttendus($year)
+  function getFilmsAttendus($year, $isMobile)
   {
     // Initialisations
     $listeFilmsAttendus = array();
+
+    if ($isMobile == true)
+      $limite = 4;
+    else
+      $limite = 5;
 
     // Calcul date du jour - 1 mois
     $dateJourMoins1Mois = date('Ymd', strtotime('now -1 Month'));
@@ -155,8 +167,8 @@
 
       array_multisort($triNombreUsers, SORT_DESC, $triMoyenne, SORT_DESC, $listeFilmsAttendus);
 
-      // Extraction des 5 premièrs films les plus attentus
-      $listeFilmsAttendus = array_slice($listeFilmsAttendus, 0, 5);
+      // Extraction des X premièrs films les plus attentus
+      $listeFilmsAttendus = array_slice($listeFilmsAttendus, 0, $limite);
 
       // Tri des films restants sur la moyenne
       foreach ($listeFilmsAttendus as $film)
@@ -173,10 +185,16 @@
 
   // METIER : Lecture des prochaines sorties cinéma organisées
   // RETOUR : Liste des prochaines sorties cinéma organisées
-  function getSortiesOrganisees($year)
+  function getSortiesOrganisees($year, $isMobile)
   {
+    // Initialisations
+    if ($isMobile == true)
+      $limite = 4;
+    else
+      $limite = 5;
+
     // Récupération de la liste des films avec une sortie cinéma organisée
-    $listeFilmsSorties = physiqueSortiesOrganisees($year);
+    $listeFilmsSorties = physiqueSortiesOrganisees($year, $limite);
 
     // Retour
     return $listeFilmsSorties;
@@ -239,7 +257,7 @@
 
   // METIER : Insertion d'un film
   // RETOUR : Id film
-  function insertFilm($post, $identifiant)
+  function insertFilm($post, $identifiant, $isMobile)
   {
     // Initialisations
     $idFilm     = NULL;
@@ -298,11 +316,16 @@
     {
       // Contrôle format date sortie cinéma
       if ($control_ok == true)
-        $control_ok = controleFormatDate($dateTheater);
+        $control_ok = controleFormatDate($dateTheater, $isMobile);
 
       // Formatage de la date de sortie cinéma pour insertion
       if ($control_ok == true)
-        $dateTheater = formatDateForInsert($dateTheater);
+      {
+        if ($isMobile == true)
+          $dateTheater = formatDateForInsertMobile($dateTheater);
+        else
+          $dateTheater = formatDateForInsert($dateTheater);
+      }
     }
 
     // Contrôle date sortie DVD / Bluray
@@ -312,11 +335,16 @@
       {
         // Contrôle format date sortie DVD / Bluray
         if ($control_ok == true)
-          $control_ok = controleFormatDate($dateRelease);
+          $control_ok = controleFormatDate($dateRelease, $isMobile);
 
         // Formatage de la date de sortie DVD / Bluray pour insertion
         if ($control_ok == true)
-          $dateRelease = formatDateForInsert($dateRelease);
+        {
+          if ($isMobile == true)
+            $dateRelease = formatDateForInsertMobile($dateRelease);
+          else
+            $dateRelease = formatDateForInsert($dateRelease);
+        }
       }
     }
 
@@ -327,11 +355,16 @@
       {
         // Contrôle format date Doodle
         if ($control_ok == true)
-          $control_ok = controleFormatDate($dateDoodle);
+          $control_ok = controleFormatDate($dateDoodle, $isMobile);
 
         // Formatage de la date Doodle pour insertion
         if ($control_ok == true)
-          $dateDoodle = formatDateForInsert($dateDoodle);
+        {
+          if ($isMobile == true)
+            $dateDoodle = formatDateForInsertMobile($dateDoodle);
+          else
+            $dateDoodle = formatDateForInsert($dateDoodle);
+        }
       }
     }
 
@@ -341,6 +374,10 @@
       if (isset($dateTheater) AND !empty($dateTheater) AND isset($dateDoodle) AND !empty($dateDoodle))
         $control_ok = controleOrdreDates($dateTheater, $dateDoodle);
     }
+
+    // Contrôle moment restaurant renseigné
+    if ($control_ok == true)
+      $control_ok = controleMomentRestaurantSaisi($restaurant, $place);
 
     // Extraction de l'ID vidéo et insertion de l'enregistrement en base
     if ($control_ok == true)

@@ -83,7 +83,7 @@
 
   // PHYSIQUE : Lecture des films récents
   // RETOUR : Liste des films récents
-  function physiqueFilmsRecents($annee)
+  function physiqueFilmsRecents($annee, $limite)
   {
     // Initialisations
     $listeFilmsRecents = array();
@@ -95,7 +95,7 @@
                         FROM movie_house
                         WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $annee . '"
                         ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC
-                        LIMIT 5');
+                        LIMIT ' . $limite);
 
     while ($data = $req->fetch())
     {
@@ -206,7 +206,7 @@
 
   // PHYSIQUE : Lecture des sorties organisées pour une année
   // RETOUR : Liste des films avec sortie
-  function physiqueSortiesOrganisees($annee)
+  function physiqueSortiesOrganisees($annee, $limite)
   {
     // Initialisations
     $listeFilmsSorties = array();
@@ -219,14 +219,14 @@
       $req = $bdd->query('SELECT *
                           FROM movie_house
                           WHERE to_delete != "Y" AND date_doodle != "" AND date_doodle >= ' . date('Ymd') . ' AND SUBSTR(date_doodle, 1, 4) = ' . $annee . '
-                          ORDER BY date_doodle ASC, id DESC LIMIT 5');
+                          ORDER BY date_doodle ASC, id DESC LIMIT ' . $limite);
     }
     elseif ($annee > date('Y'))
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
                           WHERE to_delete != "Y" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $annee . '
-                          ORDER BY date_doodle ASC, id DESC LIMIT 5');
+                          ORDER BY date_doodle ASC, id DESC LIMIT ' . $limite);
     }
     elseif ($annee < date('Y'))
     {

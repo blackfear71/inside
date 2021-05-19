@@ -96,7 +96,7 @@ $(function()
     afficherMasquerIdWithDelay('zone_details_restaurant');
   });
 
-  // Ouvre la fenêtre de saisie d'une dépense en modification
+  // Ouvre la fenêtre de saisie d'un restaurant en modification
   $('.modifierRestaurant').click(function()
   {
     var idRestaurant = $(this).attr('id').replace('modifier_restaurant_', '');
@@ -107,7 +107,7 @@ $(function()
   // Réinitialise la saisie à la fermeture au clic sur le fond
   $(document).on('click', function(event)
   {
-    // Ferme la saisie d'une dépense
+    // Ferme la saisie d'un restaurant
     if ($(event.target).attr('class') == 'fond_saisie')
       resetSaisie();
   });
@@ -1047,14 +1047,14 @@ function initialisationModification(idRestaurant)
   afficherMasquerIdWithDelay('zone_saisie_restaurant');
 }
 
-// Réinitialise la zone de saisie d'une dépense si fermeture modification
+// Réinitialise la zone de saisie d'un restaurant si fermeture modification
 function resetSaisie()
 {
   // Déclenchement après la fermeture
   setTimeout(function()
   {
     // Test si action = modification
-    var currentAction = $('.form_saisie').attr('action').split('action=');
+    var currentAction = $('#zone_saisie_restaurant').find('.form_saisie').attr('action').split('action=');
     var call          = currentAction[currentAction.length - 1]
 
     if (call == 'doModifier')

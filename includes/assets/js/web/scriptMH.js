@@ -75,12 +75,12 @@ $(function()
   $('.afficherPreference').click(function()
   {
     var idFilm    = $(this).attr('id').replace('fiche_', '');
-    var titre_film = $('#titre_film_' + idFilm).val();
-    var vote_film  = $('#vote_film_' + idFilm).val();
-    var view       = $_GET('view');
-    var year       = $_GET('year');
+    var titreFilm = $('#titre_film_' + idFilm).val();
+    var voteFilm  = $('#vote_film_' + idFilm).val();
+    var view      = $_GET('view');
+    var year      = $_GET('year');
 
-    afficherSaisiePreference(titre_film, vote_film, view, year, idFilm);
+    afficherSaisiePreference(titreFilm, voteFilm, view, year, idFilm);
   });
 
   // Masque la saisie de préférence d'une fiche
@@ -100,7 +100,7 @@ $(function()
   // Affiche la zone de modification d'un film
   $('#modifierFilm, #doodleFilm').click(function()
   {
-    updateFilm('zone_saisie_film');
+    initialisationModification('zone_saisie_film');
   });
 
   // Affiche la zone de modification d'un commentaire
@@ -219,7 +219,7 @@ $(window).on('load', function()
   var doodle = $_GET('doodle');
 
   if (doodle == 'true')
-    updateFilm('zone_saisie_film');
+    initialisationModification('zone_saisie_film');
 });
 
 /*****************/
@@ -403,14 +403,16 @@ function insertSmiley(smiley, id)
 }
 
 // Modification d'un film
-function updateFilm(zone)
+function initialisationModification(zone)
 {
   var titre  = 'Modifier un film';
   var bouton = 'Modifier le film';
   var action = 'details.php?action=doModifier';
 
-  // Affichage zone de saisie
-  afficherMasquerIdWithDelay(zone);
+  // Conversion des dates
+  var dateTheater = formatDateForDisplay(detailsFilm['date_theater']);
+  var dateRelease = formatDateForDisplay(detailsFilm['date_release']);
+  var dateDoodle  = formatDateForDisplay(detailsFilm['date_doodle']);
 
   // Modification des données
   $('.titre_saisie_film').html(titre);
@@ -418,15 +420,15 @@ function updateFilm(zone)
 
   $('input[name=id_film]').val(detailsFilm['id']);
   $('input[name=nom_film]').val(detailsFilm['film']);
-  $('input[name=date_theater]').val(detailsFilm['date_theater']);
-  $('input[name=date_release]').val(detailsFilm['date_release']);
+  $('input[name=date_theater]').val(dateTheater);
+  $('input[name=date_release]').val(dateRelease);
   $('input[name=trailer]').val(detailsFilm['trailer']);
   $('input[name=link]').val(detailsFilm['link']);
   $('input[name=poster]').val(detailsFilm['poster']);
   $('textarea[name=synopsis]').html(detailsFilm['synopsis']);
 
   $('input[name=doodle]').val(detailsFilm['doodle']);
-  $('input[name=date_doodle]').val(detailsFilm['date_doodle']);
+  $('input[name=date_doodle]').val(dateDoodle);
   $('input[name=place]').val(detailsFilm['place']);
 
   switch (detailsFilm['restaurant'])
@@ -458,6 +460,9 @@ function updateFilm(zone)
     $('select[name=minutes_doodle]').val('');
 
   $('.saisie_bouton').val(bouton);
+
+  // Affichage zone de saisie
+  afficherMasquerIdWithDelay(zone);
 }
 
 // Adaptations des films sur mobile

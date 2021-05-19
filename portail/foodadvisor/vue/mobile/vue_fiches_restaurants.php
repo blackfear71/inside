@@ -17,7 +17,7 @@
           echo '</div>';
         echo '</div>';
 
-        echo '<div id="afficher_' . formatId($lieu) . '" class="zone_fiches_restaurants">';
+        echo '<div id="afficher_' . formatId($lieu) . '">';
           // Liste des restaurants d'un lieu
           foreach ($restaurantsParLieux as $restaurant)
           {

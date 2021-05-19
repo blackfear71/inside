@@ -39,7 +39,7 @@
     // Contrôle
     if ($date >= date('Ymd'))
     {
-      $_SESSION['alerts']['date_future'] = true;
+      $_SESSION['alerts']['future_date'] = true;
       $control_ok                        = false;
     }
 
