@@ -658,7 +658,10 @@
   width: calc(50% - 1.5vh);
   margin-right: 1vh;
   text-align: center;
-  padding: 0.5vh;
+  height: 5vh;
+  line-height: 4.5vh;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   border-radius: 0.5vh;
   background-color: #13a2e9;
 }
@@ -668,7 +671,10 @@
   display: inline-block;
   width: calc(50% - 1.5vh);
   text-align: center;
-  padding: 0.5vh;
+  height: 5vh;
+  line-height: 4.5vh;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   border-radius: 0.5vh;
   background-color: #70d55d;
 }
@@ -679,7 +685,10 @@
   width: calc(100% - 1vh);
   margin-top: 1vh;
   text-align: center;
-  padding: 0.5vh;
+  height: 5vh;
+  line-height: 4.5vh;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   border-radius: 0.5vh;
   background-color: #2eb2f4;
 }
@@ -689,7 +698,8 @@
   display: inline-block;
   vertical-align: top;
   width: calc(40% - 1vh);
-  margin: 1vh 1vh 2vh 0;
+  margin-top: 1vh;
+  margin-right: 1vh;
   text-align: center;
   height: 5vh;
   line-height: 4.5vh;
@@ -704,7 +714,7 @@
   display: inline-block;
   vertical-align: top;
   width: calc(60% - 2vh);
-  margin: 1vh 0 2vh 0;
+  margin-top: 1vh;
   text-align: center;
   height: 5vh;
   line-height: 4.5vh;
