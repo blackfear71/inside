@@ -165,7 +165,7 @@
               {
                 echo '<div id="bouton_none" class="switch_restaurant switch_restaurant_margin bouton_checked">';
                   echo '<div class="zone_radio_restaurant">';
-                    echo '<input id="none" type="radio" name="restaurant" value="N" checked />';
+                    echo '<input id="none" type="radio" name="restaurant" value="N" class="radio_restaurant" checked />';
                   echo '</div>';
 
                   echo '<label for="none" class="label_switch">Aucun</label>';
@@ -175,7 +175,7 @@
               {
                 echo '<div id="bouton_none" class="switch_restaurant switch_restaurant_margin">';
                   echo '<div class="zone_radio_restaurant">';
-                    echo '<input id="none" type="radio" name="restaurant" value="N" />';
+                    echo '<input id="none" type="radio" name="restaurant" value="N" class="radio_restaurant" />';
                   echo '</div>';
 
                   echo '<label for="none" class="label_switch">Aucun</label>';
@@ -186,7 +186,7 @@
               {
                 echo '<div id="bouton_before" class="switch_restaurant switch_restaurant_margin bouton_checked">';
                   echo '<div class="zone_radio_restaurant">';
-                    echo '<input id="before" type="radio" name="restaurant" value="B" checked />';
+                    echo '<input id="before" type="radio" name="restaurant" value="B" class="radio_restaurant" checked />';
                   echo '</div>';
 
                   echo '<label for="before" class="label_switch">Avant</label>';
@@ -196,7 +196,7 @@
               {
                 echo '<div id="bouton_before" class="switch_restaurant switch_restaurant_margin">';
                   echo '<div class="zone_radio_restaurant">';
-                    echo '<input id="before" type="radio" name="restaurant" value="B" />';
+                    echo '<input id="before" type="radio" name="restaurant" value="B" class="radio_restaurant" />';
                   echo '</div>';
 
                   echo '<label for="before" class="label_switch">Avant</label>';
@@ -207,7 +207,7 @@
               {
                 echo '<div id="bouton_after" class="switch_restaurant bouton_checked">';
                   echo '<div class="zone_radio_restaurant">';
-                    echo '<input id="after" type="radio" name="restaurant" value="A" checked />';
+                    echo '<input id="after" type="radio" name="restaurant" value="A" class="radio_restaurant" checked />';
                   echo '</div>';
 
                   echo '<label for="after" class="label_switch">Après</label>';
@@ -217,7 +217,7 @@
               {
                 echo '<div id="bouton_after" class="switch_restaurant">';
                   echo '<div class="zone_radio_restaurant">';
-                    echo '<input id="after" type="radio" name="restaurant" value="A" />';
+                    echo '<input id="after" type="radio" name="restaurant" value="A" class="radio_restaurant" />';
                   echo '</div>';
 
                   echo '<label for="after" class="label_switch">Après</label>';

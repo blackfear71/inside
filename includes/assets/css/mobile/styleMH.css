@@ -341,14 +341,16 @@
 	display: inline-block;
 	vertical-align: middle;
 	width: 4vh;
-  height: 6vh;
-	line-height: 6vh;
-  text-align: center;
+  height: 4vh;
 }
 
-.zone_radio_restaurant input
+.radio_restaurant
 {
-  margin-top: 2.5vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50%;
+  transform: translateY(-50%);
 }
 
 .bouton_checked
