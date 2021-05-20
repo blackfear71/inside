@@ -340,8 +340,8 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 4vh;
-  height: 4vh;
+	width: 5vh;
+  height: 5vh;
 }
 
 .radio_restaurant
@@ -363,9 +363,9 @@
 {
   display: inline-block;
 	vertical-align: middle;
-	width: calc(100% - 5vh);
-	padding: 1.5vh 1vh 1.5vh 4vh;
-	margin-left: -4vh;
+	width: calc(100% - 6vh);
+	padding: 1.5vh 1vh 1.5vh 5vh;
+	margin-left: -5vh;
 	word-break: break-word;
 	hyphens: auto;
   text-align: left;
