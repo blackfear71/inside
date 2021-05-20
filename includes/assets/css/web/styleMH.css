@@ -1616,9 +1616,16 @@
 	vertical-align: middle;
 }
 
-.avertissement_mail
+.avertissement_mail_1
 {
-	margin: 0;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.avertissement_mail_2
+{
+	display: block;
+	margin-top: 20px;
 	color: #ff1937;
 }
 

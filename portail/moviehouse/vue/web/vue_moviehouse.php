@@ -35,6 +35,7 @@
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
 
+      <!-- Contenu -->
 			<article>
         <?php
           /********************/

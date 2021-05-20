@@ -687,10 +687,14 @@
 .zone_details_film_restaurant_1
 {
   display: inline-block;
+  vertical-align: top;
   width: calc(40% - 1vh);
   margin: 1vh 1vh 2vh 0;
   text-align: center;
-  padding: 0.5vh;
+  height: 5vh;
+  line-height: 4.5vh;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   border-radius: 0.5vh;
   background-color: #c81932;
 }
@@ -698,10 +702,14 @@
 .zone_details_film_restaurant_2
 {
   display: inline-block;
+  vertical-align: top;
   width: calc(60% - 2vh);
-  margin-bottom: 2vh;
+  margin: 1vh 0 2vh 0;
   text-align: center;
-  padding: 0.8vh 0.5vh 0.8vh 0.5vh;
+  height: 5vh;
+  line-height: 4.5vh;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   border-radius: 0.5vh;
   background-color: #ff1937;
 }
@@ -947,6 +955,82 @@
 }
 
 .bouton_saisie_commentaire:active
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+/*** Mailing ***/
+.zone_destinataires_mail
+{
+	width: calc(100% - 4vh);
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	padding: 2vh;
+  margin-top: 2vh;
+	margin-bottom: 2vh;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+}
+
+.destinataires
+{
+	margin: 1vh 0 1vh 3vh;
+}
+
+.avatar_dest
+{
+	display: inline-block;
+	border-radius: 50%;
+	width: 5vh;
+	background-color: #262626;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	margin-right: 1vh;
+	vertical-align: middle;
+}
+
+.pseudo_dest
+{
+	width: calc(100% - 6vh);
+	display: inline-block;
+	word-break: break-word;
+	font-size: 2vh;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.avertissement_mail_1
+{
+  display: block;
+  margin-bottom: 2vh;
+}
+
+.avertissement_mail_2
+{
+  display: block;
+  margin-top: 2vh;
+	color: #ff1937;
+}
+
+.send_mail_film
+{
+  display: block;
+  width: 100%;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #e3e3e3;
+  border-radius: 0.5vh;
+  font-family: robotolight, Verdana, sans-serif;
+  font-size: 3vh;
+  color: #262626;
+  text-align: center;
+  border: 0;
+  box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.send_mail_film:active
 {
 	background-color: #ff1937;
 	color: white;

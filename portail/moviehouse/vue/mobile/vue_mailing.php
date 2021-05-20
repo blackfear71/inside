@@ -7,7 +7,7 @@
       $styleHead      = 'styleMH.css';
       $scriptHead     = '';
       $angularHead    = false;
-      $chatHead       = true;
+      $chatHead       = false;
       $datepickerHead = false;
       $masonryHead    = false;
       $exifHead       = false;
@@ -18,14 +18,9 @@
 
 	<body>
 		<!-- Entête -->
-		<header>
-			<?php
-        $title = 'Movie House';
-
-        include('../../includes/common/header.php');
-        include('../../includes/common/onglets.php');
-      ?>
-		</header>
+    <header>
+      <?php include('../../includes/common/header_mobile.php'); ?>
+    </header>
 
     <!-- Contenu -->
 		<section>
@@ -35,21 +30,30 @@
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
 
+      <!-- Menus -->
+      <aside>
+        <?php include('../../includes/common/aside_mobile.php'); ?>
+      </aside>
+
+      <!-- Chargement page -->
+      <div class="zone_loading_image">
+        <img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />
+      </div>
+
+      <!-- Celsius -->
+      <?php
+        $celsius = 'moviehouse';
+
+        include('../../includes/common/celsius.php');
+      ?>
+
       <!-- Contenu -->
 			<article>
         <?php
-          /********************/
-          /* Boutons missions */
-          /********************/
-          $zoneInside = 'article';
-          include('../../includes/common/missions.php');
-
-          /*******************/
-          /* Chargement page */
-          /*******************/
-          echo '<div class="zone_loading_page">';
-            echo '<div id="loading_page" class="loading_page"></div>';
-          echo '</div>';
+          /*********/
+          /* Titre */
+          /*********/
+          echo '<div class="titre_section_mobile">' . mb_strtoupper('ENVOYER UN E-MAIL') . '</div>';
 
           /***************/
           /* Modèle mail */
@@ -101,14 +105,11 @@
           }
         ?>
 			</article>
-
-      <!-- Chat -->
-      <?php include('../../includes/common/chat/chat.php'); ?>
 		</section>
 
 		<!-- Pied de page -->
-		<footer>
-			<?php include('../../includes/common/footer.php'); ?>
-		</footer>
+    <footer>
+      <?php include('../../includes/common/footer_mobile.php'); ?>
+    </footer>
 	</body>
 </html>

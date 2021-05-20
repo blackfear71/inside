@@ -16,7 +16,7 @@
         {
           background-color: #262626;
           width: 100%;
-          height: 80px;
+          min-height: 80px;
           overflow: hidden;
         }
 
@@ -40,7 +40,7 @@
           display: inline-block;
           vertical-align: top;
           width: calc(100% - 100px);
-          height: 80px;
+          min-height: 80px;
           padding-right: 20px;
         }
 
@@ -48,7 +48,7 @@
         {
           display: block;
           margin-top: 10px;
-          height: 30px;
+          min-height: 30px;
           line-height: 30px;
           font-family: Calibri, Verdana, sans-serif;
           font-size: 150%;
@@ -59,7 +59,7 @@
         .zone_bandeau_mail_right_bottom
         {
           display: block;
-          height: 30px;
+          min-height: 30px;
           line-height: 30px;
           font-family: Calibri Light, Verdana, sans-serif;
           font-size: 110%;
@@ -210,7 +210,7 @@
 
               // Semaine
               $modele .= '<div class="zone_bandeau_mail_right_bottom">';
-                if (!empty($details->getDoodle()))
+                if (!empty($details->getDate_doodle()))
                   $modele .= 'Sortie organisée le ' . formatDateForDisplay($details->getDate_doodle());
                 else
                   $modele .= 'Sortie à organiser';

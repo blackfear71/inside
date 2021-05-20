@@ -35,6 +35,7 @@
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
 
+      <!-- Contenu -->
 			<article>
 				<?php
           /********************/
@@ -452,7 +453,7 @@
               }
               else
                 echo '<div class="empty">Pas encore de commentaires...</div>';
-                
+
               // Saisie commentaire
   						echo '<form method="post" action="details.php?action=doCommenter" id="comments" class="saisie_commentaires_films">';
   							echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';

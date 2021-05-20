@@ -47,6 +47,7 @@
         include('../../includes/common/celsius.php');
       ?>
 
+      <!-- Contenu -->
 			<article>
 				<?php
           /*********/

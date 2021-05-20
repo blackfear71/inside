@@ -57,16 +57,16 @@
   					echo '<form method="post" action="parcours.php?action=doAjouter" class="PP-form-saisie">';
   						echo '<div class="PP-zone-saisie-avancee-infos">';
   							echo '<label class="label_parcours">Nom : </label>';
-  							echo '<input type="text" placeholder="Nom parcours" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" /><br />';
+  							echo '<input type="text" placeholder="Nom parcours" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" />';
 
                 echo '<label class="label_parcours">Distance : </label>';
-  							echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" /><br />';
+  							echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" />';
 
                 echo '<label class="label_parcours">Lieu : </label>';
-  							echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" /><br />';
+  							echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
 
                 echo '<label class="label_parcours">Url image : </label>';
-  							echo '<input type="text" placeholder="Url de l\'image" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" /><br />';
+  							echo '<input type="text" placeholder="Url de l\'image" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" />';
   						echo '</div>';
 
               echo '<br /><br />';
