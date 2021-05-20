@@ -91,7 +91,7 @@
 
       // Lancement de la détermination
       if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
-      AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
+      AND (!isset($_SESSION['alerts']['determination_time'])     OR $_SESSION['alerts']['determination_time']     != true)
       AND  $isSolo != true AND empty($isReserved))
       {
         // Récupération des appelants possibles

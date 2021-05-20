@@ -44,7 +44,7 @@
 
     if ($dateAControler > date('Ymd'))
     {
-      $_SESSION['alerts']['date_expense'] = true;
+      $_SESSION['alerts']['expense_date'] = true;
       $control_ok                         = false;
     }
 
@@ -62,8 +62,8 @@
     // Contrôle
     if (is_numeric($prix) AND $prix < 0 AND $regularisationSansParts == false)
     {
-      $_SESSION['alerts']['regul_no_parts'] = true;
-      $control_ok                           = false;
+      $_SESSION['alerts']['no_parts_regularization'] = true;
+      $control_ok                                    = false;
     }
 
     // Retour
@@ -105,7 +105,7 @@
     // Contrôle
     if (!is_numeric($prix) OR $prix == 0)
     {
-      $_SESSION['alerts']['depense_not_numeric'] = true;
+      $_SESSION['alerts']['expense_not_numeric'] = true;
       $control_ok                                = false;
     }
 

@@ -6,7 +6,7 @@
   function initializeSaveSession()
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if (!isset($_SESSION['alerts']['erreur_distance']) OR $_SESSION['alerts']['erreur_distance'] != true)
+    if (!isset($_SESSION['alerts']['distance_error']) OR $_SESSION['alerts']['distance_error'] != true)
     {
       unset($_SESSION['save']);
 
@@ -74,7 +74,7 @@
       physiqueInsertionParcours($parcours);
 
       // Message d'alerte
-      $_SESSION['alerts']['parcours_added'] = true;
+      $_SESSION['alerts']['course_added'] = true;
     }
 
     // Positionnement erreur
@@ -120,7 +120,7 @@
       physiqueUpdateParcours($idParcours, $parcours);
 
       // Message d'alerte
-      $_SESSION['alerts']['parcours_updated'] = true;
+      $_SESSION['alerts']['course_updated'] = true;
     }
 
     // Positionnement erreur

@@ -6,19 +6,19 @@
   function initializeOptions()
   {
     // Liste des options
-    $options = array(array('option' => 'common',     'checked' => 'Y', 'titre' => 'Fonctions communes', 'categorie' => 'Contrôleur'),
-                     array('option' => 'dates',      'checked' => 'N', 'titre' => 'Fonctions dates',    'categorie' => 'Contrôleur'),
-                     array('option' => 'regex',      'checked' => 'N', 'titre' => 'Fonctions regex',    'categorie' => 'Contrôleur'),
-                     array('option' => 'admin',      'checked' => 'N', 'titre' => 'Page admin',         'categorie' => 'Contrôleur'),
-                     array('option' => 'angular',    'checked' => 'N', 'titre' => 'Angular',            'categorie' => 'Vue'),
-                     array('option' => 'chat',       'checked' => 'Y', 'titre' => 'Chat',               'categorie' => 'Vue'),
-                     array('option' => 'datepicker', 'checked' => 'N', 'titre' => 'Datepicker',         'categorie' => 'Vue'),
-                     array('option' => 'masonry',    'checked' => 'N', 'titre' => 'Masonry',            'categorie' => 'Vue'),
-                     array('option' => 'exif',       'checked' => 'N', 'titre' => 'Données EXIF',       'categorie' => 'Vue'),
-                     array('option' => 'onglets',    'checked' => 'Y', 'titre' => 'Onglets',            'categorie' => 'Vue'),
-                     array('option' => 'alerts',     'checked' => 'Y', 'titre' => 'Alertes',            'categorie' => 'Vue'),
-                     array('option' => 'success',    'checked' => 'Y', 'titre' => 'Déblocage succès',   'categorie' => 'Vue'),
-                     array('option' => 'mobile',     'checked' => 'N', 'titre' => 'Avec version mobile',     'categorie' => 'Vue')
+    $options = array(array('option' => 'common',     'checked' => 'Y', 'titre' => 'Fonctions communes',  'categorie' => 'Contrôleur'),
+                     array('option' => 'dates',      'checked' => 'N', 'titre' => 'Fonctions dates',     'categorie' => 'Contrôleur'),
+                     array('option' => 'regex',      'checked' => 'N', 'titre' => 'Fonctions regex',     'categorie' => 'Contrôleur'),
+                     array('option' => 'admin',      'checked' => 'N', 'titre' => 'Page admin',          'categorie' => 'Contrôleur'),
+                     array('option' => 'angular',    'checked' => 'N', 'titre' => 'Angular',             'categorie' => 'Vue'),
+                     array('option' => 'chat',       'checked' => 'Y', 'titre' => 'Chat',                'categorie' => 'Vue'),
+                     array('option' => 'datepicker', 'checked' => 'N', 'titre' => 'Datepicker',          'categorie' => 'Vue'),
+                     array('option' => 'masonry',    'checked' => 'N', 'titre' => 'Masonry',             'categorie' => 'Vue'),
+                     array('option' => 'exif',       'checked' => 'N', 'titre' => 'Données EXIF',        'categorie' => 'Vue'),
+                     array('option' => 'onglets',    'checked' => 'Y', 'titre' => 'Onglets',             'categorie' => 'Vue'),
+                     array('option' => 'alerts',     'checked' => 'Y', 'titre' => 'Alertes',             'categorie' => 'Vue'),
+                     array('option' => 'success',    'checked' => 'Y', 'titre' => 'Déblocage succès',    'categorie' => 'Vue'),
+                     array('option' => 'mobile',     'checked' => 'N', 'titre' => 'Avec version mobile', 'categorie' => 'Vue')
                     );
 
     // Retour

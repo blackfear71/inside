@@ -260,11 +260,11 @@
     $control_ok = true;
 
     // Contrôle date de saisie
-    $control_ok = controleDateSaisie('week_end_saisie');
+    $control_ok = controleDateSaisie('week_end_input');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_solo');
+      $control_ok = controleHeureSaisie('solo_time');
 
     // Contrôle déjà solo
     if ($control_ok == true)
@@ -301,7 +301,7 @@
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_suppression_solo');
+      $control_ok = controleHeureSaisie('delete_time_solo');
 
     // Suppression de l'enregistrement en base
     if ($control_ok == true)
@@ -321,7 +321,7 @@
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_reservation');
+      $control_ok = controleHeureSaisie('reservation_time');
 
     // Récupération de la détermination
     if ($control_ok == true)
@@ -388,7 +388,7 @@
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_suppression_reservation');
+      $control_ok = controleHeureSaisie('delete_time_reservation');
 
     // Annulation réservation
     if ($control_ok == true)
@@ -408,7 +408,7 @@
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_suppression');
+      $control_ok = controleHeureSaisie('delete_time');
 
     // Suppression de tous les choix utilisateurs pour ce restaurant et relance de la détermination
     if ($control_ok == true)
@@ -487,11 +487,11 @@
     $control_ok = true;
 
     // Contrôle date de saisie
-    $control_ok = controleDateSaisie('week_end_saisie');
+    $control_ok = controleDateSaisie('week_end_input');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_saisie');
+      $control_ok = controleHeureSaisie('input_time');
 
     // Contrôle bande à part
     if ($control_ok == true)
@@ -678,11 +678,11 @@
     $control_ok       = true;
 
     // Contrôle date de saisie
-    $control_ok = controleDateSaisie('week_end_saisie');
+    $control_ok = controleDateSaisie('week_end_input');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_saisie');
+      $control_ok = controleHeureSaisie('input_time');
 
     // Contrôle bande à part
     if ($control_ok == true)
@@ -772,11 +772,11 @@
     $control_ok = true;
 
     // Contrôle date de saisie
-    $control_ok = controleDateSaisie('week_end_saisie');
+    $control_ok = controleDateSaisie('week_end_input');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_saisie');
+      $control_ok = controleHeureSaisie('input_time');
 
     // Récupération des données et modification de l'enregistrements en base
     if ($control_ok == true)
@@ -838,7 +838,7 @@
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_suppression');
+      $control_ok = controleHeureSaisie('delete_time');
 
     // Vérification appelant à la suppression du choix
     if ($control_ok == true)
@@ -878,7 +878,7 @@
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_suppression');
+      $control_ok = controleHeureSaisie('delete_time');
 
     // Vérification appelant à la suppression du choix
     if ($control_ok == true)

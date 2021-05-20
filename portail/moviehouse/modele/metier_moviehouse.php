@@ -4,8 +4,8 @@
   function initializeSaveSession()
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if ((!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']        != true)
-    AND (!isset($_SESSION['alerts']['wrong_date_doodle'])     OR $_SESSION['alerts']['wrong_date_doodle'] != true)
+    if ((!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']            != true)
+    AND (!isset($_SESSION['alerts']['wrong_date_doodle'])     OR $_SESSION['alerts']['wrong_date_doodle']     != true)
     AND (!isset($_SESSION['alerts']['restaurant_incomplete']) OR $_SESSION['alerts']['restaurant_incomplete'] != true))
     {
       unset($_SESSION['save']);

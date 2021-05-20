@@ -45,8 +45,8 @@
     // Contrôle
     if ($isSolo == true)
     {
-      $_SESSION['alerts']['solo_saisie'] = true;
-      $control_ok                        = false;
+      $_SESSION['alerts']['input_solo'] = true;
+      $control_ok                       = false;
     }
 
     // Retour

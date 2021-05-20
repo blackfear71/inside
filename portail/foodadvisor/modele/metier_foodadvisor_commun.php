@@ -193,7 +193,7 @@
 
     // Contrôle heure de détermination
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_determination');
+      $control_ok = controleHeureSaisie('determination_time');
 
     // Détermination Id restaurant aléatoire
     if ($control_ok == true)
@@ -366,7 +366,7 @@
 
         // Lancement de la détermination
         if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
-        AND (!isset($_SESSION['alerts']['heure_determination'])    OR $_SESSION['alerts']['heure_determination']    != true)
+        AND (!isset($_SESSION['alerts']['determination_time'])     OR $_SESSION['alerts']['determination_time']     != true)
         AND  $isSolo != true AND empty($isReserved))
         {
           // Récupération des appelants possibles
@@ -393,11 +393,11 @@
     $control_ok   = true;
 
     // Contrôle date de saisie
-    $control_ok = controleDateSaisie('week_end_saisie');
+    $control_ok = controleDateSaisie('week_end_input');
 
     // Contrôle heure de saisie
     if ($control_ok == true)
-      $control_ok = controleHeureSaisie('heure_saisie');
+      $control_ok = controleHeureSaisie('input_time');
 
     // Contrôle bande à part
     if ($control_ok == true)

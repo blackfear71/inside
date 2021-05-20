@@ -7,15 +7,15 @@
   function initializeSaveSession()
   {
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if ((!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']          != true)
-    AND (!isset($_SESSION['alerts']['date_expense'])          OR $_SESSION['alerts']['date_expense']        != true)
-    AND (!isset($_SESSION['alerts']['depense_not_numeric'])   OR $_SESSION['alerts']['depense_not_numeric'] != true)
-    AND (!isset($_SESSION['alerts']['regul_no_parts'])        OR $_SESSION['alerts']['regul_no_parts']      != true)
-    AND (!isset($_SESSION['alerts']['parts_not_integer'])     OR $_SESSION['alerts']['parts_not_integer']   != true)
-    AND (!isset($_SESSION['alerts']['empty_amount'])          OR $_SESSION['alerts']['empty_amount']        != true)
-    AND (!isset($_SESSION['alerts']['amount_not_positive'])   OR $_SESSION['alerts']['amount_not_positive'] != true)
-    AND (!isset($_SESSION['alerts']['reduction_not_correct']) OR $_SESSION['alerts']['reduction_not_correct'] != true)
-    AND (!isset($_SESSION['alerts']['amounts_not_numeric'])   OR $_SESSION['alerts']['amounts_not_numeric'] != true))
+    if ((!isset($_SESSION['alerts']['wrong_date'])              OR $_SESSION['alerts']['wrong_date']              != true)
+    AND (!isset($_SESSION['alerts']['expense_date'])            OR $_SESSION['alerts']['expense_date']            != true)
+    AND (!isset($_SESSION['alerts']['expense_not_numeric'])     OR $_SESSION['alerts']['expense_not_numeric']     != true)
+    AND (!isset($_SESSION['alerts']['no_parts_regularization']) OR $_SESSION['alerts']['no_parts_regularization'] != true)
+    AND (!isset($_SESSION['alerts']['parts_not_integer'])       OR $_SESSION['alerts']['parts_not_integer']       != true)
+    AND (!isset($_SESSION['alerts']['empty_amount'])            OR $_SESSION['alerts']['empty_amount']            != true)
+    AND (!isset($_SESSION['alerts']['amount_not_positive'])     OR $_SESSION['alerts']['amount_not_positive']     != true)
+    AND (!isset($_SESSION['alerts']['reduction_not_correct'])   OR $_SESSION['alerts']['reduction_not_correct']   != true)
+    AND (!isset($_SESSION['alerts']['amounts_not_numeric'])     OR $_SESSION['alerts']['amounts_not_numeric']     != true))
   	{
       unset($_SESSION['save']);
 
@@ -327,7 +327,7 @@
       insertExperience($userConnected, 'add_expense');
 
       // Message d'alerte
-      $_SESSION['alerts']['depense_added'] = true;
+      $_SESSION['alerts']['expense_added'] = true;
     }
 
     // Retour
@@ -551,7 +551,7 @@
       insertExperience($userConnected, 'add_expense');
 
       // Message d'alerte
-      $_SESSION['alerts']['depense_added'] = true;
+      $_SESSION['alerts']['expense_added'] = true;
     }
 
     // Retour
@@ -755,7 +755,7 @@
       }
 
       // Message d'alerte
-      $_SESSION['alerts']['depense_modified'] = true;
+      $_SESSION['alerts']['expense_updated'] = true;
     }
 
     // Retour
@@ -1046,7 +1046,7 @@
         insertOrUpdateSuccesValue('generous', $newBuyer, 1);
 
       // Message d'alerte
-      $_SESSION['alerts']['depense_modified'] = true;
+      $_SESSION['alerts']['expense_updated'] = true;
     }
 
     // Retour
@@ -1137,7 +1137,7 @@
     }
 
     // Message d'alerte
-    $_SESSION['alerts']['depense_deleted'] = true;
+    $_SESSION['alerts']['expense_deleted'] = true;
   }
 
   // METIER : Suppression d'une dépense en montants
@@ -1231,6 +1231,6 @@
     }
 
     // Message d'alerte
-    $_SESSION['alerts']['depense_deleted'] = true;
+    $_SESSION['alerts']['expense_deleted'] = true;
   }
 ?>

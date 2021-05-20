@@ -27,8 +27,8 @@
     // Contrôle
     if (!empty($mesChoix))
     {
-      $_SESSION['alerts']['choix_solo'] = true;
-      $control_ok                       = false;
+      $_SESSION['alerts']['solo_choice'] = true;
+      $control_ok                        = false;
     }
 
     // Retour
