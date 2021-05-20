@@ -369,6 +369,7 @@
 {
   display: block;
   text-align: center;
+  margin-bottom: 0.5vh;
 }
 
 .icone_preference
@@ -659,7 +660,7 @@
   margin-right: 1vh;
   text-align: center;
   height: 5vh;
-  line-height: 4.5vh;
+  line-height: 4.6vh;
   padding-left: 0.5vh;
   padding-right: 0.5vh;
   border-radius: 0.5vh;
@@ -672,7 +673,7 @@
   width: calc(50% - 1.5vh);
   text-align: center;
   height: 5vh;
-  line-height: 4.5vh;
+  line-height: 4.6vh;
   padding-left: 0.5vh;
   padding-right: 0.5vh;
   border-radius: 0.5vh;
@@ -686,7 +687,7 @@
   margin-top: 1vh;
   text-align: center;
   height: 5vh;
-  line-height: 4.5vh;
+  line-height: 4.6vh;
   padding-left: 0.5vh;
   padding-right: 0.5vh;
   border-radius: 0.5vh;
@@ -702,7 +703,7 @@
   margin-right: 1vh;
   text-align: center;
   height: 5vh;
-  line-height: 4.5vh;
+  line-height: 4.6vh;
   padding-left: 0.5vh;
   padding-right: 0.5vh;
   border-radius: 0.5vh;
@@ -717,7 +718,7 @@
   margin-top: 1vh;
   text-align: center;
   height: 5vh;
-  line-height: 4.5vh;
+  line-height: 4.6vh;
   padding-left: 0.5vh;
   padding-right: 0.5vh;
   border-radius: 0.5vh;
