@@ -346,6 +346,11 @@
   text-align: center;
 }
 
+.zone_radio_restaurant input
+{
+  margin-top: 1vh;
+}
+
 .bouton_checked
 {
 	background-color: #ff1937;
