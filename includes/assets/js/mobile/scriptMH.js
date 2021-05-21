@@ -29,28 +29,6 @@ $(function()
     initialisationModification('zone_saisie_film');
   });
 
-  // Réinitialise la saisie à la fermeture au clic sur le fond
-  $(document).on('click', function(event)
-  {
-    // Ferme la saisie d'un film
-    if ($(event.target).attr('class') == 'fond_saisie')
-    {
-      switch (event.target.id)
-      {
-        case 'zone_saisie_film':
-          afficherMasquerIdWithDelay('zone_saisie_film');
-          break;
-
-        case 'zone_saisie_preference':
-          afficherMasquerIdWithDelay('zone_saisie_preference');
-          break;
-
-        default:
-          break;
-      }
-    }
-  });
-
   // Change la couleur des switch restaurant film
   $('.label_switch').click(function()
   {
