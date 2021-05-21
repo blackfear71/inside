@@ -189,7 +189,8 @@
   display: inline-block;
   vertical-align: top;
   border-right: solid 0.2vh #b3b3b3;
-  width: calc(50% - 0.1vh);
+  width: calc(50% - 2.1vh);
+  padding-right: 2vh;
 }
 
 .zone_parametres_avatar
@@ -216,7 +217,8 @@
 {
   display: inline-block;
   vertical-align: top;
-  width: calc(50% - 0.1vh);
+  width: calc(50% - 2.1vh);
+  padding-left: 2vh;
 }
 
 .zone_saisie_image
@@ -284,11 +286,9 @@
 .bouton_validation_image
 {
 	display: block;
-	width: calc(100% - 4vh);
+	width: 100%;
   padding-top: 1vh;
   padding-bottom: 1vh;
-  margin-left: auto;
-  margin-right: auto;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: robotolight, Verdana, sans-serif;

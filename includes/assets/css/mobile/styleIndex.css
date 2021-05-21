@@ -103,7 +103,7 @@
 .lien_index
 {
 	display: inline-block;
-	width: calc(50% - 1vh);
+	width: calc(50% - 2%);
 	vertical-align: top;
 	height: 6vh;
 	line-height: 6vh;
@@ -118,7 +118,7 @@
 
 .lien_index_margin_right
 {
-	margin-right: 2vh;
+	margin-right: 4%;
 }
 
 .lien_index:active
