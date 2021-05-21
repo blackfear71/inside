@@ -284,7 +284,7 @@
                 echo '</div>';
 
                 // Date sortie DVD / Bluray
-                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie en DVD / Bluray</div></div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/moviehouse/disk_grey.png" alt="disk_grey" class="logo_titre_section" /><div class="texte_titre_section">Sortie en DVD / Bluray</div></div>';
                 echo '<div class="contenu_detail">';
                   if (!empty($detailsFilm->getDate_release()))
                     echo formatDateForDisplay($detailsFilm->getDate_release());
