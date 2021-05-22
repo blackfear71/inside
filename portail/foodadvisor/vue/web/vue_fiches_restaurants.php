@@ -177,7 +177,10 @@
                 echo '<div class="zone_fiche_left">';
                   echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
-                  echo '<span class="zone_parcourir_restaurant_update">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" id="modifier_image_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update loadModifierRestaurant" /></span>';
+                  echo '<span class="zone_parcourir_restaurant_update">';
+                    echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image_2" />';
+                    echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="update_image_restaurant_' . $restaurant->getId() . '" id="modifier_image_' . $restaurant->getId() . '" class="bouton_parcourir_restaurant_update loadModifierRestaurant" />';
+                  echo '</span>';
 
                   echo '<div class="mask_update_restaurant">';
                     if (!empty($restaurant->getPicture()))

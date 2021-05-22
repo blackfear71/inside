@@ -63,24 +63,21 @@
 	display: block;
 	width: 254px;
 	height: 359px;
+	line-height: 359px;
 	margin-left: auto;
 	margin-right: auto;
 	border-style: dashed;
 	border-width: 3px;
 	border-radius: 2px;
 	border-color: #a3a3a3;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 300%;
-	color: #a3a3a3;
 	text-align: center;
 	overflow: hidden;
 }
 
-.symbole_saisie_image
+.logo_saisie_image
 {
-	width: 254px;
-	height: 359px;
-	line-height: 359px;
+	width: 40px;
+	vertical-align: middle;
 }
 
 .bouton_parcourir_image

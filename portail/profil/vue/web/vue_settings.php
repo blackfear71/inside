@@ -18,7 +18,10 @@
   echo '<form method="post" action="profil.php?action=doModifierAvatar" enctype="multipart/form-data" class="form_update_avatar">';
     echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
-    echo '<span class="zone_parcourir_avatar">+<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar loadAvatar" required /></span>';
+    echo '<span class="zone_parcourir_avatar">';
+      echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
+      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="avatar" class="bouton_parcourir_avatar loadAvatar" required />';
+    echo '</span>';
 
     echo '<div class="mask_avatar">';
       echo '<img id="avatar" alt="" class="avatar_update_profil" />';

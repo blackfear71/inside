@@ -451,21 +451,20 @@
 .zone_parcourir_image
 {
 	width: 200px;
-	height: 200px;
+  height: 200px;
+	line-height: 200px;
 	border-style: dashed;
 	border-width: 3px;
 	border-radius: 2px;
 	border-color: #a3a3a3;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 300%;
-	color: #a3a3a3;
 	text-align: center;
 	overflow: hidden;
 }
 
-.symbole_saisie_image
+.logo_saisie_image
 {
-	line-height: 200px;
+	width: 40px;
+	vertical-align: middle;
 }
 
 .bouton_parcourir_image

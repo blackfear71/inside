@@ -224,7 +224,8 @@
 .zone_saisie_image
 {
 	width: 20vh;
-	height: 20vh;
+  height: 20vh;
+	line-height: 19vh;
 	margin-bottom: 2vh;
 	margin-left: auto;
 	margin-right: auto;
@@ -243,12 +244,10 @@
 	box-sizing: border-box;
 }
 
-.symbole_saisie_image
+.logo_saisie_image
 {
-	line-height: 19vh;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 10vh;
-	color: #a3a3a3;
+	width: 6vh;
+	vertical-align: middle;
 }
 
 .bouton_parcourir_image
@@ -478,7 +477,7 @@
 {
   display: inline-block;
   vertical-align: middle;
-  width: calc(100% - 10vh);
+  width: calc(100% - 7vh);
   margin-bottom: 2vh;
   padding: 1.2vh 1.5vh 1.2vh 1.5vh;
   background-color: white;
@@ -493,7 +492,7 @@
 .bouton_validation_form_2
 {
 	display: block;
-	width: calc(100% - 7vh);
+	width: calc(100% - 4vh);
   padding-top: 1vh;
   padding-bottom: 1vh;
 	margin-left: auto;
@@ -513,7 +512,7 @@
   font-family: robotolight, Verdana, sans-serif;
   color: #262626;
   font-size: 2.5vh;
-  width: calc(100% - 7vh);
+  width: calc(100% - 4vh);
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 2vh;

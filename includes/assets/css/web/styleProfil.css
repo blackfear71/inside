@@ -266,17 +266,20 @@
 {
 	display: inline-block;
 	height: 120px;
+	line-height: 120px;
 	width: 120px;
 	border-style: dashed;
 	border-radius: 50%;
 	border-color: #a3a3a3;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 300%;
-	line-height: 118px;
-	color: #a3a3a3;
 	text-align: center;
 	margin-bottom: 20px;
 	overflow: hidden;
+}
+
+.logo_saisie_image
+{
+	width: 40px;
+	vertical-align: middle;
 }
 
 .bouton_parcourir_avatar

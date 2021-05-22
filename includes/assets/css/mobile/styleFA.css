@@ -781,6 +781,7 @@
 	display: block;
 	width: 30vh;
 	height: 30vh;
+	line-height: 29vh;
 	margin-top: 2vh;
 	margin-bottom: 2vh;
 	margin-left: auto;
@@ -800,12 +801,10 @@
 	box-sizing: border-box;
 }
 
-.symbole_saisie_image
+.logo_saisie_image
 {
-	line-height: 29vh;
-	font-family: robotolight, Verdana, sans-serif;
-	font-size: 10vh;
-	color: #a3a3a3;
+	width: 6vh;
+	vertical-align: middle;
 }
 
 .bouton_parcourir_image
