@@ -43,7 +43,7 @@
 
             // Date de sortie DVD
             echo '<div class="zone_saisie_ligne">';
-              echo '<img src="../../includes/icons/moviehouse/date_grey.png" alt="date_grey" title="Date de sortie DVD/Bluray" class="icone_saisie" />';
+              echo '<img src="../../includes/icons/moviehouse/disk_grey.png" alt="disk_grey" title="Date de sortie DVD/Bluray" class="icone_saisie" />';
               echo '<input type="date" name="date_release" value="' . $_SESSION['save']['date_release_saisie'] . '" placeholder="Date de sortie DVD/Bluray" maxlength="10" autocomplete="off" class="saisie_date" />';
             echo '</div>';
 
