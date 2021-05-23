@@ -287,8 +287,8 @@
 .saisie_date_short
 {
 	display: inline-block;
-	width: calc(55% - 9vh);
-	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	width: calc(55% - 8vh);
+	padding: 1.2vh 1vh 1.2vh 1vh;
 	border-radius: 0.5vh;
 	border: 0;
   background-color: white;
