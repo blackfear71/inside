@@ -287,7 +287,7 @@
 .saisie_date_short
 {
 	display: inline-block;
-	width: calc(60% - 9vh);
+	width: calc(55% - 9vh);
 	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
 	border-radius: 0.5vh;
 	border: 0;
@@ -302,7 +302,7 @@
 .select_time
 {
 	display: inline-block;
-	width: calc(20% - 1vh);
+	width: calc(22.5% - 1vh);
 	margin-left: 1vh;
 	padding: 1.2vh 1vh 1.2vh 1vh;
 	border: 0;
