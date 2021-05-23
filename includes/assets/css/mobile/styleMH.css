@@ -288,7 +288,8 @@
 {
 	display: inline-block;
 	width: calc(55% - 8vh);
-	padding: 1.2vh 1vh 1.2vh 1vh;
+  padding-top: 1.2vh;
+  padding-bottom: 1.2vh;
 	border-radius: 0.5vh;
 	border: 0;
   background-color: white;
