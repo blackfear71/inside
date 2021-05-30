@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Journal des modifications';
-      $styleHead      = 'styleCL.css';
-      $scriptHead     = 'scriptCL.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = true;
-      $exifHead       = false;
+      $titleHead       = 'Journal des modifications';
+      $styleHead       = 'styleCL.css';
+      $scriptHead      = 'scriptCL.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = true;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

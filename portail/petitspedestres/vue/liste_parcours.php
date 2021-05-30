@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Les Petits Pédestres';
-      $styleHead      = 'stylePP.css';
-      $scriptHead     = 'scriptPP.js';
-      $angularHead    = true;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = false;
-      $exifHead       = false;
+      $titleHead       = 'Les Petits Pédestres';
+      $styleHead       = 'stylePP.css';
+      $scriptHead      = 'scriptPP.js';
+      $angularHead     = true;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = false;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

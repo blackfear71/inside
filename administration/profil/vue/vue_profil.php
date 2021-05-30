@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Administrateur';
-      $styleHead      = 'styleProfil.css';
-      $scriptHead     = 'scriptProfil.js';
-      $angularHead    = false;
-      $chatHead       = false;
-      $datepickerHead = true;
-      $masonryHead    = true;
-      $exifHead       = false;
+      $titleHead       = 'Administrateur';
+      $styleHead       = 'styleProfil.css';
+      $scriptHead      = 'scriptProfil.js';
+      $angularHead     = false;
+      $chatHead        = false;
+      $datepickerHead  = true;
+      $masonryHead     = true;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

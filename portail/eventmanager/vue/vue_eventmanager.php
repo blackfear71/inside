@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Event Manager';
-      $styleHead      = 'styleEM.css';
-      $scriptHead     = '';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = false;
-      $exifHead       = false;
+      $titleHead       = 'Event Manager';
+      $styleHead       = 'styleEM.css';
+      $scriptHead      = '';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = false;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

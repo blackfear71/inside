@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Expense Center';
-      $styleHead      = 'styleEC.css';
-      $scriptHead     = 'scriptEC.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = true;
-      $masonryHead    = true;
-      $exifHead       = false;
+      $titleHead       = 'Expense Center';
+      $styleHead       = 'styleEC.css';
+      $scriptHead      = 'scriptEC.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = true;
+      $masonryHead     = true;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

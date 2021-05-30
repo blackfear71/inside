@@ -83,3 +83,7 @@
 <?php if (isset($datepickerHead) AND $datepickerHead == true) { ?>
   <script src="/inside/includes/libraries/js/datepicker.js"></script>
 <?php } ?>
+
+<?php if (isset($html2canvasHead) AND $html2canvasHead == true) { ?>
+  <script src="/inside/includes/libraries/js/html2canvas.min.js"></script>
+<?php } ?>

@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Notifications';
-      $styleHead      = 'styleNO.css';
-      $scriptHead     = 'scriptNO.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = false;
-      $exifHead       = false;
+      $titleHead       = 'Notifications';
+      $styleHead       = 'styleNO.css';
+      $scriptHead      = 'scriptNO.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = false;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

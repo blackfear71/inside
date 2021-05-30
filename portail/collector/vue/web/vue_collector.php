@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Collector Room';
-      $styleHead      = 'styleCO.css';
-      $scriptHead     = 'scriptCO.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = true;
-      $masonryHead    = true;
-      $exifHead       = true;
+      $titleHead       = 'Collector Room';
+      $styleHead       = 'styleCO.css';
+      $scriptHead      = 'scriptCO.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = true;
+      $masonryHead     = true;
+      $exifHead        = true;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

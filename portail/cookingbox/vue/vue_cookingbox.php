@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Cooking Box';
-      $styleHead      = 'styleCB.css';
-      $scriptHead     = 'scriptCB.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = true;
-      $exifHead       = true;
+      $titleHead       = 'Cooking Box';
+      $styleHead       = 'styleCB.css';
+      $scriptHead      = 'scriptCB.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = true;
+      $exifHead        = true;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

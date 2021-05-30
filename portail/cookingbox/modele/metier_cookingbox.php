@@ -501,10 +501,10 @@
         rotateImage($dossier . '/' . $newName, $typeImage);
 
       // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 2000, FALSE, FALSE);
+      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 2000, false, false);
 
       // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, FALSE, FALSE);
+      imagethumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, false, false);
     }
 
     // Retour

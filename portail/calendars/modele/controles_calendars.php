@@ -20,4 +20,22 @@
     // Retour
     return $control_ok;
   }
+
+  // CONTROLE : Utilisateur autorisé
+  // RETOUR : Booléen
+  function controleUtilisateurAutorise($preferenceGestion)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Contrôle
+    if ($preferenceGestion != 'Y')
+    {
+      $_SESSION['alerts']['not_authorized'] = true;
+      $control_ok                           = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
 ?>

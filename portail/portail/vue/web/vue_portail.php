@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Portail';
-      $styleHead      = 'stylePortail.css';
-      $scriptHead     = 'scriptPortail.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = true;
-      $exifHead       = false;
+      $titleHead       = 'Portail';
+      $styleHead       = 'stylePortail.css';
+      $scriptHead      = 'scriptPortail.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = true;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

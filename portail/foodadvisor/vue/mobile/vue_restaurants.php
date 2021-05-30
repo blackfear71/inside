@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Les enfants ! À table !';
-      $styleHead      = 'styleFA.css';
-      $scriptHead     = 'scriptFA.js';
-      $angularHead    = false;
-      $chatHead       = false;
-      $datepickerHead = false;
-      $masonryHead    = false;
-      $exifHead       = true;
+      $titleHead       = 'Les enfants ! À table !';
+      $styleHead       = 'styleFA.css';
+      $scriptHead      = 'scriptFA.js';
+      $angularHead     = false;
+      $chatHead        = false;
+      $datepickerHead  = false;
+      $masonryHead     = false;
+      $exifHead        = true;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -29,7 +30,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
       <!-- Menus -->
       <aside>
   			<?php include('../../includes/common/aside_mobile.php'); ?>

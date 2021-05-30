@@ -65,7 +65,8 @@
 		}
 
 		// Calendars
-		if ($path == '/inside/portail/calendars/calendars.php')
+		if ($path == '/inside/portail/calendars/calendars.php'
+		OR  $path == '/inside/portail/calendars/calendars_generator.php')
 		{
 			$onglet6 = '<a href="/inside/portail/calendars/calendars.php?year=' . date('Y') . '&action=goConsulter" title="Calendars" class="onglet_actif"><img src="/inside/includes/icons/common/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
 		}

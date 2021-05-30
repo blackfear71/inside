@@ -302,4 +302,62 @@
     // Retour
     return $ecart;
   }
+
+  // DATE : Détermine si un jour est férié (AAAAMMJJ)
+  // RETOUR : Jour férié
+  function isJourFerie($date)
+  {
+    // Initialisations
+    $jourFerie = '';
+
+    // Récupération des données
+    $annee = substr($date, 0, 4);
+
+    // Calcul des jours fériés variables
+    $dimanchePaques    = date('Ymd', easter_date($annee));
+    $lundiPaques       = date('Ymd', strtotime($dimanchePaques . ' + 1 days'));
+    $ascension         = date('Ymd', strtotime($dimanchePaques . ' + 39 days'));
+    $dimanchePentecote = date('Ymd', strtotime($dimanchePaques . ' + 49 days'));
+    $lundiPentecote    = date('Ymd', strtotime($dimanchePaques . ' + 50 days'));
+
+    // Liste des jours fériés
+    $joursFeries = array($annee . '0101'    => 'Jour de l\'an',
+                         $annee . '0402'    => 'Vendredi Saint',
+                         $dimanchePaques    => 'Dimanche de Pâques',
+                         $lundiPaques       => 'Lundi de Pâques',
+                         $annee . '0501'    => 'Fête du travail',
+                         $annee . '0508'    => 'Victoire 1945',
+                         $ascension         => 'Ascension',
+                         $dimanchePentecote => 'Dimanche de Pentecôte',
+                         $lundiPentecote    => 'Lundi de Pentecôte',
+                         $annee . '0714'    => 'Fête Nationale',
+                         $annee . '0815'    => 'Assomption',
+                         $annee . '1101'    => 'Toussaint',
+                         $annee . '1111'    => 'Armistice 1918',
+                         $annee . '1225'    => 'Noël',
+                         $annee . '1226'    => 'Saint-Etienne'
+                        );
+
+    // Détermination si date fériée
+    if (isset($joursFeries[$date]))
+      $jourFerie = $joursFeries[$date];
+
+    // Retour
+    return $jourFerie;
+  }
+
+  // DATE : Détermine si un jour est en vacances (AAAAMMJJ)
+  // RETOUR : Jour vacances
+  function isVacances($date, $vacances)
+  {
+    // Initialisations
+    $jourVacances = false;
+
+    // Recherche si jour fisant partie de vacances
+    if (isset($vacances[$date]) AND $vacances[$date]['vacances_zone_b'] == 'True')
+      $jourVacances = true;
+
+    // Retour
+    return $jourVacances;
+  }
 ?>

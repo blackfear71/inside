@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Missions : Insider';
-      $styleHead      = 'styleMI.css';
-      $scriptHead     = 'scriptMI.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = true;
-      $exifHead       = false;
+      $titleHead       = 'Missions : Insider';
+      $styleHead       = 'styleMI.css';
+      $scriptHead      = 'scriptMI.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = true;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

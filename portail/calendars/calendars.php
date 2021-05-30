@@ -4,10 +4,8 @@
   *******************************
   Fonctionnalités :
   - Consultation des calendriers
-  - Ajout des calendriers
   - Suppression des calendriers
   - Consultation des annexes
-  - Ajout des annexes
   - Suppression des annexes
   ******************************/
 
@@ -39,6 +37,9 @@
         // Récupération des onglets (années)
         $onglets = getOnglets();
 
+        // Récupération de la liste des mois de l'année
+        $listeMois = getMonthsCalendars();
+
         // Récupération de la liste des calendriers
         $calendriers = getCalendars($_GET['year']);
 
@@ -56,16 +57,6 @@
 
       // Récupération des préférences de l'utilisateur
       $preferences = getPreferences($_SESSION['user']['identifiant']);
-      break;
-
-    case 'doAjouter':
-      // Insertion d'un calendrier
-      insertCalendrier($_POST, $_FILES, $_SESSION['user']['identifiant']);
-      break;
-
-    case 'doAjouterAnnexe':
-      // Insertion d'une annexe
-      insertAnnexe($_POST, $_FILES, $_SESSION['user']['identifiant']);
       break;
 
     case 'doSupprimer':
@@ -95,6 +86,13 @@
 
       unset($year);
 
+      foreach ($listeMois as &$mois)
+      {
+        $mois = htmlspecialchars($mois);
+      }
+
+      unset($mois);
+
       foreach ($calendriers as $calendrier)
       {
         Calendrier::secureData($calendrier);
@@ -119,8 +117,6 @@
       Preferences::secureData($preferences);
       break;
 
-    case 'doAjouter':
-    case 'doAjouterAnnexe':
     case 'doSupprimer':
     case 'doSupprimerAnnexe':
     default:
@@ -130,11 +126,6 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case 'doAjouter':
-      header('location: calendars.php?year=' . $_POST['years'] . '&action=goConsulter');
-      break;
-
-    case 'doAjouterAnnexe':
     case 'doSupprimerAnnexe':
       header('location: calendars.php?action=goConsulterAnnexes');
       break;

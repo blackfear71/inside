@@ -232,7 +232,7 @@
             rotateImage($dossier . '/' . $newName, $typeImage);
 
           // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, FALSE, TRUE);
+          imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
         }
       }
       else
@@ -416,7 +416,7 @@
               rotateImage($dossier . '/' . $newName, $typeImage);
 
             // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-            imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, FALSE, TRUE);
+            imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
           }
         }
       }

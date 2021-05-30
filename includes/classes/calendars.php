@@ -299,4 +299,61 @@
       return $this->manage_calendars;
     }
   }
+
+  class CalendarParameters
+  {
+    private $month;
+    private $year;
+    private $picture;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->month   = '';
+      $this->year    = '';
+      $this->picture = '';
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setMonth(htmlspecialchars($data->getMonth()));
+      $data->setYear(htmlspecialchars($data->getYear()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+    }
+
+    // Getters et Setters pour l'objet CalendarParameters
+    // Mois
+    public function setMonth($month)
+    {
+      $this->month = $month;
+    }
+
+    public function getMonth()
+    {
+      return $this->month;
+    }
+
+    // Année
+    public function setYear($year)
+    {
+      $this->year = $year;
+    }
+
+    public function getYear()
+    {
+      return $this->year;
+    }
+
+    // Image
+    public function setPicture($picture)
+    {
+      $this->picture = $picture;
+    }
+
+    public function getPicture()
+    {
+      return $this->picture;
+    }
+  }
 ?>

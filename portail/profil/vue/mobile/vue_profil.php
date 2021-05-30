@@ -24,13 +24,14 @@
           break;
       }
 
-      $styleHead      = 'styleProfil.css';
-      $scriptHead     = 'scriptProfil.js';
-      $angularHead    = false;
-      $chatHead       = false;
-      $datepickerHead = false;
-      $masonryHead    = false;
-      $exifHead       = true;
+      $styleHead       = 'styleProfil.css';
+      $scriptHead      = 'scriptProfil.js';
+      $angularHead     = false;
+      $chatHead        = false;
+      $datepickerHead  = false;
+      $masonryHead     = false;
+      $exifHead        = true;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -49,7 +50,7 @@
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
-      
+
       <!-- Menus -->
       <aside>
         <?php include('../../includes/common/aside_mobile.php'); ?>

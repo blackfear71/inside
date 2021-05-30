@@ -130,7 +130,7 @@
       $newName = $fileDatas['new_name'];
 
       // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, FALSE, TRUE);
+      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, false, true);
 
       // Suppression de l'ancien avatar si présent
       $oldAvatar = physiqueAvatarUser($identifiant);

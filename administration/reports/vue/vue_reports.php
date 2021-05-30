@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Bugs';
-      $styleHead      = 'styleBugs.css';
-      $scriptHead     = 'scriptBugs.js';
-      $angularHead    = false;
-      $chatHead       = false;
-      $datepickerHead = false;
-      $masonryHead    = false;
-      $exifHead       = true;
+      $titleHead       = 'Bugs';
+      $styleHead       = 'styleBugs.css';
+      $scriptHead      = 'scriptBugs.js';
+      $angularHead     = false;
+      $chatHead        = false;
+      $datepickerHead  = false;
+      $masonryHead     = false;
+      $exifHead        = true;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>

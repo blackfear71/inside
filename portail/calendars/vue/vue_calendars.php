@@ -3,14 +3,15 @@
   <head>
     <!-- Head commun & spécifique-->
     <?php
-      $titleHead      = 'Calendars';
-      $styleHead      = 'styleCA.css';
-      $scriptHead     = 'scriptCA.js';
-      $angularHead    = false;
-      $chatHead       = true;
-      $datepickerHead = false;
-      $masonryHead    = true;
-      $exifHead       = false;
+      $titleHead       = 'Calendars';
+      $styleHead       = 'styleCA.css';
+      $scriptHead      = 'scriptCA.js';
+      $angularHead     = false;
+      $chatHead        = true;
+      $datepickerHead  = false;
+      $masonryHead     = true;
+      $exifHead        = false;
+      $html2canvasHead = false;
 
       include('../../includes/common/head.php');
     ?>
@@ -43,6 +44,20 @@
           $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
+          /*********/
+          /* Liens */
+          /*********/
+          if ($preferences->getManage_calendars() == 'Y')
+          {
+            echo '<div class="zone_liens_saisie">';
+              // Création calendrier
+              echo '<a href="calendars_generator.php?action=goConsulter" title="Créer un calendrier" class="lien_categorie">';
+                echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/edit.png" alt="edit" class="image_lien" /></div>';
+                echo '<div class="zone_texte_lien">Créer un nouveau calendrier ou une annexe</div>';
+              echo '</a>';
+            echo '</div>';
+          }
+
           /*******************/
           /* Chargement page */
           /*******************/
@@ -50,83 +65,17 @@
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
 
-          /*******************/
-          /* Saisie & Années */
-          /*******************/
-          echo '<div class="zone_calendars_left">';
-            // Saisie
-            if ($preferences->getManage_calendars() == 'Y')
-            {
-              $listeMois = array('01' => 'Janvier',
-                                 '02' => 'Février',
-                                 '03' => 'Mars',
-                                 '04' => 'Avril',
-                                 '05' => 'Mai',
-                                 '06' => 'Juin',
-                                 '07' => 'Juillet',
-                                 '08' => 'Août',
-                                 '09' => 'Septembre',
-                                 '10' => 'Octobre',
-                                 '11' => 'Novembre',
-                                 '12' => 'Décembre'
-                                );
-
-              $anneeDebut = date('Y') - 2;
-              $anneeFin   = date('Y') + 2;
-
-              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir un calendrier</div></div>';
-
-              echo '<div class="zone_saisie_calendrier">';
-                echo '<form method="post" action="calendars.php?action=doAjouter" enctype="multipart/form-data">';
-                  // Listbox mois
-                  echo '<select name="months" class="listbox" required>';
-                    echo '<option value="" disabled selected hidden>Mois</option>';
-
-                    foreach ($listeMois as $number => $month)
-                    {
-                      echo '<option value="' . $number . '">' . $month . '</option>';
-                    }
-                  echo '</select>';
-
-                  // Listbox année
-                  echo '<select name="years" class="listbox" required>';
-                    echo '<option value="" disabled selected hidden>Année</option>';
-                    for ($i = $anneeDebut; $i <= $anneeFin; $i++)
-                    {
-                      echo '<option value="' . $i . '">' . $i . '</option>';
-                    }
-                  echo '</select>';
-
-                  // Image
-                  echo '<div class="zone_saisie_image">';
-                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
-                    echo '<div class="zone_parcourir_image">';
-                      echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
-                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_image loadCalendrier" required />';
-                    echo '</div>';
-
-                    echo '<div class="mask_image">';
-                      echo '<img id="image_calendars" alt="" class="image" />';
-                    echo '</div>';
-                  echo '</div>';
-
-                  // Bouton validation
-                  echo '<div class="zone_bouton_saisie">';
-                    echo '<input type="submit" name="send" value="Valider" id="bouton_saisie_calendrier" class="saisie_bouton" />';
-                  echo '</div>';
-                echo '</form>';
-              echo '</div>';
-            }
-
-            // Années
+          /**********/
+          /* Années */
+          /**********/
+          echo '<div class="zone_calendars_onglets">';
             include('vue/vue_onglets.php');
           echo '</div>';
 
           /***************/
           /* Calendriers */
           /***************/
-          echo '<div class="zone_calendars_right">';
+          echo '<div class="zone_calendars">';
             echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Les calendriers</div></div>';
 
             if (!empty($calendriers))
