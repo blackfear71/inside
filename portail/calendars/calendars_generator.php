@@ -52,6 +52,11 @@
           $vacances = getVacances($calendarParameters);
         }
       }
+      else
+      {
+        // Redirection si non accessible
+        header('location: calendars.php?year=' . date('Y') . '&action=goConsulter');
+      }
       break;
 
     case 'doGenerer':
