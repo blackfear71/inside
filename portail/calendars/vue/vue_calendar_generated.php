@@ -79,9 +79,19 @@
                   echo '<td class="jour_calendrier_generator">';
                     // Numéro du jour
                     if ($jourVacances == true)
-                      echo '<div class="numero_jour_calendrier_generator jour_vacances_calendrier_generator">'. $numeroJourAAfficher . '</div>';
+                    {
+                      if (!empty($calendarParameters->getPicture()))
+                        echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_red_light">'. $numeroJourAAfficher . '</div>';
+                      else
+                        echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_red">'. $numeroJourAAfficher . '</div>';
+                    }
                     else
-                      echo '<div class="numero_jour_calendrier_generator">'. $numeroJourAAfficher . '</div>';
+                    {
+                      if (!empty($calendarParameters->getPicture()))
+                        echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_grey_light">'. $numeroJourAAfficher . '</div>';
+                      else
+                        echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_grey">'. $numeroJourAAfficher . '</div>';
+                    }
 
                     // Jour férié
                     if (!empty($jourFerie))
