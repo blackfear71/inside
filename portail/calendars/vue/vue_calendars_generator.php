@@ -168,7 +168,11 @@
                   echo 'Ceci est le générateur de calendriers automatisé. La saisie des données permet de générer un calendrier sur-mesure puis de le
                   sauvegarder sur le site. Les données disponibles sont :';
 
-                  echo '<ul><li>Le mois</li><li>L\'année</li><li>L\'image de fond</li></ul>';
+                  echo '<ul>';
+                    echo '<li>L\'image de fond (non obligatoire)</li>';
+                    echo '<li>Le mois (obligatoire)</li>';
+                    echo '<li>L\'année (obligatoire)</li>';
+                  echo '</ul>';
 
                   echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
                   En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
@@ -240,7 +244,11 @@
                   echo 'Ceci est l\'ancien outil de mise en ligne de calendriers. Celui-ci fonctionne toujours normalement et permet de mettre en ligne
                   un calendrier personnalisé. Toutes les saisies sont obligatoires. Les données à saisir sont :';
 
-                  echo '<ul><li>Le calendrier</li><li>Le mois</li><li>L\'année</li></ul>';
+                  echo '<ul>';
+                    echo '<li>Le calendrier</li>';
+                    echo '<li>Le mois</li>';
+                    echo '<li>L\'année</li>';
+                  echo '</ul>';
                 echo '</div>';
               echo '</div>';
             echo '</div>';
@@ -283,12 +291,15 @@
 
               // Explications
               echo '<div class="zone_saisie_calendars_right">';
-                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie d\'annexe</div>';
+                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie d\'annexes</div>';
 
                 echo '<div class="explications_calendrier_generator">';
                   echo 'Ceci est l\'outil de mise en ligne d\'annexes aux calendriers. Toutes les saisies sont obligatoires. Les données à saisir sont :';
 
-                  echo '<ul><li>L\'annexe</li><li>Le nom de l\'annexe</li></ul>';
+                  echo '<ul>';
+                    echo '<li>L\'annexe</li>';
+                    echo '<li>Le nom de l\'annexe</li>';
+                  echo '</ul>';
                 echo '</div>';
 
                 echo '<div class="explications_calendrier_generator">';
