@@ -24,6 +24,7 @@ $(function()
     tabBlock.push({element: '.listbox', property: 'readonly', value: true});
     tabBlock.push({element: '.listbox', property: 'pointer-events', value: 'none'});
     tabBlock.push({element: '.listbox', property: 'color', value: '#a3a3a3'});
+    tabBlock.push({element: '.saisie_bouton', property: 'display', value: 'none'});
 
     hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
   });

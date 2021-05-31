@@ -122,29 +122,33 @@
               if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
               {
                 echo '<div class="zone_calendrier_generator_middle">';
-                  // Génération du calendrier au format HTML
-                  include('vue_calendar_generated.php');
+                  echo '<div class="zone_saisie_calendrier">';
+                    // Génération du calendrier au format HTML
+                    include('vue_calendar_generated.php');
 
-                  // Affichage du calendrier au format JPEG (une fois généré)
-                  echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_generator" />';
+                    // Affichage du calendrier au format JPEG (une fois généré)
+                    echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_generator" />';
 
-                  // Formulaire de sauvegarde de l'image générée
-                  echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
-                    // Image générée
-                    echo '<input type="hidden" name="calendar_generator" id="calendar_generator" value="" />';
+                    // Formulaire de sauvegarde de l'image générée
+                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
+                      // Image générée
+                      echo '<input type="hidden" name="calendar_generator" id="calendar_generator" value="" />';
 
-                    // Nom fichiers temporaires
-                    echo '<input type="hidden" name="temp_name_generator" value="' . $calendarParameters->getPicture() . '" />';
+                      // Nom fichiers temporaires
+                      echo '<input type="hidden" name="temp_name_generator" value="' . $calendarParameters->getPicture() . '" />';
 
-                    // Mois
-                    echo '<input type="hidden" name="month_generator" value="' . $calendarParameters->getMonth() . '" />';
+                      // Mois
+                      echo '<input type="hidden" name="month_generator" value="' . $calendarParameters->getMonth() . '" />';
 
-                    // Année
-                    echo '<input type="hidden" name="year_generator" value="' . $calendarParameters->getYear() . '" />';
+                      // Année
+                      echo '<input type="hidden" name="year_generator" value="' . $calendarParameters->getYear() . '" />';
 
-                    // Bouton sauvegarde
-                    echo '<input type="submit" name="save" value="Sauvegarder le calendrier" id="bouton_saisie_generated" class="saisie_bouton" />';
-                  echo '</form>';
+                      // Bouton sauvegarde
+                      echo '<div class="zone_bouton_saisie">';
+                        echo '<input type="submit" name="save" value="Sauvegarder le calendrier" id="bouton_saisie_generated" class="saisie_bouton" />';
+                      echo '</div>';
+                    echo '</form>';
+                  echo '</div>';
                 echo '</div>';
               }
 

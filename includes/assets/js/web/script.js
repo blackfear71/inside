@@ -682,7 +682,7 @@ function hideSubmitButton(zone, button, form, tabBlock)
   form.find('input, textarea, select').each(function()
   {
     // Contrôle champ requis
-    if ($(this).prop('required') == true && $(this).val() == '')
+    if ($(this).prop('required') == true && ($(this).val() == '' || $(this).val() == null))
     {
       hideButton = false;
       return false;
