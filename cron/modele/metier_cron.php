@@ -310,6 +310,67 @@
     return $listeLogsMissions;
   }
 
+  // METIER : Purge des fichiers temporaires du générateur de calendriers
+  // RETOUR : Compte-rendu traitement
+  function deleteTemporairesCalendriers()
+  {
+    // Initialisations
+    $nombrePurges = 0;
+    $log          = array('titre'  => 'Purge des fichiers temporaires des calendriers',
+                          'status' => 'KO',
+                          'infos'  => ''
+                         );
+
+    // Lecture des fichiers temporaires
+    $dossierTemporaire = '../includes/images/calendars/temp';
+
+    if (is_dir($dossierTemporaire))
+    {
+      // Récupération liste des fichiers journaliers par ordre décroissant
+      $fichiersTemporaires = scandir($dossierTemporaire);
+
+      // Suppression des racines de dossier
+      unset($fichiersTemporaires[array_search('..', $fichiersTemporaires)]);
+      unset($fichiersTemporaires[array_search('.', $fichiersTemporaires)]);
+
+      if (!empty($fichiersTemporaires))
+      {
+        // Suppression des fichiers < date du jour
+        foreach ($fichiersTemporaires as $fichierTemporaire)
+        {
+          $dateModificationFichier = date('Ymd', filemtime($dossierTemporaire . '/' . $fichierTemporaire));
+
+          if ($dateModificationFichier < date('Ymd'))
+          {
+            unlink($dossierTemporaire . '/' . $fichierTemporaire);
+            $nombrePurges += 1;
+          }
+        }
+
+        // Ajout des données au log
+        $log['status'] = 'OK';
+
+        if ($nombrePurges == 1)
+          $log['infos']  = $nombrePurges . ' fichier temporaire supprimé';
+        else
+          $log['infos']  = $nombrePurges . ' fichiers temporaires supprimés';
+      }
+      else
+      {
+        $log['status'] = 'OK';
+        $log['infos']  = 'Aucun fichier temporaire supprimé';
+      }
+    }
+    else
+    {
+      $log['status'] = 'OK';
+      $log['infos']  = 'Aucun fichier temporaire supprimé';
+    }
+
+    // Retour
+    return $log;
+  }
+
   // METIER : Recalcul des dépenses pour tous les utilisateurs
   // RETOUR : Compte-rendu traitement
   function reinitializeExpenses()

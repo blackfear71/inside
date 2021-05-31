@@ -54,6 +54,12 @@
     array_push($traitementsQuotidiens, $traitementExperienceMission);
   }
 
+  // Purge des fichiers temporaires du générateur de calendriers
+  $traitementPurgeCalendriers = deleteTemporairesCalendriers();
+
+  // Ajout du compte-rendu au log
+  array_push($traitementsQuotidiens, $traitementPurgeCalendriers);
+
   // Récupération heure de fin de traitement
   $heureFin = date('His');
 
