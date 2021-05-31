@@ -427,14 +427,48 @@
   // RETOUR : Nom de l'image
   function saveCalendarParameters($post, $files)
   {
-    // Détermination du nom de l'image (cas déjà généré ou première saisie)
+    // Détermination du nom de l'image
     if (isset($post['picture_calendar_generated']) AND !empty($post['picture_calendar_generated']))
-      $nomImage = $post['picture_calendar_generated'];
+    {
+      // Si le calendrier a déjà été généré mais que la date a changé
+      if (($post['month_calendar'] != substr($post['picture_calendar_generated'], 0, 2))
+      OR  ($post['year_calendar']  != substr($post['picture_calendar_generated'], 3, 4)))
+      {
+        // Si l'image change, on supprime l'ancienne et on détermine un nouveau nom, sinon on renomme l'ancienne avec un nouveau nom
+        if (isset($files['picture_calendar']) AND !empty($files['picture_calendar']['name']))
+        {
+          // Suppression des images temporaires
+          $dossierTemporaire = '../../includes/images/calendars/temp';
+
+          unlink($dossierTemporaire . '/' . $post['picture_calendar_generated']);
+          unlink($dossierTemporaire . '/trim_' . $post['picture_calendar_generated']);
+
+          // Détermination du nouveau nom
+          $type     = pathinfo($files['picture_calendar']['name'], PATHINFO_EXTENSION);
+          $nomImage = $post['month_calendar'] . '-' . $post['year_calendar'] . '-' . rand() . '.' . $type;
+        }
+        else
+        {
+          // Détermination du nouveau nom
+          $type     = pathinfo($post['picture_calendar_generated'], PATHINFO_EXTENSION);
+          $nomImage = $post['month_calendar'] . '-' . $post['year_calendar'] . '-' . rand() . '.' . $type;
+
+          // Renommage des images temporaires
+          $dossierTemporaire = '../../includes/images/calendars/temp';
+
+          rename($dossierTemporaire . '/' . $post['picture_calendar_generated'], $dossierTemporaire . '/' . $nomImage);
+          rename($dossierTemporaire . '/trim_' . $post['picture_calendar_generated'], $dossierTemporaire . '/trim_' . $nomImage);
+        }
+      }
+      else
+        $nomImage = $post['picture_calendar_generated'];
+    }
     else
     {
-      if (!empty($files['picture_calendar']['name']))
+      // Première saisie
+      if (isset($files['picture_calendar']) AND !empty($files['picture_calendar']['name']))
       {
-        $type = pathinfo($files['picture_calendar']['name'], PATHINFO_EXTENSION);
+        $type     = pathinfo($files['picture_calendar']['name'], PATHINFO_EXTENSION);
         $nomImage = $post['month_calendar'] . '-' . $post['year_calendar'] . '-' . rand() . '.' . $type;
       }
       else
