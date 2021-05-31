@@ -151,9 +151,28 @@
               // Explications
               echo '<div class="zone_calendrier_generator_right">';
                 if (isset($vacances) AND empty($vacances))
-                  echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.';
+                {
+                  echo '<div class="avertissement_calendrier_generator">';
+                    echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
+                    Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
+                  echo '</div>';
+                }
 
-                echo '<br /><br />explications ici';
+                echo '<div class="titre_explications_calendrier_generator">A propos du générateur de calendriers</div>';
+
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Ceci est le générateur de calendriers automatisé. La saisie des données permet de générer un calendrier sur-mesure puis de le
+                  sauvegarder sur le site. Les données disponibles sont :';
+
+                  echo '<ul><li>Le mois</li><li>L\'année</li><li>L\'image de fond</li></ul>';
+
+                  echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
+                  En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
+
+                  echo '<div class="avertissement_calendrier_generator_2">';
+                    echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder le calendrier" après l\'avoir généré pour le rendre disponible sur le site.';
+                  echo '</div>';
+                echo '</div>';
               echo '</div>';
             echo '</div>';
 
@@ -211,7 +230,14 @@
 
               // Explications
               echo '<div class="zone_saisie_calendars_right">';
-                echo 'explications là';
+                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie de calendriers</div>';
+
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Ceci est l\'ancien outil de mise en ligne de calendriers. Celui-ci fonctionne toujours normalement et permet de mettre en ligne
+                  un calendrier personnalisé. Toutes les saisies sont obligatoires. Les données à saisir sont :';
+
+                  echo '<ul><li>Le calendrier</li><li>Le mois</li><li>L\'année</li></ul>';
+                echo '</div>';
               echo '</div>';
             echo '</div>';
 
@@ -253,7 +279,17 @@
 
               // Explications
               echo '<div class="zone_saisie_calendars_right">';
-                echo 'explications et là aussi';
+                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie d\'annexe</div>';
+
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Ceci est l\'outil de mise en ligne d\'annexes aux calendriers. Toutes les saisies sont obligatoires. Les données à saisir sont :';
+
+                  echo '<ul><li>L\'annexe</li><li>Le nom de l\'annexe</li></ul>';
+                echo '</div>';
+
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Un générateur d\'annexes automatisé sera développé prochainement.';
+                echo '</div>';
               echo '</div>';
             echo '</div>';
           }
