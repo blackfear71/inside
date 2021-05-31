@@ -57,7 +57,7 @@
                   echo '<li>Recherche les sorties cinéma du jour et insère une notification</li>';
                   echo '<li>Notification début et fin de mission</li>';
                   echo '<li>Attribution expérience fin de mission</li>';
-                  echo '<li>Purge des fichiers temporaire du générateur de calendriers</li>';
+                  echo '<li>Purge des fichiers temporaires du générateur de calendriers</li>';
                   echo '<li>Génération log journalier</li>';
                 echo '</ul>';
                 echo '<u>Fréquence :</u> tous les jours à 7h.';
