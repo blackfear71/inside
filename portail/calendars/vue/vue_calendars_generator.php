@@ -62,58 +62,60 @@
 
               // Saisie
               echo '<div class="zone_calendrier_generator_left">';
-                // Saisie des informations
-                echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
-                  // Image
-                  echo '<div class="zone_saisie_image">';
-                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
+                echo '<div class="zone_saisie_calendrier">';
+                  // Saisie des informations
+                  echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
+                    // Image
+                    echo '<div class="zone_saisie_image">';
+                      echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
-                    echo '<div class="zone_parcourir_image_generator">';
-                      echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
-                      echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="picture_calendar" class="bouton_parcourir_image_generator loadCalendrierGenere" />';
+                      echo '<div class="zone_parcourir_image_generator">';
+                        echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
+                        echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="picture_calendar" class="bouton_parcourir_image_generator loadCalendrierGenere" />';
+                      echo '</div>';
+
+                      echo '<div class="mask_image_generator">';
+                        if (isset($calendarParameters) AND !empty($calendarParameters->getPicture()))
+                        {
+                          echo '<img src="../../includes/images/calendars/temp/' . $calendarParameters->getPicture() . '" id="image_calendars_generated" alt="" class="image" />';
+                          echo '<input type="hidden" name="picture_calendar_generated" value="' . $calendarParameters->getPicture() . '" />';
+                        }
+                        else
+                          echo '<img id="image_calendars_generated" alt="" class="image" />';
+                      echo '</div>';
                     echo '</div>';
 
-                    echo '<div class="mask_image_generator">';
-                      if (isset($calendarParameters) AND !empty($calendarParameters->getPicture()))
+                    // Listbox mois
+                    echo '<select name="month_calendar" class="listbox" required>';
+                      echo '<option value="" disabled selected hidden>Mois</option>';
+
+                      foreach ($listeMois as $numeroMois => $mois)
                       {
-                        echo '<img src="../../includes/images/calendars/temp/' . $calendarParameters->getPicture() . '" id="image_calendars_generated" alt="" class="image" />';
-                        echo '<input type="hidden" name="picture_calendar_generated" value="' . $calendarParameters->getPicture() . '" />';
+                        if ($numeroMois == $calendarParameters->getMonth())
+                          echo '<option value="' . $numeroMois . '" selected>' . $mois . '</option>';
+                        else
+                          echo '<option value="' . $numeroMois . '">' . $mois . '</option>';
                       }
-                      else
-                        echo '<img id="image_calendars_generated" alt="" class="image" />';
+                    echo '</select>';
+
+                    // Listbox année
+                    echo '<select name="year_calendar" class="listbox" required>';
+                      echo '<option value="" disabled selected hidden>Année</option>';
+                      for ($i = $anneeDebut; $i <= $anneeFin; $i++)
+                      {
+                        if ($i == $calendarParameters->getYear())
+                          echo '<option value="' . $i . '" selected>' . $i . '</option>';
+                        else
+                          echo '<option value="' . $i . '">' . $i . '</option>';
+                      }
+                    echo '</select>';
+
+                    // Bouton validation
+                    echo '<div class="zone_bouton_saisie">';
+                      echo '<input type="submit" name="send" value="Générer le calendrier" id="bouton_saisie_generator" class="saisie_bouton" />';
                     echo '</div>';
-                  echo '</div>';
-
-                  // Listbox mois
-                  echo '<select name="month_calendar" class="listbox" required>';
-                    echo '<option value="" disabled selected hidden>Mois</option>';
-
-                    foreach ($listeMois as $numeroMois => $mois)
-                    {
-                      if ($numeroMois == $calendarParameters->getMonth())
-                        echo '<option value="' . $numeroMois . '" selected>' . $mois . '</option>';
-                      else
-                        echo '<option value="' . $numeroMois . '">' . $mois . '</option>';
-                    }
-                  echo '</select>';
-
-                  // Listbox année
-                  echo '<select name="year_calendar" class="listbox" required>';
-                    echo '<option value="" disabled selected hidden>Année</option>';
-                    for ($i = $anneeDebut; $i <= $anneeFin; $i++)
-                    {
-                      if ($i == $calendarParameters->getYear())
-                        echo '<option value="' . $i . '" selected>' . $i . '</option>';
-                      else
-                        echo '<option value="' . $i . '">' . $i . '</option>';
-                    }
-                  echo '</select>';
-
-                  // Bouton validation
-                  echo '<div class="zone_bouton_saisie">';
-                    echo '<input type="submit" name="send" value="Générer le calendrier" id="bouton_saisie_generator" class="saisie_bouton" />';
-                  echo '</div>';
-                echo '</form>';
+                  echo '</form>';
+                echo '</div>';
               echo '</div>';
 
               // Affichage du calendrier généré sous forme d'image

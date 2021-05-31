@@ -13,7 +13,7 @@ $(function()
   $('#bouton_saisie_calendrier, #bouton_saisie_annexe, #bouton_saisie_generator, #bouton_saisie_generated').click(function()
   {
     var zoneButton   = $(this).parents('.zone_bouton_saisie');
-    var submitButton = $(this).attr('id');
+    var submitButton = $(this);
     var formSaisie   = submitButton.closest('form');
     var tabBlock     = [];
 

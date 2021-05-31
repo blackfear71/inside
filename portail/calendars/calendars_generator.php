@@ -89,6 +89,16 @@
   {
     case 'goConsulter':
       CalendarParameters::secureData($calendarParameters);
+
+      if (isset($vacances) AND !empty($vacances))
+      {
+        foreach ($vacances as &$jourVacances)
+        {
+          $jourVacances['nom_vacances'] = htmlspecialchars($jourVacances['nom_vacances']);
+        }
+
+        unset($jourVacances);
+      }
       break;
 
     case 'doAjouter':
