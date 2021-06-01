@@ -131,8 +131,8 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case 'doInsererVacances':
     case 'doUpdateAutorisations':
+    case 'doInsererVacances':
 		case 'doDeleteCalendrier':
     case 'doDeleteAnnexe':
 		case 'doResetCalendrier':
