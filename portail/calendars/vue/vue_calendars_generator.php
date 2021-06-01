@@ -45,6 +45,9 @@
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
 
+          /**************************************/
+          /* Création de calendriers et annexes */
+          /**************************************/
           if ($preferences->getManage_calendars() == 'Y')
           {
             /********************/

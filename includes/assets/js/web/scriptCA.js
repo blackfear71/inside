@@ -6,7 +6,13 @@ $(function()
 {
   /*** Actions au chargement ***/
   if ($('.zone_calendrier_generator').length)
+  {
+    // Génération du calendrier sous forme d'image
     afficherCalendrierJpeg();
+
+    // Adaptation mobile
+    adaptCalendars();
+  }
 
   /*** Actions au clic ***/
   // Bloque le bouton de soumission si besoin
@@ -104,8 +110,16 @@ function adaptCalendars()
     $('.zone_calendrier_generator_middle').css('width', 'calc(100% - 280px)');
     $('.zone_calendrier_generator_middle').css('margin-right', '0');
 
-    $('.zone_calendrier_generator_right').css('width', '100%');
-    $('.zone_calendrier_generator_right').css('margin-top', '20px');
+    if ($('.zone_calendrier_generator_middle').length)
+    {
+      $('.zone_calendrier_generator_right').css('width', '100%');
+      $('.zone_calendrier_generator_right').css('margin-top', '20px');
+    }
+    else
+    {
+      $('.zone_calendrier_generator_right').css('width', 'calc(100% - 280px)');
+      $('.zone_calendrier_generator_right').css('margin-top', '0');
+    }
 
     // Ajout de calendriers et annexes
     $('.zone_calendars_left').css('display', 'block');
