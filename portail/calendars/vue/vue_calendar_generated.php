@@ -71,9 +71,9 @@
 
                   // Détermination si vacances
                   if ($numeroJourAAfficher < 10)
-                    $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . '0' . $numeroJourAAfficher, $vacances);
+                    $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . '0' . $numeroJourAAfficher, $vacances, 'vacances_zone_b');
                   else
-                    $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . $numeroJourAAfficher, $vacances);
+                    $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . $numeroJourAAfficher, $vacances, 'vacances_zone_b');
 
                   // Affichage du numéro de jour et du jour férié si besoin
                   echo '<td class="jour_calendrier_generator">';

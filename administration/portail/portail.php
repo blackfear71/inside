@@ -26,6 +26,7 @@
       // Récupération des alertes
 			$alerteUsers     = getAlerteUsers();
 			$alerteFilms     = getAlerteFilms();
+      $alerteVacances  = getAlerteVacances();
       $alerteCalendars = getAlerteCalendars();
       $alerteAnnexes   = getAlerteAnnexes();
 
@@ -34,7 +35,7 @@
 			$nombreEvols = getNombreEvols();
 
       // Création du portail administrateur
-      $portail = getPortail($alerteUsers, $alerteFilms, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
+      $portail = getPortail($alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
       break;
 
     case 'doExtract':

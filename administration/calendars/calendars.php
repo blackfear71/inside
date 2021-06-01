@@ -25,6 +25,15 @@
       // Récupération des autorisations de gestion des calendriers
       $listeAutorisations = getAutorisationsCalendars();
 
+      // Récupération des périodes de vacances disponibles
+      $periodesVacances = getPeriodesVacances();
+
+      // Récupération alerte période de vacances à saisir
+      $periodesPresentes = getPeriodesVacancesPresentes();
+
+      // Initialisation des saisies des périodes de vacances
+      $saisiesVacances = getSaisieVacances();
+
       // Récupération de la liste des mois
       $listeMois = getMonths();
 
@@ -43,6 +52,10 @@
 
       // Mise à jour des autorisations de gestion des calendriers
       updateAutorisations($_POST, $listeUsers);
+      break;
+
+    case 'doInsererVacances':
+      insertVacancesCSV($_POST);
       break;
 
 		case 'doDeleteCalendrier':
@@ -80,6 +93,20 @@
         AutorisationCalendriers::secureData($autorisation);
       }
 
+      foreach ($periodesVacances as &$periodeVacances)
+      {
+        $periodeVacances = htmlspecialchars($periodeVacances);
+      }
+
+      unset($periodeVacances);
+
+      foreach ($saisiesVacances as &$saisieVacances)
+      {
+        $saisieVacances['nom'] = htmlspecialchars($saisieVacances['nom']);
+      }
+
+      unset($saisieVacances);
+
 			foreach ($listeSuppression as $calendar)
 			{
         Calendrier::secureData($calendar);
@@ -92,6 +119,7 @@
       break;
 
     case 'doUpdateAutorisations':
+    case 'doInsererVacances':
     case 'doDeleteCalendrier':
 		case 'doDeleteAnnexe':
 		case 'doResetCalendrier':
@@ -103,6 +131,7 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doInsererVacances':
     case 'doUpdateAutorisations':
 		case 'doDeleteCalendrier':
     case 'doDeleteAnnexe':

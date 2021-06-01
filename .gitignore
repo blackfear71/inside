@@ -3,6 +3,7 @@
 ###################################
 cron/logs/
 includes/common/chat/conversations/
+includes/datas/
 includes/images/
 server/
 test/

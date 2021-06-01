@@ -1,7 +1,7 @@
 <?php
   // METIER : Génération du portail administration
   // RETOUR : Tableau des liens
-  function getPortail($alertUsers, $alertFilms, $alertCalendars, $alertAnnexes, $nombreBugs, $nombreEvols)
+  function getPortail($alertUsers, $alertFilms, $alertVacances, $alertCalendars, $alertAnnexes, $nombreBugs, $nombreEvols)
   {
     // Vérification des alertes
     if ($alertUsers == true)
@@ -14,7 +14,7 @@
     else
       $avertissementFilms = false;
 
-    if ($alertCalendars == true OR $alertAnnexes == true)
+    if ($alertVacances == true OR $alertCalendars == true OR $alertAnnexes == true)
       $avertissementCalendars = true;
     else
       $avertissementCalendars = false;
@@ -120,6 +120,26 @@
   {
     // Appel physique
     $alert = physiqueAlerteFilms();
+
+    // Retour
+    return $alert;
+  }
+
+  // METIER : Contrôle alertes vacances
+  // RETOUR : Booléen
+  function getAlerteVacances()
+  {
+    // Initialisations
+    $alert         = false;
+    $anneeInitiale = date('Y');
+    $anneeFinale   = $anneeInitiale + 1;
+    $nomFichier    = $anneeInitiale . '-' . $anneeFinale . '.csv';
+
+    // Vérification fichier existant
+    $dossier = '../../includes/datas/calendars';
+
+    if (date('m') == 12 AND !file_exists($dossier . '/' . $nomFichier))
+      $alert = true;
 
     // Retour
     return $alert;

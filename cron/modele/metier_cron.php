@@ -326,7 +326,7 @@
 
     if (is_dir($dossierTemporaire))
     {
-      // Récupération liste des fichiers journaliers par ordre décroissant
+      // Récupération liste des fichiers journaliers
       $fichiersTemporaires = scandir($dossierTemporaire);
 
       // Suppression des racines de dossier

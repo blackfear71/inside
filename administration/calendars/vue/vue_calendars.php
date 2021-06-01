@@ -46,6 +46,11 @@
           /**********************************************/
           include('vue/vue_autorisations.php');
 
+          /********************************************/
+          /* Formulaire création périodes de vacances */
+          /********************************************/
+          include('vue/vue_vacances.php');
+
           /*******************************************************/
           /* Tableau des demandes de suppression des calendriers */
           /*******************************************************/

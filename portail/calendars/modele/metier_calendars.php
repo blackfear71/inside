@@ -383,41 +383,59 @@
   {
     // Initialisations
     $vacances = array();
-    $i        = 0;
 
     // Récupération des données
     $year  = $calendarParameters->getYear();
     $month = $calendarParameters->getMonth();
 
-    // Lecture des données en ligne
-    $file = fopen('https://raw.githubusercontent.com/AntoineAugusti/vacances-scolaires/master/data.csv', 'r');
-
-    while (!feof($file))
+    // Lecture du fichier des périodes de vacances
+    if ($month >= 10)
     {
-        $line[] = fgetcsv($file, 1024);
-
-        if ($i > 0)
-        {
-          // Récupération des dates
-          if (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) == $month)
-          {
-            $vacances[str_replace('-', '', $line[$i][0])] = array('date'            => $line[$i][0],
-                                                                  'vacances_zone_a' => $line[$i][1],
-                                                                  'vacances_zone_b' => $line[$i][2],
-                                                                  'vacances_zone_c' => $line[$i][3],
-                                                                  'nom_vacances'    => $line[$i][4]
-                                                                 );
-          }
-
-          // Arrêt de la boucle si dates dépassées
-          if (substr($line[$i][0], 0, 4) > $year OR (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) > $month))
-            break;
-        }
-
-        $i++;
+      $anneeInitiale = $year;
+      $anneeFinale   = $year + 1;
+    }
+    else
+    {
+      $anneeInitiale = $year - 1;
+      $anneeFinale   = $year;
     }
 
-    fclose($file);
+    $nomFichier = $anneeInitiale . '-' . $anneeFinale . '.csv';
+
+    // Vérification fichier existant
+    $dossierVacances = '../../includes/datas/calendars';
+
+    // Si le fichier existe, on récupère les données
+    if (file_exists($dossierVacances . '/' . $nomFichier))
+    {
+      // Lecture des dates de vacances
+      $file = fopen($dossierVacances . '/' . $nomFichier, 'r');
+      $i    = 0;
+
+      while (!feof($file))
+      {
+        $line[] = fgetcsv($file, 1024);
+
+        // Récupération des dates
+        if (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) == $month)
+        {
+          $vacances[str_replace('-', '', $line[$i][0])] = array('date'            => $line[$i][0],
+                                                                'vacances_zone_a' => $line[$i][1],
+                                                                'vacances_zone_b' => $line[$i][2],
+                                                                'vacances_zone_c' => $line[$i][3],
+                                                                'nom_vacances'    => $line[$i][4]
+                                                               );
+        }
+
+        // Arrêt de la boucle si dates dépassées
+        if (substr($line[$i][0], 0, 4) > $year OR (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) > $month))
+          break;
+
+        $i++;
+      }
+
+      fclose($file);
+    }
 
     // Retour
     return $vacances;

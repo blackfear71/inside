@@ -348,13 +348,13 @@
 
   // DATE : Détermine si un jour est en vacances (AAAAMMJJ)
   // RETOUR : Jour vacances
-  function isVacances($date, $vacances)
+  function isVacances($date, $vacances, $zone)
   {
     // Initialisations
     $jourVacances = false;
 
-    // Recherche si jour fisant partie de vacances
-    if (isset($vacances[$date]) AND $vacances[$date]['vacances_zone_b'] == 'True')
+    // Recherche si jour faisant partie de vacances
+    if (isset($vacances[$date]) AND $vacances[$date][$zone] == 'true')
       $jourVacances = true;
 
     // Retour
