@@ -93,7 +93,7 @@
 
     // Vérification fichier existant
     $dossier = '../../includes/datas/calendars';
-    
+
     if (file_exists($dossier . '/' . $nomFichier))
       $periodesPresentes = true;
 
@@ -269,6 +269,9 @@
 
     // Fermeture du fichier
     fclose($periodesVacances);
+
+    // Message d'alerte
+    $_SESSION['alerts']['holidays_added'] = true;
   }
 
   // METIER : Création liste des mois
