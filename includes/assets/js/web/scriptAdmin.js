@@ -191,6 +191,26 @@ $(function()
     loadFile(event, 'banner', false);
   });
 
+  // Renseigne automatiquement les cases non saisies des périodes de vacances
+  $('.select_jour_periode_vacances, .select_mois_periode_vacances').change(function()
+  {
+    // Récupération des caractéristiques du select
+    var caracteristiquesSelect = $(this).attr('name').replace('vacances', '').replaceAll('[', '').replaceAll(']', ';').split(';').slice(0, -1);
+
+    // On renseigne automatiquement les cases correspondantes de la ligne seulement si aucune n'a été saisie
+    if (caracteristiquesSelect[2] == 'zone_a')
+    {
+      if (($('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_b][' + caracteristiquesSelect[3] + ']"]').val() == null
+      ||   $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_b][' + caracteristiquesSelect[3] + ']"]').val() == '')
+      &&  ($('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').val() == null
+      ||   $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').val() == ''))
+      {
+        $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_b][' + caracteristiquesSelect[3] + ']"]').val($(this).val());
+        $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').val($(this).val());
+      }
+    }
+  });
+
   // Charge le bouton gauche (mission)
   $('.loadLeft').on('change', function()
   {
