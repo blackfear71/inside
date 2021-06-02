@@ -76,7 +76,7 @@
           /* Annexes */
           /***********/
           echo '<div class="zone_calendars">';
-            echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Les annexes</div></div>';
+            echo '<div class="titre_section"><img src="../../includes/icons/calendars/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" /><div class="texte_titre_section">Les annexes</div></div>';
 
             if (!empty($annexes))
             {
