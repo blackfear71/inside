@@ -205,10 +205,18 @@ $(function()
       &&  ($('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').val() == null
       ||   $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').val() == ''))
       {
+        // Changement de valeur
         $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_b][' + caracteristiquesSelect[3] + ']"]').val($(this).val());
         $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').val($(this).val());
+
+        // Changement de couleur
+        $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_b][' + caracteristiquesSelect[3] + ']"]').css('background-color', '#e3e3e3');
+        $('select[name="vacances[' + caracteristiquesSelect[0] + '][' + caracteristiquesSelect[1] + '][zone_c][' + caracteristiquesSelect[3] + ']"]').css('background-color', '#e3e3e3');
       }
     }
+
+    // Changement de couleur
+    $(this).css('background-color', '#e3e3e3');
   });
 
   // Charge le bouton gauche (mission)
