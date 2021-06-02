@@ -44,12 +44,10 @@
             echo 'Année scolaire';
 
             echo '<select name="annee_vacances" class="select_annee_scolaire" required>';
+              echo '<option value="" hidden selected>Choisir...</option>';
               for ($i = date('Y'); $i >= 2017; $i--)
               {
-                if ($i == date('Y'))
-                  echo '<option value="' . $i . '" selected>' . $i . '-' . ($i + 1) . '</option>';
-                else
-                  echo '<option value="' . $i . '" >' . $i . '-' . ($i + 1) . '</option>';
+                echo '<option value="' . $i . '" >' . $i . '-' . ($i + 1) . '</option>';
               }
             echo '</select>';
           echo '</td>';
