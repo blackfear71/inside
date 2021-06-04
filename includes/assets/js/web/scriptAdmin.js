@@ -142,11 +142,15 @@ $(function()
     // Affichage ou masquage de la période concernée
     if ($('#zone_affichage_periodes_vacances').css('display') == 'none')
     {
+      console.log('test 1');
+
       // Affichage de la période concernée
       showPeriodesVacances($(this), $(this).text());
     }
     else
     {
+      console.log('test 2');
+
       // Détermination si ouverture d'une autre période
       var autrePeriode = false;
       var nomFichier   = $(this).text();
@@ -163,9 +167,13 @@ $(function()
       // Affichage de la période concernée
       setTimeout(function()
       {
+        console.log(autrePeriode);
+        console.log($(this));
+        console.log(nomFichier);
+
         if (autrePeriode == true)
           showPeriodesVacances($(this), nomFichier);
-      }, 200);
+      }, 100);
     }
   });
 
