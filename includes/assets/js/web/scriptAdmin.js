@@ -165,7 +165,7 @@ $(function()
       {
         if (autrePeriode == true)
           showPeriodesVacances($(this), nomFichier);
-      }, 100);
+      }, 200);
     }
   });
 
