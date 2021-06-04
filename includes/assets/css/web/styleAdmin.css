@@ -689,12 +689,12 @@
 	color: #262626;
 }
 
-.affichage_periodes_vacances td
+.affichage_periodes_vacances td:not(:first-child)
 {
 	padding: 5px 10px 5px 10px;
 }
 
-.ligne_affichage_periodes_vacances
+.ligne_affichage_periodes_vacances:not(:nth-child(2))
 {
 	border-top: solid 2px #e3e3e3;
 }
@@ -702,16 +702,44 @@
 .ligne_affichage_periodes_vacances td:not(:first-child)
 {
 	border-left: solid 2px #e3e3e3;
-}
-
-.ligne_affichage_periodes_vacances td:not(:first-child)
-{
 	text-align: center;
 }
 
-.affichage_zone_vide
+.ligne_affichage_periodes_vacances td:first-child
 {
+	padding: 5px 10px 5px 10px;
+}
+
+.affichage_zone_suppression
+{
+	background-color: #262626;
+	color: white;
 	width: 30%;
+}
+
+.form_suppression_vacances
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	cursor: pointer;
+}
+
+.bouton_supprimer_periode
+{
+	padding: 5px 10px 5px 35px;
+	width: 100%;
+	text-align: left;
+	font-family: robotolight, Verdana, sans-serif;
+	font-size: 100%;
+	color: white;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/delete.png");
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 .affichage_zone_a

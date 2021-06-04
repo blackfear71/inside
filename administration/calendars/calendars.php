@@ -58,6 +58,10 @@
       insertVacancesCSV($_POST);
       break;
 
+    case 'doDeleteVacances':
+      deleteVacancesCSV($_POST);
+      break;
+
 		case 'doDeleteCalendrier':
       // Suppression d'un calendrier
 			deleteCalendrier($_POST);
@@ -120,6 +124,7 @@
 
     case 'doUpdateAutorisations':
     case 'doInsererVacances':
+    case 'doDeleteVacances':
     case 'doDeleteCalendrier':
 		case 'doDeleteAnnexe':
 		case 'doResetCalendrier':
@@ -133,6 +138,7 @@
   {
     case 'doUpdateAutorisations':
     case 'doInsererVacances':
+    case 'doDeleteVacances':
 		case 'doDeleteCalendrier':
     case 'doDeleteAnnexe':
 		case 'doResetCalendrier':

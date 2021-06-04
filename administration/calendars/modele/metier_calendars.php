@@ -135,7 +135,7 @@
   function insertVacancesCSV($post)
   {
     // Initialisations
-    $datesVacances    = array();
+    $datesVacances = array();
 
     // Récupération des données
     $anneeInitiale = $post['annee_vacances'];
@@ -272,6 +272,24 @@
 
     // Message d'alerte
     $_SESSION['alerts']['holidays_added'] = true;
+  }
+
+  // METIER : Supprime un fichier de périodes de vacances scolaires
+  // RETOUR : Aucun
+  function deleteVacancesCSV($post)
+  {
+    // Récupération des données
+    $nomFichier = $post['nom_fichier'] . '.csv';
+
+    // Suppression du fichier si existant
+    $dossier = '../../includes/datas/calendars';
+
+    // Suppression de l'ancien fichier si existant
+    if (file_exists($dossier . '/' . $nomFichier))
+      unlink($dossier . '/' . $nomFichier);
+
+    // Message d'alerte
+    $_SESSION['alerts']['holidays_deleted'] = true;
   }
 
   // METIER : Création liste des mois

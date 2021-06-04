@@ -777,7 +777,14 @@ function showPeriodesVacances(periode, nomFichier)
     // Création du tableau
     html += '<table class="affichage_periodes_vacances">';
       html += '<tr>';
-        html += '<td class="affichage_zone_vide"></td>';
+        html += '<td class="affichage_zone_suppression">';
+          html += '<form method="post" id="delete_csv_' + nomFichier + '" action="calendars.php?action=doDeleteVacances" class="form_suppression_vacances ">';
+            html += '<input type="hidden" name="nom_fichier" value="' + nomFichier + '" />';
+            html += '<input type="submit" name="delete_vacances" value="Supprimer" class="bouton_supprimer_periode eventConfirm" />';
+            html += '<input type="hidden" value="Supprimer la période ' + nomFichier + ' du serveur ?" class="eventMessage" />';
+          html += '</form>';
+        html += '</td>';
+
         html += '<td class="affichage_zone_a">Zone A</td>';
         html += '<td class="affichage_zone_b">Zone B</td>';
         html += '<td class="affichage_zone_c">Zone C</td>';

@@ -73,7 +73,7 @@ $(function()
   });
 
   // Messages de confirmation
-  $('.eventConfirm').click(function()
+  $(document).on('click', '.eventConfirm', function()
   {
     var idForm  = $(this).closest('form').attr('id');
     var message = $(this).closest('form').find('.eventMessage').val();
