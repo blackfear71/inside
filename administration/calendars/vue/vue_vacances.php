@@ -48,7 +48,7 @@
 
             echo '<select name="annee_vacances" class="select_annee_scolaire" required>';
               echo '<option value="" hidden selected>Choisir...</option>';
-              for ($i = date('Y'); $i >= 2017; $i--)
+              for ($i = date('Y') + 1; $i >= 2016; $i--)
               {
                 echo '<option value="' . $i . '" >' . $i . '-' . ($i + 1) . '</option>';
               }
