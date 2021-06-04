@@ -149,6 +149,7 @@ $(function()
     {
       // Détermination si ouverture d'une autre période
       var autrePeriode = false;
+      var nomFichier   = $(this).text();
 
       if ($(this).css('background-color') == 'rgb(38, 38, 38)')
         autrePeriode = true;
@@ -160,8 +161,11 @@ $(function()
       });
 
       // Affichage de la période concernée
-      if (autrePeriode == true)
-        showPeriodesVacances($(this), $(this).text());
+      setTimeout(function()
+      {
+        if (autrePeriode == true)
+          showPeriodesVacances($(this), nomFichier);
+      }, 100);
     }
   });
 
