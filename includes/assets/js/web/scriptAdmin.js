@@ -813,7 +813,8 @@ function showPeriodesVacances(periode, nomFichier)
     $('#zone_affichage_periodes_vacances').html(html);
 
     // Affichage de la zone
-    afficherMasquerIdNoDelay('zone_affichage_periodes_vacances');
+    if ($('#zone_affichage_periodes_vacances').css('display') == 'none')
+      afficherMasquerIdNoDelay('zone_affichage_periodes_vacances');
 
     // Changement de couleur de la période sélectionnée
     periode.css('background-color', '#ff1937');
