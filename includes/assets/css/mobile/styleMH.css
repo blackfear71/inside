@@ -115,8 +115,7 @@
 
 .poster_fiche
 {
-  vertical-align: middle;
-  margin-top: -0.4vh;
+  vertical-align: top;
   max-width: 8vh;
   max-height: 8vh;
 }
