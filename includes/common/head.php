@@ -87,3 +87,7 @@
 <?php if (isset($html2canvasHead) AND $html2canvasHead == true) { ?>
   <script src="/inside/includes/libraries/js/html2canvas.min.js"></script>
 <?php } ?>
+
+<?php if (isset($jqueryCsv) AND $jqueryCsv == true) { ?>
+  <script src="/inside/includes/libraries/js/jquery.csv.js"></script>
+<?php } ?>

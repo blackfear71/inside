@@ -12,6 +12,7 @@
       $masonryHead     = true;
       $exifHead        = false;
       $html2canvasHead = false;
+      $jqueryCsv       = false;
 
       include('../../includes/common/head.php');
     ?>

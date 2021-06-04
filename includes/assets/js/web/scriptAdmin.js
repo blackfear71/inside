@@ -136,6 +136,35 @@ $(function()
     document.execCommand('copy');
   });
 
+  // Recherche et affichage des périodes de vacances
+  $('.periode_vacances').click(function()
+  {
+    // Affichage ou masquage de la période concernée
+    if ($('#zone_affichage_periodes_vacances').css('display') == 'none')
+    {
+      // Affichage de la période concernée
+      showPeriodesVacances($(this), $(this).text());
+    }
+    else
+    {
+      // Détermination si ouverture d'une autre période
+      var autrePeriode = false;
+
+      if ($(this).css('background-color') == 'rgb(38, 38, 38)')
+        autrePeriode = true;
+
+      // Masquage de toutes les périodes
+      $('.periode_vacances').each(function()
+      {
+        hidePeriodesVacances($(this));
+      });
+
+      // Affichage de la période concernée
+      if (autrePeriode == true)
+        showPeriodesVacances($(this), $(this).text());
+    }
+  });
+
   /*** Actions au changement ***/
   // Charge le thème (header utilisateurs)
   $('.loadHeaderUsers').on('change', function()
@@ -594,6 +623,202 @@ function switchCheckedColor(zone, input)
 
   $('#' + input).addClass('bouton_checked');
   $('#' + input).children('input').prop('checked', true);
+}
+
+// Récupère et affiches les périodes de vacances
+function showPeriodesVacances(periode, nomFichier)
+{
+  // Lecture du fichier CSV
+  $.post('../../includes/datas/calendars/' + nomFichier + '.csv', function(data)
+  {
+    // Initialisations
+    var html = '';
+
+    // Initialisations des variables de lecture du CSV
+    var date            = '';
+    var vacances_zone_a = '';
+    var vacances_zone_b = '';
+    var vacances_zone_c = '';
+    var nom_vacances    = '';
+
+    // Initialisations du tableau des périodes de vacances
+    var periodesVacances       = [];
+    var nomVacances            = '';
+    var dateDebutVacancesZoneA = '';
+    var dateDebutVacancesZoneB = '';
+    var dateDebutVacancesZoneC = '';
+    var dateFinVacancesZoneA   = '';
+    var dateFinVacancesZoneB   = '';
+    var dateFinVacancesZoneC   = '';
+
+    // Initialisations des variables intermédiaires
+    var datePrecedente     = '';
+    var debutVacancesZoneA = false;
+    var debutVacancesZoneB = false;
+    var debutVacancesZoneC = false;
+
+    // Conversion du fichier en tableau
+    var csv = $.csv.toArrays(data);
+
+    // Détermination des plages de vacances
+    $.each(csv, function()
+    {
+      // Décomposition de  la ligne en variables
+      date            = this[0];
+      vacances_zone_a = this[1];
+      vacances_zone_b = this[2];
+      vacances_zone_c = this[3];
+      nom_vacances    = this[4];
+
+      // Récupération du nom des vacances
+      if (nom_vacances != '' && nomVacances == '')
+        nomVacances = nom_vacances;
+
+      // Récupération de la date de début de vacances (zone A)
+      if (vacances_zone_a == 'true' && debutVacancesZoneA == false)
+      {
+        debutVacancesZoneA     = true;
+        dateDebutVacancesZoneA = date;
+      }
+
+      // Récupération de la date de début de vacances (zone B)
+      if (vacances_zone_b == 'true' && debutVacancesZoneB == false)
+      {
+        debutVacancesZoneB     = true;
+        dateDebutVacancesZoneB = date;
+      }
+
+      // Récupération de la date de début de vacances (zone C)
+      if (vacances_zone_c == 'true' && debutVacancesZoneC == false)
+      {
+        debutVacancesZoneC     = true;
+        dateDebutVacancesZoneC = date;
+      }
+
+      // Récupération de la date de fin de vacances (zone A)
+      if (vacances_zone_a != 'true' && debutVacancesZoneA == true)
+      {
+        debutVacancesZoneA = false;
+
+        if (datePrecedente != '')
+          dateFinVacancesZoneA = datePrecedente;
+      }
+
+      // Récupération de la date de fin de vacances (zone B)
+      if (vacances_zone_b != 'true' && debutVacancesZoneB == true)
+      {
+        debutVacancesZoneB = false;
+
+        if (datePrecedente != '')
+          dateFinVacancesZoneB = datePrecedente;
+      }
+
+      // Récupération de la date de fin de vacances (zone C)
+      if (vacances_zone_c != 'true' && debutVacancesZoneC == true)
+      {
+        debutVacancesZoneC = false;
+
+        if (datePrecedente != '')
+          dateFinVacancesZoneC = datePrecedente;
+      }
+
+      // Ajout de la période de vacances de chaque zone dans le tableau
+      if (nomVacances            != ''
+      &&  dateDebutVacancesZoneA != '' && dateDebutVacancesZoneB != '' && dateDebutVacancesZoneC != ''
+      &&  dateFinVacancesZoneA   != '' && dateFinVacancesZoneB   != '' && dateFinVacancesZoneC   != '')
+      {
+        periodesVacances.push({nomVacances: nomVacances, dateDebutVacancesZoneA: dateDebutVacancesZoneA, dateFinVacancesZoneA: dateFinVacancesZoneA, dateDebutVacancesZoneB: dateDebutVacancesZoneB, dateFinVacancesZoneB: dateFinVacancesZoneB, dateDebutVacancesZoneC: dateDebutVacancesZoneC, dateFinVacancesZoneC: dateFinVacancesZoneC});
+
+        // Réinitialisation des variables
+        nomVacances            = '';
+        dateDebutVacancesZoneA = '';
+        dateDebutVacancesZoneB = '';
+        dateDebutVacancesZoneC = '';
+        dateFinVacancesZoneA   = '';
+        dateFinVacancesZoneB   = '';
+        dateFinVacancesZoneC   = '';
+      }
+
+      // Sauvegarde en mémoire de la date précédente pour pouvoir l'inscrire comme date de fin à rupture
+      datePrecedente = date;
+    });
+
+    // Traitement de la dernière ligne dans l'éventualité où c'est une date de vacances (récupération en tant que dates de fin)
+    if (debutVacancesZoneA == true)
+    {
+      if (datePrecedente != '')
+        dateFinVacancesZoneA = datePrecedente;
+    }
+
+    if (debutVacancesZoneB == true)
+    {
+      if (datePrecedente != '')
+        dateFinVacancesZoneB = datePrecedente;
+    }
+
+    if (debutVacancesZoneC == true)
+    {
+      if (datePrecedente != '')
+        dateFinVacancesZoneC = datePrecedente;
+    }
+
+    if (nomVacances            != ''
+    && (dateDebutVacancesZoneA != '' && dateFinVacancesZoneA != '')
+    || (dateDebutVacancesZoneB != '' && dateFinVacancesZoneB != '')
+    || (dateDebutVacancesZoneC != '' && dateFinVacancesZoneC != ''))
+    {
+      periodesVacances.push({nomVacances: nomVacances, dateDebutVacancesZoneA: dateDebutVacancesZoneA, dateFinVacancesZoneA: dateFinVacancesZoneA, dateDebutVacancesZoneB: dateDebutVacancesZoneB, dateFinVacancesZoneB: dateFinVacancesZoneB, dateDebutVacancesZoneC: dateDebutVacancesZoneC, dateFinVacancesZoneC: dateFinVacancesZoneC});
+    }
+
+    // Création du tableau
+    html += '<table class="affichage_periodes_vacances">';
+      html += '<tr>';
+        html += '<td class="affichage_zone_vide"></td>';
+        html += '<td class="affichage_zone_a">Zone A</td>';
+        html += '<td class="affichage_zone_b">Zone B</td>';
+        html += '<td class="affichage_zone_c">Zone C</td>';
+      html += '</tr>';
+
+      $.each(periodesVacances, function()
+      {
+        html += '<tr class="ligne_affichage_periodes_vacances">';
+          html += '<td>' + this.nomVacances + '</td>';
+
+          if (this.dateDebutVacancesZoneA == this.dateDebutVacancesZoneB && this.dateDebutVacancesZoneA == this.dateDebutVacancesZoneC
+          &&  this.dateFinVacancesZoneA   == this.dateFinVacancesZoneB   && this.dateFinVacancesZoneA   == this.dateFinVacancesZoneC)
+            html += '<td colspan="3">Du ' + formatDateForDisplayCsv(this.dateDebutVacancesZoneA) + ' au ' + formatDateForDisplayCsv(this.dateFinVacancesZoneA) + '</td>';
+          else
+          {
+            html += '<td>Du ' + formatDateForDisplayCsv(this.dateDebutVacancesZoneA) + ' au ' + formatDateForDisplayCsv(this.dateFinVacancesZoneA) + '</td>';
+            html += '<td>Du ' + formatDateForDisplayCsv(this.dateDebutVacancesZoneB) + ' au ' + formatDateForDisplayCsv(this.dateFinVacancesZoneB) + '</td>';
+            html += '<td>Du ' + formatDateForDisplayCsv(this.dateDebutVacancesZoneC) + ' au ' + formatDateForDisplayCsv(this.dateFinVacancesZoneC) + '</td>';
+          }
+        html += '</tr>';
+      });
+    html += '</table>';
+
+    // Ajout à la zone
+    $('#zone_affichage_periodes_vacances').html(html);
+
+    // Affichage de la zone
+    afficherMasquerIdNoDelay('zone_affichage_periodes_vacances');
+
+    // Changement de couleur de la période sélectionnée
+    periode.css('background-color', '#ff1937');
+  });
+}
+
+// Masque les périodes de vacances
+function hidePeriodesVacances(periode)
+{
+  // Masquage de la zone
+  afficherMasquerIdNoDelay('zone_affichage_periodes_vacances');
+
+  // Vidage de la zone
+  $('#zone_affichage_periodes_vacances').html('');
+
+  // Changement de couleur de la période sélectionnée
+  periode.css('background-color', '#262626');
 }
 
 // Ajoute une entrée à la saisie d'un journal

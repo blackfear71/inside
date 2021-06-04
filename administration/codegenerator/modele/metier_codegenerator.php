@@ -16,6 +16,7 @@
                      array('option' => 'masonry',     'checked' => 'N', 'titre' => 'Masonry',                    'categorie' => 'Vue'),
                      array('option' => 'exif',        'checked' => 'N', 'titre' => 'Données EXIF',               'categorie' => 'Vue'),
                      array('option' => 'html2canvas', 'checked' => 'N', 'titre' => 'Conversion HTML vers image', 'categorie' => 'Vue'),
+                     array('option' => 'jquerycsv',   'checked' => 'N', 'titre' => 'Extraction CSV',             'categorie' => 'Vue'),
                      array('option' => 'onglets',     'checked' => 'Y', 'titre' => 'Onglets',                    'categorie' => 'Vue'),
                      array('option' => 'alerts',      'checked' => 'Y', 'titre' => 'Alertes',                    'categorie' => 'Vue'),
                      array('option' => 'success',     'checked' => 'Y', 'titre' => 'Déblocage succès',           'categorie' => 'Vue'),
@@ -287,6 +288,11 @@
       $vue = str_replace('/*html2canvas_head*/', 'true', $vue);
     else
       $vue = str_replace('/*html2canvas_head*/', 'false', $vue);
+
+    if ($options['jquerycsv']->getChecked() == 'Y')
+      $vue = str_replace('/*jquerycsv_head*/', 'true', $vue);
+    else
+      $vue = str_replace('/*jquerycsv_head*/', 'false', $vue);
 
     // Titre de la page (header)
     $vue = str_replace('/*title*/', "'" . $nomFonctionnel . "'", $vue);

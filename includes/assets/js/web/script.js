@@ -823,13 +823,27 @@ function hideNotifications()
   $('.zone_details_notifications').remove();
 }
 
-// Formate une date pour affichage
+// Formate une date pour affichage (AAAAMMJJ -> JJ/MM/AAAA)
 function formatDateForDisplay(date)
 {
   var dateFormatted;
 
   if (date.length == 8)
     dateFormatted = date.substr(6, 2) + '/' + date.substr(4, 2) + '/' + date.substr(0, 4);
+  else
+    dateFormatted = date;
+
+  // Retour
+  return dateFormatted;
+}
+
+// Formate une date pour affichage (AAAA-MM-JJ -> JJ/MM/AAAA)
+function formatDateForDisplayCsv(date)
+{
+  var dateFormatted;
+
+  if (date.length == 10)
+    dateFormatted = date.substr(8, 2) + '/' + date.substr(5, 2) + '/' + date.substr(0, 4);
   else
     dateFormatted = date;
 

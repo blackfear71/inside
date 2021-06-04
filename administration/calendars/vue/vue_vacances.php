@@ -14,6 +14,9 @@
       {
         echo '<div class="periode_vacances">' . $periodeVacances . '</div>';
       }
+
+      // Zone d'affichage des périodes
+      echo '<div id="zone_affichage_periodes_vacances"></div>';
     }
     else
       echo '<div class="empty">Pas de périodes de vacances renseignées...</div>';
@@ -66,7 +69,7 @@
         {
           foreach ($dates as $key => $date)
           {
-            echo '<tr>';
+            echo '<tr class="ligne_periodes_vacances">';
               // Nom des vacances
               if ($key == 'debut')
                 echo '<td rowspan="2">' . $saisieVacances['nom'] . '</td>';
