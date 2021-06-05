@@ -12,6 +12,7 @@
   include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/physique_commun.php');
   include_once('../../includes/functions/fonctions_dates.php');
+  include_once('../../includes/functions/fonctions_images.php');
 
   // Contrôles communs Utilisateur
   controlsUser();
@@ -152,8 +153,11 @@
       break;
 
     case 'doGenerer':
-    case 'doGenererAnnexe':
       header('location: calendars_generator.php?action=goConsulter');
+      break;
+
+    case 'doGenererAnnexe':
+      header('location: calendars_generator.php?action=goConsulter&anchor=scrollGenerator');
       break;
 
     case 'goConsulter':

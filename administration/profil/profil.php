@@ -11,6 +11,7 @@
   include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/physique_commun.php');
   include_once('../../includes/functions/fonctions_regex.php');
+  include_once('../../includes/functions/fonctions_images.php');
 
   // Contrôles communs Utilisateur
   controlsAdmin();

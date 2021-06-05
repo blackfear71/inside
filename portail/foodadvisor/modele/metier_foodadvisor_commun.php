@@ -1,7 +1,6 @@
 <?php
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/restaurants.php');
-  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Récupération de la liste des lieux
   // RETOUR : Liste des lieux

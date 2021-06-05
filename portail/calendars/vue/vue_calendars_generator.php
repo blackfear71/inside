@@ -191,7 +191,7 @@
             /************************/
             /* Générateur d'annexes */
             /************************/
-            echo '<div class="zone_calendars_top">';
+            echo '<div id="scrollGenerator" class="zone_calendars_top">';
               // Titre
               echo '<div class="titre_section"><img src="../../includes/icons/calendars/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" /><div class="texte_titre_section">Générer une nouvelle annexe</div></div>';
 

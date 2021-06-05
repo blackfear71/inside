@@ -1,6 +1,5 @@
 <?php
   include_once('../../includes/classes/profile.php');
-  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Lecture des données profil
   // RETOUR : Objet Profile
@@ -38,8 +37,8 @@
     {
       $newName = $fileDatas['new_name'];
 
-      // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, false, true);
+      // Création miniature avec une hauteur/largeur max de 400px
+      imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, false, true);
 
       // Suppression de l'ancien avatar si présent
       $oldAvatar = physiqueAvatarUser($identifiant);

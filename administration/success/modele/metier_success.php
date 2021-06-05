@@ -1,7 +1,6 @@
 <?php
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/success.php');
-  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Initialise les données de sauvegarde en session
   // RETOUR : Erreur
@@ -143,8 +142,8 @@
     // Création miniature et insertion en base
     if ($control_ok == true)
     {
-      // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, false, true);
+      // Création miniature avec une hauteur/largeur max de 500px
+      imageThumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, false, true);
 
       // Insertion de l'enregistrement en base
       $success = array('reference'     => $reference,

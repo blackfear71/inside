@@ -9,6 +9,7 @@
     $options = array(array('option' => 'common',      'checked' => 'Y', 'titre' => 'Fonctions communes',         'categorie' => 'Contrôleur'),
                      array('option' => 'dates',       'checked' => 'N', 'titre' => 'Fonctions dates',            'categorie' => 'Contrôleur'),
                      array('option' => 'regex',       'checked' => 'N', 'titre' => 'Fonctions regex',            'categorie' => 'Contrôleur'),
+                     array('option' => 'images',      'checked' => 'N', 'titre' => 'Fonctions images',           'categorie' => 'Contrôleur'),
                      array('option' => 'admin',       'checked' => 'N', 'titre' => 'Page admin',                 'categorie' => 'Contrôleur'),
                      array('option' => 'angular',     'checked' => 'N', 'titre' => 'Angular',                    'categorie' => 'Vue'),
                      array('option' => 'chat',        'checked' => 'Y', 'titre' => 'Chat',                       'categorie' => 'Vue'),
@@ -407,7 +408,12 @@
     // Fonctions regex
     if ($options['regex']->getChecked() == 'Y')
       $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_regex.php\');
-', $controler);
+  /*common_functions*/', $controler);
+
+    // Fonctions dates
+    if ($options['images']->getChecked() == 'Y')
+      $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_images.php\');
+  /*common_functions*/', $controler);
 
     // Suppression balise
     $controler = str_replace('/*common_functions*/', '', $controler);

@@ -1,7 +1,6 @@
 <?php
   include_once('../../includes/classes/gateaux.php');
   include_once('../../includes/classes/profile.php');
-  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Initialise les données de sauvegarde en session
   // RETOUR : Aucun
@@ -490,7 +489,7 @@
     if ($control_ok == true)
       $control_ok = uploadFile($fileDatas, $dossier);
 
-    // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+    // Traitement des images
     if ($control_ok == true)
     {
       $newName   = $fileDatas['new_name'];
@@ -500,11 +499,11 @@
       if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
         rotateImage($dossier . '/' . $newName, $typeImage);
 
-      // Redimensionne l'image avec une hauteur/largeur max de 2000px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 2000, false, false);
+      // Redimensionne l'image avec une hauteur/largeur max de 2000px
+      imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 2000, false, false);
 
-      // Créé une miniature de la source vers la destination en la redimensionnant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-      imagethumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, false, false);
+      // Création miniature avec une hauteur/largeur max de 500px
+      imageThumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, false, false);
     }
 
     // Retour

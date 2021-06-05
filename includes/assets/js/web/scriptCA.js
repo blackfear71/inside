@@ -97,6 +97,14 @@ $(window).on('load', function()
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_calendriers').addClass('masonry');
   }
+
+  // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+  var id     = $_GET('anchor');
+  var offset = 70;
+  var shadow = true;
+
+  // Scroll vers l'id
+  scrollToId(id, offset, shadow);
 });
 
 /*****************/

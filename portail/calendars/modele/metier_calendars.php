@@ -1,7 +1,6 @@
 <?php
   include_once('../../includes/classes/calendars.php');
   include_once('../../includes/classes/profile.php');
-  include_once('../../includes/libraries/php/imagethumb.php');
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
@@ -137,7 +136,7 @@
                         'month'     => $month,
                         'year'      => $year,
                         'calendar'  => $nameCalendar
-                        );
+                       );
 
       $idCalendar = physiqueInsertionCalendrier($calendar);
 
@@ -176,7 +175,7 @@
       $annexe = array('to_delete' => $toDelete,
                       'annexe'    => $nameAnnexe,
                       'title'     => $title
-                      );
+                     );
 
       $idAnnexe = physiqueInsertionAnnexe($annexe);
 
@@ -216,12 +215,12 @@
     if ($control_ok == true)
       $control_ok = uploadFile($fileDatas, $dossier);
 
-    // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+    // Création miniature avec une hauteur/largeur max de 500px
     if ($control_ok == true)
     {
       $newName = $fileDatas['new_name'];
 
-      imagethumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, false, false);
+      imageThumb($dossier . '/' . $newName, $dossierMiniatures . '/' . $newName, 500, false, false);
     }
 
     // Retour
@@ -531,12 +530,12 @@
     if ($control_ok == true)
       $control_ok = uploadFile($fileDatas, $dossierTemporaire);
 
-    // Duplique et rogne l'image originale de la source vers la destination en forçant une hauteur/largeur (cf fonction imagethumb.php)
+    // Duplique et rogne l'image originale avec forçage d'une hauteur et d'une largeur
     if ($control_ok == true)
     {
       $newName = $fileDatas['new_name'];
 
-      imagetrim($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 3508, 4461, true);
+      imageTrim($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 3508, 4461, true);
     }
   }
 
@@ -571,15 +570,18 @@
     // Sauvegarde du fichier
     file_put_contents($dossier . '/' . $name, $decodedPicture);
 
-    // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-    imagethumb($dossier . '/' . $name, $dossierMiniatures . '/' . $name, 500, false, false);
+    // Compression de l'image
+    imageCompression($dossier . '/' . $name, $dossier . '/' . $name, 100);
+
+    // Création miniature avec une hauteur/largeur max de 500px
+    imageThumb($dossier . '/' . $name, $dossierMiniatures . '/' . $name, 500, false, false);
 
     // Insertion de l'enregistrement en base
     $calendar = array('to_delete' => $toDelete,
                       'month'     => $month,
                       'year'      => $year,
                       'calendar'  => $name
-                      );
+                     );
 
     $idCalendar = physiqueInsertionCalendrier($calendar);
 
@@ -687,13 +689,12 @@
     if ($control_ok == true)
       $control_ok = uploadFile($fileDatas, $dossierTemporaire);
 
-    // Duplique et rogne l'image originale de la source vers la destination en forçant une hauteur/largeur (cf fonction imagethumb.php)
+    // Création miniature avec une hauteur/largeur max de 400px
     if ($control_ok == true)
     {
       $newName = $fileDatas['new_name'];
 
-      // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
-      imagethumb($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 400, true, true);
+      imageThumb($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 400, true, true);
     }
   }
 
@@ -727,8 +728,8 @@
     // Sauvegarde du fichier
     file_put_contents($dossier . '/' . $name, $decodedPicture);
 
-    // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-    imagethumb($dossier . '/' . $name, $dossierMiniatures . '/' . $name, 500, false, false);
+    // Création miniature avec une hauteur/largeur max de 500px
+    imageThumb($dossier . '/' . $name, $dossierMiniatures . '/' . $name, 500, false, false);
 
     // Insertion de l'enregistrement en base
     $annexe = array('to_delete' => $toDelete,

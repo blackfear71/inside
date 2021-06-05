@@ -231,8 +231,8 @@
           if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
             rotateImage($dossier . '/' . $newName, $typeImage);
 
-          // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-          imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
+          // Création miniature avec une hauteur/largeur max de 500px
+          imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
         }
       }
       else
@@ -415,8 +415,8 @@
             if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
               rotateImage($dossier . '/' . $newName, $typeImage);
 
-            // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
-            imagethumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
+            // Création miniature avec une hauteur/largeur max de 500px
+            imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
           }
         }
       }
