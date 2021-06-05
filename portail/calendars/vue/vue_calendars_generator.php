@@ -270,8 +270,8 @@
                 echo '<div class="titre_explications_calendrier_generator">A propos du générateur d\'annexes</div>';
 
                 echo '<div class="explications_calendrier_generator">';
-                  echo 'Ceci est le générateur d\'annexes automatisé. La saisie des données permet de générer une annexe sur-mesure puis de la
-                  sauvegarder sur le site. Les données disponibles sont :';
+                  echo 'Ceci est le générateur d\'annexes automatisé. La saisie des données permet de générer une annexe contenant des étiquettes à utiliser avec les calendriers puis de la sauvegarder sur le site.
+                  Les données disponibles sont :';
 
                   echo '<ul>';
                     echo '<li>L\'image (obligatoire)</li>';
