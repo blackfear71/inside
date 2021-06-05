@@ -5,18 +5,21 @@
 $(function()
 {
   /*** Actions au chargement ***/
+  // Génération du calendrier sous forme d'image
   if ($('.zone_calendrier_generator').length)
-  {
-    // Génération du calendrier sous forme d'image
     afficherCalendrierJpeg();
 
-    // Adaptation mobile
+  // Génération de l'annexe sous forme d'image
+  if ($('.zone_annexe_generator').length)
+    afficherAnnexeJpeg();
+
+  // Adaptation mobile
+  if ($('.zone_calendrier_generator').length || $('.zone_annexe_generator').length)
     adaptCalendars();
-  }
 
   /*** Actions au clic ***/
   // Bloque le bouton de soumission si besoin
-  $('#bouton_saisie_calendrier, #bouton_saisie_annexe, #bouton_saisie_generator, #bouton_saisie_generated').click(function()
+  $('#bouton_saisie_calendrier, #bouton_saisie_annexe, #bouton_saisie_generator, #bouton_saisie_annexe_generator, #bouton_saisie_generated, #bouton_saisie_annexe_generated').click(function()
   {
     var zoneButton   = $(this).parents('.zone_bouton_saisie');
     var submitButton = $(this);
@@ -40,6 +43,12 @@ $(function()
   $('.loadCalendrierGenere').on('change', function()
   {
     loadFile(event, 'image_calendars_generated', false);
+  });
+
+  // Charge l'annexe à générer
+  $('.loadAnnexeGeneree').on('change', function()
+  {
+    loadFile(event, 'image_annexe_generated', false);
   });
 
   // Charge le calendrier
@@ -121,6 +130,21 @@ function adaptCalendars()
       $('.zone_calendrier_generator_right').css('margin-top', '0');
     }
 
+    // Générateur d'annexes
+    $('.zone_annexe_generator_middle').css('width', 'calc(100% - 280px)');
+    $('.zone_annexe_generator_middle').css('margin-right', '0');
+
+    if ($('.zone_annexe_generator_middle').length)
+    {
+      $('.zone_annexe_generator_right').css('width', '100%');
+      $('.zone_annexe_generator_right').css('margin-top', '20px');
+    }
+    else
+    {
+      $('.zone_annexe_generator_right').css('width', 'calc(100% - 280px)');
+      $('.zone_annexe_generator_right').css('margin-top', '0');
+    }
+
     // Ajout de calendriers et annexes
     $('.zone_calendars_left').css('display', 'block');
     $('.zone_calendars_left').css('width', '100%');
@@ -149,6 +173,17 @@ function adaptCalendars()
       $('.zone_calendrier_generator_right').css('width', 'calc(100% - 280px)');
 
     $('.zone_calendrier_generator_right').css('margin-top', '0');
+
+    // Générateur d'annexes
+    $('.zone_annexe_generator_middle').css('width', '213px');
+    $('.zone_annexe_generator_middle').css('margin-right', '20px');
+
+    if ($('.zone_annexe_generator_middle').length)
+      $('.zone_annexe_generator_right').css('width', 'calc(100% - 513px)');
+    else
+      $('.zone_annexe_generator_right').css('width', 'calc(100% - 280px)');
+
+    $('.zone_annexe_generator_right').css('margin-top', '0');
 
     // Ajout de calendriers et annexes
     $('.zone_calendars_left').css('display', 'inline-block');
@@ -186,6 +221,32 @@ function afficherCalendrierJpeg()
 
   // Masquage du calendrier généré (format HTML)
   $('.zone_calendrier_generator_hidden').remove();
+
+  // Redimenssionnement des zones
+  $('.zone_calendrier_generator_right').css('width', 'calc(100% - 589px)');
+}
+
+// Affiche l'annexe générée au format JPEG
+function afficherAnnexeJpeg()
+{
+  // Conversion de l'annexe généré en image
+  html2canvas($('.zone_annexe_generator')[0],
+  {
+    // Options
+    scale:1
+  }).then(function(canvas)
+  {
+    // Conversion de l'annexe générée
+    var data = canvas.toDataURL('image/jpg', 1);
+
+    // Affichage de la zone et du formulaire
+    $('.form_sauvegarde_annexe').css('display', 'block');
+    $('#generated_annexe').attr('src', data);
+    $('#annexe_generator').val(data);
+  });
+
+  // Masquage de l'annexe généré (format HTML)
+  $('.zone_annexe_generator_hidden').remove();
 
   // Redimenssionnement des zones
   $('.zone_calendrier_generator_right').css('width', 'calc(100% - 589px)');

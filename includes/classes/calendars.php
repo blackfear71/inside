@@ -356,4 +356,47 @@
       return $this->picture;
     }
   }
+
+  class AnnexeParameters
+  {
+    private $name;
+    private $picture;
+
+    // Constructeur par défaut (objet vide)
+    public function __construct()
+    {
+      $this->name    = '';
+      $this->picture = '';
+    }
+
+    // Sécurisation des données
+    public static function secureData($data)
+    {
+      $data->setName(htmlspecialchars($data->getName()));
+      $data->setPicture(htmlspecialchars($data->getPicture()));
+    }
+
+    // Getters et Setters pour l'objet AnnexeParameters
+    // Nom de l'image
+    public function setName($name)
+    {
+      $this->name = $name;
+    }
+
+    public function getName()
+    {
+      return $this->name;
+    }
+
+    // Image
+    public function setPicture($picture)
+    {
+      $this->picture = $picture;
+    }
+
+    public function getPicture()
+    {
+      return $this->picture;
+    }
+  }
 ?>

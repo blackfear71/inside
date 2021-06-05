@@ -598,4 +598,156 @@
     // Retour
     return $year;
   }
+
+  // METIER : Initialise les paramètres d'annexe
+  // RETOUR : Paramètres
+  function initializeAnnexe()
+  {
+    // Initialisations
+    $annexeParameters = new AnnexeParameters();
+
+    // Retour
+    return $annexeParameters;
+  }
+
+  // METIER : Récupère les paramètres de l'annexe
+  // RETOUR : Paramètres
+  function getAnnexeParameters($parametres)
+  {
+    // Suppression de la session
+    unset($_SESSION['annexe']);
+
+    // Initialisations
+    $annexeParameters = new AnnexeParameters();
+
+    // Récupération des paramètres
+    $annexeParameters->setName($parametres['name']);
+    $annexeParameters->setPicture($parametres['picture']);
+
+    // Retour
+    return $annexeParameters;
+  }
+
+  // METIER : Sauvegarde des paramètres en session
+  // RETOUR : Nom de l'image
+  function saveAnnexeParameters($post, $files)
+  {
+    // Détermination du nom de l'image
+    if (isset($post['picture_annexe_generated']) AND !empty($post['picture_annexe_generated']))
+    {
+      // Si une image a déjà été saisie, le nom ne change pas
+      $nomImage = $post['picture_annexe_generated'];
+    }
+    else
+    {
+      // Première saisie
+      if (isset($files['picture_annexe']) AND !empty($files['picture_annexe']['name']))
+      {
+        $type     = pathinfo($files['picture_annexe']['name'], PATHINFO_EXTENSION);
+        $nomImage = rand() . '.' . $type;
+      }
+      else
+        $nomImage = '';
+    }
+
+    // Sauvegarde des paramètres saisis en session
+    $_SESSION['annexe']['name']    = $post['name_annexe'];
+    $_SESSION['annexe']['picture'] = $nomImage;
+
+    // Retour
+    return $nomImage;
+  }
+
+  // METIER : Insertion de l'image dans un dossier temporaire
+  // RETOUR : Aucun
+  function insertImageAnnexe($post, $files, $nom)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Dossier de destination des images temporaires
+    $dossierTemporaire = '../../includes/images/calendars/temp';
+
+    // On vérifie la présence du dossier des miniatures, sinon on le créé
+    if (!is_dir($dossierTemporaire))
+      mkdir($dossierTemporaire, 0777, true);
+
+    // Récupération du nom de l'image
+    $search   = array('.jpg', '.jpeg', '.gif', '.bmp', '.png');
+    $replace  = array('', '', '', '', '');
+    $nomImage = str_replace($search, $replace, $nom);
+
+    // Contrôles fichier
+    $fileDatas = controlsUploadFile($files['picture_annexe'], $nomImage, 'all');
+
+    // Récupération contrôles
+    $control_ok = controleFichier($fileDatas);
+
+    // Upload fichier
+    if ($control_ok == true)
+      $control_ok = uploadFile($fileDatas, $dossierTemporaire);
+
+    // Duplique et rogne l'image originale de la source vers la destination en forçant une hauteur/largeur (cf fonction imagethumb.php)
+    if ($control_ok == true)
+    {
+      $newName = $fileDatas['new_name'];
+
+      // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 400px (cf fonction imagethumb.php)
+      imagethumb($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 400, true, true);
+    }
+  }
+
+  // METIER : Sauvegarde de l'annexe générée
+  // RETOUR : Année
+  function insertAnnexeGeneree($post, $identifiant)
+  {
+    // Récupération des données
+    $picture  = $post['annexe_generator'];
+    $tempName = $post['temp_name_annexe_generator'];
+    $toDelete = 'N';
+    $title    = $post['title_generator'];
+    $name     = rand() . '.jpg';
+
+    // Décodage du flux de l'image
+    $encodedPicture = str_replace(' ', '+', substr($picture, strpos($picture, ',') + 1));
+    $decodedPicture = base64_decode($encodedPicture);
+
+    // On vérifie la présence du dossier, sinon on le créé de manière récursive
+    $dossier = '../../includes/images/calendars/annexes';
+
+    if (!is_dir($dossier))
+      mkdir($dossier, 0777, true);
+
+    // On vérifie la présence du dossier des miniatures, sinon on le créé
+    $dossierMiniatures = $dossier . '/mini';
+
+    if (!is_dir($dossierMiniatures))
+      mkdir($dossierMiniatures, 0777, true);
+
+    // Sauvegarde du fichier
+    file_put_contents($dossier . '/' . $name, $decodedPicture);
+
+    // Créé une miniature de la source vers la destination en la rognant avec une hauteur/largeur max de 500px (cf fonction imagethumb.php)
+    imagethumb($dossier . '/' . $name, $dossierMiniatures . '/' . $name, 500, false, false);
+
+    // Insertion de l'enregistrement en base
+    $annexe = array('to_delete' => $toDelete,
+                    'annexe'    => $name,
+                    'title'     => $title
+                   );
+
+    $idAnnexe = physiqueInsertionAnnexe($annexe);
+
+    // Suppression des images temporaires
+    $dossierTemporaire = '../../includes/images/calendars/temp';
+
+    unlink($dossierTemporaire . '/' . $tempName);
+    unlink($dossierTemporaire . '/trim_' . $tempName);
+
+    // Insertion notification
+    insertNotification($identifiant, 'annexe', $idAnnexe);
+
+    // Message d'alerte
+    $_SESSION['alerts']['annexe_added'] = true;
+  }
 ?>

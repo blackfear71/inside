@@ -57,9 +57,9 @@
             $anneeDebut = date('Y') - 2;
             $anneeFin   = date('Y') + 2;
 
-            /**************/
-            /* Générateur */
-            /**************/
+            /*****************************/
+            /* Générateur de calendriers */
+            /*****************************/
             echo '<div class="zone_calendars_top">';
               // Titre
               echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Générer un nouveau calendrier</div></div>';
@@ -183,6 +183,105 @@
 
                   echo '<div class="avertissement_calendrier_generator_2">';
                     echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder le calendrier" après l\'avoir généré pour le rendre disponible sur le site.';
+                  echo '</div>';
+                echo '</div>';
+              echo '</div>';
+            echo '</div>';
+
+            /************************/
+            /* Générateur d'annexes */
+            /************************/
+            echo '<div class="zone_calendars_top">';
+              // Titre
+              echo '<div class="titre_section"><img src="../../includes/icons/calendars/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" /><div class="texte_titre_section">Générer une nouvelle annexe</div></div>';
+
+              // Saisie
+              echo '<div class="zone_annexe_generator_left">';
+                echo '<div class="zone_saisie_calendrier">';
+                  // Saisie des informations
+                  echo '<form method="post" action="calendars_generator.php?action=doGenererAnnexe" enctype="multipart/form-data">';
+                    // Image
+                    echo '<div class="zone_saisie_image">';
+                      echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
+
+                      echo '<div class="zone_parcourir_annexe_generator">';
+                        echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
+                        if (isset($annexeParameters) AND !empty($annexeParameters->getPicture()))
+                          echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="picture_annexe" class="bouton_parcourir_annexe_generator loadAnnexeGeneree" />';
+                        else
+                          echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="picture_annexe" class="bouton_parcourir_annexe_generator loadAnnexeGeneree" required />';
+                      echo '</div>';
+
+                      echo '<div class="mask_annexe_generator">';
+                        if (isset($annexeParameters) AND !empty($annexeParameters->getPicture()))
+                        {
+                          echo '<img src="../../includes/images/calendars/temp/' . $annexeParameters->getPicture() . '" id="image_annexe_generated" alt="" class="image" />';
+                          echo '<input type="hidden" name="picture_annexe_generated" value="' . $annexeParameters->getPicture() . '" />';
+                        }
+                        else
+                          echo '<img id="image_annexe_generated" alt="" class="image" />';
+                      echo '</div>';
+                    echo '</div>';
+
+                    // Titre annexe
+                    echo '<input type="text" name="name_annexe" value="' . $annexeParameters->getName() . '" placeholder="Nom" maxlength="255" class="titre_annexe" required />';
+
+                    // Bouton validation
+                    echo '<div class="zone_bouton_saisie">';
+                      echo '<input type="submit" name="send_annexe" value="Générer l\'annexe" id="bouton_saisie_annexe_generator" class="saisie_bouton" />';
+                    echo '</div>';
+                  echo '</form>';
+                echo '</div>';
+              echo '</div>';
+
+              // Affichage de l'annexe générée sous forme d'image
+              if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
+              {
+                echo '<div class="zone_annexe_generator_middle">';
+                  echo '<div class="zone_saisie_calendrier">';
+                    // Génération de l'annexe au format HTML
+                    include('vue_annexe_generated.php');
+
+                    // Affichage de l'annexe au format JPEG (une fois généré)
+                    echo '<img src="" title="Annexe générée" id="generated_annexe" class="image_rendu_generator" />';
+
+                    // Formulaire de sauvegarde de l'image générée
+                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarderAnnexe" enctype="multipart/form-data" class="form_sauvegarde_annexe">';
+                      // Image générée
+                      echo '<input type="hidden" name="annexe_generator" id="annexe_generator" value="" />';
+
+                      // Nom fichiers temporaires
+                      echo '<input type="hidden" name="temp_name_annexe_generator" value="' . $annexeParameters->getPicture() . '" />';
+
+                      // Nom
+                      echo '<input type="hidden" name="title_generator" value="' . $annexeParameters->getName() . '" />';
+
+                      // Bouton sauvegarde
+                      echo '<div class="zone_bouton_saisie">';
+                        echo '<input type="submit" name="save" value="Sauvegarder l\'annexe" id="bouton_saisie_annexe_generated" class="saisie_bouton" />';
+                      echo '</div>';
+                    echo '</form>';
+                  echo '</div>';
+                echo '</div>';
+              }
+
+              // Explications
+              echo '<div class="zone_annexe_generator_right">';
+                echo '<div class="titre_explications_calendrier_generator">A propos du générateur d\'annexes</div>';
+
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Ceci est le générateur d\'annexes automatisé. La saisie des données permet de générer une annexe sur-mesure puis de la
+                  sauvegarder sur le site. Les données disponibles sont :';
+
+                  echo '<ul>';
+                    echo '<li>L\'image (obligatoire)</li>';
+                    echo '<li>Le nom (obligatoire)</li>';
+                  echo '</ul>';
+
+                  echo 'L\'annexe générée est formatée en fonction des données saisies. En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
+
+                  echo '<div class="avertissement_calendrier_generator_2">';
+                    echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder l\'annexe" après l\'avoir générée pour la rendre disponible sur le site.';
                   echo '</div>';
                 echo '</div>';
               echo '</div>';
