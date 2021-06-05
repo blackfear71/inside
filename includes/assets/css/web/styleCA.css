@@ -888,6 +888,7 @@
 	display: block;
 	width: 320px;
 	border-radius: 10px;
+	background-color: white;
 }
 
 .cake_scrum
@@ -995,6 +996,7 @@
 	height: 140px;
 	width: 140px;
 	vertical-align: middle;
+	background-color: #d3d3d3;
 }
 
 .zone_annexe_generator_right
