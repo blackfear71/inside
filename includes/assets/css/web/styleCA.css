@@ -693,12 +693,24 @@
 	line-height: 100%;
 	background-color: #262626;
 	border-radius: 5px;
+	overflow: hidden;
+}
+
+.fond_jour_ferie
+{
+	position: absolute;
+	height: 100%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .jour_ferie_calendrier_generator
 {
+	position: relative;
+	z-index: 1;
 	display: inline-block;
 	vertical-align: middle;
+	width: 100%;
 	font-family: robotoregular, Verdana, sans-serif;
 	font-size: 600%;
 	color: white;

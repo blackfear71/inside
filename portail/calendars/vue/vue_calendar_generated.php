@@ -97,7 +97,8 @@
                     if (!empty($jourFerie))
                     {
                       echo '<div class="zone_jour_ferie_calendrier_generator">';
-                        echo '<div class="jour_ferie_calendrier_generator">' . mb_strtoupper($jourFerie) . '</div>';
+                        echo '<img src="../../includes/images/calendars/backgrounds/' . $jourFerie['reference'] . '.jpg" class="fond_jour_ferie"/>';
+                        echo '<div class="jour_ferie_calendrier_generator">' . mb_strtoupper($jourFerie['nom_jour']) . '</div>';
                       echo '</div>';
                     }
                   echo '</td>';

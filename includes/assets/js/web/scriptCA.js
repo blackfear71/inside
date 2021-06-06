@@ -219,7 +219,7 @@ function afficherCalendrierJpeg()
   }).then(function(canvas)
   {
     // Conversion du calendrier généré
-    var data = canvas.toDataURL('image/jpg', 1);
+    var data = canvas.toDataURL('image/jpeg', 1);
 
     // Affichage de la zone et du formulaire
     $('.form_sauvegarde_calendrier').css('display', 'block');
@@ -245,7 +245,7 @@ function afficherAnnexeJpeg()
   }).then(function(canvas)
   {
     // Conversion de l'annexe générée
-    var data = canvas.toDataURL('image/jpg', 1);
+    var data = canvas.toDataURL('image/jpeg', 1);
 
     // Affichage de la zone et du formulaire
     $('.form_sauvegarde_annexe').css('display', 'block');
