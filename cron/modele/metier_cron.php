@@ -474,7 +474,7 @@
     if (!empty($emailAdministrateur))
     {
       // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
-      $nombreRequetesMotDePasse = physiqueRequetesUsers('Y');
+      $nombreRequetesMotDePasse = physiqueRequetesUsers('P');
 
       // Récupération du nombre de requêtes des utilisateurs (changement de mot de passe)
       $nombreRequetesInscription = physiqueRequetesUsers('I');

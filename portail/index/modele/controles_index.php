@@ -63,7 +63,7 @@
     // Contrôle
     switch ($statut)
     {
-      case 'Y':
+      case 'P':
         $_SESSION['alerts']['already_asked'] = true;
         $control_ok                          = false;
         break;

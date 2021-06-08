@@ -385,9 +385,9 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
-    $status      = 'N';
+    $status      = 'U';
 
-    // Remise à "N" de l'indicateur de demande
+    // Remise à "U" de l'indicateur de demande
     physiqueUpdateStatusUser($identifiant, $status);
   }
 
@@ -397,7 +397,7 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
-    $status      = 'N';
+    $status      = 'U';
 
     // Génération nouveau mot de passe aléatoire
     $chaine      = generateRandomString(10);
@@ -441,9 +441,9 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
-    $status      = 'N';
+    $status      = 'U';
 
-    // Mise à jour à "N" du statut
+    // Mise à jour à "U" du statut
     physiqueUpdateStatusUser($identifiant, $status);
 
     // Insertion notification
@@ -533,9 +533,9 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
-    $status      = 'N';
+    $status      = 'U';
 
-    // Mise à jour à "N" du statut
+    // Mise à jour à "U" du statut
     physiqueUpdateStatusUser($identifiant, $status);
   }
 ?>

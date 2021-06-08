@@ -546,7 +546,7 @@
       echo '</form>';
 
       // Annulation demande
-      if ($profil->getStatus() == 'Y')
+      if ($profil->getStatus() == 'P')
       {
         echo '<div class="message_form_preferences">Si vous avez fait la demande de réinitialisation de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
 

@@ -79,7 +79,7 @@
           echo '<div class="zone_index">';
             // Connexion
             if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
-              echo '<div id="formConnexion" class="zone_form_index" style="display: none;"';
+              echo '<div id="formConnexion" class="zone_form_index" style="display: none;">';
             else
               echo '<div id="formConnexion" class="zone_form_index">';
               // Logo

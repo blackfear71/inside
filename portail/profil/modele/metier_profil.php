@@ -346,7 +346,7 @@
         $_SESSION['alerts']['ask_desinscription'] = true;
         break;
 
-      case 'N':
+      case 'U':
         $_SESSION['alerts']['cancel_status'] = true;
         break;
 

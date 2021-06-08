@@ -43,25 +43,30 @@
 				echo '<td class="td_manage_users">';
 					switch ($user->getStatus())
 					{
-						case 'Y':
+						// Demande de réinitialisation de mot de passe
+						case 'P':
 							echo 'Mot de passe';
 							break;
 
+						// Demande d'inscription
 						case 'I':
 							echo 'Inscription';
 							break;
+
+						// Demande de désinscription
 						case 'D':
 							echo 'Désinscription';
 							break;
 
-						case 'N':
+						// Statut utilisateur normal
+						case 'U':
 						default:
 							break;
 					}
 				echo '</td>';
 
 				echo '<td class="td_manage_users">';
-					if ($user->getStatus() == 'Y')
+					if ($user->getStatus() == 'P')
 					{
 						echo '<form method="post" action="manageusers.php?action=doAnnulerMdp" class="form_manage_user">';
 							echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';

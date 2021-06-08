@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreStatusUsers
                         FROM users
-                        WHERE identifiant != "admin" AND (status = "Y" OR status = "I" OR status = "D")
+                        WHERE identifiant != "admin" AND (status = "P" OR status = "I" OR status = "D")
                         ORDER BY identifiant ASC');
 
     $data = $req->fetch();

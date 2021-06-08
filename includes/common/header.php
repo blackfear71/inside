@@ -93,13 +93,22 @@
         // Boutons
         echo '<div class="zone_liens_index">';
           // Connexion
-          echo '<a id="afficherConnexion" class="lien_index lien_index_selected"><div class="test">Connexion</div></a>';
+          if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
+            echo '<a id="afficherConnexion" class="lien_index"><div class="test">Connexion</div></a>';
+          else
+            echo '<a id="afficherConnexion" class="lien_index lien_index_selected"><div class="test">Connexion</div></a>';
 
           // Inscription
-          echo '<a id="afficherInscription" class="lien_index">Inscription</a>';
+          if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
+            echo '<a id="afficherInscription" class="lien_index lien_index_selected">Inscription</a>';
+          else
+            echo '<a id="afficherInscription" class="lien_index">Inscription</a>';
 
           // Mot de passe
-          echo '<a id="afficherPassword" class="lien_index">Mot de passe oublié</a>';
+          if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
+            echo '<a id="afficherPassword" class="lien_index lien_index_selected">Mot de passe oublié</a>';
+          else
+            echo '<a id="afficherPassword" class="lien_index">Mot de passe oublié</a>';
         echo '</div>';
       echo '</div>';
 

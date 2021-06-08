@@ -277,7 +277,7 @@
 
     // Récupération des données
     $identifiant = htmlspecialchars(strtoupper(trim($post['login'])));
-    $status      = 'Y';
+    $status      = 'P';
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['identifiant_saisi_mdp'] = $post['login'];

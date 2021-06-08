@@ -127,7 +127,7 @@
     case 'cancelDesinscription':
     case 'cancelResetPassword':
       // Annulation changement statut
-      updateStatus($_SESSION['user']['identifiant'], 'N');
+      updateStatus($_SESSION['user']['identifiant'], 'U');
       break;
 
     case 'doSupprimerTheme':
