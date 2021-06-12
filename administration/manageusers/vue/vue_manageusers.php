@@ -5,7 +5,7 @@
     <?php
       $titleHead       = 'Gestion utilisateurs';
       $styleHead       = 'styleAdmin.css';
-      $scriptHead      = '';
+      $scriptHead      = 'scriptAdmin.js';
       $angularHead     = false;
       $chatHead        = false;
       $datepickerHead  = false;

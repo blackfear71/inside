@@ -31,6 +31,12 @@
         echo '<div class="valeur_experience_profil">' . $profil->getExperience() . ' XP</div>';
       echo '</div>';
 
+      // Equipe
+      echo '<div class="zone_info">';
+        echo '<img src="../../includes/icons/profil/team_grey.png" alt="team_grey" class="logo_profil" />';
+        echo '<div class="texte_profil">' . $equipe->getTeam() . '</div>';
+      echo '</div>';
+      
       // Adresse mail
       if (!empty($profil->getEmail()))
       {

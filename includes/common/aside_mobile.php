@@ -73,6 +73,12 @@
       echo '<div class="niveau_aside">' . $_SESSION['user']['experience']['niveau'] . '</div>';
     echo '</div>';
 
+    // Equipe
+    echo '<div class="lien_aside">';
+      echo '<img src="/inside/includes/icons/common/team.png" alt="team" title="Equipe" class="icone_aside" />';
+      echo '<div class="titre_aside">' . formatString($_SESSION['user']['equipe_long'], 30) . '</div>';
+    echo '</div>';
+
     // Liens
     foreach ($listeAsideUser as $asideUser)
     {

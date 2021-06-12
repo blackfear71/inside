@@ -38,6 +38,12 @@ $(function()
     });
   }
 
+  // Positionnement du nom de l'équipe
+  if ($('.separation_nav').length)
+    $('.zone_equipe_bandeau').css('top', '83px');
+  else
+    $('.zone_equipe_bandeau').css('top', '80px');
+
   /*** Actions au clic ***/
   // Referme la barre de recherche quand on clique n'importe où sur le body
   $('body').click(function()

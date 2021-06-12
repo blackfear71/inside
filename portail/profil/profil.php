@@ -51,6 +51,9 @@
 
             // Récupération des préférences de l'utilisateur
             $preferences = getPreferences($_SESSION['user']['identifiant']);
+
+            // Récupération de la liste des équipes
+            $listeEquipes = getListeEquipes();
             break;
 
           case 'themes':
@@ -73,6 +76,9 @@
           case 'profile':
             // Récupération des informations de l'utilisateur
             $profil = getProfile($_SESSION['user']['identifiant']);
+
+            // Récupération de l'équipe
+            $equipe = getEquipe($profil->getTeam());
 
             // Récupération des préférences de l'utilisateur
             $statistiques = getStatistiques($_SESSION['user']['identifiant']);
@@ -117,6 +123,11 @@
     case 'doUpdatePassword':
       // Modification du mot de passe de l'utilisateur
       updatePassword($_SESSION['user']['identifiant'], $_POST);
+      break;
+
+    case 'doUpdateEquipe':
+      // Modification de l'équipe
+      updateEquipe($_SESSION['user']['identifiant'], $_POST);
       break;
 
     case 'askDesinscription':
@@ -171,6 +182,11 @@
         case 'settings':
           Profile::secureData($profil);
           Preferences::secureData($preferences);
+
+          foreach ($listeEquipes as $equipe)
+          {
+            Team::secureData($equipe);
+          }
           break;
 
         case 'themes':
@@ -197,6 +213,7 @@
         case 'profile':
         default:
           Profile::secureData($profil);
+          Team::secureData($equipe);
           StatistiquesProfil::secureData($statistiques);
           Progression::secureData($progression);
           break;
@@ -209,6 +226,7 @@
     case 'doUpdateInfosMobile':
     case 'doUpdatePreferences':
     case 'doUpdatePassword':
+    case 'doUpdateEquipe':
     case 'askDesinscription':
     case 'cancelDesinscription':
     case 'cancelResetPassword':
@@ -227,6 +245,7 @@
     case 'doUpdateInfosMobile':
     case 'doUpdatePreferences':
     case 'doUpdatePassword':
+    case 'doUpdateEquipe':
     case 'askDesinscription':
     case 'cancelDesinscription':
     case 'cancelResetPassword':

@@ -7,6 +7,7 @@
     private $author;
     private $pseudo;
     private $avatar;
+    private $team;
     private $content;
     private $picture;
     private $type;
@@ -21,6 +22,7 @@
       $this->author   = '';
       $this->pseudo   = '';
       $this->avatar   = '';
+      $this->team     = '';
       $this->content  = '';
       $this->picture  = '';
       $this->type     = '';
@@ -51,11 +53,8 @@
       if (isset($data['author']))
         $this->author   = $data['author'];
 
-      if (isset($data['pseudo']))
-        $this->pseudo   = $data['pseudo'];
-
-      if (isset($data['avatar']))
-        $this->avatar   = $data['avatar'];
+      if (isset($data['team']))
+        $this->team     = $data['team'];
 
       if (isset($data['content']))
         $this->content  = $data['content'];
@@ -78,6 +77,7 @@
       $data->setAuthor(htmlspecialchars($data->getAuthor()));
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
       $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setContent(htmlspecialchars($data->getContent()));
       $data->setPicture(htmlspecialchars($data->getPicture()));
       $data->getType(htmlspecialchars($data->getType()));
@@ -149,6 +149,17 @@
     public function getAvatar()
     {
       return $this->avatar;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Contenu

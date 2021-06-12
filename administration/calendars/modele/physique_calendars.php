@@ -4,6 +4,36 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture de la liste des équipes activées
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE activation = "Y"
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      $listeEquipes[$equipe->getReference()] = $equipe;
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
+  }
+  
   // PHYSIQUE : Lecture préférences utilisateurs
   // RETOUR : Préférences utilisateurs
   function physiqueAutorisationsCalendars()
@@ -34,24 +64,26 @@
   }
 
   // PHYSIQUE : Lecture des informations utilisateur
-  // RETOUR : Pseudo utilisateur
-  function physiquePseudoUser($identifiant)
+  // RETOUR : Données utilisateur
+  function physiqueDonneesUser($identifiant)
   {
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo
                         FROM users
                         WHERE identifiant = "' . $identifiant . '"');
 
     $data = $req->fetch();
 
-    $pseudo = $data['pseudo'];
+    $user = array('pseudo' => $data['pseudo'],
+                  'team'   => $data['team']
+                 );
 
     $req->closeCursor();
 
     // Retour
-    return $pseudo;
+    return $user;
   }
 
   // PHYSIQUE : Lecture des utilisateurs

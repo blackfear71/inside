@@ -558,6 +558,42 @@
       }
     echo '</div>';
 
+    /***************************/
+    /*** Changement d'équipe ***/
+    /***************************/
+    echo '<div class="zone_preferences">';
+      // Titre
+      echo '<div class="titre_preference">';
+        echo '<div class="texte_titre_preference">CHANGER D\'ÉQUIPE</div>';
+      echo '</div>';
+
+      // Choix de l'équipe
+      if ($profil->getStatus() == 'T')
+        echo '<div class="message_form_preferences message_bold">Une demande est déjà en cours.</div>';
+      else
+      {
+        echo '<form method="post" action="profil.php?action=doUpdateEquipe" class="form_update_user">';
+          echo '<select name="equipe" class="select_form_update_team" required>';
+            foreach ($listeEquipes as $equipe)
+            {
+              if ($equipe->getReference() == $profil->getTeam())
+                echo '<option value="' . $equipe->getReference() . '" selected>' . $equipe->getTeam() . '</option>';
+              else
+                echo '<option value="' . $equipe->getReference() . '">' . $equipe->getTeam() . '</option>';
+            }
+
+            echo '<option value="other">Créer une équipe</option>';
+          echo '</select>';
+
+          // Saisie "Autre"
+          echo '<input type="text" name="autre_equipe" value="" placeholder="Nom de l\'équipe" id="autre_equipe" class="saisie_information_2" style="display: none;" />';
+
+          // Bouton validation
+          echo '<input type="submit" name="update_team" value="Changer d\'équipe" class="bouton_validation_form_2" />';
+        echo '</form>';
+      }
+    echo '</div>';
+
     /**********************/
     /*** Désinscription ***/
     /**********************/

@@ -23,8 +23,11 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      // Récupération de la liste des utilisateurs
-			$listeUsers = getUsers();
+      // Récupération de la liste des équipes
+      $listeEquipes = getListeEquipes();
+
+      // Récupération de la liste des utilisateurs inscrits
+			$listeUsersParEquipe = getUsers();
       break;
 
     case 'changeBeginnerStatus':
@@ -47,9 +50,17 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-			foreach ($listeUsers as $user)
+      foreach ($listeEquipes as $equipe)
+      {
+        Team::secureData($equipe);
+      }
+
+			foreach ($listeUsersParEquipe as $usersParEquipe)
 			{
-        Profile::secureData($user);
+        foreach ($usersParEquipe as $user)
+        {
+          Profile::secureData($user);
+        }
 			}
       break;
 

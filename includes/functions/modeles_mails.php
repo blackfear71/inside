@@ -501,6 +501,19 @@
                 $modele .= '</div>';
               $modele .= '</div>';
 
+              // Demandes de changemement d'équipe
+              $modele .= '<div class="zone_nombre_demandes_mail">';
+                // Titre
+                $modele .= '<div class="titre_demandes_mail">';
+                  $modele .= 'Changements d\'équipe';
+                $modele .= '</div>';
+
+                // Valeur
+                $modele .= '<div class="valeur_demandes_mail">';
+                  $modele .= $demandes['nombre_requetes_changement_equipe'];
+                $modele .= '</div>';
+              $modele .= '</div>';
+
               // Demandes d'inscription
               $modele .= '<div class="zone_nombre_demandes_mail">';
                 // Titre

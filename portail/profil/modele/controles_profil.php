@@ -65,6 +65,24 @@
     return $control_ok;
   }
 
+  // CONTROLE : Dépenses non nulles
+  // RETOUR : Booléen
+  function controleDepensesNonNulles($expense)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Contrôle
+    if ($expense < -0.01 OR $expense > 0.01)
+    {
+      $_SESSION['alerts']['team_expenses_not_null'] = true;
+      $control_ok                                   = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
+
   // CONTROLE : Mission terminée ou autre succès que mission
   // RETOUR : Booléen
   function controleMissionTermineeOuAutre($referenceSuccess)

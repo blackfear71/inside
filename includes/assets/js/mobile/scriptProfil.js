@@ -35,6 +35,13 @@ $(function()
 
     showSuccess(idSuccess);
   });
+
+  /*** Actions au changement ***/
+  // Affiche la saisie "Autre" (changement d'équipe)
+  $('.select_form_update_team').on('change', function()
+  {
+    afficherAutreEquipe('select_form_update_team', 'autre_equipe');
+  });
 });
 
 /*****************/
@@ -160,4 +167,19 @@ function showSuccess(id)
   $('body').append(html);
 
   $('#zoom_succes').fadeIn(200);
+}
+
+// Affiche ou masque la zone de saisie d'une autre équipe
+function afficherAutreEquipe(select, required)
+{
+  if ($('.' + select).val() == 'other')
+  {
+    $('#' + required).css('display', 'block');
+    $('#' + required).prop('required', true);
+  }
+  else
+  {
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
+  }
 }

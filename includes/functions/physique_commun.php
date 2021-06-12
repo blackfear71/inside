@@ -52,6 +52,49 @@
     return $succes;
   }
 
+  // PHYSIQUE : Lecture de l'équipe d'un utilisateur
+  // RETOUR : Equipe
+  function physiqueEquipeUser($identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant, team
+                        FROM users
+                        WHERE identifiant = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    $equipe = $data['team'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $equipe;
+  }
+
+  // PHYSIQUE : Lecture de l'équipe
+  // RETOUR : Objet Team
+  function physiqueDonneesEquipe($reference)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE reference = "' . $reference . '"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Team à partir des données remontées de la bdd
+    $equipe = Team::withData($data);
+
+    $req->closeCursor();
+
+    // Retour
+    return $equipe;
+  }
+
   // PHYSIQUE : Lecture de l'expérience d'un utilisateur
   // RETOUR : Expérience
   function physiqueExperienceUser($identifiant)

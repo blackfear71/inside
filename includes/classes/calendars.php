@@ -228,6 +228,7 @@
   {
     private $identifiant;
     private $pseudo;
+    private $equipe;
     private $manage_calendars;
 
     // Constructeur par défaut (objet vide)
@@ -235,6 +236,7 @@
     {
       $this->identifiant      = '';
       $this->pseudo           = '';
+      $this->equipe           = '';
       $this->manage_calendars = '';
     }
 
@@ -262,6 +264,7 @@
     {
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
+      //$data->setEquipe(htmlspecialchars($data->getEquipe()));
       $data->setManage_calendars(htmlspecialchars($data->getManage_calendars()));
     }
 
@@ -286,6 +289,17 @@
     public function getPseudo()
     {
       return $this->pseudo;
+    }
+
+    // Equipe
+    public function setEquipe($equipe)
+    {
+      $this->equipe = $equipe;
+    }
+
+    public function getEquipe()
+    {
+      return $this->equipe;
     }
 
     // Autorisation gestion calendriers

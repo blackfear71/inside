@@ -110,6 +110,12 @@ $(function()
   {
     identifiantMajuscule($(this));
   });
+
+  // Affiche la saisie "Autre" (nouvelle équipe)
+  $('.select_form_index').on('change', function()
+  {
+    afficherAutreEquipe('select_form_index', 'autre_equipe');
+  });
 });
 
 /*****************/
@@ -152,4 +158,19 @@ function switchIndex(idOpen, idClose, idMargin = '')
     // Affichage de la zone
     $('.zone_form_index').fadeIn(200);
   });
+}
+
+// Affiche ou masque la zone de saisie d'une autre équipe
+function afficherAutreEquipe(select, required)
+{
+  if ($('.' + select).val() == 'other')
+  {
+    $('#' + required).css('display', 'block');
+    $('#' + required).prop('required', true);
+  }
+  else
+  {
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
+  }
 }

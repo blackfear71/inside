@@ -29,19 +29,27 @@
       // Initialisation de la sauvegarde en session
       initializeSaveSession();
 
+      // Récupération de la liste des équipes
+      $listeEquipes = getListeEquipes();
+
       // Récupération des utilisateurs inscrits et désinscrits
-			$listeUsers    = getUsers();
-      $listeUsersDes = getUsersDes($listeUsers);
+			$listeUsersParEquipe = getUsers();
+      $listeUsersDes       = getUsersDes($listeUsersParEquipe);
 
       // Récupération alerte gestion des utilisateurs
 			$alerteUsers = getAlerteUsers();
 
       // Récupération des statistiques par catégories et des statistiques de demandes et publications
-      $tableauStatistiquesIns = getStatistiquesInscrits($listeUsers);
+      $tableauStatistiquesIns = getStatistiquesInscrits($listeUsersParEquipe);
 			$tableauStatistiquesDes = getStatistiquesDesinscrits($listeUsersDes);
 
       // Récupération des totaux
       $totalStatistiques = getTotalStatistiques($tableauStatistiquesIns, $tableauStatistiquesDes);
+      break;
+
+    case 'doChangerMdp':
+      // Réinitialisation du mot de passe
+      setNewPassword($_POST);
       break;
 
     case 'doAnnulerMdp':
@@ -49,9 +57,12 @@
       resetOldPassword($_POST);
       break;
 
-    case 'doChangerMdp':
-      // Réinitialisation du mot de passe
-      setNewPassword($_POST);
+    case 'doAccepterEquipe':
+      acceptEquipe($_POST);
+      break;
+
+    case 'doRefuserEquipe':
+      declineEquipe($_POST);
       break;
 
     case 'doAccepterInscription':
@@ -84,11 +95,18 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($listeEquipes as $equipe)
+      {
+        Team::secureData($equipe);
+      }
 
-			foreach ($listeUsers as $user)
-			{
-        Profile::secureData($user);
-			}
+      foreach ($listeUsersParEquipe as $usersParEquipe)
+      {
+        foreach ($usersParEquipe as $user)
+        {
+          Profile::secureData($user);
+        }
+      }
 
       foreach ($listeUsersDes as &$userDes)
       {
@@ -110,8 +128,10 @@
       TotalStatistiquesAdmin::secureData($totalStatistiques);
       break;
 
-    case 'doAnnulerMdp':
     case 'doChangerMdp':
+    case 'doAnnulerMdp':
+    case 'doAccepterEquipe':
+    case 'doRefuserEquipe':
     case 'doAccepterInscription':
     case 'doRefuserInscription':
     case 'doAccepterDesinscription':
@@ -123,8 +143,10 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
-    case 'doAnnulerMdp':
     case 'doChangerMdp':
+    case 'doAnnulerMdp':
+    case 'doAccepterEquipe':
+    case 'doRefuserEquipe':
     case 'doAccepterInscription':
     case 'doRefuserInscription':
     case 'doAccepterDesinscription':

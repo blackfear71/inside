@@ -171,6 +171,12 @@ $(function()
   });
 
   /*** Actions au changement ***/
+  // Affiche la saisie "Autre" (nouvelle équipe)
+  $('.select_form_manage_user').on('change', function()
+  {
+    afficherAutreEquipe($(this), 'input_form_manage_user');
+  });
+
   // Charge le thème (header utilisateurs)
   $('.loadHeaderUsers').on('change', function()
   {
@@ -219,12 +225,6 @@ $(function()
     loadFile(event, 'theme_logo_mission', false);
   });
 
-  // Charge la bannière (mission)
-  $('.loadBanner').on('change', function()
-  {
-    loadFile(event, 'banner', false);
-  });
-
   // Renseigne automatiquement les cases non saisies des périodes de vacances
   $('.select_jour_periode_vacances, .select_mois_periode_vacances').change(function()
   {
@@ -251,6 +251,12 @@ $(function()
 
     // Changement de couleur
     $(this).css('background-color', '#e3e3e3');
+  });
+
+  // Charge la bannière (mission)
+  $('.loadBanner').on('change', function()
+  {
+    loadFile(event, 'banner', false);
   });
 
   // Charge le bouton gauche (mission)
@@ -308,7 +314,7 @@ $(function()
 // Au redimensionnement de la fenêtre
 $(window).resize(function()
 {
-  // Adaptation mobile
+  // Adaptations mobile
   adaptCron();
   adaptGenerator();
 });
@@ -628,6 +634,27 @@ function switchCheckedColor(zone, input)
 
   $('#' + input).addClass('bouton_checked');
   $('#' + input).children('input').prop('checked', true);
+}
+
+// Affiche ou masque la zone de saisie d'une autre équipe
+function afficherAutreEquipe(select, required)
+{
+  if (select.val() == 'other')
+  {
+    select.parent().find('.' + required).each(function()
+    {
+      $(this).css('display', 'block');
+      $(this).prop('required', true);
+    });
+  }
+  else
+  {
+    select.parent().find('.' + required).each(function()
+    {
+      $(this).css('display', 'none');
+      $(this).prop('required', false);
+    });
+  }
 }
 
 // Récupère et affiches les périodes de vacances

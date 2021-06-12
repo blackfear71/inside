@@ -31,11 +31,14 @@
       {
         case 'resolved':
         case 'unresolved':
+          // Récupération de la liste des utilisateurs
+          $listeUsers = getListeUsers();
+
           // Récupération de la liste des bugs
-          $listeBugs = getBugs($_GET['view'], 'B');
+          $listeBugs = getBugs($_GET['view'], 'B', $listeUsers);
 
           // Récupération de la liste des évolutions
-          $listeEvolutions = getBugs($_GET['view'], 'E');
+          $listeEvolutions = getBugs($_GET['view'], 'E', $listeUsers);
           break;
 
         default:
@@ -60,6 +63,14 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($listeUsers as &$user)
+      {
+        $user['pseudo'] = htmlspecialchars($user['pseudo']);
+        $user['avatar'] = htmlspecialchars($user['avatar']);
+      }
+
+      unset($user);
+
       foreach ($listeBugs as $bug)
       {
         BugEvolution::secureData($bug);

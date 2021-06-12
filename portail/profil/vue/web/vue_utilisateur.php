@@ -8,9 +8,9 @@
 
       // Modification mot de passe
       echo '<form method="post" action="profil.php?action=doUpdatePassword">';
-        echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_saisie" required />';
-        echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';
-        echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';
+        echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_saisie_2" required />';
+        echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_saisie_2" required />';
+        echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_saisie_2" required />';
 
         echo '<input type="submit" name="saisie_mdp" value="Valider" class="bouton_validation" />';
       echo '</form>';
@@ -25,6 +25,37 @@
         echo '</form>';
 
         echo '<div class="message_profil bold margin_top_20">Une demande est en cours.</div>';
+      }
+    echo '</div>';
+
+    // Changement d'équipe
+    echo '<div class="zone_action_user">';
+      echo '<div class="titre_contribution">CHANGER D\'ÉQUIPE</div>';
+
+      // Choix de l'équipe
+      if ($profil->getStatus() == 'T')
+        echo '<div class="message_profil bold">Une demande est déjà en cours.</div>';
+      else
+      {
+        echo '<form method="post" action="profil.php?action=doUpdateEquipe">';
+          echo '<select name="equipe" class="select_form_saisie" required>';
+            foreach ($listeEquipes as $equipe)
+            {
+              if ($equipe->getReference() == $profil->getTeam())
+                echo '<option value="' . $equipe->getReference() . '" selected>' . $equipe->getTeam() . '</option>';
+              else
+                echo '<option value="' . $equipe->getReference() . '">' . $equipe->getTeam() . '</option>';
+            }
+
+            echo '<option value="other">Créer une équipe</option>';
+          echo '</select>';
+
+          // Saisie "Autre"
+          echo '<input type="text" name="autre_equipe" value="" placeholder="Nom de l\'équipe" id="autre_equipe" class="monoligne_saisie_2" style="display: none;" />';
+
+          // Bouton validation
+          echo '<input type="submit" name="update_team" value="Changer d\'équipe" class="bouton_validation" />';
+        echo '</form>';
       }
     echo '</div>';
 

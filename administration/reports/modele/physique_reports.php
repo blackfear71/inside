@@ -4,6 +4,64 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture données utilisateurs
+  // RETOUR : Aucun
+  function physiqueListeUsers()
+  {
+    // Initialisations
+    $listeUsers = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT identifiant, pseudo, avatar
+                        FROM users');
+
+    $data = $req->fetch();
+
+    while ($data = $req->fetch())
+    {
+      $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
+                                                'avatar' => $data['avatar'],
+                                               );
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeUsers;
+  }
+
+  // PHYSIQUE : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE activation = "Y"
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      $listeEquipes[$equipe->getReference()] = $equipe;
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
+  }
+
   // PHYSIQUE : Lecture liste des rapports
   // RETOUR : Liste rapports
   function physiqueListeRapports($view, $type)
@@ -50,28 +108,6 @@
 
     // Retour
     return $rapports;
-  }
-
-  // PHYSIQUE : Lecture données utilisateur
-  // RETOUR : Aucun
-  function physiqueDonneesUser($rapport)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT identifiant, pseudo, avatar, COUNT(*) AS nombreLignes
-                        FROM users
-                        WHERE identifiant = "' . $rapport->getAuthor() . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-    {
-      $rapport->setPseudo($data['pseudo']);
-      $rapport->setAvatar($data['avatar']);
-    }
-
-    $req->closeCursor();
   }
 
   // PHYSIQUE : Lecture données rapport

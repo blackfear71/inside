@@ -14,7 +14,7 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, anniversary, experience
+    $req = $bdd->query('SELECT id, identifiant, team, new_team, ping, status, pseudo, avatar, email, anniversary, experience
                         FROM users
                         WHERE identifiant != "admin"
                         ORDER BY identifiant ASC');
@@ -209,6 +209,35 @@
     return $listeUsersTheBox;
   }
 
+  // PHYSIQUE : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      $listeEquipes[$equipe->getReference()] = $equipe;
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
+  }
+
   // PHYSIQUE : Lecture alerte utilisateurs
   // RETOUR : Booléen
   function physiqueAlerteUsers()
@@ -221,7 +250,7 @@
     // Requête
     $req = $bdd->query('SELECT COUNT(*) AS nombre_status_users
                         FROM users
-                        WHERE identifiant != "admin" AND (status = "P" OR status = "I" OR status = "D")
+                        WHERE identifiant != "admin" AND (status = "P" OR status = "I" OR status = "D"  OR status = "T")
                         ORDER BY identifiant ASC');
     $data = $req->fetch();
 
@@ -912,8 +941,69 @@
   }
 
   /****************************************************************************/
+  /********************************** INSERT **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Insertion nouvelle équipe
+  // RETOUR : Id alerte
+  function physiqueInsertionEquipe($equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('INSERT INTO teams(reference,
+                                            team,
+                                            short,
+                                            activation)
+                                    VALUES(:reference,
+                                           :team,
+                                           :short,
+                                           :activation)');
+
+    $req->execute($equipe);
+
+    $req->closeCursor();
+  }
+
+  /****************************************************************************/
   /********************************** UPDATE **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Mise à jour équipe
+  // RETOUR : Aucun
+  function physiqueUpdateEquipe($equipe, $referenceTemporaire)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE teams
+                          SET reference  = :reference,
+                              team       = :team,
+                              short      = :short,
+                              activation = :activation
+                          WHERE reference = "' . $referenceTemporaire . '"');
+
+    $req->execute($equipe);
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour utilisateur
+  // RETOUR : Aucun
+  function physiqueUpdateProfilUser($user, $identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE users
+                          SET team     = :team,
+                              new_team = :new_team,
+                              status   = :status
+                          WHERE identifiant = "' . $identifiant . '"');
+
+    $req->execute($user);
+
+    $req->closeCursor();
+  }
+
   // PHYSIQUE : Mise à jour statut utilisateur
   // RETOUR : Aucun
   function physiqueUpdateStatusUser($identifiant, $status)
@@ -940,7 +1030,9 @@
     global $bdd;
 
     $req = $bdd->prepare('UPDATE users
-                          SET salt = :salt, password = :password, status = :status
+                          SET salt     = :salt,
+                              password = :password,
+                              status   = :status
                           WHERE identifiant = "' . $identifiant . '"');
 
     $req->execute(array(
@@ -964,7 +1056,8 @@
     global $bdd;
 
     $req = $bdd->prepare('UPDATE collector
-                          SET speaker = :speaker, type_speaker = :type_speaker
+                          SET speaker      = :speaker,
+                              type_speaker = :type_speaker
                           WHERE speaker = "' . $identifiant . '"');
 
     $req->execute(array(
@@ -987,7 +1080,8 @@
     global $bdd;
 
     $req = $bdd->prepare('UPDATE ideas
-                          SET status = :status, developper = :developper
+                          SET status     = :status,
+                              developper = :developper
                           WHERE developper = "' . $identifiant . '" AND status != "D" AND status != "R"');
 
     $req->execute(array(
@@ -1087,6 +1181,17 @@
 
     $req = $bdd->exec('DELETE FROM preferences
                        WHERE identifiant = "' . $identifiant . '"');
+  }
+
+  // PHYSIQUE : Suppression de la nouvelle équipe
+  // RETOUR : Aucun
+  function physiqueDeleteEquipe($equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM teams
+                       WHERE reference = "' . $equipe . '" AND activation = "N"');
   }
 
   // PHYSIQUE : Suppression d'un utilisateur

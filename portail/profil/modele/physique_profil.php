@@ -26,6 +26,28 @@
     return $profil;
   }
 
+  // PHYSIQUE : Lecture équipe
+  // RETOUR : Objet Team
+  function physiqueEquipe($reference)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE reference = "' . $reference . '"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Team à partir des données remontées de la bdd
+    $equipe = Team::withData($data);
+
+    $req->closeCursor();
+
+    // Retour
+    return $equipe;
+  }
+
   // PHYSIQUE : Lecture du nombre de films ajoutés
   // RETOUR : Nombre de films ajoutés
   function physiqueFilmsAjoutesUser($identifiant)
@@ -262,6 +284,36 @@
 
     // Retour
     return $preferences;
+  }
+
+  // PHYSIQUE : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE activation = "Y"
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeEquipes, $equipe);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
   }
 
   // PHYSIQUE : Lecture avatar utilisateur
@@ -541,6 +593,30 @@
   }
 
   /****************************************************************************/
+  /********************************** INSERT **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Insertion nouvelle équipe
+  // RETOUR : Aucun
+  function physiqueInsertionEquipe($equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('INSERT INTO teams(reference,
+                                            team,
+                                            short,
+                                            activation)
+                                    VALUES(:reference,
+                                           :team,
+                                           :short,
+                                           :activation)');
+
+    $req->execute($equipe);
+
+    $req->closeCursor();
+  }
+
+  /****************************************************************************/
   /********************************** UPDATE **********************************/
   /****************************************************************************/
   // PHYSIQUE : Mise à jour avatar
@@ -575,6 +651,23 @@
                           WHERE identifiant = "' . $identifiant . '"');
 
     $req->execute($user);
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Changement équipe utilisateur
+  // RETOUR : Aucun
+  function physiqueUpdateEquipeUser($equipeUser, $identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE users
+                          SET new_team = :new_team,
+                              status   = :status
+                          WHERE identifiant = "' . $identifiant . '"');
+
+    $req->execute($equipeUser);
 
     $req->closeCursor();
   }

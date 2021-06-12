@@ -17,11 +17,19 @@
 
   // Infos
   echo '<div class="zone_profil_infos">';
+    // Niveau
     echo '<div class="zone_info">';
       echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_profil" />';
       echo '<div class="texte_profil">Insider de <strong>niveau ' . $progression->getNiveau() . '</strong></div>';
     echo '</div>';
 
+    // Equipe
+    echo '<div class="zone_info">';
+      echo '<img src="../../includes/icons/profil/team_grey.png" alt="team_grey" class="logo_profil" />';
+      echo '<div class="texte_profil">' . $equipe->getTeam() . '</div>';
+    echo '</div>';
+
+    // Adresse mail
     if (!empty($profil->getEmail()))
     {
       echo '<div class="zone_info">';
@@ -30,6 +38,7 @@
       echo '</div>';
     }
 
+    // Anniversaire
     if (!empty($profil->getAnniversary()))
     {
       echo '<div class="zone_info">';

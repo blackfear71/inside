@@ -1,6 +1,7 @@
 <?php
   include_once('includes/classes/missions.php');
   include_once('includes/classes/profile.php');
+  include_once('includes/classes/teams.php');
 
   // METIER : Initialise les données de sauvegarde en session
   // RETOUR : Aucun
@@ -24,6 +25,8 @@
 
   		$_SESSION['save']['identifiant_saisi']               = '';
       $_SESSION['save']['pseudo_saisi']                    = '';
+      $_SESSION['save']['equipe_saisie']                   = '';
+      $_SESSION['save']['autre_equipe']                    = '';
       $_SESSION['save']['mot_de_passe_saisi']              = '';
       $_SESSION['save']['confirmation_mot_de_passe_saisi'] = '';
       $_SESSION['save']['identifiant_saisi_mdp']           = '';
@@ -44,6 +47,17 @@
 
     // Retour
     return $erreursIndex;
+  }
+
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
   }
 
   // METIER : Connexion utilisateur
@@ -113,6 +127,13 @@
       // Initialisation des préférences utilisateur et du chat
       if ($user->getIdentifiant() != 'admin')
       {
+        // Récupération de l'équipe
+        $equipe = physiqueEquipe($user->getTeam());
+
+        $_SESSION['user']['equipe']       = $equipe->getReference();
+        $_SESSION['user']['equipe_long']  = $equipe->getTeam();
+        $_SESSION['user']['equipe_short'] = $equipe->getShort();
+
         // Récupération des préférences
         $preferences = physiquePreferences($user->getIdentifiant());
 
@@ -164,6 +185,19 @@
     $experience  = 0;
     $expenses    = 0;
 
+    // Récupération de l'équipe
+    $refTeam = '';
+
+    if ($post['equipe'] == 'other')
+    {
+      $newTeam        = 'temp_' . rand();
+      $labelTeam      = $post['autre_equipe'];
+      $shortTeam      = '';
+      $activationTeam = 'N';
+    }
+    else
+      $newTeam = $post['equipe'];
+
     // Initialisations préférences utilisateur
     $refTheme             = '';
     $initChat             = 'Y';
@@ -177,8 +211,14 @@
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['identifiant_saisi']               = $post['trigramme'];
     $_SESSION['save']['pseudo_saisi']                    = $post['pseudo'];
+    $_SESSION['save']['equipe_saisie']                   = $post['equipe'];
     $_SESSION['save']['mot_de_passe_saisi']              = $post['password'];
     $_SESSION['save']['confirmation_mot_de_passe_saisi'] = $post['confirm_password'];
+
+    if ($post['equipe'] == 'other')
+      $_SESSION['save']['autre_equipe'] = $post['autre_equipe'];
+    else
+      $_SESSION['save']['autre_equipe'] = '';
 
     // Contrôle trigramme sur 3 caractères
     $control_ok = controleLongueurTrigramme($trigramme);
@@ -235,7 +275,10 @@
     // Insertion des enregistrements en base
     if ($control_ok == true)
     {
+      // Données utilisateur
       $user = array('identifiant' => $trigramme,
+                    'team'        => $refTeam,
+                    'new_team'    => $newTeam,
                     'salt'        => $salt,
                     'password'    => $password,
                     'ping'        => $ping,
@@ -250,6 +293,7 @@
 
        physiqueInsertionUser($user);
 
+       // Préférences utilisateur
        $preferences = array('identifiant'            => $trigramme,
                             'ref_theme'              => $refTheme,
                             'init_chat'              => $initChat,
@@ -262,6 +306,18 @@
                            );
 
        physiqueInsertionPreferences($preferences);
+
+       // Nouvelle équipe
+       if ($post['equipe'] == 'other')
+       {
+         $team = array('reference'  => $newTeam,
+                       'team'       => $labelTeam,
+                       'short'      => $shortTeam,
+                       'activation' => $activationTeam
+                      );
+
+         physiqueInsertionEquipe($team);
+       }
 
        // Message d'alerte
        $_SESSION['alerts']['ask_inscription'] = true;

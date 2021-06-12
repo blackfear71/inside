@@ -475,9 +475,10 @@
 
 .saisie_information_2
 {
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
   width: calc(100% - 7vh);
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 2vh;
   padding: 1.2vh 1.5vh 1.2vh 1.5vh;
   background-color: white;
@@ -487,6 +488,23 @@
   font-family: robotolight, Verdana, sans-serif;
   font-size: 2.5vh;
   color: #262626;
+}
+
+.select_form_update_team
+{
+	display: block;
+	width: calc(100% - 4vh);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2vh;
+	padding: 1.2vh 1vh 1.2vh 1vh;
+  background-color: white;
+  border-radius: 0.5vh;
+  border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: robotolight, Verdana, sans-serif;
+  font-size: 2.5vh;
+	color: #262626;
 }
 
 .bouton_validation_form_2

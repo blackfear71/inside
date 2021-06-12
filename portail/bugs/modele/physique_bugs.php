@@ -4,6 +4,34 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture données utilisateurs
+  // RETOUR : Aucun
+  function physiqueListeUsers()
+  {
+    // Initialisations
+    $listeUsers = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT identifiant, pseudo, avatar
+                        FROM users');
+
+    $data = $req->fetch();
+
+    while ($data = $req->fetch())
+    {
+      $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
+                                                'avatar' => $data['avatar'],
+                                               );
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeUsers;
+  }
+  
   // PHYSIQUE : Lecture liste des rapports
   // RETOUR : Liste rapports
   function physiqueListeRapports($view, $type)
@@ -76,7 +104,7 @@
   {
     // Initialisations
     $newId = NULL;
-    
+
     // Requête
     global $bdd;
 

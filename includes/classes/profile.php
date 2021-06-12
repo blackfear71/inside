@@ -3,6 +3,8 @@
   {
     private $id;
     private $identifiant;
+    private $team;
+    private $new_team;
     private $ping;
     private $connected;
     private $status;
@@ -21,6 +23,8 @@
     {
       $this->id          = 0;
       $this->identifiant = '';
+      $this->team        = '';
+      $this->new_team    = '';
       $this->ping        = '';
       $this->connected   = '';
       $this->status      = '';
@@ -53,6 +57,12 @@
       if (isset($data['identifiant']))
         $this->identifiant = $data['identifiant'];
 
+      if (isset($data['team']))
+        $this->team        = $data['team'];
+
+      if (isset($data['new_team']))
+        $this->new_team    = $data['new_team'];
+
       if (isset($data['ping']))
         $this->ping        = $data['ping'];
 
@@ -82,6 +92,8 @@
     public static function secureData($data)
     {
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
+      //$data->setNew_team(htmlspecialchars($data->getNew_team()));
       $data->setPing(htmlspecialchars($data->getPing()));
       $data->setConnected(htmlspecialchars($data->getConnected()));
       $data->setStatus(htmlspecialchars($data->getStatus()));
@@ -117,6 +129,28 @@
     public function getIdentifiant()
     {
       return $this->identifiant;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
+    }
+
+    // Nouvelle équipe
+    public function setNew_team($new_team)
+    {
+      $this->new_team = $new_team;
+    }
+
+    public function getNew_team()
+    {
+      return $this->new_team;
     }
 
     // Ping de connexion

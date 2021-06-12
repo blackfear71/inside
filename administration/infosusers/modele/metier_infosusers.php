@@ -1,14 +1,29 @@
 <?php
   include_once('../../includes/classes/profile.php');
+  include_once('../../includes/classes/teams.php');
+
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
+  }
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
   function getUsers()
   {
+    // Initialisations
+    $listeUsersParEquipe = array();
+
     // Récupération liste des utilisateurs
     $listeUsers = physiqueUsers();
 
-    // Récupération des données complémentaires
+    // Récupération des données complémentaires et ajout à la liste par équipes
     foreach ($listeUsers as $user)
     {
       // Récupération du niveau
@@ -38,10 +53,16 @@
             break;
         }
       }
+
+      // Ajout de l'utilisateur à son équipe
+      if (!isset($listeUsersParEquipe[$user->getTeam()]))
+        $listeUsersParEquipe[$user->getTeam()] = array();
+
+      array_push($listeUsersParEquipe[$user->getTeam()], $user);
     }
 
     // Retour
-    return $listeUsers;
+    return $listeUsersParEquipe;
   }
 
   // METIER : Modification top Beginner

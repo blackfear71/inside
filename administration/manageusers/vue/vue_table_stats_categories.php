@@ -125,7 +125,7 @@
 		if (!empty($tableauStatistiquesDes))
 		{
 			echo '<tr>';
-				echo '<td class="table_old_users" colspan="12">';
+				echo '<td class="table_old_users" colspan="9">';
 					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
 					echo 'Anciens utilisateurs';
 					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';

@@ -31,6 +31,9 @@
 
 			// Initialisation de la sauvegarde en session
 			$erreursIndex = initializeSaveSession();
+
+			// Récupération de la liste des équipes
+			$listeEquipes = getListeEquipes();
 			break;
 
 		case 'doConnecter':
@@ -58,6 +61,12 @@
   switch ($_GET['action'])
   {
 		case 'goConsulter':
+			foreach ($listeEquipes as $equipe)
+			{
+				Team::secureData($equipe);
+			}
+			break;
+
 		case 'doConnecter':
 		case 'doDemanderInscription':
 		case 'doDemanderMdp':

@@ -1,6 +1,7 @@
 <?php
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/success.php');
+  include_once('../../includes/classes/teams.php');
 
   // METIER : Lecture des données profil
   // RETOUR : Objet Profile
@@ -11,6 +12,17 @@
 
     // Retour
     return $profil;
+  }
+
+  // METIER : Lecture des données équipe
+  // RETOUR : Objet Team
+  function getEquipe($reference)
+  {
+    // Récupération des données du profil
+    $equipe = physiqueEquipe($reference);
+
+    // Retour
+    return $equipe;
   }
 
   // METIER : Lecture des données statistiques profil
@@ -75,6 +87,17 @@
 
     // Retour
     return $preferences;
+  }
+
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
   }
 
   // METIER : Récupération des données de progression
@@ -329,6 +352,60 @@
         // Message d'alerte
         $_SESSION['alerts']['password_updated'] = true;
       }
+    }
+  }
+
+  // METIER : Changement d'équipe
+  // RETOUR : Aucun
+  function updateEquipe($identifiant, $post)
+  {
+    // Initialisations
+    $control_ok = true;
+    $status     = 'T';
+
+    // Récupération des données
+    if ($post['equipe'] == 'other')
+    {
+      $newTeam        = 'temp_' . rand();
+      $labelTeam      = $post['autre_equipe'];
+      $shortTeam      = '';
+      $activationTeam = 'N';
+    }
+    else
+      $newTeam = $post['equipe'];
+
+    // Récupération des données utilisateur
+    $user = physiqueProfil($identifiant);
+
+    // Contrôle dépenses nulles
+    $control_ok = controleDepensesNonNulles($user->getExpenses());
+
+    // Création d'une nouvelle équipe si besoin
+    if ($control_ok == true)
+    {
+      if ($post['equipe'] == 'other')
+      {
+        $team = array('reference'  => $newTeam,
+                      'team'       => $labelTeam,
+                      'short'      => $shortTeam,
+                      'activation' => $activationTeam
+                     );
+
+        physiqueInsertionEquipe($team);
+      }
+    }
+
+    // Modification de l'enregistrement en base
+    if ($control_ok == true)
+    {
+      $equipeUser = array('new_team' => $newTeam,
+                          'status'   => $status
+                         );
+
+      physiqueUpdateEquipeUser($equipeUser, $identifiant);
+
+      // Message d'alerte
+      $_SESSION['alerts']['ask_team'] = true;
     }
   }
 

@@ -361,6 +361,18 @@
 	text-align: justify;
 }
 
+.team_report
+{
+	display: inline-block;
+	margin: 5px 0 5px 10px;
+	vertical-align: middle;
+	font-family: robotolight, Verdana, sans-serif;
+	color: white;
+	background-color: #262626;
+	padding: 3px 8px 3px 8px;
+	border-radius: 2px;
+}
+
 .date_report
 {
 	display: inline-block;

@@ -17,7 +17,7 @@
       $this->message  = '';
     }
 
-    // Constructeur de l'objet ALerte en fonction des données
+    // Constructeur de l'objet Alerte en fonction des données
     // -> il faut passer une variable $data contenant le résultat de la requête fetch
     public static function withData($data)
     {
@@ -54,7 +54,7 @@
       $data->setMessage(htmlspecialchars($data->getMessage()));
     }
 
-    // Getters et Setters pour l'objet ALerte
+    // Getters et Setters pour l'objet Alerte
     // id
     public function setId($id)
     {

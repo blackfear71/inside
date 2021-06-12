@@ -1,9 +1,32 @@
 <?php
   include_once('../../includes/classes/bugs.php');
+  include_once('../../includes/classes/teams.php');
+
+  // METIER : Lecture de la liste des utilisateurs
+  // RETOUR : Liste des utilisateurs
+  function getListeUsers()
+  {
+    // Lecture de la liste des équipes
+    $listeUsers = physiqueListeUsers();
+
+    // Retour
+    return $listeUsers;
+  }
+
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
+  }
 
   // METIER : Lecture liste des bugs/évolutions
   // RETOUR : Liste des bugs/évolutions
-  function getBugs($view, $type)
+  function getBugs($view, $type, $listeUsers, $listeEquipe)
   {
     // Récupération des rapports en fonction de la vue et du type
     $rapports = physiqueListeRapports($view, $type);
@@ -11,7 +34,16 @@
     // Récupération des données complémentaires
     foreach ($rapports as $rapport)
     {
-      physiqueDonneesUser($rapport);
+      // Recherche des données de l'auteur
+      if (isset($listeUsers[$rapport->getAuthor()]))
+      {
+        $rapport->setPseudo($listeUsers[$rapport->getAuthor()]['pseudo']);
+        $rapport->setAvatar($listeUsers[$rapport->getAuthor()]['avatar']);
+      }
+
+      // Recherche du libellé court de l'équipe
+      if (isset($listeEquipe[$rapport->getTeam()]))
+        $rapport->setTeam($listeEquipe[$rapport->getTeam()]->getShort());
     }
 
     // Retour

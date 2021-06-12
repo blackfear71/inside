@@ -4,6 +4,36 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE activation = "Y"
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeEquipes, $equipe);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
+  }
+
   // PHYSIQUE : Lecture données utilisateur
   // RETOUR : Objet Profile
   function physiqueUser($identifiant)
@@ -52,6 +82,28 @@
 
     // Retour
     return $dataUser;
+  }
+
+  // PHYSIQUE : Lecture équipe utilisateur
+  // RETOUR : Objet Team
+  function physiqueEquipe($equipeUser)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE reference = "' . $equipeUser . '"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Team à partir des données remontées de la bdd
+    $equipe = Team::withData($data);
+
+    $req->closeCursor();
+
+    // Retour
+    return $equipe;
   }
 
   // PHYSIQUE : Lecture préférences utilisateur
@@ -287,6 +339,8 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO users(identifiant,
+                                            team,
+                                            new_team,
                                             salt,
                                             password,
                                             ping,
@@ -298,6 +352,8 @@
                                             experience,
                                             expenses)
                                     VALUES(:identifiant,
+                                           :team,
+                                           :new_team,
                                            :salt,
                                            :password,
                                            :ping,
@@ -341,6 +397,27 @@
                                                  :manage_calendars)');
 
     $req->execute($preferences);
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Insertion nouvelle équipe
+  // RETOUR : Aucun
+  function physiqueInsertionEquipe($equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('INSERT INTO teams(reference,
+                                            team,
+                                            short,
+                                            activation)
+                                    VALUES(:reference,
+                                           :team,
+                                           :short,
+                                           :activation)');
+
+    $req->execute($equipe);
 
     $req->closeCursor();
   }

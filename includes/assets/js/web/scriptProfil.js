@@ -135,6 +135,12 @@ $(function()
     loadFile(event, 'avatar', false);
   });
 
+  // Affiche la saisie "Autre" (changement d'équipe)
+  $('.select_form_saisie').on('change', function()
+  {
+    afficherAutreEquipe('select_form_saisie', 'autre_equipe');
+  });
+
   /*** Calendriers ***/
   if ($('#datepicker_anniversary').length)
   {
@@ -317,6 +323,21 @@ function adaptProfil()
       $('.zone_profil_right').css('width', 'calc(100% - 280px)');
       $('.zone_profil_right').css('margin-left', '20px');
     }
+  }
+}
+
+// Affiche ou masque la zone de saisie d'une autre équipe
+function afficherAutreEquipe(select, required)
+{
+  if ($('.' + select).val() == 'other')
+  {
+    $('#' + required).css('display', 'block');
+    $('#' + required).prop('required', true);
+  }
+  else
+  {
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
   }
 }
 

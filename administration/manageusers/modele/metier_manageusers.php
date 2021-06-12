@@ -1,6 +1,7 @@
 <?php
   include_once('../../includes/classes/expenses.php');
   include_once('../../includes/classes/profile.php');
+  include_once('../../includes/classes/teams.php');
 
   // METIER : Initialise les données de sauvegarde en session
   // RETOUR : Aucun
@@ -21,11 +22,29 @@
   // RETOUR : Tableau d'utilisateurs
   function getUsers()
   {
+    // Initialisations
+    $listeUsersParEquipe = array();
+
     // Récupération liste des utilisateurs
     $listeUsers = physiqueUsers();
 
+    // Ajout à la liste par équipes
+    foreach ($listeUsers as $user)
+    {
+      // Ajout de l'utilisateur à son équipe
+      if (!empty($user->getTeam()))
+        $team = $user->getTeam();
+      else
+        $team = 'new_users';
+
+      if (!isset($listeUsersParEquipe[$team]))
+        $listeUsersParEquipe[$team] = array();
+
+      array_push($listeUsersParEquipe[$team], $user);
+    }
+
     // Retour
-    return $listeUsers;
+    return $listeUsersParEquipe;
   }
 
   // METIER : Recherche les utilisateurs désinscrits
@@ -72,17 +91,32 @@
     // Filtrage avec les utilisateurs inscrits
     foreach ($listeUsersDes as $keyUserDes => $userDes)
     {
-      foreach ($listeUsersIns as $userIns)
+      foreach ($listeUsersIns as $equipeUsersIns)
       {
-        if ($userDes == $userIns->getIdentifiant())
+        foreach ($equipeUsersIns as $userIns)
         {
-          unset($listeUsersDes[$keyUserDes]);
-          break;
+          if ($userDes == $userIns->getIdentifiant())
+          {
+            unset($listeUsersDes[$keyUserDes]);
+            break;
+          }
         }
       }
     }
 
+    // Retour
     return $listeUsersDes;
+  }
+
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
   }
 
   // METIER : Contrôle alertes utilisateurs
@@ -104,64 +138,67 @@
     $tableauStatistiques = array();
 
     // Récupération des statistiques par catégories
-    foreach ($listeUsers as $user)
+    foreach ($listeUsers as $equipeUsers)
     {
-      // Films ajoutés
-      $nombreFilms = physiqueFilmsAjoutesUser($user->getIdentifiant());
+      foreach ($equipeUsers as $user)
+      {
+        // Films ajoutés
+        $nombreFilms = physiqueFilmsAjoutesUser($user->getIdentifiant());
 
-      // Commentaires films
-      $nombreComments = physiqueCommentairesFilmsUser($user->getIdentifiant());
+        // Commentaires films
+        $nombreComments = physiqueCommentairesFilmsUser($user->getIdentifiant());
 
-      // Phrases et images cultes ajoutées
-      $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
+        // Phrases et images cultes ajoutées
+        $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
 
-      // Réservations de restaurants
-      $nombreReservations = physiqueReservationsUser($user->getIdentifiant());
+        // Réservations de restaurants
+        $nombreReservations = physiqueReservationsUser($user->getIdentifiant());
 
-      // Gâteaux de la semaine
-      $nombreGateauxSemaine = physiqueGateauxSemaineUser($user->getIdentifiant());
+        // Gâteaux de la semaine
+        $nombreGateauxSemaine = physiqueGateauxSemaineUser($user->getIdentifiant());
 
-      // Recettes partagées
-      $nombreRecettes = physiqueRecettesUser($user->getIdentifiant());
+        // Recettes partagées
+        $nombreRecettes = physiqueRecettesUser($user->getIdentifiant());
 
-      // Bilan des dépenses
-      $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
+        // Bilan des dépenses
+        $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
 
-      // Nombre de demandes (bugs/évolutions)
-      $nombreBugsSoumis = physiqueBugsSoumisUser($user->getIdentifiant());
+        // Nombre de demandes (bugs/évolutions)
+        $nombreBugsSoumis = physiqueBugsSoumisUser($user->getIdentifiant());
 
-      // Nombre de demandes résolues (bugs/évolutions)
-      $nombreBugsResolus = physiqueBugsResolusUser($user->getIdentifiant());
+        // Nombre de demandes résolues (bugs/évolutions)
+        $nombreBugsResolus = physiqueBugsResolusUser($user->getIdentifiant());
 
-      // Nombre d'idées publiées
-      $nombreTheBox = physiqueTheBoxUser($user->getIdentifiant());
+        // Nombre d'idées publiées
+        $nombreTheBox = physiqueTheBoxUser($user->getIdentifiant());
 
-      // Nombre d'idées en charge
-      $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($user->getIdentifiant());
+        // Nombre d'idées en charge
+        $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($user->getIdentifiant());
 
-      // Nombre d'idées terminées ou rejetées
-      $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($user->getIdentifiant());
+        // Nombre d'idées terminées ou rejetées
+        $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($user->getIdentifiant());
 
-      // Génération d'un objet StatistiquesAdmin
-      $statistiquesUser = new StatistiquesAdmin();
+        // Génération d'un objet StatistiquesAdmin
+        $statistiquesUser = new StatistiquesAdmin();
 
-      $statistiquesUser->setIdentifiant($user->getIdentifiant());
-      $statistiquesUser->setPseudo($user->getPseudo());
-      $statistiquesUser->setNb_films_ajoutes($nombreFilms);
-      $statistiquesUser->setNb_films_comments($nombreComments);
-      $statistiquesUser->setNb_collectors($nombreCollector);
-      $statistiquesUser->setNb_reservations($nombreReservations);
-      $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
-      $statistiquesUser->setNb_recettes($nombreRecettes);
-      $statistiquesUser->setExpenses($bilanUser);
-      $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
-      $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
-      $statistiquesUser->setNb_idees_soumises($nombreTheBox);
-      $statistiquesUser->setNb_idees_en_charge($nombreTheBoxEnCharge);
-      $statistiquesUser->setNb_idees_terminees($nombreTheBoxTerminees);
+        $statistiquesUser->setIdentifiant($user->getIdentifiant());
+        $statistiquesUser->setPseudo($user->getPseudo());
+        $statistiquesUser->setNb_films_ajoutes($nombreFilms);
+        $statistiquesUser->setNb_films_comments($nombreComments);
+        $statistiquesUser->setNb_collectors($nombreCollector);
+        $statistiquesUser->setNb_reservations($nombreReservations);
+        $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
+        $statistiquesUser->setNb_recettes($nombreRecettes);
+        $statistiquesUser->setExpenses($bilanUser);
+        $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
+        $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
+        $statistiquesUser->setNb_idees_soumises($nombreTheBox);
+        $statistiquesUser->setNb_idees_en_charge($nombreTheBoxEnCharge);
+        $statistiquesUser->setNb_idees_terminees($nombreTheBoxTerminees);
 
-      // Ajout au tableau
-      array_push($tableauStatistiques, $statistiquesUser);
+        // Ajout au tableau
+        array_push($tableauStatistiques, $statistiquesUser);
+      }
     }
 
     // Retour
@@ -379,18 +416,6 @@
     return $totalStatistiques;
   }
 
-  // METIER : Refus réinitialisation mot de passe
-  // RETOUR : Aucun
-  function resetOldPassword($post)
-  {
-    // Récupération des données
-    $identifiant = $post['id_user'];
-    $status      = 'U';
-
-    // Remise à "U" de l'indicateur de demande
-    physiqueUpdateStatusUser($identifiant, $status);
-  }
-
   // METIER : Réinitialisation mot de passe
   // RETOUR : Aucun
   function setNewPassword($post)
@@ -435,16 +460,115 @@
     return $chaine;
   }
 
-  // METIER : Validation inscription (mise à jour du status utilisateur)
+  // METIER : Refus réinitialisation mot de passe
   // RETOUR : Aucun
-  function acceptInscription($post)
+  function resetOldPassword($post)
   {
     // Récupération des données
     $identifiant = $post['id_user'];
     $status      = 'U';
 
-    // Mise à jour à "U" du statut
+    // Remise à "U" de l'indicateur de demande
     physiqueUpdateStatusUser($identifiant, $status);
+  }
+
+  // METIER : Validation changement d'équipe (mise à jour de l'équipe et du status utilisateur)
+  // RETOUR : Aucun
+  function acceptEquipe($post)
+  {
+    // Récupération des données
+    $identifiant = $post['id_user'];
+    $newTeam     = '';
+    $status      = 'U';
+
+    if ($post['team'] == 'other')
+    {
+      $teamReference      = $post['team_reference'];
+      $nameReference      = $post['team_name'];
+      $shortNameReference = $post['team_short_name'];
+    }
+    else
+      $teamReference = $post['team'];
+
+    if (isset($post['team_temp_reference']) AND !empty($post['team_temp_reference']))
+      $tempTeam = $post['team_temp_reference'];
+
+    // Création ou mise à jour d'une équipe si besoin
+    if ($post['team'] == 'other')
+    {
+      $teamActivation = 'Y';
+
+      if (isset($tempTeam) AND !empty($tempTeam))
+      {
+        // Mise à jour de l'équipe temporaire créée par l'utilisateur et activation
+        $team = array('reference'  => $teamReference,
+                      'team'       => $nameReference,
+                      'short'      => $shortNameReference,
+                      'activation' => $teamActivation
+                     );
+
+        physiqueUpdateEquipe($team, $tempTeam);
+      }
+      else
+      {
+        // Création d'une nouvelle équipe si l'utilisateur a choisi une équipe et que l'admin créé une nouvelle équipe
+        $team = array('reference'  => $teamReference,
+                      'team'       => $nameReference,
+                      'short'      => $shortNameReference,
+                      'activation' => $teamActivation
+                     );
+
+        physiqueInsertionEquipe($team);
+      }
+    }
+    else
+    {
+      // Si il ne faut finalement pas créer d'équipe, on supprime l'équipe temporaire
+      if (isset($tempTeam) AND !empty($tempTeam))
+        physiqueDeleteEquipe($tempTeam);
+    }
+
+    // Mise à jour de la référence de l'équipe et du statut à "U"
+    $user = array('team'     => $teamReference,
+                  'new_team' => $newTeam,
+                  'status'   => $status
+                 );
+
+    physiqueUpdateProfilUser($user, $identifiant);
+  }
+
+  // METIER : Refus changement d'équipe
+  // RETOUR : Aucun
+  function declineEquipe($post)
+  {
+    // Récupération des données
+    $identifiant = $post['id_user'];
+    $team        = $post['team_user'];
+    $newTeam     = $post['new_team_user'];
+    $resetTeam   = '';
+    $status      = 'U';
+
+    // Suppression de l'équipe éventuellement créée
+    physiqueDeleteEquipe($newTeam);
+
+    // Mise à jour de la référence de l'équipe et du statut à "U"
+    $user = array('team'     => $team,
+                  'new_team' => $resetTeam,
+                  'status'   => $status
+                 );
+
+    physiqueUpdateProfilUser($user, $identifiant);
+  }
+
+  // METIER : Validation inscription (mise à jour de l'équipe et du status utilisateur)
+  // RETOUR : Aucun
+  function acceptInscription($post)
+  {
+    // Récupération des données
+    $identifiant = $post['id_user'];
+
+    // Validation de l'équipe (création, modification ou suppression)
+    acceptEquipe($post);
 
     // Insertion notification
     insertNotification('admin', 'inscrit', $identifiant);
@@ -456,9 +580,13 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
+    $equipe      = $post['team_user'];
 
     // Suppression des préférences
     physiqueDeletePreferences($identifiant);
+
+    // Suppression de l'équipe éventuellement créée
+    physiqueDeleteEquipe($equipe);
 
     // Suppression de l'utilisateur
     physiqueDeleteUser($identifiant);

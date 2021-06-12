@@ -69,6 +69,7 @@
 	line-height: 70px;
 	background-color: #2c3840;
 	text-align: center;
+	pointer-events: none;
 }
 
 .zone_texte_portail_alerte
@@ -118,12 +119,17 @@
 }
 
 /*** Infos utilisateurs ***/
+.zone_infos_equipes
+{
+	display: block;
+	width: 100%;
+}
+
 .zone_infos
 {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: -40px;
 	opacity: 0;
 	transition: opacity 0.2s;
 }
@@ -354,9 +360,7 @@
 .td_manage_users
 {
 	text-align: center;
-	line-height: 30px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
@@ -366,9 +370,7 @@
 .td_manage_users_important
 {
 	text-align: center;
-	line-height: 30px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 5px;
 	font-family: robotoregular, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
@@ -380,9 +382,7 @@
 .td_manage_users_red
 {
 	text-align: center;
-	line-height: 30px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 5px;
 	font-family: robotolight, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
@@ -422,6 +422,51 @@
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #ff1937;
 	font-size: 150%;
+}
+
+.zone_select_team
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 80%;
+}
+
+.select_form_manage_user
+{
+	display: block;
+	width: 100%;
+	padding: 5px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 100%;
+	background-color: white;
+}
+
+.input_form_manage_user
+{
+
+
+	display: block;
+	width: calc(100% - 20px);
+	margin-top: 5px;
+	padding: 5px 10px 5px 10px;
+	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 100%;
+	background-color: white;
+}
+
+.zone_validate_team
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 20%;
 }
 
 .td_stats_admin
@@ -581,7 +626,24 @@
 
 .zone_autorisations
 {
+	overflow: hidden;
+	border-radius: 5px;
+}
+
+.titre_equipe_autorisations
+{
+	display: block;
+	width: calc(100% - 20px);
+	background-color: #c3c3c3;
+	font-family: robotomedium, Verdana, sans-serif;
+	color: #262626;
 	padding: 10px;
+	text-align: center;
+}
+
+.zone_equipe_autorisations
+{
+	padding: 5px 10px 15px 10px;
 }
 
 .switch_autorisation

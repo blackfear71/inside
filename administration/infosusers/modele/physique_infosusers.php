@@ -4,6 +4,36 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture de la liste des équipes activées
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE activation = "Y"
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      $listeEquipes[$equipe->getReference()] = $equipe;
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
+  }
+
   // PHYSIQUE : Lecture des utilisateurs
   // RETOUR : Tableau des utilisateurs
   function physiqueUsers()
@@ -14,9 +44,9 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, anniversary, experience
+    $req = $bdd->query('SELECT id, identifiant, team, ping, status, pseudo, avatar, email, anniversary, experience
                         FROM users
-                        WHERE identifiant != "admin"
+                        WHERE identifiant != "admin" AND status != "I"
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())

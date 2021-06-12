@@ -1,22 +1,47 @@
 <?php
   include_once('../../includes/classes/calendars.php');
   include_once('../../includes/classes/profile.php');
+  include_once('../../includes/classes/teams.php');
 
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
+  }
+  
   // METIER : Récupération autorisation tous utilisateurs
   // RETOUR : Liste des préférences
   function getAutorisationsCalendars()
   {
+    // Initialisations
+    $listeAutorisationsParEquipe = array();
+
     // Récupération des autorisations de gestion
     $listeAutorisations = physiqueAutorisationsCalendars();
 
-    // Récupération du pseudo des utilisateurs
+    // Récupération des données complémentaires
     foreach ($listeAutorisations as $autorisation)
     {
-      $autorisation->setPseudo(physiquePseudoUser($autorisation->getIdentifiant()));
+      // Récupération du pseudo et de l'équipe de l'utilisateur
+      $user = physiqueDonneesUser($autorisation->getIdentifiant());
+
+      $autorisation->setPseudo($user['pseudo']);
+      $autorisation->setEquipe($user['team']);
+
+      // Ajout de l'utilisateur à son équipe
+      if (!isset($listeAutorisationsParEquipe[$autorisation->getEquipe()]))
+        $listeAutorisationsParEquipe[$autorisation->getEquipe()] = array();
+
+      array_push($listeAutorisationsParEquipe[$autorisation->getEquipe()], $autorisation);
     }
 
     // Retour
-    return $listeAutorisations;
+    return $listeAutorisationsParEquipe;
   }
 
   // METIER : Lecture liste des utilisateurs

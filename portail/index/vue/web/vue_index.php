@@ -44,9 +44,9 @@
 
               // Affichage du message
               echo '<div class="texte_aide_index">';
-                echo 'Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo ainsi qu\'un mot de passe.
-                Celui-ci sera directement crypté afin de garantir la sécurité de l\'accès. Une demande sera envoyée à l\'administrateur qui validera
-                votre inscription dans les plus brefs délais.';
+                echo 'Ici vous pouvez vous inscrire au site INSIDE. Il vous suffit de renseigner votre trigramme, votre pseudo, votre équipe ainsi qu\'un mot de passe.
+                Celui-ci sera directement crypté afin de garantir la sécurité de l\'accès. Vous pouvez également suggérer la création d\'une nouvelle équipe si celle que vous
+                souhaitez intégrer n\'est pas disponible. Une demande sera ensuite envoyée à l\'administrateur qui validera votre inscription dans les plus brefs délais.';
               echo '</div>';
 
               // Bouton
@@ -89,6 +89,7 @@
 
               // Formulaire
               echo '<form method="post" action="index.php?action=doConnecter" class="form_index">';
+                // Données utilisateur
                 echo '<input type="text" name="login" placeholder="Identifiant" maxlength="100" class="monoligne_index" id="focus_identifiant" required />';
                 echo '<input type="password" name="mdp" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
 
@@ -110,11 +111,42 @@
               echo '</div>';
 
               // Formulaire
-              echo '<form method="post" action="index.php?action=doDemanderInscription" class="form_index">';
-                echo '<input type="text" name="trigramme" value="' . $_SESSION['save']['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_2" required />';
-                echo '<input type="text" name="pseudo" value="' . $_SESSION['save']['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
-                echo '<input type="password" name="password" value="' . $_SESSION['save']['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
-                echo '<input type="password" name="confirm_password" value="' . $_SESSION['save']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
+              echo '<form method="post" action="index.php?action=doDemanderInscription" class="form_index_large">';
+                // Données utilisateur
+                echo '<div class="zone_form_index_left">';
+                  echo '<input type="text" name="trigramme" value="' . $_SESSION['save']['identifiant_saisi'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_2" required />';
+                  echo '<input type="text" name="pseudo" value="' . $_SESSION['save']['pseudo_saisi'] . '" placeholder="Pseudo" maxlength="255" class="monoligne_index" required />';
+
+                  // Choix de l'équipe
+                  echo '<select name="equipe" class="select_form_index" required>';
+                    echo '<option value="" hidden>Choisir une équipe</option>';
+
+                    foreach ($listeEquipes as $equipe)
+                    {
+                      if ($_SESSION['save']['equipe_saisie'] == $equipe->getReference())
+                        echo '<option value="' . $equipe->getReference() . '" selected>' . $equipe->getTeam() . '</option>';
+                      else
+                        echo '<option value="' . $equipe->getReference() . '">' . $equipe->getTeam() . '</option>';
+                    }
+
+                    if ($_SESSION['save']['equipe_saisie'] == 'other')
+                      echo '<option value="other" selected>Créer une équipe</option>';
+                    else
+                      echo '<option value="other">Créer une équipe</option>';
+                  echo '</select>';
+
+                  // Saisie "Autre"
+                  if ($_SESSION['save']['equipe_saisie'] == 'other')
+                    echo '<input type="text" name="autre_equipe" value="' . $_SESSION['save']['autre_equipe'] . '" placeholder="Nom de l\'équipe" id="autre_equipe" class="monoligne_index_equipe" />';
+                  else
+                    echo '<input type="text" name="autre_equipe" value="' . $_SESSION['save']['autre_equipe'] . '" placeholder="Nom de l\'équipe" id="autre_equipe" class="monoligne_index_equipe" style="display: none;" />';
+                echo '</div>';
+
+                // Mot de passe
+                echo '<div class="zone_form_index_right">';
+                  echo '<input type="password" name="password" value="' . $_SESSION['save']['mot_de_passe_saisi'] . '" placeholder="Mot de passe" maxlength="100" class="monoligne_index" required />';
+                  echo '<input type="password" name="confirm_password" value="' . $_SESSION['save']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index" required />';
+                echo '</div>';
 
                 // Boutons
                 echo '<div class="zone_boutons_index">';
@@ -138,6 +170,7 @@
 
               // Formulaire
               echo '<form method="post" action="index.php?action=doDemanderMdp" class="form_index">';
+                // Données utilisateur
                 echo '<input type="text" name="login" value="' . $_SESSION['save']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_3" required />';
 
                 // Boutons

@@ -2,6 +2,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/alerts.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/teams.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
 
   // METIER : Contrôles Index, initialisation session
@@ -79,6 +80,9 @@
         header('location: /inside/portail/portail/portail.php?action=goConsulter');
       else
       {
+        // Contrôle changement d'équipe
+        getEquipeUser($_SESSION['user']['identifiant'], $_SESSION['user']['equipe']);
+
         // Récupération expérience
         getExperience($_SESSION['user']['identifiant']);
 
@@ -200,6 +204,26 @@
 
     // Retour
     return $succes;
+  }
+
+  // METIER : Récupération de l'équipe d'un utilisateur si besoin
+  // RETOUR : Aucun
+  function getEquipeUser($identifiant, $equipeCourante)
+  {
+    // Lecture des données utilisateur
+    $equipeUser = physiqueEquipeUser($identifiant);
+
+    // Si l'équipe n'est pas à jour, on va récupérer la nouvelle pour la remplacer
+    if ($equipeUser != $equipeCourante)
+    {
+      // Lecture des données de l'équipe
+      $equipe = physiqueDonneesEquipe($equipeUser);
+
+      // Mise en session des données
+      $_SESSION['user']['equipe']       = $equipe->getReference();
+      $_SESSION['user']['equipe_long']  = $equipe->getTeam();
+      $_SESSION['user']['equipe_short'] = $equipe->getShort();
+    }
   }
 
   // METIER : Récupération de l'expérience d'un utilisateur

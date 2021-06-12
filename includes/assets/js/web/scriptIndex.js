@@ -129,6 +129,12 @@ $(function()
   {
     identifiantMajuscule($(this));
   });
+
+  // Affiche la saisie "Autre" (nouvelle équipe)
+  $('.select_form_index').on('change', function()
+  {
+    afficherAutreEquipe('select_form_index', 'autre_equipe');
+  });
 });
 
 // Au redimensionnement de la fenêtre
@@ -177,6 +183,21 @@ function identifiantMajuscule(champ)
     value = value.toUpperCase();
 
   champ.val(value);
+}
+
+// Affiche ou masque la zone de saisie d'une autre équipe
+function afficherAutreEquipe(select, required)
+{
+  if ($('.' + select).val() == 'other')
+  {
+    $('#' + required).css('display', 'block');
+    $('#' + required).prop('required', true);
+  }
+  else
+  {
+    $('#' + required).css('display', 'none');
+    $('#' + required).prop('required', false);
+  }
 }
 
 // Affiche la fenêtre d'inscription ou de mot de passe perdu (en fermant l'autre)

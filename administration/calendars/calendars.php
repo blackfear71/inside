@@ -22,8 +22,11 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Récupération de la liste des équipes
+      $listeEquipes = getListeEquipes();
+
       // Récupération des autorisations de gestion des calendriers
-      $listeAutorisations = getAutorisationsCalendars();
+      $listeAutorisationsParEquipe = getAutorisationsCalendars();
 
       // Récupération des périodes de vacances disponibles
       $periodesVacances = getPeriodesVacances();
@@ -92,9 +95,17 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
-      foreach ($listeAutorisations as $autorisation)
+      foreach ($listeEquipes as $equipe)
       {
-        AutorisationCalendriers::secureData($autorisation);
+        Team::secureData($equipe);
+      }
+      
+      foreach ($listeAutorisationsParEquipe as $equipeAutorisations)
+      {
+        foreach ($equipeAutorisations as $autorisation)
+        {
+          AutorisationCalendriers::secureData($autorisation);
+        }
       }
 
       foreach ($periodesVacances as &$periodeVacances)

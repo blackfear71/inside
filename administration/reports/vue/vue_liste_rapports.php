@@ -25,6 +25,12 @@
               // Pseudo
               echo '<div class="pseudo_report">' . formatUnknownUser($bug->getPseudo(), true, true) . '</div>';
 
+              // Equipe
+              echo '<div class="team_report">';
+                echo '<img src="../../includes/icons/reports/team.png" alt="team" class="icone_report" />';
+                echo $bug->getTeam();
+              echo '</div>';
+
               // Date
               echo '<div class="date_report">';
                 echo '<img src="../../includes/icons/reports/date.png" alt="date" class="icone_report" />';
@@ -116,6 +122,12 @@
               // Pseudo
               echo '<div class="pseudo_report">' . formatUnknownUser($evolution->getPseudo(), true, true) . '</div>';
 
+              // Equipe
+              echo '<div class="team_report">';
+                echo '<img src="../../includes/icons/reports/team.png" alt="team" class="icone_report" />';
+                echo $bug->getTeam();
+              echo '</div>';
+              
               // Date
               echo '<div class="date_report">';
                 echo '<img src="../../includes/icons/reports/date.png" alt="date" class="icone_report" />';

@@ -32,9 +32,9 @@
       echo '<div class="zone_bandeau_right">';
         // Titre de la page
         echo '<div class="zone_titre_page">';
-          echo '<span class="text_titre_page">';
-            echo $title;
-          echo '</span>';
+          echo '<div class="text_titre_page">';
+            echo mb_strtoupper($title);
+          echo '</div>';
         echo '</div>';
 
         // Profil
@@ -73,6 +73,15 @@
           if ($_SESSION['user']['identifiant'] != 'admin')
             echo '<a href="/inside/portail/profil/profil.php?view=success&action=goConsulter" title="Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
         echo '</div>';
+
+        // Libellé court équipe
+        if ($_SESSION['user']['identifiant'] != 'admin')
+        {
+          echo '<div class="zone_equipe_bandeau">';
+            echo '<div class="triangle_equipe_bandeau"></div>';
+            echo '<div class="equipe_bandeau">' . $_SESSION['user']['equipe_short'] . '</div>';
+          echo '</div>';
+        }
       echo '</div>';
 
       // Boutons missions
