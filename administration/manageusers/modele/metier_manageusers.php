@@ -23,7 +23,8 @@
   function getUsers()
   {
     // Initialisations
-    $listeUsersParEquipe = array();
+    $listeUsersParEquipe              = array();
+    $listeUsersParEquipe['new_users'] = array();
 
     // Récupération liste des utilisateurs
     $listeUsers = physiqueUsers();

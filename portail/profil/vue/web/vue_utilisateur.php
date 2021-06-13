@@ -39,6 +39,8 @@
       {
         echo '<form method="post" action="profil.php?action=doUpdateEquipe">';
           echo '<select name="equipe" class="select_form_saisie" required>';
+            echo '<option value="" hidden>Choisir une équipe</option>';
+
             foreach ($listeEquipes as $equipe)
             {
               if ($equipe->getReference() == $profil->getTeam())

@@ -79,7 +79,9 @@
         {
           echo '<div class="zone_equipe_bandeau">';
             echo '<div class="triangle_equipe_bandeau"></div>';
-            echo '<div class="equipe_bandeau">' . $_SESSION['user']['equipe_short'] . '</div>';
+
+            if (isset($_SESSION['user']['equipe_short']) AND !empty($_SESSION['user']['equipe_short']))
+              echo '<div class="equipe_bandeau">' . $_SESSION['user']['equipe_short'] . '</div>';
           echo '</div>';
         }
       echo '</div>';

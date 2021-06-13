@@ -57,7 +57,11 @@
 
 							// Demande de changement d'équipe
 							case 'T':
-								echo 'Changement d\'équipe (' . $listeEquipes[$user->getTeam()]->getTeam() . ' -> ' . $listeEquipes[$user->getNew_team()]->getTeam() . ')';
+								if ((isset($listeEquipes[$user->getTeam()])     AND !empty($listeEquipes[$user->getTeam()]->getTeam()))
+								AND (isset($listeEquipes[$user->getNew_team()]) AND !empty($listeEquipes[$user->getNew_team()]->getTeam())))
+									echo 'Changement d\'équipe (' . $listeEquipes[$user->getTeam()]->getTeam() . ' -> ' . $listeEquipes[$user->getNew_team()]->getTeam() . ')';
+								else
+									echo 'Changement d\'équipe';
 								break;
 
 							// Demande d'inscription
