@@ -14,6 +14,11 @@
   // RETOUR : Aucun
   function submitChat($post)
   {
+    // Récupération des données
+    $identifiant = $post['identifiant'];
+    $equipe      = $post['equipe'];
+    $message     = $post['message'];
+
     // On vérifie la présence du dossier, sinon on le créé de manière récursive
     $folder = 'conversations';
 
@@ -21,35 +26,31 @@
       mkdir($folder, 0777, true);
 
     // Contrôle existence fichier chat
-    if (!file_exists('conversations/content_chat.xml'))
+    if (!file_exists($folder . '/content_chat_' . $equipe . '.xml'))
     {
       // Création du fichier s'il n'existe pas
-      $file    = fopen('conversations/content_chat.xml', 'a+');
+      $file    = fopen($folder . '/content_chat_' . $equipe . '.xml', 'a+');
       $balises =
 '<?xml version="1.0" encoding="UTF-8"?>
 <INSIDERoom>
-</INSIDERoom>
-';
+</INSIDERoom>';
+
       fputs($file, $balises);
       fclose($file);
     }
 
-    // Récupération des données
-    $nom     = $post['identifiant'];
-    $message = $post['message'];
-
     // Ajout du message au fichier XML
-    if (!empty($nom) AND !empty($message))
+    if (!empty($identifiant) AND !empty($message))
     {
       // Création des éléments
       $dom = new DOMDocument();
-      $dom->load('conversations/content_chat.xml');
+      $dom->load($folder . '/content_chat_' . $equipe . '.xml');
       $fragment = $dom->createDocumentFragment();
 
       // Formatage du message
       $ligne =
 '  <message>
-    <identifiant>' . $nom . '</identifiant>
+    <identifiant>' . $identifiant . '</identifiant>
     <text>' . $message . '</text>
     <date>' . date('Ymd') . '</date>
     <time>' . date('His') . '</time>
@@ -59,7 +60,7 @@
       // Insersion dans le noeud puis le fichier
       $fragment->appendXML($ligne);
       $dom->documentElement->appendChild($fragment);
-      $dom->save('conversations/content_chat.xml');
+      $dom->save($folder . '/content_chat_' . $equipe . '.xml');
     }
   }
 ?>

@@ -496,29 +496,40 @@
     // Création ou mise à jour d'une équipe si besoin
     if ($post['team'] == 'other')
     {
-      $teamActivation = 'Y';
+      $team = array('reference'  => $teamReference,
+                    'team'       => $nameReference,
+                    'short'      => $shortNameReference,
+                    'activation' => 'Y'
+                   );
 
       if (isset($tempTeam) AND !empty($tempTeam))
       {
         // Mise à jour de l'équipe temporaire créée par l'utilisateur et activation
-        $team = array('reference'  => $teamReference,
-                      'team'       => $nameReference,
-                      'short'      => $shortNameReference,
-                      'activation' => $teamActivation
-                     );
-
         physiqueUpdateEquipe($team, $tempTeam);
       }
       else
       {
         // Création d'une nouvelle équipe si l'utilisateur a choisi une équipe et que l'admin créé une nouvelle équipe
-        $team = array('reference'  => $teamReference,
-                      'team'       => $nameReference,
-                      'short'      => $shortNameReference,
-                      'activation' => $teamActivation
-                     );
-
         physiqueInsertionEquipe($team);
+      }
+
+      // Création d'un fichier XML pour le chat lors de la création d'une nouvelle équipe
+      $folder = '../../includes/common/chat/conversations';
+
+      if (!is_dir($folder))
+        mkdir($folder, 0777, true);
+
+      // Création du fichier s'il n'existe pas
+      if (!file_exists($folder . '/content_chat_' . $teamReference . '.xml'))
+      {
+        $file    = fopen($folder . '/content_chat_' . $teamReference . '.xml', 'a+');
+        $balises =
+'<?xml version="1.0" encoding="UTF-8"?>
+<INSIDERoom>
+</INSIDERoom>';
+
+        fputs($file, $balises);
+        fclose($file);
       }
     }
     else

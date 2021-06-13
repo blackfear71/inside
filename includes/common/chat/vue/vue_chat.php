@@ -16,6 +16,9 @@
       echo '</a>';
     echo '</div>';
 
+    // Référence équipe
+    echo '<input type="hidden" id="reference_equipe_chat" value="' . $_SESSION['user']['equipe'] . '" />';
+
     // Fenêtres paramétrées (JS)
     echo '<div id="fenetres_chat"></div>';
   echo '</div>';

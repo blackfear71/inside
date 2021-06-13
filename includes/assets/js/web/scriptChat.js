@@ -423,8 +423,11 @@ $(window).on('load', function()
     if (scrollDown == true)
       scrollUpdate = true;
 
+    // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
+    var equipe = $('#reference_equipe_chat').val();
+
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/common/chat/conversations/content_chat.xml', function(display)
+    $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
     {
       $('#conversation_chat').html('');
 
@@ -588,11 +591,12 @@ $(window).on('load', function()
   function envoyerMessage()
   {
     var identifiant = $('#identifiant_chat').val();
+    var equipe      = $('#reference_equipe_chat').val();
     var message     = escapeHtml($('#message_chat').val());
 
     // Envoi du message si renseignée et non vide
     if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-      $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'message': message}, afficheConversation);
+      $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'equipe': equipe, 'message': message}, afficheConversation);
     else
     {
       $('#message_chat').val('');
