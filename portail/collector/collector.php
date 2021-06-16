@@ -43,16 +43,16 @@
         initializeSaveSession();
 
         // Récupération de la liste des utilisateurs
-        $listeUsers = getUsers();
+        $listeUsers = getUsers($_SESSION['user']['equipe']);
 
         // Calcul du minimum de smileys pour être culte (75%)
-        $minGolden = getMinGolden($listeUsers);
+        $minGolden = getMinGolden($listeUsers, $_SESSION['user']['equipe']);
 
         // Récupération des tris et des filtres
         $ordersAndFilters = getOrdersAndFilters();
 
         // Récupération de la pagination
-        $nombrePages = getPages($_GET['filter'], $_SESSION['user']['identifiant'], $minGolden);
+        $nombrePages = getPages($_GET['filter'], $_SESSION['user'], $minGolden);
 
         // Récupération de la liste des phrases cultes ou redirection
         if ($nombrePages > 0)
@@ -62,14 +62,14 @@
           elseif ($_GET['page'] < 1)
             header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
           else
-            $listeCollectors = getCollectors($listeUsers, $nombrePages, $minGolden, $_GET['page'], $_SESSION['user']['identifiant'], $_GET['sort'], $_GET['filter']);
+            $listeCollectors = getCollectors($listeUsers, $nombrePages, $minGolden, $_GET['page'], $_SESSION['user'], $_GET['sort'], $_GET['filter']);
         }
       }
       break;
 
     case 'doAjouter':
-      // Insertion d'une phrase culte
-      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant'], false);
+      // Insertion d'une phrase / image culte
+      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], false);
 
       // Récupération du numéro de page
       if (!empty($idCollector))
@@ -77,8 +77,8 @@
       break;
 
     case 'doAjouterMobile':
-      // Insertion d'une phrase culte
-      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user']['identifiant'], true);
+      // Insertion d'une phrase / image culte
+      $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], true);
 
       // Récupération du numéro de page
       if (!empty($idCollector))
@@ -86,12 +86,12 @@
       break;
 
     case 'doSupprimer':
-      // Suppression d'une phrase culte
+      // Suppression d'une phrase / image culte
       deleteCollector($_POST);
       break;
 
     case 'doModifier':
-      // Modification d'une phrase culte
+      // Modification d'une phrase / image culte
       $idCollector = updateCollector($_POST, $_FILES, false);
 
       // Récupération du numéro de page
@@ -99,7 +99,7 @@
       break;
 
     case 'doModifierMobile':
-      // Modification d'une phrase culte
+      // Modification d'une phrase / image culte
       $idCollector = updateCollector($_POST, $_FILES, true);
 
       // Récupération du numéro de page
@@ -108,7 +108,7 @@
 
     case 'doVoter':
       // Vote d'un utilisateur
-      $idCollector = voteCollector($_POST, $_SESSION['user']['identifiant']);
+      $idCollector = voteCollector($_POST, $_SESSION['user']);
       break;
 
     default:
@@ -152,6 +152,10 @@
         // Conversion JSON
         $listeCollectorsJson = json_encode(convertForJsonListeCollectors($listeCollectors));
       }
+
+      // Conversion JSON
+      $equipeJson     = json_encode($_SESSION['user']['equipe']);
+      $listeUsersJson = json_encode($listeUsers);
       break;
 
     case 'doAjouter':

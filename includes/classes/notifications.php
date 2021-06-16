@@ -71,7 +71,7 @@
       $data->setContent(htmlspecialchars($data->getContent()));
       $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
       $data->setIcon(htmlspecialchars($data->getIcon()));
-      // $data->setSentence(htmlspecialchars($data->getSentence()));
+      //$data->setSentence(htmlspecialchars($data->getSentence()));
       $data->setLink(htmlspecialchars($data->getLink()));
     }
 

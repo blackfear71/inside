@@ -141,6 +141,12 @@
 
     <!-- Données JSON -->
     <script>
+      // Récupération de l'équipe pour le script
+      var equipeUser = <?php if (isset($equipeJson) AND !empty($equipeJson)) echo $equipeJson; else echo '{}'; ?>;
+
+      // Récupération de la liste des utilisateurs pour le script
+      var listeUsers = <?php if (isset($listeUsersJson) AND !empty($listeUsersJson)) echo $listeUsersJson; else echo '{}'; ?>;
+
       // Récupération de la liste des dépenses pour le script
       var listeDepenses = <?php if (isset($listeDepensesJson) AND !empty($listeDepensesJson)) echo $listeDepensesJson; else echo '{}'; ?>;
     </script>

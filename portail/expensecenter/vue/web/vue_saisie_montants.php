@@ -22,10 +22,13 @@
 
             foreach ($listeUsers as $user)
             {
-              if ($user->getIdentifiant() == $_SESSION['save']['buyer'])
-                echo '<option value="' . $_SESSION['save']['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
-              else
-                echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+              if ($user->getTeam() == $_SESSION['user']['equipe'])
+              {
+                if ($user->getIdentifiant() == $_SESSION['save']['buyer'])
+                  echo '<option value="' . $_SESSION['save']['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
+                else
+                  echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+              }
             }
           echo '</select>';
 
@@ -81,40 +84,43 @@
           echo '<div class="zone_saisie_utilisateurs">';
             foreach ($listeUsers as $user)
             {
-              $savedAmounts = false;
-
-              if (isset($_SESSION['save']['tableau_montants']) AND !empty($_SESSION['save']['tableau_montants']))
+              if ($user->getTeam() == $_SESSION['user']['equipe'])
               {
-                if (isset($_SESSION['save']['tableau_montants'][$user->getIdentifiant()]))
-                  $savedAmounts = true;
-              }
+                $savedAmounts = false;
 
-              if ($savedAmounts == true)
-                echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_montant_' . $user->getId() . '">';
-              else
-                echo '<div class="zone_saisie_utilisateur" id="zone_user_montant_' . $user->getId() . '">';
-                // Pseudo
-                echo '<div class="pseudo_depense">' . $user->getPseudo() . '</div>';
+                if (isset($_SESSION['save']['tableau_montants']) AND !empty($_SESSION['save']['tableau_montants']))
+                {
+                  if (isset($_SESSION['save']['tableau_montants'][$user->getIdentifiant()]))
+                    $savedAmounts = true;
+                }
 
-                // Avatar
-                $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
+                if ($savedAmounts == true)
+                  echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_montant_' . $user->getId() . '">';
+                else
+                  echo '<div class="zone_saisie_utilisateur" id="zone_user_montant_' . $user->getId() . '">';
+                  // Pseudo
+                  echo '<div class="pseudo_depense">' . $user->getPseudo() . '</div>';
 
-                echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
+                  // Avatar
+                  $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
 
-                // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_montant[]" value="' . $user->getIdentifiant() . '" />';
+                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_depense" />';
 
-                // Montant
-                echo '<div class="zone_saisie_montant">';
-                  if ($savedAmounts == true)
-                    echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" id="montant_user_' . $user->getId() . '" class="montant" />';
-                  else
-                    echo '<input type="text" name="montant_user[]" maxlength="6" value="" id="montant_user_' . $user->getId() . '" class="montant" />';
+                  // Identifiant (caché)
+                  echo '<input type="hidden" name="identifiant_montant[]" value="' . $user->getIdentifiant() . '" />';
+
+                  // Montant
+                  echo '<div class="zone_saisie_montant">';
+                    if ($savedAmounts == true)
+                      echo '<input type="text" name="montant_user[]" maxlength="6" value="' . $_SESSION['save']['tableau_montants'][$user->getIdentifiant()] . '" id="montant_user_' . $user->getId() . '" class="montant" />';
+                    else
+                      echo '<input type="text" name="montant_user[]" maxlength="6" value="" id="montant_user_' . $user->getId() . '" class="montant" />';
+                  echo '</div>';
+
+                  // Symbole
+                  echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
                 echo '</div>';
-
-                // Symbole
-                echo '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
-              echo '</div>';
+              }
             }
           echo '</div>';
         echo '</div>';

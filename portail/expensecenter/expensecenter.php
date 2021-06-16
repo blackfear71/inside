@@ -38,60 +38,60 @@
         initializeSaveSession();
 
         // Vérification année existante
-        $anneeExistante = controlYear($_GET['year']);
+        $anneeExistante = controlYear($_GET['year'], $_SESSION['user']['equipe']);
 
         // Récupération de la liste des utilisateurs
-        $listeUsers = getUsers();
+        $listeUsers = getUsers($_SESSION['user']['equipe']);
 
         // Récupération des filtres
         $filters = getFilters();
 
         // Récupération des onglets (années)
-        $onglets = getOnglets();
+        $onglets = getOnglets($_SESSION['user']['equipe']);
 
         // Récupération de la liste des dépenses
-        $listeDepenses = getExpenses($_GET['year'], $_GET['filter'], $_SESSION['user']['identifiant']);
+        $listeDepenses = getExpenses($_GET['year'], $_GET['filter'], $_SESSION['user']);
       }
       break;
 
     case 'doInserer':
       // Insertion d'une dépense
-      $idExpense = insertExpense($_POST, $_SESSION['user']['identifiant'], false);
+      $idExpense = insertExpense($_POST, $_SESSION['user'], false);
       break;
 
     case 'doInsererMobile':
       // Insertion d'une dépense
-      $idExpense = insertExpense($_POST, $_SESSION['user']['identifiant'], true);
+      $idExpense = insertExpense($_POST, $_SESSION['user'], true);
       break;
 
     case 'doInsererMontants':
       // Insertion d'une dépense en montants
-      $idExpense = insertMontants($_POST, $_SESSION['user']['identifiant'], false);
+      $idExpense = insertMontants($_POST, $_SESSION['user'], false);
       break;
 
     case 'doInsererMontantsMobile':
       // Insertion d'une dépense en montants
-      $idExpense = insertMontants($_POST, $_SESSION['user']['identifiant'], true);
+      $idExpense = insertMontants($_POST, $_SESSION['user'], true);
       break;
 
     case 'doModifier':
       // Modification d'une dépense
-      $idExpense = updateExpense($_POST, false);
+      $idExpense = updateExpense($_POST, $_SESSION['user']['equipe'], false);
       break;
 
     case 'doModifierMobile':
       // Modification d'une dépense
-      $idExpense = updateExpense($_POST, true);
+      $idExpense = updateExpense($_POST, $_SESSION['user']['equipe'], true);
       break;
 
     case 'doModifierMontants':
       // Modification d'une dépense en montants
-      $idExpense = updateMontants($_POST, false);
+      $idExpense = updateMontants($_POST, $_SESSION['user']['equipe'], false);
       break;
 
     case 'doModifierMontantsMobile':
       // Modification d'une dépense en montants
-      $idExpense = updateMontants($_POST, true);
+      $idExpense = updateMontants($_POST, $_SESSION['user']['equipe'], true);
       break;
 
     case 'doSupprimer':
@@ -140,6 +140,8 @@
       }
 
       // Conversion JSON
+      $equipeJson        = json_encode($_SESSION['user']['equipe']);
+      $listeUsersJson    = json_encode(convertForJsonListeUsers($listeUsers));
       $listeDepensesJson = json_encode(convertForJsonListeDepenses($listeDepenses));
       break;
 

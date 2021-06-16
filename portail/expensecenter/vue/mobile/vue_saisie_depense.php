@@ -22,10 +22,13 @@
 
             foreach ($listeUsers as $user)
             {
-              if ($user->getIdentifiant() == $_SESSION['save']['buyer'])
-                echo '<option value="' . $_SESSION['save']['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
-              else
-                echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+              if ($user->getTeam() == $_SESSION['user']['equipe'])
+              {
+                if ($user->getIdentifiant() == $_SESSION['save']['buyer'])
+                  echo '<option value="' . $_SESSION['save']['buyer'] . '" selected>' . $user->getPseudo() . '</option>';
+                else
+                  echo '<option value="' . $user->getIdentifiant() . '">' . $user->getPseudo() . '</option>';
+              }
             }
           echo '</select>';
 
@@ -72,46 +75,49 @@
           echo '<div class="zone_saisie_utilisateurs">';
             foreach ($listeUsers as $user)
             {
-              $savedParts = false;
-
-              if (isset($_SESSION['save']['tableau_parts']) AND !empty($_SESSION['save']['tableau_parts']))
+              if ($user->getTeam() == $_SESSION['user']['equipe'])
               {
-                if (isset($_SESSION['save']['tableau_parts'][$user->getIdentifiant()]) AND $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] > 0)
-                  $savedParts = true;
+                $savedParts = false;
+
+                if (isset($_SESSION['save']['tableau_parts']) AND !empty($_SESSION['save']['tableau_parts']))
+                {
+                  if (isset($_SESSION['save']['tableau_parts'][$user->getIdentifiant()]) AND $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] > 0)
+                    $savedParts = true;
+                }
+
+                if ($savedParts == true)
+                  echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_' . $user->getId() . '">';
+                else
+                  echo '<div class="zone_saisie_utilisateur" id="zone_user_' . $user->getId() . '">';
+                  // Utilisateur
+                  echo '<div class="zone_saisie_utilisateur_avatar">';
+                    // Avatar
+                    $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
+
+                    echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_saisie_depense" />';
+
+                    // Pseudo
+                    echo '<div class="pseudo_saisie_depense">' . formatString($user->getPseudo(), 8) . '</div>';
+                  echo '</div>';
+
+                  // Identifiant (caché)
+                  echo '<input type="hidden" name="identifiant_quantite[]" value="' . $user->getIdentifiant() . '" />';
+
+                  // Bouton -
+                  echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
+
+                  // Quantité
+                  echo '<div class="zone_quantite">';
+                    if ($savedParts == true)
+                      echo '<input type="text" name="quantite_user[]" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
+                    else
+                      echo '<input type="text" name="quantite_user[]" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
+                  echo '</div>';
+
+                  // Bouton +
+                  echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
+                echo '</div>';
               }
-
-              if ($savedParts == true)
-                echo '<div class="zone_saisie_utilisateur part_selected" id="zone_user_' . $user->getId() . '">';
-              else
-                echo '<div class="zone_saisie_utilisateur" id="zone_user_' . $user->getId() . '">';
-                // Utilisateur
-                echo '<div class="zone_saisie_utilisateur_avatar">';
-                  // Avatar
-                  $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
-
-                  echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_saisie_depense" />';
-
-                  // Pseudo
-                  echo '<div class="pseudo_saisie_depense">' . formatString($user->getPseudo(), 8) . '</div>';
-                echo '</div>';
-
-                // Identifiant (caché)
-                echo '<input type="hidden" name="identifiant_quantite[]" value="' . $user->getIdentifiant() . '" />';
-
-                // Bouton -
-                echo '<div id="retirer_part_' . $user->getId() . '" class="bouton_quantite retirerPart">-</div>';
-
-                // Quantité
-                echo '<div class="zone_quantite">';
-                  if ($savedParts == true)
-                    echo '<input type="text" name="quantite_user[]" value="' . $_SESSION['save']['tableau_parts'][$user->getIdentifiant()] . '" id="quantite_user_' . $user->getId() . '" class="quantite part_selected" readonly />';
-                  else
-                    echo '<input type="text" name="quantite_user[]" value="0" id="quantite_user_' . $user->getId() . '" class="quantite" readonly />';
-                echo '</div>';
-
-                // Bouton +
-                echo '<div id="ajouter_part_' . $user->getId() . '" class="bouton_quantite ajouterPart">+</div>';
-              echo '</div>';
             }
           echo '</div>';
         echo '</div>';

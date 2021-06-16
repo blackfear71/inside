@@ -296,8 +296,8 @@ function showDetails(idDepense)
     });
   }
 
-  // Lien modification
-  if (depense['pseudo'] != '')
+  // Lien modification (on ne permet pas la modification si l'acheteur n'est plus dans la même équipe ou désisncrit)
+  if (depense['pseudo'] != '' && depense['team'] == listeUsers[depense['buyer']]['team'])
   {
     $('.lien_modifier_depense').css('display', 'inline-block');
     $('.form_supprimer_depense').css('margin-left', '1vh');
@@ -425,12 +425,12 @@ function initialisationModification(idDepense, year, filter)
       ajouterMontant(idZone, idMontant, montantUtilisateur);
     });
 
-    // Affichage des utilisateurs désinscrits
+    // Affichage des utilisateurs d'autres équipes et désinscrits
     var listeMontantsDes = '';
 
     $.each(parts, function(identifiant, user)
     {
-      if (user.inscrit == false)
+      if ((user.inscrit == true && listeUsers[identifiant]['team'] != equipeUser) || user.inscrit == false)
       {
         var montantDes = '';
 
@@ -488,12 +488,12 @@ function initialisationModification(idDepense, year, filter)
       ajouterPart(idZone, idQuantite, nombrePartsUtilisateur);
     });
 
-    // Affichage des utilisateurs désinscrits
+    // Affichage des utilisateurs d'autres équipes et désinscrits
     var listePartsDes = '';
 
     $.each(parts, function(identifiant, user)
     {
-      if (user.inscrit == false)
+      if ((user.inscrit == true && listeUsers[identifiant]['team'] != equipeUser) || user.inscrit == false)
       {
         var partsDes = '';
 
@@ -584,9 +584,9 @@ function resetSaisie(zone, year, filter, type)
       var jourFull;
 
       if ((dateDuJour.getMonth() + 1) < 10)
-        moisFull = '0' + dateDuJour.getMonth() + 1;
+        moisFull = '0' + parseInt(dateDuJour.getMonth() + 1);
       else
-        moisFull = dateDuJour.getMonth() + 1;
+        moisFull = parseInt(dateDuJour.getMonth() + 1);
 
       if (dateDuJour.getDate() < 10)
         jourFull = '0' + dateDuJour.getDate();

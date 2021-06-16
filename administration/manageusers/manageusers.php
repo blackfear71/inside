@@ -58,7 +58,7 @@
       break;
 
     case 'doAccepterEquipe':
-      acceptEquipe($_POST);
+      acceptEquipe($_POST, true);
       break;
 
     case 'doRefuserEquipe':

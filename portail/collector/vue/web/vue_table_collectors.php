@@ -172,10 +172,14 @@
 
                   foreach ($listeUsers as $identifiant => $user)
                   {
-                    if ($identifiant == $collector->getSpeaker())
-                      echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user['pseudo'] . '</option>';
-                    else
-                      echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
+                    // Lors de la modification on affiche tout de même l'utilisateur d'une autre équipe si c'est le speaker
+                    if ($user['team'] == $_SESSION['user']['equipe'] OR $identifiant == $collector->getSpeaker())
+                    {
+                      if ($identifiant == $collector->getSpeaker())
+                        echo '<option value="' . $collector->getSpeaker() . '" selected>' . $user['pseudo'] . '</option>';
+                      else
+                        echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
+                    }
                   }
 
                   if ($collector->getType_speaker() == 'other')

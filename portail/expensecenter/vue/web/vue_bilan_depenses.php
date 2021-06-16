@@ -9,32 +9,35 @@
     echo '<div class="zone_bilan_expenses">';
       foreach ($listeUsers as $user)
       {
-        if ($user->getExpenses() <= -6)
-          echo '<div class="zone_bilan_user bilan_red">';
-        elseif ($user->getExpenses() <= -3 AND $user->getExpenses() > -6)
-          echo '<div class="zone_bilan_user bilan_orange">';
-        elseif ($user->getExpenses() < -0.01 AND $user->getExpenses() > -3)
-          echo '<div class="zone_bilan_user bilan_jaune">';
-        elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() < 5)
-          echo '<div class="zone_bilan_user bilan_vert">';
-        elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() >= 5)
-          echo '<div class="zone_bilan_user bilan_vert_fonce">';
-        else
-          echo '<div class="zone_bilan_user">';
-          // Avatar
-          $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
-
-          echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
-
-          // Pseudo
-          echo '<div class="pseudo_bilan">' . $user->getPseudo() . '</div>';
-
-          // Total
-          if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)
-            echo '<div class="total_bilan">' . formatAmountForDisplay(abs($user->getExpenses())) . '</div>';
+        if ($user->getTeam() == $_SESSION['user']['equipe'])
+        {
+          if ($user->getExpenses() <= -6)
+            echo '<div class="zone_bilan_user bilan_red">';
+          elseif ($user->getExpenses() <= -3 AND $user->getExpenses() > -6)
+            echo '<div class="zone_bilan_user bilan_orange">';
+          elseif ($user->getExpenses() < -0.01 AND $user->getExpenses() > -3)
+            echo '<div class="zone_bilan_user bilan_jaune">';
+          elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() < 5)
+            echo '<div class="zone_bilan_user bilan_vert">';
+          elseif ($user->getExpenses() > 0.01 AND $user->getExpenses() >= 5)
+            echo '<div class="zone_bilan_user bilan_vert_fonce">';
           else
-            echo '<div class="total_bilan">' . formatAmountForDisplay($user->getExpenses()) . '</div>';
-        echo '</div>';
+            echo '<div class="zone_bilan_user">';
+            // Avatar
+            $avatarFormatted = formatAvatar($user->getAvatar(), $user->getPseudo(), 2, 'avatar');
+
+            echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar" />';
+
+            // Pseudo
+            echo '<div class="pseudo_bilan">' . $user->getPseudo() . '</div>';
+
+            // Total
+            if ($user->getExpenses() > -0.01 AND $user->getExpenses() < 0.01)
+              echo '<div class="total_bilan">' . formatAmountForDisplay(abs($user->getExpenses())) . '</div>';
+            else
+              echo '<div class="total_bilan">' . formatAmountForDisplay($user->getExpenses()) . '</div>';
+          echo '</div>';
+        }
       }
     echo '</div>';
 

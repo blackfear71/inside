@@ -475,10 +475,11 @@
 
   // METIER : Validation changement d'équipe (mise à jour de l'équipe et du status utilisateur)
   // RETOUR : Aucun
-  function acceptEquipe($post)
+  function acceptEquipe($post, $isUpdateEquipe)
   {
     // Récupération des données
     $identifiant = $post['id_user'];
+    $oldTeam     = $post['team_user'];
     $newTeam     = '';
     $status      = 'U';
 
@@ -540,6 +541,13 @@
         physiqueDeleteEquipe($tempTeam);
     }
 
+    // Suppressions (seulement lors d'un changement d'équipe)
+    if ($isUpdateEquipe == true)
+    {
+      // Suppression de la semaine de gâteaux si non réalisé
+      physiqueDeleteRecette($identifiant, $oldTeam);
+    }
+
     // Mise à jour de la référence de l'équipe et du statut à "U"
     $user = array('team'     => $teamReference,
                   'new_team' => $newTeam,
@@ -580,7 +588,7 @@
     $identifiant = $post['id_user'];
 
     // Validation de l'équipe (création, modification ou suppression)
-    acceptEquipe($post);
+    acceptEquipe($post, false);
 
     // Insertion notification
     insertNotification('admin', 'inscrit', $identifiant);

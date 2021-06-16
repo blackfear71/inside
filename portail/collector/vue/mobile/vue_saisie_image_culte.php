@@ -25,10 +25,13 @@
 
             foreach ($listeUsers as $identifiant => $user)
             {
-              if ($identifiant == $_SESSION['save']['speaker'])
-                echo '<option value="' . $identifiant . '" selected>' . $user['pseudo'] . '</option>';
-              else
-                echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
+              if ($user['team'] == $_SESSION['user']['equipe'])
+              {
+                if ($identifiant == $_SESSION['save']['speaker'])
+                  echo '<option value="' . $identifiant . '" selected>' . $user['pseudo'] . '</option>';
+                else
+                  echo '<option value="' . $identifiant . '">' . $user['pseudo'] . '</option>';
+              }
             }
 
             if (!empty($_SESSION['save']['other_speaker']))

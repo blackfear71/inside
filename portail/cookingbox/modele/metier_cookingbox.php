@@ -28,10 +28,10 @@
 
   // METIER : Récupère les données d'une semaine (N ou N+1)
   // RETOUR : Données de la semaine
-  function getWeek($week, $year)
+  function getWeek($equipe, $week, $year)
   {
     // Récupération des données de la semaine concernée
-    $semaineGateau = physiqueSemaineGateau($week, $year);
+    $semaineGateau = physiqueSemaineGateau($equipe, $week, $year);
 
     // Récupération des données utilisateur
     $user = physiqueUser($semaineGateau->getIdentifiant());
@@ -49,105 +49,58 @@
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
-  function getUsers()
+  function getUsers($equipe)
   {
     // Récupération de la liste des utilisateurs
-    $listeUsers = physiqueUsers();
+    $listeUsers = physiqueUsers($equipe);
 
     // Retour
     return $listeUsers;
   }
 
+  // METIER : Filtrage et conversion de la liste d'objets des utilisateurs de l'équipe en tableau simple pour JSON
+  // RETOUR : Tableau des recettes
+  function convertForJsonListeCookers($listeCookers, $equipe)
+  {
+    // Initialisations
+    $listeCookersAConvertir = array();
+
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($listeCookers as $identifiant => $cooker)
+    {
+      if ($cooker['team'] == $equipe)
+        $listeCookersAConvertir[$identifiant] = $cooker;
+    }
+
+    // Retour
+    return $listeCookersAConvertir;
+  }
+
   // METIER : Récupère les semaines par années pour la saisie de recette
   // RETOUR : Liste des semaines par années
-  function getWeeks($identifiant)
+  function getWeeks($sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération des semaines avec recette saisissable pour l'utilisateur
-    $listeSemainesParAnnees = physiqueSemainesGateauUser($identifiant);
+    $listeSemainesParAnnees = physiqueSemainesGateauUser($identifiant, $equipe);
 
     // Retour
     return $listeSemainesParAnnees;
   }
 
-  // METIER : Insère ou met à jour l'utilisateur d'une semaine
-  // RETOUR : Aucun
-  function updateCake($post)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Récupération des données
-    $identifiant = $post['select_user'];
-    $week        = $post['week'];
-    $year        = date('Y');
-
-    // Vérification si enregistrement existant
-    $semaineExistante = physiqueSemaineExistante($week, $year);
-
-    // Contrôle recette semaine déjà validée
-    $control_ok = controleSemaineValidee($semaineExistante);
-
-    if ($control_ok == true)
-    {
-      // Insertion de l'enregistrement en base (si semaine non existante)
-      if ($semaineExistante['exist'] == false)
-      {
-        $cooking = array('identifiant' => $identifiant,
-                         'week'        => $week,
-                         'year'        => $year,
-                         'cooked'      => 'N',
-                         'name'        => '',
-                         'picture'     => '',
-                         'ingredients' => '',
-                         'recipe'      => '',
-                         'tips'        => ''
-                        );
-
-        physiqueInsertionSemaineGateau($cooking);
-      }
-      // Modification de l'enregistrement en base
-      else
-        physiqueUpdateSemaineGateau($week, $year, $identifiant);
-    }
-  }
-
-  // METIER : Valide le gâteau de la semaine d'un utilisateur
-  // RETOUR : Aucun
-  function validateCake($cooked, $week, $year, $identifiant)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Vérification si enregistrement existant
-    $semaineExistante = physiqueSemaineExistante($week, $year);
-
-    // Contrôle recette déjà validée par un autre utilisateur
-    $control_ok = controleSemaineValideeAutre($semaineExistante['identifiant'], $identifiant);
-
-    // Mise à jour du statut de la recette de la semaine
-    if ($control_ok == true)
-    {
-      // Modification de l'enregistrement en base
-      physiqueUpdateStatusSemaineGateau($cooked, $week, $year);
-
-      // Génération succès
-      if ($cooked == 'Y')
-        insertOrUpdateSuccesValue('cooker', $semaineExistante['identifiant'], 1);
-      else
-        insertOrUpdateSuccesValue('cooker', $semaineExistante['identifiant'], -1);
-    }
-  }
-
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
-  function controlYear($year)
+  function controlYear($year, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
 
     // Vérification année présente en base
     if (isset($year) AND is_numeric($year))
-      $anneeExistante = physiqueAnneeExistante($year);
+      $anneeExistante = physiqueAnneeExistante($year, $equipe);
 
     // Retour
     return $anneeExistante;
@@ -155,10 +108,10 @@
 
   // METIER : Lecture années distinctes pour les onglets
   // RETOUR : Liste des années existantes
-  function getOnglets()
+  function getOnglets($equipe)
   {
     // Récupération de la liste des années existantes
-    $onglets = physiqueOnglets();
+    $onglets = physiqueOnglets($equipe);
 
     // Retour
     return $onglets;
@@ -166,10 +119,10 @@
 
   // METIER : Lecture des recettes saisies
   // RETOUR : Liste des recettes
-  function getRecipes($year, $listeCookers)
+  function getRecipes($year, $equipe, $listeCookers)
   {
     // Récupération de la liste des recettes
-    $listeRecettes = physiqueRecettes($year);
+    $listeRecettes = physiqueRecettes($year, $equipe);
 
     // Recherche pseudo et avatar recettes
     foreach ($listeRecettes as $recette)
@@ -199,6 +152,7 @@
                                  'identifiant' => $recette->getIdentifiant(),
                                  'pseudo'      => $recette->getPseudo(),
                                  'avatar'      => $recette->getAvatar(),
+                                 'team'        => $recette->getTeam(),
                                  'week'        => $recette->getWeek(),
                                  'year'        => $recette->getYear(),
                                  'cooked'      => $recette->getCooked(),
@@ -216,15 +170,91 @@
     return $listeRecettesAConvertir;
   }
 
+  // METIER : Insère ou met à jour l'utilisateur d'une semaine
+  // RETOUR : Aucun
+  function updateCake($post, $equipe)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $post['select_user'];
+    $week        = $post['week'];
+    $year        = date('Y');
+
+    // Vérification si enregistrement existant
+    $semaineExistante = physiqueSemaineExistante($equipe, $week, $year);
+
+    // Contrôle recette semaine déjà validée
+    $control_ok = controleSemaineValidee($semaineExistante);
+
+    if ($control_ok == true)
+    {
+      // Insertion de l'enregistrement en base (si semaine non existante)
+      if ($semaineExistante['exist'] == false)
+      {
+        $cooking = array('identifiant' => $identifiant,
+                         'team'        => $equipe,
+                         'week'        => $week,
+                         'year'        => $year,
+                         'cooked'      => 'N',
+                         'name'        => '',
+                         'picture'     => '',
+                         'ingredients' => '',
+                         'recipe'      => '',
+                         'tips'        => ''
+                        );
+
+        physiqueInsertionSemaineGateau($cooking);
+      }
+      // Modification de l'enregistrement en base
+      else
+        physiqueUpdateSemaineGateau($week, $year, $identifiant, $equipe);
+    }
+  }
+
+  // METIER : Valide le gâteau de la semaine d'un utilisateur
+  // RETOUR : Aucun
+  function validateCake($cooked, $week, $year, $sessionUser)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
+    // Vérification si enregistrement existant
+    $semaineExistante = physiqueSemaineExistante($equipe, $week, $year);
+
+    // Contrôle recette déjà validée par un autre utilisateur
+    $control_ok = controleSemaineValideeAutre($semaineExistante['identifiant'], $identifiant);
+
+    // Mise à jour du statut de la recette de la semaine
+    if ($control_ok == true)
+    {
+      // Modification de l'enregistrement en base
+      physiqueUpdateStatusSemaineGateau($equipe, $week, $year, $cooked);
+
+      // Génération succès
+      if ($cooked == 'Y')
+        insertOrUpdateSuccesValue('cooker', $semaineExistante['identifiant'], 1);
+      else
+        insertOrUpdateSuccesValue('cooker', $semaineExistante['identifiant'], -1);
+    }
+  }
+
   // METIER : Insère une recette (mise à jour d'une semaine en base)
   // RETOUR : Id recette
-  function insertRecipe($post, $files, $identifiant)
+  function insertRecipe($post, $files, $sessionUser)
   {
     // Initialisations
     $idRecette  = NULL;
     $control_ok = true;
 
     // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
     $yearRecipe  = $post['year_recipe'];
     $weekRecipe  = formatWeekForInsert($post['week_recipe']);
     $nameRecipe  = $post['name_recipe'];
@@ -280,7 +310,7 @@
     if ($control_ok == true)
     {
       // Récupération des données de la semaine en cours d'insertion
-      $semaineGateau = physiqueSemaineGateau($weekRecipe, $yearRecipe);
+      $semaineGateau = physiqueSemaineGateau($equipe, $weekRecipe, $yearRecipe);
 
       // Récupération de l'id pour rediriger vers la recette déjà existante après mise à jour ou en cas de saisie en doublon
       $idRecette = $semaineGateau->getId();
@@ -308,7 +338,7 @@
                        'tips'        => $tips
                       );
 
-      physiqueUpdateRecette($weekRecipe, $yearRecipe, $identifiant, $recette);
+      physiqueUpdateRecette($idRecette, $recette);
 
       // Insertion notification
       insertNotification($identifiant, 'recipe', $idRecette);
@@ -329,13 +359,15 @@
 
   // METIER : Met à jour une recette
   // RETOUR : Id recette
-  function updateRecipe($post, $files, $identifiant)
+  function updateRecipe($post, $files, $sessionUser)
   {
     // Initialisations
     $idRecette  = NULL;
     $control_ok = true;
 
     // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
     $yearRecipe  = $post['hidden_year_recipe'];
     $weekRecipe  = formatWeekForInsert($post['hidden_week_recipe']);
     $nameRecipe  = $post['name_recipe'];
@@ -381,7 +413,7 @@
     if ($control_ok == true)
     {
       // Récupération des données de la semaine en cours d'insertion
-      $semaineGateau = physiqueSemaineGateau($weekRecipe, $yearRecipe);
+      $semaineGateau = physiqueSemaineGateau($equipe, $weekRecipe, $yearRecipe);
 
       // Récupération de l'id pour rediriger vers la recette déjà existante après mise à jour ou en cas de saisie en doublon
       $idRecette = $semaineGateau->getId();
@@ -419,7 +451,7 @@
                        'tips'        => $tips
                       );
 
-      physiqueUpdateRecette($weekRecipe, $yearRecipe, $identifiant, $recette);
+      physiqueUpdateRecette($idRecette, $recette);
 
       // Message d'alerte
       $_SESSION['alerts']['recipe_updated'] = true;
@@ -431,13 +463,15 @@
 
   // METIER : Suppression recette
   // RETOUR : Aucun
-  function deleteRecipe($post, $year, $identifiant)
+  function deleteRecipe($post, $year, $sessionUser)
   {
     // Récupération des données
-    $week = $post['week_cake'];
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+    $week        = $post['week_cake'];
 
     // Lecture des données de la recette
-    $recette = physiqueRecette($week, $year);
+    $recette = physiqueRecette($equipe, $week, $year);
 
     // Suppression des images
     if (!empty($recette->getPicture()))

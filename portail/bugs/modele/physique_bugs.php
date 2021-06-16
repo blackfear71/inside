@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture données utilisateurs
   // RETOUR : Aucun
-  function physiqueListeUsers()
+  function physiqueListeUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -14,15 +14,17 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT identifiant, pseudo, avatar
-                        FROM users');
-
-    $data = $req->fetch();
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
+                        FROM users
+                        WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
+                        OR EXISTS (SELECT id, author, team
+                                   FROM bugs
+                                   WHERE bugs.author = users.identifiant AND bugs.team = "' . $equipe . '")');
 
     while ($data = $req->fetch())
     {
       $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
-                                                'avatar' => $data['avatar'],
+                                                'avatar' => $data['avatar']
                                                );
     }
 
@@ -31,10 +33,10 @@
     // Retour
     return $listeUsers;
   }
-  
+
   // PHYSIQUE : Lecture liste des rapports
   // RETOUR : Liste rapports
-  function physiqueListeRapports($view, $type)
+  function physiqueListeRapports($view, $type, $equipe)
   {
     // Initialisations
     $rapports = array();
@@ -47,14 +49,14 @@
       case 'resolved':
         $req = $bdd->query('SELECT *
                             FROM bugs
-                            WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R")
+                            WHERE type = "' . $type . '" AND team = "' . $equipe . '" AND (resolved = "Y" OR resolved = "R")
                             ORDER BY date DESC, id DESC');
         break;
 
       default:
         $req = $bdd->query('SELECT *
                             FROM bugs
-                            WHERE type = "' . $type . '" AND resolved = "N"
+                            WHERE type = "' . $type . '" AND team = "' . $equipe . '" AND resolved = "N"
                             ORDER BY date DESC, id DESC');
     }
 
@@ -73,28 +75,6 @@
     return $rapports;
   }
 
-  // PHYSIQUE : Lecture données utilisateur
-  // RETOUR : Aucun
-  function physiqueDonneesUser($rapport)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT identifiant, pseudo, avatar, COUNT(*) AS nombreLignes
-                        FROM users
-                        WHERE identifiant = "' . $rapport->getAuthor() . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-    {
-      $rapport->setPseudo($data['pseudo']);
-      $rapport->setAvatar($data['avatar']);
-    }
-
-    $req->closeCursor();
-  }
-
   /****************************************************************************/
   /********************************** INSERT **********************************/
   /****************************************************************************/
@@ -108,17 +88,19 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO bugs(subject,
-                                           date,
+    $req = $bdd->prepare('INSERT INTO bugs(date,
                                            author,
+                                           team,
+                                           subject,
                                            content,
                                            picture,
                                            type,
                                            resolved
                                           )
-                                    VALUES(:subject,
-                                           :date,
+                                    VALUES(:date,
                                            :author,
+                                           :team,
+                                           :subject,
                                            :content,
                                            :picture,
                                            :type,

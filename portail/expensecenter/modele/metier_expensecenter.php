@@ -33,14 +33,14 @@
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
-  function controlYear($year)
+  function controlYear($year, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
 
     // Vérification année présente en base
     if (isset($year) AND is_numeric($year))
-      $anneeExistante = physiqueAnneeExistante($year);
+      $anneeExistante = physiqueAnneeExistante($year, $equipe);
 
     // Retour
     return $anneeExistante;
@@ -48,10 +48,10 @@
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Liste des utilisateurs
-  function getUsers()
+  function getUsers($equipe)
   {
-    // Récupération de la liste des utilisateurs (sauf ceux en cours d'inscription)
-    $listeUsers = physiqueUsers();
+    // Récupération de la liste des utilisateurs
+    $listeUsers = physiqueUsers($equipe);
 
     // Retour
     return $listeUsers;
@@ -73,10 +73,10 @@
 
   // METIER : Lecture années distinctes pour les onglets
   // RETOUR : Liste des années existantes
-  function getOnglets()
+  function getOnglets($equipe)
   {
     // Récupération de la liste des années existantes
-    $onglets = physiqueOnglets();
+    $onglets = physiqueOnglets($equipe);
 
     // Retour
     return $onglets;
@@ -84,10 +84,14 @@
 
   // METIER : Lecture liste des dépenses
   // RETOUR : Liste des dépenses
-  function getExpenses($year, $filtre, $identifiant)
+  function getExpenses($year, $filtre, $sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération de la liste des dépenses
-    $listeDepenses = physiqueDepenses($year, $filtre, $identifiant);
+    $listeDepenses = physiqueDepenses($year, $filtre, $identifiant, $equipe);
 
     // Récupération des données complémentaires
     foreach ($listeDepenses as $depense)
@@ -149,6 +153,30 @@
     return $listeDepenses;
   }
 
+  // METIER : Conversion de la liste d'objets des utilisateurs en tableau simple pour JSON
+  // RETOUR : Tableau des utilisateurs
+  function convertForJsonListeUsers($listeUsers)
+  {
+    // Initialisations
+    $listeUsersAConvertir = array();
+
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($listeUsers as $userAConvertir)
+    {
+      $user = array('id'          => $userAConvertir->getId(),
+                    'identifiant' => $userAConvertir->getIdentifiant(),
+                    'team'        => $userAConvertir->getTeam(),
+                    'pseudo'      => $userAConvertir->getPseudo(),
+                    'avatar'      => $userAConvertir->getAvatar()
+                   );
+
+      $listeUsersAConvertir[$userAConvertir->getIdentifiant()] = $user;
+    }
+
+    // Retour
+    return $listeUsersAConvertir;
+  }
+
   // METIER : Conversion de la liste d'objets des dépenses et des parts en tableau simple pour JSON
   // RETOUR : Tableau des dépenses
   function convertForJsonListeDepenses($listeDepenses)
@@ -160,6 +188,7 @@
     foreach ($listeDepenses as $depenseAConvertir)
     {
       $depense = array('id'      => $depenseAConvertir->getId(),
+                       'team'    => $depenseAConvertir->getTeam(),
                        'date'    => $depenseAConvertir->getDate(),
                        'price'   => $depenseAConvertir->getPrice(),
                        'buyer'   => $depenseAConvertir->getBuyer(),
@@ -177,6 +206,7 @@
       {
         $listePartsDepense[$parts->getIdentifiant()] = array('pseudo'  => $parts->getPseudo(),
                                                              'avatar'  => $parts->getAvatar(),
+                                                             'team'    => $parts->getTeam(),
                                                              'parts'   => $parts->getParts(),
                                                              'inscrit' => $parts->getInscrit()
                                                             );
@@ -192,17 +222,19 @@
 
   // METIER : Insertion d'une dépense & mise à jour des dépenses utilisateurs
   // RETOUR : Id dépense
-  function insertExpense($post, $userConnected, $isMobile)
+  function insertExpense($post, $sessionUser, $isMobile)
   {
     // Initialisations
     $idDepense  = NULL;
     $control_ok = true;
 
     // Récupération des données
-    $price   = formatAmountForInsert($post['depense']);
-    $buyer   = $post['buyer_user'];
-    $comment = $post['comment'];
-    $type    = 'P';
+    $userConnected       = $sessionUser['identifiant'];
+    $equipeUserConnected = $sessionUser['equipe'];
+    $price               = formatAmountForInsert($post['depense']);
+    $buyer               = $post['buyer_user'];
+    $comment             = $post['comment'];
+    $type                = 'P';
 
     if ($isMobile == true)
       $date = formatDateForInsertMobile($post['date_expense']);
@@ -252,7 +284,8 @@
     // Insertion de l'enregistrement en base et traitement des utilisateurs
     if ($control_ok == true)
     {
-      $depense = array('date'    => $date,
+      $depense = array('team'    => $equipeUserConnected,
+                       'date'    => $date,
                        'price'   => $price,
                        'buyer'   => $buyer,
                        'comment' => $comment,
@@ -292,6 +325,7 @@
         {
           // Insertion de l'enregistrement en base
           $partUser = array('id_expense'  => $idDepense,
+                            'team'        => $equipeUserConnected,
                             'identifiant' => $identifiant,
                             'parts'       => $parts
                            );
@@ -336,17 +370,19 @@
 
   // METIER : Insertion de montants & mise à jour des dépenses utilisateurs
   // RETOUR : Id dépense
-  function insertMontants($post, $userConnected, $isMobile)
+  function insertMontants($post, $sessionUser, $isMobile)
   {
     // Initialisations
     $idDepense  = NULL;
     $control_ok = true;
 
     // Récupération des données
-    $buyer   = $post['buyer_user'];
-    $comment = $post['comment'];
-    $frais   = formatAmountForInsert($post['depense']);
-    $type    = 'M';
+    $userConnected       = $sessionUser['identifiant'];
+    $equipeUserConnected = $sessionUser['equipe'];
+    $buyer               = $post['buyer_user'];
+    $comment             = $post['comment'];
+    $frais               = formatAmountForInsert($post['depense']);
+    $type                = 'M';
 
     if ($isMobile == true)
       $date = formatDateForInsertMobile($post['date_expense']);
@@ -405,7 +441,8 @@
     if ($control_ok == true)
     {
       // Insertion de l'enregistrement en base
-      $depense = array('date'    => $date,
+      $depense = array('team'    => $equipeUserConnected,
+                       'date'    => $date,
                        'price'   => $frais,
                        'buyer'   => $buyer,
                        'comment' => $comment,
@@ -459,6 +496,7 @@
 
         // Insertion de l'enregistrement en base
         $partUser = array('id_expense'  => $idDepense,
+                          'team'        => $equipeUserConnected,
                           'identifiant' => $identifiant,
                           'parts'       => $montantUser
                          );
@@ -560,7 +598,7 @@
 
   // METIER : Modification d'une dépense
   // RETOUR : Id dépense
-  function updateExpense($post, $isMobile)
+  function updateExpense($post, $equipe, $isMobile)
   {
     // Initialisations
     $control_ok = true;
@@ -717,6 +755,7 @@
         {
           // Insertion de l'enregistrement en base
           $partUser = array('id_expense'  => $idDepense,
+                            'team'        => $equipe,
                             'identifiant' => $identifiant,
                             'parts'       => $parts
                            );
@@ -764,7 +803,7 @@
 
   // METIER : Modification de montants
   // RETOUR : Id dépense
-  function updateMontants($post, $isMobile)
+  function updateMontants($post, $equipe, $isMobile)
   {
     // Initialisations
     $control_ok = true;
@@ -951,6 +990,7 @@
 
         // Insertion de l'enregistrement en base
         $partUser = array('id_expense'  => $idDepense,
+                          'team'        => $equipe,
                           'identifiant' => $identifiant,
                           'parts'       => $montantUser
                          );

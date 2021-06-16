@@ -32,13 +32,13 @@
         case 'resolved':
         case 'unresolved':
           // Récupération de la liste des utilisateurs
-          $listeUsers = getListeUsers();
+          $listeUsers = getListeUsers($_SESSION['user']['equipe']);
 
           // Récupération de la liste des bugs
-          $listeBugs = getBugs($_GET['view'], 'B', $listeUsers);
+          $listeBugs = getBugs($_GET['view'], 'B', $_SESSION['user']['equipe'], $listeUsers);
 
           // Récupération de la liste des évolutions
-          $listeEvolutions = getBugs($_GET['view'], 'E', $listeUsers);
+          $listeEvolutions = getBugs($_GET['view'], 'E', $_SESSION['user']['equipe'], $listeUsers);
           break;
 
         default:
@@ -50,7 +50,7 @@
 
     case 'doSignaler':
       // Insertion d'un bug / d'une évolution
-      $idRapport = insertBug($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $idRapport = insertBug($_POST, $_FILES, $_SESSION['user']);
       break;
 
     default:

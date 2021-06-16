@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Vérification présence semaine et lecture des données d'une semaine
   // RETOUR : Objet WeekCake
-  function physiqueSemaineGateau($semaine, $annee)
+  function physiqueSemaineGateau($equipe, $semaine, $annee)
   {
     // Initialisations
     $semaineGateau = new WeekCake();
@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT *, COUNT(*) AS nombreGateauxSemaine
                         FROM cooking_box
-                        WHERE week = "' . $semaine . '" AND year = "' . $annee . '"');
+                        WHERE team = "' . $equipe . '" AND week = "' . $semaine . '" AND year = "' . $annee . '"');
 
     $data = $req->fetch();
 
@@ -60,7 +60,7 @@
 
   // PHYSIQUE : Lecture des utilisateurs inscrits
   // RETOUR : Liste des utilisateurs
-  function physiqueUsers()
+  function physiqueUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -68,20 +68,21 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I" AND status != "D"
+                        WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I" AND status != "D")
+                        OR EXISTS (SELECT id, identifiant, team
+                                   FROM cooking_box
+                                   WHERE cooking_box.identifiant = users.identifiant AND cooking_box.team = "' . $equipe . '")
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
-      $user = Profile::withData($data);
-
       // Création tableau de correspondance identifiant / pseudo / avatar
-      $listeUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
-                                                   'avatar' => $user->getAvatar()
-                                                  );
+      $listeUsers[$data['identifiant']] = array('team'   => $data['team'],
+                                                'pseudo' => $data['pseudo'],
+                                                'avatar' => $data['avatar']
+                                               );
     }
 
     $req->closeCursor();
@@ -92,7 +93,7 @@
 
   // PHYSIQUE : Lecture des recettes saisissables d'un utilisateur
   // RETOUR : Liste des semaines par années
-  function physiqueSemainesGateauUser($identifiant)
+  function physiqueSemainesGateauUser($identifiant, $equipe)
   {
     // Initialisations
     $listeSemainesParAnnees = array();
@@ -102,7 +103,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM cooking_box
-                        WHERE identifiant = "' . $identifiant . '" AND name = "" AND picture = ""  AND (year < ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week <= ' . date('W') . '))
+                        WHERE identifiant = "' . $identifiant . '" AND team = "' . $equipe . '" AND name = "" AND picture = ""  AND (year < ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week <= ' . date('W') . '))
                         ORDER BY year DESC, week DESC');
 
     while ($data = $req->fetch())
@@ -123,7 +124,7 @@
 
   // PHYSIQUE : Lecture semaine et recette existant
   // RETOUR : Indicateurs semaine et recette existante
-  function physiqueSemaineExistante($semaine, $annee)
+  function physiqueSemaineExistante($equipe, $semaine, $annee)
   {
     // Initialisations
     $semaineExistante = array('exist'       => false,
@@ -136,7 +137,7 @@
 
     $req = $bdd->query('SELECT *, COUNT(*) AS nombreRecettes
                         FROM cooking_box
-                        WHERE week = "' . $semaine . '" AND year = "' . $annee . '"');
+                        WHERE team = "' . $equipe . '" AND week = "' . $semaine . '" AND year = "' . $annee . '"');
 
     $data = $req->fetch();
 
@@ -155,7 +156,7 @@
 
   // PHYSIQUE : Lecture nombre de lignes existantes pour une année
   // RETOUR : Booléen
-  function physiqueAnneeExistante($annee)
+  function physiqueAnneeExistante($annee, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
@@ -165,7 +166,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM cooking_box
-                        WHERE year = "' . $annee . '" AND name != "" AND picture != ""');
+                        WHERE team = "' . $equipe . '" AND year = "' . $annee . '" AND name != "" AND picture != ""');
 
     $data = $req->fetch();
 
@@ -180,7 +181,7 @@
 
   // PHYSIQUE : Lecture des années existantes
   // RETOUR : Liste des années
-  function physiqueOnglets()
+  function physiqueOnglets($equipe)
   {
     // Initialisations
     $onglets = array();
@@ -190,7 +191,7 @@
 
     $req = $bdd->query('SELECT DISTINCT year
                         FROM cooking_box
-                        WHERE name != "" AND picture != ""
+                        WHERE team = "' . $equipe . '" AND name != "" AND picture != ""
                         ORDER BY year DESC');
 
     while ($data = $req->fetch())
@@ -207,7 +208,7 @@
 
   // PHYSIQUE : Lecture des recettes
   // RETOUR : Liste des recettes
-  function physiqueRecettes($annee)
+  function physiqueRecettes($annee, $equipe)
   {
     // Initialisations
     $listeRecettes = array();
@@ -217,7 +218,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM cooking_box
-                        WHERE year = "' . $annee . '" AND name != "" AND picture != ""
+                        WHERE team = "' . $equipe . '" AND year = "' . $annee . '" AND name != "" AND picture != ""
                         ORDER BY week DESC');
 
     while ($data = $req->fetch())
@@ -236,15 +237,15 @@
   }
 
   // PHYSIQUE : Lecture recette
-  // RETOUR : Objet Collector
-  function physiqueRecette($semaine, $annee)
+  // RETOUR : Objet WeekCake
+  function physiqueRecette($equipe, $semaine, $annee)
   {
     // Requête
     global $bdd;
 
     $req = $bdd->query('SELECT *
                         FROM cooking_box
-                        WHERE week = "' . $semaine . '" AND year = "' . $annee . '"');
+                        WHERE team = "' . $equipe . '" AND week = "' . $semaine . '" AND year = "' . $annee . '"');
 
     $data = $req->fetch();
 
@@ -268,6 +269,7 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO cooking_box(identifiant,
+                                                  team,
                                                   week,
                                                   year,
                                                   cooked,
@@ -277,6 +279,7 @@
                                                   recipe,
                                                   tips)
                                           VALUES(:identifiant,
+                                                 :team,
                                                  :week,
                                                  :year,
                                                  :cooked,
@@ -296,14 +299,14 @@
   /****************************************************************************/
   // PHYSIQUE : Mise à jour d'une semaine de gâteau pour un utilisateur
   // RETOUR : Aucun
-  function physiqueUpdateSemaineGateau($semaine, $annee, $identifiant)
+  function physiqueUpdateSemaineGateau($semaine, $annee, $identifiant, $equipe)
   {
     // Requête
     global $bdd;
 
     $req = $bdd->prepare('UPDATE cooking_box
                           SET identifiant = :identifiant
-                          WHERE week = "' . $semaine . '" AND year = "' . $annee . '"');
+                          WHERE team = "' . $equipe . '" AND week = "' . $semaine . '" AND year = "' . $annee . '"');
 
     $req->execute(array(
       'identifiant' => $identifiant
@@ -314,14 +317,14 @@
 
   // PHYSIQUE : Validation d'une semaine de gâteau pour un utilisateur
   // RETOUR : Aucun
-  function physiqueUpdateStatusSemaineGateau($cooked, $semaine, $annee)
+  function physiqueUpdateStatusSemaineGateau($equipe, $semaine, $annee, $cooked)
   {
     // Requête
     global $bdd;
 
     $req = $bdd->prepare('UPDATE cooking_box
                           SET cooked = :cooked
-                          WHERE week = "' . $semaine . '" AND year = "' . $annee . '"');
+                          WHERE team = "' . $equipe . '" AND week = "' . $semaine . '" AND year = "' . $annee . '"');
 
     $req->execute(array(
       'cooked' => $cooked
@@ -332,7 +335,7 @@
 
   // PHYSIQUE : Mise à jour d'une recette
   // RETOUR : Aucun
-  function physiqueUpdateRecette($semaine, $annee, $identifiant, $recette)
+  function physiqueUpdateRecette($idRecette, $recette)
   {
     // Requête
     global $bdd;
@@ -343,7 +346,7 @@
                               ingredients = :ingredients,
                               recipe      = :recipe,
                               tips        = :tips
-                          WHERE week = "' . $semaine . '" AND year = "' . $annee . '" AND identifiant = "' . $identifiant . '"');
+                          WHERE id = ' . $idRecette);
 
     $req->execute($recette);
 

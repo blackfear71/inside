@@ -21,10 +21,10 @@
 
   // METIER : Lecture de la liste des utilisateurs
   // RETOUR : Liste des utilisateurs
-  function getListeUsers()
+  function getListeUsers($equipe)
   {
     // Lecture de la liste des équipes
-    $listeUsers = physiqueListeUsers();
+    $listeUsers = physiqueListeUsers($equipe);
 
     // Retour
     return $listeUsers;
@@ -32,10 +32,10 @@
 
   // METIER : Lecture liste des bugs/évolutions
   // RETOUR : Tableau des bugs/évolutions
-  function getBugs($view, $type, $listeUsers)
+  function getBugs($view, $type, $equipe, $listeUsers)
   {
     // Récupération des rapports en fonction de la vue et du type
-    $rapports = physiqueListeRapports($view, $type);
+    $rapports = physiqueListeRapports($view, $type, $equipe);
 
     // Récupération des données complémentaires
     foreach ($rapports as $rapport)
@@ -54,17 +54,19 @@
 
   // METIER : Insertion d'un bug
   // RETOUR : Id enregistrement créé
-  function insertBug($post, $files, $author)
+  function insertBug($post, $files, $sessionUser)
   {
     // Initialisations
     $idBug      = NULL;
     $control_ok = true;
 
     // Récupération des données
+    $date     = date('Ymd');
+    $author   = $sessionUser['identifiant'];
+    $team     = $sessionUser['equipe'];
     $subject  = $post['subject_bug'];
     $type     = $post['type_bug'];
     $content  = $post['content_bug'];
-    $date     = date('Ymd');
     $resolved = 'N';
     $picture  = '';
 
@@ -113,6 +115,7 @@
       $bug = array('subject'  => $subject,
                    'date'     => $date,
                    'author'   => $author,
+                   'team'     => $team,
                    'content'  => $content,
                    'picture'  => $picture,
                    'type'     => $type,
@@ -131,6 +134,7 @@
       $_SESSION['alerts']['bug_submitted'] = true;
     }
 
+    // Retour
     return $idBug;
   }
 ?>

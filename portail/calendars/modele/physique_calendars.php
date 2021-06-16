@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture nombre de lignes existantes pour une année
   // RETOUR : Booléen
-  function physiqueAnneeExistante($annee)
+  function physiqueAnneeExistante($annee, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM calendars
-                        WHERE year = "' . $annee . '" AND to_delete != "Y"');
+                        WHERE year = "' . $annee . '" AND to_delete != "Y" AND team = "' . $equipe . '"');
 
     $data = $req->fetch();
 
@@ -31,7 +31,7 @@
 
   // PHYSIQUE : Lecture des années existantes
   // RETOUR : Liste des années
-  function physiqueOnglets()
+  function physiqueOnglets($equipe)
   {
     // Initialisations
     $onglets = array();
@@ -41,7 +41,7 @@
 
     $req = $bdd->query('SELECT DISTINCT year
                         FROM calendars
-                        WHERE to_delete != "Y"
+                        WHERE to_delete != "Y" AND team = "' . $equipe . '"
                         ORDER BY year DESC');
 
     while ($data = $req->fetch())
@@ -58,7 +58,7 @@
 
   // PHYSIQUE : Lecture des calendriers
   // RETOUR : Liste des calendriers
-  function physiqueCalendriers($annee)
+  function physiqueCalendriers($annee, $equipe)
   {
     // Initialisations
     $listeCalendriers = array();
@@ -68,7 +68,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM calendars
-                        WHERE year = ' . $annee . ' AND to_delete != "Y"
+                        WHERE year = ' . $annee . ' AND to_delete != "Y" AND team = "' . $equipe . '"
                         ORDER BY month DESC, id DESC');
 
     while ($data = $req->fetch())
@@ -91,7 +91,7 @@
 
   // PHYSIQUE : Lecture des annexes
   // RETOUR : Liste des annexes
-  function physiqueAnnexes()
+  function physiqueAnnexes($equipe)
   {
     // Initialisations
     $listeAnnexes = array();
@@ -101,7 +101,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM calendars_annexes
-                        WHERE to_delete != "Y"
+                        WHERE to_delete != "Y" AND team = "' . $equipe . '"
                         ORDER BY id DESC');
 
     while ($data = $req->fetch())
@@ -155,10 +155,12 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO calendars(to_delete,
+                                                team,
                                                 month,
                                                 year,
                                                 calendar)
                                         VALUES(:to_delete,
+                                               :team,
                                                :month,
                                                :year,
                                                :calendar)');
@@ -184,9 +186,11 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO calendars_annexes(to_delete,
+                                                        team,
                                                         annexe,
                                                         title)
                                                 VALUES(:to_delete,
+                                                       :team,
                                                        :annexe,
                                                        :title)');
 

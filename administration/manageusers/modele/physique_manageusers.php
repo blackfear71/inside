@@ -1194,6 +1194,22 @@
                        WHERE reference = "' . $equipe . '" AND activation = "N"');
   }
 
+  // PHYSIQUE : Suppression des recettes d'un utilisateur
+  // RETOUR : Aucun
+  function physiqueDeleteRecette($identifiant, $equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM cooking_box
+                       WHERE  identifiant = "' . $identifiant . '"
+                         AND  team        = "' . $equipe . '"
+                         AND (year > ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week >= ' . date('W') . '))
+                         AND  cooked      = "N"
+                         AND  name        = ""
+                         AND  picture     = ""');
+  }
+
   // PHYSIQUE : Suppression d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteUser($identifiant)

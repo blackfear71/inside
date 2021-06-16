@@ -1,10 +1,10 @@
 <?php
-  /******************
-  ****** Chat *******
-  *******************
+  /*******************
+  ******* Chat *******
+  ********************
   Fonctionnalités :
   - Affichage du chat
-  ******************/
+  *******************/
 
   // Modèle de données
   include_once('modele/metier_chat.php');

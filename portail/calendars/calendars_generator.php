@@ -83,22 +83,22 @@
 
     case 'doSauvegarder':
       // Sauvegarde de l'image générée
-      $year = insertCalendrierGenere($_POST, $_SESSION['user']['identifiant']);
+      $year = insertCalendrierGenere($_POST, $_SESSION['user']);
       break;
 
     case 'doSauvegarderAnnexe':
       // Sauvegarde de l'image générée
-      insertAnnexeGeneree($_POST, $_SESSION['user']['identifiant']);
+      insertAnnexeGeneree($_POST, $_SESSION['user']);
       break;
 
     case 'doAjouter':
       // Insertion d'un calendrier
-      $year = insertCalendrier($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $year = insertCalendrier($_POST, $_FILES, $_SESSION['user']);
       break;
 
     case 'doAjouterAnnexe':
       // Insertion d'une annexe
-      insertAnnexe($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      insertAnnexe($_POST, $_FILES, $_SESSION['user']);
       break;
 
     default:

@@ -152,6 +152,7 @@
 
 									echo '<div class="zone_validate_team">';
 										echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
+										echo '<input type="hidden" name="team_user" value="' . $user->getTeam() . '" />';
 										echo '<input type="submit" name="accept_inscription" title="Accepter" value="" class="icone_accepter" />';
 									echo '</div>';
 								echo '</form>';

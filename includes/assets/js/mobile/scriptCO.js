@@ -309,7 +309,13 @@ function initialisationModification(idCollector)
       afficherOther('speaker_2', 'other_name_2');
     }
     else
+    {
+      // Si le speaker ne fait plus partie de l'équipe, on propose tout de même de pouvoir le choisir en cas de modification
+      if (listeUsers[speaker]['team'] != equipeUser)
+        $('#speaker_2').prepend('<option value="' + speaker + '" selected>' + listeUsers[speaker]['pseudo'] + '</option>');
+
       $('#zone_saisie_image').find('.saisie_speaker').val(speaker);
+    }
 
     // Date
     $('#zone_saisie_image').find('.saisie_date_collector').val(dateCollector);
@@ -342,7 +348,13 @@ function initialisationModification(idCollector)
       afficherOther('speaker', 'other_name');
     }
     else
+    {
+      // Si le speaker ne fait plus partie de l'équipe, on propose tout de même de pouvoir le choisir en cas de modification
+      if (listeUsers[speaker]['team'] != equipeUser)
+        $('#speaker').prepend('<option value="' + speaker + '" selected>' + listeUsers[speaker]['pseudo'] + '</option>');
+
       $('#zone_saisie_collector').find('.saisie_speaker').val(speaker);
+    }
 
     // Date
     $('#zone_saisie_collector').find('.saisie_date_collector').val(dateCollector);
@@ -392,6 +404,24 @@ function resetSaisie(typeCollector)
       // Identifiants phrase / image culte
       $('#zone_saisie_collector').find('#id_saisie_collector').val('');
       $('#zone_saisie_image').find('#id_saisie_image').val('');
+
+      // Listbox speaker
+      if (typeCollector == 'I')
+      {
+        $.each($('#speaker_2').find('option'), function()
+        {
+          if (this.value != '' && this.value != 'other' && listeUsers[this.value] != null && listeUsers[this.value]['team'] != equipeUser)
+            this.remove();
+        });
+      }
+      else
+      {
+        $.each($('#speaker').find('option'), function()
+        {
+          if (this.value != '' && this.value != 'other' && listeUsers[this.value] != null && listeUsers[this.value]['team'] != equipeUser)
+            this.remove();
+        });
+      }
 
       // Champs "Autre"
       $('#zone_saisie_collector').find('.saisie_speaker').val('');

@@ -5,6 +5,7 @@
     private $identifiant;
     private $pseudo;
     private $avatar;
+    private $team;
     private $week;
     private $year;
     private $cooked;
@@ -21,6 +22,7 @@
       $this->identifiant = '';
       $this->pseudo      = '';
       $this->avatar      = '';
+      $this->team        = '';
       $this->week        = '';
       $this->year        = '';
       $this->cooked      = '';
@@ -48,6 +50,9 @@
 
       if (isset($data['identifiant']))
         $this->identifiant = $data['identifiant'];
+
+      if (isset($data['team']))
+        $this->team        = $data['team'];
 
       if (isset($data['week']))
         $this->week        = $data['week'];
@@ -80,6 +85,7 @@
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
       $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setWeek(htmlspecialchars($data->getWeek()));
       $data->setYear(htmlspecialchars($data->getYear()));
       $data->setCooked(htmlspecialchars($data->getCooked()));
@@ -133,6 +139,17 @@
     public function getAvatar()
     {
       return $this->avatar;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Semaine

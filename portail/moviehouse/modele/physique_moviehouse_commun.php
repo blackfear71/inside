@@ -144,7 +144,7 @@
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet User à partir des données remontées de la bdd
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
       $user = Profile::withData($data);
 
       // Création tableau de correspondance identifiant / pseudo / avatar

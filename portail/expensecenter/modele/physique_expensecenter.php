@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture des utilisateurs inscrits
   // RETOUR : Liste des utilisateurs
-  function physiqueUsers()
+  function physiqueUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -14,9 +14,15 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, expenses
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, expenses
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I"
+                        WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
+                        OR EXISTS (SELECT id, team, buyer
+                                   FROM expense_center
+                                   WHERE expense_center.buyer = users.identifiant AND expense_center.team = "' . $equipe . '")
+                        OR EXISTS (SELECT id, team, identifiant
+                                   FROM expense_center_users
+                                   WHERE expense_center_users.identifiant = users.identifiant AND expense_center_users.team = "' . $equipe . '")
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
@@ -25,7 +31,7 @@
       $user = Profile::withData($data);
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+      $listeUsers[$user->getIdentifiant()] = $user;
     }
 
     $req->closeCursor();
@@ -62,7 +68,7 @@
 
   // PHYSIQUE : Lecture nombre de lignes existantes pour une année
   // RETOUR : Booléen
-  function physiqueAnneeExistante($annee)
+  function physiqueAnneeExistante($annee, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
@@ -72,7 +78,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM expense_center
-                        WHERE SUBSTR(date, 1, 4) = "' . $annee . '"');
+                        WHERE team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = "' . $annee . '"');
 
     $data = $req->fetch();
 
@@ -87,7 +93,7 @@
 
   // PHYSIQUE : Lecture des années existantes
   // RETOUR : Liste des années
-  function physiqueOnglets()
+  function physiqueOnglets($equipe)
   {
     // Initialisations
     $onglets = array();
@@ -97,6 +103,7 @@
 
     $req = $bdd->query('SELECT DISTINCT SUBSTR(date, 1, 4)
                         FROM expense_center
+                        WHERE team = "' . $equipe . '"
                         ORDER BY SUBSTR(date, 1, 4) DESC');
 
     while ($data = $req->fetch())
@@ -113,7 +120,7 @@
 
   // PHYSIQUE : Lecture des dépenses
   // RETOUR : Liste des dépenses
-  function physiqueDepenses($annee, $filtre, $identifiant)
+  function physiqueDepenses($annee, $filtre, $identifiant, $equipe)
   {
     // Initialisations
     $listeDepenses = array();
@@ -126,7 +133,7 @@
       case 'myExpenses':
         $req = $bdd->query('SELECT *
                             FROM expense_center
-                            WHERE SUBSTR(date, 1, 4) = ' . $annee . ' AND buyer = "' . $identifiant . '"
+                            WHERE (team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = ' . $annee . ' AND buyer = "' . $identifiant . '")
                             ORDER BY date DESC, id DESC');
         break;
 
@@ -134,7 +141,7 @@
       $req = $bdd->query('SELECT expense_center.*
                           FROM expense_center
                           LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
-                          WHERE SUBSTR(expense_center.date, 1, 4) = ' . $annee . ' AND expense_center_users.identifiant = "' . $identifiant . '"
+                          WHERE (expense_center.team = "' . $equipe . '" AND SUBSTR(expense_center.date, 1, 4) = ' . $annee . ' AND expense_center_users.identifiant = "' . $identifiant . '")
                           ORDER BY expense_center.date DESC, expense_center.id DESC');
         break;
 
@@ -142,7 +149,7 @@
       default:
         $req = $bdd->query('SELECT *
                             FROM expense_center
-                            WHERE SUBSTR(date, 1, 4) = ' . $annee . '
+                            WHERE (team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = ' . $annee . ')
                             ORDER BY date DESC, id DESC');
         break;
     }
@@ -253,12 +260,14 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO expense_center(date,
+    $req = $bdd->prepare('INSERT INTO expense_center(team,
+                                                     date,
                                                      price,
                                                      buyer,
                                                      comment,
                                                      type)
-                                             VALUES(:date,
+                                             VALUES(:team,
+                                                    :date,
                                                     :price,
                                                     :buyer,
                                                     :comment,
@@ -282,9 +291,11 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO expense_center_users(id_expense,
+                                                           team,
                                                            identifiant,
                                                            parts)
                                                    VALUES(:id_expense,
+                                                          :team,
                                                           :identifiant,
                                                           :parts)');
 

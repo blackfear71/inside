@@ -32,16 +32,16 @@
       else
       {
         // Vérification année existante
-        $anneeExistante = controlYear($_GET['year']);
+        $anneeExistante = controlYear($_GET['year'], $_SESSION['user']['equipe']);
 
         // Récupération des onglets (années)
-        $onglets = getOnglets();
+        $onglets = getOnglets($_SESSION['user']['equipe']);
 
         // Récupération de la liste des mois de l'année
         $listeMois = getMonthsCalendars();
 
         // Récupération de la liste des calendriers
-        $calendriers = getCalendars($_GET['year']);
+        $calendriers = getCalendars($_GET['year'], $_SESSION['user']['equipe']);
 
         // Récupération des préférences de l'utilisateur
         $preferences = getPreferences($_SESSION['user']['identifiant']);
@@ -50,10 +50,10 @@
 
     case 'goConsulterAnnexes':
       // Récupération des onglets (années)
-      $onglets = getOnglets();
+      $onglets = getOnglets($_SESSION['user']['equipe']);
 
       // Récupération de la liste des annexes
-      $annexes = getAnnexes();
+      $annexes = getAnnexes($_SESSION['user']['equipe']);
 
       // Récupération des préférences de l'utilisateur
       $preferences = getPreferences($_SESSION['user']['identifiant']);

@@ -39,41 +39,41 @@
         initializeSaveSession();
 
         // Récupération des informations de la semaine en cours
-        $currentWeek = getWeek(date('W'), date('Y'));
+        $currentWeek = getWeek($_SESSION['user']['equipe'], date('W'), date('Y'));
 
         // Récupération des informations de la semaine suivante
-        $nextWeek = getWeek(date('W', strtotime('+ 1 week')), date('Y'));
+        $nextWeek = getWeek($_SESSION['user']['equipe'], date('W', strtotime('+ 1 week')), date('Y'));
 
         // Récupération de la liste des utilisateurs
-        $listeCookers = getUsers();
+        $listeCookers = getUsers($_SESSION['user']['equipe']);
 
         // Détermination des semaines de saisie possible pour l'utilisateur
-        $listeSemaines = getWeeks($_SESSION['user']['identifiant']);
+        $listeSemaines = getWeeks($_SESSION['user']);
 
         // Vérification année existante
-        $anneeExistante = controlYear($_GET['year']);
+        $anneeExistante = controlYear($_GET['year'], $_SESSION['user']['equipe']);
 
         // Récupération des onglets (années)
-        $onglets = getOnglets();
+        $onglets = getOnglets($_SESSION['user']['equipe']);
 
         // Récupération des recettes
-        $recettes = getRecipes($_GET['year'], $listeCookers);
+        $recettes = getRecipes($_GET['year'], $_SESSION['user']['equipe'], $listeCookers);
       }
       break;
 
     case 'doModifier':
       // Modification d'une semaine (utilisateur choisi)
-      updateCake($_POST);
+      updateCake($_POST, $_SESSION['user']['equipe']);
       break;
 
     case 'doValider':
       // Validation d'une semaine (par l'utilisateur choisi)
-      validateCake('Y', $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
+      validateCake('Y', $_POST['week_cake'], date('Y'), $_SESSION['user']);
       break;
 
     case 'doAnnuler':
       // Annulation de la validation d'une semaine (par l'utilisateur choisi)
-      validateCake('N', $_POST['week_cake'], date('Y'), $_SESSION['user']['identifiant']);
+      validateCake('N', $_POST['week_cake'], date('Y'), $_SESSION['user']);
       break;
 
     case 'doAjouterRecette':
@@ -81,7 +81,7 @@
       $year = $_POST['year_recipe'];
 
       // Insertion d'une recette
-      $idRecette = insertRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $idRecette = insertRecipe($_POST, $_FILES, $_SESSION['user']);
       break;
 
     case 'doModifierRecette':
@@ -89,12 +89,12 @@
       $year = $_POST['hidden_year_recipe'];
 
       // Modification d'une recette
-      $idRecette = updateRecipe($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $idRecette = updateRecipe($_POST, $_FILES, $_SESSION['user']);
       break;
 
     case 'doSupprimerRecette':
       // Suppression d'une recette
-      deleteRecipe($_POST, $_GET['year'], $_SESSION['user']['identifiant']);
+      deleteRecipe($_POST, $_GET['year'], $_SESSION['user']);
       break;
 
     default:
@@ -144,7 +144,7 @@
 
       // Conversion JSON
       $listeSemainesJson = json_encode($listeSemaines);
-      $listeCookersJson  = json_encode($listeCookers);
+      $listeCookersJson  = json_encode(convertForJsonListeCookers($listeCookers, $_SESSION['user']['equipe']));
       $recettesJson      = json_encode(convertForJsonListeRecettes($recettes));
       break;
 

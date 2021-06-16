@@ -14,7 +14,7 @@
       else
         $_SESSION['alerts']['empty_calendar'] = true;
 
-      $control_ok                             = false;
+      $control_ok = false;
     }
 
     // Retour

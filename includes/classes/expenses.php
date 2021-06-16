@@ -2,6 +2,7 @@
   class Expenses
   {
     private $id;
+    private $team;
     private $date;
     private $price;
     private $buyer;
@@ -17,6 +18,7 @@
     public function __construct()
     {
       $this->id       = 0;
+      $this->team     = '';
       $this->date     = '';
       $this->price    = '';
       $this->buyer    = '';
@@ -44,6 +46,9 @@
       if (isset($data['id']))
         $this->id      = $data['id'];
 
+      if (isset($data['team']))
+        $this->team    = $data['team'];
+
       if (isset($data['date']))
         $this->date    = $data['date'];
 
@@ -63,6 +68,7 @@
     // Sécurisation des données
     public static function secureData($data)
     {
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setDate(htmlspecialchars($data->getDate()));
       $data->setPrice(htmlspecialchars($data->getPrice()));
       $data->setBuyer(htmlspecialchars($data->getBuyer()));
@@ -89,6 +95,17 @@
     public function getId()
     {
       return $this->id;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Date
@@ -209,6 +226,7 @@
     private $identifiant;
     private $pseudo;
     private $avatar;
+    private $team;
     private $parts;
     private $inscrit;
 
@@ -220,6 +238,7 @@
       $this->identifiant    = '';
       $this->pseudo         = '';
       $this->avatar         = '';
+      $this->team           = '';
       $this->parts          = 0;
       $this->inscrit        = true;
     }
@@ -242,6 +261,9 @@
       if (isset($data['id_expense']))
         $this->id_expense  = $data['id_expense'];
 
+      if (isset($data['team']))
+        $this->team        = $data['team'];
+
       if (isset($data['identifiant']))
         $this->identifiant = $data['identifiant'];
 
@@ -255,6 +277,7 @@
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
       $data->setAvatar(htmlspecialchars($data->getAvatar()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setParts(htmlspecialchars($data->getParts()));
     }
 
@@ -312,6 +335,17 @@
     public function getAvatar()
     {
       return $this->avatar;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Parts ou montant

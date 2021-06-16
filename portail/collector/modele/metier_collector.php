@@ -1,6 +1,5 @@
 <?php
   include_once('../../includes/classes/collectors.php');
-  include_once('../../includes/classes/profile.php');
 
   // METIER : Initialise les données de sauvegarde en session
   // RETOUR : Aucun
@@ -27,10 +26,10 @@
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Tableau d'utilisateurs
-  function getUsers()
+  function getUsers($equipe)
   {
     // Récupération de la liste des utilisateurs (sauf ceux en cours d'inscription)
-    $listeUsers = physiqueUsers();
+    $listeUsers = physiqueUsers($equipe);
 
     // Retour
     return $listeUsers;
@@ -38,10 +37,17 @@
 
   // METIER : Calcule le pourcentage de votes nécessaire pour devenir top culte
   // RETOUR : Minimum pour être top culte
-  function getMinGolden($listeUsers)
+  function getMinGolden($listeUsers, $equipe)
   {
-    // Récupération du nombre d'utilisateurs inscrits
-    $nombreUsers = count($listeUsers);
+    // Initialisations
+    $nombreUsers = 0;
+
+    // Récupération du nombre d'utilisateurs inscrits de l'équipe
+    foreach ($listeUsers as $user)
+    {
+      if ($user['team'] == $equipe)
+        $nombreUsers++;
+    }
 
     // Calcul du minimum pour être culte (vérification minimum > 1)
     if ($nombreUsers == 1)
@@ -77,13 +83,17 @@
 
   // METIER : Lecture nombre de pages en fonction du filtre
   // RETOUR : Nombre de pages
-  function getPages($filtre, $identifiant, $minGolden)
+  function getPages($filtre, $sessionUser, $minGolden)
   {
     // Initialisations
     $nombreParPage = 18;
 
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Lecture du nombre total de phrases cultes pour chaque filtre
-    $nombreCollectors = physiqueNombreCollector($filtre, $identifiant, $minGolden);
+    $nombreCollectors = physiqueNombreCollector($filtre, $identifiant, $equipe, $minGolden);
 
     // Calcul du nombre de pages
     $nombrePages = ceil($nombreCollectors / $nombreParPage);
@@ -94,10 +104,14 @@
 
   // METIER : Lecture des phrases cultes
   // RETOUR : Liste phrases cultes
-  function getCollectors($listeUsers, $nombrePages, $minGolden, $page, $identifiant, $tri, $filtre)
+  function getCollectors($listeUsers, $nombrePages, $minGolden, $page, $sessionUser, $tri, $filtre)
   {
     // Initialisations
     $nombreParPage = 18;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Vérification dépassement dernière page
     if ($page > $nombrePages)
@@ -107,7 +121,7 @@
     $premiereEntree = ($page - 1) * $nombreParPage;
 
     // Lecture des enregistrements en fonction du filtre et du tri
-    $listeCollectors = physiqueCollectors($tri, $filtre, $nombreParPage, $premiereEntree, $identifiant, $minGolden);
+    $listeCollectors = physiqueCollectors($tri, $filtre, $nombreParPage, $premiereEntree, $identifiant, $equipe, $minGolden);
 
     // Récupération des données complémentaires
     foreach ($listeCollectors as $collector)
@@ -160,6 +174,7 @@
                          'type_speaker'   => $collectorAConvertir->getType_speaker(),
                          'date_collector' => $collectorAConvertir->getDate_collector(),
                          'type_collector' => $collectorAConvertir->getType_collector(),
+                         'team'           => $collectorAConvertir->getTeam(),
                          'collector'      => $collectorAConvertir->getCollector(),
                          'context'        => $collectorAConvertir->getContext(),
                          'nb_votes'       => $collectorAConvertir->getNb_votes(),
@@ -190,13 +205,16 @@
 
   // METIER : Insertion phrases / images cultes
   // RETOUR : Id collector
-  function insertCollector($post, $files, $identifiant, $isMobile)
+  function insertCollector($post, $files, $sessionUser, $isMobile)
   {
     // Initialisations
     $idCollector = NULL;
     $control_ok  = true;
 
     // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $team        = $sessionUser['equipe'];
+
     if ($post['speaker'] == 'other')
     {
       $speaker     = $post['other_speaker'];
@@ -260,6 +278,7 @@
                          'type_speaker'   => $typeSpeaker,
                          'date_collector' => $dateCollector,
                          'type_collector' => $typeCollector,
+                         'team'           => $team,
                          'collector'      => $contenuCollector,
                          'context'        => $contexteCollector
                         );
@@ -511,9 +530,11 @@
 
   // METIER : Insertion ou mise à jour vote
   // RETOUR : Id collector
-  function voteCollector($post, $identifiant)
+  function voteCollector($post, $sessionUser)
   {
     // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
     $idCollector = $post['id_collector'];
 
     if (isset($post['smiley_1']))
@@ -553,6 +574,7 @@
       if ($vote > 0)
       {
         $voteCollector = array('id_collector' => $idCollector,
+                               'team'         => $equipe,
                                'identifiant'  => $identifiant,
                                'vote'         => $vote
                               );

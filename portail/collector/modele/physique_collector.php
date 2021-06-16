@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture des utilisateurs inscrits
   // RETOUR : Liste des utilisateurs
-  function physiqueUsers()
+  function physiqueUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -14,20 +14,24 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I"
+                        WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
+                        OR EXISTS (SELECT id, author, speaker, team
+                                   FROM collector
+                                   WHERE (collector.author = users.identifiant OR collector.speaker = users.identifiant) AND collector.team = "' . $equipe . '" AND collector.type_speaker != "other")
+                        OR EXISTS (SELECT id, team, identifiant
+                                   FROM collector_users
+                                   WHERE collector_users.identifiant = users.identifiant AND collector_users.team = "' . $equipe . '")
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $user = Profile::withData($data);
-
       // Création tableau de correspondance identifiant / pseudo / avatar
-      $listeUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
-                                                   'avatar' => $user->getAvatar()
-                                                  );
+      $listeUsers[$data['identifiant']] = array('team'   => $data['team'],
+                                                'pseudo' => $data['pseudo'],
+                                                'avatar' => $data['avatar']
+                                               );
     }
 
     $req->closeCursor();
@@ -38,7 +42,7 @@
 
   // PHYSIQUE : Lecture du nombre de phrases cultes en fonction du filtre
   // RETOUR : Nombre de phrases cultes
-  function physiqueNombreCollector($filtre, $identifiant, $minGolden)
+  function physiqueNombreCollector($filtre, $identifiant, $equipe, $minGolden)
   {
     // Initialisations
     $nombreCollectors = 0;
@@ -49,52 +53,62 @@
     switch ($filtre)
     {
       case 'noVote':
-        $req = $bdd->query('SELECT COUNT(*)
-                            AS nombreCollector
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
                             FROM collector
-                            WHERE NOT EXISTS (SELECT id, id_collector, identifiant
-                                              FROM collector_users
-                                              WHERE (collector.id = collector_users.id_collector
-                                              AND    collector_users.identifiant = "' . $identifiant . '"))');
-
+                            WHERE team = "' . $equipe . '" AND NOT EXISTS (SELECT id, id_collector, identifiant
+                                                                           FROM collector_users
+                                                                           WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))');
         break;
 
       case 'meOnly':
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector WHERE speaker = "' . $identifiant . '"');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '" AND speaker = "' . $identifiant . '"');
         break;
 
       case 'byMe':
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector WHERE author = "' . $identifiant . '"');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '" AND author = "' . $identifiant . '"');
         break;
 
       case 'usersOnly':
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector WHERE (type_speaker = "user" AND speaker != "' . $identifiant . '")');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '" AND type_speaker = "user" AND speaker != "' . $identifiant . '"');
         break;
 
       case 'othersOnly':
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector WHERE type_speaker = "other"');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '" AND type_speaker = "other"');
         break;
 
       case 'textOnly':
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector WHERE type_collector = "T"');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '" AND type_collector = "T"');
         break;
 
       case 'picturesOnly':
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector WHERE type_collector = "I"');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '" AND type_collector = "I"');
         break;
 
       case 'topCulte':
-        $req = $bdd->query('SELECT COUNT(*)
-                            AS nombreCollector
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
                             FROM collector
-                            WHERE (SELECT COUNT(*)
-                                   FROM collector_users
-                                   WHERE collector_users.id_collector = collector.id) >= ' . $minGolden);
+                            WHERE team = "' . $equipe . '" AND (SELECT COUNT(*)
+                                                                FROM collector_users
+                                                                WHERE collector_users.id_collector = collector.id) >= ' . $minGolden);
         break;
 
       case 'none':
       default:
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector FROM collector');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE team = "' . $equipe . '"');
         break;
     }
 
@@ -111,7 +125,7 @@
 
   // PHYSIQUE : Lecture des phrases cultes en fonction du filtre et du tri
   // RETOUR : Liste des phrases cultes
-  function physiqueCollectors($tri, $filtre, $nombreParPage, $premiereEntree, $identifiant, $minGolden)
+  function physiqueCollectors($tri, $filtre, $nombreParPage, $premiereEntree, $identifiant, $equipe, $minGolden)
   {
     // Initialisations
     $listeCollectors = array();
@@ -138,10 +152,9 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE NOT EXISTS (SELECT id, id_collector, identifiant
-                                              FROM collector_users
-                                              WHERE (collector.id = collector_users.id_collector
-                                              AND    collector_users.identifiant = "' . $identifiant . '"))
+                            WHERE collector.team = "' . $equipe . '" AND NOT EXISTS (SELECT id, id_collector, identifiant
+                                                                                     FROM collector_users
+                                                                                     WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -150,7 +163,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (collector.speaker = "' . $identifiant . '")
+                            WHERE collector.team = "' . $equipe . '" AND collector.speaker = "' . $identifiant . '"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -159,7 +172,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (collector.author = "' . $identifiant . '")
+                            WHERE collector.team = "' . $equipe . '" AND collector.author = "' . $identifiant . '"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -168,7 +181,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (collector.type_speaker = "user" AND collector.speaker != "' . $identifiant . '")
+                            WHERE collector.team = "' . $equipe . '" AND collector.type_speaker = "user" AND collector.speaker != "' . $identifiant . '"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -177,7 +190,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (collector.type_speaker = "other")
+                            WHERE collector.team = "' . $equipe . '" AND collector.type_speaker = "other"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -186,7 +199,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (collector.type_collector = "T")
+                            WHERE collector.team = "' . $equipe . '" AND collector.type_collector = "T"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -195,7 +208,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (collector.type_collector = "I")
+                            WHERE collector.team = "' . $equipe . '" AND collector.type_collector = "I"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -204,9 +217,9 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                            WHERE (SELECT COUNT(collector_users.id)
-                                   FROM collector_users
-                                   WHERE collector_users.id_collector = collector.id) >= ' . $minGolden . '
+                            WHERE collector.team = "' . $equipe . '" AND (SELECT COUNT(collector_users.id)
+                                                                          FROM collector_users
+                                                                          WHERE collector_users.id_collector = collector.id) >= ' . $minGolden . '
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -216,6 +229,7 @@
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                             FROM collector
                             LEFT JOIN collector_users ON collector.id = collector_users.id_collector
+                            WHERE collector.team = "' . $equipe . '"
                             GROUP BY collector.id
                             ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -451,6 +465,7 @@
                                                 type_speaker,
                                                 date_collector,
                                                 type_collector,
+                                                team,
                                                 collector,
                                                 context)
                                         VALUES(:date_add,
@@ -459,6 +474,7 @@
                                                :type_speaker,
                                                :date_collector,
                                                :type_collector,
+                                               :team,
                                                :collector,
                                                :context)');
 
@@ -480,9 +496,11 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO collector_users(id_collector,
+                                                      team,
                                                       identifiant,
                                                       vote)
                                               VALUES(:id_collector,
+                                                     :team,
                                                      :identifiant,
                                                      :vote)');
 

@@ -4,14 +4,14 @@
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
-  function controlYear($year)
+  function controlYear($year, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
 
     // Vérification année présente en base
     if (isset($year) AND is_numeric($year))
-      $anneeExistante = physiqueAnneeExistante($year);
+      $anneeExistante = physiqueAnneeExistante($year, $equipe);
 
     // Retour
     return $anneeExistante;
@@ -19,10 +19,10 @@
 
   // METIER : Lecture années distinctes pour les onglets
   // RETOUR : Liste des années existantes
-  function getOnglets()
+  function getOnglets($equipe)
   {
     // Récupération de la liste des années existantes
-    $onglets = physiqueOnglets();
+    $onglets = physiqueOnglets($equipe);
 
     // Retour
     return $onglets;
@@ -53,10 +53,10 @@
 
   // METIER : Lecture calendriers pour l'année renseignée
   // RETOUR : Liste des calendriers
-  function getCalendars($year)
+  function getCalendars($year, $equipe)
   {
     // Récupération de la liste des calendriers
-    $listeCalendriers = physiqueCalendriers($year);
+    $listeCalendriers = physiqueCalendriers($year, $equipe);
 
     // Retour
     return $listeCalendriers;
@@ -64,10 +64,10 @@
 
   // METIER : Lecture annexes des calendriers
   // RETOUR : Liste des annexes
-  function getAnnexes()
+  function getAnnexes($equipe)
   {
     // Récupération de la liste des annexes
-    $listeAnnexes = physiqueAnnexes();
+    $listeAnnexes = physiqueAnnexes($equipe);
 
     // Retour
     return $listeAnnexes;
@@ -111,17 +111,19 @@
 
   // METIER : Ajout calendrier avec création miniature
   // RETOUR : Année
-  function insertCalendrier($post, $files, $identifiant)
+  function insertCalendrier($post, $files, $sessionUser)
   {
     // Initialisations
     $control_ok = true;
 
     // Récupération des données
-    $month    = $post['month_calendar'];
-    $year     = $post['year_calendar'];
-    $toDelete = 'N';
-    $name     = $post['month_calendar'] . '-' . $post['year_calendar'] . '-' . rand();
-    $folder   = '../../includes/images/calendars/' . $year;
+    $identifiant = $sessionUser['identifiant'];
+    $team        = $sessionUser['equipe'];
+    $month       = $post['month_calendar'];
+    $year        = $post['year_calendar'];
+    $toDelete    = 'N';
+    $name        = $post['month_calendar'] . '-' . $post['year_calendar'] . '-' . rand();
+    $folder      = '../../includes/images/calendars/' . $year;
 
     // Insertion image
     $nameCalendar = uploadImage($files, $name, 'calendar', $folder);
@@ -133,6 +135,7 @@
     if ($control_ok == true)
     {
       $calendar = array('to_delete' => $toDelete,
+                        'team'      => $team,
                         'month'     => $month,
                         'year'      => $year,
                         'calendar'  => $nameCalendar
@@ -153,15 +156,17 @@
 
   // METIER : Ajout annexe avec création miniature
   // RETOUR : Aucun
-  function insertAnnexe($post, $files, $identifiant)
+  function insertAnnexe($post, $files, $sessionUser)
   {
     // Initialisations
     $control_ok = true;
 
     // Récupération des données
-    $toDelete = 'N';
-    $title    = $post['title'];
-    $folder   = '../../includes/images/calendars/annexes';
+    $identifiant = $sessionUser['identifiant'];
+    $team        = $sessionUser['equipe'];
+    $toDelete    = 'N';
+    $title       = $post['title'];
+    $folder      = '../../includes/images/calendars/annexes';
 
     // Insertion image
     $nameAnnexe = uploadImage($files, rand(), 'annexe', $folder);
@@ -173,6 +178,7 @@
     if ($control_ok == true)
     {
       $annexe = array('to_delete' => $toDelete,
+                      'team'      => $team,
                       'annexe'    => $nameAnnexe,
                       'title'     => $title
                      );
@@ -541,15 +547,17 @@
 
   // METIER : Sauvegarde du calendrier généré
   // RETOUR : Année
-  function insertCalendrierGenere($post, $identifiant)
+  function insertCalendrierGenere($post, $sessionUser)
   {
     // Récupération des données
-    $picture  = $post['calendar_generator'];
-    $month    = $post['month_generator'];
-    $year     = $post['year_generator'];
-    $tempName = $post['temp_name_generator'];
-    $toDelete = 'N';
-    $name     = $post['month_generator'] . '-' . $post['year_generator'] . '-' . rand() . '.jpg';
+    $identifiant = $sessionUser['identifiant'];
+    $team        = $sessionUser['equipe'];
+    $picture     = $post['calendar_generator'];
+    $month       = $post['month_generator'];
+    $year        = $post['year_generator'];
+    $tempName    = $post['temp_name_generator'];
+    $toDelete    = 'N';
+    $name        = $post['month_generator'] . '-' . $post['year_generator'] . '-' . rand() . '.jpg';
 
     // Décodage du flux de l'image
     $encodedPicture = str_replace(' ', '+', substr($picture, strpos($picture, ',') + 1));
@@ -578,6 +586,7 @@
 
     // Insertion de l'enregistrement en base
     $calendar = array('to_delete' => $toDelete,
+                      'team'      => $team,
                       'month'     => $month,
                       'year'      => $year,
                       'calendar'  => $name
@@ -700,14 +709,16 @@
 
   // METIER : Sauvegarde de l'annexe générée
   // RETOUR : Année
-  function insertAnnexeGeneree($post, $identifiant)
+  function insertAnnexeGeneree($post, $sessionUser)
   {
     // Récupération des données
-    $picture  = $post['annexe_generator'];
-    $tempName = $post['temp_name_annexe_generator'];
-    $toDelete = 'N';
-    $title    = $post['title_generator'];
-    $name     = rand() . '.jpg';
+    $identifiant = $sessionUser['identifiant'];
+    $team        = $sessionUser['equipe'];
+    $picture     = $post['annexe_generator'];
+    $tempName    = $post['temp_name_annexe_generator'];
+    $toDelete    = 'N';
+    $title       = $post['title_generator'];
+    $name        = rand() . '.jpg';
 
     // Décodage du flux de l'image
     $encodedPicture = str_replace(' ', '+', substr($picture, strpos($picture, ',') + 1));
@@ -733,6 +744,7 @@
 
     // Insertion de l'enregistrement en base
     $annexe = array('to_delete' => $toDelete,
+                    'team'      => $team,
                     'annexe'    => $name,
                     'title'     => $title
                    );

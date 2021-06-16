@@ -11,6 +11,7 @@
     private $type_speaker;
     private $date_collector;
     private $type_collector;
+    private $team;
     private $collector;
     private $context;
     private $nb_votes;
@@ -30,6 +31,7 @@
       $this->type_speaker   = '';
       $this->date_collector = '';
       $this->type_collector = '';
+      $this->team           = '';
       $this->collector      = '';
       $this->context        = '';
       $this->nb_votes       = 0;
@@ -70,6 +72,9 @@
       if (isset($data['type_collector']))
         $this->type_collector = $data['type_collector'];
 
+      if (isset($data['team']))
+        $this->team           = $data['team'];
+
       if (isset($data['collector']))
         $this->collector      = $data['collector'];
 
@@ -89,6 +94,7 @@
       $data->setType_speaker(htmlspecialchars($data->getType_speaker()));
       $data->setDate_collector(htmlspecialchars($data->getDate_collector()));
       $data->setType_collector(htmlspecialchars($data->getType_collector()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setCollector(htmlspecialchars($data->getCollector()));
       $data->setContext(htmlspecialchars($data->getContext()));
       $data->setNb_votes(htmlspecialchars($data->getNb_votes()));
@@ -220,6 +226,17 @@
     public function getType_collector()
     {
       return $this->type_collector;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Phrase collector

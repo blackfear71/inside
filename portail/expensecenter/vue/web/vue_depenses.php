@@ -66,8 +66,8 @@
 
               // Actions
               echo '<div class="zone_actions_depense">';
-                // Modifier
-                if (!empty($depense->getPseudo()))
+                // Modifier (on ne permet pas la modification si l'acheteur n'est plus dans la même équipe ou désisncrit)
+                if (!empty($depense->getPseudo()) AND $depense->getTeam() == $listeUsers[$depense->getBuyer()]->getTeam())
                 {
                   echo '<a id="modifier_depense_' . $depense->getId() . '" title="Modifier" class="lien_depense modifierDepense">';
                     echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="icone_depense" />';
