@@ -912,7 +912,7 @@ function afficherListboxLieuxResume(id)
 // Affiche la listbox des restaurants associés (résumé)
 function afficherListboxRestaurantsResume(id, zone)
 {
-  var lieu      = $('#' + id).val();
+  var lieu      = escapeHtml($('#' + id).val());
   var num       = id.substr(-1);
   var idSelect2 = 'select_restaurant_resume_' + num;
   var idReplace = 'no_proposal_' + num;

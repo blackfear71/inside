@@ -48,10 +48,10 @@
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Liste des utilisateurs
-  function getUsers($equipe)
+  function getUsers($annee, $equipe)
   {
     // Récupération de la liste des utilisateurs
-    $listeUsers = physiqueUsers($equipe);
+    $listeUsers = physiqueUsers($annee, $equipe);
 
     // Retour
     return $listeUsers;

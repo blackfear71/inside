@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture types de restaurants
   // RETOUR : Types concaténés
-  function physiqueTypesRestaurants()
+  function physiqueTypesRestaurants($equipe)
   {
     // Initialisations
     $types = '';
@@ -15,7 +15,8 @@
     global $bdd;
 
     $req = $bdd->query('SELECT DISTINCT types
-                        FROM food_advisor_restaurants');
+                        FROM food_advisor_restaurants
+                        WHERE team = "' . $equipe . '"');
 
     while ($data = $req->fetch())
     {
@@ -37,11 +38,12 @@
   {
     // Initialisations
     $newId = NULL;
-    
+
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO food_advisor_restaurants(name,
+    $req = $bdd->prepare('INSERT INTO food_advisor_restaurants(team,
+                                                               name,
                                                                picture,
                                                                types,
                                                                location,
@@ -53,7 +55,8 @@
                                                                plan,
                                                                lafourchette,
                                                                description)
-                                                       VALUES(:name,
+                                                       VALUES(:team,
+                                                              :name,
                                                               :picture,
                                                               :types,
                                                               :location,

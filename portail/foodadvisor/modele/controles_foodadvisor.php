@@ -73,13 +73,13 @@
 
   // CONTROLE : Choix existant à date
   // RETOUR : Booléen
-  function controleChoixExistantDate($date)
+  function controleChoixExistantDate($date, $equipe)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    $exist = physiqueChoixExistantDate($date);
+    $exist = physiqueChoixExistantDate($date, $equipe);
 
     if ($exist == true)
     {

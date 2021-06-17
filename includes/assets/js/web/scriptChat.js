@@ -630,46 +630,6 @@ $(window).on('load', function()
     return isScrollBottom;
   }
 
-  // Encodage des caractères spéciaux
-  function escapeHtml(str)
-  {
-    var map =
-    {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-
-    replace = str.replace(/[&<>"']/g, function(m)
-    {
-      return map[m];
-    });
-
-    return replace;
-  }
-
-  // Décodage des caractères spéciaux
-  function decodeHtml(str)
-  {
-    var map =
-    {
-      '&amp;' : '&',
-      '&lt;'  : '<',
-      '&gt;'  : '>',
-      '&quot;': '"',
-      '&#039;': "'"
-    };
-
-    replace = str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m)
-    {
-      return map[m];
-    });
-
-    return replace;
-  }
-
   // Remplace les smileys
   function changeSmileys(text)
   {

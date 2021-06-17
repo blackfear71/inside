@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture des utilisateurs inscrits
   // RETOUR : Liste des utilisateurs
-  function physiqueUsers($equipe)
+  function physiqueUsers($annee, $equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -17,9 +17,9 @@
     $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, expenses
                         FROM users
                         WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                        OR EXISTS (SELECT id, team, buyer
+                        OR EXISTS (SELECT id, team, date, buyer
                                    FROM expense_center
-                                   WHERE expense_center.buyer = users.identifiant AND expense_center.team = "' . $equipe . '")
+                                   WHERE expense_center.buyer = users.identifiant AND expense_center.team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = "' . $annee . '")
                         OR EXISTS (SELECT id, team, identifiant
                                    FROM expense_center_users
                                    WHERE expense_center_users.identifiant = users.identifiant AND expense_center_users.team = "' . $equipe . '")

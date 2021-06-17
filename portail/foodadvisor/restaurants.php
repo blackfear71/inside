@@ -35,28 +35,28 @@
       initializeSaveSession();
 
       // Récupération des lieux
-      $listeLieux = getLieux();
+      $listeLieux = getLieux($_SESSION['user']['equipe']);
 
       // Récupération des types de restaurants
-      $listeTypes = getTypesRestaurants();
+      $listeTypes = getTypesRestaurants($_SESSION['user']['equipe']);
 
       // Récupération de la liste des restaurants
-      $listeRestaurants = getListeRestaurants($listeLieux);
+      $listeRestaurants = getListeRestaurants($listeLieux, $_SESSION['user']['equipe']);
 
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Récupération des tops d'actions rapides
       $choixRapide = getFastActions($isSolo);
 
       // Lecture des choix utilisateurs
       if ($choixRapide == true)
-        $mesChoix = getMyChoices($_SESSION['user']['identifiant']);
+        $mesChoix = getMyChoices($_SESSION['user']);
       break;
 
     case 'doAjouter':
       // Insertion d'un nouveau restaurant
-      $idRestaurant = insertRestaurant($_POST, $_FILES, $_SESSION['user']['identifiant']);
+      $idRestaurant = insertRestaurant($_POST, $_FILES, $_SESSION['user']);
       break;
 
     case 'doModifier':
@@ -71,10 +71,10 @@
 
     case 'doChoixRapide':
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Insertion d'un choix rapide
-      $idRestaurant = insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      $idRestaurant = insertFastChoice($_POST, $isSolo, $_SESSION['user']);
       break;
 
     default:

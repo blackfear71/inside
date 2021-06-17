@@ -345,7 +345,7 @@
 {
 	display: inline-block;
 	text-align: center;
-	width: calc(100% - 35px);
+	width: calc(100% - 40px);
 	margin-left: -25px;
 	padding-left: 30px;
 	padding-right: 10px;
@@ -1229,6 +1229,7 @@
 	text-align: center;
 	font-family: robotomedium, Verdana, sans-serif;
 	color: #262626;
+	word-wrap: break-word;
 }
 
 .lieu_mon_choix

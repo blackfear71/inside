@@ -2,6 +2,7 @@
   class Restaurant
   {
     private $id;
+    private $team;
     private $name;
     private $picture;
     private $types;
@@ -19,6 +20,7 @@
     public function __construct()
     {
       $this->id           = 0;
+      $this->team         = '';
       $this->name         = '';
       $this->picture      = '';
       $this->types        = '';
@@ -47,6 +49,9 @@
     {
       if (isset($data['id']))
         $this->id           = $data['id'];
+
+      if (isset($data['team']))
+        $this->team         = $data['team'];
 
       if (isset($data['name']))
         $this->name         = $data['name'];
@@ -88,6 +93,7 @@
     // Sécurisation des données
     public static function secureData($data)
     {
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setName(htmlspecialchars($data->getName()));
       $data->setPicture(htmlspecialchars($data->getPicture()));
       $data->setTypes(htmlspecialchars($data->getTypes()));
@@ -112,6 +118,17 @@
     public function getId()
     {
       return $this->id;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Nom du restaurant
@@ -251,6 +268,7 @@
   {
     private $id;
     private $id_restaurant;
+    private $team;
     private $name;
     private $picture;
     private $location;
@@ -278,6 +296,7 @@
     {
       $this->id              = 0;
       $this->id_restaurant   = '';
+      $this->team            = '';
       $this->name            = '';
       $this->picture         = '';
       $this->location        = '';
@@ -319,6 +338,9 @@
       if (isset($data['id_restaurant']))
         $this->id_restaurant = $data['id_restaurant'];
 
+      if (isset($data['team']))
+        $this->team          = $data['team'];
+
       if (isset($data['date']))
         $this->date          = $data['date'];
 
@@ -332,6 +354,7 @@
     // Sécurisation des données
     public static function secureData($data)
     {
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setName(htmlspecialchars($data->getName()));
       $data->setPicture(htmlspecialchars($data->getPicture()));
       $data->setLocation(htmlspecialchars($data->getLocation()));
@@ -380,6 +403,17 @@
     public function getId_restaurant()
     {
       return $this->id_restaurant;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Restaurant
@@ -717,6 +751,7 @@
   {
     private $id;
     private $id_restaurant;
+    private $team;
     private $identifiant;
     private $date;
     private $time;
@@ -732,6 +767,7 @@
     {
       $this->id            = 0;
       $this->id_restaurant = '';
+      $this->team          = '';
       $this->identifiant   = '';
       $this->date          = '';
       $this->time          = '';
@@ -761,6 +797,9 @@
       if (isset($data['id_restaurant']))
         $this->id_restaurant = $data['id_restaurant'];
 
+      if (isset($data['team']))
+        $this->team          = $data['team'];
+
       if (isset($data['identifiant']))
         $this->identifiant   = $data['identifiant'];
 
@@ -780,6 +819,7 @@
     // Sécurisation des données
     public static function secureData($data)
     {
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
       $data->setDate(htmlspecialchars($data->getDate()));
       $data->setTime(htmlspecialchars($data->getTime()));
@@ -812,6 +852,17 @@
     public function getId_restaurant()
     {
       return $this->id_restaurant;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Identifiant

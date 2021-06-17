@@ -55,13 +55,13 @@
 
   // CONTROLE : Choix existant
   // RETOUR : Booléen
-  function controleChoixExistant($idRestaurant, $identifiant, $alerte)
+  function controleChoixExistant($idRestaurant, $identifiant, $equipe, $alerte)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    $exist = physiqueChoixExistant($idRestaurant, $identifiant);
+    $exist = physiqueChoixExistant($idRestaurant, $identifiant, $equipe);
 
     if ($exist == true)
     {

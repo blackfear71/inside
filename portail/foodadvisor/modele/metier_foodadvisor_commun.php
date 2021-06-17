@@ -4,10 +4,10 @@
 
   // METIER : Récupération de la liste des lieux
   // RETOUR : Liste des lieux
-  function getLieux()
+  function getLieux($equipe)
   {
     // Récupération de la liste des lieux
-    $listeLieux = physiqueLieux();
+    $listeLieux = physiqueLieux($equipe);
 
     // Retour
     return $listeLieux;
@@ -15,7 +15,7 @@
 
   // METIER : Récupération de la liste des restaurants
   // RETOUR : Liste des restaurants
-  function getListeRestaurants($listeLieux)
+  function getListeRestaurants($listeLieux, $equipe)
   {
     // Initialisations
     $listeRestaurants = array();
@@ -23,7 +23,7 @@
     // Récupération de la liste des restaurants pour chaque lieu
     foreach ($listeLieux as $lieu)
     {
-      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsParLieux($lieu);
+      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsParLieux($lieu, $equipe);
     }
 
     // Retour
@@ -32,10 +32,14 @@
 
   // METIER : Détermine si l'utilisateur fait bande à part
   // RETOUR : Booléen
-  function getSolo($identifiant)
+  function getSolo($sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Vérification si bande à part
-    $solo = physiqueSolo($identifiant);
+    $solo = physiqueSolo($identifiant, $equipe);
 
     // Retour
     return $solo;
@@ -43,10 +47,10 @@
 
   // METIER : Récupère les choix du jour
   // RETOUR : Liste des choix du jour (tous)
-  function getPropositions($recuperationDetails)
+  function getPropositions($equipe, $recuperationDetails)
   {
     // Récupération des différents restaurants proposés
-    $listePropositions = physiquePropositions();
+    $listePropositions = physiquePropositions($equipe);
 
     // Récupération des données de chaque restaurant
     foreach ($listePropositions as $proposition)
@@ -218,10 +222,10 @@
 
   // METIER : Vérification si réservé et retour identifiant
   // RETOUR : Identifiant réservation
-  function getReserved()
+  function getReserved($equipe)
   {
     // Récupération de l'identifiant de l'appelant
-    $appelant = physiqueIdentifiantCaller();
+    $appelant = physiqueIdentifiantCaller($equipe);
 
     // Retour
     return $appelant;
@@ -229,7 +233,7 @@
 
   // METIER : Détermine un des participants du jour n'ayant pas appelé dans la semaine
   // RETOUR : Participant pouvant appeler
-  function getCallers($idRestaurant)
+  function getCallers($idRestaurant, $equipe)
   {
     // Calcul des dates de la semaine
     $nombreJoursLundi    = 1 - date('N');
@@ -241,7 +245,7 @@
     $listeParticipants = physiqueParticipants($idRestaurant);
 
     // Récupération de la liste des appelants de la semaine
-    $listeAppelants = physiqueAppelants($lundi, $vendredi);
+    $listeAppelants = physiqueAppelants($lundi, $vendredi, $equipe);
 
     // Filtrage des participants ayant déjà appelé
     $listeParticipantsFiltres = $listeParticipants;
@@ -270,10 +274,14 @@
 
   // METIER : Récupère les choix de l'utilisateur
   // RETOUR : Liste des choix du jour (utilisateur)
-  function getMyChoices($identifiant)
+  function getMyChoices($sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération des choix de l'utilisateur
-    $listeChoix = physiqueListeChoix($identifiant);
+    $listeChoix = physiqueListeChoix($identifiant, $equipe);
 
     // Ajout des informations des restaurants
     foreach ($listeChoix as $monChoix)
@@ -292,19 +300,19 @@
 
   // METIER : Détermine celui qui réserve
   // RETOUR : Aucun
-  function setDetermination($propositions, $idRestaurant, $appelant)
+  function setDetermination($propositions, $idRestaurant, $appelant, $equipe)
   {
     // Détermination s'il y a des propositions
     if (!empty($propositions))
     {
       // Contrôle si détermination déjà existante
-      $determinationExistante = physiqueDeterminationExistante();
+      $determinationExistante = physiqueDeterminationExistante($equipe);
 
       // Si la détermination existe déjà, mise à jour
       if ($determinationExistante == true)
       {
         // Récupération des données de la détermination
-        $determination = physiqueDetermination();
+        $determination = physiqueDetermination($equipe);
 
         // Modification de l'enregistrement en base
         $nouvelleDetermination = array('id_restaurant' => $idRestaurant,
@@ -322,6 +330,7 @@
       {
         // Insertion de l'enregistrement en base
         $nouvelleDetermination = array('id_restaurant' => $idRestaurant,
+                                       'team'          => $equipe,
                                        'date'          => date('Ymd'),
                                        'caller'        => $appelant,
                                        'reserved'      => 'N'
@@ -337,31 +346,34 @@
 
   // METIER : Relance la détermination
   // RETOUR : Aucun
-  function relanceDetermination()
+  function relanceDetermination($sessionUser)
   {
+    // Récupération des données
+    $equipe = $sessionUser['equipe'];
+
     // Contrôle si détermination déjà existante
-    $determinationExistante = physiqueDeterminationExistante();
+    $determinationExistante = physiqueDeterminationExistante($equipe);
 
     // Si une détermination du jour a déjà été effectuée, on doit relancer la détermination ou éventuellement la supprimer si c'était le dernier choix
     if ($determinationExistante == true)
     {
       // Recherche du nombre de choix restants
-      $nombreChoixRestants = physiqueChoixRestants();
+      $nombreChoixRestants = physiqueChoixRestants($equipe);
 
       // Relance de la détermination si possible, sinon suppression
       if ($nombreChoixRestants > 0)
       {
         // Récupération des propositions (sans détails)
-        $propositions = getPropositions(false);
+        $propositions = getPropositions($equipe, false);
 
         // Récupération de l'Id du restaurant déterminé
         $idRestaurant = getRestaurantDetermined($propositions);
 
         // Détermination si bande à part
-        $isSolo = getSolo($_SESSION['user']['identifiant']);
+        $isSolo = getSolo($sessionUser);
 
         // Détermination si restaurant réservé
-        $isReserved = getReserved();
+        $isReserved = getReserved($equipe);
 
         // Lancement de la détermination
         if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
@@ -369,27 +381,31 @@
         AND  $isSolo != true AND empty($isReserved))
         {
           // Récupération des appelants possibles
-          $appelant = getCallers($idRestaurant);
+          $appelant = getCallers($idRestaurant, $equipe);
 
           // Lancement de la détermination
-          setDetermination($propositions, $idRestaurant, $appelant);
+          setDetermination($propositions, $idRestaurant, $appelant, $equipe);
         }
       }
       else
       {
         // Suppression de la détermination du jour
-        physiqueDeleteDetermination();
+        physiqueDeleteDetermination($equipe);
       }
     }
   }
 
   // METIER : Insère un choix rapide
   // RETOUR : Id restaurant
-  function insertFastChoice($post, $isSolo, $identifiant)
+  function insertFastChoice($post, $isSolo, $sessionUser)
   {
     // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant  = $sessionUser['identifiant'];
+    $equipe       = $sessionUser['equipe'];
     $idRestaurant = $post['id_restaurant'];
-    $control_ok   = true;
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_input');
@@ -404,7 +420,7 @@
 
     // Contrôle choix déjà existant
     if ($control_ok == true)
-      $control_ok = controleChoixExistant($idRestaurant, $identifiant, 'wrong_fast');
+      $control_ok = controleChoixExistant($idRestaurant, $identifiant, $equipe, 'wrong_fast');
 
     // Lecture des données restaurant
     if ($control_ok == true)
@@ -418,6 +434,7 @@
     if ($control_ok == true)
     {
       $choix = array('id_restaurant' => $idRestaurant,
+                     'team'          => $equipe,
                      'identifiant'   => $identifiant,
                      'date'          => date('Ymd'),
                      'time'          => '',
@@ -428,7 +445,7 @@
       physiqueInsertionChoix($choix);
 
       // Relance de la détermination si besoin
-      relanceDetermination();
+      relanceDetermination($sessionUser);
     }
 
     // Retour

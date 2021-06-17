@@ -39,55 +39,55 @@
   {
     case 'goConsulter':
       // Récupération de tous les lieux
-      $listeLieuxDisponibles = getLieux();
+      $listeLieuxDisponibles = getLieux($_SESSION['user']['equipe']);
 
       // Récupération et filtrage de la liste des restaurants (ouverts)
-      $listeRestaurants = getListeRestaurantsOuverts($listeLieuxDisponibles);
+      $listeRestaurants = getListeRestaurantsOuverts($listeLieuxDisponibles, $_SESSION['user']['equipe']);
 
       // Récupération de tous les restaurants (existants)
-      $listeRestaurantsResume = getListeRestaurants($listeLieuxDisponibles);
+      $listeRestaurantsResume = getListeRestaurants($listeLieuxDisponibles, $_SESSION['user']['equipe']);
 
       // Filtrage de la liste des lieux (restaurants ouverts)
       $listeLieux = getLieuxFiltres($listeRestaurants);
 
       // Récupération des propositions (avec détails)
-      $propositions = getPropositions(true);
+      $propositions = getPropositions($_SESSION['user']['equipe'], true);
 
       // Récupération des utilisateurs qui font bande à part
-      $solos = getSolos();
+      $solos = getSolos($_SESSION['user']['equipe']);
 
       // Récupération des choix utilisateur
-      $mesChoix = getMyChoices($_SESSION['user']['identifiant']);
+      $mesChoix = getMyChoices($_SESSION['user']);
 
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Détermination si restaurant réservé
-      $isReserved = getReserved();
+      $isReserved = getReserved($_SESSION['user']['equipe']);
 
       // Récupération du résumé de la semaine
-      $choixSemaine = getWeekChoices();
+      $choixSemaine = getWeekChoices($_SESSION['user']['equipe']);
 
       // Détermination des actions possibles
       $actions = getActions($propositions, $mesChoix, $isSolo, $isReserved, $_SESSION['user']['identifiant']);
 
       // Récupération des utilisateurs n'ayant pas voté
       if (!empty($propositions) OR !empty($solos))
-        $sansPropositions = getNoPropositions();
+        $sansPropositions = getNoPropositions($_SESSION['user']['equipe']);
       break;
 
     case 'doDeterminer':
       // Récupération des propositions (sans détails)
-      $propositions = getPropositions(false);
+      $propositions = getPropositions($_SESSION['user']['equipe'], false);
 
       // Récupération de l'Id du restaurant déterminé
       $idRestaurant = getRestaurantDetermined($propositions);
 
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Détermination si restaurant réservé
-      $isReserved = getReserved();
+      $isReserved = getReserved($_SESSION['user']['equipe']);
 
       // Lancement de la détermination
       if ((!isset($_SESSION['alerts']['week_end_determination']) OR $_SESSION['alerts']['week_end_determination'] != true)
@@ -95,58 +95,58 @@
       AND  $isSolo != true AND empty($isReserved))
       {
         // Récupération des appelants possibles
-        $appelant = getCallers($idRestaurant);
+        $appelant = getCallers($idRestaurant, $_SESSION['user']['equipe']);
 
         // Lancement de la détermination
-        setDetermination($propositions, $idRestaurant, $appelant);
+        setDetermination($propositions, $idRestaurant, $appelant, $_SESSION['user']['equipe']);
       }
       break;
 
     case 'doSolo':
       // Récupération des choix utilisateur
-      $mesChoix = getMyChoices($_SESSION['user']['identifiant']);
+      $mesChoix = getMyChoices($_SESSION['user']);
 
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Insertion bande à part
-      setSolo($mesChoix, $isSolo, $_SESSION['user']['identifiant']);
+      setSolo($mesChoix, $isSolo, $_SESSION['user']);
       break;
 
     case 'doSupprimerSolo':
       // Suppression bande à part
-      deleteSolo($_SESSION['user']['identifiant']);
+      deleteSolo($_SESSION['user']);
       break;
 
     case 'doReserver':
       // Insertion réservation
-      insertReservation($_POST, $_SESSION['user']['identifiant']);
+      insertReservation($_POST, $_SESSION['user']);
       break;
 
     case 'doAnnulerReserver':
       // Suppression réservation
-      deleteReservation($_POST, $_SESSION['user']['identifiant']);
+      deleteReservation($_POST, $_SESSION['user']);
       break;
 
     case 'doComplet':
       // Insertion restaurant complet
-      completeChoice($_POST);
+      completeChoice($_POST, $_SESSION['user']);
       break;
 
     case 'doAjouter':
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Insertion choix
-      insertChoices($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      insertChoices($_POST, $isSolo, $_SESSION['user']);
       break;
 
     case 'doAjouterMobile':
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Insertion choix (mobile)
-      insertChoicesMobile($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      insertChoicesMobile($_POST, $isSolo, $_SESSION['user']);
       break;
 
     case 'doModifier':
@@ -156,30 +156,30 @@
 
     case 'doSupprimer':
       // Suppression d'un choix
-      deleteChoice($_POST);
+      deleteChoice($_POST, $_SESSION['user']);
       break;
 
     case 'doSupprimerChoix':
       // Suppression de tous les choix
-      deleteAllChoices($_SESSION['user']['identifiant']);
+      deleteAllChoices($_SESSION['user']);
       break;
 
     case 'doChoixRapide':
       // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']['identifiant']);
+      $isSolo = getSolo($_SESSION['user']);
 
       // Insertion choix rapide
-      insertFastChoice($_POST, $isSolo, $_SESSION['user']['identifiant']);
+      insertFastChoice($_POST, $isSolo, $_SESSION['user']);
       break;
 
     case 'doAjouterResume':
       // Insertion choix résumé de la semaine
-      insertResume($_POST);
+      insertResume($_POST, $_SESSION['user']['equipe']);
       break;
 
     case 'doSupprimerResume':
       // Suppression choix résumé de la semaine
-      deleteResume($_POST);
+      deleteResume($_POST, $_SESSION['user']['equipe']);
       break;
 
     default:

@@ -33,13 +33,13 @@
 
   // METIER : Récupération de la liste des types de restaurants
   // RETOUR : Liste des types
-  function getTypesRestaurants()
+  function getTypesRestaurants($equipe)
   {
     // Initialisations
     $listeTypes = array();
 
     // Lecture des types de restaurants
-    $stringTypes = physiqueTypesRestaurants();
+    $stringTypes = physiqueTypesRestaurants($equipe);
 
     // Extraction sous forme de tableau
     $explodedTypes = explode(';', $stringTypes);
@@ -81,13 +81,15 @@
 
   // METIER : Insère un nouveau restaurant
   // RETOUR : Id enregistrement créé
-  function insertRestaurant($post, $files, $identifiant)
+  function insertRestaurant($post, $files, $sessionUser)
   {
     // Initialisations
     $idRestaurant = NULL;
     $control_ok   = true;
 
     // Récupération des données
+    $identifiant            = $sessionUser['identifiant'];
+    $equipe                 = $sessionUser['equipe'];
     $nomRestaurant          = $post['name_restaurant'];
     $websiteRestaurant      = $post['website_restaurant'];
     $planRestaurant         = $post['plan_restaurant'];
@@ -242,7 +244,8 @@
     // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      $restaurant = array('name'         => $nomRestaurant,
+      $restaurant = array('team'         => $equipe,
+                          'name'         => $nomRestaurant,
                           'picture'      => $newName,
                           'types'        => $typesFormatted,
                           'location'     => $lieuRestaurant,

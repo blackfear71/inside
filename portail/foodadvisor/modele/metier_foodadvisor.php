@@ -1,7 +1,7 @@
 <?php
   // METIER : Récupération et filtrage la liste des restaurants ouverts
   // RETOUR : Liste des restaurants filtrés
-  function getListeRestaurantsOuverts($listeLieux)
+  function getListeRestaurantsOuverts($listeLieux, $equipe)
   {
     // Initialisations
     $listeRestaurants = array();
@@ -9,7 +9,7 @@
     // Récupération de la liste des restaurants ouverts pour chaque lieu
     foreach ($listeLieux as $lieu)
     {
-      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsOuvertsParLieux($lieu);
+      $listeRestaurants[$lieu] = physiqueRestaurantsOuvertsParLieux($equipe, $lieu);
     }
 
     // Filtrage des restaurants
@@ -210,13 +210,13 @@
 
   // METIER : Récupère les utilisateurs faisant bande à part
   // RETOUR : Liste des utilisateurs
-  function getSolos()
+  function getSolos($equipe)
   {
     // Initialisations
     $solos = array();
 
     // Récupération de la liste des utilisateurs
-    $identifiantsSolos = physiqueIdentifiantsSolos();
+    $identifiantsSolos = physiqueIdentifiantsSolos($equipe);
 
     // Récupération des données utilisateurs
     foreach ($identifiantsSolos as $identifiantSolo)
@@ -231,18 +231,24 @@
 
   // METIER : Récupère les utilisateurs qui n'ont pas fait de propositions
   // RETOUR : Liste des utilisateurs
-  function getNoPropositions()
+  function getNoPropositions($equipe)
   {
     // Initialisations
     $noPropositions = array();
 
+    // Calcul des dates de la semaine
+    $nombreJoursLundi    = 1 - date('N');
+    $nombreJoursVendredi = 5 - date('N');
+    $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
+    $vendredi            = date('Ymd', strtotime('+' . $nombreJoursVendredi . ' days'));
+
     // Récupération de la liste des utilisateurs inscrits
-    $listeUsers = physiqueUsers();
+    $listeUsers = physiqueUsers($equipe, $lundi, $vendredi);
 
     // Vérification nombre propositions de chaque utilisateur
     foreach ($listeUsers as $user)
     {
-      $nombrePropositions = physiqueNombrePropositions($user->getIdentifiant());
+      $nombrePropositions = physiqueNombrePropositions($equipe, $user->getIdentifiant());
 
       if ($nombrePropositions == 0)
         array_push($noPropositions, $user);
@@ -254,10 +260,14 @@
 
   // METIER : Insère un choix "bande à part"
   // RETOUR : Aucun
-  function setSolo($mesChoix, $isSolo, $identifiant)
+  function setSolo($mesChoix, $isSolo, $sessionUser)
   {
     // Initialisations
     $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_input');
@@ -278,6 +288,7 @@
     if ($control_ok == true)
     {
       $solo = array('id_restaurant' => 0,
+                    'team'          => $equipe,
                     'identifiant'   => $identifiant,
                     'date'          => date('Ymd'),
                     'time'          => '',
@@ -291,10 +302,14 @@
 
   // METIER : Supprime un choix "bande à part"
   // RETOUR : Aucun
-  function deleteSolo($identifiant)
+  function deleteSolo($sessionUser)
   {
     // Initialisations
     $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_delete');
@@ -305,16 +320,20 @@
 
     // Suppression de l'enregistrement en base
     if ($control_ok == true)
-      physiqueDeleteSolo($identifiant);
+      physiqueDeleteSolo($equipe, $identifiant);
   }
 
   // METIER : Insère ou met à jour une réservation
   // RETOUR : Aucun
-  function insertReservation($post, $appelant)
+  function insertReservation($post, $sessionUser)
   {
     // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $appelant     = $sessionUser['identifiant'];
+    $equipe       = $sessionUser['equipe'];
     $idRestaurant = $post['id_restaurant'];
-    $control_ok   = true;
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_reservation');
@@ -327,13 +346,13 @@
     if ($control_ok == true)
     {
       // Contrôle si détermination déjà existante
-      $determinationExistante = physiqueDeterminationExistante();
+      $determinationExistante = physiqueDeterminationExistante($equipe);
 
       // Si la détermination existe déjà
       if ($determinationExistante == true)
       {
         // Récupération des données de la détermination
-        $determination = physiqueDetermination();
+        $determination = physiqueDetermination($equipe);
 
         // Contrôle si déjà réservé
         $control_ok = controleAlreadyReserved($determination->getReserved());
@@ -362,6 +381,7 @@
       {
         // Insertion de l'enregistrement en base
         $nouvelleDetermination = array('id_restaurant' => $idRestaurant,
+                                       'team'          => $equipe,
                                        'date'          => date('Ymd'),
                                        'caller'        => $appelant,
                                        'reserved'      => 'Y'
@@ -377,11 +397,15 @@
 
   // METIER : Supprime une réservation
   // RETOUR : Aucun
-  function deleteReservation($post, $identifiant)
+  function deleteReservation($post, $sessionUser)
   {
     // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant  = $sessionUser['identifiant'];
+    $equipe       = $sessionUser['equipe'];
     $idRestaurant = $post['id_restaurant'];
-    $control_ok   = true;
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_reservation');
@@ -392,16 +416,20 @@
 
     // Annulation réservation
     if ($control_ok == true)
-      physiqueAnnulationReservation($idRestaurant, $identifiant);
+      physiqueAnnulationReservation($idRestaurant, $equipe, $identifiant);
   }
 
   // METIER : Supprime les choix de tous les utilisateurs d'un restaurant et relance la détermination
   // RETOUR : Aucun
-  function completeChoice($post)
+  function completeChoice($post, $sessionUser)
   {
     // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant  = $sessionUser['identifiant'];
+    $equipe       = $sessionUser['equipe'];
     $idRestaurant = $post['id_restaurant'];
-    $control_ok   = true;
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_delete');
@@ -414,16 +442,16 @@
     if ($control_ok == true)
     {
       // Suppression de tous les choix utilisateurs pour ce restaurant
-      physiqueDeleteComplete($idRestaurant);
+      physiqueDeleteComplete($idRestaurant, $equipe);
 
       // Relance de la détermination si besoin
-      relanceDetermination();
+      relanceDetermination($sessionUser);
     }
   }
 
   // METIER : Récupère les choix de la semaine
   // RETOUR : Liste des choix de la semaine
-  function getWeekChoices()
+  function getWeekChoices($equipe)
   {
     // Initialisations
     $listeChoixSemaine = array();
@@ -443,7 +471,7 @@
     for ($i = $lundi; $i <= $vendredi; $i = date('Ymd', strtotime($i . ' + 1 days')))
     {
       // Lecture des données du choix
-      $choixSemaine = physiqueDonneesResume($i);
+      $choixSemaine = physiqueDonneesResume($equipe, $i);
 
       if (!empty($choixSemaine))
       {
@@ -480,11 +508,15 @@
 
   // METIER : Insère un ou plusieurs choix utilisateur
   // RETOUR : Aucun
-  function insertChoices($post, $isSolo, $identifiant)
+  function insertChoices($post, $isSolo, $sessionUser)
   {
     // Initialisations
     $maxChoices = 5;
     $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_input');
@@ -549,7 +581,7 @@
         AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
         {
           // Contrôle choix existant
-          $choixNonExistant = controleChoixExistant($post['select_restaurant'][$i], $identifiant, 'wrong_choice_already');
+          $choixNonExistant = controleChoixExistant($post['select_restaurant'][$i], $identifiant, $equipe, 'wrong_choice_already');
 
           // On supprime la ligne du tableau si déjà saisi
           if ($choixNonExistant == false)
@@ -653,6 +685,7 @@
 
           // Insertion de l'enregistrement en base
           $choix = array('id_restaurant' => $idRestaurant,
+                         'team'          => $equipe,
                          'identifiant'   => $identifiant,
                          'date'          => $date,
                          'time'          => $time,
@@ -663,7 +696,7 @@
           physiqueInsertionChoix($choix);
 
           // Relance de la détermination si besoin
-          relanceDetermination();
+          relanceDetermination($sessionUser);
         }
       }
     }
@@ -671,11 +704,15 @@
 
   // METIER : Insère un ou plusieurs choix utilisateur
   // RETOUR : Aucun
-  function insertChoicesMobile($post, $isSolo, $identifiant)
+  function insertChoicesMobile($post, $isSolo, $sessionUser)
   {
     // Initialisations
+    $control_ok = true;
+
+    // Récupération des données
+    $identifiant      = $sessionUser['identifiant'];
+    $equipe           = $sessionUser['equipe'];
     $listeRestaurants = array_keys($post['restaurants']);
-    $control_ok       = true;
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_input');
@@ -697,7 +734,7 @@
         foreach ($listeRestaurants as $keyId => $idRestaurant)
         {
           // Contrôle choix existant
-          $choixNonExistant = controleChoixExistant($idRestaurant, $identifiant, 'wrong_choice_already');
+          $choixNonExistant = controleChoixExistant($idRestaurant, $identifiant, $equipe, 'wrong_choice_already');
 
           // On supprime la ligne du tableau si déjà saisi
           if ($choixNonExistant == false)
@@ -747,6 +784,7 @@
 
           // Insertion de l'enregistrement en base
           $choix = array('id_restaurant' => $idRestaurant,
+                         'team'          => $equipe,
                          'identifiant'   => $identifiant,
                          'date'          => $date,
                          'time'          => $time,
@@ -757,7 +795,7 @@
           physiqueInsertionChoix($choix);
 
           // Relance de la détermination si besoin
-          relanceDetermination();
+          relanceDetermination($sessionUser);
         }
       }
     }
@@ -768,8 +806,10 @@
   function updateChoice($post, $identifiant)
   {
     // Initialisations
-    $idChoix    = $post['id_choix'];
     $control_ok = true;
+
+    // Récupération des données
+    $idChoix = $post['id_choix'];
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_input');
@@ -827,11 +867,14 @@
 
   // METIER : Supprime un choix utilisateur
   // RETOUR : Aucun
-  function deleteChoice($post)
+  function deleteChoice($post, $sessionUser)
   {
     // Initialisations
-    $idChoix    = $post['id_choix'];
     $control_ok = true;
+
+    // Récupération des données
+    $equipe  = $sessionUser['equipe'];
+    $idChoix = $post['id_choix'];
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_delete');
@@ -847,7 +890,7 @@
       $choix = physiqueChoix($idChoix);
 
       // Récupération des données de la détermination si correspondantes
-      $determinationExistante = physiqueDeterminationExistanteUser($choix->getIdentifiant());
+      $determinationExistante = physiqueDeterminationExistanteUser($choix->getIdentifiant(), $equipe);
 
       if ($determinationExistante == true)
       {
@@ -855,23 +898,27 @@
         insertOrUpdateSuccesValue('star-chief', $choix->getIdentifiant(), -1);
 
         // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-        physiqueDeleteDeterminationRestaurantUser($choix->getId_restaurant(), $choix->getIdentifiant());
+        physiqueDeleteDeterminationRestaurantUser($choix->getId_restaurant(), $equipe, $choix->getIdentifiant());
       }
 
       // Suppression de l'enregistrement en base
       physiqueDeleteChoix($idChoix);
 
       // Relance de la détermination si besoin
-      relanceDetermination();
+      relanceDetermination($sessionUser);
     }
   }
 
   // METIER : Supprime tous les choix utilisateur
   // RETOUR : Aucun
-  function deleteAllChoices($identifiant)
+  function deleteAllChoices($sessionUser)
   {
     // Initialisations
     $control_ok = true;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Contrôle date de saisie
     $control_ok = controleDateSaisie('week_end_delete');
@@ -884,31 +931,31 @@
     if ($control_ok == true)
     {
       // Récupération des données de la détermination si correspondantes
-      $determinationExistante = physiqueDeterminationExistanteUser($identifiant);
+      $determinationExistante = physiqueDeterminationExistanteUser($identifiant, $equipe);
 
       if ($determinationExistante == true)
       {
         // Récupération des données de la détermination
-        $determination = physiqueDetermination();
+        $determination = physiqueDetermination($equipe);
 
         // Génération succès (pour l'appelant si supprimé)
         insertOrUpdateSuccesValue('star-chief', $determination->getCaller(), -1);
 
         // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-        physiqueDeleteDeterminationUser($determination->getId_restaurant(), $determination->getCaller());
+        physiqueDeleteDeterminationUser($determination->getId_restaurant(), $equipe, $determination->getCaller());
       }
 
       // Suppression des enregistrements en base
-      physiqueDeleteTousChoix($identifiant);
+      physiqueDeleteTousChoix($equipe, $identifiant);
 
       // Relance de la détermination si besoin
-      relanceDetermination();
+      relanceDetermination($sessionUser);
     }
   }
 
   // METIER : Insère un choix dans le résumé
   // RETOUR : Aucun
-  function insertResume($post)
+  function insertResume($post, $equipe)
   {
     // Initialisations
     $control_ok = true;
@@ -923,12 +970,13 @@
     $dateSaisie  = date('Ymd', strtotime('now - ' . $ecartJours . ' Days'));
 
     // Contrôle choix déjà existant
-    $control_ok = controleChoixExistantDate($dateSaisie);
+    $control_ok = controleChoixExistantDate($dateSaisie, $equipe);
 
     // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
       $resume = array('id_restaurant' => $idRestaurant,
+                      'team'          => $equipe,
                       'date'          => $dateSaisie,
                       'caller'        => '',
                       'reserved'      => 'N'
@@ -940,13 +988,13 @@
 
   // METIER : Supprime un choix dans le résumé
   // RETOUR : Aucun
-  function deleteResume($post)
+  function deleteResume($post, $equipe)
   {
     // Récupération des données
     $idResume   = $post['id_resume'];
     $dateResume = $post['date_resume'];
 
     // Suppression de l'enregistrement en base
-    physiqueDeleteResume($idResume, $dateResume);
+    physiqueDeleteResume($idResume, $equipe, $dateResume);
   }
 ?>

@@ -41,7 +41,7 @@
         $anneeExistante = controlYear($_GET['year'], $_SESSION['user']['equipe']);
 
         // Récupération de la liste des utilisateurs
-        $listeUsers = getUsers($_SESSION['user']['equipe']);
+        $listeUsers = getUsers($_GET['year'], $_SESSION['user']['equipe']);
 
         // Récupération des filtres
         $filters = getFilters();
