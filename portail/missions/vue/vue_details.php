@@ -159,6 +159,7 @@
                             $finGagnants = true;
 
                             echo '<div class="zone_participants">';
+                              echo '<div class="zone_titre_gagnants">Les autres participants</div>';
                           }
                         }
 
@@ -239,6 +240,18 @@
                 echo '</div>';
               }
 
+              // Participation hors classement
+              if (date('Ymd') > $detailsMission->getDate_fin() AND isset($participationUserNoRanking) AND $participationUserNoRanking == true)
+              {
+                echo '<div class="zone_info_details_mission">';
+                  echo '<img src="../../includes/icons/missions/user_grey.png" alt="user_grey" class="logo_details_mission" />';
+
+                  echo '<div class="texte_info_details_mission">';
+                    echo 'Vous ne faites pas partie du classement car vous avez changé d\'équipe.';
+                  echo '</div>';
+                echo '</div>';
+              }
+
               // Objectif total
               echo '<div class="zone_info_details_mission">';
                 echo '<img src="../../includes/icons/missions/progress_mission.png" alt="progress_mission" class="logo_details_mission" />';
@@ -253,7 +266,7 @@
                 echo '</div>';
               echo '</div>';
 
-              // Paticipants
+              // Participants
               if (date('Ymd') <= $detailsMission->getDate_fin())
               {
                 echo '<div class="titre_section"><img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Participants</div></div>';

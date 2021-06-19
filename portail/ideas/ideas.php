@@ -37,11 +37,11 @@
           case 'mine':
           case 'inprogress':
             // Récupération du nombre de pages
-            $nombrePages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
+            $nombrePages = getPages($_GET['view'], $_SESSION['user']);
 
             // Récupération des idées
             if ($nombrePages > 0)
-              $listeIdees = getIdeas($_GET['view'], $_GET['page'], $nombrePages, $_SESSION['user']['identifiant']);
+              $listeIdees = getIdeas($_GET['view'], $_GET['page'], $nombrePages, $_SESSION['user']);
             break;
 
           default:
@@ -54,7 +54,7 @@
 
     case 'doInserer':
       // Insertion d'une idée
-      $idIdee = insertIdea($_POST, $_SESSION['user']['identifiant']);
+      $idIdee = insertIdea($_POST, $_SESSION['user']);
       break;
 
     case 'doChangerStatut':
@@ -65,7 +65,7 @@
       $view = updateIdea($_POST, $_GET['view'], $_SESSION['user']['identifiant']);
 
       // Récupération du numéro de page pour la redirection
-      $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']['identifiant']);
+      $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']);
       break;
 
     default:

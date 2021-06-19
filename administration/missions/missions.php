@@ -67,7 +67,10 @@
           $detailsMission = initialisationModificationMission($_GET['id_mission']);
 
         // Récupération du classement des participants
-        $participants = getParticipants($_GET['id_mission']);
+        $listeParticipantsParEquipes = getParticipants($_GET['id_mission']);
+
+        // Récupération des équipes des participants
+        $listeEquipesParticipants = getEquipesParticipants($listeParticipantsParEquipes);
       }
       break;
 
@@ -105,9 +108,17 @@
     case 'goModifier':
       Mission::secureData($detailsMission);
 
-      foreach ($participants as $participant)
+      foreach ($listeParticipantsParEquipes as $participantsParEquipes)
       {
-        ParticipantMission::secureData($participant);
+        foreach ($participantsParEquipes as $participant)
+        {
+          ParticipantMission::secureData($participant);
+        }
+      }
+
+      foreach ($listeEquipesParticipants as $equipe)
+      {
+        Team::secureData($equipe);
       }
       break;
 

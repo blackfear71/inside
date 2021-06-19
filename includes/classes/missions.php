@@ -213,6 +213,7 @@
   class ParticipantMission
   {
     private $identifiant;
+    private $team;
     private $pseudo;
     private $avatar;
     private $total;
@@ -222,6 +223,7 @@
     public function __construct()
     {
       $this->identifiant = '';
+      $this->team        = '';
       $this->pseudo      = '';
       $this->avatar      = '';
       $this->total       = 0;
@@ -232,6 +234,7 @@
     public static function secureData($data)
     {
       $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setPseudo(htmlspecialchars($data->getPseudo()));
       $data->setAvatar(htmlspecialchars($data->getAvatar()));
       $data->setTotal(htmlspecialchars($data->getTotal()));
@@ -248,6 +251,17 @@
     public function getIdentifiant()
     {
       return $this->identifiant;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Pseudo

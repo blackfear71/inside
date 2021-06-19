@@ -4,13 +4,17 @@
 
   // METIER : Lecture nombre de pages en fonction de la vue
   // RETOUR : Nombre de pages
-  function getPages($view, $identifiant)
+  function getPages($view, $sessionUser)
   {
     // Initialisations
     $nombreParPage = 18;
 
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération du nombre d'idées en fonction de la vue
-    $nombreIdees = physiqueNombreIdees($view, $identifiant);
+    $nombreIdees = physiqueNombreIdees($view, $equipe, $identifiant);
 
     // Calcul du nombre total d'enregistrements pour chaque vue
     $nombrePages = ceil($nombreIdees / $nombreParPage);
@@ -21,10 +25,14 @@
 
   // METIER : Lecture liste des idées
   // RETOUR : Tableau d'idées
-  function getIdeas($view, $page, $nombrePages, $identifiant)
+  function getIdeas($view, $page, $nombrePages, $sessionUser)
   {
     // Initialisations
     $nombreParPage = 18;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Vérification que l'on ne dépasse pas la dernière page
     if ($page > $nombrePages)
@@ -34,7 +42,7 @@
     $premiereEntree = ($page - 1) * $nombreParPage;
 
     // Lecture des idées
-    $listeIdees = physiqueIdees($view, $premiereEntree, $nombreParPage, $identifiant);
+    $listeIdees = physiqueIdees($view, $premiereEntree, $nombreParPage, $equipe, $identifiant);
 
     // Recherche des pseudos et des avatars
     foreach ($listeIdees as $idee)
@@ -66,9 +74,11 @@
 
   // METIER : Insertion d'une idée
   // RETOUR : Id enregistrement créé
-  function insertIdea($post, $author)
+  function insertIdea($post, $sessionUser)
   {
     // Récupération des données
+    $author     = $sessionUser['identifiant'];
+    $equipe     = $sessionUser['equipe'];
     $subject    = $post['subject_idea'];
     $content    = $post['content_idea'];
     $date       = date('Ymd');
@@ -76,7 +86,8 @@
     $developper = '';
 
     // Insertion de l'enregistrement en base
-    $idee = array('subject'    => $subject,
+    $idee = array('team'       => $equipe,
+                  'subject'    => $subject,
                   'date'       => $date,
                   'author'     => $author,
                   'content'    => $content,
@@ -184,13 +195,17 @@
 
   // METIER : Récupère le numéro de page pour la redirection après changement de statut
   // RETOUR : Numéro de page
-  function getNumeroPageIdea($idIdee, $view, $identifiant)
+  function getNumeroPageIdea($idIdee, $view, $sessionUser)
   {
     // Initialisations
     $nombreParPage = 18;
 
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Recherche de la position de l'idée dans la table en fonction de la vue
-    $positionIdee = physiquePositionIdee($view, $idIdee, $identifiant);
+    $positionIdee = physiquePositionIdee($view, $idIdee, $equipe, $identifiant);
 
     // Calcul du numéro de page de l'idée
     $numeroPage = ceil($positionIdee / $nombreParPage);

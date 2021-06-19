@@ -274,14 +274,19 @@
     echo '<div class="zone_classement_mission">';
       echo '<div class="titre_classement">Classement</div>';
 
-      if (!empty($participants))
+      if (!empty($listeParticipantsParEquipes))
       {
-        foreach ($participants as $participant)
+        foreach ($listeParticipantsParEquipes as $equipe => $participantsParEquipes)
         {
-          echo '<div class="classement_user">';
-            echo '<div class="pseudo_classement">' . $participant->getRank() . '. ' . formatUnknownUser($participant->getPseudo(), true, false) . '</div>';
-            echo '<div class="total_classement">' . $participant->getTotal() . '</div>';
-          echo '</div>';
+          echo '<div class="titre_equipe">' . $listeEquipesParticipants[$equipe]->getTeam() . '</div>';
+
+          foreach ($participantsParEquipes as $participant)
+          {
+            echo '<div class="classement_user">';
+              echo '<div class="pseudo_classement">' . $participant->getRank() . '. ' . formatUnknownUser($participant->getPseudo(), true, false) . '</div>';
+              echo '<div class="total_classement">' . $participant->getTotal() . '</div>';
+            echo '</div>';
+          }
         }
       }
       else

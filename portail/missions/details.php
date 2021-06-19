@@ -38,14 +38,21 @@
           $detailsMission = getMission($_GET['id_mission']);
 
           // Récupération des participants
-          $participants = getParticipants($_GET['id_mission']);
+          $participants = getParticipants($_GET['id_mission'], $_SESSION['user']['equipe']);
 
           // Récupération des pourcentages d'avancement de l'utilisateur (quotidien et évènement)
           $missionUser = getMissionUser($detailsMission, $_GET['id_mission'], $_SESSION['user']['identifiant']);
 
           // Récupération des résultats
           if (date('Ymd') > $detailsMission->getDate_fin())
+          {
+            // Récupération du classement des participants
             $ranking = getRankingMission($_GET['id_mission'], $participants);
+
+            // Récupération de l'utilisateur hors classement (suite à un changement d'équipe)
+            if (!isset($participants[$_SESSION['user']['identifiant']]) OR empty($participants[$_SESSION['user']['identifiant']]))
+              $participationUserNoRanking = getParticipationNoRankingMission($_GET['id_mission'], $_SESSION['user']);
+          }
         }
       }
       break;

@@ -2325,8 +2325,21 @@
 	display: block;
 	background-color: #ff1937;
 	border-radius: 2px;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: robotolight, Verdana, sans-serif;
 	font-size: 170%;
+	color: white;
+	padding: 5px 10px 5px 10px;
+	box-shadow: 0 0 5px #7c7c7c;
+}
+
+.titre_equipe
+{
+	display: block;
+	margin-top: 10px;
+	background-color: #262626;
+	border-radius: 2px;
+	font-family: robotothin, Verdana, sans-serif;
+	font-size: 130%;
 	color: white;
 	padding: 5px 10px 5px 10px;
 	box-shadow: 0 0 5px #7c7c7c;

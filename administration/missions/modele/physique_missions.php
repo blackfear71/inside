@@ -59,15 +59,16 @@
   function physiqueUsersMission($idMission)
   {
     // Initialisations
-    $listeUsers = array();
+    $listeUsersParEquipes = array();
 
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT DISTINCT identifiant
+    $req = $bdd->query('SELECT id, team, identifiant
                         FROM missions_users
                         WHERE id_mission = ' . $idMission . '
-                        ORDER BY identifiant ASC');
+                        GROUP BY identifiant
+                        ORDER BY team ASC, identifiant ASC');
 
     while ($data = $req->fetch())
     {
@@ -75,15 +76,19 @@
       $user = new ParticipantMission();
 
       $user->setIdentifiant($data['identifiant']);
+      $user->setTeam($data['team']);
 
       // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+      if (!isset($listeUsersParEquipes[$user->getTeam()]))
+        $listeUsersParEquipes[$user->getTeam()] = array();
+
+      array_push($listeUsersParEquipes[$user->getTeam()], $user);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listeUsers;
+    return $listeUsersParEquipes;
   }
 
   // PHYSIQUE : Lecture des informations utilisateur
@@ -155,6 +160,28 @@
 
     // Retour
     return $isUnique;
+  }
+
+  // PHYSIQUE : Lecture des données d'une équipe
+  // RETOUR : Objet Team
+  function physiqueEquipeParticipants($equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE reference = "' . $equipe . '"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Team à partir des données remontées de la bdd
+    $team = Team::withData($data);
+
+    $req->closeCursor();
+
+    // Retour
+    return $team;
   }
 
   /****************************************************************************/

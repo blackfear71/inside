@@ -357,13 +357,16 @@
 
   // METIER : Changement d'équipe
   // RETOUR : Aucun
-  function updateEquipe($identifiant, $post)
+  function updateEquipe($sessionUser, $post)
   {
     // Initialisations
     $control_ok = true;
     $status     = 'T';
 
     // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $oldTeam     = $sessionUser['equipe'];
+
     if ($post['equipe'] == 'other')
     {
       $newTeam        = 'temp_' . rand();
@@ -377,8 +380,12 @@
     // Récupération des données utilisateur
     $user = physiqueProfil($identifiant);
 
+    // Contrôle équipe différente
+    $control_ok = controleAncienneEquipe($oldTeam, $newTeam);
+
     // Contrôle dépenses nulles
-    $control_ok = controleDepensesNonNulles($user->getExpenses());
+    if ($control_ok == true)
+      $control_ok = controleDepensesNonNulles($user->getExpenses());
 
     // Création d'une nouvelle équipe si besoin
     if ($control_ok == true)

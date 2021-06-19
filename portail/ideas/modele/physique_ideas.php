@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture du nombre d'idée en fonction de la vue
   // RETOUR : Nombre d'idées
-  function physiqueNombreIdees($vue, $identifiant)
+  function physiqueNombreIdees($vue, $equipe, $identifiant)
   {
     // Initialisations
     $nombreIdees = 0;
@@ -19,25 +19,26 @@
       case 'inprogress':
         $req = $bdd->query('SELECT COUNT(*) AS nombreIdees
                             FROM ideas
-                            WHERE status = "O" OR status = "C" OR status = "P"');
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P")');
         break;
 
       case 'mine':
         $req = $bdd->query('SELECT COUNT(*) AS nombreIdees
                             FROM ideas
-                            WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"');
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"');
         break;
 
       case 'done':
         $req = $bdd->query('SELECT COUNT(*) AS nombreIdees
                             FROM ideas
-                            WHERE status = "D" OR status = "R"');
+                            WHERE team = "' . $equipe . '" AND (status = "D" OR status = "R")');
         break;
 
       case 'all':
       default:
         $req = $bdd->query('SELECT COUNT(*) AS nombreIdees
-                            FROM ideas');
+                            FROM ideas
+                            WHERE team = "' . $equipe . '"');
         break;
     }
 
@@ -54,7 +55,7 @@
 
   // PHYSIQUE : Lecture des idées en fonction de la vue
   // RETOUR : Liste des idées
-  function physiqueIdees($vue, $premiereEntree, $nombreParPage, $identifiant)
+  function physiqueIdees($vue, $premiereEntree, $nombreParPage, $equipe, $identifiant)
   {
     // Initialisations
     $listeIdees = array();
@@ -67,7 +68,7 @@
       case 'done':
         $req = $bdd->query('SELECT *
                             FROM ideas
-                            WHERE status = "D" OR status = "R"
+                            WHERE team = "' . $equipe . '" AND (status = "D" OR status = "R")
                             ORDER BY date DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                           );
@@ -76,7 +77,7 @@
       case 'inprogress':
         $req = $bdd->query('SELECT *
                             FROM ideas
-                            WHERE status = "O" OR status = "C" OR status = "P"
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P")
                             ORDER BY date DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                           );
@@ -85,7 +86,7 @@
       case 'mine':
         $req = $bdd->query('SELECT *
                             FROM ideas
-                            WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"
                             ORDER BY date DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                           );
@@ -95,6 +96,7 @@
       default:
         $req = $bdd->query('SELECT *
                             FROM ideas
+                            WHERE team = "' . $equipe . '"
                             ORDER BY date DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage
                           );
@@ -166,7 +168,7 @@
 
   // PHYSIQUE : Lecture position de l'idée en fonction de la vue
   // RETOUR : Position de l'idée
-  function physiquePositionIdee($vue, $idIdee, $identifiant)
+  function physiquePositionIdee($vue, $idIdee, $equipe, $identifiant)
   {
     // Initialisations
     $positionIdee = 1;
@@ -179,7 +181,7 @@
       case 'done':
         $req = $bdd->query('SELECT id, date
                             FROM ideas
-                            WHERE status = "D" OR status = "R"
+                            WHERE team = "' . $equipe . '" AND (status = "D" OR status = "R")
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -187,7 +189,7 @@
       case 'inprogress':
         $req = $bdd->query('SELECT id, date
                             FROM ideas
-                            WHERE status = "O" OR status = "C" OR status = "P"
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P")
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -195,7 +197,7 @@
       case 'mine':
         $req = $bdd->query('SELECT id, date
                             FROM ideas
-                            WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -204,6 +206,7 @@
       default:
         $req = $bdd->query('SELECT id, date
                             FROM ideas
+                            WHERE team = "' . $equipe . '"
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -237,13 +240,15 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO ideas(subject,
+    $req = $bdd->prepare('INSERT INTO ideas(team,
+                                            subject,
                                             date,
                                             author,
                                             content,
                                             status,
                                             developper)
-                                    VALUES(:subject,
+                                    VALUES(:team,
+                                           :subject,
                                            :date,
                                            :author,
                                            :content,

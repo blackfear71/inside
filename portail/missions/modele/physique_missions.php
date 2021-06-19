@@ -156,53 +156,59 @@
 
   // PHYSIQUE : Lecture participants d'une mission
   // RETOUR : Liste des participants
-  function physiqueParticipantsMission($idMission)
+  function physiqueParticipantsMission($idMission, $equipe)
   {
     // Initialisations
-    $listeIdentifiantsParticipants = array();
+    $listeParticipants = array();
 
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT DISTINCT identifiant
-                        FROM missions_users
-                        WHERE id_mission = ' . $idMission . '
-                        ORDER BY identifiant ASC');
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
+                        FROM users
+                        WHERE EXISTS (SELECT id, id_mission, team, identifiant
+                                      FROM missions_users
+                                      WHERE missions_users.identifiant = users.identifiant AND missions_users.id_mission = "' . $idMission . '" AND missions_users.team = "' . $equipe . '")
+                       ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
     {
-      // On ajoute la ligne au tableau
-      array_push($listeIdentifiantsParticipants, $data['identifiant']);
-    }
-
-    // Retour
-    return $listeIdentifiantsParticipants;
-  }
-
-  // PHYSIQUE : Lecture des données d'un utilisateur
-  // RETOUR : Objet Profile
-  function physiqueUser($identifiant)
-  {
-    // Initialisations
-    $user = NULL;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, COUNT(*) AS nombreUser
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Profile à partir des données remontées de la bdd
-    if ($data['nombreUser'] > 0)
+      // Instanciation d'un objet Profile à partir des données remontées de la bdd
       $user = Profile::withData($data);
+
+      // On ajoute la ligne au tableau
+      $listeParticipants[$data['identifiant']] = $user;
+    }
 
     $req->closeCursor();
 
     // Retour
-    return $user;
+    return $listeParticipants;
+  }
+
+  // PHYSIQUE : Lecture participation d'un utilisateur
+  // RETOUR : Booléen
+  function physiqueParticipationUser($idMission, $equipe, $identifiant)
+  {
+    // Initialisations
+    $participationUser = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                        FROM missions_users
+                        WHERE id_mission = ' . $idMission . ' AND team != "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $participationUser = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $participationUser;
   }
 
   /****************************************************************************/
@@ -216,10 +222,12 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO missions_users(id_mission,
+                                                     team,
                                                      identifiant,
                                                      avancement,
                                                      date_mission)
                                              VALUES(:id_mission,
+                                                    :team,
                                                     :identifiant,
                                                     :avancement,
                                                     :date_mission)');

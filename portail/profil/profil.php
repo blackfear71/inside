@@ -127,7 +127,7 @@
 
     case 'doUpdateEquipe':
       // Modification de l'équipe
-      updateEquipe($_SESSION['user']['identifiant'], $_POST);
+      updateEquipe($_SESSION['user'], $_POST);
       break;
 
     case 'askDesinscription':

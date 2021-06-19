@@ -2,6 +2,7 @@
   class Idea
   {
     private $id;
+    private $team;
     private $subject;
     private $date;
     private $author;
@@ -17,6 +18,7 @@
     public function __construct()
     {
       $this->id                = 0;
+      $this->team              = '';
       $this->subject           = '';
       $this->date              = '';
       $this->author            = '';
@@ -43,6 +45,9 @@
     {
       if (isset($data['id']))
         $this->id                = $data['id'];
+
+      if (isset($data['team']))
+        $this->team              = $data['team'];
 
       if (isset($data['subject']))
         $this->subject           = $data['subject'];
@@ -78,6 +83,7 @@
     // Sécurisation des données
     public static function secureData($data)
     {
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setSubject(htmlspecialchars($data->getSubject()));
       $data->setDate(htmlspecialchars($data->getDate()));
       $data->setAuthor(htmlspecialchars($data->getAuthor()));
@@ -100,6 +106,17 @@
     public function getId()
     {
       return $this->id;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Sujet

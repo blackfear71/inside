@@ -541,11 +541,26 @@
         physiqueDeleteEquipe($tempTeam);
     }
 
-    // Suppressions (seulement lors d'un changement d'équipe)
+    // Réinitialisations (seulement lors d'un changement d'équipe)
     if ($isUpdateEquipe == true)
     {
-      // Suppression de la semaine de gâteaux si non réalisé
+      // Suppression des semaines de gâteaux si non réalisés
       physiqueDeleteRecette($identifiant, $oldTeam);
+
+      // Remise en cours des idées non terminées ou rejetées
+      physiqueUpdateStatusTheBox($identifiant);
+
+      // Récupération des missions en cours
+      $idMissionsEnCours = physiqueMissionsEnCours();
+
+      // Mise à jour des missions en cours
+      if (!empty($idMissionsEnCours))
+      {
+        foreach ($idMissionsEnCours as $idMission)
+        {
+          physiqueUpdateMissionsEnCours($idMission, $identifiant, $teamReference);
+        }
+      }
     }
 
     // Mise à jour de la référence de l'équipe et du statut à "U"

@@ -27,9 +27,11 @@
 
   // METIER : Validation d'un bouton de mission en cours
   // RETOUR : Aucun
-  function validateMission($post, $identifiant, $mission, $pageCourante)
+  function validateMission($post, $sessionUser, $mission, $pageCourante)
   {
     // Récupération des données
+    $identifiant      = $sessionUser['identifiant'];
+    $equipe           = $sessionUser['equipe'];
     $referenceMission = $post['ref_mission'];
     $cleMission       = $post['key_mission'];
 
@@ -56,6 +58,7 @@
         {
           // Insertion de l'enregistrement en base
           $missionUser = array('id_mission'   => $mission[$referenceMission]['id_mission'],
+                               'team'         => $equipe,
                                'identifiant'  => $identifiant,
                                'avancement'   => 1,
                                'date_mission' => date('Ymd')
@@ -108,6 +111,17 @@
     return $mission;
   }
 
+  // METIER : Récupération des participants d'une mission
+  // RETOUR : Liste des participants
+  function getParticipants($idMission, $equipe)
+  {
+    // Récupération de la liste des participants d'une mission
+    $listeParticipants = physiqueParticipantsMission($idMission, $equipe);
+
+    // Retour
+    return $listeParticipants;
+  }
+
   // METIER : Lecture de l'avancement de l'utilisateur (quotidien et évènement)
   // RETOUR : Tableau des pourcentages d'avancement
   function getMissionUser($detailsMission, $idMission, $identifiant)
@@ -127,30 +141,6 @@
     return $avancement;
   }
 
-  // METIER : Récupération des participants d'une mission
-  // RETOUR : Liste des participants
-  function getParticipants($idMission)
-  {
-    // Initialisations
-    $listeParticipants = array();
-
-    // Récupération des identifiants des participants d'une mission
-    $listeIdentifiantsParticipants = physiqueParticipantsMission($idMission);
-
-    // Récupération de la liste des participants d'une mission
-    foreach ($listeIdentifiantsParticipants as $identifiant)
-    {
-      $participant = physiqueUser($identifiant);
-
-      // On ajoute la ligne au tableau
-      if (!empty($participant))
-        array_push($listeParticipants, $participant);
-    }
-
-    // Retour
-    return $listeParticipants;
-  }
-
   // METIER : Lecture du classement des utilisateurs d'une mission
   // RETOUR : Tableau de classement d'une mission
   function getRankingMission($idMission, $participants)
@@ -167,6 +157,7 @@
       $rankUser = new ParticipantMission();
 
       $rankUser->setIdentifiant($user->getIdentifiant());
+      $rankUser->setTeam($user->getTeam());
       $rankUser->setPseudo($user->getPseudo());
       $rankUser->setAvatar($user->getAvatar());
       $rankUser->setTotal($avancementUser['event']);
@@ -209,5 +200,20 @@
 
     // Retour
     return $rankingUsers;
+  }
+
+  // METIER : Lecture de la participation de l'utilisateur si changement d'équipe
+  // RETOUR : Booléen
+  function getParticipationNoRankingMission($idMission, $sessionUser)
+  {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
+    // Vérification si l'utilisateur a participé en étant dans un autre équipe
+    $participationUser = physiqueParticipationUser($idMission, $equipe, $identifiant);
+
+    // Retour
+    return $participationUser;
   }
 ?>

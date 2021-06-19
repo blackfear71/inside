@@ -29,7 +29,7 @@
     case 'doMission':
       // Validation d'un bouton de mission
       if (isset($_SERVER['HTTP_REFERER']))
-        validateMission($_POST, $_SESSION['user']['identifiant'], $_SESSION['missions'][$_POST['key_mission']], $_SERVER['HTTP_REFERER']);
+        validateMission($_POST, $_SESSION['user'], $_SESSION['missions'][$_POST['key_mission']], $_SERVER['HTTP_REFERER']);
       break;
 
     default:

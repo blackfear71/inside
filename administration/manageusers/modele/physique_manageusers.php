@@ -940,6 +940,32 @@
     return $user;
   }
 
+  // PHYSIQUE : Lecture des missions en cours
+  // RETOUR : Liste des Id de missions
+  function physiqueMissionsEnCours()
+  {
+    // Initialisations
+    $idMissionsEnCours = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM missions
+                        WHERE date_deb <= ' . date('Ymd') . ' AND date_fin >= ' . date('Ymd'));
+
+    while ($data = $req->fetch())
+    {
+      // On ajoute la ligne au tableau
+      array_push($idMissionsEnCours, $data['id']);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $idMissionsEnCours;
+  }
+
   /****************************************************************************/
   /********************************** INSERT **********************************/
   /****************************************************************************/
@@ -1087,6 +1113,24 @@
     $req->execute(array(
       'status'     => $status,
       'developper' => $developper
+    ));
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour des missions en cours
+  // RETOUR : Aucun
+  function physiqueUpdateMissionsEnCours($idMission, $identifiant, $equipe)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE missions_users
+                          SET team = :team
+                          WHERE id_mission = ' . $idMission . ' AND identifiant = "' . $identifiant . '"');
+
+    $req->execute(array(
+      'team' => $equipe
     ));
 
     $req->closeCursor();

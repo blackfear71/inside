@@ -111,49 +111,77 @@
   function getParticipants($idMission)
   {
     // Récupération de la liste des participants de la mission
-    $listeUsers = physiqueUsersMission($idMission);
+    $listeUsersParEquipes = physiqueUsersMission($idMission);
 
     // Traitement s'il y a des participants
-    if (!empty($listeUsers))
+    if (!empty($listeUsersParEquipes))
     {
       // Récupération des données complémentaires des participants
-      foreach ($listeUsers as $user)
+      foreach ($listeUsersParEquipes as &$usersParEquipe)
       {
-        // Pseudo
-        $user->setPseudo(physiquePseudoUser($user->getIdentifiant()));
-
-        // Total de la mission
-        $user->setTotal(physiqueTotalUser($idMission, $user->getIdentifiant()));
-
-        // Récupération du tri sur avancement puis identifiant
-        $triTotal[]       = $user->getTotal();
-        $triIdentifiant[] = $user->getIdentifiant();
-      }
-
-      // Tri
-      if (!empty($listeUsers))
-        array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
-
-      // Affectation du rang
-      $prevTotal   = $listeUsers[0]->getTotal();
-      $currentRank = 1;
-
-      foreach ($listeUsers as $user)
-      {
-        $currentTotal = $user->getTotal();
-
-        if ($currentTotal != $prevTotal)
+        foreach ($usersParEquipe as &$user)
         {
-          $currentRank += 1;
-          $prevTotal    = $user->getTotal();
+          // Pseudo
+          $user->setPseudo(physiquePseudoUser($user->getIdentifiant()));
+
+          // Total de la mission
+          $user->setTotal(physiqueTotalUser($idMission, $user->getIdentifiant()));
+
+          // Récupération du tri sur avancement puis identifiant
+          $triTotal[]       = $user->getTotal();
+          $triIdentifiant[] = $user->getIdentifiant();
         }
 
-        $user->setRank($currentRank);
+        unset($user);
+
+        // Tri
+        array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $usersParEquipe);
+
+        unset($triTotal);
+        unset($triIdentifiant);
+
+        // Affectation du rang
+        $prevTotal   = $usersParEquipe[0]->getTotal();
+        $currentRank = 1;
+
+        foreach ($usersParEquipe as &$user)
+        {
+          $currentTotal = $user->getTotal();
+
+          if ($currentTotal != $prevTotal)
+          {
+            $currentRank += 1;
+            $prevTotal    = $user->getTotal();
+          }
+
+          $user->setRank($currentRank);
+        }
+
+        unset($user);
       }
     }
 
+    unset($usersParEquipe);
+
     // Retour
-    return $listeUsers;
+    return $listeUsersParEquipes;
+  }
+
+  // METIER : Lecture des équipes des participants
+  // RETOUR : Liste des équipes
+  function getEquipesParticipants($listeParticipantsParEquipes)
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Récupération de la liste des équipes
+    foreach ($listeParticipantsParEquipes as $equipe => $participantsParEquipes)
+    {
+      $listeEquipes[$equipe] = physiqueEquipeParticipants($equipe);
+    }
+
+    // Retour
+    return $listeEquipes;
   }
 
   // METIER : Insertion d'une nouvelle mission

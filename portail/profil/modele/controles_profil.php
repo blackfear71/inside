@@ -65,6 +65,24 @@
     return $control_ok;
   }
 
+  // CONTROLE : Ancienne équipe différente
+  // RETOUR : Booléen
+  function controleAncienneEquipe($ancienneEquipe, $nouvelleEquipe)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Contrôle
+    if ($ancienneEquipe == $nouvelleEquipe)
+    {
+      $_SESSION['alerts']['same_team'] = true;
+      $control_ok                      = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
+
   // CONTROLE : Dépenses non nulles
   // RETOUR : Booléen
   function controleDepensesNonNulles($expense)
