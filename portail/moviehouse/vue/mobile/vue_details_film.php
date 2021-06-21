@@ -83,6 +83,7 @@
               // Supprimer
               echo '<form id="delete_film" method="post" action="details.php?action=doSupprimer" class="lien_details_film">';
                 echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
+                echo '<input type="hidden" name="team_film" value="' . $detailsFilm->getTeam() . '" />';
                 echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icone_details_film_delete eventConfirm" />';
                 echo '<input type="hidden" value="Demander la suppression de ce film ?" class="eventMessage" />';
               echo '</form>';

@@ -39,10 +39,15 @@
 
   // METIER : Récupération du nombre de notifications en temps réel
   // RETOUR : Tableau notifications
-  function countNotifications()
+  function countNotifications($sessionUser)
   {
+    // Récupération des données
+    $identifiant       = $sessionUser['identifiant'];
+    $equipe            = $sessionUser['equipe'];
+    $viewNotifications = $sessionUser['view_notifications'];
+
     // Récupération préférence
-    switch ($_SESSION['user']['view_notifications'])
+    switch ($viewNotifications)
     {
       case 'M':
         $viewNotifications = 'me';
@@ -67,10 +72,10 @@
     }
 
     // Récupération du nombre de notifications du jour
-    $nombreNotificationsJour = physiqueNombreNotificationsDates(date('Ymd'), date('Ymd'));
+    $nombreNotificationsJour = physiqueNombreNotificationsDates($equipe, date('Ymd'), date('Ymd'));
 
     // Concaténation des données pour JS
-    $data = array('identifiant'             => $_SESSION['user']['identifiant'],
+    $data = array('identifiant'             => $identifiant,
                   'nombreNotificationsJour' => $nombreNotificationsJour,
                   'view'                    => $viewNotifications,
                   'page'                    => $page
@@ -84,10 +89,14 @@
 
   // METIER : Récupération du détail des notifications en temps réel
   // RETOUR : Tableau détails notifications
-  function getDetailsNotifications()
+  function getDetailsNotifications($sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération des notifications du jour
-    $nombreNotificationsJour = physiqueNombreNotificationsDates(date('Ymd'), date('Ymd'));
+    $nombreNotificationsJour = physiqueNombreNotificationsDates($equipe, date('Ymd'), date('Ymd'));
 
     // Calcul des dates de la semaine
     $nombreJoursLundi    = 1 - date('N');
@@ -96,10 +105,10 @@
     $aujourdhui          = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
 
     // Récupération des notifications du jour
-    $nombreNotificationsSemaine = physiqueNombreNotificationsDates($lundi, $aujourdhui);
+    $nombreNotificationsSemaine = physiqueNombreNotificationsDates($equipe, $lundi, $aujourdhui);
 
     // Concaténation des données pour JS
-    $data = array('identifiant'                => $_SESSION['user']['identifiant'],
+    $data = array('identifiant'                => $identifiant,
                   'nombreNotificationsJour'    => $nombreNotificationsJour,
                   'nombreNotificationsSemaine' => $nombreNotificationsSemaine
                  );
@@ -112,13 +121,17 @@
 
   // METIER : Récupération du nombre de bugs en temps réel
   // RETOUR : Tableau nombre de bugs
-  function countBugs()
+  function countBugs($sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération du nombre de bugs
-    $nombreBugs = physiqueNombreBugs();
+    $nombreBugs = physiqueNombreBugs($equipe);
 
     // Concaténation des données pour JS
-    $data = array('identifiant' => $_SESSION['user']['identifiant'],
+    $data = array('identifiant' => $identifiant,
                   'nombreBugs'  => $nombreBugs
                  );
 
@@ -130,10 +143,10 @@
 
   // METIER : Récupération du ping des utilisateurs
   // RETOUR : Liste utilisateurs et pings
-  function getPings()
+  function getPings($equipe)
   {
     // Récupération de la liste des utilisateurs
-    $listeUsers = physiquePingsUsers();
+    $listeUsers = physiquePingsUsers($equipe);
 
     // Traitement de sécurité et tri sur statut connexion puis identifiant
     foreach ($listeUsers as &$user)

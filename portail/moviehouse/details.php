@@ -61,12 +61,12 @@
 
     case 'doModifier':
       // Modification d'un film
-      $idFilm = updateFilm($_POST, $_SESSION['user']['identifiant'], false);
+      $idFilm = updateFilm($_POST, $_SESSION['user'], false);
       break;
 
     case 'doModifierMobile':
       // Modification d'un film
-      $idFilm = updateFilm($_POST, $_SESSION['user']['identifiant'], true);
+      $idFilm = updateFilm($_POST, $_SESSION['user'], true);
       break;
 
     case 'doSupprimer':
@@ -89,12 +89,12 @@
 
     case 'doCommenter':
       // Insertion commentaire de l'utilisateur sur un film
-      $idFilm = insertCommentaire($_POST, $_SESSION['user']['identifiant']);
+      $idFilm = insertCommentaire($_POST, $_SESSION['user']);
       break;
 
     case 'doSupprimerCommentaire':
       // Suppression commentaire de l'utilisateur sur un film
-      $idFilm = deleteCommentaire($_POST, $_SESSION['user']['identifiant']);
+      $idFilm = deleteCommentaire($_POST, $_SESSION['user']);
       break;
 
     case 'doModifierCommentaire':

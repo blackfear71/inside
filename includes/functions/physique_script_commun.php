@@ -7,7 +7,7 @@
 
   // PHYSIQUE : Lecture du nombre de notifications entre 2 dates
   // RETOUR : Nombre de notifications
-  function physiqueNombreNotificationsDates($date1, $date2)
+  function physiqueNombreNotificationsDates($equipe, $date1, $date2)
   {
     // Initialisations
     $nombreNotifications = 0;
@@ -17,7 +17,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                         FROM notifications
-                        WHERE date >= "' . $date1 . '" AND date <= "' . $date2 . '" AND to_delete = "N"');
+                        WHERE (team = "' . $equipe . '" OR team = "") AND (date >= "' . $date1 . '" AND date <= "' . $date2 . '" AND to_delete = "N")');
 
     $data = $req->fetch();
 
@@ -32,7 +32,7 @@
 
   // PHYSIQUE : Lecture nombre de bugs
   // RETOUR : Nombre de bugs
-  function physiqueNombreBugs()
+  function physiqueNombreBugs($equipe)
   {
     // Initialisations
     $nombreBugs = 0;
@@ -42,7 +42,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
                         FROM bugs
-                        WHERE resolved = "N"');
+                        WHERE team = "' . $equipe . '" AND resolved = "N"');
 
     $data = $req->fetch();
 
@@ -56,7 +56,7 @@
 
   // PHYSIQUE : Lecture liste utilisateurs
   // RETOUR : Liste utilisateurs
-  function physiquePingsUsers()
+  function physiquePingsUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -64,9 +64,9 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, avatar, ping, pseudo
+    $req = $bdd->query('SELECT id, identifiant, team, avatar, ping, pseudo
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I"
+                        WHERE identifiant != "admin" AND team = "' . $equipe . '" AND status != "I"
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())

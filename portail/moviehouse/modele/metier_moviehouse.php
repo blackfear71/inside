@@ -415,10 +415,10 @@
       $idFilm = physiqueInsertionFilm($film);
 
       // Insertion notifications
-      insertNotification($identifiant, 'film', $idFilm);
+      insertNotification($identifiant, 'film', $equipe, $idFilm);
 
       if (!empty($doodle))
-        insertNotification($identifiant, 'doodle', $idFilm);
+        insertNotification($identifiant, 'doodle', $equipe, $idFilm);
 
       // Génération succès
       insertOrUpdateSuccesValue('publisher', $identifiant, 1);

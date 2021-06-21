@@ -99,7 +99,7 @@
       {
         Team::secureData($equipe);
       }
-      
+
       foreach ($listeAutorisationsParEquipe as $equipeAutorisations)
       {
         foreach ($equipeAutorisations as $autorisation)

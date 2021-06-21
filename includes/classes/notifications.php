@@ -3,6 +3,7 @@
   {
     private $id;
     private $author;
+    private $team;
     private $date;
     private $time;
     private $category;
@@ -17,6 +18,7 @@
     {
       $this->id        = 0;
       $this->author    = '';
+      $this->team      = '';
       $this->date      = '';
       $this->time      = '';
       $this->category  = '';
@@ -45,6 +47,9 @@
       if (isset($data['author']))
         $this->author    = $data['author'];
 
+      if (isset($data['team']))
+        $this->team      = $data['team'];
+
       if (isset($data['date']))
         $this->date      = $data['date'];
 
@@ -65,6 +70,7 @@
     public static function secureData($data)
     {
       $data->setAuthor(htmlspecialchars($data->getAuthor()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setDate(htmlspecialchars($data->getDate()));
       $data->setTime(htmlspecialchars($data->getTime()));
       $data->setCategory(htmlspecialchars($data->getCategory()));
@@ -96,6 +102,17 @@
     public function getAuthor()
     {
       return $this->author;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Date

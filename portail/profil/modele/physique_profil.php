@@ -360,7 +360,7 @@
 
   // PHYSIQUE : Lecture des utilisateurs
   // RETOUR : Tableau des utilisateurs
-  function physiqueUsers()
+  function physiqueUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -368,9 +368,9 @@
     global $bdd;
 
     // Requête
-    $req = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, experience
+    $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, experience
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I"
+                        WHERE identifiant != "admin" AND team = "' . $equipe . '" AND status != "I"
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
@@ -392,7 +392,7 @@
   // RETOUR : Liste des succès
   function physiqueListeSuccess()
   {
-    // Initialisation
+    // Initialisations
     $listeSuccess = array();
 
     // Requête
@@ -421,7 +421,7 @@
   // RETOUR : Valeur succès
   function physiqueSuccessUser($reference, $identifiant)
   {
-    // Initialisation
+    // Initialisations
     $value = NULL;
 
     // Requête
@@ -444,44 +444,36 @@
 
   // PHYSIQUE : Lecture des succès des utilisateurs
   // RETOUR : Liste des utilisateurs
-  function physiqueSuccessUsers($reference, $limite, $missionTermineeOuAutre, $tableauUsers)
+  function physiqueSuccessUsers($reference, $limite, $user)
   {
-    // Initialisation
-    $listeRangSuccess = array();
+    // Initialisations
+    $rangSuccess = NULL;
 
     // Requête
     global $bdd;
 
     $req = $bdd->query('SELECT *
                         FROM success_users
-                        WHERE reference = "' . $reference . '"
-                        ORDER BY value DESC');
+                        WHERE reference = "' . $reference . '" AND identifiant = "' . $user['identifiant'] . '"');
 
-    while ($data = $req->fetch())
+    $data = $req->fetch();
+
+    // Vérification que l'utilisateur a débloqué le succès pour l'ajouter
+    if ($data['value'] >= $limite)
     {
-      if ($missionTermineeOuAutre == true)
-      {
-        // Vérification que l'utilisateur a débloqué le succès pour l'ajouter
-        if ($data['value'] >= $limite)
-        {
-          // Génération d'un objet Classement
-          $rangSuccess = new Classement();
+      // Génération d'un objet Classement
+      $rangSuccess = new Classement();
 
-          $rangSuccess->setIdentifiant($data['identifiant']);
-          $rangSuccess->setPseudo($tableauUsers[$data['identifiant']]['pseudo']);
-          $rangSuccess->setAvatar($tableauUsers[$data['identifiant']]['avatar']);
-          $rangSuccess->setValue($data['value']);
-
-          // On ajoute la ligne au tableau
-          array_push($listeRangSuccess, $rangSuccess);
-        }
-      }
+      $rangSuccess->setIdentifiant($data['identifiant']);
+      $rangSuccess->setPseudo($user['pseudo']);
+      $rangSuccess->setAvatar($user['avatar']);
+      $rangSuccess->setValue($data['value']);
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listeRangSuccess;
+    return $rangSuccess;
   }
 
   // PHYSIQUE : Lecture date de fin de mission
@@ -509,7 +501,7 @@
   // RETOUR : Liste des thèmes
   function physiqueThemes($type, $niveau)
   {
-    // Initialisation
+    // Initialisations
     $listeThemes = array();
 
     // Requête
@@ -549,7 +541,7 @@
   // RETOUR : Booléen
   function physiqueThemeMission()
   {
-    // Initialisation
+    // Initialisations
     $isThemeMission = false;
 
     // Requête

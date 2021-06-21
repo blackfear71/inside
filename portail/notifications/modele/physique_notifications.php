@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture du nombre de notifications en fonction de la vue
   // RETOUR : Nombre de notifications
-  function physiqueNombreNotifications($vue, $identifiant, $date)
+  function physiqueNombreNotifications($vue, $identifiant, $equipe, $date)
   {
     // Initialisations
     $nombreNotifications = 0;
@@ -19,19 +19,20 @@
       case 'me':
         $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                             FROM notifications
-                            WHERE author = "' . $identifiant . '" OR category = "' . $identifiant . '"');
+                            WHERE (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR category = "' . $identifiant . '")');
         break;
 
       case 'week':
         $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                             FROM notifications
-                            WHERE date <= ' . date('Ymd') . ' AND date > ' . $date);
+                            WHERE (team = "' . $equipe . '" OR team = "") AND date <= ' . date('Ymd') . ' AND date > ' . $date);
         break;
 
       case 'all':
       default:
         $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
-                            FROM notifications');
+                            FROM notifications
+                            WHERE team = "' . $equipe . '" OR team = ""');
         break;
     }
 
@@ -48,7 +49,7 @@
 
   // PHYSIQUE : Lecture des notifications en fonction de la vue
   // RETOUR : Liste des notifications
-  function physiqueNotifications($vue, $identifiant, $date, $premiereEntree, $nombreParPage)
+  function physiqueNotifications($vue, $identifiant, $equipe, $date, $premiereEntree, $nombreParPage)
   {
     // Initialisations
     $listeNotifications = array();
@@ -61,7 +62,7 @@
       case 'me':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE to_delete = "N" AND (author = "' . $identifiant . '" OR category = "' . $identifiant . '")
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR category = "' . $identifiant . '")
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -69,14 +70,14 @@
       case 'today':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE to_delete = "N" AND date = ' . date('Ymd') . '
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND date = ' . date('Ymd') . '
                             ORDER BY time DESC, id DESC');
         break;
 
       case 'week':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE to_delete = "N" AND date <= ' . date('Ymd') . ' AND date >= ' . $date . '
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND date <= ' . date('Ymd') . ' AND date >= ' . $date . '
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -85,7 +86,7 @@
       default:
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE to_delete = "N"
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "")
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;
@@ -108,7 +109,7 @@
 
   // PHYSIQUE : Lecture des utilisateurs inscrits
   // RETOUR : Liste des utilisateurs
-  function physiqueUsers()
+  function physiqueUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -116,9 +117,12 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I"
+                        WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
+                        OR EXISTS (SELECT id, author, team
+                                   FROM notifications
+                                   WHERE (notifications.author = users.identifiant OR notifications.content = users.identifiant) AND (notifications.team = "' . $equipe . '" OR notifications.team = ""))
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
@@ -289,7 +293,7 @@
 
   // PHYSIQUE : Lecture position phrase / image culte dans la table
   // RETOUR : Position
-  function physiquePositionCollector($idCollector)
+  function physiquePositionCollector($idCollector, $equipe)
   {
     // Initialisations
     $position = 1;
@@ -299,6 +303,7 @@
 
     $req = $bdd->query('SELECT id, date_collector
                         FROM collector
+                        WHERE team = "' . $equipe . '" OR team = ""
                         ORDER BY date_collector DESC, id DESC');
 
     while ($data = $req->fetch())
@@ -317,7 +322,7 @@
 
   // PHYSIQUE : Lecture position de l'idée en fonction de la vue
   // RETOUR : Position de l'idée
-  function physiquePositionIdee($vue, $idIdee, $identifiant)
+  function physiquePositionIdee($vue, $idIdee, $equipe, $identifiant)
   {
     // Initialisations
     $positionIdee = 1;
@@ -330,7 +335,7 @@
       case 'done':
         $req = $bdd->query('SELECT id, date
                             FROM ideas
-                            WHERE status = "D" OR status = "R"
+                            WHERE team = "' . $equipe . '" AND (status = "D" OR status = "R")
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -338,7 +343,7 @@
       case 'inprogress':
         $req = $bdd->query('SELECT id, date
                             FROM ideas
-                            WHERE status = "O" OR status = "C" OR status = "P"
+                            WHERE team = "' . $equipe . '" AND (status = "O" OR status = "C" OR status = "P")
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -346,7 +351,7 @@
       case 'mine':
         $req = $bdd->query('SELECT id, date
                             FROM ideas
-                            WHERE (status = "O" OR status = "C" OR status = "P") AND developper = "' . $identifiant . '"
+                            WHERE (status = "O" OR status = "C" OR status = "P") AND team = "' . $equipe . '" AND developper = "' . $identifiant . '"
                             ORDER BY date DESC, id DESC'
                           );
         break;
@@ -355,6 +360,7 @@
       default:
         $req = $bdd->query('SELECT id, date
                             FROM ideas
+                            WHERE team = "' . $equipe . '"
                             ORDER BY date DESC, id DESC'
                           );
         break;

@@ -73,7 +73,7 @@
 
       // Récupération du numéro de page
       if (!empty($idCollector))
-        $numeroPage = numeroPageCollector($idCollector);
+        $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
       break;
 
     case 'doAjouterMobile':
@@ -82,7 +82,7 @@
 
       // Récupération du numéro de page
       if (!empty($idCollector))
-        $numeroPage = numeroPageCollector($idCollector);
+        $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
       break;
 
     case 'doSupprimer':
@@ -95,7 +95,7 @@
       $idCollector = updateCollector($_POST, $_FILES, false);
 
       // Récupération du numéro de page
-      $numeroPage = numeroPageCollector($idCollector);
+      $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
       break;
 
     case 'doModifierMobile':
@@ -103,7 +103,7 @@
       $idCollector = updateCollector($_POST, $_FILES, true);
 
       // Récupération du numéro de page
-      $numeroPage = numeroPageCollector($idCollector);
+      $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
       break;
 
     case 'doVoter':

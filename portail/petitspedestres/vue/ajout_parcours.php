@@ -62,7 +62,7 @@
   							echo '<input type="text" placeholder="Nom parcours" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" />';
 
                 echo '<label class="label_parcours">Distance : </label>';
-  							echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" />';
+  							echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="distance" class="PP-monoligne" />';
 
                 echo '<label class="label_parcours">Lieu : </label>';
   							echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';

@@ -18,7 +18,7 @@
   // RETOUR : Objet Team
   function getEquipe($reference)
   {
-    // Récupération des données du profil
+    // Récupération des données de l'équipe
     $equipe = physiqueEquipe($reference);
 
     // Retour
@@ -441,10 +441,10 @@
 
   // METIER : Lecture liste des utilisateurs
   // RETOUR : Liste des utilisateurs
-  function getUsers()
+  function getUsers($equipe)
   {
     // Récupération liste des utilisateurs
-    $listeUsers = physiqueUsers();
+    $listeUsers = physiqueUsers($equipe);
 
     // Récupération des données complémentaires
     foreach ($listeUsers as $user)
@@ -479,7 +479,8 @@
 
     foreach ($listeUsers as $user)
     {
-      $tableauUsers[$user->getIdentifiant()] = array('pseudo' => htmlspecialchars($user->getPseudo()),
+      $tableauUsers[$user->getIdentifiant()] = array('identifiant' => $user->getIdentifiant(),
+                                                     'pseudo' => htmlspecialchars($user->getPseudo()),
                                                      'avatar' => htmlspecialchars($user->getAvatar())
                                                     );
     }
@@ -509,7 +510,35 @@
         $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getReference());
 
         // Récupération de l'avancement des utilisateurs
-        $listeRangSuccess = physiqueSuccessUsers($success->getReference(), $success->getLimit_success(), $missionTermineeOuAutre, $tableauUsers);
+        $listeRangSuccess = array();
+
+        if ($missionTermineeOuAutre == true)
+        {
+          foreach ($tableauUsers as $user)
+          {
+            $rangSuccess = physiqueSuccessUsers($success->getReference(), $success->getLimit_success(), $user);
+
+            // On ajoute la ligne au tableau
+            if (!empty($rangSuccess))
+              array_push($listeRangSuccess, $rangSuccess);
+          }
+        }
+
+        // Tri sur la valeur du succès des utilisateurs
+        if (!empty($listeRangSuccess))
+        {
+          foreach ($listeRangSuccess as &$rangSuccessUser)
+          {
+            $triSuccess[] = $rangSuccessUser->getValue();
+          }
+
+          unset($rangSuccessUser);
+
+          // Tri
+          array_multisort($triSuccess, SORT_DESC, $listeRangSuccess);
+
+          unset($triSuccess);
+        }
 
         // Filtrage du tableau
         if (!empty($listeRangSuccess))

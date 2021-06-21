@@ -228,6 +228,7 @@
 							echo '<td class="td_manage_users">';
 								echo '<form method="post" action="manageusers.php?action=doAccepterDesinscription" class="form_manage_user">';
 									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
+									echo '<input type="hidden" name="team_user" value="' . $user->getTeam() . '" />';
 									echo '<input type="submit" name="accept_desinscription" title="Accepter" value="" class="icone_accepter" />';
 								echo '</form>';
 							echo '</td>';

@@ -38,6 +38,7 @@
             {
     					echo '<form method="post" action="calendars.php?action=doDeleteAnnexe">';
 								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
+								echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
     						echo '<input type="submit" name="accepter_suppression_annexe" value="ACCEPTER" class="bouton_admin" />';
     					echo '</form>';
             }
@@ -48,6 +49,7 @@
             {
     					echo '<form method="post" action="calendars.php?action=doResetAnnexe">';
 								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
+								echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
     						echo '<input type="submit" name="annuler_suppression_annexe" value="REFUSER" class="bouton_admin" />';
     					echo '</form>';
             }

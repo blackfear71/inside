@@ -25,19 +25,19 @@
         switchMobile();
         break;
 
-      // Décompte du nombre de notifications du jour et de la semaine en temps réel
+      // Décompte du nombre de notifications du jour
       case 'countNotifications':
-        countNotifications();
+        countNotifications($_SESSION['user']);
         break;
 
       // Récupère le détail des notifications
       case 'getDetailsNotifications':
-        getDetailsNotifications();
+        getDetailsNotifications($_SESSION['user']);
         break;
 
       // Décompte du nombre de bugs en temps réel
       case 'countBugs':
-        countBugs();
+        countBugs($_SESSION['user']);
         break;
 
       // Action par défaut
@@ -53,7 +53,7 @@
     {
       // Récupération du ping des utilisateurs
       case 'getPings':
-        getPings();
+        getPings($_SESSION['user']['equipe']);
         break;
 
       // Mise à jour du ping d'un utilisateur

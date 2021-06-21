@@ -8,10 +8,14 @@
 
   // METIER : Lecture nombre de pages en fonction de la vue
   // RETOUR : Nombre de pages
-  function getPages($view, $identifiant)
+  function getPages($view, $sessionUser)
   {
     // Initialisations
     $nombreParPage = 20;
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     // Calcul de la date du jour - 7 jours
     if ($view == 'week')
@@ -20,7 +24,7 @@
       $dateMoins7 = '';
 
     // Lecture du nombre total de notifications en fonction de la vue
-    $nombreNotifications = physiqueNombreNotifications($view, $identifiant, $dateMoins7);
+    $nombreNotifications = physiqueNombreNotifications($view, $identifiant, $equipe, $dateMoins7);
 
     // Calcul du nombre de pages
     $nombrePages = ceil($nombreNotifications / $nombreParPage);
@@ -31,8 +35,12 @@
 
   // METIER : Lecture des notifications en fonction de la vue
   // RETOUR : Liste des notifications
-  function getNotifications($view, $identifiant, $nombrePages, $page)
+  function getNotifications($view, $sessionUser, $nombrePages, $page)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Détermination des critères de recherche
     if ($view != 'today')
     {
@@ -59,16 +67,31 @@
     }
 
     // Récupération de la liste des notifications
-    $listeNotifications = physiqueNotifications($view, $identifiant, $dateMoins7, $premiereEntree, $nombreParPage);
+    $listeNotifications = physiqueNotifications($view, $identifiant, $equipe, $dateMoins7, $premiereEntree, $nombreParPage);
 
     // Retour
     return $listeNotifications;
   }
 
+  // METIER : Lecture des utilisateurs
+  // RETOUR : Liste des utilisateurs
+  function getUsers($equipe)
+  {
+    // Lecture des utilisateurs
+    $listeUsers = physiqueUsers($equipe);
+
+    // Retour
+    return $listeUsers;
+  }
+
   // METIER : Formatage des notifications (icône, phrase & lien)
   // RETOUR : Notifications formatées
-  function formatNotifications($notifications, $listeUsers, $identifiant)
+  function formatNotifications($notifications, $listeUsers, $sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Traitement de toutes les catégories de notifications
     foreach ($notifications as $key => $notification)
     {
@@ -187,7 +210,7 @@
             $speaker = htmlspecialchars($collector->getSpeaker());
 
           // Recherche du numéro de page pour redirection
-          $numeroPage = numeroPageCollector($notification->getContent());
+          $numeroPage = numeroPageCollector($notification->getContent(), $equipe);
 
           // Formatage de la notification
           $icone  = 'collector';
@@ -217,7 +240,7 @@
             $speaker = htmlspecialchars($collector->getSpeaker());
 
           // Recherche du numéro de page pour redirection
-          $numeroPage = numeroPageCollector($collector->getId());
+          $numeroPage = numeroPageCollector($collector->getId(), $equipe);
 
           // Formatage de la notification
           $icone  = 'collector';
@@ -295,7 +318,7 @@
             $auteur = formatUnknownUser('', false, true);
 
           // Recherche du numéro de page pour redirection
-          $numeroPage = getNumeroPageIdea($idee->getId(), $view, $identifiant);
+          $numeroPage = getNumeroPageIdea($idee->getId(), $view, $equipe, $identifiant);
 
           // Formatage de la notification
           $icone  = 'ideas';
@@ -393,13 +416,13 @@
 
   // METIER : Récupère le numéro de page pour une notification Collector
   // RETOUR : Numéro de page
-  function numeroPageCollector($idCollector)
+  function numeroPageCollector($idCollector, $equipe)
   {
     // Initialisations
     $nombreParPage = 18;
 
     // Recherche de la position de la phrase culte dans la table
-    $positionCollector = physiquePositionCollector($idCollector);
+    $positionCollector = physiquePositionCollector($idCollector, $equipe);
 
     // Calcul du numéro de page
     $numeroPage = ceil($positionCollector / $nombreParPage);
@@ -410,13 +433,13 @@
 
   // METIER : Récupère le numéro de page pour une notification #TheBox
   // RETOUR : Numéro de page
-  function getNumeroPageIdea($idIdee, $view, $identifiant)
+  function getNumeroPageIdea($idIdee, $view, $equipe, $identifiant)
   {
     // Initialisations
     $nombreParPage = 18;
 
     // Recherche de la position de l'idée dans la table en fonction de la vue
-    $positionIdee = physiquePositionIdee($view, $idIdee, $identifiant);
+    $positionIdee = physiquePositionIdee($view, $idIdee, $equipe, $identifiant);
 
     // Calcul du numéro de page de l'idée
     $numeroPage = ceil($positionIdee / $nombreParPage);

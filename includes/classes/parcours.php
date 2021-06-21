@@ -2,6 +2,7 @@
   class Parcours
   {
     private $id;
+    private $team;
     private $nom;
     private $distance;
     private $lieu;
@@ -11,6 +12,7 @@
     public function __construct()
     {
       $this->id       = 0;
+      $this->team     = '';
       $this->nom      = '';
       $this->distance = 0;
       $this->lieu     = '';
@@ -30,24 +32,28 @@
     protected function fill ($data)
     {
       if (isset($data['id']))
-        $this->id = $data['id'];
+        $this->id       = $data['id'];
 
-      if (isset($data['id']))
-        $this->nom = $data['nom'];
+      if (isset($data['team']))
+        $this->team     = $data['team'];
 
-      if (isset($data['id']))
+      if (isset($data['nom']))
+        $this->nom      = $data['nom'];
+
+      if (isset($data['distance']))
         $this->distance = $data['distance'];
 
-      if (isset($data['id']))
-        $this->lieu = $data['lieu'];
+      if (isset($data['lieu']))
+        $this->lieu     = $data['lieu'];
 
-      if (isset($data['id']))
-        $this->image = $data['image'];
+      if (isset($data['image']))
+        $this->image    = $data['image'];
     }
 
     // Sécurisation des données
     public static function secureData($data)
     {
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setNom(htmlspecialchars($data->getNom()));
       $data->setDistance(htmlspecialchars($data->getDistance()));
       $data->setLieu(htmlspecialchars($data->getLieu()));
@@ -66,7 +72,18 @@
       return $this->id;
     }
 
-    // nom
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
+    }
+
+    // Nom
     public function setNom($name)
     {
       $this->nom = $name;
@@ -77,10 +94,10 @@
       return $this->nom;
     }
 
-    // distance
-    public function setDistance($dist)
+    // Distance
+    public function setDistance($distance)
     {
-      $this->distance = $dist;
+      $this->distance = $distance;
     }
 
     public function getDistance()
@@ -88,10 +105,10 @@
       return $this->distance;
     }
 
-    // lieu
-    public function setLieu($place)
+    // Lieu
+    public function setLieu($lieu)
     {
-      $this->lieu = $place;
+      $this->lieu = $lieu;
     }
 
     public function getLieu()
@@ -99,7 +116,7 @@
       return $this->lieu;
     }
 
-    // url image
+    // Image
     public function setImage($image)
     {
       $this->image = $image;

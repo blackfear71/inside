@@ -220,7 +220,7 @@
       physiqueInsertionChangelog($changelog);
 
       // Insertion notification
-      insertNotification('admin', 'changelog', $contentNotification);
+      insertNotification('admin', 'changelog', '', $contentNotification);
 
       // Message d'alerte
       $_SESSION['alerts']['log_added'] = true;
@@ -310,7 +310,7 @@
     physiqueDeleteChangelog($year, $week);
 
     // Suppression des notifications
-    deleteNotification('changelog', $contentNotification);
+    deleteNotification('changelog', '', $contentNotification);
 
     // Message d'alerte
     $_SESSION['alerts']['log_deleted'] = true;

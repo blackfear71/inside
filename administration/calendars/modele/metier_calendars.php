@@ -13,7 +13,7 @@
     // Retour
     return $listeEquipes;
   }
-  
+
   // METIER : Récupération autorisation tous utilisateurs
   // RETOUR : Liste des préférences
   function getAutorisationsCalendars()
@@ -390,6 +390,7 @@
   {
     // Récupération des données
     $idCalendars = $post['id_calendrier'];
+    $equipe      = $post['team_calendrier'];
 
     // Lecture des données en base
     $calendars = physiqueDonneesCalendars($idCalendars, 'calendars');
@@ -402,7 +403,7 @@
     physiqueDeleteCalendrier($idCalendars);
 
     // Suppression des notifications
-    deleteNotification('calendrier', $idCalendars);
+    deleteNotification('calendrier', $equipe, $idCalendars);
 
     // Message d'alerte
     $_SESSION['alerts']['calendar_deleted'] = true;
@@ -414,6 +415,7 @@
   {
     // Récupération des données
     $idCalendars = $post['id_annexe'];
+    $equipe      = $post['team_annexe'];
 
     // Lecture des données en base
     $calendars = physiqueDonneesCalendars($idCalendars, 'calendars_annexes');
@@ -426,7 +428,7 @@
     physiqueDeleteAnnexe($idCalendars);
 
     // Suppression des notifications
-    deleteNotification('annexe', $idCalendars);
+    deleteNotification('annexe', $equipe, $idCalendars);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_deleted'] = true;
@@ -438,13 +440,14 @@
   {
     // Récupération des données
     $idCalendars = $post['id_calendrier'];
+    $equipe      = $post['team_calendrier'];
     $toDelete    = 'N';
 
     // Remise à "N" de l'indicateur de demande de suppression
     physiqueUpdateStatusCalendars('calendars', $idCalendars, $toDelete);
 
     // Mise à jour du statut de la notification
-    updateNotification('calendrier', $idCalendars, $toDelete);
+    updateNotification('calendrier', $equipe, $idCalendars, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['calendar_reseted'] = true;
@@ -456,13 +459,14 @@
   {
     // Récupération des données
     $idAnnexe = $post['id_annexe'];
+    $equipe   = $post['team_calendrier'];
     $toDelete = 'N';
 
     // Remise à "N" de l'indicateur de demande de suppression
     physiqueUpdateStatusCalendars('calendars_annexes', $idAnnexe, $toDelete);
 
     // Mise à jour du statut de la notification
-    updateNotification('annexe', $idAnnexe, $toDelete);
+    updateNotification('annexe', $equipe, $idAnnexe, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_reseted'] = true;

@@ -78,14 +78,15 @@
   function deleteCalendrier($post)
   {
     // Récupération des données
-    $idCalendrier = $post['id_cal'];
+    $idCalendrier = $post['id_calendrier'];
+    $equipe       = $post['team_calendrier'];
     $toDelete     = 'Y';
 
     // Modification de l'enregistrement en base (en attendant validation de l'admin)
     physiqueUpdateStatusCalendars('calendars', $idCalendrier, $toDelete);
 
     // Mise à jour du statut de la notification
-    updateNotification('calendrier', $idCalendrier, $toDelete);
+    updateNotification('calendrier', $equipe, $idCalendrier, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['calendar_removed'] = true;
@@ -97,13 +98,14 @@
   {
     // Récupération des données
     $idAnnexe = $post['id_annexe'];
+    $equipe   = $post['team_annexe'];
     $toDelete = 'Y';
 
     // Modification de l'enregistrement en base (en attendant validation de l'admin)
     physiqueUpdateStatusCalendars('calendars_annexes', $idAnnexe, $toDelete);
 
     // Mise à jour du statut de la notification
-    updateNotification('annexe', $idAnnexe, $toDelete);
+    updateNotification('annexe', $equipe, $idAnnexe, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_removed'] = true;
@@ -118,7 +120,7 @@
 
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
-    $team        = $sessionUser['equipe'];
+    $equipe      = $sessionUser['equipe'];
     $month       = $post['month_calendar'];
     $year        = $post['year_calendar'];
     $toDelete    = 'N';
@@ -135,7 +137,7 @@
     if ($control_ok == true)
     {
       $calendar = array('to_delete' => $toDelete,
-                        'team'      => $team,
+                        'team'      => $equipe,
                         'month'     => $month,
                         'year'      => $year,
                         'calendar'  => $nameCalendar
@@ -144,7 +146,7 @@
       $idCalendar = physiqueInsertionCalendrier($calendar);
 
       // Insertion notification
-      insertNotification($identifiant, 'calendrier', $idCalendar);
+      insertNotification($identifiant, 'calendrier', $equipe, $idCalendar);
 
       // Message d'alerte
       $_SESSION['alerts']['calendar_added'] = true;
@@ -163,7 +165,7 @@
 
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
-    $team        = $sessionUser['equipe'];
+    $equipe      = $sessionUser['equipe'];
     $toDelete    = 'N';
     $title       = $post['title'];
     $folder      = '../../includes/images/calendars/annexes';
@@ -178,7 +180,7 @@
     if ($control_ok == true)
     {
       $annexe = array('to_delete' => $toDelete,
-                      'team'      => $team,
+                      'team'      => $equipe,
                       'annexe'    => $nameAnnexe,
                       'title'     => $title
                      );
@@ -186,7 +188,7 @@
       $idAnnexe = physiqueInsertionAnnexe($annexe);
 
       // Insertion notification
-      insertNotification($identifiant, 'annexe', $idAnnexe);
+      insertNotification($identifiant, 'annexe', $equipe, $idAnnexe);
 
       // Message d'alerte
       $_SESSION['alerts']['annexe_added'] = true;
@@ -551,7 +553,7 @@
   {
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
-    $team        = $sessionUser['equipe'];
+    $equipe      = $sessionUser['equipe'];
     $picture     = $post['calendar_generator'];
     $month       = $post['month_generator'];
     $year        = $post['year_generator'];
@@ -586,7 +588,7 @@
 
     // Insertion de l'enregistrement en base
     $calendar = array('to_delete' => $toDelete,
-                      'team'      => $team,
+                      'team'      => $equipe,
                       'month'     => $month,
                       'year'      => $year,
                       'calendar'  => $name
@@ -601,7 +603,7 @@
     unlink($dossierTemporaire . '/trim_' . $tempName);
 
     // Insertion notification
-    insertNotification($identifiant, 'calendrier', $idCalendar);
+    insertNotification($identifiant, 'calendrier', $equipe, $idCalendar);
 
     // Message d'alerte
     $_SESSION['alerts']['calendar_added'] = true;
@@ -713,7 +715,7 @@
   {
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
-    $team        = $sessionUser['equipe'];
+    $equipe      = $sessionUser['equipe'];
     $picture     = $post['annexe_generator'];
     $tempName    = $post['temp_name_annexe_generator'];
     $toDelete    = 'N';
@@ -744,7 +746,7 @@
 
     // Insertion de l'enregistrement en base
     $annexe = array('to_delete' => $toDelete,
-                    'team'      => $team,
+                    'team'      => $equipe,
                     'annexe'    => $name,
                     'title'     => $title
                    );
@@ -758,7 +760,7 @@
     unlink($dossierTemporaire . '/trim_' . $tempName);
 
     // Insertion notification
-    insertNotification($identifiant, 'annexe', $idAnnexe);
+    insertNotification($identifiant, 'annexe', $equipe, $idAnnexe);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_added'] = true;

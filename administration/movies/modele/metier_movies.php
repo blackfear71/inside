@@ -41,6 +41,7 @@
   {
     // Récupération des données
     $idFilm = $post['id_film'];
+    $equipe = $post['team_film'];
 
     // Récupération de l'identifiant de l'ajouteur
     $identifiantAjout = physiqueIdentifiantAjoutFilm($idFilm);
@@ -58,10 +59,10 @@
     insertOrUpdateSuccesValue('publisher', $identifiantAjout, -1);
 
     // Suppression des notifications
-    deleteNotification('film', $idFilm);
-    deleteNotification('doodle', $idFilm);
-    deleteNotification('cinema', $idFilm);
-    deleteNotification('comments', $idFilm);
+    deleteNotification('film', $equipe, $idFilm);
+    deleteNotification('doodle', $equipe, $idFilm);
+    deleteNotification('cinema', $equipe, $idFilm);
+    deleteNotification('comments', $equipe, $idFilm);
 
     // Message d'alerte
     $_SESSION['alerts']['film_deleted'] = true;
@@ -73,6 +74,7 @@
   {
     // Récupération des données
     $idFilm         = $post['id_film'];
+    $equipe         = $post['team_film'];
     $toDelete       = 'N';
     $identifiantDel = '';
 
@@ -80,10 +82,10 @@
     physiqueResetFilm($idFilm, $toDelete, $identifiantDel);
 
     // Mise à jour du statut des notifications
-    updateNotification('film', $idFilm, $toDelete);
-    updateNotification('doodle', $idFilm, $toDelete);
-    updateNotification('cinema', $idFilm, $toDelete);
-    updateNotification('comments', $idFilm, $toDelete);
+    updateNotification('film', $equipe, $idFilm, $toDelete);
+    updateNotification('doodle', $equipe, $idFilm, $toDelete);
+    updateNotification('cinema', $equipe, $idFilm, $toDelete);
+    updateNotification('comments', $equipe, $idFilm, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['film_reseted'] = true;

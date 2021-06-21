@@ -68,7 +68,7 @@
 
                     // Distance
                     echo '<label class="label_parcours">Distance : </label>';
-                    echo '<input type="text" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" />';
+                    echo '<input type="text" value="' . $_SESSION['save']['distance_parcours'] . '" name="distance" class="PP-monoligne" />';
 
                     // Lieu
                     echo '<label class="label_parcours">Lieu : </label>';
@@ -86,7 +86,7 @@
 
                     // Distance
                     echo '<label class="label_parcours">Distance : </label>';
-                    echo '<input type="text" value="' . $parcours->getDistance() . '" name="dist" class="PP-monoligne" />';
+                    echo '<input type="text" value="' . $parcours->getDistance() . '" name="distance" class="PP-monoligne" />';
 
                     // Lieu
                     echo '<label class="label_parcours">Lieu : </label>';

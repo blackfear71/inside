@@ -581,7 +581,7 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
-    $team        = $post['team_user'];
+    $oldTeam     = $post['team_user'];
     $newTeam     = $post['new_team_user'];
     $resetTeam   = '';
     $status      = 'U';
@@ -590,7 +590,7 @@
     physiqueDeleteEquipe($newTeam);
 
     // Mise à jour de la référence de l'équipe et du statut à "U"
-    $user = array('team'     => $team,
+    $user = array('team'     => $oldTeam,
                   'new_team' => $resetTeam,
                   'status'   => $status
                  );
@@ -604,12 +604,13 @@
   {
     // Récupération des données
     $identifiant = $post['id_user'];
+    $equipe      = $post['team_user'];
 
     // Validation de l'équipe (création, modification ou suppression)
     acceptEquipe($post, false);
 
     // Insertion notification
-    insertNotification('admin', 'inscrit', $identifiant);
+    insertNotification('admin', 'inscrit', $equipe, $identifiant);
   }
 
   // METIER : Refus inscription
@@ -639,6 +640,7 @@
 
     // Récupération des données
     $identifiant = $post['id_user'];
+    $equipe      = $post['team_user'];
 
     // Récupération des données utilisateur
     $user = physiqueDonneesDesinscriptionUser($identifiant);
@@ -685,7 +687,7 @@
       physiqueDeleteUser($user->getIdentifiant());
 
       // Suppression notification inscription
-      deleteNotification('inscrit', $user->getIdentifiant());
+      deleteNotification('inscrit', $equipe, $user->getIdentifiant());
 
       // Suppression avatar
       if (!empty($user->getAvatar()))

@@ -34,7 +34,7 @@
           else
           {
             // Calcul du nombre de pages
-            $nombrePages = getPages($_GET['view'], $_SESSION['user']['identifiant']);
+            $nombrePages = getPages($_GET['view'], $_SESSION['user']);
 
             // Récupération des notifications en fonction de la page
             if ($nombrePages > 0)
@@ -44,33 +44,33 @@
               elseif ($_GET['page'] < 1)
                 header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
               else
-                $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], $nombrePages, $_GET['page']);
+                $notifications = getNotifications($_GET['view'], $_SESSION['user'], $nombrePages, $_GET['page']);
             }
 
             // Formatage des notifications
             if (!empty($notifications))
             {
               // Récupération de la liste des utilisateurs
-              $listeUsers = physiqueUsers();
+              $listeUsers = getUsers($_SESSION['user']['equipe']);
 
               // Formatage des notifications
-              $notifications = formatNotifications($notifications, $listeUsers, $_SESSION['user']['identifiant']);
+              $notifications = formatNotifications($notifications, $listeUsers, $_SESSION['user']);
             }
           }
           break;
 
         case 'today':
           // Récupération des notifications du jour
-          $notifications = getNotifications($_GET['view'], $_SESSION['user']['identifiant'], NULL, NULL);
+          $notifications = getNotifications($_GET['view'], $_SESSION['user'], NULL, NULL);
 
           // Formatage des notifications
           if (!empty($notifications))
           {
             // Récupération de la liste des utilisateurs
-            $listeUsers = physiqueUsers();
+            $listeUsers = getUsers($_SESSION['user']['equipe']);
 
             // Formatage des notifications
-            $notifications = formatNotifications($notifications, $listeUsers, $_SESSION['user']['identifiant']);
+            $notifications = formatNotifications($notifications, $listeUsers, $_SESSION['user']);
           }
           break;
 

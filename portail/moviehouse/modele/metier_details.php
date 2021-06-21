@@ -144,12 +144,14 @@
 
   // METIER : Modification d'un film
   // RETOUR : Id film
-  function updateFilm($post, $identifiant, $isMobile)
+  function updateFilm($post, $sessionUser, $isMobile)
   {
     // Initialisations
     $control_ok = true;
 
     // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
     $idFilm      = $post['id_film'];
     $nomFilm     = $post['nom_film'];
     $dateTheater = $post['date_theater'];
@@ -265,23 +267,23 @@
       if (empty($doodle))
       {
         // Suppression notification si Doodle supprimé
-        deleteNotification('doodle', $idFilm);
+        deleteNotification('doodle', $equipe, $idFilm);
       }
       else
       {
         // Vérification si Doodle renseigné et notification existante
-        $notificationDoodleExist = controlNotification('doodle', $idFilm);
+        $notificationDoodleExist = controlNotification('doodle', $idFilm, $equipe);
 
         // Insertion notification
         if ($notificationDoodleExist != true)
-          insertNotification($identifiant, 'doodle', $idFilm);
+          insertNotification($identifiant, 'doodle', $equipe, $idFilm);
       }
 
       // Gestion notification sortie cinéma
       if (empty($dateDoodle))
       {
         // Suppression notification si Date sortie supprimée (cas notification générée par batch puis date supprimée le jour même)
-        deleteNotification('cinema', $idFilm);
+        deleteNotification('cinema', $equipe, $idFilm);
       }
       else
       {
@@ -289,11 +291,11 @@
         if ($dateDoodle == date('Ymd'))
         {
           // Vérification si sortie cinéma programmée et notification existante
-          $notificationCinemaExist = controlNotification('cinema', $idFilm);
+          $notificationCinemaExist = controlNotification('cinema', $idFilm, $equipe);
 
           // Insertion notification
           if ($notificationCinemaExist != true)
-            insertNotification('admin', 'cinema', $idFilm);
+            insertNotification('admin', 'cinema', $equipe, $idFilm);
         }
       }
 
@@ -335,16 +337,17 @@
   {
     // Récupération des données
     $idFilm   = $post['id_film'];
+    $equipe   = $post['team_film'];
     $toDelete = 'Y';
 
     // Modification de l'enregistrement en base
     physiqueUpdateStatusFilm($idFilm, $toDelete, $identifiant);
 
     // Mise à jour du statut des notifications
-    updateNotification('film', $idFilm, $toDelete);
-    updateNotification('doodle', $idFilm, $toDelete);
-    updateNotification('cinema', $idFilm, $toDelete);
-    updateNotification('comments', $idFilm, $toDelete);
+    updateNotification('film', $equipe, $idFilm, $toDelete);
+    updateNotification('doodle', $equipe, $idFilm, $toDelete);
+    updateNotification('cinema', $equipe, $idFilm, $toDelete);
+    updateNotification('comments', $equipe, $idFilm, $toDelete);
 
     // Message d'alerte
     $_SESSION['alerts']['film_removed'] = true;
@@ -370,11 +373,13 @@
 
   // METIER : Insertion commentaire sur un détail film
   // RETOUR : Id film
-  function insertCommentaire($post, $identifiant)
+  function insertCommentaire($post, $sessionUser)
   {
     // Récupération des données
-    $idFilm  = $post['id_film'];
-    $comment = $post['comment'];
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+    $idFilm      = $post['id_film'];
+    $comment     = $post['comment'];
 
     // Insertion de l'enregistrement en table
     $commentaire = array('id_film' => $idFilm,
@@ -387,11 +392,11 @@
     physiqueInsertionCommentaire($commentaire);
 
     // Vérification notification déjà présente
-    $notificationCommentsExist = controlNotification('comments', $idFilm);
+    $notificationCommentsExist = controlNotification('comments', $idFilm, $equipe);
 
     // Insertion notification
     if ($notificationCommentsExist != true)
-      insertNotification($identifiant, 'comments', $idFilm);
+      insertNotification($identifiant, 'comments', $equipe, $idFilm);
 
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $identifiant, 1);
@@ -419,9 +424,11 @@
 
   // METIER : Suppression commentaire sur un détail film
   // RETOUR : Id film
-  function deleteCommentaire($post, $identifiant)
+  function deleteCommentaire($post, $sessionUser)
   {
     // Récupération des données
+    $identifiant   = $sessionUser['identifiant'];
+    $equipe        = $sessionUser['equipe'];
     $idFilm        = $post['id_film'];
     $idCommentaire = $post['id_comment'];
 
@@ -433,7 +440,7 @@
 
     // Suppression notification
     if ($dernierCommentaireJour == true)
-      deleteNotification('comments', $idFilm);
+      deleteNotification('comments', $equipe, $idFilm);
 
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $identifiant, -1);

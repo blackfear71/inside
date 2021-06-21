@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture des films pour la recherche
   // RETOUR : Liste des films
-  function physiqueRechercheFilms($recherche)
+  function physiqueRechercheFilms($recherche, $equipe)
   {
     // Initialisations
     $resultatRecherche = array();
@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM movie_house
-                        WHERE to_delete != "Y" AND film LIKE "%' . $recherche . '%"
+                        WHERE to_delete != "Y" AND team = "' . $equipe . '" AND film LIKE "%' . $recherche . '%"
                         ORDER BY date_theater DESC, film ASC');
 
     while ($data = $req->fetch())
@@ -36,7 +36,7 @@
 
   // PHYSIQUE : Lecture des restaurants pour la recherche
   // RETOUR : Liste des restaurants
-  function physiqueRechercheRestaurants($recherche)
+  function physiqueRechercheRestaurants($recherche, $equipe)
   {
     // Initialisations
     $resultatRecherche = array();
@@ -46,7 +46,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM food_advisor_restaurants
-                        WHERE name LIKE "%' . $recherche . '%"
+                        WHERE team = "' . $equipe . '" AND name LIKE "%' . $recherche . '%"
                         ORDER BY location ASC, name ASC');
 
     while ($data = $req->fetch())
@@ -66,7 +66,7 @@
 
   // PHYSIQUE : Lecture des parcours pour la recherche
   // RETOUR : Liste des parcours
-  function physiqueRechercheParcours($recherche)
+  function physiqueRechercheParcours($recherche, $equipe)
   {
     // Initialisations
     $resultatRecherche = array();
@@ -76,7 +76,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM petits_pedestres_parcours
-                        WHERE nom LIKE "%' . $recherche . '%"
+                        WHERE team = "' . $equipe . '" AND nom LIKE "%' . $recherche . '%"
                         ORDER BY nom ASC');
 
     while ($data = $req->fetch())

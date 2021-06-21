@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture des utilisateurs pour le chat
   // RETOUR : Liste des utilisateurs
-  function physiqueUsersChat()
+  function physiqueUsersChat($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT id, identifiant, pseudo, avatar
                         FROM users
-                        WHERE identifiant != "admin"
+                        WHERE identifiant != "admin" AND team = "' . $equipe . '" AND status != "I"
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())

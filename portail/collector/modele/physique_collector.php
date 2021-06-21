@@ -370,7 +370,7 @@
 
   // PHYSIQUE : Lecture position phrase / image culte dans la table
   // RETOUR : Position
-  function physiquePositionCollector($idCollector)
+  function physiquePositionCollector($idCollector, $equipe)
   {
     // Initialisations
     $position = 1;
@@ -380,6 +380,7 @@
 
     $req = $bdd->query('SELECT id, date_collector
                         FROM collector
+                        WHERE team = "' . $equipe . '"
                         ORDER BY date_collector DESC, id DESC');
 
     while ($data = $req->fetch())

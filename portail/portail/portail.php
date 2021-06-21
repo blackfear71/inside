@@ -28,7 +28,7 @@
       $preferences = getPreferences($_SESSION['user']['identifiant']);
 
       // Récupération des news
-      $news = getNews($_SESSION['user']['identifiant']);
+      $news = getNews($_SESSION['user']);
 
       // Récupération du portail
       $portail = getPortail($preferences);

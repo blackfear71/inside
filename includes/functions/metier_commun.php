@@ -625,10 +625,11 @@
 
   // METIER : Génération d'une notification
   // RETOUR : Aucun
-  function insertNotification($author, $category, $content)
+  function insertNotification($author, $category, $equipe, $content)
   {
     // Insertion de l'enregistrement en base
     $notification = array('author'    => $author,
+                          'team'      => $equipe,
                           'date'      => date('Ymd'),
                           'time'      => date('His'),
                           'category'  => $category,
@@ -641,26 +642,26 @@
 
   // METIER : Mise à jour d'une notification
   // RETOUR : Aucun
-  function updateNotification($category, $content, $status)
+  function updateNotification($category, $equipe, $content, $status)
   {
     // Suppression de l'enregistrement en base
-    physiqueUpdateNotification($category, $content, $status);
+    physiqueUpdateNotification($category, $equipe, $content, $status);
   }
 
   // METIER : Suppression d'une notification
   // RETOUR : Aucun
-  function deleteNotification($category, $content)
+  function deleteNotification($category, $equipe, $content)
   {
     // Suppression de l'enregistrement en base
-    physiqueDeleteNotification($category, $content);
+    physiqueDeleteNotification($category, $equipe, $content);
   }
 
   // METIER : Contrôle notification existante
   // RETOUR : Booléen
-  function controlNotification($category, $content)
+  function controlNotification($category, $content, $equipe)
   {
     // Vérificartion notification existante
-    $notificationExistante = physiqueNotificationExistante($category, $content);
+    $notificationExistante = physiqueNotificationExistante($category, $content, $equipe);
 
     // Retour
     return $notificationExistante;

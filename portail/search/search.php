@@ -32,7 +32,7 @@
 
     case 'goSearch':
       // Récupération des résultats de recherche
-      $resultats = getSearch($_SESSION['search']['text_search']);
+      $resultats = getSearch($_SESSION['search']['text_search'], $_SESSION['user']['equipe']);
       break;
 
     default:

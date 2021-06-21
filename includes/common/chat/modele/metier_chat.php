@@ -1,10 +1,10 @@
 <?php
   // METIER : Lecture liste des utilisateurs pour le chat
   // RETOUR : Liste des utilisateurs
-  function getUsersChat()
+  function getUsersChat($equipe)
   {
     // Récupération de la liste des utilisateurs
-    $listeUsersChat = physiqueUsersChat();
+    $listeUsersChat = physiqueUsersChat($equipe);
 
     // Retour
     return $listeUsersChat;

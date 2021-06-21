@@ -341,7 +341,7 @@
       physiqueUpdateRecette($idRecette, $recette);
 
       // Insertion notification
-      insertNotification($identifiant, 'recipe', $idRecette);
+      insertNotification($identifiant, 'recipe', $equipe, $idRecette);
 
       // Génération succès
       insertOrUpdateSuccesValue('recipe-master', $identifiant, 1);
@@ -491,7 +491,7 @@
     physiqueResetRecette($week, $year, $reinitialisationRecette);
 
     // Suppression des notifications
-    deleteNotification('recipe', $recette->getId());
+    deleteNotification('recipe', $equipe, $recette->getId());
 
     // Génération succès
     insertOrUpdateSuccesValue('recipe-master', $identifiant, -1);

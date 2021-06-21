@@ -1,8 +1,8 @@
 $(window).on('load', function()
 {
-  /***************************/
-  /***   Initialisations   ***/
-  /***************************/
+  /***********************/
+  /*** Initialisations ***/
+  /***********************/
   // Variables
   var refreshChat;
   var refreshUsers;
@@ -36,9 +36,9 @@ $(window).on('load', function()
     stopTimerRefresh(refreshChat);
   }
 
-  /*******************/
-  /***   Actions   ***/
-  /*******************/
+  /***************/
+  /*** Actions ***/
+  /***************/
   // Positionnement de la fenêtre de chat en fonction du scroll
   $(window).scroll(initPositionChat);
 
@@ -195,9 +195,9 @@ $(window).on('load', function()
     insertSmiley($(this));
   });
 
-  /*********************/
-  /***   Fonctions   ***/
-  /*********************/
+  /*****************/
+  /*** Fonctions ***/
+  /*****************/
   // Fonction mise en place interval rafraichissement chat
   function startTimerRefresh(nomFonction, nomVariableInterval, dureeInterval, parametreFonctionAppelee, parametreInterval)
   {

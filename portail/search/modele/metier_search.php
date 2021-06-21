@@ -15,7 +15,7 @@
 
   // METIER : Recherche dans les bases de données
   // RETOUR : Tableau des résultats par catégorie
-  function getSearch($search)
+  function getSearch($search, $equipe)
   {
     // Initialisations
     $resultatsRecherche = array();
@@ -27,15 +27,15 @@
     if (!empty($recherche))
     {
       // Movie House (films non à supprimer)
-      $resultatsMovieHouse       = physiqueRechercheFilms($recherche);
+      $resultatsMovieHouse       = physiqueRechercheFilms($recherche, $equipe);
       $nombreResultatsMovieHouse = count($resultatsMovieHouse);
 
       // Restaurants
-      $resultatsFoodAdvisor       = physiqueRechercheRestaurants($recherche);
+      $resultatsFoodAdvisor       = physiqueRechercheRestaurants($recherche, $equipe);
       $nombreResultatsFoodAdvisor = count($resultatsFoodAdvisor);
 
       // Parcours
-      $resultatsPetitsPedestres       = physiqueRechercheParcours($recherche);
+      $resultatsPetitsPedestres       = physiqueRechercheParcours($recherche, $equipe);
       $nombreResultatsPetitsPedestres = count($resultatsPetitsPedestres);
 
       // Missions (déjà commencées ou terminées)

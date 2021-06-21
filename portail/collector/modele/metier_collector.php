@@ -213,7 +213,7 @@
 
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
-    $team        = $sessionUser['equipe'];
+    $equipe      = $sessionUser['equipe'];
 
     if ($post['speaker'] == 'other')
     {
@@ -278,7 +278,7 @@
                          'type_speaker'   => $typeSpeaker,
                          'date_collector' => $dateCollector,
                          'type_collector' => $typeCollector,
-                         'team'           => $team,
+                         'team'           => $equipe,
                          'collector'      => $contenuCollector,
                          'context'        => $contexteCollector
                         );
@@ -287,9 +287,9 @@
 
       // Insertion notification
       if ($post['type_collector'] == 'I')
-        insertNotification($identifiant, 'culte_image', $idCollector);
+        insertNotification($identifiant, 'culte_image', $equipe, $idCollector);
       else
-        insertNotification($identifiant, 'culte', $idCollector);
+        insertNotification($identifiant, 'culte', $equipe, $idCollector);
 
       // Génération succès
       insertOrUpdateSuccesValue('listener', $identifiant, 1);
@@ -463,13 +463,13 @@
 
   // METIER : Récupère le numéro de page lors de l'ajout ou de la modification
   // RETOUR : Numéro de page
-  function numeroPageCollector($idCollector)
+  function numeroPageCollector($idCollector, $equipe)
   {
     // Initialisations
     $nombreParPage = 18;
 
     // Recherche de la position de la phrase culte dans la table
-    $positionCollector = physiquePositionCollector($idCollector);
+    $positionCollector = physiquePositionCollector($idCollector, $equipe);
 
     // Calcul du numéro de page
     $numeroPage = ceil($positionCollector / $nombreParPage);
@@ -484,6 +484,7 @@
   {
     // Récupération des données
     $idCollector = $post['id_collector'];
+    $equipe      = $post['team_collector'];
 
     // Lecture des données de la phrase / image culte
     $collector = physiqueCollector($idCollector);
@@ -503,9 +504,9 @@
 
     // Suppression des notifications
     if ($collector->getType_collector() == 'I')
-      deleteNotification('culte_image', $idCollector);
+      deleteNotification('culte_image', $equipe, $idCollector);
     else
-      deleteNotification('culte', $idCollector);
+      deleteNotification('culte', $equipe, $idCollector);
 
     // Génération succès
     insertOrUpdateSuccesValue('listener', $collector->getAuthor(), -1);

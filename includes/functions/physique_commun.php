@@ -242,7 +242,7 @@
 
   // PHYSIQUE : Lecture nombre de notifications
   // RETOUR : Booléen
-  function physiqueNotificationExistante($categorie, $contenu)
+  function physiqueNotificationExistante($categorie, $contenu, $equipe)
   {
     // Initialisations
     $notificationExistante = false;
@@ -254,13 +254,13 @@
     {
       $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                           FROM notifications
-                          WHERE category = "' . $categorie . '" AND content = "' . $contenu . '" AND date = ' . date('Ymd'));
+                          WHERE team = "' . $equipe . '" AND category = "' . $categorie . '" AND content = "' . $contenu . '" AND date = ' . date('Ymd'));
     }
     else
     {
       $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                           FROM notifications
-                          WHERE category = "' . $categorie . '" AND content = "' . $contenu . '"');
+                          WHERE team = "' . $equipe . '" AND category = "' . $categorie . '" AND content = "' . $contenu . '"');
     }
 
     $data = $req->fetch();
@@ -331,12 +331,14 @@
     global $bdd;
 
     $req = $bdd->prepare('INSERT INTO notifications(author,
+                                                    team,
                                                     date,
                                                     time,
                                                     category,
                                                     content,
                                                     to_delete)
                                             VALUES(:author,
+                                                   :team,
                                                    :date,
                                                    :time,
                                                    :category,
@@ -408,14 +410,14 @@
 
   // PHYSIQUE : Mise à jour statut notification
   // RETOUR : Aucun
-  function physiqueUpdateNotification($categorie, $contenu, $toDelete)
+  function physiqueUpdateNotification($categorie, $equipe, $contenu, $toDelete)
   {
     // Requête
     global $bdd;
 
     $req = $bdd->prepare('UPDATE notifications
                           SET to_delete = :to_delete
-                          WHERE category = "' . $categorie . '" AND content = "' . $contenu . '"');
+                          WHERE category = "' . $categorie . '" AND team = "' . $equipe . '" AND content = "' . $contenu . '"');
 
     $req->execute(array(
       'to_delete' => $toDelete
@@ -429,7 +431,7 @@
   /****************************************************************************/
   // PHYSIQUE : Suppression d'une notification
   // RETOUR : Aucun
-  function physiqueDeleteNotification($categorie, $contenu)
+  function physiqueDeleteNotification($categorie, $equipe, $contenu)
   {
     // Requête
     global $bdd;

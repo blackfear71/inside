@@ -574,9 +574,9 @@
     physiqueDeleteMissionUsers($idMission);
 
     // Suppression des notifications
-    deleteNotification('start_mission', $idMission);
-    deleteNotification('end_mission', $idMission);
-    deleteNotification('one_mission', $idMission);
+    deleteNotification('start_mission', '', $idMission);
+    deleteNotification('end_mission', '', $idMission);
+    deleteNotification('one_mission', '', $idMission);
 
     // Message d'alerte
     $_SESSION['alerts']['mission_deleted'] = true;

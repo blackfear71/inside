@@ -3,6 +3,7 @@
   {
     private $id;
     private $to_delete;
+    private $team;
     private $month;
     private $year;
     private $title;
@@ -15,6 +16,7 @@
     {
       $this->id        = 0;
       $this->to_delete = '';
+      $this->team      = '';
       $this->month     = '';
       $this->year      = '';
       $this->title     = '';
@@ -41,6 +43,9 @@
       if (isset($data['to_delete']))
         $this->to_delete = $data['to_delete'];
 
+      if (isset($data['team']))
+        $this->team      = $data['team'];
+
       if (isset($data['month']))
         $this->month     = $data['month'];
 
@@ -55,6 +60,7 @@
     public static function secureData($data)
     {
       $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setMonth(htmlspecialchars($data->getMonth()));
       $data->setYear(htmlspecialchars($data->getYear()));
       $data->setCalendar(htmlspecialchars($data->getCalendar()));
@@ -82,6 +88,17 @@
     public function getTo_delete()
     {
       return $this->to_delete;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Mois
@@ -133,6 +150,7 @@
   {
     private $id;
     private $to_delete;
+    private $team;
     private $annexe;
     private $title;
 
@@ -141,6 +159,7 @@
     {
       $this->id        = 0;
       $this->to_delete = '';
+      $this->team      = '';
       $this->annexe    = '';
       $this->title     = '';
     }
@@ -163,6 +182,9 @@
       if (isset($data['to_delete']))
         $this->to_delete = $data['to_delete'];
 
+      if (isset($data['team']))
+        $this->team      = $data['team'];
+
       if (isset($data['annexe']))
         $this->annexe    = $data['annexe'];
 
@@ -174,6 +196,7 @@
     public static function secureData($data)
     {
       $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setAnnexe(htmlspecialchars($data->getAnnexe()));
       $data->setTitle(htmlspecialchars($data->getTitle()));
     }
@@ -201,6 +224,17 @@
       return $this->to_delete;
     }
 
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
+    }
+    
     // Annexe
     public function setAnnexe($annexe)
     {

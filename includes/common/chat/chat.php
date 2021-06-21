@@ -21,7 +21,7 @@
     default:
       // Récupération des utilisateurs en session
       if (!isset($_SESSION['chat']['users']) OR empty($_SESSION['chat']['users']))
-        $_SESSION['chat']['users'] = getUsersChat();
+        $_SESSION['chat']['users'] = getUsersChat($_SESSION['user']['equipe']);
 
       // Récupération de l'utilisateur courant pour le chat
       $_SESSION['chat']['current'] = $_SESSION['user']['identifiant'];

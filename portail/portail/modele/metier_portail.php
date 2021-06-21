@@ -98,10 +98,14 @@
 
   // METIER : Récupérations des news
   // RETOUR : Objets news
-  function getNews($identifiant)
+  function getNews($sessionUser)
   {
     // Initialisations
     $tableauNews = array();
+
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
 
     /*************************/
     /* Message début semaine */
@@ -138,7 +142,7 @@
     /*****************/
     /* Anniversaires */
     /*****************/
-    $anniversaires = physiqueNewsAnniversaires();
+    $anniversaires = physiqueNewsAnniversaires($equipe);
 
     foreach ($anniversaires as $pseudoAnniversaire)
     {
@@ -166,7 +170,7 @@
       $news->setLink('/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter');
 
       // Récupération Id restaurant réservé
-      $idRestaurant = physiqueRestaurantReserved();
+      $idRestaurant = physiqueRestaurantReserved($equipe);
 
       if (!empty($idRestaurant))
       {
@@ -178,7 +182,7 @@
       else
       {
         // Contrôle vote effectué
-        $voted = physiqueVoteUser($identifiant);
+        $voted = physiqueVoteUser($equipe, $identifiant);
 
         if ($voted == true)
           $news->setContent('Vous avez déjà voté, allez voir le resultat en cliquant sur ce lien.');
@@ -199,12 +203,12 @@
     $news->setLink('/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter');
 
     // Vérification gâteau de la semaine présent
-    $gateauSemainePresent = physiqueGateauSemainePresent();
+    $gateauSemainePresent = physiqueGateauSemainePresent($equipe);
 
     if ($gateauSemainePresent == true)
     {
       // Récupération des données du gâteau de la semaine
-      $gateauSemaine = physiqueGateauSemaine();
+      $gateauSemaine = physiqueGateauSemaine($equipe);
 
       // Récupération du pseudo
       $pseudoGateau = physiquePseudoUser($gateauSemaine->getIdentifiant());
@@ -231,12 +235,12 @@
     /*********************************/
     /* Dernière phrase culte ajoutée */
     /*********************************/
-    $collector = physiqueDernierCollector();
+    $collector = physiqueDernierCollector($equipe);
 
     if (!empty($collector))
     {
       // Numéro de page de la phrase culte
-      $numeroPage = numeroPageCollector($collector->getId());
+      $numeroPage = numeroPageCollector($collector->getId(), $equipe);
 
       $news = new News();
 
@@ -265,7 +269,7 @@
     /***********************/
     /* Dernier film ajouté */
     /***********************/
-    $movie = physiqueDernierFilm();
+    $movie = physiqueDernierFilm($equipe);
 
     if (!empty($movie))
     {
@@ -283,7 +287,7 @@
     /***************************/
     /* Prochaine sortie cinéma */
     /***************************/
-    $film = physiqueSortieFilm();
+    $film = physiqueSortieFilm($equipe);
 
     if (!empty($film))
     {
@@ -310,7 +314,7 @@
     if (!empty($missions))
     {
       // Récupération liste des gagnants
-      $gagnantsMissions = getWinners($missions);
+      $gagnantsMissions = getWinners($missions, $equipe);
 
       // Formate les missions pour les news
       $newsMissions = formatNewsMissions($missions, $gagnantsMissions);
@@ -330,13 +334,13 @@
 
   // METIER : Récupère le numéro de page pour un lien News
   // RETOUR : Numéro de page
-  function numeroPageCollector($idCollector)
+  function numeroPageCollector($idCollector, $equipe)
   {
     // Initialisations
     $nombreParPage = 18;
 
     // Calcul de la position en base
-    $position = physiquePositionCollector($idCollector);
+    $position = physiquePositionCollector($idCollector, $equipe);
 
     // Calcul du numéro de page
     $numeroPage = ceil($position / $nombreParPage);
@@ -347,7 +351,7 @@
 
   // METIER : Récupération liste des gagnants des missions
   // RETOUR : Tableau des gagnants
-  function getWinners($missions)
+  function getWinners($missions, $equipe)
   {
     // Initialisations
     $gagnants = array();
@@ -359,7 +363,7 @@
       if (date('Ymd') > $mission->getDate_fin())
       {
         // Récupération de la liste des participants de la mission
-        $listeUsers = physiqueUsersMission($mission->getId());
+        $listeUsers = physiqueUsersMission($mission->getId(), $equipe);
 
         // Traitement s'il y a des participants
         if (!empty($listeUsers))
@@ -371,7 +375,7 @@
             $user['pseudo'] = physiquePseudoUser($user['identifiant']);
 
             // Total de la mission
-            $user['total'] = physiqueTotalUser($mission->getId(), $user['identifiant']);
+            $user['total'] = physiqueTotalUser($mission->getId(), $user['identifiant'], $user['equipe']);
 
             // Récupération du tri sur avancement puis identifiant
             $triTotal[]       = $user['total'];

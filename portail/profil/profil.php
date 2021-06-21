@@ -39,7 +39,7 @@
           case 'success':
           case 'ranking':
             // Récupération de la liste des utilisateurs
-            $listeUsers = getUsers();
+            $listeUsers = getUsers($_SESSION['user']['equipe']);
 
             // Récupération de la liste des succès des utilisateurs
             $listeSuccess = getSuccess($_SESSION['user']['identifiant'], $listeUsers);
@@ -80,7 +80,7 @@
             // Récupération de l'équipe
             $equipe = getEquipe($profil->getTeam());
 
-            // Récupération des préférences de l'utilisateur
+            // Récupération des statistiques de l'utilisateur
             $statistiques = getStatistiques($_SESSION['user']['identifiant']);
 
             // Récupération de la progression de l'utilisateur

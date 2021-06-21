@@ -63,7 +63,7 @@
     // Récupération des données
     $date     = date('Ymd');
     $author   = $sessionUser['identifiant'];
-    $team     = $sessionUser['equipe'];
+    $equipe   = $sessionUser['equipe'];
     $subject  = $post['subject_bug'];
     $type     = $post['type_bug'];
     $content  = $post['content_bug'];
@@ -115,7 +115,7 @@
       $bug = array('subject'  => $subject,
                    'date'     => $date,
                    'author'   => $author,
-                   'team'     => $team,
+                   'team'     => $equipe,
                    'content'  => $content,
                    'picture'  => $picture,
                    'type'     => $type,

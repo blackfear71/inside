@@ -60,13 +60,13 @@
 
     // Récupération des données
     $nom      = $post['name'];
-    $distance = $post['dist'];
+    $distance = $post['distance'];
     $lieu     = $post['location'];
     $image    = $post['picurl'];
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_parcours']      = $post['name'];
-    $_SESSION['save']['distance_parcours'] = $post['dist'];
+    $_SESSION['save']['distance_parcours'] = $post['distance'];
     $_SESSION['save']['lieu_parcours']     = $post['location'];
     $_SESSION['save']['image_parcours']    = $post['picurl'];
 
@@ -107,13 +107,13 @@
 
     // Récupération des données
     $nom      = $post['name'];
-    $distance = $post['dist'];
+    $distance = $post['distance'];
     $lieu     = $post['location'];
     $image    = $post['picurl'];
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_parcours']      = $post['name'];
-    $_SESSION['save']['distance_parcours'] = $post['dist'];
+    $_SESSION['save']['distance_parcours'] = $post['distance'];
     $_SESSION['save']['lieu_parcours']     = $post['location'];
     $_SESSION['save']['image_parcours']    = $post['picurl'];
 
