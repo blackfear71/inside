@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture nombre de lignes existantes pour une année
   // RETOUR : Booléen
-  function physiqueAnneeExistante($annee)
+  function physiqueAnneeExistante($annee, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM movie_house
-                        WHERE SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND to_delete != "Y"');
+                        WHERE SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND team = "' . $equipe . '" AND to_delete != "Y"');
 
     $data = $req->fetch();
 
@@ -31,7 +31,7 @@
 
   // PHYSIQUE : Lecture nombre de lignes existantes sans année
   // RETOUR : Booléen
-  function physiqueSansAnnee()
+  function physiqueSansAnnee($equipe)
   {
     // Initialisations
     $anneeExistante = false;
@@ -41,7 +41,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM movie_house
-                        WHERE date_theater = "" AND to_delete != "Y"');
+                        WHERE date_theater = "" AND team = "' . $equipe . '" AND to_delete != "Y"');
 
     $data = $req->fetch();
 
@@ -56,7 +56,7 @@
 
   // PHYSIQUE : Lecture des années existantes
   // RETOUR : Liste des années
-  function physiqueOnglets()
+  function physiqueOnglets($equipe)
   {
     // Initialisations
     $onglets = array();
@@ -66,7 +66,7 @@
 
     $req = $bdd->query('SELECT DISTINCT SUBSTR(date_theater, 1, 4)
                         FROM movie_house
-                        WHERE to_delete != "Y"
+                        WHERE to_delete != "Y" AND team = "' . $equipe . '"
                         ORDER BY SUBSTR(date_theater, 1, 4) DESC');
 
     while ($data = $req->fetch())
@@ -83,7 +83,7 @@
 
   // PHYSIQUE : Lecture des films récents
   // RETOUR : Liste des films récents
-  function physiqueFilmsRecents($annee, $limite)
+  function physiqueFilmsRecents($annee, $equipe, $limite)
   {
     // Initialisations
     $listeFilmsRecents = array();
@@ -93,7 +93,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM movie_house
-                        WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $annee . '"
+                        WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $annee . '" AND team = "' . $equipe . '"
                         ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC
                         LIMIT ' . $limite);
 
@@ -114,7 +114,7 @@
 
   // PHYSIQUE : Lecture des films qui sortent dans la semaine
   // RETOUR : Liste des films qui sortent dans la semaine
-  function physiqueFilmsSemaine($jourDebut, $jourFin)
+  function physiqueFilmsSemaine($jourDebut, $jourFin, $equipe)
   {
     // Initialisations
     $listeFilmsSemaine = array();
@@ -124,7 +124,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM movie_house
-                        WHERE to_delete != "Y" AND date_theater >= "' . $jourDebut . '" AND date_theater <= "' . $jourFin . '"
+                        WHERE to_delete != "Y" AND team = "' . $equipe . '" AND date_theater >= "' . $jourDebut . '" AND date_theater <= "' . $jourFin . '"
                         ORDER BY date_theater ASC, id DESC');
 
     while ($data = $req->fetch())
@@ -144,7 +144,7 @@
 
   // PHYSIQUE : Lecture des films de l'année recherchée
   // RETOUR : Liste des films de l'année
-  function physiqueFilmsAnnee($annee, $dateJourMoins1Mois)
+  function physiqueFilmsAnnee($annee, $dateJourMoins1Mois, $equipe)
   {
     // Initialisations
     $listeFilmsAnnee = array();
@@ -154,7 +154,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM movie_house
-                        WHERE to_delete != "Y" AND SUBSTR(date_theater, 1, 4) = "' . $annee . '"
+                        WHERE to_delete != "Y" AND SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND team = "' . $equipe . '"
                         ORDER BY date_theater ASC');
 
     while ($data = $req->fetch())
@@ -253,7 +253,7 @@
 
   // PHYSIQUE : Lecture des films de l'année
   // RETOUR : Liste des films
-  function physiqueFilms($annee)
+  function physiqueFilms($annee, $equipe)
   {
     // Initialisations
     $listeFilms = array();
@@ -265,14 +265,14 @@
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
-                          WHERE date_theater = "" AND to_delete != "Y"
+                          WHERE date_theater = "" AND to_delete != "Y" AND team = "' . $equipe . '"
                           ORDER BY date_add DESC, film ASC');
     }
     else
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
-                          WHERE SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND to_delete != "Y"
+                          WHERE SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND to_delete != "Y" AND team = "' . $equipe . '"
                           ORDER BY date_theater ASC, film ASC');
     }
 
@@ -331,6 +331,7 @@
 
     $req = $bdd->prepare('INSERT INTO movie_house(film,
                                                   to_delete,
+                                                  team,
                                                   date_add,
                                                   identifiant_add,
                                                   identifiant_del,
@@ -348,6 +349,7 @@
                                                   place)
                                           VALUES(:film,
                                                  :to_delete,
+                                                 :team,
                                                  :date_add,
                                                  :identifiant_add,
                                                  :identifiant_del,

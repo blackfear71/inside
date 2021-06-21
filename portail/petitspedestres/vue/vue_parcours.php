@@ -45,23 +45,6 @@
           $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
-          /*********/
-          /* Liens */
-          /*********/
-          echo '<div class="zone_liens_saisie">';
-            // Saisie parcours
-            echo '<a href="parcours.php?action=goAjouter" title="Ajouter un parcours" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/parcours.png" alt="parcours" class="image_lien" /></div>';
-              echo '<div class="zone_texte_lien">Ajouter un parcours</div>';
-            echo '</a>';
-
-            // Modifier le parcours
-            echo '<a href="parcours.php?id_parcours=' . $_GET['id_parcours'] . '&action=goModifier" title="Modifier le parcours" class="lien_categorie">';
-              echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/edit.png" alt="edit" class="image_lien" /></div>';
-              echo '<div class="zone_texte_lien">Modifier le parcours</div>';
-            echo '</a>';
-          echo '</div>';
-
           /*******************/
           /* Chargement page */
           /*******************/
@@ -69,22 +52,42 @@
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
 
-          /***********/
-          /* Contenu */
-          /***********/
-  				echo '<div class="PP-parcours">';
-            echo '<div class="PP-titre">';
-              echo $parcours->getNom();
+          if ($parcoursExistant == true)
+          {
+            /*********/
+            /* Liens */
+            /*********/
+            echo '<div class="zone_liens_saisie">';
+              // Saisie parcours
+              echo '<a href="parcours.php?action=goAjouter" title="Ajouter un parcours" class="lien_categorie">';
+                echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/parcours.png" alt="parcours" class="image_lien" /></div>';
+                echo '<div class="zone_texte_lien">Ajouter un parcours</div>';
+              echo '</a>';
+
+              // Modifier le parcours
+              echo '<a href="parcours.php?id_parcours=' . $_GET['id_parcours'] . '&action=goModifier" title="Modifier le parcours" class="lien_categorie">';
+                echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/edit.png" alt="edit" class="image_lien" /></div>';
+                echo '<div class="zone_texte_lien">Modifier le parcours</div>';
+              echo '</a>';
             echo '</div>';
 
-            echo '<p>';
-              echo 'Distance : ' . $parcours->getDistance() . ' km<br/>';
-              echo 'Lieu : ' . $parcours->getLieu();
+            /***********/
+            /* Contenu */
+            /***********/
+            echo '<div class="PP-parcours">';
+              echo '<div class="PP-titre">';
+                echo $parcours->getNom();
+              echo '</div>';
 
-              if (!empty($parcours->getImage()))
-                echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . '" class="PP-image" /><br/>';
-            echo '</p>';
-          echo '</div>';
+              echo '<p>';
+                echo 'Distance : ' . $parcours->getDistance() . ' km<br/>';
+                echo 'Lieu : ' . $parcours->getLieu();
+
+                if (!empty($parcours->getImage()))
+                  echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . '" class="PP-image" /><br/>';
+              echo '</p>';
+            echo '</div>';
+          }
         ?>
       </article>
 

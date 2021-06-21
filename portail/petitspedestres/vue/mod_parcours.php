@@ -52,56 +52,59 @@
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
 
-          /**********/
-          /* Saisie */
-          /**********/
-  				echo '<div class="PP-contenu-saisie">';
-  					echo '<form method="post" action="parcours.php?id_parcours=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
-  						echo '<div class="PP-zone-saisie-avancee-infos">';
-                if (isset($erreurParcours) AND $erreurParcours == true)
-                {
-                  // Nom du parcours
-                  echo '<label class="label_parcours">Nom : </label>';
-                  echo '<input type="text" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" />';
+          if ($parcoursExistant == true)
+          {
+            /**********/
+            /* Saisie */
+            /**********/
+    				echo '<div class="PP-contenu-saisie">';
+    					echo '<form method="post" action="parcours.php?id_parcours=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
+    						echo '<div class="PP-zone-saisie-avancee-infos">';
+                  if (isset($erreurParcours) AND $erreurParcours == true)
+                  {
+                    // Nom du parcours
+                    echo '<label class="label_parcours">Nom : </label>';
+                    echo '<input type="text" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" />';
 
-                  // Distance
-                  echo '<label class="label_parcours">Distance : </label>';
-                  echo '<input type="text" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" />';
+                    // Distance
+                    echo '<label class="label_parcours">Distance : </label>';
+                    echo '<input type="text" value="' . $_SESSION['save']['distance_parcours'] . '" name="dist" class="PP-monoligne" />';
 
-                  // Lieu
-                  echo '<label class="label_parcours">Lieu : </label>';
-                  echo '<input type="text" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
+                    // Lieu
+                    echo '<label class="label_parcours">Lieu : </label>';
+                    echo '<input type="text" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
 
-                  // Lien image
-                  echo '<label class="label_parcours">Url image : </label>';
-                  echo '<input type="text" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" />';
-                }
-                else
-                {
-                  // Nom du parcours
-                  echo '<label class="label_parcours">Nom : </label>';
-                  echo '<input type="text" value="' . $parcours->getNom() . '" name="name" class="PP-monoligne" />';
+                    // Lien image
+                    echo '<label class="label_parcours">Url image : </label>';
+                    echo '<input type="text" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" />';
+                  }
+                  else
+                  {
+                    // Nom du parcours
+                    echo '<label class="label_parcours">Nom : </label>';
+                    echo '<input type="text" value="' . $parcours->getNom() . '" name="name" class="PP-monoligne" />';
 
-                  // Distance
-                  echo '<label class="label_parcours">Distance : </label>';
-                  echo '<input type="text" value="' . $parcours->getDistance() . '" name="dist" class="PP-monoligne" />';
+                    // Distance
+                    echo '<label class="label_parcours">Distance : </label>';
+                    echo '<input type="text" value="' . $parcours->getDistance() . '" name="dist" class="PP-monoligne" />';
 
-                  // Lieu
-                  echo '<label class="label_parcours">Lieu : </label>';
-                  echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" />';
+                    // Lieu
+                    echo '<label class="label_parcours">Lieu : </label>';
+                    echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" />';
 
-                  // Lien image
-                  echo '<label class="label_parcours">Url image : </label>';
-                  echo '<input type="text" value="' . $parcours->getImage() . '" name="picurl" class="PP-monoligne" />';
-                }
-  						echo '</div>';
+                    // Lien image
+                    echo '<label class="label_parcours">Url image : </label>';
+                    echo '<input type="text" value="' . $parcours->getImage() . '" name="picurl" class="PP-monoligne" />';
+                  }
+    						echo '</div>';
 
-              echo '<br /><br />';
+                echo '<br /><br />';
 
-              // Valider
-  						echo '<input type="submit" name="modification" value="Valider" />';
-  					echo '</form>';
-          echo '</div>';
+                // Valider
+    						echo '<input type="submit" name="modification" value="Valider" />';
+    					echo '</form>';
+            echo '</div>';
+          }
         ?>
       </article>
 

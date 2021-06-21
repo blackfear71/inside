@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture film disponible
   // RETOUR : Booléen
-  function physiqueFilmDisponible($idFilm)
+  function physiqueFilmDisponible($idFilm, $equipe)
   {
     // Initialisations
     $filmExistant = false;
@@ -16,7 +16,7 @@
 
     $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                         FROM movie_house
-                        WHERE id = ' . $idFilm . ' AND to_delete != "Y"');
+                        WHERE id = ' . $idFilm . ' AND to_delete != "Y" AND team = "' . $equipe . '"');
 
     $data = $req->fetch();
 
@@ -53,7 +53,7 @@
 
   // PHYSIQUE : Lecture film précédent existant
   // RETOUR : Booléen
-  function physiqueFilmPrecedentExistant($idFilm, $titreFilm, $anneeFilm, $dateTheater)
+  function physiqueFilmPrecedentExistant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater)
   {
     // Initialisations
     $filmPrecedentExistant = false;
@@ -65,13 +65,13 @@
     {
       $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                           FROM movie_house
-                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND (date_theater < "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film < "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"');
+                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND team = "' . $equipe . '" AND (date_theater < "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film < "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"');
     }
     else
     {
       $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                           FROM movie_house
-                          WHERE date_theater = "" AND film < "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"');
+                          WHERE date_theater = "" AND team = "' . $equipe . '" AND film < "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"');
     }
 
     $data = $req->fetch();
@@ -87,7 +87,7 @@
 
   // PHYSIQUE : Lecture film précédent
   // RETOUR : Objet Movie
-  function physiqueFilmPrecedent($idFilm, $titreFilm, $anneeFilm, $dateTheater)
+  function physiqueFilmPrecedent($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater)
   {
     // Initialisations
     $filmPrecedent = NULL;
@@ -99,7 +99,7 @@
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
-                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND (date_theater < "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film < "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"
+                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND team = "' . $equipe . '" AND (date_theater < "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film < "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"
                           ORDER BY date_theater DESC, film DESC
                           LIMIT 1');
     }
@@ -107,7 +107,7 @@
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
-                          WHERE date_theater = "" AND film < "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"
+                          WHERE date_theater = "" AND team = "' . $equipe . '" AND film < "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"
                           ORDER BY film DESC
                           LIMIT 1');
     }
@@ -125,7 +125,7 @@
 
   // PHYSIQUE : Lecture film précédent existant
   // RETOUR : Booléen
-  function physiqueFilmSuivantExistant($idFilm, $titreFilm, $anneeFilm, $dateTheater)
+  function physiqueFilmSuivantExistant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater)
   {
     // Initialisations
     $filmSuivantExistant = false;
@@ -137,13 +137,13 @@
     {
       $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                           FROM movie_house
-                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND (date_theater > "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film > "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"');
+                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND team = "' . $equipe . '" AND (date_theater > "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film > "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"');
     }
     else
     {
       $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                           FROM movie_house
-                          WHERE date_theater = "" AND film > "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"');
+                          WHERE date_theater = "" AND team = "' . $equipe . '" AND film > "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"');
     }
 
     $data = $req->fetch();
@@ -159,7 +159,7 @@
 
   // PHYSIQUE : Lecture film suivant
   // RETOUR : Objet Movie
-  function physiqueFilmSuivant($idFilm, $titreFilm, $anneeFilm, $dateTheater)
+  function physiqueFilmSuivant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater)
   {
     // Initialisations
     $filmSuivant = NULL;
@@ -171,7 +171,7 @@
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
-                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND (date_theater > "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film > "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"
+                          WHERE SUBSTR(date_theater, 1, 4) = "' . $anneeFilm . '" AND team = "' . $equipe . '" AND (date_theater > "' . $dateTheater . '" OR (date_theater = "' . $dateTheater . '" AND film > "' . $titreFilm . '")) AND id != ' . $idFilm . ' AND to_delete != "Y"
                           ORDER BY date_theater ASC, film ASC
                           LIMIT 1');
     }
@@ -179,7 +179,7 @@
     {
       $req = $bdd->query('SELECT *
                           FROM movie_house
-                          WHERE date_theater = "" AND film > "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"
+                          WHERE date_theater = "" AND team = "' . $equipe . '" AND film > "' . $titreFilm . '" AND id != ' . $idFilm . ' AND to_delete != "Y"
                           ORDER BY film ASC
                           LIMIT 1');
     }
@@ -193,6 +193,39 @@
 
     // Retour
     return $filmSuivant;
+  }
+
+  // PHYSIQUE : Lecture des utilisateurs inscrits
+  // RETOUR : Liste des utilisateurs
+  function physiqueUsersDetailsFilm($idFilm, $equipe)
+  {
+    // Initialisations
+    $listeUsers = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, email
+                        FROM users
+                        WHERE (identifiant != "admin" AND status != "I" AND team = "' . $equipe .'")
+                        OR EXISTS (SELECT id, id_film, author
+                                   FROM movie_house_comments
+                                   WHERE movie_house_comments.author = users.identifiant AND movie_house_comments.id_film = "' . $idFilm . '")
+                        ORDER BY identifiant ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Création tableau de correspondance identifiant / pseudo / avatar
+      $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
+                                                'avatar' => $data['avatar'],
+                                                'email'  => $data['email']
+                                               );
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeUsers;
   }
 
   // PHYSIQUE : Lecture des commentaires d'un film

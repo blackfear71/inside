@@ -1,10 +1,10 @@
 <?php
   // METIER : Contrôle film existant et non à supprimer
   // RETOUR : Booléen
-  function isFilmDisponible($idFilm)
+  function isFilmDisponible($idFilm, $equipe)
   {
     // Contrôle film disponible
-    $filmDisponible = controleFilmDisponible($idFilm);
+    $filmDisponible = controleFilmDisponible($idFilm, $equipe);
 
     // Retour
     return $filmDisponible;
@@ -32,7 +32,7 @@
 
   // METIER : Récupération films précédent et suivant pour navigation
   // RETOUR : Liste des films précédent et suivant
-  function getNavigation($film)
+  function getNavigation($film, $equipe)
   {
     // Initialisations
     $boutonPrecedent = array('id' => '',
@@ -49,18 +49,18 @@
     $anneeFilm   = substr($dateTheater, 0, 4);
 
     // Vérification film précédent existant
-    $filmPrecedentExistant = physiqueFilmPrecedentExistant($idFilm, $titreFilm, $anneeFilm, $dateTheater);
+    $filmPrecedentExistant = physiqueFilmPrecedentExistant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater);
 
     // Récupération du film précédent
     if ($filmPrecedentExistant == true)
-      $filmPrecedent = physiqueFilmPrecedent($idFilm, $titreFilm, $anneeFilm, $dateTheater);
+      $filmPrecedent = physiqueFilmPrecedent($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater);
 
     // Vérification film suivant existant
-    $filmSuivantExistant = physiqueFilmSuivantExistant($idFilm, $titreFilm, $anneeFilm, $dateTheater);
+    $filmSuivantExistant = physiqueFilmSuivantExistant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater);
 
     // Récupération du film suivant
     if ($filmSuivantExistant == true)
-      $filmSuivant = physiqueFilmSuivant($idFilm, $titreFilm, $anneeFilm, $dateTheater);
+      $filmSuivant = physiqueFilmSuivant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater);
 
     // Création du bouton film précédent
     if (isset($filmPrecedent) AND !empty($filmPrecedent))
@@ -85,6 +85,17 @@
 
     // Retour
     return $listeNavigation;
+  }
+
+  // METIER : Récupération des étoiles utilisateurs d'un film
+  // RETOUR : Liste des étoiles utilisateurs
+  function getUsersDetailsFilm($idFilm, $equipe)
+  {
+    // Lecture des utilisateurs
+    $listeUsers = physiqueUsersDetailsFilm($idFilm, $equipe);
+
+    // Retour
+    return $listeUsers;
   }
 
   // METIER : Récupération des étoiles utilisateurs d'un film
@@ -225,7 +236,7 @@
     // Contrôle moment restaurant renseigné
     if ($control_ok == true)
       $control_ok = controleMomentRestaurantSaisi($restaurant, $place);
-      
+
     // Extraction de l'ID vidéo et modification de l'enregistrement en base
     if ($control_ok == true)
     {

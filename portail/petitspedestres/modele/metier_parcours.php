@@ -19,13 +19,24 @@
 
   // METIER : Lecture liste des parcours
   // RETOUR : Liste des parcours
-  function getListeParcours()
+  function getListeParcours($equipe)
   {
     // Récupération de la liste des parcours
-    $listeParcours = physiqueListeParcours();
+    $listeParcours = physiqueListeParcours($equipe);
 
     // Retour
     return $listeParcours;
+  }
+
+  // METIER : Contrôle parcours existant
+  // RETOUR : Booléen
+  function isParcoursDisponible($idParcours, $equipe)
+  {
+    // Contrôle parcours disponible
+    $parcoursDisponible = controleParcoursDisponible($idParcours, $equipe);
+
+    // Retour
+    return $parcoursDisponible;
   }
 
   // METIER : Lecture d'un parcours
@@ -41,7 +52,7 @@
 
   // METIER : Insertion d'un nouveau parcours
   // RETOUR : Booléen
-  function insertParcours($post)
+  function insertParcours($post, $equipe)
   {
     // Initialisations
     $erreur     = false;
@@ -65,7 +76,8 @@
     // Insertion de l'enregistrement en base
     if ($control_ok == true)
     {
-      $parcours = array('nom'      => $nom,
+      $parcours = array('team'     => $equipe,
+                        'nom'      => $nom,
                         'distance' => $distance,
                         'lieu'     => $lieu,
                         'image'    => $image

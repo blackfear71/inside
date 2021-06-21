@@ -1,13 +1,13 @@
 <?php
   // CONTROLE : Film disponible
   // RETOUR : Booléen
-  function controleFilmDisponible($idFilm)
+  function controleFilmDisponible($idFilm, $equipe)
   {
     // Initialisations
     $control_ok = true;
 
     // Contrôle
-    $filmDisponible = physiqueFilmDisponible($idFilm);
+    $filmDisponible = physiqueFilmDisponible($idFilm, $equipe);
 
     if ($filmDisponible != true)
     {

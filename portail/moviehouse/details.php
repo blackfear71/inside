@@ -37,7 +37,7 @@
       else
       {
         // Vérification film disponible
-        $filmExistant = isFilmDisponible($_GET['id_film']);
+        $filmExistant = isFilmDisponible($_GET['id_film'], $_SESSION['user']['equipe']);
 
         if ($filmExistant == true)
         {
@@ -45,16 +45,16 @@
           $detailsFilm = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
 
           // Récupération des films précédent et suivant
-          $listeNavigation = getNavigation($detailsFilm);
+          $listeNavigation = getNavigation($detailsFilm, $_SESSION['user']['equipe']);
 
           // Récupération de la liste des utilisateurs
-          $listeUsers = physiqueUsers();
+          $listeUsersDetails = getUsersDetailsFilm($_GET['id_film'], $_SESSION['user']['equipe']);
 
           // Récupération des votes associés au film
-          $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsers);
+          $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsersDetails);
 
           // Récupération des commentaires associés aux films
-          $listeCommentaires = getCommentaires($_GET['id_film'], $listeUsers);
+          $listeCommentaires = getCommentaires($_GET['id_film'], $listeUsersDetails);
         }
       }
       break;
@@ -127,7 +127,7 @@
 
         unset($navigation);
 
-        foreach ($listeUsers as &$user)
+        foreach ($listeUsersDetails as &$user)
         {
           $user['pseudo'] = htmlspecialchars($user['pseudo']);
           $user['avatar'] = htmlspecialchars($user['avatar']);

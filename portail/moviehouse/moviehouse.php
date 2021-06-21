@@ -42,15 +42,15 @@
         initializeSaveSession();
 
         // Vérification année existante
-        $anneeExistante = controlYear($_GET['year']);
+        $anneeExistante = controlYear($_GET['year'], $_SESSION['user']['equipe']);
 
-        // Redirection si l'année n'existe pas et que l'on est sur les films sanas dates
+        // Redirection si l'année n'existe pas et que l'on est sur les films sans dates
         if ($_GET['year'] == 'none' AND $anneeExistante == false)
           header('location: moviehouse.php?view=cards&year=' . date('Y') . '&action=goConsulter');
         else
         {
           // Récupération des onglets (années)
-          $onglets = getOnglets();
+          $onglets = getOnglets($_SESSION['user']['equipe']);
 
           // Récupération des préférences de l'utilisateur
           $preferences = getPreferences($_SESSION['user']['identifiant']);
@@ -69,7 +69,7 @@
                 $isMobile = false;
 
               // Récupération de la liste des films récemments ajoutés
-              $listeRecents = getFilmsRecents($_GET['year'], $isMobile);
+              $listeRecents = getFilmsRecents($_GET['year'], $_SESSION['user']['equipe'], $isMobile);
 
               // Récupération de la liste des sorties films de la semaine
               if ($filmsSemaine == 'Y')
@@ -79,27 +79,27 @@
 
                 // Récupération de la liste des sorties films de la semaine
                 if ($afficherSemaine == true)
-                  $listeSemaine = getSortiesSemaine();
+                  $listeSemaine = getSortiesSemaine($_SESSION['user']['equipe']);
               }
 
               // Récupération de la liste des films les plus attendus
               if ($filmsWaited == 'Y')
-                $listeAttendus = getFilmsAttendus($_GET['year'], $isMobile);
+                $listeAttendus = getFilmsAttendus($_GET['year'], $_SESSION['user']['equipe'], $isMobile);
 
               // Récupération de la liste des prochaines sorties cinéma organisées
               if ($filmsWayOut == 'Y')
-                $listeSorties = getSortiesOrganisees($_GET['year'], $isMobile);
+                $listeSorties = getSortiesOrganisees($_GET['year'], $_SESSION['user']['equipe'], $isMobile);
               break;
 
             case 'cards':
               // Récupération de la liste des films de l'année
-              $listeFilms = getFilms($_GET['year'], $_SESSION['user']['identifiant']);
+              $listeFilms = getFilms($_GET['year'], $_SESSION['user']);
 
               // Récupération des votes associés aux films
               if (!empty($listeFilms))
               {
                 // Récupération de la liste des utilisateurs
-                $listeUsers = physiqueUsers();
+                $listeUsers = getUsers($_SESSION['user']['equipe']);
 
                 // Récupération des étoiles
                 $listeEtoiles = getEtoilesFichesFilms($listeFilms, $listeUsers);
@@ -117,12 +117,12 @@
 
     case 'doAjouter':
       // Insertion d'un film
-      $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant'], false);
+      $idFilm = insertFilm($_POST, $_SESSION['user'], false);
       break;
 
     case 'doAjouterMobile':
       // Insertion d'un film
-      $idFilm = insertFilm($_POST, $_SESSION['user']['identifiant'], true);
+      $idFilm = insertFilm($_POST, $_SESSION['user'], true);
       break;
 
     case 'doVoterFilm':

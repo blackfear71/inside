@@ -6,7 +6,7 @@
   /****************************************************************************/
   // PHYSIQUE : Lecture liste des parcours
   // RETOUR : Liste des parcours
-  function physiqueListeParcours()
+  function physiqueListeParcours($equipe)
   {
     // Initialisations
     $listeParcours = array();
@@ -16,6 +16,7 @@
 
     $req = $bdd->query('SELECT *
                         FROM petits_pedestres_parcours
+                        WHERE team = "' . $equipe . '"
                         ORDER BY nom ASC');
 
     while ($data = $req->fetch())
@@ -31,6 +32,31 @@
 
     // Retour
     return $listeParcours;
+  }
+
+  // PHYSIQUE : Lecture parcours disponible
+  // RETOUR : Booléen
+  function physiqueParcoursDisponible($idParcours, $equipe)
+  {
+    // Initialisations
+    $parcoursExistant = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                        FROM petits_pedestres_parcours
+                        WHERE id = ' . $idParcours . ' AND team = "' . $equipe . '"');
+
+    $data = $req->fetch();
+
+    if ($data['nombreLignes'] > 0)
+      $parcoursExistant = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $parcoursExistant;
   }
 
   // PHYSIQUE : Lecture d'un parcours
@@ -65,11 +91,13 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO petits_pedestres_parcours(nom,
+    $req = $bdd->prepare('INSERT INTO petits_pedestres_parcours(team,
+                                                                nom,
                                                                 distance,
                                                                 lieu,
                                                                 image)
-                                                        VALUES(:nom,
+                                                        VALUES(:team,
+                                                               :nom,
                                                                :distance,
                                                                :lieu,
                                                                :image)');

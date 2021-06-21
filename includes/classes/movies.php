@@ -4,6 +4,7 @@
     private $id;
     private $film;
     private $to_delete;
+    private $team;
     private $date_add;
     private $identifiant_add;
     private $pseudo_add;
@@ -33,6 +34,7 @@
       $this->id              = 0;
       $this->film            = '';
       $this->to_delete       = '';
+      $this->team            = '';
       $this->date_add        = '';
       $this->identifiant_add = '';
       $this->pseudo_add      = '';
@@ -77,6 +79,9 @@
 
       if (isset($data['to_delete']))
         $this->to_delete       = $data['to_delete'];
+
+      if (isset($data['team']))
+        $this->team            = $data['team'];
 
       if (isset($data['date_add']))
         $this->date_add        = $data['date_add'];
@@ -150,6 +155,7 @@
     {
       $data->setFilm(htmlspecialchars($data->getFilm()));
       $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
+      //$data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setDate_add(htmlspecialchars($data->getDate_add()));
       $data->setIdentifiant_add(htmlspecialchars($data->getIdentifiant_add()));
       $data->setPseudo_add(htmlspecialchars($data->getPseudo_add()));
@@ -206,6 +212,17 @@
     public function getTo_delete()
     {
       return $this->to_delete;
+    }
+
+    // Equipe
+    public function setTeam($team)
+    {
+      $this->team = $team;
+    }
+
+    public function getTeam()
+    {
+      return $this->team;
     }
 
     // Date ajout

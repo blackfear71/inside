@@ -14,6 +14,17 @@
     return $preferences;
   }
 
+  // METIER : Lecture des utilisateurs
+  // RETOUR : Liste des utilisateurs
+  function getUsers($equipe)
+  {
+    // Lecture des utilisateurs
+    $listeUsers = physiqueUsers($equipe);
+
+    // Retour
+    return $listeUsers;
+  }
+
   // METIER : Insertion / modification étoiles utilisateur
   // RETOUR : Id film
   function insertStar($post, $identifiant)

@@ -29,7 +29,7 @@
 
   // METIER : Contrôle année existante (pour les onglets)
   // RETOUR : Booléen
-  function controlYear($year)
+  function controlYear($year, $equipe)
   {
     // Initialisations
     $anneeExistante = false;
@@ -38,9 +38,9 @@
     if (isset($year))
     {
       if (is_numeric($year))
-        $anneeExistante = physiqueAnneeExistante($year);
+        $anneeExistante = physiqueAnneeExistante($year, $equipe);
       elseif ($year == 'none')
-        $anneeExistante = physiqueSansAnnee();
+        $anneeExistante = physiqueSansAnnee($equipe);
     }
 
     // Retour
@@ -49,10 +49,10 @@
 
   // METIER : Lecture années distinctes pour les onglets
   // RETOUR : Liste des années existantes
-  function getOnglets()
+  function getOnglets($equipe)
   {
     // Récupération de la liste des années existantes
-    $onglets = physiqueOnglets();
+    $onglets = physiqueOnglets($equipe);
 
     // Retour
     return $onglets;
@@ -60,7 +60,7 @@
 
   // METIER : Lecture liste des films récents
   // RETOUR : Liste des films récents
-  function getFilmsRecents($year, $isMobile)
+  function getFilmsRecents($year, $equipe, $isMobile)
   {
     // Initialisations
     if ($isMobile == true)
@@ -69,7 +69,7 @@
       $limite = 5;
 
     // Récupération de la liste des films récents
-    $listeFilmsRecents = physiqueFilmsRecents($year, $limite);
+    $listeFilmsRecents = physiqueFilmsRecents($year, $equipe, $limite);
 
     // Retour
     return $listeFilmsRecents;
@@ -102,7 +102,7 @@
 
   // METIER : Lecture liste des films qui sortent la semaine courante
   // RETOUR : Listes des films qui sortent la semaine courante
-  function getSortiesSemaine()
+  function getSortiesSemaine($equipe)
   {
     // Calcul des dates de la semaine
     $nombreJoursLundi    = 1 - date('N');
@@ -111,7 +111,7 @@
     $dimanche            = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
 
     // Récupération de la liste des films qui sortent dans la semaine
-    $listeFilmsSemaine = physiqueFilmsSemaine($lundi, $dimanche);
+    $listeFilmsSemaine = physiqueFilmsSemaine($lundi, $dimanche, $equipe);
 
     // Retour
     return $listeFilmsSemaine;
@@ -119,7 +119,7 @@
 
   // METIER : Lecture liste des films les plus attendus
   // RETOUR : Liste des films attendus
-  function getFilmsAttendus($year, $isMobile)
+  function getFilmsAttendus($year, $equipe, $isMobile)
   {
     // Initialisations
     $listeFilmsAttendus = array();
@@ -130,10 +130,10 @@
       $limite = 5;
 
     // Calcul date du jour - 1 mois
-    $dateJourMoins1Mois = date('Ymd', strtotime('now -1 Month'));
+    $dateJourMoins1Mois = date('Ymd', strtotime('now - 1 Month'));
 
     // Récupération de la liste des films de l'année recherchée
-    $listeFilmsAnnee = physiqueFilmsAnnee($year, $dateJourMoins1Mois);
+    $listeFilmsAnnee = physiqueFilmsAnnee($year, $dateJourMoins1Mois, $equipe);
 
     // Récupération du nombre d'utilisateurs et de la moyenne des étoiles pour chaque film
     foreach ($listeFilmsAnnee as $film)
@@ -202,10 +202,14 @@
 
   // METIER : Lecture des films par année
   // RETOUR : Liste des films
-  function getFilms($year, $identifiant)
+  function getFilms($year, $sessionUser)
   {
+    // Récupération des données
+    $identifiant = $sessionUser['identifiant'];
+    $equipe      = $sessionUser['equipe'];
+
     // Récupération de la liste des films de l'année
-    $listeFilms = physiqueFilms($year);
+    $listeFilms = physiqueFilms($year, $equipe);
 
     // Récupération des données complémentaires
     foreach ($listeFilms as $film)
@@ -257,17 +261,19 @@
 
   // METIER : Insertion d'un film
   // RETOUR : Id film
-  function insertFilm($post, $identifiant, $isMobile)
+  function insertFilm($post, $sessionUser, $isMobile)
   {
     // Initialisations
     $idFilm     = NULL;
     $control_ok = true;
 
     // Récupération des données
+    $identifiant    = $sessionUser['identifiant'];
+    $equipe         = $sessionUser['equipe'];
     $nomFilm        = $post['nom_film'];
     $toDelete       = 'N';
     $dateAdd        = date('Ymd');
-    $identifiantAdd = $identifiant;
+    $identifiantAdd = $sessionUser['identifiant'];
     $identifiantDel = '';
     $synopsis       = $post['synopsis'];
     $dateTheater    = $post['date_theater'];
@@ -388,6 +394,7 @@
       // Insertion de l'enregistrement en base
       $film = array('film'            => $nomFilm,
                     'to_delete'       => $toDelete,
+                    'team'            => $equipe,
                     'date_add'        => $dateAdd,
                     'identifiant_add' => $identifiantAdd,
                     'identifiant_del' => $identifiantDel,

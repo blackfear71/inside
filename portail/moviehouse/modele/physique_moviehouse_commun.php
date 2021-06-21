@@ -129,7 +129,7 @@
 
   // PHYSIQUE : Lecture des utilisateurs inscrits
   // RETOUR : Liste des utilisateurs
-  function physiqueUsers()
+  function physiqueUsers($equipe)
   {
     // Initialisations
     $listeUsers = array();
@@ -137,21 +137,18 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, email
+    $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, email
                         FROM users
-                        WHERE identifiant != "admin" AND status != "I"
+                        WHERE identifiant != "admin" AND status != "I" AND team = "' . $equipe .'"
                         ORDER BY identifiant ASC');
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $user = Profile::withData($data);
-
       // Création tableau de correspondance identifiant / pseudo / avatar
-      $listeUsers[$user->getIdentifiant()] = array('pseudo' => $user->getPseudo(),
-                                                   'avatar' => $user->getAvatar(),
-                                                   'email'  => $user->getEmail()
-                                                  );
+      $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
+                                                'avatar' => $data['avatar'],
+                                                'email'  => $data['email']
+                                               );
     }
 
     $req->closeCursor();

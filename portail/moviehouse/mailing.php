@@ -34,7 +34,7 @@
         $detailsFilm = getDetails($_GET['id_film'], $_SESSION['user']['identifiant']);
 
         // Récupération de la liste des utilisateurs
-        $listeUsers = physiqueUsers();
+        $listeUsers = getUsers($_SESSION['user']['equipe']);
 
         // Récupération des votes associés au film
         $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsers);
@@ -49,7 +49,7 @@
       $detailsFilm = getDetails($idFilm, $_SESSION['user']['identifiant']);
 
       // Récupération de la liste des utilisateurs
-      $listeUsers = physiqueUsers();
+      $listeUsers = getUsers($_SESSION['user']['equipe']);
 
       // Récupération des votes associés au film
       $listeEtoiles = getEtoilesDetailsFilm($idFilm, $listeUsers);

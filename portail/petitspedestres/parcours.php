@@ -30,7 +30,7 @@
       initializeSaveSession();
 
       // Récupération de la liste des parcours
-      $listeParcours = getListeParcours();
+      $listeParcours = getListeParcours($_SESSION['user']['equipe']);
       break;
 
     case 'goAjouter':
@@ -48,14 +48,18 @@
         // Initialisation de la sauvegarde en session
         initializeSaveSession();
 
+        // Vérification parcours accessible
+        $parcoursExistant = isParcoursDisponible($_GET['id_parcours'], $_SESSION['user']['equipe']);
+
         // Récupération des détails du parcours
-        $parcours = getParcours($_GET['id_parcours']);
+        if ($parcoursExistant == true)
+          $parcours = getParcours($_GET['id_parcours']);
       }
       break;
 
     case 'doAjouter':
       // Insertion d'un parcours
-      $erreurParcours = insertParcours($_POST);
+      $erreurParcours = insertParcours($_POST, $_SESSION['user']['equipe']);
       break;
 
     case 'doModifier':
@@ -85,7 +89,8 @@
 
     case 'goConsulter':
     case 'goModifier':
-      Parcours::secureData($parcours);
+      if ($parcoursExistant == true)
+        Parcours::secureData($parcours);
       break;
 
     case 'goAjouter':

@@ -66,7 +66,10 @@
           /************/
           /* Parcours */
           /************/
-          echo '<parcours-list></parcours-list>';
+          if (!empty($listeParcours))
+            echo '<parcours-list></parcours-list>';
+          else
+            echo '<div class="empty">Aucun parcours disponible...</div>';
         ?>
 
   			<!-- Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
