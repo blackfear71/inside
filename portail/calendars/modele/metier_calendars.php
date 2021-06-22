@@ -146,7 +146,7 @@
       $idCalendar = physiqueInsertionCalendrier($calendar);
 
       // Insertion notification
-      insertNotification($identifiant, 'calendrier', $equipe, $idCalendar);
+      insertNotification('calendrier', $equipe, $idCalendar, $identifiant);
 
       // Message d'alerte
       $_SESSION['alerts']['calendar_added'] = true;
@@ -188,7 +188,7 @@
       $idAnnexe = physiqueInsertionAnnexe($annexe);
 
       // Insertion notification
-      insertNotification($identifiant, 'annexe', $equipe, $idAnnexe);
+      insertNotification('annexe', $equipe, $idAnnexe, $identifiant);
 
       // Message d'alerte
       $_SESSION['alerts']['annexe_added'] = true;
@@ -603,7 +603,7 @@
     unlink($dossierTemporaire . '/trim_' . $tempName);
 
     // Insertion notification
-    insertNotification($identifiant, 'calendrier', $equipe, $idCalendar);
+    insertNotification('calendrier', $equipe, $idCalendar, $identifiant);
 
     // Message d'alerte
     $_SESSION['alerts']['calendar_added'] = true;
@@ -760,7 +760,7 @@
     unlink($dossierTemporaire . '/trim_' . $tempName);
 
     // Insertion notification
-    insertNotification($identifiant, 'annexe', $equipe, $idAnnexe);
+    insertNotification('annexe', $equipe, $idAnnexe, $identifiant);
 
     // Message d'alerte
     $_SESSION['alerts']['annexe_added'] = true;

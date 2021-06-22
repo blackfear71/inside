@@ -4,8 +4,12 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_50">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
 				echo 'Annexe';
+			echo '</td>';
+
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
+				echo 'Equipe';
 			echo '</td>';
 
 			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_50">';
@@ -31,6 +35,10 @@
   				echo '<td class="td_manage_users">';
   					echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="calendrier" title="' . $annexes->getTitle() . '" class="calendar_to_delete" />';
             echo '<div class="title_calendar_to_delete">' . $annexes->getTitle() . '</div>';
+  				echo '</td>';
+
+					echo '<td class="td_manage_users">';
+            echo $annexes->getTeam();
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
@@ -66,7 +74,7 @@
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td class="td_manage_users_important">';
+			echo '<td colspan="2" class="td_manage_users_important">';
 				echo 'Alertes';
 			echo '</td>';
 

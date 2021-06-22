@@ -4,8 +4,12 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Film';
+			echo '</td>';
+
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
+				echo 'Equipe';
 			echo '</td>';
 
 			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_30">';
@@ -20,7 +24,7 @@
 				echo 'Ajouté par';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Personnes intéressées';
 			echo '</td>';
 		echo '</tr>';
@@ -42,6 +46,10 @@
         echo '<tr class="tr_manage_users">';
   				echo '<td class="td_manage_users">';
   					echo $film->getFilm();
+  				echo '</td>';
+
+					echo '<td class="td_manage_users">';
+  					echo $film->getTeam();
   				echo '</td>';
 
           echo '<td class="td_manage_users">';
@@ -89,7 +97,7 @@
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td class="td_manage_users_important">';
+			echo '<td colspan="2" class="td_manage_users_important">';
 				echo 'Alertes';
 			echo '</td>';
 

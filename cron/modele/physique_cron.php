@@ -124,11 +124,11 @@
   }
 
   // PHYSIQUE : Lecture des participants d'une mission
-  // RETOUR : Liste des participants
+  // RETOUR : Liste des participants par équipe
   function physiqueParticipantsMission($idMission)
   {
     // Initialisations
-    $listeParticipants = array();
+    $listeParticipantsParEquipe = array();
 
     // Requête
     global $bdd;
@@ -140,25 +140,25 @@
 
     while ($data = $req->fetch())
     {
-      // Création du tableau des données participants
-      if (!isset($listeParticipants[$data['identifiant']]) OR empty($listeParticipants[$data['identifiant']]))
+      // Création du tableau des données participants par équipe
+      if (!isset($listeParticipantsParEquipe[$data['team']][$data['identifiant']]) OR empty($listeParticipantsParEquipe[$data['team']][$data['identifiant']]))
       {
-        $listeParticipants[$data['identifiant']] = array('avancement' => intval($data['avancement']),
-                                                         'rank'       => 0
-                                                        );
+        $listeParticipantsParEquipe[$data['team']][$data['identifiant']] = array('avancement' => intval($data['avancement']),
+                                                                                 'rank'       => 0
+                                                                                );
       }
       else
       {
-        $listeParticipants[$data['identifiant']] = array('avancement' => $listeParticipants[$data['identifiant']]['avancement'] + intval($data['avancement']),
-                                                         'rank'       => 0
-                                                        );
+        $listeParticipantsParEquipe[$data['team']][$data['identifiant']] = array('avancement' => $listeParticipantsParEquipe[$data['team']][$data['identifiant']]['avancement'] + intval($data['avancement']),
+                                                                                 'rank'       => 0
+                                                                                );
       }
     }
 
     $req->closeCursor();
 
     // Retour
-    return $listeParticipants;
+    return $listeParticipantsParEquipe;
   }
 
   // PHYSIQUE : Lecture des utilisateurs inscrits

@@ -133,15 +133,15 @@
 
   // METIER : Lecture statistiques catégories des utilisateurs inscrits
   // RETOUR : Tableau des statistiques
-  function getStatistiquesInscrits($listeUsers)
+  function getStatistiquesInscrits($listeUsersParEquipe)
   {
     // Initialisations
     $tableauStatistiques = array();
 
     // Récupération des statistiques par catégories
-    foreach ($listeUsers as $equipeUsers)
+    foreach ($listeUsersParEquipe as $listeUsers)
     {
-      foreach ($equipeUsers as $user)
+      foreach ($listeUsers as $user)
       {
         // Films ajoutés
         $nombreFilms = physiqueFilmsAjoutesUser($user->getIdentifiant());
@@ -200,6 +200,18 @@
         // Ajout au tableau
         array_push($tableauStatistiques, $statistiquesUser);
       }
+    }
+
+    // Tri par identifiant
+    if (!empty($tableauStatistiques))
+    {
+      foreach ($tableauStatistiques as $statistiquesIns)
+      {
+        $triStatistiquesIns[] = $statistiquesIns->getIdentifiant();
+      }
+
+      // Tri
+      array_multisort($triStatistiquesIns, SORT_ASC, $tableauStatistiques);
     }
 
     // Retour
@@ -610,7 +622,7 @@
     acceptEquipe($post, false);
 
     // Insertion notification
-    insertNotification('admin', 'inscrit', $equipe, $identifiant);
+    insertNotification('inscrit', $equipe, $identifiant, 'admin');
   }
 
   // METIER : Refus inscription

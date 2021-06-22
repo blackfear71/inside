@@ -341,7 +341,7 @@
       physiqueUpdateRecette($idRecette, $recette);
 
       // Insertion notification
-      insertNotification($identifiant, 'recipe', $equipe, $idRecette);
+      insertNotification('recipe', $equipe, $idRecette, $identifiant);
 
       // Génération succès
       insertOrUpdateSuccesValue('recipe-master', $identifiant, 1);

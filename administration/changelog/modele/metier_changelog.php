@@ -220,7 +220,7 @@
       physiqueInsertionChangelog($changelog);
 
       // Insertion notification
-      insertNotification('admin', 'changelog', '', $contentNotification);
+      insertNotification('changelog', '', $contentNotification, 'admin');
 
       // Message d'alerte
       $_SESSION['alerts']['log_added'] = true;

@@ -276,7 +276,7 @@
 
         // Insertion notification
         if ($notificationDoodleExist != true)
-          insertNotification($identifiant, 'doodle', $equipe, $idFilm);
+          insertNotification('doodle', $equipe, $idFilm, $identifiant);
       }
 
       // Gestion notification sortie cinéma
@@ -295,7 +295,7 @@
 
           // Insertion notification
           if ($notificationCinemaExist != true)
-            insertNotification('admin', 'cinema', $equipe, $idFilm);
+            insertNotification('cinema', $equipe, $idFilm, 'admin');
         }
       }
 
@@ -396,8 +396,7 @@
 
     // Insertion notification
     if ($notificationCommentsExist != true)
-      insertNotification($identifiant, 'comments', $equipe, $idFilm);
-
+      insertNotification('comments', $equipe, $idFilm, $identifiant);
     // Génération succès
     insertOrUpdateSuccesValue('commentator', $identifiant, 1);
 

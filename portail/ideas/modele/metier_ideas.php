@@ -98,7 +98,7 @@
     $idIdee = physiqueInsertionIdee($idee);
 
     // Insertion notification
-    insertNotification($author, 'idee', $equipe, $idIdee);
+    insertNotification('idee', $equipe, $idIdee, $author);
 
     // Génération succès
     insertOrUpdateSuccesValue('creator', $author, 1);

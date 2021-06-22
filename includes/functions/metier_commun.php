@@ -625,7 +625,7 @@
 
   // METIER : Génération d'une notification
   // RETOUR : Aucun
-  function insertNotification($author, $category, $equipe, $content)
+  function insertNotification($category, $equipe, $content, $author)
   {
     // Insertion de l'enregistrement en base
     $notification = array('author'    => $author,

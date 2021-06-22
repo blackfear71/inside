@@ -287,9 +287,9 @@
 
       // Insertion notification
       if ($post['type_collector'] == 'I')
-        insertNotification($identifiant, 'culte_image', $equipe, $idCollector);
+        insertNotification('culte_image', $equipe, $idCollector, $identifiant);
       else
-        insertNotification($identifiant, 'culte', $equipe, $idCollector);
+        insertNotification('culte', $equipe, $idCollector, $identifiant);
 
       // Génération succès
       insertOrUpdateSuccesValue('listener', $identifiant, 1);

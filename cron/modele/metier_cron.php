@@ -5,7 +5,7 @@
   include_once('../includes/classes/movies.php');
   include_once('../includes/classes/profile.php');
 
-  // METIER : Insertion notification sortie cinéma du jour
+  // METIER : Insertion notifications sortie cinéma du jour
   // RETOUR : Compte-rendu traitement
   function generateNotificationsSortieCinema()
   {
@@ -25,12 +25,12 @@
       foreach ($listeFilmsSortie as $film)
       {
         // Contrôle notification non existante
-        $notificationCinemaExist = controlNotification('cinema', $film->getId());
+        $notificationCinemaExist = controlNotification('cinema', $film->getId(), $film->getTeam());
 
         // Insertion notification
         if ($notificationCinemaExist != true)
         {
-          insertNotification('admin', 'cinema', $film->getId());
+          insertNotification('cinema', $film->getTeam(), $film->getId(), 'admin');
 
           // Compteur de notifications générées
           $nombreNotifications++;
@@ -52,7 +52,7 @@
     return $log;
   }
 
-  // METIER : Lecture des données missions
+  // METIER : Insertion notifications missions
   // RETOUR : Tableau de compte-rendus des traitements
   function generateNotificationsMissions()
   {
@@ -101,12 +101,12 @@
           }
 
           // Contrôle notification non existante
-          $notificationMissionExist = controlNotification($notification, $mission['id_mission']);
+          $notificationMissionExist = controlNotification($notification, $mission['id_mission'], '');
 
           // Insertion notification
           if ($notificationMissionExist != true)
           {
-            insertNotification('admin', $notification, $mission['id_mission']);
+            insertNotification($notification, '', $mission['id_mission'], 'admin');
 
             // Ajout des données au log
             $log['status'] = 'OK';
@@ -207,65 +207,71 @@
                       );
 
           // Récupération des participants de la mission et de leur avancement
-          $listeParticipants = physiqueParticipantsMission($mission->getId());
+          $listeParticipantsParEquipe = physiqueParticipantsMission($mission->getId());
 
-          if (!empty($listeParticipants))
+          if (!empty($listeParticipantsParEquipe))
           {
-            // Tri sur avancement
-            foreach ($listeParticipants as $participant)
+            // Traitements des participants par équipe
+            foreach ($listeParticipantsParEquipe as &$listeParticipants)
             {
-              $triRank[] = $participant['avancement'];
-            }
-
-            array_multisort($triRank, SORT_DESC, $listeParticipants);
-
-            // Réinitialisation du tri pour la prochaine occurence
-            unset($triRank);
-
-            // Affectation du rang
-            $prevTotal   = 0;
-            $currentRank = 0;
-
-            foreach ($listeParticipants as $identifiant => &$participant)
-            {
-              $currentTotal = $participant['avancement'];
-
-              if ($currentTotal != $prevTotal)
+              // Tri sur avancement
+              foreach ($listeParticipants as $participant)
               {
-                $currentRank += 1;
-                $prevTotal    = $currentTotal;
+                $triRank[] = $participant['avancement'];
               }
 
-              // Suppression des rangs > 3 sinon on enregistre le rang
-              if ($currentRank > 3)
-                unset($listeParticipants[$identifiant]);
-              else
-                $participant['rank'] = $currentRank;
-            }
+              array_multisort($triRank, SORT_DESC, $listeParticipants);
 
-            unset($participant);
+              // Réinitialisation du tri pour la prochaine occurence
+              unset($triRank);
 
-            // Ajout de l'expérience pour chaque gagnant
-            foreach ($listeParticipants as $identifiant => $participant)
-            {
-              switch ($participant['rank'])
+              // Affectation du rang
+              $prevTotal   = 0;
+              $currentRank = 0;
+
+              foreach ($listeParticipants as $identifiant => &$participant)
               {
-                case 1:
-                  insertExperience($identifiant, 'winner_mission_1');
-                  break;
+                $currentTotal = $participant['avancement'];
 
-                case 2:
-                  insertExperience($identifiant, 'winner_mission_2');
-                  break;
+                if ($currentTotal != $prevTotal)
+                {
+                  $currentRank += 1;
+                  $prevTotal    = $currentTotal;
+                }
 
-                case 3:
-                  insertExperience($identifiant, 'winner_mission_3');
-                  break;
+                // Suppression des rangs > 3 sinon on enregistre le rang
+                if ($currentRank > 3)
+                  unset($listeParticipants[$identifiant]);
+                else
+                  $participant['rank'] = $currentRank;
+              }
 
-                default:
-                  break;
+              unset($participant);
+
+              // Ajout de l'expérience pour chaque gagnant
+              foreach ($listeParticipants as $identifiant => $participant)
+              {
+                switch ($participant['rank'])
+                {
+                  case 1:
+                    insertExperience($identifiant, 'winner_mission_1');
+                    break;
+
+                  case 2:
+                    insertExperience($identifiant, 'winner_mission_2');
+                    break;
+
+                  case 3:
+                    insertExperience($identifiant, 'winner_mission_3');
+                    break;
+
+                  default:
+                    break;
+                }
               }
             }
+
+            unset($listeParticipants);
 
             // Ajout des données au log
             $log['status'] = 'OK';
