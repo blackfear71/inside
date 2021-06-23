@@ -14,7 +14,7 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, team, new_team, ping, status, pseudo, avatar, email, anniversary, experience
+    $req = $bdd->query('SELECT id, identifiant, team, new_team, status, pseudo, avatar, email, anniversary, experience
                         FROM users
                         WHERE identifiant != "admin"
                         ORDER BY identifiant ASC');
@@ -1179,7 +1179,7 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->exec('DELETE FROM missions_users
+    $req = $bdd->exec('DELETE FROM success_users
                        WHERE identifiant = "' . $identifiant . '"');
   }
 
@@ -1252,6 +1252,17 @@
                          AND  cooked      = "N"
                          AND  name        = ""
                          AND  picture     = ""');
+  }
+
+  // PHYSIQUE : Suppression d'un succès d'un utilisateur
+  // RETOUR : Aucun
+  function physiqueDeleteSuccess($identifiant, $reference)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->exec('DELETE FROM success_users
+                       WHERE identifiant = "' . $identifiant . '" AND reference = "' . $reference . '"');
   }
 
   // PHYSIQUE : Suppression d'un utilisateur

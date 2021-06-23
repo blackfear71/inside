@@ -159,7 +159,9 @@
             et la fonction <strong>isMissionEnded()</strong> dans <strong>metier_profil.php</strong>.';
           echo '</div>';
 
-          // Gestion des succès
+          /******************/
+          /* Gestion succès */
+          /******************/
           echo '<div class="titre_section"><img src="../../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Gérer les succès des utilisateurs</div></div>';
 
           // Modification
@@ -188,6 +190,7 @@
               echo '<ul class="margin_top_0 margin_bottom_0">';
                 echo '<li>J\'étais là. (beginning)</li>';
                 echo '<li>Je l\'ai fait ! (developper)</li>';
+                echo '<li>Véritable Jedi (padawan)</li>';
                 echo '<li>Economie de marché (greedy)</li>';
                 echo '<li>Radar à bouffe (restaurant-finder)</li>';
               echo '</ul>';
@@ -208,7 +211,9 @@
             echo '</div>';
           echo '</div>';
 
-          // Affichage des succès
+          /********************/
+          /* Affichage succès */
+          /********************/
           $lvl = 0;
 
           echo '<div class="zone_succes_admin" style="display: none;">';

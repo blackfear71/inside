@@ -567,6 +567,8 @@
         echo '<div class="texte_titre_preference">CHANGER D\'ÉQUIPE</div>';
       echo '</div>';
 
+      echo '<div class="message_form_preferences">Vous pouvez demander à changer d\'equipe à l\'administrateur ici. En cas de validation, les idées en charge non terminées seront réinitialisées, les recettes que vous n\'aurez pas encore réalisées et les votes sur les films seront supprimés ainsi que les succès associés.</div>';
+
       // Choix de l'équipe
       if ($profil->getStatus() == 'T')
         echo '<div class="message_form_preferences message_bold">Une demande est déjà en cours.</div>';
@@ -575,7 +577,7 @@
         echo '<form method="post" action="profil.php?action=doUpdateEquipe" class="form_update_user">';
           echo '<select name="equipe" class="select_form_update_team" required>';
             echo '<option value="" hidden>Choisir une équipe</option>';
-          
+
             foreach ($listeEquipes as $equipe)
             {
               if ($equipe->getReference() == $profil->getTeam())

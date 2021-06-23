@@ -32,6 +32,8 @@
     echo '<div class="zone_action_user">';
       echo '<div class="titre_contribution">CHANGER D\'ÉQUIPE</div>';
 
+      echo '<div class="message_profil">Vous pouvez demander à changer d\'equipe à l\'administrateur ici. En cas de validation, les idées en charge non terminées seront réinitialisées, les recettes que vous n\'aurez pas encore réalisées et les votes sur les films seront supprimés ainsi que les succès associés.</div>';
+
       // Choix de l'équipe
       if ($profil->getStatus() == 'T')
         echo '<div class="message_profil bold">Une demande est déjà en cours.</div>';

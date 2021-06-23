@@ -60,7 +60,9 @@
 
     $data = $req->fetch();
 
-    $crypt = array('salt' => $data['salt'], 'password' => $data['password']);
+    $crypt = array('salt' => $data['salt'],
+                   'password' => $data['password']
+                  );
 
     $req->closeCursor();
 

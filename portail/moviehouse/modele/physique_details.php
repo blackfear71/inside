@@ -29,28 +29,6 @@
     return $filmExistant;
   }
 
-  // PHYSIQUE : Lecture film
-  // RETOUR : Objet Movie
-  function physiqueFilm($idFilm)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM movie_house
-                        WHERE id = ' . $idFilm);
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Movie à partir des données remontées de la bdd
-    $film = Movie::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $film;
-  }
-
   // PHYSIQUE : Lecture film précédent existant
   // RETOUR : Booléen
   function physiqueFilmPrecedentExistant($idFilm, $titreFilm, $anneeFilm, $equipe, $dateTheater)

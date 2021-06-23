@@ -1,4 +1,5 @@
 <?php
+  include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/success.php');
 
@@ -486,27 +487,36 @@
             // Véritable Jedi
             case 'padawan':
               // Récupération date de sortie Star Wars VIII
-              $dateSortieSW8 = physiqueDateSortieFilm(16);
+              $listeFilms = physiqueRechercheFilms('Les derniers Jedi', $user->getTeam());
 
-              if (date('Ymd') >= $dateSortieSW8)
+              if (!empty($listeFilms))
               {
-                $listeConditions = array(array('operator' => '',
-                                               'column'   => 'id_film',
-                                               'test'     => '=',
-                                               'value'    => 16),
-                                         array('operator' => 'AND',
-                                               'column'   => 'identifiant',
-                                               'test'     => '=',
-                                               'value'    => $user->getIdentifiant()),
-                                         array('operator' => 'AND',
-                                               'column'   => 'participation',
-                                               'test'     => '=',
-                                               'value'    => 'S'));
+                foreach ($listeFilms as $film)
+                {
+                  if (date('Ymd') >= $film->getDate_theater())
+                  {
+                    $listeConditions = array(array('operator' => '',
+                                                   'column'   => 'id_film',
+                                                   'test'     => '=',
+                                                   'value'    => $film->getId()),
+                                             array('operator' => 'AND',
+                                                   'column'   => 'identifiant',
+                                                   'test'     => '=',
+                                                   'value'    => $user->getIdentifiant()),
+                                             array('operator' => 'AND',
+                                                   'column'   => 'participation',
+                                                   'test'     => '=',
+                                                   'value'    => 'S'));
 
-                $isSeen = physiqueCountSuccess('movie_house_users', $listeConditions);
+                    $isSeen = physiqueCountSuccess('movie_house_users', $listeConditions);
 
-                if ($isSeen > 0)
-                  $value = 1;
+                    if ($isSeen > 0)
+                    {
+                      $value = 1;
+                      break;
+                    }
+                  }
+                }
               }
               break;
 

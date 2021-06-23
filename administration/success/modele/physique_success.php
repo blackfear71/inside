@@ -14,7 +14,7 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, identifiant, ping, status, pseudo, avatar, email, anniversary, experience
+    $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, anniversary, experience
                         FROM users
                         WHERE identifiant != "admin"
                         ORDER BY identifiant ASC');
@@ -392,25 +392,33 @@
     return $bilan;
   }
 
-  // PHYSIQUE : Récupération date de sortie film
-  // RETOUR : Date de sortie film
-  function physiqueDateSortieFilm($idFilm)
+  // PHYSIQUE : Recherche film
+  // RETOUR : Objet Movie
+  function physiqueRechercheFilms($titreFilm, $equipe)
   {
+    // Initialisations
+    $listeFilm = array();
+
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, date_theater
+    $req = $bdd->query('SELECT *
                         FROM movie_house
-                        WHERE id = ' . $idFilm);
+                        WHERE film LIKE "%' . $titreFilm . '%" AND team = "' . $equipe . '"');
 
-    $data = $req->fetch();
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Movie à partir des données remontées de la bdd
+      $film = Movie::withData($data);
 
-    $dateSortie = $data['date_theater'];
+      // On ajoute la ligne au tableau
+      array_push($listeFilm, $film);
+    }
 
     $req->closeCursor();
 
     // Retour
-    return $dateSortie;
+    return $listeFilm;
   }
 
   // PHYSIQUE : Récupération données mission
@@ -426,6 +434,7 @@
 
     $data = $req->fetch();
 
+    // Instanciation d'un objet Mission à partir des données remontées de la bdd
     $mission = Mission::withData($data);
 
     $req->closeCursor();
@@ -584,6 +593,7 @@
     $req = $bdd->exec('DELETE FROM success_users
                        WHERE reference != "beginning"
                          AND reference != "developper"
+                         AND reference != "padawan"
                          AND reference != "greedy"
                          AND reference != "restaurant-finder"');
   }

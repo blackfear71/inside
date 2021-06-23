@@ -91,6 +91,9 @@
     // Traitement de l'action
     if (isset($post['participate']) OR isset($post['seen']))
     {
+      // Lecture des données du film
+      $film = physiqueFilm($idFilm);
+
       // Lecture de l'état de la participation
       $participationActuelle = physiqueParticipation($idFilm, $identifiant);
 
@@ -123,7 +126,7 @@
         if ($participationActuelle == 'S')
           insertOrUpdateSuccesValue('viewer', $identifiant, -1);
 
-        if ($idFilm == 16)
+        if (stripos($film->getFilm(), 'Les derniers Jedi') !== false)
           insertOrUpdateSuccesValue('padawan', $identifiant, 0);
       }
 
@@ -136,7 +139,7 @@
         else
           insertOrUpdateSuccesValue('viewer', $identifiant, -1);
 
-        if ($idFilm == 16)
+        if (stripos($film->getFilm(), 'Les derniers Jedi') !== false)
         {
           if ($participationNouvelle == 'S')
             insertOrUpdateSuccesValue('padawan', $identifiant, 1);
