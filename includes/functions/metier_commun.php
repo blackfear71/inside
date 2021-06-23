@@ -72,25 +72,34 @@
       header('location: /inside/index.php?action=goConsulter');
     else
     {
-      // Contrôle page accessible mobile
-      $isAccessibleMobile = isAccessibleMobile($_SERVER['PHP_SELF']);
+      // Contrôle utilisateur inscrit
+      $isUserInscrit = isUserInscrit($_SESSION['user']['identifiant']);
 
-      // Redirection si non accessible
-      if ($isAccessibleMobile == false)
-        header('location: /inside/portail/portail/portail.php?action=goConsulter');
+      // Déconnexion si non inscrit
+      if ($isUserInscrit == false)
+        header('location: /inside/includes/functions/script_commun.php?function=disconnectUser');
       else
       {
-        // Contrôle changement d'équipe
-        getEquipeUser($_SESSION['user']['identifiant'], $_SESSION['user']['equipe']);
+        // Contrôle page accessible mobile
+        $isAccessibleMobile = isAccessibleMobile($_SERVER['PHP_SELF']);
 
-        // Récupération expérience
-        getExperience($_SESSION['user']['identifiant']);
+        // Redirection si non accessible
+        if ($isAccessibleMobile == false)
+          header('location: /inside/portail/portail/portail.php?action=goConsulter');
+        else
+        {
+          // Contrôle changement d'équipe
+          getEquipeUser($_SESSION['user']);
 
-        // Récupération des missions
-        generateMissions();
+          // Récupération expérience
+          getExperience($_SESSION['user']['identifiant']);
 
-        // Détermination du thème
-        getTheme($_SESSION['user']['identifiant']);
+          // Récupération des missions
+          generateMissions();
+
+          // Détermination du thème
+          getTheme($_SESSION['user']['identifiant']);
+        }
       }
     }
   }
@@ -119,6 +128,17 @@
     return $plateforme;
   }
 
+  // METIER : Contrôle si l'utilisateur est bien inscrit
+  // RETOUR : Booléen
+  function isUserInscrit($identifiant)
+  {
+    // Vérification utilisateur inscrit
+    $isUserInscrit = physiqueUserInscrit($identifiant);
+
+    // Retour
+    return $isUserInscrit;
+  }
+
   // METIER : Contrôle si la page courante est accessible sur mobile
   // RETOUR : Booléen
   function isAccessibleMobile($path)
@@ -126,7 +146,7 @@
     // Initialisations
     $isAccessibleMobile = true;
 
-    // Contrôle section accessible sur mobile
+    // Vérification section accessible sur mobile
     if ($_SESSION['index']['plateforme'] == 'mobile')
     {
       if ($path != '/inside/portail/collector/collector.php'
@@ -208,8 +228,12 @@
 
   // METIER : Récupération de l'équipe d'un utilisateur si besoin
   // RETOUR : Aucun
-  function getEquipeUser($identifiant, $equipeCourante)
+  function getEquipeUser($sessionUser)
   {
+    // Récupération des données
+    $identifiant    = $sessionUser['identifiant'];
+    $equipeCourante = $sessionUser['equipe'];
+
     // Lecture des données utilisateur
     $equipeUser = physiqueEquipeUser($identifiant);
 

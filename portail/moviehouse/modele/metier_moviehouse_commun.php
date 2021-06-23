@@ -3,6 +3,34 @@
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
 
+  // METIER : Initialise les données de sauvegarde en session
+  // RETOUR : Aucun
+  function initializeSaveSession()
+  {
+    // On initialise les champs de saisie s'il n'y a pas d'erreur
+    if ((!isset($_SESSION['alerts']['wrong_date'])            OR $_SESSION['alerts']['wrong_date']            != true)
+    AND (!isset($_SESSION['alerts']['wrong_date_doodle'])     OR $_SESSION['alerts']['wrong_date_doodle']     != true)
+    AND (!isset($_SESSION['alerts']['restaurant_incomplete']) OR $_SESSION['alerts']['restaurant_incomplete'] != true))
+    {
+      unset($_SESSION['save']);
+
+      $_SESSION['save']['nom_film_saisi']         = '';
+      $_SESSION['save']['date_theater_saisie']    = '';
+      $_SESSION['save']['date_release_saisie']    = '';
+      $_SESSION['save']['trailer_saisi']          = '';
+      $_SESSION['save']['link_saisi']             = '';
+      $_SESSION['save']['poster_saisi']           = '';
+      $_SESSION['save']['synopsis_saisi']         = '';
+      $_SESSION['save']['doodle_saisi']           = '';
+      $_SESSION['save']['date_doodle_saisie']     = '';
+      $_SESSION['save']['time_doodle_saisi']      = '';
+      $_SESSION['save']['hours_doodle_saisies']   = '';
+      $_SESSION['save']['minutes_doodle_saisies'] = '';
+      $_SESSION['save']['restaurant_saisi']       = '';
+      $_SESSION['save']['place_saisie']           = '';
+    }
+  }
+  
   // METIER : Lecture des données préférences
   // RETOUR : Objet Preferences
   function getPreferences($identifiant)

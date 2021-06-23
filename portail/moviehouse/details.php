@@ -36,6 +36,9 @@
         header('location: moviehouse.php?view=home&year=' . date('Y') . '&action=goConsulter');
       else
       {
+        // Initialisation de la sauvegarde en session
+        initializeSaveSession();
+        
         // Vérification film disponible
         $filmExistant = isFilmDisponible($_GET['id_film'], $_SESSION['user']['equipe']);
 

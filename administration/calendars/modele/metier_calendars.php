@@ -459,7 +459,7 @@
   {
     // Récupération des données
     $idAnnexe = $post['id_annexe'];
-    $equipe   = $post['team_calendrier'];
+    $equipe   = $post['team_annexe'];
     $toDelete = 'N';
 
     // Remise à "N" de l'indicateur de demande de suppression

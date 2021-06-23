@@ -257,5 +257,5 @@ function afficherAnnexeJpeg()
   $('.zone_annexe_generator_hidden').remove();
 
   // Redimenssionnement des zones
-  $('.zone_calendrier_generator_right').css('width', 'calc(100% - 589px)');
+  $('.zone_annexe_generator_right').css('width', 'calc(100% - 513px)');
 }

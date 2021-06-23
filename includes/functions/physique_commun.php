@@ -4,6 +4,32 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture d'un utilisateur inscrit
+  // RETOUR : Booléen
+  function physiqueUserInscrit($identifiant)
+  {
+    // Initialisations
+    $isUserInscrit = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT id, identifiant, status, COUNT(*) AS nombreLignes
+                        FROM users
+                        WHERE identifiant = "' . $identifiant . '" AND status != "I"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Profile à partir des données remontées de la bdd
+    if ($data['nombreLignes'] > 0)
+      $isUserInscrit = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $isUserInscrit;
+  }
+
   // PHYSIQUE : Lecture d'une alerte
   // RETOUR : Objet Alerte
   function physiqueAlerte($referenceAlerte)

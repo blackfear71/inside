@@ -33,7 +33,7 @@
     // Retour
     return $listeEquipes;
   }
-  
+
   // PHYSIQUE : Lecture préférences utilisateurs
   // RETOUR : Préférences utilisateurs
   function physiqueAutorisationsCalendars()

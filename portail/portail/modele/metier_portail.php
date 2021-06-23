@@ -530,7 +530,7 @@
           $content = '<div class="contenu_paragraphe">La mission <span class="contenu_gras">' . $mission->getMission() . '</span> est terminée. Va voir les résultats en cliquant sur ce message.</div>';
 
           // Noms des gagnants
-          if (!empty($gagnants))
+          if (isset($gagnants[$mission->getId()]) AND !empty($gagnants[$mission->getId()]))
           {
             $listeGagnants = array();
 
