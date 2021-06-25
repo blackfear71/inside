@@ -40,8 +40,45 @@
           echo '</div>';
 
           /***********/
-          /* Contenu */
+          /* Equipes */
           /***********/
+          echo '<div class="zone_infos_equipes">';
+            echo '<div class="titre_section"><img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">Les équipes</div></div>';
+
+            echo '<div class="zone_gestion_equipes">';
+              foreach ($listeEquipes as $equipe)
+              {
+                echo '<div class="zone_gestion_equipe">';
+                  // Nom de l'équipe
+                  echo '<div class="titre_gestion_equipe">' . $equipe->getTeam() . '</div>';
+
+                  // Nombre de membres
+                  echo '<div class="zone_membres_equipe">';
+                    echo '<div class="nombre_membres_equipes">' . $equipe->getNombre_users() . '</div>';
+
+                    if ($equipe->getNombre_users() == 1)
+                      echo '<div class="texte_membres_equipe">membre</div>';
+                    else
+                      echo '<div class="texte_membres_equipe">membres</div>';
+                  echo '</div>';
+
+                  // Suppression de l'équipe
+                  if ($equipe->getNombre_users() == 0)
+                  {
+                    echo '<form id="delete_team_' . $equipe->getReference() . '" method="post" action="infosusers.php?action=doSupprimer" class="form_suppression_equipe">';
+                      echo '<input type="hidden" name="team" value="' . $equipe->getReference() . '" />';
+                      echo '<input type="submit" name="delete_team" value="Supprimer l\'équipe" class="bouton_suppression_equipe eventConfirm" />';
+                      echo '<input type="hidden" value="Supprimer cette équipe ? Ceci supprime également toutes les données liées, il est conseillé de faire une sauvegarde avant de confirmer." class="eventMessage" />';
+                    echo '</form>';
+                  }
+                echo '</div>';
+              }
+            echo '</div>';
+          echo '</div>';
+
+          /**********************/
+          /* Liste utilisateurs */
+          /**********************/
           echo '<div class="zone_infos_equipes">';
             foreach ($listeUsersParEquipe as $referenceEquipe => $usersParEquipe)
             {

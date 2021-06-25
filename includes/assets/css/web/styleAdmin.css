@@ -118,13 +118,102 @@
 	font-size: 70%;
 }
 
-/*** Infos utilisateurs ***/
+/*** Infos équipes ***/
 .zone_infos_equipes
 {
 	display: block;
 	width: 100%;
 }
 
+.zone_gestion_equipes
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_gestion_equipes.masonry
+{
+	opacity: 1;
+}
+
+.zone_gestion_equipe
+{
+	width: 280px;
+	text-align: center;
+	background-color: #e3e3e3;
+	box-shadow: 0 0 3px #7c7c7c;
+	margin-bottom: 15px;
+	border-radius: 2px;
+}
+
+.titre_gestion_equipe
+{
+	width: 100%;
+	font-family: robotothin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 150%;
+	font-weight: bold;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.zone_membres_equipe
+{
+	display: inline-block;
+	width: calc(100% - 10px);
+	padding: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.nombre_membres_equipes
+{
+	display: block;
+	font-family: robotothin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 500%;
+	line-height: 80px;
+}
+
+.texte_membres_equipe
+{
+	display: block;
+	font-family: robotolight, Verdana, sans-serif;
+	color: #262626;
+	font-size: 100%;
+}
+
+.form_suppression_equipe
+{
+	display: block;
+	width: 100%;
+}
+
+.bouton_suppression_equipe
+{
+	width: 100%;
+	background-color: #c3c3c3;
+	border: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-family: robotoregular, Verdana, sans-serif;
+	color: #262626;
+	font-size: 100%;
+	cursor: pointer;
+}
+
+.bouton_suppression_equipe:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+/*** Infos utilisateurs ***/
 .zone_infos
 {
 	width: 100%;

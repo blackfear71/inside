@@ -40,6 +40,11 @@
       changeDevelopper($_POST);
       break;
 
+    case 'doSupprimer':
+      // Suppression d'une équipe
+      deleteEquipe($_POST);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: infosusers.php?action=goConsulter');
@@ -66,6 +71,7 @@
 
     case 'changeBeginnerStatus':
     case 'changeDevelopperStatus':
+    case 'doSupprimer':
     default:
       break;
   }
@@ -75,6 +81,7 @@
   {
     case 'changeBeginnerStatus':
     case 'changeDevelopperStatus':
+    case 'doSupprimer':
       header('location: infosusers.php?action=goConsulter');
       break;
 

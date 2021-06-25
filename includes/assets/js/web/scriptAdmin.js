@@ -343,6 +343,24 @@ $(window).on('load', function()
     $('.menu_portail').addClass('masonry');
   }
 
+  // Masonry (Gestion équipes)
+  if ($('.zone_gestion_equipes').length)
+  {
+    $('.zone_gestion_equipes').masonry().masonry('destroy');
+
+    $('.zone_gestion_equipes').masonry({
+      // Options
+      itemSelector: '.zone_gestion_equipe',
+      columnWidth: 280,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_gestion_equipes').addClass('masonry');
+  }
+
   // Masonry (Infos utilisateurs)
   if ($('.zone_infos').length)
   {

@@ -6,15 +6,17 @@
     private $team;
     private $short;
     private $activation;
+    private $nombre_users;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
     {
-      $this->id         = 0;
-      $this->reference  = '';
-      $this->team       = '';
-      $this->short      = '';
-      $this->activation = '';
+      $this->id           = 0;
+      $this->reference    = '';
+      $this->team         = '';
+      $this->short        = '';
+      $this->activation   = '';
+      $this->nombre_users = 0;
     }
 
     // Constructeur de l'objet Team en fonction des données
@@ -52,6 +54,7 @@
       $data->setTeam(htmlspecialchars($data->getTeam()));
       $data->setShort(htmlspecialchars($data->getShort()));
       $data->setActivation(htmlspecialchars($data->getActivation()));
+      $data->setNombre_users(htmlspecialchars($data->getNombre_users()));
     }
 
     // Getters et Setters pour l'objet Team
@@ -108,6 +111,17 @@
     public function getActivation()
     {
       return $this->activation;
+    }
+
+    // Nomnbre d'utilisateurs
+    public function setNombre_users($nombre_users)
+    {
+      $this->nombre_users = $nombre_users;
+    }
+
+    public function getNombre_users()
+    {
+      return $this->nombre_users;
     }
   }
 ?>
