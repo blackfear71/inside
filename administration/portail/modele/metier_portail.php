@@ -1,9 +1,14 @@
 <?php
   // METIER : Génération du portail administration
   // RETOUR : Tableau des liens
-  function getPortail($alertUsers, $alertFilms, $alertVacances, $alertCalendars, $alertAnnexes, $nombreBugs, $nombreEvols)
+  function getPortail($alertEquipes, $alertUsers, $alertFilms, $alertVacances, $alertCalendars, $alertAnnexes, $nombreBugs, $nombreEvols)
   {
     // Vérification des alertes
+    if ($alertEquipes == true)
+      $avertissementEquipes = true;
+    else
+      $avertissementEquipes = false;
+
     if ($alertUsers == true)
       $avertissementUsers = true;
     else
@@ -30,7 +35,7 @@
                                    'title'     => 'Infos utilisateurs',
                                    'image'     => '../../includes/icons/common/inside.png',
                                    'alt'       => 'inside',
-                                   'alert'     => false),
+                                   'alert'     => $avertissementEquipes),
                              array('categorie' => 'GESTION DES<br />UTILISATEURS',
                                    'lien'      => '../manageusers/manageusers.php?action=goConsulter',
                                    'title'     => 'Gestion des utilisateurs',
@@ -101,6 +106,17 @@
 
      // Retour
      return $listeCategories;
+  }
+
+  // METIER : Contrôle alertes équipes
+  // RETOUR : Booléen
+  function getAlerteEquipes()
+  {
+    // Appel physique
+    $alert = physiqueAlerteEquipes();
+
+    // Retour
+    return $alert;
   }
 
   // METIER : Contrôle alertes utilisateurs

@@ -4,6 +4,33 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture alerte équipes
+  // RETOUR : Booléen
+  function physiqueAlerteEquipes()
+  {
+    // Initialisations
+    $alert = false;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreEquipes
+                        FROM teams
+                        WHERE activation = "Y" AND NOT EXISTS (SELECT id, identifiant, team
+                                                               FROM users
+                                                               WHERE teams.reference = users.team)');
+
+    $data = $req->fetch();
+
+    if ($data['nombreEquipes'] > 0)
+      $alert = true;
+
+    $req->closeCursor();
+
+    // Retour
+    return $alert;
+  }
+
   // PHYSIQUE : Lecture alerte utilisateurs
   // RETOUR : Booléen
   function physiqueAlerteUsers()
