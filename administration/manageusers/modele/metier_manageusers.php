@@ -497,9 +497,8 @@
 
     if ($post['team'] == 'other')
     {
-      $teamReference      = $post['team_reference'];
-      $nameReference      = $post['team_name'];
-      $shortNameReference = $post['team_short_name'];
+      $teamReference = $post['team_reference'];
+      $nameReference = $post['team_name'];
     }
     else
       $teamReference = $post['team'];
@@ -512,7 +511,6 @@
     {
       $team = array('reference'  => $teamReference,
                     'team'       => $nameReference,
-                    'short'      => $shortNameReference,
                     'activation' => 'Y'
                    );
 

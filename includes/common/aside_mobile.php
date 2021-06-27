@@ -76,7 +76,7 @@
     // Equipe
     echo '<div class="lien_aside">';
       echo '<img src="/inside/includes/icons/common/team.png" alt="team" title="Equipe" class="icone_aside" />';
-      echo '<div class="titre_aside">' . formatString($_SESSION['user']['equipe_long'], 30) . '</div>';
+      echo '<div class="titre_aside">' . formatString($_SESSION['user']['libelle_equipe'], 30) . '</div>';
     echo '</div>';
 
     // Liens

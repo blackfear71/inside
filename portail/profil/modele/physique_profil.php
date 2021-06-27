@@ -596,11 +596,9 @@
 
     $req = $bdd->prepare('INSERT INTO teams(reference,
                                             team,
-                                            short,
                                             activation)
                                     VALUES(:reference,
                                            :team,
-                                           :short,
                                            :activation)');
 
     $req->execute($equipe);

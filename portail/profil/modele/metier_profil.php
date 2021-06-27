@@ -371,7 +371,6 @@
     {
       $newTeam        = 'temp_' . rand();
       $labelTeam      = $post['autre_equipe'];
-      $shortTeam      = '';
       $activationTeam = 'N';
     }
     else
@@ -394,7 +393,6 @@
       {
         $team = array('reference'  => $newTeam,
                       'team'       => $labelTeam,
-                      'short'      => $shortTeam,
                       'activation' => $activationTeam
                      );
 

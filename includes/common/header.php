@@ -80,8 +80,8 @@
           echo '<div class="zone_equipe_bandeau">';
             echo '<div class="triangle_equipe_bandeau"></div>';
 
-            if (isset($_SESSION['user']['equipe_short']) AND !empty($_SESSION['user']['equipe_short']))
-              echo '<div class="equipe_bandeau">' . $_SESSION['user']['equipe_short'] . '</div>';
+            if (isset($_SESSION['user']['libelle_equipe']) AND !empty($_SESSION['user']['libelle_equipe']))
+              echo '<div class="equipe_bandeau">' . $_SESSION['user']['libelle_equipe'] . '</div>';
           echo '</div>';
         }
       echo '</div>';

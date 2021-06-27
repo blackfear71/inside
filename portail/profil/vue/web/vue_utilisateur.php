@@ -36,7 +36,7 @@
 
       // Choix de l'équipe
       if ($profil->getStatus() == 'T')
-        echo '<div class="message_profil bold">Une demande est déjà en cours.</div>';
+        echo '<div class="message_profil bold margin_top_20">Une demande est déjà en cours.</div>';
       else
       {
         echo '<form method="post" action="profil.php?action=doUpdateEquipe">';

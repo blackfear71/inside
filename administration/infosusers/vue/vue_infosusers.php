@@ -82,7 +82,7 @@
           echo '<div class="zone_infos_equipes">';
             foreach ($listeUsersParEquipe as $referenceEquipe => $usersParEquipe)
             {
-              echo '<div class="titre_section"><img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">' . $listeEquipes[$referenceEquipe]->getTeam() . ' (' . $listeEquipes[$referenceEquipe]->getShort() . ')</div></div>';
+              echo '<div class="titre_section"><img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">' . $listeEquipes[$referenceEquipe]->getTeam() . '</div></div>';
 
               echo '<div class="zone_infos">';
                 foreach ($usersParEquipe as $user)

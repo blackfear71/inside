@@ -4,7 +4,6 @@
     private $id;
     private $reference;
     private $team;
-    private $short;
     private $activation;
     private $nombre_users;
 
@@ -14,7 +13,6 @@
       $this->id           = 0;
       $this->reference    = '';
       $this->team         = '';
-      $this->short        = '';
       $this->activation   = '';
       $this->nombre_users = 0;
     }
@@ -40,9 +38,6 @@
       if (isset($data['team']))
         $this->team       = $data['team'];
 
-      if (isset($data['short']))
-        $this->short      = $data['short'];
-
       if (isset($data['activation']))
         $this->activation = $data['activation'];
     }
@@ -52,7 +47,6 @@
     {
       //$data->setReference(htmlspecialchars($data->getReference()));
       $data->setTeam(htmlspecialchars($data->getTeam()));
-      $data->setShort(htmlspecialchars($data->getShort()));
       $data->setActivation(htmlspecialchars($data->getActivation()));
       $data->setNombre_users(htmlspecialchars($data->getNombre_users()));
     }
@@ -89,17 +83,6 @@
     public function getTeam()
     {
       return $this->team;
-    }
-
-    // Nom court de l'équipe
-    public function setShort($short)
-    {
-      $this->short = $short;
-    }
-
-    public function getShort()
-    {
-      return $this->short;
     }
 
     // Indicateur d'activation

@@ -978,11 +978,9 @@
 
     $req = $bdd->prepare('INSERT INTO teams(reference,
                                             team,
-                                            short,
                                             activation)
                                     VALUES(:reference,
                                            :team,
-                                           :short,
                                            :activation)');
 
     $req->execute($equipe);
@@ -1003,7 +1001,6 @@
     $req = $bdd->prepare('UPDATE teams
                           SET reference  = :reference,
                               team       = :team,
-                              short      = :short,
                               activation = :activation
                           WHERE reference = "' . $referenceTemporaire . '"');
 

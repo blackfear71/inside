@@ -59,7 +59,9 @@
 							case 'T':
 								if ((isset($listeEquipes[$user->getTeam()])     AND !empty($listeEquipes[$user->getTeam()]->getTeam()))
 								AND (isset($listeEquipes[$user->getNew_team()]) AND !empty($listeEquipes[$user->getNew_team()]->getTeam())))
-									echo 'Changement d\'équipe (' . $listeEquipes[$user->getTeam()]->getTeam() . ' -> ' . $listeEquipes[$user->getNew_team()]->getTeam() . ')';
+								{
+									echo 'Changement d\'équipe (' . $listeEquipes[$user->getTeam()]->getTeam() . '<div class="zone_fleches_equipe"><img src="../../includes/icons/common/open.png" alt="open" class="fleche_equipe" /><img src="../../includes/icons/common/open.png" alt="open" class="fleche_equipe" /><img src="../../includes/icons/common/open.png" alt="open" class="fleche_equipe" /></div>' . $listeEquipes[$user->getNew_team()]->getTeam() . ')';
+								}
 								else
 									echo 'Changement d\'équipe';
 								break;
@@ -140,13 +142,11 @@
 
 											echo '<input type="text" placeholder="Référence" name="team_reference" value="" maxlength="100" class="input_form_manage_user" required />';
 											echo '<input type="text" placeholder="Nom" name="team_name" value="' . $listeEquipes[$user->getNew_team()]->getTeam() . '" class="input_form_manage_user" required />';
-											echo '<input type="text" placeholder="Nom court" name="team_short_name" value="" maxlength="100" class="input_form_manage_user" required />';
 										}
 										else
 										{
 											echo '<input type="text" placeholder="Référence" name="team_reference" value="" maxlength="100" class="input_form_manage_user" style="display: none;" />';
 											echo '<input type="text" placeholder="Nom" name="team_name" value="" class="input_form_manage_user" style="display: none;" />';
-											echo '<input type="text" placeholder="Nom court" name="team_short_name" value="" maxlength="100" class="input_form_manage_user" style="display: none;" />';
 										}
 									echo '</div>';
 
@@ -197,13 +197,11 @@
 
 											echo '<input type="text" placeholder="Référence" name="team_reference" value="" maxlength="100" class="input_form_manage_user" required />';
 											echo '<input type="text" placeholder="Nom" name="team_name" value="' . $listeEquipes[$user->getNew_team()]->getTeam() . '" class="input_form_manage_user" required />';
-											echo '<input type="text" placeholder="Nom court" name="team_short_name" value="" maxlength="100" class="input_form_manage_user" required />';
 										}
 										else
 										{
 											echo '<input type="text" placeholder="Référence" name="team_reference" value="" maxlength="100" class="input_form_manage_user" style="display: none;" />';
 											echo '<input type="text" placeholder="Nom" name="team_name" value="" class="input_form_manage_user" style="display: none;" />';
-											echo '<input type="text" placeholder="Nom court" name="team_short_name" value="" maxlength="100" class="input_form_manage_user" style="display: none;" />';
 										}
 									echo '</div>';
 

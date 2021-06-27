@@ -244,9 +244,8 @@
       $equipe = physiqueDonneesEquipe($equipeUser);
 
       // Mise en session des données
-      $_SESSION['user']['equipe']       = $equipe->getReference();
-      $_SESSION['user']['equipe_long']  = $equipe->getTeam();
-      $_SESSION['user']['equipe_short'] = $equipe->getShort();
+      $_SESSION['user']['equipe']         = $equipe->getReference();
+      $_SESSION['user']['libelle_equipe'] = $equipe->getTeam();
     }
   }
 

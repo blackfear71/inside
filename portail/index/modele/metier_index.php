@@ -130,9 +130,8 @@
         // Récupération de l'équipe
         $equipe = physiqueEquipe($user->getTeam());
 
-        $_SESSION['user']['equipe']       = $equipe->getReference();
-        $_SESSION['user']['equipe_long']  = $equipe->getTeam();
-        $_SESSION['user']['equipe_short'] = $equipe->getShort();
+        $_SESSION['user']['equipe']         = $equipe->getReference();
+        $_SESSION['user']['libelle_equipe'] = $equipe->getTeam();
 
         // Récupération des préférences
         $preferences = physiquePreferences($user->getIdentifiant());
@@ -192,7 +191,6 @@
     {
       $newTeam        = 'temp_' . rand();
       $labelTeam      = $post['autre_equipe'];
-      $shortTeam      = '';
       $activationTeam = 'N';
     }
     else
@@ -312,7 +310,6 @@
        {
          $team = array('reference'  => $newTeam,
                        'team'       => $labelTeam,
-                       'short'      => $shortTeam,
                        'activation' => $activationTeam
                       );
 

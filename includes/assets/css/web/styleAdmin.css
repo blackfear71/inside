@@ -513,6 +513,21 @@
 	font-size: 150%;
 }
 
+.zone_fleches_equipe
+{
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 8px;
+}
+
+.fleche_equipe
+{
+	display: inline-block;
+	width: 12px;
+	transform: rotateZ(270deg);
+	margin-right: -4px;
+}
+
 .zone_select_team
 {
 	display: inline-block;
@@ -536,8 +551,6 @@
 
 .input_form_manage_user
 {
-
-
 	display: block;
 	width: calc(100% - 20px);
 	margin-top: 5px;

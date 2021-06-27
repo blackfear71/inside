@@ -41,9 +41,9 @@
         $rapport->setAvatar($listeUsers[$rapport->getAuthor()]['avatar']);
       }
 
-      // Recherche du libellé court de l'équipe
+      // Recherche du libellé de l'équipe
       if (isset($listeEquipe[$rapport->getTeam()]))
-        $rapport->setTeam($listeEquipe[$rapport->getTeam()]->getShort());
+        $rapport->setTeam($listeEquipe[$rapport->getTeam()]->getTeam());
     }
 
     // Retour
