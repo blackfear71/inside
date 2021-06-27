@@ -239,7 +239,7 @@
 .montant_des
 {
 	display: inline-block;
-	width: calc(100% - 5.5vh);
+	width: calc(100% - 6vh);
 	height: 10vh;
 	line-height: 10vh;
 	border: 0;

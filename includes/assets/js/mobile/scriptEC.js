@@ -514,7 +514,10 @@ function initialisationModification(idDepense, year, filter)
           partsDes += '<input type="hidden" name="identifiant_quantite[]" value="' + identifiant + '" />';
 
           // Parts
-          partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_des part_selected" readonly />';
+          partsDes += '<div class="zone_saisie_montant">';
+            partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="montant_des" readonly />';
+            partsDes += '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="Parts" class="euro_saisie" />';
+          partsDes += '</div>';
         partsDes += '</div>';
 
         listePartsDes += partsDes;
