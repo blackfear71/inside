@@ -112,10 +112,10 @@
     if ($control_ok == true)
     {
       // On insère dans la table
-      $bug = array('subject'  => $subject,
-                   'date'     => $date,
+      $bug = array('date'     => $date,
                    'author'   => $author,
                    'team'     => $equipe,
+                   'subject'  => $subject,
                    'content'  => $content,
                    'picture'  => $picture,
                    'type'     => $type,
