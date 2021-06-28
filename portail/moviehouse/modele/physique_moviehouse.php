@@ -329,9 +329,9 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO movie_house(film,
-                                                  to_delete,
+    $req = $bdd->prepare('INSERT INTO movie_house(to_delete,
                                                   team,
+                                                  film,
                                                   date_add,
                                                   identifiant_add,
                                                   identifiant_del,
@@ -347,9 +347,9 @@
                                                   time_doodle,
                                                   restaurant,
                                                   place)
-                                          VALUES(:film,
-                                                 :to_delete,
+                                          VALUES(:to_delete,
                                                  :team,
+                                                 :film,
                                                  :date_add,
                                                  :identifiant_add,
                                                  :identifiant_del,

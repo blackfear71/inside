@@ -364,9 +364,9 @@
       $idUrl = extractUrl($trailer);
 
       // Insertion de l'enregistrement en base
-      $film = array('film'            => $nomFilm,
-                    'to_delete'       => $toDelete,
+      $film = array('to_delete'       => $toDelete,
                     'team'            => $equipe,
+                    'film'            => $nomFilm,
                     'date_add'        => $dateAdd,
                     'identifiant_add' => $identifiantAdd,
                     'identifiant_del' => $identifiantDel,
