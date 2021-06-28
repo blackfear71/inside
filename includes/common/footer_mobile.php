@@ -1,6 +1,6 @@
 <?php
   // Numéro de version
-  $version = '2.3';
+  $version = '2.4';
 
   // Version
   echo '<div class="version">v' . $version . '</div>';

@@ -1,6 +1,6 @@
 <?php
   // Numéro de version
-  $version = '2.3';
+  $version = '2.4';
 
   // Liens
   if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
