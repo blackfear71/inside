@@ -616,6 +616,21 @@
     return $listeSuccesAConvertir;
   }
 
+  // METIER : Lecture des polices de caractères existantes
+  // RETOUR : Liste des polices
+  function getPolicesCaracteres()
+  {
+    // Récupération des dossiers de polices
+    $polices = scandir('../../includes/fonts');
+
+    // Suppression des racines de dossier
+    unset($polices[array_search('..', $polices)]);
+    unset($polices[array_search('.', $polices)]);
+
+    // Retour
+    return $polices;
+  }
+
   // METIER : Lecture des thèmes existants par type
   // RETOUR : Liste des thèmes
   function getThemes($type, $experience)
@@ -643,6 +658,23 @@
 
     // Retour
     return $isThemeMission;
+  }
+
+  // METIER : Mise à jour de la préférence police de caractères utilisateur
+  // RETOUR : Aucun
+  function updateFont($identifiant, $post)
+  {
+    // Récupération des données
+    $police = $post['police'];
+
+    // Modification de l'enregistrement en base
+    physiqueUpdateFont($identifiant, $police);
+
+    // Mise à jour de la session
+    $_SESSION['user']['font'] = $police;
+    
+    // Message d'alerte
+    $_SESSION['alerts']['font_updated'] = true;
   }
 
   // METIER : Mise à jour de la préférence thème utilisateur

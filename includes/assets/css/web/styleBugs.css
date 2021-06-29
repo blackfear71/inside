@@ -36,7 +36,7 @@
 	line-height: 30px;
 	text-align: center;
 	text-decoration: none;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
 }
@@ -92,7 +92,7 @@
 	width: calc(100% - 40px);
 	padding-left: 20px;
 	padding-right: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	border-bottom: solid 2px #c81932;
@@ -149,7 +149,7 @@
 
 .text_saisie_report
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
 	margin-bottom: 10px;
@@ -242,7 +242,7 @@
 	border: 0;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -260,7 +260,7 @@
 	border-radius: 2px;
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -273,7 +273,7 @@
 	height: 70px;
 	min-height: 70px;
 	padding: 5px 10px 5px 10px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	resize: vertical;
@@ -296,7 +296,7 @@
 	line-height: 34px;
 	border-radius: 2px;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
@@ -326,7 +326,7 @@
 
 .zone_report_titre
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	text-align: center;
 }
@@ -354,7 +354,7 @@
 	display: inline-block;
 	margin-left: 10px;
 	vertical-align: middle;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	max-width: 50%;
 	word-break: break-word;
@@ -366,7 +366,7 @@
 	display: inline-block;
 	margin: 5px 0 5px 10px;
 	vertical-align: middle;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	background-color: #262626;
 	padding: 3px 8px 3px 8px;
@@ -378,7 +378,7 @@
 	display: inline-block;
 	margin: 5px 0 5px 10px;
 	vertical-align: middle;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	background-color: #2eb2f4;
 	padding: 3px 8px 3px 8px;
@@ -400,7 +400,7 @@
 	display: inline-block;
 	margin: 5px 0 5px 10px;
 	vertical-align: middle;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	background-color: #ff1937;
 	padding: 3px 8px 3px 8px;
@@ -412,7 +412,7 @@
 	display: inline-block;
 	margin: 5px 0 5px 10px;
 	vertical-align: middle;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	background-color: #70d55d;
 	padding: 3px 8px 3px 8px;
@@ -446,7 +446,7 @@
 .content_report
 {
 	vertical-align: top;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
 }

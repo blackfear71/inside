@@ -82,7 +82,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	line-height: 30px;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	color: white;
 	font-size: 180%;
 }
@@ -92,7 +92,7 @@
 	display: block;
 	margin-top: -250px;
 	line-height: 100%;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	color: white;
 	font-size: 180%;
 	height: 250px;
@@ -114,7 +114,7 @@
 	border-radius: 50%;
 	background-color: white;
 	color: #262626;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 70%;
 }
 
@@ -152,7 +152,7 @@
 .titre_gestion_equipe
 {
 	width: 100%;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	color: #262626;
 	font-size: 150%;
 	font-weight: bold;
@@ -174,7 +174,7 @@
 .nombre_membres_equipes
 {
 	display: block;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	color: #262626;
 	font-size: 500%;
 	line-height: 80px;
@@ -183,7 +183,7 @@
 .texte_membres_equipe
 {
 	display: block;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 100%;
 }
@@ -201,7 +201,7 @@
 	border: 0;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	font-size: 100%;
 	cursor: pointer;
@@ -259,7 +259,7 @@
 .infos_pseudo
 {
 	margin-left: 110px;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	text-align: left;
 	word-wrap: break-word;
@@ -268,7 +268,7 @@
 .infos_identifiant
 {
 	margin-left: 110px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	text-align: left;
 }
@@ -277,7 +277,7 @@
 {
 	clear: both;
 	margin-top: 20px;
-	font-family: robotolight_italic, Verdana, sans-serif;
+	font-family: inside_font_light_italic, Verdana, sans-serif;
 	color: #262626;
 	text-align: left;
 	word-wrap: break-word;
@@ -286,7 +286,7 @@
 .infos_niveau
 {
 	margin-left: 110px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #ff1937;
 	text-align: left;
 	word-wrap: break-word;
@@ -314,7 +314,7 @@
 	border: 0;
 	width: 50%;
 	cursor: pointer;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 }
 
 .beginner
@@ -356,7 +356,7 @@
 .date_infos_users
 {
 	clear: both;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 80%;
 	text-align: justify;
@@ -389,7 +389,7 @@
 {
 	text-align: center;
 	background-color: #e3e3e3;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-weight: bold;
 	color: #262626;
 }
@@ -450,7 +450,7 @@
 {
 	text-align: center;
 	padding: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
 	word-break: break-word;
@@ -460,7 +460,7 @@
 {
 	text-align: center;
 	padding: 5px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
 	word-break: break-word;
@@ -472,7 +472,7 @@
 {
 	text-align: center;
 	padding: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	border: solid 1px #b3b3b3;
 	word-break: break-word;
@@ -485,7 +485,7 @@
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	margin-bottom: 30px;
@@ -497,7 +497,7 @@
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 140%;
 	color: #262626;
 	background-color: #e3e3e3;
@@ -508,7 +508,7 @@
 
 .reset_warning
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #ff1937;
 	font-size: 150%;
 }
@@ -543,7 +543,7 @@
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 100%;
 	background-color: white;
@@ -558,7 +558,7 @@
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 100%;
 	background-color: white;
@@ -575,7 +575,7 @@
 {
 	padding: 5px;
 	border: solid 1px #b3b3b3;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -607,7 +607,7 @@
 .table_old_users
 {
 	line-height: 40px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	background-color: #2eb2f4;
 	color: white;
 	text-align: center;
@@ -697,7 +697,7 @@
 .bouton_admin
 {
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	margin-top: 10px;
@@ -737,7 +737,7 @@
 	display: block;
 	width: calc(100% - 20px);
 	background-color: #c3c3c3;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	padding: 10px;
 	text-align: center;
@@ -755,7 +755,7 @@
 	line-height: 35px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	padding-left: 5px;
 	cursor: pointer;
@@ -783,7 +783,7 @@
 	background-color: white;
 	padding: 10px 20px 10px 20px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	cursor: pointer;
@@ -809,7 +809,7 @@
 	display: block;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
 	text-align: justify;
@@ -824,7 +824,7 @@
 	box-shadow: 0 0 3px #7c7c7c;
 	background-color: #262626;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	cursor: pointer;
 	-moz-user-select: none;
@@ -847,7 +847,7 @@
 	background-color: white;
 	border-radius: 5px;
 	overflow: hidden;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 }
@@ -893,7 +893,7 @@
 	padding: 5px 10px 5px 35px;
 	width: 100%;
 	text-align: left;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
 	border: 0;
@@ -937,7 +937,7 @@
 
 .lien_periodes_vacances
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	text-decoration: underline;
 	color: #0000ee;
 }
@@ -947,7 +947,7 @@
 	display: block;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 100%;
 	color: #ff1937;
 	text-align: justify;
@@ -966,7 +966,7 @@
 
 .table_periodes_vacances tr:first-child
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	text-align: center;
@@ -979,7 +979,7 @@
 
 .table_periodes_vacances tr td:first-child
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 100%;
 }
 
@@ -1013,7 +1013,7 @@
 	border: 0;
 	padding-left: 10px;
 	padding-right: 10px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 }
 
@@ -1047,7 +1047,7 @@
 	border: solid 1px #d3d3d3;
 	padding-left: 10px;
 	padding-right: 10px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 }
 
@@ -1059,7 +1059,7 @@
 	border: solid 1px #d3d3d3;
 	padding-left: 10px;
 	padding-right: 10px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 }
 
@@ -1074,7 +1074,7 @@
 	background-color: white;
 	padding: 10px 20px 10px 20px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	cursor: pointer;
@@ -1141,7 +1141,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1162,7 +1162,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1183,7 +1183,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1204,7 +1204,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1221,7 +1221,7 @@
 	width: 100%;
 	height: 44px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
@@ -1292,7 +1292,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1313,7 +1313,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1332,7 +1332,7 @@
 	height: 42px;
 	border: solid 1px #a3a3a3;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	cursor: pointer;
 	background-color: white;
@@ -1358,7 +1358,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -1366,7 +1366,7 @@
 
 .titre_explications
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 110%;
 	text-align: justify;
 	margin-top: 20px;
@@ -1375,7 +1375,7 @@
 
 .contenu_explications
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	text-align: justify;
 	margin-bottom: 10px;
@@ -1394,7 +1394,7 @@
 	height: 40px;
 	line-height: 40px;
 	width: 180px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #d3d3d3;
@@ -1420,7 +1420,7 @@
 {
 	height: 40px;
 	width: 180px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #d3d3d3;
@@ -1442,7 +1442,7 @@
 	width: calc(100% - 195px);
 	margin-left: 15px;
 	margin-top: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	text-align: justify;
@@ -1509,7 +1509,7 @@
 	padding: 2px;
 	border-radius: 50%;
 	background-color: #ff1937;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	margin-bottom: -24px;
 	position: relative;
@@ -1524,7 +1524,7 @@
 	padding: 2px;
 	border-radius: 5px;
 	background-color: #ff1937;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	margin-bottom: -24px;
 	position: relative;
@@ -1539,7 +1539,7 @@
 .titre_succes
 {
 	margin-top: 6px;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 }
@@ -1547,7 +1547,7 @@
 .reference_succes
 {
 	margin-top: 6px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	background-color: #ff1937;
 	border-radius: 5px;
@@ -1558,13 +1558,13 @@
 {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	font-family: robotolight_italic, Verdana, sans-serif;
+	font-family: inside_font_light_italic, Verdana, sans-serif;
 	color: #262626;
 }
 
 .defined_succes
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 }
@@ -1583,7 +1583,7 @@
 	padding: 10px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -1595,7 +1595,7 @@
 	padding: 10px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -1680,7 +1680,7 @@
 	display: inline-block;
 	width: 25px;
 	height: 25px;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	font-size: 60%;
 	text-align: center;
@@ -1699,7 +1699,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	text-align: justify;
@@ -1710,7 +1710,7 @@
 	border: 0;
 	background-color: white;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
 	padding: 5px 10px 5px 10px;
@@ -1723,7 +1723,7 @@
 	border: 0;
 	background-color: white;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
 	padding: 5px 10px 5px 10px;
@@ -1738,7 +1738,7 @@
 	border: 0;
 	background-color: white;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
 	padding: 5px 10px 5px 10px;
@@ -1757,7 +1757,7 @@
 	margin-top: 30px;
 	padding-left: 20px;
 	padding-right: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #d3d3d3;
@@ -1798,7 +1798,7 @@
 	padding-right: 20px;
 	line-height: 50px;
 	background-color: #ff1937;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 140%;
 	color: white;
 	border-bottom: solid 2px #c81932;
@@ -1810,7 +1810,7 @@
 	line-height: 20px;
 	background-color: #ff1937;
 	padding: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
 	border-top: solid 1px #ff4961;
@@ -1834,7 +1834,7 @@
 	padding-left: 30px;
 	padding-right: 30px;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
 	cursor: pointer;
@@ -1893,7 +1893,7 @@
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: white;
 	margin-top: 5px;
 }
@@ -1905,7 +1905,7 @@
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: white;
 	margin-top: 5px;
 }
@@ -1916,7 +1916,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	background-color: #d3d3d3;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -1964,7 +1964,7 @@
 	padding-right: 20px;
 	line-height: 50px;
 	background-color: #ff1937;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 140%;
 	color: white;
 	border-bottom: solid 2px #c81932;
@@ -1975,7 +1975,7 @@
 	line-height: 20px;
 	background-color: #ff1937;
 	padding: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
 	border-top: solid 1px #ff4961;
@@ -2023,7 +2023,7 @@
 .titre_mission
 {
 	display: inline-block;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: white;
 	padding: 10px;
@@ -2091,7 +2091,7 @@
 	position: relative;
 	margin-top: 20px;
 	margin-left: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	padding: 10px;
@@ -2112,7 +2112,7 @@
 	margin-top: 80px;
 	margin-left: 17px;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 50%;
 	color: white;
 	background-color: #ff1937;
@@ -2155,7 +2155,7 @@
 	border-style: dashed;
 	border-color: #a3a3a3;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 200%;
 	color: #a3a3a3;
 	text-align: center;
@@ -2182,7 +2182,7 @@
 	border-style: dashed;
 	border-color: #a3a3a3;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 130%;
 	color: #a3a3a3;
 	text-align: center;
@@ -2223,7 +2223,7 @@
 	background-color: #ff1937;
 	line-height: 50px;
 	padding: 10px 20px 10px 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	border-bottom: solid 2px #c81932;
@@ -2233,7 +2233,7 @@
 .input_mission_date
 {
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	padding: 10px;
@@ -2256,7 +2256,7 @@
 	padding-right: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	text-align: center;
@@ -2265,7 +2265,7 @@
 .select_time_mission
 {
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	padding: 5px;
@@ -2283,7 +2283,7 @@
 {
 	width: calc(100% - 22px);
 	min-height: 300px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	padding: 10px;
@@ -2298,7 +2298,7 @@
 {
 	width: calc(100% - 20px);
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	padding: 10px;
@@ -2307,7 +2307,7 @@
 
 .reference_mission
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	margin-left: 5px;
@@ -2317,7 +2317,7 @@
 {
 	width: 100px;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	padding: 10px;
@@ -2331,7 +2331,7 @@
 	border-bottom: solid 2px #c81932;
 	line-height: 30px;
 	padding: 10px 20px 10px 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	text-align: justify;
@@ -2346,7 +2346,7 @@
 	padding-right: 20px;
 	padding-top: 10px;
 	padding-bottom: 11px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
 	text-align: justify;
@@ -2376,7 +2376,7 @@
 	width: calc(100% - 20px);
 	height: 100px;
 	min-height: 100px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	border: 0;
 	border-radius: 2px;
@@ -2398,7 +2398,7 @@
 	line-height: 40px;
 	border-radius: 2px;
 	background-color: #c81932;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 18px;
 	color: white;
 	cursor: pointer;
@@ -2427,7 +2427,7 @@
 	display: block;
 	background-color: #ff1937;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 170%;
 	color: white;
 	padding: 5px 10px 5px 10px;
@@ -2440,7 +2440,7 @@
 	margin-top: 10px;
 	background-color: #262626;
 	border-radius: 2px;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	font-size: 130%;
 	color: white;
 	padding: 5px 10px 5px 10px;
@@ -2450,7 +2450,7 @@
 .classement_user
 {
 	display: block;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 130%;
 	border-bottom: solid 1px #b3b3b3;
 	line-height: 30px;
@@ -2477,7 +2477,7 @@
 	border-radius: 2px;
 	height: 30px;
 	line-height: 30px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 80%;
 	font-weight: normal;
 	color: white;
@@ -2525,7 +2525,7 @@
 	width: 494px;
 	height: 75.5px;
 	line-height: 75.5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 150%;
 }
 
@@ -2576,7 +2576,7 @@
 	width: 494px;
 	height: 278px;
 	line-height: 278px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 150%;
 }
 
@@ -2629,7 +2629,7 @@
 	width: 494px;
 	height: 45.5px;
 	line-height: 45.5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 150%;
 }
 
@@ -2685,7 +2685,7 @@
 	width: 44px;
 	height: 44px;
 	line-height: 44px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 }
 
@@ -2739,7 +2739,7 @@
 	padding: 5px;
 	border: 0;
 	border-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2751,7 +2751,7 @@
 	width: calc(70% - 20px);
 	background-color: #b3b3b3;
 	border-bottom-left-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2763,7 +2763,7 @@
 	width: calc(30% - 20px);
 	background-color: #c3c3c3;
 	border-bottom-right-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 	text-align: center;
@@ -2776,7 +2776,7 @@
 	width: calc(500px / 3 - 20px);
 	background-color: #b3b3b3;
 	border-bottom-left-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2788,7 +2788,7 @@
 	width: calc((500px / 3) * 2 - 20px);
 	background-color: #c3c3c3;
 	border-bottom-right-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2802,7 +2802,7 @@
 	line-height: 28px;
 	border: 0;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
@@ -2822,7 +2822,7 @@
 	padding: 5px;
 	border: 0;
 	border-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2834,7 +2834,7 @@
 	padding: 5px;
 	border: 0;
 	border-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2886,7 +2886,7 @@
 {
 	display: inline-block;
 	width: calc(100% - 80px);
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
 }
@@ -2898,7 +2898,7 @@
 	width: calc(70% - 20px);
 	background-color: #b3b3b3;
 	border-bottom-left-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2910,7 +2910,7 @@
 	width: calc(500px / 3 - 20px);
 	background-color: #b3b3b3;
 	border-bottom-left-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -2922,7 +2922,7 @@
 	width: calc(30% - 20px);
 	background-color: #c3c3c3;
 	border-bottom-right-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 	text-align: center;
@@ -2935,7 +2935,7 @@
 	height: 20px;
 	border-radius: 50%;
 	background-color: #ff1937;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 90%;
 	text-align: center;
@@ -2948,7 +2948,7 @@
 	width: calc((500px / 3) * 2 - 20px);
 	background-color: #c3c3c3;
 	border-bottom-right-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -3002,7 +3002,7 @@
 	padding: 5px;
 	border: 0;
 	border-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -3014,7 +3014,7 @@
 	width: calc(30% - 20px);
 	background-color: #c3c3c3;
 	border-bottom-right-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 	text-align: center;
@@ -3027,7 +3027,7 @@
 	width: calc((500px / 3) * 2 - 20px);
 	background-color: #c3c3c3;
 	border-bottom-right-radius: 2px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -3100,7 +3100,7 @@
 	height: 44px;
 	border-radius: 5px;
 	border: solid 1px #a3a3a3;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -3121,7 +3121,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -3142,7 +3142,7 @@
 	line-height: 40px;
 	min-height: 40px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -3162,7 +3162,7 @@
 	height: 22px;
 	min-height: 22px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: white;
@@ -3212,7 +3212,7 @@
 {
 	text-align: center;
 	background-color: #ff1937;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: white;
 	line-height: 50px;
 }
@@ -3251,7 +3251,7 @@
 
 .td_reference_alerts
 {
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-weight: bold;
 	color: #262626;
 	padding: 10px;
@@ -3268,7 +3268,7 @@
 
 .td_alerts
 {
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	text-align: justify;
 	color: #262626;
 	padding: 10px;
@@ -3394,7 +3394,7 @@
 	display: block;
 	width: 100%;
 	text-align: center;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #b3b3b3;
 }
@@ -3410,7 +3410,7 @@
 	line-height: 35px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	padding-left: 5px;
 	cursor: pointer;
@@ -3455,7 +3455,7 @@
 {
 	display: inline-block;
 	width: 75px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	text-align: left;
@@ -3469,7 +3469,7 @@
 	line-height: 35px;
 	padding-left: 5px;
 	padding-right: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	border: 0;
@@ -3489,7 +3489,7 @@
 	line-height: 35px;
 	border-radius: 2px;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
@@ -3525,7 +3525,7 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	cursor: pointer;
@@ -3546,7 +3546,7 @@
 	height: 20px;
 	background-color: #70d55d;
 	border-radius: 50%;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	text-align: center;
 	line-height: 20px;
@@ -3573,7 +3573,7 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-radius: 2px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	cursor: pointer;
@@ -3600,7 +3600,7 @@
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
 	margin-bottom: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -3621,7 +3621,7 @@
 	border: 0;
 	box-shadow: 0 0 3px #7c7c7c;
 	margin-bottom: 20px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 }
@@ -3631,7 +3631,7 @@
 	display: inline-block;
 	width: 260px;
 	padding: 4px 5px 4px 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	border: 0;
@@ -3643,7 +3643,7 @@
 .notes_changelog
 {
 	line-height: 30px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 130%;
 	color: #262626;
 	text-align: justify;
@@ -3652,7 +3652,7 @@
 .notes_changelog::first-letter
 {
   font-size: 250%;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 }
 
 .zone_logs_edition
@@ -3686,7 +3686,7 @@
 	display: block;
 	text-align: center;
 	width: 100%;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	color: #262626;
 	font-size: 150%;
 	font-weight: bold;
@@ -3704,7 +3704,7 @@
 {
 	padding-left: 15px;
 	margin: 10px 0 0 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
 }
@@ -3731,14 +3731,14 @@
 
 .explications_generator
 {
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	text-align: justify;
 	color: #262626;
 }
 
 .categorie_generator
 {
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	padding-bottom: 10px;
 }
@@ -3754,7 +3754,7 @@
 	background-color: white;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	line-height: 32px;
@@ -3771,7 +3771,7 @@
 	background-color: white;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	line-height: 32px;
@@ -3786,7 +3786,7 @@
 	line-height: 35px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	padding-left: 5px;
 	cursor: pointer;
@@ -3817,7 +3817,7 @@
 	margin-top: 10px;
 	border-radius: 2px;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	background-color: #e3e3e3;
@@ -3850,7 +3850,7 @@
 	box-shadow: 0 0 3px #7c7c7c;
 	width: 100%;
 	margin-bottom: 10px;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 }
@@ -3885,7 +3885,7 @@
 	padding: 0 10px 0 10px;
 	height: 30px;
 	line-height: 30px;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	background-color: #e3e3e3;
 	cursor: pointer;
 	border: 0;

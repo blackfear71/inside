@@ -1,0 +1,112 @@
+/***************/
+/*** Polices ***/
+/***************/
+
+/*** Polices générales ***/
+@font-face
+{
+	font-family: 'inside_font_thin';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Thin.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Thin.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_thin_italic';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-ThinItalic.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-ThinItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_light';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Light.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_light_italic';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-LightItalic.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-LightItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_regular';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Regular.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_italic';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Italic.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_medium';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Medium.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Medium.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_medium_italic';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-MediumItalic.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-MediumItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_bold';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Bold.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_bold_italic';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-BoldItalic.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-BoldItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_black';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-Black.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-Black.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: 'inside_font_black_italic';
+	src: url('/inside/includes/fonts/ProductSans/ProductSans-BlackItalic.woff') format('woff'),
+			 url('/inside/includes/fonts/ProductSans/ProductSans-BlackItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}

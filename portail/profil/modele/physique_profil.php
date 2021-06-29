@@ -721,7 +721,25 @@
     $req->closeCursor();
   }
 
-  // PHYSIQUE : Mise à jour statut utilisateur
+  // PHYSIQUE : Mise à jour police utilisateur
+  // RETOUR : Aucun
+  function physiqueUpdateFont($identifiant, $police)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE preferences
+                          SET font = :font
+                          WHERE identifiant = "' . $identifiant . '"');
+
+    $req->execute(array(
+      'font' => $police
+    ));
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour thème utilisateur
   // RETOUR : Aucun
   function physiqueUpdateTheme($identifiant, $referenceTheme)
   {

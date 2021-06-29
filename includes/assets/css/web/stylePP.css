@@ -1,6 +1,10 @@
+/****************************/
+/*** Les Petits Pédestres ***/
+/****************************/
+
 .PP-parcours
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	width: 100%;
@@ -27,7 +31,7 @@
 	padding: 10px 0 10px 10px;
 	width: 70px;
 	border-radius: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -40,7 +44,7 @@
 	padding: 6px 10px 6px 10px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 }
 
@@ -51,7 +55,7 @@
 	margin-left: 20px;
 	margin-bottom: 20px;
 	padding: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	border: 0;
@@ -88,7 +92,7 @@
 	text-align: center;
 	background-color: #ffad01;
 	border-top: 1px solid #e3e3e3;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-weight: bold;
 	color: #262626;
 }
@@ -97,7 +101,7 @@
 {
 	text-align: center;
 	line-height: 30px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
 
@@ -150,7 +154,7 @@
 	border: 0;
 	background-color: white;
 	border-radius: 5px;
-	font-family: robotolight_italic, Verdana, sans-serif;
+	font-family: inside_font_light_italic, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
 }

@@ -136,6 +136,7 @@
         // Récupération des préférences
         $preferences = physiquePreferences($user->getIdentifiant());
 
+        $_SESSION['user']['font']               = $preferences->getFont();
         $_SESSION['user']['celsius']            = $preferences->getCelsius();
         $_SESSION['user']['view_movie_house']   = $preferences->getView_movie_house();
         $_SESSION['user']['view_the_box']       = $preferences->getView_the_box();
@@ -198,6 +199,7 @@
 
     // Initialisations préférences utilisateur
     $refTheme             = '';
+    $font                 = 'Roboto';
     $initChat             = 'Y';
     $celsius              = 'Y';
     $viewMovieHouse       = 'H';
@@ -294,6 +296,7 @@
        // Préférences utilisateur
        $preferences = array('identifiant'            => $trigramme,
                             'ref_theme'              => $refTheme,
+                            'font'                   => $font,
                             'init_chat'              => $initChat,
                             'celsius'                => $celsius,
                             'view_movie_house'       => $viewMovieHouse,

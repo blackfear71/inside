@@ -63,6 +63,9 @@
             // Récupération des préférences de l'utilisateur
             $preferences = getPreferences($_SESSION['user']['identifiant']);
 
+            // Récupération des polices de caratères
+            $policesCaracteres = getPolicesCaracteres();
+
             // Récupération des thèmes utilisateurs
             $themesUsers = getThemes('U', $profil->getExperience());
 
@@ -141,6 +144,11 @@
       updateStatus($_SESSION['user']['identifiant'], 'U');
       break;
 
+    case 'doModifierPolice':
+      // Modification de la police de caractères
+      updateFont($_SESSION['user']['identifiant'], $_POST);
+      break;
+
     case 'doSupprimerTheme':
       // Suppression du thème
       deleteTheme($_SESSION['user']['identifiant']);
@@ -193,6 +201,13 @@
           Profile::secureData($profil);
           Preferences::secureData($preferences);
 
+          foreach ($policesCaracteres as &$police)
+          {
+            $police = htmlspecialchars($police);
+          }
+
+          unset($police);
+
           if (!empty($themesUsers))
           {
             foreach ($themesUsers as $themeUsers)
@@ -230,6 +245,7 @@
     case 'askDesinscription':
     case 'cancelDesinscription':
     case 'cancelResetPassword':
+    case 'doModifierPolice':
     case 'doSupprimerTheme':
     case 'doModifierTheme':
     default:
@@ -252,6 +268,7 @@
       header('location: profil.php?view=settings&action=goConsulter');
       break;
 
+    case 'doModifierPolice':
     case 'doSupprimerTheme':
     case 'doModifierTheme':
       header('location: profil.php?view=themes&action=goConsulter');

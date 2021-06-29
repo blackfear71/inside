@@ -2,7 +2,7 @@
   echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Pour profiter de vos thèmes</div></div>';
 
   echo '<div class="texte_themes">';
-    echo 'Vous pouvez modifier ici votre thème qui sera <strong>appliqué à l\'ensemble du site.</strong>';
+    echo 'Vous pouvez modifier ici votre thème qui sera <strong>appliqué à l\'ensemble du site</strong>, ainsi que la police de caractères utilisée.';
   echo '</div>';
 
   echo '<div class="texte_themes">';

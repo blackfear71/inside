@@ -2,223 +2,6 @@
 /*** Commun ***/
 /**************/
 
-/*** Polices ***/
-@font-face
-{
-	font-family: 'robotothin';
-	src: url('/inside/includes/fonts/Roboto-Thin-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Thin-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Thin-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Thin-webfont.svg#robotothin') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotothin_italic';
-	src: url('/inside/includes/fonts/Roboto-ThinItalic-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-ThinItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-ThinItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-ThinItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-ThinItalic-webfont.svg#robotothin_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotolight';
-	src: url('/inside/includes/fonts/Roboto-Light-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Light-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Light-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Light-webfont.svg#robotolight') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotolight_italic';
-	src: url('/inside/includes/fonts/Roboto-LightItalic-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-LightItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-LightItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-LightItalic-webfont.svg#robotolight_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotoregular';
-	src: url('/inside/includes/fonts/Roboto-Regular-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Regular-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Regular-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Regular-webfont.svg#robotoregular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotoitalic';
-	src: url('/inside/includes/fonts/Roboto-Italic-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Italic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Italic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Italic-webfont.svg#robotoitalic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotomedium';
-	src: url('/inside/includes/fonts/Roboto-Medium-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Medium-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Medium-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Medium-webfont.svg#robotomedium') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotomedium_italic';
-	src: url('/inside/includes/fonts/Roboto-MediumItalic-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-MediumItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-MediumItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-MediumItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-MediumItalic-webfont.svg#robotomedium_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotobold';
-	src: url('/inside/includes/fonts/Roboto-Bold-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Bold-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Bold-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Bold-webfont.svg#robotobold') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotobold_italic';
-	src: url('/inside/includes/fonts/Roboto-BoldItalic-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-BoldItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-BoldItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-BoldItalic-webfont.svg#robotobold_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotoblack';
-	src: url('/inside/includes/fonts/Roboto-Black-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-Black-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-Black-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-Black-webfont.svg#robotoblack') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'robotoblack_italic';
-	src: url('/inside/includes/fonts/Roboto-BlackItalic-webfont.eot');
-	src: url('/inside/includes/fonts/Roboto-BlackItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/Roboto-BlackItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/Roboto-BlackItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/Roboto-BlackItalic-webfont.svg#robotoblack_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'roboto_condensedlight';
-	src: url('/inside/includes/fonts/RobotoCondensed-Light-webfont.eot');
-	src: url('/inside/includes/fonts/RobotoCondensed-Light-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Light-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/RobotoCondensed-Light-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Light-webfont.svg#roboto_condensedlight') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'roboto_condensedlight_italic';
-	src: url('/inside/includes/fonts/RobotoCondensed-LightItalic-webfont.eot');
-	src: url('/inside/includes/fonts/RobotoCondensed-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/RobotoCondensed-LightItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/RobotoCondensed-LightItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/RobotoCondensed-LightItalic-webfont.svg#roboto_condensedlight_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'roboto_condensedregular';
-	src: url('/inside/includes/fonts/RobotoCondensed-Regular-webfont.eot');
-	src: url('/inside/includes/fonts/RobotoCondensed-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Regular-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/RobotoCondensed-Regular-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Regular-webfont.svg#roboto_condensedregular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'roboto_condenseditalic';
-	src: url('/inside/includes/fonts/RobotoCondensed-Italic-webfont.eot');
-	src: url('/inside/includes/fonts/RobotoCondensed-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Italic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/RobotoCondensed-Italic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Italic-webfont.svg#roboto_condenseditalic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'roboto_condensedbold';
-	src: url('/inside/includes/fonts/RobotoCondensed-Bold-webfont.eot');
-	src: url('/inside/includes/fonts/RobotoCondensed-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Bold-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/RobotoCondensed-Bold-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/RobotoCondensed-Bold-webfont.svg#roboto_condensedbold') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face
-{
-	font-family: 'roboto_condensedbold_italic';
-	src: url('/inside/includes/fonts/RobotoCondensed-BoldItalic-webfont.eot');
-	src: url('/inside/includes/fonts/RobotoCondensed-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/inside/includes/fonts/RobotoCondensed-BoldItalic-webfont.woff') format('woff'),
-			 url('/inside/includes/fonts/RobotoCondensed-BoldItalic-webfont.ttf') format('truetype'),
-			 url('/inside/includes/fonts/RobotoCondensed-BoldItalic-webfont.svg#roboto_condensedbold_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
 /*** Général ***/
 html
 {
@@ -369,7 +152,7 @@ aside
 	display: inline-block;
 	vertical-align: middle;
 	width: calc(100% - 8vh);
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2.7vh;
 }
@@ -403,7 +186,7 @@ aside
 	width: 4vh;
 	height: 4vh;
 	line-height: 4vh;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 2.2vh;
 	color: white;
 	text-align: center;
@@ -476,7 +259,7 @@ aside
 	width: calc(100% - 5vh);
 	padding-left: 2.5vh;
 	padding-right: 2.5vh;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 3vh;
 	color: white;
 	border-bottom: solid 0.3vh #c81932;
@@ -496,7 +279,7 @@ aside
 	line-height: 3vh;
 	padding: 2vh;
 	height: 100%;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 2.5vh;
 	text-align: justify;
 	color: white;
@@ -534,7 +317,7 @@ aside
 	text-decoration: none;
 	text-align: center;
 	border-radius: 0.5vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
 	box-shadow: 0 0 0.5vh #7c7c7c;
@@ -552,7 +335,7 @@ aside
 	text-decoration: none;
 	text-align: center;
 	border-radius: 0.5vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
 	box-shadow: 0 0 0.5vh #7c7c7c;
@@ -573,7 +356,7 @@ aside
 /*** Texte zone vide ***/
 .empty
 {
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
 	text-align: justify;
@@ -583,7 +366,7 @@ aside
 /*** Titres ***/
 .titre_section_mobile
 {
-	font-family: robotoblack, Verdana, sans-serif;
+	font-family: inside_font_black, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
 	text-align: center;
@@ -614,7 +397,7 @@ aside
 {
 	display: inline-block;
 	width: calc(100% - 10vh);
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 3vh;
 	font-weight: bold;
 	line-height: 4vh;
@@ -702,7 +485,7 @@ aside
 	display: block;
 	height: 2vh;
 	line-height: 2vh;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2vh;
 	text-align: center;
@@ -721,7 +504,7 @@ aside
 	text-decoration: none;
 	background-color: #e3e3e3;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
 }
@@ -782,7 +565,7 @@ aside
 	display: inline-block;
 	vertical-align: middle;
 	width: calc(100% - 7vh);
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
 }
@@ -818,7 +601,7 @@ aside
 	width: calc(100% - 6vh);
 	vertical-align: top;
 	text-align: justify;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 120%;
 }
@@ -831,7 +614,7 @@ aside
 	width: 25vw;
 	background-color: #ff1937;
 	line-height: 5vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
 	text-align: center;
@@ -906,7 +689,7 @@ aside
 	width: calc(100% - 5vh);
 	padding-left: 2.5vh;
 	padding-right: 2.5vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 3vh;
 	background-color: #ff1937;
@@ -926,7 +709,7 @@ aside
 	width: calc(100% - 4vh);
 	padding: 1vh 2vh 0.5vh 2vh;
 	background-color: white;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2.5vh;
 }
@@ -938,7 +721,7 @@ aside
 	padding: 1vh;
 	margin-top: 1.5vh;
 	margin-bottom: 2vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
 	text-align: center;
@@ -974,7 +757,7 @@ aside
 	line-height: 6vh;
 	background-color: #e3e3e3;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
 }
@@ -988,7 +771,7 @@ aside
 	line-height: 6vh;
 	background-color: #70d55d;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 3vh;
 }
@@ -1001,7 +784,7 @@ aside
 	height: 6vh;
 	line-height: 6vh;
 	background-color: #ff1937;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 3vh;
 }
@@ -1034,7 +817,7 @@ aside
 
 .titre_zone_succes_zoom
 {
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	font-size: 6vh;
 	color: white;
 }
@@ -1053,7 +836,7 @@ aside
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 5vh;
 	color: white;
 }
@@ -1078,7 +861,7 @@ aside
 	border-radius: 0.5vh;
 	width: calc(100% - 2vh);
 	background-color: #ffad01;
-	font-family: robotothin, Verdana, sans-serif;
+	font-family: inside_font_thin, Verdana, sans-serif;
 	font-size: 4vh;
 	color: white;
 	box-shadow: 0 0 0.5vh #7c7c7c;
@@ -1091,7 +874,7 @@ aside
 	margin-right: auto;
 	padding: 1vh;
 	width: calc(100% - 2vh);
-	font-family: robotothin_italic, Verdana, sans-serif;
+	font-family: inside_font_thin_italic, Verdana, sans-serif;
 	font-size: 4vh;
 	color: white;
 }
@@ -1107,7 +890,7 @@ aside
 {
 	display: inline-block;
 	padding: 1vh 2vh 1vh 2vh;
-	font-family: robotomedium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 3vh;
 	color: white;
 	background-color: #b3b3b3;
@@ -1161,7 +944,7 @@ aside
 	width: calc(100% - 14vh);
 	border: 0;
 	background-color: #e3e3e3;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 2.5vh;
 }
@@ -1196,7 +979,7 @@ aside
 .numero_page_active
 {
 	background-color: #ff1937;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 3vh;
 	color: white;
 	display: inline-block;
@@ -1212,7 +995,7 @@ aside
 .numero_page_inactive
 {
 	background-color: #a3a3a3;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 3vh;
 	color: white;
 	display: inline-block;
@@ -1243,7 +1026,7 @@ aside
 .points
 {
 	display: inline-block;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	width: 4vh;
 	height: 6vh;
 	line-height: 6vh;
@@ -1264,7 +1047,7 @@ footer
 	line-height: 7vh;
 	padding-left: 2vh;
 	padding-right: 2vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2vh;
 }
@@ -1303,7 +1086,7 @@ footer
 {
 	display: inline-block;
 	line-height: 7vh;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 2vh;
 	color: white;
 	text-align: left;

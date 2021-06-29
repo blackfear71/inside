@@ -42,6 +42,12 @@ $(function()
   {
     afficherAutreEquipe('select_form_update_team', 'autre_equipe');
   });
+
+  // Affiche un exemple de police de caractères
+  $('#select_police').on('change', function()
+  {
+    $('#exemple_police').css('font-family', $(this).val() + ', Times New Roman, Verdana, sans-serif');
+  });
 });
 
 /*****************/

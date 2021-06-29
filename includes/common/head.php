@@ -2,6 +2,13 @@
   // Dates de dernière modification (CSS et JS) pour mise à jour automatique du cache du navigateur
   $dateModificationCss = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css');
 
+  $dateModificationCssFonts = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/fonts/styleFonts.css');
+
+  if (isset($_SESSION['user']['font']) AND !empty($_SESSION['user']['font']))
+    $dateModificationCssFonts2 = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/fonts/style' . $_SESSION['user']['font'] . '.css');
+  else
+    $dateModificationCssFonts2 = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/fonts/styleRoboto.css');
+
   if (!empty($styleHead))
     $dateModificationCssSection = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $styleHead);
 
@@ -26,6 +33,13 @@
 
   // Styles communs
   echo '<link rel="icon" type="image/png" href="/inside/favicon.png" />';
+  echo '<link rel="stylesheet" href="/inside/includes/assets/css/fonts/styleFonts.css?version=' . $dateModificationCssFonts . '" />';
+
+  if (isset($_SESSION['user']['font']) AND !empty($_SESSION['user']['font']))
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/fonts/style' . $_SESSION['user']['font'] . '.css?version=' . $dateModificationCssFonts2 . '" />';
+  else
+    echo '<link rel="stylesheet" href="/inside/includes/assets/css/fonts/styleRoboto.css?version=' . $dateModificationCssFonts2 . '" />';
+
   echo '<link rel="stylesheet" href="/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/style.css?version=' . $dateModificationCss . '" />';
 
   // Styles spécifiques

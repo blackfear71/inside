@@ -35,7 +35,7 @@
 .titre_onglet
 {
 	display: inline-block;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	line-height: 30px;
 	padding: 5px 10px 5px 10px;
@@ -67,7 +67,7 @@
 	height: 40px;
 	padding-right: 10px;
 	padding-left: 5px;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: white;
 	background-color: #c81932;
@@ -107,7 +107,7 @@
 	padding-right: 5px;
 	display: table-cell;
 	vertical-align: bottom;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	word-wrap: break-word;
 }
 
@@ -127,7 +127,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 0;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 }
@@ -149,7 +149,7 @@
 .bouton_chat:hover
 {
 	background-color: #ff1937;
-	font-family: robotoregular, Verdana, sans-serif;
+	font-family: inside_font_regular, Verdana, sans-serif;
 	color: white;
 	background-image: url("/inside/includes/icons/common/send.png");
 	background-size: 30px;
@@ -391,7 +391,7 @@
 	padding-right: 5px;
 	display: table-cell;
 	vertical-align: top;
-	font-family: robotolight, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	word-wrap: break-word;
 }
 

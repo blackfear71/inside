@@ -587,6 +587,7 @@
   {
     private $id;
     private $ref_theme;
+    private $font;
     private $init_chat;
     private $celsius;
     private $view_movie_house;
@@ -600,6 +601,7 @@
     {
       $this->id                     = 0;
       $this->ref_theme              = '';
+      $this->font                   = '';
       $this->init_chat              = '';
       $this->celsius                = '';
       $this->view_movie_house       = '';
@@ -627,6 +629,9 @@
       if (isset($data['ref_theme']))
         $this->ref_theme              = $data['ref_theme'];
 
+      if (isset($data['font']))
+        $this->font                   = $data['font'];
+
       if (isset($data['init_chat']))
         $this->init_chat              = $data['init_chat'];
 
@@ -653,6 +658,7 @@
     public static function secureData($data)
     {
       $data->setRef_theme(htmlspecialchars($data->getRef_theme()));
+      $data->setFont(htmlspecialchars($data->getFont()));
       $data->setInit_chat(htmlspecialchars($data->getInit_chat()));
       $data->setCelsius(htmlspecialchars($data->getCelsius()));
       $data->setView_movie_house(htmlspecialchars($data->getView_movie_house()));
@@ -683,6 +689,17 @@
     public function getRef_theme()
     {
       return $this->ref_theme;
+    }
+
+    // Police de caractères
+    public function setFont($font)
+    {
+      $this->font = $font;
+    }
+
+    public function getFont()
+    {
+      return $this->font;
     }
 
     // Initialisation chat

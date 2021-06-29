@@ -37,6 +37,9 @@
                           array('lien'  => '/inside/portail/profil/profil.php?view=success&action=goConsulter',
                                 'image' => 'cup',
                                 'titre' => 'SUCCÈS'),
+                          array('lien'  => '/inside/portail/profil/profil.php?view=themes&action=goConsulter',
+                                'image' => 'themes',
+                                'titre' => 'THÈMES'),
                           array('lien'  => '/inside/includes/functions/script_commun.php?function=disconnectUser',
                                 'image' => 'logout',
                                 'titre' => 'DÉCONNEXION')

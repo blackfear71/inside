@@ -379,6 +379,7 @@
 
     $req = $bdd->prepare('INSERT INTO preferences(identifiant,
                                                   ref_theme,
+                                                  font,
                                                   init_chat,
                                                   celsius,
                                                   view_movie_house,
@@ -388,6 +389,7 @@
                                                   manage_calendars)
                                           VALUES(:identifiant,
                                                  :ref_theme,
+                                                 :font,
                                                  :init_chat,
                                                  :celsius,
                                                  :view_movie_house,

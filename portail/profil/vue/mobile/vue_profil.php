@@ -110,8 +110,7 @@
               break;
 
             case 'themes':
-              //include('vue/mobile/vue_infos_themes.php');
-              echo '<div class="empty">En cours de construction...</div>';
+              include('vue/mobile/vue_themes.php');
               break;
 
             case 'profile':

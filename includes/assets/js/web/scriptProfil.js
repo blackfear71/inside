@@ -141,6 +141,12 @@ $(function()
     afficherAutreEquipe('select_form_saisie', 'autre_equipe');
   });
 
+  // Affiche un exemple de police de caractères
+  $('#select_police').on('change', function()
+  {
+    $('#exemple_police').css('font-family', $(this).val() + ', Times New Roman, Verdana, sans-serif');
+  });
+
   /*** Calendriers ***/
   if ($('#datepicker_anniversary').length)
   {
