@@ -100,10 +100,10 @@
 
   // METIER : Récupération des étoiles utilisateurs d'un film
   // RETOUR : Liste des étoiles utilisateurs
-  function getEtoilesDetailsFilm($idFilm, $listeUsers)
+  function getEtoilesDetailsFilm($idFilm, $listeUsers, $equipe)
   {
     // Récupération des étoiles
-    $listeEtoilesFilm = physiqueEtoilesFilm($idFilm);
+    $listeEtoilesFilm = physiqueEtoilesFilm($idFilm, $listeUsers, $equipe);
 
     // Récupération pseudo et avatar
     foreach ($listeEtoilesFilm as $etoilesFilm)

@@ -146,6 +146,7 @@
     {
       // Création tableau de correspondance identifiant / pseudo / avatar
       $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
+                                                'equipe' => $data['team'],
                                                 'avatar' => $data['avatar'],
                                                 'email'  => $data['email']
                                                );
@@ -159,7 +160,7 @@
 
   // PHYSIQUE : Lecture des étoiles d'un film
   // RETOUR : Liste des étoiles
-  function physiqueEtoilesFilm($idFilm)
+  function physiqueEtoilesFilm($idFilm, $listeUsers, $equipe)
   {
     // Initialisations
     $listeEtoilesFilm = array();
@@ -174,11 +175,15 @@
 
     while ($data = $req->fetch())
     {
-      // Instanciation d'un objet Stars à partir des données remontées de la bdd
-      $etoile = Stars::withData($data);
+      // On ne récupère que les étoiles des utilisateurs de l'équipe
+      if (isset($listeUsers[$data['identifiant']]) AND !empty($listeUsers[$data['identifiant']]) AND $listeUsers[$data['identifiant']]['equipe'] == $equipe)
+      {
+        // Instanciation d'un objet Stars à partir des données remontées de la bdd
+        $etoile = Stars::withData($data);
 
-      // On ajoute la ligne au tableau
-      array_push($listeEtoilesFilm, $etoile);
+        // On ajoute la ligne au tableau
+        array_push($listeEtoilesFilm, $etoile);
+      }
     }
 
     $req->closeCursor();

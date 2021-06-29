@@ -571,12 +571,6 @@
           physiqueUpdateMissionsEnCours($idMission, $identifiant, $teamReference);
         }
       }
-
-      // Suppression des étoiles des films
-      physiqueDeleteStarsFilmsUser($identifiant);
-
-      // Suppression du succès "viewer" associé
-      physiqueDeleteSuccess($identifiant, 'viewer');
     }
 
     // Mise à jour de la référence de l'équipe et du statut à "U"

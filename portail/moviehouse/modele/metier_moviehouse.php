@@ -205,7 +205,7 @@
 
   // METIER : Récupère les étoiles utilisateurs de chaque film
   // RETOUR : Tableau des étoiles utilisateurs
-  function getEtoilesFichesFilms($listeFilms, $listeUsers)
+  function getEtoilesFichesFilms($listeFilms, $listeUsers, $equipe)
   {
     // Initialisations
     $listeEtoiles = array();
@@ -214,7 +214,7 @@
     foreach ($listeFilms as $film)
     {
       // Récupération des étoiles
-      $listeEtoilesFilm = physiqueEtoilesFilm($film->getId());
+      $listeEtoilesFilm = physiqueEtoilesFilm($film->getId(), $listeUsers, $equipe);
 
       // Récupération pseudo et avatar
       foreach ($listeEtoilesFilm as $etoilesFilm)

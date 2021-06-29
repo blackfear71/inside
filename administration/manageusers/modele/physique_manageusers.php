@@ -1251,17 +1251,6 @@
                          AND  picture     = ""');
   }
 
-  // PHYSIQUE : Suppression d'un succès d'un utilisateur
-  // RETOUR : Aucun
-  function physiqueDeleteSuccess($identifiant, $reference)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->exec('DELETE FROM success_users
-                       WHERE identifiant = "' . $identifiant . '" AND reference = "' . $reference . '"');
-  }
-
   // PHYSIQUE : Suppression d'un utilisateur
   // RETOUR : Aucun
   function physiqueDeleteUser($identifiant)

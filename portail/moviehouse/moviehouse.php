@@ -102,7 +102,7 @@
                 $listeUsers = getUsers($_SESSION['user']['equipe']);
 
                 // Récupération des étoiles
-                $listeEtoiles = getEtoilesFichesFilms($listeFilms, $listeUsers);
+                $listeEtoiles = getEtoilesFichesFilms($listeFilms, $listeUsers, $_SESSION['user']['equipe']);
               }
               break;
 

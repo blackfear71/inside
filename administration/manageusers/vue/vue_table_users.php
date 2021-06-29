@@ -4,20 +4,30 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_10">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
 				echo 'Demande';
 			echo '</td>';
 
 			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_50">';
 				echo 'Actions';
+			echo '</td>';
+		echo '</tr>';
+
+		echo '<tr class="init_tr_manage_users">';
+			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+				echo 'Accepter';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+				echo 'Refuser';
 			echo '</td>';
 		echo '</tr>';
 
@@ -86,14 +96,6 @@
 					switch ($user->getStatus())
 					{
 						case 'P':
-							// Annulation
-							echo '<td class="td_manage_users">';
-								echo '<form method="post" action="manageusers.php?action=doAnnulerMdp" class="form_manage_user">';
-									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
-									echo '<input type="submit" name="annuler_reinitialisation" title="Annuler" value="" class="icone_annuler" />';
-								echo '</form>';
-							echo '</td>';
-
 							// Validation
 							echo '<td class="td_manage_users">';
 								echo '<form method="post" action="manageusers.php?action=doChangerMdp" class="form_manage_user">';
@@ -101,19 +103,17 @@
 									echo '<input type="submit" name="reinitialiser" title="Réinitialiser" value="" class="icone_accepter" />';
 								echo '</form>';
 							echo '</td>';
+
+							// Annulation
+							echo '<td class="td_manage_users">';
+								echo '<form method="post" action="manageusers.php?action=doAnnulerMdp" class="form_manage_user">';
+									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
+									echo '<input type="submit" name="annuler_reinitialisation" title="Annuler" value="" class="icone_annuler" />';
+								echo '</form>';
+							echo '</td>';
 							break;
 
 						case 'T':
-							// Annulation
-							echo '<td class="td_manage_users init_td_manage_users_25">';
-								echo '<form method="post" action="manageusers.php?action=doRefuserEquipe" class="form_manage_user">';
-									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
-									echo '<input type="hidden" name="team_user" value="' . $user->getTeam() . '" />';
-									echo '<input type="hidden" name="new_team_user" value="' . $user->getNew_team() . '" />';
-									echo '<input type="submit" name="decline_inscription" title="Refuser" value="" class="icone_annuler" />';
-								echo '</form>';
-							echo '</td>';
-
 							// Validation
 							echo '<td class="td_manage_users init_td_manage_users_25">';
 								echo '<form method="post" action="manageusers.php?action=doAccepterEquipe" class="form_manage_user">';
@@ -157,18 +157,19 @@
 									echo '</div>';
 								echo '</form>';
 							echo '</td>';
-							break;
 
-						case 'I':
 							// Annulation
 							echo '<td class="td_manage_users init_td_manage_users_25">';
-								echo '<form method="post" action="manageusers.php?action=doRefuserInscription" class="form_manage_user">';
+								echo '<form method="post" action="manageusers.php?action=doRefuserEquipe" class="form_manage_user">';
 									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
-									echo '<input type="hidden" name="team_user" value="' . $user->getNew_team() . '" />';
+									echo '<input type="hidden" name="team_user" value="' . $user->getTeam() . '" />';
+									echo '<input type="hidden" name="new_team_user" value="' . $user->getNew_team() . '" />';
 									echo '<input type="submit" name="decline_inscription" title="Refuser" value="" class="icone_annuler" />';
 								echo '</form>';
 							echo '</td>';
+							break;
 
+						case 'I':
 							// Validation
 							echo '<td class="td_manage_users init_td_manage_users_25">';
 								echo '<form method="post" action="manageusers.php?action=doAccepterInscription" class="form_manage_user">';
@@ -212,23 +213,32 @@
 									echo '</div>';
 								echo '</form>';
 							echo '</td>';
+
+							// Annulation
+							echo '<td class="td_manage_users init_td_manage_users_25">';
+								echo '<form method="post" action="manageusers.php?action=doRefuserInscription" class="form_manage_user">';
+									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
+									echo '<input type="hidden" name="team_user" value="' . $user->getNew_team() . '" />';
+									echo '<input type="submit" name="decline_inscription" title="Refuser" value="" class="icone_annuler" />';
+								echo '</form>';
+							echo '</td>';
 							break;
 
 						case 'D':
-							// Annulation
-							echo '<td class="td_manage_users">';
-								echo '<form method="post" action="manageusers.php?action=doRefuserDesinscription" class="form_manage_user">';
-									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
-									echo '<input type="submit" name="decline_desinscription" title="Refuser" value="" class="icone_annuler" />';
-								echo '</form>';
-							echo '</td>';
-
 							// Validation
 							echo '<td class="td_manage_users">';
 								echo '<form method="post" action="manageusers.php?action=doAccepterDesinscription" class="form_manage_user">';
 									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 									echo '<input type="hidden" name="team_user" value="' . $user->getTeam() . '" />';
 									echo '<input type="submit" name="accept_desinscription" title="Accepter" value="" class="icone_accepter" />';
+								echo '</form>';
+							echo '</td>';
+
+							// Annulation
+							echo '<td class="td_manage_users">';
+								echo '<form method="post" action="manageusers.php?action=doRefuserDesinscription" class="form_manage_user">';
+									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
+									echo '<input type="submit" name="decline_desinscription" title="Refuser" value="" class="icone_annuler" />';
 								echo '</form>';
 							echo '</td>';
 							break;

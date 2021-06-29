@@ -47,7 +47,7 @@
         break;
 
       case 'themes':
-        $contenuCelsius = 'En cours de construction...';
+        $contenuCelsius = 'C\'est un début... au moins on peut changer sa police de caractères, c\'est cool nan ?';
         break;
 
       default:

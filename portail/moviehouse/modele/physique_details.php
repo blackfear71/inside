@@ -195,6 +195,7 @@
     {
       // Création tableau de correspondance identifiant / pseudo / avatar
       $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
+                                                'equipe' => $data['team'],
                                                 'avatar' => $data['avatar'],
                                                 'email'  => $data['email']
                                                );

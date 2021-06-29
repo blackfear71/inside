@@ -37,7 +37,7 @@
         $listeUsers = getUsers($_SESSION['user']['equipe']);
 
         // Récupération des votes associés au film
-        $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsers);
+        $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsers, $_SESSION['user']['equipe']);
       }
       break;
 
@@ -52,7 +52,7 @@
       $listeUsers = getUsers($_SESSION['user']['equipe']);
 
       // Récupération des votes associés au film
-      $listeEtoiles = getEtoilesDetailsFilm($idFilm, $listeUsers);
+      $listeEtoiles = getEtoilesDetailsFilm($idFilm, $listeUsers, $_SESSION['user']['equipe']);
 
       // Envoi du mail
       sendMail($detailsFilm, $listeEtoiles);

@@ -38,7 +38,7 @@
       {
         // Initialisation de la sauvegarde en session
         initializeSaveSession();
-        
+
         // Vérification film disponible
         $filmExistant = isFilmDisponible($_GET['id_film'], $_SESSION['user']['equipe']);
 
@@ -54,7 +54,7 @@
           $listeUsersDetails = getUsersDetailsFilm($_GET['id_film'], $_SESSION['user']['equipe']);
 
           // Récupération des votes associés au film
-          $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsersDetails);
+          $listeEtoiles = getEtoilesDetailsFilm($_GET['id_film'], $listeUsersDetails, $_SESSION['user']['equipe']);
 
           // Récupération des commentaires associés aux films
           $listeCommentaires = getCommentaires($_GET['id_film'], $listeUsersDetails);
