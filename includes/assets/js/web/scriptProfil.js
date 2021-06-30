@@ -361,6 +361,17 @@ function afficherExperienceProfil(id, experience)
   var canvas      = $('#' + id)[0];
   var context     = canvas.getContext("2d");
 
+  // Correction du flou
+  var size  = 2 * (rayonArc + epaisseurLigne);
+  var scale = window.devicePixelRatio;
+
+  canvas.style.width  = size + 'px';
+  canvas.style.height = size + 'px';
+  canvas.width        = Math.floor(size * scale);
+  canvas.height       = Math.floor(size * scale);
+
+  context.scale(scale, scale);
+
   // Calcul du début et de la fin de l'arc
   var debutArc = Math.PI / 2;
   var finArc   = -1 * pourcentage * Math.PI / 50 + debutArc;
@@ -392,7 +403,7 @@ function afficherExperienceProfil(id, experience)
   // Texte
   if (pourcentage == 100)
   {
-    context.font      = '100% robotolight, Verdana, sans-serif';
+    context.font      = '100% inside_font_light, Verdana, sans-serif';
     context.textAlign = 'center';
     context.fillStyle = '#262626';
 
