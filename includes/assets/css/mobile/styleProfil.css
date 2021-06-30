@@ -708,6 +708,11 @@
   word-break: break-word;
 }
 
+.titre_full
+{
+  line-height: 4vh;
+}
+
 .medaille_succes
 {
   width: 100%;
@@ -855,10 +860,15 @@
 {
 	display: block;
 	vertical-align: top;
+  margin-top: 1.5vh;
   margin-bottom: -2vh;
 	width: 100%;
-  font-size: 2vh;
   color: #262626;
+}
+
+#exemple_police p:first-child
+{
+	font-size: 3vh;
 }
 
 #exemple_police p
@@ -866,4 +876,5 @@
 	margin: 0;
 	margin-bottom: 20px;
 	text-align: justify;
+  font-size: 2.5vh;
 }

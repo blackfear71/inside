@@ -904,11 +904,17 @@
 	margin-left: 20px;
 }
 
+#exemple_police p:first-child
+{
+	font-size: 120%;
+}
+
 #exemple_police p
 {
 	margin: 0;
 	margin-bottom: 20px;
 	text-align: justify;
+	font-size: 100%;
 }
 
 /*** Thèmes ***/
