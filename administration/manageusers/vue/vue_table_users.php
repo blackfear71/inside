@@ -34,16 +34,19 @@
 		foreach ($listeUsersParEquipe as $referenceEquipe => $equipeUsers)
 		{
 			// Nom de l'équipe
-			echo '<tr>';
-				echo '<td class="table_old_users" colspan="5">';
-					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
-					if ($referenceEquipe == 'new_users')
-						echo 'Utilisateurs en cours d\'inscription';
-					else
-						echo $listeEquipes[$referenceEquipe]->getTeam();
-					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
-				echo '</td>';
-			echo '</tr>';
+			if (!empty($listeUsersParEquipe[$referenceEquipe]))
+			{
+				echo '<tr>';
+					echo '<td class="table_old_users" colspan="5">';
+						echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
+						if ($referenceEquipe == 'new_users')
+							echo 'Utilisateurs en cours d\'inscription';
+						else
+							echo $listeEquipes[$referenceEquipe]->getTeam();
+						echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+					echo '</td>';
+				echo '</tr>';	
+			}
 
 			// Liste des utilisateurs de l'équipe
 			foreach ($equipeUsers as $user)
