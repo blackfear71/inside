@@ -135,7 +135,7 @@
                 echo '<input type="password" name="confirm_password" value="' . $_SESSION['save']['confirmation_mot_de_passe_saisi'] . '" placeholder="Confirmer le mot de passe" maxlength="100" class="monoligne_index_inscription" required />';
 
                 // Boutons
-                echo '<div class="zone_boutons_validation_index">';
+                echo '<div class="zone_boutons_validation_index zone_boutons_inscription">';
                   echo '<input type="submit" name="ask_inscription" value="INSCRIPTION" class="bouton_index bouton_index_short" />';
                   echo '<a id="afficherAideInscription" class="lien_bouton_index">';
                     echo '<img src="includes/icons/common/question_grey.png" alt="question_grey" title="Aide" class="image_bouton_index" />';

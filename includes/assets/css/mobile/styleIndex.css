@@ -48,7 +48,7 @@
 	width: calc(100% - 2vh);
 	padding: 1vh;
 	height: 5vh;
-	margin-bottom: 1vh;
+	margin-bottom: 1.5vh;
 	border: 0;
 	border-bottom: solid 0.5vh #d3d3d3;
 	background-color: transparent;
@@ -61,7 +61,7 @@
 {
 	display: block;
 	width: 100%;
-	margin-bottom: 1vh;
+	margin-bottom: 1.5vh;
 	padding: 1.5vh 0.5vh 1.5vh 0.5vh;
 	border: 0;
 	border-bottom: solid 0.5vh #d3d3d3;
@@ -77,6 +77,11 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 8vh;
+}
+
+.zone_boutons_inscription
+{
+	margin-top: 4vh;
 }
 
 .bouton_index
