@@ -417,7 +417,7 @@
 	display: block;
 	margin-bottom: 10px;
 	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 100%;
+	font-size: 120%;
 	color: #262626;
 	text-align: justify;
 }
@@ -473,7 +473,7 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
-	font-family: inside_font_black_italic, Verdana, sans-serif;
+	font-family: roboto_black_italic, Verdana, sans-serif;
 	font-size: 1500%;
 	height: 210px;
 	line-height: 160px;
@@ -509,7 +509,7 @@
 	vertical-align: top;
 	line-height: 230px;
 	padding-right: 50px;
-	font-family: inside_font_light, Verdana, sans-serif;
+	font-family: roboto_light, Verdana, sans-serif;
 	font-size: 700%;
 	color: white;
 }
@@ -537,7 +537,7 @@
 
 .numero_mois_calendrier_generator
 {
-	font-family: inside_font_regular, Verdana, sans-serif;
+	font-family: roboto_regular, Verdana, sans-serif;
 	font-size: 500%;
 	color: #262626;
 	line-height: 230px;
@@ -599,7 +599,7 @@
 {
 	height: 130px;
 	text-align: right;
-	font-family: inside_font_regular, Verdana, sans-serif;
+	font-family: roboto_regular, Verdana, sans-serif;
 	font-size: 350%;
 }
 
@@ -654,7 +654,7 @@
 	line-height: 50px;
 	padding: 10px 35px 10px 10px;
 	text-align: right;
-	font-family: inside_font_light, Verdana, sans-serif;
+	font-family: roboto_light, Verdana, sans-serif;
 	font-size: 300%;
 	border-radius: 5px;
 }
@@ -711,7 +711,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	width: 100%;
-	font-family: inside_font_regular, Verdana, sans-serif;
+	font-family: roboto_regular, Verdana, sans-serif;
 	font-size: 600%;
 	color: white;
 	word-wrap: break-word;
@@ -730,7 +730,7 @@
 {
 	display: inline-block;
 	vertical-align: top;
-	font-family: inside_font_black_italic, Verdana, sans-serif;
+	font-family: roboto_black_italic, Verdana, sans-serif;
 	font-size: 1500%;
 	line-height: 210px;
 	color: white;
@@ -763,7 +763,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	font-family: inside_font_light, Verdana, sans-serif;
+	font-family: roboto_light, Verdana, sans-serif;
 	font-size: 300%;
 	line-height: 40px;
 	color: #262626;
@@ -930,7 +930,7 @@
 	padding-left: 15px;
 	padding-right: 15px;
 	vertical-align: middle;
-	font-family: inside_font_light, Verdana, sans-serif;
+	font-family: roboto_light, Verdana, sans-serif;
 	color: white;
 	text-align: center;
 }
