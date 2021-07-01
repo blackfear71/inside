@@ -741,6 +741,9 @@
     // Sauvegarde du fichier
     file_put_contents($dossier . '/' . $name, $decodedPicture);
 
+    // Compression de l'image
+    imageCompression($dossier . '/' . $name, $dossier . '/' . $name, 100);
+
     // Création miniature avec une hauteur/largeur max de 500px
     imageThumb($dossier . '/' . $name, $dossierMiniatures . '/' . $name, 500, false, false);
 
