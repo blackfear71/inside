@@ -93,7 +93,7 @@
             if (function_exists('imagesavealpha'))
               imagesavealpha($newImage, true);
           }
-          elseif ($type=='gif' && imagecolortransparent($source) >= 0)
+          elseif ($type == 'gif' && imagecolortransparent($source) >= 0)
           {
             // Gestion de la transparence pour les GIF
             $transparentIndex = imagecolortransparent($source);
@@ -226,7 +226,7 @@
             if (function_exists('imagesavealpha'))
               imagesavealpha($newImage, true);
           }
-          elseif ($type=='gif' && imagecolortransparent($source) >= 0)
+          elseif ($type == 'gif' && imagecolortransparent($source) >= 0)
           {
             // Gestion de la transparence pour les gif
             $transparentIndex = imagecolortransparent($source);
