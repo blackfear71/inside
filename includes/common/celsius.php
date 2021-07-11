@@ -4,6 +4,14 @@
     // Sélection du contenu Celsius à afficher
     switch ($celsius)
     {
+      case 'calendars':
+        $contenuCelsius = 'Ils sont tous beaux mes calendriers ! Je les aime comme ils sont parce qu\'ils sont à nous !';
+        break;
+
+      case 'calendars_generator':
+        $contenuCelsius = 'Et si la magie opérait aussi par ici ? Allez, affiche nous tes bô calendriers sur le mur ! Et n\'oublie pas de demander aux personnes de te donner un avatar pour les étiquettes...';
+        break;
+
       case 'collector':
         $contenuCelsius = 'Magie ! Je sais que tu m\'adores ! Je sais que tu m\'attendais avec impatience, hé bien tu peux te sentir rassuré. Oui je suis bien là à tes côtés, que tu sois le chasseur
         ou la proie, on se retrouve toujours tous ici...';

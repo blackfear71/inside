@@ -116,7 +116,7 @@ $(function()
       return false;
   });
 
-  // Valider confirmation
+  // Annuler confirmation
   $(document).on('click', '#boutonAnnuler', function()
   {
     var actionForm = $('#actionForm').val();
@@ -124,7 +124,7 @@ $(function()
     executeAction(actionForm, 'cancel');
   });
 
-  // Annuler confirmation
+  // Valider confirmation
   $(document).on('click', '#boutonConfirmer', function()
   {
     var actionForm = $('#actionForm').val();
@@ -653,7 +653,7 @@ function blockValidationSubmission(form, zoneForm, zoneContenuForm, rechercheLiv
   form.find('input, textarea, select').each(function()
   {
     // Contrôle champ requis
-    if ($(this).prop('required') == true && $(this).val() == '')
+    if ($(this).prop('required') == true && ($(this).val() == '' || $(this).val() == null))
     {
       hideForm = false;
       return false;
@@ -690,6 +690,57 @@ function blockValidationSubmission(form, zoneForm, zoneContenuForm, rechercheLiv
     loading += '</div>';
 
     form.find('.' + zoneForm).append(loading);
+
+    // Animation du symbole de chargement
+    loadingPage('zone_loading_image_form', 'loading_image_form');
+    setInterval(function()
+    {
+      loadingPage('zone_loading_image_form', 'loading_image_form');
+    }, 100);
+  }
+}
+
+// Bloque la page en cas de soumission de formulaire
+function blockValidationSubmissionPage(form, zone)
+{
+  // On vérifie chaque saisie obligatoire
+  var hideForm = true;
+
+  form.find('input, textarea, select').each(function()
+  {
+    // Contrôle champ requis
+    if ($(this).prop('required') == true && ($(this).val() == '' || $(this).val() == null))
+    {
+      hideForm = false;
+      return false;
+    }
+
+    // Contrôle format numérique
+    if ($(this).attr('type') == 'number')
+    {
+      if (!$.isNumeric($(this).val())
+      || ($(this).val().attr('min') != '' && $(this).val() < $(this).val().attr('min'))
+      || ($(this).val().attr('max') != '' && $(this).val() > $(this).val().attr('max')))
+      {
+        hideForm = false;
+        return false;
+      }
+    }
+  });
+
+  if (hideForm == true)
+  {
+    // Masquage du formulaire
+    $('.' + zone).css('display', 'none');
+
+    // Génération du symbole de chargement
+    var loading = '';
+
+    loading += '<div class="zone_loading_image_form">';
+      loading += '<img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image_form" class="loading_image_form" />';
+    loading += '</div>';
+
+    $('article').append(loading);
 
     // Animation du symbole de chargement
     loadingPage('zone_loading_image_form', 'loading_image_form');

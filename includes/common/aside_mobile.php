@@ -27,7 +27,10 @@
                                    'titre' => 'EXPENSE CENTER'),
                              array('lien'  => '/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
                                    'image' => 'collector',
-                                   'titre' => 'COLLECTOR ROOM')
+                                   'titre' => 'COLLECTOR ROOM'),
+                             array('lien'  => '/inside/portail/calendars/calendars.php?year=' . date('Y') . 'action=goConsulter',
+                                   'image' => 'calendars',
+                                   'titre' => 'CALENDARS')
                             );
 
   // Menu latéral droit

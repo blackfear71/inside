@@ -248,7 +248,7 @@
 	border: 0;
 	box-shadow: 0 0 0.5vh #7c7c7c;
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
+  font-size: 2.5vh;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -263,7 +263,7 @@
   background-color: white;
   box-shadow: 0 0 0.5vh #7c7c7c;
   font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 100%;
+  font-size: 2.5vh;
   color: #262626;
   vertical-align: middle;
 }
@@ -278,7 +278,7 @@
 	box-shadow: 0 0 0.5vh #7c7c7c;
   border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
+  font-size: 2.5vh;
 	color: #262626;
   resize: none;
 }
@@ -294,7 +294,7 @@
   background-color: white;
 	box-shadow: 0 0 0.5vh #7c7c7c;
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
+  font-size: 2.5vh;
 	color: #262626;
 	vertical-align: middle;
 }
@@ -309,7 +309,7 @@
   background-color: white;
 	box-shadow: 0 0 0.5vh #7c7c7c;
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
+  font-size: 2.5vh;
 	color: #262626;
 	vertical-align: middle;
 	border-radius: 0.5vh;
@@ -966,7 +966,7 @@
   line-height: 5vh;
 	border: 0;
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 2.5vh;
+  font-size: 2.5vh;
 	color: #262626;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
@@ -1015,7 +1015,7 @@
 	width: calc(100% - 6vh);
 	display: inline-block;
 	word-break: break-word;
-	font-size: 2vh;
+  font-size: 2vh;
 	font-weight: bold;
 	vertical-align: middle;
 }

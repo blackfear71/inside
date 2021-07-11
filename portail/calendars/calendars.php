@@ -135,12 +135,9 @@
       break;
 
     case 'goConsulterAnnexes':
-      include_once('vue/vue_annexes.php');
-      break;
-
     case 'goConsulter':
     default:
-      include_once('vue/vue_calendars.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_calendars.php');
       break;
   }
 ?>

@@ -7,7 +7,7 @@
       $styleHead       = 'styleCA.css';
       $scriptHead      = 'scriptCA.js';
       $angularHead     = false;
-      $chatHead        = true;
+      $chatHead        = false;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -18,57 +18,111 @@
     ?>
   </head>
 
-	<body>
-		<!-- Entête -->
-		<header>
-      <?php
-        $title = 'Calendars';
-
-        include('../../includes/common/header.php');
-			  include('../../includes/common/onglets.php');
-      ?>
-		</header>
+  <body>
+    <!-- Entête -->
+    <header>
+      <?php include('../../includes/common/header_mobile.php'); ?>
+    </header>
 
     <!-- Contenu -->
-		<section>
+    <section>
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
 
-			<article>
+      <!-- Menus -->
+      <aside>
+        <?php include('../../includes/common/aside_mobile.php'); ?>
+      </aside>
+
+      <!-- Chargement page -->
+      <div class="zone_loading_image">
+        <img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />
+      </div>
+
+      <!-- Celsius -->
+      <?php
+        $celsius = 'calendars_generator';
+
+        include('../../includes/common/celsius.php');
+      ?>
+
+      <!-- Contenu -->
+      <article>
         <?php
-          /*******************/
-          /* Chargement page */
-          /*******************/
-          echo '<div class="zone_loading_page">';
-            echo '<div id="loading_page" class="loading_page"></div>';
-          echo '</div>';
+          /*********/
+          /* Titre */
+          /*********/
+          echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
 
-          /**************************************/
-          /* Création de calendriers et annexes */
-          /**************************************/
-          if ($preferences->getManage_calendars() == 'Y')
-          {
+          echo '<div class="zone_formulaires_calendars">';
             /********************/
-            /* Données communes */
+            /* Boutons d'action */
             /********************/
-            $anneeDebut = date('Y') - 2;
-            $anneeFin   = date('Y') + 2;
+            // Liste des calendriers
+            echo '<a href="calendars.php?year=' . date('Y') . '&action=goConsulter" title="Liste des calendriers" class="lien_green">';
+              echo '<img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="image_lien" />';
+              echo '<div class="titre_lien">LES CALENDRIERS</div>';
+            echo '</a>';
 
-            /*****************************/
-            /* Générateur de calendriers */
-            /*****************************/
-            echo '<div class="zone_calendars_top">';
+            /**************************************/
+            /* Création de calendriers et annexes */
+            /**************************************/
+            if ($preferences->getManage_calendars() == 'Y')
+            {
+              /********************/
+              /* Données communes */
+              /********************/
+              $anneeDebut = date('Y') - 2;
+              $anneeFin   = date('Y') + 2;
+
+              /*****************************/
+              /* Générateur de calendriers */
+              /*****************************/
               // Titre
-              echo '<div class="titre_section"><img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" /><div class="texte_titre_section">Générer un nouveau calendrier</div></div>';
+              echo '<div id="titre_generateur_calendrier" class="titre_section">';
+                echo '<img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />';
+                echo '<div class="texte_titre_section">Générer un calendrier</div>';
+                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+              echo '</div>';
 
-              // Saisie
-              echo '<div class="zone_calendrier_generator_left">';
+              // Générateur de calendriers
+              echo '<div id="afficher_generateur_calendrier" style="display: none;">';
+                // Explications
+                if (isset($vacances) AND empty($vacances))
+                {
+                  echo '<div class="avertissement_calendrier_generator">';
+                    echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
+                    Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
+                  echo '</div>';
+                }
+
+                echo '<div class="titre_explications_calendrier_generator">A propos du générateur de calendriers</div>';
+
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Ceci est le générateur de calendriers automatisé. La saisie des données permet de générer un calendrier sur-mesure puis de le
+                  sauvegarder sur le site. Les données disponibles sont :';
+
+                  echo '<ul>';
+                    echo '<li>L\'image de fond (non obligatoire)</li>';
+                    echo '<li>Le mois (obligatoire)</li>';
+                    echo '<li>L\'année (obligatoire)</li>';
+                  echo '</ul>';
+
+                  echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
+                  En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
+
+                  echo '<div class="avertissement_calendrier_generator_2">';
+                    echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder le calendrier" après l\'avoir généré pour le rendre disponible sur le site.';
+                  echo '</div>';
+                echo '</div>';
+
+                // Saisie
                 echo '<div class="zone_saisie_calendrier">';
                   // Saisie des informations
-                  echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
+                  echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data" id="form_saisie_generator">';
                     // Image
                     echo '<div class="zone_saisie_image">';
                       echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -120,21 +174,19 @@
                     echo '</div>';
                   echo '</form>';
                 echo '</div>';
-              echo '</div>';
 
-              // Affichage du calendrier généré sous forme d'image
-              if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
-              {
-                echo '<div class="zone_calendrier_generator_middle">';
-                  echo '<div class="zone_saisie_calendrier">';
+                // Affichage du calendrier généré sous forme d'image
+                if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
+                {
+                  echo '<div class="zone_affichage_calendrier">';
                     // Génération du calendrier au format HTML
-                    include('vue_calendar_generated.php');
+                    include('vue/mobile/vue_calendar_generated.php');
 
                     // Affichage du calendrier au format JPEG (une fois généré)
                     echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_generator" />';
 
                     // Formulaire de sauvegarde de l'image générée
-                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
+                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" id="form_saisie_generated" class="form_sauvegarde_calendrier">';
                       // Image générée
                       echo '<input type="hidden" name="calendar_generator" id="calendar_generator" value="" />';
 
@@ -153,53 +205,44 @@
                       echo '</div>';
                     echo '</form>';
                   echo '</div>';
-                echo '</div>';
-              }
-
-              // Explications
-              echo '<div class="zone_calendrier_generator_right">';
-                if (isset($vacances) AND empty($vacances))
-                {
-                  echo '<div class="avertissement_calendrier_generator">';
-                    echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
-                    Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
-                  echo '</div>';
                 }
+              echo '</div>';
 
-                echo '<div class="titre_explications_calendrier_generator">A propos du générateur de calendriers</div>';
+              /************************/
+              /* Générateur d'annexes */
+              /************************/
+              // Titre
+              echo '<div id="titre_generateur_annexe" class="titre_section">';
+                echo '<img src="../../includes/icons/calendars/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" />';
+                echo '<div class="texte_titre_section">Générer une annexe</div>';
+                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+              echo '</div>';
+
+              // Générateur d'annexes
+              echo '<div id="afficher_generateur_annexe" style="display: none;">';
+                // Explications
+                echo '<div class="titre_explications_calendrier_generator">A propos du générateur d\'annexes</div>';
 
                 echo '<div class="explications_calendrier_generator">';
-                  echo 'Ceci est le générateur de calendriers automatisé. La saisie des données permet de générer un calendrier sur-mesure puis de le
-                  sauvegarder sur le site. Les données disponibles sont :';
+                  echo 'Ceci est le générateur d\'annexes automatisé. La saisie des données permet de générer une annexe contenant des étiquettes à utiliser avec les calendriers puis de la sauvegarder sur le site.
+                  Les données disponibles sont :';
 
                   echo '<ul>';
-                    echo '<li>L\'image de fond (non obligatoire)</li>';
-                    echo '<li>Le mois (obligatoire)</li>';
-                    echo '<li>L\'année (obligatoire)</li>';
+                    echo '<li>L\'image (obligatoire)</li>';
+                    echo '<li>Le nom (obligatoire)</li>';
                   echo '</ul>';
 
-                  echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
-                  En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
+                  echo 'L\'annexe générée est formatée en fonction des données saisies. En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
 
                   echo '<div class="avertissement_calendrier_generator_2">';
-                    echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder le calendrier" après l\'avoir généré pour le rendre disponible sur le site.';
+                    echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder l\'annexe" après l\'avoir générée pour la rendre disponible sur le site.';
                   echo '</div>';
                 echo '</div>';
-              echo '</div>';
-            echo '</div>';
 
-            /************************/
-            /* Générateur d'annexes */
-            /************************/
-            echo '<div id="scrollGenerator" class="zone_calendars_top">';
-              // Titre
-              echo '<div class="titre_section"><img src="../../includes/icons/calendars/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" /><div class="texte_titre_section">Générer une nouvelle annexe</div></div>';
-
-              // Saisie
-              echo '<div class="zone_annexe_generator_left">';
+                // Saisie
                 echo '<div class="zone_saisie_calendrier">';
                   // Saisie des informations
-                  echo '<form method="post" action="calendars_generator.php?action=doGenererAnnexe" enctype="multipart/form-data">';
+                  echo '<form method="post" action="calendars_generator.php?action=doGenererAnnexe" enctype="multipart/form-data" id="form_saisie_annexe_generator">';
                     // Image
                     echo '<div class="zone_saisie_image">';
                       echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -224,7 +267,7 @@
                     echo '</div>';
 
                     // Titre annexe
-                    echo '<input type="text" name="name_annexe" value="' . $annexeParameters->getName() . '" placeholder="Nom" maxlength="255" class="titre_annexe" required />';
+                    echo '<input type="text" name="name_annexe" value="' . $annexeParameters->getName() . '" placeholder="Nom" maxlength="255" class="saisie_titre_annexe" required />';
 
                     // Bouton validation
                     echo '<div class="zone_bouton_saisie">';
@@ -232,21 +275,19 @@
                     echo '</div>';
                   echo '</form>';
                 echo '</div>';
-              echo '</div>';
 
-              // Affichage de l'annexe générée sous forme d'image
-              if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
-              {
-                echo '<div class="zone_annexe_generator_middle">';
-                  echo '<div class="zone_saisie_calendrier">';
+                // Affichage de l'annexe générée sous forme d'image
+                if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
+                {
+                  echo '<div class="zone_affichage_calendrier">';
                     // Génération de l'annexe au format HTML
-                    include('vue_annexe_generated.php');
+                    include('vue/mobile/vue_annexe_generated.php');
 
                     // Affichage de l'annexe au format JPEG (une fois généré)
                     echo '<img src="" title="Annexe générée" id="generated_annexe" class="image_rendu_generator" />';
 
                     // Formulaire de sauvegarde de l'image générée
-                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarderAnnexe" enctype="multipart/form-data" class="form_sauvegarde_annexe">';
+                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarderAnnexe" enctype="multipart/form-data" id="form_saisie_annexe_generated" class="form_sauvegarde_annexe">';
                       // Image générée
                       echo '<input type="hidden" name="annexe_generator" id="annexe_generator" value="" />';
 
@@ -262,42 +303,38 @@
                       echo '</div>';
                     echo '</form>';
                   echo '</div>';
-                echo '</div>';
-              }
+                }
+              echo '</div>';
 
-              // Explications
-              echo '<div class="zone_annexe_generator_right">';
-                echo '<div class="titre_explications_calendrier_generator">A propos du générateur d\'annexes</div>';
+              /***********************/
+              /* Ajout de calendrier */
+              /***********************/
+              // Titre
+              echo '<div id="titre_saisie_calendrier" class="titre_section">';
+                echo '<img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />';
+                echo '<div class="texte_titre_section">Saisir un calendrier</div>';
+                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+              echo '</div>';
+
+              // Saisie de calendrier
+              echo '<div id="afficher_saisie_calendrier" style="display: none;">';
+                // Explications
+                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie de calendriers</div>';
 
                 echo '<div class="explications_calendrier_generator">';
-                  echo 'Ceci est le générateur d\'annexes automatisé. La saisie des données permet de générer une annexe contenant des étiquettes à utiliser avec les calendriers puis de la sauvegarder sur le site.
-                  Les données disponibles sont :';
+                  echo 'Ceci est l\'ancien outil de mise en ligne de calendriers. Celui-ci fonctionne toujours normalement et permet de mettre en ligne
+                  un calendrier personnalisé. Toutes les saisies sont obligatoires. Les données à saisir sont :';
 
                   echo '<ul>';
-                    echo '<li>L\'image (obligatoire)</li>';
-                    echo '<li>Le nom (obligatoire)</li>';
+                    echo '<li>Le calendrier</li>';
+                    echo '<li>Le mois</li>';
+                    echo '<li>L\'année</li>';
                   echo '</ul>';
-
-                  echo 'L\'annexe générée est formatée en fonction des données saisies. En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
-
-                  echo '<div class="avertissement_calendrier_generator_2">';
-                    echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder l\'annexe" après l\'avoir générée pour la rendre disponible sur le site.';
-                  echo '</div>';
                 echo '</div>';
-              echo '</div>';
-            echo '</div>';
 
-            /***********************/
-            /* Ajout de calendrier */
-            /***********************/
-            echo '<div class="zone_calendars_left">';
-              // Titre
-              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir un calendrier</div></div>';
-
-              // Saisie
-              echo '<div class="zone_saisie_calendars_left">';
+                // Saisie
                 echo '<div class="zone_saisie_calendrier">';
-                  echo '<form method="post" action="calendars_generator.php?action=doAjouter" enctype="multipart/form-data">';
+                  echo '<form method="post" action="calendars_generator.php?action=doAjouter" enctype="multipart/form-data" id="form_saisie_calendrier">';
                     // Image
                     echo '<div class="zone_saisie_image">';
                       echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -339,34 +376,37 @@
                 echo '</div>';
               echo '</div>';
 
-              // Explications
-              echo '<div class="zone_saisie_calendars_right">';
-                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie de calendriers</div>';
+              /******************/
+              /* Ajout d'annexe */
+              /******************/
+              // Titre
+              echo '<div id="titre_saisie_annexe" class="titre_section">';
+                echo '<img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />';
+                echo '<div class="texte_titre_section">Saisir une annexe</div>';
+                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+              echo '</div>';
+
+              // Saisie d'annexe
+              echo '<div id="afficher_saisie_annexe" style="display: none;">';
+                // Explications
+                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie d\'annexes</div>';
 
                 echo '<div class="explications_calendrier_generator">';
-                  echo 'Ceci est l\'ancien outil de mise en ligne de calendriers. Celui-ci fonctionne toujours normalement et permet de mettre en ligne
-                  un calendrier personnalisé. Toutes les saisies sont obligatoires. Les données à saisir sont :';
+                  echo 'Ceci est l\'outil de mise en ligne d\'annexes aux calendriers. Toutes les saisies sont obligatoires. Les données à saisir sont :';
 
                   echo '<ul>';
-                    echo '<li>Le calendrier</li>';
-                    echo '<li>Le mois</li>';
-                    echo '<li>L\'année</li>';
+                    echo '<li>L\'annexe</li>';
+                    echo '<li>Le nom de l\'annexe</li>';
                   echo '</ul>';
                 echo '</div>';
-              echo '</div>';
-            echo '</div>';
 
-            /******************/
-            /* Ajout d'annexe */
-            /******************/
-            echo '<div class="zone_calendars_right">';
-              // Titre
-              echo '<div class="titre_section"><img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Saisir une annexe</div></div>';
+                echo '<div class="explications_calendrier_generator">';
+                  echo 'Un générateur d\'annexes automatisé sera développé prochainement.';
+                echo '</div>';
 
-              // Saisie
-              echo '<div class="zone_saisie_calendars_left">';
+                // Saisie
                 echo '<div class="zone_saisie_calendrier">';
-                  echo '<form method="post" action="calendars_generator.php?action=doAjouterAnnexe" enctype="multipart/form-data">';
+                  echo '<form method="post" action="calendars_generator.php?action=doAjouterAnnexe" enctype="multipart/form-data" id="form_saisie_annexe">';
                     // Image
                     echo '<div class="zone_saisie_image">';
                       echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -382,7 +422,7 @@
                     echo '</div>';
 
                     // Titre annexe
-                    echo '<input type="text" name="title" value="" placeholder="Nom" maxlength="255" class="titre_annexe" required />';
+                    echo '<input type="text" name="title" value="" placeholder="Nom" maxlength="255" class="saisie_titre_annexe" required />';
 
                     // Bouton validation
                     echo '<div class="zone_bouton_saisie">';
@@ -391,36 +431,15 @@
                   echo '</form>';
                 echo '</div>';
               echo '</div>';
-
-              // Explications
-              echo '<div class="zone_saisie_calendars_right">';
-                echo '<div class="titre_explications_calendrier_generator">A propos de la saisie d\'annexes</div>';
-
-                echo '<div class="explications_calendrier_generator">';
-                  echo 'Ceci est l\'outil de mise en ligne d\'annexes aux calendriers. Toutes les saisies sont obligatoires. Les données à saisir sont :';
-
-                  echo '<ul>';
-                    echo '<li>L\'annexe</li>';
-                    echo '<li>Le nom de l\'annexe</li>';
-                  echo '</ul>';
-                echo '</div>';
-
-                echo '<div class="explications_calendrier_generator">';
-                  echo 'Un générateur d\'annexes automatisé sera développé prochainement.';
-                echo '</div>';
-              echo '</div>';
-            echo '</div>';
-          }
+            }
+          echo '</div>';
         ?>
       </article>
+    </section>
 
-      <!-- Chat -->
-      <?php include('../../includes/common/chat/chat.php'); ?>
-		</section>
-
-		<!-- Pied de page -->
-		<footer>
-			<?php include('../../includes/common/footer.php'); ?>
-		</footer>
+    <!-- Pied de page -->
+    <footer>
+      <?php include('../../includes/common/footer_mobile.php'); ?>
+    </footer>
   </body>
 </html>

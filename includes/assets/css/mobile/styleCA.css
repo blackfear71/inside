@@ -1,0 +1,808 @@
+/*******************/
+/*** Calendriers ***/
+/*******************/
+
+/*** Calendriers et annexes ***/
+.zone_calendars
+{
+	display: block;
+	margin-bottom: -2vh;
+}
+
+.zone_calendriers
+{
+	width: 100%;
+}
+
+.zone_calendrier
+{
+	display: inline-block;
+	width: calc(50% - 0.5vh);
+	vertical-align: top;
+	margin-bottom: 2vh;
+	text-decoration: none;
+}
+
+.zone_calendrier_margin
+{
+	margin-right: 1vh;
+}
+
+.calendrier
+{
+	width: 100%;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: white;
+}
+
+.titre_calendrier
+{
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 9vh);
+	word-wrap: break-word;
+	text-align: justify;
+	padding: 0.5vh 0 0.5vh 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+}
+
+.zone_boutons
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 8vh;
+	height: 4vh;
+	margin-left: 1vh;
+	text-align: right;
+}
+
+.download_calendar
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 4vh;
+	height: 4vh;
+}
+
+.download_icon
+{
+	display: inline-block;
+	width: 3vh;
+	height: 3vh;
+	padding: 0.5vh;
+}
+
+.delete_calendar
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 4vh;
+	height: 4vh;
+}
+
+.delete_calendar_icon
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 4vh;
+	height: 4vh;
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
+	background-size: 3vh 3vh;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	border: 0;
+}
+
+/*** Saisies ***/
+.zone_saisie_calendrier
+{
+	display: block;
+	width: 100%;
+}
+
+.zone_saisie_image
+{
+	display: block;
+	width: 100%;
+	height: 25vh;
+	line-height: 24vh;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+}
+
+.zone_parcourir_image, .zone_parcourir_image_generator, .zone_parcourir_annexe_generator
+{
+	width: 100%;
+	height: 100%;
+	border-style: dashed;
+	border-width: 0.5vh;
+	border-radius: 0.5vh;
+	border-color: #a3a3a3;
+	text-align: center;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.logo_saisie_image
+{
+	width: 6vh;
+	vertical-align: middle;
+}
+
+.bouton_parcourir_image, .bouton_parcourir_image_generator, .bouton_parcourir_annexe_generator
+{
+	display: block;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	margin-top: -25vh;
+	position: relative;
+	z-index: 1;
+}
+
+.mask_image, .mask_image_generator, .mask_annexe_generator
+{
+	width: calc(100% - 1vh);
+	height: calc(100% - 1vh);
+	line-height: 24vh;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -24.5vh;
+	text-align: center;
+}
+
+.image
+{
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+	margin-top: -0.5vh;
+}
+
+.listbox
+{
+	width: 100%;
+	padding: 1vh;
+	margin-bottom: 1.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	border: 0;
+	border-radius: 0.5vh;
+	background-color: #e3e3e3;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.listbox option
+{
+	background-color: white;
+}
+
+.saisie_titre_annexe
+{
+	width: calc(100% - 3vh);
+	padding: 1vh 1.5vh 1vh 1.5vh;
+	border: 0;
+	background-color: white;
+	border-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	margin-bottom: 1.5vh;
+}
+
+.zone_bouton_saisie
+{
+	display: block;
+	width: 100%;
+	vertical-align: middle;
+	margin-bottom: 2vh;
+}
+
+.saisie_bouton
+{
+	width: 100%;
+	background-color: #e3e3e3;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	border-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	text-align: center;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.saisie_bouton:active
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+/*** Générateurs ***/
+.avertissement_calendrier_generator
+{
+	display: block;
+	margin-bottom: 2vh;
+	padding: 1vh;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: #ff1937;
+	font-family: inside_font_medium, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: white;
+	text-align: justify;
+}
+
+.titre_explications_calendrier_generator
+{
+	display: block;
+	margin-bottom: 1vh;
+	font-family: inside_font_medium, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+}
+
+.explications_calendrier_generator
+{
+	display: block;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+}
+
+.avertissement_calendrier_generator_2
+{
+	display: block;
+	margin-top: 2vh;
+	padding: 1vh;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: #d3d3d3;
+	font-family: inside_font_medium, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+}
+
+.zone_affichage_calendrier
+{
+	display: block;
+	width: 100%;
+}
+
+.form_sauvegarde_calendrier
+{
+	display: none;
+	width: 100%;
+}
+
+.image_rendu_generator
+{
+	width: 100%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	margin-bottom: 1vh;
+	border-radius: 0.5vh;
+}
+
+/*** Calendrier généré ***/
+.zone_calendrier_generator_hidden
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.zone_calendrier_generator
+{
+	display: block;
+	width: 3508px;
+	height: 4961px;
+}
+
+.zone_entete_calendrier_generator
+{
+	display: block;
+	width: 100%;
+	height: 250px;
+	background-color: #ff1937;
+}
+
+.mois_calendrier_generator
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	font-family: roboto_black_italic, Verdana, sans-serif;
+	font-size: 1500%;
+	height: 210px;
+	line-height: 160px;
+	color: white;
+	padding-left: 50px;
+	padding-right: 50px;
+	opacity: 0.5;
+	border-bottom: solid 10px #c81932;
+}
+
+.rift_mois_calendrier_generator
+{
+	width: 100%;
+	height: 5px;
+	background-color: rgb(255, 255, 255, 0.1);
+}
+
+.zone_semaines_calendrier_generator
+{
+	display: inline-block;
+	float: right;
+	position: relative;
+	z-index: 1;
+	margin-top: -225px;
+	height: 250px;
+	padding-left: 50px;
+	background-color: #c81932;
+}
+
+.semaines_calendrier_generator
+{
+	display: inline-block;
+	vertical-align: top;
+	line-height: 230px;
+	padding-right: 50px;
+	font-family: roboto_light, Verdana, sans-serif;
+	font-size: 700%;
+	color: white;
+}
+
+.zone_numero_mois_calendrier_generator
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 250px;
+	height: 250px;
+	text-align: center;
+}
+
+.image_mois_calendrier_generator
+{
+	background-color: white;
+	width: 160px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 10px;
+	margin-top: 25px;
+}
+
+.numero_mois_calendrier_generator
+{
+	font-family: roboto_regular, Verdana, sans-serif;
+	font-size: 500%;
+	color: #262626;
+	line-height: 230px;
+	margin-top: -205px;
+	position: relative;
+	z-index: 1;
+}
+
+.zone_corps_calendrier_generator
+{
+	display: block;
+	width: calc(100% - 100px);
+	height: calc(100% - 600px);
+	background-color: white;
+	padding: 50px;
+}
+
+.fond_corps_calendrier_generator
+{
+	position: absolute;
+	margin-top: -50px;
+	margin-left: -50px;
+	opacity: 0.5;
+}
+
+.table_calendrier_generator
+{
+	position: relative;
+	z-index: 1;
+	border-collapse: collapse;
+	border-style: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.table_calendrier_generator td
+{
+	overflow: hidden;
+	border: 2.5px solid #262626;
+}
+
+.table_calendrier_generator tr:first-child td
+{
+	border-top: 0;
+}
+
+.table_calendrier_generator tr:last-child .jour_calendrier_generator
+{
+	border-bottom: 0;
+}
+
+.table_calendrier_generator .ligne_jours_calendrier_generator td:not(:last-child),
+.table_calendrier_generator .jour_calendrier_generator:not(:last-child)
+{
+	width: 490px;
+}
+
+.ligne_jours_calendrier_generator
+{
+	height: 130px;
+	text-align: right;
+	font-family: roboto_regular, Verdana, sans-serif;
+	font-size: 350%;
+}
+
+.ligne_jours_calendrier_generator td
+{
+	width: calc(100% - 100px);
+	padding: 0px 50px 20px 50px;
+	vertical-align: text-bottom;
+}
+
+.ligne_jours_calendrier_generator td:first-child
+{
+	border-left: 0;
+}
+
+.ligne_jours_calendrier_generator td:last-child
+{
+	border-right: 0;
+	text-align: center;
+}
+
+.ligne_calendrier_generator
+{
+	vertical-align: top;
+}
+
+.ligne_calendrier_generator .jour_calendrier_generator:not(:last-child)
+{
+	line-height: 100%;
+}
+
+.ligne_calendrier_generator .jour_calendrier_generator:first-child
+{
+	border-left: 0;
+}
+
+.ligne_calendrier_generator .jour_calendrier_generator:last-child
+{
+	border-right: 0;
+}
+
+.image_gateau_calendrier_generator
+{
+	height: 150px;
+	vertical-align: text-bottom;
+}
+
+.numero_jour_calendrier_generator
+{
+	margin: 10px;
+	width: calc(100% - 65px);
+	line-height: 50px;
+	padding: 10px 35px 10px 10px;
+	text-align: right;
+	font-family: roboto_light, Verdana, sans-serif;
+	font-size: 300%;
+	border-radius: 5px;
+}
+
+.numero_jour_calendrier_generator_red_light
+{
+	background-color: rgba(255, 25, 55, 0.7);
+	color: white;
+}
+
+.numero_jour_calendrier_generator_red
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.numero_jour_calendrier_generator_grey_light
+{
+	background-color: rgba(211, 211, 211, 0.7);
+	color: #262626;
+}
+
+.numero_jour_calendrier_generator_grey
+{
+	background-color: #d3d3d3;
+	color: #262626;
+}
+
+.zone_jour_ferie_calendrier_generator
+{
+	position: absolute;
+	margin-right: 10px;
+	margin-left: 10px;
+	width: 568px;
+	text-align: center;
+	line-height: 100%;
+	background-color: #262626;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.fond_jour_ferie
+{
+	position: absolute;
+	height: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.jour_ferie_calendrier_generator
+{
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	font-family: roboto_regular, Verdana, sans-serif;
+	font-size: 600%;
+	color: white;
+	word-wrap: break-word;
+	line-height: 120px;
+}
+
+.zone_pied_calendrier_generator
+{
+	display: block;
+	width: 100%;
+	height: 250px;
+	background-color: #262626;
+}
+
+.annee_calendrier_generator
+{
+	display: inline-block;
+	vertical-align: top;
+	font-family: roboto_black_italic, Verdana, sans-serif;
+	font-size: 1500%;
+	line-height: 210px;
+	color: white;
+	padding-left: 50px;
+	padding-right: 50px;
+	opacity: 0.5;
+}
+
+.zone_signature_calendrier_generator
+{
+	display: inline-block;
+	float: right;
+	height: 250px;
+	opacity: 0.3;
+}
+
+.signature_calendrier_generator
+{
+	display: inline-block;
+	vertical-align: top;
+	height: 250px;
+	line-height: 250px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: white;
+	border-left: solid 1px rgb(255, 255, 255, 0.2);
+}
+
+.texte_signature_calendrier_generator
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: roboto_light, Verdana, sans-serif;
+	font-size: 300%;
+	line-height: 40px;
+	color: #262626;
+	text-align: right;
+}
+
+.triangle_1
+{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: -80px;
+	height: 0;
+	width: 0;
+	border-bottom: 250px solid white;
+	border-left: 70px solid transparent;
+}
+
+.triangle_2
+{
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 30px;
+	height: 0;
+	width: 0;
+	border-top: 250px solid white;
+	border-right: 70px solid transparent;
+}
+
+/*** Annexe générée ***/
+.zone_annexe_generator_hidden
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.zone_annexe_generator
+{
+	display: block;
+	width: calc(2100px - 70px);
+	height: calc(2970px - 70px);
+	padding: 50px 20px 20px 50px;
+	background-color: white;
+}
+
+.zone_etiquettes_speciales
+{
+	float: left;
+}
+
+.zone_etiquette_scrum
+{
+	display: block;
+	margin-bottom: 30px;
+	width: 350px;
+	height: 635px;
+	line-height: 635px;
+	border-radius: 20px;
+	background-color: #d3d3d3;
+	text-align: center;
+}
+
+.etiquette_scrum
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.couronne_scrum
+{
+	display: block;
+	position: relative;
+	z-index: 1;
+	width: 250px;
+	margin-bottom: -50px;
+}
+
+.avatar_scrum
+{
+	display: block;
+	width: 320px;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.cake_scrum
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 250px;
+	margin-top: 30px;
+}
+
+.zone_etiquette_normale
+{
+	display: inline-block;
+	width: 475px;
+	height: 140px;
+	border-radius: 20px;
+	overflow: hidden;
+	margin-right: 30px;
+	margin-bottom: 30px;
+}
+
+.texte_etiquette
+{
+	display: inline-block;
+	width: calc(100% - 160px);
+	padding-left: 15px;
+	padding-right: 15px;
+	vertical-align: middle;
+	font-family: roboto_light, Verdana, sans-serif;
+	color: white;
+	text-align: center;
+}
+
+.texte_etiquette_full
+{
+	vertical-align: top;
+	line-height: 130px;
+	font-size: 400%;
+}
+
+.texte_etiquette_half
+{
+	vertical-align: middle;
+	margin-top: -5px;
+	line-height: 40px;
+	font-size: 250%;
+}
+
+.zone_etiquette_normale_green, .texte_etiquette_green
+{
+	background-color: #27ae60;
+}
+
+.zone_etiquette_normale_red, .texte_etiquette_red
+{
+	background-color: #e74c3c;
+}
+
+.zone_etiquette_normale_blue, .texte_etiquette_blue
+{
+	background-color: #3498db;
+}
+
+.zone_etiquette_normale_orange, .texte_etiquette_orange
+{
+	background-color: #e67e22;
+}
+
+.triangle_3
+{
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: -10px;
+	margin-right: -40px;
+	height: 0;
+	width: 0;
+	border-right: 40px solid transparent;
+}
+
+.triangle_3_green
+{
+	border-top: 140px solid #27ae60;
+}
+
+.triangle_3_red
+{
+	border-top: 140px solid #e74c3c;
+}
+
+.triangle_3_blue
+{
+	border-top: 140px solid #3498db;
+}
+
+.triangle_3_orange
+{
+	border-top: 140px solid #e67e22;
+}
+
+.avatar_etiquette
+{
+	height: 140px;
+	width: 140px;
+	vertical-align: middle;
+	background-color: #d3d3d3;
+}
