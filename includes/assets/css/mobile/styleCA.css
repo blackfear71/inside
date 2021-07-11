@@ -97,6 +97,12 @@
 }
 
 /*** Saisies ***/
+.zone_formulaires_calendars
+{
+	display: block;
+	margin-bottom: -2vh;
+}
+
 .zone_saisie_calendrier
 {
 	display: block;
@@ -110,7 +116,7 @@
 	height: 25vh;
 	line-height: 24vh;
 	margin-top: 2vh;
-	margin-bottom: 2vh;
+	margin-bottom: 1.5vh;
 }
 
 .zone_parcourir_image, .zone_parcourir_image_generator, .zone_parcourir_annexe_generator
