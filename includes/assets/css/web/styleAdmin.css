@@ -2684,9 +2684,9 @@
 {
 	width: 44px;
 	height: 44px;
-	line-height: 44px;
+	line-height: 22px;
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
+	font-size: 50%;
 }
 
 .bouton_parcourir_logo

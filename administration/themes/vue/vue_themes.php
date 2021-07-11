@@ -61,7 +61,7 @@
 
                 // Header
                 echo '<div class="zone_parcourir_header">';
-                  echo '<div class="titre_saisie_header">Header</div>';
+                  echo '<div class="titre_saisie_header">Header (500 x 80 px)</div>';
                   echo '<input type="file" accept=".png" name="header" class="bouton_parcourir_header loadHeaderUsers" required />';
                 echo '</div>';
 
@@ -71,7 +71,7 @@
 
                 // Background
                 echo '<div class="zone_parcourir_background">';
-                  echo '<div class="titre_saisie_background">Background</div>';
+                  echo '<div class="titre_saisie_background">Background (1920 x 1080 px)</div>';
                   echo '<input type="file" accept=".png" name="background" class="bouton_parcourir_background loadBackgroundUsers" required />';
                 echo '</div>';
 
@@ -81,7 +81,7 @@
 
                 // Footer
                 echo '<div class="zone_parcourir_footer">';
-                  echo '<div class="titre_saisie_footer">Footer</div>';
+                  echo '<div class="titre_saisie_footer">Footer (500 x 50 px)</div>';
                   echo '<input type="file" accept=".png" name="footer" class="bouton_parcourir_footer loadFooterUsers" required />';
                 echo '</div>';
 
@@ -92,7 +92,7 @@
                 echo '<div class="zone_theme_saisie_titre">';
                   // Logo
                   echo '<div class="zone_parcourir_logo">';
-                    echo '<div class="titre_saisie_logo">Logo</div>';
+                    echo '<div class="titre_saisie_logo">Logo (2000 x 2000 px)</div>';
                     echo '<input type="file" accept=".png" name="logo" class="bouton_parcourir_logo loadLogoUsers" />';
                   echo '</div>';
 
@@ -215,7 +215,7 @@
 
                 // Header
                 echo '<div class="zone_parcourir_header">';
-                  echo '<div class="titre_saisie_header">Header</div>';
+                  echo '<div class="titre_saisie_header">Header (500 x 80 px)</div>';
                   echo '<input type="file" accept=".png" name="header" class="bouton_parcourir_header loadHeaderMission" required />';
                 echo '</div>';
 
@@ -225,7 +225,7 @@
 
                 // Background
                 echo '<div class="zone_parcourir_background">';
-                  echo '<div class="titre_saisie_background">Background</div>';
+                  echo '<div class="titre_saisie_background">Background (1920 x 1080 px)</div>';
                   echo '<input type="file" accept=".png" name="background" class="bouton_parcourir_background loadBackgroundMission" required />';
                 echo '</div>';
 
@@ -235,7 +235,7 @@
 
                 // Footer
                 echo '<div class="zone_parcourir_footer">';
-                  echo '<div class="titre_saisie_footer">Footer</div>';
+                  echo '<div class="titre_saisie_footer">Footer (500 x 50 px)</div>';
                   echo '<input type="file" accept=".png" name="footer" class="bouton_parcourir_footer loadFooterMission" required />';
                 echo '</div>';
 
@@ -246,7 +246,7 @@
                 echo '<div class="zone_theme_saisie_titre">';
                   // Logo
                   echo '<div class="zone_parcourir_logo">';
-                    echo '<div class="titre_saisie_logo">Logo</div>';
+                    echo '<div class="titre_saisie_logo">Logo (2000 x 2000 px)</div>';
                     echo '<input type="file" accept=".png" name="logo" class="bouton_parcourir_logo loadLogoMission" />';
                   echo '</div>';
 
