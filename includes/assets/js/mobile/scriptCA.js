@@ -49,54 +49,48 @@ $(function()
   $('#bouton_saisie_generator').click(function()
   {
     var idForm = $('#form_saisie_generator');
-    var zone   = 'zone_formulaires_calendars';
 
-    blockValidationSubmissionPage(idForm, zone);
+    blockValidationSubmissionPage(idForm);
   });
 
   // Bloque la saisie en cas de soumission (Sauvegarde de calendrier)
   $('#bouton_saisie_generated').click(function()
   {
     var idForm = $('#form_saisie_generated');
-    var zone   = 'zone_formulaires_calendars';
 
-    blockValidationSubmissionPage(idForm, zone);
+    blockValidationSubmissionPage(idForm);
   });
 
   // Bloque la saisie en cas de soumission (Génération d'annexe)
   $('#bouton_saisie_annexe_generator').click(function()
   {
     var idForm = $('#form_saisie_annexe_generator');
-    var zone   = 'zone_formulaires_calendars';
 
-    blockValidationSubmissionPage(idForm, zone);
+    blockValidationSubmissionPage(idForm);
   });
 
   // Bloque la saisie en cas de soumission (Sauvegarde d'annexe)
   $('#bouton_saisie_annexe_generated').click(function()
   {
     var idForm = $('#form_saisie_annexe_generated');
-    var zone   = 'zone_formulaires_calendars';
 
-    blockValidationSubmissionPage(idForm, zone);
+    blockValidationSubmissionPage(idForm);
   });
 
   // Bloque la saisie en cas de soumission (Saisie de calendrier)
   $('#bouton_saisie_calendrier').click(function()
   {
     var idForm = $('#form_saisie_calendrier');
-    var zone   = 'zone_formulaires_calendars';
 
-    blockValidationSubmissionPage(idForm, zone);
+    blockValidationSubmissionPage(idForm);
   });
 
   // Bloque la saisie en cas de soumission (Saisie d'annexe)
   $('#bouton_saisie_annexe').click(function()
   {
     var idForm = $('#form_saisie_annexe');
-    var zone   = 'zone_formulaires_calendars';
 
-    blockValidationSubmissionPage(idForm, zone);
+    blockValidationSubmissionPage(idForm);
   });
 });
 

@@ -701,7 +701,7 @@ function blockValidationSubmission(form, zoneForm, zoneContenuForm, rechercheLiv
 }
 
 // Bloque la page en cas de soumission de formulaire
-function blockValidationSubmissionPage(form, zone)
+function blockValidationSubmissionPage(form)
 {
   // On vérifie chaque saisie obligatoire
   var hideForm = true;
@@ -731,22 +731,22 @@ function blockValidationSubmissionPage(form, zone)
   if (hideForm == true)
   {
     // Masquage du formulaire
-    $('.' + zone).css('display', 'none');
+    $('article').css('display', 'none');
 
     // Génération du symbole de chargement
     var loading = '';
 
-    loading += '<div class="zone_loading_image_form">';
-      loading += '<img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image_form" class="loading_image_form" />';
+    loading += '<div class="zone_loading_image">';
+      loading += '<img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />';
     loading += '</div>';
 
-    $('article').append(loading);
+    $('aside').after(loading);
 
     // Animation du symbole de chargement
-    loadingPage('zone_loading_image_form', 'loading_image_form');
+    loadingPage('zone_loading_image', 'loading_image');
     setInterval(function()
     {
-      loadingPage('zone_loading_image_form', 'loading_image_form');
+      loadingPage('zone_loading_image', 'loading_image');
     }, 100);
   }
 }
