@@ -40,7 +40,10 @@
 
     // Contrôle administrateur connecté
     if ($_SESSION['index']['connected'] == false)
+    {
       header('location: /inside/index.php?action=goConsulter');
+      exit;
+    }
 
     // Récupération de la plateforme en session
     $_SESSION['index']['plateforme'] = 'web';
@@ -69,7 +72,10 @@
 
     // Contrôle utilisateur connecté
   	if ($_SESSION['index']['connected'] == false)
+    {
       header('location: /inside/index.php?action=goConsulter');
+      exit;
+    }
     else
     {
       // Contrôle utilisateur inscrit
