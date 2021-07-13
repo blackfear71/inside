@@ -104,36 +104,40 @@ function afficherCalendrierJpeg()
   var idZone = $('#titre_generateur_calendrier').attr('id').replace('titre_', 'afficher_');
   openSection($('#titre_generateur_calendrier'), idZone, '');
 
-  // Réglage de la hauteur des jours fériés (dépend du nombre de lignes affichées)
-  var hauteurJourFerie = $('.ligne_calendrier_generator').height() - 105;
-  $('.zone_jour_ferie_calendrier_generator').css('line-height', hauteurJourFerie + 'px');
-  $('.zone_jour_ferie_calendrier_generator').css('height', hauteurJourFerie + 'px');
-
-  // Conversion du calendrier généré en image
-  html2canvas($('.zone_calendrier_generator')[0],
+  // Génération du calendrier après ouverture de la zone d'affichage
+  setTimeout(function()
   {
-    // Options
-    scale:1
-  }).then(function(canvas)
-  {
-    // Conversion du calendrier généré
-    var data = canvas.toDataURL('image/jpeg', 1);
+    // Réglage de la hauteur des jours fériés (dépend du nombre de lignes affichées)
+    var hauteurJourFerie = $('.ligne_calendrier_generator').height() - 105;
+    $('.zone_jour_ferie_calendrier_generator').css('line-height', hauteurJourFerie + 'px');
+    $('.zone_jour_ferie_calendrier_generator').css('height', hauteurJourFerie + 'px');
 
-    // Affichage de la zone et du formulaire
-    $('.form_sauvegarde_calendrier').css('display', 'block');
-    $('#generated_calendar').attr('src', data);
-    $('#calendar_generator').val(data);
-  });
+    // Conversion du calendrier généré en image
+    html2canvas($('.zone_calendrier_generator')[0],
+    {
+      // Options
+      scale:1
+    }).then(function(canvas)
+    {
+      // Conversion du calendrier généré
+      var data = canvas.toDataURL('image/jpeg', 1);
 
-  // Masquage du calendrier généré (format HTML)
-  $('.zone_calendrier_generator_hidden').remove();
+      // Affichage de la zone et du formulaire
+      $('.form_sauvegarde_calendrier').css('display', 'block');
+      $('#generated_calendar').attr('src', data);
+      $('#calendar_generator').val(data);
+    });
 
-  // Scroll vers l'id
-  var id     = 'generated_calendar';
-  var offset = 0.05;
-  var shadow = false;
+    // Masquage du calendrier généré (format HTML)
+    $('.zone_calendrier_generator_hidden').remove();
 
-  scrollToId(id, offset, shadow);
+    // Scroll vers l'id
+    var id     = 'generated_calendar';
+    var offset = 0.05;
+    var shadow = false;
+
+    scrollToId(id, offset, shadow);
+  }, 200);
 }
 
 // Affiche l'annexe générée au format JPEG
