@@ -78,6 +78,18 @@
               $anneeDebut = date('Y') - 2;
               $anneeFin   = date('Y') + 2;
 
+              /*******************************************/
+              /* Génération du calendrier au format HTML */
+              /*******************************************/
+              if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
+                include('vue/mobile/vue_calendar_generated.php');
+
+              /*****************************************/
+              /* Génération de l'annexe au format HTML */
+              /*****************************************/
+              if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
+                include('vue/mobile/vue_annexe_generated.php');
+
               /*****************************/
               /* Générateur de calendriers */
               /*****************************/
@@ -179,9 +191,6 @@
                 if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
                 {
                   echo '<div class="zone_affichage_calendrier">';
-                    // Génération du calendrier au format HTML
-                    include('vue/mobile/vue_calendar_generated.php');
-
                     // Affichage du calendrier au format JPEG (une fois généré)
                     echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_generator" />';
 
@@ -280,9 +289,6 @@
                 if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
                 {
                   echo '<div class="zone_affichage_calendrier">';
-                    // Génération de l'annexe au format HTML
-                    include('vue/mobile/vue_annexe_generated.php');
-
                     // Affichage de l'annexe au format JPEG (une fois généré)
                     echo '<img src="" title="Annexe générée" id="generated_annexe" class="image_rendu_generator" />';
 
