@@ -147,32 +147,36 @@ function afficherAnnexeJpeg()
   var idZone = $('#titre_generateur_annexe').attr('id').replace('titre_', 'afficher_');
   openSection($('#titre_generateur_annexe'), idZone, '');
 
-  // Conversion de l'annexe généré en image
-  html2canvas($('.zone_annexe_generator')[0],
+  // Génération de l'annexe après ouverture de la zone d'affichage
+  setTimeout(function()
   {
-    // Options
-    scale:1
-  }).then(function(canvas)
-  {
-    // Conversion de l'annexe générée
-    var data = canvas.toDataURL('image/jpeg', 1);
+    // Conversion de l'annexe généré en image
+    html2canvas($('.zone_annexe_generator')[0],
+    {
+      // Options
+      scale:1
+    }).then(function(canvas)
+    {
+      // Conversion de l'annexe générée
+      var data = canvas.toDataURL('image/jpeg', 1);
 
-    // Affichage de la zone et du formulaire
-    $('.form_sauvegarde_annexe').css('display', 'block');
-    $('#generated_annexe').attr('src', data);
-    $('#annexe_generator').val(data);
-  });
+      // Affichage de la zone et du formulaire
+      $('.form_sauvegarde_annexe').css('display', 'block');
+      $('#generated_annexe').attr('src', data);
+      $('#annexe_generator').val(data);
+    });
 
-  // Masquage de l'annexe généré (format HTML)
-  $('.zone_annexe_generator_hidden').remove();
+    // Masquage de l'annexe généré (format HTML)
+    $('.zone_annexe_generator_hidden').remove();
 
-  // Redimenssionnement des zones
-  $('.zone_annexe_generator_right').css('width', 'calc(100% - 513px)');
+    // Redimenssionnement des zones
+    $('.zone_annexe_generator_right').css('width', 'calc(100% - 513px)');
 
-  // Scroll vers l'id
-  var id     = 'generated_annexe';
-  var offset = 0.05;
-  var shadow = false;
+    // Scroll vers l'id
+    var id     = 'generated_annexe';
+    var offset = 0.05;
+    var shadow = false;
 
-  scrollToId(id, offset, shadow);
+    scrollToId(id, offset, shadow);
+  }, 200);
 }
