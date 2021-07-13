@@ -4,15 +4,6 @@
 // Au chargement du document
 $(function()
 {
-  /*** Actions au chargement ***/
-  // Génération du calendrier sous forme d'image
-  if ($('.zone_calendrier_generator').length)
-    afficherCalendrierJpeg();
-
-  // Génération de l'annexe sous forme d'image
-  if ($('.zone_annexe_generator').length)
-    afficherAnnexeJpeg();
-
   /*** Actions au clic ***/
   // Ouvre ou ferme la zone de saisie de la vue
   $('#afficherSaisieVue, #fermerSaisieVue').click(function()
@@ -92,6 +83,18 @@ $(function()
 
     blockValidationSubmissionPage(idForm);
   });
+});
+
+// Au chargement du document complet
+$(window).on('load', function()
+{
+  // Génération du calendrier sous forme d'image
+  if ($('.zone_calendrier_generator').length)
+    afficherCalendrierJpeg();
+
+  // Génération de l'annexe sous forme d'image
+  if ($('.zone_annexe_generator').length)
+    afficherAnnexeJpeg();
 });
 
 /*****************/
