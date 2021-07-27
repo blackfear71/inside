@@ -999,6 +999,7 @@
     private $nb_reservations_total;
     private $nb_gateaux_semaine_total;
     private $nb_recettes_total;
+    private $expenses_no_parts;
     private $expenses_total;
     private $alerte_expenses;
     private $nb_bugs_soumis_total;
@@ -1013,10 +1014,11 @@
       $this->nb_films_ajoutes_total   = 0;
       $this->nb_films_comments_total  = 0;
       $this->nb_collectors_total      = 0;
-      $this->expenses_total           = 0;
       $this->nb_reservations_total    = 0;
       $this->nb_gateaux_semaine_total = 0;
       $this->nb_recettes_total        = 0;
+      $this->expenses_no_parts        = 0;
+      $this->expenses_total           = 0;
       $this->alerte_expenses          = false;
       $this->nb_bugs_soumis_total     = 0;
       $this->nb_bugs_resolus_total    = 0;
@@ -1034,6 +1036,7 @@
       $data->setNb_reservations_total(htmlspecialchars($data->getNb_reservations_total()));
       $data->setNb_gateaux_semaine_total(htmlspecialchars($data->getNb_gateaux_semaine_total()));
       $data->setNb_recettes_total(htmlspecialchars($data->getNb_recettes_total()));
+      $data->setExpenses_no_parts(htmlspecialchars($data->getExpenses_no_parts()));
       $data->setExpenses_total(htmlspecialchars($data->getExpenses_total()));
       $data->setNb_bugs_soumis_total(htmlspecialchars($data->getNb_bugs_soumis_total()));
       $data->setNb_bugs_resolus_total(htmlspecialchars($data->getNb_bugs_resolus_total()));
@@ -1107,6 +1110,17 @@
     public function getNb_recettes_total()
     {
       return $this->nb_recettes_total;
+    }
+
+    // Bilan des dépenses sans parts
+    public function setExpenses_no_parts($expenses_no_parts)
+    {
+      $this->expenses_no_parts = $expenses_no_parts;
+    }
+
+    public function getExpenses_no_parts()
+    {
+      return $this->expenses_no_parts;
     }
 
     // Bilan des dépenses

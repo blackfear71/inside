@@ -192,34 +192,52 @@
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td rowspan="4" colspan="2" class="td_manage_users_important">';
+			echo '<td rowspan="6" colspan="2" class="td_manage_users_important">';
 				echo 'Total';
 			echo '</td>';
 
-			echo '<td rowspan="4" class="td_manage_users">';
+			echo '<td rowspan="6" class="td_manage_users">';
 				echo $totalStatistiques->getNb_films_ajoutes_total();
 			echo '</td>';
 
-			echo '<td rowspan="4" class="td_manage_users">';
+			echo '<td rowspan="6" class="td_manage_users">';
 				echo $totalStatistiques->getNb_films_comments_total();
 			echo '</td>';
 
-			echo '<td rowspan="4" class="td_manage_users">';
+			echo '<td rowspan="6" class="td_manage_users">';
 				echo $totalStatistiques->getNb_collectors_total();
 			echo '</td>';
 
-			echo '<td rowspan="4" class="td_manage_users">';
+			echo '<td rowspan="6" class="td_manage_users">';
 				echo $totalStatistiques->getNb_reservations_total();
 			echo '</td>';
 
-			echo '<td rowspan="4" class="td_manage_users">';
+			echo '<td rowspan="6" class="td_manage_users">';
 				echo $totalStatistiques->getNb_gateaux_semaine_total();
 			echo '</td>';
 
-			echo '<td rowspan="4" class="td_manage_users">';
+			echo '<td rowspan="6" class="td_manage_users">';
 				echo $totalStatistiques->getNb_recettes_total();
 			echo '</td>';
 
+			// Libellé dépenses sans parts
+			echo '<td class="td_manage_users_important">';
+				echo 'Régularisations';
+			echo '</td>';
+		echo '</tr>';
+
+		// Valeur dépenses sans parts
+		echo '<tr>';
+			echo '<td class="td_manage_users">';
+				if ($totalStatistiques->getExpenses_no_parts() > -0.01 AND $totalStatistiques->getExpenses_no_parts() < 0.01)
+					echo formatAmountForDisplay('');
+				else
+					echo formatAmountForDisplay($totalStatistiques->getExpenses_no_parts());
+			echo '</td>';
+		echo '</tr>';
+
+		// Libellé bilan
+		echo '<tr>';
 			echo '<td class="td_manage_users_important">';
 				echo 'Bilan';
 			echo '</td>';

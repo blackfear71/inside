@@ -271,7 +271,12 @@
           if ($expense->getBuyer() == $userDes OR $montantUserDes != 0)
           {
             if ($expense->getBuyer() == $userDes)
-              $bilanUser += $expense->getPrice() + $nombreParts['total'] - ($montantUserDes + $fraisUserDes);
+            {
+              if (!empty($expense->getPrice()))
+                $bilanUser += $expense->getPrice() + $nombreParts['total'] - ($montantUserDes + $fraisUserDes);
+              else
+                $bilanUser += $nombreParts['total'] - ($montantUserDes + $fraisUserDes);
+            }
             else
               $bilanUser -= $montantUserDes + $fraisUserDes;
           }
@@ -417,6 +422,7 @@
     $totalStatistiques->setNb_reservations_total($nombreReservations);
     $totalStatistiques->setNb_gateaux_semaine_total($nombreGateauxSemaine);
     $totalStatistiques->setNb_recettes_total($nombreRecettes);
+    $totalStatistiques->setExpenses_no_parts($expensesNoParts);
     $totalStatistiques->setExpenses_total($sommeBilans);
     $totalStatistiques->setAlerte_expenses($alerteBilan);
     $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);
