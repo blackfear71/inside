@@ -389,6 +389,8 @@
         $expensesNoParts += $expense->getPrice();
     }
 
+    $regularisations = -1 * $expensesNoParts;
+
     // Retrait des dépenses sans parts de la somme des bilans
 		$sommeBilans = $sommeBilans - $expensesNoParts;
 
@@ -422,7 +424,7 @@
     $totalStatistiques->setNb_reservations_total($nombreReservations);
     $totalStatistiques->setNb_gateaux_semaine_total($nombreGateauxSemaine);
     $totalStatistiques->setNb_recettes_total($nombreRecettes);
-    $totalStatistiques->setExpenses_no_parts($expensesNoParts);
+    $totalStatistiques->setExpenses_no_parts($regularisations);
     $totalStatistiques->setExpenses_total($sommeBilans);
     $totalStatistiques->setAlerte_expenses($alerteBilan);
     $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);
