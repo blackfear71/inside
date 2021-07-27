@@ -113,7 +113,7 @@
 					echo '<td colspan="4" class="td_stats_admin">';
 
 						if ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
-							echo formatAmountForDisplay(abs($statistiquesIns->getExpenses()));
+							echo formatAmountForDisplay('');
 						else
 							echo formatAmountForDisplay($statistiquesIns->getExpenses());
 
@@ -182,7 +182,7 @@
 					echo '<td colspan="4" class="td_stats_admin">';
 
 						if ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
-							echo formatAmountForDisplay(abs($statistiquesDes->getExpenses()));
+							echo formatAmountForDisplay('');
 						else
 							echo formatAmountForDisplay($statistiquesDes->getExpenses());
 
@@ -233,7 +233,7 @@
 				echo '<td class="td_manage_users">';
 
 				if ($totalStatistiques->getExpenses_total() > -0.01 AND $totalStatistiques->getExpenses_total() < 0.01)
-					echo formatAmountForDisplay(abs($totalStatistiques->getExpenses_total()));
+					echo formatAmountForDisplay('');
 				else
 					echo formatAmountForDisplay($totalStatistiques->getExpenses_total());
 			echo '</td>';

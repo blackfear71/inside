@@ -3,6 +3,11 @@
 /***************/
 
 /*** Liens portail ***/
+.zone_portail
+{
+  margin-bottom: -1vh;
+}
+
 .lien_portail
 {
   display: inline-block;

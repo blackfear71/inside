@@ -62,26 +62,28 @@
           /***********/
           $i = 0;
 
-          foreach ($portail as $lienPortail)
-          {
-            if ($lienPortail['mobile'] == 'Y')
+          echo '<div class="zone_portail">';
+            foreach ($portail as $lienPortail)
             {
-              if ($i % 2 == 0)
-                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_2">';
-              else
-                echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
-                // Logo
-                echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="icone_lien_portail" />';
+              if ($lienPortail['mobile'] == 'Y')
+              {
+                if ($i % 2 == 0)
+                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_2">';
+                else
+                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+                  // Logo
+                  echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="icone_lien_portail" />';
 
-                // Texte
-                echo '<div class="zone_texte_lien_portail">';
-                  echo '<div class="texte_lien_portail">' . $lienPortail['categorie'] . '</div>';
-                echo '</div>';
-              echo '</a>';
+                  // Texte
+                  echo '<div class="zone_texte_lien_portail">';
+                    echo '<div class="texte_lien_portail">' . $lienPortail['categorie'] . '</div>';
+                  echo '</div>';
+                echo '</a>';
 
-              $i++;
+                $i++;
+              }
             }
-          }
+          echo '</div>';
         ?>
       </article>
     </section>

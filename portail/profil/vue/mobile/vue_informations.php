@@ -36,7 +36,7 @@
         echo '<img src="../../includes/icons/profil/team_grey.png" alt="team_grey" class="logo_profil" />';
         echo '<div class="texte_profil">' . $equipe->getTeam() . '</div>';
       echo '</div>';
-      
+
       // Adresse mail
       if (!empty($profil->getEmail()))
       {
@@ -131,7 +131,7 @@
       // Solde
       echo '<div class="zone_contribution large">';
         if ($statistiques->getExpenses() > -0.01 AND $statistiques->getExpenses() < 0.01)
-          echo '<div class="stat_contribution">' . formatAmountForDisplay(abs($statistiques->getExpenses())) . '</div>';
+          echo '<div class="stat_contribution">' . formatAmountForDisplay('') . '</div>';
         else
           echo '<div class="stat_contribution">' . formatAmountForDisplay($statistiques->getExpenses()) . '</div>';
         echo '<div class="texte_contribution">solde des dépenses</div>';
