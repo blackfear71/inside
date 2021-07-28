@@ -139,7 +139,7 @@
 .zone_contributions_profil
 {
   display: block;
-  margin-bottom: -2vh;
+  margin-bottom: -1.5vh;
 }
 
 .zone_contribution
@@ -373,7 +373,7 @@
 
 .preference_margin
 {
-  margin-bottom: -2vh;
+  margin-bottom: -1.5vh;
 }
 
 .zone_preferences
@@ -615,7 +615,7 @@
 .zone_succes_profil
 {
 	width: 100%;
-  margin-bottom: -2vh;
+  margin-bottom: -1vh;
 }
 
 .zone_niveau_succes
@@ -807,6 +807,12 @@
 }
 
 /*** Polices ***/
+.zone_preferences_police
+{
+	width: 100%;
+  margin-bottom: -3vh;
+}
+
 .form_update_police
 {
 	display: inline-block;
