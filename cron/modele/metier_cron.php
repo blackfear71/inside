@@ -598,28 +598,28 @@
 
 
 
-    // Création et ouverture du fichier
-    $database = fopen($cheminComplet, 'a+');
-
-    // Repositionnement du curseur au début du fichier
-    fseek($database, 0);
-
-    // Ecriture du fichier
-    fputs($database, htmlspecialchars($contenu));
-
-    // Fermeture du fichier
-    fclose($database);
-
-
+    // // Création et ouverture du fichier
+    // $database = fopen($cheminComplet, 'a+');
+    //
+    // // Repositionnement du curseur au début du fichier
+    // fseek($database, 0);
+    //
+    // // Ecriture du fichier
+    // fputs($database, $contenu);
+    //
+    // // Fermeture du fichier
+    // fclose($database);
 
 
 
-    // file_put_contents($cheminComplet, $contenu);
+
+
+    file_put_contents($cheminComplet, $contenu);
 
 
 
     echo ($cheminComplet);
-    echo (htmlspecialchars($contenu));
+    // echo (htmlspecialchars($contenu));
 
 
 
