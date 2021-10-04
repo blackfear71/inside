@@ -605,7 +605,7 @@
     fseek($database, 0);
 
     // Ecriture du fichier
-    fputs($database, $contenu);
+    fputs($database, htmlspecialchars($contenu));
 
     // Fermeture du fichier
     fclose($database);
