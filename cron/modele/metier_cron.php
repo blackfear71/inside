@@ -532,22 +532,8 @@
       $message = getModeleMailAdministration($tableauDemandes);
       $mail->MsgHTML($message);
 
-
-
-
-
-      // Extraction de la BDD
-      $cheminFichierBdd = createExtractBdd();
-
       // Pièce jointe (sauvegarde BDD)
-      $mail->addAttachment($cheminFichierBdd, '', 'Binary', 'application/octet-stream', 'attachment');
-
-
-
-
-
-
-
+      $mail->addAttachment(createExtractBdd(), '', 'Binary', 'application/octet-stream', 'attachment');
 
       // Envoi du mail
       if (!$mail->Send())
@@ -573,11 +559,8 @@
     return $log;
   }
 
-
-
-
-
-
+  // METIER : Sauvegarde de la base de donnée sur le serveur pour envoi de mail
+  // RETOUR : Chemin du fichier créé
   function createExtractBdd()
   {
     // Appel extraction BDD
@@ -597,22 +580,9 @@
 
     file_put_contents($cheminComplet, $contenu);
 
-
-
-    // echo ($cheminComplet);
-    // echo (htmlspecialchars($contenu));
-
-
-
-
-
     // Retour
     return $cheminComplet;
   }
-
-
-
-
 
   // METIER : Création du fichier de log
   // RETOUR : Aucun
