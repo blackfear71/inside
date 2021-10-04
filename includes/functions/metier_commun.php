@@ -1382,6 +1382,6 @@ SET time_zone = "+00:00";
     header('Content-disposition: attachment; filename="' . $fileName . '"');
 
     // Retour
-    echo $contenu;
+    return $contenu;
   }
 ?>
