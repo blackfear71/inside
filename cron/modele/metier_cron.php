@@ -532,6 +532,22 @@
       $message = getModeleMailAdministration($tableauDemandes);
       $mail->MsgHTML($message);
 
+
+
+      // extractBdd();
+
+
+
+      // Pièce jointe (sauvegarde BDD)
+      $mail->addAttachment(extractBdd());
+
+
+
+
+
+
+
+
       // Envoi du mail
       if (!$mail->Send())
       {

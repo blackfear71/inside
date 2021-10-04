@@ -1307,4 +1307,81 @@
     // Retour
     return $control_ok;
   }
+
+  // METIER : Extraction de la base de données
+  // RETOUR : Aucun
+  function extractBdd()
+  {
+    // Initialisations
+    $contenu = '';
+    $semaine = array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim');
+    $mois    = array('Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre');
+
+    // Entête du fichier
+    $contenu .= '-- Inside SQL Dump
+--
+-- Généré le :  ' . $semaine[date('w')] . ' ' . date('d') . ' ' . $mois[date('n')] . ' ' . date('Y') . ' à '. date('H:i') . '
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `inside`
+--
+
+';
+
+    // Récupération de la liste des tables à extraire
+    $tables = physiqueTablesBdd();
+
+    // Traitement d'extraction de chaque table
+    foreach ($tables as $table)
+    {
+      // Comptage du nomnbre de colonnes et de lignes
+      $dimensionsTable = physiqueDimensionsTable($table);
+
+      // Entête de la table
+      $contenu .= '-- --------------------------------------------------------
+
+--
+-- Structure de la table `' . $table . '`
+--';
+
+      // Initialisation du contenu de la table (CREATE TABLE)
+      $contenu .= physiqueCreateTable($table);
+
+      // Description de la table
+      $contenu .= '--
+-- Contenu de la table `' . $table . '`
+--
+';
+
+      // Récupération du contenu de chaque table
+      $contenu .= physiqueContenuTable($table, $dimensionsTable);
+    }
+
+    // Fin de la table
+    $contenu .= "
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+";
+
+    // Génération nom du fichier
+    $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
+
+    // Génération du fichier
+    header('Content-Type: application/octet-stream');
+    header('Content-Transfer-Encoding: Binary');
+    header('Content-disposition: attachment; filename="' . $fileName . '"');
+
+    // Retour
+    echo $contenu;
+  }
 ?>
