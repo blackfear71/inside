@@ -619,7 +619,7 @@
 
 
     echo ($cheminComplet);
-    echo ($contenu);
+    echo (htmlspecialchars($contenu));
 
 
 
