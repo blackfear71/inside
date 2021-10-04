@@ -587,7 +587,7 @@
     $dossier = 'databases';
 
     if (!is_dir($dossier))
-      mkdir($dossier);
+      mkdir($dossier, 0777, true);
 
     // Génération nom du fichier
     $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
@@ -595,30 +595,11 @@
     // Sauvegarde du fichier
     $cheminComplet = $dossier . '/' . $fileName;
 
-
-
-
-    // // Création et ouverture du fichier
-    // $database = fopen($cheminComplet, 'a+');
-    //
-    // // Repositionnement du curseur au début du fichier
-    // fseek($database, 0);
-    //
-    // // Ecriture du fichier
-    // fputs($database, $contenu);
-    //
-    // // Fermeture du fichier
-    // fclose($database);
-
-
-
-
-
     file_put_contents($cheminComplet, $contenu);
 
 
 
-    echo ($cheminComplet);
+    // echo ($cheminComplet);
     // echo (htmlspecialchars($contenu));
 
 
