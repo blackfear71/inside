@@ -534,12 +534,13 @@
 
 
 
-      // extractBdd();
 
 
+      // Extraction de la BDD
+      $cheminFichierBdd = createExtractBdd();
 
       // Pièce jointe (sauvegarde BDD)
-      $mail->addAttachment(extractBdd());
+      $mail->addAttachment($cheminFichierBdd, '', 'Binary', 'application/octet-stream', 'attachment');
 
 
 
@@ -571,6 +572,38 @@
     // Retour
     return $log;
   }
+
+
+
+
+
+
+  function createExtractBdd()
+  {
+    // Appel extraction BDD
+    $contenu = extractBdd();
+
+    // On vérifie la présence des dossiers, sinon on les créé
+    $dossier = 'databases';
+
+    if (!is_dir($dossier))
+      mkdir($dossier);
+
+    // Génération nom du fichier
+    $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
+
+    // Sauvegarde du fichier
+    $cheminComplet = $dossier . '/' . $fileName;
+
+    file_put_contents($cheminComplet, $contenu);
+
+    // Retour
+    return $cheminComplet;
+  }
+
+
+
+
 
   // METIER : Création du fichier de log
   // RETOUR : Aucun

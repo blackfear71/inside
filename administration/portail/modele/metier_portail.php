@@ -204,4 +204,23 @@
     // Retour
     return $nombreEvolutions;
   }
+
+  // METIER : Sauvegarde de la base de données
+  // RETOUR : Aucun
+  function saveBdd()
+  {
+    // Appel extraction BDD
+    extractBdd();
+
+    // Génération nom du fichier
+    $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
+
+    // Génération du fichier
+    header('Content-Type: application/octet-stream');
+    header('Content-Transfer-Encoding: Binary');
+    header('Content-disposition: attachment; filename="' . $fileName . '"');
+
+    // Retour
+    echo $contenu;
+  }
 ?>

@@ -1309,7 +1309,7 @@
   }
 
   // METIER : Extraction de la base de données
-  // RETOUR : Aucun
+  // RETOUR : Contenu du fichier à générer
   function extractBdd()
   {
     // Initialisations
@@ -1372,14 +1372,6 @@ SET time_zone = "+00:00";
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 ";
-
-    // Génération nom du fichier
-    $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1,11111111) . '.sql';
-
-    // Génération du fichier
-    header('Content-Type: application/octet-stream');
-    header('Content-Transfer-Encoding: Binary');
-    header('Content-disposition: attachment; filename="' . $fileName . '"');
 
     // Retour
     return $contenu;

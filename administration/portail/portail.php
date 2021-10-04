@@ -40,7 +40,7 @@
       break;
 
     case 'doExtract':
-      extractBdd();
+      saveBdd();
       break;
 
     default:
