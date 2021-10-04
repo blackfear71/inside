@@ -58,6 +58,6 @@
     $_SESSION['alerts']['weekly_cron'] = true;
 
     // Redirection
-    header('location: /inside/administration/cron/cron.php?action=goConsulter');
+    // header('location: /inside/administration/cron/cron.php?action=goConsulter');
   }
 ?>
