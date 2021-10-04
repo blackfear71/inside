@@ -532,15 +532,12 @@
       $message = getModeleMailAdministration($tableauDemandes);
       $mail->MsgHTML($message);
 
-      // Création d'un fichier d'extraction de la BDD
+      // Création d'un fichier (extraction BDD)
       $extractBdd = createExtractBdd();
 
-      // Pièce jointe (sauvegarde BDD)
+      // Pièce jointe (extraction BDD)
       $mail->addAttachment($extractBdd, '', 'Binary', 'application/octet-stream', 'attachment');
 
-      // Suppression du fichier généré
-      unlink($extractBdd);
-      
       // Envoi du mail
       if (!$mail->Send())
       {
@@ -550,6 +547,9 @@
       }
       else
       {
+        // Suppression du fichier généré (extraction BDD)
+        unlink($extractBdd);
+        
         // Ajout des données au log
         $log['status'] = 'OK';
         $log['infos']  = 'Mail envoyé';
