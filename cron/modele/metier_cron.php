@@ -533,10 +533,10 @@
       $mail->MsgHTML($message);
 
       // Création d'un fichier (extraction BDD)
-      $extractBdd = createExtractBdd();
+      $cheminExtractionBdd = createExtractBdd();
 
       // Pièce jointe (extraction BDD)
-      $mail->addAttachment($extractBdd, '', 'Binary', 'application/octet-stream', 'attachment');
+      $mail->addAttachment($cheminExtractionBdd, '', 'Binary', 'application/octet-stream', 'attachment');
 
       // Envoi du mail
       if (!$mail->Send())
@@ -547,13 +547,14 @@
       }
       else
       {
-        // Suppression du fichier généré (extraction BDD)
-        unlink($extractBdd);
-        
         // Ajout des données au log
         $log['status'] = 'OK';
         $log['infos']  = 'Mail envoyé';
       }
+
+      // Suppression du fichier généré (extraction BDD) si existant
+      if (file_exists($cheminExtractionBdd))
+        unlink($cheminExtractionBdd);
     }
     else
     {
