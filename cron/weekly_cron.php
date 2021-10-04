@@ -33,7 +33,7 @@
   // Ajout du compte-rendu au log
   array_push($traitementsHebdomadaires, $traitementBilans);
 
-  // if (!isset($_POST['weekly_cron']))
+  if (!isset($_POST['weekly_cron']))
   {
     // Envoi d'un mail de gestion à l'administrateur
     $traitementAdmin = sendMailAdmin();
