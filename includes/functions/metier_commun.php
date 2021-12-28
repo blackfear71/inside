@@ -161,6 +161,7 @@
       AND $path != '/inside/portail/expensecenter/expensecenter.php'
       AND $path != '/inside/portail/foodadvisor/foodadvisor.php'
       AND $path != '/inside/portail/foodadvisor/restaurants.php'
+      AND $path != '/inside/portail/ideas/ideas.php'
       AND $path != '/inside/portail/moviehouse/details.php'
       AND $path != '/inside/portail/moviehouse/mailing.php'
       AND $path != '/inside/portail/moviehouse/moviehouse.php'

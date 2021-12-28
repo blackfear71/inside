@@ -973,7 +973,7 @@ aside
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	margin-top: 2vh;
+	margin-top: 3.5vh;
 }
 
 .numero_page_active
@@ -1041,6 +1041,16 @@ footer
 	z-index: 2;
 }
 
+.zone_footer_left
+{
+	float: left;
+}
+
+.zone_footer_right
+{
+	float: right;
+}
+
 .version
 {
 	display: inline-block;
@@ -1050,11 +1060,6 @@ footer
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2vh;
-}
-
-.zone_footer_right
-{
-	float: right;
 }
 
 .link_footer
@@ -1068,6 +1073,15 @@ footer
 
 .link_footer:active
 {
+	background-color: #1b1b1b;
+}
+
+.link_footer_active
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 8vh;
+	height: 7vh;
 	background-color: #1b1b1b;
 }
 

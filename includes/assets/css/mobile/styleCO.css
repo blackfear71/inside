@@ -218,10 +218,11 @@
 	background-image: url("/inside/includes/icons/common/smileys/8.png");
 }
 
-/*** Phrases / images cultes***/
+/*** Phrases / images cultes ***/
 .zone_collectors
 {
   width: 100%;
+	margin-bottom: -1.5vh;
 }
 
 .zone_collector

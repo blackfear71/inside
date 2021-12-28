@@ -57,7 +57,7 @@
           /*************************/
           /* Zone de saisie d'idée */
           /*************************/
-          include('vue/vue_saisie_idea.php');
+          include('vue/web/vue_saisie_idea.php');
 
           /*******************/
           /* Chargement page */
@@ -69,17 +69,17 @@
           /***********/
           /* Onglets */
           /***********/
-          include('vue/vue_onglets.php');
+          include('vue/web/vue_onglets.php');
 
           /*********/
           /* Idées */
           /*********/
-          include('vue/vue_liste_ideas.php');
+          include('vue/web/vue_liste_ideas.php');
 
           /**************/
           /* Pagination */
           /**************/
-          include('vue/vue_pagination.php');
+          include('vue/web/vue_pagination.php');
 				?>
 			</article>
 
