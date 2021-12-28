@@ -3,6 +3,12 @@
 /**************/
 
 /*** Saisie ***/
+.zone_image_cycle_de_vie
+{
+  display: block;
+  margin-bottom: 2vh;
+}
+
 .image_cycle_de_vie
 {
   display: block;

@@ -15,7 +15,7 @@
           echo '</div>';
 
           // Cycle de vie d'une idée
-          echo '<div id="afficher_cycle_de_vie_idee" style="display: none;">';
+          echo '<div id="afficher_cycle_de_vie_idee" class="zone_image_cycle_de_vie" style="display: none;">';
             echo '<img src="../../includes/images/ideas/cycle_idee.png" alt="cycle_idee" class="image_cycle_de_vie" />';
           echo '</div>';
 
