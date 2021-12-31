@@ -160,10 +160,14 @@
       {
         echo '<div class="succes_liste">';
           // Logo succès
-          echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+          echo '<div class="succes_locked">';
+            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+          echo '</div>';
 
           // Titre succès
-          echo '<div class="titre_succes">Succès non défini</div>';
+          echo '<div class="zone_titre_succes zone_titre_full">';
+            echo '<div class="titre_succes">Succès non défini</div>';
+          echo '</div>';
         echo '</div>';
       }
 

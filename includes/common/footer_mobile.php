@@ -42,6 +42,18 @@
         // Logo
         echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
       echo '</a>';
+
+      // Lien Bugs
+      if ($path == '/inside/portail/bugs/bugs.php')
+        echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer_active">';
+      else
+        echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer">';
+        // Logo
+        echo '<img src="/inside/includes/icons/common/alert.png" alt="alert" title="Signaler un bug" class="icone_footer" />';
+
+        // Compteur
+        echo '<div class="zone_compteur_footer"></div>';
+      echo '</a>';
     }
   echo '</div>';
 

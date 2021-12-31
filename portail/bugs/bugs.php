@@ -96,7 +96,7 @@
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_bugs.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_bugs.php');
       break;
   }
 ?>

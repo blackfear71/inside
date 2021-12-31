@@ -4,6 +4,11 @@
     // Sélection du contenu Celsius à afficher
     switch ($celsius)
     {
+      case 'bugs':
+        $contenuCelsius = 'Le site ne présente aucun bug. Si toutefois tu penses être tombé sur ce qui prétend en être un, tu peux le signaler sur cette page. Ce que j\'appellerai désormais
+        "évolution" sera traitée dans les plus brefs délais par une équipe exceptionnelle, toujours à ton écoute pour te servir au mieux.';
+        break;
+
       case 'calendars':
         $contenuCelsius = 'Ils sont tous beaux mes calendriers ! Je les aime comme ils sont parce qu\'ils sont à nous !';
         break;

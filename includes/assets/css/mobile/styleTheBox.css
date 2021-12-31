@@ -20,8 +20,7 @@
 	display: block;
 	vertical-align: middle;
 	width: calc(100% - 3vh);
-	margin-right: 1vh;
-	margin-top: 2vh;
+  margin-bottom: 2vh;
 	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
 	border: 0;
 	background-color: white;
@@ -35,7 +34,6 @@
 .saisie_description_idee
 {
   display: block;
-	margin-top: 2vh;
 	margin-bottom: 1.5vh;
 	height: 15vh;
 	width: calc(100% - 3vh);

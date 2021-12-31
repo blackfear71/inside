@@ -23,6 +23,10 @@ $(function()
   updatePing();
   majPing = setInterval(updatePing, 60000);
 
+  // Mise à jour du compteur des bugs/évolutions toutes les 60 secondes
+  updateBugs();
+  majBugs = setInterval(updateBugs, 60000);
+
   // Affichage des alertes
   if ($('#alerte').length)
     afficherMasquerPopUp('alerte', false);
@@ -86,6 +90,10 @@ $(function()
     if ($(event.target).attr('class') == 'fond_saisie'
     ||  $(event.target).attr('class') == 'fond_details')
       afficherMasquerIdWithDelay(event.target.id);
+
+    // Ferme une image
+    if ($(event.target).attr('class') == 'fond_zoom_image')
+      masquerSupprimerIdWithDelay('zoom_image');
 
     // Ferme une zone de succès
     if ($(event.target).attr('class') == 'fond_zoom_succes')
@@ -927,6 +935,45 @@ function updatePing()
     if (userConnected == false)
       clearInterval(majPing);
   });
+}
+
+// Exécute le script php de mise à jour du compteur de bugs/évolutions
+function updateBugs()
+{
+  $.get('/inside/includes/functions/script_commun.php', {function: 'countBugs'}, function(data)
+  {
+    var identifiant = data.identifiant;
+    var nombreBugs  = data.nombreBugs;
+    var html        = '';
+
+    // On n'exécute de manière récurrente que si on n'est pas l'admin
+    if (identifiant != 'admin')
+    {
+      if (nombreBugs > 0)
+      {
+        // La première fois on génère la zone
+        if (!$('.count_bugs').length)
+        {
+          html += '<div class="count_bugs">';
+            html += '<div class="number_bugs"></div>';
+          html += '</div>';
+
+          $('.zone_compteur_footer').html(html);
+        }
+
+        // On met à jour le contenu
+        $('.number_bugs').html(nombreBugs);
+      }
+      else
+      {
+        // On efface la zone si présente
+        if ($('.count_bugs').length)
+          $('.count_bugs').remove();
+      }
+    }
+    else
+      clearInterval(majBugs);
+  }, 'json');
 }
 
 // Déploie le menu latéral gauche

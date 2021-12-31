@@ -57,7 +57,7 @@
           /*****************************/
           /* Zone de saisie de rapport */
           /*****************************/
-          include('vue/vue_saisie_rapport.php');
+          include('vue/web/vue_saisie_rapport.php');
 
           /*******************/
           /* Chargement page */
@@ -69,12 +69,12 @@
           /***********/
           /* Onglets */
           /***********/
-          include('vue/vue_onglets.php');
+          include('vue/web/vue_onglets.php');
 
           /************/
           /* Rapports */
           /************/
-          include('vue/vue_liste_rapports.php');
+          include('vue/web/vue_liste_rapports.php');
         ?>
 			</article>
 

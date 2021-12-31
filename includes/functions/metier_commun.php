@@ -155,7 +155,8 @@
     // Vérification section accessible sur mobile
     if ($_SESSION['index']['plateforme'] == 'mobile')
     {
-      if ($path != '/inside/portail/calendars/calendars.php'
+      if ($path != '/inside/portail/bugs/bugs.php'
+      AND $path != '/inside/portail/calendars/calendars.php'
       AND $path != '/inside/portail/calendars/calendars_generator.php'
       AND $path != '/inside/portail/collector/collector.php'
       AND $path != '/inside/portail/expensecenter/expensecenter.php'

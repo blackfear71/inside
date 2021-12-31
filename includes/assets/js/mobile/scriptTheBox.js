@@ -11,13 +11,13 @@ $(function()
     afficherMasquerIdWithDelay('zone_saisie_vue');
   });
 
-  // Ouvre ou ferme la zone de saisie d'une dépense
+  // Ouvre ou ferme la zone de saisie d'une idée
   $('#afficherSaisieIdee, #fermerSaisieIdee').click(function()
   {
     afficherMasquerIdWithDelay('zone_saisie_idee');
   });
 
-  // Bloque la saisie en cas de soumission (phrase culte)
+  // Bloque la saisie en cas de soumission
   $('#validerSaisieIdee').click(function()
   {
     var idForm          = $('#zone_saisie_idee');
