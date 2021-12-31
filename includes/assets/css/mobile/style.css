@@ -970,61 +970,6 @@ aside
 	margin-right: 2vh;
 }
 
-/*** Recherche live ***/
-.zone_recherche_live
-{
-	display: block;
-	height: 6vh;
-	background-color: #e3e3e3;
-}
-
-.logo_recherche_live
-{
-	display: inline-block;
-	vertical-align: middle;
-	width: 4vh;
-	height: 4vh;
-	padding: 1vh;
-	background-color: #d3d3d3;
-}
-
-.size_logo_recherche_live
-{
-	width: 3vh;
-	height: 3vh;
-	padding: 1.5vh;
-}
-
-.input_recherche_live
-{
-	display: inline-block;
-	vertical-align: middle;
-	padding-left: 1vh;
-	padding-right: 1vh;
-	line-height: 5.5vh;
-	width: calc(100% - 14vh);
-	border: 0;
-	background-color: #e3e3e3;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	font-size: 2.5vh;
-}
-
-.zone_contenu_saisie_live
-{
-	width: 100%;
-	max-height: 59.7vh;
-	overflow-y: auto;
-	background-color: white;
-}
-
-.empty_recherche_live
-{
-	display: none;
-	line-height: 10vh;
-	text-align: center;
-}
-
 /*** Pagination ***/
 .zone_pagination
 {

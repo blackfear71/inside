@@ -152,62 +152,10 @@ $(function()
     afficherMasquerIdWithDelay('contenuCelsius');
   });
 
-  // Efface la zone de recherche au clic sur la croix
-  $('.logo_recherche_live').click(function()
-  {
-    var idSearch = $(this).attr('id');
-    var idForm;
-
-    switch (idSearch)
-    {
-      case 'reset_recherche_live_propositions':
-        idForm = 'zone_saisie_propositions';
-        break;
-
-      case 'reset_recherche_live_resume':
-        idForm = 'zone_saisie_resume';
-        break;
-
-      default:
-        idForm = '';
-        break;
-    }
-
-    if (idForm != '')
-      resetLiveSearch(idForm);
-  });
-
   // Fermeture zoom succès
   $(document).on('click', '#closeZoomSuccess', function()
   {
     masquerSupprimerIdWithDelay('zoom_succes');
-  });
-
-  /*** Actions à la saisie ***/
-  // Filtre la recherche
-  $('.input_recherche_live').keyup(function()
-	{
-    var idInput      = $(this).attr('id');
-    var inputContent = $.trim($(this).val());
-    var idForm;
-
-    switch (idInput)
-    {
-      case 'recherche_live_propositions':
-        idForm = 'zone_saisie_propositions';
-        break;
-
-      case 'recherche_live_resume':
-        idForm = 'zone_saisie_resume';
-        break;
-
-      default:
-        idForm = '';
-        break;
-    }
-
-    if (idForm != '')
-      liveSearch(idForm, inputContent);
   });
 
   /*** Actions sur mobile ***/
@@ -1050,78 +998,6 @@ function executeAction(form, action)
   else
     $('#' + form).submit();
 }
-
-// Réinitialise la zone de recherche saisie
-function resetLiveSearch(idForm)
-{
-  // On vide la saisie
-  $('#' + idForm).find('.input_recherche_live').val('');
-
-  // On cache le message vide
-  $('#' + idForm).find('.empty_recherche_live').hide();
-
-  // Affiche tous les lieux par défaut
-  $('#' + idForm).find('.zone_recherche_conteneur').show();
-
-  // Affiche tous les restaurants par défaut
-  $('#' + idForm).find('.zone_recherche_item').show();
-}
-
-// Filtre la zone de recherche en fonction de la saisie
-function liveSearch(idForm, input)
-{
-  // Déplie toutes les zones de recherche
-  $('#' + idForm).find('.zone_recherche_conteneur > .titre_section').each(function()
-  {
-    var idZone = $(this).attr('id').replace('titre_', 'afficher_');
-
-    openSection($(this), idZone, 'open');
-  });
-
-  // Si zone vide, on fait tout apparaitre
-  if (!input)
-  {
-    // Affiche tous les lieux par défaut
-    $('#' + idForm).find('.zone_recherche_conteneur').show();
-
-    // Affiche tous les restaurants par défaut
-    $('#' + idForm).find('.zone_recherche_item').show();
-
-    // On cache le message vide
-    $('#' + idForm).find('.empty_recherche_live').hide();
-  }
-  // Sinon on filtre
-  else
-  {
-    // Affiche tous les lieux par défaut
-    $('#' + idForm).find('.zone_recherche_conteneur').show();
-
-    // Cache les restaurants qui ne correspondent pas
-    $('#' + idForm).find('.zone_recherche_item').show().not(':containsCaseInsensitive(' + input + ')').hide();
-
-    // Cache une zone qui ne contient pas de restaurant qui corresponde
-    $('#' + idForm).find('.zone_recherche_contenu').show().not(':containsCaseInsensitive(' + input + ')').parent().hide();
-
-    // Filtrage de l'affichage
-    if (!$('.zone_recherche_item').is(':visible'))
-      $('#' + idForm).find('.zone_recherche_conteneur').hide();
-
-    // Affichage / masquage message vide
-    if ($('.zone_recherche_conteneur').is(':visible'))
-      $('#' + idForm).find('.empty_recherche_live').hide();
-    else
-      $('#' + idForm).find('.empty_recherche_live').show();
-  }
-}
-
-// Rend la recherche insensible à la casse
-$.expr[':'].containsCaseInsensitive = $.expr.createPseudo(function(arg)
-{
-  return function(elem)
-  {
-    return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-  };
-});
 
 // Formate une date pour affichage
 function formatDateForDisplay(date)

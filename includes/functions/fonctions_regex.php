@@ -230,6 +230,9 @@
 		// Remplace les points virgules
 		$formatted = str_replace(';', '_', $formatted);
 
+		// Remplace les slash
+		$formatted = str_replace('/', '_', $formatted);
+
 		// Passe en minuscule
 		$formatted = strtolower($formatted);
 

@@ -9,7 +9,7 @@
     // Récupération de la liste des restaurants ouverts pour chaque lieu
     foreach ($listeLieux as $lieu)
     {
-      $listeRestaurants[$lieu] = physiqueRestaurantsOuvertsParLieux($equipe, $lieu);
+      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsOuvertsParLieux($equipe, $lieu);
     }
 
     // Filtrage des restaurants
