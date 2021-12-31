@@ -22,7 +22,7 @@
               switch ($message['logo'])
               {
                 case 'erreur':
-                  echo '<img src="/inside/includes/icons/common/alert_grey.png" alt="alerts_grey" title="Alerte" class="logo_alerte" />';
+                  echo '<img src="/inside/includes/icons/common/alert_grey.png" alt="alert_grey" title="Alerte" class="logo_alerte" />';
                   break;
 
                 case 'info':

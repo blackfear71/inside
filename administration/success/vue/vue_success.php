@@ -173,7 +173,7 @@
             echo '<div class="explications_init">';
               echo 'Il est possible de modifier le niveau, l\'ordonnancement, le titre, la description, la condition et les explications des succès. Bien contrôler l\'ordonnancement par rapport au
               niveau pour éviter les doublons. Il n\'est pas possible de modifier la référence ni l\'image, il faut donc supprimer le succès via cet écran. Pour les explications, insérer les caractères
-              %limit% permet de les remplacer par la valeur de la conditon d\'obtention du succès.';
+              <i>%limit%</i> permet de les remplacer par la valeur de la conditon d\'obtention du succès.';
             echo '</div>';
           echo '</div>';
 
