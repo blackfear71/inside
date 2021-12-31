@@ -4,9 +4,6 @@
     // Numéro de version
     $version = '2.4';
 
-    // Version
-    echo '<div class="version">v' . $version . '</div>';
-
     // Liens
     if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
     {
@@ -34,6 +31,9 @@
           break;
       }
 
+      // Version et lien Journal des modifications
+      echo '<a href="/inside/portail/changelog/changelog.php?year=' . date('Y') . '&action=goConsulter" title="Journal des modifications" class="version">v' . $version . '</a>';
+
       // Lien #TheBox
       if ($path == '/inside/portail/ideas/ideas.php')
         echo '<a href="/inside/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer_active">';
@@ -54,6 +54,11 @@
         // Compteur
         echo '<div class="zone_compteur_footer"></div>';
       echo '</a>';
+    }
+    else
+    {
+      // Version
+      echo '<div class="version">v' . $version . '</div>';
     }
   echo '</div>';
 

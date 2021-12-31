@@ -880,7 +880,7 @@
 #exemple_police p
 {
 	margin: 0;
-	margin-bottom: 20px;
+	margin-bottom: 3vh;
 	text-align: justify;
   font-size: 2.5vh;
 }

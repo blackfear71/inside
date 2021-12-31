@@ -54,7 +54,7 @@
           /**********/
           /* Années */
           /**********/
-          include('vue/vue_onglets.php');
+          include('vue/web/vue_onglets.php');
 
           switch ($_GET['action'])
           {
@@ -62,14 +62,14 @@
               /********************/
               /* Histoire du site */
               /********************/
-              include('vue/vue_history.php');
+              include('vue/web/vue_history.php');
               break;
 
             case 'goConsulter':
               /*****************************/
               /* Journaux de modifications */
               /*****************************/
-              include('vue/vue_journaux.php');
+              include('vue/web/vue_journaux.php');
               break;
 
             default:

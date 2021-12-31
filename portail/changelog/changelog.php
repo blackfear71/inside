@@ -95,7 +95,7 @@
     case 'goConsulterHistoire':
     case 'goConsulter':
     default:
-      include_once('vue/vue_changelog.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_changelog.php');
       break;
   }
 ?>

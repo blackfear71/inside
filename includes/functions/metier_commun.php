@@ -158,6 +158,7 @@
       if ($path != '/inside/portail/bugs/bugs.php'
       AND $path != '/inside/portail/calendars/calendars.php'
       AND $path != '/inside/portail/calendars/calendars_generator.php'
+      AND $path != '/inside/portail/changelog/changelog.php'
       AND $path != '/inside/portail/collector/collector.php'
       AND $path != '/inside/portail/expensecenter/expensecenter.php'
       AND $path != '/inside/portail/foodadvisor/foodadvisor.php'

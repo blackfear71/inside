@@ -17,6 +17,11 @@
         $contenuCelsius = 'Et si la magie opérait aussi par ici ? Allez, affiche nous tes bô calendriers sur le mur ! Et n\'oublie pas de demander aux personnes de te donner un avatar pour les étiquettes...';
         break;
 
+      case 'changelog':
+        $contenuCelsius = 'Tu veux être au courant des toutes dernières nouveautés ? Tu veux tout savoir de l\'histoire de ton site préféré ? Alors tu es au bon endroit ! Passionné par la technique
+        ou simple curieux, viens voir ce qui t\'attend et peut-être qu\'un jour ce sera à toi de compléter ces journaux...';
+        break;
+
       case 'collector':
         $contenuCelsius = 'Magie ! Je sais que tu m\'adores ! Je sais que tu m\'attendais avec impatience, hé bien tu peux te sentir rassuré. Oui je suis bien là à tes côtés, que tu sois le chasseur
         ou la proie, on se retrouve toujours tous ici...';

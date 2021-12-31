@@ -1,0 +1,155 @@
+/*********************************/
+/*** Journal des modifications ***/
+/*********************************/
+
+/*** Histoire du site ***/
+.zone_history
+{
+  width: 100%;
+  margin-bottom: -1.5vh;
+}
+
+.introduction_history
+{
+	display: block;
+	width: 100%;
+	margin-bottom: 2vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+	line-height: 4vh;
+}
+
+.introduction_history::first-letter
+{
+	font-family: inside_font_regular, Verdana, sans-serif;
+	font-size: 6vh;
+}
+
+.signature_history
+{
+	display: block;
+	width: 100%;
+	font-family: inside_font_light_italic, Verdana, sans-serif;
+	font-size: 2vh;
+	color: #262626;
+	text-align: right;
+}
+
+.event_history
+{
+	display: block;
+	margin-top: 2vh;
+}
+
+.date_history
+{
+	display: inline-block;
+	font-family: inside_font_regular, Verdana, sans-serif;
+	font-size: 5vh;
+	color: #b3b3b3;
+  margin-bottom: 1vh;
+	vertical-align: middle;
+}
+
+.trait_history
+{
+	display: inline-block;
+	height: 0.3vh;
+	background-color: #b3b3b3;
+	margin-left: 2vh;
+  margin-bottom: 1vh;
+	vertical-align: middle;
+}
+
+.details_history
+{
+	display: block;
+	margin-bottom: 2vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+	line-height: 4vh;
+}
+
+.details_history::first-letter
+{
+	font-family: inside_font_regular, Verdana, sans-serif;
+	font-size: 6vh;
+}
+
+/*** Journaux ***/
+.zone_changelogs
+{
+  width: 100%;
+  margin-bottom: -1.5vh;
+}
+
+.notes_changelog
+{
+	line-height: 4vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+}
+
+.notes_changelog::first-letter
+{
+	font-size: 6vh;
+	font-family: inside_font_regular, Verdana, sans-serif;
+}
+
+.zone_logs_semaine
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2vh;
+}
+
+.zone_logs_categorie
+{
+	background-color: #e3e3e3;
+	width: calc(100% - 4vh);
+	margin-top: 2vh;
+	padding: 1vh 2vh 1vh 2vh;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	vertical-align: top;
+}
+
+.titre_categorie
+{
+	display: block;
+	text-align: center;
+	width: 100%;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	font-weight: bold;
+}
+
+.logo_titre_categorie
+{
+	height: 4vh;
+	vertical-align: middle;
+  margin-top: -0.6vh;
+	margin-right: 1vh;
+}
+
+.logs_categorie
+{
+	padding-left: 2vh;
+	margin: 2vh 0 0 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	text-align: justify;
+}
+
+.log_categorie
+{
+	margin-top: 0.5vh;
+}

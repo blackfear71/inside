@@ -1066,6 +1066,7 @@ footer
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2vh;
+	text-decoration: none;
 }
 
 .link_footer

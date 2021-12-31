@@ -9,11 +9,11 @@
       // Saisie
       echo '<div class="zone_contenu_saisie">';
         echo '<div class="contenu_saisie">';
-          // Annexes
-          if ($_GET['action'] == 'goConsulterAnnexes')
-            echo '<a href="calendars.php?action=goConsulterAnnexes" class="lien_saisie lien_courant">Annexes</a>';
+          // Histoire du site
+          if ($_GET['action'] == 'goConsulterHistoire')
+            echo '<a href="changelog.php?action=goConsulterHistoire" class="lien_saisie lien_courant">Histoire du site</a>';
           else
-            echo '<a href="calendars.php?action=goConsulterAnnexes" class="lien_saisie">Annexes</a>';
+            echo '<a href="changelog.php?action=goConsulterHistoire" class="lien_saisie">Histoire du site</a>';
 
           // Années
           if (!empty($onglets))
@@ -21,15 +21,15 @@
             foreach ($onglets as $annee)
             {
               if (isset($_GET['year']) AND $annee == $_GET['year'])
-                echo '<a href="calendars.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
+                echo '<a href="changelog.php?year=' . $annee . '&action=goConsulter" class="lien_saisie lien_courant">' . $annee . '</a>';
               else
-                echo '<a href="calendars.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
+                echo '<a href="changelog.php?year=' . $annee . '&action=goConsulter" class="lien_saisie">' . $annee . '</a>';
             }
           }
           else
           {
-            if ($_GET['action'] != 'goConsulterAnnexes')
-              echo '<a href="calendars.php?year=' . $_GET['year'] . '&action=goConsulter" class="lien_saisie lien_courant">' . $_GET['year'] . '</a>';
+            if ($_GET['action'] != 'goConsulterHistoire')
+              echo '<a href="changelog.php?year=' . $_GET['year'] . '&action=goConsulter" class="lien_saisie lien_courant">' . $_GET['year'] . '</a>';
           }
         echo '</div>';
       echo '</div>';

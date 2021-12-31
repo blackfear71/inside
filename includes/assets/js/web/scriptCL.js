@@ -5,7 +5,7 @@
 $(function()
 {
   /*** Actions au clic ***/
-  // Plie ou déplie les thèmes
+  // Plie ou déplie les journaux
   $('.bouton_fold').click(function()
   {
     var idFold = $(this).attr('id').replace('fold_', '');
@@ -61,7 +61,7 @@ $(window).on('load', function()
   {
     var id;
 
-    if ($_GET('anchor') < 10)
+    if ($_GET('anchor').length < 2 && $_GET('anchor') < 10)
       id = 'changelog_0' + $_GET('anchor');
     else
       id = 'changelog_' + $_GET('anchor');
