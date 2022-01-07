@@ -7,6 +7,7 @@ $(window).on('load', function()
   var refreshChat;
   var refreshUsers;
   var intervalRefreshChat  = 4000;
+  var intervalOldMessages  = 1000;
   var intervalRefreshUsers = 30000;
   var maximumCountMessages = 100;
 
@@ -132,8 +133,24 @@ $(window).on('load', function()
     refreshUsers = startTimerRefresh(rafraichirUtilisateurs, refreshUsers, intervalRefreshUsers);
   });
 
-  // Affichage des anciens messages
+  // Affichage des anciens messages au clic sur le bouton
   $('#fenetres_chat').on('click', '#afficher_anciens_messages', afficherAnciensMessages);
+
+  // Affichage des anciens messages au scroll vers le haut
+  $('#scroll_conversation').scroll(function()
+  {
+    // Récupération de la position du scroll
+    var scrollPosition = $(this).scrollTop();
+
+    // Si le scroll est en haut, recherche des messages précédents
+    if ($('.zone_anciens_messages_chat').length && scrollPosition == 0)
+    {
+      setTimeout(function()
+      {
+        afficherAnciensMessages();
+      }, intervalOldMessages);
+    }
+  });
 
   // Envoi de message au clic sur le bouton
   $('#fenetres_chat').on('click', '#send_message_chat', envoyerMessage);
@@ -662,7 +679,7 @@ $(window).on('load', function()
             // Suppression de la première date affichée si identique à celle du premier ancien message lu
             if (firstDateDeleted == false && date == firstDate)
             {
-              $('.zone_date_chat_user').first().remove();
+              $('.zone_date_chat_messages').first().remove();
               firstDateDeleted = true;
             }
 
@@ -746,6 +763,7 @@ $(window).on('load', function()
       html += '<div class="zone_chat_user">';
         html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_user" />';
         html += '<div class="triangle_chat_user"></div>';
+        html += '<div class="time_chat_user">' + formatTimeForDisplayChat(time) + '</div>';
         html += '<div class="text_chat_user">' + text + '</div>';
         html += '<div class="date_chat">' + date + '</div>';
         html += '<div class="time_chat">' + time + '</div>';
@@ -757,6 +775,7 @@ $(window).on('load', function()
         html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_other" />';
         html += '<div class="triangle_chat_other"></div>';
         html += '<div class="text_chat_other">' + text + '</div>';
+        html += '<div class="time_chat_other">' + formatTimeForDisplayChat(time) + '</div>';
         html += '<div class="date_chat">' + date + '</div>';
         html += '<div class="time_chat">' + time + '</div>';
       html += '</div>';
@@ -771,9 +790,9 @@ $(window).on('load', function()
     // Initialisations
     var html = '';
 
-    html += '<div class="zone_date_chat_user">';
+    html += '<div class="zone_date_chat_messages">';
       html += '<div class="trait_chat_gauche"></div>';
-      html += '<div class="date_chat_user">' + formatDateForDisplayLong(dateToFormat) + '</div>';
+      html += '<div class="date_chat_messages">' + formatDateForDisplayChat(dateToFormat) + '</div>';
       html += '<div class="trait_chat_droit"></div>';
     html += '</div>';
 
@@ -984,9 +1003,9 @@ $(window).on('load', function()
     var tailleTotale = $('.contenu_onglet_chat').width() - 90;
 
     // Calcul de la taille de chaque trait
-    $('.zone_date_chat_user').each(function()
+    $('.zone_date_chat_messages').each(function()
     {
-      var tailleTexte = $(this).children('.date_chat_user').width();
+      var tailleTexte = $(this).children('.date_chat_messages').width();
       var tailleTrait = (tailleTotale - tailleTexte - 30) / 2;
 
       $(this).children('.trait_chat_gauche').css('width', tailleTrait + 'px');

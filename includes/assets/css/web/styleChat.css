@@ -253,7 +253,7 @@
 	background-color: #b3b3b3;
 }
 
-.zone_date_chat_user
+.zone_date_chat_messages
 {
 	display: block;
 	clear: both;
@@ -261,7 +261,7 @@
 	margin-bottom: 10px;
 }
 
-.date_chat_user
+.date_chat_messages
 {
 	display: inline-block;
 	color: #b3b3b3;
@@ -285,6 +285,11 @@
 	background-color: #b3b3b3;
 	margin-left: 15px;
 	vertical-align: middle;
+}
+
+.date_chat, .time_chat
+{
+	display: none;
 }
 
 .zone_chat_user
@@ -323,9 +328,15 @@
 	color: white;
 }
 
-.date_chat, .time_chat
+.time_chat_user
 {
-	display: none;
+	display: inline-block;
+	vertical-align: bottom;
+	width: 30px;
+	margin: 0 5px 2px -35px;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 70%;
+	color: #a3a3a3;
 }
 
 .triangle_chat_user
@@ -376,6 +387,17 @@
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
 	color: white;
+}
+
+.time_chat_other
+{
+	display: inline-block;
+	vertical-align: bottom;
+	width: 30px;
+	margin: 0 -35px 2px 5px;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 70%;
+	color: #a3a3a3;
 }
 
 .triangle_chat_other

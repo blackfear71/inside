@@ -898,7 +898,7 @@ function formatDateForDisplayCsv(date)
 }
 
 // Formate une date pour affichage (version texte)
-function formatDateForDisplayLong(date)
+function formatDateForDisplayChat(date)
 {
   var dateFormatted;
 
@@ -924,6 +924,21 @@ function formatDateForDisplayLong(date)
 
   // Retour
   return dateFormatted;
+}
+
+// Formate une heure pour affichage
+function formatTimeForDisplayChat(time)
+{
+  var timeFormatted;
+
+  // Formatage de l'heure
+  if (time.length == 6 || time.length == 4)
+    timeFormatted = time.substr(0, 2) + ':' + time.substr(2, 2);
+  else
+    timeFormatted = time;
+
+  // Retour
+  return timeFormatted;
 }
 
 // Formate un montant pour affichage
