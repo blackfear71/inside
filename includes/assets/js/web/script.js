@@ -909,7 +909,7 @@ function formatDateForDisplayLong(date)
     var months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
     // Récupération de la date
-    var jour  = date.substr(6, 2) - 1;
+    var jour  = date.substr(6, 2);
     var mois  = date.substr(4, 2) - 1;
     var annee = date.substr(0, 4);
 
