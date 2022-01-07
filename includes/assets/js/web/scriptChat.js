@@ -643,11 +643,7 @@ $(window).on('load', function()
     var firstTime = $('#conversation_chat .time_chat').first().text();
 
     // Récupération des données de repositionnement du scroll
-    var scrollDown   = isScrollbarDown();
-    var buttonHeight = $('.zone_anciens_messages_chat').height();
-
-    // Supression du bouton d'affichage des anciens messages
-    $('.zone_anciens_messages_chat').remove();
+    var scrollDown = isScrollbarDown();
 
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
     $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
@@ -725,11 +721,14 @@ $(window).on('load', function()
       // Adaptation des séparations (dates)
       adaptSeparationDate();
 
+      // Supression du bouton d'affichage des anciens messages
+      $('.zone_anciens_messages_chat').last().remove();
+
       // Conserve la position de la scrollbar lors de l'affichage des anciens messages
       if (scrollDown)
         setScrollbarDown();
       else
-        keepScrollbarPosition(oldHeight, buttonHeight);
+        keepScrollbarPosition(oldHeight);
     });
   }
 
@@ -917,10 +916,10 @@ $(window).on('load', function()
   }
 
   // Conserve la position de la scrollbar à l'affichage d'anciens messages
-  function keepScrollbarPosition(oldHeight, buttonHeight)
+  function keepScrollbarPosition(oldHeight)
   {
     var newHeight = $('#scroll_conversation')[0].scrollHeight;
-    $('#scroll_conversation').scrollTop(newHeight - oldHeight - buttonHeight - 20);
+    $('#scroll_conversation').scrollTop(newHeight - oldHeight);
   }
 
   // Détermine si la scrollabr est en bas

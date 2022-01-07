@@ -337,6 +337,7 @@
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 70%;
 	color: #a3a3a3;
+	text-align: left;
 }
 
 .triangle_chat_user
@@ -398,6 +399,7 @@
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 70%;
 	color: #a3a3a3;
+	text-align: right;
 }
 
 .triangle_chat_other
