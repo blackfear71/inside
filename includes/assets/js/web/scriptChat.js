@@ -8,6 +8,7 @@ $(window).on('load', function()
   var refreshUsers;
   var intervalRefreshChat  = 4000;
   var intervalRefreshUsers = 30000;
+  var maximumCountMessages = 100;
 
   // Initialisation des cookies
   initCookies();
@@ -21,8 +22,8 @@ $(window).on('load', function()
   // On lance le rafraichissement des messages toujours après l'affichage des zones
   if (cookieShowChat == 'true' && cookieWindowChat == '1')
   {
-    // Rafraichissement du chat
-    refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
+    // Lecture initiale des messages
+    initMessagesChat();
 
     // Arrêt du rafraichissement des utilisateurs
     stopTimerRefresh(refreshUsers);
@@ -85,8 +86,8 @@ $(window).on('load', function()
       // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
 
-      // Relance de la mise à jour du chat
-      refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
+      // Lecture initiale des messages
+      initMessagesChat();
     }
   });
 
@@ -107,8 +108,8 @@ $(window).on('load', function()
       // Initialisation de la vue
       initView(cookieShowChat, cookieWindowChat);
 
-      // Relance de la mise à jour du chat
-      refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, true, false);
+      // Lecture initiale des messages
+      initMessagesChat();
     }
   });
 
@@ -131,6 +132,9 @@ $(window).on('load', function()
     refreshUsers = startTimerRefresh(rafraichirUtilisateurs, refreshUsers, intervalRefreshUsers);
   });
 
+  // Affichage des anciens messages
+  $('#fenetres_chat').on('click', '#afficher_anciens_messages', afficherAnciensMessages);
+
   // Envoi de message au clic sur le bouton
   $('#fenetres_chat').on('click', '#send_message_chat', envoyerMessage);
 
@@ -147,6 +151,7 @@ $(window).on('load', function()
         $('.zone_insert_smiley').css('display', 'none');
         $('.triangle_chat_smileys').css('display', 'none');
       }
+
       return false;
     }
   });
@@ -414,50 +419,48 @@ $(window).on('load', function()
     $('#fenetres_chat').html(html);
   }
 
-  // Fonction de rafraichissement du contenu & formatage des messages
-  function rafraichirConversation(scrollUpdate)
+  // Fonction de lecture des derniers messages et du lancement du rafraichissement
+  function initMessagesChat()
   {
-    // Si la scrollbar est déjà en bas on va quand même la remettre en bas en cas d'arrivée de nouveau messages
-    var scrollDown = isScrollbarDown();
+    // Lecture initiale des messages les plus récents
+    lectureInitialeConversation();
 
-    if (scrollDown == true)
-      scrollUpdate = true;
+    // Rafraichissement du chat
+    setTimeout(function()
+    {
+      refreshChat = startTimerRefresh(rafraichirConversation, refreshChat, intervalRefreshChat, false, false);
+    }, intervalRefreshChat);
+  }
 
+  // Fonction de lecture des derniers messages
+  function lectureInitialeConversation()
+  {
     // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
     var equipe = $('#reference_equipe_chat').val();
 
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
     $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
     {
+      // Initialisations
+      var previousDate  = '';
+      var countMessages = 0;
+
+      // Initialisation de la zone d'affichage
       $('#conversation_chat').html('');
 
-      var previousDate = '';
-
-      // Affichage et formatage de tous les messages
-      $(display).find('message').each(function()
+      // Affichage et formatage des messages
+      $($(display).find('message').get().reverse()).each(function()
       {
         var message     = $(this);
         var identifiant = message.find('identifiant').text();
         var text        = changeSmileys(decodeHtml(message.find('text').text()));
         var date        = message.find('date').text();
         var time        = message.find('time').text();
-        var pseudo      = formatUnknownUser('', true, false);
         var html        = '';
-        var avatar;
 
         if (identifiant != '' && text != '')
         {
-          // Affichage de la date si différente de la précédente
-          if (date != previousDate)
-          {
-            html += '<div class="zone_date_chat_user">';
-              html += '<div class="trait_chat_gauche"></div>';
-              html += '<div class="date_chat_user">' + formatDateForDisplayLong(date) + '</div>';
-              html += '<div class="trait_chat_droit"></div>';
-            html += '</div>';
-
-            previousDate = date;
-          }
+          countMessages++;
 
           // Formatage pseudo à partir du tableau php récupéré
           $.each(listeUsersChat, function(key, value)
@@ -471,30 +474,137 @@ $(window).on('load', function()
             }
           });
 
-          // Formatage du message complet
-          var avatarFormatted = formatAvatar(avatar, pseudo, 0, 'avatar');
+          // Affichage de la date pour le message le plus ancien
+          if (countMessages >= maximumCountMessages || message.index() == 0)
+          {
+            // Formatage de la date
+            if (date != '')
+              html += formatDatesChat(date);
+          }
 
-          if (currentUser == identifiant)
-          {
-            html += '<div class="zone_chat_user">';
-              html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_user" />';
-              html += '<div class="triangle_chat_user"></div>';
-              html += '<div class="text_chat_user">' + text + '</div>';
-            html += '</div>';
-          }
-          else
-          {
-            html += '<div class="zone_chat_other">';
-              html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_other" />';
-              html += '<div class="triangle_chat_other"></div>';
-              html += '<div class="text_chat_other">' + text + '</div>';
-            html += '</div>';
-          }
+          // Formatage du message complet
+          html += formatMessagesChat(currentUser, identifiant, text, date, time);
+
+          // Affichage de la date précédente si différente de la date courante
+          if (previousDate != '' && date != previousDate)
+            html += formatDatesChat(previousDate);
+
+          // Sauvegarde de la date courante pour le message suivant
+          previousDate = date;
 
           // Insertion dans la zone
-          $('#conversation_chat').append(html);
+          $('#conversation_chat').prepend(html);
+
+          // Arrêt de la récupération des messages à la limite définie
+          if (countMessages >= maximumCountMessages)
+          {
+            // Bouton d'affichage des anciens messages seulement s'il y en a
+            if (message.index() != 0)
+            {
+              var boutonAnciensMessages = '<div class="zone_anciens_messages_chat"><a id="afficher_anciens_messages" class="anciens_messages_chat">Afficher les anciens messages</a></div>';
+
+              // Insertion dans la zone
+              $('#conversation_chat').prepend(boutonAnciensMessages);
+            }
+
+            return false;
+          }
         }
       });
+
+      // Adaptation des séparations (dates)
+      adaptSeparationDate();
+
+      // On positionne le scroll en bas lorsque la page s'initialise
+      setScrollbarDown();
+    });
+  }
+
+  // Fonction de rafraichissement des nouveaux messages
+  function rafraichirConversation(scrollUpdate)
+  {
+    // Si la scrollbar est déjà en bas on va quand même la remettre en bas en cas d'arrivée de nouveau messages
+    var scrollDown = isScrollbarDown();
+
+    if (scrollDown == true)
+      scrollUpdate = true;
+
+    // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
+    var equipe = $('#reference_equipe_chat').val();
+
+    // Récupération de la date et l'heure du message le plus récent
+    var lastDate = $('#conversation_chat .date_chat').last().text();
+    var lastTime = $('#conversation_chat .time_chat').last().text();
+
+    // Recherche de messages plus récents et affichage
+    $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
+    {
+      // Initialisations
+      var previousDate = '';
+      var newMessages  = '';
+
+      // Affichage et formatage des messages
+      $($(display).find('message').get().reverse()).each(function()
+      {
+        var message     = $(this);
+        var identifiant = message.find('identifiant').text();
+        var text        = changeSmileys(decodeHtml(message.find('text').text()));
+        var date        = message.find('date').text();
+        var time        = message.find('time').text();
+        var html        = '';
+
+        if (date > lastDate || (date == lastDate && time > lastTime))
+        {
+          if (identifiant != '' && text != '')
+          {
+            // Formatage pseudo à partir du tableau php récupéré
+            $.each(listeUsersChat, function(key, value)
+            {
+              if (identifiant == value.identifiant)
+              {
+                pseudo = decodeHtml(value.pseudo);
+                avatar = value.avatar;
+
+                return false;
+              }
+            });
+
+            // Affichage de la date pour le message le plus ancien
+            if (message.index() == 0 && date != '')
+              html += formatDatesChat(date);
+
+            // Formatage du message complet
+            html += formatMessagesChat(currentUser, identifiant, text, date, time);
+
+            // Affichage de la date précédente si différente de la date courante
+            if (previousDate != '' && date != previousDate && date != lastDate)
+              html += formatDatesChat(previousDate);
+
+            // Sauvegarde de la date courante pour le message suivant
+            previousDate = date;
+
+            // Ajout à la variable des nouveaux messages
+            newMessages = html + newMessages;
+          }
+        }
+        else
+        {
+          // Affichage de la date précédente si différente de la date courante
+          if (previousDate != '' && previousDate != lastDate)
+          {
+            // Formatage de la date
+            html += formatDatesChat(previousDate);
+
+            // Ajout à la variable des nouveaux messages
+            newMessages = html + newMessages;
+          }
+
+          return false;
+        }
+      });
+
+      // Insertion dans la zone
+      $('#conversation_chat').append(newMessages);
 
       // Adaptation des séparations (dates)
       adaptSeparationDate();
@@ -503,6 +613,171 @@ $(window).on('load', function()
       if (scrollUpdate == true)
         setScrollbarDown();
     });
+  }
+
+  // Fonction d'affichage des anciens messages
+  function afficherAnciensMessages()
+  {
+    // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
+    var equipe = $('#reference_equipe_chat').val();
+
+    // Récupération de la date et l'heure du message le plus ancien
+    var firstDate = $('#conversation_chat .date_chat').first().text();
+    var firstTime = $('#conversation_chat .time_chat').first().text();
+
+    // Récupération des données de repositionnement du scroll
+    var scrollDown   = isScrollbarDown();
+    var buttonHeight = $('.zone_anciens_messages_chat').height();
+
+    // Supression du bouton d'affichage des anciens messages
+    $('.zone_anciens_messages_chat').remove();
+
+    // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
+    $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
+    {
+      // Initialisations
+      var previousDate     = '';
+      var countMessages    = 0;
+      var firstDateDeleted = false;
+
+      // Récupération de la position initiale du scroll
+      var oldHeight = $('#scroll_conversation')[0].scrollHeight;
+
+      // Affichage et formatage des messages
+      $($(display).find('message').get().reverse()).each(function()
+      {
+        var message     = $(this);
+        var identifiant = message.find('identifiant').text();
+        var text        = changeSmileys(decodeHtml(message.find('text').text()));
+        var date        = message.find('date').text();
+        var time        = message.find('time').text();
+        var html        = '';
+
+        if (date < firstDate || (date == firstDate && time < firstTime))
+        {
+          if (identifiant != '' && text != '')
+          {
+            countMessages++;
+
+            // Suppression de la première date affichée si identique à celle du premier ancien message lu
+            if (firstDateDeleted == false && date == firstDate)
+            {
+              $('.zone_date_chat_user').first().remove();
+              firstDateDeleted = true;
+            }
+
+            // Affichage de la date pour le message le plus ancien
+            if (countMessages >= maximumCountMessages || message.index() == 0)
+            {
+              // Formatage de la date
+              if (date != '')
+                html += formatDatesChat(date);
+            }
+
+            // Formatage du message complet
+            html += formatMessagesChat(currentUser, identifiant, text, date, time);
+
+            // Affichage de la date précédente si différente de la date courante
+            if (previousDate != '' && date != previousDate)
+              html += formatDatesChat(previousDate);
+
+            // Sauvegarde de la date courante pour le message suivant
+            previousDate = date;
+
+            // Insertion dans la zone
+            $('#conversation_chat').prepend(html);
+
+            // Arrêt de la récupération des messages à la limite définie
+            if (countMessages >= maximumCountMessages)
+            {
+              // Bouton d'affichage des anciens messages seulement s'il y en a
+              if (message.index() != 0)
+              {
+                var boutonAnciensMessages = '<div class="zone_anciens_messages_chat"><a id="afficher_anciens_messages" class="anciens_messages_chat">Afficher les anciens messages</a></div>';
+
+                // Insertion dans la zone
+                $('#conversation_chat').prepend(boutonAnciensMessages);
+              }
+
+              return false;
+            }
+          }
+        }
+      });
+
+      // Adaptation des séparations (dates)
+      adaptSeparationDate();
+
+      // Conserve la position de la scrollbar lors de l'affichage des anciens messages
+      if (scrollDown)
+        setScrollbarDown();
+      else
+        keepScrollbarPosition(oldHeight, buttonHeight);
+    });
+  }
+
+  // Fonction commune de formatage des messages
+  function formatMessagesChat(currentUser, identifiant, text, date, time)
+  {
+    // Initialisations
+    var html = '';
+    var avatar;
+
+    // Formatage pseudo à partir du tableau php récupéré
+    var pseudo = formatUnknownUser('', true, false);
+
+    $.each(listeUsersChat, function(key, value)
+    {
+      if (identifiant == value.identifiant)
+      {
+        pseudo = decodeHtml(value.pseudo);
+        avatar = value.avatar;
+
+        return false;
+      }
+    });
+
+    // Formatage de l'avatar
+    var avatarFormatted = formatAvatar(avatar, pseudo, 0, 'avatar');
+
+    // Formatage du message selon l'utilisateur
+    if (currentUser == identifiant)
+    {
+      html += '<div class="zone_chat_user">';
+        html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_user" />';
+        html += '<div class="triangle_chat_user"></div>';
+        html += '<div class="text_chat_user">' + text + '</div>';
+        html += '<div class="date_chat">' + date + '</div>';
+        html += '<div class="time_chat">' + time + '</div>';
+      html += '</div>';
+    }
+    else
+    {
+      html += '<div class="zone_chat_other">';
+        html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_other" />';
+        html += '<div class="triangle_chat_other"></div>';
+        html += '<div class="text_chat_other">' + text + '</div>';
+        html += '<div class="date_chat">' + date + '</div>';
+        html += '<div class="time_chat">' + time + '</div>';
+      html += '</div>';
+    }
+
+    return html;
+  }
+
+  // Fonction commune de formatage des dates
+  function formatDatesChat(dateToFormat)
+  {
+    // Initialisations
+    var html = '';
+
+    html += '<div class="zone_date_chat_user">';
+      html += '<div class="trait_chat_gauche"></div>';
+      html += '<div class="date_chat_user">' + formatDateForDisplayLong(dateToFormat) + '</div>';
+      html += '<div class="trait_chat_droit"></div>';
+    html += '</div>';
+
+    return html;
   }
 
   // Fonction de rafraichissement des utilisateurs
@@ -622,10 +897,17 @@ $(window).on('load', function()
     $('#scroll_conversation').scrollTop(height);
   }
 
+  // Conserve la position de la scrollbar à l'affichage d'anciens messages
+  function keepScrollbarPosition(oldHeight, buttonHeight)
+  {
+    var newHeight = $('#scroll_conversation')[0].scrollHeight;
+    $('#scroll_conversation').scrollTop(newHeight - oldHeight - buttonHeight - 20);
+  }
+
   // Détermine si la scrollabr est en bas
   function isScrollbarDown()
   {
-    var isScrollBottom = $('#scroll_conversation').scrollTop() + $('#scroll_conversation').innerHeight() >= $('#scroll_conversation')[0].scrollHeight;
+    var isScrollBottom = $('#scroll_conversation').scrollTop() + Math.ceil($('#scroll_conversation').innerHeight()) >= $('#scroll_conversation')[0].scrollHeight;
 
     return isScrollBottom;
   }

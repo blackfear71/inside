@@ -229,6 +229,30 @@
 }
 
 /*** Contenu chat ***/
+.zone_anciens_messages_chat
+{
+	display: block;
+	clear: both;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+
+.anciens_messages_chat
+{
+	padding: 5px 10px 5px 10px;
+	border-radius: 50px;
+	background-color: #d3d3d3;
+	font-family: inside_font_regular, Verdana, sans-serif;
+	color: white;
+	cursor: pointer;
+}
+
+.anciens_messages_chat:hover
+{
+	background-color: #b3b3b3;
+}
+
 .zone_date_chat_user
 {
 	display: block;
@@ -297,6 +321,11 @@
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
 	color: white;
+}
+
+.date_chat, .time_chat
+{
+	display: none;
 }
 
 .triangle_chat_user
