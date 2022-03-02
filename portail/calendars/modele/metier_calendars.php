@@ -526,7 +526,7 @@
     // Récupération du nom de l'image
     $search   = array('.jpg', '.jpeg', '.gif', '.bmp', '.png');
     $replace  = array('', '', '', '', '');
-    $nomImage = str_replace($search, $replace, $nom);
+    $nomImage = str_replace($search, $replace, strtolower($nom));
 
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['picture_calendar'], $nomImage, 'all');
@@ -688,7 +688,7 @@
     // Récupération du nom de l'image
     $search   = array('.jpg', '.jpeg', '.gif', '.bmp', '.png');
     $replace  = array('', '', '', '', '');
-    $nomImage = str_replace($search, $replace, $nom);
+    $nomImage = str_replace($search, $replace, strtolower($nom));
 
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['picture_annexe'], $nomImage, 'all');
