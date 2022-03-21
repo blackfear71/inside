@@ -52,7 +52,7 @@
   if (isset($datepickerHead) AND $datepickerHead == true)
     echo '<link rel="stylesheet" href="/inside/includes/libraries/css/datepicker.css?version=' . $dateModificationCssDatepicker . '">';
 
-  // Title
+  // Titre
   if (!empty($titleHead))
     echo '<title>Inside - ' . $titleHead . '</title>';
   else
