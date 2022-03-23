@@ -6,7 +6,7 @@
   - Affichage des erreurs serveur
   ******************************/
 
-  // Fonction communes
+  // Fonctions communes
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/metier_commun.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/physique_commun.php');
 

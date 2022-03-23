@@ -1,5 +1,5 @@
 <?php
-  // Fonction communes
+  // Fonctions communes
   include_once('fonctions_dates.php');
 
   // Modèle de données

@@ -1,12 +1,12 @@
 <?php
-  /*******************************
-  *** Gestion des utilisateurs ***
-  ********************************
+  /***************************
+  **** Générateur de code ****
+  ****************************
   Fonctionnalités :
   - Génération nouvelle page
-  *******************************/
+  ***************************/
 
-  // Fonction communes
+  // Fonctions communes
   include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/physique_commun.php');
 
@@ -94,7 +94,7 @@
   {
     case 'doDownload':
       break;
-      
+
     case 'generateCode':
       header('location: codegenerator.php?action=goConsulter');
       break;
