@@ -89,7 +89,7 @@
         $identifiant = htmlspecialchars(strtoupper($dataConnect['login']));
     }
 
-    // Lectures des données de l'utilisateur
+    // Lecture des données de l'utilisateur
     $user = physiqueUser($identifiant);
 
     // Contrôle utilisateur existant

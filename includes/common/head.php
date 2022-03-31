@@ -18,10 +18,10 @@
   if (isset($datepickerHead) AND $datepickerHead == true)
     $dateModificationCssDatepicker = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/css/datepicker.css');
 
-  $dateModificationJs  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
+  $dateModificationJs = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/script.js');
 
   if (!empty($scriptHead))
-    $dateModificationJsSection  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $scriptHead);
+    $dateModificationJsSection = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/' . $scriptHead);
 
   // Meta-données
   echo '<meta charset="utf-8" />';

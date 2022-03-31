@@ -118,7 +118,7 @@
     $plateforme = 'web';
 
     // Récupération des données
-    $userAgent  = $_SERVER['HTTP_USER_AGENT'];
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
     // Recherche si plateforme mobile
     if (preg_match('/iphone/i', $userAgent)
