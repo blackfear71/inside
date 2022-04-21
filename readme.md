@@ -1,9 +1,9 @@
-![INSIDE](http://inside.ddns.net/inside/includes/icons/common/inside_readme.png)
+![INSIDE](https://inside.ddns.net/inside/includes/icons/common/inside_readme.png)
 
 # INSIDE - Plateforme de partage créée par les membres pour les membres.
 
 ## Lien
-Site accessible depuis le lien suivant : [INSIDE](http://inside.ddns.net/inside/index.php?action=goConsulter)
+Site accessible depuis le lien suivant : [INSIDE](https://inside.ddns.net/inside/index.php?action=goConsulter)
 
 ## Fonctionnalités
 - PORTAIL : liens vers les sections et news

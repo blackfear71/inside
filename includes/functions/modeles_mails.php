@@ -196,7 +196,7 @@
           $modele .= '<div class="zone_bandeau_mail">';
             // Logo et lien
             $modele .= '<div class="zone_bandeau_mail_left">';
-              $modele .= '<a href="http://inside.ddns.net/inside/index.php?action=goConsulter">';
+              $modele .= '<a href="https://inside.ddns.net/inside/index.php?action=goConsulter">';
                 $modele .= '<img src="../../includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
               $modele .= '</a>';
             $modele .= '</div>';
@@ -461,7 +461,7 @@
           $modele .= '<div class="zone_bandeau_mail">';
             // Logo et lien
             $modele .= '<div class="zone_bandeau_mail_left">';
-              $modele .= '<a href="http://inside.ddns.net/inside/index.php?action=goConsulter">';
+              $modele .= '<a href="https://inside.ddns.net/inside/index.php?action=goConsulter">';
                 $modele .= '<img src="../includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
               $modele .= '</a>';
             $modele .= '</div>';

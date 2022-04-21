@@ -219,15 +219,15 @@
                   switch ($exp[0])
                   {
                     case 'youtube':
-                      $html = '<iframe src="http://www.youtube.com/embed/' . $exp[1] . '" allowfullscreen class="video_details_film"></iframe>';
+                      $html = '<iframe src="https://www.youtube.com/embed/' . $exp[1] . '" allowfullscreen class="video_details_film"></iframe>';
                       break;
 
                     case 'vimeo':
-                      $html = '<iframe src="http://player.vimeo.com/video/'.$exp[1].'" allowFullScreen class="video_details_film"></iframe>';
+                      $html = '<iframe src="https://player.vimeo.com/video/'.$exp[1].'" allowFullScreen class="video_details_film"></iframe>';
                       break;
 
                     case 'dailymotion':
-                      $html = '<iframe src="http://www.dailymotion.com/embed/video/'.$exp[1].'" allowfullscreen class="video_details_film"></iframe>';
+                      $html = '<iframe src="https://www.dailymotion.com/embed/video/'.$exp[1].'" allowfullscreen class="video_details_film"></iframe>';
                       break;
 
                     default:

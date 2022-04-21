@@ -15,7 +15,7 @@
         echo '<div class="contenu_saisie">';
           // Liens utiles
           echo '<div class="zone_liens_saisie_film">';
-            echo '<a href="http://www.allocine.fr/" target="_blank" class="lien_saisie_film lien_allocine">ALLOCINÉ</a>';
+            echo '<a href="https://www.allocine.fr/" target="_blank" class="lien_saisie_film lien_allocine">ALLOCINÉ</a>';
             echo '<a href="https://www.youtube.com/" target="_blank" class="lien_saisie_film lien_youtube">YouTube</a>';
             echo '<a href="https://www.dailymotion.com/fr" target="_blank" class="lien_saisie_film lien_dailymotion">dailymotion</a>';
             echo '<a href="https://vimeo.com/fr/watch" target="_blank" class="lien_saisie_film lien_vimeo">vimeo</a>';

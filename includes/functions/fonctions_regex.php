@@ -7,15 +7,15 @@
 		$url = '';
 
 		// DAILYMOTION
-		preg_match('#&lt;object[^&gt;]+&gt;.+?http://www.dailymotion.com/swf/video/([A-Za-z0-9]+).+?&lt;/object&gt;#s', $adress, $matches);
+		preg_match('#&lt;object[^&gt;]+&gt;.+?https://www.dailymotion.com/swf/video/([A-Za-z0-9]+).+?&lt;/object&gt;#s', $adress, $matches);
 
 		if (!isset($matches[1]))
 		{
-			preg_match('#http://www.dailymotion.com/video/([A-Za-z0-9]+)#s', $adress, $matches);
+			preg_match('#https://www.dailymotion.com/video/([A-Za-z0-9]+)#s', $adress, $matches);
 
 			if (!isset($matches[1]))
 			{
-				preg_match('#http://www.dailymotion.com/embed/video/([A-Za-z0-9]+)#s', $adress, $matches);
+				preg_match('#https://www.dailymotion.com/embed/video/([A-Za-z0-9]+)#s', $adress, $matches);
 
 				if (!isset($matches[1]))
 					$url = '';
