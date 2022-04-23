@@ -71,17 +71,28 @@
           /********************/
           /* Boutons d'action */
           /********************/
-          // Saisie recette
-          echo '<a id="afficherSaisieRecette" title="Ajouter un gâteau ou une recette" class="lien_green lien_demi margin_lien">';
-            echo '<img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="image_lien" />';
-            echo '<div class="titre_lien">GÂTEAU / RECETTE</div>';
-          echo '</a>';
+          if (!empty($listeSemaines))
+          {
+            // Saisie recette
+            echo '<a id="afficherSaisieRecette" title="Ajouter un gâteau ou une recette" class="lien_green lien_demi margin_lien">';
+              echo '<img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="image_lien" />';
+              echo '<div class="titre_lien">GÂTEAU / RECETTE</div>';
+            echo '</a>';
 
-          // Années
-          echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red lien_demi">';
-            echo '<img src="../../includes/icons/cookingbox/recent_grey.png" alt="recent_grey" class="image_lien" />';
-            echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
-          echo '</a>';
+            // Années
+            echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red lien_demi">';
+              echo '<img src="../../includes/icons/cookingbox/recent_grey.png" alt="recent_grey" class="image_lien" />';
+              echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+            echo '</a>';
+          }
+          else
+          {
+            // Années
+            echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red">';
+              echo '<img src="../../includes/icons/cookingbox/recent_grey.png" alt="recent_grey" class="image_lien" />';
+              echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+            echo '</a>';
+          }
 
           /************/
           /* Semaines */

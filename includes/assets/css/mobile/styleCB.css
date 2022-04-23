@@ -474,16 +474,19 @@
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	padding: 1vh;
+	text-align: left;
 }
 
 .titre_details_recette
 {
 	display: block;
 	width: 100%;
+	margin-bottom: 2vh;
 	font-family: inside_font_light_italic, Verdana, sans-serif;
 	font-weight: bold;
 	color: #262626;
 	font-size: 3vh;
+	text-align: center;
 }
 
 .ingredient_details_recette
