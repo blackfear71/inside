@@ -252,8 +252,17 @@ function adaptRecipes()
 // Affiche une liste des utilisateurs
 function afficherListboxUtilisateurs(idZone, week)
 {
-  var html = '';
+  // Récupération des données de la semaine
+  var semaine;
 
+  if (idZone == 'zone_current_week')
+    semaine = currentWeek;
+  else
+    semaine = nextWeek;
+
+  // Formulaire
+  var html = '';
+  
   if (idZone == 'zone_current_week')
     html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifier">';
   else
@@ -267,7 +276,10 @@ function afficherListboxUtilisateurs(idZone, week)
 
       $.each(listCookers, function(key, value)
       {
-        html += '<option value="' + key + '">' + value['pseudo'] + '</option>';
+        if (key == semaine['identifiant'])
+          html += '<option value="' + key + '" selected>' + value['pseudo'] + '</option>';
+        else
+          html += '<option value="' + key + '">' + value['pseudo'] + '</option>';
       });
     html += '</select>';
 

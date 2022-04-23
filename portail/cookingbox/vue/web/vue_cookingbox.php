@@ -99,6 +99,10 @@
 
     <!-- Données JSON -->
     <script>
+      // Récupération des semaines pour le script
+      var currentWeek = <?php if (isset($currentWeekJson) AND !empty($currentWeekJson)) echo $currentWeekJson; else echo '{}'; ?>;
+      var nextWeek    = <?php if (isset($nextWeekJson) AND !empty($nextWeekJson)) echo $nextWeekJson; else echo '{}'; ?>;
+
       // Récupération de la liste des semaines par années pour le script
       var listWeeks = <?php if (isset($listeSemainesJson) AND !empty($listeSemainesJson)) echo $listeSemainesJson; else echo '{}'; ?>;
 
