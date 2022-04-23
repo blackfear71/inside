@@ -27,6 +27,22 @@
         ou la proie, on se retrouve toujours tous ici...';
         break;
 
+
+
+
+
+
+
+      case 'cookingbox':
+        $contenuCelsius = 'TODO à compléter';
+        break;
+
+
+
+
+
+        
+
       case 'expensecenter':
         $contenuCelsius = 'Tu peux saisir ici une dépense en commun ou bien une dépense en montants pour répartir par exemple une commande sur chacun en fonction de ce qu\'il a pris.
         Ça peut même tenir compte des frais de livraison ! Trop bien !';

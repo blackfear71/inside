@@ -53,7 +53,7 @@
                                    'title'     => 'Cooking Box',
                                    'image'     => '../../includes/icons/common/cooking_box.png',
                                    'alt'       => 'cooking_box',
-                                   'mobile'    => 'N'),
+                                   'mobile'    => 'Y'),
                              array('categorie' => 'EXPENSE<br />CENTER',
                                    'lien'      => '../expensecenter/expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter',
                                    'title'     => 'Expense Center',

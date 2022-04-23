@@ -5,23 +5,22 @@
 /*** Informations ***/
 .zone_infos_profil
 {
-  display: block;
-  margin-bottom: 2vh;
+	display: block;
+	margin-bottom: 2vh;
 }
 
 .zone_profil_avatar
 {
 	display: block;
-	vertical-align: middle;
-  width: 25vh;
-  height: 25vh;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  border-radius: 50%;
-  background-color: #262626;
-  margin-bottom: 2vh;
-  overflow: hidden;
+	width: 25vh;
+	height: 25vh;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	border-radius: 50%;
+	background-color: #262626;
+	margin-bottom: 2vh;
+	overflow: hidden;
 }
 
 .avatar_profil
@@ -31,35 +30,35 @@
 
 .zone_texte_infos
 {
-  display: block;
-  background-color: #e3e3e3;
-  border-radius: 0.5vh;
-  padding: 2vh 2vh 0 2vh;
+	display: block;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	padding: 2vh 2vh 0 2vh;
 }
 
 .zone_info
 {
-  display: block;
-  padding-bottom: 2vh;
+	display: block;
+	padding-bottom: 2vh;
 }
 
 .logo_profil
 {
-  display: inline-block;
-  width: 5vh;
-  vertical-align: middle;
-  margin-right: 1vh;
+	display: inline-block;
+	width: 5vh;
+	vertical-align: middle;
+	margin-right: 1vh;
 }
 
 .texte_profil
 {
-  display: inline-block;
-  width: calc(100% - 6vh);
-  vertical-align: middle;
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: #262626;
-  font-size: 3vh;
-  word-wrap: break-word;
+	display: inline-block;
+	width: calc(100% - 6vh);
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	word-wrap: break-word;
 }
 
 .fond_experience_profil
@@ -70,8 +69,8 @@
 	height: 1vh;
 	width: calc(100% - 19vh);
 	border-radius: 2vh;
-  margin-right: 1vh;
-  overflow: hidden;
+	margin-right: 1vh;
+	overflow: hidden;
 }
 
 .experience_profil
@@ -84,17 +83,17 @@
 
 .valeur_experience_profil
 {
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #ff1937;
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: white;
-  font-size: 2.5vh;
-  width: 12vh;
-  height: 5vh;
-  line-height: 5vh;
-  text-align: center;
-  border-radius: 0.5vh;
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #ff1937;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	font-size: 2.5vh;
+	width: 12vh;
+	height: 5vh;
+	line-height: 5vh;
+	text-align: center;
+	border-radius: 0.5vh;
 }
 
 /*** Commun ***/
@@ -103,9 +102,9 @@
 	width: 100%;
 	text-align: center;
 	background-color: white;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  margin-bottom: 2vh;
-  padding-bottom: 2vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	margin-bottom: 2vh;
+	padding-bottom: 2vh;
 	border-radius: 0.5vh;
 }
 
@@ -118,7 +117,7 @@
 
 .logo_titre_contribution, .logo_titre_preference
 {
-  display: inline-block;
+	display: inline-block;
 	height: 4vh;
 	vertical-align: middle;
 	margin-right: 1vh;
@@ -126,33 +125,33 @@
 
 .texte_titre_contribution, .texte_titre_preference
 {
-  display: inline-block;
-  vertical-align: middle;
-  font-family: inside_font_thin, Verdana, sans-serif;
-  color: #262626;
-  font-size: 3.5vh;
-  font-weight: bold;
-  line-height: 4vh;
+	display: inline-block;
+	vertical-align: middle;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3.5vh;
+	font-weight: bold;
+	line-height: 4vh;
 }
 
 /*** Contributions ***/
 .zone_contributions_profil
 {
-  display: block;
-  margin-bottom: -1.5vh;
+	display: block;
+	margin-bottom: -1.5vh;
 }
 
 .zone_contribution
 {
 	display: inline-block;
-  width: calc(50% - 0.1vh);
+	width: calc(50% - 0.1vh);
 	text-align: center;
 	vertical-align: top;
 }
 
 .border_left
 {
-  border-left: solid 0.2vh #b3b3b3;
+	border-left: solid 0.2vh #b3b3b3;
 }
 
 .large
@@ -165,7 +164,7 @@
 	display: block;
 	font-family: inside_font_thin, Verdana, sans-serif;
 	color: #262626;
-  font-size: 10vh;
+	font-size: 10vh;
 	line-height: 10vh;
 }
 
@@ -174,57 +173,56 @@
 	display: block;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
-  font-size: 2.5vh;
+	font-size: 2.5vh;
 }
 
 /*** Paramètres ***/
 .zone_settings_profil
 {
-  display: block;
-  margin-bottom: 2vh;
+	display: block;
+	margin-bottom: 2vh;
 }
 
 .zone_avatar_parametres
 {
-  display: inline-block;
-  vertical-align: top;
-  border-right: solid 0.2vh #b3b3b3;
-  width: calc(50% - 2.1vh);
-  padding-right: 2vh;
+	display: inline-block;
+	vertical-align: top;
+	border-right: solid 0.2vh #b3b3b3;
+	width: calc(50% - 2.1vh);
+	padding-right: 2vh;
 }
 
 .zone_parametres_avatar
 {
 	display: block;
-	vertical-align: middle;
-  width: 20vh;
-  height: 20vh;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  border-radius: 50%;
-  background-color: #262626;
-  margin-bottom: 2vh;
-  overflow: hidden;
+	width: 20vh;
+	height: 20vh;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	border-radius: 50%;
+	background-color: #262626;
+	margin-bottom: 2vh;
+	overflow: hidden;
 }
 
 .avatar_parametres
 {
-  width: 100%;
+	width: 100%;
 }
 
 .form_update_avatar
 {
-  display: inline-block;
-  vertical-align: top;
-  width: calc(50% - 2.1vh);
-  padding-left: 2vh;
+	display: inline-block;
+	vertical-align: top;
+	width: calc(50% - 2.1vh);
+	padding-left: 2vh;
 }
 
 .zone_saisie_image
 {
 	width: 20vh;
-  height: 20vh;
+	height: 20vh;
 	line-height: 19vh;
 	margin-bottom: 2vh;
 	margin-left: auto;
@@ -286,16 +284,16 @@
 {
 	display: block;
 	width: 100%;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 3vh;
+	font-size: 3vh;
 	color: #262626;
 	text-align: center;
 	border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .bouton_validation_image:active
@@ -306,14 +304,14 @@
 
 .form_update_infos
 {
-  display: block;
-  margin-top: 2vh;
+	display: block;
+	margin-top: 2vh;
 }
 
 .zone_saisie_information
 {
-  display: block;
-  margin-bottom: 2vh;
+	display: block;
+	margin-bottom: 2vh;
 }
 
 .logo_information
@@ -327,35 +325,35 @@
 
 .saisie_information
 {
-  display: inline-block;
-  vertical-align: middle;
-  width: calc(100% - 10vh);
-  padding: 1.2vh 1.5vh 1.2vh 1.5vh;
-  background-color: white;
-  border-radius: 0.5vh;
-  border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 2.5vh;
-  color: #262626;
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 10vh);
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
 }
 
 .bouton_validation_form
 {
 	display: block;
 	width: 100%;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 3vh;
+	font-size: 3vh;
 	color: #262626;
 	text-align: center;
 	border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .bouton_validation_form:active
@@ -367,13 +365,13 @@
 /*** Préférences ***/
 .zone_preferences_profil
 {
-  display: block;
-  margin-bottom: 2vh;
+	display: block;
+	margin-bottom: 2vh;
 }
 
 .preference_margin
 {
-  margin-bottom: -1.5vh;
+	margin-bottom: -1.5vh;
 }
 
 .zone_preferences
@@ -381,28 +379,27 @@
 	width: 100%;
 	text-align: center;
 	background-color: white;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  margin-bottom: 2vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	margin-bottom: 2vh;
 	border-radius: 0.5vh;
 }
 
 .sous_titre_preference
 {
-  background-color: #e3e3e3;
+	background-color: #e3e3e3;
 	width: 100%;
 	padding-top: 1vh;
 	padding-bottom: 1vh;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
-  font-size: 2.5vh;
+	font-size: 2.5vh;
 }
 
 .zone_preference
 {
 	display: block;
 	text-align: center;
-	vertical-align: top;
-  padding-bottom: 2vh;
+	padding-bottom: 2vh;
 }
 
 .switch_preference
@@ -414,7 +411,7 @@
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
-  font-size: 2.5vh;
+	font-size: 2.5vh;
 	background-color: #e3e3e3;
 }
 
@@ -427,7 +424,7 @@
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
-  font-size: 2.5vh;
+	font-size: 2.5vh;
 	background-color: #e3e3e3;
 }
 
@@ -440,7 +437,7 @@
 	margin-left: -6vh;
 	word-break: break-word;
 	hyphens: auto;
-  text-align: left;
+	text-align: left;
 }
 
 .bouton_checked
@@ -469,25 +466,25 @@
 /*** Utilisateur ***/
 .form_update_user
 {
-  display: block;
-  padding-bottom: 2vh;
+	display: block;
+	padding-bottom: 2vh;
 }
 
 .saisie_information_2
 {
-  display: block;
-  width: calc(100% - 7vh);
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2vh;
-  padding: 1.2vh 1.5vh 1.2vh 1.5vh;
-  background-color: white;
-  border-radius: 0.5vh;
-  border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 2.5vh;
-  color: #262626;
+	display: block;
+	width: calc(100% - 7vh);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2vh;
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
 }
 
 .select_form_update_team
@@ -498,12 +495,12 @@
 	margin-right: auto;
 	margin-bottom: 2vh;
 	padding: 1.2vh 1vh 1.2vh 1vh;
-  background-color: white;
-  border-radius: 0.5vh;
-  border: 0;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
 	box-shadow: 0 0 0.5vh #7c7c7c;
 	font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 2.5vh;
+	font-size: 2.5vh;
 	color: #262626;
 }
 
@@ -511,36 +508,36 @@
 {
 	display: block;
 	width: calc(100% - 4vh);
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 3vh;
+	font-size: 3vh;
 	color: #262626;
 	text-align: center;
 	border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .message_form_preferences
 {
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: #262626;
-  font-size: 2.5vh;
-  width: calc(100% - 4vh);
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 2vh;
-  text-align: justify;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	width: calc(100% - 4vh);
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 2vh;
+	text-align: justify;
 }
 
 .message_bold
 {
-  font-weight: bold;
-  text-align: center;
+	font-weight: bold;
+	text-align: center;
 }
 
 /*** Niveaux ***/
@@ -554,7 +551,7 @@
 {
 	text-align: center;
 	background-color: #e3e3e3;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 	margin-bottom: 2vh;
 }
 
@@ -565,7 +562,7 @@
 	border-radius: 0.5vh;
 	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
-  font-size: 3vh;
+	font-size: 3vh;
 	text-align: center;
 	padding-top: 1vh;
 	padding-bottom: 1vh;
@@ -581,7 +578,7 @@
 	background-color: #ff1937;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
-  font-size: 3vh;
+	font-size: 3vh;
 	text-align: center;
 }
 
@@ -591,7 +588,7 @@
 	text-align: center;
 	width: 15vh;
 	vertical-align: top;
-  margin: 0 1vh 1vh 1vh;
+	margin: 0 1vh 1vh 1vh;
 }
 
 .avatar_niveau
@@ -599,7 +596,7 @@
 	width: 8vh;
 	border-radius: 50%;
 	background-color: #262626;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .pseudo_niveau
@@ -607,7 +604,7 @@
 	display: block;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
-  font-size: 2vh;
+	font-size: 2vh;
 	word-break: break-word;
 }
 
@@ -615,7 +612,7 @@
 .zone_succes_profil
 {
 	width: 100%;
-  margin-bottom: -1vh;
+	margin-bottom: -1vh;
 }
 
 .zone_niveau_succes
@@ -626,26 +623,26 @@
 .number_level
 {
 	display: inline-block;
-  height: 4vh;
+	height: 4vh;
 	width: 4vh;
 	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
-  font-size: 2vh;
+	font-size: 2vh;
 	text-align: center;
 	margin-left: -5vh;
-  margin-right: 1vh;
-  vertical-align: middle;
+	margin-right: 1vh;
+	vertical-align: middle;
 }
 
 .succes_liste
 {
-  display: block;
-  width: 100%;
-  height: 8vh;
-  margin-bottom: 1.5vh;
-  border-radius: 0.5vh;
-  overflow: hidden;
-  background-color: #e3e3e3;
+	display: block;
+	width: 100%;
+	height: 8vh;
+	margin-bottom: 1.5vh;
+	border-radius: 0.5vh;
+	overflow: hidden;
+	background-color: #e3e3e3;
 }
 
 .succes_liste_yellow
@@ -655,7 +652,7 @@
 
 .succes_unlocked
 {
-  display: inline-block;
+	display: inline-block;
 	vertical-align: middle;
 	width: 6vh;
 	height: 6vh;
@@ -665,12 +662,12 @@
 
 .succes_locked
 {
-  display: inline-block;
-  vertical-align: middle;
-  width: 6vh;
-  height: 6vh;
-  padding: 1vh;
-  background-color: #d3d3d3;
+	display: inline-block;
+	vertical-align: middle;
+	width: 6vh;
+	height: 6vh;
+	padding: 1vh;
+	background-color: #d3d3d3;
 }
 
 .logo_succes_unlocked
@@ -686,37 +683,37 @@
 
 .zone_titre_succes
 {
-  display: inline-block;
-  vertical-align: middle;
-  width: calc(100% - 16vh);
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 16vh);
 }
 
 .zone_titre_full
 {
-  width: calc(100% - 8vh);
+	width: calc(100% - 8vh);
 }
 
 .titre_succes
 {
-  display: block;
-  height: 4vh;
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: #262626;
-  font-size: 2.5vh;
-  padding-left: 1vh;
-  padding-right: 1vh;
-  word-break: break-word;
+	display: block;
+	height: 4vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	word-break: break-word;
 }
 
 .titre_full
 {
-  line-height: 4vh;
+	line-height: 4vh;
 }
 
 .medaille_succes
 {
-  width: 100%;
-  filter: drop-shadow(0 0 0.3vh #7c7c7c);
+	width: 100%;
+	filter: drop-shadow(0 0 0.3vh #7c7c7c);
 }
 
 .fond_progression_succes
@@ -725,9 +722,9 @@
 	background-color: white;
 	height: 1vh;
 	width: calc(100% - 2vh);
-  margin-left: 1vh;
+	margin-left: 1vh;
 	border-radius: 2vh;
-  margin-top: 0.5vh;
+	margin-top: 0.5vh;
 }
 
 .progression_succes
@@ -741,31 +738,31 @@
 /*** Classement ***/
 .zone_classement_zoom
 {
-  display: block;
-  width: 100%;
-  border-radius: 0.5vh;
-  overflow: hidden;
-  margin-bottom: 2vh;
+	display: block;
+	width: 100%;
+	border-radius: 0.5vh;
+	overflow: hidden;
+	margin-bottom: 2vh;
 }
 
 .titre_classement_zoom
 {
-  display: block;
-  width: 100%;
-  background-color: #d3d3d3;
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: #262626;
-  font-size: 3vh;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+	display: block;
+	width: 100%;
+	background-color: #d3d3d3;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 }
 
 .zone_classement_users_zoom
 {
-  display: block;
-  width: calc(100% - 4vh);
-  background-color: white;
-  padding: 2vh 2vh 0 2vh;
+	display: block;
+	width: calc(100% - 4vh);
+	background-color: white;
+	padding: 2vh 2vh 0 2vh;
 }
 
 .medaille_classement_zoom
@@ -774,7 +771,7 @@
 	width: 5vh;
 	height: 5vh;
 	vertical-align: top;
-  filter: drop-shadow(0 0 0.2vh #5c5c5c);
+	filter: drop-shadow(0 0 0.2vh #5c5c5c);
 }
 
 .zone_classement_medaille_zoom
@@ -786,31 +783,31 @@
 .avatar_classement_zoom
 {
 	display: inline-block;
-  width: 5vh;
+	width: 5vh;
 	height: 5vh;
 	vertical-align: middle;
-  margin-left: 1vh;
+	margin-left: 1vh;
 	margin-right: 1vh;
 	margin-bottom: 2vh;
 	border-radius: 50%;
 	background-color: #262626;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .separation_classement_zoom
 {
-  display: block;
-  margin-bottom: 2vh;
-  width: 100%;
-  height: 0.2vh;
-  background-color: #d3d3d3;
+	display: block;
+	margin-bottom: 2vh;
+	width: 100%;
+	height: 0.2vh;
+	background-color: #d3d3d3;
 }
 
 /*** Polices ***/
 .zone_preferences_police
 {
 	width: 100%;
-  margin-bottom: -3vh;
+	margin-bottom: -3vh;
 }
 
 .form_update_police
@@ -818,42 +815,42 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
-  margin-bottom: 2vh;
+	margin-bottom: 2vh;
 }
 
 .select_update_police
 {
-  display: block;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2vh;
-  padding: 1.2vh 1vh 1.2vh 1vh;
-  background-color: white;
-  border-radius: 0.5vh;
-  border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 2.5vh;
-  color: #262626;
+	display: block;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2vh;
+	padding: 1.2vh 1vh 1.2vh 1vh;
+	background-color: white;
+	border-radius: 0.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
 }
 
 .bouton_form_police
 {
-  display: block;
+	display: block;
 	width: 100%;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 3vh;
+	font-size: 3vh;
 	color: #262626;
 	text-align: center;
 	border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .bouton_form_police:active
@@ -865,16 +862,15 @@
 #exemple_police
 {
 	display: block;
-	vertical-align: top;
-  margin-top: 1.5vh;
-  margin-bottom: -2vh;
+	margin-top: 1.5vh;
+	margin-bottom: -2vh;
 	width: 100%;
-  color: #262626;
+	color: #262626;
 }
 
 #exemple_police p:first-child
 {
-  font-size: 3vh;
+	font-size: 3vh;
 }
 
 #exemple_police p
@@ -882,5 +878,5 @@
 	margin: 0;
 	margin-bottom: 3vh;
 	text-align: justify;
-  font-size: 2.5vh;
+	font-size: 2.5vh;
 }

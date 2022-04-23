@@ -143,6 +143,8 @@
       }
 
       // Conversion JSON
+      $currentWeekJson   = json_encode(convertForJsonWeek($currentWeek));
+      $nextWeekJson      = json_encode(convertForJsonWeek($nextWeek));
       $listeSemainesJson = json_encode($listeSemaines);
       $listeCookersJson  = json_encode(convertForJsonListeCookers($listeCookers, $_SESSION['user']['equipe']));
       $recettesJson      = json_encode(convertForJsonListeRecettes($recettes));
@@ -175,7 +177,7 @@
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_cookingbox.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_cookingbox.php');
       break;
   }
 ?>

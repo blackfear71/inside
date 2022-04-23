@@ -385,6 +385,18 @@ aside
 	margin-bottom: 2vh;
 }
 
+.sous_titre_section
+{
+	display: block;
+	width: 100%;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	margin-top: 2vh;
+	font-family: inside_font_thin_italic, Verdana, sans-serif;
+	font-size: 2.5vh;
+	font-weight: bold;
+}
+
 .logo_titre_section
 {
 	display: inline-block;
@@ -715,6 +727,24 @@ aside
 	font-size: 2.5vh;
 }
 
+.lien_saisie_form
+{
+	display: block;
+	width: 100%;
+	padding: 1vh;
+	margin-top: 1.5vh;
+	margin-bottom: 2vh;
+	border: 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	text-align: center;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	text-decoration: none;
+	background-color: #e3e3e3;
+}
+
 .lien_saisie
 {
 	display: block;
@@ -722,6 +752,7 @@ aside
 	padding: 1vh;
 	margin-top: 1.5vh;
 	margin-bottom: 2vh;
+	border: 0;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 3vh;
@@ -738,7 +769,7 @@ aside
 	color: white;
 }
 
-.lien_saisie:active
+.lien_saisie:active, .lien_saisie_form:active
 {
 	background-color: #ff1937;
 	color: white;
@@ -887,7 +918,6 @@ aside
 .zone_succes_zoom
 {
 	display: block;
-	vertical-align: top;
 	width: 100%;
 	margin-top: 2vh;
 }
@@ -1099,7 +1129,6 @@ footer
 .icone_footer
 {
 	display: block;
-	vertical-align: middle;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 1.5vh;

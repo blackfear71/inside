@@ -15,7 +15,6 @@
 .saisie_objet
 {
   display: block;
-  vertical-align: middle;
   width: calc(100% - 3vh);
   margin-bottom: 2vh;
   padding: 1.2vh 1.5vh 1.2vh 1.5vh;

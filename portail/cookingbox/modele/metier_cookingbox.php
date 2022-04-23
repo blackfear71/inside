@@ -37,6 +37,9 @@
     $user = physiqueUser($semaineGateau->getIdentifiant());
 
     // Ajout des données complémentaires à la semaine
+    $semaineGateau->setWeek($week);
+    $semaineGateau->setYear($year);
+
     if (!empty($user))
     {
       $semaineGateau->setPseudo($user->getPseudo());
@@ -56,6 +59,21 @@
 
     // Retour
     return $listeUsers;
+  }
+
+  // METIER : Conversion de l'objet WeekCake en tableau simple pour JSON
+  // RETOUR : Tableau
+  function convertForJsonWeek($semaine)
+  {
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    $semaineAConvertir['identifiant'] = $semaine->getIdentifiant();
+    $semaineAConvertir['pseudo']      = $semaine->getPseudo();
+    $semaineAConvertir['week']        = $semaine->getWeek();
+    $semaineAConvertir['year']        = $semaine->getYear();
+    $semaineAConvertir['cooked']      = $semaine->getCooked();
+
+    // Retour
+    return $semaineAConvertir;
   }
 
   // METIER : Filtrage et conversion de la liste d'objets des utilisateurs de l'équipe en tableau simple pour JSON

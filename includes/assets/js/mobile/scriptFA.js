@@ -990,19 +990,23 @@ function changeCheckedDay(idCheckbox, idLabel, classChecked, classNoCheck)
 }
 
 // Génère une nouvelle zone pour saisir un type
-function addOtherType(id)
+function addOtherType(idParent)
 {
-  var html       = '';
-  var length     = $('#' + id + ' input').length;
-  var new_length = length + 1;
-  var idType     = id + '_' + new_length;
+  var html   = '';
+  var length = $('#' + idParent + ' input').length;
+  var idType = idParent + '_' + length;
 
-  if (new_length % 2 == 0)
-    html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + new_length + ']" class="type_other type_other_margin saisieType" />';
+  if (length % 2 == 0)
+    html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + idParent + '[' + length + ']" class="type_other type_other_margin saisieType" />';
   else
-    html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + new_length + ']" class="type_other saisieType" />';
+    html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + idParent + '[' + length + ']" class="type_other saisieType" />';
 
-  $('#' + id).append(html);
+  if ($('.addType').hasClass('switch_types_margin'))
+    $('.addType').removeClass('switch_types_margin');
+  else
+    $('.addType').addClass('switch_types_margin');
+
+  $('.addType').before(html);
 }
 
 // Change la couleur des checkbox (saisie restaurant)

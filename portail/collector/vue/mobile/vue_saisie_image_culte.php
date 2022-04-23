@@ -51,7 +51,6 @@
 
           // Saisie image
           echo '<div class="zone_image_saisie">';
-            // Saisie image
             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
             echo '<div class="zone_parcourir_image">';

@@ -897,7 +897,6 @@
 .saisie_nom_restaurant, .saisie_lieu_autre_restaurant
 {
 	display: block;
-	vertical-align: middle;
 	width: calc(100% - 3vh);
 	margin-top: 2vh;
 	margin-right: 1vh;

@@ -56,7 +56,7 @@ $(function()
   // Réinitialise la saisie à la fermeture au clic sur le fond
   $(document).on('click', function(event)
   {
-    // Ferme la saisie d'une dépense
+    // Ferme la saisie d'une phrase culte / image culte
     if ($(event.target).attr('class') == 'fond_saisie')
     {
       switch (event.target.id)

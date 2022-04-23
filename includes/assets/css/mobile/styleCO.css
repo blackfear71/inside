@@ -21,7 +21,6 @@
 .saisie_other_collector, .saisie_date_collector
 {
 	display: block;
-	vertical-align: middle;
 	width: calc(100% - 3vh);
 	margin-right: 1vh;
 	margin-top: 2vh;
@@ -221,23 +220,23 @@
 /*** Phrases / images cultes ***/
 .zone_collectors
 {
-  width: 100%;
+	width: 100%;
 	margin-bottom: -1.5vh;
 }
 
 .zone_collector
 {
-  display: block;
-  clear: both;
-  margin-bottom: 2vh;
-  border-radius: 0.5vh;
+	display: block;
+	clear: both;
+	margin-bottom: 2vh;
+	border-radius: 0.5vh;
 }
 
 .zone_collector_haut
 {
 	background-color: #d3d3d3;
 	width: 100%;
-  margin-top: 10vh;
+	margin-top: 10vh;
 	border-top-left-radius: 0.5vh;
 	border-top-right-radius: 0.5vh;
 }
@@ -246,16 +245,16 @@
 {
 	background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
 	width: 100%;
-  margin-top: 10vh;
+	margin-top: 10vh;
 	border-top-left-radius: 0.5vh;
 	border-top-right-radius: 0.5vh;
 }
 
 .zone_avatar_collector
 {
-  float: left;
-  margin-left: calc(50% - 23vh);
-  margin-top: -7.5vh;
+	float: left;
+	margin-left: calc(50% - 23vh);
+	margin-top: -7.5vh;
 	border: solid 1vh #fbfbfb;
 	border-radius: 50%;
 	width: 15vh;
@@ -267,7 +266,7 @@
 	box-shadow: 0 0 0.5vh #7c7c7c;
 	background-color: #262626;
 	width: 15vh;
-  height: 15vh;
+	height: 15vh;
 	border-radius: 50%;
 }
 
@@ -295,7 +294,7 @@
 	font-size: 3vh;
 	color: #262626;
 	width: calc(100% - 4vh);
-  padding: 1vh 2vh 1vh 2vh;
+	padding: 1vh 2vh 1vh 2vh;
 	word-wrap: break-word;
 }
 
@@ -305,19 +304,19 @@
 	background-color: #2eb2f4;
 	margin-left: auto;
 	margin-right: auto;
-  padding-top: 1vh;
+	padding-top: 1vh;
 	padding-bottom: 1vh;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 3vh;
 	color: white;
-  width: 100%;
+	width: 100%;
 }
 
 .icone_collector
 {
 	display: inline-block;
 	vertical-align: middle;
-  margin-right: 1vh;
+	margin-right: 1vh;
 	width: 5vh;
 	height: 5vh;
 }
@@ -337,7 +336,7 @@
 	margin-left: 2vh;
 	margin-top: 2vh;
 	width: 5vh;
-  filter: drop-shadow(0 0 0.2vh #7c7c7c);
+	filter: drop-shadow(0 0 0.2vh #7c7c7c);
 }
 
 .quote_2
@@ -346,12 +345,12 @@
 	margin-right: 2vh;
 	margin-top: -6vh;
 	width: 5vh;
-  filter: drop-shadow(0 0 0.2vh #7c7c7c);
+	filter: drop-shadow(0 0 0.2vh #7c7c7c);
 }
 
 .image_collector
 {
-  display: block;
+	display: block;
 	width: 100%;
 }
 
@@ -397,14 +396,14 @@
 
 .text_context_golden
 {
-  width: calc(100% - 4vh);
+	width: calc(100% - 4vh);
 	background: radial-gradient(ellipse at center, #fffd4c 0%,#ffad01 100%);
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-style: italic;
 	color: #262626;
 	text-align: justify;
-  padding: 2vh;
-  border-bottom-left-radius: 0.5vh;
+	padding: 2vh;
+	border-bottom-left-radius: 0.5vh;
 	border-bottom-right-radius: 0.5vh;
 	overflow: hidden;
 	word-wrap: break-word;
@@ -455,22 +454,22 @@
 /*** Vote ***/
 .zone_votes_users
 {
-  float: left;
+	float: left;
 	margin-left: 2vh;
 	margin-top: -2vh;
 	padding-right: 1.5vh;
 	position: relative;
 	z-index: 4;
-  height: 5vh;
+	height: 5vh;
 }
 
 .smiley_votes
 {
-  width: 5vh;
+	width: 5vh;
 	height: 5vh;
 	margin-right: -1.5vh;
 	border-radius: 50%;
-  box-shadow: 0 0 0.5vh #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 /*** Détails votes ***/

@@ -62,7 +62,7 @@
           /*****************************/
           /* Zone de saisie de recette */
           /*****************************/
-          include('vue/vue_saisie_recette.php');
+          include('vue/web/vue_saisie_recette.php');
 
           /*******************/
           /* Chargement page */
@@ -74,17 +74,17 @@
           /*********************************/
           /* Gâteaux des semaines n et n+1 */
           /*********************************/
-          include('vue/vue_semaines.php');
+          include('vue/web/vue_semaines.php');
 
           /**********/
           /* Années */
           /**********/
-          include('vue/vue_onglets.php');
+          include('vue/web/vue_onglets.php');
 
           /************/
           /* Recettes */
           /************/
-          include('vue/vue_recettes.php');
+          include('vue/web/vue_recettes.php');
         ?>
       </article>
 
