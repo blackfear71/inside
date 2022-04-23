@@ -26,7 +26,6 @@
 	width: 250px;
 	background-color: #374650;
 	overflow: hidden;
-	vertical-align: middle;
 	margin-bottom: 10px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
@@ -236,7 +235,6 @@
 	margin-bottom: 15px;
 	padding: 10px;
 	border-radius: 2px;
-	vertical-align: top;
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
@@ -1481,7 +1479,6 @@
 .succes_liste
 {
 	display: block;
-	vertical-align: top;
 	text-align: center;
 	width: 140px;
 	background-color: #ffad01;
@@ -1492,7 +1489,6 @@
 .succes_liste_undefined
 {
 	display: block;
-	vertical-align: top;
 	text-align: center;
 	width: 140px;
 	background-color: #b3b3b3;
@@ -1617,7 +1613,6 @@
 .succes_liste_mod
 {
 	display: block;
-	vertical-align: top;
 	text-align: center;
 	width: 300px;
 	background-color: #ffad01;
@@ -2957,15 +2952,15 @@
 {
 	float: right;
 	margin-top: -3px;
-  width: 30px;
-  height: 30px;
-  border: 0;
-  background-image: url("/inside/includes/icons/common/delete.png");
-  background-size: 25px 25px;
-  background-repeat: no-repeat;
-  background-position: center;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background-image: url("/inside/includes/icons/common/delete.png");
+	background-size: 25px 25px;
+	background-repeat: no-repeat;
+	background-position: center;
 	background-color: transparent;
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .icone_update_theme

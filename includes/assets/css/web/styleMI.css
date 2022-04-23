@@ -296,7 +296,7 @@
 	width: calc(100% - 50px);
 	border-radius: 20px;
 	box-shadow: 0 0 3px #7c7c7c;
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .avancement_mission

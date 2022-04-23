@@ -30,7 +30,6 @@
 {
 	display: block;
 	width: 100%;
-	vertical-align: top;
 	margin-top: 20px;
 }
 
@@ -363,7 +362,6 @@
 	cursor: pointer;
 	text-align: center;
 	border: 0;
-	vertical-align: top;
 	box-shadow: 0 0 3px #7c7c7c;
 }
 
@@ -621,7 +619,6 @@
 .succes_liste
 {
 	display: block;
-	vertical-align: top;
 	text-align: center;
 	margin-bottom: 30px;
 	width: 140px;
@@ -680,7 +677,7 @@
 	height: 5px;
 	width: 100%;
 	border-radius: 5px;
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .progression_succes
@@ -695,7 +692,6 @@
 .classement_liste
 {
 	display: block;
-	vertical-align: top;
 	margin-bottom: 20px;
 	width: 195px;
 	background-color: #e3e3e3;

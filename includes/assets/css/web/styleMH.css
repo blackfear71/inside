@@ -613,7 +613,6 @@
 	display: block;
 	width: calc(100% - 20px);
 	margin-left: 10px;
-	vertical-align: top;
 	border-bottom: solid 1px #c3c3c3;
 	padding-bottom: 5px;
 }
@@ -651,7 +650,6 @@
 	display: block;
 	width: calc(100% - 20px);
 	margin-left: 10px;
-	vertical-align: top;
 	border-bottom: solid 1px #c3c3c3;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -689,7 +687,6 @@
 	display: block;
 	width: calc(100% - 20px);
 	margin-left: 10px;
-	vertical-align: top;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	text-align: center;

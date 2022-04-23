@@ -5,33 +5,33 @@
 /*** Saisie ***/
 .texte_informations_bug_evolution
 {
-  font-family: inside_font_regular, Verdana, sans-serif;
-  color: #262626;
-  font-size: 2.5vh;
-  text-align: justify;
-  margin-bottom: 2vh;
+	font-family: inside_font_regular, Verdana, sans-serif;
+	color: #262626;
+	font-size: 2.5vh;
+	text-align: justify;
+	margin-bottom: 2vh;
 }
 
 .saisie_objet
 {
-  display: block;
-  width: calc(100% - 3vh);
-  margin-bottom: 2vh;
-  padding: 1.2vh 1.5vh 1.2vh 1.5vh;
-  border: 0;
-  background-color: white;
-  border-radius: 0.5vh;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 2.5vh;
-  color: #262626;
+	display: block;
+	width: calc(100% - 3vh);
+	margin-bottom: 2vh;
+	padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+	border: 0;
+	background-color: white;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
 }
 
 .saisie_type_demande
 {
 	display: block;
 	width: 100%;
-  margin-bottom: 2vh;
+	margin-bottom: 2vh;
 	padding: 1vh;
 	border-radius: 0.5vh;
 	border: 0;
@@ -103,39 +103,39 @@
 
 .saisie_contenu
 {
-  display: block;
-  margin-bottom: 1.5vh;
-  height: 15vh;
-  width: calc(100% - 3vh);
-  padding: 1vh 1.5vh 1vh 1.5vh;
-  border: 0;
-  box-shadow: 0 0 0.5vh #7c7c7c;
-  background-color: white;
-  border-radius: 0.5vh;
-  font-family: inside_font_light, Verdana, sans-serif;
-  font-size: 2.5vh;
-  color: #262626;
-  resize: none;
+	display: block;
+	margin-bottom: 1.5vh;
+	height: 15vh;
+	width: calc(100% - 3vh);
+	padding: 1vh 1.5vh 1vh 1.5vh;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: white;
+	border-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	resize: none;
 }
 
 /*** Bugs & Evolutions ***/
 .zone_bugs_evolutions
 {
-  width: 100%;
-  margin-bottom: -1.5vh;
+	width: 100%;
+	margin-bottom: -1.5vh;
 }
 
 .zone_bug_evolution
 {
-  display: block;
-  clear: both;
-  margin-bottom: 2vh;
-  border-radius: 0.5vh;
+	display: block;
+	clear: both;
+	margin-bottom: 2vh;
+	border-radius: 0.5vh;
 }
 
 .zone_bug_evolution_haut
 {
-  background-color: #c3c3c3;
+	background-color: #c3c3c3;
 	padding: 1vh;
 	border-top-left-radius: 0.5vh;
 	border-top-right-radius: 0.5vh;
@@ -143,21 +143,21 @@
 
 .zone_bug_evolution_titre
 {
-  font-family: inside_font_medium, Verdana, sans-serif;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	color: #262626;
 	text-align: center;
 }
 
 .zone_bug_evolution_milieu
 {
-  background-color: #d3d3d3;
+	background-color: #d3d3d3;
 	padding: 1vh;
 	text-align: center;
 }
 
 .avatar_bug_evolution
 {
-  display: inline-block;
+	display: inline-block;
 	width: 4vh;
 	height: 4vh;
 	border-radius: 50%;
@@ -168,7 +168,7 @@
 
 .pseudo_bug_evolution
 {
-  display: inline-block;
+	display: inline-block;
 	margin-left: 1vh;
 	vertical-align: middle;
 	font-family: inside_font_light, Verdana, sans-serif;
@@ -181,7 +181,7 @@
 .date_bug_evolution
 {
 	margin-top: 1vh;
-  vertical-align: middle;
+	vertical-align: middle;
 	background-color: #2eb2f4;
 	padding: 0.5vh 1vh 0.5vh 1vh;
 	border-radius: 0.5vh;
@@ -189,7 +189,7 @@
 
 .icone_bug_evolution
 {
-  display: inline-block;
+	display: inline-block;
 	vertical-align: middle;
 	margin-right: 1vh;
 	width: 3vh;
@@ -198,20 +198,20 @@
 
 .texte_date_bug_evolution
 {
-  display: inline-block;
-  vertical-align: middle;
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: white;
+	display: inline-block;
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
 }
 
 .report_status
 {
-  margin-top: 1vh;
-  vertical-align: middle;
-  font-family: inside_font_light, Verdana, sans-serif;
-  color: white;
-  padding: 0.6vh 1vh 0.6vh 1vh;
-  border-radius: 0.5vh;
+	margin-top: 1vh;
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	padding: 0.6vh 1vh 0.6vh 1vh;
+	border-radius: 0.5vh;
 }
 
 .report_in_progress
@@ -231,13 +231,13 @@
 
 .zone_bug_evolution_bas
 {
-  background-color: #e3e3e3;
+	background-color: #e3e3e3;
 	padding: 1vh;
 }
 
 .image_bug_evolution
 {
-  float: left;
+	float: left;
 	vertical-align: top;
 	max-width: 20vh;
 	max-height: 20vh;
@@ -247,12 +247,12 @@
 
 .content_bug_evolution
 {
-  font-family: inside_font_light, Verdana, sans-serif;
+	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	text-align: justify;
 }
 
 .clear_bug_evolution
 {
-  clear: both;
+  	clear: both;
 }
