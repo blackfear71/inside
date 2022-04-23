@@ -31,6 +31,7 @@
               {
                 echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doValider">';
                   echo '<input type="hidden" name="week_cake" value="' . $currentWeek->getWeek() . '" />';
+                  echo '<input type="hidden" name="year_cake" value="' . $currentWeek->getYear() . '" />';
                   echo '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_semaine_2" />';
                 echo '</form>';
               }
@@ -44,6 +45,7 @@
             {
               echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doAnnuler">';
                 echo '<input type="hidden" name="week_cake" value="' . $currentWeek->getWeek() . '" />';
+                echo '<input type="hidden" name="year_cake" value="' . $currentWeek->getYear() . '" />';
                 echo '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_semaine_2" />';
               echo '</form>';
             }

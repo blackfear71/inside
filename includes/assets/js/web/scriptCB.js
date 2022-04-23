@@ -449,6 +449,7 @@ function showRecipe(link, id)
           {
             html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnuler">';
               html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
+              html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
               html += '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_details" />';
             html += '</form>';
           }
@@ -456,6 +457,7 @@ function showRecipe(link, id)
           {
             html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValider">';
               html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
+              html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
               html += '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_details" />';
             html += '</form>';
           }

@@ -11,7 +11,7 @@
     {
       foreach ($recettes as $recette)
       {
-        echo '<div class="zone_recette">';
+        echo '<div class="zone_recette" id="' . $recette->getId() . '">';
           echo '<div id="zone_shadow_' . $recette->getId() . '" class="zone_shadow">';
             // Présence recette & photo
             if (!empty($recette->getIngredients()) OR !empty($recette->getRecipe()) OR !empty($recette->getTips()))
@@ -47,6 +47,7 @@
               // Supprimer
               echo '<form id="delete_recipe_' . $recette->getWeek() . '" method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doSupprimerRecette" class="form_delete_week">';
                 echo '<input type="hidden" name="week_cake" value="' . $recette->getWeek() . '" />';
+                echo '<input type="hidden" name="year_cake" value="' . $recette->getYear() . '" />';
                 echo '<input type="submit" name="delete_week" value="" title="Supprimer la photo et la recette" class="icon_delete_week eventConfirm" />';
                 echo '<input type="hidden" value="Supprimer la photo et la recette de cette semaine ?" class="eventMessage" />';
               echo '</form>';  

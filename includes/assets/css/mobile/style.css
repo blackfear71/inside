@@ -882,6 +882,15 @@ aside
 	background-color: #ff1937;
 }
 
+.zone_texte_zoom
+{
+	display: block;
+	margin-top: 2vh;
+	padding-bottom: 2vh;
+	border-radius: 0.5vh;
+	background-color: white;
+}
+
 /*** Succès ***/
 .fond_zoom_succes
 {

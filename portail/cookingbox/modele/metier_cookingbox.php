@@ -28,8 +28,12 @@
 
   // METIER : Récupère les données d'une semaine (N ou N+1)
   // RETOUR : Données de la semaine
-  function getWeek($equipe, $week, $year)
+  function getWeek($equipe, $date)
   {
+    // Récupération des données
+    $week = substr($date, 0, 2);
+    $year = substr($date, 2, 4);
+
     // Récupération des données de la semaine concernée
     $semaineGateau = physiqueSemaineGateau($equipe, $week, $year);
 
@@ -233,14 +237,16 @@
 
   // METIER : Valide le gâteau de la semaine d'un utilisateur
   // RETOUR : Aucun
-  function validateCake($cooked, $week, $year, $sessionUser)
+  function validateCake($cooked, $post, $sessionUser)
   {
-    // Initialisations
+     // Initialisations
     $control_ok = true;
 
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
     $equipe      = $sessionUser['equipe'];
+    $week        = $post['week_cake'];
+    $year        = $post['year_cake'];
 
     // Vérification si enregistrement existant
     $semaineExistante = physiqueSemaineExistante($equipe, $week, $year);
@@ -481,12 +487,13 @@
 
   // METIER : Suppression recette
   // RETOUR : Aucun
-  function deleteRecipe($post, $year, $sessionUser)
+  function deleteRecipe($post, $sessionUser)
   {
     // Récupération des données
     $identifiant = $sessionUser['identifiant'];
     $equipe      = $sessionUser['equipe'];
     $week        = $post['week_cake'];
+    $year        = $post['year_cake'];
 
     // Lecture des données de la recette
     $recette = physiqueRecette($equipe, $week, $year);

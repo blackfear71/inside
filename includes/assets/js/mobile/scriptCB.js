@@ -47,6 +47,10 @@ $(function()
   // Réinitialise la saisie à la fermeture au clic sur le fond
   $(document).on('click', function(event)
   {
+    // Ferme le zoom d'une recette
+    if ($(event.target).attr('class') == 'fond_zoom')
+      masquerSupprimerIdWithDelay('zoom_image');
+
     if ($(event.target).attr('id') == 'zone_saisie_recette')
       resetSaisie();
   });
@@ -72,6 +76,20 @@ $(function()
     updateRecipe(idRecette, 'zone_saisie_recette');
   });
 
+  // Affiche une recette en grand
+  $('.afficherRecette').click(function()
+  {
+    var idRecette = $(this).attr('id').replace('afficher_recette_', '');
+
+    afficherRecette($(this), idRecette);
+  });
+
+  // Ferme le zoom d'une recette (au clic sur la croix)
+  $(document).on('click', '#fermerRecette', function()
+  {
+    masquerSupprimerIdWithDelay('zoom_image');
+  });
+
   /*** Actions au changement ***/
   // Charge l'image dans la zone de saisie
   $('.loadSaisieRecette').on('change', function(event)
@@ -92,6 +110,18 @@ $(function()
 
     changeIngredientColor(idIngredient);
   });
+});
+
+// Au chargement du document complet
+$(window).on('load', function()
+{
+  // Déclenchement du scroll
+  var id     = $_GET('anchor');
+  var offset = 0.1;
+  var shadow = true;
+
+  // Scroll vers l'id
+  scrollToId(id, offset, shadow);
 });
 
 /*****************/
@@ -325,15 +355,18 @@ function afficherSaisieSemaine(idSemaine)
     {
       $('#zone_saisie_semaine').find('.form_saisie_realisation').css('display', 'block');
       $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=week_cake]').val(semaine['week']);
+      $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=year_cake]').val(semaine['year']);
     }
     else
     {
       $('#zone_saisie_semaine').find('.form_saisie_realisation').css('display', 'none');
       $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=week_cake]').val('');
+      $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=year_cake]').val('');
     }
 
     $('#zone_saisie_semaine').find('.form_saisie_annulation').css('display', 'none');
     $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=week_cake]').val('');
+    $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=year_cake]').val('');
   }
   else
   {
@@ -353,17 +386,146 @@ function afficherSaisieSemaine(idSemaine)
     {
         $('#zone_saisie_semaine').find('.form_saisie_annulation').css('display', 'block');
         $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=week_cake]').val(semaine['week']);
+        $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=year_cake]').val(semaine['year']);
     }
     else
     {
         $('#zone_saisie_semaine').find('.form_saisie_annulation').css('display', 'none');
         $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=week_cake]').val('');
+        $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=year_cake]').val('');
     }
 
     $('#zone_saisie_semaine').find('.form_saisie_realisation').css('display', 'none');
     $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=week_cake]').val('');
+    $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=year_cake]').val('');
   }
 
   // Affichage zone de saisie
   afficherMasquerIdWithDelay('zone_saisie_semaine');
+}
+
+// Affiche les détails de la recette
+function afficherRecette(link, id)
+{
+  var html             = '';
+  var path_mini        = link.children('.image_recette').attr('src');
+  var path_full        = path_mini.replace('mini/', '');
+  var split            = path_mini.split('/');
+  var image            = split[split.length - 1];
+  var recipe           = listRecipes[id];
+  var ingredientsSplit = [];
+  var ingredientSplit  = [];
+  var ingredients      = [];
+  var avatarFormatted;
+
+  html += '<div id="zoom_image" class="fond_zoom_image" style="display: none;">';
+    // Recette
+    html += '<div class="zone_image_zoom">';
+      // Image
+      html += '<img src="' + path_full + '" alt="' + image + '" class="image_zoom" />';
+
+      // Détails recette
+      html += '<div class="zone_texte_zoom">';
+        // Nom de la recette
+        html += '<div class="titre_section">';
+          html += '<img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" />';
+          html += '<div class="texte_titre_section">' + recipe['name'] + '</div>';
+        html += '</div>';
+
+        // Avatar
+        avatarFormatted = formatAvatar(recipe['avatar'], recipe['pseudo'], 2, 'avatar');
+
+        html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_details_recette" />';
+
+        // Réalisateur
+        html += '<div class="zone_pseudo_details">';
+          html += 'Par <strong>' + formatUnknownUser(recipe['pseudo'], false, true) + '</strong>';
+        html += '</div>';
+
+        // Ingrédients
+        if (recipe['ingredients'] != '')
+        {
+          ingredientsSplit = recipe['ingredients'].split(';');
+
+          $.each(ingredientsSplit, function(key, value)
+          {
+            ingredientSplit = value.split('@');
+
+            if (ingredientSplit[0] != '')
+              ingredients.push({ingredient: ingredientSplit[0], quantity: ingredientSplit[1], unity: ingredientSplit[2]});
+          });
+
+          html += '<div class="zone_ingredients_details">';
+            html += '<div class="titre_details_recette">Ingrédients</div>';
+
+            $.each(ingredients, function(key, value)
+            {
+              html += '<div class="ingredient_details_recette">' + this['ingredient'] + '</div>';
+
+              if (this['quantity'] != '')
+              {
+                if (this['unity'] == 'CC' || this['unity'] == 'CS')
+                  html += '<div class="quantite_details_recette">' + this['quantity'] + ' ' + this['unity'] + '</div>';
+                else
+                  html += '<div class="quantite_details_recette">' + this['quantity'] + this['unity'] + '</div>';
+              }
+            });
+          html += '</div>';
+        }
+
+        // Préparation
+        if (recipe['recipe'] != '')
+        {
+          html += '<div class="zone_ingredients_details">';
+            html += '<div class="titre_details_recette">Préparation</div>';
+            html += '<div class="contenu_recette_details">' + nl2br(recipe['recipe']) + '</div>';
+          html += '</div>';
+        }
+
+        // Remarques & astuces
+        if (recipe['tips'] != '')
+        {
+          html += '<div class="zone_ingredients_details">';
+            html += '<div class="titre_details_recette">Remarques & astuces</div>';
+            html += '<div class="contenu_recette_details">' + nl2br(recipe['tips']) + '</div>';
+          html += '</div>';
+        }
+
+        // Cas vide
+        if (recipe['ingredients'] == '' && recipe['recipe'] == '' && recipe['tips'] == '')
+          html += '<div class="recette_vide">Pas de recette disponible...</div>';
+
+        // Bouton "Je l'ai fait"
+        if (recipe['identifiant'] == userSession)
+        {
+          if (recipe['cooked'] == 'Y')
+          {
+            html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnuler" class="form_details">';
+              html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
+              html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
+              html += '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_details" />';
+            html += '</form>';
+          }
+          else
+          {
+            html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValider" class="form_details">';
+              html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
+              html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
+              html += '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_details" />';
+            html += '</form>';
+          }
+        }
+      html += '</div>';
+
+      // Bouton
+      html += '<div class="zone_boutons_image_zoom">';
+        // Bouton fermeture
+        html += '<a id="fermerRecette" class="bouton_image_zoom">Fermer la recette</a>';
+      html += '</div>';
+    html += '</div>';
+  html += '</div>';
+
+  $('body').append(html);
+
+  $('#zoom_image').fadeIn(200);
 }

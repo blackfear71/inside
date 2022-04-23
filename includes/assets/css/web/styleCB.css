@@ -811,6 +811,7 @@
 .ingredient_details_recette
 {
   display: inline-block;
+  vertical-align: middle;
   width: calc(100% - 90px);
   margin-top: 5px;
   padding-top: 5px;
@@ -823,6 +824,7 @@
 .quantite_details_recette
 {
   display: inline-block;
+  vertical-align: middle;
   width: 80px;
   background-color: #70d55d;
   margin-left: 10px;

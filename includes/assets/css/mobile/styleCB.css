@@ -439,17 +439,129 @@
     background-color: transparent;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*** Détails recette ***/
-/* TODO à terminer */
+.avatar_details_recette
+{
+	display: inline-block;
+	height: 5vh;
+	width: 5vh;
+	margin-left: 1vh;
+	border-radius: 50%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: #262626;
+	vertical-align: middle;
+}
+
+.zone_pseudo_details
+{
+	display: inline-block;
+	width: calc(100% - 10vh);
+	padding-left: 2vh;
+	padding-right: 2vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	text-align: justify;
+	vertical-align: middle;
+}
+
+.zone_ingredients_details
+{
+	display: block;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2vh;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	padding: 1vh;
+}
+
+.titre_details_recette
+{
+	display: block;
+	width: 100%;
+	font-family: inside_font_light_italic, Verdana, sans-serif;
+	font-weight: bold;
+	color: #262626;
+	font-size: 3vh;
+}
+
+.ingredient_details_recette
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 13vh);
+	margin-top: 1vh;
+	padding-top: 0.5vh;
+	padding-bottom: 0.5vh;
+	text-align: justify;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+}
+
+.quantite_details_recette
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 12vh;
+	background-color: #70d55d;
+	margin-left: 1vh;
+	margin-top: 1vh;
+	padding-top: 0.5vh;
+	padding-bottom: 0.5vh;
+	border-radius: 0.5vh;
+	text-align: center;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+}
+
+.contenu_recette_details
+{
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	text-align: justify;
+}
+
+.recette_vide
+{
+	display: block;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	text-align: center;
+}
+
+.form_details
+{
+	display: block;
+	width: calc(90% + 2vh);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bouton_details
+{
+	width: 100%;
+	padding: 1vh;
+	margin-top: 2vh;
+	border: 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	text-align: center;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	text-decoration: none;
+	background-color: #e3e3e3; 
+}
+
+.bouton_details:active
+{
+	background-color: #ff1937;
+	color: white;
+}

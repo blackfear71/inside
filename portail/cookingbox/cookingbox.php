@@ -39,10 +39,10 @@
         initializeSaveSession();
 
         // Récupération des informations de la semaine en cours
-        $currentWeek = getWeek($_SESSION['user']['equipe'], date('W'), date('Y'));
+        $currentWeek = getWeek($_SESSION['user']['equipe'], date('WY'));
 
         // Récupération des informations de la semaine suivante
-        $nextWeek = getWeek($_SESSION['user']['equipe'], date('W', strtotime('+ 1 week')), date('Y'));
+        $nextWeek = getWeek($_SESSION['user']['equipe'], date('WY', strtotime('+ 1 week')));
 
         // Récupération de la liste des utilisateurs
         $listeCookers = getUsers($_SESSION['user']['equipe']);
@@ -68,12 +68,12 @@
 
     case 'doValider':
       // Validation d'une semaine (par l'utilisateur choisi)
-      validateCake('Y', $_POST['week_cake'], date('Y'), $_SESSION['user']);
+      validateCake('Y', $_POST, $_SESSION['user']);
       break;
 
     case 'doAnnuler':
       // Annulation de la validation d'une semaine (par l'utilisateur choisi)
-      validateCake('N', $_POST['week_cake'], date('Y'), $_SESSION['user']);
+      validateCake('N', $_POST, $_SESSION['user']);
       break;
 
     case 'doAjouterRecette':
@@ -94,7 +94,7 @@
 
     case 'doSupprimerRecette':
       // Suppression d'une recette
-      deleteRecipe($_POST, $_GET['year'], $_SESSION['user']);
+      deleteRecipe($_POST, $_SESSION['user']);
       break;
 
     default:

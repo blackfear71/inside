@@ -26,22 +26,10 @@
         $contenuCelsius = 'Magie ! Je sais que tu m\'adores ! Je sais que tu m\'attendais avec impatience, hé bien tu peux te sentir rassuré. Oui je suis bien là à tes côtés, que tu sois le chasseur
         ou la proie, on se retrouve toujours tous ici...';
         break;
-
-
-
-
-
-
-
-      case 'cookingbox':
-        $contenuCelsius = 'TODO à compléter';
-        break;
-
-
-
-
-
         
+      case 'cookingbox':
+        $contenuCelsius = 'On a faim ! Toutes tes créations et celles de tes meilleurs amis vont se retrouver ici... en espérant que le goût soit à la hauteur du visuel !';
+        break;
 
       case 'expensecenter':
         $contenuCelsius = 'Tu peux saisir ici une dépense en commun ou bien une dépense en montants pour répartir par exemple une commande sur chacun en fonction de ce qu\'il a pris.
